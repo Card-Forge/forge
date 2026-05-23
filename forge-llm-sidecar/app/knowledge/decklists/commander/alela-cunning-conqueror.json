@@ -1,0 +1,364 @@
+{
+  "archetype": "Alela, Cunning Conqueror",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/alela-cunning-conqueror.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Aetherize"
+    },
+    {
+      "qty": 1,
+      "name": "Alela, Cunning Conqueror"
+    },
+    {
+      "qty": 1,
+      "name": "An Offer You Can't Refuse"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Denial"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archmage Emeritus"
+    },
+    {
+      "qty": 1,
+      "name": "Banner of Kinship"
+    },
+    {
+      "qty": 1,
+      "name": "Bender's Waterskin"
+    },
+    {
+      "qty": 1,
+      "name": "Bident of Thassa"
+    },
+    {
+      "qty": 1,
+      "name": "Bitterbloom Bearer"
+    },
+    {
+      "qty": 1,
+      "name": "Black Market Connections"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Brazen Borrower"
+    },
+    {
+      "qty": 1,
+      "name": "Castle Vantress"
+    },
+    {
+      "qty": 1,
+      "name": "Clearwater Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Cling to Dust"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Commandeer"
+    },
+    {
+      "qty": 1,
+      "name": "Consider"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Cunning Nightbonder"
+    },
+    {
+      "qty": 1,
+      "name": "Curiosity Crafter"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Darkslick Shores"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Distant Melody"
+    },
+    {
+      "qty": 1,
+      "name": "Drowned Catacomb"
+    },
+    {
+      "qty": 1,
+      "name": "Enduring Curiosity"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Mastermind"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Slumber Party"
+    },
+    {
+      "qty": 1,
+      "name": "Frantic Search"
+    },
+    {
+      "qty": 1,
+      "name": "Glen Elendra Archmage"
+    },
+    {
+      "qty": 1,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Go for the Throat"
+    },
+    {
+      "qty": 1,
+      "name": "Grim Hireling"
+    },
+    {
+      "qty": 1,
+      "name": "Harmonized Crescendo"
+    },
+    {
+      "qty": 1,
+      "name": "Hullbreaker Horror"
+    },
+    {
+      "qty": 1,
+      "name": "Infernal Grasp"
+    },
+    {
+      "qty": 7,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Keep Watch"
+    },
+    {
+      "qty": 1,
+      "name": "Kindred Discovery"
+    },
+    {
+      "qty": 1,
+      "name": "Ledger Shredder"
+    },
+    {
+      "qty": 1,
+      "name": "March of Swirling Mist"
+    },
+    {
+      "qty": 1,
+      "name": "Mocking Doppelganger"
+    },
+    {
+      "qty": 1,
+      "name": "Morphic Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Mortuary Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Sanctuary"
+    },
+    {
+      "qty": 1,
+      "name": "Notorious Throng"
+    },
+    {
+      "qty": 1,
+      "name": "Nymris, Oona's Trickster"
+    },
+    {
+      "qty": 1,
+      "name": "Obyra, Dreaming Duelist"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Pongify"
+    },
+    {
+      "qty": 1,
+      "name": "Propaganda"
+    },
+    {
+      "qty": 1,
+      "name": "Prosperous Thief"
+    },
+    {
+      "qty": 1,
+      "name": "Raise the Palisade"
+    },
+    {
+      "qty": 1,
+      "name": "Rapid Hybridization"
+    },
+    {
+      "qty": 1,
+      "name": "Reality Shift"
+    },
+    {
+      "qty": 1,
+      "name": "Reconnaissance Mission"
+    },
+    {
+      "qty": 1,
+      "name": "Reflecting Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Reins of Power"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rewind"
+    },
+    {
+      "qty": 1,
+      "name": "Scion of Oona"
+    },
+    {
+      "qty": 1,
+      "name": "Secluded Glen"
+    },
+    {
+      "qty": 1,
+      "name": "Shipwreck Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Skullclamp"
+    },
+    {
+      "qty": 1,
+      "name": "Slip Out the Back"
+    },
+    {
+      "qty": 1,
+      "name": "Snap"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sower of Temptation"
+    },
+    {
+      "qty": 1,
+      "name": "Spellstutter Sprite"
+    },
+    {
+      "qty": 1,
+      "name": "Stern Dismissal"
+    },
+    {
+      "qty": 1,
+      "name": "Sunken Hollow"
+    },
+    {
+      "qty": 1,
+      "name": "Sunken Ruins"
+    },
+    {
+      "qty": 6,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swan Song"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Isle"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Dominance"
+    },
+    {
+      "qty": 1,
+      "name": "Tegwyll, Duke of Splendor"
+    },
+    {
+      "qty": 1,
+      "name": "Thought Vessel"
+    },
+    {
+      "qty": 1,
+      "name": "Three Tree City"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Underground River"
+    },
+    {
+      "qty": 1,
+      "name": "Voracious Tome-Skimmer"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Wavebreak Hippocamp"
+    },
+    {
+      "qty": 1,
+      "name": "Withering Torment"
+    }
+  ],
+  "sideboard": []
+}

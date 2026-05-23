@@ -1,0 +1,129 @@
+{
+  "archetype": "Belcher",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/belcher.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Beyeen Veil"
+    },
+    {
+      "qty": 1,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 3,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 4,
+      "name": "Disrupting Shoal"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Charbelcher"
+    },
+    {
+      "qty": 4,
+      "name": "Hydroelectric Specimen"
+    },
+    {
+      "qty": 2,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 4,
+      "name": "Jwari Disruption"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Bloom"
+    },
+    {
+      "qty": 2,
+      "name": "Preordain"
+    },
+    {
+      "qty": 4,
+      "name": "Sea Gate Restoration"
+    },
+    {
+      "qty": 4,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 2,
+      "name": "Stern Scolding"
+    },
+    {
+      "qty": 1,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 1,
+      "name": "Strix Serenade"
+    },
+    {
+      "qty": 4,
+      "name": "Suppression Ray"
+    },
+    {
+      "qty": 4,
+      "name": "Tameshi, Reality Architect"
+    },
+    {
+      "qty": 4,
+      "name": "Waterlogged Teachings"
+    },
+    {
+      "qty": 4,
+      "name": "Whir of Invention"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Ashiok, Dream Render"
+    },
+    {
+      "qty": 1,
+      "name": "Commandeer"
+    },
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Engineered Explosives"
+    },
+    {
+      "qty": 2,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Hurkyl's Recall"
+    },
+    {
+      "qty": 2,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 2,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    }
+  ]
+}

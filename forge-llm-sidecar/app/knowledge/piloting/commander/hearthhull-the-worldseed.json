@@ -1,0 +1,122 @@
+{
+  "archetype": "Hearthhull, the Worldseed",
+  "format": "commander",
+  "strategy_type": "control",
+  "overview": "A BRG midrange-graveyard hybrid that uses land acceleration and resilient threats to out-value opponents, leveraging graveyard recursion and spot removal to stabilize early and close out games with unblockable or hard-to-answer threats.",
+  "win_conditions": [
+    "Large resilient creatures, Braids recursion loops, or land-based value engines.",
+    "Win by applying consistent pressure, out-valuing the opponent in trades, and leveraging graveyard recursion to bypass hand disruption."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including at least one untapped green source for Farseek), a 1-2 mana curve, and at least one early interaction or ramp spell."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no early plays, 1-2 lands with no ramp/interaction, or hands lacking a turn-1 or turn-2 play."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land and cast a 1-mana cantrip or early threat.",
+      "Turn 2: Develop mana, cast Farseek if you have an untapped green land, or play a 2-drop threat.",
+      "Prioritize untapped lands for Farseek sequencing, and use early spells to dig for key pieces or apply initial pressure."
+    ],
+    "mid_game": [
+      "Balance mana for Farseek, removal, and threats.",
+      "Avoid overcommitting to graveyard recursion if the opponent has hate.",
+      "Maintain hand size with cantrips and only cast Farseek when you have a clear untapped green land and a target in the library.",
+      "Trade efficiently and hold back large threats until you have removal or a board clear.",
+      "Use Braids, Arisen Nightmare to recur key creatures or answer threats, but be mindful of its ETB effect and graveyard vulnerability.",
+      "Prioritize clearing sweepers and graveyard hate before committing to an all-in strategy."
+    ],
+    "late_game": [
+      "Large resilient creatures, Braids recursion loops, or land-based value engines.",
+      "Win by applying consistent pressure, out-valuing the opponent in trades, and leveraging graveyard recursion to bypass hand disruption.",
+      "Go all-in when you have board control, enough mana for a turn-two response, and the opponent has no sweepers or graveyard hate.",
+      "Commit when you can safely cast Farseek and develop a board that is difficult to remove."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Hearthhull, the Worldseed",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Farseek",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Braids, Arisen Nightmare",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Farseek requires an untapped green land",
+    "plan sequencing carefully to avoid mana screw.",
+    "Braids' graveyard recursion is powerful but vulnerable to hate",
+    "keep a backup plan.",
+    "Avoid overcommitting to the graveyard if the meta is heavy on hate.",
+    "Watch for sweepers in control mirrors and adjust your threat curve accordingly."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, split spells if applicable, and cast spells in response to their counters. Rely on land acceleration to out-value and win the resource war. Avoid overcommitting to expensive spells without protection.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure and use removal on key ramp sources. Don't let them stabilize; force trades and disrupt their mana development. Use Farseek to keep pace while applying pressure.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early spot removal and hold up mana for interaction. Stabilize with board wipes if available, then transition to midrange value. Use Braids to recur threats and apply pressure while controlling the board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure and use graveyard recursion to bypass hand disruption. Win the resource war by out-valuing them in trades and leveraging Farseek to maintain mana advantage. Force them to use removal on multiple threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through value trades, graveyard hate, and targeted removal. Out-value in the late game by leveraging recursion and land acceleration. Prioritize clearing their graveyard and disrupting their Farseek targets.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers, graveyard hate, and combo pieces.",
+    "Note if the opponent is playing land destruction, counters, or heavy removal.",
+    "Track their graveyard size and hand size to anticipate Braids' ETB impact and recursion potential."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

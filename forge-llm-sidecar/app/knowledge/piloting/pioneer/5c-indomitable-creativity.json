@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with at least two mana sources and a draw engine",
       "Hands containing Indomitable Creativity or Prismari Command with early interaction",
-      "Hands with Spell Pierce and a cheap spell to protect the combo"
+      "Hands with Spell Pierce and a cheap spell to protect the combo",
+      "Keep hands with 2-3 lands (including fetches/shocks), at least one cantrip or discard, and early interaction (Spell Pierce, Thoughtseize, or cheap removal).",
+      "Prioritize hands that can play a land and a spell on turn 1.",
+      "If you have Creativity, you need at least two cheap spells or cantrips to enable it."
     ],
     "mulligan_criteria": [
       "Hands lacking mana acceleration or draw",
       "Hands with only high-cost spells and no protection",
-      "Hands without interaction against early aggression"
+      "Hands without interaction against early aggression",
+      "Mulligan hands with 0-1 lands, multiple high-cost spells, or Creativity with no support."
     ],
     "examples": []
   },
@@ -25,17 +29,32 @@
     "early_game": [
       "Play lands and cheap spells to establish board presence",
       "Use Spell Pierce to counter key removal or counterspells",
-      "Look for early Prismari Command to draw into Creativity"
+      "Look for early Prismari Command to draw into Creativity",
+      "Turn 1: Play a land, cast a cantrip (Opt, Ponder, Brainstorm) or discard to dig for Creativity and interaction.",
+      "Turn 2: Cast another cantrip, play a land, or cast a cheap spell (Lightning Bolt, Go Blank, Prismari Command) to fill the graveyard.",
+      "If you draw Creativity early, protect it immediately with counterspells or discard.",
+      "Sequence mana to ensure you can cast multiple spells per turn once Creativity is active."
     ],
     "mid_game": [
       "Cast Indomitable Creativity to draw two and cast a finisher for free",
       "Maintain card advantage by cycling through cheap spells",
-      "Apply pressure with creatures while protecting combo pieces"
+      "Apply pressure with creatures while protecting combo pieces",
+      "Mana is flexible",
+      "always keep enough for multiple spells per turn once Creativity is active.",
+      "Hand is secondary to graveyard",
+      "prioritize filling the graveyard with cheap spells and cantrips.",
+      "Use discard to disrupt opponent's hand while building your own graveyard.",
+      "Never overextend mana if you lack Creativity or interaction."
     ],
     "late_game": [
       "Execute free spell sequences to deplete opponent's resources",
       "Use excess card draw to find answers to board wipes",
-      "Close out games with unanswerable threats or direct damage"
+      "Close out games with unanswerable threats or direct damage",
+      "A combination of a large creature (e.g., Kethis, the Hidden Hand, or a big spell like Storm the Festival) cast from the graveyard, or a direct damage/combo finisher.",
+      "The goal is to cast multiple spells in a single turn to overwhelm the board and close the game before the opponent can stabilize.",
+      "Go all-in when you have Creativity active, a full graveyard, and enough interaction to protect your board or answer their response.",
+      "If you can cast 3+ spells this turn and close the game, commit.",
+      "Do not hold back if you have the resources to win this turn."
     ]
   },
   "key_cards": [
@@ -58,7 +77,12 @@
   "sequencing_tips": [
     "Hold Spell Pierce up until the opponent reveals their hand or commits to a spell",
     "Cast Prismari Command before Indomitable Creativity to ensure you have enough cards to choose from",
-    "Prioritize casting cheap spells before Creativity to maximize the free cast potential"
+    "Prioritize casting cheap spells before Creativity to maximize the free cast potential",
+    "Common mistake: Overcommitting to the graveyard without protecting Creativity.",
+    "Unique interaction: Creativity lets you cast spells from the graveyard, but you still can't cast spells from your hand.",
+    "Use this to your advantage by keeping your hand empty of spells to avoid accidentally casting them.",
+    "Also, note that Creativity doesn't bypass counterspells or removal, so sequencing is critical.",
+    "Prismari Command is a versatile tool for drawing cards, countering, or dealing damage, so use it flexibly based on the board state."
   ],
   "matchups": [
     {
@@ -87,6 +111,21 @@
         "Card draw engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Creativity bypasses hand restrictions, but counters still work. Use cheap spells to trade, cast Creativity in response to their counters, or use discard to remove their counterspells. Prioritize casting spells when they have no mana up. Use Prismari Command to counter or draw into answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-value them with card draw and discard. Use early interaction to slow their mana development. Once Creativity is active, cast multiple spells to race their big threats. Use discard to remove their ramp spells and counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the graveyard war. Prioritize discard to empty their graveyard, protect your Creativity, and out-value them with better sequencing. Use counterspells to protect your key spells. Track their graveyard to know when to strike.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -94,10 +133,15 @@
     "Teferi, Hero of Dominaria",
     "Lightning Strike",
     "Abrupt Decay",
-    "Supreme Verdict"
+    "Supreme Verdict",
+    "Watch for graveyard hate (Rest in Peace, Leyline of the Void, Surgical Extraction), sweepers, and counterspells.",
+    "Note when opponents start holding up interaction for Creativity.",
+    "Track their graveyard if they play graveyard-based strategies.",
+    "Pay attention to mana development to predict when they can cast their key spells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:39:54+00:00",
     "model": "local-model",
@@ -113,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

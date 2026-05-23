@@ -1,0 +1,145 @@
+{
+  "archetype": "Temur Control",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/temur-control.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 2,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 4,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 1,
+      "name": "Cori Mountain Monastery"
+    },
+    {
+      "qty": 2,
+      "name": "Doppelgang"
+    },
+    {
+      "qty": 3,
+      "name": "Firebending Lesson"
+    },
+    {
+      "qty": 4,
+      "name": "Flashback"
+    },
+    {
+      "qty": 4,
+      "name": "Great Hall of the Biblioplex"
+    },
+    {
+      "qty": 1,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Mistrise Village"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 2,
+      "name": "Resonating Lute"
+    },
+    {
+      "qty": 4,
+      "name": "Riverpyre Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Sear"
+    },
+    {
+      "qty": 2,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 4,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 3,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 2,
+      "name": "Swallowed by Leviathan"
+    },
+    {
+      "qty": 4,
+      "name": "Tablet of Discovery"
+    },
+    {
+      "qty": 2,
+      "name": "Three Steps Ahead"
+    },
+    {
+      "qty": 1,
+      "name": "Thundering Falls"
+    },
+    {
+      "qty": 1,
+      "name": "Traumatic Critique"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 2,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 3,
+      "name": "Flashfreeze"
+    },
+    {
+      "qty": 2,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 1,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 3,
+      "name": "Slagstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    }
+  ]
+}

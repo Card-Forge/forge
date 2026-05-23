@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "name": "Mystic Forge Combo",
+  "format": "legacy",
+  "colors": [
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This white-aligned Legacy combo deck leverages rapid card filtering and mana acceleration to assemble game-ending sequences within the format's 60-card minimum structure. By cycling through the library with Mystic Forge and generating abundant colorless mana via Grim Monolith and The One Ring, the deck aims to outpace opponents before they can stabilize. Kozilek's Command serves as the versatile engine, providing card draw, token generation, or board control to protect the combo. Success depends on precise resource management and protecting key pieces from disruption.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 3,
+      "cards": [
+        "Kozilek's Command",
+        "Mystic Forge",
+        "The One Ring"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Kozilek's Command",
+        "Mystic Forge",
+        "The One Ring"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Kozilek's Command",
+        "Mystic Forge",
+        "The One Ring"
+      ]
+    },
+    "threats": {
+      "target_count": 1,
+      "cards": [
+        "Kozilek's Command"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Mystic Forge"
+      ]
+    },
+    "graveyard_enablers": {
+      "target_count": 1,
+      "cards": [
+        "Mystic Forge"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Kozilek's Command",
+        "Mystic Forge",
+        "The One Ring"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Grim Monolith",
+        "Kozilek's Command",
+        "Mystic Forge",
+        "The One Ring"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Kozilek's Command",
+        "Mystic Forge",
+        "The One Ring"
+      ]
+    },
+    "mana_fixing": {
+      "target_count": 4,
+      "cards": [
+        "Grim Monolith",
+        "Kozilek's Command",
+        "Mystic Forge",
+        "The One Ring"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Grim Monolith",
+      "roles": [
+        "combo_pieces",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The One Ring",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kozilek's Command",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mystic Forge",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always play mana rocks before casting Kozilek's Command to ensure you can activate multiple modes or follow up",
+    "Use Mystic Forge on turns where you have excess cards in hand to maximize deck thinning",
+    "Save Kozilek's Command's board-clearing mode for when opponents commit multiple threats",
+    "Prioritize drawing into combo pieces over generating immediate board presence",
+    "Common mistakes include overcommitting to drawing cards without securing the win condition, forgetting to untap artifacts for Kozilek's Command, and not tracking opponent's mana."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Grim Monolith or The One Ring on turn one to establish mana advantage"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Mystic Forge to discard dead draws and thin the deck"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize drawing into Kozilek's Command or additional combo pieces"
+    }
+  ],
+  "kill_priority": [
+    "Kozilek's Command",
+    "Mystic Forge",
+    "The One Ring",
+    "Kozilek's Command",
+    "Mystic Forge",
+    "The One Ring",
+    "Kozilek's Command"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

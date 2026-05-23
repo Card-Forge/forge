@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands containing one or two lands and a one- or two-drop",
       "Hands featuring Hired Claw or Hearthborn Battler for early curve",
-      "Hands with Razorkin Needlehead paired with early mana sources"
+      "Hands with Razorkin Needlehead paired with early mana sources",
+      "Keep any hand with a land and a turn-1 or turn-2 threat (Razorkin Needlehead, Hired Claw).",
+      "Keep hands with 2+ lands if they contain a turn-1 play.",
+      "In a fast format, aggressive hands with 1-2 lands and 3+ spells are acceptable if they include a turn-1 play."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands",
       "Hands lacking a one- or two-drop creature",
-      "Hands composed entirely of three-drops or higher"
+      "Hands composed entirely of three-drops or higher",
+      "Mulligan to single lands, hands with only 3+ mana costs, or hands lacking a turn-1/2 threat unless paired with a land."
     ],
     "examples": []
   },
@@ -25,17 +29,32 @@
     "early_game": [
       "Play lands and one- or two-drops strictly on curve",
       "Attack immediately with Hired Claw to establish pressure",
-      "Use Hearthborn Battler to clear small blockers or push early damage"
+      "Use Hearthborn Battler to clear small blockers or push early damage",
+      "Turn 1: Play a land, cast a 1-drop (Razorkin Needlehead or Hired Claw) if available.",
+      "Turn 2: Play a land, cast a 2-drop threat or direct damage spell to push damage.",
+      "Prioritize land drops first, then threats, then spells.",
+      "If opening with multiple lands and no early threats, mulligan aggressively to find a turn-1 or turn-2 play."
     ],
     "mid_game": [
       "Deploy Razorkin Needlehead to apply haste pressure and clear blockers",
       "Trade efficiently to keep the opponent's board manageable",
-      "Look for opportunities to activate Hearthborn Battler before attacking"
+      "Look for opportunities to activate Hearthborn Battler before attacking",
+      "Avoid overextending into sweepers",
+      "keep a card in hand for interaction or to close.",
+      "Mana should be preserved for critical turns, and you should never tap out with no threats if the opponent has potential removal.",
+      "Graveyard is typically irrelevant, but watch for recursion or sacrifice outlets in the metagame.",
+      "Commit fully on turns 1-3 to establish board presence and apply pressure.",
+      "On turn 4+, assess the opponent's board state and resources."
     ],
     "late_game": [
       "Commit all remaining resources to finish the game quickly",
       "Use Needlehead's death trigger to remove final obstacles",
-      "Avoid stalling or playing defensively, as red aggro loses to attrition"
+      "Avoid stalling or playing defensively, as red aggro loses to attrition",
+      "Hearthborn Battler and late-game burn spells serve as primary finishers.",
+      "Win by trading efficiently, using combat tricks or pump spells to bypass blockers, and pushing lethal with unblocked damage.",
+      "Force the opponent to use removal on low-value threats to open up a clear path to face.",
+      "Go all-in when the opponent has no removal or sweepers in hand or graveyard, or when you can trade threats for their blockers and still hit face for lethal.",
+      "Also commit when you have card advantage and they are tapped out with no recovery plan."
     ]
   },
   "key_cards": [
@@ -58,7 +77,12 @@
   "sequencing_tips": [
     "Activate Hearthborn Battler before attacking to remove blockers",
     "Hold up mana for combat tricks when the opponent has removal",
-    "Attack with Hired Claw first to test for removal before committing Needlehead"
+    "Attack with Hired Claw first to test for removal before committing Needlehead",
+    "Common mistakes include overextending into sweepers, mismanaging mana on critical turns, and failing to track opponent hand size.",
+    "Unique interactions: Razorkin Needlehead likely triggers on damage or combat, so synergize it with direct damage and pump spells.",
+    "Hired Claw may generate tokens or provide early board presence, so use it to pressure or block.",
+    "Hearthborn Battler should be saved for closing games or trading into key threats.",
+    "Always play around sweepers and counterspells by holding up resources until the last possible moment."
   ],
   "matchups": [
     {
@@ -87,16 +111,35 @@
         "Combat tricks",
         "Early board wipes"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Chain spells, use uncounterable threats, or play around counters by holding up mana until they commit. Use cheap, efficient threats that are hard to counter effectively, and consider sideboard cards that grant hexproof or haste to bypass counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Stay under their curve and apply consistent pressure. Use discard or early threats to disrupt their land drops and force them to play defensively. Do not trade up; instead, race to close the game before their ramp payoffs stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by being more efficient and better sequenced. Prioritize card advantage, hold back a threat to counter their all-in, and use discard to disrupt their hand. Track their mana and hand size to predict their plays and make optimal trades.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early removal spells",
     "Counterspells",
     "Resilient mid-sized creatures",
-    "Life gain effects"
+    "Life gain effects",
+    "Watch for counterspells (Izzet), sweepers (Spellementals/Landfall), and ramp payoffs.",
+    "Key tells include opponents tapping for multiple colors on turn 2-3 (indicating a counter or sweeper), holding up mana past their land drop, or playing extra lands without threats.",
+    "Track their graveyard for recursion or sacrifice outlets."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:07:31+00:00",
     "model": "local-model",
@@ -125,6 +168,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

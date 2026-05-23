@@ -1,0 +1,481 @@
+{
+  "schema_version": 1,
+  "name": "Through the Breach",
+  "format": "modern",
+  "colors": [
+    "B",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Through the Breach is a combo-control deck that uses cheap, aggressive threats and pump spells to pressure the board, then casts Through the Breach to exile a massive Eldrazi from your library or graveyard. It wins by leveraging Emrakul\u2019s game-ending enter-the-battlefield triggers or Ulamog\u2019s board-clearing and card advantage to overwhelm opponents before they can stabilize.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 2,
+      "cards": [
+        "Trinisphere"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 22,
+      "cards": [
+        "Emrakul, the Aeons Torn",
+        "Faithless Looting",
+        "Kozilek's Command",
+        "Through the Breach",
+        "Ulamog, the Defiler",
+        "Vampires' Vengeance"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 21,
+      "cards": [
+        "Devourer of Destiny",
+        "Emrakul, the Aeons Torn",
+        "Faithless Looting",
+        "Raucous Theater",
+        "Through the Breach",
+        "Ulamog, the Defiler"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 7,
+      "cards": [
+        "Bloodstained Mire",
+        "Polluted Delta",
+        "Scalding Tarn"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Through the Breach"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 18,
+      "cards": [
+        "Devourer of Destiny",
+        "Emrakul, the Aeons Torn",
+        "Sire of Seven Deaths",
+        "Thoughtseize",
+        "Through the Breach",
+        "Ulamog, the Defiler"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 21,
+      "cards": [
+        "Devourer of Destiny",
+        "Goryo's Vengeance",
+        "Kozilek's Command",
+        "Kozilek's Return",
+        "Meltdown",
+        "Talisman of Indulgence",
+        "Vampires' Vengeance"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Kozilek's Return"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 13,
+      "cards": [
+        "Emrakul, the Aeons Torn",
+        "Sire of Seven Deaths",
+        "Through the Breach",
+        "Ulamog, the Defiler"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 2,
+      "cards": [
+        "Vampires' Vengeance"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "graveyard_enablers": {
+      "target_count": 28,
+      "cards": [
+        "Emrakul, the Aeons Torn",
+        "Faithless Looting",
+        "Goryo's Vengeance",
+        "Kozilek's Command",
+        "Kozilek's Return",
+        "Raucous Theater",
+        "Through the Breach",
+        "Yggdrasil, Rebirth Engine"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 18,
+      "cards": [
+        "Faithless Looting",
+        "Goryo's Vengeance",
+        "Kozilek's Return",
+        "Ugin's Labyrinth",
+        "Yggdrasil, Rebirth Engine"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 6,
+      "cards": [
+        "Kozilek's Return",
+        "Yggdrasil, Rebirth Engine"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Through the Breach"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Disruptor Flute",
+        "Torpor Orb",
+        "Void Mirror"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 27,
+      "cards": [
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Eldrazi Temple",
+        "Gemstone Caverns",
+        "Polluted Delta",
+        "Raucous Theater",
+        "Scalding Tarn",
+        "Through the Breach",
+        "Trinisphere",
+        "Ugin's Labyrinth"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 3
+    },
+    "lands": {
+      "target_count": 23,
+      "cards": [
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Eldrazi Temple",
+        "Gemstone Caverns",
+        "Mountain",
+        "Polluted Delta",
+        "Raucous Theater",
+        "Scalding Tarn",
+        "Swamp",
+        "Ugin's Labyrinth"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 1
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.39
+  },
+  "dual_role_cards": [
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Devourer of Destiny",
+      "roles": [
+        "dig_draw",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eldrazi Temple",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emrakul, the Aeons Torn",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faithless Looting",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gemstone Caverns",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goryo's Vengeance",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kozilek's Command",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kozilek's Return",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raucous Theater",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sire of Seven Deaths",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Through the Breach",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Trinisphere",
+      "roles": [
+        "mana_fixing",
+        "mana_reducers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ugin's Labyrinth",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ulamog, the Defiler",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vampires' Vengeance",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yggdrasil, Rebirth Engine",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Through the Breach is a sorcery, so it can be countered",
+    "always time it carefully.",
+    "Emrakul\u2019s ETB triggers are mandatory and cannot be responded to, making it a hard win condition.",
+    "Avoid casting TtB if you don\u2019t have a threat to protect it or if the opponent has significant interaction.",
+    "Kessig Wolf Run is essential for pumping threats and enabling early TtB."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Kessig Wolf Run if available, or play a 1-mana threat."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a land, cast another cheap threat or pump spell."
+    },
+    {
+      "trigger": "early game",
+      "line": "If you have 5 mana and a threat, cast Through the Breach targeting Emrakul/Ulamog."
+    }
+  ],
+  "kill_priority": [
+    "Kozilek's Return",
+    "Yggdrasil, Rebirth Engine",
+    "Through the Breach",
+    "Devourer of Destiny",
+    "Emrakul, the Aeons Torn",
+    "Sire of Seven Deaths",
+    "Thoughtseize",
+    "Ulamog, the Defiler"
+  ],
+  "interaction_to_disrupt": [
+    "Emrakul, the Aeons Torn",
+    "Sire of Seven Deaths",
+    "Through the Breach",
+    "Ulamog, the Defiler",
+    "Devourer of Destiny",
+    "Goryo's Vengeance",
+    "Kozilek's Command",
+    "Kozilek's Return"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/through-the-breach.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

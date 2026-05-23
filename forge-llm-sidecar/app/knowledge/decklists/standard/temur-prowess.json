@@ -1,0 +1,125 @@
+{
+  "archetype": "Temur Prowess",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/temur-prowess.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancestral Anger"
+    },
+    {
+      "qty": 1,
+      "name": "Balmor, Battlemage Captain"
+    },
+    {
+      "qty": 2,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 4,
+      "name": "Callous Sell-Sword"
+    },
+    {
+      "qty": 2,
+      "name": "Drake Hatcher"
+    },
+    {
+      "qty": 4,
+      "name": "Elusive Otter"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 2,
+      "name": "Opt"
+    },
+    {
+      "qty": 3,
+      "name": "Riverpyre Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Secret Identity"
+    },
+    {
+      "qty": 4,
+      "name": "Sleight of Hand"
+    },
+    {
+      "qty": 4,
+      "name": "Slickshot Show-Off"
+    },
+    {
+      "qty": 4,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 4,
+      "name": "Stormchaser's Talent"
+    },
+    {
+      "qty": 4,
+      "name": "Turn Inside Out"
+    },
+    {
+      "qty": 4,
+      "name": "Wild Ride"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 1,
+      "name": "Dreadmaw's Ire"
+    },
+    {
+      "qty": 1,
+      "name": "Full Bore"
+    },
+    {
+      "qty": 1,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Poison Dart Frog"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 2,
+      "name": "Secret Identity"
+    },
+    {
+      "qty": 2,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 3,
+      "name": "Spell Pierce"
+    }
+  ]
+}

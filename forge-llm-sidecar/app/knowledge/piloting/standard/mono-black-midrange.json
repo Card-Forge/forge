@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with early land drops and one-mana threats",
       "Hands containing Requiting Hex for early interaction",
-      "Balanced mana bases with at least two black sources"
+      "Balanced mana bases with at least two black sources",
+      "Keep hands with 2-3 lands, at least one turn-1 or turn-2 interaction (Requiting Hex, early removal), and a 2-drop threat or midrange engine."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands",
       "Hands lacking early interaction or threats",
-      "Hands with only high-cost cards"
+      "Hands with only high-cost cards",
+      "Mulligan pure curve toppers, triple lands, or hands lacking early answers against spell-heavy matchups."
     ],
     "examples": []
   },
@@ -25,17 +27,32 @@
     "early_game": [
       "Play lands consistently",
       "Deploy one-mana threats to apply pressure",
-      "Use Requiting Hex to clear blockers or answer early aggro threats"
+      "Use Requiting Hex to clear blockers or answer early aggro threats",
+      "Turn 1: Play a land",
+      "drop Requiting Hex or cheap removal if opponent plays a problematic early spell, otherwise develop mana.",
+      "Turn 2: Play a 2-drop threat or interaction depending on board state.",
+      "Prioritize lands that enter untapped or fetch sources if available",
+      "otherwise, sequence basics to ensure consistent black mana for threats and interaction."
     ],
     "mid_game": [
       "Trade efficiently using combat tricks",
       "Maintain board presence with Unstoppable Slasher",
-      "Manage life totals and opponent's resources"
+      "Manage life totals and opponent's resources",
+      "Balance mana between interaction and threat development",
+      "avoid flooding by holding lands if you have sufficient answers.",
+      "Manage hand size to maintain card advantage, and use the graveyard strategically if the deck includes recursion or sacrifice outlets.",
+      "Commit threats when you have interaction to clear blockers or when the opponent is tapped out.",
+      "Hold back if facing sweepers, heavy counters, or if you need to preserve mana for protection.",
+      "Trade efficiently to maintain board presence without overextending."
     ],
     "late_game": [
       "Stabilize with larger threats",
       "Use excess card advantage to outlast opponents",
-      "Close out games with direct damage and combat pressure"
+      "Close out games with direct damage and combat pressure",
+      "Bloodletter of Aclazotz generating deathtouch tokens, Unstoppable Slasher with accumulated +1/+1 counters, or a well-timed Requiting Hex to protect a win condition or remove a key blocker.",
+      "Chain threats to overwhelm interaction.",
+      "Go all-in when the opponent has no interaction, is low on life, or you hold a decisive card advantage.",
+      "Commit when you can force through multiple threats or when your board state is resilient enough to absorb a single answer."
     ]
   },
   "key_cards": [
@@ -58,7 +75,13 @@
   "sequencing_tips": [
     "Hold Requiting Hex for opponent's key threats rather than using it preemptively",
     "Activate Unstoppable Slasher's ability after opponent commits to blockers",
-    "Prioritize land drops over early spells if mana base is tight"
+    "Prioritize land drops over early spells if mana base is tight",
+    "Avoid overcommitting to a single threat without backup.",
+    "Practice timing Requiting Hex to maximize its dual effect.",
+    "Watch for format-specific rules that may affect land sequencing or card legality.",
+    "Common mistake: holding too much mana for interaction and getting overrun",
+    "balance aggression and defense.",
+    "If the deck includes graveyard recursion, manage it carefully to avoid giving opponents free targets."
   ],
   "matchups": [
     {
@@ -87,15 +110,34 @@
         "Mana acceleration",
         "Win-condition pieces"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Requiting Hex to counter their counters or cast threats in response to their spells. Apply multiple threats to force through, and consider sacrificing or discarding to bait counters before committing your finisher.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure and use interaction to disrupt their mana development. Don't get outpaced; stabilize quickly with removal and transition to midrange threats before they can deploy their win conditions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by sequencing better, sideboarding in targeted hate, and leveraging card advantage. Force them to use interaction inefficiently, and prioritize board presence over single threats.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast one-mana creatures",
     "Resilient mid-range threats",
-    "Direct damage spells"
+    "Direct damage spells",
+    "Watch for counterspells, sweepers, and combo win conditions.",
+    "Note when opponents tap out for big spells or leave mana open for interaction.",
+    "Track graveyard usage and life totals to time your finishers correctly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:34:39+00:00",
     "model": "local-model",
@@ -111,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

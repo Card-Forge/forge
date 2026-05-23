@@ -1,0 +1,117 @@
+{
+  "archetype": "Death's Shadow",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/death-s-shadow.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 4,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 2,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 4,
+      "name": "Death's Shadow"
+    },
+    {
+      "qty": 3,
+      "name": "Expressive Iteration"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 4,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Moonshadow"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Psychic Frog"
+    },
+    {
+      "qty": 4,
+      "name": "Ragavan, Nimble Pilferer"
+    },
+    {
+      "qty": 4,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 4,
+      "name": "Street Wraith"
+    },
+    {
+      "qty": 3,
+      "name": "Stubborn Denial"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 2,
+      "name": "Unholy Heat"
+    },
+    {
+      "qty": 2,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Kaito, Bane of Nightmares"
+    },
+    {
+      "qty": 2,
+      "name": "Meltdown"
+    },
+    {
+      "qty": 2,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 2,
+      "name": "Vexing Bauble"
+    }
+  ]
+}

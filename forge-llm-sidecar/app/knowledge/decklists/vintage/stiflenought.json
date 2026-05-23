@@ -1,0 +1,181 @@
+{
+  "archetype": "Stiflenought",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/stiflenought.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancestral Recall"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 3,
+      "name": "Doorkeeper Thrull"
+    },
+    {
+      "qty": 3,
+      "name": "Dress Down"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 3,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Gitaxian Probe"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 3,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Ruby"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 3,
+      "name": "Phyrexian Dreadnought"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 4,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 3,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Time Walk"
+    },
+    {
+      "qty": 1,
+      "name": "Tolarian Academy"
+    },
+    {
+      "qty": 1,
+      "name": "Treasure Cruise"
+    },
+    {
+      "qty": 3,
+      "name": "Tundra"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 4,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 1,
+      "name": "Lurrus of the Dream-Den"
+    },
+    {
+      "qty": 1,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 2,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 1,
+      "name": "Seal of Cleansing"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "The Tabernacle at Pendrell Vale"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    }
+  ]
+}

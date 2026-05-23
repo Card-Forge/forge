@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Faithless Looting or multiple low-cost cantrips",
       "Hands with at least two combo pieces (Inside Out, Tireless Tribe, Sneaky Snacker)",
-      "Hands with early disruption or cheap creatures to protect the combo"
+      "Hands with early disruption or cheap creatures to protect the combo",
+      "Keep 7-card hands with 2-3 lands, at least one discard spell (Faithless Looting), and Sneaky Snacker or a protection spell.",
+      "Keep 6-card hands only if they contain a complete turn-1/2 setup (land, discard, Snacker/protection)."
     ],
     "mulligan_criteria": [
       "Hands lacking Faithless Looting or any combo piece",
       "Hands with only high-cost cards or no lands",
-      "Hands with multiple removal spells but no way to deploy them early"
+      "Hands with multiple removal spells but no way to deploy them early",
+      "Mulligan hands with 0-1 lands, multiple Snackers without support, or only combo pieces with no mana or draw spells."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and cheap creatures to establish board presence",
       "Cast Faithless Looting on turn 2 or 3 to dig for combo pieces",
-      "Avoid unnecessary combat that could lose key pieces to removal"
+      "Avoid unnecessary combat that could lose key pieces to removal",
+      "Turn 1: Play a land, cast a cantrip or discard spell to dig for pieces and prime the graveyard.",
+      "Turn 2: Develop mana, cast Sneaky Snacker, or use discard to set up the graveyard.",
+      "Prioritize untapped lands for protection and combo execution.",
+      "If the opponent is aggressive, consider holding up removal or protection instead of committing Snacker."
     ],
     "mid_game": [
       "Assemble the Inside Out, Tireless Tribe, and Sneaky Snacker trio",
       "Use card draw and counters to outvalue the opponent",
-      "Protect combo pieces with cheap interaction or evasion"
+      "Protect combo pieces with cheap interaction or evasion",
+      "Balance mana for protection versus combo execution.",
+      "Keep Sneaky Snacker safe until the graveyard is primed with discard spells or key targets.",
+      "Use Faithless Looting to dig for pieces while simultaneously setting up the graveyard.",
+      "Avoid overcommitting mana to one step of the combo if the board state is unstable.",
+      "Commit threats only when you have protection or can trade favorably.",
+      "Hold back Snacker if the board is unstable or if the opponent has unblocked removal."
     ],
     "late_game": [
       "Execute the reversal combo to generate infinite counters and draw",
       "Attack with the pumped Tireless Tribe to close out the game",
-      "Use excess card advantage to find answers to late-game threats"
+      "Use excess card advantage to find answers to late-game threats",
+      "Infinite Sneaky Snacker + Faithless Looting loop for card advantage, or copying a specific win condition (like a big spell or combo piece).",
+      "Execute the loop when you have protection, a primed graveyard, and enough mana to resolve the final piece safely.",
+      "Go all-in when you have protection, a primed graveyard, and the opponent has no immediate removal or counterspells.",
+      "If you can resolve the combo piece safely and the board is clear of threats, commit fully.",
+      "Do not split your resources if a single decisive line wins the game."
     ]
   },
   "key_cards": [
@@ -59,7 +77,12 @@
     "Always cast Faithless Looting before deploying your combo pieces to maximize dig potential",
     "Hold up mana for potential counterspells or removal before committing to the combo",
     "Reverse Tireless Tribe first, then Sneaky Snacker, to ensure the trigger order resolves correctly",
-    "Attack with the reversed Tribe immediately after assembling the loop to avoid opponent interaction"
+    "Attack with the reversed Tribe immediately after assembling the loop to avoid opponent interaction",
+    "Common mistake: Overcommitting Sneaky Snacker too early without a primed graveyard.",
+    "Another: Ignoring mana base development, which can stall the combo.",
+    "Unique interaction: Sneaky Snacker can copy itself if you have a way to return it to the graveyard, but typically you use it to copy Faithless Looting for infinite draw.",
+    "Protect it at all costs, as losing it to discard or removal can stall your game plan.",
+    "Practice the exact combo sequence in practice games to avoid misplays during critical turns."
   ],
   "matchups": [
     {
@@ -88,16 +111,37 @@
         "Card advantage engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use protection (hexproof/shroud), split the combo into multiple steps, or use discard to force them to hold up mana. If they counter the setup, dig deeper with cantrips. Consider sacrificing Snacker to copy a protection spell from the graveyard if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and Snacker. Don't let them get to their big mana; disrupt their mana sources and race them. Use removal to eliminate key ramp creatures and prioritize survival over combo execution in the early turns.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Trade protection and discard. Prioritize graveyard protection and Snacker recursion. Win by having better setup or out-resolving their combo. Track their graveyard to anticipate their win conditions and disrupt them with targeted hate.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes that remove Tireless Tribe and Sneaky Snacker",
     "Counterspells that prevent Inside Out or Faithless Looting from resolving",
     "Hand disruption that delays combo assembly",
-    "Direct damage spells that bypass the combo's defensive value"
+    "Direct damage spells that bypass the combo's defensive value",
+    "Watch for counterspells, board wipes, and graveyard hate.",
+    "Note when opponents tap out for big spells or combo pieces.",
+    "Track graveyard contents to anticipate their hate or your own recursion needs.",
+    "Pay attention to mana bases",
+    "tapped-out opponents are vulnerable to discard and Snacker recursion."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:32:24+00:00",
     "model": "local-model",
@@ -113,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

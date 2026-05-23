@@ -11,11 +11,15 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with one-drops like Goblin Tomb Raider or Voldaren Epicure",
-      "Hands containing mana sources and at least one Burn spell or amplifier"
+      "Hands containing mana sources and at least one Burn spell or amplifier",
+      "Keep any hand with 1-2 lands and 3+ spells.",
+      "Prioritize hands containing Lightning Bolt, Galvanic Blast, or Experimental Synthesizer.",
+      "Keep hands that can play a spell on turn 1."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays or mana acceleration",
-      "Hands with only high-cost cards or no interaction"
+      "Hands with only high-cost cards or no interaction",
+      "Mulligan hands with 3+ lands, multiple copies of the same spell without lands, or hands with no turn-1 play and no way to develop mana."
     ],
     "examples": [
       {
@@ -45,15 +49,32 @@
   "game_plan": {
     "early_game": [
       "Play one-drops like Voldaren Epicure and Clockwork Percussionist to enable Goblin Tomb Raider",
-      "Establish early board presence and artifact count"
+      "Establish early board presence and artifact count",
+      "Turn 1: Play Experimental Synthesizer.",
+      "Turn 2: Play a land, then cast Lightning Bolt or Galvanic Blast into face or the opponent's creature.",
+      "If they play a creature, use Blast/Bolt to remove it and swing.",
+      "Always sequence damage efficiently: prioritize removing blockers, then swing, then finish with direct damage.",
+      "If you have a hand with multiple Bolts/Blasts and a land, consider playing a land on turn 1 to set up a turn-2 lethal or removal package."
     ],
     "mid_game": [
       "Sequence Burn spells through Kessig Flamebreather and Thermo-Alchemist to maximize damage",
-      "Use Galvanic Blast for removal or direct damage while maintaining artifact synergy"
+      "Use Galvanic Blast for removal or direct damage while maintaining artifact synergy",
+      "Treat mana as a resource for damage, not for developing a board.",
+      "Count your damage constantly: hand + board + graveyard.",
+      "Never overextend into sweepers.",
+      "Prioritize keeping lethal in hand over board presence if the board is vulnerable to board wipes.",
+      "Use Experimental Synthesizer as both a threat and a 2-damage finisher.",
+      "Commit threats only when you can safely trade or when you have enough direct damage to clear blockers."
     ],
     "late_game": [
       "Leverage Experimental Synthesizer and Wrenn's Resolve for card advantage and token generation",
-      "Finish the game with accumulated Burn spells and amplified damage triggers"
+      "Finish the game with accumulated Burn spells and amplified damage triggers",
+      "Direct damage spells are your primary finishers.",
+      "Experimental Synthesizer can be sacrificed for 2 damage to close out games or trade efficiently.",
+      "Use your last Lightning Bolt or Galvanic Blast to deal the final points of damage.",
+      "Always calculate exact lethal before committing to an attack.",
+      "Go all-in when you have lethal in hand or can guarantee it through trades.",
+      "If the opponent has no sweepers and you're ahead on damage, commit threats."
     ]
   },
   "key_cards": [
@@ -96,7 +117,10 @@
   "sequencing_tips": [
     "Accumulate enough mana, an amplifier (Kessig Flamebreather or Thermo-Alchemist), and multiple spells to sequence between turns",
     "Save three-damage spells like Lightning Bolt for key removal opportunities or optimal burn windows",
-    "Prioritize resolving spells that trigger amplifiers before using removal or card draw"
+    "Prioritize resolving spells that trigger amplifiers before using removal or card draw",
+    "Common mistakes include swinging Experimental Synthesizer into a board you can't clear, forgetting to count damage (hand + board + graveyard), and overcommitting to the board against sweepers.",
+    "Galvanic Blast's flexibility to target either a creature or the player is crucial for efficient damage and removal.",
+    "Always track opponent's mana and graveyard to time your spells correctly."
   ],
   "matchups": [
     {
@@ -157,6 +181,31 @@
         "Chain Lightning timing",
         "Generating value for opponent"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Don't overcommit to one spell. Use cheap threats like Experimental Synthesizer to pressure and force responses. If they counter a Bolt, you still have Blast and Synthesizer. Sometimes you need to wait for a free spell or use a cheap threat to force a counterspell before casting your win condition. Flusterstorm can shut down their key spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Burn is naturally favorable against ramp. Use early damage to race their mana development. Don't let them stabilize; pressure relentlessly. Use removal efficiently to clear their early threats, and don't overextend into their late-game sweepers or finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use removal efficiently. Don't burn face if you can remove a threat. Use Pyroclasm if you have it to clear multiple creatures. Trade trades and prioritize surviving the early turns. Once you stabilize, shift to dealing damage and closing the game before they can rebuild.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early and don't let them draw cards. Use Experimental Synthesizer to force interaction. If they stabilize, you need to have lethal ready. Sometimes you need to be patient and wait for a free spell. Track their graveyard and hand to know when they can cast removal or counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race. Track damage carefully and count your lethal. Use Flusterstorm to protect your key spells or remove theirs. Prioritize removing their threats and managing your own. The player who calculates damage math better and manages their hand efficiently wins the mirror.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -167,10 +216,13 @@
     "High Tide",
     "Moment's Peace",
     "Weather the Storm",
-    "Myr Enforcer"
+    "Myr Enforcer",
+    "Watch for sweepers (Pyroclasm, Flame Rift, Terror of the Peaks), targeted removal (Path to Exile, Go, Abrade), and combo win conditions.",
+    "Note when opponents tap out for their win conditions."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-synthesizer-burn-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T09:53:18+00:00",
     "model": "local-model",
@@ -214,6 +266,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

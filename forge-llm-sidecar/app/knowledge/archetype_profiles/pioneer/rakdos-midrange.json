@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "name": "Rakdos Midrange",
+  "format": "pioneer",
+  "colors": [
+    "B",
+    "R"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "Rakdos Midrange is a value-oriented strategy that leverages high-impact creatures and discard spells to consistently make favorable trades and outlast opponents. Originally built around Lurrus and Kroxa, the post-ban version focuses on threats like Graveyard Trespasser and Bonecrusher Giant to pressure opponents while maintaining early control. The deck can flex between aggressive and control stances depending on the matchup, ultimately winning through sustained card advantage and resilient clocks.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Unholy Annex // Ritual Chamber"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 19,
+      "cards": [
+        "Bloodtithe Harvester",
+        "Fable of the Mirror-Breaker",
+        "Fear of Missing Out",
+        "Graveyard Trespasser",
+        "Invoke Despair",
+        "Sheoldred, the Apocalypse"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Torch the Tower"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Bloodtithe Harvester"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 25,
+      "cards": [
+        "Blightstep Pathway",
+        "Bloodtithe Harvester",
+        "Fable of the Mirror-Breaker",
+        "Fear of Missing Out",
+        "Graveyard Trespasser",
+        "Sheoldred, the Apocalypse",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 14,
+      "cards": [
+        "Abrade",
+        "Anoint with Affliction",
+        "Day of Black Sun",
+        "Fatal Push",
+        "Torch the Tower"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Bloodtithe Harvester",
+        "Day of Black Sun"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Bloodtithe Harvester"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 10,
+      "cards": [
+        "Bloodtithe Harvester",
+        "Fear of Missing Out",
+        "Graveyard Trespasser"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 11,
+      "cards": [
+        "Bloodtithe Harvester",
+        "Fear of Missing Out",
+        "Graveyard Trespasser",
+        "Takenuma, Abandoned Mire"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 1,
+      "cards": [
+        "Takenuma, Abandoned Mire"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 13,
+      "cards": [
+        "Bloodtithe Harvester",
+        "Duress",
+        "Hidetsugu Consumes All",
+        "Ray of Enfeeblement"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 9
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Blackcleave Cliffs",
+        "Blazemire Verge",
+        "Blood Crypt",
+        "Bloodtithe Harvester",
+        "Mutavault",
+        "Takenuma, Abandoned Mire",
+        "Urborg, Tomb of Yawgmoth"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Blackcleave Cliffs",
+        "Blazemire Verge",
+        "Blood Crypt",
+        "Mountain",
+        "Mutavault",
+        "Swamp",
+        "Takenuma, Abandoned Mire",
+        "Urborg, Tomb of Yawgmoth"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.24
+  },
+  "dual_role_cards": [
+    {
+      "card": "Blackcleave Cliffs",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blazemire Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodtithe Harvester",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Day of Black Sun",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fable of the Mirror-Breaker",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fear of Missing Out",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Graveyard Trespasser",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mutavault",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheoldred, the Apocalypse",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Takenuma, Abandoned Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Torch the Tower",
+      "roles": [
+        "dig_draw",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urborg, Tomb of Yawgmoth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play discard spells on turn 1 to find key threats like Necromentia or Go Blank.",
+    "Delay discarding against Winota until after turn 1 to avoid removing Esika's Chariot too early.",
+    "Use Fatal Push early to remove mana dorks like Elvish Mystic and Llanowar Elves.",
+    "Save Kalitas, Traitor of Ghet for last to bait opponent's removal spells.",
+    "Play Den of the Bugbear only at opportune times to avoid cheap removal like March of Otherworldly Light."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play discards and removals to control the board and disrupt the opponent's hand"
+    },
+    {
+      "trigger": "early game",
+      "line": "Seek turn 1 Duress or Thoughtseize to find key threats like Necromentia or Go Blank"
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land and cast Thoughtseize if possible, or drop a 1-drop threat/removal."
+    }
+  ],
+  "kill_priority": [
+    "Bloodtithe Harvester",
+    "Blightstep Pathway",
+    "Fable of the Mirror-Breaker",
+    "Fear of Missing Out",
+    "Graveyard Trespasser",
+    "Sheoldred, the Apocalypse",
+    "Thoughtseize"
+  ],
+  "interaction_to_disrupt": [
+    "Bloodtithe Harvester",
+    "Abrade",
+    "Anoint with Affliction",
+    "Day of Black Sun",
+    "Fatal Push",
+    "Torch the Tower",
+    "Duress",
+    "Hidetsugu Consumes All"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/rakdos-midrange.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

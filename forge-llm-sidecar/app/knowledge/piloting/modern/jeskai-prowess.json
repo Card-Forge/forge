@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two cheap noncreature spells",
       "Hands containing a prowess creature and early interaction",
-      "Hands that can play a creature and cast a spell on turn one"
+      "Hands that can play a creature and cast a spell on turn one",
+      "Keep hands with 2-3 lands (preferably fixing), at least one Prowess creature (Slickshot Show-Off, Cori-Steel Cutter), and 2+ cheap instants/sorceries (Opt, Lightning Strike, Mishra's Bauble).",
+      "Bauble is a keep with any land."
     ],
     "mulligan_criteria": [
       "Hands lacking early spell density or creature threats",
       "Hands with only high-cost cards or no interaction",
-      "Hands that cannot establish board presence by turn two"
+      "Hands that cannot establish board presence by turn two",
+      "Mulligan if you have 0-1 lands, no creatures, or only spells costing 3+ mana."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Play low-cost creatures and immediately cast instants to trigger prowess",
       "Establish first-strike advantage to trade favorably into opposing aggro",
-      "Use Mishra's Bauble for card advantage if life total permits"
+      "Use Mishra's Bauble for card advantage if life total permits",
+      "Turn 1: Play a land, cast Mishra's Bauble (sacrifice for 1R), cast a cheap instant/sorcery (Opt/Lightning Strike) to trigger Prowess.",
+      "Turn 2: Play second land, cast another instant/sorcery, potentially cast a Prowess creature for free if you hit two triggers.",
+      "Sequence to maximize trigger count and maintain mana flexibility."
     ],
     "mid_game": [
       "Maintain spell density to keep prowess creatures relevant and threatening",
       "Use interaction to clear opposing threats while continuing to apply pressure",
-      "Go wide with multiple prowess creatures to force difficult blockers"
+      "Go wide with multiple prowess creatures to force difficult blockers",
+      "Keep mana flexible for instant-speed responses and Prowess triggers.",
+      "Use Bauble for fixing and tempo, not just mana.",
+      "Maintain hand size by cycling Opt/Brainstorm.",
+      "Treat the exiled top card as a resource for future turns.",
+      "Commit threats when you have enough Prowess triggers to make them unblockable or too large to answer.",
+      "Hold back if the opponent has sweepers or hard counters."
     ],
     "late_game": [
       "Transition to larger threats while continuing to cast cheap spells for buffs",
       "Stabilize the board by trading efficiently and leveraging first strike",
-      "Push for lethal with buffed attackers or value out the opponent with card draw"
+      "Push for lethal with buffed attackers or value out the opponent with card draw",
+      "Cori-Steel Cutter with multiple Prowess triggers (haste, large size), Slickshot Show-Off with flying, or other Prowess creatures cast for free.",
+      "Win by overwhelming the board with unblockable or unanswerable threats.",
+      "Go all-in when you have 3+ Prowess triggers in a turn, the opponent has no sweepers/counters, or you can close the game before they can stabilize.",
+      "Also commit when you can cast a Prowess creature for free and it's too large to block."
     ]
   },
   "key_cards": [
@@ -59,7 +75,12 @@
     "Cast noncreature spells before combat to maximize prowess buffs for the turn",
     "Prioritize first-strike triggers to win combat trades before opponents can retaliate",
     "Sequence cheap spells to maintain tempo and keep the board active",
-    "Save interaction for when it can clear a threat and still allow a prowess trigger"
+    "Save interaction for when it can clear a threat and still allow a prowess trigger",
+    "Common mistake: Overcommitting to Prowess triggers without considering the opponent's interaction.",
+    "Always leave up mana for counterspells or removal if needed.",
+    "Bauble is a tempo tool, not just mana fixing.",
+    "Prowess triggers are cumulative, so sequence spells to maximize free casts.",
+    "Don't forget that exiling the top card of your library can be a resource for future turns."
   ],
   "matchups": [
     {
@@ -88,6 +109,21 @@
         "Card draw spells",
         "Resilient creature threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Bauble and cheap instants to trigger Prowess before casting threats. Cast Prowess creatures for free via triggers. Use instant-speed threats to bypass sorcery-speed counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Pressure early with Bauble and cheap spells. Use removal to deal with ramp creatures. Don't let them stabilize; race them with Prowess threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by having better sequencing, more Prowess creatures, and better disruption (discard, artifact hate). Prioritize clearing their Prowess creatures and out-triggering them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +131,14 @@
     "Abrupt Decay",
     "Thoughtseize",
     "Fatal Push",
-    "Lightning Helix"
+    "Lightning Helix",
+    "Watch for sweepers (Wrath of God, Cyclonic Rift), counterspells (Force of Will, Spell Pierce), and graveyard strategies.",
+    "Note when opponents tap out for big spells or hold up mana for removal.",
+    "Track how many triggers they've left open."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:43:39+00:00",
     "model": "local-model",
@@ -114,7 +154,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

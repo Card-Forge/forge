@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with two lands and early interaction",
       "Hands containing Yorion or Solitude with removal",
-      "Hands with Stoneforge Mystic and artifact slots"
+      "Hands with Stoneforge Mystic and artifact slots",
+      "Keep 4+ land hands with a curve of 1-2 mana spells (Solitude, Noble Hierarch, Birds of Paradise, Thoughtseize).",
+      "Keep 5+ land hands with a turn-1 play (Thalia, Tarmogoyf, Scavenging Ooze) or a turn-2 play (Yorion, Stoneforge Mystic).",
+      "Prioritize hands that can deploy a tax effect or card draw by turn 2."
     ],
     "mulligan_criteria": [
       "Heavy land counts without early plays",
       "Hands lacking removal or card advantage",
-      "Hands with only late-game finishers"
+      "Hands with only late-game finishers",
+      "Mulligan pure land, all removal, or hands missing basics if the format demands them."
     ],
     "examples": []
   },
@@ -25,17 +29,31 @@
     "early_game": [
       "Play lands efficiently and hold interaction for key threats",
       "Use removal to clear the path for early tempo plays",
-      "Prioritize survival over early artifact deployment"
+      "Prioritize survival over early artifact deployment",
+      "Turn 1: Play a land, cast Noble Hierarch or Birds of Paradise for mana acceleration, or Thoughtseize/Duress to disrupt.",
+      "If opening Stoneforge Mystic, play land, cast SFM, fetch land, search for Batterskull or Sword of Feast and Famine.",
+      "Turn 2: Deploy Thalia to tax opponent's non-creature spells, or cast Yorion to stabilize.",
+      "Sequence lands to ensure colored mana for Solitude/Thoughtseize by turn 2."
     ],
     "mid_game": [
       "Activate Stoneforge Mystic to fetch protective boots or greaves",
       "Cast Solitude once you have a steady stream of cards to exile",
-      "Deploy Yorion when the board is clear or protected"
+      "Deploy Yorion when the board is clear or protected",
+      "Preserve Solitude for key threats (counters, finishers, combo pieces).",
+      "Use Thoughtseize/Duress to disrupt opponent's hand before committing threats.",
+      "Manage the graveyard with Rest in Peace/Surgical Extraction to prevent recursion.",
+      "Avoid overcommitting to the board if the opponent has sweepers or counterspells.",
+      "Commit threats when you have removal ready or when the opponent is tapped out.",
+      "Hold back if they have potential sweepers or counters."
     ],
     "late_game": [
       "Use Solitude to maintain hand size and outvalue opponents",
       "Push damage with Yorion while cycling through your deck",
-      "Leverage artifact synergies to protect your win condition"
+      "Leverage artifact synergies to protect your win condition",
+      "Yorion, Sky Nomad (body + flying + lifelink), Batterskull (on a resilient threat or Yorion), Sword of Feast and Famine (for card advantage and removal).",
+      "Field of the Dead can close games if the graveyard is clear and you have enough 1/1 tokens.",
+      "Go all-in when you have established board control, the opponent has no sweepers, or you can trade Yorion into a key threat.",
+      "Commit when you can protect your finisher with removal or tax effects, and when you have card advantage to sustain the push."
     ]
   },
   "key_cards": [
@@ -59,7 +77,13 @@
     "Hold removal until you see the opponent's key threats",
     "Play Solitude after you have established a steady card flow",
     "Activate Stoneforge Mystic before casting the fetched artifact to avoid counterspells",
-    "Deploy Yorion only when you have protection or the board is empty"
+    "Deploy Yorion only when you have protection or the board is empty",
+    "Yorion is both a win condition and a stabilizer",
+    "use him flexibly.",
+    "Solitude is your most powerful tool\u2014save it for game-ending threats or key combo pieces.",
+    "Stoneforge Mystic finds Batterskull for a massive body or Sword of Feast and Famine for card advantage and removal.",
+    "Watch for graveyard recursion",
+    "Rest in Peace is often a game-winning sideboard card."
   ],
   "matchups": [
     {
@@ -88,16 +112,35 @@
         "Graveyard recursion",
         "Unexpected win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Solitude to remove counterspellers. Cast threats in response to counterspells if possible. Use Thoughtseize to remove key counters. Do not overcommit to a single threat; apply incremental pressure and force them to use multiple answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use Solitude on key ramp creatures. Deploy Thalia to tax their non-creature spells. Graveyard hate to stop recursion. Force them to spend resources on interaction rather than developing their board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize Thoughtseize/Duress to disrupt their hand. Use Solitude to remove key threats. Deploy Thalia to tax their non-creature spells. Win the graveyard war with Rest in Peace/Surgical Extraction. Control the board with tax effects and efficient trades.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast one-mana removal",
     "Board wipes",
     "Card draw engines",
-    "Graveyard hate"
+    "Graveyard hate",
+    "Watch for sweepers (Supreme Verdict, Anger of the Gods), counters (Force of Will, Counterspell), combo pieces (Inverter of Truth, Storm targets), and graveyard recursion.",
+    "Note when the opponent taps out for a big spell or when they start casting non-basic lands for ramp.",
+    "Track their hand size after Thoughtseize/Duress to predict their next move."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:35:35+00:00",
     "model": "local-model",
@@ -113,6 +156,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

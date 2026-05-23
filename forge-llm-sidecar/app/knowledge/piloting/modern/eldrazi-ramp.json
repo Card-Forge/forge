@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more lands and a ramp spell",
       "Hands containing Eldrazi Temple or early threats",
-      "Hands with Kozilek's Command and sufficient mana sources"
+      "Hands with Kozilek's Command and sufficient mana sources",
+      "Keep hands with 2-3 lands plus at least one ramp spell (Rampant Growth, Cultivate, Farseek, Kodama's Reach) or a turn-1 artifact (Sol Ring, Arcane Signet).",
+      "Keep Kozilek's Command if paired with 2+ lands."
     ],
     "mulligan_criteria": [
       "Hands with zero or one land",
       "Hands lacking ramp or early impact",
-      "Hands with only late-game threats and no acceleration"
+      "Hands with only late-game threats and no acceleration",
+      "Mulligan to 5+ lands, pure ramp without lands, or hands lacking early interaction when facing Boros Energy or Affinity."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and ramp spells to accelerate mana production",
       "Deploy early threats to apply pressure and protect ramp",
-      "Hold up mana for potential interaction if needed"
+      "Hold up mana for potential interaction if needed",
+      "Turn 1: Play a land, cast Sol Ring/Arcane Signet, or cast a ramp spell.",
+      "Turn 2: Cast a second ramp spell or Eldrazi Temple",
+      "aim for 3-4 mana by turn 3.",
+      "Turn 3: Cast your first Eldrazi threat (Reality Smasher, Kozilek, Butcher of Truth) or Kozilek's Command.",
+      "Prioritize untapping lands for ramp over casting threats if you're behind on board or facing aggro."
     ],
     "mid_game": [
       "Cast Eldrazi Temple to draw cards and stabilize the board",
       "Use Kozilek's Command to remove threats, draw cards, or deal damage",
-      "Begin deploying larger Eldrazi creatures to control the board"
+      "Begin deploying larger Eldrazi creatures to control the board",
+      "Treat mana as a deployment tool, not just a casting cost.",
+      "Hold priority to cast Kozilek's Command in response to opponent's removal or sweepers.",
+      "Avoid over-committing to hand if you lack answers",
+      "prioritize card advantage via Kozilek's Command draw mode or Eldrazi draw engines to maintain pressure.",
+      "Commit threats when you have enough mana to answer a board wipe or when the opponent is low on interaction.",
+      "Hold back if you suspect a sweeper or if you're facing aggro and need to stabilize."
     ],
     "late_game": [
       "Flood the board with multiple Eldrazi threats",
       "Use Sowing Mycospawn to generate infinite card advantage",
-      "Close out the game with overwhelming board presence and direct damage"
+      "Close out the game with overwhelming board presence and direct damage",
+      "Emrakul, the Promised End is the primary win condition, providing evasion, extra turns, and card advantage.",
+      "Kozilek, Butcher of Truth and Ulamog, the Ceaseless Hunger provide secondary win paths through card draw and board wipes.",
+      "Go all-in when you have enough mana to cast two threats or when the opponent has exhausted their interaction.",
+      "Commit fully if you can answer a potential board wipe or if you're ahead on board and can close the game in 1-2 turns."
     ]
   },
   "key_cards": [
@@ -59,7 +77,13 @@
     "Prioritize playing Eldrazi Temple before casting large threats to maintain card flow",
     "Hold Kozilek's Command for key removal or card draw windows rather than early damage",
     "Sequence Sowing Mycospawn after establishing board presence to maximize token generation and card draw",
-    "Always ensure sufficient mana sources before tapping Eldrazi Temple to avoid stalling"
+    "Always ensure sufficient mana sources before tapping Eldrazi Temple to avoid stalling",
+    "Common mistake: Over-ramping into a board wipe without answers.",
+    "Always hold priority to cast Kozilek's Command in response to sweepers.",
+    "Eldrazi are colorless, so they bypass color-specific hate but are vulnerable to artifact/enchantment hate.",
+    "Sowing Mycospawn is a niche mana source",
+    "prioritize it only if you're severely mana-flooded.",
+    "Watch for opponent's discard effects"
   ],
   "matchups": [
     {
@@ -88,16 +112,35 @@
         "Card draw spells",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Kozilek's Command (discard) to remove counterspells from hand. Cast threats in response to counterspells to force them to spend resources. Deploy multiple threats to overwhelm counter suites.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-value them by prioritizing Kozilek's Command to disrupt their ramp spells or key permanents. Race if they're ahead, or use discard to slow their game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value is king. Use Kozilek's Command (discard) to remove their threats or ramp. Track their mana development and commit threats when they're tapped out. Prioritize card advantage engines to out-value them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspells",
     "Board wipes",
     "Hand disruption",
-    "Early aggressive creatures"
+    "Early aggressive creatures",
+    "Watch for board wipes (e.g., Wrath of God, Supreme Verdict), targeted removal, and counterspells.",
+    "Note when opponents tap out for sweepers or discard effects.",
+    "Track graveyard hate if they're trying to disrupt your ramp or value engines."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:07:18+00:00",
     "model": "local-model",
@@ -113,7 +156,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

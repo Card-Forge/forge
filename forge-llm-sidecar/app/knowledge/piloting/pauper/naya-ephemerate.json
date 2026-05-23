@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with one or two cheap creatures to establish early presence",
       "Hands containing Malevolent Rumble paired with a threat or recursion",
-      "Hands with Writhing Chrysalis for early graveyard interaction"
+      "Hands with Writhing Chrysalis for early graveyard interaction",
+      "Keep hands with 2-3 lands (prioritize duals or shocklands for fixing) and at least one Ephemerate or bounce enabler.",
+      "Keep hands with 1-2 mana creatures that have ETB/DTB triggers or can be bounced for value."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays or interaction",
       "Hands with only high-cost cards or multiple lands",
-      "Hands missing color fixers for key spells"
+      "Hands missing color fixers for key spells",
+      "Mulligan to pure land hands, hands with only 3+ mana creatures, or hands lacking bounce/removal in fast formats."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Deploy low-cost creatures to establish board presence and force trades",
       "Use Sacred Cat to immediately boost early threats and enable favorable exchanges",
-      "Hold up interaction or recursion to disrupt opponent's opening sequence"
+      "Hold up interaction or recursion to disrupt opponent's opening sequence",
+      "Turn 1: Play a land, optionally cast a 1-mana creature or play a shockland if fixing is critical.",
+      "Turn 2: Cast a 2-mana creature, then use Ephemerate to bounce it back to hand to trigger its ETB effect, or bounce an opponent's threat if interaction is needed.",
+      "If drawing Writhing Chrysalis, play it on turn 2 or 3, then bounce it with Ephemerate to trigger its death effect and gain flying/tempo."
     ],
     "mid_game": [
       "Cast Malevolent Rumble to clear opposing boards while dealing direct damage",
       "Leverage Writhing Chrysalis deaths to recover key spells or creatures from the graveyard",
-      "Maintain tempo by playing creatures on opponent's turn when possible to disrupt their rhythm"
+      "Maintain tempo by playing creatures on opponent's turn when possible to disrupt their rhythm",
+      "Preserve Ephemerate for high-value targets (your own ETB triggers or opponent's key threats).",
+      "Don't overcommit mana to bounce loops if you can't follow up.",
+      "Use shocklands strategically to maintain mana flexibility.",
+      "Track graveyard resources if Writhing Chrysalis or other DTB effects are involved.",
+      "Commit threats when you have interaction ready to protect them or bounce opponent's blockers.",
+      "Hold back Ephemerate if the opponent is likely to have removal or board wipes."
     ],
     "late_game": [
       "Stabilize with recycled threats and pumped survivors to apply consistent pressure",
       "Force opponent into unfavorable trades using board clears and combat math",
-      "Use remaining resources to close out the game or outvalue control strategies"
+      "Use remaining resources to close out the game or outvalue control strategies",
+      "Deploy a high-impact creature with a strong ETB/DTB effect, then use Ephemerate to bounce it for a second trigger, or bounce it to hand to cast it again.",
+      "If Writhing Chrysalis is in play, bounce it to trigger flying/+1/+1, then attack with a buffed threat.",
+      "Use Ephemerate on opponent's blockers to clear the path.",
+      "Go all-in when you have multiple bounce enablers, a clear path to damage, and the opponent has no interaction left.",
+      "Commit when you can trigger multiple ETB/DTB effects in a single turn to close the game."
     ]
   },
   "key_cards": [
@@ -59,7 +76,13 @@
     "Hold up colors for Malevolent Rumble before committing to a full board push",
     "Trigger Writhing Chrysalis carefully to ensure you can recover high-impact cards",
     "Time Sacred Cat to maximize combat damage or enable a lethal strike",
-    "Prioritize playing creatures on opponent's turn to disrupt their sequencing"
+    "Prioritize playing creatures on opponent's turn to disrupt their sequencing",
+    "Ephemerate only targets creatures, so plan your bounce loops carefully.",
+    "Writhing Chrysalis's flying trigger is powerful but temporary",
+    "use it to bypass ground blockers or finish the game.",
+    "Avoid bouncing your own creatures if you don't have a follow-up trigger.",
+    "Watch out for board wipes that can reset your bounce loops.",
+    "Practice stack sequencing to maximize ETB/DTB triggers without giving the opponent a chance to respond."
   ],
   "matchups": [
     {
@@ -106,6 +129,16 @@
         "Large creatures",
         "Mana denial effects"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Ephemerate on your own creatures to trigger ETB effects before they're countered, or bounce opponent's counterspellers if possible. Cast spells in response to their interaction, or use cheap, uncounterable threats if available. Rely on instant-speed bounce to bypass stack interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by drawing more cards and having better bounce sequencing. Prioritize keeping Ephemerate for high-value triggers. Use targeted removal to eliminate their threats before they can bounce them. Control the board state by trading efficiently and forcing them to use interaction on low-value targets.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -113,10 +146,15 @@
     "Direct damage spells",
     "Board-clearing effects",
     "Graveyard hate",
-    "Counterspells"
+    "Counterspells",
+    "Watch for counterspells, board wipes, and targeted removal.",
+    "Note if the opponent is saving interaction for your bounce targets.",
+    "Track graveyard accumulation if they play discard or mill.",
+    "Pay attention to mana development\u2014if they're playing extra lands or ramp spells, they're likely ahead on tempo."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:52:19+00:00",
     "model": "local-model",
@@ -132,6 +170,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

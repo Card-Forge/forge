@@ -1,0 +1,101 @@
+{
+  "archetype": "Mono-Blue Spellementals",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/mono-blue-spellementals.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Agna Qel'a"
+    },
+    {
+      "qty": 4,
+      "name": "Bounce Off"
+    },
+    {
+      "qty": 2,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 3,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 4,
+      "name": "Eddymurk Crab"
+    },
+    {
+      "qty": 3,
+      "name": "Eluge, the Shoreless Sea"
+    },
+    {
+      "qty": 3,
+      "name": "Get Out"
+    },
+    {
+      "qty": 2,
+      "name": "Hydro-Man, Fluid Felon"
+    },
+    {
+      "qty": 17,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Opt"
+    },
+    {
+      "qty": 4,
+      "name": "Sleight of Hand"
+    },
+    {
+      "qty": 1,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 4,
+      "name": "Sunderflock"
+    },
+    {
+      "qty": 4,
+      "name": "Three Steps Ahead"
+    },
+    {
+      "qty": 2,
+      "name": "Unsummon"
+    },
+    {
+      "qty": 2,
+      "name": "Winternight Stories"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Aetherize"
+    },
+    {
+      "qty": 2,
+      "name": "Annul"
+    },
+    {
+      "qty": 4,
+      "name": "Bear Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Glen Elendra's Answer"
+    },
+    {
+      "qty": 2,
+      "name": "Negate"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 2,
+      "name": "The Legend of Kuruk"
+    }
+  ]
+}

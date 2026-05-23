@@ -1,0 +1,602 @@
+{
+  "schema_version": 1,
+  "name": "Silverquill, the Disputant",
+  "format": "commander",
+  "colors": [
+    "B",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "A B/W attrition and conditional control deck that leverages Silverquill to disrupt opponent strategies while out-grinding them through efficient removal, card advantage, and incremental damage. It excels against combo and ramp archetypes by answering key pieces and winning midrange value exchanges.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 2,
+      "cards": [
+        "Deadly Dispute",
+        "Fake Your Own Death"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 15,
+      "cards": [
+        "Agent Venom",
+        "Buzzard-Wasp Colony",
+        "Circle of Power",
+        "Corrupted Conviction",
+        "Cost of Brilliance",
+        "Deadly Dispute",
+        "Honor",
+        "Misty Palms Oasis",
+        "Morbid Opportunist",
+        "Rabid Attack",
+        "Rat King, Pale Piper",
+        "Risky Shortcut",
+        "Skullclamp",
+        "Trouble in Pairs",
+        "Welcoming Vampire"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Forum of Amity",
+        "Resentful Revelation",
+        "Temple of Silence"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "South Wind Avatar"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 33,
+      "cards": [
+        "Adeline, Resplendent Cathar",
+        "Aerith Rescue Mission",
+        "Agent Venom",
+        "Ainok Strike Leader",
+        "Aron, Benalia's Ruin",
+        "Bartolom\u00e9 del Presidio",
+        "Big Mother Mouser",
+        "Bloodthirsty Conqueror",
+        "Buzzard-Wasp Colony",
+        "Divine Visitation",
+        "End of the Hunt",
+        "Endless Foot Assault",
+        "Epicure of Blood",
+        "Hei Bai, Spirit of Balance",
+        "Hop to It",
+        "Informed Inkwright",
+        "Join the Maestros",
+        "Marauding Blight-Priest",
+        "Morbid Opportunist",
+        "Rat King, Pale Piper",
+        "Release the Dogs",
+        "Sanguine Bond",
+        "Scolding Administrator",
+        "Sephiroth, Fabled SOLDIER",
+        "Shredder, Shadow Master",
+        "Silverquill, the Disputant",
+        "Sinkhole Surveyor",
+        "Sol Ring",
+        "South Wind Avatar",
+        "Stirring Hopesinger",
+        "Thalisse, Reverent Medium",
+        "Timeline Culler",
+        "Welcoming Vampire"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 11,
+      "cards": [
+        "Circle of Power",
+        "Come Back Wrong",
+        "Cornered by Black Mages",
+        "Duty Beyond Death",
+        "Fell",
+        "Infernal Grasp",
+        "Path to Exile",
+        "Shredder, Shadow Master",
+        "Swords to Plowshares",
+        "Will of the Mardu",
+        "Zombify"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Aron, Benalia's Ruin",
+        "Duty Beyond Death",
+        "Friendly Neighborhood",
+        "Revenge of the Rats",
+        "Stirring Hopesinger"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Ainok Strike Leader",
+        "Duty Beyond Death",
+        "Grand Crescendo"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 9,
+      "cards": [
+        "Antiquities on the Loose",
+        "Come Back Wrong",
+        "Forum of Amity",
+        "Lingering Souls",
+        "Ninja Teen",
+        "Resentful Revelation",
+        "Revenge of the Rats",
+        "Timeline Culler",
+        "Zombify"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 12,
+      "cards": [
+        "Antiquities on the Loose",
+        "Come Back Wrong",
+        "Fake Your Own Death",
+        "Lingering Souls",
+        "Ninja Teen",
+        "Pain 101",
+        "Resentful Revelation",
+        "Revenge of the Rats",
+        "The Last Ronin's Technique",
+        "Timeline Culler",
+        "Vincent's Limit Break",
+        "Zombify"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 5,
+      "cards": [
+        "Circle of Power",
+        "Cornered by Black Mages",
+        "Informed Inkwright",
+        "Scolding Administrator",
+        "Stirring Hopesinger"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "South Wind Avatar"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 9,
+      "cards": [
+        "Deadly Dispute",
+        "Fake Your Own Death",
+        "Foot Headquarters",
+        "Forum of Amity",
+        "Isolated Chapel",
+        "Misty Palms Oasis",
+        "Shattered Sanctum",
+        "Temple of Silence",
+        "Temple of the False God"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 38,
+      "cards": [
+        "Foot Headquarters",
+        "Forum of Amity",
+        "Isolated Chapel",
+        "Misty Palms Oasis",
+        "Plains",
+        "Shattered Sanctum",
+        "Swamp",
+        "Temple of Silence",
+        "Temple of the False God"
+      ],
+      "mainboard_count": 38,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.24
+  },
+  "dual_role_cards": [
+    {
+      "card": "Agent Venom",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ainok Strike Leader",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Antiquities on the Loose",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Aron, Benalia's Ruin",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Buzzard-Wasp Colony",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Circle of Power",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Come Back Wrong",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cornered by Black Mages",
+      "roles": [
+        "engines",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Dispute",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Duty Beyond Death",
+      "roles": [
+        "protection",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fake Your Own Death",
+      "roles": [
+        "mana_fixing",
+        "recursion",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Foot Headquarters",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Forum of Amity",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Informed Inkwright",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Isolated Chapel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lingering Souls",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Palms Oasis",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Morbid Opportunist",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ninja Teen",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rat King, Pale Piper",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Resentful Revelation",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Revenge of the Rats",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scolding Administrator",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shattered Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shredder, Shadow Master",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "South Wind Avatar",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stirring Hopesinger",
+      "roles": [
+        "engines",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Silence",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of the False God",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Timeline Culler",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Welcoming Vampire",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zombify",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: Overcommitting to the board without protection or interaction.",
+    "Unique interaction: Silverquill\u2019s dispute mechanic likely forces choices or counters",
+    "use it to disrupt combo chains and force unfavorable trades.",
+    "Watch for format-specific rules and adjust your pacing accordingly.",
+    "Always track graveyard and library contents if recursion or mill is a threat."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Sol Ring or Arcane Signet if mana allows."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Develop your mana base, cast early threats or targeted removal, and begin sequencing lands to ensure white and black mana for Silverquill\u2019s abilities."
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize establishing board presence without overextending."
+    }
+  ],
+  "kill_priority": [
+    "Circle of Power",
+    "Cornered by Black Mages",
+    "Informed Inkwright",
+    "Scolding Administrator",
+    "Stirring Hopesinger",
+    "South Wind Avatar",
+    "Adeline, Resplendent Cathar",
+    "Aerith Rescue Mission"
+  ],
+  "interaction_to_disrupt": [
+    "Ainok Strike Leader",
+    "Duty Beyond Death",
+    "Grand Crescendo",
+    "Circle of Power",
+    "Come Back Wrong",
+    "Cornered by Black Mages",
+    "Fell",
+    "Infernal Grasp"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/silverquill-the-disputant.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

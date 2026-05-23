@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two lands and a removal spell or early creature",
       "Draws containing Burning Inquiry or Orcish Bowmasters paired with mana sources",
-      "Combinations that allow for immediate board presence or disruption"
+      "Combinations that allow for immediate board presence or disruption",
+      "Keep hands with 2-3 lands (prioritizing duals/shocks or basic swamps/stacks for fixing), at least one removal spell (e.g., Fatal Push, Go for the Throat), and a threat or card draw engine.",
+      "Keep hands that can play a turn-1 land and a turn-2 threat or interaction."
     ],
     "mulligan_criteria": [
       "Mana screws with three or more lands and no interaction",
       "Hands lacking removal or early game answers",
-      "Draws with only high-cost cards and no ramp or draw"
+      "Draws with only high-cost cards and no ramp or draw",
+      "Mulligan on 3+ lands with no plays, hands with only removal and no threats/lands, or hands with 0-1 lands."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Play lands and deploy early creatures to establish board presence",
       "Use Burning Inquiry to disrupt opponent's opening turns and gain life",
-      "Hold removal for key threats while developing your own board"
+      "Hold removal for key threats while developing your own board",
+      "Turn 1: Play a land.",
+      "If you have a cheap threat or discard spell and the opponent is aggressive, consider playing it to disrupt their curve.",
+      "Turn 2: Develop mana, cast your 2-drop threat, or use removal on an early aggressive threat.",
+      "Land sequencing prioritizes fixing to ensure you can cast your 2-drop and 3-drop on curve without flooding.",
+      "Always prioritize playing a land over casting a spell if you are one mana short of a key play."
     ],
     "mid_game": [
       "Utilize Orcish Bowmasters to clear opposing boards and generate value",
       "Cast Moonshadow to restrict blocking and push damage with your creatures",
-      "Trade efficiently to maintain board advantage while drawing into more resources"
+      "Trade efficiently to maintain board advantage while drawing into more resources",
+      "Prioritize card advantage engines and efficient removal.",
+      "Don't overcommit mana on single-target spells if a board wipe or sweep is available.",
+      "Manage graveyard resources carefully if the format has graveyard hate, and avoid casting unnecessary spells that could be targeted by discard or removal.",
+      "Always maintain a hand of 3-4 cards to weather interaction.",
+      "Commit threats when you have removal to answer opponent's interaction or when they have no sweepers.",
+      "Hold back if you suspect a board wipe or heavy removal."
     ],
     "late_game": [
       "Stabilize with resilient threats and card advantage engines",
       "Use life gain from Burning Inquiry to outlast attrition strategies",
-      "Close out games with efficient removal and board control"
+      "Close out games with efficient removal and board control",
+      "High-impact threats, card advantage engines that draw into game-ending spells, or direct damage spells.",
+      "Win by out-resourcing and applying pressure when the opponent has no answers.",
+      "Use discard to remove their last interaction, then commit your remaining threats to close the game.",
+      "When you have card advantage, removal for their interaction, and they have no sweepers or hard answers.",
+      "Go all-in when you can close the game in 1-2 turns, or when you have enough threats to overwhelm their remaining blockers.",
+      "Commit when you've successfully disrupted their combo or control game plan."
     ]
   },
   "key_cards": [
@@ -60,7 +80,12 @@
     "Cast Orcish Bowmasters after opponent commits to a board state to maximize the death trigger",
     "Play Moonshadow before attacking to force opponent to commit blockers or concede damage",
     "Prioritize removal on threats that can't be blocked efficiently",
-    "Manage life total carefully to avoid being burned out by opponent's finishers"
+    "Manage life total carefully to avoid being burned out by opponent's finishers",
+    "The listed signature cards (Orcish Bowmasters, Moonshadow, Burning Inquiry) do not match the B/R color identity of Rakdos Midrange and likely indicate a decklist error.",
+    "Verify your card list and ensure all cards are legal in your format.",
+    "Standard Rakdos Midrange relies on efficient removal, card draw, resilient threats, and discard.",
+    "Avoid overcommitting to the board without answers, and prioritize card advantage in longer games.",
+    "Practice mulligan decisions carefully, as Rakdos Midrange is highly sensitive to early mana and card quality."
   ],
   "matchups": [
     {
@@ -89,6 +114,21 @@
         "Protection spells",
         "Fast win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that are hard to counter, or cast spells when they have no mana up. Use discard to remove counterspells from hand. Avoid overcommitting to a single threat; have multiple lines of attack to pressure them into making mistakes.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use efficient removal to kill their ramp spells or early threats. Don't overextend into their late-game finishers; stabilize with removal and discard, then close the game before they can deploy their win conditions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card advantage, efficient removal, and threat protection. Control the board with sweepers if available. Use discard to remove their key threats or interaction, and avoid overcommitting to the board without answers. The player who manages resources better and makes fewer mistakes will win.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -96,10 +136,15 @@
     "Board wipe spells",
     "Card draw and value engines",
     "Direct damage finishers",
-    "Counterspell packages"
+    "Counterspell packages",
+    "Watch for sweepers, counters, and graveyard recursion.",
+    "Note when opponents are holding up mana for interaction vs. developing their board.",
+    "Track key combo pieces or win conditions, and adjust your aggression accordingly.",
+    "Pay attention to when they tap out for a single spell, as this often indicates they are vulnerable to a threat or discard."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T02:03:23+00:00",
     "model": "local-model",
@@ -115,7 +160,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

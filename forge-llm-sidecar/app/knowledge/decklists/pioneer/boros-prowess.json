@@ -1,0 +1,109 @@
+{
+  "archetype": "Boros Prowess",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/boros-prowess.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Battlefield Forge"
+    },
+    {
+      "qty": 3,
+      "name": "Boros Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Den of the Bugbear"
+    },
+    {
+      "qty": 4,
+      "name": "Eidolon of the Great Revel"
+    },
+    {
+      "qty": 4,
+      "name": "Emberheart Challenger"
+    },
+    {
+      "qty": 3,
+      "name": "Erode"
+    },
+    {
+      "qty": 4,
+      "name": "Inspiring Vantage"
+    },
+    {
+      "qty": 4,
+      "name": "Kumano Faces Kakkazan"
+    },
+    {
+      "qty": 3,
+      "name": "Lightning Helix"
+    },
+    {
+      "qty": 4,
+      "name": "Monastery Swiftspear"
+    },
+    {
+      "qty": 4,
+      "name": "Monstrous Rage"
+    },
+    {
+      "qty": 4,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Needleverge Pathway"
+    },
+    {
+      "qty": 2,
+      "name": "Ramunap Ruins"
+    },
+    {
+      "qty": 2,
+      "name": "Reckless Rage"
+    },
+    {
+      "qty": 4,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 4,
+      "name": "Screaming Nemesis"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    },
+    {
+      "qty": 4,
+      "name": "Soul-Scar Mage"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Magebane Lizard"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 2,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 2,
+      "name": "Sunspine Lynx"
+    },
+    {
+      "qty": 3,
+      "name": "Unlicensed Hearse"
+    },
+    {
+      "qty": 3,
+      "name": "Urabrask's Forge"
+    }
+  ]
+}

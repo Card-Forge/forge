@@ -12,11 +12,14 @@
   "mulligan": {
     "keep_criteria": [
       "Hands containing Squadron Hawk",
-      "Hands with early creatures and lands"
+      "Hands with early creatures and lands",
+      "Keep any hand with 2-3 lands (mix of Plains/Mountains) and at least one of Faithless Looting, Kor Skyfisher, or Thraben Charm.",
+      "Prioritize hands that can play a turn-1 land and a turn-2 threat or discard spell."
     ],
     "mulligan_criteria": [
       "Hands full of lands paired with Faithless Looting",
-      "Hands lacking early threats or card advantage"
+      "Hands lacking early threats or card advantage",
+      "Mulligan hands with 0-1 lands, three+ non-basic lands, or hands lacking early threats/interaction."
     ],
     "examples": [
       {
@@ -36,16 +39,30 @@
     "early_game": [
       "Play low-cost creatures quickly to establish board presence",
       "Avoid opening with Faithless Looting on turn 1 to preserve information and graveyard options",
-      "Prioritize resolving Squadron Hawk"
+      "Prioritize resolving Squadron Hawk",
+      "Turn 1: Play a basic land.",
+      "Turn 2: Play a second land, then cast Faithless Looting to dig for a Kor Skyfisher or Thraben Charm, or play a cheap two-drop if available.",
+      "If you draw Skyfisher on turn 2, cast it immediately for the flying attacker and 2 damage to stabilize or finish.",
+      "Sequence lands to ensure double-colored mana is available for Skyfisher and Charm by turn 3."
     ],
     "mid_game": [
       "Hold Prismatic Strands to protect against sweepers and red removal",
       "Cast Battle Screech to generate value and board presence",
-      "Discard Dust to Dust if not facing Affinity to find better answers"
+      "Discard Dust to Dust if not facing Affinity to find better answers",
+      "Faithless Looting is your primary card advantage engine",
+      "use it when your hand is empty or you need a specific answer/threat.",
+      "Don't overcast it if you're at 3+ cards and have a clear path to win.",
+      "Manage mana to keep Thraben Charm available for key turns.",
+      "The graveyard is a resource for discard effects",
+      "avoid self-mill unless synergistic."
     ],
     "late_game": [
       "Recast Rally the Peasants to finish the game quickly",
-      "Maintain land count and board control to outvalue opponents"
+      "Maintain land count and board control to outvalue opponents",
+      "Kor Skyfisher with flying and haste is your primary win condition, supported by direct damage and discard to clear the path.",
+      "Thraben Charm can exile key blockers or sweep minor threats to enable a lethal attack.",
+      "Go all-in when you have a clear path to lethal (3+ damage away), opponent has no sweepers or hard removal in hand, or you've discarded their key answers.",
+      "Also commit when you can trade Skyfisher into a blocker and still have lethal next turn."
     ]
   },
   "key_cards": [
@@ -95,7 +112,12 @@
     "Prioritize resolving Squadron Hawk early to flood the board",
     "Hold Prismatic Strands to protect against sweepers and red removal",
     "Discard Dust to Dust early if not facing Affinity to find answers",
-    "Use Electrickery carefully in the mirror to break locked boards"
+    "Use Electrickery carefully in the mirror to break locked boards",
+    "Common mistake: overusing Faithless Looting when you already have a full hand, leaving you vulnerable to discard or sweepers.",
+    "Always sequence plays to ensure you can cast Skyfisher and Charm on the same turn if needed.",
+    "Thraben Charm's exile mode is strictly better than destruction against artifact/enchantment decks.",
+    "Watch for 'Bully' mirror matches",
+    "card advantage and efficient trades win these."
   ],
   "matchups": [
     {
@@ -141,6 +163,31 @@
         "Prismatic Strands",
         "Electrickery"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells from hand. Cast threats in response to non-removal spells or when opponent is tapped out. Use Thraben Charm's exile mode on their counterspell if it's a creature (unlikely) or focus on applying pressure they can't interact with.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply maximum early pressure to race them. Use discard to hit their ramp spells or key threats. Thraben Charm can exile their early ramp sources if they're creatures. Don't trade up unnecessarily; win before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with Thraben Charm's exile mode on key early threats. Use discard to disrupt their hand. Play Skyfisher to block flying threats or trade into bodies. Prioritize survival over aggression until you stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure relentlessly with early threats. Use discard to hit their answers or combo pieces. Thraben Charm can remove their key blockers or sweepers. Don't let them stabilize; keep applying damage and disruption.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize keeping hands with multiple threats and interaction. Use Thraben Charm to exile their Skyfisher or key blockers. Trade efficiently and recognize when to concede a trade to gain card advantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -150,10 +197,14 @@
     "Suffocating Fumes",
     "Electrickery",
     "Jaspera Sentinel",
-    "Gurmag Angler"
+    "Gurmag Angler",
+    "Watch for counterspells (hold up interaction or cast threats in response to non-removal spells), sweepers (hold up Charm or discard to disrupt setup), and graveyard strategies (discard to empty their library/graveyard).",
+    "Note when opponents tap out for big spells",
+    "that's your window to attack."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-boros-bully-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T09:57:51+00:00",
     "model": "local-model",
@@ -184,6 +235,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

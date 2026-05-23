@@ -1,0 +1,89 @@
+{
+  "archetype": "Mono Red Rally",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/mono-red-rally.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Burning-Tree Emissary"
+    },
+    {
+      "qty": 2,
+      "name": "Chain Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Clockwork Percussionist"
+    },
+    {
+      "qty": 1,
+      "name": "End the Festivities"
+    },
+    {
+      "qty": 3,
+      "name": "Experimental Synthesizer"
+    },
+    {
+      "qty": 4,
+      "name": "Galvanic Blast"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Bushwhacker"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Tomb Raider"
+    },
+    {
+      "qty": 4,
+      "name": "Great Furnace"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 14,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Rally at the Hornburg"
+    },
+    {
+      "qty": 4,
+      "name": "Reckless Impulse"
+    },
+    {
+      "qty": 4,
+      "name": "Voldaren Epicure"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Cast into the Fire"
+    },
+    {
+      "qty": 1,
+      "name": "End the Festivities"
+    },
+    {
+      "qty": 4,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 3,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 3,
+      "name": "Searing Blaze"
+    },
+    {
+      "qty": 3,
+      "name": "Smash to Smithereens"
+    }
+  ]
+}

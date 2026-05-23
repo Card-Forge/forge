@@ -1,0 +1,419 @@
+{
+  "schema_version": 1,
+  "name": "Green Devotion",
+  "format": "modern",
+  "colors": [
+    "B",
+    "G"
+  ],
+  "strategy_type": "ramp",
+  "expected_deck_total": 60,
+  "macro_plan": "This deck leverages mana acceleration and devotion to green to cast large, efficient creatures ahead of the curve. Noble Hierarch provides consistent ramp and color fixing, while Green Sun's Zenith offers flexible card advantage and threat fetching. Frenzied Baloth anchors the strategy as a resilient pressure piece that enables further devotion plays.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 4,
+      "cards": [
+        "Green Sun's Zenith"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 1,
+      "cards": [
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 12,
+      "cards": [
+        "Green Sun's Zenith",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Frenzied Baloth",
+        "Green Sun's Zenith",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 41,
+      "cards": [
+        "Bridgeworks Battle",
+        "Collector Ouphe",
+        "Dryad Arbor",
+        "Endurance",
+        "Frenzied Baloth",
+        "Green Sun's Zenith",
+        "Groundbreaker",
+        "Ignoble Hierarch",
+        "Keen-Eyed Curator",
+        "Noble Hierarch",
+        "Old-Growth Troll",
+        "Ouroboroid",
+        "Questing Beast",
+        "Steel Leaf Champion",
+        "Vines of Vastwood"
+      ],
+      "mainboard_count": 39,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 10,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Force of Vigor",
+        "Keen-Eyed Curator",
+        "Questing Beast"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Ouroboroid"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Green Sun's Zenith"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 11,
+      "cards": [
+        "Aspect of Hydra",
+        "Frenzied Baloth",
+        "Green Sun's Zenith"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 6,
+      "cards": [
+        "Endurance",
+        "Keen-Eyed Curator",
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 1
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Ba Sing Se",
+        "Old-Growth Troll"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Windswept Heath"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Frenzied Baloth",
+        "Green Sun's Zenith"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 14,
+      "cards": [
+        "Damping Sphere",
+        "Disruptor Flute",
+        "Frenzied Baloth",
+        "Illness in the Ranks",
+        "Questing Beast"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 9
+    },
+    "mana_fixing": {
+      "target_count": 25,
+      "cards": [
+        "Ba Sing Se",
+        "Boseiju, Who Endures",
+        "Dryad Arbor",
+        "Frenzied Baloth",
+        "Green Sun's Zenith",
+        "Noble Hierarch",
+        "Overgrown Tomb",
+        "Underground Mortuary",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 19,
+      "cards": [
+        "Ba Sing Se",
+        "Boseiju, Who Endures",
+        "Dryad Arbor",
+        "Forest",
+        "Overgrown Tomb",
+        "Underground Mortuary",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.3
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ba Sing Se",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dryad Arbor",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Frenzied Baloth",
+      "roles": [
+        "combo_pieces",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Green Sun's Zenith",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Keen-Eyed Curator",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Noble Hierarch",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Old-Growth Troll",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ouroboroid",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Questing Beast",
+      "roles": [
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Mortuary",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize playing Noble Hierarch before casting Green Sun's Zenith to maximize mana efficiency",
+    "Hold up black mana for counterspells or removal when facing control or midrange decks",
+    "Use Zenith to fetch lands when behind on mana, and threats when ahead of the curve",
+    "Play Frenzied Baloth after establishing a base of devotion to maximize its board impact",
+    "Common mistake: Overcommitting to the board without protection."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and prioritize casting Noble Hierarch on turn one"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Green Sun's Zenith to fetch early threats or additional lands"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish a mana base that supports both black and green spells"
+    }
+  ],
+  "kill_priority": [
+    "Frenzied Baloth",
+    "Green Sun's Zenith",
+    "Windswept Heath",
+    "Bridgeworks Battle",
+    "Collector Ouphe",
+    "Dryad Arbor",
+    "Endurance",
+    "Groundbreaker"
+  ],
+  "interaction_to_disrupt": [
+    "Green Sun's Zenith",
+    "Aspect of Hydra",
+    "Frenzied Baloth",
+    "Boseiju, Who Endures",
+    "Force of Vigor",
+    "Keen-Eyed Curator",
+    "Questing Beast",
+    "Ouroboroid"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/green-devotion.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

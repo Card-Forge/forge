@@ -1,0 +1,193 @@
+{
+  "archetype": "Mardu Control",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/mardu-control.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Airbender Ascension"
+    },
+    {
+      "qty": 3,
+      "name": "Appa, Steadfast Guardian"
+    },
+    {
+      "qty": 1,
+      "name": "Black Cat, Cunning Thief"
+    },
+    {
+      "qty": 3,
+      "name": "Blazemire Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Bleachbone Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 2,
+      "name": "Charming Prince"
+    },
+    {
+      "qty": 1,
+      "name": "Cori Mountain Monastery"
+    },
+    {
+      "qty": 3,
+      "name": "Cruelclaw's Heist"
+    },
+    {
+      "qty": 2,
+      "name": "Day of Black Sun"
+    },
+    {
+      "qty": 1,
+      "name": "Decadent Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Elegant Parlor"
+    },
+    {
+      "qty": 3,
+      "name": "Erode"
+    },
+    {
+      "qty": 2,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 3,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 2,
+      "name": "Inevitable Defeat"
+    },
+    {
+      "qty": 3,
+      "name": "Interdimensional Web Watch"
+    },
+    {
+      "qty": 3,
+      "name": "Lightning Helix"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Nowhere to Run"
+    },
+    {
+      "qty": 2,
+      "name": "Nullpriest of Oblivion"
+    },
+    {
+      "qty": 1,
+      "name": "Outrageous Robbery"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 3,
+      "name": "Practiced Scrollsmith"
+    },
+    {
+      "qty": 2,
+      "name": "Quintorius Kand"
+    },
+    {
+      "qty": 1,
+      "name": "Raucous Theater"
+    },
+    {
+      "qty": 1,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 3,
+      "name": "Shattered Sanctum"
+    },
+    {
+      "qty": 2,
+      "name": "Soulstone Sanctuary"
+    },
+    {
+      "qty": 1,
+      "name": "Stalactite Dagger"
+    },
+    {
+      "qty": 2,
+      "name": "Sunbillow Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Sundown Pass"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 3,
+      "name": "Unholy Annex // Ritual Chamber"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Exorcise"
+    },
+    {
+      "qty": 2,
+      "name": "Fire Magic"
+    },
+    {
+      "qty": 2,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 1,
+      "name": "Gonti, Night Minister"
+    },
+    {
+      "qty": 1,
+      "name": "Inevitable Defeat"
+    },
+    {
+      "qty": 1,
+      "name": "Return the Favor"
+    },
+    {
+      "qty": 1,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 1,
+      "name": "The Rise of Sozin"
+    },
+    {
+      "qty": 3,
+      "name": "Voice of Victory"
+    }
+  ]
+}

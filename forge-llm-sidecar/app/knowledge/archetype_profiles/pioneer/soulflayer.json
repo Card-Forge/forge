@@ -1,0 +1,490 @@
+{
+  "schema_version": 1,
+  "name": "Soulflayer",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This Pioneer deck mills cards into the graveyard to reduce the cost of Delve creatures, then uses Neoform or Eldritch Evolution to cheat Atraxa, Grand Unifier into play. Atraxa provides massive card advantage and enables a recurring loop, while Soulflayer serves as a resilient backup threat that gains keywords from sacrificed Atraxas. The deck prioritizes deep deck-diving tools over traditional cantrips to accelerate the combo and protect it with targeted disruption.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 4,
+      "cards": [
+        "Otherworldly Gaze"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 17,
+      "cards": [
+        "Academic Dispute",
+        "Boomerang Basics",
+        "Ketramose, the New Dawn",
+        "Masked Meower",
+        "Striped Riverwinder"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Otherworldly Gaze"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Soulflayer"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Soulflayer",
+        "Striped Riverwinder"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 28,
+      "cards": [
+        "Haywire Mite",
+        "Ketramose, the New Dawn",
+        "Masked Meower",
+        "Qarsi Revenant",
+        "Samut, Voice of Dissent",
+        "Soulflayer",
+        "Striped Riverwinder",
+        "Urborg Scavengers",
+        "Zetalpa, Primal Dawn"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 10,
+      "cards": [
+        "Boomerang Basics",
+        "Boseiju, Who Endures",
+        "Firebending Lesson",
+        "Haywire Mite",
+        "Iroh's Demonstration",
+        "Origin of Metalbending",
+        "Urborg Scavengers"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Iroh's Demonstration"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "It'll Quench Ya!",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 21,
+      "cards": [
+        "Ketramose, the New Dawn",
+        "Octopus Form",
+        "Origin of Metalbending",
+        "Soulflayer",
+        "Striped Riverwinder",
+        "Urborg Scavengers",
+        "Zetalpa, Primal Dawn"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 10,
+      "cards": [
+        "Academic Dispute",
+        "Collective Brutality",
+        "Masked Meower"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 24,
+      "cards": [
+        "Grisly Salvage",
+        "Ketramose, the New Dawn",
+        "Otherworldly Gaze",
+        "Qarsi Revenant",
+        "Soulflayer",
+        "Thoughtseize",
+        "Urborg Scavengers"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 10,
+      "cards": [
+        "Boomerang Basics",
+        "Otherworldly Gaze",
+        "Qarsi Revenant",
+        "Soulflayer"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Soulflayer",
+        "Striped Riverwinder"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Otherworldly Gaze",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Redirect Lightning"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 28,
+      "cards": [
+        "Blackcleave Cliffs",
+        "Boseiju, Who Endures",
+        "Botanical Sanctum",
+        "Copperline Gorge",
+        "Darkslick Shores",
+        "Mana Confluence",
+        "Otherworldly Gaze",
+        "Soulflayer",
+        "Starting Town",
+        "Urborg, Tomb of Yawgmoth"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 20,
+      "cards": [
+        "Blackcleave Cliffs",
+        "Boseiju, Who Endures",
+        "Botanical Sanctum",
+        "Copperline Gorge",
+        "Darkslick Shores",
+        "Mana Confluence",
+        "Starting Town",
+        "Urborg, Tomb of Yawgmoth"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.47
+  },
+  "dual_role_cards": [
+    {
+      "card": "Academic Dispute",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blackcleave Cliffs",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boomerang Basics",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Botanical Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Copperline Gorge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darkslick Shores",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haywire Mite",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Iroh's Demonstration",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ketramose, the New Dawn",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Confluence",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Masked Meower",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Origin of Metalbending",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otherworldly Gaze",
+      "roles": [
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "mana_reducers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Qarsi Revenant",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soulflayer",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Striped Riverwinder",
+      "roles": [
+        "card_advantage",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "combo_pieces",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urborg Scavengers",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urborg, Tomb of Yawgmoth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zetalpa, Primal Dawn",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast Thoughtseize on turn one to remove disruption, then mill on turn two, and combo on turn three.",
+    "Reverse spell order if needed to ensure Neoform goes unimpeded, but risk opponent's Thoughtseize.",
+    "Use Stubborn Denial to protect Atraxa or other threats once a creature is on the battlefield.",
+    "If Contingency Plan finds nothing, hold Soulflayer for turn three and sacrifice it with Eldritch Evolution on turn four.",
+    "Common mistake: Overcommitting to a single big threat without protection."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize land drops to avoid mana screw in a greedy mana base"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Thoughtseize to remove opponent disruption and gauge their hand"
+    },
+    {
+      "trigger": "early game",
+      "line": "Begin milling cards with Otherworldly Gaze or Contingency Plan to enable Delve"
+    }
+  ],
+  "kill_priority": [
+    "Soulflayer",
+    "Striped Riverwinder",
+    "Otherworldly Gaze",
+    "Thoughtseize",
+    "Haywire Mite",
+    "Ketramose, the New Dawn",
+    "Masked Meower",
+    "Qarsi Revenant"
+  ],
+  "interaction_to_disrupt": [
+    "It'll Quench Ya!",
+    "Spell Pierce",
+    "Ketramose, the New Dawn",
+    "Octopus Form",
+    "Origin of Metalbending",
+    "Soulflayer",
+    "Striped Riverwinder",
+    "Urborg Scavengers"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/soulflayer.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

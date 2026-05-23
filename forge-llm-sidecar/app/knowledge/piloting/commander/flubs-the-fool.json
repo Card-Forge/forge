@@ -1,0 +1,126 @@
+{
+  "archetype": "Flubs, the Fool",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck aims to stabilize early with card draw and flexible combat tricks, then snowball into an insurmountable board state using Song of Creation to flood the field with Golem tokens. It excels against combo and control decks that struggle to answer a wide, resilient army, while leveraging Flubs' pump to close out games or trade efficiently.",
+  "win_conditions": [
+    "Song of Creation is the primary win condition, generating a massive board of Golems that can swing combat or block out a game.",
+    "Flubs pumps key Golems or your main attacker to lethal.",
+    "Secondary finishers include combat tricks, direct damage, or milling/stealing if the format allows."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing dual lands or signets for fixing), a turn-1 or turn-2 land drop, and either Flubs or early ramp/spells.",
+      "Prioritize hands that can play a land, then a signet or cheap spell on turn 1."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 0-1 lands, only single-colored lands with no fixing, or a hand full of high-cost spells without a way to cast them."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, then Arcane Signet or a cheap cantrip/ramp spell.",
+      "Turn 2: If you have a second land, play Flubs, the Fool to draw a card and establish a pump outlet.",
+      "If you have more mana, look for early threats or ramp to set up Song of Creation by turn 4-5.",
+      "Sequence lands to ensure you can cast both Flubs and Song of Creation without flooding."
+    ],
+    "mid_game": [
+      "Preserve Flubs as a flexible pump outlet and card draw engine",
+      "don't overcommit it to trades unless necessary.",
+      "Use Arcane Signet to smooth mana for Song of Creation.",
+      "Track graveyard and exile threats, as token decks often rely on recursion or board wipes.",
+      "Commit threats when you have answered or outpaced the opponent's interaction.",
+      "Hold back Flubs if the opponent has a known board wipe or targeted removal.",
+      "Use Golem tokens as chump blockers to preserve your strategy while trading up."
+    ],
+    "late_game": [
+      "Song of Creation is the primary win condition, generating a massive board of Golems that can swing combat or block out a game.",
+      "Flubs pumps key Golems or your main attacker to lethal.",
+      "Secondary finishers include combat tricks, direct damage, or milling/stealing if the format allows.",
+      "Go all-in when you have a clear path to lethal, the opponent has no board wipes or removal in hand, or you've forced them to use their interaction on earlier threats.",
+      "Commit when your Golem army can trade favorably or push through unblocked damage."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Flubs, the Fool",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Song of Creation",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Flubs' pump is sorcery-speed, so plan combat carefully and don't assume you can respond to instant-speed removal.",
+    "Song of Creation's Golems are 1/1s, so they can be wiped by any board wipe",
+    "always have a backup plan.",
+    "Arcane Signet is crucial for fixing",
+    "if it's removed, your late-game mana will suffer.",
+    "Avoid overcommitting to a single Golem army without tracking opponent interaction."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Flubs' card draw to dig for answers or cheap threats. Cast spells in response to their counterspells if possible, or use signet/mana rocks to ensure you have enough mana to cast around them. If the format allows, use split spells or multi-target effects.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use removal on their ramp sources and board wipes to reset their board. Prioritize keeping your own board state resilient to their big spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap removal, board wipes, and chump-blocking with Golem tokens. Use Flubs to pump blockers and trade efficiently. Don't overextend into their combat tricks; wait for a favorable turn to cast Song of Creation.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure their life total and force them to use resources on your threats. Use Flubs to out-value their card draw. Cast Song of Creation when they've exhausted their interaction, or use it as a surprise finisher.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing and better sequencing. Prioritize keeping Flubs alive longer, as it's your primary value engine. Use targeted removal on their Song of Creation or key pump outlets. Trade Golems efficiently and look for the first player to run out of resources.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes (especially ones that don't target artifacts), targeted removal on Flubs, and combo win conditions.",
+    "Note when opponents tap out for a single big spell, as that's your window to push damage or cast Song of Creation."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

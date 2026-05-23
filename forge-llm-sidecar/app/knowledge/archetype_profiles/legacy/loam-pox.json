@@ -1,0 +1,514 @@
+{
+  "schema_version": 1,
+  "name": "Loam Pox",
+  "format": "legacy",
+  "colors": [
+    "B",
+    "G"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "A black-green midrange deck that leverages efficient mana acceleration and disruptive interaction to establish board presence and outvalue opponents. It uses targeted removal and board wipes to control the early game while deploying resilient threats to close out matches. The strategy relies on card quality and resource advantage rather than explosive combos.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 13,
+      "cards": [
+        "Life from the Loam",
+        "Nihil Spellbomb",
+        "Orcish Bowmasters",
+        "Urza's Saga",
+        "Witherbloom Charm"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 1,
+      "cards": [
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 9,
+      "cards": [
+        "Marsh Flats",
+        "Urza's Saga",
+        "Verdant Catacombs"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Orcish Bowmasters"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 28,
+      "cards": [
+        "Barrowgoyf",
+        "Endurance",
+        "Faerie Macabre",
+        "Haywire Mite",
+        "Hogaak, Arisen Necropolis",
+        "Icetill Explorer",
+        "Inquisition of Kozilek",
+        "Mox Diamond",
+        "Orcish Bowmasters",
+        "Skateboard",
+        "Smallpox",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 24,
+      "cards": [
+        "Barrowgoyf",
+        "Boseiju, Who Endures",
+        "Fatal Push",
+        "Force of Vigor",
+        "Game Over",
+        "Ghost Quarter",
+        "Haywire Mite",
+        "Nihil Spellbomb",
+        "Orcish Bowmasters",
+        "Wasteland",
+        "Witherbloom Charm",
+        "Witherbloom Command"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Game Over",
+        "Hogaak, Arisen Necropolis"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 8,
+      "cards": [
+        "Mox Diamond",
+        "Orcish Bowmasters"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 30,
+      "cards": [
+        "Barrowgoyf",
+        "Endurance",
+        "Eumidian Hatchery",
+        "Faerie Macabre",
+        "Hogaak, Arisen Necropolis",
+        "Icetill Explorer",
+        "Life from the Loam",
+        "Malevolent Rumble",
+        "Mox Diamond",
+        "Nihil Spellbomb",
+        "Orcish Bowmasters",
+        "Underground Mortuary",
+        "Witherbloom Command"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 10,
+      "cards": [
+        "Hogaak, Arisen Necropolis",
+        "Icetill Explorer",
+        "Life from the Loam",
+        "Orcish Bowmasters",
+        "Witherbloom Command"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Orcish Bowmasters"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Orcish Bowmasters",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 14,
+      "cards": [
+        "Disruptor Flute",
+        "Mox Diamond",
+        "Orcish Bowmasters",
+        "Pithing Needle",
+        "Sheoldred's Edict",
+        "Void Mirror"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 31,
+      "cards": [
+        "Bayou",
+        "Boseiju, Who Endures",
+        "Eumidian Hatchery",
+        "Ghost Quarter",
+        "Marsh Flats",
+        "Mox Diamond",
+        "Orcish Bowmasters",
+        "Underground Mortuary",
+        "Urza's Saga",
+        "Verdant Catacombs",
+        "Wasteland"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 26,
+      "cards": [
+        "Bayou",
+        "Boseiju, Who Endures",
+        "Eumidian Hatchery",
+        "Forest",
+        "Ghost Quarter",
+        "Marsh Flats",
+        "Swamp",
+        "Underground Mortuary",
+        "Urza's Saga",
+        "Verdant Catacombs",
+        "Wasteland"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.37
+  },
+  "dual_role_cards": [
+    {
+      "card": "Barrowgoyf",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bayou",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eumidian Hatchery",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Macabre",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Game Over",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Quarter",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haywire Mite",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hogaak, Arisen Necropolis",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Icetill Explorer",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Life from the Loam",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marsh Flats",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mox Diamond",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nihil Spellbomb",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orcish Bowmasters",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "combo_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Mortuary",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Witherbloom Charm",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Witherbloom Command",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Thoughtseize for key combo pieces or answers rather than using it early on low-impact cards.",
+    "Play Mox Diamond early to accelerate into Orcish Bowmasters and maintain mana efficiency.",
+    "Use Bowmasters' triggered ability to clear opposing boards before committing to larger threats.",
+    "Watch for Leyline of the Void in your opening hand and mulligan accordingly if you lack removal.",
+    "Mox Diamond requires careful mana sequencing to avoid dead mana."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Mox Diamond to accelerate mana production"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Thoughtseize to remove key threats or combo pieces"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish land drops and maintain card advantage"
+    }
+  ],
+  "kill_priority": [
+    "Orcish Bowmasters",
+    "Thoughtseize",
+    "Barrowgoyf",
+    "Endurance",
+    "Faerie Macabre",
+    "Haywire Mite",
+    "Hogaak, Arisen Necropolis",
+    "Icetill Explorer"
+  ],
+  "interaction_to_disrupt": [
+    "Barrowgoyf",
+    "Boseiju, Who Endures",
+    "Fatal Push",
+    "Force of Vigor",
+    "Game Over",
+    "Ghost Quarter",
+    "Haywire Mite",
+    "Nihil Spellbomb"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/loam-pox.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "archetype": "Boros Humans",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/boros-humans.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Adeline, Resplendent Cathar"
+    },
+    {
+      "qty": 2,
+      "name": "Arachne, Psionic Weaver"
+    },
+    {
+      "qty": 3,
+      "name": "Boros Charm"
+    },
+    {
+      "qty": 2,
+      "name": "Cathar Commando"
+    },
+    {
+      "qty": 4,
+      "name": "Coppercoat Vanguard"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 2,
+      "name": "Elite Spellbinder"
+    },
+    {
+      "qty": 4,
+      "name": "Inspiring Vantage"
+    },
+    {
+      "qty": 2,
+      "name": "Norin, Swift Survivalist"
+    },
+    {
+      "qty": 3,
+      "name": "Novice Inspector"
+    },
+    {
+      "qty": 7,
+      "name": "Plains"
+    },
+    {
+      "qty": 3,
+      "name": "Portable Hole"
+    },
+    {
+      "qty": 2,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Spider-Woman, Stunning Savior"
+    },
+    {
+      "qty": 2,
+      "name": "Sunbillow Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Thalia's Lieutenant"
+    },
+    {
+      "qty": 4,
+      "name": "Thalia, Guardian of Thraben"
+    },
+    {
+      "qty": 3,
+      "name": "Thraben Inspector"
+    },
+    {
+      "qty": 4,
+      "name": "Unclaimed Territory"
+    },
+    {
+      "qty": 4,
+      "name": "Warden of the Inner Sky"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Alpine Moon"
+    },
+    {
+      "qty": 1,
+      "name": "Cathar Commando"
+    },
+    {
+      "qty": 1,
+      "name": "Elite Spellbinder"
+    },
+    {
+      "qty": 2,
+      "name": "Extraction Specialist"
+    },
+    {
+      "qty": 2,
+      "name": "Giant Killer"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 2,
+      "name": "Tomik, Distinguished Advokist"
+    }
+  ]
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing at least two lands and an early artifact or creature",
       "Draws with Urza's Bauble or Lotus Petal alongside a one-drop creature or removal",
-      "Hands with Mox Opal and a land that can produce blue or red mana"
+      "Hands with Mox Opal and a land that can produce blue or red mana",
+      "Keep hands with 2+ mana sources (Mox Opal, Lotus Petal, Urza's Bauble, or basic lands) and a turn-1 or turn-2 threat/playable artifact.",
+      "Prioritize hands that can cast turn-1 spells or accelerate into turn-2 threats."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or early plays",
       "Draws with only high-cost creatures and no ramp",
-      "Hands missing artifact synergy or U/R interaction"
+      "Hands missing artifact synergy or U/R interaction",
+      "Mulligan hands with 3+ lands, no artifacts, or only expensive threats."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Play Urza's Bauble and Lotus Petal on turn one to establish immediate mana acceleration",
       "Drop early artifact creatures to begin reducing costs and applying pressure",
-      "Use U/R cantrips or removal to find lands and protect early threats"
+      "Use U/R cantrips or removal to find lands and protect early threats",
+      "Turn 1: Play a land, cast Mox Opal/Lotus Petal/Urza's Bauble.",
+      "If holding multiple artifacts, sacrifice Urza's Bauble for mana to cast a cheap threat or spell.",
+      "Turn 2: Deploy Arcbound Ravager, Myr Enforcer, or Manamorphose.",
+      "Sequence artifacts to maximize Opal triggers and generate mana for threats."
     ],
     "mid_game": [
       "Leverage Mox Opal for color fixing and additional mana to play multiple creatures per turn",
       "Prioritize wide artifact creature drops to maximize cost reduction and board presence",
-      "Sequence removal to clear blockers while maintaining tempo"
+      "Sequence removal to clear blockers while maintaining tempo",
+      "Don't overextend into sweepers or removal.",
+      "Use artifacts to generate mana efficiently but keep a reserve for interaction.",
+      "Manage graveyard carefully if facing graveyard hate.",
+      "Commit threats when you have protection or can trade favorably.",
+      "Hold back if opponent has sweepers or hard removal.",
+      "Use artifacts to trade into removal or stabilize."
     ],
     "late_game": [
       "Stabilize with a wide board of artifact creatures that are difficult to clear efficiently",
       "Use U/R interaction to counter or remove opponent's finishers or board wipes",
-      "Push for lethal by playing multiple reduced-cost creatures in a single turn"
+      "Push for lethal by playing multiple reduced-cost creatures in a single turn",
+      "Arcbound Ravager with +1/+1 counters, Manamorphose, Myr Enforcer, or artifact combos.",
+      "Win through combat or artifact synergy.",
+      "When you have multiple artifacts on board, opponent has no sweepers, and you can close the game in 1-2 turns."
     ]
   },
   "key_cards": [
@@ -59,7 +75,10 @@
     "Play artifacts before creatures to maximize cost reduction for subsequent drops",
     "Hold U/R instant-speed interaction in hand to protect key artifact creature plays",
     "Prioritize Lotus Petal and Urza's Bauble on turns one and two to establish early board presence",
-    "Use Mox Opal flexibly to fix mana for removal or to accelerate into a wide turn"
+    "Use Mox Opal flexibly to fix mana for removal or to accelerate into a wide turn",
+    "Common mistake: overcommitting to the board without protection.",
+    "Unique interaction: Mox Opal triggers can be used to pay for costs or generate mana for threats.",
+    "Watch out for Null Rod and Rest in Peace."
   ],
   "matchups": [
     {
@@ -106,6 +125,16 @@
         "Large threats",
         "Board wipes"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multiple threats (cantrips, artifact tokens, or split the cast). Don't rely on single big spells. Use artifacts to generate mana for protection or follow-up.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the artifact race, track their interaction, and out-value them with better sequencing or sideboard cards.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -113,10 +142,13 @@
     "Artifact destruction spells",
     "Direct removal targeting key threats",
     "Counterspells disrupting early plays",
-    "Non-creature sweepers"
+    "Non-creature sweepers",
+    "Watch for counterspells (Flusterstorm, Ponder/Preordain sequencing), sweepers (Pyroclasm, Wrath), and graveyard hate.",
+    "Note when opponents tap out for interaction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:47:26+00:00",
     "model": "local-model",
@@ -132,6 +164,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

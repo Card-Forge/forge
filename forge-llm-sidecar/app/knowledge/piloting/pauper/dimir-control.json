@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early interaction like Snuff Out",
       "Mana bases that support two-color casting by turn three",
-      "Combinations of removal and a late-game threat"
+      "Combinations of removal and a late-game threat",
+      "Keep any hand with 2-3 lands and at least one interaction spell (Snuff Out or Tolarian Terror).",
+      "Prioritize hands with 1-2 lands if they include Snuff Out, Tolarian Terror, and a cantrip or draw spell."
     ],
     "mulligan_criteria": [
       "Mana screws with three or more lands",
       "Hands lacking any removal or board impact",
-      "Overloaded hands with only late-game cards"
+      "Overloaded hands with only late-game cards",
+      "Mulligan hands with 3+ lands and no spells, or hands with 0-1 lands and no early interaction."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Play lands and hold up mana for Snuff Out",
       "Trade early threats efficiently to preserve life total",
-      "Prioritize drawing into more removal and board wipes"
+      "Prioritize drawing into more removal and board wipes",
+      "Turn 1: Play a land, pass.",
+      "Turn 2: Play a second land, cast Snuff Out or Tolarian Terror if the opponent plays a 3+ mana creature or threat.",
+      "If no threat appears, play a draw spell or cheap cantrip to dig for answers.",
+      "Maintain a 2-land start when possible",
+      "if forced to mulligan to a 1-land, keep only if it includes Snuff Out and a cantrip."
     ],
     "mid_game": [
       "Cast Lorien Revealed to reset the board when ahead or at parity",
       "Deploy Tolarian Terror to establish a persistent threat",
-      "Use card draw and filtering to find answers to opposing strategies"
+      "Use card draw and filtering to find answers to opposing strategies",
+      "Preserve mana for interaction until turn 4-5.",
+      "Use cantrips to cycle through dead cards and find answers without losing tempo.",
+      "Don't overcommit to Lorien Revealed unless you have board control or protection.",
+      "Manage your graveyard carefully if facing graveyard hate",
+      "consider milling or sacrificing creatures to disrupt opponent plans.",
+      "Hold back on committing Lorien Revealed until you've answered the opponent's primary threat or have a way to protect it."
     ],
     "late_game": [
       "Maintain board presence with Tolarian Terror and other resilient creatures",
       "Answer opposing finishers with remaining removal",
-      "Close out the game by trading up or attacking with a larger board"
+      "Close out the game by trading up or attacking with a larger board",
+      "Lorien Revealed is the primary win condition, often paired with a resilient creature from hand or graveyard.",
+      "Snuff Out can flashback to clear a final blocker.",
+      "Tolarian Terror can counter a game-ending spell or remove a key threat.",
+      "Go all-in when you have answered the opponent's primary threat, have card advantage, and can protect Lorien Revealed or follow up with a creature.",
+      "Commit when you're ahead in resources and the opponent has no clear answer or protection."
     ]
   },
   "key_cards": [
@@ -58,7 +77,13 @@
   "sequencing_tips": [
     "Hold up black mana for Snuff Out during opponent's turn to catch fast threats",
     "Wait to cast Lorien Revealed until after opponents play their key threats or tap into combat",
-    "Cast Tolarian Terror on your turn when you can protect it or trade efficiently"
+    "Cast Tolarian Terror on your turn when you can protect it or trade efficiently",
+    "Common mistake: Overcommitting to Lorien Revealed without board control.",
+    "Always have a plan B if your win condition is countered or removed.",
+    "Snuff Out's flashback is crucial for late-game removal, so don't waste it early.",
+    "Tolarian Terror's versatility makes it a key piece",
+    "use it wisely against combo and control.",
+    "Watch for format-specific interactions with graveyard strategies and adjust sequencing accordingly."
   ],
   "matchups": [
     {
@@ -87,16 +112,36 @@
         "Board wipes",
         "Stax effects"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use flashback on Snuff Out to bypass counterspells. Chain cantrips to find alternative answers. Cast Lorien Revealed when you know they've used their counterspells. Consider casting threats in response to their spells to force unfavorable trades.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early removal and counterspells to stop key ramp pieces. Use Tolarian Terror to counter mana accelerants. Don't let them get ahead in mana; apply pressure with cantrips and removal to disrupt their curve.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card draw and efficient removal. Use Tolarian Terror to counter their Lorien Revealed or key threats. Flashback Snuff Out to clear their board. Win by out-resourcing and better sequencing.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Unblockable or flying threats",
     "Board wipes and mass removal",
-    "Card draw engines"
+    "Card draw engines",
+    "Watch for mana bases that indicate ramp (Elves, Jund) or combo (Madness, Affinity).",
+    "Note when opponents hold up mana for protection spells or counterspells.",
+    "Track graveyard contents if they play graveyard synergies.",
+    "Pay attention to when they start casting their win conditions to time your interaction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:18:30+00:00",
     "model": "local-model",
@@ -112,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

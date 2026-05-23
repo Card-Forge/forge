@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with one or two cheap artifact creatures",
       "Hands containing Thoughtcast or Thraben Charm",
-      "Hands with early land drops and artifact synergy"
+      "Hands with early land drops and artifact synergy",
+      "Keep hands with 2-3 lands (prioritize fixing/duals if available), at least one artifact or artifact creature, and a key enabler or interaction (Thoughtcast, Thraben Charm, or Myr Enforcer)."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays or artifact synergy",
       "Hands with only high-cost cards",
-      "Hands missing removal or card draw"
+      "Hands missing removal or card draw",
+      "Mulligan on pure land, zero artifacts, or unplayable early turns that lack a way to establish board presence."
     ],
     "examples": []
   },
@@ -25,17 +27,31 @@
     "early_game": [
       "Play lands and cheap artifact creatures to establish board presence",
       "Use early interaction to disrupt opponent's development",
-      "Prioritize drawing cards with Thoughtcast to maintain tempo"
+      "Prioritize drawing cards with Thoughtcast to maintain tempo",
+      "Turn 1: Play a land, drop a cheap artifact (e.g., Manifold Key, Arcbound Worker, or generic artifact) to build affinity and set up mana/artifact synergy.",
+      "Turn 2: Play a second land, deploy Myr Enforcer or another artifact creature.",
+      "Use Thoughtcast if you have an instant in the graveyard or can cast one from hand to dig deeper.",
+      "Sequence artifacts to maximize affinity discounts on your threats, ensuring you can cast them at reduced costs."
     ],
     "mid_game": [
       "Leverage artifact synergies to grow board advantage",
       "Use Thraben Charm to remove key threats or deal direct damage",
-      "Maintain card advantage while applying consistent pressure"
+      "Maintain card advantage while applying consistent pressure",
+      "Preserve mana for interaction until your board is established.",
+      "Use Thoughtcast to recycle instants/sorceries from the graveyard, effectively doubling card advantage and digging for key answers.",
+      "Avoid overcommitting artifacts if the board is unstable",
+      "prioritize creatures with haste, evasion, or enabler synergy.",
+      "Commit threats when you have removal ready for their answers or when you can safely swing with pumped Myrs.",
+      "Hold back enablers if they can be removed for tempo loss."
     ],
     "late_game": [
       "Stabilize with efficient removal and board wipes if necessary",
       "Use card draw to find finishers",
-      "Close out games with overwhelming artifact creature boards"
+      "Close out games with overwhelming artifact creature boards",
+      "Unstoppable artifact swarms powered by Myr Enforcer, backed by recursive Thoughtcast spells and precise Thraben Charm pumps.",
+      "Win through combat damage, overwhelming value, or forcing them to trade inefficiently into your interaction.",
+      "Go all-in when you have a clear board advantage, their interaction is exhausted, or you can safely swing with pumped Myrs.",
+      "Commit when you can protect your attackers with removal, evasion, or when you can close the game before they can stabilize."
     ]
   },
   "key_cards": [
@@ -58,7 +74,13 @@
   "sequencing_tips": [
     "Hold up removal for opponent's key threats before committing to board development",
     "Prioritize playing artifact creatures before casting Thoughtcast to maximize board presence",
-    "Use Thraben Charm's damage mode when opponent is at low life to secure quick wins"
+    "Use Thraben Charm's damage mode when opponent is at low life to secure quick wins",
+    "Common mistake: Overcommitting Myr Enforcer without protection, leading to tempo loss.",
+    "Always sequence artifacts to maximize affinity discounts.",
+    "Thoughtcast synergy relies on graveyard management",
+    "avoid milling yourself or discarding your own key instants.",
+    "Thraben Charm's modes are situational",
+    "prioritize artifact destruction against artifact-heavy decks, pump in combat, and life gain against aggro."
   ],
   "matchups": [
     {
@@ -87,15 +109,34 @@
         "Card draw spells",
         "Resilient threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtcast to cast spells from the graveyard, bypassing counterspells. Sequence artifacts to reduce costs below counter thresholds. Use instant-speed interaction to clear their counterspellers or force them to use resources inefficiently.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their land drops and force trades. Use Thraben Charm to remove key ramp artifacts or pump your threats to race. Do not let them stabilize; trade efficiently and prioritize removing their mana sources.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing artifact destruction to disrupt their enablers. Use Thoughtcast to out-recycle and dig for key answers. Track their removal and hold back enablers until they commit. Favor trades that leave you with more artifacts and card advantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Efficient removal spells",
-    "Board wipe effects"
+    "Board wipe effects",
+    "Watch for their removal suite, counterspells, and board wipes.",
+    "Note if they are playing around Thraben Charm's artifact destruction mode by protecting key artifacts.",
+    "Track graveyard contents for Thoughtcast recursion targets and anticipate when they will attempt to clear your board with sweepers."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:30:04+00:00",
     "model": "local-model",
@@ -124,6 +165,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

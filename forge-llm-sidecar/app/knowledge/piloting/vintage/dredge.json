@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing early mill or graveyard recursion",
       "Hands with disruption to protect the game plan",
-      "Hands with card advantage engines to find missing pieces"
+      "Hands with card advantage engines to find missing pieces",
+      "Keep hands with at least two dredge creatures (Gravecrawler, Nighthowl Scavenger, etc.) or one dredge creature plus a discard outlet (Grief, Thoughtseize) and two lands.",
+      "Bazaar of Baghdad can mitigate land issues, so a hand with Bazaar + 1 land + 2 dredgers is keepable."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or graveyard synergy",
       "Hands with only lands and non-interactive spells",
-      "Hands missing mill or recursion components"
+      "Hands missing mill or recursion components",
+      "Mulligan hands with three or more lands, no dredgers, or only one land with no early plays."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play mill spells to rapidly fill the graveyard",
       "Cast disruption to protect early recursion attempts",
-      "Use card advantage engines to draw into combo pieces"
+      "Use card advantage engines to draw into combo pieces",
+      "Turn 1: Play a basic land, cast a dredge creature or discard outlet.",
+      "If opening Bazaar, play it on turn 1 or 2 to fetch a swamp and draw a card.",
+      "Turn 2: Activate dredge to put cards into the graveyard, cast additional creatures or discard outlets, and attack with available threats.",
+      "Prioritize establishing graveyard presence over hoarding cards."
     ],
     "mid_game": [
       "Recycle creatures from the graveyard to apply pressure",
       "Hold targeted counterspells for opponent's threats",
-      "Maintain board presence while continuing to mill"
+      "Maintain board presence while continuing to mill",
+      "Treat your graveyard as your primary resource.",
+      "Dredge selectively to avoid feeding opponent hate cards.",
+      "Use discard outlets to remove key opponent spells or cards.",
+      "Preserve Force of Negation for critical threats or to protect your own dredge/discard plays.",
+      "Bazaar of Baghdad should be used to fix mana or dig for answers, not just to flood the graveyard.",
+      "Commit to the board when you have sufficient card advantage and the opponent lacks sweepers or targeted removal."
     ],
     "late_game": [
       "Flood the battlefield with recycled creatures",
       "Use card advantage to outlast or find answers to hate cards",
-      "Close out games with overwhelming board state"
+      "Close out games with overwhelming board state",
+      "Win by overwhelming the board with a flood of dredge creatures, or by using graveyard-generated mana to cast a high-impact threat or combo finisher.",
+      "Once you have established a board presence and the opponent has no removal, commit all remaining resources to attack.",
+      "Go all-in when you have drawn into multiple dredge creatures, the opponent has no sweepers or hate in play, and your life total is safe enough to trade.",
+      "If you have Force of Negation and discard outlets ready to protect your final plays, commit aggressively."
     ]
   },
   "key_cards": [
@@ -59,7 +76,11 @@
     "Prioritize mill before recursion to ensure graveyard population",
     "Hold disruption for key threats rather than using it preemptively",
     "Use card advantage to find missing pieces before committing to recursion",
-    "Protect graveyard from hate by sequencing counterspells after opponent's interaction"
+    "Protect graveyard from hate by sequencing counterspells after opponent's interaction",
+    "Common mistakes include over-dredging into hate cards, hoarding cards instead of committing to the board, and mismanaging Force of Negation timing.",
+    "Remember that Bazaar of Baghdad can be used to fetch a swamp for black mana or a forest for green, but sequencing matters.",
+    "Always track opponent's graveyard and hand size.",
+    "Dredge is a combo-adjacent deck that wins by resource conversion, so prioritize graveyard efficiency over traditional card advantage."
   ],
   "matchups": [
     {
@@ -88,6 +109,21 @@
         "Non-creature threats",
         "Interaction"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Force of Negation to counter their counters or protect your own plays. Grief can discard their counterspells before they cast them. Dredge creatures are cheap and numerous, making them hard to counter all. Bazaar can dig for answers or additional threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Outpace them by establishing an early board presence. Use Grief to discard their ramp spells or key mana rocks. Dredge to generate card advantage and pressure, forcing them to answer quickly or lose.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-valuing in the graveyard and having better discard/hate resolution. Prioritize resolving Grief and Force of Negation to disrupt their dredge sequence. Sideboard in additional hate cards and discard outlets. Track their graveyard state to avoid feeding their win conditions.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +131,14 @@
     "Graveyard hate",
     "Board wipes",
     "Direct damage",
-    "Counterspells"
+    "Counterspells",
+    "Watch for graveyard hate (Rest in Peace, Leyline, Surgical Extraction, Grafdigger's Cage) and sweepers (Wrath of God, Damnation, etc.).",
+    "Note when opponents play discard or counterspells, as these disrupt your early game.",
+    "Track if they are playing a combo that requires specific pieces, as Grief/Force of Negation can shut them down."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:07:40+00:00",
     "model": "local-model",
@@ -114,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

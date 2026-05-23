@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands featuring Counterspell or Orcish Bowmasters with playable lands",
       "Mana bases that ensure a smooth turn 3 or 4 for Tamiyo",
-      "Hands with a clear path to early interaction and a follow-up threat"
+      "Hands with a clear path to early interaction and a follow-up threat",
+      "Keep hands with 2-3 lands (preferably duals or fetches for fixing), a turn-1 or turn-2 interaction like Counterspell or removal, and a low-cost threat or card draw."
     ],
     "mulligan_criteria": [
       "Hands lacking any instant-speed interaction or removal",
       "Mana screws with four or more lands or zero lands",
-      "Hands that cannot stabilize against early aggressive pressure"
+      "Hands that cannot stabilize against early aggressive pressure",
+      "Mulligan if you have 0-1 lands, all high-cost spells, or no interaction in the first two turns."
     ],
     "examples": []
   },
@@ -25,17 +27,28 @@
     "early_game": [
       "Play lands and hold up mana for Counterspell to answer early threats",
       "Deploy Orcish Bowmasters to bounce aggressive creatures and disrupt opponent's rhythm",
-      "Use Tamiyo to dig for answers or draw into removal when the board is manageable"
+      "Use Tamiyo to dig for answers or draw into removal when the board is manageable",
+      "Turn 1: Play a land and cast a cheap interaction or set up mana if possible.",
+      "Turn 2: Develop your mana base, cast a 2-drop threat or value engine, and prioritize untapping for color fixing.",
+      "If facing aggro or ramp, hold interaction for turn 2-3 threats rather than overcommitting early."
     ],
     "mid_game": [
       "Stabilize against early pressure by trading efficiently while maintaining card advantage",
       "Set up board presence with resilient creatures that can withstand removal",
-      "Sequence countermagic to protect key threats and force unfavorable trades"
+      "Sequence countermagic to protect key threats and force unfavorable trades",
+      "Preserve mana for interaction until threats appear, and use card draw to maintain hand size without overextending.",
+      "Manage your graveyard by using bounce or exile effects when recursion becomes a threat, and avoid tapping out for non-essential spells.",
+      "Commit threats only when you have a clear path to resolution or sufficient answers to protect them, holding back high-value permanents if the board is unstable.",
+      "Prioritize trading efficiently and never overcommit to a board state you cannot recover from."
     ],
     "late_game": [
       "Leverage Tamiyo's draw engine to out-resource opponents and find finishers",
       "Use countermagic to protect your board state and answer late-game win conditions",
-      "Close out games with incremental value, combat tricks, and superior card selection"
+      "Close out games with incremental value, combat tricks, and superior card selection",
+      "High-impact planeswalkers like Tamiyo, Inquisitive Student, and evasive threats win the game by establishing an unanswerable board state.",
+      "Close out games by leveraging card advantage to out-value opponents and forcing them to spend resources on multiple threats.",
+      "Go all-in when you have card advantage, board control, and the opponent is low on resources or locked out of their game plan.",
+      "Commit when you can safely resolve a win condition or planeswalker without fearing a sweep."
     ]
   },
   "key_cards": [
@@ -58,7 +71,10 @@
   "sequencing_tips": [
     "Hold Counterspell for opponent's most impactful spell rather than using it preemptively",
     "Play Orcish Bowmasters before committing resources to the board to maximize tempo",
-    "Activate Tamiyo after opponent passes to maximize information and minimize counter risk"
+    "Activate Tamiyo after opponent passes to maximize information and minimize counter risk",
+    "A common mistake is overcommitting to the board without answers, so always keep at least one interaction in hand for turn 3-4.",
+    "Protect Tamiyo at all costs, as her loyalty abilities provide essential card advantage and board control.",
+    "Be mindful of Commander tax and use it to your advantage by casting spells in response to triggers or when opponents are tapped out."
   ],
   "matchups": [
     {
@@ -87,15 +103,33 @@
         "Mana acceleration",
         "Win condition spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, uncounterable threats, split your spells across turns, or use protection and enablers to bypass counters. Overload counters with multiple low-cost spells or time your key plays to resolve after they've spent their interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction, artifact hate, and board wipes to prevent opponents from establishing a massive mana base. Answer key ramp pieces immediately and avoid trading into their early threats without clearing the board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing card draw, targeted removal, and protection over generic sweepers. Out-value them by resolving more threats, answering their key pieces first, and leveraging Tamiyo's card draw to maintain hand superiority.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
-    "Graveyard hate cards"
+    "Graveyard hate cards",
+    "Watch for combo pieces like Storm counts, Titan triggers, or Blink targets, and note when opponents tap out for big spells.",
+    "Track graveyard accumulation for recursion threats and monitor when key interaction is on the stack to time your plays."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:44:15+00:00",
     "model": "local-model",
@@ -111,7 +145,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

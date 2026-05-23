@@ -1,0 +1,368 @@
+{
+  "archetype": "Zimone, Infinite Analyst",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/zimone-infinite-analyst.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Alchemist's Refuge"
+    },
+    {
+      "qty": 1,
+      "name": "Altered Ego"
+    },
+    {
+      "qty": 1,
+      "name": "Animist's Awakening"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Ash Barrens"
+    },
+    {
+      "qty": 1,
+      "name": "Astral Cornucopia"
+    },
+    {
+      "qty": 1,
+      "name": "Benevolent Hydra"
+    },
+    {
+      "qty": 1,
+      "name": "Biomass Mutation"
+    },
+    {
+      "qty": 1,
+      "name": "Brass Infiniscope"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Castle Vantress"
+    },
+    {
+      "qty": 1,
+      "name": "Champion of Lambholt"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Commander's Insight"
+    },
+    {
+      "qty": 1,
+      "name": "Curse of the Swine"
+    },
+    {
+      "qty": 1,
+      "name": "Decisive Denial"
+    },
+    {
+      "qty": 1,
+      "name": "Elementalist's Palette"
+    },
+    {
+      "qty": 1,
+      "name": "Elusive Otter"
+    },
+    {
+      "qty": 1,
+      "name": "Emil, Vastlands Roamer"
+    },
+    {
+      "qty": 1,
+      "name": "Entrancing Melody"
+    },
+    {
+      "qty": 1,
+      "name": "Eureka Moment"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Expansion Algorithm"
+    },
+    {
+      "qty": 1,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Grove"
+    },
+    {
+      "qty": 6,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Forgotten Ancient"
+    },
+    {
+      "qty": 1,
+      "name": "Geometer's Arthropod"
+    },
+    {
+      "qty": 1,
+      "name": "Goldvein Hydra"
+    },
+    {
+      "qty": 1,
+      "name": "Guardian Augmenter"
+    },
+    {
+      "qty": 1,
+      "name": "Hardened Scales"
+    },
+    {
+      "qty": 1,
+      "name": "High Fae Trickster"
+    },
+    {
+      "qty": 1,
+      "name": "Hinterland Harbor"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroid Krasis"
+    },
+    {
+      "qty": 1,
+      "name": "Ingenious Prodigy"
+    },
+    {
+      "qty": 6,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Kalonian Hydra"
+    },
+    {
+      "qty": 1,
+      "name": "Kami of Whispered Hopes"
+    },
+    {
+      "qty": 1,
+      "name": "Karn's Bastion"
+    },
+    {
+      "qty": 1,
+      "name": "Kinetic Ooze"
+    },
+    {
+      "qty": 1,
+      "name": "Lifeblood Hydra"
+    },
+    {
+      "qty": 1,
+      "name": "Mathemagics"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Lore"
+    },
+    {
+      "qty": 1,
+      "name": "Nev, the Practical Dean"
+    },
+    {
+      "qty": 1,
+      "name": "Nexus Mentality"
+    },
+    {
+      "qty": 1,
+      "name": "Opal Palace"
+    },
+    {
+      "qty": 1,
+      "name": "Open the Way"
+    },
+    {
+      "qty": 1,
+      "name": "Oran-Rief, the Vastwood"
+    },
+    {
+      "qty": 1,
+      "name": "Overflowing Basin"
+    },
+    {
+      "qty": 1,
+      "name": "Owlin Spiralmancer"
+    },
+    {
+      "qty": 1,
+      "name": "Ozolith, the Shattered Spire"
+    },
+    {
+      "qty": 1,
+      "name": "Primal Might"
+    },
+    {
+      "qty": 1,
+      "name": "Primo, the Unbounded"
+    },
+    {
+      "qty": 1,
+      "name": "Primordial Hydra"
+    },
+    {
+      "qty": 1,
+      "name": "Pull from Tomorrow"
+    },
+    {
+      "qty": 1,
+      "name": "Quandrix Apprentice"
+    },
+    {
+      "qty": 1,
+      "name": "Quandrix Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Quandrix Command"
+    },
+    {
+      "qty": 1,
+      "name": "Rain-Slicked Copse"
+    },
+    {
+      "qty": 1,
+      "name": "Rapid Hybridization"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Silkguard"
+    },
+    {
+      "qty": 1,
+      "name": "Sodden Verdure"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sporocyst"
+    },
+    {
+      "qty": 1,
+      "name": "Steelbane Hydra"
+    },
+    {
+      "qty": 1,
+      "name": "Stonecoil Serpent"
+    },
+    {
+      "qty": 1,
+      "name": "Stroke of Genius"
+    },
+    {
+      "qty": 1,
+      "name": "Study Hall"
+    },
+    {
+      "qty": 1,
+      "name": "Tanazir Quandrix"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Mystery"
+    },
+    {
+      "qty": 1,
+      "name": "Terramorphic Expanse"
+    },
+    {
+      "qty": 1,
+      "name": "Terrasymbiosis"
+    },
+    {
+      "qty": 1,
+      "name": "The Earth Crystal"
+    },
+    {
+      "qty": 1,
+      "name": "The Goose Mother"
+    },
+    {
+      "qty": 1,
+      "name": "Three Visits"
+    },
+    {
+      "qty": 1,
+      "name": "Turbulent Wilderness"
+    },
+    {
+      "qty": 1,
+      "name": "Tyvar's Stand"
+    },
+    {
+      "qty": 1,
+      "name": "Unbound Flourishing"
+    },
+    {
+      "qty": 1,
+      "name": "Vineglimmer Snarl"
+    },
+    {
+      "qty": 1,
+      "name": "Walking Ballista"
+    },
+    {
+      "qty": 1,
+      "name": "Wan Shi Tong, Librarian"
+    },
+    {
+      "qty": 1,
+      "name": "Wilderness Reclamation"
+    },
+    {
+      "qty": 1,
+      "name": "Yavimaya Bloomsage"
+    },
+    {
+      "qty": 1,
+      "name": "Yavimaya Coast"
+    },
+    {
+      "qty": 1,
+      "name": "Zimone's Hypothesis"
+    },
+    {
+      "qty": 1,
+      "name": "Zimone, Infinite Analyst"
+    },
+    {
+      "qty": 1,
+      "name": "Zimone, Paradox Sculptor"
+    }
+  ],
+  "sideboard": []
+}

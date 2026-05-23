@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early mana sources and acceleration",
       "At least one cheap spell or pump spell",
-      "Access to Jeska's Will by turn 3 or 4"
+      "Access to Jeska's Will by turn 3 or 4",
+      "Keep hands with 2-3 fetchable/untapped lands, Ruby Medallion, and at least 2-3 cheap red spells (Seething Song, Lightning Bolt, etc.).",
+      "Keep Jeska's Will only if paired with mana acceleration or draw."
     ],
     "mulligan_criteria": [
       "Heavy hands lacking mana acceleration",
       "Hands with only high-cost spells",
-      "Lack of early interaction or card draw"
+      "Lack of early interaction or card draw",
+      "Mulligan hands with 0-1 lands, multiple Ruby Medallions, or expensive spells without acceleration."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Play lands and activate Ruby Medallion for mana acceleration",
       "Cast cheap spells to build storm count and draw cards",
-      "Apply early pressure with low-cost threats"
+      "Apply early pressure with low-cost threats",
+      "Turn 1: Play a land, cast a cheap red spell if available to start storm count and generate mana.",
+      "Turn 2: Play a land, cast Ruby Medallion if possible, and continue sequencing cheap spells to build mana and storm.",
+      "Prioritize untapped lands and fetching basics to maximize Ruby Medallion synergy."
     ],
     "mid_game": [
       "Stabilize board state and continue drawing cards",
       "Set up pump spells and ensure Jeska's Will is accessible",
-      "Disrupt opponent's game plan with targeted removal"
+      "Disrupt opponent's game plan with targeted removal",
+      "Track storm count meticulously",
+      "every spell cast this turn increases your win condition's power.",
+      "Manage mana to ensure you can cast your combo turn without leaving yourself vulnerable.",
+      "Use Jeska's Will to recycle key pieces or generate extra turns, but avoid overcommitting to recursion if you can win outright.",
+      "Hold back on casting expensive spells early unless you have a clear path to combo.",
+      "Commit threats only when you can protect them or when you're ready to go for the win."
     ],
     "late_game": [
       "Execute Jeska's Will combo for lethal damage",
       "Use remaining pump spells to maximize damage output",
-      "Maintain card advantage to close out the game"
+      "Maintain card advantage to close out the game",
+      "High-storm win conditions (e.g., Tendrils of Agony, Firemind's Research) or Jeska's Will chains that cast multiple win conditions or generate extra turns.",
+      "Win by casting a high-storm spell when you have enough count, or by using Jeska's Will to bypass interaction and close the game.",
+      "Go all-in when you have enough storm count to win, or when you can safely cast Jeska's Will to generate extra turns/recursion.",
+      "Commit when the opponent has no interaction left, is tapped out, or when you can protect your combo with spot removal or timing."
     ]
   },
   "key_cards": [
@@ -59,7 +75,11 @@
     "Prioritize mana acceleration in the early turns to enable faster combo execution",
     "Hold pump spells until the turn you plan to cast Jeska's Will",
     "Use cheap spells to build storm count and draw into key pieces",
-    "Sequence removal to clear blockers or key threats before going for lethal"
+    "Sequence removal to clear blockers or key threats before going for lethal",
+    "Common mistakes include overcommitting to board wipes, forgetting to count storm, mismanaging mana for Jeska's Will recursion, and not tracking opponent interaction.",
+    "Unique interactions: Jeska's Will can be cast from the graveyard with certain effects, allowing extra turns.",
+    "Ruby Medallion makes red spells cheaper, enabling more storm count.",
+    "Always prioritize untapped lands for Ruby Medallion synergy, and remember that Jeska's Will can be used to cast multiple win conditions in a single turn if sequenced correctly."
   ],
   "matchups": [
     {
@@ -88,6 +108,21 @@
         "Mana acceleration",
         "Win condition setup"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Jeska's Will to cast spells in response to counters, or chain cheap spells to out-value counters. Cast win conditions at the end of the opponent's turn or when they have no mana. Use recursion to bypass counters and win before they can respond.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with cheap spells to disrupt their mana base. Use spot removal to kill key mana sources. Go for the combo quickly before they stabilize, and use Jeska's Will to generate extra turns if needed to close the game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Out-value them with better sequencing and storm count management. Use Jeska's Will to generate extra turns or recursion. Prioritize protecting your combo and use spot removal to clear their threats. Win by going off first or by out-recursing with Jeska's Will chains.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +130,15 @@
     "Lightning Bolt",
     "Shock",
     "Force of Will",
-    "Daze"
+    "Daze",
+    "Watch for counterspells, discard, or board wipes.",
+    "Note when opponents tap out for interaction or hold up mana.",
+    "Track graveyard contents if they have recursion.",
+    "Monitor mana acceleration from Tron or ramp decks, and watch for Delver/Tempo threats that can disrupt your sequencing."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:08:10+00:00",
     "model": "local-model",
@@ -114,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more lands and a signature creature",
       "Early landfall triggers like Badgermole Cub on turn one or two",
-      "Mana acceleration to enable Icetill Explorer by turn three"
+      "Mana acceleration to enable Icetill Explorer by turn three",
+      "Keep hands with 2-3 lands (including fetches/accelerants), at least one landfall creature (Badgermole Cub, Icetill Explorer, or Mightform Harmonizer), and a land accelerator.",
+      "Prioritize hands that can play a land and a creature on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Zero-land hands",
       "Hands lacking early landfall triggers or ramp",
-      "Clumped mana sources without creatures"
+      "Clumped mana sources without creatures",
+      "Mulligan on 3+ lands with no creatures, or hands with only creatures and no land/acceleration."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Prioritize playing lands to trigger landfall abilities immediately",
       "Cast Badgermole Cub early to establish a growing threat",
-      "Use cheap ramp or landfall triggers to accelerate toward Icetill Explorer"
+      "Use cheap ramp or landfall triggers to accelerate toward Icetill Explorer",
+      "Turn 1: Play a land.",
+      "If you have a cheap landfall creature and a land accelerator, consider playing the creature on turn 1 if you can drop a land on turn 2.",
+      "Turn 2: Play a second land, then drop a landfall creature.",
+      "Sequence lands to maximize triggers\u2014play accelerants before creatures to trigger landfall immediately.",
+      "If holding multiple lands, consider playing them all at once to trigger multiple landfall abilities."
     ],
     "mid_game": [
       "Drop multiple lands per turn to maximize Mightform Harmonizer triggers",
       "Protect key creatures with blockers or evasion if available",
-      "Trade efficiently while maintaining landfall trigger count"
+      "Trade efficiently while maintaining landfall trigger count",
+      "Prioritize land drops over hoarding cards.",
+      "Use landfall triggers to filter your deck and find answers.",
+      "Don't overcommit mana to non-essential spells",
+      "every land drop is a trigger.",
+      "Manage your graveyard carefully if the format has graveyard hate, but generally, landfall doesn't rely heavily on it.",
+      "Commit threats when you have enough lands to trigger landfall repeatedly and can afford to trade."
     ],
     "late_game": [
       "Flood the board with lands to trigger massive landfall effects",
       "Push combat with a pumped army to close the game",
-      "Use card draw from landfall to find sweepers or finishers"
+      "Use card draw from landfall to find sweepers or finishers",
+      "Mightform Harmonizer (or similar high-impact landfall creatures) combined with a full board of triggered creatures.",
+      "Win by overwhelming the board with +1/+1 counters, card advantage, or direct damage from landfall triggers.",
+      "Go all-in when you have 4+ lands in play, multiple landfall creatures on the board, and the opponent has no sweepers or targeted removal in hand.",
+      "Also commit when you can close the game before their control deck stabilizes."
     ]
   },
   "key_cards": [
@@ -58,7 +76,11 @@
   "sequencing_tips": [
     "Always play lands before casting creatures to ensure landfall triggers resolve before the creature enters",
     "Sequence Mightform Harmonizer after playing your final land for the turn to maximize triggers",
-    "Prioritize dropping Icetill Explorer when you have multiple lands in hand to chain triggers"
+    "Prioritize dropping Icetill Explorer when you have multiple lands in hand to chain triggers",
+    "Landfall is highly sensitive to land drops\u2014never skip a land play unless you're casting a game-winning spell.",
+    "Practice sequencing land drops to maximize triggers.",
+    "Avoid overcommitting to the board without protection, as sweepers are common.",
+    "Remember that Mightform Harmonizer and other key creatures scale with triggers, so prioritize casting them when you have multiple lands ready to drop."
   ],
   "matchups": [
     {
@@ -87,16 +109,35 @@
         "Tempo creatures",
         "Resource denial"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that are hard to counter (e.g., 1-drops). Sequence land drops to trigger landfall before casting expensive spells. Use uncounterable effects or split your spells across turns.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-ramp them with more efficient land acceleration. Use targeted removal on their key ramp creatures. Don't get bogged down in a mana race; focus on board presence and triggers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by drawing more cards and playing more lands. Prioritize card advantage and efficient removal. Protect your key landfall enablers and don't overcommit to the board unless you have a clear advantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early aggressive creatures",
     "Targeted removal spells",
     "Board wipes",
-    "Counterspells"
+    "Counterspells",
+    "Watch for sweepers (like Wrath of God variants), targeted removal (like Lightning Strike), and counterspells.",
+    "Note when opponents tap out for big spells or hold up mana for interaction.",
+    "Track their land count to predict if they can answer your threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:38:21+00:00",
     "model": "local-model",
@@ -112,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

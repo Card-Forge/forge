@@ -1,0 +1,133 @@
+{
+  "archetype": "Izzet Prowess",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/izzet-prowess.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 2,
+      "name": "Colorstorm Stallion"
+    },
+    {
+      "qty": 4,
+      "name": "Elusive Otter"
+    },
+    {
+      "qty": 4,
+      "name": "Flow State"
+    },
+    {
+      "qty": 1,
+      "name": "Impractical Joke"
+    },
+    {
+      "qty": 6,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 4,
+      "name": "Opt"
+    },
+    {
+      "qty": 4,
+      "name": "Riverpyre Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Secret Identity"
+    },
+    {
+      "qty": 4,
+      "name": "Sleight of Hand"
+    },
+    {
+      "qty": 4,
+      "name": "Slickshot Show-Off"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 4,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 4,
+      "name": "Stormchaser's Talent"
+    },
+    {
+      "qty": 1,
+      "name": "Wild Ride"
+    },
+    {
+      "qty": 1,
+      "name": "Willowrush Verge"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 1,
+      "name": "Colorstorm Stallion"
+    },
+    {
+      "qty": 3,
+      "name": "Get Out"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 2,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 2,
+      "name": "Ral, Crackling Wit"
+    },
+    {
+      "qty": 1,
+      "name": "Roaring Furnace // Steaming Sauna"
+    },
+    {
+      "qty": 1,
+      "name": "Sear"
+    },
+    {
+      "qty": 1,
+      "name": "Slagstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    }
+  ]
+}

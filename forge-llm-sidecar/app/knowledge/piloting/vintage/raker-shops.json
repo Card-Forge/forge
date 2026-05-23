@@ -1,0 +1,122 @@
+{
+  "archetype": "Raker Shops",
+  "format": "vintage",
+  "strategy_type": "combo",
+  "overview": "A midrange-combo hybrid that uses early disruption to stabilize, then assembles The One Ring + Sensei's Divining Top + Tezzeret/Cruel Captain to generate infinite mana and untap lands, out-resourcing opponents to win through value or combo finishes.",
+  "win_conditions": [
+    "Assemble The One Ring + Sensei's Divining Top + Tezzeret/Cruel Captain to untap lands for infinite mana, then cast multiple threats or use Tezzeret's ability to mill/win.",
+    "Alternatively, win with a high-impact creature or combo finisher once the engine is online."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, The One Ring, Sensei's Divining Top, Tezzeret, or Cruel Captain, plus early disruption (Thoughtseize/Lightning Bolt).",
+      "Prioritize hands that can cast The One Ring on turn 1 or 2."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 4+ lands, only removal, or no early game plan."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play land, cast Thoughtseize or The One Ring.",
+      "Turn 2: Play land, cast Sensei's Divining Top or Tezzeret/Cruel Captain.",
+      "Sequence lands to ensure blue/black/red/green mana for key spells.",
+      "Use Divining Top to dig for The One Ring or engine pieces."
+    ],
+    "mid_game": [
+      "Preserve mana for protection and engine assembly.",
+      "Use Sensei's Divining Top to dig for key pieces without clogging your hand.",
+      "Avoid overcommitting to the board if you can stabilize with disruption.",
+      "Manage your graveyard carefully to avoid giving Dredge free targets while enabling Tezzeret/Cruel Captain recursion.",
+      "Commit threats only when you have protection or can answer their interaction.",
+      "Hold back if facing heavy sweepers or counters.",
+      "Prioritize keeping The One Ring + Top + Tezzeret/Cruel Captain engine intact over trading creatures."
+    ],
+    "late_game": [
+      "Assemble The One Ring + Sensei's Divining Top + Tezzeret/Cruel Captain to untap lands for infinite mana, then cast multiple threats or use Tezzeret's ability to mill/win.",
+      "Alternatively, win with a high-impact creature or combo finisher once the engine is online.",
+      "Go all-in when you have the engine online and can protect it, or when the opponent is out of interaction.",
+      "Commit to casting multiple threats or using the engine to win before they can stabilize."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "The One Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sensei's Divining Top",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Tezzeret, Cruel Captain",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overcommitting to the board too early, forgetting to sequence The One Ring + Top + Tezzeret correctly, not managing mana for protection, and failing to track opponent interaction.",
+    "Unique interactions: The One Ring + Sensei's Divining Top + Tezzeret/Cruel Captain can untap lands for infinite mana.",
+    "Watch out for graveyard hate vs Dredge, and always prioritize keeping your engine intact over trading creatures."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use The One Ring + Top + Tezzeret to cast spells in response, or use cheap spells to probe. Sequence around counters by playing around their main phase interaction and casting key spells when they're tapped out.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use early disruption to dig for their ramp pieces, Lightning Bolt/Abrade to remove threats, and race or stabilize with your own board presence. Don't let them get ahead with mana rocks.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Thoughtseize to dig for removal, Lightning Bolt/Abrade to clear early threats, and stabilize with your own board presence. Don't overextend into combat; trade efficiently and stabilize before going wide.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats, use The One Ring + Top + Tezzeret to out-value them, and win before they can stabilize. Don't let them draw you into a long game; force them to interact early.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by using Thoughtseize to disrupt their engine, prioritize keeping your own engine intact, and out-value them with better sequencing. Trade efficiently and don't overcommit to the board.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for counterspells, sweepers, graveyard hate, and specific combo pieces.",
+    "Note when opponents tap out for threats vs. holding up interaction.",
+    "Track when they use removal on your engine pieces vs. threats."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/vintage.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

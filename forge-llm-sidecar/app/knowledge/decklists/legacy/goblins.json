@@ -1,0 +1,137 @@
+{
+  "archetype": "Goblins",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/goblins.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Broadside Bombardiers"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 2,
+      "name": "Chrome Mox"
+    },
+    {
+      "qty": 1,
+      "name": "Commercial District"
+    },
+    {
+      "qty": 4,
+      "name": "Food Chain"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 3,
+      "name": "Fury"
+    },
+    {
+      "qty": 1,
+      "name": "General Kreat, the Boltbringer"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Lackey"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Matron"
+    },
+    {
+      "qty": 3,
+      "name": "Goblin Ringleader"
+    },
+    {
+      "qty": 4,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 1,
+      "name": "Howlsquad Heavy"
+    },
+    {
+      "qty": 4,
+      "name": "Ignoble Hierarch"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Muxus, Goblin Grandee"
+    },
+    {
+      "qty": 2,
+      "name": "Once Upon a Time"
+    },
+    {
+      "qty": 1,
+      "name": "Skirk Prospector"
+    },
+    {
+      "qty": 1,
+      "name": "Sling-Gang Lieutenant"
+    },
+    {
+      "qty": 1,
+      "name": "Squee, the Immortal"
+    },
+    {
+      "qty": 1,
+      "name": "Stingscourger"
+    },
+    {
+      "qty": 2,
+      "name": "Taiga"
+    },
+    {
+      "qty": 4,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Chalice of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Trashmaster"
+    },
+    {
+      "qty": 3,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Magus of the Moon"
+    },
+    {
+      "qty": 1,
+      "name": "Meltdown"
+    },
+    {
+      "qty": 2,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 3,
+      "name": "Red Elemental Blast"
+    }
+  ]
+}

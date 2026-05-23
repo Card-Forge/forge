@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Hands containing two or more lands and a turn-one mana dork or Badgermole Cub",
       "Hands with Noble Hierarch and a ramp spell to ensure turn-three threats",
-      "Hands featuring Green Sun's Zenith with enough mana sources to cast it by turn three"
+      "Hands featuring Green Sun's Zenith with enough mana sources to cast it by turn three",
+      "Keep hands with 2-3 lands, Noble Hierarch, Badgermole Cub, or a mix of early threats and acceleration.",
+      "Prioritize hands that can cast a 1-mana ramp creature or play a land + Hierarch."
     ],
     "mulligan_criteria": [
       "Hands with only lands and no creatures or acceleration",
       "Hands lacking early board presence or card draw",
-      "Hands with multiple high-cost threats but insufficient mana to deploy them"
+      "Hands with multiple high-cost threats but insufficient mana to deploy them",
+      "Mulligan flood, stone, or hands lacking a turn-1/2 play."
     ],
     "examples": []
   },
@@ -26,17 +29,31 @@
     "early_game": [
       "Prioritize playing lands and mana dorks to accelerate into turn-three threats",
       "Deploy Badgermole Cub immediately to establish board presence and draw into answers",
-      "Use Noble Hierarch to generate mana and create tokens for early blocks or trades"
+      "Use Noble Hierarch to generate mana and create tokens for early blocks or trades",
+      "Turn 1: Play land, tap Noble Hierarch for G.",
+      "Turn 2: Play second land, cast Badgermole Cub or another ramp creature.",
+      "Sequence lands to ensure you can cast Green Sun's Zenith or threats without stalling.",
+      "If opening with multiple ramp creatures, consider holding one or sacrificing early to secure land drops."
     ],
     "mid_game": [
       "Cast Green Sun's Zenith to fetch key threats that match or exceed the opponent's curve",
       "Trade efficiently with opponent's creatures while maintaining a mana advantage",
-      "Use ramp spells to stay ahead on the curve and pressure the opponent's resources"
+      "Use ramp spells to stay ahead on the curve and pressure the opponent's resources",
+      "Mana is your primary resource",
+      "avoid overcommitting to ramp once threats are established.",
+      "Use Green Sun's Zenith to fetch key threats or instant-speed removal.",
+      "Manage your graveyard carefully, as it fuels Zenith but can be targeted by hate.",
+      "Commit threats when you have removal for their answers or they lack sweepers.",
+      "Hold back if they have spot removal or board wipes."
     ],
     "late_game": [
       "Flood the board with large creatures and tokens to apply overwhelming combat damage",
       "Recast Green Sun's Zenith repeatedly to refill your hand and maintain pressure",
-      "Close out games by leveraging unblockable attackers or massive board states"
+      "Close out games by leveraging unblockable attackers or massive board states",
+      "Large creatures fetched via Green Sun's Zenith, unblockable threats, or direct damage.",
+      "Zenith can also fetch instant-speed removal to clear the board for a lethal attack.",
+      "Go all-in when you hold card advantage, have removal for their answers, and they are low on life or board presence.",
+      "Ensure you can survive their interaction."
     ]
   },
   "key_cards": [
@@ -60,7 +77,11 @@
     "Prioritize playing Noble Hierarch before casting Green Sun's Zenith to maximize available mana for fetching threats.",
     "Hold back interaction until you see what the opponent is playing, as mono-green midrange relies on reading the board state.",
     "Use Badgermole Cub's card draw to find ramp spells, ensuring you stay ahead on the curve.",
-    "Sequence Green Sun's Zenith after playing your lands to avoid mana screw and ensure you can cast the fetched creature immediately."
+    "Sequence Green Sun's Zenith after playing your lands to avoid mana screw and ensure you can cast the fetched creature immediately.",
+    "Green Sun's Zenith requires sacrificing a land, so sequence land drops carefully to avoid stalling.",
+    "Badgermole Cub enters tapped, so don't rely on it for immediate combat tricks.",
+    "Noble Hierarch sacrifices at end of turn, so use it for tempo or to enable Zenith.",
+    "Avoid overcommitting to ramp if the board is already favorable, and always track opponent mana to anticipate interaction."
   ],
   "matchups": [
     {
@@ -98,6 +119,21 @@
         "Card draw engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast threats at end of turn, use Zenith for instant-speed answers, overcommit with multiple threats, or rely on uncounterable threats if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-value them with efficient removal, disrupt their mana sources, and race if they are combo-based. Don't let them outpace your threat curve.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by playing more efficient threats, using better removal, and out-valuing with card draw. Sideboard in\u9488\u5bf9\u6027 hate and protection.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -107,10 +143,13 @@
     "Counterspell",
     "Teferi, Hero of Dominaria",
     "Koth of the Hammer",
-    "Chalice of the Void"
+    "Chalice of the Void",
+    "Watch for combo pieces (Amulet Titan, Ruby Storm engines), counterspells, sweepers, and artifact acceleration.",
+    "Note when opponents tap out for big spells or leave mana open for interaction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:50:50+00:00",
     "model": "local-model",
@@ -126,7 +165,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

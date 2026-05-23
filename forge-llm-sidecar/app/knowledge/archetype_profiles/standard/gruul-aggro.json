@@ -1,0 +1,348 @@
+{
+  "schema_version": 1,
+  "name": "Gruul Aggro",
+  "format": "standard",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Emberheart Challenger",
+    "Leyline of Resonance",
+    "Slickshot Show-Off",
+    "Frenzied Baloth",
+    "Giant Growth",
+    "Hexing Squelcher",
+    "Hired Claw"
+  ],
+  "interaction_to_disrupt": [
+    "Blossoming Defense",
+    "Frenzied Baloth",
+    "Hexing Squelcher",
+    "Origin of Metalbending",
+    "Snakeskin Veil",
+    "Burst Lightning",
+    "Fire Magic",
+    "Hired Claw"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Ancestral Anger",
+        "Oracle's Restoration",
+        "Soul-Guide Lantern"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 21,
+      "cards": [
+        "Emberheart Challenger",
+        "Frenzied Baloth",
+        "Giant Growth",
+        "Hexing Squelcher",
+        "Hired Claw",
+        "Slickshot Show-Off"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 21,
+      "cards": [
+        "Burst Lightning",
+        "Fire Magic",
+        "Hired Claw",
+        "Impractical Joke",
+        "Iroh's Demonstration",
+        "Origin of Metalbending",
+        "Sear",
+        "Soul-Guide Lantern"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 13
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Fire Magic",
+        "Iroh's Demonstration"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 15,
+      "cards": [
+        "Blossoming Defense",
+        "Frenzied Baloth",
+        "Hexing Squelcher",
+        "Origin of Metalbending",
+        "Snakeskin Veil"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 6
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Ancestral Anger",
+        "Soul-Guide Lantern"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 12,
+      "cards": [
+        "Emberheart Challenger",
+        "Leyline of Resonance",
+        "Slickshot Show-Off"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Frenzied Baloth",
+        "Impractical Joke"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 16,
+      "cards": [
+        "Multiversal Passage",
+        "Starting Town",
+        "Stomping Ground",
+        "Thornspire Verge"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Mountain",
+        "Multiversal Passage",
+        "Starting Town",
+        "Stomping Ground",
+        "Thornspire Verge"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.52
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancestral Anger",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emberheart Challenger",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Magic",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Frenzied Baloth",
+      "roles": [
+        "hate_pieces",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hexing Squelcher",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hired Claw",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Impractical Joke",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Iroh's Demonstration",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Multiversal Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Origin of Metalbending",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Slickshot Show-Off",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thornspire Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/gruul-aggro.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

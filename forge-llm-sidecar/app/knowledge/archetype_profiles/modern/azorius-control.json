@@ -1,0 +1,454 @@
+{
+  "schema_version": 1,
+  "name": "Azorius Control",
+  "format": "modern",
+  "colors": [
+    "W",
+    "U"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "Azorius Control in Modern relies on surviving early aggression and combo attempts through disruptive board wipes like Supreme Verdict. Once the board is clear, the deck transitions into a value grind using Solitude and Kaheera, the Orphanguard to generate card advantage. By outlasting opponents through efficient resource management and graveyard synergy, the deck secures victory in the late game.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Trinisphere"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 17,
+      "cards": [
+        "Beza, the Bounding Spring",
+        "Kaheera, the Orphanguard",
+        "Relic of Progenitus",
+        "Reprieve",
+        "Solitude",
+        "Supreme Verdict",
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 6
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Consult the Star Charts",
+        "Kaheera, the Orphanguard",
+        "Solitude",
+        "Stock Up"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Demolition Field"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Solitude"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 16,
+      "cards": [
+        "Beza, the Bounding Spring",
+        "Cityscape Leveler",
+        "Kaheera, the Orphanguard",
+        "Karn, the Great Creator",
+        "Razorgrass Ambush",
+        "Solitude",
+        "Supreme Verdict",
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 32,
+      "cards": [
+        "Cityscape Leveler",
+        "Demolition Field",
+        "Engineered Explosives",
+        "Erode",
+        "Field of Ruin",
+        "Ghost Quarter",
+        "March of Otherworldly Light",
+        "Path to Exile",
+        "Reprieve",
+        "Supreme Verdict",
+        "Wrath of the Skies"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Kaheera, the Orphanguard",
+        "Supreme Verdict"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 1,
+      "cards": [
+        "Mana Tithe"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 6,
+      "cards": [
+        "Solitude",
+        "Supreme Verdict"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 10,
+      "cards": [
+        "Crucible of Worlds",
+        "Elixir of Immortality",
+        "Kaheera, the Orphanguard",
+        "Relic of Progenitus",
+        "Solitude"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 7,
+      "cards": [
+        "Crucible of Worlds",
+        "Reprieve",
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 7,
+      "cards": [
+        "Engineered Explosives",
+        "Solitude",
+        "Supreme Verdict"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Solitude"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Kaheera, the Orphanguard",
+        "Solitude",
+        "Supreme Verdict"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "hate_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Ensnaring Bridge",
+        "Liquimetal Coating",
+        "Solitude",
+        "Timely Reinforcements"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 22,
+      "cards": [
+        "Demolition Field",
+        "Field of Ruin",
+        "Floodfarm Verge",
+        "Ghost Quarter",
+        "Solitude",
+        "Sunken Citadel",
+        "Supreme Verdict",
+        "Trinisphere"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 3
+    },
+    "lands": {
+      "target_count": 24,
+      "cards": [
+        "Demolition Field",
+        "Field of Ruin",
+        "Floodfarm Verge",
+        "Ghost Quarter",
+        "Island",
+        "Plains",
+        "Sunken Citadel"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 5,
+      "cards": [
+        "Karn, the Great Creator",
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.45
+  },
+  "dual_role_cards": [
+    {
+      "card": "Beza, the Bounding Spring",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cityscape Leveler",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crucible of Worlds",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Demolition Field",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Engineered Explosives",
+      "roles": [
+        "engines",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Field of Ruin",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Floodfarm Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Quarter",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaheera, the Orphanguard",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karn, the Great Creator",
+      "roles": [
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Relic of Progenitus",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reprieve",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Solitude",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunken Citadel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Supreme Verdict",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "protection",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teferi, Time Raveler",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Trinisphere",
+      "roles": [
+        "mana_fixing",
+        "mana_reducers"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up mana for Supreme Verdict before making irreversible plays",
+    "Activate Kaheera, the Orphanguard and Solitude to find answers before attacking",
+    "Prioritize clearing threats that cannot be answered by value engines",
+    "Manage graveyard state to maximize Kaheera and Solitude activations",
+    "Prioritize casting Solitude on Nadu while it is on the stack rather than waiting for it to resolve, to prevent the opponent from drawing a card."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize land drops and hold up mana for Supreme Verdict"
+    },
+    {
+      "trigger": "early game",
+      "line": "Disrupt opponent's early board state before committing resources"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Kaheera, the Orphanguard to dig for answers if the graveyard is populated"
+    }
+  ],
+  "kill_priority": [
+    "Engineered Explosives",
+    "Solitude",
+    "Supreme Verdict",
+    "Kaheera, the Orphanguard",
+    "Karn, the Great Creator",
+    "Teferi, Time Raveler",
+    "Beza, the Bounding Spring",
+    "Cityscape Leveler"
+  ],
+  "interaction_to_disrupt": [
+    "Mana Tithe",
+    "Solitude",
+    "Supreme Verdict",
+    "Cityscape Leveler",
+    "Demolition Field",
+    "Engineered Explosives",
+    "Erode",
+    "Field of Ruin"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/azorius-control.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

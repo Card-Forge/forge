@@ -1,0 +1,101 @@
+{
+  "archetype": "Turbo Fog",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/turbo-fog.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Arcane Denial"
+    },
+    {
+      "qty": 4,
+      "name": "Behold the Multiverse"
+    },
+    {
+      "qty": 2,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 2,
+      "name": "Devious Cover-Up"
+    },
+    {
+      "qty": 2,
+      "name": "Embrace the Paradox"
+    },
+    {
+      "qty": 4,
+      "name": "Growth Spiral"
+    },
+    {
+      "qty": 1,
+      "name": "Heritage Reclamation"
+    },
+    {
+      "qty": 8,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 4,
+      "name": "Moment's Peace"
+    },
+    {
+      "qty": 1,
+      "name": "Muddle the Mixture"
+    },
+    {
+      "qty": 4,
+      "name": "Simic Growth Chamber"
+    },
+    {
+      "qty": 2,
+      "name": "Stream of Thought"
+    },
+    {
+      "qty": 4,
+      "name": "Tangle"
+    },
+    {
+      "qty": 2,
+      "name": "Tangled Islet"
+    },
+    {
+      "qty": 4,
+      "name": "Thornwood Falls"
+    },
+    {
+      "qty": 4,
+      "name": "Unfathomable Truths"
+    },
+    {
+      "qty": 4,
+      "name": "Weather the Storm"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Dispel"
+    },
+    {
+      "qty": 2,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 2,
+      "name": "Heritage Reclamation"
+    },
+    {
+      "qty": 4,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 4,
+      "name": "Murmuring Mystic"
+    }
+  ]
+}

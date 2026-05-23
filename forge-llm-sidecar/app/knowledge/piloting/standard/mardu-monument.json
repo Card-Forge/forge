@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with at least two lands and a one- or two-drop removal spell",
       "Hands containing Monument to Endurance paired with early interaction",
-      "Hands that can play a threat or blocker on turn two"
+      "Hands that can play a threat or blocker on turn two",
+      "Keep hands with 2-3 lands (including duals or shocklands if applicable), at least one turn-1 or turn-2 play (creature, cantrip, or early interaction), and a clear path to deploying a Monument by turn 3."
     ],
     "mulligan_criteria": [
       "Mana-heavy hands with no early interaction",
       "Hands lacking removal to handle aggressive starts",
-      "Hands with only high-cost cards and no ramp"
+      "Hands with only high-cost cards and no ramp",
+      "Mulligan on 3+ lands with no early plays, 2+ lands with only late-game threats and no survival tools, or hands with multiple colored mana requirements but no way to cast them before turn 3."
     ],
     "examples": []
   },
@@ -25,17 +27,34 @@
     "early_game": [
       "Prioritize playing lands and casting Moonshadow or Cool but Rude to disrupt early threats",
       "Hold up mana for removal while setting up Monument to Endurance on turn three or four",
-      "Use early removal to buy time for the Monument to enter and generate a Wall token"
+      "Use early removal to buy time for the Monument to enter and generate a Wall token",
+      "Turn 1: Play a land",
+      "cast a cheap cantrip or early threat if mana allows.",
+      "Turn 2: Deploy a Monument if you have the mana, or play a midrange creature/removal.",
+      "Sequence lands to ensure W/B/R availability by turn 2-3",
+      "prioritize playing a land if you hold a turn-2 play that requires it."
     ],
     "mid_game": [
       "Cycle the Monument to the bottom of the library to avoid life loss while maintaining board presence",
       "Trade opponent's creatures into the recurring Wall tokens to preserve your life total",
-      "Use cheap removal to clear the way for incremental value and card advantage"
+      "Use cheap removal to clear the way for incremental value and card advantage",
+      "Preserve mana for interaction until threats are established or the board is stabilized.",
+      "Use cantrips to dig for answers or finishers rather than overcommitting to the stack.",
+      "Manage the graveyard carefully",
+      "avoid unnecessary sacrifice outlets unless necessary, as Monuments may interact with it or benefit from controlled recursion.",
+      "Commit threats only when you have removal or combat tricks to protect them.",
+      "Hold back key finishers if the opponent has unblocked removal or counterspells."
     ],
     "late_game": [
       "Let the Monument cycle repeatedly to generate infinite blockers and drain opponent's resources",
       "Focus on life gain and board control to force opponents into unfavorable trades",
-      "Manage the Monument's upkeep carefully to maximize token generation without taking lethal damage"
+      "Manage the Monument's upkeep carefully to maximize token generation without taking lethal damage",
+      "Moonshadow (evasion and recursion), Cool but Rude (combat advantage and disruption), and fully grown Monuments.",
+      "Win by trading efficiently, then attacking with unblockable or resilient threats.",
+      "Use combat tricks to bypass removal and close the game in 1-2 turns.",
+      "Go all-in when you have card advantage, the opponent has no interaction left, or you can swing through with protected threats.",
+      "Commit when a Monument reaches a critical threshold or when you can close the game before the opponent can stabilize.",
+      "Push damage when you have unblockable threats or when the opponent's life total is low enough to win outright."
     ]
   },
   "key_cards": [
@@ -59,7 +78,13 @@
     "Always assess life totals before deciding whether to keep or cycle Monument to Endurance",
     "Hold up removal mana during opponent's turn to maximize surprise and combat disruption",
     "Prioritize cycling the Monument when you have a full board of Walls to maintain pressure without paying life",
-    "Use Moonshadow and Cool but Rude to clear the path for Monument's entry, ensuring the initial Wall token survives"
+    "Use Moonshadow and Cool but Rude to clear the path for Monument's entry, ensuring the initial Wall token survives",
+    "Monuments are fragile to board wipes",
+    "protect them with counters or sacrifice outlets.",
+    "Moonshadow's recursion can be a double-edged sword",
+    "manage graveyard carefully to avoid feeding opponent strategies.",
+    "Cool but Rude's downside requires careful timing",
+    "use it when you can mitigate the drawback or when the combat advantage is decisive."
   ],
   "matchups": [
     {
@@ -85,15 +110,35 @@
         "Efficient removal that targets Monument",
         "Value engines that outscale your token generation"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split casts, stack tricks, and cheap threats that don't rely on a single spell. Attack around counterspells with multiple small threats or use artifacts that are hard to counter. Save interaction for their counterspells and pressure with unblockable or resilient threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their land drops. Use targeted removal on key ramp creatures/lands. Don't overcommit to the board; trade efficiently and win with value engines. Force them to interact with your threats rather than letting them develop their board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value is king. Trade efficiently, preserve card advantage, and win by out-resourcing. Use protection on key Monuments and threaten with evasive creatures. Force them to interact with your threats rather than letting them develop their board. Win by out-grinding them in the late game.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures that pressure life total before Monument resolves",
     "Board wipes that clear recurring Wall tokens",
-    "Efficient removal spells that target Monument to Endurance"
+    "Efficient removal spells that target Monument to Endurance",
+    "Watch for Izzet's stack interaction (counterspells, instant-speed removal, tempo spells).",
+    "Track Landfall triggers and key land drops to anticipate their power spikes.",
+    "Note when opponents save removal for specific threats versus holding for your Monuments.",
+    "Pay attention to graveyard size, as Moonshadow and Monument synergies can shift rapidly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:53:19+00:00",
     "model": "local-model",
@@ -109,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

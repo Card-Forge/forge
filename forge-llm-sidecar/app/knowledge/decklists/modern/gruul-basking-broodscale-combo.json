@@ -1,0 +1,133 @@
+{
+  "archetype": "Gruul Basking Broodscale Combo",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/gruul-basking-broodscale-combo.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Stirrings"
+    },
+    {
+      "qty": 4,
+      "name": "Basking Broodscale"
+    },
+    {
+      "qty": 4,
+      "name": "Blade of the Bloodchief"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Commercial District"
+    },
+    {
+      "qty": 4,
+      "name": "Eldrazi Temple"
+    },
+    {
+      "qty": 2,
+      "name": "Emrakul, the Promised End"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Glaring Fleshraker"
+    },
+    {
+      "qty": 4,
+      "name": "Grove of the Burnwillows"
+    },
+    {
+      "qty": 4,
+      "name": "Kozilek's Command"
+    },
+    {
+      "qty": 4,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 2,
+      "name": "Snow-Covered Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Springleaf Drum"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 2,
+      "name": "Unholy Heat"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 2,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 2,
+      "name": "Walking Ballista"
+    },
+    {
+      "qty": 3,
+      "name": "Wooded Foothills"
+    },
+    {
+      "qty": 4,
+      "name": "Writhing Chrysalis"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Dismember"
+    },
+    {
+      "qty": 2,
+      "name": "Firespout"
+    },
+    {
+      "qty": 2,
+      "name": "Pick Your Poison"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Wastes"
+    },
+    {
+      "qty": 3,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Soulless Jailer"
+    },
+    {
+      "qty": 2,
+      "name": "Thief of Existence"
+    },
+    {
+      "qty": 1,
+      "name": "Unholy Heat"
+    },
+    {
+      "qty": 2,
+      "name": "Vexing Bauble"
+    }
+  ]
+}

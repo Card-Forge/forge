@@ -1,0 +1,877 @@
+{
+  "schema_version": 1,
+  "name": "Narci, Fable Singer",
+  "format": "commander",
+  "colors": [
+    "B",
+    "G",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "The deck aims to cast a high volume of cheap noncreature spells to rapidly grow Narci into a massive threat, leveraging graveyard recursion and card advantage to out-value opponents. It excels against control and combo decks that rely on single-target interaction, as its recursive value engine and escalating board presence overwhelm static defenses.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 25,
+      "cards": [
+        "Archon of Sun's Grace",
+        "Binding the Old Gods",
+        "Dawn's Truce",
+        "Eidolon of Blossoms",
+        "Elspeth Conquers Death",
+        "Kenrith's Transformation",
+        "Narci, Fable Singer",
+        "Summon: Anima",
+        "Summon: Bahamut",
+        "Summon: Fenrir",
+        "Summon: Good King Mog XII",
+        "Summon: Knights of Round",
+        "Summon: Primal Garuda",
+        "Summon: Primal Odin",
+        "Summon: Titan",
+        "Summon: Yojimbo",
+        "Sythis, Harvest's Hand",
+        "Tale of Tin\u00faviel",
+        "The Creation of Avacyn",
+        "The Cruelty of Gix",
+        "The Eldest Reborn",
+        "The First Iroan Games",
+        "The Weatherseed Treaty",
+        "The World Spell",
+        "Three Blind Mice"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Path of Ancestry",
+        "Temple of Malady",
+        "Temple of Silence",
+        "The World Spell",
+        "Yenna, Redtooth Regent"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 11,
+      "cards": [
+        "Binding the Old Gods",
+        "Defense of the Heart",
+        "Enlightened Tutor",
+        "Fabled Passage",
+        "Farseek",
+        "Kodama's Reach",
+        "Sterling Grove",
+        "Summon: Fenrir",
+        "The Creation of Avacyn",
+        "The Cruelty of Gix",
+        "The Weatherseed Treaty"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Archon of Sun's Grace"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 40,
+      "cards": [
+        "Anikthea, Hand of Erebos",
+        "Archon of Sun's Grace",
+        "Barbara Wright",
+        "Branchloft Pathway",
+        "Calix, Guided by Fate",
+        "Clash of the Eikons",
+        "Composer of Spring",
+        "Demon of Fate's Design",
+        "Eidolon of Blossoms",
+        "Evolution Sage",
+        "Grateful Apparition",
+        "Helm of the Gods",
+        "Historian's Boon",
+        "Ishgard, the Holy See",
+        "Jukai Naturalist",
+        "Llanowar Elves",
+        "Metastatic Evangel",
+        "Narci, Fable Singer",
+        "Power Conduit",
+        "Revitalizing Repast",
+        "Sanctum Weaver",
+        "Sanguine Bond",
+        "Satsuki, the Living Lore",
+        "Sol Ring",
+        "Starfield Mystic",
+        "Strength of the Harvest",
+        "Summon: Anima",
+        "Summon: Bahamut",
+        "Summon: Fenrir",
+        "Summon: Good King Mog XII",
+        "Summon: Knights of Round",
+        "Summon: Primal Garuda",
+        "Summon: Primal Odin",
+        "Summon: Titan",
+        "Summon: Yojimbo",
+        "Sythis, Harvest's Hand",
+        "The Legend of Yangchen",
+        "Weaver of Harmony",
+        "Yenna, Redtooth Regent",
+        "Yuna, Hope of Spira"
+      ],
+      "mainboard_count": 40,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Anguished Unmaking",
+        "Austere Command",
+        "Binding the Old Gods",
+        "Calix, Guided by Fate",
+        "Caves of Koilos",
+        "Elspeth Conquers Death",
+        "Extinguish All Hope",
+        "Grateful Apparition",
+        "Llanowar Wastes",
+        "Satsuki, the Living Lore",
+        "Summon: Bahamut",
+        "Summon: Primal Garuda",
+        "Summon: Primal Odin",
+        "Summon: Yojimbo",
+        "Tale of Tin\u00faviel"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Austere Command",
+        "Extinguish All Hope",
+        "Ghostly Prison"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 10,
+      "cards": [
+        "Archon of Sun's Grace",
+        "Darksteel Mutation",
+        "Dawn's Truce",
+        "Heroic Intervention",
+        "Summon: Fenrir",
+        "Summon: Knights of Round",
+        "Swiftfoot Boots",
+        "Tale of Tin\u00faviel",
+        "Teferi's Protection",
+        "Yuna, Hope of Spira"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 10,
+      "cards": [
+        "Anikthea, Hand of Erebos",
+        "Archon of Sun's Grace",
+        "Elspeth Conquers Death",
+        "Satsuki, the Living Lore",
+        "Starfield Mystic",
+        "Summon: Titan",
+        "Tale of Tin\u00faviel",
+        "The Cruelty of Gix",
+        "The Eldest Reborn",
+        "Yuna, Hope of Spira"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 7,
+      "cards": [
+        "Anikthea, Hand of Erebos",
+        "Archon of Sun's Grace",
+        "Elspeth Conquers Death",
+        "Satsuki, the Living Lore",
+        "Summon: Titan",
+        "Tale of Tin\u00faviel",
+        "Yuna, Hope of Spira"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Summon: Good King Mog XII",
+        "Sythis, Harvest's Hand"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Archon of Sun's Grace"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 31,
+      "cards": [
+        "Arcane Signet",
+        "Archon of Sun's Grace",
+        "Bountiful Promenade",
+        "Caves of Koilos",
+        "Chromatic Lantern",
+        "Command Tower",
+        "Elspeth Conquers Death",
+        "Exotic Orchard",
+        "Fabled Passage",
+        "Fertile Ground",
+        "Forbidden Orchard",
+        "Isolated Chapel",
+        "Karn's Bastion",
+        "Llanowar Wastes",
+        "Multiversal Passage",
+        "Necroblossom Snarl",
+        "Nesting Grounds",
+        "Path of Ancestry",
+        "Reflecting Pool",
+        "Sanctum Weaver",
+        "Sandsteppe Citadel",
+        "Shattered Sanctum",
+        "Shineshadow Snarl",
+        "Starting Town",
+        "Summon: Bahamut",
+        "Sungrass Prairie",
+        "Temple of Malady",
+        "Temple of Silence",
+        "The Creation of Avacyn",
+        "The First Iroan Games",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 32,
+      "cards": [
+        "Bountiful Promenade",
+        "Caves of Koilos",
+        "Command Tower",
+        "Exotic Orchard",
+        "Fabled Passage",
+        "Forbidden Orchard",
+        "Forest",
+        "Isolated Chapel",
+        "Karn's Bastion",
+        "Llanowar Wastes",
+        "Multiversal Passage",
+        "Necroblossom Snarl",
+        "Nesting Grounds",
+        "Path of Ancestry",
+        "Plains",
+        "Reflecting Pool",
+        "Sandsteppe Citadel",
+        "Shattered Sanctum",
+        "Shineshadow Snarl",
+        "Starting Town",
+        "Sungrass Prairie",
+        "Swamp",
+        "Temple of Malady",
+        "Temple of Silence",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.27
+  },
+  "dual_role_cards": [
+    {
+      "card": "Anikthea, Hand of Erebos",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archon of Sun's Grace",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Austere Command",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Binding the Old Gods",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bountiful Promenade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Calix, Guided by Fate",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Caves of Koilos",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dawn's Truce",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eidolon of Blossoms",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elspeth Conquers Death",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Extinguish All Hope",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabled Passage",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Forbidden Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grateful Apparition",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Isolated Chapel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karn's Bastion",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Llanowar Wastes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Multiversal Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narci, Fable Singer",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Necroblossom Snarl",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nesting Grounds",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reflecting Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sanctum Weaver",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sandsteppe Citadel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Satsuki, the Living Lore",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shattered Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shineshadow Snarl",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starfield Mystic",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summon: Anima",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summon: Bahamut",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summon: Fenrir",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summon: Good King Mog XII",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summon: Knights of Round",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summon: Primal Garuda",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summon: Primal Odin",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summon: Titan",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summon: Yojimbo",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sungrass Prairie",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sythis, Harvest's Hand",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tale of Tin\u00faviel",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "protection",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Malady",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Silence",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Creation of Avacyn",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Cruelty of Gix",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Eldest Reborn",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The First Iroan Games",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Weatherseed Treaty",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The World Spell",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Woodland Cemetery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yenna, Redtooth Regent",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yuna, Hope of Spira",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistakes include overcommitting to casting spells without protection, ignoring graveyard hate, and mismanaging mana for Narci's growth.",
+    "Unique interactions: Anikthea allows you to cast Narci from the graveyard to trigger its own death trigger again, creating a recursive value loop.",
+    "Archon of Sun's Grace can protect Narci or act as a secondary win condition.",
+    "Watch for 'when you cast' triggers from opponents and plan your spell sequencing accordingly."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast a cheap cantrip or mana accelerator to establish tempo."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a second land, cast another noncreature spell to grow Narci, or drop Narci if mana allows."
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize establishing a functional mana base and getting Narci on the board as early as possible to start the counter engine."
+    }
+  ],
+  "kill_priority": [
+    "Summon: Good King Mog XII",
+    "Sythis, Harvest's Hand",
+    "Archon of Sun's Grace",
+    "Anikthea, Hand of Erebos",
+    "Barbara Wright",
+    "Branchloft Pathway",
+    "Calix, Guided by Fate",
+    "Clash of the Eikons"
+  ],
+  "interaction_to_disrupt": [
+    "Archon of Sun's Grace",
+    "Darksteel Mutation",
+    "Dawn's Truce",
+    "Heroic Intervention",
+    "Summon: Fenrir",
+    "Summon: Knights of Round",
+    "Swiftfoot Boots",
+    "Tale of Tin\u00faviel"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/narci-fable-singer.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

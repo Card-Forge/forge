@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Thoughtseize and a one or two-drop threat",
       "Hands with multiple disruption spells to control the early game",
-      "Hands that enable a turn-one or turn-two play"
+      "Hands that enable a turn-one or turn-two play",
+      "Keep hands with 2-3 lands, a Thoughtseize, and a turn-2 threat or removal.",
+      "Prioritize hands that can play a land, Thoughtseize, and a 2-drop by turn 2."
     ],
     "mulligan_criteria": [
       "Hands lacking early disruption or threats",
       "Hands with only high-cost cards like Sheoldred",
-      "Hands with no lands or unplayable mana bases"
+      "Hands with no lands or unplayable mana bases",
+      "Mulligan if you have 0-1 lands, multiple Thoughtseizes with no threats, or only high-cost spells without answers."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Cast Thoughtseize on turn one to disrupt opponent's game plan",
       "Play low-cost threats to establish board presence",
-      "Use disruption to protect key cards or set up combos"
+      "Use disruption to protect key cards or set up combos",
+      "Turn 1: Play a land, Thoughtseize if possible (target opponent's key combo piece, early threat, or removal).",
+      "Turn 2: Play a land, cast a 2-drop threat or removal.",
+      "If opponent plays a creature, answer it",
+      "if they play a land, hold Thoughtseize for later or use it on a key spell.",
+      "Land sequencing: Prioritize basic swamps or duals that enter untapped if possible to ensure mana consistency for Thoughtseize and early plays."
     ],
     "mid_game": [
       "Deploy Graveyard Trespasser to apply pressure and enable graveyard synergies",
       "Trade efficiently with removal and hand size advantage",
-      "Begin accumulating resources for late-game finishers"
+      "Begin accumulating resources for late-game finishers",
+      "Preserve Thoughtseize for critical turns (opponent's draw step or when they have a key combo piece).",
+      "Don't overcommit mana to threats if you lack answers.",
+      "Use the graveyard strategically: feed it to Trespasser for value, but avoid giving Sheoldred or other recursion targets to opponent graveyard hate unless necessary.",
+      "Manage hand size: keep 3-4 cards minimum to weather disruption.",
+      "Commit threats when you have removal ready for their answers.",
+      "Hold back if you suspect a sweep or if you need to preserve mana for disruption."
     ],
     "late_game": [
       "Cast Sheoldred, the Apocalypse to control the board and drain life",
       "Leverage graveyard recursion to outvalue opponents",
-      "Close out games with overwhelming board presence and life total advantage"
+      "Close out games with overwhelming board presence and life total advantage",
+      "Sheoldred, the Apocalypse is the primary win condition.",
+      "Get it on board and protected with removal or discard.",
+      "Graveyard Trespasser can close games by cycling through their graveyard and dealing damage or drawing cards.",
+      "Go all-in when you have Sheoldred on board, opponent has no sweepers, and you have hand disruption to protect your threats.",
+      "Also commit when you can lock them out of their combo or control game plan."
     ]
   },
   "key_cards": [
@@ -58,7 +77,12 @@
   "sequencing_tips": [
     "Hold Thoughtseize if opponent has a known turn-one play that disrupts your game plan",
     "Prioritize playing threats before casting Sheoldred to maximize its death triggers",
-    "Use Graveyard Trespasser to enable graveyard recursion strategies before committing to late-game finishers"
+    "Use Graveyard Trespasser to enable graveyard recursion strategies before committing to late-game finishers",
+    "Common mistake: Overusing Thoughtseize on irrelevant cards.",
+    "Always target their most impactful spell or permanent.",
+    "Another mistake: Committing to a board without answers, leaving you vulnerable to sweepers.",
+    "Unique interaction: Graveyard Trespasser can be used to cycle your own graveyard to find value, but be careful not to feed Sheoldred or other key threats to opponent graveyard hate.",
+    "Also, track opponent's discard spells to know when to hold up hand."
   ],
   "matchups": [
     {
@@ -87,15 +111,35 @@
         "Fast win conditions",
         "Graveyard hate"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtseize to remove counterspells. Cast threats in response to their removal or when they're low on mana. Rely on discard to win before they can cast, or use cheap, efficient threats that are hard to counter.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early disruption is key. Thoughtseize their mana rocks or ramp spells. Answer their early threats efficiently. Don't let them stabilize; pressure them with threats and discard.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a game of hand efficiency and graveyard advantage. Prioritize Thoughtseize on their key threats or discard. Use Graveyard Trespasser to disrupt their recursion. Win by having better card selection and managing the graveyard better.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
-    "Combo enablers and finishers"
+    "Combo enablers and finishers",
+    "Watch for opponent's discard spells (they'll try to empty your hand).",
+    "Track their graveyard (Trespasser needs to know what's there).",
+    "Note if they're playing sweepers (you need to have threats out or answers ready).",
+    "Watch for mana development (if they're ramping, you need to disrupt early)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:18:30+00:00",
     "model": "local-model",
@@ -111,6 +155,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

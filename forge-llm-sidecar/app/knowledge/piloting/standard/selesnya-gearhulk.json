@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two lands and a one-drop or two-drop",
       "Hands containing Keen-Eyed Curator or early creatures",
-      "Hands that can play a threat by turn three"
+      "Hands that can play a threat by turn three",
+      "Keep hands with 2-3 lands (prioritize fetchable duals or basics that enter untapped), plus at least one of Badgermole Cub, Ouroboroid, Keen-Eyed Curator, or Gearhulk.",
+      "Keep hands with 3+ mana sources and a clear path to casting a 3-4 drop on turn 2 or 3."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands",
       "Hands with only high-cost cards like Ouroboroid",
-      "Hands lacking early interaction or ramp"
+      "Hands lacking early interaction or ramp",
+      "Mulligan pure curve decks, hands with only 1-2 lands, or hands lacking early artifacts/creatures to stabilize."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Prioritize land drops and play Keen-Eyed Curator to accelerate mana",
       "Cast small creatures like Badgermole Cub to establish board presence",
-      "Avoid overextending into early aggression"
+      "Avoid overextending into early aggression",
+      "Turn 1: Play a land, ideally a fetch or basic that sets up W/G mana.",
+      "Turn 2: Cast a 2-drop artifact or mana rock (e.g., Arcane Signet, Sol Ring, or early Cub/Ouroboroid if mana allows).",
+      "Turn 3: Aim to cast Gearhulk or Keen-Eyed Curator to dig for more artifacts.",
+      "Sequence lands to ensure double-colored mana for Gearhulk by turn 3-4, prioritizing untapped sources to maintain tempo."
     ],
     "mid_game": [
       "Use Curator to fetch additional lands and smooth out mana base",
       "Begin casting larger threats and leverage creature synergies",
-      "Block efficiently while building toward a decisive turn"
+      "Block efficiently while building toward a decisive turn",
+      "Prioritize keeping artifacts in the graveyard for Gearhulk recursion.",
+      "Avoid overcommitting to the board if you lack protection or answers.",
+      "Manage mana to ensure 4WWG is available for Gearhulk without flooding.",
+      "Use Keen-Eyed Curator to dig for specific artifacts or Gearhulk itself, and track graveyard contents to maximize recursion value.",
+      "Commit threats when you have removal or counters to protect them, or when the opponent is tapped out.",
+      "Hold back Gearhulk if the opponent has sweepers or heavy removal."
     ],
     "late_game": [
       "Cast Ouroboroid and other high-cost finishers",
       "Deploy multiple creatures per turn to overwhelm blockers",
-      "Close out the game with combat damage before opponent can stabilize"
+      "Close out the game with combat damage before opponent can stabilize",
+      "Gearhulk returning a large artifact/creature, Keen-Eyed Curator finding a win-con, or a late-game artifact like Thran Dynamo combined with a big creature.",
+      "The goal is to stabilize and then swing with protected threats or combo off with artifact synergy.",
+      "Go all-in when you have card advantage, the opponent is low on removal, or you can protect your board with counters/removal.",
+      "Commit when you can safely cast Gearhulk and get a free value engine, or when you can force the opponent to use multiple answers on a single threat."
     ]
   },
   "key_cards": [
@@ -59,7 +76,12 @@
     "Hold up mana for potential interaction before committing to large spells",
     "Play Curator before casting expensive creatures to ensure mana availability",
     "Time Ouroboroid's entrance to maximize its death trigger value",
-    "Prioritize land drops over unnecessary creature trades in the early game"
+    "Prioritize land drops over unnecessary creature trades in the early game",
+    "Common mistake: Overcommitting to the board without protection.",
+    "Gearhulk is highly vulnerable to sweepers, so always keep mana open for protection or recursion.",
+    "Badgermole Cub and Ouroboroid are critical for fueling the engine and generating mana/boards.",
+    "Keen-Eyed Curator is a powerful dig spell that can find Gearhulk or key artifacts.",
+    "Don't forget to fetch lands for Gearhulk's mana cost, and track the graveyard carefully to maximize recursion value."
   ],
   "matchups": [
     {
@@ -88,16 +110,35 @@
         "Efficient creatures",
         "Hand disruption"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap artifacts to pressure, cast Gearhulk at end step or with mana open for protection. Cast multiple threats to force through, and use artifact spells that are hard to counter or cast in response to their counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with artifacts, use removal to stop key ramp pieces, and stabilize with board wipes or counters. Don't let them get too far ahead in mana, and prioritize disrupting their mana acceleration over trading creatures.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by having better resource management, more answers, and better graveyard setup. Sideboard in more artifact hate and counters. Win the attrition war by protecting your Gearhulks, out-drawing them, and forcing unfavorable trades where you have more recursion options.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
     "Counterspells and hand disruption",
-    "Efficient midrange threats"
+    "Efficient midrange threats",
+    "Watch for sweepers (e.g., Wrath of God, Cyclonic Rift), artifact hate (e.g., Disenchant, Abrade), and graveyard hate.",
+    "Note when opponents are holding up mana for counters or removal.",
+    "Track graveyard contents to know what Gearhulk can return, and monitor opponent's hand size to gauge their ability to interact with your key threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:45:12+00:00",
     "model": "local-model",
@@ -113,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

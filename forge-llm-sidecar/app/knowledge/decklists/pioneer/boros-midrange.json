@@ -1,0 +1,121 @@
+{
+  "archetype": "Boros Midrange",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/boros-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Battlefield Forge"
+    },
+    {
+      "qty": 4,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 4,
+      "name": "Fear of Missing Out"
+    },
+    {
+      "qty": 4,
+      "name": "Fiery Temper"
+    },
+    {
+      "qty": 1,
+      "name": "Guardian of New Benalia"
+    },
+    {
+      "qty": 4,
+      "name": "Hardened Academic"
+    },
+    {
+      "qty": 4,
+      "name": "Inspiring Vantage"
+    },
+    {
+      "qty": 4,
+      "name": "Marauding Mako"
+    },
+    {
+      "qty": 4,
+      "name": "Monument to Endurance"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Needleverge Pathway"
+    },
+    {
+      "qty": 2,
+      "name": "Ox of Agonas"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 4,
+      "name": "Seasoned Hallowblade"
+    },
+    {
+      "qty": 1,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    },
+    {
+      "qty": 2,
+      "name": "Sunbillow Verge"
+    },
+    {
+      "qty": 4,
+      "name": "The Mycosynth Gardens"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Abrade"
+    },
+    {
+      "qty": 3,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 2,
+      "name": "Destroy Evil"
+    },
+    {
+      "qty": 1,
+      "name": "Ox of Agonas"
+    },
+    {
+      "qty": 3,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 1,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 1,
+      "name": "Torch the Tower"
+    }
+  ]
+}

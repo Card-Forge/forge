@@ -1,0 +1,165 @@
+{
+  "archetype": "Sultai Excruciator",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/sultai-excruciator.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Analyze the Pollen"
+    },
+    {
+      "qty": 3,
+      "name": "Ancient Cornucopia"
+    },
+    {
+      "qty": 2,
+      "name": "Awaken the Honored Dead"
+    },
+    {
+      "qty": 1,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Broodspinner"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 2,
+      "name": "Day of Black Sun"
+    },
+    {
+      "qty": 2,
+      "name": "Deathcap Glade"
+    },
+    {
+      "qty": 4,
+      "name": "Deceit"
+    },
+    {
+      "qty": 2,
+      "name": "Doomsday Excruciator"
+    },
+    {
+      "qty": 3,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 3,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Harvester of Misery"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Rakshasa's Bargain"
+    },
+    {
+      "qty": 3,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 3,
+      "name": "Restless Reef"
+    },
+    {
+      "qty": 2,
+      "name": "Shoot the Sheriff"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 3,
+      "name": "Superior Spider-Man"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Urgent Necropsy"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Wistfulness"
+    },
+    {
+      "qty": 1,
+      "name": "Withering Curse"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Deadly Cover-Up"
+    },
+    {
+      "qty": 2,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 1,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Outrageous Robbery"
+    },
+    {
+      "qty": 1,
+      "name": "Petrified Hamlet"
+    },
+    {
+      "qty": 2,
+      "name": "Qarsi Revenant"
+    },
+    {
+      "qty": 1,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 2,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 1,
+      "name": "Wan Shi Tong, Librarian"
+    },
+    {
+      "qty": 1,
+      "name": "Wistfulness"
+    }
+  ]
+}

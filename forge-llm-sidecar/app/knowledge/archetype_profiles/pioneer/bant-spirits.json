@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "name": "Bant Spirits",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U",
+    "G"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Bant Spirits is an aggressive tempo deck in Pioneer that leverages Collected Company to flood the board with flying creatures and lords. It utilizes flash creatures for disruption and card advantage while aiming to close games quickly between turns four and five. The deck adapts its posture between an aggressive attack plan and a disruptive, value-oriented strategy depending on the matchup.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Shapers' Sanctuary"
+      ]
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 1,
+      "cards": [
+        "Shapers' Sanctuary"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": []
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Supreme Phantom"
+      ]
+    },
+    "threats": {
+      "target_count": 7,
+      "cards": [
+        "Collected Company",
+        "Mausoleum Wanderer",
+        "Portable Hole",
+        "Rattlechains",
+        "Skyclave Apparition",
+        "Spell Queller",
+        "Supreme Phantom"
+      ]
+    },
+    "removal": {
+      "target_count": 1,
+      "cards": [
+        "Shapers' Sanctuary"
+      ]
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Supreme Phantom"
+      ]
+    },
+    "counterspells": {
+      "target_count": 1,
+      "cards": [
+        "Supreme Phantom"
+      ]
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Mausoleum Wanderer",
+        "Shapers' Sanctuary"
+      ]
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Mausoleum Wanderer"
+      ]
+    },
+    "graveyard_enablers": {
+      "target_count": 1,
+      "cards": [
+        "Mausoleum Wanderer"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": []
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 1,
+      "cards": [
+        "Supreme Phantom"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.25
+  },
+  "dual_role_cards": [
+    {
+      "card": "Supreme Phantom",
+      "roles": [
+        "counterspells",
+        "mana_fixing",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mausoleum Wanderer",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shapers' Sanctuary",
+      "roles": [
+        "card_advantage",
+        "mana_reducers",
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Use Collected Company on your turn to increase attack and remove blockers",
+    "Use Collected Company as an answer to opponent's spells for disruption",
+    "Hold Spell Queller to answer Supreme Verdict or The Wandering Emperor",
+    "Start the match with Mausoleum Wanderer to protect from removals and discards",
+    "Block creatures enchanted with Curious Obsession to prevent opponent card advantage"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play flying creatures as fast as possible alongside Supreme Phantom"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Collected Company on your turn to attack and remove blockers"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize Mausoleum Wanderer for early pressure and protection"
+    }
+  ],
+  "kill_priority": [
+    "Supreme Phantom",
+    "Collected Company",
+    "Mausoleum Wanderer",
+    "Portable Hole"
+  ],
+  "interaction_to_disrupt": [
+    "Supreme Phantom",
+    "Shapers' Sanctuary"
+  ],
+  "last_updated": "2026-05-22"
+}

@@ -1,0 +1,165 @@
+{
+  "archetype": "Esper Control",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/esper-control.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Anoint with Affliction"
+    },
+    {
+      "qty": 2,
+      "name": "Beza, the Bounding Spring"
+    },
+    {
+      "qty": 4,
+      "name": "Bleachbone Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 1,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 1,
+      "name": "Elspeth, Storm Slayer"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 4,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Go for the Throat"
+    },
+    {
+      "qty": 2,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 3,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 3,
+      "name": "March of Otherworldly Light"
+    },
+    {
+      "qty": 1,
+      "name": "Memory Deluge"
+    },
+    {
+      "qty": 2,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 1,
+      "name": "Mirrex"
+    },
+    {
+      "qty": 1,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 3,
+      "name": "No More Lies"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowy Backstreet"
+    },
+    {
+      "qty": 1,
+      "name": "Supreme Verdict"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi, Hero of Dominaria"
+    },
+    {
+      "qty": 2,
+      "name": "Temporary Lockdown"
+    },
+    {
+      "qty": 2,
+      "name": "The Wandering Emperor"
+    },
+    {
+      "qty": 3,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 3,
+      "name": "Vanishing Verse"
+    },
+    {
+      "qty": 2,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Dovin's Veto"
+    },
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Elspeth, Storm Slayer"
+    },
+    {
+      "qty": 2,
+      "name": "High Noon"
+    },
+    {
+      "qty": 1,
+      "name": "Kaheera, the Orphanguard"
+    },
+    {
+      "qty": 1,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 2,
+      "name": "Pest Control"
+    },
+    {
+      "qty": 1,
+      "name": "Supreme Verdict"
+    },
+    {
+      "qty": 2,
+      "name": "Thought Distortion"
+    }
+  ]
+}

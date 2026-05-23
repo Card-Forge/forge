@@ -1,0 +1,109 @@
+{
+  "archetype": "Jeskai Artifacts",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/jeskai-artifacts.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Authority of the Consuls"
+    },
+    {
+      "qty": 3,
+      "name": "Clay-Fired Bricks"
+    },
+    {
+      "qty": 4,
+      "name": "Cryogen Relic"
+    },
+    {
+      "qty": 1,
+      "name": "Dauntless Scrapbot"
+    },
+    {
+      "qty": 2,
+      "name": "Day of Judgment"
+    },
+    {
+      "qty": 4,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 3,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 2,
+      "name": "Hide on the Ceiling"
+    },
+    {
+      "qty": 4,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 3,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 4,
+      "name": "Perilous Snare"
+    },
+    {
+      "qty": 3,
+      "name": "Pinnacle Starcage"
+    },
+    {
+      "qty": 6,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Repurposing Bay"
+    },
+    {
+      "qty": 4,
+      "name": "Simulacrum Synthesizer"
+    },
+    {
+      "qty": 3,
+      "name": "Spring-Loaded Sawblades"
+    },
+    {
+      "qty": 1,
+      "name": "The Fire Crystal"
+    },
+    {
+      "qty": 4,
+      "name": "United Battlefront"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Braided Net"
+    },
+    {
+      "qty": 3,
+      "name": "High Noon"
+    },
+    {
+      "qty": 1,
+      "name": "Pinnacle Starcage"
+    },
+    {
+      "qty": 3,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 3,
+      "name": "Torpor Orb"
+    },
+    {
+      "qty": 3,
+      "name": "Voice of Victory"
+    }
+  ]
+}

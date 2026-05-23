@@ -1,0 +1,296 @@
+{
+  "archetype": "Sythis, Harvest's Hand",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/sythis-harvest-s-hand.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Aetherflux Reservoir"
+    },
+    {
+      "qty": 1,
+      "name": "Ancestral Mask"
+    },
+    {
+      "qty": 1,
+      "name": "Arachnus Web"
+    },
+    {
+      "qty": 1,
+      "name": "Arasta of the Endless Web"
+    },
+    {
+      "qty": 1,
+      "name": "Arboreal Alliance"
+    },
+    {
+      "qty": 1,
+      "name": "Archetype of Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Arrest"
+    },
+    {
+      "qty": 1,
+      "name": "Assemble the Entmoot"
+    },
+    {
+      "qty": 1,
+      "name": "Aura Shards"
+    },
+    {
+      "qty": 1,
+      "name": "Authority of the Consuls"
+    },
+    {
+      "qty": 1,
+      "name": "Blanchwood Armor"
+    },
+    {
+      "qty": 1,
+      "name": "Bonds of Mortality"
+    },
+    {
+      "qty": 1,
+      "name": "Bound by Moonsilver"
+    },
+    {
+      "qty": 1,
+      "name": "Bower Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Calix, Destiny's Hand"
+    },
+    {
+      "qty": 1,
+      "name": "Captured by the Consulate"
+    },
+    {
+      "qty": 1,
+      "name": "Colossification"
+    },
+    {
+      "qty": 1,
+      "name": "Commander's Authority"
+    },
+    {
+      "qty": 1,
+      "name": "Composer of Spring"
+    },
+    {
+      "qty": 1,
+      "name": "Cowed by Wisdom"
+    },
+    {
+      "qty": 1,
+      "name": "Cryptolith Rite"
+    },
+    {
+      "qty": 1,
+      "name": "Curse of Conformity"
+    },
+    {
+      "qty": 1,
+      "name": "Danitha Capashen, Paragon"
+    },
+    {
+      "qty": 1,
+      "name": "Danitha, New Benalia's Light"
+    },
+    {
+      "qty": 1,
+      "name": "Dawn of Hope"
+    },
+    {
+      "qty": 1,
+      "name": "Destiny Spinner"
+    },
+    {
+      "qty": 1,
+      "name": "Eidolon of Blossoms"
+    },
+    {
+      "qty": 1,
+      "name": "Elven Chorus"
+    },
+    {
+      "qty": 1,
+      "name": "Enchantress's Presence"
+    },
+    {
+      "qty": 1,
+      "name": "Enduring Vitality"
+    },
+    {
+      "qty": 15,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Growing Rites of Itlimoc"
+    },
+    {
+      "qty": 1,
+      "name": "Helix Pinnacle"
+    },
+    {
+      "qty": 1,
+      "name": "Herald of the Pantheon"
+    },
+    {
+      "qty": 1,
+      "name": "Hold for Ransom"
+    },
+    {
+      "qty": 1,
+      "name": "Jukai Naturalist"
+    },
+    {
+      "qty": 1,
+      "name": "Karametra, God of Harvests"
+    },
+    {
+      "qty": 1,
+      "name": "Katilda, Dawnhart Martyr"
+    },
+    {
+      "qty": 1,
+      "name": "Leyline of Hope"
+    },
+    {
+      "qty": 1,
+      "name": "Leyline of Vitality"
+    },
+    {
+      "qty": 1,
+      "name": "Mesa Enchantress"
+    },
+    {
+      "qty": 1,
+      "name": "Nyx-Fleece Ram"
+    },
+    {
+      "qty": 1,
+      "name": "Nyxborn Behemoth"
+    },
+    {
+      "qty": 1,
+      "name": "One with Nature"
+    },
+    {
+      "qty": 1,
+      "name": "Oppressive Rays"
+    },
+    {
+      "qty": 1,
+      "name": "Overwhelming Splendor"
+    },
+    {
+      "qty": 15,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Planar Disruption"
+    },
+    {
+      "qty": 1,
+      "name": "Primeval Bounty"
+    },
+    {
+      "qty": 1,
+      "name": "Purity"
+    },
+    {
+      "qty": 1,
+      "name": "Realmbreaker's Grasp"
+    },
+    {
+      "qty": 1,
+      "name": "Sage's Reverie"
+    },
+    {
+      "qty": 1,
+      "name": "Sanctum Weaver"
+    },
+    {
+      "qty": 1,
+      "name": "Sandwurm Convergence"
+    },
+    {
+      "qty": 1,
+      "name": "Satyr Enchanter"
+    },
+    {
+      "qty": 1,
+      "name": "Selvala, Heart of the Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Setessan Champion"
+    },
+    {
+      "qty": 1,
+      "name": "Soaring Lightbringer"
+    },
+    {
+      "qty": 1,
+      "name": "Spirit Bonds"
+    },
+    {
+      "qty": 1,
+      "name": "Staff of Domination"
+    },
+    {
+      "qty": 1,
+      "name": "Sterling Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Sword of the Paruns"
+    },
+    {
+      "qty": 1,
+      "name": "Sythis, Harvest's Hand"
+    },
+    {
+      "qty": 1,
+      "name": "Test of Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Transcendent Envoy"
+    },
+    {
+      "qty": 1,
+      "name": "Trostani Discordant"
+    },
+    {
+      "qty": 1,
+      "name": "Trostani, Selesnya's Voice"
+    },
+    {
+      "qty": 1,
+      "name": "Trostani, Three Whispers"
+    },
+    {
+      "qty": 1,
+      "name": "Verduran Enchantress"
+    },
+    {
+      "qty": 1,
+      "name": "Wedding Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Well of Lost Dreams"
+    },
+    {
+      "qty": 1,
+      "name": "Yuna, Hope of Spira"
+    }
+  ],
+  "sideboard": []
+}

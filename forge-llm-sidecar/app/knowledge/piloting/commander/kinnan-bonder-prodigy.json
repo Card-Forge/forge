@@ -1,0 +1,118 @@
+{
+  "archetype": "Kinnan, Bonder Prodigy",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Accelerate into massive mana by casting cheap noncreature spells, leveraging Kinnan\u2019s self-damage to fuel a high-impact creature finisher. Wins by out-resourcing midrange and combo decks, and racing aggressive token or ramp strategies before they stabilize.",
+  "win_conditions": [
+    "Deploy high-impact creatures like Krenko, Mob Boss or similar token generators when you have 10+ mana.",
+    "Use remaining mana to pump tokens, cast additional spells, or swing for lethal."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2\u20133 lands (including basics for Kinnan\u2019s damage or fetchable sources), at least one mana accelerator (Sol Ring, Llanowar Elves, or similar), and Kinnan."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 0\u20131 lands, multiple copies of the same ramp spell, or no way to cast Kinnan by turn 2\u20133."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play land, cast Sol Ring or Llanowar Elves.",
+      "Turn 2: Play land, cast Kinnan (or another ramp spell if Kinnan is in hand).",
+      "Sequence lands and noncreature spells to maximize mana output while monitoring life total.",
+      "Prioritize casting cheap cantrips and mana rocks to build your engine before deploying threats."
+    ],
+    "mid_game": [
+      "Balance mana for casting noncreature spells versus holding up for your finisher.",
+      "Avoid over-committing to cantrips if you cannot follow up with a win condition.",
+      "Manage life total carefully, as Kinnan\u2019s damage accumulates quickly.",
+      "Commit threats only when you have sufficient mana to cast your finisher and a plan to protect it or follow up.",
+      "Hold back if the opponent has sweepers, heavy interaction, or a clear path to stabilization."
+    ],
+    "late_game": [
+      "Deploy high-impact creatures like Krenko, Mob Boss or similar token generators when you have 10+ mana.",
+      "Use remaining mana to pump tokens, cast additional spells, or swing for lethal.",
+      "Go all-in when you have a clear path to casting your finisher, the opponent has no sweepers, and you can win before they stabilize or counter your plan."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kinnan, Bonder Prodigy",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Llanowar Elves",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include forgetting Kinnan\u2019s damage, over-casting noncreature spells without a finisher, and mismanaging life total.",
+    "Unique interactions: Kinnan\u2019s damage can be mitigated with early life gain or damage prevention.",
+    "Synergizes heavily with cheap cantrips and mana rocks.",
+    "Always track opponent interaction to time your finisher."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multiple spells to beat counters, or cast your finisher when the opponent has no mana up. Utilize protection, evasion, or split spells if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them by deploying threats earlier. Do not get bogged down in a mana race; use removal on their key ramp pieces and pressure their life total.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal or life gain, then pivot to your game plan. Avoid overextending into combat and focus on shutting down their early threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats and use cantrips to dig past counters. Win before they can set up their late-game plan or find their sweepers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing, having better interaction, or deploying your finisher first. Track each other\u2019s noncreature spell counts, life totals, and interaction to time your plays correctly.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (e.g., Wrath of God, Cyclonic Rift), counters, and targeted removal.",
+    "Note when opponents play cheap interaction versus late-game answers, and track life totals to avoid dying to Kinnan\u2019s damage or combat."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

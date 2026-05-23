@@ -11,11 +11,14 @@
   "mulligan": {
     "keep_criteria": [
       "Hands containing Nykthos, mana dorks, and card draw to find key pieces",
-      "Hands that can reach Devotion 5 by turn 2"
+      "Hands that can reach Devotion 5 by turn 2",
+      "Keep any hand with a playable land plus at least one ramp spell (Farseek/Kodama's Reach) or a turn-2 threat.",
+      "Keep Leyline if you can play it turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Hands that rely heavily on future land drops",
-      "Hands with only one land and no early acceleration or Devotion"
+      "Hands with only one land and no early acceleration or Devotion",
+      "Mulligan hands with only non-lands, lands without ramp/threats, or redundant lands lacking diversity."
     ],
     "examples": [
       {
@@ -63,17 +66,31 @@
     "early_game": [
       "Play mana dorks like Llanowar Elves on turn 1 to accelerate",
       "Prioritize lands and Devotion creatures like Cavalier of Thorns and Old-Growth Troll",
-      "Utilize Leyline of the Guildpact for explosive opening turns"
+      "Utilize Leyline of the Guildpact for explosive opening turns",
+      "Turn 1: Play a land, cast Farseek/Kodama's Reach on it if possible, or play a basic.",
+      "Turn 2: Ramp into a second land, prioritizing Nykthos or Vibrance.",
+      "Play Leyline turn 1 or 2 if drawn.",
+      "Sequence lands to maximize Nykthos triggers by playing multiple lands per turn when possible."
     ],
     "mid_game": [
       "Cast Oath of Nissa and Invasion of Ixalan to dig for Nykthos or Kiora",
       "Use Storm the Festival to generate tokens and additional mana",
-      "Stabilize against aggro by blocking with Old-Growth Troll to create mana"
+      "Stabilize against aggro by blocking with Old-Growth Troll to create mana",
+      "Prioritize playing lands over holding mana",
+      "Nykthos scales with land count, so every land played generates additional mana.",
+      "Avoid overcommitting to hand if a land can be played.",
+      "Manage graveyard if opponent runs strategies that exploit it.",
+      "Commit threats only when you have sufficient mana to answer responses or when the board is clear.",
+      "Hold back if opponent has sweepers or hard removal."
     ],
     "late_game": [
       "Activate Kiora, Behemoth Beckoner to attack with the entire board",
       "Overwhelm opponents with massive creature counts and mana advantage",
-      "Deploy sideboard hate pieces like Tranquil Frillback or Pithing Needle to shut down specific strategies"
+      "Deploy sideboard hate pieces like Tranquil Frillback or Pithing Needle to shut down specific strategies",
+      "Ugin, the Spirit Dragon (board wipe + card draw), Kozilek/Ulamog/Emrakul (game-ending threats), or massive creatures like Gideon.",
+      "Maximize Nykthos triggers and play all lands to reach 10+ mana.",
+      "Go all-in when you have 10+ mana, opponent has no sweepers, or you can resolve a threat through their removal.",
+      "Commit if you can win before their next turn or if you have a clear path to game over."
     ]
   },
   "key_cards": [
@@ -112,7 +129,13 @@
     "Play mana dorks as early as possible to accelerate into Devotion creatures.",
     "Prioritize playing Cavalier of Thorns and Old-Growth Troll quickly to maximize Nykthos's mana generation.",
     "Use Oath of Nissa and Invasion of Ixalan to dig for missing key pieces like Nykthos or Kiora.",
-    "Plan turns carefully, especially the first few, to jump ahead in mana and flood the board."
+    "Plan turns carefully, especially the first few, to jump ahead in mana and flood the board.",
+    "Leyline of the Guildpact enables your ramp but makes you vulnerable to Leyline of Punishment or artifact/enchantment hate.",
+    "Don't overcommit to Nykthos if the opponent has sweepers.",
+    "Ugin, the Spirit Dragon is often the optimal finisher due to its board wipe and card draw.",
+    "Watch for opponent discard",
+    "keep hands with multiple threats or digging tools.",
+    "Avoid overpaying mana when Nykthos triggers can cover costs."
   ],
   "matchups": [
     {
@@ -158,6 +181,31 @@
         "Resource disruption",
         "Value creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Split your ramp and threats into multiple steps, use uncounterable threats (Eldrazi, Ugin), or clear the board with Ugin to draw into game-winners. Avoid casting single massive spells if heavily countered.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race if possible, but prioritize board wipes and removal. Use Ugin to clear their board and draw cards. Don't overextend into their finishers; stabilize first.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal, board wipes, and life gain. Prioritize survival over ramp. Use Nykthos to find answers quickly and stabilize the board before going off.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with threats and use card advantage to out-value them. Ugin is key for clearing their board and drawing into game-winners. Don't let them stabilize with sweepers; commit when they lack answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through card advantage and better sequencing. Use removal to clear their Leyline or threats. Prioritize resolving your own finishers and track their Leyline and hate cards.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -165,10 +213,14 @@
     "Damping Sphere",
     "Supreme Verdict",
     "Global removals and counters",
-    "Discard spells"
+    "Discard spells",
+    "Watch for sweepers (Wrath of God, Damnation), counterspells (Counterspell, Negate), and targeted removal (Path, Swords).",
+    "Note if opponent is playing discard or graveyard hate.",
+    "Track whether they are racing or trying to stabilize."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-nykthos-ramp-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T04:13:41+00:00",
     "model": "local-model",
@@ -186,6 +238,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

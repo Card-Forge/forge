@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Two-land hands with a 1 or 2-drop dragon",
       "Hands with Voice of Victory and early attackers",
-      "Hands that can play a dragon on turn 2"
+      "Hands that can play a dragon on turn 2",
+      "Keep hands with 2-3 lands (Plains, Mountain, or shock lands) and at least one 1- or 2-dropped threat or mana accelerator.",
+      "Prioritize hands containing {W} or {R} sources that enable casting Voice of Victory, Clarion Conqueror, or Nova Hellkite by turn 3."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands",
       "Hands lacking early flying threats",
-      "Hands with only late-game cards like Nova Hellkite"
+      "Hands with only late-game cards like Nova Hellkite",
+      "Mulligan any hand with 3+ lands, no playable first turn, or only 3-drops without land support."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Play lands and low-cost flyers immediately",
       "Use combat tricks to swing for damage",
-      "Apply pressure to force blockers or win quickly"
+      "Apply pressure to force blockers or win quickly",
+      "Turn 1: Play a land, ideally a shock land or fetch/shock combo to ensure color consistency.",
+      "Turn 2: Cast a cheap dragon or mana accelerant, then play a second land.",
+      "Turn 3: Drop a signature dragon or chain into a second threat.",
+      "If holding multiple dragons, sequence cheaper ones first to establish board presence, then swing with haste.",
+      "Always ensure you have a land in hand before committing to the board."
     ],
     "mid_game": [
       "Stabilize curve with 3 and 4-drop dragons",
       "Use Voice of Victory to push lethal or clear blockers",
-      "Maintain board presence with flying threats"
+      "Maintain board presence with flying threats",
+      "Preserve mana for instant-speed responses (Voice of Victory's ability, Nova's sacrifice trigger) while maintaining board presence.",
+      "Avoid overcommitting to the board without protection if facing control.",
+      "Use Clarion Conqueror's token generation to fuel sacrifice outlets or block efficiently.",
+      "Track graveyard activity if facing discard or graveyard hate.",
+      "Commit threats when you have priority to resolve them or when the opponent has no removal.",
+      "Hold back a dragon if you suspect a sweep or targeted removal."
     ],
     "late_game": [
       "Deploy Nova Hellkite as a board wipe and finisher",
       "Use combat tricks to bypass removal",
-      "Close out games with unblockable flying damage"
+      "Close out games with unblockable flying damage",
+      "Nova Hellkite with sacrifice outlets for massive trample swings, or Clarion Conqueror flooding the board with flying tokens.",
+      "Voice of Victory can clear the path by removing key blockers or control permanents.",
+      "Combine with direct damage or pump spells to close out the game.",
+      "Go all-in when you have board advantage, the opponent is tapped out, or you've removed their sweepers/removal.",
+      "Commit when you can swing through their blockers or when they have no answers to flying threats.",
+      "Use Nova's sacrifice ability to bypass blockers or finish the game in a single combat phase."
     ]
   },
   "key_cards": [
@@ -58,7 +78,13 @@
   "sequencing_tips": [
     "Hold Voice of Victory until opponent commits to removal or blockers",
     "Play Clarion Conqueror before casting instants to maximize early pressure",
-    "Save Nova Hellkite for when opponent has multiple threats or board control spells"
+    "Save Nova Hellkite for when opponent has multiple threats or board control spells",
+    "Common mistake: Overcommitting to the board without considering sweepers or targeted removal.",
+    "Always keep a land in hand if possible.",
+    "Nova Hellkite's sacrifice ability is powerful but can backfire if you have no targets",
+    "plan your turns to have a creature ready to sacrifice.",
+    "Voice of Victory's ability is instant speed\u2014use it to remove blockers before combat or answer threats.",
+    "Clarion Conqueror's tokens are great for blocking and fueling sacrifice outlets."
   ],
   "matchups": [
     {
@@ -87,6 +113,31 @@
         "Card draw engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, split your casting across turns, employ discard to remove counterspells, or use instant-speed threats. If possible, bring in cards that cannot be countered or have protection. Force them to use multiple counterspells by threatening multiple paths to victory.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to beat their ramp curve. Use targeted removal for their mana dorks. Do not trade inefficiently; use flying to bypass early ground threats. Force them to use removal on your threats while you stabilize and close the game before their late-game monsters come online.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Voice of Victory to remove key early threats. Hold back a dragon for a counter-swing. Use Clarion tokens to block efficiently. Do not overextend into combat tricks or pump spells. Prioritize life total and board presence over greedy plays.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure consistently, force them to use removal on multiple threats. Use discard to strip key answers. Swing with flying threats they cannot block. Force them to play around your threats while you stabilize. Use Nova's sacrifice ability to remove their key permanents or clear the way for combat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize keeping lands and cheap threats. Use discard to strip their key dragons. Trade efficiently, favoring trades where you get value (e.g., Clarion tokens versus their dragons). Control the board with Voice of Victory's removal ability. Outlast them in the late game by maintaining card advantage and board presence.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -94,10 +145,15 @@
     "Board wipes",
     "Targeted removal",
     "Life gain effects",
-    "Ground-based sweepers"
+    "Ground-based sweepers",
+    "Watch for counterspells (Izzet decks), ramp dorks (Landfall), and token generators (Spellementals).",
+    "Note when they tap out for spells versus creatures.",
+    "Pay attention to graveyard activity and whether they are holding up mana for sweepers or targeted removal.",
+    "Track their life total to calculate when you can swing for lethal."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:12:21+00:00",
     "model": "local-model",
@@ -126,6 +182,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

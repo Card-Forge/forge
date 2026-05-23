@@ -1,0 +1,89 @@
+{
+  "archetype": "Gruul Leyline Aggro",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/gruul-leyline-aggro.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Burnout Bashtronaut"
+    },
+    {
+      "qty": 2,
+      "name": "Callous Sell-Sword"
+    },
+    {
+      "qty": 4,
+      "name": "Dreadmaw's Ire"
+    },
+    {
+      "qty": 3,
+      "name": "Emberheart Challenger"
+    },
+    {
+      "qty": 4,
+      "name": "Full Bore"
+    },
+    {
+      "qty": 4,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 4,
+      "name": "Hired Claw"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of Resonance"
+    },
+    {
+      "qty": 13,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Slickshot Show-Off"
+    },
+    {
+      "qty": 4,
+      "name": "Snakeskin Veil"
+    },
+    {
+      "qty": 3,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 4,
+      "name": "Thornspire Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Turn Inside Out"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Nova Hellkite"
+    },
+    {
+      "qty": 4,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 2,
+      "name": "Razorkin Needlehead"
+    },
+    {
+      "qty": 3,
+      "name": "Shock"
+    },
+    {
+      "qty": 2,
+      "name": "Sunspine Lynx"
+    }
+  ]
+}

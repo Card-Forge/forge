@@ -1,0 +1,603 @@
+{
+  "schema_version": 1,
+  "name": "Domain Zoo",
+  "format": "modern",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Domain Zoo is a Modern aggressive archetype that leverages the Domain mechanic to quickly cast Scion of Draco alongside Leyline of the Guildpact. It uses cheap, high-power creatures like Wild Nacatl and Territorial Kavu to apply early pressure, while the enchantment combo transforms its threats into nearly unblockable forces. The deck relies on a fast start and attrition, adapting its sideboard to a broad metagame.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 19,
+      "cards": [
+        "Archon of Cruelty",
+        "Faithless Looting",
+        "Indatha Triome",
+        "Leyline of the Guildpact",
+        "Territorial Kavu",
+        "Tribal Flames"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Faithless Looting",
+        "Raucous Theater",
+        "Territorial Kavu",
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Bloodstained Mire",
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Verdant Catacombs",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 6,
+      "cards": [
+        "Leyline Binding",
+        "Tribal Flames"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 27,
+      "cards": [
+        "Archon of Cruelty",
+        "Aurora Awakener",
+        "Endurance",
+        "Leyline Binding",
+        "Leyline of the Guildpact",
+        "Scion of Draco",
+        "Territorial Kavu",
+        "Tunnel Ignus"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Fire Magic",
+        "Force of Vigor",
+        "Leyline Binding",
+        "Persist",
+        "Pyroclasm",
+        "Ratchet Bomb",
+        "Tormod's Crypt",
+        "Tribal Flames",
+        "Tunnel Ignus",
+        "Unholy Heat"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 7,
+      "cards": [
+        "Drag to the Bottom",
+        "Fire Magic",
+        "Pyroclasm",
+        "Scion of Draco"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": [
+        "Spell Pierce"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 14,
+      "cards": [
+        "Archon of Cruelty",
+        "Leyline of the Guildpact",
+        "Scion of Draco",
+        "Tribal Flames"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Territorial Kavu"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 36,
+      "cards": [
+        "Archon of Cruelty",
+        "Endurance",
+        "Faithless Looting",
+        "Leyline Binding",
+        "Leyline of the Guildpact",
+        "Persist",
+        "Raucous Theater",
+        "Strategic Betrayal",
+        "Territorial Kavu",
+        "Tormod's Crypt",
+        "Tribal Flames",
+        "Underground Mortuary",
+        "Unholy Heat"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 8,
+      "cards": [
+        "Faithless Looting",
+        "Persist"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Leyline of the Guildpact"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Tribal Flames"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Leyline of the Guildpact",
+        "Scion of Draco"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Pick Your Poison",
+        "Territorial Kavu",
+        "Wear // Tear"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 34,
+      "cards": [
+        "Archon of Cruelty",
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Breeding Pool",
+        "Flooded Strand",
+        "Godless Shrine",
+        "Indatha Triome",
+        "Leyline of the Guildpact",
+        "Misty Rainforest",
+        "Overgrown Tomb",
+        "Raucous Theater",
+        "Sacred Foundry",
+        "Steam Vents",
+        "Stomping Ground",
+        "Territorial Kavu",
+        "Tribal Flames",
+        "Tunnel Ignus",
+        "Underground Mortuary",
+        "Verdant Catacombs",
+        "Watery Grave",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Breeding Pool",
+        "Flooded Strand",
+        "Godless Shrine",
+        "Indatha Triome",
+        "Misty Rainforest",
+        "Overgrown Tomb",
+        "Raucous Theater",
+        "Sacred Foundry",
+        "Steam Vents",
+        "Stomping Ground",
+        "Swamp",
+        "Tunnel Ignus",
+        "Underground Mortuary",
+        "Verdant Catacombs",
+        "Watery Grave",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 1
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.38
+  },
+  "dual_role_cards": [
+    {
+      "card": "Archon of Cruelty",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faithless Looting",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Magic",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Indatha Triome",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leyline Binding",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leyline of the Guildpact",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Persist",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroclasm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raucous Theater",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scion of Draco",
+      "roles": [
+        "combo_pieces",
+        "protection",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Territorial Kavu",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tormod's Crypt",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tribal Flames",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "removal",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tunnel Ignus",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Mortuary",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unholy Heat",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Fetch Savai Triome on turn one and Breeding Pool on turn two to cast Scion of Draco by turn two",
+    "Sequence Leyline Binding with a creature to maximize efficiency without stalling the clock",
+    "Use Fetch Lands to find at least one basic land to avoid being two-for-one'd by opponent's Pick Your Poison",
+    "Hold Stubborn Denial as a Force Spike against early targeted hate like Blood Moon or key spells",
+    "Common mistake: Overlooking graveyard card types when casting spells."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap creatures like Wild Nacatl and Ragavan to establish early pressure"
+    },
+    {
+      "trigger": "early game",
+      "line": "Fetch Savai Triome and cycle Shock Lands to establish Domain quickly"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Leyline of the Guildpact or use Stubborn Denial as early interaction"
+    }
+  ],
+  "kill_priority": [
+    "Leyline of the Guildpact",
+    "Leyline Binding",
+    "Tribal Flames",
+    "Scion of Draco",
+    "Archon of Cruelty",
+    "Aurora Awakener",
+    "Endurance",
+    "Territorial Kavu"
+  ],
+  "interaction_to_disrupt": [
+    "Spell Pierce",
+    "Archon of Cruelty",
+    "Leyline of the Guildpact",
+    "Scion of Draco",
+    "Tribal Flames",
+    "Fire Magic",
+    "Force of Vigor",
+    "Leyline Binding"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/domain-zoo.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

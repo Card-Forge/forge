@@ -1,0 +1,113 @@
+{
+  "archetype": "Ruby Storm",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/ruby-storm.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Big Score"
+    },
+    {
+      "qty": 4,
+      "name": "Desperate Ritual"
+    },
+    {
+      "qty": 3,
+      "name": "First Day of Class"
+    },
+    {
+      "qty": 4,
+      "name": "Geothermal Crevice"
+    },
+    {
+      "qty": 4,
+      "name": "Glimpse the Impossible"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Anarchomancer"
+    },
+    {
+      "qty": 1,
+      "name": "Gruul Turf"
+    },
+    {
+      "qty": 4,
+      "name": "Hickory Woodlot"
+    },
+    {
+      "qty": 4,
+      "name": "Manamorphose"
+    },
+    {
+      "qty": 5,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Pirate's Pillage"
+    },
+    {
+      "qty": 4,
+      "name": "Reckless Impulse"
+    },
+    {
+      "qty": 4,
+      "name": "Sandstone Needle"
+    },
+    {
+      "qty": 4,
+      "name": "Seething Song"
+    },
+    {
+      "qty": 2,
+      "name": "Seize the Storm"
+    },
+    {
+      "qty": 4,
+      "name": "Thornscape Familiar"
+    },
+    {
+      "qty": 4,
+      "name": "Wrenn's Resolve"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abandon Attachments"
+    },
+    {
+      "qty": 1,
+      "name": "Firebending Lesson"
+    },
+    {
+      "qty": 1,
+      "name": "Flaring Pain"
+    },
+    {
+      "qty": 1,
+      "name": "Gruul Turf"
+    },
+    {
+      "qty": 1,
+      "name": "Origin of Metalbending"
+    },
+    {
+      "qty": 4,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Waterbending Lesson"
+    },
+    {
+      "qty": 3,
+      "name": "Weather the Storm"
+    }
+  ]
+}

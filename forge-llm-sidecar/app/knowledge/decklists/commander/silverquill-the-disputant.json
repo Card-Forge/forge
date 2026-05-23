@@ -1,0 +1,292 @@
+{
+  "archetype": "Silverquill, the Disputant",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/silverquill-the-disputant.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Adeline, Resplendent Cathar"
+    },
+    {
+      "qty": 1,
+      "name": "Aerith Rescue Mission"
+    },
+    {
+      "qty": 1,
+      "name": "Agent Venom"
+    },
+    {
+      "qty": 1,
+      "name": "Ainok Strike Leader"
+    },
+    {
+      "qty": 1,
+      "name": "Antiquities on the Loose"
+    },
+    {
+      "qty": 1,
+      "name": "Aron, Benalia's Ruin"
+    },
+    {
+      "qty": 1,
+      "name": "Bartolom\u00e9 del Presidio"
+    },
+    {
+      "qty": 1,
+      "name": "Big Mother Mouser"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodthirsty Conqueror"
+    },
+    {
+      "qty": 1,
+      "name": "Buzzard-Wasp Colony"
+    },
+    {
+      "qty": 1,
+      "name": "Circle of Power"
+    },
+    {
+      "qty": 1,
+      "name": "Come Back Wrong"
+    },
+    {
+      "qty": 1,
+      "name": "Cornered by Black Mages"
+    },
+    {
+      "qty": 1,
+      "name": "Corrupted Conviction"
+    },
+    {
+      "qty": 1,
+      "name": "Cost of Brilliance"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Divine Visitation"
+    },
+    {
+      "qty": 1,
+      "name": "Duty Beyond Death"
+    },
+    {
+      "qty": 1,
+      "name": "End of the Hunt"
+    },
+    {
+      "qty": 1,
+      "name": "Endless Foot Assault"
+    },
+    {
+      "qty": 1,
+      "name": "Epicure of Blood"
+    },
+    {
+      "qty": 1,
+      "name": "Fake Your Own Death"
+    },
+    {
+      "qty": 1,
+      "name": "Fell"
+    },
+    {
+      "qty": 1,
+      "name": "Foot Headquarters"
+    },
+    {
+      "qty": 1,
+      "name": "Forum of Amity"
+    },
+    {
+      "qty": 1,
+      "name": "Friendly Neighborhood"
+    },
+    {
+      "qty": 1,
+      "name": "Grand Crescendo"
+    },
+    {
+      "qty": 1,
+      "name": "Hei Bai, Spirit of Balance"
+    },
+    {
+      "qty": 1,
+      "name": "Honor"
+    },
+    {
+      "qty": 1,
+      "name": "Hop to It"
+    },
+    {
+      "qty": 1,
+      "name": "Infernal Grasp"
+    },
+    {
+      "qty": 1,
+      "name": "Informed Inkwright"
+    },
+    {
+      "qty": 1,
+      "name": "Isolated Chapel"
+    },
+    {
+      "qty": 1,
+      "name": "Join the Maestros"
+    },
+    {
+      "qty": 1,
+      "name": "Lingering Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Marauding Blight-Priest"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Palms Oasis"
+    },
+    {
+      "qty": 1,
+      "name": "Morbid Opportunist"
+    },
+    {
+      "qty": 1,
+      "name": "Ninja Teen"
+    },
+    {
+      "qty": 1,
+      "name": "Pain 101"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 15,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Rabid Attack"
+    },
+    {
+      "qty": 1,
+      "name": "Rat King, Pale Piper"
+    },
+    {
+      "qty": 1,
+      "name": "Release the Dogs"
+    },
+    {
+      "qty": 1,
+      "name": "Resentful Revelation"
+    },
+    {
+      "qty": 1,
+      "name": "Revenge of the Rats"
+    },
+    {
+      "qty": 1,
+      "name": "Risky Shortcut"
+    },
+    {
+      "qty": 1,
+      "name": "Sanguine Bond"
+    },
+    {
+      "qty": 1,
+      "name": "Scolding Administrator"
+    },
+    {
+      "qty": 1,
+      "name": "Sephiroth, Fabled SOLDIER"
+    },
+    {
+      "qty": 1,
+      "name": "Shattered Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Shredder, Shadow Master"
+    },
+    {
+      "qty": 1,
+      "name": "Silverquill, the Disputant"
+    },
+    {
+      "qty": 1,
+      "name": "Sinkhole Surveyor"
+    },
+    {
+      "qty": 1,
+      "name": "Skullclamp"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "South Wind Avatar"
+    },
+    {
+      "qty": 1,
+      "name": "Stirring Hopesinger"
+    },
+    {
+      "qty": 16,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of the False God"
+    },
+    {
+      "qty": 1,
+      "name": "Thalisse, Reverent Medium"
+    },
+    {
+      "qty": 1,
+      "name": "The Last Ronin's Technique"
+    },
+    {
+      "qty": 1,
+      "name": "Timeline Culler"
+    },
+    {
+      "qty": 1,
+      "name": "Trouble in Pairs"
+    },
+    {
+      "qty": 1,
+      "name": "Vincent's Limit Break"
+    },
+    {
+      "qty": 1,
+      "name": "Welcoming Vampire"
+    },
+    {
+      "qty": 1,
+      "name": "Will of the Mardu"
+    },
+    {
+      "qty": 1,
+      "name": "Zombify"
+    }
+  ],
+  "sideboard": []
+}

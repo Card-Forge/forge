@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early interaction like Thoughtseize",
       "Hands containing Tree of Perdition or Agatha's Soul Cauldron with lands",
-      "Hands with efficient one- or two-drop creatures"
+      "Hands with efficient one- or two-drop creatures",
+      "Keep hands with 2-3 lands, Thoughtseize, and at least one of Tree of Perdition or Agatha's Soul Cauldron.",
+      "Prioritize hands that can play a land and cast Thoughtseize on turn 1."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or early plays",
       "Hands with only high-cost cards and no interaction",
-      "Hands missing sacrifice outlets or card draw"
+      "Hands missing sacrifice outlets or card draw",
+      "Mulligan if you have 0-1 lands, no disruption, or only high-cost threats without mana development."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Play lands and efficient creatures to establish board presence",
       "Use Thoughtseize to disrupt opponent's game plan",
-      "Prioritize keeping hands that can deploy Tree or Agatha by turn three"
+      "Prioritize keeping hands that can deploy Tree or Agatha by turn three",
+      "Turn 1: Play a land, cast Thoughtseize to strip key disruption or early threats.",
+      "Turn 2: Develop your mana base, deploy Agatha's Soul Cauldron or a sacrifice outlet, and begin sacrificing low-cost creatures or artifacts to fuel the engine.",
+      "Sequence lands to ensure you can hit 2-drop and 3-drop mana bases without flooding, prioritizing dual lands or shock lands if available."
     ],
     "mid_game": [
       "Activate Tree of Perdition's sacrifice ability to deal direct damage and thin your deck",
       "Use Agatha's Soul Cauldron to convert excess creatures into card advantage",
-      "Maintain board control while cycling through your deck efficiently"
+      "Maintain board control while cycling through your deck efficiently",
+      "Balance mana between developing your engine, casting disruption, and deploying threats.",
+      "Prioritize keeping Thoughtseize for critical turns and use the graveyard as a resource rather than a liability.",
+      "Sacrifice strategically to maximize Cauldron value without overextending into sweepers.",
+      "Commit Tree of Perdition only when you can protect it or have removal ready for key threats.",
+      "Hold back on overcommitting if the opponent has sweepers or heavy removal.",
+      "Use discard to delay their game plan while you stabilize and establish board presence."
     ],
     "late_game": [
       "Leverage massive card draw from Agatha to find answers or finishers",
       "Continue sacrificing creatures to Tree for incremental damage",
-      "Close out games with efficient threats and resource superiority"
+      "Close out games with efficient threats and resource superiority",
+      "Tree of Perdition as a game-winning threat, often fueled by Cauldron-generated value or graveyard recursion.",
+      "Secondary finishers include efficient removal clearing the board and a resilient midrange threat that can close out the game.",
+      "Go all-in when you have established Cauldron value, the opponent has no sweepers, or you can safely cast Tree of Perdition with protection/disruption ready.",
+      "Also commit when you can out-value them in trades and have the resources to follow up."
     ]
   },
   "key_cards": [
@@ -59,7 +75,11 @@
     "Hold up Thoughtseize for instant-speed disruption when possible",
     "Sacrifice creatures to Tree of Perdition before casting new threats to maximize damage output",
     "Use Agatha's Soul Cauldron to draw into answers before committing to large spells",
-    "Prioritize keeping one creature on the board to enable sacrifice abilities while maintaining combat pressure"
+    "Prioritize keeping one creature on the board to enable sacrifice abilities while maintaining combat pressure",
+    "Common mistakes include overcommitting to the Cauldron engine without board presence, failing to use Thoughtseize proactively, and mismanaging the graveyard as a resource.",
+    "Tree of Perdition likely scales with sacrifices or graveyard interactions, so sequence your plays to maximize its impact.",
+    "Watch for format-specific hate cards like Rest in Peace or Leyline of the Void, and adjust your sacrifice strategy accordingly.",
+    "Practice reading opponent hands to optimize Thoughtseize targets and avoid dead draws."
   ],
   "matchups": [
     {
@@ -88,16 +108,35 @@
         "Protection spells",
         "Early setup pieces"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtseize to strip counterspells early. Cast threats in response to their spells, use cheap pingers or sacrifices to bypass counters, and rely on uncounterable effects or layered spells if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Thoughtseize to disrupt mana dorks. Use removal on key ramp spells. If they stabilize, transition to a grindier plan with Cauldron value and targeted removal to out-resource them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize Thoughtseize on their key pieces. Use Cauldron value to out-resource them. Protect Tree of Perdition with targeted removal and discard, and be willing to trade up in the late game.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
     "Counterspells and hand disruption",
-    "Card draw engines that outpace Agatha"
+    "Card draw engines that outpace Agatha",
+    "Watch for sweepers (e.g., Wrath of God, Damnation), counterspells, and graveyard recursion.",
+    "Note if the opponent is playing token generators or ramp spells, as these dictate whether you need to race or grind.",
+    "Track their hand size and discard patterns to anticipate their next move."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:47:21+00:00",
     "model": "local-model",
@@ -113,6 +152,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

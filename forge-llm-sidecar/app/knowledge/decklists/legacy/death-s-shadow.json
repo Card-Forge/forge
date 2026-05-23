@@ -1,0 +1,137 @@
+{
+  "archetype": "Death's Shadow",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/death-s-shadow.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Daze"
+    },
+    {
+      "qty": 4,
+      "name": "Death's Shadow"
+    },
+    {
+      "qty": 1,
+      "name": "Dress Down"
+    },
+    {
+      "qty": 1,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 3,
+      "name": "Flow State"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 3,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 4,
+      "name": "Moonshadow"
+    },
+    {
+      "qty": 2,
+      "name": "Murktide Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Reanimate"
+    },
+    {
+      "qty": 2,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 4,
+      "name": "Street Wraith"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 2,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 3,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 3,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 1,
+      "name": "Brazen Borrower"
+    },
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Engineered Explosives"
+    },
+    {
+      "qty": 1,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Massacre"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Unlicensed Hearse"
+    }
+  ]
+}

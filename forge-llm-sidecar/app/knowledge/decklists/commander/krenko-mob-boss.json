@@ -1,0 +1,280 @@
+{
+  "archetype": "Krenko, Mob Boss",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/krenko-mob-boss.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Battle Cry Goblin"
+    },
+    {
+      "qty": 1,
+      "name": "Beetleback Chief"
+    },
+    {
+      "qty": 1,
+      "name": "Boggart Shenanigans"
+    },
+    {
+      "qty": 1,
+      "name": "Brightstone Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Cathartic Reunion"
+    },
+    {
+      "qty": 1,
+      "name": "Chromatic Star"
+    },
+    {
+      "qty": 1,
+      "name": "Clickslither"
+    },
+    {
+      "qty": 1,
+      "name": "Commander's Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Dragon Fodder"
+    },
+    {
+      "qty": 1,
+      "name": "Ember Hauler"
+    },
+    {
+      "qty": 1,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 1,
+      "name": "Fire Diamond"
+    },
+    {
+      "qty": 1,
+      "name": "Foundry Street Denizen"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Bombardment"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Bushwhacker"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Chieftain"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Chirurgeon"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Cratermaker"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Grenade"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Hero"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Instigator"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin King"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Lackey"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Lookout"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Matron"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Motivator"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Piledriver"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Pyromancer"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Rabblemaster"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Ringleader"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Sledder"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Soothsayer"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Trashmaster"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Vandal"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin War Strike"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Warchief"
+    },
+    {
+      "qty": 1,
+      "name": "Hobgoblin Bandit Lord"
+    },
+    {
+      "qty": 1,
+      "name": "Hordeling Outburst"
+    },
+    {
+      "qty": 1,
+      "name": "Impact Tremors"
+    },
+    {
+      "qty": 1,
+      "name": "Krenko's Command"
+    },
+    {
+      "qty": 1,
+      "name": "Krenko, Mob Boss"
+    },
+    {
+      "qty": 1,
+      "name": "Krenko, Tin Street Kingpin"
+    },
+    {
+      "qty": 1,
+      "name": "Legion Warboss"
+    },
+    {
+      "qty": 1,
+      "name": "Mass Hysteria"
+    },
+    {
+      "qty": 1,
+      "name": "Mind Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Mogg Fanatic"
+    },
+    {
+      "qty": 1,
+      "name": "Mogg Raider"
+    },
+    {
+      "qty": 1,
+      "name": "Mogg War Marshal"
+    },
+    {
+      "qty": 33,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Pashalik Mons"
+    },
+    {
+      "qty": 1,
+      "name": "Pyre of Heroes"
+    },
+    {
+      "qty": 1,
+      "name": "Quest for the Goblin Lord"
+    },
+    {
+      "qty": 1,
+      "name": "Raging Goblin"
+    },
+    {
+      "qty": 1,
+      "name": "Rite of Flame"
+    },
+    {
+      "qty": 1,
+      "name": "Shared Animosity"
+    },
+    {
+      "qty": 1,
+      "name": "Siege-Gang Commander"
+    },
+    {
+      "qty": 1,
+      "name": "Simian Spirit Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Skirk Prospector"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Stingscourger"
+    },
+    {
+      "qty": 1,
+      "name": "Swiftfoot Boots"
+    },
+    {
+      "qty": 1,
+      "name": "Tarfire"
+    },
+    {
+      "qty": 1,
+      "name": "Thrill of Possibility"
+    },
+    {
+      "qty": 1,
+      "name": "Torbran, Thane of Red Fell"
+    },
+    {
+      "qty": 1,
+      "name": "Torch Courier"
+    },
+    {
+      "qty": 1,
+      "name": "Volley Veteran"
+    },
+    {
+      "qty": 1,
+      "name": "Warren Instigator"
+    }
+  ],
+  "sideboard": []
+}

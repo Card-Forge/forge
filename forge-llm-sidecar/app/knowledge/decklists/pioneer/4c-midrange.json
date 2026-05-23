@@ -1,0 +1,141 @@
+{
+  "archetype": "4c Midrange",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/4c-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Archfiend of the Dross"
+    },
+    {
+      "qty": 3,
+      "name": "Ashling, Rekindled"
+    },
+    {
+      "qty": 3,
+      "name": "Beseech the Mirror"
+    },
+    {
+      "qty": 4,
+      "name": "Blackcleave Cliffs"
+    },
+    {
+      "qty": 1,
+      "name": "Blazemire Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 4,
+      "name": "Bloodtithe Harvester"
+    },
+    {
+      "qty": 1,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 2,
+      "name": "Darkslick Shores"
+    },
+    {
+      "qty": 4,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Go for the Throat"
+    },
+    {
+      "qty": 1,
+      "name": "Hive of the Eye Tyrant"
+    },
+    {
+      "qty": 1,
+      "name": "Kolaghan's Command"
+    },
+    {
+      "qty": 3,
+      "name": "Metamorphic Alteration"
+    },
+    {
+      "qty": 2,
+      "name": "Sheoldred, the Apocalypse"
+    },
+    {
+      "qty": 2,
+      "name": "Shipwreck Marsh"
+    },
+    {
+      "qty": 3,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 2,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Xander's Lounge"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Ashiok, Dream Render"
+    },
+    {
+      "qty": 1,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 2,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Go Blank"
+    },
+    {
+      "qty": 2,
+      "name": "Kaito, Bane of Nightmares"
+    },
+    {
+      "qty": 1,
+      "name": "Languish"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 2,
+      "name": "Ray of Enfeeblement"
+    },
+    {
+      "qty": 2,
+      "name": "Unlicensed Hearse"
+    }
+  ]
+}

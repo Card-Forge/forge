@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Fatal Push and a one-drop creature",
       "Hands containing Consult the Star Charts and early interaction",
-      "Hands with two removal spells and a Shark Typhoon"
+      "Hands with two removal spells and a Shark Typhoon",
+      "Keep hands with 2-3 lands (including fetches/shocks), at least one turn-1 interaction (Thoughtseize) or turn-2 removal (Fatal Push), and a threat or engine.",
+      "Prioritize keeping lands that can untap for casting Fatal Push or Thoughtseize on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Hands lacking any one-mana spells or early interaction",
       "Hands with only high-cost creatures and no draw",
-      "Hands missing land drops for the first three turns"
+      "Hands missing land drops for the first three turns",
+      "Mulligan hands with 0-1 lands, 3+ non-basic lands without fetches, or hands lacking early interaction/threats."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and cast Fatal Push to remove early aggressive threats",
       "Use Consult the Star Charts to filter into better hands and draw cards",
-      "Deploy Shark Typhoon to establish board presence and apply pressure"
+      "Deploy Shark Typhoon to establish board presence and apply pressure",
+      "Turn 1: Play a land, cast Thoughtseize if available, or hold for interaction.",
+      "Turn 2: Deploy Fatal Push against aggro, play a threat (Tarmogoyf/Bloodtithe Harvester), or begin casting Consult the Star Charts.",
+      "Sequence lands by playing non-basics first, then fetch/shock as needed to maintain hand size above 3.",
+      "Aim to have a creature with power 4+ by turn 3 to enable Shark Typhoon and discounted Star Charts."
     ],
     "mid_game": [
       "Trade efficiently with removal while preserving card advantage",
       "Use Shark Typhoon's ability to deal direct damage or block efficiently",
-      "Filter draws to find larger threats and additional interaction"
+      "Filter draws to find larger threats and additional interaction",
+      "Prioritize hand size >3",
+      "use Consult the Star Charts to dig for answers when resources are low.",
+      "Manage your graveyard carefully\u2014exploit it for value when safe, but respect graveyard hate.",
+      "Avoid overcommitting mana to a single threat without protection.",
+      "Cast Star Charts when you control a 4+ power creature to maximize card advantage.",
+      "Commit threats when you have interaction to clear blockers or when the opponent is tapped out."
     ],
     "late_game": [
       "Stabilize the board with resilient creatures and continued card draw",
       "Leverage Shark Typhoon's flying to bypass blockers and close the game",
-      "Maintain pressure while outlasting opponents through superior resource management"
+      "Maintain pressure while outlasting opponents through superior resource management",
+      "Shark Typhoon (attacks for 4+ and draws cards), Consult the Star Charts (digs for win conditions or answers), and resilient threats like Tarmogoyf.",
+      "Secure the game by transitioning to card advantage when threats are blocked or by attacking with Typhoon when the opponent has no sweepers.",
+      "Go all-in when you hold card advantage, have interaction to clear blockers, or the opponent is tapped out/low on resources.",
+      "Commit when you can trade favorably or close the game in 1-2 turns.",
+      "Use Shark Typhoon to pressure when you know they lack board wipes."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Hold Fatal Push for combat tricks to maximize value against aggressive decks",
     "Cast Consult the Star Charts before playing threats to ensure you have answers ready",
-    "Use Shark Typhoon's direct damage ability when you have a clear path to victory or need to close out a game quickly"
+    "Use Shark Typhoon's direct damage ability when you have a clear path to victory or need to close out a game quickly",
+    "Consult the Star Charts is powerful but can strand you if you lack mana or need immediate answers",
+    "cast it when you have a clear plan and a 4+ power creature.",
+    "Shark Typhoon is vulnerable to sweepers but excels at closing games when unanswered.",
+    "Avoid overextending into sweepers, and always track graveyard hate.",
+    "Common mistake: overcommitting to a single threat without protection or ignoring hand size maintenance.",
+    "Practice recognizing when to pivot from midrange to control or aggression based on the opponent's resources."
   ],
   "matchups": [
     {
@@ -87,15 +111,34 @@
         "Card draw engines",
         "Efficient blockers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap threats, discard counterspells with Thoughtseize, or go wide/small. Cast threats at end step or use instant-speed interaction to bypass counters. Force them to use multiple counters on different threats to exhaust their resources.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early interaction (Thoughtseize, Fatal Push) to disrupt mana dorks. Discard ramp spells, stabilize with removal, and avoid overextending into their late-game finishers. Win the early game and transition to value before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the interaction war by using Thoughtseize to disrupt their engines. Win the card advantage race and sideboard in disruption/graveyard hate. Trade favorably and avoid overextending into their removal. Control the board state and force them to make the first mistake.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early one-drop creatures",
     "Flying threats that bypass your blockers",
-    "Board wipes that reset the board state"
+    "Board wipes that reset the board state",
+    "Watch for sweepers (Supreme Verdict, Anger), counterspells, and graveyard hate (Rest in Peace, Grafdigger's Cage).",
+    "Note when opponents tap out for big spells or discard their hand dry.",
+    "Track when they run out of interaction to apply pressure, and monitor their graveyard for recursion or combo pieces."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:44:37+00:00",
     "model": "local-model",
@@ -111,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

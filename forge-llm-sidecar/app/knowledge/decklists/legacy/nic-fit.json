@@ -1,0 +1,129 @@
+{
+  "archetype": "Nic Fit",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/nic-fit.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Alpha Deathclaw"
+    },
+    {
+      "qty": 1,
+      "name": "Bayou"
+    },
+    {
+      "qty": 4,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Cabal Therapy"
+    },
+    {
+      "qty": 3,
+      "name": "Chaos Defiler"
+    },
+    {
+      "qty": 4,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Field of the Dead"
+    },
+    {
+      "qty": 4,
+      "name": "Flare of Cultivation"
+    },
+    {
+      "qty": 3,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Green Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Grist, the Hunger Tide"
+    },
+    {
+      "qty": 1,
+      "name": "Lazotep Quarry"
+    },
+    {
+      "qty": 1,
+      "name": "Leovold, Emissary of Trest"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Nurturing Peatland"
+    },
+    {
+      "qty": 4,
+      "name": "Overlord of the Balemurk"
+    },
+    {
+      "qty": 1,
+      "name": "Professor Dellian Fel"
+    },
+    {
+      "qty": 3,
+      "name": "Snow-Covered Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "The Rise of Sozin"
+    },
+    {
+      "qty": 1,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 2,
+      "name": "Up the Beanstalk"
+    },
+    {
+      "qty": 4,
+      "name": "Veteran Explorer"
+    },
+    {
+      "qty": 4,
+      "name": "Vibrance"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 4,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 3,
+      "name": "Opposition Agent"
+    }
+  ]
+}

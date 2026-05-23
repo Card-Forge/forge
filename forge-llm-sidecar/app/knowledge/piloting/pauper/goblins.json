@@ -1,0 +1,125 @@
+{
+  "archetype": "Goblins",
+  "format": "pauper",
+  "strategy_type": "control",
+  "overview": "A recursive, aggressive tempo deck that floods the board with cheap goblins, leverages Ichor Wellspring for mana acceleration and extra spells, and uses Unearth to replay key threats from the graveyard. It aims to overwhelm slower decks before they stabilize and out-value control through relentless recursion and search effects.",
+  "win_conditions": [
+    "Unearthed threats (Goblin Piker, Skirk Prospector, Goblin Chieftain), Wellspring-fueled big threats, or combat with a full board of goblins.",
+    "Use recursion to replay key threats after sweepers or removal."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (preferably duals or fetches), at least one turn-1 goblin (Goblin Guide, Skirk Prospector), and early recursion/search pieces.",
+      "Prioritize hands that can play a land and a goblin on turn 1."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no early threats, 2 lands with no goblins or Wellspring, or hands with only high-cost spells."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play land, cast Goblin Guide or Skirk Prospector.",
+      "Turn 2: Play land, cast another goblin or Ichor Wellspring.",
+      "Sequence Wellspring early to enable Unearth recursion or cast a mid-game threat.",
+      "Use Goblin Matron on turn 2 or 3 to fetch Unearth targets, lands, or specific answers.",
+      "Tap Prospector for damage or card draw to maintain tempo."
+    ],
+    "mid_game": [
+      "Conserve mana to keep Unearth targets in hand or graveyard.",
+      "Use Ichor Wellspring to fuel multiple spells or cast a game-winning threat.",
+      "Use Matron to find specific answers or threats rather than hoarding it.",
+      "Track opponent's graveyard and exile effects to avoid dead recursion.",
+      "Commit aggressively when the opponent has no sweepers or targeted removal.",
+      "Hold back and stabilize if they have board wipes or heavy interaction.",
+      "Use Prospector taps for tempo or damage, but avoid overextending into sweepers.",
+      "Prioritize trading goblins efficiently to maintain board presence."
+    ],
+    "late_game": [
+      "Unearthed threats (Goblin Piker, Skirk Prospector, Goblin Chieftain), Wellspring-fueled big threats, or combat with a full board of goblins.",
+      "Use recursion to replay key threats after sweepers or removal.",
+      "Go all-in when the opponent has no sweepers, low life total, or you have graveyard recursion ready.",
+      "Commit when you can trade efficiently or when your Wellspring engine is fully online."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Goblin Matron",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Ichor Wellspring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Unearth",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overextending into sweepers, forgetting to protect Unearth targets, mismanaging Wellspring mana, and not tracking graveyard exile.",
+    "Unique interactions include using Wellspring to pay multiple Unearth costs in a single turn and Matron fetching Unearth targets from outside the game.",
+    "Always prioritize life total in aggressive matchups and track opponent's removal to time your Unearth plays.",
+    "Remember that Unearthed creatures return to the battlefield, not hand, and are exiled at end of turn, so plan your recursion and combat accordingly."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast cheap threats to force multiple counters, use Unearth in response to sweepers, and use Matron to find answers. Attack with multiple threats to stretch their counter spells, and consider sideboarding in more uncounterable threats or discard to hit their counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to beat them out. Use discard to hit their ramp spells and mana rocks. Bring in artifact hate and early threats to disrupt their acceleration. Don't let them stabilize into big threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with discard, early threats, and artifact hate. Don't overextend into their combat tricks. Use Wellspring to cast a mid-game threat that outclasses their early board. Prioritize life total and resource denial.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early and use recursion to out-value them. Attack through removal and use Wellspring to cast multiple threats. Use Matron to find answers to their key spells. Don't let them stabilize; keep the pressure on and use graveyard recursion to out-resource them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing graveyard recursion and discard. Use Matron to find better Unearth targets and disrupt their engine. Track their graveyard and exile effects. Win by out-recursing and out-drawing, using Wellspring to fuel multiple Unearth plays.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath of God, Day of Judgment, etc.), counterspells, and graveyard hate.",
+    "Note when the opponent taps out for big threats or has unanswered removal.",
+    "Track their life total and resource depletion to time your Unearth plays."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/pauper.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

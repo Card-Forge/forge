@@ -1,0 +1,396 @@
+{
+  "schema_version": 1,
+  "name": "Mono-White Initiative",
+  "format": "vintage",
+  "colors": [
+    "W"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Mono-White Initiative leverages fast mana and low-cost attackers to establish immediate board presence in Vintage. By attacking early and often, the deck triggers growth and card draw abilities to outpace opponents before they can stabilize. The strategy relies on maintaining relentless pressure while efficiently cycling through resources.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Trinisphere"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 13,
+      "cards": [
+        "Chrome Mox",
+        "Seasoned Dungeoneer",
+        "Vexing Bauble",
+        "White Plume Adventurer"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Chrome Mox",
+        "Grafdigger's Cage",
+        "Seasoned Dungeoneer"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Chrome Mox",
+        "Seasoned Dungeoneer",
+        "White Plume Adventurer"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 42,
+      "cards": [
+        "Anointed Peacekeeper",
+        "Archon of Emeria",
+        "Chrome Mox",
+        "Clarion Conqueror",
+        "Containment Priest",
+        "Karn, the Great Creator",
+        "Mox Emerald",
+        "Mox Jet",
+        "Mox Pearl",
+        "Mox Ruby",
+        "Seasoned Dungeoneer",
+        "Thorn of Amethyst",
+        "Void Mirror",
+        "White Plume Adventurer",
+        "Witch Enchanter"
+      ],
+      "mainboard_count": 38,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Ancient Tomb",
+        "Karakas",
+        "Mana Crypt",
+        "Strip Mine",
+        "Swords to Plowshares",
+        "Wasteland"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "White Plume Adventurer"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Cavern of Souls",
+        "Seasoned Dungeoneer"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Chrome Mox",
+        "Grafdigger's Cage",
+        "Seasoned Dungeoneer",
+        "White Plume Adventurer"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 1,
+      "cards": [
+        "Karakas"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Seasoned Dungeoneer"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Seasoned Dungeoneer"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 13,
+      "cards": [
+        "Archon of Emeria",
+        "Grafdigger's Cage",
+        "Light of Day",
+        "Mindbreak Trap",
+        "Null Rod"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 9
+    },
+    "mana_fixing": {
+      "target_count": 28,
+      "cards": [
+        "Ancient Tomb",
+        "Black Lotus",
+        "Cavern of Souls",
+        "Chrome Mox",
+        "Karakas",
+        "Seasoned Dungeoneer",
+        "Strip Mine",
+        "Trinisphere",
+        "Wasteland",
+        "White Plume Adventurer"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 16,
+      "cards": [
+        "Ancient Tomb",
+        "Cavern of Souls",
+        "Karakas",
+        "Plains",
+        "Strip Mine",
+        "Wasteland"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Karn, the Great Creator"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.3
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archon of Emeria",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chrome Mox",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karakas",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karn, the Great Creator",
+      "roles": [
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seasoned Dungeoneer",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strip Mine",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Trinisphere",
+      "roles": [
+        "mana_fixing",
+        "mana_reducers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "White Plume Adventurer",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always attack with Seasoned Dungeoneer before blocking to draw cards",
+    "Play Chrome Mox before lands to optimize early turns",
+    "Attack with White Plume Adventurer even if it dies, as the counter triggers on attack declaration",
+    "Prioritize damage over board control in the early game",
+    "Avoid overcommitting to the board without card advantage."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Chrome Mox immediately to accelerate mana"
+    },
+    {
+      "trigger": "early game",
+      "line": "Drop White Plume Adventurer and Seasoned Dungeoneer on curve"
+    },
+    {
+      "trigger": "early game",
+      "line": "Attack every turn to trigger abilities and establish pressure"
+    }
+  ],
+  "kill_priority": [
+    "Seasoned Dungeoneer",
+    "Chrome Mox",
+    "White Plume Adventurer",
+    "Karn, the Great Creator",
+    "Anointed Peacekeeper",
+    "Archon of Emeria",
+    "Clarion Conqueror",
+    "Containment Priest"
+  ],
+  "interaction_to_disrupt": [
+    "Cavern of Souls",
+    "Seasoned Dungeoneer",
+    "Ancient Tomb",
+    "Karakas",
+    "Mana Crypt",
+    "Strip Mine",
+    "Swords to Plowshares",
+    "Wasteland"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/mono-white-initiative.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "archetype": "Golgari Gardens",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/golgari-gardens.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 2,
+      "name": "Campfire"
+    },
+    {
+      "qty": 4,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 2,
+      "name": "Crypt Rats"
+    },
+    {
+      "qty": 4,
+      "name": "Defile"
+    },
+    {
+      "qty": 2,
+      "name": "Desert"
+    },
+    {
+      "qty": 2,
+      "name": "Drown in Sorrow"
+    },
+    {
+      "qty": 3,
+      "name": "Eviscerator's Insight"
+    },
+    {
+      "qty": 4,
+      "name": "Fanatical Offering"
+    },
+    {
+      "qty": 1,
+      "name": "Haunted Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Ichor Wellspring"
+    },
+    {
+      "qty": 4,
+      "name": "Khalni Garden"
+    },
+    {
+      "qty": 3,
+      "name": "Lembas"
+    },
+    {
+      "qty": 3,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 2,
+      "name": "Reckoner's Bargain"
+    },
+    {
+      "qty": 1,
+      "name": "Sagu Wildling"
+    },
+    {
+      "qty": 9,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Tithing Blade"
+    },
+    {
+      "qty": 4,
+      "name": "Troll of Khazad-d\u00fbm"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 3,
+      "name": "Rancid Earth"
+    },
+    {
+      "qty": 4,
+      "name": "Troublemaker Ouphe"
+    },
+    {
+      "qty": 3,
+      "name": "Weather the Storm"
+    }
+  ]
+}

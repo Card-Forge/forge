@@ -1,0 +1,169 @@
+{
+  "archetype": "Sultai Scapeshift",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/sultai-scapeshift.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Aftermath Analyst"
+    },
+    {
+      "qty": 4,
+      "name": "Arboreal Grazer"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Archway"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 3,
+      "name": "Castle Garenbrig"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 3,
+      "name": "Crumbling Vestige"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Abundance"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 4,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 4,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 4,
+      "name": "Growth Spiral"
+    },
+    {
+      "qty": 4,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 1,
+      "name": "Ipnu Rivulet"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Field"
+    },
+    {
+      "qty": 4,
+      "name": "Lumra, Bellow of the Woods"
+    },
+    {
+      "qty": 1,
+      "name": "Mirrorpool"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 3,
+      "name": "Port of Karfell"
+    },
+    {
+      "qty": 4,
+      "name": "Scapeshift"
+    },
+    {
+      "qty": 4,
+      "name": "Spelunking"
+    },
+    {
+      "qty": 4,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 4,
+      "name": "The Wandering Minstrel"
+    },
+    {
+      "qty": 1,
+      "name": "Vibrance"
+    },
+    {
+      "qty": 1,
+      "name": "Wistfulness"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Aether Gust"
+    },
+    {
+      "qty": 1,
+      "name": "Bonny Pall, Clearcutter"
+    },
+    {
+      "qty": 3,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Emrakul, the Promised End"
+    },
+    {
+      "qty": 2,
+      "name": "Languish"
+    },
+    {
+      "qty": 1,
+      "name": "Tranquil Frillback"
+    },
+    {
+      "qty": 3,
+      "name": "Unable to Scream"
+    },
+    {
+      "qty": 1,
+      "name": "Wistfulness"
+    },
+    {
+      "qty": 1,
+      "name": "Yorion, Sky Nomad"
+    }
+  ]
+}

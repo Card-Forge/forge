@@ -13,12 +13,16 @@
       "a proliferate spell and a Pentad Prism",
       "an early poison enabler",
       "a Big Card Advantage spell like Deep Analysis or Vivisurgeon's Insight",
-      "Weather the Storm in the opener against aggressive decks"
+      "Weather the Storm in the opener against aggressive decks",
+      "Keep hands with 2-3 lands, Manamorphose, and at least one cantrip or discard spell.",
+      "Keep any hand with Manamorphose plus two lands and a draw spell.",
+      "Avoid pure land hands or hands with only late-game threats."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or blue sources",
       "Hands without a clear path to mana acceleration",
-      "Hands that do not match the required speed for the matchup"
+      "Hands that do not match the required speed for the matchup",
+      "Mulligan to hands that can cast Manamorphose on turn 1 or 2 and have a clear path to Weather the Storm."
     ],
     "examples": [
       {
@@ -40,17 +44,32 @@
     "early_game": [
       "Play non-blue depletion lands first to enable Everflowing Chalice",
       "Prioritize developing mana over casting poison enablers",
-      "Cast early proliferate spells if mana allows"
+      "Cast early proliferate spells if mana allows",
+      "Turn 1: Play a land, cast Manamorphose if possible, or discard the opponent's key piece with hand disruption.",
+      "Turn 2: Cast cantrips and draw spells to dig for Weather the Storm and Thirsting Roots.",
+      "Sequence lands to ensure colored mana for disruption and combo pieces.",
+      "Prioritize finding the combo over developing a board."
     ],
     "mid_game": [
       "Deploy Pentad Prisms and Everflowing Chalices to generate exponential mana",
       "Use proliferate spells like Experimental Augury to control sequences and draw cards",
-      "Multiply poison counters and artifact/land counters simultaneously"
+      "Multiply poison counters and artifact/land counters simultaneously",
+      "Treat mana as a resource to chain spells, not to develop a board.",
+      "Keep 1-2 lands in play until the storm count is sufficient.",
+      "Prioritize keeping combo pieces in hand and manage hand size by cycling through cantrips to find the win condition.",
+      "Do not commit creatures early unless necessary to stabilize against aggro.",
+      "Hold back until you have a clear path to lethal.",
+      "If the opponent develops a board, use discard to remove key threats before casting storm spells."
     ],
     "late_game": [
       "Chain proliferate spells to reach lethal poison quickly",
       "Cast Weather the Storm at the end of high-spell turns to gain massive life",
-      "Resolve key spells through disruption using sideboarded counterspells"
+      "Resolve key spells through disruption using sideboarded counterspells",
+      "Weather the Storm with a storm count of 10+ for lethal.",
+      "Thirsting Roots can be pumped or used to trigger additional effects.",
+      "Manamorphose can be used to draw into the final pieces.",
+      "Go all-in when you have a clear path to lethal (e.g., 8+ storm count, opponent at 10 or less life, no immediate counterspells).",
+      "Commit when you can chain spells without leaving yourself vulnerable to removal."
     ]
   },
   "key_cards": [
@@ -100,7 +119,11 @@
     "Prioritize developing mana over casting poison enablers early",
     "Use proliferate spells to multiply both poison counters and artifact/land counters for mana generation",
     "Cast Weather the Storm at the end of turns with high spell counts to maximize life gain",
-    "Split card draw into multiple spells like Deep Analysis to bypass counterspells"
+    "Split card draw into multiple spells like Deep Analysis to bypass counterspells",
+    "Common mistake: overcommitting to board development instead of combo.",
+    "Unique interaction: Manamorphose can be used to draw into Weather the Storm and Thirsting Roots in the same turn if sequenced correctly.",
+    "Be mindful of mana base requirements for a four-color deck",
+    "ensure proper shock lands or fetch lands if the format allows."
   ],
   "matchups": [
     {
@@ -144,6 +167,31 @@
       "watch_for": [
         "Creature pressure"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig around counterspells. Cast Manamorphose and storm spells in response to counterspells if possible. Use protection spells or discard to remove counterspellers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and fast mana. Do not let them establish a board. Use Manamorphose to accelerate your own game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize discard and early disruption. Use Thirsting Roots or other creatures to block if necessary. Cast Weather the Storm early if possible to close the game before they overwhelm you.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-grind them with cantrips and card advantage. Use Manamorphose to draw into answers. Pressure them with early threats if they do not have counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Use discard to remove their combo pieces. Hold up counterspells for their Weather the Storm. Prioritize finding Weather the Storm first.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -157,10 +205,12 @@
     "Annul",
     "Steel Sabotage",
     "Pyroblast",
-    "Raze"
+    "Raze",
+    "Watch for counterspells (especially in Blue Terror and Grixis Affinity), removal (Jund Wildfire), and early pressure (Mono Red Madness, Elves)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-poison-storm-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T10:16:18+00:00",
     "model": "local-model",
@@ -178,6 +228,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,352 @@
+{
+  "archetype": "Kykar, Wind's Fury",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/kykar-wind-s-fury.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Denial"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archmage Emeritus"
+    },
+    {
+      "qty": 1,
+      "name": "Balmor, Battlemage Captain"
+    },
+    {
+      "qty": 1,
+      "name": "Battlefield Forge"
+    },
+    {
+      "qty": 1,
+      "name": "Birgi, God of Storytelling"
+    },
+    {
+      "qty": 1,
+      "name": "Blasphemous Act"
+    },
+    {
+      "qty": 1,
+      "name": "Boros Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Boros Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Chaos Warp"
+    },
+    {
+      "qty": 1,
+      "name": "Clifftop Retreat"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Consider"
+    },
+    {
+      "qty": 1,
+      "name": "Coruscation Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Dovin's Veto"
+    },
+    {
+      "qty": 1,
+      "name": "Dualcaster Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Electrostatic Field"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Expedite"
+    },
+    {
+      "qty": 1,
+      "name": "Expressive Iteration"
+    },
+    {
+      "qty": 1,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 1,
+      "name": "Farewell"
+    },
+    {
+      "qty": 1,
+      "name": "Fellwar Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Firebrand Archer"
+    },
+    {
+      "qty": 1,
+      "name": "Frostboil Snarl"
+    },
+    {
+      "qty": 1,
+      "name": "Furycalm Snarl"
+    },
+    {
+      "qty": 1,
+      "name": "Galvanic Iteration"
+    },
+    {
+      "qty": 1,
+      "name": "Generous Gift"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Electromancer"
+    },
+    {
+      "qty": 1,
+      "name": "Guttersnipe"
+    },
+    {
+      "qty": 1,
+      "name": "Impact Tremors"
+    },
+    {
+      "qty": 1,
+      "name": "Improbable Alliance"
+    },
+    {
+      "qty": 8,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Izzet Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Kessig Flamebreather"
+    },
+    {
+      "qty": 1,
+      "name": "Kher Keep"
+    },
+    {
+      "qty": 1,
+      "name": "Kykar, Wind's Fury"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Helix"
+    },
+    {
+      "qty": 1,
+      "name": "Mizzix's Mastery"
+    },
+    {
+      "qty": 1,
+      "name": "Monastery Mentor"
+    },
+    {
+      "qty": 4,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Murmuring Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Monastery"
+    },
+    {
+      "qty": 1,
+      "name": "Narset's Reversal"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Nesting Dovehawk"
+    },
+    {
+      "qty": 1,
+      "name": "Niv-Mizzet, Parun"
+    },
+    {
+      "qty": 1,
+      "name": "Opt"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 5,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Port Town"
+    },
+    {
+      "qty": 1,
+      "name": "Prairie Stream"
+    },
+    {
+      "qty": 1,
+      "name": "Preordain"
+    },
+    {
+      "qty": 1,
+      "name": "Ral, Storm Conduit"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Requisition Raid"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Saheeli, Sublime Artificer"
+    },
+    {
+      "qty": 1,
+      "name": "Shivan Reef"
+    },
+    {
+      "qty": 1,
+      "name": "Skullclamp"
+    },
+    {
+      "qty": 1,
+      "name": "Skycloud Expanse"
+    },
+    {
+      "qty": 1,
+      "name": "Snap"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spectator Seating"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Storm-Kiln Artist"
+    },
+    {
+      "qty": 1,
+      "name": "Sulfur Falls"
+    },
+    {
+      "qty": 1,
+      "name": "Sundown Pass"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Conviction"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Creativity"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Progress"
+    },
+    {
+      "qty": 1,
+      "name": "Talrand, Sky Summoner"
+    },
+    {
+      "qty": 1,
+      "name": "Third Path Iconoclast"
+    },
+    {
+      "qty": 1,
+      "name": "Thought Vessel"
+    },
+    {
+      "qty": 1,
+      "name": "Thrill of Possibility"
+    },
+    {
+      "qty": 1,
+      "name": "Untimely Malfunction"
+    },
+    {
+      "qty": 1,
+      "name": "Urabrask"
+    },
+    {
+      "qty": 1,
+      "name": "Wear // Tear"
+    },
+    {
+      "qty": 1,
+      "name": "Whirlwind of Thought"
+    },
+    {
+      "qty": 1,
+      "name": "Witness Protection"
+    },
+    {
+      "qty": 1,
+      "name": "Young Pyromancer"
+    }
+  ],
+  "sideboard": []
+}

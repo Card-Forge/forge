@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "name": "Mono-White Token Control",
+  "format": "pioneer",
+  "colors": [
+    "W"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "This Pioneer archetype blends token generation with traditional control elements to stabilize and outvalue opponents. By leveraging Enduring Innocence for recursion and board wipes, you protect your token engines while setting up lethal Yorion, Sky Nomad attacks. Caretaker's Talent serves as a persistent value sink that punishes aggressive strategies and fuels your late-game dominance.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 3,
+      "cards": [
+        "Caretaker's Talent",
+        "Enduring Innocence",
+        "Yorion, Sky Nomad"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Caretaker's Talent",
+        "Enduring Innocence"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Yorion, Sky Nomad"
+      ]
+    },
+    "threats": {
+      "target_count": 2,
+      "cards": [
+        "Caretaker's Talent",
+        "Enduring Innocence"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Enduring Innocence"
+      ]
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 1,
+      "cards": [
+        "Enduring Innocence"
+      ]
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Caretaker's Talent",
+        "Yorion, Sky Nomad"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Caretaker's Talent",
+        "Yorion, Sky Nomad"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Caretaker's Talent",
+        "Enduring Innocence"
+      ]
+    },
+    "mana_fixing": {
+      "target_count": 0,
+      "cards": []
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Yorion, Sky Nomad",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Caretaker's Talent",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Enduring Innocence",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "hate_pieces",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up mana for Yorion's attack before casting other spells",
+    "Activate Caretaker's Talent in response to opponent's combat or spells",
+    "Time Enduring Innocence activations to protect your board or disrupt key turns",
+    "Common mistakes include overcommitting to the board too early, failing to use Yorion's +1 efficiently, miscounting life totals when activating -1, and not tracking opponent's interaction.",
+    "Unique interactions: Enduring Innocence can be cast for free if you control a creature, making it a powerful early play."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing lands and one-drops to establish token presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early interaction to disrupt opponent's game plan"
+    },
+    {
+      "trigger": "early game",
+      "line": "Look for turn-two Yorion attacks if possible"
+    }
+  ],
+  "kill_priority": [
+    "Caretaker's Talent",
+    "Yorion, Sky Nomad",
+    "Yorion, Sky Nomad",
+    "Caretaker's Talent",
+    "Enduring Innocence"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

@@ -1,0 +1,423 @@
+{
+  "schema_version": 1,
+  "name": "Rakdos Affinity",
+  "format": "pauper",
+  "colors": [
+    "B",
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Rakdos Affinity is a two-color variant of Pauper's famous Affinity deck that prioritizes aggressive early pressure over Grixis versions. It combines direct damage spells like Lightning Bolt and Galvanic Blast with a fast clock of Frogmite and Clockwork Percussionist to overwhelm opponents quickly. Despite the streamlined mana base, it retains the core Ichor Wellspring and sacrifice engine for card advantage, while leveraging Refurbished Familiar and Blood Fountain for attrition.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 8,
+      "cards": [
+        "Frogmite",
+        "Refurbished Familiar"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 26,
+      "cards": [
+        "Blood Fountain",
+        "Fanatical Offering",
+        "Ichor Wellspring",
+        "Nihil Spellbomb",
+        "Reckoner's Bargain",
+        "Refurbished Familiar",
+        "Toxin Analysis"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 15,
+      "cards": [
+        "Fanatical Offering",
+        "Ichor Wellspring",
+        "Nihil Spellbomb",
+        "Reckoner's Bargain"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Fanatical Offering",
+        "Frogmite",
+        "Reckoner's Bargain"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 24,
+      "cards": [
+        "Arcbound Tracker",
+        "Experimental Synthesizer",
+        "Frogmite",
+        "Glaze Fiend",
+        "Goblin Bushwhacker",
+        "Gorilla Shaman",
+        "Krark-Clan Shaman",
+        "Myr Enforcer",
+        "Refurbished Familiar"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 16,
+      "cards": [
+        "Bojuka Bog",
+        "Cast into the Fire",
+        "Fiery Cannonade",
+        "Galvanic Blast",
+        "Gorilla Shaman",
+        "Krark-Clan Shaman",
+        "Nihil Spellbomb"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 9
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Krark-Clan Shaman"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Drossforge Bridge"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 12,
+      "cards": [
+        "Blood Fountain",
+        "Fanatical Offering",
+        "Reckoner's Bargain"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 20,
+      "cards": [
+        "Blood Fountain",
+        "Bojuka Bog",
+        "Fanatical Offering",
+        "Ichor Wellspring",
+        "Nihil Spellbomb",
+        "Reckoner's Bargain"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 1
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 7,
+      "cards": [
+        "Blood Fountain",
+        "Nihil Spellbomb"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 14,
+      "cards": [
+        "Arcbound Tracker",
+        "Blood Fountain",
+        "Ichor Wellspring",
+        "Refurbished Familiar"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Ichor Wellspring"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Tithing Blade"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 25,
+      "cards": [
+        "Blood Fountain",
+        "Bojuka Bog",
+        "Drossforge Bridge",
+        "Galvanic Blast",
+        "Great Furnace",
+        "Refurbished Familiar",
+        "Vault of Whispers"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Bojuka Bog",
+        "Drossforge Bridge",
+        "Great Furnace",
+        "Mountain",
+        "Swamp",
+        "Vault of Whispers"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.32
+  },
+  "dual_role_cards": [
+    {
+      "card": "Arcbound Tracker",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Fountain",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drossforge Bridge",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fanatical Offering",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Frogmite",
+      "roles": [
+        "mana_reducers",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Galvanic Blast",
+      "roles": [
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gorilla Shaman",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Great Furnace",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ichor Wellspring",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Krark-Clan Shaman",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nihil Spellbomb",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reckoner's Bargain",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Refurbished Familiar",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "mana_fixing",
+        "mana_reducers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vault of Whispers",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Sequence Frogmite early to set up Affinity discount for turn 2-3 threats",
+    "Use Blood Fountain as a mana sink to repeatedly cast Refurbished Familiar or Myr Enforcer",
+    "Prioritize Galvanic Blast and Lightning Bolt for speed in less interactive matchups",
+    "Deploy Nihil Spellbomb to guarantee extra draws and disrupt opponent recursion",
+    "Avoid overcommitting to Springleaf Drum if you can't cast a spell with it."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Frogmite and Clockwork Percussionist to establish an aggressive clock and Affinity discount"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Galvanic Blast and Lightning Bolt for mana-efficient removal and direct damage"
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, then cast a cheap artifact."
+    }
+  ],
+  "kill_priority": [
+    "Arcbound Tracker",
+    "Blood Fountain",
+    "Ichor Wellspring",
+    "Refurbished Familiar",
+    "Fanatical Offering",
+    "Frogmite",
+    "Reckoner's Bargain",
+    "Experimental Synthesizer"
+  ],
+  "interaction_to_disrupt": [
+    "Drossforge Bridge",
+    "Bojuka Bog",
+    "Cast into the Fire",
+    "Fiery Cannonade",
+    "Galvanic Blast",
+    "Gorilla Shaman",
+    "Krark-Clan Shaman",
+    "Nihil Spellbomb"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/rakdos-affinity.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

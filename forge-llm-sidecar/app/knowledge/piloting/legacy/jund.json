@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two lands and a playable creature or spell",
       "Draws containing Ignoble Hierarch or Scythecat Cub alongside early interaction",
-      "Packages that include Green Sun's Zenith with sufficient mana sources"
+      "Packages that include Green Sun's Zenith with sufficient mana sources",
+      "Keep hands with 2-3 lands (including fetch/shock sources), Green Sun\u2019s Zenith paired with 2-3 mana, Ignoble Hierarch, or early threats (1-2 mana creatures).",
+      "Prioritize hands that can play a land, cast Hierarch or a 2-drop, and have a plan for turn 3."
     ],
     "mulligan_criteria": [
       "Hands lacking land drops for the first two turns",
       "Draws heavy on high-cost spells without early threats",
-      "Combinations that cannot deploy Ignoble Hierarch or Scythecat Cub efficiently"
+      "Combinations that cannot deploy Ignoble Hierarch or Scythecat Cub efficiently",
+      "Mulligan hands with 0-1 lands, multiple copies of the same land type without fetches, or hands lacking early interaction/mana sources."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Deploy Scythecat Cub on turn one or two to establish immediate board pressure",
       "Play Ignoble Hierarch as soon as possible to begin generating 1/1 creature tokens",
-      "Use early interaction to protect key threats and disrupt opponent's game plan"
+      "Use early interaction to protect key threats and disrupt opponent's game plan",
+      "Turn 1: Play a land, cast Ignoble Hierarch if possible, or hold for disruption.",
+      "Turn 2: Fetch lands for shock lands, play a second land, cast a 2-drop or use Hierarch sacrifice for mana to cast Green Sun\u2019s Zenith targeting a 3-mana threat.",
+      "Sequence lands to ensure double-green or green-black availability for GSZ."
     ],
     "mid_game": [
       "Trade efficiently with opponent's creatures while maintaining token advantage",
       "Cast Green Sun's Zenith to search for lands or key creatures that accelerate the board state",
-      "Begin applying consistent pressure with a wide board of tokens and larger threats"
+      "Begin applying consistent pressure with a wide board of tokens and larger threats",
+      "Treat Green Sun\u2019s Zenith as a tempo investment",
+      "cast it when you can follow up with a threat or removal.",
+      "Use Ignoble Hierarch\u2019s sacrifice for mana when you need to cast a spell or break through, but avoid sacrificing it prematurely if it\u2019s your only removal.",
+      "Track graveyard resources for GSZ and opponent\u2019s recursion.",
+      "Commit threats when you have removal or disruption ready to answer their response.",
+      "Hold back if the opponent has unanswered interaction or if you\u2019re facing a combo deck that needs to be disrupted first."
     ],
     "late_game": [
       "Leverage the cumulative token army to overwhelm opponent's removal and board wipes",
       "Use Green Sun's Zenith to find resilient finishers or additional mana sources",
-      "Maintain card advantage through token generation and efficient trades to close out the game"
+      "Maintain card advantage through token generation and efficient trades to close out the game",
+      "Scythecat Cub with multiple +1/+1 counters, Green Sun\u2019s Zenith targeting a late-game threat, and board-sweeper-resistant creatures.",
+      "Win by out-resourcing through disruption and value spells.",
+      "Go all-in when you have card advantage, the opponent is tapped out, or you\u2019ve removed their key interaction.",
+      "Commit when Scythecat Cub is on the board with multiple creatures, or when you can cast GSZ into a threat they can\u2019t answer."
     ]
   },
   "key_cards": [
@@ -59,7 +75,13 @@
     "Prioritize playing Ignoble Hierarch before trading it away to maximize token generation",
     "Hold up mana for interaction when facing aggressive decks to protect Scythecat Cub and early tokens",
     "Cast Green Sun's Zenith on your opponent's turn if possible to avoid combat damage while searching",
-    "Trade larger threats into opponent's key pieces while preserving tokens for blocking and attacking"
+    "Trade larger threats into opponent's key pieces while preserving tokens for blocking and attacking",
+    "Green Sun\u2019s Zenith is a sorcery, so timing is critical\u2014cast it when you can follow up or when the opponent can\u2019t respond.",
+    "Ignoble Hierarch\u2019s sacrifice is a double-edged sword",
+    "use it for mana when necessary, but preserve it for deathtouch removal.",
+    "Four-color mana requires careful land sequencing",
+    "fetch lands should target shock lands to avoid flooding.",
+    "Avoid overcommitting to Scythecat Cub early without board support, as it\u2019s vulnerable to sweepers."
   ],
   "matchups": [
     {
@@ -97,6 +119,21 @@
         "Card advantage spells",
         "Board control effects"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Green Sun\u2019s Zenith on your turn when they\u2019re tapped out, or cast it in response to their removal. Use Ignoble Hierarch\u2019s sacrifice to cast threats at instant speed if needed. Rely on hand disruption to remove counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Disrupt their mana sources early with Thoughtseize or Hierarch sacrifice. Use removal to kill their early threats, then close the game with scalable creatures.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through better hand disruption, superior late-game threats, and precise mana sequencing. Use Thoughtseize to remove their GSZ or key threats, and out-grind with Scythecat Cub scaling.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -104,10 +141,14 @@
     "Board wipe spells",
     "Counterspell packages",
     "Direct damage spells",
-    "Card draw engines"
+    "Card draw engines",
+    "Watch for counterspells, sweepers, and graveyard recursion.",
+    "Note when opponents tap out for key spells (e.g., Tron\u2019s finishers, Sneak & Show\u2019s combo pieces).",
+    "Track their removal suite to know when GSZ will be answered."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:28:36+00:00",
     "model": "local-model",
@@ -123,6 +164,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

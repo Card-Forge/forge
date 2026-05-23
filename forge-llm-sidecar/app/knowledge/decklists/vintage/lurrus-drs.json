@@ -1,0 +1,173 @@
+{
+  "archetype": "Lurrus DRS",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/lurrus-drs.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 1,
+      "name": "Ancestral Recall"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Collector Ouphe"
+    },
+    {
+      "qty": 4,
+      "name": "Deathrite Shaman"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Dig Through Time"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Gitaxian Probe"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 2,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 4,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 3,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Psychic Frog"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 1,
+      "name": "Time Walk"
+    },
+    {
+      "qty": 1,
+      "name": "Treasure Cruise"
+    },
+    {
+      "qty": 3,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 3,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 2,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 1,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 1,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 1,
+      "name": "Hurkyl's Recall"
+    },
+    {
+      "qty": 1,
+      "name": "Lurrus of the Dream-Den"
+    },
+    {
+      "qty": 1,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    }
+  ]
+}

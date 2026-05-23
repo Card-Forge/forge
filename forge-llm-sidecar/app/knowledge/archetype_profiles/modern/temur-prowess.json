@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "name": "Temur Prowess",
+  "format": "modern",
+  "colors": [
+    "U",
+    "R",
+    "G"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Temur Prowess is a fast, artifact-centric strategy that leverages the prowess mechanic to create unblockable, oversized threats. By cycling cheap creatures alongside low-cost artifacts, the deck applies immediate pressure while maintaining board presence. The U/R/G color identity provides efficient removal, card advantage, and flexible mana to outpace midrange and control shells.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 0,
+      "cards": []
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": []
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": []
+    },
+    "threats": {
+      "target_count": 3,
+      "cards": [
+        "Cori-Steel Cutter",
+        "Mishra's Bauble",
+        "Slickshot Show-Off"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 2,
+      "cards": [
+        "Cori-Steel Cutter",
+        "Mishra's Bauble"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": []
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Cori-Steel Cutter",
+        "Mishra's Bauble"
+      ]
+    },
+    "mana_fixing": {
+      "target_count": 2,
+      "cards": [
+        "Cori-Steel Cutter",
+        "Mishra's Bauble"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Cori-Steel Cutter",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mishra's Bauble",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold artifact plays in hand until combat to surprise blockers and trigger prowess unexpectedly",
+    "Prioritize playing prowess creatures before opponent's blockers resolve to secure unblockable status",
+    "Sequence removal to clear threats that would otherwise remove your artifacts or key creatures",
+    "Manage artifact count carefully to ensure prowess remains active even after board wipes or targeted hate",
+    "Common mistakes include overcasting Prowess spells without threats on board, ignoring opponent interaction, and mismanaging Mishra's Bauble (sacrificing it too early or late)."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play artifacts on curve to enable prowess immediately"
+    },
+    {
+      "trigger": "early game",
+      "line": "Drop cheap creatures to establish early pressure and unblockability"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early removal to clear opposing one-drops and protect your board"
+    }
+  ],
+  "kill_priority": [
+    "Cori-Steel Cutter",
+    "Mishra's Bauble",
+    "Slickshot Show-Off"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

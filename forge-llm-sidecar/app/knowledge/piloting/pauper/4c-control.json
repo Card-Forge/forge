@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands containing Counterspell or early interaction",
       "Mana bases that reliably support four colors by turn three",
-      "Access to Skred or Lorien Revealed alongside lands"
+      "Access to Skred or Lorien Revealed alongside lands",
+      "Keep hands with 2-3 lands (including basics for U, R, G), Counterspell, early interaction, or Lorien Revealed paired with a land.",
+      "Look for 4+ mana sources and answers to early threats (Mono Red Madness, Elves, Grixis Affinity).",
+      "Prioritize hands that can answer turn-1 threats while developing into Lorien by turn 3."
     ],
     "mulligan_criteria": [
       "Hands lacking instant-speed denial or board control",
       "Mana-heavy hands with no early spells or draw",
-      "Hands missing key signature cards or finishers"
+      "Hands missing key signature cards or finishers",
+      "Mulligan to 1-2 lands, no interaction, or unplayable mana."
     ],
     "examples": []
   },
@@ -25,17 +29,32 @@
     "early_game": [
       "Play lands efficiently while holding up mana for Counterspell",
       "Prioritize denying early threats to slow aggressive decks",
-      "Draw into Skred or removal to establish a foothold"
+      "Draw into Skred or removal to establish a foothold",
+      "Turn 1: Play a land, hold up Counterspell for key threats or play a cheap interaction.",
+      "Turn 2: Develop mana, cast Lorien Revealed if possible, or hold for interaction.",
+      "Prioritize basics for U, R, G and use Lorien\u2019s tap ability for flexibility.",
+      "Sequence lands to ensure you can cast Lorien (3RRG) or Skred ({3} with a legendary) by turn 3-4.",
+      "Avoid tapping out for non-essential plays."
     ],
     "mid_game": [
       "Cast Lorien Revealed to clear boards and fetch additional lands",
       "Deploy Skred to generate value and apply steady pressure",
-      "Maintain hand size with counterspells and card draw to stay ahead"
+      "Maintain hand size with counterspells and card draw to stay ahead",
+      "Use Lorien\u2019s sacrifice sparingly",
+      "only when you have excess mana or need to dig for answers/finishers.",
+      "Manage mana to keep Counterspell available for key spells while developing board.",
+      "Avoid tapping out for non-essential plays.",
+      "Track opponent\u2019s graveyard and library for combo threats.",
+      "Hold interaction for high-impact threats (combo pieces, ramp accelerants, or game-ending spells)."
     ],
     "late_game": [
       "Stabilize against combo or midrange decks with repeated spell denial",
       "Leverage Skred's cumulative value to outresource opponents",
-      "Close out games with board control and resilient threats"
+      "Close out games with board control and resilient threats",
+      "Skred (trample, haste, artifact/enchantment destruction), Lorien Revealed (card draw, flexible mana), and other legendary creatures.",
+      "Win by out-resourcing, closing with Skred\u2019s trample, or overwhelming with card advantage.",
+      "Go all-in when you have board control, enough mana for Skred + protection, or when the opponent is at lethal and you can\u2019t stabilize.",
+      "Commit to Skred when you can remove their key permanents or when you\u2019re ready to trade efficiently."
     ]
   },
   "key_cards": [
@@ -58,7 +77,13 @@
   "sequencing_tips": [
     "Hold up mana for Counterspell before committing to non-essential spells",
     "Cast Lorien Revealed after opponent commits resources to maximize board reset value",
-    "Prioritize Skred's value-generating abilities over direct damage when behind on resources"
+    "Prioritize Skred's value-generating abilities over direct damage when behind on resources",
+    "Common mistake: Over-sacrificing Lorien too early.",
+    "Remember Skred\u2019s alternate cost requires a legendary creature.",
+    "Lorien\u2019s mana is U/R/G, so you\u2019ll need basics or mana rocks for {3} and {U}{U}.",
+    "Track opponent\u2019s graveyard and library for combo threats.",
+    "Don\u2019t tap out for non-essential plays",
+    "control wins by patience and resource denial."
   ],
   "matchups": [
     {
@@ -87,15 +112,35 @@
         "Board wipes",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Skred\u2019s {3} alternate cost, split spells, or sacrifice Lorien to draw around counters. Layer threats and use artifact/enchantment hate to bypass counters. Force them to use interaction on low-impact spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Answer early mana dorks, use Skred\u2019s ETB to destroy ramp artifacts/enchantments, hold up counters for key acceleration spells. Stabilize with early interaction and close quickly before they reach their late-game power level.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war. Use Lorien efficiently, track counterspells, and use Skred to remove their Lorien or key threats. Prioritize board control and resource denial. Play conservatively until you can safely commit to a finisher.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Combo finishers",
-    "Resilient midrange threats"
+    "Resilient midrange threats",
+    "Watch for opponent\u2019s mana development, graveyard usage, and library draws.",
+    "Note when they tap out for big spells or combo pieces.",
+    "Track artifact/enchantment counts for Skred\u2019s ETB targeting.",
+    "Pay attention to when they hold up counterspells versus when they\u2019re committed to the board."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:53:56+00:00",
     "model": "local-model",
@@ -111,6 +156,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,476 @@
+{
+  "schema_version": 1,
+  "name": "4c Ouroboroid",
+  "format": "standard",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "ramp",
+  "expected_deck_total": 60,
+  "macro_plan": "This four-color Standard deck leverages mana acceleration and card advantage to outpace opponents. By combining ramp spells with resilient creatures, it establishes early board presence and scales into a dominant late-game state. The synergy between land development and value engines allows consistent pressure while maintaining interaction.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 4,
+      "cards": [
+        "Nature's Rhythm"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 14,
+      "cards": [
+        "Badgermole Cub",
+        "Nature's Rhythm",
+        "Quantum Riddler",
+        "Soul-Guide Lantern",
+        "Surrak, Elusive Hunter"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 9,
+      "cards": [
+        "Kutzil's Flanker",
+        "Nature's Rhythm",
+        "Quantum Riddler"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 6,
+      "cards": [
+        "Brightglass Gearhulk",
+        "Nature's Rhythm"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Nature's Rhythm",
+        "Quantum Riddler"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 39,
+      "cards": [
+        "Badgermole Cub",
+        "Brightglass Gearhulk",
+        "Champion of the Weird",
+        "Craterhoof Behemoth",
+        "Gene Pollinator",
+        "Keen-Eyed Curator",
+        "Kutzil's Flanker",
+        "Llanowar Elves",
+        "Mockingbird",
+        "Nature's Rhythm",
+        "Ouroboroid",
+        "Quantum Riddler",
+        "Sage of the Skies",
+        "Spider Manifestation",
+        "Surrak, Elusive Hunter"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 7
+    },
+    "removal": {
+      "target_count": 11,
+      "cards": [
+        "Erode",
+        "Keen-Eyed Curator",
+        "Kutzil's Flanker",
+        "Meltstrider's Resolve",
+        "Seam Rip",
+        "Soul-Guide Lantern"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Kutzil's Flanker",
+        "Ouroboroid"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "Disdainful Stroke",
+        "Spider-Sense"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Surrak, Elusive Hunter"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 13,
+      "cards": [
+        "Keen-Eyed Curator",
+        "Kutzil's Flanker",
+        "Nature's Rhythm",
+        "Quantum Riddler",
+        "Rest in Peace",
+        "Soul-Guide Lantern"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 15,
+      "cards": [
+        "Badgermole Cub",
+        "Champion of the Weird",
+        "Nature's Rhythm",
+        "Quantum Riddler",
+        "Spider-Sense"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 3
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Quantum Riddler",
+        "Spider Manifestation"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Nature's Rhythm"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Quantum Riddler"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 41,
+      "cards": [
+        "Badgermole Cub",
+        "Botanical Sanctum",
+        "Breeding Pool",
+        "Floodfarm Verge",
+        "Gene Pollinator",
+        "Hallowed Fountain",
+        "Hushwood Verge",
+        "Nature's Rhythm",
+        "Quantum Riddler",
+        "Spider Manifestation",
+        "Starting Town",
+        "Temple Garden"
+      ],
+      "mainboard_count": 41,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 22,
+      "cards": [
+        "Botanical Sanctum",
+        "Breeding Pool",
+        "Floodfarm Verge",
+        "Forest",
+        "Hallowed Fountain",
+        "Hushwood Verge",
+        "Starting Town",
+        "Temple Garden"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Badgermole Cub",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Botanical Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brightglass Gearhulk",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Champion of the Weird",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Floodfarm Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gene Pollinator",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hushwood Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Keen-Eyed Curator",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kutzil's Flanker",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nature's Rhythm",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "mana_reducers",
+        "payoff_cards",
+        "recursion",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ouroboroid",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quantum Riddler",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spider Manifestation",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spider-Sense",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Surrak, Elusive Hunter",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize ramp spells before high-cost threats to maintain tempo",
+    "Hold up colored mana for interaction when opponent has sweepers or removal",
+    "Use card draw effects to refill hand before committing to large plays",
+    "Protect value engines until opponent's removal is exhausted",
+    "Common mistake: Over-investing in recursion without board presence."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and ramp spells to accelerate mana base"
+    },
+    {
+      "trigger": "early game",
+      "line": "Deploy early creatures to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up mana for interaction if opponent plays aggressively"
+    }
+  ],
+  "kill_priority": [
+    "Quantum Riddler",
+    "Spider Manifestation",
+    "Nature's Rhythm",
+    "Badgermole Cub",
+    "Brightglass Gearhulk",
+    "Champion of the Weird",
+    "Craterhoof Behemoth",
+    "Gene Pollinator"
+  ],
+  "interaction_to_disrupt": [
+    "Disdainful Stroke",
+    "Spider-Sense",
+    "Surrak, Elusive Hunter",
+    "Erode",
+    "Keen-Eyed Curator",
+    "Kutzil's Flanker",
+    "Meltstrider's Resolve",
+    "Seam Rip"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/4c-ouroboroid.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Mox Opal or Tamiyo plus Cori-Steel Cutter",
       "Two mana rocks with a one-mana spell",
-      "Cori-Steel Cutter with two lands"
+      "Cori-Steel Cutter with two lands",
+      "Keep any 7-card hand with 2+ lands (including Mox Opal) and at least one of Tamiyo or Cori-Steel Cutter.",
+      "Keep hands with Mox Opal plus two artifacts in play or in hand if you have a turn-2 play."
     ],
     "mulligan_criteria": [
       "Hands lacking early mana acceleration",
       "Hands with only high-cost cards",
-      "Hands without Cori-Steel Cutter or early threats"
+      "Hands without Cori-Steel Cutter or early threats",
+      "Mulligan hands with three or more lands and no early threats, or hands with Mox Opal but no artifacts to enable it."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play Mox Opal or Tamiyo on turn one",
       "Cast Cori-Steel Cutter on turn two or three",
-      "Attack immediately to establish pressure"
+      "Attack immediately to establish pressure",
+      "Turn 1: Play a land, then Mox Opal if possible.",
+      "If you have a two-drop artifact or creature, play it to enable Opal.",
+      "Turn 2: Cast Tamiyo or Cori-Steel Cutter.",
+      "If you have Opal plus two artifacts, you can cast a three-mana spell on turn two.",
+      "Sequence lands to ensure you can hit your mana steps without flooding"
     ],
     "mid_game": [
       "Use Tamiyo's card draw to find answers or additional threats",
       "Protect Cori-Steel Cutter from removal",
-      "Maintain aggressive tempo to prevent opponent stabilization"
+      "Maintain aggressive tempo to prevent opponent stabilization",
+      "Preserve mana for interaction until turn three or four.",
+      "Use Tamiyo's abilities to cycle cards and maintain hand size.",
+      "Do not overcommit artifacts if the board is unstable",
+      "Opal enables spells, but do not sacrifice your hand for tempo.",
+      "The graveyard is generally neutral, so avoid self-mill unless explicitly synergistic.",
+      "Commit Cori-Steel Cutter when you have protection or can trade favorably."
     ],
     "late_game": [
       "Leverage accumulated card advantage to outvalue opponents",
       "Scale board presence with additional threats",
-      "Close out games with relentless attacks"
+      "Close out games with relentless attacks",
+      "Cori-Steel Cutter with protection or haste, backed by Tamiyo's card advantage and Opal's mana acceleration.",
+      "Overwhelming board presence with artifact synergies and direct damage spells.",
+      "When you have three or more mana available, Tamiyo on the board, and the opponent has no sweepers or counterspells in hand.",
+      "Also commit when you can trade threats favorably or when the opponent is at low life with no blockers."
     ]
   },
   "key_cards": [
@@ -59,7 +77,13 @@
     "Play Mox Opal before Tamiyo to ensure red mana availability for Cori-Steel Cutter",
     "Attack with Cori-Steel Cutter immediately upon entering the battlefield",
     "Hold up mana for potential interaction if the opponent plays defensively",
-    "Prioritize playing mana rocks before spells to maximize turn-one and turn-two impact"
+    "Prioritize playing mana rocks before spells to maximize turn-one and turn-two impact",
+    "Mox Opal requires two artifacts to activate, so do not play it on turn one unless you have a backup plan.",
+    "Tamiyo's abilities likely scale with artifacts or provide card draw",
+    "use them to maintain tempo.",
+    "Cori-Steel Cutter's name suggests cutting or combat damage",
+    "protect it with counters or cheap artifacts.",
+    "Avoid overextending into sweepers."
   ],
   "matchups": [
     {
@@ -85,16 +109,35 @@
         "efficient removal",
         "card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split spells, cheap artifacts to enable Opal, and Tamiyo's card draw to out-value counters. Do not overcommit to one spell; threaten with multiple small plays and force them to use multiple counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Cori-Steel Cutter. Use artifact hate and spot removal to slow their mana development. Tamiyo's interaction is key to disrupting their acceleration steps.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war. Tamiyo's abilities are crucial for cycling and drawing into answers. Prioritize keeping interaction in hand. Trade artifacts favorably and use Cori-Steel Cutter to close when they run out of answers. Value each spell carefully.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes",
     "Counterspells",
     "Early removal spells",
-    "Wide creature decks"
+    "Wide creature decks",
+    "Watch for sweepers like Cyclonic Rift or Wrath of God, counterspells like Spell Pierce or Mana Leak, and targeted removal like Shock or Path.",
+    "Track opponent artifact count if they are also artifact-based.",
+    "Note when they tap out for a single big spell or when they are low on resources for interaction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:41:23+00:00",
     "model": "local-model",
@@ -110,7 +153,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

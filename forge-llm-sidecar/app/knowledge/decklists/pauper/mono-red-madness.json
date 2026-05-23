@@ -1,0 +1,77 @@
+{
+  "archetype": "Mono Red Madness",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/mono-red-madness.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 4,
+      "name": "Fiery Temper"
+    },
+    {
+      "qty": 2,
+      "name": "Fireblast"
+    },
+    {
+      "qty": 4,
+      "name": "Grab the Prize"
+    },
+    {
+      "qty": 4,
+      "name": "Guttersnipe"
+    },
+    {
+      "qty": 4,
+      "name": "Highway Robbery"
+    },
+    {
+      "qty": 4,
+      "name": "Kessig Flamebreather"
+    },
+    {
+      "qty": 4,
+      "name": "Lava Dart"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 18,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Sneaky Snacker"
+    },
+    {
+      "qty": 4,
+      "name": "Voldaren Epicure"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 3,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 4,
+      "name": "Smash to Smithereens"
+    },
+    {
+      "qty": 2,
+      "name": "Tectonic Hazard"
+    }
+  ]
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two cheap instants or sorceries",
       "Hands containing Living End plus a trigger source",
-      "Hands with early interaction like Force of Negation or Subtlety"
+      "Hands with early interaction like Force of Negation or Subtlety",
+      "Keep hands with 2-3 lands (including fetch/shock if applicable), at least one discard spell (Thoughtseize/Duress), and a clear path to cast Living End by turn 3-4.",
+      "Prioritize hands that can execute the discard -> Living End sequence."
     ],
     "mulligan_criteria": [
       "Hands lacking cheap trigger sources",
       "Hands with only high-cost permanents",
-      "Hands missing interaction or combo pieces"
+      "Hands missing interaction or combo pieces",
+      "Mulligan on pure land, no discard, or multiple low-impact creatures without mana support."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Play cheap lands and trigger sources to build toward the Living End trigger",
       "Use Force of Negation to counter key threats or protect your combo pieces",
-      "Hold Subtlety to silence problematic creatures or prevent opponent's interaction"
+      "Hold Subtlety to silence problematic creatures or prevent opponent's interaction",
+      "Turn 1: Play a land, cast Thoughtseize/Duress on key threats or combo pieces.",
+      "Turn 2: Develop mana, potentially cast a utility creature or discard again.",
+      "If the opponent is cooperative or you have enough mana, cast Living End on turn 3-4.",
+      "Sequence lands carefully to ensure you can cast both discard and Living End without flooding."
     ],
     "mid_game": [
       "Continue casting cheap spells to reach the required trigger count for Living End",
       "Maintain hand size and card advantage by cycling or drawing into more triggers",
-      "Use interaction to clear the path for your combo resolution"
+      "Use interaction to clear the path for your combo resolution",
+      "Balance mana between casting discard, developing board, and saving for Living End.",
+      "Don't overcommit to one spell if you can't follow up.",
+      "Manage graveyard by knowing what you want to resurrect vs. what you want to protect from hate.",
+      "Hold back on casting Living End if the opponent has significant removal or graveyard hate in play.",
+      "Commit when you can resolve it or when you have enough value creatures to pressure through disruption."
     ],
     "late_game": [
       "Cast Living End once you have enough triggers queued or in hand",
       "Return a suite of low-cost creatures to dominate the board",
-      "Stall with remaining interaction if the combo is disrupted"
+      "Stall with remaining interaction if the combo is disrupted",
+      "Resurrecting Cryptbreaker for infinite mana/bleed, Scavenging Ooze for graveyard recursion, or Tarmogoyf for board presence.",
+      "Win by overwhelming the board with these engines or using them to out-value the opponent.",
+      "Go all-in when you can resolve Living End, have sufficient mana to cast multiple creatures, or when the opponent has no graveyard hate or removal.",
+      "Also commit when you can pressure through their hand disruption."
     ]
   },
   "key_cards": [
@@ -58,7 +74,12 @@
   "sequencing_tips": [
     "Cast your cheapest instants and sorceries before Living End to ensure the trigger count is met",
     "Hold interaction in hand to respond to opponent's attempts to disrupt your combo",
-    "Queue spells in the same turn as Living End to maximize the number of creatures returned"
+    "Queue spells in the same turn as Living End to maximize the number of creatures returned",
+    "Common mistake: casting Living End too early without a plan for what to resurrect, or overcommitting to discard and leaving yourself vulnerable to aggro.",
+    "Always track the opponent's graveyard and hand.",
+    "Force of Negation is crucial for protecting your combo pieces.",
+    "Subtlety should be used to maximize graveyard value.",
+    "Don't forget to fetch lands efficiently and manage your graveyard for both offense and defense."
   ],
   "matchups": [
     {
@@ -92,16 +113,35 @@
       "opponent_archetype": "Azorius Control",
       "advice": "Use Force of Negation to counter Cord of Calling and Solitude to counter Nadu while it is on the stack, preventing the opponent from drawing cards instead. (from gameplay) Include Dress Down to temporarily remove Nadu's abilities, disrupting its combo potential for a turn. (from gameplay) Sun Cleanser is highly effective against the energy package (Galvanic Discharge, Wrath of the Skies) because it removes all energy counters and prevents the opponent from gaining new ones. (from gameplay) The control list is specifically tuned to beat Bant Nadu, providing a strong advantage in games 1 and 2 before sideboard adjustments. (from gameplay) Prioritize countering key combo pieces on the stack with Force of Negation rather than playing board wipes that allow the opponent to draw cards instead. (from gameplay) Be aware that certain stack-protection effects do not help resolve key combo pieces against Subtlety in games one and two, requiring direct answers rather than stack manipulation. (from gameplay)",
       "watch_for": []
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Force of Negation to protect Living End or key discard. Sequence spells to force counters, then resolve the next one. Use cheap threats or discard to disrupt their hand before casting Living End.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and cheap creatures. Don't let them stabilize; use graveyard hate if needed. Force them to interact with your threats rather than developing their mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize graveyard hate to disrupt their Living End. Use Force of Negation to protect your own spells. Track their graveyard to know what they want to resurrect.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspells",
     "Removal spells",
     "Board wipes",
-    "Hand disruption"
+    "Hand disruption",
+    "Watch for graveyard hate (Leyline of the Void, Rest in Peace, Surgical Extraction), counterspells, and board wipes.",
+    "Note when opponents play fetch/shock or mana dorks, as they may be setting up a combo or ramp.",
+    "Track discard targets to anticipate their next move."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:27:04+00:00",
     "model": "local-model",
@@ -168,6 +208,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": "Living End"
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

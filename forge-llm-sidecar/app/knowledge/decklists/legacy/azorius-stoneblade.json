@@ -1,0 +1,145 @@
+{
+  "archetype": "Azorius Stoneblade",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/azorius-stoneblade.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Batterskull"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 3,
+      "name": "Daze"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 1,
+      "name": "Meteor Sword"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 2,
+      "name": "Murktide Regent"
+    },
+    {
+      "qty": 3,
+      "name": "Phelia, Exuberant Shepherd"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Pre-War Formalwear"
+    },
+    {
+      "qty": 3,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 3,
+      "name": "Stifle"
+    },
+    {
+      "qty": 4,
+      "name": "Stoneforge Mystic"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 3,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 3,
+      "name": "Tundra"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 1,
+      "name": "Engineered Explosives"
+    },
+    {
+      "qty": 1,
+      "name": "Erode"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 2,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 2,
+      "name": "Wrath of the Skies"
+    }
+  ]
+}

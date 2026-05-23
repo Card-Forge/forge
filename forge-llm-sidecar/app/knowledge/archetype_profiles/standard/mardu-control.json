@@ -1,0 +1,489 @@
+{
+  "schema_version": 1,
+  "name": "Mardu Control",
+  "format": "standard",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 65,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Appa, Steadfast Guardian",
+    "Quintorius Kand",
+    "Black Cat, Cunning Thief",
+    "Charming Prince",
+    "Decadent Dragon",
+    "Gonti, Night Minister",
+    "Nullpriest of Oblivion",
+    "Outrageous Robbery"
+  ],
+  "interaction_to_disrupt": [
+    "Inevitable Defeat",
+    "Nowhere to Run",
+    "Day of Black Sun",
+    "Erode",
+    "Exorcise",
+    "Fire Magic",
+    "Get Lost",
+    "Ghost Vacuum"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 3,
+      "cards": [
+        "Unholy Annex // Ritual Chamber"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 3,
+      "cards": [
+        "Cruelclaw's Heist"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Black Cat, Cunning Thief",
+        "Charming Prince",
+        "Elegant Parlor",
+        "Raucous Theater"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 20,
+      "cards": [
+        "Appa, Steadfast Guardian",
+        "Black Cat, Cunning Thief",
+        "Charming Prince",
+        "Decadent Dragon",
+        "Gonti, Night Minister",
+        "Nullpriest of Oblivion",
+        "Outrageous Robbery",
+        "Practiced Scrollsmith",
+        "Quintorius Kand",
+        "Stalactite Dagger",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 27,
+      "cards": [
+        "Day of Black Sun",
+        "Erode",
+        "Exorcise",
+        "Fire Magic",
+        "Get Lost",
+        "Ghost Vacuum",
+        "Gonti, Night Minister",
+        "Inevitable Defeat",
+        "Lightning Helix",
+        "Nullpriest of Oblivion",
+        "Practiced Scrollsmith",
+        "Quintorius Kand",
+        "Requiting Hex"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Day of Black Sun",
+        "Fire Magic",
+        "Ghost Vacuum"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 4
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Inevitable Defeat",
+        "Nowhere to Run"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 12,
+      "cards": [
+        "Elegant Parlor",
+        "Ghost Vacuum",
+        "Nullpriest of Oblivion",
+        "Practiced Scrollsmith",
+        "Quintorius Kand",
+        "Raucous Theater",
+        "Strategic Betrayal"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 11,
+      "cards": [
+        "Airbender Ascension",
+        "Charming Prince",
+        "Nullpriest of Oblivion",
+        "Practiced Scrollsmith",
+        "Quintorius Kand",
+        "Return the Favor"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 5,
+      "cards": [
+        "Appa, Steadfast Guardian",
+        "Quintorius Kand"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Duress",
+        "The Rise of Sozin",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 25,
+      "cards": [
+        "Blazemire Verge",
+        "Bleachbone Verge",
+        "Blood Crypt",
+        "Cori Mountain Monastery",
+        "Elegant Parlor",
+        "Godless Shrine",
+        "Interdimensional Web Watch",
+        "Multiversal Passage",
+        "Raucous Theater",
+        "Sacred Foundry",
+        "Shattered Sanctum",
+        "Soulstone Sanctuary",
+        "Sunbillow Verge",
+        "Sundown Pass"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Blazemire Verge",
+        "Bleachbone Verge",
+        "Blood Crypt",
+        "Cori Mountain Monastery",
+        "Elegant Parlor",
+        "Godless Shrine",
+        "Mountain",
+        "Multiversal Passage",
+        "Plains",
+        "Raucous Theater",
+        "Sacred Foundry",
+        "Shattered Sanctum",
+        "Soulstone Sanctuary",
+        "Sunbillow Verge",
+        "Sundown Pass",
+        "Swamp"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Quintorius Kand"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.31
+  },
+  "dual_role_cards": [
+    {
+      "card": "Appa, Steadfast Guardian",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Black Cat, Cunning Thief",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blazemire Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bleachbone Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Charming Prince",
+      "roles": [
+        "dig_draw",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cori Mountain Monastery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Day of Black Sun",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elegant Parlor",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Magic",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Vacuum",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gonti, Night Minister",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inevitable Defeat",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Multiversal Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nullpriest of Oblivion",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Practiced Scrollsmith",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quintorius Kand",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raucous Theater",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shattered Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soulstone Sanctuary",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunbillow Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sundown Pass",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Voice of Victory",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/mardu-control.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

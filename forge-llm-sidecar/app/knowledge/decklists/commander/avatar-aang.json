@@ -1,0 +1,376 @@
+{
+  "archetype": "Avatar Aang",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/avatar-aang.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Aang, Airbending Master"
+    },
+    {
+      "qty": 1,
+      "name": "Aang, Swift Savior"
+    },
+    {
+      "qty": 1,
+      "name": "Aang, at the Crossroads"
+    },
+    {
+      "qty": 1,
+      "name": "Aang, the Last Airbender"
+    },
+    {
+      "qty": 1,
+      "name": "Abandoned Air Temple"
+    },
+    {
+      "qty": 1,
+      "name": "Agna Qel'a"
+    },
+    {
+      "qty": 1,
+      "name": "Airbender Ascension"
+    },
+    {
+      "qty": 1,
+      "name": "Airbender's Reversal"
+    },
+    {
+      "qty": 1,
+      "name": "Airbending Lesson"
+    },
+    {
+      "qty": 1,
+      "name": "Appa, Loyal Sky Bison"
+    },
+    {
+      "qty": 1,
+      "name": "Appa, Steadfast Guardian"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Avatar Aang"
+    },
+    {
+      "qty": 1,
+      "name": "Avatar Kyoshi, Earthbender"
+    },
+    {
+      "qty": 1,
+      "name": "Avatar's Wrath"
+    },
+    {
+      "qty": 1,
+      "name": "Ba Sing Se"
+    },
+    {
+      "qty": 1,
+      "name": "Bender's Waterskin"
+    },
+    {
+      "qty": 1,
+      "name": "Boiling Rock Prison"
+    },
+    {
+      "qty": 1,
+      "name": "Boiling Rock Rioter"
+    },
+    {
+      "qty": 1,
+      "name": "Bumi, Unleashed"
+    },
+    {
+      "qty": 1,
+      "name": "Chromatic Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Crumbling Necropolis"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivate"
+    },
+    {
+      "qty": 1,
+      "name": "Cycle of Renewal"
+    },
+    {
+      "qty": 1,
+      "name": "Earthbender Ascension"
+    },
+    {
+      "qty": 1,
+      "name": "Earthen Ally"
+    },
+    {
+      "qty": 1,
+      "name": "Earthshape"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Farseek"
+    },
+    {
+      "qty": 1,
+      "name": "Fellwar Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Fire Lord Zuko"
+    },
+    {
+      "qty": 1,
+      "name": "Fire Nation Palace"
+    },
+    {
+      "qty": 1,
+      "name": "Firebending Student"
+    },
+    {
+      "qty": 1,
+      "name": "Foggy Bottom Swamp"
+    },
+    {
+      "qty": 5,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Frontier Bivouac"
+    },
+    {
+      "qty": 1,
+      "name": "Great Divide Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Hakoda, Selfless Commander"
+    },
+    {
+      "qty": 1,
+      "name": "Haru, Hidden Talent"
+    },
+    {
+      "qty": 1,
+      "name": "Iroh, Dragon of the West"
+    },
+    {
+      "qty": 1,
+      "name": "Iroh, Grand Lotus"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Jungle Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Katara, Bending Prodigy"
+    },
+    {
+      "qty": 1,
+      "name": "Katara, Water Tribe's Hope"
+    },
+    {
+      "qty": 1,
+      "name": "Katara, the Fearless"
+    },
+    {
+      "qty": 1,
+      "name": "Kodama's Reach"
+    },
+    {
+      "qty": 1,
+      "name": "Kyoshi Village"
+    },
+    {
+      "qty": 1,
+      "name": "Mai and Zuko"
+    },
+    {
+      "qty": 1,
+      "name": "Meditation Pools"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Palms Oasis"
+    },
+    {
+      "qty": 1,
+      "name": "Monk Gyatso"
+    },
+    {
+      "qty": 1,
+      "name": "Moonmist"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Monastery"
+    },
+    {
+      "qty": 1,
+      "name": "Nomad Outpost"
+    },
+    {
+      "qty": 1,
+      "name": "North Pole Gates"
+    },
+    {
+      "qty": 1,
+      "name": "North Pole Patrol"
+    },
+    {
+      "qty": 1,
+      "name": "Omashu City"
+    },
+    {
+      "qty": 1,
+      "name": "Opulent Palace"
+    },
+    {
+      "qty": 1,
+      "name": "Origin of Metalbending"
+    },
+    {
+      "qty": 1,
+      "name": "Ozai, the Phoenix King"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Realm of Koh"
+    },
+    {
+      "qty": 1,
+      "name": "Ruthless Waterbender"
+    },
+    {
+      "qty": 1,
+      "name": "Sandsteppe Citadel"
+    },
+    {
+      "qty": 1,
+      "name": "Savage Lands"
+    },
+    {
+      "qty": 1,
+      "name": "Seaside Citadel"
+    },
+    {
+      "qty": 1,
+      "name": "Serpent's Pass"
+    },
+    {
+      "qty": 1,
+      "name": "Shared Roots"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spirit Water Revival"
+    },
+    {
+      "qty": 1,
+      "name": "Sun Warriors"
+    },
+    {
+      "qty": 1,
+      "name": "Sun-Blessed Peak"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "The Legend of Kuruk"
+    },
+    {
+      "qty": 1,
+      "name": "The Legend of Roku"
+    },
+    {
+      "qty": 1,
+      "name": "The Legend of Yangchen"
+    },
+    {
+      "qty": 1,
+      "name": "The Rise of Sozin"
+    },
+    {
+      "qty": 1,
+      "name": "Toph, Hardheaded Teacher"
+    },
+    {
+      "qty": 1,
+      "name": "Toph, the Blind Bandit"
+    },
+    {
+      "qty": 1,
+      "name": "Toph, the First Metalbender"
+    },
+    {
+      "qty": 1,
+      "name": "Water Tribe Rallier"
+    },
+    {
+      "qty": 1,
+      "name": "Waterbender Ascension"
+    },
+    {
+      "qty": 1,
+      "name": "Waterbender's Restoration"
+    },
+    {
+      "qty": 1,
+      "name": "Waterbending Lesson"
+    },
+    {
+      "qty": 1,
+      "name": "Yue, the Moon Spirit"
+    },
+    {
+      "qty": 1,
+      "name": "Zuko, Exiled Prince"
+    },
+    {
+      "qty": 1,
+      "name": "Zuko, Firebending Master"
+    }
+  ],
+  "sideboard": []
+}

@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with Kozilek's Command for early disruption",
       "Hands containing Karn, the Great Creator with a play-around plan",
-      "Hands with Thundertrap Trainer and cheap interaction"
+      "Hands with Thundertrap Trainer and cheap interaction",
+      "Keep hands with 2+ mana sources (Cloudpost, Darksteel Citadel, Moxen, or fetches).",
+      "Keep hands with at least one Turn 1 play and a Turn 2 spell (Kozilek's Command, Karn, or a threat).",
+      "Hands with 1 land and 2+ Moxen are keepers."
     ],
     "mulligan_criteria": [
       "Hands lacking instant-speed interaction in a Legacy environment",
       "Hands with only high-cost permanents and no draw",
-      "Hands missing a clear path to stabilize against aggressive Legacy archetypes"
+      "Hands missing a clear path to stabilize against aggressive Legacy archetypes",
+      "Mulligan hands with 3+ lands, no early mana, or only late-game spells with no acceleration."
     ],
     "examples": []
   },
@@ -25,17 +29,33 @@
     "early_game": [
       "Prioritize playing Kozilek's Command to draw into answers or disrupt opponent's turns",
       "Deploy Thundertrap Trainer to establish board presence and generate incremental value",
-      "Hold up mana for interaction while assessing opponent's opening strategy"
+      "Hold up mana for interaction while assessing opponent's opening strategy",
+      "Turn 1: Play a Mox or Cloudpost/Darksteel Citadel.",
+      "If you have two mana rocks, play them.",
+      "Turn 2: If you have 3+ mana, cast Kozilek's Command or Karn.",
+      "Sequence Cloudpost carefully\u2014it enters tapped, so you need another mana source to cast spells the turn it hits.",
+      "Darksteel Citadel is crucial for hexproof and consistent mana."
     ],
     "mid_game": [
       "Use Karn, the Great Creator to convert opponent's threats into artifacts and untap them for control",
       "Apply +1/+1 counters to Thundertrap Trainer to grow it into a board wipe or finisher",
-      "Cycle Kozilek's Command modes to maintain card advantage and manage tempo"
+      "Cycle Kozilek's Command modes to maintain card advantage and manage tempo",
+      "Mana is your biggest asset but also your vulnerability.",
+      "Don't overextend into hate.",
+      "Use Moxen strategically to enable spells when you need them.",
+      "Keep Cloudpost in play for late-game mana, but be aware of land destruction.",
+      "Manage hand size\u2014Kozilek's Command can draw cards, so use it to refill when you're low.",
+      "Commit threats only when you have protection or can answer their interaction."
     ],
     "late_game": [
       "Leverage Karn's untap ability to repeatedly trigger artifact synergies and outvalue opponents",
       "Push damage with a large Thundertrap Trainer while protecting it with Kozilek's Command",
-      "Transition to a grindy control game by stripping opponent's resources and closing with direct damage"
+      "Transition to a grindy control game by stripping opponent's resources and closing with direct damage",
+      "Kozilek's Command (destroy all nonbasic lands, draw cards, or deal damage), Karn's ultimate (exile target permanent, then draw cards), or Thundertrap Trainer.",
+      "Usually, it's a combination of card advantage and a game-ending spell.",
+      "When you have enough mana to cast your win condition and have answered or ignored their interaction.",
+      "When they're at low life and you can close the game.",
+      "When you've established board control and they have no answers."
     ]
   },
   "key_cards": [
@@ -58,7 +78,13 @@
   "sequencing_tips": [
     "Hold up Kozilek's Command before committing Karn to the battlefield to protect against early removal",
     "Prioritize giving Thundertrap Trainer flying before attacking to avoid being blocked by aggressive threats",
-    "Use Karn's untap ability on your opponent's turn to disrupt their resource generation while maintaining board presence"
+    "Use Karn's untap ability on your opponent's turn to disrupt their resource generation while maintaining board presence",
+    "Cloudpost enters tapped, so sequence carefully.",
+    "Darksteel Citadel is your best land for consistency and hexproof.",
+    "Kozilek's Command is incredibly flexible\u2014use the right mode for the situation.",
+    "Don't overcommit to one spell",
+    "preserve resources.",
+    "Thundertrap Trainer likely benefits from your mana base\u2014use it to pressure or combo."
   ],
   "matchups": [
     {
@@ -87,16 +113,35 @@
         "Graveyard recursion",
         "Win-condition pieces"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Kozilek's Command's split modes or Karn's abilities to bypass counters. Cast spells in response to their counters, or use mana rocks to cast multiple spells in a turn. Sometimes you can't beat counters, so focus on out-value and protecting your win conditions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-ramp them with Moxen and Cloudpost. Use Kozilek's Command to destroy their mana rocks or nonbasics. Karn can exile their key ramp pieces. Force them to use resources on you while you set up.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race for card advantage and protection. Prioritize protecting your Cloudpost/Citadel. Use Kozilek's Command to destroy their nonbasics. Sideboard in more hate or counterspells. Win by out-resourcing and forcing them to make mistakes.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
     "Counterspell packages",
-    "Graveyard hate"
+    "Graveyard hate",
+    "Watch for land destruction (Wasteland, Field of Ruin), artifact hate (Rest in Peace, Null Rod), and combo win conditions.",
+    "Pay attention to when they tap out for interaction vs. when they're holding up counters.",
+    "Track their graveyard for Sneak & Show or Delver strategies."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:51:02+00:00",
     "model": "local-model",
@@ -112,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

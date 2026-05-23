@@ -13,11 +13,14 @@
     "keep_criteria": [
       "Hands with early artifacts like Frogmite or Clockwork Percussionist",
       "Hands containing one-mana removal or damage spells",
-      "Hands with 2-3 lands for consistent early turns"
+      "Hands with 2-3 lands for consistent early turns",
+      "Keep hands with 2-3 lands, at least one early artifact (Springleaf Drum, Signet, or Arcbound Ravager), and early interaction (discard or Galvanic Blast/Fanatical Offering).",
+      "Prioritize hands that can play a land and an artifact on turn 1."
     ],
     "mulligan_criteria": [
       "Hands lacking early threats or interactive spells",
-      "Hands with too many lands or high-cost cards that delay the aggressive clock"
+      "Hands with too many lands or high-cost cards that delay the aggressive clock",
+      "Mulligan on 3+ lands with no artifacts or threats, or hands with only removal and no way to cast them."
     ],
     "examples": [
       {
@@ -36,15 +39,30 @@
   "game_plan": {
     "early_game": [
       "Play Frogmite and Clockwork Percussionist to establish an aggressive clock and Affinity discount",
-      "Use Galvanic Blast and Lightning Bolt for mana-efficient removal and direct damage"
+      "Use Galvanic Blast and Lightning Bolt for mana-efficient removal and direct damage",
+      "Turn 1: Play a land, then cast a cheap artifact.",
+      "If you have Springleaf Drum, play it to enable casting a 1-mana artifact or spell.",
+      "Turn 2: Develop your board with additional artifacts, cast Arcbound Ravager or Myr Enforcer, and use removal to clear early blockers or go face.",
+      "Sequence lands to ensure you can cast your highest-priority artifact each turn, maximizing Affinity discounts."
     ],
     "mid_game": [
       "Deploy Ichor Wellspring and Nihil Spellbomb to generate card advantage and disrupt opponent recursion",
-      "Cast Refurbished Familiar to reduce opponent resources or draw cards in attrition matches"
+      "Cast Refurbished Familiar to reduce opponent resources or draw cards in attrition matches",
+      "Prioritize casting artifacts to maximize Affinity discounts.",
+      "Use Springleaf Drum to cast spells out of sequence.",
+      "Manage life total carefully when using Reckoner's Bargain",
+      "only pay 5 life if you can stabilize or close the game.",
+      "Keep removal for key threats, not just chump blockers.",
+      "Commit threats when you have removal to handle blockers or when the opponent is low on interaction."
     ],
     "late_game": [
       "Utilize Blood Fountain as a mana sink to repeatedly cast Refurbished Familiar or Myr Enforcer",
-      "Play Makeshift Munitions for recurring removal against token decks and to guarantee reach"
+      "Play Makeshift Munitions for recurring removal against token decks and to guarantee reach",
+      "Galvanic Blast and Fanatical Offering for direct damage or clearing blockers.",
+      "Arcbound Ravager with +1/+1 counters or Myr Enforcer for combat damage.",
+      "Reckoner's Bargain to draw into game-ending threats if you're in a grindy position.",
+      "Go all-in when you have a clear path to combat damage, the opponent has no sweepers, or you can trade artifacts to clear their board.",
+      "Commit when your life total is safe enough to cast Reckoner's Bargain and draw into a win condition."
     ]
   },
   "key_cards": [
@@ -98,7 +116,13 @@
     "Sequence Frogmite early to set up Affinity discount for turn 2-3 threats",
     "Use Blood Fountain as a mana sink to repeatedly cast Refurbished Familiar or Myr Enforcer",
     "Prioritize Galvanic Blast and Lightning Bolt for speed in less interactive matchups",
-    "Deploy Nihil Spellbomb to guarantee extra draws and disrupt opponent recursion"
+    "Deploy Nihil Spellbomb to guarantee extra draws and disrupt opponent recursion",
+    "Avoid overcommitting to Springleaf Drum if you can't cast a spell with it.",
+    "Don't sacrifice Fanatical Offering on your own artifacts unless it clears a critical blocker or goes face for lethal.",
+    "Watch your life total carefully when casting Reckoner's Bargain",
+    "going below 5 life without a win condition is often fatal.",
+    "In mirrors, discard is king\u2014prioritize it over drawing extra cards.",
+    "Always track opponent's hand size to time your discard and Bargain plays optimally."
   ],
   "matchups": [
     {
@@ -158,6 +182,31 @@
         "Blood Fountain recursion",
         "Midrange threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells from hand. Cast artifacts in response to their removal or when they're tapped out. Use Springleaf Drum to cast spells at instant speed. Consider casting threats when they have no mana available or when you can trade artifacts to bypass counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race them. Use discard to hit their mana dorks or key ramp spells. Trade artifacts efficiently to slow their curve. Don't overcommit if they have sweepers, and prioritize clearing their early threats to buy time for your own engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use early removal (Galvanic Blast, Fanatical Offering) to clear key threats. Play discard to disrupt their hand. Stabilize with life total management and Reckoner's Bargain if needed. Race them if you have a clear path to damage, but prioritize survival over reckless aggression.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure relentlessly with cheap artifacts. Use discard to remove protection spells and counters. Grind with Reckoner's Bargain and artifact value. Force them to use removal on your threats to open up damage, and be ready to swing through with multiple artifacts once they tap out.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through discard efficiency and artifact value. Trade artifacts favorably (e.g., sacrifice a Signet for a creature). Use Reckoner's Bargain to out-draw them. Prioritize clearing their key threats with removal. Track their life total and discard to deny their Bargain, and never overextend without board presence.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -170,10 +219,12 @@
     "Mono Blue Terror",
     "Mono Red Rally",
     "Bogles",
-    "Spy Combo"
+    "Spy Combo",
+    "Watch for sweepers (Wrath of God, Day of Judgment), counterspells (Counterspell, Mana Leak), and life gain engines."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-rakdos-affinity-2025-deck-tech-sidebosrd-guide",
     "generated_at": "2026-05-21T10:34:59+00:00",
     "model": "local-model",
@@ -191,6 +242,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

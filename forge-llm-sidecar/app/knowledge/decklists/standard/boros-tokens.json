@@ -1,0 +1,93 @@
+{
+  "archetype": "Boros Tokens",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/boros-tokens.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 3,
+      "name": "Dalkovan Encampment"
+    },
+    {
+      "qty": 4,
+      "name": "Fanatical Firebrand"
+    },
+    {
+      "qty": 4,
+      "name": "Howlsquad Heavy"
+    },
+    {
+      "qty": 4,
+      "name": "Inspiring Vantage"
+    },
+    {
+      "qty": 10,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Ojer Axonil, Deepest Might"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Raphael, Tough Turtle"
+    },
+    {
+      "qty": 4,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 4,
+      "name": "Shocking Sharpshooter"
+    },
+    {
+      "qty": 4,
+      "name": "Stadium Headliner"
+    },
+    {
+      "qty": 2,
+      "name": "Sunbillow Verge"
+    },
+    {
+      "qty": 3,
+      "name": "The Last Ronin's Technique"
+    },
+    {
+      "qty": 4,
+      "name": "Voice of Victory"
+    },
+    {
+      "qty": 4,
+      "name": "Warleader's Call"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Dewdrop Cure"
+    },
+    {
+      "qty": 3,
+      "name": "Erode"
+    },
+    {
+      "qty": 4,
+      "name": "Magebane Lizard"
+    },
+    {
+      "qty": 3,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Sear"
+    }
+  ]
+}

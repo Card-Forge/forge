@@ -1,0 +1,125 @@
+{
+  "archetype": "Golgari Food",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/golgari-food.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 4,
+      "name": "Blooming Marsh"
+    },
+    {
+      "qty": 2,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Cache Grab"
+    },
+    {
+      "qty": 4,
+      "name": "Cauldron Familiar"
+    },
+    {
+      "qty": 4,
+      "name": "Darkbore Pathway"
+    },
+    {
+      "qty": 4,
+      "name": "Dredger's Insight"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Fountainport"
+    },
+    {
+      "qty": 4,
+      "name": "Gilded Goose"
+    },
+    {
+      "qty": 4,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Scavenger's Talent"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "The Meathook Massacre"
+    },
+    {
+      "qty": 2,
+      "name": "Traverse the Ulvenwald"
+    },
+    {
+      "qty": 4,
+      "name": "Witch's Oven"
+    },
+    {
+      "qty": 2,
+      "name": "Witherbloom Charm"
+    },
+    {
+      "qty": 3,
+      "name": "Ygra, Eater of All"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 1,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 3,
+      "name": "Illness in the Ranks"
+    },
+    {
+      "qty": 1,
+      "name": "Liliana of the Veil"
+    },
+    {
+      "qty": 2,
+      "name": "Professor Dellian Fel"
+    },
+    {
+      "qty": 1,
+      "name": "Ray of Enfeeblement"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Unlicensed Hearse"
+    }
+  ]
+}

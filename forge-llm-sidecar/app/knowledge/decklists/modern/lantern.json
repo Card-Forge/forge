@@ -1,0 +1,137 @@
+{
+  "archetype": "Lantern",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/lantern.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Academy Ruins"
+    },
+    {
+      "qty": 4,
+      "name": "Codex Shredder"
+    },
+    {
+      "qty": 4,
+      "name": "Darkslick Shores"
+    },
+    {
+      "qty": 1,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 4,
+      "name": "Ensnaring Bridge"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 4,
+      "name": "Inquisition of Kozilek"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 3,
+      "name": "Lantern of Insight"
+    },
+    {
+      "qty": 3,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 3,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 3,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 2,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 2,
+      "name": "Pyxis of Pandemonium"
+    },
+    {
+      "qty": 4,
+      "name": "River of Tears"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "The Underworld Cookbook"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Torpor Orb"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 3,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 4,
+      "name": "Whir of Invention"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Ashiok, Dream Render"
+    },
+    {
+      "qty": 1,
+      "name": "Cursed Totem"
+    },
+    {
+      "qty": 1,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Soulless Jailer"
+    },
+    {
+      "qty": 1,
+      "name": "Torpor Orb"
+    },
+    {
+      "qty": 1,
+      "name": "Void Mirror"
+    },
+    {
+      "qty": 2,
+      "name": "Welding Jar"
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "name": "Disa the Restless",
+  "format": "commander",
+  "colors": [
+    "B",
+    "G",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Grixis Disa is a midrange-control hybrid that uses discard to dictate the early game, stabilizes with Disa\u2019s exile ability, and closes out games using flying Spirit tokens or synergistic creatures. It excels against combo and control by disrupting their plans and outvaluing them, while relying on efficient interaction and late-game resilience against aggressive strategies.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 2,
+      "cards": [
+        "Barrowgoyf",
+        "Ignoble Hierarch"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": []
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Barrowgoyf",
+        "Ignoble Hierarch"
+      ]
+    },
+    "threats": {
+      "target_count": 1,
+      "cards": [
+        "Disa the Restless"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 2,
+      "cards": [
+        "Barrowgoyf",
+        "Ignoble Hierarch"
+      ]
+    },
+    "graveyard_enablers": {
+      "target_count": 2,
+      "cards": [
+        "Barrowgoyf",
+        "Ignoble Hierarch"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Barrowgoyf",
+        "Ignoble Hierarch"
+      ]
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": []
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Barrowgoyf",
+        "Ignoble Hierarch"
+      ]
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Barrowgoyf",
+        "Ignoble Hierarch"
+      ]
+    },
+    "mana_fixing": {
+      "target_count": 0,
+      "cards": []
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ignoble Hierarch",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "payoff_cards",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Barrowgoyf",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "payoff_cards",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: Overusing Disa\u2019s +1 too early, leaving you with no card advantage when you need it.",
+    "Another: Sacrificing Barrowgoyf too early without a clear payoff.",
+    "Remember that Ignoble Hierarch\u2019s -1/-1 effect can be used to sacrifice to Grim Flayer/Bloodtithe Harvester for value.",
+    "Disa\u2019s -1 exiles from all zones, making it excellent against recursion.",
+    "Watch for opponent\u2019s sideboarded hate (Rest in Peace, Leyline of the Void) and adjust discard targets accordingly."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Ignoble Hierarch or Barrowgoyf if mana allows, or hold for a discard spell."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Cast a discard spell targeting the opponent\u2019s key early threat or combo piece."
+    },
+    {
+      "trigger": "early game",
+      "line": "If ahead, develop board with Hierarch/Goyf"
+    }
+  ],
+  "kill_priority": [
+    "Barrowgoyf",
+    "Ignoble Hierarch",
+    "Disa the Restless"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

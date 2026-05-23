@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "name": "Jeskai Steel-Cutter",
+  "format": "modern",
+  "colors": [
+    "W",
+    "U",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Jeskai Steel-Cutter is a tempo deck that leverages early mana acceleration to establish a wide board of creatures. It uses card advantage and land tutoring to outpace opponents while protecting its key finisher. The deck aims to overwhelm defenses through incremental damage and resilient land recursion.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 2,
+      "cards": [
+        "Cori-Steel Cutter",
+        "Tamiyo, Inquisitive Student"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Cori-Steel Cutter",
+        "Tamiyo, Inquisitive Student"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 2,
+      "cards": [
+        "Mox Opal",
+        "Tamiyo, Inquisitive Student"
+      ]
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Cori-Steel Cutter",
+        "Tamiyo, Inquisitive Student"
+      ]
+    },
+    "threats": {
+      "target_count": 2,
+      "cards": [
+        "Cori-Steel Cutter",
+        "Mox Opal"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Cori-Steel Cutter"
+      ]
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 1,
+      "cards": [
+        "Cori-Steel Cutter"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 1,
+      "cards": [
+        "Cori-Steel Cutter"
+      ]
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Cori-Steel Cutter",
+        "Mox Opal"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Cori-Steel Cutter",
+        "Mox Opal"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 3,
+      "cards": [
+        "Cori-Steel Cutter",
+        "Mox Opal",
+        "Tamiyo, Inquisitive Student"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Mox Opal",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tamiyo, Inquisitive Student",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "mana_fixing",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cori-Steel Cutter",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play Mox Opal before casting Tamiyo to maximize early mana availability",
+    "Coordinate attacks with multiple creatures to trigger Cori-Steel Cutter's growth ability efficiently",
+    "Use Tamiyo's tutor ability to find lands that enable Mox Opal or specific threats",
+    "Prioritize keeping Cori-Steel Cutter alive until it has accumulated enough counters to threaten lethal",
+    "Common mistake: playing Opal without enough artifacts to activate it, stalling your game plan."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Mox Opal on turn one if possible to accelerate mana"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish land drops and play cheap creatures to apply early pressure"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early interaction to disrupt opponent's game plan"
+    }
+  ],
+  "kill_priority": [
+    "Cori-Steel Cutter",
+    "Mox Opal",
+    "Cori-Steel Cutter",
+    "Tamiyo, Inquisitive Student",
+    "Cori-Steel Cutter",
+    "Mox Opal"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

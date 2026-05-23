@@ -1,0 +1,457 @@
+{
+  "schema_version": 1,
+  "name": "Mardu Transmogrify",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "B",
+    "R"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "Mardu Transmogrify is a Pioneer midrange deck that leverages disruptive removal and creature recycling to outvalue opponents. By combining early-game interaction with late-game token generation and graveyard recursion, it aims to stabilize and close out games through incremental advantage. The deck thrives on trading efficiently and turning dead creatures into persistent threats.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Wild Ride"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 15,
+      "cards": [
+        "Case of the Stashed Skeleton",
+        "Fountainport",
+        "Ob Nixilis, the Adversary",
+        "Reckoner Bankbuster",
+        "Transmogrify",
+        "Volcanic Spite"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Torch the Tower"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Case of the Stashed Skeleton",
+        "Transmogrify"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Case of the Stashed Skeleton",
+        "Thoughtseize",
+        "Transmogrify"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 28,
+      "cards": [
+        "Ashiok, Dream Render",
+        "Atraxa, Grand Unifier",
+        "Blightstep Pathway",
+        "Case of the Stashed Skeleton",
+        "Duress",
+        "Elesh Norn, Mother of Machines",
+        "Fable of the Mirror-Breaker",
+        "Ob Nixilis, the Adversary",
+        "Raph & Mikey, Troublemakers",
+        "Thoughtseize",
+        "Transmogrify"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 20,
+      "cards": [
+        "Abrade",
+        "Day of Black Sun",
+        "Fatal Push",
+        "Go for the Throat",
+        "Ob Nixilis, the Adversary",
+        "Path of Peril",
+        "Rakdos Joins Up",
+        "Torch the Tower",
+        "Transmogrify",
+        "Volcanic Spite"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 3
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Day of Black Sun",
+        "Path of Peril"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 9,
+      "cards": [
+        "Case of the Stashed Skeleton",
+        "Ob Nixilis, the Adversary",
+        "Transmogrify"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Ashiok, Dream Render",
+        "Case of the Stashed Skeleton",
+        "Go Blank",
+        "Rakdos Joins Up",
+        "Transmogrify",
+        "Unlicensed Hearse",
+        "Wild Ride"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 10,
+      "cards": [
+        "Case of the Stashed Skeleton",
+        "Rakdos Joins Up",
+        "Transmogrify",
+        "Wild Ride"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Thoughtseize"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Thoughtseize",
+        "Transmogrify"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Hidetsugu Consumes All",
+        "The Legend of Roku"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 22,
+      "cards": [
+        "Blackcleave Cliffs",
+        "Blood Crypt",
+        "Fountainport",
+        "Haunted Ridge",
+        "Mutavault",
+        "Sokenzan, Crucible of Defiance",
+        "Transmogrify",
+        "Urborg, Tomb of Yawgmoth"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Blackcleave Cliffs",
+        "Blood Crypt",
+        "Fountainport",
+        "Haunted Ridge",
+        "Mountain",
+        "Mutavault",
+        "Sokenzan, Crucible of Defiance",
+        "Swamp",
+        "Urborg, Tomb of Yawgmoth"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Ashiok, Dream Render",
+        "Ob Nixilis, the Adversary"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "interaction_density": 0.29
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ashiok, Dream Render",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blackcleave Cliffs",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Case of the Stashed Skeleton",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Day of Black Sun",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fountainport",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haunted Ridge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mutavault",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ob Nixilis, the Adversary",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Peril",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rakdos Joins Up",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sokenzan, Crucible of Defiance",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "combo_pieces",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Torch the Tower",
+      "roles": [
+        "dig_draw",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Transmogrify",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urborg, Tomb of Yawgmoth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volcanic Spite",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wild Ride",
+      "roles": [
+        "graveyard_enablers",
+        "mana_reducers",
+        "recursion"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Thoughtseize until you see the opponent's key threat or combo piece",
+    "Play a creature before casting Transmogrify to ensure you have a legal sacrifice target",
+    "Use Case of the Stashed Skeleton to refill your graveyard before activating Transmogrify",
+    "Prioritize land drops in the early game to avoid being mana-screwed for Transmogrify",
+    "Common mistake: Overusing Transmogrify on non-essential targets."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap creatures to establish board presence and provide sacrifice outlets"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Thoughtseize to remove key threats or combo pieces before they resolve"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize land drops to ensure Transmogrify can be cast by turn three"
+    }
+  ],
+  "kill_priority": [
+    "Case of the Stashed Skeleton",
+    "Thoughtseize",
+    "Transmogrify",
+    "Ashiok, Dream Render",
+    "Ob Nixilis, the Adversary",
+    "Atraxa, Grand Unifier",
+    "Blightstep Pathway",
+    "Duress"
+  ],
+  "interaction_to_disrupt": [
+    "Abrade",
+    "Day of Black Sun",
+    "Fatal Push",
+    "Go for the Throat",
+    "Ob Nixilis, the Adversary",
+    "Path of Peril",
+    "Rakdos Joins Up",
+    "Torch the Tower"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/mardu-transmogrify.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

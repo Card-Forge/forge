@@ -1,0 +1,736 @@
+{
+  "schema_version": 1,
+  "name": "Killian, Decisive Mentor",
+  "format": "commander",
+  "colors": [
+    "B",
+    "W"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 100,
+  "macro_plan": "A B/W token commander that generates an army of Soldiers and buffs them to overwhelm opponents. It aims to stabilize early with ramp and removal, then transition into a relentless midgame where commander tax reduction allows for repeated lethal swings or efficient value trades.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 15,
+      "cards": [
+        "Angelic Gift",
+        "Chosen by Heliod",
+        "Coercive Impetus",
+        "Feather of Flight",
+        "Killian, Decisive Mentor",
+        "Kor Spiritdancer",
+        "Pearl-Ear, Imperial Advisor",
+        "Rune of Mortality",
+        "Rune of Sustenance",
+        "Sage's Reverie",
+        "Scourgemark",
+        "Sram, Senior Edificer",
+        "Umbral Expanse",
+        "Unquestioned Authority",
+        "War Room"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Forum of Amity",
+        "Path of Ancestry",
+        "Silverquill Campus",
+        "Study Hall",
+        "Temple of Silence"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 6,
+      "cards": [
+        "Claim Jumper",
+        "Fabled Passage",
+        "Knight of the White Orchid",
+        "Land Tax",
+        "Light-Paws, Emperor's Voice",
+        "Terramorphic Expanse"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Glasswing Grace",
+        "Twinblade Blessing",
+        "Winds of Rath"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 27,
+      "cards": [
+        "All That Glitters",
+        "Arcane Signet",
+        "Archon of Sun's Grace",
+        "Claim Jumper",
+        "Doomwake Giant",
+        "Eiganjo Dynastorian",
+        "Ethereal Armor",
+        "Ghostly Dancers",
+        "Greater Auramancy",
+        "Grievous Wound",
+        "Hero of Iroas",
+        "Killian, Decisive Mentor",
+        "Killian, Ink Duelist",
+        "Knight of the White Orchid",
+        "Kor Spiritdancer",
+        "Light-Paws, Emperor's Voice",
+        "Martial Impetus",
+        "Parasitic Impetus",
+        "Pearl-Ear, Imperial Advisor",
+        "Promise of Loyalty",
+        "Sigarda's Aid",
+        "Sol Ring",
+        "Sram, Senior Edificer",
+        "Starfield Mystic",
+        "Tempest Technique",
+        "The Legend of Yangchen",
+        "Transcendent Envoy"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 7,
+      "cards": [
+        "Aura of Silence",
+        "Bojuka Bog",
+        "Caves of Koilos",
+        "Chains of Custody",
+        "Sheltered by Ghosts",
+        "Talisman of Hierarchy",
+        "Winds of Rath"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Winds of Rath"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 10,
+      "cards": [
+        "Arcane Lighthouse",
+        "Chains of Custody",
+        "Darksteel Mutation",
+        "Flickering Ward",
+        "Redemption Arc",
+        "Reprobation",
+        "Sheltered by Ghosts",
+        "Shielded by Faith",
+        "Timely Ward",
+        "Unquestioned Authority"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Animate Dead",
+        "Bojuka Bog",
+        "Eye of Nidhogg",
+        "Forum of Amity",
+        "Ghostly Dancers",
+        "Mantle of the Ancients",
+        "Retether",
+        "Starfield Mystic"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 10,
+      "cards": [
+        "Animate Dead",
+        "Changing Loyalty",
+        "Eye of Nidhogg",
+        "Flickering Ward",
+        "Ghostly Dancers",
+        "Ghoulish Impetus",
+        "Gift of Immortality",
+        "Kaya's Ghostform",
+        "Mantle of the Ancients",
+        "Retether"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 6,
+      "cards": [
+        "Hallowed Haunting",
+        "Hero of Iroas",
+        "Kor Spiritdancer",
+        "Pearl-Ear, Imperial Advisor",
+        "Sigil of the Empty Throne",
+        "Sram, Senior Edificer"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 3,
+      "cards": [
+        "Glasswing Grace",
+        "Twinblade Blessing",
+        "Winds of Rath"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Inkshield",
+        "Land Tax"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 24,
+      "cards": [
+        "Arcane Lighthouse",
+        "Arcane Signet",
+        "Bojuka Bog",
+        "Caves of Koilos",
+        "Command Tower",
+        "Desolate Mire",
+        "Eclipsed Steppe",
+        "Exotic Orchard",
+        "Fabled Passage",
+        "Fellwar Stone",
+        "Fetid Heath",
+        "Forum of Amity",
+        "Isolated Chapel",
+        "Minimus Containment",
+        "Path of Ancestry",
+        "Shineshadow Snarl",
+        "Silverquill Campus",
+        "Study Hall",
+        "Sunlit Marsh",
+        "Temple of Silence",
+        "Terramorphic Expanse",
+        "Turbulent Moor",
+        "Umbral Expanse",
+        "War Room"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 37,
+      "cards": [
+        "Arcane Lighthouse",
+        "Bojuka Bog",
+        "Caves of Koilos",
+        "Command Tower",
+        "Desolate Mire",
+        "Eclipsed Steppe",
+        "Exotic Orchard",
+        "Fabled Passage",
+        "Fetid Heath",
+        "Forum of Amity",
+        "Isolated Chapel",
+        "Path of Ancestry",
+        "Plains",
+        "Shineshadow Snarl",
+        "Silverquill Campus",
+        "Study Hall",
+        "Sunlit Marsh",
+        "Swamp",
+        "Temple of Silence",
+        "Terramorphic Expanse",
+        "Turbulent Moor",
+        "Umbral Expanse",
+        "War Room"
+      ],
+      "mainboard_count": 37,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.17
+  },
+  "dual_role_cards": [
+    {
+      "card": "Animate Dead",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Lighthouse",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Signet",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Caves of Koilos",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chains of Custody",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Claim Jumper",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Desolate Mire",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eclipsed Steppe",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eye of Nidhogg",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabled Passage",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fetid Heath",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flickering Ward",
+      "roles": [
+        "protection",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Forum of Amity",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghostly Dancers",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glasswing Grace",
+      "roles": [
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hero of Iroas",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Isolated Chapel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Killian, Decisive Mentor",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Knight of the White Orchid",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kor Spiritdancer",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Land Tax",
+      "roles": [
+        "hate_pieces",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Light-Paws, Emperor's Voice",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mantle of the Ancients",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pearl-Ear, Imperial Advisor",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Retether",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheltered by Ghosts",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shineshadow Snarl",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Silverquill Campus",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sram, Senior Edificer",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starfield Mystic",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Study Hall",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunlit Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Silence",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Terramorphic Expanse",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Turbulent Moor",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Twinblade Blessing",
+      "roles": [
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Umbral Expanse",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unquestioned Authority",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "War Room",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Winds of Rath",
+      "roles": [
+        "payoff_cards",
+        "removal",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Commander tax is a major factor",
+    "include ways to reduce it (Crown of Convergence, Commander's Sphere, etc.).",
+    "Killian's ability is tap, so you can't attack and generate tokens on the same turn unless you have haste or double strike.",
+    "Watch out for 'cantrip' effects that let you dig for answers.",
+    "Common mistake: Overcommitting to board without removal for sweepers."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Sol Ring or Arcane Signet."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a second land, cast Killian if you have W mana, or play a cheap token producer/removal."
+    },
+    {
+      "trigger": "early game",
+      "line": "If you can't cast Killian T2, use signet to cast it T3."
+    }
+  ],
+  "kill_priority": [
+    "Hallowed Haunting",
+    "Hero of Iroas",
+    "Kor Spiritdancer",
+    "Pearl-Ear, Imperial Advisor",
+    "Sigil of the Empty Throne",
+    "Sram, Senior Edificer",
+    "Glasswing Grace",
+    "Twinblade Blessing"
+  ],
+  "interaction_to_disrupt": [
+    "Arcane Lighthouse",
+    "Chains of Custody",
+    "Darksteel Mutation",
+    "Flickering Ward",
+    "Redemption Arc",
+    "Reprobation",
+    "Sheltered by Ghosts",
+    "Shielded by Faith"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/killian-decisive-mentor.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

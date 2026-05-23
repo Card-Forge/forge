@@ -1,0 +1,77 @@
+{
+  "archetype": "Mono-Blue Faeries",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/mono-blue-faeries.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Brinebarrow Intruder"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 2,
+      "name": "Dispel"
+    },
+    {
+      "qty": 4,
+      "name": "Faerie Miscreant"
+    },
+    {
+      "qty": 4,
+      "name": "Faerie Seer"
+    },
+    {
+      "qty": 4,
+      "name": "Harrier Strix"
+    },
+    {
+      "qty": 18,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Moon-Circuit Hacker"
+    },
+    {
+      "qty": 4,
+      "name": "Ninja of the Deep Hours"
+    },
+    {
+      "qty": 4,
+      "name": "Of One Mind"
+    },
+    {
+      "qty": 4,
+      "name": "Snap"
+    },
+    {
+      "qty": 4,
+      "name": "Spellstutter Sprite"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Annul"
+    },
+    {
+      "qty": 4,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 4,
+      "name": "Cryoshatter"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 4,
+      "name": "Steel Sabotage"
+    }
+  ]
+}

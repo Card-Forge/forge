@@ -1,0 +1,125 @@
+{
+  "archetype": "Through the Breach",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/through-the-breach.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 4,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 3,
+      "name": "Devourer of Destiny"
+    },
+    {
+      "qty": 4,
+      "name": "Eldrazi Temple"
+    },
+    {
+      "qty": 4,
+      "name": "Emrakul, the Aeons Torn"
+    },
+    {
+      "qty": 4,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 1,
+      "name": "Gemstone Caverns"
+    },
+    {
+      "qty": 4,
+      "name": "Goryo's Vengeance"
+    },
+    {
+      "qty": 4,
+      "name": "Kozilek's Command"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 2,
+      "name": "Raucous Theater"
+    },
+    {
+      "qty": 2,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Sire of Seven Deaths"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Talisman of Indulgence"
+    },
+    {
+      "qty": 2,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 4,
+      "name": "Through the Breach"
+    },
+    {
+      "qty": 4,
+      "name": "Ugin's Labyrinth"
+    },
+    {
+      "qty": 4,
+      "name": "Ulamog, the Defiler"
+    },
+    {
+      "qty": 4,
+      "name": "Yggdrasil, Rebirth Engine"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Gemstone Caverns"
+    },
+    {
+      "qty": 2,
+      "name": "Kozilek's Return"
+    },
+    {
+      "qty": 2,
+      "name": "Meltdown"
+    },
+    {
+      "qty": 2,
+      "name": "Torpor Orb"
+    },
+    {
+      "qty": 2,
+      "name": "Trinisphere"
+    },
+    {
+      "qty": 2,
+      "name": "Vampires' Vengeance"
+    },
+    {
+      "qty": 2,
+      "name": "Void Mirror"
+    }
+  ]
+}

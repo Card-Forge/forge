@@ -1,0 +1,862 @@
+{
+  "schema_version": 1,
+  "name": "Varina, Lich Queen",
+  "format": "commander",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 100,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Diregraf Colossus",
+    "Geralf, the Fleshwright",
+    "God-Eternal Oketra",
+    "Windfall",
+    "Windswept Heath",
+    "Liliana, Death's Majesty",
+    "Liliana, Dreadhorde General",
+    "Anointed Procession"
+  ],
+  "interaction_to_disrupt": [
+    "An Offer You Can't Refuse",
+    "Counterspell",
+    "Negate",
+    "Void Rend",
+    "Wayward Servant",
+    "Zul Ashur, Lich Lord",
+    "Austere Command",
+    "Bojuka Bog"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "An Offer You Can't Refuse"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 16,
+      "cards": [
+        "Black Market Connections",
+        "Bone Miser",
+        "Chart a Course",
+        "Consider",
+        "Cryptbreaker",
+        "Dark Deal",
+        "Frantic Search",
+        "Liliana, Dreadhorde General",
+        "Mind Stone",
+        "Raffine's Tower",
+        "Smothering Tithe",
+        "Syphon Mind",
+        "Undead Augur",
+        "Varina, Lich Queen",
+        "Wilhelt, the Rotcleaver",
+        "Windfall"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Consider",
+        "Meticulous Archive",
+        "Shadowy Backstreet",
+        "The Scarab God",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 7,
+      "cards": [
+        "Bloodstained Mire",
+        "Demonic Tutor",
+        "Flooded Strand",
+        "Marsh Flats",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Windfall",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 34,
+      "cards": [
+        "Anointed Procession",
+        "Ashnod's Altar",
+        "Azorius Signet",
+        "Bone Miser",
+        "Carrion Feeder",
+        "Cemetery Reaper",
+        "Corpse Knight",
+        "Cryptbreaker",
+        "Death Baron",
+        "Dimir Signet",
+        "Diregraf Captain",
+        "Diregraf Colossus",
+        "Geralf, the Fleshwright",
+        "God-Eternal Oketra",
+        "Grave Researcher",
+        "Gravecrawler",
+        "Grimgrin, Corpse-Born",
+        "Headless Rider",
+        "Liliana's Mastery",
+        "Liliana, Death's Majesty",
+        "Liliana, Dreadhorde General",
+        "Lord of the Accursed",
+        "Necroduality",
+        "Orzhov Signet",
+        "Rooftop Storm",
+        "Sol Ring",
+        "Teysa Karlov",
+        "The Scarab God",
+        "Undead Augur",
+        "Undead Warchief",
+        "Varina, Lich Queen",
+        "Wayward Servant",
+        "Wilhelt, the Rotcleaver",
+        "Zul Ashur, Lich Lord"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Austere Command",
+        "Bojuka Bog",
+        "Cemetery Reaper",
+        "Death Baron",
+        "Disenchant",
+        "Final Act",
+        "Fracture",
+        "Generous Gift",
+        "Grimgrin, Corpse-Born",
+        "Hero's Downfall",
+        "Liliana, Death's Majesty",
+        "Path to Exile",
+        "Swords to Plowshares",
+        "Talisman of Dominance",
+        "Talisman of Hierarchy",
+        "Talisman of Progress",
+        "The Scarab God",
+        "Void Rend",
+        "Zombie Apocalypse"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Austere Command",
+        "Final Act",
+        "Liliana, Death's Majesty",
+        "Zombie Apocalypse"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Counterspell",
+        "Negate"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Void Rend",
+        "Wayward Servant",
+        "Zul Ashur, Lich Lord"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 2,
+      "cards": [
+        "Chart a Course",
+        "Cryptbreaker"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Bojuka Bog",
+        "Cemetery Reaper",
+        "Consider",
+        "Diregraf Colossus",
+        "Final Act",
+        "Gravecrawler",
+        "Liliana, Death's Majesty",
+        "Meticulous Archive",
+        "Shadowy Backstreet",
+        "The Scarab God",
+        "Undercity Sewers",
+        "Varina, Lich Queen",
+        "Zombie Apocalypse",
+        "Zul Ashur, Lich Lord"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 6,
+      "cards": [
+        "Gravecrawler",
+        "Liliana, Death's Majesty",
+        "The Scarab God",
+        "Varina, Lich Queen",
+        "Zombie Apocalypse",
+        "Zul Ashur, Lich Lord"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Diregraf Colossus",
+        "Geralf, the Fleshwright",
+        "God-Eternal Oketra"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Windfall",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 33,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Arcane Signet",
+        "Bloodstained Mire",
+        "Bojuka Bog",
+        "Command Tower",
+        "Deserted Beach",
+        "Drowned Catacomb",
+        "Eclipsed Steppe",
+        "Exotic Orchard",
+        "Field of the Dead",
+        "Flooded Strand",
+        "Glacial Fortress",
+        "Godless Shrine",
+        "Hallowed Fountain",
+        "Isolated Chapel",
+        "Marsh Flats",
+        "Meticulous Archive",
+        "Misty Rainforest",
+        "Morphic Pool",
+        "Phyrexian Altar",
+        "Polluted Delta",
+        "Prairie Stream",
+        "Raffine's Tower",
+        "Sea of Clouds",
+        "Shadowy Backstreet",
+        "Shattered Sanctum",
+        "Shipwreck Marsh",
+        "Smothering Tithe",
+        "Sunken Hollow",
+        "Undercity Sewers",
+        "Vault of Champions",
+        "Watery Grave",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 38,
+      "cards": [
+        "Bloodstained Mire",
+        "Bojuka Bog",
+        "Command Tower",
+        "Deserted Beach",
+        "Drowned Catacomb",
+        "Eclipsed Steppe",
+        "Exotic Orchard",
+        "Field of the Dead",
+        "Flooded Strand",
+        "Glacial Fortress",
+        "Godless Shrine",
+        "Hallowed Fountain",
+        "Island",
+        "Isolated Chapel",
+        "Marsh Flats",
+        "Meticulous Archive",
+        "Misty Rainforest",
+        "Morphic Pool",
+        "Plains",
+        "Polluted Delta",
+        "Prairie Stream",
+        "Raffine's Tower",
+        "Sea of Clouds",
+        "Shadowy Backstreet",
+        "Shattered Sanctum",
+        "Shipwreck Marsh",
+        "Sunken Hollow",
+        "Swamp",
+        "Undercity Sewers",
+        "Vault of Champions",
+        "Watery Grave",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 38,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Liliana, Death's Majesty",
+        "Liliana, Dreadhorde General"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.26
+  },
+  "dual_role_cards": [
+    {
+      "card": "An Offer You Can't Refuse",
+      "roles": [
+        "counterspells",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Austere Command",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bone Miser",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cemetery Reaper",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chart a Course",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Consider",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cryptbreaker",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Death Baron",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deserted Beach",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Diregraf Colossus",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drowned Catacomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eclipsed Steppe",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Field of the Dead",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Final Act",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Geralf, the Fleshwright",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glacial Fortress",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "God-Eternal Oketra",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gravecrawler",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grimgrin, Corpse-Born",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Isolated Chapel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Liliana, Death's Majesty",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Liliana, Dreadhorde General",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marsh Flats",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Morphic Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prairie Stream",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raffine's Tower",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sea of Clouds",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shadowy Backstreet",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shattered Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shipwreck Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smothering Tithe",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunken Hollow",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Scarab God",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undead Augur",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Varina, Lich Queen",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vault of Champions",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Void Rend",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wayward Servant",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wilhelt, the Rotcleaver",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windfall",
+      "roles": [
+        "card_advantage",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zombie Apocalypse",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zul Ashur, Lich Lord",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/varina-lich-queen.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

@@ -1,0 +1,511 @@
+{
+  "schema_version": 1,
+  "name": "Lurrus PO",
+  "format": "vintage",
+  "colors": [
+    "W",
+    "U",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This deck leverages Lurrus of the Dream-Den to repeatedly cast cheap spells from the graveyard, generating overwhelming card advantage and board presence. It aims to out-value control and combo decks through recursion while stabilizing against aggro with efficient interaction and card draw.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 26,
+      "cards": [
+        "Ancestral Recall",
+        "Flame of Anor",
+        "Gitaxian Probe",
+        "Lurrus of the Dream-Den",
+        "L\u00f3rien Revealed",
+        "Mana Vault",
+        "Paradoxical Outcome",
+        "Soul-Guide Lantern",
+        "Stock Up",
+        "Test of Talents",
+        "Thundertrap Trainer",
+        "Urza's Saga",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 5
+    },
+    "dig_draw": {
+      "target_count": 9,
+      "cards": [
+        "Lurrus of the Dream-Den",
+        "Stock Up",
+        "Thundertrap Trainer"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Flooded Strand",
+        "L\u00f3rien Revealed",
+        "Merchant Scroll",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Stock Up"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 16,
+      "cards": [
+        "Hexing Squelcher",
+        "Lurrus of the Dream-Den",
+        "Mox Emerald",
+        "Mox Jet",
+        "Mox Pearl",
+        "Mox Ruby",
+        "Mox Sapphire",
+        "Sink into Stupor",
+        "Snapcaster Mage",
+        "Sol Ring",
+        "Thundertrap Trainer",
+        "Time Walk"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 1
+    },
+    "removal": {
+      "target_count": 16,
+      "cards": [
+        "Abrade",
+        "Flame of Anor",
+        "Forth Eorlingas!",
+        "Mana Crypt",
+        "Mana Vault",
+        "Pyroblast",
+        "Soul-Guide Lantern",
+        "Swords to Plowshares"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 8
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 11,
+      "cards": [
+        "Consign to Memory",
+        "Flusterstorm",
+        "Force of Negation",
+        "Force of Will",
+        "Mental Misstep",
+        "Pyroblast",
+        "Test of Talents"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Hexing Squelcher"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 8,
+      "cards": [
+        "Stock Up",
+        "Thundertrap Trainer"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 16,
+      "cards": [
+        "Force of Negation",
+        "Lurrus of the Dream-Den",
+        "Snapcaster Mage",
+        "Soul-Guide Lantern",
+        "Stock Up",
+        "Test of Talents",
+        "Thundertrap Trainer"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 14,
+      "cards": [
+        "Lurrus of the Dream-Den",
+        "Paradoxical Outcome",
+        "Snapcaster Mage",
+        "Stock Up",
+        "Thundertrap Trainer"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 9,
+      "cards": [
+        "Lurrus of the Dream-Den",
+        "Stock Up",
+        "Thundertrap Trainer"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Lurrus of the Dream-Den",
+        "Stock Up",
+        "Thundertrap Trainer"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "hate_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Commandeer",
+        "Gitaxian Probe"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 15,
+      "cards": [
+        "Black Lotus",
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Mox Opal",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Tolarian Academy",
+        "Tundra",
+        "Urza's Saga",
+        "Volcanic Island"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 14,
+      "cards": [
+        "Flooded Strand",
+        "Island",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Tolarian Academy",
+        "Tundra",
+        "Urza's Saga",
+        "Volcanic Island"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Flame of Anor",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gitaxian Probe",
+      "roles": [
+        "card_advantage",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hexing Squelcher",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lurrus of the Dream-Den",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Vault",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Paradoxical Outcome",
+      "roles": [
+        "card_advantage",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snapcaster Mage",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stock Up",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Test of Talents",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thundertrap Trainer",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tolarian Academy",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tundra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volcanic Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Lurrus is a legendary companion, so you can only have one in command, but you can cast it from the graveyard repeatedly.",
+    "Stock Up's effect should be optimized for card advantage rather than discarding key pieces.",
+    "Thundertrap Trainer synergizes with high spell counts",
+    "ensure your deck runs enough cheap spells to maximize triggers.",
+    "Common mistake: filling the graveyard with uncastable spells or overcommitting to the board without recursion backup."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast a 1-mana spell or drop Thundertrap Trainer if mana allows."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play Lurrus or another cheap spell to establish the engine."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence lands to ensure WUR availability."
+    }
+  ],
+  "kill_priority": [
+    "Lurrus of the Dream-Den",
+    "Stock Up",
+    "Thundertrap Trainer",
+    "Hexing Squelcher",
+    "Mox Emerald",
+    "Mox Jet",
+    "Mox Pearl",
+    "Mox Ruby"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Flusterstorm",
+    "Force of Negation",
+    "Force of Will",
+    "Mental Misstep",
+    "Pyroblast",
+    "Test of Talents",
+    "Hexing Squelcher"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/lurrus-po.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

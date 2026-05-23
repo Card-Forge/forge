@@ -1,0 +1,141 @@
+{
+  "archetype": "Mardu Energy",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/mardu-energy.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ajani, Nacatl Pariah"
+    },
+    {
+      "qty": 2,
+      "name": "Arena of Glory"
+    },
+    {
+      "qty": 4,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 4,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Elegant Parlor"
+    },
+    {
+      "qty": 1,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 2,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Galvanic Discharge"
+    },
+    {
+      "qty": 3,
+      "name": "Goblin Bombardment"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 4,
+      "name": "Guide of Souls"
+    },
+    {
+      "qty": 4,
+      "name": "Kroxa, Titan of Death's Hunger"
+    },
+    {
+      "qty": 4,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 4,
+      "name": "Ocelot Pride"
+    },
+    {
+      "qty": 2,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 3,
+      "name": "Ragavan, Nimble Pilferer"
+    },
+    {
+      "qty": 2,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 2,
+      "name": "Seasoned Pyromancer"
+    },
+    {
+      "qty": 2,
+      "name": "Sephiroth, Fabled SOLDIER"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowy Backstreet"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Thraben Charm"
+    },
+    {
+      "qty": 2,
+      "name": "Voice of Victory"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "High Noon"
+    },
+    {
+      "qty": 2,
+      "name": "Obsidian Charmaw"
+    },
+    {
+      "qty": 2,
+      "name": "Orim's Chant"
+    },
+    {
+      "qty": 1,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 2,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 2,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 2,
+      "name": "Wear // Tear"
+    },
+    {
+      "qty": 2,
+      "name": "Wrath of the Skies"
+    }
+  ]
+}

@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "name": "Oops! All Spells",
+  "format": "legacy",
+  "colors": [
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Oops! All Spells is a Legacy combo deck that mills its entire deck on turn 1 without playing any lands. It generates mana using Spirit Guides, Rituals, Lotus Petal, and MDFCs, then triggers Balustrade Spy or Undercity Informer to mill the deck. The resulting graveyard state enables Narcomoebas and Bridge from Below to fuel Cabal Therapy, ultimately resolving Dread Return's flashback to cast Thassa's Oracle and win the game.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "Dark Ritual"
+      ]
+    },
+    "card_advantage": {
+      "target_count": 5,
+      "cards": [
+        "Agadeem's Awakening",
+        "Balustrade Spy",
+        "Bridge from Below",
+        "Cabal Therapy",
+        "Narcomoeba"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Cabal Therapy",
+        "Jack-o'-Lantern",
+        "Memory's Journey",
+        "Thassa's Oracle"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Agadeem's Awakening",
+        "Balustrade Spy",
+        "Dread Return",
+        "Thassa's Oracle"
+      ]
+    },
+    "threats": {
+      "target_count": 1,
+      "cards": [
+        "Cabal Therapy"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Agadeem's Awakening",
+        "Balustrade Spy",
+        "Pact of Negation"
+      ]
+    },
+    "discard_outlets": {
+      "target_count": 2,
+      "cards": [
+        "Agadeem's Awakening",
+        "Balustrade Spy"
+      ]
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Agadeem's Awakening",
+        "Balustrade Spy",
+        "Dread Return",
+        "Elvish Spirit Guide",
+        "Memory's Journey",
+        "Narcomoeba",
+        "Simian Spirit Guide",
+        "Undercity Informer"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Dread Return",
+        "Thassa's Oracle"
+      ]
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Bridge from Below",
+        "Narcomoeba"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Balustrade Spy",
+        "Bridge from Below",
+        "Cabal Therapy",
+        "Dark Ritual",
+        "Memory's Journey",
+        "Narcomoeba",
+        "Pact of Negation",
+        "Thoughtseize",
+        "Undercity Informer"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 10,
+      "cards": [
+        "Balustrade Spy",
+        "Dark Ritual",
+        "Elvish Spirit Guide",
+        "Fell the Profane",
+        "Jack-o'-Lantern",
+        "Lotus Petal",
+        "Memory's Journey",
+        "Simian Spirit Guide",
+        "Thassa's Oracle",
+        "Undercity Informer"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Balustrade Spy",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Informer",
+      "roles": [
+        "combo_pieces",
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thassa's Oracle",
+      "roles": [
+        "dig_draw",
+        "mana_fixing",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dread Return",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narcomoeba",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bridge from Below",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cabal Therapy",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pact of Negation",
+      "roles": [
+        "combo_pieces",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Memory's Journey",
+      "roles": [
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jack-o'-Lantern",
+      "roles": [
+        "dig_draw",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Simian Spirit Guide",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elvish Spirit Guide",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dark Ritual",
+      "roles": [
+        "combo_pieces",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Agadeem's Awakening",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "protection",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Generate exactly 4 mana (including 1 black) before activating the mill trigger",
+    "Play Pact of Negation or Thoughtseize before or during the combo to bypass opponent's interaction",
+    "Sacrifice Narcomoebas and Bridge from Below tokens in sequence to cast multiple Cabal Therapies",
+    "Use Jack-o'-Lantern's ability to filter mana for Memory's Journey flashback or Thassa's Oracle's second blue mana",
+    "Common mistake: Overcommitting to the graveyard against Rest in Peace."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Mulligan aggressively until a turn 1 combo hand is found"
+    },
+    {
+      "trigger": "early game",
+      "line": "Generate exactly 4 mana (including 1 black) using Spirit Guides, Rituals, Lotus Petal, and MDFCs"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play Balustrade Spy or activate Undercity Informer to mill the entire deck"
+    }
+  ],
+  "kill_priority": [
+    "Bridge from Below",
+    "Narcomoeba",
+    "Agadeem's Awakening",
+    "Balustrade Spy",
+    "Dread Return",
+    "Cabal Therapy"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

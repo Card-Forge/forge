@@ -1,0 +1,532 @@
+{
+  "schema_version": 1,
+  "name": "Sultai Control",
+  "format": "standard",
+  "colors": [
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "Sultai Control in Standard leverages three-color synergy to outlast opponents through superior card advantage and resource denial. By utilizing draw engines like Flow State and Rakshasa's Bargain alongside land acceleration from Ancient Cornucopia, the deck stabilizes early and transitions into a resilient late-game. The goal is to control the board with interaction while gradually building an insurmountable hand size and mana base.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 21,
+      "cards": [
+        "Ancient Cornucopia",
+        "Deadly Cover-Up",
+        "Decorum Dissertation",
+        "Flow State",
+        "Heritage Reclamation",
+        "Intimidation Tactics",
+        "Professor Dellian Fel",
+        "Three Steps Ahead",
+        "Wan Shi Tong, Librarian",
+        "Witherbloom Charm"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Consult the Star Charts",
+        "Decorum Dissertation",
+        "Flow State",
+        "Stock Up",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 2,
+      "cards": [
+        "Ancient Cornucopia"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Flow State"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 10,
+      "cards": [
+        "Ancient Cornucopia",
+        "Duress",
+        "Professor Dellian Fel",
+        "The Dawning Archaic",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 22,
+      "cards": [
+        "Bitter Triumph",
+        "Day of Black Sun",
+        "Deadly Cover-Up",
+        "Feed the Cycle",
+        "Ghost Vacuum",
+        "Heritage Reclamation",
+        "Maelstrom Pulse",
+        "Professor Dellian Fel",
+        "Requiting Hex",
+        "Shoot the Sheriff",
+        "Witherbloom Charm"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 3
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Day of Black Sun",
+        "Deadly Cover-Up",
+        "Ghost Vacuum"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 5,
+      "cards": [
+        "Flashfreeze",
+        "Negate",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 6,
+      "cards": [
+        "Ancient Cornucopia",
+        "Flow State",
+        "Mistrise Village",
+        "Nowhere to Run"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 8,
+      "cards": [
+        "Ancient Cornucopia",
+        "Bitter Triumph",
+        "Flow State",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Ancient Cornucopia",
+        "Deadly Cover-Up",
+        "Feed the Cycle",
+        "Flow State",
+        "Ghost Vacuum",
+        "Heritage Reclamation",
+        "Strategic Betrayal",
+        "The Dawning Archaic",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 6,
+      "cards": [
+        "Ancient Cornucopia",
+        "Feed the Cycle",
+        "Flow State",
+        "The Dawning Archaic"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 6,
+      "cards": [
+        "Ancient Cornucopia",
+        "Great Hall of the Biblioplex"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Ancient Cornucopia",
+        "Flow State"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Ancient Cornucopia",
+        "Emeritus of Ideation",
+        "Flow State",
+        "Outrageous Robbery",
+        "Torpor Orb"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 28,
+      "cards": [
+        "Ancient Cornucopia",
+        "Breeding Pool",
+        "Deathcap Glade",
+        "Flow State",
+        "Gloomlake Verge",
+        "Great Hall of the Biblioplex",
+        "Mistrise Village",
+        "Multiversal Passage",
+        "Overgrown Tomb",
+        "Petrified Hamlet",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Breeding Pool",
+        "Deathcap Glade",
+        "Gloomlake Verge",
+        "Great Hall of the Biblioplex",
+        "Mistrise Village",
+        "Multiversal Passage",
+        "Overgrown Tomb",
+        "Petrified Hamlet",
+        "Swamp",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 3,
+      "cards": [
+        "Professor Dellian Fel"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.46
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Cornucopia",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bitter Triumph",
+      "roles": [
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Day of Black Sun",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Cover-Up",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deathcap Glade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Decorum Dissertation",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Feed the Cycle",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Vacuum",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gloomlake Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Great Hall of the Biblioplex",
+      "roles": [
+        "engines",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Heritage Reclamation",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mistrise Village",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Multiversal Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Petrified Hamlet",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Professor Dellian Fel",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Dawning Archaic",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Three Steps Ahead",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wan Shi Tong, Librarian",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Witherbloom Charm",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize casting Flow State before Rakshasa's Bargain to maximize hand size",
+    "Use Ancient Cornucopia before playing high-cost spells to ensure mana availability",
+    "Hold up interaction until the opponent commits to a threat",
+    "Draw into answers before committing to combat tricks",
+    "Flow State is fragile"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and Ancient Cornucopia to accelerate mana"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Flow State or Rakshasa's Bargain to draw into answers"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up interaction for opponent's early threats"
+    }
+  ],
+  "kill_priority": [
+    "Ancient Cornucopia",
+    "Great Hall of the Biblioplex",
+    "Flow State",
+    "Professor Dellian Fel",
+    "Duress",
+    "The Dawning Archaic",
+    "Wan Shi Tong, Librarian"
+  ],
+  "interaction_to_disrupt": [
+    "Flashfreeze",
+    "Negate",
+    "Three Steps Ahead",
+    "Ancient Cornucopia",
+    "Flow State",
+    "Mistrise Village",
+    "Nowhere to Run",
+    "Bitter Triumph"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/sultai-control.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

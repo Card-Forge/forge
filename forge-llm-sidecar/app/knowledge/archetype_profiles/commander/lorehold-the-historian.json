@@ -1,0 +1,805 @@
+{
+  "schema_version": 1,
+  "name": "Lorehold, the Historian",
+  "format": "commander",
+  "colors": [
+    "R",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "Lorehold is a spell-slinging engine that converts instant and sorcery density into Treasure tokens and mana acceleration. It aims to out-value opponents by casting a high volume of cheap spells, leveraging Treasure generation for card advantage, mana flexibility, and late-game finishers, while controlling the board with efficient R/W removal and counters.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "Apex of Power"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Artist's Talent",
+        "Commander's Sphere",
+        "Currency Converter",
+        "Glint-Horn Buccaneer",
+        "Lorehold, the Historian",
+        "Mind Stone",
+        "Monument to Endurance",
+        "Reforge the Soul",
+        "Terminus",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Darksteel Pendant",
+        "Dragon's Rage Channeler",
+        "Elegant Parlor",
+        "Guardian of New Benalia",
+        "Improvisation Capstone",
+        "Lorehold Campus",
+        "Planetarium of Wan Shi Tong",
+        "Restoration Seminar",
+        "Sonic Screwdriver",
+        "Spinerock Knoll"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 6,
+      "cards": [
+        "Archaeomancer's Map",
+        "Arid Mesa",
+        "Evolving Wilds",
+        "Land Tax",
+        "Terramorphic Expanse",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 26,
+      "cards": [
+        "Boros Signet",
+        "Chandra, Hope's Beacon",
+        "Chaos Warp",
+        "Containment Construct",
+        "Dance with Calamity",
+        "Deflecting Swat",
+        "Deploy to the Front",
+        "Dragon's Rage Channeler",
+        "Emeria's Call",
+        "Emeritus of Conflict",
+        "Glint-Horn Buccaneer",
+        "Guardian of New Benalia",
+        "Jeska's Will",
+        "Lorehold, the Historian",
+        "Naktamun Lorespinner",
+        "Powerbalance",
+        "Primal Amulet",
+        "Radiant Scrollwielder",
+        "Reverse the Sands",
+        "Sol Ring",
+        "Storm Herd",
+        "Storm-Kiln Artist",
+        "The Dawning Archaic",
+        "Thought Vessel",
+        "Urabrask",
+        "Victory Chimes"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 21,
+      "cards": [
+        "Artist's Talent",
+        "Boros Charm",
+        "Call Forth the Tempest",
+        "Chandra, Hope's Beacon",
+        "Darksteel Pendant",
+        "Eiganjo, Seat of the Empire",
+        "Ephemerate",
+        "Erode",
+        "Generous Gift",
+        "Glint-Horn Buccaneer",
+        "Mizzix's Mastery",
+        "Ol\u00f3rin's Searing Light",
+        "Path to Exile",
+        "Restoration Seminar",
+        "Soulfire Eruption",
+        "Stroke of Midnight",
+        "Surge to Victory",
+        "Swords to Plowshares",
+        "Talisman of Conviction",
+        "Vanquish the Horde",
+        "Volcanic Vision"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Call Forth the Tempest",
+        "Farewell",
+        "Ghostly Prison",
+        "Terminus",
+        "Vanquish the Horde",
+        "Volcanic Vision"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Boros Charm",
+        "Darksteel Pendant",
+        "Guardian of New Benalia",
+        "Teferi's Protection"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 7,
+      "cards": [
+        "Artist's Talent",
+        "Containment Construct",
+        "Currency Converter",
+        "Glint-Horn Buccaneer",
+        "Guardian of New Benalia",
+        "Lorehold, the Historian",
+        "Monument to Endurance"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 15,
+      "cards": [
+        "Containment Construct",
+        "Currency Converter",
+        "Dragon's Rage Channeler",
+        "Elegant Parlor",
+        "Farewell",
+        "Hit the Mother Lode",
+        "Mizzix's Mastery",
+        "Ol\u00f3rin's Searing Light",
+        "Planetarium of Wan Shi Tong",
+        "Radiant Scrollwielder",
+        "Restoration Seminar",
+        "Surge to Victory",
+        "Tablet of Discovery",
+        "The Dawning Archaic",
+        "Volcanic Vision"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 10,
+      "cards": [
+        "Boros Garrison",
+        "Containment Construct",
+        "Currency Converter",
+        "Ephemerate",
+        "Mizzix's Mastery",
+        "Radiant Scrollwielder",
+        "Restoration Seminar",
+        "Surge to Victory",
+        "The Dawning Archaic",
+        "Volcanic Vision"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Artist's Talent",
+        "Chandra, Hope's Beacon",
+        "Dragon's Rage Channeler",
+        "Storm-Kiln Artist"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Land Tax"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 26,
+      "cards": [
+        "Arcane Signet",
+        "Arid Mesa",
+        "Bender's Waterskin",
+        "Boros Garrison",
+        "Chandra, Hope's Beacon",
+        "Clifftop Retreat",
+        "Command Beacon",
+        "Command Tower",
+        "Commander's Sphere",
+        "Eiganjo, Seat of the Empire",
+        "Elegant Parlor",
+        "Evolving Wilds",
+        "Lorehold Campus",
+        "Radiant Summit",
+        "Reliquary Tower",
+        "Rugged Prairie",
+        "Sacred Foundry",
+        "Sonic Screwdriver",
+        "Spinerock Knoll",
+        "Storm-Kiln Artist",
+        "Sundown Pass",
+        "Sunscorched Divide",
+        "Tablet of Discovery",
+        "Terramorphic Expanse",
+        "Turbulent Steppe",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 37,
+      "cards": [
+        "Arid Mesa",
+        "Boros Garrison",
+        "Clifftop Retreat",
+        "Command Beacon",
+        "Command Tower",
+        "Eiganjo, Seat of the Empire",
+        "Elegant Parlor",
+        "Evolving Wilds",
+        "Lorehold Campus",
+        "Mountain",
+        "Plains",
+        "Radiant Summit",
+        "Reliquary Tower",
+        "Rugged Prairie",
+        "Sacred Foundry",
+        "Spinerock Knoll",
+        "Sundown Pass",
+        "Sunscorched Divide",
+        "Terramorphic Expanse",
+        "Turbulent Steppe",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 37,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Chandra, Hope's Beacon"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.31
+  },
+  "dual_role_cards": [
+    {
+      "card": "Arid Mesa",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Artist's Talent",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "engines",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boros Charm",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boros Garrison",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Call Forth the Tempest",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chandra, Hope's Beacon",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Clifftop Retreat",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Beacon",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Commander's Sphere",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Containment Construct",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Currency Converter",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darksteel Pendant",
+      "roles": [
+        "dig_draw",
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dragon's Rage Channeler",
+      "roles": [
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eiganjo, Seat of the Empire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elegant Parlor",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ephemerate",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Evolving Wilds",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Farewell",
+      "roles": [
+        "graveyard_enablers",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glint-Horn Buccaneer",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guardian of New Benalia",
+      "roles": [
+        "dig_draw",
+        "discard_outlets",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Land Tax",
+      "roles": [
+        "hate_pieces",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lorehold Campus",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lorehold, the Historian",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mizzix's Mastery",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monument to Endurance",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ol\u00f3rin's Searing Light",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Planetarium of Wan Shi Tong",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Radiant Scrollwielder",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Radiant Summit",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restoration Seminar",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rugged Prairie",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sonic Screwdriver",
+      "roles": [
+        "dig_draw",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spinerock Knoll",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Storm-Kiln Artist",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sundown Pass",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunscorched Divide",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Surge to Victory",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tablet of Discovery",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Terminus",
+      "roles": [
+        "card_advantage",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Terramorphic Expanse",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Dawning Archaic",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Turbulent Steppe",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vanquish the Horde",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volcanic Vision",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: Sacrificing too many lands too early, leaving you mana-flooded or unable to cast spells.",
+    "Always calculate if the Treasure generation is worth the land loss.",
+    "Synergize Treasures with cards that care about artifacts or treasure tokens.",
+    "Watch out for land destruction in a deck that relies on land sacrifice.",
+    "Prioritize casting spells over hoarding Treasures unless a specific finisher requires them."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Sol Ring or another mana rock."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Cast a cheap spell to trigger Lorehold's Treasure generation, or play a Campus land."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence mana rocks first to enable early spell casting."
+    }
+  ],
+  "kill_priority": [
+    "Artist's Talent",
+    "Chandra, Hope's Beacon",
+    "Dragon's Rage Channeler",
+    "Storm-Kiln Artist",
+    "Boros Signet",
+    "Chaos Warp",
+    "Containment Construct",
+    "Dance with Calamity"
+  ],
+  "interaction_to_disrupt": [
+    "Boros Charm",
+    "Darksteel Pendant",
+    "Guardian of New Benalia",
+    "Teferi's Protection",
+    "Artist's Talent",
+    "Call Forth the Tempest",
+    "Chandra, Hope's Beacon",
+    "Eiganjo, Seat of the Empire"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/lorehold-the-historian.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

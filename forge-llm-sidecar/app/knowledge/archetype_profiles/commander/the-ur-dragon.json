@@ -1,0 +1,1037 @@
+{
+  "schema_version": 1,
+  "name": "The Ur-Dragon",
+  "format": "commander",
+  "colors": [
+    "B",
+    "G",
+    "R",
+    "U",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "The deck aims to generate massive amounts of mana, cast a high-impact Dragon, and then chain together multiple Dragon spells to trigger The Ur-Dragon\u2019s ability, creating an exponentially growing army of flying, haste creatures to overwhelm opponents through combat or finish with a game-ending X-spell.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Morophon, the Boundless"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "Mana Drain"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 19,
+      "cards": [
+        "Betor, Kin to All",
+        "Garruk's Uprising",
+        "Indatha Triome",
+        "Jetmir's Garden",
+        "Ketria Triome",
+        "Kindred Discovery",
+        "Raffine's Tower",
+        "Raugrin Triome",
+        "Sarkhan Unbroken",
+        "Savai Triome",
+        "Selvala, Heart of the Wilds",
+        "Spara's Headquarters",
+        "Temur Ascendancy",
+        "The Great Henge",
+        "The Ur-Dragon",
+        "Two-Headed Hellkite",
+        "Xander's Lounge",
+        "Zagoth Triome",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Orb of Dragonkind",
+        "Path of Ancestry"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 11,
+      "cards": [
+        "Arid Mesa",
+        "Bloodstained Mire",
+        "Demonic Tutor",
+        "Maelstrom of the Spirit Dragon",
+        "Nature's Lore",
+        "Sarkhan Unbroken",
+        "Sivitri, Dragon Master",
+        "Skyshroud Claim",
+        "Three Visits",
+        "Tiamat",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Call the Spirit Dragons",
+        "The Ur-Dragon"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 42,
+      "cards": [
+        "Ancient Gold Dragon",
+        "Arcane Signet",
+        "Atarka, World Render",
+        "Betor, Kin to All",
+        "Dracogenesis",
+        "Dragonlord Dromoka",
+        "Dragonspeaker Shaman",
+        "Dromoka, the Eternal",
+        "Dryad of the Ilysian Grove",
+        "Esika, God of the Tree",
+        "Helm of Awakening",
+        "Ignoble Hierarch",
+        "Jodah, Archmage Eternal",
+        "Karrthus, Tyrant of Jund",
+        "Klauth, Unrivaled Ancient",
+        "Kokusho, the Evening Star",
+        "Kolaghan, the Storm's Fury",
+        "Leyline of Mutation",
+        "Leyline of Transformation",
+        "Miirym, Sentinel Wyrm",
+        "Morophon, the Boundless",
+        "Neriv, Heart of the Storm",
+        "Noble Hierarch",
+        "Old Gnawbone",
+        "Rith, Liberated Primeval",
+        "Roaming Throne",
+        "Sarkhan Unbroken",
+        "Sarkhan, Soul Aflame",
+        "Scaled Nurturer",
+        "Scourge of Valkas",
+        "Selvala, Heart of the Wilds",
+        "Silumgar, the Drifting Death",
+        "Sivitri, Dragon Master",
+        "Skithiryx, the Blight Dragon",
+        "Sol Ring",
+        "Stormscale Scion",
+        "Taurean Mauler",
+        "Temur Battlecrier",
+        "The Ur-Dragon",
+        "Tiamat",
+        "Two-Headed Hellkite",
+        "Utvara Hellkite"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 16,
+      "cards": [
+        "Ancient Gold Dragon",
+        "Anguished Unmaking",
+        "Crux of Fate",
+        "Cyclonic Rift",
+        "Dragon Tempest",
+        "Garruk's Uprising",
+        "Haven of the Spirit Dragon",
+        "Klauth's Will",
+        "Old Gnawbone",
+        "Path to Exile",
+        "Ruinous Ultimatum",
+        "Scourge of Valkas",
+        "Sivitri, Dragon Master",
+        "Skithiryx, the Blight Dragon",
+        "Swords to Plowshares",
+        "Utter End"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 8,
+      "cards": [
+        "All-Out Assault",
+        "Betor, Kin to All",
+        "Crux of Fate",
+        "Klauth's Will",
+        "Ruinous Ultimatum",
+        "Sivitri, Dragon Master",
+        "Temur Battlecrier",
+        "The Ur-Dragon"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Fierce Guardianship",
+        "Mana Drain",
+        "Stubborn Denial",
+        "The Ur-Dragon"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 10,
+      "cards": [
+        "Call the Spirit Dragons",
+        "Cavern of Souls",
+        "Dragonlord Dromoka",
+        "Heroic Intervention",
+        "Miirym, Sentinel Wyrm",
+        "Rith, Liberated Primeval",
+        "Roaming Throne",
+        "Silumgar, the Drifting Death",
+        "Teferi's Protection",
+        "The Ur-Dragon"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 5,
+      "cards": [
+        "Eerie Ultimatum",
+        "Genesis Wave",
+        "Haven of the Spirit Dragon",
+        "Mox Diamond",
+        "The Ur-Dragon"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Cyclonic Rift",
+        "Eerie Ultimatum",
+        "Haven of the Spirit Dragon",
+        "Kolaghan, the Storm's Fury",
+        "The Ur-Dragon"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Call the Spirit Dragons"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Dragonlord Dromoka",
+        "Marang River Regent",
+        "Nicol Bolas, the Ravager",
+        "Scavenger Regent"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 50,
+      "cards": [
+        "Arcane Signet",
+        "Arid Mesa",
+        "Badlands",
+        "Bayou",
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Command Tower",
+        "Dragonstorm Globe",
+        "Godless Shrine",
+        "Hallowed Fountain",
+        "Haven of the Spirit Dragon",
+        "Indatha Triome",
+        "Jetmir's Garden",
+        "Ketria Triome",
+        "Klauth, Unrivaled Ancient",
+        "Lotus Petal",
+        "Maelstrom of the Spirit Dragon",
+        "Mox Amber",
+        "Mox Diamond",
+        "Mox Jasper",
+        "Orb of Dragonkind",
+        "Overgrown Tomb",
+        "Path of Ancestry",
+        "Plateau",
+        "Raffine's Tower",
+        "Raugrin Triome",
+        "Sacred Foundry",
+        "Sarkhan Unbroken",
+        "Savai Triome",
+        "Savannah",
+        "Scaled Nurturer",
+        "Scrubland",
+        "Selvala, Heart of the Wilds",
+        "Spara's Headquarters",
+        "Steam Vents",
+        "Stomping Ground",
+        "Taiga",
+        "Temple Garden",
+        "The Ur-Dragon",
+        "Tropical Island",
+        "Tundra",
+        "Underground Sea",
+        "Volcanic Island",
+        "Watery Grave",
+        "Wooded Foothills",
+        "Xander's Lounge",
+        "Zagoth Triome",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 47,
+      "sideboard_count": 3
+    },
+    "lands": {
+      "target_count": 38,
+      "cards": [
+        "Arid Mesa",
+        "Badlands",
+        "Bayou",
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Command Tower",
+        "Godless Shrine",
+        "Hallowed Fountain",
+        "Haven of the Spirit Dragon",
+        "Indatha Triome",
+        "Jetmir's Garden",
+        "Ketria Triome",
+        "Maelstrom of the Spirit Dragon",
+        "Overgrown Tomb",
+        "Path of Ancestry",
+        "Plateau",
+        "Raffine's Tower",
+        "Raugrin Triome",
+        "Sacred Foundry",
+        "Savai Triome",
+        "Savannah",
+        "Scrubland",
+        "Spara's Headquarters",
+        "Steam Vents",
+        "Stomping Ground",
+        "Taiga",
+        "Temple Garden",
+        "Tropical Island",
+        "Tundra",
+        "Underground Sea",
+        "Volcanic Island",
+        "Watery Grave",
+        "Wooded Foothills",
+        "Xander's Lounge",
+        "Zagoth Triome",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 37,
+      "sideboard_count": 1
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Sarkhan Unbroken",
+        "Sivitri, Dragon Master"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "interaction_density": 0.28
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Gold Dragon",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Signet",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Mesa",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Badlands",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bayou",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Betor, Kin to All",
+      "roles": [
+        "card_advantage",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Call the Spirit Dragons",
+      "roles": [
+        "payoff_cards",
+        "protection",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crux of Fate",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cyclonic Rift",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dragonlord Dromoka",
+      "roles": [
+        "hate_pieces",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eerie Ultimatum",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Garruk's Uprising",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haven of the Spirit Dragon",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Indatha Triome",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jetmir's Garden",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ketria Triome",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Klauth's Will",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Klauth, Unrivaled Ancient",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kolaghan, the Storm's Fury",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Maelstrom of the Spirit Dragon",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Drain",
+      "roles": [
+        "counterspells",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Miirym, Sentinel Wyrm",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Morophon, the Boundless",
+      "roles": [
+        "mana_reducers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mox Diamond",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Old Gnawbone",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orb of Dragonkind",
+      "roles": [
+        "dig_draw",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Plateau",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raffine's Tower",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raugrin Triome",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rith, Liberated Primeval",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Roaming Throne",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ruinous Ultimatum",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sarkhan Unbroken",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "planeswalker_threats",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Savai Triome",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Savannah",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scaled Nurturer",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scourge of Valkas",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scrubland",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Selvala, Heart of the Wilds",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Silumgar, the Drifting Death",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sivitri, Dragon Master",
+      "roles": [
+        "planeswalker_threats",
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Skithiryx, the Blight Dragon",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spara's Headquarters",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Taiga",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temur Battlecrier",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Ur-Dragon",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tiamat",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tropical Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tundra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Two-Headed Hellkite",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Sea",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volcanic Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Xander's Lounge",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zagoth Triome",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ziatora's Proving Ground",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "The Ur-Dragon's ability triggers on casting, not entering, so you can cast Dragons from exile or the graveyard if you have recursion.",
+    "Avoid casting Dragons with X in your mana pool unless you're ready to commit",
+    "you can't change X after casting.",
+    "Flying and haste make your tokens highly evasive, but be wary of board wipes.",
+    "Always track opponents' mana to anticipate sweepers or counterspells."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Sol Ring/Arcane Signet, or cast a cheap ramp spell."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Cast a 2-3 mana Dragon or another ramp piece."
+    },
+    {
+      "trigger": "early game",
+      "line": "If you have 4 mana, cast a cheap Dragon to start triggering The Ur-Dragon."
+    }
+  ],
+  "kill_priority": [
+    "Call the Spirit Dragons",
+    "The Ur-Dragon",
+    "Sarkhan Unbroken",
+    "Sivitri, Dragon Master",
+    "Ancient Gold Dragon",
+    "Arcane Signet",
+    "Atarka, World Render",
+    "Betor, Kin to All"
+  ],
+  "interaction_to_disrupt": [
+    "Fierce Guardianship",
+    "Mana Drain",
+    "Stubborn Denial",
+    "The Ur-Dragon",
+    "Call the Spirit Dragons",
+    "Cavern of Souls",
+    "Dragonlord Dromoka",
+    "Heroic Intervention"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/the-ur-dragon.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

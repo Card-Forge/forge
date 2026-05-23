@@ -1,0 +1,514 @@
+{
+  "schema_version": 1,
+  "name": "Living End",
+  "format": "modern",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Living End is a four-color combo deck that aims to cast cheap spells to trigger its namesake card, exiling the entire board and returning creatures with 0+ mana value to create an overwhelming advantage. It relies on interaction like Force of Negation and Subtlety to protect its combo pieces and control the game until the trigger resolves. The deck operates in Modern by leveraging a wide range of cheap instants and sorceries to reliably reach the necessary trigger count.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 11,
+      "cards": [
+        "Glassdust Hulk",
+        "Living End",
+        "Teferi, Time Raveler",
+        "Territorial Kavu",
+        "Xander's Lounge",
+        "Zagoth Triome"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Elegant Parlor",
+        "Lush Portico"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 12,
+      "cards": [
+        "Arid Mesa",
+        "Generous Ent",
+        "Oliphaunt",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Living End",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 43,
+      "cards": [
+        "Bloodbraid Marauder",
+        "Clarion Conqueror",
+        "Doorkeeper Thrull",
+        "Drannith Magistrate",
+        "Endurance",
+        "Generous Ent",
+        "Glassdust Hulk",
+        "Incubation // Incongruity",
+        "Leyline of the Guildpact",
+        "Living End",
+        "Oliphaunt",
+        "Overlord of the Balemurk",
+        "Scion of Draco",
+        "Teferi, Time Raveler",
+        "Territorial Kavu",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 8
+    },
+    "removal": {
+      "target_count": 4,
+      "cards": [
+        "Leyline Binding"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 7,
+      "cards": [
+        "Living End",
+        "Scion of Draco"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": [
+        "Mystical Dispute"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "protection": {
+      "target_count": 7,
+      "cards": [
+        "Living End",
+        "Scion of Draco"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 6,
+      "cards": [
+        "Living End",
+        "Territorial Kavu"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 24,
+      "cards": [
+        "Bloodbraid Marauder",
+        "Elegant Parlor",
+        "Endurance",
+        "Living End",
+        "Lush Portico",
+        "Malevolent Rumble",
+        "Overlord of the Balemurk",
+        "Territorial Kavu"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 1
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 9,
+      "cards": [
+        "Living End",
+        "Overlord of the Balemurk",
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Living End"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Windswept Heath"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Living End"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Damping Sphere",
+        "Drannith Magistrate",
+        "Inevitable Betrayal",
+        "Voice of Victory",
+        "Wear // Tear"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 8
+    },
+    "mana_fixing": {
+      "target_count": 17,
+      "cards": [
+        "Arid Mesa",
+        "Breeding Pool",
+        "Elegant Parlor",
+        "Living End",
+        "Lush Portico",
+        "Sacred Foundry",
+        "Stomping Ground",
+        "Temple Garden",
+        "Windswept Heath",
+        "Wooded Foothills",
+        "Xander's Lounge",
+        "Zagoth Triome"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 16,
+      "cards": [
+        "Arid Mesa",
+        "Breeding Pool",
+        "Elegant Parlor",
+        "Forest",
+        "Lush Portico",
+        "Mountain",
+        "Sacred Foundry",
+        "Stomping Ground",
+        "Temple Garden",
+        "Windswept Heath",
+        "Wooded Foothills",
+        "Xander's Lounge",
+        "Zagoth Triome"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.11
+  },
+  "dual_role_cards": [
+    {
+      "card": "Arid Mesa",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodbraid Marauder",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drannith Magistrate",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elegant Parlor",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Generous Ent",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glassdust Hulk",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Living End",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lush Portico",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Oliphaunt",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overlord of the Balemurk",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scion of Draco",
+      "roles": [
+        "protection",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teferi, Time Raveler",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Territorial Kavu",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Voice of Victory",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Xander's Lounge",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zagoth Triome",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast your cheapest instants and sorceries before Living End to ensure the trigger count is met",
+    "Hold interaction in hand to respond to opponent's attempts to disrupt your combo",
+    "Queue spells in the same turn as Living End to maximize the number of creatures returned",
+    "Common mistake: casting Living End too early without a plan for what to resurrect, or overcommitting to discard and leaving yourself vulnerable to aggro.",
+    "Always track the opponent's graveyard and hand."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap lands and trigger sources to build toward the Living End trigger"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Force of Negation to counter key threats or protect your combo pieces"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold Subtlety to silence problematic creatures or prevent opponent's interaction"
+    }
+  ],
+  "kill_priority": [
+    "Living End",
+    "Windswept Heath",
+    "Teferi, Time Raveler",
+    "Bloodbraid Marauder",
+    "Clarion Conqueror",
+    "Doorkeeper Thrull",
+    "Drannith Magistrate",
+    "Endurance"
+  ],
+  "interaction_to_disrupt": [
+    "Mystical Dispute",
+    "Living End",
+    "Scion of Draco",
+    "Leyline Binding",
+    "Damping Sphere",
+    "Drannith Magistrate",
+    "Inevitable Betrayal",
+    "Voice of Victory"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/living-end.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

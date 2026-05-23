@@ -1,0 +1,510 @@
+{
+  "schema_version": 1,
+  "name": "Grixis Reanimator",
+  "format": "modern",
+  "colors": [
+    "U",
+    "B",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Grixis Reanimator is a combo deck that focuses on digging for large threats and reanimating them from the graveyard. Thoughtseize provides crucial early disruption to clear the path for your finishers. Abhorrent Oculus and Archon of Cruelty serve as primary win conditions, offering value and board control respectively.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 27,
+      "cards": [
+        "Abhorrent Oculus",
+        "Archon of Cruelty",
+        "Faithless Looting",
+        "Psychic Frog",
+        "Quantum Riddler",
+        "Thoughtseize",
+        "Unearth",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 21,
+      "cards": [
+        "Abhorrent Oculus",
+        "Archon of Cruelty",
+        "Faithless Looting",
+        "Otherworldly Gaze",
+        "Raucous Theater",
+        "Thoughtseize",
+        "Thundering Falls",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 9,
+      "cards": [
+        "Bloodstained Mire",
+        "Polluted Delta",
+        "Scalding Tarn"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Archon of Cruelty"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 23,
+      "cards": [
+        "Abhorrent Oculus",
+        "Archon of Cruelty",
+        "Emperor of Bones",
+        "Psychic Frog",
+        "Quantum Riddler",
+        "Sink into Stupor",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 21,
+      "cards": [
+        "Archon of Cruelty",
+        "Fatal Push",
+        "Persist",
+        "Psychic Frog",
+        "Pyroclasm",
+        "Unearth"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Pyroclasm"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 8,
+      "cards": [
+        "Consign to Memory",
+        "Mystical Dispute",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 6
+    },
+    "protection": {
+      "target_count": 12,
+      "cards": [
+        "Abhorrent Oculus",
+        "Archon of Cruelty",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Psychic Frog"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 39,
+      "cards": [
+        "Abhorrent Oculus",
+        "Archon of Cruelty",
+        "Emperor of Bones",
+        "Faithless Looting",
+        "Leyline of the Void",
+        "Otherworldly Gaze",
+        "Persist",
+        "Psychic Frog",
+        "Raucous Theater",
+        "Thoughtseize",
+        "Thundering Falls",
+        "Undercity Sewers",
+        "Unearth"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 12,
+      "cards": [
+        "Abhorrent Oculus",
+        "Archon of Cruelty",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 21,
+      "cards": [
+        "Abhorrent Oculus",
+        "Faithless Looting",
+        "Otherworldly Gaze",
+        "Persist",
+        "Psychic Frog",
+        "Unearth"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Abhorrent Oculus"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Archon of Cruelty"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Abhorrent Oculus",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Damping Sphere"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 27,
+      "cards": [
+        "Abhorrent Oculus",
+        "Archon of Cruelty",
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Polluted Delta",
+        "Raucous Theater",
+        "Scalding Tarn",
+        "Steam Vents",
+        "Thoughtseize",
+        "Thundering Falls",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Island",
+        "Polluted Delta",
+        "Raucous Theater",
+        "Scalding Tarn",
+        "Steam Vents",
+        "Swamp",
+        "Thundering Falls",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.37
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abhorrent Oculus",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "reanimation_targets",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archon of Cruelty",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "reanimation_targets",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emperor of Bones",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faithless Looting",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otherworldly Gaze",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Persist",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Psychic Frog",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroclasm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quantum Riddler",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raucous Theater",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "reanimation_targets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thundering Falls",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unearth",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Thoughtseize for the opponent's most impactful card rather than using it preemptively",
+    "Reanimate Archon of Cruelty when the opponent has multiple threats to maximize its combat trick",
+    "Play Abhorrent Oculus when you need to dig for a specific reanimation target or answer",
+    "Prioritize reanimating threats that can immediately impact the board state",
+    "Common mistakes include overcommitting to the graveyard without protection, forgetting to track the opponent\u2019s hand for counters/removal, and missequencing mana for reanimation."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Thoughtseize to remove key threats or combo pieces"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast reanimation spells to bring back large threats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Set up the board for a fast finish"
+    }
+  ],
+  "kill_priority": [
+    "Abhorrent Oculus",
+    "Archon of Cruelty",
+    "Thoughtseize",
+    "Emperor of Bones",
+    "Psychic Frog",
+    "Quantum Riddler",
+    "Sink into Stupor"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Mystical Dispute",
+    "Spell Pierce",
+    "Abhorrent Oculus",
+    "Archon of Cruelty",
+    "Thoughtseize",
+    "Fatal Push",
+    "Persist"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/grixis-reanimator.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

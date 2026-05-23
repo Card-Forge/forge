@@ -1,0 +1,320 @@
+{
+  "archetype": "Zada, Hedron Grinder",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/zada-hedron-grinder.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Amonkhet Raceway"
+    },
+    {
+      "qty": 1,
+      "name": "Ancestors' Aid"
+    },
+    {
+      "qty": 1,
+      "name": "Ancestral Anger"
+    },
+    {
+      "qty": 1,
+      "name": "Antagonize"
+    },
+    {
+      "qty": 1,
+      "name": "Balduvian Rage"
+    },
+    {
+      "qty": 1,
+      "name": "Blighted Gorge"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodmark Mentor"
+    },
+    {
+      "qty": 1,
+      "name": "Brash Taunter"
+    },
+    {
+      "qty": 1,
+      "name": "Brightstone Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Brute Force"
+    },
+    {
+      "qty": 1,
+      "name": "Brute Strength"
+    },
+    {
+      "qty": 1,
+      "name": "Built to Smash"
+    },
+    {
+      "qty": 1,
+      "name": "Bulk Up"
+    },
+    {
+      "qty": 1,
+      "name": "Castle Embereth"
+    },
+    {
+      "qty": 1,
+      "name": "Downhill Charge"
+    },
+    {
+      "qty": 1,
+      "name": "Dragon Fodder"
+    },
+    {
+      "qty": 1,
+      "name": "Dreadmaw's Ire"
+    },
+    {
+      "qty": 1,
+      "name": "Dwarven Hold"
+    },
+    {
+      "qty": 1,
+      "name": "Empty the Warrens"
+    },
+    {
+      "qty": 1,
+      "name": "Expedite"
+    },
+    {
+      "qty": 1,
+      "name": "Fists of Flame"
+    },
+    {
+      "qty": 1,
+      "name": "Fists of the Anvil"
+    },
+    {
+      "qty": 1,
+      "name": "Fit of Rage"
+    },
+    {
+      "qty": 1,
+      "name": "Flashback"
+    },
+    {
+      "qty": 1,
+      "name": "Gempalm Incinerator"
+    },
+    {
+      "qty": 1,
+      "name": "General Kreat, the Boltbringer"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Burrows"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Chainwhirler"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Chieftain"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Dark-Dwellers"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin King"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Rally"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Warchief"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Wardriver"
+    },
+    {
+      "qty": 1,
+      "name": "Guttersnipe"
+    },
+    {
+      "qty": 1,
+      "name": "Hobgoblin Bandit Lord"
+    },
+    {
+      "qty": 1,
+      "name": "Hordeling Outburst"
+    },
+    {
+      "qty": 1,
+      "name": "Howlsquad Heavy"
+    },
+    {
+      "qty": 1,
+      "name": "Impact Tremors"
+    },
+    {
+      "qty": 1,
+      "name": "Impulsive Pilferer"
+    },
+    {
+      "qty": 1,
+      "name": "Infuriate"
+    },
+    {
+      "qty": 1,
+      "name": "Inordinate Rage"
+    },
+    {
+      "qty": 1,
+      "name": "Invoke Calamity"
+    },
+    {
+      "qty": 1,
+      "name": "Jeska's Will"
+    },
+    {
+      "qty": 1,
+      "name": "Krenko's Command"
+    },
+    {
+      "qty": 1,
+      "name": "Krenko, Mob Boss"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Geyser"
+    },
+    {
+      "qty": 1,
+      "name": "Mizzix's Mastery"
+    },
+    {
+      "qty": 1,
+      "name": "Molten-Core Maestro"
+    },
+    {
+      "qty": 1,
+      "name": "Monstrous Rage"
+    },
+    {
+      "qty": 23,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Obelisk of Urd"
+    },
+    {
+      "qty": 1,
+      "name": "Outmaneuver"
+    },
+    {
+      "qty": 1,
+      "name": "Past in Flames"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Raging Redcap"
+    },
+    {
+      "qty": 1,
+      "name": "Raze the Effigy"
+    },
+    {
+      "qty": 1,
+      "name": "Renegade Tactics"
+    },
+    {
+      "qty": 1,
+      "name": "Rile"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Rundvelt Hordemaster"
+    },
+    {
+      "qty": 1,
+      "name": "Rush of Adrenaline"
+    },
+    {
+      "qty": 1,
+      "name": "Screaming Fury"
+    },
+    {
+      "qty": 1,
+      "name": "Searslicer Goblin"
+    },
+    {
+      "qty": 1,
+      "name": "Shared Animosity"
+    },
+    {
+      "qty": 1,
+      "name": "Siege-Gang Commander"
+    },
+    {
+      "qty": 1,
+      "name": "Skirk Shaman"
+    },
+    {
+      "qty": 1,
+      "name": "Skullclamp"
+    },
+    {
+      "qty": 1,
+      "name": "Soul's Fire"
+    },
+    {
+      "qty": 1,
+      "name": "Stun"
+    },
+    {
+      "qty": 1,
+      "name": "Sudden Breakthrough"
+    },
+    {
+      "qty": 1,
+      "name": "Tail Slash"
+    },
+    {
+      "qty": 1,
+      "name": "Temur Battle Rage"
+    },
+    {
+      "qty": 1,
+      "name": "The Autonomous Furnace"
+    },
+    {
+      "qty": 1,
+      "name": "Titan's Strength"
+    },
+    {
+      "qty": 1,
+      "name": "Treasure Nabber"
+    },
+    {
+      "qty": 1,
+      "name": "Twinflame"
+    },
+    {
+      "qty": 1,
+      "name": "Zada, Hedron Grinder"
+    }
+  ],
+  "sideboard": []
+}

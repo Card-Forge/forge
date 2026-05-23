@@ -1,0 +1,364 @@
+{
+  "archetype": "Edgar Markov",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/edgar-markov.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ajani's Welcome"
+    },
+    {
+      "qty": 1,
+      "name": "Anointed Procession"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Authority of the Consuls"
+    },
+    {
+      "qty": 1,
+      "name": "Baron Bertram Graywater"
+    },
+    {
+      "qty": 1,
+      "name": "Battlefield Forge"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Artist"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodletter of Aclazotz"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodthirsty Conqueror"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Bontu's Monument"
+    },
+    {
+      "qty": 1,
+      "name": "Boros Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Captivating Vampire"
+    },
+    {
+      "qty": 1,
+      "name": "Case of the Uneaten Feast"
+    },
+    {
+      "qty": 1,
+      "name": "Caves of Koilos"
+    },
+    {
+      "qty": 1,
+      "name": "Champion of Dusk"
+    },
+    {
+      "qty": 1,
+      "name": "Charismatic Conqueror"
+    },
+    {
+      "qty": 1,
+      "name": "Cliffhaven Vampire"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Cordial Vampire"
+    },
+    {
+      "qty": 1,
+      "name": "Corrupted Conviction"
+    },
+    {
+      "qty": 1,
+      "name": "Crossway Troublemakers"
+    },
+    {
+      "qty": 1,
+      "name": "Cruel Celebrant"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonskull Summit"
+    },
+    {
+      "qty": 1,
+      "name": "Edgar Markov"
+    },
+    {
+      "qty": 1,
+      "name": "Elenda's Hierophant"
+    },
+    {
+      "qty": 1,
+      "name": "Enduring Tenacity"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Exquisite Blood"
+    },
+    {
+      "qty": 1,
+      "name": "Fellwar Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Fetid Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Henrika Domnathi"
+    },
+    {
+      "qty": 1,
+      "name": "High-Society Hunter"
+    },
+    {
+      "qty": 1,
+      "name": "Idol of Oblivion"
+    },
+    {
+      "qty": 1,
+      "name": "Impact Tremors"
+    },
+    {
+      "qty": 1,
+      "name": "Indulgent Aristocrat"
+    },
+    {
+      "qty": 1,
+      "name": "Isolated Chapel"
+    },
+    {
+      "qty": 1,
+      "name": "Legion Lieutenant"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Greaves"
+    },
+    {
+      "qty": 1,
+      "name": "Malakir Bloodwitch"
+    },
+    {
+      "qty": 1,
+      "name": "Marauding Blight-Priest"
+    },
+    {
+      "qty": 1,
+      "name": "Markov Baron"
+    },
+    {
+      "qty": 1,
+      "name": "Markov Purifier"
+    },
+    {
+      "qty": 1,
+      "name": "Master of Dark Rites"
+    },
+    {
+      "qty": 1,
+      "name": "Mavren Fein, Dusk Apostle"
+    },
+    {
+      "qty": 1,
+      "name": "Mob Justice"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "New Blood"
+    },
+    {
+      "qty": 1,
+      "name": "Ninja Teen"
+    },
+    {
+      "qty": 1,
+      "name": "Nomad Outpost"
+    },
+    {
+      "qty": 1,
+      "name": "Olivia, Crimson Bride"
+    },
+    {
+      "qty": 1,
+      "name": "Orzhov Basilica"
+    },
+    {
+      "qty": 1,
+      "name": "Orzhov Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Arena"
+    },
+    {
+      "qty": 4,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Pulse Tracker"
+    },
+    {
+      "qty": 1,
+      "name": "Rakdos Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Ruthless Lawbringer"
+    },
+    {
+      "qty": 1,
+      "name": "Sanctum Seeker"
+    },
+    {
+      "qty": 1,
+      "name": "Sanguine Bond"
+    },
+    {
+      "qty": 1,
+      "name": "Sanguine Syphoner"
+    },
+    {
+      "qty": 1,
+      "name": "Secluded Courtyard"
+    },
+    {
+      "qty": 1,
+      "name": "Shared Animosity"
+    },
+    {
+      "qty": 1,
+      "name": "Shattered Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Skullclamp"
+    },
+    {
+      "qty": 1,
+      "name": "Smoldering Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sorin, Imperious Bloodlord"
+    },
+    {
+      "qty": 1,
+      "name": "South Wind Avatar"
+    },
+    {
+      "qty": 1,
+      "name": "Springleaf Drum"
+    },
+    {
+      "qty": 1,
+      "name": "Starscape Cleric"
+    },
+    {
+      "qty": 1,
+      "name": "Strefan, Maurer Progenitor"
+    },
+    {
+      "qty": 1,
+      "name": "Stromkirk Captain"
+    },
+    {
+      "qty": 1,
+      "name": "Sulfurous Springs"
+    },
+    {
+      "qty": 8,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Conviction"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Hierarchy"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Indulgence"
+    },
+    {
+      "qty": 1,
+      "name": "Unclaimed Territory"
+    },
+    {
+      "qty": 1,
+      "name": "Underworld Connections"
+    },
+    {
+      "qty": 1,
+      "name": "Vampire Gourmand"
+    },
+    {
+      "qty": 1,
+      "name": "Vampire Socialite"
+    },
+    {
+      "qty": 1,
+      "name": "Vicious Conquistador"
+    },
+    {
+      "qty": 1,
+      "name": "Village Rites"
+    },
+    {
+      "qty": 1,
+      "name": "Vito, Thorn of the Dusk Rose"
+    },
+    {
+      "qty": 1,
+      "name": "Welcoming Vampire"
+    },
+    {
+      "qty": 1,
+      "name": "Wispdrinker Vampire"
+    }
+  ],
+  "sideboard": []
+}

@@ -1,0 +1,500 @@
+{
+  "schema_version": 1,
+  "name": "Grixis Midrange",
+  "format": "pioneer",
+  "colors": [
+    "U",
+    "B",
+    "R"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "Grixis Midrange in Pioneer leverages disruptive one-mana spells to control the early game while racing with efficient creatures. By combining card advantage from Thoughtseize with the explosive potential of Flow State, the deck aims to stabilize quickly and outvalue opponents in the mid-to-late game.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 22,
+      "cards": [
+        "Fatal Push",
+        "Flow State",
+        "Narset, Parter of Veils",
+        "Prismari Charm",
+        "Quantum Riddler",
+        "Ral, Crackling Wit",
+        "Sheoldred, the Apocalypse",
+        "Thoughtseize",
+        "Xander's Lounge"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 13,
+      "cards": [
+        "Consult the Star Charts",
+        "Flow State",
+        "Narset, Parter of Veils",
+        "Prismari Charm",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Fatal Push",
+        "Flow State",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 34,
+      "cards": [
+        "Angrath's Rampage",
+        "Blightstep Pathway",
+        "Clearwater Pathway",
+        "Emeritus of Ideation",
+        "Emeritus of Woe",
+        "Fable of the Mirror-Breaker",
+        "Fatal Push",
+        "Flow State",
+        "Narset, Parter of Veils",
+        "Quantum Riddler",
+        "Ral, Crackling Wit",
+        "Riverglide Pathway",
+        "Sheoldred, the Apocalypse",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Abrade",
+        "Day of Black Sun",
+        "Drown in the Loch",
+        "Fatal Push",
+        "Kolaghan's Command",
+        "Molten Collapse",
+        "Otawara, Soaring City",
+        "Prismari Charm"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Day of Black Sun"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Drown in the Loch",
+        "Mystical Dispute"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 8,
+      "cards": [
+        "Flow State",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 24,
+      "cards": [
+        "Drown in the Loch",
+        "Flashback",
+        "Flow State",
+        "Go Blank",
+        "Graveyard Trespasser",
+        "Kolaghan's Command",
+        "Molten Collapse",
+        "Prismari Charm",
+        "Takenuma, Abandoned Mire",
+        "Thoughtseize",
+        "Unlicensed Hearse"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 9,
+      "cards": [
+        "Flashback",
+        "Kolaghan's Command",
+        "Otawara, Soaring City",
+        "Prismari Charm",
+        "Takenuma, Abandoned Mire"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 9,
+      "cards": [
+        "Flow State",
+        "Ral, Crackling Wit",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Flow State",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Fatal Push",
+        "Flow State",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Duress"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Blood Crypt",
+        "Flow State",
+        "Otawara, Soaring City",
+        "Starting Town",
+        "Steam Vents",
+        "Takenuma, Abandoned Mire",
+        "Thoughtseize",
+        "Watery Grave",
+        "Xander's Lounge"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 16,
+      "cards": [
+        "Blood Crypt",
+        "Island",
+        "Mountain",
+        "Otawara, Soaring City",
+        "Starting Town",
+        "Steam Vents",
+        "Swamp",
+        "Takenuma, Abandoned Mire",
+        "Watery Grave",
+        "Xander's Lounge"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Narset, Parter of Veils",
+        "Ral, Crackling Wit"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "interaction_density": 0.24
+  },
+  "dual_role_cards": [
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Day of Black Sun",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drown in the Loch",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fatal Push",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flashback",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kolaghan's Command",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Molten Collapse",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narset, Parter of Veils",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismari Charm",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quantum Riddler",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ral, Crackling Wit",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheoldred, the Apocalypse",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Takenuma, Abandoned Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Xander's Lounge",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up Fatal Push or Thoughtseize if opponent has a turn-one threat",
+    "Cast Flow State before attacking to maximize damage and card draw",
+    "Prioritize removing opponent's win conditions over trading creatures early",
+    "Common mistake: Overusing Thoughtseize on irrelevant cards early.",
+    "Always ask what they will do next turn before discarding."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cast one-mana disruption to remove key threats or hands"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish early board presence with cheap creatures"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Fatal Push to clear blockers or aggressive threats"
+    }
+  ],
+  "kill_priority": [
+    "Flow State",
+    "Ral, Crackling Wit",
+    "Thoughtseize",
+    "Fatal Push",
+    "Narset, Parter of Veils",
+    "Angrath's Rampage",
+    "Blightstep Pathway",
+    "Clearwater Pathway"
+  ],
+  "interaction_to_disrupt": [
+    "Drown in the Loch",
+    "Mystical Dispute",
+    "Abrade",
+    "Day of Black Sun",
+    "Fatal Push",
+    "Kolaghan's Command",
+    "Molten Collapse",
+    "Otawara, Soaring City"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/grixis-midrange.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

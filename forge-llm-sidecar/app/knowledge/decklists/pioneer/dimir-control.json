@@ -1,0 +1,177 @@
+{
+  "archetype": "Dimir Control",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/dimir-control.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Agonizing Remorse"
+    },
+    {
+      "qty": 1,
+      "name": "Ashiok's Erasure"
+    },
+    {
+      "qty": 2,
+      "name": "Ashiok, Nightmare Muse"
+    },
+    {
+      "qty": 2,
+      "name": "Castle Vantress"
+    },
+    {
+      "qty": 1,
+      "name": "Cling to Dust"
+    },
+    {
+      "qty": 2,
+      "name": "Dismal Backwater"
+    },
+    {
+      "qty": 2,
+      "name": "Drown in the Loch"
+    },
+    {
+      "qty": 1,
+      "name": "Eliminate"
+    },
+    {
+      "qty": 2,
+      "name": "Erebos's Intervention"
+    },
+    {
+      "qty": 3,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 4,
+      "name": "Fae of Wishes"
+    },
+    {
+      "qty": 1,
+      "name": "Heartless Act"
+    },
+    {
+      "qty": 7,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Jace, Mirror Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Keep Safe"
+    },
+    {
+      "qty": 2,
+      "name": "Murderous Rider"
+    },
+    {
+      "qty": 2,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Pelakka Predation"
+    },
+    {
+      "qty": 2,
+      "name": "Pilfer"
+    },
+    {
+      "qty": 1,
+      "name": "Shadows' Verdict"
+    },
+    {
+      "qty": 1,
+      "name": "Shark Typhoon"
+    },
+    {
+      "qty": 2,
+      "name": "Silundi Vision"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 8,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Thassa's Intervention"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Whirlwind Denial"
+    },
+    {
+      "qty": 2,
+      "name": "Witching Well"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Blightbeetle"
+    },
+    {
+      "qty": 1,
+      "name": "Confounding Conundrum"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Cover-Up"
+    },
+    {
+      "qty": 1,
+      "name": "Feed the Swarm"
+    },
+    {
+      "qty": 1,
+      "name": "Narset's Reversal"
+    },
+    {
+      "qty": 1,
+      "name": "Nowhere to Run"
+    },
+    {
+      "qty": 1,
+      "name": "Shark Typhoon"
+    },
+    {
+      "qty": 1,
+      "name": "Soul Shatter"
+    },
+    {
+      "qty": 1,
+      "name": "The Elderspell"
+    },
+    {
+      "qty": 1,
+      "name": "The End"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Unmoored Ego"
+    },
+    {
+      "qty": 1,
+      "name": "Witch's Vengeance"
+    }
+  ]
+}

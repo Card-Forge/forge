@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two cheap draw spells",
       "Hands containing Thundertrap Trainer and a one-drop",
-      "Hands with early disruption or land drops"
+      "Hands with early disruption or land drops",
+      "Keep hands with 2-3 lands, Paradoxical Outcome, and early interaction (Thoughtseize, Duress, Lightning Axe, or Izzet Charm).",
+      "Keep hands with Thundertrap Trainer if supported by a land and a cantrip/answer."
     ],
     "mulligan_criteria": [
       "Hands lacking mana acceleration or draw",
       "Hands with only high-cost cards",
-      "Hands without a clear path to turn one or two"
+      "Hands without a clear path to turn one or two",
+      "Mulligan pure land draws, hands with only Paradoxical Outcome and no lands, or hands with no early interaction and no threats."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and cast cheap draw spells to establish card advantage",
       "Deploy Thundertrap Trainer early to generate value and board presence",
-      "Use Paradoxical Outcome to filter for key pieces or disrupt opponent's opening"
+      "Use Paradoxical Outcome to filter for key pieces or disrupt opponent's opening",
+      "Turn 1: Play a land, cast Thoughtseize/Duress if possible, or hold Paradoxical Outcome for later.",
+      "Turn 2: Play a shockland, cast Lightning Axe or Izzet Charm for tempo, or cast Thundertrap Trainer if ahead.",
+      "Sequence lands to ensure blue/red/black access for Paradoxical Outcome and interaction."
     ],
     "mid_game": [
       "Maintain board control while cycling through the deck for answers",
       "Leverage Stock Up to refill the hand and apply continuous pressure",
-      "Trade efficiently to preserve resources for the late game"
+      "Trade efficiently to preserve resources for the late game",
+      "Paradoxical Outcome is your lifeline",
+      "use it to find answers when low on resources, not just to cycle.",
+      "Stock Up is for late-game card advantage when you have a board or need to stabilize.",
+      "Manage mana to keep open for interaction and Paradoxical Outcome's cycling.",
+      "Commit Thundertrap Trainer when you can protect it or when you have enough interaction to survive the turn.",
+      "Hold back if you're low on answers or facing a heavy removal suite."
     ],
     "late_game": [
       "Use accumulated card advantage to outvalue opponents",
       "Recycle threats from the graveyard using Paradoxical Outcome",
-      "Close out the game with relentless draw and board presence"
+      "Close out the game with relentless draw and board presence",
+      "Thundertrap Trainer in combat, often supported by Izzet Charm/Lightning Axe to clear blockers or protect.",
+      "Paradoxical Outcome to cycle into a win condition or extra turns.",
+      "Stock Up to out-value control/combo.",
+      "Go all-in when you have a clear path to combat, enough interaction to survive, or when the opponent is out of answers.",
+      "Commit when you can safely attack with Thundertrap Trainer and have a backup plan."
     ]
   },
   "key_cards": [
@@ -59,7 +76,13 @@
     "Prioritize casting draw spells before committing to threats to ensure hand size",
     "Use Paradoxical Outcome to exile opponent's key cards if possible",
     "Save Stock Up for turns when you need to refill after a board wipe or combat",
-    "Cycle lands and cheap spells to find win conditions faster"
+    "Cycle lands and cheap spells to find win conditions faster",
+    "Paradoxical Outcome can be used to cycle into itself for extra draws.",
+    "Stock Up is a late-game win condition in control mirrors.",
+    "Watch for graveyard hate against Dredge.",
+    "Don't overuse Paradoxical Outcome early",
+    "save it for critical moments.",
+    "Thundertrap Trainer benefits from combat tricks and protection."
   ],
   "matchups": [
     {
@@ -88,16 +111,34 @@
         "Lifeloss effects",
         "Burn spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Paradoxical Outcome to cycle into cheaper threats or answers. Use Lightning Axe/Izzet Charm for instant-speed interaction. Don't overcommit to expensive spells; use cantrips and cheap interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use discard to hit key pieces, Lightning Axe to remove ramp targets, and Paradoxical Outcome to find answers. Stabilize quickly with interaction and threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Use Paradoxical Outcome to find answers and threats. Track graveyard and hand size. Win by out-resourcing and better sequencing.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast mana rocks",
     "Board wipe spells",
     "Direct damage finishers",
-    "Graveyard hate"
+    "Graveyard hate",
+    "Watch for Lurrus of the Dream-Den triggers, Jewel Shops mana rocks, Dredge engines, Oath targets, Initiative triggers.",
+    "Track graveyard hate availability, countermagic, and removal suites."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:29:20+00:00",
     "model": "local-model",
@@ -113,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

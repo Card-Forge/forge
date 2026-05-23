@@ -1,0 +1,794 @@
+{
+  "schema_version": 1,
+  "name": "Fire Lord Azula",
+  "format": "commander",
+  "colors": [
+    "B",
+    "R",
+    "U"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 100,
+  "macro_plan": "Fire Lord Azula is a value-control archetype that leverages targeted damage and card draw to out-resource opponents, winning through attrition, precise removal, and chipping away at life totals while maintaining card advantage.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 2,
+      "cards": [
+        "Dark Ritual",
+        "The Last Agni Kai"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 12,
+      "cards": [
+        "Airship Engine Room",
+        "Archmage Emeritus",
+        "Bladebrand",
+        "Boiling Rock Prison",
+        "Charging Strifeknight",
+        "Chromatic Star",
+        "Fire Lord Azula",
+        "Gran-Gran",
+        "Seething Landscape",
+        "Serpent's Pass",
+        "Spirit Water Revival",
+        "Zuko's Exile"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Fire Lord Azula",
+        "Riddle of Lightning",
+        "Temple of Epiphany",
+        "Temple of Malice"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 2,
+      "cards": [
+        "Seething Landscape",
+        "Urza's Cave"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Fire Lord Azula"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 40,
+      "cards": [
+        "Arcane Signet",
+        "Archmage Emeritus",
+        "Azula Always Lies",
+        "Charging Strifeknight",
+        "Combustion Man",
+        "Crashing Wave",
+        "Dramatic Reversal",
+        "Electro, Assaulting Battery",
+        "Emeritus of Woe",
+        "Fire Lord Azula",
+        "Fire Navy Trebuchet",
+        "Flexible Waterbender",
+        "Gandalf the Grey",
+        "Goblin Electromancer",
+        "Gran-Gran",
+        "Izzet Signet",
+        "Judith, Carnage Connoisseur",
+        "Kindlespark Duo",
+        "Last Gasp",
+        "Longshot, Rebel Bowman",
+        "Master Pakku",
+        "Melancholic Poet",
+        "Mire's Grasp",
+        "Neera, Wild Mage",
+        "North Pole Patrol",
+        "Ozai, the Phoenix King",
+        "Palladium Myr",
+        "Rakdos Signet",
+        "Ral, Monsoon Mage",
+        "Savor",
+        "Serpent of the Pass",
+        "Sol Ring",
+        "Spectacular Skywhale",
+        "Tempest Angler",
+        "Temur Battle Rage",
+        "Ty Lee, Artful Acrobat",
+        "Ty Lee, Chi Blocker",
+        "Watery Grasp",
+        "Worn Powerstone",
+        "Zuko, Seeking Honor"
+      ],
+      "mainboard_count": 40,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 25,
+      "cards": [
+        "Abrade",
+        "Bitter Triumph",
+        "Bojuka Bog",
+        "Combustion Man",
+        "Combustion Technique",
+        "Deadly Precision",
+        "Desperate Plea",
+        "Electro, Assaulting Battery",
+        "Electrodominance",
+        "Epic Downfall",
+        "Fire Lord Azula",
+        "Firebending Lesson",
+        "Gandalf the Grey",
+        "Heartless Act",
+        "Iroh's Demonstration",
+        "Judith, Carnage Connoisseur",
+        "Kindlespark Duo",
+        "Lightning Strike",
+        "Longshot, Rebel Bowman",
+        "Ozai's Cruelty",
+        "Riddle of Lightning",
+        "The Fire Nation Drill",
+        "Zuko's Conviction",
+        "Zuko's Exile",
+        "Zuko, Seeking Honor"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Iroh's Demonstration"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Ozai, the Phoenix King",
+        "The Fire Nation Drill"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 3,
+      "cards": [
+        "Bitter Triumph",
+        "Charging Strifeknight",
+        "Gran-Gran"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 12,
+      "cards": [
+        "Bojuka Bog",
+        "Chromatic Star",
+        "Combustion Technique",
+        "Desperate Plea",
+        "Fire Lord Azula",
+        "Galvanic Iteration",
+        "Gran-Gran",
+        "Master Pakku",
+        "Serpent of the Pass",
+        "Spirit Water Revival",
+        "Wither and Bloom",
+        "Zuko's Conviction"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Desperate Plea",
+        "Galvanic Iteration",
+        "Wither and Bloom",
+        "Zuko's Conviction"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 16,
+      "cards": [
+        "Airship Engine Room",
+        "Archmage Emeritus",
+        "Electro, Assaulting Battery",
+        "Fire Lord Azula",
+        "Gandalf the Grey",
+        "Judith, Carnage Connoisseur",
+        "Kindlespark Duo",
+        "Longshot, Rebel Bowman",
+        "Master Pakku",
+        "Melancholic Poet",
+        "Neera, Wild Mage",
+        "Spectacular Skywhale",
+        "Tempest Angler",
+        "Ty Lee, Artful Acrobat",
+        "Ty Lee, Chi Blocker",
+        "Zuko, Seeking Honor"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Airship Engine Room",
+        "Arcane Signet",
+        "Boiling Rock Prison",
+        "Bojuka Bog",
+        "Chromatic Star",
+        "Command Tower",
+        "Electro, Assaulting Battery",
+        "Fire Lord Azula",
+        "Foreboding Ruins",
+        "Potioner's Trove",
+        "Secret Tunnel",
+        "Seething Landscape",
+        "Serpent's Pass",
+        "Stormcarved Coast",
+        "Temple of Epiphany",
+        "Temple of Malice",
+        "Thriving Bluff",
+        "Thriving Isle",
+        "Thriving Moor",
+        "Urza's Cave",
+        "Zuko, Seeking Honor"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 36,
+      "cards": [
+        "Airship Engine Room",
+        "Boiling Rock Prison",
+        "Bojuka Bog",
+        "Command Tower",
+        "Foreboding Ruins",
+        "Island",
+        "Mountain",
+        "Secret Tunnel",
+        "Seething Landscape",
+        "Serpent's Pass",
+        "Stormcarved Coast",
+        "Swamp",
+        "Temple of Epiphany",
+        "Temple of Malice",
+        "Thriving Bluff",
+        "Thriving Isle",
+        "Thriving Moor",
+        "Urza's Cave"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.32
+  },
+  "dual_role_cards": [
+    {
+      "card": "Airship Engine Room",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Signet",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archmage Emeritus",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bitter Triumph",
+      "roles": [
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boiling Rock Prison",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Charging Strifeknight",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chromatic Star",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Combustion Man",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Combustion Technique",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Desperate Plea",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Electro, Assaulting Battery",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Lord Azula",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Foreboding Ruins",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Galvanic Iteration",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gandalf the Grey",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gran-Gran",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Iroh's Demonstration",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Judith, Carnage Connoisseur",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kindlespark Duo",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Longshot, Rebel Bowman",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Master Pakku",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Melancholic Poet",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Neera, Wild Mage",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ozai, the Phoenix King",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Riddle of Lightning",
+      "roles": [
+        "dig_draw",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Secret Tunnel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seething Landscape",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Serpent of the Pass",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Serpent's Pass",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spectacular Skywhale",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirit Water Revival",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormcarved Coast",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tempest Angler",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Epiphany",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Malice",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Fire Nation Drill",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thriving Bluff",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thriving Isle",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thriving Moor",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ty Lee, Artful Acrobat",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ty Lee, Chi Blocker",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Cave",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wither and Bloom",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zuko's Conviction",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zuko's Exile",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zuko, Seeking Honor",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistakes: Over-tapping Azula without considering protection, ignoring mana screw, failing to track opponent's life totals.",
+    "Unique interactions: Azula's abilities can target yourself to draw cards, but be careful with life total.",
+    "Synergizes well with artifact ramp and burn spells.",
+    "Always track opponent's life totals and plan your damage output accordingly."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, drop Sol Ring/Arcane Signet if possible."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Cast a cheap cantrip or removal, or play a second land."
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize stabilizing the board and setting up mana for Azula by turn 4-5."
+    }
+  ],
+  "kill_priority": [
+    "Airship Engine Room",
+    "Archmage Emeritus",
+    "Electro, Assaulting Battery",
+    "Fire Lord Azula",
+    "Gandalf the Grey",
+    "Judith, Carnage Connoisseur",
+    "Kindlespark Duo",
+    "Longshot, Rebel Bowman"
+  ],
+  "interaction_to_disrupt": [
+    "Ozai, the Phoenix King",
+    "The Fire Nation Drill",
+    "Abrade",
+    "Bitter Triumph",
+    "Bojuka Bog",
+    "Combustion Man",
+    "Combustion Technique",
+    "Deadly Precision"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/fire-lord-azula.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

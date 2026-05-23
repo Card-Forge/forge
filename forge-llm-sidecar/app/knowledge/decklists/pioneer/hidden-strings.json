@@ -1,0 +1,157 @@
+{
+  "archetype": "Hidden Strings",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/hidden-strings.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Arboreal Grazer"
+    },
+    {
+      "qty": 1,
+      "name": "Atraxa, Grand Unifier"
+    },
+    {
+      "qty": 2,
+      "name": "Bala Ged Recovery"
+    },
+    {
+      "qty": 4,
+      "name": "Blooming Marsh"
+    },
+    {
+      "qty": 2,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 3,
+      "name": "Emergent Ultimatum"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 4,
+      "name": "Hidden Strings"
+    },
+    {
+      "qty": 1,
+      "name": "Lier, Disciple of the Drowned"
+    },
+    {
+      "qty": 2,
+      "name": "Llanowar Wastes"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Field"
+    },
+    {
+      "qty": 1,
+      "name": "Mastermind's Acquisition"
+    },
+    {
+      "qty": 1,
+      "name": "Omniscience"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 3,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Peer into the Abyss"
+    },
+    {
+      "qty": 4,
+      "name": "Pore Over the Pages"
+    },
+    {
+      "qty": 3,
+      "name": "Sylvan Scrying"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Mystery"
+    },
+    {
+      "qty": 4,
+      "name": "Thespian's Stage"
+    },
+    {
+      "qty": 4,
+      "name": "Vibrance"
+    },
+    {
+      "qty": 4,
+      "name": "Vizier of Tumbling Sands"
+    },
+    {
+      "qty": 1,
+      "name": "Zagoth Triome"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 1,
+      "name": "Approach of the Second Sun"
+    },
+    {
+      "qty": 1,
+      "name": "Atraxa, Grand Unifier"
+    },
+    {
+      "qty": 2,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 3,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 1,
+      "name": "Grand Abolisher"
+    },
+    {
+      "qty": 1,
+      "name": "Kaervek, the Spiteful"
+    },
+    {
+      "qty": 1,
+      "name": "Nezahal, Primal Tide"
+    },
+    {
+      "qty": 1,
+      "name": "Tear Asunder"
+    },
+    {
+      "qty": 1,
+      "name": "Temporary Lockdown"
+    },
+    {
+      "qty": 1,
+      "name": "Ultima"
+    },
+    {
+      "qty": 1,
+      "name": "Zacama, Primal Calamity"
+    }
+  ]
+}

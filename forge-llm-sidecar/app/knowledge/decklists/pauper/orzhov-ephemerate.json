@@ -1,0 +1,125 @@
+{
+  "archetype": "Orzhov Ephemerate",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/orzhov-ephemerate.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 4,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 2,
+      "name": "Cloudshift"
+    },
+    {
+      "qty": 2,
+      "name": "Contaminated Landscape"
+    },
+    {
+      "qty": 1,
+      "name": "Dawnbringer Cleric"
+    },
+    {
+      "qty": 1,
+      "name": "Eagles of the North"
+    },
+    {
+      "qty": 4,
+      "name": "Elite Interceptor"
+    },
+    {
+      "qty": 4,
+      "name": "Ephemerate"
+    },
+    {
+      "qty": 1,
+      "name": "Go for the Throat"
+    },
+    {
+      "qty": 3,
+      "name": "Goliath Paladin"
+    },
+    {
+      "qty": 4,
+      "name": "Inspiring Overseer"
+    },
+    {
+      "qty": 2,
+      "name": "Kor Skyfisher"
+    },
+    {
+      "qty": 4,
+      "name": "Melancholic Poet"
+    },
+    {
+      "qty": 2,
+      "name": "Novice Inspector"
+    },
+    {
+      "qty": 2,
+      "name": "Orzhov Basilica"
+    },
+    {
+      "qty": 8,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 1,
+      "name": "Sunlit Marsh"
+    },
+    {
+      "qty": 4,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Thraben Inspector"
+    },
+    {
+      "qty": 2,
+      "name": "Troll of Khazad-d\u00fbm"
+    },
+    {
+      "qty": 3,
+      "name": "Vampire Sovereign"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Accursed Marauder"
+    },
+    {
+      "qty": 2,
+      "name": "Arms of Hadar"
+    },
+    {
+      "qty": 2,
+      "name": "Coalition Honor Guard"
+    },
+    {
+      "qty": 1,
+      "name": "Dawnbringer Cleric"
+    },
+    {
+      "qty": 3,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 2,
+      "name": "Prismatic Strands"
+    },
+    {
+      "qty": 3,
+      "name": "Relic of Progenitus"
+    }
+  ]
+}

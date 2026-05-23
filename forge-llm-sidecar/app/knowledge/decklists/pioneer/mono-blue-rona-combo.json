@@ -1,0 +1,117 @@
+{
+  "archetype": "Mono-Blue Rona Combo",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/mono-blue-rona-combo.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 15,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Amber"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jasper"
+    },
+    {
+      "qty": 4,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 1,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 2,
+      "name": "Octopus Form"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 4,
+      "name": "Retraction Helix"
+    },
+    {
+      "qty": 4,
+      "name": "Rona, Herald of Invasion"
+    },
+    {
+      "qty": 2,
+      "name": "Sea Gate Restoration"
+    },
+    {
+      "qty": 1,
+      "name": "Sewer-veillance Cam"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 3,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 4,
+      "name": "Stormchaser's Talent"
+    },
+    {
+      "qty": 2,
+      "name": "This Town Ain't Big Enough"
+    },
+    {
+      "qty": 4,
+      "name": "Thundertrap Trainer"
+    },
+    {
+      "qty": 4,
+      "name": "Valley Floodcaller"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Annul"
+    },
+    {
+      "qty": 2,
+      "name": "Dispel"
+    },
+    {
+      "qty": 2,
+      "name": "Fresh Start"
+    },
+    {
+      "qty": 2,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 2,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 2,
+      "name": "Sewer-veillance Cam"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "This Town Ain't Big Enough"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    }
+  ]
+}

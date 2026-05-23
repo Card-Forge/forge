@@ -1,0 +1,396 @@
+{
+  "archetype": "Oloro, Ageless Ascetic",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/oloro-ageless-ascetic.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Adarkar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Aetherflux Reservoir"
+    },
+    {
+      "qty": 1,
+      "name": "Agadeem's Awakening"
+    },
+    {
+      "qty": 1,
+      "name": "Ajani, Strength of the Pride"
+    },
+    {
+      "qty": 1,
+      "name": "Amalia Benavides Aguirre"
+    },
+    {
+      "qty": 1,
+      "name": "Approach of the Second Sun"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archangel of Thune"
+    },
+    {
+      "qty": 1,
+      "name": "Aura of Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Auriok Champion"
+    },
+    {
+      "qty": 1,
+      "name": "Authority of the Consuls"
+    },
+    {
+      "qty": 1,
+      "name": "Azorius Chancery"
+    },
+    {
+      "qty": 1,
+      "name": "Azorius Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodchief Ascension"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodthirsty Conqueror"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Bolas's Citadel"
+    },
+    {
+      "qty": 1,
+      "name": "Breach the Multiverse"
+    },
+    {
+      "qty": 1,
+      "name": "Caduceus, Staff of Hermes"
+    },
+    {
+      "qty": 1,
+      "name": "Caves of Koilos"
+    },
+    {
+      "qty": 1,
+      "name": "Chrome Mox"
+    },
+    {
+      "qty": 1,
+      "name": "City of Brass"
+    },
+    {
+      "qty": 1,
+      "name": "Coldsteel Heart"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Consecrated Sphinx"
+    },
+    {
+      "qty": 1,
+      "name": "Council's Judgment"
+    },
+    {
+      "qty": 1,
+      "name": "Crested Sunmare"
+    },
+    {
+      "qty": 1,
+      "name": "Cyclonic Rift"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Disallow"
+    },
+    {
+      "qty": 1,
+      "name": "Dismal Backwater"
+    },
+    {
+      "qty": 1,
+      "name": "Dismember"
+    },
+    {
+      "qty": 1,
+      "name": "Drowned Catacomb"
+    },
+    {
+      "qty": 1,
+      "name": "Elenda's Hierophant"
+    },
+    {
+      "qty": 1,
+      "name": "Enduring Tenacity"
+    },
+    {
+      "qty": 1,
+      "name": "Esper Sentinel"
+    },
+    {
+      "qty": 1,
+      "name": "Evolving Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Exemplar of Light"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Exquisite Blood"
+    },
+    {
+      "qty": 1,
+      "name": "Farewell"
+    },
+    {
+      "qty": 1,
+      "name": "Feed the Swarm"
+    },
+    {
+      "qty": 1,
+      "name": "Felidar Sovereign"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Fracture"
+    },
+    {
+      "qty": 1,
+      "name": "Generous Gift"
+    },
+    {
+      "qty": 1,
+      "name": "Glacial Fortress"
+    },
+    {
+      "qty": 1,
+      "name": "Grasp of Fate"
+    },
+    {
+      "qty": 1,
+      "name": "Heliod, Sun-Crowned"
+    },
+    {
+      "qty": 1,
+      "name": "Imprisoned in the Moon"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Isolated Chapel"
+    },
+    {
+      "qty": 1,
+      "name": "Jwar Isle Refuge"
+    },
+    {
+      "qty": 1,
+      "name": "Kambal, Consul of Allocation"
+    },
+    {
+      "qty": 1,
+      "name": "Karlov of the Ghost Council"
+    },
+    {
+      "qty": 1,
+      "name": "Luminarch Ascension"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Confluence"
+    },
+    {
+      "qty": 1,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Minamo, School at Water's Edge"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Remora"
+    },
+    {
+      "qty": 1,
+      "name": "No Mercy"
+    },
+    {
+      "qty": 1,
+      "name": "Oloro, Ageless Ascetic"
+    },
+    {
+      "qty": 1,
+      "name": "Opposition Agent"
+    },
+    {
+      "qty": 1,
+      "name": "Orzhov Basilica"
+    },
+    {
+      "qty": 1,
+      "name": "Oubliette"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Sanguine Bond"
+    },
+    {
+      "qty": 1,
+      "name": "Scoured Barrens"
+    },
+    {
+      "qty": 1,
+      "name": "Sea of Clouds"
+    },
+    {
+      "qty": 1,
+      "name": "Sensei's Divining Top"
+    },
+    {
+      "qty": 1,
+      "name": "Serra Ascendant"
+    },
+    {
+      "qty": 1,
+      "name": "Sheoldred, the Apocalypse"
+    },
+    {
+      "qty": 1,
+      "name": "Smothering Tithe"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Soul Warden"
+    },
+    {
+      "qty": 1,
+      "name": "Soul's Attendant"
+    },
+    {
+      "qty": 1,
+      "name": "Spymaster's Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Starscape Cleric"
+    },
+    {
+      "qty": 1,
+      "name": "Sunken Hollow"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Hierarchy"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi's Protection"
+    },
+    {
+      "qty": 1,
+      "name": "Torment of Hailfire"
+    },
+    {
+      "qty": 1,
+      "name": "Toxic Deluge"
+    },
+    {
+      "qty": 1,
+      "name": "Tranquil Cove"
+    },
+    {
+      "qty": 1,
+      "name": "Utter End"
+    },
+    {
+      "qty": 1,
+      "name": "Varragoth, Bloodsky Sire"
+    },
+    {
+      "qty": 1,
+      "name": "Vault of Champions"
+    },
+    {
+      "qty": 1,
+      "name": "Vito, Thorn of the Dusk Rose"
+    },
+    {
+      "qty": 1,
+      "name": "Voice of the Blessed"
+    },
+    {
+      "qty": 1,
+      "name": "Walking Ballista"
+    },
+    {
+      "qty": 1,
+      "name": "Zur the Enchanter"
+    }
+  ],
+  "sideboard": []
+}

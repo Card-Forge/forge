@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two mana sources by turn two",
       "Early plays like Llanowar Elves or Nature's Rhythm",
-      "A mix of lands and low-cost creatures to maintain tempo"
+      "A mix of lands and low-cost creatures to maintain tempo",
+      "Keep hands with 2-3 lands, Llanowar Elves, Nature's Rhythm, or early interactive threats.",
+      "Prioritize hands that can play a land and a Llanowar Elves on turn one, or a land and Nature's Rhythm on turn two."
     ],
     "mulligan_criteria": [
       "Hands lacking early mana acceleration",
       "Three or more lands without early plays",
-      "Hands missing interaction or ramp in the first three turns"
+      "Hands missing interaction or ramp in the first three turns",
+      "Mulligan hands with 0-1 lands, multiple high-cost finishers without ramp, or hands lacking early interaction."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Prioritize playing Llanowar Elves on curve to accelerate green mana",
       "Use Nature's Rhythm to fetch lands or draw cards, ensuring land drops",
-      "Deploy Badgermole Cub to establish early board presence and enable synergies"
+      "Deploy Badgermole Cub to establish early board presence and enable synergies",
+      "Turn 1: Play a land, tap Llanowar Elves if possible.",
+      "Turn 2: Ramp into Nature's Rhythm or deploy a 2-drop threat.",
+      "Sequence lands to ensure Sultai colors by turn 2-3, prioritizing fetches/shocks if available.",
+      "Use Nature's Rhythm to draw cards while slowing opponent's land drops, setting up a stable mana base for midgame recursion."
     ],
     "mid_game": [
       "Transition into larger threats while maintaining mana advantage",
       "Use recursion and token generation to replace lost creatures",
-      "Apply pressure while holding up interaction for opponent's threats"
+      "Apply pressure while holding up interaction for opponent's threats",
+      "Preserve mana for interaction until turn 3.",
+      "Use the graveyard strategically",
+      "avoid over-committing to recursion if the board is unstable.",
+      "Manage hand size by trading cards for board presence, and use Nature's Rhythm to cycle into answers or threats when resources are tight.",
+      "Commit threats when you have removal ready or the opponent is tapped out.",
+      "Hold back if facing sweepers or heavy removal."
     ],
     "late_game": [
       "Cast high-impact threats that leverage accumulated mana",
       "Use land synergies and card draw to outlast opponent's resources",
-      "Close out games with unblockable attackers and board wipes if necessary"
+      "Close out games with unblockable attackers and board wipes if necessary",
+      "Deploy resilient threats that can't be easily removed, or chain recursion engines to generate lethal damage or card advantage.",
+      "Use late-game Nature's Rhythm to draw into win conditions or finish off low-life opponents with recursive threats.",
+      "Go all-in when you have board control, the opponent is low on removal, or you've established a recursive loop that can't be answered.",
+      "Commit when you can force unfavorable trades or when your opponent is tapped out for interaction."
     ]
   },
   "key_cards": [
@@ -58,7 +75,12 @@
   "sequencing_tips": [
     "Hold up mana for interaction before committing to land drops",
     "Prioritize playing mana dorks before casting ramp spells to maximize efficiency",
-    "Sequence land fetches to ensure color fixing for U/B/G spells"
+    "Sequence land fetches to ensure color fixing for U/B/G spells",
+    "Common mistake: Over-ramping into a single win condition.",
+    "Always maintain a board presence and keep interactive spells in hand.",
+    "Unique interaction: Nature's Rhythm can be used to tutor for lands or trigger landfall synergies.",
+    "Badgermole Cub's recursion can be exploited by graveyard hate, so protect it or have backup plans.",
+    "Practice timing your recursion to avoid giving opponents free interaction windows."
   ],
   "matchups": [
     {
@@ -87,15 +109,34 @@
         "Card draw engines",
         "Resilient creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split spells, cheap threats, or layered effects to force counterspells. Trade resources to burn through their protection, then play around the last one. Use graveyard recursion to bypass counters and apply pressure from unexpected angles.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure and use spot removal on key ramp creatures. Disrupt their mana development with land hate or counters, and avoid trading into their late-game finishers. Stabilize quickly and close out before they reach their power spike.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing card draw, recursion, and targeted removal. Control the graveyard and force unfavorable trades. Out-value them in the late game by maintaining a steady stream of threats and answers.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
-    "Countermagic and removal"
+    "Countermagic and removal",
+    "Watch for Izzet's counterspells and cheap removal to time your plays around them.",
+    "Note when Landfall decks start dropping multiple lands per turn to anticipate their power spike.",
+    "Track graveyard contents for recursion threats or combo pieces, and adjust your removal priorities accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:33:22+00:00",
     "model": "local-model",
@@ -111,6 +152,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

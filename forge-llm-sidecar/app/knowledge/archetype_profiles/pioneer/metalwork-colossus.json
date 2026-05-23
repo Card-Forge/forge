@@ -1,0 +1,469 @@
+{
+  "schema_version": 1,
+  "name": "Metalwork Colossus",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This Pioneer Azorius deck revolves around casting Metalwork Colossus for free or cheap using high-mana-value artifacts like Brass Knuckles and Leyline Axe to achieve a double-strike lethal attack. It features an alternative win condition via Simulacrum Synthesizer tokens and includes board interaction and recursion tools to protect the combo. The deck aims to assemble its pieces quickly, bypass blockers with Wedding Invitation, and loop back to hand if removal is encountered.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 10,
+      "cards": [
+        "Brass Knuckles",
+        "Leyline Axe",
+        "Wedding Invitation"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 17,
+      "cards": [
+        "Brass Knuckles",
+        "Metalwork Colossus",
+        "Perilous Snare",
+        "Simulacrum Synthesizer",
+        "Wedding Invitation"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Ingenious Smith",
+        "Simulacrum Synthesizer"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Inventors' Fair",
+        "Repurposing Bay",
+        "Sanctum of Ugin"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 2
+    },
+    "win_conditions": {
+      "target_count": 18,
+      "cards": [
+        "Brass Knuckles",
+        "Leyline Axe",
+        "Metalwork Colossus",
+        "Simulacrum Synthesizer",
+        "Wedding Invitation"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 24,
+      "cards": [
+        "Containment Priest",
+        "Hengegate Pathway",
+        "Ingenious Smith",
+        "Metalwork Colossus",
+        "Moonsnare Prototype",
+        "Portable Hole",
+        "Simulacrum Synthesizer"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 20,
+      "cards": [
+        "Adarkar Wastes",
+        "Eiganjo, Seat of the Empire",
+        "Fabrication Foundry",
+        "Glass Casket",
+        "Knockout Blow",
+        "Otawara, Soaring City",
+        "Perilous Snare",
+        "Portable Hole"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Metalwork Colossus",
+        "Simulacrum Synthesizer"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 11,
+      "cards": [
+        "Fabrication Foundry",
+        "Metalwork Colossus",
+        "Unlicensed Hearse"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 4,
+      "cards": [
+        "Fabrication Foundry"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 13,
+      "cards": [
+        "Fabrication Foundry",
+        "Inventors' Fair",
+        "Metalwork Colossus",
+        "Otawara, Soaring City",
+        "Wedding Invitation"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 19,
+      "cards": [
+        "Leyline Axe",
+        "Metalwork Colossus",
+        "Perilous Snare",
+        "Sanctum of Ugin",
+        "Simulacrum Synthesizer"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 10,
+      "cards": [
+        "Metalwork Colossus",
+        "Simulacrum Synthesizer",
+        "Wedding Invitation"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 16,
+      "cards": [
+        "Brass Knuckles",
+        "Leyline Axe",
+        "Metalwork Colossus",
+        "Simulacrum Synthesizer"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 14,
+      "cards": [
+        "Damping Sphere",
+        "Inventors' Fair",
+        "Leyline Axe",
+        "Simulacrum Synthesizer",
+        "Torpor Orb"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 41,
+      "cards": [
+        "Adarkar Wastes",
+        "Brass Knuckles",
+        "Eiganjo, Seat of the Empire",
+        "Fabrication Foundry",
+        "Hallowed Fountain",
+        "Inventors' Fair",
+        "Leyline Axe",
+        "Metalwork Colossus",
+        "Otawara, Soaring City",
+        "Sanctum of Ugin",
+        "Seachrome Coast",
+        "Simulacrum Synthesizer",
+        "Wedding Invitation"
+      ],
+      "mainboard_count": 41,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Adarkar Wastes",
+        "Eiganjo, Seat of the Empire",
+        "Fabrication Foundry",
+        "Hallowed Fountain",
+        "Inventors' Fair",
+        "Island",
+        "Otawara, Soaring City",
+        "Plains",
+        "Sanctum of Ugin",
+        "Seachrome Coast"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.37
+  },
+  "dual_role_cards": [
+    {
+      "card": "Adarkar Wastes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brass Knuckles",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "mana_fixing",
+        "mana_reducers",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eiganjo, Seat of the Empire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabrication Foundry",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "reanimation_targets",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ingenious Smith",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inventors' Fair",
+      "roles": [
+        "hate_pieces",
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leyline Axe",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "mana_reducers",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Metalwork Colossus",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Perilous Snare",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Portable Hole",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sanctum of Ugin",
+      "roles": [
+        "engines",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seachrome Coast",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Simulacrum Synthesizer",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wedding Invitation",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "mana_reducers",
+        "payoff_cards",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize playing Leyline Axe on turn one to establish early mana and cost reduction.",
+    "Hold Wedding Invitation until combat to clear blockers for a lethal Colossus attack.",
+    "If Colossus faces removal, sacrifice two artifacts to return it to hand and repeat the combo next turn.",
+    "Use Fabrication Foundry's reanimation ability to recover key artifacts in attrition games.",
+    "Watch out for artifact hate (Shatter, Disenchant)."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Leyline Axe on turn one if possible to establish free mana and cost reduction"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Moonsnare Prototype to ramp and protect Leyline Axe"
+    },
+    {
+      "trigger": "early game",
+      "line": "Search for artifacts with Ingenious Smith"
+    }
+  ],
+  "kill_priority": [
+    "Leyline Axe",
+    "Metalwork Colossus",
+    "Perilous Snare",
+    "Sanctum of Ugin",
+    "Simulacrum Synthesizer",
+    "Brass Knuckles",
+    "Wedding Invitation",
+    "Containment Priest"
+  ],
+  "interaction_to_disrupt": [
+    "Metalwork Colossus",
+    "Simulacrum Synthesizer",
+    "Adarkar Wastes",
+    "Eiganjo, Seat of the Empire",
+    "Fabrication Foundry",
+    "Glass Casket",
+    "Knockout Blow",
+    "Otawara, Soaring City"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/metalwork-colossus.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

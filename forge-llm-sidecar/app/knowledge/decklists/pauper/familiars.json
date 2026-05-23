@@ -1,0 +1,113 @@
+{
+  "archetype": "Familiars",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/familiars.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Archaeomancer"
+    },
+    {
+      "qty": 4,
+      "name": "Azorius Chancery"
+    },
+    {
+      "qty": 3,
+      "name": "Contaminated Landscape"
+    },
+    {
+      "qty": 2,
+      "name": "Ephemerate"
+    },
+    {
+      "qty": 1,
+      "name": "Ghostly Flicker"
+    },
+    {
+      "qty": 4,
+      "name": "God-Pharaoh's Faithful"
+    },
+    {
+      "qty": 1,
+      "name": "Idyllic Beachfront"
+    },
+    {
+      "qty": 8,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 3,
+      "name": "Meeting of Minds"
+    },
+    {
+      "qty": 1,
+      "name": "Mortuary Mire"
+    },
+    {
+      "qty": 3,
+      "name": "Mulldrifter"
+    },
+    {
+      "qty": 2,
+      "name": "Murmuring Mystic"
+    },
+    {
+      "qty": 2,
+      "name": "Negate"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Preordain"
+    },
+    {
+      "qty": 2,
+      "name": "Prohibit"
+    },
+    {
+      "qty": 3,
+      "name": "Sea Gate Oracle"
+    },
+    {
+      "qty": 4,
+      "name": "Snap"
+    },
+    {
+      "qty": 4,
+      "name": "Sunscape Familiar"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 4,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Last Breath"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 3,
+      "name": "Remove Soul"
+    },
+    {
+      "qty": 2,
+      "name": "Stonehorn Dignitary"
+    }
+  ]
+}

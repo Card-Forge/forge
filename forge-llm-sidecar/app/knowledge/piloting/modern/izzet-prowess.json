@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least one cheap creature and a noncreature spell",
       "Two mana sources and a low-CMC threat",
-      "Mishra's Bauble paired with an instant or sorcery"
+      "Mishra's Bauble paired with an instant or sorcery",
+      "Keep hands with 2-3 lands (duals/fixers), plus at least one Prowess threat (Slickshot Show-Off, Cori-Steel Cutter) or a cheap cantrip/removal.",
+      "Prioritize hands that can cast 2+ spells on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Zero noncreature spells to trigger prowess",
       "Three or more lands in a six-card hand",
-      "High-CMC cards without early mana acceleration"
+      "High-CMC cards without early mana acceleration",
+      "Mulligan pure land hands, hands with only expensive spells, or hands lacking early interaction against aggro."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play Mishra's Bauble and Cori-Steel Cutter on curve",
       "Cast cheap instants or artifacts to trigger prowess before combat",
-      "Tap creatures for mana only when necessary to maintain board presence"
+      "Tap creatures for mana only when necessary to maintain board presence",
+      "Turn 1: Play a land, cast Mishra's Bauble (sacrifice for {2} damage or draw), or cast a cheap cantrip/removal.",
+      "If opening with a Prowess threat, play land, cast threat, attack to trigger Prowess + spell trigger.",
+      "Turn 2: Develop board with another cheap spell or threat, continue casting instants/sorceries to maximize Prowess damage.",
+      "Sequence lands to ensure double-blue or red sources for Bauble/fixing."
     ],
     "mid_game": [
       "Use Slickshot Show-Off's tap ability to push lethal or clear blockers",
       "Cycle through cheap spells to keep prowess triggers active",
-      "Hold up mana for interaction if opponent attempts to stabilize"
+      "Hold up mana for interaction if opponent attempts to stabilize",
+      "Prioritize casting cheap instants/sorceries over holding mana for Prowess triggers.",
+      "Use Bauble for card advantage when ahead, damage when behind.",
+      "Don't overcommit to board if opponent has sweepers",
+      "keep hand full of spells to trigger Prowess off threats.",
+      "Commit threats when you can protect them or when Prowess can close the game.",
+      "Hold back if opponent has sweepers or heavy removal."
     ],
     "late_game": [
       "Sacrifice Baubles for flying prowess tokens to bypass blockers",
       "Maintain pressure with continuous spell casting to outvalue control decks",
-      "Pivot to defensive prowess triggers if opponent boards large threats"
+      "Pivot to defensive prowess triggers if opponent boards large threats",
+      "Prowess triggers from Slickshot/Cori-Steel, direct damage spells, and combat damage.",
+      "Win by chipping to lethal or attacking with multiple Prowess threats while casting spells in response.",
+      "Go all-in when you have 3+ spells in hand, a Prowess threat on board, and opponent has no sweepers or has tapped out.",
+      "Also commit when you can race combo decks to lethal before their turn."
     ]
   },
   "key_cards": [
@@ -58,7 +75,13 @@
   "sequencing_tips": [
     "Cast noncreature spells before declaring attackers to trigger prowess for combat",
     "Hold up mana for potential counterspells or tax effects before committing to attacks",
-    "Use tap abilities after prowess triggers resolve to avoid missing combat"
+    "Use tap abilities after prowess triggers resolve to avoid missing combat",
+    "Common mistake: Holding too many lands and not casting enough spells to trigger Prowess.",
+    "Always prioritize casting instants/sorceries over holding mana.",
+    "Remember that Prowess triggers even if the spell is countered (as long as it was cast).",
+    "Use Bauble for damage when behind, card draw when ahead.",
+    "Watch out for sweepers and plan spell sequencing around them.",
+    "Cori-Steel Cutter and Slickshot Show-Off are your primary win conditions"
   ],
   "matchups": [
     {
@@ -105,6 +128,16 @@
         "Large creatures",
         "Board wipes"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Prowess to cast spells in response to counterspells (e.g., cast Shock, let them counter, cast another spell to trigger Prowess again). Use Bauble for card advantage. Don't overcommit expensive spells; rely on cheap volume.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Out-value them with better sequencing. Prioritize casting spells to trigger Prowess before attacking. Use Bauble for card advantage. Win by having more spells in hand and better threat resilience.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -112,10 +145,15 @@
     "Board wipes",
     "Large creatures",
     "Tax effects",
-    "Direct damage spells"
+    "Direct damage spells",
+    "Watch for sweepers (Wrath of God, Cyclonic Rift), counterspells, and removal.",
+    "Note when they tap out for big spells.",
+    "Track graveyard if they rely on flashback or dredge.",
+    "Watch for combo pieces (Amulet, Storm count, Blink targets)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:28:31+00:00",
     "model": "local-model",
@@ -131,7 +169,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

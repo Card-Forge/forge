@@ -1,0 +1,161 @@
+{
+  "archetype": "Raker Shops",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/raker-shops.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 1,
+      "name": "Chalice of the Void"
+    },
+    {
+      "qty": 4,
+      "name": "Glaring Fleshraker"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 3,
+      "name": "Grim Monolith"
+    },
+    {
+      "qty": 1,
+      "name": "Karn, the Great Creator"
+    },
+    {
+      "qty": 1,
+      "name": "Lodestone Golem"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Vault"
+    },
+    {
+      "qty": 2,
+      "name": "Manifold Key"
+    },
+    {
+      "qty": 4,
+      "name": "Mishra's Workshop"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Ruby"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Forge"
+    },
+    {
+      "qty": 2,
+      "name": "Petrified Hamlet"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 4,
+      "name": "Scrawling Crawler"
+    },
+    {
+      "qty": 4,
+      "name": "Sensei's Divining Top"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 4,
+      "name": "Tezzeret, Cruel Captain"
+    },
+    {
+      "qty": 4,
+      "name": "The One Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Time Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Tolarian Academy"
+    },
+    {
+      "qty": 1,
+      "name": "Trinisphere"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Argentum Masticore"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 3,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 3,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 2,
+      "name": "Petrified Hamlet"
+    },
+    {
+      "qty": 3,
+      "name": "Stonecoil Serpent"
+    }
+  ]
+}

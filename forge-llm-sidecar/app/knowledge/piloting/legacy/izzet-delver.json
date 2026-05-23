@@ -13,12 +13,15 @@
       "Hands with 1 or 2 lands",
       "Inclusion of card draw spells like Brainstorm or Ponder",
       "Early pressure or disruption like Wasteland",
-      "Reactive cards paired with cantrips to find answers"
+      "Reactive cards paired with cantrips to find answers",
+      "Keep hands with 2-3 lands, Delver of Secrets, and at least two cheap instants (Opt, Lightning Bolt, Spell Pierce, or Thought Scorn).",
+      "Prioritize hands that can cast two instants by turn 2 to flip Delver."
     ],
     "mulligan_criteria": [
       "Hands with 3 lands unless accompanied by Wasteland or strong action",
       "Overly reactive hands lacking early pressure",
-      "Hands without card draw to filter or find threats"
+      "Hands without card draw to filter or find threats",
+      "Mulligan flood, pure removal, or hands missing Delver/instants unless they contain multiple answers to specific meta threats."
     ],
     "examples": [
       {
@@ -79,17 +82,31 @@
     "early_game": [
       "Play low-cost spells to apply immediate pressure",
       "Use Wasteland to disrupt opponent's mana base",
-      "Hold up Force of Will or Daze for protection"
+      "Hold up Force of Will or Daze for protection",
+      "Turn 1: Cast Opt or Spell Pierce into a land, or Bolt a potential threat.",
+      "Turn 2: Play a second land, cast a second instant, and flip Delver into Inverter of Truth.",
+      "If holding Delver, play it on turn 1 or 2 and cast an instant to flip it.",
+      "Sequence lands to ensure you can cast two instants by turn 2 without tapping out completely if you expect disruption."
     ],
     "mid_game": [
       "Transform Delver of Secrets using Baubles or card draw",
       "Activate Cori-Steel Cutter to generate tokens on both turns",
-      "Utilize Murktide Regent's Delve and Dragon's Rage Channeler's Delirium"
+      "Utilize Murktide Regent's Delve and Dragon's Rage Channeler's Delirium",
+      "Treat mana as a resource for both interaction and threat development.",
+      "Never tap out for Delver if you have no way to protect it against hard counters.",
+      "Use Opt/Thought Scorn to dig for answers or finishers.",
+      "Preserve graveyard for Flow State or avoid it if opponent runs graveyard hate.",
+      "Commit Delver when you have at least one counter/removal to protect it, or when you can immediately follow up with Flow State.",
+      "Hold back interaction if the opponent is on a combo that requires specific pieces"
     ],
     "late_game": [
       "Maintain board presence with token swarms",
       "Continue cycling through card draw to find answers",
-      "Adapt sideboard choices based on meta threats"
+      "Adapt sideboard choices based on meta threats",
+      "Flow State + Inverter of Truth is the primary win condition, dealing infinite damage.",
+      "Secondary wins come from Inverter + Lightning Bolt/Spell Pierce, or out-racing with Delver pressure and efficient removal.",
+      "Go all-in when the opponent has no removal or counterspells in hand, when you can safely cast Flow State on your turn, or when you\u2019re ahead on board and can close out the game before they stabilize.",
+      "Commit to the combo even if it means tapping out, provided you\u2019ve verified their hand."
     ]
   },
   "key_cards": [
@@ -138,7 +155,13 @@
     "Put Cori-Steel Cutter on the board on turn 2 and immediately follow up with a 0-cost spell to trigger its ability.",
     "Activate Mishra's Bauble at the end of the opponent's turn to trigger Delirium before your turn begins.",
     "When using Brazen Borrower, set up the stack at your upkeep to reveal the top card before drawing it if it's decent, or draw first if it isn't.",
-    "Prioritize casting spells on the opponent's turn to maximize Cori-Steel Cutter's token generation."
+    "Prioritize casting spells on the opponent's turn to maximize Cori-Steel Cutter's token generation.",
+    "Flow State must be cast on your turn to trigger infinite damage with Inverter.",
+    "Don\u2019t tap out for Delver if you suspect a hard counter unless you have a way to protect it or win immediately.",
+    "Chalice of the Void is often the most impactful sideboard card",
+    "prioritize it.",
+    "Use Opt/Thought Scorn to dig for answers, not just to flip Delver.",
+    "Be mindful of graveyard hate (Rest in Peace, Leyline of the Void) which can shut down Flow State or Delver\u2019s recursion."
   ],
   "matchups": [
     {
@@ -181,6 +204,31 @@
         "Red Elemental Blast",
         "Pyroblast"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Chalice of the Void on 1 or 2, Flusterstorm/Spell Pierce to protect your instants, and Opt/Thought Scorn to dig around counters. Overcommit with Delver when you suspect they\u2019re out of counters, or use Flow State to win before they can respond.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Chalice on 1, Flusterstorm, and discard to disrupt their mana rocks. Pressure with Delver to race them before they assemble Tron or Ocelot Pride. Use Flow State to win before they stabilize or combo off.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Counterspell their early threats, Bolt/Scorn their creatures, and Chalice on 1. Delver pressure forces them to trade, while Flow State can close the game if they overcommit. Don\u2019t let them stabilize; keep pressure high.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with Delver and cheap instants. Use Chalice to disrupt their mana or key spells. Dig for Flow State and combo when they tap out for sweepers or counters. Avoid overextending; trade efficiently and wait for the right moment to go off.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through card advantage (Opt, Thought Scorn) and better sequencing. Chalice on 1 or 2 to disrupt their Delver/instants. Flusterstorm to protect your flips or disrupt theirs. Race with Delver, protect your Inverter, and use Flow State timing to out-combo them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -193,10 +241,12 @@
     "Simian Spirit Guide",
     "Painter's Servant",
     "Red Elemental Blast",
-    "Pyroblast"
+    "Pyroblast",
+    "Watch for hard counters (Counterspell, Mana Leak, Flusterstorm) and sweepers (Supreme Verdict, Anger of the Gods)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-izzet-delver-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T07:13:37+00:00",
     "model": "local-model",
@@ -214,6 +264,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

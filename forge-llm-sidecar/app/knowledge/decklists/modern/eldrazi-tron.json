@@ -1,0 +1,133 @@
+{
+  "archetype": "Eldrazi Tron",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/eldrazi-tron.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Devourer of Destiny"
+    },
+    {
+      "qty": 4,
+      "name": "Eldrazi Temple"
+    },
+    {
+      "qty": 4,
+      "name": "Expedition Map"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Karn, the Great Creator"
+    },
+    {
+      "qty": 4,
+      "name": "Kozilek's Command"
+    },
+    {
+      "qty": 2,
+      "name": "Sire of Seven Deaths"
+    },
+    {
+      "qty": 4,
+      "name": "Sowing Mycospawn"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Curiosity"
+    },
+    {
+      "qty": 4,
+      "name": "Talisman of Resilience"
+    },
+    {
+      "qty": 4,
+      "name": "Thought-Knot Seer"
+    },
+    {
+      "qty": 4,
+      "name": "Ugin's Labyrinth"
+    },
+    {
+      "qty": 4,
+      "name": "Ugin, Eye of the Storms"
+    },
+    {
+      "qty": 1,
+      "name": "Ulamog, the Ceaseless Hunger"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Mine"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Power Plant"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Tower"
+    },
+    {
+      "qty": 2,
+      "name": "Warping Wail"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Chalice of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Cityscape Leveler"
+    },
+    {
+      "qty": 1,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Engineered Explosives"
+    },
+    {
+      "qty": 1,
+      "name": "Ensnaring Bridge"
+    },
+    {
+      "qty": 1,
+      "name": "Extinguisher Battleship"
+    },
+    {
+      "qty": 1,
+      "name": "Liquimetal Coating"
+    },
+    {
+      "qty": 1,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Trinisphere"
+    },
+    {
+      "qty": 2,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 1,
+      "name": "Walking Ballista"
+    }
+  ]
+}

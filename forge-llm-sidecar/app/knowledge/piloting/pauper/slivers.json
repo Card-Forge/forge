@@ -11,11 +11,13 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with early Slivers and lords to establish pressure",
-      "Hands containing draw spells to maintain consistency"
+      "Hands containing draw spells to maintain consistency",
+      "Keep hands with 2-3 lands (prioritizing Plains/Forest for early 1-drops), at least one early Sliver (Predatory, Plated, or Muscle), and a clear path to cast it by turn 2."
     ],
     "mulligan_criteria": [
       "Hands completely lacking early creatures or lords",
-      "Hands that are severely color-screwed despite fixing options"
+      "Hands that are severely color-screwed despite fixing options",
+      "Mulligan to 5 if you have 0-1 lands, multiple uncastable Slivers, or no early threats."
     ],
     "examples": [
       {
@@ -46,17 +48,32 @@
     "early_game": [
       "Play Slivers and lords quickly to establish board presence",
       "Use draw spells early to empty hand and refill for consistency",
-      "Attack immediately to apply pressure"
+      "Attack immediately to apply pressure",
+      "Turn 1: Play a basic land matching your earliest Sliver's mana cost (Plains for Predatory/Plated, Forest for Muscle).",
+      "If you have a 1-drop, cast it.",
+      "Turn 2: Play another land, then cast a second Sliver or a 2-drop utility Sliver (e.g., Sliver Hive/Queen).",
+      "Sequence lands to ensure you can hit 2 and 3 mana reliably",
+      "fetch/shocks are ideal if your mana base supports them."
     ],
     "mid_game": [
       "Expand the swarm and utilize shared abilities like evasion and combat tricks",
       "Hold extra lords in hand to navigate sweepers",
-      "Force favorable trades using abilities like Hunter Sliver's provoke"
+      "Force favorable trades using abilities like Hunter Sliver's provoke",
+      "Slivers are mana-hungry",
+      "always maintain 1-2 mana open to react to sweepers or cast multiple threats.",
+      "Prioritize casting Sliver Queen/Hive/Overlord to generate card advantage and replace lost threats.",
+      "Avoid hoarding mana if you can safely commit to a board that trades favorably.",
+      "Commit threats when you have protection (e.g., lifelink/first strike trading into removal) or when the opponent is tapped out.",
+      "Hold back if you suspect a board wipe or spot removal"
     ],
     "late_game": [
       "Leverage card advantage to rebuild the board after sweepers",
       "Continue attacking with a wide, buffed swarm to close out games",
-      "Use sideboard cards like Quick Sliver to cast threats on opponent's turn"
+      "Use sideboard cards like Quick Sliver to cast threats on opponent's turn",
+      "A board of 5+ Slivers with trample, haste, or lifelink, often fueled by Sliver Queen/Overlord card advantage.",
+      "Win via combat if you can break through blockers, or via a sudden lethal turn when the opponent is low.",
+      "Go all-in when you have enough power to trade favorably into blockers, when the opponent has no sweepers in hand, or when you can close the game in 1-2 turns.",
+      "Also commit when you've resolved a Sliver engine and can replace losses immediately."
     ]
   },
   "key_cards": [
@@ -105,7 +122,12 @@
     "Play lords early to maximize swarm buffs",
     "Cast draw spells to maintain hand size and consistency",
     "Hold lords in hand to dodge sweepers like Electrickery",
-    "Use Quick Sliver on the opponent's turn to play threats for free"
+    "Use Quick Sliver on the opponent's turn to play threats for free",
+    "Common mistake: Overextending into sweepers without a backup plan.",
+    "Remember that Slivers share abilities, so losing one creature doesn't strip your board of keywords.",
+    "Unique interaction: Sliver Hive/Queen/Overlord create a recursive value loop",
+    "protect them at all costs.",
+    "Also, track opponent's life total closely, as Slivers often win by trading up and going face rather than grinding for a single massive threat."
   ],
   "matchups": [
     {
@@ -151,6 +173,31 @@
         "Predatory Sliver",
         "Board state parity"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast multiple cheap threats in response to counterspells to force them to spend interaction. Use uncounterable effects if available, or simply out-value them by committing more threats than they can counter.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to finish them before they deploy their finishers. Use spot removal on key ramp targets and prioritize trading Slivers efficiently to stall their development.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early lifelink/first strike Slivers (Predatory/Plated) to trade into their attackers. Don't overcommit to a board that can be wiped; focus on reaching a critical mass of Slivers that can turn the tables with trample or haste.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure relentlessly with multiple threats per turn to prevent them from stabilizing. Use Sliver Queen/Hive/Overlord to out-grind their card advantage. Don't let them sweep your board without threatening lethal or having a backup plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race to card advantage and late-game power. Prioritize Sliver Queen/Overlord to generate value. Win by out-grinding, having better late-game threats, and forcing them to trade inefficiently. Sideboard in more value engines and hate for their specific Slivers.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -160,10 +207,14 @@
     "Arms of Hadar",
     "Galvanic Blast",
     "Makeshift Munitions",
-    "Spellstutter Sprite"
+    "Spellstutter Sprite",
+    "Watch for sweepers (Wrath of God, Toxic Deluge, etc.), spot removal (Path to Exile, Lightning Strike), and combo finishers.",
+    "Note when opponents hold up mana past turn 3, as they likely have interaction.",
+    "Track their life total to gauge if you should race or grind."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-slivers-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T10:24:49+00:00",
     "model": "local-model",
@@ -194,6 +245,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

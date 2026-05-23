@@ -1,0 +1,123 @@
+{
+  "archetype": "Omnath, Locus of Creation",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck aims to rapidly accelerate mana using ramp spells and mana rocks, deploy Omnath, Locus of Creation to trigger its powerful mana and card-draw abilities, and overwhelm opponents with massive X-spells or game-winning threats. It wins by out-resourcing and out-scaling opponents, excelling against slower decks and combo strategies that give it time to assemble its game plan.",
+  "win_conditions": [
+    "Massive X-spells (e.g., Storm the Festival, Dragon's Rage Channeler, or generic big creatures like Emrakul, the Promised End).",
+    "Once Omnath is active, you can generate 10+ mana in a turn."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep any hand with 2+ lands (preferably including a fetch/shock or dual land) and at least one ramp spell (Growth Spiral, Arcane Signet, Sol Ring, or Chrome Mox).",
+      "Keep hands with Swords to Plowshares if paired with a land or early threat."
+    ],
+    "mulligan_criteria": [
+      "Mulligan pure land hands, hands with only removal and no ramp, or hands with 3+ lands and no early plays."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring/Chrome Mox/Arcane Signet, or cast Growth Spiral if you have 2 lands.",
+      "Turn 2: Ramp further with Growth Spiral or another rock, or cast Omnath if you have 4+ mana.",
+      "Prioritize fetching basic lands for Omnath's triggers and shock lands for early life loss mitigation."
+    ],
+    "mid_game": [
+      "Prioritize maintaining mana acceleration over spending on threats early.",
+      "Use Growth Spiral to dig for answers or Omnath.",
+      "Don't overcommit to board presence before Omnath is on the field.",
+      "Manage graveyard by being mindful of discard or graveyard hate, though the deck isn't heavily reliant on it.",
+      "Hold back on casting expensive threats until Omnath is active and you have a clear path to win.",
+      "Use removal efficiently on key threats (e.g., Krenko's goblins, Ur-Dragon).",
+      "Commit to the board once you have 5+ mana available and Omnath's triggers are resolving."
+    ],
+    "late_game": [
+      "Massive X-spells (e.g., Storm the Festival, Dragon's Rage Channeler, or generic big creatures like Emrakul, the Promised End).",
+      "Once Omnath is active, you can generate 10+ mana in a turn.",
+      "Go all-in when you have Omnath on the battlefield, at least 2 other permanents, and enough mana to cast a game-ending spell or swing for lethal.",
+      "Also commit when the opponent has no removal in hand and you can close the game."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Omnath, Locus of Creation",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Growth Spiral",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Swords to Plowshares",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overcommitting to the board before Omnath is active, leaving you vulnerable to removal.",
+    "Another: Forgetting to fetch basic lands for Omnath's triggers, which can slow down your mana and card draw.",
+    "Unique interaction: Omnath's ETB triggers can be responded to, so don't assume they're free.",
+    "Also, Growth Spiral can target your own permanents for value, but be careful not to give opponents triggers if they have relevant abilities."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Omnath's card draw to dig past counters. Cast spells in response to their counterspells if you have protection. Use Growth Spiral to find answers or cast threats in response to their interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-ramp them with more efficient rocks. Use Swords to Plowshares to remove their mana sources. Don't overextend; stabilize and win with bigger threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Early ramp to stabilize, use Swords to Plowshares on key threats, then out-value with Omnath's card draw and big spells. Don't trade 1-for-1; use removal on the most threatening creature.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats, use Omnath to draw into answers, and cast X-spells when they're tapped out. Out-value them with card advantage and mana acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by card advantage and efficient removal. Prioritize keeping Omnath alive. Use Swords to Plowshares on their Omnath or key threats. Dig deeper with Growth Spiral to find more value.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for opponent's mana base (are they playing fetch/shock or dual lands?).",
+    "Track if they're playing discard or graveyard hate.",
+    "Note when they tap out for a single big spell vs. holding up mana for interaction.",
+    "Key tells: Tapping out for a 4-mana spell often means they're out of interaction."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

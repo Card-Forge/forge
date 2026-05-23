@@ -1,0 +1,225 @@
+{
+  "archetype": "Lurrus Breach",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/lurrus-breach.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancestral Recall"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 1,
+      "name": "Brain Freeze"
+    },
+    {
+      "qty": 1,
+      "name": "Chain of Vapor"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Dress Down"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 2,
+      "name": "Flow State"
+    },
+    {
+      "qty": 2,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 3,
+      "name": "Gifts Ungiven"
+    },
+    {
+      "qty": 1,
+      "name": "Gitaxian Probe"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Crypt"
+    },
+    {
+      "qty": 3,
+      "name": "Mana Drain"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Merchant Scroll"
+    },
+    {
+      "qty": 2,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Ruby"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 2,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Rebuild"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 4,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 1,
+      "name": "Time Walk"
+    },
+    {
+      "qty": 1,
+      "name": "Tolarian Academy"
+    },
+    {
+      "qty": 1,
+      "name": "Tundra"
+    },
+    {
+      "qty": 2,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 2,
+      "name": "Underworld Breach"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 3,
+      "name": "Volcanic Island"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Brotherhood's End"
+    },
+    {
+      "qty": 1,
+      "name": "Chain of Vapor"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Hurkyl's Recall"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 1,
+      "name": "Long Goodbye"
+    },
+    {
+      "qty": 1,
+      "name": "Lurrus of the Dream-Den"
+    },
+    {
+      "qty": 2,
+      "name": "Overencumbered"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Unable to Scream"
+    },
+    {
+      "qty": 1,
+      "name": "Yixlid Jailer"
+    }
+  ]
+}

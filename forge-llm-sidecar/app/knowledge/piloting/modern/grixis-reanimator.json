@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Thoughtseize and a reanimation spell",
       "Hands with two lands and a way to dig",
-      "Hands containing Abhorrent Oculus or Archon of Cruelty with a cheap instant"
+      "Hands containing Abhorrent Oculus or Archon of Cruelty with a cheap instant",
+      "Keep hands with 2-3 lands, at least one discard spell (Thoughtseize/Duress), and a reanimation spell or early threat.",
+      "Prioritize hands that can play turn 1 Thoughtseize into a land or early threat, ensuring you can sequence mana for disruption before committing to the graveyard."
     ],
     "mulligan_criteria": [
       "Hands with no disruption or reanimation",
       "Hands with three or more lands",
-      "Hands lacking early-game interaction"
+      "Hands lacking early-game interaction",
+      "Mulligan if you have 0-1 lands, only lands, or only threats with no discard/mana."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Play Thoughtseize to remove key threats or combo pieces",
       "Cast reanimation spells to bring back large threats",
-      "Set up the board for a fast finish"
+      "Set up the board for a fast finish",
+      "Turn 1: Play a land, cast Thoughtseize targeting the opponent\u2019s key early piece (ramp spell, combo piece, or early threat).",
+      "Turn 2: Play a land, cast a second discard or an early threat/reanimation spell.",
+      "If you have a reanimation target in hand or graveyard, sequence mana to cast it.",
+      "Land sequencing: Prioritize basics or duals that match your first two spells",
+      "avoid overextending into removal."
     ],
     "mid_game": [
       "Use Abhorrent Oculus to generate card advantage and find answers",
       "Maintain pressure with reanimated threats",
-      "Disrupt opponent's game plan with hand traps"
+      "Disrupt opponent's game plan with hand traps",
+      "Balance mana for reanimation versus disruption",
+      "avoid overcommitting to the graveyard without protection.",
+      "Keep cards in hand for interaction, and use Abhorrent Oculus to dig for reanimation spells or threats.",
+      "Track your graveyard carefully to ensure you have enough resources to follow up on reanimation plays.",
+      "Commit threats when you have protection (discard, counters, or opponent tapped out) or when you can follow up with additional value.",
+      "Hold back if the opponent has sweepers or targeted removal in play."
     ],
     "late_game": [
       "Leverage Archon of Cruelty's combat trick to clear the board",
       "Use Abhorrent Oculus's value engine to outlast opponents",
-      "Reanimate multiple threats to secure victory"
+      "Reanimate multiple threats to secure victory",
+      "Reanimated Archon of Cruelty or Abhorrent Oculus.",
+      "Oculus generates card advantage and mana to swing for lethal, while Archon crashes through with trample/haste and clears the board on entry.",
+      "Secure these threats in the graveyard, protect them from hate, and swing when the path is clear.",
+      "Go all-in when you have protection, the opponent is tapped out, the graveyard is safe from hate, or you can swing for lethal in one or two turns.",
+      "Also commit when you\u2019ve disrupted the opponent\u2019s hand and they have no interaction left."
     ]
   },
   "key_cards": [
@@ -59,7 +78,10 @@
     "Hold Thoughtseize for the opponent's most impactful card rather than using it preemptively",
     "Reanimate Archon of Cruelty when the opponent has multiple threats to maximize its combat trick",
     "Play Abhorrent Oculus when you need to dig for a specific reanimation target or answer",
-    "Prioritize reanimating threats that can immediately impact the board state"
+    "Prioritize reanimating threats that can immediately impact the board state",
+    "Common mistakes include overcommitting to the graveyard without protection, forgetting to track the opponent\u2019s hand for counters/removal, and missequencing mana for reanimation.",
+    "Abhorrent Oculus can be reanimated to draw cards and generate mana, enabling further plays, while Archon of Cruelty\u2019s enter-the-battlefield effect can clear the board.",
+    "Always keep a Thoughtseize for turn 1 to disrupt the early game, and be prepared to pivot if your primary game plan is shut down."
   ],
   "matchups": [
     {
@@ -88,16 +110,34 @@
         "Card advantage engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells before casting reanimation spells. Cast threats in response to their interaction, and use cheap spells to pressure. If counters are pervasive, pivot to graveyard value or alternative win conditions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and early threats. Don\u2019t let them stabilize or find their big threats. Use graveyard hate if they rely on it, and reanimate threats to race their ramp spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war by prioritizing graveyard hate and tracking their reanimation spells. Reanimate threats when the opponent is tapped out, and use Abhorrent Oculus to out-value them in card advantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Counterspell packages",
     "Graveyard hate",
-    "Board wipes"
+    "Board wipes",
+    "Watch for sweepers (Wrath of God, Anger of the Gods), targeted removal (Path to Exile, Fatal Push), graveyard hate (Rest in Peace, Leyline of the Void), and combo win conditions.",
+    "Note when the opponent taps out for interaction, as this is your window to reanimate threats or dig deeper."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:34:23+00:00",
     "model": "local-model",
@@ -113,7 +153,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

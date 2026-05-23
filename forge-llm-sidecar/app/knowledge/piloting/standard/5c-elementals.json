@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with at least two lands and an early elemental or Wistfulness",
       "Draws containing Vibrance paired with a relevant elemental target",
-      "Balanced color distribution supporting five-color mana base"
+      "Balanced color distribution supporting five-color mana base",
+      "Keep hands with 2-3 lands (preferably fetchable duals or lands that enter untapped), a 1-drop (Vibrance), and at least one early interaction or threat."
     ],
     "mulligan_criteria": [
       "Zero lands or more than four lands",
       "No early plays or elemental synergies",
-      "Heavy concentration of late-game recursion without setup"
+      "Heavy concentration of late-game recursion without setup",
+      "Mulligan if you have 0-1 lands, only single-colored lands without fetch support, or a hand consisting entirely of high-cost spells with no early game plan."
     ],
     "examples": []
   },
@@ -25,17 +27,29 @@
     "early_game": [
       "Establish mana base and play low-cost elementals",
       "Cast Wistfulness to tutor for immediate threats or answers",
-      "Avoid overcommitting resources before establishing board presence"
+      "Avoid overcommitting resources before establishing board presence",
+      "Turn 1: Play a land, cast Vibrance if possible to establish early board presence.",
+      "Turn 2: Play a land, cast Wistfulness or a 2-drop threat, or use removal on an opposing early threat.",
+      "Sequence lands to ensure colored mana availability for 5-color spells, using fetch lands to find duals that tap for your next required color."
     ],
     "mid_game": [
       "Deploy Ashling to generate tokens and apply pressure",
       "Use Vibrance to filter draws and find recursion or finishers",
-      "Maintain board control while cycling through the deck efficiently"
+      "Maintain board control while cycling through the deck efficiently",
+      "Balance mana for 5-color spells while holding up interaction.",
+      "Use fetch lands strategically to avoid flooding and ensure consistent colored mana.",
+      "Protect key graveyard resources and use graveyard hate when necessary to disrupt opponent strategies.",
+      "Commit threats when you have removal or counterspells to protect them.",
+      "Hold back if the opponent has sweepers or heavy interaction, and prioritize efficient trades to maintain board advantage."
     ],
     "late_game": [
       "Leverage Rekindled to return key elementals from graveyard",
       "Sustain token production to outvalue opponent's removal",
-      "Close out games with direct damage and overwhelming board state"
+      "Close out games with direct damage and overwhelming board state",
+      "Ashling tutoring for Rekindled, or overwhelming board presence with elementals.",
+      "Get there by stabilizing early, drawing into key pieces, and using removal to clear the path for your finisher.",
+      "When you have card advantage, protection for your finisher, or the opponent is low on interaction.",
+      "Also commit when you can out-value the opponent's remaining resources."
     ]
   },
   "key_cards": [
@@ -64,7 +78,10 @@
     "Cast Wistfulness before committing to large spells to ensure optimal targets",
     "Hold up mana for Vibrance's filter ability to maintain color consistency",
     "Protect Ashling with blockers or counterspells to preserve token generation",
-    "Sequence Rekindled after opponent plays removal to maximize value"
+    "Sequence Rekindled after opponent plays removal to maximize value",
+    "Common mistakes include overcommitting early, mismanaging fetch lands, failing to track opponent interaction, and not adapting to the metagame.",
+    "Unique interactions include Ashling tutoring for multiple win conditions, Vibrance synergizing with token strategies, and Wistfulness providing card advantage but being vulnerable to discard.",
+    "Always prioritize mana base consistency and interaction availability over raw power."
   ],
   "matchups": [
     {
@@ -120,6 +137,16 @@
         "Card advantage spells",
         "Board control"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells, split your combo, or use uncounterable threats. Hold up interaction to protect key plays and force the opponent to use counterspells on non-critical spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card draw, protect your finisher, and use targeted removal efficiently. Track the opponent's interaction and commit threats when they are out of answers.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -127,10 +154,13 @@
     "Permanent removal",
     "Counterspells",
     "Land destruction",
-    "Direct damage spells"
+    "Direct damage spells",
+    "Watch for counterspells (hold up blue mana), sweepers (hold back board), and combo pieces (keep interaction ready).",
+    "Key tells: Opponent tapping out on turn 2/3 often signals a combo or control plan, while aggressive early plays indicate a need for immediate stabilization."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:01:10+00:00",
     "model": "local-model",
@@ -146,6 +176,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

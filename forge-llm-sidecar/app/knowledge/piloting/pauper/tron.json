@@ -12,11 +12,13 @@
   "mulligan": {
     "keep_criteria": [
       "Hands containing multiple Urza's lands or mana accelerants like Crop Rotation",
-      "Hands with early interaction, life gain, or card draw engines"
+      "Hands with early interaction, life gain, or card draw engines",
+      "Keep hands with 2-3 lands (preferably Urza\u2019s Mine/Power Plant/Tower), one mana accelerator (Sol Ring/Arcane Signet), and at least one early interaction or discard."
     ],
     "mulligan_criteria": [
       "Hands lacking land drops or mana sources",
-      "Hands with only high-cost finishers and no ramp or protection"
+      "Hands with only high-cost finishers and no ramp or protection",
+      "Mulligan on 3+ lands with no Urzas, or hands with only accelerators and no lands."
     ],
     "examples": [
       {
@@ -35,15 +37,27 @@
   "game_plan": {
     "early_game": [
       "Prioritize casting Urza's trio or mana accelerants to unlock five-color mana",
-      "Play cheap interaction and life gain spells to stall the opponent and survive early pressure"
+      "Play cheap interaction and life gain spells to stall the opponent and survive early pressure",
+      "Turn 1: Play a land, cast Sol Ring/Arcane Signet, or use discard on a key threat.",
+      "Turn 2: Play a second land, cast another accelerator or discard, and begin sequencing Urza lands into your mana base.",
+      "Prioritize untapping lands that enable Tron by turn 3."
     ],
     "mid_game": [
       "Assemble the full mana base to access expensive answers and toolbox cards",
-      "Set up mini loops or combo pieces to lock down the opponent's resources and board state"
+      "Set up mini loops or combo pieces to lock down the opponent's resources and board state",
+      "Hoard mana until you can untap three Urza lands simultaneously.",
+      "Use Relic of Progenitus to protect your graveyard from recursion or combo engines.",
+      "Use Lembas sparingly for life or to enable Tron if mana is tight.",
+      "Commit threats only when you can protect them or when you have a clear path to victory.",
+      "Hold back Emrakul if the board is too unstable",
+      "use Koth to clear lands or Ugin to reset if needed."
     ],
     "late_game": [
       "Execute win conditions like infinite token generation, direct damage, or Golem armies",
-      "Maintain board control while cycling through the deck to find missing combo components"
+      "Maintain board control while cycling through the deck to find missing combo components",
+      "Emrakul, the Promised End (draws cards, bounces threats, wins via card advantage), Ugin, the Spirit Dragon (board wipe + card draw), or Koth, the Warhammer (destroys lands, pumps, and attacks).",
+      "Go all-in when you have assembled Tron, have answered or outpaced the opponent\u2019s interaction, and can safely untap your threat.",
+      "If you have Emrakul and they have no removal, cast it immediately."
     ]
   },
   "key_cards": [
@@ -77,7 +91,11 @@
     "Cast Urza's lands as early as possible to unlock five-color mana",
     "Hold back combo pieces until the mana base is fully assembled",
     "Sacrifice artifacts in the correct order to trigger recursive loops without stalling",
-    "Use life gain and combat control spells early to buy time for the combo"
+    "Use life gain and combat control spells early to buy time for the combo",
+    "Candy Trail is not a recognized Magic card",
+    "focus on standard Tron staples like Urza\u2019s lands, Sol Ring, Arcane Signet, and Koth/Emrakul/Ugin.",
+    "Common mistake: untapping Urza lands individually instead of saving them for a simultaneous Tron activation.",
+    "Always count your lands and accelerators to guarantee a turn 3 Tron."
   ],
   "matchups": [
     {
@@ -95,14 +113,42 @@
         "Early artifact drops",
         "Lethal token attacks"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Koth to destroy lands and break their mana, or cast Emrakul/Ugin when they\u2019re tapped out. Use discard to remove counterspells before you cast your threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-ramp them with accelerators, use Relic to stop their graveyard ramp, and pressure with Koth or early discard to disrupt their land drops.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use discard to remove key threats, hold up interaction for turn 2-3, and stabilize with Koth or early Emrakul if possible. Use Lembas for life to survive until your big threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure with discard and Koth to destroy their lands. Use Emrakul to bypass counterspells and generate card advantage. Don\u2019t overcommit to one threat; have backup plans.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing with Ugin or Emrakul, using Relic to deny their graveyard value, and leveraging discard to strip their key spells. Prioritize card advantage and graveyard hate.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Storm",
-    "Affinity"
+    "Affinity",
+    "Watch for graveyard recursion (Elves, Jund), artifact chains (Affinity), and counterspells (Blue Terror, Grixis).",
+    "Note when opponents tap out for big spells or hold up mana for interaction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-the-history-of-tron",
     "generated_at": "2026-05-21T09:14:09+00:00",
     "model": "local-model",
@@ -120,6 +166,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,602 @@
+{
+  "schema_version": 1,
+  "name": "Sultai Reanimator",
+  "format": "standard",
+  "colors": [
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Sultai Reanimator is a Tier 2 Standard combo deck that leverages Universes Beyond cards to cheat large threats into play. It primarily uses Superior Spider-Man and Bringer of the Last Gift to assemble a massive board state, often finishing games with Ardyn, the Usurper's combat triggers. While currently sitting behind top-tier decks like Izzet Vivi Cauldron and Red Deck Wins, it offers a high upside for players who enjoy graveyard-based strategies.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 22,
+      "cards": [
+        "Awaken the Honored Dead",
+        "Deceit",
+        "Intimidation Tactics",
+        "Oblivious Bookworm",
+        "Overlord of the Balemurk",
+        "Superior Spider-Man",
+        "Wistfulness"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 12,
+      "cards": [
+        "Glarb, Calamity's Augur",
+        "Overlord of the Balemurk",
+        "Superior Spider-Man",
+        "Undercity Sewers",
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Dina's Guidance",
+        "Formidable Speaker"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 10,
+      "cards": [
+        "Ardyn, the Usurper",
+        "Bringer of the Last Gift",
+        "Overlord of the Balemurk"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 35,
+      "cards": [
+        "Ardyn, the Usurper",
+        "Bringer of the Last Gift",
+        "Deceit",
+        "Emeritus of Ideation",
+        "Formidable Speaker",
+        "Glarb, Calamity's Augur",
+        "Harvester of Misery",
+        "Myojin of Night's Reach",
+        "Oblivious Bookworm",
+        "Overlord of the Balemurk",
+        "Superior Spider-Man",
+        "Town Greeter",
+        "Wistfulness"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 13,
+      "cards": [
+        "Awaken the Honored Dead",
+        "Bitter Triumph",
+        "Ghost Vacuum",
+        "Requiting Hex",
+        "Wistfulness",
+        "Zero Point Ballad"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Bringer of the Last Gift",
+        "Ghost Vacuum",
+        "Zero Point Ballad"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": [
+        "Disdainful Stroke",
+        "Spider-Sense"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Cavern of Souls",
+        "Myojin of Night's Reach"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 21,
+      "cards": [
+        "Awaken the Honored Dead",
+        "Bitter Triumph",
+        "Formidable Speaker",
+        "Oblivious Bookworm",
+        "Overlord of the Balemurk",
+        "Superior Spider-Man",
+        "Wistfulness"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 1
+    },
+    "graveyard_enablers": {
+      "target_count": 27,
+      "cards": [
+        "Ardyn, the Usurper",
+        "Awaken the Honored Dead",
+        "Bringer of the Last Gift",
+        "Deceit",
+        "Dina's Guidance",
+        "Ghost Vacuum",
+        "Glarb, Calamity's Augur",
+        "Overlord of the Balemurk",
+        "Superior Spider-Man",
+        "Town Greeter",
+        "Undercity Sewers",
+        "Underground Mortuary",
+        "Zero Point Ballad"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 2,
+      "cards": [
+        "Ardyn, the Usurper"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 21,
+      "cards": [
+        "Ardyn, the Usurper",
+        "Awaken the Honored Dead",
+        "Bringer of the Last Gift",
+        "Deceit",
+        "Overlord of the Balemurk",
+        "Spider-Sense",
+        "Superior Spider-Man",
+        "Zero Point Ballad"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 16,
+      "cards": [
+        "Bringer of the Last Gift",
+        "Deceit",
+        "Overlord of the Balemurk",
+        "Superior Spider-Man"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 6,
+      "cards": [
+        "Ardyn, the Usurper",
+        "Overlord of the Balemurk"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 16,
+      "cards": [
+        "Bringer of the Last Gift",
+        "Deceit",
+        "Overlord of the Balemurk",
+        "Superior Spider-Man"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 14,
+      "cards": [
+        "Deceit",
+        "Duress",
+        "Overlord of the Balemurk",
+        "Superior Spider-Man"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 31,
+      "cards": [
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Deathcap Glade",
+        "Dreamroot Cascade",
+        "Gloomlake Verge",
+        "Overgrown Tomb",
+        "Overlord of the Balemurk",
+        "Superior Spider-Man",
+        "Undercity Sewers",
+        "Underground Mortuary",
+        "Wastewood Verge",
+        "Watery Grave",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 24,
+      "cards": [
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Deathcap Glade",
+        "Dreamroot Cascade",
+        "Gloomlake Verge",
+        "Overgrown Tomb",
+        "Swamp",
+        "Undercity Sewers",
+        "Underground Mortuary",
+        "Wastewood Verge",
+        "Watery Grave",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.31
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ardyn, the Usurper",
+      "roles": [
+        "graveyard_enablers",
+        "payoff_cards",
+        "reanimation_targets",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Awaken the Honored Dead",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bitter Triumph",
+      "roles": [
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bringer of the Last Gift",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deathcap Glade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deceit",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dina's Guidance",
+      "roles": [
+        "graveyard_enablers",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dreamroot Cascade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Formidable Speaker",
+      "roles": [
+        "discard_outlets",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Vacuum",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glarb, Calamity's Augur",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gloomlake Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Myojin of Night's Reach",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Oblivious Bookworm",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overlord of the Balemurk",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "payoff_cards",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spider-Sense",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Superior Spider-Man",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Town Greeter",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Mortuary",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wastewood Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Willowrush Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wistfulness",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zero Point Ballad",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast Superior Spider-Man targeting a copy of Bringer of the Last Gift to trigger the mass return effect",
+    "Ensure Ardyn, the Usurper is in the graveyard before casting Bringer so it returns to the battlefield",
+    "Wait until the beginning of combat to trigger Ardyn's ability, reanimating a utility creature as a 5/5",
+    "Swing with Bringer of the Last Gift and all other demons simultaneously to maximize Ardyn's combat boost",
+    "Common mistake: overcommitting to reanimating low-impact threats early, leaving you vulnerable to board wipes or graveyard hate."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cheap utility creatures like Kavaero, Mind-Bitten or Steamcore Scholar"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Proft's Eidetic Memory to dig for Superior Spider-Man and Bringer of the Last Gift"
+    },
+    {
+      "trigger": "early game",
+      "line": "Avoid unnecessary combat to preserve creatures for the graveyard"
+    }
+  ],
+  "kill_priority": [
+    "Bringer of the Last Gift",
+    "Deceit",
+    "Overlord of the Balemurk",
+    "Superior Spider-Man",
+    "Ardyn, the Usurper",
+    "Emeritus of Ideation",
+    "Formidable Speaker",
+    "Glarb, Calamity's Augur"
+  ],
+  "interaction_to_disrupt": [
+    "Disdainful Stroke",
+    "Spider-Sense",
+    "Cavern of Souls",
+    "Myojin of Night's Reach",
+    "Awaken the Honored Dead",
+    "Bitter Triumph",
+    "Ghost Vacuum",
+    "Requiting Hex"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/sultai-reanimator.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

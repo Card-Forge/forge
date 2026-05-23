@@ -1,0 +1,320 @@
+{
+  "archetype": "Witherbloom, the Balancer",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/witherbloom-the-balancer.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Agadeem's Awakening"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archon of Cruelty"
+    },
+    {
+      "qty": 1,
+      "name": "Army of the Damned"
+    },
+    {
+      "qty": 1,
+      "name": "Awakening Zone"
+    },
+    {
+      "qty": 1,
+      "name": "Ba Sing Se"
+    },
+    {
+      "qty": 1,
+      "name": "Bad Deal"
+    },
+    {
+      "qty": 1,
+      "name": "Beast Whisperer"
+    },
+    {
+      "qty": 1,
+      "name": "Beast Within"
+    },
+    {
+      "qty": 1,
+      "name": "Beseech the Queen"
+    },
+    {
+      "qty": 1,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Bitterbloom Bearer"
+    },
+    {
+      "qty": 1,
+      "name": "Blooming Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Breach the Multiverse"
+    },
+    {
+      "qty": 1,
+      "name": "Chord of Calling"
+    },
+    {
+      "qty": 1,
+      "name": "Circle of Dreams Druid"
+    },
+    {
+      "qty": 1,
+      "name": "Circle of Power"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Cryptolith Rite"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivate"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Darkbore Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Dryad Arbor"
+    },
+    {
+      "qty": 1,
+      "name": "Elephant Grass"
+    },
+    {
+      "qty": 1,
+      "name": "Elves of Deep Shadow"
+    },
+    {
+      "qty": 1,
+      "name": "Elvish Spirit Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Emerald Medallion"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Fists of Ironwood"
+    },
+    {
+      "qty": 1,
+      "name": "Foolish Fate"
+    },
+    {
+      "qty": 12,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Foulmire Knight"
+    },
+    {
+      "qty": 1,
+      "name": "Frog Butler"
+    },
+    {
+      "qty": 1,
+      "name": "Gala Greeters"
+    },
+    {
+      "qty": 1,
+      "name": "Golgari Rot Farm"
+    },
+    {
+      "qty": 1,
+      "name": "Grave Titan"
+    },
+    {
+      "qty": 1,
+      "name": "In Garruk's Wake"
+    },
+    {
+      "qty": 1,
+      "name": "Jet Medallion"
+    },
+    {
+      "qty": 1,
+      "name": "Lab Rats"
+    },
+    {
+      "qty": 1,
+      "name": "Leyline of Abundance"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Massacre Wurm"
+    },
+    {
+      "qty": 1,
+      "name": "Mordor Muster"
+    },
+    {
+      "qty": 1,
+      "name": "Mosswood Dreadknight"
+    },
+    {
+      "qty": 1,
+      "name": "Naturalize"
+    },
+    {
+      "qty": 1,
+      "name": "Necroblossom Snarl"
+    },
+    {
+      "qty": 1,
+      "name": "Night's Whisper"
+    },
+    {
+      "qty": 1,
+      "name": "Once Upon a Time"
+    },
+    {
+      "qty": 1,
+      "name": "Oracle's Restoration"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Painful Lesson"
+    },
+    {
+      "qty": 1,
+      "name": "Peer into the Abyss"
+    },
+    {
+      "qty": 1,
+      "name": "Pest Infestation"
+    },
+    {
+      "qty": 1,
+      "name": "Plague of Vermin"
+    },
+    {
+      "qty": 1,
+      "name": "Rise of the Dark Realms"
+    },
+    {
+      "qty": 1,
+      "name": "Sakura-Tribe Elder"
+    },
+    {
+      "qty": 1,
+      "name": "Saproling Migration"
+    },
+    {
+      "qty": 1,
+      "name": "Sedgemoor Witch"
+    },
+    {
+      "qty": 1,
+      "name": "Seeker's Folly"
+    },
+    {
+      "qty": 1,
+      "name": "Shamanic Revelation"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 12,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Wood"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Malady"
+    },
+    {
+      "qty": 1,
+      "name": "Titan's Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Tooth and Nail"
+    },
+    {
+      "qty": 1,
+      "name": "Traverse the Ulvenwald"
+    },
+    {
+      "qty": 1,
+      "name": "Twilight Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Tyvar, Jubilant Brawler"
+    },
+    {
+      "qty": 1,
+      "name": "Utopia Sprawl"
+    },
+    {
+      "qty": 1,
+      "name": "Valgavoth, Terror Eater"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Command"
+    },
+    {
+      "qty": 1,
+      "name": "Vernal Fen"
+    },
+    {
+      "qty": 1,
+      "name": "Virulent Emissary"
+    },
+    {
+      "qty": 1,
+      "name": "Witherbloom, the Balancer"
+    },
+    {
+      "qty": 1,
+      "name": "Woodland Cemetery"
+    }
+  ],
+  "sideboard": []
+}

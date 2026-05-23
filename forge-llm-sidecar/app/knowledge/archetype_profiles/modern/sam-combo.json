@@ -1,0 +1,611 @@
+{
+  "schema_version": 1,
+  "name": "Sam Combo",
+  "format": "modern",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Sam Combo is a quadrants Modern deck that leverages mana acceleration and card selection to assemble lethal sequences. By combining Birthing Ritual and Cauldron Familiar, the deck rapidly generates resources to cast Chord of Calling and find its win conditions. The strategy focuses on outpacing opponents through efficient spell sequencing and land search.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 12,
+      "cards": [
+        "Birthing Ritual",
+        "Cauldron Familiar",
+        "Chord of Calling"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 18,
+      "cards": [
+        "Birthing Ritual",
+        "Cauldron Familiar",
+        "Chord of Calling",
+        "Nurturing Peatland",
+        "Orcish Bowmasters",
+        "Witherbloom Charm"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 18,
+      "cards": [
+        "Abhorrent Oculus",
+        "Birthing Ritual",
+        "Cauldron Familiar",
+        "Chord of Calling",
+        "Lush Portico",
+        "Underground Mortuary",
+        "Viscera Seer"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 21,
+      "cards": [
+        "Birthing Ritual",
+        "Cauldron Familiar",
+        "Chord of Calling",
+        "Misty Rainforest",
+        "Verdant Catacombs",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 16,
+      "cards": [
+        "Birthing Ritual",
+        "Cauldron Familiar",
+        "Chord of Calling",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 44,
+      "cards": [
+        "Abhorrent Oculus",
+        "Birthing Ritual",
+        "Carrion Feeder",
+        "Cauldron Familiar",
+        "Chord of Calling",
+        "Crystal Barricade",
+        "Dauthi Voidwalker",
+        "Drannith Magistrate",
+        "Dryad Arbor",
+        "Endurance",
+        "Gaddock Teeg",
+        "Gilded Goose",
+        "Grist, the Hunger Tide",
+        "Haywire Mite",
+        "Lavinia, Azorius Renegade",
+        "Orcish Bowmasters",
+        "Samwise Gamgee",
+        "Suncleanser",
+        "Sylvan Safekeeper",
+        "Viscera Seer",
+        "Young Wolf"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 9
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Erode",
+        "Force of Vigor",
+        "Grist, the Hunger Tide",
+        "Haywire Mite",
+        "Orcish Bowmasters",
+        "Samwise Gamgee",
+        "Witherbloom Charm"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Chord of Calling"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Crystal Barricade"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 20,
+      "cards": [
+        "Abhorrent Oculus",
+        "Cauldron Familiar",
+        "Dauthi Voidwalker",
+        "Endurance",
+        "Grist, the Hunger Tide",
+        "Lush Portico",
+        "Malevolent Rumble",
+        "Samwise Gamgee",
+        "Scout for Survivors",
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 13,
+      "cards": [
+        "Abhorrent Oculus",
+        "Cauldron Familiar",
+        "Samwise Gamgee",
+        "Scout for Survivors",
+        "Young Wolf"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Chord of Calling",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Birthing Ritual",
+        "Cauldron Familiar",
+        "Chord of Calling"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Crystal Barricade",
+        "Drannith Magistrate",
+        "Lavinia, Azorius Renegade",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 36,
+      "cards": [
+        "Birthing Ritual",
+        "Boseiju, Who Endures",
+        "Breeding Pool",
+        "Cauldron Familiar",
+        "Chord of Calling",
+        "Dryad Arbor",
+        "Gilded Goose",
+        "Godless Shrine",
+        "Lush Portico",
+        "Misty Rainforest",
+        "Nurturing Peatland",
+        "Overgrown Tomb",
+        "Temple Garden",
+        "Underground Mortuary",
+        "Verdant Catacombs",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Breeding Pool",
+        "Dryad Arbor",
+        "Forest",
+        "Godless Shrine",
+        "Lush Portico",
+        "Misty Rainforest",
+        "Nurturing Peatland",
+        "Overgrown Tomb",
+        "Temple Garden",
+        "Underground Mortuary",
+        "Verdant Catacombs",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Grist, the Hunger Tide"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "interaction_density": 0.26
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abhorrent Oculus",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Birthing Ritual",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "mana_fixing",
+        "rituals",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cauldron Familiar",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "rituals",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chord of Calling",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "mana_fixing",
+        "payoff_cards",
+        "rituals",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crystal Barricade",
+      "roles": [
+        "hate_pieces",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dauthi Voidwalker",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drannith Magistrate",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dryad Arbor",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gilded Goose",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grist, the Hunger Tide",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haywire Mite",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lavinia, Azorius Renegade",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lush Portico",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nurturing Peatland",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orcish Bowmasters",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Samwise Gamgee",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scout for Survivors",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Mortuary",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Viscera Seer",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Witherbloom Charm",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Young Wolf",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Activate Cauldron Familiar before playing lands to maximize search efficiency",
+    "Cast Birthing Ritual immediately before Chord of Calling to ensure you can pay for multiple targets",
+    "Hold up mana for potential counterspells or removal before committing to the full combo sequence",
+    "Common mistakes include overcommitting Birthing Ritual/Cauldron Familiar without a win condition, miscounting mana for Chord of Calling, and failing to track opponent's removal.",
+    "Unique interactions include using Birthing Ritual to fetch basic lands for shock lands or fetch lands, and using Cauldron Familiar's death trigger to fetch creatures with mana value 1 for additional value."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and immediately activate Cauldron Familiar to search for optimal mana bases"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast cheap spells to establish board presence and protect acceleration"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold back mana to respond to early disruption if possible"
+    }
+  ],
+  "kill_priority": [
+    "Birthing Ritual",
+    "Cauldron Familiar",
+    "Chord of Calling",
+    "Windswept Heath",
+    "Grist, the Hunger Tide",
+    "Abhorrent Oculus",
+    "Carrion Feeder",
+    "Crystal Barricade"
+  ],
+  "interaction_to_disrupt": [
+    "Crystal Barricade",
+    "Boseiju, Who Endures",
+    "Erode",
+    "Force of Vigor",
+    "Grist, the Hunger Tide",
+    "Haywire Mite",
+    "Orcish Bowmasters",
+    "Samwise Gamgee"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/sam-combo.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

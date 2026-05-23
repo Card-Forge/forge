@@ -13,12 +13,16 @@
     "keep_criteria": [
       "Hands containing Thoughtseize or Sinkhole for early interaction",
       "Pox paired with at least two mana sources",
-      "Orcish Bowmasters with a removal spell or Pox"
+      "Orcish Bowmasters with a removal spell or Pox",
+      "Keep hands with 2-3 lands, or 3+ lands paired with a Thoughtseize or Inquisition.",
+      "Always keep a hand containing Pox + a land.",
+      "Prioritize hands that can cast Pox by turn 2 or 3."
     ],
     "mulligan_criteria": [
       "No interaction or board presence in the opening hand",
       "Mana-heavy hands lacking Pox or cheap threats",
-      "Hands with only high-cost cards and no disruption"
+      "Hands with only high-cost cards and no disruption",
+      "Mulligan hands with 0-1 lands, or 3+ lands with no disruption or Pox."
     ],
     "examples": []
   },
@@ -26,17 +30,31 @@
     "early_game": [
       "Use Thoughtseize to disrupt opponent's game plan and find Pox",
       "Play lands consistently to ensure Pox and removal are accessible",
-      "Deploy Orcish Bowmasters early to apply pressure and remove key threats"
+      "Deploy Orcish Bowmasters early to apply pressure and remove key threats",
+      "Turn 1: Play Swamp, cast Thoughtseize or Inquisition if possible.",
+      "Turn 2: Play Swamp, cast Pox if you have 2 mana, or cast another disruption spell.",
+      "Sequence lands to ensure you can cast Pox by turn 2 or 3.",
+      "If opponent plays a creature, Thoughtseize it or kill it with Pox/Sinkhole."
     ],
     "mid_game": [
       "Cast Pox when the opponent has multiple creatures on the board",
       "Use Sinkhole to eliminate large threats that Pox cannot handle alone",
-      "Develop board presence with cheap creatures to capitalize on Pox's effect"
+      "Develop board presence with cheap creatures to capitalize on Pox's effect",
+      "Mana is tight",
+      "always prioritize casting Pox to enable your own creatures and disable opponent's.",
+      "Use Thoughtseize/Inquisition to strip key combo pieces or removal.",
+      "Manage graveyard carefully",
+      "Pox and Bloodghast synergize, but opponent graveyard hate matters.",
+      "Commit threats only when you have removal or Pox ready to answer their answer."
     ],
     "late_game": [
       "Maintain card advantage by trading efficiently with Sinkhole and Bowmasters",
       "Attack with resilient low-cost creatures while opponent's threats are weakened",
-      "Stabilize against combo attempts by holding up interaction and Pox"
+      "Stabilize against combo attempts by holding up interaction and Pox",
+      "Bloodghast (fueled by Pox and graveyard), Liliana of the Veil (draw + removal), or simply attacking with poisoned creatures.",
+      "Once opponent is at 5-7 poison counters, commit all creatures.",
+      "When you have board control, opponent has no sweepers/hate in hand, and you can safely attack with 2+ creatures.",
+      "Also commit when you can cast Pox on their only blocker."
     ]
   },
   "key_cards": [
@@ -60,7 +78,13 @@
     "Hold Thoughtseize until you see a key threat or combo piece before committing it",
     "Play Pox only when the opponent has multiple creatures to maximize board impact",
     "Use Sinkhole on threats that Pox cannot reduce to 0/1, such as artifacts or indestructible creatures",
-    "Trigger Orcish Bowmasters' ability on high-value targets to generate card advantage"
+    "Trigger Orcish Bowmasters' ability on high-value targets to generate card advantage",
+    "Note: Orcish Bowmasters is a Red/Black card and not part of Mono-Black Pox",
+    "this guidance assumes the standard Mono-Black Pox list (Thoughtseize, Inquisition, Pox, Bloodghast, Liliana, Sinkhole).",
+    "Pox is your most important card\u2014always prioritize casting it over attacking.",
+    "Be mindful of your own graveyard",
+    "Pox and Bloodghast rely on it, but opponent hate can shut you down.",
+    "Track opponent's hand size and resources to know when to go all-in."
   ],
   "matchups": [
     {
@@ -89,16 +113,34 @@
         "Key combo enablers",
         "Graveyard recursion"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Don't overcommit to expensive spells. Use cheap disruption (Thoughtseize, Inquisition) and Pox (instant speed). Attack with small creatures to force counters, then cast Pox or follow up.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Hand disruption is key. Thoughtseize their mana rocks. Pox their big threats. Don't trade creatures; use spot removal and poison to close out before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a game of resource attrition and graveyard management. Prioritize keeping your graveyard safe. Use Thoughtseize to strip their Pox or Bloodghast. Trade removal efficiently. Win by out-grinding their graveyard and applying poison faster.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "High-toughness finishers",
     "Artifact-based threats",
-    "Graveyard recursion engines"
+    "Graveyard recursion engines",
+    "Watch for sweepers (Wrath of God, Toxic Deluge), graveyard hate (Rest in Peace), and combo win conditions.",
+    "Note when they tap out for a counter or removal, as that's your window to cast Pox or attack."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:54:19+00:00",
     "model": "local-model",
@@ -114,6 +156,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

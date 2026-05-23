@@ -1,0 +1,149 @@
+{
+  "archetype": "Azorius Control",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/azorius-control.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Beza, the Bounding Spring"
+    },
+    {
+      "qty": 2,
+      "name": "Change the Equation"
+    },
+    {
+      "qty": 4,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 3,
+      "name": "Deserted Beach"
+    },
+    {
+      "qty": 1,
+      "name": "Dovin's Veto"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 2,
+      "name": "Elspeth, Storm Slayer"
+    },
+    {
+      "qty": 2,
+      "name": "Field of Ruin"
+    },
+    {
+      "qty": 4,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Fountainport"
+    },
+    {
+      "qty": 3,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 1,
+      "name": "Hall of Storm Giants"
+    },
+    {
+      "qty": 4,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "March of Otherworldly Light"
+    },
+    {
+      "qty": 1,
+      "name": "Memory Deluge"
+    },
+    {
+      "qty": 2,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 4,
+      "name": "No More Lies"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Restless Anchorage"
+    },
+    {
+      "qty": 1,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 2,
+      "name": "Supreme Verdict"
+    },
+    {
+      "qty": 2,
+      "name": "Teferi, Hero of Dominaria"
+    },
+    {
+      "qty": 3,
+      "name": "Temporary Lockdown"
+    },
+    {
+      "qty": 3,
+      "name": "The Wandering Emperor"
+    },
+    {
+      "qty": 1,
+      "name": "Three Steps Ahead"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Beza, the Bounding Spring"
+    },
+    {
+      "qty": 3,
+      "name": "Dovin's Veto"
+    },
+    {
+      "qty": 1,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 3,
+      "name": "High Noon"
+    },
+    {
+      "qty": 1,
+      "name": "Kaheera, the Orphanguard"
+    },
+    {
+      "qty": 3,
+      "name": "Kutzil's Flanker"
+    },
+    {
+      "qty": 1,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 1,
+      "name": "Temporary Lockdown"
+    }
+  ]
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early ramp like Arbor Elf",
       "Hands containing land destruction spells",
-      "Hands with playable creatures for an aggressive start"
+      "Hands with playable creatures for an aggressive start",
+      "Keep hands with 2-3 lands (prioritizing basics or duals that can untap), at least one 1-2 mana threat, and a land destruction spell.",
+      "Keep Utopia Sprawl only if paired with a 2-drop threat or ramp."
     ],
     "mulligan_criteria": [
       "Hands lacking early ramp or land destruction",
       "Hands with only high-cost creatures without mana acceleration",
-      "Hands that will take too long to develop the game"
+      "Hands that will take too long to develop the game",
+      "Mulligan pure land, pure removal, or hands missing basic land sources needed for turn 1-2 plays."
     ],
     "examples": [
       {
@@ -36,16 +39,30 @@
     "early_game": [
       "Cast Arbor Elf on turn 1",
       "Play Wild Growth or Utopia Sprawl to ramp",
-      "Destroy opponent's lands early"
+      "Destroy opponent's lands early",
+      "Turn 1: Play a basic Forest or dual land, cast a 1-mana threat or discard spell.",
+      "Turn 2: Play a second land, cast a 2-mana threat or Utopia Sprawl if you have a target.",
+      "Prioritize establishing board presence while simultaneously disrupting opponent\u2019s mana with Acid-Moss/Thermokarst on their non-basics or key utility lands.",
+      "Against ramp, prioritize land destruction early to slow acceleration."
     ],
     "mid_game": [
       "Continue ramping to cast large creatures",
       "Generate value with creatures",
-      "Race opponents if they have indestructible lands"
+      "Race opponents if they have indestructible lands",
+      "Optimize mana for casting threats and land destruction in the same turn.",
+      "Preserve hand disruption for key turns.",
+      "Don't overcommit to Utopia Sprawl without a reliable target",
+      "use it to close games or stabilize.",
+      "Sequence land destruction to break the most impactful lands first.",
+      "Commit threats when you've established mana denial or when the opponent is vulnerable to Utopia Sprawl."
     ],
     "late_game": [
       "Deploy big creatures to attack and end the game",
-      "Use sideboard options like Weather the Storm or Deglamer/Natural Obsolescence to handle specific matchups"
+      "Use sideboard options like Weather the Storm or Deglamer/Natural Obsolescence to handle specific matchups",
+      "Utopia Sprawl on a resilient threat combined with efficient creatures is the primary win condition.",
+      "Once mana is disrupted and board control is established, swing with boosted threats to pressure for lethal.",
+      "Go all-in when you've broken key mana, they're low on removal, or you have a clear path to lethal with Utopia Sprawl + threats.",
+      "Also commit when they're on the draw and you can pressure them before they stabilize."
     ]
   },
   "key_cards": [
@@ -89,7 +106,11 @@
     "Prioritize casting Arbor Elf on turn 1 to enable early ramp",
     "Follow ramp with land destruction to disrupt opponents immediately",
     "Adjust aggression based on opponent's land types, racing if they run indestructible lands",
-    "Mulligan aggressively if the hand lacks early ramp or playable creatures"
+    "Mulligan aggressively if the hand lacks early ramp or playable creatures",
+    "Common mistakes include overusing land destruction on non-impactful lands, holding Utopia Sprawl too long without a target, and mismanaging mana to cast threats and disruption in the same turn.",
+    "Play the long game, disrupt their plan, and close out with Utopia Sprawl + threats.",
+    "Avoid overcommitting early",
+    "Ponza thrives in mid-to-late game resource wars and wins by out-resourcing opponents rather than racing."
   ],
   "matchups": [
     {
@@ -133,6 +154,31 @@
         "Opponent's Thermokarst",
         "Speed of land destruction"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that are hard to counter or counter them with discard. Sequence land destruction to break their mana so they can't cast counters later. Utopia Sprawl is cheap enough to cast in response to their mana development.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early land destruction to slow acceleration. Use Utopia Sprawl to stabilize against early threats. Trade efficiently and don't let them get ahead on board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play early threats to race, use Utopia Sprawl to block and counter-attack, and hold land destruction for key utility lands. Don't overextend; trade efficiently and stabilize before going for the win.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with efficient threats, use land destruction to break mana and force basics, and use Utopia Sprawl to swing for lethal. Don't let them stabilize; keep pressure on and disrupt as needed.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by playing more efficiently, using land destruction to break their mana, and leveraging Utopia Sprawl to close out games. Prioritize hand disruption and efficient threats to out-value them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -141,10 +187,14 @@
     "Boros Garrison",
     "Quirion Ranger",
     "Mana-generating creatures",
-    "Direct damage spells"
+    "Direct damage spells",
+    "Watch opponent's land drops (basics vs non-basics), graveyard activity, and mana development.",
+    "Key tells: Holding mana on turn 3-4 often signals combo/control.",
+    "Playing multiple non-basics early suggests vulnerability to land destruction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-gruul-ponza-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T09:27:44+00:00",
     "model": "local-model",
@@ -162,6 +212,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,497 @@
+{
+  "schema_version": 1,
+  "name": "Dimir Midrange",
+  "format": "pioneer",
+  "colors": [
+    "U",
+    "B"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 80,
+  "macro_plan": "Dimir Midrange controls the early game through targeted disruption and card advantage, then transitions into a late-game aerial assault centered on Yorion, Sky Nomad. It wins by out-resourcing opponents with efficient threats, superior hand management, and flying bodies that are difficult to block or remove.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 2,
+      "cards": [
+        "Ritual of Soot"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "card_advantage": {
+      "target_count": 19,
+      "cards": [
+        "Boomerang Basics",
+        "Cling to Dust",
+        "Cryogen Relic",
+        "Fountainport",
+        "Invoke Despair",
+        "Narset, Parter of Veils",
+        "Sheoldred, the Apocalypse",
+        "Stormchaser's Talent",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 17,
+      "cards": [
+        "Grim Bauble",
+        "Hopeless Nightmare",
+        "Narset, Parter of Veils",
+        "Stock Up",
+        "Stormchaser's Talent",
+        "Thundertrap Trainer",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 5
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 9,
+      "cards": [
+        "Stormchaser's Talent",
+        "Thoughtseize",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "threats": {
+      "target_count": 17,
+      "cards": [
+        "Clearwater Pathway",
+        "Duress",
+        "Narset, Parter of Veils",
+        "Sheoldred, the Apocalypse",
+        "Stormchaser's Talent",
+        "Thundertrap Trainer",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 22,
+      "cards": [
+        "Boomerang Basics",
+        "Cling to Dust",
+        "Fatal Push",
+        "Field of Ruin",
+        "Hive of the Eye Tyrant",
+        "Otawara, Soaring City",
+        "Ritual of Soot",
+        "Stormchaser's Talent",
+        "Underground River"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 1
+    },
+    "wrath": {
+      "target_count": 11,
+      "cards": [
+        "Extinction Event",
+        "Ritual of Soot",
+        "Stormchaser's Talent",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 8,
+      "cards": [
+        "Change the Equation",
+        "Flashfreeze",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Nowhere to Run"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 16,
+      "cards": [
+        "Cling to Dust",
+        "Go Blank",
+        "Grim Bauble",
+        "Hive of the Eye Tyrant",
+        "Hopeless Nightmare",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 14,
+      "cards": [
+        "Boomerang Basics",
+        "Cling to Dust",
+        "Otawara, Soaring City",
+        "Stormchaser's Talent",
+        "This Town Ain't Big Enough",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Aether Gust",
+        "Stormchaser's Talent",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 34,
+      "cards": [
+        "Darkslick Shores",
+        "Field of Ruin",
+        "Fountainport",
+        "Gloomlake Verge",
+        "Hive of the Eye Tyrant",
+        "Otawara, Soaring City",
+        "Petrified Hamlet",
+        "Shipwreck Marsh",
+        "Stormchaser's Talent",
+        "Thoughtseize",
+        "Underground River",
+        "Watery Grave",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 29,
+      "cards": [
+        "Darkslick Shores",
+        "Field of Ruin",
+        "Fountainport",
+        "Gloomlake Verge",
+        "Hive of the Eye Tyrant",
+        "Island",
+        "Otawara, Soaring City",
+        "Petrified Hamlet",
+        "Shipwreck Marsh",
+        "Swamp",
+        "Underground River",
+        "Watery Grave"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Narset, Parter of Veils"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "interaction_density": 0.41
+  },
+  "dual_role_cards": [
+    {
+      "card": "Boomerang Basics",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cling to Dust",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darkslick Shores",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Field of Ruin",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fountainport",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gloomlake Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grim Bauble",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hive of the Eye Tyrant",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hopeless Nightmare",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narset, Parter of Veils",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Petrified Hamlet",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ritual of Soot",
+      "roles": [
+        "removal",
+        "rituals",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheoldred, the Apocalypse",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shipwreck Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormchaser's Talent",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "hate_pieces",
+        "mana_fixing",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thundertrap Trainer",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground River",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yorion, Sky Nomad",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistakes include overcommitting to Stormchaser's Talent without a follow-up, or holding too much interaction and missing early disruption windows.",
+    "Always track the opponent's mana and hand size.",
+    "Yorion is vulnerable to sweepers, so don't cast it into known board wipes.",
+    "In the mirror, winning the Thoughtseize war is paramount.",
+    "Be mindful of format-specific hate cards and adjust your sideboard accordingly."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Thoughtseize if possible to strip key early threats or combo pieces."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a land, cast Stormchaser's Talent to draw into a threat or Yorion, or deploy a cheap removal spell."
+    },
+    {
+      "trigger": "early game",
+      "line": "If opening with Yorion, ensure you have two lands and a way to protect it or follow up."
+    }
+  ],
+  "kill_priority": [
+    "Stormchaser's Talent",
+    "Thoughtseize",
+    "Yorion, Sky Nomad",
+    "Narset, Parter of Veils",
+    "Clearwater Pathway",
+    "Duress",
+    "Sheoldred, the Apocalypse",
+    "Thundertrap Trainer"
+  ],
+  "interaction_to_disrupt": [
+    "Change the Equation",
+    "Flashfreeze",
+    "Spell Pierce",
+    "Nowhere to Run",
+    "Boomerang Basics",
+    "Cling to Dust",
+    "Fatal Push",
+    "Field of Ruin"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/dimir-midrange.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

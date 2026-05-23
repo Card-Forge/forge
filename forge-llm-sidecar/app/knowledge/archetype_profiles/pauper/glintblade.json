@@ -1,0 +1,507 @@
+{
+  "schema_version": 1,
+  "name": "Glintblade",
+  "format": "pauper",
+  "colors": [
+    "W",
+    "B"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Glintblade is an interactive Pauper strategy that leverages a bounce package centered on Glint Hawk, Refurbished Familiar, and Tithing Blade to extract resources and disrupt opponents. By cycling cheap artifacts and creatures, the deck generates card advantage through Deadly Dispute and Refurbished Familiar while maintaining board control. Its flexible maindeck and targeted sideboard allow it to adapt to various Tier 1.5 matchups.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 21,
+      "cards": [
+        "Eviscerator's Insight",
+        "Kor Skyfisher",
+        "Lembas",
+        "Oroku Saki, Shredder Rising",
+        "Refurbished Familiar",
+        "Thraben Inspector"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 7,
+      "cards": [
+        "Grim Bauble",
+        "Lembas",
+        "Omen of the Dead"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Glint Hawk",
+        "Lembas"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 38,
+      "cards": [
+        "Arms of Hadar",
+        "Cast Down",
+        "Faerie Macabre",
+        "Foot Ninjas",
+        "Glint Hawk",
+        "Kor Skyfisher",
+        "Lembas",
+        "Oroku Saki, Shredder Rising",
+        "Refurbished Familiar",
+        "Thraben Inspector",
+        "Tithing Blade"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 7
+    },
+    "removal": {
+      "target_count": 24,
+      "cards": [
+        "Anchovy & Banana Pizza",
+        "Arms of Hadar",
+        "Bojuka Bog",
+        "Cast Down",
+        "Glint Hawk",
+        "Omen of the Dead",
+        "Oroku Saki, Shredder Rising",
+        "Refurbished Familiar",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 3
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Arms of Hadar"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 9,
+      "cards": [
+        "Glint Hawk",
+        "Lembas",
+        "Omen of the Dead"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 20,
+      "cards": [
+        "Bojuka Bog",
+        "Eviscerator's Insight",
+        "Faerie Macabre",
+        "Glint Hawk",
+        "Grim Bauble",
+        "Lembas",
+        "Mortuary Mire",
+        "Omen of the Dead",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 24,
+      "cards": [
+        "Eviscerator's Insight",
+        "Foot Ninjas",
+        "Glint Hawk",
+        "Kor Skyfisher",
+        "Mortuary Mire",
+        "Omen of the Dead",
+        "Oroku Saki, Shredder Rising",
+        "Orzhov Basilica",
+        "Thraben Inspector"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 9,
+      "cards": [
+        "Glint Hawk",
+        "Omen of the Dead",
+        "Tithing Blade"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 2
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Glint Hawk",
+        "Omen of the Dead"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 19,
+      "cards": [
+        "Arms of Hadar",
+        "Duress",
+        "Dust to Dust",
+        "Glint Hawk",
+        "Lembas"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 11
+    },
+    "mana_fixing": {
+      "target_count": 22,
+      "cards": [
+        "Ancient Den",
+        "Bojuka Bog",
+        "Dust to Dust",
+        "Foot Headquarters",
+        "Kabira Crossroads",
+        "Mortuary Mire",
+        "Orzhov Basilica",
+        "Vault of Whispers"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 4
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Ancient Den",
+        "Bojuka Bog",
+        "Foot Headquarters",
+        "Kabira Crossroads",
+        "Mortuary Mire",
+        "Orzhov Basilica",
+        "Plains",
+        "Swamp",
+        "Vault of Whispers"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.37
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Den",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arms of Hadar",
+      "roles": [
+        "hate_pieces",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cast Down",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dust to Dust",
+      "roles": [
+        "hate_pieces",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eviscerator's Insight",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Macabre",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Foot Headquarters",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Foot Ninjas",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glint Hawk",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "protection",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grim Bauble",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kabira Crossroads",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kor Skyfisher",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lembas",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mortuary Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Omen of the Dead",
+      "roles": [
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "protection",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Oroku Saki, Shredder Rising",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orzhov Basilica",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Refurbished Familiar",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thraben Charm",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thraben Inspector",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tithing Blade",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vault of Whispers",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize using Tithing Blade on larger creatures while saving Suffocating Fumes for smaller ones, recycling Fumes when the board lacks X/1s.",
+    "Use Duress early to extract information and remove card advantage sources, allowing better spell sequencing in subsequent turns.",
+    "Chain Omen of the Dead and Kor Skyfisher to return multiple Kors to hand, ensuring you have enough resources to handle removal.",
+    "Hold Thraben Charm to respond to Sadistic Glee or exile graveyards against Tolarian Terror and Dredge.",
+    "Common mistake: Sacrificing Glint Hawk too early without a target for Lembas or without triggering Nephilim."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play artifact lands and cheap artifact sources like Thraben Inspector to enable bounce effects"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Tithing Blade to remove larger threats while saving Glint Hawk for recursion"
+    },
+    {
+      "trigger": "early game",
+      "line": "Deploy Refurbished Familiar for early disruption and eventual card advantage"
+    }
+  ],
+  "kill_priority": [
+    "Glint Hawk",
+    "Omen of the Dead",
+    "Tithing Blade",
+    "Lembas",
+    "Arms of Hadar",
+    "Cast Down",
+    "Faerie Macabre",
+    "Foot Ninjas"
+  ],
+  "interaction_to_disrupt": [
+    "Glint Hawk",
+    "Lembas",
+    "Omen of the Dead",
+    "Anchovy & Banana Pizza",
+    "Arms of Hadar",
+    "Bojuka Bog",
+    "Cast Down",
+    "Oroku Saki, Shredder Rising"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/glintblade.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

@@ -1,0 +1,390 @@
+{
+  "schema_version": 1,
+  "name": "Mono-Blue Faeries",
+  "format": "pauper",
+  "colors": [
+    "U"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Mono-Blue Faeries is a versatile Pauper archetype that leverages Ninjutsu interactions to generate massive value and control the board. It adapts between aggressive and controlling playstyles depending on the matchup, utilizing bounce effects and card draw to outmaneuver opponents. The deck is highly effective against combo strategies like High Tide while remaining competitive against midrange and aggro decks.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 12,
+      "cards": [
+        "Counterspell",
+        "Snap",
+        "Spellstutter Sprite"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 24,
+      "cards": [
+        "Counterspell",
+        "Faerie Miscreant",
+        "Harrier Strix",
+        "Moon-Circuit Hacker",
+        "Ninja of the Deep Hours",
+        "Of One Mind"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Faerie Seer",
+        "Harrier Strix"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Counterspell"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 32,
+      "cards": [
+        "Brinebarrow Intruder",
+        "Counterspell",
+        "Faerie Miscreant",
+        "Faerie Seer",
+        "Harrier Strix",
+        "Moon-Circuit Hacker",
+        "Ninja of the Deep Hours",
+        "Spellstutter Sprite"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 30,
+      "cards": [
+        "Blue Elemental Blast",
+        "Cryoshatter",
+        "Harrier Strix",
+        "Hydroblast",
+        "Moon-Circuit Hacker",
+        "Ninja of the Deep Hours",
+        "Snap",
+        "Steel Sabotage"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 14
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 25,
+      "cards": [
+        "Annul",
+        "Blue Elemental Blast",
+        "Counterspell",
+        "Dispel",
+        "Hydroblast",
+        "Snap",
+        "Spellstutter Sprite",
+        "Steel Sabotage"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 11
+    },
+    "protection": {
+      "target_count": 12,
+      "cards": [
+        "Counterspell",
+        "Snap",
+        "Spellstutter Sprite"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 8,
+      "cards": [
+        "Harrier Strix",
+        "Moon-Circuit Hacker"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 12,
+      "cards": [
+        "Counterspell",
+        "Snap",
+        "Spellstutter Sprite"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 16,
+      "cards": [
+        "Moon-Circuit Hacker",
+        "Ninja of the Deep Hours",
+        "Snap",
+        "Steel Sabotage"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 4
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Ninja of the Deep Hours"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 16,
+      "cards": [
+        "Counterspell",
+        "Ninja of the Deep Hours",
+        "Snap",
+        "Spellstutter Sprite"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Harrier Strix"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 12,
+      "cards": [
+        "Counterspell",
+        "Snap",
+        "Spellstutter Sprite"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Island"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.71
+  },
+  "dual_role_cards": [
+    {
+      "card": "Blue Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Counterspell",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "graveyard_enablers",
+        "mana_fixing",
+        "mana_reducers",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Miscreant",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Seer",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Harrier Strix",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "discard_outlets",
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Moon-Circuit Hacker",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ninja of the Deep Hours",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snap",
+      "roles": [
+        "combo_pieces",
+        "counterspells",
+        "graveyard_enablers",
+        "mana_fixing",
+        "mana_reducers",
+        "protection",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spellstutter Sprite",
+      "roles": [
+        "combo_pieces",
+        "counterspells",
+        "graveyard_enablers",
+        "mana_fixing",
+        "mana_reducers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steel Sabotage",
+      "roles": [
+        "counterspells",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Wait for Gigadrowse to resolve to untap lands and save mana for a counter",
+    "Use Shrieking Drake's bounce after Ninjutsu to return the Ninja to hand for reuse",
+    "Play counters at the right time to control opponent rather than wasting them early",
+    "Adjust aggression based on opponent's removal density and deck speed",
+    "Common mistakes include overcommitting without protection, mismanaging Snapcaster Mage\u2019s graveyard, and forgetting that Spellstutter Sprite\u2019s counter reduces as you cast more spells."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play a Ninja on turn 2 if possible"
+    },
+    {
+      "trigger": "early game",
+      "line": "Assess matchup to play proactively or responsively"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use counters like Spellstutter or Counterspell to disrupt early threats"
+    }
+  ],
+  "kill_priority": [
+    "Ninja of the Deep Hours",
+    "Counterspell",
+    "Snap",
+    "Spellstutter Sprite",
+    "Brinebarrow Intruder",
+    "Faerie Miscreant",
+    "Faerie Seer",
+    "Harrier Strix"
+  ],
+  "interaction_to_disrupt": [
+    "Annul",
+    "Blue Elemental Blast",
+    "Counterspell",
+    "Dispel",
+    "Hydroblast",
+    "Snap",
+    "Spellstutter Sprite",
+    "Steel Sabotage"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/mono-blue-faeries.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

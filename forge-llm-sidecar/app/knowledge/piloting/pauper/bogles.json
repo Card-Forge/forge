@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands containing creatures to develop the game plan",
       "Adequate land drops to ensure mana consistency",
-      "Cards that guarantee mana fixing for the splash colors"
+      "Cards that guarantee mana fixing for the splash colors",
+      "Keep any hand containing a land plus Bogles.",
+      "Keep land + Bogles + Utopia Sprawl/Wild Growth or Gilt-Leaf/Elvish Archdruid.",
+      "Keep land + land + Bogles + Sprawl/Growth."
     ],
     "mulligan_criteria": [
       "Hands completely lacking creatures",
       "Hands that cannot dig through the deck for key pieces",
-      "Risky hands without auras that leave the board vulnerable to wipes"
+      "Risky hands without auras that leave the board vulnerable to wipes",
+      "Mulligan anything without a Bogles or without a land."
     ],
     "examples": [
       {
@@ -48,17 +52,32 @@
     "early_game": [
       "Prioritize playing lands and fixing mana to access splash colors",
       "Deploy creatures early to establish a board presence",
-      "Play around early removal and edicts by holding up mana or sequencing carefully"
+      "Play around early removal and edicts by holding up mana or sequencing carefully",
+      "Turn 1: Play land, cast Bogles.",
+      "Turn 2: Play land, cast Bogles, cast Utopia Sprawl (or Gilt-Leaf/Elvish Archdruid).",
+      "If you have a druid, cast it, then cast Utopia Sprawl/Wild Growth on Bogles.",
+      "Attack with Bogles.",
+      "Turn 3: Cast Wild Growth/Utopia Sprawl on Bogles, attack for lethal."
     ],
     "mid_game": [
       "Attach multiple auras like Ethereal Armor and All That Glitters to hexproof creatures",
       "Use ramp and draw spells like Utopia Sprawl and Commune with Spirits to find missing combo pieces",
-      "Navigate board wipes and enchantment hate by mulliganing appropriately or playing around known threats"
+      "Navigate board wipes and enchantment hate by mulliganing appropriately or playing around known threats",
+      "Mana is your primary resource",
+      "always prioritize untapping lands to fuel the next turn's attack.",
+      "Keep cards in hand for protection or finishing moves.",
+      "Use Malevolent Rumble strategically to dig for Utopia Sprawl/Wild Growth or answers.",
+      "Commit your Bogles early and often.",
+      "Never hold back a massive attack unless you have a clear answer to a specific threat (like a board wipe or targeted removal)."
     ],
     "late_game": [
       "Push for lethal damage with the buffed hexproof creature",
       "Utilize lifelink to stabilize against aggressive decks",
-      "Race combo decks by maximizing damage output in available windows"
+      "Race combo decks by maximizing damage output in available windows",
+      "A single Bogles with Utopia Sprawl(s) and Wild Growth(s) for 10+ damage.",
+      "Malevolent Rumble can close the game if you have enough mana and a creature to attack with.",
+      "Go all-in when you have enough mana to cast your next Sprawl/Growth and attack for lethal, or when the opponent has no interaction left.",
+      "Never hold back a lethal attack."
     ]
   },
   "key_cards": [
@@ -107,7 +126,9 @@
     "Curve well to maximize mana efficiency and take advantage of windows of opportunity",
     "Play around counterspells and global removal by holding up mana or sequencing auras after threats are resolved",
     "Prioritize surviving the early game against aggro before committing to the full combo",
-    "Mulligan aggressively if the hand cannot develop the game plan or dig for key pieces"
+    "Mulligan aggressively if the hand cannot develop the game plan or dig for key pieces",
+    "Common mistakes include holding back a lethal attack, miscounting damage with Utopia Sprawl/Wild Growth, casting Malevolent Rumble too early without a target, and forgetting that Slippery Bogle can only be blocked by one creature.",
+    "Unique interactions include Utopia Sprawl's trample working with Wild Growth's power boost, and Malevolent Rumble being castable from the graveyard if you have enough mana."
   ],
   "matchups": [
     {
@@ -154,10 +175,35 @@
         "Fog spells",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Malevolent Rumble from the graveyard to bypass counters. Cast Utopia Sprawl/Wild Growth in response to their counterspells if you have priority. Use cheap threats to force interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Outpace them by going wide/committing early. Use Lightning Strike/Abrade to remove their ramp sources. Don't let them stabilize; pressure relentlessly.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Lightning Strike/Abrade to remove key threats. Use Swords to Plowshares/Path to Exile to bounce or remove. Rely on your early damage to race them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure immediately. Use Malevolent Rumble to dig past their removal. Attack with everything you have. Force them to use multiple spells to stop one threat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by having better card advantage (Malevolent Rumble) and better protection (Utopia Sprawl). Use Swords to Plowshares to remove their Bogles. Hold back a Sprawl/Growth to protect your threat.",
+      "watch_for": []
     }
   ],
   "common_threats": [
-    "Chainer’s Edict",
+    "Chainer\u2019s Edict",
     "Enchantment hate",
     "Counterspells",
     "Board wipes",
@@ -169,10 +215,12 @@
     "Ephemerate",
     "Archaeomancer",
     "Stonehorn Dignitary",
-    "Fog spells"
+    "Fog spells",
+    "Watch for board wipes (Wrath of God, Damnation, etc.), targeted removal (Path, Lightning Strike), and graveyard hate (Rest in Peace, Leyline)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-glitter-bogles-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T09:59:28+00:00",
     "model": "local-model",
@@ -190,6 +238,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
@@ -258,7 +324,7 @@
       "confidence": 0.95,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Chainer’s Edict and similar cards... enchantment hates (for BW and BG), and counterspells (UB)."
+      "evidence_span": "Chainer\u2019s Edict and similar cards... enchantment hates (for BW and BG), and counterspells (UB)."
     },
     {
       "confidence": 0.9,

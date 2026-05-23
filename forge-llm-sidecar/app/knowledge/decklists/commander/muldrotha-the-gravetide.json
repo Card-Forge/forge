@@ -1,0 +1,380 @@
+{
+  "archetype": "Muldrotha, the Gravetide",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/muldrotha-the-gravetide.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 1,
+      "name": "Altar of Dementia"
+    },
+    {
+      "qty": 1,
+      "name": "Animate Dead"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Denial"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Assassin's Trophy"
+    },
+    {
+      "qty": 1,
+      "name": "Baleful Strix"
+    },
+    {
+      "qty": 1,
+      "name": "Beast Within"
+    },
+    {
+      "qty": 1,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Artist"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Buried Alive"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Crop Rotation"
+    },
+    {
+      "qty": 1,
+      "name": "Cyclonic Rift"
+    },
+    {
+      "qty": 1,
+      "name": "Dakmor Salvage"
+    },
+    {
+      "qty": 1,
+      "name": "Deathrite Shaman"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Displacer Kitten"
+    },
+    {
+      "qty": 1,
+      "name": "Dread Return"
+    },
+    {
+      "qty": 1,
+      "name": "Drowned Catacomb"
+    },
+    {
+      "qty": 1,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Eternal Witness"
+    },
+    {
+      "qty": 1,
+      "name": "Evolving Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Fierce Guardianship"
+    },
+    {
+      "qty": 1,
+      "name": "Find // Finality"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 4,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Glen Elendra Archmage"
+    },
+    {
+      "qty": 1,
+      "name": "Golgari Grave-Troll"
+    },
+    {
+      "qty": 1,
+      "name": "Golgari Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Golgari Thug"
+    },
+    {
+      "qty": 1,
+      "name": "Gravebreaker Lamia"
+    },
+    {
+      "qty": 1,
+      "name": "Gravecrawler"
+    },
+    {
+      "qty": 1,
+      "name": "Grisly Salvage"
+    },
+    {
+      "qty": 1,
+      "name": "Hermit Druid"
+    },
+    {
+      "qty": 1,
+      "name": "Hinterland Harbor"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Kaya's Ghostform"
+    },
+    {
+      "qty": 1,
+      "name": "Krosan Grip"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Greaves"
+    },
+    {
+      "qty": 1,
+      "name": "Living Death"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Lotus Cobra"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Drain"
+    },
+    {
+      "qty": 1,
+      "name": "Mesmeric Orb"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Morphic Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Muldrotha, the Gravetide"
+    },
+    {
+      "qty": 1,
+      "name": "Mulldrifter"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Remora"
+    },
+    {
+      "qty": 1,
+      "name": "Nurturing Peatland"
+    },
+    {
+      "qty": 1,
+      "name": "Old Stickfingers"
+    },
+    {
+      "qty": 1,
+      "name": "Opulent Palace"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Pact of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Altar"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Reclamation"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Pongify"
+    },
+    {
+      "qty": 1,
+      "name": "Ramunap Excavator"
+    },
+    {
+      "qty": 1,
+      "name": "Reanimate"
+    },
+    {
+      "qty": 1,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Sakura-Tribe Elder"
+    },
+    {
+      "qty": 1,
+      "name": "Satyr Wayfinder"
+    },
+    {
+      "qty": 1,
+      "name": "Seal of Primordium"
+    },
+    {
+      "qty": 1,
+      "name": "Seal of Removal"
+    },
+    {
+      "qty": 1,
+      "name": "Simic Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Skull Prophet"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Stinkweed Imp"
+    },
+    {
+      "qty": 1,
+      "name": "Stitcher's Supplier"
+    },
+    {
+      "qty": 1,
+      "name": "Sultai Ascendancy"
+    },
+    {
+      "qty": 3,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Syr Konrad, the Grim"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Terramorphic Expanse"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 1,
+      "name": "Toxic Deluge"
+    },
+    {
+      "qty": 1,
+      "name": "Underground River"
+    },
+    {
+      "qty": 1,
+      "name": "Undergrowth Stadium"
+    },
+    {
+      "qty": 1,
+      "name": "Underrealm Lich"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Victimize"
+    },
+    {
+      "qty": 1,
+      "name": "Waterlogged Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Woodland Cemetery"
+    },
+    {
+      "qty": 1,
+      "name": "World Shaper"
+    },
+    {
+      "qty": 1,
+      "name": "Yavimaya Coast"
+    },
+    {
+      "qty": 1,
+      "name": "Zulaport Cutthroat"
+    }
+  ],
+  "sideboard": []
+}

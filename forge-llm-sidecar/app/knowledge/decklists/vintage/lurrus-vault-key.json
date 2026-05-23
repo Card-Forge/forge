@@ -1,0 +1,193 @@
+{
+  "archetype": "Lurrus Vault Key",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/lurrus-vault-key.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancestral Recall"
+    },
+    {
+      "qty": 4,
+      "name": "Arcum's Astrolabe"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Engineer"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Welder"
+    },
+    {
+      "qty": 2,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 1,
+      "name": "Ichor Wellspring"
+    },
+    {
+      "qty": 1,
+      "name": "Legion Extruder"
+    },
+    {
+      "qty": 1,
+      "name": "Manifold Key"
+    },
+    {
+      "qty": 2,
+      "name": "Melded Moxite"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Ruby"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 1,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 2,
+      "name": "Portable Hole"
+    },
+    {
+      "qty": 1,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 4,
+      "name": "Prismatic Vista"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 4,
+      "name": "Sewer-veillance Cam"
+    },
+    {
+      "qty": 2,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 3,
+      "name": "Snow-Covered Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Time Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Time Walk"
+    },
+    {
+      "qty": 1,
+      "name": "Tolarian Academy"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Void Mirror"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Abrade"
+    },
+    {
+      "qty": 2,
+      "name": "Blood Moon"
+    },
+    {
+      "qty": 1,
+      "name": "Chain of Vapor"
+    },
+    {
+      "qty": 1,
+      "name": "Ensnaring Bridge"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 2,
+      "name": "Lithomantic Barrage"
+    },
+    {
+      "qty": 1,
+      "name": "Lurrus of the Dream-Den"
+    },
+    {
+      "qty": 1,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 1,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 2,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Vandalblast"
+    }
+  ]
+}

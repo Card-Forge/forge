@@ -1,0 +1,117 @@
+{
+  "archetype": "Jund Wildfire",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/jund-wildfire.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 4,
+      "name": "Cleansing Wildfire"
+    },
+    {
+      "qty": 4,
+      "name": "Drossforge Bridge"
+    },
+    {
+      "qty": 2,
+      "name": "Eviscerator's Insight"
+    },
+    {
+      "qty": 4,
+      "name": "Fanatical Offering"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 3,
+      "name": "Gixian Infiltrator"
+    },
+    {
+      "qty": 4,
+      "name": "Ichor Wellspring"
+    },
+    {
+      "qty": 3,
+      "name": "Krark-Clan Shaman"
+    },
+    {
+      "qty": 2,
+      "name": "Lembas"
+    },
+    {
+      "qty": 1,
+      "name": "Makeshift Munitions"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 4,
+      "name": "Refurbished Familiar"
+    },
+    {
+      "qty": 1,
+      "name": "Sagu Wildling"
+    },
+    {
+      "qty": 4,
+      "name": "Slagwoods Bridge"
+    },
+    {
+      "qty": 3,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Terminate"
+    },
+    {
+      "qty": 4,
+      "name": "Twisted Landscape"
+    },
+    {
+      "qty": 2,
+      "name": "Vault of Whispers"
+    },
+    {
+      "qty": 4,
+      "name": "Writhing Chrysalis"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 2,
+      "name": "Terminate"
+    },
+    {
+      "qty": 3,
+      "name": "Troublemaker Ouphe"
+    },
+    {
+      "qty": 3,
+      "name": "Weather the Storm"
+    }
+  ]
+}

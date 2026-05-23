@@ -1,0 +1,101 @@
+{
+  "archetype": "Eldrazi",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/eldrazi.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Abundant Countryside"
+    },
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 2,
+      "name": "Broadside Bombardiers"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 4,
+      "name": "Chalice of the Void"
+    },
+    {
+      "qty": 4,
+      "name": "Eldrazi Linebreaker"
+    },
+    {
+      "qty": 2,
+      "name": "Eldrazi Obligator"
+    },
+    {
+      "qty": 4,
+      "name": "Eldrazi Temple"
+    },
+    {
+      "qty": 3,
+      "name": "Eye of Ugin"
+    },
+    {
+      "qty": 4,
+      "name": "Glaring Fleshraker"
+    },
+    {
+      "qty": 4,
+      "name": "Kozilek's Command"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 4,
+      "name": "Petrified Hamlet"
+    },
+    {
+      "qty": 2,
+      "name": "Reality Smasher"
+    },
+    {
+      "qty": 2,
+      "name": "Simian Spirit Guide"
+    },
+    {
+      "qty": 4,
+      "name": "Thought-Knot Seer"
+    },
+    {
+      "qty": 1,
+      "name": "Unclaimed Territory"
+    },
+    {
+      "qty": 4,
+      "name": "Wastescape Battlemage"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 3,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 3,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 3,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 3,
+      "name": "Null Rod"
+    }
+  ]
+}

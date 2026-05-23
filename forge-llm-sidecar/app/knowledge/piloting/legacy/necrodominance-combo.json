@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with at least two mana sources (Chrome Mox, Lotus Petal, or lands)",
       "Hands containing Beseech the Mirror plus acceleration",
-      "Hands with a clear path to turn two or three combo execution"
+      "Hands with a clear path to turn two or three combo execution",
+      "Keep any hand with Beseech the Mirror plus two fast mana sources (Chrome Mox, Lotus Petal, or fetch/shock equivalents).",
+      "Keep hands with 2-3 lands and at least one fast mana source if you have draw spells.",
+      "Prioritize hands that can cast Beseech by turn 2."
     ],
     "mulligan_criteria": [
       "Hands lacking artifact lands or mox/lotus synergy",
       "Hands with only slow ramp or no combo pieces",
-      "Hands missing color fixing for U/B/G spells"
+      "Hands missing color fixing for U/B/G spells",
+      "Mulligan on 4+ lands with no fast mana, 3+ lands with no land fetchers, or hands with only one land and no acceleration."
     ],
     "examples": []
   },
@@ -25,17 +29,31 @@
     "early_game": [
       "Prioritize playing Chrome Mox and Lotus Petal to enable early Beseech the Mirror",
       "Play lands and hold up colors for U/B/G spells",
-      "Avoid unnecessary combat to preserve combo pieces"
+      "Avoid unnecessary combat to preserve combo pieces",
+      "Turn 1: Play a land, cast Lotus Petal or Chrome Mox.",
+      "Turn 2: Use fast mana to cast Beseech the Mirror, then fetch your win condition (e.g., Griselbrand, Phyrexian Negator, or Bogardan Hellkite).",
+      "If you lack Beseech, develop your mana base, cast draw spells, and look for alternative combo pieces or disruption.",
+      "Always prioritize untapping fast mana to maximize your second-turn go-off potential."
     ],
     "mid_game": [
       "Execute Beseech the Mirror on a key permanent to generate value or mana",
       "Use copied permanents to cast game-ending spells or stabilize",
-      "Apply pressure if combo is disrupted to buy time"
+      "Apply pressure if combo is disrupted to buy time",
+      "Treat fast mana as a one-time resource",
+      "conserve lands for casting Beseech and your win condition.",
+      "Avoid overcommitting to the stack if you lack follow-up.",
+      "Use draw spells to cycle into answers or combo pieces, and keep your graveyard clean unless your build specifically synergizes with it.",
+      "Prioritize hand integrity over board presence in the early turns.",
+      "Hold back if the opponent has sweepers, hard counters, or significant interaction on the stack."
     ],
     "late_game": [
       "Reassemble combo pieces using draw spells or recursion",
       "Leverage multiple artifact permanents for repeated Beseech the Mirror copies",
-      "Close out the game with overwhelming resource advantage"
+      "Close out the game with overwhelming resource advantage",
+      "Beseech the Mirror fetching a game-ending threat like Griselbrand, Phyrexian Negator, or Bogardan Hellkite, enabled by Chrome Mox and Lotus Petal.",
+      "Once the win condition is on the battlefield, attack with it or use its abilities to close the game immediately.",
+      "Go all-in when you have two or more fast mana sources in play, Beseech in hand, and the opponent has no interaction on the stack or is tapped out.",
+      "Also commit when you've established a resilient threat and the opponent lacks sweepers or hard removal."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Always play Chrome Mox before Lotus Petal to maximize color fixing early",
     "Hold up mana for Beseech the Mirror before committing to other spells",
-    "Prioritize copying permanents that generate mana or card advantage first"
+    "Prioritize copying permanents that generate mana or card advantage first",
+    "Common mistake: overcommitting to casting Beseech the Mirror when you lack follow-up or face hard counters.",
+    "Always keep a backup plan in hand.",
+    "Fast mana is fragile",
+    "protect it from discard and spot removal.",
+    "Beseech can fetch lands, so ensure your mana base can support your win condition.",
+    "Adapt to local rules and format restrictions, as this archetype is highly sensitive to banned/restricted lists and format-specific mechanics."
   ],
   "matchups": [
     {
@@ -87,6 +111,21 @@
         "Hand disruption",
         "Priority for turn two plays"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, uncounterable threats if available, or layer Beseech with discard and spot removal to clear the way. If countered, pivot to a backup plan using draw spells to find alternative win conditions or disruption. Never overcommit to casting Beseech if you know the opponent has a hard counter and no follow-up.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure and use discard to hit their mana rocks or key lands. Go off before they stabilize, and prioritize hands with interaction. If they stabilize, use card advantage to out-value them and find a win condition that bypasses their ramp.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing discard, protecting your combo pieces, and going off first. Sideboard in additional disruption and protection, and track when your opponent is holding up mana for interaction versus developing their board. Force them to make mistakes by applying early pressure and punishing misplays.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -94,10 +133,14 @@
     "Smashing Hammer",
     "Counterspell",
     "Doomsday",
-    "Beloved Chaplain"
+    "Beloved Chaplain",
+    "Watch for counterspells (especially in Dimir Tempo) and note when opponents tap out for disruption versus board presence.",
+    "Track when Tron players hit their lands and when Sneak and Show players hold up mana for protection.",
+    "Pay attention to discard targets and prioritize protecting your fast mana and Beseech from early hand disruption."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:30:23+00:00",
     "model": "local-model",
@@ -113,6 +156,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

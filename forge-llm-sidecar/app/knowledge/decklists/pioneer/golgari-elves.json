@@ -1,0 +1,121 @@
+{
+  "archetype": "Golgari Elves",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/golgari-elves.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 4,
+      "name": "Blooming Marsh"
+    },
+    {
+      "qty": 3,
+      "name": "Chord of Calling"
+    },
+    {
+      "qty": 4,
+      "name": "Collected Company"
+    },
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 2,
+      "name": "Darkbore Pathway"
+    },
+    {
+      "qty": 4,
+      "name": "Dwynen's Elite"
+    },
+    {
+      "qty": 4,
+      "name": "Elvish Archdruid"
+    },
+    {
+      "qty": 4,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 3,
+      "name": "Elvish Warmaster"
+    },
+    {
+      "qty": 6,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Leaf-Crowned Visionary"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 4,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Shaman of the Pack"
+    },
+    {
+      "qty": 2,
+      "name": "Tyvar, Jubilant Brawler"
+    },
+    {
+      "qty": 2,
+      "name": "Tyvar, the Pummeler"
+    },
+    {
+      "qty": 1,
+      "name": "Westvale Abbey"
+    },
+    {
+      "qty": 2,
+      "name": "Woodland Cemetery"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 2,
+      "name": "Assassin's Trophy"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Heroic Intervention"
+    },
+    {
+      "qty": 3,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Maelstrom Pulse"
+    },
+    {
+      "qty": 1,
+      "name": "Shapers' Sanctuary"
+    },
+    {
+      "qty": 1,
+      "name": "Tear Asunder"
+    }
+  ]
+}

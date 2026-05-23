@@ -11,13 +11,16 @@
   "mulligan": {
     "keep_criteria": [
       "Hands containing combo pieces like lands, artifact keys, Show and Tell, The One Ring, or Transmute Artifact",
-      "Hands that can execute the Coveted Jewel loop on turns 1-2"
+      "Hands that can execute the Coveted Jewel loop on turns 1-2",
+      "Keep hands with 2-3 lands (preferably fetchable or shock lands if format-legal) plus at least one core combo piece (Grim Monolith, The One Ring, or Transmute Artifact).",
+      "Keep hands with early interaction (Thoughtseize, Inquisition, Duress) that support the combo."
     ],
     "mulligan_criteria": [
       "Hands missing essential combo pieces",
       "Hands with Urza's Saga but no sacrifice target",
       "Hands with Force of Will but nothing to protect",
-      "Slow hands relying on relics or Paradox Engine without early acceleration"
+      "Slow hands relying on relics or Paradox Engine without early acceleration",
+      "Mulligan hands with 0-1 lands, multiple non-basic lands without fetch support, or hands containing only combo pieces with no mana or interaction to protect them."
     ],
     "examples": [
       {
@@ -61,16 +64,30 @@
     "early_game": [
       "Play lands and artifact keys on turn 1",
       "Use Show and Tell to cheat Coveted Jewel or The One Ring into play early",
-      "Hold Force of Will and Force of Negation to protect combo pieces from counterspells"
+      "Hold Force of Will and Force of Negation to protect combo pieces from counterspells",
+      "Turn 1: Play a land, cast a cantrip or early interaction to disrupt the opponent or dig for combo pieces.",
+      "Turn 2: Play a second land, cast Transmute Artifact to find a mana rock (Sol Ring, Arcane Signet, or similar), or cast The One Ring.",
+      "If you have Grim Monolith, play it on turn 2 when possible.",
+      "Sequence lands to ensure you can cast pieces on curve without tapping out prematurely."
     ],
     "mid_game": [
       "Tap Coveted Jewel to draw cards and generate mana",
       "Copy the Jewel with Copy Artifact or Phyrexian Metamorph to accelerate the loop",
-      "Use Transmute Artifact to swap the Jewel for Paradox Engine to untap artifacts"
+      "Use Transmute Artifact to swap the Jewel for Paradox Engine to untap artifacts",
+      "Prioritize assembling the mana engine over spending mana on non-essential spells.",
+      "Use Transmute Artifact strategically to find the most efficient mana rock for your current board state.",
+      "Manage your graveyard carefully, as graveyard hate is common",
+      "keep backup plans ready.",
+      "Hold cards in hand to disrupt opponent key plays while preserving combo pieces for your turn.",
+      "Commit threats only when you have a clear path to combo off or when you can stabilize against aggro."
     ],
     "late_game": [
       "Cast Emrakul, the Aeons Torn to win the game",
-      "Activate Urza's Saga chapters to generate Construct tokens and fetch Lavaspur Boots for an alternate win condition"
+      "Activate Urza's Saga chapters to generate Construct tokens and fetch Lavaspur Boots for an alternate win condition",
+      "The primary win condition is assembling Grim Monolith + The One Ring + a mana rock (via Transmute Artifact) to generate 10+ mana, then casting a game-winning spell or combo finisher.",
+      "Secondary finishers include using the mana to cast multiple disruptive spells or combo off with alternative win conditions if the primary plan is disrupted.",
+      "Go all-in when you have assembled the core mana engine, have cleared or bypassed the opponent's disruption, and have a clear path to casting your win condition.",
+      "Commit when you can generate enough mana to cast your win condition and still have protection (e.g., counterspells, discard, or instant-speed protection)."
     ]
   },
   "key_cards": [
@@ -115,7 +132,12 @@
     "After copying, tap both to generate massive mana, then play Transmute Artifact to swap the original Jewel for Paradox Engine.",
     "Untap the copied Jewel to draw more cards and generate mana, repeating the loop until you can cast Emrakul, the Aeons Torn.",
     "Use Show and Tell on turn 2 if you lack early mana acceleration, cheating the Jewel or Ring into play.",
-    "Save Force of Will and Force of Negation for opponent's disruptive spells or key threats rather than wasting them early."
+    "Save Force of Will and Force of Negation for opponent's disruptive spells or key threats rather than wasting them early.",
+    "Common mistakes include overcommitting to the mana engine without a clear win condition, failing to track opponent disruption, and not using Transmute Artifact optimally.",
+    "Unique interactions: The One Ring can be tapped for mana even if you control other artifacts, and it can be used to pay for costs.",
+    "Grim Monolith requires you to control no other artifacts, so sequence carefully.",
+    "Transmute Artifact can find any artifact, so prioritize mana rocks but also consider utility artifacts if needed.",
+    "Always be aware of the 'artifact tax' and plan your turns accordingly."
   ],
   "matchups": [
     {
@@ -162,6 +184,31 @@
         "Magus of the Moon",
         "Broadside Bombardiers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple casting steps (cast pieces on different turns), use cheap interaction (Thoughtseize, Inquisition) to remove counterspells from hand, or use protection spells (Force of Will, Spell Pierce) to protect your combo. If possible, cast your win condition in response to their counterspells or use free spells to bypass counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them by going off as soon as possible. Use early interaction to disrupt their mana development (Thoughtseize, Inquisition). If they outpace you, use spot removal or discard to slow them down, then try to combo off before they can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and spot removal to stabilize. Use discard to remove key threats. If you cannot stabilize, go off as fast as possible. Use countermagic to protect your combo pieces from removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure with early interaction and discard to disrupt their hand. Use the mana engine to cast multiple spells in a turn, overwhelming their resources. If they have a hard lock, use disruption to remove key pieces or go off around it.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the mirror by going off first. Use discard to remove their combo pieces or interaction. Use countermagic to protect your engine. Prioritize assembling the mana engine faster and casting your win condition before they can respond.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -174,10 +221,12 @@
     "Chalice of the Void",
     "Trinisphere",
     "Meltdown",
-    "Broadside Bombardiers"
+    "Broadside Bombardiers",
+    "Watch for counterspells (Force of Will, Spell Pierce, Daze), graveyard hate (Rest in Peace, Leyline of the Void, Surgical Extraction), and board wipes (Supreme Verdict, Anger of the Gods)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-deck-tech-coveted-jewel-combo",
     "generated_at": "2026-05-21T08:33:27+00:00",
     "model": "local-model",
@@ -195,6 +244,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

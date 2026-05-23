@@ -1,0 +1,413 @@
+{
+  "schema_version": 1,
+  "name": "Ocelot Pride Midrange",
+  "format": "legacy",
+  "colors": [
+    "W",
+    "R"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "Ocelot Pride Midrange is a white-red Legacy deck that blends efficient creature plays with combat trick manipulation to control the board and close games. By leveraging signature threats like Ocelot Pride and Ajani, Nacatl Pariah alongside Voice of Victory, the deck applies steady pressure while retaining the flexibility to answer opponent's key pieces. Success relies on reading the matchup, holding up combat tricks for maximum impact, and transitioning smoothly from early aggression to late-game value generation.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 14,
+      "cards": [
+        "Ajani, Nacatl Pariah",
+        "Ocelot Pride",
+        "Sunbaked Canyon",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Elegant Parlor",
+        "Ocelot Pride"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 11,
+      "cards": [
+        "Arid Mesa",
+        "Marsh Flats",
+        "Sand Scout"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Ajani, Nacatl Pariah",
+        "Ocelot Pride",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 27,
+      "cards": [
+        "Amped Raptor",
+        "Clarion Conqueror",
+        "Containment Priest",
+        "Guide of Souls",
+        "Hexing Squelcher",
+        "Ocelot Pride",
+        "Sand Scout",
+        "Thalia, Guardian of Thraben",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 20,
+      "cards": [
+        "Goblin Bombardment",
+        "Karakas",
+        "Lazotep Quarry",
+        "Prismatic Ending",
+        "Pyroblast",
+        "Static Prison",
+        "Swords to Plowshares",
+        "Wasteland"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": [
+        "Pyroblast"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 7,
+      "cards": [
+        "Hexing Squelcher",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Elegant Parlor",
+        "Lazotep Quarry",
+        "Sand Scout",
+        "Surgical Extraction"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Karakas",
+        "Lazotep Quarry"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Ocelot Pride"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Ajani, Nacatl Pariah",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Ajani, Nacatl Pariah",
+        "Ocelot Pride"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 10,
+      "cards": [
+        "Deafening Silence",
+        "Null Rod",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Arid Mesa",
+        "Elegant Parlor",
+        "Karakas",
+        "Lazotep Quarry",
+        "Marsh Flats",
+        "Plateau",
+        "Sunbaked Canyon",
+        "Wasteland"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 24,
+      "cards": [
+        "Arid Mesa",
+        "Elegant Parlor",
+        "Karakas",
+        "Lazotep Quarry",
+        "Marsh Flats",
+        "Mountain",
+        "Plains",
+        "Plateau",
+        "Sunbaked Canyon",
+        "Wasteland"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.36
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ajani, Nacatl Pariah",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Mesa",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elegant Parlor",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hexing Squelcher",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karakas",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lazotep Quarry",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marsh Flats",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ocelot Pride",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Plateau",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sand Scout",
+      "roles": [
+        "graveyard_enablers",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunbaked Canyon",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Voice of Victory",
+      "roles": [
+        "card_advantage",
+        "hate_pieces",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Voice of Victory until combat to maximize surprise value and bypass protection spells",
+    "Prioritize playing Ocelot Pride before committing to all-in attacks to maintain board resilience",
+    "Save combat tricks for opponent's key threats rather than using them on curve",
+    "Sequence Ajani, Nacatl Pariah's activation after opponent's removal window has passed",
+    "Common mistake: Over-pumping Ocelot Pride without board presence or card advantage."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and small creatures strictly on curve to establish presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold Voice of Victory until combat to maximize surprise value and damage"
+    },
+    {
+      "trigger": "early game",
+      "line": "Avoid unnecessary trades while preserving combat tricks for key moments"
+    }
+  ],
+  "kill_priority": [
+    "Ocelot Pride",
+    "Ajani, Nacatl Pariah",
+    "Voice of Victory",
+    "Amped Raptor",
+    "Clarion Conqueror",
+    "Containment Priest",
+    "Guide of Souls",
+    "Hexing Squelcher"
+  ],
+  "interaction_to_disrupt": [
+    "Pyroblast",
+    "Hexing Squelcher",
+    "Voice of Victory",
+    "Goblin Bombardment",
+    "Karakas",
+    "Lazotep Quarry",
+    "Prismatic Ending",
+    "Static Prison"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/ocelot-pride-midrange.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

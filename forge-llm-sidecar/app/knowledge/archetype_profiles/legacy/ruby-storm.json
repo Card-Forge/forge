@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "name": "Ruby Storm",
+  "format": "legacy",
+  "colors": [
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Ruby Storm is a red combo deck that leverages cheap spells and mana acceleration to cast Jeska's Will for lethal damage. It uses pump spells like Seething Song to boost the win condition while maintaining early pressure. The deck aims to close games quickly before opponents can establish board control or draw answers.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 0,
+      "cards": []
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": []
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Jeska's Will",
+        "Ruby Medallion"
+      ]
+    },
+    "threats": {
+      "target_count": 1,
+      "cards": [
+        "Seething Song"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 2,
+      "cards": [
+        "Jeska's Will",
+        "Ruby Medallion"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Jeska's Will",
+        "Ruby Medallion"
+      ]
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": []
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Jeska's Will",
+        "Ruby Medallion"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 2,
+      "cards": [
+        "Jeska's Will",
+        "Ruby Medallion"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Jeska's Will",
+      "roles": [
+        "combo_pieces",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ruby Medallion",
+      "roles": [
+        "combo_pieces",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize mana acceleration in the early turns to enable faster combo execution",
+    "Hold pump spells until the turn you plan to cast Jeska's Will",
+    "Use cheap spells to build storm count and draw into key pieces",
+    "Sequence removal to clear blockers or key threats before going for lethal",
+    "Common mistakes include overcommitting to board wipes, forgetting to count storm, mismanaging mana for Jeska's Will recursion, and not tracking opponent interaction."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and activate Ruby Medallion for mana acceleration"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast cheap spells to build storm count and draw cards"
+    },
+    {
+      "trigger": "early game",
+      "line": "Apply early pressure with low-cost threats"
+    }
+  ],
+  "kill_priority": [
+    "Jeska's Will",
+    "Ruby Medallion",
+    "Seething Song"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

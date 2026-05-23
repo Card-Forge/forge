@@ -1,0 +1,117 @@
+{
+  "archetype": "Mono-Black Midrange",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/mono-black-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Blade of the Oni"
+    },
+    {
+      "qty": 3,
+      "name": "Castle Locthwain"
+    },
+    {
+      "qty": 2,
+      "name": "Deep-Cavern Bat"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Woe"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Field of Ruin"
+    },
+    {
+      "qty": 3,
+      "name": "Gifted Aetherborn"
+    },
+    {
+      "qty": 2,
+      "name": "Go for the Throat"
+    },
+    {
+      "qty": 3,
+      "name": "Graveyard Trespasser"
+    },
+    {
+      "qty": 2,
+      "name": "Invoke Despair"
+    },
+    {
+      "qty": 2,
+      "name": "Murderous Rider"
+    },
+    {
+      "qty": 3,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 2,
+      "name": "Ral Zarek, Guest Lecturer"
+    },
+    {
+      "qty": 3,
+      "name": "Sheoldred, the Apocalypse"
+    },
+    {
+      "qty": 15,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 4,
+      "name": "Unholy Annex // Ritual Chamber"
+    },
+    {
+      "qty": 1,
+      "name": "Urborg, Tomb of Yawgmoth"
+    },
+    {
+      "qty": 1,
+      "name": "Withering Curse"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Extinction Event"
+    },
+    {
+      "qty": 2,
+      "name": "Kalitas, Traitor of Ghet"
+    },
+    {
+      "qty": 3,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 2,
+      "name": "The Stone Brain"
+    },
+    {
+      "qty": 2,
+      "name": "Unstoppable Slasher"
+    }
+  ]
+}

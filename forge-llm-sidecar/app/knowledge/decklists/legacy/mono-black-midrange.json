@@ -1,0 +1,125 @@
+{
+  "archetype": "Mono Black Midrange",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/mono-black-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 3,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 4,
+      "name": "Dauthi Voidwalker"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 3,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 3,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Moonshadow"
+    },
+    {
+      "qty": 4,
+      "name": "Nethergoyf"
+    },
+    {
+      "qty": 4,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 3,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Sheoldred's Edict"
+    },
+    {
+      "qty": 2,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 4,
+      "name": "Street Wraith"
+    },
+    {
+      "qty": 4,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Unlicensed Hearse"
+    },
+    {
+      "qty": 2,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 2,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 2,
+      "name": "Mai, Scornful Striker"
+    },
+    {
+      "qty": 1,
+      "name": "Massacre"
+    },
+    {
+      "qty": 2,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 2,
+      "name": "Opposition Agent"
+    },
+    {
+      "qty": 1,
+      "name": "Toxic Deluge"
+    }
+  ]
+}

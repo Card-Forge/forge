@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early disruption like Thoughtseize or Fatal Push",
       "Two-mana spells paired with a threat",
-      "Hands that can interact with aggressive starts"
+      "Hands that can interact with aggressive starts",
+      "Keep hands with 2-3 lands and at least one early interaction (Thoughtseize or Fatal Push).",
+      "Prioritize hands that can play Thoughtseize on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction",
       "Three-mana or higher spells without disruption",
-      "Hands with only lands or only threats"
+      "Hands with only lands or only threats",
+      "Mulligan to lands if you have fewer than two, or if your hand consists entirely of 3+ mana spells with no land/draw support."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and use Fatal Push to remove early threats",
       "Cast Thoughtseize to disrupt opponent's game plan",
-      "Hold up mana for interaction if possible"
+      "Hold up mana for interaction if possible",
+      "Turn 1: Play a land, cast Thoughtseize if possible (target discard, removal, or early threat).",
+      "Turn 2: Play a second land, cast Fatal Push on a 2-drop threat, or develop board with a midrange creature.",
+      "Land sequencing: Prioritize basics that support WUB",
+      "if playing fetch/shock lands, fetch for the right color and shock for tempo when needed."
     ],
     "mid_game": [
       "Deploy Quantum Riddler to generate card advantage",
       "Trade efficiently with removal and disruption",
-      "Stabilize against aggressive decks while building board presence"
+      "Stabilize against aggressive decks while building board presence",
+      "Hoard removal for key threats and use Thoughtseize to disrupt opponent's hand before committing threats.",
+      "Manage mana to maintain flexibility between spells and threats.",
+      "Avoid overcommitting to the board without card advantage.",
+      "Commit threats when the opponent has no removal or sweepers.",
+      "Hold back if they have counterspells or sweepers in play or hand.",
+      "Use removal efficiently on tempo threats that disrupt your game plan."
     ],
     "late_game": [
       "Use Quantum Riddler's ability to outvalue control decks",
       "Deploy resilient threats to close out games",
-      "Maintain hand advantage to outlast attrition strategies"
+      "Maintain hand advantage to outlast attrition strategies",
+      "Quantum Riddler combined with other midrange threats and card advantage.",
+      "Use discard and removal to clear the path, then close the game with resilient threats and card draw.",
+      "Go all-in when the opponent has no removal or sweepers, or when you have a clear card advantage advantage.",
+      "Commit when you can safely develop your board without fear of being wiped."
     ]
   },
   "key_cards": [
@@ -58,7 +75,12 @@
   "sequencing_tips": [
     "Hold up Fatal Push mana to protect Quantum Riddler from early removal",
     "Cast Thoughtseize before playing threats to ensure they stick",
-    "Use Quantum Riddler's ability on opponent's turn to maximize card advantage"
+    "Use Quantum Riddler's ability on opponent's turn to maximize card advantage",
+    "Common mistake: overcommitting to the board without card advantage or tracking opponent's removal.",
+    "Quantum Riddler's value scales with discard and removal synergy, so prioritize keeping it in hand.",
+    "Always track opponent's mana and hand size to predict their next move.",
+    "Avoid playing around cards that don't exist",
+    "focus on the current board state and known information."
   ],
   "matchups": [
     {
@@ -87,15 +109,34 @@
         "Protection spells",
         "Fast win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split effects, cast threats at end of turn, and use Thoughtseize to remove counterspells. Overcommit with value threats that can't be countered or that provide immediate impact.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early disruption with Thoughtseize and Fatal Push. Don't let them cast big spells; answer threats efficiently and pressure before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war by tracking their hand and removing key threats. Hold up removal for their threats and sweepers. Win with superior late-game threats and card advantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early aggressive creatures",
     "High impact combo pieces",
-    "Resilient late game threats"
+    "Resilient late game threats",
+    "Watch for sweepers (e.g., Wrath of God, Doomskar), counterspells, and combo pieces.",
+    "Note when opponents tap out for threats versus holding up removal.",
+    "Track graveyard usage and discard patterns to predict their next move."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:21:15+00:00",
     "model": "local-model",
@@ -111,6 +152,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

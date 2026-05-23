@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing one or two one-drop heroic creatures",
       "Access to early pump spells like Practiced Offense",
-      "At least one removal or draw spell to sustain tempo"
+      "At least one removal or draw spell to sustain tempo",
+      "Keep any hand with a land and a Heroic creature (especially Illuminator Virtuoso or a cheap pump target).",
+      "Prioritize hands with 2-3 lands and at least one targeted spell like Practiced Offense or a combat trick."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands",
       "Hands lacking any creatures to target",
-      "Hands with only high-mana spells or late-game threats"
+      "Hands with only high-mana spells or late-game threats",
+      "Mulligan hands with only one color of mana, three+ lands with no early threats, or hands lacking a way to protect your early creatures (like Sheltered by Ghosts or similar protection)."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play cheap heroic creatures on curve",
       "Use low-cost spells to trigger heroic and draw cards",
-      "Apply early pressure to force opponent responses"
+      "Apply early pressure to force opponent responses",
+      "Turn 1: Play a land, ideally a fetch/shock or dual that enters untapped to set up five-color mana.",
+      "Turn 2: Cast a cheap Heroic creature, then immediately target it with a pump spell or combat trick to establish a 2/2 or 3/2 threat.",
+      "If holding Sheltered by Ghosts, consider holding it for protection against removal or to enable indirect targeting if the card's mechanics allow.",
+      "Sequence mana carefully to ensure you can cast both the creature and its first pump spell on curve."
     ],
     "mid_game": [
       "Pump key threats with Sheltered by Ghosts and Practiced Offense",
       "Cycle through card advantage to maintain board presence",
-      "Use removal to clear blockers while preserving tempo"
+      "Use removal to clear blockers while preserving tempo",
+      "Heroic relies on spell density",
+      "never run out of targeted spells unless you're at lethal.",
+      "Use mana efficiently by chaining pump spells onto the same creature to maximize value, but diversify threats to avoid being one-sweeper'd.",
+      "Manage your graveyard carefully if recursion is a threat",
+      "use exile effects or discard if needed.",
+      "Commit creatures when you have protection or enough pump spells to answer removal."
     ],
     "late_game": [
       "Stabilize with larger heroic threats",
       "Leverage card draw to out-resource control strategies",
-      "Use combat tricks to close out games efficiently"
+      "Use combat tricks to close out games efficiently",
+      "Large, evasive Heroic creatures with multiple +1/+1 counters, often paired with unblockable effects or combat tricks.",
+      "Use Practiced Offense or similar late-game pumps to push lethal through blockers.",
+      "Go all-in when you have a clear path to lethal, the opponent has no sweepers, or you've established a board state they cannot clear with their remaining resources.",
+      "Commit when you can trade up favorably or when your life total is low enough that you must attack."
     ]
   },
   "key_cards": [
@@ -59,7 +76,12 @@
     "Hold up pump spells until combat to maximize surprise and trigger timing",
     "Prioritize targeting creatures that will survive the turn to avoid wasted triggers",
     "Use Sheltered by Ghosts after opponent commits removal to protect your biggest threat",
-    "Sequence removal before pump spells if you expect opponent interaction"
+    "Sequence removal before pump spells if you expect opponent interaction",
+    "5c Heroic is highly dependent on spell density and mana consistency.",
+    "Avoid overcommitting to a single creature unless you have protection.",
+    "Be mindful of indirect targeting rules if your format supports them.",
+    "Practice stack interactions carefully, as Heroic triggers resolve on the stack and can be responded to.",
+    "Common mistake: pumping a creature to lethal but forgetting to account for combat damage or blocking, leading to unexpected losses."
   ],
   "matchups": [
     {
@@ -88,6 +110,21 @@
         "Card draw engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap spells in a row to force counter spells, then pump the remaining creatures. Utilize indirect targeting if available, or rely on unblockable effects. Save protection spells for your key threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race their mana acceleration. Use removal or counterspells to disrupt their key ramp creatures. If they stabilize, switch to a control-oriented approach with targeted removal and sweepers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing with better card draw and more efficient pump spells. Prioritize protecting your key threats with Sheltered by Ghosts or similar effects. Trade up favorably and use your sideboard cards to disrupt their spell density.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +132,14 @@
     "Teferi, Hero of Dominaria",
     "Lightning Strike",
     "Abrupt Decay",
-    "Kethis, the Hidden Hand"
+    "Kethis, the Hidden Hand",
+    "Watch for sweepers (like Wrath of God effects), hard removal (Path to Exile, Doom Blade), and graveyard recursion.",
+    "Note when opponents are holding up mana for counterspells or protection spells.",
+    "Track their life total and board state to decide between racing or stabilizing."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:51:53+00:00",
     "model": "local-model",
@@ -114,6 +155,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

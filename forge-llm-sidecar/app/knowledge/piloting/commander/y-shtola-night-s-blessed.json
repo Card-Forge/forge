@@ -1,0 +1,128 @@
+{
+  "archetype": "Y'shtola, Night's Blessed",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "A midrange-control archetype that leverages Y'shtola's noncreature spell synergy to generate a resilient army of flying Spirits while using targeted removal and bounce to neutralize threats. It aims to out-value aggressive and combo decks through card advantage and board control, closing out games with a resilient token army or a late-game finisher.",
+  "win_conditions": [
+    "Y'shtola herself with a board of flying Spirits, or a late-game spell like a board wipe + draw engine to reset and rebuild.",
+    "Finish with a combination of token pressure and targeted removal to clear the path."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing duals/shocks if available), Sol Ring/Arcane Signet, and at least one early noncreature spell or removal.",
+      "Prioritize hands that can play a land + mana rock on turn 1, or land + noncreature spell on turn 2."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 0-1 lands, no color fixers, or only creatures with no early interaction."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a basic land, then Sol Ring/Arcane Signet.",
+      "Turn 2: Play a dual land or fetch/shock, cast a cheap noncreature spell (e.g., bounce, counterspell, or draw) to trigger Y'shtola or build board presence.",
+      "If opening with a creature, play land, then creature, holding mana for interaction.",
+      "Sequence lands to ensure B/U/W availability by turn 3-4."
+    ],
+    "mid_game": [
+      "Preserve mana for interaction until turn 4.",
+      "Use noncreature spells efficiently to trigger Y'shtola without overcommitting.",
+      "Manage graveyard by avoiding unnecessary recursion unless necessary.",
+      "Keep a hand of 3-4 cards to navigate disruption.",
+      "Commit threats only when you have removal or bounce ready for the opponent's response.",
+      "Use Y'shtola's -1/-1 ability to neutralize key threats without spending mana.",
+      "Hold back on casting expensive noncreature spells if the board is unstable."
+    ],
+    "late_game": [
+      "Y'shtola herself with a board of flying Spirits, or a late-game spell like a board wipe + draw engine to reset and rebuild.",
+      "Finish with a combination of token pressure and targeted removal to clear the path.",
+      "Go all-in when you have card advantage, removal for their key threats, and enough mana to cast multiple noncreature spells in a turn.",
+      "Commit when the opponent is tapped out or has no answers to flying."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Y'shtola, Night's Blessed",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Y'shtola is vulnerable to board wipes and targeted removal",
+    "protect her or have a backup plan.",
+    "The deck thrives on noncreature spell synergy, so avoid overcommitting to creatures early.",
+    "Watch for format-specific hate cards.",
+    "Practice sequencing mana rocks and dual lands to avoid flooding.",
+    "Common mistake: casting too many noncreature spells without board presence, leaving you vulnerable to sweepers.",
+    "As a fringe archetype, expect unfamiliar hate cards",
+    "prioritize information gathering in the first few turns."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multi-target, or instant-speed noncreature spells. Bounce or remove the counter source. Use Y'shtola's -1/-1 to neutralize blockers. Cast spells in response to their counterspells if possible.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early interaction is key. Use bounce and cheap removal to slow them down. Bring in artifact destruction and counterspells. Don't let them stabilize; pressure early.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize cheap removal and bounce. Use Y'shtola's -1/-1 to neutralize key attackers. Hold up mana for interaction on opponent's turn. Stabilize with a board wipe if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with noncreature spells and tokens. Force them to use resources on your threats. Use card draw to out-value them. Attack with flying Spirits to bypass ground blockers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Use hand disruption to limit their noncreature spells. Prioritize targeted removal over board wipes. Use Y'shtola's bounce to steal tempo. Control the board with -1/-1 and force them to overcommit.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers, counterspells, and targeted removal.",
+    "Note when opponents tap out for big threats or combo pieces.",
+    "Track graveyard usage for recursion decks.",
+    "Pay attention to mana development to predict their next play."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

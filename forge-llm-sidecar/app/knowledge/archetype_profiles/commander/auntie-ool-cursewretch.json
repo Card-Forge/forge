@@ -1,0 +1,800 @@
+{
+  "schema_version": 1,
+  "name": "Auntie Ool, Cursewretch",
+  "format": "commander",
+  "colors": [
+    "B",
+    "G",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "This deck leverages noncreature spells and Curse enchantments to rapidly stack +1/+1 counters on Auntie Ool, Cursewretch, then sacrifices her for game-swinging creature removal or direct damage. It wins by out-resourcing midrange and control decks with efficient value engines while leveraging sacrifice outlets to disrupt aggressive and combo strategies.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 11,
+      "cards": [
+        "Auntie Ool, Cursewretch",
+        "Commander's Sphere",
+        "Dusk Urchins",
+        "Eventide's Shadow",
+        "Generous Patron",
+        "Glissa Sunslayer",
+        "Massacre Girl, Known Killer",
+        "Oft-Nabbed Goat",
+        "Sinister Gnarlbark",
+        "The Scorpion God",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Dawnhand Dissident",
+        "Path of Ancestry"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 5,
+      "cards": [
+        "Evolving Wilds",
+        "Farseek",
+        "Nature's Lore",
+        "Rampant Growth",
+        "Three Visits"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Auntie Ool, Cursewretch"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 41,
+      "cards": [
+        "Ammit Eternal",
+        "Auntie Ool, Cursewretch",
+        "Blowfly Infestation",
+        "Carnifex Demon",
+        "Channeler Initiate",
+        "Contagion Clasp",
+        "Dawnhand Dissident",
+        "Devoted Druid",
+        "Dread Tiller",
+        "Dusk Urchins",
+        "Evolution Sage",
+        "Generous Patron",
+        "Glissa Sunslayer",
+        "Grim Affliction",
+        "Grim Poppet",
+        "Hapatra, Vizier of Poisons",
+        "Hexing Squelcher",
+        "Ignoble Hierarch",
+        "Incremental Blight",
+        "Kulrath Knight",
+        "Lightning Greaves",
+        "Maha, Its Feathers Night",
+        "Massacre Girl, Known Killer",
+        "Midnight Banshee",
+        "Mikaeus, the Unhallowed",
+        "Moonshadow",
+        "Necroskitter",
+        "Nest of Scarabs",
+        "Obelisk Spider",
+        "Oft-Nabbed Goat",
+        "Persistent Constrictor",
+        "Scuzzback Scrounger",
+        "Sinister Gnarlbark",
+        "Sol Ring",
+        "Soul Snuffers",
+        "Spitting Dilophosaurus",
+        "The Reaper, King No More",
+        "The Scorpion God",
+        "Tree of Perdition",
+        "Village Pillagers",
+        "Wickerbough Elder"
+      ],
+      "mainboard_count": 41,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 26,
+      "cards": [
+        "All Will Be One",
+        "Ammit Eternal",
+        "Assassin's Trophy",
+        "Atomize",
+        "Blasphemous Act",
+        "Bogslither's Embrace",
+        "Bojuka Bog",
+        "Crumbling Ashes",
+        "Dawnhand Dissident",
+        "Everlasting Torment",
+        "Glissa Sunslayer",
+        "Hapatra, Vizier of Poisons",
+        "Infernal Grasp",
+        "Kulrath Knight",
+        "Lasting Tarfire",
+        "Massacre Girl, Known Killer",
+        "Midnight Banshee",
+        "Mikaeus, the Unhallowed",
+        "Necroskitter",
+        "Obelisk Spider",
+        "Persist",
+        "Putrefy",
+        "Soul Immolation",
+        "Terminate",
+        "Village Pillagers",
+        "Wickerbough Elder"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Black Sun's Zenith",
+        "Blasphemous Act",
+        "Darkness Descends",
+        "Soul Immolation",
+        "Soul Snuffers",
+        "Village Pillagers"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Auntie Ool, Cursewretch",
+        "Hexing Squelcher",
+        "Maha, Its Feathers Night"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Maha, Its Feathers Night"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Aberrant Return",
+        "Bojuka Bog",
+        "Dawnhand Dissident",
+        "Dread Tiller",
+        "Moonshadow",
+        "Persist",
+        "Puca's Covenant",
+        "Reanimate"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 7,
+      "cards": [
+        "Aberrant Return",
+        "Mikaeus, the Unhallowed",
+        "Necroskitter",
+        "Persist",
+        "Persistent Constrictor",
+        "Puca's Covenant",
+        "The Scorpion God"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Auntie Ool, Cursewretch"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Auntie Ool, Cursewretch"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Everlasting Torment",
+        "Sudden Spoiling"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 22,
+      "cards": [
+        "Arcane Signet",
+        "Blood Crypt",
+        "Bojuka Bog",
+        "Channeler Initiate",
+        "Command Tower",
+        "Commander's Sphere",
+        "Dragonskull Summit",
+        "Evolving Wilds",
+        "Ifnir Deadlands",
+        "Karn's Bastion",
+        "Luxury Suite",
+        "Nesting Grounds",
+        "Overgrown Tomb",
+        "Path of Ancestry",
+        "Reliquary Tower",
+        "Rootbound Crag",
+        "Savage Lands",
+        "Scuzzback Scrounger",
+        "Smoldering Marsh",
+        "Undergrowth Stadium",
+        "Woodland Cemetery",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 33,
+      "cards": [
+        "Blood Crypt",
+        "Bojuka Bog",
+        "Command Tower",
+        "Dragonskull Summit",
+        "Evolving Wilds",
+        "Forest",
+        "Ifnir Deadlands",
+        "Karn's Bastion",
+        "Luxury Suite",
+        "Mountain",
+        "Nesting Grounds",
+        "Overgrown Tomb",
+        "Path of Ancestry",
+        "Reliquary Tower",
+        "Rootbound Crag",
+        "Savage Lands",
+        "Smoldering Marsh",
+        "Swamp",
+        "Undergrowth Stadium",
+        "Woodland Cemetery",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.36
+  },
+  "dual_role_cards": [
+    {
+      "card": "Aberrant Return",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ammit Eternal",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Auntie Ool, Cursewretch",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blasphemous Act",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Channeler Initiate",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Commander's Sphere",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dawnhand Dissident",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dragonskull Summit",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dread Tiller",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dusk Urchins",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Everlasting Torment",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Evolving Wilds",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Generous Patron",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glissa Sunslayer",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hapatra, Vizier of Poisons",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hexing Squelcher",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ifnir Deadlands",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karn's Bastion",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kulrath Knight",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Luxury Suite",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Maha, Its Feathers Night",
+      "roles": [
+        "discard_outlets",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Massacre Girl, Known Killer",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Midnight Banshee",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mikaeus, the Unhallowed",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Moonshadow",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Necroskitter",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nesting Grounds",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Obelisk Spider",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Oft-Nabbed Goat",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Persist",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Persistent Constrictor",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Puca's Covenant",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rootbound Crag",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Savage Lands",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scuzzback Scrounger",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sinister Gnarlbark",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smoldering Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul Immolation",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul Snuffers",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Scorpion God",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undergrowth Stadium",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Village Pillagers",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wickerbough Elder",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Woodland Cemetery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ziatora's Proving Ground",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistakes include overcommitting to Ool without a sacrifice outlet, neglecting to cast noncreature spells to grow her, and failing to track the opponent's removal.",
+    "Remember that Ool's ability is a sorcery-speed sacrifice, so plan your turns accordingly.",
+    "Synergize with curses that have beneficial effects or additional value.",
+    "Always keep an eye on the opponent's graveyard for recursion threats."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast a cheap Curse or noncreature spell if mana allows."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a second land, cast another noncreature spell to grow Ool, or deploy a sacrifice outlet like Ignoble Hierarch."
+    },
+    {
+      "trigger": "early game",
+      "line": "If you have Ool in hand, play her on turn 2 or 3 once you have a Curse or noncreature spell ready to trigger her growth."
+    }
+  ],
+  "kill_priority": [
+    "Auntie Ool, Cursewretch",
+    "Ammit Eternal",
+    "Blowfly Infestation",
+    "Carnifex Demon",
+    "Channeler Initiate",
+    "Contagion Clasp",
+    "Dawnhand Dissident",
+    "Devoted Druid"
+  ],
+  "interaction_to_disrupt": [
+    "Auntie Ool, Cursewretch",
+    "Hexing Squelcher",
+    "Maha, Its Feathers Night",
+    "All Will Be One",
+    "Ammit Eternal",
+    "Assassin's Trophy",
+    "Atomize",
+    "Blasphemous Act"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/auntie-ool-cursewretch.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

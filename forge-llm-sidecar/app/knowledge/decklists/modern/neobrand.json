@@ -1,0 +1,153 @@
+{
+  "archetype": "Neobrand",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/neobrand.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Allosaurus Rider"
+    },
+    {
+      "qty": 1,
+      "name": "Atraxa, Grand Unifier"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Bridgeworks Battle"
+    },
+    {
+      "qty": 4,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 4,
+      "name": "Disciple of Freyalise"
+    },
+    {
+      "qty": 4,
+      "name": "Eldritch Evolution"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 2,
+      "name": "Generous Ent"
+    },
+    {
+      "qty": 3,
+      "name": "Ghalta, Stampede Tyrant"
+    },
+    {
+      "qty": 1,
+      "name": "Griselbrand"
+    },
+    {
+      "qty": 3,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 1,
+      "name": "Hooting Mandrills"
+    },
+    {
+      "qty": 4,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 4,
+      "name": "Neoform"
+    },
+    {
+      "qty": 1,
+      "name": "Nourishing Shoal"
+    },
+    {
+      "qty": 3,
+      "name": "Pact of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Planar Genesis"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 4,
+      "name": "Summoner's Pact"
+    },
+    {
+      "qty": 1,
+      "name": "Ureni, the Song Unending"
+    },
+    {
+      "qty": 1,
+      "name": "Veil of Summer"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Foothills"
+    },
+    {
+      "qty": 1,
+      "name": "Xenagos, God of Revels"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Elesh Norn, Grand Cenobite"
+    },
+    {
+      "qty": 2,
+      "name": "Hooting Mandrills"
+    },
+    {
+      "qty": 1,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 4,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 2,
+      "name": "Natural State"
+    },
+    {
+      "qty": 2,
+      "name": "Nature's Claim"
+    },
+    {
+      "qty": 3,
+      "name": "Veil of Summer"
+    }
+  ]
+}

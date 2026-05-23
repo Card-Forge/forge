@@ -1,0 +1,481 @@
+{
+  "schema_version": 1,
+  "name": "Azorius Initiative",
+  "format": "vintage",
+  "colors": [
+    "W",
+    "U"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "Azorius Initiative is a control-arcane deck that leverages the Initiative mechanic to cast spells from the top of your library, turning card draw into immediate board impact. It aims to stabilize early, out-value opponents through recursive spell-casting, and close out games with resilient threats or unexpected finishers.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 16,
+      "cards": [
+        "Ancestral Recall",
+        "Brainstorm",
+        "Gitaxian Probe",
+        "L\u00f3rien Revealed",
+        "Narset, Parter of Veils",
+        "Ponder",
+        "Quantum Riddler",
+        "Treasure Cruise",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Narset, Parter of Veils",
+        "Ponder"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Flooded Strand",
+        "L\u00f3rien Revealed",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 28,
+      "cards": [
+        "Archon of Absolution",
+        "Archon of Emeria",
+        "Containment Priest",
+        "Lavinia, Azorius Renegade",
+        "Monastery Mentor",
+        "Mox Emerald",
+        "Mox Jet",
+        "Mox Pearl",
+        "Mox Ruby",
+        "Mox Sapphire",
+        "Narset, Parter of Veils",
+        "Quantum Riddler",
+        "Seasoned Dungeoneer",
+        "Sol Ring",
+        "Time Walk",
+        "White Plume Adventurer"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 8
+    },
+    "removal": {
+      "target_count": 9,
+      "cards": [
+        "Karakas",
+        "Mana Crypt",
+        "Strip Mine",
+        "Swords to Plowshares",
+        "The Tabernacle at Pendrell Vale",
+        "Wasteland"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "The Tabernacle at Pendrell Vale",
+        "White Plume Adventurer"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 11,
+      "cards": [
+        "Consign to Memory",
+        "Daze",
+        "Flusterstorm",
+        "Force of Negation",
+        "Force of Will",
+        "Mental Misstep"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 1
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Archon of Absolution",
+        "Seasoned Dungeoneer"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 4,
+      "cards": [
+        "Force of Negation",
+        "Seasoned Dungeoneer",
+        "Treasure Cruise"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Daze",
+        "Karakas",
+        "Treasure Cruise"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Monastery Mentor"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 10,
+      "cards": [
+        "Archon of Emeria",
+        "Deafening Silence",
+        "Gitaxian Probe",
+        "Lavinia, Azorius Renegade",
+        "Null Rod"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 7
+    },
+    "mana_fixing": {
+      "target_count": 15,
+      "cards": [
+        "Black Lotus",
+        "Flooded Strand",
+        "Karakas",
+        "Strip Mine",
+        "The Tabernacle at Pendrell Vale",
+        "Tolarian Academy",
+        "Tundra",
+        "Urza's Saga",
+        "Wasteland"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 16,
+      "cards": [
+        "Flooded Strand",
+        "Island",
+        "Karakas",
+        "Plains",
+        "Strip Mine",
+        "The Tabernacle at Pendrell Vale",
+        "Tolarian Academy",
+        "Tundra",
+        "Urza's Saga",
+        "Wasteland"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 1
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Narset, Parter of Veils"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.35
+  },
+  "dual_role_cards": [
+    {
+      "card": "Archon of Absolution",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archon of Emeria",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Daze",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gitaxian Probe",
+      "roles": [
+        "card_advantage",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karakas",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lavinia, Azorius Renegade",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monastery Mentor",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narset, Parter of Veils",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quantum Riddler",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seasoned Dungeoneer",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strip Mine",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Tabernacle at Pendrell Vale",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tolarian Academy",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Treasure Cruise",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tundra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "White Plume Adventurer",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Initiative recursion is powerful but vulnerable to board wipes and targeted removal.",
+    "Always protect Lorien Revealed.",
+    "Be mindful of your library size",
+    "running out of cards can limit your Initiative value.",
+    "Practice sequencing your turns to maximize spell-casting from the top."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Quantum Riddler or White Plume Adventurer if possible."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a second land, cast Lorien Revealed or another Initiative creature."
+    },
+    {
+      "trigger": "early game",
+      "line": "If you have Lorien Revealed and an Initiative creature, you can start casting spells from the top of your library."
+    }
+  ],
+  "kill_priority": [
+    "Monastery Mentor",
+    "Narset, Parter of Veils",
+    "Archon of Absolution",
+    "Archon of Emeria",
+    "Containment Priest",
+    "Lavinia, Azorius Renegade",
+    "Mox Emerald",
+    "Mox Jet"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Daze",
+    "Flusterstorm",
+    "Force of Negation",
+    "Force of Will",
+    "Mental Misstep",
+    "Archon of Absolution",
+    "Seasoned Dungeoneer"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/azorius-initiative.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

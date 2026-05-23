@@ -12,18 +12,20 @@
     "keep_criteria": [
       "Hands with Goryo's Vengeance for early interaction",
       "Hands containing Solitude for card advantage",
-      "Hands with Atraxa, Grand Unifier and bounce support"
+      "Hands with Atraxa, Grand Unifier and bounce support",
+      "Keep hands with 2-3 lands, at least one cantrip or early interaction (Thoughtseize, Inquisition, Fatal Push), and preferably Goryo's Vengeance paired with a land or draw spell."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or card draw",
       "Hands with only late-game permanents",
-      "Hands with no way to handle early aggression"
+      "Hands with no way to handle early aggression",
+      "Mulligan to 5+ lands, all removal with no threats, or hands lacking early interaction against fast archetypes."
     ],
     "examples": [
       {
         "hand": [],
         "decision": "mulligan",
-        "reason": "Mulligan to five cards — Starting at five cards is heavily disadvantaged against fast Prowess decks. The Goryo's player must slog through and find combo pieces quickly, as the opponent can win before the graveyard combo assembles."
+        "reason": "Mulligan to five cards \u2014 Starting at five cards is heavily disadvantaged against fast Prowess decks. The Goryo's player must slog through and find combo pieces quickly, as the opponent can win before the graveyard combo assembles."
       }
     ]
   },
@@ -31,17 +33,32 @@
     "early_game": [
       "Play lands and hold Goryo's Vengeance for opponent's threats",
       "Prioritize survival over early development",
-      "Use bounce effects to disrupt early board presence"
+      "Use bounce effects to disrupt early board presence",
+      "Turn 1: Cast Thoughtseize or Inquisition into a land or cantrip.",
+      "Turn 2: Play a land, cast a cantrip (Opt, Preordain) or early removal (Fatal Push).",
+      "Turn 3: Deploy Goryo's Vengeance if mana allows, or continue cantripping to find answers.",
+      "Prioritize fetching shock lands and playing basics to avoid slow starts."
     ],
     "mid_game": [
       "Cast Solitude to draw cards and bounce multiple threats",
       "Begin setting up Atraxa, Grand Unifier",
-      "Maintain board control by repeatedly bouncing key pieces"
+      "Maintain board control by repeatedly bouncing key pieces",
+      "Treat Goryo's Vengeance as a one-time resource",
+      "only cast it when you can immediately resolve a high-impact instant (Solitude, Drown in the Loch, or Thoughtseize).",
+      "Preserve graveyard resources by avoiding unnecessary discard spells if you plan to cast them from the graveyard later.",
+      "Manage hand size by cantripping through dead draws.",
+      "Commit threats like Atraxa only when you have a clear path to resolution or a bounce/removal package to protect it.",
+      "Hold back Solitude for key permanents (Amulet, Energy accelerants, opposing Atraxa) rather than using it on low-impact creatures."
     ],
     "late_game": [
       "Deploy Atraxa, Grand Unifier to lock the board and draw cards",
       "Use bounce effects to protect Atraxa from counters or removal",
-      "Outvalue opponents through continuous card draw and disruption"
+      "Outvalue opponents through continuous card draw and disruption",
+      "Atraxa, Grand Unifier is the primary win condition",
+      "once it resolves and untaps, it draws cards and can be replayed or bounced for extra value.",
+      "Secondary finishers include Kethis, the Hidden Hand for card advantage, or out-grinding with Solitude bounce loops.",
+      "Go all-in when you have a resolved Atraxa with protection, or when the opponent has no interaction left to stop your combo.",
+      "Commit to casting Atraxa when you can follow up with Solitude or discard to ensure it resolves and generates immediate value."
     ]
   },
   "key_cards": [
@@ -67,7 +84,12 @@
     "Protect Atraxa, Grand Unifier with bounce effects if opponent has removal or counters",
     "Cast Force of Negation before Tainted Indulgence to surveil first, hiding the card you are searching for from the opponent's knowledge.",
     "Pump spells that check for Delirium evaluate the condition on resolution, not at cast time. You can cast them before hitting Delirium and still get the full effect if you resolve them after.",
-    "When utilizing the deck's primary win condition alongside a warp creature, attack with the creature and pitch one-mana cards on the stack to draw two cards. This card-advantage loop is most effective when you are down to two or three cards in hand."
+    "When utilizing the deck's primary win condition alongside a warp creature, attack with the creature and pitch one-mana cards on the stack to draw two cards. This card-advantage loop is most effective when you are down to two or three cards in hand.",
+    "Goryo's Vengeance is a one-shot, so never cast it without a clear target.",
+    "Solitude can be countered, so sequence it carefully.",
+    "The deck is vulnerable to fast combo",
+    "don't overcommit to Atraxa if you can't protect it.",
+    "Mana base can be tricky, so consider playing extra basics if you're consistently mana-screwed."
   ],
   "matchups": [
     {
@@ -103,15 +125,34 @@
       "opponent_archetype": "Jeskai Blink",
       "advice": "Expect a more aggressive, white-heavy blink shell that relies on one-drops and token generators to pressure you early. The opponent will heavily depend on warp creatures to enable blink effects; disrupting these enablers or countering their early threats is crucial to stopping their combo. (from gameplay)",
       "watch_for": []
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Goryo's Vengeance to cast instant spells from the graveyard, which still go on the stack but can surprise opponents. Rely on Thoughtseize to remove counterspells from hand, and sequence Solitude/Atraxa when you know they are out of interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Thoughtseize to grab accelerants (Amulet, Lotus Bloom), Fatal Push for early threats, and Solitude to bounce key mana rocks. Use Drown in the Loch from the graveyard via Goryo's to deal with problematic permanents.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by sequencing better and holding more interaction. Thoughtseize to disrupt their combo pieces, and use Solitude to bounce their Atraxa or key permanents. Prioritize graveyard resources and be ready to cast Goryo's Vengeance at the wrong time for them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early aggressive creatures",
     "High-impact midrange threats",
-    "Counterspells and removal"
+    "Counterspells and removal",
+    "Watch for mana rocks and accelerants (Amulet, Lotus Bloom, Energy counters) that signal combo turns.",
+    "Track opponent's graveyard for recursion threats.",
+    "Note when they hold up mana for counterspells or bounce effects, as this dictates whether you can safely cast Atraxa or need to disrupt first."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:23:14+00:00",
     "model": "local-model",
@@ -162,6 +203,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": "Goryo's Vengeance"
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

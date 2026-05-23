@@ -73,6 +73,7 @@ public final class DeckRecognitionManager {
             }
             final DeckRecognitionObserver observer = new DeckRecognitionObserver(player, game, client, ai);
             ai.setSidecarClient(client, observer.deckCards());
+            ai.setDeckRecognitionObserver(observer);
             game.subscribeToEvents(observer);
             Logger.info("DeckRecognition: enabled for AI player '" + player
                     + "' via " + url + " (health=" + healthy + ")");

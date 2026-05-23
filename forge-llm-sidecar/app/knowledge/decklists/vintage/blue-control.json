@@ -1,0 +1,185 @@
+{
+  "archetype": "Blue Control",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/blue-control.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancestral Recall"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Dig Through Time"
+    },
+    {
+      "qty": 1,
+      "name": "Dress Down"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 2,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Gitaxian Probe"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 3,
+      "name": "Lavinia, Azorius Renegade"
+    },
+    {
+      "qty": 1,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "March of Otherworldly Light"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 3,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 1,
+      "name": "Seal of Cleansing"
+    },
+    {
+      "qty": 2,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 1,
+      "name": "Snapcaster Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 3,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 1,
+      "name": "Time Walk"
+    },
+    {
+      "qty": 1,
+      "name": "Treasure Cruise"
+    },
+    {
+      "qty": 4,
+      "name": "Tundra"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Annul"
+    },
+    {
+      "qty": 3,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 1,
+      "name": "Dismember"
+    },
+    {
+      "qty": 2,
+      "name": "Empty-Shrine Kannushi"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 1,
+      "name": "Lurrus of the Dream-Den"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 2,
+      "name": "Stony Silence"
+    },
+    {
+      "qty": 1,
+      "name": "The Tabernacle at Pendrell Vale"
+    }
+  ]
+}

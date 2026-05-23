@@ -1,0 +1,435 @@
+{
+  "schema_version": 1,
+  "name": "Bant Airbending Combo",
+  "format": "standard",
+  "colors": [
+    "W",
+    "U",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This Bant deck leverages flying creatures and evasion to assemble a synergistic board state centered around Aang, Swift Savior and Appa, Steadfast Guardian. By cycling through Bramble Familiar and other low-cost spells, you generate card advantage while protecting your combo pieces. The goal is to quickly establish an unblockable aerial threat that overwhelms opponents before they can stabilize in Standard.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 7,
+      "cards": [
+        "Bramble Familiar",
+        "Heritage Reclamation",
+        "Summon: Bahamut"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Bramble Familiar"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Aang, Swift Savior"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 30,
+      "cards": [
+        "Aang, Swift Savior",
+        "Aang, at the Crossroads",
+        "Appa, Steadfast Guardian",
+        "Aven Interrupter",
+        "Craterhoof Behemoth",
+        "Doc Aurlock, Grizzled Genius",
+        "Gene Pollinator",
+        "Leatherhead, Swamp Stalker",
+        "Llanowar Elves",
+        "Skycoach Conductor",
+        "Summon: Bahamut",
+        "Vastlands Scavenger"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 13,
+      "cards": [
+        "Aven Interrupter",
+        "Erode",
+        "Heritage Reclamation",
+        "Leatherhead, Swamp Stalker",
+        "Seam Rip",
+        "Summon: Bahamut"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 11
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 11,
+      "cards": [
+        "Appa, Steadfast Guardian",
+        "Bramble Familiar",
+        "Cavern of Souls",
+        "Leatherhead, Swamp Stalker"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 11,
+      "cards": [
+        "Aven Interrupter",
+        "Doc Aurlock, Grizzled Genius",
+        "Heritage Reclamation",
+        "Rest in Peace"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Doc Aurlock, Grizzled Genius"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Appa, Steadfast Guardian",
+        "Bramble Familiar"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Aang, Swift Savior"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Appa, Steadfast Guardian",
+        "Bramble Familiar"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Avatar's Wrath"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 33,
+      "cards": [
+        "Bramble Familiar",
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Floodfarm Verge",
+        "Gene Pollinator",
+        "Hallowed Fountain",
+        "Hushwood Verge",
+        "Interdimensional Web Watch",
+        "Multiversal Passage",
+        "Starting Town",
+        "Summon: Bahamut",
+        "Temple Garden",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Floodfarm Verge",
+        "Forest",
+        "Hallowed Fountain",
+        "Hushwood Verge",
+        "Island",
+        "Multiversal Passage",
+        "Plains",
+        "Starting Town",
+        "Temple Garden",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.29
+  },
+  "dual_role_cards": [
+    {
+      "card": "Aang, Swift Savior",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Appa, Steadfast Guardian",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Aven Interrupter",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bramble Familiar",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Doc Aurlock, Grizzled Genius",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Floodfarm Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gene Pollinator",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Heritage Reclamation",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hushwood Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leatherhead, Swamp Stalker",
+      "roles": [
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Multiversal Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summon: Bahamut",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Willowrush Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always prioritize casting Aang, Swift Savior before Appa, Steadfast Guardian to maximize early synergy.",
+    "Cycle Bramble Familiar only when you have enough lands to play the next turn's combo piece.",
+    "Hold up removal or counterspells to protect your flying threats from opponent's early interaction.",
+    "Common mistake: Overcommitting to the board before securing protection, leaving your combo vulnerable to sweepers.",
+    "Unique interaction: Appa and Aang synergize to protect and recur flying creatures, creating a resilient engine."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cheap creatures to establish board presence."
+    },
+    {
+      "trigger": "early game",
+      "line": "Cycle through Bramble Familiar to find combo pieces."
+    },
+    {
+      "trigger": "early game",
+      "line": "Protect Aang, Swift Savior and Appa, Steadfast Guardian from early removal."
+    }
+  ],
+  "kill_priority": [
+    "Appa, Steadfast Guardian",
+    "Bramble Familiar",
+    "Aang, Swift Savior",
+    "Aang, at the Crossroads",
+    "Aven Interrupter",
+    "Craterhoof Behemoth",
+    "Doc Aurlock, Grizzled Genius",
+    "Gene Pollinator"
+  ],
+  "interaction_to_disrupt": [
+    "Appa, Steadfast Guardian",
+    "Bramble Familiar",
+    "Cavern of Souls",
+    "Leatherhead, Swamp Stalker",
+    "Aven Interrupter",
+    "Erode",
+    "Heritage Reclamation",
+    "Seam Rip"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/bant-airbending-combo.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

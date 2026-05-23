@@ -1,0 +1,125 @@
+{
+  "archetype": "Oops! All Spells",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/oops-all-spells.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Agadeem's Awakening"
+    },
+    {
+      "qty": 4,
+      "name": "Balustrade Spy"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 4,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 1,
+      "name": "Bridge from Below"
+    },
+    {
+      "qty": 2,
+      "name": "Cabal Therapy"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Dread Return"
+    },
+    {
+      "qty": 4,
+      "name": "Elvish Spirit Guide"
+    },
+    {
+      "qty": 4,
+      "name": "Fell the Profane"
+    },
+    {
+      "qty": 4,
+      "name": "Grief"
+    },
+    {
+      "qty": 1,
+      "name": "Jack-o'-Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 1,
+      "name": "Memory's Journey"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 2,
+      "name": "Narcomoeba"
+    },
+    {
+      "qty": 4,
+      "name": "Pact of Negation"
+    },
+    {
+      "qty": 2,
+      "name": "Poxwalkers"
+    },
+    {
+      "qty": 4,
+      "name": "Summoner's Pact"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 4,
+      "name": "Undercity Informer"
+    },
+    {
+      "qty": 4,
+      "name": "Unmask"
+    },
+    {
+      "qty": 1,
+      "name": "Wild Cantor"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Chancellor of the Annex"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 4,
+      "name": "Sickening Shoal"
+    }
+  ]
+}

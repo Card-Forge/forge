@@ -1,0 +1,161 @@
+{
+  "archetype": "Cradle Control",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/cradle-control.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Atraxa, Grand Unifier"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 2,
+      "name": "Bayou"
+    },
+    {
+      "qty": 1,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Collector Ouphe"
+    },
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 1,
+      "name": "Dryad Arbor"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Gaea's Cradle"
+    },
+    {
+      "qty": 4,
+      "name": "Green Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Grist, the Hunger Tide"
+    },
+    {
+      "qty": 4,
+      "name": "Ignoble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 1,
+      "name": "Lair of the Hydra"
+    },
+    {
+      "qty": 2,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 3,
+      "name": "Natural Order"
+    },
+    {
+      "qty": 2,
+      "name": "Noble Hierarch"
+    },
+    {
+      "qty": 3,
+      "name": "Once Upon a Time"
+    },
+    {
+      "qty": 1,
+      "name": "Quirion Ranger"
+    },
+    {
+      "qty": 2,
+      "name": "Springheart Nantuko"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Safekeeper"
+    },
+    {
+      "qty": 1,
+      "name": "Talon Gates of Madara"
+    },
+    {
+      "qty": 3,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Mortuary"
+    },
+    {
+      "qty": 2,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 2,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 4,
+      "name": "Wight of the Reliquary"
+    },
+    {
+      "qty": 2,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 2,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 3,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Gaddock Teeg"
+    },
+    {
+      "qty": 3,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 1,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Veil of Summer"
+    }
+  ]
+}

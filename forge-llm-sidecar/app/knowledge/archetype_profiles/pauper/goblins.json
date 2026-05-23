@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "name": "Goblins",
+  "format": "pauper",
+  "colors": [
+    "B",
+    "R"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "A recursive, aggressive tempo deck that floods the board with cheap goblins, leverages Ichor Wellspring for mana acceleration and extra spells, and uses Unearth to replay key threats from the graveyard. It aims to overwhelm slower decks before they stabilize and out-value control through relentless recursion and search effects.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 26,
+      "cards": [
+        "Boiling Rock Prison",
+        "Eviscerator's Insight",
+        "Fanatical Offering",
+        "First Day of Class",
+        "Ichor Wellspring",
+        "Introduction to Prophecy",
+        "Toxin Analysis",
+        "Unearth"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Introduction to Prophecy"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "tutors_wildcards": {
+      "target_count": 12,
+      "cards": [
+        "Goblin Matron",
+        "Ichor Wellspring",
+        "Unearth"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 31,
+      "cards": [
+        "Accursed Marauder",
+        "Dark-Dweller Oracle",
+        "Duress",
+        "Goblin Matron",
+        "Ichor Wellspring",
+        "Impulsive Pilferer",
+        "Krark-Clan Shaman",
+        "Mesmeric Fiend",
+        "Putrid Goblin",
+        "Skirk Prospector",
+        "Stormshriek Feral",
+        "Unearth"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Bojuka Bog",
+        "Cast into the Fire",
+        "Krark-Clan Shaman",
+        "Makeshift Munitions",
+        "Origin of Metalbending",
+        "Red Elemental Blast",
+        "Suplex",
+        "Unearth"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 11
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Krark-Clan Shaman",
+        "Unearth"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Red Elemental Blast"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 5,
+      "cards": [
+        "Origin of Metalbending",
+        "Unearth"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "First Day of Class"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 13,
+      "cards": [
+        "Bojuka Bog",
+        "Eviscerator's Insight",
+        "Ichor Wellspring",
+        "Impulsive Pilferer",
+        "Unearth"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 19,
+      "cards": [
+        "Eviscerator's Insight",
+        "Ichor Wellspring",
+        "Impulsive Pilferer",
+        "Mesmeric Fiend",
+        "Putrid Goblin",
+        "Rakdos Carnarium",
+        "Unearth"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 19,
+      "cards": [
+        "Boiling Rock Prison",
+        "Bojuka Bog",
+        "Ichor Wellspring",
+        "Impulsive Pilferer",
+        "Rakdos Carnarium",
+        "Unearth",
+        "Vault of Whispers"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 19,
+      "cards": [
+        "Boiling Rock Prison",
+        "Bojuka Bog",
+        "Mountain",
+        "Rakdos Carnarium",
+        "Swamp",
+        "Vault of Whispers"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.29
+  },
+  "dual_role_cards": [
+    {
+      "card": "Boiling Rock Prison",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eviscerator's Insight",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "First Day of Class",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Matron",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ichor Wellspring",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Impulsive Pilferer",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Introduction to Prophecy",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Krark-Clan Shaman",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mesmeric Fiend",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Origin of Metalbending",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Putrid Goblin",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rakdos Carnarium",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Red Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unearth",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vault of Whispers",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistakes include overextending into sweepers, forgetting to protect Unearth targets, mismanaging Wellspring mana, and not tracking graveyard exile.",
+    "Unique interactions include using Wellspring to pay multiple Unearth costs in a single turn and Matron fetching Unearth targets from outside the game.",
+    "Always prioritize life total in aggressive matchups and track opponent's removal to time your Unearth plays.",
+    "Remember that Unearthed creatures return to the battlefield, not hand, and are exiled at end of turn, so plan your recursion and combat accordingly."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play land, cast Goblin Guide or Skirk Prospector."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play land, cast another goblin or Ichor Wellspring."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence Wellspring early to enable Unearth recursion or cast a mid-game threat."
+    }
+  ],
+  "kill_priority": [
+    "Accursed Marauder",
+    "Dark-Dweller Oracle",
+    "Duress",
+    "Goblin Matron",
+    "Ichor Wellspring",
+    "Impulsive Pilferer",
+    "Krark-Clan Shaman",
+    "Mesmeric Fiend"
+  ],
+  "interaction_to_disrupt": [
+    "Red Elemental Blast",
+    "Origin of Metalbending",
+    "Unearth",
+    "Bojuka Bog",
+    "Cast into the Fire",
+    "Krark-Clan Shaman",
+    "Makeshift Munitions",
+    "Suplex"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/goblins.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

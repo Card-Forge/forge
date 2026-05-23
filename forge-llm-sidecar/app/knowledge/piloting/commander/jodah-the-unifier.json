@@ -1,0 +1,128 @@
+{
+  "archetype": "Jodah, the Unifier",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Jodah is a five-color value engine that converts mana acceleration into explosive spell casting from the top of your library. It wins by out-ramping opponents, casting high-impact spells for reduced cost, and leveraging card advantage to overwhelm the board or close out games with singular massive threats.",
+  "win_conditions": [
+    "Jodah casting a massive creature (e.g., Emrakul, The Aeons Torn",
+    "Teferi, Hero of Dominaria",
+    "or a five-color win con like Worldslayer) from the top of the deck.",
+    "Sometimes combo finishes with cards like Storm the Festival or specific commander synergies."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including fetches/shocks for fixing), at least one mana rock or ramp spell (Sol Ring, Arcane Signet, Farseek, Cultivate), and Jodah if possible."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 0-1 lands, no ramp, or only cheap spells with no way to cast them."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring/Arcane Signet or play a ramp spell like Farseek/Cultivate.",
+      "Turn 2: Play another land, cast a mana dork or second ramp spell.",
+      "Prioritize getting Jodah online by turn 3-4.",
+      "Sequence fetches into shock lands for five-color fixing."
+    ],
+    "mid_game": [
+      "Mana is your primary resource",
+      "always have 5+ mana available to trigger Jodah's full potential.",
+      "Manage hand by holding up mana for protection or big spells.",
+      "Graveyard is generally a liability, so consider graveyard hate if needed, though five-color ramp usually doesn't run it.",
+      "Commit threats when you have protection or can follow up.",
+      "Use Jodah to cast board wipes when opponents have too many creatures.",
+      "Don't overcommit to a single massive spell if you can't protect it."
+    ],
+    "late_game": [
+      "Jodah casting a massive creature (e.g., Emrakul, The Aeons Torn",
+      "Teferi, Hero of Dominaria",
+      "or a five-color win con like Worldslayer) from the top of the deck.",
+      "Sometimes combo finishes with cards like Storm the Festival or specific commander synergies.",
+      "When you have 5+ mana, Jodah is safe, and you can cast a game-ending spell or combo.",
+      "Also commit when you can protect the spell (counters, protection, or opponent has no interaction)."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Jodah, the Unifier",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Farseek",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Jodah's ability only works on the top card, so deck consistency is key.",
+    "Use fetch lands and cantrips to dig for Jodah or key spells.",
+    "Be careful of 'top-deck' variance",
+    "don't rely on it for critical turns.",
+    "Common mistake: overcommitting to a single massive spell without protection.",
+    "Another: neglecting five-color mana fixing early on."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Jodah's ability to cast spells with multiple targets or split effects. Cast spells in response to counterspells if possible. Use protection spells. Sometimes just out-value by casting multiple smaller spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Match or exceed their ramp. Use Jodah to cast their ramp spells if they're on top of your deck. Prioritize board wipes to stop their big threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap removal and board wipes. Use Jodah to cast a big creature or sweeper. Gain life if possible. Don't overextend.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value with Jodah's card advantage. Cast spells that are hard to counter (multikind, split effects). Pressure with threats they can't answer. Use Jodah to cast their own control spells if they're on top of your deck.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Out-ramp and out-value. Prioritize protecting Jodah. Use targeted removal on their Jodah or key ramp. Win by casting more high-impact spells per turn.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (opponents will try to wipe your board before you can cast your win con).",
+    "Track mana development (are they ahead on ramp?).",
+    "Note when opponents hold up mana (likely holding counters or removal)."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Lurrus of the Dream-Den or Psychic Frog",
       "Two-land hands with early interaction or Flow State",
-      "Hands with a clear path to turn-one or turn-two recursion"
+      "Hands with a clear path to turn-one or turn-two recursion",
+      "Keep hands with 2-3 lands (preferably fetch/shock or duals), at least one Lurrus, and a Flow State or Psychic Frog.",
+      "Keep hands with Thoughtseize, Fatal Push, or Lightning Strike for early disruption."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or recursion engines",
       "Hands heavy on late-game cards without early setup",
-      "Hands vulnerable to common Vintage disruption without answers"
+      "Hands vulnerable to common Vintage disruption without answers",
+      "Mulligan pure land hands, hands with only high-CMC spells, or hands missing Lurrus/Flow State/Psychic Frog without disruption or mana fixing."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Prioritize land drops and playing Lurrus or a cheap threat",
       "Use Flow State on opponent's turn to draw into early interaction",
-      "Begin filling the graveyard with creatures for Lurrus activation"
+      "Begin filling the graveyard with creatures for Lurrus activation",
+      "Turn 1: Play a land, cast Thoughtseize targeting key interaction or combo pieces.",
+      "Turn 2: Play a shockland/dual, cast a cheap cantrip or disruption, or drop Lurrus if you have the mana.",
+      "Prioritize fetching/finding Flow State and Psychic Frog while cycling through the deck with Lurrus-recursable cantrips.",
+      "Sequence lands to ensure you can cast Flow State on turn 3-4."
     ],
     "mid_game": [
       "Activate Lurrus to return Psychic Frog or other threats to hand",
       "Cast Flow State to copy Frog's attack trigger or draw multiple cards",
-      "Apply pressure while holding up mana for counterspells or removal"
+      "Apply pressure while holding up mana for counterspells or removal",
+      "Balance graveyard resources for Lurrus recursion against keeping cards in hand for immediate disruption.",
+      "Avoid over-committing to casting cheap spells if you need to hold mana for counters or removal.",
+      "Use cantrips to dig for Flow State/Psychic Frog while maintaining tempo and hand size.",
+      "Commit threats only when you have protection or can answer their interaction.",
+      "Hold back on casting Flow State if you lack sufficient targets or if the opponent has sweepers.",
+      "Use Lurrus to recur removal/cantrips to maintain board presence without depleting your hand."
     ],
     "late_game": [
       "Loop Lurrus and Frog to generate insurmountable card advantage",
       "Close out games by attacking with Frog repeatedly to draw into finishers",
-      "Stabilize against board wipes by keeping threats in hand via Lurrus"
+      "Stabilize against board wipes by keeping threats in hand via Lurrus",
+      "Flow State + Psychic Frog (often with a Frog token or other cheap spells to hit the mana value threshold).",
+      "Lurrus recursion of Psychic Frog or other win-cons to close out the game.",
+      "Go all-in when you have Flow State, Psychic Frog, and enough cheap spells to hit lethal.",
+      "Commit when the opponent has no interaction left or when you can race their combo before they stabilize."
     ]
   },
   "key_cards": [
@@ -59,7 +76,12 @@
     "Hold Flow State until opponent's turn to maximize card draw and find answers",
     "Activate Lurrus before attacking with Frog to ensure you can recast it next turn",
     "Prioritize keeping Frog in hand over graveyard when opponent has board wipes",
-    "Use Lurrus to return threats to hand rather than graveyard to avoid hate cards"
+    "Use Lurrus to return threats to hand rather than graveyard to avoid hate cards",
+    "Common mistake: Over-casting cheap spells early and running out of resources for the combo.",
+    "Always keep a hand of disruption and a win-con.",
+    "Unique interaction: Psychic Frog can be cast for {1}{U}{R} and creates a Frog token, which can then be used to cast another Psychic Frog for free, or combined with Flow State for massive value.",
+    "Lurrus recursion timing: Don't cast spells you can't afford to lose to the graveyard unless you have a way to recur them.",
+    "Format note: Since format is Unknown, assume standard rules but adapt land counts and hate cards based on actual format legality and local metagame shifts."
   ],
   "matchups": [
     {
@@ -88,16 +110,35 @@
         "Protection spells",
         "Win condition pieces"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, uncounterable threats (Psychic Frog can be cast for free if you control a Frog, or use Flow State to bypass counters). Sequence cantrips to find protection. Use Lurrus to recur spells after counters resolve, and pressure with discard to remove counters from hand.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and removal. Don't let them stabilize. Use Blood Moon or discard to disrupt mana bases. Combo off quickly before they cast their big spells or establish board dominance.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the disruption race. Prioritize Thoughtseize and discard to remove their Lurrus/Flow State/Psychic Frog. Use Lurrus to recur removal/cantrips. Track graveyard for recursion targets. Win by going first or having better sequencing and hand management.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspells that stop Flow State or Frog",
     "Board wipes that clear Lurrus and threats",
     "Graveyard hate that disrupts recursion",
-    "Direct removal targeting Lurrus or Frog"
+    "Direct removal targeting Lurrus or Frog",
+    "Watch for sweepers (Wrath of God, Anger of the Gods), counterspells, graveyard hate, and combo pieces.",
+    "Note when opponents tap out for interaction versus when they're holding priority.",
+    "Track graveyard contents for Lurrus recursion targets and monitor opponent's hand size to gauge combo readiness."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:27:58+00:00",
     "model": "local-model",
@@ -113,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

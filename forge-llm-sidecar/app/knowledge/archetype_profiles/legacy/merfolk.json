@@ -1,0 +1,408 @@
+{
+  "schema_version": 1,
+  "name": "Merfolk",
+  "format": "legacy",
+  "colors": [
+    "U"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "This Legacy Merfolk deck leverages blue's speed and card selection to establish early board presence and maintain tempo. Aether Vial enables aggressive early plays, while Lord of Atlantis provides consistent token generation and board control. Vodalian Hexcatcher ensures long-term card advantage by cycling through the deck and protecting key threats.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 13,
+      "cards": [
+        "Lord of Atlantis",
+        "Silvergill Adept",
+        "Svyelun of Sea and Sky",
+        "Vodalian Hexcatcher"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Grafdigger's Cage",
+        "Vodalian Hexcatcher"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Aether Vial",
+        "Lord of Atlantis"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 38,
+      "cards": [
+        "Aether Vial",
+        "Floodpits Drowner",
+        "Harbinger of the Seas",
+        "Lord of Atlantis",
+        "Master of the Pearl Trident",
+        "Silvergill Adept",
+        "Sink into Stupor",
+        "Svyelun of Sea and Sky",
+        "Tide Shaper",
+        "Tishana's Tidebinder",
+        "True-Name Nemesis",
+        "Vodalian Hexcatcher"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 8,
+      "cards": [
+        "Blue Elemental Blast",
+        "Hydroblast",
+        "Otawara, Soaring City",
+        "Wasteland"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 3
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 25,
+      "cards": [
+        "Aether Vial",
+        "Blue Elemental Blast",
+        "Consign to Memory",
+        "Daze",
+        "Force of Negation",
+        "Force of Will",
+        "Hydroblast",
+        "Lord of Atlantis",
+        "Vodalian Hexcatcher"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 6
+    },
+    "protection": {
+      "target_count": 19,
+      "cards": [
+        "Aether Vial",
+        "Cavern of Souls",
+        "Lord of Atlantis",
+        "Svyelun of Sea and Sky",
+        "True-Name Nemesis",
+        "Vodalian Hexcatcher"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 11,
+      "cards": [
+        "Aether Vial",
+        "Force of Negation",
+        "Grafdigger's Cage",
+        "Lord of Atlantis",
+        "Unlicensed Hearse"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Daze",
+        "Otawara, Soaring City"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Aether Vial",
+        "Lord of Atlantis"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 14,
+      "cards": [
+        "Aether Vial",
+        "Dismember",
+        "Disruptor Flute",
+        "Grafdigger's Cage",
+        "Lord of Atlantis",
+        "Umezawa's Jitte"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 16,
+      "cards": [
+        "Aether Vial",
+        "Cavern of Souls",
+        "Lord of Atlantis",
+        "Otawara, Soaring City",
+        "Wasteland"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 17,
+      "cards": [
+        "Cavern of Souls",
+        "Island",
+        "Otawara, Soaring City",
+        "Wasteland"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.52
+  },
+  "dual_role_cards": [
+    {
+      "card": "Aether Vial",
+      "roles": [
+        "combo_pieces",
+        "counterspells",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blue Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Daze",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lord of Atlantis",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Silvergill Adept",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Svyelun of Sea and Sky",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "True-Name Nemesis",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vodalian Hexcatcher",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "dig_draw",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up counterspells for opponent's early threats before committing to the board",
+    "Sequence Aether Vial plays to maximize early pressure without stalling",
+    "Prioritize casting Vodalian Hexcatcher when opponent has removal in hand",
+    "Use Lord of Atlantis tokens to absorb removal before committing larger threats",
+    "Aether Vial synergy is key"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize casting Aether Vial to enable early Merfolk"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play low-cost threats to apply immediate pressure"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold interaction for opponent's early threats"
+    }
+  ],
+  "kill_priority": [
+    "Aether Vial",
+    "Lord of Atlantis",
+    "Floodpits Drowner",
+    "Harbinger of the Seas",
+    "Master of the Pearl Trident",
+    "Silvergill Adept",
+    "Sink into Stupor",
+    "Svyelun of Sea and Sky"
+  ],
+  "interaction_to_disrupt": [
+    "Aether Vial",
+    "Blue Elemental Blast",
+    "Consign to Memory",
+    "Daze",
+    "Force of Negation",
+    "Force of Will",
+    "Hydroblast",
+    "Lord of Atlantis"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/merfolk.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

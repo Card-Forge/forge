@@ -1,0 +1,217 @@
+{
+  "archetype": "Blue Tempo",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/blue-tempo.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancestral Recall"
+    },
+    {
+      "qty": 2,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Emrakul, the Aeons Torn"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Hullbreacher"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 1,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Mind Twist"
+    },
+    {
+      "qty": 2,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 3,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Ruby"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 3,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 2,
+      "name": "Stifle"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 3,
+      "name": "Sword of the Meek"
+    },
+    {
+      "qty": 2,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 4,
+      "name": "Thopter Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Time Walk"
+    },
+    {
+      "qty": 1,
+      "name": "Tinker"
+    },
+    {
+      "qty": 1,
+      "name": "Tolarian Academy"
+    },
+    {
+      "qty": 1,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 1,
+      "name": "Tundra"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 4,
+      "name": "Urza, Lord High Artificer"
+    },
+    {
+      "qty": 1,
+      "name": "Volcanic Island"
+    },
+    {
+      "qty": 1,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 1,
+      "name": "Wrenn and Six"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Dack Fayden"
+    },
+    {
+      "qty": 2,
+      "name": "Drannith Magistrate"
+    },
+    {
+      "qty": 1,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 3,
+      "name": "Kappa Cannoneer"
+    },
+    {
+      "qty": 2,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Moat"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 1,
+      "name": "The Meathook Massacre"
+    },
+    {
+      "qty": 1,
+      "name": "Vandalblast"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    }
+  ]
+}

@@ -1,0 +1,429 @@
+{
+  "schema_version": 1,
+  "name": "Gruul Midrange",
+  "format": "pioneer",
+  "colors": [
+    "R",
+    "G"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "Gruul Midrange is a deceptively simple deck that focuses on generating card advantage through optimized 2-for-1 trades. It utilizes versatile split cards and vehicles to execute both aggressive early-game plans and grindy midrange strategies. The deck adapts its posture based on the metagame, leaning into fast mana dorks and haste enablers against control or combo, while relying on value engines and removal against aggressive opponents.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 11,
+      "cards": [
+        "Esika's Chariot",
+        "Smuggler's Copter",
+        "Surrak, Elusive Hunter",
+        "The Akroan War"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 5
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Storm the Festival"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 7,
+      "cards": [
+        "Esika's Chariot",
+        "Reckless Stormseeker"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 28,
+      "cards": [
+        "Badgermole Cub",
+        "Elvish Mystic",
+        "Hexing Squelcher",
+        "Keen-Eyed Curator",
+        "Llanowar Elves",
+        "Lovestruck Beast",
+        "Pawpatch Recruit",
+        "Questing Beast",
+        "Surrak, Elusive Hunter",
+        "The Akroan War",
+        "Zhao, the Moon Slayer"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 10
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Abrade",
+        "Boseiju, Who Endures",
+        "Fire Magic",
+        "Keen-Eyed Curator",
+        "Questing Beast",
+        "Scorching Shot",
+        "Skysovereign, Consul Flagship",
+        "The Akroan War"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 8
+    },
+    "wrath": {
+      "target_count": 7,
+      "cards": [
+        "Elvish Mystic",
+        "Fire Magic"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 6,
+      "cards": [
+        "Hexing Squelcher",
+        "Innkeeper's Talent",
+        "Surrak, Elusive Hunter"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 4
+    },
+    "discard_outlets": {
+      "target_count": 3,
+      "cards": [
+        "Smuggler's Copter"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 4,
+      "cards": [
+        "Keen-Eyed Curator",
+        "Storm the Festival"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 9,
+      "cards": [
+        "Badgermole Cub",
+        "Esika's Chariot",
+        "Storm the Festival"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Esika's Chariot"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 3,
+      "cards": [
+        "Esika's Chariot"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Esika's Chariot"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Questing Beast"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 30,
+      "cards": [
+        "Badgermole Cub",
+        "Boseiju, Who Endures",
+        "Copperline Gorge",
+        "Elvish Mystic",
+        "Lair of the Hydra",
+        "Llanowar Elves",
+        "Mutavault",
+        "Stomping Ground",
+        "Thornspire Verge"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 22,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Copperline Gorge",
+        "Forest",
+        "Lair of the Hydra",
+        "Mountain",
+        "Mutavault",
+        "Stomping Ground",
+        "Thornspire Verge"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.43
+  },
+  "dual_role_cards": [
+    {
+      "card": "Badgermole Cub",
+      "roles": [
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Copperline Gorge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elvish Mystic",
+      "roles": [
+        "mana_fixing",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Esika's Chariot",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "payoff_cards",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Magic",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hexing Squelcher",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Keen-Eyed Curator",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lair of the Hydra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Llanowar Elves",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mutavault",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Questing Beast",
+      "roles": [
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smuggler's Copter",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Storm the Festival",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Surrak, Elusive Hunter",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Akroan War",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thornspire Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Wait to equip Embercleave until after the opponent responds to your attack to avoid wasting mana on removal.",
+    "Cast Bonecrusher Giant // Stomp as Stomp to remove Bloodtithe Harvester, saving The Akroan War for Sheoldred, the Apocalypse.",
+    "Account for Brave the Elements when casting removal spells and deciding which creatures to block with.",
+    "Common mistake: Over-tapping Elvish Mystic and failing to play a second land, stalling your curve.",
+    "Another: Overextending into sweepers without checking for interaction."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Accelerate mana with Llanowar Elves or Elvish Mystic"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast turn 2 threats like Bonecrusher Giant // Stomp or Reckless Stormseeker // Storm-Charged Slasher"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early removal like Obliterating Bolt to disrupt opponent's board"
+    }
+  ],
+  "kill_priority": [
+    "Esika's Chariot",
+    "Reckless Stormseeker",
+    "Badgermole Cub",
+    "Elvish Mystic",
+    "Hexing Squelcher",
+    "Keen-Eyed Curator",
+    "Llanowar Elves",
+    "Lovestruck Beast"
+  ],
+  "interaction_to_disrupt": [
+    "Hexing Squelcher",
+    "Innkeeper's Talent",
+    "Surrak, Elusive Hunter",
+    "Abrade",
+    "Boseiju, Who Endures",
+    "Fire Magic",
+    "Keen-Eyed Curator",
+    "Questing Beast"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/gruul-midrange.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

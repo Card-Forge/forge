@@ -1,0 +1,141 @@
+{
+  "archetype": "Jeskai Elementals",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/jeskai-elementals.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ashling, Rekindled"
+    },
+    {
+      "qty": 2,
+      "name": "Bounce Off"
+    },
+    {
+      "qty": 3,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 2,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Cori Mountain Monastery"
+    },
+    {
+      "qty": 4,
+      "name": "Deceit"
+    },
+    {
+      "qty": 4,
+      "name": "Flamebraider"
+    },
+    {
+      "qty": 3,
+      "name": "Ill-Timed Explosion"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Pit of Offerings"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Vinestalk"
+    },
+    {
+      "qty": 4,
+      "name": "Roaming Throne"
+    },
+    {
+      "qty": 4,
+      "name": "Secluded Courtyard"
+    },
+    {
+      "qty": 1,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 3,
+      "name": "Sunderflock"
+    },
+    {
+      "qty": 4,
+      "name": "Vibrance"
+    },
+    {
+      "qty": 1,
+      "name": "Winternight Stories"
+    },
+    {
+      "qty": 4,
+      "name": "Wistfulness"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 2,
+      "name": "Beza, the Bounding Spring"
+    },
+    {
+      "qty": 1,
+      "name": "Bounce Off"
+    },
+    {
+      "qty": 1,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 2,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 2,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 1,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 1,
+      "name": "Sear"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Sunderflock"
+    }
+  ]
+}

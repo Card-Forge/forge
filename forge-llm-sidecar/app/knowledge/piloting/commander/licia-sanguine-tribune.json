@@ -1,0 +1,128 @@
+{
+  "archetype": "Licia, Sanguine Tribune",
+  "format": "commander",
+  "strategy_type": "ramp",
+  "overview": "The deck wins by casting a high volume of instants and sorceries to grow Licia, Sanguine Tribune and leverage Enduring Tenacity to continuously buff a core of resilient artifact creatures. It out-scales opponents through spell-driven value, converting early tempo into an overwhelming late-game board presence that trades efficiently and closes games quickly.",
+  "win_conditions": [
+    "A fully grown Licia (5+ counters) with Enduring Tenacity, backed by a board of 3+ artifact creatures, can close the game in 1-2 turns.",
+    "Use Licia's activated ability to push lethal or block key threats.",
+    "Enduring Tenacity ensures your creatures remain unblockable or lethal even after trades."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (preferably duals or shocklands) plus Licia, Enduring Tenacity, or 2+ cheap instants/sorceries.",
+      "Prioritize keeping any hand with Licia + 2 lands + 1 cheap spell."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 0-1 lands, 3+ lands with no spells, or hands lacking Licia/Enduring Tenacity and only expensive spells."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cheap instant/sorcery (draw, spot removal, or minor buff) to trigger Licia.",
+      "Turn 2: Play a land, cast a second spell to grow Licia further, then deploy an artifact creature or Enduring Tenacity.",
+      "If opening with Licia + 2 lands, play Licia on turn 2, then sequence spells to build counters.",
+      "Ensure B/W/R mana availability by turn 3 to cast your key spells and activate Licia's ability."
+    ],
+    "mid_game": [
+      "Preserve mana for Licia's sorcery-speed buff and key instants/sorceries.",
+      "Avoid overcommitting to casting spells if you lack targets or board presence.",
+      "Manage your graveyard by avoiding unnecessary discard or self-mill unless synergistic.",
+      "Use Enduring Tenacity to maximize value from each spell cast, ensuring you have enough resources to sustain pressure.",
+      "Commit artifact creatures when you have Licia with 3+ counters and Enduring Tenacity online.",
+      "Hold back if the opponent has sweepers or can easily remove your key pieces.",
+      "Prioritize trading efficiently and maintaining spell density to keep Licia growing.",
+      "Use Licia's ability to block or trade favorably when threatened."
+    ],
+    "late_game": [
+      "A fully grown Licia (5+ counters) with Enduring Tenacity, backed by a board of 3+ artifact creatures, can close the game in 1-2 turns.",
+      "Use Licia's activated ability to push lethal or block key threats.",
+      "Enduring Tenacity ensures your creatures remain unblockable or lethal even after trades.",
+      "Go all-in when you have Licia with 4+ counters, Enduring Tenacity, and at least two artifact creatures on the board.",
+      "Also commit when the opponent has no sweepers or removal in hand, or when you can force them to use interaction on non-lethal threats."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Licia, Sanguine Tribune",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Enduring Tenacity",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Indulging Patrician",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overcasting spells without targets, leaving Licia vulnerable to removal.",
+    "Always sequence spells to grow Licia before committing artifact creatures.",
+    "Remember Licia's ability is sorcery-speed, so plan attacks and blocks accordingly.",
+    "Enduring Tenacity synergizes best with instant-speed spells, so keep your hand flexible.",
+    "Watch for artifact hate in the metagame and sideboard accordingly.",
+    "Practice spell sequencing in practice games to optimize turn order and mana efficiency."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multi-target, or split-second spells if available. Cast threats in response to counterspells, or use Licia's ability to protect creatures. Rely on Enduring Tenacity to make threats resilient enough to trade through counters. Sequence spells to force counterspells on non-critical targets.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Licia and artifact creatures. Use spot removal to stop key ramp creatures. Don't overextend; trade efficiently and stabilize with board wipes if available. Force them to interact with your board rather than letting them dig for their win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early spot removal and board wipes. Use Licia's ability to block or trade favorably. Stabilize by turn 3-4, then transition to value with Enduring Tenacity and artifact creatures. Don't let them race you; control the board and out-value them in the midgame.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with Licia and artifact creatures to force interaction. Cast spells to grow Licia and out-value their card draw. Use Enduring Tenacity to make threats unblockable or lethal. Don't let them stabilize; keep the pressure on and force them to use resources on your board rather than their combo.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing with better spell sequencing and artifact synergy. Prioritize removing their Licia or Enduring Tenacity. Use targeted removal to break their board. Control the spell slot economy and win the attrition war by maintaining card advantage and board presence.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (e.g., Wrath of God, Anger of the Gods), targeted removal on Licia, and combo win conditions.",
+    "Note when opponents hold up mana for counterspells or spot removal.",
+    "Track graveyard hate if they play it, and adjust your spell sequencing to avoid feeding it."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

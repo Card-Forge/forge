@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more lands and a cheap draw spell",
       "Hands containing Mox Amber and a blue instant/sorcery",
-      "Hands with Rona, Disciple of Gix and acceleration"
+      "Hands with Rona, Disciple of Gix and acceleration",
+      "Keep any hand with a land and at least one of Mox Amber, Stormchaser's Talent, or Valley Floodcaller.",
+      "Keep hands with early interaction if facing expected aggro."
     ],
     "mulligan_criteria": [
       "Hands with only lands or high-cost permanents",
       "Hands lacking blue spells to trigger Stormchaser's Talent or Valley Floodcaller",
-      "Hands with no combo pieces or mana acceleration"
+      "Hands with no combo pieces or mana acceleration",
+      "Mulligan hands with two or more lands, or hands lacking acceleration/card draw unless they contain multiple combo pieces."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Play lands and filter deck with cheap blue spells",
       "Prioritize finding Mox Amber to enable turn-two or turn-three combo attempts",
-      "Use draw engines to dig for Rona and additional mana sources"
+      "Use draw engines to dig for Rona and additional mana sources",
+      "Turn 1: Play a land, cast Mox Amber if possible, or hold for Stormchaser's Talent if it's a one-mana play.",
+      "Turn 2: Cast the other piece, begin cycling or drawing into Valley Floodcaller.",
+      "Prioritize untapped lands that can produce blue mana on demand and avoid tapping Mox Amber unless you can afford a one-turn delay."
     ],
     "mid_game": [
       "Assemble a critical mass of mana rocks and draw spells",
       "Cast Rona, Disciple of Gix once you have enough mana and cards to trigger a large draw",
-      "Protect combo pieces with counterspells or evasion if available"
+      "Protect combo pieces with counterspells or evasion if available",
+      "Preserve blue mana for protection spells until the combo is within two turns of winning.",
+      "Use card draw efficiently to avoid flooding",
+      "discard excess lands or redundant acceleration only when necessary.",
+      "Track opponent's mana and stack to time your pieces safely.",
+      "Commit threats only when you can protect them or when the board state is clear.",
+      "Avoid trading into removal unless it enables your combo or stabilizes against aggro."
     ],
     "late_game": [
       "Execute the mill combo to deplete the opponent's library",
       "Use infinite draw to find answers to board wipes or counterspells",
-      "Close out the game by casting a large threat or continuing to mill"
+      "Close out the game by casting a large threat or continuing to mill",
+      "Valley Floodcaller combined with Stormchaser's Talent's effect creates an unstoppable finish.",
+      "Secure it with counterspells or discard, then resolve the combo piece to win immediately.",
+      "Go all-in when you have the full combo in hand, protection for at least one piece, and the opponent has no immediate board wipe or hard counter.",
+      "Commit when you can resolve your win condition through the stack or on the opponent's turn."
     ]
   },
   "key_cards": [
@@ -64,7 +80,12 @@
     "Cast cheap instants and sorceries before playing permanents to maximize Stormchaser's Talent triggers",
     "Hold back Mox Amber until you have a blue spell to cast on the same turn to avoid wasting mana",
     "Trigger Valley Floodcaller with multiple blue spells in a single turn to accelerate into Rona",
-    "Delay casting Rona until you have enough cards in hand to ensure the mill effect outpaces the opponent's draw"
+    "Delay casting Rona until you have enough cards in hand to ensure the mill effect outpaces the opponent's draw",
+    "Mox Amber's tap ability can be a double-edged sword",
+    "only tap it for mana when you can't afford to wait a turn.",
+    "Stormchaser's Talent's timing is crucial\u2014cast it to maximize value or protect your combo.",
+    "Avoid overcommitting to the board without protection, as blue's lack of removal makes you vulnerable to sweepers.",
+    "Practice stack sequencing to ensure your combo resolves through typical disruption."
   ],
   "matchups": [
     {
@@ -93,6 +114,21 @@
         "Hand traps",
         "Fast win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use layered threats, cast pieces at end step, or rely on uncounterable effects if available. Prioritize drawing through counterspells with card draw and force them to use resources on your early pieces.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to interrupt their mana development. Use spot removal on key ramp creatures and hold up counterspells for their finishers. Disrupt their acceleration to delay their game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card draw and protection. Sideboard in more counterspells and discard to disrupt their assembly. Control the stack and force them to overcommit before you execute.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -100,10 +136,14 @@
     "Field of the Dead",
     "Thoughtseize",
     "Teferi, Hero of Dominaria",
-    "Lightning Strike"
+    "Lightning Strike",
+    "Watch for counterspells on stack (hold up protection), graveyard hate (Golgari), and board wipes.",
+    "Note when opponents tap out for removal or counters, as this creates windows to cast combo pieces.",
+    "Track when they use their main phase resources, leaving them vulnerable to disruption."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:48:48+00:00",
     "model": "local-model",
@@ -119,6 +159,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

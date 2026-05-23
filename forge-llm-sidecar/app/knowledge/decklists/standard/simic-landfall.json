@@ -1,0 +1,113 @@
+{
+  "archetype": "Simic Landfall",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/simic-landfall.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Ba Sing Se"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 4,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Earthbender Ascension"
+    },
+    {
+      "qty": 3,
+      "name": "Escape Tunnel"
+    },
+    {
+      "qty": 4,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 9,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Icetill Explorer"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Lumbering Worldwagon"
+    },
+    {
+      "qty": 3,
+      "name": "Mightform Harmonizer"
+    },
+    {
+      "qty": 4,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 3,
+      "name": "Sapling Nursery"
+    },
+    {
+      "qty": 4,
+      "name": "Sazh's Chocobo"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 2,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 1,
+      "name": "Willowrush Verge"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 2,
+      "name": "Frenzied Baloth"
+    },
+    {
+      "qty": 1,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 2,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 2,
+      "name": "Leatherhead, Swamp Stalker"
+    },
+    {
+      "qty": 4,
+      "name": "Mossborn Hydra"
+    },
+    {
+      "qty": 1,
+      "name": "Sapling Nursery"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    }
+  ]
+}

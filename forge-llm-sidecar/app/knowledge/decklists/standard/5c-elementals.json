@@ -1,0 +1,145 @@
+{
+  "archetype": "5c Elementals",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/5c-elementals.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ashling, Rekindled"
+    },
+    {
+      "qty": 2,
+      "name": "Bounce Off"
+    },
+    {
+      "qty": 2,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 3,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Cori Mountain Monastery"
+    },
+    {
+      "qty": 3,
+      "name": "Deceit"
+    },
+    {
+      "qty": 4,
+      "name": "Flamebraider"
+    },
+    {
+      "qty": 3,
+      "name": "Ill-Timed Explosion"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Pit of Offerings"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Vinestalk"
+    },
+    {
+      "qty": 3,
+      "name": "Roaming Throne"
+    },
+    {
+      "qty": 4,
+      "name": "Secluded Courtyard"
+    },
+    {
+      "qty": 1,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 3,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 2,
+      "name": "Sunderflock"
+    },
+    {
+      "qty": 1,
+      "name": "Thundering Falls"
+    },
+    {
+      "qty": 4,
+      "name": "Vibrance"
+    },
+    {
+      "qty": 3,
+      "name": "Winternight Stories"
+    },
+    {
+      "qty": 4,
+      "name": "Wistfulness"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Beza, the Bounding Spring"
+    },
+    {
+      "qty": 2,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 1,
+      "name": "Deceit"
+    },
+    {
+      "qty": 2,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 1,
+      "name": "Flashfreeze"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 1,
+      "name": "Petrified Hamlet"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Ygra, Eater of All"
+    }
+  ]
+}

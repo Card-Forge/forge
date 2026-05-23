@@ -1,0 +1,129 @@
+{
+  "archetype": "Gruul Prowess",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/gruul-prowess.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Academic Dispute"
+    },
+    {
+      "qty": 4,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Copperline Gorge"
+    },
+    {
+      "qty": 2,
+      "name": "Den of the Bugbear"
+    },
+    {
+      "qty": 4,
+      "name": "Emberheart Challenger"
+    },
+    {
+      "qty": 4,
+      "name": "Kumano Faces Kakkazan"
+    },
+    {
+      "qty": 4,
+      "name": "Monastery Swiftspear"
+    },
+    {
+      "qty": 2,
+      "name": "Monstrous Rage"
+    },
+    {
+      "qty": 5,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Pawpatch Recruit"
+    },
+    {
+      "qty": 4,
+      "name": "Questing Druid"
+    },
+    {
+      "qty": 2,
+      "name": "Ramunap Ruins"
+    },
+    {
+      "qty": 2,
+      "name": "Reckless Rage"
+    },
+    {
+      "qty": 4,
+      "name": "Screaming Nemesis"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    },
+    {
+      "qty": 4,
+      "name": "Soul-Scar Mage"
+    },
+    {
+      "qty": 4,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 4,
+      "name": "Thornspire Verge"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abandon Attachments"
+    },
+    {
+      "qty": 1,
+      "name": "Firebending Lesson"
+    },
+    {
+      "qty": 1,
+      "name": "Heroic Intervention"
+    },
+    {
+      "qty": 1,
+      "name": "Iroh's Demonstration"
+    },
+    {
+      "qty": 2,
+      "name": "Magebane Lizard"
+    },
+    {
+      "qty": 2,
+      "name": "Origin of Metalbending"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 1,
+      "name": "Redcap Melee"
+    },
+    {
+      "qty": 1,
+      "name": "Rending Volley"
+    },
+    {
+      "qty": 2,
+      "name": "Scorching Shot"
+    },
+    {
+      "qty": 1,
+      "name": "Seismic Sense"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    }
+  ]
+}

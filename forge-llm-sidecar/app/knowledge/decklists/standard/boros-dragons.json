@@ -1,0 +1,117 @@
+{
+  "archetype": "Boros Dragons",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/boros-dragons.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 3,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 4,
+      "name": "Clarion Conqueror"
+    },
+    {
+      "qty": 2,
+      "name": "Dragonhawk, Fate's Tempest"
+    },
+    {
+      "qty": 2,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 4,
+      "name": "Inspiring Vantage"
+    },
+    {
+      "qty": 1,
+      "name": "Lorehold, the Historian"
+    },
+    {
+      "qty": 4,
+      "name": "Maelstrom of the Spirit Dragon"
+    },
+    {
+      "qty": 4,
+      "name": "Magmatic Hellkite"
+    },
+    {
+      "qty": 4,
+      "name": "Momo, Friendly Flier"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 4,
+      "name": "Nova Hellkite"
+    },
+    {
+      "qty": 4,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 4,
+      "name": "Sarkhan, Dragon Ascendant"
+    },
+    {
+      "qty": 1,
+      "name": "Spectacular Tactics"
+    },
+    {
+      "qty": 4,
+      "name": "Sunbillow Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Twinmaw Stormbrood"
+    },
+    {
+      "qty": 4,
+      "name": "Voice of Victory"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Doorkeeper Thrull"
+    },
+    {
+      "qty": 1,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 2,
+      "name": "High Noon"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 4,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 1,
+      "name": "Slagstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Spectacular Tactics"
+    },
+    {
+      "qty": 2,
+      "name": "The Legend of Roku"
+    }
+  ]
+}

@@ -1,0 +1,584 @@
+{
+  "schema_version": 1,
+  "name": "Jeskai Ascendancy",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "This five-color Pioneer archetype leverages incremental board presence and card advantage to outlast aggressive decks while scaling into a dominant late-game board state. By cycling through low-cost creatures and talent-based draw engines, the deck maintains tempo while searching for its namesake finisher. The strategy relies on careful resource management across W/U/B/R/G to stabilize and eventually overwhelm opponents.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 31,
+      "cards": [
+        "Badgermole Cub",
+        "Boomerang Basics",
+        "Consider",
+        "Divide by Zero",
+        "Fiery Impulse",
+        "Impolite Entrance",
+        "Jeskai Ascendancy",
+        "Opt",
+        "Stormchaser's Talent",
+        "True Ancestry"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 27,
+      "cards": [
+        "Accumulate Wisdom",
+        "Badgermole Cub",
+        "Consider",
+        "Flow State",
+        "Jeskai Ascendancy",
+        "Opt",
+        "Restless Spire",
+        "Sleight of Hand",
+        "Stock Up",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Badgermole Cub",
+        "Jeskai Ascendancy",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 17,
+      "cards": [
+        "Badgermole Cub",
+        "Jeskai Ascendancy",
+        "Stormchaser's Talent",
+        "Sylvan Caryatid",
+        "Toph, Hardheaded Teacher"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Boomerang Basics",
+        "Divide by Zero",
+        "Fiery Impulse",
+        "Fire Magic",
+        "Firebending Lesson",
+        "Origin of Metalbending",
+        "Stormchaser's Talent",
+        "Toph, Hardheaded Teacher",
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 11,
+      "cards": [
+        "Badgermole Cub",
+        "Fire Magic",
+        "Ruinous Waterbending",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "It'll Quench Ya!",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 14,
+      "cards": [
+        "Badgermole Cub",
+        "Enter the Avatar State",
+        "Origin of Metalbending",
+        "Stormchaser's Talent",
+        "Sylvan Caryatid"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 9,
+      "cards": [
+        "Divide by Zero",
+        "Jeskai Ascendancy",
+        "Toph, Hardheaded Teacher"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 18,
+      "cards": [
+        "Accumulate Wisdom",
+        "Badgermole Cub",
+        "Consider",
+        "Fiery Impulse",
+        "Flow State",
+        "Stormchaser's Talent",
+        "Toph, Hardheaded Teacher",
+        "Tormod's Crypt",
+        "True Ancestry"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 19,
+      "cards": [
+        "Badgermole Cub",
+        "Boomerang Basics",
+        "Dai Li Indoctrination",
+        "Divide by Zero",
+        "Stormchaser's Talent",
+        "Toph, Hardheaded Teacher",
+        "True Ancestry"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 3
+    },
+    "engines": {
+      "target_count": 13,
+      "cards": [
+        "Badgermole Cub",
+        "Jeskai Ascendancy",
+        "Stormchaser's Talent",
+        "Toph, Hardheaded Teacher"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Jeskai Ascendancy",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Badgermole Cub"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Badgermole Cub",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 37,
+      "cards": [
+        "Badgermole Cub",
+        "Botanical Sanctum",
+        "Copperline Gorge",
+        "Hallowed Fountain",
+        "Jeskai Ascendancy",
+        "Mana Confluence",
+        "Restless Spire",
+        "Sacred Foundry",
+        "Seachrome Coast",
+        "Spirebluff Canal",
+        "Starting Town",
+        "Steam Vents",
+        "Stomping Ground",
+        "Stormchaser's Talent",
+        "Sylvan Caryatid",
+        "Temple Garden"
+      ],
+      "mainboard_count": 37,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 22,
+      "cards": [
+        "Botanical Sanctum",
+        "Copperline Gorge",
+        "Hallowed Fountain",
+        "Island",
+        "Mana Confluence",
+        "Restless Spire",
+        "Sacred Foundry",
+        "Seachrome Coast",
+        "Spirebluff Canal",
+        "Starting Town",
+        "Steam Vents",
+        "Stomping Ground",
+        "Temple Garden"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.39
+  },
+  "dual_role_cards": [
+    {
+      "card": "Accumulate Wisdom",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Badgermole Cub",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boomerang Basics",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Botanical Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Consider",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Copperline Gorge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Divide by Zero",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fiery Impulse",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Magic",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jeskai Ascendancy",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Confluence",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Opt",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Origin of Metalbending",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restless Spire",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seachrome Coast",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirebluff Canal",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormchaser's Talent",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sylvan Caryatid",
+      "roles": [
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Toph, Hardheaded Teacher",
+      "roles": [
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tormod's Crypt",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "True Ancestry",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play Badgermole Cub before using removal to maximize its triggered value",
+    "Hold Stormchaser's Talent until after opponent commits resources to avoid wasting draw potential",
+    "Delay Jeskai Ascendancy until you have enough mana and board presence to trigger its full effect",
+    "Five-color mana can be inconsistent",
+    "practice land sequencing and fetch usage to avoid flooding or screwing."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and deploy Badgermole Cub immediately to generate value"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Stormchaser's Talent to draw cards and find answers or threats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize mana base consistency to support five-color casting"
+    }
+  ],
+  "kill_priority": [
+    "Badgermole Cub",
+    "Jeskai Ascendancy",
+    "Stormchaser's Talent",
+    "Toph, Hardheaded Teacher",
+    "Sylvan Caryatid"
+  ],
+  "interaction_to_disrupt": [
+    "It'll Quench Ya!",
+    "Spell Pierce",
+    "Badgermole Cub",
+    "Enter the Avatar State",
+    "Origin of Metalbending",
+    "Stormchaser's Talent",
+    "Sylvan Caryatid",
+    "Boomerang Basics"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/jeskai-ascendancy.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

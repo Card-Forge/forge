@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two one- or two-mana creatures",
       "Hands containing Street Wraith or Archon of Cruelty",
-      "Hands with early land drops to support the curve"
+      "Hands with early land drops to support the curve",
+      "Keep 4+ lands, at least one early threat (Street Wraith) or interaction (Fatal Push, Dismember, Go for the Throat).",
+      "Keep Stitcher's Supplier only if paired with a land or early play."
     ],
     "mulligan_criteria": [
       "Hands with only three-mana or higher cards",
       "Hands lacking creature threats",
-      "Hands with zero lands or four+ lands"
+      "Hands with zero lands or four+ lands",
+      "Mulligan hands with 3+ lands and no early plays, or multiple removal spells with no threats/lands."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Play Street Wraith on turn one to establish flying pressure and begin life manipulation",
       "Prioritize land drops to ensure Archon of Cruelty can be cast by turn two",
-      "Use early creatures to force opponent's removal spells"
+      "Use early creatures to force opponent's removal spells",
+      "Turn 1: Play a land, cast Street Wraith or Birds of Paradise if available.",
+      "Turn 2: Play a second land, cast Street Wraith if not played, or hold interaction for opponent's threats.",
+      "Sequence fetches/shocks to ensure black mana on turn 1-2 for Fatal Push, then green for threats.",
+      "Do not overextend",
+      "prioritize board control and graveyard setup."
     ],
     "mid_game": [
       "Cast Archon of Cruelty to remove key threats while establishing a 4/4 body",
       "Trigger Stitcher's Supplier to replay Street Wraith or Archon of Cruelty from the graveyard",
-      "Maintain board presence to force opponent into unfavorable trades"
+      "Maintain board presence to force opponent into unfavorable trades",
+      "Conserve interaction for key threats",
+      "do not burn removal on expendable tokens.",
+      "Manage your graveyard carefully\u2014Stitcher's Supplier and Archon of Cruelty both require it, but avoid filling it with unplayable cards.",
+      "Use discard to disrupt opponent's hand while preserving your own resources.",
+      "Commit threats only when you have removal for their answer or when you can trade favorably.",
+      "Hold back Archon of Cruelty until you have a clear path to cast it or can use it as a sac outlet."
     ],
     "late_game": [
       "Cycle Archon of Cruelty repeatedly to generate value and combat damage",
       "Leverage Stitcher's Supplier to continuously refill the board with recurring threats",
-      "Grind down opponent's life total through attrition and life drain triggers"
+      "Grind down opponent's life total through attrition and life drain triggers",
+      "Archon of Cruelty is the primary win condition.",
+      "Get it to the graveyard via discard, sacrifice, or death triggers, then cast it.",
+      "Follow up with Stitcher's Supplier recursion or additional threats to close out the game.",
+      "Go all-in when you have answered their key threats, have a clear path to cast Archon, and can protect it or use it as a sac outlet.",
+      "Commit when you can trade favorably and have interaction left for their response."
     ]
   },
   "key_cards": [
@@ -59,7 +78,13 @@
     "Hold Archon of Cruelty until you can cast it for maximum impact, such as removing a game-winning threat",
     "Sacrifice Stitcher's Supplier immediately after it resolves or when it dies naturally to avoid wasting its trigger",
     "Play Street Wraith before casting Archon of Cruelty to maximize early pressure and life swing",
-    "Manage your life total carefully, as Archon of Cruelty's departure deals damage to you"
+    "Manage your life total carefully, as Archon of Cruelty's departure deals damage to you",
+    "Archon of Cruelty is a sorcery, so cast it when you can protect it or use it as a sac outlet.",
+    "Stitcher's Supplier is fragile",
+    "protect it or use it as a sacrifice target.",
+    "Watch for graveyard hate and adjust your game plan accordingly.",
+    "Do not overextend with Street Wraith",
+    "it is a tool, not a win condition."
   ],
   "matchups": [
     {
@@ -88,16 +113,37 @@
         "Card draw engines",
         "Resilient creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counters, cast Archon at end step or when they lack mana, or use it as a sacrifice outlet for Stitcher's. Avoid casting it into known counters; instead, pressure with early threats and removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Street Wraith and hold interaction for their mana dorks or finishers. Do not let them get ahead; use Fatal Push and Dismember to disrupt their acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the value war by using discard to disrupt their graveyard and hand. Trade efficiently, prioritize Stitcher's Supplier recursion, and use Blood Moon if available. Out-value them by managing your graveyard better and closing with Archon when they run out of answers.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Flying creatures that bypass your ground blockers",
     "Board wipes that clear your recurring threats",
     "Direct damage spells that bypass your life gain strategy",
-    "Wide creature spreads that overwhelm your removal"
+    "Wide creature spreads that overwhelm your removal",
+    "Watch for graveyard hate (Rest in Peace, Leyline of the Void, Surgical Extraction) and discard spells.",
+    "Track opponent's hand for counters or removal.",
+    "Note when they start casting their win conditions",
+    "adjust interaction accordingly.",
+    "Pay attention to their graveyard size for Stitcher's value."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:57:19+00:00",
     "model": "local-model",
@@ -113,7 +159,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

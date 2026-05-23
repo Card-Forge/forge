@@ -1,0 +1,380 @@
+{
+  "archetype": "Narci, Fable Singer",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/narci-fable-singer.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Anguished Unmaking"
+    },
+    {
+      "qty": 1,
+      "name": "Anikthea, Hand of Erebos"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archon of Sun's Grace"
+    },
+    {
+      "qty": 1,
+      "name": "Austere Command"
+    },
+    {
+      "qty": 1,
+      "name": "Barbara Wright"
+    },
+    {
+      "qty": 1,
+      "name": "Binding the Old Gods"
+    },
+    {
+      "qty": 1,
+      "name": "Bountiful Promenade"
+    },
+    {
+      "qty": 1,
+      "name": "Branchloft Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Calix, Guided by Fate"
+    },
+    {
+      "qty": 1,
+      "name": "Caves of Koilos"
+    },
+    {
+      "qty": 1,
+      "name": "Chromatic Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Clash of the Eikons"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Composer of Spring"
+    },
+    {
+      "qty": 1,
+      "name": "Darksteel Mutation"
+    },
+    {
+      "qty": 1,
+      "name": "Dawn's Truce"
+    },
+    {
+      "qty": 1,
+      "name": "Defense of the Heart"
+    },
+    {
+      "qty": 1,
+      "name": "Demon of Fate's Design"
+    },
+    {
+      "qty": 1,
+      "name": "Eidolon of Blossoms"
+    },
+    {
+      "qty": 1,
+      "name": "Elspeth Conquers Death"
+    },
+    {
+      "qty": 1,
+      "name": "Enlightened Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Evolution Sage"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Extinguish All Hope"
+    },
+    {
+      "qty": 1,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Farseek"
+    },
+    {
+      "qty": 1,
+      "name": "Fertile Ground"
+    },
+    {
+      "qty": 1,
+      "name": "Forbidden Orchard"
+    },
+    {
+      "qty": 5,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Ghostly Prison"
+    },
+    {
+      "qty": 1,
+      "name": "Grateful Apparition"
+    },
+    {
+      "qty": 1,
+      "name": "Helm of the Gods"
+    },
+    {
+      "qty": 1,
+      "name": "Heroic Intervention"
+    },
+    {
+      "qty": 1,
+      "name": "Historian's Boon"
+    },
+    {
+      "qty": 1,
+      "name": "Ishgard, the Holy See"
+    },
+    {
+      "qty": 1,
+      "name": "Isolated Chapel"
+    },
+    {
+      "qty": 1,
+      "name": "Jukai Naturalist"
+    },
+    {
+      "qty": 1,
+      "name": "Karn's Bastion"
+    },
+    {
+      "qty": 1,
+      "name": "Kenrith's Transformation"
+    },
+    {
+      "qty": 1,
+      "name": "Kodama's Reach"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Metastatic Evangel"
+    },
+    {
+      "qty": 1,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Narci, Fable Singer"
+    },
+    {
+      "qty": 1,
+      "name": "Necroblossom Snarl"
+    },
+    {
+      "qty": 1,
+      "name": "Nesting Grounds"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 3,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Power Conduit"
+    },
+    {
+      "qty": 1,
+      "name": "Reflecting Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Revitalizing Repast"
+    },
+    {
+      "qty": 1,
+      "name": "Sanctum Weaver"
+    },
+    {
+      "qty": 1,
+      "name": "Sandsteppe Citadel"
+    },
+    {
+      "qty": 1,
+      "name": "Sanguine Bond"
+    },
+    {
+      "qty": 1,
+      "name": "Satsuki, the Living Lore"
+    },
+    {
+      "qty": 1,
+      "name": "Shattered Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Shineshadow Snarl"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Starfield Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 1,
+      "name": "Sterling Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Strength of the Harvest"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Anima"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Bahamut"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Fenrir"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Good King Mog XII"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Knights of Round"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Primal Garuda"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Primal Odin"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Titan"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Yojimbo"
+    },
+    {
+      "qty": 1,
+      "name": "Sungrass Prairie"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swiftfoot Boots"
+    },
+    {
+      "qty": 1,
+      "name": "Sythis, Harvest's Hand"
+    },
+    {
+      "qty": 1,
+      "name": "Tale of Tin\u00faviel"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi's Protection"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Malady"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Silence"
+    },
+    {
+      "qty": 1,
+      "name": "The Creation of Avacyn"
+    },
+    {
+      "qty": 1,
+      "name": "The Cruelty of Gix"
+    },
+    {
+      "qty": 1,
+      "name": "The Eldest Reborn"
+    },
+    {
+      "qty": 1,
+      "name": "The First Iroan Games"
+    },
+    {
+      "qty": 1,
+      "name": "The Legend of Yangchen"
+    },
+    {
+      "qty": 1,
+      "name": "The Weatherseed Treaty"
+    },
+    {
+      "qty": 1,
+      "name": "The World Spell"
+    },
+    {
+      "qty": 1,
+      "name": "Three Blind Mice"
+    },
+    {
+      "qty": 1,
+      "name": "Weaver of Harmony"
+    },
+    {
+      "qty": 1,
+      "name": "Woodland Cemetery"
+    },
+    {
+      "qty": 1,
+      "name": "Yenna, Redtooth Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Yuna, Hope of Spira"
+    }
+  ],
+  "sideboard": []
+}

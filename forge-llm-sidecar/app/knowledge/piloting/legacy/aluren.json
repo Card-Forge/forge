@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Lotus Petal or Aluren",
       "Hands with Show and Tell and at least two lands",
-      "Hands with early mana acceleration and draw"
+      "Hands with early mana acceleration and draw",
+      "Keep hands with two or more sources of fast mana (Lotus Petal, Mox, Dark Ritual, etc.) paired with Aluren, Show and Tell, or a draw spell.",
+      "Keep 4+ lands if you have zero fast mana."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or mana sources",
       "Hands with only high-cost permanents and no Aluren",
-      "Hands with no interaction or combo pieces"
+      "Hands with no interaction or combo pieces",
+      "Mulligan hands with only lands, only non-mana non-combo cards, or a broken mana base that can't cast your key spells by turn two."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Prioritize playing Lotus Petal and Aluren to establish cost reduction and mana generation",
       "Use Show and Tell for {1} to fetch a large threat as soon as possible",
-      "Protect key permanents from early disruption"
+      "Protect key permanents from early disruption",
+      "Turn 1: Play a land, cast fast mana, and either cast Aluren or draw spells to dig for your combo.",
+      "Turn 2: Cast Show and Tell, fetch a massive creature like Griselbrand or Emrakul, and cast it for free via Aluren.",
+      "If Aluren isn't in play, use fast mana to cast Show and Tell and target a creature in your graveyard.",
+      "Land sequencing: Prioritize fetches and shocks to generate fast mana, then play basics to ensure you can cast Aluren and Show and Tell without flooding."
     ],
     "mid_game": [
       "Apply consistent pressure with fetched creatures",
       "Use excess mana to cast additional spells or fetch more threats",
-      "Maintain board presence while searching for answers to opponent's threats"
+      "Maintain board presence while searching for answers to opponent's threats",
+      "Hoard fast mana until you have the full combo package or a clear win condition.",
+      "Use card draw (Necropotence, Glimpse the Unthinkable, Brainstorm) to dig for pieces while managing your life total and graveyard.",
+      "If facing graveyard hate, avoid unnecessary graveyard interactions and pivot to direct combo wins or Leyline of the Void.",
+      "Commit threats only when you can win the game or have a backup plan to protect them.",
+      "Don't overextend into board wipes or sweepers unless you're confident you can win in response.",
+      "Use counterspells and discard to protect your combo pieces and disrupt opponent's key spells."
     ],
     "late_game": [
       "Leverage mana advantage to outvalue opponents",
       "Use Show and Tell repeatedly to fetch game-ending permanents",
-      "Stabilize against control decks by reducing removal costs to {1}"
+      "Stabilize against control decks by reducing removal costs to {1}",
+      "Griselbrand (life gain and massive card draw), Emrakul, the Aeons Torn (draw seven and exile permanents), Karn, the Great Creator (Engineered Plague or Leyline of the Void), and Bogardan Hellkite (board sweep and direct damage).",
+      "Get there by resolving Show and Tell or casting Aluren creatures, then following up with the finisher.",
+      "Go all-in when you have the full combo package (fast mana + Aluren/Show and Tell + target) or when you can win in a single turn.",
+      "Commit to the board if you have a clear path to victory and your opponent has no immediate answers."
     ]
   },
   "key_cards": [
@@ -59,7 +76,11 @@
     "Play Lotus Petal before Aluren to generate mana for Show and Tell",
     "Cast Aluren before Show and Tell to reduce its cost to {1}",
     "Use Show and Tell to fetch threats with mana value 7 or greater",
-    "Prioritize fetching creatures that can immediately impact the board"
+    "Prioritize fetching creatures that can immediately impact the board",
+    "Common mistakes include mulliganing too aggressively, overcommitting to the board without a win condition, and ignoring graveyard hate.",
+    "Aluren bypasses casting costs but not targeting or counterspells, so plan accordingly.",
+    "Karn can find Engineered Plague or Leyline of the Void, providing a secondary win condition.",
+    "Always have a backup plan if your primary combo is disrupted."
   ],
   "matchups": [
     {
@@ -88,6 +109,21 @@
         "Hand disruption",
         "Graveyard hate"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells before they can be cast. Cast your combo pieces in response to counterspells, or rely on Aluren's free casting to bypass targeting if they only counter spells. Have multiple targets for Show and Tell to make it difficult to counter everything.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use discard to hit their mana rocks and slow their acceleration. Bring in artifact hate to remove their fast mana. Play around their big spells by holding up counterspells or discard, and aim to win before they can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by using discard to hit their combo pieces and card draw to out-draw them. Prioritize graveyard hate if they rely on it, and aim to resolve your combo before they can. Control the board with counterspells and discard to protect your game plan.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +131,14 @@
     "Lightning Bolt",
     "Path to Exile",
     "Force of Will",
-    "Swords to Plowshares"
+    "Swords to Plowshares",
+    "Watch for discard spells to see what they're targeting, and note when opponents tap out for counterspells versus when they're holding up.",
+    "Pay attention to graveyard interactions\u2014if they're casting Leyline or Rest in Peace, your combo game plan is severely compromised.",
+    "Track their mana development to anticipate when they can answer your threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:44:47+00:00",
     "model": "local-model",
@@ -114,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

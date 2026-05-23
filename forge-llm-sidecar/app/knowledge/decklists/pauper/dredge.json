@@ -1,0 +1,101 @@
+{
+  "archetype": "Dredge",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/dredge.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Circle of the Land Druid"
+    },
+    {
+      "qty": 4,
+      "name": "Dread Return"
+    },
+    {
+      "qty": 4,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Generous Ent"
+    },
+    {
+      "qty": 1,
+      "name": "Haunted Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Holdout Settlement"
+    },
+    {
+      "qty": 4,
+      "name": "Khalni Garden"
+    },
+    {
+      "qty": 4,
+      "name": "Lotleth Giant"
+    },
+    {
+      "qty": 4,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 2,
+      "name": "Masked Vandal"
+    },
+    {
+      "qty": 4,
+      "name": "Molten Gatekeeper"
+    },
+    {
+      "qty": 2,
+      "name": "Mortuary Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Satyr Wayfinder"
+    },
+    {
+      "qty": 4,
+      "name": "Scrapwork Mutt"
+    },
+    {
+      "qty": 4,
+      "name": "Stinkweed Imp"
+    },
+    {
+      "qty": 2,
+      "name": "Survivors' Encampment"
+    },
+    {
+      "qty": 4,
+      "name": "Town Greeter"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Ridgeline"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Ancient Grudge"
+    },
+    {
+      "qty": 3,
+      "name": "Fang Dragon"
+    },
+    {
+      "qty": 2,
+      "name": "Flaring Pain"
+    },
+    {
+      "qty": 4,
+      "name": "Gnaw to the Bone"
+    },
+    {
+      "qty": 3,
+      "name": "Momentary Blink"
+    }
+  ]
+}

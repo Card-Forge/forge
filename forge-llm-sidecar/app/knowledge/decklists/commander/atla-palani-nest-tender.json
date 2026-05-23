@@ -1,0 +1,316 @@
+{
+  "archetype": "Atla Palani, Nest Tender",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/atla-palani-nest-tender.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Annie Joins Up"
+    },
+    {
+      "qty": 1,
+      "name": "Anointed Procession"
+    },
+    {
+      "qty": 1,
+      "name": "Apex Altisaur"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Ashnod's Altar"
+    },
+    {
+      "qty": 1,
+      "name": "Atla Palani, Nest Tender"
+    },
+    {
+      "qty": 1,
+      "name": "Bellowing Aegisaur"
+    },
+    {
+      "qty": 1,
+      "name": "Caged Sun"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivate"
+    },
+    {
+      "qty": 1,
+      "name": "Determined Iteration"
+    },
+    {
+      "qty": 1,
+      "name": "Dinosaur Egg"
+    },
+    {
+      "qty": 1,
+      "name": "Dinosaurs on a Spaceship"
+    },
+    {
+      "qty": 1,
+      "name": "Druid's Deliverance"
+    },
+    {
+      "qty": 1,
+      "name": "Earthshaker Dreadmaw"
+    },
+    {
+      "qty": 1,
+      "name": "Etali, Primal Conqueror"
+    },
+    {
+      "qty": 1,
+      "name": "Etali, Primal Storm"
+    },
+    {
+      "qty": 1,
+      "name": "Farseek"
+    },
+    {
+      "qty": 1,
+      "name": "Forerunner of the Empire"
+    },
+    {
+      "qty": 9,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Garruk's Uprising"
+    },
+    {
+      "qty": 1,
+      "name": "Gauntlet of Power"
+    },
+    {
+      "qty": 1,
+      "name": "Ghalta and Mavren"
+    },
+    {
+      "qty": 1,
+      "name": "Ghalta, Primal Hunger"
+    },
+    {
+      "qty": 1,
+      "name": "Ghalta, Stampede Tyrant"
+    },
+    {
+      "qty": 1,
+      "name": "Gishath, Sun's Avatar"
+    },
+    {
+      "qty": 1,
+      "name": "Goring Ceratops"
+    },
+    {
+      "qty": 1,
+      "name": "Growing Ranks"
+    },
+    {
+      "qty": 1,
+      "name": "Harmonic Prodigy"
+    },
+    {
+      "qty": 1,
+      "name": "High Market"
+    },
+    {
+      "qty": 1,
+      "name": "Hunting Velociraptor"
+    },
+    {
+      "qty": 1,
+      "name": "Jetmir's Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Jungle Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Kinjalli's Caller"
+    },
+    {
+      "qty": 1,
+      "name": "Knight of the Stampede"
+    },
+    {
+      "qty": 1,
+      "name": "Kodama's Reach"
+    },
+    {
+      "qty": 1,
+      "name": "Marauding Raptor"
+    },
+    {
+      "qty": 1,
+      "name": "Maskwood Nexus"
+    },
+    {
+      "qty": 1,
+      "name": "Mirror Entity"
+    },
+    {
+      "qty": 1,
+      "name": "Monster Manual"
+    },
+    {
+      "qty": 1,
+      "name": "Mosswort Bridge"
+    },
+    {
+      "qty": 9,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Nesting Dovehawk"
+    },
+    {
+      "qty": 1,
+      "name": "Nesting Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Otepec Huntmaster"
+    },
+    {
+      "qty": 1,
+      "name": "Palani's Hatcher"
+    },
+    {
+      "qty": 1,
+      "name": "Pantlaza, Sun-Favored"
+    },
+    {
+      "qty": 1,
+      "name": "Parallel Lives"
+    },
+    {
+      "qty": 8,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Quartzwood Crasher"
+    },
+    {
+      "qty": 1,
+      "name": "Raging Swordtooth"
+    },
+    {
+      "qty": 1,
+      "name": "Rampant Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Ranging Raptors"
+    },
+    {
+      "qty": 1,
+      "name": "Ravenous Tyrannosaurus"
+    },
+    {
+      "qty": 1,
+      "name": "Regal Behemoth"
+    },
+    {
+      "qty": 1,
+      "name": "Regisaur Alpha"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rootborn Defenses"
+    },
+    {
+      "qty": 1,
+      "name": "Scion of Calamity"
+    },
+    {
+      "qty": 1,
+      "name": "Seedborn Muse"
+    },
+    {
+      "qty": 1,
+      "name": "Silverclad Ferocidons"
+    },
+    {
+      "qty": 1,
+      "name": "Skullclamp"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sundering Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Swiftfoot Boots"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Altisaur"
+    },
+    {
+      "qty": 1,
+      "name": "Thornbite Staff"
+    },
+    {
+      "qty": 1,
+      "name": "Thunderherd Migration"
+    },
+    {
+      "qty": 1,
+      "name": "Topiary Stomper"
+    },
+    {
+      "qty": 1,
+      "name": "Trapjaw Tyrant"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Incubator"
+    },
+    {
+      "qty": 1,
+      "name": "Vaultborn Tyrant"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Sun's Avatar"
+    },
+    {
+      "qty": 1,
+      "name": "Wayward Swordtooth"
+    },
+    {
+      "qty": 1,
+      "name": "Wrathful Raptors"
+    },
+    {
+      "qty": 1,
+      "name": "Yavimaya, Cradle of Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Zacama, Primal Calamity"
+    }
+  ],
+  "sideboard": []
+}

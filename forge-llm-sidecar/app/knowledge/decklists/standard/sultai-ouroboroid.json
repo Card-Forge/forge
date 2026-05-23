@@ -1,0 +1,133 @@
+{
+  "archetype": "Sultai Ouroboroid",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/sultai-ouroboroid.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Awaken the Honored Dead"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 4,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 2,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 2,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 2,
+      "name": "Gene Pollinator"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 4,
+      "name": "Nature's Rhythm"
+    },
+    {
+      "qty": 2,
+      "name": "Ouroboroid"
+    },
+    {
+      "qty": 4,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 3,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 4,
+      "name": "Spider Manifestation"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 3,
+      "name": "Superior Spider-Man"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Wastewood Verge"
+    },
+    {
+      "qty": 3,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 2,
+      "name": "Willowrush Verge"
+    },
+    {
+      "qty": 3,
+      "name": "Winternight Stories"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 3,
+      "name": "Deceit"
+    },
+    {
+      "qty": 1,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 2,
+      "name": "Maelstrom Pulse"
+    },
+    {
+      "qty": 1,
+      "name": "Nowhere to Run"
+    },
+    {
+      "qty": 2,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 3,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 1,
+      "name": "Strategic Betrayal"
+    }
+  ]
+}

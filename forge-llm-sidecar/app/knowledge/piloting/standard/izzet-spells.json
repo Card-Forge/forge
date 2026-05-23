@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more cheap spells",
       "Hands containing a signature card paired with interaction",
-      "Hands that can play a turn-one spell or creature"
+      "Hands that can play a turn-one spell or creature",
+      "Keep hands with 2-3 lands and at least one spell-casting engine (Flow State, Slickshot Show-Off, or a cheap cantrip).",
+      "Keep hands with multiple cheap instants/sorceries (1-2 mana) that enable Stormchaser's Talent or Show-Off."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction or card draw",
       "Hands with only high-cost finishers",
-      "Hands missing land drops for the first three turns"
+      "Hands missing land drops for the first three turns",
+      "Mulligan hands with 0-1 lands, three+ lands with no early spells, or hands lacking any way to cast multiple spells in one turn."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Play cheap spells to trigger Stormchaser's Talent and establish early tempo",
       "Deploy Slickshot Show-Off to apply pressure and enable spell synergies",
-      "Hold interaction for opponent's early threats"
+      "Hold interaction for opponent's early threats",
+      "Turn 1: Play a land, cast a cantrip or cheap spell to set up the turn.",
+      "If you have Flow State, play it on turn 1 or 2 if you have mana to cast a spell from your library.",
+      "Turn 2: Cast a second spell, ideally a cantrip or removal, to build spell count.",
+      "If you have Slickshot Show-Off, cast it on turn 2 or 3 after casting 1-2 spells to make it a meaningful threat.",
+      "Always prioritize casting spells over holding up mana for counterspells unless facing a known control deck."
     ],
     "mid_game": [
       "Cast Flow State to accelerate card advantage and stabilize the board",
       "Use removal and counterspells to protect key permanents",
-      "Cycle through the deck to find finishers and additional value engines"
+      "Cycle through the deck to find finishers and additional value engines",
+      "Treat your library as a secondary hand when Flow State is active.",
+      "Prioritize casting instants/sorceries over creatures to maximize spell count for Stormchaser's Talent or Show-Off.",
+      "Don't overextend creatures if you can win by casting spells.",
+      "Manage your mana to ensure you can cast your win condition in a single turn",
+      "hold priority to chain spells.",
+      "Commit creatures like Slickshot Show-Off only when you can protect them or when you're ready to swing for lethal."
     ],
     "late_game": [
       "Leverage accumulated card advantage to out-resource opponents",
       "Maintain board control while chipping away at life totals",
-      "Commit to all-in spells when the opponent runs out of answers"
+      "Commit to all-in spells when the opponent runs out of answers",
+      "Stormchaser's Talent is the primary finisher",
+      "cast it after 3+ spells in a turn for lethal.",
+      "Slickshot Show-Off can close the game if it's large enough and unblocked.",
+      "Flow State enables infinite or semi-infinite spell chains if paired with draw engines or cheap cantrips.",
+      "Go all-in when you have Flow State on the battlefield, enough mana to cast 4+ spells, and a clear path to lethal.",
+      "Also commit when the opponent has no interaction left or is at low life."
     ]
   },
   "key_cards": [
@@ -59,7 +79,13 @@
     "Hold up interaction until the opponent commits to a threat",
     "Cast cheap spells before playing permanents to maximize trigger counts",
     "Prioritize drawing cards over dealing damage when behind on tempo",
-    "Save removal for high-impact threats rather than early creatures"
+    "Save removal for high-impact threats rather than early creatures",
+    "Flow State is your engine",
+    "never cast it unless you can immediately cast an instant or sorcery from your library.",
+    "Stormchaser's Talent scales with the number of spells cast this turn, so sequence your spells carefully (e.g., cantrip -> removal -> Stormchaser's Talent).",
+    "Slickshot Show-Off is vulnerable to sweepers",
+    "don't rely on it as your only win condition.",
+    "Watch out for spell count math"
   ],
   "matchups": [
     {
@@ -88,16 +114,35 @@
         "Resilient creatures",
         "Value generators"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells to trade with counters. Cast your win condition in response to their spells, or use multiple spells to force multiple counters. Bring in more cantrips or discard to remove their counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Slickshot Show-Off and cantrips. Don't let them get to their big mana; use spot removal and discard to disrupt their land drops. If they ramp, win quickly with Stormchaser's Talent before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the spell war by having better sequencing and more interaction. Use discard to remove their Flow State or Stormchaser's Talent. Hold up counterspells for their win conditions. Prioritize casting spells in response to their spells to maximize your own spell count.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Direct damage spells",
     "Board wipe effects",
-    "Counterspell packages"
+    "Counterspell packages",
+    "Watch for counterspells (hold up mana or cast in response to their spells), sweepers (have a way to protect your win condition or win before it resolves), and graveyard hate.",
+    "Note when opponents tap out for big spells",
+    "that's your window to cast multiple spells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:29:05+00:00",
     "model": "local-model",
@@ -113,6 +158,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:25:03+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

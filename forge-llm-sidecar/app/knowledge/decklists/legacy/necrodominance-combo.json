@@ -1,0 +1,109 @@
+{
+  "archetype": "Necrodominance Combo",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/necrodominance-combo.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Beseech the Mirror"
+    },
+    {
+      "qty": 3,
+      "name": "Borne Upon a Wind"
+    },
+    {
+      "qty": 4,
+      "name": "Cabal Ritual"
+    },
+    {
+      "qty": 4,
+      "name": "Chrome Mox"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 4,
+      "name": "Elvish Spirit Guide"
+    },
+    {
+      "qty": 4,
+      "name": "Gemstone Mine"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 4,
+      "name": "Manamorphose"
+    },
+    {
+      "qty": 4,
+      "name": "Necrodominance"
+    },
+    {
+      "qty": 4,
+      "name": "Pact of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Simian Spirit Guide"
+    },
+    {
+      "qty": 3,
+      "name": "Summoner's Pact"
+    },
+    {
+      "qty": 1,
+      "name": "Tendrils of Agony"
+    },
+    {
+      "qty": 1,
+      "name": "Unmask"
+    },
+    {
+      "qty": 3,
+      "name": "Valakut Awakening"
+    },
+    {
+      "qty": 4,
+      "name": "Vault of Whispers"
+    },
+    {
+      "qty": 1,
+      "name": "Wild Cantor"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Foundation Breaker"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Claim"
+    },
+    {
+      "qty": 2,
+      "name": "Slaughter Pact"
+    },
+    {
+      "qty": 2,
+      "name": "Veil of Summer"
+    }
+  ]
+}

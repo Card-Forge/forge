@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two lands and a one-drop or two-drop creature",
       "Hands containing Kozilek's Command paired with early mana sources",
-      "Hands that include Blade of the Bloodchief and a creature to equip it to"
+      "Hands that include Blade of the Bloodchief and a creature to equip it to",
+      "Keep hands with 2-3 lands, Kozilek's Command, and at least one early enabler (Blade of the Bloodchief or combo starter).",
+      "Prioritize hands that can develop mana and establish a board by turn 2."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands and no early plays",
       "Hands lacking any creatures or counter-generating effects",
-      "Hands with only high-cost finishers and no ramp"
+      "Hands with only high-cost finishers and no ramp",
+      "Mulligan on 1-land hands, hands with only removal and no threats, or hands with multiple copies of the same low-impact card."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Prioritize land drops and play Basking Broodscale to establish early counter generation",
       "Use Kozilek's Command for small X values to draw cards and add initial counters",
-      "Avoid overcommitting to life loss if opponent has early removal or burn"
+      "Avoid overcommitting to life loss if opponent has early removal or burn",
+      "Turn 1: Play a land and hold for Kozilek's Command if facing disruption, or cast a cheap enabler.",
+      "Turn 2: Develop mana, deploy Blade of the Bloodchief or combo starter, and look to establish a board presence while preserving interaction for turn 3-4.",
+      "Sequence lands to ensure you can cast Kozilek's Command on time if needed."
     ],
     "mid_game": [
       "Equip Blade of the Bloodchief to your largest creature before combat",
       "Cast Devourer of Destiny to exile opponent's threats and transfer their counters to your board",
-      "Cycle through Kozilek's Command to maintain card advantage while steadily growing your threat"
+      "Cycle through Kozilek's Command to maintain card advantage while steadily growing your threat",
+      "Prioritize mana development for Kozilek's Command's versatility.",
+      "Use the graveyard strategically for value, but avoid overcommitting if graveyard hate is present.",
+      "Manage hand resources by holding interaction for key threats rather than burning it on minor plays.",
+      "Commit threats when you have a clear answer to the opponent's removal or when you can close the game.",
+      "Hold back if the opponent has sweepers or heavy disruption.",
+      "Use Blade of the Bloodchief's lifelink to stabilize against aggressive pushes."
     ],
     "late_game": [
       "Focus on maximizing combat damage triggers to snowball counters",
       "Use Kozilek's Command for larger X values to refill hand and pump for lethal",
-      "Maintain pressure to prevent opponent from setting up permanent answers or sweepers"
+      "Maintain pressure to prevent opponent from setting up permanent answers or sweepers",
+      "Assemble the combo loop to trigger Blade of the Bloodchief repeatedly for lethal damage, or use Kozilek's Command to clear the board and draw into a win condition.",
+      "Direct damage from death triggers or card draw into a finisher.",
+      "Go all-in when you have a guaranteed combo sequence, when the opponent is at lethal range, or when you can protect your combo pieces from removal.",
+      "Commit when you can out-value their interaction."
     ]
   },
   "key_cards": [
@@ -64,7 +80,11 @@
     "Always equip Blade of the Bloodchief before declaring attackers to ensure the life-loss bonus applies to combat damage",
     "Cast Kozilek's Command on your turn before combat to maximize the +X/+X bonus from the Blade",
     "Use Devourer of Destiny in response to opponent's ETB triggers or during their combat phase to disrupt their game plan",
-    "Save life total for Kozilek's Command when you need to draw into sweepers or additional finishers"
+    "Save life total for Kozilek's Command when you need to draw into sweepers or additional finishers",
+    "Be mindful of Blade of the Bloodchief's death trigger timing",
+    "it can be a double-edged sword if you accidentally sacrifice it to your own effects.",
+    "Kozilek's Command is your most versatile tool\u2014use it to answer problems rather than just as removal.",
+    "Avoid overcommitting to the combo if the board state is unfavorable, and always keep a backup plan in case your primary win condition is disrupted."
   ],
   "matchups": [
     {
@@ -96,6 +116,31 @@
         "Smuggler's Copter",
         "Thassa's Oracle"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Kozilek's Command's instant speed modes, split your combo into multiple steps, or rely on mana dorks/land drops to out-value counters. Cast threats in response to counterspells when possible.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize artifact/enchantment destruction, use lifegain to survive their early damage, and race with your own acceleration. Disrupt their mana base with targeted removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Mulligan for early interaction, use Kozilek's Command to remove key threats, stabilize with lifegain, and transition to a control/combo game plan. Don't overcommit to the combo if you're behind on the board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure, use card advantage to out-value their removal, and close the game before they can stabilize. Force them to use resources on your threats rather than their own game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war, prioritize protecting your combo pieces, and use Kozilek's Command to disrupt their setup. Trade efficiently and look for the first misstep in their combo sequence.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -103,10 +148,15 @@
     "Thoughtseize",
     "Teferi, Hero of Dominaria",
     "Rest in Peace",
-    "Field of the Dead"
+    "Field of the Dead",
+    "Watch for counterspells, sweepers, and graveyard hate.",
+    "Note when opponents tap out for key spells.",
+    "Track life totals carefully due to Blade of the Bloodchief's death trigger and opponent lifegain.",
+    "Pay attention to artifact/enchantment counts for Kozilek's Command targeting."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:47:01+00:00",
     "model": "local-model",
@@ -122,7 +172,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

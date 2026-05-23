@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early interaction or artifact lands",
       "Hands containing Sphere of Resistance or Lodestone Golem",
-      "Hands with multiple lands and a win condition"
+      "Hands with multiple lands and a win condition",
+      "Keep hands with 1-2 lands, Golos or Tireless Pilgrim, and at least one lock piece (Lodestone Golem, Sphere of Resistance).",
+      "Keep hands with acceleration + a lock piece, or Golos + Pilgrim + 2 lands."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or early answers",
       "Hands with only late-game cards",
-      "Hands without artifact synergy"
+      "Hands without artifact synergy",
+      "Mulligan hands with only lock pieces and no mana sources, multiple lands with no early plays, or hands lacking a way to cast turn-1/2 threats."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play artifact lands and cheap stax pieces",
       "Use Sphere of Resistance to tax opponent's early spells",
-      "Prioritize survival and resource denial"
+      "Prioritize survival and resource denial",
+      "Turn 1: Play a land, cast a mana artifact or Golos/Pilgrim if mana allows.",
+      "If you have acceleration, cast Lodestone Golem or Sphere of Resistance.",
+      "Turn 2: Use Golos/Pilgrim to generate mana, cast additional lock pieces, or start setting up the win condition.",
+      "Land sequencing: Prioritize fetching/playing lands that tap for blue or colorless, ensuring you can cast blue spells and artifacts."
     ],
     "mid_game": [
       "Deploy Lodestone Golem to tax combat and gain card advantage",
       "Search for Golos, Tireless Pilgrim to stabilize and draw cards",
-      "Maintain board presence while digging for answers"
+      "Maintain board presence while digging for answers",
+      "Mana is king.",
+      "Always prioritize casting lock pieces over drawing cards.",
+      "Use Golos/Pilgrim to generate mana for win conditions, not just more locks.",
+      "Manage hand by keeping answers for key threats.",
+      "Graveyard is usually not a primary focus unless facing Dredge.",
+      "Commit threats only when the board is locked down."
     ],
     "late_game": [
       "Use Golos to draw into finishers or additional stax",
       "Attack with artifact creatures to bypass opponent's defenses",
-      "Grind opponent out of resources through continuous taxes"
+      "Grind opponent out of resources through continuous taxes",
+      "Golos + Tireless Pilgrim generating massive mana to cast Emrakul, Aeons Torn, Ugin, or a combo finisher.",
+      "Alternatively, attacking with a massive threat or using a combo like Urza's Saga.",
+      "When you have locked the opponent out of relevant interactions and have enough mana to cast a win condition or attack for lethal.",
+      "Also commit when the opponent has no removal for your lock pieces."
     ]
   },
   "key_cards": [
@@ -58,7 +75,11 @@
   "sequencing_tips": [
     "Hold Sphere of Resistance until opponent casts key spells to maximize tax impact",
     "Play Lodestone Golem before opponent commits multiple creatures to the board",
-    "Use Golos to fetch lands when mana is tight, or fetch stax when board is clear"
+    "Use Golos to fetch lands when mana is tight, or fetch stax when board is clear",
+    "Common mistakes: Overcommitting Golos/Pilgrim too early without a win condition, failing to lock the opponent's mana, or ignoring graveyard strategies.",
+    "Unique interactions: Golos + Pilgrim can generate massive mana if you have enough artifacts.",
+    "Sphere of Resistance + Lodestone Golem can make spells uncastable.",
+    "Watch out for artifact destruction and graveyard recursion."
   ],
   "matchups": [
     {
@@ -105,6 +126,16 @@
         "Big finishers",
         "Protection spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap lock pieces that don't need to be countered, or cast them in response to counterspells. Use counterspells yourself if in the deck. Rely on the fact that lock pieces are often cheap or free with acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize locking their mana and hand. Use counterspells and discard to disrupt their setup. Golos/Pilgrim sequencing is key to out-generating their mana.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -112,10 +143,13 @@
     "Lightning Bolt",
     "Rest in Peace",
     "Field of the Dead",
-    "Thief of Hope"
+    "Thief of Hope",
+    "Watch for graveyard recursion (Dredge), mana acceleration (Oath), or artifact destruction (Initiative/Control).",
+    "Key tells: Opponent playing multiple lands, casting cheap creatures, or targeting your artifacts."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:53:15+00:00",
     "model": "local-model",
@@ -131,6 +165,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

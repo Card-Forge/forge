@@ -13,11 +13,13 @@
     "keep_criteria": [
       "Hands with early interaction",
       "Hands with board threats",
-      "Hands that maximize mana usage"
+      "Hands that maximize mana usage",
+      "Keep hands with 2-3 lands, at least one early interaction (Deadly Cover-Up or discard), and a turn-2 or turn-3 threat."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction or threats",
-      "Hands with poor mana curve"
+      "Hands with poor mana curve",
+      "Mulligan on 2 lands with no early plays, 3+ lands with no threats or interaction, or hands with multiple copies of the same card that don't synergize with your midgame plan."
     ],
     "examples": [
       {
@@ -39,17 +41,32 @@
     "early_game": [
       "Play interaction to disrupt opponent's resources",
       "Drop early threats to apply pressure",
-      "Maximize mana usage on every turn"
+      "Maximize mana usage on every turn",
+      "Turn 1: Play a land, potentially cast a cheap threat or hold for interaction.",
+      "Turn 2: Ramp with Ancient Cornucopia or play a midgame threat like Professor Dellian Fel if mana allows.",
+      "Prioritize establishing board presence while retaining removal for early aggression from Izzet or Landfall decks."
     ],
     "mid_game": [
       "Use tutors like Pillage the Bog and Analyze the Pollen to find lands or threats",
       "Manage board state against opponent's disruption",
-      "Apply steady pressure with creatures like Glissa and Trespasser"
+      "Apply steady pressure with creatures like Glissa and Trespasser",
+      "Balance mana for interaction vs. casting threats.",
+      "Use Ancient Cornucopia to dig for consistency, but avoid sacrificing it prematurely if you lack follow-up.",
+      "Leverage the graveyard for recursion or value, but track opponent graveyard hate to avoid overcommitting.",
+      "Commit threats when you have removal to answer their early aggression.",
+      "Hold back if you lack interaction and they have a wide board.",
+      "Trade efficiently, prioritizing removal on key tempo or combo pieces over chump-blocking."
     ],
     "late_game": [
       "Finish the game with Restless Cottage or Liliana's ultimate",
       "Leverage Sheoldred and Dreadknight for massive value",
-      "Use removal to clear path for finishers"
+      "Use removal to clear path for finishers",
+      "Professor Dellian Fel as a resilient threat, combined with graveyard recursion or card advantage to overwhelm.",
+      "Ancient Cornucopia can close games by drawing into the final answer or threat.",
+      "Apply incremental pressure until they lack resources to respond.",
+      "When you have card advantage, board control, and they have no immediate removal or board wipes.",
+      "Go all-in if they're at low life and you can out-value their remaining resources.",
+      "Commit when you've established a clear resource lead."
     ]
   },
   "key_cards": [
@@ -94,7 +111,12 @@
     "Attack with Restless Cottage to enable its extra abilities",
     "Play creatures defensively against Boros until you can cast Harvester of Misery",
     "Use Trespasser to remove Memory Deluge from the graveyard in Azorius Control matchups",
-    "Be cautious of life-drain abilities in the Boros matchup"
+    "Be cautious of life-drain abilities in the Boros matchup",
+    "Avoid overcommitting to Ancient Cornucopia early if you lack protection.",
+    "Professor Dellian Fel's value scales with board state, so protect it with removal or discard.",
+    "Deadly Cover-Up is best used on key threats or to disrupt combo turns.",
+    "Watch for format-specific hate cards and adjust your sideboard accordingly.",
+    "Practice efficient mulligan decisions to avoid dead draws."
   ],
   "matchups": [
     {
@@ -141,6 +163,31 @@
         "Archangel of Wrath",
         "Global removals"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap threats, discard to disrupt hand, and leverage graveyard value that can't be countered. Time spells around their counters and avoid overcommitting to single high-value plays.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use spot removal on key ramp creatures. Don't overcommit to board stalls; trade efficiently and transition to midgame threats before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and discard. Stabilize with efficient removal, then transition to midgame threats. Don't overextend into combat traps and always keep an answer for their finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with resilient threats. Use discard to disrupt their hand. Out-value them with card advantage engines and force them to spend resources on removal instead of executing their game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize discard and efficient threats. Control the graveyard. Trade efficiently and out-value them in the late game. Sideboard in more interaction and late-game threats to tip the balance.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -154,10 +201,12 @@
     "Imodane's Recruiter",
     "Memory Deluge",
     "Up the Beanstalk",
-    "Archangel of Wrath"
+    "Archangel of Wrath",
+    "Watch for Izzet's tempo spells and Landfall triggers."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-golgari-midrange-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T05:48:22+00:00",
     "model": "local-model",
@@ -175,6 +224,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

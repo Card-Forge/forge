@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands containing Dark Ritual and at least two combo enablers",
       "Hands with Flow State and early land drops",
-      "Hands with Beseech the Mirror and cheap spells to copy"
+      "Hands with Beseech the Mirror and cheap spells to copy",
+      "Keep hands with 2-3 lands, at least one Dark Ritual or Flow State, Beseech the Mirror, and a creature to sacrifice (or a way to generate one)."
     ],
     "mulligan_criteria": [
       "Hands lacking acceleration or combo pieces",
       "Hands with only lands and high-cost cards",
-      "Hands without a clear path to turn one or two interaction"
+      "Hands without a clear path to turn one or two interaction",
+      "Mulligan on all lands, all spells without acceleration, or hands missing Beseech with no way to cast it."
     ],
     "examples": []
   },
@@ -25,17 +27,30 @@
     "early_game": [
       "Play lands and cast Dark Ritual to enable turn one or two combo pieces",
       "Set up Flow State and Beseech the Mirror while protecting them from disruption",
-      "Prioritize drawing into additional cheap spells to fuel the Storm count"
+      "Prioritize drawing into additional cheap spells to fuel the Storm count",
+      "Turn 1: Play a land, cast a cantrip (e.g., Delve spell, Brainstorm, or similar) to dig for acceleration/Beseech.",
+      "Turn 2: Cast Dark Ritual/Flow State, play a land, cast Beseech the Mirror, sacrifice a creature to search for an artifact, cast it for free.",
+      "Sequence lands to ensure you can cast acceleration on time without flooding."
     ],
     "mid_game": [
       "Cast Flow State to begin casting spells without paying mana costs",
       "Use Beseech the Mirror to duplicate cheap spells and rapidly increase Storm count",
-      "Maintain a hand of spells to bait out opponent counterspells or discard"
+      "Maintain a hand of spells to bait out opponent counterspells or discard",
+      "Prioritize keeping hand size high with cantrips",
+      "don't overcommit to casting Beseech if you lack a creature to sacrifice or a clear win condition.",
+      "Manage graveyard carefully if facing Dredge.",
+      "Use Dark Ritual/Flow State only when you can cast Beseech and have a target.",
+      "Hold back on casting Beseech if the opponent has sweepers or counterspells.",
+      "Commit when you have a clear path to lethal or a lock piece."
     ],
     "late_game": [
       "Resolve the primary finisher once Storm count is sufficient",
       "If combo fails, use remaining resources to stabilize or draw into answers",
-      "Look for alternate win conditions like card draw or direct damage spells"
+      "Look for alternate win conditions like card draw or direct damage spells",
+      "Beseech the Mirror into free artifacts (e.g., Thopter Foundry + Sword, or a combo like Phyrexian Revoker + Thousand-Year Elixir, or just artifact value leading to lethal).",
+      "Sometimes finding a direct win con like a free-to-cast threat or combo piece.",
+      "When you have a complete mana base, a sacrifice outlet, Beseech, and a clear win condition in your library/hand.",
+      "Go all-in if the opponent has no interaction left or if you're ahead in the race."
     ]
   },
   "key_cards": [
@@ -59,7 +74,11 @@
     "Cast Dark Ritual before Flow State to ensure you can cast or protect it",
     "Use Beseech the Mirror after Flow State resolves to copy the free spells",
     "Prioritize casting the cheapest spells first to maximize the number of spells in the Storm count",
-    "Hold up mana for counterspells if you suspect opponent interaction"
+    "Hold up mana for counterspells if you suspect opponent interaction",
+    "Common mistakes: Casting Beseech without a creature to sacrifice, overcommitting to the combo against sweepers, ignoring graveyard strategies, and not tracking opponent's mana.",
+    "Unique interactions: Flow State can be cast for {0} if you control an artifact, enabling extra turns or massive value.",
+    "Beseech's sacrifice target can be any creature you control, including tokens or artifacts with the creature type (if applicable).",
+    "Always have a backup plan if your primary win con is countered or removed."
   ],
   "matchups": [
     {
@@ -106,6 +125,16 @@
         "Land acceleration",
         "Big threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig around counters, cast Beseech in response to counterspells if possible, or use cheap acceleration to cast Beseech when they're tapped out. Sideboard in protection or alternative win cons.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by drawing more cards, using disruption to hit their Beseech/acceleration, and prioritizing artifact value. Sideboard in extra disruption and value engines.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -113,10 +142,13 @@
     "Counterspell",
     "Leyline of Sanctity",
     "Field of the Dead",
-    "Sneak Attack"
+    "Sneak Attack",
+    "Watch for counterspells (hold up mana), graveyard strategies (track dredge/putrefy), and control win conditions (Lurrus, planeswalkers).",
+    "Note when opponents tap out for sweepers or hatebears."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:42:27+00:00",
     "model": "local-model",
@@ -132,6 +164,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

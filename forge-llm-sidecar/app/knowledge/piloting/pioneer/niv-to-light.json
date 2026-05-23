@@ -14,12 +14,15 @@
     "keep_criteria": [
       "Hands with a turn 1 land and turn 2 Sylvan Caryatid or Growth Spiral",
       "Hands containing Bring to Light or Niv-Mizzet Reborn with adequate mana",
-      "Hands with early removal like Dreadbore or Abrupt Decay"
+      "Hands with early removal like Dreadbore or Abrupt Decay",
+      "Keep hands with 2-3 lands (including fetchable basics or Cornucopia), at least one early game piece (Yorion, Cornucopia, or a cheap cantrip/removal), and a win condition or setup tool.",
+      "Prioritize hands with Cornucopia + cantrips for consistency."
     ],
     "mulligan_criteria": [
       "Hands lacking early ramp or mana fixing",
       "Hands with only high-cost threats and no lands",
-      "Hands missing Bring to Light in a format where toolbox consistency is key"
+      "Hands missing Bring to Light in a format where toolbox consistency is key",
+      "Mulligan on 3+ lands with no early plays, or hands with only late-game threats and insufficient mana/spells to cast them."
     ],
     "examples": [
       {
@@ -54,17 +57,33 @@
     "early_game": [
       "Play a triome or basic land on turn 1 to fix mana and enable turn 2 plays.",
       "Cast Sylvan Caryatid or Growth Spiral on turn 2 to accelerate to four mana and block small creatures.",
-      "Use early removal like Dreadbore or Abrupt Decay to answer aggressive threats."
+      "Use early removal like Dreadbore or Abrupt Decay to answer aggressive threats.",
+      "Turn 1: Play a land, optionally cast a cantrip or deploy Cornucopia.",
+      "Turn 2: Develop board with Yorion or cheap creatures/spells, fix mana with Cornucopia fetches, and start casting cheap instants/sorceries to build Niv's storm count.",
+      "If missing Yorion/Cornucopia, prioritize drawing into them via cantrips.",
+      "Never overextend into known sweepers."
     ],
     "mid_game": [
       "Deploy Niv-Mizzet Reborn to draw cards and apply flying pressure.",
       "Utilize Bring to Light to find specific silver bullets like Shadows' Verdict or Slaughter Games based on the matchup.",
-      "Cast Expressive Iteration on turn 3 or later to filter for threats and answers."
+      "Cast Expressive Iteration on turn 3 or later to filter for threats and answers.",
+      "Hoard instants and sorceries for Niv-Mizzet Reborn.",
+      "Use Cornucopia to fix mana and fuel Niv's ability, but avoid sacrificing it prematurely if you need the mana for stabilization.",
+      "Don't overcommit Yorion if the opponent has sweepers in hand.",
+      "Manage your graveyard carefully if facing hate cards, though Niv's primary engine is hand-based.",
+      "Commit Yorion early to establish board presence and trigger card draw, but hold back Niv until you have a clear path to win or enough instant/sorcery density.",
+      "Use removal sparingly"
     ],
     "late_game": [
       "Chain Niv-Mizzet Reborn into itself to overwhelm opponents with card advantage.",
       "Use Kolaghan's Command to rebuy threats and generate reach.",
-      "Play board wipes like Deafening Clarion or Solar Blaze to reset the board and swing life totals."
+      "Play board wipes like Deafening Clarion or Solar Blaze to reset the board and swing life totals.",
+      "Niv-Mizzet Reborn copying key instants/sorceries for a storm win or massive value, or Yorion out-valuing through repeated triggers.",
+      "Ancient Cornucopia can be sacrificed to cast a game-winning spell or fuel Niv's ability.",
+      "Once Niv is on the board with 3+ instants/sorceries in hand/graveyard, you can often win in one turn.",
+      "Go all-in when you have 3+ instants/sorceries ready, the opponent has no sweepers, and you can safely cast Niv.",
+      "Also commit Yorion when you can draw into answers or finishers.",
+      "If the opponent is tapped out or has no interaction, cast Niv immediately and chain spells to win."
     ]
   },
   "key_cards": [
@@ -104,7 +123,11 @@
     "Use Growth Spiral to search for lands only when necessary, ideally after ensuring a free land drop to trigger Omnath's ability.",
     "Double-spell with Dreadbore and another removal spell to efficiently clear threats while holding up instant-speed interaction.",
     "Prioritize casting Sylvan Caryatid on turn 2 over Growth Spiral for better blocking and survival against removal.",
-    "Save Deafening Clarion for when you have a Niv, Omnath, or Scarab God in play to maximize life gain swings."
+    "Save Deafening Clarion for when you have a Niv, Omnath, or Scarab God in play to maximize life gain swings.",
+    "Common mistakes include overcommitting Yorion into sweepers, failing to hoard instants/sorceries for Niv, and mismanaging Cornucopia's tap ability versus its sacrifice ability.",
+    "Unique interactions: Cornucopia can be sacrificed to cast Niv's ability or other spells, enabling storm combos.",
+    "Niv's ability copies spells even if they target it, so protect it but don't fear targeting.",
+    "Always track opponent's hand for sweepers/counters, and remember that Yorion's triggers can be chained with cheap creatures to draw into game-winning pieces."
   ],
   "matchups": [
     {
@@ -142,6 +165,21 @@
         "Esika's Chariot",
         "Late-game sweepers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells to probe for counterspells, cast Niv/Yorion in response to counterspells if possible, or use Cornucopia to cast around them. Sideboard in more uncounterable threats or extra interaction. If heavily countered, pivot to Yorion value and out-grind the opponent.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Yorion, disrupt mana with discard/removal, and use Cornucopia to outpace their mana development. Don't let them stabilize; keep casting spells and trading efficiently. Sideboard in more early interaction if needed.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card advantage (Yorion), protect Niv, and sideboard in targeted hate. Trade efficiently and out-value in the late game. Control the board with removal and use Cornucopia to fuel Niv faster than your opponent.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -150,10 +188,15 @@
     "Archon of Emeria",
     "Small aggressive creatures",
     "Recursive graveyard creatures",
-    "Mono-colored aggro permanents"
+    "Mono-colored aggro permanents",
+    "Watch for board wipes (sweepers), targeted removal on Niv/Yorion, and combo win conditions.",
+    "Note if the opponent is playing around Niv (counterspells, discard, or graveyard hate).",
+    "Track their mana base and hand for sweepers or hard counters.",
+    "Pay attention to when they tap out for value vs. when they hold up interaction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Draftsim",
+    "source": "Draftsim + legacy_guidance",
     "source_url": "https://draftsim.com/niv-to-light-pioneer/",
     "generated_at": "2026-05-21T03:40:13+00:00",
     "model": "local-model",
@@ -174,6 +217,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {
@@ -186,20 +247,20 @@
     "confidence": 0.95,
     "kind": "explicit",
     "source_index": 0,
-    "evidence_span": "Powerful midrange strategies can shift answers and threats to respond to any top deck... One hallmark of Niv to Light is using Bring to Light to enable a suite of silver bullets... The deck’s second namesake, Niv-Mizzet Reborn, acts as this deck’s card advantage engine and primary win condition."
+    "evidence_span": "Powerful midrange strategies can shift answers and threats to respond to any top deck... One hallmark of Niv to Light is using Bring to Light to enable a suite of silver bullets... The deck\u2019s second namesake, Niv-Mizzet Reborn, acts as this deck\u2019s card advantage engine and primary win condition."
   },
   "win_conditions_evidence": [
     {
       "confidence": 0.95,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Niv-Mizzet Reborn, acts as this deck’s card advantage engine and primary win condition."
+      "evidence_span": "Niv-Mizzet Reborn, acts as this deck\u2019s card advantage engine and primary win condition."
     },
     {
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Omnath, Locus of Creation gaining you life and presenting a blocker that’s difficult to answer"
+      "evidence_span": "Omnath, Locus of Creation gaining you life and presenting a blocker that\u2019s difficult to answer"
     },
     {
       "confidence": 0.9,
@@ -211,7 +272,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Valki, God of Lies... get a 7-mana planeswalker that’s incredibly hard to answer."
+      "evidence_span": "Valki, God of Lies... get a 7-mana planeswalker that\u2019s incredibly hard to answer."
     },
     {
       "confidence": 0.85,
@@ -237,13 +298,13 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "it’s easy to double-spell with Dreadbore and another piece of removal at just ."
+      "evidence_span": "it\u2019s easy to double-spell with Dreadbore and another piece of removal at just ."
     },
     {
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "there really isn’t any debate on which you’d rather cast on turn 2 in a format littered with small creatures."
+      "evidence_span": "there really isn\u2019t any debate on which you\u2019d rather cast on turn 2 in a format littered with small creatures."
     },
     {
       "confidence": 0.85,

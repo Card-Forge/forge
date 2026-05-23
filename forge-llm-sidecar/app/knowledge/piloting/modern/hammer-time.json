@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Lands, Target cards, and Search cards",
       "Direct Equipment in hand",
-      "Short-term game development plan"
+      "Short-term game development plan",
+      "Keep hands with 1-2 lands plus at least one mana accelerator (Mox Opal, Chrome Mox, Arcane Signet, or Sol Ring) and one cantrip/draw spell.",
+      "Keep hands with Colossus Hammer paired with two sources of acceleration or draw."
     ],
     "mulligan_criteria": [
       "Hands lacking a Target despite having Search and Equipment",
       "Hands dependent on topdecking early game",
-      "Average hands without a clear plan"
+      "Average hands without a clear plan",
+      "Mulligan any hand with three or more lands, no acceleration/draw synergy, or only Hammer with no way to cast it."
     ],
     "examples": [
       {
@@ -36,17 +39,17 @@
       {
         "hand": [],
         "decision": "keep",
-        "reason": "Turn one Lotus Bloom with supporting lands — Starting with Lotus Bloom significantly increases the chance of winning on turn four."
+        "reason": "Turn one Lotus Bloom with supporting lands \u2014 Starting with Lotus Bloom significantly increases the chance of winning on turn four."
       },
       {
         "hand": [],
         "decision": "keep",
-        "reason": "Pinnacle Emissary on turn one — Unlocks the hand by enabling early artifact plays and combo pieces."
+        "reason": "Pinnacle Emissary on turn one \u2014 Unlocks the hand by enabling early artifact plays and combo pieces."
       },
       {
         "hand": [],
         "decision": "mulligan",
-        "reason": "Generic Affinity hand — Affinity does not mulligan well; it requires a full hand of cheap artifacts to litter the board effectively."
+        "reason": "Generic Affinity hand \u2014 Affinity does not mulligan well; it requires a full hand of cheap artifacts to litter the board effectively."
       }
     ]
   },
@@ -54,17 +57,30 @@
     "early_game": [
       "Aim for explosive combo kills with equipment and targets",
       "Aggressive Mulligan to ensure a short-term plan",
-      "Race aggro decks or play around control removals"
+      "Race aggro decks or play around control removals",
+      "Turn 1: Play a land, cast Mox Opal or Chrome Mox, then cast a cantrip (Opt, Brainstorm, Ponder, or Gitaxian Rampant) to dig for acceleration or Hammer.",
+      "Turn 2: Cast a second mana rock, ensure Opal is active (land + Opal on battlefield), and cast Colossus Hammer if you have the mana.",
+      "Sequence mana rocks to enable Opal\u2019s one-mana discount as early as possible."
     ],
     "mid_game": [
       "Use protections like Giver of Runes or Sanctifier en-Vec",
       "Play around opponent's removals and hate cards",
-      "Utilize Mana Tithe to slow down midrange/control"
+      "Utilize Mana Tithe to slow down midrange/control",
+      "Prioritize keeping Mox Opal active to reduce spell costs.",
+      "Use cantrips to filter into acceleration or Hammer, but avoid over-drawing if you\u2019re low on lands.",
+      "Manage your graveyard carefully if facing Rest in Peace or Blood Moon, as your draw engine relies on it.",
+      "Commit threats only when you have protection or the opponent is tapped out.",
+      "Hold back Hammer if you suspect hard interaction (Red Elemental Blast, Counterspell) and you lack a backup plan.",
+      "Use removal/counter to clear the board against aggro before going for the kill."
     ],
     "late_game": [
       "Shift to a beatdown plan with Urza's Saga",
       "Generate constant artifact threats",
-      "Maintain board presence to force 2-for-1s"
+      "Maintain board presence to force 2-for-1s",
+      "Colossus Hammer is the primary finisher, often cast on turn one or two.",
+      "Secondary finishers include a combination of cheap artifacts, cantrips, and Lightning Axe/Swords to clear the board and go lethal.",
+      "Go all-in when you have enough mana and draw spells to guarantee casting Hammer, or when the opponent has no interaction left.",
+      "Commit to threats if you can protect them or if going below lethal forces a mistake."
     ]
   },
   "key_cards": [
@@ -117,7 +133,12 @@
     "Save Mana Tithe and Pithing Needle for key combo pieces or hate cards",
     "Hold Engineered Explosives until you are ready to win the game, as it destroys your own zero-cost artifacts. Only use it as a desperation play to stop a resolving Lotus Bloom.",
     "Lead with a turn one Lotus Bloom to maximize the probability of resolving a turn four win condition.",
-    "Use Consign to Memory to counter the triggered ability of Oza, the Thousand Faces, delaying the search for Pithing Needle and buying time for Lotus Blooms to resolve."
+    "Use Consign to Memory to counter the triggered ability of Oza, the Thousand Faces, delaying the search for Pithing Needle and buying time for Lotus Blooms to resolve.",
+    "Mox Opal requires a land on the battlefield to activate",
+    "never cast it without one.",
+    "Watch for Blood Moon, Rest in Peace, and Red Elemental Blast, as they can completely shut down the deck.",
+    "Don\u2019t overcommit to threats if you can\u2019t protect them, and always keep a backup plan if Hammer is countered.",
+    "The deck\u2019s high variance means practice and metagame prediction are key to consistent results."
   ],
   "matchups": [
     {
@@ -169,6 +190,31 @@
       "opponent_archetype": "Affinity",
       "advice": "Lead with Oza, the Thousand Faces on turn one to find Pithing Needle by turn three and name Goblin Charbelcher. (from gameplay) If Pithing Needle resolves, use Sink into Stupor to bounce it, then untap and win with Goblin Charbelcher. (from gameplay) Monitor the opponent's mana base; if they lack blue mana, they cannot cast counter spells, allowing you to play aggressively without fear of interaction. (from gameplay)",
       "watch_for": []
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Spell Pierce or cheap cantrips to dig around counters. Cast Hammer when the opponent is tapped out or after they\u2019ve used interaction on threats. Sometimes use cheap artifacts as bait to force counters before casting Hammer.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them aggressively. Use removal and counters to disrupt their mana sources. Don\u2019t let them stabilize; pressure early and finish before their late-game threats come online.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with Lightning Axe, Spell Pierce, Counterspell, or Swords to Plowshares. Don\u2019t overcommit to Hammer if you can\u2019t clear the board. Use cantrips to find answers and stabilize before going for the kill.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure to force interaction. Use cantrips to dig for answers or Hammer. Don\u2019t let them stabilize; if they do, use Lightning Axe or Swords to clear threats and go for lethal. Sometimes you must go below lethal with threats to force a mistake.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the interaction war. Use Spell Pierce and Counterspell to protect your Hammer and disrupt theirs. Prioritize removal on their threats and dig deeper for Hammer. Track their hand for counters and play around them with cheap artifacts or timing.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -181,10 +227,12 @@
     "Boseiju, Who Endures",
     "Living End",
     "Cascade",
-    "Free removals"
+    "Free removals",
+    "Watch for counterspells, discard, and board wipes."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-hammer-time-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T01:30:18+00:00",
     "model": "local-model",
@@ -234,6 +282,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": "Hammer Time"
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

@@ -1,0 +1,121 @@
+{
+  "archetype": "Slivers",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/slivers.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Abundant Growth"
+    },
+    {
+      "qty": 4,
+      "name": "Blossoming Sands"
+    },
+    {
+      "qty": 1,
+      "name": "Crypt Sliver"
+    },
+    {
+      "qty": 8,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Gemhide Sliver"
+    },
+    {
+      "qty": 1,
+      "name": "Heart Sliver"
+    },
+    {
+      "qty": 2,
+      "name": "Holdout Settlement"
+    },
+    {
+      "qty": 1,
+      "name": "Horned Sliver"
+    },
+    {
+      "qty": 2,
+      "name": "Hunter Sliver"
+    },
+    {
+      "qty": 2,
+      "name": "Lead the Stampede"
+    },
+    {
+      "qty": 4,
+      "name": "Muscle Sliver"
+    },
+    {
+      "qty": 4,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Plated Sliver"
+    },
+    {
+      "qty": 4,
+      "name": "Predatory Sliver"
+    },
+    {
+      "qty": 1,
+      "name": "Sentinel Sliver"
+    },
+    {
+      "qty": 4,
+      "name": "Sidewinder Sliver"
+    },
+    {
+      "qty": 4,
+      "name": "Sinew Sliver"
+    },
+    {
+      "qty": 1,
+      "name": "Striking Sliver"
+    },
+    {
+      "qty": 4,
+      "name": "Virulent Sliver"
+    },
+    {
+      "qty": 1,
+      "name": "Winged Sliver"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Crimson Acolyte"
+    },
+    {
+      "qty": 3,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 4,
+      "name": "Hallow"
+    },
+    {
+      "qty": 2,
+      "name": "Hunter Sliver"
+    },
+    {
+      "qty": 1,
+      "name": "Lead the Stampede"
+    },
+    {
+      "qty": 1,
+      "name": "Obsidian Acolyte"
+    },
+    {
+      "qty": 1,
+      "name": "Prismatic Strands"
+    },
+    {
+      "qty": 1,
+      "name": "Winged Sliver"
+    }
+  ]
+}

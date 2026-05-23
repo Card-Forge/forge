@@ -1,0 +1,516 @@
+{
+  "schema_version": 1,
+  "name": "Lurrus DRS",
+  "format": "vintage",
+  "colors": [
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Out-value opponents through relentless graveyard recursion and card advantage, leveraging Lurrus to repeatedly cast cheap dredgers while disrupting the opponent's resources. Wins by out-graveyarding control, out-speeding aggro with early pressure, and out-valuing mirrors.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 14,
+      "cards": [
+        "Ancestral Recall",
+        "Brainstorm",
+        "Gitaxian Probe",
+        "Nihil Spellbomb",
+        "Orcish Bowmasters",
+        "Psychic Frog",
+        "Soul-Guide Lantern",
+        "Treasure Cruise"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Dig Through Time",
+        "Grafdigger's Cage",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Demonic Tutor",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Verdant Catacombs"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 21,
+      "cards": [
+        "Collector Ouphe",
+        "Deathrite Shaman",
+        "Lurrus of the Dream-Den",
+        "Mox Emerald",
+        "Mox Jet",
+        "Mox Sapphire",
+        "Orcish Bowmasters",
+        "Psychic Frog",
+        "Time Walk"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 1
+    },
+    "removal": {
+      "target_count": 28,
+      "cards": [
+        "Abrupt Decay",
+        "Deathrite Shaman",
+        "Fatal Push",
+        "Force of Vigor",
+        "Nihil Spellbomb",
+        "Orcish Bowmasters",
+        "Psychic Frog",
+        "Soul-Guide Lantern",
+        "Strip Mine",
+        "Tormod's Crypt",
+        "Wasteland"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 12,
+      "cards": [
+        "Consign to Memory",
+        "Flusterstorm",
+        "Force of Negation",
+        "Force of Will",
+        "Mental Misstep",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 10,
+      "cards": [
+        "Abrupt Decay",
+        "Collector Ouphe",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 8,
+      "cards": [
+        "Collector Ouphe",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 22,
+      "cards": [
+        "Collector Ouphe",
+        "Deathrite Shaman",
+        "Dig Through Time",
+        "Force of Negation",
+        "Grafdigger's Cage",
+        "Lurrus of the Dream-Den",
+        "Nihil Spellbomb",
+        "Psychic Frog",
+        "Soul-Guide Lantern",
+        "Tormod's Crypt",
+        "Treasure Cruise",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 12,
+      "cards": [
+        "Collector Ouphe",
+        "Dig Through Time",
+        "Hurkyl's Recall",
+        "Lurrus of the Dream-Den",
+        "Psychic Frog",
+        "Treasure Cruise"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Collector Ouphe",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Collector Ouphe",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 13,
+      "cards": [
+        "Collector Ouphe",
+        "Dismember",
+        "Gitaxian Probe",
+        "Grafdigger's Cage",
+        "Pithing Needle",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 32,
+      "cards": [
+        "Black Lotus",
+        "Collector Ouphe",
+        "Deathrite Shaman",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Psychic Frog",
+        "Strip Mine",
+        "Tropical Island",
+        "Undercity Sewers",
+        "Underground Sea",
+        "Verdant Catacombs",
+        "Wasteland"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 19,
+      "cards": [
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Strip Mine",
+        "Tropical Island",
+        "Undercity Sewers",
+        "Underground Sea",
+        "Verdant Catacombs",
+        "Wasteland"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.45
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abrupt Decay",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Collector Ouphe",
+      "roles": [
+        "combo_pieces",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deathrite Shaman",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dig Through Time",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gitaxian Probe",
+      "roles": [
+        "card_advantage",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lurrus of the Dream-Den",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nihil Spellbomb",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orcish Bowmasters",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Psychic Frog",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strip Mine",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tormod's Crypt",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Treasure Cruise",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tropical Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Sea",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistakes: Overcommitting to Lurrus without backup threats, ignoring graveyard hate, mismanaging fetch lands, forgetting Psychic Frog's bounce timing.",
+    "Unique interactions: Lurrus can return dredgers from graveyard to hand.",
+    "Collector Ouphe shuts down artifact combos but is vulnerable to discard.",
+    "Ensure you have enough interaction to protect your engine."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast a mana dork (Llanowar Elves/Birds) or discard (Thoughtseize/Duress) to protect the plan."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Cast Arcanist or another dredger, or cast Lurrus if ahead."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence mana dorks into Arcanist to start filling the graveyard."
+    }
+  ],
+  "kill_priority": [
+    "Collector Ouphe",
+    "Psychic Frog",
+    "Deathrite Shaman",
+    "Lurrus of the Dream-Den",
+    "Mox Emerald",
+    "Mox Jet",
+    "Mox Sapphire",
+    "Orcish Bowmasters"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Flusterstorm",
+    "Force of Negation",
+    "Force of Will",
+    "Mental Misstep",
+    "Spell Pierce",
+    "Abrupt Decay",
+    "Collector Ouphe"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/lurrus-drs.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

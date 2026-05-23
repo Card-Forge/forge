@@ -11,11 +11,14 @@
   "mulligan": {
     "keep_criteria": [
       "Hands containing Llanowar Elves or Elvish Mystic for early acceleration",
-      "Hands with early interaction like Obliterating Bolt or Bonecrusher Giant // Stomp"
+      "Hands with early interaction like Obliterating Bolt or Bonecrusher Giant // Stomp",
+      "Keep any hand with 2 lands and at least one of Elvish Mystic, Reckless Stormseeker, or a two-drop threat.",
+      "Prioritize hands with 1-2 lands if they contain acceleration plus a turn-2 play."
     ],
     "mulligan_criteria": [
       "Hands lacking mana dorks or early-turn cards when facing aggressive decks",
-      "Hands composed entirely of high mana cost cards (3 or more) without early plays"
+      "Hands composed entirely of high mana cost cards (3 or more) without early plays",
+      "Mulligan pure land hands, hands with 3+ lands and no early plays, or hands with only removal and no threats."
     ],
     "examples": [
       {
@@ -33,17 +36,31 @@
     "early_game": [
       "Accelerate mana with Llanowar Elves or Elvish Mystic",
       "Cast turn 2 threats like Bonecrusher Giant // Stomp or Reckless Stormseeker // Storm-Charged Slasher",
-      "Use early removal like Obliterating Bolt to disrupt opponent's board"
+      "Use early removal like Obliterating Bolt to disrupt opponent's board",
+      "Turn 1: Play a land, optionally tap Elvish Mystic if you have another land or can afford to delay.",
+      "Turn 2: Cast Elvish Mystic or a two-drop threat, then play a second land.",
+      "If opening with acceleration, play land, then Elvish Mystic, then cast a two-drop on turn 2.",
+      "Always prioritize developing mana quickly to cast turn-3 threats."
     ],
     "mid_game": [
       "Counter opponent's gameplan with targeted removal and sweepers",
       "Make favorable 2-for-1 trades to maintain card advantage",
-      "Deploy vehicles like Esika's Chariot or Skysovereign, Consul Flagship for value and pressure"
+      "Deploy vehicles like Esika's Chariot or Skysovereign, Consul Flagship for value and pressure",
+      "Preserve mana for interaction when needed, but aggressively convert acceleration into board presence.",
+      "Don't overextend into sweepers",
+      "keep a threat in hand if you suspect a board wipe.",
+      "Manage hand size by trading removal for threats when ahead.",
+      "Commit threats when the opponent has no removal or sweepers.",
+      "Hold back a key threat if you suspect a board wipe or if you're behind on board."
     ],
     "late_game": [
       "Close the game with high-impact creatures or vehicles",
       "Use Chandra, Awakened Inferno for emblem-based win conditions",
-      "Maintain board presence and resource advantage without relying on card draw"
+      "Maintain board presence and resource advantage without relying on card draw",
+      "Reckless Stormseeker and late-game Gruul threats.",
+      "Win by overwhelming the board with unblockable/haste threats or trading up into their remaining resources.",
+      "Go all-in when you have a clear board advantage, the opponent has no interaction, or you're facing a combo/control deck that needs to stabilize.",
+      "Also commit when you can close the game before their next turn."
     ]
   },
   "key_cards": [
@@ -81,7 +98,11 @@
   "sequencing_tips": [
     "Wait to equip Embercleave until after the opponent responds to your attack to avoid wasting mana on removal.",
     "Cast Bonecrusher Giant // Stomp as Stomp to remove Bloodtithe Harvester, saving The Akroan War for Sheoldred, the Apocalypse.",
-    "Account for Brave the Elements when casting removal spells and deciding which creatures to block with."
+    "Account for Brave the Elements when casting removal spells and deciding which creatures to block with.",
+    "Common mistake: Over-tapping Elvish Mystic and failing to play a second land, stalling your curve.",
+    "Another: Overextending into sweepers without checking for interaction.",
+    "Unique interaction: Using acceleration to cast threats in response to removal, forcing unfavorable trades.",
+    "Always track opponent's mana and hand size to predict their next move."
   ],
   "matchups": [
     {
@@ -124,6 +145,31 @@
         "Adeline, Resplendent Cathar",
         "Brutal Cathar // Moonrage Brute"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that can be cast in response to counterspells. Employ uncounterable threats if available. Sequence plays to force counterspells on non-critical spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race them. Use spot removal to eliminate their mana dorks. Don't overcommit to the board; trade efficiently.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal and spot interaction. Don't overextend; focus on surviving turn 3-4. Use your midrange threats to close the game once stabilized.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early to force mistakes. Use card advantage to out-value them. Don't let them stabilize; keep applying pressure and trading resources favorably.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing and better sequencing. Prioritize keeping a threat in hand for interaction. Use removal efficiently to trade up. Win the resource war by converting acceleration into board presence faster.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -138,10 +184,12 @@
     "Thalia, Guardian of Thraben",
     "Adeline, Resplendent Cathar",
     "Brutal Cathar // Moonrage Brute",
-    "Brave the Elements"
+    "Brave the Elements",
+    "Watch for sweepers (e.g., Wrath of God, Damnation), targeted removal, and ramp spells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-gruul-midrange-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T05:05:36+00:00",
     "model": "local-model",
@@ -159,6 +207,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

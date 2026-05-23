@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early creatures that can trigger Heroic",
       "Hands containing cheap equipment or +1/+1 counters",
-      "Hands with a mix of lands and one-drop threats"
+      "Hands with a mix of lands and one-drop threats",
+      "Keep hands with 2-3 lands and at least one cheap creature (e.g., Knight of the White Orchid) paired with a cheap enchantment (Ethereal Armor, Emerge Unscathed, or Hyena Umbra).",
+      "Keep 3+ land hands only if they contain two complete creature-enchantment pairs."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays or land drops",
       "Hands heavy on late-game cards without early interaction",
-      "Hands with multiple lands or zero creatures"
+      "Hands with multiple lands or zero creatures",
+      "Mulligan hands with 4+ lands, pure land hands, or expensive spells without early threats."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and one-drop creatures to establish board presence",
       "Trigger Heroic immediately with cheap equipment or spells",
-      "Apply pressure while searching for key synergies"
+      "Apply pressure while searching for key synergies",
+      "Turn 1: Play a Plains, cast a cheap creature.",
+      "Turn 2: Play a Plains, cast a cheap enchantment targeting your creature to trigger Heroic for +1/+1, lifelink, or flying.",
+      "Sequence lands to ensure you can cast the enchantment the same turn or immediately after.",
+      "Prioritize playing creatures that can attack or set up for a pump turn."
     ],
     "mid_game": [
       "Scale threats using Emerge Unscathed and Ethereal Armor",
       "Maintain board control by trading efficiently",
-      "Look for combat tricks to push damage through"
+      "Look for combat tricks to push damage through",
+      "Reserve mana for casting enchantments on your creatures",
+      "avoid overcommitting to attacks without protection.",
+      "Cast one enchantment per creature per turn to maximize Heroic triggers.",
+      "Use your hand efficiently and leverage land-fetching creatures for mana acceleration.",
+      "Commit threats when you have at least one enchantment providing protection (e.g., Ethereal Armor for hexproof, Hyena Umbra for flying).",
+      "Hold back if the opponent has board wipes or targeted removal and you lack answers."
     ],
     "late_game": [
       "Consolidate board state with larger threats",
       "Use accumulated +1/+1 counters to overwhelm blockers",
-      "Close out the game with direct damage or unblockable attackers"
+      "Close out the game with direct damage or unblockable attackers",
+      "A fully pumped creature with flying, lifelink, and protection.",
+      "Achieve this by chaining multiple enchantments on a single creature, then attacking.",
+      "Use creatures that generate card advantage or mana to fuel the final push.",
+      "Go all-in when you have a lethal threat (typically 5+ power with flying/lifelink) and the opponent has no clear answer.",
+      "Also commit when you're ahead in life and can close the game in 1-2 turns."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Cast equipment or counter-granting spells after declaring attackers to maximize Heroic triggers",
     "Hold up mana for combat tricks to surprise opponents and push unexpected damage",
-    "Prioritize keeping creatures alive to compound +1/+1 counters over multiple turns"
+    "Prioritize keeping creatures alive to compound +1/+1 counters over multiple turns",
+    "Heroic triggers only when the enchantment targets only your creature",
+    "avoid multi-target enchantments.",
+    "Be mindful of summoning sickness when attacking.",
+    "Enchantments survive board wipes, allowing quick rebuilds.",
+    "Watch for flicker effects that can reset your creature's counters.",
+    "In unknown formats, verify card legality and adjust sideboard accordingly."
   ],
   "matchups": [
     {
@@ -87,15 +111,44 @@
         "Removal spells that target your key creatures",
         "Card advantage engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast enchantments at end step to avoid counters, or use cheap creatures to bait them. If possible, cast them in response to their spells or use instant-speed options.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race them. Use protection enchantments to survive their early threats. If they get ahead, use your enchantments to stabilize and out-value them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use your early creatures to trade efficiently. Cast protection enchantments to survive their burst. If you stabilize, transition to your own aggressive plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure them with early threats. Cast enchantments to grow your creatures and force them to use removal. If they sweep, use your enchantments to rebuild quickly.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the value race by casting more enchantments per turn. Track their creature count and prioritize attacking with your largest threat. Use targeted removal to eliminate their key creatures.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes that remove +1/+1 counters",
     "Direct damage spells that bypass your blockers",
-    "Counterspells that disrupt your key plays"
+    "Counterspells that disrupt your key plays",
+    "Watch for board wipes, targeted removal on your pumped creatures, and counterspells.",
+    "Note if the opponent is holding up mana for removal or committing to a combo/aggro plan.",
+    "Track their enchantment count in mirrors to gauge your value race."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:17:17+00:00",
     "model": "local-model",
@@ -111,6 +164,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

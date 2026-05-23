@@ -12,18 +12,20 @@
     "keep_criteria": [
       "Hands with two or more lands and at least one blink spell or creature",
       "Early interaction that can return opponent's threats to hand",
-      "Mana base that supports W/U/B casting by turn two"
+      "Mana base that supports W/U/B casting by turn two",
+      "Keep hands with 2-3 lands (preferably fetch/shock-compatible), a turn-1 or turn-2 play (cheap threat, cantrip, or early blink enabler), and at least one interaction (removal, protection, or cantrip)."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or playable cards by turn two",
       "Hands with only late-game blink engines and no early disruption",
-      "Hands with four or more lands and no early plays"
+      "Hands with four or more lands and no early plays",
+      "Mulligan if you have 0-1 lands, only high-cost spells, no way to interact with early aggression, or a completely dead hand of removal without threats to blink."
     ],
     "examples": [
       {
         "hand": [],
         "decision": "keep",
-        "reason": "Hand capable of deploying a major threat (Kapka, Canaan's Fiend) on turn 2 — The opponent is a turn 4 combo deck, so you have at least four turns to establish pressure and win the race."
+        "reason": "Hand capable of deploying a major threat (Kapka, Canaan's Fiend) on turn 2 \u2014 The opponent is a turn 4 combo deck, so you have at least four turns to establish pressure and win the race."
       }
     ]
   },
@@ -31,17 +33,32 @@
     "early_game": [
       "Play lands and establish a mana base",
       "Cast cheap blink targets or creatures to trigger ETB effects",
-      "Use blink spells to remove opponent's early threats"
+      "Use blink spells to remove opponent's early threats",
+      "Turn 1: Play a land, cast a cheap cantrip or early threat if mana allows.",
+      "Turn 2: Cast a blink enabler or early value creature, then blink it if possible to trigger ETB effects.",
+      "Turn 3: Ensure WUB mana is online for key spells",
+      "sequence fetch/shock into basics if you need specific colors for interaction or protection.",
+      "Prioritize establishing board presence without overcommitting to a single threat."
     ],
     "mid_game": [
       "Blink your own permanents to grow counters on blink engines",
       "Return opponent's key cards to hand to stall their strategy",
-      "Maintain board presence while cycling resources"
+      "Maintain board presence while cycling resources",
+      "Preserve mana for interaction and blink triggers",
+      "avoid tapping out for non-essential spells.",
+      "Use cantrips to dig for key pieces and maintain a hand of 3-4 cards.",
+      "Manage your graveyard carefully\u2014avoid unnecessary exile effects if the opponent has recursion, but leverage them to your advantage.",
+      "Track opponent's mana and hand size to time your blinks.",
+      "Commit threats when you have protection or removal ready to handle sweepers or removal."
     ],
     "late_game": [
       "Attack with large, counter-filled blink engines",
       "Blink lands repeatedly to generate excess mana for late-game answers",
-      "Close out the game with combat or attrition after depleting opponent's resources"
+      "Close out the game with combat or attrition after depleting opponent's resources",
+      "Large blink targets with powerful ETB effects, or combo finishes using repeated blink triggers to generate infinite value or lethal damage.",
+      "Secure the board with removal and protection, then attack with resilient threats or chain triggers to close the game.",
+      "Go all-in when you have card advantage, protection against sweepers, and the opponent is low on resources or has no immediate answer.",
+      "Commit when you can close the game in 1-2 turns or when you've forced the opponent to use their interaction on non-critical threats."
     ]
   },
   "key_cards": [
@@ -72,7 +89,10 @@
     "Leave mana open for interaction (like Consign to Memory) instead of committing to attacks or saga activations when the opponent is approaching their combo turn.",
     "Use Replicate on Consign to Memory to generate a second counter spell, protecting against backup counters or combo pieces without spending extra mana.",
     "Use Solitude immediately on Pinnacle Emissary's cast trigger to prevent token generation, even if Affinity has Tormod's Crypt on stack, to stop the board from unlocking Thoughtcast and Capacitor.",
-    "When low on cards, prioritize countering Thoughtcast with Force of Negation over bouncing with Solitude, preserving hand size to sequence Prismatic Ending and draw two cards off Quantum Riddler."
+    "When low on cards, prioritize countering Thoughtcast with Force of Negation over bouncing with Solitude, preserving hand size to sequence Prismatic Ending and draw two cards off Quantum Riddler.",
+    "Common mistake: Blinking into a known sweeper.",
+    "Always ask 'what happens if they have a board wipe?' before committing.",
+    "Unique interactions: Some blink effects can chain with specific ETB triggers for infinite value"
   ],
   "matchups": [
     {
@@ -125,16 +145,36 @@
       "opponent_archetype": "Affinity",
       "advice": "Abandon the Gorion's Vengeance graveyard plan and pivot to the midrange engine (Psychic Frog, Quantum Riddler, Ephemerate) due to Affinity's main deck Tormod's Crypts. (from gameplay) Focus heavily on winning Game 1, as Affinity's explosive starts are hardest to handle pre-sideboard; Esper's sideboard heavily favors Games 2+. (from gameplay)",
       "watch_for": []
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig past counters, cast spells at instant speed when safe, use protection, or commit multiple threats to overwhelm. Avoid blinking into known counters; instead, trade value or wait for a window when they've used their interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early interaction with cheap removal and artifact hate. Don't overcommit to the board; value trade efficiently and use protection on key threats. Force them to spend resources on removal rather than accelerating their game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value trades matter most. Use targeted removal to kill their blink targets before they blink. Protect your own threats and track ETB triggers. Win by out-resourcing them in card advantage and making better decisions about when to commit to the board.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
     "Counterspell packages",
-    "Graveyard-based combo pieces"
+    "Graveyard-based combo pieces",
+    "Watch for sweepers (e.g., board wipes, artifact destruction), counterspells, and recursion engines.",
+    "Note when the opponent taps out for a key spell or has no interaction left.",
+    "Track graveyard and exile contents for combo pieces or recursion threats.",
+    "Pay attention to mana development to predict when they can cast their win conditions."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:14:45+00:00",
     "model": "local-model",
@@ -201,6 +241,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": "Esper GenericBlink"
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

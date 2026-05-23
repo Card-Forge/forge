@@ -1,0 +1,119 @@
+{
+  "archetype": "Prismari, the Inspiration",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Cast cheap instants and sorceries to generate a relentless army of 1/1 haste Wizard tokens, then sacrifice them to pump your commander or a secondary threat for lethal. This deck wins by out-casting opponents with instant-speed interaction and overwhelming board presence before control or combo can stabilize.",
+  "win_conditions": [
+    "The commander itself (pumped via sacrifice), or a separate big threat fueled by token sacrifice.",
+    "Lethal comes from a single massive swing or repeated pump-and-swing turns once you have consistent sacrifice outlets."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including basics or fetchable duals), at least one mana acceleration piece (Sol Ring, Arcane Signet, or a ramp spell), and 2-3 cheap instants/sorceries or a sacrifice outlet."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 3+ lands with no acceleration, only expensive spells, or no way to cast your commander early."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring/Arcane Signet.",
+      "Turn 2: Cast a cheap instant or sorcery to trigger the commander, creating a 1/1 haste token.",
+      "Sequence mana to ensure you can cast multiple spells per turn as soon as possible, prioritizing cheap, efficient spells that draw cards or deal damage."
+    ],
+    "mid_game": [
+      "Prioritize casting instants/sorceries over hoarding cards.",
+      "Use mana rocks and ramp to maintain a high spell density.",
+      "Don't overcommit to pumping if you lack sacrifice outlets, and always preserve mana for flash protection on your commander.",
+      "Commit threats when you have enough tokens to trade favorably or when the opponent has no removal or sweepers.",
+      "Hold back if they have board wipes or targeted removal.",
+      "Use flash to protect your commander and surprise-block or attack."
+    ],
+    "late_game": [
+      "The commander itself (pumped via sacrifice), or a separate big threat fueled by token sacrifice.",
+      "Lethal comes from a single massive swing or repeated pump-and-swing turns once you have consistent sacrifice outlets.",
+      "When you have 3+ tokens, a reliable sacrifice outlet, and the opponent has no sweepers or removal in hand.",
+      "Also commit when you can close the game before their next turn or when you can trade your tokens for their key permanents."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Prismari, the Inspiration",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Over-pumping without enough sacrifice outlets.",
+    "Remember that the commander's ability is a sacrifice outlet itself, but you'll need more for consistent pressure.",
+    "Prismari spells often have additional effects, so prioritize those that draw cards or deal damage.",
+    "Flash and haste synergy is key, and always protect your commander with counterspells or protection spells."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use flash, split second (if any), or cast spells in response to their counterspells. Use cheap spells to trade up. Rely on instant-speed interaction to clear the way and pressure before they can cast their own spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race them. Use counterspells or removal to stop their mana dorks/rituals. Don't let them stabilize; force them to interact with your board while you push for lethal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use cheap removal and counterspells to stall. Build a board of tokens to trade into their attackers. Use pump effects to survive combat and stabilize before going on the offensive.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card advantage and cheap spells. Use flash to bypass their removal windows. Push for lethal before they can find their win condition, and use instant-speed interaction to disrupt their plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race to cast more spells and find better sacrifice outlets. Prioritize counterspells, targeted removal, and card draw. Win by disrupting their key spells, out-resourcing them in the late game, or finding a unique finisher they can't answer.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes (Wrath of God, etc.), targeted removal on your commander, and counterspells.",
+    "Note when opponents tap out for big spells versus holding up mana for interaction, and track how many instants/sorceries they've cast to gauge their hand size."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

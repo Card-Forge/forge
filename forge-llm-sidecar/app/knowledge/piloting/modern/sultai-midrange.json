@@ -1,0 +1,124 @@
+{
+  "archetype": "Sultai Midrange",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Sultai Midrange aims to out-value opponents through resilient threats, efficient interaction, and late-game lock pieces, leveraging card advantage to outlast aggressive and combo decks while grinding down control strategies. It wins by controlling the early game, establishing a board presence with Abhorrent Oculus, and closing out games with Subtlety-protected threats or Sink into Stupor.",
+  "win_conditions": [
+    "Sink into Stupor is the primary finisher, locking the opponent out of their deck or ending the game outright.",
+    "Subtlety-protected threats (like Abhorrent Oculus or other midrange creatures) can also close out games."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, at least one 1-2 mana interaction (discard or spot removal), and a 2-3 drop threat or card advantage."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 1-lands, 3+ lands with no early plays, or hands completely lacking interaction against aggro/combo."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, optionally cast a 1-mana interaction or pass.",
+      "Turn 2: Play a second land, cast a 2-drop (removal, discard, or early threat).",
+      "Turn 3: Deploy Abhorrent Oculus if mana is open, or use interaction to protect it.",
+      "Prioritize untapped lands for flexibility and to enable Subtlety or Sink into Stupor later."
+    ],
+    "mid_game": [
+      "Preserve mana for interaction until threats are committed.",
+      "Use Abhorrent Oculus to stabilize hand size and board.",
+      "Avoid overcommitting to the board without protection",
+      "Subtlety should be saved for key threats or to enable a surprise attack.",
+      "Manage graveyard by using Surgical Extraction or Rest in Peace when needed.",
+      "Commit threats when you have card advantage or removal ready.",
+      "Hold back if the opponent has sweepers or spot removal.",
+      "Use Subtlety on your most resilient threat or to protect a Sink into Stupor cast."
+    ],
+    "late_game": [
+      "Sink into Stupor is the primary finisher, locking the opponent out of their deck or ending the game outright.",
+      "Subtlety-protected threats (like Abhorrent Oculus or other midrange creatures) can also close out games.",
+      "Go all-in when you have card advantage, the opponent has no sweepers, and you can protect your threats with Subtlety or removal.",
+      "Also commit when you can safely cast Sink into Stupor and the opponent lacks graveyard hate or disruption."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Abhorrent Oculus",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Subtlety",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sink into Stupor",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Abhorrent Oculus is fragile to sweepers but excels at generating card advantage and board presence.",
+    "Subtlety is a versatile tool\u2014use it to protect threats, enable surprise attacks, or protect Sink into Stupor.",
+    "Sink into Stupor is a game-ending lock but vulnerable to graveyard hate",
+    "have backup plans.",
+    "Avoid overcommitting to the board without protection, and always track opponent's mana and hand size to time your plays optimally."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Subtlety to protect key spells, cast threats in response to counterspells, or use multiple threats to out-value counters. Sink into Stupor is often uncounterable or worth the risk due to its game-ending potential.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with interaction, use Surgical Extraction to disrupt mana dorks, and stabilize with Abhorrent Oculus. Avoid trading inefficiently; out-value them with card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and discard to slow the pace. Use Abhorrent Oculus to stabilize and draw into answers. Subtlety can protect a key threat to close out the game quickly.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card advantage (Oculus, discard). Use Subtlety to protect threats from spot removal. Sink into Stupor can lock them out of their own game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Card advantage wins. Use Subtlety on your most resilient threat or to protect a Sink into Stupor. Prioritize graveyard hate and Spell Pierce to disrupt their resources. Win by out-drawing and out-resolving.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (e.g., Boros Charm, Swords to Plowshares), spot removal, and combo win conditions.",
+    "Note when opponents tap out for spells vs. threats.",
+    "Track graveyard hate availability."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/modern.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

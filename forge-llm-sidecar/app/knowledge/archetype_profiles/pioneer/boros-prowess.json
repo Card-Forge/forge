@@ -1,0 +1,408 @@
+{
+  "schema_version": 1,
+  "name": "Boros Prowess",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Boros Prowess leverages cheap, resilient creatures to apply rapid early pressure while maintaining board control. Soul-Scar Mage amplifies Prowess triggers to accelerate damage output, while Emberheart Challenger provides a versatile threat that rewards combat. Screaming Nemesis offers late-game value and board presence to close out games when the early tempo advantage holds.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 4,
+      "cards": [
+        "Screaming Nemesis"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Emberheart Challenger",
+        "Soul-Scar Mage"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 29,
+      "cards": [
+        "Eidolon of the Great Revel",
+        "Emberheart Challenger",
+        "Kumano Faces Kakkazan",
+        "Magebane Lizard",
+        "Monastery Swiftspear",
+        "Screaming Nemesis",
+        "Soul-Scar Mage",
+        "Sunspine Lynx"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 38,
+      "cards": [
+        "Battlefield Forge",
+        "Boros Charm",
+        "Eidolon of the Great Revel",
+        "Erode",
+        "Lightning Helix",
+        "Magebane Lizard",
+        "Pyroclasm",
+        "Ramunap Ruins",
+        "Reckless Rage",
+        "Screaming Nemesis",
+        "Sheltered by Ghosts",
+        "Soul-Scar Mage",
+        "Sunspine Lynx"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 9
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Pyroclasm"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 9,
+      "cards": [
+        "Boros Charm",
+        "Screaming Nemesis",
+        "Sheltered by Ghosts"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 7,
+      "cards": [
+        "Monstrous Rage",
+        "Unlicensed Hearse"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Emberheart Challenger",
+        "Monastery Swiftspear"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Emberheart Challenger"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Emberheart Challenger"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Sunspine Lynx",
+        "Urabrask's Forge"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 17,
+      "cards": [
+        "Battlefield Forge",
+        "Den of the Bugbear",
+        "Inspiring Vantage",
+        "Needleverge Pathway",
+        "Ramunap Ruins",
+        "Sacred Foundry",
+        "Sokenzan, Crucible of Defiance"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Battlefield Forge",
+        "Den of the Bugbear",
+        "Inspiring Vantage",
+        "Mountain",
+        "Needleverge Pathway",
+        "Ramunap Ruins",
+        "Sacred Foundry",
+        "Sokenzan, Crucible of Defiance"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.52
+  },
+  "dual_role_cards": [
+    {
+      "card": "Battlefield Forge",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boros Charm",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Den of the Bugbear",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eidolon of the Great Revel",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emberheart Challenger",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inspiring Vantage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Magebane Lizard",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monastery Swiftspear",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Needleverge Pathway",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroclasm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ramunap Ruins",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Screaming Nemesis",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheltered by Ghosts",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sokenzan, Crucible of Defiance",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Scar Mage",
+      "roles": [
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunspine Lynx",
+      "roles": [
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Soul-Scar Mage until you have a Prowess creature to pump",
+    "Cast Emberheart Challenger before attacking to maximize its enter-the-battlefield trigger",
+    "Use Screaming Nemesis to trade up or protect key threats",
+    "Common mistake: Overcommitting creatures without spells to pump them, leaving you vulnerable to removal.",
+    "Another: Forgetting that Prowess triggers on any noncreature spell, including your own removal or pump spells."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap Prowess creatures immediately"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Soul-Scar Mage to pump attackers"
+    },
+    {
+      "trigger": "early game",
+      "line": "Apply pressure before opponent stabilizes"
+    }
+  ],
+  "kill_priority": [
+    "Emberheart Challenger",
+    "Monastery Swiftspear",
+    "Soul-Scar Mage",
+    "Eidolon of the Great Revel",
+    "Kumano Faces Kakkazan",
+    "Magebane Lizard",
+    "Screaming Nemesis",
+    "Sunspine Lynx"
+  ],
+  "interaction_to_disrupt": [
+    "Boros Charm",
+    "Screaming Nemesis",
+    "Sheltered by Ghosts",
+    "Battlefield Forge",
+    "Eidolon of the Great Revel",
+    "Erode",
+    "Lightning Helix",
+    "Magebane Lizard"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/boros-prowess.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

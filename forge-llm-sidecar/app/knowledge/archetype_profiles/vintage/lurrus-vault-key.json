@@ -1,0 +1,499 @@
+{
+  "schema_version": 1,
+  "name": "Lurrus Vault Key",
+  "format": "vintage",
+  "colors": [
+    "W",
+    "U",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This archetype leverages artifact recursion and flash-enabled artifact deployment to assemble recursive loops quickly. By cycling cheap permanents through the graveyard and battlefield, it generates overwhelming value or infinite resources before opponents can stabilize. The W/U/R color scheme provides efficient mana acceleration and versatile interaction to protect the combo.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 24,
+      "cards": [
+        "Ancestral Recall",
+        "Arcum's Astrolabe",
+        "Goblin Engineer",
+        "Goblin Welder",
+        "Ichor Wellspring",
+        "Lurrus of the Dream-Den",
+        "Melded Moxite",
+        "Sewer-veillance Cam",
+        "Soul-Guide Lantern",
+        "Urza's Saga",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Goblin Engineer",
+        "Goblin Welder",
+        "Grafdigger's Cage",
+        "Lurrus of the Dream-Den"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "tutors_wildcards": {
+      "target_count": 10,
+      "cards": [
+        "Goblin Engineer",
+        "Prismatic Vista",
+        "Scalding Tarn",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 9,
+      "cards": [
+        "Goblin Engineer",
+        "Goblin Welder",
+        "Lurrus of the Dream-Den"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "threats": {
+      "target_count": 27,
+      "cards": [
+        "Goblin Engineer",
+        "Goblin Welder",
+        "Hexing Squelcher",
+        "Lurrus of the Dream-Den",
+        "Manifold Key",
+        "Mox Emerald",
+        "Mox Jet",
+        "Mox Pearl",
+        "Mox Ruby",
+        "Mox Sapphire",
+        "Null Rod",
+        "Pithing Needle",
+        "Sol Ring",
+        "Time Vault",
+        "Time Walk",
+        "Void Mirror"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 20,
+      "cards": [
+        "Abrade",
+        "Chain of Vapor",
+        "Goblin Engineer",
+        "Legion Extruder",
+        "Lithomantic Barrage",
+        "Portable Hole",
+        "Prismatic Ending",
+        "Pyroblast",
+        "Soul-Guide Lantern",
+        "Swords to Plowshares",
+        "Vandalblast"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 9
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 11,
+      "cards": [
+        "Goblin Engineer",
+        "Goblin Welder",
+        "Mental Misstep",
+        "Pyroblast"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 13,
+      "cards": [
+        "Goblin Engineer",
+        "Goblin Welder",
+        "Hexing Squelcher",
+        "Lithomantic Barrage",
+        "Lurrus of the Dream-Den"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 3
+    },
+    "discard_outlets": {
+      "target_count": 2,
+      "cards": [
+        "Melded Moxite"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 12,
+      "cards": [
+        "Goblin Engineer",
+        "Goblin Welder",
+        "Grafdigger's Cage",
+        "Ichor Wellspring",
+        "Lurrus of the Dream-Den",
+        "Soul-Guide Lantern"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 10,
+      "cards": [
+        "Chain of Vapor",
+        "Goblin Engineer",
+        "Goblin Welder",
+        "Lurrus of the Dream-Den"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 9,
+      "cards": [
+        "Goblin Engineer",
+        "Goblin Welder",
+        "Lurrus of the Dream-Den"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Goblin Engineer",
+        "Goblin Welder",
+        "Lurrus of the Dream-Den"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "hate_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Blood Moon",
+        "Ensnaring Bridge",
+        "Goblin Engineer",
+        "Goblin Welder",
+        "Grafdigger's Cage"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 22,
+      "cards": [
+        "Arcum's Astrolabe",
+        "Black Lotus",
+        "Goblin Engineer",
+        "Prismatic Vista",
+        "Scalding Tarn",
+        "Snow-Covered Island",
+        "Snow-Covered Mountain",
+        "Snow-Covered Plains",
+        "Tolarian Academy",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 13,
+      "cards": [
+        "Prismatic Vista",
+        "Scalding Tarn",
+        "Snow-Covered Island",
+        "Snow-Covered Mountain",
+        "Snow-Covered Plains",
+        "Tolarian Academy",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.34
+  },
+  "dual_role_cards": [
+    {
+      "card": "Arcum's Astrolabe",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chain of Vapor",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Engineer",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Welder",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hexing Squelcher",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ichor Wellspring",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lithomantic Barrage",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lurrus of the Dream-Den",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Melded Moxite",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismatic Vista",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Mountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Plains",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tolarian Academy",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play Vault Key as early as possible to unlock flash artifact deployment",
+    "Use Goblin Engineer to get key artifacts onto the battlefield before activating Goblin Welder",
+    "Recycle Lurrus of the Dream-Den from the graveyard to replay it or fetch other cheap permanents",
+    "Hold interaction in hand to protect combo pieces until the loop is fully assembled",
+    "The infinite combo requires precise sequencing: cast Goblin Engineer, attach Lightning Greaves, tap Engineer to sacrifice a 1/1 token (or any creature), draw 2, Engineer dies, Goblin Welder finds another Engineer, repeat."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing Vault Key to enable flash artifact deployment"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish mana acceleration with cheap artifact permanents"
+    },
+    {
+      "trigger": "early game",
+      "line": "Set up Goblin Engineer to bypass casting costs for key artifacts"
+    }
+  ],
+  "kill_priority": [
+    "Goblin Engineer",
+    "Goblin Welder",
+    "Lurrus of the Dream-Den",
+    "Hexing Squelcher",
+    "Manifold Key",
+    "Mox Emerald",
+    "Mox Jet",
+    "Mox Pearl"
+  ],
+  "interaction_to_disrupt": [
+    "Goblin Engineer",
+    "Goblin Welder",
+    "Mental Misstep",
+    "Pyroblast",
+    "Hexing Squelcher",
+    "Lithomantic Barrage",
+    "Lurrus of the Dream-Den",
+    "Abrade"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/lurrus-vault-key.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "archetype": "Jeskai Ephemerate",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/jeskai-ephemerate.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Archaeomancer"
+    },
+    {
+      "qty": 4,
+      "name": "Augur of Bolas"
+    },
+    {
+      "qty": 2,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 2,
+      "name": "Dispel"
+    },
+    {
+      "qty": 3,
+      "name": "Ephemerate"
+    },
+    {
+      "qty": 2,
+      "name": "Fanged Flames"
+    },
+    {
+      "qty": 2,
+      "name": "Glacial Floodplain"
+    },
+    {
+      "qty": 4,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 3,
+      "name": "Mulldrifter"
+    },
+    {
+      "qty": 2,
+      "name": "Murmuring Mystic"
+    },
+    {
+      "qty": 4,
+      "name": "Perilous Landscape"
+    },
+    {
+      "qty": 4,
+      "name": "Preordain"
+    },
+    {
+      "qty": 2,
+      "name": "Ride's End"
+    },
+    {
+      "qty": 4,
+      "name": "Skred"
+    },
+    {
+      "qty": 8,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 2,
+      "name": "Snow-Covered Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Snow-Covered Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Union of the Third Path"
+    },
+    {
+      "qty": 2,
+      "name": "Volatile Fjord"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Annul"
+    },
+    {
+      "qty": 2,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 2,
+      "name": "Destroy Evil"
+    },
+    {
+      "qty": 2,
+      "name": "Envelop"
+    },
+    {
+      "qty": 3,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 3,
+      "name": "Pyroblast"
+    }
+  ]
+}

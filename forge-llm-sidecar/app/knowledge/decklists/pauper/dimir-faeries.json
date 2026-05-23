@@ -1,0 +1,133 @@
+{
+  "archetype": "Dimir Faeries",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/dimir-faeries.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Agony Warp"
+    },
+    {
+      "qty": 4,
+      "name": "Augur of Bolas"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 4,
+      "name": "Contaminated Aquifer"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir Aqueduct"
+    },
+    {
+      "qty": 2,
+      "name": "Dispel"
+    },
+    {
+      "qty": 1,
+      "name": "Extract a Confession"
+    },
+    {
+      "qty": 4,
+      "name": "Faerie Seer"
+    },
+    {
+      "qty": 1,
+      "name": "Foreboding Landscape"
+    },
+    {
+      "qty": 10,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Moon-Circuit Hacker"
+    },
+    {
+      "qty": 1,
+      "name": "Mukotai Ambusher"
+    },
+    {
+      "qty": 2,
+      "name": "Ninja of the Deep Hours"
+    },
+    {
+      "qty": 1,
+      "name": "Sewer-veillance Cam"
+    },
+    {
+      "qty": 4,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 4,
+      "name": "Spellstutter Sprite"
+    },
+    {
+      "qty": 1,
+      "name": "Suffocating Fumes"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Thorn of the Black Rose"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Annul"
+    },
+    {
+      "qty": 1,
+      "name": "Arms of Hadar"
+    },
+    {
+      "qty": 4,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Campfire"
+    },
+    {
+      "qty": 1,
+      "name": "Extract a Confession"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Mukotai Ambusher"
+    },
+    {
+      "qty": 2,
+      "name": "Relic of Progenitus"
+    }
+  ]
+}

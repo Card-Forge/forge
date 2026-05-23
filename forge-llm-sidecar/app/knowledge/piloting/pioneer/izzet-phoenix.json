@@ -14,12 +14,15 @@
     "keep_criteria": [
       "Hands with early cantrips like Opt or Consider",
       "Hands containing lands that enter untapped",
-      "Hands with early threats or delve enablers"
+      "Hands with early threats or delve enablers",
+      "Keep hands with 2-3 lands, at least one discard spell (Thoughtseize/Inquisition), and a cantrip (Treasure Cruise/Opt).",
+      "Keep hands with 2+ cantrips/discard and 2 lands."
     ],
     "mulligan_criteria": [
       "Hands heavy in tapped lands without immediate value",
       "Hands lacking card draw or filtering",
-      "Hands with only late-game reanimation spells"
+      "Hands with only late-game reanimation spells",
+      "Mulligan pure land hands, single-land hands, or hands lacking early interaction/cantrips."
     ],
     "examples": [
       {
@@ -54,17 +57,34 @@
     "early_game": [
       "Play untapped lands to maintain tempo and avoid wasting turns",
       "Use cantrips like Opt and Consider to filter draws and feed the graveyard",
-      "Cast early threats or delve enablers to establish board presence"
+      "Cast early threats or delve enablers to establish board presence",
+      "Turn 1: Play land, cast discard or cantrip.",
+      "Sequence discard first to see opponent's hand, then cantrip to dig.",
+      "Turn 2: Cast second cantrip/discard, play second land.",
+      "Aim for 3+ cards in graveyard by turn 3-4.",
+      "Cast Treasure Cruise as early as possible (turn 2 or 3) to dig 4 cards and rapidly fill the graveyard."
     ],
     "mid_game": [
       "Execute Treasure Cruise or Strategic Planning to find reanimation targets",
       "Manage spell count to avoid triggering Thing in the Ice prematurely if using Crackling Drake",
-      "Remove opposing threats with Lightning Axe or other interaction"
+      "Remove opposing threats with Lightning Axe or other interaction",
+      "Prioritize graveyard filling over board presence.",
+      "Manage mana to ensure you can cast Phoenix when the board is clear or protected.",
+      "Use Treasure Cruise strategically when you need to dig deep, not just for card advantage.",
+      "Hold back on committing all resources until you have a clear path to cast Phoenix or protect it.",
+      "Use discard to remove key threats early.",
+      "If the opponent has a board, discard their removal, then cast Phoenix on the following turn."
     ],
     "late_game": [
       "Reanimate multiple Arclight Phoenix or use Temporal Trespass/Galvanic Iteration for extra turns",
       "Stabilize against attrition with Narset, Parter of Veils or Chandra, Torch of Defiance",
-      "Close out games with lethal damage from Phoenixes or Drake combos"
+      "Close out games with lethal damage from Phoenixes or Drake combos",
+      "Arclight Phoenix is the primary finisher.",
+      "Artist's Talent can tutor for Phoenix or other graveyard synergies.",
+      "Once you have 7+ cards in graveyard, cast Phoenix for free.",
+      "Protect it with discard, countermagic, or by casting it when the opponent has no removal.",
+      "Go all-in when you have 7+ cards in graveyard, the opponent has no removal or board wipes, or you have a way to protect Phoenix.",
+      "Also commit when you cannot stabilize against aggro and need to race."
     ]
   },
   "key_cards": [
@@ -119,7 +139,13 @@
     "Manage spell count carefully to prevent accidentally returning Crackling Drake to hand via Thing in the Ice.",
     "Prioritize filtering draws with Strategic Planning or Opt to streamline the game plan.",
     "Sequence delve spells to maximize graveyard depth before casting Treasure Cruise or reanimating.",
-    "Keep lands untapped during the opponent's turn when playing around Narset, Parter of Veils."
+    "Keep lands untapped during the opponent's turn when playing around Narset, Parter of Veils.",
+    "Common mistake: overcommitting to the board before casting Phoenix.",
+    "Always prioritize graveyard count.",
+    "Artist's Talent is flexible but can be dead against graveyard hate",
+    "have a backup plan.",
+    "Treasure Cruise is a one-time draw engine",
+    "use it when you need to dig deep, not just for fun."
   ],
   "matchups": [
     {
@@ -171,6 +197,31 @@
         "Sacrifice outlets",
         "Heroic triggers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells. Cast Phoenix on the stack after they counter your cantrip, or use cheap spells to dig past it. If they have multiple counters, consider conceding if they have a hard lock.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and cantrips. Do not let them stabilize. Use Lightning Strike or Abrade to remove ramp creatures or planeswalkers. Cast Phoenix before they can deploy a game-ending threat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use discard to remove key threats. Use cantrips to dig for answers. Cast Phoenix as soon as possible to race. Do not overcommit to board stalls; you are a combo deck.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with cantrips and discard. Use discard to remove their removal. Cast Phoenix when they have exhausted their interaction. If they have a board wipe, wait until they have used it or dig for a way to protect Phoenix.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It is a graveyard race. Prioritize graveyard filling. Use Surgical Extraction to remove their Phoenix or key cards. Use discard to remove their cantrips or discard. Track graveyard size and win by casting Phoenix first or using Artist's Talent to find it when they do not.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -179,10 +230,13 @@
     "Mono Green Devotion big creatures",
     "Control board wipes",
     "Narset, Parter of Veils",
-    "Graveyard hate"
+    "Graveyard hate",
+    "Watch for removal (Lightning Strike, Abrade, Fatal Push), board wipes (Supreme Verdict, Wrath of God), and graveyard hate (Rest in Peace, Surgical Extraction, Grafdigger's Cage).",
+    "Track opponent's card count and discard usage to gauge their game plan and graveyard vulnerability."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-upgrading-the-challenger-deck-izzet-phoenix",
     "generated_at": "2026-05-21T03:49:55+00:00",
     "model": "local-model",
@@ -229,6 +283,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {
@@ -248,7 +320,7 @@
       "confidence": 0.95,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Arclight Phoenix — it's literally the heart of the strategy"
+      "evidence_span": "Arclight Phoenix \u2014 it's literally the heart of the strategy"
     },
     {
       "confidence": 0.9,

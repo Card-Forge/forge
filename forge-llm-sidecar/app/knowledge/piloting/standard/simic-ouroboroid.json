@@ -1,0 +1,128 @@
+{
+  "archetype": "Simic Ouroboroid",
+  "format": "standard",
+  "strategy_type": "combo",
+  "overview": "Simic Ouroboroid is a control-combo midrange deck that stabilizes early with efficient interaction and card advantage, then transitions into a recursive threat engine centered on Ouroboroid. It wins by outlasting spell-heavy and landfall strategies through superior resource management, graveyard recursion, and late-game inevitability.",
+  "win_conditions": [
+    "Ouroboroid is the primary win condition, especially when recursed from the graveyard.",
+    "Secondary finishers include efficient combat tricks, card advantage engines, and direct damage if applicable.",
+    "Once Ouroboroid is on the board and protected, focus on clearing blockers and closing the game."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including mana accelerants or fetches if applicable), at least one early interaction (counterspell or spot removal), and a curve-1 or curve-2 play like Badgermole Cub."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 0-1 lands, only high-cost spells, or no way to survive turns 1-3 against aggressive or spell-heavy strategies."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land and cast a cantrip or cheap interaction if available.",
+      "Turn 2: Drop Badgermole Cub to establish early board presence or mana advantage.",
+      "Use Nature's Rhythm strategically if you have excess mana or a spare land to dig for answers, threats, or graveyard fuel.",
+      "Sequence lands to ensure you can cast turn-2 plays while maintaining flexibility for counterspells and removal."
+    ],
+    "mid_game": [
+      "Preserve mana for interaction until turn 4-5.",
+      "Use Nature's Rhythm strategically to dig for answers or fuel the graveyard for Ouroboroid's recursion.",
+      "Avoid overcommitting to landfall or ramp synergies if the meta favors spell chains",
+      "prioritize card advantage and board control.",
+      "Manage your graveyard carefully, as it is both a resource and a vulnerability.",
+      "Hold back on committing all threats until you've established a baseline of interaction.",
+      "Trade efficiently against aggressive creatures, but save removal for key threats like Izzet finishers or Landfall enablers.",
+      "Use counterspells to protect your board state and disrupt opponent's combos or spell chains."
+    ],
+    "late_game": [
+      "Ouroboroid is the primary win condition, especially when recursed from the graveyard.",
+      "Secondary finishers include efficient combat tricks, card advantage engines, and direct damage if applicable.",
+      "Once Ouroboroid is on the board and protected, focus on clearing blockers and closing the game.",
+      "Go all-in when you have graveyard fuel, sufficient interaction to protect your board, and the opponent is low on removal or sweepers.",
+      "Also commit when you've outdrawn them and can close in 1-2 turns.",
+      "Don't overextend if the opponent has unblocked mana or known sweepers."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ouroboroid",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Badgermole Cub",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Nature's Rhythm",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overusing Nature's Rhythm too early and leaving yourself mana-starved.",
+    "Always calculate the opportunity cost of sacrificing lands.",
+    "Ouroboroid's recursion likely requires graveyard fuel, so don't discard it unnecessarily.",
+    "Watch for opponent's graveyard strategies, as they may interact with yours.",
+    "Practice timing your recursion to avoid falling into graveyard hate traps."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split casting costs, cheap cantrips to dig around counters, or commit multiple threats to overwhelm counterspells. Use Nature's Rhythm to dig for protection or alternative win conditions. Play around counters by holding priority or using layered spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their land drops, use spot removal on key ramp creatures, and prioritize graveyard hate if they rely on recursion. Force them to interact with your board instead of developing their mana base.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with efficient removal and counterspells, use Nature's Rhythm to dig for answers, and transition to a controlling midgame once the early threat is neutralized. Don't overcommit to threats until you've stabilized.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with efficient threats, use card draw to outvalue their removal, and leverage Ouroboroid's recursion to bypass sweepers. Force them to spend resources on multiple threats rather than one finisher.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize counterspells, graveyard hate, and targeted removal. Control the board with efficient trades and win by out-resourcing or out-recursing. Track their graveyard and hand size to time your aggression.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for Izzet's spell chains (Prowess triggers, Spellementals), Landfall's ramp/finishers, and control's sweepers.",
+    "Key tells: Opponent holding mana on their end step often signals a counter or sweeper.",
+    "Graveyard activity signals recursion or graveyard combos.",
+    "Track their removal count to know when you can safely commit threats."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/standard.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing at least two lands and a token generator",
       "Early access to Glistener Elf or Noble Hierarch",
-      "Presence of Legolas's Quick Reflexes to enable graveyard value"
+      "Presence of Legolas's Quick Reflexes to enable graveyard value",
+      "Keep hands with 1-2 lands, at least one 1-drop (Glistener Elf, Noble Hierarch, or Legolas's Quick Reflexes), and a pump spell or discard.",
+      "You need a turn-1 playable threat or mana source to execute the game plan."
     ],
     "mulligan_criteria": [
       "Zero lands or mana sources",
       "No creature spells or token producers",
-      "Heavy reliance on late-game cards without early pressure"
+      "Heavy reliance on late-game cards without early pressure",
+      "Mulligan if you have zero 1-drops, three or more lands, or only 2-drops with no acceleration."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Prioritize playing lands and token generators to establish board presence",
       "Use Glistener Elf to create infect tokens and apply immediate poison pressure",
-      "Hold up mana to protect key threats from early removal"
+      "Hold up mana to protect key threats from early removal",
+      "Turn 1: Play a land, cast Noble Hierarch or Glistener Elf.",
+      "If you have Legolas's Quick Reflexes, play it for immediate haste and +1/+1.",
+      "Turn 2: Play a second land, cast Kongming's Confidant or Sylvan Caryatid, or pump your 1-drop.",
+      "Attack with infect creatures immediately, prioritizing the face for poison.",
+      "Sequence mana to ensure you can cast threats and answers on curve without flooding."
     ],
     "mid_game": [
       "Leverage Noble Hierarch for mana ramp and additional flying tokens",
       "Activate Legolas's Quick Reflexes to cast creatures from the graveyard on opponent's turn",
-      "Trade efficiently to preserve infect tokens while advancing poison counters"
+      "Trade efficiently to preserve infect tokens while advancing poison counters",
+      "Treat mana as a resource for threats and answers, not for storing value.",
+      "Keep a pump spell or counterspell in hand to protect your poison strategy.",
+      "Avoid overcommitting to the board if you lack answers.",
+      "Your graveyard is generally a liability against hate, so prioritize board presence over recursion.",
+      "Commit early threats to apply poison pressure and force difficult blocks.",
+      "Hold back if the opponent has sweepers, hard removal, or counterspells they can activate."
     ],
     "late_game": [
       "Flood the board with multiple infect sources to bypass blockers",
       "Use graveyard recursion to replay lethal threats repeatedly",
-      "Maintain mana advantage through Noble Hierarch to outvalue control strategies"
+      "Maintain mana advantage through Noble Hierarch to outvalue control strategies",
+      "Win by dealing 10 poison counters through combat.",
+      "Achieve this by pumping infect creatures, attacking with multiple threats, or using pump spells to break through blockers.",
+      "Ensure you have enough damage to close the game before the opponent can stabilize or race you back.",
+      "Go all-in when you have two or more infect creatures, a pump spell, and the opponent has no sweepers or hard removal.",
+      "Also commit when you're at 5+ poison and the opponent is at low life or has no answers.",
+      "Use discard to remove key answers before attacking."
     ]
   },
   "key_cards": [
@@ -59,7 +79,12 @@
     "Hold up white mana to protect infect tokens from targeted removal",
     "Cast Legolas's Quick Reflexes before playing lands to maximize surprise value",
     "Prioritize attacking with infect creatures over trading to accumulate poison counters",
-    "Use Noble Hierarch's flying tokens to block flying threats while keeping ground infect safe"
+    "Use Noble Hierarch's flying tokens to block flying threats while keeping ground infect safe",
+    "Common mistakes include overextending into sweepers, forgetting to count poison counters, and mismanaging pump spells.",
+    "Always track the opponent's life total versus your poison damage.",
+    "Legolas's Quick Reflexes can be pumped for immediate lethal, so sequence it carefully.",
+    "Fast mana enables turn-2 poison, but don't sacrifice consistency for speed.",
+    "Watch for opponent's mana development and adjust your aggression based on their available answers."
   ],
   "matchups": [
     {
@@ -97,16 +122,35 @@
         "Card draw engines",
         "Late-game finishers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells before casting threats. Cast threats in response to counterspells if possible, or use pump spells to make threats too large to counter. Attack with multiple threats to force multiple counterspells. If they have only cheap counters, pump your creatures to bypass them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Deploy hate cards like Rest in Peace and Gaddock Teeg early to disrupt their mana. Apply pressure before they stabilize. Use targeted removal on key mana sources. If they ramp past your hate, use counterspells and pump spells to race or stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race to 10 poison. Prioritize faster mana, better pump spells, and hate cards against each other's threats. Win by out-resourcing, applying poison faster, and using discard to remove their answers. Track their poison counters and adjust your aggression accordingly.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes that clear token swarms",
     "Targeted removal for Glistener Elf and Noble Hierarch",
     "Counterspells that disrupt Legolas's Quick Reflexes recursion",
-    "Hand disruption that limits early token generation"
+    "Hand disruption that limits early token generation",
+    "Watch for Tron's mana rocks, Sneak & Show's graveyard, Delver's flip condition, Ocelot Pride's counters, and Dimir Tempo's counterspells.",
+    "Key tells include tapping for multiple colors, drawing extra cards, protecting specific permanents, or holding up mana on your turn.",
+    "Adjust your aggression based on their available answers."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:47:59+00:00",
     "model": "local-model",
@@ -135,6 +179,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

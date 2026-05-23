@@ -1,0 +1,129 @@
+{
+  "archetype": "Hammer Time",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/hammer-time.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Battlefield Improvisation"
+    },
+    {
+      "qty": 4,
+      "name": "Colossus Hammer"
+    },
+    {
+      "qty": 1,
+      "name": "Cryptic Coat"
+    },
+    {
+      "qty": 2,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 2,
+      "name": "Inkmoth Nexus"
+    },
+    {
+      "qty": 1,
+      "name": "Lavaspur Boots"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline Axe"
+    },
+    {
+      "qty": 4,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 4,
+      "name": "Memnite"
+    },
+    {
+      "qty": 4,
+      "name": "Metallic Rebuke"
+    },
+    {
+      "qty": 2,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 4,
+      "name": "Ornithopter"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Puresteel Paladin"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowspear"
+    },
+    {
+      "qty": 4,
+      "name": "Stoneforge Mystic"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 4,
+      "name": "Windswept Heath"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 2,
+      "name": "Kappa Cannoneer"
+    },
+    {
+      "qty": 1,
+      "name": "Portable Hole"
+    },
+    {
+      "qty": 1,
+      "name": "Stern Scolding"
+    },
+    {
+      "qty": 1,
+      "name": "Surge of Salvation"
+    },
+    {
+      "qty": 2,
+      "name": "Teferi, Time Raveler"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    }
+  ]
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with a one-mana creature or burn spell",
       "Hands containing Soul-Scar Mage or Monastery Swiftspear",
-      "Hands with two lands and multiple cheap spells"
+      "Hands with two lands and multiple cheap spells",
+      "Keep any hand with 2-3 lands and at least two Prowess creatures or a creature plus a burn spell.",
+      "Prioritize hands with 1-drops and early burn (e.g., Shock, Incinerate, Lightning Strike)."
     ],
     "mulligan_criteria": [
       "Hands with only three-mana or higher cards",
       "Hands lacking early interaction or creatures",
-      "Hands with three or more lands"
+      "Hands with three or more lands",
+      "Mulligan hands with 0-1 lands, 3+ lands with no early spells, or hands lacking a turn-1 Prowess threat."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and cheap creatures immediately",
       "Cast one-mana spells to trigger prowess on Swiftspear",
-      "Use burn to clear blockers or push damage"
+      "Use burn to clear blockers or push damage",
+      "Turn 1: Play a land, cast a 1-drop Prowess creature.",
+      "Turn 2: Play a land, cast a burn spell to trigger Prowess on your creature, then cast a second creature or another burn.",
+      "If opening with two lands, play both, then cast two spells (creature + burn or two burns).",
+      "Always sequence burn to trigger Prowess on threats rather than dealing direct damage to the face."
     ],
     "mid_game": [
       "Deploy Emberheart Challenger to generate tokens and trigger prowess",
       "Maintain board pressure while cycling through burn spells",
-      "Look for card advantage through token generation"
+      "Look for card advantage through token generation",
+      "Mana is for casting, not saving.",
+      "Prioritize triggering Prowess on threats over dealing damage to the face.",
+      "Keep 1-2 cards in hand to react to removal or close out games.",
+      "Avoid overcommitting to the board without a burn spell ready to clear blockers or finish the game.",
+      "Commit threats when you have a burn spell ready to clear blockers or when the opponent has no interaction.",
+      "Hold back if they have sweepers or spot removal"
     ],
     "late_game": [
       "Flood the board with tokens to overwhelm defenses",
       "Use remaining burn to finish the game",
-      "Transition to a wide board state if the opponent stalls"
+      "Transition to a wide board state if the opponent stalls",
+      "Emberheart Challenger combined with burn spells to trigger Prowess and deal 3-4 damage per turn.",
+      "Monastery Swiftspear with Prowess triggers is the primary win condition.",
+      "Use burn to clear blockers or close out games at 3-4 life.",
+      "Go all-in when you have a lethal combination in hand/graveyard, or when the opponent has no removal/sweepers and you can outpace their life total.",
+      "Commit when you can trigger Prowess on multiple threats in one turn."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Cast one-mana spells before attacking to maximize prowess triggers",
     "Hold burn spells in hand to trigger prowess on Swiftspear before using them",
-    "Play Emberheart Challenger when you have multiple prowess creatures to maximize token synergy"
+    "Play Emberheart Challenger when you have multiple prowess creatures to maximize token synergy",
+    "Common mistake: casting burn spells for damage instead of triggering Prowess on threats.",
+    "Always prioritize Prowess triggers over face damage unless you're at lethal.",
+    "Soul-Scar Mage's triggered ability lets you destroy a creature when you deal damage to it, making it an excellent blocker-killer and finisher when paired with Prowess burn.",
+    "Emberheart Challenger's token generation synergizes with Prowess, so cast it early to maximize triggers.",
+    "In the mirror, card advantage wins",
+    "don't trade evenly."
   ],
   "matchups": [
     {
@@ -87,16 +111,46 @@
         "Doomed Traveler",
         "Bloodmist Infiltrator"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells (1-drops, burn) to trigger Prowess before they can counter. Use Red Elemental Blast or Lightning Strike to remove their counterspellers. Sequence spells to trigger Prowess on threats, not just burn.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply maximum pressure early. Don't let them stabilize. Use burn to deal with their ramp creatures or finish them before they cast their big spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use burn to trade efficiently. Don't overextend into combat. Use removal to kill their key threats. Win by out-grinding or closing out before their board stabilizes.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure relentlessly. Use Prowess to bypass their spot removal. Force them to use multiple spells to answer one threat. Win by out-casting them or closing out with burn.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by card advantage and better sequencing. Use draw engines to out-value them. Prioritize triggering Prowess on your threats while using burn to clear their blockers. Sideboard in more hate (Red Elemental Blast, Pyroclasm) and bring in more burn to stabilize.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Abrupt Decay",
     "Path to Exile",
     "Lightning Strike",
-    "Teferi, Hero of Dominaria"
+    "Teferi, Hero of Dominaria",
+    "Watch for sweepers (Wrath of God, Pyroclasm), spot removal (Path to Exile, Shock), and counterspells.",
+    "Note when opponents tap out for answers.",
+    "Track their life total and board state to calculate lethal.",
+    "Watch for graveyard recursion or combo pieces, especially against Niv to Light and Greasefang."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T03:51:10+00:00",
     "model": "local-model",
@@ -112,6 +166,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

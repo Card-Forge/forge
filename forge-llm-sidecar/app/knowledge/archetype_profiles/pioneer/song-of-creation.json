@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "name": "Song of Creation",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This five-color Pioneer deck leverages Mox Amber to fetch key lands and Beseech the Mirror to duplicate permanents, culminating in a Song of Creation payoff. By rapidly assembling a board of 1/1 creatures, the deck aims to overwhelm opponents before they can stabilize. The strategy relies on precise sequencing and mana acceleration to bypass early-game vulnerability.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 7,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Deadly Dispute"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 11,
+      "cards": [
+        "Beseech the Mirror",
+        "Deadly Dispute",
+        "Song of Creation"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 13,
+      "cards": [
+        "Beseech the Mirror",
+        "Mox Amber",
+        "Song of Creation",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Beseech the Mirror"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 13,
+      "cards": [
+        "Beseech the Mirror",
+        "Mox Amber",
+        "Song of Creation",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 23,
+      "cards": [
+        "Beseech the Mirror",
+        "Bone Saw",
+        "Gilded Goose",
+        "Song of Creation",
+        "Stonecoil Serpent",
+        "Thassa's Oracle",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 8,
+      "cards": [
+        "Into the Flood Maw",
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 5,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "protection": {
+      "target_count": 9,
+      "cards": [
+        "Leyline of Sanctity",
+        "Stonecoil Serpent",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 4
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 16,
+      "cards": [
+        "Beseech the Mirror",
+        "Mox Amber",
+        "Song of Creation",
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 16,
+      "cards": [
+        "Beseech the Mirror",
+        "Into the Flood Maw",
+        "Mox Amber",
+        "Song of Creation"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 4
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Song of Creation"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 5,
+      "cards": [
+        "Song of Creation",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Beseech the Mirror",
+        "Song of Creation"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Silence",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 47,
+      "cards": [
+        "Aether Hub",
+        "An Offer You Can't Refuse",
+        "Astral Cornucopia",
+        "Beseech the Mirror",
+        "Deadly Dispute",
+        "Gilded Goose",
+        "Mana Confluence",
+        "Mox Amber",
+        "Mox Jasper",
+        "Song of Creation",
+        "Spire of Industry",
+        "Starting Town"
+      ],
+      "mainboard_count": 47,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 16,
+      "cards": [
+        "Aether Hub",
+        "Mana Confluence",
+        "Spire of Industry",
+        "Starting Town"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Aether Hub",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "An Offer You Can't Refuse",
+      "roles": [
+        "counterspells",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Beseech the Mirror",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Dispute",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gilded Goose",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Into the Flood Maw",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Confluence",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mox Amber",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Song of Creation",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spire of Industry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stonecoil Serpent",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thassa's Oracle",
+      "roles": [
+        "dig_draw",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tormod's Crypt",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Voice of Victory",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always play Mox Amber before casting high-cost spells",
+    "Copy lands with Beseech the Mirror before casting Song of Creation",
+    "Hold up mana for potential counterspells or removal",
+    "Common mistake: Casting Song of Creation without a plan for recursion if it's answered.",
+    "Always keep Beseech the Mirror in hand or ensure you have a way to get it to the graveyard."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing lands and Mox Amber"
+    },
+    {
+      "trigger": "early game",
+      "line": "Search for specific lands needed for combo pieces"
+    },
+    {
+      "trigger": "early game",
+      "line": "Protect combo pieces from early disruption"
+    }
+  ],
+  "kill_priority": [
+    "Song of Creation",
+    "Beseech the Mirror",
+    "Mox Amber",
+    "Thassa's Oracle",
+    "Bone Saw",
+    "Gilded Goose",
+    "Stonecoil Serpent",
+    "Voice of Victory"
+  ],
+  "interaction_to_disrupt": [
+    "An Offer You Can't Refuse",
+    "Spell Pierce",
+    "Leyline of Sanctity",
+    "Stonecoil Serpent",
+    "Thassa's Oracle",
+    "Into the Flood Maw",
+    "Tormod's Crypt",
+    "Silence"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/song-of-creation.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

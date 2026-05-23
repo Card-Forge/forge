@@ -1,0 +1,370 @@
+{
+  "schema_version": 1,
+  "name": "Selesnya Midrange",
+  "format": "pioneer",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Elspeth, Storm Slayer",
+    "The Wandering Emperor",
+    "Archon of Emeria",
+    "Aven Interrupter",
+    "Badgermole Cub",
+    "Beza, the Bounding Spring",
+    "Elvish Mystic",
+    "Emeritus of Abundance"
+  ],
+  "interaction_to_disrupt": [
+    "Aven Interrupter",
+    "Boseiju, Who Endures",
+    "Brushland",
+    "Eiganjo, Seat of the Empire",
+    "Elspeth, Storm Slayer",
+    "Get Lost",
+    "March of Otherworldly Light",
+    "Seam Rip"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 7,
+      "cards": [
+        "Beza, the Bounding Spring",
+        "Enduring Innocence"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Collected Company"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 41,
+      "cards": [
+        "Archon of Emeria",
+        "Aven Interrupter",
+        "Badgermole Cub",
+        "Beza, the Bounding Spring",
+        "Elspeth, Storm Slayer",
+        "Elvish Mystic",
+        "Emeritus of Abundance",
+        "Enduring Innocence",
+        "Llanowar Elves",
+        "Ouroboroid",
+        "Skyclave Apparition",
+        "Thalia, Guardian of Thraben",
+        "The Wandering Emperor"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 7
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Aven Interrupter",
+        "Boseiju, Who Endures",
+        "Brushland",
+        "Eiganjo, Seat of the Empire",
+        "Elspeth, Storm Slayer",
+        "Get Lost",
+        "March of Otherworldly Light",
+        "Seam Rip",
+        "The Wandering Emperor"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 7,
+      "cards": [
+        "Abandoned Air Temple",
+        "Elspeth, Storm Slayer",
+        "Ouroboroid"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 7,
+      "cards": [
+        "Aven Interrupter",
+        "Unlicensed Hearse"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 8,
+      "cards": [
+        "Badgermole Cub",
+        "Enduring Innocence"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Archon of Emeria"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Abandoned Air Temple",
+        "Badgermole Cub",
+        "Boseiju, Who Endures",
+        "Brushland",
+        "Eiganjo, Seat of the Empire",
+        "Razorverge Thicket",
+        "Starting Town",
+        "Temple Garden"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 22,
+      "cards": [
+        "Abandoned Air Temple",
+        "Boseiju, Who Endures",
+        "Brushland",
+        "Eiganjo, Seat of the Empire",
+        "Forest",
+        "Plains",
+        "Razorverge Thicket",
+        "Starting Town",
+        "Temple Garden"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 4,
+      "cards": [
+        "Elspeth, Storm Slayer",
+        "The Wandering Emperor"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.41
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abandoned Air Temple",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archon of Emeria",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Aven Interrupter",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Badgermole Cub",
+      "roles": [
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Beza, the Bounding Spring",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brushland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eiganjo, Seat of the Empire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elspeth, Storm Slayer",
+      "roles": [
+        "planeswalker_threats",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Enduring Innocence",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ouroboroid",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Razorverge Thicket",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Wandering Emperor",
+      "roles": [
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/selesnya-midrange.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

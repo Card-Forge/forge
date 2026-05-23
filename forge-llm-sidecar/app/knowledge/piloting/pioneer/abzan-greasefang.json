@@ -2,22 +2,25 @@
   "archetype": "Abzan Greasefang",
   "format": "pioneer",
   "strategy_type": "combo",
-  "overview": "Abzan Greasefang is a Pioneer combo deck that mills vehicles into the graveyard to reanimate them with Greasefang, Okiba Boss for a rapid combat kill. It supplements this primary win condition with efficient discard, recursion, and attrition threats like Esika’s Chariot and Overlord of the Balemurk. The deck aims to apply early pressure while forcing opponents to play around its inevitable combo sequence.",
+  "overview": "Abzan Greasefang is a Pioneer combo deck that mills vehicles into the graveyard to reanimate them with Greasefang, Okiba Boss for a rapid combat kill. It supplements this primary win condition with efficient discard, recursion, and attrition threats like Esika\u2019s Chariot and Overlord of the Balemurk. The deck aims to apply early pressure while forcing opponents to play around its inevitable combo sequence.",
   "win_conditions": [
     "Reanimate Parhelion II with Greasefang, Okiba Boss to deal 13 combat damage plus token attacks",
-    "Use Esika’s Chariot and Skysovereign, Consul Flagship for attrition and board control",
+    "Use Esika\u2019s Chariot and Skysovereign, Consul Flagship for attrition and board control",
     "Leverage Overlord of the Balemurk and Sheoldred, the Apocalypse for late-game card advantage and threat generation"
   ],
   "mulligan": {
     "keep_criteria": [
       "Hands with early lands, mill effects, or discard spells",
       "Hands containing Greasefang, Okiba Boss with a way to mill a vehicle",
-      "Hands with Thoughtseize or Traverse the Ulvenwald for early disruption and mana"
+      "Hands with Thoughtseize or Traverse the Ulvenwald for early disruption and mana",
+      "Keep hands with 2-3 lands (including a Parhelion II if possible), a Thoughtseize, and a turn-2 play (2-drop creature or mana acceleration).",
+      "Prioritize hands that can play a land, cast Thoughtseize, and develop a board by turn 2-3."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or early interaction",
       "Hands with multiple Parhelion II copies without discard outlets",
-      "Hands focused solely on late-game threats without setup"
+      "Hands focused solely on late-game threats without setup",
+      "Mulligan if you have 0-1 lands, multiple Parhelion II with no other ramp, or only removal without threats."
     ],
     "examples": [
       {
@@ -39,17 +42,31 @@
     "early_game": [
       "Play Thoughtseize on turn one to extract information and remove key threats",
       "Use Traverse the Ulvenwald for land drops or toolbox creatures like Boseiju, Who Endures",
-      "Deploy Raffine’s Informant or mill effects to begin filling the graveyard"
+      "Deploy Raffine\u2019s Informant or mill effects to begin filling the graveyard",
+      "Turn 1: Play a land, cast Thoughtseize on the opponent's key early threat, combo piece, or answer to your plan.",
+      "Turn 2: Ramp with Parhelion II if available, or play a 2-drop creature.",
+      "If you have Greasefang and sufficient mana, cast it on turn 3-4 to stabilize.",
+      "Sequence lands to ensure you hit your mana steps, prioritizing untapped sources when possible to maintain spell speed."
     ],
     "mid_game": [
       "Cast Greasefang, Okiba Boss on turn three to reanimate milled vehicles",
       "Force opponents to play around Greasefang to gain virtual extra turns",
-      "Use discard spells like Bitter Triumph or Liliana of the Veil to drain resources and mill vehicles"
+      "Use discard spells like Bitter Triumph or Liliana of the Veil to drain resources and mill vehicles",
+      "Manage mana to keep options open for removal and threats.",
+      "Don't overcommit to the board if you can draw into answers.",
+      "Use Parhelion II early to accelerate into Greasefang or key midgame threats.",
+      "Track graveyard resources to avoid falling behind on card advantage and recursion.",
+      "Commit threats when you have removal or discard to protect them.",
+      "Hold back if the opponent has sweepers or counterspells."
     ],
     "late_game": [
-      "Transition to attrition with Esika’s Chariot, Overlord of the Balemurk, and Sheoldred, the Apocalypse",
+      "Transition to attrition with Esika\u2019s Chariot, Overlord of the Balemurk, and Sheoldred, the Apocalypse",
       "Use Glissa Sunslayer for card advantage and enchantment removal",
-      "Maintain constant threat flow and life gain to outlast opponents"
+      "Maintain constant threat flow and life gain to outlast opponents",
+      "Greasefang with a board of lifelinked creatures, or a planeswalker (Teferi, Hero of Dominaria) that can lock down the board and draw cards.",
+      "Win by trading up through combat and card draw, leveraging Greasefang's death triggers to out-resource the opponent.",
+      "Go all-in when you have card advantage, removal for their threats, and Greasefang on board.",
+      "Also commit when they've used their sweepers or counters, or when you can safely trade creatures to trigger Greasefang's draw engine."
     ]
   },
   "key_cards": [
@@ -64,7 +81,7 @@
       "notes": "Milled into the graveyard to be reanimated; deals 13 combat damage and creates two 4/4 tokens."
     },
     {
-      "name": "Esika’s Chariot",
+      "name": "Esika\u2019s Chariot",
       "role": "Attrition threat",
       "notes": "Provides ten power across four permanents when reanimated; serves as a fair backup plan against combo-focused lists."
     },
@@ -87,7 +104,12 @@
   "sequencing_tips": [
     "Target yourself with Thoughtseize to discard Parhelion II, then cast Greasefang, Okiba Boss to immediately reanimate it.",
     "Use Traverse the Ulvenwald early for lands, then later to fetch Boseiju, Who Endures to Channel into artifact/enchantment removal.",
-    "Force opponents to play around Greasefang early to gain virtual extra turns for proactive plays like Esika's Chariot."
+    "Force opponents to play around Greasefang early to gain virtual extra turns for proactive plays like Esika's Chariot.",
+    "Common mistakes include overcommitting to Greasefang without backup, ignoring graveyard resources, and mulliganing too aggressively.",
+    "Parhelion II can be sacrificed for mana if absolutely necessary, but it's usually kept for ramp.",
+    "Greasefang's draw trigger synergizes with sacrifice outlets and natural combat deaths.",
+    "Watch for opponent's recursion and plan discard/removal accordingly.",
+    "Always track their graveyard to avoid falling behind on card advantage."
   ],
   "matchups": [
     {
@@ -125,6 +147,31 @@
         "Quintorius Kand",
         "Fast artifact assembly"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, discard their counters, or cast spells in response to their counterspells. Greasefang's value can outlast counters, and Thoughtseize can remove key counters before they're needed.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, disrupt their mana sources with Thoughtseize, and use removal to stop their big threats. Force them to answer your board while you stabilize into Greasefang.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal, lifegain, and sweepers. Greasefang can turn the tide by making your creatures unblockable/unkillable in combat and drawing you into answers through creature deaths.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with multiple threats, use discard to disrupt their answers, and win through card advantage. Greasefang out-grinds control by turning every combat into a card draw engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the hand war with Thoughtseize, track graveyard, and be the first to cast Greasefang. Use targeted removal to break their board and force unfavorable trades. Prioritize graveyard hate to disrupt their recursion.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -135,10 +182,13 @@
     "Lotus Combo",
     "Nykthos Ramp",
     "Aggro decks",
-    "Midrange decks"
+    "Midrange decks",
+    "Watch for sweepers (Wrath of God, Anger), counterspells, graveyard recursion, and combo pieces.",
+    "Note when opponents tap out for big threats or hold up mana for protection."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-abzan-greasefang-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T03:44:53+00:00",
     "model": "local-model",
@@ -156,6 +206,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

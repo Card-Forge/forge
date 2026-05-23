@@ -1,0 +1,141 @@
+{
+  "archetype": "Ninjas",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/ninjas.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Daze"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 4,
+      "name": "Ingenious Infiltrator"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 3,
+      "name": "Kaito, Bane of Nightmares"
+    },
+    {
+      "qty": 2,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 2,
+      "name": "Mockingbird"
+    },
+    {
+      "qty": 4,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 4,
+      "name": "Ornithopter"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 2,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 4,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 2,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 4,
+      "name": "Yuriko, the Tiger's Shadow"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 1,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Dauthi Voidwalker"
+    },
+    {
+      "qty": 1,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 2,
+      "name": "Wasteland"
+    }
+  ]
+}

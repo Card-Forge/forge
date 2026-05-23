@@ -1,0 +1,372 @@
+{
+  "archetype": "Quandrix, the Proof",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/quandrix-the-proof.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Alchemist's Refuge"
+    },
+    {
+      "qty": 1,
+      "name": "Allosaurus Shepherd"
+    },
+    {
+      "qty": 1,
+      "name": "Amphibian Downpour"
+    },
+    {
+      "qty": 1,
+      "name": "An Offer You Can't Refuse"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Archmage Emeritus"
+    },
+    {
+      "qty": 1,
+      "name": "Archmage of Runes"
+    },
+    {
+      "qty": 1,
+      "name": "Basalt Monolith"
+    },
+    {
+      "qty": 1,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Capture of Jingzhou"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Chord of Calling"
+    },
+    {
+      "qty": 1,
+      "name": "Chrome Mox"
+    },
+    {
+      "qty": 1,
+      "name": "City of Brass"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Crop Rotation"
+    },
+    {
+      "qty": 1,
+      "name": "Cyclonic Rift"
+    },
+    {
+      "qty": 1,
+      "name": "Delighted Halfling"
+    },
+    {
+      "qty": 1,
+      "name": "Dosan the Falling Leaf"
+    },
+    {
+      "qty": 1,
+      "name": "Eldritch Evolution"
+    },
+    {
+      "qty": 1,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Emergence Zone"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Entish Restoration"
+    },
+    {
+      "qty": 1,
+      "name": "Eternal Scourge"
+    },
+    {
+      "qty": 1,
+      "name": "Eternal Witness"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Mastermind"
+    },
+    {
+      "qty": 1,
+      "name": "Fierce Guardianship"
+    },
+    {
+      "qty": 1,
+      "name": "Final-Word Phantom"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Food Chain"
+    },
+    {
+      "qty": 1,
+      "name": "Forbidden Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 6,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 1,
+      "name": "Fortune Teller's Talent"
+    },
+    {
+      "qty": 1,
+      "name": "Fyndhorn Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Gaea's Cradle"
+    },
+    {
+      "qty": 1,
+      "name": "Gemstone Caverns"
+    },
+    {
+      "qty": 1,
+      "name": "Grim Monolith"
+    },
+    {
+      "qty": 1,
+      "name": "Harrow"
+    },
+    {
+      "qty": 1,
+      "name": "Horizon of Progress"
+    },
+    {
+      "qty": 5,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Kinnan, Bonder Prodigy"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Misdirection"
+    },
+    {
+      "qty": 1,
+      "name": "Mistrise Village"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Diamond"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Remora"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Lore"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Rhythm"
+    },
+    {
+      "qty": 1,
+      "name": "Nexus of Fate"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Pact of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Personal Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Planar Engineering"
+    },
+    {
+      "qty": 1,
+      "name": "Quandrix, the Proof"
+    },
+    {
+      "qty": 1,
+      "name": "Rampant Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Rejuvenating Springs"
+    },
+    {
+      "qty": 1,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Roiling Regrowth"
+    },
+    {
+      "qty": 1,
+      "name": "Shared Roots"
+    },
+    {
+      "qty": 1,
+      "name": "Skyshroud Claim"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sowing Mycospawn"
+    },
+    {
+      "qty": 1,
+      "name": "Staff of Domination"
+    },
+    {
+      "qty": 1,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 1,
+      "name": "Swan Song"
+    },
+    {
+      "qty": 1,
+      "name": "Temporal Manipulation"
+    },
+    {
+      "qty": 1,
+      "name": "Temporal Mastery"
+    },
+    {
+      "qty": 1,
+      "name": "Temur Sabertooth"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 1,
+      "name": "The One Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Thrasios, Triton Hero"
+    },
+    {
+      "qty": 1,
+      "name": "Three Visits"
+    },
+    {
+      "qty": 1,
+      "name": "Time Stretch"
+    },
+    {
+      "qty": 1,
+      "name": "Time Warp"
+    },
+    {
+      "qty": 1,
+      "name": "Walk the Aeons"
+    },
+    {
+      "qty": 1,
+      "name": "Walking Ballista"
+    },
+    {
+      "qty": 1,
+      "name": "Wan Shi Tong, Librarian"
+    },
+    {
+      "qty": 1,
+      "name": "Waterlogged Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Worldly Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Yavimaya Coast"
+    }
+  ],
+  "sideboard": []
+}

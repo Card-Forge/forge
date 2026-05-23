@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "name": "4c Ponza",
+  "format": "pauper",
+  "colors": [
+    "W",
+    "U",
+    "R",
+    "G"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 61,
+  "macro_plan": "4c Ponza is a four-color midrange deck that leverages land destruction to disrupt opponents while maintaining board presence with efficient creatures and token generation. By integrating blue into the traditional W/R/G foundation, the archetype gains additional card advantage and tempo tools to outlast aggressive strategies and race control decks. The core loop revolves around trading lands for creatures, using Utopia Sprawl to stabilize, and closing games with overwhelming combat pressure.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 12,
+      "cards": [
+        "L\u00f3rien Revealed",
+        "Perilous Landscape",
+        "Relic of Progenitus",
+        "Rhystic Study",
+        "Utopia Sprawl"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 12,
+      "cards": [
+        "Avenging Hunter",
+        "Thermokarst",
+        "Utopia Sprawl"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 7,
+      "cards": [
+        "L\u00f3rien Revealed",
+        "Mwonvuli Acid-Moss",
+        "Perilous Landscape"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 20,
+      "cards": [
+        "Arbor Elf",
+        "Avenging Hunter",
+        "Boarding Party",
+        "Jewel Thief",
+        "Sagu Wildling",
+        "Wild Growth",
+        "Writhing Chrysalis"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 27,
+      "cards": [
+        "Armadillo Cloak",
+        "Avenging Hunter",
+        "Breath Weapon",
+        "Circle of Protection: Red",
+        "Hydroblast",
+        "Mwonvuli Acid-Moss",
+        "Snap",
+        "Structural Distortion",
+        "Thermokarst",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 10
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "Hydroblast"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 13,
+      "cards": [
+        "Avenging Hunter",
+        "Circle of Protection: Red",
+        "Thermokarst",
+        "Utopia Sprawl"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 12,
+      "cards": [
+        "Avenging Hunter",
+        "Thermokarst",
+        "Utopia Sprawl"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 16,
+      "cards": [
+        "Avenging Hunter",
+        "Relic of Progenitus",
+        "Thermokarst",
+        "Thraben Charm",
+        "Utopia Sprawl"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 14,
+      "cards": [
+        "Avenging Hunter",
+        "Snap",
+        "Thermokarst",
+        "Utopia Sprawl"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Utopia Sprawl"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Avenging Hunter",
+        "Thermokarst",
+        "Utopia Sprawl"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Circle of Protection: Red",
+        "Dust to Dust",
+        "Weather the Storm"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 20,
+      "cards": [
+        "Avenging Hunter",
+        "Highland Forest",
+        "Jewel Thief",
+        "Perilous Landscape",
+        "Radiant Grove",
+        "Rimewood Falls",
+        "Thermokarst",
+        "Utopia Sprawl"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 17,
+      "cards": [
+        "Forest",
+        "Highland Forest",
+        "Island",
+        "Mountain",
+        "Perilous Landscape",
+        "Plains",
+        "Radiant Grove",
+        "Rimewood Falls"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.37
+  },
+  "dual_role_cards": [
+    {
+      "card": "Avenging Hunter",
+      "roles": [
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Circle of Protection: Red",
+      "roles": [
+        "hate_pieces",
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Highland Forest",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jewel Thief",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mwonvuli Acid-Moss",
+      "roles": [
+        "removal",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Perilous Landscape",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Radiant Grove",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Relic of Progenitus",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rimewood Falls",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snap",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thermokarst",
+      "roles": [
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thraben Charm",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Utopia Sprawl",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Thermokarst until after opponent commits to a land or before combat to maximize impact",
+    "Trigger Avenging Hunter's death ability strategically, often by trading it into a removal spell or sacrificing it",
+    "Use Utopia Sprawl's untap ability to cast multiple spells in a turn or to generate tokens for combat tricks",
+    "Prioritize destroying opponent's nonbasic lands or lands that enable their key strategies",
+    "Utopia Sprawl + Avenging Hunter is a powerful but fragile combo"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cheap threats to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Thermokarst or Avenging Hunter to destroy key opponent lands"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize disrupting aggressive strategies before they gain momentum"
+    }
+  ],
+  "kill_priority": [
+    "Utopia Sprawl",
+    "Avenging Hunter",
+    "Thermokarst",
+    "Arbor Elf",
+    "Boarding Party",
+    "Jewel Thief",
+    "Sagu Wildling",
+    "Wild Growth"
+  ],
+  "interaction_to_disrupt": [
+    "Hydroblast",
+    "Avenging Hunter",
+    "Circle of Protection: Red",
+    "Thermokarst",
+    "Utopia Sprawl",
+    "Armadillo Cloak",
+    "Breath Weapon",
+    "Mwonvuli Acid-Moss"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/4c-ponza.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

@@ -1,0 +1,527 @@
+{
+  "schema_version": 1,
+  "name": "Jeskai Elementals",
+  "format": "standard",
+  "colors": [
+    "W",
+    "U",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Jeskai Elementals operates as a tempo strategy that leverages disruptive sorceries and conditional ramp to outpace opponents. The deck uses Deceit to steal key spells or threats while generating card advantage, supported by Wistfulness to accelerate lands and draw cards when Elementals are on the battlefield. Roaming Throne provides flexible pump and counter manipulation to quickly scale small Elementals into formidable blockers or finishers.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Winternight Stories"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 17,
+      "cards": [
+        "Beza, the Bounding Spring",
+        "Broadside Barrage",
+        "Deceit",
+        "Ill-Timed Explosion",
+        "Quantum Riddler",
+        "Soul-Guide Lantern",
+        "Winternight Stories",
+        "Wistfulness"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 5
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Wistfulness"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Vibrance"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 5,
+      "cards": [
+        "Deceit",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 31,
+      "cards": [
+        "Ashling, Rekindled",
+        "Beza, the Bounding Spring",
+        "Deceit",
+        "Flamebraider",
+        "Quantum Riddler",
+        "Roaming Throne",
+        "Sunderflock",
+        "Vibrance",
+        "Wistfulness"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 24,
+      "cards": [
+        "Abrade",
+        "Bounce Off",
+        "Broadside Barrage",
+        "Burst Lightning",
+        "Ghost Vacuum",
+        "Ill-Timed Explosion",
+        "Pyroclasm",
+        "Sear",
+        "Soul-Guide Lantern",
+        "Vibrance",
+        "Wistfulness"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 9
+    },
+    "wrath": {
+      "target_count": 7,
+      "cards": [
+        "Ghost Vacuum",
+        "Ill-Timed Explosion",
+        "Pyroclasm"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 4
+    },
+    "counterspells": {
+      "target_count": 10,
+      "cards": [
+        "Disdainful Stroke",
+        "Roaming Throne",
+        "Wistfulness"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 16,
+      "cards": [
+        "Cavern of Souls",
+        "Deceit",
+        "Roaming Throne",
+        "Wistfulness"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 5,
+      "cards": [
+        "Broadside Barrage",
+        "Wistfulness"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "graveyard_enablers": {
+      "target_count": 13,
+      "cards": [
+        "Ghost Vacuum",
+        "Pit of Offerings",
+        "Roaming Throne",
+        "Soul-Guide Lantern",
+        "Winternight Stories",
+        "Wistfulness"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 12,
+      "cards": [
+        "Bounce Off",
+        "Deceit",
+        "Sunderflock",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 5,
+      "cards": [
+        "Deceit",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Roaming Throne",
+        "Wistfulness"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 36,
+      "cards": [
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Cori Mountain Monastery",
+        "Deceit",
+        "Flamebraider",
+        "Pit of Offerings",
+        "Restless Vinestalk",
+        "Secluded Courtyard",
+        "Spirebluff Canal",
+        "Starting Town",
+        "Steam Vents",
+        "Stormcarved Coast",
+        "Wistfulness"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Cori Mountain Monastery",
+        "Island",
+        "Pit of Offerings",
+        "Restless Vinestalk",
+        "Secluded Courtyard",
+        "Spirebluff Canal",
+        "Starting Town",
+        "Steam Vents",
+        "Stormcarved Coast"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.48
+  },
+  "dual_role_cards": [
+    {
+      "card": "Beza, the Bounding Spring",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bounce Off",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Broadside Barrage",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cori Mountain Monastery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deceit",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flamebraider",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Vacuum",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ill-Timed Explosion",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pit of Offerings",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroclasm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quantum Riddler",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restless Vinestalk",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Roaming Throne",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers",
+        "hate_pieces",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Secluded Courtyard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirebluff Canal",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormcarved Coast",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunderflock",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vibrance",
+      "roles": [
+        "removal",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Winternight Stories",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_reducers",
+        "payoff_cards",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wistfulness",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Deceit until your opponent's turn to maximize disruption and avoid wasting it on a dead hand",
+    "Cast Wistfulness immediately after playing an Elemental to secure the card draw and land drop in one turn",
+    "Move counters from Roaming Throne only when an Elemental needs immediate size to block or attack",
+    "Prioritize copying opponent's removal over threats when your board is vulnerable",
+    "Common mistake: Overcommitting to the board without protection or tracking opponent's interaction."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play small Elementals to trigger Wistfulness's draw condition"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Wistfulness to fetch lands and maintain mana advantage"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold Deceit for opponent's turn to disrupt early threats"
+    }
+  ],
+  "kill_priority": [
+    "Deceit",
+    "Winternight Stories",
+    "Ashling, Rekindled",
+    "Beza, the Bounding Spring",
+    "Flamebraider",
+    "Quantum Riddler",
+    "Roaming Throne",
+    "Sunderflock"
+  ],
+  "interaction_to_disrupt": [
+    "Disdainful Stroke",
+    "Roaming Throne",
+    "Wistfulness",
+    "Cavern of Souls",
+    "Deceit",
+    "Abrade",
+    "Bounce Off",
+    "Broadside Barrage"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/jeskai-elementals.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

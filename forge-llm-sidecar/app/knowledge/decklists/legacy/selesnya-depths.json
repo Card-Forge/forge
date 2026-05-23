@@ -1,0 +1,193 @@
+{
+  "archetype": "Selesnya Depths",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/selesnya-depths.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 3,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Crop Rotation"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Depths"
+    },
+    {
+      "qty": 1,
+      "name": "Dryad Arbor"
+    },
+    {
+      "qty": 1,
+      "name": "Echoing Deeps"
+    },
+    {
+      "qty": 4,
+      "name": "Elvish Reclaimer"
+    },
+    {
+      "qty": 1,
+      "name": "Erode"
+    },
+    {
+      "qty": 1,
+      "name": "Flagstones of Trokair"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Gaddock Teeg"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Quarter"
+    },
+    {
+      "qty": 4,
+      "name": "Green Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Icetill Explorer"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 2,
+      "name": "Knight of the Reliquary"
+    },
+    {
+      "qty": 1,
+      "name": "Life from the Loam"
+    },
+    {
+      "qty": 1,
+      "name": "Lush Portico"
+    },
+    {
+      "qty": 1,
+      "name": "Maze of Ith"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Diamond"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Savannah"
+    },
+    {
+      "qty": 1,
+      "name": "Sejiri Steppe"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowspear"
+    },
+    {
+      "qty": 1,
+      "name": "Skateboard"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 2,
+      "name": "Sylvan Library"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Safekeeper"
+    },
+    {
+      "qty": 1,
+      "name": "Talon Gates of Madara"
+    },
+    {
+      "qty": 1,
+      "name": "The Tabernacle at Pendrell Vale"
+    },
+    {
+      "qty": 1,
+      "name": "Thespian's Stage"
+    },
+    {
+      "qty": 2,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 2,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 2,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 2,
+      "name": "Yavimaya, Cradle of Growth"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Choke"
+    },
+    {
+      "qty": 1,
+      "name": "Collector Ouphe"
+    },
+    {
+      "qty": 2,
+      "name": "Deafening Silence"
+    },
+    {
+      "qty": 2,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 2,
+      "name": "Doorkeeper Thrull"
+    },
+    {
+      "qty": 2,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Erode"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Surgical Extraction"
+    }
+  ]
+}

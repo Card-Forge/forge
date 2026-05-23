@@ -1,0 +1,93 @@
+{
+  "archetype": "Blue Terror",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/blue-terror.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Abandon Attachments"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Contaminated Aquifer"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 4,
+      "name": "Cryptic Serpent"
+    },
+    {
+      "qty": 2,
+      "name": "Deem Inferior"
+    },
+    {
+      "qty": 1,
+      "name": "Deep Analysis"
+    },
+    {
+      "qty": 2,
+      "name": "Dispel"
+    },
+    {
+      "qty": 15,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 4,
+      "name": "Mental Note"
+    },
+    {
+      "qty": 2,
+      "name": "Sleep of the Dead"
+    },
+    {
+      "qty": 4,
+      "name": "Sneaky Snacker"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 4,
+      "name": "Thought Scour"
+    },
+    {
+      "qty": 4,
+      "name": "Tolarian Terror"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 4,
+      "name": "Gut Shot"
+    },
+    {
+      "qty": 4,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Murmuring Mystic"
+    },
+    {
+      "qty": 4,
+      "name": "Steel Sabotage"
+    }
+  ]
+}

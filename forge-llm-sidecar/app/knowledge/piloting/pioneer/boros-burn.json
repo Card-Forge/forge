@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with multiple one-mana red spells",
       "Early Boros Charm or Boltwave",
-      "At least two lands for turns one and two"
+      "At least two lands for turns one and two",
+      "Keep any hand with a land and a one-mana spell (Shock, Lightning Helix, Boros Charm, or a 1/1 like Raging Goblin/Firebrand Archer).",
+      "Keep two lands plus one mana spell, or two lands plus two one-mana spells.",
+      "Prioritize hands that can play a turn-one or turn-two threat or spell."
     ],
     "mulligan_criteria": [
       "Hands lacking early damage spells",
       "Hands with only white cards or high-cost threats",
-      "Hands with three or more lands"
+      "Hands with three or more lands",
+      "Mulligan hands with three or more lands, no one-mana spells, or only expensive threats (Kari Zev, Grim Lavamander, Screaming Nemesis) without early damage."
     ],
     "examples": []
   },
@@ -25,17 +29,34 @@
     "early_game": [
       "Play lands and cast one-mana red spells for direct damage",
       "Use Boros Charm for damage or early board control",
-      "Prioritize speed over card advantage"
+      "Prioritize speed over card advantage",
+      "Turn 1: Play a land, cast Shock/Lightning Helix at the opponent or a 1/1 creature.",
+      "If holding a 1/1, play land, cast 1/1, end.",
+      "Turn 2: Play second land, cast another 1/1 or cheap burn, attack with everything.",
+      "If drawing Screaming Nemesis, cast it on turn 2 or 3 to capitalize on instant/sorcery spells, then use Boros Charm to pump it into a lethal 3/1 or remove a blocker.",
+      "Mana base: Prioritize dual lands (Steam Vents, Bloodstained Mire, Stomping Ground) early"
     ],
     "mid_game": [
       "Deploy Screaming Nemesis to pressure life total or remove key blockers",
       "Cast Boltwave to clear the board and deal residual damage",
-      "Maintain aggressive posture while answering threats"
+      "Maintain aggressive posture while answering threats",
+      "Burn is a race",
+      "conserve lands but never miss land drops.",
+      "Use direct damage to close out games or remove key blockers.",
+      "Track opponent's life total carefully.",
+      "Don't overcommit to the board if you can win with spells.",
+      "Prioritize keeping mana open for Boros Charm and Shock to maximize efficiency."
     ],
     "late_game": [
       "Use remaining red spells to close out the game",
       "Leverage Boros Charm's combat trick mode if needed",
-      "Push damage every turn until the opponent folds or wins"
+      "Push damage every turn until the opponent folds or wins",
+      "Kari Zev, Swiftblade Scavenger, Kuldotha Cackler, Grim Lavamander, and Screaming Nemesis are your primary win conditions.",
+      "Chain direct damage spells with combat to reach 20.",
+      "Boros Charm can pump a threat into lethal or remove a blocker to enable a kill.",
+      "Go all-in when you have lethal damage in hand/creature pool, or when the opponent has no removal/sweepers.",
+      "Use Boros Charm to pump a threat into lethal or remove a blocker.",
+      "If the opponent is at 3 or less life, attack with everything and burn the rest."
     ]
   },
   "key_cards": [
@@ -59,7 +80,13 @@
     "Cast direct damage spells before playing creatures to avoid giving the opponent free blockers",
     "Hold Boros Charm in hand to respond to opponent's combat tricks or removal",
     "Time Boltwave to hit multiple creatures while leaving enough damage to close the game",
-    "Use Screaming Nemesis's ETB effect to clear the path for your own attackers"
+    "Use Screaming Nemesis's ETB effect to clear the path for your own attackers",
+    "Boltwave appears to be a typo or custom card",
+    "assuming it refers to a high-damage burn spell like Lightning Strike or Shock.",
+    "Always calculate exact damage to the opponent versus blockers.",
+    "Boros Charm's 'deal 2 to target creature' can remove key creatures, but prioritize life gain removal or pump in aggressive matchups.",
+    "Screaming Nemesis synergizes heavily with your instant/sorcery suite",
+    "cast it early to maximize its +1/+1 trigger."
   ],
   "matchups": [
     {
@@ -88,6 +115,31 @@
         "Abrupt Decay",
         "Bloodtithe Harvester"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Boros Charm and Shock on turn 1 to pressure before counters are up. Save Lightning Axe/Dragon's Rage Channeler for later when you can value out counters. Attack with creatures to force counter decisions and protect your spells with cheap threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Outpace them. Play lands, cast burn, attack. Don't trade creatures; burn their ramp sources or the opponent directly. Use Boros Charm to pump your threats into lethal before they can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Boros Charm to pump your 1/1s into lethal. Use Shock/Lightning Helix to remove key threats. Don't overextend; race them. Track their life total and your own to ensure you win the race.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early, then pivot to value engines (Dragon's Rage Channeler, Lightning Axe) if they stabilize. Use Red Elemental Blast to counter their key counterspells. Attack with creatures to force them to spend removal on threats rather than your spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It is a race. Prioritize lethal damage over board presence. Use Boros Charm to pump your threat into lethal or remove theirs. Track life totals carefully; often the first to deal 20 wins. Save removal for their threats and burn for the opponent.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +147,14 @@
     "Swords to Plowshares",
     "Fatal Push",
     "Abrupt Decay",
-    "Doomed Artisan"
+    "Doomed Artisan",
+    "Watch for life gain (Orzhov), sweepers (Selesnya/Golgari), counterspells (Izzet/Niv), and graveyard recursion (Golgari).",
+    "Key tells include the opponent tapping for multiple colors, holding up mana past turn 3, or playing enchantments/planeswalkers.",
+    "Adjust your damage sequencing to bypass life gain or remove key threats before attacking."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:22:28+00:00",
     "model": "local-model",
@@ -153,6 +209,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

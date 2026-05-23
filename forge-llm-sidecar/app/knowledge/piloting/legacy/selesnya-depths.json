@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands containing at least two mana sources and a combo piece",
       "Hands with Green Sun's Zenith and a permanent to sacrifice",
-      "Hands featuring Dark Depths alongside early ramp or counter sources"
+      "Hands featuring Dark Depths alongside early ramp or counter sources",
+      "Keep hands with 2+ lands (including fetches or Mox Diamond), Green Sun's Zenith, or early removal.",
+      "Keep hands with Mox Diamond + fetcher + basic island.",
+      "Prioritize hands that can cast a 1-drop or fetch a basic island on turn 1."
     ],
     "mulligan_criteria": [
       "Hands lacking sufficient mana acceleration or land drops",
       "Hands with only late-game combo pieces and no early interaction",
-      "Hands missing both Dark Depths and Green Sun's Zenith"
+      "Hands missing both Dark Depths and Green Sun's Zenith",
+      "Mulligan pure curve decks without lands, GSZ, or early interaction."
     ],
     "examples": []
   },
@@ -25,17 +29,34 @@
     "early_game": [
       "Play lands efficiently and deploy Dark Depths as soon as possible",
       "Use early ramp to establish a mana base that supports Mox Diamond",
-      "Begin accumulating counters on Dark Depths through deck synergies"
+      "Begin accumulating counters on Dark Depths through deck synergies",
+      "Turn 1: Play land, cast Mox Diamond or fetch a basic island.",
+      "Turn 2: Cast Green Sun's Zenith for Inkwell Elder or City of Traitors, or play a 2-drop like Knight of the Reliquary.",
+      "Sequence: Fetch -> Mox Diamond -> GSZ -> Elders.",
+      "Protect GSZ with early removal or discard.",
+      "If opponent plays aggressively, use Swords to Plowshares or Natural Order to stabilize before pursuing the combo."
     ],
     "mid_game": [
       "Activate Mox Diamond to generate excess mana for combo assembly",
       "Cast Green Sun's Zenith to fetch Dark Depths if it was mulliganed or to find key creatures",
-      "Protect your board state while pushing counters onto Dark Depths"
+      "Protect your board state while pushing counters onto Dark Depths",
+      "Hoard GSZ and Inkwell Elders for the combo turn.",
+      "Use Mox Diamond to smooth mana, but remember it requires a basic island or 2 life to untap.",
+      "Don't overcommit to the board if your combo is incomplete.",
+      "Treat your graveyard as both fuel for Dark Depths and a liability against hate cards.",
+      "Use spot removal to clear key threats without trading into your own combo pieces.",
+      "Hold back Elders until you have a clear path or protection."
     ],
     "late_game": [
       "Trigger Dark Depths to create the 10/10 Ice Creature",
       "Attack repeatedly to close out the game before opponent can stabilize",
-      "Use remaining resources to replace lands or fetch additional threats via Green Sun's Zenith"
+      "Use remaining resources to replace lands or fetch additional threats via Green Sun's Zenith",
+      "Dark Depths + 2 Inkwell Elders = 13/13 unblockable threat.",
+      "If you only have 1 Elder, use City of Traitors or pay life to remove the remaining ice counters.",
+      "Once assembled, attack with Dark Depths",
+      "it's unblockable by non-flying creatures, making it nearly impossible to block without flying or removal.",
+      "Go all-in when you have 2+ Elders, Dark Depths, and a way to remove ice counters, or when the opponent has no removal/counters in hand.",
+      "Commit early if the board is clear and you can close the game before they can rebuild."
     ]
   },
   "key_cards": [
@@ -59,7 +80,13 @@
     "Prioritize playing Dark Depths before activating Mox Diamond to ensure you have a counter-bearing land to tap for mana.",
     "Time Green Sun's Zenith casts to avoid leaving yourself with insufficient mana for the turn's combo assembly.",
     "Hold up mana for potential interaction before committing to the full Dark Depths combo sequence.",
-    "Use Mox Diamond's mana generation to pay for multiple spells in a single turn, accelerating the counter accumulation."
+    "Use Mox Diamond's mana generation to pay for multiple spells in a single turn, accelerating the counter accumulation.",
+    "Dark Depths is a land, so it can be targeted by land destruction",
+    "keep a Swords to Plowshares or Natural Order to protect it.",
+    "Mox Diamond's drawback requires careful mana management",
+    "don't overextend without a basic island.",
+    "GSZ is vulnerable to counters but searches for a creature, so sequence carefully.",
+    "Don't forget Dark Depths is unblockable by non-flying, which is key to its win condition."
   ],
   "matchups": [
     {
@@ -88,16 +115,36 @@
         "Graveyard hate",
         "Library manipulation"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Sequence GSZ and Elders around counterspells by using cheap mana or casting in response to their counters. If they counter GSZ, use the remaining mana to cast Elders naturally. Consider holding a Swords to Plowshares to clear their protection spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-value them with efficient removal and combo inevitability. Use Swords and Natural Order to clear their mana rocks. Pressure with early threats to force them to interact, then combo when they're tapped out.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by tracking graveyard and using removal efficiently. Combo first if you have the pieces, or out-value them with Swords and Natural Order. Don't overcommit to the board; preserve your combo pieces and force them to make mistakes.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Artifact destruction targeting Mox Diamond or Dark Depths",
     "Board wipes that remove counter sources and the Ice Creature",
     "Counterspells that prevent Green Sun's Zenith or combo assembly",
-    "Land destruction that disrupts the mana base required for Mox Diamond"
+    "Land destruction that disrupts the mana base required for Mox Diamond",
+    "Watch for Force of Will, Daze, and counterspells in Dimir Tempo.",
+    "Track when Tron players tap out for Gaea's Cradle or Arcane Signet.",
+    "Note when Sneak and Show players hold up interaction for Thassa's Oracle or Show and Tell.",
+    "Pay attention to graveyard hate (Rest in Peace, Leyline of the Void) and adjust your win condition accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:56:10+00:00",
     "model": "local-model",
@@ -113,6 +160,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

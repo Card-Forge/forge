@@ -12,27 +12,44 @@
     "keep_criteria": [
       "Hands containing two or more lands and an early play like Indomitable Creativity",
       "Hands with Wrenn and Six and enough lands to cast it by turn three",
-      "Hands with early interaction or recursion to protect key threats"
+      "Hands with early interaction or recursion to protect key threats",
+      "Keep hands with 2-3 lands (preferably including fetchable duals or a Wrenn and Six), plus at least one of Indomitable Creativity, Archon of Cruelty, or a hand disruption spell (Thoughtseize/Inquisition).",
+      "Keep hands featuring Wrenn and Six paired with a land."
     ],
     "mulligan_criteria": [
       "Hands with zero or one land",
       "Hands lacking early plays or card draw",
-      "Hands heavy on high-cost finishers without ramp"
+      "Hands heavy on high-cost finishers without ramp",
+      "Mulligan to hands with four or more lands, multiple copies of low-impact spells, or no viable turn 1-2 plays."
     ],
     "examples": []
   },
   "game_plan": {
     "early_game": [
       "Prioritize land drops and cast Indomitable Creativity to establish board presence and draw cards",
-      "Use red and black spells for early disruption or burn to slow aggressive opponents"
+      "Use red and black spells for early disruption or burn to slow aggressive opponents",
+      "Turn 1: Play a land, hold for Thoughtseize/Inquisition, or cast Wrenn and Six if mana allows.",
+      "Turn 2: Activate Wrenn and Six for colored mana or a 2/2 creature, or deploy Archon of Cruelty if ahead.",
+      "Sequence lands to ensure red/green mana for Indomitable Creativity by turn 3-4.",
+      "Prioritize fetching lands to enable Wrenn and Six's abilities and maintain flexibility."
     ],
     "mid_game": [
       "Deploy Wrenn and Six to untap lands and accelerate into larger threats",
-      "Cast Archon of Cruelty to begin recycling key creatures and apply flying pressure"
+      "Cast Archon of Cruelty to begin recycling key creatures and apply flying pressure",
+      "Use Wrenn and Six to fix mana and draw cards, but avoid overcommitting to a single ability.",
+      "Guard your graveyard carefully",
+      "Indomitable Creativity requires a valuable target, so avoid filling it with low-impact cards unless you are committed to the token win condition.",
+      "Archon of Cruelty should be used to control the board while protecting your combo pieces.",
+      "Commit threats when you have interaction or a clear path to victory.",
+      "Hold Indomitable Creativity until you have a game-winning spell in the graveyard and sufficient mana to cast it safely."
     ],
     "late_game": [
       "Flood the board with tokens and recursed threats to create unblockable attackers",
-      "Use card advantage to outlast control decks and race midrange opponents"
+      "Use card advantage to outlast control decks and race midrange opponents",
+      "Indomitable Creativity casting a high-impact spell (such as a large creature, board wipe, or combo piece) from the graveyard, combined with the Saproling tokens, to overwhelm the opponent.",
+      "Archon of Cruelty can also close games if the board is open and the opponent lacks removal.",
+      "Go all-in when you have a clear path to victory: Indomitable Creativity in hand, a valuable spell in the graveyard, enough mana to cast it, and the opponent lacks interaction.",
+      "Commit when you can safely resolve your combo or when the board state favors your token army."
     ]
   },
   "key_cards": [
@@ -56,7 +73,12 @@
     "Hold up black and red mana for interaction before committing to big green spells",
     "Use Wrenn and Six to untap lands specifically for casting Archon of Cruelty or Indomitable Creativity",
     "Time Archon of Cruelty's death to coincide with having key threats in your graveyard for maximum impact",
-    "Play Indomitable Creativity in response to removal to maintain board presence and card advantage"
+    "Play Indomitable Creativity in response to removal to maintain board presence and card advantage",
+    "Common mistakes include overcommitting to Wrenn and Six's abilities too early, filling the graveyard with useless cards before casting Indomitable Creativity, and mismanaging colored mana for the combo.",
+    "Always track the opponent's graveyard and hand to time your spells correctly.",
+    "Archon of Cruelty is both a threat and a utility card",
+    "use it to control the board while protecting your combo pieces.",
+    "Remember that Indomitable Creativity's token generation scales with graveyard size, so curate your graveyard deliberately rather than treating it as a free win button."
   ],
   "matchups": [
     {
@@ -85,16 +107,36 @@
         "Card draw engines",
         "Race threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Wrenn and Six to generate mana and draw around counterspells. Cast Indomitable Creativity when the opponent is tapped out or in response to their counterspells if you have priority. Sideboard cards that protect your spells or remove countersources can also help.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Archon of Cruelty and discard to disrupt their mana base. Use spot removal to kill their early threats. Do not let them stabilize; keep the board clear and race them to their late-game finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the game of attrition by out-drawing and out-resolving. Use discard to disrupt their combo setup. Prioritize graveyard hate and artifact removal. Win by resolving Indomitable Creativity first or by out-valuing with Archon of Cruelty and Wrenn and Six.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early burn spells that target your face or ramp pieces",
     "Board wipes that clear your token army",
     "Hand disruption that removes key combo pieces before they resolve",
-    "Efficient removal spells that answer your Archon of Cruelty"
+    "Efficient removal spells that answer your Archon of Cruelty",
+    "Monitor combo decks (Ruby Storm, Jeskai Blink) for graveyard setup and hand resources.",
+    "Against ramp (Amulet Titan), track early mana rocks and large threats to decide when to stabilize.",
+    "Against control, track removal and counterspells to time your combo resolution.",
+    "Always count the opponent's available interaction to avoid dead-angling your Creativity."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:04:27+00:00",
     "model": "local-model",
@@ -110,7 +152,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

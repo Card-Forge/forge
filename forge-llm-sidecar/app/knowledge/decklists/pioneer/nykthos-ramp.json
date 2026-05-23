@@ -1,0 +1,113 @@
+{
+  "archetype": "Nykthos Ramp",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/nykthos-ramp.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Cavalier of Thorns"
+    },
+    {
+      "qty": 4,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 7,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Hushwood Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Kiora, Behemoth Beckoner"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Guildpact"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 4,
+      "name": "Nykthos, Shrine to Nyx"
+    },
+    {
+      "qty": 2,
+      "name": "Oath of Nissa"
+    },
+    {
+      "qty": 3,
+      "name": "Old-Growth Troll"
+    },
+    {
+      "qty": 4,
+      "name": "Outcaster Trailblazer"
+    },
+    {
+      "qty": 1,
+      "name": "Scrapshooter"
+    },
+    {
+      "qty": 4,
+      "name": "Storm the Festival"
+    },
+    {
+      "qty": 4,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 2,
+      "name": "Ulvenwald Oddity"
+    },
+    {
+      "qty": 4,
+      "name": "Vibrance"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Elesh Norn, Mother of Machines"
+    },
+    {
+      "qty": 1,
+      "name": "Kenrith's Transformation"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Questing Beast"
+    },
+    {
+      "qty": 4,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 1,
+      "name": "Skysovereign, Consul Flagship"
+    },
+    {
+      "qty": 1,
+      "name": "The Stone Brain"
+    },
+    {
+      "qty": 2,
+      "name": "Unlicensed Hearse"
+    },
+    {
+      "qty": 3,
+      "name": "Wolfwillow Haven"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "archetype": "5c Legends",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/5c-legends.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Adeline, Resplendent Cathar"
+    },
+    {
+      "qty": 4,
+      "name": "Arachne, Psionic Weaver"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 4,
+      "name": "Cecil, Dark Knight"
+    },
+    {
+      "qty": 4,
+      "name": "Ertai Resurrected"
+    },
+    {
+      "qty": 4,
+      "name": "Jirina, Dauntless General"
+    },
+    {
+      "qty": 4,
+      "name": "Jodah, the Unifier"
+    },
+    {
+      "qty": 4,
+      "name": "Kytheon, Hero of Akros"
+    },
+    {
+      "qty": 4,
+      "name": "Mana Confluence"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Amber"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Plaza of Heroes"
+    },
+    {
+      "qty": 4,
+      "name": "Secluded Courtyard"
+    },
+    {
+      "qty": 4,
+      "name": "Thalia, Guardian of Thraben"
+    },
+    {
+      "qty": 3,
+      "name": "Unclaimed Territory"
+    },
+    {
+      "qty": 4,
+      "name": "Zack Fair"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 4,
+      "name": "Dennick, Pious Apprentice"
+    },
+    {
+      "qty": 4,
+      "name": "Loran of the Third Path"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Ruinous Blast"
+    }
+  ]
+}

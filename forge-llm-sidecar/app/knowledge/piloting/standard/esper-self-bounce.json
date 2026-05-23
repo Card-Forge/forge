@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with early bounce spells and 1-drops",
       "Two-mana spells that enable turn-two disruption",
-      "Draw spells to stabilize in longer games"
+      "Draw spells to stabilize in longer games",
+      "Keep hands with 2-3 lands (including basics for Boomerang Basics and WUB mana), at least one bounce enabler (Stormchaser's Talent or Kaito), and a turn-1 or turn-2 play."
     ],
     "mulligan_criteria": [
       "High curve hands lacking interaction",
       "Hands with three or more lands",
-      "Decks devoid of bounce effects or recursion"
+      "Decks devoid of bounce effects or recursion",
+      "Mulligan on 3+ lands with no bounce spells, 1-2 lands with only bounce spells and no early threats, or hands lacking a way to protect your engine."
     ],
     "examples": []
   },
@@ -25,17 +27,31 @@
     "early_game": [
       "Play bounce spells to disrupt early threats",
       "Establish land drops while holding interaction",
-      "Use low-cost creatures to apply pressure"
+      "Use low-cost creatures to apply pressure",
+      "Turn 1: Play a land",
+      "if you have a cheap bounce spell and a Boomerang Basic, consider bouncing it for early mana or card advantage.",
+      "Turn 2: Deploy Kaito or a bounce enabler, bounce a Boomerang Basic or itself to trigger ETB effects, and establish a resilient board.",
+      "Sequence lands to ensure WUB availability for interaction on opponent's turn."
     ],
     "mid_game": [
       "Recycle your own permanents to generate value",
       "Target opponent's key pieces with return-to-hand effects",
-      "Maintain card advantage through draw synergies"
+      "Maintain card advantage through draw synergies",
+      "Hoarded bounce spells for key ETB triggers or to protect Kaito.",
+      "Use Boomerang Basics for flexible mana acceleration and card advantage.",
+      "Avoid over-bouncing",
+      "prioritize triggers that generate tempo or card advantage.",
+      "Monitor your graveyard to ensure bounce doesn't inadvertently feed opponent recursion.",
+      "Commit threats only after securing bounce protection or having interaction ready."
     ],
     "late_game": [
       "Lock opponent out by repeatedly bouncing lands and threats",
       "Use accumulated resources to close out the game",
-      "Prioritize bouncing high-impact permanents over low-value ones"
+      "Prioritize bouncing high-impact permanents over low-value ones",
+      "Kaito, Bane of Nightmares as a protected value engine or combat finisher, repeated Boomerang Basic bounces for lethal mana/card advantage, and Stormchaser's Talent for late-game recursion.",
+      "Win by overwhelming with triggered value or closing out with a protected threat that cannot be easily removed.",
+      "Go all-in when you have bounce protection, enough mana to survive a turn, and the opponent has no clear answer.",
+      "Commit when you can trigger multiple ETB effects in response to their removal or when you can close the game before they can stabilize."
     ]
   },
   "key_cards": [
@@ -59,7 +75,13 @@
     "Hold bounce spells in hand to respond to opponent's turns",
     "Bounce your own permanents only when you have a clear follow-up",
     "Prioritize bouncing opponent's lands when they are ahead on resources",
-    "Use draw spells before committing to a bounce sequence to ensure hand size"
+    "Use draw spells before committing to a bounce sequence to ensure hand size",
+    "Common mistake: Bouncing permanents without calculating ETB triggers or mana needs.",
+    "Always ask what value you gain from each bounce.",
+    "Unique interaction: Boomerang Basics can be bounced for mana/card advantage even when tapped, enabling surprise turns.",
+    "Kaito's abilities likely synergize with exile/bounce",
+    "check timing to maximize value.",
+    "Avoid over-relying on bounce"
   ],
   "matchups": [
     {
@@ -88,16 +110,35 @@
         "Value creatures",
         "Late-game finishers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use bounce spells as free spells since they resolve or bounce on resolution. Cast threats at end step, use Kaito's abilities to protect your spells, or bounce their counterspell if possible. Prioritize spells with flash or instant-speed triggers to bypass counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction and spot removal. Use bounce to delay their mana rocks and disrupt their acceleration. Bring in board wipes and artifact hate to slow their game plan while you stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by having better card advantage and more efficient bounce spells. Prioritize targeting their Kaito or key bounce enablers. Use counterspells to disrupt their recursion loops and force them to replay their engine at a disadvantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
     "Permanent removal effects",
-    "Card draw engines"
+    "Card draw engines",
+    "Watch for opponent mana development (ramp vs control), graveyard activity (recursion threats), and board state (when they assemble a win condition).",
+    "Key tells: Holding up mana on opponent's turn suggests counterspells or instant-speed hate",
+    "playing multiple permanents suggests they're going wide or setting up a combo."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:02:57+00:00",
     "model": "local-model",
@@ -113,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

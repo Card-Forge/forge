@@ -1,0 +1,165 @@
+{
+  "archetype": "Domain Zoo",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/domain-zoo.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Archon of Cruelty"
+    },
+    {
+      "qty": 4,
+      "name": "Aurora Awakener"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 2,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Indatha Triome"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline Binding"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Guildpact"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Persist"
+    },
+    {
+      "qty": 1,
+      "name": "Raucous Theater"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 4,
+      "name": "Scion of Draco"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 2,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Territorial Kavu"
+    },
+    {
+      "qty": 2,
+      "name": "Tribal Flames"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Mortuary"
+    },
+    {
+      "qty": 2,
+      "name": "Unholy Heat"
+    },
+    {
+      "qty": 2,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 2,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Drag to the Bottom"
+    },
+    {
+      "qty": 2,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Fire Magic"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 3,
+      "name": "Pick Your Poison"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 1,
+      "name": "Ratchet Bomb"
+    },
+    {
+      "qty": 2,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Tunnel Ignus"
+    },
+    {
+      "qty": 2,
+      "name": "Wear // Tear"
+    }
+  ]
+}

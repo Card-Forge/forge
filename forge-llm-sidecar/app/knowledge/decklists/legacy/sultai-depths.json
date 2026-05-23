@@ -1,0 +1,133 @@
+{
+  "archetype": "Sultai Depths",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/sultai-depths.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Bayou"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Crop Rotation"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Depths"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 4,
+      "name": "Elvish Spirit Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Quarter"
+    },
+    {
+      "qty": 1,
+      "name": "Legolas's Quick Reflexes"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 3,
+      "name": "Not of This World"
+    },
+    {
+      "qty": 3,
+      "name": "Once Upon a Time"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Sejiri Steppe"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Sylvan Library"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Safekeeper"
+    },
+    {
+      "qty": 4,
+      "name": "Sylvan Scrying"
+    },
+    {
+      "qty": 4,
+      "name": "Thespian's Stage"
+    },
+    {
+      "qty": 4,
+      "name": "Urborg, Tomb of Yawgmoth"
+    },
+    {
+      "qty": 4,
+      "name": "Vampire Hexmage"
+    },
+    {
+      "qty": 4,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 2,
+      "name": "Yavimaya, Cradle of Growth"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 4,
+      "name": "Collector Ouphe"
+    },
+    {
+      "qty": 3,
+      "name": "Legolas's Quick Reflexes"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Not of This World"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Safekeeper"
+    }
+  ]
+}

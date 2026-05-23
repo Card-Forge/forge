@@ -11,11 +11,15 @@
   "mulligan": {
     "keep_criteria": [
       "Have Aether Vial or Goblin Lackey in hand",
-      "Have a nice sequence for the first three turns"
+      "Have a nice sequence for the first three turns",
+      "Keep hands with 2-3 lands (duals/lands that fetch), Goblin Lackey, Food Chain, or a 2-drop (Piledriver/Chieftain/Rabblemaster).",
+      "Prioritize hands that can execute a Turn 1 Lackey into a Turn 2 free cast.",
+      "Against control-heavy fields, keep hands with Disfigure or Hexing Squelcher."
     ],
     "mulligan_criteria": [
       "Lack Aether Vial or Goblin Lackey without a strong early sequence",
-      "Hand cannot impact turn 1 or 2 effectively"
+      "Hand cannot impact turn 1 or 2 effectively",
+      "Mulligan on 3+ lands with no combo pieces or threats, or hands with only 1 land and no early plays."
     ],
     "examples": [
       {
@@ -58,17 +62,33 @@
   "game_plan": {
     "early_game": [
       "Play Aether Vial or Goblin Lackey on turn 1 to establish early board presence",
-      "Use 1-drops like Greasewrench Goblin to filter lands or play aggressively"
+      "Use 1-drops like Greasewrench Goblin to filter lands or play aggressively",
+      "Turn 1: Play land, cast Goblin Lackey.",
+      "Turn 2: Play land, cast Food Chain, sacrifice Lackey to cast Goblin Piledriver or Chieftain.",
+      "If you have a pump spell or Rabblemaster, hold it for Turn 2 or 3 to maximize value.",
+      "Sequence lands to ensure you can cast the free spell on Turn 2.",
+      "If you draw a 2-drop in hand, you can cast it for free on Turn 2."
     ],
     "mid_game": [
       "Use Munitions Expert and Broadside Bombardiers to control the board",
       "Utilize Goblin Matron as a toolbox to find answers or threats",
-      "Refill resources with Rundvelt Hordemaster, Greasewrench Goblin, and Goblin Ringleader"
+      "Refill resources with Rundvelt Hordemaster, Greasewrench Goblin, and Goblin Ringleader",
+      "Do not overcommit to Food Chain without a target or protection.",
+      "Use Hexing Squelcher to protect key threats or recur Goblin Welder.",
+      "Manage your graveyard carefully against hate, but generally keep it stocked with Lackey/Chain/Welder.",
+      "Use lands efficiently",
+      "do not untap with excess mana if you can cast a threat or cast Hexing Squelcher for {1}.",
+      "Commit threats when you have a way to protect them or when the board is clear."
     ],
     "late_game": [
       "Give haste to your horde with Howlsquad Heavy or Draconautics Engineer",
       "Use Sling-Gang Lieutenant to drain life and finish the game",
-      "Use Gempalm Incinerator for extra removal and card draw in drawn-out matches"
+      "Use Gempalm Incinerator for extra removal and card draw in drawn-out matches",
+      "Goblin Piledriver with Rabblemaster/Bomb, Scuttling Doom Engine, or a swarm of goblins with pump spells.",
+      "Get there by chaining Lackey/Chain, then using Welder/Squelcher to recur threats, or pumping Rabblemaster to lethal.",
+      "When you have a clear path to lethal, the opponent has no sweepers, or you're ahead in the race.",
+      "Go all-in with pump spells and bombs.",
+      "If the opponent has no interaction left, commit your entire hand and board to close the game."
     ]
   },
   "key_cards": [
@@ -107,7 +127,12 @@
     "Prioritize resolving Aether Vial or Goblin Lackey on turn 1 to set the pace",
     "Use Greasewrench Goblin's ability to filter lands or unused Aether Vials when needed",
     "Save Stingscourger to bounce big threats like Emrakul, the Aeons Torn back to hand",
-    "Create gigantic boards and sacrifice them instantly with Sling-Gang Lieutenant to kill opponents on their turn against The One Ring"
+    "Create gigantic boards and sacrifice them instantly with Sling-Gang Lieutenant to kill opponents on their turn against The One Ring",
+    "Common mistakes: Overcommitting to Food Chain without a target, forgetting to protect your combo pieces, mismanaging the graveyard, not tracking opponent's hand size.",
+    "Unique interactions: Hexing Squelcher can protect Goblin Lackey or Food Chain from removal.",
+    "Scuttling Doom Engine can recur Goblin Welder for infinite value if you have enough goblins.",
+    "Remember that Goblin Piledriver's power is based on goblins you control, not just the ones you cast.",
+    "Always be ready to pivot to an aggressive plan if your combo is disrupted."
   ],
   "matchups": [
     {
@@ -152,6 +177,31 @@
         "Cephalid Illusionist combo",
         "Nadu, Winged Wisdom"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple targets (Lackey into Chain into Piledriver), or cast threats in response to counters. Use Hexing Squelcher to protect key spells. Sometimes you need to go off at instant speed or use pump spells to overcome counters. If they counter your combo, pivot to aggressive goblin swarms or Scuttling Doom Engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them. Use Goblin Bomb to deal direct damage. Use Disfigure to remove their ramp creatures. Do not let them stabilize; pressure early and go off as soon as you have a lethal threat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Hexing Squelcher to protect your threats, Disfigure to remove key aggro creatures, and Goblin Bomb to deal damage. You can also go off quickly to win before they kill you. Do not overextend into sweepers; hold back interaction for their key threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure early, use Disfigure to remove their answers, and go off with multiple threats. Use Hexing Squelcher to protect your combo pieces. Do not let them stabilize; keep the pressure on and go off at instant speed when they show vulnerability.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race. Prioritize card advantage and protection. Use Disfigure to remove their threats, Hexing Squelcher to protect yours, and Scuttling Doom Engine to recur. Track their graveyard and hand size. Win the interaction war by holding up Disfigure for their key threats and going off when they are tapped out.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -161,10 +211,14 @@
     "The One Ring",
     "Nadu, Winged Wisdom",
     "Emrakul, the Aeons Torn",
-    "Force of Will"
+    "Force of Will",
+    "Watch for sweepers, counterspells, and graveyard hate.",
+    "Note if the opponent is playing around your combo (holding up removal/counters).",
+    "Track their mana and hand size to know when to go off."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-rakdos-goblins-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T08:00:58+00:00",
     "model": "local-model",
@@ -182,6 +236,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

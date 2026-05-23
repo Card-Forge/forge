@@ -1,0 +1,117 @@
+{
+  "archetype": "Metalwork Colossus",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/metalwork-colossus.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Adarkar Wastes"
+    },
+    {
+      "qty": 4,
+      "name": "Brass Knuckles"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 4,
+      "name": "Fabrication Foundry"
+    },
+    {
+      "qty": 4,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 2,
+      "name": "Hengegate Pathway"
+    },
+    {
+      "qty": 4,
+      "name": "Ingenious Smith"
+    },
+    {
+      "qty": 2,
+      "name": "Inventors' Fair"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline Axe"
+    },
+    {
+      "qty": 4,
+      "name": "Metalwork Colossus"
+    },
+    {
+      "qty": 4,
+      "name": "Moonsnare Prototype"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 3,
+      "name": "Perilous Snare"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Portable Hole"
+    },
+    {
+      "qty": 4,
+      "name": "Sanctum of Ugin"
+    },
+    {
+      "qty": 4,
+      "name": "Seachrome Coast"
+    },
+    {
+      "qty": 4,
+      "name": "Simulacrum Synthesizer"
+    },
+    {
+      "qty": 2,
+      "name": "Wedding Invitation"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 2,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 2,
+      "name": "Glass Casket"
+    },
+    {
+      "qty": 2,
+      "name": "Knockout Blow"
+    },
+    {
+      "qty": 2,
+      "name": "Repurposing Bay"
+    },
+    {
+      "qty": 2,
+      "name": "Torpor Orb"
+    },
+    {
+      "qty": 3,
+      "name": "Unlicensed Hearse"
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "name": "Eriette of the Charmed Apple",
+  "format": "commander",
+  "colors": [
+    "B",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This deck leverages the synergy between Eriette of the Charmed Apple, Sram, Senior Edificer, and All That Glitters to generate a relentless swarm of flying Angels and Soldiers by casting noncreature spells. It wins by outpacing combo and control with incremental value and evasion, while overwhelming aggro with early board presence, targeted removal, and combat advantage.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 3,
+      "cards": [
+        "All That Glitters",
+        "Eriette of the Charmed Apple",
+        "Sram, Senior Edificer"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": []
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "All That Glitters",
+        "Eriette of the Charmed Apple",
+        "Sram, Senior Edificer"
+      ]
+    },
+    "threats": {
+      "target_count": 3,
+      "cards": [
+        "All That Glitters",
+        "Eriette of the Charmed Apple",
+        "Sram, Senior Edificer"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 1,
+      "cards": [
+        "All That Glitters"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": []
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 3,
+      "cards": [
+        "All That Glitters",
+        "Eriette of the Charmed Apple",
+        "Sram, Senior Edificer"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 1,
+      "cards": [
+        "All That Glitters"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Eriette of the Charmed Apple",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sram, Senior Edificer",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "All That Glitters",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistakes include overcommitting to creatures instead of casting noncreature spells, forgetting that Eriette triggers on any noncreature spell (including instants/sorceries from hand or graveyard), and mismanaging mana for instant-speed triggers.",
+    "All That Glitters is redundant with Eriette but provides backup and can be used for specific synergies.",
+    "Watch for 'cast without targeting' effects to bypass counters.",
+    "In multiplayer, consider commander damage and political dynamics when committing to the board."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast a cheap mana accelerator or instant/sorcery if available."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a second land, cast another noncreature spell or a cheap artifact/enchantment."
+    },
+    {
+      "trigger": "early game",
+      "line": "If you have Eriette or Sram on the battlefield, prioritize casting a noncreature spell the turn after they enter to immediately trigger token generation."
+    }
+  ],
+  "kill_priority": [
+    "All That Glitters",
+    "Eriette of the Charmed Apple",
+    "Sram, Senior Edificer",
+    "All That Glitters",
+    "Eriette of the Charmed Apple",
+    "Sram, Senior Edificer"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

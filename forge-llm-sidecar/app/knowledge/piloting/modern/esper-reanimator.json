@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Thoughtseize and a reanimation spell or cheap creature",
       "Two-card hands containing a tutor and a finisher",
-      "Hands with multiple cheap interaction spells to stabilize early"
+      "Hands with multiple cheap interaction spells to stabilize early",
+      "Keep 7-card hands with 2-3 lands and at least one Thoughtseize or reanimation spell.",
+      "Keep 6-card hands with 2 lands, a discard, and a reanimation target/spell."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or graveyard recursion",
       "Hands with only high-cost permanents and no early plays",
-      "Hands missing lands or with unplayable mana bases"
+      "Hands missing lands or with unplayable mana bases",
+      "Mulligan hands with 0-1 lands, 3+ untapped non-fetch lands, or hands with multiple threats but no discard/reanimation/mana."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play cheap creatures to fuel the graveyard and apply early pressure",
       "Use Thoughtseize to remove key threats or tutor for reanimation pieces",
-      "Set up mana efficiently while holding up interaction for aggro or control"
+      "Set up mana efficiently while holding up interaction for aggro or control",
+      "Turn 1: Play a land, cast Thoughtseize if possible to strip counters, removal, or combo pieces.",
+      "Turn 2: Play a second land, cast a cantrip or discard, or begin mana development.",
+      "Prioritize fetching for color fixing.",
+      "Sequence to reach 5-7 mana by turn 3/4 for reanimation."
     ],
     "mid_game": [
       "Activate Emeritus of Ideation to find reanimation spells or board wipes",
       "Cast reanimation spells on the opponent's turn to bypass counterspells and flash triggers",
-      "Clear opposing boards with Archon of Cruelty to establish dominance"
+      "Clear opposing boards with Archon of Cruelty to establish dominance",
+      "Hoard graveyard resources (cards with flashback, exile, or reanimation costs).",
+      "Use discard to protect your graveyard and strip opponent's answers.",
+      "Don't overcommit mana to reanimation if you can't protect the threat.",
+      "Commit threats when you have removal for their interaction or when they're low on resources.",
+      "Hold back if they have sweepers or spot removal",
+      "use discard to find answers or set up a surprise reanimation."
     ],
     "late_game": [
       "Stabilize against sweepers by keeping reanimation spells in hand",
       "Cycle through the deck to find additional finishers or disruption",
-      "Apply consistent pressure with recurring threats until the opponent runs out of resources"
+      "Apply consistent pressure with recurring threats until the opponent runs out of resources",
+      "Reanimate Archon of Cruelty to exile their board, or Emeritus of Ideation to draw into more resources and swing.",
+      "Combine with discard to strip remaining answers.",
+      "Go all-in when you have 7+ mana, a guaranteed reanimation spell, and they have no spot removal or sweepers in hand.",
+      "Also commit when they're at 3-4 life and you can swing for lethal."
     ]
   },
   "key_cards": [
@@ -59,7 +76,11 @@
     "Hold Thoughtseize until you see a key threat or need to tutor for a reanimation spell",
     "Flash Archon of Cruelty on the opponent's turn to clear their board before they can attack or cast spells",
     "Use Emeritus of Ideation to tutor for reanimation spells only when you have the mana and graveyard targets ready",
-    "Prioritize keeping reanimation spells in hand to respond to sweepers or board wipes"
+    "Prioritize keeping reanimation spells in hand to respond to sweepers or board wipes",
+    "Common mistake: Overcommitting to reanimation without protecting the threat or checking for sweepers.",
+    "Unique interaction: Emeritus of Ideation's death trigger can be used to draw into more reanimation spells or answers.",
+    "Always prioritize graveyard protection and discard timing.",
+    "In Unknown format, adapt to local meta by tracking what answers are common."
   ],
   "matchups": [
     {
@@ -88,16 +109,35 @@
         "Card draw engines",
         "Resilient creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to strip counterspells. Cast reanimation spells in response to their counterspells if you have priority, or use cheap threats to force interaction. Rely on flashback/graveyard value so countered spells still provide value.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early Thoughtseize to strip mana rocks or key ramp spells. Use spot removal to deal with early threats. Reanimate early to pressure before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize Thoughtseize to strip their reanimation spells or key threats. Use spot removal to clear their board. Reanimate threats when they're out of answers. Control the graveyard with Surgical Extraction if needed.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
     "Counterspells and interaction",
-    "Graveyard hate cards"
+    "Graveyard hate cards",
+    "Watch for counterspells, spot removal (Dismember, Anguished Unmaking), and sweepers (Supreme Verdict, Wrath of God).",
+    "Note when they tap out for answers.",
+    "Track their graveyard if they play graveyard hate or combo decks."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:38:14+00:00",
     "model": "local-model",
@@ -113,7 +153,9 @@
       "http_status": 200,
       "used_for_fields": [
         "(failed extraction)"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     },
     {
       "publisher": "builder_llm_default",
@@ -124,7 +166,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

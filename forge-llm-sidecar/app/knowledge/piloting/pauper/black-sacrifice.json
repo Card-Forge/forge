@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with turn 1 or 2 creature plays",
       "At least one sacrifice outlet or removal spell",
-      "Two or more lands with an early mana curve"
+      "Two or more lands with an early mana curve",
+      "Keep hands with 2-3 lands, a sacrifice outlet (Carrion Feeder, Mortician Beetle), and a cantrip/ritual (Village Rites, Dark Ritual, Thoughtseize)."
     ],
     "mulligan_criteria": [
       "Hands lacking early creatures or lands",
       "Hands with only high-cost cards or late-game value",
-      "Hands without removal or sacrifice triggers"
+      "Hands without removal or sacrifice triggers",
+      "Mulligan if you have 0-1 lands, only high-cost spells, or no way to generate initial value."
     ],
     "examples": []
   },
@@ -25,17 +27,29 @@
     "early_game": [
       "Play cheap creatures to establish board presence",
       "Prioritize casting Carrion Feeder by turn 2",
-      "Hold Village Rites for early blockers or to trigger sacrifice effects"
+      "Hold Village Rites for early blockers or to trigger sacrifice effects",
+      "Turn 1: Play a land, cast Dark Ritual or Thoughtseize to disrupt.",
+      "Turn 2: Play a sacrifice outlet, then sacrifice a 1/1 (like Gravecrawler or token) to draw cards/gain life.",
+      "Sequence lands to ensure you can cast outlets on curve."
     ],
     "mid_game": [
       "Use Village Rites to remove key threats and trigger death abilities",
       "Sacrifice creatures to Carrion Feeder to pump it into a combat threat",
-      "Trigger Mortician Beetle recursion to force opponent sacrifices"
+      "Trigger Mortician Beetle recursion to force opponent sacrifices",
+      "Balance mana for threats vs. outlets.",
+      "Don't overcommit to sacrifice if you need creatures to block or attack.",
+      "Keep graveyard stocked but be mindful of hate.",
+      "Use Village Rites/Dark Ritual to maintain hand size.",
+      "Commit threats when you have a clear advantage in card advantage or life total.",
+      "Hold back outlets if the opponent has sweepers or hate."
     ],
     "late_game": [
       "Maintain a wide board of pumped creatures",
       "Use sacrifice triggers to drain opponent resources",
-      "Push combat damage while opponent lacks answers"
+      "Push combat damage while opponent lacks answers",
+      "Graveyard recursion (Sheoldred, Liliana), relentless value engines (Mortician Beetle + Carrion Feeder), or direct damage from sacrifice outlets.",
+      "Win by out-graving or out-valuing.",
+      "When you have a clear card advantage lead, opponent is low on interaction, or you can close the game before they can stabilize."
     ]
   },
   "key_cards": [
@@ -59,7 +73,10 @@
     "Sacrifice creatures to Carrion Feeder before casting Village Rites to maximize pump",
     "Hold Village Rites in hand to respond to opponent's combat tricks or board wipes",
     "Avoid sacrificing your last creature unless it directly wins the game or triggers a lethal chain",
-    "Trigger Mortician Beetle's death ability by sacrificing it to Carrion Feeder or Village Rites"
+    "Trigger Mortician Beetle's death ability by sacrificing it to Carrion Feeder or Village Rites",
+    "Common mistake: Over-sacrificing too early and running out of resources.",
+    "Unique interaction: Carrion Feeder's draw triggers on sacrifice, not death, so it works with tokens and sacrifice outlets.",
+    "Always keep a land in hand if you're playing a format with fetch/shock lands to avoid flooding."
   ],
   "matchups": [
     {
@@ -88,6 +105,31 @@
         "Krenko, Mob Boss",
         "Lightning Bolt"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multiple threats (Village Rites, Dark Ritual) to force counter windows. Bounce or discard to disrupt their mana. Don't overcommit to one big spell.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use discard to hit their lands, and prioritize removal over value generation. Out-grave them if they go wide.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with life gain from Mortician Beetle/Village Rites, use removal to clear key threats, and transition to value once stabilized. Don't over-sacrifice early.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with value engines, use discard to hit their answers, and win through attrition. Force them to use resources on your small threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war. Prioritize discard, protect your outlets, and be willing to trade creatures to maintain graveyard presence.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -96,10 +138,13 @@
     "Abrupt Decay",
     "Fumigate",
     "Inferno Titan",
-    "Blood Artist"
+    "Blood Artist",
+    "Watch for graveyard hate (Rest in Peace, Leyline, Tormod's Crypt), sweepers (Wrath of God, Damnation), and combo wincons.",
+    "Note when opponents tap out for big spells vs. holding up interaction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:43:57+00:00",
     "model": "local-model",
@@ -115,6 +160,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

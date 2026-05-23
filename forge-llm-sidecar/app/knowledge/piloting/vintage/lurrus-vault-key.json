@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Lurrus of the Dream-Den paired with cheap artifacts or creatures",
       "Hands with Goblin Welder or Goblin Engineer alongside Vault Key",
-      "Hands with multiple mana rocks and artifact recursion pieces"
+      "Hands with multiple mana rocks and artifact recursion pieces",
+      "Keep hands with 2-3 lands (prioritize duals/shocklands or basics that hit WUR), a Lurrus or early threat (Goblin Guide/Monastery Swiftspear), and at least one interaction (Inventor's Inspiration, Lightning Strike, or Spell Pierce).",
+      "Keep hands that can cast Lurrus on turn 2 or 3."
     ],
     "mulligan_criteria": [
       "Hands lacking artifact recursion or combo enablers",
       "Hands with only high-cost permanents and no acceleration",
-      "Hands without interaction or mana base consistency"
+      "Hands without interaction or mana base consistency",
+      "Mulligan on 3+ lands with no early plays, or 2+ lands with only removal and no Lurrus/threats."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Prioritize playing Vault Key to enable flash artifact deployment",
       "Establish mana acceleration with cheap artifact permanents",
-      "Set up Goblin Engineer to bypass casting costs for key artifacts"
+      "Set up Goblin Engineer to bypass casting costs for key artifacts",
+      "Turn 1: Play a land, cast a 1-drop (Goblin Guide, Monastery Swiftspear, or Spell Pierce/Inventor's Inspiration).",
+      "Turn 2: Cast Lurrus if possible, or play a second land and hold for interaction.",
+      "Against aggro, prioritize early threats and spot removal.",
+      "Against control/combo, protect Lurrus and look for early interaction to enable turn 3-4 combo."
     ],
     "mid_game": [
       "Use Goblin Welder to exile unwanted artifacts and enter combo pieces",
       "Recycle Lurrus of the Dream-Den or other key permanents from the graveyard",
-      "Apply pressure while assembling the recursive loop"
+      "Apply pressure while assembling the recursive loop",
+      "Preserve Lurrus as your primary engine",
+      "avoid casting Welder/Engineer unless you can safely assemble the combo or have a clear win path.",
+      "Manage the graveyard with Surgical Extraction or discard to prevent opponent recursion.",
+      "Use Inventor's Inspiration to cheat on mana for combo pieces or Lurrus.",
+      "Commit threats only when you have interaction or a clear win condition.",
+      "Hold back Lurrus/Welder/Engineer if the board is unstable or lacks protection."
     ],
     "late_game": [
       "Execute the artifact recursion combo for infinite resources",
       "Stabilize with infinite mana to cast game-ending spells",
-      "Maintain board presence with recurring artifact creatures"
+      "Maintain board presence with recurring artifact creatures",
+      "The Goblin Engineer + Goblin Welder + Lightning Greaves infinite draw combo, followed by casting Vault of the Archangel for life gain and card advantage, or using infinite resources to cast a game-winning spell.",
+      "Alternatively, win with Monastery Swiftspear or Goblin Guide if the combo is disrupted.",
+      "Go all-in when you have protection (Greaves/Boots), a clear path to assemble the combo, and no immediate board wipes or graveyard hate in play.",
+      "Commit to the combo if you can resolve the first Engineer and have a way to protect it."
     ]
   },
   "key_cards": [
@@ -64,7 +81,12 @@
     "Play Vault Key as early as possible to unlock flash artifact deployment",
     "Use Goblin Engineer to get key artifacts onto the battlefield before activating Goblin Welder",
     "Recycle Lurrus of the Dream-Den from the graveyard to replay it or fetch other cheap permanents",
-    "Hold interaction in hand to protect combo pieces until the loop is fully assembled"
+    "Hold interaction in hand to protect combo pieces until the loop is fully assembled",
+    "The infinite combo requires precise sequencing: cast Goblin Engineer, attach Lightning Greaves, tap Engineer to sacrifice a 1/1 token (or any creature), draw 2, Engineer dies, Goblin Welder finds another Engineer, repeat.",
+    "Use Inventor's Inspiration to cast Engineer for free.",
+    "Be aware of graveyard hate and counterspells.",
+    "Lurrus is your win condition enabler, so protect it at all costs.",
+    "Avoid overcommitting to the combo without protection."
   ],
   "matchups": [
     {
@@ -93,6 +115,21 @@
         "Red Deck Wins",
         "Mono-Green Devotion"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Inventor's Inspiration to cast combo pieces for free, or split the combo across multiple turns. Use Lightning Greaves to protect key creatures from targeted counterspells. Cast Goblin Engineer in response to counterspells when possible.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction (Spell Pierce, Lightning Strike) to disrupt mana dorks. Use Surgical Extraction to remove key ramp pieces from the graveyard. If they outpace you, commit to the combo early or win with early threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize counterspells and removal. Use Lightning Greaves to protect combo pieces. Track Lurrus on the stack. Win by assembling the combo first or out-resolving their Lurrus plays.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -100,10 +137,14 @@
     "Swords to Plowshares",
     "Rest in Peace",
     "Field of the Dead",
-    "Lightning Bolt"
+    "Lightning Bolt",
+    "Watch for graveyard hate (Leyline of the Void, Rest in Peace), counterspells (Spell Pierce, Negate), and board wipes (Supreme Verdict, Anger of the Gods).",
+    "Track opponent's hand size and graveyard contents.",
+    "Note if they're playing Oath of Druids (early mana dorks) or Dredge (Bitter Ordeal, Golgari Grave-Troll)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:45:37+00:00",
     "model": "local-model",
@@ -119,6 +160,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Mox Diamond or Grim Monolith",
       "Hands containing Trinisphere",
-      "Hands with early white stax effects"
+      "Hands with early white stax effects",
+      "Keep hands with 2-3 lands (including fetches if applicable), plus at least one tax effect (Trinisphere, Thalia, Winter Orb) and a mana source (Mox Diamond, Grim Monolith, or basic lands).",
+      "Prioritize hands that can establish a tax floor by turn 2-3."
     ],
     "mulligan_criteria": [
       "Hands lacking artifact mana acceleration",
       "Hands with no early disruption",
-      "Hands heavy on late-game cards without setup"
+      "Hands heavy on late-game cards without setup",
+      "Mulligan pure land hands, hands with only expensive spells without acceleration, or hands missing both tax effects and mana rocks."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play Mox Diamond or Grim Monolith on turn one",
       "Cast Trinisphere as soon as possible to restrict opponent spells",
-      "Use early white stax to delay aggressive starts"
+      "Use early white stax to delay aggressive starts",
+      "Turn 1: Play a land, cast Mox Diamond or Grim Monolith if mana allows.",
+      "Turn 2: Drop Trinisphere or Thalia if available",
+      "otherwise, continue mana development.",
+      "If you have Grim Monolith, consider tapping it for mana on turn 2 to cast a second tax effect or a disruption piece.",
+      "Sequence lands to ensure you can cast your tax effects by turn 2-3 without stalling."
     ],
     "mid_game": [
       "Maintain Trinisphere on the battlefield",
       "Cycle through white disruption to counter key threats",
-      "Develop board presence while opponent struggles to cast spells"
+      "Develop board presence while opponent struggles to cast spells",
+      "Mana is your most valuable resource.",
+      "Use Grim Monolith strategically to cast multiple tax effects or disruption in a single turn.",
+      "Mox Diamond requires careful sequencing to avoid dead mana.",
+      "Keep cards in hand to respond to key threats, but don't hoard if you can stabilize.",
+      "Graveyard is a resource for you (via fetch lands or recursion) but a liability for opponents (Rest in Peace).",
+      "Commit threats only when you have established a tax floor."
     ],
     "late_game": [
       "Leverage mana advantage to outvalue opponent",
       "Play resilient white finishers",
-      "Close out games by exhausting opponent's resources"
+      "Close out games by exhausting opponent's resources",
+      "Out-grinding via tax effects, or using Knight of the Reliquary to fetch a land for mana, or casting a large spell with Grim Monolith.",
+      "Sometimes a resilient creature like Knight of the Reliquary or a win con like Empty the Warrens (if in the list) closes it out.",
+      "Go all-in when you've established a permanent tax floor (Trinisphere + Thalia/Winter Orb) and the opponent has no way to remove your key pieces."
     ]
   },
   "key_cards": [
@@ -59,7 +76,13 @@
     "Always play artifact mana before Trinisphere to ensure it can be cast",
     "Hold up white mana for stax effects when opponent has cheap threats",
     "Prioritize keeping Trinisphere protected from artifact hate",
-    "Sequence disruption to maximize opponent's mana inefficiency"
+    "Sequence disruption to maximize opponent's mana inefficiency",
+    "Stax is a fragile deck if your key pieces are removed.",
+    "Protect Trinisphere and Thalia at all costs.",
+    "Mox Diamond's sacrifice cost can be a liability in slow games.",
+    "Grim Monolith requires careful mana management.",
+    "Don't overcommit to attacking",
+    "Stax wins by attrition."
   ],
   "matchups": [
     {
@@ -88,16 +111,34 @@
         "Mana acceleration",
         "Protection spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multi-target tax effects. Cast spells in response to counterspells if possible, or use mana rocks to cast around them. Trinisphere makes counterspells expensive.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Rest in Peace, Wasteland, and Winter Orb are key. Tax their mana with Trinisphere/Thalia. Don't let them establish a mana base.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race to establish tax effects. Prioritize keeping Trinisphere and Thalia. Use Wasteland to disrupt their mana. Win by having more resilient artifacts or better sequencing.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Artifact hate",
     "Cheap removal",
     "Mana disruption",
-    "Fast win conditions"
+    "Fast win conditions",
+    "Watch for mana acceleration (Tron, Sneak and Show), card draw engines (Dimir Tempo, Ocelot Pride), and graveyard recursion.",
+    "Key tells: Opponent tapping extra lands, casting spells from exile/graveyard, or holding up mana for counterspells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:27:22+00:00",
     "model": "local-model",
@@ -113,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

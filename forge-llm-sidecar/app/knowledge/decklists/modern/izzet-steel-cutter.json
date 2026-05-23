@@ -1,0 +1,149 @@
+{
+  "archetype": "Izzet Steel-Cutter",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/izzet-steel-cutter.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Cori-Steel Cutter"
+    },
+    {
+      "qty": 4,
+      "name": "Emry, Lurker of the Loch"
+    },
+    {
+      "qty": 1,
+      "name": "Fiery Islet"
+    },
+    {
+      "qty": 2,
+      "name": "Flame of Anor"
+    },
+    {
+      "qty": 1,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Metallic Rebuke"
+    },
+    {
+      "qty": 4,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Mox Amber"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 3,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 4,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowspear"
+    },
+    {
+      "qty": 1,
+      "name": "Skateboard"
+    },
+    {
+      "qty": 3,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Strix Serenade"
+    },
+    {
+      "qty": 4,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 1,
+      "name": "Thundering Falls"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 4,
+      "name": "Unholy Heat"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Blood Moon"
+    },
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 3,
+      "name": "Fire Magic"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 2,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 1,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Strix Serenade"
+    }
+  ]
+}

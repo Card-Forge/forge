@@ -1,0 +1,121 @@
+{
+  "archetype": "Ocelot Pride Midrange",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/ocelot-pride-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ajani, Nacatl Pariah"
+    },
+    {
+      "qty": 4,
+      "name": "Amped Raptor"
+    },
+    {
+      "qty": 4,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Elegant Parlor"
+    },
+    {
+      "qty": 2,
+      "name": "Goblin Bombardment"
+    },
+    {
+      "qty": 4,
+      "name": "Guide of Souls"
+    },
+    {
+      "qty": 3,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 2,
+      "name": "Karakas"
+    },
+    {
+      "qty": 2,
+      "name": "Lazotep Quarry"
+    },
+    {
+      "qty": 4,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Ocelot Pride"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Plateau"
+    },
+    {
+      "qty": 3,
+      "name": "Sand Scout"
+    },
+    {
+      "qty": 2,
+      "name": "Static Prison"
+    },
+    {
+      "qty": 2,
+      "name": "Sunbaked Canyon"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 2,
+      "name": "Thalia, Guardian of Thraben"
+    },
+    {
+      "qty": 4,
+      "name": "Voice of Victory"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Clarion Conqueror"
+    },
+    {
+      "qty": 2,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 4,
+      "name": "Deafening Silence"
+    },
+    {
+      "qty": 2,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 2,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Surgical Extraction"
+    }
+  ]
+}

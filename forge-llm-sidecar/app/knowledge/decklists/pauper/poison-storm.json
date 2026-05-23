@@ -1,0 +1,125 @@
+{
+  "archetype": "Poison Storm",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/poison-storm.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Contentious Plan"
+    },
+    {
+      "qty": 4,
+      "name": "Experimental Augury"
+    },
+    {
+      "qty": 2,
+      "name": "Focus the Mind"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Hickory Woodlot"
+    },
+    {
+      "qty": 4,
+      "name": "Infectious Inquiry"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Manamorphose"
+    },
+    {
+      "qty": 1,
+      "name": "Merchant Scroll"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Peat Bog"
+    },
+    {
+      "qty": 4,
+      "name": "Pentad Prism"
+    },
+    {
+      "qty": 1,
+      "name": "Prologue to Phyresis"
+    },
+    {
+      "qty": 3,
+      "name": "Sandstone Needle"
+    },
+    {
+      "qty": 4,
+      "name": "Saprazzan Skerry"
+    },
+    {
+      "qty": 3,
+      "name": "Snap"
+    },
+    {
+      "qty": 2,
+      "name": "Steady Progress"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Teach by Example"
+    },
+    {
+      "qty": 4,
+      "name": "Thirsting Roots"
+    },
+    {
+      "qty": 4,
+      "name": "Vivisurgeon's Insight"
+    },
+    {
+      "qty": 4,
+      "name": "Weather the Storm"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 2,
+      "name": "Dispel"
+    },
+    {
+      "qty": 2,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Moment's Peace"
+    },
+    {
+      "qty": 3,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Shred Memory"
+    }
+  ]
+}

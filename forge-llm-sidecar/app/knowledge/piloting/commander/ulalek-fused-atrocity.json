@@ -1,0 +1,117 @@
+{
+  "archetype": "Ulalek, Fused Atrocity",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck leverages a high volume of cheap noncreature spells to continuously generate mana and Golem tokens via Ulalek, transitioning into a massive board presence or explosive spell-slinging finisher. It excels against slower, resource-starved decks that cannot handle rapid board development or sudden mana surges.",
+  "win_conditions": [
+    "A massive Golem army fueled by a turn of cheap spells, or a high-impact spell (planeswalker, big creature, or combo piece) cast with the generated mana."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including duals/signets), Sol Ring or Arcane Signet, and at least one cheap noncreature spell or cantrip."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 3+ lands with no ramp/spells, or only creatures with no way to cast them or protect Ulalek."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring/Arcane Signet if possible, or cast a cheap cantrip/ramp spell.",
+      "Turn 2: Develop your mana base, cast another noncreature spell to trigger Ulalek if it's on board, or play a cheap creature/spellslinger.",
+      "Land sequencing: Prioritize fetches/shocks to find basics for signets, then duals for five-color fixing."
+    ],
+    "mid_game": [
+      "Hoard noncreature spells for big turns",
+      "use Golem tokens for mana acceleration rather than combat early on.",
+      "Protect hand resources to maintain spell velocity and ensure you can respond to threats.",
+      "Commit Ulalek and key spellslinger effects early to establish the engine.",
+      "Hold back on overcommitting to the board if opponents have sweepers",
+      "use tokens for mana to answer threats or dig for answers."
+    ],
+    "late_game": [
+      "A massive Golem army fueled by a turn of cheap spells, or a high-impact spell (planeswalker, big creature, or combo piece) cast with the generated mana.",
+      "Go all-in when you have 5+ mana open, a clear path to combat, or when opponents are tapped out and lack immediate removal.",
+      "Trigger Ulalek's upkeep with additional spells to maximize token generation before attacking."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ulalek, Fused Atrocity",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overcommitting to combat too early without securing the spell engine, or failing to use Golem tokens for mana acceleration.",
+    "Remember that Ulalek's upkeep trigger creates tokens for the entire turn, so casting spells in response to upkeep can double-dip.",
+    "Protect your signets and mana rocks, as they are critical for five-color consistency.",
+    "Avoid casting your most valuable noncreature spells when opponents have visible sweepers unless you have a guaranteed answer."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multi-target spells; cast threats in response to their counters; utilize mana rocks to cast spells with hexproof or from exile if possible; don't overcommit to single expensive spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with tokens; use removal on their mana sources; don't let them stabilize into a massive board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and board wipes; use Golem tokens to block or trade; stabilize before committing to your engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with incremental value; use cantrips to dig through their lock; win via combat with a large army or a resilient finisher they can't easily answer.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win via card advantage and efficient removal; prioritize keeping Ulalek alive; use counterspells or discard to disrupt their spell count; trade resources efficiently.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes (sweepers will reset your progress), targeted removal on Ulalek, and graveyard hate if you rely on recursion.",
+    "Note when opponents start hoarding counterspells or have high life totals with no board presence."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

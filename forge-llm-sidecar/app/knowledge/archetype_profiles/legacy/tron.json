@@ -1,0 +1,456 @@
+{
+  "schema_version": 1,
+  "name": "Tron",
+  "format": "legacy",
+  "colors": [],
+  "strategy_type": "ramp",
+  "expected_deck_total": 60,
+  "macro_plan": "This Legacy Tron variant leverages massive mana acceleration to overwhelm opponents before they can stabilize. By combining The One Ring and Grim Monolith with traditional Tron lands, you generate exponential resources to deploy Candelabra of Tawnos. The deck aims to flood the board with tokens or cast oversized threats that dictate the tempo of the game.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 4,
+      "cards": [
+        "Trinisphere"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 24,
+      "cards": [
+        "Candelabra of Tawnos",
+        "Grim Monolith",
+        "Kozilek's Command",
+        "The One Ring",
+        "Ugin, Eye of the Storms",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Grim Monolith",
+        "The One Ring"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Ugin, Eye of the Storms",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Candelabra of Tawnos"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 24,
+      "cards": [
+        "Candelabra of Tawnos",
+        "Cityscape Leveler",
+        "Disruptor Flute",
+        "Karn, the Great Creator",
+        "Manifold Key",
+        "Pithing Needle",
+        "The One Ring",
+        "Ugin, Eye of the Storms",
+        "Voltaic Key"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 11,
+      "cards": [
+        "Ancient Tomb",
+        "Cityscape Leveler",
+        "Extinguisher Battleship",
+        "Kozilek's Command",
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 9,
+      "cards": [
+        "Candelabra of Tawnos",
+        "Extinguisher Battleship",
+        "The One Ring"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "The One Ring"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 17,
+      "cards": [
+        "Candelabra of Tawnos",
+        "Kozilek's Command",
+        "Leyline of the Void",
+        "The One Ring",
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 13,
+      "cards": [
+        "Candelabra of Tawnos",
+        "Paradox Engine",
+        "The One Ring",
+        "Ugin, Eye of the Storms"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Candelabra of Tawnos"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Candelabra of Tawnos",
+        "The One Ring"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 13,
+      "cards": [
+        "Candelabra of Tawnos",
+        "Ensnaring Bridge",
+        "Liquimetal Coating",
+        "Mindbreak Trap",
+        "The One Ring"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 47,
+      "cards": [
+        "Ancient Tomb",
+        "Candelabra of Tawnos",
+        "Grim Monolith",
+        "Mycosynth Lattice",
+        "Petrified Hamlet",
+        "Planar Nexus",
+        "The One Ring",
+        "Trinisphere",
+        "Ugin, Eye of the Storms",
+        "Urza's Mine",
+        "Urza's Power Plant",
+        "Urza's Saga",
+        "Urza's Tower",
+        "Urza's Workshop"
+      ],
+      "mainboard_count": 44,
+      "sideboard_count": 3
+    },
+    "lands": {
+      "target_count": 26,
+      "cards": [
+        "Ancient Tomb",
+        "Petrified Hamlet",
+        "Planar Nexus",
+        "Urza's Mine",
+        "Urza's Power Plant",
+        "Urza's Saga",
+        "Urza's Tower",
+        "Urza's Workshop"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 2
+    },
+    "planeswalker_threats": {
+      "target_count": 8,
+      "cards": [
+        "Karn, the Great Creator",
+        "Ugin, Eye of the Storms"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.25
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Candelabra of Tawnos",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cityscape Leveler",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Extinguisher Battleship",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grim Monolith",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karn, the Great Creator",
+      "roles": [
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kozilek's Command",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Petrified Hamlet",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Planar Nexus",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The One Ring",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tormod's Crypt",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Trinisphere",
+      "roles": [
+        "mana_fixing",
+        "mana_reducers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ugin, Eye of the Storms",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "mana_fixing",
+        "planeswalker_threats",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Mine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Power Plant",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Workshop",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize The One Ring and Grim Monolith before casting Candelabra to maximize mana efficiency",
+    "Hold up mana for countermagic or removal if opponent plays early threats",
+    "Sequence land drops to ensure Candelabra can be cast on curve or turn after",
+    "Use Grim Monolith's draw ability to find answers before committing to Candelabra",
+    "Tron is highly sensitive to land drops"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize casting The One Ring and Grim Monolith to establish early mana and card advantage"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play Tron lands and search for them if possible"
+    },
+    {
+      "trigger": "early game",
+      "line": "Avoid unnecessary combat damage while ramping"
+    }
+  ],
+  "kill_priority": [
+    "Candelabra of Tawnos",
+    "Paradox Engine",
+    "The One Ring",
+    "Ugin, Eye of the Storms",
+    "Karn, the Great Creator",
+    "Cityscape Leveler",
+    "Disruptor Flute",
+    "Manifold Key"
+  ],
+  "interaction_to_disrupt": [
+    "The One Ring",
+    "Ancient Tomb",
+    "Cityscape Leveler",
+    "Extinguisher Battleship",
+    "Kozilek's Command",
+    "Tormod's Crypt",
+    "Candelabra of Tawnos",
+    "Ensnaring Bridge"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/tron.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

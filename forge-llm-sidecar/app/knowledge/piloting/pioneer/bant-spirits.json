@@ -12,11 +12,14 @@
     "keep_criteria": [
       "Hands with Portable Hole or Skyclave Apparition",
       "Aggressive hands with lords to play with Collected Company",
-      "Hands with Mausoleum Wanderer for early pressure"
+      "Hands with Mausoleum Wanderer for early pressure",
+      "Keep hands with 2-3 lands (preferably fetch/shock-compatible), at least one 1-drop threat (Skyclave Apparition, Phantom Warrior), and a mix of cheap spells or removal.",
+      "Keep hands with Thoughtseize/Inquisition if you have a solid early curve."
     ],
     "mulligan_criteria": [
       "Hands with Damping Sphere and Rest in Peace but only 3 mana value creatures",
-      "Hands lacking interaction or early threats"
+      "Hands lacking interaction or early threats",
+      "Mulligan pure land hands, hands with only 2-drops or higher, or hands with multiple removal but no threats or mana acceleration."
     ],
     "examples": [
       {
@@ -34,17 +37,31 @@
     "early_game": [
       "Play flying creatures as fast as possible alongside Supreme Phantom",
       "Use Collected Company on your turn to attack and remove blockers",
-      "Prioritize Mausoleum Wanderer for early pressure and protection"
+      "Prioritize Mausoleum Wanderer for early pressure and protection",
+      "Turn 1: Play a land, cast a 1-drop threat or cast a cheap spell (Spell Pierce, Remand, or Thoughtseize) to grow your board and disrupt.",
+      "Turn 2: Play a shock land/fetch, cast a second threat or spot removal, and continue casting spells to grow your creatures.",
+      "Prioritize establishing a board of evasive threats while holding up interaction for key opponent plays."
     ],
     "mid_game": [
       "Use Collected Company as an answer to opponent's spells for disruption",
       "Leverage flash creatures like Rattlechains and Spell Queller to stay ahead in the race",
-      "Trade efficiently to build card advantage"
+      "Trade efficiently to build card advantage",
+      "Optimize mana for shock lands and instant-speed interaction.",
+      "Avoid overextending into sweepers.",
+      "Use the graveyard strategically by not giving opponents free targets or recursion material.",
+      "Manage your hand by holding removal for key threats rather than burning it on small creatures.",
+      "Commit threats when you have interaction to answer their removal or when they're low on life.",
+      "Hold back if they have sweepers or heavy removal in hand."
     ],
     "late_game": [
       "Avoid late game against control due to limited card draw",
       "Use Shapers' Sanctuary and Extraction Specialist to return dead creatures",
-      "Win through sustained card advantage and 2-to-1 trades"
+      "Win through sustained card advantage and 2-to-1 trades",
+      "Supreme Phantom and Mausoleum Wanderer are primary finishers.",
+      "Once they're large enough (3+ counters), they can close out the game in 1-2 turns.",
+      "Use evasion and spot removal to clear the path and force trades.",
+      "Go all-in when you have a board of 2+ growing threats, they have no sweepers, and you're within lethal range.",
+      "Also commit when you've established graveyard advantage or when they're tapped out for a non-interactive spell."
     ]
   },
   "key_cards": [
@@ -90,7 +107,12 @@
     "Hold Spell Queller to answer Supreme Verdict or The Wandering Emperor",
     "Start the match with Mausoleum Wanderer to protect from removals and discards",
     "Block creatures enchanted with Curious Obsession to prevent opponent card advantage",
-    "Use Shacklegeist to remove blockers like Old-Growth Troll"
+    "Use Shacklegeist to remove blockers like Old-Growth Troll",
+    "Common mistake: Overextending into sweepers or holding up too much mana for interaction.",
+    "Always track opponent's mana and hand size.",
+    "Use fetch/shock cycle efficiently to avoid flooding.",
+    "Supreme Phantom's late-game power is immense, so don't be afraid to cast it even if it seems slow early.",
+    "Remember that casting any instant/sorcery grows your board, so use removal and counterspells aggressively to maximize your threat size."
   ],
   "matchups": [
     {
@@ -139,6 +161,31 @@
         "Opponent's creatures",
         "Stabilization attempts"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats that can be cast in response to counterspells, or hold up interaction to protect your key spells. Use Thoughtseize to remove their counterspells. Consider Chalice of the Void on 1 or 2 to disrupt their mana or key spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply maximum pressure early before they can cast their big spells. Use spot removal to kill their ramp creatures. Sideboard in additional removal and hate cards to slow their acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with spot removal and counterspells. Don't overcommit to the board. Use Leyline of the Meek or Rest in Peace to disrupt their graveyard/strategy. Transition to a control-oriented midgame if needed.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure relentlessly. Use Thoughtseize to remove their counterspells and sweepers. Cast threats in response to their removal. Use evasion to bypass board wipes. Sideboard in additional pressure and hate cards to break their lock.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Use Thoughtseize/Inquisition to strip their key spells. Prioritize graveyard advantage. Use Leyline of the Meek/Punishment to disrupt their strategy. Win the interaction war by holding up removal for their key threats and out-resourcing them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -150,10 +197,12 @@
     "Sheoldred, the Apocalypse",
     "Fable of the Mirror-Breaker // Reflection of Kiki-Jiki",
     "Pore Over the Pages",
-    "Curious Obsession"
+    "Curious Obsession",
+    "Watch for sweepers (Wrath of God, Anger of the Gods), graveyard hate (Rest in Peace, Leyline), and counterspells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-bant-spirits-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T05:14:26+00:00",
     "model": "local-model",
@@ -171,6 +220,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

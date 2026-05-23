@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands containing Ponder or Flow State for turn one or two",
       "Hands with early disruption and a land drop",
-      "Hands featuring Tamiyo, Inquisitive Student alongside interaction"
+      "Hands featuring Tamiyo, Inquisitive Student alongside interaction",
+      "Keep hands with 2-3 lands (prioritizing duals or fixing), Ponder or another card-draw engine, and at least one turn-1 or turn-2 interaction (bounce/removal) or a 2-drop threat."
     ],
     "mulligan_criteria": [
       "Hands lacking card draw or interaction",
       "Hands with multiple lands and no spells",
-      "Hands without a clear path to turn one or two plays"
+      "Hands without a clear path to turn one or two plays",
+      "Mulligan flood, mana screw, or hands with only high-cost spells without fixing or early answers."
     ],
     "examples": []
   },
@@ -25,17 +27,31 @@
     "early_game": [
       "Play lands and cast Ponder to smooth draws",
       "Use cheap interaction to disrupt opponent's early strategy",
-      "Establish board presence with efficient creatures"
+      "Establish board presence with efficient creatures",
+      "Turn 1: Play a land",
+      "Ponder if opening with 3+ lands or no early plays to dig for a turn-2 threat or interaction.",
+      "Turn 2: Cast a 2-drop threat or Flow State/Tamiyo if mana allows, or hold up interaction to protect your board.",
+      "Sequence lands to ensure WU or UW availability, and use Ponder to smooth out mana or find answers to early aggression."
     ],
     "mid_game": [
       "Deploy Tamiyo, Inquisitive Student to generate card advantage",
       "Cast Flow State to accelerate threats or draw into answers",
-      "Maintain tempo by trading efficiently and keeping the board clear"
+      "Maintain tempo by trading efficiently and keeping the board clear",
+      "Preserve mana for interaction until threats are established or opponents commit to plays.",
+      "Use Ponder, Flow State, and Tamiyo to cycle into answers or threats, but avoid over-digging early.",
+      "Manage your graveyard carefully if opponents run graveyard hate, and don't overextend into known sweepers.",
+      "Commit threats when you have interaction to protect them or when the opponent is tapped out.",
+      "Hold back if they have sweepers, heavy removal, or combo pieces in play.",
+      "Use bounce effects to reset key permanents, protect your own threats, or disrupt opponent's mana development."
     ],
     "late_game": [
       "Leverage card advantage to outlast opponents",
       "Close out games with resilient threats",
-      "Use draw spells to find finishers and stabilize"
+      "Use draw spells to find finishers and stabilize",
+      "Resilient creatures, Flow State/Tamiyo bounce loops, or direct damage.",
+      "Win by out-valuing in card advantage, protecting a key threat, or closing out with a board state that opponents cannot clear efficiently.",
+      "Go all-in when you have card advantage, the opponent has no sweepers or interaction, or you can protect your threat with bounce/removal.",
+      "Commit when you've disrupted their win condition and can pressure them into a losing position."
     ]
   },
   "key_cards": [
@@ -58,7 +74,10 @@
   "sequencing_tips": [
     "Hold Ponder for turn one to maximize draw smoothing before committing resources",
     "Cast Flow State before deploying threats to optimize resource efficiency",
-    "Use Tamiyo, Inquisitive Student to answer opponent's key plays while drawing cards to stay ahead"
+    "Use Tamiyo, Inquisitive Student to answer opponent's key plays while drawing cards to stay ahead",
+    "Common mistakes include over-digging with Ponder early and flooding out, or using Flow State/Tamiyo bounce on your own creatures unnecessarily.",
+    "Always track opponent's mana and graveyard, as Jeskai Tempo relies on precise timing and interaction efficiency.",
+    "The synergy between Tamiyo and Flow State is key for card advantage and board control, so sequence them to maximize value without overcommitting."
   ],
   "matchups": [
     {
@@ -87,15 +106,34 @@
         "Combo enablers",
         "Win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Ponder to dig for answers, cast threats in response to counterspells, or use bounce to protect your own spells. Don't overcommit to one threat; spread your investment and force them to counter multiple spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction to slow their acceleration. Use bounce/removal to reset key permanents and avoid inefficient trades. Wait for them to overextend or tap out for big spells before committing your own threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the interaction war by holding up counterspells/bounce for their threats. Use Ponder to find answers and out-value them in card advantage. Win by out-resolving, protecting your threats, and forcing them to overcommit into your interaction.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspell",
     "Lightning Bolt",
-    "Thoughtseize"
+    "Thoughtseize",
+    "Watch for sweepers, counterspells, and combo win conditions.",
+    "Note when opponents tap out for big spells or leave mana open for interaction.",
+    "Track graveyard contents against combo decks, and monitor land drops to predict ramp or Tron lock potential."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:31:52+00:00",
     "model": "local-model",
@@ -111,6 +149,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

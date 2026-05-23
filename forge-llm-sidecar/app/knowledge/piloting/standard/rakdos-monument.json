@@ -11,11 +11,14 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with early discard outlets or lands to trigger Monument to Endurance",
-      "Hands with low-cost creatures to establish early board presence"
+      "Hands with low-cost creatures to establish early board presence",
+      "Keep hands with 2-3 lands, a turn-1 or turn-2 discard/removal spell, and at least one early threat or mana accelerator.",
+      "Prioritize hands that can play a land, cast a cheap interaction, and develop toward the Monument by turn 3."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction or discard sources",
-      "Hands with only high-cost permanents without early triggers"
+      "Hands with only high-cost permanents without early triggers",
+      "Mulligan any hand with 0-1 lands, multiple expensive cards with no early play, or only removal without threats or mana fixing."
     ],
     "examples": [
       {
@@ -37,17 +40,33 @@
     "early_game": [
       "Play Monument to Endurance and lands to establish the engine",
       "Use early discard outlets like Iron-Shield Elf or Restless Vents to trigger Monument",
-      "Deploy hard-to-remove creatures to apply early pressure"
+      "Deploy hard-to-remove creatures to apply early pressure",
+      "Turn 1: Play a land, cast a cheap discard or early threat if available.",
+      "Turn 2: Develop mana, drop the Monument if you have the mana, or establish a midrange threat.",
+      "Prioritize board presence and card advantage over rushing",
+      "the Monument needs time to grow and stabilize against the fast metagame."
     ],
     "mid_game": [
       "Cycle through discard sources to maintain Monument triggers and card advantage",
       "Use Moonshadow to fetch high-power creatures like Flamewake Phoenix",
-      "Leverage Bloodthorn Flail and Bloodghast to return discarded threats to the battlefield"
+      "Leverage Bloodthorn Flail and Bloodghast to return discarded threats to the battlefield",
+      "Balance mana for interaction versus Monument development.",
+      "Avoid overcommitting to the artifact early",
+      "keep mana open for disruption and protection.",
+      "Manage your graveyard carefully if the deck uses it for recursion or value, and prioritize drawing into late-game threats when the board is stabilized.",
+      "Commit threats when you have removal or discard to clear blockers or answer sweepers.",
+      "Hold back if the opponent has heavy removal or counterspells and you lack protection."
     ],
     "late_game": [
       "Cycle Marauding Mako for card advantage rather than playing it as a one-drop",
       "Sideboard in attrition tools like Case of the Crimson Pulse and Sunspine Lynx",
-      "Use sweepers like Pyroclasm to clear wide boards while protecting recurring threats"
+      "Use sweepers like Pyroclasm to clear wide boards while protecting recurring threats",
+      "A fully grown Monument-boosted creature, often paired with direct damage or a resilient threat like Moonshadow.",
+      "Sometimes a sacrifice outlet combined with recursion or evasion can close games.",
+      "Direct damage spells can also finish games if the opponent is low and your board is established.",
+      "Go all-in when you have card advantage, the opponent is low on removal, or you've established board control.",
+      "Commit aggressively if the Monument is untouchable or if you can trade efficiently into their blockers.",
+      "Push damage when you know they lack sweepers or counters."
     ]
   },
   "key_cards": [
@@ -146,7 +165,11 @@
     "Prioritize Monument to Endurance triggers in the order of Draw, Damage, Treasure unless a specific trigger wins immediately or extra mana is needed for an explosive play.",
     "Use Moonshadow to fetch creatures with power four or greater to survive combat and trigger Flamewake Phoenix.",
     "Combine Bloodthorn Flail with Bloodghast to return Flamewake Phoenix to the battlefield on the same turn for board consistency.",
-    "Cycle Marauding Mako in the late game rather than playing it as a one-drop that does nothing on its own."
+    "Cycle Marauding Mako in the late game rather than playing it as a one-drop that does nothing on its own.",
+    "Common mistake: Overcommitting to the Monument too early and getting wiped by sweepers or targeted removal.",
+    "Another pitfall: Ignoring the graveyard if the deck uses it for recursion or value.",
+    "Unique interaction: Moonshadow likely synergizes with the Monument through recursion, evasion, or sacrifice outlets.",
+    "Always track opponent's mana and removal to time your key plays, and don't be afraid to play around sweepers by holding up interaction or attacking in waves."
   ],
   "matchups": [
     {
@@ -205,6 +228,31 @@
         "Flying creatures",
         "Airbending strategies"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, uncounterable threats or discard to remove counterspells before they can be cast. Cast key spells at instant speed when the opponent is tapped out. Rely on the Monument as a secondary win condition that doesn't require casting spells, and use discard to disrupt their hand before they can answer your threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development and use discard to hit key ramp pieces. Stabilize with sweepers and early removal, then close out the game before they hit their late-game power. Don't let them stabilize; trade efficiently and pressure their life total.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early removal and discard to slow their board development. Don't overextend; the Monument wins long games, so survive turns 1-3, stabilize, and out-value them. Use direct damage to trade down favorably and protect your life total while developing your board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure their life total with direct damage and resilient threats. Force them to use removal on the Monument, then exploit the card advantage. Use discard to disrupt their game plan and force unfavorable trades. Don't let them stabilize; keep applying pressure and win the resource war.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing card advantage, protecting your Monument, and forcing unfavorable trades. Discard their key threats and out-value them in the late game. Track their removal and counters, and play around their sideboard by keeping a balanced hand of interaction and threats.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -215,10 +263,13 @@
     "Lessons",
     "Dimir Midrange",
     "Mono Red Aggro",
-    "Sultai Reanimator"
+    "Sultai Reanimator",
+    "Watch for Izzet's counterspells\u2014hold up mana for protection or cast key spells at instant speed when they're tapped out.",
+    "Track Landfall triggers and wide boards"
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-rakdos-monument-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T06:31:55+00:00",
     "model": "local-model",
@@ -236,6 +287,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
@@ -272,7 +341,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "We typically want Moonshadow with power four or greater—ideal for surviving most combat while also triggering Flamewake Phoenix"
+      "evidence_span": "We typically want Moonshadow with power four or greater\u2014ideal for surviving most combat while also triggering Flamewake Phoenix"
     },
     {
       "confidence": 0.9,
@@ -284,7 +353,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "there are scenarios—especially in the late-game — where Cycling it away is a more reliable option than putting a one-drop on the board that does nothing on its own."
+      "evidence_span": "there are scenarios\u2014especially in the late-game \u2014 where Cycling it away is a more reliable option than putting a one-drop on the board that does nothing on its own."
     }
   ],
   "common_threats_evidence": [

@@ -12,11 +12,15 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with early land drops and Fetch Lands",
-      "Hands containing early threats like Sazh's Chocobo or Bristly Bill, Spine Sower"
+      "Hands containing early threats like Sazh's Chocobo or Bristly Bill, Spine Sower",
+      "Keep hands with 2-3 lands (including basics for mana fixing and Erode targets), plus at least one of Badgermole Cub or Mightform Harmonizer.",
+      "Keep hands with Erode if paired with a land or creature.",
+      "Prioritize hands that can play a land on turn 1 and a creature/land on turn 2."
     ],
     "mulligan_criteria": [
       "Hands lacking land drops or early acceleration",
-      "Hands heavy on late-game cards without early plays"
+      "Hands heavy on late-game cards without early plays",
+      "Mulligan to 4+ lands, or hands with multiple spells and no lands."
     ],
     "examples": [
       {
@@ -36,17 +40,32 @@
     "early_game": [
       "Play Fetch Lands to trigger Landfall and find basics",
       "Drop early threats like Sazh's Chocobo and Bristly Bill, Spine Sower",
-      "Use Icetill Explorer to guarantee Landfall and reuse Fetch Lands"
+      "Use Icetill Explorer to guarantee Landfall and reuse Fetch Lands",
+      "Turn 1: Play a basic land.",
+      "Turn 2: Play a second land, then cast Badgermole Cub or Mightform Harmonizer.",
+      "If you have Erode, use it to fetch a basic land to trigger landfall and immediately pump your creature.",
+      "Sequence lands first to maximize trigger counts, then cast creatures to capitalize on immediate landfall triggers."
     ],
     "mid_game": [
       "Double Landfall triggers with Traveling Chocobo for explosive plays",
       "Grow Mossborn Hydra and Tifa Lockhart with +1/+1 counters",
-      "Cast Felidar Retreat to generate tokens and pump the board"
+      "Cast Felidar Retreat to generate tokens and pump the board",
+      "Prioritize land drops above all else",
+      "each land is a trigger and a resource.",
+      "Use Erode strategically to fetch basics for mana fixing or to trigger landfall at optimal times.",
+      "Don't overcommit to hand if you can stabilize with landfall triggers.",
+      "Manage your graveyard carefully if the format has graveyard hate, but generally, landfall doesn't rely heavily on it.",
+      "Commit creatures once you have 2+ lands on the battlefield to ensure immediate pump triggers."
     ],
     "late_game": [
       "Rely on Bristly Bill, Spine Sower's late-game ability to dominate",
       "Use Dyadrine, Synthesis Amalgam to generate card advantage and extra bodies",
-      "Apply sideboard answers like Dawn's Truce or Requisition Raid to close out matches"
+      "Apply sideboard answers like Dawn's Truce or Requisition Raid to close out matches",
+      "Mightform Harmonizer with multiple landfall triggers, or a fully pumped Badgermole Cub.",
+      "Win by attacking with giant creatures or using Erode to fetch lands that trigger additional pumps.",
+      "If behind, use land drops to trigger enough landfall to stabilize and counter-attack.",
+      "Go all-in when you have 3+ lands on the battlefield, your creatures are pumped, and the opponent has no sweepers or hard removal in hand.",
+      "Also commit when you can close the game in 1-2 turns of combat."
     ]
   },
   "key_cards": [
@@ -101,7 +120,13 @@
     "Preserve Fetch Lands in hand when needed for key creatures like Mossborn Hydra",
     "Use Icetill Explorer to reuse Fetch Lands and guarantee triggers",
     "Remove +1/+1 counters from creatures to activate Dyadrine, Synthesis Amalgam for card advantage when damage isn't the priority",
-    "Cast Felidar Retreat to protect the board and generate tokens when opponents have removal"
+    "Cast Felidar Retreat to protect the board and generate tokens when opponents have removal",
+    "Common mistake: Overcommitting to a wide board without accounting for sweepers.",
+    "Always count the opponent's potential removal.",
+    "Another mistake: Not using Erode optimally for landfall triggers.",
+    "Remember that fetching a land triggers landfall, so you can pump creatures before they even enter the battlefield.",
+    "Also, be mindful of format-specific hate cards if applicable, though Landfall is less graveyard-dependent.",
+    "Practice sequencing land drops to maximize trigger counts."
   ],
   "matchups": [
     {
@@ -151,6 +176,31 @@
         "Mirror match dynamics",
         "Landfall triggers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Erode to fetch lands and trigger landfall before casting threats, or cast creatures in response to their spells. Use cheap, efficient threats that are hard to counter. If possible, use bounce or protection to protect key creatures from targeted counters or removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Outpace them with aggressive land drops and early threats. Use Erode to disrupt their mana base or fetch lands to stabilize. Don't let them get too far ahead; pressure early and often to force mistakes or win before their late-game threats resolve.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early land drops and pump creatures to trade efficiently. Use Erode to bounce key threats or fetch lands to trigger landfall and stabilize the board. Don't overcommit to a wide board if they have sweepers; focus on trading 1-for-1 efficiently.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with landfall triggers. Use Erode to disrupt their mana or fetch lands to keep triggering. Don't let them stabilize completely; keep attacking and threatening. If they have sweepers, wait for the right moment to commit or use bounce to protect key creatures.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource race. Prioritize card advantage and efficient removal. Use Erode to disrupt their land drops or fetch lands to trigger landfall at critical moments. Track their hand to know when they have removal. Win by out-resourcing them with better sequencing and sideboard choices.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -159,10 +209,15 @@
     "Pinnacle Starcage",
     "Caretaker's Talent",
     "Overlord of the Hauntwoods",
-    "Spot removal"
+    "Spot removal",
+    "Watch for counterspells, sweepers (like Wrath of God), and targeted removal.",
+    "Note when opponents tap out for spells vs. holding mana for interaction.",
+    "Track their land count to predict if they can cast their win conditions.",
+    "Pay attention to when they use removal on your pump creatures vs. your lands."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-selesnya-landfall-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T05:32:30+00:00",
     "model": "local-model",
@@ -193,6 +248,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:25:03+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

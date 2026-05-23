@@ -1,0 +1,109 @@
+{
+  "archetype": "Counter Vine",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/counter-vine.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Basking Rootwalla"
+    },
+    {
+      "qty": 4,
+      "name": "Bazaar of Baghdad"
+    },
+    {
+      "qty": 4,
+      "name": "Blazing Rootwalla"
+    },
+    {
+      "qty": 1,
+      "name": "Commandeer"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 4,
+      "name": "Hollow One"
+    },
+    {
+      "qty": 4,
+      "name": "Master of Death"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 2,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 2,
+      "name": "Misdirection"
+    },
+    {
+      "qty": 4,
+      "name": "Noxious Revival"
+    },
+    {
+      "qty": 4,
+      "name": "Serum Powder"
+    },
+    {
+      "qty": 1,
+      "name": "Snapback"
+    },
+    {
+      "qty": 4,
+      "name": "Squee, Goblin Nabob"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 4,
+      "name": "Vengevine"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Echoing Deeps"
+    },
+    {
+      "qty": 4,
+      "name": "Fury"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Quarter"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 4,
+      "name": "Ravenous Trap"
+    }
+  ]
+}

@@ -1,0 +1,408 @@
+{
+  "archetype": "Kaalia of the Vast",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/kaalia-of-the-vast.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancient Copper Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Angel of Despair"
+    },
+    {
+      "qty": 1,
+      "name": "Angel of Serenity"
+    },
+    {
+      "qty": 1,
+      "name": "Angelic Arbiter"
+    },
+    {
+      "qty": 1,
+      "name": "Anguished Unmaking"
+    },
+    {
+      "qty": 1,
+      "name": "Animate Dead"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archfiend of Depravity"
+    },
+    {
+      "qty": 1,
+      "name": "Archfiend of Despair"
+    },
+    {
+      "qty": 1,
+      "name": "Arena of Glory"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Aurelia, the Warleader"
+    },
+    {
+      "qty": 1,
+      "name": "Avacyn, Angel of Hope"
+    },
+    {
+      "qty": 1,
+      "name": "Badlands"
+    },
+    {
+      "qty": 1,
+      "name": "Balefire Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Blasphemous Act"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Caves of Koilos"
+    },
+    {
+      "qty": 1,
+      "name": "Clifftop Retreat"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Damn"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Rollick"
+    },
+    {
+      "qty": 1,
+      "name": "Deflecting Swat"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Counsel"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Dragon Tempest"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonskull Summit"
+    },
+    {
+      "qty": 1,
+      "name": "Drakuseth, Maw of Flames"
+    },
+    {
+      "qty": 1,
+      "name": "Drana and Linvala"
+    },
+    {
+      "qty": 1,
+      "name": "Enlightened Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Farewell"
+    },
+    {
+      "qty": 1,
+      "name": "Flawless Maneuver"
+    },
+    {
+      "qty": 1,
+      "name": "Gisela, Blade of Goldnight"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Grand Abolisher"
+    },
+    {
+      "qty": 1,
+      "name": "Hellkite Tyrant"
+    },
+    {
+      "qty": 1,
+      "name": "Isolated Chapel"
+    },
+    {
+      "qty": 1,
+      "name": "Isshin, Two Heavens as One"
+    },
+    {
+      "qty": 1,
+      "name": "Jeska's Will"
+    },
+    {
+      "qty": 1,
+      "name": "Kaalia of the Vast"
+    },
+    {
+      "qty": 1,
+      "name": "Kaalia, Zenith Seeker"
+    },
+    {
+      "qty": 1,
+      "name": "Land Tax"
+    },
+    {
+      "qty": 1,
+      "name": "Liesa, Forgotten Archangel"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Greaves"
+    },
+    {
+      "qty": 1,
+      "name": "Lord of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Master of Cruelties"
+    },
+    {
+      "qty": 1,
+      "name": "Minas Tirith"
+    },
+    {
+      "qty": 1,
+      "name": "Mortify"
+    },
+    {
+      "qty": 1,
+      "name": "Mother of Runes"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Night's Whisper"
+    },
+    {
+      "qty": 1,
+      "name": "Nomad Outpost"
+    },
+    {
+      "qty": 1,
+      "name": "Orzhov Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Plateau"
+    },
+    {
+      "qty": 1,
+      "name": "Rakdos, Patron of Chaos"
+    },
+    {
+      "qty": 1,
+      "name": "Razaketh, the Foulblooded"
+    },
+    {
+      "qty": 1,
+      "name": "Read the Bones"
+    },
+    {
+      "qty": 1,
+      "name": "Reanimate"
+    },
+    {
+      "qty": 1,
+      "name": "Reconnaissance"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Reya Dawnbringer"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Ruinous Ultimatum"
+    },
+    {
+      "qty": 1,
+      "name": "Rune-Scarred Demon"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Savai Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Scrubland"
+    },
+    {
+      "qty": 1,
+      "name": "Sephara, Sky's Blade"
+    },
+    {
+      "qty": 1,
+      "name": "Serra's Emissary"
+    },
+    {
+      "qty": 1,
+      "name": "Shattered Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Shizo, Death's Storehouse"
+    },
+    {
+      "qty": 1,
+      "name": "Smoldering Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Smothering Tithe"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sundown Pass"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swiftfoot Boots"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi's Protection"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Malice"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Triumph"
+    },
+    {
+      "qty": 1,
+      "name": "Terminate"
+    },
+    {
+      "qty": 1,
+      "name": "Terror of the Peaks"
+    },
+    {
+      "qty": 1,
+      "name": "The One Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Twinflame Tyrant"
+    },
+    {
+      "qty": 1,
+      "name": "Urborg, Tomb of Yawgmoth"
+    },
+    {
+      "qty": 1,
+      "name": "Valgavoth, Terror Eater"
+    },
+    {
+      "qty": 1,
+      "name": "Vampiric Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Vault of the Archangel"
+    },
+    {
+      "qty": 1,
+      "name": "Vilis, Broker of Blood"
+    },
+    {
+      "qty": 1,
+      "name": "Whispersilk Cloak"
+    }
+  ],
+  "sideboard": []
+}

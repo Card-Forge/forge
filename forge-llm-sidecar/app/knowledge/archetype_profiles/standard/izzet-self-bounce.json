@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "name": "Izzet Self-Bounce",
+  "format": "standard",
+  "colors": [
+    "U",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Izzet Self-Bounce leverages instant-speed bounce spells to repeatedly trigger enters-the-battlefield abilities, generating massive card advantage and board presence. By cycling creatures back and forth, the deck outvalues opponents in the midgame while maintaining tempo pressure. Success relies on precise sequencing and protecting key bounce targets from removal.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 25,
+      "cards": [
+        "Boomerang Basics",
+        "Broadside Barrage",
+        "Flow State",
+        "Opt",
+        "Ral, Crackling Wit",
+        "Slickshot Show-Off",
+        "Stormchaser's Talent",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 5
+    },
+    "dig_draw": {
+      "target_count": 21,
+      "cards": [
+        "Flow State",
+        "Opt",
+        "Sleight of Hand",
+        "Slickshot Show-Off",
+        "Stock Up",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 21,
+      "cards": [
+        "Eddymurk Crab",
+        "Flow State",
+        "Ral, Crackling Wit",
+        "Roaring Furnace // Steaming Sauna",
+        "Slickshot Show-Off",
+        "Stormchaser's Talent",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 27,
+      "cards": [
+        "Abrade",
+        "Boomerang Basics",
+        "Broadside Barrage",
+        "Burst Lightning",
+        "Flow State",
+        "Ghost Vacuum",
+        "Impractical Joke",
+        "Slagstorm",
+        "Slickshot Show-Off",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Ghost Vacuum",
+        "Slagstorm"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 9,
+      "cards": [
+        "Annul",
+        "Disdainful Stroke",
+        "Get Out",
+        "Negate",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 6
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Flow State",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 2,
+      "cards": [
+        "Broadside Barrage"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "graveyard_enablers": {
+      "target_count": 13,
+      "cards": [
+        "Eddymurk Crab",
+        "Flow State",
+        "Ghost Vacuum",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 1
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 11,
+      "cards": [
+        "Boomerang Basics",
+        "Get Out",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 14,
+      "cards": [
+        "Flow State",
+        "Ral, Crackling Wit",
+        "Slickshot Show-Off",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Impractical Joke"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 22,
+      "cards": [
+        "Flow State",
+        "Riverpyre Verge",
+        "Spirebluff Canal",
+        "Steam Vents",
+        "Stormcarved Coast",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Island",
+        "Riverpyre Verge",
+        "Spirebluff Canal",
+        "Steam Vents",
+        "Stormcarved Coast"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Ral, Crackling Wit"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "interaction_density": 0.56
+  },
+  "dual_role_cards": [
+    {
+      "card": "Boomerang Basics",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Broadside Barrage",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eddymurk Crab",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Get Out",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Vacuum",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Impractical Joke",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Opt",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ral, Crackling Wit",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Riverpyre Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Slagstorm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Slickshot Show-Off",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirebluff Canal",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormcarved Coast",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormchaser's Talent",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wan Shi Tong, Librarian",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Bounce creatures before the opponent's turn to trigger ETBs and draw cards safely",
+    "Use Flow State to untap a creature, then bounce it to trigger its ETB a second time in the same turn",
+    "Prioritize bouncing creatures with the most impactful ETB abilities to maximize value",
+    "Hold bounce spells in hand to dodge opponent's removal and sweepers",
+    "Common mistake: Bouncing your own tokens too early without a plan to protect them or generate value."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap ETB creatures and immediately bounce them to draw cards"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use bounce spells as early interaction against opponent's threats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish a minimal board presence while cycling through the deck"
+    }
+  ],
+  "kill_priority": [
+    "Flow State",
+    "Ral, Crackling Wit",
+    "Slickshot Show-Off",
+    "Stormchaser's Talent",
+    "Eddymurk Crab",
+    "Roaring Furnace // Steaming Sauna",
+    "Wan Shi Tong, Librarian"
+  ],
+  "interaction_to_disrupt": [
+    "Annul",
+    "Disdainful Stroke",
+    "Get Out",
+    "Negate",
+    "Spell Pierce",
+    "Flow State",
+    "Stormchaser's Talent",
+    "Abrade"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/izzet-self-bounce.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

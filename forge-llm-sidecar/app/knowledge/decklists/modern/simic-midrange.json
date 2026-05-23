@@ -1,0 +1,117 @@
+{
+  "archetype": "Simic Midrange",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/simic-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Abhorrent Oculus"
+    },
+    {
+      "qty": 4,
+      "name": "Birthing Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 2,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Coiling Oracle"
+    },
+    {
+      "qty": 2,
+      "name": "Endurance"
+    },
+    {
+      "qty": 2,
+      "name": "Fblthp, the Lost"
+    },
+    {
+      "qty": 4,
+      "name": "Flare of Denial"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 2,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 2,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 4,
+      "name": "Ice-Fang Coatl"
+    },
+    {
+      "qty": 4,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 4,
+      "name": "Shardless Agent"
+    },
+    {
+      "qty": 4,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 2,
+      "name": "Snow-Covered Forest"
+    },
+    {
+      "qty": 2,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 4,
+      "name": "Subtlety"
+    },
+    {
+      "qty": 3,
+      "name": "Verdant Catacombs"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 3,
+      "name": "Fade from History"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 2,
+      "name": "Gemstone Caverns"
+    },
+    {
+      "qty": 3,
+      "name": "Mystical Dispute"
+    }
+  ]
+}

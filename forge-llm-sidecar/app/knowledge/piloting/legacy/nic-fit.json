@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more lands and at least one ramp or interaction spell",
       "Hands containing Veteran Explorer or Green Sun's Zenith with sufficient mana sources",
-      "Hands with early Cabal Therapy to secure information"
+      "Hands with early Cabal Therapy to secure information",
+      "Keep hands with 2-3 lands, Green Sun's Zenith, Cabal Therapy, and at least one early threat (Tarmogoyf, Scavenging Ooze, Veteran Explorer, or Bloodbraid Elf).",
+      "Prioritize hands that can cast a 1-mana spell on turn 1 and a 2-mana spell on turn 2."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands and no ramp or interaction",
       "Hands lacking any card that impacts the early game",
-      "Hands with only late-game threats and no acceleration"
+      "Hands with only late-game threats and no acceleration",
+      "Mulligan hands with 0-1 lands, multiple copies of Therapy without threats, or hands lacking early interaction/pressure."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Prioritize land drops and cast ramp spells to enable turn-three or turn-four plays",
       "Use Cabal Therapy to probe opponent's hand and identify key threats or answers",
-      "Hold up mana for potential interaction while establishing a minimal board presence"
+      "Hold up mana for potential interaction while establishing a minimal board presence",
+      "Turn 1: Play a land, cast Cabal Therapy targeting opponent's hand (discard a key disruption or combo piece) or cast a 1-mana threat like Tarmogoyf/Scavenging Ooze.",
+      "Turn 2: Play a second land, cast Green Sun's Zenith to tutor for a 2-3 mana threat (Veteran Explorer, Bloodbraid Elf, or Thalia's Guardian) or additional disruption.",
+      "Sequence lands to ensure double-colored mana availability for Zenith and threats",
+      "fetch lands should be used to find shock lands or duals that enter untapped if possible."
     ],
     "mid_game": [
       "Cast Veteran Explorer to generate excess mana and accelerate the curve",
       "Deploy Green Sun's Zenith to find targeted threats, removal, or additional ramp based on Therapy information",
-      "Begin applying pressure with mid-sized creatures while maintaining card advantage"
+      "Begin applying pressure with mid-sized creatures while maintaining card advantage",
+      "Treat Green Sun's Zenith as a premium resource",
+      "only cast it when you can guarantee a game-winning or game-swinging threat.",
+      "Use Cabal Therapy early to disrupt opponent's hand, saving it for key turns.",
+      "Manage your graveyard by avoiding unnecessary self-mill and using Surgical Extraction if needed.",
+      "Keep a hand of 3-4 cards to maintain flexibility against disruption.",
+      "Commit threats when the opponent has no sweepers or has exhausted their removal."
     ],
     "late_game": [
       "Flood the board with mana-accelerated threats that opponents cannot answer",
       "Use repeated Cabal Therapy to strip opponent's remaining resources",
-      "Close out games by leveraging mana advantage to cast multiple threats per turn"
+      "Close out games by leveraging mana advantage to cast multiple threats per turn",
+      "Veteran Explorer (often pumped to 3/3 or 4/4), Tarmogoyf, and Bloodbraid Elf.",
+      "Secure victory by applying consistent pressure, using combat tricks to bypass removal, and leveraging Green Sun's Zenith to find a late-game finisher if needed.",
+      "Go all-in when the opponent has no sweepers, has used their removal on earlier threats, or is at low life.",
+      "Commit multiple threats if you can trade favorably or if you have combat tricks to protect your board.",
+      "Push for lethal with Veteran Explorer's pump ability when opponent has no blockers or removal."
     ]
   },
   "key_cards": [
@@ -59,7 +77,13 @@
     "Cast Cabal Therapy before Green Sun's Zenith to know exactly which creature or spell to fetch",
     "Play Veteran Explorer as early as possible to maximize cumulative mana generation",
     "Hold up black mana for potential interaction while keeping enough open to cast ramp on curve",
-    "Prioritize fetching threats that pressure the opponent's weakest color or matchup weakness"
+    "Prioritize fetching threats that pressure the opponent's weakest color or matchup weakness",
+    "Green Sun's Zenith is a one-sided tutor, so know your topdecks and what you're looking for.",
+    "Cabal Therapy's downside is manageable early but can be a liability late",
+    "use it wisely.",
+    "Veteran Explorer's pump ability is crucial in combat and should be saved for favorable trades or lethal.",
+    "Avoid overcommitting to the board without assessing sweepers.",
+    "Practice hand management to avoid being out of resources against control."
   ],
   "matchups": [
     {
@@ -88,16 +112,36 @@
         "Win condition pieces",
         "Protection spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple threats to force through, cast Green Sun's Zenith on your turn to bypass counters, and use Cabal Therapy to discard counterspells. If possible, tutor for Rest in Peace or Thalia's Guardian to lock them out. Use combat tricks to trade favorably if a threat is countered.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race their mana acceleration. Use Cabal Therapy to discard mana dorks or key ramp spells. Bring in Rest in Peace and Thalia's Guardian to neutralize their advantage. Use Green Sun's Zenith to find hate bears or additional disruption.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value exchange is key; use Cabal Therapy to disrupt their Green Sun's Zenith or key threats. Track their hand for combat tricks and discard them. Use Veteran Explorer's pump ability to trade favorably. Don't overextend; play one threat at a time to bait removal. Use Green Sun's Zenith to find a superior threat or hate bear when they commit.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Counterspell packages",
     "Board wipe spells",
-    "Card draw engines"
+    "Card draw engines",
+    "Watch for counterspells (Force of Will, Daze, Spell Pierce) and targeted removal (Path to Exile, Swords to Plowshares, Lightning Axe).",
+    "Track opponent's hand size and discarded cards to anticipate their game plan.",
+    "Note if they're playing lands that suggest ramp (Tron) or combo (Sneak and Show).",
+    "Pay attention to when they tap out for spells, indicating vulnerability to pressure."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:18:19+00:00",
     "model": "local-model",
@@ -113,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

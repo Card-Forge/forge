@@ -12,12 +12,15 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with creatures and a balanced land count",
-      "Hands that can set up a Turn 2 Kill"
+      "Hands that can set up a Turn 2 Kill",
+      "Keep hands with 1-2 lands, Kiln Fiend, and at least one cheap spell (Rite of Flame, Manamorphose, Lightning Strike, etc.).",
+      "Prioritize hands that can cast Kiln Fiend on turn 2 or 3."
     ],
     "mulligan_criteria": [
       "Hands without any creatures",
       "Hands with not enough lands",
-      "Hands with too many lands"
+      "Hands with too many lands",
+      "Mulligan to hands with only lands, only spells with no early plays, or hands missing both Kiln Fiend and a way to cast it by turn 3."
     ],
     "examples": [
       {
@@ -34,15 +37,28 @@
   "game_plan": {
     "early_game": [
       "Play Satyr Hoplite on turn 1 and pump it with Rite of Flame and Furor of the Bitten",
-      "Cast Kiln Fiend on turn 2 to establish a major threat"
+      "Cast Kiln Fiend on turn 2 to establish a major threat",
+      "Turn 1: Play a land, cast a cheap spell (Rite of Flame/Manamorphose) if possible, or hold for turn 2.",
+      "Turn 2: Play second land, cast Kiln Fiend, then immediately cast another cheap spell to trigger its ETB for lethal or board damage.",
+      "If opening with Rite of Flame, consider playing it on turn 1 if you have a land, then casting Kiln Fiend on turn 2."
     ],
     "mid_game": [
       "Continuously cast instants and sorceries to buff Kiln Fiend and Festival Crasher",
-      "Use Apostle's Blessing for protection or evasion as needed"
+      "Use Apostle's Blessing for protection or evasion as needed",
+      "Mana is critical",
+      "always keep 1R open for Kiln Fiend ETB triggers and instant-speed spells.",
+      "Manage hand size by using draw spells (Rite/Manamorphose) but avoid flooding if you have no Kiln Fiends.",
+      "Graveyard is generally irrelevant unless using specific sideboard cards",
+      "focus on hand and library.",
+      "Commit Kiln Fiends aggressively when you have a way to trigger them immediately."
     ],
     "late_game": [
       "Leverage Ancestral Anger which gets better as the game goes on",
-      "Use Mutagenic Growth or Temur Battle Rage to secure lethal damage"
+      "Use Mutagenic Growth or Temur Battle Rage to secure lethal damage",
+      "Multiple Kiln Fiends on the board with cheap spells to trigger them, or a single Kiln Fiend with a high spell count.",
+      "Rite of Flame/Manamorphose can finish games directly.",
+      "Go all-in when you have 2+ Kiln Fiends, enough mana to cast them and trigger them, and the opponent has no sweepers or sufficient life to survive the triggers.",
+      "Also commit when you can close the game in one turn."
     ]
   },
   "key_cards": [
@@ -96,7 +112,12 @@
     "Cast instants and sorceries before attacking to maximize Kiln Fiend's power",
     "Use Rite of Flame on turn 1 to enable Furor of the Bitten for Satyr Hoplite",
     "Play creatures before opponents get access to a lot of mana to avoid counters",
-    "Use Apostle's Blessing for protection or evasion depending on the board state"
+    "Use Apostle's Blessing for protection or evasion depending on the board state",
+    "Common mistake: Overcasting spells without Kiln Fiend on board to trigger them, wasting resources.",
+    "Another: Forgetting that Kiln Fiend's trigger goes on the stack and can be responded to.",
+    "Always calculate exact damage needed.",
+    "Manamorphose's life loss is manageable but can be fatal against aggressive decks.",
+    "Rite of Flame's extra land is crucial for consistency."
   ],
   "matchups": [
     {
@@ -138,6 +159,31 @@
         "Land Destruction version",
         "ramp resources"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells that are hard to counter (if format allows), or sequence plays to counter the counter. Use discard to remove counterspells. If possible, cast Kiln Fiend in response to a counter, or use instant-speed spells to trigger it.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them. They will try to outpace you with big threats; you must win before they stabilize. Use discard to hit their mana sources.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with spot removal, then pivot to your game plan. You can't out-race Elves/Affinity early, so focus on surviving turn 1-3, then close the game with Kiln Fiend triggers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure relentlessly. Don't let them stabilize. Use discard to remove key answers. Win before they can draw into sweepers or counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize killing their Kiln Fiends before they can trigger. Use your own triggers to close the game. Track spell counts carefully.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -147,10 +193,14 @@
     "Delver",
     "counters",
     "colorless Eldrazi tokens",
-    "Writhing Chrysalis"
+    "Writhing Chrysalis",
+    "Watch for board wipes (Wrath of God, etc.), targeted removal (Path to Exile, Lightning Strike), and counterspells.",
+    "Note when opponents tap out for sweepers or hold up interaction.",
+    "Track their life total to calculate trigger damage needed."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-mono-red-kiln-fiend-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T10:15:02+00:00",
     "model": "local-model",
@@ -168,6 +218,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

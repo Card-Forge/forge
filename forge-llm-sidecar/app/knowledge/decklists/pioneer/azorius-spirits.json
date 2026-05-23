@@ -1,0 +1,109 @@
+{
+  "archetype": "Azorius Spirits",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/azorius-spirits.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Adarkar Wastes"
+    },
+    {
+      "qty": 3,
+      "name": "Enduring Curiosity"
+    },
+    {
+      "qty": 4,
+      "name": "Geistlight Snare"
+    },
+    {
+      "qty": 4,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Hengegate Pathway"
+    },
+    {
+      "qty": 4,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Mausoleum Wanderer"
+    },
+    {
+      "qty": 2,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 4,
+      "name": "No More Lies"
+    },
+    {
+      "qty": 4,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Rattlechains"
+    },
+    {
+      "qty": 4,
+      "name": "Seachrome Coast"
+    },
+    {
+      "qty": 3,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 3,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 4,
+      "name": "Skyclave Apparition"
+    },
+    {
+      "qty": 4,
+      "name": "Spell Queller"
+    },
+    {
+      "qty": 4,
+      "name": "Supreme Phantom"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Curious Obsession"
+    },
+    {
+      "qty": 2,
+      "name": "Deafening Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 2,
+      "name": "Dovin's Veto"
+    },
+    {
+      "qty": 1,
+      "name": "High Noon"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 3,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 2,
+      "name": "Split Up"
+    }
+  ]
+}

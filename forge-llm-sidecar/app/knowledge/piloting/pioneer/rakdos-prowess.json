@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with a turn-one prowess creature and at least one noncreature spell",
       "Curves that guarantee plays on turns two and three",
-      "Removal or interaction to handle early threats"
+      "Removal or interaction to handle early threats",
+      "Keep hands with 2-3 lands, at least one turn-1 or turn-2 threat (Slickshot Show-Off, Monastery Swiftspear, Emberheart Challenger), and cheap spells/removal (Fatal Push, Lightning Strike, Go Blank).",
+      "Prioritize hands that can cast a spell on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Hands lacking noncreature spells to trigger prowess",
       "Stuck on three-drops or higher without early interaction",
-      "Multiple high-cost creatures with no cheap spells"
+      "Multiple high-cost creatures with no cheap spells",
+      "Mulligan if you have 0-1 lands, only expensive threats, or no way to trigger Prowess early."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Deploy Monastery Swiftspear immediately and cast cheap instants or sorceries to buff it",
       "Prioritize land drops and spell density to maximize prowess triggers",
-      "Use early removal to clear blockers and keep damage on track"
+      "Use early removal to clear blockers and keep damage on track",
+      "Turn 1: Play a basic land, cast a cheap spell (Fatal Push, Lightning Strike, or Slickshot Show-Off if mana allows).",
+      "Turn 2: Play a second land, cast another spell, and drop a mid-tier threat like Emberheart Challenger or Slickshot.",
+      "Sequence lands to ensure access to double red/black for Swiftspear and Emberheart, but don't flood with red if you need black for removal."
     ],
     "mid_game": [
       "Introduce Slickshot Show-Off and Emberheart Challenger to apply wider pressure",
       "Cast noncreature spells before combat to maximize prowess buffs",
-      "Begin recycling Slickshot from the graveyard to maintain board presence"
+      "Begin recycling Slickshot from the graveyard to maintain board presence",
+      "Treat your hand as a resource to trigger Prowess",
+      "don't hoard spells.",
+      "Use removal only when necessary to preserve threats.",
+      "Keep an eye on your graveyard for Fatal Push targets and Bloodtithe Harvester value.",
+      "Commit threats when the opponent has no sweepers or targeted removal.",
+      "Hold back Monastery Swiftspear until it can swing for lethal or trade favorably."
     ],
     "late_game": [
       "Focus on finishing the game with accumulated prowess counters",
       "Use Emberheart Challenger's death trigger to create a final threat",
-      "Maintain spell density to outvalue slower decks and close out matches"
+      "Maintain spell density to outvalue slower decks and close out matches",
+      "Monastery Swiftspear is your primary win condition.",
+      "Once it reaches 4/4 or larger, swing aggressively.",
+      "Emberheart Challenger can also close games if it survives combat or trades into a key blocker.",
+      "Go all-in when the opponent has no removal, no sweepers, and you have Prowess triggers ready to scale your attackers.",
+      "Also commit when you can race their win condition or force a combat math advantage."
     ]
   },
   "key_cards": [
@@ -59,7 +76,12 @@
     "Cast noncreature spells before declaring attackers to maximize prowess buffs",
     "Hold removal in hand to respond to opponent's key threats or blockers",
     "Time Emberheart Challenger's death trigger to leave a counter on your largest creature",
-    "Prioritize casting spells that trigger prowess over drawing cards when ahead on damage"
+    "Prioritize casting spells that trigger prowess over drawing cards when ahead on damage",
+    "Prowess rewards spell efficiency, so don\u2019t fear casting seemingly 'bad' spells if they trigger Prowess.",
+    "Watch your graveyard for Fatal Push and Harvester value.",
+    "Don\u2019t overcommit to the board without considering sweepers.",
+    "Practice combat math with Swiftspear to avoid misplays.",
+    "Remember that Prowess triggers on any instant, sorcery, or activated ability, so use creature abilities and discard effects to your advantage."
   ],
   "matchups": [
     {
@@ -97,16 +119,35 @@
         "Protection spells",
         "Graveyard hate"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast multiple cheap spells to force counters, then drop a threat. Use instant-speed threats or sacrifice outlets to bypass counters. Sometimes accepting a counter is fine if you maintain pressure and keep triggering Prowess.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them aggressively. They\u2019re slow early, so don\u2019t let them stabilize. Use discard and removal to disrupt their mana development and force them to spend resources on interaction instead of acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through resource efficiency and sequencing. Use discard to disrupt their game plan. Avoid overextending; value trades and win by out-scaling or out-removing. Prioritize keeping your Swiftspear alive until it can swing for lethal.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes that clear prowess counters",
     "Targeted removal for key creatures",
     "Card draw engines that outpace the deck",
-    "Wide creature spreads that block damage"
+    "Wide creature spreads that block damage",
+    "Watch for sweepers (Supreme Verdict, Wrath of God), targeted removal (Path to Exile, Doom Blade), and counterspells.",
+    "Note when the opponent taps out for a single spell\u2014that\u2019s your window to drop a threat.",
+    "Track graveyard contents for Fatal Push and Harvester synergies."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:04:01+00:00",
     "model": "local-model",
@@ -135,6 +176,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

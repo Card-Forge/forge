@@ -1,0 +1,113 @@
+{
+  "archetype": "Jund Gardens",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/jund-gardens.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Ash Barrens"
+    },
+    {
+      "qty": 2,
+      "name": "Avenging Hunter"
+    },
+    {
+      "qty": 2,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 2,
+      "name": "Campfire"
+    },
+    {
+      "qty": 4,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 4,
+      "name": "Eviscerator's Insight"
+    },
+    {
+      "qty": 4,
+      "name": "Fanatical Offering"
+    },
+    {
+      "qty": 3,
+      "name": "Ichor Wellspring"
+    },
+    {
+      "qty": 4,
+      "name": "Khalni Garden"
+    },
+    {
+      "qty": 3,
+      "name": "Lembas"
+    },
+    {
+      "qty": 3,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 1,
+      "name": "Pulse of Murasa"
+    },
+    {
+      "qty": 2,
+      "name": "Sagu Wildling"
+    },
+    {
+      "qty": 4,
+      "name": "Skred"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Forest"
+    },
+    {
+      "qty": 2,
+      "name": "Snow-Covered Mountain"
+    },
+    {
+      "qty": 6,
+      "name": "Snow-Covered Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 4,
+      "name": "Twisted Landscape"
+    },
+    {
+      "qty": 4,
+      "name": "Writhing Chrysalis"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 4,
+      "name": "Duress"
+    },
+    {
+      "qty": 3,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Rotten Reunion"
+    },
+    {
+      "qty": 2,
+      "name": "Troublemaker Ouphe"
+    },
+    {
+      "qty": 4,
+      "name": "Weather the Storm"
+    }
+  ]
+}

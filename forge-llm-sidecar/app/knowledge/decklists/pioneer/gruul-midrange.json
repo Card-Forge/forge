@@ -1,0 +1,121 @@
+{
+  "archetype": "Gruul Midrange",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/gruul-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Abrade"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 2,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Copperline Gorge"
+    },
+    {
+      "qty": 4,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 3,
+      "name": "Esika's Chariot"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 2,
+      "name": "Innkeeper's Talent"
+    },
+    {
+      "qty": 2,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 2,
+      "name": "Lair of the Hydra"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 3,
+      "name": "Lovestruck Beast"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 1,
+      "name": "Questing Beast"
+    },
+    {
+      "qty": 4,
+      "name": "Reckless Stormseeker"
+    },
+    {
+      "qty": 2,
+      "name": "Skysovereign, Consul Flagship"
+    },
+    {
+      "qty": 3,
+      "name": "Smuggler's Copter"
+    },
+    {
+      "qty": 4,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 2,
+      "name": "Storm the Festival"
+    },
+    {
+      "qty": 4,
+      "name": "Thornspire Verge"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Fire Magic"
+    },
+    {
+      "qty": 2,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 2,
+      "name": "Pawpatch Recruit"
+    },
+    {
+      "qty": 2,
+      "name": "Scorching Shot"
+    },
+    {
+      "qty": 2,
+      "name": "Surrak, Elusive Hunter"
+    },
+    {
+      "qty": 3,
+      "name": "The Akroan War"
+    },
+    {
+      "qty": 1,
+      "name": "Zhao, the Moon Slayer"
+    }
+  ]
+}

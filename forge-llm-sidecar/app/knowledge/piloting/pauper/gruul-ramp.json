@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two mana sources by turn two",
       "Early mana dorks like Avenging Hunter or Utopia Sprawl",
-      "A clear path to turn three or four threats like Annoyed Altisaur"
+      "A clear path to turn three or four threats like Annoyed Altisaur",
+      "Keep hands with 2-3 lands, at least one ramp spell, and a threat (Annoyed Altisaur or Avenging Hunter).",
+      "Keep hands with Utopia Sprawl if paired with a land or cheap creature."
     ],
     "mulligan_criteria": [
       "Hands lacking early mana acceleration",
       "Hands with only high-cost threats and no ramp",
-      "Hands with multiple lands but no creatures"
+      "Hands with multiple lands but no creatures",
+      "Mulligan hands with 4+ lands, no ramp, or only high-cost threats."
     ],
     "examples": []
   },
@@ -25,17 +28,29 @@
     "early_game": [
       "Play lands and cheap ramp creatures on curve",
       "Prioritize Avenging Hunter and Utopia Sprawl to build mana base",
-      "Avoid overextending into removal without board presence"
+      "Avoid overextending into removal without board presence",
+      "Turn 1: Play a land, optionally cast a cheap ramp spell if available.",
+      "Turn 2: Play a second land, ramp again or deploy a cheap threat.",
+      "Prioritize land drops to ensure you can cast your ramp spells on curve, aiming to hit turn 3-4 for your signature threats."
     ],
     "mid_game": [
       "Deploy Annoyed Altisaur and other mid-sized threats",
       "Use excess mana to play multiple creatures per turn",
-      "Start applying pressure while continuing to ramp"
+      "Start applying pressure while continuing to ramp",
+      "Preserve mana for your big threats",
+      "avoid overcommitting to low-impact plays.",
+      "Track graveyard if relevant, but focus on hand and library resources to ensure you can cast threats when they hit.",
+      "Commit threats when you have enough mana to protect them or close the game.",
+      "Hold back Annoyed Altisaur if the opponent has board wipes or targeted removal.",
+      "Use Avenging Hunter to stabilize or apply immediate pressure."
     ],
     "late_game": [
       "Flood the board with large creatures using accumulated mana",
       "Use card draw from lands or creatures to find finishers",
-      "Close out the game with an unblockable army or massive threat"
+      "Close out the game with an unblockable army or massive threat",
+      "Annoyed Altisaur and Avenging Hunter, often boosted by Utopia Sprawl.",
+      "Combine evasion with unblockable effects to deal lethal damage.",
+      "Go all-in when you have enough mana to cast a threat and have a clear path to close the game, or when the opponent is out of answers."
     ]
   },
   "key_cards": [
@@ -59,7 +74,13 @@
     "Play Avenging Hunter before Utopia Sprawl to maximize early mana advantage",
     "Hold up mana for counterspells or removal if the opponent plays interaction",
     "Prioritize playing lands before creatures to avoid mana screw on turn three",
-    "Use excess mana to play multiple ramp creatures in a single turn to trigger synergies"
+    "Use excess mana to play multiple ramp creatures in a single turn to trigger synergies",
+    "Annoyed Altisaur cannot be blocked by creatures with power 4 or greater, making it a premier finisher.",
+    "Utopia Sprawl makes creatures unblockable by creatures with power 2 or less.",
+    "Combine them for massive damage.",
+    "Watch out for board wipes and targeted removal.",
+    "Don't overextend without protection.",
+    "Remember that Gruul Ramp is a race"
   ],
   "matchups": [
     {
@@ -88,6 +109,21 @@
         "Value creatures",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast threats at end of turn, use multiple threats to force counter trade-offs, and rely on unblockable/evasive effects that bypass counters once resolved.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them with faster threats, use early interaction to disrupt their mana, and sideboard in hate for their key ramp spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by trading efficiently, sideboard in hate for Utopia Sprawl, and prioritize value plays over aggressive overextensions.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +131,14 @@
     "Wilderness Reclamation",
     "Goblin Sharpshooter",
     "Swords to Plowshares",
-    "Abrupt Decay"
+    "Abrupt Decay",
+    "Watch for removal spells, board wipes, and counter magic.",
+    "Note when opponents save removal for your key threats.",
+    "Track their mana development to anticipate when they can answer your plays."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:35:09+00:00",
     "model": "local-model",
@@ -127,6 +167,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

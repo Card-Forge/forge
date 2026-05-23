@@ -1,0 +1,422 @@
+{
+  "schema_version": 1,
+  "name": "Boros Bully",
+  "format": "pauper",
+  "colors": [
+    "W",
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Boros Bully is a competitive Pauper Aggro deck that leverages low-cost creatures, protection spells, and graveyard recursion to secure quick victories. It adapts to the metagame by including specific maindeck answers for popular strategies like Affinity, Faeries, and Elves. Success relies on careful resource management and precise timing rather than simply flooding the board.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 20,
+      "cards": [
+        "Battle Screech",
+        "Novice Inspector",
+        "Raffine's Informant",
+        "Thraben Charm",
+        "Thraben Inspector"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Mardu Devotee",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 6,
+      "cards": [
+        "Rally the Peasants",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 36,
+      "cards": [
+        "Battle Screech",
+        "Greatsword of Tyr",
+        "Kor Skyfisher",
+        "Leonardo, Big Brother",
+        "Lunarch Veteran",
+        "Mardu Devotee",
+        "Novice Inspector",
+        "Prismatic Strands",
+        "Raffine's Informant",
+        "Raphael, Tough Turtle",
+        "Thraben Inspector"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 12,
+      "cards": [
+        "End the Festivities",
+        "Journey to Nowhere",
+        "Raphael, Tough Turtle",
+        "Smash to Dust",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 10,
+      "cards": [
+        "End the Festivities",
+        "Prismatic Strands",
+        "Smash to Dust",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 4
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Prismatic Strands"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 12,
+      "cards": [
+        "Dust to Dust",
+        "Raffine's Informant",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 4
+    },
+    "graveyard_enablers": {
+      "target_count": 18,
+      "cards": [
+        "Battle Screech",
+        "Dust to Dust",
+        "Flaring Pain",
+        "Prismatic Strands",
+        "Rally the Peasants",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 6
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 23,
+      "cards": [
+        "Battle Screech",
+        "Boros Garrison",
+        "Flaring Pain",
+        "Journey to Nowhere",
+        "Kor Skyfisher",
+        "Leonardo, Big Brother",
+        "Prismatic Strands",
+        "Rally the Peasants"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 4
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Rally the Peasants"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Prismatic Strands"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Flaring Pain",
+        "Hallow",
+        "Prismatic Strands"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 4,
+      "cards": [
+        "Boros Garrison"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Boros Garrison",
+        "Plains"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.29
+  },
+  "dual_role_cards": [
+    {
+      "card": "Battle Screech",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boros Garrison",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dust to Dust",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "End the Festivities",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flaring Pain",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Journey to Nowhere",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kor Skyfisher",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leonardo, Big Brother",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mardu Devotee",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Novice Inspector",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismatic Strands",
+      "roles": [
+        "combo_pieces",
+        "graveyard_enablers",
+        "hate_pieces",
+        "protection",
+        "recursion",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raffine's Informant",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rally the Peasants",
+      "roles": [
+        "graveyard_enablers",
+        "payoff_cards",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raphael, Tough Turtle",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smash to Dust",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thraben Charm",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "removal",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thraben Inspector",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Avoid playing Faithless Looting on turn 1 to keep information and potential graveyard reuse",
+    "Prioritize resolving Squadron Hawk early to flood the board",
+    "Hold Prismatic Strands to protect against sweepers and red removal",
+    "Discard Dust to Dust early if not facing Affinity to find answers",
+    "Use Electrickery carefully in the mirror to break locked boards"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play low-cost creatures quickly to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Avoid opening with Faithless Looting on turn 1 to preserve information and graveyard options"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize resolving Squadron Hawk"
+    }
+  ],
+  "kill_priority": [
+    "Rally the Peasants",
+    "Thraben Charm",
+    "Prismatic Strands",
+    "Battle Screech",
+    "Greatsword of Tyr",
+    "Kor Skyfisher",
+    "Leonardo, Big Brother",
+    "Lunarch Veteran"
+  ],
+  "interaction_to_disrupt": [
+    "Prismatic Strands",
+    "End the Festivities",
+    "Journey to Nowhere",
+    "Raphael, Tough Turtle",
+    "Smash to Dust",
+    "Thraben Charm",
+    "Flaring Pain",
+    "Hallow"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/boros-bully.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

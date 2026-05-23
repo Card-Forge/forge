@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with two or more low-cost creatures.",
       "Hands containing Aang, Swift Savior or Appa, Steadfast Guardian.",
-      "Hands with Bramble Familiar and a cheap spell to cycle."
+      "Hands with Bramble Familiar and a cheap spell to cycle.",
+      "Keep hands with 2\u20133 lands (including at least one Bant fixer), one of Appa or Aang, and at least one early creature or cantrip."
     ],
     "mulligan_criteria": [
       "Hands with only high-cost cards.",
       "Hands lacking creature synergies or cycling outlets.",
-      "Hands with no way to protect or deploy the combo pieces early."
+      "Hands with no way to protect or deploy the combo pieces early.",
+      "Mulligan on 0\u20131 lands, 3+ lands with no early plays, or hands lacking color sources for your key combo pieces."
     ],
     "examples": []
   },
@@ -25,17 +27,30 @@
     "early_game": [
       "Play lands and cheap creatures to establish board presence.",
       "Cycle through Bramble Familiar to find combo pieces.",
-      "Protect Aang, Swift Savior and Appa, Steadfast Guardian from early removal."
+      "Protect Aang, Swift Savior and Appa, Steadfast Guardian from early removal.",
+      "Turn 1: Play a land, cast Bramble Familiar or a cheap cantrip to dig.",
+      "Turn 2: Develop a flying threat, protect key pieces with Aang\u2019s abilities, or begin combo assembly.",
+      "Land sequencing: Prioritize fetching/drawing Bant duals or fixers early to ensure you can cast protection and flying spells on curve without stalling."
     ],
     "mid_game": [
       "Assemble the core combo by getting both signature creatures onto the battlefield.",
       "Use flying evasion to apply pressure while searching for answers.",
-      "Maintain card advantage through cycling and draw effects."
+      "Maintain card advantage through cycling and draw effects.",
+      "Conserve mana for protection and combo triggers",
+      "avoid overextending into sweepers.",
+      "Use graveyard recursion strategically to fuel triggers and maintain hand size.",
+      "Prioritize drawing into combo pieces over hoarding lands once you have a solid curve.",
+      "Commit flying threats when you have protection or when the opponent lacks sweepers.",
+      "Hold back key combo pieces and protection spells until you\u2019ve assessed their removal or counter suite."
     ],
     "late_game": [
       "Close out the game with an unblockable aerial assault.",
       "Stabilize against board wipes by keeping backup creatures in hand.",
-      "Leverage card advantage to out-resource opponents in extended games."
+      "Leverage card advantage to out-resource opponents in extended games.",
+      "Assemble the Appa/Aang flying synergy to generate infinite value or direct damage, or use recursion to repeatedly cast a high-impact flying creature.",
+      "Protect the combo pieces with Aang\u2019s protection or bounce effects to ensure resolution.",
+      "Go all-in when you have protection, sufficient mana for the full combo sequence, and the opponent has no sweepers, counters, or graveyard hate.",
+      "Use cantrips to dig for the final piece if you\u2019re one card away."
     ]
   },
   "key_cards": [
@@ -58,7 +73,11 @@
   "sequencing_tips": [
     "Always prioritize casting Aang, Swift Savior before Appa, Steadfast Guardian to maximize early synergy.",
     "Cycle Bramble Familiar only when you have enough lands to play the next turn's combo piece.",
-    "Hold up removal or counterspells to protect your flying threats from opponent's early interaction."
+    "Hold up removal or counterspells to protect your flying threats from opponent's early interaction.",
+    "Common mistake: Overcommitting to the board before securing protection, leaving your combo vulnerable to sweepers.",
+    "Unique interaction: Appa and Aang synergize to protect and recur flying creatures, creating a resilient engine.",
+    "Always track the opponent\u2019s graveyard and mana pool to time protection and combo triggers optimally.",
+    "In Unknown format, meta shifts quickly, so be ready to adapt your sideboard based on observed trends."
   ],
   "matchups": [
     {
@@ -87,16 +106,35 @@
         "Value creatures",
         "Late-game finishers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Bait counters with cheap spells, use split casting or protection effects, and assemble the combo in response to their counters if possible. Prioritize threats that are difficult to counter (e.g., instant-speed combos or protection).",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to prevent them from hitting their late-game payoffs. Use targeted removal on key ramp pieces and don\u2019t let them stabilize. Force trades that disrupt their landfall or mana acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win on card advantage and protection. Trade efficiently, protect your combo pieces, and use discard or hate if available. Force them to overcommit first, then capitalize on their missteps with recursion and evasion.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipe spells",
     "Direct removal targeting flying creatures",
     "Counterspells targeting your combo pieces",
-    "Fast aggressive creatures"
+    "Fast aggressive creatures",
+    "Watch for blue mana taps (counterspell setup), landfall triggers (Landfall decks), and early creature deployment (Prowess/Aggro).",
+    "Note when opponents hold up mana past turn 3, as this often signals a combo or control lock.",
+    "Track graveyard contents for recursion threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:20:12+00:00",
     "model": "local-model",
@@ -112,6 +150,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

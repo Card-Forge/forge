@@ -1,0 +1,360 @@
+{
+  "archetype": "Derevi, Empyrial Tactician",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/derevi-empyrial-tactician.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "An Offer You Can't Refuse"
+    },
+    {
+      "qty": 1,
+      "name": "Angel of Indemnity"
+    },
+    {
+      "qty": 1,
+      "name": "Angel of Invention"
+    },
+    {
+      "qty": 1,
+      "name": "Baneslayer Angel"
+    },
+    {
+      "qty": 1,
+      "name": "Beguiler of Wills"
+    },
+    {
+      "qty": 1,
+      "name": "Bident of Thassa"
+    },
+    {
+      "qty": 1,
+      "name": "Bishop of Wings"
+    },
+    {
+      "qty": 1,
+      "name": "Bloom Tender"
+    },
+    {
+      "qty": 1,
+      "name": "Boon-Bringer Valkyrie"
+    },
+    {
+      "qty": 1,
+      "name": "Bountiful Promenade"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Brushland"
+    },
+    {
+      "qty": 1,
+      "name": "Celestial Mantle"
+    },
+    {
+      "qty": 1,
+      "name": "Celestine, the Living Saint"
+    },
+    {
+      "qty": 1,
+      "name": "Chromatic Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Chromatic Orrery"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivate"
+    },
+    {
+      "qty": 1,
+      "name": "Darksteel Mutation"
+    },
+    {
+      "qty": 1,
+      "name": "Derevi, Empyrial Tactician"
+    },
+    {
+      "qty": 1,
+      "name": "Deserted Beach"
+    },
+    {
+      "qty": 1,
+      "name": "Dismiss into Dream"
+    },
+    {
+      "qty": 1,
+      "name": "Dreamroot Cascade"
+    },
+    {
+      "qty": 1,
+      "name": "Drogskol Reaver"
+    },
+    {
+      "qty": 1,
+      "name": "Elenda's Hierophant"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Abundance"
+    },
+    {
+      "qty": 1,
+      "name": "Empress Galina"
+    },
+    {
+      "qty": 1,
+      "name": "Enduring Curiosity"
+    },
+    {
+      "qty": 1,
+      "name": "Exalted Sunborn"
+    },
+    {
+      "qty": 1,
+      "name": "Faeburrow Elder"
+    },
+    {
+      "qty": 5,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Gateway Plaza"
+    },
+    {
+      "qty": 1,
+      "name": "Ghostly Prison"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Hidden Hideout"
+    },
+    {
+      "qty": 1,
+      "name": "Hushwood Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Imprisoned in the Moon"
+    },
+    {
+      "qty": 5,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Kodama's Reach"
+    },
+    {
+      "qty": 1,
+      "name": "Luminarch Ascension"
+    },
+    {
+      "qty": 1,
+      "name": "Lyra Dawnbringer"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Reflection"
+    },
+    {
+      "qty": 1,
+      "name": "Mirari's Wake"
+    },
+    {
+      "qty": 1,
+      "name": "Mirror Entity"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Farmland"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 5,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Praetor's Counsel"
+    },
+    {
+      "qty": 1,
+      "name": "Propaganda"
+    },
+    {
+      "qty": 1,
+      "name": "Ranger's Path"
+    },
+    {
+      "qty": 1,
+      "name": "Rejuvenating Springs"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Resplendent Angel"
+    },
+    {
+      "qty": 1,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Riot Control"
+    },
+    {
+      "qty": 1,
+      "name": "Rite of Replication"
+    },
+    {
+      "qty": 1,
+      "name": "Rupture Spire"
+    },
+    {
+      "qty": 1,
+      "name": "Sage of the Skies"
+    },
+    {
+      "qty": 1,
+      "name": "Scavenged Brawler"
+    },
+    {
+      "qty": 1,
+      "name": "Seaside Citadel"
+    },
+    {
+      "qty": 1,
+      "name": "Selfless Spirit"
+    },
+    {
+      "qty": 1,
+      "name": "Sephara, Sky's Blade"
+    },
+    {
+      "qty": 1,
+      "name": "Serra Paragon"
+    },
+    {
+      "qty": 1,
+      "name": "Skyclave Relic"
+    },
+    {
+      "qty": 1,
+      "name": "Skyshroud Claim"
+    },
+    {
+      "qty": 1,
+      "name": "Spara's Headquarters"
+    },
+    {
+      "qty": 1,
+      "name": "Spelltithe Enforcer"
+    },
+    {
+      "qty": 1,
+      "name": "Sphinx of the Revelation"
+    },
+    {
+      "qty": 1,
+      "name": "Storm Herd"
+    },
+    {
+      "qty": 1,
+      "name": "Swan Song"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "The Wind Crystal"
+    },
+    {
+      "qty": 1,
+      "name": "Thought Vessel"
+    },
+    {
+      "qty": 1,
+      "name": "Toski, Bearer of Secrets"
+    },
+    {
+      "qty": 1,
+      "name": "Trailtracker Scout"
+    },
+    {
+      "qty": 1,
+      "name": "Transguild Promenade"
+    },
+    {
+      "qty": 1,
+      "name": "Treva's Ruins"
+    },
+    {
+      "qty": 1,
+      "name": "Tyrite Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Unnatural Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Urban Retreat"
+    },
+    {
+      "qty": 1,
+      "name": "Valkyrie Harbinger"
+    },
+    {
+      "qty": 1,
+      "name": "Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Well of Lost Dreams"
+    },
+    {
+      "qty": 1,
+      "name": "Willbreaker"
+    },
+    {
+      "qty": 1,
+      "name": "Willowrush Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Wizard Class"
+    },
+    {
+      "qty": 1,
+      "name": "Zendikar Resurgent"
+    }
+  ],
+  "sideboard": []
+}

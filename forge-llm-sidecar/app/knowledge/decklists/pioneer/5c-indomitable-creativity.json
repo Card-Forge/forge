@@ -1,0 +1,141 @@
+{
+  "archetype": "5c Indomitable Creativity",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/5c-indomitable-creativity.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Atraxa, Grand Unifier"
+    },
+    {
+      "qty": 4,
+      "name": "Deduce"
+    },
+    {
+      "qty": 4,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 2,
+      "name": "Fiery Impulse"
+    },
+    {
+      "qty": 4,
+      "name": "Indomitable Creativity"
+    },
+    {
+      "qty": 2,
+      "name": "Make Disappear"
+    },
+    {
+      "qty": 4,
+      "name": "Mirrex"
+    },
+    {
+      "qty": 1,
+      "name": "Mistrise Village"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Ooze Spill"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 4,
+      "name": "Prismari Command"
+    },
+    {
+      "qty": 1,
+      "name": "Progenitus"
+    },
+    {
+      "qty": 2,
+      "name": "Riverglide Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Shark Typhoon"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    },
+    {
+      "qty": 4,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 4,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 3,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 2,
+      "name": "Thundering Falls"
+    },
+    {
+      "qty": 2,
+      "name": "Unable to Scream"
+    },
+    {
+      "qty": 1,
+      "name": "Valgavoth, Terror Eater"
+    },
+    {
+      "qty": 4,
+      "name": "Volcanic Spite"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Anger of the Gods"
+    },
+    {
+      "qty": 1,
+      "name": "Hullbreaker Horror"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of Sanctity"
+    },
+    {
+      "qty": 2,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 2,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 1,
+      "name": "Portal to Phyrexia"
+    },
+    {
+      "qty": 2,
+      "name": "Shark Typhoon"
+    },
+    {
+      "qty": 1,
+      "name": "Sire of Insanity"
+    },
+    {
+      "qty": 1,
+      "name": "Valgavoth, Terror Eater"
+    }
+  ]
+}

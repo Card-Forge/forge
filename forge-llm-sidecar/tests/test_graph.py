@@ -455,19 +455,17 @@ class TestActionsInGraphOutput:
             "hand": ["Mountain", "Lightning Bolt", "Mountain", "Fireball"],
             "own_board": [],
             "alternatives": [],
+            "decision_type": "mulligan",
         }
         game_advisor._resolved_format["mull-test"] = "modern"
 
         async def fake_generate_json(prompt, system=None):
-            return {
-                "archetype": "Unknown",
-                "confidence": 0.0,
-                "reasoning": "No plays observed yet.",
-                "alternatives": [],
-            }
+            raise AssertionError("recognition LLM should be skipped before any opponent observations")
 
         monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
         result = await get_graph().ainvoke(state)
+        assert result["archetype"] == "Unknown"
+        assert result["confidence"] == 0.0
         assert "actions" in result
         actions = result["actions"]
         types = {a.get("action_type") for a in actions}

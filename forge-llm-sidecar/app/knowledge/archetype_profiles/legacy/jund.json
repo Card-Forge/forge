@@ -1,0 +1,520 @@
+{
+  "schema_version": 1,
+  "name": "Jund",
+  "format": "legacy",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "This Jund variant operates as a midrange deck that blends early aggression with sustained card advantage. By leveraging Ignoble Hierarch to generate token armies and Scythecat Cub for immediate board presence, it pressures opponents before transitioning into a resilient late game. Green Sun's Zenith provides the necessary ramp and search capability to stabilize against Legacy's faster archetypes.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 12,
+      "cards": [
+        "Green Sun's Zenith",
+        "Ignoble Hierarch",
+        "Scythecat Cub"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Once Upon a Time"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 16,
+      "cards": [
+        "Green Sun's Zenith",
+        "Verdant Catacombs",
+        "Wight of the Reliquary",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Green Sun's Zenith",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 34,
+      "cards": [
+        "Alpha Deathclaw",
+        "Badgermole Cub",
+        "Barrowgoyf",
+        "Birds of Paradise",
+        "Dryad Arbor",
+        "Endurance",
+        "Gaddock Teeg",
+        "Green Sun's Zenith",
+        "Grist, the Hunger Tide",
+        "Icetill Explorer",
+        "Ignoble Hierarch",
+        "Scythecat Cub",
+        "Sylvan Safekeeper",
+        "Thoughtseize",
+        "Wight of the Reliquary"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Alpha Deathclaw",
+        "Barrowgoyf",
+        "Bojuka Bog",
+        "Fatal Push",
+        "Force of Vigor",
+        "Ghost Quarter",
+        "Grist, the Hunger Tide",
+        "Karakas",
+        "Snuff Out",
+        "Wasteland"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 13,
+      "cards": [
+        "Gaea's Cradle",
+        "Ignoble Hierarch",
+        "Scythecat Cub",
+        "Wight of the Reliquary"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Scythecat Cub"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Archive Trap",
+        "Barrowgoyf",
+        "Bojuka Bog",
+        "Endurance",
+        "Grist, the Hunger Tide",
+        "Icetill Explorer",
+        "Leyline of the Void",
+        "Wight of the Reliquary"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Ba Sing Se",
+        "Badgermole Cub",
+        "Icetill Explorer",
+        "Karakas"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 12,
+      "cards": [
+        "Green Sun's Zenith",
+        "Ignoble Hierarch",
+        "Scythecat Cub"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Windswept Heath"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Green Sun's Zenith",
+        "Ignoble Hierarch",
+        "Scythecat Cub"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Disruptor Flute",
+        "Mindbreak Trap",
+        "Pick Your Poison"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 37,
+      "cards": [
+        "Ba Sing Se",
+        "Badgermole Cub",
+        "Bayou",
+        "Birds of Paradise",
+        "Bojuka Bog",
+        "Dryad Arbor",
+        "Gaea's Cradle",
+        "Ghost Quarter",
+        "Green Sun's Zenith",
+        "Ignoble Hierarch",
+        "Karakas",
+        "Scythecat Cub",
+        "Talon Gates of Madara",
+        "Verdant Catacombs",
+        "Wasteland",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Ba Sing Se",
+        "Bayou",
+        "Bojuka Bog",
+        "Dryad Arbor",
+        "Forest",
+        "Gaea's Cradle",
+        "Ghost Quarter",
+        "Karakas",
+        "Swamp",
+        "Talon Gates of Madara",
+        "Verdant Catacombs",
+        "Wasteland",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 1
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Grist, the Hunger Tide"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.39
+  },
+  "dual_role_cards": [
+    {
+      "card": "Alpha Deathclaw",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ba Sing Se",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Badgermole Cub",
+      "roles": [
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Barrowgoyf",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bayou",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Birds of Paradise",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dryad Arbor",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gaea's Cradle",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Quarter",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Green Sun's Zenith",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grist, the Hunger Tide",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Icetill Explorer",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ignoble Hierarch",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karakas",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scythecat Cub",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Talon Gates of Madara",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wight of the Reliquary",
+      "roles": [
+        "graveyard_enablers",
+        "threats",
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize playing Ignoble Hierarch before trading it away to maximize token generation",
+    "Hold up mana for interaction when facing aggressive decks to protect Scythecat Cub and early tokens",
+    "Cast Green Sun's Zenith on your opponent's turn if possible to avoid combat damage while searching",
+    "Trade larger threats into opponent's key pieces while preserving tokens for blocking and attacking",
+    "Green Sun\u2019s Zenith is a sorcery, so timing is critical\u2014cast it when you can follow up or when the opponent can\u2019t respond."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Deploy Scythecat Cub on turn one or two to establish immediate board pressure"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play Ignoble Hierarch as soon as possible to begin generating 1/1 creature tokens"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early interaction to protect key threats and disrupt opponent's game plan"
+    }
+  ],
+  "kill_priority": [
+    "Green Sun's Zenith",
+    "Ignoble Hierarch",
+    "Scythecat Cub",
+    "Windswept Heath",
+    "Grist, the Hunger Tide",
+    "Alpha Deathclaw",
+    "Badgermole Cub",
+    "Barrowgoyf"
+  ],
+  "interaction_to_disrupt": [
+    "Scythecat Cub",
+    "Alpha Deathclaw",
+    "Barrowgoyf",
+    "Bojuka Bog",
+    "Fatal Push",
+    "Force of Vigor",
+    "Ghost Quarter",
+    "Grist, the Hunger Tide"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/jund.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

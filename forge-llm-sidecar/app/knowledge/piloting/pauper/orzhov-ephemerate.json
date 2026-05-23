@@ -14,12 +14,14 @@
       "2 or 3 lands",
       "1 to 3 creatures that draw cards (e.g., Thraben Inspector, Spirited Companion)",
       "Removal spells",
-      "Ephemerate for combat tricks or protection"
+      "Ephemerate for combat tricks or protection",
+      "Keep hands with 2-3 lands (preferably duals or fetches for W/B fixing), at least one turn-1 or turn-2 threat (Kor Skyfisher, Refurbished Familiar), or early interaction (Thraben Charm, Ephemerate)."
     ],
     "mulligan_criteria": [
       "Hands lacking card draw or board presence",
       "Hands with too many high-cost cards without sufficient lands",
-      "Hands without removal or replay effects"
+      "Hands without removal or replay effects",
+      "Mulligan on 3+ lands with no early plays, 3+ non-basic lands without fixing, or hands lacking any way to interact or develop a board."
     ],
     "examples": [
       {
@@ -38,16 +40,29 @@
   "game_plan": {
     "early_game": [
       "Play low-cost creatures to establish board presence and trigger ETB card draw",
-      "Use draw spells to find removal and replay effects"
+      "Use draw spells to find removal and replay effects",
+      "Turn 1: Play a land, optionally cast a cheap threat or hold for interaction.",
+      "Turn 2: Develop board with Kor Skyfisher or Refurbished Familiar, using Thraben Charm for lifegain, disruption, or temporary board stalls.",
+      "Sequence lands to ensure consistent access to both white and black mana for charms and instant-speed bounce."
     ],
     "mid_game": [
       "Cast targeted removal like Cast Down and Unmake to handle threats",
       "Use Suffocating Fumes to clear boards of small creatures",
-      "Replay key creatures with Ephemerate or Rescue the Foal to regain initiative"
+      "Replay key creatures with Ephemerate or Rescue the Foal to regain initiative",
+      "Balance mana for interaction versus threat development.",
+      "Use the graveyard strategically for Refurbished Familiar recursion without overcommitting to it.",
+      "Avoid bouncing your own threats unless it triggers a specific value engine or buys critical tempo.",
+      "Commit threats when you have interaction to protect them or when the opponent lacks sweepers.",
+      "Hold back if facing heavy removal or board wipes.",
+      "Use Ephemerate and Thraben Charm to temporarily stall key threats while you stabilize or close out the game."
     ],
     "late_game": [
       "Maintain board control and initiative through consistent ETB value",
-      "Carefully manage resources in long games to avoid running out of answers"
+      "Carefully manage resources in long games to avoid running out of answers",
+      "Kor Skyfisher (evading lifelink), Refurbished Familiar (value engine), and Thraben Charm modes.",
+      "Win by out-valuing through repeated interactions, cycling threats, or overwhelming with resilient, evasive pressure.",
+      "Go all-in when you have card advantage, protection, or the opponent is low on interaction.",
+      "Commit fully when you can close the game before they can stabilize or find a counterplay."
     ]
   },
   "key_cards": [
@@ -97,7 +112,10 @@
     "Prioritize playing and protecting flying creatures against Grixis Affinity",
     "Time Suffocating Fumes carefully to maximize impact against Mono Blue Fairies",
     "Avoid taking Ephemerate out of the sideboard in the mirror match",
-    "Conserve resources and play carefully in long matchups like the mirror or against Grixis Affinity"
+    "Conserve resources and play carefully in long matchups like the mirror or against Grixis Affinity",
+    "Common mistakes include over-bouncing your own threats without follow-up, mismanaging mana for Orzhov colors, and ignoring graveyard interactions.",
+    "Unique interactions: Thraben Charm modes can be sequenced for maximum value, and Refurbished Familiar synergizes with bounce effects for repeated triggers.",
+    "Always track opponent's hand and graveyard to optimize bounce and recursion timing."
   ],
   "matchups": [
     {
@@ -135,16 +153,45 @@
         "Critical decision points",
         "Resource management"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, split casts, or bounce their counterspells with Ephemerate. Sequence Thraben Charm to disrupt their stack. Play around with timing and avoid overcommitting to single high-value spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their curve. Use artifact hate, graveyard hate, and Ephemerate to bounce ramp targets. Stabilize with lifelinked threats and efficient removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction, lifegain, and board wipes if available. Stabilize with lifelinked threats and efficient removal. Use bounce to temporarily stall key attackers while you set up your game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure and use bounce to cycle threats. Out-value with card draw and recursion. Don't overcommit to one threat; force them to use multiple answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value engine wins. Track graveyard, manage bounce timing, and out-resource with better sequencing. Prioritize keeping threats on the board and use Thraben Charm to disrupt their recursion.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Krark-Clan Shaman",
     "Spellstutter Sprite",
     "Fast aggro decks",
-    "Small creature swarms"
+    "Small creature swarms",
+    "Watch for counterspells, sweepers, and combo pieces.",
+    "Note when opponents save removal for specific threats to plan your sequence.",
+    "Track graveyard content for recursion threats and monitor life totals to time lifelink-based wins."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-orzhov-ephemerate-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T10:58:36+00:00",
     "model": "local-model",
@@ -162,6 +209,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

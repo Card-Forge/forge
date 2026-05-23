@@ -1,0 +1,141 @@
+{
+  "archetype": "Aluren",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/aluren.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Acererak the Archlich"
+    },
+    {
+      "qty": 4,
+      "name": "Aluren"
+    },
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 3,
+      "name": "Atraxa, Grand Unifier"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "City of Traitors"
+    },
+    {
+      "qty": 1,
+      "name": "Emrakul, the Aeons Torn"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 2,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 4,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 2,
+      "name": "Omniscience"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 4,
+      "name": "Show and Tell"
+    },
+    {
+      "qty": 4,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 3,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 2,
+      "name": "Veil of Summer"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 3,
+      "name": "Carpet of Flowers"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Claim"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Silent Gravestone"
+    },
+    {
+      "qty": 2,
+      "name": "Veil of Summer"
+    }
+  ]
+}

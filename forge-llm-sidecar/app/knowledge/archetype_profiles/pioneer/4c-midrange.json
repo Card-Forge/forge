@@ -1,0 +1,445 @@
+{
+  "schema_version": 1,
+  "name": "4c Midrange",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "This four-color midrange deck leverages a wide mana base to access efficient disruption and resilient threats. By combining early interaction like Thoughtseize and Fatal Push with the card advantage engine of Quantum Riddler, it aims to stabilize quickly and outvalue opponents. The deck excels at adapting to any matchup by answering key pieces while maintaining a steady board presence.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "Culling Ritual"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 9,
+      "cards": [
+        "Bloodtithe Harvester",
+        "Kaito, Bane of Nightmares",
+        "Sheoldred, the Apocalypse",
+        "Xander's Lounge"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Kaito, Bane of Nightmares"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "tutors_wildcards": {
+      "target_count": 3,
+      "cards": [
+        "Beseech the Mirror"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Thoughtseize"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 31,
+      "cards": [
+        "Archfiend of the Dross",
+        "Ashiok, Dream Render",
+        "Ashling, Rekindled",
+        "Bloodtithe Harvester",
+        "Fable of the Mirror-Breaker",
+        "Fatal Push",
+        "Kaito, Bane of Nightmares",
+        "Metamorphic Alteration",
+        "Sheoldred, the Apocalypse",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 9,
+      "cards": [
+        "Culling Ritual",
+        "Fatal Push",
+        "Go for the Throat",
+        "Hive of the Eye Tyrant",
+        "Kolaghan's Command"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Languish"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "Disdainful Stroke",
+        "Negate"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 6,
+      "cards": [
+        "Kaito, Bane of Nightmares",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Bloodtithe Harvester"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Ashiok, Dream Render",
+        "Go Blank",
+        "Hive of the Eye Tyrant",
+        "Kaito, Bane of Nightmares",
+        "Kolaghan's Command",
+        "Unlicensed Hearse"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 6
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Kaito, Bane of Nightmares",
+        "Kolaghan's Command"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Thoughtseize"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Thoughtseize"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Damping Sphere",
+        "Duress",
+        "Ray of Enfeeblement"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 28,
+      "cards": [
+        "Blackcleave Cliffs",
+        "Blazemire Verge",
+        "Blood Crypt",
+        "Darkslick Shores",
+        "Fatal Push",
+        "Hive of the Eye Tyrant",
+        "Shipwreck Marsh",
+        "Starting Town",
+        "Steam Vents",
+        "Watery Grave",
+        "Xander's Lounge"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Blackcleave Cliffs",
+        "Blazemire Verge",
+        "Blood Crypt",
+        "Darkslick Shores",
+        "Hive of the Eye Tyrant",
+        "Shipwreck Marsh",
+        "Starting Town",
+        "Steam Vents",
+        "Swamp",
+        "Watery Grave",
+        "Xander's Lounge"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 3,
+      "cards": [
+        "Ashiok, Dream Render",
+        "Kaito, Bane of Nightmares"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "interaction_density": 0.3
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ashiok, Dream Render",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blackcleave Cliffs",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blazemire Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodtithe Harvester",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Culling Ritual",
+      "roles": [
+        "removal",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darkslick Shores",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fatal Push",
+      "roles": [
+        "mana_fixing",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hive of the Eye Tyrant",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaito, Bane of Nightmares",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kolaghan's Command",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheoldred, the Apocalypse",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shipwreck Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "combo_pieces",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Xander's Lounge",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up Fatal Push before committing mana to threats to avoid being caught off guard",
+    "Cast Thoughtseize before playing Quantum Riddler to protect it from early removal",
+    "Prioritize keeping lands in hand when facing control decks to ensure Riddler can draw safely",
+    "Quantum Riddler's draw/discard ability synergizes with discard outlets and card advantage engines.",
+    "Avoid over-drawing if you have no way to discard."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and use Fatal Push to remove aggressive threats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Thoughtseize to disrupt opponent's combo or key pieces"
+    },
+    {
+      "trigger": "early game",
+      "line": "Develop board with cheap creatures while holding up mana for interaction"
+    }
+  ],
+  "kill_priority": [
+    "Thoughtseize",
+    "Ashiok, Dream Render",
+    "Kaito, Bane of Nightmares",
+    "Archfiend of the Dross",
+    "Ashling, Rekindled",
+    "Bloodtithe Harvester",
+    "Fable of the Mirror-Breaker",
+    "Fatal Push"
+  ],
+  "interaction_to_disrupt": [
+    "Disdainful Stroke",
+    "Negate",
+    "Kaito, Bane of Nightmares",
+    "Thoughtseize",
+    "Culling Ritual",
+    "Fatal Push",
+    "Go for the Throat",
+    "Hive of the Eye Tyrant"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/4c-midrange.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

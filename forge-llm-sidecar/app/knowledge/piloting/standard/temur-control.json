@@ -13,12 +13,14 @@
       "Stock Up",
       "Consult the Star Charts",
       "Spells with Flashback",
-      "Early interaction"
+      "Early interaction",
+      "Keep hands with 2-3 lands (prioritizing fixing/duals), at least one early interaction (counterspell, removal, or discard), and a draw engine (Stock Up or a flashback enabler)."
     ],
     "mulligan_criteria": [
       "High-cost cards without recursion",
       "Lands only",
-      "No graveyard setup"
+      "No graveyard setup",
+      "Mulligan on 3+ lands with no early plays, or hands with only late-game threats and zero disruption."
     ],
     "examples": []
   },
@@ -26,17 +28,30 @@
     "early_game": [
       "Cast Stock Up to ramp and draw",
       "Play cheap interaction to survive",
-      "Begin cycling cards for Flashback fuel"
+      "Begin cycling cards for Flashback fuel",
+      "Turn 1: Play a land, optionally cast a cheap cantrip or early interaction if available.",
+      "Turn 2: Develop your mana base, deploy a counterspell or removal to handle early threats, or cast Stock Up/flashback spells to stabilize and draw into answers.",
+      "Prioritize fixing over rushing lands to ensure consistency."
     ],
     "mid_game": [
       "Use Consult the Star Charts to find specific answers",
       "Stabilize against early threats",
-      "Maintain graveyard depth"
+      "Maintain graveyard depth",
+      "Hoard mana for key counterspells and removal until the opponent commits.",
+      "Use flashback strategically to recycle high-impact spells without clogging your hand.",
+      "Manage graveyard resources carefully to enable flashback while avoiding hate.",
+      "Commit threats only when you have a clear path to resolution or when the board is stabilized.",
+      "Hold back on overcommitting to one spell",
+      "always keep a counter or removal for the opponent's biggest play."
     ],
     "late_game": [
       "Recycle high-impact spells via Flashback",
       "Control the board with repeated removal",
-      "Win through card advantage"
+      "Win through card advantage",
+      "Deploy resilient mid-to-late game threats (e.g., planeswalkers, flying creatures, or value engines) that are hard to interact with.",
+      "Use flashback to recur removal or counters to protect your finisher.",
+      "Go all-in when you\u2019ve established board control, have card advantage, and the opponent has no clear interaction left.",
+      "Also commit when you can safely cast a finisher through their remaining mana."
     ]
   },
   "key_cards": [
@@ -60,7 +75,11 @@
     "Cycle low-value cards early to fuel Flashback",
     "Hold up interaction before casting Stock Up",
     "Use Consult the Star Charts to dig for specific answers",
-    "Prioritize Flashback on high-impact spells over minor ones"
+    "Prioritize Flashback on high-impact spells over minor ones",
+    "Flashback is a double-edged sword",
+    "don\u2019t over-rely on it early if it leaves your graveyard vulnerable to hate.",
+    "Consult the Star Charts and Stock Up provide card advantage, but sequence them carefully to avoid flooding.",
+    "Against the Izzet/landfall meta, prioritize interaction over card draw in the early game."
   ],
   "matchups": [
     {
@@ -86,15 +105,34 @@
         "Efficient threats",
         "Removal"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use flashback to cast spells from the graveyard, bypassing counterspells. Employ cheap cantrips to force counters and find answers. Use uncounterable threats or split your spells across turns.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction to slow their mana development. Use sweepers and artifact/enchantment removal to neutralize their acceleration. Out-value them with card draw and efficient removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by out-drawing and out-interacting. Prioritize card advantage and efficient counterspells. Use flashback to recycle key spells and maintain pressure. Track their graveyard to anticipate their flashback threats.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early aggressive creatures",
     "Board wipes",
-    "Hand disruption"
+    "Hand disruption",
+    "Watch for mana bases and land drops to predict spell availability.",
+    "Track graveyard contents to anticipate flashback threats.",
+    "Note when opponents hold up mana for multiple turns\u2014they\u2019re likely setting up a combo or big spell."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:42:53+00:00",
     "model": "local-model",
@@ -110,6 +148,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

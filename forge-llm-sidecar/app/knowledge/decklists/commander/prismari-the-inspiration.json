@@ -1,0 +1,352 @@
+{
+  "archetype": "Prismari, the Inspiration",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/prismari-the-inspiration.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Arcane Bombardment"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archmage Emeritus"
+    },
+    {
+      "qty": 1,
+      "name": "Baral, Chief of Compliance"
+    },
+    {
+      "qty": 1,
+      "name": "Big Score"
+    },
+    {
+      "qty": 1,
+      "name": "Birgi, God of Storytelling"
+    },
+    {
+      "qty": 1,
+      "name": "Blazing Firesinger"
+    },
+    {
+      "qty": 1,
+      "name": "Boltwave"
+    },
+    {
+      "qty": 1,
+      "name": "Brain Freeze"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Cascade Bluffs"
+    },
+    {
+      "qty": 1,
+      "name": "Chaos Warp"
+    },
+    {
+      "qty": 1,
+      "name": "Chart a Course"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Consider"
+    },
+    {
+      "qty": 1,
+      "name": "Crackle with Power"
+    },
+    {
+      "qty": 1,
+      "name": "Creative Technique"
+    },
+    {
+      "qty": 1,
+      "name": "Cyclonic Rift"
+    },
+    {
+      "qty": 1,
+      "name": "Demand Answers"
+    },
+    {
+      "qty": 1,
+      "name": "Desperate Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Dirgur Focusmage"
+    },
+    {
+      "qty": 1,
+      "name": "Dualcaster Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Expressive Iteration"
+    },
+    {
+      "qty": 1,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 1,
+      "name": "Ferrous Lake"
+    },
+    {
+      "qty": 1,
+      "name": "Fiery Islet"
+    },
+    {
+      "qty": 1,
+      "name": "Flashback"
+    },
+    {
+      "qty": 1,
+      "name": "Frantic Search"
+    },
+    {
+      "qty": 1,
+      "name": "Frostboil Snarl"
+    },
+    {
+      "qty": 1,
+      "name": "Gitaxian Probe"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Electromancer"
+    },
+    {
+      "qty": 1,
+      "name": "Grapeshot"
+    },
+    {
+      "qty": 1,
+      "name": "Harmonized Trio"
+    },
+    {
+      "qty": 8,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Izzet Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Jaya's Immolating Inferno"
+    },
+    {
+      "qty": 1,
+      "name": "Jeska's Will"
+    },
+    {
+      "qty": 1,
+      "name": "Kozilek, Butcher of Truth"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Geyser"
+    },
+    {
+      "qty": 1,
+      "name": "Mindsplice Apparatus"
+    },
+    {
+      "qty": 1,
+      "name": "Mistrise Village"
+    },
+    {
+      "qty": 1,
+      "name": "Mnemonic Deluge"
+    },
+    {
+      "qty": 8,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Sanctuary"
+    },
+    {
+      "qty": 1,
+      "name": "Opt"
+    },
+    {
+      "qty": 1,
+      "name": "Past in Flames"
+    },
+    {
+      "qty": 1,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Pongify"
+    },
+    {
+      "qty": 1,
+      "name": "Preordain"
+    },
+    {
+      "qty": 1,
+      "name": "Prismari Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Prismari Command"
+    },
+    {
+      "qty": 1,
+      "name": "Prismari, the Inspiration"
+    },
+    {
+      "qty": 1,
+      "name": "Pyretic Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Rapid Hybridization"
+    },
+    {
+      "qty": 1,
+      "name": "Rapturous Moment"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Resonating Lute"
+    },
+    {
+      "qty": 1,
+      "name": "Reverberate"
+    },
+    {
+      "qty": 1,
+      "name": "Riverglide Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Riverpyre Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Scorched Geyser"
+    },
+    {
+      "qty": 1,
+      "name": "Serum Visions"
+    },
+    {
+      "qty": 1,
+      "name": "Shivan Reef"
+    },
+    {
+      "qty": 1,
+      "name": "Sleight of Hand"
+    },
+    {
+      "qty": 1,
+      "name": "Snap"
+    },
+    {
+      "qty": 1,
+      "name": "Snapcaster Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Storm-Kiln Artist"
+    },
+    {
+      "qty": 1,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 1,
+      "name": "Stormcatch Mentor"
+    },
+    {
+      "qty": 1,
+      "name": "Strike It Rich"
+    },
+    {
+      "qty": 1,
+      "name": "Sulfur Falls"
+    },
+    {
+      "qty": 1,
+      "name": "Sunbird's Invocation"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Creativity"
+    },
+    {
+      "qty": 1,
+      "name": "Thought Vessel"
+    },
+    {
+      "qty": 1,
+      "name": "Thousand-Year Storm"
+    },
+    {
+      "qty": 1,
+      "name": "Thrill of Possibility"
+    },
+    {
+      "qty": 1,
+      "name": "Training Center"
+    },
+    {
+      "qty": 1,
+      "name": "Unexpected Windfall"
+    },
+    {
+      "qty": 1,
+      "name": "Veyran, Voice of Duality"
+    },
+    {
+      "qty": 1,
+      "name": "Wheel of Misfortune"
+    },
+    {
+      "qty": 1,
+      "name": "Windfall"
+    }
+  ],
+  "sideboard": []
+}

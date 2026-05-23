@@ -1,0 +1,519 @@
+{
+  "schema_version": 1,
+  "name": "Blue Tempo",
+  "format": "vintage",
+  "colors": [
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "This U/B/G Blue Tempo deck leverages early disruption and efficient threats to control the pace of Vintage games. By holding up mana for Flusterstorm, it denies opponents their key plays while establishing board presence with Psychic Frog. Collector Ouphe provides a resilient stabilizer that generates card advantage, allowing the deck to outlast aggressive strategies and race control opponents.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 9,
+      "cards": [
+        "Ancestral Recall",
+        "Brainstorm",
+        "Dack Fayden",
+        "Hullbreacher",
+        "Mana Vault",
+        "Narset, Parter of Veils",
+        "Ponder",
+        "Urza's Saga",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Narset, Parter of Veils",
+        "Ponder"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 7,
+      "cards": [
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Tinker",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 23,
+      "cards": [
+        "Dack Fayden",
+        "Drannith Magistrate",
+        "Emrakul, the Aeons Torn",
+        "Harbinger of the Seas",
+        "Hullbreacher",
+        "Kappa Cannoneer",
+        "Mind Twist",
+        "Mox Emerald",
+        "Mox Jet",
+        "Mox Pearl",
+        "Mox Ruby",
+        "Mox Sapphire",
+        "Narset, Parter of Veils",
+        "Sol Ring",
+        "Time Walk",
+        "Urza, Lord High Artificer",
+        "Wrenn and Six"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 8
+    },
+    "removal": {
+      "target_count": 11,
+      "cards": [
+        "Ancient Tomb",
+        "Karakas",
+        "Mana Crypt",
+        "Mana Vault",
+        "Strip Mine",
+        "Swords to Plowshares",
+        "Vandalblast",
+        "Wasteland",
+        "Wrenn and Six"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 1
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "The Meathook Massacre"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 9,
+      "cards": [
+        "Force of Will",
+        "Mental Misstep",
+        "Mystical Dispute",
+        "Spell Pierce",
+        "Stifle"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Emrakul, the Aeons Torn",
+        "Kappa Cannoneer"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 3
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 5,
+      "cards": [
+        "Emrakul, the Aeons Torn",
+        "Sword of the Meek",
+        "Wrenn and Six"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Karakas",
+        "Sword of the Meek",
+        "Wrenn and Six"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Dack Fayden"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Drannith Magistrate",
+        "Mindbreak Trap",
+        "Moat"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 30,
+      "cards": [
+        "Ancient Tomb",
+        "Black Lotus",
+        "Hullbreacher",
+        "Karakas",
+        "Lotus Petal",
+        "Misty Rainforest",
+        "Mox Opal",
+        "Polluted Delta",
+        "Strip Mine",
+        "Thopter Foundry",
+        "Tolarian Academy",
+        "Tropical Island",
+        "Tundra",
+        "Underground Sea",
+        "Urza's Saga",
+        "Urza, Lord High Artificer",
+        "Volcanic Island",
+        "Wasteland"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Ancient Tomb",
+        "Island",
+        "Karakas",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Strip Mine",
+        "Thopter Foundry",
+        "Tolarian Academy",
+        "Tropical Island",
+        "Tundra",
+        "Underground Sea",
+        "Urza's Saga",
+        "Volcanic Island",
+        "Wasteland"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 3,
+      "cards": [
+        "Dack Fayden",
+        "Narset, Parter of Veils",
+        "Wrenn and Six"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 2
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dack Fayden",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drannith Magistrate",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emrakul, the Aeons Torn",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hullbreacher",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kappa Cannoneer",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karakas",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Vault",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narset, Parter of Veils",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strip Mine",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sword of the Meek",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thopter Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tolarian Academy",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tropical Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tundra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Sea",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza, Lord High Artificer",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volcanic Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wrenn and Six",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always prioritize holding up mana for Flusterstorm before committing to other spells",
+    "Cast Psychic Frog before playing lands if possible to maximize card draw timing",
+    "Use Collector Ouphe after taking damage or losing cards to maximize its value generation",
+    "Collector Ouphe is technically a white card, so ensure your mana base supports W if it\u2019s in the deck, or note that the archetype may actually be U/B/W (Esper) but the prompt specifies U/B/G.",
+    "Psychic Frog and Flusterstorm are blue, so U is primary."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and hold up two blue mana for Flusterstorm"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Psychic Frog to generate card advantage and apply immediate pressure"
+    },
+    {
+      "trigger": "early game",
+      "line": "Disrupt opponent's early threats or combo pieces"
+    }
+  ],
+  "kill_priority": [
+    "Dack Fayden",
+    "Narset, Parter of Veils",
+    "Wrenn and Six",
+    "Drannith Magistrate",
+    "Emrakul, the Aeons Torn",
+    "Harbinger of the Seas",
+    "Hullbreacher",
+    "Kappa Cannoneer"
+  ],
+  "interaction_to_disrupt": [
+    "Force of Will",
+    "Mental Misstep",
+    "Mystical Dispute",
+    "Spell Pierce",
+    "Stifle",
+    "Emrakul, the Aeons Torn",
+    "Kappa Cannoneer",
+    "Ancient Tomb"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/blue-tempo.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

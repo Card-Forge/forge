@@ -1,0 +1,181 @@
+{
+  "archetype": "Esper Lurrus Control",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/esper-lurrus-control.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancestral Recall"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Dig Through Time"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Gitaxian Probe"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Lavinia, Azorius Renegade"
+    },
+    {
+      "qty": 2,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 4,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 3,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Ponder"
+    },
+    {
+      "qty": 4,
+      "name": "Psychic Frog"
+    },
+    {
+      "qty": 3,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Time Walk"
+    },
+    {
+      "qty": 1,
+      "name": "Treasure Cruise"
+    },
+    {
+      "qty": 3,
+      "name": "Tundra"
+    },
+    {
+      "qty": 3,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 3,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 2,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 1,
+      "name": "Lurrus of the Dream-Den"
+    },
+    {
+      "qty": 1,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 1,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Seal of Cleansing"
+    },
+    {
+      "qty": 2,
+      "name": "Stony Silence"
+    },
+    {
+      "qty": 1,
+      "name": "The Tabernacle at Pendrell Vale"
+    }
+  ]
+}

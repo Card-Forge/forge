@@ -1,0 +1,157 @@
+{
+  "archetype": "Abzan Greasefang",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/abzan-greasefang.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 3,
+      "name": "Blooming Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Cache Grab"
+    },
+    {
+      "qty": 3,
+      "name": "Concealed Courtyard"
+    },
+    {
+      "qty": 3,
+      "name": "Darkbore Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Emptiness"
+    },
+    {
+      "qty": 4,
+      "name": "Esika's Chariot"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 2,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 4,
+      "name": "Greasefang, Okiba Boss"
+    },
+    {
+      "qty": 1,
+      "name": "Lush Portico"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Confluence"
+    },
+    {
+      "qty": 2,
+      "name": "Overlord of the Balemurk"
+    },
+    {
+      "qty": 4,
+      "name": "Parhelion II"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Raffine's Informant"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowy Backstreet"
+    },
+    {
+      "qty": 1,
+      "name": "Sheoldred, the Apocalypse"
+    },
+    {
+      "qty": 1,
+      "name": "Skysovereign, Consul Flagship"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Thundering Broodwagon"
+    },
+    {
+      "qty": 3,
+      "name": "Witherbloom Command"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 1,
+      "name": "Ashiok, Dream Render"
+    },
+    {
+      "qty": 1,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 1,
+      "name": "Knight of Autumn"
+    },
+    {
+      "qty": 1,
+      "name": "Tear Asunder"
+    },
+    {
+      "qty": 2,
+      "name": "Temporary Lockdown"
+    },
+    {
+      "qty": 1,
+      "name": "Unlicensed Hearse"
+    },
+    {
+      "qty": 1,
+      "name": "Vanishing Verse"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "archetype": "Azorius Ephemerate",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/azorius-ephemerate.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 4,
+      "name": "Ephemerate"
+    },
+    {
+      "qty": 1,
+      "name": "Forecasting Fortune Teller"
+    },
+    {
+      "qty": 2,
+      "name": "Ghostly Flicker"
+    },
+    {
+      "qty": 4,
+      "name": "Halimar Excavator"
+    },
+    {
+      "qty": 1,
+      "name": "Idyllic Beachfront"
+    },
+    {
+      "qty": 7,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Kyoshi Warriors"
+    },
+    {
+      "qty": 2,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Makindi Shieldmate"
+    },
+    {
+      "qty": 2,
+      "name": "Negate"
+    },
+    {
+      "qty": 4,
+      "name": "Ondu Cleric"
+    },
+    {
+      "qty": 2,
+      "name": "Opt"
+    },
+    {
+      "qty": 7,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Ponder"
+    },
+    {
+      "qty": 4,
+      "name": "Preordain"
+    },
+    {
+      "qty": 2,
+      "name": "Recommission"
+    },
+    {
+      "qty": 2,
+      "name": "Tranquil Cove"
+    },
+    {
+      "qty": 2,
+      "name": "Umara Raptor"
+    },
+    {
+      "qty": 2,
+      "name": "University Campus"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Dispel"
+    },
+    {
+      "qty": 2,
+      "name": "Journey to Nowhere"
+    },
+    {
+      "qty": 2,
+      "name": "Makindi Shieldmate"
+    },
+    {
+      "qty": 2,
+      "name": "Oblivion Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Recommission"
+    },
+    {
+      "qty": 2,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 2,
+      "name": "Snap"
+    },
+    {
+      "qty": 2,
+      "name": "Sundering Growth"
+    }
+  ]
+}

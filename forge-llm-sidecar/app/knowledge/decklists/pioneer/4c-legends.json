@@ -1,0 +1,145 @@
+{
+  "archetype": "4c Legends",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/4c-legends.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Aang, Swift Savior"
+    },
+    {
+      "qty": 4,
+      "name": "Carnage, Crimson Chaos"
+    },
+    {
+      "qty": 3,
+      "name": "Concealed Courtyard"
+    },
+    {
+      "qty": 4,
+      "name": "Glasspool Mimic"
+    },
+    {
+      "qty": 2,
+      "name": "Gran-Gran"
+    },
+    {
+      "qty": 2,
+      "name": "Inti, Seneschal of the Sun"
+    },
+    {
+      "qty": 1,
+      "name": "Malcolm, Alluring Scoundrel"
+    },
+    {
+      "qty": 4,
+      "name": "Mana Confluence"
+    },
+    {
+      "qty": 3,
+      "name": "Mox Amber"
+    },
+    {
+      "qty": 1,
+      "name": "Narset, Jeskai Waymaster"
+    },
+    {
+      "qty": 3,
+      "name": "Nashi, Searcher in the Dark"
+    },
+    {
+      "qty": 2,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 4,
+      "name": "Plaza of Heroes"
+    },
+    {
+      "qty": 3,
+      "name": "Raffine, Scheming Seer"
+    },
+    {
+      "qty": 1,
+      "name": "Ral Zarek, Guest Lecturer"
+    },
+    {
+      "qty": 1,
+      "name": "Raphael, Tough Turtle"
+    },
+    {
+      "qty": 3,
+      "name": "Rona, Herald of Invasion"
+    },
+    {
+      "qty": 3,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 3,
+      "name": "Skrelv, Defector Mite"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Tinybones Joins Up"
+    },
+    {
+      "qty": 1,
+      "name": "Urborg, Tomb of Yawgmoth"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Liliana of the Veil"
+    },
+    {
+      "qty": 2,
+      "name": "Pest Control"
+    },
+    {
+      "qty": 2,
+      "name": "Ray of Enfeeblement"
+    },
+    {
+      "qty": 1,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 1,
+      "name": "Sheoldred, the Apocalypse"
+    },
+    {
+      "qty": 1,
+      "name": "The Meathook Massacre"
+    },
+    {
+      "qty": 2,
+      "name": "Unlicensed Hearse"
+    }
+  ]
+}

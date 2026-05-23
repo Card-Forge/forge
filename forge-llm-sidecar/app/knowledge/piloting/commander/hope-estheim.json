@@ -1,0 +1,125 @@
+{
+  "archetype": "Hope Estheim",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Establish a resilient, flying board of Spirit tokens while leveraging Hope Estheim\u2019s recursive engine to out-value opponents. The deck wins by outlasting midrange and combo decks through card advantage, flash combat tricks, and relentless pressure, while stabilizing against aggro with targeted removal and temporary board wipes.",
+  "win_conditions": [
+    "Estheim\u2019s recursion engine combined with a wide board of flying Spirits.",
+    "Win by trading up with flash combat tricks, recuring key Spirits from the graveyard, or using Estheim\u2019s bounce to reset the board while maintaining card advantage.",
+    "Push damage with flying tokens once the opponent has no sweepers or targeted removal."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including a fetch or Arcane Signet if possible), Estheim or early ramp (Sol Ring, mana dork), and at least one interaction/removal.",
+      "Keep hands with 4+ mana sources if targeting Estheim on turn 3."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no early plays, or hands with only Estheim and no mana/lands."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Arcane Signet or a mana dork.",
+      "Turn 2: Ramp into Signet or play a 2-drop enabler like Rhox Faithmender or a cheap Spirit.",
+      "Prioritize establishing mana acceleration and early board presence.",
+      "If opening with Estheim, ensure you have 4 mana and a land drop ready for turn 3."
+    ],
+    "mid_game": [
+      "Preserve Estheim\u2019s {2}{W} activations for critical moments: recursion for value, flash for combat tricks, or bouncing to protect from sweepers.",
+      "Avoid overcommitting mana to bouncing your own permanents unless necessary.",
+      "Manage graveyard resources by keeping key Spirits in play when possible, and use Rhox Faithmender to untap lands for repeated activations.",
+      "Commit threats when you have removal or flash protection ready.",
+      "Hold back if facing sweepers or targeted removal.",
+      "Use flying tokens to trade efficiently against non-flying blockers, and prioritize trading into removal spells to preserve Estheim and key enablers."
+    ],
+    "late_game": [
+      "Estheim\u2019s recursion engine combined with a wide board of flying Spirits.",
+      "Win by trading up with flash combat tricks, recuring key Spirits from the graveyard, or using Estheim\u2019s bounce to reset the board while maintaining card advantage.",
+      "Push damage with flying tokens once the opponent has no sweepers or targeted removal.",
+      "Go all-in when you have Estheim in play, sufficient mana for multiple activations, and the opponent has no sweepers or targeted removal in hand.",
+      "Also commit when you can trade up favorably in combat or when the opponent is at lethal and you have flying tokens to push through."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Hope Estheim",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Rhox Faithmender",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overusing Estheim\u2019s bounce ability on your own permanents, which can disrupt your own mana base or combo.",
+    "Remember that Estheim\u2019s abilities have flash, so you can activate them in response to removal or during combat.",
+    "Rhox Faithmender is a key enabler for pumping your board and untapping lands for activations.",
+    "Watch out for graveyard hate like Rest in Peace or Leyline of the Void, which can neuter your recursion engine.",
+    "Always track opponent hand size before committing to a large board state."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use flash combat tricks, split your mana across multiple turns, cast Estheim\u2019s abilities as sorceries (they have flash), or use cheap threats that don\u2019t need to be cast. Bounce your own permanents to protect them from counterspells, and prioritize casting Estheim when the opponent has no blue mana or counterspells available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use removal on mana dorks/rocks, and stabilize with board wipes. Don\u2019t let them get too far ahead in mana. Use flying tokens to trade efficiently and force them to use removal on low-value targets while you preserve your recursion engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize life gain, early removal, and board wipes. Use flying tokens to trade efficiently. Don\u2019t overextend into combat if you can\u2019t block. Stabilize with Rhox Faithmender to pump your board and untap lands for Estheim activations to clear the board or bounce threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with resilient threats, use Estheim\u2019s recursion to out-value their removal, and win the card advantage war. Force them to use answers on low-value targets. Use flash to cast Estheim\u2019s abilities in response to removal, and prioritize graveyard recursion over casting new spells when they have heavy countermagic.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by better resource management, timing your Estheim activations, and using targeted removal to break their recursion engine. Prioritize graveyard hate and bounce effects. Trade up in combat by using flying tokens to remove their key permanents, and conserve mana for flash responses to their removal spells.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath, Damnation), targeted removal (Path, Terminate), and combo win conditions.",
+    "Note when opponents tap out for big spells or have graveyard resources.",
+    "Track when they use removal on your tokens versus your commander to gauge their hand size and strategy."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

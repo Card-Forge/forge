@@ -1,0 +1,133 @@
+{
+  "archetype": "Mono-White Initiative",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/mono-white-initiative.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Anointed Peacekeeper"
+    },
+    {
+      "qty": 4,
+      "name": "Archon of Emeria"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 4,
+      "name": "Chrome Mox"
+    },
+    {
+      "qty": 4,
+      "name": "Clarion Conqueror"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 1,
+      "name": "Karn, the Great Creator"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Ruby"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Seasoned Dungeoneer"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 2,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Thorn of Amethyst"
+    },
+    {
+      "qty": 1,
+      "name": "Trinisphere"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Void Mirror"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 4,
+      "name": "White Plume Adventurer"
+    },
+    {
+      "qty": 4,
+      "name": "Witch Enchanter"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 2,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 2,
+      "name": "Light of Day"
+    },
+    {
+      "qty": 2,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 3,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 2,
+      "name": "Swords to Plowshares"
+    }
+  ]
+}

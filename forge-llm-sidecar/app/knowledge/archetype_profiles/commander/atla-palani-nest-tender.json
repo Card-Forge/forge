@@ -1,0 +1,551 @@
+{
+  "schema_version": 1,
+  "name": "Atla Palani, Nest Tender",
+  "format": "commander",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 100,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Harmonic Prodigy",
+    "Bellowing Aegisaur",
+    "Growing Ranks",
+    "Anointed Procession",
+    "Apex Altisaur",
+    "Ashnod's Altar",
+    "Atla Palani, Nest Tender",
+    "Determined Iteration"
+  ],
+  "interaction_to_disrupt": [
+    "Rootborn Defenses",
+    "Swiftfoot Boots",
+    "Wayward Swordtooth",
+    "Annie Joins Up",
+    "Forerunner of the Empire",
+    "Garruk's Uprising",
+    "Ghalta, Primal Hunger",
+    "Gishath, Sun's Avatar"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 5,
+      "cards": [
+        "Earthshaker Dreadmaw",
+        "Garruk's Uprising",
+        "Jetmir's Garden",
+        "Skullclamp",
+        "Vaultborn Tyrant"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Harmonic Prodigy",
+        "Mosswort Bridge"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Cultivate",
+        "Farseek",
+        "Forerunner of the Empire",
+        "Kodama's Reach",
+        "Rampant Growth",
+        "Ranging Raptors",
+        "Thunderherd Migration",
+        "Topiary Stomper"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Bellowing Aegisaur",
+        "Growing Ranks"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 51,
+      "cards": [
+        "Anointed Procession",
+        "Apex Altisaur",
+        "Ashnod's Altar",
+        "Atla Palani, Nest Tender",
+        "Bellowing Aegisaur",
+        "Determined Iteration",
+        "Dinosaur Egg",
+        "Dinosaurs on a Spaceship",
+        "Earthshaker Dreadmaw",
+        "Etali, Primal Conqueror",
+        "Etali, Primal Storm",
+        "Forerunner of the Empire",
+        "Gauntlet of Power",
+        "Ghalta and Mavren",
+        "Ghalta, Primal Hunger",
+        "Ghalta, Stampede Tyrant",
+        "Gishath, Sun's Avatar",
+        "Goring Ceratops",
+        "Harmonic Prodigy",
+        "Hunting Velociraptor",
+        "Kinjalli's Caller",
+        "Knight of the Stampede",
+        "Marauding Raptor",
+        "Maskwood Nexus",
+        "Mirror Entity",
+        "Monster Manual",
+        "Nesting Dovehawk",
+        "Nesting Dragon",
+        "Otepec Huntmaster",
+        "Palani's Hatcher",
+        "Pantlaza, Sun-Favored",
+        "Parallel Lives",
+        "Quartzwood Crasher",
+        "Raging Swordtooth",
+        "Ranging Raptors",
+        "Ravenous Tyrannosaurus",
+        "Regal Behemoth",
+        "Regisaur Alpha",
+        "Scion of Calamity",
+        "Seedborn Muse",
+        "Silverclad Ferocidons",
+        "Sol Ring",
+        "Temple Altisaur",
+        "Topiary Stomper",
+        "Trapjaw Tyrant",
+        "Urza's Incubator",
+        "Vaultborn Tyrant",
+        "Verdant Sun's Avatar",
+        "Wayward Swordtooth",
+        "Wrathful Raptors",
+        "Zacama, Primal Calamity"
+      ],
+      "mainboard_count": 51,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Annie Joins Up",
+        "Forerunner of the Empire",
+        "Garruk's Uprising",
+        "Ghalta, Primal Hunger",
+        "Gishath, Sun's Avatar",
+        "Hunting Velociraptor",
+        "Marauding Raptor",
+        "Quartzwood Crasher",
+        "Raging Swordtooth",
+        "Ravenous Tyrannosaurus",
+        "Scion of Calamity",
+        "Sundering Growth",
+        "Temple Altisaur",
+        "Thornbite Staff",
+        "Trapjaw Tyrant",
+        "Wrathful Raptors",
+        "Zacama, Primal Calamity"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Forerunner of the Empire"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Rootborn Defenses",
+        "Swiftfoot Boots",
+        "Wayward Swordtooth"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Harmonic Prodigy"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Bellowing Aegisaur",
+        "Growing Ranks"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Druid's Deliverance",
+        "Temple Altisaur"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 10,
+      "cards": [
+        "Arcane Signet",
+        "Caged Sun",
+        "Command Tower",
+        "High Market",
+        "Jetmir's Garden",
+        "Jungle Shrine",
+        "Mosswort Bridge",
+        "Regal Behemoth",
+        "Reliquary Tower",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 33,
+      "cards": [
+        "Command Tower",
+        "Forest",
+        "High Market",
+        "Jetmir's Garden",
+        "Jungle Shrine",
+        "Mosswort Bridge",
+        "Mountain",
+        "Plains",
+        "Reliquary Tower",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.26
+  },
+  "dual_role_cards": [
+    {
+      "card": "Bellowing Aegisaur",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Earthshaker Dreadmaw",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Forerunner of the Empire",
+      "roles": [
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Garruk's Uprising",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghalta, Primal Hunger",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gishath, Sun's Avatar",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Growing Ranks",
+      "roles": [
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Harmonic Prodigy",
+      "roles": [
+        "dig_draw",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "High Market",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hunting Velociraptor",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jetmir's Garden",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jungle Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marauding Raptor",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mosswort Bridge",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quartzwood Crasher",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raging Swordtooth",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ranging Raptors",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ravenous Tyrannosaurus",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Regal Behemoth",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scion of Calamity",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Altisaur",
+      "roles": [
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Topiary Stomper",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Trapjaw Tyrant",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vaultborn Tyrant",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wayward Swordtooth",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wrathful Raptors",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya, Cradle of Growth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zacama, Primal Calamity",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/atla-palani-nest-tender.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

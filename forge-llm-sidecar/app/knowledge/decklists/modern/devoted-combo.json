@@ -1,0 +1,173 @@
+{
+  "archetype": "Devoted Combo",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/devoted-combo.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Agatha's Soul Cauldron"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 1,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 2,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Chord of Calling"
+    },
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 4,
+      "name": "Delighted Halfling"
+    },
+    {
+      "qty": 4,
+      "name": "Devoted Druid"
+    },
+    {
+      "qty": 1,
+      "name": "Dryad Arbor"
+    },
+    {
+      "qty": 1,
+      "name": "Duskwatch Recruiter"
+    },
+    {
+      "qty": 1,
+      "name": "Eternal Witness"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 4,
+      "name": "Green Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Lush Portico"
+    },
+    {
+      "qty": 3,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 4,
+      "name": "Nature's Rhythm"
+    },
+    {
+      "qty": 1,
+      "name": "Ouroboroid"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 2,
+      "name": "Shifting Woodland"
+    },
+    {
+      "qty": 2,
+      "name": "Snow-Covered Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Safekeeper"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 4,
+      "name": "Tyvar, Jubilant Brawler"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Mortuary"
+    },
+    {
+      "qty": 4,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 3,
+      "name": "Vizier of Remedies"
+    },
+    {
+      "qty": 1,
+      "name": "Walking Ballista"
+    },
+    {
+      "qty": 4,
+      "name": "Windswept Heath"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Collector Ouphe"
+    },
+    {
+      "qty": 1,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Ethersworn Canonist"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Grist, the Hunger Tide"
+    },
+    {
+      "qty": 1,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 1,
+      "name": "Kraul Harpooner"
+    },
+    {
+      "qty": 3,
+      "name": "Orim's Chant"
+    },
+    {
+      "qty": 1,
+      "name": "Ouroboroid"
+    },
+    {
+      "qty": 1,
+      "name": "Outland Liberator"
+    },
+    {
+      "qty": 1,
+      "name": "Suncleanser"
+    }
+  ]
+}

@@ -10,11 +10,14 @@
   "mulligan": {
     "keep_criteria": [
       "Hands containing one-drops like Favored Hoplite or Monastery Swiftspear",
-      "Hands with early spells to trigger Heroic/Prowess abilities"
+      "Hands with early spells to trigger Heroic/Prowess abilities",
+      "Keep hands with 2-3 lands (preferably one of each color or duals), at least one early creature (Monastery Swiftspear, Knight of the Skyward Eye, or Champion of the Parish), and 2+ cheap spells (Lightning Helix, Path to Exile, God's Willing, etc.).",
+      "Keep Leyline of Resonance if you have a solid mana base and early threats."
     ],
     "mulligan_criteria": [
       "Hands lacking early pressure or sufficient land drops",
-      "Hands without interaction to protect threats"
+      "Hands without interaction to protect threats",
+      "Mulligan hands with >2 lands, only lands, or no creatures/spells."
     ],
     "examples": [
       {
@@ -32,15 +35,31 @@
   "game_plan": {
     "early_game": [
       "Play one-drops to force opponent answers and pave the way for larger threats",
-      "Use Defiant Strike or Homestead Courage to draw cards and trigger abilities"
+      "Use Defiant Strike or Homestead Courage to draw cards and trigger abilities",
+      "Turn 1: Play a land, cast a cheap spell on your creature if possible, or hold for optimal sequencing.",
+      "Turn 2: Drop your main threat (Swiftspear), immediately cast a spell on it to trigger heroic, then attack.",
+      "If you have Leyline, it enters untapped if you open with it.",
+      "Sequence spells to maximize +1/+1 counters before combat."
     ],
     "mid_game": [
       "Deploy Illuminator Virtuoso and pump it with Monstrous Rage or Ancestral Anger for explosive damage",
-      "Use Gods Willing to protect threats and deflect blockers"
+      "Use Gods Willing to protect threats and deflect blockers",
+      "Mana is critical",
+      "always keep open mana for protection spells or additional heroic triggers.",
+      "Don't overcommit creatures if you have no spells to protect them or trigger heroic again.",
+      "Graveyard is generally not a focus, but watch for graveyard recursion from opponents.",
+      "Commit threats when you have a spell in hand to protect them or trigger heroic again.",
+      "Hold back if facing sweepers or targeted removal."
     ],
     "late_game": [
       "Leverage Dreadhorde Arcanist for card advantage and value",
-      "Sideboard into attrition engines like Showdown of the Skalds or Jegantha, the Wellspring for longer games"
+      "Sideboard into attrition engines like Showdown of the Skalds or Jegantha, the Wellspring for longer games",
+      "Honor of the Pure is the primary finisher",
+      "cast it when you have a board of heroic creatures to flood them with counters.",
+      "Swiftspear with multiple counters can also close games.",
+      "Leyline of Resonance doubles triggers for explosive turns.",
+      "Go all-in when you have a lethal threat on board, enough spells to protect it or trigger heroic again, and your opponent has no sweepers in hand (based on previous turns).",
+      "Also commit when you can cast Honor of the Pure and have enough creatures to make it unblockable or lethal."
     ]
   },
   "key_cards": [
@@ -100,7 +119,12 @@
     "Combine Monstrous Rage with other spells to threaten lethal damage over multiple turns.",
     "Use Defiant Strike as a cantrip to draw into answers while triggering creature abilities.",
     "Hold up Gods Willing to protect key threats from removal or deflect blockers.",
-    "Avoid going 'all-in' against interactive decks; instead, apply steady pressure to force hasty plays."
+    "Avoid going 'all-in' against interactive decks; instead, apply steady pressure to force hasty plays.",
+    "Common mistake: Overcommitting creatures without spells to protect them or trigger heroic again.",
+    "Another: Forgetting to count +1/+1 counters when calculating combat.",
+    "Unique interaction: Leyline of Resonance doubles heroic triggers, so casting two spells on one creature gives it four +1/+1 counters.",
+    "Honor of the Pure copies the +1/+1 counters on your creatures, so timing is crucial.",
+    "Always check for 'target' spells to maximize heroic."
   ],
   "matchups": [
     {
@@ -142,6 +166,31 @@
         "Counterspells",
         "Board clears"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient spells that are hard to counter. Cast threats in response to their counterspells. Use Leyline of Resonance to make triggers go off even if you cast multiple spells. Consider sideboarded hate (Leyline of Punishment, Rest in Peace if applicable).",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race their mana development. Use removal to kill their ramp sources. Don't overextend; wait for them to overcommit.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal and board wipes. Use your creatures as blockers when necessary, but prioritize surviving to cast Honor of the Pure. Gain life if possible.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with multiple threats. Don't let them clear your board without trading. Use spells to protect your key creatures. Outlast them by having more threats than they have removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race. Prioritize casting spells on your creatures faster. Use removal to kill their threats before they can grow. Track their heroic triggers to know when they're about to go wide or big.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -154,10 +203,12 @@
     "Cauldron Familiar",
     "Thalia, Guardian of Thraben",
     "Sweepers",
-    "Removals"
+    "Removals",
+    "Watch for sweepers (Wrath, Damnation), targeted removal (Path, Murder), and combo pieces."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-boros-heroic-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T04:53:33+00:00",
     "model": "local-model",
@@ -175,6 +226,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

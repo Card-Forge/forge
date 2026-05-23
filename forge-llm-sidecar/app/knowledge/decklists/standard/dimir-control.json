@@ -1,0 +1,157 @@
+{
+  "archetype": "Dimir Control",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/dimir-control.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Aclazotz, Deepest Betrayal"
+    },
+    {
+      "qty": 2,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 3,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 1,
+      "name": "Day of Black Sun"
+    },
+    {
+      "qty": 3,
+      "name": "Deadly Cover-Up"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 2,
+      "name": "Flow State"
+    },
+    {
+      "qty": 1,
+      "name": "Fountainport"
+    },
+    {
+      "qty": 4,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Marang River Regent"
+    },
+    {
+      "qty": 2,
+      "name": "Petrified Hamlet"
+    },
+    {
+      "qty": 2,
+      "name": "Phantom Interference"
+    },
+    {
+      "qty": 1,
+      "name": "Realm of Koh"
+    },
+    {
+      "qty": 3,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 3,
+      "name": "Restless Reef"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 3,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 2,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "The End"
+    },
+    {
+      "qty": 3,
+      "name": "Three Steps Ahead"
+    },
+    {
+      "qty": 2,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 2,
+      "name": "Virtue of Persistence"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Feed the Swarm"
+    },
+    {
+      "qty": 1,
+      "name": "Glen Elendra's Answer"
+    },
+    {
+      "qty": 2,
+      "name": "Intimidation Tactics"
+    },
+    {
+      "qty": 1,
+      "name": "Lord Skitter, Sewer King"
+    },
+    {
+      "qty": 2,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Outrageous Robbery"
+    },
+    {
+      "qty": 2,
+      "name": "Qarsi Revenant"
+    },
+    {
+      "qty": 2,
+      "name": "Tishana's Tidebinder"
+    },
+    {
+      "qty": 1,
+      "name": "Wan Shi Tong, Librarian"
+    },
+    {
+      "qty": 1,
+      "name": "Withering Curse"
+    },
+    {
+      "qty": 1,
+      "name": "Withering Torment"
+    }
+  ]
+}

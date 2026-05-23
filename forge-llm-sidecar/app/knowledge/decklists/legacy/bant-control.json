@@ -1,0 +1,133 @@
+{
+  "archetype": "Bant Control",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/bant-control.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Life from the Loam"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 4,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 2,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 2,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 4,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 1,
+      "name": "Savannah"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 2,
+      "name": "Stifle"
+    },
+    {
+      "qty": 1,
+      "name": "Supreme Verdict"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 4,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 2,
+      "name": "Teferi, Time Raveler"
+    },
+    {
+      "qty": 3,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 2,
+      "name": "Tundra"
+    },
+    {
+      "qty": 4,
+      "name": "Up the Beanstalk"
+    },
+    {
+      "qty": 4,
+      "name": "Uro, Titan of Nature's Wrath"
+    },
+    {
+      "qty": 3,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Carpet of Flowers"
+    },
+    {
+      "qty": 4,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 1,
+      "name": "Gaddock Teeg"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Lavinia, Azorius Renegade"
+    },
+    {
+      "qty": 2,
+      "name": "Wrath of the Skies"
+    }
+  ]
+}

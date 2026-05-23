@@ -1,0 +1,113 @@
+{
+  "archetype": "Boros Moxite",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/boros-moxite.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Ancient Den"
+    },
+    {
+      "qty": 2,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 2,
+      "name": "Boros Garrison"
+    },
+    {
+      "qty": 4,
+      "name": "Galvanic Blast"
+    },
+    {
+      "qty": 4,
+      "name": "Glint Hawk"
+    },
+    {
+      "qty": 1,
+      "name": "Great Furnace"
+    },
+    {
+      "qty": 3,
+      "name": "Journey to Nowhere"
+    },
+    {
+      "qty": 1,
+      "name": "Kabira Crossroads"
+    },
+    {
+      "qty": 4,
+      "name": "Kor Skyfisher"
+    },
+    {
+      "qty": 4,
+      "name": "Lembas"
+    },
+    {
+      "qty": 3,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 4,
+      "name": "Melded Moxite"
+    },
+    {
+      "qty": 4,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Pursue the Past"
+    },
+    {
+      "qty": 1,
+      "name": "Radiant Fountain"
+    },
+    {
+      "qty": 3,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 4,
+      "name": "Sneaky Snacker"
+    },
+    {
+      "qty": 4,
+      "name": "Thraben Inspector"
+    },
+    {
+      "qty": 4,
+      "name": "Wind-Scarred Crag"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Destroy Evil"
+    },
+    {
+      "qty": 3,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 2,
+      "name": "Goliath Paladin"
+    },
+    {
+      "qty": 4,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 3,
+      "name": "Smash to Dust"
+    }
+  ]
+}

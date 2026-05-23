@@ -1,0 +1,97 @@
+{
+  "archetype": "Elves",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/elves.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Avenging Hunter"
+    },
+    {
+      "qty": 1,
+      "name": "Crashing Drawbridge"
+    },
+    {
+      "qty": 7,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Fyndhorn Elves"
+    },
+    {
+      "qty": 4,
+      "name": "Generous Ent"
+    },
+    {
+      "qty": 1,
+      "name": "Gingerbread Cabin"
+    },
+    {
+      "qty": 4,
+      "name": "Land Grant"
+    },
+    {
+      "qty": 4,
+      "name": "Lead the Stampede"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 4,
+      "name": "Masked Vandal"
+    },
+    {
+      "qty": 4,
+      "name": "Nyxborn Hydra"
+    },
+    {
+      "qty": 4,
+      "name": "Priest of Titania"
+    },
+    {
+      "qty": 4,
+      "name": "Quirion Ranger"
+    },
+    {
+      "qty": 2,
+      "name": "Sagu Wildling"
+    },
+    {
+      "qty": 4,
+      "name": "Timberwatch Elf"
+    },
+    {
+      "qty": 1,
+      "name": "Wellwisher"
+    },
+    {
+      "qty": 4,
+      "name": "Winding Way"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 4,
+      "name": "Monstrous Emergence"
+    },
+    {
+      "qty": 3,
+      "name": "Rooftop Percher"
+    },
+    {
+      "qty": 2,
+      "name": "Viridian Longbow"
+    },
+    {
+      "qty": 3,
+      "name": "Vitu-Ghazi Inspector"
+    }
+  ]
+}

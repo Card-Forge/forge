@@ -1,0 +1,407 @@
+{
+  "schema_version": 1,
+  "name": "Dimir Reanimator",
+  "format": "modern",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Abhorrent Oculus",
+    "Archon of Cruelty",
+    "Boggart Trawler",
+    "Dauthi Voidwalker",
+    "Eyetwitch",
+    "Flare of Malice",
+    "Harbinger of the Seas",
+    "Mai, Scornful Striker"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "It'll Quench Ya!",
+    "Octopus Form",
+    "Boomerang Basics",
+    "Chthonian Nightmare",
+    "Persist",
+    "Psychic Frog",
+    "Unearth"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 17,
+      "cards": [
+        "Archon of Cruelty",
+        "Boomerang Basics",
+        "Decorum Dissertation",
+        "Eyetwitch",
+        "Psychic Frog",
+        "Unearth",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 11,
+      "cards": [
+        "Abhorrent Oculus",
+        "Decorum Dissertation",
+        "Otherworldly Gaze",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 6,
+      "cards": [
+        "Bloodstained Mire",
+        "Polluted Delta"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 34,
+      "cards": [
+        "Abhorrent Oculus",
+        "Archon of Cruelty",
+        "Boggart Trawler",
+        "Dauthi Voidwalker",
+        "Eyetwitch",
+        "Flare of Malice",
+        "Harbinger of the Seas",
+        "Mai, Scornful Striker",
+        "Psychic Frog",
+        "Stitcher's Supplier",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 13,
+      "cards": [
+        "Boomerang Basics",
+        "Chthonian Nightmare",
+        "Persist",
+        "Psychic Frog",
+        "Unearth"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 1
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Ruinous Waterbending"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "Consign to Memory",
+        "It'll Quench Ya!"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Octopus Form"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 6,
+      "cards": [
+        "Eyetwitch",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 28,
+      "cards": [
+        "Abhorrent Oculus",
+        "Chthonian Nightmare",
+        "Dauthi Voidwalker",
+        "Otherworldly Gaze",
+        "Persist",
+        "Psychic Frog",
+        "Stitcher's Supplier",
+        "Surgical Extraction",
+        "Undercity Sewers",
+        "Unearth"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 21,
+      "cards": [
+        "Abhorrent Oculus",
+        "Boomerang Basics",
+        "Chthonian Nightmare",
+        "Otherworldly Gaze",
+        "Persist",
+        "Psychic Frog",
+        "Unearth"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 14,
+      "cards": [
+        "Bloodstained Mire",
+        "Darkslick Shores",
+        "Polluted Delta",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 17,
+      "cards": [
+        "Bloodstained Mire",
+        "Darkslick Shores",
+        "Island",
+        "Polluted Delta",
+        "Swamp",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.3
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abhorrent Oculus",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archon of Cruelty",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boomerang Basics",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chthonian Nightmare",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darkslick Shores",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dauthi Voidwalker",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Decorum Dissertation",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eyetwitch",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otherworldly Gaze",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Persist",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Psychic Frog",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stitcher's Supplier",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unearth",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/dimir-reanimator.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

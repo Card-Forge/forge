@@ -1,0 +1,129 @@
+{
+  "archetype": "Vivi Ornitier",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck leverages mana acceleration and card draw to out-resource opponents, transitioning from early tempo to late-game card advantage and combat dominance. It excels against slower, resource-starved decks and struggles against hyper-aggressive or combo strategies that can close the game before your engine stabilizes.",
+  "win_conditions": [
+    "Vivi Ornitier with combat tricks, infinite card draw loops, or overwhelming board presence from Curiosity.",
+    "Secure victory by trading up in card advantage and closing with unblockable or protected threats.",
+    "Use mana acceleration to cast multiple threats in a single turn if the board is clear."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2+ lands (including fetches/shocks if applicable) and at least one mana accelerator (Sol Ring, Arcane Signet, etc.) or a turn-1/2 play that establishes board presence.",
+      "Keep hands with Curiosity or Vivi Ornitier if supported by ramp or cantrips."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no acceleration, or 2+ lands with only removal/beatsticks and no draw engines or color fixers."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring if mana allows.",
+      "Turn 2: Play a second land, cast Curiosity or Vivi Ornitier.",
+      "Sequence lands to ensure red/blue mana availability by turn 2-3.",
+      "If opening with acceleration, prioritize casting draw engines to stabilize hand size and dig for answers.",
+      "If opening with threats, hold up mana for interaction until you establish a baseline of card advantage."
+    ],
+    "mid_game": [
+      "Prioritize maintaining card advantage over board presence early.",
+      "Use Curiosity to filter into answers or threats rather than hoarding cards.",
+      "Don't overextend into removal",
+      "keep a hand of 3+ cards when facing interactive decks.",
+      "Manage mana for both casting and countering, and avoid tapping out on turn 3 unless you have a clear win condition or protection.",
+      "Commit threats only when you have card advantage or removal to protect them.",
+      "Hold back Vivi Ornitier if the opponent has sweepers or targeted hate.",
+      "Use countermagic to protect key pieces and disrupt opponent's combos."
+    ],
+    "late_game": [
+      "Vivi Ornitier with combat tricks, infinite card draw loops, or overwhelming board presence from Curiosity.",
+      "Secure victory by trading up in card advantage and closing with unblockable or protected threats.",
+      "Use mana acceleration to cast multiple threats in a single turn if the board is clear.",
+      "Go all-in when you have card advantage, opponent has low life or a swept board, or you've established a clear win condition.",
+      "Commit when you can protect your finisher or have enough answers to handle interaction.",
+      "Don't commit if the opponent has unanswered sweepers or targeted hate."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Vivi Ornitier",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Curiosity",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: overcommitting to Curiosity too early without protection or follow-up.",
+    "Unique interaction: Vivi Ornitier likely synergizes with card draw",
+    "maximize triggers and use cantrips to dig into your engine.",
+    "Watch for format-specific rules regarding Sol Ring (if banned/limited).",
+    "Always track opponent's life total and board state to determine when to pivot from control to aggression or vice versa."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, uncounterable threats or split your casting into multiple turns. Employ cantrips to dig through counters. Use mana dorks to cast around counters. Force them to use resources on your threats rather than combo pieces.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use artifact hate, and disrupt their mana base. Don't trade cards; trade resources. Force them to use interaction on your threats rather than accelerating their game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Keep early interaction, stabilize with board wipes or removal, then transition to your game plan. Don't overcommit to draw engines before turn 4. Use countermagic to protect your engine and disrupt their early threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with efficient threats, use cantrips to dig past counters, and win through card advantage. Force them to use resources on your threats rather than combo pieces. Don't let them stabilize; keep pressure on and trade up in card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through better card advantage, superior sequencing, and sideboard cards. Prioritize countermagic and removal to protect your engine. Force them to use resources on your threats rather than drawing into their win condition. Track their hand size and adjust your plays accordingly.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath of God, Cyclonic Rift), targeted removal (Path to Exile, Lightning Strike), and combo win conditions.",
+    "Note when opponents tap out for counterspells or have graveyard hate.",
+    "Track life totals and board state to determine when to pivot from control to aggression or vice versa."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

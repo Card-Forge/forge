@@ -1,0 +1,109 @@
+{
+  "archetype": "Boros Convoke",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/boros-convoke.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Battlefield Forge"
+    },
+    {
+      "qty": 2,
+      "name": "Cosmogrand Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 4,
+      "name": "Gleeful Demolition"
+    },
+    {
+      "qty": 4,
+      "name": "Inspiring Vantage"
+    },
+    {
+      "qty": 4,
+      "name": "Knight-Errant of Eos"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Needleverge Pathway"
+    },
+    {
+      "qty": 4,
+      "name": "Novice Inspector"
+    },
+    {
+      "qty": 3,
+      "name": "Ornithopter"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Portable Hole"
+    },
+    {
+      "qty": 4,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Shefet Dunes"
+    },
+    {
+      "qty": 2,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    },
+    {
+      "qty": 4,
+      "name": "Thraben Inspector"
+    },
+    {
+      "qty": 4,
+      "name": "Venerated Loxodon"
+    },
+    {
+      "qty": 4,
+      "name": "Voldaren Epicure"
+    },
+    {
+      "qty": 4,
+      "name": "Warden of the Inner Sky"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Destroy Evil"
+    },
+    {
+      "qty": 4,
+      "name": "Invasion of Gobakhan"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 3,
+      "name": "Torch the Tower"
+    }
+  ]
+}

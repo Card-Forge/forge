@@ -1,0 +1,141 @@
+{
+  "archetype": "Azorius Tempo",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/azorius-tempo.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Daze"
+    },
+    {
+      "qty": 1,
+      "name": "Erode"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Flow State"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 2,
+      "name": "Murktide Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Sanctuary"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 2,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 2,
+      "name": "Prismatic Vista"
+    },
+    {
+      "qty": 2,
+      "name": "Snapcaster Mage"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 3,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi, Time Raveler"
+    },
+    {
+      "qty": 4,
+      "name": "Tundra"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 2,
+      "name": "Wrath of the Skies"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 2,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 2,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 1,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 1,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 2,
+      "name": "Temporary Lockdown"
+    }
+  ]
+}

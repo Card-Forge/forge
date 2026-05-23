@@ -1,0 +1,119 @@
+{
+  "archetype": "Narci, Fable Singer",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "The deck aims to cast a high volume of cheap noncreature spells to rapidly grow Narci into a massive threat, leveraging graveyard recursion and card advantage to out-value opponents. It excels against control and combo decks that rely on single-target interaction, as its recursive value engine and escalating board presence overwhelm static defenses.",
+  "win_conditions": [
+    "Narci with 10+ counters attacking unblocked, or using Anikthea to cast a game-ending spell from the graveyard.",
+    "Archon of Sun's Grace can also close games if it survives long enough to trade or attack."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, Narci, Anikthea, or multiple cheap noncreature spells (cantrips, ramp, removal)."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you lack Narci/Anikthea and only have expensive spells, or if your mana base is severely broken (requires untapped B/G/W sources or fast mana)."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cheap cantrip or mana accelerator to establish tempo.",
+      "Turn 2: Play a second land, cast another noncreature spell to grow Narci, or drop Narci if mana allows.",
+      "Prioritize establishing a functional mana base and getting Narci on the board as early as possible to start the counter engine."
+    ],
+    "mid_game": [
+      "Balance mana for Narci growth versus answering threats.",
+      "Use Anikthea to cast spells from the graveyard to trigger Narci again without depleting your hand.",
+      "Avoid overcommitting to casting spells if Narci is at risk of removal",
+      "conserve resources for protection or recursion.",
+      "Commit Narci to the board when you have protection (Archon of Sun's Grace, counters, or hexproof) or enough counters to survive removal.",
+      "Hold back noncreature spells if the board is unstable or if you need to answer a major opponent threat first."
+    ],
+    "late_game": [
+      "Narci with 10+ counters attacking unblocked, or using Anikthea to cast a game-ending spell from the graveyard.",
+      "Archon of Sun's Grace can also close games if it survives long enough to trade or attack.",
+      "Go all-in when you have protection, sufficient card advantage to rebuild after a wipe, or when the opponent has exhausted their removal/counter spells.",
+      "Commit when Narci is large enough to trade favorably or go unblocked."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Narci, Fable Singer",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Anikthea, Hand of Erebos",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Archon of Sun's Grace",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overcommitting to casting spells without protection, ignoring graveyard hate, and mismanaging mana for Narci's growth.",
+    "Unique interactions: Anikthea allows you to cast Narci from the graveyard to trigger its own death trigger again, creating a recursive value loop.",
+    "Archon of Sun's Grace can protect Narci or act as a secondary win condition.",
+    "Watch for 'when you cast' triggers from opponents and plan your spell sequencing accordingly."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multiple spells to force out counter spells, then cast Narci or Anikthea when they are tapped out. Utilize protection, hexproof, or instant-speed recursion to bypass counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Narci and use removal to stop their big threats before they stabilize. Do not let them reach their win conditions; pressure them with recursive value and card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with targeted removal and Archon of Sun's Grace, then transition to Narci once you have card advantage. Use Anikthea to recycle spells and maintain pressure while out-grinding their early aggression.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with Anikthea recursion and graveyard spells. Avoid overextending; wait for them to use interaction, then cast Narci or key spells when they are tapped out. Use card draw to out-resource their removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing card draw, targeted removal, and graveyard hate. Control the board with Archon of Sun's Grace and win on Narci's size. Force trades that favor your recursion engine and out-value them in the late game.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for targeted removal (e.g., Murder, Doom Blade), board wipes (e.g., Wrath of God), and graveyard hate (e.g., Rest in Peace, Grafdigger's Cage).",
+    "Note when opponents tap out for interaction, as this is your window to cast Narci or Anikthea safely."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,465 @@
+{
+  "schema_version": 1,
+  "name": "Esper Reanimator",
+  "format": "modern",
+  "colors": [
+    "W",
+    "U",
+    "B"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Esper Reanimator is a Modern combo deck that leverages graveyard recursion to cast high-impact threats like Archon of Cruelty for free. It blends disruptive interaction with efficient tutoring to bypass opponent defenses and close games quickly. The W/U/B color identity provides robust card advantage and board control to protect the reanimation engine.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 16,
+      "cards": [
+        "Archon of Cruelty",
+        "Faithful Mending",
+        "Psychic Frog",
+        "Quantum Riddler"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 7,
+      "cards": [
+        "Meticulous Archive",
+        "Shadowy Backstreet",
+        "Thoughtseize",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 16,
+      "cards": [
+        "Flooded Strand",
+        "Marsh Flats",
+        "Polluted Delta",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Archon of Cruelty"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 23,
+      "cards": [
+        "Archon of Cruelty",
+        "Emperor of Bones",
+        "Psychic Frog",
+        "Quantum Riddler",
+        "Solitude",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 27,
+      "cards": [
+        "Archon of Cruelty",
+        "Ephemerate",
+        "Force of Despair",
+        "Persist",
+        "Prismatic Ending",
+        "Psychic Frog",
+        "Wrath of the Skies"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 7,
+      "cards": [
+        "Archon of Cruelty",
+        "Force of Despair"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 8,
+      "cards": [
+        "Consign to Memory",
+        "Force of Negation"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 8
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Thoughtseize"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Psychic Frog"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 26,
+      "cards": [
+        "Archon of Cruelty",
+        "Emperor of Bones",
+        "Faithful Mending",
+        "Force of Negation",
+        "Meticulous Archive",
+        "Persist",
+        "Psychic Frog",
+        "Shadowy Backstreet",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 8,
+      "cards": [
+        "Archon of Cruelty",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 16,
+      "cards": [
+        "Ephemerate",
+        "Faithful Mending",
+        "Persist",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Thoughtseize"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Archon of Cruelty"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Thoughtseize"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 18,
+      "cards": [
+        "Flooded Strand",
+        "Godless Shrine",
+        "Hallowed Fountain",
+        "Marsh Flats",
+        "Meticulous Archive",
+        "Polluted Delta",
+        "Shadowy Backstreet",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Flooded Strand",
+        "Godless Shrine",
+        "Hallowed Fountain",
+        "Island",
+        "Marsh Flats",
+        "Meticulous Archive",
+        "Plains",
+        "Polluted Delta",
+        "Shadowy Backstreet",
+        "Swamp",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.38
+  },
+  "dual_role_cards": [
+    {
+      "card": "Archon of Cruelty",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "payoff_cards",
+        "reanimation_targets",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emperor of Bones",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ephemerate",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faithful Mending",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Despair",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marsh Flats",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Persist",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Psychic Frog",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quantum Riddler",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shadowy Backstreet",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "protection",
+        "reanimation_targets",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Thoughtseize until you see a key threat or need to tutor for a reanimation spell",
+    "Flash Archon of Cruelty on the opponent's turn to clear their board before they can attack or cast spells",
+    "Use Emeritus of Ideation to tutor for reanimation spells only when you have the mana and graveyard targets ready",
+    "Prioritize keeping reanimation spells in hand to respond to sweepers or board wipes",
+    "Common mistake: Overcommitting to reanimation without protecting the threat or checking for sweepers."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap creatures to fuel the graveyard and apply early pressure"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Thoughtseize to remove key threats or tutor for reanimation pieces"
+    },
+    {
+      "trigger": "early game",
+      "line": "Set up mana efficiently while holding up interaction for aggro or control"
+    }
+  ],
+  "kill_priority": [
+    "Thoughtseize",
+    "Archon of Cruelty",
+    "Emperor of Bones",
+    "Psychic Frog",
+    "Quantum Riddler",
+    "Solitude"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Force of Negation",
+    "Thoughtseize",
+    "Archon of Cruelty",
+    "Ephemerate",
+    "Force of Despair",
+    "Persist",
+    "Prismatic Ending"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/esper-reanimator.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

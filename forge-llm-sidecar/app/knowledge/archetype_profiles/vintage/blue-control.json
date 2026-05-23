@@ -1,0 +1,485 @@
+{
+  "schema_version": 1,
+  "name": "Blue Control",
+  "format": "vintage",
+  "colors": [
+    "W",
+    "U"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "This White/Blue control deck stabilizes games through efficient removal and recursive value generation. It leverages Lurrus of the Dream-Den to repeatedly cast Swords to Plowshares and replay resilient threats like Thing in the Ice. The strategy focuses on outlasting opponents by maintaining board control and converting card advantage into lethal damage.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 18,
+      "cards": [
+        "Ancestral Recall",
+        "Brainstorm",
+        "Dress Down",
+        "Gitaxian Probe",
+        "Lurrus of the Dream-Den",
+        "L\u00f3rien Revealed",
+        "Mishra's Bauble",
+        "Soul-Guide Lantern",
+        "Swords to Plowshares",
+        "Treasure Cruise",
+        "Urza's Saga",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Dig Through Time",
+        "Grafdigger's Cage",
+        "Mishra's Bauble"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 6,
+      "cards": [
+        "Flooded Strand",
+        "L\u00f3rien Revealed",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 23,
+      "cards": [
+        "Containment Priest",
+        "Empty-Shrine Kannushi",
+        "Lavinia, Azorius Renegade",
+        "Lurrus of the Dream-Den",
+        "Mox Jet",
+        "Mox Pearl",
+        "Mox Sapphire",
+        "Sink into Stupor",
+        "Snapcaster Mage",
+        "Swords to Plowshares",
+        "Tamiyo, Inquisitive Student",
+        "Time Walk"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 14,
+      "cards": [
+        "March of Otherworldly Light",
+        "Seal of Cleansing",
+        "Soul-Guide Lantern",
+        "Strip Mine",
+        "Swords to Plowshares",
+        "The Tabernacle at Pendrell Vale",
+        "Wasteland"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "The Tabernacle at Pendrell Vale"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 15,
+      "cards": [
+        "Annul",
+        "Flusterstorm",
+        "Force of Negation",
+        "Force of Will",
+        "Lurrus of the Dream-Den",
+        "Mental Misstep",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Empty-Shrine Kannushi"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Dig Through Time",
+        "Force of Negation",
+        "Grafdigger's Cage",
+        "Lurrus of the Dream-Den",
+        "Snapcaster Mage",
+        "Soul-Guide Lantern",
+        "Swords to Plowshares",
+        "Treasure Cruise"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 8,
+      "cards": [
+        "Dig Through Time",
+        "Lurrus of the Dream-Den",
+        "Snapcaster Mage",
+        "Swords to Plowshares",
+        "Treasure Cruise"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 5,
+      "cards": [
+        "Lurrus of the Dream-Den",
+        "Swords to Plowshares"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Lurrus of the Dream-Den",
+        "Swords to Plowshares"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "hate_pieces": {
+      "target_count": 13,
+      "cards": [
+        "Dismember",
+        "Gitaxian Probe",
+        "Grafdigger's Cage",
+        "Lavinia, Azorius Renegade",
+        "Pithing Needle",
+        "Stony Silence",
+        "Swords to Plowshares"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Black Lotus",
+        "Flooded Strand",
+        "Snow-Covered Plains",
+        "Strip Mine",
+        "Swords to Plowshares",
+        "The Tabernacle at Pendrell Vale",
+        "Tundra",
+        "Urza's Saga",
+        "Wasteland"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 17,
+      "cards": [
+        "Flooded Strand",
+        "Island",
+        "Snow-Covered Plains",
+        "Strip Mine",
+        "The Tabernacle at Pendrell Vale",
+        "Tundra",
+        "Urza's Saga",
+        "Wasteland"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 1
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.35
+  },
+  "dual_role_cards": [
+    {
+      "card": "Dig Through Time",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Empty-Shrine Kannushi",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gitaxian Probe",
+      "roles": [
+        "card_advantage",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lavinia, Azorius Renegade",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lurrus of the Dream-Den",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mishra's Bauble",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snapcaster Mage",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Plains",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strip Mine",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Swords to Plowshares",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Tabernacle at Pendrell Vale",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Treasure Cruise",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tundra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up white mana for Swords to Plowshares before committing to attacks",
+    "Trigger Thing in the Ice's ability only when you have a way to save it or trade favorably",
+    "Use Lurrus to replay Swords before replaying creatures to maximize board control",
+    "Thing in the Ice dies to Swords to Plowshares, so don't cast it into your own removal.",
+    "Lurrus only recurs 2-mana or less permanents, so plan your graveyard accordingly."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and hold up white mana for Swords to Plowshares"
+    },
+    {
+      "trigger": "early game",
+      "line": "Neutralize early threats to prevent being overwhelmed"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize drawing into Lurrus to establish your recursion engine"
+    }
+  ],
+  "kill_priority": [
+    "Lurrus of the Dream-Den",
+    "Swords to Plowshares",
+    "Containment Priest",
+    "Empty-Shrine Kannushi",
+    "Lavinia, Azorius Renegade",
+    "Mox Jet",
+    "Mox Pearl",
+    "Mox Sapphire"
+  ],
+  "interaction_to_disrupt": [
+    "Annul",
+    "Flusterstorm",
+    "Force of Negation",
+    "Force of Will",
+    "Lurrus of the Dream-Den",
+    "Mental Misstep",
+    "Spell Pierce",
+    "Empty-Shrine Kannushi"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/blue-control.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

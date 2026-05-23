@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands containing Moxite paired with a one-drop threat or spell",
       "Hands with two or more cheap interaction spells",
-      "Hands featuring early pump or removal to protect a turn-one play"
+      "Hands featuring early pump or removal to protect a turn-one play",
+      "Keep hands with 2-3 lands (prioritizing duals/fixing), at least one Glint Hawk or Lembas, and a Galvanic Blast or early creature."
     ],
     "mulligan_criteria": [
       "Hands lacking early mana acceleration or one-drops",
       "Hands with only high-cost cards or no interaction",
-      "Hands missing a clear path to turn-one or turn-two pressure"
+      "Hands missing a clear path to turn-one or turn-two pressure",
+      "Mulligan on 1-land hands, triple-colored non-fixing lands, or hands with only removal and no early plays."
     ],
     "examples": []
   },
@@ -25,17 +27,29 @@
     "early_game": [
       "Play Moxite on turn one to enable turn-two threats",
       "Deploy Glint Hawk early to establish flying pressure",
-      "Use Galvanic Blast to remove key blockers or chip away at life total"
+      "Use Galvanic Blast to remove key blockers or chip away at life total",
+      "Turn 1: Play a land, cast Glint Hawk or Lembas if mana allows.",
+      "Turn 2: Play a second land, follow up with Glint Hawk (sacrifice for draw) or Lembas (pay upkeep for food), or play a cheap threat.",
+      "Prioritize fixing lands to enable WURB spells."
     ],
     "mid_game": [
       "Cast Lembas to pump existing threats and push through blockers",
       "Leverage the four-color palette for versatile cheap interaction",
-      "Maintain board presence by cycling through low-cost spells and artifacts"
+      "Maintain board presence by cycling through low-cost spells and artifacts",
+      "Use Glint Hawk to filter and maintain hand size",
+      "avoid over-sacrificing when ahead.",
+      "Leverage Lembas food tokens for splash colors or late-game spells.",
+      "Keep Galvanic Blast for key threats or finishers, not just chump blockers.",
+      "Commit threats when you have removal or card advantage to protect them.",
+      "Hold back if the opponent has sweepers or countermagic."
     ],
     "late_game": [
       "Use accumulated pump effects to push lethal combat damage",
       "Transition to value by trading efficiently with Galvanic Blast",
-      "Stabilize with resilient creatures and finish with direct damage"
+      "Stabilize with resilient creatures and finish with direct damage",
+      "Galvanic Blast for direct damage or clearing the final blocker, Glint Hawk for card advantage to find the win condition, and Lembas-generated mana for big spells.",
+      "Combine flying threats with removal to close.",
+      "Go all-in when you have card advantage, the board is clear or you control key threats, and the opponent has no sweepers or countermagic in hand."
     ]
   },
   "key_cards": [
@@ -64,7 +78,13 @@
     "Hold Galvanic Blast in hand until you identify a key threat to remove or a moment to chip damage",
     "Cast Lembas on your turn to maximize combat damage rather than using it defensively",
     "Prioritize playing Moxite before pumping to ensure you have enough mana for both spells",
-    "Use the four-color interaction suite to answer opponent's plays while maintaining your own board presence"
+    "Use the four-color interaction suite to answer opponent's plays while maintaining your own board presence",
+    "Glint Hawk sacrifice is a key resource",
+    "use it to dig for answers or finishers, but avoid sacrificing it when you are already ahead.",
+    "Lembas requires careful mana management",
+    "do not pay the upkeep cost if you are low on life or need the mana for interaction.",
+    "Galvanic Blast can target two creatures for 2 damage each, making it excellent for trading with multiple small threats.",
+    "Watch out for sacrifice outlets in the metagame that can punish Glint Hawk."
   ],
   "matchups": [
     {
@@ -93,16 +113,35 @@
         "Removal spells",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Glint Hawk to dig for counterspell protection or cheap threats. Cast Galvanic Blast in response to their counters if needed. Do not overcommit to one spell; spread threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Glint Hawk and cheap spells. Use Galvanic Blast to remove their ramp creatures or finish them before they hit their big mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize Glint Hawk to draw into more answers. Use Galvanic Blast to remove their Glint Hawks or key threats. Control the board with efficient trades and sideboard in additional disruption.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspells",
     "Board wipes",
     "High-toughness creatures",
-    "Direct damage spells"
+    "Direct damage spells",
+    "Watch for sweepers (Wrath of God, Cyclonic Rift), targeted removal (Path, Lightning), and combo pieces.",
+    "Note when opponents tap out for big spells",
+    "that is your window to attack or cast Galvanic Blast."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:41:00+00:00",
     "model": "local-model",
@@ -118,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

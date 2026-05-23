@@ -1,0 +1,121 @@
+{
+  "archetype": "4c Scapeshift",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/4c-scapeshift.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Aftermath Analyst"
+    },
+    {
+      "qty": 4,
+      "name": "Arboreal Grazer"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Archway"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Castle Garenbrig"
+    },
+    {
+      "qty": 4,
+      "name": "Crumbling Vestige"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 1,
+      "name": "Glasspool Mimic"
+    },
+    {
+      "qty": 3,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 1,
+      "name": "Lessons from Life"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Field"
+    },
+    {
+      "qty": 4,
+      "name": "Lumra, Bellow of the Woods"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 4,
+      "name": "Port of Karfell"
+    },
+    {
+      "qty": 4,
+      "name": "Scapeshift"
+    },
+    {
+      "qty": 4,
+      "name": "Spelunking"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 1,
+      "name": "Terror of the Peaks"
+    },
+    {
+      "qty": 4,
+      "name": "The Wandering Minstrel"
+    },
+    {
+      "qty": 4,
+      "name": "Underground Mortuary"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 2,
+      "name": "Binding the Old Gods"
+    },
+    {
+      "qty": 4,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Emrakul, the Promised End"
+    },
+    {
+      "qty": 1,
+      "name": "Kaervek, the Spiteful"
+    },
+    {
+      "qty": 2,
+      "name": "Lessons from Life"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Leviathan"
+    }
+  ]
+}

@@ -12,27 +12,43 @@
     "keep_criteria": [
       "Hands with two or more lands and an early attacker",
       "Hands containing Galvanic Blast for early interaction",
-      "Hands with Wrenn's Resolve paired with a creature"
+      "Hands with Wrenn's Resolve paired with a creature",
+      "Keep hands with 2-3 lands, at least one turn-1 spell (Galvanic Blast or a cheap rally creature), and a way to chain spells (instants/sorceries).",
+      "Keep 3-card hands only if they contain a complete turn-1 package (land + spell + rally enabler)."
     ],
     "mulligan_criteria": [
       "Hands with no lands or only one land",
       "Hands full of pump spells without creatures to target",
-      "Hands lacking early damage or interaction"
+      "Hands lacking early damage or interaction",
+      "Mulligan to 4+ cards if missing lands or turn-1 play."
     ],
     "examples": []
   },
   "game_plan": {
     "early_game": [
       "Play lands and attack with cheap creatures to apply immediate pressure.",
-      "Use Galvanic Blast to remove early blockers or chip away at the opponent's life total."
+      "Use Galvanic Blast to remove early blockers or chip away at the opponent's life total.",
+      "Turn 1: Play land, cast a cheap spell (Galvanic Blast for tempo or a rally creature).",
+      "Turn 2: Play land, cast another spell to trigger rally, develop board.",
+      "Prioritize playing lands on curve to enable spell density.",
+      "Sequence instants to maximize rally triggers before combat."
     ],
     "mid_game": [
       "Cast Wrenn's Resolve on Goblin Bushwhacker or other attackers to push through blockers.",
-      "Continue attacking to grow Bushwhacker with +1/+1 counters while maintaining board presence."
+      "Continue attacking to grow Bushwhacker with +1/+1 counters while maintaining board presence.",
+      "Preserve instant-speed spells for rally triggers and interaction.",
+      "Don't overextend into sweepers.",
+      "Track graveyard if relevant, but focus on hand density for spell chaining.",
+      "Commit threats when you have enough spells to trigger rally and survive interaction.",
+      "Hold back instants for protection or finishing blows.",
+      "Use Wrenn's Resolve to stabilize or close games."
     ],
     "late_game": [
       "Leverage a large Bushwhacker with trample to close out the game.",
-      "Use remaining removal to clear late-game threats and secure the win."
+      "Use remaining removal to clear late-game threats and secure the win.",
+      "Wrenn's Resolve planeswalker abilities, Galvanic Blast chains for lethal, or a fully buffed Goblin Bushwhacker.",
+      "When you have 3+ spells in hand, a land drop, and the board state allows it.",
+      "Go all-in if opponent has no sweepers or counters."
     ]
   },
   "key_cards": [
@@ -55,7 +71,12 @@
   "sequencing_tips": [
     "Hold up Galvanic Blast until you see the opponent's response to avoid wasting it on a trivial blocker.",
     "Cast Wrenn's Resolve after the opponent declares blockers to ensure the pumped creature deals maximum damage.",
-    "Attack with Bushwhacker before casting pump spells to trigger its counter ability first."
+    "Attack with Bushwhacker before casting pump spells to trigger its counter ability first.",
+    "Common mistake: Overcommitting to rally triggers without considering board state.",
+    "Always count spells in hand before casting.",
+    "Wrenn's Resolve is fragile",
+    "protect it or use it at end step.",
+    "Galvanic Blast can be used for both removal and damage, so prioritize based on board state."
   ],
   "matchups": [
     {
@@ -84,16 +105,35 @@
         "Card advantage engines",
         "Resilient blockers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast spells in response to their counters, use cheap spells to trigger rally before they can respond, sideboard in more uncounterable or redundant threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Play fast, use direct damage to interrupt ramp steps, sideboard in artifact destruction or early interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Race for life total, track hand size, prioritize discard or direct damage, win the spell-chaining race.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipe spells",
     "Efficient one-mana removal",
     "Wide creature spreads",
-    "Life gain effects"
+    "Life gain effects",
+    "Watch for sweepers, counters, or removal.",
+    "Note when opponents tap out for big plays.",
+    "Track artifact counts (vs Affinity) or hand size (vs Madness)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:12:53+00:00",
     "model": "local-model",
@@ -122,6 +162,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

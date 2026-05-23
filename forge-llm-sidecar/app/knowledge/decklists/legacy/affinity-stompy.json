@@ -1,0 +1,125 @@
+{
+  "archetype": "Affinity Stompy",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/affinity-stompy.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Chalice of the Void"
+    },
+    {
+      "qty": 4,
+      "name": "Emry, Lurker of the Loch"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Kappa Cannoneer"
+    },
+    {
+      "qty": 1,
+      "name": "Krang, Master Mind"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 4,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 3,
+      "name": "Patchwork Automaton"
+    },
+    {
+      "qty": 4,
+      "name": "Pinnacle Emissary"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 4,
+      "name": "Seat of the Synod"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowspear"
+    },
+    {
+      "qty": 3,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 1,
+      "name": "Skateboard"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 3,
+      "name": "Urza's Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Aether Spellbomb"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 2,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 2,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 1,
+      "name": "Lavinia, Azorius Renegade"
+    },
+    {
+      "qty": 3,
+      "name": "Metallic Rebuke"
+    },
+    {
+      "qty": 2,
+      "name": "Tormod's Crypt"
+    }
+  ]
+}

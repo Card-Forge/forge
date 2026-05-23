@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "name": "Hardened Scales",
+  "format": "modern",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Arcbound Ravager",
+    "Arcbound Worker",
+    "Hangarback Walker",
+    "Hardened Scales",
+    "Haywire Mite",
+    "Pithing Needle",
+    "Skateboard",
+    "The Ozolith"
+  ],
+  "interaction_to_disrupt": [
+    "Darksteel Citadel",
+    "Heroic Intervention",
+    "Tamiyo's Safekeeping",
+    "Veil of Summer",
+    "Agatha's Soul Cauldron",
+    "Boseiju, Who Endures",
+    "Force of Vigor",
+    "Haywire Mite"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 9,
+      "cards": [
+        "Terrasymbiosis",
+        "Urza's Saga",
+        "Veil of Summer",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 1,
+      "cards": [
+        "Grafdigger's Cage"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Urza's Saga"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 25,
+      "cards": [
+        "Arcbound Ravager",
+        "Arcbound Worker",
+        "Hangarback Walker",
+        "Hardened Scales",
+        "Haywire Mite",
+        "Pithing Needle",
+        "Skateboard",
+        "The Ozolith",
+        "Walking Ballista",
+        "Welding Jar",
+        "Zabaz, the Glimmerwasp"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 25,
+      "cards": [
+        "Agatha's Soul Cauldron",
+        "Boseiju, Who Endures",
+        "Force of Vigor",
+        "Haywire Mite",
+        "Inkmoth Nexus",
+        "Nature's Claim",
+        "Tamiyo's Safekeeping",
+        "The Ooze",
+        "Walking Ballista",
+        "Whipflare",
+        "Zabaz, the Glimmerwasp"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Darksteel Citadel",
+        "Heroic Intervention",
+        "Tamiyo's Safekeeping",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 3
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Agatha's Soul Cauldron",
+        "Grafdigger's Cage",
+        "Malevolent Rumble",
+        "The Ooze"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Damping Sphere",
+        "Dismember",
+        "Grafdigger's Cage"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 25,
+      "cards": [
+        "Agatha's Soul Cauldron",
+        "Boseiju, Who Endures",
+        "Darksteel Citadel",
+        "Grove of the Burnwillows",
+        "Inkmoth Nexus",
+        "Mox Opal",
+        "Pendelhaven",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 20,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Darksteel Citadel",
+        "Forest",
+        "Grove of the Burnwillows",
+        "Inkmoth Nexus",
+        "Pendelhaven",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.42
+  },
+  "dual_role_cards": [
+    {
+      "card": "Agatha's Soul Cauldron",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darksteel Citadel",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grove of the Burnwillows",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haywire Mite",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inkmoth Nexus",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pendelhaven",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tamiyo's Safekeeping",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Ooze",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veil of Summer",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Walking Ballista",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zabaz, the Glimmerwasp",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/hardened-scales.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

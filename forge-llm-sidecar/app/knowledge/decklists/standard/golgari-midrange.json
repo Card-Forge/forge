@@ -1,0 +1,149 @@
+{
+  "archetype": "Golgari Midrange",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/golgari-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Cornucopia"
+    },
+    {
+      "qty": 1,
+      "name": "Assassin's Trophy"
+    },
+    {
+      "qty": 1,
+      "name": "Ba Sing Se"
+    },
+    {
+      "qty": 2,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 3,
+      "name": "Blooming Marsh"
+    },
+    {
+      "qty": 4,
+      "name": "Deadly Cover-Up"
+    },
+    {
+      "qty": 3,
+      "name": "Deathcap Glade"
+    },
+    {
+      "qty": 1,
+      "name": "Demolition Field"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Fountainport"
+    },
+    {
+      "qty": 1,
+      "name": "Maelstrom Pulse"
+    },
+    {
+      "qty": 3,
+      "name": "Mosswood Dreadknight"
+    },
+    {
+      "qty": 4,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Professor Dellian Fel"
+    },
+    {
+      "qty": 1,
+      "name": "Realm of Koh"
+    },
+    {
+      "qty": 2,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 2,
+      "name": "Restless Cottage"
+    },
+    {
+      "qty": 1,
+      "name": "Scavenger Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 4,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "The End"
+    },
+    {
+      "qty": 3,
+      "name": "Unholy Annex // Ritual Chamber"
+    },
+    {
+      "qty": 3,
+      "name": "Unstoppable Slasher"
+    },
+    {
+      "qty": 4,
+      "name": "Wastewood Verge"
+    },
+    {
+      "qty": 3,
+      "name": "Withering Curse"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Ancient Vendetta"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Heritage Reclamation"
+    },
+    {
+      "qty": 1,
+      "name": "Maelstrom Pulse"
+    },
+    {
+      "qty": 2,
+      "name": "Outrageous Robbery"
+    },
+    {
+      "qty": 2,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "The End"
+    },
+    {
+      "qty": 1,
+      "name": "Torpor Orb"
+    },
+    {
+      "qty": 1,
+      "name": "Ugin, Eye of the Storms"
+    },
+    {
+      "qty": 1,
+      "name": "Vicious Rivalry"
+    }
+  ]
+}

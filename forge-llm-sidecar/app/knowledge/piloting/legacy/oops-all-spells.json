@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands that can execute the full combo on turn 1",
       "Hands containing the combo, protection, and sufficient mana",
-      "Hands that can set up a turn 2 combo under Pact of Negation protection (only in rare, known matchups)"
+      "Hands that can set up a turn 2 combo under Pact of Negation protection (only in rare, known matchups)",
+      "Keep hands with 2+ mana sources (including cantrips/artifacts like Lotus Petal, Mishra's Bauble, or Mox Opal) and at least one key piece (Agadeem's Awakening, Karn, Cauldron Familiar, or Balustrade Spy)."
     ],
     "mulligan_criteria": [
       "Hands that cannot combo on turn 1",
       "Hands lacking protection against Thoughtseize but still attempting to combo (highly risky)",
-      "Hands that do not combo on turn 1 and are not cutting to 4 cards"
+      "Hands that do not combo on turn 1 and are not cutting to 4 cards",
+      "Mulligan on 3+ lands with no spells, or hands with only one mana source and no draw/disruption spells."
     ],
     "examples": [
       {
@@ -62,17 +64,29 @@
     "early_game": [
       "Mulligan aggressively until a turn 1 combo hand is found",
       "Generate exactly 4 mana (including 1 black) using Spirit Guides, Rituals, Lotus Petal, and MDFCs",
-      "Play Balustrade Spy or activate Undercity Informer to mill the entire deck"
+      "Play Balustrade Spy or activate Undercity Informer to mill the entire deck",
+      "Turn 1: Play a land, cast Lotus Petal/Mishra's Bauble for mana, or cast Thoughtseize/Inquisition to disrupt.",
+      "Turn 2: Cast Mox Opal/Balustrade Spy, draw cards, and start assembling the spell engine.",
+      "Sequence lands carefully to ensure you can cast multiple instant-speed spells by turn 3-4."
     ],
     "mid_game": [
       "Sacrifice Narcomoebas and Bridge from Below tokens to cast Cabal Therapy",
       "Use Cabal Therapy to locate Dread Return and Thassa's Oracle",
-      "Cast Dread Return for flashback to return Thassa's Oracle from the graveyard"
+      "Cast Dread Return for flashback to return Thassa's Oracle from the graveyard",
+      "Prioritize keeping cheap artifacts and discard in hand for protection.",
+      "Use Cauldron Familiar to flashback spells from the graveyard to fuel Balustrade Spy and Agadeem's Awakening.",
+      "Don't overcommit to the graveyard if facing Rest in Peace",
+      "pivot to hand disruption.",
+      "Hold back on casting Agadeem's Awakening until you have enough cheap spells in hand/graveyard to draw cards and generate tokens safely.",
+      "Use discard and spot interaction to clear threats before going off."
     ],
     "late_game": [
       "Win immediately when Thassa's Oracle enters the battlefield",
       "Use Memory's Journey flashback to reshuffle the graveyard and attempt a second combo if disrupted",
-      "Use Jack-o'-Lantern to filter mana for flashback costs or Oracle's second blue mana"
+      "Use Jack-o'-Lantern to filter mana for flashback costs or Oracle's second blue mana",
+      "Agadeem's Awakening is the primary finisher, drawing cards and creating Saproling tokens to win via combat or overwhelming board state.",
+      "Karn, the Great Creator can also close games by making artifacts cost less or tutoring for pieces.",
+      "Go all-in when you have 3+ mana sources, at least one cheap artifact or discard, and a clear path to casting Agadeem's Awakening without being countered or disrupted."
     ]
   },
   "key_cards": [
@@ -161,7 +175,13 @@
     "Generate exactly 4 mana (including 1 black) before activating the mill trigger",
     "Play Pact of Negation or Thoughtseize before or during the combo to bypass opponent's interaction",
     "Sacrifice Narcomoebas and Bridge from Below tokens in sequence to cast multiple Cabal Therapies",
-    "Use Jack-o'-Lantern's ability to filter mana for Memory's Journey flashback or Thassa's Oracle's second blue mana"
+    "Use Jack-o'-Lantern's ability to filter mana for Memory's Journey flashback or Thassa's Oracle's second blue mana",
+    "Common mistake: Overcommitting to the graveyard against Rest in Peace.",
+    "Always have a backup plan with hand disruption.",
+    "Balustrade Spy is crucial for card advantage, so protect it.",
+    "Agadeem's Awakening wins via combat if you have enough Saprolings, so don't forget to attack.",
+    "Watch for Leyline of the Void in opening hand",
+    "if opponent has it, consider mulliganing or playing around it with discard."
   ],
   "matchups": [
     {
@@ -204,6 +224,26 @@
         "Painter's Servant",
         "Pyroblast"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap spells to out-value counters, cast Agadeem's Awakening as the last spell in a chain, or use discard to remove counterspells from hand. Flusterstorm can also protect your key spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and cheap artifacts. Use Tormod's Crypt or Surgical Extraction to remove their mana rocks. Combo off quickly before they can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Thoughtseize/Inquisition to remove key threats, Flusterstorm/Spell Pierce to protect your combo, and Tormod's Crypt for graveyard decks. Stabilize and go off on turn 3-4.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the interaction war with Flusterstorm, Spell Pierce, and Thoughtseize. Prioritize graveyard hate (Tormod's Crypt) to disrupt their recursion. Out-value them with better sequencing and card advantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -215,10 +255,12 @@
     "Chalice of the Void",
     "Vexing Bauble",
     "Pyroblast",
-    "Painter's Servant"
+    "Painter's Servant",
+    "Watch for counterspells (Flusterstorm, Spell Pierce, Force of Will), graveyard hate (Rest in Peace, Leyline of the Void, Tormod's Crypt), and board wipes."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-oops-all-spells-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T07:16:27+00:00",
     "model": "local-model",
@@ -236,6 +278,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

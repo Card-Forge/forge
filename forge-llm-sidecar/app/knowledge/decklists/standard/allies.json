@@ -1,0 +1,125 @@
+{
+  "archetype": "Allies",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/allies.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Aang, Swift Savior"
+    },
+    {
+      "qty": 2,
+      "name": "Aang, at the Crossroads"
+    },
+    {
+      "qty": 3,
+      "name": "Allies at Last"
+    },
+    {
+      "qty": 1,
+      "name": "Boiling Rock Rioter"
+    },
+    {
+      "qty": 4,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 3,
+      "name": "Celestial Reunion"
+    },
+    {
+      "qty": 4,
+      "name": "Earth King's Lieutenant"
+    },
+    {
+      "qty": 4,
+      "name": "Earth Kingdom Protectors"
+    },
+    {
+      "qty": 4,
+      "name": "Earthen Ally"
+    },
+    {
+      "qty": 2,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Great Divide Guide"
+    },
+    {
+      "qty": 2,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 4,
+      "name": "Jasmine Dragon Tea Shop"
+    },
+    {
+      "qty": 3,
+      "name": "Katara, the Fearless"
+    },
+    {
+      "qty": 2,
+      "name": "Mai, Scornful Striker"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "South Pole Voyager"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 2,
+      "name": "Temple Garden"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Boiling Rock Rioter"
+    },
+    {
+      "qty": 1,
+      "name": "Chomping Changeling"
+    },
+    {
+      "qty": 1,
+      "name": "Earth Kingdom Jailer"
+    },
+    {
+      "qty": 1,
+      "name": "Hakoda, Selfless Commander"
+    },
+    {
+      "qty": 1,
+      "name": "Mai, Scornful Striker"
+    },
+    {
+      "qty": 1,
+      "name": "Scout for Survivors"
+    },
+    {
+      "qty": 2,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 3,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 3,
+      "name": "Winnowing"
+    }
+  ]
+}

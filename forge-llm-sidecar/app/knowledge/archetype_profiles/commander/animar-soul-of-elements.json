@@ -1,0 +1,936 @@
+{
+  "schema_version": 1,
+  "name": "Animar, Soul of Elements",
+  "format": "commander",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 100,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Animar, Soul of Elements",
+    "Beast Whisperer",
+    "Glimpse of Nature",
+    "Hullbreaker Horror",
+    "Inga and Esika",
+    "Primordial Sage",
+    "Spider Manifestation",
+    "Aether Channeler"
+  ],
+  "interaction_to_disrupt": [
+    "Glen Elendra Archmage",
+    "Sister of Silence",
+    "Stratus Dancer",
+    "Stubborn Denial",
+    "Animar, Soul of Elements",
+    "Boltbender",
+    "Hullbreaker Horror",
+    "Lord of Change"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 15,
+      "cards": [
+        "Aether Channeler",
+        "Anticausal Vestige",
+        "Beast Whisperer",
+        "Cloud of Faeries",
+        "Glimpse of Nature",
+        "Guardian Project",
+        "Hydroid Krasis",
+        "Inga and Esika",
+        "Lord of Change",
+        "Mawloc",
+        "Mulldrifter",
+        "Nulldrifter",
+        "Primordial Sage",
+        "Soul of the Harvest",
+        "Zoanthrope"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Augur of Autumn",
+        "Kinnan, Bonder Prodigy",
+        "Vizier of the Menagerie"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 2,
+      "cards": [
+        "Imperial Recruiter",
+        "Spellseeker"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 65,
+      "cards": [
+        "Aether Channeler",
+        "Ainok Survivalist",
+        "Ancestral Statue",
+        "Animar, Soul of Elements",
+        "Anticausal Vestige",
+        "Augur of Autumn",
+        "Barkchannel Pathway",
+        "Beast Whisperer",
+        "Beastcaller Savant",
+        "Biophagus",
+        "Birds of Paradise",
+        "Bolt Bend",
+        "Boltbender",
+        "Broodguard Elite",
+        "Cloud of Faeries",
+        "Cragcrown Pathway",
+        "Craterhoof Behemoth",
+        "Den Protector",
+        "Elvish Mystic",
+        "Fanatic of Rhonas",
+        "Fyndhorn Elves",
+        "Germinating Wurm",
+        "Glen Elendra Archmage",
+        "Haywire Mite",
+        "Hideous Taskmaster",
+        "Hullbreaker Horror",
+        "Hydroelectric Specimen",
+        "Hydroid Krasis",
+        "Imperial Recruiter",
+        "Inga and Esika",
+        "Kinnan, Bonder Prodigy",
+        "Llanowar Elves",
+        "Llanowar Loamspeaker",
+        "Lord of Change",
+        "Mawloc",
+        "Mulldrifter",
+        "Nulldrifter",
+        "Ornithopter of Paradise",
+        "Peregrine Drake",
+        "Phyrexian Metamorph",
+        "Primordial Sage",
+        "Purphoros, God of the Forge",
+        "Rattleclaw Mystic",
+        "Riverglide Pathway",
+        "Shrieking Drake",
+        "Simian Simulacrum",
+        "Sister of Silence",
+        "Slash, Reptile Rampager",
+        "Slip Out the Back",
+        "Smirking Spelljacker",
+        "Sol Ring",
+        "Soul of the Harvest",
+        "Spellseeker",
+        "Spider Manifestation",
+        "Stratus Dancer",
+        "Sylvan Caryatid",
+        "Sylvan Safekeeper",
+        "Temur Sabertooth",
+        "The Ozolith",
+        "Tishana's Tidebinder",
+        "Treasonous Ogre",
+        "Vizier of the Menagerie",
+        "Walking Ballista",
+        "Weird Harvest",
+        "Zoanthrope"
+      ],
+      "mainboard_count": 65,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Ainok Survivalist",
+        "Boseiju, Who Endures",
+        "City of Brass",
+        "Den Protector",
+        "Haywire Mite",
+        "Hullbreaker Horror",
+        "Karplusan Forest",
+        "Otawara, Soaring City",
+        "Purphoros, God of the Forge",
+        "Shivan Reef",
+        "Slash, Reptile Rampager",
+        "Smirking Spelljacker",
+        "Walking Ballista",
+        "Yavimaya Coast",
+        "Zoanthrope"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Glen Elendra Archmage",
+        "Sister of Silence",
+        "Stratus Dancer",
+        "Stubborn Denial"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Animar, Soul of Elements",
+        "Boltbender",
+        "Hullbreaker Horror",
+        "Lord of Change",
+        "Purphoros, God of the Forge",
+        "Sylvan Caryatid",
+        "Temur Sabertooth",
+        "Zoanthrope"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 4,
+      "cards": [
+        "Den Protector",
+        "Fanatic of Rhonas",
+        "Guardian Project",
+        "Simian Simulacrum"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 11,
+      "cards": [
+        "Aether Channeler",
+        "Ancestral Statue",
+        "Cloudstone Curio",
+        "Den Protector",
+        "Fanatic of Rhonas",
+        "Glen Elendra Archmage",
+        "Hullbreaker Horror",
+        "Otawara, Soaring City",
+        "Shrieking Drake",
+        "Simian Simulacrum",
+        "Temur Sabertooth"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 7,
+      "cards": [
+        "Animar, Soul of Elements",
+        "Beast Whisperer",
+        "Glimpse of Nature",
+        "Hullbreaker Horror",
+        "Inga and Esika",
+        "Primordial Sage",
+        "Spider Manifestation"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 31,
+      "cards": [
+        "Abundant Countryside",
+        "Ancient Ziggurat",
+        "Beastcaller Savant",
+        "Biophagus",
+        "Birds of Paradise",
+        "Boseiju, Who Endures",
+        "Breeding Pool",
+        "City of Brass",
+        "Command Beacon",
+        "Command Tower",
+        "Dreamroot Cascade",
+        "Exotic Orchard",
+        "Fanatic of Rhonas",
+        "Inga and Esika",
+        "Karplusan Forest",
+        "Kinnan, Bonder Prodigy",
+        "Llanowar Loamspeaker",
+        "Ornithopter of Paradise",
+        "Otawara, Soaring City",
+        "Rejuvenating Springs",
+        "Rockfall Vale",
+        "Shivan Reef",
+        "Spider Manifestation",
+        "Spire Garden",
+        "Steam Vents",
+        "Stomping Ground",
+        "Stormcarved Coast",
+        "Sylvan Caryatid",
+        "Training Center",
+        "Yavimaya Coast",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 31,
+      "cards": [
+        "Abundant Countryside",
+        "Ancient Ziggurat",
+        "Boseiju, Who Endures",
+        "Breeding Pool",
+        "City of Brass",
+        "Command Beacon",
+        "Command Tower",
+        "Dreamroot Cascade",
+        "Exotic Orchard",
+        "Forest",
+        "Island",
+        "Karplusan Forest",
+        "Mountain",
+        "Otawara, Soaring City",
+        "Rejuvenating Springs",
+        "Rockfall Vale",
+        "Shivan Reef",
+        "Spire Garden",
+        "Steam Vents",
+        "Stomping Ground",
+        "Stormcarved Coast",
+        "Training Center",
+        "Yavimaya Coast",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.26
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abundant Countryside",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Aether Channeler",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ainok Survivalist",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancestral Statue",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Ziggurat",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Animar, Soul of Elements",
+      "roles": [
+        "engines",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Anticausal Vestige",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Augur of Autumn",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Beast Whisperer",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Beastcaller Savant",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Biophagus",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Birds of Paradise",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boltbender",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "City of Brass",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cloud of Faeries",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Beacon",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Den Protector",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dreamroot Cascade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fanatic of Rhonas",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glen Elendra Archmage",
+      "roles": [
+        "counterspells",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glimpse of Nature",
+      "roles": [
+        "card_advantage",
+        "engines"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guardian Project",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haywire Mite",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hullbreaker Horror",
+      "roles": [
+        "engines",
+        "protection",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroid Krasis",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Imperial Recruiter",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inga and Esika",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karplusan Forest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kinnan, Bonder Prodigy",
+      "roles": [
+        "dig_draw",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Llanowar Loamspeaker",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lord of Change",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mawloc",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mulldrifter",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nulldrifter",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ornithopter of Paradise",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Primordial Sage",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Purphoros, God of the Forge",
+      "roles": [
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rejuvenating Springs",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rockfall Vale",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shivan Reef",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shrieking Drake",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Simian Simulacrum",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sister of Silence",
+      "roles": [
+        "counterspells",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Slash, Reptile Rampager",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smirking Spelljacker",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul of the Harvest",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spellseeker",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spider Manifestation",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spire Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormcarved Coast",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stratus Dancer",
+      "roles": [
+        "counterspells",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sylvan Caryatid",
+      "roles": [
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temur Sabertooth",
+      "roles": [
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Training Center",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vizier of the Menagerie",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Walking Ballista",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya Coast",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya, Cradle of Growth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zoanthrope",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/animar-soul-of-elements.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

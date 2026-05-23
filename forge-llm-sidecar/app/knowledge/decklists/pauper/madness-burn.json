@@ -1,0 +1,101 @@
+{
+  "archetype": "Madness Burn",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/madness-burn.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Alms of the Vein"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 4,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 4,
+      "name": "Fiery Temper"
+    },
+    {
+      "qty": 4,
+      "name": "Grab the Prize"
+    },
+    {
+      "qty": 4,
+      "name": "Highway Robbery"
+    },
+    {
+      "qty": 4,
+      "name": "Jagged Barrens"
+    },
+    {
+      "qty": 4,
+      "name": "Kitchen Imp"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 8,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Rakdos Carnarium"
+    },
+    {
+      "qty": 4,
+      "name": "Sneaky Snacker"
+    },
+    {
+      "qty": 4,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Tectonic Hazard"
+    },
+    {
+      "qty": 4,
+      "name": "Vampire's Kiss"
+    },
+    {
+      "qty": 4,
+      "name": "Voldaren Epicure"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 2,
+      "name": "Cast into the Fire"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Withering"
+    },
+    {
+      "qty": 1,
+      "name": "Electrickery"
+    },
+    {
+      "qty": 2,
+      "name": "Extract a Confession"
+    },
+    {
+      "qty": 2,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 2,
+      "name": "Smash to Smithereens"
+    }
+  ]
+}

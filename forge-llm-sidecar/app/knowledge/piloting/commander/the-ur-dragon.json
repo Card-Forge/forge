@@ -1,0 +1,125 @@
+{
+  "archetype": "The Ur-Dragon",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "The deck aims to generate massive amounts of mana, cast a high-impact Dragon, and then chain together multiple Dragon spells to trigger The Ur-Dragon\u2019s ability, creating an exponentially growing army of flying, haste creatures to overwhelm opponents through combat or finish with a game-ending X-spell.",
+  "win_conditions": [
+    "The Ur-Dragon itself (once you have 5+ mana, cast it and follow up with 2+ Dragons for a lethal army), massive X-spells, or token doublers to swing combat."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, at least one mana acceleration piece (Sol Ring, Arcane Signet, or ramp spell), and an early-game Dragon or removal.",
+      "Keep any hand with The Ur-Dragon if you have 2+ mana sources."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 4+ lands with no acceleration, or 3+ acceleration with no lands."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring/Arcane Signet, or cast a cheap ramp spell.",
+      "Turn 2: Cast a 2-3 mana Dragon or another ramp piece.",
+      "If you have 4 mana, cast a cheap Dragon to start triggering The Ur-Dragon.",
+      "Prioritize fixing your mana base early to ensure you can cast 5-color spells by turn 4-5."
+    ],
+    "mid_game": [
+      "Hoard mana until you can cast a high-impact Dragon or a massive X-spell.",
+      "Use card draw to maintain hand size, as casting multiple Dragons per turn is key.",
+      "Manage your graveyard carefully",
+      "if you use exile effects, ensure you have recursion for key Dragons.",
+      "Avoid overcommitting to the board without protection or a clear win condition.",
+      "Commit threats when you have mana advantage or when the board is clear.",
+      "Hold back if opponents have sweepers or targeted removal.",
+      "Use flying and haste to bypass ground blockers."
+    ],
+    "late_game": [
+      "The Ur-Dragon itself (once you have 5+ mana, cast it and follow up with 2+ Dragons for a lethal army), massive X-spells, or token doublers to swing combat.",
+      "Go all-in when you have 10+ mana, a clear path to combat, and no immediate sweepers in play.",
+      "Commit when you can cast The Ur-Dragon and 2+ Dragons in a single turn, or when you have a guaranteed lethal with your current board state."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "The Ur-Dragon",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "The Ur-Dragon's ability triggers on casting, not entering, so you can cast Dragons from exile or the graveyard if you have recursion.",
+    "Avoid casting Dragons with X in your mana pool unless you're ready to commit",
+    "you can't change X after casting.",
+    "Flying and haste make your tokens highly evasive, but be wary of board wipes.",
+    "Always track opponents' mana to anticipate sweepers or counterspells.",
+    "Common mistake: overcommitting to the board without protection or a clear win condition, leading to a wiped board and no comeback."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips and cheap Dragons to trade up. Cast Dragons with haste or flying to bypass counters if possible. Use mana rocks to cast multiple spells in a turn, forcing counterspells to be spent on non-essential pieces. Consider bringing in protection or alternative win conditions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with flying Dragons and removal. Don't let them get to their massive finishers. Use board wipes to reset their board. If they out-ramp you, focus on card advantage and recursion to stay in the game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal and board wipes. Use flying Dragons to trade efficiently. Don't overextend; hold back mana for interaction. Once stabilized, pivot to your combo/finisher.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with cheap Dragons and cantrips to out-value their removal. Use card draw to out-resource them. If they lock you out, use alternative win conditions or bring in additional finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win on card advantage and board presence. Prioritize drawing extra cards and protecting The Ur-Dragon. Use targeted removal to eliminate their key Dragons. If they go wide, use sweepers or targeted removal to clear the board before striking.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes, targeted removal on The Ur-Dragon, and combo win conditions.",
+    "Pay attention to opponents' mana bases",
+    "if they're holding up blue, assume counterspells.",
+    "Track graveyard hate if you rely on recursion."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

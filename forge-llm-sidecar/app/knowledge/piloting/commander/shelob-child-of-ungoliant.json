@@ -1,0 +1,124 @@
+{
+  "archetype": "Shelob, Child of Ungoliant",
+  "format": "commander",
+  "strategy_type": "midrange",
+  "overview": "This deck leverages arthropod tribal synergies to generate endless 1/1 Spider tokens, using death triggers to create larger threats and apply targeted -X/-X to neutralize key opponents' creatures. It wins by overwhelming board presence, chipping life totals through relentless pressure, and leveraging commander damage or attrition.",
+  "win_conditions": [
+    "Overwhelming token swarms, commander damage, or chipping life with stacked -X/-X triggers.",
+    "Achieve this by protecting your commanders, using card draw to refill your hand, and timing death triggers to clear the board of blockers before attacking."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing fetches/duals if available), at least one early Spider (e.g., Arasta, Webweaver Knight, or a cheap 1/1), and ramp or early interaction."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 0-1 lands, only high-cost spells, or no early threats to establish board presence."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cheap Spider or ramp spell (e.g., Rampant Growth).",
+      "Turn 2: Ramp into a 2/2 Spider or Arasta.",
+      "Sequence lands to ensure consistent drops",
+      "prioritize fetching if your mana base is complex.",
+      "If you have a 1/1 and a 2/2, you can begin triggering death effects early to clear early blockers or apply pressure."
+    ],
+    "mid_game": [
+      "Hoard mana for key death triggers and removal rather than overcommitting to token generation.",
+      "Use the graveyard strategically",
+      "sacrifice creatures only when you need card draw, a specific -X/-X payoff, or to clear a blocker.",
+      "Avoid unnecessary sacrifices that give opponents free triggers.",
+      "Commit threats when you have removal or board wipes ready to protect your swarm.",
+      "Hold back if opponents are holding sweepers or targeted removal.",
+      "Use -X/-X triggers to clear blockers before attacking, prioritizing the most dangerous opponent's key creature."
+    ],
+    "late_game": [
+      "Overwhelming token swarms, commander damage, or chipping life with stacked -X/-X triggers.",
+      "Achieve this by protecting your commanders, using card draw to refill your hand, and timing death triggers to clear the board of blockers before attacking.",
+      "Go all-in when you have a board wipe ready, opponents are low on life, or you've exhausted their removal.",
+      "Attack with everything if you can't be swept, and use -X/-X triggers to remove multiple blockers simultaneously."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Shelob, Child of Ungoliant",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Shelob, Dread Weaver",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arasta of the Endless Web",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include over-sacrificing your own creatures without a payoff, ignoring commander damage, failing to track opponent's removal, and overcommitting to token generation without protection.",
+    "Unique interactions: Shelob's -X/-X triggers stack, so timing sacrifices can clear multiple blockers.",
+    "Arasta's entry creates a massive board swing, so protect it.",
+    "Remember that this archetype thrives on attrition and timing",
+    "patience often beats aggression."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, uncounterable threats if possible, or cast spells in response to their counterspells. Leverage mana dorks and ramp to outpace them, and time your big plays when they've exhausted interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use removal on their key ramp spells or creatures. Board wipes are essential to reset the board before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal and life gain. Use -X/-X triggers to clear their early threats and don't overextend into combat. Prioritize surviving until you can establish a token wall.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with resilient threats and use card draw to out-value them. Time your big plays when they've exhausted removal, and use -X/-X triggers to clear their board when they commit to a sweep.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value the player with better removal and board wipes. Prioritize trading tokens efficiently and use -X/-X triggers to remove their commanders. Control the graveyard and force unfavorable trades where their creatures die to your triggers.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath, Toxic Deluge), targeted removal (Path, Trophy), and combo win conditions.",
+    "Note when opponents are saving removal for your commanders.",
+    "Track graveyard size for potential recursion threats and monitor life totals to gauge when commander damage or attrition becomes viable."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

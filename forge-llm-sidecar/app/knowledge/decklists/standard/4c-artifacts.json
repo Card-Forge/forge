@@ -1,0 +1,141 @@
+{
+  "archetype": "4c Artifacts",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/4c-artifacts.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Candy Trail"
+    },
+    {
+      "qty": 3,
+      "name": "Clay-Fired Bricks"
+    },
+    {
+      "qty": 1,
+      "name": "Dauntless Scrapbot"
+    },
+    {
+      "qty": 2,
+      "name": "Day of Judgment"
+    },
+    {
+      "qty": 4,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Fomori Vault"
+    },
+    {
+      "qty": 4,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Mistrise Village"
+    },
+    {
+      "qty": 4,
+      "name": "Perilous Snare"
+    },
+    {
+      "qty": 1,
+      "name": "Phoenix Fleet Airship"
+    },
+    {
+      "qty": 2,
+      "name": "Pinnacle Starcage"
+    },
+    {
+      "qty": 5,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Repurposing Bay"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Anchorage"
+    },
+    {
+      "qty": 2,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 4,
+      "name": "Simulacrum Synthesizer"
+    },
+    {
+      "qty": 3,
+      "name": "Spring-Loaded Sawblades"
+    },
+    {
+      "qty": 3,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 2,
+      "name": "Sunbillow Verge"
+    },
+    {
+      "qty": 3,
+      "name": "The Enigma Jewel"
+    },
+    {
+      "qty": 1,
+      "name": "The Fire Crystal"
+    },
+    {
+      "qty": 1,
+      "name": "The Irencrag"
+    },
+    {
+      "qty": 1,
+      "name": "Torpor Orb"
+    },
+    {
+      "qty": 4,
+      "name": "United Battlefront"
+    },
+    {
+      "qty": 1,
+      "name": "White Auracite"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Authority of the Consuls"
+    },
+    {
+      "qty": 2,
+      "name": "Flashfreeze"
+    },
+    {
+      "qty": 2,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 1,
+      "name": "Pinnacle Starcage"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Torpor Orb"
+    },
+    {
+      "qty": 4,
+      "name": "Voice of Victory"
+    }
+  ]
+}

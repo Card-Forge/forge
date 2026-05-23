@@ -1,0 +1,105 @@
+{
+  "archetype": "Jeskai Synthesizer",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/jeskai-synthesizer.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Basilisk Gate"
+    },
+    {
+      "qty": 4,
+      "name": "Citadel Gate"
+    },
+    {
+      "qty": 4,
+      "name": "Cliffgate"
+    },
+    {
+      "qty": 4,
+      "name": "Cryogen Relic"
+    },
+    {
+      "qty": 4,
+      "name": "Experimental Synthesizer"
+    },
+    {
+      "qty": 4,
+      "name": "Galvanic Blast"
+    },
+    {
+      "qty": 4,
+      "name": "Glint Hawk"
+    },
+    {
+      "qty": 1,
+      "name": "Guardian of the Guildpact"
+    },
+    {
+      "qty": 2,
+      "name": "Heap Gate"
+    },
+    {
+      "qty": 4,
+      "name": "Kor Skyfisher"
+    },
+    {
+      "qty": 2,
+      "name": "Lembas"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 3,
+      "name": "Melded Moxite"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Navigator's Compass"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Sacred Cat"
+    },
+    {
+      "qty": 4,
+      "name": "Sea Gate"
+    },
+    {
+      "qty": 2,
+      "name": "Thraben Charm"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 3,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 4,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 4,
+      "name": "Relic of Progenitus"
+    }
+  ]
+}

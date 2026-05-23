@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing at least two cheap creatures or delirium-enabling cards",
       "Early interaction or recursion to stabilize against aggressive decks",
-      "Mana base that ensures smooth turns two and three"
+      "Mana base that ensures smooth turns two and three",
+      "Keep hands with 2-3 lands (prioritizing non-foils or duals if available), at least one delirium enabler (discard spell, graveyard filler, or Nethergoyf/Moonshadow), and a threat or interaction.",
+      "Prioritize hands that can hit turn 1 delirium or establish board presence by turn 2."
     ],
     "mulligan_criteria": [
       "Mana screws or lands-only hands",
       "Lack of early plays or delirium progress",
-      "Hands heavy on late-game cards without early board presence"
+      "Hands heavy on late-game cards without early board presence",
+      "Mulligan on 3+ lands with no early plays, or 2+ lands with only threats and no enablers/interaction."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play Nethergoyf and Moonshadow on curve to establish early board presence",
       "Use cheap interaction to disrupt opponent's early game",
-      "Begin cycling cards to different types to progress toward delirium"
+      "Begin cycling cards to different types to progress toward delirium",
+      "Turn 1: Play a land, cast a discard spell or low-cost delirium enabler to start filling the graveyard.",
+      "If you have Nethergoyf or Moonshadow, play it on turn 1 or 2 once delirium is active.",
+      "Turn 2: Drop a second land, cast another enabler or threat.",
+      "If delirium is active, prioritize deploying scalable creatures.",
+      "Land sequencing: Play non-basic lands first if they enter untapped, then basics to avoid summoning sickness on key turns."
     ],
     "mid_game": [
       "Deploy Cori-Steel Cutter and other threats to apply consistent pressure",
       "Trigger delirium to unlock recursive value and board control spells",
-      "Maintain board advantage by trading efficiently and leveraging graveyard synergies"
+      "Maintain board advantage by trading efficiently and leveraging graveyard synergies",
+      "Preserve mana for delirium triggers and threat deployment.",
+      "Don't overextend into sweepers.",
+      "Use graveyard fillers efficiently\u2014don't dump everything if you're behind on board.",
+      "Prioritize keeping hand size above 3 to maintain disruption.",
+      "Commit threats when you have delirium active and opponent has no immediate removal.",
+      "Hold back if they have sweepers or spot removal."
     ],
     "late_game": [
       "Use delirium-boosted recursion to repeatedly deploy signature creatures",
       "Stabilize with wide boards and card advantage engines",
-      "Close out games with overwhelming board presence or targeted finishers"
+      "Close out games with overwhelming board presence or targeted finishers",
+      "Nethergoyf (massively scaled), Moonshadow, and Cori-Steel Cutter once delirium is stable.",
+      "Win by trading efficiently and deploying a delirium-powered threat they can't answer.",
+      "When delirium is active, you have board presence, and opponent has no sweepers or spot removal.",
+      "Go all-in if you can close the game in 1-2 turns."
     ]
   },
   "key_cards": [
@@ -59,7 +77,12 @@
     "Prioritize playing creatures that progress delirium before casting expensive spells",
     "Hold up flash creatures like Moonshadow to respond to opponent's removal or combat",
     "Cycle low-value cards early to reach four card types in the graveyard faster",
-    "Save removal for opponent's key threats rather than trading early creatures unnecessarily"
+    "Save removal for opponent's key threats rather than trading early creatures unnecessarily",
+    "Delirium is fragile",
+    "avoid overfilling the graveyard with useless cards if you're facing graveyard hate.",
+    "Track opponent's removal and sweepers carefully\u2014overextending with delirium threats is the most common mistake.",
+    "Moonshadow and Nethergoyf scale differently, so prioritize which one to commit based on board state.",
+    "Cori-Steel Cutter likely synergizes with delirium triggers, so time its activation for maximum value."
   ],
   "matchups": [
     {
@@ -88,16 +111,35 @@
         "Card draw engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells from hand. Cast threats in response to their spells. Use multiple low-cost threats to force counter trade-offs.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure. Use discard to hit their ramp spells. Don't let them stabilize; trade efficiently and win before they cast their finisher.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize targeting their enablers and threats. Use targeted removal efficiently. Control the graveyard by dumping key types when advantageous.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early board wipes",
     "Targeted removal spells",
     "Graveyard hate",
-    "Life total pressure from aggressive strategies"
+    "Life total pressure from aggressive strategies",
+    "Watch for artifact acceleration (Affinity/Amulet), combo pieces (Ruby Storm), or blink/evade threats (Jeskai).",
+    "Note when they tap out for sweepers or counterspells.",
+    "Track graveyard contents if they have hate."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:54:14+00:00",
     "model": "local-model",
@@ -113,7 +155,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

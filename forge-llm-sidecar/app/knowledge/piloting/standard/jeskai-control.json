@@ -11,11 +11,14 @@
     "keep_criteria": [
       "Hands with interaction tools",
       "Hands with sufficient land drops",
-      "Versatile hands that perform well across multiple matchups"
+      "Versatile hands that perform well across multiple matchups",
+      "Keep hands with 2-3 lands (including fetch/shock sources), a turn-1 discard spell, and a turn-2 interaction (counterspell, removal, or bounce).",
+      "Prioritize keeping lands that can fetch basics for Stock Up and Jeskai Revelation conditions."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or land drops",
-      "Risky hands against unknown opponents that rely on topdeck manipulation"
+      "Risky hands against unknown opponents that rely on topdeck manipulation",
+      "Mulligan to 5+ lands, pure removal without answers, or hands with multiple draw spells but no early interaction."
     ],
     "examples": [
       {
@@ -39,16 +42,30 @@
     "early_game": [
       "Play lands and early interaction",
       "Use spot removal and counterspells to control the board",
-      "Gain life to survive aggro strategies"
+      "Gain life to survive aggro strategies",
+      "Turn 1: Play a land, cast Thoughtseize or Inquisition on the opponent's most threatening early card or key combo piece.",
+      "Turn 2: Play a land, cast a counterspell or removal on the opponent's second-drop threat.",
+      "If ahead, use Stock Up or Consult the Star Charts to dig for answers.",
+      "Sequence lands to ensure you can cast colored spells on curve while maintaining land drops."
     ],
     "mid_game": [
       "Continue controlling the board and preventing opponent value",
       "Bounce problematic creatures with Marang River Regent",
-      "Manage resources and keep backup plans in hand"
+      "Manage resources and keep backup plans in hand",
+      "Preserve mana for multiple interaction spells per turn",
+      "never overcommit to a single threat if you lack answers.",
+      "Use Consult the Star Charts to find specific answers or finishers rather than randomizing.",
+      "Manage graveyard by using Rest in Peace or Leyline of the Void if needed, and avoid milling yourself with Jeskai Revelation unless you have a win condition or can discard non-essential cards.",
+      "Hold back on committing your best threat until you have at least one interaction spell in hand.",
+      "Trade efficiently: use removal on key threats, counterspells on game-ending spells, and discard on combo pieces."
     ],
     "late_game": [
       "Deploy win conditions like Elspeth, Storm Slayer and Beza, the Bounding Spring",
-      "Finish the game once the opponent runs out of resources"
+      "Finish the game once the opponent runs out of resources",
+      "Teferi, Hero of Dominaria (planeswalker loyalty plays), Jeska's Thane (attacking with creatures), The Wandering Emperor (combat tricks + card draw), or a well-timed Jeskai Revelation into a lethal threat.",
+      "Secure the game by establishing a board presence that can't be easily wiped, then close with combat or a finisher.",
+      "Go all-in when you have card advantage locked, the opponent has no removal/counterspells in hand, or you've established a board that can trade favorably.",
+      "Commit when you can safely cast Jeskai Revelation and still have a win condition in hand or on board."
     ]
   },
   "key_cards": [
@@ -103,7 +120,13 @@
     "Keep global removals in hand for the right timing.",
     "Control your opponent's board and life points carefully against aggro.",
     "Prevent opponents from creating value with creatures, especially when Cauldron is in play.",
-    "Use removals wisely and save them for the right time."
+    "Use removals wisely and save them for the right time.",
+    "Jeskai Revelation is a double-edged sword",
+    "only cast it when you have a clear win condition or can discard non-essential cards.",
+    "Consult the Star Charts is best used to find specific answers or finishers, not as a random draw spell.",
+    "Watch for opponent's mana development",
+    "Jeskai's color fixing relies on fetch lands and shock lands, so they may be vulnerable to early pressure.",
+    "Avoid overcommitting to the board without answers, as Jeskai Control is vulnerable to sweepers."
   ],
   "matchups": [
     {
@@ -146,6 +169,31 @@
         "artifact engines",
         "damage when artifacts leave the board"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells from hand. Cast threats at end of opponent's turn or in response to their spells. Use Consult the Star Charts to find uncounterable threats or protection. Employ cheap, efficient threats that can trade with their interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction to disrupt mana acceleration. Use Thoughtseize/Inquisition on ramp spells. Bring in artifact/enchantment hate and board wipes. If they get ahead, use Teferi or Karn to stabilize and lock them out.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Keep early interaction (counters, removal, discard). Play aggressively with your own threats once stabilized. Use Swan Song or Dovin's Veto to protect your board. Don't overextend; trade efficiently and close the game quickly once you stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with superior card draw (Stock Up, Consult the Star Charts, Jeskai Revelation). Apply pressure with resilient threats they can't easily remove. Force them to use interaction on non-critical spells. Win the attrition war by having more answers and better late-game threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize keeping hands with multiple interaction spells. Use Thoughtseize/Inquisition to strip their answers and force them to mulligan. Trade efficiently, save your best threat for when they're tapped out. Use Consult the Star Charts to find the exact answer they need.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -154,10 +202,15 @@
     "Screaming Nemesis",
     "Mosswood Dreadknight",
     "Weapons Manufacturing",
-    "Cauldron"
+    "Cauldron",
+    "Watch for opponent's mana base (dual lands vs. shock lands vs. fetches) to predict their interaction.",
+    "Track graveyard content for reanimation or storm threats.",
+    "Note when they tap out for a big spell",
+    "that's your window to attack or cast a free interaction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-jeskai-control-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T05:46:47+00:00",
     "model": "local-model",
@@ -175,6 +228,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

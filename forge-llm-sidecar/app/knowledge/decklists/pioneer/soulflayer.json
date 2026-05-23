@@ -1,0 +1,129 @@
+{
+  "archetype": "Soulflayer",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/soulflayer.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Academic Dispute"
+    },
+    {
+      "qty": 4,
+      "name": "Blackcleave Cliffs"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Botanical Sanctum"
+    },
+    {
+      "qty": 2,
+      "name": "Collective Brutality"
+    },
+    {
+      "qty": 1,
+      "name": "Copperline Gorge"
+    },
+    {
+      "qty": 4,
+      "name": "Darkslick Shores"
+    },
+    {
+      "qty": 4,
+      "name": "Grisly Salvage"
+    },
+    {
+      "qty": 4,
+      "name": "Ketramose, the New Dawn"
+    },
+    {
+      "qty": 4,
+      "name": "Mana Confluence"
+    },
+    {
+      "qty": 4,
+      "name": "Masked Meower"
+    },
+    {
+      "qty": 4,
+      "name": "Otherworldly Gaze"
+    },
+    {
+      "qty": 1,
+      "name": "Qarsi Revenant"
+    },
+    {
+      "qty": 2,
+      "name": "Samut, Voice of Dissent"
+    },
+    {
+      "qty": 4,
+      "name": "Soulflayer"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Striped Riverwinder"
+    },
+    {
+      "qty": 3,
+      "name": "Urborg Scavengers"
+    },
+    {
+      "qty": 1,
+      "name": "Urborg, Tomb of Yawgmoth"
+    },
+    {
+      "qty": 4,
+      "name": "Zetalpa, Primal Dawn"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 1,
+      "name": "Firebending Lesson"
+    },
+    {
+      "qty": 2,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 1,
+      "name": "Iroh's Demonstration"
+    },
+    {
+      "qty": 1,
+      "name": "It'll Quench Ya!"
+    },
+    {
+      "qty": 1,
+      "name": "Octopus Form"
+    },
+    {
+      "qty": 1,
+      "name": "Origin of Metalbending"
+    },
+    {
+      "qty": 1,
+      "name": "Redirect Lightning"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    }
+  ]
+}

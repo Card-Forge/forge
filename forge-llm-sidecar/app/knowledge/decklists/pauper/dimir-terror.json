@@ -1,0 +1,89 @@
+{
+  "archetype": "Dimir Terror",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/dimir-terror.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Contaminated Aquifer"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 4,
+      "name": "Cryptic Serpent"
+    },
+    {
+      "qty": 4,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 4,
+      "name": "Mental Note"
+    },
+    {
+      "qty": 3,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Sleep of the Dead"
+    },
+    {
+      "qty": 4,
+      "name": "Sneaky Snacker"
+    },
+    {
+      "qty": 12,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 4,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 4,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 4,
+      "name": "Thought Scour"
+    },
+    {
+      "qty": 4,
+      "name": "Tolarian Terror"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Annul"
+    },
+    {
+      "qty": 2,
+      "name": "Arms of Hadar"
+    },
+    {
+      "qty": 4,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Dispel"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Unexpected Fangs"
+    }
+  ]
+}

@@ -13,12 +13,14 @@
     "keep_criteria": [
       "Hands with one-drop mana dorks like Llanowar Elves or Elvish Mystic",
       "Hands containing efficient two-drops like Thalia or Kellan",
-      "Hands with a mix of lands and creatures to jump from one to three mana by turn two"
+      "Hands with a mix of lands and creatures to jump from one to three mana by turn two",
+      "Keep hands with 2-3 lands (prioritizing untapped or fetchable sources), a turn-1 or turn-2 creature/token generator, and at least one +1/+1 counter enabler or protection spell."
     ],
     "mulligan_criteria": [
       "Hands lacking early mana acceleration",
       "Hands heavy on lands or high-cost cards without early threats",
-      "Hands without a clear path to apply turn one or two pressure"
+      "Hands without a clear path to apply turn one or two pressure",
+      "Mulligan to 5 if you have 0-1 lands, multiple unplayable high-cost spells, or no early threats/answers."
     ],
     "examples": [
       {
@@ -40,17 +42,30 @@
     "early_game": [
       "Play unconditional mana dorks like Llanowar Elves and Elvish Mystic to accelerate mana",
       "Cast efficient two-drops like Thalia, Guardian of Thraben to tax opponents and protect creatures",
-      "Aim to jump from one mana to three by turn two"
+      "Aim to jump from one mana to three by turn two",
+      "Turn 1: Play a land, optionally cast a cheap creature or enabler if mana allows.",
+      "Turn 2: Develop board with a token generator or counter enabler, ensuring mana flexibility for interaction.",
+      "Prioritize playing lands that enter untapped or can fetch basics to smooth mana development."
     ],
     "mid_game": [
       "Deploy board interaction like Skyclave Apparition and Werefox Bodyguard",
       "Use Anointed Peacekeeper to identify targets for Aven Interrupter",
-      "Cast Collected Company to flood the board and apply pressure"
+      "Cast Collected Company to flood the board and apply pressure",
+      "Preserve mana for interaction until you establish a board.",
+      "Use the graveyard strategically if recursion is present, but avoid overcommitting if graveyard hate is likely.",
+      "Keep 2-3 cards in hand for flexibility and avoid emptying your hand prematurely.",
+      "Commit threats when you have removal or protection to answer opponent interaction.",
+      "Hold back if you lack answers and the opponent has sweepers or targeted removal.",
+      "Prioritize trading tokens for removal to exhaust opponent resources."
     ],
     "late_game": [
       "Utilize Shefet Dunes to increase pressure in longer games or mirrors",
       "Maintain board presence with Enduring Innocence to outvalue opponents",
-      "Sideboard in attrition tools like Gideon, Ally of Zendikar or Elite Spellbinder against control"
+      "Sideboard in attrition tools like Gideon, Ally of Zendikar or Elite Spellbinder against control",
+      "Large counter-distributed creatures, recursive value engines, or enchantment-based board states.",
+      "Win by overwhelming the board with +1/+1 counters and closing with a decisive combat step or enchantment finisher.",
+      "Go all-in when you have established board presence, the opponent has no sweepers, or you can safely cast a finisher without fear of interaction.",
+      "Also commit when you can trade up on value or force unfavorable blocks."
     ]
   },
   "key_cards": [
@@ -94,7 +109,12 @@
     "Play mana dorks before two-drops to ensure smooth mana curve and early pressure",
     "Hold Aven Interrupter for key opponent spells rather than casting it immediately",
     "Use Anointed Peacekeeper's reveal to decide whether to cast Aven Interrupter or play another creature",
-    "Prioritize untapped lands like Eiganjo and Boseiju to maintain aggressive tempo"
+    "Prioritize untapped lands like Eiganjo and Boseiju to maintain aggressive tempo",
+    "Common mistake: overcommitting to token generation without answers, leaving you vulnerable to sweepers.",
+    "Always track opponent mana and hand size.",
+    "Leverage +1/+1 counters to make creatures resilient to spot removal.",
+    "Avoid playing all lands at once if you need to hold mana for interaction.",
+    "Protect your key engines with counters or protection spells to maximize value recursion."
   ],
   "matchups": [
     {
@@ -141,6 +161,31 @@
         "Sacrifice outlets",
         "Graveyard hate"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats, cast multiple spells in response to counterspells, or rely on uncounterable effects if available. Bait counters with cheap enablers before committing finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt mana development. Use removal on key ramp creatures and prioritize board wipes to reset their advantage before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal and board wipes. Transition to value engines once stabilized, using +1/+1 counters to outscale their early aggression and close out the game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with multiple threats to force interaction, then capitalize on card advantage. Use protection spells to keep key creatures alive against targeted removal and out-value their late-game answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-valuing in the midgame, using targeted removal to eliminate key engines, and leveraging board wipes to reset while retaining card advantage. Prioritize counter distribution and protection to outlast the grind.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -152,10 +197,12 @@
     "Izzet Phoenix",
     "Azorius Control",
     "Lotus Combo",
-    "Enigmatic Incarnation"
+    "Enigmatic Incarnation",
+    "Watch for sweepers, targeted removal on key engines, and combo win conditions."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-selesnya-company-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T03:36:43+00:00",
     "model": "local-model",
@@ -176,6 +223,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {
@@ -188,14 +253,14 @@
     "confidence": 0.9,
     "kind": "explicit",
     "source_index": 0,
-    "evidence_span": "Selesnya Company is a very adaptable deck with a wide range of answers for different Metagames... one of the main ways for “go wide” Aggro decks to play fair games against value archetypes."
+    "evidence_span": "Selesnya Company is a very adaptable deck with a wide range of answers for different Metagames... one of the main ways for \u201cgo wide\u201d Aggro decks to play fair games against value archetypes."
   },
   "win_conditions_evidence": [
     {
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "one of the main ways for “go wide” Aggro decks to play fair games against value archetypes"
+      "evidence_span": "one of the main ways for \u201cgo wide\u201d Aggro decks to play fair games against value archetypes"
     },
     {
       "confidence": 0.9,
@@ -247,7 +312,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "counter to Witch’s Oven in Jund Sacrifice"
+      "evidence_span": "counter to Witch\u2019s Oven in Jund Sacrifice"
     },
     {
       "confidence": 0.8,

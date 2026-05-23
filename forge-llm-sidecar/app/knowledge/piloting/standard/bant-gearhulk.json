@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early mana sources and a one or two-drop",
       "Draw spells or removal to stabilize against aggressive starts",
-      "Nature's Rhythm paired with a creature to accelerate curve"
+      "Nature's Rhythm paired with a creature to accelerate curve",
+      "Keep hands with 2-3 lands (including fetches or duals that can find basics/Nature's Rhythm), a discard spell (Thoughtseize/Inquisition), and a turn-2 play (Badgermole Cub, Quantum Riddler, or cheap removal).",
+      "Keep hands that can play a land, cast a spell, and have a clear plan for turn 2."
     ],
     "mulligan_criteria": [
       "Hands lacking early mana acceleration or interaction",
       "Three or more high-cost cards without ramp",
-      "Hands missing a clear path to turn three or four"
+      "Hands missing a clear path to turn three or four",
+      "Mulligan flood, no lands, or all lands with no early interaction or threats."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and low-cost creatures to establish board presence",
       "Use early interaction to disrupt opponent's game plan",
-      "Prioritize drawing cards to find ramp and threats"
+      "Prioritize drawing cards to find ramp and threats",
+      "Turn 1: Play a land, cast Thoughtseize/Inquisition on a key threat or combo piece.",
+      "Turn 2: Play a land, cast a cheap creature (Badgermole Cub/Quantum Riddler) or follow up with removal.",
+      "If opening with Nature's Rhythm, play it on turn 1 or 2 for mana fixing and potential sacrifice for early damage or mana.",
+      "Sequence lands to ensure colored mana for interaction and avoid tapping out unnecessarily."
     ],
     "mid_game": [
       "Cast Nature's Rhythm to accelerate mana production",
       "Deploy Quantum Riddler to generate card advantage and remove blockers",
-      "Maintain board control while searching for win conditions"
+      "Maintain board control while searching for win conditions",
+      "Preserve hand for key interaction (discard/removal) until turn 3-4.",
+      "Use Nature's Rhythm to fix mana or generate extra mana for threats.",
+      "Don't overcommit creatures",
+      "Bant's creatures are value engines, not pure attackers.",
+      "Manage graveyard by avoiding unnecessary sacrifices unless it fuels Aethergeode Titan/Gearhulk or enables Quantum Riddler.",
+      "Commit threats when you have removal for their response or when you can protect them with Teferi's Protection."
     ],
     "late_game": [
       "Cast large creatures that pressure the opponent's life total",
       "Use excess mana to cast multiple spells per turn",
-      "Stabilize against late-game threats with removal and card draw"
+      "Stabilize against late-game threats with removal and card draw",
+      "Aethergeode Titan or Gearhulk (exiling multiple creatures from graveyard for massive value), Teferi, Hero of Dominaria (card advantage and board wipe), or a well-timed Teferi's Protection on a key threat.",
+      "Win by out-grinding them with card advantage and efficient removal.",
+      "When you have card advantage in hand, removal for their threats, and they have no sweepers.",
+      "Also commit when you can safely cast a Gearhulk/Aethergeode Titan with multiple exiled creatures.",
+      "Go all-in when you can protect your threats with Teferi's Protection or when the opponent is out of interaction."
     ]
   },
   "key_cards": [
@@ -59,7 +77,13 @@
     "Hold up removal for opponent's key threats before committing to your own plays",
     "Cast Nature's Rhythm before playing large creatures to ensure you have enough mana",
     "Use Quantum Riddler's draw ability to find answers before making a major board commitment",
-    "Prioritize playing lands and ramp before committing to high-cost spells"
+    "Prioritize playing lands and ramp before committing to high-cost spells",
+    "Common mistake: Overcommitting creatures without protection or removal.",
+    "Don't sacrifice Nature's Rhythm unnecessarily unless it's for mana or early damage.",
+    "Remember that Badgermole Cub and Quantum Riddler are value engines, not just attackers.",
+    "Use Teferi's Protection sparingly for maximum impact.",
+    "Watch for Izzet's sweepers and Landfall triggers.",
+    "The deck's strength is its resilience and card advantage, so play patiently and out-value opponents."
   ],
   "matchups": [
     {
@@ -88,16 +112,36 @@
         "Card draw engines",
         "Resilient creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells early. Cast threats in response to their spells or when they're tapped out. Use Teferi's Protection to protect key threats. Don't overcommit to spells they can counter; use creatures that can be cast at instant speed or in response, and prioritize value engines that can't be easily countered.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use discard to remove key ramp pieces. Stabilize with removal and Teferi's Protection, then out-value them with card advantage. Don't let them get ahead on mana; trade efficiently and punish their overextension.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize keeping interaction. Use Teferi's Protection to protect key threats. Trade efficiently and win by out-resourcing with better late-game threats (Aethergeode Titan/Gearhulk). Don't overcommit to board position; focus on card advantage and graveyard value.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
     "Counterspell packages",
-    "Late-game value engines"
+    "Late-game value engines",
+    "Watch for Izzet's counterspells, sweepers (Teferi's Protection, Lightning Strike, Izzet Charm), and Landfall triggers.",
+    "Track when they run out of removal or discard.",
+    "Key tell: If they tap out for a big spell or creature without answering your early threats, they're vulnerable to pressure.",
+    "Note when they commit to a combo or ramp strategy to adjust your interaction accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:44:27+00:00",
     "model": "local-model",
@@ -113,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

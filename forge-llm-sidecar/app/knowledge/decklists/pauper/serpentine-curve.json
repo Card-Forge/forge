@@ -1,0 +1,112 @@
+{
+  "archetype": "Serpentine Curve",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/serpentine-curve.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Accumulated Knowledge"
+    },
+    {
+      "qty": 4,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 2,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Campfire"
+    },
+    {
+      "qty": 2,
+      "name": "Cast into the Fire"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 2,
+      "name": "Fiery Cannonade"
+    },
+    {
+      "qty": 1,
+      "name": "Fling"
+    },
+    {
+      "qty": 4,
+      "name": "Frantic Inventory"
+    },
+    {
+      "qty": 4,
+      "name": "Galvanic Discharge"
+    },
+    {
+      "qty": 1,
+      "name": "Gorilla Shaman"
+    },
+    {
+      "qty": 4,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 2,
+      "name": "Lose Focus"
+    },
+    {
+      "qty": 2,
+      "name": "Murmuring Mystic"
+    },
+    {
+      "qty": 2,
+      "name": "Ponder"
+    },
+    {
+      "qty": 4,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 2,
+      "name": "Seething Landscape"
+    },
+    {
+      "qty": 2,
+      "name": "Serpentine Curve"
+    },
+    {
+      "qty": 4,
+      "name": "Skred"
+    },
+    {
+      "qty": 8,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 4,
+      "name": "Snow-Covered Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Swirling Sandstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Teach by Example"
+    },
+    {
+      "qty": 2,
+      "name": "Tolarian Terror"
+    },
+    {
+      "qty": 4,
+      "name": "Volatile Fjord"
+    }
+  ],
+  "sideboard": []
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hand contains Doomsday and at least two cheap tutors or accelerants",
       "Hand features Psychic Frog with multiple one-mana spells",
-      "Multiple lands and a clear path to turn two or three Doomsday"
+      "Multiple lands and a clear path to turn two or three Doomsday",
+      "Keep hands with Doomsday, Psychic Frog, Lurrus, or at least two of these plus a cantrip/discard.",
+      "Require at least two lands plus one acceleration source (e.g., Mana Crypt, Chrome Mox, or a ritual) or a cantrip to find them."
     ],
     "mulligan_criteria": [
       "No Doomsday and no cheap spells to enable Lurrus recursion",
       "Too many lands or high-cost cards that slow down the combo",
-      "Lack of card draw or hand size management tools"
+      "Lack of card draw or hand size management tools",
+      "Mulligan pure land hands, hands with only one combo piece and no support, or hands lacking acceleration/cantrips if you hold multiple pieces."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and cheap tutors to stabilize and draw into Doomsday",
       "Cast Psychic Frog to draw two cards and discard a dead draw",
-      "Prioritize finding Doomsday or setting up Lurrus recursion"
+      "Prioritize finding Doomsday or setting up Lurrus recursion",
+      "Turn 1: Play a land, cast Thoughtseize/Duress to find combo pieces or remove key threats.",
+      "Turn 2: Accelerate with mana rocks/rituals, cast another cantrip or discard, and begin assembling the graveyard.",
+      "Prioritize playing lands to support the combo's mana requirements (typically 3-4 mana for Doomsday + Frog).",
+      "If you draw Lurrus early, cast it to enable recursion of Doomsday or the Frog."
     ],
     "mid_game": [
       "Cast Doomsday to dig for mana rocks, tutors, and win conditions",
       "Use Lurrus to replay Doomsday or key tutors for infinite loops",
-      "Manage hand size and discard carefully to avoid losing combo pieces"
+      "Manage hand size and discard carefully to avoid losing combo pieces",
+      "Treat your graveyard as a resource, not a liability.",
+      "Use Lurrus to recur Doomsday or Psychic Frog if you run out of pieces.",
+      "Manage mana carefully to ensure you can cast Doomsday (3UB) and activate the Frog (1U) on the same turn.",
+      "Avoid milling yourself accidentally",
+      "track your graveyard contents when using the Frog.",
+      "Commit threats only when you have a clear path to the combo or can protect it with discard."
     ],
     "late_game": [
       "Execute infinite mana and tutor loops to win on the spot",
       "Use Lurrus to repeatedly cast Doomsday for additional answers",
-      "Stabilize against interaction by cycling through the top of the library"
+      "Stabilize against interaction by cycling through the top of the library",
+      "Cast Doomsday to exile your hand and graveyard, then draw seven cards.",
+      "Activate Psychic Frog to mill two and draw one, repeating until you assemble the win condition (typically a creature with enter-the-battlefield effects or a mill-out win con).",
+      "Lurrus can recur Doomsday or the Frog if needed.",
+      "Go all-in when you have Doomsday, Psychic Frog, a cantrip, and a win condition in hand/graveyard, and you can either protect the combo with discard or go off uncountered.",
+      "Commit when the opponent has no remaining answers or when you can win before they can respond."
     ]
   },
   "key_cards": [
@@ -59,7 +77,12 @@
     "Play Psychic Frog before Doomsday to increase the odds of drawing the combo enabler",
     "Prioritize casting one-mana tutors before Lurrus to maximize recursion potential",
     "Discard high-impact combo pieces only if necessary, keeping Doomsday and Lurrus in hand or graveyard",
-    "Use Lurrus to replay Doomsday after resolving the first one to maintain momentum"
+    "Use Lurrus to replay Doomsday after resolving the first one to maintain momentum",
+    "Lurrus of the Dream-Den is a critical enabler",
+    "it allows you to recur Doomsday or Psychic Frog, making the combo more resilient.",
+    "Be extremely careful when activating Psychic Frog, as milling yourself can accidentally lose the game or disrupt your own combo.",
+    "Doomsday is a sorcery, so you must time it carefully to avoid being interrupted.",
+    "In the Unknown format, adapt your sideboard based on the specific metagame, but always prioritize graveyard protection and hand disruption."
   ],
   "matchups": [
     {
@@ -151,6 +174,16 @@
         "Sylvan Library",
         "Big finishers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells from the opponent's hand. Cast cantrips to find protection or assemble the combo in multiple steps. Use Lurrus to recur Doomsday if it gets countered, or go off with redundant pieces.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Race to assemble the combo first. Use discard to clear the opponent's hand of combo pieces. Track their graveyard to avoid falling for their Doomsday. Win the graveyard war by using Lurrus to recur pieces and mill out the opponent. Prioritize win condition redundancy.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -159,10 +192,14 @@
     "Rest in Peace",
     "Dismantler",
     "Force of Will",
-    "Duress"
+    "Duress",
+    "Watch for graveyard hate (Rest in Peace, Leyline, Surgical Extraction), counterspells, and hand disruption.",
+    "Track when the opponent plays removal or hate, as this may force you to assemble the combo earlier or concede.",
+    "Note if they are playing Oath or Initiative, as these can win quickly if left unchecked."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:26:36+00:00",
     "model": "local-model",
@@ -178,6 +215,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

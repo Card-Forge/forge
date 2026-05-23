@@ -1,0 +1,129 @@
+{
+  "archetype": "Azorius Control",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/azorius-control.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Agna Qel'a"
+    },
+    {
+      "qty": 4,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 4,
+      "name": "Day of Judgment"
+    },
+    {
+      "qty": 3,
+      "name": "Demolition Field"
+    },
+    {
+      "qty": 2,
+      "name": "Enduring Curiosity"
+    },
+    {
+      "qty": 4,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Fountainport"
+    },
+    {
+      "qty": 4,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 2,
+      "name": "Horned Loch-Whale"
+    },
+    {
+      "qty": 4,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 2,
+      "name": "Negate"
+    },
+    {
+      "qty": 4,
+      "name": "No More Lies"
+    },
+    {
+      "qty": 3,
+      "name": "Plains"
+    },
+    {
+      "qty": 3,
+      "name": "Restless Anchorage"
+    },
+    {
+      "qty": 3,
+      "name": "Ride's End"
+    },
+    {
+      "qty": 2,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 1,
+      "name": "Sunken Citadel"
+    },
+    {
+      "qty": 1,
+      "name": "The Unagi of Kyoshi Island"
+    },
+    {
+      "qty": 4,
+      "name": "Three Steps Ahead"
+    },
+    {
+      "qty": 2,
+      "name": "Ultima"
+    },
+    {
+      "qty": 2,
+      "name": "Wan Shi Tong, Librarian"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Devout Decree"
+    },
+    {
+      "qty": 1,
+      "name": "Disenchant"
+    },
+    {
+      "qty": 2,
+      "name": "Exorcise"
+    },
+    {
+      "qty": 2,
+      "name": "High Noon"
+    },
+    {
+      "qty": 2,
+      "name": "Negate"
+    },
+    {
+      "qty": 3,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Split Up"
+    }
+  ]
+}

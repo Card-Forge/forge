@@ -1,0 +1,601 @@
+{
+  "schema_version": 1,
+  "name": "Doomsday",
+  "format": "legacy",
+  "colors": [
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Sultai Flow Doomsday is a combo deck that aims to cast Doomsday as early as possible to stack cycling cards and win on the following turn with Thassa's Oracle. The inclusion of Flow State provides crucial resilience against discard and counterspell-heavy metas, allowing the pilot to recover key pieces or hoard resources. Green mana adds utility through Veil of Summer, Carpet of Flowers, and Witherbloom Charm to navigate hate cards.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Dark Ritual"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 25,
+      "cards": [
+        "Brainstorm",
+        "Consider",
+        "Doomsday",
+        "Edge of Autumn",
+        "Flow State",
+        "Jace, Wielder of Mysteries",
+        "Ponder",
+        "Street Wraith",
+        "Tamiyo, Inquisitive Student",
+        "Thassa's Oracle",
+        "Unearth"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 22,
+      "cards": [
+        "Brainstorm",
+        "Consider",
+        "Doomsday",
+        "Flow State",
+        "Ponder",
+        "Tamiyo, Inquisitive Student",
+        "Thassa's Oracle",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 21,
+      "cards": [
+        "Doomsday",
+        "Edge of Autumn",
+        "Flooded Strand",
+        "Flow State",
+        "Marsh Flats",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 22,
+      "cards": [
+        "Barrowgoyf",
+        "Doomsday",
+        "Flow State",
+        "Force of Will",
+        "Jace, Wielder of Mysteries",
+        "Tamiyo, Inquisitive Student",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 5
+    },
+    "threats": {
+      "target_count": 13,
+      "cards": [
+        "Barrowgoyf",
+        "Dauthi Voidwalker",
+        "Jace, Wielder of Mysteries",
+        "Murktide Regent",
+        "Street Wraith",
+        "Thassa's Oracle",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 7
+    },
+    "removal": {
+      "target_count": 12,
+      "cards": [
+        "Barrowgoyf",
+        "Bitter Triumph",
+        "Fatal Push",
+        "Long Goodbye",
+        "Unearth",
+        "Wasteland"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 8
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 10,
+      "cards": [
+        "Consign to Memory",
+        "Daze",
+        "Force of Negation",
+        "Force of Will"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 7,
+      "cards": [
+        "Cavern of Souls",
+        "Force of Will",
+        "Long Goodbye",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 13,
+      "cards": [
+        "Bitter Triumph",
+        "Doomsday",
+        "Flow State",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 1
+    },
+    "graveyard_enablers": {
+      "target_count": 26,
+      "cards": [
+        "Barrowgoyf",
+        "Consider",
+        "Dauthi Voidwalker",
+        "Doomsday",
+        "Flow State",
+        "Force of Negation",
+        "Jace, Wielder of Mysteries",
+        "Murktide Regent",
+        "Tamiyo, Inquisitive Student",
+        "Undercity Sewers",
+        "Unearth"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 9
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Daze",
+        "Murktide Regent",
+        "Unearth"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Doomsday"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 14,
+      "cards": [
+        "Barrowgoyf",
+        "Doomsday",
+        "Force of Will",
+        "Jace, Wielder of Mysteries",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 5
+    },
+    "combo_pieces": {
+      "target_count": 20,
+      "cards": [
+        "Brainstorm",
+        "Doomsday",
+        "Flow State",
+        "Force of Will",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Barrowgoyf"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 24,
+      "cards": [
+        "Cavern of Souls",
+        "Flooded Strand",
+        "Force of Will",
+        "Lion's Eye Diamond",
+        "Lotus Petal",
+        "Marsh Flats",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Undercity Sewers",
+        "Underground Sea",
+        "Wasteland"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 19,
+      "cards": [
+        "Cavern of Souls",
+        "Flooded Strand",
+        "Island",
+        "Marsh Flats",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Swamp",
+        "Undercity Sewers",
+        "Underground Sea",
+        "Wasteland"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Jace, Wielder of Mysteries"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Barrowgoyf",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "payoff_cards",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bitter Triumph",
+      "roles": [
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brainstorm",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Consider",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dauthi Voidwalker",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Daze",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Doomsday",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Edge of Autumn",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Will",
+      "roles": [
+        "combo_pieces",
+        "counterspells",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jace, Wielder of Mysteries",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "payoff_cards",
+        "planeswalker_threats",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Long Goodbye",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marsh Flats",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Murktide Regent",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Street Wraith",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tamiyo, Inquisitive Student",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thassa's Oracle",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Sea",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unearth",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Stack cycling cards like Edge of Autumn and Street Wraith on top of the deck to draw Thassa's Oracle.",
+    "Stack Cavern of Souls to bypass counterspells or Chalice of the Void for 2.",
+    "Stack Thoughtseize to remove enemy Consign to Memory or Mindbreak Trap.",
+    "Stack Lion's Eye Diamond to generate blue mana and play around Blood Moon.",
+    "Put a land or blue card on top to pay for Force of Will while playing Thoughtseize on turn 2."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cantrips like Brainstorm and Ponder to find Doomsday and key combo pieces."
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Dark Ritual and Lotus Petal for early mana acceleration."
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Doomsday as soon as possible to stack cycling cards."
+    }
+  ],
+  "kill_priority": [
+    "Doomsday",
+    "Barrowgoyf",
+    "Flow State",
+    "Force of Will",
+    "Jace, Wielder of Mysteries",
+    "Tamiyo, Inquisitive Student",
+    "Thassa's Oracle",
+    "Brainstorm"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Daze",
+    "Force of Negation",
+    "Force of Will",
+    "Cavern of Souls",
+    "Long Goodbye",
+    "Thassa's Oracle",
+    "Barrowgoyf"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/doomsday.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

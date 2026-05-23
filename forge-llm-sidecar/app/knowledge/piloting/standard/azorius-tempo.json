@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Hands with cheap ETB creatures and early interaction",
       "Hands containing Enduring Curiosity or dual lands for mana consistency",
-      "Hands with a clear clock like Voice of Victory"
+      "Hands with a clear clock like Voice of Victory",
+      "Keep hands with 2-3 lands (prioritizing duals/fixing), at least one early interaction (Aven Interrupter, Voice of Victory, or a cheap counter/removal), and a curve-appropriate threat.",
+      "Keep hands that can play a turn-1 Aven Interrupter or a turn-2 threat/interaction combo."
     ],
     "mulligan_criteria": [
       "Hands lacking one-drops or early board presence",
       "Hands heavy on lands or late-game cards without early interaction",
-      "Hands without answers to aggressive early pressure"
+      "Hands without answers to aggressive early pressure",
+      "Mulligan hands with 0-1 lands, multiple copies of expensive spells, or no early interaction if the metagame is fast."
     ],
     "examples": [
       {
@@ -39,15 +42,29 @@
   "game_plan": {
     "early_game": [
       "Deploy cheap one-drops like Spyglass Siren and Aven Interrupter to filter and delay opponent's plays.",
-      "Use instant-speed interaction like No More Lies and Tishana’s Tidebinder to disrupt key triggers or permanents."
+      "Use instant-speed interaction like No More Lies and Tishana\u2019s Tidebinder to disrupt key triggers or permanents.",
+      "Turn 1: Play a land, cast Aven Interrupter if available, or hold up mana for a turn-1 interaction if the opponent is known to play vulnerable early threats.",
+      "Turn 2: Develop mana, cast a 2-drop threat or interaction.",
+      "Prioritize playing lands to ensure you hit key mana steps (3, 4, 5).",
+      "If drawing Aven Interrupter on turn 1, consider holding up mana to protect it or answer a key spell, as its ward/counter ability can swing early trades."
     ],
     "mid_game": [
       "Apply pressure with Voice of Victory and Floodpits Drowner to remove blockers and deal damage.",
-      "Utilize Avatar's Wrath to clear the board and trigger ETB effects a second time, gaining tempo advantage."
+      "Utilize Avatar's Wrath to clear the board and trigger ETB effects a second time, gaining tempo advantage.",
+      "Preserve interaction for high-value targets (key threats, combo pieces, or ramp accelerators).",
+      "Avoid overcommitting to clearing minor threats if you can out-value them.",
+      "Manage hand size by playing threats that can be answered, then recasting or drawing into more.",
+      "Graveyard is rarely a primary resource, but monitor opponent recursion.",
+      "Commit threats when you have interaction to protect them or when the opponent has no answers.",
+      "Hold back if you suspect a board wipe or heavy removal."
     ],
     "late_game": [
       "Transform Aang, Swift Savior into a 5/5 to boost board presence and close out games.",
-      "Leverage Abandoned Air Temple for power boosts and sideboard in attrition tools like Enduring Innocence."
+      "Leverage Abandoned Air Temple for power boosts and sideboard in attrition tools like Enduring Innocence.",
+      "Avatar's Wrath (if it leaves your board intact or you have protection), resilient mid-game threats, or card advantage engines that out-draw the opponent.",
+      "A well-timed Voice of Victory on a key combo piece or board wipe can also swing the game.",
+      "Go all-in when you have card advantage, the opponent has no interaction, or you've stabilized and they're below 10 life.",
+      "Commit when you can protect threats with ward or counters, or when you can force unfavorable trades that leave you ahead."
     ]
   },
   "key_cards": [
@@ -67,7 +84,7 @@
       "notes": "Functions as a proactive bounce and scales into a 5/5 that buffs all creatures in play."
     },
     {
-      "name": "Avatar’s Wrath",
+      "name": "Avatar\u2019s Wrath",
       "role": "Board reset & ETB retrigger",
       "notes": "Exiles all creatures to reuse ETB effects at a lower cost, preventing opponent recovery."
     },
@@ -82,7 +99,7 @@
       "notes": "Provides permanent power increase at end of opponent's turn, ideal for small-body creatures."
     },
     {
-      "name": "Tishana’s Tidebinder",
+      "name": "Tishana\u2019s Tidebinder",
       "role": "Versatile counter",
       "notes": "Permanently locks down Planeswalkers, Ouroboroid triggers, or Repurposing Bay."
     },
@@ -97,7 +114,13 @@
     "Use Aang, Swift Savior proactively as a bounce to disrupt opponent's turns before they resolve.",
     "Cast Avatar's Wrath to exile all creatures, then replay ETB creatures to gain a second round of value.",
     "Deploy Voice of Victory on your turn to pressure the opponent while protecting your board from interaction.",
-    "Hold Tishana’s Tidebinder for instant speed to permanently lock problematic triggers like Ouroboroid."
+    "Hold Tishana\u2019s Tidebinder for instant speed to permanently lock problematic triggers like Ouroboroid.",
+    "Common mistakes include overcommitting to the board without protection and hoarding interaction until you run out of gas.",
+    "Unique interaction: Aven Interrupter's ward can be used strategically to protect key threats or force unfavorable trades.",
+    "Voice of Victory can counter or destroy, so choose based on whether the target is a threat or a combo piece.",
+    "Avatar's Wrath is a double-edged sword",
+    "ensure you have a board state advantage or protection before casting it.",
+    "Always track opponent life total and hand size to optimize your tempo swings."
   ],
   "matchups": [
     {
@@ -147,13 +170,38 @@
     },
     {
       "opponent_archetype": "Izzet Looting",
-      "advice": "Prepare for late-game plans with Ghost Vacuum against Stormchaser’s Talent variants and Izzet Prowess.",
+      "advice": "Prepare for late-game plans with Ghost Vacuum against Stormchaser\u2019s Talent variants and Izzet Prowess.",
       "watch_for": [
-        "Stormchaser’s Talent",
+        "Stormchaser\u2019s Talent",
         "Izzet Prowess",
         "Lessons",
         "Dimir Bounce"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split spells, flash, or layered threats (cast a threat, then answer their counter with another spell). Play around counters by holding up interaction until they commit. Use Aven Interrupter's ward to protect key plays and force unfavorable trades.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to punish their mana development. Use efficient removal to kill accelerators. Don't overextend into their late-game finishers; stabilize and out-value them with card advantage and sweepers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction (Aven Interrupter, Voice of Victory, cheap counters). Don't play too many threats early; focus on stabilization. Use Avatar's Wrath if they overextend, and track their life total to know when to pivot to offense.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with resilient threats. Force them to use interaction on low-value targets. Out-value them with card advantage and late-game sweepers. Play around their counters by holding up interaction or using layered spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war. Prioritize playing around their counters and sweepers. Use Aven Interrupter to protect key threats. Trade up on interaction and be willing to go second if it means drawing into more answers. Track their hand size and mana to predict their interaction windows.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -166,13 +214,15 @@
     "Red Aggro",
     "Badgermole Cub",
     "Ouroboroid",
-    "Stormchaser’s Talent",
+    "Stormchaser\u2019s Talent",
     "Izzet Prowess",
     "Lessons",
-    "Dimir Bounce"
+    "Dimir Bounce",
+    "Watch for opponent mana development and hand size."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-azorius-tempo-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T05:52:48+00:00",
     "model": "local-model",
@@ -190,6 +240,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
@@ -224,7 +292,7 @@
       "confidence": 0.95,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Avatar’s Wrath can turn games in our favor by allowing us to exile all creatures in play... use the ETB effect of the others a second time"
+      "evidence_span": "Avatar\u2019s Wrath can turn games in our favor by allowing us to exile all creatures in play... use the ETB effect of the others a second time"
     },
     {
       "confidence": 0.95,
@@ -250,7 +318,7 @@
       "confidence": 0.95,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Avatar’s Wrath... can be used as a way to reuse all the ETBs of your cards a second time"
+      "evidence_span": "Avatar\u2019s Wrath... can be used as a way to reuse all the ETBs of your cards a second time"
     },
     {
       "confidence": 0.95,
@@ -262,7 +330,7 @@
       "confidence": 0.95,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Tishana’s Tidebinder is still the most versatile Stifle in Standard, capable of permanently 'locking down' Planeswalkers, the trigger for Ouroboroid"
+      "evidence_span": "Tishana\u2019s Tidebinder is still the most versatile Stifle in Standard, capable of permanently 'locking down' Planeswalkers, the trigger for Ouroboroid"
     }
   ],
   "common_threats_evidence": [
@@ -270,7 +338,7 @@
       "confidence": 0.95,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Disdainful Stroke is primarily used against Jeskai Control, Reanimator, Omniscience, and Artifact lists... Simic versions... Quantum Riddler and Sab-Sunen... Spider-Sense... Ideal against Dimir Midrange... Seam Rip... Red Aggro, or the combination of Badgermole Cub and mana dorks... Ouroboroid... Stormchaser’s Talent decks... Izzet Prowess, Lessons and Dimir Bounce."
+      "evidence_span": "Disdainful Stroke is primarily used against Jeskai Control, Reanimator, Omniscience, and Artifact lists... Simic versions... Quantum Riddler and Sab-Sunen... Spider-Sense... Ideal against Dimir Midrange... Seam Rip... Red Aggro, or the combination of Badgermole Cub and mana dorks... Ouroboroid... Stormchaser\u2019s Talent decks... Izzet Prowess, Lessons and Dimir Bounce."
     }
   ]
 }

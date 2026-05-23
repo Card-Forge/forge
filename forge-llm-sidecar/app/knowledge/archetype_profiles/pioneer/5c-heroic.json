@@ -1,0 +1,435 @@
+{
+  "schema_version": 1,
+  "name": "5c Heroic",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "This five-color Heroic deck leverages cheap creatures and instant-speed pump spells to generate rapid board presence and card advantage. By repeatedly targeting your own creatures, you trigger heroic abilities to draw cards and grow threats while maintaining tempo. The strategy focuses on efficient resource usage to outpace opponents before they can stabilize.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 14,
+      "cards": [
+        "Airbending Lesson",
+        "Boomerang Basics",
+        "Guiding Voice",
+        "Illuminator Virtuoso",
+        "Professor of Symbology",
+        "Soul-Guide Lantern"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Dig Site Inventory",
+        "Guardian of New Benalia",
+        "Illuminator Virtuoso"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Practiced Offense"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 32,
+      "cards": [
+        "Doorkeeper Thrull",
+        "Favored Hoplite",
+        "Guardian of New Benalia",
+        "Illuminator Virtuoso",
+        "Lagonna-Band Trailblazer",
+        "Practiced Offense",
+        "Professor of Symbology",
+        "Seasoned Hallowblade",
+        "Sheltered by Ghosts"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Boomerang Basics",
+        "Eiganjo, Seat of the Empire",
+        "Iroh's Demonstration",
+        "Origin of Metalbending",
+        "Ozai's Cruelty",
+        "Seasoned Hallowblade",
+        "Sheltered by Ghosts",
+        "Soul-Guide Lantern"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Iroh's Demonstration",
+        "Practiced Offense"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 13,
+      "cards": [
+        "Enter the Avatar State",
+        "Guardian of New Benalia",
+        "Origin of Metalbending",
+        "Seasoned Hallowblade",
+        "Sheltered by Ghosts"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 3
+    },
+    "discard_outlets": {
+      "target_count": 16,
+      "cards": [
+        "Guardian of New Benalia",
+        "Guiding Voice",
+        "Illuminator Virtuoso",
+        "Professor of Symbology",
+        "Seasoned Hallowblade"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Dig Site Inventory",
+        "Homestead Courage",
+        "Practiced Offense",
+        "Soul-Guide Lantern"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 14,
+      "cards": [
+        "Boomerang Basics",
+        "Dai Li Indoctrination",
+        "Dig Site Inventory",
+        "Homestead Courage",
+        "Practiced Offense"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 16,
+      "cards": [
+        "Favored Hoplite",
+        "Great Hall of the Biblioplex",
+        "Illuminator Virtuoso",
+        "Lagonna-Band Trailblazer"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Practiced Offense"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Illuminator Virtuoso"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Favored Hoplite",
+        "Yip Yip!"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 5,
+      "cards": [
+        "Eiganjo, Seat of the Empire",
+        "Great Hall of the Biblioplex"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 20,
+      "cards": [
+        "Eiganjo, Seat of the Empire",
+        "Great Hall of the Biblioplex",
+        "Plains"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.46
+  },
+  "dual_role_cards": [
+    {
+      "card": "Boomerang Basics",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dig Site Inventory",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eiganjo, Seat of the Empire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Favored Hoplite",
+      "roles": [
+        "engines",
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Great Hall of the Biblioplex",
+      "roles": [
+        "engines",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guardian of New Benalia",
+      "roles": [
+        "dig_draw",
+        "discard_outlets",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guiding Voice",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Homestead Courage",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Illuminator Virtuoso",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Iroh's Demonstration",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lagonna-Band Trailblazer",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Origin of Metalbending",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Practiced Offense",
+      "roles": [
+        "graveyard_enablers",
+        "payoff_cards",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Professor of Symbology",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seasoned Hallowblade",
+      "roles": [
+        "discard_outlets",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheltered by Ghosts",
+      "roles": [
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up pump spells until combat to maximize surprise and trigger timing",
+    "Prioritize targeting creatures that will survive the turn to avoid wasted triggers",
+    "Use Sheltered by Ghosts after opponent commits removal to protect your biggest threat",
+    "Sequence removal before pump spells if you expect opponent interaction",
+    "5c Heroic is highly dependent on spell density and mana consistency."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap heroic creatures on curve"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use low-cost spells to trigger heroic and draw cards"
+    },
+    {
+      "trigger": "early game",
+      "line": "Apply early pressure to force opponent responses"
+    }
+  ],
+  "kill_priority": [
+    "Favored Hoplite",
+    "Great Hall of the Biblioplex",
+    "Illuminator Virtuoso",
+    "Lagonna-Band Trailblazer",
+    "Practiced Offense",
+    "Doorkeeper Thrull",
+    "Guardian of New Benalia",
+    "Professor of Symbology"
+  ],
+  "interaction_to_disrupt": [
+    "Enter the Avatar State",
+    "Guardian of New Benalia",
+    "Origin of Metalbending",
+    "Seasoned Hallowblade",
+    "Sheltered by Ghosts",
+    "Boomerang Basics",
+    "Eiganjo, Seat of the Empire",
+    "Iroh's Demonstration"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/5c-heroic.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

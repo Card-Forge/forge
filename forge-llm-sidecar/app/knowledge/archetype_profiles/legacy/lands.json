@@ -1,0 +1,527 @@
+{
+  "schema_version": 1,
+  "name": "Lands",
+  "format": "legacy",
+  "colors": [
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 61,
+  "macro_plan": "The Lands deck is a Legacy archetype that abuses the format's extensive land pool to generate mana, control the board, and win through specific combos. It relies on an engine of Mox Diamond, Exploration, Crop Rotation, and Life from the Loam to cycle lands and recover card advantage. Recently, the deck has integrated four Sphere of Resistance into the main deck to improve consistency against faster strategies.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 8,
+      "cards": [
+        "Life from the Loam",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 15,
+      "cards": [
+        "Exploration",
+        "Life from the Loam",
+        "Mox Diamond",
+        "Once Upon a Time"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 9,
+      "cards": [
+        "Crop Rotation",
+        "Expedition Map",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 20,
+      "cards": [
+        "Dark Depths",
+        "Exploration",
+        "Life from the Loam",
+        "Mox Diamond",
+        "Thespian's Stage"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 26,
+      "cards": [
+        "Disruptor Flute",
+        "Endurance",
+        "Exploration",
+        "Icetill Explorer",
+        "Life from the Loam",
+        "Mox Diamond",
+        "Pithing Needle",
+        "Skateboard",
+        "Thespian's Stage"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Ancient Tomb",
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Force of Vigor",
+        "Ghost Quarter",
+        "Ghost Vacuum",
+        "Karakas",
+        "Otawara, Soaring City",
+        "The Tabernacle at Pendrell Vale",
+        "Wasteland"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Ghost Vacuum",
+        "The Tabernacle at Pendrell Vale"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": [
+        "Not of This World"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 5,
+      "cards": [
+        "Dark Depths",
+        "Sejiri Steppe"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 21,
+      "cards": [
+        "Bojuka Bog",
+        "Endurance",
+        "Exploration",
+        "Ghost Vacuum",
+        "Icetill Explorer",
+        "Life from the Loam",
+        "Malevolent Rumble",
+        "Mox Diamond"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 12,
+      "cards": [
+        "Exploration",
+        "Life from the Loam",
+        "Mox Diamond"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 7,
+      "cards": [
+        "Icetill Explorer",
+        "Karakas",
+        "Life from the Loam",
+        "Otawara, Soaring City"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Mox Diamond"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Dark Depths",
+        "Thespian's Stage"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 20,
+      "cards": [
+        "Crop Rotation",
+        "Dark Depths",
+        "Exploration",
+        "Mox Diamond",
+        "Thespian's Stage"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Damping Sphere",
+        "Dismember",
+        "Maze of Ith",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 47,
+      "cards": [
+        "Ancient Tomb",
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Crop Rotation",
+        "Dark Depths",
+        "Exploration",
+        "Ghost Quarter",
+        "Karakas",
+        "Life from the Loam",
+        "Maze of Ith",
+        "Mox Diamond",
+        "Otawara, Soaring City",
+        "Sejiri Steppe",
+        "The Tabernacle at Pendrell Vale",
+        "Thespian's Stage",
+        "Urza's Saga",
+        "Wasteland",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 46,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 32,
+      "cards": [
+        "Ancient Tomb",
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Dark Depths",
+        "Forest",
+        "Ghost Quarter",
+        "Karakas",
+        "Maze of Ith",
+        "Otawara, Soaring City",
+        "Sejiri Steppe",
+        "The Tabernacle at Pendrell Vale",
+        "Thespian's Stage",
+        "Urza's Saga",
+        "Wasteland",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 1
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.41
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crop Rotation",
+      "roles": [
+        "combo_pieces",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dark Depths",
+      "roles": [
+        "combo_pieces",
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exploration",
+      "roles": [
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "reanimation_targets",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Quarter",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Vacuum",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Icetill Explorer",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karakas",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Life from the Loam",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "reanimation_targets",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Maze of Ith",
+      "roles": [
+        "hate_pieces",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mox Diamond",
+      "roles": [
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "reanimation_targets",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sejiri Steppe",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Tabernacle at Pendrell Vale",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thespian's Stage",
+      "roles": [
+        "combo_pieces",
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "hate_pieces",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya, Cradle of Growth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play Forest, then Exploration, then Urza's Saga on turn 1 to accelerate land drops.",
+    "Crop Rotation into a fetchland, tap it for mana, then cast Life from the Loam to recover both lands and play Sphere of Resistance.",
+    "Prioritize holding off attackers with Maze of Ith or Karakas before committing to the combo.",
+    "Use Urza's Saga to exile and retrieve sideboard cards like Haywire Mite or Soul-Guide Lantern as needed.",
+    "Common mistakes include overcommitting to Exploration without a finisher, mismanaging Life from the Loam by digging into lands when you need threats, and failing to mulligan aggressively for early plays."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands to establish a robust mana base"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold off attackers with Maze of Ith, The Tabernacle at Pendrell Vale, and Karakas"
+    },
+    {
+      "trigger": "early game",
+      "line": "Deploy Sphere of Resistance to slow down opponent's spell casting"
+    }
+  ],
+  "kill_priority": [
+    "Mox Diamond",
+    "Dark Depths",
+    "Exploration",
+    "Life from the Loam",
+    "Thespian's Stage",
+    "Crop Rotation",
+    "Disruptor Flute",
+    "Endurance"
+  ],
+  "interaction_to_disrupt": [
+    "Not of This World",
+    "Dark Depths",
+    "Sejiri Steppe",
+    "Ancient Tomb",
+    "Bojuka Bog",
+    "Boseiju, Who Endures",
+    "Force of Vigor",
+    "Ghost Quarter"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/lands.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

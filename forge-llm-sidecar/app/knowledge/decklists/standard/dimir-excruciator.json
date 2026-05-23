@@ -1,0 +1,125 @@
+{
+  "archetype": "Dimir Excruciator",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/dimir-excruciator.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 2,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 3,
+      "name": "Day of Black Sun"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Cover-Up"
+    },
+    {
+      "qty": 4,
+      "name": "Deceit"
+    },
+    {
+      "qty": 3,
+      "name": "Doomsday Excruciator"
+    },
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 4,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Insatiable Avarice"
+    },
+    {
+      "qty": 1,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 4,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 4,
+      "name": "Restless Reef"
+    },
+    {
+      "qty": 3,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 1,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 4,
+      "name": "Superior Spider-Man"
+    },
+    {
+      "qty": 9,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 2,
+      "name": "Winternight Stories"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Decorum Dissertation"
+    },
+    {
+      "qty": 1,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Flashfreeze"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 3,
+      "name": "Oildeep Gearhulk"
+    },
+    {
+      "qty": 2,
+      "name": "Qarsi Revenant"
+    },
+    {
+      "qty": 2,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 1,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 2,
+      "name": "Sunderflock"
+    }
+  ]
+}

@@ -1,0 +1,352 @@
+{
+  "archetype": "Killian, Decisive Mentor",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/killian-decisive-mentor.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "All That Glitters"
+    },
+    {
+      "qty": 1,
+      "name": "Angelic Gift"
+    },
+    {
+      "qty": 1,
+      "name": "Animate Dead"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Lighthouse"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archon of Sun's Grace"
+    },
+    {
+      "qty": 1,
+      "name": "Aura of Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Caves of Koilos"
+    },
+    {
+      "qty": 1,
+      "name": "Chains of Custody"
+    },
+    {
+      "qty": 1,
+      "name": "Changing Loyalty"
+    },
+    {
+      "qty": 1,
+      "name": "Chosen by Heliod"
+    },
+    {
+      "qty": 1,
+      "name": "Claim Jumper"
+    },
+    {
+      "qty": 1,
+      "name": "Coercive Impetus"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Darksteel Mutation"
+    },
+    {
+      "qty": 1,
+      "name": "Desolate Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Doomwake Giant"
+    },
+    {
+      "qty": 1,
+      "name": "Eclipsed Steppe"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo Dynastorian"
+    },
+    {
+      "qty": 1,
+      "name": "Ethereal Armor"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Eye of Nidhogg"
+    },
+    {
+      "qty": 1,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Feather of Flight"
+    },
+    {
+      "qty": 1,
+      "name": "Fellwar Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Fetid Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Flickering Ward"
+    },
+    {
+      "qty": 1,
+      "name": "Forum of Amity"
+    },
+    {
+      "qty": 1,
+      "name": "Ghostly Dancers"
+    },
+    {
+      "qty": 1,
+      "name": "Ghoulish Impetus"
+    },
+    {
+      "qty": 1,
+      "name": "Gift of Immortality"
+    },
+    {
+      "qty": 1,
+      "name": "Glasswing Grace"
+    },
+    {
+      "qty": 1,
+      "name": "Greater Auramancy"
+    },
+    {
+      "qty": 1,
+      "name": "Grievous Wound"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Haunting"
+    },
+    {
+      "qty": 1,
+      "name": "Hero of Iroas"
+    },
+    {
+      "qty": 1,
+      "name": "Inkshield"
+    },
+    {
+      "qty": 1,
+      "name": "Isolated Chapel"
+    },
+    {
+      "qty": 1,
+      "name": "Kaya's Ghostform"
+    },
+    {
+      "qty": 1,
+      "name": "Killian, Decisive Mentor"
+    },
+    {
+      "qty": 1,
+      "name": "Killian, Ink Duelist"
+    },
+    {
+      "qty": 1,
+      "name": "Knight of the White Orchid"
+    },
+    {
+      "qty": 1,
+      "name": "Kor Spiritdancer"
+    },
+    {
+      "qty": 1,
+      "name": "Land Tax"
+    },
+    {
+      "qty": 1,
+      "name": "Light-Paws, Emperor's Voice"
+    },
+    {
+      "qty": 1,
+      "name": "Mantle of the Ancients"
+    },
+    {
+      "qty": 1,
+      "name": "Martial Impetus"
+    },
+    {
+      "qty": 1,
+      "name": "Minimus Containment"
+    },
+    {
+      "qty": 1,
+      "name": "Parasitic Impetus"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Pearl-Ear, Imperial Advisor"
+    },
+    {
+      "qty": 8,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Promise of Loyalty"
+    },
+    {
+      "qty": 1,
+      "name": "Redemption Arc"
+    },
+    {
+      "qty": 1,
+      "name": "Reprobation"
+    },
+    {
+      "qty": 1,
+      "name": "Retether"
+    },
+    {
+      "qty": 1,
+      "name": "Rune of Mortality"
+    },
+    {
+      "qty": 1,
+      "name": "Rune of Sustenance"
+    },
+    {
+      "qty": 1,
+      "name": "Sage's Reverie"
+    },
+    {
+      "qty": 1,
+      "name": "Scourgemark"
+    },
+    {
+      "qty": 1,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 1,
+      "name": "Shielded by Faith"
+    },
+    {
+      "qty": 1,
+      "name": "Shineshadow Snarl"
+    },
+    {
+      "qty": 1,
+      "name": "Sigarda's Aid"
+    },
+    {
+      "qty": 1,
+      "name": "Sigil of the Empty Throne"
+    },
+    {
+      "qty": 1,
+      "name": "Silverquill Campus"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sram, Senior Edificer"
+    },
+    {
+      "qty": 1,
+      "name": "Starfield Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Study Hall"
+    },
+    {
+      "qty": 1,
+      "name": "Sunlit Marsh"
+    },
+    {
+      "qty": 8,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Hierarchy"
+    },
+    {
+      "qty": 1,
+      "name": "Tempest Technique"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Terramorphic Expanse"
+    },
+    {
+      "qty": 1,
+      "name": "The Legend of Yangchen"
+    },
+    {
+      "qty": 1,
+      "name": "Timely Ward"
+    },
+    {
+      "qty": 1,
+      "name": "Transcendent Envoy"
+    },
+    {
+      "qty": 1,
+      "name": "Turbulent Moor"
+    },
+    {
+      "qty": 1,
+      "name": "Twinblade Blessing"
+    },
+    {
+      "qty": 1,
+      "name": "Umbral Expanse"
+    },
+    {
+      "qty": 1,
+      "name": "Unquestioned Authority"
+    },
+    {
+      "qty": 1,
+      "name": "War Room"
+    },
+    {
+      "qty": 1,
+      "name": "Winds of Rath"
+    }
+  ],
+  "sideboard": []
+}

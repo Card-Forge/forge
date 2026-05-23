@@ -1,0 +1,129 @@
+{
+  "archetype": "4c Ouroboroid",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/4c-ouroboroid.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 2,
+      "name": "Botanical Sanctum"
+    },
+    {
+      "qty": 4,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 2,
+      "name": "Brightglass Gearhulk"
+    },
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 2,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Gene Pollinator"
+    },
+    {
+      "qty": 2,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 3,
+      "name": "Hushwood Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 2,
+      "name": "Meltstrider's Resolve"
+    },
+    {
+      "qty": 3,
+      "name": "Mockingbird"
+    },
+    {
+      "qty": 4,
+      "name": "Nature's Rhythm"
+    },
+    {
+      "qty": 2,
+      "name": "Ouroboroid"
+    },
+    {
+      "qty": 4,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 3,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 4,
+      "name": "Spider Manifestation"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Temple Garden"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Champion of the Weird"
+    },
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 3,
+      "name": "Erode"
+    },
+    {
+      "qty": 1,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 1,
+      "name": "Kutzil's Flanker"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 3,
+      "name": "Sage of the Skies"
+    },
+    {
+      "qty": 2,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 1,
+      "name": "Surrak, Elusive Hunter"
+    }
+  ]
+}

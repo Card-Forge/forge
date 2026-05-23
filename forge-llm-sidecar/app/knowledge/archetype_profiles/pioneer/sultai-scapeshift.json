@@ -1,0 +1,579 @@
+{
+  "schema_version": 1,
+  "name": "Sultai Scapeshift",
+  "format": "pioneer",
+  "colors": [
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 80,
+  "macro_plan": "Sultai Scapeshift is a Pioneer combo deck that leverages land acceleration to assemble a resilient board state. By exiling lands with Scapeshift, you rapidly deploy Yorion, Sky Nomad and Lumra, Bellow of the Woods to generate overwhelming card advantage and combat pressure. The deck wins by out-drawing opponents through Yorion's death trigger while Lumra grows into an unblockable threat.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 3,
+      "cards": [
+        "Culling Ritual"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "card_advantage": {
+      "target_count": 12,
+      "cards": [
+        "Bonny Pall, Clearcutter",
+        "Growth Spiral",
+        "Spelunking",
+        "Wistfulness",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 11,
+      "cards": [
+        "Arid Archway",
+        "Hedge Maze",
+        "Stock Up",
+        "Thassa's Oracle",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 14,
+      "cards": [
+        "Fabled Passage",
+        "Formidable Speaker",
+        "Scapeshift",
+        "Vibrance",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 1
+    },
+    "win_conditions": {
+      "target_count": 10,
+      "cards": [
+        "Lumra, Bellow of the Woods",
+        "Scapeshift",
+        "Thassa's Oracle",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 1
+    },
+    "threats": {
+      "target_count": 34,
+      "cards": [
+        "Aftermath Analyst",
+        "Arboreal Grazer",
+        "Bonny Pall, Clearcutter",
+        "Emeritus of Abundance",
+        "Emeritus of Ideation",
+        "Emrakul, the Promised End",
+        "Formidable Speaker",
+        "Lumra, Bellow of the Woods",
+        "Scapeshift",
+        "Thassa's Oracle",
+        "The Wandering Minstrel",
+        "Tranquil Frillback",
+        "Vibrance",
+        "Wistfulness",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 9,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Culling Ritual",
+        "Otawara, Soaring City",
+        "Tranquil Frillback",
+        "Vibrance",
+        "Wistfulness"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Languish"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 12,
+      "cards": [
+        "Cavern of Souls",
+        "Emrakul, the Promised End",
+        "Lotus Field",
+        "Scapeshift",
+        "Thassa's Oracle",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 6,
+      "cards": [
+        "Formidable Speaker",
+        "Wistfulness"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 1
+    },
+    "graveyard_enablers": {
+      "target_count": 25,
+      "cards": [
+        "Aftermath Analyst",
+        "Arid Archway",
+        "Bonny Pall, Clearcutter",
+        "Emrakul, the Promised End",
+        "Hedge Maze",
+        "Ipnu Rivulet",
+        "Lumra, Bellow of the Woods",
+        "Port of Karfell",
+        "Scapeshift",
+        "Takenuma, Abandoned Mire",
+        "Tranquil Frillback"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 15,
+      "cards": [
+        "Aftermath Analyst",
+        "Arid Archway",
+        "Lumra, Bellow of the Woods",
+        "Otawara, Soaring City",
+        "Port of Karfell",
+        "Takenuma, Abandoned Mire",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Thassa's Oracle",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "combo_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Scapeshift",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Aether Gust",
+        "Scapeshift",
+        "Unable to Scream"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 37,
+      "cards": [
+        "Arid Archway",
+        "Boseiju, Who Endures",
+        "Breeding Pool",
+        "Castle Garenbrig",
+        "Cavern of Souls",
+        "Crumbling Vestige",
+        "Fabled Passage",
+        "Hedge Maze",
+        "Ipnu Rivulet",
+        "Lotus Field",
+        "Mirrorpool",
+        "Otawara, Soaring City",
+        "Port of Karfell",
+        "Scapeshift",
+        "Takenuma, Abandoned Mire",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 39,
+      "cards": [
+        "Arid Archway",
+        "Boseiju, Who Endures",
+        "Breeding Pool",
+        "Castle Garenbrig",
+        "Cavern of Souls",
+        "Crumbling Vestige",
+        "Fabled Passage",
+        "Forest",
+        "Hedge Maze",
+        "Ipnu Rivulet",
+        "Island",
+        "Lotus Field",
+        "Mirrorpool",
+        "Otawara, Soaring City",
+        "Port of Karfell",
+        "Swamp",
+        "Takenuma, Abandoned Mire"
+      ],
+      "mainboard_count": 39,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Aftermath Analyst",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Archway",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bonny Pall, Clearcutter",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Castle Garenbrig",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crumbling Vestige",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Culling Ritual",
+      "roles": [
+        "removal",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emrakul, the Promised End",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabled Passage",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Formidable Speaker",
+      "roles": [
+        "discard_outlets",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hedge Maze",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ipnu Rivulet",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lotus Field",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lumra, Bellow of the Woods",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mirrorpool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Port of Karfell",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scapeshift",
+      "roles": [
+        "combo_pieces",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Takenuma, Abandoned Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thassa's Oracle",
+      "roles": [
+        "dig_draw",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tranquil Frillback",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vibrance",
+      "roles": [
+        "removal",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wistfulness",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yorion, Sky Nomad",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always play lands before casting Scapeshift to maximize the number of lands you can exile",
+    "Hold up Scapeshift until you have a clear target or need to bypass a land count limit",
+    "Pump Lumra during your opponent's turn or before combat to maximize surprise and combat damage",
+    "Sacrifice Yorion at the end of your turn to draw cards safely and avoid opponent interaction",
+    "Common mistakes include overcommitting to Yorion when you can combo off, forgetting to untap a Forest after Scapeshift, and not tracking opponent's removal/counters."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands efficiently to enable Scapeshift on turn two or three"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up mana for potential hand disruption or counterspells"
+    },
+    {
+      "trigger": "early game",
+      "line": "Deploy Lumra early to establish a board presence and begin counter accumulation"
+    }
+  ],
+  "kill_priority": [
+    "Yorion, Sky Nomad",
+    "Lumra, Bellow of the Woods",
+    "Scapeshift",
+    "Thassa's Oracle",
+    "Aftermath Analyst",
+    "Arboreal Grazer",
+    "Bonny Pall, Clearcutter",
+    "Emeritus of Abundance"
+  ],
+  "interaction_to_disrupt": [
+    "Cavern of Souls",
+    "Emrakul, the Promised End",
+    "Lotus Field",
+    "Scapeshift",
+    "Thassa's Oracle",
+    "Yorion, Sky Nomad",
+    "Boseiju, Who Endures",
+    "Culling Ritual"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/sultai-scapeshift.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

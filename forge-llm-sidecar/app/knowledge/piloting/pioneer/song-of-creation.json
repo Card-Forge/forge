@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Mox Amber and early lands",
       "Hands with Beseech the Mirror and mana sources",
-      "Hands featuring Song of Creation and acceleration"
+      "Hands featuring Song of Creation and acceleration",
+      "Keep any hand with Mox Amber or Beseech the Mirror plus two lands.",
+      "Keep Song of Creation only if paired with fast mana (Mox Amber, fetches, or shock lands) and a land."
     ],
     "mulligan_criteria": [
       "Hands lacking mana acceleration",
       "Hands with only high-cost cards",
-      "Hands missing key combo pieces"
+      "Hands missing key combo pieces",
+      "Mulligan pure land hands, hands with only Song of Creation and no mana, or hands with Beseech but no way to get Song of Creation to the graveyard."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Prioritize playing lands and Mox Amber",
       "Search for specific lands needed for combo pieces",
-      "Protect combo pieces from early disruption"
+      "Protect combo pieces from early disruption",
+      "Turn 1: Play a fetch land, tap for a basic, fetch a dual/shock land, and play Mox Amber.",
+      "Turn 2: Cast Song of Creation.",
+      "If it resolves, you win.",
+      "If it is countered or removed, use Beseech the Mirror to sacrifice a permanent and recur Song of Creation from the graveyard.",
+      "Sequence lands to ensure you can cast Song of Creation on time while retaining mana for protection or recursion."
     ],
     "mid_game": [
       "Cast Beseech the Mirror to copy key permanents",
       "Accumulate mana and creatures for the payoff",
-      "Apply pressure with copied creatures or lands"
+      "Apply pressure with copied creatures or lands",
+      "Prioritize keeping Song of Creation and Beseech the Mirror in hand or graveyard.",
+      "Use Mox Amber for tempo and mana acceleration, timing your spells to trigger its untap ability.",
+      "Don't overextend into board wipes",
+      "keep recursion tools ready and manage your graveyard carefully if facing hate cards.",
+      "Commit threats only when you have protection or recursion backup.",
+      "Hold back if the opponent has sweepers or heavy removal."
     ],
     "late_game": [
       "Cast Song of Creation to flood the board",
       "Use the army of 1/1s to attack directly",
-      "Maintain board presence with copied permanents"
+      "Maintain board presence with copied permanents",
+      "Song of Creation is the primary finisher.",
+      "Beseech the Mirror enables recursion wins if you have multiple copies or ways to sacrifice permanents.",
+      "Use Mox Amber to fuel the recursion loop and ensure you can cast Song of Creation even after it's been answered.",
+      "Go all-in when you have a clear path to resolving Song of Creation, have answered or bypassed the opponent's removal, or when you're ahead on board and can protect the win condition.",
+      "Commit fully if the opponent has no interaction left."
     ]
   },
   "key_cards": [
@@ -58,7 +77,12 @@
   "sequencing_tips": [
     "Always play Mox Amber before casting high-cost spells",
     "Copy lands with Beseech the Mirror before casting Song of Creation",
-    "Hold up mana for potential counterspells or removal"
+    "Hold up mana for potential counterspells or removal",
+    "Common mistake: Casting Song of Creation without a plan for recursion if it's answered.",
+    "Always keep Beseech the Mirror in hand or ensure you have a way to get it to the graveyard.",
+    "Watch out for cantrips that let opponents find removal.",
+    "Mox Amber's untap trigger can be a massive tempo swing, so time your spells to maximize it.",
+    "The deck is fragile to mass removal, so don't overcommit to the board before casting Song of Creation."
   ],
   "matchups": [
     {
@@ -84,15 +108,33 @@
         "Removal spells",
         "Card advantage engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split second if available, or cast Song of Creation when the opponent has no mana up. Use Beseech the Mirror to recur it after it's countered. Employ cheap threats to force interaction, then win with Song of Creation on the following turn.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Mox Amber and cheap spells. Use spot removal to stop key ramp pieces. Don't let them get too far ahead; recur Song of Creation quickly and pressure their life total to close the game before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the recursion war. Prioritize card advantage and protection. Use Beseech the Mirror to recur Song of Creation faster. Sideboard in extra recursion and hate for their recursion tools. Trade efficiently and force them to overcommit to removal.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspell",
     "Lightning Bolt",
-    "Wrath of God"
+    "Wrath of God",
+    "Watch for sweepers (e.g., Wrath of God, Damnation), targeted removal (Path, Swords to Plowshares), and graveyard hate (Leyline, Rest in Peace).",
+    "Note if opponents are holding up removal for Song of Creation versus early threats, and adjust your recursion timing accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:23:47+00:00",
     "model": "local-model",
@@ -108,6 +150,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

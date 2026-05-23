@@ -1,0 +1,998 @@
+{
+  "schema_version": 1,
+  "name": "Atreus, Impulsive Son // Kratos, Stoic Father",
+  "format": "commander",
+  "colors": [
+    "R",
+    "U",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "The deck leverages a dual-state engine to fluidly shift between explosive tempo aggression and resilient control, using Iroas, God of Victory as a combat and value anchor. It aims to out-resource and out-adapt midrange, control, and combo archetypes by dictating pace, trading efficiently, and closing out games through combat advantage or late-game inevitability.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 2,
+      "cards": [
+        "Training Grounds",
+        "Zirda, the Dawnwaker"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "An Offer You Can't Refuse"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Atreus, Impulsive Son",
+        "Battle Angels of Tyr",
+        "Esper Sentinel",
+        "Iroas, God of Victory",
+        "Kaito, Cunning Infiltrator",
+        "Raugrin Triome",
+        "Smothering Tithe",
+        "The Locust God",
+        "Trouble in Pairs",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 1,
+      "cards": [
+        "Thassa, God of the Sea"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 3,
+      "cards": [
+        "Arid Mesa",
+        "Bloodstained Mire",
+        "Flooded Strand"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Iroas, God of Victory",
+        "Windcrag Siege"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 42,
+      "cards": [
+        "Atreus, Impulsive Son",
+        "Aurelia, the Warleader",
+        "Battle Angels of Tyr",
+        "Birgi, God of Storytelling",
+        "Cavern-Hoard Dragon",
+        "Cursed Mirror",
+        "Deflecting Swat",
+        "Embercleave",
+        "Esper Sentinel",
+        "Gisela, Blade of Goldnight",
+        "God-Eternal Oketra",
+        "Goldspan Dragon",
+        "Grand Abolisher",
+        "Grateful Apparition",
+        "Halvar, God of Battle",
+        "Heliod, Sun-Crowned",
+        "Hexing Squelcher",
+        "Ilharg, the Raze-Boar",
+        "Iroas, God of Victory",
+        "Kaito, Cunning Infiltrator",
+        "Kratos, God of War",
+        "Kratos, Stoic Father",
+        "Legion Leadership",
+        "Lightning Greaves",
+        "Metastatic Evangel",
+        "Norn's Choirmaster",
+        "Ojer Axonil, Deepest Might",
+        "Otharri, Suns' Glory",
+        "Patrolling Peacemaker",
+        "Port Razer",
+        "Purphoros, Bronze-Blooded",
+        "Roaming Throne",
+        "Sol Ring",
+        "Surtr, Fiery J\u00f6tun",
+        "Thassa, God of the Sea",
+        "The Locust God",
+        "Unsettled Mariner",
+        "Urza's Incubator",
+        "Venat, Heart of Hydaelyn",
+        "Vexilus Praetor",
+        "Wan Shi Tong, Librarian",
+        "Zirda, the Dawnwaker"
+      ],
+      "mainboard_count": 42,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Adarkar Wastes",
+        "Ancient Tomb",
+        "Atreus, Impulsive Son",
+        "Battle Angels of Tyr",
+        "Battlefield Forge",
+        "Cavern-Hoard Dragon",
+        "Gisela, Blade of Goldnight",
+        "Grateful Apparition",
+        "Kaito, Cunning Infiltrator",
+        "Kratos, God of War",
+        "Otawara, Soaring City",
+        "Path to Exile",
+        "Port Razer",
+        "Shivan Reef",
+        "Surtr, Fiery J\u00f6tun",
+        "Swords to Plowshares",
+        "Talisman of Conviction",
+        "Talisman of Progress",
+        "The Reaver Cleaver"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Arcane Signet",
+        "Aurelia, the Warleader",
+        "Full Throttle",
+        "Kratos, God of War",
+        "Port Razer"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Fierce Guardianship",
+        "Swan Song"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 12,
+      "cards": [
+        "Cavern of Souls",
+        "Flare of Fortitude",
+        "Heliod, Sun-Crowned",
+        "Hexing Squelcher",
+        "Iroas, God of Victory",
+        "Mithril Coat",
+        "Purphoros, Bronze-Blooded",
+        "Roaming Throne",
+        "Shadowspear",
+        "Thassa, God of the Sea",
+        "Tyrite Sanctum",
+        "Vexilus Praetor"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 3,
+      "cards": [
+        "Atreus, Impulsive Son",
+        "Kaito, Cunning Infiltrator",
+        "The Locust God"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 3,
+      "cards": [
+        "Otharri, Suns' Glory",
+        "Patrolling Peacemaker",
+        "Seize the Day"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 6,
+      "cards": [
+        "Desynchronization",
+        "Ilharg, the Raze-Boar",
+        "Otawara, Soaring City",
+        "Otharri, Suns' Glory",
+        "Seize the Day",
+        "The Locust God"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Blind Obedience",
+        "God-Eternal Oketra",
+        "Iroas, God of Victory",
+        "Surtr, Fiery J\u00f6tun"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Windcrag Siege"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Iroas, God of Victory"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Gisela, Blade of Goldnight",
+        "Grand Abolisher",
+        "Iroas, God of Victory"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 43,
+      "cards": [
+        "Adarkar Wastes",
+        "An Offer You Can't Refuse",
+        "Ancient Tomb",
+        "Arcane Signet",
+        "Arena of Glory",
+        "Arid Mesa",
+        "Battlefield Forge",
+        "Bloodstained Mire",
+        "Cascade Bluffs",
+        "Cavern of Souls",
+        "Fellwar Stone",
+        "Flooded Strand",
+        "Floodfarm Verge",
+        "Goldspan Dragon",
+        "Hallowed Fountain",
+        "Iroas, God of Victory",
+        "Karn's Bastion",
+        "Minamo, School at Water's Edge",
+        "Nimbus Maze",
+        "Otawara, Soaring City",
+        "Plateau",
+        "Raugrin Triome",
+        "Riverpyre Verge",
+        "Rogue's Passage",
+        "Rugged Prairie",
+        "Sacred Foundry",
+        "Sea of Clouds",
+        "Secret Tunnel",
+        "Shinka, the Bloodsoaked Keep",
+        "Shivan Reef",
+        "Smothering Tithe",
+        "Snow-Covered Island",
+        "Snow-Covered Mountain",
+        "Snow-Covered Plains",
+        "Spectator Seating",
+        "Steam Vents",
+        "Sunbillow Verge",
+        "Sundown Pass",
+        "Training Center",
+        "Tundra",
+        "Tyrite Sanctum",
+        "Volcanic Island"
+      ],
+      "mainboard_count": 43,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 37,
+      "cards": [
+        "Adarkar Wastes",
+        "Ancient Tomb",
+        "Arena of Glory",
+        "Arid Mesa",
+        "Battlefield Forge",
+        "Bloodstained Mire",
+        "Cascade Bluffs",
+        "Cavern of Souls",
+        "Flooded Strand",
+        "Floodfarm Verge",
+        "Hallowed Fountain",
+        "Karn's Bastion",
+        "Minamo, School at Water's Edge",
+        "Nimbus Maze",
+        "Otawara, Soaring City",
+        "Plateau",
+        "Raugrin Triome",
+        "Riverpyre Verge",
+        "Rogue's Passage",
+        "Rugged Prairie",
+        "Sacred Foundry",
+        "Sea of Clouds",
+        "Secret Tunnel",
+        "Shinka, the Bloodsoaked Keep",
+        "Shivan Reef",
+        "Snow-Covered Island",
+        "Snow-Covered Mountain",
+        "Snow-Covered Plains",
+        "Spectator Seating",
+        "Steam Vents",
+        "Sunbillow Verge",
+        "Sundown Pass",
+        "Training Center",
+        "Tundra",
+        "Tyrite Sanctum",
+        "Volcanic Island"
+      ],
+      "mainboard_count": 37,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Kaito, Cunning Infiltrator"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.37
+  },
+  "dual_role_cards": [
+    {
+      "card": "Adarkar Wastes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "An Offer You Can't Refuse",
+      "roles": [
+        "counterspells",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Signet",
+      "roles": [
+        "mana_fixing",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arena of Glory",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Mesa",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Atreus, Impulsive Son",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Aurelia, the Warleader",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Battle Angels of Tyr",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Battlefield Forge",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cascade Bluffs",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern-Hoard Dragon",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Esper Sentinel",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Floodfarm Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gisela, Blade of Goldnight",
+      "roles": [
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "God-Eternal Oketra",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goldspan Dragon",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grand Abolisher",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grateful Apparition",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Heliod, Sun-Crowned",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hexing Squelcher",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ilharg, the Raze-Boar",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Iroas, God of Victory",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaito, Cunning Infiltrator",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karn's Bastion",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kratos, God of War",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Minamo, School at Water's Edge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nimbus Maze",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otharri, Suns' Glory",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Patrolling Peacemaker",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Plateau",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Port Razer",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Purphoros, Bronze-Blooded",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raugrin Triome",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Riverpyre Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Roaming Throne",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rogue's Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rugged Prairie",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sea of Clouds",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Secret Tunnel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seize the Day",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shinka, the Bloodsoaked Keep",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shivan Reef",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smothering Tithe",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Mountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Plains",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spectator Seating",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunbillow Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sundown Pass",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Surtr, Fiery J\u00f6tun",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thassa, God of the Sea",
+      "roles": [
+        "dig_draw",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Locust God",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Training Center",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tundra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tyrite Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vexilus Praetor",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volcanic Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wan Shi Tong, Librarian",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windcrag Siege",
+      "roles": [
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zirda, the Dawnwaker",
+      "roles": [
+        "mana_reducers",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: Overcommitting to Impulsive mode without backup, leaving you vulnerable to sweepers.",
+    "Always maintain a balance between the two states.",
+    "Iroas synergizes best with combat-heavy or +1/+1 counter strategies, so track opponent's board state carefully.",
+    "Arcane Signet is crucial for tempo",
+    "don't leave it untapped if you can cast a spell."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Arcane Signet if available, or deploy a cheap creature/spell to establish board presence."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Cast Kratos/Atreus, choosing Stoic mode to draw/filter or Impulsive mode to attack/trigger effects."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence lands to ensure R/U/W availability by turn 3, prioritizing Signet drops to accelerate into key spells."
+    }
+  ],
+  "kill_priority": [
+    "Blind Obedience",
+    "God-Eternal Oketra",
+    "Iroas, God of Victory",
+    "Surtr, Fiery J\u00f6tun",
+    "Windcrag Siege",
+    "Kaito, Cunning Infiltrator",
+    "Atreus, Impulsive Son",
+    "Aurelia, the Warleader"
+  ],
+  "interaction_to_disrupt": [
+    "An Offer You Can't Refuse",
+    "Fierce Guardianship",
+    "Swan Song",
+    "Cavern of Souls",
+    "Flare of Fortitude",
+    "Heliod, Sun-Crowned",
+    "Hexing Squelcher",
+    "Iroas, God of Victory"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/atreus-impulsive-son-kratos-stoic-father.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

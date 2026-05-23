@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Cauldron Familiar and at least two lands",
       "Hands with Birthing Ritual and a cheap spell or Chord of Calling",
-      "Hands that can play a turn-one land and a turn-two acceleration spell"
+      "Hands that can play a turn-one land and a turn-two acceleration spell",
+      "Keep hands with 2-3 lands (preferably basics or duals that fetch basics), Birthing Ritual, Cauldron Familiar, and Chord of Calling.",
+      "Keep any hand with Birthing Ritual + Cauldron Familiar + 2 lands."
     ],
     "mulligan_criteria": [
       "Hands lacking mana acceleration or land search",
       "Hands with only high-cost spells and no early interaction",
-      "Hands missing Chord of Calling or combo enablers in a 4-card hand"
+      "Hands missing Chord of Calling or combo enablers in a 4-card hand",
+      "Mulligan hands with 0-1 lands, multiple copies of Birthing Ritual/Cauldron Familiar without lands, or hands lacking early interaction/draw spells."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Play lands and immediately activate Cauldron Familiar to search for optimal mana bases",
       "Cast cheap spells to establish board presence and protect acceleration",
-      "Hold back mana to respond to early disruption if possible"
+      "Hold back mana to respond to early disruption if possible",
+      "Turn 1: Play a land, cast Birthing Ritual for 1 to fetch Cauldron Familiar.",
+      "Turn 2: Cast Cauldron Familiar, let it die to fetch a second creature (often a mana dork, artifact, or wincon piece), or cast Chord of Calling for 1 to fetch a specific threat.",
+      "Sequence lands to ensure you can cast Birthing Ritual on turn 1 and follow up with Cauldron Familiar on turn 2."
     ],
     "mid_game": [
       "Chain Birthing Ritual with Chord of Calling to find multiple threats or finishers",
       "Use Cauldron Familiar repeatedly to fix mana and find combo pieces",
-      "Apply pressure while searching for the final components of the combo"
+      "Apply pressure while searching for the final components of the combo",
+      "Prioritize keeping Birthing Ritual and Cauldron Familiar in play as long as possible to maximize value.",
+      "Use Chord of Calling sparingly for key pieces.",
+      "Manage graveyard by avoiding unnecessary sacrifice outlets unless necessary for the combo.",
+      "Keep hand size high by using draw spells or ritual effects.",
+      "Commit threats only when you have a clear path to the win condition or can protect them with removal.",
+      "Hold back Birthing Ritual/Cauldron Familiar if the opponent has sweepers or targeted removal."
     ],
     "late_game": [
       "Execute the full combo sequence to generate lethal damage or untouchable board states",
       "Flood the board with Chord of Calling targets to exhaust opponent removal",
-      "Maintain card advantage through continuous land search and spell recursion"
+      "Maintain card advantage through continuous land search and spell recursion",
+      "Birthing Ritual + Cauldron Familiar + Chord of Calling to fetch a win condition like Karn, the Great Creator, Thrun, Breaker of Silence, Goblin Welder, or a massive creature.",
+      "Once assembled, untap lands and cast Birthing Ritual repeatedly to generate infinite value or win directly.",
+      "Go all-in when you have a clear win condition in hand or can assemble it in one turn, and the opponent has no immediate removal or sweepers.",
+      "Also commit when you're ahead on board and can close out the game before the opponent stabilizes."
     ]
   },
   "key_cards": [
@@ -58,7 +74,9 @@
   "sequencing_tips": [
     "Activate Cauldron Familiar before playing lands to maximize search efficiency",
     "Cast Birthing Ritual immediately before Chord of Calling to ensure you can pay for multiple targets",
-    "Hold up mana for potential counterspells or removal before committing to the full combo sequence"
+    "Hold up mana for potential counterspells or removal before committing to the full combo sequence",
+    "Common mistakes include overcommitting Birthing Ritual/Cauldron Familiar without a win condition, miscounting mana for Chord of Calling, and failing to track opponent's removal.",
+    "Unique interactions include using Birthing Ritual to fetch basic lands for shock lands or fetch lands, and using Cauldron Familiar's death trigger to fetch creatures with mana value 1 for additional value."
   ],
   "matchups": [
     {
@@ -96,6 +114,21 @@
         "Hand disruption",
         "Priority plays"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Birthing Ritual and Cauldron Familiar as instant-speed threats or value engines. Cast Chord of Calling in response to counterspells if possible, or use protection spells. Sequence spells to beat countermagic (e.g., cast Birthing Ritual, then Cauldron Familiar, then Chord of Calling in separate turns).",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use early interaction to slow down their mana development. Prioritize removing key ramp creatures or artifacts. Use Chord of Calling to fetch removal or protection.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by going first, having better sequencing, or having more interaction. Use Chord of Calling to fetch removal or protection. Prioritize breaking their combo pieces before they can assemble theirs.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -103,10 +136,13 @@
     "Hand disruption",
     "Counterspells",
     "Permanent destruction",
-    "Graveyard hate"
+    "Graveyard hate",
+    "Watch for sweepers (e.g., Wrath of God, Day of Judgment), targeted removal (e.g., Path to Exile, Swords to Plowshares), and combo pieces that can end the game quickly.",
+    "Note when opponents tap out for counterspells or protection spells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:26:57+00:00",
     "model": "local-model",
@@ -122,7 +158,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

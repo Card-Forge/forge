@@ -1,0 +1,105 @@
+{
+  "archetype": "5c Heroic",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/5c-heroic.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Dig Site Inventory"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 4,
+      "name": "Favored Hoplite"
+    },
+    {
+      "qty": 4,
+      "name": "Great Hall of the Biblioplex"
+    },
+    {
+      "qty": 2,
+      "name": "Guardian of New Benalia"
+    },
+    {
+      "qty": 4,
+      "name": "Guiding Voice"
+    },
+    {
+      "qty": 4,
+      "name": "Homestead Courage"
+    },
+    {
+      "qty": 4,
+      "name": "Illuminator Virtuoso"
+    },
+    {
+      "qty": 4,
+      "name": "Lagonna-Band Trailblazer"
+    },
+    {
+      "qty": 15,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Practiced Offense"
+    },
+    {
+      "qty": 2,
+      "name": "Professor of Symbology"
+    },
+    {
+      "qty": 4,
+      "name": "Seasoned Hallowblade"
+    },
+    {
+      "qty": 4,
+      "name": "Sheltered by Ghosts"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Airbending Lesson"
+    },
+    {
+      "qty": 1,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 1,
+      "name": "Dai Li Indoctrination"
+    },
+    {
+      "qty": 4,
+      "name": "Doorkeeper Thrull"
+    },
+    {
+      "qty": 2,
+      "name": "Enter the Avatar State"
+    },
+    {
+      "qty": 1,
+      "name": "Iroh's Demonstration"
+    },
+    {
+      "qty": 1,
+      "name": "Origin of Metalbending"
+    },
+    {
+      "qty": 1,
+      "name": "Ozai's Cruelty"
+    },
+    {
+      "qty": 2,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Yip Yip!"
+    }
+  ]
+}

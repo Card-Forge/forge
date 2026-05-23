@@ -1,0 +1,145 @@
+{
+  "archetype": "Mono-White Stax",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/mono-white-stax.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Blast Zone"
+    },
+    {
+      "qty": 4,
+      "name": "Chalice of the Void"
+    },
+    {
+      "qty": 4,
+      "name": "City of Traitors"
+    },
+    {
+      "qty": 3,
+      "name": "Crucible of Worlds"
+    },
+    {
+      "qty": 1,
+      "name": "Expedition Map"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Quarter"
+    },
+    {
+      "qty": 4,
+      "name": "Grim Monolith"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 4,
+      "name": "Karn, the Great Creator"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Diamond"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 4,
+      "name": "Rishadan Port"
+    },
+    {
+      "qty": 4,
+      "name": "Simian Spirit Guide"
+    },
+    {
+      "qty": 2,
+      "name": "Smokestack"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 3,
+      "name": "Tezzeret, Cruel Captain"
+    },
+    {
+      "qty": 4,
+      "name": "Trinisphere"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Walking Ballista"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Crucible of Worlds"
+    },
+    {
+      "qty": 1,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Ensnaring Bridge"
+    },
+    {
+      "qty": 1,
+      "name": "Karn's Sylex"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Liquimetal Coating"
+    },
+    {
+      "qty": 1,
+      "name": "Mycosynth Lattice"
+    },
+    {
+      "qty": 1,
+      "name": "Skysovereign, Consul Flagship"
+    },
+    {
+      "qty": 1,
+      "name": "Smokestack"
+    },
+    {
+      "qty": 1,
+      "name": "Sphere of Resistance"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Torpor Orb"
+    }
+  ]
+}

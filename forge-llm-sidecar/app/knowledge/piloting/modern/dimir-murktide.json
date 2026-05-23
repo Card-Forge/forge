@@ -1,0 +1,122 @@
+{
+  "archetype": "Dimir Murktide",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Dimir Murktide is a tempo-control deck that uses discard and counterspells to disrupt the opponent while building a graveyard advantage to cast Murktide Necromancer and Flow State for explosive, game-winning turns. It excels against combo and midrange decks by out-valueing them with cheap threats and graveyard recursion.",
+  "win_conditions": [
+    "Flow State casting multiple cheap threats (Orcish Bowmasters, Psychic Frog, Thought Scour, counters) followed by Murktide Necromancer to recur them.",
+    "Alternatively, Murktide + graveyard shenanigans to overwhelm the board."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including fetches), at least one early interaction (Thoughtseize, Inquisition of the Deep, Daze, Force of Negation), and a Flow State or cheap threat (Psychic Frog, Orcish Bowmasters, Thought Scour)."
+    ],
+    "mulligan_criteria": [
+      "Mulligan pure land, three-plus lands without interaction, or hands lacking a turn-1 play."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Cast Thoughtseize/Inquisition on key threats (Amulet, Energy, Storm combo pieces, Affinity artifacts).",
+      "Turn 2: Play a shock land, fetch a basic, cast Daze/Force of Negation/Thought Scour, or drop Psychic Frog/Orcish Bowmasters.",
+      "Prioritize fetching duals for shock lands to preserve life total against aggro."
+    ],
+    "mid_game": [
+      "Use Thought Scour to fuel Murktide and Flow State while digging for answers.",
+      "Preserve counterspells for critical threats",
+      "don't waste them on non-essential spells.",
+      "Keep graveyard size in check against hatebear decks, but maintain it for Murktide recursion.",
+      "Commit threats when you have interaction to protect them or when you can swing with Flow State.",
+      "Hold back on casting expensive spells if you lack counters/discard to protect them.",
+      "Use counters to protect your Flow State or key threats."
+    ],
+    "late_game": [
+      "Flow State casting multiple cheap threats (Orcish Bowmasters, Psychic Frog, Thought Scour, counters) followed by Murktide Necromancer to recur them.",
+      "Alternatively, Murktide + graveyard shenanigans to overwhelm the board.",
+      "Go all-in when you have 3+ spells/threats in hand/graveyard, enough mana to cast Flow State, and a clear path to victory (opponent low on life, no immediate removal).",
+      "Don't commit if you're facing graveyard hate or have no way to protect your combo."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Orcish Bowmasters",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Flow State",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Psychic Frog",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Flow State is your win condition, not just a tempo play.",
+    "Sequence it carefully: cast cheap threats first, then counters/discard, then Flow State to cast them all for free.",
+    "Don't cast Flow State on turn 2 unless you have a clear path to lethal.",
+    "Murktide requires a graveyard, so be mindful of Rest in Peace or Surgical Extraction.",
+    "Thought Scour is your best friend for fueling both Murktide and Flow State."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtseize to remove counterspells early. Cast Flow State or threats in response to counterspells to break the stack. Use Daze/Force of Negation to protect your own spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-value them with cheap threats and counters. Thoughtseize to remove key ramp pieces. Flow State to swing before they can cast their big threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early counters and discard. Use Psychic Frog/Orcish Bowmasters to trade efficiently. Flow State to swing for lethal or to clear the board. Don't overextend; play around removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with cheap threats and discard. Use Flow State to out-value their removal. Dig for answers with Thought Scour/Brainstorm. Force them to use resources on your threats while you set up Murktide.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize Thoughtseize/Inquisition to remove their counters and threats. Use counters to protect your Flow State. Graveyard hate (Rest in Peace) can shut down their recursion. Out-value them with better sequencing and card advantage.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for combo win conditions (Amulet Titan, Ruby Storm, Energy) and artifact acceleration (Affinity).",
+    "Note when opponents tap out for big threats, as you can counter or discard them.",
+    "Track graveyard size to anticipate Murktide or opponent recursion."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/modern.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

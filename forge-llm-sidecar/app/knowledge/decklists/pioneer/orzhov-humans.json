@@ -1,0 +1,113 @@
+{
+  "archetype": "Orzhov Humans",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/orzhov-humans.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Adeline, Resplendent Cathar"
+    },
+    {
+      "qty": 1,
+      "name": "Bleachbone Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Caves of Koilos"
+    },
+    {
+      "qty": 3,
+      "name": "Cecil, Dark Knight"
+    },
+    {
+      "qty": 4,
+      "name": "Concealed Courtyard"
+    },
+    {
+      "qty": 4,
+      "name": "Coppercoat Vanguard"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Confidant"
+    },
+    {
+      "qty": 2,
+      "name": "Dauntless Bodyguard"
+    },
+    {
+      "qty": 2,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 2,
+      "name": "Extraction Specialist"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 4,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 2,
+      "name": "Hopeful Initiate"
+    },
+    {
+      "qty": 1,
+      "name": "Kytheon, Hero of Akros"
+    },
+    {
+      "qty": 4,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 3,
+      "name": "Recruitment Officer"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowy Backstreet"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thalia's Lieutenant"
+    },
+    {
+      "qty": 3,
+      "name": "Thalia, Guardian of Thraben"
+    },
+    {
+      "qty": 2,
+      "name": "Veteran Survivor"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 4,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 3,
+      "name": "Vanishing Verse"
+    }
+  ]
+}

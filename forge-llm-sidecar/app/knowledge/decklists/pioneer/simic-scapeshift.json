@@ -1,0 +1,121 @@
+{
+  "archetype": "Simic Scapeshift",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/simic-scapeshift.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Adventurer's Inn"
+    },
+    {
+      "qty": 4,
+      "name": "Aftermath Analyst"
+    },
+    {
+      "qty": 4,
+      "name": "Arboreal Grazer"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Archway"
+    },
+    {
+      "qty": 2,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Botanical Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Castle Garenbrig"
+    },
+    {
+      "qty": 2,
+      "name": "Echoing Deeps"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 1,
+      "name": "Ipnu Rivulet"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Field"
+    },
+    {
+      "qty": 4,
+      "name": "Lumra, Bellow of the Woods"
+    },
+    {
+      "qty": 3,
+      "name": "Marang River Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 4,
+      "name": "Port of Karfell"
+    },
+    {
+      "qty": 4,
+      "name": "Scapeshift"
+    },
+    {
+      "qty": 4,
+      "name": "Spelunking"
+    },
+    {
+      "qty": 3,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 1,
+      "name": "Sunken Citadel"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 4,
+      "name": "The Wandering Minstrel"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Ephara's Dispersal"
+    },
+    {
+      "qty": 3,
+      "name": "Heritage Reclamation"
+    },
+    {
+      "qty": 4,
+      "name": "Sentinel of the Nameless City"
+    },
+    {
+      "qty": 3,
+      "name": "Three Steps Ahead"
+    },
+    {
+      "qty": 2,
+      "name": "Warkite Marauder"
+    }
+  ]
+}

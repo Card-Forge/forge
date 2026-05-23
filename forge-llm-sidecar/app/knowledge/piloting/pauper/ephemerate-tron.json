@@ -1,0 +1,129 @@
+{
+  "archetype": "Ephemerate Tron",
+  "format": "pauper",
+  "strategy_type": "combo",
+  "overview": "A five-color Tron variant that leverages bounce spells like Ephemerate to replay Urza lands for exponential mana generation, aiming to combo off or overwhelm opponents with unanswerable threats. It wins by out-accelerating traditional Tron and leveraging card draw to assemble its engine before opponents can stabilize.",
+  "win_conditions": [
+    "Infinite mana loop via Ephemerate + Tron lands, then cast a game-winning spell (e.g., a massive creature, a combo finisher, or attack with infinite mana artifacts).",
+    "Alternatively, use the mana to cast multiple threats or win via a specific win-con.",
+    "The loop itself is the finisher",
+    "the mana pays for the victory condition."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with two or more lands (preferably including at least one Urza land or Expedition Map), or a combination of Mulldrifter + land + Ephemerate.",
+      "Drop hands with three or more non-basic lands, no Tron pieces, or only single lands without fixing.",
+      "Prioritize hands that can assemble Tron by turn 3 or draw into the bounce engine."
+    ],
+    "mulligan_criteria": [],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Expedition Map to fetch a basic or Urza land.",
+      "Turn 2: Play a land, cast another land or early spell.",
+      "Turn 3: Aim to assemble Tron.",
+      "If possible, cast Mulldrifter to dig for Tron pieces or Ephemerate.",
+      "Sequence: Fetch -> Play -> Cast -> Dig.",
+      "Use low-cost spells to protect your lands or dig deeper if behind."
+    ],
+    "mid_game": [
+      "Mana is your primary resource",
+      "avoid overextending into removal.",
+      "Use Mulldrifter to dig for Tron/Ephemerate when behind.",
+      "Manage your graveyard carefully if the opponent has recursion or hate.",
+      "Prioritize assembling Tron over casting non-essential spells.",
+      "Commit threats only when you have Tron assembled and a bounce spell ready to protect or follow up.",
+      "Hold back if the opponent has sweepers or targeted hate.",
+      "Use Ephemerate to protect key lands or bounce opponent's threats if possible."
+    ],
+    "late_game": [
+      "Infinite mana loop via Ephemerate + Tron lands, then cast a game-winning spell (e.g., a massive creature, a combo finisher, or attack with infinite mana artifacts).",
+      "Alternatively, use the mana to cast multiple threats or win via a specific win-con.",
+      "The loop itself is the finisher",
+      "the mana pays for the victory condition.",
+      "When you have Tron assembled, a bounce spell in hand, and enough mana to either combo off or stabilize against an aggressive board.",
+      "Also commit when the opponent has no removal for your key pieces or when you can safely dig for the second Tron piece."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Urza's Power Plant",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Expedition Map",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Mulldrifter",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overcommitting to Tron without a bounce spell, ignoring opponent's hate, and mismanaging mana during the loop.",
+    "Unique interactions: Ephemerate can bounce your own Tron lands to replay them, but be careful of 'summoning sickness' if using creatures.",
+    "Mulldrifter synergy with bounce allows digging for the second Tron piece.",
+    "Always track opponent's removal count and be ready to pivot if your primary win condition is answered."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple low-cost threats, split your combo across turns, use protection spells, or combo off with uncounterable spells if possible. Dig for answers and avoid casting your entire combo in one vulnerable turn.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-accelerate with Tron, use land destruction, or combo off before they stabilize. Use early interaction to slow them down and prevent them from reaching their late-game threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play early interaction, use Mulldrifter to dig for Tron/Ephemerate, stabilize with board wipes, then combo off or out-value. Prioritize survival over speed until you can assemble your engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats, dig for Tron/Ephemerate, combo off when they have no counters, or use protection to protect your engine. Force them to use resources on your early game to set up your late game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Use Mulldrifter to out-draw, protect your Tron pieces, and combo off first. Bounce their Tron lands if possible and track their removal to avoid walking into hard counters.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for counterspells, artifact hate, board wipes, and graveyard recursion.",
+    "Note if the opponent is playing fast aggro (keep pressure) or control (prepare to combo off).",
+    "Track their removal count and key answers to avoid walking into hard counters."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/pauper.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

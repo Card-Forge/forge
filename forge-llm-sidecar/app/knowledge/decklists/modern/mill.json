@@ -1,0 +1,129 @@
+{
+  "archetype": "Mill",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/mill.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Archive Trap"
+    },
+    {
+      "qty": 4,
+      "name": "Drown in the Loch"
+    },
+    {
+      "qty": 2,
+      "name": "Exhibition Tidecaller"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 3,
+      "name": "Field of Ruin"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Fractured Sanity"
+    },
+    {
+      "qty": 4,
+      "name": "Hedron Crab"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Oboro, Palace in the Clouds"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 3,
+      "name": "Preordain"
+    },
+    {
+      "qty": 4,
+      "name": "Ruin Crab"
+    },
+    {
+      "qty": 1,
+      "name": "Shelldock Isle"
+    },
+    {
+      "qty": 1,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 4,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Tasha's Hideous Laughter"
+    },
+    {
+      "qty": 2,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Visions of Beyond"
+    },
+    {
+      "qty": 2,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Baleful Mastery"
+    },
+    {
+      "qty": 4,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Crypt Incursion"
+    },
+    {
+      "qty": 3,
+      "name": "Extirpate"
+    },
+    {
+      "qty": 1,
+      "name": "Feed the Cycle"
+    },
+    {
+      "qty": 2,
+      "name": "Profane Memento"
+    },
+    {
+      "qty": 1,
+      "name": "The Meathook Massacre"
+    },
+    {
+      "qty": 1,
+      "name": "Toxic Deluge"
+    }
+  ]
+}

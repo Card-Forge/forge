@@ -1,0 +1,129 @@
+{
+  "archetype": "Jund Sacrifice",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/jund-sacrifice.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 3,
+      "name": "Blackcleave Cliffs"
+    },
+    {
+      "qty": 3,
+      "name": "Blazemire Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Blightstep Pathway"
+    },
+    {
+      "qty": 3,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 4,
+      "name": "Bloodtithe Harvester"
+    },
+    {
+      "qty": 4,
+      "name": "Cauldron Familiar"
+    },
+    {
+      "qty": 1,
+      "name": "Claim the Firstborn"
+    },
+    {
+      "qty": 4,
+      "name": "Deadly Dispute"
+    },
+    {
+      "qty": 2,
+      "name": "Den of the Bugbear"
+    },
+    {
+      "qty": 4,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 4,
+      "name": "Mayhem Devil"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Scavenger's Talent"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "The Meathook Massacre"
+    },
+    {
+      "qty": 1,
+      "name": "Unlucky Witness"
+    },
+    {
+      "qty": 4,
+      "name": "Witch's Oven"
+    },
+    {
+      "qty": 2,
+      "name": "Ygra, Eater of All"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 3,
+      "name": "Illness in the Ranks"
+    },
+    {
+      "qty": 1,
+      "name": "Ray of Enfeeblement"
+    },
+    {
+      "qty": 2,
+      "name": "The Legend of Roku"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 2,
+      "name": "Unlicensed Hearse"
+    },
+    {
+      "qty": 1,
+      "name": "Withering Curse"
+    }
+  ]
+}

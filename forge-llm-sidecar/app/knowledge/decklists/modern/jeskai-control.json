@@ -1,0 +1,153 @@
+{
+  "archetype": "Jeskai Control",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/jeskai-control.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 4,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Galvanic Discharge"
+    },
+    {
+      "qty": 1,
+      "name": "Hall of Storm Giants"
+    },
+    {
+      "qty": 2,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Isochron Scepter"
+    },
+    {
+      "qty": 1,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Memory Deluge"
+    },
+    {
+      "qty": 2,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 1,
+      "name": "Monumental Henge"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Gate"
+    },
+    {
+      "qty": 4,
+      "name": "Orim's Chant"
+    },
+    {
+      "qty": 1,
+      "name": "Petrified Hamlet"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 2,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 3,
+      "name": "Solitude"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 2,
+      "name": "Subtlety"
+    },
+    {
+      "qty": 2,
+      "name": "Supreme Verdict"
+    },
+    {
+      "qty": 2,
+      "name": "Teferi, Hero of Dominaria"
+    },
+    {
+      "qty": 4,
+      "name": "Teferi, Time Raveler"
+    },
+    {
+      "qty": 1,
+      "name": "Thundering Falls"
+    },
+    {
+      "qty": 2,
+      "name": "Wrath of the Skies"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Celestial Purge"
+    },
+    {
+      "qty": 4,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "High Noon"
+    },
+    {
+      "qty": 1,
+      "name": "Kaheera, the Orphanguard"
+    },
+    {
+      "qty": 3,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 1,
+      "name": "Subtlety"
+    },
+    {
+      "qty": 1,
+      "name": "Wrath of the Skies"
+    }
+  ]
+}

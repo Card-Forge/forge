@@ -1,0 +1,124 @@
+{
+  "archetype": "Ashling, the Limitless",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck aims to generate an overwhelming army of 1/1 Human tokens by repeatedly casting spells each turn, leveraging Ashling, the Limitless and Risen Reef as core engines. It wins by out-resourcing opponents through spell density and token multiplication, overwhelming both aggressive and control strategies with unstoppable board presence.",
+  "win_conditions": [
+    "Ashling, the Limitless (entering triggers + second spell triggers), Risen Reef, and other token generators.",
+    "Win by casting multiple spells in a single turn to flood the board, then attacking with the token army."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing untapped or fetchable basics), at least one mana rock (Sol Ring, Arcane Signet, etc.), and a 1-2 mana cantrip or creature."
+    ],
+    "mulligan_criteria": [
+      "Mulligan any hand with zero lands, only high-cost spells, or no early interaction/spell generation tools."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring or a cheap mana artifact.",
+      "If possible, cast a 1-mana cantrip or creature to start the 'second spell' trigger.",
+      "Turn 2: Ramp into dual lands or fetch basics, cast a second spell to trigger Ashling/Risen Reef, or play Ashling directly if mana allows.",
+      "Prioritize untapped land drops to enable multi-casting."
+    ],
+    "mid_game": [
+      "Preserve mana for multi-casting",
+      "avoid overcommitting to one big spell if you can cast two smaller ones to trigger token generation.",
+      "Manage hand size by cycling through cantrips.",
+      "Use the graveyard strategically but avoid relying on it since the deck is spell-centric.",
+      "Commit threats when you have untapped mana for at least 3 spells in a turn.",
+      "Hold back if opponents have sweepers or if you're low on resources.",
+      "Prioritize protecting Ashling and Risen Reef with counterspells or protection spells."
+    ],
+    "late_game": [
+      "Ashling, the Limitless (entering triggers + second spell triggers), Risen Reef, and other token generators.",
+      "Win by casting multiple spells in a single turn to flood the board, then attacking with the token army.",
+      "Go all-in when you have untapped mana for at least 3-4 spells in a turn, or when opponents have no sweepers in hand.",
+      "Commit when you can protect your board or have a backup plan if wiped."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ashling, the Limitless",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Risen Reef",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Remember that Ashling's second-spell trigger only counts spells you cast, not tokens or triggered abilities.",
+    "Risen Reef triggers on every spell you cast, so stacking cheap cantrips is key.",
+    "Avoid overcommitting to one big spell",
+    "the deck wins through volume.",
+    "Watch for 'summoning sickness' on your tokens\u2014they can attack immediately if they enter on your turn, but be mindful of combat math.",
+    "In Commander, always be aware of the 'conspiracy' rule regarding sideboards",
+    "if playing in a sanctioned environment, use a sideboard from your command zone or adjust your main deck pre-game accordingly."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, redundant spells to force counterspells. Employ mana rocks to cast around counters. Use instant-speed spells to protect your key creatures.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with tokens. Use removal on their mana sources. Don't let them stabilize; keep casting spells to overwhelm their ramp strategy.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Hold up removal/wipes for turn 3-4. Use your early tokens to trade efficiently. Stabilize with board wipes, then transition to your own win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-grind them with card advantage and multi-casting. Use cantrips to dig for answers. Attack with tokens to force them to spend resources on removal instead of their win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by having better card advantage, more efficient mana, or additional protection for your key creatures. Prioritize removing their Ashling/Risen Reef and controlling the board with targeted removal.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath of God, Day of Judgment), targeted removal on your key creatures, and combo win conditions.",
+    "Note when opponents tap out for big spells, as you can capitalize on their vulnerability."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

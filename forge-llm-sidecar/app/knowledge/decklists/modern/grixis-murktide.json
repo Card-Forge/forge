@@ -1,0 +1,113 @@
+{
+  "archetype": "Grixis Murktide",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/grixis-murktide.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Abhorrent Oculus"
+    },
+    {
+      "qty": 4,
+      "name": "Agatha's Soul Cauldron"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 2,
+      "name": "Darkslick Shores"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 4,
+      "name": "Fatestitcher"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Gran-Gran"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 4,
+      "name": "Pensive Professor"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Psychic Frog"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 3,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 4,
+      "name": "Unearth"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Engineered Explosives"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 3,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 3,
+      "name": "Meltdown"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroclasm"
+    }
+  ]
+}

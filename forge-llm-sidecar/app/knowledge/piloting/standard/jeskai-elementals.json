@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least one early Elemental or Roaming Throne",
       "Hands containing Deceit paired with a land drop",
-      "Hands with Wistfulness and a playable creature"
+      "Hands with Wistfulness and a playable creature",
+      "Keep hands with 2-3 lands (prioritizing duals/fixing), a turn-1 or turn-2 play (1-drop Elemental or early interaction like Deceit), and at least one way to protect your board or counter threats.",
+      "Keep Roaming Throne only with 3+ cheap instants/sorceries to copy."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or early board presence",
       "Hands with only high-cost spells and no ramp",
-      "Hands missing lands or card draw engines"
+      "Hands missing lands or card draw engines",
+      "Mulligan on 3+ lands with no early plays, or 2+ lands with only late-game threats and no interaction."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play small Elementals to trigger Wistfulness's draw condition",
       "Use Wistfulness to fetch lands and maintain mana advantage",
-      "Hold Deceit for opponent's turn to disrupt early threats"
+      "Hold Deceit for opponent's turn to disrupt early threats",
+      "Turn 1: Play a land, cast a 1-drop Elemental or hold up Deceit/counter.",
+      "Turn 2: Develop board with another Elemental or cast interaction.",
+      "Sequence lands to ensure blue/red availability for counterspells/removal while maintaining white sources for protection.",
+      "If opening with Roaming Throne, play it on turn 2 or 3 once you have a stack of cheap spells to copy."
     ],
     "mid_game": [
       "Activate Roaming Throne to move counters onto key Elementals",
       "Cast Deceit to copy opponent's removal or pump spells",
-      "Maintain board presence while cycling through card advantage"
+      "Maintain board presence while cycling through card advantage",
+      "Hoard interaction until key threats or combo pieces are on the stack.",
+      "Use Wistfulness's death trigger to refill your hand when trading Elementals favorably.",
+      "Avoid overcommitting to the board if you lack answers to their sweepers or spot removal.",
+      "Manage your graveyard only if the format features relevant reanimation or milling threats.",
+      "Commit threats when you have interaction to protect them or can trade favorably.",
+      "Hold back big finishers if the opponent has sweepers or targeted removal."
     ],
     "late_game": [
       "Scale Elementals into unblockable threats using Roaming Throne",
       "Leverage Deceit to replicate late-game finishers or sweepers",
-      "Close games with mana advantage and superior board state"
+      "Close games with mana advantage and superior board state",
+      "Large, resilient Elementals combined with Roaming Throne copying removal/counters to clear the path.",
+      "Wistfulness can provide card advantage to outlast them.",
+      "Once you have board control and sufficient interaction, commit to dealing damage with evasive threats or copying removal to eliminate blockers.",
+      "Go all-in when you have board control, sufficient interaction to handle their answers, and a clear path to damage.",
+      "Commit when Roaming Throne is on board with multiple cheap spells to copy, or when the opponent has no sweepers or targeted removal in hand."
     ]
   },
   "key_cards": [
@@ -59,7 +77,12 @@
     "Hold Deceit until your opponent's turn to maximize disruption and avoid wasting it on a dead hand",
     "Cast Wistfulness immediately after playing an Elemental to secure the card draw and land drop in one turn",
     "Move counters from Roaming Throne only when an Elemental needs immediate size to block or attack",
-    "Prioritize copying opponent's removal over threats when your board is vulnerable"
+    "Prioritize copying opponent's removal over threats when your board is vulnerable",
+    "Common mistake: Overcommitting to the board without protection or tracking opponent's interaction.",
+    "Unique interaction: Roaming Throne can copy your own counterspells to protect multiple threats, or copy removal to clear multiple blockers.",
+    "Wistfulness dies to sacrifice outlets or combat, so plan trades carefully.",
+    "Watch for format-specific hate cards like graveyard hate or mass removal.",
+    "Always track opponent's hand size and available interaction to time your plays effectively."
   ],
   "matchups": [
     {
@@ -97,16 +120,36 @@
         "Card draw engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multi-target, or uncounterable threats. Cast spells in response to their counterspells. Use Roaming Throne to copy your own counterspells or removal. Don't overcommit expensive spells to the stack; trade efficiently and wait for them to use interaction on lesser threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to force errors. Use counterspells and removal to disrupt their mana development. Bring in more interaction post-sideboard. Prioritize killing their ramp sources before they can deploy finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Use better sequencing, sideboard cards, and card advantage. Prioritize keeping interaction to counter their key spells. Win by out-drawing and out-resolving. Track their hand size and available interaction to time your plays.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Wide creature spreads that overwhelm early board presence",
     "Board wipes that clear pumped Elementals",
     "Counterspells that protect key combo pieces or threats",
-    "Direct damage spells that bypass blockers"
+    "Direct damage spells that bypass blockers",
+    "Watch for sweepers (e.g., Wrath of God, Cyclonic Rift), targeted removal (Path, Swords to Plowshares), and combo win conditions.",
+    "Note when opponents save interaction for your key spells.",
+    "Track graveyard hate if they start milling or reanimating.",
+    "Pay attention to mana bases to predict available answers."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:21:57+00:00",
     "model": "local-model",
@@ -122,6 +165,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

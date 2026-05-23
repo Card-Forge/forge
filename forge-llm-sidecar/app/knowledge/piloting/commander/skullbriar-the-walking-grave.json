@@ -1,0 +1,124 @@
+{
+  "archetype": "Skullbriar, the Walking Grave",
+  "format": "commander",
+  "strategy_type": "control",
+  "overview": "A resilient midrange strategy that leverages sacrifice outlets and -1/-1 counter mechanics to exponentially grow a board of zombies, culminating in a massively pumped Skullbriar that swings for lethal. It wins by out-grinding resource-heavy decks with recursive threats and out-swinging aggressive decks with resilient, growing attackers.",
+  "win_conditions": [
+    "A fully pumped Skullbriar (often 10+ power) swinging with backup zombies or using Invigorating Surge to swing for lethal.",
+    "Sometimes a mass pump or sacrifice outlet combo wins the game outright."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including at least one black and one green source or reliable fixing), a turn-1 land, and either a cheap zombie generator, Corpsejack Menace, or a key sacrifice outlet."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have no lands, only single-color lands with no fixing, or a hand full of high-cost spells without a turn-2 play."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land.",
+      "Turn 2: Develop mana and drop a cheap zombie or Corpsejack Menace if possible.",
+      "Turn 3-4: Cast Skullbriar, then use sacrifice outlets to feed it or generate tokens.",
+      "Sequence lands to ensure you can cast Corpsejack Menace by turn 3-4 and Skullbriar by turn 4-5.",
+      "Prioritize fetching/drawing fixing if your mana base is clunky."
+    ],
+    "mid_game": [
+      "Balance mana between casting Corpsejack Menace, pump spells, and sacrifice outlets on the same turn to maximize growth.",
+      "Avoid overcommitting to Skullbriar if you lack protection",
+      "maintain a board of backup zombies.",
+      "Use your graveyard strategically\u2014don't sacrifice everything if you need recursion for the late game.",
+      "Commit Skullbriar when you have a clear path to lethal or when the opponent has no sweepers or targeted hate.",
+      "Hold back if they have board wipes or removal in hand.",
+      "Use smaller zombies to block or trade, preserving Skullbriar for the kill swing."
+    ],
+    "late_game": [
+      "A fully pumped Skullbriar (often 10+ power) swinging with backup zombies or using Invigorating Surge to swing for lethal.",
+      "Sometimes a mass pump or sacrifice outlet combo wins the game outright.",
+      "Go all-in when you have a clear path to lethal, the opponent has no sweepers, and you have enough resources to rebuild if Skullbriar dies.",
+      "Also commit when you're at low life and need to swing immediately to close the game."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Skullbriar, the Walking Grave",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Invigorating Surge",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Corpsejack Menace",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overcommitting Skullbriar without protection, ignoring graveyard hate, and mismanaging mana for Corpsejack Menace timing.",
+    "Unique interactions: Corpsejack Menace combined with sacrifice outlets creates exponential growth.",
+    "Invigorating Surge can be used defensively or offensively.",
+    "Remember that Skullbriar dies to combat damage, so timing swings is crucial.",
+    "Always track the opponent's life total and interaction to avoid swinging into a sweeper or removal."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that are hard to counter (e.g., mana rocks, sacrifice outlets). Save removal for their counters. Use pump spells in response to counters if needed. Consider sideboarding in more uncounterable threats or protection.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with cheap zombies. Use removal on their mana sources. Don't let them stabilize; trade efficiently and go wide to outpace their late-game threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal and life gain. Use Skullbriar as a blocker early, then pivot to offense. Don't overextend; wait for a clear path to swing and use Invigorating Surge defensively if needed.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with resilient threats. Use card draw to out-value them. Save removal for their key pieces. Go wide with zombies to overwhelm their single-target removal and force them to use sweepers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by having more efficient sacrifice outlets, better card draw, or more protection for Skullbriar. Trade efficiently and aim to out-resource them in the late game. Prioritize board wipes and targeted removal to break their momentum.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes (sweepers), targeted removal (e.g., Lightning Helix, Doom Blade), and graveyard hate (Rest in Peace, Leyline of the Void).",
+    "Note if the opponent is ramping or locking you out.",
+    "Track their life total to calculate lethal with Skullbriar's current size and anticipate their interaction windows."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

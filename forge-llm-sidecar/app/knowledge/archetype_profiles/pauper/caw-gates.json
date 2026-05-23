@@ -1,0 +1,422 @@
+{
+  "schema_version": 1,
+  "name": "Caw-Gates",
+  "format": "pauper",
+  "colors": [
+    "W",
+    "U",
+    "R"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "The Esper Caw-Gates variant shifts from a traditional control stance to a midrange approach, focusing on proactive threat removal and fair trades rather than a passive draw-go strategy. It leverages a powerful removal suite and card advantage engines to outlast opponents, eventually closing games with versatile finishers backed by a robust land base.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 20,
+      "cards": [
+        "Basilisk Gate",
+        "Brainstorm",
+        "L\u00f3rien Revealed",
+        "Mystic Remora",
+        "Outlaw Medic",
+        "Squadron Hawk"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Brainstorm"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "L\u00f3rien Revealed",
+        "Squadron Hawk"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Basilisk Gate"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 23,
+      "cards": [
+        "Basilisk Gate",
+        "Guardian of the Guildpact",
+        "Outlaw Medic",
+        "Sacred Cat",
+        "Squadron Hawk",
+        "The Modern Age",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Blue Elemental Blast",
+        "Breath Weapon",
+        "Journey to Nowhere",
+        "Red Elemental Blast",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 10
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 13,
+      "cards": [
+        "Blue Elemental Blast",
+        "Counterspell",
+        "Envelop",
+        "Red Elemental Blast"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 9
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Guardian of the Guildpact",
+        "Prismatic Strands"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 3,
+      "cards": [
+        "Prismatic Strands"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 10,
+      "cards": [
+        "Prismatic Strands",
+        "Sacred Cat",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 11,
+      "cards": [
+        "Journey to Nowhere",
+        "Prismatic Strands",
+        "Sacred Cat"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Prismatic Strands"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Basilisk Gate"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Prismatic Strands",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Dust to Dust",
+        "Prismatic Strands"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Azorius Guildgate",
+        "Basilisk Gate",
+        "Citadel Gate",
+        "Heap Gate",
+        "Idyllic Beachfront",
+        "Prismatic Strands",
+        "Sea Gate"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Azorius Guildgate",
+        "Basilisk Gate",
+        "Citadel Gate",
+        "Heap Gate",
+        "Idyllic Beachfront",
+        "Island",
+        "Sea Gate"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.38
+  },
+  "dual_role_cards": [
+    {
+      "card": "Azorius Guildgate",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Basilisk Gate",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blue Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brainstorm",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Citadel Gate",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guardian of the Guildpact",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Heap Gate",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Idyllic Beachfront",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Journey to Nowhere",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Outlaw Medic",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismatic Strands",
+      "roles": [
+        "combo_pieces",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Red Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Cat",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sea Gate",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Squadron Hawk",
+      "roles": [
+        "card_advantage",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thraben Charm",
+      "roles": [
+        "combo_pieces",
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Use Lorien Revealed and Suffocating Fumes to pay the Evidence cost for Extract a Confession if needed.",
+    "Cast Brainstorm before Preordain to filter the cards left behind and dig for specific answers.",
+    "Pair Squadron Hawk with Basilisk Gate to bypass blockers and generate card advantage when Brainstorm fetches extra copies.",
+    "Common mistake: Casting Lorien Revealed without board control or answers, leading to easy removal.",
+    "Knight of the Reliquary is essential for mana fixing and protecting against graveyard hate"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Secure land drops with Lorien Revealed and Preordain"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Duress to extract information and disrupt opponent's game plan"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play cheap removal like Cast Down or Journey to Nowhere to handle early threats"
+    }
+  ],
+  "kill_priority": [
+    "Prismatic Strands",
+    "Basilisk Gate",
+    "Thraben Charm",
+    "Guardian of the Guildpact",
+    "Outlaw Medic",
+    "Sacred Cat",
+    "Squadron Hawk",
+    "The Modern Age"
+  ],
+  "interaction_to_disrupt": [
+    "Blue Elemental Blast",
+    "Counterspell",
+    "Envelop",
+    "Red Elemental Blast",
+    "Guardian of the Guildpact",
+    "Prismatic Strands",
+    "Breath Weapon",
+    "Journey to Nowhere"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/caw-gates.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

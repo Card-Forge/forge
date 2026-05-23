@@ -1,0 +1,189 @@
+{
+  "archetype": "4/5c Omnath",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/4-5c-omnath.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 2,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Elegant Parlor"
+    },
+    {
+      "qty": 1,
+      "name": "Elesh Norn, Mother of Machines"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 2,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 2,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Galvanic Discharge"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 2,
+      "name": "High Noon"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Lush Portico"
+    },
+    {
+      "qty": 2,
+      "name": "March of Otherworldly Light"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Nissa, Resurgent Animist"
+    },
+    {
+      "qty": 4,
+      "name": "Omnath, Locus of Creation"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 3,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 1,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 4,
+      "name": "Solitude"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 1,
+      "name": "Subtlety"
+    },
+    {
+      "qty": 3,
+      "name": "Teferi, Time Raveler"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Thundering Falls"
+    },
+    {
+      "qty": 1,
+      "name": "Titania, Protector of Argoth"
+    },
+    {
+      "qty": 2,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 2,
+      "name": "Wooded Foothills"
+    },
+    {
+      "qty": 2,
+      "name": "Wrath of the Skies"
+    },
+    {
+      "qty": 4,
+      "name": "Wrenn and Six"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Beza, the Bounding Spring"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Dress Down"
+    },
+    {
+      "qty": 2,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 3,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 2,
+      "name": "Vexing Bauble"
+    }
+  ]
+}

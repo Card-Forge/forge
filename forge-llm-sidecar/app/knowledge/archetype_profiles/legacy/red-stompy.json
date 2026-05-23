@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "name": "Red Stompy",
+  "format": "legacy",
+  "colors": [
+    "B",
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Saga Moon Red Stompy combines Blood Moon and Urza's Saga to create a prison strategy that freezes the Saga at two lore counters, generating infinite Construct tokens. The deck leverages acceleration, graveyard hate, and equip artifacts like Fable of the Mirror-Breaker to apply early pressure and lock down opponents. It thrives on disrupting mana and graveyard-dependent strategies while pushing damage through lifelink and equipped tokens.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 2,
+      "cards": [
+        "Trinisphere"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 16,
+      "cards": [
+        "Broadside Bombardiers",
+        "Chalice of the Void",
+        "Chrome Mox",
+        "The One Ring"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 16,
+      "cards": [
+        "Broadside Bombardiers",
+        "Chalice of the Void",
+        "Chrome Mox",
+        "Fable of the Mirror-Breaker"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 32,
+      "cards": [
+        "Broadside Bombardiers",
+        "Chalice of the Void",
+        "Emrakul, the Aeons Torn",
+        "Fury",
+        "Hexing Squelcher",
+        "Magus of the Moon",
+        "Pyrogoyf",
+        "Shatterskull Smashing",
+        "Simian Spirit Guide",
+        "Sundering Eruption"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 1
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Ancient Tomb",
+        "Broadside Bombardiers",
+        "Fiery Confluence",
+        "Pyroblast",
+        "Pyrogoyf",
+        "Ravenous Trap"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 14,
+      "cards": [
+        "Broadside Bombardiers",
+        "Chalice of the Void",
+        "Chrome Mox",
+        "Fiery Confluence"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": [
+        "Pyroblast"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 7,
+      "cards": [
+        "Emrakul, the Aeons Torn",
+        "Hexing Squelcher",
+        "The One Ring"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 12,
+      "cards": [
+        "Broadside Bombardiers",
+        "Chalice of the Void",
+        "Chrome Mox"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 22,
+      "cards": [
+        "Broadside Bombardiers",
+        "Chalice of the Void",
+        "Chrome Mox",
+        "Emrakul, the Aeons Torn",
+        "Pyrogoyf",
+        "Ravenous Trap",
+        "Unlicensed Hearse"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 6
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Fable of the Mirror-Breaker"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Chalice of the Void"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Dead // Gone",
+        "Disruptor Flute"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 26,
+      "cards": [
+        "Ancient Tomb",
+        "Blood Moon",
+        "Broadside Bombardiers",
+        "Chalice of the Void",
+        "Chrome Mox",
+        "City of Traitors",
+        "Sokenzan, Crucible of Defiance",
+        "Trinisphere"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 12,
+      "cards": [
+        "Ancient Tomb",
+        "City of Traitors",
+        "Mountain",
+        "Sokenzan, Crucible of Defiance"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.44
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Broadside Bombardiers",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chalice of the Void",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chrome Mox",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "City of Traitors",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emrakul, the Aeons Torn",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fable of the Mirror-Breaker",
+      "roles": [
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fiery Confluence",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hexing Squelcher",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyrogoyf",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ravenous Trap",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sokenzan, Crucible of Defiance",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The One Ring",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Trinisphere",
+      "roles": [
+        "mana_fixing",
+        "mana_reducers"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play Ancient Tomb, then Lavaspur Boots, then a Mox, imprint Pyrogoyf, and follow with Chalice of the Void for 1",
+    "If Chalice is inefficient against the matchup, play Fable of the Mirror-Breaker on turn 1 instead",
+    "Against certain decks, lead with Magus of the Moon on turn 1 if you can draw additional mana sources",
+    "Use Urza's Saga's third chapter to find a Chrome Mox and fix mana",
+    "Chrome Mox is a one-shot, so sequence it carefully to maximize its impact."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Deploy acceleration like Ancient Tomb, Sol Lands, and Chrome Mox to cast Chalice of the Void and Blood Moon by turn 1 or 2"
+    },
+    {
+      "trigger": "early game",
+      "line": "Imprint Pyrogoyf or play Fable of the Mirror-Breaker to establish early board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use The One Ring to recover cards if the opening hand is thin"
+    }
+  ],
+  "kill_priority": [
+    "Broadside Bombardiers",
+    "Chalice of the Void",
+    "Chrome Mox",
+    "Fable of the Mirror-Breaker",
+    "Emrakul, the Aeons Torn",
+    "Fury",
+    "Hexing Squelcher",
+    "Magus of the Moon"
+  ],
+  "interaction_to_disrupt": [
+    "Pyroblast",
+    "Emrakul, the Aeons Torn",
+    "Hexing Squelcher",
+    "The One Ring",
+    "Ancient Tomb",
+    "Broadside Bombardiers",
+    "Fiery Confluence",
+    "Pyrogoyf"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/red-stompy.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

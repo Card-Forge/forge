@@ -1,0 +1,161 @@
+{
+  "archetype": "Maverick",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/maverick.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Collector Ouphe"
+    },
+    {
+      "qty": 1,
+      "name": "Dryad Arbor"
+    },
+    {
+      "qty": 3,
+      "name": "Endurance"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Frenzied Baloth"
+    },
+    {
+      "qty": 1,
+      "name": "Gaddock Teeg"
+    },
+    {
+      "qty": 4,
+      "name": "Green Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Horizon Canopy"
+    },
+    {
+      "qty": 1,
+      "name": "Icetill Explorer"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 2,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 1,
+      "name": "Kinetic Ooze"
+    },
+    {
+      "qty": 3,
+      "name": "Knight of the Reliquary"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 4,
+      "name": "Noble Hierarch"
+    },
+    {
+      "qty": 3,
+      "name": "Once Upon a Time"
+    },
+    {
+      "qty": 1,
+      "name": "Outland Liberator"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Renegade Rallier"
+    },
+    {
+      "qty": 3,
+      "name": "Savannah"
+    },
+    {
+      "qty": 1,
+      "name": "Scryb Ranger"
+    },
+    {
+      "qty": 4,
+      "name": "Scythecat Cub"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 2,
+      "name": "Thalia, Guardian of Thraben"
+    },
+    {
+      "qty": 2,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 4,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 2,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Choke"
+    },
+    {
+      "qty": 2,
+      "name": "Deafening Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 2,
+      "name": "Erode"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Gaddock Teeg"
+    },
+    {
+      "qty": 2,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 1,
+      "name": "Rampaging Yao Guai"
+    },
+    {
+      "qty": 2,
+      "name": "Sheltered by Ghosts"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "archetype": "Mono-Black Midrange",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/mono-black-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 3,
+      "name": "Castle Locthwain"
+    },
+    {
+      "qty": 4,
+      "name": "Dauthi Voidwalker"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 4,
+      "name": "Fell the Profane"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Despair"
+    },
+    {
+      "qty": 3,
+      "name": "March of Wretched Sorrow"
+    },
+    {
+      "qty": 1,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 4,
+      "name": "Necrodominance"
+    },
+    {
+      "qty": 4,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Shadow of Doubt"
+    },
+    {
+      "qty": 3,
+      "name": "Sheoldred, the Apocalypse"
+    },
+    {
+      "qty": 4,
+      "name": "Soul Spike"
+    },
+    {
+      "qty": 7,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Mortuary"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Break the Ice"
+    },
+    {
+      "qty": 1,
+      "name": "Damnation"
+    },
+    {
+      "qty": 2,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Decorum Dissertation"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Despair"
+    },
+    {
+      "qty": 1,
+      "name": "Illness in the Ranks"
+    },
+    {
+      "qty": 2,
+      "name": "Necromentia"
+    },
+    {
+      "qty": 1,
+      "name": "The Meathook Massacre"
+    },
+    {
+      "qty": 2,
+      "name": "Wrench Mind"
+    }
+  ]
+}

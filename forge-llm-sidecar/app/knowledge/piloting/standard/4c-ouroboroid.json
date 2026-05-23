@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more lands",
       "Early ramp or acceleration spells",
-      "Low-cost creatures that apply immediate pressure"
+      "Low-cost creatures that apply immediate pressure",
+      "Keep hands with 2-3 lands (prioritizing duals or fast lands), a turn-1 or turn-2 landfall enabler or cheap threat like Badgermole Cub, and at least one interaction or card draw spell.",
+      "Hands with Quantum Riddler and a land are keepers if you have a way to cast it or protect it."
     ],
     "mulligan_criteria": [
       "Zero or one land",
       "No early interaction or ramp",
-      "High-cost cards without acceleration"
+      "High-cost cards without acceleration",
+      "Mulligan if you have 0-1 lands, only high-cost spells, or no way to interact with the early game."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Play lands and ramp spells to accelerate mana base",
       "Deploy early creatures to establish board presence",
-      "Hold up mana for interaction if opponent plays aggressively"
+      "Hold up mana for interaction if opponent plays aggressively",
+      "Turn 1: Play a land, optionally cast a cheap enabler or threat if mana allows.",
+      "Turn 2: Develop board presence with landfall triggers, dig for consistency, or deploy early interaction.",
+      "Prioritize playing lands that enter untapped to maintain tempo.",
+      "Use Nature's Rhythm to trigger landfall effects and stabilize or accelerate your board state."
     ],
     "mid_game": [
       "Cast signature value creatures and ramp sorceries",
       "Use card draw to find answers to opponent's threats",
-      "Begin applying consistent pressure with developed board"
+      "Begin applying consistent pressure with developed board",
+      "Balance mana for interaction versus board development.",
+      "Use the graveyard strategically",
+      "avoid over-committing to recursion if your board is empty.",
+      "Prioritize keeping key enablers in play over hoarding cards.",
+      "Manage your four-color mana carefully to avoid flooding or screwing, especially in slower matchups.",
+      "Commit threats when you have removal or interaction to protect them."
     ],
     "late_game": [
       "Leverage excess mana for continuous value generation",
       "Protect key engines with removal or evasion",
-      "Close out the game with overwhelming board state"
+      "Close out the game with overwhelming board state",
+      "Recurring mid-range threats, landfall-enraged creatures, or direct damage from recursion engines.",
+      "Win by out-resourcing the opponent or closing with a protected big threat.",
+      "Use Quantum Riddler to manipulate the board state or recur a key finisher from the graveyard.",
+      "When you have board presence, interaction to clear blockers, and enough resources to follow up.",
+      "Go all-in if the opponent is tapped out or has no sweepers.",
+      "Commit when you can safely trigger landfall effects to swing the board state in your favor."
     ]
   },
   "key_cards": [
@@ -59,7 +78,13 @@
     "Prioritize ramp spells before high-cost threats to maintain tempo",
     "Hold up colored mana for interaction when opponent has sweepers or removal",
     "Use card draw effects to refill hand before committing to large plays",
-    "Protect value engines until opponent's removal is exhausted"
+    "Protect value engines until opponent's removal is exhausted",
+    "Common mistake: Over-investing in recursion without board presence.",
+    "Unique interaction: Quantum Riddler can be used to manipulate probability or recursion chains, so always consider its timing.",
+    "Always track opponent's graveyard and exile zones.",
+    "The four-color mana base is fragile",
+    "play around dual-slow lands in slower matchups.",
+    "Practice your mana sequencing to avoid flooding or screwing, especially in the early game."
   ],
   "matchups": [
     {
@@ -88,16 +113,35 @@
         "Card draw engines",
         "Protection spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split casting, flash, or end-step spells. Cast threats in response to their interaction, or use recursion to bypass counters. Hold up counterspells for their key spells and use protection effects to ensure your finishers resolve.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use artifact/enchantment removal, and disrupt their mana development with targeted hate. Prioritize removing their mana sources and key enablers before they can stabilize. Use sweepers to clear their board if they commit to a big play.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card draw, recursion, and targeted removal. Control the graveyard and force them to over-commit. Use Quantum Riddler to disrupt their recursion chains and win the attrition battle.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
     "Counterspell packages",
-    "Value engines that outdraw the deck"
+    "Value engines that outdraw the deck",
+    "Watch for counterspells (hold up mana for protection or cast at end step), sweepers (save removal for key threats), and graveyard recursion (track exile/graveyard size).",
+    "Key tell: Opponent tapping out on turn 3-4 often signals a combo or big spell.",
+    "Track when they use their interaction to predict their next move."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:45:50+00:00",
     "model": "local-model",
@@ -113,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

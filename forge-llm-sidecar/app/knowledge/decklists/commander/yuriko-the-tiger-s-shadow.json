@@ -1,0 +1,372 @@
+{
+  "archetype": "Yuriko, the Tiger's Shadow",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/yuriko-the-tiger-s-shadow.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Access Tunnel"
+    },
+    {
+      "qty": 1,
+      "name": "Adaptive Automaton"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Adaptation"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Augury Owl"
+    },
+    {
+      "qty": 1,
+      "name": "Azra Smokeshaper"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodline Bidding"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Brainsurge"
+    },
+    {
+      "qty": 1,
+      "name": "Changeling Outcast"
+    },
+    {
+      "qty": 1,
+      "name": "Choked Estuary"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Commandeer"
+    },
+    {
+      "qty": 1,
+      "name": "Commit // Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Consign // Oblivion"
+    },
+    {
+      "qty": 1,
+      "name": "Creeping Tar Pit"
+    },
+    {
+      "qty": 1,
+      "name": "Crystal Grotto"
+    },
+    {
+      "qty": 1,
+      "name": "Cunning Evasion"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Darkwater Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Death-Rattle Oni"
+    },
+    {
+      "qty": 1,
+      "name": "Dig Through Time"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir Aqueduct"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir Keyrune"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Diversion Unit"
+    },
+    {
+      "qty": 1,
+      "name": "Drowned Catacomb"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Seer"
+    },
+    {
+      "qty": 1,
+      "name": "Fallen Shinobi"
+    },
+    {
+      "qty": 1,
+      "name": "Funeral Room // Awakening Hall"
+    },
+    {
+      "qty": 1,
+      "name": "Gingerbrute"
+    },
+    {
+      "qty": 1,
+      "name": "Grazilaxx, Illithid Scholar"
+    },
+    {
+      "qty": 1,
+      "name": "Gudul Lurker"
+    },
+    {
+      "qty": 1,
+      "name": "Halimar Depths"
+    },
+    {
+      "qty": 1,
+      "name": "Heartless Conscription"
+    },
+    {
+      "qty": 1,
+      "name": "Hope of Ghirapur"
+    },
+    {
+      "qty": 1,
+      "name": "Ingenious Infiltrator"
+    },
+    {
+      "qty": 1,
+      "name": "Ingenious Prodigy"
+    },
+    {
+      "qty": 6,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Kaito, Cunning Infiltrator"
+    },
+    {
+      "qty": 1,
+      "name": "Leyline of Transformation"
+    },
+    {
+      "qty": 1,
+      "name": "Meat Locker // Drowned Diner"
+    },
+    {
+      "qty": 1,
+      "name": "Metallic Mimic"
+    },
+    {
+      "qty": 1,
+      "name": "Mirror Room // Fractured Realm"
+    },
+    {
+      "qty": 1,
+      "name": "Mist-Cloaked Herald"
+    },
+    {
+      "qty": 1,
+      "name": "Mistblade Shinobi"
+    },
+    {
+      "qty": 1,
+      "name": "Moon-Circuit Hacker"
+    },
+    {
+      "qty": 1,
+      "name": "Moonsnare Specialist"
+    },
+    {
+      "qty": 1,
+      "name": "Murky Sewer"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Sanctuary"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Speculation"
+    },
+    {
+      "qty": 1,
+      "name": "Nashi, Moon Sage's Scion"
+    },
+    {
+      "qty": 1,
+      "name": "Ninja of the Deep Hours"
+    },
+    {
+      "qty": 1,
+      "name": "Ninja's Blades"
+    },
+    {
+      "qty": 1,
+      "name": "Ornithopter"
+    },
+    {
+      "qty": 1,
+      "name": "Peregrine Drake"
+    },
+    {
+      "qty": 1,
+      "name": "Phantom Ninja"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Walker"
+    },
+    {
+      "qty": 1,
+      "name": "Prosperous Thief"
+    },
+    {
+      "qty": 1,
+      "name": "Rags // Riches"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rivendell"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Satoru Umezawa"
+    },
+    {
+      "qty": 1,
+      "name": "Satoru, the Infiltrator"
+    },
+    {
+      "qty": 1,
+      "name": "Shadow of Mortality"
+    },
+    {
+      "qty": 1,
+      "name": "Shipwreck Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Silver Raven"
+    },
+    {
+      "qty": 1,
+      "name": "Silver-Fur Master"
+    },
+    {
+      "qty": 1,
+      "name": "Singularity Rupture"
+    },
+    {
+      "qty": 1,
+      "name": "Siren Stormtamer"
+    },
+    {
+      "qty": 1,
+      "name": "Slither Blade"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Soothsaying"
+    },
+    {
+      "qty": 1,
+      "name": "Sunken Hollow"
+    },
+    {
+      "qty": 5,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Dominance"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Deceit"
+    },
+    {
+      "qty": 1,
+      "name": "Temporal Trespass"
+    },
+    {
+      "qty": 1,
+      "name": "Tetsuko Umezawa, Fugitive"
+    },
+    {
+      "qty": 1,
+      "name": "Thought Vessel"
+    },
+    {
+      "qty": 1,
+      "name": "Thousand-Faced Shadow"
+    },
+    {
+      "qty": 1,
+      "name": "Tormented Soul"
+    },
+    {
+      "qty": 1,
+      "name": "Treasure Cruise"
+    },
+    {
+      "qty": 1,
+      "name": "Triton Shorestalker"
+    },
+    {
+      "qty": 1,
+      "name": "Unclaimed Territory"
+    },
+    {
+      "qty": 1,
+      "name": "Unwind"
+    },
+    {
+      "qty": 1,
+      "name": "Wonder"
+    },
+    {
+      "qty": 1,
+      "name": "Wreckage Wickerfolk"
+    },
+    {
+      "qty": 1,
+      "name": "Yuriko, the Tiger's Shadow"
+    }
+  ],
+  "sideboard": []
+}

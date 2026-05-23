@@ -1,0 +1,105 @@
+{
+  "archetype": "Izzet Terror",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/izzet-terror.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Azure Fleet Admiral"
+    },
+    {
+      "qty": 2,
+      "name": "Bountiful Landscape"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Crimson Fleet Commodore"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 4,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Lose Focus"
+    },
+    {
+      "qty": 3,
+      "name": "Murmuring Mystic"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 2,
+      "name": "Preordain"
+    },
+    {
+      "qty": 4,
+      "name": "Skred"
+    },
+    {
+      "qty": 9,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 3,
+      "name": "Snow-Covered Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 4,
+      "name": "Tolarian Terror"
+    },
+    {
+      "qty": 4,
+      "name": "Volatile Fjord"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Annul"
+    },
+    {
+      "qty": 3,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 3,
+      "name": "Campfire"
+    },
+    {
+      "qty": 2,
+      "name": "Cast into the Fire"
+    },
+    {
+      "qty": 3,
+      "name": "Red Elemental Blast"
+    }
+  ]
+}

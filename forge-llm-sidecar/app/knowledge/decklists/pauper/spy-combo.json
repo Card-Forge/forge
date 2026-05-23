@@ -1,0 +1,133 @@
+{
+  "archetype": "Spy Combo",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/spy-combo.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Balustrade Spy"
+    },
+    {
+      "qty": 1,
+      "name": "Beastrider Vanguard"
+    },
+    {
+      "qty": 1,
+      "name": "Bonebind Orator"
+    },
+    {
+      "qty": 4,
+      "name": "Conjurer's Bauble"
+    },
+    {
+      "qty": 2,
+      "name": "Dread Return"
+    },
+    {
+      "qty": 2,
+      "name": "Elves of Deep Shadow"
+    },
+    {
+      "qty": 3,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Fyndhorn Elves"
+    },
+    {
+      "qty": 3,
+      "name": "Gatecreeper Vine"
+    },
+    {
+      "qty": 4,
+      "name": "Generous Ent"
+    },
+    {
+      "qty": 4,
+      "name": "Land Grant"
+    },
+    {
+      "qty": 4,
+      "name": "Lead the Stampede"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 2,
+      "name": "Lotleth Giant"
+    },
+    {
+      "qty": 2,
+      "name": "Masked Vandal"
+    },
+    {
+      "qty": 4,
+      "name": "Overgrown Battlement"
+    },
+    {
+      "qty": 1,
+      "name": "Rust"
+    },
+    {
+      "qty": 4,
+      "name": "Sagu Wildling"
+    },
+    {
+      "qty": 1,
+      "name": "Songs of the Damned"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Troll of Khazad-d\u00fbm"
+    },
+    {
+      "qty": 4,
+      "name": "Wall of Roots"
+    },
+    {
+      "qty": 4,
+      "name": "Winding Way"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Acorn Harvest"
+    },
+    {
+      "qty": 1,
+      "name": "Beastrider Vanguard"
+    },
+    {
+      "qty": 1,
+      "name": "Dispel"
+    },
+    {
+      "qty": 2,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 1,
+      "name": "Flaring Pain"
+    },
+    {
+      "qty": 2,
+      "name": "Jack-o'-Lantern"
+    },
+    {
+      "qty": 3,
+      "name": "Mesmeric Fiend"
+    },
+    {
+      "qty": 4,
+      "name": "Nylea's Disciple"
+    }
+  ]
+}

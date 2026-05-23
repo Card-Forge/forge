@@ -1,0 +1,744 @@
+{
+  "schema_version": 1,
+  "name": "The Gitrog, Ravenous Ride",
+  "format": "commander",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 100,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Beastrider Vanguard",
+    "Bebop & Rocksteady",
+    "Birds of Paradise",
+    "Bygone Colossus",
+    "Destiny Spinner",
+    "Devoted Druid",
+    "Dimir House Guard",
+    "Dosan the Falling Leaf"
+  ],
+  "interaction_to_disrupt": [
+    "Abrupt Decay",
+    "Destiny Spinner",
+    "Frenzied Baloth",
+    "Hunted Horror",
+    "Prowling Serpopard",
+    "Veil of Summer",
+    "Assassin's Trophy",
+    "City of Brass"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Nature's Rhythm"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 2,
+      "cards": [
+        "Culling Ritual",
+        "Dark Ritual"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 11,
+      "cards": [
+        "Elemental Bond",
+        "Garruk's Uprising",
+        "Greater Good",
+        "Guardian Project",
+        "Necropotence",
+        "Orcish Bowmasters",
+        "Selvala, Heart of the Wilds",
+        "Sylvan Library",
+        "The Gitrog, Ravenous Ride",
+        "Unearth",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Beastrider Vanguard",
+        "Bolas's Citadel",
+        "Dimir Machinations"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Chord of Calling",
+        "Dimir House Guard",
+        "Dimir Machinations",
+        "Earthbender Ascension",
+        "Eldritch Evolution",
+        "Lively Dirge",
+        "Nature's Rhythm",
+        "Shred Memory"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 39,
+      "cards": [
+        "Beastrider Vanguard",
+        "Bebop & Rocksteady",
+        "Birds of Paradise",
+        "Bygone Colossus",
+        "Destiny Spinner",
+        "Devoted Druid",
+        "Dimir House Guard",
+        "Dosan the Falling Leaf",
+        "Elves of Deep Shadow",
+        "Elvish Mystic",
+        "Elvish Spirit Guide",
+        "Eternal Witness",
+        "Frenzied Baloth",
+        "Fyndhorn Elves",
+        "Ghalta, Primal Hunger",
+        "Gilded Goose",
+        "Hazel's Brewmaster",
+        "Honest Rutstein",
+        "Hunted Horror",
+        "Kalakscion, Hunger Tyrant",
+        "Llanowar Elves",
+        "Lupine Prototype",
+        "Opposition Agent",
+        "Orcish Bowmasters",
+        "Phyrexian Soulgorger",
+        "Prowling Serpopard",
+        "Relic Golem",
+        "Rot-Curse Rakshasa",
+        "Rotting Regisaur",
+        "Selvala, Heart of the Wilds",
+        "Sheltering Ancient",
+        "Sol Ring",
+        "Sylvan Safekeeper",
+        "The Gitrog, Ravenous Ride",
+        "The Skullspore Nexus",
+        "Tireless Provisioner",
+        "Walking Ballista",
+        "Wall of Blood",
+        "Wild Growth"
+      ],
+      "mainboard_count": 39,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 18,
+      "cards": [
+        "Abrupt Decay",
+        "Assassin's Trophy",
+        "City of Brass",
+        "Culling Ritual",
+        "Elves of Deep Shadow",
+        "Eternal Witness",
+        "Force of Vigor",
+        "Garruk's Uprising",
+        "Ghalta, Primal Hunger",
+        "Honest Rutstein",
+        "Llanowar Wastes",
+        "Orcish Bowmasters",
+        "Phyrexian Reclamation",
+        "Talisman of Resilience",
+        "Tear Asunder",
+        "The Gitrog, Ravenous Ride",
+        "Unearth",
+        "Walking Ballista"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Chord of Calling"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 6,
+      "cards": [
+        "Abrupt Decay",
+        "Destiny Spinner",
+        "Frenzied Baloth",
+        "Hunted Horror",
+        "Prowling Serpopard",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 3,
+      "cards": [
+        "Bebop & Rocksteady",
+        "Necropotence",
+        "Rotting Regisaur"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 13,
+      "cards": [
+        "Eternal Witness",
+        "Guardian Project",
+        "Hazel's Brewmaster",
+        "Honest Rutstein",
+        "Lively Dirge",
+        "Nature's Rhythm",
+        "Necropotence",
+        "Phyrexian Reclamation",
+        "Reanimate",
+        "Relic Golem",
+        "Rot-Curse Rakshasa",
+        "Shred Memory",
+        "Unearth"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 8,
+      "cards": [
+        "Eternal Witness",
+        "Honest Rutstein",
+        "Lively Dirge",
+        "Nature's Rhythm",
+        "Necropotence",
+        "Phyrexian Reclamation",
+        "Rot-Curse Rakshasa",
+        "Unearth"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Conqueror's Flail",
+        "Frenzied Baloth"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 20,
+      "cards": [
+        "Arcane Signet",
+        "Birds of Paradise",
+        "Carpet of Flowers",
+        "City of Brass",
+        "Command Tower",
+        "Exotic Orchard",
+        "Fellwar Stone",
+        "Forbidden Orchard",
+        "Gilded Goose",
+        "Llanowar Wastes",
+        "Opposition Agent",
+        "Reliquary Tower",
+        "Selvala, Heart of the Wilds",
+        "Starting Town",
+        "Tainted Wood",
+        "Tireless Provisioner",
+        "Twilight Mire",
+        "Undergrowth Stadium",
+        "Wastewood Verge",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 32,
+      "cards": [
+        "City of Brass",
+        "Command Tower",
+        "Exotic Orchard",
+        "Forbidden Orchard",
+        "Forest",
+        "Llanowar Wastes",
+        "Reliquary Tower",
+        "Starting Town",
+        "Swamp",
+        "Tainted Wood",
+        "Twilight Mire",
+        "Undergrowth Stadium",
+        "Wastewood Verge",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.29
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abrupt Decay",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Beastrider Vanguard",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bebop & Rocksteady",
+      "roles": [
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Birds of Paradise",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chord of Calling",
+      "roles": [
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "City of Brass",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Culling Ritual",
+      "roles": [
+        "removal",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Destiny Spinner",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dimir House Guard",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dimir Machinations",
+      "roles": [
+        "dig_draw",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elves of Deep Shadow",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eternal Witness",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Forbidden Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Frenzied Baloth",
+      "roles": [
+        "hate_pieces",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Garruk's Uprising",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghalta, Primal Hunger",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gilded Goose",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guardian Project",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hazel's Brewmaster",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Honest Rutstein",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hunted Horror",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lively Dirge",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Llanowar Wastes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nature's Rhythm",
+      "roles": [
+        "graveyard_enablers",
+        "mana_reducers",
+        "recursion",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Necropotence",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Opposition Agent",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orcish Bowmasters",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Phyrexian Reclamation",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prowling Serpopard",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Relic Golem",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rot-Curse Rakshasa",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rotting Regisaur",
+      "roles": [
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Selvala, Heart of the Wilds",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shred Memory",
+      "roles": [
+        "graveyard_enablers",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tainted Wood",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Gitrog, Ravenous Ride",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tireless Provisioner",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Twilight Mire",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undergrowth Stadium",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unearth",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veil of Summer",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Walking Ballista",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wastewood Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Woodland Cemetery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/the-gitrog-ravenous-ride.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

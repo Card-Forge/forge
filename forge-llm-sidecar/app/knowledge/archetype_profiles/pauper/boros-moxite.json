@@ -1,0 +1,462 @@
+{
+  "schema_version": 1,
+  "name": "Boros Moxite",
+  "format": "pauper",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Boros Moxite is a fast, four-color tempo deck that leverages Moxite for early mana acceleration to deploy cheap threats like Glint Hawk ahead of schedule. It uses efficient pump spells like Lembas and versatile removal such as Galvanic Blast to maintain board control and push lethal damage quickly. The W/U/B/R color scheme provides access to a wide array of low-cost interaction and finishers while staying strictly within Pauper legality.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 30,
+      "cards": [
+        "Galvanic Blast",
+        "Glint Hawk",
+        "Lembas",
+        "Melded Moxite",
+        "Pursue the Past",
+        "Relic of Progenitus",
+        "Sneaky Snacker",
+        "Thraben Inspector"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 12,
+      "cards": [
+        "Galvanic Blast",
+        "Glint Hawk",
+        "Lembas"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 16,
+      "cards": [
+        "Galvanic Blast",
+        "Glint Hawk",
+        "Lembas",
+        "Wind-Scarred Crag"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 26,
+      "cards": [
+        "Galvanic Blast",
+        "Glint Hawk",
+        "Goliath Paladin",
+        "Kor Skyfisher",
+        "Lembas",
+        "Sneaky Snacker",
+        "Thraben Inspector"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 21,
+      "cards": [
+        "Bojuka Bog",
+        "Destroy Evil",
+        "Galvanic Blast",
+        "Journey to Nowhere",
+        "Lightning Bolt",
+        "Red Elemental Blast",
+        "Smash to Dust"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 9
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Smash to Dust"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Red Elemental Blast"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 6,
+      "cards": [
+        "Melded Moxite",
+        "Pursue the Past"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 16,
+      "cards": [
+        "Bojuka Bog",
+        "Lembas",
+        "Pursue the Past",
+        "Relic of Progenitus",
+        "Sneaky Snacker"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 1
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 19,
+      "cards": [
+        "Boros Garrison",
+        "Glint Hawk",
+        "Journey to Nowhere",
+        "Kor Skyfisher",
+        "Pursue the Past",
+        "Sneaky Snacker"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Lembas",
+        "Wind-Scarred Crag"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Galvanic Blast",
+        "Glint Hawk",
+        "Lembas"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Dust to Dust"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 25,
+      "cards": [
+        "Ancient Den",
+        "Bojuka Bog",
+        "Boros Garrison",
+        "Galvanic Blast",
+        "Glint Hawk",
+        "Great Furnace",
+        "Kabira Crossroads",
+        "Lembas",
+        "Radiant Fountain",
+        "Wind-Scarred Crag"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Ancient Den",
+        "Bojuka Bog",
+        "Boros Garrison",
+        "Great Furnace",
+        "Kabira Crossroads",
+        "Mountain",
+        "Plains",
+        "Radiant Fountain",
+        "Wind-Scarred Crag"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.28
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Den",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boros Garrison",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Galvanic Blast",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "mana_fixing",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glint Hawk",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Great Furnace",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Journey to Nowhere",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kabira Crossroads",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kor Skyfisher",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lembas",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Melded Moxite",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pursue the Past",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Radiant Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Red Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Relic of Progenitus",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smash to Dust",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sneaky Snacker",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thraben Inspector",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wind-Scarred Crag",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Galvanic Blast in hand until you identify a key threat to remove or a moment to chip damage",
+    "Cast Lembas on your turn to maximize combat damage rather than using it defensively",
+    "Prioritize playing Moxite before pumping to ensure you have enough mana for both spells",
+    "Use the four-color interaction suite to answer opponent's plays while maintaining your own board presence",
+    "Glint Hawk sacrifice is a key resource"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Moxite on turn one to enable turn-two threats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Deploy Glint Hawk early to establish flying pressure"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Galvanic Blast to remove key blockers or chip away at life total"
+    }
+  ],
+  "kill_priority": [
+    "Galvanic Blast",
+    "Glint Hawk",
+    "Lembas",
+    "Wind-Scarred Crag",
+    "Goliath Paladin",
+    "Kor Skyfisher",
+    "Sneaky Snacker",
+    "Thraben Inspector"
+  ],
+  "interaction_to_disrupt": [
+    "Red Elemental Blast",
+    "Bojuka Bog",
+    "Destroy Evil",
+    "Galvanic Blast",
+    "Journey to Nowhere",
+    "Lightning Bolt",
+    "Smash to Dust",
+    "Dust to Dust"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/boros-moxite.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

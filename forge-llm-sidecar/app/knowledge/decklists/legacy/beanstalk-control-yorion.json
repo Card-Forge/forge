@@ -1,0 +1,169 @@
+{
+  "archetype": "Beanstalk Control (Yorion)",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/beanstalk-control-yorion.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Flow State"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Forth Eorlingas!"
+    },
+    {
+      "qty": 1,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline Binding"
+    },
+    {
+      "qty": 1,
+      "name": "Life from the Loam"
+    },
+    {
+      "qty": 3,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 4,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Sanctuary"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 3,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 1,
+      "name": "Savannah"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Terminus"
+    },
+    {
+      "qty": 3,
+      "name": "Triumph of Saint Katherine"
+    },
+    {
+      "qty": 2,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 2,
+      "name": "Tundra"
+    },
+    {
+      "qty": 4,
+      "name": "Up the Beanstalk"
+    },
+    {
+      "qty": 4,
+      "name": "Uro, Titan of Nature's Wrath"
+    },
+    {
+      "qty": 1,
+      "name": "Volcanic Island"
+    },
+    {
+      "qty": 3,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 2,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Wrath of the Skies"
+    },
+    {
+      "qty": 1,
+      "name": "Xander's Lounge"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Carpet of Flowers"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 1,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 3,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Silent Gravestone"
+    },
+    {
+      "qty": 1,
+      "name": "Yorion, Sky Nomad"
+    }
+  ]
+}

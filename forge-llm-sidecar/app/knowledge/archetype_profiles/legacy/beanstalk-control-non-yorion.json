@@ -1,0 +1,612 @@
+{
+  "schema_version": 1,
+  "name": "Beanstalk Control (Non-Yorion)",
+  "format": "legacy",
+  "colors": [
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "A tempo-control hybrid that leverages early token generation and precise damage to stabilize against aggressive and combo strategies, while using card selection to out-value control and midrange opponents. It aims to win by out-resourcing the midgame and closing out games with Orcish Bowmasters pressure or incremental Saproling damage.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 19,
+      "cards": [
+        "Baleful Strix",
+        "Brainstorm",
+        "Kaito, Bane of Nightmares",
+        "Life from the Loam",
+        "L\u00f3rien Revealed",
+        "Orcish Bowmasters",
+        "Ponder",
+        "Up the Beanstalk",
+        "Uro, Titan of Nature's Wrath"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 17,
+      "cards": [
+        "Brainstorm",
+        "Grafdigger's Cage",
+        "Hedge Maze",
+        "Kaito, Bane of Nightmares",
+        "Orcish Bowmasters",
+        "Ponder",
+        "Rakshasa's Bargain",
+        "Up the Beanstalk"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 9,
+      "cards": [
+        "Flooded Strand",
+        "L\u00f3rien Revealed",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Verdant Catacombs"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 7,
+      "cards": [
+        "Brainstorm",
+        "Orcish Bowmasters"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 25,
+      "cards": [
+        "Baleful Strix",
+        "Barrowgoyf",
+        "Brainstorm",
+        "Endurance",
+        "Kaito, Bane of Nightmares",
+        "Murktide Regent",
+        "Orcish Bowmasters",
+        "Sheoldred's Edict",
+        "Tamiyo, Inquisitive Student",
+        "Thoughtseize",
+        "Up the Beanstalk",
+        "Uro, Titan of Nature's Wrath"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Abrupt Decay",
+        "Barrowgoyf",
+        "Blue Elemental Blast",
+        "Fatal Push",
+        "Force of Vigor",
+        "Hydroblast",
+        "Murderous Cut",
+        "Orcish Bowmasters",
+        "Pernicious Deed",
+        "Snuff Out",
+        "Wasteland",
+        "Witherbloom Command"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Toxic Deluge"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 10,
+      "cards": [
+        "Blue Elemental Blast",
+        "Consign to Memory",
+        "Force of Negation",
+        "Force of Will",
+        "Hydroblast"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 5
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Abrupt Decay",
+        "Kaito, Bane of Nightmares"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 20,
+      "cards": [
+        "Barrowgoyf",
+        "Endurance",
+        "Force of Negation",
+        "Grafdigger's Cage",
+        "Hedge Maze",
+        "Kaito, Bane of Nightmares",
+        "Life from the Loam",
+        "Murderous Cut",
+        "Murktide Regent",
+        "Mystic Sanctuary",
+        "Orcish Bowmasters",
+        "Rakshasa's Bargain",
+        "Surgical Extraction",
+        "Uro, Titan of Nature's Wrath",
+        "Witherbloom Command"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 8,
+      "cards": [
+        "Kaito, Bane of Nightmares",
+        "Life from the Loam",
+        "Murderous Cut",
+        "Murktide Regent",
+        "Mystic Sanctuary",
+        "Uro, Titan of Nature's Wrath",
+        "Witherbloom Command"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Up the Beanstalk"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Orcish Bowmasters"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Grafdigger's Cage",
+        "Torpor Orb"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 29,
+      "cards": [
+        "Bayou",
+        "Brainstorm",
+        "Carpet of Flowers",
+        "Flooded Strand",
+        "Hedge Maze",
+        "Misty Rainforest",
+        "Mystic Sanctuary",
+        "Orcish Bowmasters",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Tropical Island",
+        "Underground Sea",
+        "Up the Beanstalk",
+        "Verdant Catacombs",
+        "Wasteland"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 20,
+      "cards": [
+        "Bayou",
+        "Flooded Strand",
+        "Hedge Maze",
+        "Island",
+        "Misty Rainforest",
+        "Mystic Sanctuary",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Swamp",
+        "Tropical Island",
+        "Underground Sea",
+        "Verdant Catacombs",
+        "Wasteland"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Kaito, Bane of Nightmares"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.37
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abrupt Decay",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Baleful Strix",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Barrowgoyf",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bayou",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blue Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brainstorm",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hedge Maze",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaito, Bane of Nightmares",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Life from the Loam",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Murderous Cut",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Murktide Regent",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mystic Sanctuary",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orcish Bowmasters",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rakshasa's Bargain",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tropical Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Sea",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Up the Beanstalk",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Uro, Titan of Nature's Wrath",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Witherbloom Command",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Orcish Bowmasters is a double-edged sword",
+    "it can hit you or your own creatures if not careful.",
+    "Up the Beanstalk's token is fragile but crucial for mana fixing and blocking.",
+    "Brainstorm is your lifeline",
+    "use it to dig for answers, not just to draw cards."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Orcish Bowmasters if possible, or hold for a turn-2 Up the Beanstalk."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Cast Up the Beanstalk to fetch a land and drop a Saproling, or use Brainstorm to dig for answers/land."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence lands carefully to ensure UBG mana base works (e.g., Island, Swamp, Forest sequencing)."
+    }
+  ],
+  "kill_priority": [
+    "Up the Beanstalk",
+    "Brainstorm",
+    "Orcish Bowmasters",
+    "Kaito, Bane of Nightmares",
+    "Baleful Strix",
+    "Barrowgoyf",
+    "Endurance",
+    "Murktide Regent"
+  ],
+  "interaction_to_disrupt": [
+    "Blue Elemental Blast",
+    "Consign to Memory",
+    "Force of Negation",
+    "Force of Will",
+    "Hydroblast",
+    "Abrupt Decay",
+    "Kaito, Bane of Nightmares",
+    "Barrowgoyf"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/beanstalk-control-non-yorion.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

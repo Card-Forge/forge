@@ -1,0 +1,364 @@
+{
+  "archetype": "Toph, the First Metalbender",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/toph-the-first-metalbender.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Angel of the Ruins"
+    },
+    {
+      "qty": 1,
+      "name": "Arboreal Grazer"
+    },
+    {
+      "qty": 1,
+      "name": "Ash Barrens"
+    },
+    {
+      "qty": 1,
+      "name": "Badgermole"
+    },
+    {
+      "qty": 1,
+      "name": "Baloth Prime"
+    },
+    {
+      "qty": 1,
+      "name": "Bitter Work"
+    },
+    {
+      "qty": 1,
+      "name": "Burnished Hart"
+    },
+    {
+      "qty": 1,
+      "name": "Chain Reaction"
+    },
+    {
+      "qty": 1,
+      "name": "Chromatic Star"
+    },
+    {
+      "qty": 1,
+      "name": "Clockwork Percussionist"
+    },
+    {
+      "qty": 1,
+      "name": "Codex Shredder"
+    },
+    {
+      "qty": 1,
+      "name": "Cogwork Assembler"
+    },
+    {
+      "qty": 1,
+      "name": "Cogworker's Puzzleknot"
+    },
+    {
+      "qty": 1,
+      "name": "Combat Thresher"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivate"
+    },
+    {
+      "qty": 1,
+      "name": "Cycle of Renewal"
+    },
+    {
+      "qty": 1,
+      "name": "Drix Fatemaker"
+    },
+    {
+      "qty": 1,
+      "name": "Dundoolin Weaver"
+    },
+    {
+      "qty": 1,
+      "name": "Escape Tunnel"
+    },
+    {
+      "qty": 1,
+      "name": "Escape to the Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Eusocial Engineering"
+    },
+    {
+      "qty": 1,
+      "name": "Evolving Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 7,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Foundry Inspector"
+    },
+    {
+      "qty": 1,
+      "name": "Fumigate"
+    },
+    {
+      "qty": 1,
+      "name": "Gene Pollinator"
+    },
+    {
+      "qty": 1,
+      "name": "Glacier Godmaw"
+    },
+    {
+      "qty": 1,
+      "name": "Glider Staff"
+    },
+    {
+      "qty": 1,
+      "name": "Graypelt Refuge"
+    },
+    {
+      "qty": 1,
+      "name": "Horizon Spellbomb"
+    },
+    {
+      "qty": 1,
+      "name": "Inspiring Statuary"
+    },
+    {
+      "qty": 1,
+      "name": "Jungle Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Kaslem's Stonetree"
+    },
+    {
+      "qty": 1,
+      "name": "Kazandu Refuge"
+    },
+    {
+      "qty": 1,
+      "name": "Larval Scoutlander"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Loamcrafter Faun"
+    },
+    {
+      "qty": 1,
+      "name": "Lux Artillery"
+    },
+    {
+      "qty": 1,
+      "name": "Melded Moxite"
+    },
+    {
+      "qty": 1,
+      "name": "Mishra's Research Desk"
+    },
+    {
+      "qty": 3,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Myriad Landscape"
+    },
+    {
+      "qty": 1,
+      "name": "Navigation Orb"
+    },
+    {
+      "qty": 1,
+      "name": "Novice Inspector"
+    },
+    {
+      "qty": 1,
+      "name": "Nutrient Block"
+    },
+    {
+      "qty": 1,
+      "name": "Origin Spellbomb"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Phoenix Down"
+    },
+    {
+      "qty": 1,
+      "name": "Pilgrim's Eye"
+    },
+    {
+      "qty": 4,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Portable Hole"
+    },
+    {
+      "qty": 1,
+      "name": "Public Thoroughfare"
+    },
+    {
+      "qty": 1,
+      "name": "Radiant Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Raging Ravine"
+    },
+    {
+      "qty": 1,
+      "name": "Reckless Fireweaver"
+    },
+    {
+      "qty": 1,
+      "name": "Reclamation Sage"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Ridgeline"
+    },
+    {
+      "qty": 1,
+      "name": "Rustvale Bridge"
+    },
+    {
+      "qty": 1,
+      "name": "Sabotender"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Peaks"
+    },
+    {
+      "qty": 1,
+      "name": "Saheeli's Lattice"
+    },
+    {
+      "qty": 1,
+      "name": "Sakura-Tribe Elder"
+    },
+    {
+      "qty": 1,
+      "name": "Sarpadian Simulacrum"
+    },
+    {
+      "qty": 1,
+      "name": "Seismic Sense"
+    },
+    {
+      "qty": 1,
+      "name": "Servo Schematic"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Solar Transformer"
+    },
+    {
+      "qty": 1,
+      "name": "Solemn Simulacrum"
+    },
+    {
+      "qty": 1,
+      "name": "Springbloom Druid"
+    },
+    {
+      "qty": 1,
+      "name": "Springleaf Drum"
+    },
+    {
+      "qty": 1,
+      "name": "Struggle // Survive"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Abandon"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Plenty"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Triumph"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of the False God"
+    },
+    {
+      "qty": 1,
+      "name": "Thraben Inspector"
+    },
+    {
+      "qty": 1,
+      "name": "Throne of the High City"
+    },
+    {
+      "qty": 1,
+      "name": "Tireless Tracker"
+    },
+    {
+      "qty": 1,
+      "name": "Toph, the Blind Bandit"
+    },
+    {
+      "qty": 1,
+      "name": "Toph, the First Metalbender"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Cryptkeeper"
+    },
+    {
+      "qty": 1,
+      "name": "Tuskguard Captain"
+    },
+    {
+      "qty": 1,
+      "name": "Vanquish the Horde"
+    },
+    {
+      "qty": 1,
+      "name": "Vibrant Cityscape"
+    },
+    {
+      "qty": 1,
+      "name": "Warped Landscape"
+    },
+    {
+      "qty": 1,
+      "name": "White Auracite"
+    },
+    {
+      "qty": 1,
+      "name": "Worldsoul's Rage"
+    }
+  ],
+  "sideboard": []
+}

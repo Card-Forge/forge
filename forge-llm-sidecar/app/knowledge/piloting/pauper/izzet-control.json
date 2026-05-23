@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with 2-3 lands and a counterspell",
       "Hands featuring Force Spike for early disruption",
-      "Hands containing Lorien Revealed for mid-game refills"
+      "Hands containing Lorien Revealed for mid-game refills",
+      "Keep hands with 2-3 lands, at least one early interaction (Force Spike, Counterspell), and Lorien Revealed or a cantrip."
     ],
     "mulligan_criteria": [
       "Hands with 0-1 lands",
       "Hands lacking early interaction or mana",
-      "Hands with only high-cost threats"
+      "Hands with only high-cost threats",
+      "Mulligan flood/draw, hands with only high-cost spells, or hands lacking early disruption against aggro."
     ],
     "examples": []
   },
@@ -25,17 +27,31 @@
     "early_game": [
       "Play lands consistently to avoid mana screws",
       "Hold up Counterspell or Force Spike for opponent's key plays",
-      "Avoid developing board unless opponent lacks interaction"
+      "Avoid developing board unless opponent lacks interaction",
+      "Turn 1: Play a land, cast Force Spike on a 1-drop threat if possible.",
+      "Turn 2: Play a second land, cast Counterspell on a key spell or play a cantrip.",
+      "Sequence lands to ensure U/R availability",
+      "prioritize untapping lands before casting spells to maximize interaction windows."
     ],
     "mid_game": [
       "Cast Lorien Revealed to refill hand and find answers",
       "Trade spells efficiently to maintain resource advantage",
-      "Apply pressure only when opponent's interaction is exhausted"
+      "Apply pressure only when opponent's interaction is exhausted",
+      "Hold 1-2 mana for interaction until Lorien Revealed is on the board.",
+      "Prioritize drawing into Lorien over overcommitting to board presence.",
+      "Use cantrips to cycle dead cards and maintain hand size.",
+      "Commit Lorien Revealed only after stabilizing against early aggression.",
+      "Hold back on casting non-essential spells if the opponent has sweepers or removal in hand.",
+      "Use Force Spike to protect Lorien from targeted removal."
     ],
     "late_game": [
       "Stall with counterspells until opponent runs out of resources",
       "Cast remaining threats to close out the game",
-      "Prioritize countering win conditions over removal"
+      "Prioritize countering win conditions over removal",
+      "Lorien Revealed generating Saprolings, combined with direct damage spells and card draw.",
+      "Win by out-valuing the opponent, sacrificing Lorien for damage/card advantage when threatened, and closing with combat or direct spells.",
+      "Go all-in when the opponent has no sweepers, you have card advantage, and Lorien is on the board.",
+      "Commit to attacking with Saprolings and casting remaining interaction to close the game."
     ]
   },
   "key_cards": [
@@ -58,7 +74,12 @@
   "sequencing_tips": [
     "Hold up Counterspell before casting Lorien Revealed to protect your advantage",
     "Use Force Spike on opponent's turn to maximize mana denial",
-    "Prioritize countering threats over removal to preserve resources"
+    "Prioritize countering threats over removal to preserve resources",
+    "Lorien Revealed is legendary, so you cannot have multiple copies",
+    "plan around its single existence.",
+    "Watch for 'Legend rule' interactions if an opponent copies it.",
+    "Format legality heavily influences card choices, so verify your list's validity.",
+    "Avoid overextending into sweepers, and always hold up interaction for key threats before committing to Lorien."
   ],
   "matchups": [
     {
@@ -87,15 +108,35 @@
         "Ramp spells",
         "Win-condition cards"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to out-value counters, sacrifice Lorien for card advantage, and avoid overcommitting to expensive spells. Target their counterspells with spot removal or discard if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Force Spike and Counterspell to disrupt mana development. Bring in artifact hate and sweepers to neutralize late-game threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win on card advantage and efficient interaction. Prioritize casting Lorien Revealed first to establish a board presence. Use Force Spike to protect your Lorien and disrupt theirs. Cycle through your deck to find the next key spell.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggro creatures",
     "Combo win conditions",
-    "Board wipes"
+    "Board wipes",
+    "Watch for opponent's mana development and discard patterns.",
+    "Key tells: holding up 3+ mana suggests a sweeper or combo piece",
+    "discarding draw spells indicates a control/combo plan",
+    "playing multiple lands without spells suggests ramp or combo."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:03:27+00:00",
     "model": "local-model",
@@ -124,6 +165,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

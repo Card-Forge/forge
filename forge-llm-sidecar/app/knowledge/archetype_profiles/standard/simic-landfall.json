@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "name": "Simic Landfall",
+  "format": "standard",
+  "colors": [
+    "U",
+    "G"
+  ],
+  "strategy_type": "ramp",
+  "expected_deck_total": 60,
+  "macro_plan": "Simic Landfall leverages the landfall mechanic to accelerate resource generation and grow threats rapidly. By playing multiple lands per turn and cycling through Earthbender Ascension, the deck triggers landfall repeatedly to buff Badgermole Cub and Mightform Harmonizer. This approach aims to outpace opponents through consistent board presence and incremental value generation.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 8,
+      "cards": [
+        "Badgermole Cub",
+        "Quantum Riddler"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 12,
+      "cards": [
+        "Earthbender Ascension",
+        "Escape Tunnel",
+        "Fabled Passage",
+        "Lumbering Worldwagon"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 33,
+      "cards": [
+        "Badgermole Cub",
+        "Frenzied Baloth",
+        "Icetill Explorer",
+        "Keen-Eyed Curator",
+        "Leatherhead, Swamp Stalker",
+        "Llanowar Elves",
+        "Mightform Harmonizer",
+        "Mossborn Hydra",
+        "Quantum Riddler",
+        "Sazh's Chocobo"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 10
+    },
+    "removal": {
+      "target_count": 9,
+      "cards": [
+        "Into the Flood Maw",
+        "Keen-Eyed Curator",
+        "Leatherhead, Swamp Stalker",
+        "Mossborn Hydra"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 9
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 10,
+      "cards": [
+        "Disdainful Stroke",
+        "Earthbender Ascension",
+        "Spell Pierce",
+        "Spider-Sense"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Frenzied Baloth",
+        "Leatherhead, Swamp Stalker",
+        "Sapling Nursery"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 5
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 9,
+      "cards": [
+        "Escape Tunnel",
+        "Icetill Explorer",
+        "Keen-Eyed Curator"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 14,
+      "cards": [
+        "Ba Sing Se",
+        "Badgermole Cub",
+        "Icetill Explorer",
+        "Into the Flood Maw",
+        "Spider-Sense"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 11,
+      "cards": [
+        "Badgermole Cub",
+        "Earthbender Ascension",
+        "Mightform Harmonizer"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Earthbender Ascension"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Badgermole Cub",
+        "Frenzied Baloth"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 26,
+      "cards": [
+        "Ba Sing Se",
+        "Badgermole Cub",
+        "Breeding Pool",
+        "Earthbender Ascension",
+        "Escape Tunnel",
+        "Fabled Passage",
+        "Mightform Harmonizer",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 26,
+      "cards": [
+        "Ba Sing Se",
+        "Breeding Pool",
+        "Escape Tunnel",
+        "Fabled Passage",
+        "Forest",
+        "Island",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.42
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ba Sing Se",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Badgermole Cub",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Earthbender Ascension",
+      "roles": [
+        "combo_pieces",
+        "counterspells",
+        "engines",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Escape Tunnel",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabled Passage",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Frenzied Baloth",
+      "roles": [
+        "hate_pieces",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Icetill Explorer",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Into the Flood Maw",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Keen-Eyed Curator",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leatherhead, Swamp Stalker",
+      "roles": [
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mightform Harmonizer",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mossborn Hydra",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quantum Riddler",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spider-Sense",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Willowrush Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always play lands before casting creatures to ensure landfall triggers on the same turn",
+    "Hold up mana for Earthbender Ascension when you suspect opponent interaction",
+    "Prioritize landfall triggers over combat damage when you are ahead in board state",
+    "Sequence removal to protect key landfall beneficiaries before they are fully grown",
+    "Landfall decks thrive on consistency"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing lands to trigger landfall before casting creatures"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish early board presence with Badgermole Cub"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up mana for potential Earthbender Ascension plays"
+    }
+  ],
+  "kill_priority": [
+    "Badgermole Cub",
+    "Earthbender Ascension",
+    "Mightform Harmonizer",
+    "Frenzied Baloth",
+    "Icetill Explorer",
+    "Keen-Eyed Curator",
+    "Leatherhead, Swamp Stalker",
+    "Llanowar Elves"
+  ],
+  "interaction_to_disrupt": [
+    "Disdainful Stroke",
+    "Earthbender Ascension",
+    "Spell Pierce",
+    "Spider-Sense",
+    "Frenzied Baloth",
+    "Leatherhead, Swamp Stalker",
+    "Sapling Nursery",
+    "Into the Flood Maw"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/simic-landfall.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

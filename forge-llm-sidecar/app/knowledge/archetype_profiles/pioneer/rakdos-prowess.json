@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "name": "Rakdos Prowess",
+  "format": "pioneer",
+  "colors": [
+    "B",
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Rakdos Prowess is a fast, spell-slinging aggro deck that leverages cheap noncreature spells to repeatedly trigger the prowess mechanic. By cycling through low-cost creatures and instant-speed interactions, it aims to overwhelm opponents before they can establish a stable board state. The deck thrives on efficient resource usage and graveyard recursion to maintain relentless pressure.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 0,
+      "cards": []
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": []
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Emberheart Challenger"
+      ]
+    },
+    "threats": {
+      "target_count": 3,
+      "cards": [
+        "Emberheart Challenger",
+        "Monastery Swiftspear",
+        "Slickshot Show-Off"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 1,
+      "cards": [
+        "Slickshot Show-Off"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 1,
+      "cards": [
+        "Slickshot Show-Off"
+      ]
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Monastery Swiftspear",
+        "Slickshot Show-Off"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Monastery Swiftspear"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 0,
+      "cards": []
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Monastery Swiftspear",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Slickshot Show-Off",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emberheart Challenger",
+      "roles": [
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast noncreature spells before declaring attackers to maximize prowess buffs",
+    "Hold removal in hand to respond to opponent's key threats or blockers",
+    "Time Emberheart Challenger's death trigger to leave a counter on your largest creature",
+    "Prioritize casting spells that trigger prowess over drawing cards when ahead on damage",
+    "Prowess rewards spell efficiency, so don\u2019t fear casting seemingly 'bad' spells if they trigger Prowess."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Deploy Monastery Swiftspear immediately and cast cheap instants or sorceries to buff it"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize land drops and spell density to maximize prowess triggers"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early removal to clear blockers and keep damage on track"
+    }
+  ],
+  "kill_priority": [
+    "Monastery Swiftspear",
+    "Slickshot Show-Off",
+    "Emberheart Challenger",
+    "Emberheart Challenger",
+    "Monastery Swiftspear",
+    "Slickshot Show-Off"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

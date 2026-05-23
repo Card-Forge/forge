@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with Thoughtseize and a one-drop or land",
       "Hands containing Fear of Missing Out and early disruption",
-      "Hands with two lands and a playable creature or artifact"
+      "Hands with two lands and a playable creature or artifact",
+      "Keep hands with 2-3 lands, at least one early game plan (Thoughtseize, Parhelion II, or a sacrifice outlet), and a clear path to developing Greasefang.",
+      "Keep hands with Thoughtseize + land, or Parhelion II + land.",
+      "Prioritize hands that can disrupt the opponent's early game or establish a board presence by turn 2."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands",
       "Hands lacking any disruption or early plays",
-      "Hands with only high-cost finishers and no interaction"
+      "Hands with only high-cost finishers and no interaction",
+      "Mulligan to 4+ lands, or hands with only threats and no lands/speed."
     ],
     "examples": []
   },
@@ -25,17 +29,33 @@
     "early_game": [
       "Play lands and cheap creatures to establish board presence",
       "Use Thoughtseize to disrupt opponent's combo pieces or early threats",
-      "Hold up mana for potential instant-speed interaction if needed"
+      "Hold up mana for potential instant-speed interaction if needed",
+      "Turn 1: Play a land, cast Thoughtseize if possible to remove key answers (targeted removal, sweepers, or combo pieces) or disrupt their game plan.",
+      "Turn 2: Play a second land, cast Parhelion II or a sacrifice outlet if mana allows, or develop a 2-drop threat.",
+      "If opening with Greasefang, play land, land, Greasefang on turn 3, using turns 1-2 for disruption or setup.",
+      "Sequence sacrifices carefully to maximize value without overcommitting."
     ],
     "mid_game": [
       "Deploy Fear of Missing Out to clear problematic permanents or draw cards",
       "Establish a board of creatures that can trade efficiently",
-      "Use Parhelion II to exile graveyard threats or generate card advantage"
+      "Use Parhelion II to exile graveyard threats or generate card advantage",
+      "Balance mana between developing your board, casting disruption, and fueling sacrifice outlets.",
+      "Avoid over-sacrificing when you need creatures for blocking or attacking.",
+      "Use Parhelion II's sacrifice ability for card draw only when you have a clear advantage or need to dig for answers.",
+      "Track your graveyard and opponent's potential sweepers.",
+      "Commit Greasefang when you have protection or can trade effectively.",
+      "Hold back if the opponent has sweepers or targeted removal."
     ],
     "late_game": [
       "Enter Greasefang, Okiba Boss to clear the board and untap for a massive attack",
       "Cycle through card advantage engines to maintain resource superiority",
-      "Use remaining interaction to protect your finisher and close the game"
+      "Use remaining interaction to protect your finisher and close the game",
+      "Greasefang (often buffed via sacrifice outlets or equipment/aura if in format), or a massive swarm of flying Spirits.",
+      "Secure the win by trading into blockers, using discard to remove answers, and leveraging card draw to outlast the opponent.",
+      "Close the game when you have established board control and the opponent has no sweepers.",
+      "Go all-in when you have established board control, the opponent has no sweepers, or you can trade your tokens for their key threats.",
+      "Commit when you have enough resources to survive their removal and close the game.",
+      "Push damage with flying tokens while using sacrifice outlets to draw into answers or finishers."
     ]
   },
   "key_cards": [
@@ -64,7 +84,12 @@
     "Hold Thoughtseize until you see the opponent's key threat or combo piece",
     "Prioritize exiling threats with Fear of Missing Out before generating tokens unless you need immediate board presence",
     "Time Greasefang's ability to maximize the number of creatures attacking in a single turn",
-    "Use Parhelion II's draw mode when you are low on cards, but keep it on the battlefield for graveyard denial when facing mill or reanimation decks"
+    "Use Parhelion II's draw mode when you are low on cards, but keep it on the battlefield for graveyard denial when facing mill or reanimation decks",
+    "Common mistakes include over-sacrificing too early without a plan, ignoring the opponent's removal, and failing to track graveyard/sweeper counts.",
+    "Greasefang is vulnerable to targeted removal, so protect it or have a backup plan.",
+    "Parhelion II's card draw is powerful but can be a liability if you're low on life or facing sweepers.",
+    "Always weigh the value of sacrificing tokens against board presence.",
+    "Practice sequencing sacrifice outlets to maximize value without overcommitting."
   ],
   "matchups": [
     {
@@ -93,6 +118,21 @@
         "Mill effects",
         "Unexpected win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtseize to remove counterspells or key pieces. Cast threats in response to counterspells if possible, or use cheap/sacrifice outlets to value out counters. Consider sideboard hate like Dispel or Negate if needed. Force them to use multiple spells to deal with your engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to beat them out. Use discard to remove ramp spells. Once they stabilize, use sweepers or targeted removal to clear their board and close the game with Greasefang. Don't let them get too far ahead in mana before committing to a board wipe.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through card advantage and better sequencing. Use Thoughtseize to remove their key pieces. Trade efficiently, prioritize Greasefang protection, and out-value them in the late game. Control the board with flying tokens and force them to use removal on your less valuable threats.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -100,10 +140,15 @@
     "Rakdos Carnarium",
     "Spell Queller",
     "Doomsday",
-    "Infect creatures"
+    "Infect creatures",
+    "Watch for sweepers (Wrath of God, Damnation), targeted removal (Path, Lightning), and combo win conditions.",
+    "Note when opponents tap out for counterspells or answers.",
+    "Track graveyard contents if playing against graveyard decks.",
+    "Pay attention to when they save removal for Greasefang versus your tokens."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:23:00+00:00",
     "model": "local-model",
@@ -119,6 +164,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

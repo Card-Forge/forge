@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "name": "Sultai Depths",
+  "format": "legacy",
+  "colors": [
+    "B",
+    "G"
+  ],
+  "strategy_type": "ramp",
+  "expected_deck_total": 62,
+  "macro_plan": "Sultai Depths is a Legacy black-green ramp archetype that accelerates mana to cast large spells ahead of schedule. By leveraging Lotus Petal and Crop Rotation, it rapidly builds a mana base while cycling toward win conditions. Elvish Spirit Guide provides early board presence and card advantage, stabilizing against aggressive strategies.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Elvish Spirit Guide",
+        "Lotus Petal",
+        "Sylvan Library"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 11,
+      "cards": [
+        "Elvish Spirit Guide",
+        "Once Upon a Time",
+        "Sylvan Scrying"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 20,
+      "cards": [
+        "Crop Rotation",
+        "Elvish Spirit Guide",
+        "Lotus Petal",
+        "Sylvan Scrying",
+        "Verdant Catacombs"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 28,
+      "cards": [
+        "Collector Ouphe",
+        "Crop Rotation",
+        "Duress",
+        "Elvish Spirit Guide",
+        "Lotus Petal",
+        "Pithing Needle",
+        "Sylvan Safekeeper",
+        "Vampire Hexmage"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 9,
+      "cards": [
+        "Abrupt Decay",
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Ghost Quarter",
+        "Legolas's Quick Reflexes"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 12,
+      "cards": [
+        "Crop Rotation",
+        "Elvish Spirit Guide",
+        "Lotus Petal"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Not of This World"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 1
+    },
+    "protection": {
+      "target_count": 23,
+      "cards": [
+        "Abrupt Decay",
+        "Crop Rotation",
+        "Dark Depths",
+        "Elvish Spirit Guide",
+        "Legolas's Quick Reflexes",
+        "Lotus Petal",
+        "Sejiri Steppe"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 5
+    },
+    "discard_outlets": {
+      "target_count": 12,
+      "cards": [
+        "Crop Rotation",
+        "Elvish Spirit Guide",
+        "Lotus Petal"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 17,
+      "cards": [
+        "Bojuka Bog",
+        "Crop Rotation",
+        "Elvish Spirit Guide",
+        "Leyline of the Void",
+        "Lotus Petal"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Elvish Spirit Guide"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Elvish Spirit Guide"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Legolas's Quick Reflexes"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 36,
+      "cards": [
+        "Bayou",
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Crop Rotation",
+        "Dark Depths",
+        "Elvish Spirit Guide",
+        "Ghost Quarter",
+        "Lotus Petal",
+        "Overgrown Tomb",
+        "Sejiri Steppe",
+        "Thespian's Stage",
+        "Urborg, Tomb of Yawgmoth",
+        "Verdant Catacombs",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 26,
+      "cards": [
+        "Bayou",
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Dark Depths",
+        "Forest",
+        "Ghost Quarter",
+        "Overgrown Tomb",
+        "Sejiri Steppe",
+        "Swamp",
+        "Thespian's Stage",
+        "Urborg, Tomb of Yawgmoth",
+        "Verdant Catacombs",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.39
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abrupt Decay",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bayou",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crop Rotation",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dark Depths",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elvish Spirit Guide",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Quarter",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Legolas's Quick Reflexes",
+      "roles": [
+        "hate_pieces",
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lotus Petal",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sejiri Steppe",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sylvan Scrying",
+      "roles": [
+        "dig_draw",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thespian's Stage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urborg, Tomb of Yawgmoth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya, Cradle of Growth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize playing Lotus Petal before Crop Rotation to maximize turn two mana",
+    "Cycle Crop Rotation only when you have sufficient mana sources in play",
+    "Hold Elvish Spirit Guide in hand if you need to untap lands for a big play",
+    "Depths is a key tutor",
+    "don't overextend without it."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and accelerators to establish mana base"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Crop Rotation to find optimal lands while cycling"
+    },
+    {
+      "trigger": "early game",
+      "line": "Deploy Elvish Spirit Guide for early board presence and card draw"
+    }
+  ],
+  "kill_priority": [
+    "Elvish Spirit Guide",
+    "Collector Ouphe",
+    "Crop Rotation",
+    "Duress",
+    "Lotus Petal",
+    "Pithing Needle",
+    "Sylvan Safekeeper",
+    "Vampire Hexmage"
+  ],
+  "interaction_to_disrupt": [
+    "Not of This World",
+    "Abrupt Decay",
+    "Crop Rotation",
+    "Dark Depths",
+    "Elvish Spirit Guide",
+    "Legolas's Quick Reflexes",
+    "Lotus Petal",
+    "Sejiri Steppe"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/sultai-depths.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

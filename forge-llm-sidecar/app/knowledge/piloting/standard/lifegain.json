@@ -13,11 +13,14 @@
     "keep_criteria": [
       "Hands with turn-one plays like Momo, Friendly Flier",
       "Hands containing turn-two threats like Hinterland Sanctifier",
-      "Hands with early land drops and life gain triggers"
+      "Hands with early land drops and life gain triggers",
+      "Keep hands with 2-3 lands, at least one early lifegain source or combat damage enabler, and a clear turn-2 play.",
+      "Keep any hand with Sheltered by Ghosts or Leonardo, Cutting Edge if supported by a land and a cheap creature or pump spell."
     ],
     "mulligan_criteria": [
       "Hands lacking early creatures or lands",
-      "Hands heavy on high-cost payoffs without early triggers"
+      "Hands heavy on high-cost payoffs without early triggers",
+      "Mulligan on 3+ lands with no early threats, or 0-1 lands with no lifegain/combat synergies."
     ],
     "examples": [
       {
@@ -39,17 +42,32 @@
     "early_game": [
       "Play Momo, Friendly Flier on turn one to reduce flying costs and enable early bats",
       "Use Starting Town to pay life for Essence Channeler's ability",
-      "Establish early life gain triggers with Case of the Uneaten Feast"
+      "Establish early life gain triggers with Case of the Uneaten Feast",
+      "Turn 1: Play a Plains, then cast a 1-2 mana lifegain spell or early creature.",
+      "Turn 2: Deploy Sheltered by Ghosts or Leonardo, Cutting Edge, then attack with pump spells or blockers to trigger life gain.",
+      "Land sequencing: Prioritize Plains for early white mana, then develop into a balanced mana base.",
+      "If playing fetch/shock-style lands, sequence them to avoid life loss early when you need it."
     ],
     "mid_game": [
       "Accumulate triggers with Hinterland Sanctifier and Zoraline, Cosmos Caller or Voice of Victory",
       "Grow Amalia Benavides Aguirre and Essence Channeler with +1/+1 counters",
-      "Use interaction like Erode and Deep-Cavern Bat to clear board and hand"
+      "Use interaction like Erode and Deep-Cavern Bat to clear board and hand",
+      "Hoover mana for combat damage triggers and pump spells rather than overcommitting to the board.",
+      "Track life total carefully",
+      "use lifegain to offset damage from spells or combat.",
+      "If your deck interacts with the graveyard, protect key lifegain sources and avoid unnecessary discards.",
+      "Commit creatures when you have active lifegain sources to stabilize life total and trade efficiently.",
+      "Hold back if the opponent has sweepers, heavy removal, or can answer your key synergies."
     ],
     "late_game": [
       "Leverage card advantage engines like Haliya, Guided by Light, Darkstar Augur, and Enduring Innocence",
       "Activate Restless Fortress for additional life gain and pressure",
-      "Close out with large, triggered creatures and wide board presence"
+      "Close out with large, triggered creatures and wide board presence",
+      "Leonardo, Cutting Edge + Sheltered by Ghosts + combat damage creates a life gain engine that outpaces most formats.",
+      "Win by trading efficiently, pumping creatures, and leveraging life total math to outlast opponents.",
+      "Once life is stable (>18), commit to combat damage and pump spells to close the game.",
+      "Go all-in when life is stable, you have multiple creatures or combat damage sources, and the opponent has no sweepers or hard removal in hand.",
+      "Also commit when you can trigger multiple lifegain sources in a single combat to swing life total decisively."
     ]
   },
   "key_cards": [
@@ -98,7 +116,12 @@
     "Prioritize playing Momo, Friendly Flier on turn one to unlock flying synergies",
     "Use Starting Town's life loss to fuel Essence Channeler early",
     "Offset life loss from Starting Town with Scoured Barrens later",
-    "Sequence Hinterland Sanctifier on turn two to maximize early triggers"
+    "Sequence Hinterland Sanctifier on turn two to maximize early triggers",
+    "Common mistakes include overextending without lifegain sources, ignoring life total math, and failing to track opponent's removal or counters.",
+    "Unique interactions: Sheltered by Ghosts + pump spells = massive life gain in a single combat.",
+    "Leonardo, Cutting Edge synergizes with combat damage and life gain triggers.",
+    "Watch for format-specific hate cards like artifact/enchantment removal or sweepers.",
+    "Always calculate life total swings before attacking, and prioritize trading into threats over attacking face when life is below 15."
   ],
   "matchups": [
     {
@@ -108,15 +131,45 @@
         "Explosive early turns",
         "Aggressive creature pressure"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap threats to force counter windows, stack triggers to out-value counters, and rely on non-creature lifegain or instant-speed pumps. Attack around the stack by committing to board presence and leveraging life gain to survive removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to force life total trades before they stabilize. Use targeted removal on key ramp sources, stabilize with lifegain, and punish overextended boards with combat damage triggers. Don't let them reach their late-game win condition by trading efficiently.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize lifegain and pump spells to stabilize life total. Trade efficiently, avoid overextending, and use blockers to buy time for your synergies. Once stabilized, shift to combat damage and life gain to out-value their aggressive curve.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with early threats and lifegain to force removal. Use life total math to out-value their removal spells, and win through combat damage once they run out of answers. Don't overcommit to the board if they have sweepers; instead, trade and stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win value trades by prioritizing lifegain synergies and combat damage triggers. Use sideboard cards for extra life gain or pump effects, and track life total carefully. Force the opponent to overextend or make bad trades by leveraging your life gain engine.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Rest in Peace",
     "Similar enchantment removal in sideboards",
-    "Explosive early-game turns from aggressive decks"
+    "Explosive early-game turns from aggressive decks",
+    "Watch for Izzet's cheap removal and stack manipulation, Landfall's ramp triggers, and Prowess's burst turns.",
+    "Key tells: Opponent tapping extra mana or holding up counterspells suggests a stack play.",
+    "Multiple untapped lands with no immediate play often signals a Landfall or Prowess turn.",
+    "Track life total swings to anticipate their win condition."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-upgrading-the-theme-deck-lifegain",
     "generated_at": "2026-05-21T06:48:47+00:00",
     "model": "local-model",
@@ -134,6 +187,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

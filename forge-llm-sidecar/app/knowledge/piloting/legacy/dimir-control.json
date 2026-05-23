@@ -12,7 +12,10 @@
     "keep_criteria": [
       "Hands with early disruption like Thoughtseize",
       "Hands containing Brainstorm or Flow State for card advantage",
-      "Hands with at least two lands and a removal spell"
+      "Hands with at least two lands and a removal spell",
+      "Keep hands with 2-3 lands, at least one Thoughtseize, and a mix of removal/counterspells.",
+      "Drop to 6 if you have 4+ lands with no early interaction, or 3+ draw spells with zero answers.",
+      "Prioritize keeping hands that can cast Thoughtseize on turn 1 and have a land to cast it on."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction",
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and use Thoughtseize to disrupt opponent's key cards",
       "Cast Brainstorm to dig for answers and set up future turns",
-      "Prioritize surviving turn 1-2 threats over developing your own board"
+      "Prioritize surviving turn 1-2 threats over developing your own board",
+      "Turn 1: Cast Thoughtseize against Tron (target Lotus Cobra/Ancient Tomb), Sneak and Show (target Phyrexian Revoker or graveyard), or Ocelot Pride (target mana accelerants).",
+      "Turn 2: Play a land, then cast Brainstorm or a spot removal/counter.",
+      "Sequence lands to ensure you can cast Thoughtseize on turn 1, then develop your mana base.",
+      "Use Brainstorm to dig for answers or set up your graveyard for Snapcaster Mage/Flow State."
     ],
     "mid_game": [
       "Stabilize with Flow State to generate card advantage and protect your life total",
       "Use removal and counterspells to clear the board",
-      "Begin assembling combo pieces or setting up a resilient finisher"
+      "Begin assembling combo pieces or setting up a resilient finisher",
+      "Balance mana between interaction and threat development.",
+      "Avoid overcommitting to Flow State unless you have a clear win condition or protection.",
+      "Use Brainstorm/Preordain to cycle into answers or set up your graveyard for Snapcaster Mage.",
+      "Track opponent\u2019s graveyard for combo pieces and Snapcaster targets.",
+      "Hold back on committing large threats if the opponent has sweepers or heavy removal.",
+      "Use counterspells to protect key spells (Flow State, Snapcaster, or finishers) and disrupt opponent\u2019s combos."
     ],
     "late_game": [
       "Leverage infinite draw loops or massive card advantage to find answers",
       "Deploy a win condition once the opponent is out of resources",
-      "Maintain board control until victory is inevitable"
+      "Maintain board control until victory is inevitable",
+      "Flow State (storm count > 10) is the primary win condition, often followed by Snapcaster Mage to replay key spells or draw into game-ending answers.",
+      "Efficient threats like Thoughtseize into a board wipe or spot removal can also close out games if the opponent is low on resources.",
+      "Go all-in when you have enough spells in hand/graveyard to cast Flow State, have protection (counterspell/removal), and the opponent has no clear answer.",
+      "Also commit when you can safely cast Snapcaster Mage to replay a key spell or draw into a win."
     ]
   },
   "key_cards": [
@@ -59,7 +76,13 @@
     "Hold Brainstorm for when you need to dig for a specific answer or set up a combo",
     "Use Thoughtseize reactively to remove the most impactful card in the opponent's hand",
     "Cast Flow State only when you can safely survive the turn and maximize its draw potential",
-    "Prioritize keeping removal in hand over casting it immediately unless necessary"
+    "Prioritize keeping removal in hand over casting it immediately unless necessary",
+    "Flow State is highly vulnerable to discard and counterspells",
+    "never cast it blindly without protection or a clear win condition.",
+    "Brainstorm and Preordain are crucial for setting up your graveyard and digging for answers.",
+    "Mind the graveyard for Snapcaster Mage and opponent combo pieces.",
+    "Common mistake: Overcommitting to Flow State without enough spells or protection, leading to dead mana and lost games.",
+    "Always track opponent\u2019s hand and graveyard to make informed decisions."
   ],
   "matchups": [
     {
@@ -88,16 +111,35 @@
         "Counterspell wars",
         "Late game finishers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells to split the stack, cast Flow State in response to their counter, or use Thoughtseize to remove their counterspells. Brainstorm to dig for answers or protection. If they have heavy counter magic, pivot to discard and spot removal to grind them down.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early disruption with Thoughtseize to target mana rocks or key creatures. Use spot removal for early threats and counterspells for finishers. Flow State can out-value ramp if you have enough spells, but prioritize shutting down their early acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war by targeting their counterspells, discard, and key threats. Protect your Flow State and Snapcaster Mage with counterspells. Track their graveyard for Snapcaster targets and use counterspells to protect your key spells. Sideboard games often come down to who manages resources and graveyard better.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Combo enablers and accelerants",
     "Board wipe spells",
-    "Card draw engines"
+    "Card draw engines",
+    "Watch for Tron\u2019s mana rock drops, Sneak and Show\u2019s graveyard setup, Delver\u2019s flip condition, and Ocelot\u2019s mana acceleration.",
+    "Key tells include opponents playing multiple lands without casting spells, casting discard to protect combo pieces, or holding up mana for sweepers/counterspells.",
+    "Track their graveyard for Phyrexian Revoker, Snapcaster, or combo enablers."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:19:48+00:00",
     "model": "local-model",
@@ -113,6 +155,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

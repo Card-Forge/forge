@@ -1,0 +1,126 @@
+{
+  "archetype": "Golgari Midrange",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "Golgari Midrange seeks to control the early game with efficient disruption and removal while out-grinding opponents through resilient threats and card advantage. It wins by dictating the pace of the match, leveraging graveyard synergy and targeted removal to outvalue slower, combo, or aggressive strategies.",
+  "win_conditions": [
+    "Sentinel of the Nameless City clearing the board, resilient mid-range threats, and graveyard-fueled card advantage.",
+    "Win by out-resourcing through removal and threat cycles."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing duals/shocks for fixing) and at least one early interaction (Thoughtseize, removal, or Badgermole Cub).",
+      "Keep any hand containing Sentinel of the Nameless City if you have 3+ mana sources."
+    ],
+    "mulligan_criteria": [
+      "Mulligan flood, screw, or hands with only high-cost threats and no early game plan or disruption."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Thoughtseize on a key combo piece, early threat, or removal spell.",
+      "Turn 2: Play a land, cast Badgermole Cub or a 2-drop removal spell.",
+      "If opening with Sentinel, ensure you have 3 lands and a removal spell or another threat to support it.",
+      "Sequence lands to ensure color fixing, prioritizing duals/shocks if available."
+    ],
+    "mid_game": [
+      "Preserve Thoughtseize for high-impact targets (combo pieces, key removal, or win conditions).",
+      "Use Badgermole Cub's card advantage efficiently by letting it trade with removal or block early threats.",
+      "Manage graveyard resources carefully",
+      "avoid overcommitting if facing graveyard hate.",
+      "Commit threats when you have removal ready for their response.",
+      "Hold back Sentinel if you lack an answer to their removal or if they have sweepers.",
+      "Prioritize trading efficiently rather than overextending into sweepers or counters."
+    ],
+    "late_game": [
+      "Sentinel of the Nameless City clearing the board, resilient mid-range threats, and graveyard-fueled card advantage.",
+      "Win by out-resourcing through removal and threat cycles.",
+      "Go all-in when you have card advantage secured, removal for their potential answers, and they are at low life or have no sweepers.",
+      "Commit when you can trade multiple threats for their removal."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Badgermole Cub",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sentinel of the Nameless City",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Badgermole Cub's card advantage is conditional",
+    "don't cast it into a sweeper.",
+    "Sentinel of the Nameless City is a board wipe in a single card slot but requires three colors",
+    "sequence mana carefully.",
+    "Thoughtseize is your most important spell",
+    "save it for game-ending threats or combo pieces.",
+    "Avoid overcommitting to the graveyard if facing hate."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtseize to discard counterspells or key pieces. Cast threats in response to their removal or when they have no mana. Utilize flash or instant-speed interaction if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Thoughtseize and Badgermole Cub. Don't let them stabilize; remove their mana rocks or key ramp spells. Use Sentinel to exile their biggest threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with Thoughtseize to disrupt early plays, use removal efficiently, and deploy Sentinel to clear the board. Transition to card advantage once stabilized.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with mid-range threats. Use Thoughtseize to disrupt their hand. Out-grind them with card advantage and removal. Force them to use resources on your threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize Thoughtseize for their hand disruption and removal. Use Sentinel to exile their key threats. Control the board with efficient trades and graveyard advantage.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath of God, Toxic Deluge), graveyard hate (Rest in Peace, Leyline), and combo win conditions.",
+    "Note when opponents hold up mana for removal vs. counterspells.",
+    "Track graveyard content if facing graveyard-dependent decks."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/pioneer.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

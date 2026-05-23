@@ -1,0 +1,133 @@
+{
+  "archetype": "Scam",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/scam.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 4,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 4,
+      "name": "Chain of Smog"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Consultation"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 2,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 4,
+      "name": "Grief"
+    },
+    {
+      "qty": 1,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Reanimate"
+    },
+    {
+      "qty": 4,
+      "name": "Sedgemoor Witch"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 5,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 4,
+      "name": "Troll of Khazad-d\u00fbm"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Dismember"
+    },
+    {
+      "qty": 1,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 2,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Long Goodbye"
+    },
+    {
+      "qty": 3,
+      "name": "Mai, Scornful Striker"
+    },
+    {
+      "qty": 1,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Sheoldred, the Apocalypse"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "archetype": "Orzhov GenericBlink",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/orzhov-genericblink.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 2,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 2,
+      "name": "Decorum Dissertation"
+    },
+    {
+      "qty": 2,
+      "name": "Emperor of Bones"
+    },
+    {
+      "qty": 2,
+      "name": "Ephemerate"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Flickerwisp"
+    },
+    {
+      "qty": 3,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 4,
+      "name": "Guide of Souls"
+    },
+    {
+      "qty": 4,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 4,
+      "name": "Ocelot Pride"
+    },
+    {
+      "qty": 4,
+      "name": "Overlord of the Balemurk"
+    },
+    {
+      "qty": 4,
+      "name": "Phelia, Exuberant Shepherd"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Shadowy Backstreet"
+    },
+    {
+      "qty": 4,
+      "name": "Solitude"
+    },
+    {
+      "qty": 3,
+      "name": "Starfield Shepherd"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 4,
+      "name": "Witch Enchanter"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Ashiok, Dream Render"
+    },
+    {
+      "qty": 2,
+      "name": "Boromir, Warden of the Tower"
+    },
+    {
+      "qty": 2,
+      "name": "Clarion Conqueror"
+    },
+    {
+      "qty": 1,
+      "name": "Elesh Norn, Mother of Machines"
+    },
+    {
+      "qty": 1,
+      "name": "Erode"
+    },
+    {
+      "qty": 2,
+      "name": "High Noon"
+    },
+    {
+      "qty": 4,
+      "name": "White Orchid Phantom"
+    },
+    {
+      "qty": 2,
+      "name": "Wrath of the Skies"
+    }
+  ]
+}

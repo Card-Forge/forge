@@ -1,0 +1,500 @@
+{
+  "schema_version": 1,
+  "name": "LED Dredge",
+  "format": "legacy",
+  "colors": [
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "LED Dredge is a graveyard-centric combo deck that mills its own library to assemble powerful synergies. By leveraging Lion's Eye Diamond for explosive mana acceleration and Cabal Therapy for consistent card advantage, the deck rapidly constructs lethal sequences. Stinkweed Imp provides early board presence and flexible value to protect the combo or trigger graveyard effects.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 4,
+      "cards": [
+        "Cabal Therapy"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 30,
+      "cards": [
+        "Breakthrough",
+        "Cabal Therapy",
+        "Cephalid Coliseum",
+        "Faithless Looting",
+        "Golgari Grave-Troll",
+        "Golgari Thug",
+        "Ox of Agonas",
+        "Satoru, the Infiltrator",
+        "Shenanigans",
+        "Stinkweed Imp"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 9,
+      "cards": [
+        "Faithless Looting",
+        "Otherworldly Gaze",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Cabal Therapy",
+        "Scalding Tarn"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 13,
+      "cards": [
+        "Cabal Therapy",
+        "Lion's Eye Diamond",
+        "Stinkweed Imp",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 29,
+      "cards": [
+        "Cabal Therapy",
+        "Golgari Grave-Troll",
+        "Golgari Thug",
+        "Lion's Eye Diamond",
+        "Narcomoeba",
+        "Ox of Agonas",
+        "Poxwalkers",
+        "Satoru, the Infiltrator",
+        "Stinkweed Imp",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Cephalid Coliseum",
+        "Dread Return",
+        "Into the Flood Maw",
+        "Shenanigans",
+        "Stinkweed Imp"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Golgari Grave-Troll"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 5,
+      "cards": [
+        "Leyline of Sanctity",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 4
+    },
+    "discard_outlets": {
+      "target_count": 8,
+      "cards": [
+        "Cabal Therapy",
+        "Lion's Eye Diamond"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 46,
+      "cards": [
+        "Bridge from Below",
+        "Cabal Therapy",
+        "Cephalid Coliseum",
+        "Dread Return",
+        "Faithless Looting",
+        "Golgari Grave-Troll",
+        "Golgari Thug",
+        "Lion's Eye Diamond",
+        "Narcomoeba",
+        "Otherworldly Gaze",
+        "Ox of Agonas",
+        "Poxwalkers",
+        "Shenanigans",
+        "Stinkweed Imp"
+      ],
+      "mainboard_count": 44,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 36,
+      "cards": [
+        "Cabal Therapy",
+        "Dread Return",
+        "Faithless Looting",
+        "Golgari Grave-Troll",
+        "Golgari Thug",
+        "Into the Flood Maw",
+        "Kiora's Dismissal",
+        "Otherworldly Gaze",
+        "Ox of Agonas",
+        "Poxwalkers",
+        "Shenanigans",
+        "Stinkweed Imp"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 7
+    },
+    "engines": {
+      "target_count": 11,
+      "cards": [
+        "Cabal Therapy",
+        "Poxwalkers",
+        "Stinkweed Imp"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Cabal Therapy",
+        "Lion's Eye Diamond",
+        "Stinkweed Imp"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Cabal Therapy",
+        "Unmask"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 22,
+      "cards": [
+        "Cabal Therapy",
+        "Cephalid Coliseum",
+        "Lion's Eye Diamond",
+        "Lotus Petal",
+        "Scalding Tarn",
+        "Underground Sea",
+        "Volcanic Island"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 13,
+      "cards": [
+        "Cephalid Coliseum",
+        "Island",
+        "Scalding Tarn",
+        "Underground Sea",
+        "Volcanic Island"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.31
+  },
+  "dual_role_cards": [
+    {
+      "card": "Cabal Therapy",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "mana_reducers",
+        "recursion",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cephalid Coliseum",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dread Return",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faithless Looting",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Golgari Grave-Troll",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Golgari Thug",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Into the Flood Maw",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lion's Eye Diamond",
+      "roles": [
+        "combo_pieces",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narcomoeba",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otherworldly Gaze",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ox of Agonas",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Poxwalkers",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Satoru, the Infiltrator",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shenanigans",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stinkweed Imp",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thassa's Oracle",
+      "roles": [
+        "dig_draw",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Sea",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volcanic Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Mill your deck before activating Lion's Eye Diamond to ensure you have enough pieces in the graveyard",
+    "Cast Cabal Therapy before committing to a combo to verify you have all necessary components",
+    "Hold up mana for potential interaction before resolving your final combo sequence",
+    "Sacrifice Stinkweed Imp only when it triggers a beneficial effect or avoids lethal damage",
+    "Dredge triggers go on the stack and can be responded to, so don't assume they will resolve."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing lands and casting cheap creatures to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Cabal Therapy to dig for combo pieces and discard dead draws"
+    },
+    {
+      "trigger": "early game",
+      "line": "Begin milling your deck to populate the graveyard with key synergies"
+    }
+  ],
+  "kill_priority": [
+    "Cabal Therapy",
+    "Poxwalkers",
+    "Stinkweed Imp",
+    "Lion's Eye Diamond",
+    "Thassa's Oracle",
+    "Golgari Grave-Troll",
+    "Golgari Thug",
+    "Narcomoeba"
+  ],
+  "interaction_to_disrupt": [
+    "Leyline of Sanctity",
+    "Thassa's Oracle",
+    "Cephalid Coliseum",
+    "Dread Return",
+    "Into the Flood Maw",
+    "Shenanigans",
+    "Stinkweed Imp",
+    "Golgari Grave-Troll"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/led-dredge.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

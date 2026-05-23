@@ -1,0 +1,117 @@
+{
+  "archetype": "Rakdos Midrange",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/rakdos-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 3,
+      "name": "Castle Locthwain"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 4,
+      "name": "Fell the Profane"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Despair"
+    },
+    {
+      "qty": 4,
+      "name": "Graveyard Trespasser"
+    },
+    {
+      "qty": 2,
+      "name": "March of Wretched Sorrow"
+    },
+    {
+      "qty": 4,
+      "name": "Necrodominance"
+    },
+    {
+      "qty": 4,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Raucous Theater"
+    },
+    {
+      "qty": 4,
+      "name": "Shadow of Doubt"
+    },
+    {
+      "qty": 4,
+      "name": "Sheoldred, the Apocalypse"
+    },
+    {
+      "qty": 4,
+      "name": "Soul Spike"
+    },
+    {
+      "qty": 6,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Break the Ice"
+    },
+    {
+      "qty": 1,
+      "name": "Damnation"
+    },
+    {
+      "qty": 2,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 4,
+      "name": "Dauthi Voidwalker"
+    },
+    {
+      "qty": 1,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Despair"
+    },
+    {
+      "qty": 1,
+      "name": "Illness in the Ranks"
+    },
+    {
+      "qty": 1,
+      "name": "Meltdown"
+    },
+    {
+      "qty": 1,
+      "name": "The Meathook Massacre"
+    }
+  ]
+}

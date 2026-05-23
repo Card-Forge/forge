@@ -1,0 +1,105 @@
+{
+  "archetype": "Mono-Red Goblins",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/mono-red-goblins.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Battle Cry Goblin"
+    },
+    {
+      "qty": 4,
+      "name": "Cacophony Scamp"
+    },
+    {
+      "qty": 1,
+      "name": "Castle Embereth"
+    },
+    {
+      "qty": 2,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 3,
+      "name": "Conspicuous Snoop"
+    },
+    {
+      "qty": 2,
+      "name": "Den of the Bugbear"
+    },
+    {
+      "qty": 2,
+      "name": "Goblin Instigator"
+    },
+    {
+      "qty": 3,
+      "name": "Goblin Ringleader"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Warchief"
+    },
+    {
+      "qty": 2,
+      "name": "Hobgoblin Bandit Lord"
+    },
+    {
+      "qty": 2,
+      "name": "Krenko, Tin Street Kingpin"
+    },
+    {
+      "qty": 4,
+      "name": "Legion Loyalist"
+    },
+    {
+      "qty": 16,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 4,
+      "name": "Rundvelt Hordemaster"
+    },
+    {
+      "qty": 4,
+      "name": "Skirk Prospector"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Conspicuous Snoop"
+    },
+    {
+      "qty": 3,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Giant Cindermaw"
+    },
+    {
+      "qty": 2,
+      "name": "Goblin Trashmaster"
+    },
+    {
+      "qty": 3,
+      "name": "Redcap Melee"
+    },
+    {
+      "qty": 1,
+      "name": "Siege-Gang Commander"
+    },
+    {
+      "qty": 4,
+      "name": "Tormod's Crypt"
+    }
+  ]
+}

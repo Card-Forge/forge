@@ -1,0 +1,123 @@
+{
+  "archetype": "Sephiroth, Fabled SOLDIER",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck leverages a steady stream of 0/1 Zombie tokens to fuel sacrifice outlets, growing Sephiroth into a massive combat threat or funneling damage through The Masamune. It aims to close games quickly with recursive pressure and sacrifice synergies, out-grinding control and combo while stabilizing against aggro through token trading and targeted removal.",
+  "win_conditions": [
+    "Combat damage with a heavily buffed Sephiroth, or sacrificing a large creature/token via The Masamune for lethal.",
+    "Recursion of Sephiroth with accumulated +1/+1 counters also closes games quickly."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 1-2 lands, Sol Ring, and either Sephiroth or The Masamune.",
+      "Drop any hand with only lands, only removal, or no early mana acceleration.",
+      "Prioritize keeping 2-3 mana sources by turn 2 to cast your commander or key artifacts."
+    ],
+    "mulligan_criteria": [],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play land, cast Sol Ring if available.",
+      "Turn 2: Play second land, cast Sephiroth or The Masamune.",
+      "If Sephiroth, begin token generation on upkeep.",
+      "Sequence lands to ensure you can cast your commander by turn 3 at the latest, prioritizing black mana sources."
+    ],
+    "mid_game": [
+      "Hoard low-cost removal and sacrifice outlets.",
+      "Avoid overcommitting to board wipes unless necessary.",
+      "Manage the graveyard by using recursion sparingly",
+      "prioritize keeping Sephiroth alive and maintaining a steady token pipeline.",
+      "Commit threats when you have enough tokens to trade favorably or when The Masamune can finish a player.",
+      "Hold back if opponents have sweepers or if you are low on resources.",
+      "Use Sephiroth's +1/+1 growth to pressure without overextending."
+    ],
+    "late_game": [
+      "Combat damage with a heavily buffed Sephiroth, or sacrificing a large creature/token via The Masamune for lethal.",
+      "Recursion of Sephiroth with accumulated +1/+1 counters also closes games quickly.",
+      "Go all-in when you have 3+ tokens, a sacrifice outlet, and enough mana to cast Sephiroth's ability or Masamune's trigger.",
+      "Also commit if an opponent is at 5 or less life or if you have a clear path to combat damage."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Sephiroth, Fabled SOLDIER",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "The Masamune",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Over-sacrificing tokens too early without a payoff.",
+    "Always calculate Masamune damage versus Sephiroth's combat value.",
+    "Remember that 0/1 tokens die at end of turn, so you must sacrifice them or use them before then.",
+    "Sephiroth's recursion is key",
+    "don't let it die to removal unless you have a way to bring it back.",
+    "Track opponent life totals carefully, as Masamune can close games unexpectedly."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, uncounterable threats like tokens, split your spells across turns, and rely on instant-speed sacrifice outlets or protection to bypass counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use artifact hate to disrupt their mana base, and prioritize sweepers to stop their big creatures before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap removal, board wipes, and life gain if possible. Use Sephiroth's tokens to block and trade favorably, then pivot to a win condition once the board is clear.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats, use card draw to out-value them, and exploit their lack of interaction by committing to combat and leveraging sacrifice synergies for value.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing with better token generation, superior sacrifice outlets, and timing your sweepers and removal to break their board first. Prioritize keeping Sephiroth alive longer than your opponent.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Damnation, Wrath), targeted removal (Murder, Fatal Push), and combo win conditions.",
+    "Note when opponents tap out for counters or big spells, and track how many tokens they have to anticipate their next move."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

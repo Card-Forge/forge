@@ -1,0 +1,458 @@
+{
+  "schema_version": 1,
+  "name": "Raker Shops",
+  "format": "vintage",
+  "colors": [],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "A midrange-combo hybrid that uses early disruption to stabilize, then assembles The One Ring + Sensei's Divining Top + Tezzeret/Cruel Captain to generate infinite mana and untap lands, out-resourcing opponents to win through value or combo finishes.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Trinisphere"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 15,
+      "cards": [
+        "Mana Vault",
+        "Scrawling Crawler",
+        "Sensei's Divining Top",
+        "The One Ring",
+        "Urza's Saga",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 9,
+      "cards": [
+        "Grafdigger's Cage",
+        "Mystic Forge",
+        "Sensei's Divining Top"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 3
+    },
+    "tutors_wildcards": {
+      "target_count": 5,
+      "cards": [
+        "Tezzeret, Cruel Captain",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Sensei's Divining Top",
+        "The One Ring"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 41,
+      "cards": [
+        "Argentum Masticore",
+        "Chalice of the Void",
+        "Glaring Fleshraker",
+        "Grim Monolith",
+        "Karn, the Great Creator",
+        "Lodestone Golem",
+        "Manifold Key",
+        "Mox Emerald",
+        "Mox Jet",
+        "Mox Pearl",
+        "Mox Ruby",
+        "Mox Sapphire",
+        "Pithing Needle",
+        "Scrawling Crawler",
+        "Sensei's Divining Top",
+        "Sol Ring",
+        "Stonecoil Serpent",
+        "Tezzeret, Cruel Captain",
+        "The One Ring",
+        "Time Vault"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Ancient Tomb",
+        "Argentum Masticore",
+        "Glaring Fleshraker",
+        "Mana Crypt",
+        "Mana Vault",
+        "Strip Mine",
+        "Wasteland"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 13,
+      "cards": [
+        "Argentum Masticore",
+        "Sensei's Divining Top",
+        "Stonecoil Serpent",
+        "The One Ring"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 5
+    },
+    "discard_outlets": {
+      "target_count": 2,
+      "cards": [
+        "Argentum Masticore"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "graveyard_enablers": {
+      "target_count": 12,
+      "cards": [
+        "Grafdigger's Cage",
+        "Sensei's Divining Top",
+        "The One Ring"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 12,
+      "cards": [
+        "Glaring Fleshraker",
+        "Sensei's Divining Top",
+        "The One Ring"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Sensei's Divining Top",
+        "The One Ring"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 17,
+      "cards": [
+        "Dismember",
+        "Grafdigger's Cage",
+        "Mindbreak Trap",
+        "Sensei's Divining Top",
+        "The One Ring"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 8
+    },
+    "mana_fixing": {
+      "target_count": 29,
+      "cards": [
+        "Ancient Tomb",
+        "Black Lotus",
+        "Mishra's Workshop",
+        "Petrified Hamlet",
+        "Sensei's Divining Top",
+        "Strip Mine",
+        "The One Ring",
+        "Tolarian Academy",
+        "Trinisphere",
+        "Urza's Saga",
+        "Wasteland"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 2
+    },
+    "lands": {
+      "target_count": 19,
+      "cards": [
+        "Ancient Tomb",
+        "Mishra's Workshop",
+        "Petrified Hamlet",
+        "Strip Mine",
+        "Tolarian Academy",
+        "Urza's Saga",
+        "Wasteland"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 2
+    },
+    "planeswalker_threats": {
+      "target_count": 5,
+      "cards": [
+        "Karn, the Great Creator",
+        "Tezzeret, Cruel Captain"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.28
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Argentum Masticore",
+      "roles": [
+        "discard_outlets",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glaring Fleshraker",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karn, the Great Creator",
+      "roles": [
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Vault",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mishra's Workshop",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Petrified Hamlet",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scrawling Crawler",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sensei's Divining Top",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stonecoil Serpent",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strip Mine",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tezzeret, Cruel Captain",
+      "roles": [
+        "planeswalker_threats",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The One Ring",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tolarian Academy",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Trinisphere",
+      "roles": [
+        "mana_fixing",
+        "mana_reducers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistakes include overcommitting to the board too early, forgetting to sequence The One Ring + Top + Tezzeret correctly, not managing mana for protection, and failing to track opponent interaction.",
+    "Unique interactions: The One Ring + Sensei's Divining Top + Tezzeret/Cruel Captain can untap lands for infinite mana.",
+    "Watch out for graveyard hate vs Dredge, and always prioritize keeping your engine intact over trading creatures."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play land, cast Thoughtseize or The One Ring."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play land, cast Sensei's Divining Top or Tezzeret/Cruel Captain."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence lands to ensure blue/black/red/green mana for key spells."
+    }
+  ],
+  "kill_priority": [
+    "Glaring Fleshraker",
+    "Sensei's Divining Top",
+    "The One Ring",
+    "Karn, the Great Creator",
+    "Tezzeret, Cruel Captain",
+    "Argentum Masticore",
+    "Chalice of the Void",
+    "Grim Monolith"
+  ],
+  "interaction_to_disrupt": [
+    "Argentum Masticore",
+    "Sensei's Divining Top",
+    "Stonecoil Serpent",
+    "The One Ring",
+    "Ancient Tomb",
+    "Glaring Fleshraker",
+    "Mana Crypt",
+    "Mana Vault"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/raker-shops.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

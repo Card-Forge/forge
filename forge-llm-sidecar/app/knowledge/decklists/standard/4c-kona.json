@@ -1,0 +1,133 @@
+{
+  "archetype": "4c Kona",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/4c-kona.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ashling, Rekindled"
+    },
+    {
+      "qty": 2,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Dreamroot Cascade"
+    },
+    {
+      "qty": 3,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Kavaron, Memorial World"
+    },
+    {
+      "qty": 4,
+      "name": "Kona, Rescue Beastie"
+    },
+    {
+      "qty": 3,
+      "name": "Lost in the Maze"
+    },
+    {
+      "qty": 3,
+      "name": "Marang River Regent"
+    },
+    {
+      "qty": 2,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 2,
+      "name": "North Wind Avatar"
+    },
+    {
+      "qty": 4,
+      "name": "Omniscience"
+    },
+    {
+      "qty": 3,
+      "name": "Opt"
+    },
+    {
+      "qty": 3,
+      "name": "Prismari Charm"
+    },
+    {
+      "qty": 2,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 2,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 3,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 2,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 4,
+      "name": "Uthros, Titanic Godcore"
+    },
+    {
+      "qty": 3,
+      "name": "Winternight Stories"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Dracogenesis"
+    },
+    {
+      "qty": 3,
+      "name": "Fire Magic"
+    },
+    {
+      "qty": 1,
+      "name": "Marang River Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Omni-Changeling"
+    },
+    {
+      "qty": 2,
+      "name": "Origin of Metalbending"
+    },
+    {
+      "qty": 3,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 1,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 1,
+      "name": "Terror of the Peaks"
+    },
+    {
+      "qty": 2,
+      "name": "Voice of Victory"
+    }
+  ]
+}

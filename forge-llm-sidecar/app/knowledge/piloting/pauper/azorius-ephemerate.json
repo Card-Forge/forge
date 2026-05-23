@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with Preordain and a cheap counter or removal",
       "Two-mana spells that can interact on turn one or two",
-      "Mana bases that support early W/U spells"
+      "Mana bases that support early W/U spells",
+      "Keep hands with 2 lands (including at least one of each color or duals), Preordain, and Counterspell.",
+      "Keep any hand with Preordain + land, or Counterspell + land.",
+      "Avoid keeping pure curve-out hands without answers, or hands with 3+ lands and no spells."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or card draw",
       "Mana screws with too many lands or too few",
-      "Hands that cannot play anything before turn three"
+      "Hands that cannot play anything before turn three",
+      "Mulligan to 4+ lands if you have no early interaction."
     ],
     "examples": []
   },
@@ -25,17 +29,31 @@
     "early_game": [
       "Play lands and Preordain to filter your deck",
       "Hold up mana for Counterspell to protect your resources",
-      "Avoid committing permanents unless necessary"
+      "Avoid committing permanents unless necessary",
+      "Turn 1: Play land, cast Preordain to set up land/answer/threat.",
+      "Turn 2: Play second land, cast Counterspell if opponent casts a key spell, or play Ephemerate to bounce a threat.",
+      "Prioritize maintaining card advantage and answering key threats before committing to a board.",
+      "If no interaction is needed, develop a cheap creature or spell while holding up mana for counters."
     ],
     "mid_game": [
       "Use Ephemerate on high-value threats or board sweepers",
       "Cycle through your deck to find answers while maintaining mana advantage",
-      "Start building a board presence if the opponent stalls"
+      "Start building a board presence if the opponent stalls",
+      "Hoard counterspells for key threats, use Preordain to dig for answers or threats, and avoid overcommitting mana.",
+      "Keep 1-2 counterspells in hand at all times.",
+      "Manage your graveyard by avoiding unnecessary scry/dig if the opponent has hate, and use Ephemerate to protect your hand or board when resources are tight.",
+      "Hold back on committing multiple threats until you have interaction or a clear path to closing.",
+      "Use Ephemerate defensively to bounce removal targets or offensively to trigger ETBs.",
+      "Only commit when you can protect your board or have enough interaction to respond to their answers."
     ],
     "late_game": [
       "Replay Ephemerate on recurring threats or finishers",
       "Leverage card advantage to out-resource the opponent",
-      "Close out the game with efficient removal or combat damage"
+      "Close out the game with efficient removal or combat damage",
+      "Ephemerate bouncing a key creature to trigger ETB effects, or bouncing an opponent's threat to stabilize and close with card advantage.",
+      "Secondary finishers include efficient removal and counterspells to protect a closing threat or force a favorable trade.",
+      "Go all-in when you have card advantage, the opponent has no counterspells, or you can safely resolve a game-ending threat.",
+      "Also commit when you can bounce a threat and still have mana for interaction, or when you can force them to use multiple answers on a single threat."
     ]
   },
   "key_cards": [
@@ -59,7 +77,13 @@
     "Always prioritize Preordain on turn one to optimize your hand",
     "Hold up mana for Counterspell before playing lands or other spells",
     "Delay Ephemerate until you can replay it for maximum value",
-    "Save counters for game-ending threats rather than early fliers"
+    "Save counters for game-ending threats rather than early fliers",
+    "Ephemerate is versatile but not a win-con on its own",
+    "pair it with creatures that benefit from being cast multiple times or use it defensively to stabilize.",
+    "Avoid overusing Preordain early",
+    "save it for when you need to dig for answers or threats.",
+    "Watch for opponent's mana development to predict their interaction.",
+    "Common mistake: holding too many counterspells and running out of mana to cast threats, or using Ephemerate on non-essential targets when you could save it for a game-ending bounce."
   ],
   "matchups": [
     {
@@ -85,15 +109,34 @@
         "Winning on turn three or four",
         "Unstoppable one-card combos"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Preordain to dig around counterspells, cast threats in response to their counters, or layer interaction to force them to use multiple spells. Save Ephemerate to bounce their countered spells if possible, or use it to protect your own threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with counterspells on key ramp spells and use Ephemerate to bounce ramp threats before they stabilize. Use discard to disrupt their plan, and avoid letting them reach their late-game power level.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the interaction war by using Preordain to dig deeper, saving counterspells for their key spells, and using Ephemerate to bounce their threats or trigger value. Prioritize card advantage, timing, and forcing them to use more resources than you do.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board sweepers that clear your counters",
-    "Unstoppable combo pieces"
+    "Unstoppable combo pieces",
+    "Watch for opponent's mana development to predict whether they are holding counterspells or removal.",
+    "Note when they hold up mana on their turn (likely counterspell) vs. when they pass empty (likely out of answers).",
+    "Track graveyard activity and key combo pieces, especially against Blue Terror and Elves."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:27:09+00:00",
     "model": "local-model",
@@ -109,6 +152,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

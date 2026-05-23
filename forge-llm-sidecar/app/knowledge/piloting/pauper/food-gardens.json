@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands containing at least two one-mana spells",
       "Early land drops paired with a creature or interaction",
-      "Combinations that enable turn-one or turn-two pressure"
+      "Combinations that enable turn-one or turn-two pressure",
+      "Keep hands with 2-3 lands (prioritizing duals/fetches if available, otherwise basics that tap for B/G), at least one early game piece (Lembas, Eviscerator's Insight, or a creature), and a way to interact or stabilize."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands",
       "Lack of one-mana spells or early creatures",
-      "Hands reliant solely on high-cost cards"
+      "Hands reliant solely on high-cost cards",
+      "Mulligan on 3+ lands with no early plays, or 2+ lands with only late-game finishers and no mana fixing."
     ],
     "examples": []
   },
@@ -25,17 +27,31 @@
     "early_game": [
       "Prioritize land drops and play cheap creatures to establish immediate board presence",
       "Use one-mana interaction to disrupt opponent's early threats or clear paths for attackers",
-      "Hold up mana when necessary to respond to opponent's plays"
+      "Hold up mana when necessary to respond to opponent's plays",
+      "T1: Play a land, cast Lembas if you have a creature to sacrifice later or to set up tokens.",
+      "T2: Play a second land, cast Eviscerator's Insight or a creature, then sacrifice Food tokens for life gain and combat tricks.",
+      "Sequence lands to ensure B/G mana by turn 2.",
+      "Prioritize casting Food generators to build a token army and life total."
     ],
     "mid_game": [
       "Leverage sacrifice outlets to remove problematic blockers or finish off damaged creatures",
       "Apply consistent pressure with buffed attackers while maintaining card advantage",
-      "Adapt playstyle based on opponent's board state, swinging hard when clear or trading efficiently"
+      "Adapt playstyle based on opponent's board state, swinging hard when clear or trading efficiently",
+      "Balance mana between casting threats, generating Food tokens, and holding up interaction.",
+      "Don't overcommit to token generation if you can't protect them.",
+      "Use the graveyard strategically if the deck has recursion or sacrifice outlets.",
+      "Commit threats when you have sufficient life total and interaction to protect them.",
+      "Hold back if facing sweepers or heavy removal.",
+      "Use Fanatical Offering to swing combat or protect key creatures."
     ],
     "late_game": [
       "Rely on card draw from interaction spells to maintain resources",
       "Use remaining mana to push for lethal with optimized creature stats",
-      "Avoid overextending into board wipes by keeping a hand of interaction"
+      "Avoid overextending into board wipes by keeping a hand of interaction",
+      "Large creatures, combat tricks, or a specific win condition (e.g., a creature that gets bigger with Food tokens or life gain).",
+      "Close the game by attacking with protected threats or using Fanatical Offering to break through blockers.",
+      "Go all-in when you have a clear board advantage, sufficient life total, and know the opponent lacks sweepers or removal.",
+      "Also commit when you can close the game in 1-2 turns."
     ]
   },
   "key_cards": [
@@ -59,7 +75,11 @@
     "Hold up black mana to keep Eviscerator's Insight available for instant-speed responses",
     "Time Fanatical Offering to coincide with a sacrificial creature or when you need to clear a specific blocker",
     "Play Lembas immediately before declaring attackers to maximize combat damage",
-    "Prioritize land drops early to ensure consistent access to one-mana spells"
+    "Prioritize land drops early to ensure consistent access to one-mana spells",
+    "Common mistake: Overgenerating Food tokens without a way to sacrifice them or protect the board.",
+    "Another: Holding up too much mana for interaction and falling behind on the board.",
+    "Unique interaction: Fanatical Offering can be used on your own Food tokens to create a massive combat trick if you have a way to sacrifice them, but typically it's used on your main threats.",
+    "Also, life gain from Food can be crucial against burn or aggressive decks."
   ],
   "matchups": [
     {
@@ -88,16 +108,35 @@
         "Card draw engines",
         "Resilient creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap threats, cast spells at unexpected times, or rely on uncounterable effects if available. Use Food tokens to fuel spells that bypass counters or win combat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use removal on key ramp creatures, and stabilize with life gain. Don't let them get too far ahead.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by managing your Food tokens better, using Fanatical Offering more efficiently, and outvaluing in the late game. Prioritize card advantage and protection.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipe spells",
     "Targeted creature removal",
     "Counterspells",
-    "Land destruction"
+    "Land destruction",
+    "Watch for sweepers (like Wrath of God), counterspells, and removal.",
+    "Note when opponents are holding up mana for interaction.",
+    "Track their life total and board state to know when to push damage vs. stabilize."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:36:29+00:00",
     "model": "local-model",
@@ -113,6 +152,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,488 @@
+{
+  "schema_version": 1,
+  "name": "Jeskai Control",
+  "format": "modern",
+  "colors": [
+    "W",
+    "U",
+    "R"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 61,
+  "macro_plan": "Jeskai Control in Modern relies on a suite of permanent-based answers and repeatable board resets to outlast aggressive and midrange decks. By leveraging Narset, Parter of Veils for early board control and Teferi, Time Raveler for late-game acceleration, the deck establishes a resilient board state. Orim's Chant serves as a flexible, repeatable reset button to clear threats and protect key assets.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 11,
+      "cards": [
+        "L\u00f3rien Revealed",
+        "Orim's Chant",
+        "Teferi, Hero of Dominaria",
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 17,
+      "cards": [
+        "Consult the Star Charts",
+        "Memory Deluge",
+        "Meticulous Archive",
+        "Monumental Henge",
+        "Orim's Chant",
+        "Teferi, Time Raveler",
+        "Thundering Falls"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 11,
+      "cards": [
+        "Arid Mesa",
+        "Flooded Strand",
+        "L\u00f3rien Revealed",
+        "Scalding Tarn"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 19,
+      "cards": [
+        "Isochron Scepter",
+        "Kaheera, the Orphanguard",
+        "Orim's Chant",
+        "Solitude",
+        "Subtlety",
+        "Teferi, Hero of Dominaria",
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Celestial Purge",
+        "Galvanic Discharge",
+        "High Noon",
+        "Prismatic Ending",
+        "Supreme Verdict",
+        "Teferi, Hero of Dominaria",
+        "Wrath of the Skies"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 11,
+      "cards": [
+        "Kaheera, the Orphanguard",
+        "Orim's Chant",
+        "Supreme Verdict",
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 11,
+      "cards": [
+        "Consign to Memory",
+        "Counterspell",
+        "Mystical Dispute"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 7
+    },
+    "protection": {
+      "target_count": 11,
+      "cards": [
+        "Hall of Storm Giants",
+        "Orim's Chant",
+        "Supreme Verdict",
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Memory Deluge",
+        "Meticulous Archive",
+        "Orim's Chant",
+        "Rest in Peace",
+        "Teferi, Time Raveler",
+        "Thundering Falls"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Memory Deluge",
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 6,
+      "cards": [
+        "High Noon",
+        "Orim's Chant"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 29,
+      "cards": [
+        "Arid Mesa",
+        "Flooded Strand",
+        "Hall of Storm Giants",
+        "Hallowed Fountain",
+        "Meticulous Archive",
+        "Monumental Henge",
+        "Mystic Gate",
+        "Orim's Chant",
+        "Petrified Hamlet",
+        "Sacred Foundry",
+        "Scalding Tarn",
+        "Steam Vents",
+        "Teferi, Time Raveler",
+        "Thundering Falls"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Arid Mesa",
+        "Flooded Strand",
+        "Hall of Storm Giants",
+        "Hallowed Fountain",
+        "Island",
+        "Meticulous Archive",
+        "Monumental Henge",
+        "Mystic Gate",
+        "Petrified Hamlet",
+        "Plains",
+        "Sacred Foundry",
+        "Scalding Tarn",
+        "Steam Vents",
+        "Thundering Falls"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 6,
+      "cards": [
+        "Teferi, Hero of Dominaria",
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.41
+  },
+  "dual_role_cards": [
+    {
+      "card": "Arid Mesa",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hall of Storm Giants",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "High Noon",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaheera, the Orphanguard",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Memory Deluge",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monumental Henge",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mystic Gate",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orim's Chant",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Petrified Hamlet",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Supreme Verdict",
+      "roles": [
+        "protection",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teferi, Hero of Dominaria",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teferi, Time Raveler",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "planeswalker_threats",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thundering Falls",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up Orim's Chant for opponent's turn to maximize board clearance",
+    "Prioritize Narset early to establish card advantage before deploying Teferi",
+    "Use Teferi's untap ability to cast Orim's Chant or play additional permanents",
+    "Sequence removal to protect Narset and Teferi from targeted hate",
+    "Bank energy early with 1-mana spells (Galvanic Discharge, Tune the Narrative) to cast Wrath of the Skies for 2 mana, leaving mana open for instant-speed interaction."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cheap interaction to survive early pressure"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize Narset, Parter of Veils for immediate board control and card draw"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up mana for Orim's Chant if facing aggressive starts"
+    }
+  ],
+  "kill_priority": [
+    "Teferi, Time Raveler",
+    "Teferi, Hero of Dominaria",
+    "Isochron Scepter",
+    "Kaheera, the Orphanguard",
+    "Orim's Chant",
+    "Solitude",
+    "Subtlety"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Counterspell",
+    "Mystical Dispute",
+    "Hall of Storm Giants",
+    "Orim's Chant",
+    "Supreme Verdict",
+    "Teferi, Time Raveler",
+    "Celestial Purge"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/jeskai-control.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "archetype": "Sultai Tempo",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/sultai-tempo.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Baleful Strix"
+    },
+    {
+      "qty": 1,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 1,
+      "name": "Bayou"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Daze"
+    },
+    {
+      "qty": 1,
+      "name": "Dress Down"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Kaito, Bane of Nightmares"
+    },
+    {
+      "qty": 1,
+      "name": "Life from the Loam"
+    },
+    {
+      "qty": 3,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 3,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 2,
+      "name": "Sheoldred's Edict"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Stifle"
+    },
+    {
+      "qty": 3,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 3,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 2,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 3,
+      "name": "Uro, Titan of Nature's Wrath"
+    },
+    {
+      "qty": 2,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 2,
+      "name": "Witherbloom Command"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Carpet of Flowers"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 1,
+      "name": "Massacre"
+    },
+    {
+      "qty": 1,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 2,
+      "name": "Pernicious Deed"
+    },
+    {
+      "qty": 1,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 1,
+      "name": "Veil of Summer"
+    }
+  ]
+}

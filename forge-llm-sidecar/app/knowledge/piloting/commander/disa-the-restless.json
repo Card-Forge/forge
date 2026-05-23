@@ -1,0 +1,128 @@
+{
+  "archetype": "Disa the Restless",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Grixis Disa is a midrange-control hybrid that uses discard to dictate the early game, stabilizes with Disa\u2019s exile ability, and closes out games using flying Spirit tokens or synergistic creatures. It excels against combo and control by disrupting their plans and outvaluing them, while relying on efficient interaction and late-game resilience against aggressive strategies.",
+  "win_conditions": [
+    "Disa the Restless (via +2 tokens or -1 exile to clear path), Barrowgoyf (sacrifice for flying +X/+X), and pumped Hierarchs.",
+    "Get there by stabilizing with discard/removal, then attacking with flying threats or using Disa\u2019s loyalty to draw into closure."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, at least one discard spell (Thoughtseize, Duress, or Inquisition), and either Ignoble Hierarch or Barrowgoyf.",
+      "Keep Disa if paired with a discard outlet or early interaction."
+    ],
+    "mulligan_criteria": [
+      "Mulligan pure land hands, hands with multiple copies of low-impact cards, or hands lacking early interaction when facing aggro."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Ignoble Hierarch or Barrowgoyf if mana allows, or hold for a discard spell.",
+      "Turn 2: Cast a discard spell targeting the opponent\u2019s key early threat or combo piece.",
+      "If ahead, develop board with Hierarch/Goyf",
+      "if behind, use discard to disrupt and stabilize.",
+      "Land sequencing: Prioritize duals (Steam Vents, Blood Crypt, Stomping Ground) if available, otherwise basics that tap for needed colors.",
+      "Avoid overextending into potential sweepers."
+    ],
+    "mid_game": [
+      "Preserve discard spells for high-value targets (combo pieces, key aggro threats, or control hand disruption).",
+      "Use Disa\u2019s +1 sparingly",
+      "only draw when you need to find an answer or close the game.",
+      "Manage graveyard resources carefully\u2014Barrowgoyf and discard outlets thrive here, but avoid over-sacrificing if you need creatures for board presence.",
+      "Commit threats when you have removal or discard to protect them.",
+      "Hold back if the opponent has sweepers or heavy removal.",
+      "Use Disa\u2019s -1 to exile unblockable or game-winning threats, but don\u2019t waste it on chump blockers.",
+      "Maintain card advantage to outlast their interaction."
+    ],
+    "late_game": [
+      "Disa the Restless (via +2 tokens or -1 exile to clear path), Barrowgoyf (sacrifice for flying +X/+X), and pumped Hierarchs.",
+      "Get there by stabilizing with discard/removal, then attacking with flying threats or using Disa\u2019s loyalty to draw into closure.",
+      "Go all-in when you\u2019ve removed their sweepers, they\u2019re at low life, or you have a clear path to combat.",
+      "Also commit if you\u2019ve established board control and they lack answers, or if you can force multiple counterspells with multiple threats."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Disa the Restless",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Ignoble Hierarch",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Barrowgoyf",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overusing Disa\u2019s +1 too early, leaving you with no card advantage when you need it.",
+    "Another: Sacrificing Barrowgoyf too early without a clear payoff.",
+    "Remember that Ignoble Hierarch\u2019s -1/-1 effect can be used to sacrifice to Grim Flayer/Bloodtithe Harvester for value.",
+    "Disa\u2019s -1 exiles from all zones, making it excellent against recursion.",
+    "Watch for opponent\u2019s sideboarded hate (Rest in Peace, Leyline of the Void) and adjust discard targets accordingly.",
+    "Always track their graveyard and library if they run graveyard strategies."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to hit their hand before casting threats. Cast spells in response to their counterspells if possible. Use Disa\u2019s -1 to exile threats they can't counter, or attack with multiple threats to force multiple counters. Avoid overcommitting to a single spell.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race their mana. Use discard to hit their ramp spells or key threats. Disa\u2019s -1 is crucial to exile their finishers. Don\u2019t let them stabilize; pressure relentlessly and force them to interact early.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early discard to disrupt their curve. Use Fatal Push/Lightning Strike for 1-2 drops. Disa\u2019s -1 clears boards. Hold back on overcommitting; stabilize and close out with flying threats. Don\u2019t trade up unnecessarily.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early to force interaction. Use discard to hit their removal/counters. Disa\u2019s +1 outvalues their card draw. Attack with flying threats to bypass ground removal. Force them to use multiple answers to close out the game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value discard efficiency and creature synergies. Prioritize keeping hands with multiple discard spells and early creatures. Use Disa\u2019s -1 to exile their key threats. Win by out-resourcing and forcing them to overcommit. Track their sideboarded hate and adjust discard targets accordingly.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Supreme Verdict, Anger of the Gods), counterspells (Spell Pierce, Arcane Denial), and graveyard recursion.",
+    "Note when opponents tap out for big spells\u2014this is your window to attack or cast discard.",
+    "Track if they\u2019re playing around your discard by keeping multiple threats or sideboarding in hate cards like Rest in Peace."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

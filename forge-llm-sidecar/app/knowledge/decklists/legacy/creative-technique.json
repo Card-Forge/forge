@@ -1,0 +1,93 @@
+{
+  "archetype": "Creative Technique",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/creative-technique.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Bloodbraid Elf"
+    },
+    {
+      "qty": 2,
+      "name": "City of Traitors"
+    },
+    {
+      "qty": 4,
+      "name": "Creative Technique"
+    },
+    {
+      "qty": 4,
+      "name": "Emrakul, the Aeons Torn"
+    },
+    {
+      "qty": 4,
+      "name": "Hickory Woodlot"
+    },
+    {
+      "qty": 4,
+      "name": "Mossfire Valley"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Petrified Hamlet"
+    },
+    {
+      "qty": 2,
+      "name": "Raph & Mikey, Troublemakers"
+    },
+    {
+      "qty": 4,
+      "name": "Sandstone Needle"
+    },
+    {
+      "qty": 3,
+      "name": "Taiga"
+    },
+    {
+      "qty": 4,
+      "name": "Throes of Chaos"
+    },
+    {
+      "qty": 4,
+      "name": "Tibalt's Trickery"
+    },
+    {
+      "qty": 4,
+      "name": "Ulamog, the Infinite Gyre"
+    },
+    {
+      "qty": 4,
+      "name": "Violent Outburst"
+    },
+    {
+      "qty": 4,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Sire of Insanity"
+    },
+    {
+      "qty": 3,
+      "name": "Talon Gates of Madara"
+    },
+    {
+      "qty": 4,
+      "name": "Volcanic Torrent"
+    }
+  ]
+}

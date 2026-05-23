@@ -1,0 +1,60 @@
+{
+  "archetype": "Mono Red Pingers",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/mono-red-pingers.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Chain Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Fireblast"
+    },
+    {
+      "qty": 4,
+      "name": "Kessig Flamebreather"
+    },
+    {
+      "qty": 3,
+      "name": "Lava Dart"
+    },
+    {
+      "qty": 4,
+      "name": "Lava Spike"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 17,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Reckless Impulse"
+    },
+    {
+      "qty": 4,
+      "name": "Rift Bolt"
+    },
+    {
+      "qty": 4,
+      "name": "Skewer the Critics"
+    },
+    {
+      "qty": 4,
+      "name": "Thermo-Alchemist"
+    },
+    {
+      "qty": 2,
+      "name": "Thunderous Wrath"
+    },
+    {
+      "qty": 4,
+      "name": "Wrenn's Resolve"
+    }
+  ],
+  "sideboard": []
+}

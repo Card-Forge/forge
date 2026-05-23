@@ -1,0 +1,471 @@
+{
+  "schema_version": 1,
+  "name": "Azorius Control",
+  "format": "standard",
+  "colors": [
+    "W",
+    "U"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "Azorius Control aims to manipulate the match from an early disadvantage to eventual inevitability by controlling the board and accumulating card advantage. It relies on a handful of powerful win conditions backed by extensive removal and interaction. The deck excels at answering aggressive strategies and combo decks while leveraging token synergy and planeswalker value to close out games.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 20,
+      "cards": [
+        "Agna Qel'a",
+        "Consult the Star Charts",
+        "Day of Judgment",
+        "Enduring Curiosity",
+        "Fountainport",
+        "The Unagi of Kyoshi Island",
+        "Three Steps Ahead",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Consult the Star Charts",
+        "Devout Decree",
+        "Meticulous Archive"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 3
+    },
+    "tutors_wildcards": {
+      "target_count": 3,
+      "cards": [
+        "Demolition Field"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Consult the Star Charts",
+        "Day of Judgment",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 22,
+      "cards": [
+        "Consult the Star Charts",
+        "Day of Judgment",
+        "Enduring Curiosity",
+        "Horned Loch-Whale",
+        "Ride's End",
+        "The Unagi of Kyoshi Island",
+        "Three Steps Ahead",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 26,
+      "cards": [
+        "Day of Judgment",
+        "Demolition Field",
+        "Devout Decree",
+        "Disenchant",
+        "Enduring Curiosity",
+        "Exorcise",
+        "High Noon",
+        "Ride's End",
+        "Seam Rip",
+        "Split Up",
+        "Ultima"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 10
+    },
+    "wrath": {
+      "target_count": 8,
+      "cards": [
+        "Day of Judgment",
+        "Split Up",
+        "Ultima"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 14,
+      "cards": [
+        "Negate",
+        "No More Lies",
+        "Spell Snare",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "The Unagi of Kyoshi Island"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 5,
+      "cards": [
+        "Agna Qel'a",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Meticulous Archive",
+        "No More Lies",
+        "Rest in Peace"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Enduring Curiosity"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 14,
+      "cards": [
+        "Consult the Star Charts",
+        "Day of Judgment",
+        "High Noon",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 31,
+      "cards": [
+        "Agna Qel'a",
+        "Consult the Star Charts",
+        "Day of Judgment",
+        "Demolition Field",
+        "Floodfarm Verge",
+        "Fountainport",
+        "Hallowed Fountain",
+        "Meticulous Archive",
+        "Restless Anchorage",
+        "Sunken Citadel",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 26,
+      "cards": [
+        "Agna Qel'a",
+        "Demolition Field",
+        "Floodfarm Verge",
+        "Fountainport",
+        "Hallowed Fountain",
+        "Island",
+        "Meticulous Archive",
+        "Plains",
+        "Restless Anchorage",
+        "Sunken Citadel"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.55
+  },
+  "dual_role_cards": [
+    {
+      "card": "Agna Qel'a",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Consult the Star Charts",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "hate_pieces",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Day of Judgment",
+      "roles": [
+        "card_advantage",
+        "hate_pieces",
+        "mana_fixing",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Demolition Field",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Devout Decree",
+      "roles": [
+        "dig_draw",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Enduring Curiosity",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Floodfarm Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fountainport",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "High Noon",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "No More Lies",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restless Anchorage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ride's End",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Split Up",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunken Citadel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Unagi of Kyoshi Island",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Three Steps Ahead",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "discard_outlets",
+        "hate_pieces",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ultima",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wan Shi Tong, Librarian",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Don't rush things and let the opponent think they control the game before taking control back.",
+    "Save resources and try to lead the opponent into making a mistake.",
+    "Never pass a turn without enough mana to interact.",
+    "Don't let the opponent force you to play something at the end of your turn.",
+    "Common mistake: Overusing Day of Judgment too early or too late."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play defensively and use Temporary Lockdown to buy time against early threats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize finding lands and early interaction like Ride's End"
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast a cantrip or cheap interaction if available."
+    }
+  ],
+  "kill_priority": [
+    "Consult the Star Charts",
+    "Day of Judgment",
+    "Three Steps Ahead",
+    "Enduring Curiosity",
+    "Horned Loch-Whale",
+    "Ride's End",
+    "The Unagi of Kyoshi Island",
+    "Wan Shi Tong, Librarian"
+  ],
+  "interaction_to_disrupt": [
+    "Negate",
+    "No More Lies",
+    "Spell Snare",
+    "Three Steps Ahead",
+    "The Unagi of Kyoshi Island",
+    "Day of Judgment",
+    "Demolition Field",
+    "Devout Decree"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/azorius-control.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

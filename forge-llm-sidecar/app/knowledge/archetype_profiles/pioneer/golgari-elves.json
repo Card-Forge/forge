@@ -1,0 +1,296 @@
+{
+  "schema_version": 1,
+  "name": "Golgari Elves",
+  "format": "pioneer",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Leaf-Crowned Visionary",
+    "Tyvar, Jubilant Brawler",
+    "Craterhoof Behemoth",
+    "Darkbore Pathway",
+    "Dwynen's Elite",
+    "Elvish Archdruid",
+    "Elvish Mystic",
+    "Elvish Warmaster"
+  ],
+  "interaction_to_disrupt": [
+    "Abrupt Decay",
+    "Heroic Intervention",
+    "Tyvar, the Pummeler",
+    "Assassin's Trophy",
+    "Fatal Push",
+    "Maelstrom Pulse",
+    "Tear Asunder",
+    "Chord of Calling"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 5,
+      "cards": [
+        "Leaf-Crowned Visionary",
+        "Shapers' Sanctuary"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Collected Company"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 3,
+      "cards": [
+        "Chord of Calling"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 35,
+      "cards": [
+        "Craterhoof Behemoth",
+        "Darkbore Pathway",
+        "Dwynen's Elite",
+        "Elvish Archdruid",
+        "Elvish Mystic",
+        "Elvish Warmaster",
+        "Leaf-Crowned Visionary",
+        "Llanowar Elves",
+        "Shaman of the Pack",
+        "Tyvar, Jubilant Brawler",
+        "Tyvar, the Pummeler",
+        "Westvale Abbey"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 9,
+      "cards": [
+        "Abrupt Decay",
+        "Assassin's Trophy",
+        "Fatal Push",
+        "Maelstrom Pulse",
+        "Tear Asunder"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Chord of Calling"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 7,
+      "cards": [
+        "Abrupt Decay",
+        "Heroic Intervention",
+        "Tyvar, the Pummeler"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 5,
+      "cards": [
+        "Leyline of the Void",
+        "Tyvar, Jubilant Brawler"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Tyvar, Jubilant Brawler"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Leaf-Crowned Visionary"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Duress"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 10,
+      "cards": [
+        "Blooming Marsh",
+        "Overgrown Tomb",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 16,
+      "cards": [
+        "Blooming Marsh",
+        "Forest",
+        "Overgrown Tomb",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Tyvar, Jubilant Brawler"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.3
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abrupt Decay",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blooming Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chord of Calling",
+      "roles": [
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leaf-Crowned Visionary",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tyvar, Jubilant Brawler",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tyvar, the Pummeler",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Woodland Cemetery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/golgari-elves.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

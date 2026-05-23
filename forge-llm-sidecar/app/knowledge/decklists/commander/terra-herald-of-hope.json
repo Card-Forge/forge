@@ -1,0 +1,408 @@
+{
+  "archetype": "Terra, Herald of Hope",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/terra-herald-of-hope.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Accursed Marauder"
+    },
+    {
+      "qty": 1,
+      "name": "Adeline, Resplendent Cathar"
+    },
+    {
+      "qty": 1,
+      "name": "Alesha, Who Laughs at Fate"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Ardbert, Warrior of Darkness"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Aurelia, the Warleader"
+    },
+    {
+      "qty": 1,
+      "name": "Badlands"
+    },
+    {
+      "qty": 1,
+      "name": "Bayek of Siwa"
+    },
+    {
+      "qty": 1,
+      "name": "Bleeding Effect"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Boromir, Warden of the Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Bruse Tarl, Boorish Herder"
+    },
+    {
+      "qty": 1,
+      "name": "Carmen, Cruel Skymarcher"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Ceaseless Conflict"
+    },
+    {
+      "qty": 1,
+      "name": "Celestine, the Living Saint"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Damn"
+    },
+    {
+      "qty": 1,
+      "name": "Deflecting Swat"
+    },
+    {
+      "qty": 1,
+      "name": "Demand Answers"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo Castle"
+    },
+    {
+      "qty": 1,
+      "name": "Elegant Parlor"
+    },
+    {
+      "qty": 1,
+      "name": "Entomb"
+    },
+    {
+      "qty": 1,
+      "name": "Esper Sentinel"
+    },
+    {
+      "qty": 1,
+      "name": "Excalibur, Sword of Eden"
+    },
+    {
+      "qty": 1,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 1,
+      "name": "Fellwar Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Field of the Dead"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Flowering of the White Tree"
+    },
+    {
+      "qty": 1,
+      "name": "Fury"
+    },
+    {
+      "qty": 1,
+      "name": "Gau, Feral Youth"
+    },
+    {
+      "qty": 1,
+      "name": "General Leo Cristophe"
+    },
+    {
+      "qty": 1,
+      "name": "General's Enforcer"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Godo, Bandit Warlord"
+    },
+    {
+      "qty": 1,
+      "name": "Gogo, Mysterious Mime"
+    },
+    {
+      "qty": 1,
+      "name": "Hero's Blade"
+    },
+    {
+      "qty": 1,
+      "name": "Imperial Seal"
+    },
+    {
+      "qty": 1,
+      "name": "Interceptor, Shadow's Hound"
+    },
+    {
+      "qty": 1,
+      "name": "Joshua, Phoenix's Dominant"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Greaves"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning, Army of One"
+    },
+    {
+      "qty": 1,
+      "name": "Locke, Treasure Hunter"
+    },
+    {
+      "qty": 1,
+      "name": "Loran of the Third Path"
+    },
+    {
+      "qty": 1,
+      "name": "Luxury Suite"
+    },
+    {
+      "qty": 1,
+      "name": "Madame Null, Power Broker"
+    },
+    {
+      "qty": 1,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Minas Tirith"
+    },
+    {
+      "qty": 1,
+      "name": "Mount Doom"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Mythos of Snapdax"
+    },
+    {
+      "qty": 1,
+      "name": "Nibelheim Aflame"
+    },
+    {
+      "qty": 1,
+      "name": "Obosh, the Preypiercer"
+    },
+    {
+      "qty": 1,
+      "name": "Odric, Lunarch Marshal"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Plateau"
+    },
+    {
+      "qty": 1,
+      "name": "Plaza of Heroes"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Pursue the Past"
+    },
+    {
+      "qty": 1,
+      "name": "Ragavan, Nimble Pilferer"
+    },
+    {
+      "qty": 1,
+      "name": "Rakdos Joins Up"
+    },
+    {
+      "qty": 1,
+      "name": "Raucous Theater"
+    },
+    {
+      "qty": 1,
+      "name": "Reanimate"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Scrubland"
+    },
+    {
+      "qty": 1,
+      "name": "Sevinne's Reclamation"
+    },
+    {
+      "qty": 1,
+      "name": "Shadow, Mysterious Assassin"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowspear"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowy Backstreet"
+    },
+    {
+      "qty": 1,
+      "name": "Shanid, Sleepers' Scourge"
+    },
+    {
+      "qty": 1,
+      "name": "Shinka, the Bloodsoaked Keep"
+    },
+    {
+      "qty": 1,
+      "name": "Shizo, Death's Storehouse"
+    },
+    {
+      "qty": 1,
+      "name": "Sister Hospitaller"
+    },
+    {
+      "qty": 1,
+      "name": "Skullclamp"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Solitude"
+    },
+    {
+      "qty": 1,
+      "name": "Spectator Seating"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Knights of Round"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Terra, Herald of Hope"
+    },
+    {
+      "qty": 1,
+      "name": "Teshar, Ancestor's Apostle"
+    },
+    {
+      "qty": 1,
+      "name": "Thalia, Heretic Cathar"
+    },
+    {
+      "qty": 1,
+      "name": "The Soul Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Tymna the Weaver"
+    },
+    {
+      "qty": 1,
+      "name": "Tyrite Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Unburial Rites"
+    },
+    {
+      "qty": 1,
+      "name": "Urborg, Tomb of Yawgmoth"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Ruinous Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Vampiric Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Vault of Champions"
+    },
+    {
+      "qty": 1,
+      "name": "Venat, Heart of Hydaelyn"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Verrak, Warped Sengir"
+    },
+    {
+      "qty": 1,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": []
+}

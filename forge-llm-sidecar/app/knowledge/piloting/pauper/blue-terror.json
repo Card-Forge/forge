@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early Counterspell or cheap disruption",
       "Hands containing Mental Note or Lorien Revealed with lands",
-      "Hands with at least two lands and a way to interact"
+      "Hands with at least two lands and a way to interact",
+      "Keep hands with 2\u20133 lands, 1\u20132 early interaction/cantrips, and a clear path to hit UUU by turn 3.",
+      "Prioritize keeping Mental Note or Counterspell if your mana base supports them."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or card draw",
       "Hands with only lands or only high-cost cards",
-      "Hands missing early game answers to aggressive strategies"
+      "Hands missing early game answers to aggressive strategies",
+      "Mulligan on 3+ lands with no early spells, 0\u20131 lands, or hands lacking any way to stabilize against aggro."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and hold Counterspell for opponent's early threats",
       "Use Mental Note or Lorien Revealed on curve to discard opponent's hand while drawing into answers",
-      "Prioritize survival and hand disruption over early board presence"
+      "Prioritize survival and hand disruption over early board presence",
+      "Turn 1: Play a land, cast a cantrip or cheap interaction if available.",
+      "Turn 2: Develop mana, drop a 2-drop threat or counterspell, and set up for Mental Note.",
+      "Land sequencing: Prioritize fetching/dual lands to ensure consistent UUU access for Mental Note and Lorien Revealed by turns 3\u20134.",
+      "Avoid flooding with non-basic lands if you lack fixing."
     ],
     "mid_game": [
       "Continue cycling with discard spells to find removal and counters",
       "Target opponent's key threats with discard and counterspells",
-      "Establish a minimal board presence if necessary to apply pressure"
+      "Establish a minimal board presence if necessary to apply pressure",
+      "Hoard counterspells for game-ending threats or critical combo pieces.",
+      "Use Mental Note to filter into Lorien Revealed or answers, but avoid casting it into known discard.",
+      "Manage your graveyard carefully",
+      "use Surgical Extraction against Jund or affinity-based strategies.",
+      "Don't overextend into sweepers.",
+      "Commit threats only when you have sufficient interaction to protect them or when you can close the game in one turn."
     ],
     "late_game": [
       "Leverage card advantage to overwhelm opponent with answers",
       "Use discard spells to strip opponent's hand of finishers",
-      "Stall with counterspells until superior resources or value engines secure victory"
+      "Stall with counterspells until superior resources or value engines secure victory",
+      "Lorien Revealed into a game-ending threat, or a sequence of removal/counters to clear the board and attack.",
+      "If the deck includes combo pieces, dig for them using Mental Note and Lorien Revealed.",
+      "Go all-in when you have card advantage, board control, and the opponent has no sweepers or interaction left.",
+      "Commit when you can safely cast Lorien Revealed and follow up with a threat or removal."
     ]
   },
   "key_cards": [
@@ -58,7 +75,12 @@
   "sequencing_tips": [
     "Cast discard spells before playing lands to maximize hand size for counters",
     "Hold Counterspell until opponent commits to a key play rather than using it preemptively",
-    "Cycle Mental Note and Lorien Revealed alternately to maintain hand disruption pressure"
+    "Cycle Mental Note and Lorien Revealed alternately to maintain hand disruption pressure",
+    "Mental Note and Lorien Revealed are vulnerable to discard and sweepers",
+    "sequence carefully.",
+    "Don't cast Lorien Revealed into a known sweeper.",
+    "Watch for graveyard hate and adjust your game plan accordingly.",
+    "Practice end-of-turn sequencing to protect your key spells."
   ],
   "matchups": [
     {
@@ -87,15 +109,34 @@
         "Combo enablers",
         "Win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Pressure with cheap cantrips and threats at end of turn. Use Mental Note to dig for uncounterable threats or answers. Cast Lorien Revealed at end of turn to protect it from counterspells. Don't overcommit to expensive spells if you lack protection.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use early interaction and discard to disrupt mana development. Counter key mana rocks or accelerants. Stabilize with removal and card draw. Don't let them get ahead; apply pressure with threats once stabilized.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war by holding counterspells for their Lorien Revealed or key threats. Use Surgical Extraction to disrupt their draw engines. Sideboard in more disruption and discard. Play conservatively early, then out-value in the late game.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early aggressive creatures",
     "Fast combo pieces",
-    "High-impact finishers"
+    "High-impact finishers",
+    "Watch for sweepers (Wrath of God, Anger of the Gods), fast combo finishes, or ramp accelerants.",
+    "Note when opponents tap out for big threats or when they hold up mana for counterspells.",
+    "Track graveyard contents against Jund and affinity decks."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:59:02+00:00",
     "model": "local-model",
@@ -124,6 +165,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

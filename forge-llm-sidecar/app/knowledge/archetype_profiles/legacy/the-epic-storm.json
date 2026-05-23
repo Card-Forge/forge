@@ -1,0 +1,422 @@
+{
+  "schema_version": 1,
+  "name": "The EPIC Storm",
+  "format": "legacy",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "The EPIC Storm archetype is a Legacy combo deck that utilizes a four-color mana base to assemble a high-storm-count spell sequence. By leveraging signature mana accelerants like Lion's Eye Diamond and Mox Opal alongside card selection tools, the pilot aims to cast a storm spell on turn two or three. Burning Wish provides critical flexibility to fetch missing combo pieces or interaction from the sideboard. Success relies on precise sequencing and protecting the combo from disruption.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Dark Ritual"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 20,
+      "cards": [
+        "Boomerang Basics",
+        "Brainstorm",
+        "Lion's Eye Diamond",
+        "Mox Opal",
+        "Peer into the Abyss",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 5
+    },
+    "dig_draw": {
+      "target_count": 14,
+      "cards": [
+        "Brainstorm",
+        "Lion's Eye Diamond",
+        "Mox Opal",
+        "Raucous Theater",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 21,
+      "cards": [
+        "Beseech the Mirror",
+        "Bloodstained Mire",
+        "Burning Wish",
+        "Infernal Tutor",
+        "Polluted Delta",
+        "Urza's Saga",
+        "Verdant Catacombs",
+        "Wishclaw Talisman"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 1
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Mox Opal"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 16,
+      "cards": [
+        "Ad Nauseam",
+        "Burning Wish",
+        "Duress",
+        "Hexing Squelcher",
+        "Tendrils of Agony",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 4,
+      "cards": [
+        "Boomerang Basics"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Hexing Squelcher"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Brainstorm"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 16,
+      "cards": [
+        "Brainstorm",
+        "Gaea's Will",
+        "Helm of Obedience",
+        "Leyline of the Void",
+        "Mox Opal",
+        "Raucous Theater",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Boomerang Basics",
+        "Gaea's Will"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 4
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 11,
+      "cards": [
+        "Burning Wish",
+        "Lion's Eye Diamond",
+        "Mox Opal"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Burning Wish",
+        "Debt to the Deathless",
+        "Mox Opal"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 32,
+      "cards": [
+        "Badlands",
+        "Bloodstained Mire",
+        "Burning Wish",
+        "Chrome Mox",
+        "Lion's Eye Diamond",
+        "Lotus Petal",
+        "Mox Opal",
+        "Polluted Delta",
+        "Raucous Theater",
+        "Undercity Sewers",
+        "Underground Sea",
+        "Urza's Saga",
+        "Verdant Catacombs"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 14,
+      "cards": [
+        "Badlands",
+        "Bloodstained Mire",
+        "Polluted Delta",
+        "Raucous Theater",
+        "Swamp",
+        "Undercity Sewers",
+        "Underground Sea",
+        "Urza's Saga",
+        "Verdant Catacombs"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.07
+  },
+  "dual_role_cards": [
+    {
+      "card": "Badlands",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boomerang Basics",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brainstorm",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Burning Wish",
+      "roles": [
+        "combo_pieces",
+        "hate_pieces",
+        "mana_fixing",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gaea's Will",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hexing Squelcher",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lion's Eye Diamond",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mox Opal",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raucous Theater",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Sea",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast cantrips before mana rocks to maximize the storm count",
+    "Hold up interaction until you know the opponent's hand or play",
+    "Use Lion's Eye Diamond after other mana sources to ensure you can pay the life cost",
+    "Cast the storm spell last to ensure it resolves with the highest possible count",
+    "TES is highly skill-intensive"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and mana rocks to establish a fast mana base"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use cantrips to dig for the storm spell and combo pieces"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up interaction to protect against early disruption"
+    }
+  ],
+  "kill_priority": [
+    "Mox Opal",
+    "Burning Wish",
+    "Lion's Eye Diamond",
+    "Ad Nauseam",
+    "Duress",
+    "Hexing Squelcher",
+    "Tendrils of Agony",
+    "Thoughtseize"
+  ],
+  "interaction_to_disrupt": [
+    "Hexing Squelcher",
+    "Boomerang Basics",
+    "Burning Wish",
+    "Debt to the Deathless",
+    "Mox Opal"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/the-epic-storm.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

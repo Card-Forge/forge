@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more one- or two-mana creatures",
       "Combinations featuring Slickshot Show-Off or Hired Claw with early land drops",
-      "Draws that include Elusive Otter alongside a removal or Leyline interaction"
+      "Draws that include Elusive Otter alongside a removal or Leyline interaction",
+      "Keep hands with 2-3 lands (prioritizing untapped entry or fetchable duals), at least two 1-drops (Slickshot Show-Off, Hired Claw, Elusive Otter), and a Leyline card if it can be cast or protected by turn 2.",
+      "Prioritize hands that can establish board presence or Leyline advantage by turn 1-2."
     ],
     "mulligan_criteria": [
       "Hands lacking early land drops or creature threats",
       "Draws heavy on three-mana or higher cards without early play",
-      "Hands missing Temur mana sources or Leyline synergies"
+      "Hands missing Temur mana sources or Leyline synergies",
+      "Mulligan on triple lands, single-card hands, or hands with only 2-drops and no early threats."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and one- or two-mana creatures immediately",
       "Prioritize Elusive Otter and Hired Claw to establish board presence",
-      "Use early interaction to protect key threats from opponent's removal"
+      "Use early interaction to protect key threats from opponent's removal",
+      "Turn 1: Play a basic land, cast Slickshot Show-Off or Elusive Otter if mana allows.",
+      "If you have a Leyline in opening hand, ensure you can cast it or have it in play by turn 2.",
+      "Turn 2: Play a second land, cast Hired Claw or another 1-drop, attack with evasive threats.",
+      "Sequence lands to ensure U/R/G availability by turn 2.",
+      "If you have fetches, chain them to find duals for untapped entry."
     ],
     "mid_game": [
       "Introduce Slickshot Show-Off to generate card advantage and combat tricks",
       "Leverage Leyline effects to pump or shield creatures",
-      "Trade efficiently while maintaining a forward board state"
+      "Trade efficiently while maintaining a forward board state",
+      "Preserve mana for flash threats and interaction.",
+      "Don't overextend into known sweepers.",
+      "Use Leyline cards strategically\u2014don't rely on them as your only win condition if the board is stale.",
+      "Manage hand size by trading creatures for removal or using evasion to pressure.",
+      "Commit threats when you have evasion or when the opponent lacks removal.",
+      "Hold back if they have sweepers or hard counters."
     ],
     "late_game": [
       "Push lethal with a wide board of evasive and pumped creatures",
       "Use Slickshot Show-Off's value generation to outlast opponent's resources",
-      "Commit to all-in attacks when opponent lacks board control or sweepers"
+      "Commit to all-in attacks when opponent lacks board control or sweepers",
+      "Overwhelming board presence with evasive 1/1s, Leyline of the Meek tokens, and Slickshot Show-Off's -1/-1 effect clearing blockers.",
+      "If Leyline is the win con, ensure it stays in play and pressure the opponent to break it or lose to combat.",
+      "Go all-in when you have evasion, the opponent has no sweepers, or you're at lethal in 2-3 turns.",
+      "Commit when you can trade favorably or when the opponent is low on life."
     ]
   },
   "key_cards": [
@@ -59,7 +77,12 @@
     "Play Elusive Otter or Hired Claw before activating Leyline effects to maximize combat damage.",
     "Hold up mana for Slickshot Show-Off's abilities when opponents are likely to cast removal or sweepers.",
     "Prioritize land drops in the early game to ensure smooth casting of signature creatures.",
-    "Use Leyline synergies to protect key threats only when the opponent has visible interaction."
+    "Use Leyline synergies to protect key threats only when the opponent has visible interaction.",
+    "Common mistakes include overextending into sweepers, neglecting land sequencing, and relying too heavily on Leyline as a win condition.",
+    "Remember that Elusive Otter can't be blocked by creatures with power 2+, so use it to trade into large blockers.",
+    "Slickshot Show-Off's -1/-1 effect is best used on key blockers or combo pieces.",
+    "Leyline cards are powerful but vulnerable to hate",
+    "protect them or have a backup plan."
   ],
   "matchups": [
     {
@@ -88,16 +111,35 @@
         "Fast curve creatures",
         "Combat tricks"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use flash threats, split your casts, or rely on uncounterable effects if available. Use Leyline of Abundance if it helps with mana/landfall to bypass counters. Attack around counterspells with evasive threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to finish them before they stabilize. Use removal for key ramp creatures. Don't let them get to 4+ mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card advantage, use flash to surprise, and target their Leylines or key threats. Trade favorably and pressure the life total.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early board wipes that clear your creature-heavy board",
     "Targeted removal aimed at Slickshot Show-Off or Hired Claw",
     "Counterspells disrupting your Leyline synergies and key creatures",
-    "Resilient midrange creatures that outvalue your early pressure"
+    "Resilient midrange creatures that outvalue your early pressure",
+    "Watch for counterspells (Izzet), landfall triggers (Selesnya/Mono-Green), and combo pieces.",
+    "Key tells: opponent tapping for multiple colors, holding up mana on turn 2-3, or playing non-basic lands that suggest ramp.",
+    "Track graveyard for recursion or combo pieces."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:01:48+00:00",
     "model": "local-model",
@@ -113,6 +155,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

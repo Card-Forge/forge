@@ -1,0 +1,532 @@
+{
+  "schema_version": 1,
+  "name": "Lurrus Breach",
+  "format": "vintage",
+  "colors": [
+    "U",
+    "B",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Lurrus Breach is a U/B/R Vintage tempo deck that leverages graveyard recursion and instant-speed card advantage to overwhelm opponents. By repeatedly casting Psychic Frog and copying its effects with Flow State, the deck generates massive card draw while applying relentless pressure. Lurrus of the Dream-Den serves as the central engine, enabling efficient reanimation and hand refills to outmaneuver traditional control and combo strategies in the Vintage environment.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 3,
+      "cards": [
+        "Mana Drain"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 11,
+      "cards": [
+        "Ancestral Recall",
+        "Dress Down",
+        "Flow State",
+        "Gitaxian Probe",
+        "L\u00f3rien Revealed",
+        "Rebuild",
+        "Soul-Guide Lantern",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 7,
+      "cards": [
+        "Flow State",
+        "Lurrus of the Dream-Den",
+        "Stock Up"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 13,
+      "cards": [
+        "Demonic Tutor",
+        "Flooded Strand",
+        "Gifts Ungiven",
+        "L\u00f3rien Revealed",
+        "Merchant Scroll",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Flow State",
+        "Lurrus of the Dream-Den"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "threats": {
+      "target_count": 11,
+      "cards": [
+        "Lurrus of the Dream-Den",
+        "Mindbreak Trap",
+        "Mox Emerald",
+        "Mox Jet",
+        "Mox Pearl",
+        "Mox Ruby",
+        "Mox Sapphire",
+        "Sol Ring",
+        "Time Walk",
+        "Yixlid Jailer"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 10,
+      "cards": [
+        "Brotherhood's End",
+        "Chain of Vapor",
+        "Lightning Bolt",
+        "Long Goodbye",
+        "Mana Crypt",
+        "Pyroblast",
+        "Red Elemental Blast",
+        "Soul-Guide Lantern"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Brotherhood's End"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 14,
+      "cards": [
+        "Consign to Memory",
+        "Flusterstorm",
+        "Force of Will",
+        "Mana Drain",
+        "Mental Misstep",
+        "Pyroblast",
+        "Red Elemental Blast"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Long Goodbye"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 12,
+      "cards": [
+        "Brain Freeze",
+        "Flow State",
+        "Gifts Ungiven",
+        "Lurrus of the Dream-Den",
+        "Soul-Guide Lantern",
+        "Underworld Breach",
+        "Yixlid Jailer"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 9,
+      "cards": [
+        "Chain of Vapor",
+        "Flow State",
+        "Hurkyl's Recall",
+        "Lurrus of the Dream-Den",
+        "Rebuild",
+        "Underworld Breach"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 3
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Flow State",
+        "Lurrus of the Dream-Den"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Flow State",
+        "Lurrus of the Dream-Den"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "hate_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Flow State",
+        "Gitaxian Probe",
+        "Overencumbered",
+        "Pithing Needle",
+        "Unable to Scream"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 18,
+      "cards": [
+        "Black Lotus",
+        "Flooded Strand",
+        "Flow State",
+        "Lotus Petal",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Snow-Covered Island",
+        "Tolarian Academy",
+        "Tundra",
+        "Underground Sea",
+        "Urza's Saga",
+        "Volcanic Island"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 15,
+      "cards": [
+        "Flooded Strand",
+        "Island",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Snow-Covered Island",
+        "Tolarian Academy",
+        "Tundra",
+        "Underground Sea",
+        "Urza's Saga",
+        "Volcanic Island"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.25
+  },
+  "dual_role_cards": [
+    {
+      "card": "Brotherhood's End",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chain of Vapor",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gifts Ungiven",
+      "roles": [
+        "graveyard_enablers",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gitaxian Probe",
+      "roles": [
+        "card_advantage",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Long Goodbye",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lurrus of the Dream-Den",
+      "roles": [
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Drain",
+      "roles": [
+        "counterspells",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rebuild",
+      "roles": [
+        "card_advantage",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Red Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tolarian Academy",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tundra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Sea",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underworld Breach",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volcanic Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yixlid Jailer",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Flow State until opponent's turn to maximize card draw and find answers",
+    "Activate Lurrus before attacking with Frog to ensure you can recast it next turn",
+    "Prioritize keeping Frog in hand over graveyard when opponent has board wipes",
+    "Use Lurrus to return threats to hand rather than graveyard to avoid hate cards",
+    "Common mistake: Over-casting cheap spells early and running out of resources for the combo."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize land drops and playing Lurrus or a cheap threat"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Flow State on opponent's turn to draw into early interaction"
+    },
+    {
+      "trigger": "early game",
+      "line": "Begin filling the graveyard with creatures for Lurrus activation"
+    }
+  ],
+  "kill_priority": [
+    "Flow State",
+    "Lurrus of the Dream-Den",
+    "Mindbreak Trap",
+    "Mox Emerald",
+    "Mox Jet",
+    "Mox Pearl",
+    "Mox Ruby",
+    "Mox Sapphire"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Flusterstorm",
+    "Force of Will",
+    "Mana Drain",
+    "Mental Misstep",
+    "Pyroblast",
+    "Red Elemental Blast",
+    "Long Goodbye"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/lurrus-breach.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

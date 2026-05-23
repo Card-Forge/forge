@@ -14,13 +14,16 @@
       "Hands with a turn-one Glint Hawk or Galvanic Blast",
       "Two-land hands with early interaction",
       "Kor Skyfisher paired with a recycled spell target",
-      "Mana bases that hit at least two of the four colors early"
+      "Mana bases that hit at least two of the four colors early",
+      "Keep hands with 2-3 lands (prioritizing untapped entry or fetchable basics), at least one early play (Glint Hawk, Kor Skyfisher, or Galvanic Blast), and a curve that allows a turn-1 or turn-2 spell.",
+      "Prioritize keeping hands that can establish board presence or interaction by turn 2."
     ],
     "mulligan_criteria": [
       "Zero lands or three+ lands with no early plays",
       "Heavy hands lacking instant-speed interaction",
       "Hands missing flying creatures or removal",
-      "Mana bases heavily skewed to one color"
+      "Mana bases heavily skewed to one color",
+      "Mulligan to 0 lands, 4+ lands with no early spells, or hands consisting entirely of high-cost threats."
     ],
     "examples": []
   },
@@ -28,17 +31,32 @@
     "early_game": [
       "Prioritize playing lands and dropping Glint Hawk for immediate pressure",
       "Use Galvanic Blast to clear early blockers or chip the opponent's life total",
-      "Hold interaction for key aggressive threats while establishing board presence"
+      "Hold interaction for key aggressive threats while establishing board presence",
+      "Turn 1: Play a land, cast Glint Hawk or Kor Skyfisher if available.",
+      "Turn 2: Develop mana, cast Galvanic Blast to remove a 2-drop, or drop a 2-drop threat.",
+      "Sequence lands to ensure colored mana availability",
+      "play W/U sources first to enable early spells, then add B/R as needed.",
+      "If the format allows fetch lands or shock lands, prioritize them to smooth mana and enable dual-color spells immediately."
     ],
     "mid_game": [
       "Deploy Kor Skyfisher to stabilize the board and begin recycling Galvanic Blast",
       "Maintain tempo by trading efficiently and keeping the opponent on the back foot",
-      "Manage four-color mana carefully to avoid clashing while casting spells"
+      "Manage four-color mana carefully to avoid clashing while casting spells",
+      "Treat mana as a tempo resource",
+      "hold priority to react to opponent's key spells rather than autopiloting through turns.",
+      "Use graveyard strategically if recursion is available, but avoid overcommitting unless necessary.",
+      "Prioritize card advantage and efficient 1-for-1 trades that clear the board or protect key threats.",
+      "Commit threats when you have interaction to protect them or when the board is clear.",
+      "Hold back if the opponent has sweepers or heavy targeted removal."
     ],
     "late_game": [
       "Recycle high-impact spells repeatedly to exhaust opponent's resources",
       "Push damage with flying creatures while holding Blast for finishers or sweepers",
-      "Transition to a value grind if the opponent stabilizes, leveraging recursion"
+      "Transition to a value grind if the opponent stabilizes, leveraging recursion",
+      "Resilient mid-game threats (Kor Skyfisher variants, larger flyers) combined with targeted removal to clear blockers.",
+      "If the format includes a specific win-con, it is typically a combination of board presence, card advantage, and precise removal to close out games in 2-3 turns.",
+      "Go all-in when you have card advantage, the opponent has no sweepers, and you can close the game in 2-3 turns.",
+      "Also commit when you can protect your threats with removal or counters, or when the opponent is at lethal and you have the resources to deliver it."
     ]
   },
   "key_cards": [
@@ -63,7 +81,13 @@
     "Play Glint Hawk early to force blockers before dropping Kor Skyfisher",
     "Recycle Galvanic Blast with Kor Skyfisher only when you have a clear target or need to finish the game",
     "Prioritize mana base consistency by playing lands that support multiple colors early",
-    "Trade flying creatures efficiently to preserve board advantage while recycling spells"
+    "Trade flying creatures efficiently to preserve board advantage while recycling spells",
+    "Common mistake: overcommitting to early threats without protection.",
+    "Another: mismanaging mana base in a 4-color deck",
+    "always prioritize lands that enter untapped or can be fetched.",
+    "Unique interaction: Glint Hawk's flying makes it excellent for trading with sweepers or forcing unfavorable blocks.",
+    "Kor Skyfisher's stats make it a solid early blocker.",
+    "Galvanic Blast is versatile for both removal and finishing off low-health players."
   ],
   "matchups": [
     {
@@ -101,6 +125,31 @@
         "Counterspell",
         "Esper Sentinel"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that can be cast in response to counterspells. Employ Galvanic Blast to force counterspells into unfavorable trades. Use flashback or alternative costs if available, and prioritize casting spells when the opponent has no mana to respond.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their land drops. Use removal on their ramp targets. Do not let them stabilize; trade efficiently and close the game before their late-game threats. If they go wide, use sweepers or targeted removal to clear the board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal and flying creatures. Do not overcommit to board stalls; use direct damage to clear paths. Transition to card advantage once stabilized. Track their hand for removal and hold up interaction to protect your key threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats to force interaction. Use discard to disrupt their hand. Out-value them with card draw and resilient threats. Do not let them control the pace; force trades on your terms and punish their mana base if it is clunky.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card advantage, efficient removal, and protecting your key threats. Track their hand for sweepers. Win by out-resourcing and making better trades. Sideboard in additional interaction and discard to disrupt their game plan.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -108,10 +157,14 @@
     "Board wipes",
     "Graveyard hate",
     "Mana disruption",
-    "Cheap aggressive creatures"
+    "Cheap aggressive creatures",
+    "Watch for sweepers (e.g., Wrath of God, Cyclonic Rift), targeted removal, and combo win conditions.",
+    "Key tells: opponent holding up mana on your turn 3-4, discarding your hand, or playing unusual land drops.",
+    "Track their graveyard and library if relevant, and note when they start hoarding mana for late-game threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:57:05+00:00",
     "model": "local-model",
@@ -127,6 +180,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

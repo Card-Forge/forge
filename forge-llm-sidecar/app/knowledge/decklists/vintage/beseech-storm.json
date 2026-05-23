@@ -1,0 +1,201 @@
+{
+  "archetype": "Beseech Storm",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/beseech-storm.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancestral Recall"
+    },
+    {
+      "qty": 3,
+      "name": "Beseech the Mirror"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 1,
+      "name": "Bolas's Citadel"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Chain of Vapor"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 3,
+      "name": "Flow State"
+    },
+    {
+      "qty": 2,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Gitaxian Probe"
+    },
+    {
+      "qty": 1,
+      "name": "Karn, the Great Creator"
+    },
+    {
+      "qty": 2,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Manifold Key"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Ruby"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Sensei's Divining Top"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 3,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 1,
+      "name": "Tendrils of Agony"
+    },
+    {
+      "qty": 2,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Time Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Time Walk"
+    },
+    {
+      "qty": 1,
+      "name": "Tinker"
+    },
+    {
+      "qty": 1,
+      "name": "Tolarian Academy"
+    },
+    {
+      "qty": 4,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Vampiric Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Yawgmoth's Will"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Grim Bauble"
+    },
+    {
+      "qty": 2,
+      "name": "Hullbreacher"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Mycosynth Lattice"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "The One Ring"
+    },
+    {
+      "qty": 1,
+      "name": "The Tabernacle at Pendrell Vale"
+    }
+  ]
+}

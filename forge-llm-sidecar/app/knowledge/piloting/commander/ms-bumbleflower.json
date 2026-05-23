@@ -1,0 +1,130 @@
+{
+  "archetype": "Ms. Bumbleflower",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "A flexible G/U/W midrange/control hybrid that leverages Ms. Bumbleflower as a versatile engine for mana acceleration, token generation, and anti-token disruption. Wins by out-valuing opponents through efficient removal, card advantage, and strategic Saproling floods that overwhelm board states or enable favorable sweepers.",
+  "win_conditions": [
+    "Ms.",
+    "Bumbleflower token floods combined with board sweepers, or a late-game resilient threat protected by Saprolings.",
+    "Card advantage engines that out-value opponents and force unfavorable trades."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including fetches/shocks if in deck), or 1 land plus 2+ mana accelerants (Arcane Signet, Sol Ring, etc.).",
+      "Keep hands with turn-2 interaction (Swords to Plowshares, early removal, or countermagic) and a turn-3 play (Ms.",
+      "Bumbleflower or a 2-drop)."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 0-1 lands, pure curve decks, or no early interaction/mana sources."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land.",
+      "Turn 2: Cast a 2-drop or Arcane Signet.",
+      "Turn 3: Cast Ms.",
+      "Bumbleflower.",
+      "Sequence mana carefully: if ahead, tap for G/U to develop threats",
+      "if behind, consider early sacrifice to flood the board with Saprolings for blocking or to enable removal."
+    ],
+    "mid_game": [
+      "Preserve Ms.",
+      "Bumbleflower for both mana generation and token generation",
+      "avoid overcommitting to Saproling floods without removal or sweepers ready.",
+      "Use Swords to Plowshares efficiently on key threats, and manage hand resources to maintain interaction through the midgame.",
+      "Commit threats when you have removal or sweepers ready to handle their response.",
+      "Hold back if they have heavy interaction or sweepers in hand.",
+      "Use Saprolings as flexible blockers or to trade favorably with key creatures, preserving your board state for value plays."
+    ],
+    "late_game": [
+      "Ms.",
+      "Bumbleflower token floods combined with board sweepers, or a late-game resilient threat protected by Saprolings.",
+      "Card advantage engines that out-value opponents and force unfavorable trades.",
+      "Go all-in when you have card advantage, removal for their threats, and they lack sweepers.",
+      "Commit when you can safely flood the board knowing you can clear it or trade favorably, or when you can close the game before they stabilize."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ms. Bumbleflower",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Swords to Plowshares",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include sacrificing Ms.",
+    "Bumbleflower too early without a plan, overcommitting to token floods without removal, and ignoring opponent mana states.",
+    "Unique interactions: Ms.",
+    "Bumbleflower's sacrifice triggers go on the stack, allowing responses.",
+    "Synergizes well with token doublers, sweepers, and card draw.",
+    "Watch for sacrifice hate or destroy effects, and remember that Saprolings can be used to enable sacrifice outlets or block key creatures."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use mana rocks to cast spells at instant speed when they are tapped out. Avoid overcommitting to single large spells; instead, use smaller threats, token floods, and split strategies to overwhelm counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure and use removal on their mana sources. Do not let them stabilize; trade efficiently and force them to spend resources on board development rather than acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early removal, life gain, and using Saprolings as blockers. Hold back Ms. Bumbleflower for mana or blocking until needed, and stabilize before attempting to go off.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with resilient threats and card draw to out-value. Force them to use removal on low-value targets, and use token floods to clog their board and enable favorable trades.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value exchange is paramount. Use targeted removal on their key pieces, out-value with superior token synergies, and control the board with well-timed sweepers. Prioritize card advantage and hand disruption to out-resource them.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath, Cyclonic), targeted removal (Swords, Go for the Throat), and combo wincons.",
+    "Note when opponents are holding up mana for counterspells or instant-speed interaction.",
+    "Track graveyard for reanimation or recursion threats, and monitor life totals for aggressive pushes."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

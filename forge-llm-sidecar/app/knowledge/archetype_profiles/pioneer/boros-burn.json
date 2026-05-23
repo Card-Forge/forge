@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "name": "Boros Burn",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Boros Burn is a fast, aggressive deck that aims to reduce the opponent's life total to zero using a suite of efficient one-mana red spells and white support. The deck leverages signature cards like Boltwave and Boros Charm to apply relentless pressure while maintaining board control. Screaming Nemesis provides a flexible finisher or removal option that scales with the number of creatures in play. Success relies on maximizing early damage output and disrupting opponent development before they can stabilize.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 4,
+      "cards": [
+        "Boltwave"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Play with Fire"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Boros Charm",
+        "Screaming Nemesis"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 26,
+      "cards": [
+        "Boltwave",
+        "Boros Charm",
+        "Eidolon of the Great Revel",
+        "Magebane Lizard",
+        "Monastery Swiftspear",
+        "Screaming Nemesis",
+        "Sunspine Lynx"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 58,
+      "cards": [
+        "Battlefield Forge",
+        "Boltwave",
+        "Boros Charm",
+        "Deflecting Palm",
+        "Eidolon of the Great Revel",
+        "Erode",
+        "Exquisite Firecraft",
+        "Lightning Helix",
+        "Magebane Lizard",
+        "Play with Fire",
+        "Ramunap Ruins",
+        "Screaming Nemesis",
+        "Searing Blood",
+        "Skewer the Critics",
+        "Skullcrack",
+        "Smash to Smithereens",
+        "Sunspine Lynx"
+      ],
+      "mainboard_count": 43,
+      "sideboard_count": 15
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 6,
+      "cards": [
+        "Boros Charm",
+        "Exquisite Firecraft"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 2,
+      "cards": [
+        "Exquisite Firecraft"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Monastery Swiftspear"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Boros Charm",
+        "Screaming Nemesis"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Deflecting Palm",
+        "Skullcrack",
+        "Sunspine Lynx"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 30,
+      "cards": [
+        "Battlefield Forge",
+        "Boltwave",
+        "Boros Charm",
+        "Den of the Bugbear",
+        "Inspiring Vantage",
+        "Ramunap Ruins",
+        "Sacred Foundry",
+        "Screaming Nemesis",
+        "Sokenzan, Crucible of Defiance"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 20,
+      "cards": [
+        "Battlefield Forge",
+        "Den of the Bugbear",
+        "Inspiring Vantage",
+        "Mountain",
+        "Ramunap Ruins",
+        "Sacred Foundry",
+        "Sokenzan, Crucible of Defiance"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.74
+  },
+  "dual_role_cards": [
+    {
+      "card": "Battlefield Forge",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boltwave",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boros Charm",
+      "roles": [
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deflecting Palm",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Den of the Bugbear",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eidolon of the Great Revel",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exquisite Firecraft",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inspiring Vantage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Magebane Lizard",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monastery Swiftspear",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Play with Fire",
+      "roles": [
+        "dig_draw",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ramunap Ruins",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Screaming Nemesis",
+      "roles": [
+        "mana_fixing",
+        "payoff_cards",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Skullcrack",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sokenzan, Crucible of Defiance",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunspine Lynx",
+      "roles": [
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast direct damage spells before playing creatures to avoid giving the opponent free blockers",
+    "Hold Boros Charm in hand to respond to opponent's combat tricks or removal",
+    "Time Boltwave to hit multiple creatures while leaving enough damage to close the game",
+    "Use Screaming Nemesis's ETB effect to clear the path for your own attackers",
+    "Boltwave appears to be a typo or custom card"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cast one-mana red spells for direct damage"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Boros Charm for damage or early board control"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize speed over card advantage"
+    }
+  ],
+  "kill_priority": [
+    "Monastery Swiftspear",
+    "Boros Charm",
+    "Screaming Nemesis",
+    "Boltwave",
+    "Eidolon of the Great Revel",
+    "Magebane Lizard",
+    "Sunspine Lynx"
+  ],
+  "interaction_to_disrupt": [
+    "Boros Charm",
+    "Exquisite Firecraft",
+    "Battlefield Forge",
+    "Boltwave",
+    "Deflecting Palm",
+    "Eidolon of the Great Revel",
+    "Erode",
+    "Lightning Helix"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/boros-burn.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

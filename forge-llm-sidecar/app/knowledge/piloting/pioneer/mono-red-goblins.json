@@ -12,7 +12,10 @@
     "keep_criteria": [
       "Hands with multiple one-mana goblins",
       "Hands containing Legion Loyalist or Goblin Warchief",
-      "Hands with early land drops and aggressive creatures"
+      "Hands with early land drops and aggressive creatures",
+      "Keep hands with 1-2 lands, at least two 1-drops (e.g., Goblin Guide, Goblin Racketeer, or a cheap pump), and a finisher or pump effect.",
+      "Drop hands with three or more lands, only a single 1-drop, or exclusively high-cost cards.",
+      "Prioritize hands that can play a 1-drop on turn 1 and a land + threat/pump on turn 2."
     ],
     "mulligan_criteria": [
       "Hands lacking one-mana creatures",
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and one-mana goblins to establish board presence",
       "Use Legion Loyalist to fetch additional lands and accelerate",
-      "Apply early pressure to force opponent to use removal inefficiently"
+      "Apply early pressure to force opponent to use removal inefficiently",
+      "Turn 1: Play a 1-drop goblin (preferably one with haste or an immediate impact).",
+      "Turn 2: Play a land, then either a 2-drop goblin or a pump effect like Legion Loyalist.",
+      "Sequence lands to ensure you can cast your pump spells on the same turn as your threats.",
+      "If you have Goblin Warchief, play it early to buff your board, then follow up with Legion Loyalist or Rundvelt Hordemaster for haste + +1/+1 synergy."
     ],
     "mid_game": [
       "Deploy Goblin Warchief to boost attack power and trigger combat tricks",
       "Use Rundvelt Hordemaster to generate token goblins and widen the board",
-      "Push damage through while protecting key threats"
+      "Push damage through while protecting key threats",
+      "Mana is your most critical resource",
+      "always keep open mana for pump spells or interaction, especially when the opponent taps out.",
+      "Hand is your primary resource\u2014avoid overcommitting to the board without backup.",
+      "Graveyard is generally irrelevant unless you're running specific discard or sacrifice synergies.",
+      "Commit threats when you have pump support or when the opponent has no removal.",
+      "Hold back if they have sweepers or spot removal ready."
     ],
     "late_game": [
       "Maintain board control with a wide army of goblins",
       "Use token generation to trigger Warchief and Hordemaster repeatedly",
-      "Close out the game with overwhelming combat damage"
+      "Close out the game with overwhelming combat damage",
+      "Rundvelt Hordemaster and Legion Loyalist with pump effects, or a fully pumped board of goblins.",
+      "Win by attacking with haste threats or chump blocking to preserve key pumpers.",
+      "Use pump spells to make threats too big to block.",
+      "When you have multiple pump effects, the opponent has no removal, or you're ahead on life total and can race.",
+      "Also commit when you can play a pump and a threat on the same turn to swing for lethal or massive damage."
     ]
   },
   "key_cards": [
@@ -58,7 +76,11 @@
   "sequencing_tips": [
     "Activate Legion Loyalist before playing other creatures to maximize land drops",
     "Wait to play Goblin Warchief until you have multiple goblins ready to attack",
-    "Use Rundvelt Hordemaster's tokens to trigger Warchief's ability for maximum damage"
+    "Use Rundvelt Hordemaster's tokens to trigger Warchief's ability for maximum damage",
+    "Common mistakes: Overcommitting to board without pump support, ignoring life total, failing to sequence lands properly.",
+    "Unique interactions: Legion Loyalist and Rundvelt can be played on the same turn for massive haste pump.",
+    "Watch for 'Goblin Piledriver' or similar pump effects if format allows.",
+    "Always prioritize playing your pump effects before your threats to maximize damage."
   ],
   "matchups": [
     {
@@ -87,15 +109,34 @@
         "Wide boards",
         "Combat tricks"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that can't be countered (if any), or overcommit with multiple threats. Use pump spells to make threats too big to ignore. If possible, use instant-speed interaction to clear the way.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply maximum pressure early. Don't let them stabilize. Use removal on their ramp sources if possible. If they have a big threat, trade your goblins efficiently to survive until you can close.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value exchange. Use removal efficiently. Win by having better late-game threats or more pump effects. Track their hand for key cards like Legion Loyalist or Rundvelt, and prioritize trading your expendable goblins for their key pieces.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board sweepers",
     "Counterspells",
-    "Large blockers"
+    "Large blockers",
+    "Watch for sweepers (e.g., Wrath of God, Cyclonic Rift), spot removal (e.g., Path to Exile, Lightning Strike), and life gain.",
+    "Note when they tap out for a big spell or when they start drawing into answers.",
+    "Pay attention to their mana base for potential sweepers or removal."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:50:16+00:00",
     "model": "local-model",
@@ -111,6 +152,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

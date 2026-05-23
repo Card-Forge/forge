@@ -12,25 +12,45 @@
     "Urza's Saga"
   ],
   "mulligan": {
-    "keep_criteria": [],
-    "mulligan_criteria": [],
+    "keep_criteria": [
+      "Keep hands with Amulet of Vigor + 1-2 lands, or 2+ lands + 1+ mana dork (Elvish Mystic, Llanowar Elves, Birds of Paradise).",
+      "Keep hands with Scapeshift + 2+ lands if supported by ramp."
+    ],
+    "mulligan_criteria": [
+      "Mulligan pure land hands, hands with only Primeval Titan and no ramp/Amulet, or hands with multiple dorks but no lands."
+    ],
     "examples": []
   },
   "game_plan": {
     "early_game": [
       "Play Arboreal Grazer on turn 1 for a land and blocker",
       "Sequence Amulet of Vigor and bounce lands carefully to dodge disruption",
-      "Use Explore and Spelunking to smooth land drops and draw cards"
+      "Use Explore and Spelunking to smooth land drops and draw cards",
+      "Turn 1: Play land, cast a mana dork.",
+      "Turn 2: Play second land, cast Amulet of Vigor (or second dork).",
+      "Tap dorks, untap with Amulet, play Primeval Titan or Scapeshift.",
+      "Sequence lands to ensure you can cast combo pieces",
+      "prioritize dual lands if you have fetches."
     ],
     "mid_game": [
       "Deploy Primeval Titan to fetch lands that stabilize, protect, or attack",
       "Use Summoner's Pact when you can win immediately or afford the upkeep cost",
-      "Leverage Urza's Saga to tutor Amulet or generate Construct token pressure"
+      "Leverage Urza's Saga to tutor Amulet or generate Construct token pressure",
+      "Mana is your primary resource",
+      "always prioritize untapping lands with Amulet.",
+      "Don't overcommit to one Titan if you can Scapeshift for more.",
+      "Keep protection cards in hand until you're ready to combo.",
+      "Graveyard is generally not a primary resource, but monitor opponents' graveyard strategies.",
+      "Hold back Primeval Titan if you have Scapeshift in hand and can combo off next turn."
     ],
     "late_game": [
       "Chain Cultivator Colossus with untapped lands to draw cards and grow the creature",
       "Execute Aftermath Analyst loops with Scapeshift or Lotus Field for massive mana bursts",
-      "Utilize Shifting Woodland and Mirrorpool for infinite recursion and repeated Titan triggers"
+      "Utilize Shifting Woodland and Mirrorpool for infinite recursion and repeated Titan triggers",
+      "Scapeshift for 10+ lands (lethal), or Primeval Titan + Scapeshift for massive land search + lethal.",
+      "Sometimes just casting Primeval Titan and attacking with it if the board is open.",
+      "When you have Amulet + 2+ mana dorks + Primeval Titan/Scapeshift in hand, or when you can reliably cast Scapeshift for 10+ lands.",
+      "Also commit when you have protection (counterspell, discard, or instant-speed protection) and the opponent has no removal."
     ]
   },
   "key_cards": [
@@ -80,7 +100,13 @@
     "Sequence Amulet of Vigor and lands carefully to dodge disruption; sometimes play Amulet first, sometimes lay lands out first.",
     "Use Summoner's Pact only when you can win that turn or guarantee mana for the upkeep cost.",
     "Float mana and plan ahead for Urza's Saga's Chapter III sacrifice timing.",
-    "Chain Cultivator Colossus land drops while Amulet or Spelunking is active to maximize card draw and creature size."
+    "Chain Cultivator Colossus land drops while Amulet or Spelunking is active to maximize card draw and creature size.",
+    "Amulet of Vigor is the engine",
+    "never mulligan it if you have lands.",
+    "Scapeshift is your win condition",
+    "protect it.",
+    "Primeval Titan is both a threat and a win condition.",
+    "Watch for Stax effects (Wasteland, Field of Ruin) which can shut you down."
   ],
   "matchups": [
     {
@@ -124,6 +150,31 @@
         "engine disruption",
         "Amulet of Vigor"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard (Thoughtseize) to remove counterspells. Use cheap, uncounterable threats if possible. Use Ponder/Preordain to dig for protection. Sometimes just casting Scapeshift in response to a counter if you have a backup plan, but generally, hate out or discard is key.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use Stifle on their combo pieces. Use Red Elemental Blast or Abrupt Decay on their mana rocks. Attack early with Titan to race them. Don't let them get ahead in mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Lightning Helix/Go for the Throat to remove early threats. Use Primeval Titan to block or trade. Sometimes you can combo off turn 2 or 3 to win before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats. Use discard to remove key control cards. Combo off before they can stabilize. Use Scapeshift to go wide and pressure.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race. Use Thoughtseize to remove their Amulet or Scapeshift. Use discard to remove their protection. Attack with Titan to force trades. Sometimes you just combo off first.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -134,10 +185,13 @@
     "counters",
     "mana rocks",
     "Ruby Medallion",
-    "Ral, Storm Conduit"
+    "Ral, Storm Conduit",
+    "Watch for counterspells (Force of Will, Ponder/Preordain into countermagic), removal (Path to Exile, Swords to Plowshares), and graveyard hate.",
+    "Note when opponents play discard or hand disruption."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Draftsim",
+    "source": "Draftsim + legacy_guidance",
     "source_url": "https://draftsim.com/mtg-amulet-titan-modern-deck/",
     "generated_at": "2026-05-20T21:16:58+00:00",
     "model": "local-model",
@@ -155,7 +209,27 @@
         "overview",
         "key_cards",
         "matchups"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {
@@ -183,7 +257,7 @@
       "confidence": 0.95,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "When both triggers go on the stack, make sure Amulet’s untap resolves before the land’s “return a land” trigger... Sometimes you jam an Amulet first, other times you lay out your lands carefully to dodge disruption... You usually want to use it when you’re winning that same turn... Just be mindful of Saga’s timing: It sacrifices itself after Chapter III, so float mana and plan ahead."
+      "evidence_span": "When both triggers go on the stack, make sure Amulet\u2019s untap resolves before the land\u2019s \u201creturn a land\u201d trigger... Sometimes you jam an Amulet first, other times you lay out your lands carefully to dodge disruption... You usually want to use it when you\u2019re winning that same turn... Just be mindful of Saga\u2019s timing: It sacrifices itself after Chapter III, so float mana and plan ahead."
     }
   ],
   "common_threats_evidence": [

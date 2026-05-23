@@ -1,0 +1,384 @@
+{
+  "archetype": "Varina, Lich Queen",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/varina-lich-queen.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "An Offer You Can't Refuse"
+    },
+    {
+      "qty": 1,
+      "name": "Anointed Procession"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Ashnod's Altar"
+    },
+    {
+      "qty": 1,
+      "name": "Austere Command"
+    },
+    {
+      "qty": 1,
+      "name": "Azorius Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Black Market Connections"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Bone Miser"
+    },
+    {
+      "qty": 1,
+      "name": "Carrion Feeder"
+    },
+    {
+      "qty": 1,
+      "name": "Cemetery Reaper"
+    },
+    {
+      "qty": 1,
+      "name": "Chart a Course"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Consider"
+    },
+    {
+      "qty": 1,
+      "name": "Corpse Knight"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Cryptbreaker"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Deal"
+    },
+    {
+      "qty": 1,
+      "name": "Death Baron"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Deserted Beach"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Diregraf Captain"
+    },
+    {
+      "qty": 1,
+      "name": "Diregraf Colossus"
+    },
+    {
+      "qty": 1,
+      "name": "Disenchant"
+    },
+    {
+      "qty": 1,
+      "name": "Drowned Catacomb"
+    },
+    {
+      "qty": 1,
+      "name": "Eclipsed Steppe"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Field of the Dead"
+    },
+    {
+      "qty": 1,
+      "name": "Final Act"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Fracture"
+    },
+    {
+      "qty": 1,
+      "name": "Frantic Search"
+    },
+    {
+      "qty": 1,
+      "name": "Generous Gift"
+    },
+    {
+      "qty": 1,
+      "name": "Geralf, the Fleshwright"
+    },
+    {
+      "qty": 1,
+      "name": "Glacial Fortress"
+    },
+    {
+      "qty": 1,
+      "name": "God-Eternal Oketra"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Grave Researcher"
+    },
+    {
+      "qty": 1,
+      "name": "Gravecrawler"
+    },
+    {
+      "qty": 1,
+      "name": "Grimgrin, Corpse-Born"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Headless Rider"
+    },
+    {
+      "qty": 1,
+      "name": "Hero's Downfall"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Isolated Chapel"
+    },
+    {
+      "qty": 1,
+      "name": "Liliana's Mastery"
+    },
+    {
+      "qty": 1,
+      "name": "Liliana, Death's Majesty"
+    },
+    {
+      "qty": 1,
+      "name": "Liliana, Dreadhorde General"
+    },
+    {
+      "qty": 1,
+      "name": "Lord of the Accursed"
+    },
+    {
+      "qty": 1,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 1,
+      "name": "Mind Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Morphic Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Necroduality"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Orzhov Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Altar"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Prairie Stream"
+    },
+    {
+      "qty": 1,
+      "name": "Raffine's Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rooftop Storm"
+    },
+    {
+      "qty": 1,
+      "name": "Sea of Clouds"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowy Backstreet"
+    },
+    {
+      "qty": 1,
+      "name": "Shattered Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Shipwreck Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Smothering Tithe"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sunken Hollow"
+    },
+    {
+      "qty": 4,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Syphon Mind"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Dominance"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Hierarchy"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Progress"
+    },
+    {
+      "qty": 1,
+      "name": "Teysa Karlov"
+    },
+    {
+      "qty": 1,
+      "name": "The Scarab God"
+    },
+    {
+      "qty": 1,
+      "name": "Undead Augur"
+    },
+    {
+      "qty": 1,
+      "name": "Undead Warchief"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Varina, Lich Queen"
+    },
+    {
+      "qty": 1,
+      "name": "Vault of Champions"
+    },
+    {
+      "qty": 1,
+      "name": "Void Rend"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Wayward Servant"
+    },
+    {
+      "qty": 1,
+      "name": "Wilhelt, the Rotcleaver"
+    },
+    {
+      "qty": 1,
+      "name": "Windfall"
+    },
+    {
+      "qty": 1,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Zombie Apocalypse"
+    },
+    {
+      "qty": 1,
+      "name": "Zul Ashur, Lich Lord"
+    }
+  ],
+  "sideboard": []
+}

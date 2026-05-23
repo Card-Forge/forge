@@ -1,0 +1,124 @@
+{
+  "archetype": "Rograkh, Son of Rohgahh // Silas Renn, Seeker Adept",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "A Grixis control-combo deck that uses early discard and spot removal to stabilize, then transitions into a recursive mana engine with Springleaf Drum and Silas Renn to repeatedly pump Rograkh or zombie tokens for lethal, while leveraging graveyard synergy for sustained value.",
+  "win_conditions": [
+    "Silas Renn pumping Rograkh (or a large zombie) for lethal, or repeatedly bouncing Silas/Rograkh to generate extended value.",
+    "Zombie tokens can also close games if the opponent is low on life or board space."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, at least one discard spell (Thoughtseize/Duress), and either Springleaf Drum or a creature to cast it on.",
+      "Prioritize hands with 2+ mana sources and early interaction."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no early play, 0-1 lands, or hands lacking any way to disrupt or start your engine."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Thoughtseize or Duress to strip the opponent's key combo piece or removal.",
+      "Turn 2: Play a land, cast a creature or Springleaf Drum on a creature.",
+      "If you have a creature and mana, tap the creature for mana, cast Silas Renn, then tap Silas to pump Rograkh.",
+      "Sequence lands to ensure you can cast interaction on turn 1 or 2 without flooding your board."
+    ],
+    "mid_game": [
+      "Preserve mana for interaction until your engine is online.",
+      "Use Springleaf Drum to fuel multiple spells or pump sequences.",
+      "Don't overcommit creatures if you can stabilize with removal.",
+      "Manage your graveyard carefully",
+      "Silas Renn needs creatures there, but avoid giving opponents graveyard synergies.",
+      "Commit threats only when you can protect them or have a clear path to combo off.",
+      "Hold back if the opponent has sweepers or heavy removal.",
+      "Use discard proactively to strip combo pieces or removal before they can be cast."
+    ],
+    "late_game": [
+      "Silas Renn pumping Rograkh (or a large zombie) for lethal, or repeatedly bouncing Silas/Rograkh to generate extended value.",
+      "Zombie tokens can also close games if the opponent is low on life or board space.",
+      "Go all-in when you have a clear path to lethal, the opponent has no sweepers, or you've stripped their key answers via discard.",
+      "Commit when you can safely cast Silas Renn and pump without fear of immediate removal."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Silas Renn, Seeker Adept",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Rograkh, Son of Rohgahh",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Springleaf Drum",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overusing Springleaf Drum on non-essential creatures, leaving you without a pump target.",
+    "Remember that Silas Renn's ability returns a creature from graveyard to hand, not directly to the battlefield, so plan your mana accordingly.",
+    "Rograkh's death trigger creates tokens, which can be used as additional mana sources or pump targets.",
+    "Watch out for graveyard hate (Rest in Peace, Blood Moon) as it can disrupt Silas Renn's recursion."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to strip counterspells. Cast threats in response to their counterspells, or use Springleaf Drum to generate mana for multiple threats. If possible, use cheap threats or pump in response to counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and spot removal. Don't let them establish a large board. Use your engine to out-value their ramp, and target their mana sources if possible.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize spot removal and discard to disrupt their curve. Use Springleaf Drum to pump your own creatures or generate mana for multiple removal spells. Don't overcommit to a single threat; stabilize first.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with discard to strip their answers. Use your combo to go over the top of their removal. If they try to grind, use your zombie tokens and card advantage to outlast them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize discard to strip their combo pieces or removal. Protect your engine. Use targeted removal to kill their threats before they can combo off. Card advantage and precise sequencing will decide the match.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Damnation, Anger, etc.), targeted removal (Fatal Push, Murder), and combo win conditions.",
+    "Note when opponents tap out for a single spell\u2014they're vulnerable to discard or pump sequences.",
+    "Track graveyard contents to anticipate Silas Renn recursion or opponent graveyard synergies."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

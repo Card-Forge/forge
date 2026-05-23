@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "name": "Orzhov Midrange",
+  "format": "standard",
+  "colors": [
+    "W",
+    "B"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "Orzhov Midrange leverages efficient removal and resilient creatures to stabilize early and outvalue opponents in the mid-to-late game. By playing a balanced curve of threats and answers, the deck aims to survive aggressive starts before deploying larger, game-ending threats. The synergy between creature death triggers and conditional removal creates a flexible game plan that adapts to the opponent's strategy.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 4,
+      "cards": [
+        "Haliya, Guided by Light",
+        "Requiting Hex",
+        "Tomik, Wielder of Law"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Starfield Shepherd"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 27,
+      "cards": [
+        "Cecil, Dark Knight",
+        "Clarion Conqueror",
+        "Deep-Cavern Bat",
+        "Haliya, Guided by Light",
+        "Momo, Friendly Flier",
+        "Nurturing Pixie",
+        "Requiting Hex",
+        "Sage of the Skies",
+        "Starfield Shepherd",
+        "Tomik, Wielder of Law"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 10,
+      "cards": [
+        "Daydream",
+        "Requiting Hex",
+        "Seam Rip",
+        "Shoot the Sheriff",
+        "Split Up"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Abandoned Air Temple",
+        "Barrensteppe Siege",
+        "Practiced Offense",
+        "Split Up"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Requiting Hex"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Tinybones Joins Up"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Daydream",
+        "Practiced Offense",
+        "Rest in Peace",
+        "Tinybones Joins Up"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 11,
+      "cards": [
+        "Daydream",
+        "Nurturing Pixie",
+        "Practiced Offense",
+        "Requiting Hex"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Requiting Hex"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Duress"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 19,
+      "cards": [
+        "Abandoned Air Temple",
+        "Bleachbone Verge",
+        "Concealed Courtyard",
+        "Godless Shrine",
+        "Requiting Hex",
+        "Springleaf Drum"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Abandoned Air Temple",
+        "Bleachbone Verge",
+        "Concealed Courtyard",
+        "Godless Shrine",
+        "Plains",
+        "Swamp"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.31
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abandoned Air Temple",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bleachbone Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Concealed Courtyard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Daydream",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haliya, Guided by Light",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nurturing Pixie",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Practiced Offense",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Requiting Hex",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Split Up",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starfield Shepherd",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tinybones Joins Up",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tomik, Wielder of Law",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize playing threats before holding removal unless a specific answer is needed",
+    "Use creature death triggers to trigger additional effects before casting removal",
+    "Manage mana carefully to ensure you can cast both a threat and an answer on the same turn",
+    "Common mistakes include overcommitting to the board without answers, mismanaging Bloodletter's counters, and ignoring opponent's mana.",
+    "Unique interactions: Bloodletter can sacrifice your own creatures to grow, but be careful not to give opponent triggers."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cheap threats to establish presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early removal to disrupt opponent's game plan"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize card advantage by trading efficiently"
+    }
+  ],
+  "kill_priority": [
+    "Requiting Hex",
+    "Cecil, Dark Knight",
+    "Clarion Conqueror",
+    "Deep-Cavern Bat",
+    "Haliya, Guided by Light",
+    "Momo, Friendly Flier",
+    "Nurturing Pixie",
+    "Sage of the Skies"
+  ],
+  "interaction_to_disrupt": [
+    "Requiting Hex",
+    "Daydream",
+    "Seam Rip",
+    "Shoot the Sheriff",
+    "Split Up",
+    "Abandoned Air Temple",
+    "Barrensteppe Siege",
+    "Practiced Offense"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/orzhov-midrange.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

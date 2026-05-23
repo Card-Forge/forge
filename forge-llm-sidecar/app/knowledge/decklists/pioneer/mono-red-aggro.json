@@ -1,0 +1,97 @@
+{
+  "archetype": "Mono-Red Aggro",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/mono-red-aggro.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Burning-Tree Emissary"
+    },
+    {
+      "qty": 4,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 3,
+      "name": "Cunning Coyote"
+    },
+    {
+      "qty": 3,
+      "name": "Den of the Bugbear"
+    },
+    {
+      "qty": 4,
+      "name": "Kumano Faces Kakkazan"
+    },
+    {
+      "qty": 4,
+      "name": "Monastery Swiftspear"
+    },
+    {
+      "qty": 4,
+      "name": "Monstrous Rage"
+    },
+    {
+      "qty": 14,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Phoenix Chick"
+    },
+    {
+      "qty": 4,
+      "name": "Ramunap Ruins"
+    },
+    {
+      "qty": 4,
+      "name": "Reckless Bushwhacker"
+    },
+    {
+      "qty": 4,
+      "name": "Screaming Nemesis"
+    },
+    {
+      "qty": 2,
+      "name": "Skewer the Critics"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    },
+    {
+      "qty": 1,
+      "name": "Spikefield Hazard"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Curse of Shaken Faith"
+    },
+    {
+      "qty": 4,
+      "name": "Magebane Lizard"
+    },
+    {
+      "qty": 2,
+      "name": "Redcap Melee"
+    },
+    {
+      "qty": 1,
+      "name": "Rending Volley"
+    },
+    {
+      "qty": 2,
+      "name": "Scorching Shot"
+    },
+    {
+      "qty": 3,
+      "name": "Sunspine Lynx"
+    }
+  ]
+}

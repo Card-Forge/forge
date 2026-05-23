@@ -1,0 +1,118 @@
+{
+  "archetype": "Blech, Loafing Pest",
+  "format": "commander",
+  "strategy_type": "control",
+  "overview": "Leverage Beledros Witherbloom\u2019s spell-triggered mana acceleration and token generation to fuel Blech\u2019s attack/death value and Pest Infestation\u2019s massive trample swing, winning through overwhelming board presence and card advantage.",
+  "win_conditions": [
+    "Pest Infestation is the primary finisher.",
+    "Cast it when you have 3+ creatures to sacrifice, swing with trample tokens, and draw into game-ending threats."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including Beledros if possible), Blech, and early mana sources."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you lack B/G mana, have no Blech/Beledros, or only single lands with no early plays."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Blech if mana allows.",
+      "Turn 2: Attack with Blech or hold for value.",
+      "Turn 3: Cast Beledros Witherbloom, tap creatures for mana, and begin generating tokens on spell casts.",
+      "Sequence lands to ensure B/G mana by turn 2-3."
+    ],
+    "mid_game": [
+      "Prioritize casting spells to trigger Beledros.",
+      "Manage mana to tap two creatures for three mana of any color to cast Pest Infestation.",
+      "Don't overcommit Blech if it can be removed for value.",
+      "Commit Blech to attack when safe or when you can follow up.",
+      "Hold back if the opponent has sweepers.",
+      "Use Beledros as both a mana source and a threat."
+    ],
+    "late_game": [
+      "Pest Infestation is the primary finisher.",
+      "Cast it when you have 3+ creatures to sacrifice, swing with trample tokens, and draw into game-ending threats.",
+      "Go all-in when you have Beledros online, enough creatures to sacrifice for Pest Infestation, and the opponent has no sweepers or low life total."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Blech, Loafing Pest",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Beledros Witherbloom",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Pest Infestation",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Casting Pest Infestation without enough creatures to sacrifice, or dying to a sweeper before casting it.",
+    "Unique interaction: Beledros's mana ability can be activated in response to Blech dying to get the 2/2 token, or to cast Pest Infestation.",
+    "Don't tap Beledros's creatures if you need to cast spells to trigger it."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast Blech/Beledros on the opponent's turn or with protection. Use Pest Infestation's card draw to out-value counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use Beledros to accelerate. Prioritize early Blech to pressure. Don't let them stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Hold interaction for Blech/Beledros. Use Pest Infestation to stabilize the board and swing back. Mulligan aggressively for early threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value with card draw. Cast spells to trigger Beledros. Pressure with Blech to force interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Track their Beledros and Pest Infestation count. Prioritize targeted removal over sweepers. Win by out-drawing with Pest Infestation and protecting your own Beledros.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes (Wrath of God, Damnation), targeted removal (Path to Exile, Fatal Push), and hand disruption.",
+    "Track if they're holding up counters/removal for Blech or Beledros."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

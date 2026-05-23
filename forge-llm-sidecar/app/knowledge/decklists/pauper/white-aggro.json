@@ -1,0 +1,109 @@
+{
+  "archetype": "White Aggro",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/white-aggro.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Battle Screech"
+    },
+    {
+      "qty": 1,
+      "name": "Eagles of the North"
+    },
+    {
+      "qty": 1,
+      "name": "Greatsword of Tyr"
+    },
+    {
+      "qty": 2,
+      "name": "Guardians' Pledge"
+    },
+    {
+      "qty": 2,
+      "name": "Idyllic Grange"
+    },
+    {
+      "qty": 1,
+      "name": "Journey to Nowhere"
+    },
+    {
+      "qty": 4,
+      "name": "Kor Skyfisher"
+    },
+    {
+      "qty": 3,
+      "name": "Leonardo, Big Brother"
+    },
+    {
+      "qty": 3,
+      "name": "Lunarch Veteran"
+    },
+    {
+      "qty": 4,
+      "name": "Novice Inspector"
+    },
+    {
+      "qty": 16,
+      "name": "Plains"
+    },
+    {
+      "qty": 3,
+      "name": "Prismatic Strands"
+    },
+    {
+      "qty": 4,
+      "name": "Raffine's Informant"
+    },
+    {
+      "qty": 1,
+      "name": "Ramosian Rally"
+    },
+    {
+      "qty": 1,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 2,
+      "name": "Spider-Man, Web-Slinger"
+    },
+    {
+      "qty": 4,
+      "name": "Thraben Charm"
+    },
+    {
+      "qty": 4,
+      "name": "Thraben Inspector"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Crimson Acolyte"
+    },
+    {
+      "qty": 2,
+      "name": "Destroy Evil"
+    },
+    {
+      "qty": 4,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 2,
+      "name": "Holy Light"
+    },
+    {
+      "qty": 3,
+      "name": "Martyr of Sands"
+    },
+    {
+      "qty": 1,
+      "name": "Obsidian Acolyte"
+    },
+    {
+      "qty": 2,
+      "name": "Palace Sentinels"
+    }
+  ]
+}

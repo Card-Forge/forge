@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with two to three lands and early interaction",
       "Supreme Verdict on turn three or four",
-      "Solitude or Kaheera, the Orphanguard with sufficient mana sources"
+      "Solitude or Kaheera, the Orphanguard with sufficient mana sources",
+      "Keep hands with 2-3 lands (prioritizing untapped or dual lands), a turn-1 or turn-2 removal spell, and a board wipe or Kaheera."
     ],
     "mulligan_criteria": [
       "Zero or one land",
       "Five or more cards with no interaction",
-      "Hands lacking Supreme Verdict or value engines against aggressive decks"
+      "Hands lacking Supreme Verdict or value engines against aggressive decks",
+      "Mulligan on 3+ lands with no spells, hands with only removal and no land/early interaction, or hands lacking a way to stabilize against early aggression."
     ],
     "examples": []
   },
@@ -25,17 +27,32 @@
     "early_game": [
       "Prioritize land drops and hold up mana for Supreme Verdict",
       "Disrupt opponent's early board state before committing resources",
-      "Use Kaheera, the Orphanguard to dig for answers if the graveyard is populated"
+      "Use Kaheera, the Orphanguard to dig for answers if the graveyard is populated",
+      "Turn 1: Play a land, cast a cheap interaction or pass.",
+      "Turn 2: Play a land, cast a removal spell or counter, or develop mana for a turn-3 play.",
+      "Prioritize untapped lands for flexibility.",
+      "If drawing Kaheera, hold for turn 3-4 to ensure it's protected or paired with bounce/removal."
     ],
     "mid_game": [
       "Deploy Solitude to establish a durable blocker and value source",
       "Time Supreme Verdict to clear multiple threats simultaneously",
-      "Cycle through the graveyard using Kaheera and Solitude to find late-game answers"
+      "Cycle through the graveyard using Kaheera and Solitude to find late-game answers",
+      "Preserve mana for interaction until turn 4.",
+      "Avoid overcommitting to the board before you have a clear path to victory.",
+      "Use the graveyard strategically for bounce effects or as a resource for removal, and track opponent hand size to anticipate combo or control plays.",
+      "Hold back on committing Kaheera until you have a bounce spell or removal ready.",
+      "Use Solitude on the opponent's most threatening creature, keeping yours if possible.",
+      "Supreme Verdict is a hard reset"
     ],
     "late_game": [
       "Leverage Solitude and Kaheera, the Orphanguard to generate massive card advantage",
       "Maintain board presence while digging for win conditions or additional control",
-      "Outpace opponent's resources through continuous value generation"
+      "Outpace opponent's resources through continuous value generation",
+      "Kaheera, the Orphanguard is the primary win condition.",
+      "Follow up with bounce or removal to protect it, or use it to block flying threats while chipping in damage.",
+      "Secondary finishers include resilient creatures or direct damage if available.",
+      "Go all-in when you have a resolved Kaheera, sufficient removal to handle their answer, and enough mana to protect it or follow up.",
+      "Also commit when they've exhausted their interaction on earlier threats or when you can safely resolve a second threat."
     ]
   },
   "key_cards": [
@@ -60,7 +77,13 @@
     "Activate Kaheera, the Orphanguard and Solitude to find answers before attacking",
     "Prioritize clearing threats that cannot be answered by value engines",
     "Manage graveyard state to maximize Kaheera and Solitude activations",
-    "Prioritize casting Solitude on Nadu while it is on the stack rather than waiting for it to resolve, to prevent the opponent from drawing a card."
+    "Prioritize casting Solitude on Nadu while it is on the stack rather than waiting for it to resolve, to prevent the opponent from drawing a card.",
+    "Kaheera is vulnerable to non-flying removal and board wipes",
+    "always have a bounce or protection spell ready.",
+    "Solitude's conditional nature means you must evaluate whether keeping your creature is worth more than removing theirs.",
+    "Avoid overcommitting to the board before turn 5 unless you have a clear path to victory.",
+    "Common mistake: playing Kaheera too early without protection, leading to easy removal.",
+    "Always track whether opponents are playing around Solitude by keeping creatures in hand."
   ],
   "matchups": [
     {
@@ -103,16 +126,34 @@
       "opponent_archetype": "Living End",
       "advice": "Use Dress Down to temporarily remove Nadu's abilities for a turn. (from gameplay) Be aware that Sun Cleanser removes all energy counters and prevents gaining new ones, completely shutting down your energy-based sweepers. (from gameplay) Watch out for Vexing Devil, which stops counter magic and instant-speed interaction. (from gameplay)",
       "watch_for": []
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Sequence spells to force counterspells, then follow up with uncounterable threats or bounce/removal that bypasses the stack. Use Solitude on a creature they can't protect, or play around their main counter with a second threat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early interaction to disrupt their mana development. Use Solitude to remove key ramp creatures or mana dorks. Hold a board wipe for when they commit multiple threats, and avoid overcommitting to the board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the attrition war through better sequencing and sideboard positioning. Use Solitude to remove their threat while keeping yours, save counters for their key spells, and prioritize card advantage through efficient removal and bounce effects.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Aggressive creature swarms",
     "Combo win conditions",
     "Efficient midrange threats",
-    "Graveyard hate cards"
+    "Graveyard hate cards",
+    "Watch for mana development (ramp decks), hand size (combo decks), and whether they're holding up interaction for your threats.",
+    "Note if they're playing around Solitude by keeping a creature in hand, and track whether they've blown counters on earlier spells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T02:01:36+00:00",
     "model": "local-model",
@@ -147,6 +188,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": "Azorius Control"
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

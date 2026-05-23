@@ -13,12 +13,14 @@
     "keep_criteria": [
       "Hands with one-drops or early interaction to protect spell triggers",
       "Multiple spell-casting outlets to activate Sunderflock and Eddymurk Crab",
-      "A mix of land and cheap instants/sorceries for turn-one or turn-two plays"
+      "A mix of land and cheap instants/sorceries for turn-one or turn-two plays",
+      "Keep hands with 2-3 lands (or 1 land if on the play) and at least one 1-2 mana spell or key engine card like Eddymurk Crab or Three Steps Ahead."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction or spell density",
       "Hands with too many lands or high-cost creatures without early plays",
-      "Hands that cannot cast spells on curve to trigger key abilities"
+      "Hands that cannot cast spells on curve to trigger key abilities",
+      "Mulligan hands with 3+ lands and no early spells, multiple high-cost spells, or no way to interact with the board."
     ],
     "examples": []
   },
@@ -26,17 +28,31 @@
     "early_game": [
       "Play lands and cheap spells to establish board presence",
       "Prioritize casting instants to trigger spell abilities immediately",
-      "Use early interaction to protect key creatures from removal"
+      "Use early interaction to protect key creatures from removal",
+      "Turn 1: Play a land, cast a 1-mana cantrip or cheap spell to start the spell count.",
+      "Turn 2: Play a land, cast a 2-mana spell or deploy Eddymurk Crab.",
+      "Prioritize casting spells over attacking to build engine value.",
+      "If you have Three Steps Ahead, cast it early to dig for more spells or protect your board state."
     ],
     "mid_game": [
       "Maintain spell density to maximize token generation and card draw",
       "Trade efficiently while preserving your trigger engines",
-      "Apply pressure with creatures while holding up answers for opponent's threats"
+      "Apply pressure with creatures while holding up answers for opponent's threats",
+      "Preserve mana for interaction and spell casting",
+      "avoid overcommitting to the board without protection.",
+      "Use cantrips to maintain hand size and ensure you always have spells to cast.",
+      "If the format utilizes the graveyard, protect it or leverage it for value.",
+      "Commit threats when you have interaction to protect them or when the board is clear.",
+      "Hold back if the opponent has sweepers or heavy removal."
     ],
     "late_game": [
       "Leverage accumulated card advantage to outvalue opponents",
       "Flood the board with tokens to overwhelm defenses",
-      "Use counterspells to shut down game-winning attempts while closing with your army"
+      "Use counterspells to shut down game-winning attempts while closing with your army",
+      "Sunderflock as a late-game threat or combo piece, or a high-spell-count win condition.",
+      "Use Three Steps Ahead to dig for the finisher or protection when needed.",
+      "Go all-in when you have enough spell count to make threats unblockable or unkillable, or when the opponent has exhausted their interaction.",
+      "Commit when you can safely attack or cast your win condition without fear of a sweepers."
     ]
   },
   "key_cards": [
@@ -60,7 +76,11 @@
     "Cast instants before playing creatures to maximize trigger counts",
     "Hold up interaction for opponent's key threats before committing to trigger engines",
     "Prioritize drawing cards with Three Steps Ahead when your hand is low to maintain spell density",
-    "Use token generation to block multiple attackers while preserving your main creatures"
+    "Use token generation to block multiple attackers while preserving your main creatures",
+    "Common mistake: Overcommitting to attacking instead of casting spells, which stalls your engine.",
+    "Unique interaction: Three Steps Ahead can be used to find protection or finishers, while Eddymurk Crab provides early value or spell acceleration.",
+    "Sunderflock is your late-game win condition.",
+    "Play around sweepers and counters, and always prioritize maintaining spell density in your deck."
   ],
   "matchups": [
     {
@@ -89,16 +109,35 @@
         "Removal spells",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast spells in response to counters, use cheap spells to overwhelm counters, or employ protection. Split your threats across multiple turns to reduce the impact of single-target counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use early interaction, discard, or counters to stop their big spells. Leverage cantrips to stay ahead in cards and pressure before they can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the spell war by prioritizing card advantage, protecting your engine, and disrupting their spell count. Sideboard targeted removal and counters to break their momentum.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes that clear your trigger engines",
     "Counterspells that stop your key instants",
     "Direct damage spells that bypass your blockers",
-    "High-toughness creatures that are hard to remove"
+    "High-toughness creatures that are hard to remove",
+    "Watch for sweepers, counterspells, and targeted removal.",
+    "Note when opponents hold up mana for interaction.",
+    "Track their graveyard if relevant, and monitor for combo pieces or win conditions that could end the game unexpectedly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:27:30+00:00",
     "model": "local-model",
@@ -114,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

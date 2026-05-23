@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "name": "Izzet Splinter Twin",
+  "format": "modern",
+  "colors": [
+    "U",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Izzet Splinter Twin is a Modern combo deck that leverages Splinter Twin to copy creatures and generate infinite value or massive damage. The provided signature cards accelerate this game plan by tutoring for combo pieces, pumping attackers, and drawing cards to stabilize against interaction. Success hinges on protecting the combo sequence until it resolves.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 3,
+      "cards": [
+        "Fear of Missing Out",
+        "Flow State",
+        "Splinter Twin"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Fear of Missing Out",
+        "Flow State",
+        "Splinter Twin"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 1,
+      "cards": [
+        "Tamiyo, Inquisitive Student"
+      ]
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Fear of Missing Out",
+        "Flow State",
+        "Splinter Twin",
+        "Tamiyo, Inquisitive Student"
+      ]
+    },
+    "threats": {
+      "target_count": 4,
+      "cards": [
+        "Fear of Missing Out",
+        "Flow State",
+        "Splinter Twin",
+        "Tamiyo, Inquisitive Student"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Fear of Missing Out",
+        "Flow State"
+      ]
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Fear of Missing Out",
+        "Flow State"
+      ]
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Splinter Twin"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Fear of Missing Out",
+        "Flow State",
+        "Splinter Twin",
+        "Tamiyo, Inquisitive Student"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Fear of Missing Out",
+        "Flow State"
+      ]
+    },
+    "mana_fixing": {
+      "target_count": 1,
+      "cards": [
+        "Tamiyo, Inquisitive Student"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.5
+  },
+  "dual_role_cards": [
+    {
+      "card": "Tamiyo, Inquisitive Student",
+      "roles": [
+        "combo_pieces",
+        "mana_fixing",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "hate_pieces",
+        "protection",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fear of Missing Out",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "hate_pieces",
+        "protection",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Splinter Twin",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold pump spells until the opponent's turn to avoid counterspells",
+    "Cast Tamiyo before Twin to ensure you have the copy target or necessary lands",
+    "Sequence Twin after pump spells are on the stack or resolved to maximize combat damage",
+    "Prioritize drawing cards with pump spells to find answers to interaction",
+    "Common mistake: Overcommitting to the combo without protection."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Tamiyo to find Splinter Twin or a key creature"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast pump spells on opponent's turn to protect them"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish board presence and draw cards to find combo pieces"
+    }
+  ],
+  "kill_priority": [
+    "Splinter Twin",
+    "Fear of Missing Out",
+    "Flow State",
+    "Splinter Twin",
+    "Fear of Missing Out",
+    "Flow State",
+    "Splinter Twin"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

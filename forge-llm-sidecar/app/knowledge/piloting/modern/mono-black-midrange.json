@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least one one-mana disruption spell",
       "Hands containing a creature threat and a removal option",
-      "Two-mana curve hands that establish early board presence"
+      "Two-mana curve hands that establish early board presence",
+      "Keep hands with 2-3 lands, a Thoughtseize or Thought-Knot Seer, and at least one early threat or removal spell.",
+      "Prioritize hands that can execute a turn 1 Thoughtseize or turn 2 Thought-Knot Seer to disrupt the opponent's plan immediately."
     ],
     "mulligan_criteria": [
       "Hands lacking disruption or early interaction",
       "Mana-heavy hands with no one or two-drop",
-      "Hands that rely solely on late-game threats without setup"
+      "Hands that rely solely on late-game threats without setup",
+      "Mulligan hands with 0-1 lands, 3+ lands with no plays, or multiple Thoughtseizes without threats/removal."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play Thoughtseize on turn one to disrupt opponent's combo or aggressive strategy",
       "Deploy Thought-Knot Seer to gain card advantage and apply early pressure",
-      "Hold disruption for high-value targets while establishing a minimal board presence"
+      "Hold disruption for high-value targets while establishing a minimal board presence",
+      "Turn 1: Play a land, cast Thoughtseize on the opponent's most disruptive or combo piece.",
+      "If they lack key threats, take a land or low-impact card to preserve your hand.",
+      "Turn 2: Play a land, cast Thought-Knot Seer or a midgame threat.",
+      "Against combo, prioritize Thought-Knot Seer to dig for and discard their win condition.",
+      "Sequence lands carefully to ensure you can cast disruption on turn 1 and threats/removal on turn 2 without flooding."
     ],
     "mid_game": [
       "Trade efficiently using removal to clear opposing threats",
       "Use Kozilek's Command to stabilize or take the lead when the board is favorable",
-      "Maintain card parity by leveraging Seer's death trigger and cheap spells"
+      "Maintain card parity by leveraging Seer's death trigger and cheap spells",
+      "Preserve hand disruption for critical turns",
+      "avoid Thoughtseizing into empty hands.",
+      "Use spot removal efficiently against unblockable or high-impact threats.",
+      "Manage your graveyard by avoiding unnecessary self-mill unless synergistic, and consider Rest in Peace if combo is prevalent to deny recursion.",
+      "Commit threats when you have removal or discard to answer their interaction.",
+      "Hold back if you're out of answers and they have sweepers or counters."
     ],
     "late_game": [
       "Deploy Kozilek's Command as a primary win condition or board reset",
       "Outvalue opponents by consistently generating card advantage",
-      "Close out games with resilient threats that are difficult to remove efficiently"
+      "Close out games with resilient threats that are difficult to remove efficiently",
+      "High-impact threats like Tarmogoyf, Liliana, Dreadhorde General, or Sheoldred, supported by graveyard recursion (Bloodghast) or card advantage.",
+      "Win by applying pressure while holding up interaction, or by out-valuing through discard and efficient removal.",
+      "Go all-in when you have card advantage in hand, they have no sweepers/counters, or you can safely attack with a threat that demands multiple answers.",
+      "Also commit when you've disrupted their combo or control plan and they lack the interaction to stabilize."
     ]
   },
   "key_cards": [
@@ -59,7 +77,12 @@
     "Always play Thoughtseize before committing creatures to the board",
     "Hold Kozilek's Command until you have a clear board advantage or need a reset",
     "Trigger Thought-Knot Seer's death ability as early as possible to maximize card draw",
-    "Prioritize removing high-impact threats over low-value blockers"
+    "Prioritize removing high-impact threats over low-value blockers",
+    "Common mistake: Overthinking Thoughtseize targets.",
+    "Take the most disruptive card, not necessarily the biggest threat.",
+    "Another mistake: Committing too many threats early without answers, leaving you vulnerable to sweepers.",
+    "Unique interaction: Kozilek's Command can be used to destroy your own land for mana fixing or to bounce a permanent to bypass hexproof/shroud.",
+    "Always track opponent's graveyard if playing against recursion or combo decks, and consider sideboarding in graveyard hate early if the metagame shifts toward combo-heavy strategies."
   ],
   "matchups": [
     {
@@ -88,15 +111,33 @@
         "Ramp spells",
         "Protection spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Kozilek's Command to destroy a land or bounce a permanent, bypassing counters. Cast threats in response to their counterspells if you have protection, or use discard to remove their counterspells before they can cast them. Force them to spend resources on land destruction rather than counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Thought-Knot Seer to dig for and discard their ramp spells or win conditions. Use spot removal on their mana sources or early threats. Kozilek's Command to destroy a land or remove a key permanent. Out-value them by trading efficiently and punishing their greedy mana development.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize Thought-Knot Seer to dig for removal or threats. Use Kozilek's Command to destroy their lands or remove a key threat. Track their hand to know when to commit, and prioritize taking their disruption over their threats to maintain hand advantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
-    "High-impact combo pieces"
+    "High-impact combo pieces",
+    "Watch for combo win conditions (e.g., Storm count, Amulet activation, Blink targets) and track their removal and discard to know when you can safely commit a threat.",
+    "Note if they're playing lands that suggest a specific strategy (e.g., multiple Islands for Blink, Mountains for Energy) to adjust your disruption priorities."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:21:17+00:00",
     "model": "local-model",
@@ -112,7 +153,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

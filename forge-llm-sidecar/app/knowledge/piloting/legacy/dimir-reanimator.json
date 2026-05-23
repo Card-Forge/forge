@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Reanimate and a cheap cantrip or tutor",
       "Hands containing Thoughtseize and a win condition",
-      "Two-mana or three-mana opening hands with clear paths to turn one or two"
+      "Two-mana or three-mana opening hands with clear paths to turn one or two",
+      "Keep hands with 2+ lands (prioritizing fetch/shock or duals), at least one Thoughtseize, and at least one reanimation spell or mana acceleration.",
+      "Keep hands with 3+ lands if they include Thoughtseize and a reanimation spell."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or card advantage",
       "Hands with only high-cost cards and no Reanimate",
-      "Hands with multiple lands and no early plays"
+      "Hands with multiple lands and no early plays",
+      "Mulligan on 3+ lands with no spells, hands with only reanimation spells and no mana/discard, or hands with zero interaction against aggro/tempo."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play Thoughtseize to remove key opponent cards",
       "Cast Reanimate to bring back a win condition",
-      "Use cheap cantrips to dig for missing pieces"
+      "Use cheap cantrips to dig for missing pieces",
+      "Turn 1: Play a land, cast Thoughtseize if possible to hit key early threats or mana rocks.",
+      "Turn 2: Develop mana, potentially cast a second Thoughtseize or a cheap threat.",
+      "Land sequencing: Prioritize fetch/shock lands to enter untapped, then basics to enable shock lands.",
+      "Ensure you can cast Thoughtseize on turn 1 or 2 to disrupt Tron, Sneak and Show, or Izzet Delver before they stabilize."
     ],
     "mid_game": [
       "Stabilize with board presence from reanimated threats",
       "Answer opponent's threats with discard or removal",
-      "Set up infinite loops or value engines with Atraxa"
+      "Set up infinite loops or value engines with Atraxa",
+      "Preserve graveyard resources",
+      "avoid overcommitting to one threat if multiple reanimation targets are available.",
+      "Keep mana open for protection (Counterspell, Flashback, or instant-speed discard).",
+      "Trade discard for card advantage when ahead, and use Atraxa, Grand Unifier's ETB to generate mana/graveyard value when needed.",
+      "Commit threats when you have protection or when the board is clear.",
+      "Hold back if the opponent has sweepers (Wrath of God, Toxic Deluge) or graveyard hate in play."
     ],
     "late_game": [
       "Close out the game with overwhelming board state",
       "Use Atraxa's abilities to generate infinite mana or cards",
-      "Maintain card advantage through continuous disruption"
+      "Maintain card advantage through continuous disruption",
+      "Atraxa, Grand Unifier (enters with multiple value triggers, including reanimating a permanent from graveyard and generating mana/graveyard value), or high-impact reanimated threats (e.g., Uro, Titan of Nature's Wrath, Teferi, Hero of Dominaria, or format-specific win conditions).",
+      "Win by swinging with multiple threats or using Atraxa's ETB to put a game-winning permanent onto the battlefield.",
+      "Go all-in when you have lethal damage in the graveyard, when the opponent has no removal/hate, or when you can protect your reanimation spell.",
+      "Commit when you can trade up or when the opponent is at low life total."
     ]
   },
   "key_cards": [
@@ -58,7 +75,11 @@
   "sequencing_tips": [
     "Cast Thoughtseize before playing lands to hide your hand size",
     "Prioritize Reanimate on turn one if you have a clear win condition",
-    "Hold up mana for counterspells only if opponent shows aggressive early plays"
+    "Hold up mana for counterspells only if opponent shows aggressive early plays",
+    "Common mistake: Overcommitting to reanimation without protection, leaving you vulnerable to sweepers.",
+    "Unique interaction: Atraxa, Grand Unifier's ETB can search for a basic land, put it tapped, then put it into the graveyard, potentially fueling your reanimation engine or triggering landfall effects.",
+    "Always check the graveyard for value before casting reanimation.",
+    "Watch for Leyline of the Void in the sideboard of control decks."
   ],
   "matchups": [
     {
@@ -87,16 +108,35 @@
         "Mana acceleration",
         "Win condition setup"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, split your reanimation targets, or cast reanimation spells in response to their counterspells. Use flashback or alternative costs if available. Force them to use multiple counterspells by threatening multiple angles.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Thoughtseize to hit their mana rocks. Stabilize with a single reanimated threat, then close out the game before they can cast their win conditions. Don't let them get to 5+ mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Protect your graveyard with hate. Use reanimation to trade up. Prioritize keeping hands with multiple threats and protection. Force them to use counterspells on non-lethal threats.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early aggressive creatures",
     "Counterspells that stop Reanimate",
     "Board wipes that clear your board",
-    "Discard that targets your hand"
+    "Discard that targets your hand",
+    "Watch for graveyard hate (Rest in Peace, Leyline of the Void), sweepers, and counterspells.",
+    "Note when opponents tap out for big threats or hold up mana for protection.",
+    "Track how many cards they have in hand vs graveyard to predict reanimation targets."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:34:43+00:00",
     "model": "local-model",
@@ -112,6 +152,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

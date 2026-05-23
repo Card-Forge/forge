@@ -1,0 +1,129 @@
+{
+  "archetype": "Rakdos Scam",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/rakdos-scam.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 3,
+      "name": "Badlands"
+    },
+    {
+      "qty": 4,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 4,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 2,
+      "name": "Broadside Bombardiers"
+    },
+    {
+      "qty": 3,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 3,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 2,
+      "name": "Fury"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 1,
+      "name": "Metamorphosis Fanatic"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 3,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 4,
+      "name": "Pyrogoyf"
+    },
+    {
+      "qty": 2,
+      "name": "Raucous Theater"
+    },
+    {
+      "qty": 3,
+      "name": "Reanimate"
+    },
+    {
+      "qty": 3,
+      "name": "Sudden Edict"
+    },
+    {
+      "qty": 3,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "The One Ring"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Blood Moon"
+    },
+    {
+      "qty": 2,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Engineered Explosives"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 2,
+      "name": "Feed the Swarm"
+    },
+    {
+      "qty": 2,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 2,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 2,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 1,
+      "name": "Untimely Malfunction"
+    }
+  ]
+}

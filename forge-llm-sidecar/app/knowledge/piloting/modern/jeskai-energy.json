@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two lands and an early energy generator or Nulldrifter",
       "Hands containing Doorkeeper Thrull paired with removal or energy acceleration",
-      "Hands that can play a creature on turn one or two"
+      "Hands that can play a creature on turn one or two",
+      "Keep hands with 2-3 lands (prioritizing energy-producing lands or fetch/shocks if format-legal), at least one energy generator (Energy Converter, Harvester, or Refractor), and a turn-2 play.",
+      "Keep hands with 3+ energy generators even with 2 lands."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or early plays",
       "Hands with only late-game energy spenders and no generators",
-      "Hands with multiple high-cost cards and no ramp"
+      "Hands with multiple high-cost cards and no ramp",
+      "Mulligan hands with 0-1 lands, zero energy generators, or only expensive spells without acceleration."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Prioritize playing Nulldrifter to establish an early board presence and protect energy generators",
       "Begin generating energy immediately to fuel Phlage, Titan of Fire's Fury's growth",
-      "Use cheap interaction to disrupt opponent's early game"
+      "Use cheap interaction to disrupt opponent's early game",
+      "Turn 1: Play a land, then an energy generator if available.",
+      "Turn 2: Ramp into a second generator or cast Doorkeeper Thrull.",
+      "Sequence lands to ensure you can cast your turn-2 generator.",
+      "Use energy counters to cast instants or protect threats.",
+      "Prioritize playing lands that tap for energy or mana, and avoid overcommitting to cheap spells if you lack board presence."
     ],
     "mid_game": [
       "Bring in Phlage, Titan of Fire's Fury and pump it using accumulated energy",
       "Activate Doorkeeper Thrull to exile opponent's graveyard threats or prevent lethal damage",
-      "Maintain board pressure while cycling through energy resources"
+      "Maintain board pressure while cycling through energy resources",
+      "Hoard energy counters for Phlage or Nulldrifter.",
+      "Don't overspend on cheap instants if you're behind on board.",
+      "Manage your graveyard carefully, as Nulldrifter triggers for all players.",
+      "Keep hand size high by using energy to cast draw spells or sacrifice Phlage at optimal times.",
+      "Commit threats only when you have interaction or energy to protect them.",
+      "Nulldrifter is a board wipe that also stops graveyard recursion"
     ],
     "late_game": [
       "Convert excess energy into massive combat damage or direct damage",
       "Use Doorkeeper Thrull's recursion to refill hand and maintain card advantage",
-      "Close out games with unblockable or oversized creatures"
+      "Close out games with unblockable or oversized creatures",
+      "Phlage, Titan of Fire's Fury is the primary finisher.",
+      "Cast it, draw two cards, then sacrifice it for X cards to find more threats or win conditions.",
+      "Alternatively, use accumulated energy to cast multiple high-impact spells in a single turn.",
+      "Go all-in when you have 5+ energy, a clear path to combat, or when the opponent has no interaction left.",
+      "Commit Phlage when you can follow up with card draw or have protection ready."
     ]
   },
   "key_cards": [
@@ -59,7 +78,13 @@
     "Generate energy before declaring attackers to maximize Phlage, Titan of Fire's Fury's size",
     "Hold up energy for Doorkeeper Thrull's damage prevention before committing to all-in attacks",
     "Prioritize playing energy generators before spenders to avoid stalling",
-    "Use Nulldrifter to block or pressure while setting up energy for turn three"
+    "Use Nulldrifter to block or pressure while setting up energy for turn three",
+    "Energy counters are a unique resource",
+    "track them carefully and don't waste them on low-impact spells.",
+    "Phlage's sacrifice ability is a double-edged sword",
+    "only sacrifice it when you can find immediate value or win the game.",
+    "Nulldrifter's enter-the-battlefield ability triggers for all players, so be mindful of your own graveyard.",
+    "Common mistake: Overcommitting to energy generation without threats to spend it on, or sacrificing Phlage too early without follow-up."
   ],
   "matchups": [
     {
@@ -97,16 +122,34 @@
         "Card advantage engines",
         "Late game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use energy to cast instants in response to counterspells. Play threats in multiples or use protection spells. Bait counterspells with cheap energy spells before committing Phlage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Nulldrifter shuts down their graveyard recursion. Use early interaction to disrupt their mana development. Phlage's card draw helps you out-value their ramp.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize energy generation and card draw. Nulldrifter is key to breaking their engine. Use Phlage to out-value them in card draw. Sideboard in additional interaction and graveyard hate.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes that clear energy investments",
     "Counterspells that stall energy generation",
     "Fast aggro creatures that pressure before energy ramps",
-    "Graveyard hate that disrupts Doorkeeper Thrull"
+    "Graveyard hate that disrupts Doorkeeper Thrull",
+    "Watch for opponent's graveyard size (Nulldrifter trigger), their mana base (can they answer Phlage?), and their interaction count.",
+    "Key tells: Opponent holding up mana for counterspells/removal means you should commit threats gradually or use energy to cast instants in response."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:42:48+00:00",
     "model": "local-model",
@@ -122,7 +165,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

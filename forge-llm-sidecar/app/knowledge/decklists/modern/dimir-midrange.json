@@ -1,0 +1,149 @@
+{
+  "archetype": "Dimir Midrange",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/dimir-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Agna Qel'a"
+    },
+    {
+      "qty": 1,
+      "name": "Cling to Dust"
+    },
+    {
+      "qty": 1,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 3,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Darkslick Shores"
+    },
+    {
+      "qty": 2,
+      "name": "Drown in the Loch"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 3,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Despair"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Kaito, Bane of Nightmares"
+    },
+    {
+      "qty": 2,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 3,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Psychic Frog"
+    },
+    {
+      "qty": 3,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 2,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 2,
+      "name": "Subtlety"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 2,
+      "name": "Tasigur, the Golden Fang"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 2,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 2,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Engineered Explosives"
+    },
+    {
+      "qty": 3,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 2,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 2,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 1,
+      "name": "Sheoldred's Edict"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 1,
+      "name": "Toxic Deluge"
+    }
+  ]
+}

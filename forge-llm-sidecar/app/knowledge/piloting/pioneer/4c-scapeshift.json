@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with Scapeshift and multiple lands",
       "Hands containing Formidable Speaker or Lumra with early land drops",
-      "Hands with at least three mana sources and a ramp spell"
+      "Hands with at least three mana sources and a ramp spell",
+      "Keep hands with 2-3 lands (including fetchable sources or basics), Scapeshift, and at least one land-fetching spell.",
+      "Keep hands with 3+ lands if they include Scapeshift and a fetcher.",
+      "Prioritize hands that can reliably hit 7 untapped lands by turn 3-4."
     ],
     "mulligan_criteria": [
       "Hands lacking Scapeshift or land acceleration",
       "Hands with four or more lands but no combo enablers",
-      "Hands missing early mana sources to cast Formidable Speaker"
+      "Hands missing early mana sources to cast Formidable Speaker",
+      "Mulligan hands with 0-1 lands, multiple non-fetching lands, or hands lacking Scapeshift and fetchers unless they feature a strong early Formidable Speaker play."
     ],
     "examples": []
   },
@@ -25,17 +29,32 @@
     "early_game": [
       "Play lands and cast Lumra to search for basics and establish board presence",
       "Prioritize drawing into Scapeshift while maintaining land count",
-      "Avoid overcommitting to non-land cards unless necessary"
+      "Avoid overcommitting to non-land cards unless necessary",
+      "Turn 1: Play a land, optionally cast Formidable Speaker if paired with a land to stabilize or draw.",
+      "Turn 2: Ramp with green spells, fetch untapped basics, or play Formidable Speaker to apply pressure.",
+      "Turn 3: Continue ramping, fetch more basics, and set up for Scapeshift.",
+      "Land sequencing is critical: prioritize fetching untapped Plains, Forest, Swamp, and Island to ensure you can cast Scapeshift and the 7/7 on the same turn.",
+      "Avoid playing non-fetching lands that don't tap for the needed colors."
     ],
     "mid_game": [
       "Activate Formidable Speaker to untap extra lands each upkeep",
       "Cast Scapeshift to exile hand cards and flood the battlefield with lands",
-      "Begin deploying large threats or combo pieces enabled by the mana surge"
+      "Begin deploying large threats or combo pieces enabled by the mana surge",
+      "Hoard mana until you have 7 untapped lands.",
+      "Use fetch lands to fix mana and search for basics.",
+      "Keep Scapeshift in hand until you have the full 7 lands and a target.",
+      "Manage your graveyard carefully against hate, but don't over-worry unless facing specific graveyard strategies.",
+      "Formidable Speaker should be played early to stabilize or as a fallback threat if Scapeshift is disrupted.",
+      "Commit threats only when you can protect them or when you're ahead in the game state."
     ],
     "late_game": [
       "Maintain landfall triggers and continuous mana generation",
       "Use excess mana to cast game-ending spells or stabilize against opponent's threats",
-      "Cycle through hand to keep Scapeshift viable if needed"
+      "Cycle through hand to keep Scapeshift viable if needed",
+      "Scapeshift into 7 lands, sacrifice them for 7 damage, then untap and cast Lumra, Bellow of the Woods (or another 7+ power threat).",
+      "If Scapeshift is countered, use Formidable Speaker + land drops to build a massive board or go wide.",
+      "Go all-in when you have 7 untapped lands, a clear path to cast Scapeshift, and no immediate threats that can stop you.",
+      "Also commit if you're behind and need the 7 damage to close the game or stabilize."
     ]
   },
   "key_cards": [
@@ -59,7 +78,13 @@
     "Always ensure you have enough lands in hand to pay for Scapeshift before exiling them",
     "Prioritize untapping lands with Formidable Speaker before casting Scapeshift to maximize land count",
     "Hold back at least one land in hand to pay for Scapeshift's mana cost",
-    "Sequence land drops to maintain a steady curve before triggering the combo"
+    "Sequence land drops to maintain a steady curve before triggering the combo",
+    "Common mistake: Playing too many non-fetching lands, making it hard to hit 7 basics.",
+    "Always prioritize fetching untapped basics.",
+    "Another mistake: Casting Scapeshift too early without a target or protection.",
+    "Remember that Formidable Speaker can be a great fallback but doesn't replace the combo.",
+    "Watch out for Niv to Light sweepers and discard.",
+    "Practice land sequencing to ensure you can cast Scapeshift and the 7/7 on the same turn."
   ],
   "matchups": [
     {
@@ -88,15 +113,36 @@
         "Card draw engines",
         "Late-game finishers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple casting steps (fetch lands, instant-speed ramp), discard counterspells, or use Formidable Speaker to pressure while they hold up mana. Cast Scapeshift in response to their counterspells or use protection spells if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them with your own acceleration. Use Formidable Speaker to stabilize and out-value them. If they're ahead, use removal to clear their threats and go for the combo.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Use discard to remove their Scapeshift. Use counterspells to protect yours. Prioritize land acceleration and Formidable Speaker to out-value them. The player who resolves Scapeshift first usually wins.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Counterspells and board wipes",
-    "Hand disruption and card draw engines"
+    "Hand disruption and card draw engines",
+    "Watch for counterspells, discard spells, and board wipes.",
+    "Note when opponents play sweepers or targeted removal aimed at your lands or Scapeshift.",
+    "Track their graveyard if they play graveyard strategies.",
+    "Pay attention to mana development",
+    "if they're ahead on mana, they may have a win condition ready."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:04:04+00:00",
     "model": "local-model",
@@ -112,6 +158,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

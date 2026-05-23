@@ -1,0 +1,124 @@
+{
+  "archetype": "Atarka, World Render",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Leverage Dragonspeaker Shaman and Savage Ventmaw to rapidly pump Atarka, World Render into a massive, unblockable threat that closes out games before control or combo decks can stabilize. It functions as a tempo-aggro dragon deck that wins by overwhelming the board with a single, game-ending dragon.",
+  "win_conditions": [
+    "Atarka with +3/+3 from Shaman or +4/+4 from Ventmaw.",
+    "Sometimes a pumped Ventmaw itself wins."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (Forests/Mountains), Dragonspeaker Shaman, Savage Ventmaw, or Atarka.",
+      "Prioritize hands that can play a Shaman on turn 1 or 2, or Ventmaw on turn 3."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 3+ lands with no threats, or only Atarka with no mana/support."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a Forest or Mountain.",
+      "If you have Shaman, play it.",
+      "Turn 2: Play a Mountain, cast Shaman if you didn't, or play a 2-drop dragon.",
+      "Use Shaman's enter-the-battlefield counter or sacrifice to pump Atarka.",
+      "Turn 3: Cast Savage Ventmaw or Atarka, pump with remaining resources, swing."
+    ],
+    "mid_game": [
+      "Don't overcommit to board if you can't win the exchange.",
+      "Save pump spells/shamans for Atarka.",
+      "Manage mana to ensure you can cast Atarka and pump it in the same turn if possible.",
+      "Commit Atarka only when you can protect it or swing for lethal.",
+      "Hold back pump resources if the opponent has sweepers.",
+      "Use Ventmaw as a finisher or pump source depending on board state."
+    ],
+    "late_game": [
+      "Atarka with +3/+3 from Shaman or +4/+4 from Ventmaw.",
+      "Sometimes a pumped Ventmaw itself wins.",
+      "When you have Atarka on board with a pump source, or when you can swing with a 7/7+ for lethal.",
+      "Go all-in if the opponent has no sweepers or answers."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Atarka, World Render",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Dragonspeaker Shaman",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Savage Ventmaw",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Pumping the wrong dragon.",
+    "Always prioritize Atarka.",
+    "Watch out for sacrifice outlets.",
+    "Shaman's ETB counter is free value.",
+    "Ventmaw can be a finisher or pump source.",
+    "Don't forget to check for flying/trample synergy."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats (Shaman) to pressure before they can counter. Use pump spells in response to counters if possible. Don't overextend into known counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure. Don't let them stabilize. Use removal on their mana sources if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play removal, use Atarka as a clock-ender, but be careful of sweepers. Sometimes you need to trade efficiently.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early, use pump spells to bypass removal. Have a backup plan if Atarka is removed.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value exchange of pump spells. Shaman is key. Try to out-value them in the late game.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (like Wrath of God equivalents), targeted removal (Lightning Helix, etc.), and combo win conditions.",
+    "Note when opponents tap out for answers."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

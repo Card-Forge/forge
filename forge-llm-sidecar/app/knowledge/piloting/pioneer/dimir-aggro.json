@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with 1-2 mana and a cheap creature",
       "Hands containing Thoughtseize or Mockingbird",
-      "Hands with Kaito and early land drops"
+      "Hands with Kaito and early land drops",
+      "Keep any hand with a land and a turn-1 or turn-2 play (Thoughtseize, Kaito, Mockingbird, or a 2-drop).",
+      "Keep hands with 2 lands and a turn-2 play, or 3+ lands with a turn-1 Thoughtseize.",
+      "Prioritize hands that can execute a turn-1 Thoughtseize into a turn-2 threat or Kaito."
     ],
     "mulligan_criteria": [
       "Hands with 3+ mana and no disruption",
       "Hands lacking early threats",
-      "Hands with only late-game cards"
+      "Hands with only late-game cards",
+      "Mulligan hands with 0-1 lands, multiple copies of the same low-impact spell, or hands lacking early interaction/pressure."
     ],
     "examples": []
   },
@@ -25,17 +29,34 @@
     "early_game": [
       "Play lands and cheap creatures immediately",
       "Cast Thoughtseize to remove key answers or threats",
-      "Use Mockingbird to disrupt opponent's early turns"
+      "Use Mockingbird to disrupt opponent's early turns",
+      "Turn 1: Play a land, cast Thoughtseize if possible.",
+      "Strip the opponent's most disruptive card (removal, hand disruption, or early threat).",
+      "Turn 2: Play a land, cast Kaito or Mockingbird if mana allows, or follow up with another Thoughtseize/removal.",
+      "Sequence lands to ensure you can cast your 1-drop and 2-drops on curve.",
+      "If you have multiple lands, prioritize fetching/finding the right ones for your early spells, and avoid overcommitting to a board without answers."
     ],
     "mid_game": [
       "Develop board with Kaito and other aggressive threats",
       "Maintain card advantage through disruption",
-      "Apply consistent pressure to force opponent into unfavorable trades"
+      "Apply consistent pressure to force opponent into unfavorable trades",
+      "Preserve mana for interaction when needed, but don't overcommit to holding up removal if you can safely develop your board.",
+      "Use Thoughtseize to strip key answers or combo pieces.",
+      "Manage your graveyard carefully",
+      "Bane of Nightmares can be a liability if the opponent has recursion, so consider graveyard hate or playing around it.",
+      "Track your life total, as Kaito's emblem and Bane's effect can swing games quickly.",
+      "Commit threats when you have enough interaction to protect them or when the opponent is out of answers."
     ],
     "late_game": [
       "Push for lethal with remaining creatures",
       "Use card draw or value engines if available",
-      "Close out quickly before opponent stabilizes"
+      "Close out quickly before opponent stabilizes",
+      "Kaito, the Sunken City and Mockingbird are primary finishers.",
+      "Use them to apply pressure, draw cards, and close out the game.",
+      "Bane of Nightmares can also finish games if the opponent is low on life and you can protect it or sacrifice it for damage.",
+      "Kaito's -7 ability wins the game instantly if you can survive long enough to activate it.",
+      "Go all-in when you have established board control, the opponent has no sweepers, and you have enough threats to pressure for lethal.",
+      "Commit when you can safely cast your finishers and have answers to their potential removal."
     ]
   },
   "key_cards": [
@@ -58,7 +79,13 @@
   "sequencing_tips": [
     "Hold Thoughtseize for opponent's turn to maximize information",
     "Cast Mockingbird before playing threats to force discards first",
-    "Prioritize land drops over holding up mana for early turns"
+    "Prioritize land drops over holding up mana for early turns",
+    "Common mistakes include overcommitting to the board without answers, misusing Thoughtseize on low-impact cards, and ignoring graveyard hate when facing recursion decks.",
+    "Kaito's emblem is powerful but can be a liability if you're low on life",
+    "manage your life total carefully.",
+    "Bane of Nightmares requires careful timing",
+    "don't cast it into sweepers or when the opponent has graveyard recursion.",
+    "Practice sequencing your turns to maximize value from each spell, and always prioritize winning the resource war over short-term board presence."
   ],
   "matchups": [
     {
@@ -87,16 +114,37 @@
         "Card draw spells",
         "Resilient creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtseize to strip counterspells. Cast threats in response to their spells or when they're tapped out. Use cheap, efficient threats that are hard to counter. Consider sideboard hate against specific counters. Don't overcommit to a board if you can't close quickly; trade efficiently and wait for them to use their answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to beat them before they hit their big mana. Use Thoughtseize to take their ramp spells or key threats. Use spot removal to deal with their early threats. Don't overextend into their late-game finishers. Force them to use resources inefficiently and close out the game before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize Thoughtseize to strip their key cards. Trade efficiently and don't overextend. Use Bane of Nightmares to punish their graveyard or as a finisher. Sideboard in more disruption and removal to win the hand war. Track their hand size and graveyard state to make optimal discard and threat decisions.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
     "Hand disruption",
-    "Counterspells"
+    "Counterspells",
+    "Watch for the opponent's hand size and graveyard state.",
+    "Note if they're holding up mana for removal or counters.",
+    "Track when they play lands that suggest a specific strategy (e.g., dual lands for control, fetches for midrange).",
+    "Pay attention to when they start casting their win conditions and adjust your pressure accordingly.",
+    "Watch for graveyard recursion threats that could punish Bane of Nightmares or Mockingbird."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:56:16+00:00",
     "model": "local-model",
@@ -112,6 +160,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

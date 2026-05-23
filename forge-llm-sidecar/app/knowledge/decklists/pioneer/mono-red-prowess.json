@@ -1,0 +1,97 @@
+{
+  "archetype": "Mono-Red Prowess",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/mono-red-prowess.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 1,
+      "name": "Den of the Bugbear"
+    },
+    {
+      "qty": 4,
+      "name": "Emberheart Challenger"
+    },
+    {
+      "qty": 4,
+      "name": "Kumano Faces Kakkazan"
+    },
+    {
+      "qty": 4,
+      "name": "Monastery Swiftspear"
+    },
+    {
+      "qty": 4,
+      "name": "Monstrous Rage"
+    },
+    {
+      "qty": 15,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 2,
+      "name": "Ramunap Ruins"
+    },
+    {
+      "qty": 4,
+      "name": "Reckless Rage"
+    },
+    {
+      "qty": 3,
+      "name": "Robber of the Rich"
+    },
+    {
+      "qty": 4,
+      "name": "Screaming Nemesis"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    },
+    {
+      "qty": 3,
+      "name": "Soul-Scar Mage"
+    },
+    {
+      "qty": 3,
+      "name": "Sunspine Lynx"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Flowstone Infusion"
+    },
+    {
+      "qty": 2,
+      "name": "Maelstrom Artisan"
+    },
+    {
+      "qty": 4,
+      "name": "Magebane Lizard"
+    },
+    {
+      "qty": 3,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 2,
+      "name": "Scorching Shot"
+    },
+    {
+      "qty": 1,
+      "name": "Sunspine Lynx"
+    },
+    {
+      "qty": 1,
+      "name": "The Legend of Roku"
+    }
+  ]
+}

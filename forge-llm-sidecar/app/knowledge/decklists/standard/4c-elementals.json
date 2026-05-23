@@ -1,0 +1,145 @@
+{
+  "archetype": "4c Elementals",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/4c-elementals.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ashling, Rekindled"
+    },
+    {
+      "qty": 2,
+      "name": "Bounce Off"
+    },
+    {
+      "qty": 2,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 2,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 3,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Cori Mountain Monastery"
+    },
+    {
+      "qty": 3,
+      "name": "Deceit"
+    },
+    {
+      "qty": 4,
+      "name": "Flamebraider"
+    },
+    {
+      "qty": 2,
+      "name": "Ill-Timed Explosion"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Pit of Offerings"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Vinestalk"
+    },
+    {
+      "qty": 3,
+      "name": "Roaming Throne"
+    },
+    {
+      "qty": 4,
+      "name": "Secluded Courtyard"
+    },
+    {
+      "qty": 2,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 2,
+      "name": "Sunderflock"
+    },
+    {
+      "qty": 4,
+      "name": "Vibrance"
+    },
+    {
+      "qty": 2,
+      "name": "Winternight Stories"
+    },
+    {
+      "qty": 4,
+      "name": "Wistfulness"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 1,
+      "name": "Dauntless Scrapbot"
+    },
+    {
+      "qty": 1,
+      "name": "Deceit"
+    },
+    {
+      "qty": 2,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 1,
+      "name": "Pit of Offerings"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 1,
+      "name": "Sear"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 1,
+      "name": "Sunderflock"
+    },
+    {
+      "qty": 1,
+      "name": "Ygra, Eater of All"
+    }
+  ]
+}

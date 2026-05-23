@@ -1,0 +1,392 @@
+{
+  "archetype": "Ulalek, Fused Atrocity",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/ulalek-fused-atrocity.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abstruse Appropriation"
+    },
+    {
+      "qty": 1,
+      "name": "Adarkar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Alchemist's Refuge"
+    },
+    {
+      "qty": 1,
+      "name": "Analyze the Pollen"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Archway"
+    },
+    {
+      "qty": 1,
+      "name": "Ash Barrens"
+    },
+    {
+      "qty": 1,
+      "name": "Bring to Light"
+    },
+    {
+      "qty": 1,
+      "name": "Brood Monitor"
+    },
+    {
+      "qty": 1,
+      "name": "Brushland"
+    },
+    {
+      "qty": 1,
+      "name": "Caves of Koilos"
+    },
+    {
+      "qty": 1,
+      "name": "Chord of Calling"
+    },
+    {
+      "qty": 1,
+      "name": "Cloud Key"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Conduit Pylons"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Crib Swap"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivate"
+    },
+    {
+      "qty": 1,
+      "name": "Dimensional Infiltrator"
+    },
+    {
+      "qty": 1,
+      "name": "Dreamstone Hedron"
+    },
+    {
+      "qty": 1,
+      "name": "Drowner of Truth"
+    },
+    {
+      "qty": 1,
+      "name": "Echoes of Eternity"
+    },
+    {
+      "qty": 1,
+      "name": "Eladamri's Call"
+    },
+    {
+      "qty": 1,
+      "name": "Eldrazi Displacer"
+    },
+    {
+      "qty": 1,
+      "name": "Emrakul's Hatcher"
+    },
+    {
+      "qty": 1,
+      "name": "Endbringer"
+    },
+    {
+      "qty": 1,
+      "name": "Ertai Resurrected"
+    },
+    {
+      "qty": 1,
+      "name": "Eternal Witness"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Fact or Fiction"
+    },
+    {
+      "qty": 1,
+      "name": "Fellwar Stone"
+    },
+    {
+      "qty": 4,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Forsaken Monument"
+    },
+    {
+      "qty": 1,
+      "name": "Glaring Fleshraker"
+    },
+    {
+      "qty": 1,
+      "name": "Herald of Kozilek"
+    },
+    {
+      "qty": 1,
+      "name": "Herald's Horn"
+    },
+    {
+      "qty": 1,
+      "name": "Hidden Grotto"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Karplusan Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Kirol, Attentive First-Year"
+    },
+    {
+      "qty": 1,
+      "name": "Kozilek's Command"
+    },
+    {
+      "qty": 1,
+      "name": "Kutzil, Malamet Exemplar"
+    },
+    {
+      "qty": 1,
+      "name": "Liberator, Urza's Battlethopter"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Muraganda Raceway"
+    },
+    {
+      "qty": 1,
+      "name": "Nameless Inversion"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Nulldrifter"
+    },
+    {
+      "qty": 1,
+      "name": "Omni-Changeling"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Perplex"
+    },
+    {
+      "qty": 1,
+      "name": "Peter Parker's Camera"
+    },
+    {
+      "qty": 1,
+      "name": "Pit of Offerings"
+    },
+    {
+      "qty": 1,
+      "name": "Pitiless Plunderer"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Prismatic Lens"
+    },
+    {
+      "qty": 1,
+      "name": "Prophet of Distortion"
+    },
+    {
+      "qty": 1,
+      "name": "Rampant Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Revitalizing Repast"
+    },
+    {
+      "qty": 1,
+      "name": "Sakura-Tribe Elder"
+    },
+    {
+      "qty": 1,
+      "name": "Sally Sparrow"
+    },
+    {
+      "qty": 1,
+      "name": "Search for Tomorrow"
+    },
+    {
+      "qty": 1,
+      "name": "Shields of Velis Vel"
+    },
+    {
+      "qty": 1,
+      "name": "Shivan Reef"
+    },
+    {
+      "qty": 1,
+      "name": "Sire of Stagnation"
+    },
+    {
+      "qty": 1,
+      "name": "Snapping Voidcraw"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sowing Mycospawn"
+    },
+    {
+      "qty": 1,
+      "name": "Spawn-Gang Commander"
+    },
+    {
+      "qty": 1,
+      "name": "Spire of Industry"
+    },
+    {
+      "qty": 1,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 1,
+      "name": "Sulfurous Springs"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Curiosity"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Impulse"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Resilience"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Unity"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi, Mage of Zhalfir"
+    },
+    {
+      "qty": 1,
+      "name": "Thief of Existence"
+    },
+    {
+      "qty": 1,
+      "name": "Thran Dynamo"
+    },
+    {
+      "qty": 1,
+      "name": "Ugin, the Ineffable"
+    },
+    {
+      "qty": 1,
+      "name": "Ulalek, Fused Atrocity"
+    },
+    {
+      "qty": 1,
+      "name": "Underground River"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Cave"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Mine"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Power Plant"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Venser, Shaper Savant"
+    },
+    {
+      "qty": 1,
+      "name": "Void Grafter"
+    },
+    {
+      "qty": 1,
+      "name": "Waterlogged Teachings"
+    },
+    {
+      "qty": 1,
+      "name": "Whirlwind Denial"
+    },
+    {
+      "qty": 1,
+      "name": "Wilderness Reclamation"
+    },
+    {
+      "qty": 1,
+      "name": "Yavimaya Coast"
+    }
+  ],
+  "sideboard": []
+}

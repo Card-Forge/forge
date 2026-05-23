@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Two or three lands",
       "At least one cheap Prowess creature",
-      "Soul-Scar Mage or Emberheart Challenger"
+      "Soul-Scar Mage or Emberheart Challenger",
+      "Keep hands with 2-3 lands (duals/shocklands preferred, basics acceptable) and at least one Prowess creature (Screaming Nemesis, Emberheart Challenger, or Soul-Scar Mage).",
+      "Also keep hands with 2+ cheap spells (Shock, Lightning Strike, Path to Exile, Abrade, Lightning Axe) that can pump a creature on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "High-cost cards without early plays",
       "Multiple removal spells",
-      "Lack of Prowess synergies"
+      "Lack of Prowess synergies",
+      "Mulligan if you have 3+ lands with no creatures/spells, 4+ lands, or only creatures with zero spells to pump them."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Play cheap Prowess creatures immediately",
       "Cast Soul-Scar Mage to pump attackers",
-      "Apply pressure before opponent stabilizes"
+      "Apply pressure before opponent stabilizes",
+      "Turn 1: Play a land, cast a cheap spell (Shock/Lightning Strike) to trigger Prowess, or cast a creature if you already have a spell in hand.",
+      "Turn 2: Cast a Prowess creature, then immediately pump it with a second spell to make it a lethal threat.",
+      "Sequence lands to ensure you can cast two spells by turn 2.",
+      "If drawing lands, play a land, then a creature, and pump it next turn if you have spells.",
+      "Never attack with a creature unless you have a spell in hand to pump it further or remove a blocker."
     ],
     "mid_game": [
       "Deploy Emberheart Challenger to swing combat",
       "Use Prowess triggers to dodge removal",
-      "Trade efficiently with opponent's threats"
+      "Trade efficiently with opponent's threats",
+      "Mana is for casting spells, not just attacking.",
+      "Always prioritize casting noncreature spells to maintain Prowess momentum.",
+      "Don't overcommit to the board if you're out of spells.",
+      "Manage hand size by using cantrips efficiently",
+      "Prowess decks run thin, so dig early.",
+      "Graveyard is generally irrelevant, so don't waste turns worrying about it."
     ],
     "late_game": [
       "Cast Screaming Nemesis for board presence",
       "Use Nemesis to trade up or protect key cards",
-      "Close out with accumulated Prowess damage"
+      "Close out with accumulated Prowess damage",
+      "Pumped creatures (Emberheart Challenger with multiple permanent counters, Screaming Nemesis with 3+ spells cast, Soul-Scar Mage with pump + trample/first strike if applicable) attacking with spells in hand to block or pump further.",
+      "Use Lightning Axe to finish games or pump a creature for lethal.",
+      "Soul-Scar Mage's triggered ability should be resolved after pumping to maximize damage.",
+      "Go all-in when you have a creature with 3+ Prowess counters, at least one spell in hand to pump it further or remove a blocker, and the opponent has no sweepers or targeted removal in hand.",
+      "Also commit when you're ahead in life and can race, or when the opponent is tapped out for a non-interactive play."
     ]
   },
   "key_cards": [
@@ -58,7 +77,13 @@
   "sequencing_tips": [
     "Hold Soul-Scar Mage until you have a Prowess creature to pump",
     "Cast Emberheart Challenger before attacking to maximize its enter-the-battlefield trigger",
-    "Use Screaming Nemesis to trade up or protect key threats"
+    "Use Screaming Nemesis to trade up or protect key threats",
+    "Common mistake: Overcommitting creatures without spells to pump them, leaving you vulnerable to removal.",
+    "Another: Forgetting that Prowess triggers on any noncreature spell, including your own removal or pump spells.",
+    "Always sequence spells to maximize pump before combat.",
+    "Emberheart Challenger enters with counters, so cast your pump spells before it enters.",
+    "Soul-Scar Mage's ability triggers on attack, so pump it before declaring attackers.",
+    "Watch out for 'pump tax' in mirrors where both players are casting spells to grow creatures."
   ],
   "matchups": [
     {
@@ -87,16 +112,46 @@
         "Devkarin Dissident",
         "Board wipes"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient spells that are hard to counter (Shock, Lightning Strike). Cast creatures first, then pump with uncounterable spells if needed. Use removal to clear their counterspell casters. Don't overextend into known counterspells; wait for them to use it on a non-critical spell or save your pump spells for combat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race their mana acceleration. Use removal on their ramp sources (manlands, signets, etc.) if possible. Win quickly before they cast their big threats. Don't trade inefficiently; use your spells to clear their board while you build your own.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use cheap removal (Shock, Lightning Strike, Path) to trade efficiently. Don't overcommit creatures early; stabilize with removal, then win with your own Prowess threats. Use Lightning Axe to clear multiple small blockers. Track their life total and adjust your aggression accordingly.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Outspeed with spell density. Use removal to clear key blockers, then attack with pumped creatures. Bait out removal with cheap spells, then commit your main threat. Use counterspells if running any to protect your pump spells. Don't overcommit to the board; Prowess wins by out-casting, not out-blocking.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by spell outpacing and removal efficiency. Track how many noncreature spells each player has cast. Use targeted removal to kill their pumped creatures before they can pump them further. Save your best pump spells for when you can go wide or finish the game. In prolonged mirrors, prioritize cantrips and Lightning Axe to maintain spell advantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early burn spells",
     "Board wipes",
     "Counterspells",
-    "Fast removal"
+    "Fast removal",
+    "Watch for sweepers (Supreme Verdict, Anger of the Gods), targeted removal (Path, Shock), and counterspells.",
+    "Note when opponents save removal for your creatures versus their threats.",
+    "Track how many noncreature spells they've cast to gauge their Prowess potential in mirror matches.",
+    "Pay attention to when they tap out for a big threat, as that's your window to attack with a pumped creature."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:05:20+00:00",
     "model": "local-model",
@@ -112,6 +167,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

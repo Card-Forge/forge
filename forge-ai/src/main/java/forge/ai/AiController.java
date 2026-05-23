@@ -106,6 +106,7 @@ public class AiController {
     private boolean timeoutReached;
     private final SidecarInfluence sidecarInfluence;
     private volatile DeckRecognitionClient sidecarClient;
+    private volatile forge.ai.llm.DeckRecognitionObserver deckRecognitionObserver;
     private volatile List<String> sidecarDeckCards = List.of();
     // Set once at attach time from the sidecar /health probe. When the sidecar
     // is known-unreachable we skip the synchronous wait entirely so an offline
@@ -178,6 +179,11 @@ public class AiController {
         this.sidecarDeckCards = deckCards == null ? List.of() : List.copyOf(deckCards);
     }
 
+    /** Store the event observer so decision points can request fresh recognition. */
+    public void setDeckRecognitionObserver(final forge.ai.llm.DeckRecognitionObserver observer) {
+        this.deckRecognitionObserver = observer;
+    }
+
     /** Resolve the AI's decklist lazily. The snapshot captured at attach time
      *  is empty when the player was not yet registered with the game (sim
      *  path); recompute from the now-registered player on demand. */
@@ -230,7 +236,7 @@ public class AiController {
         }
         final RecognitionRequest request = new RecognitionRequest(
                 RecognitionRequest.CLIENT,
-                String.valueOf(game.getId()),
+                forge.ai.llm.DeckRecognitionFeature.sidecarGameId(game.getId()),
                 game.getRules().getGameType().name(),
                 player.getId(),
                 currentAiTurnNumber(),
@@ -335,6 +341,10 @@ public class AiController {
     public void waitForSidecar(final DecisionType type, final boolean ignoreHealth) {
         if (!sidecarInfluenceEnabled() || (!ignoreHealth && !sidecarHealthy)) {
             return;
+        }
+        final var observer = deckRecognitionObserver;
+        if (observer != null) {
+            observer.requestRecognitionForDecision(type);
         }
         int budget = getIntProperty(type.budgetProp());
         if (budget <= 0) {

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more cheap Goblins",
       "Access to early discard effects",
-      "Birthing Ritual paired with a creature"
+      "Birthing Ritual paired with a creature",
+      "Keep hands with 2-3 lands (preferably fetchable or duals), at least one mana acceleration/ritual (Boggart Trawler, Birthing Ritual, or Goblin Lackey), and a turn-1 or turn-2 threat (Goblin Guide, Goblin Lackey, or Conspicuous Snoop).",
+      "Dual lands (Steam Vents, Bloodstained Mire, etc.) are essential for B/R/G fixing."
     ],
     "mulligan_criteria": [
       "High mana curve with no early threats",
       "Lack of interaction or board presence",
-      "Hands missing both discard and pump effects"
+      "Hands missing both discard and pump effects",
+      "Mulligan on 3+ lands with no early threats, or hands with only high-cost spells and no acceleration."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Deploy low-cost Goblins to establish immediate pressure",
       "Play Conspicuous Snoop or Boggart Trawler to force early discards",
-      "Hold up mana for potential combat tricks"
+      "Hold up mana for potential combat tricks",
+      "Turn 1: Play a land, cast Goblin Lackey or Goblin Guide.",
+      "If opening with Birthing Ritual, play it, tap for {R}, then sacrifice it to fetch a Goblin (like Lackey or Guide).",
+      "Turn 2: Accelerate with Boggart Trawler or Conspicuous Snoop to find more threats, then attack with everything.",
+      "Prioritize playing fetch lands to find duals for B/R/G color fixing."
     ],
     "mid_game": [
       "Use Birthing Ritual to pump attackers or block efficiently",
       "Cycle through discard triggers to strip opponent's answers",
-      "Maintain board advantage while searching for finishers"
+      "Maintain board advantage while searching for finishers",
+      "Mana is your most valuable resource.",
+      "Never overextend into sweepers unless you have a clear path to lethal.",
+      "Use Conspicuous Snoop to dig for specific threats or rituals.",
+      "Manage graveyard carefully if facing discard/recursion hate, and prioritize keeping Birthing Ritual for late-game value or surprise acceleration.",
+      "Commit threats early to force interaction.",
+      "If the opponent has sweepers (like Supreme Verdict or Wrath of God), hold back a threat or two to trade into it."
     ],
     "late_game": [
       "Leverage accumulated board presence to close out the match",
       "Use remaining discard effects to clear late-game threats",
-      "Push for lethal with maximized combat damage"
+      "Push for lethal with maximized combat damage",
+      "Lethal is typically achieved through combat damage with a flooded board of 1-2 mana Goblins, Kuldotha Forgemaster triggers, or Goblin Bombardment.",
+      "Birthing Ritual and Conspicuous Snoop help dig for the final threats when the game extends past turn 4.",
+      "Go all-in when you have 3+ mana, at least two threats, and the opponent has no sweepers or removal in hand.",
+      "Also commit when you can close the game in 1-2 turns, even if it means leaving yourself vulnerable to a single-target removal spell."
     ]
   },
   "key_cards": [
@@ -58,7 +75,13 @@
   "sequencing_tips": [
     "Prioritize playing discard creatures before pumping to maximize hand disruption",
     "Save Birthing Ritual for combat tricks rather than static board states",
-    "Manage hand size carefully to avoid discarding key cards when multiple death triggers resolve"
+    "Manage hand size carefully to avoid discarding key cards when multiple death triggers resolve",
+    "Common mistake: overcommitting into sweepers without checking for interaction.",
+    "Unique interaction: Birthing Ritual can be sacrificed to fetch a Goblin even if you're low on mana, enabling surprise turns.",
+    "Conspicuous Snoop can find lands if you're flooded, but prioritize Goblins.",
+    "B/R/G splash requires careful land management",
+    "fetch lands are essential.",
+    "Always play around the metagame's top combo decks by keeping early disruption in hand."
   ],
   "matchups": [
     {
@@ -87,6 +110,21 @@
         "Fatal Push",
         "Kethic Arsonist"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple low-cost threats to force counter trade-offs. Play around single counters with redundant threats. Use Birthing Ritual's one-time effect to bypass counters if needed, and save a threat for when they tap out for counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply pressure immediately. Don't let them stabilize. Use discard to hit their ramp spells or key creatures. If they outpace you, prioritize finding lethal damage over board development.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize discard, track their hand, and use Rabblemaster synergy. Trade efficiently and don't overcommit into their sweepers. The player who manages their graveyard and hand disruption better will win.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -94,10 +132,14 @@
     "Lightning Strike",
     "Fatal Push",
     "Tarmogoyf",
-    "Rest in Peace"
+    "Rest in Peace",
+    "Watch for counterspells (Jeskai Blink), sweepers (Boros Energy/Affinity), and combo win conditions (Ruby Storm, Amulet Titan).",
+    "Key tells include opponent tapping for multiple colors early, drawing extra cards, or playing artifact/creature synergies.",
+    "Adjust your aggression based on whether they have board wipes or single-target removal in hand."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:48:07+00:00",
     "model": "local-model",
@@ -113,7 +155,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

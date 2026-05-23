@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with at least two one-mana disruption spells",
       "Hands containing a cheap creature alongside a removal spell",
-      "Hands that can play a turn-one Thoughtseize or Fatal Push"
+      "Hands that can play a turn-one Thoughtseize or Fatal Push",
+      "Keep any hand with a land and Thoughtseize or Fatal Push.",
+      "Prioritize hands with 2-3 lands, a discard spell, and a one-mana spell.",
+      "Keep hands that can play a land, Thoughtseize, and a one-drop on turn 1."
     ],
     "mulligan_criteria": [
       "Hands with only high-cost creatures and no early interaction",
       "Hands lacking land drops for the first two turns",
-      "Hands with multiple Flow States but no creatures to cast"
+      "Hands with multiple Flow States but no creatures to cast",
+      "Mulligan hands with 3+ lands and no early interaction, or hands with multiple one-drops and no land."
     ],
     "examples": []
   },
@@ -25,17 +29,31 @@
     "early_game": [
       "Play lands and cast one-mana disruption to remove key threats or hands",
       "Establish early board presence with cheap creatures",
-      "Use Fatal Push to clear blockers or aggressive threats"
+      "Use Fatal Push to clear blockers or aggressive threats",
+      "Turn 1: Play land, Thoughtseize opponent (target graveyard, hand disruption, or key early threat).",
+      "Turn 2: Play second land, cast Fatal Push if opponent has a 1-2 mana threat, or cast Flow State if you need card advantage or tempo.",
+      "If opponent is slow, hold interaction for turn 3-4.",
+      "Sequence lands carefully to ensure blue/red mana availability for Flow State and discard."
     ],
     "mid_game": [
       "Cast Flow State to boost your creatures and generate card advantage",
       "Trade efficiently while preserving removal for bigger threats",
-      "Apply steady pressure while digging for late-game answers"
+      "Apply steady pressure while digging for late-game answers",
+      "Mana: Always maintain flexibility for blue/red spells",
+      "don't overcommit to black mana early.",
+      "Hand: Keep Thoughtseize for critical turns",
+      "don't waste it on irrelevant cards.",
+      "Graveyard: Be mindful of opponent's recursion",
+      "Fatal Push and discard are your primary graveyard hate."
     ],
     "late_game": [
       "Stabilize with resilient creatures and board wipes if necessary",
       "Use Flow State repeatedly to outvalue and close the game",
-      "Maintain hand advantage to outlast opponent's resources"
+      "Maintain hand advantage to outlast opponent's resources",
+      "Resilient mid-range threats combined with removal to clear the path.",
+      "Flow State can also close games by generating multiple value engines or finding a killer.",
+      "Go all-in when you have board control, opponent has no sweepers, and you can trade efficiently.",
+      "Commit when you've established a clear advantage in card advantage or life total."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Hold up Fatal Push or Thoughtseize if opponent has a turn-one threat",
     "Cast Flow State before attacking to maximize damage and card draw",
-    "Prioritize removing opponent's win conditions over trading creatures early"
+    "Prioritize removing opponent's win conditions over trading creatures early",
+    "Common mistake: Overusing Thoughtseize on irrelevant cards early.",
+    "Always ask what they will do next turn before discarding.",
+    "Flow State is a tempo engine, not just a draw spell",
+    "use it to swing the board or dig for specific answers.",
+    "Be mindful of mana screw",
+    "consider mulliganing aggressively if you lack blue/red sources."
   ],
   "matchups": [
     {
@@ -87,16 +111,35 @@
         "Protection spells",
         "Graveyard recursion"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Flow State's multiple targets to bypass counters. Cast threats in response to their counterspells. Use discard to remove their counterspells from hand.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Thoughtseize to remove ramp spells or key threats. Fatal Push to clear early ramp threats. Hold removal for their finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize Thoughtseize on their hand. Use Fatal Push to clear their early threats. Track their sideboard and adjust accordingly.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast one-drop creatures",
     "Board wipes",
     "Counterspells",
-    "Graveyard hate"
+    "Graveyard hate",
+    "Watch for sweepers, counterspells, and late-game finishers.",
+    "Note when they tap out for big spells or hold up blue mana.",
+    "Track graveyard contents for recursion threats and adjust removal priorities accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:19:55+00:00",
     "model": "local-model",
@@ -112,6 +155,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

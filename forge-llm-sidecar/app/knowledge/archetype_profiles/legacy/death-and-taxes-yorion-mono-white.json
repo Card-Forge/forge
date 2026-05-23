@@ -1,0 +1,477 @@
+{
+  "schema_version": 1,
+  "name": "Death and Taxes (Yorion) - Mono White",
+  "format": "legacy",
+  "colors": [
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 81,
+  "macro_plan": "This Legacy mono-white archetype leverages Yorion, Sky Nomad to generate exponential Spirit token armies, then locks them in with Solitude for indestructibility and size. Stoneforge Mystic provides artifact synergy to accelerate the board state and close games. The deck operates as a combo-focused tempo strategy, aiming to establish an unblockable, unkillable token presence before opponents can stabilize.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 8,
+      "cards": [
+        "Solitude",
+        "Stoneforge Mystic"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Grafdigger's Cage",
+        "Meticulous Archive"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 12,
+      "cards": [
+        "Flagstones of Trokair",
+        "Recruiter of the Guard",
+        "Stoneforge Mystic"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Solitude"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 49,
+      "cards": [
+        "Aether Vial",
+        "Canoptek Scarab Swarm",
+        "Containment Priest",
+        "Disruptor Flute",
+        "Dryad Militant",
+        "Faerie Macabre",
+        "Flickerwisp",
+        "Lion Sash",
+        "Phelia, Exuberant Shepherd",
+        "Recruiter of the Guard",
+        "Skyclave Apparition",
+        "Solitude",
+        "Stoneforge Mystic",
+        "Thalia, Guardian of Thraben",
+        "White Orchid Phantom",
+        "Witch Enchanter",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 45,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 31,
+      "cards": [
+        "Canoptek Scarab Swarm",
+        "Eiganjo, Seat of the Empire",
+        "Erode",
+        "Ghost Quarter",
+        "Karakas",
+        "Lion Sash",
+        "Meteor Sword",
+        "Pre-War Formalwear",
+        "Swords to Plowshares",
+        "Wasteland",
+        "White Orchid Phantom",
+        "Wrath of the Skies"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Solitude",
+        "Stoneforge Mystic"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 22,
+      "cards": [
+        "Canoptek Scarab Swarm",
+        "Dryad Militant",
+        "Faerie Macabre",
+        "Flagstones of Trokair",
+        "Grafdigger's Cage",
+        "Lion Sash",
+        "Meticulous Archive",
+        "Pre-War Formalwear",
+        "Solitude",
+        "Stoneforge Mystic",
+        "Surgical Extraction"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 13,
+      "cards": [
+        "Flickerwisp",
+        "Karakas",
+        "Phelia, Exuberant Shepherd",
+        "Pre-War Formalwear",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 5,
+      "cards": [
+        "Stoneforge Mystic",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Solitude",
+        "Stoneforge Mystic",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Deafening Silence",
+        "Grafdigger's Cage",
+        "Mindbreak Trap",
+        "Solitude"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 27,
+      "cards": [
+        "Eiganjo, Seat of the Empire",
+        "Flagstones of Trokair",
+        "Ghost Quarter",
+        "Karakas",
+        "Meticulous Archive",
+        "Solitude",
+        "Stoneforge Mystic",
+        "Wasteland",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 29,
+      "cards": [
+        "Eiganjo, Seat of the Empire",
+        "Flagstones of Trokair",
+        "Ghost Quarter",
+        "Karakas",
+        "Meticulous Archive",
+        "Plains",
+        "Wasteland"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 8,
+      "cards": [
+        "Solitude",
+        "Stoneforge Mystic"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.42
+  },
+  "dual_role_cards": [
+    {
+      "card": "Canoptek Scarab Swarm",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dryad Militant",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eiganjo, Seat of the Empire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Macabre",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flagstones of Trokair",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flickerwisp",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Quarter",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karakas",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lion Sash",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Phelia, Exuberant Shepherd",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pre-War Formalwear",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Recruiter of the Guard",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Solitude",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "planeswalker_threats",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stoneforge Mystic",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "planeswalker_threats",
+        "protection",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "White Orchid Phantom",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yorion, Sky Nomad",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always play lands before casting Stoneforge Mystic to ensure you can pay for fetched artifacts",
+    "Cast Yorion, Sky Nomad only when you have enough mana to follow up with Solitude on the same turn or immediately after",
+    "Hold up mana for counterspells or protection if you suspect opponent interaction",
+    "Prioritize playing Solitude before attacking to ensure tokens survive combat damage and removal",
+    "Common mistakes include overcommitting Yorion without protection, failing to play Rest in Peace/Leyline when needed, missequencing Stoneforge Mystic (finding Batterskull too late), and ignoring the graveyard."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize land drops to ensure mana availability for Stoneforge Mystic and early spells"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Stoneforge Mystic to search for artifacts that support token generation or board control"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play cheap spells or hold mana to protect against early disruption"
+    }
+  ],
+  "kill_priority": [
+    "Stoneforge Mystic",
+    "Yorion, Sky Nomad",
+    "Solitude",
+    "Aether Vial",
+    "Canoptek Scarab Swarm",
+    "Containment Priest",
+    "Disruptor Flute",
+    "Dryad Militant"
+  ],
+  "interaction_to_disrupt": [
+    "Solitude",
+    "Stoneforge Mystic",
+    "Canoptek Scarab Swarm",
+    "Eiganjo, Seat of the Empire",
+    "Erode",
+    "Ghost Quarter",
+    "Karakas",
+    "Lion Sash"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/death-and-taxes-yorion-mono-white.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

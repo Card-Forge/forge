@@ -10,11 +10,14 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with turn 1 crabs",
-      "Hands with Drown in the Loch or Crypt Incursion against Living End"
+      "Hands with Drown in the Loch or Crypt Incursion against Living End",
+      "Keep hands with 2-3 lands, at least one early mill engine (Hedron Crab or Tasha's Hideous Laughter), and a discard spell (Thoughtseize/Duress) if you have a land drop.",
+      "Keep hands with Fractured Sanity if you can reach 5+ cards in your graveyard quickly."
     ],
     "mulligan_criteria": [
       "Hands lacking early land drops to follow a crab",
-      "Hands without interactive spells against fast decks"
+      "Hands without interactive spells against fast decks",
+      "Mulligan hands with 0-1 lands, multiple copies of the same low-impact spell, or hands lacking early mill engines or disruption."
     ],
     "examples": [
       {
@@ -34,17 +37,34 @@
     "early_game": [
       "Play a crab on turn one to establish early pressure and landfall triggers.",
       "Use Fatal Push and Drown in the Loch to remove immediate threats and survive.",
-      "Fetch lands to double-dip on landfall and find shock lands."
+      "Fetch lands to double-dip on landfall and find shock lands.",
+      "Turn 1: Play a land, cast Hedron Crab or Tasha's Hideous Laughter.",
+      "If you have acceleration (Lotus Petal, Chrome Mox, Arcane Signet), use it to cast a mill creature or discard on turn 1.",
+      "Turn 2: Cast a second mill engine or use discard to remove a key threat.",
+      "Sequence lands to ensure you can cast your first two mill pieces by turn 2.",
+      "If you have Fractured Sanity, hold it for when your graveyard has 5+ cards."
     ],
     "mid_game": [
       "Execute the mill package with Fractured Sanity, Tasha's Hideous Laughter, and Archive Trap.",
       "Generate card advantage with Visions of Beyond and Jace, the Perfected Mind to snowball mill effects.",
-      "Use Consign to Memory and Surgical Extraction to disrupt opponent strategies and remove hate cards."
+      "Use Consign to Memory and Surgical Extraction to disrupt opponent strategies and remove hate cards.",
+      "Preserve your graveyard for Fractured Sanity and recursion.",
+      "Don't overcommit creatures if you can mill from your hand.",
+      "Use discard to protect your mill engines or remove key threats.",
+      "Manage mana to ensure you can cast Fractured Sanity at instant speed when your graveyard is large.",
+      "Commit mill creatures early to apply pressure and protect them with bounce or protection if available.",
+      "Hold back if the opponent has a clear answer (e.g., Rest in Peace, Surgical Extraction) and you can't protect your graveyard."
     ],
     "late_game": [
       "Close out games with Jace's -X ability or force draws with Cephalid Coliseum.",
       "Utilize Shelldock Isle to cast hideaway spells cheaply.",
-      "Continue milling until the opponent runs out of cards."
+      "Continue milling until the opponent runs out of cards.",
+      "Fractured Sanity cast from hand or graveyard when your graveyard has 10+ cards.",
+      "Tasha's Hideous Laughter sacrificed repeatedly.",
+      "Hedron Crab sacrificed with acceleration.",
+      "Aim to reduce opponent's library to 0 while keeping yours above 0.",
+      "Go all-in when you have 2+ mill engines on board, your graveyard is large enough for a lethal Fractured Sanity, or the opponent is below 5 cards in library.",
+      "Don't hold back if you can win this turn."
     ]
   },
   "key_cards": [
@@ -134,7 +154,13 @@
     "Do not tap out; play mill spells at instant speed to keep removal and counters available for lethal threats.",
     "Immediately remove hate cards like Endurance from the graveyard using Extirpate to avoid free recasts.",
     "Prioritize killing early threats like Ragavan, Nimble Pilferer or Murktide Regent before focusing on milling.",
-    "Play around opposing countermagic by sequencing mill spells carefully."
+    "Play around opposing countermagic by sequencing mill spells carefully.",
+    "Common mistake: Overcommitting to attacking with creatures instead of milling.",
+    "Remember, mill wins the game, not combat.",
+    "Another mistake: Not tracking the opponent's library size.",
+    "Use Fractured Sanity when you can win.",
+    "Watch out for Leyline of the Void or Rest in Peace",
+    "have a plan B (like direct damage or mill creatures that don't rely on the graveyard)."
   ],
   "matchups": [
     {
@@ -194,6 +220,31 @@
         "Opponent's crabs",
         "Mill package"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells. Cast mill creatures in response to their counterspells. Use Fractured Sanity from the graveyard to bypass counters. Consider Spell Pierce or Negate to protect your own spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use discard to remove key ramp pieces. Mill them out before they can cast their big spells. If they have a fast combo finisher, prioritize mill over removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Early discard to remove threats. Use Fatal Blow/Fatal Push to clear board. Mill quickly to race. Don't overextend creatures; prioritize graveyard size for Fractured Sanity.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure with mill creatures. Use discard to remove key answers. Mill through their library while they try to stabilize. Fractured Sanity can win instantly if their library is low.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the graveyard war. Use discard to remove their mill engines. Prioritize casting Fractured Sanity when your graveyard is larger. Use Cryptbreaker to recur Tasha's or Hedron Crab. Control the board with discard and removal.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -207,10 +258,12 @@
     "Ruby Medallion",
     "Grapeshot",
     "Yawgmoth, Thran Physician",
-    "Amped Raptor"
+    "Amped Raptor",
+    "Watch for graveyard hate (Rest in Peace, Surgical Extraction, Leyline of the Void), sweepers (Wrath of God, Anger of the Gods), and combo win conditions."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Draftsim",
+    "source": "Draftsim + legacy_guidance",
     "source_url": "https://draftsim.com/mill-modern/",
     "generated_at": "2026-05-20T21:41:54+00:00",
     "model": "local-model",
@@ -228,7 +281,27 @@
         "overview",
         "key_cards",
         "matchups"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {
@@ -241,7 +314,7 @@
     "confidence": 0.95,
     "kind": "explicit",
     "source_index": 0,
-    "evidence_span": "The strategy is simple: Reduce your opponents’ library to zero cards before they kill you."
+    "evidence_span": "The strategy is simple: Reduce your opponents\u2019 library to zero cards before they kill you."
   },
   "win_conditions_evidence": [
     {
@@ -256,7 +329,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "It’s usually good to lead with a turn 1 crab because your opponent could have difficulty dealing with it."
+      "evidence_span": "It\u2019s usually good to lead with a turn 1 crab because your opponent could have difficulty dealing with it."
     },
     {
       "confidence": 0.9,
@@ -324,7 +397,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Boros Energy’s a terrifyingly fast deck even in a post- Amped Raptor Modern"
+      "evidence_span": "Boros Energy\u2019s a terrifyingly fast deck even in a post- Amped Raptor Modern"
     }
   ]
 }

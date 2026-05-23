@@ -1,0 +1,909 @@
+{
+  "schema_version": 1,
+  "name": "Sisay, Weatherlight Captain",
+  "format": "commander",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 100,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Borne Upon a Wind",
+    "Thassa's Oracle",
+    "Windswept Heath",
+    "Aminatou, the Fateshifter",
+    "Tyvar, Jubilant Brawler",
+    "Birds of Paradise",
+    "Bloom Tender",
+    "Deadpool, Trading Card"
+  ],
+  "interaction_to_disrupt": [
+    "An Offer You Can't Refuse",
+    "Fierce Guardianship",
+    "Flusterstorm",
+    "Force of Will",
+    "Louisoix's Sacrifice",
+    "Mental Misstep",
+    "Pyroblast",
+    "Delighted Halfling"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Nature's Rhythm"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 3,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Cabal Ritual",
+        "Dark Ritual"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 13,
+      "cards": [
+        "Aminatou, the Fateshifter",
+        "Borne Upon a Wind",
+        "Chromatic Orrery",
+        "Deadpool, Trading Card",
+        "Esper Sentinel",
+        "Kutzil, Malamet Exemplar",
+        "Mana Vault",
+        "Mystic Remora",
+        "Necropotence",
+        "Rhystic Study",
+        "Selvala, Heart of the Wilds",
+        "Smothering Tithe",
+        "Tataru Taru"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Kinnan, Bonder Prodigy",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 20,
+      "cards": [
+        "Arid Mesa",
+        "Bloodstained Mire",
+        "Crop Rotation",
+        "Demonic Tutor",
+        "Diabolic Intent",
+        "Enlightened Tutor",
+        "Flooded Strand",
+        "Gamble",
+        "Green Sun's Zenith",
+        "Imperial Seal",
+        "Mystical Tutor",
+        "Nature's Rhythm",
+        "Polluted Delta",
+        "Ranger-Captain of Eos",
+        "Sisay, Weatherlight Captain",
+        "Vampiric Tutor",
+        "Verdant Catacombs",
+        "Windswept Heath",
+        "Wooded Foothills",
+        "Worldly Tutor"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Borne Upon a Wind",
+        "Thassa's Oracle",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 34,
+      "cards": [
+        "Aminatou, the Fateshifter",
+        "Birds of Paradise",
+        "Bloom Tender",
+        "Deadpool, Trading Card",
+        "Deathrite Shaman",
+        "Deflecting Swat",
+        "Delighted Halfling",
+        "Demonic Consultation",
+        "Derevi, Empyrial Tactician",
+        "Drannith Magistrate",
+        "Elvish Spirit Guide",
+        "Emiel the Blessed",
+        "Enduring Vitality",
+        "Esper Sentinel",
+        "Ignoble Hierarch",
+        "Ioreth of the Healing House",
+        "Kinnan, Bonder Prodigy",
+        "Kutzil, Malamet Exemplar",
+        "Lotho, Corrupt Shirriff",
+        "Marvin, Murderous Mimic",
+        "Mindbreak Trap",
+        "Noble Hierarch",
+        "Ragavan, Nimble Pilferer",
+        "Ranger-Captain of Eos",
+        "Redirect Lightning",
+        "Selvala, Heart of the Wilds",
+        "Simian Spirit Guide",
+        "Sisay, Weatherlight Captain",
+        "Sol Ring",
+        "Tainted Pact",
+        "Tataru Taru",
+        "Thassa's Oracle",
+        "Tinder Wall",
+        "Tyvar, Jubilant Brawler"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 14,
+      "cards": [
+        "Ancient Tomb",
+        "City of Brass",
+        "Deadly Rollick",
+        "Deathrite Shaman",
+        "Derevi, Empyrial Tactician",
+        "Into the Flood Maw",
+        "Kutzil, Malamet Exemplar",
+        "Mana Vault",
+        "Otawara, Soaring City",
+        "Path to Exile",
+        "Pyroblast",
+        "Ragavan, Nimble Pilferer",
+        "Sevinne's Reclamation",
+        "Tinder Wall"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 7,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Fierce Guardianship",
+        "Flusterstorm",
+        "Force of Will",
+        "Louisoix's Sacrifice",
+        "Mental Misstep",
+        "Pyroblast"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Delighted Halfling",
+        "Flawless Maneuver",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 2,
+      "cards": [
+        "Gamble",
+        "Necropotence"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Brain Freeze",
+        "Cabal Ritual",
+        "Deathrite Shaman",
+        "Nature's Rhythm",
+        "Necropotence",
+        "Sevinne's Reclamation",
+        "Tyvar, Jubilant Brawler",
+        "Underworld Breach"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 11,
+      "cards": [
+        "Aminatou, the Fateshifter",
+        "Emiel the Blessed",
+        "Enduring Vitality",
+        "Into the Flood Maw",
+        "Nature's Rhythm",
+        "Necropotence",
+        "Otawara, Soaring City",
+        "Ragavan, Nimble Pilferer",
+        "Sevinne's Reclamation",
+        "Tyvar, Jubilant Brawler",
+        "Underworld Breach"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 3,
+      "cards": [
+        "Borne Upon a Wind",
+        "Thassa's Oracle",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Drannith Magistrate",
+        "Kutzil, Malamet Exemplar",
+        "Ranger-Captain of Eos",
+        "Silence"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 42,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Ancient Tomb",
+        "Arcane Signet",
+        "Arid Mesa",
+        "Birds of Paradise",
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Bloom Tender",
+        "Breeding Pool",
+        "Carpet of Flowers",
+        "Chromatic Orrery",
+        "City of Brass",
+        "Command Tower",
+        "Deathrite Shaman",
+        "Delighted Halfling",
+        "Enduring Vitality",
+        "Exotic Orchard",
+        "Flooded Strand",
+        "Gemstone Caverns",
+        "Godless Shrine",
+        "Hallowed Fountain",
+        "Kinnan, Bonder Prodigy",
+        "Lotho, Corrupt Shirriff",
+        "Lotus Petal",
+        "Mox Amber",
+        "Otawara, Soaring City",
+        "Overgrown Tomb",
+        "Polluted Delta",
+        "Relic of Legends",
+        "Sacred Foundry",
+        "Selvala, Heart of the Wilds",
+        "Smothering Tithe",
+        "Springleaf Drum",
+        "Starting Town",
+        "Steam Vents",
+        "Stomping Ground",
+        "Talon Gates of Madara",
+        "Temple Garden",
+        "Verdant Catacombs",
+        "Watery Grave",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 42,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Ancient Tomb",
+        "Arid Mesa",
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Breeding Pool",
+        "City of Brass",
+        "Command Tower",
+        "Exotic Orchard",
+        "Flooded Strand",
+        "Gemstone Caverns",
+        "Godless Shrine",
+        "Hallowed Fountain",
+        "Otawara, Soaring City",
+        "Overgrown Tomb",
+        "Polluted Delta",
+        "Sacred Foundry",
+        "Starting Town",
+        "Steam Vents",
+        "Stomping Ground",
+        "Talon Gates of Madara",
+        "Temple Garden",
+        "Verdant Catacombs",
+        "Watery Grave",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Aminatou, the Fateshifter",
+        "Tyvar, Jubilant Brawler"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.23
+  },
+  "dual_role_cards": [
+    {
+      "card": "Aminatou, the Fateshifter",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "An Offer You Can't Refuse",
+      "roles": [
+        "counterspells",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Mesa",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Birds of Paradise",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloom Tender",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Borne Upon a Wind",
+      "roles": [
+        "card_advantage",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cabal Ritual",
+      "roles": [
+        "graveyard_enablers",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chromatic Orrery",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "City of Brass",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadpool, Trading Card",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deathrite Shaman",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Delighted Halfling",
+      "roles": [
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Derevi, Empyrial Tactician",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drannith Magistrate",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emiel the Blessed",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Enduring Vitality",
+      "roles": [
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Esper Sentinel",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gamble",
+      "roles": [
+        "discard_outlets",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gemstone Caverns",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Into the Flood Maw",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kinnan, Bonder Prodigy",
+      "roles": [
+        "dig_draw",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kutzil, Malamet Exemplar",
+      "roles": [
+        "card_advantage",
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lotho, Corrupt Shirriff",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Vault",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nature's Rhythm",
+      "roles": [
+        "graveyard_enablers",
+        "mana_reducers",
+        "recursion",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Necropotence",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ragavan, Nimble Pilferer",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ranger-Captain of Eos",
+      "roles": [
+        "hate_pieces",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Selvala, Heart of the Wilds",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sevinne's Reclamation",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sisay, Weatherlight Captain",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smothering Tithe",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Talon Gates of Madara",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tataru Taru",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thassa's Oracle",
+      "roles": [
+        "dig_draw",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tinder Wall",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tyvar, Jubilant Brawler",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underworld Breach",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/sisay-weatherlight-captain.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

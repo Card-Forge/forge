@@ -1,0 +1,376 @@
+{
+  "archetype": "Brago, King Eternal",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/brago-king-eternal.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abandoned Campground"
+    },
+    {
+      "qty": 1,
+      "name": "Abuelo, Ancestral Echo"
+    },
+    {
+      "qty": 1,
+      "name": "Adarkar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Another Round"
+    },
+    {
+      "qty": 1,
+      "name": "Aqueous Form"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Azorius Chancery"
+    },
+    {
+      "qty": 1,
+      "name": "Beza, the Bounding Spring"
+    },
+    {
+      "qty": 1,
+      "name": "Blighted Cataract"
+    },
+    {
+      "qty": 1,
+      "name": "Brago, King Eternal"
+    },
+    {
+      "qty": 1,
+      "name": "Canoptek Spyder"
+    },
+    {
+      "qty": 1,
+      "name": "Castle Vantress"
+    },
+    {
+      "qty": 1,
+      "name": "Claim Jumper"
+    },
+    {
+      "qty": 1,
+      "name": "Cloudblazer"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Confounding Conundrum"
+    },
+    {
+      "qty": 1,
+      "name": "Conjurer's Closet"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Daxos, Blessed by the Sun"
+    },
+    {
+      "qty": 1,
+      "name": "Daydream"
+    },
+    {
+      "qty": 1,
+      "name": "Delney, Streetwise Lookout"
+    },
+    {
+      "qty": 1,
+      "name": "Disenchant"
+    },
+    {
+      "qty": 1,
+      "name": "Disorder in the Court"
+    },
+    {
+      "qty": 1,
+      "name": "Displacer Kitten"
+    },
+    {
+      "qty": 1,
+      "name": "Distinguished Conjurer"
+    },
+    {
+      "qty": 1,
+      "name": "Dour Port-Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Duplicant"
+    },
+    {
+      "qty": 1,
+      "name": "Eerie Interlude"
+    },
+    {
+      "qty": 1,
+      "name": "Essence Flux"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Far Traveler"
+    },
+    {
+      "qty": 1,
+      "name": "Farewell"
+    },
+    {
+      "qty": 1,
+      "name": "Field of Ruin"
+    },
+    {
+      "qty": 1,
+      "name": "Flickerwisp"
+    },
+    {
+      "qty": 1,
+      "name": "Genku, Future Shaper"
+    },
+    {
+      "qty": 1,
+      "name": "Getaway Glamer"
+    },
+    {
+      "qty": 1,
+      "name": "Glacial Fortress"
+    },
+    {
+      "qty": 1,
+      "name": "Helpful Hunter"
+    },
+    {
+      "qty": 1,
+      "name": "Hengegate Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Irrigated Farmland"
+    },
+    {
+      "qty": 4,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Jeering Homunculus"
+    },
+    {
+      "qty": 1,
+      "name": "Knight of the White Orchid"
+    },
+    {
+      "qty": 1,
+      "name": "Lifecreed Duo"
+    },
+    {
+      "qty": 1,
+      "name": "Lonely Arroyo"
+    },
+    {
+      "qty": 1,
+      "name": "Loran of the Third Path"
+    },
+    {
+      "qty": 1,
+      "name": "Meteor Golem"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 1,
+      "name": "Mistmeadow Vanisher"
+    },
+    {
+      "qty": 1,
+      "name": "Monologue Tax"
+    },
+    {
+      "qty": 1,
+      "name": "Moorland Haunt"
+    },
+    {
+      "qty": 1,
+      "name": "Myriad Landscape"
+    },
+    {
+      "qty": 1,
+      "name": "Niko, Light of Hope"
+    },
+    {
+      "qty": 1,
+      "name": "Oketra's Monument"
+    },
+    {
+      "qty": 1,
+      "name": "Panharmonicon"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 1,
+      "name": "Permission Denied"
+    },
+    {
+      "qty": 1,
+      "name": "Phelia, Exuberant Shepherd"
+    },
+    {
+      "qty": 1,
+      "name": "Plagon, Lord of the Beach"
+    },
+    {
+      "qty": 6,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Port Town"
+    },
+    {
+      "qty": 1,
+      "name": "Prairie Stream"
+    },
+    {
+      "qty": 1,
+      "name": "Preston, the Vanisher"
+    },
+    {
+      "qty": 1,
+      "name": "Psychic Paper"
+    },
+    {
+      "qty": 1,
+      "name": "Rapid Hybridization"
+    },
+    {
+      "qty": 1,
+      "name": "Reflector Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Anchorage"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Roiling Dragonstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Rumor Gatherer"
+    },
+    {
+      "qty": 1,
+      "name": "Sejiri Steppe"
+    },
+    {
+      "qty": 1,
+      "name": "Semester's End"
+    },
+    {
+      "qty": 1,
+      "name": "Skycloud Expanse"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Solemn Recruit"
+    },
+    {
+      "qty": 1,
+      "name": "Solemn Simulacrum"
+    },
+    {
+      "qty": 1,
+      "name": "Soul Warden"
+    },
+    {
+      "qty": 1,
+      "name": "Soulherder"
+    },
+    {
+      "qty": 1,
+      "name": "Spirited Companion"
+    },
+    {
+      "qty": 1,
+      "name": "Stonehorn Dignitary"
+    },
+    {
+      "qty": 1,
+      "name": "Suppression Ray"
+    },
+    {
+      "qty": 1,
+      "name": "Supreme Verdict"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Enlightenment"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa, Deep-Dwelling"
+    },
+    {
+      "qty": 1,
+      "name": "Thraben Inspector"
+    },
+    {
+      "qty": 1,
+      "name": "Twinblade Blessing"
+    },
+    {
+      "qty": 1,
+      "name": "Unidentified Hovership"
+    },
+    {
+      "qty": 1,
+      "name": "Virtue of Knowledge"
+    },
+    {
+      "qty": 1,
+      "name": "War Room"
+    },
+    {
+      "qty": 1,
+      "name": "Whispersilk Cloak"
+    },
+    {
+      "qty": 1,
+      "name": "Yorion, Sky Nomad"
+    }
+  ],
+  "sideboard": []
+}

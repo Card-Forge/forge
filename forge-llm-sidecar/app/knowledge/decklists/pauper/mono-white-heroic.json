@@ -1,0 +1,89 @@
+{
+  "archetype": "Mono-White Heroic",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/mono-white-heroic.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Akroan Skyguard"
+    },
+    {
+      "qty": 4,
+      "name": "Benevolent Blessing"
+    },
+    {
+      "qty": 4,
+      "name": "Dig Site Inventory"
+    },
+    {
+      "qty": 2,
+      "name": "Emerge Unscathed"
+    },
+    {
+      "qty": 4,
+      "name": "Ethereal Armor"
+    },
+    {
+      "qty": 4,
+      "name": "Homestead Courage"
+    },
+    {
+      "qty": 4,
+      "name": "Hyena Umbra"
+    },
+    {
+      "qty": 4,
+      "name": "Lagonna-Band Trailblazer"
+    },
+    {
+      "qty": 14,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Remote Farm"
+    },
+    {
+      "qty": 4,
+      "name": "Sentinel's Eyes"
+    },
+    {
+      "qty": 4,
+      "name": "Skyward Spider"
+    },
+    {
+      "qty": 4,
+      "name": "Spirit Link"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Deftblade Elite"
+    },
+    {
+      "qty": 2,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 2,
+      "name": "Gut Shot"
+    },
+    {
+      "qty": 1,
+      "name": "Lifelink"
+    },
+    {
+      "qty": 3,
+      "name": "Mask of Law and Grace"
+    },
+    {
+      "qty": 3,
+      "name": "Shield of Duty and Reason"
+    },
+    {
+      "qty": 2,
+      "name": "Vault Skirge"
+    }
+  ]
+}

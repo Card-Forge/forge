@@ -12,11 +12,14 @@
     "keep_criteria": [
       "Hands with early damage spells or creatures to establish the aggressive clock",
       "Hands containing Looting effects paired with Madness cards to enable virtual card advantage",
-      "Hands with at least two lands to support early sequencing"
+      "Hands with at least two lands to support early sequencing",
+      "Keep hands with 2-3 lands (preferably fetchable or duals), at least one discard outlet (Alms of the Vein, Vampire's Kiss, or Grab the Prize), and 1-2 cheap burn spells.",
+      "Keep if you can play a land and cast an outlet or burn on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction or damage to set the clock",
-      "Hands with too many lands or late-game cards that delay the aggressive strategy"
+      "Hands with too many lands or late-game cards that delay the aggressive strategy",
+      "Mulligan on pure burn with no outlets, pure outlets with no mana, or hands with 3+ lands and no play."
     ],
     "examples": [
       {
@@ -38,17 +41,32 @@
     "early_game": [
       "Sequence spells carefully to drop Razortrap Gorge untapped by turn 3 or 4",
       "Play Kitchen Imp and Sneaky Snacker immediately to establish an aggressive clock",
-      "Cast Looting effects like Faithless Looting or Grab the Prize to trigger Madness and draw into threats"
+      "Cast Looting effects like Faithless Looting or Grab the Prize to trigger Madness and draw into threats",
+      "Turn 1: Play land, cast discard outlet if mana allows, or play land.",
+      "Turn 2: Cast second outlet or burn spell.",
+      "Sequence: Cast outlet -> opponent discards or you discard -> cast burn from graveyard via Madness -> repeat.",
+      "Prioritize finding more outlets over burn early to establish the engine."
     ],
     "mid_game": [
       "Use Alms of the Vein for life gain in Aggro mirrors while dealing damage",
       "Deploy Voldaren Epicure to create a token that enables further Madness triggers",
-      "Utilize Highway Robbery or Vampire’s Kiss for additional damage and discard synergy"
+      "Utilize Highway Robbery or Vampire\u2019s Kiss for additional damage and discard synergy",
+      "Hold mana for instant-speed burn responses, but commit to casting burn via Madness as soon as you have a discard outlet on the battlefield.",
+      "Never hoard burn spells in hand",
+      "intentionally discard them to fuel the graveyard.",
+      "Track your graveyard burn count and opponent's life total closely.",
+      "This is a face-race deck with minimal board presence.",
+      "Commit burn spells aggressively."
     ],
     "late_game": [
       "Reuse Faithless Looting from the graveyard to cycle hand or enable more Sneaky Snacker copies",
       "Play Stormshriek Feral as an extra threat and discard outlet",
-      "Leverage Rakdos Carnarium to reuse Jagged Barrens or Bojuka Bog ETB effects for mana fixing and damage"
+      "Leverage Rakdos Carnarium to reuse Jagged Barrens or Bojuka Bog ETB effects for mana fixing and damage",
+      "Lethal burn spells cast from the graveyard via Madness.",
+      "Chain multiple cheap burns (Shock, Lightning Strike, Lightning Helix, etc.) to close out the game.",
+      "Use discard outlets to dig for the final burn spell if needed.",
+      "Go all-in when you have 2+ burn spells in the graveyard and a discard outlet on the battlefield, or when you're at 3 or less life and can deal lethal this turn.",
+      "Commit fully if the opponent has no removal or counterspells in hand."
     ]
   },
   "key_cards": [
@@ -107,7 +125,13 @@
     "Sequence early spells carefully to ensure Razortrap Gorge enters untapped by turn 3 or 4",
     "Prioritize casting Looting effects before or alongside Madness cards to maximize virtual card advantage",
     "Save Faithless Looting for the graveyard to reuse it in longer games for cycling or enabling Sneaky Snacker",
-    "Use Alms of the Vein strategically in Aggro mirrors to gain life while maintaining damage output"
+    "Use Alms of the Vein strategically in Aggro mirrors to gain life while maintaining damage output",
+    "Common mistake: Hoarding burn spells in hand instead of discarding them to fuel the graveyard.",
+    "Remember, discard outlets are your engine",
+    "burn spells are your fuel.",
+    "If you discard a burn spell to an opponent's effect, it still goes to the graveyard and can be cast via Madness.",
+    "Ensure you have priority to cast from the graveyard, and watch out for 'discard to graveyard' vs 'discard to graveyard for Madness' timing.",
+    "In Unknown format, verify format-specific restrictions, but the core loop remains consistent."
   ],
   "matchups": [
     {
@@ -149,6 +173,31 @@
         "Experimental Synthesizer",
         "Kessig Flamebreather"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to strip counterspells from hand before committing. Cast burn spells in response to their counterspells if you have priority, or sequence your discard outlets to force them to counter multiple spells. Rely on graveyard recursion to bypass single-target counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply maximum early pressure. Do not let them stabilize. Use discard to hit their mana dorks, land drops, or early threats. If they get a big board, burn it down or race past it. Prioritize life total over board presence.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "You are the aggro. Do not slow down. Use discard to disrupt their early plays and key threats. If they get too wide, use any available burn to clear key threats, but prioritize closing the game over board control.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure relentlessly. Discard their removal and counterspells. If they try to grind, you must win before they find their answer. Use discard to strip key answers, then burn through their life total. Avoid trading burn for their removal unless it's lethal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Race to discard. Prioritize keeping discard outlets. Use your own discard to strip their outlets and burn spells. Win by having more burn in the graveyard, better sequencing, or out-drawing them with your outlets. Respect their discard and time your own carefully.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -159,10 +208,13 @@
     "High Tide",
     "Tron",
     "Dredge",
-    "Tolarian Terror"
+    "Tolarian Terror",
+    "Watch for counterspells, board wipes, and opponent discard outlets.",
+    "Note if the opponent is playing draw spells (they're trying to out-value you) or discard (they're disrupting your graveyard)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-madness-burn-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T09:22:56+00:00",
     "model": "local-model",
@@ -180,6 +232,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

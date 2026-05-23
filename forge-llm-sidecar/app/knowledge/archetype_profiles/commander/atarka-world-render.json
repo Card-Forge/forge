@@ -1,0 +1,639 @@
+{
+  "schema_version": 1,
+  "name": "Atarka, World Render",
+  "format": "commander",
+  "colors": [
+    "G",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "Leverage Dragonspeaker Shaman and Savage Ventmaw to rapidly pump Atarka, World Render into a massive, unblockable threat that closes out games before control or combo decks can stabilize. It functions as a tempo-aggro dragon deck that wins by overwhelming the board with a single, game-ending dragon.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 7,
+      "cards": [
+        "Dragon's Hoard",
+        "Drumhunter",
+        "Elemental Bond",
+        "Garruk's Uprising",
+        "Harmonize",
+        "Sweltering Suns",
+        "Talisman of Impulse"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Path of Ancestry",
+        "Temple of Abandon"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Cultivate",
+        "Kodama's Reach",
+        "Sakura-Tribe Elder",
+        "Sarkhan's Triumph"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Atarka, World Render",
+        "Dragonspeaker Shaman",
+        "Savage Ventmaw"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 38,
+      "cards": [
+        "Atarka Monument",
+        "Atarka, World Render",
+        "Belbe's Portal",
+        "Crucible of Fire",
+        "Demanding Dragon",
+        "Domri, Anarch of Bolas",
+        "Dracogenesis",
+        "Dragonkin Berserker",
+        "Dragonlord's Servant",
+        "Dragonmaster Outcast",
+        "Dragonspeaker Shaman",
+        "Drakuseth, Maw of Flames",
+        "Drumhunter",
+        "Earthquake Dragon",
+        "Elvish Piper",
+        "Fires of Yavimaya",
+        "Flameblast Dragon",
+        "Foe-Razer Regent",
+        "Frontier Siege",
+        "Ganax, Astral Hunter",
+        "Goblin Anarchomancer",
+        "Hellkite Charger",
+        "Hoard-Smelter Dragon",
+        "Lathliss, Dragon Queen",
+        "Minion of the Mighty",
+        "Mordant Dragon",
+        "Rapacious Dragon",
+        "Sakura-Tribe Elder",
+        "Savage Ventmaw",
+        "Scourge of Valkas",
+        "Scourge of the Throne",
+        "Sol Ring",
+        "Steel Hellkite",
+        "Thrakkus the Butcher",
+        "Thunderbreak Regent",
+        "Thundermaw Hellkite",
+        "Tyrant's Familiar",
+        "Unleash Fury"
+      ],
+      "mainboard_count": 38,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 23,
+      "cards": [
+        "Beast Within",
+        "Clan Defiance",
+        "Demanding Dragon",
+        "Dragon Tempest",
+        "Drakuseth, Maw of Flames",
+        "Flameblast Dragon",
+        "Garruk's Uprising",
+        "Haven of the Spirit Dragon",
+        "Hoard-Smelter Dragon",
+        "Krosan Grip",
+        "Magmaquake",
+        "Mordant Dragon",
+        "Primal Might",
+        "Scourge of Valkas",
+        "Spit Flame",
+        "Steel Hellkite",
+        "Sweltering Suns",
+        "Talisman of Impulse",
+        "Thunderbreak Regent",
+        "Thundermaw Hellkite",
+        "Tyrant's Familiar",
+        "Vandalblast",
+        "Warstorm Surge"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Magmaquake",
+        "Sweltering Suns",
+        "Thundermaw Hellkite"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Blossoming Defense",
+        "Domri, Anarch of Bolas",
+        "Rhythm of the Wild",
+        "Swiftfoot Boots"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 3,
+      "cards": [
+        "Earthquake Dragon",
+        "Haven of the Spirit Dragon",
+        "Spit Flame"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Earthquake Dragon",
+        "Haven of the Spirit Dragon",
+        "Spit Flame"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Atarka, World Render",
+        "Dragonspeaker Shaman",
+        "Savage Ventmaw"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Krosan Grip"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 16,
+      "cards": [
+        "Arcane Signet",
+        "Carnelian Orb of Dragonkind",
+        "Cinder Glade",
+        "Command Tower",
+        "Dragon's Hoard",
+        "Game Trail",
+        "Ganax, Astral Hunter",
+        "Haven of the Spirit Dragon",
+        "Kazandu Refuge",
+        "Path of Ancestry",
+        "Rapacious Dragon",
+        "Rugged Highlands",
+        "Savage Ventmaw",
+        "Shivan Oasis",
+        "Temple of Abandon",
+        "Timber Gorge"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 39,
+      "cards": [
+        "Cinder Glade",
+        "Command Tower",
+        "Forest",
+        "Game Trail",
+        "Haven of the Spirit Dragon",
+        "Kazandu Refuge",
+        "Mountain",
+        "Path of Ancestry",
+        "Rugged Highlands",
+        "Shivan Oasis",
+        "Temple of Abandon",
+        "Timber Gorge"
+      ],
+      "mainboard_count": 39,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Domri, Anarch of Bolas"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.37
+  },
+  "dual_role_cards": [
+    {
+      "card": "Atarka, World Render",
+      "roles": [
+        "combo_pieces",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cinder Glade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Demanding Dragon",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Domri, Anarch of Bolas",
+      "roles": [
+        "planeswalker_threats",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dragon's Hoard",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dragonspeaker Shaman",
+      "roles": [
+        "combo_pieces",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drakuseth, Maw of Flames",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drumhunter",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Earthquake Dragon",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flameblast Dragon",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Game Trail",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ganax, Astral Hunter",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Garruk's Uprising",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haven of the Spirit Dragon",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hoard-Smelter Dragon",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kazandu Refuge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Krosan Grip",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Magmaquake",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mordant Dragon",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rapacious Dragon",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rugged Highlands",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sakura-Tribe Elder",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Savage Ventmaw",
+      "roles": [
+        "combo_pieces",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scourge of Valkas",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shivan Oasis",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spit Flame",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steel Hellkite",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sweltering Suns",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Talisman of Impulse",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Abandon",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thunderbreak Regent",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thundermaw Hellkite",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Timber Gorge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tyrant's Familiar",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: Pumping the wrong dragon.",
+    "Always prioritize Atarka.",
+    "Watch out for sacrifice outlets.",
+    "Shaman's ETB counter is free value.",
+    "Ventmaw can be a finisher or pump source."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a Forest or Mountain."
+    },
+    {
+      "trigger": "early game",
+      "line": "If you have Shaman, play it."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a Mountain, cast Shaman if you didn't, or play a 2-drop dragon."
+    }
+  ],
+  "kill_priority": [
+    "Atarka, World Render",
+    "Dragonspeaker Shaman",
+    "Savage Ventmaw",
+    "Domri, Anarch of Bolas",
+    "Atarka Monument",
+    "Belbe's Portal",
+    "Crucible of Fire",
+    "Demanding Dragon"
+  ],
+  "interaction_to_disrupt": [
+    "Blossoming Defense",
+    "Domri, Anarch of Bolas",
+    "Rhythm of the Wild",
+    "Swiftfoot Boots",
+    "Beast Within",
+    "Clan Defiance",
+    "Demanding Dragon",
+    "Dragon Tempest"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/atarka-world-render.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

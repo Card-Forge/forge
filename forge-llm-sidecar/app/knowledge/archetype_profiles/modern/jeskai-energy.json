@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "name": "Jeskai Energy",
+  "format": "modern",
+  "colors": [
+    "W",
+    "U",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Jeskai Energy in Modern leverages the energy mechanic to rapidly accelerate into large, resilient threats while maintaining board presence and card advantage. The deck uses cheap early plays to establish energy generation, then transitions into massive creatures that can overwhelm opponents through combat or direct damage. Interaction and graveyard recursion provide the necessary resilience to outlast aggressive strategies and close out games against control.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 2,
+      "cards": [
+        "Doorkeeper Thrull",
+        "Nulldrifter"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Doorkeeper Thrull",
+        "Nulldrifter"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Doorkeeper Thrull",
+        "Nulldrifter",
+        "Phlage, Titan of Fire's Fury"
+      ]
+    },
+    "threats": {
+      "target_count": 3,
+      "cards": [
+        "Doorkeeper Thrull",
+        "Nulldrifter",
+        "Phlage, Titan of Fire's Fury"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Doorkeeper Thrull",
+        "Nulldrifter"
+      ]
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 2,
+      "cards": [
+        "Doorkeeper Thrull",
+        "Nulldrifter"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 1,
+      "cards": [
+        "Doorkeeper Thrull"
+      ]
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Doorkeeper Thrull",
+        "Nulldrifter"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Doorkeeper Thrull",
+        "Nulldrifter"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 2,
+      "cards": [
+        "Doorkeeper Thrull",
+        "Nulldrifter"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Phlage, Titan of Fire's Fury",
+      "roles": [
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nulldrifter",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Doorkeeper Thrull",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Generate energy before declaring attackers to maximize Phlage, Titan of Fire's Fury's size",
+    "Hold up energy for Doorkeeper Thrull's damage prevention before committing to all-in attacks",
+    "Prioritize playing energy generators before spenders to avoid stalling",
+    "Use Nulldrifter to block or pressure while setting up energy for turn three",
+    "Energy counters are a unique resource"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing Nulldrifter to establish an early board presence and protect energy generators"
+    },
+    {
+      "trigger": "early game",
+      "line": "Begin generating energy immediately to fuel Phlage, Titan of Fire's Fury's growth"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use cheap interaction to disrupt opponent's early game"
+    }
+  ],
+  "kill_priority": [
+    "Doorkeeper Thrull",
+    "Nulldrifter",
+    "Doorkeeper Thrull",
+    "Nulldrifter",
+    "Phlage, Titan of Fire's Fury",
+    "Doorkeeper Thrull",
+    "Nulldrifter",
+    "Phlage, Titan of Fire's Fury"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

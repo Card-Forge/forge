@@ -1,0 +1,161 @@
+{
+  "archetype": "Doomsday",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/doomsday.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancestral Recall"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Daze"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Dig Through Time"
+    },
+    {
+      "qty": 4,
+      "name": "Doomsday"
+    },
+    {
+      "qty": 2,
+      "name": "Flow State"
+    },
+    {
+      "qty": 3,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Gitaxian Probe"
+    },
+    {
+      "qty": 1,
+      "name": "Gush"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Misdirection"
+    },
+    {
+      "qty": 3,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 3,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 2,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 4,
+      "name": "Psychic Frog"
+    },
+    {
+      "qty": 3,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 1,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Time Walk"
+    },
+    {
+      "qty": 1,
+      "name": "Treasure Cruise"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 4,
+      "name": "Underground Sea"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Commandeer"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Lurrus of the Dream-Den"
+    },
+    {
+      "qty": 2,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Steel Sabotage"
+    },
+    {
+      "qty": 4,
+      "name": "Unable to Scream"
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "archetype": "Esper Affinity",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/esper-affinity.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Den"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Campfire"
+    },
+    {
+      "qty": 3,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 3,
+      "name": "Cryogen Relic"
+    },
+    {
+      "qty": 4,
+      "name": "Glint Hawk"
+    },
+    {
+      "qty": 2,
+      "name": "Goldmire Bridge"
+    },
+    {
+      "qty": 2,
+      "name": "Grim Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Ichor Wellspring"
+    },
+    {
+      "qty": 4,
+      "name": "Kor Skyfisher"
+    },
+    {
+      "qty": 1,
+      "name": "Lembas"
+    },
+    {
+      "qty": 2,
+      "name": "Mistvault Bridge"
+    },
+    {
+      "qty": 2,
+      "name": "Mukotai Ambusher"
+    },
+    {
+      "qty": 4,
+      "name": "Myr Enforcer"
+    },
+    {
+      "qty": 1,
+      "name": "Navigator's Compass"
+    },
+    {
+      "qty": 1,
+      "name": "Omen of the Dead"
+    },
+    {
+      "qty": 1,
+      "name": "Prophetic Prism"
+    },
+    {
+      "qty": 2,
+      "name": "Razortide Bridge"
+    },
+    {
+      "qty": 2,
+      "name": "Reckoner's Bargain"
+    },
+    {
+      "qty": 4,
+      "name": "Refurbished Familiar"
+    },
+    {
+      "qty": 3,
+      "name": "Seat of the Synod"
+    },
+    {
+      "qty": 1,
+      "name": "Thorn of the Black Rose"
+    },
+    {
+      "qty": 2,
+      "name": "Thoughtcast"
+    },
+    {
+      "qty": 1,
+      "name": "Thraben Charm"
+    },
+    {
+      "qty": 3,
+      "name": "Tithing Blade"
+    },
+    {
+      "qty": 3,
+      "name": "Vault of Whispers"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Arms of Hadar"
+    },
+    {
+      "qty": 4,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 3,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 2,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 2,
+      "name": "Thraben Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 2,
+      "name": "Unexpected Fangs"
+    }
+  ]
+}

@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with early interaction and reliable land drops",
       "Hands containing Lurrus of the Dream-Den with cheap recursion targets",
-      "Hands with multiple cantrips or disruption spells"
+      "Hands with multiple cantrips or disruption spells",
+      "Keep hands with 2-3 lands, Lurrus of the Dream-Den, and 1-2 1-drops (Orcish Bowmasters/Psychic Frog) or early interaction (Thoughtseize/Dismember)."
     ],
     "mulligan_criteria": [
       "Hands lacking early disruption or land drops",
       "Hands with only high-cost cards and no recursion",
-      "Hands missing Lurrus or its targets in a control matchup"
+      "Hands missing Lurrus or its targets in a control matchup",
+      "Mulligan hands with 3+ lands, no Lurrus/1-drops, or only expensive spells that can't impact turns 1-2."
     ],
     "examples": []
   },
@@ -25,17 +27,29 @@
     "early_game": [
       "Play lands and hold up mana for disruption",
       "Cast Lurrus of the Dream-Den as soon as possible",
-      "Use cheap interaction to delay opponent threats"
+      "Use cheap interaction to delay opponent threats",
+      "Turn 1: Play a land, cast Thoughtseize/Dismember to disrupt, or drop a 1-drop if the board is clear.",
+      "Turn 2: Develop mana, cast Lurrus or another 1-drop, or play a removal spell.",
+      "Sequence lands to ensure consistent blue/black mana availability for interaction and Lurrus casting."
     ],
     "mid_game": [
       "Replay Orcish Bowmasters to remove recurring threats",
       "Use Psychic Frog to counter high-value spells",
-      "Maintain board control while drawing into late-game answers"
+      "Maintain board control while drawing into late-game answers",
+      "Preserve Lurrus as your primary engine",
+      "avoid overcommitting to the board if you can recur threats next turn.",
+      "Manage your graveyard carefully\u2014don't fill it with non-Lurrus targets, but actively dump 1-drops and removal to fuel flashback.",
+      "Use cantrips (Ponder/Brainstorm) to dig for Lurrus or interaction when resources thin.",
+      "Commit threats when you have removal or counterspells to protect them, or when you can safely recur them next turn.",
+      "Hold back if facing sweepers or if your graveyard is empty."
     ],
     "late_game": [
       "Leverage Lurrus recursion to replay key answers repeatedly",
       "Stall until opponent runs out of resources",
-      "Close out with recursive removal or counters"
+      "Close out with recursive removal or counters",
+      "Lurrus of the Dream-Den replaying Orcish Bowmasters/Psychic Frog for incremental damage and targeted removal, combined with Teferi, Hero of Dominaria or The Wandering Emperor for card advantage and a reliable clock.",
+      "Go all-in when you have Lurrus on board, a full graveyard of 1-drops/removal, and enough interaction to protect your board or answer their sweepers.",
+      "Also commit when the opponent is at low life and you can recur threats for lethal before they stabilize."
     ]
   },
   "key_cards": [
@@ -58,7 +72,10 @@
   "sequencing_tips": [
     "Hold up Lurrus recursion until you have a clear target to avoid wasting mana",
     "Prioritize removing threats that can generate immediate board presence or card advantage",
-    "Save Psychic Frog for turns when opponent is vulnerable to mana taxes or has high-cost spells queued"
+    "Save Psychic Frog for turns when opponent is vulnerable to mana taxes or has high-cost spells queued",
+    "Common mistakes include overfilling the graveyard with non-Lurrus targets, forgetting that Lurrus only returns 2-mana-or-less spells, and mismanaging the flashback mechanic.",
+    "Remember that Psychic Frog and Orcish Bowmasters are both 1-mana, making them ideal Lurrus targets.",
+    "Track the opponent's graveyard to avoid giving them free Lurrus targets if they run similar strategies, and always prioritize protecting Lurrus as your primary win condition engine."
   ],
   "matchups": [
     {
@@ -87,16 +104,35 @@
         "Board wipes",
         "Resource denial"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig around counters, cast threats at the end of the opponent's turn, use flashback/removal to bypass counters, or sideboard in more uncounterable threats/sweepers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race them, use efficient removal (Dismember, Fatal Push) on key ramp creatures, and sideboard in artifact/enchantment hate or additional removal to slow their acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by optimizing Lurrus targets, winning the graveyard race, and sideboarding in more card advantage (Teferi, Wandering Emperor) and counterspells. Prioritize keeping Lurrus safe and trading efficiently to outlast them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Mana acceleration spells",
     "Graveyard-based combo pieces",
-    "Board wipes that remove Lurrus"
+    "Board wipes that remove Lurrus",
+    "Watch for sweepers (Supreme Verdict, Anger), graveyard strategies (Dredge, Oath), and combo win conditions.",
+    "Note when opponents tap out for big spells or hold up interaction.",
+    "Track graveyard contents to anticipate Lurrus targets and avoid giving them free recursion."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:23:43+00:00",
     "model": "local-model",
@@ -112,6 +148,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

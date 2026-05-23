@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with fast mana and a one- or two-drop",
       "Hands containing Goblin Welder alongside artifact support",
-      "Hands featuring blue interaction paired with early threats"
+      "Hands featuring blue interaction paired with early threats",
+      "Keep hands with 2+ mana sources (lands, Mox Opal, Lotus Petal, Chrome Mox) and at least one of Goblin Welder, Aether Vial, or Arcbound Ravager.",
+      "Prioritize hands that can cast a spell or activate a mana rock on turn 1."
     ],
     "mulligan_criteria": [
       "Hands lacking artifact synergy or fast mana",
       "Hands composed entirely of high-cost cards",
-      "Hands without early disruption or threats"
+      "Hands without early disruption or threats",
+      "Mulligan hands with 3+ lands, no artifacts, or only one mana source without a turn-1 play."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Deploy Mox Opal and Lotus Petal immediately to accelerate mana",
       "Play low-cost artifacts to enable Goblin Welder activations",
-      "Use red instant-speed removal to clear early blockers"
+      "Use red instant-speed removal to clear early blockers",
+      "Turn 1: Play a land, cast Lotus Petal or Mox Opal, or cast Goblin Welder/Shardless Agent.",
+      "Turn 2: Cast Aether Vial, Smelt-Hound, or another artifact.",
+      "Sequence Opal/Petal to generate extra mana for Vial activation or Welder casting.",
+      "Prioritize establishing artifact acceleration and Vial availability to cheat threats into play before the opponent can interact."
     ],
     "mid_game": [
       "Activate Goblin Welder to fetch key artifacts from the graveyard",
       "Cast blue control spells to protect your board state",
-      "Build a resilient artifact engine that pressures the opponent"
+      "Build a resilient artifact engine that pressures the opponent",
+      "Use Opal and Petal to accelerate into Vial or Welder.",
+      "Don't overextend Vial if you lack follow-up artifacts.",
+      "Track graveyard contents carefully",
+      "Welder, Ravager, and Smelt-Hound are vulnerable to graveyard hate but enable infinite combos if assembled.",
+      "Preserve interaction for key threats.",
+      "Commit Goblin Welder when you can immediately follow up with Arcbound Ravager, Smelt-Hound, or have Aether Vial ready to cheat in a threat."
     ],
     "late_game": [
       "Loop Goblin Welder and artifacts to generate infinite value",
       "Cast high-impact finishers to close the game",
-      "Maintain card advantage through continuous artifact recursion"
+      "Maintain card advantage through continuous artifact recursion",
+      "Goblin Welder + Arcbound Ravager (5/5 trample with untap on death), or Welder + Smelt-Hound/Thopter Foundry (infinite combat damage or mana).",
+      "Assemble by cheating Welder/Vial into play, then sequencing artifacts to trigger abilities and close the game.",
+      "Go all-in when Aether Vial is active, the opponent has no removal/sweepers, or you can safely assemble the combo.",
+      "Commit when you can swing for lethal or lock the opponent out of the game with infinite combat/mana."
     ]
   },
   "key_cards": [
@@ -59,7 +76,13 @@
     "Always play Mox Opal before Lotus Petal when artifact mana is required",
     "Hold blue counterspells for opponent's key threats rather than early swats",
     "Sacrifice expendable artifacts first to protect your core engine pieces",
-    "Activate Goblin Welder before opponent's instant-speed removal resolves"
+    "Activate Goblin Welder before opponent's instant-speed removal resolves",
+    "Common mistakes include overcommitting Goblin Welder without follow-up, forgetting to use Opal/Petal for extra mana, and mis-timing Aether Vial.",
+    "Unique interactions: Welder + Ravager triggers both ETB and death abilities",
+    "Smelt-Hound + Welder creates infinite combat/mana",
+    "Aether Vial can target artifacts in the graveyard.",
+    "Always track opponent removal and sweepers to avoid dead commits.",
+    "Practice sequencing Opal/Petal to ensure you can cast Vial or Welder on curve even with a poor land draw."
   ],
   "matchups": [
     {
@@ -88,16 +111,35 @@
         "Key combo pieces",
         "Graveyard recursion"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Opal/Petal to cast spells around counters, cheat threats with Aether Vial, and use Spell Pierce/Sudden Spoiling to protect your own spells. Sequence Welder first, then Vial on the following turn to bypass counter windows.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure and use removal on mana dorks or key lands. Don't let them stabilize; use Vial to cheat out threats before they can ramp out. Disrupt their mana base with targeted removal or counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing with Aether Vial timing, graveyard management, and more interaction. Prioritize casting Welder first, then Vial, and use removal to break their combos. Value engine and artifact synergy will decide the match.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Rest in Peace",
     "Lightning Bolt",
     "Counterspell",
-    "Abrupt Decay"
+    "Abrupt Decay",
+    "Watch for sweepers (e.g., Wrath of God, Day of Judgment), targeted removal (Path to Exile, Lightning Bolt), and counterspells.",
+    "Note when opponents tap out for big spells or leave mana open for interaction.",
+    "Track graveyard recursion and artifact hate to avoid dead commits."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:48:39+00:00",
     "model": "local-model",
@@ -113,6 +155,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,668 @@
+{
+  "schema_version": 1,
+  "name": "Witherbloom, the Balancer",
+  "format": "commander",
+  "colors": [
+    "B",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "This archetype is a fast mana and ramp strategy that leverages Witherbloom, the Balancer as both a flexible mana source and a late-game pump engine. It aims to outpace opponents by accelerating into massive threats or pumping a single creature to lethal, thriving against slower control and combo decks while struggling against hyper-aggressive strategies.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "Dark Ritual"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Archon of Cruelty",
+        "Bad Deal",
+        "Beast Whisperer",
+        "Circle of Power",
+        "Mordor Muster",
+        "Night's Whisper",
+        "Oracle's Restoration",
+        "Painful Lesson",
+        "Peer into the Abyss",
+        "Shamanic Revelation"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Once Upon a Time",
+        "Temple of Malady",
+        "Titan's Grave"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 6,
+      "cards": [
+        "Beseech the Queen",
+        "Chord of Calling",
+        "Cultivate",
+        "Sakura-Tribe Elder",
+        "Tooth and Nail",
+        "Traverse the Ulvenwald"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Tooth and Nail",
+        "Witherbloom, the Balancer"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 34,
+      "cards": [
+        "Agadeem's Awakening",
+        "Archon of Cruelty",
+        "Awakening Zone",
+        "Beast Whisperer",
+        "Birds of Paradise",
+        "Bitterbloom Bearer",
+        "Circle of Dreams Druid",
+        "Darkbore Pathway",
+        "Dryad Arbor",
+        "Elves of Deep Shadow",
+        "Elvish Spirit Guide",
+        "Emerald Medallion",
+        "Endurance",
+        "Fists of Ironwood",
+        "Foulmire Knight",
+        "Frog Butler",
+        "Gala Greeters",
+        "Grave Titan",
+        "Jet Medallion",
+        "Lab Rats",
+        "Llanowar Elves",
+        "Massacre Wurm",
+        "Mosswood Dreadknight",
+        "Plague of Vermin",
+        "Sakura-Tribe Elder",
+        "Saproling Migration",
+        "Sedgemoor Witch",
+        "Seeker's Folly",
+        "Sol Ring",
+        "Tyvar, Jubilant Brawler",
+        "Utopia Sprawl",
+        "Valgavoth, Terror Eater",
+        "Virulent Emissary",
+        "Witherbloom, the Balancer"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 10,
+      "cards": [
+        "Beast Within",
+        "Bojuka Bog",
+        "Circle of Power",
+        "Elves of Deep Shadow",
+        "Foolish Fate",
+        "In Garruk's Wake",
+        "Llanowar Wastes",
+        "Naturalize",
+        "Pest Infestation",
+        "Verdant Command"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 8,
+      "cards": [
+        "Breach the Multiverse",
+        "Chord of Calling",
+        "Circle of Dreams Druid",
+        "Elephant Grass",
+        "In Garruk's Wake",
+        "Leyline of Abundance",
+        "Shamanic Revelation",
+        "Witherbloom, the Balancer"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 1,
+      "cards": [
+        "Verdant Command"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Sedgemoor Witch",
+        "Valgavoth, Terror Eater"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 10,
+      "cards": [
+        "Army of the Damned",
+        "Bojuka Bog",
+        "Breach the Multiverse",
+        "Endurance",
+        "Rise of the Dark Realms",
+        "Titan's Grave",
+        "Traverse the Ulvenwald",
+        "Tyvar, Jubilant Brawler",
+        "Valgavoth, Terror Eater",
+        "Verdant Command"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Army of the Damned",
+        "Ba Sing Se",
+        "Golgari Rot Farm",
+        "Tyvar, Jubilant Brawler"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Beast Whisperer",
+        "Circle of Power",
+        "Sedgemoor Witch",
+        "Witherbloom, the Balancer"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Tooth and Nail"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Witherbloom, the Balancer"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Arcane Signet",
+        "Ba Sing Se",
+        "Birds of Paradise",
+        "Blooming Marsh",
+        "Bojuka Bog",
+        "Command Tower",
+        "Cryptolith Rite",
+        "Dryad Arbor",
+        "Frog Butler",
+        "Golgari Rot Farm",
+        "Leyline of Abundance",
+        "Llanowar Wastes",
+        "Necroblossom Snarl",
+        "Overgrown Tomb",
+        "Tainted Wood",
+        "Temple of Malady",
+        "Titan's Grave",
+        "Twilight Mire",
+        "Vernal Fen",
+        "Witherbloom, the Balancer",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 39,
+      "cards": [
+        "Ba Sing Se",
+        "Blooming Marsh",
+        "Bojuka Bog",
+        "Command Tower",
+        "Dryad Arbor",
+        "Forest",
+        "Golgari Rot Farm",
+        "Llanowar Wastes",
+        "Necroblossom Snarl",
+        "Overgrown Tomb",
+        "Swamp",
+        "Tainted Wood",
+        "Temple of Malady",
+        "Titan's Grave",
+        "Twilight Mire",
+        "Vernal Fen",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 39,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Tyvar, Jubilant Brawler"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.24
+  },
+  "dual_role_cards": [
+    {
+      "card": "Archon of Cruelty",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Army of the Damned",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ba Sing Se",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Beast Whisperer",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Birds of Paradise",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blooming Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breach the Multiverse",
+      "roles": [
+        "graveyard_enablers",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chord of Calling",
+      "roles": [
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Circle of Dreams Druid",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Circle of Power",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dryad Arbor",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elves of Deep Shadow",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Frog Butler",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Golgari Rot Farm",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "In Garruk's Wake",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leyline of Abundance",
+      "roles": [
+        "mana_fixing",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Llanowar Wastes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Necroblossom Snarl",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sakura-Tribe Elder",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sedgemoor Witch",
+      "roles": [
+        "engines",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shamanic Revelation",
+      "roles": [
+        "card_advantage",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tainted Wood",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Malady",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Titan's Grave",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tooth and Nail",
+      "roles": [
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Traverse the Ulvenwald",
+      "roles": [
+        "graveyard_enablers",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Twilight Mire",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tyvar, Jubilant Brawler",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Valgavoth, Terror Eater",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Command",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vernal Fen",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Witherbloom, the Balancer",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Woodland Cemetery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: Tapping Witherbloom for mana when you should be saving it for a pump, or overcommitting to the board without protection.",
+    "Unique interaction: Witherbloom's pump scales with mana spent to cast it, so casting it for its converted mana cost or using it as a pump source is key.",
+    "Always balance its dual role as a mana source and finisher based on game state."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, tap Llanowar/Elvish for green."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play another land, tap dweeb + land for {G}, cast another dweeb or low-cost ramp spell."
+    },
+    {
+      "trigger": "early game",
+      "line": "If opening with Witherbloom, play land, tap for {G}, and cast it on turn 2 if possible, or hold for turn 3."
+    }
+  ],
+  "kill_priority": [
+    "Beast Whisperer",
+    "Circle of Power",
+    "Sedgemoor Witch",
+    "Witherbloom, the Balancer",
+    "Tooth and Nail",
+    "Tyvar, Jubilant Brawler",
+    "Agadeem's Awakening",
+    "Archon of Cruelty"
+  ],
+  "interaction_to_disrupt": [
+    "Verdant Command",
+    "Sedgemoor Witch",
+    "Valgavoth, Terror Eater",
+    "Beast Within",
+    "Bojuka Bog",
+    "Circle of Power",
+    "Elves of Deep Shadow",
+    "Foolish Fate"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/witherbloom-the-balancer.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

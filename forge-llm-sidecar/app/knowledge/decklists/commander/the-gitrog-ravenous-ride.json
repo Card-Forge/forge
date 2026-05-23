@@ -1,0 +1,336 @@
+{
+  "archetype": "The Gitrog, Ravenous Ride",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/the-gitrog-ravenous-ride.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Assassin's Trophy"
+    },
+    {
+      "qty": 1,
+      "name": "Beastrider Vanguard"
+    },
+    {
+      "qty": 1,
+      "name": "Bebop & Rocksteady"
+    },
+    {
+      "qty": 1,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Bolas's Citadel"
+    },
+    {
+      "qty": 1,
+      "name": "Bygone Colossus"
+    },
+    {
+      "qty": 1,
+      "name": "Carpet of Flowers"
+    },
+    {
+      "qty": 1,
+      "name": "Chord of Calling"
+    },
+    {
+      "qty": 1,
+      "name": "City of Brass"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Conqueror's Flail"
+    },
+    {
+      "qty": 1,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Destiny Spinner"
+    },
+    {
+      "qty": 1,
+      "name": "Devoted Druid"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir House Guard"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir Machinations"
+    },
+    {
+      "qty": 1,
+      "name": "Dosan the Falling Leaf"
+    },
+    {
+      "qty": 1,
+      "name": "Earthbender Ascension"
+    },
+    {
+      "qty": 1,
+      "name": "Eldritch Evolution"
+    },
+    {
+      "qty": 1,
+      "name": "Elemental Bond"
+    },
+    {
+      "qty": 1,
+      "name": "Elves of Deep Shadow"
+    },
+    {
+      "qty": 1,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Elvish Spirit Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Eternal Witness"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Fellwar Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Forbidden Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 14,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Frenzied Baloth"
+    },
+    {
+      "qty": 1,
+      "name": "Fyndhorn Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Garruk's Uprising"
+    },
+    {
+      "qty": 1,
+      "name": "Ghalta, Primal Hunger"
+    },
+    {
+      "qty": 1,
+      "name": "Gilded Goose"
+    },
+    {
+      "qty": 1,
+      "name": "Greater Good"
+    },
+    {
+      "qty": 1,
+      "name": "Guardian Project"
+    },
+    {
+      "qty": 1,
+      "name": "Hazel's Brewmaster"
+    },
+    {
+      "qty": 1,
+      "name": "Honest Rutstein"
+    },
+    {
+      "qty": 1,
+      "name": "Hunted Horror"
+    },
+    {
+      "qty": 1,
+      "name": "Kalakscion, Hunger Tyrant"
+    },
+    {
+      "qty": 1,
+      "name": "Lively Dirge"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Lupine Prototype"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Rhythm"
+    },
+    {
+      "qty": 1,
+      "name": "Necropotence"
+    },
+    {
+      "qty": 1,
+      "name": "Opposition Agent"
+    },
+    {
+      "qty": 1,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Reclamation"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Soulgorger"
+    },
+    {
+      "qty": 1,
+      "name": "Prowling Serpopard"
+    },
+    {
+      "qty": 1,
+      "name": "Reanimate"
+    },
+    {
+      "qty": 1,
+      "name": "Relic Golem"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rot-Curse Rakshasa"
+    },
+    {
+      "qty": 1,
+      "name": "Rotting Regisaur"
+    },
+    {
+      "qty": 1,
+      "name": "Selvala, Heart of the Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Sheltering Ancient"
+    },
+    {
+      "qty": 1,
+      "name": "Shred Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 6,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Library"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Safekeeper"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Wood"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Resilience"
+    },
+    {
+      "qty": 1,
+      "name": "Tear Asunder"
+    },
+    {
+      "qty": 1,
+      "name": "The Gitrog, Ravenous Ride"
+    },
+    {
+      "qty": 1,
+      "name": "The Skullspore Nexus"
+    },
+    {
+      "qty": 1,
+      "name": "Tireless Provisioner"
+    },
+    {
+      "qty": 1,
+      "name": "Twilight Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Undergrowth Stadium"
+    },
+    {
+      "qty": 1,
+      "name": "Unearth"
+    },
+    {
+      "qty": 1,
+      "name": "Veil of Summer"
+    },
+    {
+      "qty": 1,
+      "name": "Walking Ballista"
+    },
+    {
+      "qty": 1,
+      "name": "Wall of Blood"
+    },
+    {
+      "qty": 1,
+      "name": "Wastewood Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Wild Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Woodland Cemetery"
+    }
+  ],
+  "sideboard": []
+}

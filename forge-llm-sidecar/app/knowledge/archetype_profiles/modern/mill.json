@@ -1,0 +1,479 @@
+{
+  "schema_version": 1,
+  "name": "Mill",
+  "format": "modern",
+  "colors": [
+    "U",
+    "B"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "This Modern mill deck aims to win by exhausting the opponent's library before they can reduce your life total to zero. It relies on a core of eight crabs for consistent milling, supported by a robust suite of removal, counterspells, and card advantage engines to survive aggressive strategies and close out games.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 3,
+      "cards": [
+        "Field of Ruin"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 9,
+      "cards": [
+        "Baleful Mastery",
+        "Fractured Sanity",
+        "Preordain",
+        "Visions of Beyond"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 6,
+      "cards": [
+        "Preordain",
+        "Shelldock Isle",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 11,
+      "cards": [
+        "Field of Ruin",
+        "Flooded Strand",
+        "Polluted Delta"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Fractured Sanity",
+        "Tasha's Hideous Laughter"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 27,
+      "cards": [
+        "Drown in the Loch",
+        "Exhibition Tidecaller",
+        "Fatal Push",
+        "Fractured Sanity",
+        "Hedron Crab",
+        "Otawara, Soaring City",
+        "Ruin Crab",
+        "Sink into Stupor",
+        "Tasha's Hideous Laughter"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 13,
+      "cards": [
+        "Baleful Mastery",
+        "Drown in the Loch",
+        "Fatal Push",
+        "Feed the Cycle",
+        "Field of Ruin",
+        "Otawara, Soaring City"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "The Meathook Massacre",
+        "Toxic Deluge"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 8,
+      "cards": [
+        "Consign to Memory",
+        "Drown in the Loch"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 41,
+      "cards": [
+        "Archive Trap",
+        "Crypt Incursion",
+        "Drown in the Loch",
+        "Exhibition Tidecaller",
+        "Extirpate",
+        "Feed the Cycle",
+        "Fractured Sanity",
+        "Hedron Crab",
+        "Profane Memento",
+        "Ruin Crab",
+        "Surgical Extraction",
+        "Tasha's Hideous Laughter",
+        "Undercity Sewers",
+        "Visions of Beyond"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 8
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Feed the Cycle",
+        "Oboro, Palace in the Clouds",
+        "Otawara, Soaring City"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Exhibition Tidecaller",
+        "Visions of Beyond"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 11,
+      "cards": [
+        "Drown in the Loch",
+        "Extirpate",
+        "Surgical Extraction"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 26,
+      "cards": [
+        "Field of Ruin",
+        "Flooded Strand",
+        "Hedron Crab",
+        "Oboro, Palace in the Clouds",
+        "Otawara, Soaring City",
+        "Polluted Delta",
+        "Ruin Crab",
+        "Shelldock Isle",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 22,
+      "cards": [
+        "Field of Ruin",
+        "Flooded Strand",
+        "Island",
+        "Oboro, Palace in the Clouds",
+        "Otawara, Soaring City",
+        "Polluted Delta",
+        "Shelldock Isle",
+        "Swamp",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.3
+  },
+  "dual_role_cards": [
+    {
+      "card": "Baleful Mastery",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drown in the Loch",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers",
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exhibition Tidecaller",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Extirpate",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fatal Push",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Feed the Cycle",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Field of Ruin",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "mana_reducers",
+        "removal",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fractured Sanity",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hedron Crab",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Oboro, Palace in the Clouds",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Preordain",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ruin Crab",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shelldock Isle",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Surgical Extraction",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tasha's Hideous Laughter",
+      "roles": [
+        "graveyard_enablers",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Visions of Beyond",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Lead with a turn 1 crab unless facing heavy removal, then wait for a land drop.",
+    "Do not tap out; play mill spells at instant speed to keep removal and counters available for lethal threats.",
+    "Immediately remove hate cards like Endurance from the graveyard using Extirpate to avoid free recasts.",
+    "Prioritize killing early threats like Ragavan, Nimble Pilferer or Murktide Regent before focusing on milling.",
+    "Play around opposing countermagic by sequencing mill spells carefully."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play a crab on turn one to establish early pressure and landfall triggers."
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Fatal Push and Drown in the Loch to remove immediate threats and survive."
+    },
+    {
+      "trigger": "early game",
+      "line": "Fetch lands to double-dip on landfall and find shock lands."
+    }
+  ],
+  "kill_priority": [
+    "Exhibition Tidecaller",
+    "Visions of Beyond",
+    "Fractured Sanity",
+    "Tasha's Hideous Laughter",
+    "Drown in the Loch",
+    "Fatal Push",
+    "Hedron Crab",
+    "Otawara, Soaring City"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Drown in the Loch",
+    "Baleful Mastery",
+    "Fatal Push",
+    "Feed the Cycle",
+    "Field of Ruin",
+    "Otawara, Soaring City",
+    "The Meathook Massacre"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/mill.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

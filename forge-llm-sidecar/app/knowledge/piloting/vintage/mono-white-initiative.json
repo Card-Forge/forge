@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands containing Chrome Mox and at least one one-drop creature",
       "Two-land hands with multiple attackers",
-      "Hands that can attack by turn one"
+      "Hands that can attack by turn one",
+      "Keep any hand with Chrome Mox plus at least one land and one haste creature.",
+      "Also keep hands with two lands and two haste creatures if they include a removal spell or combat trick.",
+      "Prioritize hands that can play a turn-1 Chrome Mox or a turn-1/2 haste creature."
     ],
     "mulligan_criteria": [
       "Hands with zero artifacts or creatures",
       "Hands stuck on three or more lands",
-      "Hands lacking early attack triggers"
+      "Hands lacking early attack triggers",
+      "Mulligan hands with three or more lands, no Chrome Mox, and no early threats, or hands with only one land and no acceleration."
     ],
     "examples": []
   },
@@ -25,17 +29,33 @@
     "early_game": [
       "Play Chrome Mox immediately to accelerate mana",
       "Drop White Plume Adventurer and Seasoned Dungeoneer on curve",
-      "Attack every turn to trigger abilities and establish pressure"
+      "Attack every turn to trigger abilities and establish pressure",
+      "Turn 1: Play Chrome Mox, tap it for one white mana, and play a basic land.",
+      "If you have a haste creature, play it on turn 1 if you can afford it (1W), otherwise hold for turn 2.",
+      "Turn 2: Attack with haste creatures, trigger death/draw effects, and use the card advantage to play more threats or answers.",
+      "Prioritize playing lands to ensure you can cast your spells on curve.",
+      "Sequence Chrome Mox early to unlock turn-2 plays, but remember it won't untap until your next turn."
     ],
     "mid_game": [
       "Prioritize attacking over blocking to maximize triggers",
       "Use drawn cards to maintain board presence and apply pressure",
-      "Look for ways to grow Adventurer into an unblockable threat"
+      "Look for ways to grow Adventurer into an unblockable threat",
+      "Use Chrome Mox to maintain mana advantage, but be mindful of the one-turn delay for untapping.",
+      "Prioritize keeping cards in hand to leverage death triggers and maintain pressure.",
+      "Manage your graveyard carefully if the opponent has graveyard hate, and avoid overcommitting to the board without card advantage.",
+      "Commit threats when you have card advantage or when the opponent has no removal.",
+      "Hold back if you suspect a sweep or if you need to preserve resources for a specific interaction.",
+      "Use removal to protect your board or remove key threats, and prioritize trading creatures when it generates favorable card advantage."
     ],
     "late_game": [
       "Commit to all-out attacks to close the game quickly",
       "Avoid stalling, as Vintage control decks stabilize over time",
-      "Use card advantage to out-resource opponents in attrition"
+      "Use card advantage to out-resource opponents in attrition",
+      "Unblocked haste creatures, combat tricks, and direct damage spells.",
+      "Use card advantage to generate multiple threats that are difficult to block or remove.",
+      "Leverage the +1/+1 counters from White Plume Adventurer to close the game in one or two turns.",
+      "Go all-in when you have card advantage, the opponent has no removal or sweepers, or when you can close the game in one or two turns.",
+      "Commit when you've forced the opponent to use their removal on less important spells, leaving your key threats unanswerable."
     ]
   },
   "key_cards": [
@@ -59,7 +79,12 @@
     "Always attack with Seasoned Dungeoneer before blocking to draw cards",
     "Play Chrome Mox before lands to optimize early turns",
     "Attack with White Plume Adventurer even if it dies, as the counter triggers on attack declaration",
-    "Prioritize damage over board control in the early game"
+    "Prioritize damage over board control in the early game",
+    "Avoid overcommitting to the board without card advantage.",
+    "Be mindful of the one-turn delay on Chrome Mox and plan your mana accordingly.",
+    "Track the opponent's graveyard and hand to anticipate threats.",
+    "Practice sequencing to maximize death triggers and card advantage.",
+    "Remember that Mono-White Initiative thrives on tempo and card advantage, so prioritize plays that maintain pressure while drawing into more resources."
   ],
   "matchups": [
     {
@@ -88,16 +113,36 @@
         "Flying creatures",
         "Direct damage spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, artifact spells, and multiple threats to overwhelm counterspells. Sequence plays to force counters on less important spells, and use Chrome Mox to cast spells at instant speed when possible. Consider bringing in artifact hate and additional pressure if counterspells are prevalent.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race their ramp. Use fast mana to stay ahead and use removal to disrupt their mana sources. Attack around their ramp spells and use combat tricks to close the game before they can cast their late-game threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by leveraging card advantage, tracking removal, and out-sequence your opponent. Use sideboard tricks and removal to gain an edge. Prioritize trading creatures when it generates favorable card advantage, and be mindful of the opponent's hand to avoid walking into targeted removal.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspells",
     "Board wipes",
     "Fast combo finishes",
-    "Direct damage spells"
+    "Direct damage spells",
+    "Watch for counterspells, removal, and sweepers in the opponent's hand.",
+    "Pay attention to their mana base and graveyard to anticipate their strategy.",
+    "Track their life total and board state to know when to pressure or stabilize.",
+    "Note when they tap out for a key spell, as this is often your window to attack or cast a combat trick."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:10:35+00:00",
     "model": "local-model",
@@ -113,6 +158,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,444 @@
+{
+  "schema_version": 1,
+  "name": "Grixis Midrange",
+  "format": "modern",
+  "colors": [
+    "U",
+    "B",
+    "R"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "Grixis Midrange in Modern leverages a blend of instant-speed interaction, efficient removal, and resilient creatures to control the pace of the game. By utilizing Orcish Bowmasters and Counterspell early, the deck disrupts aggressive strategies while Tamiyo, Inquisitive Student provides the card advantage needed to outlast opponents. The goal is to stabilize against early pressure, trade efficiently, and close out games with superior resource management.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 17,
+      "cards": [
+        "Cling to Dust",
+        "Counterspell",
+        "Nihil Spellbomb",
+        "Orcish Bowmasters",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 7,
+      "cards": [
+        "Consult the Star Charts",
+        "Thundering Falls",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 9,
+      "cards": [
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Counterspell"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 20,
+      "cards": [
+        "Counterspell",
+        "Harbinger of the Seas",
+        "Orcish Bowmasters",
+        "Sheoldred's Edict",
+        "Subtlety",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 22,
+      "cards": [
+        "Cling to Dust",
+        "Fatal Push",
+        "Field of Ruin",
+        "Fire Magic",
+        "Meltdown",
+        "Nihil Spellbomb",
+        "Orcish Bowmasters"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Fire Magic"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 16,
+      "cards": [
+        "Consign to Memory",
+        "Counterspell",
+        "Force of Negation",
+        "Mystical Dispute",
+        "Spell Snare"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 7
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Counterspell"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 10,
+      "cards": [
+        "Cling to Dust",
+        "Force of Negation",
+        "Nihil Spellbomb",
+        "Thundering Falls",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Cling to Dust"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Counterspell"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Counterspell"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Counterspell"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 25,
+      "cards": [
+        "Field of Ruin",
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Snow-Covered Island",
+        "Snow-Covered Swamp",
+        "Steam Vents",
+        "Thundering Falls",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Field of Ruin",
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Snow-Covered Island",
+        "Snow-Covered Swamp",
+        "Steam Vents",
+        "Thundering Falls",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 4,
+      "cards": [
+        "Counterspell"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.44
+  },
+  "dual_role_cards": [
+    {
+      "card": "Cling to Dust",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Counterspell",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "engines",
+        "payoff_cards",
+        "planeswalker_threats",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Field of Ruin",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Magic",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nihil Spellbomb",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orcish Bowmasters",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Swamp",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thundering Falls",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wan Shi Tong, Librarian",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Counterspell for opponent's most impactful spell rather than using it preemptively",
+    "Play Orcish Bowmasters before committing resources to the board to maximize tempo",
+    "Activate Tamiyo after opponent passes to maximize information and minimize counter risk",
+    "A common mistake is overcommitting to the board without answers, so always keep at least one interaction in hand for turn 3-4.",
+    "Protect Tamiyo at all costs, as her loyalty abilities provide essential card advantage and board control."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and hold up mana for Counterspell to answer early threats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Deploy Orcish Bowmasters to bounce aggressive creatures and disrupt opponent's rhythm"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Tamiyo to dig for answers or draw into removal when the board is manageable"
+    }
+  ],
+  "kill_priority": [
+    "Counterspell",
+    "Harbinger of the Seas",
+    "Orcish Bowmasters",
+    "Sheoldred's Edict",
+    "Subtlety",
+    "Wan Shi Tong, Librarian"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Counterspell",
+    "Force of Negation",
+    "Mystical Dispute",
+    "Spell Snare",
+    "Cling to Dust",
+    "Fatal Push",
+    "Field of Ruin"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/grixis-midrange.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

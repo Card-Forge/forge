@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "name": "Sanar, Innovative First-Year",
+  "format": "commander",
+  "colors": [
+    "R",
+    "U"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This R/U deck functions as a treasure-fueled midrange-combo hybrid that leverages artifact synergy and spell acceleration to out-value opponents. It aims to win by generating incremental advantage through cantrips and treasure generation, then closing games with high-impact threats or direct damage engines that overwhelm control and combo strategies while out-grinding aggro with efficient interaction.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 2,
+      "cards": [
+        "Magmakin Artillerist",
+        "Treasure Hunt"
+      ]
+    },
+    "card_advantage": {
+      "target_count": 0,
+      "cards": []
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": []
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": []
+    },
+    "threats": {
+      "target_count": 1,
+      "cards": [
+        "Sanar, Innovative First-Year"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": []
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 0,
+      "cards": []
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [],
+  "tells": [
+    "Common mistake: Overcommitting treasure on small threats instead of saving for finishers.",
+    "Unique interaction: Treasure can be used to cast spells with additional costs, so time your activations to bypass counters or trigger enter-the-battlefield effects.",
+    "Watch for artifact hate",
+    "keep a backup plan if your synergy is targeted.",
+    "Always track opponent's mana and interaction to avoid walking into hard counters or sweepers."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land and cast a cantrip or cheap artifact to establish mana/artifact synergy and draw into your game plan."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Deploy Sanar or cast Treasure Hunt to generate treasure, then follow up with a threat or interaction."
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize untapped lands for R/U duals"
+    }
+  ],
+  "kill_priority": [
+    "Sanar, Innovative First-Year"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

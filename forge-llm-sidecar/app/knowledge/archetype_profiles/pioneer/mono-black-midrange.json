@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "name": "Mono-Black Midrange",
+  "format": "pioneer",
+  "colors": [
+    "B"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "This Mono-Black Midrange deck leverages early-game hand disruption to stabilize into a mid-game of resilient threats and graveyard recursion. It aims to outvalue opponents by consistently trading up with removal and hand size advantage, eventually deploying a dominant late-game finisher. The strategy relies on controlling the board state while accumulating resources for a decisive endgame.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Unholy Annex // Ritual Chamber"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 17,
+      "cards": [
+        "Castle Locthwain",
+        "Graveyard Trespasser",
+        "Invoke Despair",
+        "Sheoldred, the Apocalypse",
+        "The Stone Brain",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Ral Zarek, Guest Lecturer"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 6,
+      "cards": [
+        "Graveyard Trespasser",
+        "Sheoldred, the Apocalypse"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 30,
+      "cards": [
+        "Blade of the Oni",
+        "Deep-Cavern Bat",
+        "Duress",
+        "Emeritus of Woe",
+        "Gifted Aetherborn",
+        "Graveyard Trespasser",
+        "Kalitas, Traitor of Ghet",
+        "Murderous Rider",
+        "Ral Zarek, Guest Lecturer",
+        "Sheoldred, the Apocalypse",
+        "Thoughtseize",
+        "Unstoppable Slasher"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 12,
+      "cards": [
+        "Fatal Push",
+        "Field of Ruin",
+        "Go for the Throat",
+        "Ral Zarek, Guest Lecturer",
+        "Unstoppable Slasher",
+        "Withering Curse"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 10,
+      "cards": [
+        "Extinction Event",
+        "Graveyard Trespasser",
+        "Thoughtseize",
+        "Withering Curse"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Thoughtseize"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 9,
+      "cards": [
+        "Graveyard Trespasser",
+        "Ral Zarek, Guest Lecturer",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Graveyard Trespasser",
+        "Leyline of the Void",
+        "Ral Zarek, Guest Lecturer",
+        "The Stone Brain",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 7,
+      "cards": [
+        "Graveyard Trespasser",
+        "Ral Zarek, Guest Lecturer",
+        "Unstoppable Slasher"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Sheoldred, the Apocalypse"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 3,
+      "cards": [
+        "Sheoldred, the Apocalypse"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Sheoldred, the Apocalypse",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Damping Sphere",
+        "Graveyard Trespasser",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 9,
+      "cards": [
+        "Castle Locthwain",
+        "Field of Ruin",
+        "Mutavault",
+        "Urborg, Tomb of Yawgmoth"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 24,
+      "cards": [
+        "Castle Locthwain",
+        "Field of Ruin",
+        "Mutavault",
+        "Swamp",
+        "Urborg, Tomb of Yawgmoth"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Ral Zarek, Guest Lecturer"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.35
+  },
+  "dual_role_cards": [
+    {
+      "card": "Castle Locthwain",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Field of Ruin",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Graveyard Trespasser",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mutavault",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ral Zarek, Guest Lecturer",
+      "roles": [
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheoldred, the Apocalypse",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Stone Brain",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "protection",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unstoppable Slasher",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urborg, Tomb of Yawgmoth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Withering Curse",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Thoughtseize if opponent has a known turn-one play that disrupts your game plan",
+    "Prioritize playing threats before casting Sheoldred to maximize its death triggers",
+    "Use Graveyard Trespasser to enable graveyard recursion strategies before committing to late-game finishers",
+    "Common mistake: Overusing Thoughtseize on irrelevant cards.",
+    "Always target their most impactful spell or permanent."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Cast Thoughtseize on turn one to disrupt opponent's game plan"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play low-cost threats to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use disruption to protect key cards or set up combos"
+    }
+  ],
+  "kill_priority": [
+    "Sheoldred, the Apocalypse",
+    "Graveyard Trespasser",
+    "Thoughtseize",
+    "Ral Zarek, Guest Lecturer",
+    "Blade of the Oni",
+    "Deep-Cavern Bat",
+    "Duress",
+    "Emeritus of Woe"
+  ],
+  "interaction_to_disrupt": [
+    "Thoughtseize",
+    "Fatal Push",
+    "Field of Ruin",
+    "Go for the Throat",
+    "Ral Zarek, Guest Lecturer",
+    "Unstoppable Slasher",
+    "Withering Curse",
+    "Extinction Event"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/mono-black-midrange.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

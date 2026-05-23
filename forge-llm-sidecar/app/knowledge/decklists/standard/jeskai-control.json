@@ -1,0 +1,169 @@
+{
+  "archetype": "Jeskai Control",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/jeskai-control.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 2,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 4,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 1,
+      "name": "Cori Mountain Monastery"
+    },
+    {
+      "qty": 1,
+      "name": "Essence Scatter"
+    },
+    {
+      "qty": 2,
+      "name": "Firebending Lesson"
+    },
+    {
+      "qty": 1,
+      "name": "Flashback"
+    },
+    {
+      "qty": 4,
+      "name": "Great Hall of the Biblioplex"
+    },
+    {
+      "qty": 2,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Jeskai Revelation"
+    },
+    {
+      "qty": 1,
+      "name": "Mistrise Village"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Petrified Hamlet"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 4,
+      "name": "Riverpyre Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Sear"
+    },
+    {
+      "qty": 2,
+      "name": "Slagstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 4,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 2,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 2,
+      "name": "Sundown Pass"
+    },
+    {
+      "qty": 1,
+      "name": "Swallowed by Leviathan"
+    },
+    {
+      "qty": 4,
+      "name": "Tablet of Discovery"
+    },
+    {
+      "qty": 2,
+      "name": "Three Steps Ahead"
+    },
+    {
+      "qty": 2,
+      "name": "Thunder Magic"
+    },
+    {
+      "qty": 1,
+      "name": "Twinmaw Stormbrood"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Annul"
+    },
+    {
+      "qty": 1,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 2,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 3,
+      "name": "Flashfreeze"
+    },
+    {
+      "qty": 1,
+      "name": "Mathemagics"
+    },
+    {
+      "qty": 1,
+      "name": "Petrified Hamlet"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "The Unagi of Kyoshi Island"
+    },
+    {
+      "qty": 1,
+      "name": "Twinmaw Stormbrood"
+    }
+  ]
+}

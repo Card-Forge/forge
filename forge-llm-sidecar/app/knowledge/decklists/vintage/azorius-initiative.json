@@ -1,0 +1,185 @@
+{
+  "archetype": "Azorius Initiative",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/azorius-initiative.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancestral Recall"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Daze"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Gitaxian Probe"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 2,
+      "name": "Lavinia, Azorius Renegade"
+    },
+    {
+      "qty": 3,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Monastery Mentor"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Ruby"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 1,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 3,
+      "name": "Ponder"
+    },
+    {
+      "qty": 4,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 1,
+      "name": "Seasoned Dungeoneer"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 3,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Time Walk"
+    },
+    {
+      "qty": 1,
+      "name": "Tolarian Academy"
+    },
+    {
+      "qty": 1,
+      "name": "Treasure Cruise"
+    },
+    {
+      "qty": 4,
+      "name": "Tundra"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 4,
+      "name": "White Plume Adventurer"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Archon of Absolution"
+    },
+    {
+      "qty": 3,
+      "name": "Archon of Emeria"
+    },
+    {
+      "qty": 3,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 2,
+      "name": "Deafening Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "The Tabernacle at Pendrell Vale"
+    }
+  ]
+}

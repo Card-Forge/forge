@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more lands and early interaction",
       "Hands containing Ponder or Cabal Therapy to enable card selection",
-      "Hands with a clear path to stabilize turn three or four"
+      "Hands with a clear path to stabilize turn three or four",
+      "Keep hands with 2-3 lands, Ponder, and at least one early interaction (Cabal Therapy, Path to Exile, or a counterspell).",
+      "Keep any hand with Ponder + 2 lands."
     ],
     "mulligan_criteria": [
       "Hands with zero interaction or removal",
       "Hands with three or more lands without early plays",
-      "Hands lacking a clear game plan against the expected matchup"
+      "Hands lacking a clear game plan against the expected matchup",
+      "Mulligan pure land draws, hands with multiple Ponders but no lands, or hands with only late-game threats and no early answers."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and hold up mana for potential counterspells or removal",
       "Use Ponder to find answers to the opponent's early threats",
-      "Prioritize surviving the first few turns over developing your own board"
+      "Prioritize surviving the first few turns over developing your own board",
+      "Turn 1: Play a land, Ponder if possible to set up draws.",
+      "Turn 2: Play a second land, cast Cabal Therapy against combo/midrange, or hold for a threat.",
+      "Sequence lands carefully to ensure blue mana availability for counterspells and card draw.",
+      "Prioritize stabilizing plays over aggressive ones."
     ],
     "mid_game": [
       "Cast Cabal Therapy to draw multiple cards and find specific answers",
       "Begin deploying resilient creatures or planeswalkers if the board is clear",
-      "Maintain a hand of interaction to disrupt opponent's key turns"
+      "Maintain a hand of interaction to disrupt opponent's key turns",
+      "Preserve Ponders for when you need a specific answer or threat.",
+      "Don't overcommit mana to Ponder if you can't protect it.",
+      "Manage the graveyard with Cabal Therapy or Surgical Extraction against Tron/Sneak and Show.",
+      "Keep hand size above 3 when possible.",
+      "Hold back on committing Ajani or Nacatl Pariah until you've established a baseline of interaction.",
+      "Use Cryptic Command or Jace to clear blockers or protect your board."
     ],
     "late_game": [
       "Cast Ajani, Nacatl Pariah and protect it with counterspells or removal",
       "Use excess card advantage to outvalue opponents in long games",
-      "Cycle through your hand to find the exact answer needed to close the game"
+      "Cycle through your hand to find the exact answer needed to close the game",
+      "Ajani for lifelink and board presence, Nacatl Pariah for aggressive pressure, and Jace for card advantage.",
+      "Win by out-resourcing and closing with a board of threats or a planeswalker.",
+      "Go all-in when you have card advantage secured, the opponent has no hard removal, and you can protect your finisher with counterspells or lifegain.",
+      "Commit when you can swing and still have an answer to their removal."
     ]
   },
   "key_cards": [
@@ -64,7 +81,13 @@
     "Always cast Ponder at the end of your turn to optimize your opening hand for the next turn",
     "Sequence Cabal Therapy after drawing into it to immediately find answers to the opponent's current threats",
     "Hold up white and blue mana early to counter or remove aggressive creatures before they become unmanageable",
-    "Protect Ajani, Nacatl Pariah by keeping counterspells or removal in hand until the opponent commits to attacking it"
+    "Protect Ajani, Nacatl Pariah by keeping counterspells or removal in hand until the opponent commits to attacking it",
+    "Ponder is your best card",
+    "never cast it blindly.",
+    "Cabal Therapy is versatile but can be dead against control",
+    "know when to hold it.",
+    "Ajani's lifelink is crucial against aggressive decks.",
+    "Cryptic Command is a win-more card in some matchups but essential in others."
   ],
   "matchups": [
     {
@@ -93,16 +116,35 @@
         "Counterspells held up for your key plays",
         "Attrition games where card advantage decides the match"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Ponder/Brainstorm to dig for answers or threats that can't be countered. Cast threats in response to counterspells, or use Cryptic Command to bounce their counter source. Don't overextend into known counter suites.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early Cabal Therapy to disrupt mana dorks/Tron. Surgical Extraction to remove key permanents. Path to Exile to trade efficiently. Don't let them stabilize; pressure early.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war. Prioritize Ponders/Brainstorms and Jace. Use Cryptic Command to bounce their threats or protect yours. Cabal Therapy to disrupt their hand. Win by out-drawing and out-resolving.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Aggressive creature decks that overwhelm early interaction",
     "Combo decks that bypass traditional removal",
     "Board sweepers that clear resilient finishers",
-    "Counterspells that disrupt key finishers"
+    "Counterspells that disrupt key finishers",
+    "Watch for Tron's signets/mana rocks, Sneak and Show's graveyard setup, Delver's flip threshold, and Ocelot Pride's mana acceleration.",
+    "Note if they're holding up blue mana (counterspell) or black mana (Therapy).",
+    "Track graveyard contents against combo."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:57:46+00:00",
     "model": "local-model",
@@ -118,6 +160,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

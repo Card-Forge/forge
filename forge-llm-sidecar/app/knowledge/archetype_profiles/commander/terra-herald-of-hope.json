@@ -1,0 +1,1100 @@
+{
+  "schema_version": 1,
+  "name": "Terra, Herald of Hope",
+  "format": "commander",
+  "colors": [
+    "B",
+    "R",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "Terra, Herald of Hope is a spell-synergy engine that generates a relentless swarm of flying Spirits with every spell cast. The deck aims to out-value opponents through card advantage, recursive threats, and resilient board presence, winning by overwhelming the board with evasive tokens or replaying Terra via recursion to close out games.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 14,
+      "cards": [
+        "Demand Answers",
+        "Esper Sentinel",
+        "Faithless Looting",
+        "Loran of the Third Path",
+        "Minas Tirith",
+        "Nibelheim Aflame",
+        "Pursue the Past",
+        "Reanimate",
+        "Shadow, Mysterious Assassin",
+        "Shanid, Sleepers' Scourge",
+        "Skullclamp",
+        "Summon: Knights of Round",
+        "Terra, Herald of Hope",
+        "Tymna the Weaver"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Elegant Parlor",
+        "Faithless Looting",
+        "Raucous Theater",
+        "Reanimate",
+        "Shadowy Backstreet"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 13,
+      "cards": [
+        "Arid Mesa",
+        "Bloodstained Mire",
+        "Entomb",
+        "Flooded Strand",
+        "Godo, Bandit Warlord",
+        "Imperial Seal",
+        "Marsh Flats",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Vampiric Tutor",
+        "Verdant Catacombs",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Reanimate",
+        "Terra, Herald of Hope",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 45,
+      "cards": [
+        "Accursed Marauder",
+        "Adeline, Resplendent Cathar",
+        "Alesha, Who Laughs at Fate",
+        "Arcane Signet",
+        "Ardbert, Warrior of Darkness",
+        "Aurelia, the Warleader",
+        "Bayek of Siwa",
+        "Boromir, Warden of the Tower",
+        "Bruse Tarl, Boorish Herder",
+        "Carmen, Cruel Skymarcher",
+        "Celestine, the Living Saint",
+        "Deflecting Swat",
+        "Esper Sentinel",
+        "Excalibur, Sword of Eden",
+        "Fury",
+        "Gau, Feral Youth",
+        "General Leo Cristophe",
+        "General's Enforcer",
+        "Godo, Bandit Warlord",
+        "Gogo, Mysterious Mime",
+        "Hero's Blade",
+        "Interceptor, Shadow's Hound",
+        "Joshua, Phoenix's Dominant",
+        "Lightning Greaves",
+        "Lightning, Army of One",
+        "Locke, Treasure Hunter",
+        "Loran of the Third Path",
+        "Madame Null, Power Broker",
+        "Mythos of Snapdax",
+        "Obosh, the Preypiercer",
+        "Odric, Lunarch Marshal",
+        "Ragavan, Nimble Pilferer",
+        "Shadow, Mysterious Assassin",
+        "Shanid, Sleepers' Scourge",
+        "Sister Hospitaller",
+        "Sol Ring",
+        "Solitude",
+        "Summon: Knights of Round",
+        "Terra, Herald of Hope",
+        "Teshar, Ancestor's Apostle",
+        "Thalia, Heretic Cathar",
+        "Tymna the Weaver",
+        "Urza's Ruinous Blast",
+        "Venat, Heart of Hydaelyn",
+        "Verrak, Warped Sengir"
+      ],
+      "mainboard_count": 45,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 20,
+      "cards": [
+        "Alesha, Who Laughs at Fate",
+        "Ceaseless Conflict",
+        "Celestine, the Living Saint",
+        "Damn",
+        "Gau, Feral Youth",
+        "General's Enforcer",
+        "Lightning, Army of One",
+        "Loran of the Third Path",
+        "Mount Doom",
+        "Nibelheim Aflame",
+        "Obosh, the Preypiercer",
+        "Ragavan, Nimble Pilferer",
+        "Rakdos Joins Up",
+        "Sevinne's Reclamation",
+        "Shadow, Mysterious Assassin",
+        "Sister Hospitaller",
+        "Terra, Herald of Hope",
+        "Teshar, Ancestor's Apostle",
+        "The Soul Stone",
+        "Unburial Rites"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Aurelia, the Warleader",
+        "Ceaseless Conflict",
+        "General Leo Cristophe"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 13,
+      "cards": [
+        "Bayek of Siwa",
+        "Bleeding Effect",
+        "Boromir, Warden of the Tower",
+        "Cavern of Souls",
+        "Flowering of the White Tree",
+        "General's Enforcer",
+        "Odric, Lunarch Marshal",
+        "Plaza of Heroes",
+        "Reanimate",
+        "Shadowspear",
+        "Summon: Knights of Round",
+        "The Soul Stone",
+        "Tyrite Sanctum"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 2,
+      "cards": [
+        "Demand Answers",
+        "Pursue the Past"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 25,
+      "cards": [
+        "Alesha, Who Laughs at Fate",
+        "Bleeding Effect",
+        "Carmen, Cruel Skymarcher",
+        "Celestine, the Living Saint",
+        "Elegant Parlor",
+        "Entomb",
+        "Faithless Looting",
+        "Gau, Feral Youth",
+        "General Leo Cristophe",
+        "General's Enforcer",
+        "Interceptor, Shadow's Hound",
+        "Locke, Treasure Hunter",
+        "Nibelheim Aflame",
+        "Pursue the Past",
+        "Rakdos Joins Up",
+        "Raucous Theater",
+        "Reanimate",
+        "Sevinne's Reclamation",
+        "Shadowy Backstreet",
+        "Sister Hospitaller",
+        "Takenuma, Abandoned Mire",
+        "Terra, Herald of Hope",
+        "Teshar, Ancestor's Apostle",
+        "The Soul Stone",
+        "Unburial Rites"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 1,
+      "cards": [
+        "Reanimate"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 17,
+      "cards": [
+        "Alesha, Who Laughs at Fate",
+        "Carmen, Cruel Skymarcher",
+        "Celestine, the Living Saint",
+        "Faithless Looting",
+        "General Leo Cristophe",
+        "Interceptor, Shadow's Hound",
+        "Nibelheim Aflame",
+        "Pursue the Past",
+        "Ragavan, Nimble Pilferer",
+        "Rakdos Joins Up",
+        "Sevinne's Reclamation",
+        "Sister Hospitaller",
+        "Takenuma, Abandoned Mire",
+        "Terra, Herald of Hope",
+        "Teshar, Ancestor's Apostle",
+        "The Soul Stone",
+        "Unburial Rites"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Ardbert, Warrior of Darkness",
+        "Terra, Herald of Hope",
+        "Teshar, Ancestor's Apostle"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Windswept Heath"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Terra, Herald of Hope"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Eiganjo Castle",
+        "Reanimate"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 35,
+      "cards": [
+        "Arcane Signet",
+        "Arid Mesa",
+        "Badlands",
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Cavern of Souls",
+        "Command Tower",
+        "Eiganjo Castle",
+        "Elegant Parlor",
+        "Fellwar Stone",
+        "Field of the Dead",
+        "Flooded Strand",
+        "Godless Shrine",
+        "Luxury Suite",
+        "Marsh Flats",
+        "Minas Tirith",
+        "Mount Doom",
+        "Plateau",
+        "Plaza of Heroes",
+        "Polluted Delta",
+        "Raucous Theater",
+        "Sacred Foundry",
+        "Scalding Tarn",
+        "Scrubland",
+        "Shadowy Backstreet",
+        "Shinka, the Bloodsoaked Keep",
+        "Shizo, Death's Storehouse",
+        "Spectator Seating",
+        "Takenuma, Abandoned Mire",
+        "Tyrite Sanctum",
+        "Urborg, Tomb of Yawgmoth",
+        "Vault of Champions",
+        "Verdant Catacombs",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 36,
+      "cards": [
+        "Arid Mesa",
+        "Badlands",
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Cavern of Souls",
+        "Command Tower",
+        "Eiganjo Castle",
+        "Elegant Parlor",
+        "Field of the Dead",
+        "Flooded Strand",
+        "Godless Shrine",
+        "Luxury Suite",
+        "Marsh Flats",
+        "Minas Tirith",
+        "Mount Doom",
+        "Mountain",
+        "Plains",
+        "Plateau",
+        "Plaza of Heroes",
+        "Polluted Delta",
+        "Raucous Theater",
+        "Sacred Foundry",
+        "Scalding Tarn",
+        "Scrubland",
+        "Shadowy Backstreet",
+        "Shinka, the Bloodsoaked Keep",
+        "Shizo, Death's Storehouse",
+        "Spectator Seating",
+        "Swamp",
+        "Takenuma, Abandoned Mire",
+        "Tyrite Sanctum",
+        "Urborg, Tomb of Yawgmoth",
+        "Vault of Champions",
+        "Verdant Catacombs",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Alesha, Who Laughs at Fate",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Signet",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ardbert, Warrior of Darkness",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Mesa",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Aurelia, the Warleader",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Badlands",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bayek of Siwa",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bleeding Effect",
+      "roles": [
+        "graveyard_enablers",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boromir, Warden of the Tower",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Carmen, Cruel Skymarcher",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ceaseless Conflict",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Celestine, the Living Saint",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Demand Answers",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eiganjo Castle",
+      "roles": [
+        "hate_pieces",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elegant Parlor",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Entomb",
+      "roles": [
+        "graveyard_enablers",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Esper Sentinel",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faithless Looting",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Field of the Dead",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gau, Feral Youth",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "General Leo Cristophe",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "General's Enforcer",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godo, Bandit Warlord",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Interceptor, Shadow's Hound",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lightning, Army of One",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Locke, Treasure Hunter",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Loran of the Third Path",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Luxury Suite",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marsh Flats",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Minas Tirith",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mount Doom",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nibelheim Aflame",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Obosh, the Preypiercer",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Odric, Lunarch Marshal",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Plateau",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Plaza of Heroes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pursue the Past",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ragavan, Nimble Pilferer",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rakdos Joins Up",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raucous Theater",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reanimate",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces",
+        "protection",
+        "reanimation_targets",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scrubland",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sevinne's Reclamation",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shadow, Mysterious Assassin",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shadowy Backstreet",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shanid, Sleepers' Scourge",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shinka, the Bloodsoaked Keep",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shizo, Death's Storehouse",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sister Hospitaller",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spectator Seating",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summon: Knights of Round",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Takenuma, Abandoned Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Terra, Herald of Hope",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teshar, Ancestor's Apostle",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Soul Stone",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tymna the Weaver",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tyrite Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unburial Rites",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urborg, Tomb of Yawgmoth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vault of Champions",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Terra's ability triggers on any spell, including instants and sorceries, so use cheap cantrips and removal to fuel it.",
+    "Reanimate is a key win-con but vulnerable to graveyard hate",
+    "have backup plans like direct damage or combat.",
+    "Avoid overcommitting to the board without protection.",
+    "Watch for board wipes"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast a cantrip or disruption if available."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a second land, cast Terra if mana allows, or play a cheap spell to start the token engine."
+    },
+    {
+      "trigger": "early game",
+      "line": "If holding Terra, consider playing a cheap spell first to generate a token, then cast Terra to maximize triggers on your opponent's turn."
+    }
+  ],
+  "kill_priority": [
+    "Ardbert, Warrior of Darkness",
+    "Terra, Herald of Hope",
+    "Teshar, Ancestor's Apostle",
+    "Reanimate",
+    "Windswept Heath",
+    "Accursed Marauder",
+    "Adeline, Resplendent Cathar",
+    "Alesha, Who Laughs at Fate"
+  ],
+  "interaction_to_disrupt": [
+    "Bayek of Siwa",
+    "Bleeding Effect",
+    "Boromir, Warden of the Tower",
+    "Cavern of Souls",
+    "Flowering of the White Tree",
+    "General's Enforcer",
+    "Odric, Lunarch Marshal",
+    "Plaza of Heroes"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/terra-herald-of-hope.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

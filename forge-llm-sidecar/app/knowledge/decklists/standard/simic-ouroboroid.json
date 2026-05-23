@@ -1,0 +1,113 @@
+{
+  "archetype": "Simic Ouroboroid",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/simic-ouroboroid.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ba Sing Se"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 4,
+      "name": "Botanical Sanctum"
+    },
+    {
+      "qty": 4,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 6,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Gene Pollinator"
+    },
+    {
+      "qty": 2,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Marang River Regent"
+    },
+    {
+      "qty": 4,
+      "name": "Mockingbird"
+    },
+    {
+      "qty": 4,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 4,
+      "name": "Nature's Rhythm"
+    },
+    {
+      "qty": 3,
+      "name": "Ouroboroid"
+    },
+    {
+      "qty": 4,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 4,
+      "name": "Spider Manifestation"
+    },
+    {
+      "qty": 4,
+      "name": "Willowrush Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Wistfulness"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Archdruid's Charm"
+    },
+    {
+      "qty": 2,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 2,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 1,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 2,
+      "name": "Meltstrider's Resolve"
+    },
+    {
+      "qty": 2,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 2,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 2,
+      "name": "Unable to Scream"
+    }
+  ]
+}

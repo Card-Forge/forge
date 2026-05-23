@@ -1,0 +1,165 @@
+{
+  "archetype": "Grixis Tempo",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/grixis-tempo.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Badlands"
+    },
+    {
+      "qty": 1,
+      "name": "Baleful Strix"
+    },
+    {
+      "qty": 1,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 3,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Brazen Borrower"
+    },
+    {
+      "qty": 2,
+      "name": "Cling to Dust"
+    },
+    {
+      "qty": 1,
+      "name": "Daze"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 3,
+      "name": "Flow State"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Kaito, Bane of Nightmares"
+    },
+    {
+      "qty": 2,
+      "name": "Kolaghan's Command"
+    },
+    {
+      "qty": 1,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 3,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 2,
+      "name": "Sheoldred's Edict"
+    },
+    {
+      "qty": 1,
+      "name": "Snapcaster Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 2,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 1,
+      "name": "Volcanic Island"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "From the Catacombs"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Massacre"
+    },
+    {
+      "qty": 2,
+      "name": "Meltdown"
+    },
+    {
+      "qty": 2,
+      "name": "Price of Progress"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 1,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Toxic Deluge"
+    }
+  ]
+}

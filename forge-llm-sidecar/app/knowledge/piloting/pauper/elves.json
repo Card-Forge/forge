@@ -11,10 +11,13 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with 1 land are often sufficient if they contain draw spells",
-      "Hands that can apply early pressure or fit Lead the Stampede or Distant Melody"
+      "Hands that can apply early pressure or fit Lead the Stampede or Distant Melody",
+      "Keep hands with 1-2 lands and at least one mana dork (Llanowar/Fyndhorn).",
+      "Prioritize hands that can play a dork on turn 1."
     ],
     "mulligan_criteria": [
-      "Hands lacking lands or draw spells that cannot establish early board presence"
+      "Hands lacking lands or draw spells that cannot establish early board presence",
+      "Mulligan to 4+ lands with no dorks, or hands with only dorks and no lands."
     ],
     "examples": [
       {
@@ -31,15 +34,28 @@
   "game_plan": {
     "early_game": [
       "Adopt an aggressive 'all win' posture to close out games quickly",
-      "Play early mana dorks like Wellwisher to generate life and pressure"
+      "Play early mana dorks like Wellwisher to generate life and pressure",
+      "Turn 1: Play land, then Llanowar Elves.",
+      "Turn 2: Play land, then Fyndhorn Elves or second Llanowar.",
+      "Turn 3: Play a big threat (e.g., Avenging Hunter) or pump spell, using 3-4 mana.",
+      "Sequence lands to ensure you can cast your threat on time."
     ],
     "mid_game": [
       "Play enough Elves to win without necessarily committing your entire board at once",
-      "Use draw spells to refill your hand and maintain pressure after playing multiple creatures"
+      "Use draw spells to refill your hand and maintain pressure after playing multiple creatures",
+      "Prioritize mana acceleration over card draw early.",
+      "Use pump spells efficiently to maximize combat damage.",
+      "Don't overcommit to board if opponent has sweepers.",
+      "Commit threats when you have enough mana to answer or out-value removal.",
+      "Hold back if opponent has potential sweepers or hate.",
+      "Use combat tricks to trade favorably."
     ],
     "late_game": [
       "If the game stalls, use sideboarded artifacts like Viridian Longbow to lock down the board",
-      "Continue flooding the board to overwhelm opponents with mana and creature count"
+      "Continue flooding the board to overwhelm opponents with mana and creature count",
+      "Avenging Hunter + pump spells, or multiple large creatures with +1/+1 counters.",
+      "Win through combat or direct damage if needed.",
+      "Go all-in when you have 5+ mana, opponent has no sweepers, and you can close the game in 1-2 turns."
     ]
   },
   "key_cards": [
@@ -98,7 +114,13 @@
     "Avoid playing your entire board at once to prevent losing everything to a single sweeper",
     "Prioritize playing enough Elves to secure a win while conserving resources",
     "Play carefully around threats like Krark-Clan Shaman that can easily clean the board",
-    "Use draw spells to refill your hand after committing multiple creatures to the battlefield"
+    "Use draw spells to refill your hand after committing multiple creatures to the battlefield",
+    "Common mistake: Overextending into sweepers.",
+    "Always count opponent's mana and board state.",
+    "Watch for Blood Moon effects.",
+    "Use pump spells to maximize value.",
+    "Avenging Hunter likely has a specific ability",
+    "treat it as a finisher."
   ],
   "matchups": [
     {
@@ -151,6 +173,31 @@
         "Distant Melody",
         "Timberwatch Elf"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats. Cast dorks early to build mana advantage. Use pump spells in response to counters if needed.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-value them with card draw or efficient removal. Don't overextend; wait for them to tap out.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play early threats to race. Use pump spells to stabilize. Bring in small creatures or removal post-sideboard.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure. Don't let them stabilize. Use card advantage to outlast them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the mana race. Prioritize dorks and efficient threats. Use disruption to slow their ramp. Trade favorably in combat.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -160,10 +207,13 @@
     "Makeshift Munitions",
     "Spellstutter Sprite",
     "Echoing Decay",
-    "Electrickery"
+    "Electrickery",
+    "Watch for sweepers (Wrath of God, Damnation), hate cards (Cage, Bog), and counters.",
+    "Note when opponent taps out for a big spell vs. holding mana for interaction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-ug-elves-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T09:08:31+00:00",
     "model": "local-model",
@@ -194,6 +244,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
@@ -236,7 +304,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Krark-Clan Shaman — which easily cleans our board, and we can't interact so easily - so play carefully around it."
+      "evidence_span": "Krark-Clan Shaman \u2014 which easily cleans our board, and we can't interact so easily - so play carefully around it."
     }
   ],
   "common_threats_evidence": [
@@ -250,7 +318,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Krark-Clan Shaman — which easily cleans our board"
+      "evidence_span": "Krark-Clan Shaman \u2014 which easily cleans our board"
     },
     {
       "confidence": 0.9,

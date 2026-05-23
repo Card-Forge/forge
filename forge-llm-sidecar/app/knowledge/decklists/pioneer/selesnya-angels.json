@@ -1,0 +1,93 @@
+{
+  "archetype": "Selesnya Angels",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/selesnya-angels.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Bishop of Wings"
+    },
+    {
+      "qty": 4,
+      "name": "Brushland"
+    },
+    {
+      "qty": 4,
+      "name": "Collected Company"
+    },
+    {
+      "qty": 3,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 3,
+      "name": "Enduring Innocence"
+    },
+    {
+      "qty": 4,
+      "name": "Giada, Font of Hope"
+    },
+    {
+      "qty": 4,
+      "name": "Hushwood Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Inspiring Overseer"
+    },
+    {
+      "qty": 4,
+      "name": "Kayla's Reconstruction"
+    },
+    {
+      "qty": 3,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 7,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Razorverge Thicket"
+    },
+    {
+      "qty": 4,
+      "name": "Resplendent Angel"
+    },
+    {
+      "qty": 4,
+      "name": "Righteous Valkyrie"
+    },
+    {
+      "qty": 3,
+      "name": "Skyclave Apparition"
+    },
+    {
+      "qty": 4,
+      "name": "Temple Garden"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Archon of Emeria"
+    },
+    {
+      "qty": 2,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 3,
+      "name": "High Noon"
+    },
+    {
+      "qty": 3,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 4,
+      "name": "Seam Rip"
+    }
+  ]
+}

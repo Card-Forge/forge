@@ -10,25 +10,46 @@
     "Winning with Tribal Flames after a few attacks"
   ],
   "mulligan": {
-    "keep_criteria": [],
-    "mulligan_criteria": [],
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (fetches/shocks preferred for consistency), at least one Domain enabler (Leyline of the Guildpact, cheap creatures, or graveyard-filling spells), and a mix of early threats (1-2 mana) and interaction.",
+      "Specifically, keep hands with Tribal Flames + a cheap creature, or Archon of Cruelty + two cheap spells.",
+      "Prioritize hands that can cast a spell on turn 1 to start building graveyard diversity."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on all-lands, all-removal, or hands missing both early pressure and Domain triggers."
+    ],
     "examples": []
   },
   "game_plan": {
     "early_game": [
       "Play cheap creatures like Wild Nacatl and Ragavan to establish early pressure",
       "Fetch Savai Triome and cycle Shock Lands to establish Domain quickly",
-      "Cast Leyline of the Guildpact or use Stubborn Denial as early interaction"
+      "Cast Leyline of the Guildpact or use Stubborn Denial as early interaction",
+      "Turn 1: Play a land, cast a 1-mana spell (creature or instant) to begin accumulating card types in the graveyard.",
+      "Turn 2: Play a land, cast a 2-mana threat or use Tribal Flames if your graveyard has 3+ different card types.",
+      "Sequence cheap spells to maximize Domain triggers without overcommitting mana.",
+      "Prioritize lands that enter untapped, but never skip casting a crucial spell just to untap a land if you can cast on the current turn."
     ],
     "mid_game": [
       "Cast Scion of Draco to synergize with Leyline and buff existing creatures",
       "Attack with Territorial Kavu and Nishoba Brawler, leveraging +1/+1 counters and trample",
-      "Use Lightning Bolt and Tribal Flames to clear blockers or finish the opponent"
+      "Use Lightning Bolt and Tribal Flames to clear blockers or finish the opponent",
+      "Track graveyard card types meticulously",
+      "prioritize casting spells that add new types (lands, creatures, instants, sorceries, enchantments) to maximize Tribal Flames and other Domain effects.",
+      "Avoid overcommitting mana on low-impact spells when a higher-impact Domain trigger is available.",
+      "Manage hand size by using cheap spells to dig or discard dead cards, and preserve interaction for critical turns.",
+      "Commit threats when you have interaction or a clear path to the face.",
+      "Hold back if the opponent has a board wipe or hard removal pending."
     ],
     "late_game": [
       "Rely on attrition and sideboard hosers like Drannith Magistrate or Rest in Peace to stall",
       "Use targeted removal like Prismatic Ending or Pick Your Poison to handle specific threats",
-      "Continue applying pressure with buffed creatures until lethal"
+      "Continue applying pressure with buffed creatures until lethal",
+      "Archon of Cruelty with multiple +1/+1 counters, Tribal Flames for direct damage or clearing a final blocker, and a swarm of Domain-boosted creatures.",
+      "The goal is to pressure while keeping interaction ready for the last turn, often using Tribal Flames to swing for lethal or remove a key defender.",
+      "Go all-in when you have a clear path to the face, the opponent has no hard removal or board wipes in hand, or when you can win before their combo/control piece resolves.",
+      "If you have 3+ Domain types in your graveyard and a Tribal Flames, it's often worth swinging.",
+      "Commit when your opponent is tapped out or has no interaction left."
     ]
   },
   "key_cards": [
@@ -87,7 +108,13 @@
     "Fetch Savai Triome on turn one and Breeding Pool on turn two to cast Scion of Draco by turn two",
     "Sequence Leyline Binding with a creature to maximize efficiency without stalling the clock",
     "Use Fetch Lands to find at least one basic land to avoid being two-for-one'd by opponent's Pick Your Poison",
-    "Hold Stubborn Denial as a Force Spike against early targeted hate like Blood Moon or key spells"
+    "Hold Stubborn Denial as a Force Spike against early targeted hate like Blood Moon or key spells",
+    "Common mistake: Overlooking graveyard card types when casting spells.",
+    "Always count before casting Tribal Flames to ensure maximum value.",
+    "Another: Casting Archon of Cruelty too early without a way to pump it or protect it.",
+    "Unique interaction: Leyline of the Guildpact counts as an enchantment for Domain, so having it in play or graveyard helps.",
+    "Domain triggers check graveyard, library, hand, and battlefield simultaneously.",
+    "Remember that fetch lands can be sacrificed for Domain if needed, but usually you want them in library."
   ],
   "matchups": [
     {
@@ -137,6 +164,31 @@
         "Amulet of Vigor",
         "Problematic permanents"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Tribal Flames as a free spell (instant speed, flexible targeting) to pressure through counters. Wait for end step or use cheap spells to force counters. Play around counters by having multiple threats in hand and using fetch lands to dig for answers. Don't overcommit to a single spell; spread your threats across turns.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to beat them out. Use Tribal Flames to remove their ramp targets or finish them. Don't trade inefficiently; focus on the face. Bring in more direct damage and clock. If they stabilize, use Archon of Cruelty to outvalue them in the late game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap removal (Tribal Flames, pathfinders) and early threats. Don't overextend; use interaction to clear key blockers. Lean into your speed; Domain Zoo is often faster than traditional aggro. Use your five-color mana base to answer their threats while applying your own pressure.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure relentlessly with cheap threats. Use Tribal Flames to clear blockers or swing for lethal. Don't give them time to draw; play around their counterspells by having multiple threats. If they have a wipe, hold up interaction or swing through it. Force them to use resources on your threats rather than their game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race and a resource war. Prioritize graveyard diversity to maximize Tribal Flames. Track their hand size and graveyard. Use discard or cheap interaction to disrupt their setup. Archon of Cruelty wins the long game; pump it with their creatures or your own. Win the graveyard war by casting more spells and keeping your types diverse.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -151,10 +203,12 @@
     "Blood Moon",
     "Magus of the Moon",
     "Pick Your Poison",
-    "Indomitable Creativity"
+    "Indomitable Creativity",
+    "Watch for board wipes (especially against control), hard removal (pathfinders, swords), and combo pieces (Storm counters, Amulet targets)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-domain-zoo-deck-tech-sideboard-guide",
     "generated_at": "2026-05-20T23:32:51+00:00",
     "model": "local-model",
@@ -172,7 +226,27 @@
         "overview",
         "key_cards",
         "matchups"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {
@@ -268,7 +342,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Legion’s End is an efficient removal against Crashing Footfalls tokens"
+      "evidence_span": "Legion\u2019s End is an efficient removal against Crashing Footfalls tokens"
     },
     {
       "confidence": 0.9,

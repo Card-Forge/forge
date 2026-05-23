@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early interaction or mana dorks",
       "Hands containing Narset or Teferi with sufficient lands",
-      "Hands with Orim's Chant and removal"
+      "Hands with Orim's Chant and removal",
+      "Keep hands with 4+ mana sources (lands, fetches, shock lands) and at least one land.",
+      "Prioritize hands with 2+ answers (Lightning Strike, Path to Exile, Cryptic Command, Orim's Chant) or a Narset/Teferi, Time Raveler."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or early play",
       "Hands with only late-game permanents and no answers",
-      "Hands without card draw or board presence"
+      "Hands without card draw or board presence",
+      "Mulligan pure land draws, hands missing a color of mana, or hands with multiple low-impact cards like Orim's Chant without answers."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Play lands and cheap interaction to survive early pressure",
       "Prioritize Narset, Parter of Veils for immediate board control and card draw",
-      "Hold up mana for Orim's Chant if facing aggressive starts"
+      "Hold up mana for Orim's Chant if facing aggressive starts",
+      "Turn 1: Play a land, hold up 1-2 mana for interaction.",
+      "Turn 2: Play a shock land or fetch, develop mana, and cast a cheap answer if threatened.",
+      "If safe, drop Narset or Teferi, Time Raveler.",
+      "Prioritize untapping lands for shock targets to enable tempo or dig for specific colors."
     ],
     "mid_game": [
       "Deploy Teferi, Time Raveler to establish a tempo advantage",
       "Use Orim's Chant to clear wide boards or protect key permanents",
-      "Maintain board presence while cycling through answers"
+      "Maintain board presence while cycling through answers",
+      "Preserve counterspells and removal for high-value targets.",
+      "Use fetches/shocks strategically to enable shock lands for tempo or dig for colors.",
+      "Manage the graveyard with Narset, Teferi, Time Raveler, Abrupt Decay, or Surgical Extraction.",
+      "Avoid overcommitting to the board without answers.",
+      "Hold back on committing threats until you have at least one answer or a Teferi, Time Raveler out.",
+      "Use Orim's Chant to protect your board or disrupt opponent combos/aggro."
     ],
     "late_game": [
       "Leverage Narset's draw engine to exhaust opponent's resources",
       "Use Teferi's untap ability to accelerate mana and draw",
-      "Cast Orim's Chant repeatedly to maintain board control until victory"
+      "Cast Orim's Chant repeatedly to maintain board control until victory",
+      "Teferi, Hero of Dominaria (draws cards, protects board, generates value), Teferi, Time Raveler (locks opponent, protects your board), or a well-timed Lightning Strike/Path to Exile sequence to clear the way for a single threat.",
+      "Go all-in when you have a Teferi out, or when the opponent has no answers to your threat.",
+      "Commit when you can stabilize and they're at low life, or when you have a clear path to victory with minimal risk."
     ]
   },
   "key_cards": [
@@ -65,7 +81,9 @@
     "Use Subtlety to exile uncounterable threats to the top of the library, stalling their resolution for a turn to resolve your own sweepers.",
     "Use Teferi, Time Raveler's +1 ability to grant flash to sorceries, allowing the new sweeper to be cast instant-speed to clear boards before attacks or resolves.",
     "When casting the new sweeper, do not auto-reveal the X cost for energy. Wait for the opponent to declare responses first to avoid giving away strategic information.",
-    "Prioritize keeping removal in hand to protect Teferi, Time Raveler rather than bouncing an enchanted threat if it would allow the opponent to attack with multiple creatures that would kill Teferi."
+    "Prioritize keeping removal in hand to protect Teferi, Time Raveler rather than bouncing an enchanted threat if it would allow the opponent to attack with multiple creatures that would kill Teferi.",
+    "Common mistakes include overcommitting to the board without answers, misusing Orim's Chant on your own spells unnecessarily, forgetting to track opponent mana and graveyard, and failing to use Teferi, Time Raveler's tap ability effectively.",
+    "Unique interactions: Orim's Chant can protect your Narset/Teferi from removal, and Teferi, Time Raveler's -1 can be used to bounce your own creatures to recast them or protect them from sweepers."
   ],
   "matchups": [
     {
@@ -96,16 +114,39 @@
       "opponent_archetype": "Bant Nadu",
       "advice": "Wrath of the Skies is the premier answer to Bant Nadu's multi-pronged threats (Shuko, Urza's Saga, Nadu) because it clears creatures, artifacts, and enchantments simultaneously. (from gameplay) Bant Nadu will often test waters by casting Summoner's Pact in response to Urza's Saga to gauge your counter spells before committing to the full Shuko combo; keep interaction up to disrupt this. (from gameplay) The new sweeper is a critical tool against Bant Nadu, efficiently clearing early threats and hitting enchantments in land form to severely delay their rebuild. (from gameplay) Keep extra blue cards in hand during discard phases to fuel cheap counterspells against Nadu's aggressive curve and mana acceleration. (from gameplay) Use the energy removal spell to target Nadu's mana creatures and bounce them to the top of the graveyard, disrupting their mana base while dealing damage. (from gameplay)",
       "watch_for": []
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Orim's Chant to protect your spells, cast Narset/Teferi at instant speed when they're tapped out, or use fetch/shock to dig for answers. Don't overcommit to one threat; trade efficiently and respect their mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction (Lightning Strike, Path, Orim's Chant) to stop key ramp spells. Use Teferi, Time Raveler to lock them out. Don't let them get to 5+ mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-grind with card draw (Teferi, Hero, Narset). Use Orim's Chant to protect your threats. Trade efficiently and don't let them sweep your board. Win by out-resourcing and closing with a resilient threat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing and better sequencing. Prioritize Teferi, Time Raveler and Narset. Use Orim's Chant to protect your board. Trade efficiently and don't overcommit. Surgical Extraction and Negate are key.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Targeted removal spells",
     "Board wipe effects",
-    "Card draw engines"
+    "Card draw engines",
+    "Watch for opponent mana bases to predict key spells, graveyard activity for Storm/Ruby, and board state for sweepers or lock pieces.",
+    "Note when they hold up mana past turn 3-4, as this often signals a counterspell or removal ready for your threat."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:12:01+00:00",
     "model": "local-model",
@@ -169,6 +210,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": "Jeskai Control"
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

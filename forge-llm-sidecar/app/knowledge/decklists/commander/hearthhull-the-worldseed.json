@@ -1,0 +1,368 @@
+{
+  "archetype": "Hearthhull, the Worldseed",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/hearthhull-the-worldseed.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Aftermath Analyst"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Greenwarden"
+    },
+    {
+      "qty": 1,
+      "name": "Augur of Autumn"
+    },
+    {
+      "qty": 1,
+      "name": "Avenger of Zendikar"
+    },
+    {
+      "qty": 1,
+      "name": "Azusa, Lost but Seeking"
+    },
+    {
+      "qty": 1,
+      "name": "Baloth Prime"
+    },
+    {
+      "qty": 1,
+      "name": "Beast Within"
+    },
+    {
+      "qty": 1,
+      "name": "Blasphemous Act"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Braids, Arisen Nightmare"
+    },
+    {
+      "qty": 1,
+      "name": "Cabaretti Courtyard"
+    },
+    {
+      "qty": 1,
+      "name": "Canyon Slough"
+    },
+    {
+      "qty": 1,
+      "name": "Cinder Glade"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Conduit of Worlds"
+    },
+    {
+      "qty": 1,
+      "name": "Constant Mists"
+    },
+    {
+      "qty": 1,
+      "name": "Crop Rotation"
+    },
+    {
+      "qty": 1,
+      "name": "Crucible of Worlds"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivate"
+    },
+    {
+      "qty": 1,
+      "name": "Dakmor Salvage"
+    },
+    {
+      "qty": 1,
+      "name": "Dryad of the Ilysian Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Escape Tunnel"
+    },
+    {
+      "qty": 1,
+      "name": "Eumidian Hatchery"
+    },
+    {
+      "qty": 1,
+      "name": "Evendo Brushrazer"
+    },
+    {
+      "qty": 1,
+      "name": "Evolving Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Exploration"
+    },
+    {
+      "qty": 1,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Farseek"
+    },
+    {
+      "qty": 1,
+      "name": "Festering Thicket"
+    },
+    {
+      "qty": 6,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Garruk's Uprising"
+    },
+    {
+      "qty": 1,
+      "name": "Green Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Harrow"
+    },
+    {
+      "qty": 1,
+      "name": "Hearthhull, the Worldseed"
+    },
+    {
+      "qty": 1,
+      "name": "Icetill Explorer"
+    },
+    {
+      "qty": 1,
+      "name": "Karplusan Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Korvold, Fae-Cursed King"
+    },
+    {
+      "qty": 1,
+      "name": "Life from the Loam"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Lord Windgrace"
+    },
+    {
+      "qty": 1,
+      "name": "Lotus Cobra"
+    },
+    {
+      "qty": 1,
+      "name": "Maestros Theater"
+    },
+    {
+      "qty": 1,
+      "name": "Mazirek, Kraul Death Priest"
+    },
+    {
+      "qty": 1,
+      "name": "Moraug, Fury of Akoum"
+    },
+    {
+      "qty": 1,
+      "name": "Mossborn Hydra"
+    },
+    {
+      "qty": 3,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Nahiri's Lithoforming"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Lore"
+    },
+    {
+      "qty": 1,
+      "name": "Nissa, Vital Force"
+    },
+    {
+      "qty": 1,
+      "name": "Ob Nixilis, the Fallen"
+    },
+    {
+      "qty": 1,
+      "name": "Omnath, Locus of Rage"
+    },
+    {
+      "qty": 1,
+      "name": "Oracle of Mul Daya"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Rampaging Baloths"
+    },
+    {
+      "qty": 1,
+      "name": "Ramunap Excavator"
+    },
+    {
+      "qty": 1,
+      "name": "Riveteers Overlook"
+    },
+    {
+      "qty": 1,
+      "name": "Roiling Regrowth"
+    },
+    {
+      "qty": 1,
+      "name": "Rumbleweed"
+    },
+    {
+      "qty": 1,
+      "name": "Scapeshift"
+    },
+    {
+      "qty": 1,
+      "name": "Scouring Swarm"
+    },
+    {
+      "qty": 1,
+      "name": "Scute Swarm"
+    },
+    {
+      "qty": 1,
+      "name": "Sheltered Thicket"
+    },
+    {
+      "qty": 1,
+      "name": "Skyshroud Claim"
+    },
+    {
+      "qty": 1,
+      "name": "Smoldering Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Soul of Windgrace"
+    },
+    {
+      "qty": 1,
+      "name": "Spelunking"
+    },
+    {
+      "qty": 1,
+      "name": "Splendid Reclamation"
+    },
+    {
+      "qty": 1,
+      "name": "Springbloom Druid"
+    },
+    {
+      "qty": 1,
+      "name": "Springheart Nantuko"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 1,
+      "name": "Sulfurous Springs"
+    },
+    {
+      "qty": 4,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Safekeeper"
+    },
+    {
+      "qty": 1,
+      "name": "Szarel, Genesis Shepherd"
+    },
+    {
+      "qty": 1,
+      "name": "Tannuk, Memorial Ensign"
+    },
+    {
+      "qty": 1,
+      "name": "Terramorphic Expanse"
+    },
+    {
+      "qty": 1,
+      "name": "The Gitrog Monster"
+    },
+    {
+      "qty": 1,
+      "name": "Timeless Witness"
+    },
+    {
+      "qty": 1,
+      "name": "Tireless Provisioner"
+    },
+    {
+      "qty": 1,
+      "name": "Titania, Protector of Argoth"
+    },
+    {
+      "qty": 1,
+      "name": "Valakut Exploration"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Vernal Fen"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Foothills"
+    },
+    {
+      "qty": 1,
+      "name": "Worldsoul's Rage"
+    },
+    {
+      "qty": 1,
+      "name": "Wrenn and Seven"
+    },
+    {
+      "qty": 1,
+      "name": "Ziatora's Proving Ground"
+    },
+    {
+      "qty": 1,
+      "name": "Zuran Orb"
+    }
+  ],
+  "sideboard": []
+}

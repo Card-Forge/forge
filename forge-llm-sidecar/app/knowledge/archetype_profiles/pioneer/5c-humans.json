@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "name": "5c Humans",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "This five-color Humans deck leverages Collected Company to rapidly flood the board with low-cost creatures, applying immediate pressure while generating card advantage. Thalia's Lieutenant taxes opponent spells to slow their game plan, while Reflector Mage provides recursive value and board control by bouncing threats. The deck aims to establish an early lead, stabilize with card advantage, and close out games through combat damage or attrition.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 3,
+      "cards": [
+        "Collected Company",
+        "Reflector Mage",
+        "Thalia's Lieutenant"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Collected Company",
+        "Reflector Mage",
+        "Thalia's Lieutenant"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Collected Company",
+        "Reflector Mage"
+      ]
+    },
+    "threats": {
+      "target_count": 3,
+      "cards": [
+        "Collected Company",
+        "Reflector Mage",
+        "Thalia's Lieutenant"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Collected Company",
+        "Reflector Mage",
+        "Thalia's Lieutenant"
+      ]
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 3,
+      "cards": [
+        "Collected Company",
+        "Reflector Mage",
+        "Thalia's Lieutenant"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": []
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 3,
+      "cards": [
+        "Collected Company",
+        "Reflector Mage",
+        "Thalia's Lieutenant"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Collected Company",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thalia's Lieutenant",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reflector Mage",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast Collected Company after playing your early creatures to maximize the number of cards drawn",
+    "Hold up mana for Reflector Mage's ability before attacking to bounce threats",
+    "Play Thalia's Lieutenant early to tax opponent's spells, but be mindful of its low power/toughness",
+    "Prioritize playing lands before casting Collected Company to ensure you can follow up",
+    "Use Reflector Mage to bounce opponent's removal or board wipes when possible"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and 1-drops to establish early board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Thalia's Lieutenant to tax opponent's early spells"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize keeping hands that can play a creature by turn two"
+    }
+  ],
+  "kill_priority": [
+    "Collected Company",
+    "Reflector Mage",
+    "Collected Company",
+    "Reflector Mage",
+    "Thalia's Lieutenant"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

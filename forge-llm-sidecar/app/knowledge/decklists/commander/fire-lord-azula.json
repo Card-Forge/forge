@@ -1,0 +1,336 @@
+{
+  "archetype": "Fire Lord Azula",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/fire-lord-azula.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Airship Engine Room"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archmage Emeritus"
+    },
+    {
+      "qty": 1,
+      "name": "Azula Always Lies"
+    },
+    {
+      "qty": 1,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 1,
+      "name": "Bladebrand"
+    },
+    {
+      "qty": 1,
+      "name": "Boiling Rock Prison"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Charging Strifeknight"
+    },
+    {
+      "qty": 1,
+      "name": "Chromatic Star"
+    },
+    {
+      "qty": 1,
+      "name": "Combustion Man"
+    },
+    {
+      "qty": 1,
+      "name": "Combustion Technique"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Crashing Wave"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Precision"
+    },
+    {
+      "qty": 1,
+      "name": "Desperate Plea"
+    },
+    {
+      "qty": 1,
+      "name": "Dramatic Reversal"
+    },
+    {
+      "qty": 1,
+      "name": "Electro, Assaulting Battery"
+    },
+    {
+      "qty": 1,
+      "name": "Electrodominance"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Woe"
+    },
+    {
+      "qty": 1,
+      "name": "Epic Downfall"
+    },
+    {
+      "qty": 1,
+      "name": "Fire Lord Azula"
+    },
+    {
+      "qty": 1,
+      "name": "Fire Navy Trebuchet"
+    },
+    {
+      "qty": 1,
+      "name": "Firebending Lesson"
+    },
+    {
+      "qty": 1,
+      "name": "Flexible Waterbender"
+    },
+    {
+      "qty": 1,
+      "name": "Foreboding Ruins"
+    },
+    {
+      "qty": 1,
+      "name": "Galvanic Iteration"
+    },
+    {
+      "qty": 1,
+      "name": "Gandalf the Grey"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Electromancer"
+    },
+    {
+      "qty": 1,
+      "name": "Gran-Gran"
+    },
+    {
+      "qty": 1,
+      "name": "Heartless Act"
+    },
+    {
+      "qty": 1,
+      "name": "Iroh's Demonstration"
+    },
+    {
+      "qty": 6,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Izzet Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Judith, Carnage Connoisseur"
+    },
+    {
+      "qty": 1,
+      "name": "Kindlespark Duo"
+    },
+    {
+      "qty": 1,
+      "name": "Last Gasp"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Strike"
+    },
+    {
+      "qty": 1,
+      "name": "Longshot, Rebel Bowman"
+    },
+    {
+      "qty": 1,
+      "name": "Master Pakku"
+    },
+    {
+      "qty": 1,
+      "name": "Melancholic Poet"
+    },
+    {
+      "qty": 1,
+      "name": "Mire's Grasp"
+    },
+    {
+      "qty": 8,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Neera, Wild Mage"
+    },
+    {
+      "qty": 1,
+      "name": "North Pole Patrol"
+    },
+    {
+      "qty": 1,
+      "name": "Ozai's Cruelty"
+    },
+    {
+      "qty": 1,
+      "name": "Ozai, the Phoenix King"
+    },
+    {
+      "qty": 1,
+      "name": "Palladium Myr"
+    },
+    {
+      "qty": 1,
+      "name": "Potioner's Trove"
+    },
+    {
+      "qty": 1,
+      "name": "Rakdos Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Ral, Monsoon Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Riddle of Lightning"
+    },
+    {
+      "qty": 1,
+      "name": "Savor"
+    },
+    {
+      "qty": 1,
+      "name": "Secret Tunnel"
+    },
+    {
+      "qty": 1,
+      "name": "Seething Landscape"
+    },
+    {
+      "qty": 1,
+      "name": "Serpent of the Pass"
+    },
+    {
+      "qty": 1,
+      "name": "Serpent's Pass"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spectacular Skywhale"
+    },
+    {
+      "qty": 1,
+      "name": "Spirit Water Revival"
+    },
+    {
+      "qty": 1,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 7,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Tempest Angler"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Epiphany"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Malice"
+    },
+    {
+      "qty": 1,
+      "name": "Temur Battle Rage"
+    },
+    {
+      "qty": 1,
+      "name": "The Fire Nation Drill"
+    },
+    {
+      "qty": 1,
+      "name": "The Last Agni Kai"
+    },
+    {
+      "qty": 1,
+      "name": "Thriving Bluff"
+    },
+    {
+      "qty": 1,
+      "name": "Thriving Isle"
+    },
+    {
+      "qty": 1,
+      "name": "Thriving Moor"
+    },
+    {
+      "qty": 1,
+      "name": "Ty Lee, Artful Acrobat"
+    },
+    {
+      "qty": 1,
+      "name": "Ty Lee, Chi Blocker"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Cave"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grasp"
+    },
+    {
+      "qty": 1,
+      "name": "Wither and Bloom"
+    },
+    {
+      "qty": 1,
+      "name": "Worn Powerstone"
+    },
+    {
+      "qty": 1,
+      "name": "Zuko's Conviction"
+    },
+    {
+      "qty": 1,
+      "name": "Zuko's Exile"
+    },
+    {
+      "qty": 1,
+      "name": "Zuko, Seeking Honor"
+    }
+  ],
+  "sideboard": []
+}

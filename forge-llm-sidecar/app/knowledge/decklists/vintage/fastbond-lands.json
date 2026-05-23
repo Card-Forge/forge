@@ -1,0 +1,153 @@
+{
+  "archetype": "Fastbond Lands",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/fastbond-lands.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 3,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Crop Rotation"
+    },
+    {
+      "qty": 4,
+      "name": "Crucible of Worlds"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Depths"
+    },
+    {
+      "qty": 2,
+      "name": "Exploration"
+    },
+    {
+      "qty": 4,
+      "name": "Fastbond"
+    },
+    {
+      "qty": 1,
+      "name": "Glacial Chasm"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 2,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 1,
+      "name": "Maze of Ith"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 4,
+      "name": "Mishra's Workshop"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 3,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 4,
+      "name": "Once Upon a Time"
+    },
+    {
+      "qty": 2,
+      "name": "Perennial Behemoth"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 1,
+      "name": "The Tabernacle at Pendrell Vale"
+    },
+    {
+      "qty": 2,
+      "name": "Thespian's Stage"
+    },
+    {
+      "qty": 1,
+      "name": "Trinisphere"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 2,
+      "name": "Void Mirror"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 4,
+      "name": "Waterlogged Grove"
+    },
+    {
+      "qty": 4,
+      "name": "Yavimaya, Cradle of Growth"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Depths"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 2,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 1,
+      "name": "Kaheera, the Orphanguard"
+    },
+    {
+      "qty": 3,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Null Rod"
+    }
+  ]
+}

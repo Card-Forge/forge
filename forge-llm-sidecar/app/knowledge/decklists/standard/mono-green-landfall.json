@@ -1,0 +1,101 @@
+{
+  "archetype": "Mono-Green Landfall",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/mono-green-landfall.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Archdruid's Charm"
+    },
+    {
+      "qty": 4,
+      "name": "Ba Sing Se"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 4,
+      "name": "Earthbender Ascension"
+    },
+    {
+      "qty": 3,
+      "name": "Escape Tunnel"
+    },
+    {
+      "qty": 4,
+      "name": "Esper Origins"
+    },
+    {
+      "qty": 4,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 13,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Icetill Explorer"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 2,
+      "name": "Meltstrider's Resolve"
+    },
+    {
+      "qty": 4,
+      "name": "Mightform Harmonizer"
+    },
+    {
+      "qty": 2,
+      "name": "Mossborn Hydra"
+    },
+    {
+      "qty": 2,
+      "name": "Promising Vein"
+    },
+    {
+      "qty": 1,
+      "name": "Royal Treatment"
+    },
+    {
+      "qty": 4,
+      "name": "Sazh's Chocobo"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Meltstrider's Resolve"
+    },
+    {
+      "qty": 2,
+      "name": "Mossborn Hydra"
+    },
+    {
+      "qty": 2,
+      "name": "Pawpatch Formation"
+    },
+    {
+      "qty": 1,
+      "name": "Royal Treatment"
+    },
+    {
+      "qty": 4,
+      "name": "Sapling Nursery"
+    },
+    {
+      "qty": 2,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 2,
+      "name": "Surrak, Elusive Hunter"
+    }
+  ]
+}

@@ -1,0 +1,518 @@
+{
+  "schema_version": 1,
+  "name": "Eldrazi",
+  "format": "vintage",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Glaring Fleshraker",
+    "Sowing Mycospawn",
+    "Karn, the Great Creator",
+    "Tezzeret, Cruel Captain",
+    "Eldrazi Linebreaker",
+    "Grim Monolith",
+    "Manifold Key",
+    "Mox Emerald"
+  ],
+  "interaction_to_disrupt": [
+    "Mental Misstep",
+    "Cavern of Souls",
+    "Dark Depths",
+    "The One Ring",
+    "Ancient Tomb",
+    "Bojuka Bog",
+    "Glaring Fleshraker",
+    "Mana Crypt"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Trinisphere"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Mana Vault",
+        "Sensei's Divining Top",
+        "The One Ring",
+        "Thought-Knot Seer",
+        "Urza's Saga",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Grafdigger's Cage",
+        "Sensei's Divining Top"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 11,
+      "cards": [
+        "Eye of Ugin",
+        "Sowing Mycospawn",
+        "Tezzeret, Cruel Captain",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Sowing Mycospawn"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 32,
+      "cards": [
+        "Eldrazi Linebreaker",
+        "Glaring Fleshraker",
+        "Grim Monolith",
+        "Karn, the Great Creator",
+        "Manifold Key",
+        "Mox Emerald",
+        "Mox Jet",
+        "Mox Pearl",
+        "Mox Ruby",
+        "Mox Sapphire",
+        "Mutated Cultist",
+        "Sol Ring",
+        "Sowing Mycospawn",
+        "Tezzeret, Cruel Captain",
+        "Thought-Knot Seer",
+        "Time Vault",
+        "Wastescape Battlemage"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 1
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Ancient Tomb",
+        "Bojuka Bog",
+        "Glaring Fleshraker",
+        "Mana Crypt",
+        "Mana Vault",
+        "Sowing Mycospawn",
+        "Strip Mine",
+        "The Tabernacle at Pendrell Vale",
+        "Wastescape Battlemage"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Gaea's Cradle",
+        "The Tabernacle at Pendrell Vale"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 1,
+      "cards": [
+        "Mental Misstep"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Cavern of Souls",
+        "Dark Depths",
+        "The One Ring"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 7,
+      "cards": [
+        "Bojuka Bog",
+        "Grafdigger's Cage",
+        "Leyline of the Void",
+        "Wastescape Battlemage"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Wastescape Battlemage"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Glaring Fleshraker"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Sowing Mycospawn"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Chalice of the Void",
+        "Dismember",
+        "Disruptor Flute",
+        "Grafdigger's Cage",
+        "Maze of Ith",
+        "Pithing Needle"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 7
+    },
+    "mana_fixing": {
+      "target_count": 25,
+      "cards": [
+        "Ancient Tomb",
+        "Black Lotus",
+        "Bojuka Bog",
+        "Cavern of Souls",
+        "Dark Depths",
+        "Eldrazi Temple",
+        "Eye of Ugin",
+        "Gaea's Cradle",
+        "Maze of Ith",
+        "Mox Opal",
+        "Strip Mine",
+        "Talon Gates of Madara",
+        "The Tabernacle at Pendrell Vale",
+        "Tolarian Academy",
+        "Trinisphere",
+        "Urborg, Tomb of Yawgmoth",
+        "Urza's Saga",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 4
+    },
+    "lands": {
+      "target_count": 22,
+      "cards": [
+        "Ancient Tomb",
+        "Bojuka Bog",
+        "Cavern of Souls",
+        "Dark Depths",
+        "Eldrazi Temple",
+        "Eye of Ugin",
+        "Gaea's Cradle",
+        "Maze of Ith",
+        "Strip Mine",
+        "Talon Gates of Madara",
+        "The Tabernacle at Pendrell Vale",
+        "Tolarian Academy",
+        "Urborg, Tomb of Yawgmoth",
+        "Urza's Saga",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 3
+    },
+    "planeswalker_threats": {
+      "target_count": 5,
+      "cards": [
+        "Karn, the Great Creator",
+        "Tezzeret, Cruel Captain"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.3
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dark Depths",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eldrazi Temple",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eye of Ugin",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gaea's Cradle",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glaring Fleshraker",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karn, the Great Creator",
+      "roles": [
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Vault",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Maze of Ith",
+      "roles": [
+        "hate_pieces",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sensei's Divining Top",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sowing Mycospawn",
+      "roles": [
+        "payoff_cards",
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strip Mine",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Talon Gates of Madara",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tezzeret, Cruel Captain",
+      "roles": [
+        "planeswalker_threats",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The One Ring",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Tabernacle at Pendrell Vale",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thought-Knot Seer",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tolarian Academy",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Trinisphere",
+      "roles": [
+        "mana_fixing",
+        "mana_reducers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urborg, Tomb of Yawgmoth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wastescape Battlemage",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya, Cradle of Growth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/eldrazi.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

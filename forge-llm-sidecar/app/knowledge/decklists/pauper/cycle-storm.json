@@ -1,0 +1,97 @@
+{
+  "archetype": "Cycle Storm",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/cycle-storm.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Barren Moor"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Celebrant"
+    },
+    {
+      "qty": 4,
+      "name": "Cabal Ritual"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 4,
+      "name": "Drannith Healer"
+    },
+    {
+      "qty": 4,
+      "name": "Drannith Stinger"
+    },
+    {
+      "qty": 4,
+      "name": "Great Furnace"
+    },
+    {
+      "qty": 4,
+      "name": "Horror of the Broken Lands"
+    },
+    {
+      "qty": 4,
+      "name": "Imposing Vantasaur"
+    },
+    {
+      "qty": 2,
+      "name": "Monstrous Carabid"
+    },
+    {
+      "qty": 4,
+      "name": "Page, Loose Leaf"
+    },
+    {
+      "qty": 4,
+      "name": "Reaping the Graves"
+    },
+    {
+      "qty": 4,
+      "name": "Rowan's Grim Search"
+    },
+    {
+      "qty": 4,
+      "name": "Songs of the Damned"
+    },
+    {
+      "qty": 4,
+      "name": "Street Wraith"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Vault of Whispers"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Chitin Gravestalker"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 3,
+      "name": "Siege Smash"
+    },
+    {
+      "qty": 4,
+      "name": "Writhing Necromass"
+    }
+  ]
+}

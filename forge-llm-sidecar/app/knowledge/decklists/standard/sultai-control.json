@@ -1,0 +1,173 @@
+{
+  "archetype": "Sultai Control",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/sultai-control.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Ancient Cornucopia"
+    },
+    {
+      "qty": 1,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 3,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 4,
+      "name": "Deadly Cover-Up"
+    },
+    {
+      "qty": 3,
+      "name": "Deathcap Glade"
+    },
+    {
+      "qty": 1,
+      "name": "Decorum Dissertation"
+    },
+    {
+      "qty": 1,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Feed the Cycle"
+    },
+    {
+      "qty": 2,
+      "name": "Flow State"
+    },
+    {
+      "qty": 3,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Great Hall of the Biblioplex"
+    },
+    {
+      "qty": 3,
+      "name": "Maelstrom Pulse"
+    },
+    {
+      "qty": 1,
+      "name": "Mistrise Village"
+    },
+    {
+      "qty": 1,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 2,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 2,
+      "name": "Petrified Hamlet"
+    },
+    {
+      "qty": 3,
+      "name": "Professor Dellian Fel"
+    },
+    {
+      "qty": 3,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 3,
+      "name": "Shoot the Sheriff"
+    },
+    {
+      "qty": 1,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 1,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 3,
+      "name": "Three Steps Ahead"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Wan Shi Tong, Librarian"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Witherbloom Charm"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Day of Black Sun"
+    },
+    {
+      "qty": 1,
+      "name": "Decorum Dissertation"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 1,
+      "name": "Flashfreeze"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 1,
+      "name": "Heritage Reclamation"
+    },
+    {
+      "qty": 2,
+      "name": "Intimidation Tactics"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Nowhere to Run"
+    },
+    {
+      "qty": 1,
+      "name": "Outrageous Robbery"
+    },
+    {
+      "qty": 1,
+      "name": "The Dawning Archaic"
+    },
+    {
+      "qty": 1,
+      "name": "Torpor Orb"
+    }
+  ]
+}

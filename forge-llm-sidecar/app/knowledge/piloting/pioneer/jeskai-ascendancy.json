@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing at least two lands and a playable creature or talent card",
       "Early access to Badgermole Cub to establish board presence and draw a card",
-      "Mana base that supports five-color casting without severe clumps"
+      "Mana base that supports five-color casting without severe clumps",
+      "Keep hands with 2-3 lands (including fetches/shocks), Jeska's Ascension, and a protection or casting enabler (e.g., Lightning Greaves, Karn, or cheap cantrips).",
+      "Prioritize hands with Badgermole Cub or Stormchaser's Talent for early card draw and pump synergy."
     ],
     "mulligan_criteria": [
       "Hands lacking land drops for the first three turns",
       "Overloaded with high-cost finishers without early interaction or draw",
-      "Missing any of the signature cards in a 40-card deck context where they are critical"
+      "Missing any of the signature cards in a 40-card deck context where they are critical",
+      "Mulligan hands with 0-1 lands, multiple copies of Ascension without answers, or hands lacking early interaction/mana acceleration."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and deploy Badgermole Cub immediately to generate value",
       "Use Stormchaser's Talent to draw cards and find answers or threats",
-      "Prioritize mana base consistency to support five-color casting"
+      "Prioritize mana base consistency to support five-color casting",
+      "Turn 1: Play a land, cast a cantrip or cheap interaction.",
+      "Turn 2: Cast Stormchaser's Talent or Badgermole Cub, fetch a shock land, or play a cheap threat.",
+      "Sequence mana carefully to ensure you can cast Ascension by turn 3-4 while maintaining interaction.",
+      "Against aggro, prioritize early threats and spot removal",
+      "against control, prioritize card draw and protection."
     ],
     "mid_game": [
       "Trade efficiently to preserve board presence while cycling through draw engines",
       "Hold up mana for potential interaction while advancing toward Jeskai Ascendancy",
-      "Apply pressure with creatures to force opponent to use resources prematurely"
+      "Apply pressure with creatures to force opponent to use resources prematurely",
+      "Mana is tight due to five-color requirements",
+      "use fetches and shock lands efficiently to avoid flooding.",
+      "Keep card advantage flowing with Badgermole Cub and Stormchaser's Talent.",
+      "Protect Ascension at all costs\u2014it is the engine.",
+      "Do not overcommit to the board if Ascension is still in hand or on the stack.",
+      "Commit threats only when you have protection or removal for the opponent's key pieces."
     ],
     "late_game": [
       "Cast Jeskai Ascendancy to lock down the game or create an unanswerable board state",
       "Flood the board with creatures to overwhelm opponent's remaining removal",
-      "Maintain card advantage through repeated talent activations to close out the match"
+      "Maintain card advantage through repeated talent activations to close out the match",
+      "A fully pumped creature (often via Badgermole Cub/Stormchaser's Talent + Ascension) or a board of counters.",
+      "Win via combat or card advantage if the opponent is out of resources.",
+      "Go all-in when you have Ascension on the battlefield, protection for it, and enough mana to cast a threat or pump spell.",
+      "Also commit when the opponent has no sweepers or interaction left."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Play Badgermole Cub before using removal to maximize its triggered value",
     "Hold Stormchaser's Talent until after opponent commits resources to avoid wasting draw potential",
-    "Delay Jeskai Ascendancy until you have enough mana and board presence to trigger its full effect"
+    "Delay Jeskai Ascendancy until you have enough mana and board presence to trigger its full effect",
+    "Five-color mana can be inconsistent",
+    "practice land sequencing and fetch usage to avoid flooding or screwing.",
+    "Badgermole Cub and Stormchaser's Talent are crucial for card draw and pump synergy\u2014do not cast them lightly without a clear plan.",
+    "Jeska's Ascension is fragile",
+    "always have a plan to protect it or recast it.",
+    "Be aware of format-specific hate cards (e.g., Rest in Peace, Leyline of Punishment, or graveyard hate) and adjust your sideboard accordingly."
   ],
   "matchups": [
     {
@@ -87,15 +111,34 @@
         "Board presence creatures",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use protection (Lightning Greaves, counterspells), split your spells, or cast Ascension when the opponent is tapped out. Use cantrips to dig for answers or protection.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use spot removal on key ramp creatures. Do not let them stabilize; win before they cast their finisher.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize protection for Ascension, use targeted removal to eliminate their threats, and out-draw them with Badgermole Cub/Stormchaser's Talent. Control the board with sweepers if available.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early-game aggressive creatures that pressure life total",
     "Board wipes that reset incremental advantages",
-    "Counterspells that disrupt Jeskai Ascendancy casting"
+    "Counterspells that disrupt Jeskai Ascendancy casting",
+    "Watch for sweepers (e.g., Wrath of God, Cyclonic Rift), counterspells, and graveyard strategies.",
+    "Note when opponents tap out for interaction, as this is your window to cast Ascension.",
+    "Track their mana base to predict if they can answer your threats or stabilize."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:08:12+00:00",
     "model": "local-model",
@@ -111,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

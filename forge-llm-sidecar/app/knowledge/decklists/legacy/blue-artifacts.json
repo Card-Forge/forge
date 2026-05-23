@@ -1,0 +1,141 @@
+{
+  "archetype": "Blue Artifacts",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/blue-artifacts.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Aether Spellbomb"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Chromatic Star"
+    },
+    {
+      "qty": 4,
+      "name": "Emry, Lurker of the Loch"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Welder"
+    },
+    {
+      "qty": 2,
+      "name": "Kappa Cannoneer"
+    },
+    {
+      "qty": 2,
+      "name": "Krang, Master Mind"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 4,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 4,
+      "name": "Pinnacle Emissary"
+    },
+    {
+      "qty": 4,
+      "name": "Seat of the Synod"
+    },
+    {
+      "qty": 4,
+      "name": "Sewer-veillance Cam"
+    },
+    {
+      "qty": 1,
+      "name": "Skateboard"
+    },
+    {
+      "qty": 1,
+      "name": "Twinshot Sniper"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 4,
+      "name": "Volcanic Island"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 1,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Stern Scolding"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    }
+  ]
+}

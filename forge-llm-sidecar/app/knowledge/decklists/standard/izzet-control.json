@@ -1,0 +1,169 @@
+{
+  "archetype": "Izzet Control",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/izzet-control.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ashling's Command"
+    },
+    {
+      "qty": 1,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Colorstorm Stallion"
+    },
+    {
+      "qty": 1,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 1,
+      "name": "Cori Mountain Monastery"
+    },
+    {
+      "qty": 1,
+      "name": "Devastating Onslaught"
+    },
+    {
+      "qty": 2,
+      "name": "Fire Magic"
+    },
+    {
+      "qty": 3,
+      "name": "Firebending Lesson"
+    },
+    {
+      "qty": 1,
+      "name": "Improvisation Capstone"
+    },
+    {
+      "qty": 1,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Mistrise Village"
+    },
+    {
+      "qty": 3,
+      "name": "Molten-Core Maestro"
+    },
+    {
+      "qty": 3,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 2,
+      "name": "Prismari Charm"
+    },
+    {
+      "qty": 4,
+      "name": "Riverpyre Verge"
+    },
+    {
+      "qty": 3,
+      "name": "Sanar, Unfinished Genius"
+    },
+    {
+      "qty": 1,
+      "name": "Sear"
+    },
+    {
+      "qty": 1,
+      "name": "Sorceress's Schemes"
+    },
+    {
+      "qty": 3,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 2,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 3,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 4,
+      "name": "Tablet of Discovery"
+    },
+    {
+      "qty": 2,
+      "name": "Three Steps Ahead"
+    },
+    {
+      "qty": 2,
+      "name": "Thundering Falls"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Aetherize"
+    },
+    {
+      "qty": 1,
+      "name": "Annul"
+    },
+    {
+      "qty": 1,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 1,
+      "name": "Devastating Onslaught"
+    },
+    {
+      "qty": 1,
+      "name": "Flashfreeze"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 1,
+      "name": "Improvisation Capstone"
+    },
+    {
+      "qty": 1,
+      "name": "Molten-Core Maestro"
+    },
+    {
+      "qty": 2,
+      "name": "Octopus Form"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 1,
+      "name": "Sear"
+    },
+    {
+      "qty": 1,
+      "name": "Sorceress's Schemes"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    }
+  ]
+}

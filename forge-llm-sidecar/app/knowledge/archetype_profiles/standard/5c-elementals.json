@@ -1,0 +1,555 @@
+{
+  "schema_version": 1,
+  "name": "5c Elementals",
+  "format": "standard",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "This five-color deck leverages elemental synergy to control the board while generating consistent value. Wistfulness provides targeted tutoring to find key threats, while Vibrance offers card advantage and mana filtering. Ashling serves as the primary win condition by producing tokens and dealing direct damage, supported by Rekindled for recursion and late-game sustainability.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 3,
+      "cards": [
+        "Winternight Stories"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 22,
+      "cards": [
+        "Ashling, Rekindled",
+        "Beza, the Bounding Spring",
+        "Broadside Barrage",
+        "Ill-Timed Explosion",
+        "Soul-Guide Lantern",
+        "Vibrance",
+        "Winternight Stories",
+        "Wistfulness"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Thundering Falls",
+        "Vibrance"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Vibrance",
+        "Wistfulness"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 15,
+      "cards": [
+        "Ashling, Rekindled",
+        "Vibrance",
+        "Winternight Stories",
+        "Wistfulness"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 23,
+      "cards": [
+        "Beza, the Bounding Spring",
+        "Deceit",
+        "Flamebraider",
+        "Roaming Throne",
+        "Sunderflock",
+        "Vibrance",
+        "Wistfulness",
+        "Ygra, Eater of All"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 23,
+      "cards": [
+        "Abrade",
+        "Bounce Off",
+        "Broadside Barrage",
+        "Burst Lightning",
+        "Ghost Vacuum",
+        "Ill-Timed Explosion",
+        "Pyroclasm",
+        "Soul-Guide Lantern",
+        "Vibrance",
+        "Wistfulness"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Ghost Vacuum",
+        "Ill-Timed Explosion",
+        "Pyroclasm"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Disdainful Stroke",
+        "Flashfreeze",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 12,
+      "cards": [
+        "Ashling, Rekindled",
+        "Cavern of Souls",
+        "Roaming Throne",
+        "Ygra, Eater of All"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 10,
+      "cards": [
+        "Broadside Barrage",
+        "Vibrance",
+        "Wistfulness"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "graveyard_enablers": {
+      "target_count": 17,
+      "cards": [
+        "Ghost Vacuum",
+        "Pit of Offerings",
+        "Soul-Guide Lantern",
+        "Thundering Falls",
+        "Vibrance",
+        "Winternight Stories",
+        "Wistfulness",
+        "Ygra, Eater of All"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 15,
+      "cards": [
+        "Ashling, Rekindled",
+        "Bounce Off",
+        "Deceit",
+        "Sunderflock",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Ashling, Rekindled"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 7,
+      "cards": [
+        "Ashling, Rekindled",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 36,
+      "cards": [
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Cori Mountain Monastery",
+        "Flamebraider",
+        "Petrified Hamlet",
+        "Pit of Offerings",
+        "Restless Vinestalk",
+        "Secluded Courtyard",
+        "Spirebluff Canal",
+        "Starting Town",
+        "Steam Vents",
+        "Thundering Falls",
+        "Vibrance",
+        "Wistfulness"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 26,
+      "cards": [
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Cori Mountain Monastery",
+        "Island",
+        "Petrified Hamlet",
+        "Pit of Offerings",
+        "Restless Vinestalk",
+        "Secluded Courtyard",
+        "Spirebluff Canal",
+        "Starting Town",
+        "Steam Vents",
+        "Thundering Falls"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 1
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.52
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ashling, Rekindled",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Beza, the Bounding Spring",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bounce Off",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Broadside Barrage",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cori Mountain Monastery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deceit",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flamebraider",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Vacuum",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ill-Timed Explosion",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Petrified Hamlet",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pit of Offerings",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroclasm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restless Vinestalk",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Roaming Throne",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Secluded Courtyard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirebluff Canal",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunderflock",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thundering Falls",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vibrance",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Winternight Stories",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_reducers",
+        "payoff_cards",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wistfulness",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ygra, Eater of All",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast Wistfulness before committing to large spells to ensure optimal targets",
+    "Hold up mana for Vibrance's filter ability to maintain color consistency",
+    "Protect Ashling with blockers or counterspells to preserve token generation",
+    "Sequence Rekindled after opponent plays removal to maximize value",
+    "Common mistakes include overcommitting early, mismanaging fetch lands, failing to track opponent interaction, and not adapting to the metagame."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Establish mana base and play low-cost elementals"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Wistfulness to tutor for immediate threats or answers"
+    },
+    {
+      "trigger": "early game",
+      "line": "Avoid overcommitting resources before establishing board presence"
+    }
+  ],
+  "kill_priority": [
+    "Ashling, Rekindled",
+    "Vibrance",
+    "Winternight Stories",
+    "Wistfulness",
+    "Beza, the Bounding Spring",
+    "Deceit",
+    "Flamebraider",
+    "Roaming Throne"
+  ],
+  "interaction_to_disrupt": [
+    "Disdainful Stroke",
+    "Flashfreeze",
+    "Spell Pierce",
+    "Ashling, Rekindled",
+    "Cavern of Souls",
+    "Roaming Throne",
+    "Ygra, Eater of All",
+    "Abrade"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/5c-elementals.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

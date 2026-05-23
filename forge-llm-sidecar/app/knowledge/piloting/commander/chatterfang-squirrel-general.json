@@ -1,0 +1,130 @@
+{
+  "archetype": "Chatterfang, Squirrel General",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Chatterfang is a value engine that trades creatures for cards, aiming to out-resource opponents through relentless card advantage and token generation. It wins by stabilizing early, out-drawing control and combo decks, and out-valuing aggro with efficient removal and late-game finishers.",
+  "win_conditions": [
+    "Chatterfang itself, often protected or replayed via recursion.",
+    "Secondary finishers include efficient removal to clear the board and a large creature or direct damage.",
+    "The goal is to stabilize, draw into a win condition, and close the game before the opponent can reset the board."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, a turn-1 land drop, and either Chatterfang, a cheap creature, or removal.",
+      "Prioritize hands that can play a land, then a creature/removal on turn 1, and set up the Chatterfang engine by turn 2-3."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no early plays, or hands with only draw spells and no creatures/removal."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, then a cheap creature or removal.",
+      "If you have Sol Ring, play it on turn 1, then a land, then a creature/removal.",
+      "Turn 2: Play Chatterfang if possible, or another creature/removal.",
+      "If you have Chatterfang, play it to get two Squirrels.",
+      "If you have a creature and Deadly Dispute, you can sacrifice it for card advantage.",
+      "Land sequencing: Prioritize fetching/playing lands that enter untapped to ensure you hit your mana steps for Chatterfang (2BG) and removal."
+    ],
+    "mid_game": [
+      "Use Deadly Dispute sparingly",
+      "only sacrifice when you can replace the creature or when the card advantage is critical.",
+      "Manage your graveyard carefully, as it's your primary resource for card draw.",
+      "Don't overcommit to token generation if you're low on removal",
+      "prioritize board presence and card advantage.",
+      "Commit threats when you have removal or protection to protect them.",
+      "Hold back if the opponent has sweepers or targeted removal.",
+      "Use Chatterfang's tokens as both threats and sacrifice fodder, but don't flood the board if you can't answer their answers."
+    ],
+    "late_game": [
+      "Chatterfang itself, often protected or replayed via recursion.",
+      "Secondary finishers include efficient removal to clear the board and a large creature or direct damage.",
+      "The goal is to stabilize, draw into a win condition, and close the game before the opponent can reset the board.",
+      "Go all-in when you have card advantage, removal to answer their threats, and the opponent is at low life or has no sweepers.",
+      "Also commit when you can safely sacrifice tokens for Deadly Dispute to draw into your finisher."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Chatterfang, Squirrel General",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Deadly Dispute",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Chatterfang is vulnerable to board wipes, so don't overcommit to token generation.",
+    "Deadly Dispute is your best friend, but don't sacrifice your only creature unless necessary.",
+    "Watch for opponent's discard or hand disruption.",
+    "The deck thrives on patience and out-valuing, not rushing.",
+    "Avoid playing around cards you don't need to",
+    "play the game as it develops."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple low-cost threats to force counter windows. Employ discard or discard effects to disrupt their hand. Use protection or recursion to get Chatterfang back if countered.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use efficient removal to kill their ramp creatures. Don't let them establish a board; trade efficiently and out-value them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and removal. Use Chatterfang's tokens to block and trade efficiently. Stabilize by turn 3-4, then transition to value and card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card draw and efficient threats. Protect Chatterfang from targeted removal. Use discard to disrupt their hand. Force them to use resources on your threats while you draw into answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card draw and efficient removal. Use discard to disrupt their Deadly Dispute or Chatterfang. Control the board with fewer, more efficient creatures.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (e.g., Wrath of God, Damnation), targeted removal (e.g., Murder, Go for the Throat), and combo win conditions.",
+    "Note when opponents tap out for big spells or hold up mana for protection.",
+    "Track their graveyard if they're using it for value."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

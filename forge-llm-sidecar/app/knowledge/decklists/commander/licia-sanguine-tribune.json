@@ -1,0 +1,340 @@
+{
+  "archetype": "Licia, Sanguine Tribune",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/licia-sanguine-tribune.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Aetherflux Reservoir"
+    },
+    {
+      "qty": 1,
+      "name": "Aettir and Priwen"
+    },
+    {
+      "qty": 1,
+      "name": "Alhammarret's Archive"
+    },
+    {
+      "qty": 1,
+      "name": "And\u00faril, Narsil Reforged"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Aunt May"
+    },
+    {
+      "qty": 1,
+      "name": "Authority of the Consuls"
+    },
+    {
+      "qty": 1,
+      "name": "Battlemage's Bracers"
+    },
+    {
+      "qty": 1,
+      "name": "Blade of the Bloodchief"
+    },
+    {
+      "qty": 1,
+      "name": "Blind Obedience"
+    },
+    {
+      "qty": 1,
+      "name": "Brotherhood Regalia"
+    },
+    {
+      "qty": 1,
+      "name": "Caduceus, Staff of Hermes"
+    },
+    {
+      "qty": 1,
+      "name": "Clifftop Retreat"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Creeping Bloodsucker"
+    },
+    {
+      "qty": 1,
+      "name": "Danitha Capashen, Paragon"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonfire Blade"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonskull Summit"
+    },
+    {
+      "qty": 1,
+      "name": "Excalibur II"
+    },
+    {
+      "qty": 1,
+      "name": "Excalibur, Sword of Eden"
+    },
+    {
+      "qty": 1,
+      "name": "Font of Agonies"
+    },
+    {
+      "qty": 1,
+      "name": "Genji Glove"
+    },
+    {
+      "qty": 1,
+      "name": "Hexplate Wallbreaker"
+    },
+    {
+      "qty": 1,
+      "name": "Illusionist's Bracers"
+    },
+    {
+      "qty": 1,
+      "name": "Isolated Chapel"
+    },
+    {
+      "qty": 1,
+      "name": "Isshin, Two Heavens as One"
+    },
+    {
+      "qty": 1,
+      "name": "Kambal, Consul of Allocation"
+    },
+    {
+      "qty": 1,
+      "name": "Kediss, Emberclaw Familiar"
+    },
+    {
+      "qty": 1,
+      "name": "Leyline of Hope"
+    },
+    {
+      "qty": 1,
+      "name": "Licia, Sanguine Tribune"
+    },
+    {
+      "qty": 1,
+      "name": "Light of Promise"
+    },
+    {
+      "qty": 1,
+      "name": "Luminous Wake"
+    },
+    {
+      "qty": 1,
+      "name": "Lurrus of the Dream-Den"
+    },
+    {
+      "qty": 1,
+      "name": "Luxury Suite"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Flare"
+    },
+    {
+      "qty": 1,
+      "name": "Moseo, Vein's New Dean"
+    },
+    {
+      "qty": 6,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 1,
+      "name": "Nykthos Paragon"
+    },
+    {
+      "qty": 1,
+      "name": "Open the Armory"
+    },
+    {
+      "qty": 1,
+      "name": "Pip-Boy 3000"
+    },
+    {
+      "qty": 8,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Pristine Talisman"
+    },
+    {
+      "qty": 1,
+      "name": "Puresteel Paladin"
+    },
+    {
+      "qty": 1,
+      "name": "Rebuff the Wicked"
+    },
+    {
+      "qty": 1,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Serra Ascendant"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowspear"
+    },
+    {
+      "qty": 1,
+      "name": "Shattered Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Sigarda's Aid"
+    },
+    {
+      "qty": 1,
+      "name": "Smothering Tithe"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Soul Warden"
+    },
+    {
+      "qty": 1,
+      "name": "Soul's Attendant"
+    },
+    {
+      "qty": 1,
+      "name": "Spectator Seating"
+    },
+    {
+      "qty": 1,
+      "name": "Spider-Punk"
+    },
+    {
+      "qty": 1,
+      "name": "Sram, Senior Edificer"
+    },
+    {
+      "qty": 1,
+      "name": "Steelshaper's Gift"
+    },
+    {
+      "qty": 1,
+      "name": "Stoneforge Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Stonehewer Giant"
+    },
+    {
+      "qty": 1,
+      "name": "Sunbond"
+    },
+    {
+      "qty": 1,
+      "name": "Sundown Pass"
+    },
+    {
+      "qty": 1,
+      "name": "Sunforger"
+    },
+    {
+      "qty": 6,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Sword of Hearth and Home"
+    },
+    {
+      "qty": 1,
+      "name": "Sword of Vengeance"
+    },
+    {
+      "qty": 1,
+      "name": "Sword of War and Peace"
+    },
+    {
+      "qty": 1,
+      "name": "Sword of the Animist"
+    },
+    {
+      "qty": 1,
+      "name": "The Darkness Crystal"
+    },
+    {
+      "qty": 1,
+      "name": "The Ooze"
+    },
+    {
+      "qty": 1,
+      "name": "The Ozolith"
+    },
+    {
+      "qty": 1,
+      "name": "The Reaver Cleaver"
+    },
+    {
+      "qty": 1,
+      "name": "Tithe Drinker"
+    },
+    {
+      "qty": 1,
+      "name": "Turbulent Moor"
+    },
+    {
+      "qty": 1,
+      "name": "Turbulent Steppe"
+    },
+    {
+      "qty": 1,
+      "name": "Twilight Prophet"
+    },
+    {
+      "qty": 1,
+      "name": "Two-Handed Axe"
+    },
+    {
+      "qty": 1,
+      "name": "Urborg, Tomb of Yawgmoth"
+    },
+    {
+      "qty": 1,
+      "name": "Vault of Champions"
+    },
+    {
+      "qty": 1,
+      "name": "Verrak, Warped Sengir"
+    },
+    {
+      "qty": 1,
+      "name": "Windcrag Siege"
+    }
+  ],
+  "sideboard": []
+}

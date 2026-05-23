@@ -1,0 +1,129 @@
+{
+  "archetype": "Ocelot Pride Tempo",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/ocelot-pride-tempo.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Dance of Many"
+    },
+    {
+      "qty": 2,
+      "name": "Daze"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Flow State"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 4,
+      "name": "Guide of Souls"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 4,
+      "name": "Mockingbird"
+    },
+    {
+      "qty": 4,
+      "name": "Ocelot Pride"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 2,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 4,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 4,
+      "name": "Tundra"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Deafening Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Engineered Explosives"
+    },
+    {
+      "qty": 1,
+      "name": "Erode"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Meddling Mage"
+    },
+    {
+      "qty": 2,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "archetype": "Ruby Storm",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/ruby-storm.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 2,
+      "name": "Artist's Talent"
+    },
+    {
+      "qty": 2,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Commercial District"
+    },
+    {
+      "qty": 4,
+      "name": "Desperate Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Elegant Parlor"
+    },
+    {
+      "qty": 2,
+      "name": "Flashback"
+    },
+    {
+      "qty": 1,
+      "name": "Gemstone Caverns"
+    },
+    {
+      "qty": 2,
+      "name": "Glimpse the Impossible"
+    },
+    {
+      "qty": 1,
+      "name": "Grapeshot"
+    },
+    {
+      "qty": 4,
+      "name": "Manamorphose"
+    },
+    {
+      "qty": 4,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Past in Flames"
+    },
+    {
+      "qty": 4,
+      "name": "Pyretic Ritual"
+    },
+    {
+      "qty": 4,
+      "name": "Ral, Monsoon Mage"
+    },
+    {
+      "qty": 4,
+      "name": "Reckless Impulse"
+    },
+    {
+      "qty": 4,
+      "name": "Ruby Medallion"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 2,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Sunbaked Canyon"
+    },
+    {
+      "qty": 2,
+      "name": "Valakut Awakening"
+    },
+    {
+      "qty": 2,
+      "name": "Wish"
+    },
+    {
+      "qty": 2,
+      "name": "Wooded Foothills"
+    },
+    {
+      "qty": 4,
+      "name": "Wrenn's Resolve"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Empty the Warrens"
+    },
+    {
+      "qty": 1,
+      "name": "Grapeshot"
+    },
+    {
+      "qty": 4,
+      "name": "Orim's Chant"
+    },
+    {
+      "qty": 1,
+      "name": "Past in Flames"
+    },
+    {
+      "qty": 4,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 2,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 2,
+      "name": "Wear // Tear"
+    }
+  ]
+}

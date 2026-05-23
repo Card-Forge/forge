@@ -76,9 +76,9 @@ The image is also published to GHCR by CI on every push to `master`:
 | `LLM_BASE_URL`         | `http://localhost:8080/v1`    | OpenAI-compatible API base URL (llama.cpp server)     |
 | `LLM_API_KEY`          | `not-needed`                  | Bearer token; llama.cpp ignores it                    |
 | `MODEL_NAME`           | `local-model`                 | Model name sent in the request                        |
-| `LLM_TIMEOUT`          | `60`                          | LLM request timeout (seconds)                         |
+| `LLM_TIMEOUT`          | `300`                         | LLM request timeout (seconds)                         |
 | `LLM_DISABLE_THINKING` | `true`                        | Skip the model's `<think>` block (`enable_thinking:false`) — ~20x faster |
-| `HOST`                 | `127.0.0.1`                   | Interface the sidecar binds to; set `0.0.0.0` for remote access |
+| `HOST`                 | `0.0.0.0`                     | Interface the sidecar binds to; set `127.0.0.1` for localhost only |
 | `PORT`                 | `18970`                       | Port the sidecar listens on                           |
 | `METAGAME_ENABLE`      | `true`                        | Score guesses against the scraped metagame data       |
 | `FORMAT_DETECT_ENABLE` | `true`                        | Detect the precise format via Scryfall when ambiguous |
@@ -206,6 +206,21 @@ Each run snapshots the `learnings_version()` token, so win-rate / turns-to-win m
 line up against learnings changes. The same data renders live in the dashboard's
 **Self-play Trends** panel via `GET /api/selfplay/trends`. `scripts/selfplay_report.py`
 remains the quick one-shot aggregator over raw JSONL files.
+
+## Card bucket profiles
+
+The opponent strategist reads `app/knowledge/archetype_profiles/<format>/*.json`.
+Build those profiles from real imported decklists with:
+
+```sh
+python scripts/import_goldfish_decks.py standard --limit 8
+python scripts/build_card_buckets.py standard --refresh-scryfall
+```
+
+`build_card_buckets.py` parses `selfplay/decks/<format>/*.dck`, writes normalized
+decklists to `app/knowledge/decklists/<format>/`, refreshes the local Scryfall
+cache at `app/knowledge/card_cache/cards.json`, regenerates bucketed archetype
+profiles, and writes `reports/card_bucket_coverage_<format>.md`.
 
 ## Connecting Forge
 

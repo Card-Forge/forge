@@ -12,10 +12,13 @@
     "keep_criteria": [
       "Hands that can find the combo through cantrips",
       "Hands with protection, card draw, and Doomsday",
-      "Hands that can activate Flow State early or win on turn 2 with backup"
+      "Hands that can activate Flow State early or win on turn 2 with backup",
+      "Keep hands containing Doomsday plus two or more enablers/tutors (Tamiyo, Flow State, Thoughtseize, Duress) and two or more basic lands.",
+      "Keep hands with three or more enablers/tutors and two lands if you can reliably find Doomsday."
     ],
     "mulligan_criteria": [
-      "Hands with lots of disruption but only a few cantrips"
+      "Hands with lots of disruption but only a few cantrips",
+      "Mulligan hands with fewer than two lands, Doomsday with zero enablers, or hands with only enablers and no reliable way to fetch Doomsday."
     ],
     "examples": [
       {
@@ -46,16 +49,32 @@
     "early_game": [
       "Play cantrips like Brainstorm and Ponder to find Doomsday and key combo pieces.",
       "Use Dark Ritual and Lotus Petal for early mana acceleration.",
-      "Cast Doomsday as soon as possible to stack cycling cards."
+      "Cast Doomsday as soon as possible to stack cycling cards.",
+      "Turn 1: Play a land, cast Thoughtseize or Duress to remove opponent's combo pieces, counterspells, or ramp sources.",
+      "Turn 2: Play a land, cast Flow State or Tamiyo to tutor for Doomsday or additional enablers.",
+      "Sequence mana to ensure you can disrupt on turn 1 and assemble on turn 2 or 3.",
+      "If opening with multiple lands, consider holding a land drop to guarantee you can cast Doomsday when ready."
     ],
     "mid_game": [
       "Execute the combo by playing Thassa's Oracle with 2 or fewer cards in the deck.",
       "Use Force of Will, Daze, and Veil of Summer to protect the combo from disruption.",
-      "Stack cards like Cavern of Souls or Thoughtseize to bypass enemy counters or hate cards."
+      "Stack cards like Cavern of Souls or Thoughtseize to bypass enemy counters or hate cards.",
+      "Conserve mana for Doomsday's five mana cost and protect your hand size, as Doomsday requires exactly five cards.",
+      "Use Tamiyo to mill or search efficiently, and leverage Flow State's graveyard recursion to tutor without losing card advantage.",
+      "Avoid drawing extra cards once you have the full five-card combo assembled.",
+      "Hold back on committing threats until you have the complete five-card hand.",
+      "Use disruption to clear the path for Doomsday.",
+      "If the opponent has a clear win condition, prioritize disruption over combo assembly."
     ],
     "late_game": [
       "Use Flow State to recover from discards or unexpected counterspells.",
-      "If the combo is stalled, hoard resources with Flow State or transition to a midrange plan with Barrowgoyf and Dauthi Voidwalker post-sideboard."
+      "If the combo is stalled, hoard resources with Flow State or transition to a midrange plan with Barrowgoyf and Dauthi Voidwalker post-sideboard.",
+      "Doomsday plus four other cards in your graveyard and one in hand.",
+      "Common UB/G finishers include Mindslaver, Time Spiral, or Empty Library setups.",
+      "Once Doomsday resolves, arrange the four graveyard cards on top of your library to win instantly or set up an unbeatable state, then play the top card if possible.",
+      "When you have exactly five cards in hand, including Doomsday and four enablers/wincons.",
+      "When the opponent has no clear answer to Doomsday or has already used their interaction.",
+      "When you can protect the combo with disruption, counters, or graveyard protection."
     ]
   },
   "key_cards": [
@@ -115,7 +134,13 @@
     "Stack Cavern of Souls to bypass counterspells or Chalice of the Void for 2.",
     "Stack Thoughtseize to remove enemy Consign to Memory or Mindbreak Trap.",
     "Stack Lion's Eye Diamond to generate blue mana and play around Blood Moon.",
-    "Put a land or blue card on top to pay for Force of Will while playing Thoughtseize on turn 2."
+    "Put a land or blue card on top to pay for Force of Will while playing Thoughtseize on turn 2.",
+    "Doomsday requires exactly five cards in hand",
+    "drawing extra cards before casting it will break the combo.",
+    "Tamiyo, Inquisitive Student can mill or search, but be careful not to mill Doomsday into your graveyard unless you have a way to retrieve it.",
+    "Flow State can be cast from the graveyard, making it resilient to discard.",
+    "Common mistakes include overcommitting to the board, drawing too many cards before casting Doomsday, and failing to track opponent's hand size.",
+    "Always prioritize disruption and hand integrity over tempo."
   ],
   "matchups": [
     {
@@ -163,6 +188,31 @@
         "Trinisphere",
         "Grim Monolith"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Force of Will, Flash, or split your combo assembly to avoid single-target counters. Cast Doomsday in response to their counterspells if you have protection. Use Tamiyo and Flow State to set up multiple threats or win conditions that are harder to counter, and prioritize disrupting their hand early.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Disrupt their mana base early with Thoughtseize and Duress. Use Force of Will to protect your combo. If they get ahead, use Tamiyo to mill or search for a faster wincon. Bring in sideboard hate and artifact/enchantment removal to slow their engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early disruption to remove key threats. Use Force of Will to protect your combo. If you can't stabilize, concede early. Tamiyo can mill to find Doomsday faster, but only if you can survive the initial turns.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card advantage (Tamiyo, Flow State). Use disruption to remove their key answers. Set up a win condition that is hard to interact with, and avoid overcommitting to the board. Force them to spend resources on your combo while you assemble it.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Prioritize disruption to remove their Doomsday or enablers. Use Force of Will to protect your combo. Track their graveyard and hand size. If they have Doomsday, use Surgical Extraction or Rest in Peace. Win by going first, having better disruption, or out-resolving their Doomsday setup.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -176,10 +226,12 @@
     "Disruptor Flute",
     "Karn, the Great Creator",
     "Trinisphere",
-    "Mindbreak Trap"
+    "Mindbreak Trap",
+    "Watch for counterspells (Force of Will, Counterspell), graveyard hate (Rest in Peace, Leyline of the Void), and fast combo threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-sultai-flow-doomsday-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T07:26:22+00:00",
     "model": "local-model",
@@ -197,6 +249,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

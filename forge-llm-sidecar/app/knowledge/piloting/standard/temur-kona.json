@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Two or more lands",
       "Formidable Speaker",
-      "Cheap spells or interaction"
+      "Cheap spells or interaction",
+      "Keep hands with 2-3 lands (prioritizing fetches/shocks if in format), at least one early spell or ramp piece, and a clear path to casting Formidable Speaker or Omniscience by turn 3-4."
     ],
     "mulligan_criteria": [
       "Three or more lands without ramp",
       "High mana cost threats without acceleration",
-      "No interaction against early pressure"
+      "No interaction against early pressure",
+      "Mulligan if you have zero lands, only late-game threats without enablers, or a hand entirely composed of high-cost spells with no early interaction."
     ],
     "examples": []
   },
@@ -25,17 +27,32 @@
     "early_game": [
       "Prioritize land drops and Formidable Speaker activation",
       "Hold up mana for potential interaction",
-      "Avoid committing to North Wind Avatar prematurely"
+      "Avoid committing to North Wind Avatar prematurely",
+      "Turn 1: Play a land, cast a cheap cantrip or ramp spell to dig for your enablers.",
+      "Turn 2: Develop mana base, cast additional spells to build synergy counters/triggers, and set up for Omniscience.",
+      "Land sequencing: Prioritize sources that enter untapped or fetch lands to smooth draws",
+      "avoid clumping colors early."
     ],
     "mid_game": [
       "Cast Omniscience once you have excess mana",
       "Deploy multiple threats and interaction for free",
-      "Use Speaker's draw ability to find answers"
+      "Use Speaker's draw ability to find answers",
+      "Hoard low-cost spells to fuel spell triggers and ensure you have enough resources to cast Omniscience and follow-up threats.",
+      "Manage mana carefully to avoid flooding",
+      "use cantrips to dig for answers.",
+      "Treat the graveyard as a secondary resource for recursion or spell synergy, but protect it from hate if the format rewards it.",
+      "Commit threats only when you have a clear path to resolution or can protect them with counterspells/removal.",
+      "Hold back high-value spells if the board is unstable or if you're facing a hard counter to your game plan."
     ],
     "late_game": [
       "Stabilize with North Wind Avatar",
       "Leverage mana advantage to outvalue opponents",
-      "Protect key permanents from board wipes"
+      "Protect key permanents from board wipes",
+      "North Wind Avatar (high power/flying finisher) and Formidable Speaker (spell-synergy enabler/finisher).",
+      "Win by casting these with Omniscience or building enough spell triggers to overwhelm the board.",
+      "Use cantrips to dig for the final piece when resources are low.",
+      "Go all-in when Omniscience is online, you have sufficient mana for a turn, and the board is clear or you can protect your finisher.",
+      "Commit when you can resolve your threat through the stack or when the opponent has no interaction left."
     ]
   },
   "key_cards": [
@@ -58,7 +75,10 @@
   "sequencing_tips": [
     "Hold up blue and green mana for potential interaction before committing to Omniscience",
     "Activate Formidable Speaker before casting Omniscience to maximize free spells",
-    "Prioritize casting North Wind Avatar last during Omniscience to avoid early removal"
+    "Prioritize casting North Wind Avatar last during Omniscience to avoid early removal",
+    "Common mistakes include overcommitting early without Omniscience, mismanaging mana for the enabler, and ignoring graveyard hate.",
+    "Unique interactions: Omniscience combined with spell triggers can create massive value, but be wary of format-specific rules about spell stacking.",
+    "Practice stack management and learn to read opponent's mana holdings to optimize your plays."
   ],
   "matchups": [
     {
@@ -84,16 +104,36 @@
         "Efficient removal",
         "Value engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use spell-slow, split the stack by casting multiple spells in response to counters, or leverage Omniscience to cast around them. Prioritize cantrips to dig through counters and maintain card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure and use spot removal on key ramp creatures. Disrupt their mana development with discard or early interaction to prevent them from out-accelerating you.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value card advantage and protect your enablers. Out-resolve their spells with counterspells or spell-slow, and prioritize graveyard/hand disruption to disrupt their combo.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early creature pressure",
     "Board wipes",
     "Counterspells",
-    "Efficient removal"
+    "Efficient removal",
+    "Watch for Izzet's counterspells and stack manipulation",
+    "note when they hold up mana for removal versus counters.",
+    "Track landfall triggers on Selesnya/Mono-Green and anticipate their big turns.",
+    "Pay attention to graveyard activity and hand size to gauge their combo potential."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:35:39+00:00",
     "model": "local-model",
@@ -109,6 +149,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

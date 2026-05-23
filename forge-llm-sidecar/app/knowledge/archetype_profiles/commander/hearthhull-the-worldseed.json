@@ -1,0 +1,984 @@
+{
+  "schema_version": 1,
+  "name": "Hearthhull, the Worldseed",
+  "format": "commander",
+  "colors": [
+    "B",
+    "G",
+    "R"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 100,
+  "macro_plan": "A BRG midrange-graveyard hybrid that uses land acceleration and resilient threats to out-value opponents, leveraging graveyard recursion and spot removal to stabilize early and close out games with unblockable or hard-to-answer threats.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 17,
+      "cards": [
+        "Braids, Arisen Nightmare",
+        "Canyon Slough",
+        "Dakmor Salvage",
+        "Festering Thicket",
+        "Garruk's Uprising",
+        "Hearthhull, the Worldseed",
+        "Korvold, Fae-Cursed King",
+        "Life from the Loam",
+        "Lord Windgrace",
+        "Nahiri's Lithoforming",
+        "Nissa, Vital Force",
+        "Sheltered Thicket",
+        "Soul of Windgrace",
+        "Spelunking",
+        "Tannuk, Memorial Ensign",
+        "The Gitrog Monster",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 1,
+      "cards": [
+        "Augur of Autumn"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 20,
+      "cards": [
+        "Bloodstained Mire",
+        "Cabaretti Courtyard",
+        "Crop Rotation",
+        "Cultivate",
+        "Escape Tunnel",
+        "Evolving Wilds",
+        "Fabled Passage",
+        "Farseek",
+        "Green Sun's Zenith",
+        "Harrow",
+        "Maestros Theater",
+        "Nature's Lore",
+        "Riveteers Overlook",
+        "Roiling Regrowth",
+        "Scapeshift",
+        "Skyshroud Claim",
+        "Springbloom Druid",
+        "Terramorphic Expanse",
+        "Verdant Catacombs",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Lord Windgrace",
+        "Soul of Windgrace"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 40,
+      "cards": [
+        "Aftermath Analyst",
+        "Ancient Greenwarden",
+        "Augur of Autumn",
+        "Avenger of Zendikar",
+        "Azusa, Lost but Seeking",
+        "Baloth Prime",
+        "Braids, Arisen Nightmare",
+        "Dryad of the Ilysian Grove",
+        "Evendo Brushrazer",
+        "Exploration",
+        "Farseek",
+        "Hearthhull, the Worldseed",
+        "Icetill Explorer",
+        "Korvold, Fae-Cursed King",
+        "Lord Windgrace",
+        "Lotus Cobra",
+        "Mazirek, Kraul Death Priest",
+        "Moraug, Fury of Akoum",
+        "Mossborn Hydra",
+        "Nissa, Vital Force",
+        "Ob Nixilis, the Fallen",
+        "Omnath, Locus of Rage",
+        "Oracle of Mul Daya",
+        "Rampaging Baloths",
+        "Ramunap Excavator",
+        "Rumbleweed",
+        "Scouring Swarm",
+        "Scute Swarm",
+        "Soul of Windgrace",
+        "Springbloom Druid",
+        "Springheart Nantuko",
+        "Sylvan Safekeeper",
+        "Szarel, Genesis Shepherd",
+        "Tannuk, Memorial Ensign",
+        "The Gitrog Monster",
+        "Timeless Witness",
+        "Tireless Provisioner",
+        "Titania, Protector of Argoth",
+        "Wrenn and Seven",
+        "Zuran Orb"
+      ],
+      "mainboard_count": 40,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 16,
+      "cards": [
+        "Beast Within",
+        "Blasphemous Act",
+        "Bojuka Bog",
+        "Garruk's Uprising",
+        "Karplusan Forest",
+        "Llanowar Wastes",
+        "Lord Windgrace",
+        "Mossborn Hydra",
+        "Nissa, Vital Force",
+        "Omnath, Locus of Rage",
+        "Sulfurous Springs",
+        "Tannuk, Memorial Ensign",
+        "Timeless Witness",
+        "Titania, Protector of Argoth",
+        "Valakut Exploration",
+        "Worldsoul's Rage"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Blasphemous Act",
+        "Farseek",
+        "Mazirek, Kraul Death Priest",
+        "Moraug, Fury of Akoum"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Ancient Greenwarden",
+        "Soul of Windgrace"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Lord Windgrace"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 25,
+      "cards": [
+        "Aftermath Analyst",
+        "Ancient Greenwarden",
+        "Bojuka Bog",
+        "Conduit of Worlds",
+        "Crucible of Worlds",
+        "Dakmor Salvage",
+        "Escape Tunnel",
+        "Eumidian Hatchery",
+        "Farseek",
+        "Icetill Explorer",
+        "Life from the Loam",
+        "Lord Windgrace",
+        "Nissa, Vital Force",
+        "Ramunap Excavator",
+        "Rumbleweed",
+        "Scouring Swarm",
+        "Soul of Windgrace",
+        "Splendid Reclamation",
+        "Szarel, Genesis Shepherd",
+        "The Gitrog Monster",
+        "Timeless Witness",
+        "Titania, Protector of Argoth",
+        "Valakut Exploration",
+        "Worldsoul's Rage",
+        "Wrenn and Seven"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 16,
+      "cards": [
+        "Aftermath Analyst",
+        "Ancient Greenwarden",
+        "Conduit of Worlds",
+        "Crucible of Worlds",
+        "Dakmor Salvage",
+        "Farseek",
+        "Icetill Explorer",
+        "Life from the Loam",
+        "Lord Windgrace",
+        "Nissa, Vital Force",
+        "Ramunap Excavator",
+        "Splendid Reclamation",
+        "Szarel, Genesis Shepherd",
+        "Timeless Witness",
+        "Titania, Protector of Argoth",
+        "Wrenn and Seven"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Lord Windgrace",
+        "Soul of Windgrace"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Conduit of Worlds",
+        "Constant Mists",
+        "Farseek"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 30,
+      "cards": [
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Bojuka Bog",
+        "Cabaretti Courtyard",
+        "Canyon Slough",
+        "Cinder Glade",
+        "Command Tower",
+        "Dakmor Salvage",
+        "Escape Tunnel",
+        "Eumidian Hatchery",
+        "Evolving Wilds",
+        "Fabled Passage",
+        "Farseek",
+        "Festering Thicket",
+        "Karplusan Forest",
+        "Llanowar Wastes",
+        "Lotus Cobra",
+        "Maestros Theater",
+        "Overgrown Tomb",
+        "Riveteers Overlook",
+        "Sheltered Thicket",
+        "Smoldering Marsh",
+        "Stomping Ground",
+        "Sulfurous Springs",
+        "Terramorphic Expanse",
+        "Tireless Provisioner",
+        "Verdant Catacombs",
+        "Vernal Fen",
+        "Wooded Foothills",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 40,
+      "cards": [
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Bojuka Bog",
+        "Cabaretti Courtyard",
+        "Canyon Slough",
+        "Cinder Glade",
+        "Command Tower",
+        "Dakmor Salvage",
+        "Escape Tunnel",
+        "Eumidian Hatchery",
+        "Evolving Wilds",
+        "Fabled Passage",
+        "Festering Thicket",
+        "Forest",
+        "Karplusan Forest",
+        "Llanowar Wastes",
+        "Maestros Theater",
+        "Mountain",
+        "Overgrown Tomb",
+        "Riveteers Overlook",
+        "Sheltered Thicket",
+        "Smoldering Marsh",
+        "Stomping Ground",
+        "Sulfurous Springs",
+        "Swamp",
+        "Terramorphic Expanse",
+        "Verdant Catacombs",
+        "Vernal Fen",
+        "Wooded Foothills",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 40,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 3,
+      "cards": [
+        "Lord Windgrace",
+        "Nissa, Vital Force",
+        "Wrenn and Seven"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.23
+  },
+  "dual_role_cards": [
+    {
+      "card": "Aftermath Analyst",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Greenwarden",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Augur of Autumn",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blasphemous Act",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Braids, Arisen Nightmare",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cabaretti Courtyard",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Canyon Slough",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cinder Glade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Conduit of Worlds",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crucible of Worlds",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dakmor Salvage",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Escape Tunnel",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eumidian Hatchery",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Evolving Wilds",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabled Passage",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Farseek",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Festering Thicket",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Garruk's Uprising",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hearthhull, the Worldseed",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Icetill Explorer",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karplusan Forest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Korvold, Fae-Cursed King",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Life from the Loam",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Llanowar Wastes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lord Windgrace",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "payoff_cards",
+        "planeswalker_threats",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lotus Cobra",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Maestros Theater",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mazirek, Kraul Death Priest",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Moraug, Fury of Akoum",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mossborn Hydra",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nissa, Vital Force",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Omnath, Locus of Rage",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ramunap Excavator",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Riveteers Overlook",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rumbleweed",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scouring Swarm",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheltered Thicket",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smoldering Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul of Windgrace",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Splendid Reclamation",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Springbloom Druid",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sulfurous Springs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Szarel, Genesis Shepherd",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tannuk, Memorial Ensign",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Terramorphic Expanse",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Gitrog Monster",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Timeless Witness",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tireless Provisioner",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Titania, Protector of Argoth",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Valakut Exploration",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vernal Fen",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Worldsoul's Rage",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wrenn and Seven",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ziatora's Proving Ground",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Farseek requires an untapped green land",
+    "plan sequencing carefully to avoid mana screw.",
+    "Braids' graveyard recursion is powerful but vulnerable to hate",
+    "keep a backup plan.",
+    "Avoid overcommitting to the graveyard if the meta is heavy on hate."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land and cast a 1-mana cantrip or early threat."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Develop mana, cast Farseek if you have an untapped green land, or play a 2-drop threat."
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize untapped lands for Farseek sequencing, and use early spells to dig for key pieces or apply initial pressure."
+    }
+  ],
+  "kill_priority": [
+    "Lord Windgrace",
+    "Soul of Windgrace",
+    "Nissa, Vital Force",
+    "Wrenn and Seven",
+    "Aftermath Analyst",
+    "Ancient Greenwarden",
+    "Augur of Autumn",
+    "Avenger of Zendikar"
+  ],
+  "interaction_to_disrupt": [
+    "Ancient Greenwarden",
+    "Soul of Windgrace",
+    "Beast Within",
+    "Blasphemous Act",
+    "Bojuka Bog",
+    "Garruk's Uprising",
+    "Karplusan Forest",
+    "Llanowar Wastes"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/hearthhull-the-worldseed.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

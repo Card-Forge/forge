@@ -1,0 +1,491 @@
+{
+  "schema_version": 1,
+  "name": "Neobrand",
+  "format": "modern",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Neobrand is a five-color Modern deck that leverages cheap creatures and untap/haste synergies to generate explosive early turns. By chaining Summoner's Pact and Allosaurus Rider, players can bypass normal turn structure to attack with tapped creatures like Griselbrand immediately. The deck aims to overwhelm opponents through unexpected damage spikes and relentless card advantage.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 13,
+      "cards": [
+        "Allosaurus Rider",
+        "Griselbrand",
+        "Summoner's Pact",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 16,
+      "cards": [
+        "Allosaurus Rider",
+        "Griselbrand",
+        "Hedge Maze",
+        "Planar Genesis",
+        "Summoner's Pact"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 23,
+      "cards": [
+        "Eldritch Evolution",
+        "Flooded Strand",
+        "Generous Ent",
+        "Griselbrand",
+        "Misty Rainforest",
+        "Neoform",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Summoner's Pact",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 9,
+      "cards": [
+        "Allosaurus Rider",
+        "Griselbrand",
+        "Summoner's Pact"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 28,
+      "cards": [
+        "Allosaurus Rider",
+        "Atraxa, Grand Unifier",
+        "Bridgeworks Battle",
+        "Disciple of Freyalise",
+        "Elesh Norn, Grand Cenobite",
+        "Endurance",
+        "Generous Ent",
+        "Ghalta, Stampede Tyrant",
+        "Griselbrand",
+        "Hooting Mandrills",
+        "Nourishing Shoal",
+        "Summoner's Pact",
+        "Ureni, the Song Unending",
+        "Xenagos, God of Revels"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 6,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Into the Flood Maw",
+        "Natural State",
+        "Nature's Claim"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 11,
+      "cards": [
+        "Consign to Memory",
+        "Mystical Dispute",
+        "Pact of Negation"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 11,
+      "cards": [
+        "Allosaurus Rider",
+        "Griselbrand",
+        "Ureni, the Song Unending",
+        "Veil of Summer",
+        "Xenagos, God of Revels"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 16,
+      "cards": [
+        "Allosaurus Rider",
+        "Endurance",
+        "Griselbrand",
+        "Hedge Maze",
+        "Hooting Mandrills",
+        "Summoner's Pact"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 8,
+      "cards": [
+        "Hooting Mandrills",
+        "Into the Flood Maw",
+        "Summoner's Pact"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 3
+    },
+    "engines": {
+      "target_count": 5,
+      "cards": [
+        "Griselbrand",
+        "Summoner's Pact"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Griselbrand"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Griselbrand",
+        "Summoner's Pact"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 20,
+      "cards": [
+        "Allosaurus Rider",
+        "Boseiju, Who Endures",
+        "Breeding Pool",
+        "Flooded Strand",
+        "Griselbrand",
+        "Hedge Maze",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Snow-Covered Forest",
+        "Snow-Covered Island",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 15,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Breeding Pool",
+        "Flooded Strand",
+        "Hedge Maze",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Snow-Covered Forest",
+        "Snow-Covered Island",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.35
+  },
+  "dual_role_cards": [
+    {
+      "card": "Allosaurus Rider",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Generous Ent",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Griselbrand",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hedge Maze",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hooting Mandrills",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Into the Flood Maw",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Forest",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summoner's Pact",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ureni, the Song Unending",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veil of Summer",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Xenagos, God of Revels",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always untap and grant haste before declaring attackers to avoid wasting tempo",
+    "Chain Pact's untap mode after Rider to attack the same creature twice in one turn",
+    "Manage your graveyard carefully since Pact can exile cards you might need for other effects",
+    "Hold up Pact in hand to respond to removal rather than committing it too early",
+    "Common mistake: Overcommitting to Griselbrand without protection or a win condition."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap creatures and cast Summoner's Pact to draw cards and discard"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Allosaurus Rider to untap creatures and grant haste for immediate attacks"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize mana development to enable five-color casting by turn three"
+    }
+  ],
+  "kill_priority": [
+    "Griselbrand",
+    "Summoner's Pact",
+    "Allosaurus Rider",
+    "Atraxa, Grand Unifier",
+    "Bridgeworks Battle",
+    "Disciple of Freyalise",
+    "Elesh Norn, Grand Cenobite",
+    "Endurance"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Mystical Dispute",
+    "Pact of Negation",
+    "Allosaurus Rider",
+    "Griselbrand",
+    "Ureni, the Song Unending",
+    "Veil of Summer",
+    "Xenagos, God of Revels"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/neobrand.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

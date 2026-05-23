@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Myr Retriever or Cauldron Familiar with two lands",
       "Hands with Lembas and early mana sources",
-      "Hands with artifact recursion synergies"
+      "Hands with artifact recursion synergies",
+      "Keep hands with 2-3 lands (prioritizing fixing), Myr Retriever, and at least one food generator or artifact that produces/sacrifices for food.",
+      "Keep Cauldron Familiar paired with mana or food."
     ],
     "mulligan_criteria": [
       "Hands lacking combo pieces or early mana",
       "Hands with only late-game cards",
-      "Hands vulnerable to early aggression without protection"
+      "Hands vulnerable to early aggression without protection",
+      "Mulligan pure land hands, high-cost spell clusters, or hands lacking both Retriever and Familiar without a clear combo path."
     ],
     "examples": []
   },
@@ -25,17 +28,29 @@
     "early_game": [
       "Play lands and cheap combo pieces like Cauldron Familiar",
       "Protect key creatures from early removal",
-      "Cast Lembas to establish food counters"
+      "Cast Lembas to establish food counters",
+      "Turn 1: Play a land, cast a cantrip or low-cost mana rock if available.",
+      "Turn 2: Cast Myr Retriever, fetch a key artifact (e.g., Sol Ring, Arcane Signet, or a food generator).",
+      "If you have Familiar, sequence mana into casting it, then begin generating food tokens and shoving them to the graveyard to fuel the engine."
     ],
     "mid_game": [
       "Use Myr Retriever to fetch artifacts that enable the combo",
       "Move food counters to creatures for stats and life gain",
-      "Stabilize against opponent's threats"
+      "Stabilize against opponent's threats",
+      "Prioritize keeping mana open for Retriever triggers and Familiar activations.",
+      "Sequence food generation carefully to avoid graveyard hate.",
+      "Use card draw (Lembas, cantrips) to maintain hand size and avoid running out of resources.",
+      "Commit threats only when you have a clear path to converting food to zombies or when you can protect your engine.",
+      "Hold back if the opponent has sweepers or targeted removal in play or hand."
     ],
     "late_game": [
       "Execute the food counter loop for infinite life or board control",
       "Recycle artifacts to maintain pressure",
-      "Close out the game with unblockable threats"
+      "Close out the game with unblockable threats",
+      "Cauldron Familiar + graveyard food = massive zombie army.",
+      "Use artifact sacrifice outlets or food generators to keep the engine running and attack with the resulting zombies.",
+      "Go all-in when you have 3+ food in the graveyard, a protected Familiar, and the opponent has no sweepers or removal in hand.",
+      "Also commit when you can close the game before their combo or beatdown resolves."
     ]
   },
   "key_cards": [
@@ -58,7 +73,10 @@
   "sequencing_tips": [
     "Cast Cauldron Familiar before moving counters to maximize board impact",
     "Prioritize protecting Myr Retriever to maintain artifact recursion",
-    "Use Lembas's life gain to stabilize against aggressive matchups"
+    "Use Lembas's life gain to stabilize against aggressive matchups",
+    "Common mistakes include overcommitting to food generation without protecting Familiar, ignoring graveyard hate, and mismanaging mana for Retriever triggers.",
+    "Lembas can be sacrificed for card draw if the engine stalls, but prioritize food generation.",
+    "Remember that food in the graveyard is your win condition, so protect it from hate and sequence your turns to maximize zombie output."
   ],
   "matchups": [
     {
@@ -87,15 +105,33 @@
         "Card draw engines",
         "Late-game finishers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips, multikind spells, or sacrifice outlets to bypass counters. Sequence Retriever to fetch cheap, hard-to-counter pieces. Utilize flash or instant-speed combos if the format allows.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with food/zombies. Use artifact hate to disrupt their mana. Don't let them stabilize; close games quickly before they outpace your engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize graveyard protection, disrupt their Retriever/Familiar, and out-value them with better sequencing and sideboard hate.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early game removal",
     "Graveyard hate",
-    "Board wipes"
+    "Board wipes",
+    "Watch for graveyard hate (Rest in Peace, Leyline of the Void), sweepers, and targeted removal on Familiar/Retriever.",
+    "Note when opponents tap out for counters or spot removal to identify windows for your combo."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:55:34+00:00",
     "model": "local-model",
@@ -111,6 +147,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

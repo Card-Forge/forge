@@ -1,0 +1,515 @@
+{
+  "schema_version": 1,
+  "name": "4c Legends",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "This four-color legendary midrange deck leverages Aether Revolt staples to control the board while applying steady pressure. By combining discard effects, sacrifice-based removal, and growing legendary threats, it aims to outvalue opponents in the mid-to-late game. The package thrives on card advantage and efficient board wipes disguised as creature sacrifices.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 18,
+      "cards": [
+        "Glasspool Mimic",
+        "Gran-Gran",
+        "Malcolm, Alluring Scoundrel",
+        "Narset, Jeskai Waymaster",
+        "Pest Control",
+        "Raffine, Scheming Seer",
+        "Sheoldred, the Apocalypse",
+        "Tinybones Joins Up"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 1,
+      "cards": [
+        "Ral Zarek, Guest Lecturer"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Tinybones Joins Up"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 32,
+      "cards": [
+        "Aang, Swift Savior",
+        "Carnage, Crimson Chaos",
+        "Gran-Gran",
+        "Inti, Seneschal of the Sun",
+        "Liliana of the Veil",
+        "Malcolm, Alluring Scoundrel",
+        "Narset, Jeskai Waymaster",
+        "Nashi, Searcher in the Dark",
+        "Raffine, Scheming Seer",
+        "Ral Zarek, Guest Lecturer",
+        "Raphael, Tough Turtle",
+        "Rona, Herald of Invasion",
+        "Sheoldred, the Apocalypse",
+        "Skrelv, Defector Mite",
+        "Tinybones Joins Up"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Carnage, Crimson Chaos",
+        "Fatal Push",
+        "Malcolm, Alluring Scoundrel",
+        "Nashi, Searcher in the Dark",
+        "Otawara, Soaring City",
+        "Pest Control",
+        "Ral Zarek, Guest Lecturer",
+        "Raphael, Tough Turtle",
+        "Sheltered by Ghosts"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 7,
+      "cards": [
+        "Pest Control",
+        "The Meathook Massacre",
+        "Tinybones Joins Up"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 22,
+      "cards": [
+        "Glasspool Mimic",
+        "Plaza of Heroes",
+        "Raffine, Scheming Seer",
+        "Sheltered by Ghosts",
+        "Skrelv, Defector Mite",
+        "Tinybones Joins Up"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 10,
+      "cards": [
+        "Gran-Gran",
+        "Inti, Seneschal of the Sun",
+        "Malcolm, Alluring Scoundrel",
+        "Ral Zarek, Guest Lecturer",
+        "Tinybones Joins Up"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 17,
+      "cards": [
+        "Carnage, Crimson Chaos",
+        "Gran-Gran",
+        "Nashi, Searcher in the Dark",
+        "Ral Zarek, Guest Lecturer",
+        "Takenuma, Abandoned Mire",
+        "Tinybones Joins Up",
+        "Unlicensed Hearse"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 8,
+      "cards": [
+        "Carnage, Crimson Chaos",
+        "Otawara, Soaring City",
+        "Ral Zarek, Guest Lecturer",
+        "Takenuma, Abandoned Mire"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Tinybones Joins Up"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Duress",
+        "Ray of Enfeeblement"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 23,
+      "cards": [
+        "Concealed Courtyard",
+        "Mana Confluence",
+        "Mox Amber",
+        "Otawara, Soaring City",
+        "Plaza of Heroes",
+        "Starting Town",
+        "Steam Vents",
+        "Takenuma, Abandoned Mire",
+        "Urborg, Tomb of Yawgmoth"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Concealed Courtyard",
+        "Mana Confluence",
+        "Otawara, Soaring City",
+        "Plaza of Heroes",
+        "Starting Town",
+        "Steam Vents",
+        "Swamp",
+        "Takenuma, Abandoned Mire",
+        "Urborg, Tomb of Yawgmoth"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 3,
+      "cards": [
+        "Liliana of the Veil",
+        "Ral Zarek, Guest Lecturer"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 2
+    },
+    "interaction_density": 0.45
+  },
+  "dual_role_cards": [
+    {
+      "card": "Carnage, Crimson Chaos",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Concealed Courtyard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glasspool Mimic",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gran-Gran",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inti, Seneschal of the Sun",
+      "roles": [
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Liliana of the Veil",
+      "roles": [
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Malcolm, Alluring Scoundrel",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Confluence",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narset, Jeskai Waymaster",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nashi, Searcher in the Dark",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pest Control",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Plaza of Heroes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raffine, Scheming Seer",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ral Zarek, Guest Lecturer",
+      "roles": [
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raphael, Tough Turtle",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheltered by Ghosts",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheoldred, the Apocalypse",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Skrelv, Defector Mite",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Takenuma, Abandoned Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tinybones Joins Up",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urborg, Tomb of Yawgmoth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold creatures in hand to enable Carnage when facing big threats",
+    "Cast Crimson Chaos before playing creatures to maximize hand disruption",
+    "Save Glasspool Mimic deaths for when you need blockers or Carnage fuel",
+    "Prioritize keeping Tinybones Joins Up alive while building board state",
+    "Watch for legend rule interactions when copying or entering the battlefield."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and early legends to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Crimson Chaos to disrupt opponent's hand while drawing cards"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold creatures to fuel Carnage if needed"
+    }
+  ],
+  "kill_priority": [
+    "Tinybones Joins Up",
+    "Liliana of the Veil",
+    "Ral Zarek, Guest Lecturer",
+    "Aang, Swift Savior",
+    "Carnage, Crimson Chaos",
+    "Gran-Gran",
+    "Inti, Seneschal of the Sun",
+    "Malcolm, Alluring Scoundrel"
+  ],
+  "interaction_to_disrupt": [
+    "Glasspool Mimic",
+    "Plaza of Heroes",
+    "Raffine, Scheming Seer",
+    "Sheltered by Ghosts",
+    "Skrelv, Defector Mite",
+    "Tinybones Joins Up",
+    "Carnage, Crimson Chaos",
+    "Fatal Push"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/4c-legends.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

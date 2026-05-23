@@ -5,30 +5,47 @@
   "overview": "Boros Energy is a Modern aggro deck that leverages the Energy mechanic to cast spells for free and establish a fast clock. It merges an Energy package centered on Amped Raptor and Guide of Souls with a blink/value strategy using Phelia, Exuberant Shepherd to maximize ETB effects and card advantage.",
   "win_conditions": [
     "Establish a fast clock with cheap creatures and Guide of Souls",
-    "Deal direct damage with Unstable Amulet and Phlage, Titan of Fire’s Fury",
+    "Deal direct damage with Unstable Amulet and Phlage, Titan of Fire\u2019s Fury",
     "Generate value and board presence by blinking permanents with Phelia, Exuberant Shepherd",
     "Cast spells for free using Amped Raptor to accelerate damage"
   ],
   "mulligan": {
-    "keep_criteria": [],
-    "mulligan_criteria": [],
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including at least one Plains and one Mountain), at least one energy generator, and a turn-2 play."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no early plays, or hands with only removal/Phlage and no energy generation."
+    ],
     "examples": []
   },
   "game_plan": {
     "early_game": [
       "Play cheap creatures and lands to establish a fast clock",
       "Generate energy with Static Prison or Galvanic Discharge",
-      "Use Amped Raptor to cast early threats or removal for free"
+      "Use Amped Raptor to cast early threats or removal for free",
+      "Turn 1: Play a land, cast an energy generator.",
+      "Turn 2: Play a second land, generate energy, and cast Ragavan, Ocelot Pride, or attempt Phlage if you have 5+ energy.",
+      "Prioritize playing lands first, then energy engines, then threats."
     ],
     "mid_game": [
       "Blink permanents with Phelia, Exuberant Shepherd to trigger ETB effects and grow the board",
       "Use Guide of Souls to make creatures threatening and bypass blockers",
-      "Deal incremental damage with Unstable Amulet while maintaining card advantage"
+      "Deal incremental damage with Unstable Amulet while maintaining card advantage",
+      "Hoarding energy counters until you can cast Phlage or clear a board.",
+      "Use Ragavan's ability to dig for lands, energy generators, or answers.",
+      "Avoid spending energy on marginal spells when Phlage is your win condition.",
+      "Commit threats when you have enough energy to cast Phlage or protect your board with Ocelot Pride.",
+      "Hold back if the opponent has sweepers or heavy removal",
+      "use Ragavan to dig for answers or stabilize."
     ],
     "late_game": [
       "Maintain pressure with recurring value from Phelia and Unstable Amulet",
-      "Leverage Ragavan, Nimble Pilferer and Phlage, Titan of Fire’s Fury for graveyard value and damage",
-      "Utilize sideboard cards like White Orchid Phantom or Disruptor Flute to close out specific matchups"
+      "Leverage Ragavan, Nimble Pilferer and Phlage, Titan of Fire\u2019s Fury for graveyard value and damage",
+      "Utilize sideboard cards like White Orchid Phantom or Disruptor Flute to close out specific matchups",
+      "Phlage, Titan of Fire's Fury, and Ocelot Pride with combat tricks.",
+      "Cast Phlage to deal 5 damage and swing for 6, or use Ocelot Pride to close out games with +1/+1 counters and trample/flying.",
+      "Go all-in when you have 5+ energy for Phlage, or when the opponent is at 5 or less life and you can swing with multiple threats.",
+      "Commit when you've disrupted their plan and they have no sweepers."
     ]
   },
   "key_cards": [
@@ -58,7 +75,7 @@
       "notes": "Legends rule interaction creates tokens to protect it, making it highly efficient in games."
     },
     {
-      "name": "Phlage, Titan of Fire’s Fury",
+      "name": "Phlage, Titan of Fire\u2019s Fury",
       "role": "Removal & threat",
       "notes": "Feeds on graveyard, sets a two-turn clock, deals up to 11 damage with Guide of Souls."
     },
@@ -87,7 +104,12 @@
     "Blink Amped Raptor with Phelia to generate energy for triggering Guide of Souls on the following turn.",
     "Cast Static Prison early to generate two energy before it sacrifices itself, even without a target.",
     "Use Galvanic Discharge on smaller creatures to store excess energy for Unstable Amulet.",
-    "Save Amped Raptor for games requiring conditional responses to avoid whiffing."
+    "Save Amped Raptor for games requiring conditional responses to avoid whiffing.",
+    "Energy management is critical",
+    "never spend energy on marginal spells when Phlage is your win condition.",
+    "Ragavan's ability can be a double-edged sword, so use it to dig for answers or more Phlage, not just for damage.",
+    "Ocelot Pride requires protection or combat tricks to be effective, so sequence it carefully.",
+    "Watch for sweepers and have a plan to cast Phlage before or after they resolve."
   ],
   "matchups": [
     {
@@ -134,6 +156,31 @@
         "Graveyard value",
         "Token generation"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast Phlage at instant speed when they have no mana, use Ragavan to dig for answers, or rely on haste/flying to close before they can respond.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them with early threats, use spot removal on key ramp pieces, and use Phlage to clear their board or swing past.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use early removal to answer key threats, Ocelot Pride for combat tricks, and Phlage to swing past and close the game quickly.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early with Ragavan and Ocelot Pride, use Ragavan to dig past counterspells, and cast Phlage to break their board or close the game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through superior sequencing, better resource management, and sideboard hate. Prioritize value engines and use Ragavan to out-draw your opponent.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -142,10 +189,13 @@
     "Primeval Titan",
     "Urza's Saga",
     "Simulacrum Synthesizer",
-    "Blood Moon"
+    "Blood Moon",
+    "Watch for counterspells, sweepers (like Wrath of God), and artifact hate.",
+    "Note when opponents tap out for removal or board wipes, as this is your window to cast Phlage or swing with Ocelot Pride."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-boros-energy-deck-tech-sideboard-guide",
     "generated_at": "2026-05-20T23:27:12+00:00",
     "model": "local-model",
@@ -163,7 +213,27 @@
         "overview",
         "key_cards",
         "matchups"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {
@@ -189,7 +259,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Unstable Amulet is a recurring source of card advantage and damage in Boros Energy... Phlage, Titan of Fire’s Fury... can deal up to 11 damage in a single attack."
+      "evidence_span": "Unstable Amulet is a recurring source of card advantage and damage in Boros Energy... Phlage, Titan of Fire\u2019s Fury... can deal up to 11 damage in a single attack."
     },
     {
       "confidence": 0.9,
@@ -227,7 +297,7 @@
       "confidence": 0.95,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Amped Raptor... tends to come out in games where we need more conditional responses that can “whiff” when played by it."
+      "evidence_span": "Amped Raptor... tends to come out in games where we need more conditional responses that can \u201cwhiff\u201d when played by it."
     }
   ],
   "common_threats_evidence": [

@@ -1,0 +1,113 @@
+{
+  "archetype": "Azorius Tempo",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/azorius-tempo.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Aang, Swift Savior"
+    },
+    {
+      "qty": 2,
+      "name": "Abandoned Air Temple"
+    },
+    {
+      "qty": 4,
+      "name": "Avatar's Wrath"
+    },
+    {
+      "qty": 4,
+      "name": "Aven Interrupter"
+    },
+    {
+      "qty": 4,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Floodpits Drowner"
+    },
+    {
+      "qty": 2,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 4,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 4,
+      "name": "High Noon"
+    },
+    {
+      "qty": 4,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 4,
+      "name": "Plains"
+    },
+    {
+      "qty": 3,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Anchorage"
+    },
+    {
+      "qty": 2,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 4,
+      "name": "Skycoach Conductor"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Voice of Victory"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Beza, the Bounding Spring"
+    },
+    {
+      "qty": 2,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 2,
+      "name": "Flashfreeze"
+    },
+    {
+      "qty": 1,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 2,
+      "name": "Requisition Raid"
+    },
+    {
+      "qty": 3,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 1,
+      "name": "Wan Shi Tong, Librarian"
+    }
+  ]
+}

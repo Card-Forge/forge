@@ -1,0 +1,93 @@
+{
+  "archetype": "Mono-White Aggro",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/mono-white-aggro.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Battle Screech"
+    },
+    {
+      "qty": 3,
+      "name": "Guardians' Pledge"
+    },
+    {
+      "qty": 4,
+      "name": "Hinterland Sanctifier"
+    },
+    {
+      "qty": 2,
+      "name": "Idyllic Grange"
+    },
+    {
+      "qty": 2,
+      "name": "Journey to Nowhere"
+    },
+    {
+      "qty": 4,
+      "name": "Kor Skyfisher"
+    },
+    {
+      "qty": 4,
+      "name": "Leonardo, Big Brother"
+    },
+    {
+      "qty": 4,
+      "name": "Novice Inspector"
+    },
+    {
+      "qty": 18,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Prismatic Strands"
+    },
+    {
+      "qty": 4,
+      "name": "Raffine's Informant"
+    },
+    {
+      "qty": 3,
+      "name": "Thraben Charm"
+    },
+    {
+      "qty": 4,
+      "name": "Thraben Inspector"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 1,
+      "name": "Goliath Paladin"
+    },
+    {
+      "qty": 2,
+      "name": "Gut Shot"
+    },
+    {
+      "qty": 2,
+      "name": "Journey to Nowhere"
+    },
+    {
+      "qty": 2,
+      "name": "Martyr of Sands"
+    },
+    {
+      "qty": 1,
+      "name": "Palace Sentinels"
+    },
+    {
+      "qty": 2,
+      "name": "Ramosian Rally"
+    },
+    {
+      "qty": 1,
+      "name": "Thraben Charm"
+    }
+  ]
+}

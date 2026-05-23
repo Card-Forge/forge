@@ -1,0 +1,124 @@
+{
+  "archetype": "Dimir Midrange",
+  "format": "standard",
+  "strategy_type": "combo",
+  "overview": "Dimir Midrange aims to outvalue opponents through card advantage engines like Enduring Curiosity and Kaito while using efficient removal, discard, and graveyard disruption to control the board. It wins by grinding out attrition against slower decks and stabilizing against aggressive strategies before closing out with resilient threats and card draw.",
+  "win_conditions": [
+    "Kaito (card draw + graveyard exile), Qarsi Revenant (flash + graveyard threat), and resilient midrange creatures.",
+    "Close out by attacking with unblockable threats, using Bane of Nightmares to discard their win conditions, or locking them out with Enduring Curiosity and Kaito's draw engines."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (preferably duals or fetchable sources), a turn-1 or turn-2 play, and at least one card advantage engine (Enduring Curiosity, Kaito, or Qarsi Revenant)."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with three or more lands, no early plays, or multiple copies of the same removal without threats."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cantrip or 1-drop to dig for answers.",
+      "Turn 2: Develop the board with a 2-drop, cast Enduring Curiosity if you have mana advantage, or flash in Qarsi Revenant to disrupt.",
+      "Prioritize untapped lands to maintain flexibility for interaction on the opponent's turn."
+    ],
+    "mid_game": [
+      "Preserve mana for interaction on the opponent's turn.",
+      "Use cantrips to dig for answers and avoid dead draws.",
+      "Manage your graveyard by exiling threats with Kaito or leveraging Qarsi Revenant's self-exile mechanic.",
+      "Do not overcommit to Enduring Curiosity if you lack protection or answers to sweepers.",
+      "Commit threats when you have removal for their answers and they lack sweepers.",
+      "Hold back if you are tapped out against mass removal or if they have unanswered interaction.",
+      "Prioritize efficient trades using Qarsi Revenant's flash and graveyard presence to maintain board state without overextending."
+    ],
+    "late_game": [
+      "Kaito (card draw + graveyard exile), Qarsi Revenant (flash + graveyard threat), and resilient midrange creatures.",
+      "Close out by attacking with unblockable threats, using Bane of Nightmares to discard their win conditions, or locking them out with Enduring Curiosity and Kaito's draw engines.",
+      "Go all-in when you have card advantage locked in (Enduring Curiosity + Kaito), enough removal for their answers, and they have no sweepers in hand.",
+      "Also commit when they are at low life and you can close with multiple threats or when you can safely cast Enduring Curiosity on their turn."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kaito, Bane of Nightmares",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Enduring Curiosity",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Qarsi Revenant",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Kaito's ability to exile cards from the graveyard is crucial against recursion decks and can disrupt opponent's plans.",
+    "Qarsi Revenant's self-exile prevents graveyard recursion but can be a liability against graveyard hate.",
+    "Enduring Curiosity is a win condition but vulnerable to sweepers",
+    "protect it or cast it when they are tapped out.",
+    "Common mistake: overcommitting to Enduring Curiosity without protection or ignoring the opponent's graveyard.",
+    "Always track their hand size for Bane of Nightmares targeting and use Kaito to exile key cards from their graveyard when possible."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use flash (Qarsi Revenant), split your spells across turns, cast Enduring Curiosity when they are tapped out, and use Kaito to exile their counterspells from the graveyard. Bait counterspells with cheap threats before committing to your engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use discard to hit their lands, and bring in artifact/land hate. Stabilize with removal and close out before they hit their big mana. Do not trade into their ramp creatures; instead, disrupt their mana development.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize cheap interaction, discard to hit their threats, and stabilize with Bane of Nightmares or removal. Do not overextend into combat tricks. Use Qarsi Revenant to answer key threats and buy time for your card advantage engines to come online.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with Enduring Curiosity and Kaito. Pressure their life total to force mistakes. Use discard to hit their answers and win the attrition war. Cast your engines when they are tapped out for removal or sweepers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war. Prioritize keeping Enduring Curiosity and Kaito. Use discard to hit their answers, and trade efficiently. Graveyard hate can be crucial if they rely on recursion. Play conservatively early and out-value them mid-to-late game.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for Izzet's chain lightning/mana drain, Landfall's ramp triggers, and control's sweepers.",
+    "Note when they tap out for big spells",
+    "that is your window to attack or cast Enduring Curiosity.",
+    "Track graveyard size for Bane of Nightmares targeting and watch for recursion engines that Kaito can exile."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/standard.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "archetype": "Dimir Control",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/dimir-control.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Augur of Bolas"
+    },
+    {
+      "qty": 1,
+      "name": "Behold the Multiverse"
+    },
+    {
+      "qty": 2,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 3,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Dispel"
+    },
+    {
+      "qty": 1,
+      "name": "Extract a Confession"
+    },
+    {
+      "qty": 4,
+      "name": "Ice Tunnel"
+    },
+    {
+      "qty": 11,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 2,
+      "name": "Murmuring Mystic"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 4,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Suffocating Fumes"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Thorn of the Black Rose"
+    },
+    {
+      "qty": 4,
+      "name": "Tolarian Terror"
+    },
+    {
+      "qty": 1,
+      "name": "Unexpected Fangs"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Annul"
+    },
+    {
+      "qty": 1,
+      "name": "Arms of Hadar"
+    },
+    {
+      "qty": 1,
+      "name": "Campfire"
+    },
+    {
+      "qty": 1,
+      "name": "Extract a Confession"
+    },
+    {
+      "qty": 2,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 4,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 1,
+      "name": "Unexpected Fangs"
+    }
+  ]
+}

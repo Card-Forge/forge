@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Mox Opal and a Mountain symbol land",
       "Two-land hands with early interaction or cheap creatures",
-      "Tamiyo, Inquisitive Student paired with a land drop"
+      "Tamiyo, Inquisitive Student paired with a land drop",
+      "Keep any 3+ land hand with Mox Opal, or any 4+ land hand with Opal + a turn-2 play (Tamiyo, Inquisitive Student, or a cheap artifact).",
+      "Keep 2-land hands only if they include Opal, a cantrip, and a turn-2 threat."
     ],
     "mulligan_criteria": [
       "Three-land hands with no early plays",
       "Hands lacking Mountain symbols for Mox Opal",
-      "Heavy hands with only late-game cards"
+      "Heavy hands with only late-game cards",
+      "Mulligan hands with multiple Opals but no artifacts, or hands lacking Opal and a turn-2 play."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play Mox Opal on turn one if possible to accelerate mana",
       "Establish land drops and play cheap creatures to apply early pressure",
-      "Use early interaction to disrupt opponent's game plan"
+      "Use early interaction to disrupt opponent's game plan",
+      "Turn 1: Play a land, cast Mox Opal if possible, or play a cheap artifact/land.",
+      "Turn 2: Activate Opal for one mana, cast Tamiyo or Inquisitive Student to dig for Cori-Steel Cutter or additional artifacts.",
+      "If drawing Opal + two artifacts, play both, activate Opal, and cast a turn-2 threat.",
+      "Sequence lands to ensure colored mana for Tamiyo/Student while maintaining artifact count for Opal."
     ],
     "mid_game": [
       "Cast Tamiyo, Inquisitive Student to draw cards and tutor for lands",
       "Attack with multiple creatures to pump Cori-Steel Cutter with +1/+1 counters",
-      "Maintain board control while developing your advantage"
+      "Maintain board control while developing your advantage",
+      "Prioritize keeping Opal online",
+      "it\u2019s your primary acceleration engine.",
+      "Use Tamiyo/Student to cycle into answers or finishers rather than hoarding.",
+      "Don\u2019t overextend into sweepers",
+      "maintain a board presence of 1-2 artifacts plus your cutter.",
+      "Manage colored mana carefully\u2014Jeskai can be mana-screwed without Opal."
     ],
     "late_game": [
       "Let Cori-Steel Cutter finish the game with a large attack",
       "Recycle lands from the graveyard using Cori's death trigger or Tamiyo's tutor",
-      "Stabilize with card advantage and land recursion to outlast opponents"
+      "Stabilize with card advantage and land recursion to outlast opponents",
+      "Cori-Steel Cutter is the primary win condition, often closing games through direct damage, exile effects, or artifact synergy.",
+      "Secondary finishers include Tamiyo\u2019s ultimate or combo chains involving Inquisitive Student.",
+      "Go all-in when you have Opal online, a clear path to damage/exile, and the opponent has no known sweepers or counters.",
+      "Commit when your hand contains a finisher and you can protect it for one turn."
     ]
   },
   "key_cards": [
@@ -59,7 +76,12 @@
     "Play Mox Opal before casting Tamiyo to maximize early mana availability",
     "Coordinate attacks with multiple creatures to trigger Cori-Steel Cutter's growth ability efficiently",
     "Use Tamiyo's tutor ability to find lands that enable Mox Opal or specific threats",
-    "Prioritize keeping Cori-Steel Cutter alive until it has accumulated enough counters to threaten lethal"
+    "Prioritize keeping Cori-Steel Cutter alive until it has accumulated enough counters to threaten lethal",
+    "Common mistake: playing Opal without enough artifacts to activate it, stalling your game plan.",
+    "Another: overcommitting to the board without considering sweepers.",
+    "Unique interaction: Cori-Steel Cutter likely scales with artifact count or has a triggered ability that synergizes with Tamiyo\u2019s card draw.",
+    "Always track opponent\u2019s graveyard and mana for combo tells.",
+    "Practice mulligan decisions rigorously\u2014this deck is highly sensitive to opening hands."
   ],
   "matchups": [
     {
@@ -97,6 +119,31 @@
         "Inferno Titan",
         "Rest in Peace"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips and cheap artifacts to dig through counters. Cast Opal and threats in response to counterspells if possible. Rely on Tamiyo\u2019s protection or flashback/graveyard recursion if available. Don\u2019t overcommit to one threat; pressure from multiple angles forces counterspells to break.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use spot removal on key ramp pieces. Opal acceleration lets you race their ramp if you stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize cheap interaction and early board stalls. Tamiyo and Inquisitive Student can draw into answers. Don\u2019t overextend into combat; trade efficiently and stabilize before going for the win.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure their life total while digging for your win condition. Use Jeskai spells to trade resources favorably. Force them to use removal on your artifacts to buy time for Cori-Steel Cutter.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize Opal and early artifacts to out-accelerate. Use Tamiyo to out-value their card draw. Sideboard in more interaction and finishers. Trade efficiently and punish overextensions.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -104,10 +151,14 @@
     "Abrupt Decay",
     "Thoughtseize",
     "Rest in Peace",
-    "Inferno Titan"
+    "Inferno Titan",
+    "Watch for opponent\u2019s mana development (ramp vs. control), graveyard activity (combo decks), and board state (sweepers vs. spot removal).",
+    "Key tells: opponent tapping for two mana on turn 2 often signals a combo or control plan",
+    "untapped blue mana late game usually means a counterspell or removal."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:52:36+00:00",
     "model": "local-model",
@@ -123,7 +174,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

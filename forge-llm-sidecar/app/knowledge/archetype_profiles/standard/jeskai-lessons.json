@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "name": "Jeskai Lessons",
+  "format": "standard",
+  "colors": [
+    "W",
+    "U",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Jeskai Lessons is a three-color tempo deck that leverages card advantage and sorcery-speed recursion to control the board while maintaining pressure. By cycling through cheap spells and reusing key threats, the deck aims to outvalue opponents in the mid-to-late game. The inclusion of Gran-Gran and Accumulate Wisdom provides a powerful engine for recurring removal and finishers, allowing you to stabilize against aggressive strategies and grind out control matchups.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 3,
+      "cards": [
+        "Accumulate Wisdom",
+        "Gran-Gran",
+        "Stormchaser's Talent"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Accumulate Wisdom",
+        "Stormchaser's Talent"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Accumulate Wisdom",
+        "Gran-Gran",
+        "Stormchaser's Talent"
+      ]
+    },
+    "threats": {
+      "target_count": 3,
+      "cards": [
+        "Accumulate Wisdom",
+        "Gran-Gran",
+        "Stormchaser's Talent"
+      ]
+    },
+    "removal": {
+      "target_count": 1,
+      "cards": [
+        "Stormchaser's Talent"
+      ]
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Accumulate Wisdom",
+        "Stormchaser's Talent"
+      ]
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 3,
+      "cards": [
+        "Accumulate Wisdom",
+        "Gran-Gran",
+        "Stormchaser's Talent"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Accumulate Wisdom",
+        "Gran-Gran",
+        "Stormchaser's Talent"
+      ]
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Accumulate Wisdom",
+        "Gran-Gran",
+        "Stormchaser's Talent"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Accumulate Wisdom",
+        "Gran-Gran",
+        "Stormchaser's Talent"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Accumulate Wisdom",
+        "Stormchaser's Talent"
+      ]
+    },
+    "mana_fixing": {
+      "target_count": 3,
+      "cards": [
+        "Accumulate Wisdom",
+        "Gran-Gran",
+        "Stormchaser's Talent"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.67
+  },
+  "dual_role_cards": [
+    {
+      "card": "Stormchaser's Talent",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Accumulate Wisdom",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gran-Gran",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize holding up mana for recursion over committing to early plays",
+    "Cast Accumulate Wisdom before committing to board state changes",
+    "Use Gran-Gran's ability to recast removal after opponent commits resources",
+    "Balance aggression with card advantage to avoid running out of answers",
+    "Common mistake: Overcommitting to casting spells without considering graveyard hate or sweepers."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cheap interaction to disrupt opponent's early strategy"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up mana for potential recursion or counterplay"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish early board presence with low-cost threats"
+    }
+  ],
+  "kill_priority": [
+    "Accumulate Wisdom",
+    "Gran-Gran",
+    "Stormchaser's Talent",
+    "Accumulate Wisdom",
+    "Gran-Gran",
+    "Stormchaser's Talent",
+    "Accumulate Wisdom",
+    "Gran-Gran",
+    "Stormchaser's Talent"
+  ],
+  "interaction_to_disrupt": [
+    "Stormchaser's Talent"
+  ],
+  "last_updated": "2026-05-22"
+}

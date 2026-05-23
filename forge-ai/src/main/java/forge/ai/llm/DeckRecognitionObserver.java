@@ -22,11 +22,10 @@ import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbility;
 import forge.game.event.GameEvent;
+import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventLandPlayed;
-import forge.game.event.GameEventPlayerLivesChanged;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventTurnBegan;
-import forge.game.event.GameEventZone;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
@@ -36,10 +35,10 @@ import org.tinylog.Logger;
 
 /**
  * Subscribes to the game's event bus and records the opponent's public plays
- * (spells cast, lands played). It re-runs deck recognition <em>every time the
- * opponent takes an action</em> and at <em>every turn boundary</em> (so turns
- * the opponent passes without acting are also reflected), then writes the
- * guess to the game log.
+ * (spells cast, non-mana abilities activated, lands played, attackers
+ * declared). Recognition itself is fired from AI decision points, not directly
+ * from the event bus: calls are made at AI decision points only when the
+ * opponent has supplied new public information since the last call.
  *
  * <p>Because a local LLM call is slow, calls use latest-wins coalescing: if a
  * recognition is already in flight when a new trigger arrives, a single rerun
@@ -81,6 +80,9 @@ public final class DeckRecognitionObserver {
     /** AI-player turn count. This is intentionally separate from the global game turn. */
     private volatile int aiTurnNumber = 0;
 
+    /** Number of public opponent observations covered by the last started call. */
+    private volatile int requestedObservationCount = 0;
+
     public DeckRecognitionObserver(final Player aiPlayer, final Game game,
                                    final DeckRecognitionClient client,
                                    final AiController aiController) {
@@ -104,7 +106,7 @@ public final class DeckRecognitionObserver {
             return;
         }
         final OwnArchetypeRequest request = new OwnArchetypeRequest(
-                String.valueOf(game.getId()),
+                sidecarGameId(),
                 game.getRules().getGameType().name(),
                 deckCards);
         client.identifyOwnArchetypeAsync(request).whenComplete((result, err) -> {
@@ -175,18 +177,12 @@ public final class DeckRecognitionObserver {
                 handleSpellCast(cast);
             } else if (ev instanceof GameEventLandPlayed land) {
                 handleLandPlayed(land);
+            } else if (ev instanceof GameEventAttackersDeclared attackers) {
+                handleAttackersDeclared(attackers);
             } else if (ev instanceof GameEventTurnBegan turnBegan) {
                 if (turnBegan.turnOwner() != null && turnBegan.turnOwner().equals(aiPlayer.getView())) {
                     aiTurnNumber = Math.max(aiTurnNumber + 1, aiPlayer.getTurn() + 1);
                 }
-                // A turn boundary is itself information (e.g. a turn the
-                // opponent passed without acting), so always re-evaluate.
-                requestRecognition();
-            } else if (ev instanceof GameEventPlayerLivesChanged
-                    || ev instanceof GameEventZone) {
-                // Life changes and zone churn (cards entering / leaving a zone)
-                // can flip the role assessment without spell/land traffic.
-                requestRecognition();
             }
         } catch (final RuntimeException ex) {
             // Never let observation bookkeeping disrupt the game.
@@ -195,17 +191,16 @@ public final class DeckRecognitionObserver {
     }
 
     private void handleSpellCast(final GameEventSpellAbilityCast cast) {
-        if (cast.sa() == null || !cast.sa().isSpell()) {
+        if (cast.sa() == null || cast.si() == null || cast.si().isTrigger()) {
             return;
         }
-        final PlayerView caster = cast.si() == null ? null : cast.si().getActivatingPlayer();
+        final PlayerView caster = cast.si().getActivatingPlayer();
         if (caster == null || caster.equals(aiPlayer.getView())) {
             return; // ignore the AI's own plays
         }
         final Card host = resolveCard(cast.sa().getHostCard());
         if (host != null) {
-            observations.add(toObservation(host, "spell"));
-            requestRecognition();
+            observations.add(toObservation(host, cast.sa().isSpell() ? "spell" : "ability"));
         }
     }
 
@@ -216,7 +211,19 @@ public final class DeckRecognitionObserver {
         final Card landCard = resolveCard(land.land());
         if (landCard != null) {
             observations.add(toObservation(landCard, "land"));
-            requestRecognition();
+        }
+    }
+
+    private void handleAttackersDeclared(final GameEventAttackersDeclared attackers) {
+        if (attackers.player() == null || attackers.player().equals(aiPlayer.getView())
+                || attackers.attackersMap() == null || attackers.attackersMap().isEmpty()) {
+            return;
+        }
+        for (final CardView attackerView : attackers.attackersMap().values()) {
+            final Card attacker = resolveCard(attackerView);
+            if (attacker != null) {
+                observations.add(toObservation(attacker, "attack"));
+            }
         }
     }
 
@@ -228,11 +235,26 @@ public final class DeckRecognitionObserver {
     /**
      * Kick off a recognition call, or queue a rerun if one is already running.
      */
+    public void requestRecognitionForDecision(final AiController.DecisionType type) {
+        if (type == AiController.DecisionType.MULLIGAN) {
+            return;
+        }
+        final boolean hasNewOpponentInfo = observations.size() > requestedObservationCount;
+        if (hasNewOpponentInfo) {
+            requestRecognition();
+        }
+    }
+
     private void requestRecognition() {
         if (observations.isEmpty() && game.getPhaseHandler().getTurn() < MIN_TURN_TO_GUESS) {
             return; // too early and nothing observed yet
         }
+        final int observationCount = observations.size();
+        if (observationCount <= requestedObservationCount) {
+            return; // no new public opponent information since the last started call
+        }
         if (inFlight.compareAndSet(false, true)) {
+            requestedObservationCount = observationCount;
             fireCall();
         } else {
             rerunRequested.set(true);
@@ -535,7 +557,7 @@ public final class DeckRecognitionObserver {
 
         final RecognitionRequest request = new RecognitionRequest(
                 RecognitionRequest.CLIENT,
-                String.valueOf(game.getId()),
+                sidecarGameId(),
                 game.getRules().getGameType().name(),
                 aiPlayer.getId(),
                 currentAiTurnNumber(),
@@ -601,6 +623,10 @@ public final class DeckRecognitionObserver {
 
     private int currentAiTurnNumber() {
         return Math.max(aiTurnNumber, aiPlayer.getTurn());
+    }
+
+    private String sidecarGameId() {
+        return DeckRecognitionFeature.sidecarGameId(game.getId());
     }
 
     private void postGuess(final RecognitionResult result) {

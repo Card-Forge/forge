@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with solid land drops",
       "Cantrips to manipulate the top of the deck and create card advantage",
-      "Combo pieces like High Tide, Mulldrifter, and Nightscape Familiar"
+      "Combo pieces like High Tide, Mulldrifter, and Nightscape Familiar",
+      "Keep hands with 2-3 lands (fetches count as 1.5), at least one cantrip (Opt, Ponder, Brainstorm), and a Familiar or Lorien Revealed."
     ],
     "mulligan_criteria": [
       "Hands lacking land drops",
       "Hands with no cantrips or deck manipulation",
-      "Hands that cannot execute the game plan early"
+      "Hands that cannot execute the game plan early",
+      "Mulligan any hand with three or more lands, no draw spells, or only one land with no early plays."
     ],
     "examples": [
       {
@@ -55,17 +57,33 @@
     "early_game": [
       "Play lands and cantrips like Preordain to find combo pieces",
       "Cast Nightscape Familiar to discount red and blue spells",
-      "Set up High Tide for mana acceleration"
+      "Set up High Tide for mana acceleration",
+      "Turn 1: Play a land, cast a cantrip to dig for Sunscape Familiar or Lorien Revealed.",
+      "If holding a fetch, use it to find a dual land that enters untapped to enable early spells.",
+      "Turn 2: Cast Familiar to start fueling the graveyard, or continue cantripping if you have no threats.",
+      "Prioritize setting up the engine over committing to the board unless facing aggressive decks that require early interaction."
     ],
     "mid_game": [
       "Execute the Ardent Elementalist and Snapcaster Mage mini-combo",
       "Use Snuff Out to remove problematic creatures",
-      "Play Mulldrifter for card advantage and board presence"
+      "Play Mulldrifter for card advantage and board presence",
+      "Treat your graveyard as a secondary hand.",
+      "Cast spells from it only when necessary to enable combos or stabilize.",
+      "Preserve cantrips to dig through disruption.",
+      "Never overextend into spot removal",
+      "your value comes from card advantage, not board presence.",
+      "Commit threats only when you have a clear path to resolving Lorien Revealed or when you can trade up using Snap + Familiar."
     ],
     "late_game": [
       "Cast Stream of Thought for a massive draw and win",
       "Activate Murmuring Mystic to generate infinite 1/1 Bird tokens",
-      "Regenerate Nightscape Familiar to block and attack repeatedly"
+      "Regenerate Nightscape Familiar to block and attack repeatedly",
+      "Lorien Revealed is the primary win condition",
+      "resolve it and draw into game-ending lands or spells.",
+      "Snap + Sunscape Familiar can win instantly if you have a free spell in the graveyard.",
+      "Use cantrips to assemble these pieces while maintaining card advantage.",
+      "Go all-in when you have enough resources to resolve Lorien Revealed despite potential counters (e.g., you have Snap, multiple cantrips, or the opponent has tapped out).",
+      "Commit when you can trade a Familiar for a key removal spell and still win via card advantage."
     ]
   },
   "key_cards": [
@@ -119,7 +137,13 @@
     "Discount counterspells like Negate using Nightscape Familiar for efficiency.",
     "Look for windows in the opponent's strategy to safely play your combo.",
     "Use Snuff Out early to clear the board before executing win conditions.",
-    "Prioritize land drops and cantrips in opening hands to avoid dead turns."
+    "Prioritize land drops and cantrips in opening hands to avoid dead turns.",
+    "Familiars is highly vulnerable to graveyard hate",
+    "always have a plan B (like Snap + Familiar or direct damage) if Rest in Peace or Null Rod is in play.",
+    "Lorien Revealed is a combo piece, not a board wipe",
+    "use it to draw into wins, not to stabilize.",
+    "Avoid overusing cantrips early if you have no threats",
+    "preserve them for when you need to dig through disruption."
   ],
   "matchups": [
     {
@@ -127,7 +151,7 @@
       "advice": "Side in Snuff Out and Negate. Use Nightscape Familiar as a blocker and regenerate it. Wait for a window to play the combo.",
       "watch_for": [
         "Rush of Knowledge",
-        "Lórien Revealed",
+        "L\u00f3rien Revealed",
         "Tolarian Terror",
         "Counterspells"
       ]
@@ -164,6 +188,31 @@
         "Slippery Bogle",
         "Indestructible creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Snap to cast free spells instantly, bypassing counterspells. Dig deeper with cantrips to find Lorien Revealed or additional threats. If facing heavy counters, commit multiple spells in a row or use Snap to win before they can react.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Disrupt their mana with early interaction or targeted removal. Use cantrips to dig faster than they can ramp. If they establish a board, use Snap + Familiar to combo off or trade up with card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction (Spell Pierce, Lightning Axe) to stabilize. Use cantrips to dig for removal or Lorien Revealed. Race if you can stabilize and have enough threats to outpace their damage. Do not overcommit to the board; value out their creatures with efficient removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with relentless cantrips and graveyard-fueled spells. Use Snap to bypass counterspells and win instantly. Dig for Lorien Revealed to draw into game-ending resources. Pressure their hand size and force them to spend resources on disruption.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Grind for card advantage with cantrips and Familiar. Track their graveyard to avoid falling for Snap + Familiar combos. Sideboard in additional graveyard hate and counterspells. Win by out-drawing them and resolving Lorien Revealed first.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -173,10 +222,14 @@
     "Blood Fountain",
     "Counterspells",
     "Aggressive burn spells",
-    "Tolarian Terror"
+    "Tolarian Terror",
+    "Watch for counterspells (especially on your second spell), targeted removal (Lightning Axe, Go for the Throat), and graveyard hate (Rest in Peace, Null Rod, Void Rend).",
+    "Note when opponents tap out for disruption",
+    "this is your window to dig for Lorien or Snap."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-grixis-tide-familiars-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T09:37:52+00:00",
     "model": "local-model",
@@ -194,6 +247,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

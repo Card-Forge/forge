@@ -1,0 +1,149 @@
+{
+  "archetype": "Death and Taxes (Yorion) - Mono White",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/death-and-taxes-yorion-mono-white.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Aether Vial"
+    },
+    {
+      "qty": 1,
+      "name": "Canoptek Scarab Swarm"
+    },
+    {
+      "qty": 1,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 3,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 2,
+      "name": "Dryad Militant"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 4,
+      "name": "Flagstones of Trokair"
+    },
+    {
+      "qty": 2,
+      "name": "Flickerwisp"
+    },
+    {
+      "qty": 4,
+      "name": "Ghost Quarter"
+    },
+    {
+      "qty": 4,
+      "name": "Karakas"
+    },
+    {
+      "qty": 1,
+      "name": "Lion Sash"
+    },
+    {
+      "qty": 1,
+      "name": "Meteor Sword"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 4,
+      "name": "Phelia, Exuberant Shepherd"
+    },
+    {
+      "qty": 11,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Pre-War Formalwear"
+    },
+    {
+      "qty": 4,
+      "name": "Recruiter of the Guard"
+    },
+    {
+      "qty": 4,
+      "name": "Skyclave Apparition"
+    },
+    {
+      "qty": 4,
+      "name": "Solitude"
+    },
+    {
+      "qty": 4,
+      "name": "Stoneforge Mystic"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 3,
+      "name": "Thalia, Guardian of Thraben"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 4,
+      "name": "White Orchid Phantom"
+    },
+    {
+      "qty": 4,
+      "name": "Witch Enchanter"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 3,
+      "name": "Deafening Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 2,
+      "name": "Erode"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 1,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 3,
+      "name": "Wrath of the Skies"
+    },
+    {
+      "qty": 1,
+      "name": "Yorion, Sky Nomad"
+    }
+  ]
+}

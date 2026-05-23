@@ -1,0 +1,127 @@
+{
+  "archetype": "Giada, Font of Hope",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Mono-white voltron-token engine that wins by attacking with Giada to generate a resilient army, then leveraging her tap ability to pump her for lethal or using tokens to control the board and out-value opponents. Excels in midrange and control matchups where it can stabilize and snowball, but must race fast aggro and artifact/ramp decks.",
+  "win_conditions": [
+    "Giada with a full board of tapped tokens for massive +1/+1 counters, or a fully equipped Giada.",
+    "The goal is to swing with Giada and enough tokens to either go lethal or leave the opponent at 0 life after combat."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (preferably fetchable or ramp-able), Sol Ring or other mana acceleration, and either Giada or a protective/early threat.",
+      "Keep hands with removal or bounce if facing aggro/control."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 0-1 lands, no ramp, or only removal with no threats/land."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, drop Sol Ring or other ramp.",
+      "Turn 2: Cast Giada if possible, or play a cheap land/ramp to set up for Turn 3 Giada.",
+      "If you can't cast Giada early, use ramp to accelerate and play cheap white creatures or equipment to stabilize.",
+      "Prioritize playing lands to ensure you can cast Giada by Turn 3."
+    ],
+    "mid_game": [
+      "Mana should be hoarded for Giada's pump ability or key removal.",
+      "Don't overcommit to attacking if you can't pump Giada or block effectively.",
+      "Use tokens as a resource: tap them to pump Giada, or leave them untapped to block/attack.",
+      "Graveyard is generally less relevant unless using bounce or recursion",
+      "prioritize hand and board resources.",
+      "Commit threats when you have a clear path to lethal or when you can stabilize against an aggressive board.",
+      "Hold back if the opponent has sweepers or can easily remove Giada.",
+      "Use tokens to trade favorably and preserve Giada's life total."
+    ],
+    "late_game": [
+      "Giada with a full board of tapped tokens for massive +1/+1 counters, or a fully equipped Giada.",
+      "The goal is to swing with Giada and enough tokens to either go lethal or leave the opponent at 0 life after combat.",
+      "Go all-in when you have enough tapped creatures to pump Giada for lethal, or when the opponent is low enough that a single combat step will win.",
+      "Also commit when you can safely ignore their removal (e.g., they have no instant-speed interaction)."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Giada, Font of Hope",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Lyra Dawnbringer",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Attacking with Giada without tapping creatures to pump her, leaving her vulnerable to removal or unable to close the game.",
+    "Always calculate pump math before committing.",
+    "Another mistake: Overcommitting to the board without considering sweepers.",
+    "Use tokens as a buffer, not just for damage.",
+    "Giada's lifelink is crucial for stabilizing against aggressive decks, so don't neglect blocking.",
+    "Equipment synergizes well but isn't strictly necessary",
+    "focus on the tap-pump engine."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use mana dorks/ramp to cast Giada on turn 2 or 3 before they can comfortably counter. Use cheap, efficient threats or equipment to pressure. If they counter, use bounce or protection to recast.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with tokens and Giada. Use artifact hate and removal to slow their acceleration. Don't let them get too far ahead; trade efficiently and use lifegain to outlast them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal, bounce, and board wipes. Use tokens to block and trade favorably. Prioritize keeping Giada alive and use her lifelink to stabilize life total.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with consistent attacks and token generation. Use card draw to out-value them. Force them to use removal on Giada, then swing with tokens. If they sweep, rebuild quickly with ramp and cheap threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value trades carefully. Use your tokens to out-value theirs. Prioritize keeping Giada alive. Use removal on their Giada or key pump sources. The deck with better card advantage and removal wins.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes (Krenko's tokens are vulnerable), artifact acceleration (Blech), and combo win conditions.",
+    "Key tells: Opponent tapping out on non-creature spells often signals a sweeper or combo piece.",
+    "Opponent keeping mana open on their turn end suggests a counter or instant-speed interaction."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

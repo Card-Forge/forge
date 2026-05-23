@@ -1,0 +1,819 @@
+{
+  "schema_version": 1,
+  "name": "Ms. Bumbleflower",
+  "format": "commander",
+  "colors": [
+    "G",
+    "U",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "A flexible G/U/W midrange/control hybrid that leverages Ms. Bumbleflower as a versatile engine for mana acceleration, token generation, and anti-token disruption. Wins by out-valuing opponents through efficient removal, card advantage, and strategic Saproling floods that overwhelm board states or enable favorable sweepers.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "An Offer You Can't Refuse"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 12,
+      "cards": [
+        "Archivist of Oghma",
+        "Esper Sentinel",
+        "Ms. Bumbleflower",
+        "Mystic Remora",
+        "Puresteel Paladin",
+        "Return of the Wildspeaker",
+        "Rhystic Study",
+        "Sram, Senior Edificer",
+        "Sylvan Library",
+        "The Great Henge",
+        "The One Ring",
+        "Titanoth Rex"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 1,
+      "cards": [
+        "Ms. Bumbleflower"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 9,
+      "cards": [
+        "Cultivate",
+        "Finale of Devastation",
+        "Flooded Strand",
+        "Kodama of the West Tree",
+        "Misty Rainforest",
+        "Nature's Lore",
+        "Stoneforge Mystic",
+        "Weathered Wayfarer",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Everybody Lives!",
+        "Ms. Bumbleflower",
+        "Winds of Abandon",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 33,
+      "cards": [
+        "Arcane Signet",
+        "Archivist of Oghma",
+        "Blackblade Reforged",
+        "Bristly Bill, Spine Sower",
+        "Craterhoof Behemoth",
+        "Danitha Capashen, Paragon",
+        "Esper Sentinel",
+        "Evolution Sage",
+        "Forgotten Ancient",
+        "Hardened Scales",
+        "Kami of Whispered Hopes",
+        "Kodama of the West Tree",
+        "Managorger Hydra",
+        "Mother of Runes",
+        "Ms. Bumbleflower",
+        "Puresteel Paladin",
+        "Robe of Stars",
+        "Scavenged Brawler",
+        "Scavenging Ooze",
+        "Sigarda's Aid",
+        "Sink into Stupor",
+        "Sol Ring",
+        "Sram, Senior Edificer",
+        "Stoneforge Mystic",
+        "Sword of Vengeance",
+        "Swords to Plowshares",
+        "The Earth Crystal",
+        "The Ozolith",
+        "Thought Vessel",
+        "Thundering Mightmare",
+        "Titanoth Rex",
+        "Vorinclex, Monstrous Raider",
+        "Weathered Wayfarer"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Basilisk Collar",
+        "Bear Umbra",
+        "Boseiju, Who Endures",
+        "Cyclonic Rift",
+        "Generous Gift",
+        "Kaldra Compleat",
+        "Kodama of the West Tree",
+        "Otawara, Soaring City",
+        "Path to Exile",
+        "Scavenging Ooze",
+        "Sphere Grid",
+        "Sword of Feast and Famine",
+        "Sword of War and Peace",
+        "Swords to Plowshares",
+        "Winds of Abandon"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Bristly Bill, Spine Sower",
+        "Everybody Lives!",
+        "Farewell",
+        "Ms. Bumbleflower",
+        "Winds of Abandon"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Counterspell",
+        "Dovin's Veto"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 16,
+      "cards": [
+        "Akroma's Will",
+        "Dovin's Veto",
+        "Everybody Lives!",
+        "Flawless Maneuver",
+        "Hammer of Nazahn",
+        "Heroic Intervention",
+        "Kaldra Compleat",
+        "Mithril Coat",
+        "Mother of Runes",
+        "Shadowspear",
+        "Swiftfoot Boots",
+        "Sword of Feast and Famine",
+        "Sword of War and Peace",
+        "Teferi's Protection",
+        "The One Ring",
+        "Thran Power Suit"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 5,
+      "cards": [
+        "Farewell",
+        "Finale of Devastation",
+        "Rancor",
+        "Scavenged Brawler",
+        "Scavenging Ooze"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Cyclonic Rift",
+        "Otawara, Soaring City",
+        "Rancor",
+        "Return of the Wildspeaker",
+        "Scavenged Brawler"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Ms. Bumbleflower",
+        "Sram, Senior Edificer"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 3,
+      "cards": [
+        "Everybody Lives!",
+        "Winds of Abandon",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Ms. Bumbleflower"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Ms. Bumbleflower"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 28,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Arcane Signet",
+        "Boseiju, Who Endures",
+        "Bountiful Promenade",
+        "Breeding Pool",
+        "Command Tower",
+        "Exotic Orchard",
+        "Fellwar Stone",
+        "Flooded Strand",
+        "Glacial Fortress",
+        "Hallowed Fountain",
+        "Hinterland Harbor",
+        "Kami of Whispered Hopes",
+        "Misty Rainforest",
+        "Mox Opal",
+        "Ms. Bumbleflower",
+        "Otawara, Soaring City",
+        "Rejuvenating Springs",
+        "Reliquary Tower",
+        "Rogue's Passage",
+        "Savannah",
+        "Sea of Clouds",
+        "Sunpetal Grove",
+        "Temple Garden",
+        "Tropical Island",
+        "Tundra",
+        "Windswept Heath",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 31,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Bountiful Promenade",
+        "Breeding Pool",
+        "Command Tower",
+        "Exotic Orchard",
+        "Flooded Strand",
+        "Forest",
+        "Glacial Fortress",
+        "Hallowed Fountain",
+        "Hinterland Harbor",
+        "Island",
+        "Misty Rainforest",
+        "Otawara, Soaring City",
+        "Plains",
+        "Rejuvenating Springs",
+        "Reliquary Tower",
+        "Rogue's Passage",
+        "Savannah",
+        "Sea of Clouds",
+        "Sunpetal Grove",
+        "Temple Garden",
+        "Tropical Island",
+        "Tundra",
+        "Windswept Heath",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.35
+  },
+  "dual_role_cards": [
+    {
+      "card": "An Offer You Can't Refuse",
+      "roles": [
+        "counterspells",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Signet",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archivist of Oghma",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bountiful Promenade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bristly Bill, Spine Sower",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cyclonic Rift",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dovin's Veto",
+      "roles": [
+        "counterspells",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Esper Sentinel",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Everybody Lives!",
+      "roles": [
+        "payoff_cards",
+        "protection",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Farewell",
+      "roles": [
+        "graveyard_enablers",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Finale of Devastation",
+      "roles": [
+        "graveyard_enablers",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glacial Fortress",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hinterland Harbor",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaldra Compleat",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kami of Whispered Hopes",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kodama of the West Tree",
+      "roles": [
+        "removal",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mother of Runes",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ms. Bumbleflower",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Puresteel Paladin",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rancor",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rejuvenating Springs",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Return of the Wildspeaker",
+      "roles": [
+        "card_advantage",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rogue's Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Savannah",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scavenged Brawler",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scavenging Ooze",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sea of Clouds",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sram, Senior Edificer",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stoneforge Mystic",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunpetal Grove",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sword of Feast and Famine",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sword of War and Peace",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Swords to Plowshares",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The One Ring",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Titanoth Rex",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tropical Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tundra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Weathered Wayfarer",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Winds of Abandon",
+      "roles": [
+        "payoff_cards",
+        "removal",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya, Cradle of Growth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistakes include sacrificing Ms.",
+    "Bumbleflower too early without a plan, overcommitting to token floods without removal, and ignoring opponent mana states.",
+    "Unique interactions: Ms.",
+    "Bumbleflower's sacrifice triggers go on the stack, allowing responses.",
+    "Synergizes well with token doublers, sweepers, and card draw."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Cast a 2-drop or Arcane Signet."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 3: Cast Ms."
+    }
+  ],
+  "kill_priority": [
+    "Ms. Bumbleflower",
+    "Sram, Senior Edificer",
+    "Everybody Lives!",
+    "Winds of Abandon",
+    "Windswept Heath",
+    "Arcane Signet",
+    "Archivist of Oghma",
+    "Blackblade Reforged"
+  ],
+  "interaction_to_disrupt": [
+    "An Offer You Can't Refuse",
+    "Counterspell",
+    "Dovin's Veto",
+    "Akroma's Will",
+    "Everybody Lives!",
+    "Flawless Maneuver",
+    "Hammer of Nazahn",
+    "Heroic Intervention"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/ms-bumbleflower.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

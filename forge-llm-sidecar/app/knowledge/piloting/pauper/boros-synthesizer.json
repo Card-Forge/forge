@@ -12,11 +12,14 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with early artifacts like Experimental Synthesizer and bounce creatures",
-      "Hands featuring aggressive starts like Seeker of the Way"
+      "Hands featuring aggressive starts like Seeker of the Way",
+      "Keep hands with 2-3 lands, at least one early interaction (Galvanic Blast, Glint Hawk, or a removal spell), and a Lembas or early creature.",
+      "Prioritize hands that can play a land, then a Glint Hawk or removal on turn 1, followed by Lembas on turn 2."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays or interaction",
-      "Hands without a clear game plan for the matchup"
+      "Hands without a clear game plan for the matchup",
+      "Mulligan if you have 0-1 lands, no early plays, or only late-game finishers."
     ],
     "examples": [
       {
@@ -39,17 +42,32 @@
       "Play cheap artifacts to draw cards",
       "Cast bounce creatures to return artifacts to hand",
       "Use removal on opponent's early threats",
-      "Optionally lead with Seeker of the Way for aggressive pressure"
+      "Optionally lead with Seeker of the Way for aggressive pressure",
+      "Turn 1: Play a land, cast Glint Hawk or a cheap removal spell.",
+      "If opening with land + removal, hold for potential aggro threats.",
+      "Turn 2: Play a second land, cast Lembas or another threat.",
+      "Sequence lands to ensure you can cast Lembas on turn 2 or 3 to start generating food tokens for life gain and pump.",
+      "If facing aggro, prioritize removal over Lembas early."
     ],
     "mid_game": [
       "Cycle artifacts repeatedly to generate card advantage",
       "Establish flying threats to apply pressure",
-      "Manage resources carefully to avoid misplays"
+      "Manage resources carefully to avoid misplays",
+      "Conserve mana for interactive spells until you establish board presence.",
+      "Use Lembas food tokens strategically: pump Glint Hawk or other flyers to close games, or sacrifice for life to stabilize against aggro.",
+      "Avoid overcommitting to one threat",
+      "maintain card advantage through incremental value.",
+      "Commit threats when you have removal ready to answer opponent's responses.",
+      "Hold back if you lack interaction against control or combo."
     ],
     "late_game": [
       "Outvalue opponents with continuous card draw",
       "Use lifegain and removal to stabilize",
-      "Avoid letting games drag out against combo decks like Affinity"
+      "Avoid letting games drag out against combo decks like Affinity",
+      "Glint Hawk (pumped via Lembas), direct damage spells, and resilient creatures.",
+      "Close games by attacking with multiple flyers or using Galvanic Blast to remove a key blocker/planeswalker.",
+      "Go all-in when you have card advantage, removal ready, and the opponent is at low life or lacks answers.",
+      "Commit when Lembas is generating consistent food tokens and you can safely attack through potential removal."
     ]
   },
   "key_cards": [
@@ -77,7 +95,12 @@
   "sequencing_tips": [
     "Play Seeker of the Way before casting draw rocks to trigger its lifegain ability",
     "Wait for the optimal moment to destroy opponent's enchantments in GW Auras matchups",
-    "Prioritize aggressive plays over value generation against aggressive or control decks"
+    "Prioritize aggressive plays over value generation against aggressive or control decks",
+    "Common mistake: Overcommitting to Lembas too early without protection.",
+    "Another: Hoarding mana instead of using Glint Hawk's tap ability for incremental damage.",
+    "Unique interaction: Lembas food tokens can be used to pump Glint Hawk into lethal or trade efficiently.",
+    "Watch out for artifact/enchantment hate in the meta.",
+    "Always track opponent's life total and board state to know when to swing."
   ],
   "matchups": [
     {
@@ -125,6 +148,31 @@
         "Opponent's rock cycling",
         "Clock pressure"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split second effects if available, or sequence spells to beat counters. Attack with multiple threats to force counter decisions. Use Glint Hawk's tap ability to deal damage without casting spells. Rely on instant-speed interaction to clear the way.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to punish their mana development. Use efficient removal to delete key ramp creatures. Leverage life gain to survive their early attacks while you stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize removal and life gain over threats early. Use Lembas to stabilize, then transition to flying threats once stabilized. Don't overextend; trade efficiently and close quickly once ahead.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with multiple threats to force suboptimal counters. Use direct damage to bypass blockers. Leverage card advantage and incremental value to outlast their resources.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value trades are paramount. Use Glint Hawk to trade efficiently. Prioritize removing their Lembas or key threats. Control the board with removal and close games with flying threats. Card advantage wins mirrors.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -139,10 +187,12 @@
     "Curse of the Pierced Heart",
     "Trespasser's Curse",
     "Okiba Reckoner Raid",
-    "Omen of the Dead"
+    "Omen of the Dead",
+    "Watch for counterspells, sweepers, and graveyard recursion."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-boros-synthesizer-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T10:09:14+00:00",
     "model": "local-model",
@@ -186,6 +236,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

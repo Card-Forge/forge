@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "name": "Etali, Primal Conqueror",
+  "format": "commander",
+  "colors": [
+    "G",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This deck operates as a midrange-control hybrid that stabilizes early with disruption and mana acceleration, then deploys Etali, Primal Conqueror as a game-ending threat that leverages the graveyard to generate overwhelming board presence. It wins against combo and control by out-resourcing them and punishing slow games, while relying on efficient spot removal and land disruption to close out aggro matchups before they snowball.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 0,
+      "cards": []
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": []
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Etali, Primal Conqueror"
+      ]
+    },
+    "threats": {
+      "target_count": 3,
+      "cards": [
+        "Arcane Signet",
+        "Etali, Primal Conqueror",
+        "Sol Ring"
+      ]
+    },
+    "removal": {
+      "target_count": 1,
+      "cards": [
+        "Etali, Primal Conqueror"
+      ]
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 1,
+      "cards": [
+        "Etali, Primal Conqueror"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Etali, Primal Conqueror"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Etali, Primal Conqueror"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 1,
+      "cards": [
+        "Etali, Primal Conqueror"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Etali, Primal Conqueror",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Etali's graveyard trigger is a win-more card but can close games",
+    "don't overcommit to it if you can win faster.",
+    "Watch for Leyline of the Void or Rest in Peace, which can neuter your strategy.",
+    "Mana base is crucial",
+    "ensure you can cast Etali reliably without flooding."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, then cast disruption (Thoughtseize on combo pieces or early threats) or drop Sol Ring/Arcane Signet if opening light."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Develop your second land, cast acceleration if available, and evaluate whether to drop a mid-game threat or hold for Etali."
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize untapped lands for flexibility and ensure you can cast your disruption spells in response to opponent's opening moves."
+    }
+  ],
+  "kill_priority": [
+    "Etali, Primal Conqueror",
+    "Etali, Primal Conqueror",
+    "Arcane Signet",
+    "Etali, Primal Conqueror",
+    "Sol Ring"
+  ],
+  "interaction_to_disrupt": [
+    "Etali, Primal Conqueror"
+  ],
+  "last_updated": "2026-05-22"
+}

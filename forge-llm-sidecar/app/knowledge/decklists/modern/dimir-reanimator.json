@@ -1,0 +1,129 @@
+{
+  "archetype": "Dimir Reanimator",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/dimir-reanimator.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Abhorrent Oculus"
+    },
+    {
+      "qty": 3,
+      "name": "Archon of Cruelty"
+    },
+    {
+      "qty": 2,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 2,
+      "name": "Chthonian Nightmare"
+    },
+    {
+      "qty": 4,
+      "name": "Darkslick Shores"
+    },
+    {
+      "qty": 4,
+      "name": "Eyetwitch"
+    },
+    {
+      "qty": 4,
+      "name": "Flare of Malice"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Otherworldly Gaze"
+    },
+    {
+      "qty": 4,
+      "name": "Persist"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 2,
+      "name": "Psychic Frog"
+    },
+    {
+      "qty": 4,
+      "name": "Stitcher's Supplier"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 2,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 4,
+      "name": "Unearth"
+    },
+    {
+      "qty": 2,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Dauthi Voidwalker"
+    },
+    {
+      "qty": 1,
+      "name": "Decorum Dissertation"
+    },
+    {
+      "qty": 2,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 1,
+      "name": "It'll Quench Ya!"
+    },
+    {
+      "qty": 2,
+      "name": "Mai, Scornful Striker"
+    },
+    {
+      "qty": 1,
+      "name": "Octopus Form"
+    },
+    {
+      "qty": 1,
+      "name": "Ruinous Waterbending"
+    },
+    {
+      "qty": 1,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 2,
+      "name": "Vexing Bauble"
+    }
+  ]
+}

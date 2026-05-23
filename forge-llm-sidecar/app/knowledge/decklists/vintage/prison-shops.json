@@ -1,0 +1,205 @@
+{
+  "archetype": "Prison Shops",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/prison-shops.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Aether Spellbomb"
+    },
+    {
+      "qty": 1,
+      "name": "Ancestral Recall"
+    },
+    {
+      "qty": 3,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 1,
+      "name": "Chalice of the Void"
+    },
+    {
+      "qty": 2,
+      "name": "Crucible of Worlds"
+    },
+    {
+      "qty": 4,
+      "name": "Emry, Lurker of the Loch"
+    },
+    {
+      "qty": 1,
+      "name": "God-Pharaoh's Statue"
+    },
+    {
+      "qty": 4,
+      "name": "Golos, Tireless Pilgrim"
+    },
+    {
+      "qty": 1,
+      "name": "Inventors' Fair"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 1,
+      "name": "Karn, the Great Creator"
+    },
+    {
+      "qty": 1,
+      "name": "Lodestone Golem"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Minamo, School at Water's Edge"
+    },
+    {
+      "qty": 4,
+      "name": "Mishra's Workshop"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Ruby"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Metamorph"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 4,
+      "name": "Sphere of Resistance"
+    },
+    {
+      "qty": 1,
+      "name": "Stonecoil Serpent"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 2,
+      "name": "Talon Gates of Madara"
+    },
+    {
+      "qty": 1,
+      "name": "The Tabernacle at Pendrell Vale"
+    },
+    {
+      "qty": 1,
+      "name": "Thorn of Amethyst"
+    },
+    {
+      "qty": 1,
+      "name": "Time Walk"
+    },
+    {
+      "qty": 1,
+      "name": "Tinker"
+    },
+    {
+      "qty": 1,
+      "name": "Tolarian Academy"
+    },
+    {
+      "qty": 1,
+      "name": "Trinisphere"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 1,
+      "name": "Wurmcoil Engine"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Argentum Masticore"
+    },
+    {
+      "qty": 1,
+      "name": "Ensnaring Bridge"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 2,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 2,
+      "name": "Scrawling Crawler"
+    },
+    {
+      "qty": 2,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Stonecoil Serpent"
+    },
+    {
+      "qty": 2,
+      "name": "Unable to Scream"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "archetype": "Kykar, Wind's Fury",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Generate a relentless stream of flying Spirit tokens by casting cheap non-creature spells, leveraging card advantage and tempo to overwhelm opponents or close out games quickly. Wins by out-valuing opponents through spell density and token pressure, particularly against decks that struggle with flying threats or lack efficient removal.",
+  "win_conditions": [
+    "A board full of flying Spirits, often boosted by pump spells or doublers.",
+    "Alternatively, a storm combo finish or a direct damage spell.",
+    "Get there by chaining cantrips to generate tokens and stabilize the board."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including basics for R/U/W), Sol Ring/Arcane Signet, and at least one cheap cantrip/draw spell.",
+      "Keep Kykar only if paired with a mana accelerator and a cheap non-creature spell."
+    ],
+    "mulligan_criteria": [
+      "Mulligan to lands if you have no acceleration or cantrips, or if you draw 4+ lands with no play."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring/Arcane Signet if possible.",
+      "Turn 2: Cast a cheap cantrip to dig for Kykar or more spells.",
+      "If Kykar is on the battlefield, immediately cast a cheap non-creature spell to generate a token.",
+      "Sequence mana rocks first, then cantrips, then Kykar."
+    ],
+    "mid_game": [
+      "Prioritize maintaining card advantage",
+      "never cast Kykar without a plan to follow up with non-creature spells.",
+      "Manage mana to keep open for interaction or to chain cantrips.",
+      "Use the graveyard strategically if the deck utilizes recursion or storm, but avoid flooding it if it becomes a liability.",
+      "Commit tokens when you have card advantage or removal to clear blockers.",
+      "Hold back if you are low on resources or facing sweepers.",
+      "Use flying tokens to trade efficiently against non-flying decks and preserve your commander."
+    ],
+    "late_game": [
+      "A board full of flying Spirits, often boosted by pump spells or doublers.",
+      "Alternatively, a storm combo finish or a direct damage spell.",
+      "Get there by chaining cantrips to generate tokens and stabilize the board.",
+      "Go all-in when you have card advantage, protection for Kykar, and no immediate sweepers in play.",
+      "Also commit when you can close the game before the opponent's next turn or when you have out-resourced them in spells."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kykar, Wind's Fury",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Kykar triggers on any non-creature spell, including instants, sorceries, artifacts, enchantments, and lands with ETB effects.",
+    "Synergizes well with cheap cantrips, storm, and token doublers.",
+    "Remember that token generation is a trigger, so it goes on the stack and can be responded to.",
+    "Common mistakes include casting Kykar without a follow-up spell, overcommitting to the board without protection, and ignoring the opponent's mana state."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multiple spells to out-value counterspells. Employ protection (Hexproof, Shroud, Flash), or cast Kykar during your opponent's turn if possible. Use cantrips to dig through counterspells and maintain spell density.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with tokens. Use cheap removal or bounce to neutralize their mana rocks. Do not get bogged down in a long game; race them to lethal before their late-game threats come online.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap counterspells, bounce, or early token generation to block flying threats. Use removal on key attackers. Dig for board wipes if available, and prioritize surviving the early turns to stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card draw and cheap spells. Use protection for Kykar. Pressure the board to force them to use removal on tokens rather than your key spells, and dig for combo pieces or direct answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by card advantage and interaction. Protect your Kykar. Use counterspells to protect your own spells. Trade tokens efficiently and prioritize keeping your commander alive to out-value them over the long game.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath of God, Damnation), targeted removal (Path to Exile, Swords to Plowshares), and combo win conditions.",
+    "Note when opponents are holding up mana for counterspells or removal to time your Kykar casts and follow-up spells accordingly."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

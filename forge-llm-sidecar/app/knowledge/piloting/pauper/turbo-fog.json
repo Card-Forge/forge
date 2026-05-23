@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with at least two cheap spells or removal",
       "Early lands paired with Moment's Peace or Tangle",
-      "Card draw spells that enable finding fog or answers"
+      "Card draw spells that enable finding fog or answers",
+      "Keep hands with 2+ lands (preferably one producing U or G), at least one fog effect (Tangle/Fog), and a draw spell or Moment's Peace."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or board wipes",
       "Too many lands without early plays",
-      "Slow, high-cost cards that cannot respond to early aggression"
+      "Slow, high-cost cards that cannot respond to early aggression",
+      "Mulligan if you have 3+ lands with no early spells, or only high-cost spells without a functional mana base."
     ],
     "examples": []
   },
@@ -25,17 +27,28 @@
     "early_game": [
       "Play lands and hold removal for early threats",
       "Use Tangle or Lorien Revealed to clear pathing blockers or finish off attackers",
-      "Draw cards to find Moment's Peace or additional answers"
+      "Draw cards to find Moment's Peace or additional answers",
+      "Turn 1: Play a land and cast Tangle or a draw spell if mana allows.",
+      "Turn 2: Ramp with Growth Spiral or play a second land, then cast Moment's Peace to stall if pressured.",
+      "Sequence lands to ensure U/G availability by turn 2 to cast key spells."
     ],
     "mid_game": [
       "Cast Moment's Peace when the opponent has multiple threats or is about to stabilize",
       "Rebuild the board with cheap, efficient creatures after the wipe resolves",
-      "Maintain hand size by cycling low-cost spells and drawing into more fog"
+      "Maintain hand size by cycling low-cost spells and drawing into more fog",
+      "Hoard fog effects for combat phases and use card draw to maintain hand size.",
+      "Avoid overcommitting to Lorien Revealed until you have a board of creatures to counter, and track graveyard resources to avoid dead draws.",
+      "Commit threats only when you have fog effects ready to protect them or when you can safely grow your board.",
+      "Hold back if the opponent has sweepers or removal in play, and use Moment's Peace to reset combat when necessary."
     ],
     "late_game": [
       "Stabilize completely by repeatedly clearing boards and drawing into finishers",
       "Use removal to protect key threats or clear unblockable attackers",
-      "Close out the game with a resilient threat that survives or bypasses remaining answers"
+      "Close out the game with a resilient threat that survives or bypasses remaining answers",
+      "Lorien Revealed with a board of creatures, or a late-game creature boosted by counters.",
+      "Moment's Peace can buy time to set up the final turn, and fog effects ensure your creatures survive combat.",
+      "Go all-in when you have 3+ fog effects in hand/graveyard, Lorien Revealed on the board, and enough creatures to make combat irrelevant.",
+      "Push the counter engine when the opponent is tapped out or out of removal."
     ]
   },
   "key_cards": [
@@ -59,7 +72,10 @@
     "Hold removal until the opponent commits to a threat or attacks",
     "Cast Moment's Peace after the opponent plays their last threat for the turn",
     "Use Tangle to reduce a creature's power before combat to enable trading or survival",
-    "Prioritize clearing unblockable or flying threats before using board wipes"
+    "Prioritize clearing unblockable or flying threats before using board wipes",
+    "Common mistake: Overcommitting to Lorien Revealed too early without a board.",
+    "Remember that fog effects don't stop non-combat damage, so track opponent's hand size to know when they can cast sweepers.",
+    "Use Moment's Peace strategically to stall, not just as a draw spell."
   ],
   "matchups": [
     {
@@ -97,16 +113,34 @@
         "Resilient threats",
         "Card advantage engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap fog effects, split your spells across turns, and win the game before they can counter key pieces. Moment's Peace can stall while they burn resources on counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize graveyard hate and additional stalling. Don't trade resources; out-value them with card draw and fog effects, and avoid giving them easy targets.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing card draw and fog effects. Establish Lorien Revealed first if possible, and use targeted removal to disrupt their counter engine.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Cheap aggressive creatures",
     "Wide boards of low-cost threats",
     "Unblockable or flying attackers",
-    "Counterspells and protection effects"
+    "Counterspells and protection effects",
+    "Watch for sweepers, fast combo turns, and removal targeting Lorien Revealed or key fog effects.",
+    "Note when opponents tap out for big threats or run out of resources, as these are your windows to push the counter engine."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:42:33+00:00",
     "model": "local-model",
@@ -122,6 +156,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

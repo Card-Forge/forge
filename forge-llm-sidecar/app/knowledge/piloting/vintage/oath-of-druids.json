@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with multiple tutors to find Oath of Druids",
       "Hands containing Show and Tell with early mana acceleration",
-      "Hands with early interaction to protect combo pieces"
+      "Hands with early interaction to protect combo pieces",
+      "Keep hands with 2-3 lands (including fetch/shock potential), one of Oath of Druids or Show and Tell, and at least one disruption or mana source.",
+      "Keep hands with Atraxa/Emrakul + 2+ mana sources."
     ],
     "mulligan_criteria": [
       "Hands lacking tutors or mana sources",
       "Hands with only high-cost cards and no draw",
-      "Hands vulnerable to early disruption without answers"
+      "Hands vulnerable to early disruption without answers",
+      "Mulligan pure land hands, hands with multiple Oath/Show and Tell but no mana, or hands with only disruption and no way to cast it."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play mana rocks and tutors to locate Oath of Druids",
       "Use early interaction to counter opponent's disruption",
-      "Prioritize drawing cards to find combo pieces"
+      "Prioritize drawing cards to find combo pieces",
+      "Turn 1: Play a land, cast Thoughtseize/Force of Will/Spell Pierce, or play a shock land.",
+      "Turn 2: Play a land, cast disruption, or begin assembling mana for Oath/Show and Tell.",
+      "Prioritize fetching dual lands and maintaining open mana for counterspells until you commit to your combo."
     ],
     "mid_game": [
       "Cast Oath of Druids and activate its ability to draw and tutor",
       "Search for Atraxa, Grand Unifier or Show and Tell",
-      "Begin generating card advantage and setting up the win"
+      "Begin generating card advantage and setting up the win",
+      "Conserve mana for counterspells and disruption until you can safely resolve Oath or Show and Tell.",
+      "Use Lilian, the Last Hope to refill your hand and generate value.",
+      "Avoid overcommitting to Oath if you lack protection or a follow-up threat.",
+      "Commit threats like Atraxa or Emrakul when you have protection (counterspells, discard, or board wipe) or when the opponent has no removal.",
+      "Hold back Oath of Druids if the opponent has sweepers or targeted hate, as it requires tapping your creatures."
     ],
     "late_game": [
       "Use Atraxa's death trigger to draw cards and tutor for more threats",
       "Cast Show and Tell to bypass mana costs for game-ending cards",
-      "Overwhelm opponent with infinite resources and unblockable threats"
+      "Overwhelm opponent with infinite resources and unblockable threats",
+      "Atraxa, Grand Unifier, or Emrakul, World Aflame resolved via Oath of Druids or Show and Tell.",
+      "Atraxa wins through +1/+1 counters and token generation",
+      "Emrakul wins by drawing cards and removing threats",
+      "Grand Unifier wins by answering multiple problems and enabling attacks.",
+      "Go all-in when you have protection for your finisher, the opponent has no sweepers or targeted hate in hand, and you can follow up with additional value (Lilian, Emrakul\u2019s draw step, or Atraxa\u2019s tokens).",
+      "Commit to Oath/Show and Tell when you can safely resolve it and have a clear path to victory."
     ]
   },
   "key_cards": [
@@ -58,7 +75,13 @@
   "sequencing_tips": [
     "Always tutor for Atraxa first when possible to enable Show and Tell or further tutoring",
     "Hold up interaction for opponent's known disruption before committing to Oath of Druids",
-    "Use Show and Tell to cast Atraxa if you lack the mana, then use Atraxa's death trigger to find more pieces"
+    "Use Show and Tell to cast Atraxa if you lack the mana, then use Atraxa's death trigger to find more pieces",
+    "Oath of Druids and Show and Tell are sorceries, making them vulnerable to counterspells",
+    "always time them carefully.",
+    "Atraxa, Grand Unifier, and Emrakul are your primary win conditions, so protect them at all costs.",
+    "Lilian, the Last Hope is a critical engine for card advantage and mana fixing.",
+    "Avoid tapping your creatures for Oath if you have no follow-up or protection.",
+    "Watch for Leyline of the Void in the sideboard, as it can completely shut down your game plan."
   ],
   "matchups": [
     {
@@ -87,15 +110,34 @@
         "Combo enablers",
         "Priority windows"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Force of Will, Spell Pierce, or split your combo pieces to resolve threats. Oath and Show and Tell are sorceries, so resolve them when the opponent has no counterspells, or use Atraxa/Emrakul which are harder to counter. Consider playing around counters with discard or timing.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-value them with Atraxa/Emrakul and Lilian. Use Thoughtseize to hit key ramp pieces (Mana Crypt, Arcane Signet, etc.). Atraxa\u2019s +1/+1 counters and token generation will outscale their mana advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by tracking key cards, sideboarding in Rest in Peace/Leyline, and out-sequence your opponent. Use Thoughtseize to hit their Oath/Show and Tell or protection. Resolve Atraxa/Emrakul first, as it often wins the race. Be cautious of their Lilian and counterspells.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspells targeting Oath of Druids or Show and Tell",
     "Board wipes that clear Atraxa before it can trigger",
-    "Enchantment destroyers targeting key permanents"
+    "Enchantment destroyers targeting key permanents",
+    "Watch for Rest in Peace, Leyline of the Void, and graveyard hate.",
+    "Track opponent\u2019s hand for sweepers (Wrath of God, Anger of the Gods) and targeted removal (Path to Exile, Swords to Plowshares).",
+    "Note when they run out of counterspells to safely resolve your finishers."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:09:09+00:00",
     "model": "local-model",
@@ -111,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

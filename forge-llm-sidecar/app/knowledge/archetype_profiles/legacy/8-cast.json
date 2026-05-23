@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "name": "8-Cast",
+  "format": "legacy",
+  "colors": [
+    "U",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "8-Cast is a Legacy archetype that utilizes a high density of cheap artifacts to fuel card-drawing 'Cast' cards like Thoughtcast and Thought Monitor. It aims for explosive early-game plays by improvising Kappa Cannoneer and generating pressure with Urza's Saga tokens, while incorporating prison and control elements via Chalice of the Void. The deck intentionally forgoes Brainstorm and Ponder to maximize the impact of its artifact synergies and one-mana hate cards.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Kappa Cannoneer"
+      ]
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 4,
+      "cards": [
+        "Force of Will",
+        "Mox Opal",
+        "Thought Monitor",
+        "Thoughtcast"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Force of Will",
+        "Mox Opal",
+        "Thought Monitor",
+        "Thoughtcast"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 1,
+      "cards": [
+        "Urza's Saga"
+      ]
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Kappa Cannoneer",
+        "Mox Opal",
+        "Thoughtcast"
+      ]
+    },
+    "threats": {
+      "target_count": 1,
+      "cards": [
+        "Urza's Saga"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 2,
+      "cards": [
+        "Mox Opal",
+        "Thoughtcast"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Mox Opal",
+        "Thoughtcast",
+        "Urza's Saga"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Mox Opal",
+        "Thoughtcast",
+        "Urza's Saga"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 4,
+      "cards": [
+        "Chalice of the Void",
+        "Lotus Petal",
+        "Mox Opal",
+        "Thoughtcast"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Kappa Cannoneer",
+      "roles": [
+        "mana_reducers",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thought Monitor",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Will",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtcast",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mox Opal",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize playing the cheapest artifacts first to reduce costs for Cast cards and enable early Kappa Cannoneer",
+    "Sequence mana accelerators like Ancient Tomb, Lotus Petal, and Mox Opal to resolve Chalice of the Void to 1 on turn 1",
+    "Activate Urza's Saga's second ability on turn 2 to maximize token generation and pressure",
+    "Use Otawara, Soaring City's ability with reduced cost for Emry, Lurker of the Loch or Sai, Master Thopterist when needed",
+    "Mulligan very slow hands in mirror matches to ensure explosive early plays"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap artifacts to reduce mana costs for Cast cards and improvise Kappa Cannoneer"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Chalice of the Void to 1 on turn 1 using mana accelerators to punish one-mana cards"
+    },
+    {
+      "trigger": "early game",
+      "line": "Activate Urza's Saga's token generation on turn 2 to apply immediate pressure"
+    }
+  ],
+  "kill_priority": [
+    "Mox Opal",
+    "Thoughtcast",
+    "Urza's Saga",
+    "Kappa Cannoneer",
+    "Mox Opal",
+    "Thoughtcast",
+    "Urza's Saga"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

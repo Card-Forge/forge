@@ -1,0 +1,109 @@
+{
+  "archetype": "Red Stompy",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/red-stompy.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 3,
+      "name": "Blood Moon"
+    },
+    {
+      "qty": 4,
+      "name": "Broadside Bombardiers"
+    },
+    {
+      "qty": 4,
+      "name": "Chalice of the Void"
+    },
+    {
+      "qty": 4,
+      "name": "Chrome Mox"
+    },
+    {
+      "qty": 4,
+      "name": "City of Traitors"
+    },
+    {
+      "qty": 4,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 3,
+      "name": "Fury"
+    },
+    {
+      "qty": 2,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 3,
+      "name": "Magus of the Moon"
+    },
+    {
+      "qty": 3,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Pyrogoyf"
+    },
+    {
+      "qty": 3,
+      "name": "Shatterskull Smashing"
+    },
+    {
+      "qty": 4,
+      "name": "Simian Spirit Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    },
+    {
+      "qty": 4,
+      "name": "Sundering Eruption"
+    },
+    {
+      "qty": 4,
+      "name": "The One Ring"
+    },
+    {
+      "qty": 2,
+      "name": "Trinisphere"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Dead // Gone"
+    },
+    {
+      "qty": 3,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Emrakul, the Aeons Torn"
+    },
+    {
+      "qty": 2,
+      "name": "Fiery Confluence"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 3,
+      "name": "Ravenous Trap"
+    },
+    {
+      "qty": 2,
+      "name": "Unlicensed Hearse"
+    }
+  ]
+}

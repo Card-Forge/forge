@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Scapeshift and at least two basic or dual lands",
       "Hands with Formidable Speaker and cheap spells to stabilize",
-      "Hands with multiple land ramp sources and a clear win condition"
+      "Hands with multiple land ramp sources and a clear win condition",
+      "Keep hands with Scapeshift plus one to two lands, or two+ lands paired with cantrips/searchers (e.g., Life from the Loam, Farseek, Kodama's Reach, or fetches).",
+      "Against aggro, keep early interaction or discard."
     ],
     "mulligan_criteria": [
       "Hands lacking Scapeshift or any mana acceleration",
       "Hands with four or more lands and no cheap spells",
-      "Hands with only high-cost threats and no way to cast them early"
+      "Hands with only high-cost threats and no way to cast them early",
+      "Mulligan hands with only one land, no searchers, or no Scapeshift unless heavily supported by cantrips."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Play lands and hold Scapeshift until you have a safe window to dump lands",
       "Use Formidable Speaker to cast cheap interaction or draw cards",
-      "Avoid playing unnecessary lands before Scapeshift to maximize land count for the spell"
+      "Avoid playing unnecessary lands before Scapeshift to maximize land count for the spell",
+      "Turn 1: Play a land and cast a cantrip or early threat if available.",
+      "Turn 2: Search for Scapeshift or additional lands using fetches, ramp spells, or search creatures.",
+      "Sequence lands to ensure you can reach seven by turn 3-4, prioritizing color fixers and mana sources that support your chosen finisher."
     ],
     "mid_game": [
       "Cast Scapeshift to ramp into seven or more lands, drawing into threats",
       "Play Lumra, Bellow of the Woods immediately after ramping to apply pressure",
-      "Use Formidable Speaker to cast additional cheap threats or removal from hand"
+      "Use Formidable Speaker to cast additional cheap threats or removal from hand",
+      "Conserve mana to assemble seven lands without overcommitting.",
+      "Use cantrips to dig for Scapeshift or the final land.",
+      "Protect your graveyard if running Life from the Loam, and avoid unnecessary land drops that delay your win condition.",
+      "Commit threats only when you have a clear path to seven lands or can protect your combo.",
+      "Hold back if the opponent has hard interaction",
+      "use cantrips to dig around it rather than overextending with vulnerable permanents."
     ],
     "late_game": [
       "Maintain board presence with oversized creatures that are difficult to remove",
       "Cycle through cheap spells using Formidable Speaker to outvalue opponents",
-      "Protect your mana base and win condition with available interaction"
+      "Protect your mana base and win condition with available interaction",
+      "Scapeshift into seven Forests for Tron (Lumra/Nissa), seven Islands for Storm (Formidable Speaker/Emrakul), or seven Mountains for burn.",
+      "Tron wins via stack-independent triggers, while Storm wins quickly on the stack.",
+      "Go all-in when you have Scapeshift in hand, six lands on the battlefield, and cantrips to find the seventh.",
+      "Commit when the opponent has no interaction left or when you can safely resolve your finisher."
     ]
   },
   "key_cards": [
@@ -64,7 +80,13 @@
     "Play lands before casting Scapeshift to maximize the number of lands you can put onto the battlefield",
     "Hold Scapeshift until you have a clear path to play Lumra or another high-cost threat",
     "Use Formidable Speaker's triggered ability before or after Scapeshift depending on whether you need immediate interaction or want to save cheap spells for later",
-    "Avoid overcommitting to the board early if you plan to Scapeshift, as discarded lands can be replaced"
+    "Avoid overcommitting to the board early if you plan to Scapeshift, as discarded lands can be replaced",
+    "Scapeshift is a sorcery, so it's vulnerable to instant-speed interaction",
+    "always have a backup plan or protection.",
+    "The five-color mana base is complex, so practice land sequencing to avoid mana screw.",
+    "Tron is your most reliable finisher against control, while Storm offers speed but requires stack protection.",
+    "Avoid overcommitting to one finisher type",
+    "keep your options open based on the board state."
   ],
   "matchups": [
     {
@@ -93,6 +115,21 @@
         "Card draw engines",
         "Tempo plays that disrupt your ramp sequence"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Tron to bypass the stack, or split your combo across multiple targets. Use discard to remove counterspells, or win via instant-speed cantrips and landfall triggers that don't rely on Scapeshift resolving.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them with faster finishes (Storm or Tron), use counterspells/discard to disrupt their mana, or win via burn if they overextend. Prioritize speed and interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Grind for Scapeshift and early lands. Use graveyard hate to disrupt their Life from the Loam or landfall triggers. Sideboard in counterspells and discard to disrupt their combo, and prioritize protecting your own finisher.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -100,10 +137,14 @@
     "Abrupt Decay",
     "Thoughtseize",
     "Fatal Push",
-    "Beast Within"
+    "Beast Within",
+    "Watch for counterspells, discard spells, and land destruction.",
+    "Note if the opponent is playing sweepers or targeted removal aimed at your lands or Scapeshift.",
+    "Track their graveyard if they run Life from the Loam or similar hate."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:11:51+00:00",
     "model": "local-model",
@@ -119,6 +160,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

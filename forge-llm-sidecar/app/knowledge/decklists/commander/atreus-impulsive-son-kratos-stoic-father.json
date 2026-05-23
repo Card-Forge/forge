@@ -1,0 +1,404 @@
+{
+  "archetype": "Atreus, Impulsive Son // Kratos, Stoic Father",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/atreus-impulsive-son-kratos-stoic-father.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Adarkar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "An Offer You Can't Refuse"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Arena of Glory"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Atreus, Impulsive Son"
+    },
+    {
+      "qty": 1,
+      "name": "Aurelia, the Warleader"
+    },
+    {
+      "qty": 1,
+      "name": "Battle Angels of Tyr"
+    },
+    {
+      "qty": 1,
+      "name": "Battlefield Forge"
+    },
+    {
+      "qty": 1,
+      "name": "Birgi, God of Storytelling"
+    },
+    {
+      "qty": 1,
+      "name": "Blind Obedience"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Cascade Bluffs"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern-Hoard Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Cursed Mirror"
+    },
+    {
+      "qty": 1,
+      "name": "Deflecting Swat"
+    },
+    {
+      "qty": 1,
+      "name": "Desynchronization"
+    },
+    {
+      "qty": 1,
+      "name": "Embercleave"
+    },
+    {
+      "qty": 1,
+      "name": "Esper Sentinel"
+    },
+    {
+      "qty": 1,
+      "name": "Fellwar Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Fierce Guardianship"
+    },
+    {
+      "qty": 1,
+      "name": "Flare of Fortitude"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Full Throttle"
+    },
+    {
+      "qty": 1,
+      "name": "Gisela, Blade of Goldnight"
+    },
+    {
+      "qty": 1,
+      "name": "God-Eternal Oketra"
+    },
+    {
+      "qty": 1,
+      "name": "Goldspan Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Grand Abolisher"
+    },
+    {
+      "qty": 1,
+      "name": "Grateful Apparition"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Halvar, God of Battle"
+    },
+    {
+      "qty": 1,
+      "name": "Heliod, Sun-Crowned"
+    },
+    {
+      "qty": 1,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 1,
+      "name": "Ilharg, the Raze-Boar"
+    },
+    {
+      "qty": 1,
+      "name": "Iroas, God of Victory"
+    },
+    {
+      "qty": 1,
+      "name": "Kaito, Cunning Infiltrator"
+    },
+    {
+      "qty": 1,
+      "name": "Karn's Bastion"
+    },
+    {
+      "qty": 1,
+      "name": "Kratos, God of War"
+    },
+    {
+      "qty": 1,
+      "name": "Kratos, Stoic Father"
+    },
+    {
+      "qty": 1,
+      "name": "Legion Leadership"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Greaves"
+    },
+    {
+      "qty": 1,
+      "name": "Metastatic Evangel"
+    },
+    {
+      "qty": 1,
+      "name": "Minamo, School at Water's Edge"
+    },
+    {
+      "qty": 1,
+      "name": "Mithril Coat"
+    },
+    {
+      "qty": 1,
+      "name": "Nimbus Maze"
+    },
+    {
+      "qty": 1,
+      "name": "Norn's Choirmaster"
+    },
+    {
+      "qty": 1,
+      "name": "Ojer Axonil, Deepest Might"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Otharri, Suns' Glory"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 1,
+      "name": "Patrolling Peacemaker"
+    },
+    {
+      "qty": 1,
+      "name": "Plateau"
+    },
+    {
+      "qty": 1,
+      "name": "Port Razer"
+    },
+    {
+      "qty": 1,
+      "name": "Purphoros, Bronze-Blooded"
+    },
+    {
+      "qty": 1,
+      "name": "Raugrin Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Riverpyre Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Roaming Throne"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Rugged Prairie"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Sea of Clouds"
+    },
+    {
+      "qty": 1,
+      "name": "Secret Tunnel"
+    },
+    {
+      "qty": 1,
+      "name": "Seize the Day"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowspear"
+    },
+    {
+      "qty": 1,
+      "name": "Shinka, the Bloodsoaked Keep"
+    },
+    {
+      "qty": 1,
+      "name": "Shivan Reef"
+    },
+    {
+      "qty": 1,
+      "name": "Smothering Tithe"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 2,
+      "name": "Snow-Covered Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spectator Seating"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Sunbillow Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Sundown Pass"
+    },
+    {
+      "qty": 1,
+      "name": "Surtr, Fiery J\u00f6tun"
+    },
+    {
+      "qty": 1,
+      "name": "Swan Song"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Conviction"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Progress"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa, God of the Sea"
+    },
+    {
+      "qty": 1,
+      "name": "The Locust God"
+    },
+    {
+      "qty": 1,
+      "name": "The Reaver Cleaver"
+    },
+    {
+      "qty": 1,
+      "name": "Training Center"
+    },
+    {
+      "qty": 1,
+      "name": "Training Grounds"
+    },
+    {
+      "qty": 1,
+      "name": "Trouble in Pairs"
+    },
+    {
+      "qty": 1,
+      "name": "Tundra"
+    },
+    {
+      "qty": 1,
+      "name": "Tyrite Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Unsettled Mariner"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Incubator"
+    },
+    {
+      "qty": 1,
+      "name": "Venat, Heart of Hydaelyn"
+    },
+    {
+      "qty": 1,
+      "name": "Vexilus Praetor"
+    },
+    {
+      "qty": 1,
+      "name": "Volcanic Island"
+    },
+    {
+      "qty": 1,
+      "name": "Wan Shi Tong, Librarian"
+    },
+    {
+      "qty": 1,
+      "name": "Windcrag Siege"
+    },
+    {
+      "qty": 1,
+      "name": "Zirda, the Dawnwaker"
+    }
+  ],
+  "sideboard": []
+}

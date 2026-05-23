@@ -1,0 +1,506 @@
+{
+  "schema_version": 1,
+  "name": "4c Control",
+  "format": "standard",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "This four-color control deck leverages Jeskai and Black mana to stabilize against aggressive strategies and grind out value in longer matchups. By utilizing Stock Up for early resource acceleration and Jeskai Revelation for combat tricks and card draw, the deck maintains parity while searching for a finish. Inevitable Defeat serves as the primary board reset and card advantage engine, allowing you to outlast opponents in the Standard format.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 13,
+      "cards": [
+        "Deadly Cover-Up",
+        "Glorious Decay",
+        "Heritage Reclamation",
+        "Pest Control",
+        "Professor Dellian Fel",
+        "Stock Up",
+        "Three Steps Ahead",
+        "Witherbloom Charm"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 6,
+      "cards": [
+        "Consult the Star Charts",
+        "Rakshasa's Bargain",
+        "Stock Up"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Fabled Passage"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Stock Up"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 16,
+      "cards": [
+        "Aang, Swift Savior",
+        "Duress",
+        "Emeritus of Abundance",
+        "Emeritus of Ideation",
+        "Icetill Explorer",
+        "Professor Dellian Fel",
+        "Sandman, Shifting Scoundrel",
+        "Stock Up"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 18,
+      "cards": [
+        "Day of Black Sun",
+        "Deadly Cover-Up",
+        "Get Lost",
+        "Glorious Decay",
+        "Heritage Reclamation",
+        "Pest Control",
+        "Professor Dellian Fel",
+        "Requiting Hex",
+        "Shoot the Sheriff",
+        "Urgent Necropsy",
+        "Witherbloom Charm"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Day of Black Sun",
+        "Deadly Cover-Up",
+        "Pest Control"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 8,
+      "cards": [
+        "Annul",
+        "Disdainful Stroke",
+        "Essence Scatter",
+        "Negate",
+        "Spell Pierce",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 5
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 2,
+      "cards": [
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 16,
+      "cards": [
+        "Deadly Cover-Up",
+        "Glorious Decay",
+        "Heritage Reclamation",
+        "Icetill Explorer",
+        "Rakshasa's Bargain",
+        "Restless Cottage",
+        "Restless Reef",
+        "Sandman, Shifting Scoundrel",
+        "Stock Up",
+        "Strategic Betrayal"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Ba Sing Se",
+        "Icetill Explorer",
+        "Sandman, Shifting Scoundrel",
+        "Stock Up"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Ancient Cornucopia"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Stock Up"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 22,
+      "cards": [
+        "Ancient Cornucopia",
+        "Ba Sing Se",
+        "Concealed Courtyard",
+        "Dreamroot Cascade",
+        "Fabled Passage",
+        "Restless Cottage",
+        "Restless Reef",
+        "Starting Town",
+        "Stock Up",
+        "Temple Garden",
+        "Watery Grave",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 26,
+      "cards": [
+        "Ba Sing Se",
+        "Concealed Courtyard",
+        "Dreamroot Cascade",
+        "Fabled Passage",
+        "Forest",
+        "Island",
+        "Plains",
+        "Restless Cottage",
+        "Restless Reef",
+        "Starting Town",
+        "Swamp",
+        "Temple Garden",
+        "Watery Grave",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Professor Dellian Fel"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.4
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Cornucopia",
+      "roles": [
+        "engines",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ba Sing Se",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Concealed Courtyard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Day of Black Sun",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Cover-Up",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dreamroot Cascade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabled Passage",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glorious Decay",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Heritage Reclamation",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Icetill Explorer",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pest Control",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Professor Dellian Fel",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rakshasa's Bargain",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restless Cottage",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restless Reef",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sandman, Shifting Scoundrel",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stock Up",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Three Steps Ahead",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Willowrush Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Witherbloom Charm",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Inevitable Defeat until the opponent commits multiple creatures or a key threat",
+    "Cast Stock Up as early as possible to smooth out mana and draw into answers",
+    "Use Jeskai Revelation's combat trick after the opponent commits to blockers or attacks",
+    "Common mistakes include overusing Stock Up too early, ignoring graveyard recursion, and holding too much interaction until it's too late.",
+    "Unique interaction: Inevitable Defeat on your own creature creates a 1/1 Soldier token, which can be used as a blocker, a sacrifice target, or a win condition."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and draw spells to stabilize"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early interaction to disrupt opponent's game plan"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize finding Stock Up to accelerate resources"
+    }
+  ],
+  "kill_priority": [
+    "Ancient Cornucopia",
+    "Stock Up",
+    "Professor Dellian Fel",
+    "Aang, Swift Savior",
+    "Duress",
+    "Emeritus of Abundance",
+    "Emeritus of Ideation",
+    "Icetill Explorer"
+  ],
+  "interaction_to_disrupt": [
+    "Annul",
+    "Disdainful Stroke",
+    "Essence Scatter",
+    "Negate",
+    "Spell Pierce",
+    "Three Steps Ahead",
+    "Day of Black Sun",
+    "Deadly Cover-Up"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/4c-control.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

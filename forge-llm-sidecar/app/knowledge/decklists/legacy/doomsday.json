@@ -1,0 +1,153 @@
+{
+  "archetype": "Doomsday",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/doomsday.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Consider"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 2,
+      "name": "Daze"
+    },
+    {
+      "qty": 4,
+      "name": "Doomsday"
+    },
+    {
+      "qty": 1,
+      "name": "Edge of Autumn"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Flow State"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Lion's Eye Diamond"
+    },
+    {
+      "qty": 2,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 1,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 2,
+      "name": "Murktide Regent"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 3,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Street Wraith"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 2,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 4,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 1,
+      "name": "Unearth"
+    },
+    {
+      "qty": 3,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 1,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Dauthi Voidwalker"
+    },
+    {
+      "qty": 2,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Jace, Wielder of Mysteries"
+    },
+    {
+      "qty": 1,
+      "name": "Long Goodbye"
+    }
+  ]
+}

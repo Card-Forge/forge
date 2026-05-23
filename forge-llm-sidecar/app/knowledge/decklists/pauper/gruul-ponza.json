@@ -1,0 +1,97 @@
+{
+  "archetype": "Gruul Ponza",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/gruul-ponza.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Annoyed Altisaur"
+    },
+    {
+      "qty": 4,
+      "name": "Arbor Elf"
+    },
+    {
+      "qty": 3,
+      "name": "Avenging Hunter"
+    },
+    {
+      "qty": 4,
+      "name": "Boarding Party"
+    },
+    {
+      "qty": 1,
+      "name": "Colossal Dreadmask"
+    },
+    {
+      "qty": 3,
+      "name": "Eldrazi Repurposer"
+    },
+    {
+      "qty": 3,
+      "name": "Generous Ent"
+    },
+    {
+      "qty": 2,
+      "name": "Highland Forest"
+    },
+    {
+      "qty": 3,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 4,
+      "name": "Mwonvuli Acid-Moss"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Forest"
+    },
+    {
+      "qty": 14,
+      "name": "Snow-Covered Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Thermokarst"
+    },
+    {
+      "qty": 4,
+      "name": "Utopia Sprawl"
+    },
+    {
+      "qty": 2,
+      "name": "Wild Growth"
+    },
+    {
+      "qty": 4,
+      "name": "Writhing Chrysalis"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 3,
+      "name": "Deglamer"
+    },
+    {
+      "qty": 2,
+      "name": "Penumbra Spider"
+    },
+    {
+      "qty": 2,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 2,
+      "name": "Skred"
+    },
+    {
+      "qty": 3,
+      "name": "Weather the Storm"
+    }
+  ]
+}

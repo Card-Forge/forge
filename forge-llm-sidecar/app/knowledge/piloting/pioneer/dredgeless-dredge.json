@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Narcomoeba or early graveyard recursion",
       "Two or more cheap creatures (Bloodghast, Prized Amalgam)",
-      "Hands with early land drops and interaction"
+      "Hands with early land drops and interaction",
+      "Keep hands with 2-3 lands (preferably one of each color or fetch/shock-compatible), at least one discard spell (Thoughtseize/Inquisition), and a recursion enabler (Narcomoeba/Bloodghast).",
+      "Prioritize hands that can establish the graveyard quickly or apply early pressure."
     ],
     "mulligan_criteria": [
       "Hands lacking graveyard interaction or sacrifice outlets",
       "Hands with only high-cost cards",
-      "Hands missing early mana sources"
+      "Hands missing early mana sources",
+      "Mulligan if you have 0-1 lands, no discard, or only high-cost spells without graveyard support."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Prioritize playing Narcomoeba to establish recursion",
       "Cast Bloodghast to populate the graveyard",
-      "Use Prized Amalgam to stabilize or draw into answers"
+      "Use Prized Amalgam to stabilize or draw into answers",
+      "Turn 1: Play a land, cast Thoughtseize/Inquisition to strip key threats or discard a cheap spell to build the graveyard.",
+      "Turn 2: Develop mana, cast a cheap threat or recursion enabler, or continue applying discard.",
+      "Land sequencing: Prioritize fetching/finding duals or shock lands early to ensure consistent U/B mana, but don't overextend into removal if the board is vulnerable."
     ],
     "mid_game": [
       "Activate Narcomoeba to return threats and apply pressure",
       "Sacrifice creatures to fuel Amalgam's draw ability",
-      "Maintain board presence while cycling the graveyard"
+      "Maintain board presence while cycling the graveyard",
+      "Balance mana between casting threats, recursion, and interaction.",
+      "Don't overcommit to the graveyard if you lack recursion payoffs.",
+      "Use Narcomoeba to trade efficiently, Bloodghast to stabilize and generate mana, and Prized Amalgam to snowball when the graveyard is full.",
+      "Keep hand size optimal by using discard proactively.",
+      "Commit threats when you have interaction to protect them or when the opponent lacks removal.",
+      "Hold back if facing sweepers or targeted hate."
     ],
     "late_game": [
       "Execute recursive loops to outvalue opponents",
       "Return larger threats to close the game",
-      "Manage card advantage to withstand sweepers"
+      "Manage card advantage to withstand sweepers",
+      "Prized Amalgam with multiple instant/sorcery counters, Bloodghast armies, or Narcomoeba swarms.",
+      "Win by overwhelming the board or trading up into unblockable threats.",
+      "Use discard to strip win conditions and force unfavorable trades.",
+      "Go all-in when the opponent has no removal, no graveyard hate, or when you can safely recurse a Prized Amalgam into a lethal threat.",
+      "Commit when you have card advantage and can protect your board.",
+      "Push through damage when recursion can outpace their life total or removal cycle."
     ]
   },
   "key_cards": [
@@ -59,7 +77,12 @@
     "Activate Narcomoeba before sacrificing creatures to maximize returns",
     "Hold up black mana to protect key activations from removal",
     "Sacrifice Prized Amalgam after drawing to maintain hand size",
-    "Cycle Bloodghast immediately after it resolves to keep the graveyard active"
+    "Cycle Bloodghast immediately after it resolves to keep the graveyard active",
+    "Common mistakes: Overcommitting to the graveyard without recursion payoffs, ignoring discard timing, failing to track opponent's hate cards, and overextending into removal.",
+    "Unique interactions: Prized Amalgam scales with every instant/sorcery in the graveyard, so even cheap spells like Thoughtseize or discard make it massive.",
+    "Bloodghast's mana ability can be used to cast spells in response to removal.",
+    "Narcomoeba can be used as a sacrifice target for other synergies.",
+    "Always prioritize graveyard consistency over raw card count."
   ],
   "matchups": [
     {
@@ -88,16 +111,35 @@
         "Card draw engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to strip counterspells or win conditions. Cast threats in response to counterspells if possible. Use graveyard recursion to bypass counters since recursion triggers from the graveyard, not the stack. Force them to use removal on your graveyard threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and cheap threats. Don't let them stabilize. Use graveyard hate if they rely on it, otherwise out-value them with recursion. Disrupt their mana base with discard and pressure their early game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize keeping recursion enablers. Use Prized Amalgam to out-value. Track their graveyard hate and adapt. Trade efficiently and don't overcommit to the graveyard without payoffs. Favor games where you can recur multiple threats before they can answer them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fatal Push",
     "Abrupt Decay",
     "Supreme Verdict",
-    "Boros Charm"
+    "Boros Charm",
+    "Watch for graveyard hate (Rest in Peace, Tormod's Crypt, Relic), board wipes (Supreme Verdict, Wrath of God), and targeted removal (Path to Exile, Murder).",
+    "Note when opponents save removal for your key threats.",
+    "Track their discard targets to anticipate what they're trying to stop and adjust your graveyard strategy accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:06:49+00:00",
     "model": "local-model",
@@ -113,6 +155,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

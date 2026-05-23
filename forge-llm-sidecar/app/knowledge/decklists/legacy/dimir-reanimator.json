@@ -1,0 +1,129 @@
+{
+  "archetype": "Dimir Reanimator",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/dimir-reanimator.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Animate Dead"
+    },
+    {
+      "qty": 2,
+      "name": "Archon of Cruelty"
+    },
+    {
+      "qty": 4,
+      "name": "Atraxa, Grand Unifier"
+    },
+    {
+      "qty": 1,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Careful Study"
+    },
+    {
+      "qty": 2,
+      "name": "Daze"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 3,
+      "name": "Flow State"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 4,
+      "name": "Reanimate"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 3,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 2,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 4,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 2,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Brazen Borrower"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Dauthi Voidwalker"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 4,
+      "name": "Show and Tell"
+    }
+  ]
+}

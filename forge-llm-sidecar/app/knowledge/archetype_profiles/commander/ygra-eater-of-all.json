@@ -1,0 +1,654 @@
+{
+  "schema_version": 1,
+  "name": "Ygra, Eater of All",
+  "format": "commander",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 100,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "South Wind Avatar",
+    "Professor Dellian Fel",
+    "Arnyn, Deathbloom Botanist",
+    "Ashnod's Altar",
+    "Bane of Progress",
+    "Beledros Witherbloom",
+    "Blood Artist",
+    "Braids, Arisen Nightmare"
+  ],
+  "interaction_to_disrupt": [
+    "Heroic Intervention",
+    "Innkeeper's Talent",
+    "Ygra, Eater of All",
+    "Assassin's Trophy",
+    "Bane of Progress",
+    "Bitter Triumph",
+    "Cauldron of Essence",
+    "Close Encounter"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "Deadly Dispute"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 14,
+      "cards": [
+        "Braids, Arisen Nightmare",
+        "Deadly Dispute",
+        "Decorum Dissertation",
+        "Garruk's Uprising",
+        "Greta, Sweettooth Scourge",
+        "Peregrin Took",
+        "Phyrexian Arena",
+        "Professor Dellian Fel",
+        "Rabid Attack",
+        "Ravenous Squirrel",
+        "Savvy Hunter",
+        "Season of Loss",
+        "Skullclamp",
+        "Viridian Revel"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Decorum Dissertation",
+        "Trail of Crumbs"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 6,
+      "cards": [
+        "Entish Restoration",
+        "Farseek",
+        "Flare of Cultivation",
+        "Nature's Lore",
+        "Sakura-Tribe Elder",
+        "Thornvault Forager"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "South Wind Avatar"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 40,
+      "cards": [
+        "Arnyn, Deathbloom Botanist",
+        "Ashnod's Altar",
+        "Bane of Progress",
+        "Beledros Witherbloom",
+        "Blood Artist",
+        "Braids, Arisen Nightmare",
+        "Brawn",
+        "Camellia, the Seedmiser",
+        "Casal, Lurkwood Pathfinder",
+        "Cauldron Familiar",
+        "Chatterfang, Squirrel General",
+        "Compy Swarm",
+        "Culling the Weak",
+        "Emeritus of Woe",
+        "Experimental Confectioner",
+        "Grave Researcher",
+        "Greta, Sweettooth Scourge",
+        "Invasion of Ikoria",
+        "Moseo, Vein's New Dean",
+        "Night of the Sweets' Revenge",
+        "Osteomancer Adept",
+        "Peregrin Took",
+        "Phyrexian Plaguelord",
+        "Pitiless Plunderer",
+        "Professor Dellian Fel",
+        "Rapacious Guest",
+        "Ravenous Squirrel",
+        "Rise of the Dread Marn",
+        "Sakura-Tribe Elder",
+        "Savvy Hunter",
+        "Scute Swarm",
+        "Sol Ring",
+        "South Wind Avatar",
+        "Teacher's Pest",
+        "Thornvault Forager",
+        "Twitching Doll",
+        "Warren Soultrader",
+        "Whispersilk Cloak",
+        "Ygra, Eater of All",
+        "Zulaport Cutthroat"
+      ],
+      "mainboard_count": 40,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 10,
+      "cards": [
+        "Assassin's Trophy",
+        "Bane of Progress",
+        "Bitter Triumph",
+        "Cauldron of Essence",
+        "Close Encounter",
+        "Feed the Swarm",
+        "Garruk's Uprising",
+        "Llanowar Wastes",
+        "Professor Dellian Fel",
+        "Rapacious Guest"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Bane of Progress",
+        "Season of Loss",
+        "Toxic Deluge"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Heroic Intervention",
+        "Innkeeper's Talent",
+        "Ygra, Eater of All"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Bitter Triumph"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 15,
+      "cards": [
+        "Altar of Dementia",
+        "Brawn",
+        "Camellia, the Seedmiser",
+        "Cauldron Familiar",
+        "Cauldron of Essence",
+        "Fallen Ideal",
+        "Moseo, Vein's New Dean",
+        "Osteomancer Adept",
+        "Rancor",
+        "Scavenger's Talent",
+        "Season of Loss",
+        "Teacher's Pest",
+        "Thornvault Forager",
+        "Viridian Revel",
+        "Ygra, Eater of All"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 10,
+      "cards": [
+        "Camellia, the Seedmiser",
+        "Cauldron Familiar",
+        "Cauldron of Essence",
+        "Fallen Ideal",
+        "Moseo, Vein's New Dean",
+        "Osteomancer Adept",
+        "Rancor",
+        "Scavenger's Talent",
+        "Teacher's Pest",
+        "Thornvault Forager"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "South Wind Avatar"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 14,
+      "cards": [
+        "Command Tower",
+        "Deadly Dispute",
+        "Llanowar Wastes",
+        "Ninja Pizza",
+        "Overgrown Tomb",
+        "Pitiless Plunderer",
+        "Reliquary Tower",
+        "Rogue's Passage",
+        "Tainted Wood",
+        "Thornvault Forager",
+        "Twitching Doll",
+        "Warren Soultrader",
+        "Wastewood Verge",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 34,
+      "cards": [
+        "Command Tower",
+        "Forest",
+        "Llanowar Wastes",
+        "Overgrown Tomb",
+        "Reliquary Tower",
+        "Rogue's Passage",
+        "Swamp",
+        "Tainted Wood",
+        "Wastewood Verge",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Professor Dellian Fel"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.2
+  },
+  "dual_role_cards": [
+    {
+      "card": "Bane of Progress",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bitter Triumph",
+      "roles": [
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Braids, Arisen Nightmare",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brawn",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Camellia, the Seedmiser",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cauldron Familiar",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cauldron of Essence",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Dispute",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Decorum Dissertation",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fallen Ideal",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Garruk's Uprising",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Greta, Sweettooth Scourge",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Llanowar Wastes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Moseo, Vein's New Dean",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Osteomancer Adept",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Peregrin Took",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pitiless Plunderer",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Professor Dellian Fel",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rancor",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rapacious Guest",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ravenous Squirrel",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rogue's Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sakura-Tribe Elder",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Savvy Hunter",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scavenger's Talent",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Season of Loss",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "South Wind Avatar",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tainted Wood",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teacher's Pest",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thornvault Forager",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Twitching Doll",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Viridian Revel",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Warren Soultrader",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wastewood Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Woodland Cemetery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ygra, Eater of All",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/ygra-eater-of-all.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

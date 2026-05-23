@@ -1,0 +1,500 @@
+{
+  "schema_version": 1,
+  "name": "Azorius Stoneblade",
+  "format": "legacy",
+  "colors": [
+    "W",
+    "U"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "Azorius Stoneblade is a Legacy control deck that leverages White and Blue's superior card selection and disruption to outlast opponents. It uses Stoneforge Mystic to fetch a stabilizing sword, Tamiyo, Inquisitive Student for massive card advantage, and Stifle to shut down key opponent spells. The goal is to establish a resilient board state and win through incremental value and targeted interaction.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 21,
+      "cards": [
+        "Brainstorm",
+        "Ponder",
+        "Quantum Riddler",
+        "Stifle",
+        "Stoneforge Mystic",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 9,
+      "cards": [
+        "Grafdigger's Cage",
+        "Meticulous Archive",
+        "Ponder",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 18,
+      "cards": [
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Stifle",
+        "Stoneforge Mystic",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 10,
+      "cards": [
+        "Stifle",
+        "Stoneforge Mystic",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 19,
+      "cards": [
+        "Containment Priest",
+        "Murktide Regent",
+        "Phelia, Exuberant Shepherd",
+        "Quantum Riddler",
+        "Stifle",
+        "Stoneforge Mystic",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 1
+    },
+    "removal": {
+      "target_count": 16,
+      "cards": [
+        "Engineered Explosives",
+        "Erode",
+        "Hydroblast",
+        "Karakas",
+        "Meteor Sword",
+        "Pre-War Formalwear",
+        "Swords to Plowshares",
+        "Wasteland",
+        "Wrath of the Skies"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 20,
+      "cards": [
+        "Consign to Memory",
+        "Daze",
+        "Force of Negation",
+        "Force of Will",
+        "Hydroblast",
+        "Stifle",
+        "Stoneforge Mystic"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 6
+    },
+    "protection": {
+      "target_count": 7,
+      "cards": [
+        "Stifle",
+        "Stoneforge Mystic"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 9,
+      "cards": [
+        "Force of Negation",
+        "Grafdigger's Cage",
+        "Meticulous Archive",
+        "Murktide Regent",
+        "Pre-War Formalwear",
+        "Surgical Extraction"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 11,
+      "cards": [
+        "Batterskull",
+        "Daze",
+        "Karakas",
+        "Murktide Regent",
+        "Phelia, Exuberant Shepherd",
+        "Pre-War Formalwear"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Engineered Explosives",
+        "Stoneforge Mystic",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 3,
+      "cards": [
+        "Stifle"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 10,
+      "cards": [
+        "Stifle",
+        "Stoneforge Mystic",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Grafdigger's Cage",
+        "Null Rod"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 24,
+      "cards": [
+        "Flooded Strand",
+        "Karakas",
+        "Meticulous Archive",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Stifle",
+        "Stoneforge Mystic",
+        "Tundra",
+        "Wasteland"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 20,
+      "cards": [
+        "Flooded Strand",
+        "Island",
+        "Karakas",
+        "Meticulous Archive",
+        "Misty Rainforest",
+        "Plains",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Tundra",
+        "Wasteland"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.44
+  },
+  "dual_role_cards": [
+    {
+      "card": "Daze",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Engineered Explosives",
+      "roles": [
+        "engines",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karakas",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Murktide Regent",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Phelia, Exuberant Shepherd",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pre-War Formalwear",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quantum Riddler",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stifle",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stoneforge Mystic",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "engines",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tamiyo, Inquisitive Student",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tundra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always hold up Stifle until you know what the opponent is casting",
+    "Play Stoneforge Mystic before casting Tamiyo to ensure the sword is available for defense",
+    "Use Tamiyo's draw ability when your hand is low and you need specific answers",
+    "Manage mana carefully to keep interaction available while developing board presence",
+    "Common mistakes include overplaying Tamiyo without protection, using Sword of Feast and Famine as mere removal instead of a win condition, and hoarding counterspells until it's too late."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing lands and holding up mana for Stifle"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Stifle to counter fetch lands, tutors, or early combo pieces"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play Stoneforge Mystic as early as possible to set up the sword"
+    }
+  ],
+  "kill_priority": [
+    "Engineered Explosives",
+    "Stoneforge Mystic",
+    "Tamiyo, Inquisitive Student",
+    "Stifle",
+    "Containment Priest",
+    "Murktide Regent",
+    "Phelia, Exuberant Shepherd",
+    "Quantum Riddler"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Daze",
+    "Force of Negation",
+    "Force of Will",
+    "Hydroblast",
+    "Stifle",
+    "Stoneforge Mystic",
+    "Engineered Explosives"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/azorius-stoneblade.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

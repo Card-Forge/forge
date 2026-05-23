@@ -1,0 +1,130 @@
+{
+  "archetype": "Esper Control",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "Esper Control neutralizes early threats and disrupts opponent game plans to out-value them into a late-game scenario where Kaheera, the Orphanguard becomes a self-sustaining, unblockable win condition. It excels against midrange and combo decks that rely on key pieces or board presence, but requires careful resource management to survive fast aggro and spell-slinging strategies.",
+  "win_conditions": [
+    "Kaheera, the Orphanguard is the primary win condition.",
+    "Once it hits the battlefield, it draws you a card each combat, effectively replacing itself.",
+    "Combine with lifelink and vigilance to outlast opponents.",
+    "Consult the Star Charts can be used to dig for Kaheera or additional answers if you are behind."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing duals/shocklands or basic WUB), a turn-1 Thoughtseize, and a clear turn-2 play (land + spell, or two lands + spell).",
+      "Keep Consult the Star Charts only if paired with a land drop and you have a plan to mitigate the discard."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 1-land hands, 3+ land hands, or hands with only removal/draw without disruption or a viable early sequence."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Cast Thoughtseize on a key non-land card (discard a threat, ramp piece, or combo piece).",
+      "Turn 2: Play a land, then cast a counterspell, removal, or another Thoughtseize/Consult if possible.",
+      "Sequence lands to ensure you can hit WUB on turn 3 for Kaheera or key answers.",
+      "Prioritize maintaining hand size above 3 cards when possible."
+    ],
+    "mid_game": [
+      "Preserve mana for interaction until you stabilize.",
+      "Use Consult the Star Charts when you have excess cards or need to dig for a specific answer/wincon, but avoid it when you're low on life or need to hold up mana for counters.",
+      "Manage your graveyard by Thoughtseizing key pieces from Golgari or Greasefang, and avoid unnecessary scry/draw if the meta features graveyard hate.",
+      "Hold back on committing Kaheera until you have at least one removal spell or counter in hand, or until the board is clear of sweepers.",
+      "Use counterspells to protect Kaheera on the stack or to stop opponent key spells.",
+      "Trade efficiently: do not use removal on 1/1s if you can counter a 3-drop, and avoid overcommitting to board stalls that leave you vulnerable to a single sweep."
+    ],
+    "late_game": [
+      "Kaheera, the Orphanguard is the primary win condition.",
+      "Once it hits the battlefield, it draws you a card each combat, effectively replacing itself.",
+      "Combine with lifelink and vigilance to outlast opponents.",
+      "Consult the Star Charts can be used to dig for Kaheera or additional answers if you are behind.",
+      "Go all-in when you have Kaheera on board, a clear path to combat, and sufficient interaction to handle one or two removal spells.",
+      "Also commit when you are ahead on life and the opponent is out of answers, or when you can force them to use multiple counterspells on Kaheera's entry."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kaheera, the Orphanguard",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Consult the Star Charts",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Consult the Star Charts is powerful but can backfire if you discard your own Kaheera or key answers",
+    "use it when you have a full hand or can mitigate the discard.",
+    "Kaheera's lifelink and vigilance make it excellent for trading life, but be wary of board wipes and targeted removal.",
+    "Thoughtseize is your best early-game tool",
+    "do not be afraid to use it on lands if the opponent is mana-screwed, but prioritize non-lands.",
+    "In the current meta, Golgari and Company are prevalent",
+    "ensure you have enough removal for multiple threats and consider graveyard hate if needed.",
+    "Practice sequencing: Thoughtseize -> land -> spell/land -> counterspell/removal -> Kaheera."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, uncounterable threats if available, or cast spells in response to their counterspells (e.g., Thoughtseize on their counter, or use Consult to dig for a way around). Cast multiple spells in a chain to force multiple counters, and prioritize combat damage and triggered abilities that do not go on the stack.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Thoughtseize their ramp pieces early. Use counterspells to stop key spells. If they get ahead, use removal on their mana sources or threats. Consult can help dig for answers faster than they can cast, but hold up interaction to stop their finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize cheap counterspells and removal. Thoughtseize their early threats. Use Consult sparingly; hold up mana for interaction. Stabilize with lifelink/vigilance creatures or planeswalkers if available, then transition to Kaheera. Do not overextend into sweepers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card draw. Use Thoughtseize to disrupt their game plan. Cast Kaheera when they run out of counterspells. Use Consult to dig for answers or wincons. Pressure with threats to force them to use resources, and track their hand size to know when they are vulnerable.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the hand war. Thoughtseize their counterspells and draw spells. Use Consult to dig for Kaheera or additional answers. Play around their counterspells by casting spells in response to their interaction. Prioritize keeping hand size and mana open for counters, and be willing to trade resources to gain a slight advantage.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for discard outlets (Golgari), token generators (Company, Greasefang), and spell chains (Prowess, Niv).",
+    "Note when opponents play lands out of order, which often signals a specific turn-3/4 play.",
+    "Track graveyard size for graveyard-based wincons and monitor hand size to anticipate when they are out of answers."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/pioneer.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

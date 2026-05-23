@@ -1,0 +1,153 @@
+{
+  "archetype": "Kethis Combo",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/kethis-combo.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Agatha's Soul Cauldron"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Emry, Lurker of the Loch"
+    },
+    {
+      "qty": 2,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Gran-Gran"
+    },
+    {
+      "qty": 3,
+      "name": "Grinding Station"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Jace, the Perfected Mind"
+    },
+    {
+      "qty": 4,
+      "name": "Kethis, the Hidden Hand"
+    },
+    {
+      "qty": 1,
+      "name": "Lush Portico"
+    },
+    {
+      "qty": 4,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 4,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Amber"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 4,
+      "name": "Plaza of Heroes"
+    },
+    {
+      "qty": 2,
+      "name": "Sewer-veillance Cam"
+    },
+    {
+      "qty": 1,
+      "name": "Skateboard"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 4,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi, Time Raveler"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 3,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 2,
+      "name": "Drannith Magistrate"
+    },
+    {
+      "qty": 1,
+      "name": "Gemstone Caverns"
+    },
+    {
+      "qty": 1,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 2,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 2,
+      "name": "Teferi, Time Raveler"
+    },
+    {
+      "qty": 1,
+      "name": "The Meathook Massacre"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "archetype": "Ephemerate Tron",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/ephemerate-tron.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 3,
+      "name": "Bonder's Ornament"
+    },
+    {
+      "qty": 1,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 1,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 2,
+      "name": "Crop Rotation"
+    },
+    {
+      "qty": 1,
+      "name": "Crystal Grotto"
+    },
+    {
+      "qty": 2,
+      "name": "Energy Refractor"
+    },
+    {
+      "qty": 1,
+      "name": "Ephemerate"
+    },
+    {
+      "qty": 3,
+      "name": "Expedition Map"
+    },
+    {
+      "qty": 2,
+      "name": "Ghostly Flicker"
+    },
+    {
+      "qty": 1,
+      "name": "Heritage Reclamation"
+    },
+    {
+      "qty": 2,
+      "name": "Impulse"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 3,
+      "name": "Mnemonic Wall"
+    },
+    {
+      "qty": 1,
+      "name": "Moment's Peace"
+    },
+    {
+      "qty": 3,
+      "name": "Mulldrifter"
+    },
+    {
+      "qty": 1,
+      "name": "Murmuring Mystic"
+    },
+    {
+      "qty": 2,
+      "name": "Mystical Teachings"
+    },
+    {
+      "qty": 2,
+      "name": "Prohibit"
+    },
+    {
+      "qty": 4,
+      "name": "Prophetic Prism"
+    },
+    {
+      "qty": 1,
+      "name": "Pulse of Murasa"
+    },
+    {
+      "qty": 1,
+      "name": "Rimewood Falls"
+    },
+    {
+      "qty": 1,
+      "name": "Stonehorn Dignitary"
+    },
+    {
+      "qty": 1,
+      "name": "Unfathomable Truths"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Mine"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Power Plant"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Tower"
+    },
+    {
+      "qty": 2,
+      "name": "Visionary's Dance"
+    },
+    {
+      "qty": 1,
+      "name": "Volatile Fjord"
+    },
+    {
+      "qty": 2,
+      "name": "Weather the Storm"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Ancient Grudge"
+    },
+    {
+      "qty": 1,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 1,
+      "name": "Dinrova Horror"
+    },
+    {
+      "qty": 4,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Moment's Peace"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Remora"
+    },
+    {
+      "qty": 4,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Rolling Thunder"
+    }
+  ]
+}

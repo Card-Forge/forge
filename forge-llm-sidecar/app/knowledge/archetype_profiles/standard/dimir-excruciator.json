@@ -1,0 +1,515 @@
+{
+  "schema_version": 1,
+  "name": "Dimir Excruciator",
+  "format": "standard",
+  "colors": [
+    "U",
+    "B"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Dimir Excruciator is a Combo-Control archetype that wins by reducing both players' libraries to six cards with Doomsday Excruciator, then milling the opponent to zero with Restless Reef. It supplements this primary combo with cheap disruption, Deceit copies via Superior Spider-Man, and flexible removal to handle aggressive and control strategies. The deck relies on early discard to enable faster combo turns and deep draw spells like Stock Up to find key pieces.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 10,
+      "cards": [
+        "Deceit",
+        "Superior Spider-Man",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 17,
+      "cards": [
+        "Deadly Cover-Up",
+        "Decorum Dissertation",
+        "Doomsday Excruciator",
+        "Insatiable Avarice",
+        "Oildeep Gearhulk",
+        "Quantum Riddler",
+        "Stock Up",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 6
+    },
+    "dig_draw": {
+      "target_count": 12,
+      "cards": [
+        "Deadly Cover-Up",
+        "Decorum Dissertation",
+        "Doomsday Excruciator",
+        "Insatiable Avarice",
+        "Stock Up",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 2,
+      "cards": [
+        "Insatiable Avarice"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 19,
+      "cards": [
+        "Deceit",
+        "Doomsday Excruciator",
+        "Insatiable Avarice",
+        "Restless Reef",
+        "Superior Spider-Man",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 29,
+      "cards": [
+        "Deceit",
+        "Doomsday Excruciator",
+        "Duress",
+        "Emeritus of Ideation",
+        "Oildeep Gearhulk",
+        "Qarsi Revenant",
+        "Quantum Riddler",
+        "Requiting Hex",
+        "Sunderflock",
+        "Superior Spider-Man"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 10
+    },
+    "removal": {
+      "target_count": 12,
+      "cards": [
+        "Bitter Triumph",
+        "Day of Black Sun",
+        "Deadly Cover-Up",
+        "Ghost Vacuum",
+        "Requiting Hex"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 1
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Day of Black Sun",
+        "Deadly Cover-Up",
+        "Ghost Vacuum"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": [
+        "Flashfreeze"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 5,
+      "cards": [
+        "Cavern of Souls",
+        "Oildeep Gearhulk"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 3
+    },
+    "discard_outlets": {
+      "target_count": 6,
+      "cards": [
+        "Bitter Triumph",
+        "Doomsday Excruciator"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 23,
+      "cards": [
+        "Deadly Cover-Up",
+        "Doomsday Excruciator",
+        "Ghost Vacuum",
+        "Insatiable Avarice",
+        "Qarsi Revenant",
+        "Restless Reef",
+        "Strategic Betrayal",
+        "Superior Spider-Man",
+        "Undercity Sewers",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 10,
+      "cards": [
+        "Deceit",
+        "Qarsi Revenant",
+        "Sunderflock",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 4
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 11,
+      "cards": [
+        "Doomsday Excruciator",
+        "Insatiable Avarice",
+        "Restless Reef",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 17,
+      "cards": [
+        "Deadly Cover-Up",
+        "Deceit",
+        "Doomsday Excruciator",
+        "Insatiable Avarice",
+        "Stock Up",
+        "Superior Spider-Man"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 24,
+      "cards": [
+        "Cavern of Souls",
+        "Gloomlake Verge",
+        "Multiversal Passage",
+        "Requiting Hex",
+        "Restless Reef",
+        "Stock Up",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 26,
+      "cards": [
+        "Cavern of Souls",
+        "Gloomlake Verge",
+        "Multiversal Passage",
+        "Restless Reef",
+        "Swamp",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.3
+  },
+  "dual_role_cards": [
+    {
+      "card": "Bitter Triumph",
+      "roles": [
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Day of Black Sun",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Cover-Up",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deceit",
+      "roles": [
+        "combo_pieces",
+        "mana_reducers",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Decorum Dissertation",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Doomsday Excruciator",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Vacuum",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gloomlake Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Insatiable Avarice",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Multiversal Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Oildeep Gearhulk",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Qarsi Revenant",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quantum Riddler",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Requiting Hex",
+      "roles": [
+        "mana_fixing",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restless Reef",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stock Up",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunderflock",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Superior Spider-Man",
+      "roles": [
+        "combo_pieces",
+        "graveyard_enablers",
+        "mana_reducers",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Winternight Stories",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_reducers",
+        "payoff_cards",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Memorize the cards Stock Up places on the bottom of your library, as they will be drawn after Doomsday Excruciator resolves.",
+    "Force the opponent to draw cards with Insatiable Avarice immediately after resolving Doomsday Excruciator to accelerate the mill win.",
+    "Prioritize discarding Doomsday Excruciator with Winternight Stories or Bitter Triumph on turns 1-2 to enable a faster combo turn.",
+    "Use Superior Spider-Man to copy Deceit early for board control, or copy Excruciator to reduce the combo to a single turn.",
+    "Common mistake: overcommitting to the board without hand resources."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap disruption like Intimidation Tactics and Requiting Hex to slow aggressive decks."
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Winternight Stories and Bitter Triumph to discard Doomsday Excruciator for future turns."
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish a clock or board presence with Deceit."
+    }
+  ],
+  "kill_priority": [
+    "Deceit",
+    "Doomsday Excruciator",
+    "Insatiable Avarice",
+    "Restless Reef",
+    "Superior Spider-Man",
+    "Winternight Stories",
+    "Deadly Cover-Up",
+    "Stock Up"
+  ],
+  "interaction_to_disrupt": [
+    "Flashfreeze",
+    "Cavern of Souls",
+    "Oildeep Gearhulk",
+    "Bitter Triumph",
+    "Day of Black Sun",
+    "Deadly Cover-Up",
+    "Ghost Vacuum",
+    "Requiting Hex"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/dimir-excruciator.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

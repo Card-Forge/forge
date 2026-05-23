@@ -1,0 +1,153 @@
+{
+  "archetype": "Esper Control",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/esper-control.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ajani, Nacatl Pariah"
+    },
+    {
+      "qty": 2,
+      "name": "Baleful Strix"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Cabal Therapy"
+    },
+    {
+      "qty": 1,
+      "name": "Erode"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 2,
+      "name": "Flow State"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 2,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 2,
+      "name": "Murktide Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 1,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 2,
+      "name": "Phelia, Exuberant Shepherd"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 1,
+      "name": "Scrubland"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 3,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi, Time Raveler"
+    },
+    {
+      "qty": 2,
+      "name": "Tundra"
+    },
+    {
+      "qty": 2,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 2,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 2,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Stony Silence"
+    },
+    {
+      "qty": 2,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 2,
+      "name": "Wrath of the Skies"
+    }
+  ]
+}

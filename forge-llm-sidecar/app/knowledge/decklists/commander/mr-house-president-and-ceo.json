@@ -1,0 +1,332 @@
+{
+  "archetype": "Mr. House, President and CEO",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/mr-house-president-and-ceo.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Attempted Murder"
+    },
+    {
+      "qty": 1,
+      "name": "Barbarian Class"
+    },
+    {
+      "qty": 1,
+      "name": "Battlemage's Bracers"
+    },
+    {
+      "qty": 1,
+      "name": "Black Market Connections"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Brazen Dwarf"
+    },
+    {
+      "qty": 1,
+      "name": "Cabaretti Courtyard"
+    },
+    {
+      "qty": 1,
+      "name": "Celebr-8000"
+    },
+    {
+      "qty": 1,
+      "name": "Chaos Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Circuits Act"
+    },
+    {
+      "qty": 1,
+      "name": "Clifftop Retreat"
+    },
+    {
+      "qty": 1,
+      "name": "Clock of Omens"
+    },
+    {
+      "qty": 1,
+      "name": "Comet, Stellar Pup"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Component Pouch"
+    },
+    {
+      "qty": 1,
+      "name": "Contraband Livestock"
+    },
+    {
+      "qty": 1,
+      "name": "Costly Plunder"
+    },
+    {
+      "qty": 1,
+      "name": "Cyberman Patrol"
+    },
+    {
+      "qty": 1,
+      "name": "Danse Macabre"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Delete"
+    },
+    {
+      "qty": 1,
+      "name": "Delina, Wild Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Demand Answers"
+    },
+    {
+      "qty": 1,
+      "name": "Depopulate"
+    },
+    {
+      "qty": 1,
+      "name": "Desolate Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Dispatch"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonskull Summit"
+    },
+    {
+      "qty": 1,
+      "name": "Hoarding Ogre"
+    },
+    {
+      "qty": 1,
+      "name": "Idol of Oblivion"
+    },
+    {
+      "qty": 1,
+      "name": "Illusionist's Bracers"
+    },
+    {
+      "qty": 1,
+      "name": "Ingenious Artillerist"
+    },
+    {
+      "qty": 1,
+      "name": "Intangible Virtue"
+    },
+    {
+      "qty": 1,
+      "name": "Iron Mastiff"
+    },
+    {
+      "qty": 1,
+      "name": "Isolated Chapel"
+    },
+    {
+      "qty": 1,
+      "name": "Jan Jansen, Chaos Crafter"
+    },
+    {
+      "qty": 1,
+      "name": "Kellogg, Dangerous Mind"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Greaves"
+    },
+    {
+      "qty": 1,
+      "name": "Lithoform Engine"
+    },
+    {
+      "qty": 1,
+      "name": "Maddening Hex"
+    },
+    {
+      "qty": 1,
+      "name": "Magda, Brazen Outlaw"
+    },
+    {
+      "qty": 1,
+      "name": "Mastermind Plum"
+    },
+    {
+      "qty": 1,
+      "name": "Mirkwood Bats"
+    },
+    {
+      "qty": 9,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Mr. House, President and CEO"
+    },
+    {
+      "qty": 1,
+      "name": "Myrkul's Edict"
+    },
+    {
+      "qty": 1,
+      "name": "Nadier's Nightblade"
+    },
+    {
+      "qty": 1,
+      "name": "Neyali, Suns' Vanguard"
+    },
+    {
+      "qty": 1,
+      "name": "Night Shift of the Living Dead"
+    },
+    {
+      "qty": 1,
+      "name": "Nomad Outpost"
+    },
+    {
+      "qty": 1,
+      "name": "Organic Extinction"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 6,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Professional Face-Breaker"
+    },
+    {
+      "qty": 1,
+      "name": "Reckless Fireweaver"
+    },
+    {
+      "qty": 1,
+      "name": "Recruitment Drive"
+    },
+    {
+      "qty": 1,
+      "name": "Revel in Riches"
+    },
+    {
+      "qty": 1,
+      "name": "Riveteers Overlook"
+    },
+    {
+      "qty": 1,
+      "name": "Ruinous Ultimatum"
+    },
+    {
+      "qty": 1,
+      "name": "Securitron Squadron"
+    },
+    {
+      "qty": 1,
+      "name": "Six-Sided Die"
+    },
+    {
+      "qty": 1,
+      "name": "Smoldering Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Steel Overseer"
+    },
+    {
+      "qty": 1,
+      "name": "Strength-Testing Hammer"
+    },
+    {
+      "qty": 7,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Sword of Hours"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Field"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Peak"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Conviction"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Hierarchy"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Indulgence"
+    },
+    {
+      "qty": 1,
+      "name": "Terramorphic Expanse"
+    },
+    {
+      "qty": 1,
+      "name": "Thunderwave"
+    },
+    {
+      "qty": 1,
+      "name": "Treasure Chest"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Puzzlebox"
+    },
+    {
+      "qty": 1,
+      "name": "Wand of Wonder"
+    },
+    {
+      "qty": 1,
+      "name": "Wyll's Reversal"
+    },
+    {
+      "qty": 1,
+      "name": "Wyll, Blade of Frontiers"
+    }
+  ],
+  "sideboard": []
+}

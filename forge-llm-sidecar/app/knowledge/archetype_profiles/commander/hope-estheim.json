@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "name": "Hope Estheim",
+  "format": "commander",
+  "colors": [
+    "U",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Establish a resilient, flying board of Spirit tokens while leveraging Hope Estheim\u2019s recursive engine to out-value opponents. The deck wins by outlasting midrange and combo decks through card advantage, flash combat tricks, and relentless pressure, while stabilizing against aggro with targeted removal and temporary board wipes.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 1,
+      "cards": [
+        "Hope Estheim"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": []
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Hope Estheim"
+      ]
+    },
+    "threats": {
+      "target_count": 2,
+      "cards": [
+        "Arcane Signet",
+        "Hope Estheim"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 1,
+      "cards": [
+        "Rhox Faithmender"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Hope Estheim",
+        "Rhox Faithmender"
+      ]
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Hope Estheim",
+        "Rhox Faithmender"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Hope Estheim",
+        "Rhox Faithmender"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Rhox Faithmender"
+      ]
+    },
+    "mana_fixing": {
+      "target_count": 1,
+      "cards": [
+        "Rhox Faithmender"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Hope Estheim",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rhox Faithmender",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: Overusing Estheim\u2019s bounce ability on your own permanents, which can disrupt your own mana base or combo.",
+    "Remember that Estheim\u2019s abilities have flash, so you can activate them in response to removal or during combat.",
+    "Rhox Faithmender is a key enabler for pumping your board and untapping lands for activations.",
+    "Watch out for graveyard hate like Rest in Peace or Leyline of the Void, which can neuter your recursion engine.",
+    "Always track opponent hand size before committing to a large board state."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Arcane Signet or a mana dork."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Ramp into Signet or play a 2-drop enabler like Rhox Faithmender or a cheap Spirit."
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize establishing mana acceleration and early board presence."
+    }
+  ],
+  "kill_priority": [
+    "Hope Estheim",
+    "Rhox Faithmender",
+    "Hope Estheim",
+    "Arcane Signet",
+    "Hope Estheim"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

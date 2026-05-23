@@ -1,0 +1,607 @@
+{
+  "schema_version": 1,
+  "name": "Mr. House, President and CEO",
+  "format": "commander",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 100,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Lithoform Engine",
+    "Mastermind Plum",
+    "Revel in Riches",
+    "Comet, Stellar Pup",
+    "Attempted Murder",
+    "Barbarian Class",
+    "Battlemage's Bracers",
+    "Brazen Dwarf"
+  ],
+  "interaction_to_disrupt": [
+    "Celebr-8000",
+    "Brazen Dwarf",
+    "Comet, Stellar Pup",
+    "Contraband Livestock",
+    "Delete",
+    "Depopulate",
+    "Ingenious Artillerist",
+    "Iron Mastiff"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "Deadly Dispute"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 9,
+      "cards": [
+        "Black Market Connections",
+        "Costly Plunder",
+        "Deadly Dispute",
+        "Demand Answers",
+        "Depopulate",
+        "Idol of Oblivion",
+        "Mastermind Plum",
+        "Strength-Testing Hammer",
+        "Treasure Chest"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 1,
+      "cards": [
+        "Path of Ancestry"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 6,
+      "cards": [
+        "Cabaretti Courtyard",
+        "Magda, Brazen Outlaw",
+        "Riveteers Overlook",
+        "Terramorphic Expanse",
+        "Treasure Chest",
+        "Vexing Puzzlebox"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Revel in Riches"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 38,
+      "cards": [
+        "Attempted Murder",
+        "Barbarian Class",
+        "Battlemage's Bracers",
+        "Brazen Dwarf",
+        "Celebr-8000",
+        "Chaos Dragon",
+        "Circuits Act",
+        "Clock of Omens",
+        "Comet, Stellar Pup",
+        "Cyberman Patrol",
+        "Delina, Wild Mage",
+        "Dispatch",
+        "Hoarding Ogre",
+        "Illusionist's Bracers",
+        "Ingenious Artillerist",
+        "Intangible Virtue",
+        "Iron Mastiff",
+        "Jan Jansen, Chaos Crafter",
+        "Kellogg, Dangerous Mind",
+        "Lightning Greaves",
+        "Magda, Brazen Outlaw",
+        "Mastermind Plum",
+        "Mirkwood Bats",
+        "Mr. House, President and CEO",
+        "Myrkul's Edict",
+        "Nadier's Nightblade",
+        "Neyali, Suns' Vanguard",
+        "Night Shift of the Living Dead",
+        "Professional Face-Breaker",
+        "Reckless Fireweaver",
+        "Recruitment Drive",
+        "Securitron Squadron",
+        "Sol Ring",
+        "Steel Overseer",
+        "Sword of Hours",
+        "Wand of Wonder",
+        "Wyll's Reversal",
+        "Wyll, Blade of Frontiers"
+      ],
+      "mainboard_count": 38,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Brazen Dwarf",
+        "Comet, Stellar Pup",
+        "Contraband Livestock",
+        "Delete",
+        "Depopulate",
+        "Ingenious Artillerist",
+        "Iron Mastiff",
+        "Maddening Hex",
+        "Organic Extinction",
+        "Path to Exile",
+        "Professional Face-Breaker",
+        "Reckless Fireweaver",
+        "Ruinous Ultimatum",
+        "Six-Sided Die",
+        "Swords to Plowshares",
+        "Talisman of Conviction",
+        "Talisman of Hierarchy",
+        "Talisman of Indulgence",
+        "Thunderwave"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Depopulate",
+        "Organic Extinction",
+        "Ruinous Ultimatum",
+        "Thunderwave"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Celebr-8000"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Demand Answers"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 3,
+      "cards": [
+        "Comet, Stellar Pup",
+        "Danse Macabre",
+        "Mastermind Plum"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Comet, Stellar Pup",
+        "Danse Macabre"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Lithoform Engine",
+        "Mastermind Plum"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Revel in Riches"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Arcane Signet",
+        "Blood Crypt",
+        "Cabaretti Courtyard",
+        "Clifftop Retreat",
+        "Command Tower",
+        "Component Pouch",
+        "Deadly Dispute",
+        "Desolate Mire",
+        "Dragonskull Summit",
+        "Hoarding Ogre",
+        "Isolated Chapel",
+        "Mastermind Plum",
+        "Nomad Outpost",
+        "Path of Ancestry",
+        "Revel in Riches",
+        "Riveteers Overlook",
+        "Smoldering Marsh",
+        "Tainted Field",
+        "Tainted Peak",
+        "Terramorphic Expanse",
+        "Vexing Puzzlebox"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 36,
+      "cards": [
+        "Blood Crypt",
+        "Cabaretti Courtyard",
+        "Clifftop Retreat",
+        "Command Tower",
+        "Desolate Mire",
+        "Dragonskull Summit",
+        "Isolated Chapel",
+        "Mountain",
+        "Nomad Outpost",
+        "Path of Ancestry",
+        "Plains",
+        "Riveteers Overlook",
+        "Smoldering Marsh",
+        "Swamp",
+        "Tainted Field",
+        "Tainted Peak",
+        "Terramorphic Expanse"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Comet, Stellar Pup"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.25
+  },
+  "dual_role_cards": [
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brazen Dwarf",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cabaretti Courtyard",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Celebr-8000",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Clifftop Retreat",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Comet, Stellar Pup",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Danse Macabre",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Dispute",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Demand Answers",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Depopulate",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Desolate Mire",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dragonskull Summit",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hoarding Ogre",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ingenious Artillerist",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Iron Mastiff",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Isolated Chapel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Magda, Brazen Outlaw",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mastermind Plum",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nomad Outpost",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Organic Extinction",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Professional Face-Breaker",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reckless Fireweaver",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Revel in Riches",
+      "roles": [
+        "mana_fixing",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Riveteers Overlook",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ruinous Ultimatum",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smoldering Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tainted Field",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tainted Peak",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Terramorphic Expanse",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thunderwave",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Treasure Chest",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vexing Puzzlebox",
+      "roles": [
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/mr-house-president-and-ceo.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

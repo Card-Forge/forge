@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early mana dorks like Llanowar Elves or Giada, Font of Hope",
       "Hands containing Bishop of Wings or early angels to establish life gain",
-      "Hands with Collected Company or Kayla's Reconstruction paired with sufficient lands and dorks"
+      "Hands with Collected Company or Kayla's Reconstruction paired with sufficient lands and dorks",
+      "Keep hands with 2-3 lands (ensuring at least one W source) and at least one early game piece: Bishop of Wings (1W), a 2-drop Angel, or a mana dork/land fetch.",
+      "Keep 3+ lands if you have a 1-drop or 2-drop."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction or life gain sources",
       "Hands with too many lands or high-cost lords without acceleration",
-      "Hands without answers to aggressive red threats like Sunspine Lynx"
+      "Hands without answers to aggressive red threats like Sunspine Lynx",
+      "Mulligan pure land hands, hands with only 3+ mana costs, or hands lacking a way to stabilize (no early flyer, removal, or lifegain)."
     ],
     "examples": [
       {
@@ -39,17 +42,33 @@
     "early_game": [
       "Play mana dorks to accelerate into Bishop of Wings and early angels",
       "Establish life gain quickly to invalidate damage-based strategies",
-      "Sideboard out mana dorks if racing is not the priority"
+      "Sideboard out mana dorks if racing is not the priority",
+      "Turn 1: Play a land, pass.",
+      "Turn 2: If you have 1W, cast Bishop of Wings to start generating 1/1 Spirit tokens and lifegain.",
+      "If you have 2W or 1GG, play a 2-drop Angel or token enabler.",
+      "Sequence lands to guarantee W on turn 1, then W/W or W/G on turn 2.",
+      "Prioritize basic lands or fetch/shock lands that can produce W early to cast Bishop of Wings on curve."
     ],
     "mid_game": [
       "Cast Collected Company or Kayla's Reconstruction to deploy multiple lords and angels",
       "Use Skyclave Apparition to lock down key aggressive threats",
-      "Trigger Resplendent Angel and Inspiring Overseer to flood the board with tokens"
+      "Trigger Resplendent Angel and Inspiring Overseer to flood the board with tokens",
+      "Reserve mana for answering key threats or casting your own Angels",
+      "avoid overextending into sweepers.",
+      "Use tokens as chump blockers to preserve your Angels.",
+      "Grind value by trading tokens for opponent's removal or blockers, and keep card advantage in hand to out-resource midrange decks.",
+      "Commit Angels when you have board presence, removal to protect them, or when you can safely trade through their answers.",
+      "Hold back if the opponent has sweepers or spot removal ready."
     ],
     "late_game": [
       "Leverage massive life totals and board presence to outvalue opponents",
       "Utilize sideboard cards like Tocasia's Welcome or Reidane, God of the Worthy against control/midrange",
-      "Maintain board control with Eiganjo, Seat of the Empire and Portable Hole"
+      "Maintain board control with Eiganjo, Seat of the Empire and Portable Hole",
+      "Righteous Valkyrie and Resplendent Angel are your primary win conditions.",
+      "Use them to close out games when you have board control or can trade through their removal.",
+      "Combine with token generation to overwhelm blockers and pressure the opponent's life total through flying and lifelink.",
+      "Go all-in when you have card advantage, the opponent is low on removal, or you can safely attack with Angels and still have blockers for their remaining threats.",
+      "Commit when you can trade your tokens for their key pieces or when you can force a favorable combat math scenario."
     ]
   },
   "key_cards": [
@@ -98,7 +117,13 @@
     "Play Bishop of Wings as early as possible to maximize life gain from subsequent angel ETBs",
     "Hold Skyclave Apparition in hand until the opponent plays Sunspine Lynx or Screaming Nemesis",
     "Sideboard Portable Hole over Collected Company in games against heavy aggro or when facing Witch's Oven",
-    "Use Kayla's Reconstruction to dig for sideboard cards like Portable Hole when needed"
+    "Use Kayla's Reconstruction to dig for sideboard cards like Portable Hole when needed",
+    "Common mistake: Overextending into sweepers without backup.",
+    "Always keep a land drop and a removal spell in hand.",
+    "Another: Forgetting to use tokens as chump blockers.",
+    "Lifelink is your best friend",
+    "use it to stabilize and drain opponents.",
+    "Watch out for graveyard recursion if the format supports it."
   ],
   "matchups": [
     {
@@ -143,6 +168,31 @@
         "Supreme Verdict",
         "Extinction Event"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats like Bishop of Wings to pressure before they can counter. Cast Angels in response to their spells if possible. Use mana dorks or ramp to cast threats at instant speed. Don't overcommit to expensive spells without backup or protection.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with tokens and lifelink to slow down their ramp. Use removal to kill their mana sources or key threats. Stabilize with board wipes and angelic blockers, then close out games before they can cast their finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize lifegain and early flyers to stabilize. Use removal on their biggest threats. Trade tokens to absorb damage. Don't overextend into combat; play defensively until you can drop a Valkyrie or Resplendent Angel to turn the tide.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with tokens and Angels. Force them to use removal on your threats. Use card advantage to out-grind them. Attack with Angels when they have no answers, and be ready to trade through their sweepers or use lifelink to stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card advantage and efficient removal. Use your Angels to pressure while trading tokens. Sideboard in targeted removal and additional Angels. Win by out-valuing them in the late game and forcing unfavorable trades.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -154,10 +204,12 @@
     "Mayhem Devil",
     "Witch's Oven",
     "Unholy Annex",
-    "Cori-Steel Cutter"
+    "Cori-Steel Cutter",
+    "Watch for sweepers (wraths), spot removal (Path, Go for the Throat), and finishers (Greasefang, Niv-Mizzet, etc.)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-selesnya-angels-2025-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T04:02:21+00:00",
     "model": "local-model",
@@ -175,6 +227,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
@@ -203,7 +273,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Collected Company and Kayla’s Reconstruction offer resilience against targeted removal by offering a two-for-one or greater, and they also enable the most explosive plays in this list."
+      "evidence_span": "Collected Company and Kayla\u2019s Reconstruction offer resilience against targeted removal by offering a two-for-one or greater, and they also enable the most explosive plays in this list."
     },
     {
       "confidence": 0.85,
@@ -229,13 +299,13 @@
       "confidence": 0.8,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Portable Hole is the main removal available in the Sideboard for Aggro... It’s worth noting that it can be found with Kayla’s Reconstruction . Therefore, it’s common to leave it instead of Collected Company in some games."
+      "evidence_span": "Portable Hole is the main removal available in the Sideboard for Aggro... It\u2019s worth noting that it can be found with Kayla\u2019s Reconstruction . Therefore, it\u2019s common to leave it instead of Collected Company in some games."
     },
     {
       "confidence": 0.6,
       "kind": "inferred",
       "source_index": 0,
-      "evidence_span": "Mana dorks speed up the casting of Collected Company and Kayla’s Reconstruction... They are a common side out when we know that winning on the race is not the best option."
+      "evidence_span": "Mana dorks speed up the casting of Collected Company and Kayla\u2019s Reconstruction... They are a common side out when we know that winning on the race is not the best option."
     }
   ],
   "common_threats_evidence": [
@@ -243,7 +313,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "due to the ability of Screaming Nemesis and Sunspine Lynx to “lock” life gain"
+      "evidence_span": "due to the ability of Screaming Nemesis and Sunspine Lynx to \u201clock\u201d life gain"
     },
     {
       "confidence": 0.85,
@@ -255,7 +325,7 @@
       "confidence": 0.8,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "deals with other troublesome permanents like Witch’s Oven"
+      "evidence_span": "deals with other troublesome permanents like Witch\u2019s Oven"
     },
     {
       "confidence": 0.8,

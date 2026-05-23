@@ -1,0 +1,348 @@
+{
+  "archetype": "Urza, Lord High Artificer",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/urza-lord-high-artificer.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Academy Ruins"
+    },
+    {
+      "qty": 1,
+      "name": "An Offer You Can't Refuse"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "April O'Neil, Human Element"
+    },
+    {
+      "qty": 1,
+      "name": "Basalt Monolith"
+    },
+    {
+      "qty": 1,
+      "name": "Blightsteel Colossus"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Buried Ruin"
+    },
+    {
+      "qty": 1,
+      "name": "Chrome Mox"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Cyberdrive Awakener"
+    },
+    {
+      "qty": 1,
+      "name": "Cyclonic Rift"
+    },
+    {
+      "qty": 1,
+      "name": "Efficient Construction"
+    },
+    {
+      "qty": 1,
+      "name": "Emry, Lurker of the Loch"
+    },
+    {
+      "qty": 1,
+      "name": "Encroaching Mycosynth"
+    },
+    {
+      "qty": 1,
+      "name": "Etherium Sculptor"
+    },
+    {
+      "qty": 1,
+      "name": "Everflowing Chalice"
+    },
+    {
+      "qty": 1,
+      "name": "Fabricate"
+    },
+    {
+      "qty": 1,
+      "name": "Fierce Guardianship"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Forensic Gadgeteer"
+    },
+    {
+      "qty": 1,
+      "name": "Forsaken Monument"
+    },
+    {
+      "qty": 1,
+      "name": "Foundry Inspector"
+    },
+    {
+      "qty": 1,
+      "name": "Gemstone Caverns"
+    },
+    {
+      "qty": 1,
+      "name": "Howling Mine"
+    },
+    {
+      "qty": 1,
+      "name": "Hullbreaker Horror"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroelectric Specimen"
+    },
+    {
+      "qty": 1,
+      "name": "Inventors' Fair"
+    },
+    {
+      "qty": 16,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Isochron Scepter"
+    },
+    {
+      "qty": 1,
+      "name": "Jeweled Amulet"
+    },
+    {
+      "qty": 1,
+      "name": "Karn, Legacy Reforged"
+    },
+    {
+      "qty": 1,
+      "name": "Karn, the Great Creator"
+    },
+    {
+      "qty": 1,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Drain"
+    },
+    {
+      "qty": 1,
+      "name": "Mechanized Production"
+    },
+    {
+      "qty": 1,
+      "name": "Memnite"
+    },
+    {
+      "qty": 1,
+      "name": "Minamo, School at Water's Edge"
+    },
+    {
+      "qty": 1,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 1,
+      "name": "Mishra's Workshop"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Amber"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 1,
+      "name": "Mycosynth Lattice"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Forge"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Remora"
+    },
+    {
+      "qty": 1,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 1,
+      "name": "Ornithopter"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Padeem, Consul of Innovation"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Sai, Master Thopterist"
+    },
+    {
+      "qty": 1,
+      "name": "Sea Gate Restoration"
+    },
+    {
+      "qty": 1,
+      "name": "Seat of the Synod"
+    },
+    {
+      "qty": 1,
+      "name": "Sensei's Divining Top"
+    },
+    {
+      "qty": 1,
+      "name": "Shimmer Myr"
+    },
+    {
+      "qty": 1,
+      "name": "Simulacrum Synthesizer"
+    },
+    {
+      "qty": 1,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spellbook"
+    },
+    {
+      "qty": 1,
+      "name": "Static Orb"
+    },
+    {
+      "qty": 1,
+      "name": "Steel Overseer"
+    },
+    {
+      "qty": 1,
+      "name": "Tezzeret the Seeker"
+    },
+    {
+      "qty": 1,
+      "name": "The One Ring"
+    },
+    {
+      "qty": 1,
+      "name": "The Reality Chip"
+    },
+    {
+      "qty": 1,
+      "name": "Thopter Spy Network"
+    },
+    {
+      "qty": 1,
+      "name": "Thought Monitor"
+    },
+    {
+      "qty": 1,
+      "name": "Thoughtcast"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Treasure Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Tribute Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Trinisphere"
+    },
+    {
+      "qty": 1,
+      "name": "Trinket Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Trophy Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Unstoppable Plan"
+    },
+    {
+      "qty": 1,
+      "name": "Unwinding Clock"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Bauble"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Urza, Lord High Artificer"
+    },
+    {
+      "qty": 1,
+      "name": "Uthros, Titanic Godcore"
+    },
+    {
+      "qty": 1,
+      "name": "Vedalken Archmage"
+    },
+    {
+      "qty": 1,
+      "name": "Walking Ballista"
+    },
+    {
+      "qty": 1,
+      "name": "Welding Jar"
+    },
+    {
+      "qty": 1,
+      "name": "Winter Orb"
+    }
+  ],
+  "sideboard": []
+}

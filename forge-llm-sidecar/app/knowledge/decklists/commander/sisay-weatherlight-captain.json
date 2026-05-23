@@ -1,0 +1,408 @@
+{
+  "archetype": "Sisay, Weatherlight Captain",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/sisay-weatherlight-captain.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Aminatou, the Fateshifter"
+    },
+    {
+      "qty": 1,
+      "name": "An Offer You Can't Refuse"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Bloom Tender"
+    },
+    {
+      "qty": 1,
+      "name": "Borne Upon a Wind"
+    },
+    {
+      "qty": 1,
+      "name": "Brain Freeze"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Cabal Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Carpet of Flowers"
+    },
+    {
+      "qty": 1,
+      "name": "Chromatic Orrery"
+    },
+    {
+      "qty": 1,
+      "name": "City of Brass"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Crop Rotation"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Rollick"
+    },
+    {
+      "qty": 1,
+      "name": "Deadpool, Trading Card"
+    },
+    {
+      "qty": 1,
+      "name": "Deathrite Shaman"
+    },
+    {
+      "qty": 1,
+      "name": "Deflecting Swat"
+    },
+    {
+      "qty": 1,
+      "name": "Delighted Halfling"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Consultation"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Derevi, Empyrial Tactician"
+    },
+    {
+      "qty": 1,
+      "name": "Diabolic Intent"
+    },
+    {
+      "qty": 1,
+      "name": "Drannith Magistrate"
+    },
+    {
+      "qty": 1,
+      "name": "Elvish Spirit Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Emiel the Blessed"
+    },
+    {
+      "qty": 1,
+      "name": "Enduring Vitality"
+    },
+    {
+      "qty": 1,
+      "name": "Enlightened Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Esper Sentinel"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Fierce Guardianship"
+    },
+    {
+      "qty": 1,
+      "name": "Flawless Maneuver"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Gamble"
+    },
+    {
+      "qty": 1,
+      "name": "Gemstone Caverns"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Green Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Ignoble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Imperial Seal"
+    },
+    {
+      "qty": 1,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 1,
+      "name": "Ioreth of the Healing House"
+    },
+    {
+      "qty": 1,
+      "name": "Kinnan, Bonder Prodigy"
+    },
+    {
+      "qty": 1,
+      "name": "Kutzil, Malamet Exemplar"
+    },
+    {
+      "qty": 1,
+      "name": "Lotho, Corrupt Shirriff"
+    },
+    {
+      "qty": 1,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 1,
+      "name": "Louisoix's Sacrifice"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Marvin, Murderous Mimic"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Amber"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Remora"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Rhythm"
+    },
+    {
+      "qty": 1,
+      "name": "Necropotence"
+    },
+    {
+      "qty": 1,
+      "name": "Noble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Ragavan, Nimble Pilferer"
+    },
+    {
+      "qty": 1,
+      "name": "Ranger-Captain of Eos"
+    },
+    {
+      "qty": 1,
+      "name": "Redirect Lightning"
+    },
+    {
+      "qty": 1,
+      "name": "Relic of Legends"
+    },
+    {
+      "qty": 1,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Selvala, Heart of the Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Sevinne's Reclamation"
+    },
+    {
+      "qty": 1,
+      "name": "Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Simian Spirit Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Sisay, Weatherlight Captain"
+    },
+    {
+      "qty": 1,
+      "name": "Smothering Tithe"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Springleaf Drum"
+    },
+    {
+      "qty": 1,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Pact"
+    },
+    {
+      "qty": 1,
+      "name": "Talon Gates of Madara"
+    },
+    {
+      "qty": 1,
+      "name": "Tataru Taru"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 1,
+      "name": "Tinder Wall"
+    },
+    {
+      "qty": 1,
+      "name": "Tyvar, Jubilant Brawler"
+    },
+    {
+      "qty": 1,
+      "name": "Underworld Breach"
+    },
+    {
+      "qty": 1,
+      "name": "Vampiric Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Foothills"
+    },
+    {
+      "qty": 1,
+      "name": "Worldly Tutor"
+    }
+  ],
+  "sideboard": []
+}

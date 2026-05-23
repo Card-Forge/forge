@@ -13,11 +13,15 @@
     "keep_criteria": [
       "red land",
       "Cleansing Wildfire",
-      "Preordain"
+      "Preordain",
+      "Keep hands with 2-3 lands, a turn-1 or turn-2 land, and at least one of: Ephemerate, Lorien Revealed, Counterspell, or a cheap bounce target/creature.",
+      "Keep hands that can sequence into a turn-2 Lorien or turn-2 Ephemerate.",
+      "Prioritize hands with 2 lands and 3+ spells if you have a turn-1 land."
     ],
     "mulligan_criteria": [
       "hands with few lands",
-      "hands without answers"
+      "hands without answers",
+      "Mulligan on 3+ lands with no early interaction or combo pieces, hands with only high-cost spells, or hands lacking a way to protect your combo."
     ],
     "examples": [
       {
@@ -39,17 +43,33 @@
     "early_game": [
       "Prioritize keeping red land and Cleansing Wildfire",
       "Use Preordain to find answers",
-      "Play patiently and avoid aggressive early plays"
+      "Play patiently and avoid aggressive early plays",
+      "Turn 1: Play a land, optionally cast a cheap cantrip or hold up mana for interaction.",
+      "Turn 2: Cast Lorien Revealed if you have a land, or cast Ephemerate if you have a land and a bounce target.",
+      "Sequence lands to ensure you can hit your 2-drop and 3-drop turns.",
+      "If opening with Lorien, play land, cast Lorien, and hold up Ephemerate next turn.",
+      "If opening with Ephemerate, play land, cast Ephemerate, and hold up Lorien or a creature/land that can be bounced."
     ],
     "mid_game": [
       "Control the board by removing key threats",
       "Set up the Archaeomancer and Ephemerate lock",
-      "Use removal like Lightning Bolt and Abrade efficiently"
+      "Use removal like Lightning Bolt and Abrade efficiently",
+      "Preserve mana for counterspells and bounce effects",
+      "never overcommit to the board without protection.",
+      "Use the Lorien + Ephemerate loop for card advantage and board wipes, but track opponent's interaction to avoid dead mana.",
+      "Manage your hand by keeping answers until you know what the opponent is doing.",
+      "Graveyard management is secondary unless facing graveyard-dependent decks.",
+      "Commit threats only when you have protection (counterspell, bounce, or a resolved loop)."
     ],
     "late_game": [
       "Generate massive card advantage with Archaeomancer",
       "Out-resource the opponent to secure the lock",
-      "Win with token swarms or monarch"
+      "Win with token swarms or monarch",
+      "The Lorien Revealed + Ephemerate infinite mana loop is the primary win condition, allowing you to cast multiple spells, board wipes, or finish with Skred.",
+      "Skred can also close games quickly if you can bounce it for extra damage or cast it uncounterably.",
+      "Use repeated ETB triggers from bounced permanents to overwhelm opponents.",
+      "Go all-in when you have protection (counterspell, bounce, or a resolved loop), the opponent is tapped out, or you can close the game before they can interact.",
+      "Commit to the loop when you have enough mana to generate card advantage and board control, and when you've tracked that the opponent lacks sweepers or counterspells."
     ]
   },
   "key_cards": [
@@ -103,7 +123,12 @@
     "Activate Relic of Progenitus every turn to prevent Gurmag from resolving",
     "Resolve Mulldrifter to stop faeries and gain card advantage",
     "Use Dust to Dust early in Boros matchups to remove artifact lands",
-    "Prioritize red land and Cleansing Wildfire in opening hand"
+    "Prioritize red land and Cleansing Wildfire in opening hand",
+    "Common mistakes include overcommitting to the board without protection, misplaying the Lorien + Ephemerate loop, and failing to track opponent's interaction.",
+    "Unique interaction: Ephemerate can bounce itself to trigger Lorien repeatedly, generating infinite mana.",
+    "Watch for opponent's graveyard hate if they run it.",
+    "Format-specific rules may apply, so always check the banned list and format rules.",
+    "Practice stack interactions and timing to maximize your combo potential."
   ],
   "matchups": [
     {
@@ -149,6 +174,31 @@
         "bait",
         "risky plays"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Sequence spells to trade counterspells, using cheap, uncounterable threats or bounce effects to bypass counterspells. Target permanents already on the battlefield to avoid stack interaction. Use the Lorien loop to generate enough value to out-resource their counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure and use counterspells to stop key ramp spells. Bounce their mana sources if possible. Close games quickly with Skred before they can stabilize. Use the Lorien loop to draw into answers and out-value their ramp.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with counterspells and bounce effects. Use the Lorien loop to draw into answers and stabilize the board. Don't overcommit to the board. Use Skred to pressure their life total while you set up your combo.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card draw and bounce effects. Use Skred to pressure their life total while they are locked down. Force them to use resources on your threats, then close the game with the Lorien loop or repeated ETB triggers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by using counterspells to protect your combo and disrupt theirs. Bounce their Lorien or Ephemerate to break their loop. Win by out-resourcing, closing faster, or forcing them to make mistakes in the stack.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -158,10 +208,14 @@
     "Gurmag",
     "Slippery Bogle",
     "hexproof creatures",
-    "indestructible artifact lands"
+    "indestructible artifact lands",
+    "Watch for sweepers (e.g., Wrath of God, Damnation, Cruel Ultimatum), counterspells, and graveyard hate.",
+    "Note when opponents tap out for big spells or combo pieces.",
+    "Track if they have discard or hand disruption."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-jeskai-ephemerate-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T09:29:11+00:00",
     "model": "local-model",
@@ -179,6 +233,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

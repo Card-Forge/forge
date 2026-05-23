@@ -1,0 +1,117 @@
+{
+  "archetype": "Bant Gearhulk",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/bant-gearhulk.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Appa, Steadfast Guardian"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 4,
+      "name": "Bloom Tender"
+    },
+    {
+      "qty": 4,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 4,
+      "name": "Botanical Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Brightglass Gearhulk"
+    },
+    {
+      "qty": 4,
+      "name": "Commune with Beavers"
+    },
+    {
+      "qty": 1,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Hushwood Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Mockingbird"
+    },
+    {
+      "qty": 3,
+      "name": "Nature's Rhythm"
+    },
+    {
+      "qty": 2,
+      "name": "Nurturing Pixie"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 4,
+      "name": "Sewer-veillance Cam"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Stormchaser's Talent"
+    },
+    {
+      "qty": 4,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Willowrush Verge"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Agatha's Soul Cauldron"
+    },
+    {
+      "qty": 2,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 3,
+      "name": "Erode"
+    },
+    {
+      "qty": 1,
+      "name": "Meltstrider's Resolve"
+    },
+    {
+      "qty": 4,
+      "name": "Sage of the Skies"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    }
+  ]
+}

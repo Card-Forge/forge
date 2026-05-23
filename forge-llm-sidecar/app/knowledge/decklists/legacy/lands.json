@@ -1,0 +1,145 @@
+{
+  "archetype": "Lands",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/lands.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 3,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Crop Rotation"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Depths"
+    },
+    {
+      "qty": 3,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Expedition Map"
+    },
+    {
+      "qty": 4,
+      "name": "Exploration"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Quarter"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 4,
+      "name": "Life from the Loam"
+    },
+    {
+      "qty": 4,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 1,
+      "name": "Maze of Ith"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Diamond"
+    },
+    {
+      "qty": 3,
+      "name": "Once Upon a Time"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Sejiri Steppe"
+    },
+    {
+      "qty": 1,
+      "name": "Skateboard"
+    },
+    {
+      "qty": 1,
+      "name": "The Tabernacle at Pendrell Vale"
+    },
+    {
+      "qty": 4,
+      "name": "Thespian's Stage"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 4,
+      "name": "Yavimaya, Cradle of Growth"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 1,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 2,
+      "name": "Endurance"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Icetill Explorer"
+    },
+    {
+      "qty": 2,
+      "name": "Not of This World"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    }
+  ]
+}

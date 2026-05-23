@@ -1,0 +1,189 @@
+{
+  "archetype": "Oath of Druids",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/oath-of-druids.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancestral Recall"
+    },
+    {
+      "qty": 4,
+      "name": "Atraxa, Grand Unifier"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 2,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 3,
+      "name": "Flow State"
+    },
+    {
+      "qty": 2,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Forbidden Orchard"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Gaea's Blessing"
+    },
+    {
+      "qty": 1,
+      "name": "Gitaxian Probe"
+    },
+    {
+      "qty": 1,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 1,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 4,
+      "name": "Oath of Druids"
+    },
+    {
+      "qty": 1,
+      "name": "Oko, Thief of Crowns"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 3,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 3,
+      "name": "Show and Tell"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 1,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Time Walk"
+    },
+    {
+      "qty": 3,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 2,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 1,
+      "name": "Vampiric Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 1,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Dismember"
+    },
+    {
+      "qty": 1,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Null Rod"
+    },
+    {
+      "qty": 4,
+      "name": "Ravenous Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Serra's Emissary"
+    },
+    {
+      "qty": 1,
+      "name": "The Tabernacle at Pendrell Vale"
+    },
+    {
+      "qty": 1,
+      "name": "Thoughtseize"
+    }
+  ]
+}

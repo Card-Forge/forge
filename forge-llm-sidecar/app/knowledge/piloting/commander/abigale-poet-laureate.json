@@ -1,0 +1,126 @@
+{
+  "archetype": "Abigale, Poet Laureate",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Cast noncreature spells to generate a swarm of 1/1 flying Spirits, using them to block, attack, or sacrifice for card advantage. Win by overwhelming opponents with board presence and out-drawing them through spell synergy, particularly against spell-heavy combo and token/artifact archetypes.",
+  "win_conditions": [
+    "Abigale + token swarm, or a big removal/wipe to clear the board and attack with flying Spirits.",
+    "Commander damage is also viable.",
+    "Use card draw to find finishers when needed."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, Abigale or early token generators (Lecturing Scornmage/Scolding Administrator), and at least one cheap noncreature spell (cantrip, removal, or tutor).",
+      "Prioritize hands that can cast a noncreature spell on turn 1 or 2."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have no lands, only expensive spells, or no way to generate initial value."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cheap cantrip or removal to trigger token generation.",
+      "Turn 2: Develop board with another land + spell, or play a Scornmage/Administrator to stabilize.",
+      "Sequence lands to ensure you can cast your first noncreature spell on curve.",
+      "Use early tokens to block aggressively or trade into opponent's threats."
+    ],
+    "mid_game": [
+      "Prioritize casting noncreature spells over attacking with tokens unless necessary.",
+      "Use Spirit sacrifice for card draw when you're low on resources or facing a threat.",
+      "Manage mana to ensure you can respond to threats while maintaining spell flow.",
+      "Avoid overcommitting to the board without card advantage.",
+      "Commit threats when you have card advantage or removal to handle responses.",
+      "Hold back if you're vulnerable to board wipes or if you need to preserve Abigale for late-game value.",
+      "Use flying Spirits to control the air and force unfavorable blocks."
+    ],
+    "late_game": [
+      "Abigale + token swarm, or a big removal/wipe to clear the board and attack with flying Spirits.",
+      "Commander damage is also viable.",
+      "Use card draw to find finishers when needed.",
+      "Go all-in when you have card advantage, opponent is low on removal, or you can safely attack with multiple flying Spirits without risking Abigale.",
+      "Commit when you can trade tokens for value or close the game."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Abigale, Poet Laureate",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Lecturing Scornmage",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Scolding Administrator",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Abigale's ability triggers on cast, not on resolution, so it works with instant-speed spells.",
+    "Synergizes well with cheap cantrips and removal.",
+    "Avoid casting too many spells in a single turn if you can't follow up, as it leaves you vulnerable to wipes.",
+    "Common mistake: forgetting to sacrifice Spirits for draw when you're low on resources.",
+    "Unique interaction: Sacrificing a Spirit for draw can be done in response to a removal spell to replace it."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "B/W lacks hard counters, so use cheap, efficient spells, split casts, or sacrifice tokens to draw into answers. Use Thoughtseize/Duress to remove key counterspells. Cast spells in response to counters or use instant-speed cantrips to maintain pressure.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use removal on mana dorks, and don't overcommit to the board. Use board wipes to reset. Force them to interact with your board while they develop mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal and board wipes. Use flying Spirits to block efficiently. Protect Abigale from early aggression. Trade tokens for their threats and slow the game down.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with spell synergy, use card draw to out-value them, and threaten with flying Spirits. Don't let them stabilize with cheap removal. Force them to use interaction on your spells while you build a board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value exchange is key. Use targeted removal on their Abigale or key engines. Prioritize card draw and board presence. Protect your commander. Win by out-resolving them in spell wars and trading efficiently.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes, targeted removal on Abigale, and opponent's mana sources.",
+    "Key tells: Opponent tapping for multiple colors often signals a big spell or wipe.",
+    "Track how many noncreature spells they've cast to anticipate their board state and plan your sacrifices accordingly."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

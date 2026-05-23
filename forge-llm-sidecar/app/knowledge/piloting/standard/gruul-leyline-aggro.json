@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with one- or two-drops",
       "Leyline of Resonance paired with early creatures",
-      "Hands containing Slickshot Show-Off for immediate tempo"
+      "Hands containing Slickshot Show-Off for immediate tempo",
+      "Keep hands with 2-3 lands, at least one Leyline of Resonance (if opening with three copies), and 2+ cheap creatures or pump spells."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays",
       "Heavy hands with only three-drops or higher",
-      "Hands missing Leyline of Resonance in aggressive matchups"
+      "Hands missing Leyline of Resonance in aggressive matchups",
+      "Mulligan if you have zero to one lands, only high-cost threats, or no early game interaction/pump spells."
     ],
     "examples": []
   },
@@ -25,17 +27,32 @@
     "early_game": [
       "Play Leyline of Resonance as soon as mana allows",
       "Deploy Slickshot Show-Off to apply immediate pressure and trade",
-      "Attack with available creatures to establish a clock"
+      "Attack with available creatures to establish a clock",
+      "Turn 1: Play a land, cast a cheap creature or mana accelerator.",
+      "Turn 2: Drop a second land, cast a pump spell or second creature.",
+      "If Leyline is in your opening hand, play it immediately to establish the board state.",
+      "Sequence lands to ensure you can cast your turn-2/3 threats without flooding.",
+      "Prioritize playing creatures that can attack or set up Slickshot/Emberheart targets."
     ],
     "mid_game": [
       "Drop Emberheart Challenger to clear blockers or pump stats via fighting",
       "Flood the board with additional creatures to maximize resonance scaling",
-      "Prioritize trading efficiently to keep attackers alive"
+      "Prioritize trading efficiently to keep attackers alive",
+      "Conserve mana for pump spells and protection.",
+      "Don't overextend into sweepers.",
+      "Use graveyard strategically if cards interact with it, but prioritize hand resources for combat tricks.",
+      "Commit threats when you have pump spells or protection ready.",
+      "Hold back if the opponent has potential sweepers or heavy removal.",
+      "Use Slickshot Show-Off to copy pump spells on your biggest threats to swing for lethal or stabilize."
     ],
     "late_game": [
       "Commit the entire board to combat as creatures become unblockable",
       "Use Challenger's fight ability to remove late-game threats",
-      "Close out quickly before opponent can assemble a win condition"
+      "Close out quickly before opponent can assemble a win condition",
+      "Leyline of Resonance + multiple pumped creatures, often amplified by Slickshot Show-Off or Emberheart Challenger copying a massive pump spell.",
+      "Direct damage spells to close out.",
+      "When you have Leyline resolved, enough mana for a pump + attack, and the opponent has no sweepers or targeted removal in hand.",
+      "Go all-in if you can swing for lethal or leave them at 0-1 life."
     ]
   },
   "key_cards": [
@@ -59,7 +76,12 @@
     "Drop Leyline of Resonance before playing multiple creatures to maximize cumulative buffs",
     "Hold Slickshot Show-Off if you suspect a board wipe, otherwise play it immediately for tempo",
     "Use Emberheart Challenger's fight ability after Leyline is active to create massive combat math",
-    "Prioritize attacking with the largest creatures to force difficult blocks"
+    "Prioritize attacking with the largest creatures to force difficult blocks",
+    "Leyline of Resonance must be in your opening hand to start in play",
+    "otherwise, it's a sideboard card.",
+    "Slickshot Show-Off and Emberheart Challenger synergize best when you have a specific pump spell or ability to copy\u2014plan your mana accordingly.",
+    "Avoid overcommitting to the board without protection, as control decks can sweep.",
+    "Watch for format-specific hate cards that target Leyline or creature types."
   ],
   "matchups": [
     {
@@ -97,16 +119,35 @@
         "Key combo pieces",
         "Protection spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap threats to force counter decisions. Copy pump spells with Emberheart/Slickshot to bypass counters. Use direct damage to pressure through.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply maximum early pressure. Don't let them stabilize. Use spot removal on key ramp creatures. Leyline makes your threats resilient to their late-game finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win on combat math. Prioritize keeping Leyline. Use additional pump spells and removal to out-value. Track their hand for Leyline copies.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board sweepers",
     "Early removal spells",
     "Land denial strategies",
-    "Stax effects that slow down your development"
+    "Stax effects that slow down your development",
+    "Watch for counterspells, sweepers, and targeted removal.",
+    "Note when opponents tap out for spells vs. creatures.",
+    "Track graveyard content if they run recursion or combo."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:51:26+00:00",
     "model": "local-model",
@@ -122,6 +163,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

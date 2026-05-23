@@ -1,0 +1,125 @@
+{
+  "archetype": "Merfolk",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/merfolk.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Aether Vial"
+    },
+    {
+      "qty": 3,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 3,
+      "name": "Daze"
+    },
+    {
+      "qty": 4,
+      "name": "Floodpits Drowner"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 2,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 9,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Lord of Atlantis"
+    },
+    {
+      "qty": 4,
+      "name": "Master of the Pearl Trident"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 4,
+      "name": "Silvergill Adept"
+    },
+    {
+      "qty": 3,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 1,
+      "name": "Svyelun of Sea and Sky"
+    },
+    {
+      "qty": 2,
+      "name": "Tide Shaper"
+    },
+    {
+      "qty": 1,
+      "name": "Tishana's Tidebinder"
+    },
+    {
+      "qty": 3,
+      "name": "True-Name Nemesis"
+    },
+    {
+      "qty": 4,
+      "name": "Vodalian Hexcatcher"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 2,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 1,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Tishana's Tidebinder"
+    },
+    {
+      "qty": 1,
+      "name": "Umezawa's Jitte"
+    },
+    {
+      "qty": 1,
+      "name": "Unlicensed Hearse"
+    }
+  ]
+}

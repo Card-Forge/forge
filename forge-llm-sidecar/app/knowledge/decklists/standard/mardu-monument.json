@@ -1,0 +1,121 @@
+{
+  "archetype": "Mardu Monument",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/mardu-monument.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Blazemire Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Bleachbone Verge"
+    },
+    {
+      "qty": 3,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 3,
+      "name": "Casey Jones, Vigilante"
+    },
+    {
+      "qty": 2,
+      "name": "Concealed Courtyard"
+    },
+    {
+      "qty": 4,
+      "name": "Cool but Rude"
+    },
+    {
+      "qty": 2,
+      "name": "Erode"
+    },
+    {
+      "qty": 4,
+      "name": "Fear of Missing Out"
+    },
+    {
+      "qty": 3,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 4,
+      "name": "Hardened Academic"
+    },
+    {
+      "qty": 3,
+      "name": "Helping Hand"
+    },
+    {
+      "qty": 4,
+      "name": "Iron-Shield Elf"
+    },
+    {
+      "qty": 4,
+      "name": "Marauding Mako"
+    },
+    {
+      "qty": 4,
+      "name": "Monument to Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 3,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 1,
+      "name": "Sunbillow Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Sundown Pass"
+    },
+    {
+      "qty": 3,
+      "name": "Tersa Lightshatter"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Authority of the Consuls"
+    },
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Qarsi Revenant"
+    },
+    {
+      "qty": 2,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 2,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 1,
+      "name": "Split Up"
+    },
+    {
+      "qty": 3,
+      "name": "Strategic Betrayal"
+    }
+  ]
+}

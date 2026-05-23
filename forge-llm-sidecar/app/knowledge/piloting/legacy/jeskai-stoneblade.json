@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with two or more lands and early interaction",
       "Hands containing Ponder or Brainstorm to dig for answers",
-      "Hands with Stoneforge Mystic and a way to play it on curve"
+      "Hands with Stoneforge Mystic and a way to play it on curve",
+      "Keep any hand with a land and a turn-1 interaction (Path to Exile, Go for the Throat, or a counterspell) or a Ponder/Brainstorm into a land.",
+      "Keep hands with Stoneforge Mystic if you have a land and a way to protect it or cast it on turn 2.",
+      "Ideal opening hand: 1-2 lands, 1-2 spells (interaction/filtering), possibly SFM."
     ],
     "mulligan_criteria": [
       "Hands lacking removal or board interaction",
       "Hands with four or more lands",
-      "Hands with no draw spells and slow mana development"
+      "Hands with no draw spells and slow mana development",
+      "Mulligan pure curve decks, hands with 3+ lands and no early plays, or hands with multiple Ponders/Brainstorms but no lands."
     ],
     "examples": []
   },
@@ -25,17 +29,33 @@
     "early_game": [
       "Prioritize playing lands and casting draw spells to find answers",
       "Hold removal for opponent's early threats rather than playing it preemptively",
-      "Play Stoneforge Mystic as soon as mana allows to begin fetching a weapon"
+      "Play Stoneforge Mystic as soon as mana allows to begin fetching a weapon",
+      "Turn 1: Play a land, cast a Ponder or Brainstorm to dig for interaction or SFM.",
+      "If you have a land and interaction, hold for potential threats.",
+      "Turn 2: Cast Stoneforge Mystic if you have a land and a way to protect it or cast it.",
+      "If you have a land and a threat/interaction, play a land and cast a spell.",
+      "Sequence lands carefully to ensure you can cast SFM on turn 2 or 3 while maintaining mana for removal."
     ],
     "mid_game": [
       "Fetch the signature weapon and use it to trade efficiently with opponent's creatures",
       "Maintain board control by answering threats before they become unmanageable",
-      "Use draw spells to find sweepers or additional removal as the board state grows"
+      "Use draw spells to find sweepers or additional removal as the board state grows",
+      "Prioritize card advantage",
+      "never cast Ponder/Brainstorm if you can avoid it, but use them to dig for answers or SFM.",
+      "Manage mana to ensure you can cast SFM on turn 2/3 while keeping open mana for removal.",
+      "Protect your graveyard from hate effects, but don't overcommit to protecting it if it means losing the board.",
+      "Commit threats only when you have sufficient interaction to protect them.",
+      "Hold back removal for key threats (Tron combo pieces, Sneak & Show creatures, Delver)."
     ],
     "late_game": [
       "Race the opponent by attacking with the weapon while holding up mana for interaction",
       "Deploy board wipes to reset the game state and gain tempo advantage",
-      "Close out the game by leveraging card advantage to find finishers or lethal sequences"
+      "Close out the game by leveraging card advantage to find finishers or lethal sequences",
+      "Emrakul, the Aeons Torn is the primary win condition",
+      "its enter-the-battlefield trigger and ongoing effect dominate the board.",
+      "Umezawa\u2019s Jitte is a secondary finisher for closing out games against control or midrange.",
+      "Go all-in when you have Emrakul on the board with protection, or when you've stabilized and have enough resources to trade up.",
+      "Commit Jitte when you can attack safely or when you have removal to clear blockers."
     ]
   },
   "key_cards": [
@@ -59,7 +79,13 @@
     "Always hold up mana for interaction when facing unknown or aggressive strategies",
     "Use Ponder before Brainstorm to ensure you are drawing into relevant answers",
     "Delay fetching the weapon if the board is heavily populated with threats you cannot remove",
-    "Play draw spells before removal to ensure you have answers for the opponent's next turn"
+    "Play draw spells before removal to ensure you have answers for the opponent's next turn",
+    "Ponder and Brainstorm are essential for consistency",
+    "never mulligan hands with them unless you have no lands or interaction.",
+    "Protect Stoneforge Mystic at all costs",
+    "if it dies, your game plan stalls.",
+    "Emrakul\u2019s enter-the-battlefield trigger is a free card draw and board wipe",
+    "use it to reset the board when you\u2019re behind."
   ],
   "matchups": [
     {
@@ -88,15 +114,34 @@
         "Counterspells targeting your draw spells or Mystic",
         "Late-game value engines that outdraw you"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Ponder/Brainstorm to dig for answers or protection. Cast SFM and threats in response to counterspells if possible. Use cheap, efficient spells that are hard to counter. Consider sideboarded counterspells or discard to disrupt their hand.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize hate bears (Rest in Peace, Leyline of Punishment) to shut down their mana acceleration. Use efficient removal to deal with their threats before they can stabilize. Protect Emrakul from their combo finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war. Use Ponder/Brainstorm to dig deeper. Protect your SFM and Emrakul with counterspells or discard. Trade efficiently and prioritize graveyard hate if recursion is a threat.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures that pressure life total early",
     "Unexpected combo pieces that win on the spot",
-    "Board wipes that clear your signature weapon and creatures"
+    "Board wipes that clear your signature weapon and creatures",
+    "Watch for Tron's mana rocks, Sneak & Show's graveyard setup, Delver's flip triggers, and Ocelot Pride's midrange threats.",
+    "Note when opponents are holding up mana for counterspells or removal.",
+    "Track graveyard contents for potential Sneak & Show or Emrakul recursion."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:49:28+00:00",
     "model": "local-model",
@@ -112,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

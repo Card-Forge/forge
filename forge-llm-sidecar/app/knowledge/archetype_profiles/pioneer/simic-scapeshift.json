@@ -1,0 +1,512 @@
+{
+  "schema_version": 1,
+  "name": "Simic Scapeshift",
+  "format": "pioneer",
+  "colors": [
+    "U",
+    "G"
+  ],
+  "strategy_type": "ramp",
+  "expected_deck_total": 60,
+  "macro_plan": "Simic Scapeshift leverages landfall synergies and massive mana acceleration to overwhelm opponents before they can stabilize. By cycling lands into the graveyard and replaying them with Scapeshift, the deck generates explosive board states and outscales most Pioneer strategies. Success relies on carefully sequencing land drops to maximize triggers while maintaining enough resources to cast high-impact threats.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 14,
+      "cards": [
+        "Heritage Reclamation",
+        "Scapeshift",
+        "Spelunking",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 6
+    },
+    "dig_draw": {
+      "target_count": 13,
+      "cards": [
+        "Arid Archway",
+        "Ephara's Dispersal",
+        "Hedge Maze",
+        "Scapeshift",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 3
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Scapeshift",
+        "Spelunking"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 9,
+      "cards": [
+        "Scapeshift",
+        "Spelunking",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 34,
+      "cards": [
+        "Aftermath Analyst",
+        "Arboreal Grazer",
+        "Lumra, Bellow of the Woods",
+        "Marang River Regent",
+        "Scapeshift",
+        "Sentinel of the Nameless City",
+        "Spelunking",
+        "Thassa's Oracle",
+        "The Wandering Minstrel",
+        "Warkite Marauder"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 9,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Ephara's Dispersal",
+        "Heritage Reclamation",
+        "Otawara, Soaring City"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 5,
+      "cards": [
+        "Lotus Field",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 3,
+      "cards": [
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "graveyard_enablers": {
+      "target_count": 35,
+      "cards": [
+        "Aftermath Analyst",
+        "Arid Archway",
+        "Echoing Deeps",
+        "Ephara's Dispersal",
+        "Hedge Maze",
+        "Heritage Reclamation",
+        "Ipnu Rivulet",
+        "Lumra, Bellow of the Woods",
+        "Port of Karfell",
+        "Scapeshift",
+        "Spelunking",
+        "Takenuma, Abandoned Mire"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 6
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 18,
+      "cards": [
+        "Aftermath Analyst",
+        "Arid Archway",
+        "Ephara's Dispersal",
+        "Lumra, Bellow of the Woods",
+        "Otawara, Soaring City",
+        "Port of Karfell",
+        "Takenuma, Abandoned Mire"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 3
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Scapeshift"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Scapeshift"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 42,
+      "cards": [
+        "Adventurer's Inn",
+        "Arid Archway",
+        "Boseiju, Who Endures",
+        "Botanical Sanctum",
+        "Castle Garenbrig",
+        "Echoing Deeps",
+        "Hedge Maze",
+        "Ipnu Rivulet",
+        "Lotus Field",
+        "Lumra, Bellow of the Woods",
+        "Otawara, Soaring City",
+        "Port of Karfell",
+        "Scapeshift",
+        "Spelunking",
+        "Starting Town",
+        "Sunken Citadel",
+        "Takenuma, Abandoned Mire"
+      ],
+      "mainboard_count": 42,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 32,
+      "cards": [
+        "Adventurer's Inn",
+        "Arid Archway",
+        "Boseiju, Who Endures",
+        "Botanical Sanctum",
+        "Castle Garenbrig",
+        "Echoing Deeps",
+        "Forest",
+        "Hedge Maze",
+        "Ipnu Rivulet",
+        "Lotus Field",
+        "Otawara, Soaring City",
+        "Port of Karfell",
+        "Starting Town",
+        "Sunken Citadel",
+        "Takenuma, Abandoned Mire"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.25
+  },
+  "dual_role_cards": [
+    {
+      "card": "Adventurer's Inn",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Aftermath Analyst",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Archway",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Botanical Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Castle Garenbrig",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Echoing Deeps",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ephara's Dispersal",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hedge Maze",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Heritage Reclamation",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ipnu Rivulet",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lotus Field",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lumra, Bellow of the Woods",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Port of Karfell",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scapeshift",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spelunking",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunken Citadel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Takenuma, Abandoned Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thassa's Oracle",
+      "roles": [
+        "dig_draw",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Three Steps Ahead",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "discard_outlets"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize putting lands into the graveyard before casting Scapeshift",
+    "Trigger landfall abilities in an order that maximizes board impact",
+    "Save Spelunking for when you need specific land types or graveyard fuel",
+    "Common mistakes: Going off too early without a finisher, overcommitting to creatures, forgetting that Scapeshift sacrifices lands (so you need enough in play/graveyard), miscounting landfall triggers.",
+    "Unique interactions: Lumra's landfall can trigger multiple times if you fetch/Scapeshift."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands consistently to build a base"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Spelunking to fetch specific land types and sacrifice lands to the graveyard"
+    },
+    {
+      "trigger": "early game",
+      "line": "Deploy early landfall creatures to apply pressure"
+    }
+  ],
+  "kill_priority": [
+    "Scapeshift",
+    "Spelunking",
+    "Thassa's Oracle",
+    "Aftermath Analyst",
+    "Arboreal Grazer",
+    "Lumra, Bellow of the Woods",
+    "Marang River Regent",
+    "Sentinel of the Nameless City"
+  ],
+  "interaction_to_disrupt": [
+    "Three Steps Ahead",
+    "Lotus Field",
+    "Thassa's Oracle",
+    "Boseiju, Who Endures",
+    "Ephara's Dispersal",
+    "Heritage Reclamation",
+    "Otawara, Soaring City"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/simic-scapeshift.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

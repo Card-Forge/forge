@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Mystic Forge paired with at least one mana rock",
       "Hands featuring Kozilek's Command with early mana sources",
-      "Hands with multiple card draw or filtering options"
+      "Hands with multiple card draw or filtering options",
+      "Keep hands with 2-3 lands, at least one mana artifact (Sol Ring, Arcane Signet, or similar), and Mystic Forge or The One Ring.",
+      "Prioritize hands that can cast Mystic Forge by turn 2-3 or The One Ring by turn 3-4."
     ],
     "mulligan_criteria": [
       "Hands lacking mana acceleration or card filtering",
       "Hands with only high-cost cards and no early plays",
-      "Hands missing interaction or combo enablers"
+      "Hands missing interaction or combo enablers",
+      "Mulligan if you have no artifact acceleration, no way to untap artifacts, or more than 3 lands with zero early plays."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Play Grim Monolith or The One Ring on turn one to establish mana advantage",
       "Use Mystic Forge to discard dead draws and thin the deck",
-      "Prioritize drawing into Kozilek's Command or additional combo pieces"
+      "Prioritize drawing into Kozilek's Command or additional combo pieces",
+      "Turn 1: Play a land, cast a cheap mana artifact.",
+      "Turn 2: Cast Mystic Forge if possible, or another mana rock.",
+      "Turn 3-4: Cast The One Ring and begin cycling artifacts.",
+      "Sequence lands to ensure you can cast key pieces without flooding.",
+      "If you draw The One Ring early, prioritize casting it to start generating mana and cycling your hand."
     ],
     "mid_game": [
       "Activate Kozilek's Command modes to generate value or clear threats",
       "Continue cycling with Mystic Forge to maintain card flow",
-      "Protect combo pieces with available white interaction"
+      "Protect combo pieces with available white interaction",
+      "Mana is your primary resource",
+      "always keep enough untapped for interaction.",
+      "Use Mystic Forge to cycle your hand and find answers or win conditions.",
+      "Don't overcommit to drawing if you need to hold up mana for Kozilek's Command or protection.",
+      "Prioritize untapping artifacts for The One Ring's draw trigger when you have excess mana.",
+      "Commit threats only when you have a clear path to the win condition or can protect them with protection spells."
     ],
     "late_game": [
       "Execute the primary combo sequence once resources are assembled",
       "Use Kozilek's Command to stabilize or finish the game",
-      "Leverage mana rocks to cast multiple spells per turn"
+      "Leverage mana rocks to cast multiple spells per turn",
+      "Commander damage, combat via a large creature, or a specific artifact combo (e.g., infinite mana into a win condition).",
+      "Assemble The One Ring + Mystic Forge to draw your deck and find the win.",
+      "Use Kozilek's Command to bounce blockers or remove key defenders.",
+      "Go all-in when you have enough mana to protect your win condition, have removed key blockers, or when opponents are tapped out.",
+      "If you can generate infinite mana/turns, commit immediately.",
+      "Don't wait for perfect conditions if you can close out the game before opponents can respond."
     ]
   },
   "key_cards": [
@@ -64,7 +84,12 @@
     "Always play mana rocks before casting Kozilek's Command to ensure you can activate multiple modes or follow up",
     "Use Mystic Forge on turns where you have excess cards in hand to maximize deck thinning",
     "Save Kozilek's Command's board-clearing mode for when opponents commit multiple threats",
-    "Prioritize drawing into combo pieces over generating immediate board presence"
+    "Prioritize drawing into combo pieces over generating immediate board presence",
+    "Common mistakes include overcommitting to drawing cards without securing the win condition, forgetting to untap artifacts for Kozilek's Command, and not tracking opponent's mana.",
+    "Unique interactions: The One Ring can be used with Mystic Forge to draw multiple cards per turn.",
+    "Kozilek's Command's bounce mode can be used to recycle artifacts for additional triggers.",
+    "Always be mindful of timing and stack management when cycling artifacts.",
+    "If playing in a format with sideboards, prioritize keeping your core combo pieces while swapping in matchup-specific hate."
   ],
   "matchups": [
     {
@@ -93,16 +118,36 @@
         "Mana acceleration",
         "Combo enablers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, uncounterable threats if possible, or cast spells during your opponent's turn. Use Kozilek's Command to bounce counterspells or protect your combo pieces. Overload with multiple threats to force them to spend multiple counters. Prioritize casting Mystic Forge and The One Ring first to establish card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use artifact destruction, and race them with your own acceleration. Don't let them stabilize; use Kozilek's Command to remove key ramp pieces. Prioritize finding your win condition quickly rather than engaging in a long game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value card advantage and resource denial. Use Kozilek's Command to bounce their combo pieces. Prioritize protecting your own Mystic Forge and One Ring. Win by out-resourcing and finding the win condition first. Track their hand size and mana to know when they're vulnerable to targeted removal.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspells that stop Kozilek's Command or combo pieces",
     "Board wipes that remove tokens and permanents",
     "Hand disruption that prevents Mystic Forge from functioning",
-    "Mana denial that hinders rock activation"
+    "Mana denial that hinders rock activation",
+    "Watch for sweepers (Wrath of God, etc.), targeted removal on your combo pieces, and opponent's mana development.",
+    "Note if they're playing counterspells or artifact hate.",
+    "Track how many cards they have in hand and whether they're going for a specific combo.",
+    "Pay attention to when they tap out for interaction versus when they're holding up for protection."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:24:23+00:00",
     "model": "local-model",
@@ -118,6 +163,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

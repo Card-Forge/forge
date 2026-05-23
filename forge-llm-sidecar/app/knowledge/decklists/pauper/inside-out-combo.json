@@ -1,0 +1,117 @@
+{
+  "archetype": "Inside Out Combo",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/inside-out-combo.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abandon Attachments"
+    },
+    {
+      "qty": 3,
+      "name": "Aurora Eidolon"
+    },
+    {
+      "qty": 3,
+      "name": "Boros Garrison"
+    },
+    {
+      "qty": 4,
+      "name": "Escape Tunnel"
+    },
+    {
+      "qty": 4,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 1,
+      "name": "Fling"
+    },
+    {
+      "qty": 2,
+      "name": "Gods Willing"
+    },
+    {
+      "qty": 4,
+      "name": "Inside Out"
+    },
+    {
+      "qty": 2,
+      "name": "Lightning Axe"
+    },
+    {
+      "qty": 4,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Prismatic Strands"
+    },
+    {
+      "qty": 4,
+      "name": "Pursue the Past"
+    },
+    {
+      "qty": 3,
+      "name": "Sandstorm Eidolon"
+    },
+    {
+      "qty": 4,
+      "name": "Sneaky Snacker"
+    },
+    {
+      "qty": 4,
+      "name": "Spirit Mascot"
+    },
+    {
+      "qty": 3,
+      "name": "Thrilling Discovery"
+    },
+    {
+      "qty": 4,
+      "name": "Tireless Tribe"
+    },
+    {
+      "qty": 4,
+      "name": "Wind-Scarred Crag"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 1,
+      "name": "Flaring Pain"
+    },
+    {
+      "qty": 1,
+      "name": "Fling"
+    },
+    {
+      "qty": 2,
+      "name": "Loran's Escape"
+    },
+    {
+      "qty": 1,
+      "name": "Prismatic Strands"
+    },
+    {
+      "qty": 4,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Suplex"
+    },
+    {
+      "qty": 2,
+      "name": "Thraben Charm"
+    }
+  ]
+}

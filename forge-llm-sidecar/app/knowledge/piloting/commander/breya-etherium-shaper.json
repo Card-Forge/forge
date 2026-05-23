@@ -1,0 +1,127 @@
+{
+  "archetype": "Breya, Etherium Shaper",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "A four-color artifact synergy deck that leverages Breya\u2019s mana generation and +1/+1 pumping abilities to fuel token swarms, combat tricks, and artifact synergies. It aims to stabilize early, out-value opponents through card advantage and board presence, and close games via combat damage or triggered abilities.",
+  "win_conditions": [
+    "Pumping a high-impact artifact (Myr Battlesphere, Thopter Assembly, or a token generator) for lethal.",
+    "Using Skullclamp + Breya to draw cards and stabilize.",
+    "Triggering win conditions via artifact ETB or combat damage."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, at least one mana rock (Sol Ring, Arcane Signet, Mind Stone), and Breya or a key synergist (Myr Battlesphere, Thopter Assembly, Skullclamp).",
+      "Prioritize hands with protection or value engines."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 4+ lands with no ramp, or 3+ rocks with no lands."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, drop a mana rock if possible.",
+      "Turn 2: Cast Breya or a synergist.",
+      "Sequence lands to ensure Breya drops by turn 2 or 3.",
+      "Tap Breya for mana and pump a key artifact to trigger ETB effects, stabilize, or set up a lethal threat.",
+      "If you have a token doublers or artifact synergist, prioritize setting those up before overcommitting to combat."
+    ],
+    "mid_game": [
+      "Hoard mana for Breya\u2019s pumping abilities and key synergies.",
+      "Avoid overcommitting to pumps without a clear plan or protection.",
+      "Keep interaction in hand for sweepers or targeted hate.",
+      "Graveyard is secondary but watch for recursion or sacrifice outlets.",
+      "Commit threats when you have protection (hexproof, indestructible, counters) or removal ready.",
+      "Hold back if facing sweepers or heavy artifact hate.",
+      "Use Breya to pump blockers for favorable trades or to block key threats."
+    ],
+    "late_game": [
+      "Pumping a high-impact artifact (Myr Battlesphere, Thopter Assembly, or a token generator) for lethal.",
+      "Using Skullclamp + Breya to draw cards and stabilize.",
+      "Triggering win conditions via artifact ETB or combat damage.",
+      "Go all-in when you have protection, the opponent lacks interaction, or pumping will trigger a win condition.",
+      "Commit when you can trade up or force a favorable combat math."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Breya, Etherium Shaper",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: over-pumping without a plan, ignoring opponent\u2019s interaction, or failing to protect Breya.",
+    "Unique interaction: Breya\u2019s abilities can target your own artifacts in response to triggers.",
+    "Use Skullclamp for card advantage.",
+    "Watch for artifact hate like Disenchant or Abrade.",
+    "Protect Breya at all costs, as it\u2019s the deck\u2019s primary engine and win condition enabler."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats. Pump artifacts in response to counters. Use cantrips to dig through counters. Favor artifact-based win cons that don\u2019t rely on casting spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure. Use removal on their mana dorks. Don\u2019t let them stabilize. Use sweepers if they get too big.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal and board wipes. Use Breya to pump blockers. Gain life if possible. Don\u2019t overextend into combat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with efficient artifacts. Use Breya to pump and trade. Dig for combo pieces or extra turns. Force them to use interaction on low-value threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value engines and card draw win. Prioritize removing their Breya or key synergists. Use targeted removal over sweepers. Control the board with efficient pumps.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath, Toxic Deluge), artifact hate (Disenchant, Abrade), and combo win conditions.",
+    "Note when opponents tap out for big spells.",
+    "Track if they\u2019re specifically targeting Breya or your key synergists."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

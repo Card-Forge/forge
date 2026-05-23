@@ -1,0 +1,125 @@
+{
+  "archetype": "Mardu Greasefang",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/mardu-greasefang.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Blackcleave Cliffs"
+    },
+    {
+      "qty": 1,
+      "name": "Bleachbone Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Blightstep Pathway"
+    },
+    {
+      "qty": 4,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 4,
+      "name": "Bloodtithe Harvester"
+    },
+    {
+      "qty": 4,
+      "name": "Concealed Courtyard"
+    },
+    {
+      "qty": 4,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 4,
+      "name": "Fear of Missing Out"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 4,
+      "name": "Greasefang, Okiba Boss"
+    },
+    {
+      "qty": 3,
+      "name": "Inspiring Vantage"
+    },
+    {
+      "qty": 1,
+      "name": "Nahiri, the Harbinger"
+    },
+    {
+      "qty": 2,
+      "name": "Overlord of the Balemurk"
+    },
+    {
+      "qty": 4,
+      "name": "Parhelion II"
+    },
+    {
+      "qty": 1,
+      "name": "Raucous Theater"
+    },
+    {
+      "qty": 2,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 2,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 2,
+      "name": "Torch the Tower"
+    },
+    {
+      "qty": 4,
+      "name": "Vanishing Verse"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Abrade"
+    },
+    {
+      "qty": 2,
+      "name": "Anger of the Gods"
+    },
+    {
+      "qty": 1,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Emptiness"
+    },
+    {
+      "qty": 3,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Nahiri, the Harbinger"
+    },
+    {
+      "qty": 1,
+      "name": "Torch the Tower"
+    }
+  ]
+}

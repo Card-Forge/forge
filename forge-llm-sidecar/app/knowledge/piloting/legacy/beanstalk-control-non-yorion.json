@@ -1,0 +1,126 @@
+{
+  "archetype": "Beanstalk Control (Non-Yorion)",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "A tempo-control hybrid that leverages early token generation and precise damage to stabilize against aggressive and combo strategies, while using card selection to out-value control and midrange opponents. It aims to win by out-resourcing the midgame and closing out games with Orcish Bowmasters pressure or incremental Saproling damage.",
+  "win_conditions": [
+    "Orcish Bowmasters trading into key creatures and dealing 1 damage per turn, combined with Saproling tokens for incremental damage.",
+    "Brainstorm to find the final answer or land to cast a win condition."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing basics for UBG mana), Brainstorm, and a turn-1 or turn-2 play (Up the Beanstalk, Orcish Bowmasters, or early removal).",
+      "Prioritize hands that can stabilize or apply early pressure."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no early plays, or hands with only non-basic lands and no cantrips/removal."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Orcish Bowmasters if possible, or hold for a turn-2 Up the Beanstalk.",
+      "Turn 2: Cast Up the Beanstalk to fetch a land and drop a Saproling, or use Brainstorm to dig for answers/land.",
+      "Sequence lands carefully to ensure UBG mana base works (e.g., Island, Swamp, Forest sequencing)."
+    ],
+    "mid_game": [
+      "Use Brainstorm sparingly to find answers or land when mana is tight.",
+      "Preserve Up the Beanstalk for critical turns to fix mana or generate a blocker.",
+      "Don't overcommit Saprolings if the board is unstable",
+      "they are chump blockers and damage sources.",
+      "Commit threats only when you have interaction ready or when the opponent has no removal.",
+      "Use Orcish Bowmasters to trade with key creatures or finish the opponent.",
+      "Hold back on casting Up the Beanstalk if you can stabilize with removal/counters."
+    ],
+    "late_game": [
+      "Orcish Bowmasters trading into key creatures and dealing 1 damage per turn, combined with Saproling tokens for incremental damage.",
+      "Brainstorm to find the final answer or land to cast a win condition.",
+      "Go all-in when you have board control, the opponent is low on life (under 10), or you've removed their primary interaction.",
+      "Commit Bowmasters and tokens to pressure, using Brainstorm to ensure you don't run out of resources."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Brainstorm",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Orcish Bowmasters",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Up the Beanstalk",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Orcish Bowmasters is a double-edged sword",
+    "it can hit you or your own creatures if not careful.",
+    "Up the Beanstalk's token is fragile but crucial for mana fixing and blocking.",
+    "Brainstorm is your lifeline",
+    "use it to dig for answers, not just to draw cards.",
+    "Watch for format-specific bans/restrictions if playing in a specific league.",
+    "Common mistake: Overusing Up the Beanstalk early without a plan, or misplacing Bowmasters damage."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Brainstorm to dig around counters, cast Up the Beanstalk in response to counters if it's a key play, or use cheap, uncounterable threats. Sequence spells to force counters on non-critical plays.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction to stop mana acceleration. Use removal on key ramp creatures. Up the Beanstalk helps fix mana to cast answers faster.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal and chump blockers. Use Orcish Bowmasters to trade with key attackers. Don't overextend; focus on surviving to turn 4-5.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply incremental pressure with tokens and Bowmasters. Use Brainstorm to find answers to their control spells. Out-value them by generating card advantage with Up the Beanstalk.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Use Brainstorm to find the right answer. Prioritize board control and track interaction. Win by out-resourcing and closing out with Bowmasters pressure when they run out of answers.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for Tron's signets/lands, Sneak & Show's graveyard setup, Delver's flip condition, and Ocelot Pride's mana acceleration.",
+    "Key tells: Opponent playing multiple lands without spells suggests Tron or ramp.",
+    "Opponent casting discard early suggests Delver or midrange.",
+    "Opponent holding up mana on your turn suggests counters or sweepers."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/legacy.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

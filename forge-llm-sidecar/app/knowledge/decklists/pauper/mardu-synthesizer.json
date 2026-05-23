@@ -1,0 +1,137 @@
+{
+  "archetype": "Mardu Synthesizer",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/mardu-synthesizer.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Ancient Den"
+    },
+    {
+      "qty": 4,
+      "name": "Black Mage's Rod"
+    },
+    {
+      "qty": 2,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 4,
+      "name": "Cleansing Wildfire"
+    },
+    {
+      "qty": 3,
+      "name": "Drossforge Bridge"
+    },
+    {
+      "qty": 4,
+      "name": "Experimental Synthesizer"
+    },
+    {
+      "qty": 4,
+      "name": "Galvanic Blast"
+    },
+    {
+      "qty": 4,
+      "name": "Glint Hawk"
+    },
+    {
+      "qty": 2,
+      "name": "Goldmire Bridge"
+    },
+    {
+      "qty": 1,
+      "name": "Great Furnace"
+    },
+    {
+      "qty": 4,
+      "name": "Kor Skyfisher"
+    },
+    {
+      "qty": 4,
+      "name": "Lembas"
+    },
+    {
+      "qty": 3,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 1,
+      "name": "Makeshift Munitions"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Navigator's Compass"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Refurbished Familiar"
+    },
+    {
+      "qty": 4,
+      "name": "Rustvale Bridge"
+    },
+    {
+      "qty": 2,
+      "name": "Seeker of the Way"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Vault of Whispers"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Arms of Hadar"
+    },
+    {
+      "qty": 3,
+      "name": "Cast into the Fire"
+    },
+    {
+      "qty": 1,
+      "name": "Electrickery"
+    },
+    {
+      "qty": 1,
+      "name": "Extract a Confession"
+    },
+    {
+      "qty": 1,
+      "name": "Gorilla Shaman"
+    },
+    {
+      "qty": 2,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 2,
+      "name": "Omen of the Dead"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Tithing Blade"
+    }
+  ]
+}

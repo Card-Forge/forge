@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Thoughtseize or Counterspell for early disruption",
       "Two-land hands with a playable creature or interaction",
-      "Hands that can resolve Psychic Frog by turn two or three"
+      "Hands that can resolve Psychic Frog by turn two or three",
+      "Keep hands with 2-3 lands, a Thoughtseize or Counterspell, and a turn-2 play.",
+      "Keep hands that can play a land, cast Thoughtseize on turn 1, and follow up with a land or interaction."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands and no interaction",
       "Hands lacking any removal or counterspell",
-      "Hands with only high-cost threats and no early game plan"
+      "Hands with only high-cost threats and no early game plan",
+      "Mulligan pure land hands, single-color mana hands, or hands with multiple Thoughtseizes but no early threats or interaction."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play Thoughtseize on turn one to strip key combo pieces or early threats",
       "Cast Psychic Frog to establish a resilient board presence and generate card advantage",
-      "Hold Counterspell for priority threats or to protect your Frog"
+      "Hold Counterspell for priority threats or to protect your Frog",
+      "Turn 1: Play a land, cast Thoughtseize on the opponent's most threatening card (prioritize combo pieces, ramp spells, or early aggro threats).",
+      "Turn 2: Play a land, cast Psychic Frog or a cheap interaction/finisher.",
+      "If facing combo, prioritize disruption over development.",
+      "Land sequencing: Prioritize fetching/playing duals/shocks if available, otherwise ensure non-basic lands enter untapped or use fetches to find basics for shock targets."
     ],
     "mid_game": [
       "Trade efficiently by using Frog's abilities to remove opponent's creatures or generate value",
       "Use Counterspell to protect your board state or punish opponent's key spells",
-      "Develop additional threats while maintaining enough mana for interaction"
+      "Develop additional threats while maintaining enough mana for interaction",
+      "Preserve mana for interaction until turn 3-4.",
+      "Don't overextend Psychic Frog into sweepers or removal.",
+      "Use Thoughtseize early to deny key pieces, then rely on card advantage from threats.",
+      "Manage graveyard by using Surgical Extraction or Rest in Peace if needed, but prioritize hand disruption.",
+      "Commit Psychic Frog when you have interaction to protect it or when the opponent has no sweepers.",
+      "Hold back if they have potential board wipes or removal."
     ],
     "late_game": [
       "Leverage accumulated card advantage to outvalue opponents",
       "Use Frog's recurring value to outlast control decks or overwhelm aggro",
-      "Close the game with efficient threats that are difficult to remove"
+      "Close the game with efficient threats that are difficult to remove",
+      "Psychic Frog applying pressure, supported by Counterspell and discard.",
+      "If the board is clear, commit to attacking with all threats.",
+      "Use Thoughtseize to remove the last piece of their combo or a key blocker.",
+      "When you have card advantage, they have no sweepers, and you can protect your threats.",
+      "If they're at 5 or less life and you have a clear path, go all-in."
     ]
   },
   "key_cards": [
@@ -59,7 +77,13 @@
     "Hold Counterspell until you see the opponent's priority threat or need to protect Psychic Frog",
     "Use Thoughtseize before casting Frog to clear the way for it to resolve safely",
     "Prioritize trading Frog's abilities against opponent's creatures to generate value while maintaining board presence",
-    "Save interaction for spells that enable the opponent's win condition or remove your key threats"
+    "Save interaction for spells that enable the opponent's win condition or remove your key threats",
+    "Common mistake: Overplaying Psychic Frog into removal without protection.",
+    "Always track opponent's mana and hand.",
+    "Psychic Frog's discard effect is a form of interaction, so don't waste it on empty hands.",
+    "Use fetch lands to optimize mana base.",
+    "Remember that Counterspell is versatile",
+    "save it for key moments."
   ],
   "matchups": [
     {
@@ -97,6 +121,21 @@
         "Removal spells",
         "Counterspells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtseize to remove counterspells early. Cast threats at end step or when they have no mana. Use multiple threats to force multiple counters. If they have heavy counter, pivot to discard and pressure.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early disruption is key. Thoughtseize their ramp spells. Use Counterspell on their big threats. Apply pressure with Psychic Frog to force them to interact instead of ramping.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing and better sequencing. Use Thoughtseize to remove their key threats or interaction. Protect your Psychic Frog with counters or discard. Win the attrition war by having better late-game threats and interaction.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -104,10 +143,15 @@
     "Board wipe spells",
     "Direct damage finishers",
     "High-impact combo pieces",
-    "Resilient late-game threats"
+    "Resilient late-game threats",
+    "Watch for combo decks setting up (e.g., Amulet Titan charging, Ruby Storm drawing cards).",
+    "Note when control decks have their main interaction up.",
+    "Track if aggro decks are holding up mana for removal.",
+    "Key tell: Opponent tapping out on turn 2-3 usually means they're setting up a combo or have a specific win condition."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:50:05+00:00",
     "model": "local-model",
@@ -123,7 +167,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

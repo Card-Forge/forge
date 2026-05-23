@@ -13,11 +13,15 @@
     "keep_criteria": [
       "Hands with early discard spells like Duress or Thoughtseize",
       "Hands containing key threats like Necromentia or Go Blank",
-      "Hands that enable early favorable trades or board control"
+      "Hands that enable early favorable trades or board control",
+      "Keep hands with 2-3 lands and 1-2 early spells.",
+      "Prioritize keeping Thoughtseize paired with a land, or a 1-drop/removal spell with a land.",
+      "Keep Bloodtithe Harvester only if you have 2 lands in hand."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction or threats",
-      "Hands that cannot apply pressure or disrupt the opponent's game plan"
+      "Hands that cannot apply pressure or disrupt the opponent's game plan",
+      "Mulligan pure land wads, 3+ lands with no early spells, or hands lacking discard/removal when facing aggressive or combo strategies."
     ],
     "examples": [
       {
@@ -38,16 +42,32 @@
   "game_plan": {
     "early_game": [
       "Play discards and removals to control the board and disrupt the opponent's hand",
-      "Seek turn 1 Duress or Thoughtseize to find key threats like Necromentia or Go Blank"
+      "Seek turn 1 Duress or Thoughtseize to find key threats like Necromentia or Go Blank",
+      "Turn 1: Play a land and cast Thoughtseize if possible, or drop a 1-drop threat/removal.",
+      "Turn 2: Develop mana to 2, cast Bloodtithe Harvester if supported, or play a 2-drop threat.",
+      "Sequence lands to guarantee 2-mana on turn 2 and 3-mana on turn 3.",
+      "Avoid tapping out for expensive threats before establishing early disruption."
     ],
     "mid_game": [
       "Deploy value threats like Graveyard Trespasser, Bonecrusher Giant, and Fable of the Mirror-Breaker",
-      "Make favorable 2-for-1 trades to gain card advantage and maintain board presence"
+      "Make favorable 2-for-1 trades to gain card advantage and maintain board presence",
+      "Conserve mana for interaction rather than overcommitting to the board.",
+      "Use discard to protect your key threats or remove opponent's answers.",
+      "Manage your graveyard by ensuring Harvester triggers for life draw and preserving Sheoldred's enter-the-battlefield ability for maximum impact.",
+      "Avoid casting multiple spells in a row if you lack removal for their response.",
+      "Commit threats when you have removal or discard to clear blockers or answer targeted removal.",
+      "Hold back if the opponent has potential sweepers or board wipes in hand or the graveyard."
     ],
     "late_game": [
       "Use Kroxa, Titan of Death's Hunger as a clock and recursion engine",
       "Deploy Planeswalkers like Chandra, Torch of Defiance to close out games",
-      "Maintain board presence to outlast opponent's resources and finish with damage"
+      "Maintain board presence to outlast opponent's resources and finish with damage",
+      "Sheoldred, the Apocalypse serves as the primary finisher, using its enter-the-battlefield sacrifice to destroy a key permanent and then applying massive late-game pressure.",
+      "Bloodtithe Harvester provides a sustainable engine of life gain and card draw to outlast opponents.",
+      "Close out games by leveraging card advantage, protecting Sheoldred, and using efficient removal to clear the path.",
+      "Go all-in when you have established card advantage, possess removal for their blockers, and have confirmed they lack sweepers in hand or graveyard.",
+      "Commit fully when Sheoldred is on the battlefield and you can protect it with discard or removal.",
+      "Push for the win when your life total is high and you can out-value their remaining resources."
     ]
   },
   "key_cards": [
@@ -98,7 +118,13 @@
     "Use Fatal Push early to remove mana dorks like Elvish Mystic and Llanowar Elves.",
     "Save Kalitas, Traitor of Ghet for last to bait opponent's removal spells.",
     "Play Den of the Bugbear only at opportune times to avoid cheap removal like March of Otherworldly Light.",
-    "Take exile removals out of opponent's hand before playing Kroxa from the graveyard."
+    "Take exile removals out of opponent's hand before playing Kroxa from the graveyard.",
+    "Common mistake: Overextending into sweepers without checking for board wipes.",
+    "Always count the opponent's mana and track their discard decisions to anticipate their next play.",
+    "Bloodtithe Harvester's life gain is crucial against aggressive decks but can be a liability against sacrifice strategies, though it remains strong in this meta.",
+    "Sheoldred's enter-the-battlefield ability acts as a pseudo-sweeper",
+    "use it wisely to remove the most threatening permanent.",
+    "Don't forget to track graveyard hate if the meta shifts, and always prioritize protecting your key finishers with discard or removal."
   ],
   "matchups": [
     {
@@ -150,6 +176,31 @@
         "Graveyard Trespasser",
         "Planeswalkers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtseize to remove counterspells from their hand. Cast threats in response to their discard or when they are tapped out. Utilize cheap, efficient threats that are difficult to counter or cast multiple threats in a single turn to force multiple counter spells. Avoid overcommitting to expensive spells when they have untapped mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Thoughtseize their mana dorks, ramp spells, or early threats. Use efficient removal on early threats to slow their acceleration. Bloodtithe Harvester's life gain is crucial to survive their early aggression. Do not overextend; stabilize with removal and grind out the game with superior card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Keep Thoughtseize for their key early threats and discard their most dangerous one-drop or two-drop. Use removal efficiently to answer their board without overcommitting. Bloodtithe Harvester stabilizes by gaining life and drawing cards, turning their aggression into a resource deficit. Do not play too many threats at once; prioritize answering their board and surviving to turn 4.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with midrange threats to force interaction. Use discard to find answers or finishers, and deny them card draw or sweepers. Do not let them stabilize with card draw; keep applying pressure and force them to use resources inefficiently. Sheoldred is excellent against control's permanents and can swing the board state dramatically.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war by prioritizing card advantage and value threats over raw power. Use Sheoldred to remove their key permanents and disrupt their game plan. Prioritize life total management and card draw to out-grind them. Sideboard in more value threats and discard effects to gain the upper hand in the matchup.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -162,10 +213,12 @@
     "Monastery Swiftspear",
     "Soul-Scar Mage",
     "Teferi, Hero of Dominaria",
-    "The Wandering Emperor"
+    "The Wandering Emperor",
+    "Watch for sweepers (e.g., Supreme Verdict, Wrath of God), targeted removal, and combo win conditions."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-rakdos-midrange-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T03:52:46+00:00",
     "model": "local-model",
@@ -183,6 +236,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
@@ -243,7 +314,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Don't skimp on Fatal Push — ideally remove mana dorks like Elvish Mystic and Llanowar Elves from the opponent."
+      "evidence_span": "Don't skimp on Fatal Push \u2014 ideally remove mana dorks like Elvish Mystic and Llanowar Elves from the opponent."
     },
     {
       "confidence": 0.9,

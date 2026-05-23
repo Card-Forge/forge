@@ -13,11 +13,14 @@
       "Hands containing acceleration and action",
       "Hands that can play Forest - Exploration - Saga on turn 1",
       "Hands threatening Marit Lage by turn 2 against decks without counters",
-      "Risky hands that can buy time and likely draw a green mana source soon"
+      "Risky hands that can buy time and likely draw a green mana source soon",
+      "Keep hands with 4-5 lands (especially fetches, duals, or signets), Mox Diamond, Life from the Loam, Exploration, or early threats like Tectonic Giant/Thrun.",
+      "Keep any hand with Mox Diamond + fetch land, or Loam + 2 lands."
     ],
     "mulligan_criteria": [
       "Hands with no action or acceleration against almost everything",
-      "Hands relying on Marit Lage when facing decks with counterspells"
+      "Hands relying on Marit Lage when facing decks with counterspells",
+      "Mulligan to hands that can play a land or rock on turn 1, or dig for consistency."
     ],
     "examples": [
       {
@@ -60,17 +63,31 @@
     "early_game": [
       "Play lands to establish a robust mana base",
       "Hold off attackers with Maze of Ith, The Tabernacle at Pendrell Vale, and Karakas",
-      "Deploy Sphere of Resistance to slow down opponent's spell casting"
+      "Deploy Sphere of Resistance to slow down opponent's spell casting",
+      "Turn 1: Play a land, cast Mox Diamond if possible, or fetch a dual.",
+      "Turn 2: Cast Life from the Loam to dig 2-3 cards, play a second land, then cast another mana rock or Exploration.",
+      "Sequence: Fetch -> Land -> Dig/Rock -> Land -> Rock/Exploration.",
+      "Prioritize acceleration over threats until turn 3-4."
     ],
     "mid_game": [
       "Control opponent's mana with Wasteland and Ghost Quarter",
       "Utilize Urza's Saga as a toolbox to find answers like Haywire Mite or Soul-Guide Lantern",
-      "Cycle lands with Crop Rotation and recover them with Life from the Loam"
+      "Cycle lands with Crop Rotation and recover them with Life from the Loam",
+      "Prioritize mana acceleration and digging over card draw.",
+      "Use Life from the Loam to dig 2-3 cards, but avoid digging into lands when you need threats.",
+      "Manage your graveyard carefully against hate, and sequence mana rocks to ensure you can cast Exploration or threats when needed.",
+      "Hold back early threats until you have 5+ mana or a clear path to victory.",
+      "Commit when you can protect your board with multiple threats or have enough mana to answer removal.",
+      "Avoid trading creatures prematurely"
     ],
     "late_game": [
       "Summon Marit Lage to secure victory",
       "Execute the Dark Depths and Thespian's Stage combo",
-      "Overwhelm opponents with continuous land production and resource advantage"
+      "Overwhelm opponents with continuous land production and resource advantage",
+      "Tectonic Giant, Thrun, Breaker of Silence, or casting Exploration with 4+ lands in play to win on the spot.",
+      "Secure these by protecting them with multiple threats or using mana rocks to cast around removal.",
+      "Go all-in when you have 5+ mana, a threat on board, and enough pressure to close the game.",
+      "Commit to Exploration only if you have 4+ lands and a guaranteed win, or if the opponent has no answers."
     ]
   },
   "key_cards": [
@@ -129,7 +146,10 @@
     "Play Forest, then Exploration, then Urza's Saga on turn 1 to accelerate land drops.",
     "Crop Rotation into a fetchland, tap it for mana, then cast Life from the Loam to recover both lands and play Sphere of Resistance.",
     "Prioritize holding off attackers with Maze of Ith or Karakas before committing to the combo.",
-    "Use Urza's Saga to exile and retrieve sideboard cards like Haywire Mite or Soul-Guide Lantern as needed."
+    "Use Urza's Saga to exile and retrieve sideboard cards like Haywire Mite or Soul-Guide Lantern as needed.",
+    "Common mistakes include overcommitting to Exploration without a finisher, mismanaging Life from the Loam by digging into lands when you need threats, and failing to mulligan aggressively for early plays.",
+    "Unique interactions: Mox Diamond can be sacrificed for 2 mana, Life from the Loam can fetch any land, and Exploration can be cast from the graveyard if supported by effects like Reanimate or Undying Evil (though rare in Modern).",
+    "Always track the opponent's graveyard and mana base to predict their answers."
   ],
   "matchups": [
     {
@@ -176,6 +196,31 @@
         "Doomsday combo",
         "Counterspells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast multiple low-cost threats to force counter trade-offs, use Life from the Loam to dig for answers, and sequence mana rocks to cast around counters. If possible, cast Exploration in response to counterspells or use it from the graveyard if supported.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-ramp them with Life from the Loam and Exploration. Do not trade creatures; focus on generating more mana and card advantage to win the late game. Use Thrun or Breaker of Silence to protect your board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Mulligan aggressively for early threats like Tectonic Giant or Thrun. Use Life from the Loam to dig for answers and stabilize. Apply early pressure to force the opponent to answer you, then close the game with a massive threat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with threats and use Life from the Loam to out-value their draw spells. Win by generating more card advantage and mana than they can answer. Protect your threats with multiple board presence or removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It is a Life from the Loam and Exploration race. Win by having better sequencing, more threats, and graveyard hate. Prioritize digging for threats over lands, and use Thrun or Breaker of Silence to protect your board while out-valuing your opponent.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -188,10 +233,12 @@
     "Chalice of the Void",
     "Initiative",
     "Force of Negation",
-    "Counterspells"
+    "Counterspells",
+    "Watch for counterspells, discard, and graveyard hate."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-deck-tech-lands-an-old-classic-revived",
     "generated_at": "2026-05-21T07:24:46+00:00",
     "model": "local-model",
@@ -222,6 +269,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

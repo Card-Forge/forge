@@ -1,0 +1,317 @@
+{
+  "schema_version": 1,
+  "name": "Black Sacrifice",
+  "format": "pauper",
+  "colors": [
+    "B"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Black Sacrifice in Pauper leverages low-cost creatures and sacrifice outlets to generate continuous value and clear opposing boards. By repeatedly sacrificing creatures to Carrion Feeder and Mortician Beetle, you create a recursive loop that outvalues opponents while maintaining combat pressure. Village Rites serves as both efficient removal and a trigger source, ensuring you can bypass blockers and close out games quickly.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 8,
+      "cards": [
+        "Carrion Feeder",
+        "Nihil Spellbomb",
+        "Unearth"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Carrion Feeder",
+        "Drown in Sorrow"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 34,
+      "cards": [
+        "Accursed Marauder",
+        "Bloodthrone Vampire",
+        "Carrion Feeder",
+        "Infestation Sage",
+        "Mesmeric Fiend",
+        "Mortician Beetle",
+        "Nested Shambler",
+        "Nezumi Linkbreaker",
+        "Sadistic Glee",
+        "Shambling Ghast"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 10,
+      "cards": [
+        "Nihil Spellbomb",
+        "Rite of Consumption",
+        "Snuff Out",
+        "Unearth"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 1
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Drown in Sorrow"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 6,
+      "cards": [
+        "Nihil Spellbomb",
+        "Rotten Reunion",
+        "Unearth"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 15,
+      "cards": [
+        "Mesmeric Fiend",
+        "Mortician Beetle",
+        "Rotten Reunion",
+        "Supernatural Stamina",
+        "Unearth"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 4
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Carrion Feeder",
+        "Mortician Beetle"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Carrion Feeder"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Mutagenic Growth",
+        "Tragic Slip"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 7
+    },
+    "mana_fixing": {
+      "target_count": 6,
+      "cards": [
+        "Carrion Feeder",
+        "Shambling Ghast"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 17,
+      "cards": [
+        "Swamp"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.25
+  },
+  "dual_role_cards": [
+    {
+      "card": "Carrion Feeder",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drown in Sorrow",
+      "roles": [
+        "dig_draw",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mesmeric Fiend",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mortician Beetle",
+      "roles": [
+        "engines",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nihil Spellbomb",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rotten Reunion",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shambling Ghast",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unearth",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Sacrifice creatures to Carrion Feeder before casting Village Rites to maximize pump",
+    "Hold Village Rites in hand to respond to opponent's combat tricks or board wipes",
+    "Avoid sacrificing your last creature unless it directly wins the game or triggers a lethal chain",
+    "Trigger Mortician Beetle's death ability by sacrificing it to Carrion Feeder or Village Rites",
+    "Common mistake: Over-sacrificing too early and running out of resources."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap creatures to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize casting Carrion Feeder by turn 2"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold Village Rites for early blockers or to trigger sacrifice effects"
+    }
+  ],
+  "kill_priority": [
+    "Carrion Feeder",
+    "Mortician Beetle",
+    "Accursed Marauder",
+    "Bloodthrone Vampire",
+    "Infestation Sage",
+    "Mesmeric Fiend",
+    "Nested Shambler",
+    "Nezumi Linkbreaker"
+  ],
+  "interaction_to_disrupt": [
+    "Nihil Spellbomb",
+    "Rite of Consumption",
+    "Snuff Out",
+    "Unearth",
+    "Drown in Sorrow",
+    "Mutagenic Growth",
+    "Tragic Slip"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/black-sacrifice.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

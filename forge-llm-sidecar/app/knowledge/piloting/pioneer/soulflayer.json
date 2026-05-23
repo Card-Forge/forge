@@ -11,12 +11,14 @@
   "mulligan": {
     "keep_criteria": [
       "Hands containing a first-turn disruption spell, a second-turn mill spell, and combo pieces for turn three",
-      "Hands with combo pieces, disruption, and two lands that can find the third land and a Delve spell via Otherworldly Gaze or Contingency Plan"
+      "Hands with combo pieces, disruption, and two lands that can find the third land and a Delve spell via Otherworldly Gaze or Contingency Plan",
+      "Keep hands with 2-3 lands (prioritizing fetches, duals, or shock lands for fixing), at least one mana acceleration spell (e.g., Arcane Signet, Sol Ring, Llanowar Elves, Rampant Growth), and a turn-2 or turn-3 play."
     ],
     "mulligan_criteria": [
       "Any one-lander hand due to the deck's mana greedy nature",
       "Hands requiring two perfect turns to act when facing aggressive decks",
-      "Hands lacking a first-turn option or protection against opponent's Thoughtseize"
+      "Hands lacking a first-turn option or protection against opponent's Thoughtseize",
+      "Mulligan any hand with only single-colored basic lands, no ramp, or exclusively high-cost spells without acceleration."
     ],
     "examples": [
       {
@@ -54,17 +56,31 @@
     "early_game": [
       "Prioritize land drops to avoid mana screw in a greedy mana base",
       "Cast Thoughtseize to remove opponent disruption and gauge their hand",
-      "Begin milling cards with Otherworldly Gaze or Contingency Plan to enable Delve"
+      "Begin milling cards with Otherworldly Gaze or Contingency Plan to enable Delve",
+      "Turn 1: Play a land, cast a 1-drop or hold for turn 2 ramp.",
+      "Turn 2: Cast acceleration or a 2-drop creature.",
+      "Turn 3: Cast a second ramp or a 3-drop to reliably hit five mana by turn 4-5.",
+      "Prioritize fixing and ramp over non-essential threats",
+      "your game plan hinges on casting five-color spells on curve."
     ],
     "mid_game": [
       "Cast Delve creatures cheaply once enough cards are in the graveyard",
       "Use Neoform or Eldritch Evolution to cheat Atraxa, Grand Unifier into play",
-      "Protect threats with Stubborn Denial once a creature is on the battlefield"
+      "Protect threats with Stubborn Denial once a creature is on the battlefield",
+      "Mana is your primary constraint",
+      "always maintain a 2-3 mana buffer for protection or interaction.",
+      "Use your graveyard strategically if recursion is present, but prioritize keeping key creatures on board.",
+      "Draw spells to maintain hand size, as five-color decks often run dry of answers.",
+      "Commit threats when you have protection or can follow up with another threat.",
+      "Hold back if the opponent has sweepers or targeted removal."
     ],
     "late_game": [
       "Use Atraxa's card draw to find more combo pieces or mill spells",
       "Sacrifice Atraxa to Soulflayer for a resilient, keyword-heavy threat",
-      "Apply pressure with Tyrranax Rex if Atraxa is removed or the combo stalls"
+      "Apply pressure with Tyrranax Rex if Atraxa is removed or the combo stalls",
+      "Soulflayer with multiple +1/+1 counters or board presence, Ketramose tutoring for a game-ending threat, or Zetalpa generating a flying Golem that trades into key blockers.",
+      "When you have 5+ mana available, protection for your threat, and the opponent has no sweepers or has already used theirs.",
+      "Go all-in when you can follow up with a second threat or have enough board presence to weather a wipe."
     ]
   },
   "key_cards": [
@@ -123,7 +139,12 @@
     "Cast Thoughtseize on turn one to remove disruption, then mill on turn two, and combo on turn three.",
     "Reverse spell order if needed to ensure Neoform goes unimpeded, but risk opponent's Thoughtseize.",
     "Use Stubborn Denial to protect Atraxa or other threats once a creature is on the battlefield.",
-    "If Contingency Plan finds nothing, hold Soulflayer for turn three and sacrifice it with Eldritch Evolution on turn four."
+    "If Contingency Plan finds nothing, hold Soulflayer for turn three and sacrifice it with Eldritch Evolution on turn four.",
+    "Common mistake: Overcommitting to a single big threat without protection.",
+    "Unique interaction: Zetalpa\u2019s Golem can be sacrificed to trigger 'when a creature dies' effects or trade into removal.",
+    "Ketramose can tutor for any 5-mana or less creature, making it incredibly flexible.",
+    "Mana base is critical",
+    "consider fetching lands early."
   ],
   "matchups": [
     {
@@ -143,6 +164,31 @@
         "Graveyard hate",
         "Interrupts"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, split the cast (cast one, hold mana for protection), or use uncounterable effects if available. Bounce or sacrifice Zetalpa to bypass counters if needed.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use removal on their ramp sources, and don\u2019t let them stabilize. Use your own acceleration to stay ahead.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction, board wipes, or fast threats. Don\u2019t overcommit to big creatures if you can\u2019t stabilize. Use Zetalpa\u2019s Golem to block.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with multiple threats, use card advantage, and don\u2019t let them stabilize. Use Ketramose to find value creatures or win conditions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize removal, card draw, and protection. Out-value them with better sequencing and sideboard cards.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -151,10 +197,14 @@
     "Grafdigger's Cage",
     "Unlicensed Hearse",
     "Targeted removal",
-    "Instant-speed counterspells"
+    "Instant-speed counterspells",
+    "Watch for sweepers (e.g., Wrath of God, Hero\u2019s Downfall), targeted removal, and counterspells.",
+    "Note when opponents tap out for answers.",
+    "Track graveyard hate if recursion is present, and monitor when control decks stabilize with card draw or lifegain."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-atraxa-soulflayer-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T05:00:45+00:00",
     "model": "local-model",
@@ -172,6 +222,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

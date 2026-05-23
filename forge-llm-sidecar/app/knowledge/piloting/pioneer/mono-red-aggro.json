@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least one turn-one creature",
       "Hands containing Eidolon of the Great Revel with early triggers",
-      "Hands with Swiftspear paired with instant-speed removal"
+      "Hands with Swiftspear paired with instant-speed removal",
+      "Keep hands with 1\u20132 lands and 2\u20133 one-drops (Screaming Nemesis, Eidolon of the Great Revel, Lightning Strike, Firebrand, etc.).",
+      "Prioritize hands that can play a turn-1 one-drop or turn-2 Monastery Swiftspear."
     ],
     "mulligan_criteria": [
       "Hands with only three-mana or higher cards",
       "Hands lacking early creatures or damage triggers",
-      "Hands with multiple Eidolons or no lands"
+      "Hands with multiple Eidolons or no lands",
+      "Mulligan hands with 3+ lands, no early threats, or only high-cost spells."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and Monastery Swiftspear immediately to establish pressure",
       "Cast Screaming Nemesis to remove early threats or deal damage",
-      "Prioritize keeping the initiative and forcing opponent responses"
+      "Prioritize keeping the initiative and forcing opponent responses",
+      "Turn 1: Play a land, cast a one-drop if possible.",
+      "Turn 2: Play a land, cast a second one-drop or Monastery Swiftspear.",
+      "Sequence lands to ensure you can cast early threats and have mana available for pump spells or burn.",
+      "Avoid overcommitting to the board if you suspect a sweeper."
     ],
     "mid_game": [
       "Trigger Eidolon of the Great Revel multiple times per turn using combat and spells",
       "Trade efficiently to maintain board presence while pushing damage",
-      "Use removal to clear path for aggressive attacks"
+      "Use removal to clear path for aggressive attacks",
+      "Treat mana as a resource for threats and burn, not for storing.",
+      "Use discard to disrupt opponent\u2019s hand on their turn, preferably targeting key spells or combo pieces.",
+      "The graveyard is generally irrelevant for this deck, but monitor opponent\u2019s graveyard for recursion or mill strategies.",
+      "Commit threats when the opponent has no sweepers or cannot afford to block.",
+      "Hold back if they have potential board wipes or heavy removal.",
+      "Use direct damage to clear blockers, finish players, or punish draw-go strategies."
     ],
     "late_game": [
       "Rely on accumulated Eidolon triggers to close out the match",
       "Accept that the deck falls off if the opponent stabilizes",
-      "Push all remaining damage through before opponent's card advantage takes over"
+      "Push all remaining damage through before opponent's card advantage takes over",
+      "Monastery Swiftspear (pumped via combat tricks or spells), direct damage spells, and coordinated combat with multiple threats.",
+      "Win by applying early pressure, using discard to clear the path, and burning the opponent down to lethal.",
+      "Go all-in when the opponent has no sweepers, has low life total, or you have enough threats to trade favorably.",
+      "Commit when you can force unfavorable blocks or when you can finish the game before they can respond."
     ]
   },
   "key_cards": [
@@ -58,7 +75,12 @@
   "sequencing_tips": [
     "Hold Screaming Nemesis until the opponent's turn to protect your board or answer threats",
     "Trigger Eidolon of the Great Revel after combat damage is dealt to maximize life loss",
-    "Play Swiftspear before casting other spells to ensure early pressure and force responses"
+    "Play Swiftspear before casting other spells to ensure early pressure and force responses",
+    "Common mistakes include overextending into sweepers, misusing discard on irrelevant cards, and failing to track opponent\u2019s mana for counterspells or sweepers.",
+    "Unique interactions: Monastery Swiftspear\u2019s double strike makes it a premier finisher",
+    "Screaming Nemesis punishes draw-go and control strategies",
+    "Eidolon of the Great Revel pressures spell-heavy decks.",
+    "Always prioritize discarding key spells over threats, and use burn to clear blockers or finish players efficiently."
   ],
   "matchups": [
     {
@@ -87,16 +109,35 @@
         "Direct damage spells",
         "Early board presence"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells before they can be cast. Cast threats in response to their mana sources or use multiple threats to force counter-decisions. If possible, play around counters by holding up mana for pump spells or burn.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply maximum pressure early to prevent them from reaching their ramp spells. Use discard to hit their ramp or mana rocks. Don\u2019t let them stabilize; race them or disrupt their early game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Use more discard and direct damage to disrupt their hand. Track opponent\u2019s hand and play accordingly. Prioritize threats that are hard to remove and use burn to finish the game.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspells",
     "Board wipes",
     "Life gain spells",
-    "Resilient midrange creatures"
+    "Resilient midrange creatures",
+    "Watch for sweepers (e.g., Wrath of God, Cyclonic Rift), counters, and discard outlets.",
+    "Key tells include holding up mana on turn 2\u20133, drawing extra cards, or playing unusual lands.",
+    "Track opponent\u2019s life total and hand size to optimize discard and burn timing."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:17:02+00:00",
     "model": "local-model",
@@ -125,6 +166,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

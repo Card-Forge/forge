@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands containing Lotus Petal and Chalice of the Void",
       "Hands with Kozilek's Command and early interaction",
-      "Hands with three or more lands and a one-drop"
+      "Hands with three or more lands and a one-drop",
+      "Keep any hand with two or more mana sources plus a Lotus Petal, Chalice of the Void, or Kozilek's Command."
     ],
     "mulligan_criteria": [
       "Hands lacking artifact interaction or mana acceleration",
       "Hands with four or more lands",
-      "Hands without Kozilek's Command or Chalice"
+      "Hands without Kozilek's Command or Chalice",
+      "Mulligan on three or more lands with no early plays, or hands with only one land and no disruption or acceleration."
     ],
     "examples": []
   },
@@ -25,17 +27,29 @@
     "early_game": [
       "Play Lotus Petal to enable turn-one Chalice of the Void or Kozilek's Command",
       "Set Chalice at zero or one to disrupt fast aggro and combo strategies",
-      "Use Kozilek's Command to draw cards or destroy early threats"
+      "Use Kozilek's Command to draw cards or destroy early threats",
+      "Turn 1: Play a land, then Lotus Petal -> Kozilek's Command (discard a threat or bounce an opponent's spell) or Chalice of the Void (X=1 or 2).",
+      "Turn 2: Play a land, cast Thought-Knot Seer or Reality Smasher.",
+      "If you have three Arcane Signs, assemble Tron for massive mana acceleration."
     ],
     "mid_game": [
       "Stabilize the board by maintaining Chalice pressure and generating Kozilek tokens",
       "Trade efficiently with opponent's creatures while preserving card advantage",
-      "Begin applying pressure with tokens or creatures to force opponent to respond"
+      "Begin applying pressure with tokens or creatures to force opponent to respond",
+      "Conserve mana for interaction",
+      "avoid overcommitting to Chalice without a follow-up threat.",
+      "Use Kozilek's Command to protect your graveyard or bounce key threats, and prioritize card advantage from Ulamog/Emrakul to out-resource opponents.",
+      "Commit threats when you have removal or bounce ready for their interaction.",
+      "Hold back if the opponent has sweepers or heavy graveyard hate, and prioritize killing small threats before deploying massive Eldrazi."
     ],
     "late_game": [
       "Outvalue the opponent through repeated Kozilek's Command activations and card draw",
       "Use Chalice to lock out late-game finishers or sweepers",
-      "Close out games with accumulated resources and board presence"
+      "Close out games with accumulated resources and board presence",
+      "Ulamog, the Ceaseless Hunger and Emrakul, the Promised End win the game by exiling permanents, drawing cards, and shuffling the opponent's graveyard.",
+      "Assemble Tron or use Lotus Petal/Kozilek's Command to generate the 7+ mana needed to cast them.",
+      "Go all-in when you have card advantage, removal for their threats, and they lack sweepers or graveyard hate.",
+      "Commit when you can protect your finisher or win before they can respond."
     ]
   },
   "key_cards": [
@@ -59,7 +73,10 @@
     "Drop Chalice of the Void before the opponent's turn to maximize disruption",
     "Use Lotus Petal to cast Kozilek's Command on turn one or two for immediate impact",
     "Hold up mana to counter spells if Chalice is already on the battlefield",
-    "Prioritize drawing cards with Kozilek's Command when behind on resources"
+    "Prioritize drawing cards with Kozilek's Command when behind on resources",
+    "Common mistakes include overcommitting to Chalice without follow-up, misusing Lotus Petal on non-critical turns, and failing to track the opponent's graveyard.",
+    "Unique interactions: Kozilek's Command can bounce your own Chalice to reuse it, or bounce your own Petal for extra mana.",
+    "Emrakul's shuffle effect is crucial against graveyard combos."
   ],
   "matchups": [
     {
@@ -97,6 +114,21 @@
         "Removal spells",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Kozilek's Command to bounce counterspells or threats, cast threats in response to counterspells, and leverage Tron for massive mana to overwhelm interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Deploy Chalice of the Void (X=1 or 2) to shut down mana rocks, use Thought-Knot Seer to discard key pieces, and Kozilek's Command to bounce ramp accelerants.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race to card advantage. Prioritize Kozilek's Command to bounce their threats or exile their graveyard, use Surgical Extraction to remove their graveyard hate, and win by deploying Emrakul/Ulamog first.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -104,10 +136,13 @@
     "Mana disruption artifacts",
     "Board wipe spells",
     "Targeted removal",
-    "Card draw engines"
+    "Card draw engines",
+    "Watch for opponents holding up mana on turns 2-3, which often indicates counterspells or discard.",
+    "Track their graveyard for combo pieces or graveyard hate, and note when they sacrifice lands for Tron to anticipate a massive mana turn."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:21:29+00:00",
     "model": "local-model",
@@ -149,6 +184,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,133 @@
+{
+  "archetype": "Dimir Control",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "Dimir Control dictates the game through efficient interaction, card advantage, and tempo control, out-resourcing opponents until it can deploy Ashiok, Nightmare Muse or leverage Fae of Wishes to access tailored hate. It excels against midrange and combo decks that overcommit to the board, while struggling against fast, uninteractive aggro or highly resilient value engines.",
+  "win_conditions": [
+    "Ashiok, Nightmare Muse is the primary win condition, generating card advantage and board control through its triggered abilities.",
+    "Fae of Wishes can also close games by fetching targeted hate or additional threats.",
+    "Secondary finishers include planeswalkers or late-game removal that clears the board and leaves you with card advantage."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (preferably duals or shocklands) and at least one interaction or cantrip.",
+      "Keep Fae of Wishes or Ashiok only if supported by 2+ lands and a land drop or cantrip.",
+      "Prioritize hands that can play a land and a meaningful spell by turn 2."
+    ],
+    "mulligan_criteria": [
+      "Mulligan to 4+ lands, hands with zero spells, or hands with multiple Drown in the Loch but no lands."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a basic Island or fetch/dual land.",
+      "If you have a cantrip or cheap interaction, cast it to maintain parity.",
+      "Turn 2: Develop mana with a second land, then cast Drown in the Loch or a discard spell.",
+      "If you have Fae of Wishes, prefer casting it on turn 3 with a cantrip to maximize value.",
+      "Always prioritize maintaining card parity",
+      "never cast removal prematurely if you can answer with a land drop and hold interaction for a bigger threat."
+    ],
+    "mid_game": [
+      "Keep mana flexible",
+      "avoid overcommitting to a single color unless casting a finisher.",
+      "Use cantrips to cycle through dead draws and maintain hand size.",
+      "Protect your graveyard from exploitation, but don't fear it if you have Ashiok.",
+      "Prioritize keeping interaction in hand over casting it prematurely",
+      "Dimir wins by answering the most threatening spell while preserving resources for the endgame.",
+      "Commit threats only when you have a clear path to resolving them or when the board state demands it.",
+      "Ashiok should be played when you can protect it or when you have enough removal to handle immediate threats."
+    ],
+    "late_game": [
+      "Ashiok, Nightmare Muse is the primary win condition, generating card advantage and board control through its triggered abilities.",
+      "Fae of Wishes can also close games by fetching targeted hate or additional threats.",
+      "Secondary finishers include planeswalkers or late-game removal that clears the board and leaves you with card advantage.",
+      "Go all-in when you have established board control, the opponent has no clear answer to your finisher, or you're ahead in card advantage.",
+      "Commit when you can resolve Ashiok safely or when you have enough interaction to handle the opponent's response."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Fae of Wishes",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Ashiok, Nightmare Muse",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Drown in the Loch",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Fae of Wishes is a versatile tool but requires careful timing",
+    "don't use it to fetch a card you could just draw.",
+    "Ashiok's triggers are powerful but can be disrupted by graveyard hate, so protect your graveyard or have a backup plan.",
+    "Drown in the Loch is excellent but can be countered",
+    "have a backup plan if it's met with a counter.",
+    "Avoid overcommitting to the board",
+    "Dimir wins by out-resourcing, not out-timing.",
+    "Practice recognizing when to hold up mana versus when to commit to a play."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig through counters, cast spells at unexpected times (end step, after they've used their counter), or rely on uncounterable threats like Ashiok. If possible, bring in more uncounterable spells or discard to remove their counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction to disrupt their mana development. Use discard to remove key ramp spells, and board wipes to handle their big threats. If they get ahead, use Ashiok to stabilize and out-value them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Keep early interaction in hand, prioritize cheap removal and counterspells, and use Fae of Wishes to fetch early hate. Don't overextend; stabilize and win the late game with card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with superior card draw and efficient removal. Use Ashiok to generate advantage, and pressure them with threats they can't answer. If they're slow, apply pressure with Fae of Wishes and late-game threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by having better card advantage, more efficient interaction, and superior sideboard choices. Prioritize keeping discard and counterspells, and use Ashiok to out-resource them. Track their hand and play around their key answers.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for the opponent's mana development and hand size.",
+    "Key tells include holding up mana on your turn (likely holding a counter or removal), casting spells at instant speed after you've committed to a play, and graveyard activity (signaling midrange or combo).",
+    "Track when they use their removal on your threats versus holding it for your finishers."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/pioneer.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

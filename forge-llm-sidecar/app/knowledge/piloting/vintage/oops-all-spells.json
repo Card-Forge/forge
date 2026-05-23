@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Hands with at least two lands and a cheap interaction spell",
       "Combinations featuring Chrome Mox and a one-drop counter or draw spell",
-      "Packages that can answer turn-one threats or establish early tempo"
+      "Packages that can answer turn-one threats or establish early tempo",
+      "Keep hands with 2+ lands (preferably fetch/shock/mana rocks) and at least one of Chrome Mox, Pact of Negation, or a spell-casting engine (e.g., Karn, Tamiyo, Raff).",
+      "Keep any hand with Chrome Mox + a land, as it provides immediate tempo and card selection."
     ],
     "mulligan_criteria": [
       "Mana-heavy hands lacking early interaction",
       "Hands with only high-cost threats and no answers",
-      "Draws missing at least two sources of instant-speed spells"
+      "Draws missing at least two sources of instant-speed spells",
+      "Mulligan on 3+ lands with no early spells or mana acceleration, or hands with only one land and no acceleration."
     ],
     "examples": []
   },
@@ -26,17 +29,32 @@
     "early_game": [
       "Prioritize playing lands and Chrome Mox to enable turn-one or turn-two interaction",
       "Use Pact of Negation or other counters to disrupt opponent's key plays",
-      "Hold up mana to respond to threats rather than committing resources prematurely"
+      "Hold up mana to respond to threats rather than committing resources prematurely",
+      "Turn 1: Play a land, cast Chrome Mox or a cantrip (Brainstorm/Ponder) to dig for key pieces.",
+      "Turn 2: Cast a mana rock or cheap spell, then follow up with a value engine or interaction.",
+      "Prioritize fetching basic lands for shock lands and ensuring you have at least 3 colors of mana available by turn 3.",
+      "Never tap out for a single spell if you can stabilize or dig for your combo."
     ],
     "mid_game": [
       "Stabilize the board by removing problematic permanents and drawing into more answers",
       "Leverage Beseech the Mirror to copy and replay spells for massive value or board control",
-      "Begin deploying resilient threats once the opponent's interaction is exhausted"
+      "Begin deploying resilient threats once the opponent's interaction is exhausted",
+      "Treat your graveyard as a secondary library.",
+      "Use Karn/Tamiyo to recur cheap spells or protect key permanents.",
+      "Never overextend into a known sweep unless you have a guaranteed win condition.",
+      "Prioritize keeping 1-2 counterspells for protection, not just offense.",
+      "Commit threats only when you have answered or bypassed their interaction.",
+      "Hold back if they have unanswered removal or a hard counter."
     ],
     "late_game": [
       "Transition to a grindy attrition battle using superior card advantage and recursion",
       "Protect your win conditions with layered countermagic and damage prevention",
-      "Close out the game by attacking with untapped creatures or resolving uncounterable finishers"
+      "Close out the game by attacking with untapped creatures or resolving uncounterable finishers",
+      "Beseech the Mirror for Thassa's Oracle or Kethis, the Hidden Hand.",
+      "Griselbrand for card advantage to fuel the combo.",
+      "Uro, Titan of Nature's Wrath for mana and card draw.",
+      "When you have 5+ mana available, a guaranteed Oracle/Kethis in hand or library, and no known hard interaction in their hand.",
+      "Also commit if you can resolve a Griselbrand and draw into your win condition."
     ]
   },
   "key_cards": [
@@ -60,7 +78,11 @@
     "Always hold up Pact of Negation's mana requirement before committing to other spells",
     "Cast Beseech the Mirror after your primary spell resolves to ensure the copy targets the correct state",
     "Use Chrome Mox to fix mana for counterspells rather than accelerating threats early",
-    "Prioritize countering the opponent's most impactful spell over their mana sources"
+    "Prioritize countering the opponent's most impactful spell over their mana sources",
+    "Common mistake: overcommitting to a single win condition without backup.",
+    "Unique interaction: Beseech the Mirror can target itself to tutor for multiple copies of the same spell, enabling infinite recursion with certain engines.",
+    "Always track opponent's hand size",
+    "if they have 0 cards, they're likely holding interaction."
   ],
   "matchups": [
     {
@@ -89,16 +111,35 @@
         "Board wipes",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig past counters, cast spells in response to their counters, or use Pact of Negation/Force of Will to protect your combo. Bolas's Citadel can bypass counters by drawing cards.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with cheap spells, use discard to disrupt their mana base, and prioritize fast combo turns before they can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Prioritize hand disruption, protect your combo pieces with counterspells, and win by resolving your Oracle/Kethis first. Use Narset to steal their key spells or disrupt their draw.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast mana artifacts",
     "Unstoppable finishers",
     "Board wipe spells",
-    "Graveyard hate"
+    "Graveyard hate",
+    "Watch for hand disruption (Thoughtseize, Liliana), sweepers (Supreme Verdict, Anger), and counterspells (Force, Negate).",
+    "If they tap out for a single spell, they likely have a sweep or counter.",
+    "If they keep mana open past turn 3, they're likely holding interaction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:58:47+00:00",
     "model": "local-model",
@@ -114,6 +155,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

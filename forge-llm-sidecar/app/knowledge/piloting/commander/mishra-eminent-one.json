@@ -1,0 +1,120 @@
+{
+  "archetype": "Mishra, Eminent One",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck leverages Mishra's token generation and Emry's graveyard recursion to flood the board with Golem artifacts, winning through attrition and overwhelming combat steps. It excels against midrange and combo decks that overcommit to single threats or lack efficient sweepers.",
+  "win_conditions": [
+    "Flood the board with Golems, pump them with +1/+1 counters or combat tricks, or use Emry to replay a high-impact artifact (like Thopter Foundry or Mindslaver) for a lethal turn.",
+    "Mishra's trigger can also generate a final wave of tokens to close out games."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritize duals/signets for Grixis), at least one artifact ramp (Sol Ring, Arcane Signet, or cheap artifacts), and a path to casting Mishra or Emry by turn 3-4.",
+      "Against aggro, keep early removal or blockers",
+      "against control, keep card draw or protection."
+    ],
+    "mulligan_criteria": [],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play land, cast Sol Ring/Arcane Signet or a cheap artifact.",
+      "Turn 2: Play land, cast another artifact or ramp, potentially casting Mishra if ahead on mana.",
+      "Prioritize establishing artifact count and mana base while preserving hand for Mishra triggers."
+    ],
+    "mid_game": [
+      "Preserve artifacts in hand for Mishra triggers",
+      "use Emry to recycle high-CMV artifacts for value.",
+      "Don't overextend into sweepers.",
+      "Manage graveyard by protecting key artifacts or using them as fuel for Emry's recursion.",
+      "Commit threats when you have removal or a board wipe ready.",
+      "Hold back if opponents have sweepers or targeted removal.",
+      "Use Golem tokens as blockers to preserve key artifacts and protect Emry."
+    ],
+    "late_game": [
+      "Flood the board with Golems, pump them with +1/+1 counters or combat tricks, or use Emry to replay a high-impact artifact (like Thopter Foundry or Mindslaver) for a lethal turn.",
+      "Mishra's trigger can also generate a final wave of tokens to close out games.",
+      "Go all-in when you have 3+ artifacts in play/graveyard, enough mana to cast Mishra and follow-up, and opponents are low on removal or sweepers.",
+      "Commit when you can trade tokens for their key permanents."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Mishra, Eminent One",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Emry, Lurker of the Loch",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overcommitting to Mishra without protection, ignoring graveyard protection for Emry, and mismanaging mana for the {2} trigger.",
+    "Unique interaction: Golem tokens are artifacts, so they can be replayed via Emry if they hit the graveyard.",
+    "Watch for 'destroy artifact' effects and plan accordingly.",
+    "Always track opponent's mana to time your Mishra casts and combat."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast artifacts in response to their spells, use cheap artifacts to bait counters, or rely on Mishra's trigger (pay {2} to make a token) which can't be countered. Use protection or haste to bypass counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, disrupt their mana sources with artifact hate or targeted removal, and win before they stabilize. Use Emry to out-value their ramp by recycling artifacts for incremental advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use early removal, board wipes, and blockers. Don't overcommit to value; stabilize first, then rebuild with Mishra's tokens. Protect Emry from targeted removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Value out with Emry recursion, use Mishra's tokens to pressure, and win through combat or combo finishers. Don't let them stabilize with sweepers; force trades and pressure their life total.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win via card advantage, better recursion, and protecting your commander. Use Emry to out-value their graveyard, time Mishra triggers to maximize token generation, and sideboard in targeted removal to handle their key artifacts.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath, Cyclonic Rift), targeted removal (Path, Murder), and combo wincons.",
+    "Note when opponents tap out for big spells or hold up interaction, as this dictates when to cast Mishra or push combat."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

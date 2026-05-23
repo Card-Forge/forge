@@ -1,0 +1,117 @@
+{
+  "archetype": "Devotion",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/devotion.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Blood Fountain"
+    },
+    {
+      "qty": 2,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 4,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 4,
+      "name": "Chittering Rats"
+    },
+    {
+      "qty": 3,
+      "name": "Cuombajj Witches"
+    },
+    {
+      "qty": 3,
+      "name": "Ephemerate"
+    },
+    {
+      "qty": 4,
+      "name": "Fanatical Offering"
+    },
+    {
+      "qty": 3,
+      "name": "Gray Merchant of Asphodel"
+    },
+    {
+      "qty": 3,
+      "name": "Grim Bauble"
+    },
+    {
+      "qty": 2,
+      "name": "Hopeless Nightmare"
+    },
+    {
+      "qty": 4,
+      "name": "Mephitic Draught"
+    },
+    {
+      "qty": 2,
+      "name": "Orzhov Basilica"
+    },
+    {
+      "qty": 2,
+      "name": "Orzhov Guildgate"
+    },
+    {
+      "qty": 1,
+      "name": "Pestilence"
+    },
+    {
+      "qty": 4,
+      "name": "Refurbished Familiar"
+    },
+    {
+      "qty": 1,
+      "name": "Scoured Barrens"
+    },
+    {
+      "qty": 4,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Tithing Blade"
+    },
+    {
+      "qty": 4,
+      "name": "Troll of Khazad-d\u00fbm"
+    },
+    {
+      "qty": 4,
+      "name": "Vault of Whispers"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Contaminated Ground"
+    },
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 3,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 2,
+      "name": "God-Pharaoh's Faithful"
+    },
+    {
+      "qty": 2,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 2,
+      "name": "Trespasser's Curse"
+    }
+  ]
+}

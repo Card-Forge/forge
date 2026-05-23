@@ -1,0 +1,133 @@
+{
+  "archetype": "Goblins",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/goblins.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Birthing Ritual"
+    },
+    {
+      "qty": 2,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 4,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Boggart Harbinger"
+    },
+    {
+      "qty": 4,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Champion of the Weird"
+    },
+    {
+      "qty": 1,
+      "name": "Commercial District"
+    },
+    {
+      "qty": 4,
+      "name": "Conspicuous Snoop"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Chainwhirler"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Trashmaster"
+    },
+    {
+      "qty": 2,
+      "name": "Grub, Storied Matriarch"
+    },
+    {
+      "qty": 4,
+      "name": "Ignoble Hierarch"
+    },
+    {
+      "qty": 2,
+      "name": "Kiki-Jiki, Mirror Breaker"
+    },
+    {
+      "qty": 1,
+      "name": "Masked Vandal"
+    },
+    {
+      "qty": 2,
+      "name": "Mogg Mob"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Mudbutton Cursetosser"
+    },
+    {
+      "qty": 4,
+      "name": "Munitions Expert"
+    },
+    {
+      "qty": 1,
+      "name": "Raucous Theater"
+    },
+    {
+      "qty": 2,
+      "name": "Sling-Gang Lieutenant"
+    },
+    {
+      "qty": 1,
+      "name": "Stingscourger"
+    },
+    {
+      "qty": 3,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 3,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 2,
+      "name": "Fade from History"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Ringleader"
+    },
+    {
+      "qty": 3,
+      "name": "Inquisition of Kozilek"
+    },
+    {
+      "qty": 1,
+      "name": "Masked Vandal"
+    },
+    {
+      "qty": 3,
+      "name": "Ravenous Trap"
+    },
+    {
+      "qty": 3,
+      "name": "Vexing Bauble"
+    }
+  ]
+}

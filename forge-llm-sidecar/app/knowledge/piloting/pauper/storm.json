@@ -12,11 +12,15 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with early mana and aggressive creatures like Fortress Kin-Guard",
-      "Hands containing key combo pieces like Balustrade Spy or Sagu Wildling"
+      "Hands containing key combo pieces like Balustrade Spy or Sagu Wildling",
+      "Keep hands with 2-3 lands plus at least one Dark Ritual or equivalent acceleration.",
+      "Keep any hand containing Exhume paired with a cheap storm spell or a creature that can be cast for free/cheap.",
+      "Prioritize hands that can execute a turn-2 or turn-3 storm combo."
     ],
     "mulligan_criteria": [
       "Hands lacking early threats or card draw",
-      "Hands with only high-cost creatures without ramp or discount effects"
+      "Hands with only high-cost creatures without ramp or discount effects",
+      "Mulligan hands with 3+ lands and no acceleration, or hands with multiple copies of Exhume but no cheap spells to cast."
     ],
     "examples": [
       {
@@ -37,15 +41,31 @@
   "game_plan": {
     "early_game": [
       "Play low-cost creatures like Fortress Kin-Guard to establish board presence and generate tokens.",
-      "Use versatile red card draw to stabilize or buff early threats."
+      "Use versatile red card draw to stabilize or buff early threats.",
+      "Turn 1: Play a land, cast Dark Ritual or equivalent mana spell.",
+      "If you have a cheap storm spell, cast it to build initial storm count.",
+      "Turn 2: Ramp with additional rituals, cast cheap spells, and begin assembling the combo.",
+      "If you have Exhume and a key piece in the graveyard, consider casting it early to set up recursion.",
+      "Mana sequencing: Prioritize fetching/shocking into the colors needed for your immediate spell, then stabilize with untapped lands."
     ],
     "mid_game": [
       "Leverage creature tokens to discount Salt Road Packbeast and push damage.",
-      "Exile Champion of Dusan from the graveyard to apply trample counters to key attackers."
+      "Exile Champion of Dusan from the graveyard to apply trample counters to key attackers.",
+      "Treat Dark Ritual as your primary engine",
+      "cast it as early as possible to maximize storm count.",
+      "Use Exhume strategically to recur your most expensive or game-winning spell, not just any cheap spell.",
+      "Keep a card advantage engine or draw spell in reserve to avoid running out of gas.",
+      "Monitor your graveyard: if Exhume is your only recursion, protect it or have a backup plan if it's removed.",
+      "Storm is fragile"
     ],
     "late_game": [
       "Execute the 5-Land Spy combo by milling the deck and returning Lotleth Giant.",
-      "Use Heritage Reclamation for graveyard disruption and card advantage to close out games."
+      "Use Heritage Reclamation for graveyard disruption and card advantage to close out games.",
+      "The primary win condition is casting a high-storm spell (like Not Dead After All or a similar combo piece) when your storm count is high enough to win in one turn.",
+      "Use Exhume to recur this piece if it's in the graveyard, or cast it from hand if you have enough mana.",
+      "If the combo is disrupted, pivot to a secondary win condition like a large creature or direct damage spell.",
+      "Go all-in when you have enough mana to cast your entire combo, your storm count is sufficient to win, and you've accounted for potential counterspells (e.g., by casting in response to their upkeep or using protection).",
+      "Also commit if the opponent has no interaction left and you can win before their next turn."
     ]
   },
   "key_cards": [
@@ -88,7 +108,13 @@
   "sequencing_tips": [
     "Prioritize playing Fortress Kin-Guard early to generate tokens that reduce Salt Road Packbeast's cost.",
     "Save Champion of Dusan's Renew ability for when you have a strong attacker like Writhing Chrysalis or Boarding Party to maximize trample impact.",
-    "In 5-Land Spy, use Sagu Wildling to mill lands and creatures, then trigger Balustrade Spy before casting Dread Return for Lotleth Giant."
+    "In 5-Land Spy, use Sagu Wildling to mill lands and creatures, then trigger Balustrade Spy before casting Dread Return for Lotleth Giant.",
+    "Four-color storm requires careful mana management",
+    "ensure you have enough dual lands or equivalent to support all colors without slowing down.",
+    "Exhume is powerful but vulnerable to graveyard hate",
+    "always have a backup plan if it's removed. 'Not Dead After All' likely functions as a high-storm combo piece or recursive threat",
+    "practice sequencing to maximize its impact.",
+    "Common mistake: Overcommitting to the board or casting too many spells without a clear win condition."
   ],
   "matchups": [
     {
@@ -106,16 +132,45 @@
         "Graveyard hate",
         "Board wipes"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split casts or cast your combo in response to their counterspells. If possible, use cheap spells to force out their counters before going off. Consider bringing in protection or discard to disrupt their hand. If they have heavy counter coverage, consider a backup win condition or concede if the matchup is unfavorable.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Outpace them by going off as early as possible. Use discard or early interaction to disrupt their mana development. If they stabilize, use your graveyard recursion to out-value their larger threats. Bring in artifact/enchantment removal if they rely on it.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early survival: use any available removal, counters, or life-gain to stabilize. If you can't stabilize, go off immediately on turn 2 or 3 if possible. Bring in direct damage and early interaction to slow them down.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure them with early storm count to force them to use resources. If they try to lock you out, use Exhume to recur key pieces and maintain pressure. If they have heavy board wipes, wait for a safe turn to go off, or pivot to a backup plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "The mirror is a race to storm count and graveyard recursion. Prioritize drawing cards, protecting your graveyard, and disrupting theirs with discard. Use Exhume to recur your win condition faster than they can. If they have graveyard hate, focus on hand disruption and direct damage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Bannerhide Krushok",
     "Malevolent Rumble",
     "Graveyard hate effects",
-    "Board wipes"
+    "Board wipes",
+    "Watch for counterspells (especially in Blue Terror and Grixis Affinity) and hold up interaction or cast your combo in response to their end steps.",
+    "Track graveyard hate (like Rest in Peace or Leyline of the Void) and adjust your recursion plans.",
+    "Note when opponents tap out for removal or sweepers, as this is your window to go off."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-best-cards-from-tarkir-dragonstorm",
     "generated_at": "2026-05-21T10:40:02+00:00",
     "model": "local-model",
@@ -159,6 +214,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

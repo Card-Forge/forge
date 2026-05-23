@@ -1,0 +1,117 @@
+{
+  "archetype": "Azorius Momo",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/azorius-momo.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Aang, Swift Savior"
+    },
+    {
+      "qty": 2,
+      "name": "Abandoned Air Temple"
+    },
+    {
+      "qty": 2,
+      "name": "Cosmogrand Zenith"
+    },
+    {
+      "qty": 4,
+      "name": "Daydream"
+    },
+    {
+      "qty": 2,
+      "name": "Erode"
+    },
+    {
+      "qty": 4,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Gran-Gran"
+    },
+    {
+      "qty": 2,
+      "name": "Haliya, Guided by Light"
+    },
+    {
+      "qty": 4,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 4,
+      "name": "Momo, Friendly Flier"
+    },
+    {
+      "qty": 4,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 2,
+      "name": "Nurturing Pixie"
+    },
+    {
+      "qty": 7,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Practiced Offense"
+    },
+    {
+      "qty": 4,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 4,
+      "name": "Sage of the Skies"
+    },
+    {
+      "qty": 2,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 4,
+      "name": "Springleaf Drum"
+    },
+    {
+      "qty": 4,
+      "name": "Starfield Shepherd"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Clarion Conqueror"
+    },
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 2,
+      "name": "Hide on the Ceiling"
+    },
+    {
+      "qty": 2,
+      "name": "No More Lies"
+    },
+    {
+      "qty": 2,
+      "name": "Pyrrhic Strike"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    }
+  ]
+}

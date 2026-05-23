@@ -1,0 +1,126 @@
+{
+  "archetype": "Dimir Midrange",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "Dimir Midrange controls the early game through targeted disruption and card advantage, then transitions into a late-game aerial assault centered on Yorion, Sky Nomad. It wins by out-resourcing opponents with efficient threats, superior hand management, and flying bodies that are difficult to block or remove.",
+  "win_conditions": [
+    "Yorion, Sky Nomad is the primary finisher, often supported by Stormchaser's Talent to draw into additional Yorions or flying threats.",
+    "Secondary finishers include efficient flying creatures or planeswalkers that can stabilize and close out the game."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing duals or shocklands, otherwise basics that tap for U/B), plus at least one of Thoughtseize or Stormchaser's Talent.",
+      "Keep any hand with Yorion if paired with a land and a removal spell or card draw."
+    ],
+    "mulligan_criteria": [
+      "Mulligan pure land hands, hands with only high-cost spells, or hands with multiple Thoughtseizes but no early interaction or land."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Thoughtseize if possible to strip key early threats or combo pieces.",
+      "Turn 2: Play a land, cast Stormchaser's Talent to draw into a threat or Yorion, or deploy a cheap removal spell.",
+      "If opening with Yorion, ensure you have two lands and a way to protect it or follow up.",
+      "Sequence lands to ensure you can cast your spells on curve without flooding."
+    ],
+    "mid_game": [
+      "Prioritize keeping your hand size above 3 cards",
+      "use Stormchaser's Talent and other draw spells to maintain tempo.",
+      "Don't overextend into known removal",
+      "save interaction for key threats.",
+      "Manage your graveyard carefully if the format has graveyard hate, but generally, Dimir wants to keep its own graveyard clean while disrupting the opponent's.",
+      "Commit Yorion when you have sufficient interaction to protect it or when the board is clear enough to establish aerial dominance.",
+      "Hold back on overcommitting if the opponent has sweepers or hard removal.",
+      "Use Thoughtseize to strip removal or win conditions before deploying your own threats."
+    ],
+    "late_game": [
+      "Yorion, Sky Nomad is the primary finisher, often supported by Stormchaser's Talent to draw into additional Yorions or flying threats.",
+      "Secondary finishers include efficient flying creatures or planeswalkers that can stabilize and close out the game.",
+      "Go all-in when you have established card advantage, the opponent has no sweepers in hand, and you can safely deploy Yorion or a board of flying threats.",
+      "Commit when you can protect your key pieces with interaction or when the opponent is at low enough life that flying damage is lethal."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Yorion, Sky Nomad",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Stormchaser's Talent",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overcommitting to Stormchaser's Talent without a follow-up, or holding too much interaction and missing early disruption windows.",
+    "Always track the opponent's mana and hand size.",
+    "Yorion is vulnerable to sweepers, so don't cast it into known board wipes.",
+    "In the mirror, winning the Thoughtseize war is paramount.",
+    "Be mindful of format-specific hate cards and adjust your sideboard accordingly."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient spells that are hard to counter, or cast your threats in response to their counterspells. Use Thoughtseize to strip counterspells early. If they have multiple counters, commit multiple threats or use uncounterable finishers if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Thoughtseize to disrupt their mana development. Use efficient removal to deal with their ramp targets. If they get ahead, stabilize with Yorion and card advantage to out-value their acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and Thoughtseize to disrupt their early game. Use removal to kill key threats. Deploy Yorion to establish flying presence that they struggle to block. Don't overcommit to card advantage if you're losing the board; stabilize first.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure their hand and graveyard. Use Thoughtseize to strip their answers. Deploy Yorion and flying threats to force them to use multiple spells to deal with one threat. Out-value them with card advantage and efficient removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by winning Thoughtseize exchanges. Prioritize keeping your hand size and card advantage. Use targeted removal to kill their Yorion or key threats. Play around their sweepers and hold interaction for their finishers.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers, hard removal, and combo finishers.",
+    "Pay attention to when the opponent holds up mana",
+    "if they have open mana on your turn, assume they have interaction.",
+    "Track their graveyard if they play graveyard-centric decks."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/pioneer.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

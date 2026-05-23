@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two lands and one artifact ramp piece",
       "Combinations featuring Displacer Kitten alongside early mana sources",
-      "Draws that include multiple Coveted Jewels or The One Rings for acceleration"
+      "Draws that include multiple Coveted Jewels or The One Rings for acceleration",
+      "Keep hands with 1-2 lands, 2+ mana rocks (Sol Ring, Arcane Signet, Mind Stone), and at least one key piece (Coveted Jewel, Displacer Kitten, or The One Ring).",
+      "Prioritize hands that can cast Coveted Jewel or Displacer Kitten on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Hands lacking any artifact acceleration or land drops",
       "Draws with too many lands and no creature or ramp interaction",
-      "Hands missing early-game playables to establish mana advantage"
+      "Hands missing early-game playables to establish mana advantage",
+      "Mulligan hands with 3+ lands, no rocks, or only fragile threats without protection."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Prioritize playing lands before tapping artifacts to avoid mana screw",
       "Drop Coveted Jewel on turn one or two to begin land cycling",
-      "Cast Displacer Kitten as early as possible to enable land recovery"
+      "Cast Displacer Kitten as early as possible to enable land recovery",
+      "Turn 1: Play Sol Ring, cast Coveted Jewel or Displacer Kitten.",
+      "Turn 2: Play a land, cast another rock or The One Ring if safe.",
+      "Sequence mana to protect key pieces with Counterspell/Spell Pierce.",
+      "If facing aggro, prioritize early interaction",
+      "against control, focus on assembling card advantage engines."
     ],
     "mid_game": [
       "Sacrifice excess lands to untap Jewels and generate incremental mana",
       "Use The One Ring to smooth mana curves and enable larger plays",
-      "Leverage Kitten's recursion to replace lands lost to artifact untapping"
+      "Leverage Kitten's recursion to replace lands lost to artifact untapping",
+      "Conserve mana to protect The One Ring and Displacer Kitten.",
+      "Use Coveted Jewel to dig for answers or win conditions.",
+      "Avoid overextending without protection",
+      "prioritize card advantage and board control over aggressive plays.",
+      "Commit threats when you have protection or can answer opponent's interaction.",
+      "Hold back key pieces if the opponent has unanswerable removal or counterspells."
     ],
     "late_game": [
       "Convert accumulated mana into decisive board impacts or win conditions",
       "Maintain artifact untap loops to out-grind opponent resources",
-      "Protect key permanents while maximizing land recycling efficiency"
+      "Protect key permanents while maximizing land recycling efficiency",
+      "Win with The One Ring + Displacer Kitten recursion loop, Coveted Jewel card advantage, or Emrakul, the Promised End.",
+      "Secure protection for key pieces, then commit to drawing into game-winners or locking the board.",
+      "Go all-in when you have protection for The One Ring/Displacer Kitten, enough mana to answer interaction, and a clear path to closing.",
+      "Commit when the opponent has no removal or counterspells left, or when you can safely cast a finisher like Emrakul."
     ]
   },
   "key_cards": [
@@ -59,7 +77,13 @@
     "Always play lands before activating artifact untap costs to prevent mana shortages",
     "Sacrifice lands only when you have Kitten on the battlefield or multiple Jewels to recover them",
     "Hold up blue mana for potential interaction before committing to artifact untaps",
-    "Cycle lands in a way that preserves your most impactful land types for the win condition"
+    "Cycle lands in a way that preserves your most impactful land types for the win condition",
+    "The One Ring's tap ability can be used to draw cards or protect itself",
+    "time it carefully.",
+    "Displacer Kitten can bounce itself to replay protected spells or bounce threats.",
+    "Coveted Jewel is fragile\u2014protect it or have a backup plan.",
+    "Avoid overcommitting without protection, and always track opponent's hand for interaction.",
+    "Practice sequencing mana rocks to cast key spells out of turn or early."
   ],
   "matchups": [
     {
@@ -97,6 +121,21 @@
         "Card draw engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips and discard to thin your deck and remove counterspells. Cast around counters with The One Ring's protection or Displacer Kitten's bounce. Prioritize threats that are hard to counter or can be cast in response.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-value them with superior card quality. Use removal to neutralize early threats, protect key pieces, and close the game before they stabilize. Leverage The One Ring to out-draw their ramp spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through superior sequencing and card advantage. Prioritize counterspells and discard to disrupt their key pieces. Protect The One Ring and Displacer Kitten, and use Coveted Jewel to dig deeper. Out-value them in resource management and close when they run out of interaction.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -104,10 +143,15 @@
     "Lightning Bolt",
     "Force of Will",
     "Beast Within",
-    "Rest in Peace"
+    "Rest in Peace",
+    "Watch for removal targeting The One Ring or Displacer Kitten.",
+    "Track opponent's hand for counterspells and discard.",
+    "Note graveyard strategies (Dredge) or combo pieces (Oath, Initiative) to prepare sideboard cards.",
+    "Pay attention to mana development to anticipate their next play."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:06:26+00:00",
     "model": "local-model",
@@ -123,6 +167,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

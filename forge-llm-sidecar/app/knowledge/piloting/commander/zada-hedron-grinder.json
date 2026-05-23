@@ -1,0 +1,126 @@
+{
+  "archetype": "Zada, Hedron Grinder",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Cast cheap non-creature spells to generate haste Goblin tokens, then swing them all at a single target for lethal. The deck wins by overwhelming opponents with unblockable combat damage while leveraging sacrifice outlets and card draw to out-resource the field.",
+  "win_conditions": [
+    "Fists of Flame combined with Zada's tokens, or swinging all Goblins at a single target.",
+    "Use sacrifice outlets to cast additional spells for extra triggers before combat.",
+    "Chain cantrips and rituals to maximize triggers in a single turn."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, Zada, and at least 2-3 cheap non-creature spells (rituals, cantrips, or direct damage)."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you lack early land drops, hold only high-cost spells without protection, or have creatures but no Zada or sacrifice outlets."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cheap cantrip or ritual to draw into threats or generate mana.",
+      "Turn 2: Play a land, cast a non-creature spell to trigger Zada if it's on the board, or play a Goblin token generator.",
+      "Prioritize establishing Zada by turn 2-3 with protection (Lightning Greaves, Swiftfoot Boots, or hexproof/gain tactics)."
+    ],
+    "mid_game": [
+      "Hoard mana for Zada triggers and combat.",
+      "Use sacrifice outlets to fuel card draw and mana acceleration.",
+      "Don't overcommit to board wipes unless necessary",
+      "Zada wins via combat, not attrition.",
+      "Manage hand size to ensure you have answers or finishers when needed.",
+      "Commit threats when you have protection for Zada and enough non-creature spells to flood the board.",
+      "Hold back if facing sweepers or targeted removal",
+      "use cantrips to dig for answers."
+    ],
+    "late_game": [
+      "Fists of Flame combined with Zada's tokens, or swinging all Goblins at a single target.",
+      "Use sacrifice outlets to cast additional spells for extra triggers before combat.",
+      "Chain cantrips and rituals to maximize triggers in a single turn.",
+      "Go all-in when you have Zada protected, a board of Goblins, and enough mana to cast 2-3 non-creature spells in response to blockers or to trigger additional combat damage.",
+      "Commit when the opponent has no sweepers or removal in hand."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Zada, Hedron Grinder",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Fists of Flame",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Ancestors' Aid",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Zada's ability triggers on cast, not ETB, so sacrifice outlets are crucial for fueling the engine.",
+    "Protect Zada at all costs",
+    "if it dies, the deck loses its primary win condition.",
+    "Avoid overcommitting to board wipes unless you have a backup plan.",
+    "Watch for opponent's hand size to predict sweepers or finishers.",
+    "Remember that tokens created by Zada can be sacrificed to Ancestors' Aid or other outlets to draw cards or generate mana, creating a recursive engine."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use protection (hexproof, shroud, haste), cast spells in response to counterspells, or rely on uncounterable effects. Dig for Lightning Greaves or Swiftfoot Boots. Cast non-creature spells in a specific order to beat counterspells, or use sacrifice outlets to generate value even if countered.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use removal for key ramp pieces, and prioritize winning before they stabilize. Bring in Flame Rift or Goblin Bomb for direct damage. Disrupt their mana development with early threats and sacrifice outlets.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal, use Goblins to trade efficiently, and race with Fists of Flame or direct damage. Prioritize survival over combo. Use cantrips to dig for answers and keep your life total high enough to swing for lethal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value with card draw, use protection for Zada, and pressure with early tokens. Dig for Fists of Flame or Goblin Charbelcher for finishers. Force them to use resources on your board rather than your spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win via card advantage, protection for Zada, and better sacrifice outlets. Prioritize Ancestors' Aid and cantrips to out-draw. Control the board with early Goblins and use protection to outlast the opponent's removal.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes (sweepers will reset your engine), targeted removal on Zada (prioritize protection), and counterspells (have evasion or protection).",
+    "Note opponent's mana base and hand size to predict sweepers or finishers.",
+    "Track how many non-creature spells they've countered to adjust your casting order."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

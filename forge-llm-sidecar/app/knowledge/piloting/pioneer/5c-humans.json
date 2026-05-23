@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more lands and a 1-drop or 2-drop",
       "Collected Company with three or more lands",
-      "Hands containing Thalia's Lieutenant or Reflector Mage with early lands"
+      "Hands containing Thalia's Lieutenant or Reflector Mage with early lands",
+      "Keep hands with 2-3 lands, at least one turn-1 land, and a turn-1 play (Thoughtseize, Reflector Mage, or a 1-drop Human).",
+      "Keep hands with a fetch/shock + land + disruption."
     ],
     "mulligan_criteria": [
       "Hands with zero or one land",
       "Hands with only high-cost cards or removal",
-      "Hands lacking early board presence or card draw"
+      "Hands lacking early board presence or card draw",
+      "Mulligan on 3+ lands with no plays, 1 land with 5+ spells, or hands missing a turn-1 land entirely."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and 1-drops to establish early board presence",
       "Use Thalia's Lieutenant to tax opponent's early spells",
-      "Prioritize keeping hands that can play a creature by turn two"
+      "Prioritize keeping hands that can play a creature by turn two",
+      "Turn 1: Play land, cast Thoughtseize (discard removal/land) or Reflector Mage (if opponent plays a spell) or a 1-drop Human.",
+      "Turn 2: Play second land, cast a 2-drop Human or Reflector Mage.",
+      "Sequence lands to ensure you can cast disruption/creatures on curve.",
+      "Use fetches/shocks to fix for WUBR or WUBRG.",
+      "If you have Knight of the Reliquary, fetch a basic land for shock lands or utility."
     ],
     "mid_game": [
       "Cast Collected Company to flood the board and gain card advantage",
       "Use Reflector Mage to bounce key threats and generate value",
-      "Apply pressure while managing opponent's removal and board wipes"
+      "Apply pressure while managing opponent's removal and board wipes",
+      "Preserve Reflector Mages for key spells (counterspells, removal, or combo pieces).",
+      "Don't tap out for a 1/1 if you can hold up mana for a Reflector Mage counter.",
+      "Use Knight of the Reliquary to fetch basics for shock lands or utility lands.",
+      "Manage hand size: Collected Company can refill your hand, so don't overcommit early.",
+      "Thalia's Lieutenant draws a card when you cast a spell if you control a Human, so chain spells to generate card advantage.",
+      "Commit threats when you have Reflector Mage protection or when the opponent has no removal."
     ],
     "late_game": [
       "Stabilize by bouncing threats with Reflector Mage and drawing into answers",
       "Close out games with combat damage from a wide board",
-      "Use card advantage to outvalue control decks and recover from wipes"
+      "Use card advantage to outvalue control decks and recover from wipes",
+      "Collected Company into two high-impact humans (e.g., Reflector Mage + Knight of the Reliquary, or Thalia's Lieutenant + a 3-drop).",
+      "Once you have a board of 2-3+ humans, you can often swing for lethal or establish an unblockable/untouchable threat.",
+      "When you have a Reflector Mage on the board, or when you've established card advantage via Thalia's Lieutenant.",
+      "Go all-in when the opponent has no sweepers or targeted removal, or when you can swing past their blockers."
     ]
   },
   "key_cards": [
@@ -60,7 +78,11 @@
     "Hold up mana for Reflector Mage's ability before attacking to bounce threats",
     "Play Thalia's Lieutenant early to tax opponent's spells, but be mindful of its low power/toughness",
     "Prioritize playing lands before casting Collected Company to ensure you can follow up",
-    "Use Reflector Mage to bounce opponent's removal or board wipes when possible"
+    "Use Reflector Mage to bounce opponent's removal or board wipes when possible",
+    "Common mistakes include tapping out for Reflector Mage without a land to cast it, overcommitting to the board without protection, and misusing Knight of the Reliquary (fetch basics for shock lands or utility lands, not just any land).",
+    "Remember that Thalia's Lieutenant draws a card when you cast a spell if you control a Human, so chain spells to generate card advantage.",
+    "Collected Company looks at the top five cards, so don't rely on graveyard synergy for it.",
+    "Reflector Mage is a 1/1 that dies to combat, so don't use it to block unless necessary."
   ],
   "matchups": [
     {
@@ -89,6 +111,21 @@
         "Card draw engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Reflector Mage to counter their counterspells. Cast threats in response to their removal. Use Thoughtseize to discard their counterspells. Cast Collected Company in response to their removal or when they're tapped out.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race them. Use Reflector Mage to counter their mana rocks or ramp spells. Thoughtseize to discard their ramp. Collected Company to swing for lethal before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the disruption war. Thoughtseize to discard their Collected Company or key humans. Reflector Mage to counter their Reflector Mage or Collected Company. Thalia's Lieutenant to out-draw them. Collected Company into a better two-creature combo.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -96,10 +133,15 @@
     "Single-target removal",
     "Counterspells",
     "Creature hate cards",
-    "Fast aggro pressure"
+    "Fast aggro pressure",
+    "Watch for sweepers (Supreme Verdict, Wrath of God), targeted removal (Path to Exile, Murder), and combo pieces.",
+    "Note when they tap out for a big spell or creature.",
+    "Track graveyard hate vs. no graveyard hate.",
+    "Watch for mana bases that indicate ramp or control."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:26:30+00:00",
     "model": "local-model",
@@ -115,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,185 @@
+{
+  "archetype": "Jund Saga",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/jund-saga.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Arena of Glory"
+    },
+    {
+      "qty": 2,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 3,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 2,
+      "name": "Dark Confidant"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Fear of Missing Out"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 2,
+      "name": "Inquisition of Kozilek"
+    },
+    {
+      "qty": 1,
+      "name": "Kroxa, Titan of Death's Hunger"
+    },
+    {
+      "qty": 1,
+      "name": "Molten Collapse"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Nethergoyf"
+    },
+    {
+      "qty": 1,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 3,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 2,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 3,
+      "name": "Ragavan, Nimble Pilferer"
+    },
+    {
+      "qty": 1,
+      "name": "Raucous Theater"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowspear"
+    },
+    {
+      "qty": 1,
+      "name": "Shoot the Sheriff"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Tarfire"
+    },
+    {
+      "qty": 3,
+      "name": "Tarmogoyf"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Unholy Heat"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 4,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Foothills"
+    },
+    {
+      "qty": 3,
+      "name": "Wrenn and Six"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Engineered Explosives"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 1,
+      "name": "Graveyard Trespasser"
+    },
+    {
+      "qty": 1,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 1,
+      "name": "Meltdown"
+    },
+    {
+      "qty": 1,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 2,
+      "name": "Obsidian Charmaw"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Terminate"
+    },
+    {
+      "qty": 1,
+      "name": "Tourach, Dread Cantor"
+    }
+  ]
+}

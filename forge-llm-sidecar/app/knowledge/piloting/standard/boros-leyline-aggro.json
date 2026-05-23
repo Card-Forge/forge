@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two 1-drops or a 1-drop and a 2-drop",
       "Hands containing early combat tricks or pump effects",
-      "Hands that can play a creature on turn 1 and follow up on turn 2"
+      "Hands that can play a creature on turn 1 and follow up on turn 2",
+      "Keep hands with 2-3 lands (duals/shock preferred) plus at least two of: Slickshot Show-Off, Emberheart Challenger, Voice of Victory, or cheap instants (Lightning Helix/Shock).",
+      "Keep 2 lands if paired with two 1-drops or a 1-drop plus an instant."
     ],
     "mulligan_criteria": [
       "Hands with only 3-drops or higher",
       "Hands lacking early land drops or creature plays",
-      "Hands with multiple removal spells but no early threats"
+      "Hands with multiple removal spells but no early threats",
+      "Mulligan on 4+ lands with no threats, or 3+ lands with only one threat."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and 1-drops consistently to establish early board presence",
       "Use combat tricks to maximize damage on turns 1 and 2",
-      "Avoid trading up unless it leaves you with a larger threat"
+      "Avoid trading up unless it leaves you with a larger threat",
+      "Turn 1: Play a land, cast Slickshot Show-Off.",
+      "Turn 2: Play a land, cast Emberheart Challenger or another threat.",
+      "If the opponent plays a 2-power or less creature, flash in Voice of Victory to remove it or protect your board.",
+      "Sequence lands to guarantee red mana for Emberheart and instants, and use Slickshot's graveyard trigger to cast removal or pump spells for tempo."
     ],
     "mid_game": [
       "Deploy signature creatures like Emberheart Challenger to apply pressure",
       "Use Voice of Victory to swing for lethal or clear blockers",
-      "Maintain mana advantage by playing creatures before removal resolves"
+      "Maintain mana advantage by playing creatures before removal resolves",
+      "Preserve instant-speed interaction for critical turns rather than burning it on low-impact threats.",
+      "Use Slickshot Show-Off to cast graveyard instants for tempo or removal, but avoid overcommitting to graveyard recursion if the opponent has graveyard hate.",
+      "Track hand size to ensure you can answer sweepers or counters when needed.",
+      "Commit threats when you have removal for their answers or when the board is clear of sweepers.",
+      "Hold back if you suspect a board wipe, heavy counter suite, or hand disruption.",
+      "Use flash to respond to removal on your key threats, and trade efficiently to maintain board presence without overextending."
     ],
     "late_game": [
       "Push for lethal with remaining creatures and combat tricks",
       "Use pump effects to bypass late-game board wipes or sweepers",
-      "If stalled, look for value triggers or combat damage to close the game"
+      "If stalled, look for value triggers or combat damage to close the game",
+      "Emberheart Challenger (often 4/4+ with flying tokens), Slickshot Show-Off + instant pump/removal, and Voice of Victory as a surprise attacker or blocker.",
+      "Close with unblockable flyers or pumped ground pounders when the opponent has no answers.",
+      "Go all-in when the opponent has no removal, sweepers, or counterspells in hand or graveyard.",
+      "Commit when you can swing for lethal or force a trade that leaves you ahead in board state.",
+      "Push damage when you know they cannot stabilize or draw into a sweep."
     ]
   },
   "key_cards": [
@@ -59,7 +77,11 @@
     "Play creatures before holding up mana for combat tricks to avoid being outdrawn",
     "Use pump effects on the last creature in combat to maximize damage",
     "Hold removal for opponent's key threats rather than trading early",
-    "Prioritize attacking with multiple creatures to force difficult blocker assignments"
+    "Prioritize attacking with multiple creatures to force difficult blocker assignments",
+    "Slickshot Show-Off's graveyard trigger is conditional ('this turn'), so plan accordingly and avoid wasting it on low-impact spells.",
+    "Voice of Victory's 'power 2 or less' restriction means it won't kill most mid-game threats, so use it strategically for flash protection or early removal.",
+    "Emberheart Challenger scales with dragons, so include a few cheap dragons if possible.",
+    "Avoid overextending into sweepers and always track opponent hand size to know when to commit or hold back."
   ],
   "matchups": [
     {
@@ -97,16 +119,35 @@
         "Win conditions",
         "Protection spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use flash (Voice of Victory) to cast after counterspells resolve. Split threats across turns to force multiple counters. Use Slickshot to cast instants from the graveyard to bypass counters, and avoid overcommitting to a single turn.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply maximum early pressure to prevent them from hitting 4+ lands. Use removal on their mana sources if possible, and don't let them stabilize. Trade efficiently to keep them below lethal while you close the game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value Slickshot Show-Off and Voice of Victory for tempo. Prioritize graveyard recursion and efficient trades. Use Emberheart to out-value their board and win combat steps by leveraging flying tokens and +1/+1 counters.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Efficient removal spells",
     "Board wipes and sweepers",
     "Large blockers with evasion",
-    "Counterspells and disruption"
+    "Counterspells and disruption",
+    "Watch for counterspells (Izzet), sweepers (Mono-Green/Selesnya), and hand disruption.",
+    "Note if the opponent saves removal for your finishers or if they are holding up mana for a specific answer.",
+    "Track graveyard contents for Slickshot triggers and be aware of when they run out of removal, signaling a window to go all-in."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:55:50+00:00",
     "model": "local-model",
@@ -122,6 +163,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

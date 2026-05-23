@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more cheap instants or sorceries to trigger token generation",
       "Hands containing Quintorius Kand or Yorion, Sky Nomad with early triggers",
-      "Hands with Sea Gate Restoration and multiple spells to cast"
+      "Hands with Sea Gate Restoration and multiple spells to cast",
+      "Keep hands with 2-3 lands (including duals/fixing), Quintorius, and at least one cantrip or removal spell.",
+      "Prioritize fixing and early interaction."
     ],
     "mulligan_criteria": [
       "Hands lacking instant or sorcery spells to fuel the engine",
       "Hands with only high-curve creatures and no triggers",
-      "Hands missing lands or spell interaction"
+      "Hands missing lands or spell interaction",
+      "Mulligan to hands with 3+ lands and no spells, or hands with multiple copies of the same low-impact card."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Prioritize casting cheap instants and sorceries to trigger Sea Gate Restoration and early Yorion abilities",
       "Play lands efficiently to ensure you can cast Quintorius Kand by turn four",
-      "Avoid trading tokens into opponent removal unless necessary"
+      "Avoid trading tokens into opponent removal unless necessary",
+      "Turn 1: Play a land, ideally a dual or shock land if possible, or a basic that fixes into your next turn.",
+      "Turn 2: Cast a cantrip or removal to stabilize, or play Quintorius if you have mana for it.",
+      "Sequence lands to ensure you can cast your second spell on turn 2 to trigger Yorion if possible, or set up Quintorius for turn 3."
     ],
     "mid_game": [
       "Cast Quintorius Kand and Yorion, Sky Nomad to accelerate token production",
       "Use removal and counterspells to protect your engine while generating more Birds",
-      "Begin attacking with flying tokens to apply pressure while building board presence"
+      "Begin attacking with flying tokens to apply pressure while building board presence",
+      "Use Quintorius to cycle through your deck, but avoid discarding key combo pieces or removal.",
+      "Prioritize casting instants/sorceries to trigger Yorion, but balance with board presence.",
+      "Manage graveyard carefully if facing graveyard strategies.",
+      "Commit threats when you have interaction or a board wipe ready.",
+      "Hold back if the opponent has unanswered removal or counterspells.",
+      "Use Yorion tokens to trade efficiently and apply pressure."
     ],
     "late_game": [
       "Flood the board with tokens to overwhelm opponent board wipes and removal",
       "Pump Quintorius Kand with every noncreature spell to create a massive threat",
-      "Close out the game with a massive flying token army that cannot be blocked efficiently"
+      "Close out the game with a massive flying token army that cannot be blocked efficiently",
+      "Sea Gate Restoration (creates two flying Spirits), Yorion (generates tokens from spell casting), and Quintorius (digging for the final piece).",
+      "Win by overwhelming the board with flying Spirits or out-resourcing the opponent.",
+      "Go all-in when you have multiple cantrips/removal in hand, a clear path to cast two spells, and the opponent has no sweepers.",
+      "Commit when you can trigger Yorion reliably and have enough interaction to protect your board."
     ]
   },
   "key_cards": [
@@ -59,7 +75,13 @@
     "Cast Sea Gate Restoration before your first instant or sorcery to maximize early triggers",
     "Hold removal in hand to trigger Quintorius Kand while protecting your threats",
     "Prioritize casting instants and sorceries before committing creatures to the battlefield to maximize token generation",
-    "Use countermagic to deny opponent interaction while still triggering your own token abilities"
+    "Use countermagic to deny opponent interaction while still triggering your own token abilities",
+    "Quintorius's ability is a draw/discard/play loop, so manage your graveyard carefully.",
+    "Yorion requires casting two spells per turn, so sequence your turns to maximize token generation.",
+    "Sea Gate Restoration is a powerful finisher but vulnerable to removal",
+    "protect it or cast it when safe.",
+    "Avoid overcommitting to the board without interaction.",
+    "Watch for opponent's sideboard cards that target your strategy."
   ],
   "matchups": [
     {
@@ -88,16 +110,35 @@
         "Card advantage engines",
         "Late game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig past counters, cast spells in response to counterspells, or use cheap spells to trigger Yorion. Consider sideboarding in spell Pierce or similar if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with cantrips and removal. Use sweepers to clear their large threats. Out-value them with card advantage from Quintorius.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card advantage, use Quintorius to dig deeper, and time your Yorion triggers to out-value their token generation. Sideboard in additional removal and counters.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipe spells",
     "Direct damage and targeted removal",
     "Counterspells and hand disruption",
-    "Token hate and enchantment removal"
+    "Token hate and enchantment removal",
+    "Watch for sweepers, counterspells, and targeted removal.",
+    "Note when opponents save removal for your key spells.",
+    "Track graveyard activity if facing Niv to Light or Greasefang."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:59:18+00:00",
     "model": "local-model",
@@ -126,6 +167,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,428 @@
+{
+  "schema_version": 1,
+  "name": "Izzet Prowess",
+  "format": "pioneer",
+  "colors": [
+    "U",
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Izzet Prowess is an aggressive Pioneer deck that combines cheap cantrips, burn spells, and efficient threats to apply constant pressure. It leverages Cori-Steel Cutter to generate tokens from spellcast triggers, increasing resilience and damage output. The strategy focuses on explosive early turns and proactive graveyard feeding while using instant-speed interaction to control the pace.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 11,
+      "cards": [
+        "Abandon Attachments",
+        "Academic Dispute",
+        "Boomerang Basics",
+        "Broadside Barrage",
+        "Soul-Guide Lantern"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Flow State",
+        "Sleight of Hand"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 21,
+      "cards": [
+        "Burst Lightning",
+        "Monastery Swiftspear",
+        "Riverglide Pathway",
+        "Slickshot Show-Off",
+        "Soul-Scar Mage",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 29,
+      "cards": [
+        "Boomerang Basics",
+        "Broadside Barrage",
+        "Burst Lightning",
+        "Firebending Lesson",
+        "Impractical Joke",
+        "Iroh's Demonstration",
+        "Pyroclasm",
+        "Reckless Rage",
+        "Redcap Melee",
+        "Shivan Reef",
+        "Soul-Guide Lantern",
+        "Soul-Scar Mage",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 8
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Iroh's Demonstration",
+        "Pyroclasm"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 5,
+      "cards": [
+        "Disdainful Stroke",
+        "It'll Quench Ya!",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 5
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Octopus Form",
+        "Secret Identity"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 6,
+      "cards": [
+        "Abandon Attachments",
+        "Academic Dispute",
+        "Broadside Barrage"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "graveyard_enablers": {
+      "target_count": 9,
+      "cards": [
+        "Flow State",
+        "Soul-Guide Lantern",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 8,
+      "cards": [
+        "Boomerang Basics",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 12,
+      "cards": [
+        "Monastery Swiftspear",
+        "Slickshot Show-Off",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Impractical Joke"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 20,
+      "cards": [
+        "Den of the Bugbear",
+        "Riverpyre Verge",
+        "Shivan Reef",
+        "Slickshot Show-Off",
+        "Spirebluff Canal",
+        "Steam Vents"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Den of the Bugbear",
+        "Mountain",
+        "Riverpyre Verge",
+        "Shivan Reef",
+        "Spirebluff Canal",
+        "Steam Vents"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.6
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abandon Attachments",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Academic Dispute",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boomerang Basics",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Broadside Barrage",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Burst Lightning",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Den of the Bugbear",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Impractical Joke",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Iroh's Demonstration",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monastery Swiftspear",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroclasm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Riverpyre Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shivan Reef",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Slickshot Show-Off",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Scar Mage",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirebluff Canal",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormchaser's Talent",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast instant-speed cantrips like Opt and Consider on the opponent's turn to trigger Cori-Steel Cutter before they respond.",
+    "Use Play with Fire's Scry 1 effect during your upkeep to filter the top card before drawing.",
+    "Hold Into the Flood Maw until the end of the opponent's turn to bounce temporary answers like Temporary Lockdown and attack for lethal.",
+    "Common mistake: Overcasting instants/sorceries without threats to grow, or overcommitting to a single Prowess creature.",
+    "Always keep a Prowess creature on the board to maximize trigger value."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap threats and cantrips to trigger Cori-Steel Cutter"
+    },
+    {
+      "trigger": "early game",
+      "line": "Apply pressure with Monastery Swiftspear and burn spells"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Plot cost on Slickshot Show-Off to cast multiple spells"
+    }
+  ],
+  "kill_priority": [
+    "Monastery Swiftspear",
+    "Slickshot Show-Off",
+    "Stormchaser's Talent",
+    "Burst Lightning",
+    "Riverglide Pathway",
+    "Soul-Scar Mage"
+  ],
+  "interaction_to_disrupt": [
+    "Disdainful Stroke",
+    "It'll Quench Ya!",
+    "Spell Pierce",
+    "Octopus Form",
+    "Secret Identity",
+    "Boomerang Basics",
+    "Broadside Barrage",
+    "Burst Lightning"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/izzet-prowess.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

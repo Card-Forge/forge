@@ -1,0 +1,312 @@
+{
+  "archetype": "Chatterfang, Squirrel General",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/chatterfang-squirrel-general.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Academy Manufactor"
+    },
+    {
+      "qty": 1,
+      "name": "Agent of the Iron Throne"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Bastion of Remembrance"
+    },
+    {
+      "qty": 1,
+      "name": "Beast Within"
+    },
+    {
+      "qty": 1,
+      "name": "Beledros Witherbloom"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Artist"
+    },
+    {
+      "qty": 1,
+      "name": "Bootleggers' Stash"
+    },
+    {
+      "qty": 1,
+      "name": "Cauldron of Essence"
+    },
+    {
+      "qty": 1,
+      "name": "Chatterfang, Squirrel General"
+    },
+    {
+      "qty": 1,
+      "name": "Chatterstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Chord of Calling"
+    },
+    {
+      "qty": 1,
+      "name": "Cloakwood Hermit"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Corrupted Conviction"
+    },
+    {
+      "qty": 1,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Tutelage"
+    },
+    {
+      "qty": 1,
+      "name": "Darkstar Augur"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Diabolic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Dig Up"
+    },
+    {
+      "qty": 1,
+      "name": "Dreadhorde Invasion"
+    },
+    {
+      "qty": 1,
+      "name": "Eldritch Evolution"
+    },
+    {
+      "qty": 1,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Fauna Shaman"
+    },
+    {
+      "qty": 1,
+      "name": "Fecundity"
+    },
+    {
+      "qty": 10,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Gala Greeters"
+    },
+    {
+      "qty": 1,
+      "name": "Gilded Goose"
+    },
+    {
+      "qty": 1,
+      "name": "Golgari Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Greedy Freebooter"
+    },
+    {
+      "qty": 1,
+      "name": "Idol of Oblivion"
+    },
+    {
+      "qty": 1,
+      "name": "Life // Death"
+    },
+    {
+      "qty": 1,
+      "name": "Living Death"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Many Partings"
+    },
+    {
+      "qty": 1,
+      "name": "Marionette Apprentice"
+    },
+    {
+      "qty": 1,
+      "name": "Mastermind's Acquisition"
+    },
+    {
+      "qty": 1,
+      "name": "Mirkwood Bats"
+    },
+    {
+      "qty": 1,
+      "name": "Moldervine Reclamation"
+    },
+    {
+      "qty": 1,
+      "name": "Morbid Opportunist"
+    },
+    {
+      "qty": 1,
+      "name": "Nadier's Nightblade"
+    },
+    {
+      "qty": 1,
+      "name": "Nested Shambler"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Peregrin Took"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Arena"
+    },
+    {
+      "qty": 1,
+      "name": "Pitiless Carnage"
+    },
+    {
+      "qty": 1,
+      "name": "Pitiless Plunderer"
+    },
+    {
+      "qty": 1,
+      "name": "Plumb the Forbidden"
+    },
+    {
+      "qty": 1,
+      "name": "Prosperous Innkeeper"
+    },
+    {
+      "qty": 1,
+      "name": "Ruthless Knave"
+    },
+    {
+      "qty": 1,
+      "name": "Scavenger's Talent"
+    },
+    {
+      "qty": 1,
+      "name": "Skullclamp"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spawning Pit"
+    },
+    {
+      "qty": 1,
+      "name": "Spymaster's Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Squirrel Sanctuary"
+    },
+    {
+      "qty": 16,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Offering"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Wood"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Resilience"
+    },
+    {
+      "qty": 1,
+      "name": "Toski, Bearer of Secrets"
+    },
+    {
+      "qty": 1,
+      "name": "Umbral Collar Zealot"
+    },
+    {
+      "qty": 1,
+      "name": "Unearth"
+    },
+    {
+      "qty": 1,
+      "name": "Utopia Sprawl"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Command"
+    },
+    {
+      "qty": 1,
+      "name": "Victimize"
+    },
+    {
+      "qty": 1,
+      "name": "Village Rites"
+    },
+    {
+      "qty": 1,
+      "name": "Vinereap Mentor"
+    },
+    {
+      "qty": 1,
+      "name": "Viscera Seer"
+    },
+    {
+      "qty": 1,
+      "name": "Warren Soultrader"
+    },
+    {
+      "qty": 1,
+      "name": "Weird Harvest"
+    },
+    {
+      "qty": 1,
+      "name": "Wild Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Woodland Cemetery"
+    },
+    {
+      "qty": 1,
+      "name": "Zulaport Cutthroat"
+    }
+  ],
+  "sideboard": []
+}

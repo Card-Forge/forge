@@ -1,0 +1,101 @@
+{
+  "archetype": "Gruul Aggro",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/gruul-aggro.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancestral Anger"
+    },
+    {
+      "qty": 4,
+      "name": "Blossoming Defense"
+    },
+    {
+      "qty": 4,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Emberheart Challenger"
+    },
+    {
+      "qty": 3,
+      "name": "Frenzied Baloth"
+    },
+    {
+      "qty": 4,
+      "name": "Giant Growth"
+    },
+    {
+      "qty": 2,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 4,
+      "name": "Hired Claw"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of Resonance"
+    },
+    {
+      "qty": 5,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 2,
+      "name": "Oracle's Restoration"
+    },
+    {
+      "qty": 4,
+      "name": "Slickshot Show-Off"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 4,
+      "name": "Thornspire Verge"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Fire Magic"
+    },
+    {
+      "qty": 1,
+      "name": "Impractical Joke"
+    },
+    {
+      "qty": 1,
+      "name": "Iroh's Demonstration"
+    },
+    {
+      "qty": 4,
+      "name": "Origin of Metalbending"
+    },
+    {
+      "qty": 2,
+      "name": "Sear"
+    },
+    {
+      "qty": 2,
+      "name": "Snakeskin Veil"
+    },
+    {
+      "qty": 4,
+      "name": "Soul-Guide Lantern"
+    }
+  ]
+}

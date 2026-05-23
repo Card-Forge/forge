@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "name": "Jeskai Stoneblade",
+  "format": "legacy",
+  "colors": [
+    "W",
+    "U",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Jeskai Stoneblade is a tempo-control archetype that leverages card advantage to stabilize against early pressure and outvalue opponents over time. By cycling through the deck with draw spells, it reliably finds Stoneforge Mystic to fetch a signature weapon that dictates combat and board trades. The deck aims to control the pace of the game, using efficient removal and board wipes to clear paths for lethal damage.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 3,
+      "cards": [
+        "Brainstorm",
+        "Ponder",
+        "Stoneforge Mystic"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Brainstorm",
+        "Ponder",
+        "Stoneforge Mystic"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Brainstorm",
+        "Ponder",
+        "Stoneforge Mystic"
+      ]
+    },
+    "threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Ponder"
+      ]
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Brainstorm",
+        "Ponder",
+        "Stoneforge Mystic"
+      ]
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 3,
+      "cards": [
+        "Brainstorm",
+        "Ponder",
+        "Stoneforge Mystic"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Ponder",
+        "Stoneforge Mystic"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Ponder",
+        "Stoneforge Mystic"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Brainstorm",
+        "Ponder",
+        "Stoneforge Mystic"
+      ]
+    },
+    "mana_fixing": {
+      "target_count": 3,
+      "cards": [
+        "Brainstorm",
+        "Ponder",
+        "Stoneforge Mystic"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Stoneforge Mystic",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brainstorm",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always hold up mana for interaction when facing unknown or aggressive strategies",
+    "Use Ponder before Brainstorm to ensure you are drawing into relevant answers",
+    "Delay fetching the weapon if the board is heavily populated with threats you cannot remove",
+    "Play draw spells before removal to ensure you have answers for the opponent's next turn",
+    "Ponder and Brainstorm are essential for consistency"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing lands and casting draw spells to find answers"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold removal for opponent's early threats rather than playing it preemptively"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play Stoneforge Mystic as soon as mana allows to begin fetching a weapon"
+    }
+  ],
+  "kill_priority": [
+    "Ponder",
+    "Stoneforge Mystic",
+    "Brainstorm",
+    "Ponder",
+    "Stoneforge Mystic"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

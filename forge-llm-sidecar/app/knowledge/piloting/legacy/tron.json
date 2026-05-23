@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with multiple Tron lands and The One Ring",
       "Hands containing Grim Monolith and early mana sources",
-      "Hands with Candelabra of Tawnos and sufficient mana to cast it"
+      "Hands with Candelabra of Tawnos and sufficient mana to cast it",
+      "Keep any hand with 2+ lands and a mana acceleration piece (Sol Ring, Arcane Signet, Chalice of the Void) or a Tron piece.",
+      "Keep hands with 3+ lands if you have no acceleration but have fetch lands.",
+      "Against combo, keep hands with 2+ lands and interaction (Surgical Strike, Dismember)."
     ],
     "mulligan_criteria": [
       "Hands lacking acceleration or card draw",
       "Hands with only non-Tron lands",
-      "Hands missing The One Ring or Grim Monolith"
+      "Hands missing The One Ring or Grim Monolith",
+      "Mulligan hands with 0-1 lands, or 3+ lands with no acceleration/Tron pieces."
     ],
     "examples": []
   },
@@ -25,17 +29,34 @@
     "early_game": [
       "Prioritize casting The One Ring and Grim Monolith to establish early mana and card advantage",
       "Play Tron lands and search for them if possible",
-      "Avoid unnecessary combat damage while ramping"
+      "Avoid unnecessary combat damage while ramping",
+      "Turn 1: Play a land, cast Sol Ring/Arcane Signet/Chalice, or fetch a dual land.",
+      "Turn 2: Play a land, cast a Tron piece or acceleration, or fetch another land.",
+      "Prioritize untapped lands when possible, but never skip casting acceleration for a tapped land.",
+      "Sequence fetches to find Shivan Reef or Ancient Tomb for early mana, then play Tron pieces.",
+      "If you hit Tron on turn 2 or 3, cast your threat immediately."
     ],
     "mid_game": [
       "Cast Candelabra of Tawnos once mana is sufficient",
       "Begin applying pressure with tokens or mid-sized threats",
-      "Maintain mana advantage over opponent"
+      "Maintain mana advantage over opponent",
+      "Mana is your primary resource",
+      "never hoard mana past turn 3 unless you're holding up counterspells or waiting for a specific threat.",
+      "Use Candelabra of Tawnos to recycle lands for extra mana, but be mindful of the 2-mana cost.",
+      "Protect your Tron pieces with Chalice of the Void (set to 0 or 1) and countermagic.",
+      "Graveyard is generally irrelevant unless facing Rest in Peace",
+      "otherwise, focus on board presence."
     ],
     "late_game": [
       "Flood the board with Candelabra tokens",
       "Cast game-ending threats or combo pieces",
-      "Control the board with excess resources"
+      "Control the board with excess resources",
+      "Ugin, the Spirit Dragon is the primary win condition, providing card advantage and board wipe.",
+      "If Ugin is dead or you're ahead, cast a second Ugin or use your mana to attack with creatures if applicable.",
+      "In the mirror, winning the resource war and out-resourcing with Ugin or a second Tron turn is key.",
+      "Go all-in when you have assembled Tron, have a threat in hand, and your opponent has no clear answer in hand or on board.",
+      "If you're ahead on board, commit to attacking and casting your threat to close the game.",
+      "If you're behind, commit to casting your threat immediately to stabilize."
     ]
   },
   "key_cards": [
@@ -59,7 +80,13 @@
     "Prioritize The One Ring and Grim Monolith before casting Candelabra to maximize mana efficiency",
     "Hold up mana for countermagic or removal if opponent plays early threats",
     "Sequence land drops to ensure Candelabra can be cast on curve or turn after",
-    "Use Grim Monolith's draw ability to find answers before committing to Candelabra"
+    "Use Grim Monolith's draw ability to find answers before committing to Candelabra",
+    "Tron is highly sensitive to land drops",
+    "always prioritize playing lands over casting spells if you're behind on mana.",
+    "Candelabra of Tawnos is incredibly powerful but requires careful mana management",
+    "don't overextend into sweepers.",
+    "The One Ring is a powerful card advantage engine but can be a liability against Rest in Peace",
+    "consider mulliganing if you expect heavy graveyard hate."
   ],
   "matchups": [
     {
@@ -88,16 +115,36 @@
         "Win condition pieces",
         "Protection spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Candelabra of Tawnos to generate mana for multiple threats or to cast your threat in response to a counterspell. Set Chalice to 0 to counter their cheap counterspells. Use fetch lands to find untapped lands to cast threats in response to counterspells. If they have multiple counters, consider casting your threat at end step or using a cheap threat like Ugin (which is a planeswalker, not a spell, so it bypasses counterspells).",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-accelerate them by prioritizing Tron assembly. Use Cursed Totem to destroy their mana rocks. If they go wide, use Engineered Explosives set to 2 or 3. Ugin's -3 loyalty ability can remove key threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize land drops and Tron assembly. Use countermagic to protect your threats and disrupt theirs. Ugin is the key; winning the planeswalker war usually decides the match. Be willing to trade Tron pieces for theirs if it gives you a tempo advantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early aggressive creatures",
     "Counterspell packages",
     "Board wipes",
-    "Hand disruption"
+    "Hand disruption",
+    "Watch for counterspells (Mana Leak, Spell Pierce, Daze), targeted removal (Surgical Strike, Dismember), and sweepers (Engineered Explosives, Cursed Totem).",
+    "Pay attention to how many lands they play",
+    "control decks often play extra lands to stabilize.",
+    "Note if they're holding up mana for multiple turns, indicating a counterspell or sweeper."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:10:39+00:00",
     "model": "local-model",
@@ -126,6 +173,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

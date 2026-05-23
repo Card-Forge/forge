@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "name": "5c Control",
+  "format": "standard",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "This five-color control deck aims to outlast opponents by leveraging a wide array of removal and board wipes like Day of Judgment. It stabilizes early games with efficient answers, then transitions into a value-heavy late game using Stock Up to build an unblockable board presence. Jeskai Revelation serves as a flexible finisher that rewards spell-heavy turns, allowing you to close games efficiently once the board is clear.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 4,
+      "cards": [
+        "Stock Up"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Jeskai Revelation",
+        "Stock Up",
+        "Together as One"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Consult the Star Charts",
+        "Stock Up"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Shared Roots"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Day of Judgment",
+        "Jeskai Revelation"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "threats": {
+      "target_count": 20,
+      "cards": [
+        "Day of Judgment",
+        "Jeskai Revelation",
+        "Leatherhead, Swamp Stalker",
+        "Shimmerwilds Growth",
+        "Stock Up",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 20,
+      "cards": [
+        "Day of Judgment",
+        "Erode",
+        "Inevitable Defeat",
+        "Jeskai Revelation",
+        "Leatherhead, Swamp Stalker",
+        "Lightning Helix",
+        "Maelstrom Pulse",
+        "Pyroclasm",
+        "Together as One"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 3
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Day of Judgment",
+        "Pyroclasm"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": [
+        "Disdainful Stroke"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Inevitable Defeat",
+        "Leatherhead, Swamp Stalker",
+        "Mistrise Village"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 13,
+      "cards": [
+        "Flashback",
+        "Jeskai Revelation",
+        "Rest in Peace",
+        "Strategic Betrayal",
+        "Tablet of Discovery"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Flashback",
+        "Jeskai Revelation"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Great Hall of the Biblioplex",
+        "Stock Up"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Day of Judgment",
+        "Jeskai Revelation"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Jeskai Revelation",
+        "Stock Up"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Arcane Omens",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 28,
+      "cards": [
+        "Breeding Pool",
+        "Great Hall of the Biblioplex",
+        "Jeskai Revelation",
+        "Mistrise Village",
+        "Starting Town",
+        "Stomping Ground",
+        "Tablet of Discovery",
+        "Temple Garden"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Breeding Pool",
+        "Great Hall of the Biblioplex",
+        "Island",
+        "Mistrise Village",
+        "Mountain",
+        "Plains",
+        "Starting Town",
+        "Stomping Ground",
+        "Swamp",
+        "Temple Garden"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.37
+  },
+  "dual_role_cards": [
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Day of Judgment",
+      "roles": [
+        "payoff_cards",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flashback",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Great Hall of the Biblioplex",
+      "roles": [
+        "engines",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inevitable Defeat",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jeskai Revelation",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leatherhead, Swamp Stalker",
+      "roles": [
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mistrise Village",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroclasm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stock Up",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "mana_reducers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tablet of Discovery",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Together as One",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Voice of Victory",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast Jeskai Revelation after other spells on the same turn to maximize its damage output",
+    "Hold up Day of Judgment until the opponent commits creatures to the board",
+    "Equip Stock Up to creatures that can immediately attack or block to maximize tempo",
+    "Prioritize removal over board wipes when the opponent has few threats",
+    "Common mistakes include overcommitting to the board too early, failing to hold up mana for interaction, and mismanaging Jeskai Revelation's exile trigger."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and hold up mana for interaction"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use cheap removal to handle early threats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize keeping the board clear to survive"
+    }
+  ],
+  "kill_priority": [
+    "Great Hall of the Biblioplex",
+    "Stock Up",
+    "Day of Judgment",
+    "Jeskai Revelation",
+    "Leatherhead, Swamp Stalker",
+    "Shimmerwilds Growth",
+    "Voice of Victory"
+  ],
+  "interaction_to_disrupt": [
+    "Disdainful Stroke",
+    "Inevitable Defeat",
+    "Leatherhead, Swamp Stalker",
+    "Mistrise Village",
+    "Day of Judgment",
+    "Erode",
+    "Jeskai Revelation",
+    "Lightning Helix"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/5c-control.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

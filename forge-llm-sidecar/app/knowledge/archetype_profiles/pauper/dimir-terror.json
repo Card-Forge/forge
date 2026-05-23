@@ -1,0 +1,444 @@
+{
+  "schema_version": 1,
+  "name": "Dimir Terror",
+  "format": "pauper",
+  "colors": [
+    "U",
+    "B"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Dimir Terror is a Pauper tempo deck that uses low-cost creatures, cheap disruption, and card selection to delay opponents and maintain board control. It relies on a graveyard-heavy cantrip package to efficiently cast powerful threats like Tolarian Terror and Gurmag Angler. The deck adapts its posture between aggressive and reactive lines depending on the matchup, aiming to outmaneuver opponents with mana-efficient interaction and protected win conditions.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 4,
+      "cards": [
+        "Tolarian Terror"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 31,
+      "cards": [
+        "Brainstorm",
+        "Counterspell",
+        "L\u00f3rien Revealed",
+        "Mental Note",
+        "Ponder",
+        "Sneaky Snacker",
+        "Snuff Out",
+        "Thought Scour"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 19,
+      "cards": [
+        "Brainstorm",
+        "Counterspell",
+        "Ponder",
+        "Snuff Out",
+        "Thought Scour"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "L\u00f3rien Revealed"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Counterspell",
+        "Snuff Out",
+        "Tolarian Terror"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 24,
+      "cards": [
+        "Counterspell",
+        "Cryptic Serpent",
+        "Sneaky Snacker",
+        "Snuff Out",
+        "Thought Scour",
+        "Tolarian Terror"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 10,
+      "cards": [
+        "Blue Elemental Blast",
+        "Hydroblast",
+        "Snuff Out"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 23,
+      "cards": [
+        "Annul",
+        "Blue Elemental Blast",
+        "Counterspell",
+        "Dispel",
+        "Hydroblast",
+        "Snuff Out",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 11
+    },
+    "protection": {
+      "target_count": 16,
+      "cards": [
+        "Counterspell",
+        "Snuff Out",
+        "Spell Pierce",
+        "Tolarian Terror"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 8,
+      "cards": [
+        "Brainstorm",
+        "Thought Scour"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 33,
+      "cards": [
+        "Brainstorm",
+        "Counterspell",
+        "Cryptic Serpent",
+        "Mental Note",
+        "Sleep of the Dead",
+        "Sneaky Snacker",
+        "Snuff Out",
+        "Thought Scour",
+        "Tolarian Terror"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Sleep of the Dead",
+        "Sneaky Snacker"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Counterspell",
+        "Snuff Out"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Snuff Out",
+        "Tolarian Terror"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Brainstorm",
+        "Counterspell",
+        "Snuff Out"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Arms of Hadar",
+        "Counterspell",
+        "Snuff Out",
+        "Unexpected Fangs"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 24,
+      "cards": [
+        "Contaminated Aquifer",
+        "Snow-Covered Island",
+        "Spell Pierce",
+        "Tolarian Terror"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 16,
+      "cards": [
+        "Contaminated Aquifer",
+        "Snow-Covered Island"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.4
+  },
+  "dual_role_cards": [
+    {
+      "card": "Blue Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brainstorm",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Contaminated Aquifer",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Counterspell",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cryptic Serpent",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mental Note",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sleep of the Dead",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sneaky Snacker",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snuff Out",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "payoff_cards",
+        "protection",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spell Pierce",
+      "roles": [
+        "counterspells",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thought Scour",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tolarian Terror",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "mana_reducers",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Measure graveyard size carefully before casting Gurmag Angler to balance discount with Tolarian Terror's needs.",
+    "Use Brainstorm to discard dead cards and set up Thought Scour or Deep Analysis for maximum efficiency.",
+    "Avoid relying solely on cantrips early game to find interaction, as it costs mana and delays development.",
+    "Pair removal on Tolarian Terror with Spell Pierce to force opponents to pay four extra mana to answer it.",
+    "Adopt an aggressive posture against midranges to prevent them from growing, but slow down against explosive aggro to stabilize."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cast cheap cantrips like Brainstorm and Consider to filter the deck"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use low-cost disruption like Spell Pierce and Snuff Out to delay opponent's plans"
+    },
+    {
+      "trigger": "early game",
+      "line": "Avoid over-committing to cantrips if it delays finding necessary interaction against aggressive decks"
+    }
+  ],
+  "kill_priority": [
+    "Counterspell",
+    "Snuff Out",
+    "Tolarian Terror",
+    "Brainstorm",
+    "Cryptic Serpent",
+    "Sneaky Snacker",
+    "Thought Scour"
+  ],
+  "interaction_to_disrupt": [
+    "Annul",
+    "Blue Elemental Blast",
+    "Counterspell",
+    "Dispel",
+    "Hydroblast",
+    "Snuff Out",
+    "Spell Pierce",
+    "Tolarian Terror"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/dimir-terror.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

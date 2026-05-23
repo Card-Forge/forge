@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Thoughtseize and a one-drop",
       "Hands containing Abhorrent Oculus and early interaction",
-      "Two-land hands with a disruptive spell"
+      "Two-land hands with a disruptive spell",
+      "Keep 2-3 lands (including Agatha's if possible) plus 1-2 spells.",
+      "Prioritize hands with Thoughtseize + a land, or a 2-drop threat + lands."
     ],
     "mulligan_criteria": [
       "High-curve hands lacking early interaction",
       "Hands with only lands and late-game threats",
-      "Hands missing both disruption and low-cost value generators"
+      "Hands missing both disruption and low-cost value generators",
+      "Mulligan pure land hands, hands with only Agatha's and no spells, or hands with multiple Thoughtseize but no early plays."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Cast Thoughtseize to remove key threats or combo pieces",
       "Play Abhorrent Oculus to generate immediate card advantage",
-      "Establish land drops while holding interaction for opponent's plays"
+      "Establish land drops while holding interaction for opponent's plays",
+      "Turn 1: Play a land, cast Thoughtseize if possible.",
+      "Turn 2: Play Agatha's or a midrange threat.",
+      "Tap Agatha's for mana/Zombies as needed.",
+      "Sequence lands to ensure colored mana for Thoughtseize and threats."
     ],
     "mid_game": [
       "Deploy Agatha's Soul Cauldron to convert discards into draws",
       "Trade creatures efficiently to maintain board parity",
-      "Use discard effects to fuel Cauldron while disrupting opponent's hand"
+      "Use discard effects to fuel Cauldron while disrupting opponent's hand",
+      "Hoards mana for Thoughtseize early, then commits to board.",
+      "Uses Agatha's to fuel spells and generate incremental value.",
+      "Avoids overextending into spot removal",
+      "keeps a Thoughtseize or removal for key threats.",
+      "Commits threats when opponent has no spot removal or counters.",
+      "Holds back if they have sweepers or spot removal."
     ],
     "late_game": [
       "Leverage card advantage to outdraw and outresource the opponent",
       "Play resilient threats that are difficult to remove efficiently",
-      "Use Cauldron to refill hand and close out the game with combat or spells"
+      "Use Cauldron to refill hand and close out the game with combat or spells",
+      "The Wandering Emperor, The World Tree, or a fully fueled Abhorrent Oculus combo with Agatha's.",
+      "Wins by trading up in cards and closing with unblockable threats or combat damage.",
+      "When opponent is tapped out, has no removal, or you've established a board they can't clear.",
+      "Goes all-in with threats and Agatha's pumps."
     ]
   },
   "key_cards": [
@@ -58,7 +75,11 @@
   "sequencing_tips": [
     "Prioritize Thoughtseize before playing creatures to avoid trading into removal",
     "Trigger Abhorrent Oculus death draws early to accelerate card advantage",
-    "Time Agatha's Soul Cauldron activations to avoid leaving yourself vulnerable to board wipes"
+    "Time Agatha's Soul Cauldron activations to avoid leaving yourself vulnerable to board wipes",
+    "Agatha's Soul Cauldron is a land, so it doesn't count as a spell for counterspells.",
+    "Abhorrent Oculus synergizes with Agatha's tokens and sacrifice outlets.",
+    "Don't overcommit to Agatha's if you can't protect it.",
+    "Watch for artifact hate vs Affinity."
   ],
   "matchups": [
     {
@@ -87,15 +108,33 @@
         "Key combo pieces",
         "Win conditions that bypass combat"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Uses Thoughtseize to remove counterspells. Casts threats in response to their counterspells. Uses Agatha's to generate mana for multiple threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Thoughtseizes their ramp pieces. Plays early threats to pressure before they can cast big spells. Uses spot removal on key ramp creatures.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Thoughtseizes for their Thoughtseize or key threats. Trades efficiently. Wins by having better card advantage and better late-game finishers.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Combo enablers and finishers",
-    "Board wipes and targeted removal"
+    "Board wipes and targeted removal",
+    "Watches for sweepers (Supreme Verdict, Anger of the Gods), spot removal (Fatal Push, Go Blank), and combo pieces (Amulet, Ruby, Energy counters).",
+    "Notes when they tap out for threats vs holding up removal."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:13:24+00:00",
     "model": "local-model",
@@ -111,7 +150,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

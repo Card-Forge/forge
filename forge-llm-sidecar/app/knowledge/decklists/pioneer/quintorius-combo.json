@@ -1,0 +1,121 @@
+{
+  "archetype": "Quintorius Combo",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/quintorius-combo.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Clever Impersonator"
+    },
+    {
+      "qty": 4,
+      "name": "Conduit Pylons"
+    },
+    {
+      "qty": 4,
+      "name": "Consign // Oblivion"
+    },
+    {
+      "qty": 4,
+      "name": "Creative Outburst"
+    },
+    {
+      "qty": 4,
+      "name": "Eddymurk Crab"
+    },
+    {
+      "qty": 4,
+      "name": "Elegant Parlor"
+    },
+    {
+      "qty": 4,
+      "name": "Emeria's Call"
+    },
+    {
+      "qty": 4,
+      "name": "Flotsam // Jetsam"
+    },
+    {
+      "qty": 4,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Magma Opus"
+    },
+    {
+      "qty": 4,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Quintorius Kand"
+    },
+    {
+      "qty": 4,
+      "name": "Riverpyre Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Sea Gate Restoration"
+    },
+    {
+      "qty": 4,
+      "name": "Spark Double"
+    },
+    {
+      "qty": 4,
+      "name": "The Dawning Archaic"
+    },
+    {
+      "qty": 4,
+      "name": "Trumpeting Carnosaur"
+    },
+    {
+      "qty": 4,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 4,
+      "name": "Visionary's Dance"
+    },
+    {
+      "qty": 4,
+      "name": "Warrant // Warden"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Commence the Endgame"
+    },
+    {
+      "qty": 4,
+      "name": "Consecrate // Consume"
+    },
+    {
+      "qty": 2,
+      "name": "Depose // Deploy"
+    },
+    {
+      "qty": 4,
+      "name": "Repudiate // Replicate"
+    },
+    {
+      "qty": 2,
+      "name": "Thought Distortion"
+    },
+    {
+      "qty": 1,
+      "name": "Yorion, Sky Nomad"
+    }
+  ]
+}

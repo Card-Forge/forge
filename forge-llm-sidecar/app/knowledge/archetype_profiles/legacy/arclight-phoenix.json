@@ -1,0 +1,407 @@
+{
+  "schema_version": 1,
+  "name": "Arclight Phoenix",
+  "format": "legacy",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Arclight Phoenix",
+    "Murktide Regent",
+    "Thoughtseize"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Daze",
+    "Force of Negation",
+    "Force of Will",
+    "Hydroblast",
+    "Pyroblast",
+    "Spell Pierce",
+    "Fatal Push"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 6,
+      "cards": [
+        "Cabal Ritual",
+        "Dark Ritual"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Brainstorm",
+        "Faithless Looting",
+        "L\u00f3rien Revealed",
+        "Ponder"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 11,
+      "cards": [
+        "Faithless Looting",
+        "Flow State",
+        "Ponder",
+        "Thundering Falls",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 13,
+      "cards": [
+        "Buried Alive",
+        "Flooded Strand",
+        "L\u00f3rien Revealed",
+        "Misty Rainforest",
+        "Polluted Delta"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 10,
+      "cards": [
+        "Arclight Phoenix",
+        "Murktide Regent",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 11,
+      "cards": [
+        "Fatal Push",
+        "Hydroblast",
+        "Lightning Bolt",
+        "Meltdown",
+        "Pyroblast"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 16,
+      "cards": [
+        "Consign to Memory",
+        "Daze",
+        "Force of Negation",
+        "Force of Will",
+        "Hydroblast",
+        "Pyroblast",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 9
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 23,
+      "cards": [
+        "Arclight Phoenix",
+        "Buried Alive",
+        "Cabal Ritual",
+        "Faithless Looting",
+        "Flow State",
+        "Force of Negation",
+        "Murktide Regent",
+        "Surgical Extraction",
+        "Thundering Falls",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 9,
+      "cards": [
+        "Arclight Phoenix",
+        "Daze",
+        "Faithless Looting",
+        "Murktide Regent"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Brazen Borrower"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 15,
+      "cards": [
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Thundering Falls",
+        "Undercity Sewers",
+        "Underground Sea",
+        "Volcanic Island"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 15,
+      "cards": [
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Thundering Falls",
+        "Undercity Sewers",
+        "Underground Sea",
+        "Volcanic Island"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Arclight Phoenix",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Buried Alive",
+      "roles": [
+        "graveyard_enablers",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cabal Ritual",
+      "roles": [
+        "graveyard_enablers",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Daze",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faithless Looting",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Murktide Regent",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thundering Falls",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Sea",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volcanic Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/arclight-phoenix.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

@@ -1,0 +1,129 @@
+{
+  "archetype": "Arclight Phoenix",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/arclight-phoenix.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Arclight Phoenix"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Buried Alive"
+    },
+    {
+      "qty": 2,
+      "name": "Cabal Ritual"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 2,
+      "name": "Daze"
+    },
+    {
+      "qty": 1,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 2,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Flow State"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 1,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 2,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 2,
+      "name": "Murktide Regent"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Thundering Falls"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 3,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 2,
+      "name": "Volcanic Island"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Brazen Borrower"
+    },
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Meltdown"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Surgical Extraction"
+    }
+  ]
+}

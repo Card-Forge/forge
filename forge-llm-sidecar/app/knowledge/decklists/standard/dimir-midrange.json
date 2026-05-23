@@ -1,0 +1,137 @@
+{
+  "archetype": "Dimir Midrange",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/dimir-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 2,
+      "name": "Cecil, Dark Knight"
+    },
+    {
+      "qty": 4,
+      "name": "Deep-Cavern Bat"
+    },
+    {
+      "qty": 3,
+      "name": "Enduring Curiosity"
+    },
+    {
+      "qty": 4,
+      "name": "Floodpits Drowner"
+    },
+    {
+      "qty": 1,
+      "name": "Fountainport"
+    },
+    {
+      "qty": 4,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 5,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Kaito, Bane of Nightmares"
+    },
+    {
+      "qty": 1,
+      "name": "Loch Mare"
+    },
+    {
+      "qty": 4,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 2,
+      "name": "Phantom Interference"
+    },
+    {
+      "qty": 1,
+      "name": "Preacher of the Schism"
+    },
+    {
+      "qty": 4,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 2,
+      "name": "Restless Reef"
+    },
+    {
+      "qty": 2,
+      "name": "Shoot the Sheriff"
+    },
+    {
+      "qty": 2,
+      "name": "Soulstone Sanctuary"
+    },
+    {
+      "qty": 4,
+      "name": "Spyglass Siren"
+    },
+    {
+      "qty": 3,
+      "name": "Swamp"
+    },
+    {
+      "qty": 3,
+      "name": "Tishana's Tidebinder"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Annul"
+    },
+    {
+      "qty": 2,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 1,
+      "name": "Enduring Curiosity"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 1,
+      "name": "Loch Mare"
+    },
+    {
+      "qty": 1,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 2,
+      "name": "The Unagi of Kyoshi Island"
+    },
+    {
+      "qty": 1,
+      "name": "Tishana's Tidebinder"
+    },
+    {
+      "qty": 1,
+      "name": "Tragic Trajectory"
+    },
+    {
+      "qty": 2,
+      "name": "Zero Point Ballad"
+    }
+  ]
+}

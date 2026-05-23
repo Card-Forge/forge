@@ -1,0 +1,411 @@
+{
+  "schema_version": 1,
+  "name": "Bant Control",
+  "format": "legacy",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Up the Beanstalk",
+    "Teferi, Time Raveler",
+    "Containment Priest",
+    "Gaddock Teeg",
+    "Lavinia, Azorius Renegade",
+    "Quantum Riddler",
+    "Tamiyo, Inquisitive Student",
+    "Uro, Titan of Nature's Wrath"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Force of Negation",
+    "Force of Will",
+    "Hydroblast",
+    "Spell Pierce",
+    "Stifle",
+    "Supreme Verdict",
+    "Boseiju, Who Endures"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 19,
+      "cards": [
+        "Brainstorm",
+        "Life from the Loam",
+        "Quantum Riddler",
+        "Teferi, Time Raveler",
+        "Up the Beanstalk",
+        "Uro, Titan of Nature's Wrath"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 1,
+      "cards": [
+        "Meticulous Archive"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 10,
+      "cards": [
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Polluted Delta"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 19,
+      "cards": [
+        "Containment Priest",
+        "Gaddock Teeg",
+        "Lavinia, Azorius Renegade",
+        "Quantum Riddler",
+        "Tamiyo, Inquisitive Student",
+        "Teferi, Time Raveler",
+        "Uro, Titan of Nature's Wrath"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 14,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Hydroblast",
+        "Prismatic Ending",
+        "Supreme Verdict",
+        "Swords to Plowshares",
+        "Wasteland",
+        "Wrath of the Skies"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 3
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Supreme Verdict"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 13,
+      "cards": [
+        "Consign to Memory",
+        "Force of Negation",
+        "Force of Will",
+        "Hydroblast",
+        "Spell Pierce",
+        "Stifle"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 5
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Supreme Verdict"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 7,
+      "cards": [
+        "Force of Negation",
+        "Life from the Loam",
+        "Meticulous Archive",
+        "Uro, Titan of Nature's Wrath"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 7,
+      "cards": [
+        "Life from the Loam",
+        "Teferi, Time Raveler",
+        "Uro, Titan of Nature's Wrath"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Up the Beanstalk"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Lavinia, Azorius Renegade"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 24,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Carpet of Flowers",
+        "Flooded Strand",
+        "Meticulous Archive",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Savannah",
+        "Tropical Island",
+        "Tundra",
+        "Wasteland"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 3
+    },
+    "lands": {
+      "target_count": 22,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Flooded Strand",
+        "Island",
+        "Meticulous Archive",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Savannah",
+        "Tropical Island",
+        "Tundra",
+        "Wasteland"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.39
+  },
+  "dual_role_cards": [
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lavinia, Azorius Renegade",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Life from the Loam",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quantum Riddler",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Savannah",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Supreme Verdict",
+      "roles": [
+        "protection",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teferi, Time Raveler",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tropical Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tundra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Up the Beanstalk",
+      "roles": [
+        "card_advantage",
+        "engines"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Uro, Titan of Nature's Wrath",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/bant-control.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

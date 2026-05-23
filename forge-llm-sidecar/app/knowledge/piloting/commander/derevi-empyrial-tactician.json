@@ -1,0 +1,132 @@
+{
+  "archetype": "Derevi, Empyrial Tactician",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Derevi operates as a tempo-control engine that trades card disadvantage for massive tempo swings and resource generation. The goal is to stabilize early with cheap interaction, then leverage untap effects and combat tricks to out-value opponents and close games through incremental advantage or overwhelming combat steps.",
+  "win_conditions": [
+    "Derevi with combat tricks, untapped artifact/creature combos, or a sudden board wipe + value engine.",
+    "Win through incremental combat damage or overwhelming value from untap synergies.",
+    "If running token or golem synergies, untap multiple threats for a lethal attack."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep any hand with 2-3 lands (including fetches/shocks) and a turn-1 or turn-2 play (Sol Ring, Arcane Signet, or a cheap creature/spell).",
+      "Prioritize hands with early interaction or mana acceleration.",
+      "Keep hands with discard spells if facing control/combo."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 3+ lands with no early plays, or 2+ lands with only high-cost spells."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring/Arcane Signet, or drop a cheap threat/interaction.",
+      "Turn 2: Develop mana base, cast a one-mana spell, or establish board presence.",
+      "If you have Derevi, aim to cast her by turn 3-4 once you have WU mana and a land to untap for tempo.",
+      "Sequence lands to ensure you can cast her without stalling, and always leave mana open for protection or combat tricks."
+    ],
+    "mid_game": [
+      "Manage mana carefully",
+      "don't overcommit to untap effects if you'll be tapped out for combat tricks.",
+      "Use the upkeep draw/discard as a filter\u2014keep high-impact spells, discard low-impact ones.",
+      "Utilize discard outlets or card draw engines to mitigate the upkeep downside and maintain hand size.",
+      "Prioritize untapping artifacts or creatures that enable immediate value over untapping lands unless you're mana-flooded.",
+      "Commit threats when you have interaction or untap outlets ready to protect them or enable combat tricks.",
+      "Hold back if the opponent has sweepers or counterspells.",
+      "Derevi herself is fragile"
+    ],
+    "late_game": [
+      "Derevi with combat tricks, untapped artifact/creature combos, or a sudden board wipe + value engine.",
+      "Win through incremental combat damage or overwhelming value from untap synergies.",
+      "If running token or golem synergies, untap multiple threats for a lethal attack.",
+      "Go all-in when you have Derevi untapped, a combat trick ready, and the opponent has no sweepers or counterspells.",
+      "Also commit when you can untap multiple threats for a lethal attack, or when you've forced the opponent to use their last interaction on a cheaper threat."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Derevi, Empyrial Tactician",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Derevi's upkeep draw/discard is a double-edged sword",
+    "mitigate it with card draw engines or discard outlets.",
+    "Don't overuse her untap ability on lands if you need mana for combat tricks.",
+    "Watch for 'tap out' windows\u2014opponents often leave themselves vulnerable after casting big spells.",
+    "Common mistake: casting Derevi too early without protection or untap targets, leaving her vulnerable to removal.",
+    "Always prioritize protecting her over overcommitting to a single untap effect."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multi-target spells, or cast Derevi when they're tapped out. Utilize counterspell protection or force them to use resources on cheaper threats first. If they're holding up counters, apply pressure with multiple small threats to drain their resources.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use discard to hit their ramp spells, and bring in artifact hate or early interaction to slow their acceleration. Don't let them stabilize; punish their mana development with efficient removal or board wipes.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and board wipes. Don't overextend; stabilize with cheap blockers or bounce effects, then close the game with Derevi's value. Use discard to hit their key threats and disrupt their curve.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card advantage and incremental threats. Protect Derevi, use counterspells to protect your key plays, and pressure when they're low on resources. Force them to interact with your cheaper threats to exhaust their hand.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the value exchange. Protect your Derevi, force them to use interaction on your cheaper threats, and leverage the upkeep draw/discard to out-resource them. Prioritize untap synergies that out-value theirs, and track their hand size to know when to commit or hold back.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath, Cyclonic), counterspells, and graveyard strategies.",
+    "Note when opponents tap out for big spells\u2014this is your window to attack or cast Derevi.",
+    "Track their hand size",
+    "if they're low on answers, pressure harder.",
+    "Pay attention to mana development",
+    "opponents running ramp or combo will often show early acceleration, signaling a need for early disruption."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with at least two cheap instants or sorceries",
       "Hands containing Ruby Medallion or Pyretic Ritual",
-      "Hands with Ral, Monsoon Mage and a red/blue instant to replay"
+      "Hands with Ral, Monsoon Mage and a red/blue instant to replay",
+      "Keep hands with 2-3 lands (preferably with fetch/land drop synergy), Ruby Medallion, Pyretic Ritual, and at least one cantrip or win condition."
     ],
     "mulligan_criteria": [
       "Hands lacking mana acceleration or storm enablers",
       "Hands with only high-cost permanents or lands",
-      "Hands without instant-speed interaction or card draw"
+      "Hands without instant-speed interaction or card draw",
+      "Mulligan if you have 0-1 lands, no mana acceleration, or only win conditions without pieces to assemble the combo."
     ],
     "examples": [
       {
@@ -48,17 +50,31 @@
     "early_game": [
       "Play mana rocks and cheap instants to establish acceleration and storm count",
       "Use card draw to dig for combo pieces and finishers",
-      "Hold up instant-speed disruption to protect key plays"
+      "Hold up instant-speed disruption to protect key plays",
+      "Turn 1: Play a land, cast a cantrip or ritual, and drop Ruby Medallion if possible.",
+      "Turn 2: Chain rituals and cantrips to draw into your win condition or additional pieces.",
+      "Prioritize fetching lands that enter untapped or using mana rocks to maintain tempo."
     ],
     "mid_game": [
       "Assemble the storm combo and resolve the finisher",
       "Use Ral, Monsoon Mage to replay discarded or resolved instants for additional value",
-      "Apply pressure with pumped creatures if the combo is delayed"
+      "Apply pressure with pumped creatures if the combo is delayed",
+      "Treat your graveyard as a resource for storm count, but avoid unnecessary discards.",
+      "Sequence rituals to maximize mana while preserving cards for the storm turn.",
+      "Keep cantrips ready to dig through your deck if the combo is disrupted.",
+      "Avoid committing to the board unless you have a backup win condition or can stabilize.",
+      "Storm decks are fragile",
+      "prioritize drawing into the combo over trading creatures."
     ],
     "late_game": [
       "Stabilize with Ral's recursion and board presence if the combo is countered",
       "Use life total and card advantage to outlast opponents",
-      "Look for alternate win conditions like token generation or direct damage spells"
+      "Look for alternate win conditions like token generation or direct damage spells",
+      "Cast 10+ spells in a single turn to trigger storm damage or win conditions like Ral, Monsoon Mage.",
+      "Sequence rituals first, then cantrips, then the finisher.",
+      "Ensure you have enough mana to cast the finisher for lethal.",
+      "Go all-in when you have enough mana sources and rituals to cast 10+ spells, or when you can guarantee the finisher resolves.",
+      "If you have a backup win condition or can protect the storm turn, commit aggressively."
     ]
   },
   "key_cards": [
@@ -82,7 +98,13 @@
     "Play Ruby Medallion before Pyretic Ritual to maximize red discount and pump",
     "Cast cheap instants before drawing to maximize storm count",
     "Use Ral's ETB to replay the most impactful instant or sorcery in your graveyard",
-    "Hold up instant-speed interaction to protect combo pieces from counterspells"
+    "Hold up instant-speed interaction to protect combo pieces from counterspells",
+    "Ruby Medallion is crucial for reducing red spell costs, so sequence it early.",
+    "Pyretic Ritual provides burst mana but can be a target",
+    "protect it with cantrips or counters.",
+    "Be mindful of the storm mechanic: your graveyard count matters, so avoid unnecessary discards.",
+    "Common mistake: over-committing to the board instead of drawing into the combo.",
+    "Always count your spells carefully before the storm turn to ensure lethal damage."
   ],
   "matchups": [
     {
@@ -111,6 +133,21 @@
         "Board wipes",
         "Card draw"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig through counters, cast spells in response to their counters, and sequence your storm turn to out-value their hand. Bring in additional counters and protection in the sideboard.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them with fast mana and early storm attempts. Use counterspells and artifact hate to disrupt their mana base. Don't let them stabilize; pressure them with early threats or combo out before they reach their big spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Out-value with better sequencing and sideboard hate. Prioritize graveyard protection, additional win conditions, and hand disruption. Track their storm count and counters, and aim to resolve your finisher first. Bring in more counters and protection to protect your combo.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -119,7 +156,10 @@
     "Inquisition of Kozilek",
     "Rest in Peace",
     "Field of the Dead",
-    "Lightning Helix"
+    "Lightning Helix",
+    "Watch for counterspells (especially in control/mirror), removal targeting your win condition or mana rocks, and graveyard hate.",
+    "Note when opponents hold up mana for multiple turns, as they likely have a counter or sweep.",
+    "Track their graveyard size if they play storm or graveyard-based strategies."
   ],
   "combo_profile": {
     "profile_version": 1,
@@ -247,19 +287,19 @@
       {
         "opponent_type": "control",
         "posture": "cautious",
-        "go_threshold": 85,
+        "go_threshold": 85.0,
         "notes": "Against open countermagic, prefer protection, bait, or additional setup unless the line already includes protection."
       },
       {
         "opponent_type": "aggro",
         "posture": "faster",
-        "go_threshold": 65,
+        "go_threshold": 65.0,
         "notes": "Against pressure, accept less perfect setup and try to combo before lethal damage arrives."
       },
       {
         "opponent_type": "fast_combo",
         "posture": "faster",
-        "go_threshold": 65,
+        "go_threshold": 65.0,
         "notes": "Against another combo deck, push earlier attempts rather than waiting for a perfect hand."
       }
     ],
@@ -273,10 +313,40 @@
     ]
   },
   "metadata": {
-    "source": "build_piloting_guides.py",
+    "source": "build_piloting_guides.py + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-20T17:22:11+00:00",
     "model": "local-model",
-    "schema_version": 1
-  }
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": null,
+  "overview_evidence": null,
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
 }

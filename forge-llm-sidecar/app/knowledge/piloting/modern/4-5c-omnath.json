@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with 2+ lands and a cheap spell or creature",
       "Hands containing Omnath, Locus of Creation with early land drops",
-      "Hands with Solitude or Teferi, Time Raveler and sufficient mana"
+      "Hands with Solitude or Teferi, Time Raveler and sufficient mana",
+      "Keep hands with 2-3 lands (including at least one fetch/shock or equivalent fixing), a turn-1 land drop, and either Teferi, Time Raveler, Time Raveler, or a cheap interaction/removal spell.",
+      "Prioritize hands that can play a land and cast a 1-2 mana interaction or draw spell on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Hands with 0 or 1 land",
       "Hands with only high-cost permanents and no acceleration",
-      "Hands lacking interaction or early plays"
+      "Hands lacking interaction or early plays",
+      "Mulligan hands with 0-1 lands, unfixable multi-color demands, or only high-cost spells without early answers."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Prioritize land drops and cheap mana rocks to accelerate into Omnath",
       "Play Solitude early to disrupt opponent's board development",
-      "Use Teferi, Time Raveler to protect key permanents and gain tempo"
+      "Use Teferi, Time Raveler to protect key permanents and gain tempo",
+      "Turn 1: Play a land, cast Teferi, Time Raveler or Time Raveler if mana allows.",
+      "Turn 2: Develop mana, cast a counterspell or removal, or play a second land.",
+      "Against aggro/combo, prioritize interaction over ramp.",
+      "Against control/ramp, develop mana and draw cards.",
+      "Sequence lands to ensure W/U/R/G availability by turn 3-4 for Omnath, holding up blue mana for protection when possible."
     ],
     "mid_game": [
       "Focus on playing lands to trigger Omnath's counters and generate mana",
       "Use generated mana to cast additional threats or answer opponent's plays",
-      "Maintain board presence with Solitude and Teferi while ramping"
+      "Maintain board presence with Solitude and Teferi while ramping",
+      "Hoard mana for Omnath (typically 5-6 mana) and protection spells.",
+      "Use card draw to maintain hand size and track opponent resources.",
+      "Treat the graveyard as a secondary concern unless facing recursion engines",
+      "prioritize keeping Solitude and Teferi, Time Raveler in play as they provide both protection and removal.",
+      "Never overextend mana into a single threat without backup interaction.",
+      "Commit threats only when you have interaction or a board wipe ready."
     ],
     "late_game": [
       "Leverage massive mana advantage to deploy multiple threats simultaneously",
       "Use Omnath's counters to draw cards or generate additional resources",
-      "Close out the game with an unblockable board state or direct damage"
+      "Close out the game with an unblockable board state or direct damage",
+      "Omnath, Locus of Creation is the primary finisher.",
+      "Once it resolves and enters, follow up with token generation, card draw, and protection.",
+      "Solitude can exile opponent's removal or threats to secure the win.",
+      "Teferi, Time Raveler can lock down the board and enable Omnath.",
+      "Win by out-valuing the opponent through card advantage and board presence.",
+      "Go all-in when you have resolved Omnath, have protection (Solitude or counters), and the opponent lacks immediate removal or combo answers."
     ]
   },
   "key_cards": [
@@ -59,7 +79,12 @@
     "Always play lands before other spells to trigger Omnath's abilities",
     "Hold up mana for Solitude's ability to bounce key threats",
     "Use Teferi, Time Raveler's abilities to respond to opponent's plays rather than proactively",
-    "Prioritize keeping Solitude and Teferi on the battlefield to maintain tempo"
+    "Prioritize keeping Solitude and Teferi on the battlefield to maintain tempo",
+    "Common mistakes include overcommitting to Omnath without protection, mismanaging mana colors, ignoring opponent's graveyard, and failing to track opponent's hand size.",
+    "Unique interactions: Solitude can exile permanents from any zone, making it versatile for protection and removal.",
+    "Teferi, Time Raveler's loyalty counters can be a resource.",
+    "Always be mindful of the legendary rule if you control multiple Omnaths.",
+    "Practice timing your protection spells to counter opponent's removal or combo finishers."
   ],
   "matchups": [
     {
@@ -88,6 +113,21 @@
         "Board control spells",
         "Value engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split second (if available), cheap interaction, or resolve threats through layers. Play around counters by having backup plans or using protection. If possible, resolve Omnath when the opponent has no mana up. Force them to use resources on you before committing your win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-grind them with card draw and removal. Use Teferi, Time Raveler to slow their mana development. Prioritize removing their ramp sources and finishers. Don't trade up unnecessarily; wait for them to overextend or make a mistake, then capitalize with your engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize keeping interaction and counters. Use Solitude to exile opponent's Omnath or Teferi, Time Raveler. Win the card advantage battle by drawing more and protecting your own threats. Track their hand size and mana to time your plays perfectly.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +135,16 @@
     "Board wipes",
     "Permanent removal",
     "Counterspells",
-    "Value engines"
+    "Value engines",
+    "Watch for opponent's mana development (ramp vs. control), hand size (combo decks often go all-in), and graveyard activity (recursion engines).",
+    "Key tells: Opponent tapping for multiple colors early suggests ramp/combo",
+    "holding up blue mana suggests counterspells",
+    "tapping for black/red suggests targeted removal or discard.",
+    "Track when they tap out for their win condition to time your protection spells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:45:01+00:00",
     "model": "local-model",
@@ -114,7 +160,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

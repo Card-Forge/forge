@@ -1,0 +1,93 @@
+{
+  "archetype": "Black Sacrifice",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/black-sacrifice.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Accursed Marauder"
+    },
+    {
+      "qty": 4,
+      "name": "Bloodthrone Vampire"
+    },
+    {
+      "qty": 4,
+      "name": "Carrion Feeder"
+    },
+    {
+      "qty": 4,
+      "name": "Infestation Sage"
+    },
+    {
+      "qty": 4,
+      "name": "Mortician Beetle"
+    },
+    {
+      "qty": 4,
+      "name": "Nested Shambler"
+    },
+    {
+      "qty": 4,
+      "name": "Nezumi Linkbreaker"
+    },
+    {
+      "qty": 3,
+      "name": "Rite of Consumption"
+    },
+    {
+      "qty": 2,
+      "name": "Sadistic Glee"
+    },
+    {
+      "qty": 2,
+      "name": "Shambling Ghast"
+    },
+    {
+      "qty": 3,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 4,
+      "name": "Supernatural Stamina"
+    },
+    {
+      "qty": 17,
+      "name": "Swamp"
+    },
+    {
+      "qty": 3,
+      "name": "Unearth"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Accursed Marauder"
+    },
+    {
+      "qty": 1,
+      "name": "Drown in Sorrow"
+    },
+    {
+      "qty": 2,
+      "name": "Mesmeric Fiend"
+    },
+    {
+      "qty": 3,
+      "name": "Mutagenic Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 2,
+      "name": "Rotten Reunion"
+    },
+    {
+      "qty": 4,
+      "name": "Tragic Slip"
+    }
+  ]
+}

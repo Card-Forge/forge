@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with two or more mana sources and a cheap creature",
       "Hands containing Desperate Ritual or Seething Song with early lands",
-      "Hands with Manamorphose and a way to cast it on turn two"
+      "Hands with Manamorphose and a way to cast it on turn two",
+      "Keep 7 with 2-3 lands, 1+ ritual/fixer (Desperate Ritual, Manamorphose), and 1+ cantrip.",
+      "Keep 6 with 2 lands, 2+ rituals/fixers, and 1+ cantrip.",
+      "Keep 5 with 3+ rituals/fixers and 1+ cantrip."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands and no spells",
       "Hands lacking a turn-one or turn-two play",
-      "Hands with only high-cost cards or multiple Manamorphoses"
+      "Hands with only high-cost cards or multiple Manamorphoses",
+      "Always mulligan hands with 0-1 lands, 0 rituals/fixers, or no wincon/draw engine."
     ],
     "examples": []
   },
@@ -25,17 +29,33 @@
     "early_game": [
       "Prioritize casting Desperate Ritual on turn two to enable a cheap creature and a spell",
       "Look for Seething Song on turn three to flood the board with 1-drops",
-      "Play Manamorphose to draw cards and fix mana while maintaining tempo"
+      "Play Manamorphose to draw cards and fix mana while maintaining tempo",
+      "Turn 1: Cast cantrip or early threat, play land.",
+      "Turn 2: Cast ritual or fixer, draw cards, sequence lands for U/R/G access.",
+      "Prioritize fixing into Manamorphose/Rituals over untapped lands if possible.",
+      "Avoid overextending into interaction",
+      "focus on assembling the engine and drawing into the wincon."
     ],
     "mid_game": [
       "Maintain board pressure by cycling through cheap threats",
       "Use extra mana to cast multiple creatures or combat tricks in a single turn",
-      "Protect key attackers while chipping away at opponent's life total"
+      "Protect key attackers while chipping away at opponent's life total",
+      "Treat mana as a resource to be spent, not saved.",
+      "Prioritize card advantage over board presence.",
+      "The graveyard is a secondary resource for recursion but a liability against hate",
+      "manage it by discarding low-value cards or using it to fuel rituals.",
+      "Keep hand size low enough to avoid discard but high enough to maintain a wincon.",
+      "Storm rarely trades creatures."
     ],
     "late_game": [
       "If the game stalls, use Manamorphose to find finishers or removal",
       "Leverage mana advantage to outvalue slower decks",
-      "Close out games with repeated Seething Song effects or large creature swarms"
+      "Close out games with repeated Seething Song effects or large creature swarms",
+      "A high-damage spell (e.g., Grapeshot, Lightning Axe, Tendrils of Agony) cast for zero or negative mana after casting 10+ spells.",
+      "Execute by dumping hand into rituals/fixers, then casting the wincon.",
+      "Ensure you have enough spells to reach the threshold before committing.",
+      "Go all-in when you have a wincon in hand, 1+ mana sources, and a clear path to 10+ spells without the opponent having a guaranteed counter or lethal threat.",
+      "If the opponent is at lethal, commit immediately regardless of setup."
     ]
   },
   "key_cards": [
@@ -59,7 +79,12 @@
     "Cast Desperate Ritual before playing creatures to maximize mana efficiency",
     "Hold up mana for Seething Song until you have multiple creatures in hand or on board",
     "Play Manamorphose when you need to fix colors or replace a played land",
-    "Prioritize casting Seething Song on your opponent's turn if possible to surprise them with a board flood"
+    "Prioritize casting Seething Song on your opponent's turn if possible to surprise them with a board flood",
+    "Common mistakes include overcommitting to a combo turn without checking for counters, miscounting spells, holding too much mana, and ignoring graveyard hate.",
+    "Manamorphose fixes into any color but taps for 1 damage",
+    "use it wisely to avoid self-damage or missing a critical land drop.",
+    "Remember that Storm wins by spell count, so every card drawn matters.",
+    "Always count your spells carefully before casting the wincon, and never assume you have enough mana without verifying the exact threshold."
   ],
   "matchups": [
     {
@@ -88,16 +113,40 @@
         "Key combo pieces",
         "Protection spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig for alternative wincons or disruption. Cast the wincon at end step or during the opponent's turn if possible. Use cheap spells to force counters, then cast the wincon on the following turn. If they have multiple counters, pivot to discard or an uncounterable wincon.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them aggressively. Do not let them stabilize. Use discard to hit their mana sources or key threats. If they get ahead, go all-in on turn 3-4 with whatever you have. Prioritize speed over perfect setup.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use early discard to hit threats or mana. If you have cheap removal or burn, use it to stabilize. If you cannot stabilize, race them with your combo turn. Do not overcommit to board control; Storm wins by going off, not trading.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It is a spell-out war. Prioritize hand disruption (Thoughtseize, Duress) to hit their wincons or rituals. Wincons are often identical, so it comes down to who goes first and who has better disruption. Hold back a ritual if the opponent has a counter, then go off on the following turn.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes that clear your flooded board",
     "Counterspells targeting Seething Song or Desperate Ritual",
     "Life gain effects that slow down your race",
-    "Efficient removal that trades favorably with your creatures"
+    "Efficient removal that trades favorably with your creatures",
+    "Watch for opponents holding mana on their end step or main phase without playing threats\u2014often signals counterspells or discard.",
+    "Track graveyard hate, board wipes, and hard counters.",
+    "Note when opponents tap out for interaction, as this creates windows to go off safely."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:46:49+00:00",
     "model": "local-model",
@@ -113,6 +162,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,105 @@
+{
+  "archetype": "Selesnya Gearhulk",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/selesnya-gearhulk.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Abandoned Air Temple"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 3,
+      "name": "Brightglass Gearhulk"
+    },
+    {
+      "qty": 6,
+      "name": "Forest"
+    },
+    {
+      "qty": 3,
+      "name": "Gene Pollinator"
+    },
+    {
+      "qty": 4,
+      "name": "Hushwood Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 2,
+      "name": "Meltstrider's Resolve"
+    },
+    {
+      "qty": 1,
+      "name": "Nurturing Pixie"
+    },
+    {
+      "qty": 4,
+      "name": "Ouroboroid"
+    },
+    {
+      "qty": 4,
+      "name": "Pawpatch Recruit"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Sage of the Skies"
+    },
+    {
+      "qty": 3,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Temple Garden"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 3,
+      "name": "Erode"
+    },
+    {
+      "qty": 1,
+      "name": "Focus Fire"
+    },
+    {
+      "qty": 1,
+      "name": "Insidious Fungus"
+    },
+    {
+      "qty": 4,
+      "name": "Nature's Rhythm"
+    },
+    {
+      "qty": 3,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Spider Manifestation"
+    }
+  ]
+}

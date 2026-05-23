@@ -1,0 +1,522 @@
+{
+  "schema_version": 1,
+  "name": "Dimir Control",
+  "format": "pioneer",
+  "colors": [
+    "U",
+    "B"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Dimir Control dictates the game through efficient interaction, card advantage, and tempo control, out-resourcing opponents until it can deploy Ashiok, Nightmare Muse or leverage Fae of Wishes to access tailored hate. It excels against midrange and combo decks that overcommit to the board, while struggling against fast, uninteractive aggro or highly resilient value engines.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 20,
+      "cards": [
+        "Ashiok, Nightmare Muse",
+        "Cling to Dust",
+        "Confounding Conundrum",
+        "Deadly Cover-Up",
+        "Drown in the Loch",
+        "Fae of Wishes",
+        "Jace, Mirror Mage",
+        "Keep Safe",
+        "Shark Typhoon",
+        "The End",
+        "Unmoored Ego",
+        "Witching Well"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 5
+    },
+    "dig_draw": {
+      "target_count": 14,
+      "cards": [
+        "Castle Vantress",
+        "Drown in the Loch",
+        "Fae of Wishes",
+        "Jace, Mirror Mage",
+        "Thassa's Intervention",
+        "Witching Well"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 7,
+      "cards": [
+        "Fabled Passage",
+        "Fae of Wishes"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 9,
+      "cards": [
+        "Ashiok, Nightmare Muse",
+        "Drown in the Loch",
+        "Fae of Wishes",
+        "Whirlwind Denial"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 18,
+      "cards": [
+        "Ashiok, Nightmare Muse",
+        "Blightbeetle",
+        "Fae of Wishes",
+        "Jace, Mirror Mage",
+        "Murderous Rider",
+        "Pelakka Predation",
+        "Pilfer",
+        "Silundi Vision"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 13,
+      "cards": [
+        "Ashiok's Erasure",
+        "Ashiok, Nightmare Muse",
+        "Cling to Dust",
+        "Deadly Cover-Up",
+        "Drown in the Loch",
+        "Eliminate",
+        "Feed the Swarm",
+        "Heartless Act",
+        "The Elderspell",
+        "The End",
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Deadly Cover-Up",
+        "Shadows' Verdict"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 9,
+      "cards": [
+        "Drown in the Loch",
+        "Keep Safe",
+        "Mystical Dispute",
+        "Negate",
+        "Spell Pierce",
+        "Thassa's Intervention"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 10,
+      "cards": [
+        "Blightbeetle",
+        "Drown in the Loch",
+        "Fae of Wishes",
+        "Nowhere to Run"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 4
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 16,
+      "cards": [
+        "Agonizing Remorse",
+        "Cling to Dust",
+        "Deadly Cover-Up",
+        "Drown in the Loch",
+        "Erebos's Intervention",
+        "Fae of Wishes",
+        "Shadows' Verdict",
+        "The End",
+        "Tormod's Crypt",
+        "Unmoored Ego"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 6,
+      "cards": [
+        "Ashiok's Erasure",
+        "Ashiok, Nightmare Muse",
+        "Cling to Dust",
+        "Confounding Conundrum",
+        "Narset's Reversal"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Ashiok, Nightmare Muse",
+        "Fae of Wishes",
+        "Shark Typhoon"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Whirlwind Denial"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Ashiok, Nightmare Muse",
+        "Fae of Wishes"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 11,
+      "cards": [
+        "Ashiok's Erasure",
+        "Ashiok, Nightmare Muse",
+        "Drown in the Loch",
+        "Fae of Wishes",
+        "Soul Shatter",
+        "Witch's Vengeance"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 14,
+      "cards": [
+        "Castle Vantress",
+        "Dismal Backwater",
+        "Drown in the Loch",
+        "Fabled Passage",
+        "Fae of Wishes",
+        "Watery Grave"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 23,
+      "cards": [
+        "Castle Vantress",
+        "Dismal Backwater",
+        "Fabled Passage",
+        "Island",
+        "Swamp",
+        "Watery Grave"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 4,
+      "cards": [
+        "Ashiok, Nightmare Muse",
+        "Jace, Mirror Mage"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.49
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ashiok's Erasure",
+      "roles": [
+        "hate_pieces",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ashiok, Nightmare Muse",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "hate_pieces",
+        "planeswalker_threats",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blightbeetle",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Castle Vantress",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cling to Dust",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Confounding Conundrum",
+      "roles": [
+        "card_advantage",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Cover-Up",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dismal Backwater",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drown in the Loch",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "removal",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabled Passage",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fae of Wishes",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jace, Mirror Mage",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Keep Safe",
+      "roles": [
+        "card_advantage",
+        "counterspells"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shadows' Verdict",
+      "roles": [
+        "graveyard_enablers",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shark Typhoon",
+      "roles": [
+        "card_advantage",
+        "engines"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thassa's Intervention",
+      "roles": [
+        "counterspells",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The End",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tormod's Crypt",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unmoored Ego",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Whirlwind Denial",
+      "roles": [
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Witching Well",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Fae of Wishes is a versatile tool but requires careful timing",
+    "don't use it to fetch a card you could just draw.",
+    "Ashiok's triggers are powerful but can be disrupted by graveyard hate, so protect your graveyard or have a backup plan.",
+    "Drown in the Loch is excellent but can be countered",
+    "have a backup plan if it's met with a counter."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a basic Island or fetch/dual land."
+    },
+    {
+      "trigger": "early game",
+      "line": "If you have a cantrip or cheap interaction, cast it to maintain parity."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Develop mana with a second land, then cast Drown in the Loch or a discard spell."
+    }
+  ],
+  "kill_priority": [
+    "Ashiok, Nightmare Muse",
+    "Fae of Wishes",
+    "Shark Typhoon",
+    "Drown in the Loch",
+    "Whirlwind Denial",
+    "Jace, Mirror Mage",
+    "Blightbeetle",
+    "Murderous Rider"
+  ],
+  "interaction_to_disrupt": [
+    "Drown in the Loch",
+    "Keep Safe",
+    "Mystical Dispute",
+    "Negate",
+    "Spell Pierce",
+    "Thassa's Intervention",
+    "Blightbeetle",
+    "Fae of Wishes"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/dimir-control.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

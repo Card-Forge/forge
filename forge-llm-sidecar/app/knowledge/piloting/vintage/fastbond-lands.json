@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Fastbond or Crucible of Worlds with at least two lands",
       "Hands featuring Kaheera, the Orphanguard alongside land acceleration",
-      "Hands with multiple lands and a way to replay or untap them"
+      "Hands with multiple lands and a way to replay or untap them",
+      "Keep any hand with Fastbond, Crucible of Worlds, or Kaheera, the Orphanguard.",
+      "Otherwise, keep 3+ lands plus at least one land-fetching spell (e.g., Rampant Growth, Farseek, Kodama\u2019s Reach) or a protection spell."
     ],
     "mulligan_criteria": [
       "Hands lacking Fastbond, Crucible, or Kaheera",
       "Hands with three or fewer lands and no acceleration",
-      "Hands heavy on non-land permanents without mana sources"
+      "Hands heavy on non-land permanents without mana sources",
+      "Mulligan hands with 0-1 lands, or multiple lands with no ramp/protection if you lack a signature card."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Prioritize playing Fastbond on turn one or two to establish land acceleration",
       "Deploy Crucible of Worlds as soon as mana allows to enable land recursion",
-      "Play lands consistently to build a graveyard pool for Crucible"
+      "Play lands consistently to build a graveyard pool for Crucible",
+      "Turn 1: Play a land, then cast a land-fetching spell or Kaheera if mana allows.",
+      "Turn 2: Play a second land, cast Fastbond, tap it with a fetch land to draw 2 cards, then use Crucible of Worlds to exile the fetched land and replay it.",
+      "Prioritize establishing 3-4 untapped lands by turn 3 to safely tap Fastbond repeatedly."
     ],
     "mid_game": [
       "Use Crucible to replay lands from the graveyard, triggering landfall and increasing board presence",
       "Cast Kaheera, the Orphanguard and use its untap ability to generate extra mana or replay lands",
-      "Maintain a steady stream of land drops to outpace opponent's resource generation"
+      "Maintain a steady stream of land drops to outpace opponent's resource generation",
+      "Use Crucible to exile lands from the graveyard to prevent opponent graveyard strategies and maintain your land count.",
+      "Never tap Fastbond if you\u2019re below 3 untapped lands unless you can safely replay the tapped land.",
+      "Prioritize land-fetching over non-land ramp to keep your Fastbond engine fueled.",
+      "Commit Kaheera early to protect Fastbond and fetch lands.",
+      "Hold back on overcommitting to the board if you haven\u2019t secured protection or a win condition.",
+      "Use landfall triggers and card draw to maintain hand size and mana advantage."
     ],
     "late_game": [
       "Leverage massive mana pools to close out games or deploy finishers",
       "Continuously replay lands with Crucible to maintain board pressure and trigger effects",
-      "Use Kaheera's counters and untap ability to stabilize against board wipes or removal"
+      "Use Kaheera's counters and untap ability to stabilize against board wipes or removal",
+      "Win with Emrakul, the Aeons Torn (to clear board and draw cards), Utopia Sprawl + massive mana, or infinite mana combos (e.g., Fastbond + fetch lands + landfall triggers).",
+      "Alternatively, cast high-impact spells like Genesis Ultimatum or Dominate.",
+      "Go all-in when you have Fastbond protected, 5+ untapped lands, and a clear path to a win condition.",
+      "Commit to a combo if you have the necessary pieces and protection against removal."
     ]
   },
   "key_cards": [
@@ -59,7 +75,13 @@
     "Play Fastbond before Crucible to maximize the number of lands you can drop and replay",
     "Use Kaheera's untap ability after replaying lands with Crucible to generate additional mana or triggers",
     "Prioritize replaying lands that trigger landfall effects or provide immediate value over basic lands",
-    "Hold back Crucible if opponent has artifact destruction available to protect your recursion engine"
+    "Hold back Crucible if opponent has artifact destruction available to protect your recursion engine",
+    "Fastbond Lands is highly vulnerable to land destruction and targeted removal\u2014never assume your engine is safe.",
+    "Crucible of Worlds is your insurance policy",
+    "always exile lands you don\u2019t need to keep your library from running out.",
+    "Kaheera\u2019s protection is single-target, so prioritize protecting Fastbond over other lands.",
+    "Avoid tapping Fastbond with non-fetch lands if you can help it, as it doesn\u2019t help your Crucible recursion.",
+    "Watch for opponent\u2019s graveyard strategies, as they can disrupt your engine."
   ],
   "matchups": [
     {
@@ -88,16 +110,34 @@
         "Board wipes",
         "Direct damage"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use protection spells, cast Fastbond/Kaheera in response to counters, or go off with multiple spells in a single turn. Utilize landfall triggers and instant-speed ramp to bypass counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-ramp them with land-fetching spells and Fastbond card draw. Protect your lands and combo off before they can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by protecting your Fastbond better, drawing more cards, and going off first. Use land destruction to disrupt their engine, and prioritize card advantage to out-resource them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes that clear lands and permanents",
     "Artifact destruction targeting Crucible of Worlds",
     "Counterspells interrupting key plays",
-    "Hand disruption reducing acceleration options"
+    "Hand disruption reducing acceleration options",
+    "Watch for targeted removal on Fastbond, land destruction (e.g., Blightsteel Colossus, Carrion Feeder), and graveyard hate.",
+    "Note if opponents are playing discard or hand disruption, as your combo relies on card selection and consistent land drops."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:48:20+00:00",
     "model": "local-model",
@@ -113,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

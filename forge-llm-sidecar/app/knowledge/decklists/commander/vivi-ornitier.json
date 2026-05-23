@@ -1,0 +1,437 @@
+{
+  "archetype": "Vivi Ornitier",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/vivi-ornitier.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Aetherflux Reservoir"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Chandra's Ignition"
+    },
+    {
+      "qty": 1,
+      "name": "Chrome Mox"
+    },
+    {
+      "qty": 1,
+      "name": "Confound"
+    },
+    {
+      "qty": 1,
+      "name": "Coruscation Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Crackle with Power"
+    },
+    {
+      "qty": 1,
+      "name": "Curiosity"
+    },
+    {
+      "qty": 1,
+      "name": "Cyclonic Rift"
+    },
+    {
+      "qty": 1,
+      "name": "Deflecting Swat"
+    },
+    {
+      "qty": 1,
+      "name": "Desperate Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Electro, Assaulting Battery"
+    },
+    {
+      "qty": 1,
+      "name": "Fierce Guardianship"
+    },
+    {
+      "qty": 1,
+      "name": "Final Fortune"
+    },
+    {
+      "qty": 1,
+      "name": "Finale of Revelation"
+    },
+    {
+      "qty": 1,
+      "name": "Flame of Anor"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Frantic Search"
+    },
+    {
+      "qty": 1,
+      "name": "Gitaxian Probe"
+    },
+    {
+      "qty": 1,
+      "name": "Gut Shot"
+    },
+    {
+      "qty": 1,
+      "name": "Guttersnipe"
+    },
+    {
+      "qty": 1,
+      "name": "Harmonic Prodigy"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Isochron Scepter"
+    },
+    {
+      "qty": 1,
+      "name": "Jaya's Immolating Inferno"
+    },
+    {
+      "qty": 1,
+      "name": "Kessig Flamebreather"
+    },
+    {
+      "qty": 1,
+      "name": "Last Chance"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Greaves"
+    },
+    {
+      "qty": 1,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Drain"
+    },
+    {
+      "qty": 1,
+      "name": "Merchant Scroll"
+    },
+    {
+      "qty": 1,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 1,
+      "name": "Mistrise Village"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mithril Coat"
+    },
+    {
+      "qty": 1,
+      "name": "Mizzix's Mastery"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Amber"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Diamond"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Sanctuary"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Niv-Mizzet, Visionary"
+    },
+    {
+      "qty": 1,
+      "name": "Ojer Axonil, Deepest Might"
+    },
+    {
+      "qty": 1,
+      "name": "Ophidian Eye"
+    },
+    {
+      "qty": 1,
+      "name": "Opt"
+    },
+    {
+      "qty": 1,
+      "name": "Overmaster"
+    },
+    {
+      "qty": 1,
+      "name": "Personal Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Pongify"
+    },
+    {
+      "qty": 1,
+      "name": "Preordain"
+    },
+    {
+      "qty": 1,
+      "name": "Prismatic Vista"
+    },
+    {
+      "qty": 1,
+      "name": "Pyretic Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Ral, Crackling Wit"
+    },
+    {
+      "qty": 1,
+      "name": "Rapid Hybridization"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Riptide Laboratory"
+    },
+    {
+      "qty": 1,
+      "name": "Ruby Medallion"
+    },
+    {
+      "qty": 1,
+      "name": "Sapphire Medallion"
+    },
+    {
+      "qty": 1,
+      "name": "Savor the Moment"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Scorched Geyser"
+    },
+    {
+      "qty": 1,
+      "name": "Sea Gate Restoration"
+    },
+    {
+      "qty": 1,
+      "name": "Seething Song"
+    },
+    {
+      "qty": 1,
+      "name": "Slip Through Space"
+    },
+    {
+      "qty": 1,
+      "name": "Snap"
+    },
+    {
+      "qty": 2,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 2,
+      "name": "Snow-Covered Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Swan Song"
+    },
+    {
+      "qty": 1,
+      "name": "Swiftfoot Boots"
+    },
+    {
+      "qty": 1,
+      "name": "Tandem Lookout"
+    },
+    {
+      "qty": 1,
+      "name": "Thought Vessel"
+    },
+    {
+      "qty": 1,
+      "name": "Time Warp"
+    },
+    {
+      "qty": 1,
+      "name": "Timetwister"
+    },
+    {
+      "qty": 1,
+      "name": "Turn Aside"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Bauble"
+    },
+    {
+      "qty": 1,
+      "name": "Veyran, Voice of Duality"
+    },
+    {
+      "qty": 1,
+      "name": "Vivi Ornitier"
+    },
+    {
+      "qty": 1,
+      "name": "Volcanic Island"
+    },
+    {
+      "qty": 1,
+      "name": "Wheel of Fortune"
+    },
+    {
+      "qty": 1,
+      "name": "Wisdom of Ages"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Birgi, God of Storytelling"
+    },
+    {
+      "qty": 1,
+      "name": "Deliberate"
+    },
+    {
+      "qty": 1,
+      "name": "Enter the Enigma"
+    },
+    {
+      "qty": 1,
+      "name": "Exalted Flamer of Tzeentch"
+    },
+    {
+      "qty": 1,
+      "name": "Ghyrson Starn, Kelermorph"
+    },
+    {
+      "qty": 1,
+      "name": "Hullbreaker Horror"
+    },
+    {
+      "qty": 1,
+      "name": "Jeska's Will"
+    },
+    {
+      "qty": 1,
+      "name": "Past in Flames"
+    },
+    {
+      "qty": 1,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Thousand-Year Storm"
+    },
+    {
+      "qty": 1,
+      "name": "Urabrask"
+    },
+    {
+      "qty": 1,
+      "name": "Will of the Jeskai"
+    }
+  ]
+}

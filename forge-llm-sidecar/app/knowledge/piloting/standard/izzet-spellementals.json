@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two lands and a one- or two-drop threat",
       "Hands containing Traumatic Critique paired with early board presence",
-      "Hands that can play a spell on turn one and follow up on turn two"
+      "Hands that can play a spell on turn one and follow up on turn two",
+      "Keep hands with 2-3 lands (ensuring at least one U and one R source), 3-4 spells (instants/sorceries), and at least one 2-drop spellmentals creature.",
+      "Prioritize hands with 1-mana cantrips or cheap removal to stabilize."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands",
       "Hands lacking any one- or two-drops",
-      "Hands with only high-cost cards and no early interaction"
+      "Hands with only high-cost cards and no early interaction",
+      "Mulligan hands with 3+ lands, no early spells, or only high-cost threats without fuel."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and cheap threats like Eddymurk Crab to establish board presence",
       "Use Traumatic Critique to chip away at the opponent's life total or force unfavorable trades",
-      "Prioritize keeping the board active and applying immediate pressure"
+      "Prioritize keeping the board active and applying immediate pressure",
+      "Turn 1: Play a land, optionally cast a 1-mana cantrip or cheap spell if mana allows.",
+      "Turn 2: Play a second land, cast a 1-2 mana spellmentals creature (e.g., Eddymurk Crab), and immediately follow up with an instant/sorcery to trigger its growth ability.",
+      "Sequence lands to guarantee U/R availability",
+      "if opening with a single color source, consider mulliganing unless you have a cantrip to fix mana."
     ],
     "mid_game": [
       "Leverage Hearth Elemental to recycle key spells from the graveyard",
       "Generate additional elementals to widen the board and force blockers",
-      "Maintain card advantage by replaying efficient threats and burn spells"
+      "Maintain card advantage by replaying efficient threats and burn spells",
+      "Balance mana between casting spells for triggers and developing threats.",
+      "Avoid emptying your hand unless you have a clear path to victory.",
+      "Use the graveyard as a resource for recursion or alternative wins, but prioritize keeping key interaction in hand.",
+      "Track your spell count to maximize spellmentals growth.",
+      "Commit threats when you have removal or counterspells to protect them from sweepers or removal.",
+      "Hold back if the opponent has unanswered interaction or is building a wide board."
     ],
     "late_game": [
       "Use recycled threats to clear the board and close out the game",
       "Push for lethal with a combination of board presence and direct damage",
-      "Avoid overcommitting to the board if the opponent has sweepers or board wipes"
+      "Avoid overcommitting to the board if the opponent has sweepers or board wipes",
+      "Large spellmentals with trample or flying, fueled by a full graveyard and hand of cheap spells.",
+      "Use cheap instants/sorceries to close out games, either through combat or direct damage.",
+      "If the opponent is low on interaction, go wide with pumped threats.",
+      "Go all-in when you have card advantage, protection (counters/removal), and the opponent is low on interaction.",
+      "Commit when you can trade efficiently or when the opponent is forced to use their last interaction on a non-critical threat."
     ]
   },
   "key_cards": [
@@ -59,7 +77,10 @@
     "Hold up Traumatic Critique for instant-speed interaction when possible",
     "Play Eddymurk Crab before Hearth Elemental to maximize token generation and board presence",
     "Recycle high-impact spells first, then use Hearth Elemental to replay threats",
-    "Avoid overcommitting to the board if the opponent has sweepers or board wipes"
+    "Avoid overcommitting to the board if the opponent has sweepers or board wipes",
+    "Common mistakes include overcommitting without protection, mismanaging mana for spells vs. creatures, and ignoring graveyard synergy.",
+    "Unique interactions include stack manipulation to trigger multiple spellmentals, and using cheap spells to out-value counterspells.",
+    "Always track the opponent's interaction and graveyard to maximize your spell-driven triggers."
   ],
   "matchups": [
     {
@@ -88,16 +109,35 @@
         "Card draw spells",
         "Board control effects"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells to out-value counters, split your threats across multiple turns, and cast multiple spells in response to force counter trade-offs. If available, use uncounterable effects or flashback/graveyard recursion to bypass counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to punish their slow start. Use targeted removal on key ramp pieces (e.g., mana dorks, landfall enablers) and avoid overcommitting to a race. Stabilize with removal/counters, then transition to midrange grind.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the spell war by tracking counterspells and prioritizing card advantage. Use targeted removal efficiently, and don't overcommit to the board. Force the opponent to use interaction on non-critical threats, then close out with a pumped spellmentals.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast sweepers that clear the board",
     "Direct removal targeting key threats",
     "Card draw engines that outpace recursion",
-    "Life gain effects that extend the game"
+    "Life gain effects that extend the game",
+    "Watch for sweepers (e.g., board wipes), counterspells, and fast aggro threats.",
+    "Note when the opponent saves removal vs. when they commit to a sweeper.",
+    "Track their graveyard if recursion is a threat, and monitor their mana for key combo pieces or finishers."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:33:40+00:00",
     "model": "local-model",
@@ -113,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

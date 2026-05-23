@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Snuff Out or early Spellstutter Sprite",
       "Balanced curves with at least two sources of interaction or flying creatures",
-      "Lorien Revealed paired with early counters or removal"
+      "Lorien Revealed paired with early counters or removal",
+      "Keep hands with 2\u20133 lands (prioritizing duals or fixing), at least one Spellstutter Sprite or equivalent turn-1 threat, and a counterspell or removal suite.",
+      "Prioritize hands that can execute a turn-1 Sprite or turn-2 Lorien Revealed while retaining mana for disruption."
     ],
     "mulligan_criteria": [
       "Hands lacking any instant-speed interaction or early plays",
       "Overloaded with late-game sorceries like Lorien Revealed without early defense",
-      "No flying creatures or life loss triggers to apply pressure"
+      "No flying creatures or life loss triggers to apply pressure",
+      "Mulligan if you have three or more lands with no early plays, or three or more spells with no lands."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Deploy Spellstutter Sprite immediately to start triggering life loss on opponent spells",
       "Use Snuff Out to counter high-impact creature spells or early threats",
-      "Establish a flying presence to pressure the opponent while maintaining board control"
+      "Establish a flying presence to pressure the opponent while maintaining board control",
+      "Turn 1: Play a land, cast Spellstutter Sprite to establish early disruption and board presence.",
+      "Turn 2: Play a land, cast Lorien Revealed or another threat, or hold up mana for counterspells/removal.",
+      "Sequence lands to ensure consistent blue/black mana.",
+      "If the opponent casts a key spell, use counterspells or Sprite\u2019s sacrifice ability to disrupt their plan.",
+      "Never tap out for Lorien Revealed if you lack protection or disruption."
     ],
     "mid_game": [
       "Time Lorien Revealed to clear multiple opponent creatures and gain substantial life",
       "Continue applying -1/-1 counters to shrink threats and enable favorable trades",
-      "Maintain hand of instant-speed interaction to disrupt opponent's key turns"
+      "Maintain hand of instant-speed interaction to disrupt opponent's key turns",
+      "Manage mana to hold up for counterspells and removal while developing Lorien Revealed.",
+      "Use Spellstutter Sprite\u2019s sacrifice ability sparingly for high-impact spells.",
+      "Track your graveyard for potential recursion threats and avoid overcommitting to Lorien tokens if the board is unstable.",
+      "Prioritize card advantage to outlast opponents in longer games.",
+      "Commit threats when you have board presence or can protect them with counterspells and removal.",
+      "Hold back if the opponent has sweepers or heavy removal."
     ],
     "late_game": [
       "Leverage accumulated life advantage and card draw to outvalue the opponent",
       "Use remaining counters and removal to protect your flying finishers",
-      "Close the game by repeatedly triggering Sprite on opponent's recovery spells"
+      "Close the game by repeatedly triggering Sprite on opponent's recovery spells",
+      "Lorien Revealed token army, resilient flying creatures, or targeted removal to clear the path.",
+      "Use card advantage to outlast opponents and close out games before they can stabilize.",
+      "Leverage flash removal to answer late-game threats and secure victory.",
+      "Go all-in when you have Lorien Revealed on the board, sufficient mana to protect it, and the opponent has no sweepers or heavy removal.",
+      "Also commit when you\u2019ve disrupted their key spells and can close out before they recover.",
+      "Use token generation to overwhelm opponents who lack board wipes."
     ]
   },
   "key_cards": [
@@ -58,7 +78,11 @@
   "sequencing_tips": [
     "Hold Snuff Out until the opponent commits to a high-value spell to maximize the -1/-1 counter trigger",
     "Trigger Spellstutter Sprite on opponent's spells rather than your own to avoid self-inflicted counters",
-    "Cast Lorien Revealed after the opponent has played multiple creatures to maximize life gain and board impact"
+    "Cast Lorien Revealed after the opponent has played multiple creatures to maximize life gain and board impact",
+    "Common mistakes include overcommitting to Lorien Revealed without protection, misusing Spellstutter Sprite\u2019s sacrifice ability on low-impact spells, and failing to track opponent mana for sweepers.",
+    "Unique interactions: Sprite\u2019s ability can be used to counter your own spells if needed, and Lorien Revealed tokens are flying and can be pumped.",
+    "Always prioritize keeping your board state flexible and avoid tapping out for non-essential plays.",
+    "Practice stack manipulation to maximize disruption and protect your key permanents."
   ],
   "matchups": [
     {
@@ -87,15 +111,35 @@
         "Removal spells",
         "Graveyard recursion"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Spellstutter Sprite to make their counterspells more expensive. Cast threats in response to their counterspells to exploit the stack. Use flash removal (Snuff Out) to answer threats after they resolve. Prioritize card advantage to out-resource their disruption.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early disruption and removal to slow their acceleration. Use Snuff Out to answer big threats before they can stabilize. Lorien Revealed can outvalue ramp if you survive the early game. Disrupt their mana sources and key spells to prevent them from reaching their win conditions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card advantage, protect Lorien Revealed, and use counterspells to disrupt their key spells. Win the removal race by targeting their threats efficiently. Track their mana to identify windows for disruption and avoid overcommitting into potential sweepers.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures that bypass flying",
     "Uncounterable spells or creatures with hexproof",
-    "Board wipes that remove counters and clear your board"
+    "Board wipes that remove counters and clear your board",
+    "Watch for sweepers (e.g., board wipes, tide effects), heavy removal, and combo win conditions.",
+    "Note when opponents tap out for key spells to identify windows for disruption.",
+    "Track the graveyard for potential recursion or graveyard-based strategies.",
+    "Pay attention to mana development to anticipate when opponents can cast their most threatening spells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:21:24+00:00",
     "model": "local-model",
@@ -137,6 +181,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

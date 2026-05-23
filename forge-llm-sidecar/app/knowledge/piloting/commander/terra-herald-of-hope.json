@@ -1,0 +1,125 @@
+{
+  "archetype": "Terra, Herald of Hope",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Terra, Herald of Hope is a spell-synergy engine that generates a relentless swarm of flying Spirits with every spell cast. The deck aims to out-value opponents through card advantage, recursive threats, and resilient board presence, winning by overwhelming the board with evasive tokens or replaying Terra via recursion to close out games.",
+  "win_conditions": [
+    "Reanimating Terra to cast multiple spells in a single turn, generating a lethal swarm.",
+    "Also, direct damage spells or combat with flying tokens when opponents lack blockers."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including basics for B/R/W), Arcane Signet, and a turn-1 or turn-2 play.",
+      "Prioritize hands with 3+ lands if they include a turn-2 play."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 0-1 lands, or 4+ lands with no early impact or mana fixing."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cantrip or disruption if available.",
+      "Turn 2: Play a second land, cast Terra if mana allows, or play a cheap spell to start the token engine.",
+      "If holding Terra, consider playing a cheap spell first to generate a token, then cast Terra to maximize triggers on your opponent's turn."
+    ],
+    "mid_game": [
+      "Keep mana flexible for instant-speed responses and casting spells to fuel Terra.",
+      "Don't overcommit to the board if you can't protect it.",
+      "Use the graveyard strategically",
+      "keep Terra or key threats in hand if the graveyard is unsafe.",
+      "Commit threats when you have removal or a board wipe ready.",
+      "Hold back if opponents have sweepers or targeted hate.",
+      "Use flying tokens to trade efficiently against non-flying blockers and preserve your key creatures."
+    ],
+    "late_game": [
+      "Reanimating Terra to cast multiple spells in a single turn, generating a lethal swarm.",
+      "Also, direct damage spells or combat with flying tokens when opponents lack blockers.",
+      "When you have graveyard protection, enough mana to cast multiple spells, and opponents lack sweepers.",
+      "Also when you can close the game in 1-2 turns with a clear path to combat or spell triggers."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Terra, Herald of Hope",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Reanimate",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Terra's ability triggers on any spell, including instants and sorceries, so use cheap cantrips and removal to fuel it.",
+    "Reanimate is a key win-con but vulnerable to graveyard hate",
+    "have backup plans like direct damage or combat.",
+    "Avoid overcommitting to the board without protection.",
+    "Watch for board wipes",
+    "keep a hand ready to rebuild.",
+    "Don't forget to use Terra's activated ability to bounce tokens for card draw when you're low on resources."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells, cantrips, and instant-speed recursion. Cast Terra after clearing the stack or with protection. Bait counters with low-value spells before committing your engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, disrupt mana sources, and use removal on key ramp creatures. Don't let them get too far ahead; force them to interact with your board before they can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use flying tokens to block, spot removal on key attackers, and stabilize with board wipes. Don't overextend into combat; prioritize survival and out-value them in the late game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with spell density, use recursion to bypass graveyard hate, and pressure with flying tokens. Force them to use resources on multiple threats rather than focusing on one.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize graveyard protection, use targeted removal on opponent's Terra, and out-cast them with better card draw. Control the stack and force unfavorable trades.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes, targeted removal on Terra, and graveyard recursion.",
+    "Note when opponents save removal for your key threats.",
+    "Track graveyard contents for Reanimate targets and be aware of opponent's mana development."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

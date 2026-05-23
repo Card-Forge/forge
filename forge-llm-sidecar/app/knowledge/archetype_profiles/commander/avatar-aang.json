@@ -1,0 +1,890 @@
+{
+  "schema_version": 1,
+  "name": "Avatar Aang",
+  "format": "commander",
+  "colors": [
+    "B",
+    "G",
+    "R",
+    "U",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "A five-color control-midrange deck built around protecting Avatar Aang while using Airbender's Reversal for flexible interaction and Toph for board stabilization. It aims to out-value opponents through superior card quality and protection, winning against aggressive strategies via disruption and against control/combo through resilient threats and late-game inevitability.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 17,
+      "cards": [
+        "Agna Qel'a",
+        "Airbender's Reversal",
+        "Airbending Lesson",
+        "Avatar Aang",
+        "Boiling Rock Prison",
+        "Foggy Bottom Swamp",
+        "Katara, Bending Prodigy",
+        "Kyoshi Village",
+        "Meditation Pools",
+        "Misty Palms Oasis",
+        "North Pole Gates",
+        "Omashu City",
+        "Serpent's Pass",
+        "Spirit Water Revival",
+        "Sun-Blessed Peak",
+        "Waterbender Ascension",
+        "Waterbending Lesson"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Hakoda, Selfless Commander",
+        "Katara, Bending Prodigy",
+        "Water Tribe Rallier"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 7,
+      "cards": [
+        "Cultivate",
+        "Cycle of Renewal",
+        "Earthbender Ascension",
+        "Fabled Passage",
+        "Farseek",
+        "Kodama's Reach",
+        "Shared Roots"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Airbender's Reversal",
+        "Avatar Aang"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 40,
+      "cards": [
+        "Aang, Airbending Master",
+        "Aang, Swift Savior",
+        "Aang, at the Crossroads",
+        "Aang, the Last Airbender",
+        "Airbender's Reversal",
+        "Appa, Loyal Sky Bison",
+        "Appa, Steadfast Guardian",
+        "Avatar Aang",
+        "Avatar Kyoshi, Earthbender",
+        "Boiling Rock Rioter",
+        "Bumi, Unleashed",
+        "Earthen Ally",
+        "Fire Lord Zuko",
+        "Firebending Student",
+        "Great Divide Guide",
+        "Hakoda, Selfless Commander",
+        "Haru, Hidden Talent",
+        "Iroh, Dragon of the West",
+        "Iroh, Grand Lotus",
+        "Katara, Bending Prodigy",
+        "Katara, Water Tribe's Hope",
+        "Katara, the Fearless",
+        "Mai and Zuko",
+        "Monk Gyatso",
+        "North Pole Patrol",
+        "Ozai, the Phoenix King",
+        "Ruthless Waterbender",
+        "Sol Ring",
+        "Sun Warriors",
+        "The Legend of Kuruk",
+        "The Legend of Roku",
+        "The Legend of Yangchen",
+        "The Rise of Sozin",
+        "Toph, Hardheaded Teacher",
+        "Toph, the Blind Bandit",
+        "Toph, the First Metalbender",
+        "Water Tribe Rallier",
+        "Yue, the Moon Spirit",
+        "Zuko, Exiled Prince",
+        "Zuko, Firebending Master"
+      ],
+      "mainboard_count": 40,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 6,
+      "cards": [
+        "Airbender's Reversal",
+        "Boiling Rock Rioter",
+        "Bumi, Unleashed",
+        "Origin of Metalbending",
+        "Toph, Hardheaded Teacher",
+        "Waterbender Ascension"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Abandoned Air Temple",
+        "Airbender's Reversal",
+        "Earthshape",
+        "Fire Lord Zuko",
+        "Iroh, Dragon of the West"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 7,
+      "cards": [
+        "Airbender's Reversal",
+        "Avatar Aang",
+        "Avatar Kyoshi, Earthbender",
+        "Earthshape",
+        "Hakoda, Selfless Commander",
+        "Origin of Metalbending",
+        "Ozai, the Phoenix King"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 3,
+      "cards": [
+        "Agna Qel'a",
+        "Toph, Hardheaded Teacher",
+        "Waterbending Lesson"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 4,
+      "cards": [
+        "Boiling Rock Rioter",
+        "Iroh, Grand Lotus",
+        "Spirit Water Revival",
+        "Toph, Hardheaded Teacher"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 10,
+      "cards": [
+        "Airbender Ascension",
+        "Avatar Kyoshi, Earthbender",
+        "Ba Sing Se",
+        "Earthen Ally",
+        "Haru, Hidden Talent",
+        "Iroh, Grand Lotus",
+        "Toph, Hardheaded Teacher",
+        "Toph, the Blind Bandit",
+        "Toph, the First Metalbender",
+        "Waterbender's Restoration"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 6,
+      "cards": [
+        "Aang, the Last Airbender",
+        "Appa, Steadfast Guardian",
+        "Fire Lord Zuko",
+        "Firebending Student",
+        "Toph, Hardheaded Teacher",
+        "Zuko, Firebending Master"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Airbender's Reversal",
+        "Avatar Aang"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Avatar's Wrath",
+        "Moonmist"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 40,
+      "cards": [
+        "Abandoned Air Temple",
+        "Agna Qel'a",
+        "Airbender's Reversal",
+        "Arcane Sanctum",
+        "Arcane Signet",
+        "Ba Sing Se",
+        "Bender's Waterskin",
+        "Boiling Rock Prison",
+        "Boiling Rock Rioter",
+        "Chromatic Lantern",
+        "Command Tower",
+        "Crumbling Necropolis",
+        "Exotic Orchard",
+        "Fabled Passage",
+        "Fellwar Stone",
+        "Fire Lord Zuko",
+        "Fire Nation Palace",
+        "Firebending Student",
+        "Foggy Bottom Swamp",
+        "Frontier Bivouac",
+        "Great Divide Guide",
+        "Iroh, Dragon of the West",
+        "Jungle Shrine",
+        "Kyoshi Village",
+        "Meditation Pools",
+        "Misty Palms Oasis",
+        "Mystic Monastery",
+        "Nomad Outpost",
+        "North Pole Gates",
+        "Omashu City",
+        "Opulent Palace",
+        "Realm of Koh",
+        "Sandsteppe Citadel",
+        "Savage Lands",
+        "Seaside Citadel",
+        "Serpent's Pass",
+        "Sun Warriors",
+        "Sun-Blessed Peak",
+        "Zuko, Exiled Prince",
+        "Zuko, Firebending Master"
+      ],
+      "mainboard_count": 40,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 40,
+      "cards": [
+        "Abandoned Air Temple",
+        "Agna Qel'a",
+        "Arcane Sanctum",
+        "Ba Sing Se",
+        "Boiling Rock Prison",
+        "Command Tower",
+        "Crumbling Necropolis",
+        "Exotic Orchard",
+        "Fabled Passage",
+        "Fire Nation Palace",
+        "Foggy Bottom Swamp",
+        "Forest",
+        "Frontier Bivouac",
+        "Island",
+        "Jungle Shrine",
+        "Kyoshi Village",
+        "Meditation Pools",
+        "Misty Palms Oasis",
+        "Mountain",
+        "Mystic Monastery",
+        "Nomad Outpost",
+        "North Pole Gates",
+        "Omashu City",
+        "Opulent Palace",
+        "Plains",
+        "Realm of Koh",
+        "Sandsteppe Citadel",
+        "Savage Lands",
+        "Seaside Citadel",
+        "Serpent's Pass",
+        "Sun-Blessed Peak",
+        "Swamp"
+      ],
+      "mainboard_count": 40,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.15
+  },
+  "dual_role_cards": [
+    {
+      "card": "Aang, the Last Airbender",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Abandoned Air Temple",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Agna Qel'a",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Airbender's Reversal",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "mana_fixing",
+        "protection",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Appa, Steadfast Guardian",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Avatar Aang",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Avatar Kyoshi, Earthbender",
+      "roles": [
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ba Sing Se",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boiling Rock Prison",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boiling Rock Rioter",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bumi, Unleashed",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crumbling Necropolis",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Earthen Ally",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Earthshape",
+      "roles": [
+        "protection",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabled Passage",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Lord Zuko",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Nation Palace",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Firebending Student",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Foggy Bottom Swamp",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Frontier Bivouac",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Great Divide Guide",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hakoda, Selfless Commander",
+      "roles": [
+        "dig_draw",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haru, Hidden Talent",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Iroh, Dragon of the West",
+      "roles": [
+        "mana_fixing",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Iroh, Grand Lotus",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jungle Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Katara, Bending Prodigy",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kyoshi Village",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meditation Pools",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Palms Oasis",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mystic Monastery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nomad Outpost",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "North Pole Gates",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Omashu City",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Opulent Palace",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Origin of Metalbending",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ozai, the Phoenix King",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Realm of Koh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sandsteppe Citadel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Savage Lands",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seaside Citadel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Serpent's Pass",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirit Water Revival",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sun Warriors",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sun-Blessed Peak",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Toph, Hardheaded Teacher",
+      "roles": [
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Toph, the Blind Bandit",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Toph, the First Metalbender",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Water Tribe Rallier",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Waterbender Ascension",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Waterbending Lesson",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zuko, Exiled Prince",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zuko, Firebending Master",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Five-color mana bases are fragile",
+    "avoid overextending into sweepers.",
+    "Airbender's Reversal is your most versatile tool\u2014use it to bounce threats, protect Aang, or trigger ETB/untap effects.",
+    "Toph likely provides static protection or board lock",
+    "coordinate your plays around her."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, optionally cast a cheap mana rock or cantrip."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Develop into three mana, play Toph or a low-cost threat, and use Airbender's Reversal to bounce an opponent's early threat or protect your own."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence lands to fix colors while preserving untapped lands for protection spells."
+    }
+  ],
+  "kill_priority": [
+    "Aang, the Last Airbender",
+    "Appa, Steadfast Guardian",
+    "Fire Lord Zuko",
+    "Firebending Student",
+    "Toph, Hardheaded Teacher",
+    "Zuko, Firebending Master",
+    "Airbender's Reversal",
+    "Avatar Aang"
+  ],
+  "interaction_to_disrupt": [
+    "Airbender's Reversal",
+    "Avatar Aang",
+    "Avatar Kyoshi, Earthbender",
+    "Earthshape",
+    "Hakoda, Selfless Commander",
+    "Origin of Metalbending",
+    "Ozai, the Phoenix King",
+    "Boiling Rock Rioter"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/avatar-aang.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early mana dorks and land drops",
       "Hands containing Omniscience with follow-up spells",
-      "Hands with interactive removal or ramp"
+      "Hands with interactive removal or ramp",
+      "Keep hands with 2-3 lands (duals, fetches, or ramp like Sol Ring/Arcane Signet) plus at least one early spell engine (Kona, Formidable Speaker, or a cheap cantrip/ramp).",
+      "Prioritize keeping hands that can cast 2+ spells by turn 2."
     ],
     "mulligan_criteria": [
       "Hands lacking ramp or mana acceleration",
       "Hands with too many lands and no threats",
-      "Hands missing Omniscience or key finishers"
+      "Hands missing Omniscience or key finishers",
+      "Mulligan if you have 0-1 lands, only lands, or a hand of high-cost finishers without early outlets."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and mana dorks on curve",
       "Establish early board presence with Speaker",
-      "Prioritize land drops over early spells"
+      "Prioritize land drops over early spells",
+      "Turn 1: Play a land, cast a mana accelerator or cantrip.",
+      "Turn 2: Ramp into Kona or Formidable Speaker, or cast a cheap Elemental to start the token pipeline.",
+      "Sequence lands to ensure 3-4 mana by turn 3.",
+      "If Omniscience is in hand, hold it until you can cast a high-value spell for free, then drop it to swing for lethal or establish board dominance."
     ],
     "mid_game": [
       "Cast Omniscience when you have multiple spells ready",
       "Follow up with threats and answers simultaneously",
-      "Use Ashling to generate extra mana or untap lands"
+      "Use Ashling to generate extra mana or untap lands",
+      "Treat mana as a resource for spell density, not just for casting Kona.",
+      "Keep 1-2 lands in hand if drawing multiple spells.",
+      "Avoid self-mill unless it fuels a specific win condition.",
+      "Use cantrips to maintain hand size and continuously trigger Kona/Formidable Speaker.",
+      "Commit threats when you have removal or counterspells to protect them, or when you can out-value the opponent's board.",
+      "Hold back if facing heavy board wipes or targeted removal"
     ],
     "late_game": [
       "Flood the board with untapped creatures",
       "Close out games with efficient, high-impact threats",
-      "Maintain mana advantage to outvalue opponents"
+      "Maintain mana advantage to outvalue opponents",
+      "Omniscience + Ashling, Rekindled or Kona/Formidable Speaker is the primary win condition.",
+      "Cast Omniscience, then cast Ashling or multiple Elementals for free to flood the board with flying tokens.",
+      "Alternatively, use a high-impact spell or big Elemental finisher to close out the game.",
+      "Go all-in when you have Omniscience in play, enough mana to cast multiple spells, and the opponent has no immediate board wipe or removal.",
+      "Also commit when you can out-value their remaining life total with token damage and have no reason to hold back interaction."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Hold up mana for counterspells if needed, but prioritize casting Omniscience when you have a clear follow-up",
     "Play mana dorks before casting Omniscience to maximize free spells",
-    "Save removal for opponent's key threats"
+    "Save removal for opponent's key threats",
+    "Kona and Formidable Speaker trigger on any spell you cast, including instants and activated abilities that count as spells.",
+    "Cast instants at optimal times to maximize token generation.",
+    "Omniscience is fragile",
+    "protect it with counterspells or sacrifice outlets if needed.",
+    "Common mistake: overcommitting to Kona without follow-up spells.",
+    "Always keep a hand of spells to fuel the engine."
   ],
   "matchups": [
     {
@@ -84,15 +108,34 @@
         "Efficient removal",
         "Value engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multi-target spells or cast instants in response to their counters to trigger Kona/Formidable Speaker. Use spell acceleration to cast multiple spells in a single turn, forcing them to counter multiple targets. Prioritize uncounterable effects or spell-skew if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with cheap Elementals and cantrips. Use removal to hit their ramp spells or mana rocks. Do not let them establish a massive mana advantage; disrupt their early game with interaction and keep the board state fluid.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card draw, removal, and counterspells. Control the board with Kona/Formidable Speaker, but be ready to trade efficiently. Use hand disruption to break their rhythm and win by out-resourcing and out-answering.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast Aggro Creatures",
     "Counterspells",
-    "Board Wipes"
+    "Board Wipes",
+    "Watch for board wipes (Cyclonic Rift, Wrath of God), targeted removal (Path to Exile, Lightning Strike), and counterspells.",
+    "Note when opponents are holding up mana for interaction vs. casting spells.",
+    "Track their graveyard if they are playing combo or reanimation strategies."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:49:39+00:00",
     "model": "local-model",
@@ -108,6 +151,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

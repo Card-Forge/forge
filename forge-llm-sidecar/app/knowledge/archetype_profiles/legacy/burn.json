@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "name": "Burn",
+  "format": "legacy",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Monastery Swiftspear",
+    "Eidolon of the Great Revel",
+    "Faerie Macabre",
+    "Goblin Guide"
+  ],
+  "interaction_to_disrupt": [
+    "Boltwave",
+    "Chain Lightning",
+    "Eidolon of the Great Revel",
+    "Fireblast",
+    "Lava Spike",
+    "Lightning Bolt",
+    "Price of Progress",
+    "Rift Bolt"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 15,
+      "cards": [
+        "Eidolon of the Great Revel",
+        "Faerie Macabre",
+        "Goblin Guide",
+        "Monastery Swiftspear"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 45,
+      "cards": [
+        "Boltwave",
+        "Chain Lightning",
+        "Eidolon of the Great Revel",
+        "Fireblast",
+        "Lava Spike",
+        "Lightning Bolt",
+        "Price of Progress",
+        "Rift Bolt",
+        "Roiling Vortex",
+        "Searing Blood",
+        "Skewer the Critics",
+        "Smash to Smithereens",
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 11
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 6,
+      "cards": [
+        "Faerie Macabre",
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 6
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Monastery Swiftspear"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Dragon's Claw"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Mountain"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.72
+  },
+  "dual_role_cards": [
+    {
+      "card": "Eidolon of the Great Revel",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Macabre",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monastery Swiftspear",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tormod's Crypt",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/burn.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

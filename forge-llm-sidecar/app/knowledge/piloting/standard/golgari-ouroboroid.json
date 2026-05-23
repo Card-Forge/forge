@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more lands",
       "Hands containing Badgermole Cub or Nature's Rhythm",
-      "Hands with a playable creature by turn two"
+      "Hands with a playable creature by turn two",
+      "Keep hands with at least two lands (preferably duals or fetches if available), Nature's Rhythm, Badgermole Cub, and at least one early creature or removal.",
+      "Drop to five if you have a functional two-land start with a key synergistic piece."
     ],
     "mulligan_criteria": [
       "Hands with zero lands",
       "Hands with only high-cost creatures",
-      "Hands lacking graveyard synergy or card draw"
+      "Hands lacking graveyard synergy or card draw",
+      "Mulligan hands with three or more lands and no early plays, or hands with only instants/sorceries lacking land support."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and cheap creatures like Badgermole Cub",
       "Prioritize drawing cards with Nature's Rhythm",
-      "Establish a board presence to fuel Ouroboroid"
+      "Establish a board presence to fuel Ouroboroid",
+      "Turn 1: Play a land, cast Badgermole Cub if mana allows.",
+      "Turn 2: Drop a second land, then cast Nature's Rhythm or a 2-drop creature.",
+      "Prioritize land drops to enable landfall triggers and set up Nature's Rhythm's value.",
+      "Sequence spells to maximize graveyard fuel for Ouroboroid recursion without overcommitting to shuffling prematurely."
     ],
     "mid_game": [
       "Sacrifice or trade creatures to grow Ouroboroid",
       "Use Nature's Rhythm to pump and draw simultaneously",
-      "Maintain pressure while filtering through the deck"
+      "Maintain pressure while filtering through the deck",
+      "Balance mana between land drops, spell casting, and graveyard manipulation.",
+      "Use Nature's Rhythm on yourself when you have 3+ lands and an empty graveyard to stabilize, or on opponents facing graveyard-dependent strategies.",
+      "Avoid shuffling your graveyard if you need specific cards for recursion or answers.",
+      "Track opponent graveyard size to anticipate their Nature's Rhythm or combo potential.",
+      "Commit threats when you have landfall triggers active or sufficient graveyard recursion to replace them.",
+      "Hold back against sweepers, heavy removal, or when you lack land synergy to recover."
     ],
     "late_game": [
       "Focus all resources into pumping Ouroboroid",
       "Use token generation to block and trade efficiently",
-      "Close out the game with combat damage or card advantage"
+      "Close out the game with combat damage or card advantage",
+      "Nature's Rhythm combined with 4+ lands on the battlefield and a healthy graveyard is your primary win condition, often leading to lethal card advantage or overwhelming board presence.",
+      "Ouroboroid recursion can close games by repeatedly deploying threats or shuffling key pieces back into play.",
+      "Badgermole Cub can dig for the final land or answer needed to secure the game.",
+      "Go all-in when you have 3+ lands, a creature on board, and enough graveyard fuel to sustain recursion for at least two turns.",
+      "Commit when the opponent has no sweepers or counterspells in hand, or when you can safely cast Nature's Rhythm to draw into game-ending threats."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Hold up Nature's Rhythm for key moments to maximize pump value",
     "Sacrifice Badgermole Cub before trading it to ensure the token triggers",
-    "Play Ouroboroid as soon as possible to start accumulating counters"
+    "Play Ouroboroid as soon as possible to start accumulating counters",
+    "Common mistake: Over-shuffling your graveyard too early, leaving you without recursion fuel.",
+    "Remember that Nature's Rhythm targets a player, so use it strategically on yourself for stabilization or on opponents facing graveyard synergy.",
+    "Ouroboroid's recursion is your win condition",
+    "don't sacrifice it lightly.",
+    "Practice stack interaction to maximize Nature's Rhythm and Badgermole Cub value.",
+    "In Unknown format, always verify specific card rulings and format restrictions before tournament play."
   ],
   "matchups": [
     {
@@ -87,15 +111,36 @@
         "Card draw engines",
         "Value trades"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Play around counters by establishing land advantage first, then casting Nature's Rhythm or creatures in response to their counterspells. Use cheap threats and stack recursion to force them to spend multiple counters. If they have heavy counter suites, prioritize artifact/enchantment removal and graveyard hate to bypass their interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Badgermole Cub and early creatures to disrupt their mana development. Use targeted removal on key ramp creatures before they can stabilize. Avoid trading into their late-game finishers; instead, win the resource war by out-graving them and using Nature's Rhythm to draw past their threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the graveyard war by out-sequenceing your opponent and using counters/removal on key creatures. Prioritize keeping your graveyard stocked for Ouroboroid recursion while stripping theirs. Use Nature's Rhythm to draw into more recursion or answers. Track their land count and graveyard size to anticipate their plays and counter their Nature's Rhythm timing.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Direct removal spells",
     "Board wipe effects",
-    "Counterspells targeting Nature's Rhythm"
+    "Counterspells targeting Nature's Rhythm",
+    "Watch for Izzet's counterspells and sweepers",
+    "they will try to interrupt your landfall or Nature's Rhythm.",
+    "Note when opponents shuffle their graveyard\u2014that often signals a big draw or combo setup.",
+    "Track land counts",
+    "opponents with 4+ lands are primed for massive turns."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:57:23+00:00",
     "model": "local-model",
@@ -111,6 +156,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

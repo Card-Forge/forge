@@ -1,0 +1,153 @@
+{
+  "archetype": "Naya Initiative",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/naya-initiative.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Anointed Peacekeeper"
+    },
+    {
+      "qty": 1,
+      "name": "Broadside Bombardiers"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 4,
+      "name": "Caves of Chaos Adventurer"
+    },
+    {
+      "qty": 4,
+      "name": "Chrome Mox"
+    },
+    {
+      "qty": 4,
+      "name": "City of Traitors"
+    },
+    {
+      "qty": 1,
+      "name": "Elegant Parlor"
+    },
+    {
+      "qty": 4,
+      "name": "Elvish Spirit Guide"
+    },
+    {
+      "qty": 4,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 1,
+      "name": "Fury"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 1,
+      "name": "Lush Portico"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Once Upon a Time"
+    },
+    {
+      "qty": 3,
+      "name": "Palace Jailer"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Plateau"
+    },
+    {
+      "qty": 4,
+      "name": "Seasoned Dungeoneer"
+    },
+    {
+      "qty": 4,
+      "name": "Simian Spirit Guide"
+    },
+    {
+      "qty": 4,
+      "name": "Solitude"
+    },
+    {
+      "qty": 4,
+      "name": "Undermountain Adventurer"
+    },
+    {
+      "qty": 2,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 4,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 2,
+      "name": "Witch Enchanter"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Archon of Emeria"
+    },
+    {
+      "qty": 1,
+      "name": "Clarion Conqueror"
+    },
+    {
+      "qty": 1,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 4,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 1,
+      "name": "Fury"
+    },
+    {
+      "qty": 1,
+      "name": "Gaddock Teeg"
+    },
+    {
+      "qty": 4,
+      "name": "Sanctum Prelate"
+    },
+    {
+      "qty": 1,
+      "name": "Yorion, Sky Nomad"
+    }
+  ]
+}

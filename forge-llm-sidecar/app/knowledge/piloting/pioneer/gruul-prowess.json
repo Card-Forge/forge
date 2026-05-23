@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two lands and a turn-one or turn-two creature",
       "Hands containing Soul-Scar Mage or Emberheart Challenger with early land drops",
-      "Hands that can establish a prowess trigger by turn two"
+      "Hands that can establish a prowess trigger by turn two",
+      "Keep hands with 2-3 lands, at least one Prowess creature (Screaming Nemesis, Emberheart Challenger, or Soul-Scar Mage), and 2-3 cheap noncreature spells (Lightning Strike, Shock, Charm, etc.).",
+      "Keep if you can cast a turn-1 spell or play a turn-1 creature."
     ],
     "mulligan_criteria": [
       "Hands with zero or one land",
       "Hands lacking early creatures or prowess triggers",
-      "Hands stuck on high-cost cards without early acceleration"
+      "Hands stuck on high-cost cards without early acceleration",
+      "Mulligan if 0-1 lands, all creatures with no spells, or all spells with no creatures/lands."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Prioritize playing lands and casting one- or two-mana creatures to establish prowess",
       "Attack early to trigger Emberheart Challenger's counter ability and Soul-Scar Mage's draw",
-      "Use Screaming Nemesis's enter-the-battlefield fight to remove early blockers or chip damage"
+      "Use Screaming Nemesis's enter-the-battlefield fight to remove early blockers or chip damage",
+      "Turn 1: Play land, cast a cantrip or removal spell to trigger Prowess on a potential turn-2 threat, or play a 1-drop creature if available.",
+      "Turn 2: Play land, cast another noncreature spell to pump your creature, then attack.",
+      "Prioritize sequencing spells to maximize Prowess triggers before combat.",
+      "If opening with a creature, hold a spell for flash or to pump before attacking."
     ],
     "mid_game": [
       "Push damage with multiple prowess-boosted attackers to pressure the opponent's life total",
       "Sequence Nemesis fights to clear the way for larger threats like Emberheart Challenger",
-      "Maintain card advantage by repeatedly attacking with Soul-Scar Mage to draw into answers"
+      "Maintain card advantage by repeatedly attacking with Soul-Scar Mage to draw into answers",
+      "Mana should be kept flexible for flash threats and instant-speed spells.",
+      "Prioritize keeping cards in hand to fuel Prowess",
+      "don't overcommit to board state if you can cast a spell to pump next turn.",
+      "Graveyard is generally a liability (avoid self-mill), but be aware of opponent's graveyard recursion.",
+      "Commit threats when you have enough Prowess triggers to make trades favorable or when you can close the game.",
+      "Hold back if the opponent has sweepers or if you're low on resources."
     ],
     "late_game": [
       "Leverage accumulated +1/+1 counters and prowess buffs to close out the game with wide attacks",
       "Keep pressure constant to prevent control or midrange opponents from stabilizing",
-      "Use remaining fight triggers to handle late-game threats while pushing lethal"
+      "Use remaining fight triggers to handle late-game threats while pushing lethal",
+      "Emberheart Challenger and pumped Screaming Nemesis are primary finishers.",
+      "Kari Zev can close games by drawing cards and pumping.",
+      "Use flash threats to surprise block or attack through removal.",
+      "Go all-in when you have 3+ Prowess triggers ready, the opponent has no sweepers, or you can close the game in 1-2 turns.",
+      "Also commit when you can trade up favorably with Soul-Scar Mage."
     ]
   },
   "key_cards": [
@@ -59,7 +77,12 @@
     "Always play a prowess creature before casting spells that rely on combat damage or buffs",
     "Use Screaming Nemesis's fight ability before declaring attackers to clear blockers efficiently",
     "Attack with Soul-Scar Mage before playing new threats to draw into synergistic cards",
-    "Hold up red mana only when necessary, as prowess relies on unspent mana for other effects"
+    "Hold up red mana only when necessary, as prowess relies on unspent mana for other effects",
+    "Avoid casting spells unnecessarily just to trigger Prowess if it leaves you vulnerable",
+    "timing is key.",
+    "Remember that Soul-Scar Mage's ability triggers on combat damage, so you can attack with it to remove a large creature's +1/+1 counters or toughness.",
+    "Don't overcommit to a single threat if you can pump multiple creatures.",
+    "Watch out for opponent's trick removal like Lightning Axe or Shock in response to your Prowess triggers."
   ],
   "matchups": [
     {
@@ -97,16 +120,45 @@
         "Blood Artist",
         "Fatal Push"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use flash threats to attack after they counter your spell. Cast multiple cheap spells to force multiple counters or let Prowess triggers resolve. Use spells with flash or instant speed to pump before combat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race their mana development. Use removal to kill their ramp creatures. Sideboard in hate bears or early threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use efficient removal to kill early threats. Pump your creatures to trade up. Don't overextend; stabilize with removal and then win with Prowess threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with spell density. Use flash threats to bypass removal. Pressure early to force them to use interaction on non-critical spells. Use cantrips to dig for answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the spell war. Prioritize card advantage (Kari Zev, cantrips). Sideboard in more removal and hate bears. Play around their flash threats.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Izzet Phoenix",
     "Mono-Green",
     "Abzan Control",
-    "Rakdos Midrange"
+    "Rakdos Midrange",
+    "Watch for sweepers (Wrath of God, Damnation, etc.), targeted removal (Path, Go for the Throat), and combo win conditions.",
+    "Note when opponents tap out for counterspells or sweepers.",
+    "Track if they're playing around flash threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:10:21+00:00",
     "model": "local-model",
@@ -148,6 +200,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

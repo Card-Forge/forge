@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two lands and a one-drop like Scalding Viper",
       "Hands containing Burst Lightning alongside a creature",
-      "Hands with early interaction and a curve into Hexing Squelcher"
+      "Hands with early interaction and a curve into Hexing Squelcher",
+      "Keep any hand with 2-3 lands and at least one turn-1 or turn-2 play (e.g., Scalding Viper, Hexing Squelcher, or a cantrip/removal spell).",
+      "Prioritize keeping hands that can establish a board presence by turn 2."
     ],
     "mulligan_criteria": [
       "Hands lacking early creatures or burn spells",
       "Hands with three or more lands",
-      "Hands missing a one-drop or two-drop threat"
+      "Hands missing a one-drop or two-drop threat",
+      "Mulligan hands with 0-1 lands, three+ lands with no early plays, or hands lacking any way to interact or apply pressure."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Play Scalding Viper on turn one to establish immediate board presence",
       "Use Burst Lightning to clear small blockers or push damage directly",
-      "Prioritize land drops to ensure consistent casting of early threats"
+      "Prioritize land drops to ensure consistent casting of early threats",
+      "Turn 1: Play a land, cast a cantrip or cheap threat if mana allows.",
+      "Turn 2: Play a land, cast a 2-drop threat or removal.",
+      "If opening with a Viper/Squelcher on turn 1, play land, cast creature, use its ETB to clear a potential blocker or hit face.",
+      "Sequence lands to ensure two-color availability by turn 2.",
+      "If drawing a hand with Burst Lightning, hold it for a key threat or to swing through a blocker."
     ],
     "mid_game": [
       "Deploy Hexing Squelcher to apply pressure and force removal",
       "Sequence burn spells to maximize combat damage by clearing blockers efficiently",
-      "Maintain card advantage by trading efficiently rather than overcommitting resources"
+      "Maintain card advantage by trading efficiently rather than overcommitting resources",
+      "Treat mana as a weapon",
+      "always have one mana open for interaction or finishing blows.",
+      "Manage hand by prioritizing threats over removal when ahead, and vice versa when behind.",
+      "Avoid overcommitting to the board without protection.",
+      "Graveyard is generally a liability",
+      "be mindful of opponent's recursion or mill strategies."
     ],
     "late_game": [
       "Push maximum damage with remaining creatures and burn",
       "Look for ways to stabilize if the game extends, though the deck aims to end earlier",
-      "Use Burst Lightning to finish opponents who have stabilized with larger threats"
+      "Use Burst Lightning to finish opponents who have stabilized with larger threats",
+      "High-impact threats like Hexing Squelcher, Scalding Viper, and Burst Lightning chain together to close out games.",
+      "Use removal to clear the final blocker, then swing with remaining threats.",
+      "If ahead, use direct damage to finish the opponent.",
+      "Go all-in when you have board advantage, the opponent has no sweepers or counterspells in hand, and you can pressure through their remaining interaction.",
+      "Also commit when you've out-resourced them and can trade favorably."
     ]
   },
   "key_cards": [
@@ -58,7 +77,11 @@
   "sequencing_tips": [
     "Hold Burst Lightning until after combat damage is declared to maximize total damage output",
     "Play Scalding Viper before casting Hexing Squelcher to establish a curve that pressures opponents early",
-    "Use burn spells to clear blockers rather than trading creatures when you can push more damage"
+    "Use burn spells to clear blockers rather than trading creatures when you can push more damage",
+    "Common mistakes include overcommitting to the board without protection, holding too many removal spells when ahead, and mismanaging mana for interaction.",
+    "Be mindful of timing your Burst Lightning to both deal damage and draw a card efficiently.",
+    "Avoid casting spells into known counterspells without a plan.",
+    "Practice stack management and prioritize threats over removal when you have a clear path to victory."
   ],
   "matchups": [
     {
@@ -87,15 +110,34 @@
         "Combat tricks",
         "Early sweepers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig for answers or threats. Cast spells in response to known counterspells if you have priority tricks. Don't overcommit to the stack; use removal to clear their threats and pressure face. Consider sideboard cards that bypass counters or protect your spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply maximum pressure early before they stabilize. Use removal to eliminate their ramp sources or key threats. Don't let them get ahead in mana; trade efficiently and keep them on the back foot.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing and better sequencing. Prioritize card advantage and efficient removal. Trade creatures favorably and use removal to clear their threats before committing your own. Sideboard in additional interaction and threats to gain an edge.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early sweepers that clear your board",
     "Counterspells that disrupt your burn sequence",
-    "Resilient creatures that outvalue your early pressure"
+    "Resilient creatures that outvalue your early pressure",
+    "Watch for sweepers (e.g., Cyclonic Rift, Wrath of God), counterspells, and targeted removal.",
+    "Note when opponents tap out for a single spell\u2014they're likely holding interaction.",
+    "Track their graveyard for recursion threats and monitor their mana for potential ramp or combo pieces."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:02:28+00:00",
     "model": "local-model",
@@ -111,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

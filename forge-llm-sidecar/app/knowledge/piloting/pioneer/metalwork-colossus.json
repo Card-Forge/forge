@@ -11,7 +11,10 @@
   "mulligan": {
     "keep_criteria": [
       "Hands containing Leyline Axe and early artifact enablers like Brass Knuckles or Moonsnare Prototype",
-      "Hands with multiple high-mana-value artifacts to trigger Simulacrum Synthesizer"
+      "Hands with multiple high-mana-value artifacts to trigger Simulacrum Synthesizer",
+      "Keep hands with 2-3 lands, Simulacrum Synthesizer, and at least one early artifact or cantrip.",
+      "Drop hands with three or more lands and no early plays, or hands with only Metalwork Colossus and no way to cast it.",
+      "Keep hands with Leyline Axe if paired with early mana and a target artifact."
     ],
     "mulligan_criteria": [
       "Hands lacking early mana or artifact reduction tools",
@@ -35,17 +38,30 @@
     "early_game": [
       "Play Leyline Axe on turn one if possible to establish free mana and cost reduction",
       "Use Moonsnare Prototype to ramp and protect Leyline Axe",
-      "Search for artifacts with Ingenious Smith"
+      "Search for artifacts with Ingenious Smith",
+      "Turn 1: Play a land, optionally cast a cheap artifact or cantrip.",
+      "Turn 2: Cast Simulacrum Synthesizer",
+      "use its enter-the-battlefield trigger to put a +1/+1 counter on Leyline Axe or another artifact, or sacrifice it later to fuel Colossus.",
+      "Sequence lands to ensure you can hit your two-drop and six-drop without flooding."
     ],
     "mid_game": [
       "Cast Metalwork Colossus for free or cheap on turn three or four",
       "Equip with Brass Knuckles and Leyline Axe for double strike",
-      "Use Wedding Invitation to clear blockers for lethal combat"
+      "Use Wedding Invitation to clear blockers for lethal combat",
+      "Balance mana between casting Colossus, holding up interaction, and fueling Simulacrum Synthesizer.",
+      "Use Leyline Axe's sacrifice ability for card draw when you have board control, and use its pump ability only when it secures combat or trades favorably.",
+      "Commit Metalwork Colossus when you have removal for their threats or a board wipe ready.",
+      "Hold back if the opponent has sweepers or targeted hate in play.",
+      "Use Simulacrum Synthesizer to trade efficiently or protect key artifacts."
     ],
     "late_game": [
       "Sacrifice artifacts to return Colossus to hand and repeat the loop if killed",
       "Pivot to Simulacrum Synthesizer token generation",
-      "Use Fabrication Foundry to reanimate artifacts and accelerate the combo"
+      "Use Fabrication Foundry to reanimate artifacts and accelerate the combo",
+      "Metalwork Colossus with enough +1/+1 counters to be unblockable or too large to remove, or Leyline Axe pumped to lethal.",
+      "Simulacrum Synthesizer can also close games by repeatedly fueling Colossus or trading into key threats.",
+      "Go all-in when you have card advantage, removal for their threats, and they have no sweepers in hand.",
+      "Commit when you can trade your early artifacts for their board wipes or removal."
     ]
   },
   "key_cards": [
@@ -99,7 +115,11 @@
     "Prioritize playing Leyline Axe on turn one to establish early mana and cost reduction.",
     "Hold Wedding Invitation until combat to clear blockers for a lethal Colossus attack.",
     "If Colossus faces removal, sacrifice two artifacts to return it to hand and repeat the combo next turn.",
-    "Use Fabrication Foundry's reanimation ability to recover key artifacts in attrition games."
+    "Use Fabrication Foundry's reanimation ability to recover key artifacts in attrition games.",
+    "Watch out for artifact hate (Shatter, Disenchant).",
+    "Simulacrum Synthesizer's ability is a key resource engine.",
+    "Don't overcommit to Colossus without board presence or answers.",
+    "Leyline Axe's pump is a tempo tool, not just a finisher."
   ],
   "matchups": [
     {
@@ -144,6 +164,31 @@
         "Lotus combo pieces",
         "Fast mana acceleration"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple small threats, sacrifice triggers, and artifact synergies to out-value counterspells. Cast Colossus in response to their counterspells if possible, or use Leyline Axe's draw ability to dig for answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use artifact hate, and don't let them stabilize. Trade efficiently and use sweepers to reset the board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early artifacts and removal, then transition to Colossus. Use Leyline Axe's pump to block or trade favorably.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats, use card advantage to out-grind, and protect Colossus from targeted removal. Use Leyline Axe's draw to dig past their answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing, using better sequencing, and targeting their key artifacts with removal. Use Simulacrum Synthesizer to fuel Colossus faster or trade efficiently.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -157,10 +202,12 @@
     "Mayhem Devil",
     "Bonecrusher Giant",
     "Kayla's Reconstruction",
-    "Collected Company"
+    "Collected Company",
+    "Watch for sweepers (e.g., Wrath of God, Supreme Verdict), targeted removal (e.g., Path to Exile, Doom Blade), and combo finishers."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-azorius-metalwork-colossus-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T05:27:46+00:00",
     "model": "local-model",
@@ -178,6 +225,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

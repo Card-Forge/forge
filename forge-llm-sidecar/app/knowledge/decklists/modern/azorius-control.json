@@ -1,0 +1,137 @@
+{
+  "archetype": "Azorius Control",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/azorius-control.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 4,
+      "name": "Demolition Field"
+    },
+    {
+      "qty": 4,
+      "name": "Erode"
+    },
+    {
+      "qty": 4,
+      "name": "Field of Ruin"
+    },
+    {
+      "qty": 2,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Ghost Quarter"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 3,
+      "name": "Karn, the Great Creator"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Tithe"
+    },
+    {
+      "qty": 3,
+      "name": "March of Otherworldly Light"
+    },
+    {
+      "qty": 3,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 7,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Razorgrass Ambush"
+    },
+    {
+      "qty": 1,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 4,
+      "name": "Reprieve"
+    },
+    {
+      "qty": 4,
+      "name": "Solitude"
+    },
+    {
+      "qty": 4,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 3,
+      "name": "Sunken Citadel"
+    },
+    {
+      "qty": 2,
+      "name": "Teferi, Time Raveler"
+    },
+    {
+      "qty": 4,
+      "name": "Wrath of the Skies"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Beza, the Bounding Spring"
+    },
+    {
+      "qty": 1,
+      "name": "Cityscape Leveler"
+    },
+    {
+      "qty": 1,
+      "name": "Crucible of Worlds"
+    },
+    {
+      "qty": 1,
+      "name": "Elixir of Immortality"
+    },
+    {
+      "qty": 1,
+      "name": "Engineered Explosives"
+    },
+    {
+      "qty": 1,
+      "name": "Ensnaring Bridge"
+    },
+    {
+      "qty": 1,
+      "name": "Kaheera, the Orphanguard"
+    },
+    {
+      "qty": 1,
+      "name": "Liquimetal Coating"
+    },
+    {
+      "qty": 2,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 2,
+      "name": "Supreme Verdict"
+    },
+    {
+      "qty": 2,
+      "name": "Timely Reinforcements"
+    },
+    {
+      "qty": 1,
+      "name": "Trinisphere"
+    }
+  ]
+}

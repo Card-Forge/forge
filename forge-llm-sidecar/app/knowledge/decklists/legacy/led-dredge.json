@@ -1,0 +1,113 @@
+{
+  "archetype": "LED Dredge",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/led-dredge.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Breakthrough"
+    },
+    {
+      "qty": 3,
+      "name": "Bridge from Below"
+    },
+    {
+      "qty": 4,
+      "name": "Cabal Therapy"
+    },
+    {
+      "qty": 4,
+      "name": "Cephalid Coliseum"
+    },
+    {
+      "qty": 2,
+      "name": "Dread Return"
+    },
+    {
+      "qty": 4,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 4,
+      "name": "Golgari Grave-Troll"
+    },
+    {
+      "qty": 3,
+      "name": "Golgari Thug"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Lion's Eye Diamond"
+    },
+    {
+      "qty": 2,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 4,
+      "name": "Narcomoeba"
+    },
+    {
+      "qty": 4,
+      "name": "Otherworldly Gaze"
+    },
+    {
+      "qty": 1,
+      "name": "Ox of Agonas"
+    },
+    {
+      "qty": 3,
+      "name": "Poxwalkers"
+    },
+    {
+      "qty": 1,
+      "name": "Satoru, the Infiltrator"
+    },
+    {
+      "qty": 4,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 4,
+      "name": "Stinkweed Imp"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 3,
+      "name": "Volcanic Island"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 2,
+      "name": "Kiora's Dismissal"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of Sanctity"
+    },
+    {
+      "qty": 2,
+      "name": "Shenanigans"
+    },
+    {
+      "qty": 4,
+      "name": "Unmask"
+    }
+  ]
+}

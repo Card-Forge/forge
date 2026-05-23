@@ -1,0 +1,121 @@
+{
+  "archetype": "Silverquill, the Disputant",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "A B/W attrition and conditional control deck that leverages Silverquill to disrupt opponent strategies while out-grinding them through efficient removal, card advantage, and incremental damage. It excels against combo and ramp archetypes by answering key pieces and winning midrange value exchanges.",
+  "win_conditions": [
+    "Silverquill\u2019s ultimate ability, incremental damage via lifelink and removal, or card advantage engines that out-value the opponent.",
+    "Secure the win by protecting your win condition and removing the last key piece of their strategy."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including basics or signets), at least one mana rock (Sol Ring/Arcane Signet), and a mix of early interaction or a turn-2 threat."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have fewer than two lands, no mana acceleration, or a hand full of high-cost removal with no early plays."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring or Arcane Signet if mana allows.",
+      "Turn 2: Develop your mana base, cast early threats or targeted removal, and begin sequencing lands to ensure white and black mana for Silverquill\u2019s abilities.",
+      "Prioritize establishing board presence without overextending."
+    ],
+    "mid_game": [
+      "Conservatively manage mana to ensure you can respond to threats while developing your board.",
+      "Use mana rocks to enable Silverquill\u2019s abilities at optimal times.",
+      "Avoid hoarding cards if you can safely apply pressure or stabilize.",
+      "Commit threats only when you have interaction to answer their response or when you can safely establish a board.",
+      "Hold back if the opponent has unanswered removal, a combo piece, or a board wipe.",
+      "Use Silverquill to force favorable trades or disrupt their strategy."
+    ],
+    "late_game": [
+      "Silverquill\u2019s ultimate ability, incremental damage via lifelink and removal, or card advantage engines that out-value the opponent.",
+      "Secure the win by protecting your win condition and removing the last key piece of their strategy.",
+      "Go all-in when you have board control, the opponent is at low life, or you can protect your win condition with interaction.",
+      "Commit when you\u2019ve answered their key threats and can safely attack or cast your finisher."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Silverquill, the Disputant",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overcommitting to the board without protection or interaction.",
+    "Unique interaction: Silverquill\u2019s dispute mechanic likely forces choices or counters",
+    "use it to disrupt combo chains and force unfavorable trades.",
+    "Watch for format-specific rules and adjust your pacing accordingly.",
+    "Always track graveyard and library contents if recursion or mill is a threat."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use mana rocks to cast at instant speed, split your spells across multiple turns, or cast multiple threats to force counters. Use Silverquill to disrupt their counterspells or force them to spend resources on less important targets.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure and interaction to disrupt their mana development. Use discard, targeted removal, or board wipes to stop them from reaching their big spells. Don\u2019t let them stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize early with efficient removal and lifegain. Use board wipes to clear token armies or aggressive threats. Transition to value engines once the board is clear.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with efficient threats and card advantage. Don\u2019t let them out-value you; use Silverquill to disrupt their strategy and force them to spend resources. Attack when they\u2019re tapped out for counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the attrition war by trading efficiently and targeting their key pieces. Use hand disruption to prevent them from setting up their strategy. Prioritize card advantage and protect Silverquill to out-value them.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for combo win conditions (Ur-Dragon, Krenko), big planeswalkers, and board wipes.",
+    "Note when opponents tap out for key spells or when they start drawing multiple cards.",
+    "Track graveyard contents if recursion is a threat."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

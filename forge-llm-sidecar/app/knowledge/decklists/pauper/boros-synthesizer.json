@@ -1,0 +1,113 @@
+{
+  "archetype": "Boros Synthesizer",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/boros-synthesizer.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Den"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 2,
+      "name": "Boros Garrison"
+    },
+    {
+      "qty": 4,
+      "name": "Experimental Synthesizer"
+    },
+    {
+      "qty": 4,
+      "name": "Galvanic Blast"
+    },
+    {
+      "qty": 4,
+      "name": "Glint Hawk"
+    },
+    {
+      "qty": 4,
+      "name": "Great Furnace"
+    },
+    {
+      "qty": 2,
+      "name": "Journey to Nowhere"
+    },
+    {
+      "qty": 4,
+      "name": "Kor Skyfisher"
+    },
+    {
+      "qty": 4,
+      "name": "Lembas"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 1,
+      "name": "Makeshift Munitions"
+    },
+    {
+      "qty": 1,
+      "name": "Melded Moxite"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Novice Inspector"
+    },
+    {
+      "qty": 3,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Radiant Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 2,
+      "name": "Thraben Charm"
+    },
+    {
+      "qty": 4,
+      "name": "Thraben Inspector"
+    },
+    {
+      "qty": 4,
+      "name": "Wind-Scarred Crag"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Cast into the Fire"
+    },
+    {
+      "qty": 4,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 4,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 3,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 2,
+      "name": "Thraben Charm"
+    }
+  ]
+}

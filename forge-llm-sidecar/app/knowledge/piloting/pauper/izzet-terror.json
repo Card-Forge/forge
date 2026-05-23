@@ -11,11 +11,13 @@
     "keep_criteria": [
       "Hands containing 2-3 lands to avoid mana screw",
       "Early interaction like Counterspell or cheap removal",
-      "Cantrips to dig for necessary answers"
+      "Cantrips to dig for necessary answers",
+      "Keep hands with 2-3 lands, at least one early interaction (Counterspell, Spell Pierce, Lightning Strike, or Abrade), and Lorien Revealed if you have 3+ mana sources."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or early interaction",
-      "Hands heavy on late-game threats without draw or protection"
+      "Hands heavy on late-game threats without draw or protection",
+      "Mulligan on 1-land hands, hands with only removal and no cantrips/interaction, or hands with multiple Lorien Revealed but no early spells."
     ],
     "examples": [
       {
@@ -34,15 +36,29 @@
   "game_plan": {
     "early_game": [
       "Play lands and use cantrips like Brainstorm and Ponder to find answers",
-      "Deploy cheap removal and Counterspell to disrupt opponent's early threats"
+      "Deploy cheap removal and Counterspell to disrupt opponent's early threats",
+      "Turn 1: Play a land, cast Opt/Ponder to dig for interaction or Lorien.",
+      "Turn 2: Play a second land, hold up 2-3 mana for counterspells against key threats.",
+      "If opponent plays a vulnerable early creature, remove it or counter it.",
+      "If you have 3 mana, cast Lorien Revealed to start generating tokens and drawing cards."
     ],
     "mid_game": [
       "Stabilize the board using sweepers like Breath Weapon and meta calls like Cast into the Fire",
-      "Maintain Monarch state if possible to generate extra card advantage"
+      "Maintain Monarch state if possible to generate extra card advantage",
+      "Preserve counterspells for game-ending threats or combo pieces",
+      "use removal on tempo threats.",
+      "Don\u2019t overcommit to Lorien if you have no way to protect it or follow up.",
+      "Track graveyard for reanimation threats.",
+      "Commit Lorien tokens when you have board presence or can protect them with counterspells.",
+      "Hold back on Skred until the opponent has no removal or can\u2019t block effectively."
     ],
     "late_game": [
       "Deploy Tolarian Terror to create a four-turn clock or endless blockers",
-      "Use Murmuring Mystic to flood the board with tokens once opponent's resources are exhausted"
+      "Use Murmuring Mystic to flood the board with tokens once opponent's resources are exhausted",
+      "Skred (often pumped via Lightning Strike or similar effects) or Lorien Revealed token army.",
+      "Secure victory by clearing the board of blockers, then attacking with Skred or tokens.",
+      "Go all-in when the opponent has no removal, counterspells, or board wipes in hand, and you have a card advantage advantage.",
+      "Commit to Skred attacks when you can safely pump it or they have no blockers."
     ]
   },
   "key_cards": [
@@ -91,7 +107,10 @@
     "Use Brainstorm to dig deep, then follow up with Ponder to shuffle unfavorable cards on top.",
     "Cast Lorien Revealed to search for Volatile Fjord, ensuring consistent red mana access.",
     "Time Cast into the Fire to clear multiple tokens or lands simultaneously for maximum efficiency.",
-    "Retain Monarch by avoiding combat damage to draw an extra card each turn."
+    "Retain Monarch by avoiding combat damage to draw an extra card each turn.",
+    "Common mistakes include overcommitting to Lorien Revealed without follow-up, holding up too many counterspells and missing early interaction windows, and underestimating Skred\u2019s vulnerability to board wipes.",
+    "Always track the opponent\u2019s graveyard and hand size, as Izzet Terror relies heavily on information and timing.",
+    "In mirrors, card advantage and counterspell efficiency are paramount\u2014don\u2019t trade spells unnecessarily."
   ],
   "matchups": [
     {
@@ -138,6 +157,31 @@
         "Removal",
         "Counterspell"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap cantrips to dig through counterspells, cast Lorien Revealed on turns when you can protect it, and use Skred as a threat that\u2019s hard to counter. Cast spells in response to their counterspells to force trades.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with removal and counterspells to disrupt their mana development. Bring in artifact hate and discard to slow them down. Don\u2019t let them stabilize; finish them before they hit their late-game threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction to stabilize. Use Lorien Revealed to generate blockers and card advantage. Track life total and don\u2019t overextend into board wipes.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with Lorien Revealed and card draw. Use Skred as a finisher they can\u2019t easily answer. Force them to use resources on your threats while you dig for answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by drawing more cards and holding up counterspells for key plays. Prioritize Lorien Revealed and card draw over aggressive threats. Use Skred when they have no counterspells left. Track their hand size and graveyard to predict their game plan.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -149,10 +193,12 @@
     "Faeries tokens",
     "Tamiyo's Safekeeping",
     "Mnemonic Wall",
-    "Archaeomancer"
+    "Archaeomancer",
+    "Watch for combo win conditions, note when opponents tap out for big threats (your counterspell window), and track graveyard activity for reanimation or discard strategies."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-izzet-terror-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T10:05:47+00:00",
     "model": "local-model",
@@ -170,6 +216,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
@@ -250,7 +314,7 @@
       "confidence": 0.85,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "protect the Broodscale Combo, such as Tamiyo’s Safekeeping"
+      "evidence_span": "protect the Broodscale Combo, such as Tamiyo\u2019s Safekeeping"
     },
     {
       "confidence": 0.8,

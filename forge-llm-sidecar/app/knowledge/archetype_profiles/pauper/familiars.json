@@ -1,0 +1,426 @@
+{
+  "schema_version": 1,
+  "name": "Familiars",
+  "format": "pauper",
+  "colors": [
+    "W",
+    "U"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Grixis Tide Familiars is a Pauper combo deck that leverages the newly legal High Tide to generate massive mana for its win conditions. It utilizes Nightscape Familiar to discount spells and provide regeneration, while relying on Stream of Thought or infinite Murmuring Mystic tokens to close games. The deck also features a flexible Ardent Elementalist and Snapcaster Mage mini-combo alongside strong black removal.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 21,
+      "cards": [
+        "Contaminated Landscape",
+        "L\u00f3rien Revealed",
+        "Meeting of Minds",
+        "Mulldrifter",
+        "Preordain",
+        "Snap"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 16,
+      "cards": [
+        "Mulldrifter",
+        "Preordain",
+        "Sea Gate Oracle",
+        "Snap",
+        "Stonehorn Dignitary"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 2
+    },
+    "tutors_wildcards": {
+      "target_count": 7,
+      "cards": [
+        "Contaminated Landscape",
+        "L\u00f3rien Revealed"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 6,
+      "cards": [
+        "Murmuring Mystic",
+        "Snap"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 25,
+      "cards": [
+        "Archaeomancer",
+        "God-Pharaoh's Faithful",
+        "Mulldrifter",
+        "Murmuring Mystic",
+        "Sea Gate Oracle",
+        "Snap",
+        "Stonehorn Dignitary",
+        "Sunscape Familiar"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Archaeomancer",
+        "Ephemerate",
+        "Hydroblast",
+        "Last Breath",
+        "Snap"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Meeting of Minds"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 16,
+      "cards": [
+        "Hydroblast",
+        "Negate",
+        "Prohibit",
+        "Remove Soul",
+        "Snap"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 8
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Archaeomancer",
+        "Mortuary Mire",
+        "Snap"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 15,
+      "cards": [
+        "Archaeomancer",
+        "Azorius Chancery",
+        "Ephemerate",
+        "Ghostly Flicker",
+        "Mortuary Mire",
+        "Snap"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 6,
+      "cards": [
+        "God-Pharaoh's Faithful",
+        "Murmuring Mystic"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Murmuring Mystic"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 10,
+      "cards": [
+        "Murmuring Mystic",
+        "Preordain",
+        "Snap"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Dust to Dust",
+        "Snap"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 13,
+      "cards": [
+        "Azorius Chancery",
+        "Contaminated Landscape",
+        "Idyllic Beachfront",
+        "Mortuary Mire",
+        "Snap"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 19,
+      "cards": [
+        "Azorius Chancery",
+        "Contaminated Landscape",
+        "Idyllic Beachfront",
+        "Island",
+        "Mortuary Mire",
+        "Plains"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.36
+  },
+  "dual_role_cards": [
+    {
+      "card": "Archaeomancer",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Azorius Chancery",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Contaminated Landscape",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ephemerate",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "God-Pharaoh's Faithful",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Idyllic Beachfront",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meeting of Minds",
+      "roles": [
+        "card_advantage",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mortuary Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mulldrifter",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Murmuring Mystic",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Preordain",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sea Gate Oracle",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snap",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stonehorn Dignitary",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Discount counterspells like Negate using Nightscape Familiar for efficiency.",
+    "Look for windows in the opponent's strategy to safely play your combo.",
+    "Use Snuff Out early to clear the board before executing win conditions.",
+    "Prioritize land drops and cantrips in opening hands to avoid dead turns.",
+    "Familiars is highly vulnerable to graveyard hate"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cantrips like Preordain to find combo pieces"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Nightscape Familiar to discount red and blue spells"
+    },
+    {
+      "trigger": "early game",
+      "line": "Set up High Tide for mana acceleration"
+    }
+  ],
+  "kill_priority": [
+    "God-Pharaoh's Faithful",
+    "Murmuring Mystic",
+    "Snap",
+    "Preordain",
+    "Archaeomancer",
+    "Mulldrifter",
+    "Sea Gate Oracle",
+    "Stonehorn Dignitary"
+  ],
+  "interaction_to_disrupt": [
+    "Hydroblast",
+    "Negate",
+    "Prohibit",
+    "Remove Soul",
+    "Snap",
+    "Archaeomancer",
+    "Ephemerate",
+    "Last Breath"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/familiars.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

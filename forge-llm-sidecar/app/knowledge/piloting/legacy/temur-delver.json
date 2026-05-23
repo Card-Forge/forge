@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Hands with 1-2 lands and proactive action (creatures or cantrips)",
       "Hands with a mix of cantrips, one creature, and one interaction",
-      "Hands that can open with Ponder to find a second land safely"
+      "Hands that can open with Ponder to find a second land safely",
+      "Keep any hand with Delver of Secrets, Flow State, and Mishra's Bauble.",
+      "Keep hands with 2-3 lands (preferably shock lands or duals), 1-2 cantrips (Opt, Ponder, Brainstorm), and 1-2 removal spells."
     ],
     "mulligan_criteria": [
       "Hands with more than 2 lands",
       "Hands that are too reactive without guaranteed pressure",
-      "Hands lacking action or card draw"
+      "Hands lacking action or card draw",
+      "Mulligan flood, hands with 3+ non-basic lands and no early plays, or hands lacking Delver/Flow State/Bauble unless they contain multiple cantrips and removal to dig for the combo."
     ],
     "examples": [
       {
@@ -61,17 +64,31 @@
     "early_game": [
       "Play cheap threats like Delver of Secrets on turn 1 or 2",
       "Use Lightning Bolt and Daze to disrupt early threats and protect your board",
-      "Cast Wasteland immediately to hinder opponent's mana base"
+      "Cast Wasteland immediately to hinder opponent's mana base",
+      "Turn 1: Play a land, then cast Mishra's Bauble if you have no land, or hold it for tempo.",
+      "Turn 2: Cast Flow State (if Bauble is on the battlefield) or play a land and cast Flow State.",
+      "Turn 3: Cast Delver of Secrets and attack.",
+      "Sequence mana carefully, prioritizing shock lands to maintain mana availability for interaction."
     ],
     "mid_game": [
       "Trade cards efficiently in attrition wars against blue tempo decks",
       "Use Questing Druid to generate card advantage and stabilize",
-      "Leverage cantrips like Brainstorm and Ponder to find answers and threats"
+      "Leverage cantrips like Brainstorm and Ponder to find answers and threats",
+      "Use cantrips to maintain hand size and dig for threats or answers.",
+      "Avoid overcommitting mana to Flow State without a clear path to Delver.",
+      "Protect your graveyard, as Delver's flip condition and Flow State's value depend on it.",
+      "Commit Delver when the opponent lacks removal or has no effective blockers.",
+      "Use cheap removal to eliminate key threats before they can stabilize.",
+      "Hold back interaction if the opponent is on a combo or control plan that requires specific pieces to disrupt."
     ],
     "late_game": [
       "Close out games with direct damage or remaining creatures",
       "Cast Murktide Regent using Delve if early threats are removed",
-      "Rely on sideboard answers like Consign to Memory or Price of Progress against specific archetypes"
+      "Rely on sideboard answers like Consign to Memory or Price of Progress against specific archetypes",
+      "Delver of Secrets (flipped) is the primary win condition, supported by Lightning Helix or Go for the Throat to clear blockers or finish the game.",
+      "Secondary finishers include late-game threats like Tarmogoyf or efficient removal to clear the path.",
+      "Go all-in when the opponent has no removal, no blockers, or is below 10 life.",
+      "Commit when you have card advantage and the opponent is out of resources to interact."
     ]
   },
   "key_cards": [
@@ -110,7 +127,13 @@
     "Open with Ponder instead of Delver when holding only one land to safely draw a second land and avoid enemy Wasteland.",
     "Prioritize destroying the opponent's basic Island as soon as possible when facing Red Stompy to mitigate Blood Moon.",
     "Keep Daze in hand against Red Stompy even if they play Simian Spirit Guide, as it remains important when playing first.",
-    "Watch for Chalice of the Void in Eldrazi matchups and adjust mana usage accordingly."
+    "Watch for Chalice of the Void in Eldrazi matchups and adjust mana usage accordingly.",
+    "Delver's flip condition is crucial",
+    "remember to flip it when you cast a noncreature spell.",
+    "Flow State is a combo piece but also a cantrip, so use it to dig for threats or answers.",
+    "Mishra's Bauble is essential for tempo and can be used to bait counterspells or protect your hand.",
+    "Common mistakes include overcommitting mana on Flow State without a plan, forgetting to flip Delver, and underestimating graveyard hate.",
+    "Watch for Rest in Peace, Leyline of Punishment, and other graveyard disruption."
   ],
   "matchups": [
     {
@@ -158,6 +181,31 @@
         "Nadu, Winged Wisdom",
         "Combo pieces"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Mishra's Bauble to bait counterspells, then cast Flow State in response. Dig for answers with cantrips and cast cheap spells to pressure through interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to force interaction before they ramp out. Use cheap removal and discard to disrupt mana dorks and key spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap removal and cantrips to dig for answers. Use Delver to trade efficiently and pressure the opponent's life total.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with Delver and force interaction. Use removal on key spells and dig for threats to out-value their card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by using removal efficiently and tracking the opponent's hand. Win with better sequencing, card advantage, and by forcing the opponent to overcommit.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -170,10 +218,12 @@
     "Blood Moon",
     "Chalice of the Void",
     "Cavern of Souls",
-    "Simian Spirit Guide"
+    "Simian Spirit Guide",
+    "Watch for counterspells (Remand, Spell Pierce, Essence Scatter), sweepers (Wrath of God, Anger of the Gods), and graveyard hate (Rest in Peace, Leyline of Punishment)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-temur-delver-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T08:56:00+00:00",
     "model": "local-model",
@@ -191,6 +241,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

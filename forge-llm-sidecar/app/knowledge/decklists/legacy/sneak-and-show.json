@@ -1,0 +1,133 @@
+{
+  "archetype": "Sneak and Show",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/sneak-and-show.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Archon of Cruelty"
+    },
+    {
+      "qty": 3,
+      "name": "Atraxa, Grand Unifier"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "City of Traitors"
+    },
+    {
+      "qty": 3,
+      "name": "Emrakul, the Aeons Torn"
+    },
+    {
+      "qty": 2,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 2,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 2,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Omniscience"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 4,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 4,
+      "name": "Show and Tell"
+    },
+    {
+      "qty": 4,
+      "name": "Sneak Attack"
+    },
+    {
+      "qty": 4,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 1,
+      "name": "Thundering Falls"
+    },
+    {
+      "qty": 3,
+      "name": "Volcanic Island"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Brotherhood's End"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Fury"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 1,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 2,
+      "name": "Magus of the Moon"
+    },
+    {
+      "qty": 3,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Surgical Extraction"
+    }
+  ]
+}

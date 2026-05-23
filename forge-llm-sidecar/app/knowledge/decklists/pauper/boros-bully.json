@@ -1,0 +1,93 @@
+{
+  "archetype": "Boros Bully",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/boros-bully.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Battle Screech"
+    },
+    {
+      "qty": 4,
+      "name": "Boros Garrison"
+    },
+    {
+      "qty": 1,
+      "name": "Greatsword of Tyr"
+    },
+    {
+      "qty": 4,
+      "name": "Kor Skyfisher"
+    },
+    {
+      "qty": 3,
+      "name": "Leonardo, Big Brother"
+    },
+    {
+      "qty": 4,
+      "name": "Lunarch Veteran"
+    },
+    {
+      "qty": 4,
+      "name": "Mardu Devotee"
+    },
+    {
+      "qty": 4,
+      "name": "Novice Inspector"
+    },
+    {
+      "qty": 14,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Prismatic Strands"
+    },
+    {
+      "qty": 4,
+      "name": "Raffine's Informant"
+    },
+    {
+      "qty": 2,
+      "name": "Rally the Peasants"
+    },
+    {
+      "qty": 2,
+      "name": "Raphael, Tough Turtle"
+    },
+    {
+      "qty": 4,
+      "name": "Thraben Charm"
+    },
+    {
+      "qty": 4,
+      "name": "Thraben Inspector"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 2,
+      "name": "End the Festivities"
+    },
+    {
+      "qty": 2,
+      "name": "Flaring Pain"
+    },
+    {
+      "qty": 3,
+      "name": "Hallow"
+    },
+    {
+      "qty": 2,
+      "name": "Journey to Nowhere"
+    },
+    {
+      "qty": 2,
+      "name": "Smash to Dust"
+    }
+  ]
+}

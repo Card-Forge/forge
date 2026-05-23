@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with 2-3 lands and at least one low-cost creature",
       "Hands containing Demilich or Manamorphose",
-      "Hands with early interaction such as Gut Shot"
+      "Hands with early interaction such as Gut Shot",
+      "Keep hands with 2-3 lands (preferably duals or fetchable basics), at least one cheap cantrip (Gitaxian Probe, Opt, Manamorphose), and a discard outlet."
     ],
     "mulligan_criteria": [
       "Hands with 0 or 4+ lands",
       "Hands lacking early creatures or draw engines",
-      "Hands composed entirely of high-cost cards"
+      "Hands composed entirely of high-cost cards",
+      "Mulligan if you have 0-1 lands, no cheap spells, or only high-cost threats.",
+      "In a 7-card mulligan, keep 3+ lands if you have multiple cheap spells or discard effects."
     ],
     "examples": []
   },
@@ -25,17 +28,29 @@
     "early_game": [
       "Play lands and cheap creatures to establish board presence",
       "Cast Manamorphose to draw cards and filter into Demilich",
-      "Use Gut Shot to remove early aggressive threats"
+      "Use Gut Shot to remove early aggressive threats",
+      "Turn 1: Play a land, cast Gitaxian Probe on your opponent's turn, or cast Manamorphose for mana/ramp.",
+      "Turn 2: Fetch a dual land, cast cheap cantrips to dig for Phoenix or discard, or sequence Manamorphose into a cheap spell.",
+      "Prioritize lands that enter untapped or can be fetched to ensure blue/red mana availability for Probe and Phoenix."
     ],
     "mid_game": [
       "Trigger Demilich to replay discarded creatures and maintain pressure",
       "Cycle through the deck to find more removal and draw spells",
-      "Protect key engines while applying consistent damage"
+      "Protect key engines while applying consistent damage",
+      "Prioritize graveyard consistency over board presence.",
+      "Keep cheap spells in hand to dig for Phoenix or disrupt, and avoid overcommitting to cantrips if you're low on life.",
+      "Manage mana carefully to ensure you can cast Probe/Phoenix on the correct turn without flooding the board.",
+      "Hold back threats until you have a clear path to cast Phoenix or have enough removal to handle interaction.",
+      "Commit when you have graveyard setup and can answer interaction, but avoid overextending into board wipes or sweepers."
     ],
     "late_game": [
       "Flood the board with replayed creatures to close out the game",
       "Leverage card advantage to outvalue slower strategies",
-      "Clear remaining blockers with targeted removal to secure victory"
+      "Clear remaining blockers with targeted removal to secure victory",
+      "Arclight Phoenix (cast for free or with Manamorphose), backed by spot removal and burn.",
+      "Gut Shot can finish off low-life opponents or trade efficiently in the late game.",
+      "When you have 2+ cards in the graveyard, can cast Probe/cheap spells, and the opponent has no graveyard hate or counterspells in play.",
+      "Go all-in if you can close the game in 1-2 turns or if the opponent is at lethal range."
     ]
   },
   "key_cards": [
@@ -58,7 +73,12 @@
   "sequencing_tips": [
     "Prioritize casting Manamorphose before Demilich to fuel the graveyard",
     "Hold Gut Shot for key threats rather than using it preemptively",
-    "Discard creatures intentionally to trigger Demilich when mana is available"
+    "Discard creatures intentionally to trigger Demilich when mana is available",
+    "Common mistakes include overcommitting to cantrips without a win condition, ignoring graveyard hate, and mismanaging mana for Probe/Phoenix sequencing.",
+    "Manamorphose is crucial for mana fixing and ramp, while Gut Shot serves as niche burn/removal.",
+    "Demilich is highly atypical for Phoenix",
+    "if included, it likely changes the game to a graveyard-focused wincon, but be aware it's vulnerable to exile-based hate and may conflict with your core strategy.",
+    "Always track opponent's graveyard and hand size, and never assume your win condition will resolve without backup."
   ],
   "matchups": [
     {
@@ -87,16 +107,35 @@
         "Efficient removal",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Manamorphose for mana/ramp, cast Probe on the opponent's turn, use discard to remove counterspells, or cast Phoenix when they're tapped out. Sideboard Negate/Spell Pierce to protect your key spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use discard to hit their ramp sources, and close games before they stabilize. Gut Shot can finish off low-life ramp players, and Manamorphose helps you race their mana acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war, control the graveyard, and out-value with better sequencing. Gut Shot can trade efficiently, and prioritizing Probe/cheap spells ensures you reach your win condition first. Track their graveyard to know when to hold up removal.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Lightning Bolt",
     "Abrupt Decay",
     "Fatal Push",
-    "Beast Within"
+    "Beast Within",
+    "Watch for graveyard hate (Rest in Peace, Leyline, Surgical Extraction), counterspells, and discard.",
+    "Note if the opponent is playing fast lands or ramp to gauge if they can race you.",
+    "Track their hand size to know when they're tapped out for interaction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:58:10+00:00",
     "model": "local-model",
@@ -112,7 +151,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

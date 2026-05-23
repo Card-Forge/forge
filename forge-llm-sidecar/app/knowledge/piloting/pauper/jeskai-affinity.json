@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with early artifacts like Frogmite or Novice Inspector",
       "Mana base with access to red and white for Galvanic Blast and Glitters",
-      "At least one All That Glitters or Gingerbrute"
+      "At least one All That Glitters or Gingerbrute",
+      "Keep hands with 2-3 lands, at least one mana accelerator (Thoughtcast, Talisman, or similar), and a turn-1 or turn-2 artifact or threat."
     ],
     "mulligan_criteria": [
       "Hands lacking artifact synergy or early plays",
       "Hands with only lands or high-cost cards like Gearseeker Serpent without protection",
-      "Hands vulnerable to early Dust to Dust without answers"
+      "Hands vulnerable to early Dust to Dust without answers",
+      "Mulligan on pure land hands, multiple accelerators with no artifacts, or hands lacking a way to play a creature by turn 2."
     ],
     "examples": [
       {
@@ -42,17 +44,30 @@
     "early_game": [
       "Play artifact creatures like Frogmite and Novice Inspector to build affinity and board presence.",
       "Use Springleaf Drum to fix mana and enable early colored spells.",
-      "Sequence Frogmites to cast Myr Enforcer on turn 2 and set up All That Glitters by turn 3."
+      "Sequence Frogmites to cast Myr Enforcer on turn 2 and set up All That Glitters by turn 3.",
+      "Turn 1: Play a land, cast Thoughtcast or a cheap artifact like Glint Hawk or Ornithopter.",
+      "Turn 2: Play another land, cast a second accelerator or a medium threat (Memnite, Myr Retriever), or attack with evasive artifacts.",
+      "Sequence lands to ensure you can cast spells on curve while maintaining mana for instant-speed interaction."
     ],
     "mid_game": [
       "Deploy Gingerbrute or Glint Hawk to carry All That Glitters and apply immediate pressure.",
       "Use Galvanic Blast post-combat to remove blockers or finish off creatures.",
-      "Cast Thoughtcast to dig for key cards and maintain card advantage."
+      "Cast Thoughtcast to dig for key cards and maintain card advantage.",
+      "Preserve mana for instant-speed interaction while maintaining artifact development.",
+      "Use Thoughtcast to dig for answers or threats.",
+      "Avoid overcommitting artifacts if the opponent has sweepers or targeted removal in hand.",
+      "Commit threats when you have protection or can trade favorably.",
+      "Hold back if the opponent has sweepers, counters, or removal.",
+      "Use evasive artifacts to pressure while developing a bigger threat, and use instants to clear blockers or remove key threats."
     ],
     "late_game": [
       "Utilize Experimental Synthesizer for continuous value and artifact recursion.",
       "Deploy Gearseeker Serpent as a resilient clock to close out games.",
-      "Sideboard in Relic of Progenitus or Destroy Evil to handle specific meta threats."
+      "Sideboard in Relic of Progenitus or Destroy Evil to handle specific meta threats.",
+      "A massive artifact creature (e.g., Arcbound Ravager with +1/+1 counters, Myr Battlesphere, or a hasted threat) combined with burn or combat tricks.",
+      "Use Galvanic Blast to remove blockers or finish the opponent at 3-4 life.",
+      "Go all-in when you have a clear path to combat, the opponent has no sweepers, or you can trade artifacts favorably.",
+      "Commit when you can close the game in 1-2 turns and have enough interaction to protect your final attack."
     ]
   },
   "key_cards": [
@@ -111,7 +126,12 @@
     "Sequence multiple Frogmites on turn 2 to cast Myr Enforcer and enchant a creature with All That Glitters by turn 3.",
     "Cast Thoughtcast after playing a sequence of Frogmites to maximize card advantage.",
     "Use Galvanic Blast after combat to remove blockers or finish off creatures that survived attacks.",
-    "Protect early Gearseeker Serpent with Dispel if the opponent has instant-speed removal."
+    "Protect early Gearseeker Serpent with Dispel if the opponent has instant-speed removal.",
+    "Common mistake: Overcommitting artifacts without leaving mana for instant-speed interaction.",
+    "Always keep a mana source open for Galvanic Blast or counters.",
+    "Don't forget to use Thoughtcast to dig for answers or threats.",
+    "Watch for sweepers and hold up mana accordingly.",
+    "Jeskai Affinity thrives on tempo and resource advantage, so prioritize efficient trades and timely aggression."
   ],
   "matchups": [
     {
@@ -164,6 +184,31 @@
         "Galvanic Blast",
         "Dispel"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtcast to dig for protection or threats. Cast spells in response to counterspells when possible. Rely on artifacts that enter the battlefield with immediate impact or cast multiple spells in a row to force counters and find answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use Galvanic Blast and other removal to kill their ramp creatures before they stabilize. Do not let them reach their late-game power level.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Glint Hawk and other evasive artifacts to trade efficiently. Hold up Galvanic Blast for their key threats. Stabilize with removal and then close the game with a big threat before they overwhelm you.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with cheap artifacts and cantrips. Force them to use resources on interaction. Close out games quickly before they can set up their win condition, and use instant-speed spells to disrupt their combo or control pieces.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-accelerating and out-resolving. Use Thoughtcast to dig deeper and find answers. Trade artifacts favorably, disrupt their acceleration with counters or destruction, and prioritize board presence over card advantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -177,10 +222,12 @@
     "Counterspell",
     "Kuldotha Rebirth",
     "Avenging Hunter",
-    "Bogles"
+    "Bogles",
+    "Watch for sweepers (e.g., Wrath of God, Day of Judgment), targeted removal, counterspells, and graveyard recursion."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-jeskai-affinity-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T10:33:22+00:00",
     "model": "local-model",
@@ -214,6 +261,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {
@@ -233,7 +298,7 @@
       "confidence": 0.95,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "All That Glitters is our main win condition and powerful “free-win” button at different points in the game."
+      "evidence_span": "All That Glitters is our main win condition and powerful \u201cfree-win\u201d button at different points in the game."
     },
     {
       "confidence": 0.9,

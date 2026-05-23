@@ -1,0 +1,400 @@
+{
+  "archetype": "Ashling, the Limitless",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/ashling-the-limitless.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Adarkar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Alchemist's Refuge"
+    },
+    {
+      "qty": 1,
+      "name": "Amphibian Downpour"
+    },
+    {
+      "qty": 1,
+      "name": "An Offer You Can't Refuse"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Ashling, the Limitless"
+    },
+    {
+      "qty": 1,
+      "name": "Ashnod's Altar"
+    },
+    {
+      "qty": 1,
+      "name": "Avacyn's Pilgrim"
+    },
+    {
+      "qty": 1,
+      "name": "Battlefield Forge"
+    },
+    {
+      "qty": 1,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Birthing Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Brigid, Clachan's Heart"
+    },
+    {
+      "qty": 1,
+      "name": "Brushland"
+    },
+    {
+      "qty": 1,
+      "name": "Burnt Offering"
+    },
+    {
+      "qty": 1,
+      "name": "Cascade Bluffs"
+    },
+    {
+      "qty": 1,
+      "name": "Cauldron of Essence"
+    },
+    {
+      "qty": 1,
+      "name": "Caves of Koilos"
+    },
+    {
+      "qty": 1,
+      "name": "Chord of Calling"
+    },
+    {
+      "qty": 1,
+      "name": "City of Brass"
+    },
+    {
+      "qty": 1,
+      "name": "Cloud Key"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Dina's Guidance"
+    },
+    {
+      "qty": 1,
+      "name": "Eladamri's Call"
+    },
+    {
+      "qty": 1,
+      "name": "Eladamri, Korvecdal"
+    },
+    {
+      "qty": 1,
+      "name": "Eldritch Evolution"
+    },
+    {
+      "qty": 1,
+      "name": "Elemental Bond"
+    },
+    {
+      "qty": 1,
+      "name": "Elven Chorus"
+    },
+    {
+      "qty": 1,
+      "name": "Elves of Deep Shadow"
+    },
+    {
+      "qty": 1,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Eternal Witness"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Fellwar Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Fetid Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Fiery Islet"
+    },
+    {
+      "qty": 1,
+      "name": "Final-Word Phantom"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Food Chain"
+    },
+    {
+      "qty": 1,
+      "name": "Forbidden Orchard"
+    },
+    {
+      "qty": 3,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 1,
+      "name": "Foundation Breaker"
+    },
+    {
+      "qty": 1,
+      "name": "Fury"
+    },
+    {
+      "qty": 1,
+      "name": "Fyndhorn Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Bombardment"
+    },
+    {
+      "qty": 1,
+      "name": "Graveshifter"
+    },
+    {
+      "qty": 1,
+      "name": "Greater Good"
+    },
+    {
+      "qty": 1,
+      "name": "Greenwarden of Murasa"
+    },
+    {
+      "qty": 1,
+      "name": "Grove of the Burnwillows"
+    },
+    {
+      "qty": 1,
+      "name": "Heartless Summoning"
+    },
+    {
+      "qty": 1,
+      "name": "Herald's Horn"
+    },
+    {
+      "qty": 1,
+      "name": "Horizon Canopy"
+    },
+    {
+      "qty": 1,
+      "name": "Horizon of Progress"
+    },
+    {
+      "qty": 1,
+      "name": "Ignoble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Impulsivity"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Karplusan Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Lamentation"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Maelstrom Wanderer"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Metamorphosis"
+    },
+    {
+      "qty": 1,
+      "name": "Mulldrifter"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Rhythm"
+    },
+    {
+      "qty": 1,
+      "name": "Nevermaker"
+    },
+    {
+      "qty": 1,
+      "name": "Noble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Nylea, Keen-Eyed"
+    },
+    {
+      "qty": 1,
+      "name": "Pact of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Realmwalker"
+    },
+    {
+      "qty": 1,
+      "name": "Rejuvenating Springs"
+    },
+    {
+      "qty": 1,
+      "name": "Reveillark"
+    },
+    {
+      "qty": 1,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Risen Reef"
+    },
+    {
+      "qty": 1,
+      "name": "Sacrifice"
+    },
+    {
+      "qty": 1,
+      "name": "Selvala, Heart of the Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Semblance Anvil"
+    },
+    {
+      "qty": 1,
+      "name": "Shivan Reef"
+    },
+    {
+      "qty": 1,
+      "name": "Slithermuse"
+    },
+    {
+      "qty": 1,
+      "name": "Sneak Attack"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spire Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 1,
+      "name": "Sulfurous Springs"
+    },
+    {
+      "qty": 1,
+      "name": "Sunderflock"
+    },
+    {
+      "qty": 1,
+      "name": "Swan Song"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Impulse"
+    },
+    {
+      "qty": 1,
+      "name": "Temur Sabertooth"
+    },
+    {
+      "qty": 1,
+      "name": "The Jolly Balloon Man"
+    },
+    {
+      "qty": 1,
+      "name": "Titan of Industry"
+    },
+    {
+      "qty": 1,
+      "name": "Twilight Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Underground River"
+    },
+    {
+      "qty": 1,
+      "name": "Undergrowth Stadium"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Incubator"
+    },
+    {
+      "qty": 1,
+      "name": "Waterlogged Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Whir of Invention"
+    },
+    {
+      "qty": 1,
+      "name": "Yavimaya Coast"
+    }
+  ],
+  "sideboard": []
+}

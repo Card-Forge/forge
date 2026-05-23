@@ -1,0 +1,129 @@
+{
+  "archetype": "Dimir Aggro",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/dimir-aggro.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Cecil, Dark Knight"
+    },
+    {
+      "qty": 4,
+      "name": "Darkslick Shores"
+    },
+    {
+      "qty": 2,
+      "name": "Enduring Curiosity"
+    },
+    {
+      "qty": 4,
+      "name": "Faerie Miscreant"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 4,
+      "name": "Floodpits Drowner"
+    },
+    {
+      "qty": 3,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Go for the Throat"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Kaito, Bane of Nightmares"
+    },
+    {
+      "qty": 4,
+      "name": "Mockingbird"
+    },
+    {
+      "qty": 4,
+      "name": "Moon-Circuit Hacker"
+    },
+    {
+      "qty": 4,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 1,
+      "name": "Nowhere to Run"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 3,
+      "name": "Underground River"
+    },
+    {
+      "qty": 1,
+      "name": "Urborg, Tomb of Yawgmoth"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Anoint with Affliction"
+    },
+    {
+      "qty": 1,
+      "name": "Ashiok, Dream Render"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Enduring Curiosity"
+    },
+    {
+      "qty": 1,
+      "name": "Extinction Event"
+    },
+    {
+      "qty": 2,
+      "name": "Kalitas, Traitor of Ghet"
+    },
+    {
+      "qty": 1,
+      "name": "Liliana of the Veil"
+    },
+    {
+      "qty": 2,
+      "name": "Path of Peril"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 2,
+      "name": "Tishana's Tidebinder"
+    }
+  ]
+}

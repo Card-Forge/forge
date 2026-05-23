@@ -1,0 +1,145 @@
+{
+  "archetype": "5c Midrange",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/5c-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Birthing Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Elesh Norn, Mother of Machines"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 1,
+      "name": "Indatha Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline Binding"
+    },
+    {
+      "qty": 4,
+      "name": "Magmatic Hellkite"
+    },
+    {
+      "qty": 4,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 4,
+      "name": "Omnath, Locus of Creation"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 4,
+      "name": "Shardless Agent"
+    },
+    {
+      "qty": 4,
+      "name": "Solitude"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 4,
+      "name": "Subtlety"
+    },
+    {
+      "qty": 1,
+      "name": "Superior Spider-Man"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Thundering Falls"
+    },
+    {
+      "qty": 3,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 2,
+      "name": "Witch Enchanter"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 3,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 2,
+      "name": "Obsidian Charmaw"
+    },
+    {
+      "qty": 2,
+      "name": "Rough // Tumble"
+    },
+    {
+      "qty": 2,
+      "name": "Supreme Verdict"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi, Time Raveler"
+    },
+    {
+      "qty": 3,
+      "name": "Wear // Tear"
+    }
+  ]
+}

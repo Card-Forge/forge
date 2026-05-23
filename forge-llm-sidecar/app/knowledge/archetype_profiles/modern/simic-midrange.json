@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "name": "Simic Midrange",
+  "format": "modern",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Abhorrent Oculus",
+    "Coiling Oracle",
+    "Endurance",
+    "Fblthp, the Lost",
+    "Harbinger of the Seas",
+    "Ice-Fang Coatl",
+    "Shardless Agent",
+    "Sink into Stupor"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Flare of Denial",
+    "Force of Negation",
+    "Mystical Dispute",
+    "Boseiju, Who Endures",
+    "Fade from History",
+    "Force of Vigor",
+    "Otawara, Soaring City"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Birthing Ritual"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 6,
+      "cards": [
+        "Fblthp, the Lost",
+        "Ice-Fang Coatl"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Abhorrent Oculus",
+        "Birthing Ritual",
+        "Hedge Maze"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Verdant Catacombs"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 31,
+      "cards": [
+        "Abhorrent Oculus",
+        "Coiling Oracle",
+        "Endurance",
+        "Fblthp, the Lost",
+        "Harbinger of the Seas",
+        "Ice-Fang Coatl",
+        "Shardless Agent",
+        "Sink into Stupor",
+        "Subtlety"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 1
+    },
+    "removal": {
+      "target_count": 7,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Fade from History",
+        "Force of Vigor",
+        "Otawara, Soaring City"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Fade from History"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 15,
+      "cards": [
+        "Consign to Memory",
+        "Flare of Denial",
+        "Force of Negation",
+        "Mystical Dispute"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 7
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 13,
+      "cards": [
+        "Abhorrent Oculus",
+        "Endurance",
+        "Force of Negation",
+        "Hedge Maze"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 1
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Abhorrent Oculus",
+        "Otawara, Soaring City"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 20,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Breeding Pool",
+        "Flooded Strand",
+        "Gemstone Caverns",
+        "Hedge Maze",
+        "Misty Rainforest",
+        "Otawara, Soaring City",
+        "Snow-Covered Forest",
+        "Snow-Covered Island",
+        "Verdant Catacombs"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 2
+    },
+    "lands": {
+      "target_count": 20,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Breeding Pool",
+        "Flooded Strand",
+        "Gemstone Caverns",
+        "Hedge Maze",
+        "Misty Rainforest",
+        "Otawara, Soaring City",
+        "Snow-Covered Forest",
+        "Snow-Covered Island",
+        "Verdant Catacombs"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 2
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.31
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abhorrent Oculus",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Birthing Ritual",
+      "roles": [
+        "dig_draw",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fade from History",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fblthp, the Lost",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gemstone Caverns",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hedge Maze",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ice-Fang Coatl",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Forest",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/simic-midrange.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

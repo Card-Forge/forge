@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Hands containing Noble Hierarch or early mana acceleration",
       "Hands with Green Sun's Zenith and a clear early target",
-      "Hands with two or more lands and a turn-one or turn-two play"
+      "Hands with two or more lands and a turn-one or turn-two play",
+      "Keep hands with 2-3 lands, Noble Hierarch, and a Green Sun's Zenith or early threat.",
+      "Prioritize hands that can play a land, cast Hierarch, and have a turn 2-3 plan."
     ],
     "mulligan_criteria": [
       "Hands lacking acceleration or early interaction",
       "Hands with four or more lands",
-      "Hands missing black mana for key spells or removal"
+      "Hands missing black mana for key spells or removal",
+      "Mulligan hands with 0-1 lands, multiple Noble Hierarchs without lands, or hands lacking acceleration/early interaction."
     ],
     "examples": []
   },
@@ -26,17 +29,31 @@
     "early_game": [
       "Play lands and prioritize casting Noble Hierarch on turn one",
       "Use Green Sun's Zenith to fetch early threats or additional lands",
-      "Establish a mana base that supports both black and green spells"
+      "Establish a mana base that supports both black and green spells",
+      "Turn 1: Play a land, cast Noble Hierarch.",
+      "Turn 2: Tap Hierarch for mana, play a second land, cast Green Sun's Zenith targeting Tarmogoyf, Scavenging Ooze, or a key threat.",
+      "If drawing extra lands, hold Zenith for bigger targets.",
+      "Sequence lands to ensure you can cast your spells on curve."
     ],
     "mid_game": [
       "Cast Frenzied Baloth and other devotion creatures to apply pressure",
       "Use excess mana to cast multiple spells or fetch answers with Zenith",
-      "Trade efficiently with opponent's threats while preserving key permanents"
+      "Trade efficiently with opponent's threats while preserving key permanents",
+      "Mana is critical",
+      "always ensure you have enough green for Green Sun's Zenith and your threats.",
+      "Use the graveyard strategically (Zenith puts creatures directly into play, so manage your graveyard for recursion or protection).",
+      "Don't overextend into removal",
+      "hold back threats if you lack interaction.",
+      "Commit threats when you have a clear path to victory or when the opponent is low on interaction."
     ],
     "late_game": [
       "Flood the board with large creatures to close out the game",
       "Use Zenith to fetch game-ending threats or removal as needed",
-      "Leverage mana advantage to outpace opponent's resources and win with combat"
+      "Leverage mana advantage to outpace opponent's resources and win with combat",
+      "Green Sun's Zenith into a game-winning threat (Tarmogoyf, Scavenging Ooze, or Frenzied Baloth if comboing), or a direct damage/combo finish.",
+      "Use discard to remove the last answer.",
+      "Go all-in when you have a clear path to victory, the opponent has no interaction, or you're at lethal.",
+      "Don't commit if they have sweepers or removal in hand."
     ]
   },
   "key_cards": [
@@ -60,7 +77,12 @@
     "Prioritize playing Noble Hierarch before casting Green Sun's Zenith to maximize mana efficiency",
     "Hold up black mana for counterspells or removal when facing control or midrange decks",
     "Use Zenith to fetch lands when behind on mana, and threats when ahead of the curve",
-    "Play Frenzied Baloth after establishing a base of devotion to maximize its board impact"
+    "Play Frenzied Baloth after establishing a base of devotion to maximize its board impact",
+    "Common mistake: Overcommitting to the board without protection.",
+    "Always hold up mana for interaction when facing interactive decks.",
+    "Green Sun's Zenith is a one-of or two-of, so don't cast it on an empty board unless you're going for a specific combo.",
+    "Fungal Bloom + Frenzied Baloth combo requires careful sequencing",
+    "ensure you have enough mana and a way to get the combo off."
   ],
   "matchups": [
     {
@@ -89,6 +111,21 @@
         "Value engines",
         "Card draw spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells. Cast Green Sun's Zenith in response to their counterspells if possible, or use mana dorks to cast threats in response to their spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to prevent them from reaching their big spells. Use discard to remove their acceleration or key threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Use Thoughtseize/Duress to remove their Green Sun's Zenith or key threats. Prioritize board presence and don't overextend.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -96,10 +133,14 @@
     "Abrupt Decay",
     "Thoughtseize",
     "Fatal Push",
-    "Lightning Helix"
+    "Lightning Helix",
+    "Watch for counterspells, sweepers, and removal.",
+    "Pay attention to when opponents tap out for big spells or hold up mana for interaction.",
+    "Note if they're playing lands that suggest a specific strategy (e.g., artifact lands for Affinity, snow for Blink)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T02:08:32+00:00",
     "model": "local-model",
@@ -115,7 +156,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

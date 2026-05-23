@@ -1,0 +1,157 @@
+{
+  "archetype": "4c Elementals",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/4c-elementals.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ashling, Rekindled"
+    },
+    {
+      "qty": 1,
+      "name": "Botanical Sanctum"
+    },
+    {
+      "qty": 2,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 2,
+      "name": "Chomping Changeling"
+    },
+    {
+      "qty": 4,
+      "name": "Collected Company"
+    },
+    {
+      "qty": 4,
+      "name": "Copperline Gorge"
+    },
+    {
+      "qty": 1,
+      "name": "Cragcrown Pathway"
+    },
+    {
+      "qty": 3,
+      "name": "Explosive Prodigy"
+    },
+    {
+      "qty": 2,
+      "name": "Fecund Greenshell"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 2,
+      "name": "Frontier Bivouac"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Leafkin Druid"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 2,
+      "name": "Mossborn Hydra"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Mutable Explorer"
+    },
+    {
+      "qty": 2,
+      "name": "Omnath, Locus of the Roil"
+    },
+    {
+      "qty": 1,
+      "name": "Realmwalker"
+    },
+    {
+      "qty": 2,
+      "name": "Rimekin Recluse"
+    },
+    {
+      "qty": 4,
+      "name": "Risen Reef"
+    },
+    {
+      "qty": 4,
+      "name": "Secluded Courtyard"
+    },
+    {
+      "qty": 1,
+      "name": "Tangled Florahedron"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Abandon"
+    },
+    {
+      "qty": 2,
+      "name": "Thunderkin Awakener"
+    },
+    {
+      "qty": 1,
+      "name": "Twinflame Travelers"
+    },
+    {
+      "qty": 4,
+      "name": "Unclaimed Territory"
+    },
+    {
+      "qty": 2,
+      "name": "Voice of Resurgence"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Chomping Changeling"
+    },
+    {
+      "qty": 3,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Eclipsed Flamekin"
+    },
+    {
+      "qty": 1,
+      "name": "Explosive Prodigy"
+    },
+    {
+      "qty": 2,
+      "name": "Realmwalker"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Viper"
+    },
+    {
+      "qty": 2,
+      "name": "Torch the Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Vine Mare"
+    },
+    {
+      "qty": 2,
+      "name": "Weathered Runestone"
+    }
+  ]
+}

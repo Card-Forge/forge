@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early sacrifice outlets",
       "Hands containing Mayhem Devil or cheap creatures",
-      "Hands with at least two mana sources"
+      "Hands with at least two mana sources",
+      "Keep hands with 2-3 lands, Cauldron Familiar, Witch's Oven, or early threats like Bloodtithe Harvester.",
+      "Keep discard (Thoughtseize/Liliana) if paired with a land."
     ],
     "mulligan_criteria": [
       "Hands with only high-cost cards",
       "Hands lacking sacrifice synergies",
-      "Hands with no removal or threats"
+      "Hands with no removal or threats",
+      "Mulligan on 1-land hands, triple-colored mana without lands, or hands lacking early plays and no way to generate mana."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Deploy cheap creatures to establish a board presence",
       "Prioritize playing Witch's Oven or similar outlets",
-      "Use early sac triggers to draw into key cards"
+      "Use early sac triggers to draw into key cards",
+      "Turn 1: Play a land, cast Cauldron Familiar or Bloodtithe Harvester if mana allows.",
+      "Turn 2: Play a second land, sacrifice Familiar for {R}{G}, cast Witch's Oven or another threat.",
+      "Prioritize playing lands to ensure sacrifice outlets can be activated on curve.",
+      "Sequence mana carefully to avoid dead turns."
     ],
     "mid_game": [
       "Cycle opponent's threats through Cauldron Familiar",
       "Cast Mayhem Devil for removal and pressure",
-      "Balance direct damage with board development"
+      "Balance direct damage with board development",
+      "Treat creatures as resources, not just threats.",
+      "Sacrifice only when it generates immediate value (mana for threats, card draw, or damage).",
+      "Preserve graveyard resources if possible, but be ready to play around Rest in Peace.",
+      "Maintain hand size with discard and card draw",
+      "never let your hand empty without a clear win condition.",
+      "Commit threats when you have protection (discard, removal) or when the opponent is tapped out."
     ],
     "late_game": [
       "Leverage accumulated card advantage to out-resource opponents",
       "Use Witch's Oven to clear blockers or finish the game",
-      "Maintain sac outlets to keep drawing cards"
+      "Maintain sac outlets to keep drawing cards",
+      "Mayhem Devil (haste, unblockable), Witch's Oven + sacrifice outlet for infinite damage/mana, Liliana's ultimate, or unblockable threats.",
+      "Secure the win by attacking with haste creatures or using Oven to swing for lethal.",
+      "Go all-in when you have a clear path to damage, the opponent is tapped out, or you can protect your win condition with discard/removal.",
+      "Commit when you've established board control and have the resources to follow up."
     ]
   },
   "key_cards": [
@@ -59,7 +76,11 @@
     "Hold sacrifice outlets until you can trigger them for maximum value",
     "Use Witch's Oven to remove threats before they attack or block",
     "Trigger Cauldron Familiar on opponent's creatures to gain card advantage",
-    "Cast Mayhem Devil when you need immediate board impact or removal"
+    "Cast Mayhem Devil when you need immediate board impact or removal",
+    "Common mistakes include over-sacrificing early, forgetting to protect Witch's Oven, and mismanaging mana for sacrifice outlets.",
+    "Unique interactions: Oven + Cauldron Familiar/Bloodtithe Harvester creates infinite sacrifice for mana or damage.",
+    "Mayhem Devil's haste makes it a surprise attacker.",
+    "Always track opponent's hate cards and adjust your game plan accordingly."
   ],
   "matchups": [
     {
@@ -85,15 +106,34 @@
         "Similar sacrifice synergies",
         "Removal spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple threats to force counter trade-offs. Sacrifice outlets for mana to cast around counters. Use discard to remove counterspells or protect your threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to punish their slow start. Use discard to remove mana dorks. Bring in hate cards (Rest in Peace, Leyline of Punishment) and sweepers to clear their board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Protect your Witch's Oven. Use Rest in Peace to shut down their graveyard. Out-value with better sequencing and card advantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Rakdos Bloodfiend",
     "Krenko, Mob Boss",
-    "Spell Queller"
+    "Spell Queller",
+    "Watch for sweepers (Wrath of God, Anger of the Gods), hate cards (Rest in Peace, Leyline of Punishment), and counters.",
+    "Note when opponents tap out for big spells or leave mana open for protection.",
+    "Track graveyard contents to anticipate Rest in Peace or graveyard recursion."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T03:58:56+00:00",
     "model": "local-model",
@@ -109,6 +149,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,133 @@
+{
+  "archetype": "Orzhov Greasefang",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/orzhov-greasefang.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Bleachbone Verge"
+    },
+    {
+      "qty": 3,
+      "name": "Brightclimb Pathway"
+    },
+    {
+      "qty": 4,
+      "name": "Concealed Courtyard"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 3,
+      "name": "Fleeting Spirit"
+    },
+    {
+      "qty": 1,
+      "name": "Geier Reach Sanitarium"
+    },
+    {
+      "qty": 4,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 4,
+      "name": "Greasefang, Okiba Boss"
+    },
+    {
+      "qty": 4,
+      "name": "Guardian of New Benalia"
+    },
+    {
+      "qty": 4,
+      "name": "Iron-Shield Elf"
+    },
+    {
+      "qty": 1,
+      "name": "Lively Dirge"
+    },
+    {
+      "qty": 4,
+      "name": "Monument to Endurance"
+    },
+    {
+      "qty": 4,
+      "name": "Parhelion II"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Recommission"
+    },
+    {
+      "qty": 2,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 4,
+      "name": "The Mycosynth Gardens"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Urborg, Tomb of Yawgmoth"
+    },
+    {
+      "qty": 1,
+      "name": "Vanishing Verse"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 2,
+      "name": "Doorkeeper Thrull"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Go Blank"
+    },
+    {
+      "qty": 2,
+      "name": "High Noon"
+    },
+    {
+      "qty": 2,
+      "name": "Pest Control"
+    },
+    {
+      "qty": 2,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Vanishing Verse"
+    }
+  ]
+}

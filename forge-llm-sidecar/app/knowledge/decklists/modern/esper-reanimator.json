@@ -1,0 +1,113 @@
+{
+  "archetype": "Esper Reanimator",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/esper-reanimator.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Archon of Cruelty"
+    },
+    {
+      "qty": 3,
+      "name": "Emperor of Bones"
+    },
+    {
+      "qty": 4,
+      "name": "Ephemerate"
+    },
+    {
+      "qty": 4,
+      "name": "Faithful Mending"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 4,
+      "name": "Persist"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 4,
+      "name": "Psychic Frog"
+    },
+    {
+      "qty": 4,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowy Backstreet"
+    },
+    {
+      "qty": 4,
+      "name": "Solitude"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Despair"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Wrath of the Skies"
+    }
+  ]
+}

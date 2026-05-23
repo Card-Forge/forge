@@ -12,10 +12,12 @@
   "mulligan": {
     "keep_criteria": [
       "Hands that draw cards efficiently on the first few turns",
-      "Hands that develop the game plan"
+      "Hands that develop the game plan",
+      "Keep hands with 2-3 lands, at least one mana accelerator or cheap artifact, and a turn-1/2 play (Arcbound Ravager, Myr Enforcer, or Thoughtcast paired with an artifact)."
     ],
     "mulligan_criteria": [
-      "Hands with only one land"
+      "Hands with only one land",
+      "Mulligan on 3+ lands with no early artifacts, or hands with only removal/draw spells and no way to cast them on curve."
     ],
     "examples": [
       {
@@ -36,16 +38,29 @@
   "game_plan": {
     "early_game": [
       "Play slowly due to tap lands",
-      "Prioritize efficient card draw and game plan development"
+      "Prioritize efficient card draw and game plan development",
+      "Turn 1: Play a land, then a cheap artifact or mana rock.",
+      "If you have a cantrip, cast it to dig.",
+      "Turn 2: Deploy an Arcbound Ravager or Myr Enforcer, using artifacts for mana or +1/+1 counters.",
+      "Sequence lands to ensure you can hit your colors for Thoughtcast or Galvanic Blast if needed, but prioritize artifact acceleration."
     ],
     "mid_game": [
       "Draw cards and hoard resources",
       "Trade well at instant speed",
-      "Disrupt opponent's board with Krark-Clan Shaman and Toxin Analysis"
+      "Disrupt opponent's board with Krark-Clan Shaman and Toxin Analysis",
+      "Use Thoughtcast to cycle cheap artifacts and draw spells, keeping hand size stable.",
+      "Don't overcommit mana to artifacts if you're low on interaction.",
+      "Protect your cantrip engine",
+      "it's your lifeline.",
+      "Commit threats when you have interaction to protect them or when the opponent has no answers.",
+      "Hold back if they have sweepers or targeted removal."
     ],
     "late_game": [
       "Drown opponent in accumulated resources",
-      "Take full control of the game after opponent spends resources"
+      "Take full control of the game after opponent spends resources",
+      "A fully powered Arcbound Ravager or Myr Enforcer, often buffed by artifacts or combat tricks.",
+      "Reckoner's Bargain can also close games by drawing you into a win condition or enabling a graveyard combo.",
+      "Go all-in when you have a clear path to lethal, the opponent has no sweepers, or you've established card advantage that they can't match."
     ]
   },
   "key_cards": [
@@ -84,7 +99,11 @@
     "Keep two or three Galvanic Blasts in hand until opponent is in range, then play them all at once",
     "Trade well at instant speed to punish opponent mistakes",
     "Sacrifice Myr Enforcer to Reckoner's Bargain when facing Kuldotha Red",
-    "Use Krark-Clan Shaman and Toxin Analysis to clear the board after disrupting ramp"
+    "Use Krark-Clan Shaman and Toxin Analysis to clear the board after disrupting ramp",
+    "Common mistake: Overcommitting to artifacts without interaction, leaving you vulnerable to sweepers.",
+    "Unique interaction: Thoughtcast can be used to cycle artifacts into the graveyard for Reckoner's Bargain or other synergies.",
+    "Always track their hand size",
+    "if they have no cards, they're likely on a combo or control plan."
   ],
   "matchups": [
     {
@@ -129,6 +148,31 @@
         "Fast opening hand",
         "Reckoner's Bargain"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtcast to dig for multiple spells, forcing them to counter multiple threats. Cast artifacts and spells at unexpected times (end step, after they tap out). Use Galvanic Blast to remove their key counterspell sources if possible.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use Galvanic Blast to remove their ramp sources or early threats. Don't let them stabilize; keep the board state volatile.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize removal and life total. Use artifacts as blockers early. Reckoner's Bargain can stabilize your hand. Don't overextend into combat tricks.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure their life total while they dig for answers. Use Thoughtcast to out-draw them. Force them to use interaction on low-impact artifacts to set up bigger threats later.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize Thoughtcast and card draw to out-value them. Use discard to strip their key artifacts. Protect your own engine with counters or protection.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -139,10 +183,13 @@
     "Murmuring Mystic",
     "Reckoner's Bargain",
     "Counters",
-    "Protection spells"
+    "Protection spells",
+    "Watch for sweepers, targeted removal, and combo win conditions.",
+    "Note when they tap out for a single spell\u2014that's your window to attack or cast Thoughtcast."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-grixis-affinity-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T09:10:04+00:00",
     "model": "local-model",
@@ -160,6 +207,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

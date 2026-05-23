@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two one- or two-mana spells",
       "Early Madness outlets to trigger draw effects",
-      "A mix of removal and creature threats"
+      "A mix of removal and creature threats",
+      "Keep hands with 2-3 lands (prioritize duals or shocklands if available), at least one discard outlet or Madness enabler, and a turn-1 or turn-2 play (Lava Dart, Lightning Bolt, or a 1/2 drop).",
+      "Keep 2 lands if paired with a discard outlet + early threat or two cheap spells."
     ],
     "mulligan_criteria": [
       "Hands lacking early discard triggers",
       "Stuck on three-mana or higher cards",
-      "No interaction or board presence"
+      "No interaction or board presence",
+      "Mulligan on 4+ lands with no early plays, or 3+ lands with only removal and no threats/discard."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play cheap creatures to establish board presence",
       "Discard into Lightning Bolt or Lava Dart for immediate impact",
-      "Use Madness triggers to draw into follow-up threats"
+      "Use Madness triggers to draw into follow-up threats",
+      "Turn 1: Play a land, then either play a 1-drop or discard a cheap spell with Madness to pressure or answer a threat.",
+      "Turn 2: Develop with a 2-drop or cast a discarded Madness spell for value.",
+      "Sequence mana to ensure R on T1, BR on T2, and UBR on T3.",
+      "Always prioritize casting discarded spells over letting them exile, and use discard to strip key threats or counterspells before they resolve."
     ],
     "mid_game": [
       "Maintain pressure while cycling through the deck",
       "Prioritize discarding into high-value spells or removal",
-      "Block efficiently to protect key discard outlets"
+      "Block efficiently to protect key discard outlets",
+      "Treat your hand as a dynamic resource",
+      "discard strategically to fuel Madness rather than dumping randomly.",
+      "Preserve mana for interaction on opponent's turn, and remember that uncast Madness spells exile, so don't plan around graveyard recursion.",
+      "Use U mana for utility or protection when needed, but prioritize R/B for pressure and discard.",
+      "Commit threats when you have removal ready to answer their response or when they've exhausted interaction.",
+      "Hold back if they have sweepers, hard counters, or graveyard hate."
     ],
     "late_game": [
       "Leverage Kessig Flamebreather for sustained card advantage",
       "Close out games with accumulated direct damage",
-      "Overwhelm opponent's resources with rapid card draw"
+      "Overwhelm opponent's resources with rapid card draw",
+      "Kessig Flamebreather as a resilient threat or burn finisher, chains of Lava Dart and Lightning Bolt for unblockable damage, or discarding a high-value Madness spell that resolves to swing the board.",
+      "Close games by forcing interaction until it's gone, then commit remaining resources.",
+      "Go all-in when the opponent has no interaction left, has low life total (\u226410), or you've established board dominance with resilient threats.",
+      "Also commit when you can safely discard a high-impact Madness spell that they cannot counter or answer."
     ]
   },
   "key_cards": [
@@ -59,7 +76,13 @@
     "Hold up red mana to pay Madness costs when casting spells",
     "Discard into removal only when necessary to preserve hand size",
     "Prioritize discarding into Kessig Flamebreather to maximize draw potential",
-    "Use direct damage spells to finish games rather than overcommitting to combat"
+    "Use direct damage spells to finish games rather than overcommitting to combat",
+    "Common mistake: Discarding randomly without a plan.",
+    "Always ask if the discard fuels a Madness spell, removes a threat, or strips a key answer.",
+    "Don't overcommit to the graveyard",
+    "Madness exiles, not returns.",
+    "Kessig Flamebreather likely synergizes with discard or burn, so sequence it to maximize value.",
+    "Watch for format-specific hate cards and adjust your discard targets to protect your win conditions."
   ],
   "matchups": [
     {
@@ -88,6 +111,21 @@
         "Flametongue Kavu",
         "Goblin Sharpshooter"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove their counterspells before they can be cast, or cast spells in response to their counterspells to manipulate the stack. Rely on cheap, uncounterable effects if available, and avoid overcommitting to expensive spells they can easily bounce or counter.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply maximum early pressure before they stabilize. Use removal to kill ramp creatures before they can cast big spells, and don't overextend into sweepers. Force them to use removal early, then close the game with discard and burn.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war by keeping hands with multiple discard outlets and early threats. Trade removal efficiently, value out their discarded spells, and prioritize keeping life total high to outlast their late-game threats. Sideboard in targeted discard and cheap interaction to out-value them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +133,13 @@
     "Path to Exile",
     "Boros Charm",
     "Goblin Sharpshooter",
-    "Flametongue Kavu"
+    "Flametongue Kavu",
+    "Watch for sweepers (e.g., Wrath, Terror), hard counters (e.g., Counterspell, Negate), and discard/graveyard hate (e.g., Rest in Peace, Leyline).",
+    "Note when opponents start drawing extra cards, have protection spells, or are holding up mana for multiple turns, as these signal a control or combo game plan."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:02:03+00:00",
     "model": "local-model",
@@ -127,6 +168,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

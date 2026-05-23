@@ -1,0 +1,85 @@
+{
+  "archetype": "Burn",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/burn.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Boltwave"
+    },
+    {
+      "qty": 4,
+      "name": "Chain Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Eidolon of the Great Revel"
+    },
+    {
+      "qty": 4,
+      "name": "Fireblast"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Guide"
+    },
+    {
+      "qty": 4,
+      "name": "Lava Spike"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 4,
+      "name": "Monastery Swiftspear"
+    },
+    {
+      "qty": 18,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Price of Progress"
+    },
+    {
+      "qty": 4,
+      "name": "Rift Bolt"
+    },
+    {
+      "qty": 4,
+      "name": "Skewer the Critics"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Dragon's Claw"
+    },
+    {
+      "qty": 3,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 1,
+      "name": "Price of Progress"
+    },
+    {
+      "qty": 2,
+      "name": "Roiling Vortex"
+    },
+    {
+      "qty": 1,
+      "name": "Searing Blood"
+    },
+    {
+      "qty": 4,
+      "name": "Smash to Smithereens"
+    },
+    {
+      "qty": 3,
+      "name": "Tormod's Crypt"
+    }
+  ]
+}

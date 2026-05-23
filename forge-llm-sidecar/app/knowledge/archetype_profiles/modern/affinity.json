@@ -1,0 +1,407 @@
+{
+  "schema_version": 1,
+  "name": "Affinity",
+  "format": "modern",
+  "colors": [
+    "U",
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Affinity is an aggressive U/R deck that leverages artifact creatures to rapidly reduce the mana cost of its spells. By flooding the board with cheap artifacts, you enable highly efficient removal and finishers while applying relentless pressure. The game plan revolves around maximizing artifact count to trigger affinity reduction and overwhelm opponents before they can stabilize.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 4,
+      "cards": [
+        "Weapons Manufacturing"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 19,
+      "cards": [
+        "Engineered Explosives",
+        "Fiery Islet",
+        "Mishra's Bauble",
+        "Thoughtcast",
+        "Urza's Saga",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Mishra's Bauble"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Urza's Saga"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Engineered Explosives",
+        "Weapons Manufacturing"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 33,
+      "cards": [
+        "Arcbound Ravager",
+        "Claws of Gix",
+        "Emry, Lurker of the Loch",
+        "Engineered Explosives",
+        "Harbinger of the Seas",
+        "Kappa Cannoneer",
+        "Mox Opal",
+        "Pinnacle Emissary",
+        "Pithing Needle",
+        "Sink into Stupor",
+        "Skateboard",
+        "Weapons Manufacturing",
+        "Welding Jar"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 1
+    },
+    "removal": {
+      "target_count": 16,
+      "cards": [
+        "Engineered Explosives",
+        "Galvanic Blast",
+        "Tormod's Crypt",
+        "Weapons Manufacturing",
+        "Whipflare"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 8,
+      "cards": [
+        "Engineered Explosives",
+        "Weapons Manufacturing"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 18,
+      "cards": [
+        "Consign to Memory",
+        "Engineered Explosives",
+        "Force of Negation",
+        "Metallic Rebuke",
+        "Mystical Dispute",
+        "Weapons Manufacturing"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 7
+    },
+    "protection": {
+      "target_count": 13,
+      "cards": [
+        "Engineered Explosives",
+        "Kappa Cannoneer",
+        "Shadowspear",
+        "Weapons Manufacturing"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 10,
+      "cards": [
+        "Emry, Lurker of the Loch",
+        "Force of Negation",
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 16,
+      "cards": [
+        "Engineered Explosives",
+        "Mox Opal",
+        "Pinnacle Emissary",
+        "Weapons Manufacturing"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Weapons Manufacturing"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Engineered Explosives",
+        "Mox Opal",
+        "Weapons Manufacturing"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Damping Sphere"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 25,
+      "cards": [
+        "Engineered Explosives",
+        "Fiery Islet",
+        "Mox Opal",
+        "Spirebluff Canal",
+        "Steam Vents",
+        "Urza's Saga",
+        "Weapons Manufacturing"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 14,
+      "cards": [
+        "Fiery Islet",
+        "Island",
+        "Spirebluff Canal",
+        "Steam Vents",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.37
+  },
+  "dual_role_cards": [
+    {
+      "card": "Emry, Lurker of the Loch",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Engineered Explosives",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "engines",
+        "mana_fixing",
+        "protection",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fiery Islet",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kappa Cannoneer",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mishra's Bauble",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mox Opal",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pinnacle Emissary",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirebluff Canal",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tormod's Crypt",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Weapons Manufacturing",
+      "roles": [
+        "combo_pieces",
+        "counterspells",
+        "engines",
+        "mana_fixing",
+        "mana_reducers",
+        "payoff_cards",
+        "protection",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play artifact creatures before activating Mox Opal to enable mana acceleration",
+    "Cast Engineered Explosives before playing your next creature to maximize value and protect threats",
+    "Hold removal until after you see the opponent's response to avoid wasting mana",
+    "Prioritize playing creatures that generate tokens or reduce costs further",
+    "Use affinity reduction to cast finishers earlier than expected, catching opponents off guard"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Mox Opal on turn 1 for mana acceleration"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast 1-2 mana artifact creatures to build affinity"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Engineered Explosives to clear early blockers or face-up threats"
+    }
+  ],
+  "kill_priority": [
+    "Engineered Explosives",
+    "Mox Opal",
+    "Pinnacle Emissary",
+    "Weapons Manufacturing",
+    "Arcbound Ravager",
+    "Claws of Gix",
+    "Emry, Lurker of the Loch",
+    "Harbinger of the Seas"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Engineered Explosives",
+    "Force of Negation",
+    "Metallic Rebuke",
+    "Mystical Dispute",
+    "Weapons Manufacturing",
+    "Kappa Cannoneer",
+    "Shadowspear"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/affinity.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

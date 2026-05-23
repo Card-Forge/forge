@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Fatal Push and two lands",
       "Low-cost threats that can race early",
-      "Hands containing Lotus Field for mana acceleration"
+      "Hands containing Lotus Field for mana acceleration",
+      "Keep hands with 2-3 lands (preferably shock/fetch capable), at least one early interaction (Fatal Push, Thoughtseize, or Duress), and a Lotus Field or Vibrance if paired with a land.",
+      "Keep hands with 1-2 lands if they contain multiple early interaction spells or a clear combo piece with a land."
     ],
     "mulligan_criteria": [
       "Hands lacking removal or early interaction",
       "Hands with three or more lands and no spells",
-      "Hands missing Fatal Push against aggressive matchups"
+      "Hands missing Fatal Push against aggressive matchups",
+      "Mulligan on 3+ lands with no early interaction, or 4+ lands with no lands."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands efficiently and hold Fatal Push for instant-speed answers",
       "Prioritize removing power 2 or less threats to stabilize",
-      "Use Lotus Field cautiously to avoid mana screw while setting up acceleration"
+      "Use Lotus Field cautiously to avoid mana screw while setting up acceleration",
+      "Turn 1: Play a land, cast Thoughtseize/Duress to disrupt opponent's key pieces (target combo pieces, fast mana, or early threats).",
+      "If you have Fatal Push and a target, hold it for removal or discard.",
+      "Turn 2: Develop mana with shock lands/fetches, cast early interaction or a low-cost threat.",
+      "If you have Lotus Field + a land, play Field, then Vibrance (or vice versa) to untap it, setting up infinite mana.",
+      "Prioritize untapped lands for shock costs if needed."
     ],
     "mid_game": [
       "Develop board presence with resilient creatures",
       "Sacrifice Lotus Field to untap lands for key spells or sweepers",
-      "Begin drawing into late-game resources while maintaining board control"
+      "Begin drawing into late-game resources while maintaining board control",
+      "Preserve hand disruption for key turns",
+      "don't overcommit to early trades.",
+      "Manage mana carefully to ensure you can untap Lotus Field with Vibrance.",
+      "Use fetch lands to dig for combo pieces or interaction.",
+      "Graveyard is a resource for Fatal Push and discard",
+      "protect it from hate."
     ],
     "late_game": [
       "Cast Vibrance to clear opponent's board and draw into finishers",
       "Leverage card advantage to outlast opponent's resources",
-      "Close out games with large threats or repeated board clears"
+      "Close out games with large threats or repeated board clears",
+      "Infinite mana from Lotus Field + Vibrance allows you to cast a high-impact spell (like a massive creature, storm combo, or direct damage) or chain multiple removal spells.",
+      "Sometimes you can combo off with other cards in the deck.",
+      "Go all-in when you have Lotus Field + Vibrance on the board, enough mana to cast your win con, and no immediate threat to your combo pieces.",
+      "Also commit if you're ahead on board and can close the game with a single high-impact spell."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Hold Fatal Push for instant speed to counter aggressive pushes",
     "Time Lotus Field sacrifices to ensure you have enough untapped mana for key spells",
-    "Cast Vibrance after opponent commits resources to the board to maximize card draw and board state swing"
+    "Cast Vibrance after opponent commits resources to the board to maximize card draw and board state swing",
+    "Lotus Field enters tapped, so you need a land in play to untap it with Vibrance.",
+    "Don't play Vibrance without a target land.",
+    "Fatal Push is versatile but can be a dead draw against non-black creatures",
+    "consider holding it for discard if needed.",
+    "Avoid overcommitting to the board without interaction.",
+    "Watch for opponent's sideboard hate like Rest in Peace, Leyline of the Void, or artifact hate."
   ],
   "matchups": [
     {
@@ -84,15 +108,35 @@
         "Key combo pieces",
         "Untap tricks"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells before they're cast. Chain interaction (Thoughtseize into Fatal Push) to break through. Use mana generation to cast multiple spells or use instant-speed combo pieces.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and removal. Don't let them stabilize; use Fatal Push on key ramp creatures. Sideboard in additional disruption and hate.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the interaction war. Prioritize Thoughtseize/Duress to remove their combo pieces. Protect your Lotus Field/Vibrance with counterspells or discard. Sideboard in additional disruption and artifact hate.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Aggressive creatures with power 2 or less",
     "Board wipe spells",
-    "Countermagic"
+    "Countermagic",
+    "Watch for opponent's discard targets (keep your combo pieces hidden).",
+    "Track their removal count (Fatal Push, Lightning Strike, etc.).",
+    "Note if they're playing graveyard hate or artifact hate.",
+    "Watch for combo indicators (fast mana, specific win cons)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T03:54:13+00:00",
     "model": "local-model",
@@ -108,6 +152,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

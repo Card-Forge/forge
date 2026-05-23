@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "name": "Mono-Black",
+  "format": "pauper",
+  "colors": [
+    "B"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "This Mono-Black Pauper deck utilizes cheap, aggressive creatures and board-wide pressure to overwhelm opponents before they can stabilize. Defile provides constant life drain and creature attrition, while Troll of Khazad-dum offers efficient early threats. Cast Down ensures you can bypass larger blockers to close out games quickly.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 1,
+      "cards": [
+        "Troll of Khazad-dum"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": []
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": []
+    },
+    "threats": {
+      "target_count": 3,
+      "cards": [
+        "Cast Down",
+        "Defile",
+        "Troll of Khazad-dum"
+      ]
+    },
+    "removal": {
+      "target_count": 1,
+      "cards": [
+        "Troll of Khazad-dum"
+      ]
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Defile"
+      ]
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 2,
+      "cards": [
+        "Defile",
+        "Troll of Khazad-dum"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": []
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Troll of Khazad-dum"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 0,
+      "cards": []
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Defile",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Troll of Khazad-dum",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast Defile before playing creatures to immediately weaken the board",
+    "Save Cast Down for the opponent's turn to maximize its impact",
+    "Use Troll of Khazad-dum's trigger to remove blockers before attacking with it",
+    "Avoid overcommitting to board wipes if you lack follow-up.",
+    "Troll's death trigger is a key resource\u2014don't sacrifice it unnecessarily."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap creatures immediately to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Defile as soon as possible to start life drain and weaken opposing creatures"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Cast Down to remove early blockers or finish the opponent"
+    }
+  ],
+  "kill_priority": [
+    "Cast Down",
+    "Defile",
+    "Troll of Khazad-dum"
+  ],
+  "interaction_to_disrupt": [
+    "Troll of Khazad-dum"
+  ],
+  "last_updated": "2026-05-22"
+}

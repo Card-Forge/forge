@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early land recovery spells like Kozilek's Command",
       "Playable one-drops or early land recoverers on curve",
-      "Sufficient early land drops (4+ cards in hand)"
+      "Sufficient early land drops (4+ cards in hand)",
+      "Keep hands with 2-3 lands (preferably Forests or duals), plus at least one early disruption (Thought-Knot Seer) or ramp spell.",
+      "Keep hands with 3+ mana sources and a Thought-Knot Seer or Kozilek's Command."
     ],
     "mulligan_criteria": [
       "Hands lacking land recovery or acceleration",
       "Hands with only high-cost threats and no early plays",
-      "Hands with too many lands and no spells"
+      "Hands with too many lands and no spells",
+      "Mulligan hands with 0-1 lands, multiple copies of the same low-cost spell without lands, or hands lacking early interaction against artifact/combo decks."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and immediately use land recovery spells to accelerate",
       "Deploy early threats or Thought-Knot Seer to establish board presence",
-      "Prioritize mana efficiency to reach turn three or four drops"
+      "Prioritize mana efficiency to reach turn three or four drops",
+      "Turn 1: Play a Forest, cast Thought-Knot Seer if possible, or hold for ramp.",
+      "Turn 2: Cast ramp spells (Cultivate/Farseek) or drop a second land, then cast Thought-Knot Seer if mana allows.",
+      "Prioritize playing lands first, then casting disruption/ramp.",
+      "If you have a hand with Kozilek's Command, hold for turn 3-4 when you can cast it for its full value."
     ],
     "mid_game": [
       "Continue recovering lands to maintain tempo against midrange decks",
       "Play medium-sized Eldrazi to apply consistent pressure",
-      "Use Kozilek's Command for removal or card advantage when ahead"
+      "Use Kozilek's Command for removal or card advantage when ahead",
+      "Balance mana for ramp vs. casting threats.",
+      "Don't overextend into sweepers.",
+      "Use Thought-Knot Seer's scry/discard to dig for answers or disrupt opponent's combo pieces.",
+      "Manage graveyard by avoiding unnecessary scry if opponent runs graveyard hate, but generally, Eldrazi benefits from card advantage.",
+      "Commit threats when you have removal/hate ready for their interaction.",
+      "Hold back against sweepers or board wipes until you have a way to protect or recast."
     ],
     "late_game": [
       "Deploy massive Eldrazi threats to close out the game",
       "Focus on combat damage rather than card draw",
-      "Use remaining land recovery to stabilize against control answers"
+      "Use remaining land recovery to stabilize against control answers",
+      "Glaring Fleshraker (trample, haste, artifact/enchantment destruction), Emrakul, the Aeons Torn, or World Breaker.",
+      "Get there by ramping to 4-5 mana, using disruption to clear the path, and deploying threats when opponents are tapped out or out of answers.",
+      "Go all-in when you have a lethal threat on board, opponent has no sweepers or targeted removal, or you can follow up with a second threat.",
+      "Also commit when you've disrupted their combo pieces early."
     ]
   },
   "key_cards": [
@@ -58,7 +75,9 @@
   "sequencing_tips": [
     "Prioritize land recovery on turns one and two to enable three and four mana threats",
     "Hold up mana for potential counterspells if facing control, otherwise play threats on opponent's turn",
-    "Use Kozilek's Command removal to clear blockers before attacking with large Eldrazi"
+    "Use Kozilek's Command removal to clear blockers before attacking with large Eldrazi",
+    "Common mistakes: Overcommitting to the board without answering their interaction, misusing Kozilek's Command (always pick the artifact/enchantment mode against this metagame), and forgetting to scry with Thought-Knot Seer to dig for answers.",
+    "Unique interaction: Glaring Fleshraker's ETB can clear key artifacts/enchantments, making it a perfect mid-game swing against this specific metagame."
   ],
   "matchups": [
     {
@@ -87,15 +106,33 @@
         "Card advantage engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Eldrazi threats are typically uncounterable or cast via ramp that bypasses counters. Use Thought-Knot Seer to discard counterspells. Cast Kozilek's Command on their permanents before they can respond.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-ramp them with your own acceleration. Use Thought-Knot Seer to disrupt their mana rocks. Kozilek's Command can remove key ramp pieces.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-drawing and out-resolving. Thought-Knot Seer is key to disrupting their hand. Prioritize clearing their threats with Kozilek's Command. Win the resource war by ramping faster and deploying uncounterable threats.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Large Eldrazi creatures",
     "Land recovery spells",
-    "Mana acceleration engines"
+    "Mana acceleration engines",
+    "Watch for artifact acceleration (Arcbound Ravager, Mycosynth Lattice), combo win conditions (Storm count, Blink triggers), and sweepers (Wrath of God, Day of Judgment).",
+    "Note when opponents tap out for spells vs. holding mana for protection."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:48:36+00:00",
     "model": "local-model",
@@ -111,7 +148,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

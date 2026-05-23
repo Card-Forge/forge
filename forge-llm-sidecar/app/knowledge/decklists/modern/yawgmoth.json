@@ -1,0 +1,149 @@
+{
+  "archetype": "Yawgmoth",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/yawgmoth.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Agatha's Soul Cauldron"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 2,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 2,
+      "name": "Chord of Calling"
+    },
+    {
+      "qty": 4,
+      "name": "Delighted Halfling"
+    },
+    {
+      "qty": 3,
+      "name": "Dredger's Insight"
+    },
+    {
+      "qty": 1,
+      "name": "Dryad Arbor"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 3,
+      "name": "Green Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Grist, the Hunger Tide"
+    },
+    {
+      "qty": 3,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 1,
+      "name": "Ouroboroid"
+    },
+    {
+      "qty": 3,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 3,
+      "name": "Spymaster's Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Strangleroot Geist"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Mortuary"
+    },
+    {
+      "qty": 4,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 1,
+      "name": "Virulent Emissary"
+    },
+    {
+      "qty": 3,
+      "name": "Walking Ballista"
+    },
+    {
+      "qty": 4,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 3,
+      "name": "Yawgmoth, Thran Physician"
+    },
+    {
+      "qty": 3,
+      "name": "Young Wolf"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Fulminator Mage"
+    },
+    {
+      "qty": 2,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 1,
+      "name": "Outland Liberator"
+    },
+    {
+      "qty": 1,
+      "name": "Soulless Jailer"
+    },
+    {
+      "qty": 3,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    }
+  ]
+}

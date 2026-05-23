@@ -11,11 +11,13 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with 1-2 lands and multiple cheap Spirit creatures",
-      "Hands containing lords like Empyrion Eagle or Supreme Phantom"
+      "Hands containing lords like Empyrion Eagle or Supreme Phantom",
+      "Keep hands with 2-3 lands (preferably duals or fetches), at least one 1-drop Spirit (e.g., Cryptbreaker or Spirited Phantom), and early interaction (No More Lies, spot removal, or bounce)."
     ],
     "mulligan_criteria": [
       "Hands with only high-cost lords or no lands",
-      "Hands lacking early-game pressure or utility"
+      "Hands lacking early-game pressure or utility",
+      "Mulligan if you have 3+ lands with no early threats, multiple expensive cards with no mana base, or zero interaction against aggro/control."
     ],
     "examples": [
       {
@@ -36,15 +38,28 @@
   "game_plan": {
     "early_game": [
       "Play cheap Spirits to establish board presence",
-      "Cast lords like Empyrion Eagle or Supreme Phantom to boost power"
+      "Cast lords like Empyrion Eagle or Supreme Phantom to boost power",
+      "Turn 1: Play a land, cast a 1-drop Spirit.",
+      "Turn 2: Develop board with another Spirit, use Cryptbreaker\u2019s ability to bounce a blocker or disrupt a spell, or cast No More Lies to protect a threat or counter an opponent\u2019s play.",
+      "Prioritize casting Spirits in response to opponent spells to maximize Rattlechains and Supreme Phantom triggers."
     ],
     "mid_game": [
       "Deploy utility Spirits like Rattlechains and Spell Queller to disrupt opponent's removal and spells",
-      "Use Shacklegeist and Nebelgast Herald to tap down opposing creatures"
+      "Use Shacklegeist and Nebelgast Herald to tap down opposing creatures",
+      "Keep 1-2 mana open for instant-speed interaction and Spirit triggers.",
+      "Don\u2019t overcommit to the board if the opponent has sweepers.",
+      "Use the graveyard strategically with No More Lies to recycle threats or disrupt the opponent.",
+      "Commit threats when you have interaction to handle blockers or sweepers.",
+      "Hold back if the opponent has potential board wipes or can out-value you.",
+      "Use flying tokens to pressure planeswalkers or close games."
     ],
     "late_game": [
       "Win with large evasive creatures",
-      "Flash in Selfless Spirit for instant-speed indestructible to survive board wipes and close the game"
+      "Flash in Selfless Spirit for instant-speed indestructible to survive board wipes and close the game",
+      "Supreme Phantom token generation, Cryptbreaker for targeted removal, and aerial assaults with flying Spirits.",
+      "Use No More Lies to cast a key Spirit from the graveyard to close the game or disrupt a combo.",
+      "Go all-in when you have board presence, interaction to handle sweepers, and the opponent is at low life or has no clear answer.",
+      "Commit when you can pressure through potential removal or when the opponent is tapped out."
     ]
   },
   "key_cards": [
@@ -87,7 +102,11 @@
   "sequencing_tips": [
     "Know when to switch between aggro and control modes based on the board state",
     "Flash in Spirits at instant speed to maximize combat tricks and utility",
-    "Prioritize tapping down opponent's key creatures before they can attack or block"
+    "Prioritize tapping down opponent's key creatures before they can attack or block",
+    "Common mistakes include overcommitting to the board without interaction, mismanaging mana for instant-speed triggers, forgetting to use Cryptbreaker\u2019s ability, and not tracking the opponent\u2019s graveyard for No More Lies.",
+    "Unique interactions: Rattlechains can shut down key blockers mid-combat.",
+    "Supreme Phantom\u2019s tokens are flying, making them hard to block.",
+    "No More Lies can be used offensively to cast a Spirit from the graveyard for a surprise trigger."
   ],
   "matchups": [
     {
@@ -98,16 +117,46 @@
         "Large auras",
         "First strike/lifelink creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use No More Lies to counter their counters or protect your spells. Cast threats in response to their counterspells to trigger Rattlechains/Supreme Phantom. Use Cryptbreaker to bounce their counterspell if possible. Don\u2019t overcommit to one threat; trade up.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race them before they cast big spells. Use spot removal and counters to handle their acceleration. If they stabilize, use flying tokens and card advantage to out-value them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early interaction, then transition to a control/aggro hybrid. Use No More Lies to protect your board or disrupt their combo. Once stabilized, use Supreme Phantom to generate tokens and close the game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early, then use card advantage and recursion (No More Lies) to out-value them. Force them to use multiple answers. Use flying tokens to bypass board wipes.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource race. Prioritize keeping interaction, track their graveyard, and use No More Lies to steal their key Spirits. Win the trigger war by casting Spirits in response to their triggers.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Supreme Verdict",
     "Karametra's Blessing",
     "Removal spells",
-    "Oppressive combo decks (e.g., Inverter, Heliod Ballista)"
+    "Oppressive combo decks (e.g., Inverter, Heliod Ballista)",
+    "Watch for sweepers, counterspells, and graveyard hate.",
+    "Note when opponents tap out for big spells.",
+    "Track if they\u2019re playing around No More Lies by holding blue mana.",
+    "Watch for ramp/acceleration in midrange decks."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/interview-azorius-spirits-the-dominating-deck-in-pioneer-royale",
     "generated_at": "2026-05-21T05:19:05+00:00",
     "model": "local-model",
@@ -138,6 +187,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

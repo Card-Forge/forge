@@ -1,0 +1,500 @@
+{
+  "schema_version": 1,
+  "name": "Fastbond Lands",
+  "format": "vintage",
+  "colors": [
+    "G"
+  ],
+  "strategy_type": "ramp",
+  "expected_deck_total": 60,
+  "macro_plan": "Fastbond Lands is a green ramp archetype that leverages land acceleration and graveyard recursion to generate overwhelming mana advantage. By combining Fastbond's extra land drops with Crucible of Worlds' replay ability, the deck floods the board with lands to fuel Kaheera, the Orphanguard's untap and counter-generating potential. This land-centric approach aims to outpace opponents in resource generation while maintaining board presence through continuous land deployment.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Trinisphere"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 15,
+      "cards": [
+        "Crucible of Worlds",
+        "Fastbond",
+        "Kaheera, the Orphanguard",
+        "Urza's Saga",
+        "Vexing Bauble",
+        "Waterlogged Grove"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 13,
+      "cards": [
+        "Crucible of Worlds",
+        "Fastbond",
+        "Grafdigger's Cage",
+        "Once Upon a Time"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 5,
+      "cards": [
+        "Crop Rotation",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Crucible of Worlds",
+        "Fastbond"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 12,
+      "cards": [
+        "Exploration",
+        "Kaheera, the Orphanguard",
+        "Mox Emerald",
+        "Null Rod",
+        "Perennial Behemoth",
+        "Void Mirror"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 18,
+      "cards": [
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Fastbond",
+        "Force of Vigor",
+        "Karakas",
+        "Strip Mine",
+        "The Tabernacle at Pendrell Vale",
+        "Wasteland"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Kaheera, the Orphanguard",
+        "The Tabernacle at Pendrell Vale"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 1,
+      "cards": [
+        "Mental Misstep"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 10,
+      "cards": [
+        "Crucible of Worlds",
+        "Dark Depths",
+        "Fastbond"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Bojuka Bog",
+        "Crucible of Worlds",
+        "Fastbond",
+        "Grafdigger's Cage",
+        "Malevolent Rumble",
+        "Perennial Behemoth"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 11,
+      "cards": [
+        "Crucible of Worlds",
+        "Fastbond",
+        "Karakas",
+        "Perennial Behemoth"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Crucible of Worlds",
+        "Fastbond"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Crucible of Worlds"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Crucible of Worlds",
+        "Fastbond"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 10,
+      "cards": [
+        "Dismember",
+        "Disruptor Flute",
+        "Glacial Chasm",
+        "Grafdigger's Cage",
+        "Maze of Ith",
+        "Mindbreak Trap"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 8
+    },
+    "mana_fixing": {
+      "target_count": 41,
+      "cards": [
+        "Black Lotus",
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Crucible of Worlds",
+        "Dark Depths",
+        "Fastbond",
+        "Glacial Chasm",
+        "Kaheera, the Orphanguard",
+        "Karakas",
+        "Maze of Ith",
+        "Mishra's Workshop",
+        "Strip Mine",
+        "The Tabernacle at Pendrell Vale",
+        "Thespian's Stage",
+        "Trinisphere",
+        "Urza's Saga",
+        "Wasteland",
+        "Waterlogged Grove",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 38,
+      "sideboard_count": 3
+    },
+    "lands": {
+      "target_count": 30,
+      "cards": [
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Dark Depths",
+        "Glacial Chasm",
+        "Karakas",
+        "Maze of Ith",
+        "Mishra's Workshop",
+        "Strip Mine",
+        "The Tabernacle at Pendrell Vale",
+        "Thespian's Stage",
+        "Urza's Saga",
+        "Wasteland",
+        "Waterlogged Grove",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 2
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.35
+  },
+  "dual_role_cards": [
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crucible of Worlds",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dark Depths",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fastbond",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glacial Chasm",
+      "roles": [
+        "hate_pieces",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaheera, the Orphanguard",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karakas",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Maze of Ith",
+      "roles": [
+        "hate_pieces",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mishra's Workshop",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Perennial Behemoth",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strip Mine",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Tabernacle at Pendrell Vale",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thespian's Stage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Trinisphere",
+      "roles": [
+        "mana_fixing",
+        "mana_reducers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Waterlogged Grove",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya, Cradle of Growth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play Fastbond before Crucible to maximize the number of lands you can drop and replay",
+    "Use Kaheera's untap ability after replaying lands with Crucible to generate additional mana or triggers",
+    "Prioritize replaying lands that trigger landfall effects or provide immediate value over basic lands",
+    "Hold back Crucible if opponent has artifact destruction available to protect your recursion engine",
+    "Fastbond Lands is highly vulnerable to land destruction and targeted removal\u2014never assume your engine is safe."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing Fastbond on turn one or two to establish land acceleration"
+    },
+    {
+      "trigger": "early game",
+      "line": "Deploy Crucible of Worlds as soon as mana allows to enable land recursion"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play lands consistently to build a graveyard pool for Crucible"
+    }
+  ],
+  "kill_priority": [
+    "Crucible of Worlds",
+    "Fastbond",
+    "Exploration",
+    "Kaheera, the Orphanguard",
+    "Mox Emerald",
+    "Null Rod",
+    "Perennial Behemoth",
+    "Void Mirror"
+  ],
+  "interaction_to_disrupt": [
+    "Mental Misstep",
+    "Crucible of Worlds",
+    "Dark Depths",
+    "Fastbond",
+    "Bojuka Bog",
+    "Boseiju, Who Endures",
+    "Force of Vigor",
+    "Karakas"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/fastbond-lands.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

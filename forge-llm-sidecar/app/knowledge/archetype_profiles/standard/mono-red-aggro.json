@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "name": "Mono-Red Aggro",
+  "format": "standard",
+  "colors": [
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Mono-Red Aggro in Standard relies on a fast curve and relentless pressure to close games before opponents can stabilize. By leveraging early threats like Hired Claw and mid-game finishers like Razorkin Needlehead, you overwhelm opponents with combat damage. Hearthborn Battler provides flexible board control and damage pushing to maintain momentum throughout the match.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 9,
+      "cards": [
+        "Razorkin Needlehead",
+        "Soul-Guide Lantern",
+        "Tersa Lightshatter"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Razorkin Needlehead"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 32,
+      "cards": [
+        "Burnout Bashtronaut",
+        "Emberheart Challenger",
+        "Hired Claw",
+        "Magebane Lizard",
+        "Manifold Mouse",
+        "Nova Hellkite",
+        "Ojer Axonil, Deepest Might",
+        "Razorkin Needlehead",
+        "Sunspine Lynx",
+        "Tersa Lightshatter"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 7
+    },
+    "removal": {
+      "target_count": 38,
+      "cards": [
+        "Abrade",
+        "Burst Lightning",
+        "Hired Claw",
+        "Lightning Strike",
+        "Magebane Lizard",
+        "Nova Hellkite",
+        "Pyroclasm",
+        "Razorkin Needlehead",
+        "Scorching Shot",
+        "Shock",
+        "Soul-Guide Lantern",
+        "Sunspine Lynx",
+        "Witchstalker Frenzy"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 15
+    },
+    "wrath": {
+      "target_count": 12,
+      "cards": [
+        "Hired Claw",
+        "Pyroclasm",
+        "Razorkin Needlehead",
+        "Witchstalker Frenzy"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 8,
+      "cards": [
+        "Hired Claw",
+        "Razorkin Needlehead"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Hired Claw"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 5,
+      "cards": [
+        "Soul-Guide Lantern",
+        "Tersa Lightshatter"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Tersa Lightshatter"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Burnout Bashtronaut",
+        "Emberheart Challenger"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Razorkin Needlehead"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Sunspine Lynx"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 13,
+      "cards": [
+        "Fire Nation Palace",
+        "Hired Claw",
+        "Razorkin Needlehead",
+        "Soulstone Sanctuary"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 23,
+      "cards": [
+        "Fire Nation Palace",
+        "Mountain",
+        "Soulstone Sanctuary"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.62
+  },
+  "dual_role_cards": [
+    {
+      "card": "Burnout Bashtronaut",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emberheart Challenger",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Nation Palace",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hired Claw",
+      "roles": [
+        "counterspells",
+        "mana_fixing",
+        "protection",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Magebane Lizard",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nova Hellkite",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroclasm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Razorkin Needlehead",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "mana_fixing",
+        "payoff_cards",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soulstone Sanctuary",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunspine Lynx",
+      "roles": [
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tersa Lightshatter",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Witchstalker Frenzy",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Activate Hearthborn Battler before attacking to remove blockers",
+    "Hold up mana for combat tricks when the opponent has removal",
+    "Attack with Hired Claw first to test for removal before committing Needlehead",
+    "Common mistakes include overextending into sweepers, mismanaging mana on critical turns, and failing to track opponent hand size.",
+    "Unique interactions: Razorkin Needlehead likely triggers on damage or combat, so synergize it with direct damage and pump spells."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and one- or two-drops strictly on curve"
+    },
+    {
+      "trigger": "early game",
+      "line": "Attack immediately with Hired Claw to establish pressure"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Hearthborn Battler to clear small blockers or push early damage"
+    }
+  ],
+  "kill_priority": [
+    "Burnout Bashtronaut",
+    "Emberheart Challenger",
+    "Razorkin Needlehead",
+    "Hired Claw",
+    "Magebane Lizard",
+    "Manifold Mouse",
+    "Nova Hellkite",
+    "Ojer Axonil, Deepest Might"
+  ],
+  "interaction_to_disrupt": [
+    "Hired Claw",
+    "Razorkin Needlehead",
+    "Abrade",
+    "Burst Lightning",
+    "Lightning Strike",
+    "Magebane Lizard",
+    "Nova Hellkite",
+    "Pyroclasm"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/mono-red-aggro.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

@@ -1,0 +1,740 @@
+{
+  "schema_version": 1,
+  "name": "Quandrix, the Proof",
+  "format": "commander",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 100,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Archmage Emeritus",
+    "Archmage of Runes",
+    "Planar Engineering",
+    "Sowing Mycospawn",
+    "Thassa's Oracle",
+    "Allosaurus Shepherd",
+    "Amphibian Downpour",
+    "Basalt Monolith"
+  ],
+  "interaction_to_disrupt": [
+    "An Offer You Can't Refuse",
+    "Fierce Guardianship",
+    "Force of Negation",
+    "Force of Will",
+    "Mental Misstep",
+    "Pact of Negation",
+    "Swan Song",
+    "Allosaurus Shepherd"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Nature's Rhythm"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "An Offer You Can't Refuse"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 13,
+      "cards": [
+        "Archmage Emeritus",
+        "Archmage of Runes",
+        "Faerie Mastermind",
+        "Horizon of Progress",
+        "Mana Vault",
+        "Mystic Remora",
+        "Rhystic Study",
+        "Staff of Domination",
+        "Temporal Mastery",
+        "The One Ring",
+        "Thrasios, Triton Hero",
+        "Wan Shi Tong, Librarian",
+        "Waterlogged Grove"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Fortune Teller's Talent",
+        "Kinnan, Bonder Prodigy",
+        "Thassa's Oracle",
+        "Thrasios, Triton Hero"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 18,
+      "cards": [
+        "Chord of Calling",
+        "Crop Rotation",
+        "Eldritch Evolution",
+        "Entish Restoration",
+        "Formidable Speaker",
+        "Harrow",
+        "Mystical Tutor",
+        "Nature's Lore",
+        "Nature's Rhythm",
+        "Personal Tutor",
+        "Planar Engineering",
+        "Rampant Growth",
+        "Roiling Regrowth",
+        "Shared Roots",
+        "Skyshroud Claim",
+        "Sowing Mycospawn",
+        "Three Visits",
+        "Worldly Tutor"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Sowing Mycospawn",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 34,
+      "cards": [
+        "Allosaurus Shepherd",
+        "Amphibian Downpour",
+        "Archmage Emeritus",
+        "Archmage of Runes",
+        "Basalt Monolith",
+        "Birds of Paradise",
+        "Capture of Jingzhou",
+        "Delighted Halfling",
+        "Dosan the Falling Leaf",
+        "Elvish Mystic",
+        "Endurance",
+        "Eternal Scourge",
+        "Eternal Witness",
+        "Faerie Mastermind",
+        "Final-Word Phantom",
+        "Formidable Speaker",
+        "Fyndhorn Elves",
+        "Grim Monolith",
+        "Kinnan, Bonder Prodigy",
+        "Llanowar Elves",
+        "Mindbreak Trap",
+        "Misdirection",
+        "Quandrix, the Proof",
+        "Sol Ring",
+        "Sowing Mycospawn",
+        "Temporal Manipulation",
+        "Temur Sabertooth",
+        "Thassa's Oracle",
+        "Thrasios, Triton Hero",
+        "Time Stretch",
+        "Time Warp",
+        "Walk the Aeons",
+        "Walking Ballista",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 11,
+      "cards": [
+        "Ancient Tomb",
+        "Boseiju, Who Endures",
+        "City of Brass",
+        "Cyclonic Rift",
+        "Eternal Witness",
+        "Force of Vigor",
+        "Mana Vault",
+        "Otawara, Soaring City",
+        "Sowing Mycospawn",
+        "Walking Ballista",
+        "Yavimaya Coast"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Chord of Calling",
+        "Gaea's Cradle"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 7,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Fierce Guardianship",
+        "Force of Negation",
+        "Force of Will",
+        "Mental Misstep",
+        "Pact of Negation",
+        "Swan Song"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 7,
+      "cards": [
+        "Allosaurus Shepherd",
+        "Cavern of Souls",
+        "Delighted Halfling",
+        "Mistrise Village",
+        "Temur Sabertooth",
+        "Thassa's Oracle",
+        "The One Ring"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Formidable Speaker"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 6,
+      "cards": [
+        "Endurance",
+        "Eternal Witness",
+        "Force of Negation",
+        "Mox Diamond",
+        "Nature's Rhythm",
+        "Nexus of Fate"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Cyclonic Rift",
+        "Eternal Witness",
+        "Nature's Rhythm",
+        "Otawara, Soaring City",
+        "Temur Sabertooth"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Archmage Emeritus",
+        "Archmage of Runes",
+        "Planar Engineering"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Sowing Mycospawn",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 26,
+      "cards": [
+        "Alchemist's Refuge",
+        "An Offer You Can't Refuse",
+        "Ancient Tomb",
+        "Birds of Paradise",
+        "Boseiju, Who Endures",
+        "Cavern of Souls",
+        "Chrome Mox",
+        "City of Brass",
+        "Command Tower",
+        "Delighted Halfling",
+        "Emergence Zone",
+        "Exotic Orchard",
+        "Flooded Grove",
+        "Food Chain",
+        "Forbidden Orchard",
+        "Gaea's Cradle",
+        "Gemstone Caverns",
+        "Horizon of Progress",
+        "Kinnan, Bonder Prodigy",
+        "Mistrise Village",
+        "Mox Diamond",
+        "Otawara, Soaring City",
+        "Rejuvenating Springs",
+        "Starting Town",
+        "Waterlogged Grove",
+        "Yavimaya Coast"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 30,
+      "cards": [
+        "Alchemist's Refuge",
+        "Ancient Tomb",
+        "Boseiju, Who Endures",
+        "Cavern of Souls",
+        "City of Brass",
+        "Command Tower",
+        "Emergence Zone",
+        "Exotic Orchard",
+        "Flooded Grove",
+        "Forbidden Orchard",
+        "Forest",
+        "Gaea's Cradle",
+        "Gemstone Caverns",
+        "Horizon of Progress",
+        "Island",
+        "Mistrise Village",
+        "Otawara, Soaring City",
+        "Rejuvenating Springs",
+        "Starting Town",
+        "Waterlogged Grove",
+        "Yavimaya Coast"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.3
+  },
+  "dual_role_cards": [
+    {
+      "card": "Alchemist's Refuge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Allosaurus Shepherd",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "An Offer You Can't Refuse",
+      "roles": [
+        "counterspells",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archmage Emeritus",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archmage of Runes",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Birds of Paradise",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chord of Calling",
+      "roles": [
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "City of Brass",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cyclonic Rift",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Delighted Halfling",
+      "roles": [
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emergence Zone",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eternal Witness",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Mastermind",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Grove",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Forbidden Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Formidable Speaker",
+      "roles": [
+        "discard_outlets",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gaea's Cradle",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gemstone Caverns",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Horizon of Progress",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kinnan, Bonder Prodigy",
+      "roles": [
+        "dig_draw",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Vault",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mistrise Village",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mox Diamond",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nature's Rhythm",
+      "roles": [
+        "graveyard_enablers",
+        "mana_reducers",
+        "recursion",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Planar Engineering",
+      "roles": [
+        "engines",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rejuvenating Springs",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sowing Mycospawn",
+      "roles": [
+        "payoff_cards",
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temur Sabertooth",
+      "roles": [
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thassa's Oracle",
+      "roles": [
+        "dig_draw",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The One Ring",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thrasios, Triton Hero",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Walking Ballista",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wan Shi Tong, Librarian",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Waterlogged Grove",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya Coast",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/quandrix-the-proof.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

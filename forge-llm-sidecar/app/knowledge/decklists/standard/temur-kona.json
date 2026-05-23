@@ -1,0 +1,157 @@
+{
+  "archetype": "Temur Kona",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/temur-kona.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Abrade"
+    },
+    {
+      "qty": 4,
+      "name": "Ashling, Rekindled"
+    },
+    {
+      "qty": 3,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 3,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 1,
+      "name": "Ill-Timed Explosion"
+    },
+    {
+      "qty": 1,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 4,
+      "name": "Kavaron, Memorial World"
+    },
+    {
+      "qty": 4,
+      "name": "Kona, Rescue Beastie"
+    },
+    {
+      "qty": 3,
+      "name": "Marang River Regent"
+    },
+    {
+      "qty": 2,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 4,
+      "name": "North Wind Avatar"
+    },
+    {
+      "qty": 4,
+      "name": "Omniscience"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 1,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 2,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 2,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 2,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 2,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 3,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 4,
+      "name": "Uthros, Titanic Godcore"
+    },
+    {
+      "qty": 2,
+      "name": "Winternight Stories"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Dracogenesis"
+    },
+    {
+      "qty": 1,
+      "name": "Ill-Timed Explosion"
+    },
+    {
+      "qty": 1,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 1,
+      "name": "Koma, World-Eater"
+    },
+    {
+      "qty": 1,
+      "name": "Marang River Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Omni-Changeling"
+    },
+    {
+      "qty": 1,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 2,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 2,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 2,
+      "name": "Stormkeld Vanguard"
+    },
+    {
+      "qty": 1,
+      "name": "Terror of the Peaks"
+    }
+  ]
+}

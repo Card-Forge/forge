@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Monument to Endurance and at least one discard outlet",
       "Hands containing Greasefang, Okiba Boss and Parhelion II",
-      "Hands with early interaction like Thoughtseize or Fatal Push"
+      "Hands with early interaction like Thoughtseize or Fatal Push",
+      "Keep hands with 2-3 lands, a turn-1 Thoughtseize or Parhelion II, and early game pieces like Greasefang or Monument to Endurance.",
+      "Prioritize hands that can stabilize turn 1-2 and set up the sacrifice engine by turn 3-4."
     ],
     "mulligan_criteria": [
       "Hands lacking discard outlets to enable Monument to Endurance",
       "Hands with only lands or high-cost permanents",
-      "Hands missing both combo pieces and interaction"
+      "Hands missing both combo pieces and interaction",
+      "Mulligan on 2 lands with no plays, or 3+ lands with no early interaction/growth."
     ],
     "examples": [
       {
@@ -39,17 +42,32 @@
     "early_game": [
       "Play Monument to Endurance and discard Parhelion II to begin generating value.",
       "Deploy cheap discard outlets like Seasoned Hallowblade, Guardian of New Benalia, or Fleeting Spirit to trigger Monument repeatedly.",
-      "Use Thoughtseize or Fatal Push to disrupt aggressive opponents or protect combo pieces."
+      "Use Thoughtseize or Fatal Push to disrupt aggressive opponents or protect combo pieces.",
+      "Turn 1: Play a land, cast Thoughtseize on a key threat or card draw spell.",
+      "Turn 2: Play a land, cast Parhelion II to filter/draw, or play a sacrifice outlet/early threat.",
+      "Turn 3: Drop Greasefang or Monument to Endurance, begin sacrificing creatures (including tokens or sacrificed creatures from previous turns) to grow Greasefang.",
+      "Sequence lands to ensure you can hit 4 mana by turn 3 or 4 for your win conditions."
     ],
     "mid_game": [
       "Reanimate Parhelion II using Greasefang, Okiba Boss and immediately crew it to attack.",
       "Cast The Mycosynth Gardens to copy Monument to Endurance triggers and accelerate card advantage.",
-      "Use Sheltered by Ghosts on creatures that can gain indestructible via discard to protect against removal."
+      "Use Sheltered by Ghosts on creatures that can gain indestructible via discard to protect against removal.",
+      "Balance mana between casting growth spells, maintaining hand size via Parhelion II/Thoughtseize, and preserving creatures for sacrifice.",
+      "Don't overcommit to sacrificing your entire board early",
+      "keep a threat on the board to pressure.",
+      "Manage graveyard carefully if playing against graveyard hate.",
+      "Commit Greasefang when you have a clear path to growth and can protect it with removal or counters.",
+      "Hold back if the opponent has sweepers or heavy removal"
     ],
     "late_game": [
       "Stack Monument triggers with Seasoned Hallowblade and similar cards to create a snowball effect.",
       "Use Takenuma, Abandoned Mire and Geier Reach Sanitarium to recur key creatures and draw cards.",
-      "Close out the game with Angel token attacks or incremental Monument damage."
+      "Close out the game with Angel token attacks or incremental Monument damage.",
+      "Greasefang, Okiba Boss (often 5/5+ or massive) supported by Monument to Endurance.",
+      "Close out games by sacrificing remaining creatures to Greasefang, then attacking with the grown threat.",
+      "Use Parhelion II to dig for the final answer or threat if needed.",
+      "Go all-in when you have established board control, the opponent has no sweepers, and you can safely grow Greasefang without fear of immediate removal.",
+      "Also commit when you're ahead on board and can close the game in 1-2 turns."
     ]
   },
   "key_cards": [
@@ -134,7 +152,13 @@
     "Play Monument to Endurance before casting discard outlets to maximize triggers per turn.",
     "Use The Mycosynth Gardens to copy Monument triggers after playing discard outlets to stack value.",
     "Target Sheltered by Ghosts on creatures that can gain indestructible through discard effects to mitigate removal.",
-    "Crew Parhelion II immediately after reanimating it with Greasefang to attack on the same turn."
+    "Crew Parhelion II immediately after reanimating it with Greasefang to attack on the same turn.",
+    "Common mistake: Sacrificing too many creatures too early, leaving you with no board presence.",
+    "Always keep a threat on the board.",
+    "Another mistake: Over-relying on Parhelion II when the opponent has hand disruption",
+    "have backup plans.",
+    "Greasefang's ability triggers on sacrifice, so plan your turns to maximize growth while maintaining board control.",
+    "Monument to Endurance is a great early threat but can be sacrificed to Greasefang for a massive swing"
   ],
   "matchups": [
     {
@@ -210,18 +234,47 @@
         "Mirror interaction",
         "Monument triggers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Parhelion II to dig for multiple threats, cast Thoughtseize to remove counterspells, and sequence spells to hit non-protected targets. Consider casting growth spells in response to counterspells if possible, or use mana rocks/acceleration to outpace them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Thoughtseize and Parhelion II to disrupt their mana development. Use removal to kill their ramp sources, and stabilize quickly to prevent them from out-scaling you.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction (Thoughtseize, removal) to stall. Drop Greasefang or Monument to Endurance as soon as possible to turn the board. Use Parhelion II to dig for answers and stabilize. Don't overcommit to sacrifice until you have a clear path to growth.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats and discard to disrupt their hand. Use Parhelion II to out-value them in card draw. Grow Greasefang steadily and force them to use removal on it, then follow up with additional threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize Thoughtseize to disrupt their discard and draw engines. Protect your Greasefang with removal and counters. Out-value them with Parhelion II and sacrifice outlets. Sideboard for more disruption and hate against their sacrifice synergies.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Leyline of the Void",
     "Rest in Peace",
-    "Witch’s Oven",
+    "Witch\u2019s Oven",
     "Targeted removal",
     "Counterspells",
-    "Aggressive creature decks (Mono Red Aggro, Angels, Spirits)"
+    "Aggressive creature decks (Mono Red Aggro, Angels, Spirits)",
+    "Watch for sweepers, counterspells, and graveyard hate.",
+    "Note when opponents play discard or hand disruption, as it can starve your Parhelion II engine.",
+    "Track their mana development to predict when they can hit key spots."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-orzhov-greasefang-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T03:38:29+00:00",
     "model": "local-model",
@@ -239,6 +292,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
@@ -307,7 +378,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Witch’s Oven"
+      "evidence_span": "Witch\u2019s Oven"
     },
     {
       "confidence": 0.85,

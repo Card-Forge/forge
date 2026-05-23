@@ -1,0 +1,523 @@
+{
+  "schema_version": 1,
+  "name": "4c Elementals",
+  "format": "standard",
+  "colors": [
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "This four-color Standard deck leverages a resilient elemental creature base to control the board while generating incremental advantage. By cycling through Wistfulness for card draw, Deceit for board manipulation, and Vibrance for mana acceleration, the pilot aims to outlast early pressure and close games with a superior resource count. The strategy relies on flexible interaction and steady value generation rather than explosive combos.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 2,
+      "cards": [
+        "Winternight Stories"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 21,
+      "cards": [
+        "Broadside Barrage",
+        "Deceit",
+        "Ill-Timed Explosion",
+        "Soul-Guide Lantern",
+        "Vibrance",
+        "Winternight Stories",
+        "Wistfulness"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 12,
+      "cards": [
+        "Deceit",
+        "Vibrance",
+        "Wistfulness"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 5,
+      "cards": [
+        "Dauntless Scrapbot",
+        "Vibrance"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Winternight Stories"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 28,
+      "cards": [
+        "Ashling, Rekindled",
+        "Dauntless Scrapbot",
+        "Deceit",
+        "Flamebraider",
+        "Roaming Throne",
+        "Sunderflock",
+        "Vibrance",
+        "Wistfulness",
+        "Ygra, Eater of All"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 27,
+      "cards": [
+        "Bounce Off",
+        "Broadside Barrage",
+        "Burst Lightning",
+        "Deceit",
+        "Ill-Timed Explosion",
+        "Pyroclasm",
+        "Sear",
+        "Soul-Guide Lantern",
+        "Vibrance",
+        "Wistfulness"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Ill-Timed Explosion",
+        "Pyroclasm"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "Disdainful Stroke",
+        "Spider-Sense"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 12,
+      "cards": [
+        "Cavern of Souls",
+        "Deceit",
+        "Roaming Throne",
+        "Ygra, Eater of All"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 8,
+      "cards": [
+        "Broadside Barrage",
+        "Wistfulness"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 2
+    },
+    "graveyard_enablers": {
+      "target_count": 7,
+      "cards": [
+        "Dauntless Scrapbot",
+        "Pit of Offerings",
+        "Soul-Guide Lantern",
+        "Winternight Stories",
+        "Ygra, Eater of All"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 20,
+      "cards": [
+        "Bounce Off",
+        "Deceit",
+        "Spider-Sense",
+        "Sunderflock",
+        "Vibrance",
+        "Winternight Stories",
+        "Wistfulness"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 3
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Winternight Stories"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Deceit",
+        "Vibrance",
+        "Wistfulness"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 1
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Emeritus of Ideation"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 40,
+      "cards": [
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Cori Mountain Monastery",
+        "Deceit",
+        "Flamebraider",
+        "Pit of Offerings",
+        "Restless Vinestalk",
+        "Secluded Courtyard",
+        "Spirebluff Canal",
+        "Starting Town",
+        "Steam Vents",
+        "Vibrance",
+        "Wistfulness"
+      ],
+      "mainboard_count": 38,
+      "sideboard_count": 2
+    },
+    "lands": {
+      "target_count": 26,
+      "cards": [
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Cori Mountain Monastery",
+        "Island",
+        "Pit of Offerings",
+        "Restless Vinestalk",
+        "Secluded Courtyard",
+        "Spirebluff Canal",
+        "Starting Town",
+        "Steam Vents"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 1
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.5
+  },
+  "dual_role_cards": [
+    {
+      "card": "Bounce Off",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Broadside Barrage",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cori Mountain Monastery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dauntless Scrapbot",
+      "roles": [
+        "graveyard_enablers",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deceit",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flamebraider",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ill-Timed Explosion",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pit of Offerings",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroclasm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restless Vinestalk",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Roaming Throne",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Secluded Courtyard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spider-Sense",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirebluff Canal",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunderflock",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vibrance",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Winternight Stories",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_reducers",
+        "payoff_cards",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wistfulness",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ygra, Eater of All",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Lead with Deceit to clear paths for early elementals before committing resources",
+    "Cast Wistfulness after resolving threats to ensure you have answers for the next turn",
+    "Use Vibrance's mana generation to smooth out four-color mana base clumps",
+    "Hold interaction until opponent commits to a play to maximize efficiency",
+    "Common mistake: overcommitting to the board without answers or tracking opponent's mana."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and low-cost elementals to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Deceit to disrupt opponent's early threats or bounce their creatures"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize keeping the board clear while searching for Wistfulness"
+    }
+  ],
+  "kill_priority": [
+    "Winternight Stories",
+    "Deceit",
+    "Vibrance",
+    "Wistfulness",
+    "Ashling, Rekindled",
+    "Dauntless Scrapbot",
+    "Flamebraider",
+    "Roaming Throne"
+  ],
+  "interaction_to_disrupt": [
+    "Disdainful Stroke",
+    "Spider-Sense",
+    "Cavern of Souls",
+    "Deceit",
+    "Roaming Throne",
+    "Ygra, Eater of All",
+    "Bounce Off",
+    "Broadside Barrage"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/4c-elementals.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

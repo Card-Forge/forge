@@ -1,0 +1,133 @@
+{
+  "archetype": "Infect",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/infect.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Become Immense"
+    },
+    {
+      "qty": 2,
+      "name": "Berserk"
+    },
+    {
+      "qty": 4,
+      "name": "Blighted Agent"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Brazen Borrower"
+    },
+    {
+      "qty": 4,
+      "name": "Daze"
+    },
+    {
+      "qty": 1,
+      "name": "Embiggen"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Glistener Elf"
+    },
+    {
+      "qty": 1,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 4,
+      "name": "Inkmoth Nexus"
+    },
+    {
+      "qty": 4,
+      "name": "Invigorate"
+    },
+    {
+      "qty": 4,
+      "name": "Legolas's Quick Reflexes"
+    },
+    {
+      "qty": 4,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 4,
+      "name": "Noble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Pendelhaven"
+    },
+    {
+      "qty": 3,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Scale Up"
+    },
+    {
+      "qty": 4,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 2,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 3,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 2,
+      "name": "Sylvan Library"
+    },
+    {
+      "qty": 2,
+      "name": "Veil of Summer"
+    }
+  ]
+}

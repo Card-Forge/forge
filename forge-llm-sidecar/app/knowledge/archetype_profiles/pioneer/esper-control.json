@@ -1,0 +1,545 @@
+{
+  "schema_version": 1,
+  "name": "Esper Control",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U",
+    "B"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Esper Control neutralizes early threats and disrupts opponent game plans to out-value them into a late-game scenario where Kaheera, the Orphanguard becomes a self-sustaining, unblockable win condition. It excels against midrange and combo decks that rely on key pieces or board presence, but requires careful resource management to survive fast aggro and spell-slinging strategies.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 8,
+      "cards": [
+        "Beza, the Bounding Spring",
+        "Kaheera, the Orphanguard",
+        "Narset, Parter of Veils",
+        "Pest Control",
+        "Teferi, Hero of Dominaria"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Consult the Star Charts",
+        "Memory Deluge",
+        "Meticulous Archive",
+        "Narset, Parter of Veils",
+        "Shadowy Backstreet"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Kaheera, the Orphanguard"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "threats": {
+      "target_count": 23,
+      "cards": [
+        "Beza, the Bounding Spring",
+        "Consult the Star Charts",
+        "Duress",
+        "Elspeth, Storm Slayer",
+        "Kaheera, the Orphanguard",
+        "Narset, Parter of Veils",
+        "Teferi, Hero of Dominaria",
+        "Temporary Lockdown",
+        "The Wandering Emperor",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 26,
+      "cards": [
+        "Anoint with Affliction",
+        "Eiganjo, Seat of the Empire",
+        "Elspeth, Storm Slayer",
+        "Fatal Push",
+        "Go for the Throat",
+        "High Noon",
+        "March of Otherworldly Light",
+        "Otawara, Soaring City",
+        "Pest Control",
+        "Supreme Verdict",
+        "Teferi, Hero of Dominaria",
+        "The Wandering Emperor",
+        "Vanishing Verse"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 7,
+      "cards": [
+        "Elspeth, Storm Slayer",
+        "Kaheera, the Orphanguard",
+        "Pest Control",
+        "Supreme Verdict"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 5
+    },
+    "counterspells": {
+      "target_count": 12,
+      "cards": [
+        "Consult the Star Charts",
+        "Dovin's Veto",
+        "No More Lies",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 6,
+      "cards": [
+        "Dovin's Veto",
+        "Supreme Verdict",
+        "Thought Distortion"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 5
+    },
+    "discard_outlets": {
+      "target_count": 7,
+      "cards": [
+        "Consult the Star Charts",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 16,
+      "cards": [
+        "Consult the Star Charts",
+        "Memory Deluge",
+        "Meticulous Archive",
+        "No More Lies",
+        "Shadowy Backstreet",
+        "Thought Distortion",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Memory Deluge",
+        "Otawara, Soaring City"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Kaheera, the Orphanguard"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Consult the Star Charts",
+        "High Noon",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 31,
+      "cards": [
+        "Bleachbone Verge",
+        "Consult the Star Charts",
+        "Eiganjo, Seat of the Empire",
+        "Floodfarm Verge",
+        "Gloomlake Verge",
+        "Godless Shrine",
+        "Hallowed Fountain",
+        "Kaheera, the Orphanguard",
+        "Meticulous Archive",
+        "Mirrex",
+        "Otawara, Soaring City",
+        "Shadowy Backstreet",
+        "Thoughtseize",
+        "Watery Grave"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Bleachbone Verge",
+        "Eiganjo, Seat of the Empire",
+        "Floodfarm Verge",
+        "Gloomlake Verge",
+        "Godless Shrine",
+        "Hallowed Fountain",
+        "Meticulous Archive",
+        "Mirrex",
+        "Otawara, Soaring City",
+        "Plains",
+        "Shadowy Backstreet",
+        "Swamp",
+        "Watery Grave"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 7,
+      "cards": [
+        "Elspeth, Storm Slayer",
+        "Narset, Parter of Veils",
+        "Teferi, Hero of Dominaria",
+        "The Wandering Emperor"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 2
+    },
+    "interaction_density": 0.54
+  },
+  "dual_role_cards": [
+    {
+      "card": "Beza, the Bounding Spring",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bleachbone Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Consult the Star Charts",
+      "roles": [
+        "counterspells",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dovin's Veto",
+      "roles": [
+        "counterspells",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eiganjo, Seat of the Empire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elspeth, Storm Slayer",
+      "roles": [
+        "planeswalker_threats",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Floodfarm Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gloomlake Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "High Noon",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaheera, the Orphanguard",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "mana_fixing",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Memory Deluge",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mirrex",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narset, Parter of Veils",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "No More Lies",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pest Control",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shadowy Backstreet",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Supreme Verdict",
+      "roles": [
+        "protection",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teferi, Hero of Dominaria",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Wandering Emperor",
+      "roles": [
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thought Distortion",
+      "roles": [
+        "graveyard_enablers",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "counterspells",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Consult the Star Charts is powerful but can backfire if you discard your own Kaheera or key answers",
+    "use it when you have a full hand or can mitigate the discard.",
+    "Kaheera's lifelink and vigilance make it excellent for trading life, but be wary of board wipes and targeted removal.",
+    "Thoughtseize is your best early-game tool",
+    "do not be afraid to use it on lands if the opponent is mana-screwed, but prioritize non-lands."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Cast Thoughtseize on a key non-land card (discard a threat, ramp piece, or combo piece)."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a land, then cast a counterspell, removal, or another Thoughtseize/Consult if possible."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence lands to ensure you can hit WUB on turn 3 for Kaheera or key answers."
+    }
+  ],
+  "kill_priority": [
+    "Kaheera, the Orphanguard",
+    "Elspeth, Storm Slayer",
+    "Narset, Parter of Veils",
+    "Teferi, Hero of Dominaria",
+    "The Wandering Emperor",
+    "Beza, the Bounding Spring",
+    "Consult the Star Charts",
+    "Duress"
+  ],
+  "interaction_to_disrupt": [
+    "Consult the Star Charts",
+    "Dovin's Veto",
+    "No More Lies",
+    "Thoughtseize",
+    "Supreme Verdict",
+    "Thought Distortion",
+    "Anoint with Affliction",
+    "Eiganjo, Seat of the Empire"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/esper-control.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

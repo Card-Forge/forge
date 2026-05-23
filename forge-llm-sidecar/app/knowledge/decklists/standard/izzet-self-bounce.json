@@ -1,0 +1,125 @@
+{
+  "archetype": "Izzet Self-Bounce",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/izzet-self-bounce.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 4,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Eddymurk Crab"
+    },
+    {
+      "qty": 4,
+      "name": "Flow State"
+    },
+    {
+      "qty": 2,
+      "name": "Get Out"
+    },
+    {
+      "qty": 1,
+      "name": "Impractical Joke"
+    },
+    {
+      "qty": 7,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Opt"
+    },
+    {
+      "qty": 4,
+      "name": "Riverpyre Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Roaring Furnace // Steaming Sauna"
+    },
+    {
+      "qty": 4,
+      "name": "Sleight of Hand"
+    },
+    {
+      "qty": 4,
+      "name": "Slickshot Show-Off"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 4,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 2,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 4,
+      "name": "Stormchaser's Talent"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Annul"
+    },
+    {
+      "qty": 2,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 1,
+      "name": "Get Out"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 2,
+      "name": "Ral, Crackling Wit"
+    },
+    {
+      "qty": 2,
+      "name": "Slagstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Wan Shi Tong, Librarian"
+    }
+  ]
+}

@@ -1,0 +1,925 @@
+{
+  "schema_version": 1,
+  "name": "Morophon, the Boundless",
+  "format": "commander",
+  "colors": [
+    "B",
+    "G",
+    "R",
+    "U",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "This deck aims to cast high-impact spells at drastically reduced costs by leveraging Morophon's ability to discount colored mana, supported by heavy generic mana acceleration and card draw. It wins by out-scaling opponents through exponential value generation, closing games with massive threats or game-ending spells that opponents cannot afford to answer.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Morophon, the Boundless"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 17,
+      "cards": [
+        "Ancient Silver Dragon",
+        "Colossal Majesty",
+        "Dragon's Hoard",
+        "Garruk's Uprising",
+        "Jetmir's Garden",
+        "Kindred Discovery",
+        "Lorehold, the Historian",
+        "Raffine's Tower",
+        "Rhystic Study",
+        "Sarkhan, Fireblood",
+        "Shadrix Silverquill",
+        "Smothering Tithe",
+        "Spara's Headquarters",
+        "Temur Ascendancy",
+        "The Great Henge",
+        "Xander's Lounge",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Dragonlord Ojutai",
+        "Velomachus Lorehold"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 18,
+      "cards": [
+        "Arid Mesa",
+        "Bloodstained Mire",
+        "Cultivate",
+        "Farseek",
+        "Flooded Strand",
+        "Kodama's Reach",
+        "Marsh Flats",
+        "Misty Rainforest",
+        "Nature's Lore",
+        "Polluted Delta",
+        "Rampant Growth",
+        "Sarkhan's Triumph",
+        "Scalding Tarn",
+        "Skyshroud Claim",
+        "Three Visits",
+        "Verdant Catacombs",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Call the Spirit Dragons",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 30,
+      "cards": [
+        "Ancient Brass Dragon",
+        "Ancient Bronze Dragon",
+        "Ancient Copper Dragon",
+        "Ancient Gold Dragon",
+        "Ancient Silver Dragon",
+        "Arcane Signet",
+        "Beledros Witherbloom",
+        "Chromium, the Mutable",
+        "Dragonlord Atarka",
+        "Dragonlord Dromoka",
+        "Dragonlord Kolaghan",
+        "Dragonlord Ojutai",
+        "Dragonlord Silumgar",
+        "Galazeth Prismari",
+        "Hraesvelgr of the First Brood",
+        "Kindred Discovery",
+        "Lorehold, the Historian",
+        "Morophon, the Boundless",
+        "Nicol Bolas, the Ravager",
+        "Palladia-Mors, the Ruiner",
+        "Prismari, the Inspiration",
+        "Quandrix, the Proof",
+        "Sarkhan, Fireblood",
+        "Shadrix Silverquill",
+        "Silverquill, the Disputant",
+        "Sol Ring",
+        "Tanazir Quandrix",
+        "Vaevictis Asmadi, the Dire",
+        "Velomachus Lorehold",
+        "Witherbloom, the Balancer"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Abrade",
+        "Ancient Brass Dragon",
+        "Ancient Bronze Dragon",
+        "Ancient Copper Dragon",
+        "Ancient Gold Dragon",
+        "Ancient Silver Dragon",
+        "Assassin's Trophy",
+        "Beast Within",
+        "Bedevil",
+        "Bojuka Bog",
+        "Boros Charm",
+        "Crux of Fate",
+        "Dragon Tempest",
+        "Dragonlord Ojutai",
+        "Garruk's Uprising",
+        "Generous Gift",
+        "Klauth's Will",
+        "Rakdos Charm",
+        "Ruinous Ultimatum"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Crux of Fate",
+        "Klauth's Will",
+        "Rakdos Charm",
+        "Ruinous Ultimatum",
+        "Shadrix Silverquill",
+        "Witherbloom, the Balancer"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": [
+        "Counterspell",
+        "Negate"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 10,
+      "cards": [
+        "Boros Charm",
+        "Call the Spirit Dragons",
+        "Chromium, the Mutable",
+        "Dragonlord Dromoka",
+        "Dragonlord Ojutai",
+        "Heroic Intervention",
+        "Hraesvelgr of the First Brood",
+        "Palladia-Mors, the Ruiner",
+        "Prismari, the Inspiration",
+        "Teferi's Protection"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 3,
+      "cards": [
+        "Chromium, the Mutable",
+        "Lorehold, the Historian",
+        "Sarkhan, Fireblood"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 5,
+      "cards": [
+        "Ancient Brass Dragon",
+        "Bojuka Bog",
+        "Dragonlord Kolaghan",
+        "Eerie Ultimatum",
+        "Rakdos Charm"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 1,
+      "cards": [
+        "Eerie Ultimatum"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Hraesvelgr of the First Brood",
+        "Prismari, the Inspiration"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Call the Spirit Dragons",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Dragonlord Dromoka"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 34,
+      "cards": [
+        "Arcane Signet",
+        "Arid Mesa",
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Bojuka Bog",
+        "Breeding Pool",
+        "Command Tower",
+        "Crucible of the Spirit Dragon",
+        "Dragon's Hoard",
+        "Exotic Orchard",
+        "Flooded Strand",
+        "Galazeth Prismari",
+        "Godless Shrine",
+        "Hallowed Fountain",
+        "Jetmir's Garden",
+        "Marsh Flats",
+        "Misty Rainforest",
+        "Overgrown Tomb",
+        "Polluted Delta",
+        "Raffine's Tower",
+        "Sacred Foundry",
+        "Sarkhan, Fireblood",
+        "Scalding Tarn",
+        "Smothering Tithe",
+        "Spara's Headquarters",
+        "Steam Vents",
+        "Stomping Ground",
+        "Temple Garden",
+        "Verdant Catacombs",
+        "Watery Grave",
+        "Windswept Heath",
+        "Wooded Foothills",
+        "Xander's Lounge",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 38,
+      "cards": [
+        "Arid Mesa",
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Bojuka Bog",
+        "Breeding Pool",
+        "Command Tower",
+        "Crucible of the Spirit Dragon",
+        "Exotic Orchard",
+        "Flooded Strand",
+        "Forest",
+        "Godless Shrine",
+        "Hallowed Fountain",
+        "Island",
+        "Jetmir's Garden",
+        "Marsh Flats",
+        "Misty Rainforest",
+        "Mountain",
+        "Overgrown Tomb",
+        "Plains",
+        "Polluted Delta",
+        "Raffine's Tower",
+        "Sacred Foundry",
+        "Scalding Tarn",
+        "Spara's Headquarters",
+        "Steam Vents",
+        "Stomping Ground",
+        "Swamp",
+        "Temple Garden",
+        "Verdant Catacombs",
+        "Watery Grave",
+        "Windswept Heath",
+        "Wooded Foothills",
+        "Xander's Lounge",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 38,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Sarkhan, Fireblood"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.32
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Brass Dragon",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Bronze Dragon",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Copper Dragon",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Gold Dragon",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Silver Dragon",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Signet",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Mesa",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boros Charm",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Call the Spirit Dragons",
+      "roles": [
+        "payoff_cards",
+        "protection",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chromium, the Mutable",
+      "roles": [
+        "discard_outlets",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crucible of the Spirit Dragon",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crux of Fate",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dragon's Hoard",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dragonlord Dromoka",
+      "roles": [
+        "hate_pieces",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dragonlord Kolaghan",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dragonlord Ojutai",
+      "roles": [
+        "dig_draw",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eerie Ultimatum",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Galazeth Prismari",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Garruk's Uprising",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hraesvelgr of the First Brood",
+      "roles": [
+        "engines",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jetmir's Garden",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kindred Discovery",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Klauth's Will",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lorehold, the Historian",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marsh Flats",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Morophon, the Boundless",
+      "roles": [
+        "mana_reducers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Palladia-Mors, the Ruiner",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismari, the Inspiration",
+      "roles": [
+        "engines",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raffine's Tower",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rakdos Charm",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ruinous Ultimatum",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sarkhan, Fireblood",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "mana_fixing",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shadrix Silverquill",
+      "roles": [
+        "card_advantage",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smothering Tithe",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spara's Headquarters",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Velomachus Lorehold",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Witherbloom, the Balancer",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Xander's Lounge",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ziatora's Proving Ground",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Morophon's cost reduction only applies to the colored mana portion of spells",
+    "generic mana costs remain unchanged.",
+    "Be careful of commander tax if Morophon leaves the battlefield, as recasting it will be expensive.",
+    "Synergize with cards that reduce generic costs (e.g., Mind Stone, Sol Ring, mana rocks) and cards that generate generic mana.",
+    "Avoid overcommitting to Morophon without backup threats."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast a generic mana rock or cheap ramp spell."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Cast another accelerator or cheap spell, sequencing to ensure you have enough generic mana in play to maximize Morophon's discount."
+    },
+    {
+      "trigger": "early game",
+      "line": "If you have Morophon and enough mana rocks, cast a mid-tier creature or spell at a steep discount."
+    }
+  ],
+  "kill_priority": [
+    "Hraesvelgr of the First Brood",
+    "Prismari, the Inspiration",
+    "Call the Spirit Dragons",
+    "Windswept Heath",
+    "Sarkhan, Fireblood",
+    "Ancient Brass Dragon",
+    "Ancient Bronze Dragon",
+    "Ancient Copper Dragon"
+  ],
+  "interaction_to_disrupt": [
+    "Counterspell",
+    "Negate",
+    "Boros Charm",
+    "Call the Spirit Dragons",
+    "Chromium, the Mutable",
+    "Dragonlord Dromoka",
+    "Dragonlord Ojutai",
+    "Heroic Intervention"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/morophon-the-boundless.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

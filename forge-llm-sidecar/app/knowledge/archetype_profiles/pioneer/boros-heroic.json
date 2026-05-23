@@ -1,0 +1,469 @@
+{
+  "schema_version": 1,
+  "name": "Boros Heroic",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Boros Heroic is a proactive Pioneer strategy that leverages one-drop creatures and combat tricks to trigger Heroic and Prowess abilities. The deck aims to establish early tempo and overwhelm opponents with explosive damage, primarily using Illuminator Virtuoso alongside Monstrous Rage. Consistency is maintained through card advantage engines like Dreadhorde Arcanist and efficient removal like Reckless Rage.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 20,
+      "cards": [
+        "Ancestral Anger",
+        "Defiant Strike",
+        "Honor",
+        "Illuminator Virtuoso",
+        "Reckless Rage"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 15,
+      "cards": [
+        "Defiant Strike",
+        "Gods Willing",
+        "Reckless Rage",
+        "Tenth District Legionnaire"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 2
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 16,
+      "cards": [
+        "Honor",
+        "Illuminator Virtuoso",
+        "Leyline of Resonance",
+        "Monstrous Rage"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 39,
+      "cards": [
+        "Defiant Strike",
+        "Favored Hoplite",
+        "Gods Willing",
+        "Honor",
+        "Illuminator Virtuoso",
+        "Leyline of Resonance",
+        "Monastery Swiftspear",
+        "Monstrous Rage",
+        "Reckless Rage",
+        "Tenth District Legionnaire"
+      ],
+      "mainboard_count": 37,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Battlefield Forge",
+        "Boros Charm",
+        "Eiganjo, Seat of the Empire",
+        "Lorehold Charm",
+        "Portable Hole",
+        "Reckless Rage",
+        "Rip Apart",
+        "Seam Rip",
+        "Sheltered by Ghosts"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 12
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 18,
+      "cards": [
+        "Boros Charm",
+        "Gods Willing",
+        "Honor",
+        "Leyline of Resonance",
+        "Shardmage's Rescue",
+        "Sheltered by Ghosts"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 6
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Illuminator Virtuoso"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 11,
+      "cards": [
+        "Ancestral Anger",
+        "Lorehold Charm",
+        "Monstrous Rage",
+        "Rest in Peace"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 1,
+      "cards": [
+        "Lorehold Charm"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 15,
+      "cards": [
+        "Favored Hoplite",
+        "Leyline of Resonance",
+        "Monastery Swiftspear",
+        "Tenth District Legionnaire"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Illuminator Virtuoso"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Honor",
+        "Leyline of Resonance"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Favored Hoplite"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 17,
+      "cards": [
+        "Battlefield Forge",
+        "Eiganjo, Seat of the Empire",
+        "Inspiring Vantage",
+        "Needleverge Pathway",
+        "Sacred Foundry",
+        "Sokenzan, Crucible of Defiance",
+        "Sunbillow Verge"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 19,
+      "cards": [
+        "Battlefield Forge",
+        "Eiganjo, Seat of the Empire",
+        "Inspiring Vantage",
+        "Mountain",
+        "Needleverge Pathway",
+        "Plains",
+        "Sacred Foundry",
+        "Sokenzan, Crucible of Defiance",
+        "Sunbillow Verge"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.46
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancestral Anger",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Battlefield Forge",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boros Charm",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Defiant Strike",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eiganjo, Seat of the Empire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Favored Hoplite",
+      "roles": [
+        "engines",
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gods Willing",
+      "roles": [
+        "dig_draw",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Honor",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Illuminator Virtuoso",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inspiring Vantage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leyline of Resonance",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lorehold Charm",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monastery Swiftspear",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monstrous Rage",
+      "roles": [
+        "graveyard_enablers",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Needleverge Pathway",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reckless Rage",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheltered by Ghosts",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sokenzan, Crucible of Defiance",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunbillow Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tenth District Legionnaire",
+      "roles": [
+        "dig_draw",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Force opponents to spend resources on early one-drops before attacking with larger threats like Illuminator Virtuoso.",
+    "Combine Monstrous Rage with other spells to threaten lethal damage over multiple turns.",
+    "Use Defiant Strike as a cantrip to draw into answers while triggering creature abilities.",
+    "Hold up Gods Willing to protect key threats from removal or deflect blockers.",
+    "Avoid going 'all-in' against interactive decks; instead, apply steady pressure to force hasty plays."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play one-drops to force opponent answers and pave the way for larger threats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Defiant Strike or Homestead Courage to draw cards and trigger abilities"
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast a cheap spell on your creature if possible, or hold for optimal sequencing."
+    }
+  ],
+  "kill_priority": [
+    "Favored Hoplite",
+    "Leyline of Resonance",
+    "Monastery Swiftspear",
+    "Tenth District Legionnaire",
+    "Honor",
+    "Illuminator Virtuoso",
+    "Monstrous Rage",
+    "Defiant Strike"
+  ],
+  "interaction_to_disrupt": [
+    "Boros Charm",
+    "Gods Willing",
+    "Honor",
+    "Leyline of Resonance",
+    "Shardmage's Rescue",
+    "Sheltered by Ghosts",
+    "Battlefield Forge",
+    "Eiganjo, Seat of the Empire"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/boros-heroic.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

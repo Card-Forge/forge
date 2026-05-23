@@ -1,0 +1,344 @@
+{
+  "archetype": "Lorehold, the Historian",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/lorehold-the-historian.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Apex of Power"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archaeomancer's Map"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Artist's Talent"
+    },
+    {
+      "qty": 1,
+      "name": "Bender's Waterskin"
+    },
+    {
+      "qty": 1,
+      "name": "Boros Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Boros Garrison"
+    },
+    {
+      "qty": 1,
+      "name": "Boros Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Call Forth the Tempest"
+    },
+    {
+      "qty": 1,
+      "name": "Chandra, Hope's Beacon"
+    },
+    {
+      "qty": 1,
+      "name": "Chaos Warp"
+    },
+    {
+      "qty": 1,
+      "name": "Clifftop Retreat"
+    },
+    {
+      "qty": 1,
+      "name": "Command Beacon"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Commander's Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Containment Construct"
+    },
+    {
+      "qty": 1,
+      "name": "Currency Converter"
+    },
+    {
+      "qty": 1,
+      "name": "Dance with Calamity"
+    },
+    {
+      "qty": 1,
+      "name": "Darksteel Pendant"
+    },
+    {
+      "qty": 1,
+      "name": "Deflecting Swat"
+    },
+    {
+      "qty": 1,
+      "name": "Deploy to the Front"
+    },
+    {
+      "qty": 1,
+      "name": "Dragon's Rage Channeler"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 1,
+      "name": "Elegant Parlor"
+    },
+    {
+      "qty": 1,
+      "name": "Emeria's Call"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Conflict"
+    },
+    {
+      "qty": 1,
+      "name": "Ephemerate"
+    },
+    {
+      "qty": 1,
+      "name": "Erode"
+    },
+    {
+      "qty": 1,
+      "name": "Evolving Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Farewell"
+    },
+    {
+      "qty": 1,
+      "name": "Generous Gift"
+    },
+    {
+      "qty": 1,
+      "name": "Ghostly Prison"
+    },
+    {
+      "qty": 1,
+      "name": "Glint-Horn Buccaneer"
+    },
+    {
+      "qty": 1,
+      "name": "Guardian of New Benalia"
+    },
+    {
+      "qty": 1,
+      "name": "Hit the Mother Lode"
+    },
+    {
+      "qty": 1,
+      "name": "Improvisation Capstone"
+    },
+    {
+      "qty": 1,
+      "name": "Jeska's Will"
+    },
+    {
+      "qty": 1,
+      "name": "Land Tax"
+    },
+    {
+      "qty": 1,
+      "name": "Lorehold Campus"
+    },
+    {
+      "qty": 1,
+      "name": "Lorehold, the Historian"
+    },
+    {
+      "qty": 1,
+      "name": "Mind Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Mizzix's Mastery"
+    },
+    {
+      "qty": 1,
+      "name": "Monument to Endurance"
+    },
+    {
+      "qty": 9,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Naktamun Lorespinner"
+    },
+    {
+      "qty": 1,
+      "name": "Ol\u00f3rin's Searing Light"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 9,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Planetarium of Wan Shi Tong"
+    },
+    {
+      "qty": 1,
+      "name": "Powerbalance"
+    },
+    {
+      "qty": 1,
+      "name": "Primal Amulet"
+    },
+    {
+      "qty": 1,
+      "name": "Radiant Scrollwielder"
+    },
+    {
+      "qty": 1,
+      "name": "Radiant Summit"
+    },
+    {
+      "qty": 1,
+      "name": "Reforge the Soul"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Restoration Seminar"
+    },
+    {
+      "qty": 1,
+      "name": "Reverse the Sands"
+    },
+    {
+      "qty": 1,
+      "name": "Rugged Prairie"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sonic Screwdriver"
+    },
+    {
+      "qty": 1,
+      "name": "Soulfire Eruption"
+    },
+    {
+      "qty": 1,
+      "name": "Spinerock Knoll"
+    },
+    {
+      "qty": 1,
+      "name": "Storm Herd"
+    },
+    {
+      "qty": 1,
+      "name": "Storm-Kiln Artist"
+    },
+    {
+      "qty": 1,
+      "name": "Stroke of Midnight"
+    },
+    {
+      "qty": 1,
+      "name": "Sundown Pass"
+    },
+    {
+      "qty": 1,
+      "name": "Sunscorched Divide"
+    },
+    {
+      "qty": 1,
+      "name": "Surge to Victory"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Tablet of Discovery"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Conviction"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi's Protection"
+    },
+    {
+      "qty": 1,
+      "name": "Terminus"
+    },
+    {
+      "qty": 1,
+      "name": "Terramorphic Expanse"
+    },
+    {
+      "qty": 1,
+      "name": "The Dawning Archaic"
+    },
+    {
+      "qty": 1,
+      "name": "Thought Vessel"
+    },
+    {
+      "qty": 1,
+      "name": "Turbulent Steppe"
+    },
+    {
+      "qty": 1,
+      "name": "Urabrask"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Vanquish the Horde"
+    },
+    {
+      "qty": 1,
+      "name": "Victory Chimes"
+    },
+    {
+      "qty": 1,
+      "name": "Volcanic Vision"
+    }
+  ],
+  "sideboard": []
+}

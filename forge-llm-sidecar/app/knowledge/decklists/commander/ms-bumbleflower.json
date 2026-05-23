@@ -1,0 +1,384 @@
+{
+  "archetype": "Ms. Bumbleflower",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/ms-bumbleflower.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Akroma's Will"
+    },
+    {
+      "qty": 1,
+      "name": "An Offer You Can't Refuse"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archivist of Oghma"
+    },
+    {
+      "qty": 1,
+      "name": "Basilisk Collar"
+    },
+    {
+      "qty": 1,
+      "name": "Bear Umbra"
+    },
+    {
+      "qty": 1,
+      "name": "Blackblade Reforged"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Bountiful Promenade"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Bristly Bill, Spine Sower"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivate"
+    },
+    {
+      "qty": 1,
+      "name": "Cyclonic Rift"
+    },
+    {
+      "qty": 1,
+      "name": "Danitha Capashen, Paragon"
+    },
+    {
+      "qty": 1,
+      "name": "Dovin's Veto"
+    },
+    {
+      "qty": 1,
+      "name": "Esper Sentinel"
+    },
+    {
+      "qty": 1,
+      "name": "Everybody Lives!"
+    },
+    {
+      "qty": 1,
+      "name": "Evolution Sage"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Farewell"
+    },
+    {
+      "qty": 1,
+      "name": "Fellwar Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Finale of Devastation"
+    },
+    {
+      "qty": 1,
+      "name": "Flawless Maneuver"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 3,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Forgotten Ancient"
+    },
+    {
+      "qty": 1,
+      "name": "Generous Gift"
+    },
+    {
+      "qty": 1,
+      "name": "Glacial Fortress"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Hammer of Nazahn"
+    },
+    {
+      "qty": 1,
+      "name": "Hardened Scales"
+    },
+    {
+      "qty": 1,
+      "name": "Heroic Intervention"
+    },
+    {
+      "qty": 1,
+      "name": "Hinterland Harbor"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Kaldra Compleat"
+    },
+    {
+      "qty": 1,
+      "name": "Kami of Whispered Hopes"
+    },
+    {
+      "qty": 1,
+      "name": "Kodama of the West Tree"
+    },
+    {
+      "qty": 1,
+      "name": "Managorger Hydra"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mithril Coat"
+    },
+    {
+      "qty": 1,
+      "name": "Mother of Runes"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 1,
+      "name": "Ms. Bumbleflower"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Remora"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Lore"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 3,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Puresteel Paladin"
+    },
+    {
+      "qty": 1,
+      "name": "Rancor"
+    },
+    {
+      "qty": 1,
+      "name": "Rejuvenating Springs"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Return of the Wildspeaker"
+    },
+    {
+      "qty": 1,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Robe of Stars"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Savannah"
+    },
+    {
+      "qty": 1,
+      "name": "Scavenged Brawler"
+    },
+    {
+      "qty": 1,
+      "name": "Scavenging Ooze"
+    },
+    {
+      "qty": 1,
+      "name": "Sea of Clouds"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowspear"
+    },
+    {
+      "qty": 1,
+      "name": "Sigarda's Aid"
+    },
+    {
+      "qty": 1,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sphere Grid"
+    },
+    {
+      "qty": 1,
+      "name": "Sram, Senior Edificer"
+    },
+    {
+      "qty": 1,
+      "name": "Stoneforge Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Sunpetal Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Swiftfoot Boots"
+    },
+    {
+      "qty": 1,
+      "name": "Sword of Feast and Famine"
+    },
+    {
+      "qty": 1,
+      "name": "Sword of Vengeance"
+    },
+    {
+      "qty": 1,
+      "name": "Sword of War and Peace"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Library"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi's Protection"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "The Earth Crystal"
+    },
+    {
+      "qty": 1,
+      "name": "The Great Henge"
+    },
+    {
+      "qty": 1,
+      "name": "The One Ring"
+    },
+    {
+      "qty": 1,
+      "name": "The Ozolith"
+    },
+    {
+      "qty": 1,
+      "name": "Thought Vessel"
+    },
+    {
+      "qty": 1,
+      "name": "Thran Power Suit"
+    },
+    {
+      "qty": 1,
+      "name": "Thundering Mightmare"
+    },
+    {
+      "qty": 1,
+      "name": "Titanoth Rex"
+    },
+    {
+      "qty": 1,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 1,
+      "name": "Tundra"
+    },
+    {
+      "qty": 1,
+      "name": "Vorinclex, Monstrous Raider"
+    },
+    {
+      "qty": 1,
+      "name": "Weathered Wayfarer"
+    },
+    {
+      "qty": 1,
+      "name": "Winds of Abandon"
+    },
+    {
+      "qty": 1,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Yavimaya, Cradle of Growth"
+    }
+  ],
+  "sideboard": []
+}

@@ -1,0 +1,503 @@
+{
+  "schema_version": 1,
+  "name": "Dredgeless Dredge",
+  "format": "pioneer",
+  "colors": [
+    "U",
+    "B"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Dredgeless Dredge is a blue-black Pioneer archetype that leverages graveyard recursion and sacrifice synergies to generate overwhelming value. By cycling cheap creatures like Bloodghast and Prized Amalgam through the graveyard, the deck creates a self-sustaining engine that outmaneuvers opponents. Narcomoeba serves as the primary catalyst, enabling repeated returns of threats while drawing cards to maintain board control.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 21,
+      "cards": [
+        "Bloodghast",
+        "Founding the Third Path",
+        "Jace, the Perfected Mind",
+        "Narcomoeba",
+        "Prized Amalgam",
+        "Silversmote Ghoul"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 9,
+      "cards": [
+        "Otherworldly Gaze",
+        "Prized Amalgam",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Bloodghast",
+        "Narcomoeba",
+        "Prized Amalgam"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 29,
+      "cards": [
+        "Ashiok, Dream Render",
+        "Bloodghast",
+        "Breaking // Entering",
+        "Clearwater Pathway",
+        "Haunted Dead",
+        "Jace, the Perfected Mind",
+        "Narcomoeba",
+        "Prized Amalgam",
+        "Silversmote Ghoul",
+        "Stitcher's Supplier"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 1
+    },
+    "removal": {
+      "target_count": 18,
+      "cards": [
+        "Creeping Chill",
+        "Fatal Push",
+        "Founding the Third Path",
+        "Into the Flood Maw",
+        "Narcomoeba",
+        "Otawara, Soaring City"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Spell Pierce"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 12,
+      "cards": [
+        "Bloodghast",
+        "Narcomoeba",
+        "Prized Amalgam"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 12,
+      "cards": [
+        "Bloodghast",
+        "Narcomoeba",
+        "Prized Amalgam"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 47,
+      "cards": [
+        "Ashiok, Dream Render",
+        "Bloodghast",
+        "Creeping Chill",
+        "Drownyard Temple",
+        "Founding the Third Path",
+        "Haunted Dead",
+        "Ipnu Rivulet",
+        "Jace, the Perfected Mind",
+        "Leyline of the Void",
+        "Narcomoeba",
+        "Otherworldly Gaze",
+        "Prized Amalgam",
+        "Silversmote Ghoul",
+        "Stitcher's Supplier",
+        "Tome Scour",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 43,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 30,
+      "cards": [
+        "Bloodghast",
+        "Drownyard Temple",
+        "Founding the Third Path",
+        "Haunted Dead",
+        "Into the Flood Maw",
+        "Narcomoeba",
+        "Otawara, Soaring City",
+        "Otherworldly Gaze",
+        "Prized Amalgam",
+        "Silversmote Ghoul"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 3
+    },
+    "engines": {
+      "target_count": 12,
+      "cards": [
+        "Bloodghast",
+        "Narcomoeba",
+        "Prized Amalgam"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 12,
+      "cards": [
+        "Bloodghast",
+        "Narcomoeba",
+        "Prized Amalgam"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Bloodghast",
+        "Narcomoeba",
+        "Prized Amalgam"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 14,
+      "cards": [
+        "Bloodghast",
+        "Damping Sphere",
+        "Narcomoeba",
+        "Prized Amalgam",
+        "Tainted Remedy"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 31,
+      "cards": [
+        "Bloodghast",
+        "Darkslick Shores",
+        "Drownyard Temple",
+        "Founding the Third Path",
+        "Ipnu Rivulet",
+        "Narcomoeba",
+        "Otawara, Soaring City",
+        "Prized Amalgam",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 16,
+      "cards": [
+        "Darkslick Shores",
+        "Drownyard Temple",
+        "Ipnu Rivulet",
+        "Island",
+        "Otawara, Soaring City",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Ashiok, Dream Render",
+        "Jace, the Perfected Mind"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ashiok, Dream Render",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodghast",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Creeping Chill",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darkslick Shores",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drownyard Temple",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Founding the Third Path",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haunted Dead",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Into the Flood Maw",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ipnu Rivulet",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jace, the Perfected Mind",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narcomoeba",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otherworldly Gaze",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prized Amalgam",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Silversmote Ghoul",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stitcher's Supplier",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Activate Narcomoeba before sacrificing creatures to maximize returns",
+    "Hold up black mana to protect key activations from removal",
+    "Sacrifice Prized Amalgam after drawing to maintain hand size",
+    "Cycle Bloodghast immediately after it resolves to keep the graveyard active",
+    "Common mistakes: Overcommitting to the graveyard without recursion payoffs, ignoring discard timing, failing to track opponent's hate cards, and overextending into removal."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing Narcomoeba to establish recursion"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Bloodghast to populate the graveyard"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Prized Amalgam to stabilize or draw into answers"
+    }
+  ],
+  "kill_priority": [
+    "Bloodghast",
+    "Narcomoeba",
+    "Prized Amalgam",
+    "Ashiok, Dream Render",
+    "Jace, the Perfected Mind",
+    "Breaking // Entering",
+    "Clearwater Pathway",
+    "Haunted Dead"
+  ],
+  "interaction_to_disrupt": [
+    "Spell Pierce",
+    "Bloodghast",
+    "Narcomoeba",
+    "Prized Amalgam",
+    "Creeping Chill",
+    "Fatal Push",
+    "Founding the Third Path",
+    "Into the Flood Maw"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/dredgeless-dredge.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

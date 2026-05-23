@@ -1,0 +1,153 @@
+{
+  "archetype": "Amulet Titan",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/amulet-titan.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Amulet of Vigor"
+    },
+    {
+      "qty": 4,
+      "name": "Arboreal Grazer"
+    },
+    {
+      "qty": 3,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 3,
+      "name": "Crumbling Vestige"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivator Colossus"
+    },
+    {
+      "qty": 1,
+      "name": "Dryad Arbor"
+    },
+    {
+      "qty": 4,
+      "name": "Dryad of the Ilysian Grove"
+    },
+    {
+      "qty": 4,
+      "name": "Explore"
+    },
+    {
+      "qty": 3,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Golgari Rot Farm"
+    },
+    {
+      "qty": 3,
+      "name": "Green Sun's Zenith"
+    },
+    {
+      "qty": 4,
+      "name": "Gruul Turf"
+    },
+    {
+      "qty": 1,
+      "name": "Hanweir Battlements"
+    },
+    {
+      "qty": 1,
+      "name": "Kessig Wolf Run"
+    },
+    {
+      "qty": 1,
+      "name": "Mirrorpool"
+    },
+    {
+      "qty": 4,
+      "name": "Primeval Titan"
+    },
+    {
+      "qty": 1,
+      "name": "Shifting Woodland"
+    },
+    {
+      "qty": 4,
+      "name": "Simic Growth Chamber"
+    },
+    {
+      "qty": 2,
+      "name": "Spelunking"
+    },
+    {
+      "qty": 2,
+      "name": "Summoner's Pact"
+    },
+    {
+      "qty": 1,
+      "name": "The Mycosynth Gardens"
+    },
+    {
+      "qty": 1,
+      "name": "Tolaria West"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 1,
+      "name": "Valakut, the Molten Pinnacle"
+    },
+    {
+      "qty": 1,
+      "name": "Vesuva"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Collector Ouphe"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 2,
+      "name": "Fire Magic"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Quarter"
+    },
+    {
+      "qty": 1,
+      "name": "Icetill Explorer"
+    },
+    {
+      "qty": 1,
+      "name": "Six"
+    },
+    {
+      "qty": 3,
+      "name": "Vexing Bauble"
+    }
+  ]
+}

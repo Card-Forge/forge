@@ -1,0 +1,97 @@
+{
+  "archetype": "Merfolk",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/merfolk.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Aether Vial"
+    },
+    {
+      "qty": 3,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 3,
+      "name": "Flare of Denial"
+    },
+    {
+      "qty": 4,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 7,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Lord of Atlantis"
+    },
+    {
+      "qty": 4,
+      "name": "Master of the Pearl Trident"
+    },
+    {
+      "qty": 1,
+      "name": "Minamo, School at Water's Edge"
+    },
+    {
+      "qty": 2,
+      "name": "Mindspring Merfolk"
+    },
+    {
+      "qty": 4,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 3,
+      "name": "Silvergill Adept"
+    },
+    {
+      "qty": 3,
+      "name": "Silvergill Mentor"
+    },
+    {
+      "qty": 4,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 3,
+      "name": "Svyelun of Sea and Sky"
+    },
+    {
+      "qty": 4,
+      "name": "Tide Shaper"
+    },
+    {
+      "qty": 3,
+      "name": "Tishana's Tidebinder"
+    },
+    {
+      "qty": 4,
+      "name": "Vodalian Hexcatcher"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Chalice of the Void"
+    },
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 3,
+      "name": "Subtlety"
+    }
+  ]
+}

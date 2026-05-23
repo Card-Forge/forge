@@ -1,0 +1,627 @@
+{
+  "schema_version": 1,
+  "name": "Zada, Hedron Grinder",
+  "format": "commander",
+  "colors": [
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "Cast cheap non-creature spells to generate haste Goblin tokens, then swing them all at a single target for lethal. The deck wins by overwhelming opponents with unblockable combat damage while leveraging sacrifice outlets and card draw to out-resource the field.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 3,
+      "cards": [
+        "Ancestors' Aid",
+        "Brightstone Ritual",
+        "Sudden Breakthrough"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 12,
+      "cards": [
+        "Ancestors' Aid",
+        "Ancestral Anger",
+        "Balduvian Rage",
+        "Expedite",
+        "Fists of Flame",
+        "Gempalm Incinerator",
+        "Renegade Tactics",
+        "Rile",
+        "Skullclamp",
+        "Stun",
+        "The Autonomous Furnace",
+        "Zada, Hedron Grinder"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Ancestors' Aid",
+        "Inordinate Rage",
+        "Path of Ancestry",
+        "Titan's Strength"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Ancestors' Aid",
+        "Fists of Flame",
+        "Twinflame"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 42,
+      "cards": [
+        "Antagonize",
+        "Bloodmark Mentor",
+        "Brash Taunter",
+        "Brute Force",
+        "Built to Smash",
+        "Downhill Charge",
+        "Dragon Fodder",
+        "Empty the Warrens",
+        "Fists of the Anvil",
+        "Fit of Rage",
+        "Gempalm Incinerator",
+        "General Kreat, the Boltbringer",
+        "Goblin Chainwhirler",
+        "Goblin Chieftain",
+        "Goblin Dark-Dwellers",
+        "Goblin King",
+        "Goblin Rally",
+        "Goblin Warchief",
+        "Goblin Wardriver",
+        "Guttersnipe",
+        "Hobgoblin Bandit Lord",
+        "Hordeling Outburst",
+        "Howlsquad Heavy",
+        "Impulsive Pilferer",
+        "Infuriate",
+        "Jeska's Will",
+        "Krenko's Command",
+        "Krenko, Mob Boss",
+        "Mana Geyser",
+        "Molten-Core Maestro",
+        "Outmaneuver",
+        "Raging Redcap",
+        "Rundvelt Hordemaster",
+        "Rush of Adrenaline",
+        "Screaming Fury",
+        "Searslicer Goblin",
+        "Shared Animosity",
+        "Siege-Gang Commander",
+        "Skirk Shaman",
+        "Temur Battle Rage",
+        "Treasure Nabber",
+        "Zada, Hedron Grinder"
+      ],
+      "mainboard_count": 42,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Blighted Gorge",
+        "Brash Taunter",
+        "Brute Strength",
+        "Dreadmaw's Ire",
+        "Fists of Flame",
+        "Gempalm Incinerator",
+        "General Kreat, the Boltbringer",
+        "Goblin Chainwhirler",
+        "Guttersnipe",
+        "Hobgoblin Bandit Lord",
+        "Impact Tremors",
+        "Mizzix's Mastery",
+        "Raze the Effigy",
+        "Rile",
+        "Siege-Gang Commander",
+        "Soul's Fire",
+        "Tail Slash"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Ancestors' Aid",
+        "Goblin Chainwhirler",
+        "Obelisk of Urd"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Ancestors' Aid",
+        "Brash Taunter",
+        "Goblin Wardriver"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 10,
+      "cards": [
+        "Ancestral Anger",
+        "Bulk Up",
+        "Fists of Flame",
+        "Flashback",
+        "Goblin Dark-Dwellers",
+        "Impulsive Pilferer",
+        "Invoke Calamity",
+        "Mizzix's Mastery",
+        "Monstrous Rage",
+        "Past in Flames"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 8,
+      "cards": [
+        "Ancestors' Aid",
+        "Bulk Up",
+        "Flashback",
+        "Goblin Dark-Dwellers",
+        "Impulsive Pilferer",
+        "Invoke Calamity",
+        "Mizzix's Mastery",
+        "Past in Flames"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 6,
+      "cards": [
+        "Amonkhet Raceway",
+        "Ancestors' Aid",
+        "Guttersnipe",
+        "Howlsquad Heavy",
+        "Molten-Core Maestro",
+        "Zada, Hedron Grinder"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Twinflame"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Ancestors' Aid"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 12,
+      "cards": [
+        "Amonkhet Raceway",
+        "Ancestors' Aid",
+        "Blighted Gorge",
+        "Castle Embereth",
+        "Dwarven Hold",
+        "Goblin Burrows",
+        "Impulsive Pilferer",
+        "Molten-Core Maestro",
+        "Path of Ancestry",
+        "Rogue's Passage",
+        "Sudden Breakthrough",
+        "The Autonomous Furnace"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 31,
+      "cards": [
+        "Amonkhet Raceway",
+        "Blighted Gorge",
+        "Castle Embereth",
+        "Dwarven Hold",
+        "Goblin Burrows",
+        "Mountain",
+        "Path of Ancestry",
+        "Rogue's Passage",
+        "The Autonomous Furnace"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.26
+  },
+  "dual_role_cards": [
+    {
+      "card": "Amonkhet Raceway",
+      "roles": [
+        "engines",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancestors' Aid",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "rituals",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancestral Anger",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blighted Gorge",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brash Taunter",
+      "roles": [
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bulk Up",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Castle Embereth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dwarven Hold",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fists of Flame",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flashback",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gempalm Incinerator",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "General Kreat, the Boltbringer",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Burrows",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Chainwhirler",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Dark-Dwellers",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Wardriver",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guttersnipe",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hobgoblin Bandit Lord",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Howlsquad Heavy",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Impulsive Pilferer",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Invoke Calamity",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mizzix's Mastery",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Molten-Core Maestro",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Past in Flames",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rile",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rogue's Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Siege-Gang Commander",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sudden Breakthrough",
+      "roles": [
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Autonomous Furnace",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Twinflame",
+      "roles": [
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zada, Hedron Grinder",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Zada's ability triggers on cast, not ETB, so sacrifice outlets are crucial for fueling the engine.",
+    "Protect Zada at all costs",
+    "if it dies, the deck loses its primary win condition.",
+    "Avoid overcommitting to board wipes unless you have a backup plan.",
+    "Watch for opponent's hand size to predict sweepers or finishers."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast a cheap cantrip or ritual to draw into threats or generate mana."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a land, cast a non-creature spell to trigger Zada if it's on the board, or play a Goblin token generator."
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize establishing Zada by turn 2-3 with protection (Lightning Greaves, Swiftfoot Boots, or hexproof/gain tactics)."
+    }
+  ],
+  "kill_priority": [
+    "Amonkhet Raceway",
+    "Ancestors' Aid",
+    "Guttersnipe",
+    "Howlsquad Heavy",
+    "Molten-Core Maestro",
+    "Zada, Hedron Grinder",
+    "Fists of Flame",
+    "Twinflame"
+  ],
+  "interaction_to_disrupt": [
+    "Ancestors' Aid",
+    "Brash Taunter",
+    "Goblin Wardriver",
+    "Blighted Gorge",
+    "Brute Strength",
+    "Dreadmaw's Ire",
+    "Fists of Flame",
+    "Gempalm Incinerator"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/zada-hedron-grinder.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

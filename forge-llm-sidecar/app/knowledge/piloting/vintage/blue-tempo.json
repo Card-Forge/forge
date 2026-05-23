@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands containing early disruption like Flusterstorm",
       "Hands with Psychic Frog or Collector Ouphe alongside lands",
-      "Hands with a clear path to disrupt the opponent's first turn"
+      "Hands with a clear path to disrupt the opponent's first turn",
+      "Keep hands with 2-3 lands (prioritizing fetch/shock or duals for U/B/G), at least one 1-mana interaction (Flusterstorm, Psychic Frog, or Collector Ouphe), and a curve of 1-2-3 spells."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or early threats",
       "Hands with too many lands or too few",
-      "Hands without a clear plan to establish tempo"
+      "Hands without a clear plan to establish tempo",
+      "Mulligan hands with 3+ lands, zero interaction, or multiple 3+ mana spells without early support or land acceleration."
     ],
     "examples": []
   },
@@ -25,17 +27,31 @@
     "early_game": [
       "Play lands and hold up two blue mana for Flusterstorm",
       "Cast Psychic Frog to generate card advantage and apply immediate pressure",
-      "Disrupt opponent's early threats or combo pieces"
+      "Disrupt opponent's early threats or combo pieces",
+      "Turn 1: Play a land, cast Psychic Frog or Collector Ouphe if mana allows.",
+      "Turn 2: Curve into a 2-drop (e.g., Thoughtseize, Go Blank, or a 2-drop threat).",
+      "Sequence lands to ensure you can produce U for counters, B for discard, and G for ramp/threats.",
+      "Hold up interaction for turn 1/2 threats or key combo pieces, and use Psychic Frog\u2019s tap ability to dig for answers when your hand is light."
     ],
     "mid_game": [
       "Deploy Collector Ouphe to stabilize and gain card advantage",
       "Use removal and counterspells to control the board",
-      "Maintain tempo by trading efficiently and keeping the initiative"
+      "Maintain tempo by trading efficiently and keeping the initiative",
+      "Preserve interaction for high-impact threats",
+      "avoid blowing counters on non-critical spells.",
+      "Use Psychic Frog\u2019s draw effect to dig for answers when your hand is empty.",
+      "Manage your graveyard carefully against Dredge/Oath, and avoid unnecessary triggers that could fuel opponent strategies or reveal your hand to discard.",
+      "Commit threats only when you have interaction to protect them or clear the way.",
+      "Hold back if the opponent has a known sweep or heavy removal."
     ],
     "late_game": [
       "Leverage card advantage to outvalue opponents",
       "Use resilient threats to close the game",
-      "Maintain interaction to prevent opponent's late-game finishers"
+      "Maintain interaction to prevent opponent's late-game finishers",
+      "Late-game threats like Tarmogoyf, Scavenging Ooze, or midrange creatures backed by card draw.",
+      "Win by out-resourcing and applying pressure when interaction is exhausted, forcing the opponent to use remaining resources inefficiently.",
+      "When the opponent has no interaction left, or when you have card advantage and can trade up.",
+      "Go all-in if you can close the game before they can stabilize or find a sweep, especially if you have a proven win condition in hand."
     ]
   },
   "key_cards": [
@@ -58,7 +74,13 @@
   "sequencing_tips": [
     "Always prioritize holding up mana for Flusterstorm before committing to other spells",
     "Cast Psychic Frog before playing lands if possible to maximize card draw timing",
-    "Use Collector Ouphe after taking damage or losing cards to maximize its value generation"
+    "Use Collector Ouphe after taking damage or losing cards to maximize its value generation",
+    "Collector Ouphe is technically a white card, so ensure your mana base supports W if it\u2019s in the deck, or note that the archetype may actually be U/B/W (Esper) but the prompt specifies U/B/G.",
+    "Psychic Frog and Flusterstorm are blue, so U is primary.",
+    "B provides discard/graveyard hate.",
+    "G provides ramp/efficient threats.",
+    "Avoid overcommitting to the board without interaction, as tempo decks die to sweepers.",
+    "Always prioritize card advantage in the late game, and use Psychic Frog\u2019s draw effect strategically to dig for answers rather than wasting it on non-critical spells."
   ],
   "matchups": [
     {
@@ -87,15 +109,34 @@
         "Counterspell packages",
         "Late-game finishers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Psychic Frog\u2019s draw to dig through, cast spells in response to their counters, or use uncounterable threats. Sequence around known counters and save interaction for their key spells. Force them to use counters on low-impact spells to open up your hand.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early interaction to stop mana dorks/land drops. Collector Ouphe shuts down non-artifact ramp. Discard their ramp spells and pressure them before they can cast big threats. Don\u2019t let them stabilize; trade efficiently and punish missed blocks.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the interaction war. Out-value them with better sequencing, card draw, and sideboard cards. Prioritize keeping interaction for their key threats and force them to make the first mistake. Track their hand and graveyard to anticipate their plays.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast combo decks",
     "Aggressive creature decks",
-    "Resilient control strategies"
+    "Resilient control strategies",
+    "Watch for sweepers (Supreme Verdict, Anger of the Gods), graveyard strategies (Dredge, Oath), and artifact engines (Jewel Shops, Initiative).",
+    "Note when they tap out for big spells or when they start drawing multiple cards.",
+    "Track their remaining interaction to time your own plays and identify when they are vulnerable to pressure."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:50:46+00:00",
     "model": "local-model",
@@ -111,6 +152,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

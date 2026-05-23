@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Nethergoyf or Dauthi Voidwalker paired with early removal or mana acceleration",
       "Two-card hands containing Moonshadow and a cheap creature for turn-one pressure",
-      "Balanced hands with at least two lands and a mix of creatures and interaction"
+      "Balanced hands with at least two lands and a mix of creatures and interaction",
+      "Keep hands with 2-3 lands (Swamps or duals), plus at least one early interaction (Thoughtseize, Fatal Push) or a 1B creature (Moonshadow/Dauthi Voidwalker).",
+      "Keep hands with Nethergoyf if supported by a land and a discard outlet."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays or board presence",
       "Mana-heavy hands with no creatures or interaction",
-      "Hands that cannot establish a turn-one or turn-two threat"
+      "Hands that cannot establish a turn-one or turn-two threat",
+      "Mulligan pure curve decks, hands with 0-1 lands, or hands with only expensive threats and no early board presence."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play Nethergoyf on turn one to establish board presence and disrupt opponent's land drops",
       "Use Dauthi Voidwalker to apply pressure while forcing opponent to spend resources on removal",
-      "Prioritize land drops and early interaction to stabilize against aggressive decks"
+      "Prioritize land drops and early interaction to stabilize against aggressive decks",
+      "Turn 1: Play a Swamp, cast Thoughtseize on a key non-basic land or early threat, or drop a 1B creature if holding lands.",
+      "Turn 2: Develop board with a second land, cast Nethergoyf if opponent has sacrificed creatures, or play a cheap deathtouch creature.",
+      "Prioritize establishing a 2-drop board presence over rushing",
+      "Nethergoyf scales best when opponents are forced to sacrifice to your removal or their own effects."
     ],
     "mid_game": [
       "Trade efficiently with opponent's threats while preserving Moonshadow for key moments",
       "Leverage card advantage by playing around expected removal and board wipes",
-      "Transition to a more controlling posture by holding up black mana for interaction"
+      "Transition to a more controlling posture by holding up black mana for interaction",
+      "Mana should be kept flexible for 1B spells and 2-drop creatures",
+      "avoid flooding with Swamps if you have multiple 1B threats.",
+      "Use discard to disrupt opponent's mana or key combo pieces.",
+      "Manage graveyard carefully\u2014Nethergoyf benefits from opponent sacrifices, but you must avoid filling your own graveyard with unplayable cards if facing graveyard hate.",
+      "Commit threats when you have removal ready to answer their interaction or when Nethergoyf is already large.",
+      "Hold back if facing sweepers or if your hand is light on answers."
     ],
     "late_game": [
       "Use Moonshadow to swing combat, remove problematic blockers, or secure game-ending damage",
       "Maintain board presence with resilient creatures while cycling through resources",
-      "Apply consistent pressure until opponent runs out of answers or mana"
+      "Apply consistent pressure until opponent runs out of answers or mana",
+      "Nethergoyf is the primary win condition, especially when it reaches 5+ toughness.",
+      "Moonshadow and Dauthi Voidwalker provide deathtouch pressure that forces trades.",
+      "Use discard to strip their removal, then swing with Nethergoyf and deathtouch creatures.",
+      "Go all-in when you have established board control, your hand is light on threats but heavy on Nethergoyf/Moonshadow, and you've removed or bypassed their main interaction.",
+      "Commit when Nethergoyf is large enough to trade through their best removal or when you can close the game in 1-2 turns."
     ]
   },
   "key_cards": [
@@ -58,7 +76,11 @@
   "sequencing_tips": [
     "Hold up black mana for interaction before committing creatures to combat",
     "Play Nethergoyf before opponent's land drops to maximize disruption value",
-    "Save Moonshadow for moments when it can swing the game state or secure lethal damage"
+    "Save Moonshadow for moments when it can swing the game state or secure lethal damage",
+    "Common mistakes include overcommitting to the board too early, which leaves you vulnerable to sweepers, or failing to use discard effectively to disrupt opponent's key pieces.",
+    "Remember that Nethergoyf's power is tied to opponent sacrifices, so your removal and their own effects are your best friends.",
+    "Avoid filling your graveyard unnecessarily if facing graveyard hate.",
+    "Play around common sideboard cards like Rest in Peace or Surgical Extraction by keeping threats in hand."
   ],
   "matchups": [
     {
@@ -87,15 +109,35 @@
         "Mana acceleration",
         "Win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Work around it with discard to remove counterspells before they can cast them. Use cheap, efficient threats that can be cast in response to their spells. If they counter your removal, use discard to strip their hand and apply pressure with Nethergoyf, which is hard to counter if cast at instant speed or if they're out of mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early disruption (Thoughtseize, Fatal Push) to hit their lands or key ramp spells. Use discard to remove their mana rocks or finishers. Nethergoyf scales well against ramp if they sacrifice creatures to your removal or their own effects.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing with better card advantage (discard, lifelink, or graveyard synergies). Prioritize trading efficiently with deathtouch creatures and use Nethergoyf as a late-game wincon. Sideboard in additional removal and discard to control the midgame. Track their hand and graveyard to avoid falling for their traps.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
-    "Counterspell packages"
+    "Counterspell packages",
+    "Watch for opponent's discard targets (prioritize keeping Nethergoyf and removal).",
+    "Track their graveyard size and sacrifice outlets.",
+    "Note if they're playing around your removal with unblockable or hexproof threats.",
+    "Watch for mana development\u2014if they're ramping, prioritize early disruption."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:54:50+00:00",
     "model": "local-model",
@@ -111,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

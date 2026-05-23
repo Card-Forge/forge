@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "name": "Mono-Red Goblins",
+  "format": "pioneer",
+  "colors": [
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Mono-Red Goblins is a fast-paced aggressive deck that relies on tribal synergy and mana acceleration to overwhelm opponents before they can stabilize. By leveraging Legion Loyalist for early land drops and card advantage, the deck establishes a wide board of 1/1s quickly. Rundvelt Hordemaster and Goblin Warchief then multiply your combat damage, turning a swarm of goblins into an unstoppable offensive force in the Pioneer format.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 4,
+      "cards": [
+        "Legion Loyalist"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Legion Loyalist"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Legion Loyalist"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 41,
+      "cards": [
+        "Battle Cry Goblin",
+        "Cacophony Scamp",
+        "Conspicuous Snoop",
+        "Giant Cindermaw",
+        "Goblin Instigator",
+        "Goblin Ringleader",
+        "Goblin Trashmaster",
+        "Goblin Warchief",
+        "Hobgoblin Bandit Lord",
+        "Krenko, Tin Street Kingpin",
+        "Legion Loyalist",
+        "Rundvelt Hordemaster",
+        "Siege-Gang Commander",
+        "Skirk Prospector"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Cacophony Scamp",
+        "Giant Cindermaw",
+        "Goblin Trashmaster",
+        "Hobgoblin Bandit Lord",
+        "Redcap Melee",
+        "Siege-Gang Commander",
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 11
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Cavern of Souls"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 4,
+      "cards": [
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Legion Loyalist"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Damping Sphere"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 16,
+      "cards": [
+        "Castle Embereth",
+        "Cavern of Souls",
+        "Den of the Bugbear",
+        "Goblin Warchief",
+        "Legion Loyalist",
+        "Mutavault",
+        "Sokenzan, Crucible of Defiance"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 24,
+      "cards": [
+        "Castle Embereth",
+        "Cavern of Souls",
+        "Den of the Bugbear",
+        "Mountain",
+        "Mutavault",
+        "Sokenzan, Crucible of Defiance"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.35
+  },
+  "dual_role_cards": [
+    {
+      "card": "Cacophony Scamp",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Castle Embereth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Den of the Bugbear",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Giant Cindermaw",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Trashmaster",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Warchief",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hobgoblin Bandit Lord",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Legion Loyalist",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mutavault",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Siege-Gang Commander",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sokenzan, Crucible of Defiance",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tormod's Crypt",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Activate Legion Loyalist before playing other creatures to maximize land drops",
+    "Wait to play Goblin Warchief until you have multiple goblins ready to attack",
+    "Use Rundvelt Hordemaster's tokens to trigger Warchief's ability for maximum damage",
+    "Common mistakes: Overcommitting to board without pump support, ignoring life total, failing to sequence lands properly.",
+    "Unique interactions: Legion Loyalist and Rundvelt can be played on the same turn for massive haste pump."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and one-mana goblins to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Legion Loyalist to fetch additional lands and accelerate"
+    },
+    {
+      "trigger": "early game",
+      "line": "Apply early pressure to force opponent to use removal inefficiently"
+    }
+  ],
+  "kill_priority": [
+    "Legion Loyalist",
+    "Battle Cry Goblin",
+    "Cacophony Scamp",
+    "Conspicuous Snoop",
+    "Giant Cindermaw",
+    "Goblin Instigator",
+    "Goblin Ringleader",
+    "Goblin Trashmaster"
+  ],
+  "interaction_to_disrupt": [
+    "Cavern of Souls",
+    "Cacophony Scamp",
+    "Giant Cindermaw",
+    "Goblin Trashmaster",
+    "Hobgoblin Bandit Lord",
+    "Redcap Melee",
+    "Siege-Gang Commander",
+    "Tormod's Crypt"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/mono-red-goblins.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

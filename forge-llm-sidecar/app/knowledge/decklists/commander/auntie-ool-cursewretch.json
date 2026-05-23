@@ -1,0 +1,360 @@
+{
+  "archetype": "Auntie Ool, Cursewretch",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/auntie-ool-cursewretch.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Aberrant Return"
+    },
+    {
+      "qty": 1,
+      "name": "All Will Be One"
+    },
+    {
+      "qty": 1,
+      "name": "Ammit Eternal"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Assassin's Trophy"
+    },
+    {
+      "qty": 1,
+      "name": "Atomize"
+    },
+    {
+      "qty": 1,
+      "name": "Auntie Ool, Cursewretch"
+    },
+    {
+      "qty": 1,
+      "name": "Black Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Blasphemous Act"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Blowfly Infestation"
+    },
+    {
+      "qty": 1,
+      "name": "Bogslither's Embrace"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Carnifex Demon"
+    },
+    {
+      "qty": 1,
+      "name": "Channeler Initiate"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Commander's Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Contagion Clasp"
+    },
+    {
+      "qty": 1,
+      "name": "Crumbling Ashes"
+    },
+    {
+      "qty": 1,
+      "name": "Darkness Descends"
+    },
+    {
+      "qty": 1,
+      "name": "Dawnhand Dissident"
+    },
+    {
+      "qty": 1,
+      "name": "Devoted Druid"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonskull Summit"
+    },
+    {
+      "qty": 1,
+      "name": "Dread Tiller"
+    },
+    {
+      "qty": 1,
+      "name": "Dusk Urchins"
+    },
+    {
+      "qty": 1,
+      "name": "Eventide's Shadow"
+    },
+    {
+      "qty": 1,
+      "name": "Everlasting Torment"
+    },
+    {
+      "qty": 1,
+      "name": "Evolution Sage"
+    },
+    {
+      "qty": 1,
+      "name": "Evolving Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Farseek"
+    },
+    {
+      "qty": 4,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Generous Patron"
+    },
+    {
+      "qty": 1,
+      "name": "Glissa Sunslayer"
+    },
+    {
+      "qty": 1,
+      "name": "Grim Affliction"
+    },
+    {
+      "qty": 1,
+      "name": "Grim Poppet"
+    },
+    {
+      "qty": 1,
+      "name": "Hapatra, Vizier of Poisons"
+    },
+    {
+      "qty": 1,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 1,
+      "name": "Ifnir Deadlands"
+    },
+    {
+      "qty": 1,
+      "name": "Ignoble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Incremental Blight"
+    },
+    {
+      "qty": 1,
+      "name": "Infernal Grasp"
+    },
+    {
+      "qty": 1,
+      "name": "Karn's Bastion"
+    },
+    {
+      "qty": 1,
+      "name": "Kulrath Knight"
+    },
+    {
+      "qty": 1,
+      "name": "Lasting Tarfire"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Greaves"
+    },
+    {
+      "qty": 1,
+      "name": "Luxury Suite"
+    },
+    {
+      "qty": 1,
+      "name": "Maha, Its Feathers Night"
+    },
+    {
+      "qty": 1,
+      "name": "Massacre Girl, Known Killer"
+    },
+    {
+      "qty": 1,
+      "name": "Midnight Banshee"
+    },
+    {
+      "qty": 1,
+      "name": "Mikaeus, the Unhallowed"
+    },
+    {
+      "qty": 1,
+      "name": "Moonshadow"
+    },
+    {
+      "qty": 4,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Lore"
+    },
+    {
+      "qty": 1,
+      "name": "Necroskitter"
+    },
+    {
+      "qty": 1,
+      "name": "Nest of Scarabs"
+    },
+    {
+      "qty": 1,
+      "name": "Nesting Grounds"
+    },
+    {
+      "qty": 1,
+      "name": "Obelisk Spider"
+    },
+    {
+      "qty": 1,
+      "name": "Oft-Nabbed Goat"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Persist"
+    },
+    {
+      "qty": 1,
+      "name": "Persistent Constrictor"
+    },
+    {
+      "qty": 1,
+      "name": "Puca's Covenant"
+    },
+    {
+      "qty": 1,
+      "name": "Putrefy"
+    },
+    {
+      "qty": 1,
+      "name": "Rampant Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Reanimate"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rootbound Crag"
+    },
+    {
+      "qty": 1,
+      "name": "Savage Lands"
+    },
+    {
+      "qty": 1,
+      "name": "Scuzzback Scrounger"
+    },
+    {
+      "qty": 1,
+      "name": "Sinister Gnarlbark"
+    },
+    {
+      "qty": 1,
+      "name": "Smoldering Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Soul Immolation"
+    },
+    {
+      "qty": 1,
+      "name": "Soul Snuffers"
+    },
+    {
+      "qty": 1,
+      "name": "Spitting Dilophosaurus"
+    },
+    {
+      "qty": 1,
+      "name": "Sudden Spoiling"
+    },
+    {
+      "qty": 7,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Terminate"
+    },
+    {
+      "qty": 1,
+      "name": "The Reaper, King No More"
+    },
+    {
+      "qty": 1,
+      "name": "The Scorpion God"
+    },
+    {
+      "qty": 1,
+      "name": "Three Visits"
+    },
+    {
+      "qty": 1,
+      "name": "Tree of Perdition"
+    },
+    {
+      "qty": 1,
+      "name": "Undergrowth Stadium"
+    },
+    {
+      "qty": 1,
+      "name": "Village Pillagers"
+    },
+    {
+      "qty": 1,
+      "name": "Wickerbough Elder"
+    },
+    {
+      "qty": 1,
+      "name": "Woodland Cemetery"
+    },
+    {
+      "qty": 1,
+      "name": "Ziatora's Proving Ground"
+    }
+  ],
+  "sideboard": []
+}

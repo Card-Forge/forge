@@ -1,0 +1,121 @@
+{
+  "archetype": "Tron",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/tron.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Stirrings"
+    },
+    {
+      "qty": 2,
+      "name": "Barrels of Blasting Jelly"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 3,
+      "name": "Boulderbranch Golem"
+    },
+    {
+      "qty": 4,
+      "name": "Bramble Wurm"
+    },
+    {
+      "qty": 2,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 4,
+      "name": "Candy Trail"
+    },
+    {
+      "qty": 1,
+      "name": "Conduit Pylons"
+    },
+    {
+      "qty": 3,
+      "name": "Crop Rotation"
+    },
+    {
+      "qty": 1,
+      "name": "Dread Linnorm"
+    },
+    {
+      "qty": 4,
+      "name": "Expedition Map"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 3,
+      "name": "Generous Ent"
+    },
+    {
+      "qty": 1,
+      "name": "Haunted Fengraf"
+    },
+    {
+      "qty": 4,
+      "name": "Maelstrom Colossus"
+    },
+    {
+      "qty": 4,
+      "name": "Pinnacle Kill-Ship"
+    },
+    {
+      "qty": 2,
+      "name": "Prophetic Prism"
+    },
+    {
+      "qty": 2,
+      "name": "Unfathomable Truths"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Mine"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Power Plant"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Ridgeline"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Avenging Hunter"
+    },
+    {
+      "qty": 2,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 3,
+      "name": "Gut Shot"
+    },
+    {
+      "qty": 2,
+      "name": "Moment's Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Pulse of Murasa"
+    },
+    {
+      "qty": 3,
+      "name": "Relic of Progenitus"
+    }
+  ]
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing at least one one-mana spell",
       "Hands with early disruption like Thoughtseize",
-      "Hands that can reliably cast Death's Shadow by turn three"
+      "Hands that can reliably cast Death's Shadow by turn three",
+      "Keep any hand with a land and a discount spell (Thoughtseize, Inquisition, or similar) or a direct way to cast Death's Shadow (Flow State, Dark Ritual, Cabal Ritual).",
+      "Keep hands with 2+ lands if they include discard or ritual acceleration."
     ],
     "mulligan_criteria": [
       "Hands lacking one-mana spells or cheap cantrips",
       "Hands with only high-cost cards and no draw",
-      "Hands without interaction or graveyard synergy"
+      "Hands without interaction or graveyard synergy",
+      "Mulligan pure land hands, hands with only high-cost threats, or hands with multiple rituals but no way to cast Shadow."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play one-mana spells to build the graveyard and disrupt the opponent",
       "Use Thoughtseize to remove key threats or combo pieces",
-      "Prioritize land drops to ensure smooth mana base"
+      "Prioritize land drops to ensure smooth mana base",
+      "Turn 1: Play a land, cast Thoughtseize on a key answer or win condition.",
+      "If holding rituals, save them for turn 2.",
+      "Turn 2: Cast a ritual (Dark/Cabal/Flow State), then cast Death's Shadow.",
+      "If the opponent has early threats, use Thoughtseize to remove removal or keep hand clear.",
+      "Land sequencing: Start with a dual land (Underground Sea, Underground River, etc.) if possible, or a basic Swamp."
     ],
     "mid_game": [
       "Cast Death's Shadow once the graveyard is sufficiently populated",
       "Use Flow State to refill the hand and maintain tempo",
-      "Trade efficiently to keep the board clear for the scaled threat"
+      "Trade efficiently to keep the board clear for the scaled threat",
+      "Mana is king",
+      "always keep open mana for counterspells or protection if running them, but prioritize casting Shadow.",
+      "Manage hand by using Thoughtseize to strip answers to Shadow or combo pieces.",
+      "Graveyard is a resource for rituals",
+      "avoid self-mill unless necessary.",
+      "Commit Shadow immediately if you can cast it for 2 mana and the board is clear or you have removal."
     ],
     "late_game": [
       "Repeatedly cast Flow State to generate overwhelming card advantage",
       "Attack with Death's Shadow while using discard to strip remaining answers",
-      "Grind out the game by out-valuing the opponent's resource pool"
+      "Grind out the game by out-valuing the opponent's resource pool",
+      "Death's Shadow attacking for lethal, often supported by discard to clear blockers or rituals to cast it multiple times.",
+      "Flow State can tutor for Shadow or other threats to close out games.",
+      "Go all-in when you have a clear path to lethal, the opponent has no sweepers in hand, or you've established a board advantage that they cannot easily reset."
     ]
   },
   "key_cards": [
@@ -58,7 +75,12 @@
   "sequencing_tips": [
     "Hold Thoughtseize for the opponent's most impactful card rather than using it preemptively",
     "Cast Flow State after the opponent commits resources to maximize value",
-    "Prioritize graveyard depth before casting Death's Shadow to ensure it enters the battlefield at a threatening size"
+    "Prioritize graveyard depth before casting Death's Shadow to ensure it enters the battlefield at a threatening size",
+    "Common mistake: overpaying for Shadow or failing to track opponent's life total.",
+    "Unique interaction: Flow State can tutor for Shadow or other threats, but be careful of graveyard hate.",
+    "Always calculate your life total carefully",
+    "a single damage spell can make Shadow uncastable.",
+    "In Unknown format, adapt to specific rulesets, but the core life-total math remains critical."
   ],
   "matchups": [
     {
@@ -87,6 +109,21 @@
         "Card draw engines",
         "Lifelink threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells. Cast Shadow at end step or when they're tapped out. Use Flow State to tutor around counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Aggressive discard to hit their ramp spells. Use Thoughtseize to strip key mana rocks. Pressure them before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Track their life total to know when they can cast Shadow. Use Thoughtseize to strip their rituals or Shadow. Prioritize keeping lands and discard spells.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -94,10 +131,14 @@
     "Board wipes",
     "Graveyard hate",
     "Efficient removal",
-    "Counterspells"
+    "Counterspells",
+    "Watch for sweepers (Wrath, Go for the Throat), hard removal (Path, Murder), and combo win conditions.",
+    "Note when they tap out for a threat vs. when they hold up mana for interaction.",
+    "Track their life total carefully, as it dictates Shadow's casting cost."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:35:03+00:00",
     "model": "local-model",
@@ -113,7 +154,9 @@
       "http_status": 200,
       "used_for_fields": [
         "(failed extraction)"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     },
     {
       "publisher": "Cards Realm",
@@ -124,7 +167,9 @@
       "http_status": 200,
       "used_for_fields": [
         "(failed extraction)"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     },
     {
       "publisher": "builder_llm_default",
@@ -135,7 +180,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

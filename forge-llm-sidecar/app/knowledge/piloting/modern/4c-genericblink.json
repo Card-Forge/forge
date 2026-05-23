@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with two or more lands and a signature creature",
       "Hands containing early bounce spells or removal",
-      "Hands with mana dorks or ramp to smooth the four-color base"
+      "Hands with mana dorks or ramp to smooth the four-color base",
+      "Keep hands with 2-3 lands (including basics for four-color), at least one instant-speed blink enabler, and a one- or two-mana creature."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands",
       "Hands lacking bounce effects or signature creatures",
-      "Hands with only high-cost finishers and no early plays"
+      "Hands with only high-cost finishers and no early plays",
+      "Mulligan if you have three or more non-basic lands without fetch/shock support, multiple lands with no spells, or only high-cost threats with no interaction or blink spells."
     ],
     "examples": []
   },
@@ -25,17 +27,31 @@
     "early_game": [
       "Play lands and low-cost creatures to establish board presence",
       "Use early bounce spells to disrupt opponent's early threats",
-      "Prioritize mana development to support the four-color base"
+      "Prioritize mana development to support the four-color base",
+      "Turn 1: Play a land, optionally cast a one-mana cantrip or early threat.",
+      "Turn 2: Cast a blink spell on your creature or a cheap threat to trigger ETB, then follow up with another spell.",
+      "Prioritize establishing board presence with value-generating creatures while holding up interaction for key threats.",
+      "Sequence mana to ensure you can blink on the opponent's turn if needed."
     ],
     "mid_game": [
       "Begin cycling signature creatures to trigger ETB abilities repeatedly",
       "Trade opponent's threats for your own using bounce effects",
-      "Maintain card advantage by bouncing creatures instead of destroying them"
+      "Maintain card advantage by bouncing creatures instead of destroying them",
+      "Preserve mana for instant-speed interaction and blink spells.",
+      "Avoid overcommitting to the board without blink enablers ready.",
+      "Use the graveyard strategically if the deck includes recursion, but remain vigilant against hate cards.",
+      "Commit threats only when you have a plan to blink them or protect them.",
+      "If the opponent has removal, hold back high-value targets until you can blink them into safety or answer their interaction.",
+      "Use bounce effects to temporarily remove aggressive threats."
     ],
     "late_game": [
       "Focus on closing the game with efficient combat tricks and removal",
       "Use board wipes selectively to clear the way for your signature creatures",
-      "Leverage mana advantage to cast multiple spells per turn"
+      "Leverage mana advantage to cast multiple spells per turn",
+      "Phlage, Titan of Fire's Fury is the primary win condition, often deployed after clearing the board or when the opponent has no interaction.",
+      "Quantum Riddler and Overlord of the Balemurk provide secondary win conditions through repeated value and board swings.",
+      "Go all-in when you have a clear path to lethal, the opponent has no interaction, or you can safely blink Phlage into a board-clearing ETB.",
+      "Commit when you've established card advantage and can out-value their remaining resources."
     ]
   },
   "key_cards": [
@@ -59,7 +75,13 @@
     "Always bounce your own creatures before bouncing opponent's threats to maximize ETB triggers",
     "Prioritize mana development in the early game to avoid being stuck with uncastable spells",
     "Use removal spells to handle threats that cannot be bounced, preserving bounce effects for recurring value",
-    "Sequence board wipes after bouncing your own creatures to avoid losing them"
+    "Sequence board wipes after bouncing your own creatures to avoid losing them",
+    "Blink effects resolve as a single spell, making them hard to counter with single-target counters.",
+    "Be mindful of 'enter the battlefield' vs 'leaves the battlefield' triggers.",
+    "Don't blink creatures with negative ETB effects.",
+    "Coordinate your mana carefully due to the four-color requirement",
+    "fetch lands and shock lands are critical.",
+    "Common mistake: overcommitting to the board without a blink enabler ready, leaving you vulnerable to removal or board wipes."
   ],
   "matchups": [
     {
@@ -88,6 +110,21 @@
         "Value creatures",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple low-cost spells to force counter windows, employ instant-speed interaction to clear the way, and rely on blink effects that resolve as a single spell or use alternative costs. Chain triggers to out-value their counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development, use bounce/blink to return their ramp artifacts/creatures, and prioritize fast threats that can close the game before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-valuing through better card draw, more efficient blink enablers, and superior sequencing. Prioritize protecting your value engines and disrupting their blink triggers with targeted removal or counters.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +132,14 @@
     "Abrupt Decay",
     "Fatal Push",
     "Beast Within",
-    "Rest in Peace"
+    "Rest in Peace",
+    "Watch for counterspells, targeted removal, and board wipes.",
+    "Note when opponents save removal for specific threats.",
+    "Track graveyard activity if facing combo or recursion decks, and monitor mana development to anticipate their next play."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:49:31+00:00",
     "model": "local-model",
@@ -114,7 +155,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with a 1-drop Human and a land",
       "Hands containing Thalia's Lieutenant and early mana",
-      "Hands with two 2-drop Humans and a land"
+      "Hands with two 2-drop Humans and a land",
+      "Keep hands with 2-3 lands (preferably shock/duals), 1-2 one-drops (e.g., Kitesail Freebooter, Legion Warboss, or similar), and a Thalia or Warden.",
+      "You need early pressure to set up Thalia\u2019s tax and Warden\u2019s scry engine."
     ],
     "mulligan_criteria": [
       "Hands with only 3+ mana creatures",
       "Hands lacking early mana sources",
-      "Hands with no early board presence"
+      "Hands with no early board presence",
+      "Mulligan if you have >3 lands, no one-drops, or a hand full of removal/tricks with no early threats."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Play lands and 1-2 drop Humans on curve",
       "Prioritize Thalia's Lieutenant to tax opponent's early spells",
-      "Establish a wide board before turn 3"
+      "Establish a wide board before turn 3",
+      "Turn 1: Play a land, then drop a one-drop.",
+      "If you have a double-swap land, sequence it to ensure colored mana for tricks.",
+      "Turn 2: Play a second land, drop Thalia or a second one-drop.",
+      "Attack immediately with haste creatures to force unfavorable blocks or removal.",
+      "Prioritize playing lands that enter untapped if possible to maintain mana flexibility for combat tricks."
     ],
     "mid_game": [
       "Cast Warden of the Inner Sky to maximize combat damage",
       "Deploy Thalia, Guardian of Thraben to tax removal and tutors",
-      "Trade efficiently while keeping board presence"
+      "Trade efficiently while keeping board presence",
+      "Conserve mana for combat tricks and removal rather than overcommitting to attacks.",
+      "Use Warden\u2019s scry to dig for lands when mana-screwed or for specific threats when you\u2019re behind.",
+      "Track your graveyard if facing discard or graveyard hate, as Thalia and Warden are vulnerable to targeted removal.",
+      "Commit threats when the opponent has no removal or sweepers, or when you can trade up using tricks.",
+      "Hold back if they have spot removal or a sweeper in play",
+      "use Thalia to tax their blockers and force unfavorable combat math."
     ],
     "late_game": [
       "Push damage through pumped Human swarms",
       "Maintain aggressive pressure until opponent runs out of resources",
-      "Use tax effects to buy time for additional attackers"
+      "Use tax effects to buy time for additional attackers",
+      "Warden of the Inner Sky (card advantage + evasion), Legion Warboss (double strike + +1/+1 counter engine), and Thalia (tax + tax on blockers).",
+      "Win by trading up with tricks, attacking with haste/vigilance creatures, and using Warden to dig through their layers until you reach lethal.",
+      "Go all-in when the opponent has no removal, has already used a sweeper, or is at lethal range.",
+      "Commit with tricks to clear blockers and attack with all haste creatures.",
+      "If you have Warden and a clear path to value, commit to out-drawing them."
     ]
   },
   "key_cards": [
@@ -58,7 +77,12 @@
   "sequencing_tips": [
     "Hold up red for instant-speed effects if available",
     "Cast Thalia's Lieutenant before committing multiple attackers to tax responses",
-    "Use Warden of the Inner Sky's pump in the same combat phase as a wide board"
+    "Use Warden of the Inner Sky's pump in the same combat phase as a wide board",
+    "Common mistakes include overcommitting to combat without accounting for tricks/removal, forgetting Thalia\u2019s tax applies to opponent\u2019s non-human spells, and not tracking the opponent\u2019s graveyard.",
+    "Warden\u2019s scry is a tool, not a free card",
+    "use it strategically to dig for lands or threats.",
+    "In mirrors, Leyline of Punishment can be a game-ender if you can cast it.",
+    "Always track opponent\u2019s removal and sweeper counts before committing to attacks."
   ],
   "matchups": [
     {
@@ -87,16 +111,45 @@
         "Ramp spells",
         "Board wipes"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Warden to dig for tricks or lands. Attack with multiple cheap threats to force counter decisions. Prioritize one-drops and haste creatures that are hard to counter effectively. Save removal for their counterspells if they\u2019re playing a control shell.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Thalia is your primary answer; tax their non-human ramp creatures. Use removal/tricks to kill their early threats before they stabilize. Attack early to race before they can cast their finishers. Don\u2019t overcommit to trades\u2014preserve Warden for value.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal and combat tricks, then use Warden to out-value them. Don\u2019t overextend; trade efficiently and use Thalia to tax their blockers. If they\u2019re playing humans, focus on combat math and sideboard hate.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early to force mistakes and force them to use removal on low-value threats. Use Warden to dig through their layers and find answers. Save tricks for their removal and attack with haste to bypass sweepers. Don\u2019t let them stabilize\u2014keep the pressure on.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Combat math is king. Use tricks to clear blockers and trade up. Track opponent\u2019s tricks and removal. Sideboard Leyline of Punishment and Rest in Peace are crucial; if you can cast Leyline, it often wins the game. Prioritize Warden for card advantage and Warboss for double strike.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Lightning Strike",
     "Abrupt Decay",
     "Supreme Verdict",
-    "Beast Within"
+    "Beast Within",
+    "Watch for sweepers (e.g., Wrath of God, Day of Judgment), spot removal (Path to Exile, Lightning Strike), and combo win conditions.",
+    "Note if the opponent is playing non-human decks (Thalia\u2019s tax applies) or if they\u2019re ramping out of control.",
+    "Track their graveyard if they play discard or sacrifice engines."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:25:12+00:00",
     "model": "local-model",
@@ -112,6 +165,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

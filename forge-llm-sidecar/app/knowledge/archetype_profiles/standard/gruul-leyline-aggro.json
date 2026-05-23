@@ -1,0 +1,381 @@
+{
+  "schema_version": 1,
+  "name": "Gruul Leyline Aggro",
+  "format": "standard",
+  "colors": [
+    "R",
+    "G"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Gruul Leyline Aggro is a fast, wide creature deck that leverages Leyline of Resonance to rapidly scale its early threats into massive blockers and attackers. By flooding the board with low-cost creatures, the deck generates exponential combat damage while maintaining board presence. The strategy relies on overwhelming opponents before they can stabilize, using aggressive sequencing to maximize the +1/+1 resonance effect.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 2,
+      "cards": [
+        "Razorkin Needlehead"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Turn Inside Out"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 11,
+      "cards": [
+        "Emberheart Challenger",
+        "Leyline of Resonance",
+        "Slickshot Show-Off"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 33,
+      "cards": [
+        "Burnout Bashtronaut",
+        "Callous Sell-Sword",
+        "Emberheart Challenger",
+        "Full Bore",
+        "Hexing Squelcher",
+        "Hired Claw",
+        "Leyline of Resonance",
+        "Nova Hellkite",
+        "Razorkin Needlehead",
+        "Slickshot Show-Off",
+        "Sunspine Lynx"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 23,
+      "cards": [
+        "Abrade",
+        "Dreadmaw's Ire",
+        "Hired Claw",
+        "Nova Hellkite",
+        "Pyroclasm",
+        "Razorkin Needlehead",
+        "Shock",
+        "Sunspine Lynx"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 15
+    },
+    "wrath": {
+      "target_count": 8,
+      "cards": [
+        "Leyline of Resonance",
+        "Pyroclasm"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 19,
+      "cards": [
+        "Emberheart Challenger",
+        "Hexing Squelcher",
+        "Leyline of Resonance",
+        "Slickshot Show-Off",
+        "Snakeskin Veil"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 4,
+      "cards": [
+        "Turn Inside Out"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 14,
+      "cards": [
+        "Burnout Bashtronaut",
+        "Emberheart Challenger",
+        "Leyline of Resonance",
+        "Slickshot Show-Off"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Leyline of Resonance"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 13,
+      "cards": [
+        "Emberheart Challenger",
+        "Leyline of Resonance",
+        "Slickshot Show-Off",
+        "Sunspine Lynx"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 18,
+      "cards": [
+        "Emberheart Challenger",
+        "Leyline of Resonance",
+        "Slickshot Show-Off",
+        "Stomping Ground",
+        "Thornspire Verge"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 20,
+      "cards": [
+        "Mountain",
+        "Stomping Ground",
+        "Thornspire Verge"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.65
+  },
+  "dual_role_cards": [
+    {
+      "card": "Burnout Bashtronaut",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emberheart Challenger",
+      "roles": [
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hexing Squelcher",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hired Claw",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leyline of Resonance",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nova Hellkite",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroclasm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Razorkin Needlehead",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Slickshot Show-Off",
+      "roles": [
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunspine Lynx",
+      "roles": [
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thornspire Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Turn Inside Out",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Drop Leyline of Resonance before playing multiple creatures to maximize cumulative buffs",
+    "Hold Slickshot Show-Off if you suspect a board wipe, otherwise play it immediately for tempo",
+    "Use Emberheart Challenger's fight ability after Leyline is active to create massive combat math",
+    "Prioritize attacking with the largest creatures to force difficult blocks",
+    "Leyline of Resonance must be in your opening hand to start in play"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Leyline of Resonance as soon as mana allows"
+    },
+    {
+      "trigger": "early game",
+      "line": "Deploy Slickshot Show-Off to apply immediate pressure and trade"
+    },
+    {
+      "trigger": "early game",
+      "line": "Attack with available creatures to establish a clock"
+    }
+  ],
+  "kill_priority": [
+    "Burnout Bashtronaut",
+    "Emberheart Challenger",
+    "Leyline of Resonance",
+    "Slickshot Show-Off",
+    "Callous Sell-Sword",
+    "Full Bore",
+    "Hexing Squelcher",
+    "Hired Claw"
+  ],
+  "interaction_to_disrupt": [
+    "Emberheart Challenger",
+    "Hexing Squelcher",
+    "Leyline of Resonance",
+    "Slickshot Show-Off",
+    "Snakeskin Veil",
+    "Abrade",
+    "Dreadmaw's Ire",
+    "Hired Claw"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/gruul-leyline-aggro.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

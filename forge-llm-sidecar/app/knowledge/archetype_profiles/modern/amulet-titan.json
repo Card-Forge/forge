@@ -1,0 +1,540 @@
+{
+  "schema_version": 1,
+  "name": "Amulet Titan",
+  "format": "modern",
+  "colors": [
+    "U",
+    "R",
+    "G"
+  ],
+  "strategy_type": "ramp",
+  "expected_deck_total": 60,
+  "macro_plan": "Amulet Titan is a skill-intensive Modern strategy that combines explosive ramp with a toolbox-style land package and intricate sequencing. It aims to deploy Primeval Titan as early as turn two to snowball into a winning position, while maintaining enough interaction and redundancy to grind through disruption in longer games.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 15,
+      "cards": [
+        "Cultivator Colossus",
+        "Explore",
+        "Spelunking",
+        "Urza's Saga",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Cultivator Colossus",
+        "Spelunking"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 18,
+      "cards": [
+        "Amulet of Vigor",
+        "Green Sun's Zenith",
+        "Primeval Titan",
+        "Summoner's Pact",
+        "Tolaria West",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 9,
+      "cards": [
+        "Amulet of Vigor",
+        "Cultivator Colossus",
+        "Primeval Titan"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 23,
+      "cards": [
+        "Amulet of Vigor",
+        "Arboreal Grazer",
+        "Collector Ouphe",
+        "Cultivator Colossus",
+        "Dryad Arbor",
+        "Dryad of the Ilysian Grove",
+        "Icetill Explorer",
+        "Primeval Titan",
+        "Six",
+        "Spelunking"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Amulet of Vigor",
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Fire Magic",
+        "Force of Vigor",
+        "Ghost Quarter",
+        "Simic Growth Chamber",
+        "Valakut, the Molten Pinnacle"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Fire Magic"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Amulet of Vigor",
+        "Primeval Titan"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Bojuka Bog",
+        "Icetill Explorer",
+        "Shifting Woodland",
+        "Simic Growth Chamber",
+        "Six"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 15,
+      "cards": [
+        "Amulet of Vigor",
+        "Golgari Rot Farm",
+        "Gruul Turf",
+        "Icetill Explorer",
+        "Simic Growth Chamber",
+        "Six"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Amulet of Vigor",
+        "Primeval Titan"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 5,
+      "cards": [
+        "Cultivator Colossus",
+        "Primeval Titan"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 10,
+      "cards": [
+        "Amulet of Vigor",
+        "Primeval Titan",
+        "Spelunking"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Dismember"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 42,
+      "cards": [
+        "Amulet of Vigor",
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Crumbling Vestige",
+        "Cultivator Colossus",
+        "Dryad Arbor",
+        "Ghost Quarter",
+        "Golgari Rot Farm",
+        "Gruul Turf",
+        "Hanweir Battlements",
+        "Kessig Wolf Run",
+        "Mirrorpool",
+        "Primeval Titan",
+        "Shifting Woodland",
+        "Simic Growth Chamber",
+        "Spelunking",
+        "The Mycosynth Gardens",
+        "Tolaria West",
+        "Urza's Saga",
+        "Valakut, the Molten Pinnacle",
+        "Vesuva"
+      ],
+      "mainboard_count": 39,
+      "sideboard_count": 3
+    },
+    "lands": {
+      "target_count": 34,
+      "cards": [
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Crumbling Vestige",
+        "Dryad Arbor",
+        "Forest",
+        "Ghost Quarter",
+        "Golgari Rot Farm",
+        "Gruul Turf",
+        "Hanweir Battlements",
+        "Kessig Wolf Run",
+        "Mirrorpool",
+        "Shifting Woodland",
+        "Simic Growth Chamber",
+        "The Mycosynth Gardens",
+        "Tolaria West",
+        "Urza's Saga",
+        "Valakut, the Molten Pinnacle",
+        "Vesuva"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 3
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.26
+  },
+  "dual_role_cards": [
+    {
+      "card": "Amulet of Vigor",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crumbling Vestige",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cultivator Colossus",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dryad Arbor",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Magic",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Quarter",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Golgari Rot Farm",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gruul Turf",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hanweir Battlements",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Icetill Explorer",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kessig Wolf Run",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mirrorpool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Primeval Titan",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shifting Woodland",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Simic Growth Chamber",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Six",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spelunking",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Mycosynth Gardens",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tolaria West",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Valakut, the Molten Pinnacle",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vesuva",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "When Amulet of Vigor and a bounce land trigger, ensure Amulet's untap resolves before the land's return trigger to tap it for mana first.",
+    "Sequence Amulet of Vigor and lands carefully to dodge disruption; sometimes play Amulet first, sometimes lay lands out first.",
+    "Use Summoner's Pact only when you can win that turn or guarantee mana for the upkeep cost.",
+    "Float mana and plan ahead for Urza's Saga's Chapter III sacrifice timing.",
+    "Chain Cultivator Colossus land drops while Amulet or Spelunking is active to maximize card draw and creature size."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Arboreal Grazer on turn 1 for a land and blocker"
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence Amulet of Vigor and bounce lands carefully to dodge disruption"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Explore and Spelunking to smooth land drops and draw cards"
+    }
+  ],
+  "kill_priority": [
+    "Amulet of Vigor",
+    "Primeval Titan",
+    "Cultivator Colossus",
+    "Spelunking",
+    "Arboreal Grazer",
+    "Collector Ouphe",
+    "Dryad Arbor",
+    "Dryad of the Ilysian Grove"
+  ],
+  "interaction_to_disrupt": [
+    "Amulet of Vigor",
+    "Primeval Titan",
+    "Bojuka Bog",
+    "Boseiju, Who Endures",
+    "Fire Magic",
+    "Force of Vigor",
+    "Ghost Quarter",
+    "Simic Growth Chamber"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/amulet-titan.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

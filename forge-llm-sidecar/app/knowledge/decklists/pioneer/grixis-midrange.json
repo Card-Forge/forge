@@ -1,0 +1,161 @@
+{
+  "archetype": "Grixis Midrange",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/grixis-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Angrath's Rampage"
+    },
+    {
+      "qty": 3,
+      "name": "Blightstep Pathway"
+    },
+    {
+      "qty": 3,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 3,
+      "name": "Clearwater Pathway"
+    },
+    {
+      "qty": 2,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 1,
+      "name": "Drown in the Loch"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Woe"
+    },
+    {
+      "qty": 3,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 3,
+      "name": "Flashback"
+    },
+    {
+      "qty": 4,
+      "name": "Flow State"
+    },
+    {
+      "qty": 1,
+      "name": "Go Blank"
+    },
+    {
+      "qty": 1,
+      "name": "Graveyard Trespasser"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Kolaghan's Command"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 2,
+      "name": "Prismari Charm"
+    },
+    {
+      "qty": 3,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 2,
+      "name": "Riverglide Pathway"
+    },
+    {
+      "qty": 2,
+      "name": "Sheoldred, the Apocalypse"
+    },
+    {
+      "qty": 3,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 2,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 2,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Xander's Lounge"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Abrade"
+    },
+    {
+      "qty": 2,
+      "name": "Day of Black Sun"
+    },
+    {
+      "qty": 1,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Go Blank"
+    },
+    {
+      "qty": 1,
+      "name": "Molten Collapse"
+    },
+    {
+      "qty": 3,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 1,
+      "name": "Ral, Crackling Wit"
+    },
+    {
+      "qty": 3,
+      "name": "Unlicensed Hearse"
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "archetype": "Hardened Scales",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/hardened-scales.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Agatha's Soul Cauldron"
+    },
+    {
+      "qty": 4,
+      "name": "Arcbound Ravager"
+    },
+    {
+      "qty": 2,
+      "name": "Arcbound Worker"
+    },
+    {
+      "qty": 2,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 3,
+      "name": "Darksteel Citadel"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Grove of the Burnwillows"
+    },
+    {
+      "qty": 1,
+      "name": "Hangarback Walker"
+    },
+    {
+      "qty": 4,
+      "name": "Hardened Scales"
+    },
+    {
+      "qty": 1,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 4,
+      "name": "Inkmoth Nexus"
+    },
+    {
+      "qty": 3,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 1,
+      "name": "Pendelhaven"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Skateboard"
+    },
+    {
+      "qty": 2,
+      "name": "Tamiyo's Safekeeping"
+    },
+    {
+      "qty": 2,
+      "name": "Terrasymbiosis"
+    },
+    {
+      "qty": 1,
+      "name": "The Ooze"
+    },
+    {
+      "qty": 1,
+      "name": "The Ozolith"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 4,
+      "name": "Walking Ballista"
+    },
+    {
+      "qty": 2,
+      "name": "Welding Jar"
+    },
+    {
+      "qty": 4,
+      "name": "Zabaz, the Glimmerwasp"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 2,
+      "name": "Heroic Intervention"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Claim"
+    },
+    {
+      "qty": 1,
+      "name": "Veil of Summer"
+    },
+    {
+      "qty": 2,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 2,
+      "name": "Whipflare"
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+{
+  "archetype": "Ygra, Eater of All",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/ygra-eater-of-all.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Altar of Dementia"
+    },
+    {
+      "qty": 1,
+      "name": "Arnyn, Deathbloom Botanist"
+    },
+    {
+      "qty": 1,
+      "name": "Ashnod's Altar"
+    },
+    {
+      "qty": 1,
+      "name": "Assassin's Trophy"
+    },
+    {
+      "qty": 1,
+      "name": "Bane of Progress"
+    },
+    {
+      "qty": 1,
+      "name": "Beledros Witherbloom"
+    },
+    {
+      "qty": 1,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Artist"
+    },
+    {
+      "qty": 1,
+      "name": "Braids, Arisen Nightmare"
+    },
+    {
+      "qty": 1,
+      "name": "Brawn"
+    },
+    {
+      "qty": 1,
+      "name": "Camellia, the Seedmiser"
+    },
+    {
+      "qty": 1,
+      "name": "Casal, Lurkwood Pathfinder"
+    },
+    {
+      "qty": 1,
+      "name": "Cauldron Familiar"
+    },
+    {
+      "qty": 1,
+      "name": "Cauldron of Essence"
+    },
+    {
+      "qty": 1,
+      "name": "Chatterfang, Squirrel General"
+    },
+    {
+      "qty": 1,
+      "name": "Close Encounter"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Compy Swarm"
+    },
+    {
+      "qty": 1,
+      "name": "Culling the Weak"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Decorum Dissertation"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Woe"
+    },
+    {
+      "qty": 1,
+      "name": "Entish Restoration"
+    },
+    {
+      "qty": 1,
+      "name": "Experimental Confectioner"
+    },
+    {
+      "qty": 1,
+      "name": "Fallen Ideal"
+    },
+    {
+      "qty": 1,
+      "name": "Farseek"
+    },
+    {
+      "qty": 1,
+      "name": "Feed the Swarm"
+    },
+    {
+      "qty": 1,
+      "name": "Flare of Cultivation"
+    },
+    {
+      "qty": 13,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Garruk's Uprising"
+    },
+    {
+      "qty": 1,
+      "name": "Grave Researcher"
+    },
+    {
+      "qty": 1,
+      "name": "Greta, Sweettooth Scourge"
+    },
+    {
+      "qty": 1,
+      "name": "Heroic Intervention"
+    },
+    {
+      "qty": 1,
+      "name": "Innkeeper's Talent"
+    },
+    {
+      "qty": 1,
+      "name": "Invasion of Ikoria"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Moseo, Vein's New Dean"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Lore"
+    },
+    {
+      "qty": 1,
+      "name": "Night of the Sweets' Revenge"
+    },
+    {
+      "qty": 1,
+      "name": "Ninja Pizza"
+    },
+    {
+      "qty": 1,
+      "name": "Osteomancer Adept"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Peregrin Took"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Arena"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Plaguelord"
+    },
+    {
+      "qty": 1,
+      "name": "Pitiless Plunderer"
+    },
+    {
+      "qty": 1,
+      "name": "Professor Dellian Fel"
+    },
+    {
+      "qty": 1,
+      "name": "Rabid Attack"
+    },
+    {
+      "qty": 1,
+      "name": "Rancor"
+    },
+    {
+      "qty": 1,
+      "name": "Rapacious Guest"
+    },
+    {
+      "qty": 1,
+      "name": "Ravenous Squirrel"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rise of the Dread Marn"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Sakura-Tribe Elder"
+    },
+    {
+      "qty": 1,
+      "name": "Savvy Hunter"
+    },
+    {
+      "qty": 1,
+      "name": "Scavenger's Talent"
+    },
+    {
+      "qty": 1,
+      "name": "Scute Swarm"
+    },
+    {
+      "qty": 1,
+      "name": "Season of Loss"
+    },
+    {
+      "qty": 1,
+      "name": "Skullclamp"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "South Wind Avatar"
+    },
+    {
+      "qty": 13,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Wood"
+    },
+    {
+      "qty": 1,
+      "name": "Teacher's Pest"
+    },
+    {
+      "qty": 1,
+      "name": "Thornvault Forager"
+    },
+    {
+      "qty": 1,
+      "name": "Toxic Deluge"
+    },
+    {
+      "qty": 1,
+      "name": "Trail of Crumbs"
+    },
+    {
+      "qty": 1,
+      "name": "Twitching Doll"
+    },
+    {
+      "qty": 1,
+      "name": "Viridian Revel"
+    },
+    {
+      "qty": 1,
+      "name": "Warren Soultrader"
+    },
+    {
+      "qty": 1,
+      "name": "Wastewood Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Whispersilk Cloak"
+    },
+    {
+      "qty": 1,
+      "name": "Woodland Cemetery"
+    },
+    {
+      "qty": 1,
+      "name": "Ygra, Eater of All"
+    },
+    {
+      "qty": 1,
+      "name": "Zulaport Cutthroat"
+    }
+  ],
+  "sideboard": []
+}

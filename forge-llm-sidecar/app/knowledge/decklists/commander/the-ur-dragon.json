@@ -1,0 +1,469 @@
+{
+  "archetype": "The Ur-Dragon",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/the-ur-dragon.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancient Gold Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Anguished Unmaking"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Atarka, World Render"
+    },
+    {
+      "qty": 1,
+      "name": "Badlands"
+    },
+    {
+      "qty": 1,
+      "name": "Bayou"
+    },
+    {
+      "qty": 1,
+      "name": "Betor, Kin to All"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Call the Spirit Dragons"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Cyclonic Rift"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Dracogenesis"
+    },
+    {
+      "qty": 1,
+      "name": "Dragon Tempest"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonlord Dromoka"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonspeaker Shaman"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonstorm Globe"
+    },
+    {
+      "qty": 1,
+      "name": "Dromoka, the Eternal"
+    },
+    {
+      "qty": 1,
+      "name": "Dryad of the Ilysian Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Eerie Ultimatum"
+    },
+    {
+      "qty": 1,
+      "name": "Esika, God of the Tree"
+    },
+    {
+      "qty": 1,
+      "name": "Fierce Guardianship"
+    },
+    {
+      "qty": 1,
+      "name": "Garruk's Uprising"
+    },
+    {
+      "qty": 1,
+      "name": "Genesis Wave"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Haven of the Spirit Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Helm of Awakening"
+    },
+    {
+      "qty": 1,
+      "name": "Heroic Intervention"
+    },
+    {
+      "qty": 1,
+      "name": "Ignoble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Indatha Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Jetmir's Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Karrthus, Tyrant of Jund"
+    },
+    {
+      "qty": 1,
+      "name": "Ketria Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Klauth, Unrivaled Ancient"
+    },
+    {
+      "qty": 1,
+      "name": "Kokusho, the Evening Star"
+    },
+    {
+      "qty": 1,
+      "name": "Kolaghan, the Storm's Fury"
+    },
+    {
+      "qty": 1,
+      "name": "Leyline of Mutation"
+    },
+    {
+      "qty": 1,
+      "name": "Leyline of Transformation"
+    },
+    {
+      "qty": 1,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 1,
+      "name": "Maelstrom of the Spirit Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Drain"
+    },
+    {
+      "qty": 1,
+      "name": "Miirym, Sentinel Wyrm"
+    },
+    {
+      "qty": 1,
+      "name": "Morophon, the Boundless"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Amber"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jasper"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Lore"
+    },
+    {
+      "qty": 1,
+      "name": "Neriv, Heart of the Storm"
+    },
+    {
+      "qty": 1,
+      "name": "Noble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Old Gnawbone"
+    },
+    {
+      "qty": 1,
+      "name": "Orb of Dragonkind"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 1,
+      "name": "Plateau"
+    },
+    {
+      "qty": 1,
+      "name": "Raffine's Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Raugrin Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Rith, Liberated Primeval"
+    },
+    {
+      "qty": 1,
+      "name": "Roaming Throne"
+    },
+    {
+      "qty": 1,
+      "name": "Ruinous Ultimatum"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Sarkhan, Soul Aflame"
+    },
+    {
+      "qty": 1,
+      "name": "Savai Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Savannah"
+    },
+    {
+      "qty": 1,
+      "name": "Scaled Nurturer"
+    },
+    {
+      "qty": 1,
+      "name": "Scourge of Valkas"
+    },
+    {
+      "qty": 1,
+      "name": "Scrubland"
+    },
+    {
+      "qty": 1,
+      "name": "Selvala, Heart of the Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Silumgar, the Drifting Death"
+    },
+    {
+      "qty": 1,
+      "name": "Skyshroud Claim"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spara's Headquarters"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 1,
+      "name": "Stormscale Scion"
+    },
+    {
+      "qty": 1,
+      "name": "Stubborn Denial"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Taiga"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi's Protection"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Temur Ascendancy"
+    },
+    {
+      "qty": 1,
+      "name": "Temur Battlecrier"
+    },
+    {
+      "qty": 1,
+      "name": "The Great Henge"
+    },
+    {
+      "qty": 1,
+      "name": "The Ur-Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Three Visits"
+    },
+    {
+      "qty": 1,
+      "name": "Tiamat"
+    },
+    {
+      "qty": 1,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 1,
+      "name": "Tundra"
+    },
+    {
+      "qty": 1,
+      "name": "Two-Headed Hellkite"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 1,
+      "name": "Utter End"
+    },
+    {
+      "qty": 1,
+      "name": "Volcanic Island"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Foothills"
+    },
+    {
+      "qty": 1,
+      "name": "Xander's Lounge"
+    },
+    {
+      "qty": 1,
+      "name": "Zagoth Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Ziatora's Proving Ground"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "All-Out Assault"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Crux of Fate"
+    },
+    {
+      "qty": 1,
+      "name": "Jodah, Archmage Eternal"
+    },
+    {
+      "qty": 1,
+      "name": "Kindred Discovery"
+    },
+    {
+      "qty": 1,
+      "name": "Klauth's Will"
+    },
+    {
+      "qty": 1,
+      "name": "Marang River Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Diamond"
+    },
+    {
+      "qty": 1,
+      "name": "Nicol Bolas, the Ravager"
+    },
+    {
+      "qty": 1,
+      "name": "Sarkhan Unbroken"
+    },
+    {
+      "qty": 1,
+      "name": "Scavenger Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Sivitri, Dragon Master"
+    },
+    {
+      "qty": 1,
+      "name": "Skithiryx, the Blight Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Taurean Mauler"
+    },
+    {
+      "qty": 1,
+      "name": "Utvara Hellkite"
+    }
+  ]
+}

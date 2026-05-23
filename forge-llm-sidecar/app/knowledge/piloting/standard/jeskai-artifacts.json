@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more low-cost artifacts",
       "Early interaction paired with a ramp or draw engine",
-      "Simulacrum Synthesizer alongside cheap artifact enablers"
+      "Simulacrum Synthesizer alongside cheap artifact enablers",
+      "Keep hands with 2-3 lands (duals/talismans preferred), at least one of Simulacrum Synthesizer, Repurposing Bay, or United Battlefront, and 2-3 cheap instants/sorceries (e.g., Lightning Strike, Path to Exile, Consider, Opt).",
+      "Keep hands with mana rocks if paired with a turn-2 play."
     ],
     "mulligan_criteria": [
       "Four or more lands",
       "Late-game finishers without early plays",
-      "Hands lacking artifact synergy or interaction"
+      "Hands lacking artifact synergy or interaction",
+      "Mulligan to pure mana rocks, multiple lands with no artifacts, artifact-heavy hands with zero instants/sorceries, or hands lacking early interaction against aggro."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play cheap artifacts to trigger Simulacrum Synthesizer",
       "Establish a minimal board presence to apply pressure",
-      "Use early interaction to disrupt opponent's game plan"
+      "Use early interaction to disrupt opponent's game plan",
+      "Turn 1: Play a land and a talisman/mana rock, or cast a cheap instant/sorcery if you have free mana.",
+      "Turn 2: Deploy Simulacrum Synthesizer or an artifact engine, or cast a second cheap spell to trigger Repurposing Bay/United Battlefront.",
+      "Sequence lands to ensure you can cast a turn-2 spell and a turn-3 artifact, or vice versa.",
+      "Prioritize playing duals/talismans early to enable Jeskai's two-color requirements for removal and card draw."
     ],
     "mid_game": [
       "Activate Repurposing Bay to recycle dead cards into threats",
       "Scale artifact synergies to outpace opponent's development",
-      "Hold up mana for counterspells to protect key permanents"
+      "Hold up mana for counterspells to protect key permanents",
+      "Preserve instants/sorceries for engine triggers and removal",
+      "avoid overcommitting to casting spells just to make tokens without follow-up.",
+      "Use card draw (Consider, Opt, Thoughtcast) to cycle into threats or answers.",
+      "Manage graveyard carefully if playing Karn, the Great Creator or Engineered Plated Warbeast.",
+      "Track opponent's mana to time your spells when they're tapped out.",
+      "Commit threats when you have removal or protection ready to handle interaction."
     ],
     "late_game": [
       "Cast United Battlefront to wipe opposing boards and swing with your artifacts",
       "Leverage card advantage from Repurposing Bay to refill your hand",
-      "Close out games with repeated artifact triggers and combat damage"
+      "Close out games with repeated artifact triggers and combat damage",
+      "A fully fueled board of Clone tokens backed by artifact pumps (Engineered Plated Warbeast, Arcbound Ravager, Karn, the Great Creator), or a Karn Liberated / Urabrask the Hidden finish.",
+      "Simulacrum Synthesizer copying a pumped threat or Restoration Angel blinking a key artifact can close games.",
+      "Jeskai's removal can clear the path for a decisive attack.",
+      "Go all-in when you have card advantage secured, the opponent has no sweepers/counters in hand, or you've established a board state that forces them to overextend.",
+      "Commit when you can protect your threats with Lightning Greaves or Restoration Angel, and when your opponent's graveyard/mana is depleted."
     ]
   },
   "key_cards": [
@@ -59,7 +77,13 @@
     "Trigger Simulacrum Synthesizer before combat to maximize value",
     "Activate Repurposing Bay after opponent commits resources to the board",
     "Cast United Battlefront on your turn to immediately follow up with artifact attacks",
-    "Hold up colored mana for interaction before committing to artifact plays"
+    "Hold up colored mana for interaction before committing to artifact plays",
+    "Be mindful of the 'Clone' token name synergy",
+    "it doesn't interact with other token types or generic artifact synergies.",
+    "Simulacrum Synthesizer's upkeep ability is a powerful tool but requires careful mana management.",
+    "Repurposing Bay and United Battlefront trigger on any instant/sorcery, so even cheap removal or cantrips are valuable.",
+    "Avoid overcommitting to casting spells just to make tokens if you lack board presence or protection.",
+    "Watch for artifact hate (Rest in Peace, Leyline of the Void, Chalice of the Void) and have a plan to pivot to non-artifact threats or direct damage if needed."
   ],
   "matchups": [
     {
@@ -88,16 +112,35 @@
         "Card draw spells",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Chalice of the Void (if applicable), Thoughtcast to dig, or cast spells at instant speed when they're tapped out. Use Simulacrum Synthesizer ETB effect before they can react, or rely on artifact mana rocks that don't target. Cast instants/sorceries in response to their counterspells to trigger Repurposing Bay/United Battlefront before they resolve, turning their interaction into token generation.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Clone tokens. Use Path to Exile or Dovin\u2019s Veto on key ramp pieces. Don't let them stabilize; force them to interact with your board while you develop. Use Jeskai's card draw to out-resource their acceleration and close before they hit their late-game win conditions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize Karn, the Great Creator and Engineered Plated Warbeast for value. Use Restoration Angel and Lightning Greaves to protect key artifacts. Trade efficiently and out-draw them with Consider/Opt. Control the board with Simulacrum Synthesizer copying their key threats, and use Jeskai's removal to clear blockers before attacking.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Artifact destruction spells",
     "Board wipe effects",
     "Counterspell packages",
-    "Fast aggressive creatures"
+    "Fast aggressive creatures",
+    "Watch for sweepers (Wrath of God, Supreme Verdict, Cyclonic Rift), counterspells (Spell Pierce, Flusterstorm, Dovin\u2019s Veto), and hate cards (Chalice of the Void, Rest in Peace, Leyline of the Void).",
+    "Track opponent's mana and card count to predict when they can interact.",
+    "Note when they tap out for a single spell vs. holding up mana, and adjust your spell timing accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:54:37+00:00",
     "model": "local-model",
@@ -113,6 +156,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

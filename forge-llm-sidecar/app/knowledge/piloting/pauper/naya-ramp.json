@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Two to three lands in hand",
       "At least one early ramp spell or low-cost threat",
-      "Mana base coverage for W/R/G spells"
+      "Mana base coverage for W/R/G spells",
+      "Keep hands with 2-3 lands and at least one ramp spell (e.g., Skyshroud Claim, Farseek, or a mana creature) or a turn-2 land drop.",
+      "Prioritize hands with Utopia Sprawl or a 3-mana threat if paired with ramp."
     ],
     "mulligan_criteria": [
       "Four or more lands",
       "No ramp or early interaction",
-      "All cards cost four or more mana"
+      "All cards cost four or more mana",
+      "Mulligan pure land hands, hands with only 1-2 lands, or hands with multiple threats but zero ramp or fixing."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Prioritize land drops and ramp spells",
       "Play efficient threats to apply early pressure",
-      "Avoid overextending into removal"
+      "Avoid overextending into removal",
+      "Turn 1: Play a land, cast a ramp spell or play a mana creature.",
+      "Turn 2: Play a land, cast another ramp or a 2-mana threat.",
+      "Turn 3: Drop Utopia Sprawl if you have the mana, or cast a 3-mana threat like Generous Ent.",
+      "Sequence lands to ensure you hit 4-5 mana by turn 3-4.",
+      "Chain multiple ramp spells to hit 5 mana by turn 3 to drop Avenging Hunter or multiple threats."
     ],
     "mid_game": [
       "Trigger landfall synergies with Utopia Sprawl",
       "Deploy Generous Ent and Avenging Hunter for card advantage",
-      "Maintain board presence while filtering deck"
+      "Maintain board presence while filtering deck",
+      "Prioritize mana acceleration over card advantage early.",
+      "Don't overextend into removal",
+      "save Utopia Sprawl for your biggest threats.",
+      "Manage hand size by casting threats when you can't improve the board further.",
+      "Avoid flooding by converting excess ramp into card selection or threats once you hit 5 mana.",
+      "Commit threats when you have protection or can trade favorably."
     ],
     "late_game": [
       "Flood the board with large creatures",
       "Use excess mana to play multiple threats per turn",
-      "Close out games with overwhelming stats and card draw"
+      "Close out games with overwhelming stats and card draw",
+      "Avenging Hunter and Generous Ent with Utopia Sprawl are primary finishers.",
+      "Once you have a 6/6 or 7/7 with haste, push for lethal.",
+      "Use additional threats to overwhelm blockers or trade into sweepers.",
+      "Utopia Sprawl can also be cast on a cheaper threat to win combat or push damage.",
+      "Go all-in when you have Utopia Sprawl on board, a clear path to the opponent, and no immediate sweepers in play.",
+      "Also commit when you can trade threats favorably or when the opponent is at low life."
     ]
   },
   "key_cards": [
@@ -59,7 +79,13 @@
     "Play lands before ramp spells to maximize landfall triggers",
     "Hold up mana for counters or removal when facing interactive decks",
     "Deploy threats before ramp when ahead to pressure opponents",
-    "Prioritize card draw engines when behind to catch up"
+    "Prioritize card draw engines when behind to catch up",
+    "Common mistake: casting Utopia Sprawl on a 2-drop instead of a 4/5 threat.",
+    "Another: over-ramping into a dead hand.",
+    "Remember that Utopia Sprawl is an enchantment, so it can be destroyed by artifact/enchantment hate.",
+    "Sequence lands carefully to avoid flooding.",
+    "In the mirror, card advantage and efficient removal win games.",
+    "Always track their life total and board state before committing to a Utopia Sprawl play."
   ],
   "matchups": [
     {
@@ -88,16 +114,36 @@
         "Value engines",
         "Board control spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple threats in a row to force counterspells. Cast Utopia Sprawl on your most expensive threat to make it harder to counter or trade. Use cheap threats to bait counters. If they have heavy counter magic, pivot to enchantment-based strategies or sideboard in protection.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them with faster threats. Use Utopia Sprawl to win combat and stabilize. Bring in artifact/enchantment hate if they rely on it. Don't overcommit to big threats; trade favorably and pressure their life total.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-valuing. Use card draw, removal, and better sequencing. Utopia Sprawl on a cheaper threat can win trades. Track their hand to know when they have answers. Prioritize board presence and force them to use removal inefficiently.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggro creatures",
     "Board wipes and removal spells",
     "Countermagic and hand disruption",
-    "Land destruction and mana hate"
+    "Land destruction and mana hate",
+    "Watch for sweepers, targeted removal, and counterspells.",
+    "Note if the opponent is playing discard or hand disruption.",
+    "Track their mana development to predict when they can answer your threats.",
+    "Pay attention to graveyard activity if they play reanimation or recursion."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:41:22+00:00",
     "model": "local-model",
@@ -113,6 +159,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

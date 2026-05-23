@@ -1,0 +1,129 @@
+{
+  "archetype": "Affinity",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/affinity.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Arcbound Ravager"
+    },
+    {
+      "qty": 1,
+      "name": "Claws of Gix"
+    },
+    {
+      "qty": 3,
+      "name": "Emry, Lurker of the Loch"
+    },
+    {
+      "qty": 4,
+      "name": "Engineered Explosives"
+    },
+    {
+      "qty": 4,
+      "name": "Fiery Islet"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Kappa Cannoneer"
+    },
+    {
+      "qty": 3,
+      "name": "Metallic Rebuke"
+    },
+    {
+      "qty": 4,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 4,
+      "name": "Pinnacle Emissary"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowspear"
+    },
+    {
+      "qty": 3,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 1,
+      "name": "Skateboard"
+    },
+    {
+      "qty": 4,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 2,
+      "name": "Thoughtcast"
+    },
+    {
+      "qty": 4,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 4,
+      "name": "Weapons Manufacturing"
+    },
+    {
+      "qty": 1,
+      "name": "Welding Jar"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 2,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 2,
+      "name": "Galvanic Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 2,
+      "name": "Whipflare"
+    }
+  ]
+}

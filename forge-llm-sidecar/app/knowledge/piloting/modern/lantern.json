@@ -13,18 +13,21 @@
     "keep_criteria": [
       "Hands with 2-3 lands and at least one low-cost artifact or removal spell",
       "Hands containing Lantern of Insight or multiple milling artifacts",
-      "Hands with early interaction like Thoughtseize or Abrupt Decay"
+      "Hands with early interaction like Thoughtseize or Abrupt Decay",
+      "Keep hands with 2-3 lands (prioritizing duals/shocklands if available, otherwise basics), plus at least one of Ensnaring Bridge, Thoughtseize, or Whir of Invention.",
+      "Keep hands with discard spells if paired with a land or a protection/removal spell."
     ],
     "mulligan_criteria": [
       "Hands with too many lands or zero artifacts",
       "Hands lacking early game interaction or milling engines",
-      "Hands without a clear path to control the opponent's first few draws"
+      "Hands without a clear path to control the opponent's first few draws",
+      "Mulligan hands with 0-1 lands, multiple non-basic lands without fetch sources, or hands heavy on late-game threats with no early interaction or lock pieces."
     ],
     "examples": [
       {
         "hand": [
           "Lantern of Insight",
-          "Ghoulcaller’s Bell",
+          "Ghoulcaller\u2019s Bell",
           "Thoughtseize",
           "Island",
           "Mountain"
@@ -36,19 +39,36 @@
   },
   "game_plan": {
     "early_game": [
-      "Play low-cost artifacts like Ghoulcaller’s Bell and Codex Shredder to begin milling",
+      "Play low-cost artifacts like Ghoulcaller\u2019s Bell and Codex Shredder to begin milling",
       "Use discard spells like Thoughtseize and Inquisition of Kozilek to see the opponent's hand and disrupt their game plan",
-      "Establish mana base and play Inventor’s Fair for consistency"
+      "Establish mana base and play Inventor\u2019s Fair for consistency",
+      "Turn 1: Play a land, cast Thoughtseize/Duress if mana allows, or play a basic land.",
+      "If opening with Bridge, play land then Bridge, then discard.",
+      "Turn 2: Play second land, cast Whir of Invention if Lantern is in play, or play another discard/bridge.",
+      "Sequence lands to ensure you can hit your 2-drop and 3-drop turns consistently.",
+      "Prioritize getting Bridge online by turn 2, as it immediately pressures and enables Whir recursion."
     ],
     "mid_game": [
       "Use Lantern of Insight to view the top card and control the opponent's draws one by one",
       "Deploy Ensnaring Bridge to hold off attacks and buy time",
-      "Sequence milled cards to deny key combo pieces or lands based on the matchup"
+      "Sequence milled cards to deny key combo pieces or lands based on the matchup",
+      "Hoard mana for interaction and Whir of Invention triggers.",
+      "Lantern of Insight is your primary card advantage engine",
+      "protect it and use it to dig through your deck.",
+      "Graveyard hate (Rest in Peace/Surgical) is crucial against combo decks",
+      "deploy it early.",
+      "Avoid overcommitting with small creatures if the Bridge is still vulnerable or if you need mana for recursion."
     ],
     "late_game": [
       "Utilize Academy Ruins to loop graveyard artifacts and generate value",
       "Sequence damage with Pyrite Spellbomb or Ghirapur Aether Grid to close out the game",
-      "Aim to win by the clock, leaving the opponent at a tournament disadvantage"
+      "Aim to win by the clock, leaving the opponent at a tournament disadvantage",
+      "Ensnaring Bridge lock combined with small creatures (Knight of the Reliquary, Thalia's Lieutenant, or discard-induced card advantage).",
+      "Whir of Invention to recur Lantern for infinite card draw if you have enough mana/lands.",
+      "Attrition through discard and graveyard hate until the opponent runs out of resources.",
+      "Go all-in when the Bridge is established, you have removal for their threats, and you can pressure with creatures or discard to empty their hand.",
+      "Also commit when you can chain Whir of Invention to generate lethal or win the game via card advantage.",
+      "Push for the win when the opponent has no sweepers or artifact hate in hand."
     ]
   },
   "key_cards": [
@@ -58,7 +78,7 @@
       "notes": "Grants the ability to see the opponent's top card, enabling precise draw control."
     },
     {
-      "name": "Ghoulcaller’s Bell",
+      "name": "Ghoulcaller\u2019s Bell",
       "role": "Milling Artifact",
       "notes": "Low-cost artifact that mills one card at a time to manipulate the opponent's deck."
     },
@@ -93,7 +113,7 @@
       "notes": "Creates loops with graveyard artifacts to generate infinite value or damage."
     },
     {
-      "name": "Inventor’s Fair",
+      "name": "Inventor\u2019s Fair",
       "role": "Utility Land",
       "notes": "Searches for needed pieces and replaces artifacts sacrificed for their abilities."
     },
@@ -107,8 +127,13 @@
     "Know the combos, needs, and priorities of every deck you face by heart",
     "Control the opponent's draws one by one using Lantern of Insight",
     "Give more lands to Burn players, fewer lands to Amulet Titan players, and always give the same copy of Urza's Land to Tron players",
-    "Use Inventor’s Fair to replace artifacts after sacrificing them for their effects",
-    "Sequence milled cards to deny key combo pieces or force unfavorable draws"
+    "Use Inventor\u2019s Fair to replace artifacts after sacrificing them for their effects",
+    "Sequence milled cards to deny key combo pieces or force unfavorable draws",
+    "Common mistake: Overcommitting to Whir of Invention without enough mana to protect it or answer sweepers.",
+    "Another: Forgetting to use Thoughtseize on key combo pieces or removal on critical threats.",
+    "Unique interaction: Whir of Invention can target Lantern of Insight in your graveyard to recur it, enabling infinite card draw if you have enough lands/mana.",
+    "Also, Ensnaring Bridge can be targeted by Whir of Invention to recur it if it gets destroyed, but be careful of sacrifice outlets.",
+    "Always track the opponent's graveyard and hand size to make informed discard and recursion decisions."
   ],
   "matchups": [
     {
@@ -138,7 +163,7 @@
     },
     {
       "opponent_archetype": "Reanimator",
-      "advice": "Sideboard in Grafdigger’s Cage to prevent graveyard interactions and use removal on their threats.",
+      "advice": "Sideboard in Grafdigger\u2019s Cage to prevent graveyard interactions and use removal on their threats.",
       "watch_for": [
         "Graveyard recursion",
         "Large creatures"
@@ -146,7 +171,7 @@
     },
     {
       "opponent_archetype": "Dredge",
-      "advice": "Use Grafdigger’s Cage to lock down their graveyard strategy and remove key pieces with Abrupt Decay.",
+      "advice": "Use Grafdigger\u2019s Cage to lock down their graveyard strategy and remove key pieces with Abrupt Decay.",
       "watch_for": [
         "Golgari Grave-Troll",
         "Graveyard synergy"
@@ -161,6 +186,31 @@
         "Force of Vigor",
         "Boseiju, Who Endures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells from hand. Cast spells at unexpected times (end step, after they tap out). Whir of Invention can be activated in response to counterspells if you have enough mana. Use cheap spells and value engines that are hard to counter or that provide immediate board impact.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Thoughtseize/Duress to remove ramp spells. Rest in Peace to stop graveyard recursion. Ensnaring Bridge to neutralize their large creatures. Surgical Extraction to remove key cards from the graveyard. Force them to play around your lock by holding up interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Early discard to remove threats. Ensnaring Bridge to lock them out. Go for the Throat/Rest in Peace to handle small creatures. Don't overcommit to card draw; stabilize first and use the Bridge to stall until you can close out the game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with Bridge and small creatures. Use discard to remove key control spells. Whir of Invention to generate card advantage and out-grind them. Force them to use removal on your lock pieces, then recur with Whir. Play around sweepers by holding up interaction or using discard to remove them from hand.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize keeping Thoughtseize/Duress. Use Whir of Invention to recur Lantern for card advantage. Ensnaring Bridge is key; try to deploy it first. Trade removal efficiently and avoid overcommitting to creatures. Control the board state by forcing them to answer your lock pieces while you dig for more value.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -169,10 +219,15 @@
     "Force of Vigor",
     "Boseiju, Who Endures",
     "Mox Opal ban (mana restriction)",
-    "Artifact destruction and ability lockouts"
+    "Artifact destruction and ability lockouts",
+    "Watch for sweepers (Wrath of God, Cyclonic Rift), artifact destruction (Abrade, Shatter), and graveyard recursion (Reanimate, Flashback).",
+    "Note when opponents tap out for big spells",
+    "this is your window to deploy Bridge or Whir.",
+    "Track their hand size after Thoughtseize to know what they're holding and predict their next play."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/explaining-lantern-control-an-ancient-treasure-in-moderns-past",
     "generated_at": "2026-05-21T01:23:01+00:00",
     "model": "local-model",
@@ -190,7 +245,27 @@
         "overview",
         "key_cards",
         "matchups"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

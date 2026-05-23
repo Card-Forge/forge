@@ -1,0 +1,552 @@
+{
+  "schema_version": 1,
+  "name": "4c Reanimator",
+  "format": "standard",
+  "colors": [
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This four-color Reanimator deck aims to bypass the normal game state by casting high-impact creatures directly from the graveyard. It leverages cheap instants and sorceries to fetch targets, then uses mana acceleration and reanimation spells to bring them onto the battlefield for lethal damage or overwhelming board presence. The inclusion of Deceit provides a flexible way to copy and cast these threats efficiently.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 15,
+      "cards": [
+        "Awaken the Honored Dead",
+        "Deceit",
+        "Formidable Speaker",
+        "Wistfulness"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 5
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Glarb, Calamity's Augur",
+        "Undercity Sewers",
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Deceit",
+        "Formidable Speaker"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Deceit",
+        "Formidable Speaker",
+        "Overlord of the Balemurk"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 32,
+      "cards": [
+        "Bringer of the Last Gift",
+        "Deceit",
+        "Formidable Speaker",
+        "Glarb, Calamity's Augur",
+        "Overlord of the Balemurk",
+        "Sunderflock",
+        "Superior Spider-Man",
+        "Terror of the Peaks",
+        "Town Greeter",
+        "Wistfulness"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 21,
+      "cards": [
+        "Awaken the Honored Dead",
+        "Bitter Triumph",
+        "Ghost Vacuum",
+        "Into the Flood Maw",
+        "Requiting Hex",
+        "Terror of the Peaks",
+        "Wistfulness"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 9
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Ghost Vacuum"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": [
+        "Spider-Sense"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 15,
+      "cards": [
+        "Cavern of Souls",
+        "Deceit",
+        "Formidable Speaker",
+        "Overlord of the Balemurk"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 17,
+      "cards": [
+        "Awaken the Honored Dead",
+        "Bitter Triumph",
+        "Deceit",
+        "Formidable Speaker",
+        "Wistfulness"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 5
+    },
+    "graveyard_enablers": {
+      "target_count": 30,
+      "cards": [
+        "Awaken the Honored Dead",
+        "Bringer of the Last Gift",
+        "Deceit",
+        "Formidable Speaker",
+        "Ghost Vacuum",
+        "Glarb, Calamity's Augur",
+        "Overlord of the Balemurk",
+        "Superior Spider-Man",
+        "Town Greeter",
+        "Undercity Sewers",
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 6
+    },
+    "reanimation_targets": {
+      "target_count": 8,
+      "cards": [
+        "Deceit",
+        "Formidable Speaker"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 24,
+      "cards": [
+        "Awaken the Honored Dead",
+        "Bringer of the Last Gift",
+        "Deceit",
+        "Into the Flood Maw",
+        "Overlord of the Balemurk",
+        "Spider-Sense",
+        "Sunderflock"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 9
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Formidable Speaker",
+        "Overlord of the Balemurk"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Deceit"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Emeritus of Ideation"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 35,
+      "cards": [
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Deathcap Glade",
+        "Deceit",
+        "Dreamroot Cascade",
+        "Formidable Speaker",
+        "Gloomlake Verge",
+        "Overgrown Tomb",
+        "Overlord of the Balemurk",
+        "Undercity Sewers",
+        "Underground Mortuary",
+        "Wastewood Verge",
+        "Watery Grave",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Deathcap Glade",
+        "Dreamroot Cascade",
+        "Gloomlake Verge",
+        "Overgrown Tomb",
+        "Swamp",
+        "Undercity Sewers",
+        "Underground Mortuary",
+        "Wastewood Verge",
+        "Watery Grave",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.41
+  },
+  "dual_role_cards": [
+    {
+      "card": "Awaken the Honored Dead",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bitter Triumph",
+      "roles": [
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bringer of the Last Gift",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deathcap Glade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deceit",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "reanimation_targets",
+        "recursion",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dreamroot Cascade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Formidable Speaker",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "reanimation_targets",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Vacuum",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glarb, Calamity's Augur",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gloomlake Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Into the Flood Maw",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overlord of the Balemurk",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spider-Sense",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunderflock",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Superior Spider-Man",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Terror of the Peaks",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Town Greeter",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Mortuary",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wastewood Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Willowrush Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wistfulness",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always ensure you have a counter or removal ready before casting your reanimation spell",
+    "Use Deceit to copy graveyard tutors or discard spells to set up your targets efficiently",
+    "Hold up mana for protection before committing to casting Formidable Speaker or Overlord of the Balemurk",
+    "Common mistakes: Overcommitting to the graveyard without protection, mismanaging 4-color mana, failing to track opponent's removal/counter count.",
+    "Unique interactions: Formidable Speaker likely synergizes with sacrifice outlets"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Discard or tutor for reanimation targets into the graveyard"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play lands and cheap cantrips to set up Deceit copies"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up counterspells to protect key reanimation plays"
+    }
+  ],
+  "kill_priority": [
+    "Deceit",
+    "Formidable Speaker",
+    "Overlord of the Balemurk",
+    "Bringer of the Last Gift",
+    "Glarb, Calamity's Augur",
+    "Sunderflock",
+    "Superior Spider-Man",
+    "Terror of the Peaks"
+  ],
+  "interaction_to_disrupt": [
+    "Spider-Sense",
+    "Cavern of Souls",
+    "Deceit",
+    "Formidable Speaker",
+    "Overlord of the Balemurk",
+    "Awaken the Honored Dead",
+    "Bitter Triumph",
+    "Ghost Vacuum"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/4c-reanimator.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

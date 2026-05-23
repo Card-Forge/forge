@@ -1,0 +1,128 @@
+{
+  "archetype": "4c Artifacts",
+  "format": "standard",
+  "strategy_type": "ramp",
+  "overview": "4c Artifacts leverages mana acceleration, artifact synergies, and high-impact threats to outvalue faster, tempo-oriented decks. It aims to stabilize early, ramp into game-winning artifact enablers, and close out games with resilient board presence or explosive finishers.",
+  "win_conditions": [
+    "Simulacrum Synthesizer as a primary win condition, supported by United Battlefront for protection or board-wide value.",
+    "Secondary finishers include high-impact artifact spells or combo pieces that can close the game in one turn.",
+    "Use your artifact tokens and synergies to overwhelm opponents who lack sweepers."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing fetches, duals, or artifact-producing lands like Repurposing Bay), plus at least one mana accelerator or artifact tutor.",
+      "Drop hands with 3+ lands and no early plays, or hands with multiple colors but no ramp/tutors.",
+      "Prioritize keeping hands that can execute a turn-1 or turn-2 artifact that generates value, mana, or early board presence."
+    ],
+    "mulligan_criteria": [],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, then cast a cheap artifact or mana accelerator.",
+      "Turn 2: Develop your mana base, cast a second ramp or early threat, and ensure you have the mana to hit key thresholds.",
+      "Sequence lands to minimize tapping issues",
+      "prioritize fetching/dualing into artifact-producing lands early to fuel Repurposing Bay and United Battlefront.",
+      "Avoid overcommitting to one-mana artifacts if you cannot follow up with your key spells."
+    ],
+    "mid_game": [
+      "Preserve mana for interaction and key thresholds",
+      "avoid overcommitting to low-cost artifacts if you need to cast Simulacrum Synthesizer or United Battlefront.",
+      "Use artifact synergies to generate card advantage and mana acceleration.",
+      "Manage your graveyard by protecting key artifacts from discard or sacrifice effects, and recycle artifacts when possible to maintain hand size.",
+      "Commit threats only when you have protection or can follow up with another artifact.",
+      "Hold back on casting high-value artifacts if the opponent has sweepers or targeted removal.",
+      "Prioritize establishing a board presence with low-cost artifacts that can be sacrificed or recycled for value, and use your artifacts as blockers to stabilize against aggressive strategies."
+    ],
+    "late_game": [
+      "Simulacrum Synthesizer as a primary win condition, supported by United Battlefront for protection or board-wide value.",
+      "Secondary finishers include high-impact artifact spells or combo pieces that can close the game in one turn.",
+      "Use your artifact tokens and synergies to overwhelm opponents who lack sweepers.",
+      "Go all-in when you have protection for your finisher, enough mana to cast it and still have interaction, or when the opponent is tapped out with no sweepers.",
+      "Also commit when you can follow up with a second threat or card draw to close out the game.",
+      "Do not commit if the opponent has unanswered removal or a sweeper in hand."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Simulacrum Synthesizer",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Repurposing Bay",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "United Battlefront",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "4c Artifacts relies heavily on consistency and mana base quality.",
+    "Avoid overcommitting to one-mana artifacts if you cannot cast your key spells.",
+    "Watch for opponent sideboard cards that target artifacts, and be ready to pivot to non-artifact threats if necessary.",
+    "Practice sequencing your mana to ensure you can hit thresholds without tapping out prematurely.",
+    "Remember that artifact synergies often provide incremental value, so prioritize plays that generate multiple benefits per mana spent."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use artifact spells that are hard to counter (e.g., mana rocks, lands, or spells with protection), split your casts across multiple turns, and use counterspells or countersuit protection. Prioritize casting threats when the opponent is tapped out or has already used their counters. Force them to choose between countering your ramp or your threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with cheap artifacts to disrupt their mana development. Use artifact destruction and sweepers to reset their board. Out-value them with card draw and resilient threats. Do not let them establish a massive mana advantage; trade efficiently and punish overextended boards.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and artifact-based removal. Stabilize with cheap blockers or protection spells. Transition to a control plan until you can cast your finishers. Use your artifacts as blockers and trade efficiently to survive the early game, then out-value them in the midgame.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with artifact threats and card draw. Force them to use removal on multiple targets. Out-grind them with value engines and late-game finishers. Use your mana base to cast spells at optimal times, and avoid overcommitting to one- mana artifacts that can be easily removed.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by drawing more cards and protecting your key artifacts. Prioritize targeting their finishers and disrupting their mana development. Use sideboard cards that give you an edge in the late game, and be willing to trade artifacts efficiently to maintain board presence. Control the tempo by playing around their counters and sweepers.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers, targeted removal, and counterspells.",
+    "Track opponent's mana development and whether they're going for a combo or midrange plan.",
+    "Note when they tap out for a key spell, as this is your window to attack or cast a game-winning artifact.",
+    "Pay attention to graveyard activity, as some meta decks will try to exile or sacrifice your artifacts."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/standard.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

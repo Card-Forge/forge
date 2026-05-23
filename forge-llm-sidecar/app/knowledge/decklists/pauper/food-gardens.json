@@ -1,0 +1,117 @@
+{
+  "archetype": "Food Gardens",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/food-gardens.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 3,
+      "name": "Campfire"
+    },
+    {
+      "qty": 4,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 3,
+      "name": "Cauldron Familiar"
+    },
+    {
+      "qty": 4,
+      "name": "Eviscerator's Insight"
+    },
+    {
+      "qty": 4,
+      "name": "Fanatical Offering"
+    },
+    {
+      "qty": 1,
+      "name": "Go for the Throat"
+    },
+    {
+      "qty": 2,
+      "name": "Golgari Rot Farm"
+    },
+    {
+      "qty": 1,
+      "name": "Haunted Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Heaped Harvest"
+    },
+    {
+      "qty": 1,
+      "name": "Heritage Reclamation"
+    },
+    {
+      "qty": 2,
+      "name": "Ichor Wellspring"
+    },
+    {
+      "qty": 4,
+      "name": "Khalni Garden"
+    },
+    {
+      "qty": 4,
+      "name": "Lembas"
+    },
+    {
+      "qty": 2,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 4,
+      "name": "Nutrient Block"
+    },
+    {
+      "qty": 3,
+      "name": "Pestilence"
+    },
+    {
+      "qty": 9,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Tithing Blade"
+    },
+    {
+      "qty": 2,
+      "name": "Tragic Slip"
+    },
+    {
+      "qty": 3,
+      "name": "Troll of Khazad-d\u00fbm"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Drown in Sorrow"
+    },
+    {
+      "qty": 2,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 2,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 2,
+      "name": "Tithing Blade"
+    },
+    {
+      "qty": 2,
+      "name": "Troublemaker Ouphe"
+    },
+    {
+      "qty": 4,
+      "name": "Weather the Storm"
+    }
+  ]
+}

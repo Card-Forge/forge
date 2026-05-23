@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with at least two cheap spells or rituals",
       "Hands containing a win condition and acceleration",
-      "Hands with early interaction and land drops"
+      "Hands with early interaction and land drops",
+      "Keep hands with 2+ lands (prioritizing duals or fetchable sources), at least one fast mana spell (Cabal/Dark Ritual), and at least one card draw/selection spell or direct combo piece.",
+      "Keep hands that can reliably go off on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Hands lacking mana acceleration or cheap spells",
       "Hands with only lands or high-cost cards",
-      "Hands missing a clear path to storm count"
+      "Hands missing a clear path to storm count",
+      "Mulligan hands with 3+ lands, zero fast mana, or only threats without acceleration.",
+      "In a mulligan, prioritize keeping a single land with two spells if it includes a ritual and a cantrip."
     ],
     "examples": []
   },
@@ -25,17 +29,33 @@
     "early_game": [
       "Prioritize land drops and casting cheap instants to build storm count",
       "Use early interaction to disrupt opponent's board",
-      "Search for mana acceleration to enable combo turns"
+      "Search for mana acceleration to enable combo turns",
+      "Turn 1: Play a land, cast a fast mana spell if possible, or cast a cantrip to dig for the combo.",
+      "Turn 2: Accelerate mana with rituals, draw into more spells, and begin assembling the combo chain.",
+      "Sequence lands to ensure you can cast rituals on the same turn you draw them.",
+      "If you have a turn 1 or 2 combo, execute it immediately rather than holding up for interaction."
     ],
     "mid_game": [
       "Accumulate storm count while holding up mana for potential counterspells",
       "Set up the turn to cast multiple rituals followed by the win condition",
-      "Manage card advantage by cycling through the deck efficiently"
+      "Manage card advantage by cycling through the deck efficiently",
+      "Treat mana as a resource to be spent on acceleration and card draw, not threats.",
+      "Prioritize keeping cards in hand to fuel the combo and maintain redundancy.",
+      "Manage your graveyard carefully if hate exists, but generally use it as a resource for recursion or as a secondary win condition.",
+      "Never spend mana on non-essential spells once you have enough to go off.",
+      "Hold back on playing non-combo threats unless they're part of the win condition.",
+      "Only interact if you're on the draw and need to stabilize, but prioritize going off over trading."
     ],
     "late_game": [
       "Execute the lethal sequence by casting rituals before the storm spell",
       "Adapt to opponent's interaction by going wider or finding alternative damage sources",
-      "Maintain pressure if the initial combo is disrupted"
+      "Maintain pressure if the initial combo is disrupted",
+      "Songs of the Damned combined with a large number of spells cast that turn, generating tokens and life to close the game.",
+      "Alternatively, use format-legal spell-synergy finishers like Empty the Warrens, Lightning Storm, or Goblin Bombardment.",
+      "The goal is to cast 10+ spells to generate enough mana/tokens to win before the opponent can respond.",
+      "Go all-in when you have a reliable turn 1 or 2 combo, or when you've drawn into a self-sustaining chain that guarantees a win.",
+      "Commit when you have enough mana to cast the finisher and still have priority.",
+      "If you're on the draw and face a reactive deck, go off as soon as you have a guaranteed win condition rather than waiting for a perfect hand."
     ]
   },
   "key_cards": [
@@ -59,7 +79,13 @@
     "Cast all rituals and cheap instants before the win condition to maximize storm count",
     "Hold up mana for interaction if the opponent has countermagic",
     "Prioritize casting spells that generate storm count over drawing cards unless you need to find the win condition",
-    "Use Cabal Ritual's sacrifice clause strategically to avoid losing key creatures prematurely"
+    "Use Cabal Ritual's sacrifice clause strategically to avoid losing key creatures prematurely",
+    "Common mistakes include overcommitting to board presence, holding up mana for interaction when you can go off, miscounting spells needed for the finisher, and failing to track opponent's discard/counters.",
+    "Unique interactions: Songs of the Damned scales with spells cast, so include cheap cantrips and rituals to maximize its impact.",
+    "Fast mana is critical",
+    "ensure your mana base supports it without flooding.",
+    "In unknown formats, verify legality of key pieces and adjust sideboard accordingly.",
+    "Always count your spells carefully before casting the finisher to avoid overpaying or underperforming."
   ],
   "matchups": [
     {
@@ -88,6 +114,21 @@
         "Combo pieces",
         "Countermagic"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap spells to force counters, then go off with a protected finisher. Utilize discard to remove counterspells, or use protection/enchantment removal. If possible, go off in response to their counterspell or use a spell that can't be countered. Sideboard in additional disruption and protection to break their lock.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply pressure with early disruption. If they get ahead, use discard to hit their key ramp pieces. Consider bringing in artifact hate or graveyard hate. Race them if possible, but prioritize disruption. If they stabilize, go off immediately to win before they can deploy their win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize keeping hands with discard and protection. Go off on turn 1 if possible to catch them off-guard. Use disruption to prevent their combo from resolving. Track their hand to avoid going off into a locked state. Sideboard in additional disruption and protection to out-resource them in extended games.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +136,16 @@
     "Thoughtseize",
     "Lightning Bolt",
     "Path to Exile",
-    "Duress"
+    "Duress",
+    "Watch for counterspells, discard spells, and graveyard hate.",
+    "Note when opponents play lands that suggest ramp or control.",
+    "Track if they're holding up mana for protection or disruption.",
+    "In mirrors, track their discard and disruption to avoid going off into a locked hand.",
+    "Pay attention to when they sacrifice lands or play utility spells that indicate a combo or control game plan."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:54:41+00:00",
     "model": "local-model",
@@ -114,6 +161,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

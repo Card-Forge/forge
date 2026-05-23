@@ -1,0 +1,392 @@
+{
+  "archetype": "Morophon, the Boundless",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/morophon-the-boundless.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Brass Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Bronze Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Copper Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Gold Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Silver Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Assassin's Trophy"
+    },
+    {
+      "qty": 1,
+      "name": "Beast Within"
+    },
+    {
+      "qty": 1,
+      "name": "Bedevil"
+    },
+    {
+      "qty": 1,
+      "name": "Beledros Witherbloom"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Boros Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Call the Spirit Dragons"
+    },
+    {
+      "qty": 1,
+      "name": "Chromium, the Mutable"
+    },
+    {
+      "qty": 1,
+      "name": "Colossal Majesty"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Crucible of the Spirit Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Crux of Fate"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivate"
+    },
+    {
+      "qty": 1,
+      "name": "Dragon Tempest"
+    },
+    {
+      "qty": 1,
+      "name": "Dragon's Hoard"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonlord Atarka"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonlord Dromoka"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonlord Kolaghan"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonlord Ojutai"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonlord Silumgar"
+    },
+    {
+      "qty": 1,
+      "name": "Eerie Ultimatum"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Farseek"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 3,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Galazeth Prismari"
+    },
+    {
+      "qty": 1,
+      "name": "Garruk's Uprising"
+    },
+    {
+      "qty": 1,
+      "name": "Generous Gift"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Heroic Intervention"
+    },
+    {
+      "qty": 1,
+      "name": "Hraesvelgr of the First Brood"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Jetmir's Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Kindred Discovery"
+    },
+    {
+      "qty": 1,
+      "name": "Klauth's Will"
+    },
+    {
+      "qty": 1,
+      "name": "Kodama's Reach"
+    },
+    {
+      "qty": 1,
+      "name": "Lorehold, the Historian"
+    },
+    {
+      "qty": 1,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Morophon, the Boundless"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Lore"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Nicol Bolas, the Ravager"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Palladia-Mors, the Ruiner"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Prismari, the Inspiration"
+    },
+    {
+      "qty": 1,
+      "name": "Quandrix, the Proof"
+    },
+    {
+      "qty": 1,
+      "name": "Raffine's Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rakdos Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Rampant Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Ruinous Ultimatum"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Sarkhan's Triumph"
+    },
+    {
+      "qty": 1,
+      "name": "Sarkhan, Fireblood"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Shadrix Silverquill"
+    },
+    {
+      "qty": 1,
+      "name": "Silverquill, the Disputant"
+    },
+    {
+      "qty": 1,
+      "name": "Skyshroud Claim"
+    },
+    {
+      "qty": 1,
+      "name": "Smothering Tithe"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spara's Headquarters"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Tanazir Quandrix"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi's Protection"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Temur Ascendancy"
+    },
+    {
+      "qty": 1,
+      "name": "The Great Henge"
+    },
+    {
+      "qty": 1,
+      "name": "Three Visits"
+    },
+    {
+      "qty": 1,
+      "name": "Vaevictis Asmadi, the Dire"
+    },
+    {
+      "qty": 1,
+      "name": "Velomachus Lorehold"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Witherbloom, the Balancer"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Foothills"
+    },
+    {
+      "qty": 1,
+      "name": "Xander's Lounge"
+    },
+    {
+      "qty": 1,
+      "name": "Ziatora's Proving Ground"
+    }
+  ],
+  "sideboard": []
+}

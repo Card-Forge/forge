@@ -1,0 +1,161 @@
+{
+  "archetype": "Sultai Reanimator",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/sultai-reanimator.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Ardyn, the Usurper"
+    },
+    {
+      "qty": 1,
+      "name": "Awaken the Honored Dead"
+    },
+    {
+      "qty": 2,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 3,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Bringer of the Last Gift"
+    },
+    {
+      "qty": 3,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Deathcap Glade"
+    },
+    {
+      "qty": 4,
+      "name": "Deceit"
+    },
+    {
+      "qty": 1,
+      "name": "Dina's Guidance"
+    },
+    {
+      "qty": 1,
+      "name": "Dreamroot Cascade"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 3,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 2,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 3,
+      "name": "Oblivious Bookworm"
+    },
+    {
+      "qty": 3,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Overlord of the Balemurk"
+    },
+    {
+      "qty": 3,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 4,
+      "name": "Superior Spider-Man"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Town Greeter"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Mortuary"
+    },
+    {
+      "qty": 2,
+      "name": "Wastewood Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 2,
+      "name": "Willowrush Verge"
+    },
+    {
+      "qty": 3,
+      "name": "Wistfulness"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 2,
+      "name": "Glarb, Calamity's Augur"
+    },
+    {
+      "qty": 1,
+      "name": "Harvester of Misery"
+    },
+    {
+      "qty": 2,
+      "name": "Intimidation Tactics"
+    },
+    {
+      "qty": 1,
+      "name": "Myojin of Night's Reach"
+    },
+    {
+      "qty": 1,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 1,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 1,
+      "name": "Wistfulness"
+    },
+    {
+      "qty": 1,
+      "name": "Zero Point Ballad"
+    }
+  ]
+}

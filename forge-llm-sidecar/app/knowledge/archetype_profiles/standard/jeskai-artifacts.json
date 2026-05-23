@@ -1,0 +1,400 @@
+{
+  "schema_version": 1,
+  "name": "Jeskai Artifacts",
+  "format": "standard",
+  "colors": [
+    "W",
+    "U",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Jeskai Artifacts is a Standard tempo deck that leverages artifact synergies to establish early board presence and generate consistent card advantage. By cycling threats through Repurposing Bay and amplifying artifact triggers with Simulacrum Synthesizer, the deck maintains pressure while protecting its resources. United Battlefront serves as a pivotal board-clearing tool to reset unfavorable states and secure late-game swings.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 16,
+      "cards": [
+        "Cryogen Relic",
+        "Repurposing Bay",
+        "Simulacrum Synthesizer",
+        "United Battlefront"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 14,
+      "cards": [
+        "Meticulous Archive",
+        "Repurposing Bay",
+        "Simulacrum Synthesizer",
+        "United Battlefront"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 5,
+      "cards": [
+        "Dauntless Scrapbot",
+        "Repurposing Bay"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "United Battlefront"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 26,
+      "cards": [
+        "Authority of the Consuls",
+        "Clay-Fired Bricks",
+        "Dauntless Scrapbot",
+        "Repurposing Bay",
+        "Simulacrum Synthesizer",
+        "Spring-Loaded Sawblades",
+        "The Fire Crystal",
+        "United Battlefront",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 9,
+      "cards": [
+        "Day of Judgment",
+        "High Noon",
+        "Perilous Snare"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 3
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Day of Judgment"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 12,
+      "cards": [
+        "Repurposing Bay",
+        "Simulacrum Synthesizer",
+        "United Battlefront"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 10,
+      "cards": [
+        "Dauntless Scrapbot",
+        "Meticulous Archive",
+        "Pinnacle Starcage",
+        "Rest in Peace"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 10,
+      "cards": [
+        "Hide on the Ceiling",
+        "Repurposing Bay",
+        "United Battlefront"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 16,
+      "cards": [
+        "Perilous Snare",
+        "Repurposing Bay",
+        "Simulacrum Synthesizer",
+        "United Battlefront"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "United Battlefront"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Repurposing Bay",
+        "Simulacrum Synthesizer",
+        "United Battlefront"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 23,
+      "cards": [
+        "Braided Net",
+        "High Noon",
+        "Repurposing Bay",
+        "Simulacrum Synthesizer",
+        "Torpor Orb",
+        "United Battlefront",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 11
+    },
+    "mana_fixing": {
+      "target_count": 24,
+      "cards": [
+        "Floodfarm Verge",
+        "Hallowed Fountain",
+        "Meticulous Archive",
+        "Multiversal Passage",
+        "Repurposing Bay",
+        "Simulacrum Synthesizer",
+        "United Battlefront"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 22,
+      "cards": [
+        "Floodfarm Verge",
+        "Hallowed Fountain",
+        "Island",
+        "Meticulous Archive",
+        "Multiversal Passage",
+        "Plains"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.25
+  },
+  "dual_role_cards": [
+    {
+      "card": "Dauntless Scrapbot",
+      "roles": [
+        "graveyard_enablers",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Day of Judgment",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Floodfarm Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "High Noon",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Multiversal Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Perilous Snare",
+      "roles": [
+        "engines",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Repurposing Bay",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Simulacrum Synthesizer",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "United Battlefront",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Voice of Victory",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Trigger Simulacrum Synthesizer before combat to maximize value",
+    "Activate Repurposing Bay after opponent commits resources to the board",
+    "Cast United Battlefront on your turn to immediately follow up with artifact attacks",
+    "Hold up colored mana for interaction before committing to artifact plays",
+    "Be mindful of the 'Clone' token name synergy"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap artifacts to trigger Simulacrum Synthesizer"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish a minimal board presence to apply pressure"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early interaction to disrupt opponent's game plan"
+    }
+  ],
+  "kill_priority": [
+    "Perilous Snare",
+    "Repurposing Bay",
+    "Simulacrum Synthesizer",
+    "United Battlefront",
+    "Authority of the Consuls",
+    "Clay-Fired Bricks",
+    "Dauntless Scrapbot",
+    "Spring-Loaded Sawblades"
+  ],
+  "interaction_to_disrupt": [
+    "Repurposing Bay",
+    "Simulacrum Synthesizer",
+    "United Battlefront",
+    "Day of Judgment",
+    "High Noon",
+    "Perilous Snare",
+    "Braided Net",
+    "Torpor Orb"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/jeskai-artifacts.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

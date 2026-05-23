@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "name": "Boros Midrange",
+  "format": "pioneer",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Fable of the Mirror-Breaker",
+    "Fear of Missing Out",
+    "Guardian of New Benalia",
+    "Hardened Academic",
+    "Marauding Mako",
+    "Ox of Agonas",
+    "Seasoned Hallowblade"
+  ],
+  "interaction_to_disrupt": [
+    "Guardian of New Benalia",
+    "Seasoned Hallowblade",
+    "Sheltered by Ghosts",
+    "Abrade",
+    "Battlefield Forge",
+    "Burst Lightning",
+    "Destroy Evil",
+    "Fiery Temper"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 15,
+      "cards": [
+        "Fear of Missing Out",
+        "Marauding Mako",
+        "Monument to Endurance",
+        "Ox of Agonas"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Guardian of New Benalia",
+        "Torch the Tower"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 24,
+      "cards": [
+        "Fable of the Mirror-Breaker",
+        "Fear of Missing Out",
+        "Guardian of New Benalia",
+        "Hardened Academic",
+        "Marauding Mako",
+        "Ox of Agonas",
+        "Seasoned Hallowblade"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 1
+    },
+    "removal": {
+      "target_count": 23,
+      "cards": [
+        "Abrade",
+        "Battlefield Forge",
+        "Burst Lightning",
+        "Destroy Evil",
+        "Fiery Temper",
+        "Seam Rip",
+        "Seasoned Hallowblade",
+        "Sheltered by Ghosts",
+        "Torch the Tower"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 8
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 7,
+      "cards": [
+        "Guardian of New Benalia",
+        "Seasoned Hallowblade",
+        "Sheltered by Ghosts"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 17,
+      "cards": [
+        "Fear of Missing Out",
+        "Guardian of New Benalia",
+        "Hardened Academic",
+        "Monument to Endurance",
+        "Seasoned Hallowblade"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 18,
+      "cards": [
+        "Fear of Missing Out",
+        "Fiery Temper",
+        "Hardened Academic",
+        "Ox of Agonas",
+        "Rest in Peace"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Ox of Agonas"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Damping Sphere"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Battlefield Forge",
+        "Inspiring Vantage",
+        "Needleverge Pathway",
+        "Sacred Foundry",
+        "Sokenzan, Crucible of Defiance",
+        "Sunbillow Verge",
+        "The Mycosynth Gardens"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 24,
+      "cards": [
+        "Battlefield Forge",
+        "Inspiring Vantage",
+        "Mountain",
+        "Needleverge Pathway",
+        "Plains",
+        "Sacred Foundry",
+        "Sokenzan, Crucible of Defiance",
+        "Sunbillow Verge",
+        "The Mycosynth Gardens"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.38
+  },
+  "dual_role_cards": [
+    {
+      "card": "Battlefield Forge",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fear of Missing Out",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fiery Temper",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guardian of New Benalia",
+      "roles": [
+        "dig_draw",
+        "discard_outlets",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hardened Academic",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inspiring Vantage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marauding Mako",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monument to Endurance",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Needleverge Pathway",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ox of Agonas",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seasoned Hallowblade",
+      "roles": [
+        "discard_outlets",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheltered by Ghosts",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sokenzan, Crucible of Defiance",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunbillow Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Mycosynth Gardens",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Torch the Tower",
+      "roles": [
+        "dig_draw",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/boros-midrange.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

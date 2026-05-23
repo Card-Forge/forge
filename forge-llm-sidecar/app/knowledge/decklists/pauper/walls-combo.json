@@ -1,0 +1,113 @@
+{
+  "archetype": "Walls Combo",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/walls-combo.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Axebane Guardian"
+    },
+    {
+      "qty": 1,
+      "name": "Beastrider Vanguard"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodrite Invoker"
+    },
+    {
+      "qty": 4,
+      "name": "Drift of Phantasms"
+    },
+    {
+      "qty": 12,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Freed from the Real"
+    },
+    {
+      "qty": 1,
+      "name": "Galvanic Alchemist"
+    },
+    {
+      "qty": 4,
+      "name": "Lead the Stampede"
+    },
+    {
+      "qty": 1,
+      "name": "Orochi Leafcaller"
+    },
+    {
+      "qty": 4,
+      "name": "Overgrown Battlement"
+    },
+    {
+      "qty": 1,
+      "name": "Pulse of Murasa"
+    },
+    {
+      "qty": 4,
+      "name": "Quirion Ranger"
+    },
+    {
+      "qty": 1,
+      "name": "Reaping the Graves"
+    },
+    {
+      "qty": 4,
+      "name": "Sagu Wildling"
+    },
+    {
+      "qty": 4,
+      "name": "Saruli Caretaker"
+    },
+    {
+      "qty": 1,
+      "name": "Secret Door"
+    },
+    {
+      "qty": 4,
+      "name": "Shield-Wall Sentinel"
+    },
+    {
+      "qty": 3,
+      "name": "Tinder Wall"
+    },
+    {
+      "qty": 1,
+      "name": "Tuktuk Rubblefort"
+    },
+    {
+      "qty": 4,
+      "name": "Winding Way"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Avenging Hunter"
+    },
+    {
+      "qty": 4,
+      "name": "Deglamer"
+    },
+    {
+      "qty": 2,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 2,
+      "name": "Gut Shot"
+    },
+    {
+      "qty": 2,
+      "name": "Moment's Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Tamiyo's Safekeeping"
+    }
+  ]
+}

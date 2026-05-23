@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with one or two lands and a removal spell like Fatal Push",
       "Draw spells that can find missing pieces such as Ponder or Brainstorm",
-      "Early threats that apply pressure while setting up answers"
+      "Early threats that apply pressure while setting up answers",
+      "Keep any hand with a land, a turn-1 disruption or removal (e.g., Fatal Push, Thoughtseize), and a turn-2 threat or card draw.",
+      "Prioritize keeping hands that can cast Ponder or Brainstorm on turn 2 to dig for consistency.",
+      "Ensure at least two sources of colored mana for early spells."
     ],
     "mulligan_criteria": [
       "Mana screws with three or more lands and no interaction",
       "Hands lacking removal or card draw in the first three turns",
-      "Slow value cards without early board presence or answers"
+      "Slow value cards without early board presence or answers",
+      "Mulligan hands with two or more lands, or hands lacking a turn-1 play and a turn-2 threat/draw."
     ],
     "examples": []
   },
@@ -25,17 +29,31 @@
     "early_game": [
       "Play lands efficiently and cast Fatal Push to remove key early threats",
       "Use Brainstorm and Ponder to dig for answers and smooth out mana",
-      "Establish a small creature to apply pressure while protecting it with removal"
+      "Establish a small creature to apply pressure while protecting it with removal",
+      "Turn 1: Play a land, cast disruption (Fatal Push on aggressive threats, Thoughtseize on key combo pieces or removal).",
+      "Turn 2: Play a land, cast Ponder/Brainstorm to filter into a threat or removal, then play a threat or another disruption.",
+      "Land sequencing: Prioritize fetching/shock lands or duals that enter untapped if possible, but don't delay casting turn-1 disruption for a fetch.",
+      "Always keep a land drop available for turn 2."
     ],
     "mid_game": [
       "Transition to larger threats and value cards while maintaining board control",
       "Trade efficiently and cycle through draw spells to find game-ending pieces",
-      "Look for opportunities to swing for lethal while keeping removal in hand"
+      "Look for opportunities to swing for lethal while keeping removal in hand",
+      "Preserve hand for key turns",
+      "don't overcommit to board if opponent has unanswered interaction.",
+      "Use Ponder/Brainstorm to find answers to immediate threats or finishers.",
+      "Manage graveyard by using Surgical Extraction or Rest in Peace if opponent relies on it.",
+      "Don't overextend into sweepers.",
+      "Commit threats when you have removal for their interaction or when they've blown through answers."
     ],
     "late_game": [
       "Leverage card advantage to outvalue opponents and find finishers",
       "Use targeted removal to clear the path for lethal swings",
-      "Stabilize against combo decks by disrupting their key pieces and racing with resilient creatures"
+      "Stabilize against combo decks by disrupting their key pieces and racing with resilient creatures",
+      "High-impact mid-game threats (e.g., 4/4 or 5/5 creatures, or a combination of smaller threats that outvalue their blockers).",
+      "Win by out-resourcing them through card draw and efficient removal, then closing with unblockable or resilient threats.",
+      "Go all-in when you have card advantage, they have no sweepers, and you can trade efficiently.",
+      "Also commit when you're at low life and need to race, but only if your threats are faster than theirs."
     ]
   },
   "key_cards": [
@@ -58,7 +76,12 @@
   "sequencing_tips": [
     "Prioritize casting Fatal Push before playing creatures to avoid trading into removal",
     "Use Ponder to find lands when behind on mana, and Brainstorm to accelerate when ahead",
-    "Hold up removal for opponent's key threats rather than casting it preemptively unless necessary"
+    "Hold up removal for opponent's key threats rather than casting it preemptively unless necessary",
+    "Common mistake: overcommitting to the board without considering sweepers.",
+    "Unique interaction: Ponder/Brainstorm can be used to dig for specific answers or threats, but don't cast them just to cast them",
+    "always have a plan.",
+    "Graveyard hate is crucial against recursion decks.",
+    "Always track opponent's hand size after discard spells."
   ],
   "matchups": [
     {
@@ -87,15 +110,35 @@
         "Key combo pieces",
         "Unexpected win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Ponder/Brainstorm to dig for alternative paths or cheap threats. Cast spells in response to their counterspells if you have protection or can trade up. Don't overcommit to a single spell; spread threats across turns.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use early disruption to slow their mana development. Prioritize removal on their mana rocks or early threats. Bring in hate cards (Rest in Peace, Leyline) if they rely on graveyard or specific engines.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the hand war. Prioritize Thoughtseize/brainstorm to find answers. Trade threats efficiently. Control the board with removal. The player who manages hand and board better wins.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggro creatures that pressure early",
     "Counterspells that disrupt your game plan",
-    "Board wipes that clear your board presence"
+    "Board wipes that clear your board presence",
+    "Watch for sweepers (e.g., Wrath of God, Anger of the Gods), counterspells, and graveyard recursion.",
+    "Note when they tap out for a single spell",
+    "that's your window to push damage or play a free threat.",
+    "Track their hand size after discard spells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:09:25+00:00",
     "model": "local-model",
@@ -111,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

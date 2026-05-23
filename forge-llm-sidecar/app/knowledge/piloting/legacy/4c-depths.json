@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands containing early Swords to Plowshares or Brainstorm",
       "Mana bases that support two-color starts",
-      "Low-cost threats or interaction that can be played on turn one or two"
+      "Low-cost threats or interaction that can be played on turn one or two",
+      "Keep hands with 2\u20133 lands (prioritizing fetch/shock or duals that can produce WUBG), a turn-1 play (land, Orcish Bowmasters, or Delver), and at least one disruption spell (Thoughtseize, Brainstorm, or a counterspell)."
     ],
     "mulligan_criteria": [
       "Hands lacking any interaction or cantrips",
       "Mana screws with four or more lands",
-      "Slow hands reliant on late-game cards without early answers"
+      "Slow hands reliant on late-game cards without early answers",
+      "Mulligan on 3+ lands with no early plays, hands with only removal and no threats/land, or hands missing colored sources for your key spells."
     ],
     "examples": []
   },
@@ -25,17 +27,30 @@
     "early_game": [
       "Prioritize playing lands and casting Brainstorm to find answers",
       "Hold Swords to Plowshares for opponent's early threats",
-      "Deploy Orcish Bowmasters on curve to establish tempo"
+      "Deploy Orcish Bowmasters on curve to establish tempo",
+      "Turn 1: Play a land, cast Orcish Bowmasters or Delver of Secrets, or cast Thoughtseize on a key threat.",
+      "Turn 2: Develop mana, cast Brainstorm to filter into threats or answers, or play a second land and cast a delve creature (Tarmogoyf, Cryptbreaker).",
+      "Sequence lands to ensure you can produce the necessary colors for removal and delve costs while maintaining a steady curve."
     ],
     "mid_game": [
       "Use Swords to Plowshares to clear the way for your threats",
       "Leverage Bowmasters' triggered ability to generate card advantage",
-      "Maintain a balance of lands and spells to avoid being stuck"
+      "Maintain a balance of lands and spells to avoid being stuck",
+      "Use Brainstorm to filter into threats or counterspells based on board state.",
+      "Manage your graveyard carefully\u2014delve creatures want to be cast from it, but avoid overcommitting to it if the opponent has graveyard hate.",
+      "Use Liliana of the Veil or Dark Confidant to maintain card advantage while monitoring your life total.",
+      "Commit threats when you have removal or counterspells to protect them and the opponent has no sweepers.",
+      "Hold back if they have untapped mana for counters or a known sweeper in hand.",
+      "Use counterspells on game-winning threats or key combo pieces rather than cheap spells."
     ],
     "late_game": [
       "Stabilize with remaining removal and card draw",
       "Race with unblocked threats while managing life totals",
-      "Use Swords to Plowshares for life gain to outlast attrition wars"
+      "Use Swords to Plowshares for life gain to outlast attrition wars",
+      "Cryptbreaker, Tarmogoyf, and Delver of Secrets (Inferno Titan/Insectile Aberration).",
+      "Win by establishing board presence, using delve to cast them cheaply, and protecting them with counterspells or removal.",
+      "Go all-in when you have card advantage, removal for their threats, and they have no sweepers or graveyard hate in play.",
+      "Commit when you can close the game in 1\u20132 turns or when you\u2019ve forced them to use their answers on multiple threats."
     ]
   },
   "key_cards": [
@@ -59,7 +74,13 @@
     "Hold Swords to Plowshares until you see the opponent's key threats",
     "Cast Brainstorm after assessing the board to maximize hand optimization",
     "Play Orcish Bowmasters early to establish board presence before opponent stabilizes",
-    "Manage life totals carefully when using Swords to Plowshares for removal"
+    "Manage life totals carefully when using Swords to Plowshares for removal",
+    "Delve creatures are vulnerable to graveyard hate",
+    "always have a plan B like direct damage or early pressure.",
+    "Brainstorm is crucial for consistency\u2014use it to find answers or threats based on board state.",
+    "Orcish Bowmasters is a fragile but effective early threat",
+    "protect it or use it to trade into their removal.",
+    "Avoid overextending into sweepers and always track the opponent\u2019s graveyard to anticipate delve threats or recursion."
   ],
   "matchups": [
     {
@@ -88,6 +109,21 @@
         "Draw spells",
         "Protection spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Brainstorm to find cheaper threats or counterspells. Cast spells in response to their counters or when they\u2019re tapped out. Use discard to remove their counterspells, and prioritize casting threats when they have no mana to respond. Delve doesn\u2019t bypass counterspells, so timing and card advantage are key.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race them. Use removal on their mana rocks and early threats. If they get ahead, use counterspells on their win conditions and stabilize with removal. Don\u2019t let them establish a massive mana base; disrupt their acceleration early.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win on card advantage and better sequencing. Use discard to remove their counterspells and key threats. Hold up counterspells for their key plays and prioritize graveyard advantage. Track their hand and adjust your timing to outmaneuver them in the late game.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +131,14 @@
     "Thoughtseize",
     "Delver of Secrets",
     "Tarmogoyf",
-    "Jace, the Mind Sculptor"
+    "Jace, the Mind Sculptor",
+    "Watch for graveyard hate, sweepers (Wrath of God, Anger of the Gods), and combo win conditions.",
+    "Note when opponents tap out for big spells or hold up mana for counterspells.",
+    "Track their graveyard size to anticipate delve threats or recursion."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:45:00+00:00",
     "model": "local-model",
@@ -114,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,508 @@
+{
+  "schema_version": 1,
+  "name": "Nic Fit",
+  "format": "legacy",
+  "colors": [
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "ramp",
+  "expected_deck_total": 60,
+  "macro_plan": "Nic Fit is a Legacy UBRG ramp deck that leverages mana acceleration and card selection to outpace opponents. By combining Veteran Explorer's mana generation with Green Sun's Zenith's targeted fetching, the deck establishes early board presence and scales into late-game threats. Cabal Therapy provides crucial card advantage and information to navigate complex matchups.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 20,
+      "cards": [
+        "Cabal Therapy",
+        "Green Sun's Zenith",
+        "Leovold, Emissary of Trest",
+        "Nurturing Peatland",
+        "Professor Dellian Fel",
+        "Up the Beanstalk",
+        "Veteran Explorer"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Cabal Therapy"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 20,
+      "cards": [
+        "Cabal Therapy",
+        "Flare of Cultivation",
+        "Green Sun's Zenith",
+        "Veteran Explorer",
+        "Vibrance"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Cabal Therapy",
+        "Green Sun's Zenith",
+        "Veteran Explorer"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 35,
+      "cards": [
+        "Alpha Deathclaw",
+        "Cabal Therapy",
+        "Chaos Defiler",
+        "Endurance",
+        "Green Sun's Zenith",
+        "Grist, the Hunger Tide",
+        "Leovold, Emissary of Trest",
+        "Opposition Agent",
+        "Overlord of the Balemurk",
+        "Professor Dellian Fel",
+        "The Rise of Sozin",
+        "Veteran Explorer",
+        "Vibrance"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Alpha Deathclaw",
+        "Boseiju, Who Endures",
+        "Chaos Defiler",
+        "Grist, the Hunger Tide",
+        "Lazotep Quarry",
+        "Professor Dellian Fel",
+        "Vibrance"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 12,
+      "cards": [
+        "Cabal Therapy",
+        "Green Sun's Zenith",
+        "Veteran Explorer"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 18,
+      "cards": [
+        "Cabal Therapy",
+        "Endurance",
+        "Grist, the Hunger Tide",
+        "Lazotep Quarry",
+        "Leyline of the Void",
+        "Overlord of the Balemurk"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 9,
+      "cards": [
+        "Cabal Therapy",
+        "Lazotep Quarry",
+        "Overlord of the Balemurk"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 14,
+      "cards": [
+        "Cabal Therapy",
+        "Green Sun's Zenith",
+        "Up the Beanstalk",
+        "Veteran Explorer"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Cabal Therapy",
+        "Green Sun's Zenith",
+        "Veteran Explorer"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Disruptor Flute",
+        "Mindbreak Trap"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 8
+    },
+    "mana_fixing": {
+      "target_count": 32,
+      "cards": [
+        "Bayou",
+        "Boseiju, Who Endures",
+        "Cabal Therapy",
+        "Field of the Dead",
+        "Green Sun's Zenith",
+        "Lazotep Quarry",
+        "Nurturing Peatland",
+        "Opposition Agent",
+        "Snow-Covered Forest",
+        "Snow-Covered Mountain",
+        "Snow-Covered Swamp",
+        "Tropical Island",
+        "Veteran Explorer"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 3
+    },
+    "lands": {
+      "target_count": 22,
+      "cards": [
+        "Bayou",
+        "Boseiju, Who Endures",
+        "Field of the Dead",
+        "Forest",
+        "Lazotep Quarry",
+        "Mountain",
+        "Nurturing Peatland",
+        "Snow-Covered Forest",
+        "Snow-Covered Mountain",
+        "Snow-Covered Swamp",
+        "Swamp",
+        "Tropical Island"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Grist, the Hunger Tide",
+        "Professor Dellian Fel"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Alpha Deathclaw",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bayou",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cabal Therapy",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chaos Defiler",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Field of the Dead",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Green Sun's Zenith",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grist, the Hunger Tide",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lazotep Quarry",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leovold, Emissary of Trest",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nurturing Peatland",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Opposition Agent",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overlord of the Balemurk",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Professor Dellian Fel",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Forest",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Mountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Swamp",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tropical Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Up the Beanstalk",
+      "roles": [
+        "card_advantage",
+        "engines"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veteran Explorer",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vibrance",
+      "roles": [
+        "removal",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast Cabal Therapy before Green Sun's Zenith to know exactly which creature or spell to fetch",
+    "Play Veteran Explorer as early as possible to maximize cumulative mana generation",
+    "Hold up black mana for potential interaction while keeping enough open to cast ramp on curve",
+    "Prioritize fetching threats that pressure the opponent's weakest color or matchup weakness",
+    "Green Sun's Zenith is a one-sided tutor, so know your topdecks and what you're looking for."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize land drops and cast ramp spells to enable turn-three or turn-four plays"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Cabal Therapy to probe opponent's hand and identify key threats or answers"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up mana for potential interaction while establishing a minimal board presence"
+    }
+  ],
+  "kill_priority": [
+    "Cabal Therapy",
+    "Green Sun's Zenith",
+    "Up the Beanstalk",
+    "Veteran Explorer",
+    "Grist, the Hunger Tide",
+    "Professor Dellian Fel",
+    "Alpha Deathclaw",
+    "Chaos Defiler"
+  ],
+  "interaction_to_disrupt": [
+    "Alpha Deathclaw",
+    "Boseiju, Who Endures",
+    "Chaos Defiler",
+    "Grist, the Hunger Tide",
+    "Lazotep Quarry",
+    "Professor Dellian Fel",
+    "Vibrance",
+    "Cabal Therapy"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/nic-fit.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

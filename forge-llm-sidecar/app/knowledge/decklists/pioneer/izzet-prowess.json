@@ -1,0 +1,133 @@
+{
+  "archetype": "Izzet Prowess",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/izzet-prowess.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Academic Dispute"
+    },
+    {
+      "qty": 3,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 3,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 1,
+      "name": "Den of the Bugbear"
+    },
+    {
+      "qty": 4,
+      "name": "Flow State"
+    },
+    {
+      "qty": 1,
+      "name": "Impractical Joke"
+    },
+    {
+      "qty": 4,
+      "name": "Monastery Swiftspear"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Reckless Rage"
+    },
+    {
+      "qty": 2,
+      "name": "Riverglide Pathway"
+    },
+    {
+      "qty": 4,
+      "name": "Riverpyre Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Secret Identity"
+    },
+    {
+      "qty": 3,
+      "name": "Shivan Reef"
+    },
+    {
+      "qty": 4,
+      "name": "Sleight of Hand"
+    },
+    {
+      "qty": 4,
+      "name": "Slickshot Show-Off"
+    },
+    {
+      "qty": 4,
+      "name": "Soul-Scar Mage"
+    },
+    {
+      "qty": 4,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 4,
+      "name": "Stormchaser's Talent"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abandon Attachments"
+    },
+    {
+      "qty": 1,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 1,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 1,
+      "name": "Firebending Lesson"
+    },
+    {
+      "qty": 1,
+      "name": "Iroh's Demonstration"
+    },
+    {
+      "qty": 1,
+      "name": "It'll Quench Ya!"
+    },
+    {
+      "qty": 1,
+      "name": "Octopus Form"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 2,
+      "name": "Redcap Melee"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 3,
+      "name": "Spell Pierce"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "archetype": "Krenko, Mob Boss",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Overwhelm opponents with exponential Goblin token generation, leveraging red\u2019s direct damage and combat tricks to close games quickly. It wins by racing faster than control and combo can answer, and out-scaling midrange with relentless board presence.",
+  "win_conditions": [
+    "Krenko's untapped ability generating 10+ Goblins, often paired with Impact Tremors, Rite of Flame, or combat tricks like Goblin Piledriver/Goblin Chainwhirler.",
+    "Win by attacking with the full army or using direct damage from token entry."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, Krenko, and at least one token generator or cheap red spell.",
+      "Prioritize hands with Krenko + 1-2 mana sources + a way to make the first 2 Goblins."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have no lands, only high-cost spells, or no way to generate initial tokens."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, pass.",
+      "Turn 2: Play Krenko.",
+      "If you have 2 mana, tap him for 2 Goblins.",
+      "Turn 3: Attack with Goblins, untap, tap Krenko again for exponential growth, or cast Impact Tremors/cheap red spells to trigger damage.",
+      "Land sequencing: Prioritize red mana sources early",
+      "basic Mountains are fine, but fetches/duals help consistency."
+    ],
+    "mid_game": [
+      "Mana is critical",
+      "always keep 1-2 mana open for instant-speed responses or Impact Tremors triggers.",
+      "Don't overcommit all Goblins if you have no way to protect them.",
+      "Use the graveyard effectively if your list includes sacrifice outlets or recursion.",
+      "Commit threats when you have a clear path to lethal or when the opponent has no board wipes.",
+      "Hold back a few Goblins as insurance against sweepers.",
+      "If the opponent has a known sweeper, save Krenko and key doublers for post-sweeper turns."
+    ],
+    "late_game": [
+      "Krenko's untapped ability generating 10+ Goblins, often paired with Impact Tremors, Rite of Flame, or combat tricks like Goblin Piledriver/Goblin Chainwhirler.",
+      "Win by attacking with the full army or using direct damage from token entry.",
+      "Go all-in when you have no viable board wipes in play, the opponent has low life total, or you've established a clear advantage in board state.",
+      "Also commit when you can protect Krenko (e.g., with Lightning Greaves or hexproof effects)."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Krenko, Mob Boss",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Skirk Prospector",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Impact Tremors",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overcommitting to the board without considering board wipes.",
+    "Always keep a few Goblins in reserve.",
+    "Another: Forgetting to use Impact Tremors on your own tokens.",
+    "Skirk Prospector synergizes by being a cheap damage source or sacrifice outlet",
+    "tap Krenko for Goblins, then tap Prospector to deal damage or sacrifice it to fuel other effects.",
+    "Mono-red has limited card draw, so hand management and sequencing are crucial to avoid dead draws."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient spells. Cast Krenko on your turn, then use instant-speed token generation or damage spells. If possible, use protection (Lightning Greaves) or cast Krenko when the opponent has no mana up.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure before they can cast their big spells. Use board wipes to reset their board. Target their mana rocks with Lightning Strike or Shock.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap removal (Shock, Lightning Strike) and board wipes (Pyroclasm, Blasphemous Act). Use Goblins to trade efficiently and close out the game quickly.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early tokens. Don't let them stabilize by winning the card advantage war. Use Impact Tremors to deal damage while they try to sweep. Out-value them with token doublers and card draw.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by going first, having more efficient token generation, or better removal. Prioritize protecting Krenko, using Impact Tremors to race, and out-resourcing with doublers. Track their board wipes carefully.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes (sweepers, artifact/enchantment destruction), targeted removal on Krenko, and hand disruption.",
+    "Key tells: Opponent holding up mana on their turn often signals a counter or removal.",
+    "Opponent tapping out on turn 3-4 often signals a combo or sweeper."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,368 @@
+{
+  "archetype": "Frodo, Adventurous Hobbit // Sam, Loyal Attendant",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/frodo-adventurous-hobbit-sam-loyal-attendant.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Academy Manufactor"
+    },
+    {
+      "qty": 1,
+      "name": "Access Tunnel"
+    },
+    {
+      "qty": 1,
+      "name": "Agent of the Iron Throne"
+    },
+    {
+      "qty": 1,
+      "name": "Anguished Unmaking"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archon of Emeria"
+    },
+    {
+      "qty": 1,
+      "name": "Ash Barrens"
+    },
+    {
+      "qty": 1,
+      "name": "Banquet Guests"
+    },
+    {
+      "qty": 1,
+      "name": "Bartolom\u00e9 del Presidio"
+    },
+    {
+      "qty": 1,
+      "name": "Beast Within"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Call of the Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Canopy Vista"
+    },
+    {
+      "qty": 1,
+      "name": "Cauldron Familiar"
+    },
+    {
+      "qty": 1,
+      "name": "Chatterfang, Squirrel General"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Crypt Incursion"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivate"
+    },
+    {
+      "qty": 1,
+      "name": "Dawn of Hope"
+    },
+    {
+      "qty": 1,
+      "name": "Deafening Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Diabolic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Dusk // Dawn"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Experimental Confectioner"
+    },
+    {
+      "qty": 1,
+      "name": "Farmer Cotton"
+    },
+    {
+      "qty": 1,
+      "name": "Farseek"
+    },
+    {
+      "qty": 1,
+      "name": "Feasting Hobbit"
+    },
+    {
+      "qty": 1,
+      "name": "Flare of Fortitude"
+    },
+    {
+      "qty": 4,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Fortified Village"
+    },
+    {
+      "qty": 1,
+      "name": "Frodo Baggins"
+    },
+    {
+      "qty": 1,
+      "name": "Frodo, Adventurous Hobbit"
+    },
+    {
+      "qty": 1,
+      "name": "Fumigate"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Quarter"
+    },
+    {
+      "qty": 1,
+      "name": "Gilded Goose"
+    },
+    {
+      "qty": 1,
+      "name": "Go for the Throat"
+    },
+    {
+      "qty": 1,
+      "name": "Gollum, Obsessed Stalker"
+    },
+    {
+      "qty": 1,
+      "name": "Graypelt Refuge"
+    },
+    {
+      "qty": 1,
+      "name": "Hazel's Brewmaster"
+    },
+    {
+      "qty": 1,
+      "name": "Horizon Canopy"
+    },
+    {
+      "qty": 1,
+      "name": "Inspiring Statuary"
+    },
+    {
+      "qty": 1,
+      "name": "Jaheira, Friend of the Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Lich-Knights' Conquest"
+    },
+    {
+      "qty": 1,
+      "name": "Living Death"
+    },
+    {
+      "qty": 1,
+      "name": "Lobelia, Defender of Bag End"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Tithe"
+    },
+    {
+      "qty": 1,
+      "name": "Mentor of the Meek"
+    },
+    {
+      "qty": 1,
+      "name": "Meriadoc Brandybuck"
+    },
+    {
+      "qty": 1,
+      "name": "Merry, Warden of Isengard"
+    },
+    {
+      "qty": 1,
+      "name": "Mirkwood Bats"
+    },
+    {
+      "qty": 1,
+      "name": "Mortify"
+    },
+    {
+      "qty": 1,
+      "name": "Nadier's Nightblade"
+    },
+    {
+      "qty": 1,
+      "name": "Necroblossom Snarl"
+    },
+    {
+      "qty": 1,
+      "name": "Night's Whisper"
+    },
+    {
+      "qty": 1,
+      "name": "Nykthos Paragon"
+    },
+    {
+      "qty": 1,
+      "name": "Of Herbs and Stewed Rabbit"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Peregrin Took"
+    },
+    {
+      "qty": 1,
+      "name": "Pippin, Warden of Isengard"
+    },
+    {
+      "qty": 4,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Prize Pig"
+    },
+    {
+      "qty": 1,
+      "name": "Rapacious Guest"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Rosie Cotton of South Lane"
+    },
+    {
+      "qty": 1,
+      "name": "Rule of Law"
+    },
+    {
+      "qty": 1,
+      "name": "Sam's Desperate Rescue"
+    },
+    {
+      "qty": 1,
+      "name": "Sam, Loyal Attendant"
+    },
+    {
+      "qty": 1,
+      "name": "Samwise Gamgee"
+    },
+    {
+      "qty": 1,
+      "name": "Sandsteppe Citadel"
+    },
+    {
+      "qty": 1,
+      "name": "Sanguine Bond"
+    },
+    {
+      "qty": 1,
+      "name": "Savvy Hunter"
+    },
+    {
+      "qty": 1,
+      "name": "Scattered Groves"
+    },
+    {
+      "qty": 1,
+      "name": "Scoured Barrens"
+    },
+    {
+      "qty": 1,
+      "name": "Scurry Oak"
+    },
+    {
+      "qty": 1,
+      "name": "Shire Terrace"
+    },
+    {
+      "qty": 1,
+      "name": "Sm\u00e9agol, Helpful Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Sunpetal Grove"
+    },
+    {
+      "qty": 5,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Hierarchy"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Resilience"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Unity"
+    },
+    {
+      "qty": 1,
+      "name": "The Battle of Bywater"
+    },
+    {
+      "qty": 1,
+      "name": "The Ring Goes South"
+    },
+    {
+      "qty": 1,
+      "name": "The Shire"
+    },
+    {
+      "qty": 1,
+      "name": "Tireless Provisioner"
+    },
+    {
+      "qty": 1,
+      "name": "Treebeard, Gracious Host"
+    },
+    {
+      "qty": 1,
+      "name": "Viscera Seer"
+    },
+    {
+      "qty": 1,
+      "name": "Woodland Cemetery"
+    },
+    {
+      "qty": 1,
+      "name": "Zulaport Cutthroat"
+    }
+  ],
+  "sideboard": []
+}

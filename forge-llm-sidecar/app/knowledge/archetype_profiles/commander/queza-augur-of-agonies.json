@@ -1,0 +1,992 @@
+{
+  "schema_version": 1,
+  "name": "Queza, Augur of Agonies",
+  "format": "commander",
+  "colors": [
+    "B",
+    "U",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "The deck leverages high-volume spell casting to trigger life loss and card draw engines like Queza and Psychosis Crawler, converting incremental advantage into a lethal life-loss clock while using black and white removal to control the board. It excels against combo and control decks that rely on single big threats, as its cantrip-heavy game plan out-values them while applying steady pressure.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 3,
+      "cards": [
+        "Angel's Grace",
+        "Defiler of Dreams",
+        "Jin-Gitaxias, Core Augur"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 44,
+      "cards": [
+        "Archivist of Oghma",
+        "Archmage Emeritus",
+        "Body of Knowledge",
+        "Brainstorm",
+        "Chasm Skulker",
+        "Circuit Mender",
+        "Cloudblazer",
+        "Consider",
+        "Defiler of Dreams",
+        "Depopulate",
+        "Ertai Resurrected",
+        "Fell Stinger",
+        "Font of Mythos",
+        "Gitaxian Probe",
+        "Ingenious Prodigy",
+        "Insatiable Avarice",
+        "Jace, the Mind Sculptor",
+        "Jin-Gitaxias, Core Augur",
+        "Laboratory Maniac",
+        "Ledger Shredder",
+        "Lich's Mastery",
+        "Mystic Remora",
+        "Narset, Parter of Veils",
+        "Peer into the Abyss",
+        "Preordain",
+        "Queza, Augur of Agonies",
+        "Raffine's Tower",
+        "Reconnaissance Mission",
+        "Sheoldred, the Apocalypse",
+        "Sign in Blood",
+        "Silver Scrutiny",
+        "Skybridge Towers",
+        "Teferi's Ageless Insight",
+        "Teferi, Temporal Pilgrim",
+        "Tenacious Underdog",
+        "The Bath Song",
+        "The Dross Pits",
+        "The Fair Basilica",
+        "The Surgical Bay",
+        "Underworld Dreams",
+        "Wall of Omens",
+        "Waterfront District",
+        "Windfall",
+        "Wizard Class"
+      ],
+      "mainboard_count": 44,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Consider",
+        "Ingenious Prodigy",
+        "Jace, the Mind Sculptor",
+        "Narset, Parter of Veils",
+        "Preordain",
+        "Silverquill Campus",
+        "Temple of Deceit",
+        "Temple of Enlightenment",
+        "Temple of Silence",
+        "Woe Strider"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 2,
+      "cards": [
+        "Insatiable Avarice",
+        "Moon-Blessed Cleric"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Angel's Grace",
+        "Laboratory Maniac",
+        "Windfall"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 32,
+      "cards": [
+        "Archivist of Oghma",
+        "Archmage Emeritus",
+        "Azorius Signet",
+        "Body of Knowledge",
+        "Chasm Skulker",
+        "Circuit Mender",
+        "Cloudblazer",
+        "Commit // Memory",
+        "Defiler of Dreams",
+        "Dimir Signet",
+        "Ertai Resurrected",
+        "Fell Stinger",
+        "Fiendish Panda",
+        "Ingenious Prodigy",
+        "Jace, the Mind Sculptor",
+        "Jin-Gitaxias, Core Augur",
+        "Laboratory Maniac",
+        "Ledger Shredder",
+        "Luminous Broodmoth",
+        "Monastery Mentor",
+        "Moon-Blessed Cleric",
+        "Narset, Parter of Veils",
+        "Orzhov Signet",
+        "Priest of Fell Rites",
+        "Queza, Augur of Agonies",
+        "Sheoldred, the Apocalypse",
+        "Sol Ring",
+        "Teferi, Temporal Pilgrim",
+        "Tenacious Underdog",
+        "Wall of Omens",
+        "Waterlogged Teachings",
+        "Woe Strider"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Austere Command",
+        "Cleansing Nova",
+        "Darksteel Ingot",
+        "Depopulate",
+        "Ertai Resurrected",
+        "Infernal Grasp",
+        "Jace, the Mind Sculptor",
+        "Path to Exile",
+        "Priest of Fell Rites",
+        "Reconnaissance Mission",
+        "Swords to Plowshares",
+        "Talisman of Dominance",
+        "Talisman of Hierarchy",
+        "Underworld Dreams",
+        "Void Rend"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Austere Command",
+        "Cleansing Nova",
+        "Depopulate"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": [
+        "Counterspell",
+        "Ertai Resurrected"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Darksteel Ingot",
+        "Lich's Mastery",
+        "Void Rend"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 2,
+      "cards": [
+        "Ledger Shredder",
+        "The Bath Song"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 10,
+      "cards": [
+        "Ascend from Avernus",
+        "Bloodchief Ascension",
+        "Consider",
+        "Fiendish Panda",
+        "Lich's Mastery",
+        "Priest of Fell Rites",
+        "Takenuma, Abandoned Mire",
+        "Tenacious Underdog",
+        "The Bath Song",
+        "Woe Strider"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 11,
+      "cards": [
+        "Ascend from Avernus",
+        "Dromar's Cavern",
+        "Fiendish Panda",
+        "Jace, the Mind Sculptor",
+        "Luminous Broodmoth",
+        "Priest of Fell Rites",
+        "Takenuma, Abandoned Mire",
+        "Teferi, Temporal Pilgrim",
+        "Tenacious Underdog",
+        "The Bath Song",
+        "Woe Strider"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Archmage Emeritus",
+        "Defiler of Dreams",
+        "Monastery Mentor"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 3,
+      "cards": [
+        "Angel's Grace",
+        "Laboratory Maniac",
+        "Windfall"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Angel's Grace",
+        "Gitaxian Probe",
+        "Jin-Gitaxias",
+        "Jin-Gitaxias, Core Augur"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 26,
+      "cards": [
+        "Arcane Sanctum",
+        "Arcane Signet",
+        "Command Tower",
+        "Darkslick Shores",
+        "Darksteel Ingot",
+        "Decanter of Endless Water",
+        "Dromar's Cavern",
+        "Exotic Orchard",
+        "Fetid Heath",
+        "Isolated Chapel",
+        "Mirrex",
+        "Morphic Pool",
+        "Raffine's Tower",
+        "Reliquary Tower",
+        "Shipwreck Marsh",
+        "Silverquill Campus",
+        "Skybridge Towers",
+        "Skycloud Expanse",
+        "Takenuma, Abandoned Mire",
+        "Temple of Deceit",
+        "Temple of Enlightenment",
+        "Temple of Silence",
+        "The Dross Pits",
+        "The Fair Basilica",
+        "The Surgical Bay",
+        "Waterfront District"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 34,
+      "cards": [
+        "Arcane Sanctum",
+        "Command Tower",
+        "Darkslick Shores",
+        "Dromar's Cavern",
+        "Exotic Orchard",
+        "Fetid Heath",
+        "Island",
+        "Isolated Chapel",
+        "Mirrex",
+        "Morphic Pool",
+        "Plains",
+        "Raffine's Tower",
+        "Reliquary Tower",
+        "Shipwreck Marsh",
+        "Silverquill Campus",
+        "Skybridge Towers",
+        "Skycloud Expanse",
+        "Swamp",
+        "Takenuma, Abandoned Mire",
+        "Temple of Deceit",
+        "Temple of Enlightenment",
+        "Temple of Silence",
+        "The Dross Pits",
+        "The Fair Basilica",
+        "The Surgical Bay",
+        "Waterfront District"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 3,
+      "cards": [
+        "Jace, the Mind Sculptor",
+        "Narset, Parter of Veils",
+        "Teferi, Temporal Pilgrim"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.18
+  },
+  "dual_role_cards": [
+    {
+      "card": "Angel's Grace",
+      "roles": [
+        "hate_pieces",
+        "mana_reducers",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archivist of Oghma",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archmage Emeritus",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ascend from Avernus",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Austere Command",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Body of Knowledge",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chasm Skulker",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Circuit Mender",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cleansing Nova",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cloudblazer",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Consider",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darkslick Shores",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darksteel Ingot",
+      "roles": [
+        "mana_fixing",
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Defiler of Dreams",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "mana_reducers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Depopulate",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dromar's Cavern",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ertai Resurrected",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fell Stinger",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fetid Heath",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fiendish Panda",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gitaxian Probe",
+      "roles": [
+        "card_advantage",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ingenious Prodigy",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Insatiable Avarice",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Isolated Chapel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jace, the Mind Sculptor",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "planeswalker_threats",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jin-Gitaxias, Core Augur",
+      "roles": [
+        "card_advantage",
+        "hate_pieces",
+        "mana_reducers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Laboratory Maniac",
+      "roles": [
+        "card_advantage",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ledger Shredder",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lich's Mastery",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Luminous Broodmoth",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mirrex",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monastery Mentor",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Moon-Blessed Cleric",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Morphic Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narset, Parter of Veils",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Preordain",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Priest of Fell Rites",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Queza, Augur of Agonies",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raffine's Tower",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reconnaissance Mission",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheoldred, the Apocalypse",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shipwreck Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Silverquill Campus",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Skybridge Towers",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Skycloud Expanse",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Takenuma, Abandoned Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teferi, Temporal Pilgrim",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Deceit",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Enlightenment",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Silence",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tenacious Underdog",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Bath Song",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Dross Pits",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Fair Basilica",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Surgical Bay",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underworld Dreams",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Void Rend",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wall of Omens",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Waterfront District",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windfall",
+      "roles": [
+        "card_advantage",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Woe Strider",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Be cautious of self-inflicted life loss from Queza and Psychosis Crawler",
+    "always calculate triggers before casting spells.",
+    "Marauding Blight-Priest is a double-edged sword\u2014sacrificing it for life gain and damage can backfire if you're low on life.",
+    "In formats with graveyard hate, consider reducing recursion spells and focusing on in-the-board synergy.",
+    "Always track opponent's life total relative to your triggers to avoid accidental losses."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast a cantrip or cheap spell to trigger life loss/card draw, then pass."
+    },
+    {
+      "trigger": "early game",
+      "line": "If holding a 1-drop creature, play it instead."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Develop mana, cast another cantrip or deploy Marauding Blight-Priest."
+    }
+  ],
+  "kill_priority": [
+    "Archmage Emeritus",
+    "Defiler of Dreams",
+    "Monastery Mentor",
+    "Angel's Grace",
+    "Laboratory Maniac",
+    "Windfall",
+    "Jace, the Mind Sculptor",
+    "Narset, Parter of Veils"
+  ],
+  "interaction_to_disrupt": [
+    "Counterspell",
+    "Ertai Resurrected",
+    "Darksteel Ingot",
+    "Lich's Mastery",
+    "Void Rend",
+    "Austere Command",
+    "Cleansing Nova",
+    "Depopulate"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/queza-augur-of-agonies.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

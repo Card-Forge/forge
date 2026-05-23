@@ -1,0 +1,169 @@
+{
+  "archetype": "4c Control",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/4c-control.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Augur of Bolas"
+    },
+    {
+      "qty": 1,
+      "name": "Avenging Hunter"
+    },
+    {
+      "qty": 1,
+      "name": "Azure Fleet Admiral"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 1,
+      "name": "Campfire"
+    },
+    {
+      "qty": 1,
+      "name": "Chainer's Edict"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Fire // Ice"
+    },
+    {
+      "qty": 1,
+      "name": "Generous Ent"
+    },
+    {
+      "qty": 1,
+      "name": "Highland Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Ice Tunnel"
+    },
+    {
+      "qty": 2,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 4,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 2,
+      "name": "Murmuring Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Teachings"
+    },
+    {
+      "qty": 3,
+      "name": "Preordain"
+    },
+    {
+      "qty": 1,
+      "name": "Pulse of Murasa"
+    },
+    {
+      "qty": 2,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 1,
+      "name": "Rimewood Falls"
+    },
+    {
+      "qty": 2,
+      "name": "Seething Landscape"
+    },
+    {
+      "qty": 4,
+      "name": "Skred"
+    },
+    {
+      "qty": 5,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Thorn of the Black Rose"
+    },
+    {
+      "qty": 1,
+      "name": "Troll of Khazad-d\u00fbm"
+    },
+    {
+      "qty": 4,
+      "name": "Volatile Fjord"
+    },
+    {
+      "qty": 1,
+      "name": "Woodland Chasm"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Campfire"
+    },
+    {
+      "qty": 2,
+      "name": "Cast into the Fire"
+    },
+    {
+      "qty": 1,
+      "name": "Fiery Cannonade"
+    },
+    {
+      "qty": 2,
+      "name": "Gorilla Shaman"
+    },
+    {
+      "qty": 1,
+      "name": "Heritage Reclamation"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 3,
+      "name": "Weather the Storm"
+    }
+  ]
+}

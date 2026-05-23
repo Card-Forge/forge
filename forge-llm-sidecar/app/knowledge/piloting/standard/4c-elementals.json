@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early elemental creatures or mana dorks",
       "Hands containing Wistfulness or Deceit for early interaction",
-      "Hands with at least three lands and a playable curve"
+      "Hands with at least three lands and a playable curve",
+      "Keep hands with 2-3 lands (prioritizing duals or fetch/shock sources), at least one turn-1 playable spell or cheap Elemental, and a removal/answer.",
+      "Against Izzet Spells or Spellementals, prioritize hands with counterspell hate or early threats."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays or land drops",
       "Hands heavy on late-game cards without acceleration",
-      "Hands missing key interaction or elemental synergies"
+      "Hands missing key interaction or elemental synergies",
+      "Mulligan if you have 0-1 lands, only spells costing 3+ mana, or no early interaction against aggro/spells."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and low-cost elementals to establish board presence",
       "Use Deceit to disrupt opponent's early threats or bounce their creatures",
-      "Prioritize keeping the board clear while searching for Wistfulness"
+      "Prioritize keeping the board clear while searching for Wistfulness",
+      "Turn 1: Play a land, cast a cheap Elemental or cantrip to dig for consistency and establish board presence.",
+      "Turn 2: Develop mana, cast a mid-cost Elemental or answer an opponent's threat.",
+      "Sequence lands to maximize untapped mana, and prioritize playing spells that trigger Elemental synergies.",
+      "Never overextend without backup interaction."
     ],
     "mid_game": [
       "Deploy Vibrance to accelerate mana and enable larger elementals",
       "Cast Wistfulness to refill the hand and maintain pressure",
-      "Trade efficiently while preserving key removal for bigger threats"
+      "Trade efficiently while preserving key removal for bigger threats",
+      "Preserve mana for interaction until the late game",
+      "use cantrips to cycle through dead draws and maintain hand size.",
+      "Manage the graveyard carefully if the format features recursion hate, but leverage it for Elemental value when safe.",
+      "Track opponent's mana pools to time your plays around their answers.",
+      "Commit threats when you have removal ready for the opponent's answer or when you can out-value them in a race.",
+      "Hold back big Elementals if the opponent has sweepers or heavy targeted removal."
     ],
     "late_game": [
       "Flood the board with high-impact elementals using excess mana",
       "Leverage card advantage to out-resource control decks",
-      "Close out games with wide attacks or targeted finishers"
+      "Close out games with wide attacks or targeted finishers",
+      "High-impact Elementals with evasion or trample, combined with direct damage or card advantage to close out games.",
+      "Use signature cards like Wistfulness for late-game value or recursion, Deceit for surprise value or disruption, and Vibrance for mana acceleration or burst damage to close races.",
+      "Go all-in when you have card advantage secured, the opponent has no sweepers, or you can out-value them in a race.",
+      "Commit when you can protect your finisher or have multiple threats to trade through answers.",
+      "Only go all-in if you've confirmed the opponent lacks a board wipe or counter suite."
     ]
   },
   "key_cards": [
@@ -59,7 +77,11 @@
     "Lead with Deceit to clear paths for early elementals before committing resources",
     "Cast Wistfulness after resolving threats to ensure you have answers for the next turn",
     "Use Vibrance's mana generation to smooth out four-color mana base clumps",
-    "Hold interaction until opponent commits to a play to maximize efficiency"
+    "Hold interaction until opponent commits to a play to maximize efficiency",
+    "Common mistake: overcommitting to the board without answers or tracking opponent's mana.",
+    "Always save Deceit for optimal timing to disrupt their combo or control plan, use Vibrance for mana acceleration or burst when it closes the game, and leverage Wistfulness for late-game value or recursion.",
+    "Avoid playing all spells in a single turn unless necessary",
+    "preserve mana for interaction and maintain hand size through cantrips."
   ],
   "matchups": [
     {
@@ -88,16 +110,35 @@
         "Draw engines",
         "Win-condition pieces"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multi-target, or split-second spells if available. Overload counters with multiple low-cost threats and cantrips to dig past counters. Force them to use resources on multiple fronts, and save your signature cards for when they've exhausted their counter suite.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race their mana development. Use removal to eliminate key ramp sources and disrupt their curve. Don't overcommit to the board; focus on disruption and card advantage to out-value their late-game power.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage race. Prioritize keeping interaction for their key synergies and finishers. Use targeted removal to eliminate their threats and control the board with sweepers when necessary. Track their hand size and mana to time your plays optimally.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board-wide removal spells",
     "Card draw and value engines",
-    "Mana acceleration artifacts"
+    "Mana acceleration artifacts",
+    "Watch for sweepers, counterspells, and targeted removal.",
+    "Note when opponents hold up mana for multiple turns (likely holding a sweeper or counter).",
+    "Track graveyard activity if recursion is a threat, and monitor land drops to anticipate their power level."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:13:54+00:00",
     "model": "local-model",
@@ -113,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

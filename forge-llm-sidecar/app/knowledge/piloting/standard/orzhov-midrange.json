@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early interaction or a 1-2 drop creature",
       "Balanced mana bases with at least two lands",
-      "Combinations of removal and a threat that can play turn 3"
+      "Combinations of removal and a threat that can play turn 3",
+      "Keep hands with 2-3 lands, a turn-1 or turn-2 play (1-drop, removal, or early threat), and at least one answer to common metagame threats.",
+      "Prioritize hands with 2+ lands if they include a turn-2 play."
     ],
     "mulligan_criteria": [
       "Mana screws or heavy land hands",
       "Hands lacking early plays or answers",
-      "Overloaded with high-cost cards without early interaction"
+      "Overloaded with high-cost cards without early interaction",
+      "Mulligan pure land hands, hands with only 3+ mana spells, or hands lacking early interaction against Izzet/Aggro."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and cheap threats to establish presence",
       "Use early removal to disrupt opponent's game plan",
-      "Prioritize card advantage by trading efficiently"
+      "Prioritize card advantage by trading efficiently",
+      "Turn 1: Play a basic land, optionally cast a 1-drop or hold removal.",
+      "Turn 2: Play a second land, cast a 2-drop threat or removal.",
+      "Sequence lands to ensure W/B mana availability for removal and midgame spells.",
+      "If drawing Bloodletter, aim to have 2+ mana by turn 4-5, but can be cast earlier if needed to stabilize."
     ],
     "mid_game": [
       "Deploy signature creatures to apply pressure",
       "Hold removal for key opponent threats",
-      "Begin generating value through death triggers and conditional effects"
+      "Begin generating value through death triggers and conditional effects",
+      "Balance mana for removal versus threat development.",
+      "Avoid overcommitting to the board if the opponent has sweepers or counters.",
+      "Use the graveyard strategically, particularly for Bloodletter's sacrifice ability to fuel +1/+1 counters or answer threats.",
+      "Manage hand size to avoid flooding while maintaining pressure.",
+      "Commit threats when you have removal ready or the opponent is tapped out.",
+      "Hold back if the opponent has potential sweepers, counters, or ramp."
     ],
     "late_game": [
       "Stabilize with larger threats and board wipes if necessary",
       "Leverage accumulated card advantage to outlast opponents",
-      "Close out games with resilient, hard-to-remove creatures"
+      "Close out games with resilient, hard-to-remove creatures",
+      "Bloodletter of Aclazotz with multiple +1/+1 counters, Unstoppable Slasher, or a combination of removal and a resilient threat.",
+      "Win by out-resourcing and closing with flying or unblockable threats that are difficult to answer.",
+      "Go all-in when you have board advantage, the opponent is low on life, or you've removed their key answers.",
+      "Commit when you can safely attack with Bloodletter or Slasher without risking a sweep."
     ]
   },
   "key_cards": [
@@ -58,7 +75,10 @@
   "sequencing_tips": [
     "Prioritize playing threats before holding removal unless a specific answer is needed",
     "Use creature death triggers to trigger additional effects before casting removal",
-    "Manage mana carefully to ensure you can cast both a threat and an answer on the same turn"
+    "Manage mana carefully to ensure you can cast both a threat and an answer on the same turn",
+    "Common mistakes include overcommitting to the board without answers, mismanaging Bloodletter's counters, and ignoring opponent's mana.",
+    "Unique interactions: Bloodletter can sacrifice your own creatures to grow, but be careful not to give opponent triggers.",
+    "Requiting Hex likely counters or returns spells, so use it strategically to protect your board or disrupt opponent combos."
   ],
   "matchups": [
     {
@@ -87,15 +107,35 @@
         "Value creatures",
         "Mana advantage"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, split your spells across turns, or play around counters by holding up removal. Utilize uncounterable effects if available, and pressure with multiple threats to force difficult decisions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Answer ramp sources early with efficient removal. Don't let them reach their big spells. Use life gain and board control to slow their acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by better sequencing, holding up removal for key threats, and out-valuing with Bloodletter's synergy. Prioritize board presence and card advantage. Force the opponent to overcommit or make mistakes.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Efficient removal spells",
-    "Board wipes and sweepers"
+    "Board wipes and sweepers",
+    "Watch for opponent's mana base, hand size, and graveyard.",
+    "Note if they're playing landfall triggers or prowess triggers.",
+    "Track if they have sweepers or counterspells in hand.",
+    "Pay attention to when they tap out for big spells or combo pieces."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:47:15+00:00",
     "model": "local-model",
@@ -111,6 +151,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

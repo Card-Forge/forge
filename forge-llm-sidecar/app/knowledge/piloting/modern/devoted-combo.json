@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more lands",
       "Hands containing both Devoted Druid and Delighted Halfling",
-      "Hands with Green Sun's Zenith and early mana sources"
+      "Hands with Green Sun's Zenith and early mana sources",
+      "Keep hands with 2-3 lands plus Devoted Druid, Delighted Halfling, or Green Sun's Zenith.",
+      "Keep any hand with Druid + a land."
     ],
     "mulligan_criteria": [
       "Hands with zero or one land",
       "Hands missing either Druid or Halfling",
-      "Hands with only high-cost cards and no combo pieces"
+      "Hands with only high-cost cards and no combo pieces",
+      "Mulligan pure land hands, hands with only non-creature spells, or hands lacking Druid/Halfling/GSZ unless they contain multiple lands and a clear path to combo."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Prioritize playing lands and setting up the Devoted Druid and Delighted Halfling loop",
       "Avoid unnecessary combat to preserve combo pieces",
-      "Play cheap spells or ramp cards if available"
+      "Play cheap spells or ramp cards if available",
+      "Turn 1: Play a land, pass.",
+      "Turn 2: Play Devoted Druid, tap for G.",
+      "Turn 3: Play Delighted Halfling, untap Druid, tap for GG.",
+      "Turn 4: Cast Green Sun's Zenith for X=2 to tutor for a combo piece or ramp spell.",
+      "Sequence lands to ensure colored mana for GSZ and finisher."
     ],
     "mid_game": [
       "Execute the mana loop once both creatures are on the battlefield",
       "Cast Green Sun's Zenith immediately after generating infinite mana",
-      "Search for a zero-mana-cost finisher that matches the matchup"
+      "Search for a zero-mana-cost finisher that matches the matchup",
+      "Prioritize keeping Devoted Druid and Delighted Halfling on board.",
+      "Use GSZ efficiently to find the exact finisher needed.",
+      "Don't overcommit mana if the opponent has interaction.",
+      "Manage graveyard carefully if playing against discard/hate.",
+      "Hold back on casting the finisher until you have protection or can resolve it through interaction.",
+      "Use discard to clear key threats."
     ],
     "late_game": [
       "Activate the finisher's abilities to secure victory",
       "Use excess mana to cast additional spells or protect the board if the combo is interrupted",
-      "Transition to a grind game only if the combo is disrupted"
+      "Transition to a grind game only if the combo is disrupted",
+      "Karn, the Great Creator (exile opponent's library), Bolas's Citadel (mill), or Thassa's Oracle (draw opponent's library).",
+      "Assemble via Druid/Halfling mana + GSZ tutor.",
+      "Go all-in when you have 5+ mana, a clear path to resolve the finisher, and no immediate interaction from the opponent.",
+      "If you can tutor for the finisher and have protection, commit."
     ]
   },
   "key_cards": [
@@ -59,7 +77,11 @@
     "Always play Delighted Halfling before Devoted Druid to ensure the loop can start",
     "Verify you have enough mana to cast both creatures before attempting the loop",
     "Cast Green Sun's Zenith immediately after the loop to avoid opponent interaction",
-    "Prioritize finishers that bypass opponent's board state or life total"
+    "Prioritize finishers that bypass opponent's board state or life total",
+    "Common mistake: Overcommitting to GSZ without a clear finisher.",
+    "Another: Forgetting that Delighted Halfling's mana generation requires untapping Druid.",
+    "Watch out for 'Stifle' or 'Surgical Extraction' on your graveyard.",
+    "Green Sun's Zenith can target creatures in the graveyard, so be mindful of your own graveyard."
   ],
   "matchups": [
     {
@@ -88,16 +110,35 @@
         "Card draw engines",
         "Tempo plays"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use GSZ's flash-in capability if possible, or tutor for a finisher that doesn't rely on the stack. Use discard to remove counterspells. Consider casting the finisher in response to their spell if you have priority.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use discard to remove ramp spells. Use removal on key ramp creatures. Don't let them get ahead on mana; pressure them with early plays or discard.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Use discard to remove their tutors. Protect your Druid/Halfling. Out-value them with better sequencing and sideboard cards.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Single-target removal targeting Devoted Druid or Delighted Halfling",
     "Board wipes that clear your combo setup",
     "Counterspells aimed at Green Sun's Zenith",
-    "Hand disruption that delays your mana loop"
+    "Hand disruption that delays your mana loop",
+    "Watch for counterspells, discard spells, and removal targeting Druid/Halfling.",
+    "Note when opponents tap out for big spells or have graveyard hate.",
+    "Track if they're playing around your combo with specific answers."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:59:44+00:00",
     "model": "local-model",
@@ -132,6 +173,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": "Devoted Combo"
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

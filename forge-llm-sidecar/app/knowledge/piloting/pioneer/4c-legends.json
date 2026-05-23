@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early legendary creatures or token generators",
       "Hands containing Crimson Chaos or Carnage with a creature to sacrifice",
-      "Mana bases that support four-color casting by turn three"
+      "Mana bases that support four-color casting by turn three",
+      "Keep hands with 2-3 lands (including fixing) and a turn-1 or turn-2 play (e.g., a cheap legend, Glasspool Mimic, or spot removal).",
+      "Prioritize fixing over raw land count."
     ],
     "mulligan_criteria": [
       "Hands lacking removal or discard effects",
       "Hands with only late-game legends and no early interaction",
-      "Hands missing two or more basic lands or key duals"
+      "Hands missing two or more basic lands or key duals",
+      "Mulligan on 3+ lands with no early plays, or hands consisting solely of high-cost legends and no answers."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and early legends to establish board presence",
       "Use Crimson Chaos to disrupt opponent's hand while drawing cards",
-      "Hold creatures to fuel Carnage if needed"
+      "Hold creatures to fuel Carnage if needed",
+      "Turn 1: Play a land, cast a 1-drop legend or cantrip if available.",
+      "Turn 2: Develop board with a 2-drop legend or Glasspool Mimic, using it to copy a threat or block.",
+      "Land sequencing: Prioritize fetch/shock lands that can enter untapped or pair with basics for fixing.",
+      "Play around spot removal until you establish board presence."
     ],
     "mid_game": [
       "Sacrifice tokens or excess creatures to cast Carnage for targeted removal",
       "Let Tinybones Joins Up grow while applying pressure",
-      "Maintain card advantage through discard and draw effects"
+      "Maintain card advantage through discard and draw effects",
+      "Preserve mana for interaction until turn 3.",
+      "Use cantrips to dig for answers and maintain hand size.",
+      "Treat the graveyard as a secondary resource for recursion or value, avoiding unnecessary milling.",
+      "Balance removal, threats, and answers in hand",
+      "avoid flooding the board with unprotectable legends.",
+      "Commit threats when you have removal in hand or a board advantage."
     ],
     "late_game": [
       "Scale Tinybones Joins Up into a massive threat",
       "Generate token armies with Glasspool Mimic deaths",
-      "Outlast opponents with superior card economy and board control"
+      "Outlast opponents with superior card economy and board control",
+      "Tinybones Joins Up as a legendary commander/finisher, or a copied high-impact threat via Glasspool Mimic.",
+      "Carnage and Crimson Chaos serve as scalable finishers if they can resolve safely.",
+      "Go all-in when you have card advantage, removal for their answers, and they have no sweepers.",
+      "Commit when you can protect your finisher or have multiple threats that force unfavorable trades."
     ]
   },
   "key_cards": [
@@ -64,7 +81,13 @@
     "Hold creatures in hand to enable Carnage when facing big threats",
     "Cast Crimson Chaos before playing creatures to maximize hand disruption",
     "Save Glasspool Mimic deaths for when you need blockers or Carnage fuel",
-    "Prioritize keeping Tinybones Joins Up alive while building board state"
+    "Prioritize keeping Tinybones Joins Up alive while building board state",
+    "Watch for legend rule interactions when copying or entering the battlefield.",
+    "Glasspool Mimic's tap ability is a key resource for value and defense",
+    "do not overextend with it.",
+    "Tinybones Joins Up likely functions as a commander or legend enabler",
+    "use its ability to generate value or protect your board.",
+    "Common mistake: playing too many legends without protection or answers."
   ],
   "matchups": [
     {
@@ -93,6 +116,21 @@
         "Card draw spells",
         "Value legends"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, split casting costs, or force counters with cantrips. Protect key spells with counters or protection effects. Prioritize spells that are difficult to counter or have multiple targets.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early interaction, discard, or artifact destruction. Do not let them stabilize; pressure early and disrupt their mana development. Use efficient removal to trade up against their large threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing removal and card draw. Use Glasspool Mimic to copy their key threats or protect your own. Win the sideboard game by bringing in more interaction and legality tricks.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -100,10 +138,15 @@
     "Counterspells",
     "Board wipes",
     "Fast finishers",
-    "Card draw engines"
+    "Card draw engines",
+    "Watch for sweepers, targeted removal, and combo pieces.",
+    "Note if the opponent is playing around specific legends.",
+    "Track graveyard activity for recursion threats.",
+    "Pay attention to mana development to predict their next move."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:29:30+00:00",
     "model": "local-model",
@@ -119,6 +162,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

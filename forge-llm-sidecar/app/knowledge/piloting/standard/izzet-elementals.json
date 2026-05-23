@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more lands and a playable threat or draw spell by turn two",
       "Hands containing Ashling, Rekindled paired with early interaction or mana dorks",
-      "Hands that can cast Wistfulness or Vibrance on curve to establish early board presence"
+      "Hands that can cast Wistfulness or Vibrance on curve to establish early board presence",
+      "Keep hands with 2-3 lands (preferably including a dual or shockland for fixing), at least one 1-2 mana Elemental (Rekindled Zephyr, Izzet Staticaster), and a pump spell or Ashling.",
+      "Prioritize hands that can play a land and cast a threat on turn 2."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands and no early plays",
       "Hands lacking removal or card draw in a six-card hand",
-      "Hands that cannot interact with aggressive early-game strategies"
+      "Hands that cannot interact with aggressive early-game strategies",
+      "Mulligan to 4-5 lands if you have no early threats, or hands consisting solely of 3+ mana spells."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Play lands and cheap Elementals to establish board presence",
       "Use Wistfulness to draw into answers or additional threats",
-      "Prioritize casting Ashling, Rekindled to begin token generation"
+      "Prioritize casting Ashling, Rekindled to begin token generation",
+      "Turn 1: Play a land, optionally cast a 1-mana Elemental if open.",
+      "Turn 2: Play a land, cast a 2-mana Elemental or pump spell.",
+      "Sequence lands to ensure you can cast Ashling (RR) by turn 3-4.",
+      "Avoid overextending on turn 2",
+      "establish board presence while preserving mana for interaction or Ashling's flash."
     ],
     "mid_game": [
       "Leverage Vibrance to accelerate mana and cast larger threats",
       "Protect Ashling, Rekindled with U/R interaction to maximize token output",
-      "Trade efficiently to maintain board control while drawing cards"
+      "Trade efficiently to maintain board control while drawing cards",
+      "Treat Wistfulness and Vibrance as tempo tools, not just damage spells.",
+      "Use them to trade your Elementals into larger blockers or clear key removal.",
+      "Manage Ashling's activation economy carefully",
+      "don't over-sacrifice Elementals if you need them for board presence or to trigger death triggers for card draw.",
+      "Commit threats when you have removal or pump ready to handle blockers.",
+      "Hold back if facing sweepers (Wrath of God, Cyclonic Rift) or large finishers."
     ],
     "late_game": [
       "Flood the board with recurring Elemental tokens to apply unblockable pressure",
       "Use card draw engines to find sweepers or finishers if the board clears",
-      "Manage life totals and tempo to outlast control strategies"
+      "Manage life totals and tempo to outlast control strategies",
+      "Ashling, the Extinguisher (activated ability or pump-boosted), or a fully pumped Elemental with flying/trample.",
+      "Win by trading up into their finishers and closing with unblockable damage or direct removal.",
+      "Use Ashling's flash to respond to their win attempts.",
+      "When you have card advantage, removal for their threats, and they're tapped out or low on life.",
+      "Go all-in when Ashling is on board and you can safely activate her or pump a threat past their blockers.",
+      "Commit when you've forced them to use multiple spells for one threat and you still have resources left."
     ]
   },
   "key_cards": [
@@ -58,7 +78,11 @@
   "sequencing_tips": [
     "Hold up U/R interaction until the opponent commits to a board state or attacks",
     "Cast Wistfulness before playing Ashling, Rekindled to draw into protection or additional value",
-    "Use Vibrance's abilities to enable surprise plays or recover from board wipes"
+    "Use Vibrance's abilities to enable surprise plays or recover from board wipes",
+    "Common mistake: Overusing pump spells on unblockable threats instead of using them to trade into larger blockers or clear removal.",
+    "Remember that Wistfulness/Vibrance draw a card if the creature dies, so trading is often better than pushing unblocked damage.",
+    "Ashling's flash allows you to hold priority and respond to their plays.",
+    "Don't forget to check for hexproof/indestructible threats that Ashling can't target, and be mindful of the sorcery timing of Vibrance in fast matchups."
   ],
   "matchups": [
     {
@@ -87,15 +111,35 @@
         "Card draw spells",
         "Resilient threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Wistfulness/Vibrance on your own Elementals to trade into their blockers, then cast Ashling or threats in response to counterspells. Use cheap threats to force counterspells, then follow up with Ashling or a pump spell. Don't overcommit to the stack; let them counter your first threat before going for the kill.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their land drops. Use Ashling to remove their ramp targets or finishers. Don't overcommit to the board; trade efficiently and use pump spells to clear their early threats. Force them to use removal on your cheap Elementals, then close with Ashling.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize keeping Ashling, as her activated ability and flash make her superior. Trade Elementals efficiently and use Negate to protect your finishers. Control the stack by holding priority and responding to their Ashling activations with your own.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early aggressive creatures",
     "Board wipe spells",
-    "Hand disruption"
+    "Hand disruption",
+    "Watch for sweepers, targeted removal (Path to Exile, Fatal Push), and combo wincons.",
+    "Note when opponents tap out for big spells",
+    "that's your window to push damage or cast Ashling.",
+    "Track how many removal spells they've already answered, as Ashling and pumped Elementals become significantly more dangerous once their interaction is depleted."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:38:36+00:00",
     "model": "local-model",
@@ -111,6 +155,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

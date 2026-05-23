@@ -1,0 +1,506 @@
+{
+  "schema_version": 1,
+  "name": "4c Kona",
+  "format": "standard",
+  "colors": [
+    "W",
+    "U",
+    "R",
+    "G"
+  ],
+  "strategy_type": "ramp",
+  "expected_deck_total": 60,
+  "macro_plan": "A four-color ramp strategy that leverages mana dorks like Formidable Speaker and Ashling, Rekindled to accelerate into game-winning spells. Omniscience serves as the primary engine, allowing you to cast multiple threats or answers without paying mana. The deck aims to outvalue opponents by generating massive mana advantages and closing games with efficient, untapped threats.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 3,
+      "cards": [
+        "Winternight Stories"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 20,
+      "cards": [
+        "Ashling, Rekindled",
+        "Formidable Speaker",
+        "Omniscience",
+        "Opt",
+        "Prismari Charm",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Opt",
+        "Prismari Charm",
+        "Stock Up"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 3,
+      "cards": [
+        "Formidable Speaker"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 5,
+      "cards": [
+        "North Wind Avatar",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 21,
+      "cards": [
+        "Formidable Speaker",
+        "Kona, Rescue Beastie",
+        "Marang River Regent",
+        "North Wind Avatar",
+        "Omni-Changeling",
+        "Omniscience",
+        "Terror of the Peaks",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 9,
+      "cards": [
+        "Fire Magic",
+        "Origin of Metalbending",
+        "Prismari Charm",
+        "Terror of the Peaks"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Fire Magic",
+        "Omni-Changeling"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "counterspells": {
+      "target_count": 14,
+      "cards": [
+        "Ashling, Rekindled",
+        "Formidable Speaker",
+        "Omniscience",
+        "Spider-Sense"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 20,
+      "cards": [
+        "Ashling, Rekindled",
+        "Cavern of Souls",
+        "Formidable Speaker",
+        "Lost in the Maze",
+        "Omniscience",
+        "Origin of Metalbending"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 3,
+      "cards": [
+        "Formidable Speaker"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 6,
+      "cards": [
+        "Prismari Charm",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 9,
+      "cards": [
+        "Prismari Charm",
+        "Spider-Sense",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 3
+    },
+    "engines": {
+      "target_count": 11,
+      "cards": [
+        "Ashling, Rekindled",
+        "Formidable Speaker",
+        "Omniscience"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 5,
+      "cards": [
+        "North Wind Avatar",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 11,
+      "cards": [
+        "Ashling, Rekindled",
+        "Formidable Speaker",
+        "Omniscience"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Dracogenesis",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 35,
+      "cards": [
+        "Ashling, Rekindled",
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Dreamroot Cascade",
+        "Formidable Speaker",
+        "Kavaron, Memorial World",
+        "Multiversal Passage",
+        "Omniscience",
+        "Starting Town",
+        "Steam Vents",
+        "Stomping Ground",
+        "Stormcarved Coast",
+        "Uthros, Titanic Godcore"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Breeding Pool",
+        "Cavern of Souls",
+        "Dreamroot Cascade",
+        "Island",
+        "Kavaron, Memorial World",
+        "Multiversal Passage",
+        "Starting Town",
+        "Steam Vents",
+        "Stomping Ground",
+        "Stormcarved Coast",
+        "Uthros, Titanic Godcore"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.38
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ashling, Rekindled",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "engines",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dreamroot Cascade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Magic",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Formidable Speaker",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "discard_outlets",
+        "engines",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kavaron, Memorial World",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Multiversal Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "North Wind Avatar",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Omni-Changeling",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Omniscience",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "engines",
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Opt",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Origin of Metalbending",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismari Charm",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spider-Sense",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormcarved Coast",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Terror of the Peaks",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Uthros, Titanic Godcore",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Voice of Victory",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Winternight Stories",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_reducers",
+        "payoff_cards",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up mana for counterspells if needed, but prioritize casting Omniscience when you have a clear follow-up",
+    "Play mana dorks before casting Omniscience to maximize free spells",
+    "Save removal for opponent's key threats",
+    "Kona and Formidable Speaker trigger on any spell you cast, including instants and activated abilities that count as spells.",
+    "Cast instants at optimal times to maximize token generation."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and mana dorks on curve"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish early board presence with Speaker"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize land drops over early spells"
+    }
+  ],
+  "kill_priority": [
+    "Ashling, Rekindled",
+    "Formidable Speaker",
+    "Omniscience",
+    "North Wind Avatar",
+    "Winternight Stories",
+    "Kona, Rescue Beastie",
+    "Marang River Regent",
+    "Omni-Changeling"
+  ],
+  "interaction_to_disrupt": [
+    "Ashling, Rekindled",
+    "Formidable Speaker",
+    "Omniscience",
+    "Spider-Sense",
+    "Cavern of Souls",
+    "Lost in the Maze",
+    "Origin of Metalbending",
+    "Fire Magic"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/4c-kona.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "archetype": "Selesnya Midrange",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/selesnya-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Abandoned Air Temple"
+    },
+    {
+      "qty": 3,
+      "name": "Aven Interrupter"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 4,
+      "name": "Brushland"
+    },
+    {
+      "qty": 4,
+      "name": "Collected Company"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 2,
+      "name": "Elspeth, Storm Slayer"
+    },
+    {
+      "qty": 4,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Abundance"
+    },
+    {
+      "qty": 4,
+      "name": "Enduring Innocence"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 3,
+      "name": "Ouroboroid"
+    },
+    {
+      "qty": 4,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Razorverge Thicket"
+    },
+    {
+      "qty": 4,
+      "name": "Skyclave Apparition"
+    },
+    {
+      "qty": 1,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 3,
+      "name": "Thalia, Guardian of Thraben"
+    },
+    {
+      "qty": 2,
+      "name": "The Wandering Emperor"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Archon of Emeria"
+    },
+    {
+      "qty": 1,
+      "name": "Aven Interrupter"
+    },
+    {
+      "qty": 3,
+      "name": "Beza, the Bounding Spring"
+    },
+    {
+      "qty": 1,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 2,
+      "name": "March of Otherworldly Light"
+    },
+    {
+      "qty": 2,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 3,
+      "name": "Unlicensed Hearse"
+    }
+  ]
+}

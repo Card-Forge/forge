@@ -1,0 +1,121 @@
+{
+  "archetype": "Selesnya Landfall",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/selesnya-landfall.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Ba Sing Se"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 2,
+      "name": "Bushwhack"
+    },
+    {
+      "qty": 2,
+      "name": "Dyadrine, Synthesis Amalgam"
+    },
+    {
+      "qty": 4,
+      "name": "Earthbender Ascension"
+    },
+    {
+      "qty": 4,
+      "name": "Erode"
+    },
+    {
+      "qty": 3,
+      "name": "Escape Tunnel"
+    },
+    {
+      "qty": 4,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 7,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Hushwood Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Icetill Explorer"
+    },
+    {
+      "qty": 1,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 2,
+      "name": "Lumbering Worldwagon"
+    },
+    {
+      "qty": 4,
+      "name": "Mightform Harmonizer"
+    },
+    {
+      "qty": 1,
+      "name": "Mossborn Hydra"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Sazh's Chocobo"
+    },
+    {
+      "qty": 1,
+      "name": "Surrak, Elusive Hunter"
+    },
+    {
+      "qty": 2,
+      "name": "Temple Garden"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Kutzil, Malamet Exemplar"
+    },
+    {
+      "qty": 2,
+      "name": "Mossborn Hydra"
+    },
+    {
+      "qty": 3,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 1,
+      "name": "Restoration Magic"
+    },
+    {
+      "qty": 3,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 2,
+      "name": "Snakeskin Veil"
+    },
+    {
+      "qty": 2,
+      "name": "Surrak, Elusive Hunter"
+    },
+    {
+      "qty": 1,
+      "name": "Voice of Victory"
+    }
+  ]
+}

@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Hands with two lands and a playable creature or combat trick",
       "Hands containing Ocelot Pride or Voice of Victory",
-      "Hands with early interaction or curve-smoothing spells"
+      "Hands with early interaction or curve-smoothing spells",
+      "Keep hands with 3+ lands (prioritize fetch/shock-compatible or untap-entering lands), plus a turn-2 play (Ocelot Pride, Nacatl Pariah, or a combat trick).",
+      "Keep 2 lands only if paired with Ocelot Pride, Ajani, or two cheap cantrips/removal."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands",
       "Hands lacking early creatures or spells to play turns 1-2",
-      "Hands consisting only of late-game threats like Ajani, Nacatl Pariah"
+      "Hands consisting only of late-game threats like Ajani, Nacatl Pariah",
+      "Mulligan on 2 lands with no early plays, or 3+ lands with zero interactive/early threats."
     ],
     "examples": []
   },
@@ -26,17 +29,32 @@
     "early_game": [
       "Play lands and small creatures strictly on curve to establish presence",
       "Hold Voice of Victory until combat to maximize surprise value and damage",
-      "Avoid unnecessary trades while preserving combat tricks for key moments"
+      "Avoid unnecessary trades while preserving combat tricks for key moments",
+      "Turn 1: Play a land, optionally cast a cantrip or hold for turn 2.",
+      "Turn 2: Cast Nacatl Pariah or Ocelot Pride.",
+      "If Pariah, attack immediately, pump it, and look to trade or establish board presence.",
+      "Sequence lands to guarantee 2-drop and 3-drop turns.",
+      "Use Ocelot Pride on the turn it resolves if you have a token to pump, or hold it for a favorable combat phase."
     ],
     "mid_game": [
       "Deploy Ocelot Pride to generate board control and buff your Cat synergies",
       "Apply steady pressure to force unfavorable trades from the opponent",
-      "Use combat tricks to protect key attackers or enable surprise swings"
+      "Use combat tricks to protect key attackers or enable surprise swings",
+      "Avoid overcommitting mana to pumps without board presence or card advantage.",
+      "Use Ocelot Pride to trade up (pump to kill a larger creature, then sacrifice a token to refill).",
+      "Cantrip into answers to maintain hand size.",
+      "Graveyard is generally irrelevant",
+      "focus on board and hand resources.",
+      "Commit threats when the opponent has no sweepers or has blown interaction."
     ],
     "late_game": [
       "Bring in Ajani, Nacatl Pariah to stabilize, gain life, and close games",
       "Leverage Ocelot Pride's activated abilities to outvalue opponent's resources",
-      "Sequence combat tricks to bypass protection spells and secure lethal damage"
+      "Sequence combat tricks to bypass protection spells and secure lethal damage",
+      "Ocelot Pride pumped to lethal, Ajani's ultimate, or a combat trick on a large threat.",
+      "Win by trading efficiently, pushing damage through unblocked, and closing in 1-2 combat phases once you have card advantage.",
+      "Go all-in when you have card advantage, the opponent has no sweepers, or you can mathematically close the game before they can stabilize.",
+      "Commit when Ocelot Pride can trade into their best removal and still leave you ahead."
     ]
   },
   "key_cards": [
@@ -60,7 +78,12 @@
     "Hold Voice of Victory until combat to maximize surprise value and bypass protection spells",
     "Prioritize playing Ocelot Pride before committing to all-in attacks to maintain board resilience",
     "Save combat tricks for opponent's key threats rather than using them on curve",
-    "Sequence Ajani, Nacatl Pariah's activation after opponent's removal window has passed"
+    "Sequence Ajani, Nacatl Pariah's activation after opponent's removal window has passed",
+    "Common mistake: Over-pumping Ocelot Pride without board presence or card advantage.",
+    "Unique interaction: Ocelot Pride's ability triggers on combat damage, so timing pumps matters.",
+    "Don't forget to use Ajani's +1 to generate tokens or his -2 to draw cards.",
+    "Watch out for sacrifice outlets in the meta, as they can disrupt your token strategy.",
+    "Always track opponent's removal count to calculate risk."
   ],
   "matchups": [
     {
@@ -89,6 +112,21 @@
         "Protection spells",
         "Unexpected win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast Ocelot Pride with a cheap cantrip to ensure it resolves, or play multiple threats in a row to force counter-sacrifice. Use it as a late-game finisher when they've exhausted interaction. Don't rely on it resolving early if they have heavy counter support.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to force answers before they hit their big spells. Use efficient removal on their mana sources or key threats. Don't let them stabilize; trade aggressively and close the game before their late-game threats come online.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card advantage, efficient trades, and timing your pumps to maximize value. Sideboard in targeted removal and protection. Out-value them by trading up and closing the game before they can stabilize.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -96,10 +134,14 @@
     "Abrupt Decay",
     "Terastodon",
     "Kethis, the Hidden Hand",
-    "Lightning Helix"
+    "Lightning Helix",
+    "Watch for sweepers (e.g., Anger of the Gods, Wrath of God), hard removal (Path to Exile, Doom Blade), and combo finishers.",
+    "Note when opponents tap out for interaction versus holding up mana.",
+    "Track how many removal spells they've seen to calculate your risk of overcommitting."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:14:49+00:00",
     "model": "local-model",
@@ -115,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

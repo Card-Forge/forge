@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with one-mana creatures and cheap instants",
       "Draw engines that generate card advantage",
-      "Hands with at least three spells to trigger Prowess"
+      "Hands with at least three spells to trigger Prowess",
+      "Keep hands with 2-3 lands (prioritizing duals or mana rocks), at least one cheap cantrip or mana spell (e.g., Arcum's Astrolabe, Manamorphose), and a Prowess enabler or early damage spell.",
+      "Keep any hand with a turn-1 playable spell or mana accelerator."
     ],
     "mulligan_criteria": [
       "Hands lacking early curve plays",
       "Hands with only high-cost cards",
-      "Hands missing instant or sorcery spells"
+      "Hands missing instant or sorcery spells",
+      "Mulligan on 3+ lands with no spells, or 0-1 lands with no cantrips/rituals to fix mana."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Play one-drop creatures to establish board presence",
       "Cast cheap instants to trigger Prowess and cycle",
-      "Apply early pressure to force opponent responses"
+      "Apply early pressure to force opponent responses",
+      "Turn 1: Play a land, cast a cantrip or mana spell to trigger Prowess and dig.",
+      "Turn 2: Develop mana, cast a second spell to trigger Prowess again, aiming to draw into threats or burn.",
+      "Prioritize playing lands that enter untapped or can produce multiple colors, and sequence spells to maximize Prowess triggers before committing to combat."
     ],
     "mid_game": [
       "Use card draw to maintain spell density",
       "Protect key threats with counterspells or evasion",
-      "Trade efficiently while growing creatures larger"
+      "Trade efficiently while growing creatures larger",
+      "Treat hand as a resource",
+      "prioritize casting multiple spells per turn to trigger Prowess and dig deeper.",
+      "Manage mana carefully to ensure you can cast 2+ spells on key turns.",
+      "Use graveyard strategically if the deck utilizes it, but avoid overcommitting to graveyard synergies unless necessary.",
+      "Hold back on committing all threats if the opponent has removal or counterspells.",
+      "Use Prowess triggers to scout and stabilize before going wide."
     ],
     "late_game": [
       "Flood the board with multiple Prowess creatures",
       "Use remaining spells to trigger Prowess for lethal damage",
-      "Stabilize against opponent finishers with removal or counters"
+      "Stabilize against opponent finishers with removal or counters",
+      "Direct damage spells (Lightning Strike, Grapeshot, Aetherflux Reservoir) or combat damage from Prowess-enriched threats.",
+      "Win by reducing opponent to 0 life through spell chains or combat.",
+      "Go all-in when you have enough Prowess triggers to draw into your finisher, or when the opponent is at lethal range (10 or less life).",
+      "Commit when you can safely cast 3+ spells in a turn to ensure you draw through your deck."
     ]
   },
   "key_cards": [
@@ -58,7 +74,13 @@
   "sequencing_tips": [
     "Prioritize casting instants before combat to maximize Prowess triggers",
     "Hold up mana for counterspells when facing control decks",
-    "Cycle dead cards to find more instants and keep Prowess active"
+    "Cycle dead cards to find more instants and keep Prowess active",
+    "Common mistake: Overcommitting to combat without triggering Prowess first.",
+    "Always cast spells before attacking to maximize Prowess triggers.",
+    "Another: Ignoring mana screw",
+    "ensure your deck has enough mana acceleration and dual lands.",
+    "Unique interaction: Prowess triggers on the stack, so you can cast multiple spells in response to each other to trigger Prowess repeatedly.",
+    "Signature cards like Stormchaser's Talent and Flow State are turn-2/3 finishers that also trigger Prowess, so sequence them after cheaper enablers to maximize card draw and mana generation."
   ],
   "matchups": [
     {
@@ -84,15 +106,33 @@
         "Removal spells",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Prowess to dig through counterspells, cast spells in response to triggers, or use cheap cantrips to find answers. Hold up mana for Prowess triggers to maintain tempo. Consider sideboarded artifact hate or counterspell disruption.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to punish their mana development. Use direct damage to remove their ramp sources or finish them before they stabilize. Track their land drops and prepare burn.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by having better spell sequencing, more efficient mana, and superior sideboard choices. Prioritize disrupting their spell chains with counterspell hate and direct damage. Track their hand size and Prowess triggers to out-draw them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Wide creature decks",
     "Board wipe spells",
-    "Counterspell packages"
+    "Counterspell packages",
+    "Watch for counterspells (hold up mana for Prowess triggers or have backup plans), sweepers (prepare with artifact destruction or burn), and ramp threats (track mana development and prepare early pressure).",
+    "Key tell: Opponent holding 2+ mana on their turn often signals a counter or removal."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:36:42+00:00",
     "model": "local-model",
@@ -121,6 +161,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

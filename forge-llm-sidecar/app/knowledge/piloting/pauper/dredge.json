@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands containing Dread Return paired with early mill spells",
       "Hands featuring Generous Ent alongside cheap graveyard fillers",
-      "Hands with multiple low-cost spells to enable turn 1-2 graveyard setup"
+      "Hands with multiple low-cost spells to enable turn 1-2 graveyard setup",
+      "Keep hands with 2-3 lands (preferably duals or shocklands, or basic Swamps/Forests), at least one dredge enabler (Dredge, Stinkweed Imp, or similar), and a recursion engine or disruption spell."
     ],
     "mulligan_criteria": [
       "Hands lacking Dread Return or mill synergy",
       "Hands with only high-cost cards that stall development",
-      "Hands with no way to interact or fill the graveyard"
+      "Hands with no way to interact or fill the graveyard",
+      "Mulligan any hand with 0-1 lands, all non-basic lands with no fetches, or hands with only disruption and no graveyard synergy."
     ],
     "examples": []
   },
@@ -25,17 +27,31 @@
     "early_game": [
       "Play lands and cheap mill spells to fill your graveyard",
       "Prioritize drawing into Dread Return and Stinkweed Imp",
-      "Use Generous Ent early if possible to apply pressure"
+      "Use Generous Ent early if possible to apply pressure",
+      "Turn 1: Play a land, cast a dredge enabler or disruption spell.",
+      "Turn 2: Play a second land, cast another dredge enabler or recursion piece.",
+      "If you have multiple dredge cards, chain them to fill the graveyard quickly.",
+      "Prioritize establishing a graveyard engine over board presence."
     ],
     "mid_game": [
       "Cast Dread Return to bring back Stinkweed Imp",
       "Trigger Imp repeatedly to mill opponent and drain life",
-      "Use Generous Ent's ability to deal damage as cards are milled"
+      "Use Generous Ent's ability to deal damage as cards are milled",
+      "Mana should be hoarded for recursion spells and responding to threats.",
+      "Cards in hand should be used for disruption early, then saved for protection.",
+      "The graveyard is your primary resource",
+      "avoid unnecessary discards and prioritize filling it with high-value targets (Griselbrand, Nexus of Fate, Bitter Ordeal).",
+      "Dredge has minimal board presence early.",
+      "Commit threats only when you can protect them or when you're close to winning."
     ],
     "late_game": [
       "Maintain board presence with recursive threats",
       "Use graveyard recursion to outvalue opponents",
-      "Close out games with repeated Imp triggers or Ent damage"
+      "Close out games with repeated Imp triggers or Ent damage",
+      "Griselbrand (drain life), Nexus of Fate (infinite turns/draws), Bitter Ordeal (infinite combat/draws), Dread Return (reanimate threats).",
+      "Win by chaining recursion to generate lethal damage or infinite turns.",
+      "Go all-in when you have a recursion engine in play, enough mana to cast it, and the opponent has no immediate graveyard hate or removal.",
+      "If you can resolve a win condition and have backup recursion, commit fully."
     ]
   },
   "key_cards": [
@@ -59,7 +75,13 @@
     "Mill yourself before casting Dread Return to ensure Stinkweed Imp is in the graveyard",
     "Trigger Stinkweed Imp immediately after it enters to maximize mill before opponent can respond",
     "Hold up Generous Ent's ability if needed to deal damage after opponent's graveyard is depleted",
-    "Prioritize mill spells that don't require targets to avoid interaction"
+    "Prioritize mill spells that don't require targets to avoid interaction",
+    "Dredge is highly dependent on graveyard synergy",
+    "avoid playing cards that don't contribute to it.",
+    "Be mindful of turn-based actions and priority when chaining dredge effects.",
+    "Watch for opponent's sideboard cards that target the graveyard.",
+    "Practice sequencing to maximize recursion efficiency.",
+    "Common mistake: overcommitting to a single win condition without backup recursion."
   ],
   "matchups": [
     {
@@ -88,6 +110,21 @@
         "Card draw engines",
         "Tempo creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells from hand. Cast dredge enablers and recursion spells at instant speed when possible. Use cheap, resilient threats that don't rely on a single resolution.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with dredge engines. Use discard to remove ramp spells. If they outpace you, rely on graveyard recursion to out-value their mana advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the graveyard war. Prioritize discarding their dredge enablers and recursion pieces. Use Tormod's Crypt or Surgical Extraction to remove their key cards. Control the graveyard with hate cards and win by out-recursing them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +132,14 @@
     "Rest in Peace",
     "Tormod's Crypt",
     "Lightning Bolt",
-    "Abrupt Decay"
+    "Abrupt Decay",
+    "Watch for graveyard hate (Rest in Peace, Leyline of the Void, Tormod's Crypt, Surgical Extraction).",
+    "Track opponent's hand for counterspells or removal.",
+    "Note when they start playing removal or hate, as it signals they've identified your game plan."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:13:35+00:00",
     "model": "local-model",
@@ -127,6 +168,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

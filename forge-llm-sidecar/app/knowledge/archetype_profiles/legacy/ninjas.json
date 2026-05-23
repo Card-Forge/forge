@@ -1,0 +1,493 @@
+{
+  "schema_version": 1,
+  "name": "Ninjas",
+  "format": "legacy",
+  "colors": [
+    "U",
+    "B"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "This U/B Ninja deck operates as a tempo strategy in Legacy, leveraging cheap creatures and instant-speed interaction to control the board while generating card advantage. Orcish Bowmasters provides immediate disruption by stealing key threats, while Yuriko, the Tiger's Shadow offers flexible removal and untap value. Tamiyo, Inquisitive Student ensures you stay ahead in the card economy, allowing you to outmaneuver opponents through calculated trades and incremental advantages.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 23,
+      "cards": [
+        "Brainstorm",
+        "Ingenious Infiltrator",
+        "Kaito, Bane of Nightmares",
+        "Orcish Bowmasters",
+        "Tamiyo, Inquisitive Student",
+        "Yuriko, the Tiger's Shadow"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 9,
+      "cards": [
+        "Grafdigger's Cage",
+        "Kaito, Bane of Nightmares",
+        "Tamiyo, Inquisitive Student",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 10,
+      "cards": [
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Verdant Catacombs"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Orcish Bowmasters"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 24,
+      "cards": [
+        "Barrowgoyf",
+        "Dauthi Voidwalker",
+        "Ingenious Infiltrator",
+        "Kaito, Bane of Nightmares",
+        "Mockingbird",
+        "Orcish Bowmasters",
+        "Ornithopter",
+        "Yuriko, the Tiger's Shadow"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 25,
+      "cards": [
+        "Barrowgoyf",
+        "Blue Elemental Blast",
+        "Fatal Push",
+        "Hydroblast",
+        "Ingenious Infiltrator",
+        "Orcish Bowmasters",
+        "Snuff Out",
+        "Wasteland",
+        "Yuriko, the Tiger's Shadow"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 8,
+      "cards": [
+        "Orcish Bowmasters",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 15,
+      "cards": [
+        "Blue Elemental Blast",
+        "Consign to Memory",
+        "Daze",
+        "Force of Negation",
+        "Force of Will",
+        "Hydroblast",
+        "Mystical Dispute"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 7
+    },
+    "protection": {
+      "target_count": 11,
+      "cards": [
+        "Kaito, Bane of Nightmares",
+        "Orcish Bowmasters",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 19,
+      "cards": [
+        "Barrowgoyf",
+        "Dauthi Voidwalker",
+        "Force of Negation",
+        "Grafdigger's Cage",
+        "Kaito, Bane of Nightmares",
+        "Orcish Bowmasters",
+        "Surgical Extraction",
+        "Tamiyo, Inquisitive Student",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 7
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 15,
+      "cards": [
+        "Daze",
+        "Ingenious Infiltrator",
+        "Kaito, Bane of Nightmares",
+        "Yuriko, the Tiger's Shadow"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Orcish Bowmasters",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Orcish Bowmasters",
+        "Tamiyo, Inquisitive Student"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Grafdigger's Cage"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 27,
+      "cards": [
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Orcish Bowmasters",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Tamiyo, Inquisitive Student",
+        "Undercity Sewers",
+        "Underground Sea",
+        "Verdant Catacombs",
+        "Wasteland"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 2
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Flooded Strand",
+        "Island",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Swamp",
+        "Undercity Sewers",
+        "Underground Sea",
+        "Verdant Catacombs",
+        "Wasteland"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 2
+    },
+    "planeswalker_threats": {
+      "target_count": 3,
+      "cards": [
+        "Kaito, Bane of Nightmares"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.52
+  },
+  "dual_role_cards": [
+    {
+      "card": "Barrowgoyf",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blue Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dauthi Voidwalker",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Daze",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ingenious Infiltrator",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaito, Bane of Nightmares",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orcish Bowmasters",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tamiyo, Inquisitive Student",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Sea",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yuriko, the Tiger's Shadow",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast Orcish Bowmasters before Yuriko to ensure you have a creature to exile if Yuriko dies",
+    "Sequence Tamiyo after other spells to maximize card draw triggers",
+    "Hold up removal until opponent commits to a board state, then use Yuriko's death trigger for maximum impact",
+    "Prioritize stealing creatures that can be untapped by Yuriko for extra value",
+    "Note that Yuriko is Commander-only, Orcish Bowmasters is not a Ninja, and Tamiyo, Inquisitive Student is not a real card"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Orcish Bowmasters on curve to steal an early threat or disrupt opponent's board"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Yuriko to establish a body and prepare for death-trigger removal"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Tamiyo to draw cards when casting early spells, maintaining hand size"
+    }
+  ],
+  "kill_priority": [
+    "Orcish Bowmasters",
+    "Tamiyo, Inquisitive Student",
+    "Kaito, Bane of Nightmares",
+    "Barrowgoyf",
+    "Dauthi Voidwalker",
+    "Ingenious Infiltrator",
+    "Mockingbird",
+    "Ornithopter"
+  ],
+  "interaction_to_disrupt": [
+    "Blue Elemental Blast",
+    "Consign to Memory",
+    "Daze",
+    "Force of Negation",
+    "Force of Will",
+    "Hydroblast",
+    "Mystical Dispute",
+    "Kaito, Bane of Nightmares"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/ninjas.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

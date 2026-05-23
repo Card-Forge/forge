@@ -1,0 +1,392 @@
+{
+  "archetype": "Teysa Karlov",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/teysa-karlov.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Anguished Unmaking"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Ascend from Avernus"
+    },
+    {
+      "qty": 1,
+      "name": "Ashnod's Altar"
+    },
+    {
+      "qty": 1,
+      "name": "Ayara, First of Locthwain"
+    },
+    {
+      "qty": 1,
+      "name": "Bartolom\u00e9 del Presidio"
+    },
+    {
+      "qty": 1,
+      "name": "Bastion of Remembrance"
+    },
+    {
+      "qty": 1,
+      "name": "Bitterblossom"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Artist"
+    },
+    {
+      "qty": 1,
+      "name": "Body Launderer"
+    },
+    {
+      "qty": 1,
+      "name": "Burnished Hart"
+    },
+    {
+      "qty": 1,
+      "name": "By Invitation Only"
+    },
+    {
+      "qty": 1,
+      "name": "Carrion Feeder"
+    },
+    {
+      "qty": 1,
+      "name": "Castle Ardenvale"
+    },
+    {
+      "qty": 1,
+      "name": "Caves of Koilos"
+    },
+    {
+      "qty": 1,
+      "name": "Clackbridge Troll"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Commander's Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Concealed Courtyard"
+    },
+    {
+      "qty": 1,
+      "name": "Cruel Celebrant"
+    },
+    {
+      "qty": 1,
+      "name": "Delney, Streetwise Lookout"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Dictate of Erebos"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir House Guard"
+    },
+    {
+      "qty": 1,
+      "name": "Drivnod, Carnage Dominus"
+    },
+    {
+      "qty": 1,
+      "name": "Edgar, Charmed Groom"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 1,
+      "name": "Elas il-Kor, Sadistic Pilgrim"
+    },
+    {
+      "qty": 1,
+      "name": "Elenda, the Dusk Rose"
+    },
+    {
+      "qty": 1,
+      "name": "Fetid Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Fiendish Panda"
+    },
+    {
+      "qty": 1,
+      "name": "Forlorn Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Generous Gift"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Goldmire Bridge"
+    },
+    {
+      "qty": 1,
+      "name": "Grim Haruspex"
+    },
+    {
+      "qty": 1,
+      "name": "Brightclimb Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "High-Society Hunter"
+    },
+    {
+      "qty": 1,
+      "name": "Hive of the Eye Tyrant"
+    },
+    {
+      "qty": 1,
+      "name": "Isolated Chapel"
+    },
+    {
+      "qty": 1,
+      "name": "Junji, the Midnight Sky"
+    },
+    {
+      "qty": 1,
+      "name": "Karmic Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Living Death"
+    },
+    {
+      "qty": 1,
+      "name": "Luminous Broodmoth"
+    },
+    {
+      "qty": 1,
+      "name": "Lurrus of the Dream-Den"
+    },
+    {
+      "qty": 1,
+      "name": "Malakir Rebirth"
+    },
+    {
+      "qty": 1,
+      "name": "Marionette Apprentice"
+    },
+    {
+      "qty": 1,
+      "name": "Massacre Wurm"
+    },
+    {
+      "qty": 1,
+      "name": "Midnight Reaper"
+    },
+    {
+      "qty": 1,
+      "name": "Morbid Opportunist"
+    },
+    {
+      "qty": 1,
+      "name": "Nadier's Nightblade"
+    },
+    {
+      "qty": 1,
+      "name": "Orzhov Basilica"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Altar"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Pitiless Plunderer"
+    },
+    {
+      "qty": 1,
+      "name": "Plaguecrafter"
+    },
+    {
+      "qty": 3,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Plaza of Heroes"
+    },
+    {
+      "qty": 1,
+      "name": "Reassembling Skeleton"
+    },
+    {
+      "qty": 1,
+      "name": "Relic of Legends"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Fortress"
+    },
+    {
+      "qty": 1,
+      "name": "Reveillark"
+    },
+    {
+      "qty": 1,
+      "name": "Rite of Oblivion"
+    },
+    {
+      "qty": 1,
+      "name": "Scoured Barrens"
+    },
+    {
+      "qty": 1,
+      "name": "Sejiri Shelter"
+    },
+    {
+      "qty": 1,
+      "name": "Shineshadow Snarl"
+    },
+    {
+      "qty": 1,
+      "name": "Silverquill Campus"
+    },
+    {
+      "qty": 1,
+      "name": "Skullclamp"
+    },
+    {
+      "qty": 1,
+      "name": "Smile at Death"
+    },
+    {
+      "qty": 1,
+      "name": "Snowfield Sinkhole"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spawning Pit"
+    },
+    {
+      "qty": 1,
+      "name": "Sunlit Marsh"
+    },
+    {
+      "qty": 3,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Field"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Teysa Karlov"
+    },
+    {
+      "qty": 1,
+      "name": "The Dross Pits"
+    },
+    {
+      "qty": 1,
+      "name": "The Fair Basilica"
+    },
+    {
+      "qty": 1,
+      "name": "The Meathook Massacre"
+    },
+    {
+      "qty": 1,
+      "name": "Toxic Deluge"
+    },
+    {
+      "qty": 1,
+      "name": "Vampiric Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Vein Ripper"
+    },
+    {
+      "qty": 1,
+      "name": "Vengeful Bloodwitch"
+    },
+    {
+      "qty": 1,
+      "name": "Vindicate"
+    },
+    {
+      "qty": 1,
+      "name": "Vindictive Vampire"
+    },
+    {
+      "qty": 1,
+      "name": "Viscera Seer"
+    },
+    {
+      "qty": 1,
+      "name": "Vraan, Executioner Thane"
+    },
+    {
+      "qty": 1,
+      "name": "Witch's Cottage"
+    },
+    {
+      "qty": 1,
+      "name": "Woe Strider"
+    },
+    {
+      "qty": 1,
+      "name": "Wrath of God"
+    },
+    {
+      "qty": 1,
+      "name": "Yahenni, Undying Partisan"
+    },
+    {
+      "qty": 1,
+      "name": "Yawgmoth, Thran Physician"
+    },
+    {
+      "qty": 1,
+      "name": "Zulaport Cutthroat"
+    }
+  ],
+  "sideboard": []
+}

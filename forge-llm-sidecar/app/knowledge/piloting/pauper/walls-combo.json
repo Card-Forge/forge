@@ -16,13 +16,16 @@
       "at least 1 land",
       "Lead the Stampede",
       "Winding Way",
-      "Shield-Wall Sentinel"
+      "Shield-Wall Sentinel",
+      "Keep hands with 2-3 lands (including basics for fixers), Quirion Ranger, Winding Way, or early wall/mana dorks.",
+      "Prioritize hands that can play a land and a Ranger/Winding Way by turn 2."
     ],
     "mulligan_criteria": [
       "hands with many doubles that don't do anything",
       "cards you can't cast straight away",
       "too many lands",
-      "cards that cost different types of mana"
+      "cards that cost different types of mana",
+      "Mulligan if you have 0-1 lands, no ramp/fixing, or only expensive spells without mana acceleration."
     ],
     "examples": [
       {
@@ -43,15 +46,31 @@
   "game_plan": {
     "early_game": [
       "Play mana dorks like Saruli Caretaker and Quirion Ranger to accelerate the curve.",
-      "Cast barriers with haste like Tuktuk Rubblefort and Crashing Drawbridge to enable early combo turns."
+      "Cast barriers with haste like Tuktuk Rubblefort and Crashing Drawbridge to enable early combo turns.",
+      "Turn 1: Play a basic land.",
+      "Turn 2: Cast Quirion Ranger or Winding Way to search a land and ramp.",
+      "If the opponent plays a creature, drop a wall to block.",
+      "Sequence lands to ensure colored mana for walls and ramp.",
+      "Use Ranger\u2019s tap ability for flexible mana if needed for protection or combo pieces."
     ],
     "mid_game": [
       "Assemble the infinite mana loop using Axebane Guardian or Overgrown Battlement paired with Freed From the Real or Galvanic Alchemist.",
-      "Use tutors like Drift of Phantasms and Shield-Wall Sentinel to find missing combo pieces or win conditions."
+      "Use tutors like Drift of Phantasms and Shield-Wall Sentinel to find missing combo pieces or win conditions.",
+      "Prioritize mana acceleration to cast combo pieces.",
+      "Use Quirion Ranger\u2019s tap ability for flexible mana.",
+      "Don\u2019t overcommit walls if you can win via combo.",
+      "Manage graveyard if relevant, and conserve cards in hand until you have a clear path to the win condition.",
+      "Commit walls only when necessary to survive until combo pieces are assembled.",
+      "Hold back high-value combo pieces until you have protection or a guaranteed win."
     ],
     "late_game": [
       "Execute win conditions such as Valakut Invoker, Vivien's Grizzly, or Secret Door using infinite mana.",
-      "Utilize Reaping the Graves to recover discarded combo pieces and create a secondary transmute loop."
+      "Utilize Reaping the Graves to recover discarded combo pieces and create a secondary transmute loop.",
+      "The combo win condition, typically assembled through mana advantage and board stability.",
+      "Get there by ramping with Ranger/Winding Way and stabilizing with walls.",
+      "Once the combo is in hand or on the stack, execute it immediately if possible.",
+      "Go all-in when you have enough mana to cast your combo, have removed or blocked key threats, and can protect your win condition.",
+      "Commit when the opponent has no clear answer to your finisher or when you can trade your board for their life total."
     ]
   },
   "key_cards": [
@@ -146,7 +165,11 @@
     "Play Quirion Ranger on turn 2 to accelerate Overgrown Battlement and Orochi Leafcaller.",
     "Enchant Overgrown Battlement with Freed From the Real on turn 3 to trigger infinite mana.",
     "Tutor for and cast Valakut Invoker immediately after generating infinite mana.",
-    "Play cards in the exact order required to guarantee the combo on turn 3 if possible."
+    "Play cards in the exact order required to guarantee the combo on turn 3 if possible.",
+    "Common mistakes include overcommitting walls too early, mismanaging mana for combo, ignoring graveyard hate, and failing to track opponent\u2019s win conditions.",
+    "Unique interactions: Quirion Ranger\u2019s tap ability can be used for instant-speed mana for protection or combo pieces.",
+    "Winding Way\u2019s extra land can enable combo turns.",
+    "Always play around sweepers and keep a backup plan if your combo is disrupted."
   ],
   "matchups": [
     {
@@ -191,6 +214,31 @@
         "Avenging Hunter",
         "Standard Bearer"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, split your combo into multiple steps, or use protection/disruption. Play around counters by having backup plans or casting at end step. If possible, use instant-speed interaction to clear the way for your combo.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with walls, use removal on key ramp creatures, and race if your combo is faster. Disrupt their mana base if possible, and prioritize surviving until you can execute your own combo.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with walls and cheap removal. Don\u2019t overextend; focus on surviving until turn 4-5 to execute combo. Use life gain if available, and trade walls efficiently to preserve your combo pieces.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats, use card advantage to out-value them, and protect your combo from sweepers. Play around their removal by having multiple threats or using protection. Force them to make difficult choices between your combo and board presence.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize land drops, disrupt their ramp, and use targeted removal on their key combo pieces. Control the board with walls and force them to overcommit. Use hand disruption to steal key turns.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -200,10 +248,14 @@
     "Chain Lightning",
     "Refurbished Familiar",
     "Standard Bearer",
-    "Removal spells"
+    "Removal spells",
+    "Watch for sweepers, targeted removal, and combo win conditions.",
+    "Note if opponents are playing land destruction or discard.",
+    "Track graveyard hate if your combo relies on it, and monitor opponent\u2019s mana development to predict their next play."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-5c-walls-combo-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T10:04:17+00:00",
     "model": "local-model",
@@ -247,6 +299,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

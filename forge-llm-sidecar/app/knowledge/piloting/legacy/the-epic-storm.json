@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with two or more lands and a cantrip like Brainstorm or Ponder",
       "Hands containing Mox Opal or Lion's Eye Diamond alongside a land",
-      "Hands with early interaction like Force of Will or Daze"
+      "Hands with early interaction like Force of Will or Daze",
+      "Keep any hand with 2+ fast mana sources (Mox Opal, Lotus Petal, Chrome Mox, Mana Crypt) and a land, or 3+ fast mana with a cantrip/discard.",
+      "Keep hands with Burning Wish + 2+ fast mana + a land.",
+      "Prioritize hands that can sequence mana into draws on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Hands with only one land and no mana rocks",
       "Hands lacking card draw or combo enablers",
-      "Hands with multiple lands but no way to draw into the storm spell"
+      "Hands with multiple lands but no way to draw into the storm spell",
+      "Mulligan hands with 0 fast mana, 3+ lands, or only one land and no cantrips/discard."
     ],
     "examples": []
   },
@@ -25,17 +29,32 @@
     "early_game": [
       "Play lands and mana rocks to establish a fast mana base",
       "Use cantrips to dig for the storm spell and combo pieces",
-      "Hold up interaction to protect against early disruption"
+      "Hold up interaction to protect against early disruption",
+      "Turn 1: Play a land, fetch a fast mana source (e.g., Polluted Delta for Mox Opal), or cast a cantrip/discard if you have a free mana source.",
+      "Turn 2: Assemble additional mana, draw cards with Brainstorm/Ponder/Preordain, and begin sequencing toward a Tendrils win or set up a Burning Wish target.",
+      "Prioritize fetching dual lands that enter untapped only if you need to hold priority",
+      "otherwise, fast mana dictates aggressive fetching."
     ],
     "mid_game": [
       "Sequence spells to maximize the storm count before casting the win condition",
       "Use Burning Wish to fetch sideboard interaction or missing combo pieces",
-      "Manage the stack carefully to ensure the storm spell resolves"
+      "Manage the stack carefully to ensure the storm spell resolves",
+      "Treat mana as a one-time explosive resource",
+      "sequence draws to maximize value.",
+      "Keep the graveyard stocked with Tendrils, Fire/Ice, and Wish targets.",
+      "Don't overcommit to drawing if you're at lethal",
+      "prioritize casting win conditions.",
+      "Manage hand size carefully\u2014discard is a resource, but don't blow it all on non-essential threats."
     ],
     "late_game": [
       "If the combo is disrupted, transition to a control game plan using fetched interaction",
       "Use card advantage to outlast opponents while searching for a second combo attempt",
-      "Leverage excess mana to cast multiple spells in a single turn"
+      "Leverage excess mana to cast multiple spells in a single turn",
+      "Tendril of Agony (primary), Fire/Ice (secondary/versatile), or Burning Wish targets like Pyroclasm, Tormod's Crypt, or a second Tendrils.",
+      "Win by assembling 7+ mana and casting Tendrils, or using Fire/Ice to deal 5 damage and draw 2.",
+      "Go all-in when you have enough mana to cast your win condition and draw enough cards to ensure it resolves or deals lethal.",
+      "If you're at 5+ mana and have a Tendrils in hand, cast it.",
+      "If you're racing, commit to your win condition even if it means leaving yourself vulnerable."
     ]
   },
   "key_cards": [
@@ -69,7 +88,13 @@
     "Cast cantrips before mana rocks to maximize the storm count",
     "Hold up interaction until you know the opponent's hand or play",
     "Use Lion's Eye Diamond after other mana sources to ensure you can pay the life cost",
-    "Cast the storm spell last to ensure it resolves with the highest possible count"
+    "Cast the storm spell last to ensure it resolves with the highest possible count",
+    "TES is highly skill-intensive",
+    "practice sequencing mana and cantrips to avoid dead draws.",
+    "Remember that Mox Opal requires a permanent to enter untapped, so plan your land drops accordingly.",
+    "Don't forget that Fire/Ice can be used as a 5-damage spell even if you don't need to draw cards.",
+    "In mirrors, graveyard hate often decides the game\u2014track both players' graveyards carefully.",
+    "Common mistake: over-drawing past lethal or failing to sequence cantrips properly, leading to dead mana."
   ],
   "matchups": [
     {
@@ -98,6 +123,21 @@
         "Priority stealing",
         "Unexpected win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrip density to out-draw and find answers. Hold up mana for Brainstorm/Preordain to find around counters. Use Thoughtseize to discard their counterspells. If they have heavy counter suites, switch to Fire/Ice or Wish for Tormod's/Pyroclasm.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Outpace them with faster mana and win conditions. Use Thoughtseize to discard their ramp pieces. Hold Tormod's Crypt for their mana rocks. Win before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Out-draw and out-wish. Prioritize graveyard protection and hate. Win condition selection is key\u2014Tendril wins if they're low, Fire/Ice if they're drawing, Pyroclasm if they're aggressive. Manage your hand carefully and don't overdraw into your own hate.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -110,10 +150,12 @@
     "Duress",
     "Inquisition of Kozilek",
     "Beast Within",
-    "Rest in Peace"
+    "Rest in Peace",
+    "Watch for counterspells (hold up mana for Brainstorm/Preordain or discard), graveyard hate (Tormod's, Rest in Peace), and board wipes."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:27:49+00:00",
     "model": "local-model",
@@ -129,6 +171,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

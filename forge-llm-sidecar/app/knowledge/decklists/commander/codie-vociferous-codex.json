@@ -1,0 +1,368 @@
+{
+  "archetype": "Codie, Vociferous Codex",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/codie-vociferous-codex.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ad Nauseam"
+    },
+    {
+      "qty": 1,
+      "name": "Ancestral Vision"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Approach of the Second Sun"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Bayou"
+    },
+    {
+      "qty": 1,
+      "name": "Biomancer's Familiar"
+    },
+    {
+      "qty": 1,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Brain Freeze"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Bring to Light"
+    },
+    {
+      "qty": 1,
+      "name": "Burnt Offering"
+    },
+    {
+      "qty": 1,
+      "name": "Cabal Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Carpet of Flowers"
+    },
+    {
+      "qty": 1,
+      "name": "Chrome Mox"
+    },
+    {
+      "qty": 1,
+      "name": "City of Brass"
+    },
+    {
+      "qty": 1,
+      "name": "Claim the Firstborn"
+    },
+    {
+      "qty": 1,
+      "name": "Codie, Vociferous Codex"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Crop Rotation"
+    },
+    {
+      "qty": 1,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Culling the Weak"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Deflecting Swat"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Consultation"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Elvish Spirit Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Emerald Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 1,
+      "name": "Fierce Guardianship"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 4,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Gamble"
+    },
+    {
+      "qty": 1,
+      "name": "Gemstone Caverns"
+    },
+    {
+      "qty": 1,
+      "name": "Gitaxian Probe"
+    },
+    {
+      "qty": 1,
+      "name": "Growth Spiral"
+    },
+    {
+      "qty": 1,
+      "name": "Ignoble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Imperial Seal"
+    },
+    {
+      "qty": 1,
+      "name": "Inevitable Betrayal"
+    },
+    {
+      "qty": 1,
+      "name": "Infernal Plunge"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Jeska's Will"
+    },
+    {
+      "qty": 1,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Confluence"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Manamorphose"
+    },
+    {
+      "qty": 1,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mizzix's Mastery"
+    },
+    {
+      "qty": 3,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Remora"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Noble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Noxious Revival"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Tower"
+    },
+    {
+      "qty": 3,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Preordain"
+    },
+    {
+      "qty": 1,
+      "name": "Prismari, the Inspiration"
+    },
+    {
+      "qty": 1,
+      "name": "Profane Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Rite of Flame"
+    },
+    {
+      "qty": 1,
+      "name": "Sacrifice"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Simian Spirit Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Solve the Equation"
+    },
+    {
+      "qty": 1,
+      "name": "Strike It Rich"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swan Song"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Pact"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 1,
+      "name": "Tinder Wall"
+    },
+    {
+      "qty": 1,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 1,
+      "name": "Underworld Breach"
+    },
+    {
+      "qty": 1,
+      "name": "Vampiric Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Veil of Summer"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Volcanic Island"
+    },
+    {
+      "qty": 1,
+      "name": "Windfall"
+    },
+    {
+      "qty": 1,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": []
+}

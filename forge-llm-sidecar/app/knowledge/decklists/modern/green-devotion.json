@@ -1,0 +1,117 @@
+{
+  "archetype": "Green Devotion",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/green-devotion.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Aspect of Hydra"
+    },
+    {
+      "qty": 1,
+      "name": "Ba Sing Se"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 3,
+      "name": "Bridgeworks Battle"
+    },
+    {
+      "qty": 1,
+      "name": "Dryad Arbor"
+    },
+    {
+      "qty": 6,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Frenzied Baloth"
+    },
+    {
+      "qty": 4,
+      "name": "Green Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Groundbreaker"
+    },
+    {
+      "qty": 4,
+      "name": "Ignoble Hierarch"
+    },
+    {
+      "qty": 4,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 4,
+      "name": "Noble Hierarch"
+    },
+    {
+      "qty": 4,
+      "name": "Old-Growth Troll"
+    },
+    {
+      "qty": 1,
+      "name": "Ouroboroid"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Questing Beast"
+    },
+    {
+      "qty": 4,
+      "name": "Steel Leaf Champion"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Mortuary"
+    },
+    {
+      "qty": 4,
+      "name": "Vines of Vastwood"
+    },
+    {
+      "qty": 4,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 4,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Collector Ouphe"
+    },
+    {
+      "qty": 3,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 2,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 4,
+      "name": "Illness in the Ranks"
+    }
+  ]
+}

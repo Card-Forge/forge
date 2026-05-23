@@ -13,13 +13,17 @@
       "Hands with 1-2 mana artifact creatures",
       "Hands containing Mox Opal or other early ramp",
       "Hands with Engineered Explosives or early removal",
-      "Hands with a clear path to turn 1 or 2 plays"
+      "Hands with a clear path to turn 1 or 2 plays",
+      "Keep any hand with Mox Opal plus two artifacts, or three artifacts with a playable land.",
+      "Prioritize hands with Arcbound Ravager, Signal Pest, or turn-one artifact plays.",
+      "Aim for 4-5 artifact-producing/fixing lands (Shimmer Glen, Arcane Sanctum, Myr Meadow, Treetop Village) in your opening hand."
     ],
     "mulligan_criteria": [
       "Hands with only high-cost cards",
       "Hands lacking artifact creatures or ramp",
       "Hands with multiple removal spells but no threats",
-      "Hands with no turn 1 play"
+      "Hands with no turn 1 play",
+      "Mulligan hands with three or more lands, no artifacts, or only single artifacts without a land."
     ],
     "examples": [
       {
@@ -45,12 +49,12 @@
       {
         "hand": [],
         "decision": "keep",
-        "reason": "Mox Opal, early mana rocks, and a turn-2 threat — Open deck list confirms opponent is a turn-4 combo deck, giving enough time to develop a fast clock."
+        "reason": "Mox Opal, early mana rocks, and a turn-2 threat \u2014 Open deck list confirms opponent is a turn-4 combo deck, giving enough time to develop a fast clock."
       },
       {
         "hand": [],
         "decision": "keep",
-        "reason": "General Affinity opening hand philosophy — Affinity does not mulligan well because it relies on having a full hand of cheap artifacts to litter the board. Mulliganing down to 4 cards leaves insufficient resources to function."
+        "reason": "General Affinity opening hand philosophy \u2014 Affinity does not mulligan well because it relies on having a full hand of cheap artifacts to litter the board. Mulliganing down to 4 cards leaves insufficient resources to function."
       }
     ]
   },
@@ -58,17 +62,34 @@
     "early_game": [
       "Play Mox Opal on turn 1 for mana acceleration",
       "Cast 1-2 mana artifact creatures to build affinity",
-      "Use Engineered Explosives to clear early blockers or face-up threats"
+      "Use Engineered Explosives to clear early blockers or face-up threats",
+      "Turn 1: Play a land, cast Arcbound Ravager or Signal Pest.",
+      "Turn 2: Play a land, cast Mox Opal, or cast a second artifact.",
+      "If you have Opal and an artifact, tap Opal for mana to cast another threat or cast Engineered Explosives.",
+      "Sequence Opal as early as possible to enable explosive turns.",
+      "If opening with Opal, play it on turn 1 or 2 and use it to accelerate into your game plan."
     ],
     "mid_game": [
       "Flood the board with artifact creatures and tokens",
       "Cast affinity-reduced threats and removal to maintain board control",
-      "Push damage consistently while protecting your board"
+      "Push damage consistently while protecting your board",
+      "Treat Mox Opal as your primary mana engine",
+      "tap it for one mana at a time to enable multiple spells per turn.",
+      "Avoid overcommitting artifacts if you lack protection or follow-up.",
+      "Use Engineered Explosives to clear boards when ahead or to stabilize when behind.",
+      "Manage your graveyard carefully if facing discard or graveyard hate, and prioritize keeping key artifacts in play.",
+      "Commit threats when you have Opal online to protect them or when you can follow up with removal."
     ],
     "late_game": [
       "Deploy high-impact finishers like Weapons Manufacturing at reduced cost",
       "Use token generators to overwhelm opponent's removal",
-      "Close out the game with combat damage or direct damage spells"
+      "Close out the game with combat damage or direct damage spells",
+      "Arcbound Ravager combined with Mox Opal and Engineered Explosives for a lethal burst, or Weapons Manufacturing to generate a massive token army that overwhelms the board.",
+      "If the format allows, Glimpse the Unthinkable with an artifact in hand can close the game.",
+      "Otherwise, grind out value with artifact synergies and clear the board with EE to secure lethal.",
+      "Go all-in when you have Mox Opal online, the opponent has no interaction in hand, and you have a clear path to lethal.",
+      "Commit when you can protect your key artifacts or when Engineered Explosives can clear the board without hurting your own board.",
+      "Also commit when the opponent is on a combo turn you can interrupt with your interaction suite."
     ]
   },
   "key_cards": [
@@ -100,7 +121,9 @@
     "Use Prismatic Ending on Engineered Explosives rather than Weapons Manufacturing if many Munitions tokens are already on the battlefield, as the tokens themselves will deal lethal damage when they leave.",
     "Hold up Mystical Dispute to counter key enablers like Weapons Manufacturing or Pinnacle Emissary to slow down Affinity's explosive turns and buy time for answers.",
     "Hold Engineered Explosives until you are winning; casting it early removes too many 0-cost artifacts needed for combo pieces. Only use it as a desperation play to kill a key threat like Lotus Bloom.",
-    "Avoid tapping your last mana source if you need to represent interaction like Metallic Rebuke, as it leaves you vulnerable to the opponent's plays."
+    "Avoid tapping your last mana source if you need to represent interaction like Metallic Rebuke, as it leaves you vulnerable to the opponent's plays.",
+    "Common mistakes include overcommitting artifacts without Opal protection, forgetting to tap Opal for mana, and mismanaging Engineered Explosives targets.",
+    "Always track the opponent's hand for counterspells and sweepers."
   ],
   "matchups": [
     {
@@ -132,12 +155,27 @@
     },
     {
       "opponent_archetype": "Amulet Titan",
-      "advice": "Prioritize sideboarding permission alongside pressure cards to force the opponent to use their counters on threats rather than their combo pieces. (from gameplay) Lead with Öza's Saga on turn one to enable casting Pithing Needle by turn three, naming Goblin Charbelcher to shut down the combo. (from gameplay) Use Torment of Hailfire to interact with the Tameshi, Golden Spirit side of the combo, as it won't stop Goblin Charbelcher itself but disrupts the mana engine. (from gameplay) If Amulet Titan resolves Goblin Charbelcher through Mystical Dispute, they cannot activate it immediately, buying crucial tempo to find answers. (from gameplay)",
+      "advice": "Prioritize sideboarding permission alongside pressure cards to force the opponent to use their counters on threats rather than their combo pieces. (from gameplay) Lead with \u00d6za's Saga on turn one to enable casting Pithing Needle by turn three, naming Goblin Charbelcher to shut down the combo. (from gameplay) Use Torment of Hailfire to interact with the Tameshi, Golden Spirit side of the combo, as it won't stop Goblin Charbelcher itself but disrupts the mana engine. (from gameplay) If Amulet Titan resolves Goblin Charbelcher through Mystical Dispute, they cannot activate it immediately, buying crucial tempo to find answers. (from gameplay)",
       "watch_for": []
     },
     {
       "opponent_archetype": "Jeskai Blink",
       "advice": "Include three main deck Tormod's Crypts to disrupt their graveyard recursion strategy; the low mana cost of Affinity's zero-mana artifacts makes this inclusion cost-effective. (from gameplay) Engineered Explosives can serve as a combo kill finish when cast for zero mana, dealing two damage per Munitions token that leaves the battlefield. (from gameplay) Consigned to Memory is effective against colorless strategies but does not counter Pinnacle Emissary since it is a creature, so plan removal accordingly. (from gameplay)",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast spells in response to counterspells, use Mox Opal to protect key artifacts, and rely on Engineered Explosives to clear the board if your threats are countered. Use cheap artifacts to pressure through interaction, and consider casting spells when the opponent has no mana available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to prevent them from stabilizing. Use Engineered Explosives to clear ramp threats before they can cast their win conditions. Do not let them get ahead in mana; trade artifacts efficiently and use your interaction suite to disrupt their key spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win on card advantage and better sequencing. Use Flusterstorm to protect your key spells and disrupt theirs. Use Engineered Explosives to clear boards favorably. Trade artifacts efficiently, and prioritize keeping Mox Opal online. Do not overcommit to the board; wait for the opponent to make a mistake or run out of resources.",
       "watch_for": []
     }
   ],
@@ -146,14 +184,18 @@
     "Board wipes",
     "Counterspells",
     "Direct damage",
-    "Creature removal"
+    "Creature removal",
+    "Watch for counterspells (Flusterstorm, Spell Pierce, Mana Leak), board wipes (Swords to Plowshares, Wrath of God, Engineered Explosives), and artifact hate (Rest in Peace, Null Rod, Surgical Extraction, Leyline of Punishment).",
+    "Track the opponent's hand size and graveyard to anticipate combo turns or sweepers.",
+    "Note when they tap out for interaction, as this is your window to attack or cast key spells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "build_piloting_guides.py + draftsim",
+    "source": "build_piloting_guides.py + draftsim + legacy_guidance",
     "source_url": "https://draftsim.com/affinity/",
     "generated_at": "2026-05-20T17:20:55+00:00",
     "model": "local-model",
-    "schema_version": 1
+    "schema_version": 2
   },
   "provenance": [
     {
@@ -203,6 +245,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": "Affinity"
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

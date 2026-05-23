@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with early interaction or board wipes",
       "Hands containing Jeskai Revelation with cheap spells to enable it",
-      "Hands with Stock Up and a creature to equip"
+      "Hands with Stock Up and a creature to equip",
+      "Keep hands with 2-3 lands (including fixing), at least one early interaction (removal/counterspell) or draw spell (Stock Up), and a clear win condition or path to it."
     ],
     "mulligan_criteria": [
       "Hands with only late-game finishers and no early answers",
       "Hands lacking land drops or mana fixing",
-      "Hands with multiple high-cost board wipes and no removal"
+      "Hands with multiple high-cost board wipes and no removal",
+      "Mulligan hands with 0-1 lands, 3+ lands with no early plays, or hands full of late-game cards with zero interaction."
     ],
     "examples": []
   },
@@ -25,17 +27,32 @@
     "early_game": [
       "Play lands and hold up mana for interaction",
       "Use cheap removal to handle early threats",
-      "Prioritize keeping the board clear to survive"
+      "Prioritize keeping the board clear to survive",
+      "Turn 1: Play a basic land, pass.",
+      "Turn 2: Play a dual/fixing land, cast a cheap interaction or Stock Up to stabilize.",
+      "Prioritize maintaining card parity and board control over developing a board.",
+      "Against aggro, prioritize cheap removal/counters over digging."
     ],
     "mid_game": [
       "Cast Day of Judgment to reset the board when opponents commit resources",
       "Begin equipping creatures with Stock Up to generate value",
-      "Cast Jeskai Revelation to trade efficiently or chip away at life totals"
+      "Cast Jeskai Revelation to trade efficiently or chip away at life totals",
+      "Treat mana as a resource for answers, not just casting threats.",
+      "Keep 1-2 lands untapped for instant-speed interaction.",
+      "Manage hand size by trading answers for threats when ahead, and dig with Stock Up when behind or facing lock pieces.",
+      "Avoid overcommitting to the board",
+      "control wins on card advantage.",
+      "Commit threats only when you have a clear path to resolution or when the opponent has no interaction left."
     ],
     "late_game": [
       "Flood the board with Stock Up auras to create unblockable attackers",
       "Chain multiple spells together to maximize Jeskai Revelation damage",
-      "Grind out the game by cycling through your deck and outlasting the opponent"
+      "Grind out the game by cycling through your deck and outlasting the opponent",
+      "Jeskai Revelation is the primary win condition",
+      "cast it when you can safely exile a game-winning spell or creature.",
+      "Secondary finishers include late-game creatures or direct damage spells if available.",
+      "Go all-in when you have card advantage, the opponent has no interaction, or you've established board control and can safely cast your finisher.",
+      "Also commit when you're at low life and need to race or close the game before they stabilize."
     ]
   },
   "key_cards": [
@@ -59,7 +76,11 @@
     "Cast Jeskai Revelation after other spells on the same turn to maximize its damage output",
     "Hold up Day of Judgment until the opponent commits creatures to the board",
     "Equip Stock Up to creatures that can immediately attack or block to maximize tempo",
-    "Prioritize removal over board wipes when the opponent has few threats"
+    "Prioritize removal over board wipes when the opponent has few threats",
+    "Common mistakes include overcommitting to the board too early, failing to hold up mana for interaction, and mismanaging Jeskai Revelation's exile trigger.",
+    "Always track the opponent's graveyard and hand size.",
+    "In unknown formats, adapt quickly to new threats by leveraging 5c's flexibility.",
+    "Remember that control wins by making better decisions, not by having the biggest threats."
   ],
   "matchups": [
     {
@@ -88,15 +109,34 @@
         "Card advantage engines",
         "Counterspells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap threats to force counters, then resolve your finisher. Utilize flashback, exile effects, or uncounterable spells if available. Dig deeper to find answers to their counters or alternative win conditions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction and board wipes. Don't let them get ahead on mana; use cheap removal and counters to disrupt their land drops. If they stabilize, out-value them with card advantage and late-game threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win on card advantage and better sequencing. Use Stock Up to dig deeper, hold up interaction to counter their key spells, and close the game with Jeskai Revelation or a superior finisher. Track their hand size and graveyard.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast, wide creature decks",
     "Graveyard-based combo strategies",
-    "Other control decks with superior card advantage"
+    "Other control decks with superior card advantage",
+    "Watch for counterspell stacks (Izzet decks), land acceleration (Landfall decks), and spell chains (Prowess/Spellementals).",
+    "Key tells: Opponent tapping for multiple colors early, leaving mana open on turns 2-3, or discarding/drawing into specific combo pieces.",
+    "Track graveyard hate needs against discard or mill strategies."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:30:18+00:00",
     "model": "local-model",
@@ -125,6 +165,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

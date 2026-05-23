@@ -1,0 +1,137 @@
+{
+  "archetype": "The Rock",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/the-rock.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Archon of Cruelty"
+    },
+    {
+      "qty": 2,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 1,
+      "name": "Chthonian Nightmare"
+    },
+    {
+      "qty": 4,
+      "name": "Crypt of Agadeem"
+    },
+    {
+      "qty": 3,
+      "name": "Emperor of Bones"
+    },
+    {
+      "qty": 4,
+      "name": "Eyetwitch"
+    },
+    {
+      "qty": 3,
+      "name": "Flare of Malice"
+    },
+    {
+      "qty": 1,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Overlord of the Balemurk"
+    },
+    {
+      "qty": 4,
+      "name": "Persist"
+    },
+    {
+      "qty": 4,
+      "name": "Phyrexian Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Poet's Quill"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Spymaster's Vault"
+    },
+    {
+      "qty": 4,
+      "name": "Stitcher's Supplier"
+    },
+    {
+      "qty": 4,
+      "name": "Street Wraith"
+    },
+    {
+      "qty": 4,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 2,
+      "name": "Troll of Khazad-d\u00fbm"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Mortuary"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Break the Ice"
+    },
+    {
+      "qty": 1,
+      "name": "Dai Li Indoctrination"
+    },
+    {
+      "qty": 2,
+      "name": "Dauthi Voidwalker"
+    },
+    {
+      "qty": 1,
+      "name": "Decorum Dissertation"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Despair"
+    },
+    {
+      "qty": 1,
+      "name": "Necrotic Fumes"
+    },
+    {
+      "qty": 1,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 1,
+      "name": "Origin of Metalbending"
+    },
+    {
+      "qty": 1,
+      "name": "Ozai's Cruelty"
+    },
+    {
+      "qty": 1,
+      "name": "Ruinous Waterbending"
+    },
+    {
+      "qty": 1,
+      "name": "True Ancestry"
+    }
+  ]
+}

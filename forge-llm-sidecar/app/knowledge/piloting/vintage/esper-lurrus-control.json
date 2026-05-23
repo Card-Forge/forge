@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with at least two lands and a one-drop creature",
       "Combinations featuring Lurrus alongside removal or disruption",
-      "Draws containing Psychic Frog or Orcish Bowmasters with early interaction"
+      "Draws containing Psychic Frog or Orcish Bowmasters with early interaction",
+      "Keep hands with 2-3 lands (including fetch/shock if applicable), early interaction (Thoughtseize, Inquisition, Fatal Push, Spell Pierce), and Lurrus or Psychic Frog."
     ],
     "mulligan_criteria": [
       "Mana screws lacking early land drops",
       "Hands heavy on late-game cards without early tempo",
-      "Draws missing interaction against the current meta"
+      "Draws missing interaction against the current meta",
+      "Mulligan pure land hands, hands with only 3+ mana spells, or hands with no early interaction against aggro."
     ],
     "examples": []
   },
@@ -25,17 +27,31 @@
     "early_game": [
       "Prioritize casting one-drops to establish tempo and gather information",
       "Use Psychic Frog to force reveals and adjust your game plan accordingly",
-      "Play lands and cheap disruption to stabilize against fast strategies"
+      "Play lands and cheap disruption to stabilize against fast strategies",
+      "Turn 1: Play land, cast Thoughtseize/Inquisition if possible, or hold for Lurrus/interaction.",
+      "Turn 2: Lurrus, Psychic Frog, or interaction.",
+      "Sequence lands carefully (fetch/shock to duals, then basics).",
+      "Prioritize finding duals for Esper colors."
     ],
     "mid_game": [
       "Begin cycling Lurrus to return creatures from the graveyard to your hand",
       "Trade Orcish Bowmasters for high-value threats to maintain board control",
-      "Filter your deck with cheap spells to find answers to opponent's threats"
+      "Filter your deck with cheap spells to find answers to opponent's threats",
+      "Use Lurrus to cast 2-drops multiple times per turn.",
+      "Manage your graveyard carefully",
+      "avoid overloading it if facing graveyard hate, but leverage it for the Lurrus engine.",
+      "Preserve card advantage by trading efficiently and using cheap interaction.",
+      "Commit threats when you have removal for their threats or when they lack sweepers.",
+      "Hold back if they have board wipes or heavy interaction."
     ],
     "late_game": [
       "Leverage infinite Lurrus recursion loops to exhaust opponent's resources",
       "Recycle Orcish Bowmasters repeatedly to clear the board and close the game",
-      "Maintain card advantage by continuously cycling cheap creatures and interaction"
+      "Maintain card advantage by continuously cycling cheap creatures and interaction",
+      "Lurrus engine, Psychic Frog, Orcish Bowmasters, and Teferi's Protection-protected threats.",
+      "Close out by recurring 2-drops, trading efficiently, and applying pressure when the opponent lacks answers.",
+      "Go all-in when the opponent has no sweepers, low life total, or you have decisive card advantage.",
+      "Commit when you can safely cast Lurrus or Psychic Frog and follow up with recurring threats."
     ]
   },
   "key_cards": [
@@ -59,7 +75,13 @@
     "Always cast Psychic Frog before playing other creatures to maximize information gain",
     "Hold up Lurrus recursion until you have a clear target in the graveyard to cycle",
     "Use Orcish Bowmasters' death trigger to remove threats that would otherwise trigger opponent's abilities",
-    "Prioritize land drops early to ensure you can pay Lurrus's recursion cost consistently"
+    "Prioritize land drops early to ensure you can pay Lurrus's recursion cost consistently",
+    "Lurrus is fragile",
+    "protect it with removal or Teferi's Protection.",
+    "Don't overcommit to the graveyard if facing hate.",
+    "Psychic Frog is a win condition but vulnerable to sweepers.",
+    "Teferi's Protection is versatile but limited",
+    "use it on key spells or threats."
   ],
   "matchups": [
     {
@@ -88,16 +110,35 @@
         "Counterspells",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells, split casts, or threats that are hard to counter (Lurrus, Psychic Frog). Use Teferi's Protection to protect key spells. Apply pressure to force them to use counters on non-critical spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early interaction, Thoughtseize to hit mana dorks, removal for key threats, and Teferi's Protection to protect your game plan. Stabilize quickly and out-value them in the late game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Focus on card advantage, better sequencing, and sideboard hate. Use Teferi's Protection to protect key spells, Surgical Extraction to disrupt their graveyard, and out-value them in extended turns.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast combo win conditions",
     "Aggressive creature boards",
     "Permanent removal spells",
-    "Graveyard interaction"
+    "Graveyard interaction",
+    "Watch for sweepers (Wrath, Anger, etc.), counterspells, and graveyard strategies.",
+    "Note when opponents tap out for sweepers or hold up interaction.",
+    "Track graveyard contents if facing Dredge or reanimation."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:04:42+00:00",
     "model": "local-model",
@@ -113,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

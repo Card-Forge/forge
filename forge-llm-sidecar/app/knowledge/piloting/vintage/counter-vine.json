@@ -1,0 +1,130 @@
+{
+  "archetype": "Counter Vine",
+  "format": "vintage",
+  "strategy_type": "combo",
+  "overview": "A four-color control-combo hybrid that uses Force of Negation to protect key pieces and Squee, Goblin Nabob as a recurring win condition, leveraging Noxious Revival to reset threats while generating card advantage through Goblin Nabob's enter-the-battlefield triggers. It wins by out-resourcing control decks, out-recursing combo, and stabilizing against aggro before closing with repeated Squee attacks.",
+  "win_conditions": [
+    "Squee, Goblin Nabob attacking with recursion via Noxious Revival.",
+    "Once you have a Squee on board and a counter in hand, commit to attacking.",
+    "Use Goblin Nabob to dig for the second Squee or a counter to protect the attack."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including fetches/shocks), a Force of Negation or Noxious Revival, and a Squee or Goblin Nabob.",
+      "Prioritize hands with interaction + a threat or recursion target."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 0-1 lands, only single-colored lands with no fetches, or hands with multiple copies of one spell but no threats/answers."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, potentially cast Goblin Nabob if you have mana and can afford the risk, or hold for Force of Negation.",
+      "Turn 2: Develop mana, cast a land, and look to play a Squee or cast Force of Negation on opponent's key spell.",
+      "If facing aggro, hold counters for early threats",
+      "if control, hold for Lurrus or Jace."
+    ],
+    "mid_game": [
+      "Counters are your lifeline",
+      "only spend them on game-ending threats or critical combo pieces.",
+      "Use Goblin Nabob to dig for answers when low on cards.",
+      "Manage graveyard with Surgical Extraction or discard to prevent Noxious Revival recursion abuse.",
+      "Commit Squee only when you have at least one counter or removal ready for the combat step.",
+      "Hold back if the board is empty and you're facing a control deck that can clear it next turn.",
+      "Prioritize board presence over rushing."
+    ],
+    "late_game": [
+      "Squee, Goblin Nabob attacking with recursion via Noxious Revival.",
+      "Once you have a Squee on board and a counter in hand, commit to attacking.",
+      "Use Goblin Nabob to dig for the second Squee or a counter to protect the attack.",
+      "Go all-in when you have a Squee on board, at least one counter or removal in hand, and the opponent has no clear answer.",
+      "Also commit if you're ahead in life and can close in 2-3 turns."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Squee, Goblin Nabob",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Force of Negation",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Noxious Revival",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Squee's ETB triggers are a double-edged sword",
+    "be mindful of opponent's removal.",
+    "Noxious Revival can be a liability against graveyard hate, so consider mulliganing it if you expect Surgical Extraction.",
+    "Force of Negation is your most valuable card",
+    "never spend it on a non-critical spell.",
+    "Remember that 4-color mana can be clunky",
+    "prioritize lands that enter untapped or use fetches to smooth draws.",
+    "Avoid overcommitting to Squee without a counter or removal backup."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Goblin Nabob to dig past counters. Cast Squee in response to their counterspell if you have a backup. Use Noxious Revival to recur threats after their counters are spent. Consider sideboarded discard to remove counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use Force of Negation to stop key ramp spells (e.g., Arcane Signet, Sol Ring, or ramp creatures). Use discard to hit their mana rocks. Stabilize quickly with counters and clear their board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Hold counters for early threats (e.g., Monastery Swiftspear, Goblin Guide). Use Goblin Nabob to stabilize and draw into answers. Once stabilized, transition to control and close with Squee.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure with Squee and Goblin Nabob. Force them to use counters on non-critical spells. Use recursion to out-value their removal. Sideboard in more discard and graveyard hate.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the spell war by holding counters for their Squee or Noxious Revival. Use Thoughtseize to remove their key pieces. Prioritize graveyard denial to stop recursion. Win by out-drawing and out-recursing.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for Lurrus of the Dream-Den (Esper), Treasure tokens (Jewel), and graveyard strategies (Dredge).",
+    "Opponents playing multiple spells in a row often signal combo or control",
+    "hold counters for the finisher.",
+    "Note if they're playing discard or graveyard hate."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/vintage.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

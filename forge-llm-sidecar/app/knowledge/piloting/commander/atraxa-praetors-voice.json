@@ -1,0 +1,123 @@
+{
+  "archetype": "Atraxa, Praetors' Voice",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Atraxa is a +1/+1 counter midrange-combo deck that stabilizes early, ramps into its commander, and overwhelms opponents by continuously pumping its board. It wins by out-scaling aggressive tribal decks, out-grinding control, and leveraging graveyard synergies for late-game finishers.",
+  "win_conditions": [
+    "Atraxa with multiple +1/+1 counters, Cauldron Familiar + Phyrexian Altar + Ashnod's Altar for infinite life/mana, or Exsanguinate for lethal.",
+    "Push combat with pumped creatures when you have protection or removal to handle answers."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including fetches/shocks if applicable), Sol Ring/Arcane Signet, and at least one ramp spell or early creature.",
+      "Prioritize hands that can cast a land and a ramp spell on turn 1."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 3+ lands with no ramp/mana rocks, only removal with no threats/mana, or unplayable colored mana requirements."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring/Arcane Signet, or ramp spell (Llanowar Elves/Rampant Growth).",
+      "Turn 2: Develop mana with ramp creatures/spells, potentially play a second land, and set up early threats like Sylvan Caryatid or Karametra's Acolyte.",
+      "Sequence lands to ensure colored mana for removal (W/B) and ramp (G/U) by turn 3-4."
+    ],
+    "mid_game": [
+      "Balance mana for ramp, removal, and casting Atraxa.",
+      "Don't overcommit to the board if you lack answers.",
+      "Use the graveyard effectively for Exsanguinate or Cauldron Familiar combos.",
+      "Keep hand size optimal by trading removal for threats when ahead and holding counterspells/protection for key threats.",
+      "Commit threats when you have removal to handle opposing answers or when opponents are tapped out.",
+      "Hold back if the board is stacked or if you lack interaction.",
+      "Prioritize keeping Atraxa alive over pumping weak creatures, and use Heroic Intervention or Path to Exile to protect it from targeted removal."
+    ],
+    "late_game": [
+      "Atraxa with multiple +1/+1 counters, Cauldron Familiar + Phyrexian Altar + Ashnod's Altar for infinite life/mana, or Exsanguinate for lethal.",
+      "Push combat with pumped creatures when you have protection or removal to handle answers.",
+      "Go all-in when you have Atraxa on board with 3+ counters, removal to handle answers, and a clear path to lethal.",
+      "Also commit when opponents are tapped out, low on life, or have exhausted their interaction."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Atraxa, Praetors' Voice",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overextending without answers, neglecting to protect Atraxa, mismanaging mana for colored requirements, and ignoring graveyard synergies.",
+    "Unique interactions: Cauldron Familiar + Phyrexian Altar + Ashnod's Altar = infinite life/mana.",
+    "Exsanguinate can win games from the graveyard.",
+    "Watch out for Rest in Peace, Leyline of the Void, or Blood Moon.",
+    "Always track opponent's life total for Exsanguinate and combat math."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats (Sylvan Caryatid, Karametra's Acolyte) and split your investment. Cast Atraxa in response to counterspells if possible, or use protection (Heroic Intervention, Path to Exile on self). Avoid overcommitting to a single large threat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use removal to kill ramp creatures before they stabilize. Out-value them with card draw and efficient removal, and prioritize keeping Atraxa alive to out-scale their late-game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal and Heroic Intervention. Don't overextend; trade efficiently and preserve Atraxa. Pivot to Atraxa once stabilized, and use Fertid Groundskeeper to close out games against wide boards.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with multiple threats to force inefficient block trades. Use Exsanguinate or combo finishers to bypass control. Force them to use resources on multiple fronts and punish overextended boards with combat damage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by resource efficiency and card advantage. Prioritize keeping Atraxa alive, use removal to clear opposing threats, and leverage Cauldron Familiar combos if ahead. Track counters and protect your own, and be willing to trade creatures to maintain board presence.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (e.g., Wrath of God, Day of Judgment), targeted removal, and counterspells.",
+    "Note opponent's mana base and whether they're going wide or tall.",
+    "Track graveyard content for combo threats and monitor life totals to calculate Exsanguinate or combat damage requirements."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

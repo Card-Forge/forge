@@ -40,9 +40,9 @@ class Config:
             strategist_model_name=os.environ.get(
                 "STRATEGIST_MODEL_NAME", os.environ.get("MODEL_NAME", "local-model")
             ),
-            host=os.environ.get("HOST", "127.0.0.1"),
+            host=os.environ.get("HOST", "0.0.0.0"),
             port=int(os.environ.get("PORT", "18970")),
-            request_timeout=float(os.environ.get("LLM_TIMEOUT", "60")),
+            request_timeout=float(os.environ.get("LLM_TIMEOUT", "300")),
             llm_disable_thinking=_env_bool("LLM_DISABLE_THINKING", True),
             metagame_enable=_env_bool("METAGAME_ENABLE", True),
             default_meta_format=os.environ.get("DEFAULT_META_FORMAT", "standard"),

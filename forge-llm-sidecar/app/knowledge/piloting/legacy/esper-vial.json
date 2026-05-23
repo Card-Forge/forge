@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Aether Vial and at least two early spells or creatures",
       "Hands with Quantum Riddler and sufficient lands to cast it by turn two",
-      "Hands featuring Yorion, Sky Nomad alongside interaction or acceleration"
+      "Hands featuring Yorion, Sky Nomad alongside interaction or acceleration",
+      "Keep hands with 2-3 lands, Aether Vial, and at least one 1-2 CMC creature or removal spell.",
+      "Keep hands that can play a land and a 1-drop or Vial on turn 1."
     ],
     "mulligan_criteria": [
       "Hands lacking Aether Vial or any form of acceleration",
       "Hands with only late-game cards or high-mana creatures",
-      "Hands with insufficient lands to cast turn-one or turn-two threats"
+      "Hands with insufficient lands to cast turn-one or turn-two threats",
+      "Mulligan hands with Vial but no creatures/removal, 4+ lands with no early plays, or hands lacking interaction against known tempo/combo threats."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Play Aether Vial on turn one to enable untapped threats",
       "Deploy Quantum Riddler or Yorion, Sky Nomad to establish immediate board presence",
-      "Use basic interaction to protect your early advantages"
+      "Use basic interaction to protect your early advantages",
+      "Turn 1: Play land, cast Aether Vial or a 1-drop creature.",
+      "Turn 2: Play land, cast a second land or cheap creature/removal.",
+      "If you have Vial + a cheap creature, Vial the creature on turn 2 or 3 to establish board presence while preserving mana for interaction.",
+      "Prioritize developing a defensive wall of threats while holding up spot removal or counters for key metagame threats like Delver or Tron engines."
     ],
     "mid_game": [
       "Leverage Quantum Riddler's entry ability to untap Aether Vial and lands for additional plays",
       "Maintain tempo by countering key opponent threats and playing Yorion with flying exiles",
-      "Cycle through your hand to find removal and card draw while keeping pressure"
+      "Cycle through your hand to find removal and card draw while keeping pressure",
+      "Use Aether Vial to cast creatures from hand when you have excess mana, effectively converting mana into tempo.",
+      "Avoid overextending into known sweepers or heavy removal.",
+      "Balance hand size by using Yorion triggers to refill, and manage your graveyard carefully if the format features graveyard hate.",
+      "Prioritize keeping interaction for the opponent's win conditions rather than burning it on low-impact threats.",
+      "Commit threats when you have interaction to protect them or when the opponent is tapped out.",
+      "Hold back if they have sweepers, counters, or heavy removal in hand."
     ],
     "late_game": [
       "Stabilize the board by repeatedly untapping Quantum Riddler and Aether Vial",
       "Use Yorion, Sky Nomad to exile opponent's blockers or give your creatures flying",
-      "Close the game with a flurry of untapped attackers while holding up counterspells"
+      "Close the game with a flurry of untapped attackers while holding up counterspells",
+      "Yorion, Sky Nomad is the primary closer.",
+      "Cast it to draw a card and potentially cheat a game-winning permanent onto the battlefield.",
+      "Secondary finishers include mid-4 CMC creatures Vial'd into play or late-game value engines that out-resource the opponent.",
+      "Go all-in when you have board control, sufficient interaction to protect Yorion, and the opponent is low on resources or has no sweepers.",
+      "Commit when you can Vial multiple threats to close the game or when the opponent is tapped out for a key spell.",
+      "Also commit when you can force a favorable trade that leaves you ahead in board state."
     ]
   },
   "key_cards": [
@@ -59,7 +78,12 @@
     "Always play Aether Vial before your creatures to maximize untapped entries",
     "Use Quantum Riddler's triggered ability to untap Aether Vial and a land, then play another creature",
     "Hold up counterspells for opponent's board wipes or key threats before committing your Yorion",
-    "Exile cards with Yorion only when you need flying evasion or to protect a key permanent"
+    "Exile cards with Yorion only when you need flying evasion or to protect a key permanent",
+    "Common mistakes include overusing Vial on low-impact creatures, forgetting to hold up interaction, and mismanaging Yorion timing.",
+    "Remember that creatures Vial'd into play enter tapped, so plan your turns accordingly.",
+    "Synergize Yorion with cheap threats to maximize the 'put a permanent from hand' trigger.",
+    "Always track the opponent's hand for sweepers and counters, and adjust your Vial timing to exploit their tapped-out turns.",
+    "In Unknown format, adapt quickly to meta shifts and prioritize flexibility over rigid game plans."
   ],
   "matchups": [
     {
@@ -88,16 +112,37 @@
         "Library manipulation",
         "Instant-speed win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Vial to cast creatures when opponents are tapped out or after they've used counters. Deploy cheap, efficient threats that are hard to counter (flying, hexproof, or multiple targets). Save interaction for their key spells and avoid overcommitting to value when they have counterspells in hand.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt mana development. Use spot removal on key ramp creatures and Vial threats to force trades before they stabilize. Don't let them reach their late-game power level; pressure them into mistakes and close the game before they can deploy their engines.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing card advantage and efficient Vial plays. Target their key threats with removal and control the board to force them to overextend. Track their hand for interaction and adjust your threat deployment accordingly. Win the late game by out-valuing them with Yorion and superior resource management.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes",
     "Counterspells",
     "Graveyard hate",
-    "Land destruction"
+    "Land destruction",
+    "Watch for sweepers, counterspells, and combo pieces.",
+    "Note when opponents tap out for big threats or engines.",
+    "Track graveyard activity if relevant.",
+    "Pay attention to Tron/Drake mana bases and Sneak & Show hand disruption.",
+    "Adjust your Vial timing based on their available interaction and board state."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:37:57+00:00",
     "model": "local-model",
@@ -126,6 +171,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

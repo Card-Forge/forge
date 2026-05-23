@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two lands and a one-drop threat or interaction",
       "Combinations of Daze and early creatures to establish tempo",
-      "Hands that can play a threat on turn one or two"
+      "Hands that can play a threat on turn one or two",
+      "Keep hands with 2+ lands (prioritizing fetch/shock or duals if available), Daze, and Nulldrifter.",
+      "Keep hands with Daze + a land + a discard outlet."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction or threats",
       "Mana-heavy hands with no one-drops",
-      "Hands that cannot establish board presence by turn two"
+      "Hands that cannot establish board presence by turn two",
+      "Mulligan hands with 3+ lands, single lands, or only Dreadnought without discard outlets or interaction."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Play lands and deploy one-drops like Nulldrifter to establish board presence and draw cards",
       "Use Daze to counter opponent's early threats or protect your permanents",
-      "Prioritize mana efficiency to maintain tempo advantage"
+      "Prioritize mana efficiency to maintain tempo advantage",
+      "Turn 1: Play a land.",
+      "If opponent casts a spell, Daze it.",
+      "If they don't, hold for Nulldrifter on turn 2.",
+      "Turn 2: Drop Nulldrifter if possible, or play a land and hold Daze.",
+      "Sequence lands to ensure you can cast Nulldrifter on turn 2 or Daze on turn 1."
     ],
     "mid_game": [
       "Transition to Phyrexian Dreadnought to generate card advantage and apply pressure",
       "Hold Daze for key removal or counters to stabilize against aggressive pushes",
-      "Use Dreadnought's activated ability to dig for answers while managing life total"
+      "Use Dreadnought's activated ability to dig for answers while managing life total",
+      "Daze is your primary interaction",
+      "use it on key spells, not just anything.",
+      "Nulldrifter shuts down recursion, so don't tap it for attacks unless necessary.",
+      "Dreadnought requires discarding",
+      "manage your hand to ensure you have enough cards to cast it without leaving yourself defenseless.",
+      "Graveyard is your friend for Dreadnought but an enemy for recursion"
     ],
     "late_game": [
       "Rely on continuous card advantage from Dreadnought and Nulldrifter recursion to outvalue opponents",
       "Maintain board control with instant-speed interaction to close out games",
-      "Manage life total carefully while activating Dreadnought to find game-ending answers"
+      "Manage life total carefully while activating Dreadnought to find game-ending answers",
+      "Phyrexian Dreadnought is the primary win condition.",
+      "Cast it when you have board control, opponent has no removal, or you can protect it with Nulldrifter.",
+      "Secondary win: Nulldrifter can win by attrition if opponent relies on abilities.",
+      "Go all-in when you have Nulldrifter on board, opponent's graveyard is empty or irrelevant, and you have enough mana to cast Dreadnought.",
+      "Also commit when opponent has no removal or counterspells left."
     ]
   },
   "key_cards": [
@@ -58,7 +77,13 @@
   "sequencing_tips": [
     "Hold up Daze before committing to a threat to protect against instant-speed removal",
     "Activate Phyrexian Dreadnought only when you have a clear path to recovery or when digging for a specific answer",
-    "Prioritize playing Nulldrifter early to trigger its death value and draw into more interaction"
+    "Prioritize playing Nulldrifter early to trigger its death value and draw into more interaction",
+    "Dreadnought's discard cost means you must manage your hand carefully.",
+    "Nulldrifter stops all abilities, including your own if you have any.",
+    "Daze's life payment is a double-edged sword",
+    "don't life-pay unless necessary.",
+    "Common mistake: Casting Dreadnought without board control, leading to easy removal.",
+    "Unique interaction: Nulldrifter + Dreadnought is a classic \"unblockable/unanswerable\" threat if opponent relies on abilities or counters."
   ],
   "matchups": [
     {
@@ -87,15 +112,33 @@
         "Graveyard recursion",
         "Fast win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Daze to counter their counters. Cast Dreadnought in response to their removal, or use Nulldrifter to shut down their ability-based answers. Sequence spells to force counterspells on non-critical threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Nulldrifter is key to stopping artifact ramp. Use Daze to counter their mana rocks or finishers. Dreadnought can outvalue their early game if you survive turn 3.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Nulldrifter is king. Trade Nulldrifters if necessary. Daze war of attrition. Dreadnought wins if you can discard efficiently and protect it.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Aggressive creature decks",
     "Control shells with heavy interaction",
-    "Combo strategies relying on graveyard or mana acceleration"
+    "Combo strategies relying on graveyard or mana acceleration",
+    "Watch for graveyard recursion (e.g., Reanimate, Flashback), artifact abilities (Nulldrifter handles this), and counterspells.",
+    "Key tell: Opponent tapping out on turn 3-4 with a graveyard full of cards usually means they're setting up a combo or midrange win."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:13:53+00:00",
     "model": "local-model",
@@ -124,6 +167,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

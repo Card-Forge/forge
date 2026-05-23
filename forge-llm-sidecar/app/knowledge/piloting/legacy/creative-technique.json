@@ -11,12 +11,14 @@
   "mulligan": {
     "keep_criteria": [
       "Hands capable of playing Creative Technique or a 6-mana cascade on turn 3",
-      "Hands with the correct land combination to produce 5-6 mana by turn 3"
+      "Hands with the correct land combination to produce 5-6 mana by turn 3",
+      "Keep hands with 2+ lands (prioritizing duals/acceleration like Chrome Mox, Mox Opal, Arcane Signet, or basic Islands/Plains) plus at least one way to cast a 4+ power creature or ramp spell."
     ],
     "mulligan_criteria": [
       "Hands lacking the correct mana to cascade on turn 3",
       "Hands drawing multiple Maelstrom Wanderer, which reduces haste odds",
-      "Hands overly vulnerable to discard or Wasteland without opponent knowledge"
+      "Hands overly vulnerable to discard or Wasteland without opponent knowledge",
+      "Mulligan on 3+ lands with no early plays, or hands with only low-cost spells and no acceleration or 4+ power threats."
     ],
     "examples": [
       {
@@ -58,16 +60,29 @@
   "game_plan": {
     "early_game": [
       "Ramp to 5-6 mana using dual lands and channel lands",
-      "Play Creative Technique or a 6-mana cascade on turn 3"
+      "Play Creative Technique or a 6-mana cascade on turn 3",
+      "Turn 1: Play a land, cast acceleration or a cantrip.",
+      "Turn 2: Cast a 4+ power creature (e.g., Karn, Glimmerpoint Stag, or Carnosaur itself if mana allows) or ramp into it.",
+      "Sequence lands to ensure U/R availability for counterspells or removal if needed, but prioritize casting threats/ramp to set up the Etali discount."
     ],
     "mid_game": [
       "Demonstrate Creative Technique to stack two copies",
       "Cascade through multiple Techniques, Emrakul, and other cascade cards",
-      "Summon Maelstrom Wanderer to grant haste and attack immediately"
+      "Summon Maelstrom Wanderer to grant haste and attack immediately",
+      "Preserve counterspells for key threats or combo pieces.",
+      "Use graveyard recursion efficiently\u2014don't dump Carnosaur unless you have a follow-up plan or can protect it.",
+      "Cantrip to maintain hand size and dig for answers or finishers.",
+      "Commit threats when you have protection or can trade favorably.",
+      "Hold back if the opponent has sweepers or heavy removal.",
+      "Use Etali\u2019s haste to pressure, but be mindful of board wipes and graveyard hate."
     ],
     "late_game": [
       "If combo is disrupted, use Emrakul's extra turn to recover",
-      "Rely on sideboard interactions like Tibalt's Trickery or Pyrokinesis to stabilize"
+      "Rely on sideboard interactions like Tibalt's Trickery or Pyrokinesis to stabilize",
+      "Etali, Primal Conqueror attacking twice with trample/flying, or a chain of Carnosaur deaths triggering into a lethal threat.",
+      "Use cantrips to dig for the final piece and close the game.",
+      "Go all-in when you have mana open for protection, the opponent has no sweepers, or you can close the game in 1-2 turns.",
+      "Commit when you can safely cast Etali and follow up with a threat."
     ]
   },
   "key_cards": [
@@ -116,7 +131,13 @@
     "Play Ancient Tomb only on the turn you will summon the combo card to minimize Wasteland impact.",
     "Demonstrate Creative Technique to put two copies on the stack, letting the opponent's resolve first.",
     "Use any 6-mana cascade card as an alternative trigger if Creative Technique is not in hand.",
-    "Sideboard Tibalt's Trickery and Throes of Chaos together to cascade into a counter that finds the combo."
+    "Sideboard Tibalt's Trickery and Throes of Chaos together to cascade into a counter that finds the combo.",
+    "Avoid casting Carnosaur without a follow-up plan.",
+    "Etali\u2019s discount requires a 4+ power nonland permanent on the battlefield\u2014Carnosaur itself can enable this.",
+    "Watch for Sneak and Show or combo decks that can go off before you stabilize.",
+    "Practice sequencing mana to ensure you can cast both spells in the same turn if needed.",
+    "Remember that graveyard hate is your primary weakness",
+    "carry sideboard hate or play around it."
   ],
   "matchups": [
     {
@@ -160,6 +181,31 @@
         "Painter's Servant",
         "Counterspells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, split the cast (cast one, respond to counter), or use protection/enlightened. Cantrip into answers and pressure with multiple threats to force counter trade-offs.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use removal on their mana sources, and sideboard in hate bears. Don't overextend into their late-game finishers; stabilize and close the game quickly.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play early removal, stabilize with counterspells, and don't overcommit to big threats until you have board control. Use cantrips to find answers and keep pressure on.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats, use cantrips to find answers, and sideboard in direct damage. Force them to use resources on your threats rather than their own game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value trades, protect your finishers, and use counterspells to protect your own plays. Sideboard in hate for their recursion and prioritize graveyard interaction.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -172,10 +218,12 @@
     "Teferi, Time Raveler",
     "Discard effects",
     "Oops, All Spells",
-    "Goblin Charbelcher"
+    "Goblin Charbelcher",
+    "Watch for sweepers (Wrath of God, Cyclonic Rift), counterspells (Counterspell, Flusterstorm), and graveyard hate (Rest in Peace, Null Rod)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-deck-tech-creative-technique-combo",
     "generated_at": "2026-05-21T07:59:25+00:00",
     "model": "local-model",
@@ -193,6 +241,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

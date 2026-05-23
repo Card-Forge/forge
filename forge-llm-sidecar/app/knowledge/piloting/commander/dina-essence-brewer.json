@@ -1,0 +1,125 @@
+{
+  "archetype": "Dina, Essence Brewer",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Dina is a midrange-combo hybrid that sacrifices creatures to generate escalating Spirit tokens from the graveyard, winning through combat damage or synergistic damage outlets like Zulaport Cutthroat. It excels against slower, resource-heavy decks that struggle to answer multiple large threats or manage sacrifice synergies.",
+  "win_conditions": [
+    "Dina with 5+ creatures in the graveyard creates 5/5 Spirits.",
+    "Pair with Zulaport Cutthroat and sacrifice outlets for lethal poison/damage.",
+    "Alternatively, attack with a wall of 4/4+ Spirits to close out the game."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including at least one Forest or dual land that enters untapped), Sakura-Tribe Elder, and Dina or a sacrifice outlet."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 0-1 lands, no ramp/sacrifice outlets, or too many high-cost creatures without Dina."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sakura-Tribe Elder (or another ramp creature).",
+      "Turn 2: Play a second land, search for a basic Forest with Elder, cast Dina or a second sacrifice outlet.",
+      "Sequence ramp into Dina as fast as possible to start generating tokens."
+    ],
+    "mid_game": [
+      "Prioritize keeping Dina and key sacrifice outlets in play.",
+      "Use Sakura-Tribe Elder early to smooth mana.",
+      "Don't overcommit to the graveyard if graveyard hate is present",
+      "keep a hand of threats.",
+      "Manage token production to avoid flooding your board.",
+      "Commit Dina and early sacrifice outlets to establish a board presence.",
+      "Hold back on sacrificing your entire hand if you lack answers to opponent's removal.",
+      "Use tokens to trade efficiently against smaller threats and preserve your key pieces."
+    ],
+    "late_game": [
+      "Dina with 5+ creatures in the graveyard creates 5/5 Spirits.",
+      "Pair with Zulaport Cutthroat and sacrifice outlets for lethal poison/damage.",
+      "Alternatively, attack with a wall of 4/4+ Spirits to close out the game.",
+      "Go all-in when you have Dina, a reliable sacrifice outlet, and 3+ creatures in the graveyard.",
+      "If the opponent has no graveyard hate or board wipes, commit aggressively to overwhelm their defenses."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Dina, Essence Brewer",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Zulaport Cutthroat",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sakura-Tribe Elder",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Dina decks are highly sensitive to graveyard hate",
+    "always have a plan B (like direct damage or combat wins).",
+    "Avoid sacrificing your entire hand before Dina is on the board.",
+    "Zulaport Cutthroat shines when paired with multiple sacrifice outlets, so sequence sacrifices carefully.",
+    "Watch for Blood Moon or similar mana disruption, as Dina requires specific colors.",
+    "Practice token math to maximize Dina's power and toughness scaling."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats (Sakura-Tribe Elder, Dina) that are hard to counter effectively. Employ discard or hand disruption if available. Sequence around counters by playing around their removal window and committing multiple threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with sacrifice outlets and Zulaport. Use removal to stop their key ramp creatures. Don't overextend into their finishers; stabilize first and punish their creature-heavy curve with Zulaport.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize board wipes, efficient removal, and early Dina to stabilize. Use Zulaport to punish their aggressive creature curve. Hold up removal for their key threats and trade tokens efficiently to survive the early game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early sacrifice outlets and Dina. Don't give them time to set up; win before they can answer your graveyard strategy. Use graveyard recursion to out-value them and force them to spend resources on removal instead of their own game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-graveyarding them. Prioritize keeping Dina and sacrifice outlets. Use discard or hand disruption to slow their recursion. Trade tokens efficiently and aim for lethal faster by managing your graveyard count carefully.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for graveyard hate (Leyline, Rest in Peace, Blood Moon), board wipes, and targeted removal on Dina.",
+    "Note if opponents are playing discard or hand disruption, as Dina decks rely on card advantage from graveyard recursion and consistent land drops."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

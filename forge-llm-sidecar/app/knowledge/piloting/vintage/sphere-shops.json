@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early artifact disruption or interaction",
       "Hands containing Sphere of Resistance or Null Rod",
-      "Hands with Patchwork Automaton and removal"
+      "Hands with Patchwork Automaton and removal",
+      "Keep hands with 2-3 lands (primarily Island and Arcane Lighthouse), plus at least one of: Null Rod, Sphere of Resistance, Patchwork Automaton, or Spell Pierce/Force of Will.",
+      "Keep hands with 2+ disruption if you have a land drop."
     ],
     "mulligan_criteria": [
       "Hands lacking early answers to aggressive threats",
       "Hands with only late-game cards",
-      "Hands missing land or artifact synergy"
+      "Hands missing land or artifact synergy",
+      "Mulligan pure land hands, hands with only one disruption piece and no lands, or hands with multiple copies of low-impact cards like extra Arcane Lighthouse without answers."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Play lands and deploy Null Rod to disrupt artifact-dependent opponents",
       "Hold Sphere of Resistance until you can protect it or use it to tax spells",
-      "Prioritize survival and card advantage"
+      "Prioritize survival and card advantage",
+      "Turn 1: Play Island, cast Spell Pierce or discard (if running hand disruption).",
+      "Turn 2: Play Arcane Lighthouse or second Island, then cast Sphere of Resistance or Null Rod.",
+      "If opening with Lighthouse, play it to enable Wasteland or protect your hand from discard.",
+      "Sequence lands to ensure you can cast disruption on curve",
+      "prioritize getting Null Rod and Sphere online by turn 3 for maximum lock potential."
     ],
     "mid_game": [
       "Stabilize with Sphere of Resistance to increase opponent's spell costs",
       "Deploy Patchwork Automaton to apply pressure while maintaining defense",
-      "Use removal to clear opposing threats"
+      "Use removal to clear opposing threats",
+      "Mana is tight",
+      "always keep 1 blue open for counterspells until it's safe to commit.",
+      "Your hand is your primary resource\u2014don't dump disruption early unless necessary.",
+      "Graveyard is generally irrelevant for you, but monitor opponents using it (Dredge, Reanimator).",
+      "Use Arcane Lighthouse to enable fetches/Wasteland and protect your spells from discard.",
+      "Commit Patchwork Automaton only when Null Rod and Sphere are active or when you can protect it."
     ],
     "late_game": [
       "Leverage Sphere of Resistance to shut down combo or aggressive strategies",
       "Use Patchwork Automaton's toughness to outvalue opponents",
-      "Transition to a grindy endgame where resource denial wins"
+      "Transition to a grindy endgame where resource denial wins",
+      "Patchwork Automaton with Null Rod and Sphere active is the primary win condition.",
+      "Thalia's Lieutenant can close out games against artifact-heavy decks.",
+      "Force of Will or Spell Pierce can protect the final Automaton or Null Rod from removal.",
+      "Go all-in when you have Null Rod and Sphere on the battlefield, the opponent has no interaction, and you can attack with Automaton safely.",
+      "Also commit when you've out-resourced them in disruption and they're out of answers, or when you can swing for lethal before they can stabilize."
     ]
   },
   "key_cards": [
@@ -59,7 +78,13 @@
     "Hold Sphere of Resistance until you can protect it or force opponent to waste removal",
     "Play Null Rod on turn one against artifact decks, but be ready to discard it if it becomes a liability",
     "Deploy Patchwork Automaton after clearing the board to maximize its impact",
-    "Prioritize land drops to ensure you can cast Sphere of Resistance when needed"
+    "Prioritize land drops to ensure you can cast Sphere of Resistance when needed",
+    "Common mistake: Playing Sphere of Resistance without Null Rod (it's weak alone).",
+    "Always try to have both up by turn 3.",
+    "Another mistake: Overcommitting to the board without protection.",
+    "Unique interaction: Arcane Lighthouse can be used to fetch Wasteland to destroy opponent's non-basic lands, but be careful not to destroy your own.",
+    "Null Rod interacts with mana abilities that produce colored mana (shuts down ramp).",
+    "Patchwork Automaton's trigger is a triggered ability, not a spell, so it can't be countered."
   ],
   "matchups": [
     {
@@ -88,15 +113,35 @@
         "Counterspell packages",
         "Artifact disruption"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Arcane Lighthouse to protect your hand, but counters are harder to resolve. Rely on Force of Will to protect your key pieces. Don't overcommit to the stack; wait for them to use interaction on your Pierce. Null Rod can still disrupt their non-artifact spells even if countered.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Null Rod shuts down mana dorks and ramp spells. Sphere of Resistance punishes their extra mana. Use Wasteland to disrupt their mana base. Attack with Automaton to race their slow game plan. Don't let them stabilize; pressure is key.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a counterspell and disruption war. Prioritize keeping Spell Pierce and Force of Will. Null Rod is king. Attack with Automaton when safe. Use Arcane Lighthouse to protect your hand. Win by out-resolving them and having better disruption. Track their hand size and interaction to know when to swing.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Artifact-based combo engines",
     "Fast aggressive strategies",
-    "Board wipes and removal spells"
+    "Board wipes and removal spells",
+    "Watch for graveyard activity (Dredge, Reanimator), mana dorks/ramp (Oath, Tron), and artifact synergies (Jewel Shops, Affinity).",
+    "Key tell: Opponent playing multiple non-basic lands or shuffling graveyard means combo/control.",
+    "Opponent holding up 2+ mana on their turn usually means they have a counter or removal.",
+    "Track how many interaction spells they've already used to gauge when you can safely attack."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:24:51+00:00",
     "model": "local-model",
@@ -112,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

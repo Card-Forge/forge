@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Aether Vial and early Merfolk",
       "Hands containing Lord of Atlantis or Vodalian Hexcatcher with lands",
-      "Hands with multiple low-cost threats and interaction"
+      "Hands with multiple low-cost threats and interaction",
+      "Keep hands with 1-2 lands, Aether Vial, and at least two 1-mana Merfolk or Vodalian Hexcatcher.",
+      "Prioritize hands that can cast Vial or a 1-drop on turn 1."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or early plays",
       "Hands with only high-cost cards",
-      "Hands missing interaction or board presence"
+      "Hands missing interaction or board presence",
+      "Mulligan if you have 3+ lands, no Vial, or only expensive lords without early threats."
     ],
     "examples": []
   },
@@ -25,17 +28,27 @@
     "early_game": [
       "Prioritize casting Aether Vial to enable early Merfolk",
       "Play low-cost threats to apply immediate pressure",
-      "Hold interaction for opponent's early threats"
+      "Hold interaction for opponent's early threats",
+      "Turn 1: Play a land, cast Aether Vial or a 1-mana Merfolk.",
+      "Turn 2: Play a second land, cast another 1-drop or use Vial to put a Lord or Hexcatcher into play.",
+      "Sequence lands to ensure blue mana is available for Hexcatcher and Vial activation."
     ],
     "mid_game": [
       "Cast Lord of Atlantis to generate tokens and stabilize",
       "Use Vodalian Hexcatcher to draw cards and protect the board",
-      "Maintain board presence while cycling through the deck"
+      "Maintain board presence while cycling through the deck",
+      "Treat Aether Vial as a tempo engine",
+      "sequence it to protect threats or bypass counterspells.",
+      "Don't overcommit hand resources\u2014trade cheap Merfolk for value and save interaction for key spells.",
+      "Commit threats when you have Vial or Hexcatcher ready to protect them.",
+      "Hold back if the opponent has sweepers, heavy counterspells, or can stabilize with a single play."
     ],
     "late_game": [
       "Leverage token generation to overwhelm opponent's removal",
       "Use card advantage to outlast control strategies",
-      "Close out games with relentless board pressure"
+      "Close out games with relentless board pressure",
+      "Lord of Atlantis with a full board of Merfolk, or a Vial-sent Hexcatcher/Lord into combat.",
+      "When you have board presence, opponent is at low life, or you've disrupted their key interaction."
     ]
   },
   "key_cards": [
@@ -59,7 +72,13 @@
     "Hold up counterspells for opponent's early threats before committing to the board",
     "Sequence Aether Vial plays to maximize early pressure without stalling",
     "Prioritize casting Vodalian Hexcatcher when opponent has removal in hand",
-    "Use Lord of Atlantis tokens to absorb removal before committing larger threats"
+    "Use Lord of Atlantis tokens to absorb removal before committing larger threats",
+    "Aether Vial synergy is key",
+    "practice sequencing.",
+    "Don't overcommit to the board without protection.",
+    "Watch for graveyard hate in combo matchups.",
+    "Lord of Atlantis is a clock and a tool",
+    "use its tap ability strategically."
   ],
   "matchups": [
     {
@@ -88,6 +107,21 @@
         "Spell syphoners",
         "Unstoppable win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Aether Vial to cast threats in response to counterspells, or sequence around them. Use Hexcatcher if you have another Merfolk.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race them. Use counterspells to hit their mana rocks or finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize lords and interaction. Vial into lords to break stalemates.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +129,13 @@
     "Lightning Strike",
     "Inferno Titan",
     "Thoughtseize",
-    "Daze"
+    "Daze",
+    "Watch for Dimir's counterspells and removal, Tron's mana rocks and finishers, Sneak & Show's graveyard combo, Delver's flip threats, and Ocelot's midrange value.",
+    "Key tells: opponent tapping for multiple colors, graveyard activity, or holding up mana past turn 3."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:22:45+00:00",
     "model": "local-model",
@@ -127,6 +164,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -152,11 +152,19 @@ async def combo_strategist_node(state: GraphState) -> GraphState:
     deterministic = analyze_combo_state(state, combo_profile)
     llm_result: dict | None = None
     try:
+        log.info(
+            "llm_call node=combo_strategist own_archetype=%s",
+            state.get("own_archetype") or "",
+        )
         llm_result = await generate_json(
             _prompt(state, combo_profile, deterministic),
             system=_SYSTEM_PROMPT,
             model=CONFIG.strategist_model_name,
             temperature=0.2,
+        )
+        log.info(
+            "llm_result node=combo_strategist own_archetype=%s",
+            state.get("own_archetype") or "",
         )
     except LLMError as exc:
         log.warning("combo_strategist: LLM call failed (%s); using deterministic plan", exc)

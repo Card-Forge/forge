@@ -1,0 +1,518 @@
+{
+  "schema_version": 1,
+  "name": "Azorius Control",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 61,
+  "macro_plan": "Azorius Control is a top-tier Pioneer deck that leverages Kaheera, the Orphanguard as a companion to empower creature-based strategies. It adopts a reactive, backwards posture focused on countering spells, removing threats, and exhausting the opponent's resources before deploying powerful late-game win conditions.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 14,
+      "cards": [
+        "Beza, the Bounding Spring",
+        "Consult the Star Charts",
+        "Fountainport",
+        "Memory Deluge",
+        "Teferi, Hero of Dominaria",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 11,
+      "cards": [
+        "Consult the Star Charts",
+        "Kutzil's Flanker",
+        "Memory Deluge",
+        "Meticulous Archive",
+        "Stock Up"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 6,
+      "cards": [
+        "Consult the Star Charts",
+        "Teferi, Hero of Dominaria"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 23,
+      "cards": [
+        "Beza, the Bounding Spring",
+        "Consult the Star Charts",
+        "Elspeth, Storm Slayer",
+        "Kaheera, the Orphanguard",
+        "Kutzil's Flanker",
+        "Teferi, Hero of Dominaria",
+        "Temporary Lockdown",
+        "The Wandering Emperor"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 7
+    },
+    "removal": {
+      "target_count": 27,
+      "cards": [
+        "Eiganjo, Seat of the Empire",
+        "Elspeth, Storm Slayer",
+        "Field of Ruin",
+        "Get Lost",
+        "High Noon",
+        "Kutzil's Flanker",
+        "March of Otherworldly Light",
+        "Otawara, Soaring City",
+        "Supreme Verdict",
+        "Teferi, Hero of Dominaria",
+        "The Wandering Emperor"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 12,
+      "cards": [
+        "Consult the Star Charts",
+        "Elspeth, Storm Slayer",
+        "Kaheera, the Orphanguard",
+        "Kutzil's Flanker",
+        "Supreme Verdict"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 4
+    },
+    "counterspells": {
+      "target_count": 11,
+      "cards": [
+        "Change the Equation",
+        "Dovin's Veto",
+        "No More Lies",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 11,
+      "cards": [
+        "Consult the Star Charts",
+        "Dovin's Veto",
+        "Hall of Storm Giants",
+        "Supreme Verdict"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 11,
+      "cards": [
+        "Kutzil's Flanker",
+        "Memory Deluge",
+        "Meticulous Archive",
+        "No More Lies",
+        "Rest in Peace"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Memory Deluge",
+        "Otawara, Soaring City"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 7,
+      "cards": [
+        "Consult the Star Charts",
+        "Memory Deluge",
+        "Teferi, Hero of Dominaria"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Consult the Star Charts",
+        "Memory Deluge",
+        "Teferi, Hero of Dominaria"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "High Noon"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 23,
+      "cards": [
+        "Deserted Beach",
+        "Eiganjo, Seat of the Empire",
+        "Field of Ruin",
+        "Floodfarm Verge",
+        "Fountainport",
+        "Hall of Storm Giants",
+        "Hallowed Fountain",
+        "Kaheera, the Orphanguard",
+        "Meticulous Archive",
+        "Otawara, Soaring City",
+        "Restless Anchorage"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 26,
+      "cards": [
+        "Deserted Beach",
+        "Eiganjo, Seat of the Empire",
+        "Field of Ruin",
+        "Floodfarm Verge",
+        "Fountainport",
+        "Hall of Storm Giants",
+        "Hallowed Fountain",
+        "Island",
+        "Meticulous Archive",
+        "Otawara, Soaring City",
+        "Plains",
+        "Restless Anchorage"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 7,
+      "cards": [
+        "Elspeth, Storm Slayer",
+        "Teferi, Hero of Dominaria",
+        "The Wandering Emperor"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.58
+  },
+  "dual_role_cards": [
+    {
+      "card": "Beza, the Bounding Spring",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Consult the Star Charts",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "protection",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deserted Beach",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dovin's Veto",
+      "roles": [
+        "counterspells",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eiganjo, Seat of the Empire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elspeth, Storm Slayer",
+      "roles": [
+        "planeswalker_threats",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Field of Ruin",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Floodfarm Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fountainport",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hall of Storm Giants",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "High Noon",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaheera, the Orphanguard",
+      "roles": [
+        "mana_fixing",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kutzil's Flanker",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Memory Deluge",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "No More Lies",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restless Anchorage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Supreme Verdict",
+      "roles": [
+        "protection",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teferi, Hero of Dominaria",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "planeswalker_threats",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Wandering Emperor",
+      "roles": [
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Three Steps Ahead",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "discard_outlets"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play backwards by responding to opponent threats before deploying your own",
+    "Save answers in mirror matches and avoid rushing to prevent fatal mistakes",
+    "Prioritize countering Storm the Festival and preventing Karn from entering the board against Nykthos Ramp",
+    "Do not save removal against Gruul Midrange; kill elves immediately to prevent explosive damage",
+    "Teferi's -2 is your most important tool"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands to support a heavy curve of 4+ mana spells"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early counterspells like Censor as a Force Spike"
+    },
+    {
+      "trigger": "early game",
+      "line": "Remove small creatures with Lay Down Arms"
+    }
+  ],
+  "kill_priority": [
+    "Consult the Star Charts",
+    "Memory Deluge",
+    "Teferi, Hero of Dominaria",
+    "Elspeth, Storm Slayer",
+    "The Wandering Emperor",
+    "Beza, the Bounding Spring",
+    "Kaheera, the Orphanguard",
+    "Kutzil's Flanker"
+  ],
+  "interaction_to_disrupt": [
+    "Change the Equation",
+    "Dovin's Veto",
+    "No More Lies",
+    "Three Steps Ahead",
+    "Consult the Star Charts",
+    "Hall of Storm Giants",
+    "Supreme Verdict",
+    "Eiganjo, Seat of the Empire"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/azorius-control.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

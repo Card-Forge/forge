@@ -1,0 +1,746 @@
+{
+  "schema_version": 1,
+  "name": "Blech, Loafing Pest",
+  "format": "commander",
+  "colors": [
+    "B",
+    "G"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 100,
+  "macro_plan": "Leverage Beledros Witherbloom\u2019s spell-triggered mana acceleration and token generation to fuel Blech\u2019s attack/death value and Pest Infestation\u2019s massive trample swing, winning through overwhelming board presence and card advantage.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "Culling Ritual"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Beledros Witherbloom",
+        "Festering Thicket",
+        "Grim Backwoods",
+        "Inspiring Call",
+        "Moldervine Reclamation",
+        "Ohran Frostfang",
+        "Pest Infestation",
+        "Skullclamp",
+        "Well of Lost Dreams",
+        "Witherbloom Charm"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Elven Chorus",
+        "Path of Ancestry",
+        "Study Hall",
+        "Temple of Malady",
+        "Witherbloom Campus"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 5,
+      "cards": [
+        "Fabled Passage",
+        "Nature's Lore",
+        "Sakura-Tribe Elder",
+        "Terramorphic Expanse",
+        "Wight of the Reliquary"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Beledros Witherbloom",
+        "Pest Infestation",
+        "Winding Constrictor"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 43,
+      "cards": [
+        "Arasta of the Endless Web",
+        "Beledros Witherbloom",
+        "Blech, Loafing Pest",
+        "Blex, Vexing Pest",
+        "Blight Mound",
+        "Blossoming Bogbeast",
+        "Bogwater Lumaret",
+        "Comforting Counsel",
+        "Dina, Soul Steeper",
+        "Duskshell Crawler",
+        "Eccentric Pestfinder",
+        "Elvish Mystic",
+        "Gorma, the Gullet",
+        "Hagra Constrictor",
+        "Hardened Scales",
+        "Kazandu Nectarpot",
+        "Llanowar Elves",
+        "Lluwen, Exchange Student",
+        "Lotus Cobra",
+        "Maskwood Nexus",
+        "Mirkwood Bats",
+        "Moseo, Vein's New Dean",
+        "Ohran Frostfang",
+        "Ophiomancer",
+        "Pest Infestation",
+        "Pest Mascot",
+        "Pest Rescuer",
+        "Pest Summoning",
+        "Pestbrood Sloth",
+        "Ribtruss Roaster",
+        "Root Manipulation",
+        "Sakura-Tribe Elder",
+        "Scute Swarm",
+        "Shopkeeper's Bane",
+        "Sol Ring",
+        "Starscape Cleric",
+        "Teacher's Pest",
+        "Tend the Pests",
+        "Twitching Doll",
+        "Veinwitch Coven",
+        "Virulent Emissary",
+        "Wight of the Reliquary",
+        "Winding Constrictor"
+      ],
+      "mainboard_count": 43,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Abrupt Decay",
+        "Assassin's Trophy",
+        "Beast Within",
+        "Bojuka Bog",
+        "Cauldron of Essence",
+        "Culling Ritual",
+        "Duskshell Crawler",
+        "Grapple with Death",
+        "Immoral Bargain",
+        "Inspiring Call",
+        "Llanowar Wastes",
+        "Mortality Spear",
+        "Ohran Frostfang",
+        "Pest Infestation",
+        "Swarmyard",
+        "Triumph of the Hordes",
+        "Veinwitch Coven",
+        "Witherbloom Charm",
+        "Withering Curse"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 9,
+      "cards": [
+        "Duskshell Crawler",
+        "Gorma, the Gullet",
+        "Hagra Constrictor",
+        "Inspiring Call",
+        "Pest Infestation",
+        "Toxic Deluge",
+        "Unnatural Growth",
+        "Wight of the Reliquary",
+        "Withering Curse"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Abrupt Decay",
+        "Inspiring Call"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 7,
+      "cards": [
+        "Bojuka Bog",
+        "Cauldron of Essence",
+        "Deadly Brew",
+        "Moseo, Vein's New Dean",
+        "Teacher's Pest",
+        "Veinwitch Coven",
+        "Wight of the Reliquary"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Cauldron of Essence",
+        "Deadly Brew",
+        "Moseo, Vein's New Dean",
+        "Teacher's Pest",
+        "Veinwitch Coven"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Winding Constrictor"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 28,
+      "cards": [
+        "Arcane Signet",
+        "Beledros Witherbloom",
+        "Bojuka Bog",
+        "Command Tower",
+        "Deathcap Glade",
+        "Elven Chorus",
+        "Exotic Orchard",
+        "Fabled Passage",
+        "Festering Thicket",
+        "Grim Backwoods",
+        "High Market",
+        "Jungle Hollow",
+        "Llanowar Wastes",
+        "Lotus Cobra",
+        "Necroblossom Snarl",
+        "Path of Ancestry",
+        "Pest Infestation",
+        "Reliquary Tower",
+        "Springleaf Parade",
+        "Study Hall",
+        "Swarmyard",
+        "Temple of Malady",
+        "Terramorphic Expanse",
+        "Twilight Mire",
+        "Twitching Doll",
+        "Vernal Fen",
+        "Witherbloom Campus",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 35,
+      "cards": [
+        "Bojuka Bog",
+        "Command Tower",
+        "Deathcap Glade",
+        "Exotic Orchard",
+        "Fabled Passage",
+        "Festering Thicket",
+        "Forest",
+        "Grim Backwoods",
+        "High Market",
+        "Jungle Hollow",
+        "Llanowar Wastes",
+        "Necroblossom Snarl",
+        "Path of Ancestry",
+        "Reliquary Tower",
+        "Study Hall",
+        "Swamp",
+        "Swarmyard",
+        "Temple of Malady",
+        "Terramorphic Expanse",
+        "Twilight Mire",
+        "Vernal Fen",
+        "Witherbloom Campus",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.27
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abrupt Decay",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Beledros Witherbloom",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cauldron of Essence",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Culling Ritual",
+      "roles": [
+        "removal",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Brew",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deathcap Glade",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Duskshell Crawler",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elven Chorus",
+      "roles": [
+        "dig_draw",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabled Passage",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Festering Thicket",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gorma, the Gullet",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grim Backwoods",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hagra Constrictor",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "High Market",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inspiring Call",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jungle Hollow",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Llanowar Wastes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lotus Cobra",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Moseo, Vein's New Dean",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Necroblossom Snarl",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ohran Frostfang",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pest Infestation",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sakura-Tribe Elder",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Study Hall",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Swarmyard",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teacher's Pest",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Malady",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Terramorphic Expanse",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Twilight Mire",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Twitching Doll",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veinwitch Coven",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vernal Fen",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wight of the Reliquary",
+      "roles": [
+        "graveyard_enablers",
+        "threats",
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Winding Constrictor",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Witherbloom Campus",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Witherbloom Charm",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Withering Curse",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Woodland Cemetery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: Casting Pest Infestation without enough creatures to sacrifice, or dying to a sweeper before casting it.",
+    "Unique interaction: Beledros's mana ability can be activated in response to Blech dying to get the 2/2 token, or to cast Pest Infestation.",
+    "Don't tap Beledros's creatures if you need to cast spells to trigger it."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Blech if mana allows."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Attack with Blech or hold for value."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 3: Cast Beledros Witherbloom, tap creatures for mana, and begin generating tokens on spell casts."
+    }
+  ],
+  "kill_priority": [
+    "Beledros Witherbloom",
+    "Pest Infestation",
+    "Winding Constrictor",
+    "Arasta of the Endless Web",
+    "Blech, Loafing Pest",
+    "Blex, Vexing Pest",
+    "Blight Mound",
+    "Blossoming Bogbeast"
+  ],
+  "interaction_to_disrupt": [
+    "Abrupt Decay",
+    "Inspiring Call",
+    "Assassin's Trophy",
+    "Beast Within",
+    "Bojuka Bog",
+    "Cauldron of Essence",
+    "Culling Ritual",
+    "Duskshell Crawler"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/blech-loafing-pest.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

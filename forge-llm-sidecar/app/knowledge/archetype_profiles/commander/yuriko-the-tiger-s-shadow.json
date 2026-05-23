@@ -1,0 +1,825 @@
+{
+  "schema_version": 1,
+  "name": "Yuriko, the Tiger's Shadow",
+  "format": "commander",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 100,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Unwind",
+    "Kaito, Cunning Infiltrator",
+    "Adaptive Automaton",
+    "Arcane Adaptation",
+    "Augury Owl",
+    "Azra Smokeshaper",
+    "Changeling Outcast",
+    "Commandeer"
+  ],
+  "interaction_to_disrupt": [
+    "Diversion Unit",
+    "Siren Stormtamer",
+    "Unwind",
+    "Azra Smokeshaper",
+    "Death-Rattle Oni",
+    "Fallen Shinobi",
+    "Grazilaxx, Illithid Scholar",
+    "Ingenious Infiltrator"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "Dark Ritual"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 11,
+      "cards": [
+        "Brainstorm",
+        "Brainsurge",
+        "Grazilaxx, Illithid Scholar",
+        "Ingenious Infiltrator",
+        "Ingenious Prodigy",
+        "Kaito, Cunning Infiltrator",
+        "Moon-Circuit Hacker",
+        "Ninja of the Deep Hours",
+        "Ninja's Blades",
+        "Satoru, the Infiltrator",
+        "Treasure Cruise"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 13,
+      "cards": [
+        "Augury Owl",
+        "Crystal Grotto",
+        "Dig Through Time",
+        "Faerie Seer",
+        "Halimar Depths",
+        "Ingenious Prodigy",
+        "Mystic Speculation",
+        "Rivendell",
+        "Satoru Umezawa",
+        "Silver Raven",
+        "Soothsaying",
+        "Temple of Deceit",
+        "Wreckage Wickerfolk"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Unwind"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 54,
+      "cards": [
+        "Adaptive Automaton",
+        "Arcane Adaptation",
+        "Augury Owl",
+        "Azra Smokeshaper",
+        "Changeling Outcast",
+        "Commandeer",
+        "Commit // Memory",
+        "Consign // Oblivion",
+        "Death-Rattle Oni",
+        "Dimir Keyrune",
+        "Dimir Signet",
+        "Diversion Unit",
+        "Faerie Seer",
+        "Fallen Shinobi",
+        "Funeral Room // Awakening Hall",
+        "Gingerbrute",
+        "Grazilaxx, Illithid Scholar",
+        "Gudul Lurker",
+        "Hope of Ghirapur",
+        "Ingenious Infiltrator",
+        "Ingenious Prodigy",
+        "Kaito, Cunning Infiltrator",
+        "Leyline of Transformation",
+        "Meat Locker // Drowned Diner",
+        "Metallic Mimic",
+        "Mirror Room // Fractured Realm",
+        "Mist-Cloaked Herald",
+        "Mistblade Shinobi",
+        "Moon-Circuit Hacker",
+        "Moonsnare Specialist",
+        "Nashi, Moon Sage's Scion",
+        "Ninja of the Deep Hours",
+        "Ornithopter",
+        "Peregrine Drake",
+        "Phantom Ninja",
+        "Phyrexian Walker",
+        "Prosperous Thief",
+        "Rags // Riches",
+        "Satoru Umezawa",
+        "Satoru, the Infiltrator",
+        "Shadow of Mortality",
+        "Silver Raven",
+        "Silver-Fur Master",
+        "Siren Stormtamer",
+        "Slither Blade",
+        "Sol Ring",
+        "Tetsuko Umezawa, Fugitive",
+        "Thought Vessel",
+        "Thousand-Faced Shadow",
+        "Tormented Soul",
+        "Triton Shorestalker",
+        "Wonder",
+        "Wreckage Wickerfolk",
+        "Yuriko, the Tiger's Shadow"
+      ],
+      "mainboard_count": 54,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 14,
+      "cards": [
+        "Death-Rattle Oni",
+        "Fallen Shinobi",
+        "Grazilaxx, Illithid Scholar",
+        "Ingenious Infiltrator",
+        "Kaito, Cunning Infiltrator",
+        "Mistblade Shinobi",
+        "Moon-Circuit Hacker",
+        "Nashi, Moon Sage's Scion",
+        "Ninja of the Deep Hours",
+        "Ninja's Blades",
+        "Prosperous Thief",
+        "Singularity Rupture",
+        "Talisman of Dominance",
+        "Yuriko, the Tiger's Shadow"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Bloodline Bidding",
+        "Death-Rattle Oni",
+        "Heartless Conscription",
+        "Satoru Umezawa",
+        "Singularity Rupture"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "Diversion Unit",
+        "Siren Stormtamer",
+        "Unwind"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Azra Smokeshaper"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 3,
+      "cards": [
+        "Kaito, Cunning Infiltrator",
+        "Moon-Circuit Hacker",
+        "Ninja's Blades"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Bloodline Bidding",
+        "Dig Through Time",
+        "Mystic Sanctuary",
+        "Singularity Rupture",
+        "Temporal Trespass",
+        "Treasure Cruise",
+        "Wonder",
+        "Wreckage Wickerfolk"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 20,
+      "cards": [
+        "Azra Smokeshaper",
+        "Bloodline Bidding",
+        "Cunning Evasion",
+        "Dig Through Time",
+        "Dimir Aqueduct",
+        "Fallen Shinobi",
+        "Grazilaxx, Illithid Scholar",
+        "Ingenious Infiltrator",
+        "Mistblade Shinobi",
+        "Moon-Circuit Hacker",
+        "Moonsnare Specialist",
+        "Mystic Sanctuary",
+        "Nashi, Moon Sage's Scion",
+        "Ninja of the Deep Hours",
+        "Prosperous Thief",
+        "Silver-Fur Master",
+        "Temporal Trespass",
+        "Thousand-Faced Shadow",
+        "Treasure Cruise",
+        "Yuriko, the Tiger's Shadow"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Unwind"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Hope of Ghirapur"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Access Tunnel",
+        "Arcane Signet",
+        "Choked Estuary",
+        "Command Tower",
+        "Creeping Tar Pit",
+        "Crystal Grotto",
+        "Darkwater Catacombs",
+        "Dimir Aqueduct",
+        "Drowned Catacomb",
+        "Exotic Orchard",
+        "Halimar Depths",
+        "Murky Sewer",
+        "Mystic Sanctuary",
+        "Prosperous Thief",
+        "Reliquary Tower",
+        "Rivendell",
+        "Rogue's Passage",
+        "Shipwreck Marsh",
+        "Sunken Hollow",
+        "Temple of Deceit",
+        "Unclaimed Territory"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 30,
+      "cards": [
+        "Access Tunnel",
+        "Choked Estuary",
+        "Command Tower",
+        "Creeping Tar Pit",
+        "Crystal Grotto",
+        "Darkwater Catacombs",
+        "Dimir Aqueduct",
+        "Drowned Catacomb",
+        "Exotic Orchard",
+        "Halimar Depths",
+        "Island",
+        "Murky Sewer",
+        "Mystic Sanctuary",
+        "Reliquary Tower",
+        "Rivendell",
+        "Rogue's Passage",
+        "Shipwreck Marsh",
+        "Sunken Hollow",
+        "Swamp",
+        "Temple of Deceit",
+        "Unclaimed Territory"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Kaito, Cunning Infiltrator"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.23
+  },
+  "dual_role_cards": [
+    {
+      "card": "Access Tunnel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Augury Owl",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Azra Smokeshaper",
+      "roles": [
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodline Bidding",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Choked Estuary",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Creeping Tar Pit",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crystal Grotto",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darkwater Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Death-Rattle Oni",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dig Through Time",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dimir Aqueduct",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Diversion Unit",
+      "roles": [
+        "counterspells",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drowned Catacomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Seer",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fallen Shinobi",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grazilaxx, Illithid Scholar",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Halimar Depths",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hope of Ghirapur",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ingenious Infiltrator",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ingenious Prodigy",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaito, Cunning Infiltrator",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mistblade Shinobi",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Moon-Circuit Hacker",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Moonsnare Specialist",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Murky Sewer",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mystic Sanctuary",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nashi, Moon Sage's Scion",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ninja of the Deep Hours",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ninja's Blades",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prosperous Thief",
+      "roles": [
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rivendell",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rogue's Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Satoru Umezawa",
+      "roles": [
+        "dig_draw",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Satoru, the Infiltrator",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shipwreck Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Silver Raven",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Silver-Fur Master",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Singularity Rupture",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Siren Stormtamer",
+      "roles": [
+        "counterspells",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunken Hollow",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Deceit",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temporal Trespass",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thousand-Faced Shadow",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Treasure Cruise",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unclaimed Territory",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unwind",
+      "roles": [
+        "counterspells",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wonder",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wreckage Wickerfolk",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yuriko, the Tiger's Shadow",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/yuriko-the-tiger-s-shadow.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

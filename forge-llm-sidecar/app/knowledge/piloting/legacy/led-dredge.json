@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two mana sources and a cheap spell or creature",
       "Hands containing Cabal Therapy or Stinkweed Imp alongside lands",
-      "Hands that can mill three or more cards by turn two"
+      "Hands that can mill three or more cards by turn two",
+      "Keep hands with Cabal Therapy, at least one dredge card (Stinkweed Imp, Nighthowler, etc.), and 1-2 lands.",
+      "Prioritize hands with LED if paired with a dredge card and land."
     ],
     "mulligan_criteria": [
       "Hands with four or more lands",
       "Hands lacking any card draw or graveyard interaction",
-      "Hands with only high-cost cards and no acceleration"
+      "Hands with only high-cost cards and no acceleration",
+      "Mulligan pure mana hands, hands with only dredge cards and no lands, or hands with Cabal Therapy but no targets/lands."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Prioritize playing lands and casting cheap creatures to establish board presence",
       "Use Cabal Therapy to dig for combo pieces and discard dead draws",
-      "Begin milling your deck to populate the graveyard with key synergies"
+      "Begin milling your deck to populate the graveyard with key synergies",
+      "Turn 1: Cast Cabal Therapy to discard an opponent's key spell or card, or self-mill to set up the graveyard.",
+      "Turn 2: Play a dredge creature or LED.",
+      "Sequence lands to ensure you can cast Cabal Therapy and play a dredge card by turn 2.",
+      "If opening LED, hold for a turn to ensure you have a dredge card and land to activate it profitably."
     ],
     "mid_game": [
       "Activate Lion's Eye Diamond once you have sufficient mana sources and graveyard pieces",
       "Recast creatures and spells from the graveyard to apply pressure or set up combos",
-      "Manage your life total carefully while assembling the final pieces"
+      "Manage your life total carefully while assembling the final pieces",
+      "Treat your graveyard as your library",
+      "preserve key dredge cards and LED.",
+      "Mana is tight, so sequence Cabal Therapy and dredge triggers to maximize value.",
+      "Never activate LED unless you have a clear path to victory or a necessary discard outlet.",
+      "Commit dredge creatures to apply pressure and force answers, but hold back if the opponent has sweepers or targeted removal.",
+      "Use Cabal Therapy to remove threats before they resolve."
     ],
     "late_game": [
       "Execute the assembled combo for lethal damage or infinite resources",
       "Use recursive threats to maintain board control if the combo is disrupted",
-      "Leverage excess mana to cast multiple spells in a single turn"
+      "Leverage excess mana to cast multiple spells in a single turn",
+      "Lion's Eye Diamond combined with a high-impact threat like Blightsteel Colossus, Phyrexian Obliterator, or a massive Stinkweed Imp/Nighthowler swarm.",
+      "Sequence Cabal Therapy to discard the threat, then activate LED to cast it or trigger a massive dredge sequence.",
+      "Go all-in when you have LED, a dredge card, and a land, or when you can cast a win condition that the opponent cannot answer in time.",
+      "Commit if your opponent has no graveyard hate or sweepers in hand and you can close the game before their next turn."
     ]
   },
   "key_cards": [
@@ -59,7 +76,13 @@
     "Mill your deck before activating Lion's Eye Diamond to ensure you have enough pieces in the graveyard",
     "Cast Cabal Therapy before committing to a combo to verify you have all necessary components",
     "Hold up mana for potential interaction before resolving your final combo sequence",
-    "Sacrifice Stinkweed Imp only when it triggers a beneficial effect or avoids lethal damage"
+    "Sacrifice Stinkweed Imp only when it triggers a beneficial effect or avoids lethal damage",
+    "Dredge triggers go on the stack and can be responded to, so don't assume they will resolve.",
+    "LED is an artifact, so it can be destroyed or tapped for mana if needed.",
+    "Cabal Therapy is your most versatile card",
+    "use it to discard opponent's threats, set up your own graveyard, or mill yourself.",
+    "Avoid over-milling without a win condition, and always count your opponent's hand size after Cabal Therapy to make informed decisions.",
+    "Watch for Leyline of the Void in the sideboard, as it can completely shut you down if not addressed."
   ],
   "matchups": [
     {
@@ -88,6 +111,21 @@
         "Belbe's Portal",
         "Fast mana acceleration"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Cabal Therapy to discard counterspells before they resolve. Sequence dredge triggers carefully, as they go on the stack and can be countered. If countered, use LED to generate mana for a backup plan or discard the countered spell to disrupt their hand.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them by prioritizing fast Cabal Therapy and dredge sequences. Discard their ramp spells and early threats. If they outpace you, use LED to go off immediately rather than trying to grind.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war by sequencing Cabal Therapy to remove their key cards (LED, dredge cards, threats). Value your graveyard resources and force them to overcommit. Use hate cards if sideboarded, and prioritize milling to out-value them in the late game.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +133,14 @@
     "Rest in Peace",
     "Lightning Bolt",
     "Abrupt Decay",
-    "Empty the Graveyard"
+    "Empty the Graveyard",
+    "Watch for graveyard hate (Leyline, Rest in Peace, Surgical Extraction) and sweepers (Wrath of God, Anger of the Gods).",
+    "Note when opponents hold up mana for counterspells or removal, as this dictates whether you should go off with LED or hold back.",
+    "Track their hand size after Cabal Therapy to gauge their resilience."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:53:18+00:00",
     "model": "local-model",
@@ -114,6 +156,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

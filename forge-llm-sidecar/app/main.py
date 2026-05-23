@@ -808,6 +808,8 @@ class ReflectGame(BaseModel):
     """One self-play game outcome from the runner's per-seat JSONL."""
 
     won: bool = False
+    # True when the runner interrupted the game at its wall-clock cap.
+    timed_out: bool = False
     # Turn the deck won on (None for losses/timeouts). Lower is better.
     win_turn: int | None = None
     # Compact per-turn action summary, if the runner captured it.
@@ -867,7 +869,12 @@ def _summarize_games(games: list[ReflectGame], *, limit: int = 12) -> str:
     chosen = (wins[:limit] + losses[:3])[:limit]
     lines: list[str] = []
     for g in chosen:
-        outcome = f"WON turn {g.win_turn}" if g.won else "did not win"
+        if g.timed_out:
+            outcome = "timed out"
+        elif g.won:
+            outcome = f"WON turn {g.win_turn}"
+        else:
+            outcome = "did not win"
         seq = "; ".join(g.actions[:20]) if g.actions else (g.log[:400] if g.log else "")
         lines.append(f"- {outcome}: {seq}" if seq else f"- {outcome}")
     return "\n".join(lines)
@@ -892,6 +899,7 @@ async def selfplay_reflect(req: ReflectRequest) -> ReflectResponse:
     n_games = len(games)
     win_turns = [g.win_turn for g in games if g.won and g.win_turn is not None]
     n_wins = len(win_turns)
+    n_timeouts = sum(1 for g in games if g.timed_out)
     win_rate = (n_wins / n_games) if n_games else 0.0
     fastest = min(win_turns) if win_turns else None
     mean_turn = round(statistics.fmean(win_turns), 2) if win_turns else None
@@ -901,16 +909,29 @@ async def selfplay_reflect(req: ReflectRequest) -> ReflectResponse:
     delta = round((mean_turn - fastest), 2) if (mean_turn is not None and fastest is not None) else 0.0
 
     log.info(
-        "selfplay/reflect: archetype=%s context=%s games=%d wins=%d fastest=%s",
-        req.archetype, req.context, n_games, n_wins, fastest,
+        "selfplay/reflect: archetype=%s context=%s games=%d wins=%d timeouts=%d fastest=%s",
+        req.archetype, req.context, n_games, n_wins, n_timeouts, fastest,
     )
 
     lessons: list[Lesson] = []
-    if n_games:
+    suppress_reason = ""
+    if n_games and n_timeouts == n_games:
+        suppress_reason = "all_games_timed_out"
+    elif n_games and n_wins == 0:
+        suppress_reason = "no_wins"
+
+    if suppress_reason:
+        log.info(
+            "selfplay/reflect: suppressed LLM lessons for archetype=%s context=%s reason=%s",
+            req.archetype,
+            req.context,
+            suppress_reason,
+        )
+    elif n_games:
         prompt = (
             f"Deck: {req.archetype} ({req.format})\n"
             f"Pilot mode: {req.pilot_mode}  Context: {req.context}\n"
-            f"Games: {n_games}  Wins: {n_wins}  Win rate: {win_rate:.0%}\n"
+            f"Games: {n_games}  Wins: {n_wins}  Timeouts: {n_timeouts}  Win rate: {win_rate:.0%}\n"
             f"Win turns — fastest: {fastest}, mean: {mean_turn}, median: {median_turn}\n\n"
             f"PER-GAME SUMMARIES (fastest wins first):\n{_summarize_games(games)}\n\n"
             f"Distill at most {req.max_lessons} conditional lessons that would make "
@@ -918,7 +939,18 @@ async def selfplay_reflect(req: ReflectRequest) -> ReflectResponse:
             '  "lessons": [{"trigger": string, "recommendation": string}]'
         )
         try:
+            log.info(
+                "llm_call node=selfplay_reflect archetype=%s context=%s games=%d",
+                req.archetype,
+                req.context,
+                n_games,
+            )
             raw = await generate_json(prompt, system=_REFLECT_SYSTEM_PROMPT)
+            log.info(
+                "llm_result node=selfplay_reflect archetype=%s context=%s",
+                req.archetype,
+                req.context,
+            )
         except LLMError as exc:
             log.warning("selfplay/reflect: LLM call failed (%s); returning aggregates only", exc)
             raw = {}

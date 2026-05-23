@@ -1,0 +1,137 @@
+{
+  "archetype": "Bant Airbending Combo",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/bant-airbending-combo.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Aang, Swift Savior"
+    },
+    {
+      "qty": 2,
+      "name": "Aang, at the Crossroads"
+    },
+    {
+      "qty": 4,
+      "name": "Appa, Steadfast Guardian"
+    },
+    {
+      "qty": 2,
+      "name": "Aven Interrupter"
+    },
+    {
+      "qty": 4,
+      "name": "Bramble Familiar"
+    },
+    {
+      "qty": 4,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 2,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 4,
+      "name": "Doc Aurlock, Grizzled Genius"
+    },
+    {
+      "qty": 2,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 2,
+      "name": "Gene Pollinator"
+    },
+    {
+      "qty": 3,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 2,
+      "name": "Hushwood Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Interdimensional Web Watch"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Skycoach Conductor"
+    },
+    {
+      "qty": 3,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 3,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 2,
+      "name": "Vastlands Scavenger"
+    },
+    {
+      "qty": 2,
+      "name": "Willowrush Verge"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Avatar's Wrath"
+    },
+    {
+      "qty": 1,
+      "name": "Aven Interrupter"
+    },
+    {
+      "qty": 3,
+      "name": "Erode"
+    },
+    {
+      "qty": 2,
+      "name": "Heritage Reclamation"
+    },
+    {
+      "qty": 1,
+      "name": "Leatherhead, Swamp Stalker"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 3,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Bahamut"
+    }
+  ]
+}

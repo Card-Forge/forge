@@ -1,0 +1,799 @@
+{
+  "schema_version": 1,
+  "name": "Alela, Cunning Conqueror",
+  "format": "commander",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 100,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Alela, Cunning Conqueror",
+    "Archmage Emeritus",
+    "Hullbreaker Horror",
+    "Nymris, Oona's Trickster",
+    "Voracious Tome-Skimmer",
+    "Wavebreak Hippocamp",
+    "Rewind",
+    "Bitterbloom Bearer"
+  ],
+  "interaction_to_disrupt": [
+    "An Offer You Can't Refuse",
+    "Arcane Denial",
+    "Counterspell",
+    "Glen Elendra Archmage",
+    "Rewind",
+    "Spellstutter Sprite",
+    "Swan Song",
+    "Cunning Nightbonder"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 3,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Dark Ritual",
+        "Deadly Dispute"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 22,
+      "cards": [
+        "Arcane Denial",
+        "Archmage Emeritus",
+        "Bident of Thassa",
+        "Black Market Connections",
+        "Brainstorm",
+        "Cling to Dust",
+        "Consider",
+        "Curiosity Crafter",
+        "Deadly Dispute",
+        "Distant Melody",
+        "Enduring Curiosity",
+        "Faerie Mastermind",
+        "Frantic Search",
+        "Harmonized Crescendo",
+        "Keep Watch",
+        "Kindred Discovery",
+        "Ledger Shredder",
+        "Reconnaissance Mission",
+        "Skullclamp",
+        "Tegwyll, Duke of Splendor",
+        "Voracious Tome-Skimmer",
+        "Wavebreak Hippocamp"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Castle Vantress",
+        "Consider",
+        "Nymris, Oona's Trickster",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 1,
+      "cards": [
+        "Polluted Delta"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Rewind"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 29,
+      "cards": [
+        "Alela, Cunning Conqueror",
+        "Archmage Emeritus",
+        "Bitterbloom Bearer",
+        "Brazen Borrower",
+        "Clearwater Pathway",
+        "Commandeer",
+        "Cunning Nightbonder",
+        "Curiosity Crafter",
+        "Dimir Signet",
+        "Enduring Curiosity",
+        "Faerie Mastermind",
+        "Glen Elendra Archmage",
+        "Grim Hireling",
+        "Hullbreaker Horror",
+        "Ledger Shredder",
+        "March of Swirling Mist",
+        "Mocking Doppelganger",
+        "Nymris, Oona's Trickster",
+        "Obyra, Dreaming Duelist",
+        "Prosperous Thief",
+        "Scion of Oona",
+        "Slip Out the Back",
+        "Sol Ring",
+        "Sower of Temptation",
+        "Spellstutter Sprite",
+        "Tegwyll, Duke of Splendor",
+        "Thought Vessel",
+        "Voracious Tome-Skimmer",
+        "Wavebreak Hippocamp"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 20,
+      "cards": [
+        "Alela, Cunning Conqueror",
+        "Bident of Thassa",
+        "Cling to Dust",
+        "Curiosity Crafter",
+        "Enduring Curiosity",
+        "Go for the Throat",
+        "Grim Hireling",
+        "Hullbreaker Horror",
+        "Infernal Grasp",
+        "Notorious Throng",
+        "Pongify",
+        "Prosperous Thief",
+        "Rapid Hybridization",
+        "Reality Shift",
+        "Reconnaissance Mission",
+        "Snap",
+        "Stern Dismissal",
+        "Talisman of Dominance",
+        "Underground River",
+        "Withering Torment"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Banner of Kinship",
+        "Faerie Slumber Party",
+        "Harmonized Crescendo",
+        "Propaganda",
+        "Raise the Palisade",
+        "Reins of Power"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 7,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Arcane Denial",
+        "Counterspell",
+        "Glen Elendra Archmage",
+        "Rewind",
+        "Spellstutter Sprite",
+        "Swan Song"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Cunning Nightbonder",
+        "Hullbreaker Horror"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Ledger Shredder"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 7,
+      "cards": [
+        "Cling to Dust",
+        "Consider",
+        "Mortuary Mire",
+        "Mystic Sanctuary",
+        "Nymris, Oona's Trickster",
+        "Takenuma, Abandoned Mire",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 13,
+      "cards": [
+        "Aetherize",
+        "Cling to Dust",
+        "Enduring Curiosity",
+        "Faerie Slumber Party",
+        "Glen Elendra Archmage",
+        "Hullbreaker Horror",
+        "Mortuary Mire",
+        "Mystic Sanctuary",
+        "Prosperous Thief",
+        "Raise the Palisade",
+        "Snap",
+        "Stern Dismissal",
+        "Takenuma, Abandoned Mire"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 6,
+      "cards": [
+        "Alela, Cunning Conqueror",
+        "Archmage Emeritus",
+        "Hullbreaker Horror",
+        "Nymris, Oona's Trickster",
+        "Voracious Tome-Skimmer",
+        "Wavebreak Hippocamp"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Rewind"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 26,
+      "cards": [
+        "An Offer You Can't Refuse",
+        "Arcane Signet",
+        "Bender's Waterskin",
+        "Castle Vantress",
+        "Command Tower",
+        "Darkslick Shores",
+        "Deadly Dispute",
+        "Drowned Catacomb",
+        "Gloomlake Verge",
+        "Morphic Pool",
+        "Mortuary Mire",
+        "Mystic Sanctuary",
+        "Polluted Delta",
+        "Prosperous Thief",
+        "Reflecting Pool",
+        "Reliquary Tower",
+        "Secluded Glen",
+        "Shipwreck Marsh",
+        "Sunken Hollow",
+        "Sunken Ruins",
+        "Tainted Isle",
+        "Takenuma, Abandoned Mire",
+        "Three Tree City",
+        "Undercity Sewers",
+        "Underground River",
+        "Watery Grave"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 34,
+      "cards": [
+        "Castle Vantress",
+        "Command Tower",
+        "Darkslick Shores",
+        "Drowned Catacomb",
+        "Gloomlake Verge",
+        "Island",
+        "Morphic Pool",
+        "Mortuary Mire",
+        "Mystic Sanctuary",
+        "Polluted Delta",
+        "Reflecting Pool",
+        "Reliquary Tower",
+        "Secluded Glen",
+        "Shipwreck Marsh",
+        "Sunken Hollow",
+        "Sunken Ruins",
+        "Swamp",
+        "Tainted Isle",
+        "Takenuma, Abandoned Mire",
+        "Three Tree City",
+        "Undercity Sewers",
+        "Underground River",
+        "Watery Grave"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.38
+  },
+  "dual_role_cards": [
+    {
+      "card": "Alela, Cunning Conqueror",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "An Offer You Can't Refuse",
+      "roles": [
+        "counterspells",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Denial",
+      "roles": [
+        "card_advantage",
+        "counterspells"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archmage Emeritus",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bident of Thassa",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Castle Vantress",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cling to Dust",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Consider",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cunning Nightbonder",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Curiosity Crafter",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darkslick Shores",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Dispute",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drowned Catacomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Enduring Curiosity",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Mastermind",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Slumber Party",
+      "roles": [
+        "recursion",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glen Elendra Archmage",
+      "roles": [
+        "counterspells",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gloomlake Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grim Hireling",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Harmonized Crescendo",
+      "roles": [
+        "card_advantage",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hullbreaker Horror",
+      "roles": [
+        "engines",
+        "protection",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ledger Shredder",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Morphic Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mortuary Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mystic Sanctuary",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nymris, Oona's Trickster",
+      "roles": [
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prosperous Thief",
+      "roles": [
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raise the Palisade",
+      "roles": [
+        "recursion",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reconnaissance Mission",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reflecting Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rewind",
+      "roles": [
+        "counterspells",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Secluded Glen",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shipwreck Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snap",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spellstutter Sprite",
+      "roles": [
+        "counterspells",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stern Dismissal",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunken Hollow",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunken Ruins",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tainted Isle",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Takenuma, Abandoned Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tegwyll, Duke of Splendor",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Three Tree City",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground River",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Voracious Tome-Skimmer",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wavebreak Hippocamp",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/alela-cunning-conqueror.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

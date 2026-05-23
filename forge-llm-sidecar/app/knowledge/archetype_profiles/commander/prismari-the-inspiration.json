@@ -1,0 +1,806 @@
+{
+  "schema_version": 1,
+  "name": "Prismari, the Inspiration",
+  "format": "commander",
+  "colors": [
+    "R",
+    "U"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "Cast cheap instants and sorceries to generate a relentless army of 1/1 haste Wizard tokens, then sacrifice them to pump your commander or a secondary threat for lethal. This deck wins by out-casting opponents with instant-speed interaction and overwhelming board presence before control or combo can stabilize.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 5,
+      "cards": [
+        "Big Score",
+        "Desperate Ritual",
+        "Pyretic Ritual",
+        "Strike It Rich",
+        "Unexpected Windfall"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 24,
+      "cards": [
+        "Archmage Emeritus",
+        "Baral, Chief of Compliance",
+        "Big Score",
+        "Brainstorm",
+        "Chart a Course",
+        "Consider",
+        "Demand Answers",
+        "Faithless Looting",
+        "Fiery Islet",
+        "Frantic Search",
+        "Gitaxian Probe",
+        "Kozilek, Butcher of Truth",
+        "Opt",
+        "Ponder",
+        "Preordain",
+        "Prismari Charm",
+        "Prismari Command",
+        "Rapturous Moment",
+        "Resonating Lute",
+        "Serum Visions",
+        "Thrill of Possibility",
+        "Unexpected Windfall",
+        "Wheel of Misfortune",
+        "Windfall"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 9,
+      "cards": [
+        "Consider",
+        "Expressive Iteration",
+        "Faithless Looting",
+        "Opt",
+        "Ponder",
+        "Preordain",
+        "Prismari Charm",
+        "Serum Visions",
+        "Sleight of Hand"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 1,
+      "cards": [
+        "Scalding Tarn"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Unexpected Windfall",
+        "Windfall"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 25,
+      "cards": [
+        "Arcane Signet",
+        "Archmage Emeritus",
+        "Baral, Chief of Compliance",
+        "Birgi, God of Storytelling",
+        "Blazing Firesinger",
+        "Chaos Warp",
+        "Creative Technique",
+        "Dirgur Focusmage",
+        "Dualcaster Mage",
+        "Goblin Electromancer",
+        "Harmonized Trio",
+        "Izzet Signet",
+        "Jeska's Will",
+        "Kozilek, Butcher of Truth",
+        "Mana Geyser",
+        "Mindsplice Apparatus",
+        "Prismari, the Inspiration",
+        "Reverberate",
+        "Riverglide Pathway",
+        "Snapcaster Mage",
+        "Sol Ring",
+        "Storm-Kiln Artist",
+        "Stormcatch Mentor",
+        "Thought Vessel",
+        "Veyran, Voice of Duality"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Boltwave",
+        "Crackle with Power",
+        "Cyclonic Rift",
+        "Grapeshot",
+        "Jaya's Immolating Inferno",
+        "Lightning Bolt",
+        "Mnemonic Deluge",
+        "Pongify",
+        "Prismari Charm",
+        "Prismari Command",
+        "Rapid Hybridization",
+        "Shivan Reef",
+        "Snap",
+        "Talisman of Creativity",
+        "Wheel of Misfortune"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Mistrise Village",
+        "Prismari, the Inspiration"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 6,
+      "cards": [
+        "Baral, Chief of Compliance",
+        "Big Score",
+        "Chart a Course",
+        "Demand Answers",
+        "Thrill of Possibility",
+        "Unexpected Windfall"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 12,
+      "cards": [
+        "Arcane Bombardment",
+        "Brain Freeze",
+        "Consider",
+        "Faithless Looting",
+        "Flashback",
+        "Kozilek, Butcher of Truth",
+        "Mnemonic Deluge",
+        "Mystic Sanctuary",
+        "Past in Flames",
+        "Prismari Charm",
+        "Snapcaster Mage",
+        "Strike It Rich"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 10,
+      "cards": [
+        "Arcane Bombardment",
+        "Cyclonic Rift",
+        "Faithless Looting",
+        "Flashback",
+        "Mystic Sanctuary",
+        "Past in Flames",
+        "Prismari Charm",
+        "Snap",
+        "Snapcaster Mage",
+        "Strike It Rich"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Arcane Bombardment",
+        "Archmage Emeritus",
+        "Prismari, the Inspiration",
+        "Storm-Kiln Artist",
+        "Stormcatch Mentor",
+        "Sunbird's Invocation",
+        "Thousand-Year Storm",
+        "Veyran, Voice of Duality"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Unexpected Windfall",
+        "Windfall"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Gitaxian Probe"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 23,
+      "cards": [
+        "Arcane Signet",
+        "Big Score",
+        "Cascade Bluffs",
+        "Command Tower",
+        "Ferrous Lake",
+        "Fiery Islet",
+        "Frostboil Snarl",
+        "Mistrise Village",
+        "Mystic Sanctuary",
+        "Reliquary Tower",
+        "Resonating Lute",
+        "Riverpyre Verge",
+        "Scalding Tarn",
+        "Scorched Geyser",
+        "Shivan Reef",
+        "Spirebluff Canal",
+        "Steam Vents",
+        "Storm-Kiln Artist",
+        "Stormcarved Coast",
+        "Strike It Rich",
+        "Sulfur Falls",
+        "Training Center",
+        "Unexpected Windfall"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 33,
+      "cards": [
+        "Cascade Bluffs",
+        "Command Tower",
+        "Ferrous Lake",
+        "Fiery Islet",
+        "Frostboil Snarl",
+        "Island",
+        "Mistrise Village",
+        "Mountain",
+        "Mystic Sanctuary",
+        "Reliquary Tower",
+        "Riverpyre Verge",
+        "Scalding Tarn",
+        "Scorched Geyser",
+        "Shivan Reef",
+        "Spirebluff Canal",
+        "Steam Vents",
+        "Stormcarved Coast",
+        "Sulfur Falls",
+        "Training Center"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.2
+  },
+  "dual_role_cards": [
+    {
+      "card": "Arcane Bombardment",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Signet",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archmage Emeritus",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Baral, Chief of Compliance",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Big Score",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cascade Bluffs",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chart a Course",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Consider",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cyclonic Rift",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Demand Answers",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faithless Looting",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ferrous Lake",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fiery Islet",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flashback",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Frostboil Snarl",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gitaxian Probe",
+      "roles": [
+        "card_advantage",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kozilek, Butcher of Truth",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mistrise Village",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mnemonic Deluge",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mystic Sanctuary",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Opt",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Past in Flames",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Preordain",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismari Charm",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismari Command",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismari, the Inspiration",
+      "roles": [
+        "engines",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Resonating Lute",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Riverpyre Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scorched Geyser",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Serum Visions",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shivan Reef",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snap",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snapcaster Mage",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirebluff Canal",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Storm-Kiln Artist",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormcarved Coast",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormcatch Mentor",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strike It Rich",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sulfur Falls",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thrill of Possibility",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Training Center",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unexpected Windfall",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "mana_fixing",
+        "payoff_cards",
+        "rituals",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veyran, Voice of Duality",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wheel of Misfortune",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windfall",
+      "roles": [
+        "card_advantage",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: Over-pumping without enough sacrifice outlets.",
+    "Remember that the commander's ability is a sacrifice outlet itself, but you'll need more for consistent pressure.",
+    "Prismari spells often have additional effects, so prioritize those that draw cards or deal damage.",
+    "Flash and haste synergy is key, and always protect your commander with counterspells or protection spells."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Sol Ring/Arcane Signet."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Cast a cheap instant or sorcery to trigger the commander, creating a 1/1 haste token."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence mana to ensure you can cast multiple spells per turn as soon as possible, prioritizing cheap, efficient spells that draw cards or deal damage."
+    }
+  ],
+  "kill_priority": [
+    "Arcane Bombardment",
+    "Archmage Emeritus",
+    "Prismari, the Inspiration",
+    "Storm-Kiln Artist",
+    "Stormcatch Mentor",
+    "Sunbird's Invocation",
+    "Thousand-Year Storm",
+    "Veyran, Voice of Duality"
+  ],
+  "interaction_to_disrupt": [
+    "Mistrise Village",
+    "Prismari, the Inspiration",
+    "Boltwave",
+    "Crackle with Power",
+    "Cyclonic Rift",
+    "Grapeshot",
+    "Jaya's Immolating Inferno",
+    "Lightning Bolt"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/prismari-the-inspiration.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

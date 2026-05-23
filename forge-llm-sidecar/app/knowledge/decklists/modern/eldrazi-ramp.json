@@ -1,0 +1,133 @@
+{
+  "archetype": "Eldrazi Ramp",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/eldrazi-ramp.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Ancient Stirrings"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Commercial District"
+    },
+    {
+      "qty": 3,
+      "name": "Devourer of Destiny"
+    },
+    {
+      "qty": 4,
+      "name": "Eldrazi Temple"
+    },
+    {
+      "qty": 3,
+      "name": "Emrakul, the Promised End"
+    },
+    {
+      "qty": 3,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Quarter"
+    },
+    {
+      "qty": 2,
+      "name": "Icetill Explorer"
+    },
+    {
+      "qty": 4,
+      "name": "Kozilek's Command"
+    },
+    {
+      "qty": 2,
+      "name": "Kozilek's Return"
+    },
+    {
+      "qty": 4,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 1,
+      "name": "Sanctum of Ugin"
+    },
+    {
+      "qty": 1,
+      "name": "Sire of Seven Deaths"
+    },
+    {
+      "qty": 4,
+      "name": "Sowing Mycospawn"
+    },
+    {
+      "qty": 2,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 4,
+      "name": "Talisman of Impulse"
+    },
+    {
+      "qty": 4,
+      "name": "Ugin's Labyrinth"
+    },
+    {
+      "qty": 2,
+      "name": "Ugin, Eye of the Storms"
+    },
+    {
+      "qty": 2,
+      "name": "Unholy Heat"
+    },
+    {
+      "qty": 4,
+      "name": "Utopia Sprawl"
+    },
+    {
+      "qty": 4,
+      "name": "Wooded Foothills"
+    },
+    {
+      "qty": 1,
+      "name": "World Breaker"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Blasphemous Act"
+    },
+    {
+      "qty": 2,
+      "name": "Fade from History"
+    },
+    {
+      "qty": 2,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 2,
+      "name": "Nature's Claim"
+    },
+    {
+      "qty": 2,
+      "name": "The Stone Brain"
+    },
+    {
+      "qty": 2,
+      "name": "Trinisphere"
+    },
+    {
+      "qty": 3,
+      "name": "Vexing Bauble"
+    }
+  ]
+}

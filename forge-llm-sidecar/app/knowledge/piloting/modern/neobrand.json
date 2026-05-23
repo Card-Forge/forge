@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Summoner's Pact paired with at least one creature",
       "Early mana sources to support five-color requirements",
-      "Allosaurus Rider or Griselbrand with a way to untap them"
+      "Allosaurus Rider or Griselbrand with a way to untap them",
+      "Keep hands with 2-3 lands (prioritize duals/fixing), a Summoner's Pact or sacrifice outlet, and a way to protect or find Griselbrand.",
+      "Prioritize hands that can play a turn-1 land and have a turn-2 threat or Pact."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or card draw",
       "Heavy lands with no creatures or Pact",
-      "Griselbrand without an untap or haste source"
+      "Griselbrand without an untap or haste source",
+      "Mulligan if you have 0-1 lands, only single-colored fixing with no fetches, or a hand full of late-game cards with no early interaction."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play cheap creatures and cast Summoner's Pact to draw cards and discard",
       "Use Allosaurus Rider to untap creatures and grant haste for immediate attacks",
-      "Prioritize mana development to enable five-color casting by turn three"
+      "Prioritize mana development to enable five-color casting by turn three",
+      "Turn 1: Play a land, cast a cheap cantrip or protection spell if available.",
+      "Turn 2: Cast Allosaurus Rider or a Pact, or play a second land.",
+      "If you have Pact, search for a creature (like a sacrifice outlet or early threat), sacrifice it to draw into your combo pieces.",
+      "Sequence lands carefully to ensure you can cast B spells on time for Pact/Griselbrand."
     ],
     "mid_game": [
       "Chain Pact and Rider to generate multiple attacks per turn",
       "Stabilize against removal by keeping Pact in hand to replace lost creatures",
-      "Begin setting up Griselbrand as a primary threat once mana is established"
+      "Begin setting up Griselbrand as a primary threat once mana is established",
+      "Mana is tight",
+      "always keep 1-2 mana open for Pact or protection.",
+      "Don't overcommit to board if you can't protect Griselbrand.",
+      "Graveyard is a resource for Pact but also a vulnerability",
+      "be mindful of graveyard hate.",
+      "Hand size should be maintained via cantrips"
     ],
     "late_game": [
       "Attack with Griselbrand repeatedly using untap loops",
       "Maintain card advantage by cycling through Pact draws",
-      "Close out games with overwhelming board presence or direct damage from haste creatures"
+      "Close out games with overwhelming board presence or direct damage from haste creatures",
+      "Griselbrand is the primary finisher.",
+      "Once you draw 7, you typically win via card advantage, a secondary threat, or overwhelming board state.",
+      "Secondary finishers include large creatures or combo pieces found via Pact.",
+      "Go all-in when you have protection (counters, hexproof, or opponent out of answers), a clear path to Griselbrand, and enough resources to survive the 7 life cost.",
+      "If you can draw into Griselbrand and have a way to protect it or win immediately, commit."
     ]
   },
   "key_cards": [
@@ -59,7 +77,13 @@
     "Always untap and grant haste before declaring attackers to avoid wasting tempo",
     "Chain Pact's untap mode after Rider to attack the same creature twice in one turn",
     "Manage your graveyard carefully since Pact can exile cards you might need for other effects",
-    "Hold up Pact in hand to respond to removal rather than committing it too early"
+    "Hold up Pact in hand to respond to removal rather than committing it too early",
+    "Common mistake: Overcommitting to Griselbrand without protection or a win condition.",
+    "Always have a backup plan.",
+    "Another: Ignoring the 7 life cost",
+    "track your life total carefully.",
+    "Unique interaction: Allosaurus Rider can be sacrificed to Pact to find Griselbrand, then sacrificed to Rider to draw into it, creating a powerful loop if you have the mana.",
+    "Also, Pact can target creatures in your graveyard, so keep a few cheap creatures there as fuel."
   ],
   "matchups": [
     {
@@ -88,16 +112,34 @@
         "Card draw engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Pact on your turn to avoid targeting, or cast Griselbrand when opponent has no mana open. Use cheap cantrips to pressure through counters. If possible, use protection spells or sacrifice outlets to bypass counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Allosaurus Rider and cantrips. Use spot removal to kill ramp targets. Don't overextend; stabilize and find Griselbrand before they can deploy their win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a game of resource management and disruption. Prioritize discard to empty their hand, use Pact to find key pieces before they do, and protect your Griselbrand with counters or hexproof. Win by out-drawing them and finding your win condition first.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipe spells",
     "Counterspells targeting Pact or Griselbrand",
     "Graveyard hate effects",
-    "Direct creature removal"
+    "Direct creature removal",
+    "Watch for counterspells (hold Pact/Griselbrand until safe), sweepers (have a backup plan or protection), graveyard hate (switch to midrange/aggro plan if Pact is dead), and fast combo turns (have a clock or disruption ready).",
+    "Key tells: Opponent tapping for 2+ mana on turn 2/3, discarding your hand, or targeting your graveyard."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:25:53+00:00",
     "model": "local-model",
@@ -113,7 +155,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

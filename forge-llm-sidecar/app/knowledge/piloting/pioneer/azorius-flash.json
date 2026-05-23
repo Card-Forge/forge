@@ -11,12 +11,14 @@
   "mulligan": {
     "keep_criteria": [
       "Hands that let you be aggressive early on",
-      "Hands that have answers to enemy removals and interactions"
+      "Hands that have answers to enemy removals and interactions",
+      "Keep hands with 2-3 lands (preferably duals or fetch/shock sources for W/U), at least one flash enabler (Consult the Star Charts or Aven Interrupter), and a Drannith Magistrate or early removal."
     ],
     "mulligan_criteria": [
       "Hands that are quite reactive and only have one turn-3 creature",
       "Hands that can't easily deal with early game threats",
-      "Hands that lack an extra land and will likely get stuck"
+      "Hands that lack an extra land and will likely get stuck",
+      "Mulligan pure curve-outs, hands with only flash spells and no lands, or hands with multiple Dranniths but no early interaction or card draw."
     ],
     "examples": [
       {
@@ -43,17 +45,31 @@
     "early_game": [
       "Put creatures in play and attack from above",
       "Protect strategies with counters and Spell Queller",
-      "Build the board fast against aggro decks"
+      "Build the board fast against aggro decks",
+      "Turn 1: Play a land, flash in a cheap threat or removal if possible, or hold up mana for interaction.",
+      "Turn 2: Flash in a second enabler or threat, deploy Drannith Magistrate to enable graveyard recursion.",
+      "Sequence lands to ensure you can cast flash spells on the opponent's turn.",
+      "Prioritize keeping mana open for flash triggers rather than committing to a single turn's plan."
     ],
     "mid_game": [
       "Use Mausoleum Wanderer as a flexible counter spell",
       "Deal with problematic cards using Spell Queller and Skyclave Apparition",
-      "Apply pressure with Supreme Phantom and Brazen Borrower"
+      "Apply pressure with Supreme Phantom and Brazen Borrower",
+      "Mana is for flash triggers and interaction, not just casting.",
+      "Keep 1-2 cards in hand to react.",
+      "Use the graveyard strategically",
+      "Drannith enables recursion, but don't overcommit to the graveyard if hate is present.",
+      "Prioritize card advantage engines when the board is stable.",
+      "Commit threats when you have removal or flash counterspells to protect them."
     ],
     "late_game": [
       "Rely on card draw to progress the game plan",
       "Use The Wandering Emperor to buff creatures and remove threats",
-      "Maintain board presence and life total while denying opponent space"
+      "Maintain board presence and life total while denying opponent space",
+      "A board full of flying threats enabled by Drannith, backed by card advantage from Consult the Star Charts and Aven Interrupter.",
+      "Win by trading efficiently and out-grinding with flash value, often closing out in combat after flashing in blockers or removal on the opponent's turn.",
+      "When you have card advantage, removal for their threats, and they have no graveyard hate or board wipes.",
+      "Go all-in when you can flash in multiple threats on their turn to bypass sweepers or combat damage, forcing them to answer multiple lines simultaneously."
     ]
   },
   "key_cards": [
@@ -92,7 +108,13 @@
     "Activate Mausoleum Wanderer's sacrifice ability whenever needed as long as it is on the board",
     "Play it safe and use your creatures well against midrange decks",
     "Stop opponents from resolving Collected Company at all costs",
-    "Be careful with your life total against aggressive decks"
+    "Be careful with your life total against aggressive decks",
+    "Common mistake: Flashing in enablers on your turn when you could save mana for the opponent's turn.",
+    "Always keep mana open for flash triggers.",
+    "Drannith Magistrate is your engine",
+    "protect it or have a backup.",
+    "Consult the Star Charts and Aven Interrupter are your card advantage",
+    "use them to out-value, not just to cast spells."
   ],
   "matchups": [
     {
@@ -137,6 +159,31 @@
         "Brutal Cathar",
         "Collected Company"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use flash to cast spells on the opponent's turn when they've already spent mana. Use Drannith to cast from the graveyard, bypassing stack-based disruption. Use cheap threats and value engines that don't rely on a single spell, and trade removal efficiently to clear the path for your finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with flash threats. Use removal on their mana dorks/accelerants. Don't let them stabilize; flash in value to disrupt their plans and force them to answer multiple threats before they can cast their big spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize removal and counterspells. Flash in blockers or removal on their combat step. Use Drannith to recur removal. Stabilize by turn 3-4, then close out with flying threats and card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card advantage. Flash in threats when they're tapped out. Use Drannith to recur value. Don't overcommit to the stack; trade efficiently and force them to use multiple answers for a single threat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war. Prioritize keeping interaction. Use Drannith to recur your enablers. Trade removal efficiently. Flash in threats on their turn to bypass sweepers and force them to answer multiple lines simultaneously.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -147,10 +194,13 @@
     "Sheoldred, the Apocalypse",
     "Thoughtseize",
     "Duress",
-    "global removals"
+    "global removals",
+    "Watch for graveyard hate (Rest in Peace, Scavenging Ooze), board wipes, and counter suites.",
+    "Note if opponents are holding up mana for flash responses."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-azorius-flash-spirits-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T04:34:33+00:00",
     "model": "local-model",
@@ -181,6 +231,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

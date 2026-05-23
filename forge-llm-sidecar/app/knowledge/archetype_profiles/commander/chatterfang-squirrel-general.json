@@ -1,0 +1,580 @@
+{
+  "schema_version": 1,
+  "name": "Chatterfang, Squirrel General",
+  "format": "commander",
+  "colors": [
+    "B",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "Chatterfang is a value engine that trades creatures for cards, aiming to out-resource opponents through relentless card advantage and token generation. It wins by stabilizing early, out-drawing control and combo decks, and out-valuing aggro with efficient removal and late-game finishers.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 3,
+      "cards": [
+        "Culling Ritual",
+        "Dark Ritual",
+        "Deadly Dispute"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 16,
+      "cards": [
+        "Corrupted Conviction",
+        "Deadly Dispute",
+        "Fecundity",
+        "Idol of Oblivion",
+        "Moldervine Reclamation",
+        "Morbid Opportunist",
+        "Peregrin Took",
+        "Phyrexian Arena",
+        "Pitiless Carnage",
+        "Plumb the Forbidden",
+        "Ruthless Knave",
+        "Skullclamp",
+        "Spymaster's Vault",
+        "Toski, Bearer of Secrets",
+        "Unearth",
+        "Village Rites"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Dig Up",
+        "Greedy Freebooter",
+        "Path of Ancestry",
+        "Umbral Collar Zealot",
+        "Viscera Seer"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 7,
+      "cards": [
+        "Chord of Calling",
+        "Diabolic Tutor",
+        "Dig Up",
+        "Eldritch Evolution",
+        "Fauna Shaman",
+        "Many Partings",
+        "Mastermind's Acquisition"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 40,
+      "cards": [
+        "Academy Manufactor",
+        "Bastion of Remembrance",
+        "Beledros Witherbloom",
+        "Blood Artist",
+        "Bootleggers' Stash",
+        "Chatterfang, Squirrel General",
+        "Chatterstorm",
+        "Dark Tutelage",
+        "Darkstar Augur",
+        "Deadly Dispute",
+        "Dreadhorde Invasion",
+        "Elvish Mystic",
+        "Fauna Shaman",
+        "Gala Greeters",
+        "Gilded Goose",
+        "Golgari Signet",
+        "Greedy Freebooter",
+        "Life // Death",
+        "Llanowar Elves",
+        "Marionette Apprentice",
+        "Mirkwood Bats",
+        "Morbid Opportunist",
+        "Nadier's Nightblade",
+        "Nested Shambler",
+        "Peregrin Took",
+        "Pitiless Plunderer",
+        "Prosperous Innkeeper",
+        "Ruthless Knave",
+        "Sol Ring",
+        "Spawning Pit",
+        "Sylvan Offering",
+        "Toski, Bearer of Secrets",
+        "Umbral Collar Zealot",
+        "Utopia Sprawl",
+        "Vinereap Mentor",
+        "Viscera Seer",
+        "Warren Soultrader",
+        "Weird Harvest",
+        "Wild Growth",
+        "Zulaport Cutthroat"
+      ],
+      "mainboard_count": 40,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 7,
+      "cards": [
+        "Beast Within",
+        "Cauldron of Essence",
+        "Culling Ritual",
+        "Talisman of Resilience",
+        "Toski, Bearer of Secrets",
+        "Unearth",
+        "Verdant Command"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Chord of Calling",
+        "Living Death",
+        "Plumb the Forbidden"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 1,
+      "cards": [
+        "Verdant Command"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Toski, Bearer of Secrets"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Deadly Dispute"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 11,
+      "cards": [
+        "Agent of the Iron Throne",
+        "Cauldron of Essence",
+        "Cloakwood Hermit",
+        "Deadly Dispute",
+        "Living Death",
+        "Marionette Apprentice",
+        "Scavenger's Talent",
+        "Umbral Collar Zealot",
+        "Unearth",
+        "Verdant Command",
+        "Victimize"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Cauldron of Essence",
+        "Scavenger's Talent",
+        "Squirrel Sanctuary",
+        "Unearth",
+        "Victimize"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 13,
+      "cards": [
+        "Arcane Signet",
+        "Command Tower",
+        "Deadly Dispute",
+        "Gilded Goose",
+        "Greedy Freebooter",
+        "Path of Ancestry",
+        "Pitiless Plunderer",
+        "Prosperous Innkeeper",
+        "Ruthless Knave",
+        "Spymaster's Vault",
+        "Tainted Wood",
+        "Warren Soultrader",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 31,
+      "cards": [
+        "Command Tower",
+        "Forest",
+        "Path of Ancestry",
+        "Spymaster's Vault",
+        "Swamp",
+        "Tainted Wood",
+        "Woodland Cemetery"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.13
+  },
+  "dual_role_cards": [
+    {
+      "card": "Cauldron of Essence",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chord of Calling",
+      "roles": [
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Culling Ritual",
+      "roles": [
+        "removal",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Dispute",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "rituals",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dig Up",
+      "roles": [
+        "dig_draw",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fauna Shaman",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gilded Goose",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Greedy Freebooter",
+      "roles": [
+        "dig_draw",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Living Death",
+      "roles": [
+        "graveyard_enablers",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marionette Apprentice",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Morbid Opportunist",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Peregrin Took",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pitiless Plunderer",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Plumb the Forbidden",
+      "roles": [
+        "card_advantage",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prosperous Innkeeper",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ruthless Knave",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scavenger's Talent",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spymaster's Vault",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tainted Wood",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Toski, Bearer of Secrets",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Umbral Collar Zealot",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unearth",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Command",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Victimize",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Viscera Seer",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Warren Soultrader",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Woodland Cemetery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Chatterfang is vulnerable to board wipes, so don't overcommit to token generation.",
+    "Deadly Dispute is your best friend, but don't sacrifice your only creature unless necessary.",
+    "Watch for opponent's discard or hand disruption.",
+    "The deck thrives on patience and out-valuing, not rushing.",
+    "Avoid playing around cards you don't need to"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, then a cheap creature or removal."
+    },
+    {
+      "trigger": "early game",
+      "line": "If you have Sol Ring, play it on turn 1, then a land, then a creature/removal."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play Chatterfang if possible, or another creature/removal."
+    }
+  ],
+  "kill_priority": [
+    "Academy Manufactor",
+    "Bastion of Remembrance",
+    "Beledros Witherbloom",
+    "Blood Artist",
+    "Bootleggers' Stash",
+    "Chatterfang, Squirrel General",
+    "Chatterstorm",
+    "Dark Tutelage"
+  ],
+  "interaction_to_disrupt": [
+    "Verdant Command",
+    "Toski, Bearer of Secrets",
+    "Beast Within",
+    "Cauldron of Essence",
+    "Culling Ritual",
+    "Talisman of Resilience",
+    "Unearth",
+    "Chord of Calling"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/chatterfang-squirrel-general.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

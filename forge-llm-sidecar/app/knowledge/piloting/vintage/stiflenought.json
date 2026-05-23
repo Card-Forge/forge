@@ -12,7 +12,10 @@
     "keep_criteria": [
       "Hands with Lurrus and cheap spells",
       "Hands with Stock Up and early interaction",
-      "Two-land hands with recursion potential"
+      "Two-land hands with recursion potential",
+      "Keep hands with 2-3 playable lands, Lurrus, Stock Up, or early interaction (Stifle, removal).",
+      "Drop hands with 3+ lands and no early plays, or hands consisting solely of removal without card draw or a finisher.",
+      "Prioritize hands that can play a land and a spell on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Hands lacking Lurrus or Stock Up",
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and cheap interaction",
       "Cast Lurrus to recur key spells",
-      "Use Stock Up to draw into answers"
+      "Use Stock Up to draw into answers",
+      "Turn 1: Play a land, optionally cast a cantrip or hold up interaction depending on matchup.",
+      "Turn 2: Cast Lurrus or play a second land.",
+      "Sequence lands to ensure blue/white mana for Stifle and Lurrus.",
+      "If facing aggro, hold interaction for early threats",
+      "against control, establish card advantage with Stock Up or Lurrus."
     ],
     "mid_game": [
       "Stabilize with removal and counterspells",
       "Recycle threats through Lurrus",
-      "Set up Phyrexian Dreadnought"
+      "Set up Phyrexian Dreadnought",
+      "Treat your graveyard as a secondary hand",
+      "only cast Dreadnought when you have a plan to recur it or it applies immediate pressure.",
+      "Use Stock Up to dig for answers or recursion pieces.",
+      "Avoid overcommitting to the board without Lurrus or interaction ready.",
+      "Commit threats only when you have interaction or recursion locked in.",
+      "Dreadnought is a liability if unprotected or unrecurable."
     ],
     "late_game": [
       "Push Dreadnought for damage",
       "Maintain card advantage with Stock Up loops",
-      "Control board state until opponent runs out of resources"
+      "Control board state until opponent runs out of resources",
+      "Phyrexian Dreadnought cast from the graveyard and recurring via Lurrus, or a board presence of Lurrus plus Dreadnought.",
+      "Sometimes a Stifle-protected Dreadnought that cannot be removed wins the game outright.",
+      "Go all-in when you have graveyard recursion secured, enough mana to cast Dreadnought, and interaction to protect it.",
+      "Also commit when the opponent has no removal or graveyard hate in play."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Cast Stock Up before Lurrus to fill graveyard",
     "Hold up mana for counterspells before committing to Lurrus",
-    "Prioritize removing opponent's early threats before setting up Dreadnought"
+    "Prioritize removing opponent's early threats before setting up Dreadnought",
+    "Common mistake: casting Dreadnought without a plan to recur it or protect it.",
+    "Stifle timing is crucial\u2014save it for opponent's removal or key spells, not just for fun.",
+    "Lurrus is fragile",
+    "protect it or have a backup plan.",
+    "In an Unknown format, adapt to the local meta but keep the core recursion engine intact.",
+    "Always track opponent's graveyard and hand size to avoid walking into sweepers or hate cards."
   ],
   "matchups": [
     {
@@ -87,15 +111,34 @@
         "Counterspell packages",
         "Resource denial"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Stifle to protect your own spells or Dreadnought. Cast threats in response to counterspells when possible. Use cantrips to dig around interaction and force them to spend mana on multiple threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction to disrupt their mana development. Use Stifle to counter key ramp spells or mana dorks. Dreadnought can stabilize by applying pressure while they are still ramping.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Treat it as a resource war. Prioritize graveyard protection, out-value with card draw, and use Stifle to protect your Lurrus and Dreadnought from their recursion. Win by having more interaction and better graveyard management.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggro creatures",
     "Combo win conditions",
-    "Board wipes and counterspells"
+    "Board wipes and counterspells",
+    "Watch for graveyard hate (Rest in Peace, Scavenging Ooze, etc.), counterspells, and sweepers.",
+    "Note when opponents hold up mana for removal versus interaction.",
+    "Track how many cards they have in hand to gauge if they can answer your next threat."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T12:01:11+00:00",
     "model": "local-model",
@@ -111,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

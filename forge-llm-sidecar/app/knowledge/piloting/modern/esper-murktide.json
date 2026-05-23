@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Psychic Frog or Fatal Push",
       "Hands with at least one counterspell and a land",
-      "Hands with two one-mana spells"
+      "Hands with two one-mana spells",
+      "Keep hands with 2-3 lands, at least one interaction spell (Fatal Push, Counterspell, or Thoughtseize), and preferably Psychic Frog or a turn-2 threat.",
+      "Ideal opening curve includes a 1-drop interaction, a 2-drop threat/land, and a clear 3-turn plan."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction or creatures",
       "Hands with three or more lands",
-      "Hands without Psychic Frog or Fatal Push"
+      "Hands without Psychic Frog or Fatal Push",
+      "Mulligan pure land hands, hands with only removal and no lands, or hands with multiple copies of the same low-impact spell."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play Psychic Frog on turn one to establish presence",
       "Use Fatal Push to remove early aggressive threats",
-      "Hold Counterspell for opponent's key plays"
+      "Hold Counterspell for opponent's key plays",
+      "Turn 1: Play a land, then cast Thoughtseize if possible to disrupt combo/aggro, or hold interaction for key threats.",
+      "Turn 2: Play a land, then drop Psychic Frog or a cheap threat.",
+      "If facing aggro, prioritize lethal interaction (Fatal Push on 1-2 mana threats).",
+      "Land sequencing: Start with duals/shocks if available, otherwise fetch/land drop to ensure WUB mana.",
+      "Do not tap out on turn 1 unless you have a clear disruption plan."
     ],
     "mid_game": [
       "Trade Psychic Frog repeatedly to draw cards",
       "Maintain board control with efficient removal",
-      "Apply steady pressure while waiting for opponent's resources to dry up"
+      "Apply steady pressure while waiting for opponent's resources to dry up",
+      "Preserve Psychic Frog until you have a Murktide Predator or other high-value threat in the graveyard.",
+      "Do not overextend into sweepers.",
+      "Use Fatal Push on 1-2 mana threats to preserve hand for later.",
+      "Manage your graveyard carefully",
+      "avoid dumping Murktide into it if you cannot safely cast it.",
+      "Commit threats only when you have sufficient interaction to answer their response."
     ],
     "late_game": [
       "Stabilize with remaining counterspells",
       "Close out with accumulated card advantage",
-      "Use Fatal Push to clear the final path to victory"
+      "Use Fatal Push to clear the final path to victory",
+      "Casting Murktide Predator from the graveyard via Psychic Frog, then following up with additional threats or pumping tokens.",
+      "The combination of flying tokens and Murktide's ETB usually closes the game.",
+      "When you have card advantage, they have no sweepers, and you can safely cast Murktide.",
+      "Also commit when you are at 3+ life and they are at 5+, or when you can trade tokens for their blockers without risking your life total."
     ]
   },
   "key_cards": [
@@ -60,7 +78,13 @@
     "Trade Psychic Frog early to draw into Fatal Push or additional interaction",
     "Use Fatal Push on threats that would otherwise trade with Frog to maximize card advantage",
     "Save reactive removal like Spell Snare for after Teferi enters the battlefield to protect it, while using proactive removal like Unholy Heat on early threats like Felia to avoid wasting interaction.",
-    "When facing a haste creature with Teferi on the board, delay casting Subtlety until the attack step to safely block and bounce the creature, preventing the opponent from playing spells in response due to Teferi's static ability."
+    "When facing a haste creature with Teferi on the board, delay casting Subtlety until the attack step to safely block and bounce the creature, preventing the opponent from playing spells in response due to Teferi's static ability.",
+    "Psychic Frog's ability puts the creature onto the battlefield, triggering enters-the-battlefield effects.",
+    "Murktide Predator's ETB creates tokens based on creatures you control other than itself, so dropping it into an empty board only makes 1 token.",
+    "Do not sacrifice Psychic Frog to recur a threat if you can cast it normally",
+    "Frog is better used to draw a card and recur a Murktide or other high-value threat.",
+    "Be careful of fetch effects that put Murktide into the graveyard",
+    "you can target it with Frog as long as it is in the graveyard."
   ],
   "matchups": [
     {
@@ -96,15 +120,33 @@
       "opponent_archetype": "Esper GenericBlink",
       "advice": "Fatal Push is a critical clean answer to Blink creatures like Solitude, Ephemerate, and Felia. This specific opponent list lacks Solitude, making cheap removal even more impactful for controlling the early board. (from gameplay) Be wary of Subtlety bouncing your Prowess creatures back to the top of your library. If you are mana-screwed, the bounce can severely disrupt your game plan by putting a non-land on top when you desperately need mana. (from gameplay)",
       "watch_for": []
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtseize to remove counterspells. Cast threats in response to their counterspells if you have protection. Use Psychic Frog to recur threats from the graveyard, bypassing the stack entirely.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize Fatal Push on 1-2 mana threats. Use Thoughtseize to grab their ramp spells. Do not let them establish a board; trade efficiently and punish overextensions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Thoughtseize is key to disrupting their recursion. Use Psychic Frog to recur Murktide efficiently. Trade tokens carefully and wait for them to overcommit or make a sequencing error.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
-    "Combo enablers"
+    "Combo enablers",
+    "Watch for sweepers (Wrath of God, Anger of the Gods), targeted removal (Path to Exile, Murderous Rider), and combo pieces (Tendrils, Storm count, Amulet targets).",
+    "Note if they are holding up mana for counterspells or spot removal before committing your own threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:42:12+00:00",
     "model": "local-model",
@@ -171,6 +213,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": "Esper Murktide"
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

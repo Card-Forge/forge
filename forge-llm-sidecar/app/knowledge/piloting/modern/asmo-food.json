@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with early persist creatures or Archon of Cruelty",
       "Hands containing Asmoranomardicadaistinaculdacar with cheap recursion targets",
-      "Mana bases supporting W/B/R/G early turns"
+      "Mana bases supporting W/B/R/G early turns",
+      "Keep hands with 2-3 lands (including duals or fetches), a turn-1 land drop, and either a turn-2 Archon of Cruelty, a mana accelerator, or a Persist enabler."
     ],
     "mulligan_criteria": [
       "Hands lacking early board presence or recursion targets",
       "Hands with only high-cost cards and no persist creatures",
-      "Mana screws in the quadrabonus color scheme"
+      "Mana screws in the quadrabonus color scheme",
+      "Mulligan on 3+ lands with no early plays, hands with only single-color sources and no fixers, or hands lacking any interaction or early threats."
     ],
     "examples": []
   },
@@ -25,17 +27,31 @@
     "early_game": [
       "Deploy cheap persist creatures to establish early board presence",
       "Prioritize mana development to support W/B/R/G casting costs",
-      "Hold up mana to protect key threats from early removal"
+      "Hold up mana to protect key threats from early removal",
+      "Turn 1: Play a basic or dual land, cast a mana dork or artifact ramp if available.",
+      "Turn 2: Develop your mana base, drop Archon of Cruelty if ahead, or play a Persist creature to establish board presence.",
+      "Prioritize fixing over speed",
+      "four-color consistency is critical to hitting your key spells."
     ],
     "mid_game": [
       "Cast Asmoranomardicadaistinaculdacar to begin recurring persist creatures",
       "Use Archon of Cruelty to swing life totals and generate value",
-      "Maintain board pressure while filtering draw step for recursion targets"
+      "Maintain board pressure while filtering draw step for recursion targets",
+      "Balance mana for casting threats versus holding up interaction.",
+      "Use Food artifacts for card advantage and life gain to stabilize against aggressive strategies.",
+      "Preserve Persist creatures by protecting them or maintaining recursion resources in hand and graveyard.",
+      "Commit Archon of Cruelty when you can protect it or have removal ready for opposing threats.",
+      "Hold back Asmo until you have a clear path to victory, sufficient protection, or the opponent is tapped out for a combo win.",
+      "Trade efficiently"
     ],
     "late_game": [
       "Chain persist returns to create unblockable or massive board states",
       "Leverage Archon of Cruelty deaths to drain opponent life totals",
-      "Close out games with Asmo's trample damage or life total manipulation"
+      "Close out games with Asmo's trample damage or life total manipulation",
+      "Asmoranomardicadaistinaculdacar is the primary win condition, often cast for free or reduced cost.",
+      "Archon of Cruelty combined with Persist recursion creates an unblockable or resilient threat that forces multiple answers.",
+      "Go all-in when you have board control, enough mana to protect Asmo, or when the opponent is tapped out for a combo win.",
+      "Commit to attacking with Archon and Persist creatures when you can trade favorably or force the opponent to use multiple answers."
     ]
   },
   "key_cards": [
@@ -59,7 +75,12 @@
     "Hold up red mana before Asmo dies to ensure it can be cast or protected",
     "Time Archon of Cruelty deaths to maximize life swing before opponent's turn",
     "Prioritize returning persist creatures with Asmo to maintain board pressure",
-    "Use W/B/R/G mana efficiently to cast recursion targets before graveyard hate"
+    "Use W/B/R/G mana efficiently to cast recursion targets before graveyard hate",
+    "Asmo's casting cost or commander tax can be mitigated with specific effects",
+    "plan your mana accordingly.",
+    "Persist creatures should be protected or recurred efficiently to maximize value.",
+    "Watch for format-specific hate cards and adjust your mulligan strategy to avoid dead draws.",
+    "Practice timing your Asmo cast to avoid counter spells and blink effects."
   ],
   "matchups": [
     {
@@ -88,16 +109,36 @@
         "Board control spells",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips, split casts, or cast Asmo during the opponent's upkeep when they are less likely to have counterspells. Utilize protection spells, free-cast effects, or sacrifice outlets to bypass counters and establish board presence.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use artifact hate and board wipes to slow their acceleration. Prioritize life gain and removal to survive their early game while outvaluing them midgame.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize graveyard hate to disrupt Persist recursion. Use targeted removal to eliminate key threats. Control the board with wipes and win with Asmo or superior card advantage. Track opponent's hand size and graveyard to anticipate their moves.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Graveyard hate effects",
     "Board wipe spells",
     "Targeted creature removal",
-    "Life total manipulation spells"
+    "Life total manipulation spells",
+    "Watch for combo pieces (Energy counters, Storm counters, Amulet activations) and blink triggers.",
+    "Note when opponents tap out for key spells",
+    "this is your window to attack, cast Asmo, or deploy a Persist enabler.",
+    "Track graveyard contents to anticipate recursion plays."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T02:05:17+00:00",
     "model": "local-model",
@@ -113,7 +154,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

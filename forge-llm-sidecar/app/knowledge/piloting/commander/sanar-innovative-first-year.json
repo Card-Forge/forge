@@ -1,0 +1,121 @@
+{
+  "archetype": "Sanar, Innovative First-Year",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This R/U deck functions as a treasure-fueled midrange-combo hybrid that leverages artifact synergy and spell acceleration to out-value opponents. It aims to win by generating incremental advantage through cantrips and treasure generation, then closing games with high-impact threats or direct damage engines that overwhelm control and combo strategies while out-grinding aggro with efficient interaction.",
+  "win_conditions": [
+    "Magmakin Artillerist (pumped via treasure/artifact synergies), Sanar's ultimate ability, or a high-impact spell fueled by accumulated treasure.",
+    "Win by overwhelming the board with synergistic threats or dealing direct damage through artifact engines."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing untapped or duals), at least one turn-1 or turn-2 play (Sanar, Treasure Hunt, or a cheap artifact), and an early interaction piece."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no early plays, 2+ lands with only high-casting-cost spells, or hands lacking any way to establish board presence or answer early threats."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land and cast a cantrip or cheap artifact to establish mana/artifact synergy and draw into your game plan.",
+      "Turn 2: Deploy Sanar or cast Treasure Hunt to generate treasure, then follow up with a threat or interaction.",
+      "Prioritize untapped lands for R/U duals",
+      "use fetches only if you need a specific basic for shock lands or to smooth a mana flood."
+    ],
+    "mid_game": [
+      "Hoard treasure and artifacts for burst turns rather than spending them on minor advantages.",
+      "Use cantrips to maintain hand size and avoid card starvation.",
+      "Track graveyard recursion threats and avoid overcommitting mana on single-target removal when board wipes are likely.",
+      "Commit threats only when you have at least one interaction or a board wipe in hand.",
+      "Hold back if the opponent has open mana for counterspells or sweepers.",
+      "Use treasure to cast multiple spells in response to maintain tempo and force unfavorable trades."
+    ],
+    "late_game": [
+      "Magmakin Artillerist (pumped via treasure/artifact synergies), Sanar's ultimate ability, or a high-impact spell fueled by accumulated treasure.",
+      "Win by overwhelming the board with synergistic threats or dealing direct damage through artifact engines.",
+      "Go all-in when you have 3+ treasure/artifacts, a way to protect your finisher, and the opponent has no sweepers or counterspells.",
+      "Commit if you can close the game in 1-2 turns without leaving yourself vulnerable to a comeback."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Sanar, Innovative First-Year",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Treasure Hunt",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Magmakin Artillerist",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overcommitting treasure on small threats instead of saving for finishers.",
+    "Unique interaction: Treasure can be used to cast spells with additional costs, so time your activations to bypass counters or trigger enter-the-battlefield effects.",
+    "Watch for artifact hate",
+    "keep a backup plan if your synergy is targeted.",
+    "Always track opponent's mana and interaction to avoid walking into hard counters or sweepers."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split spells, instants, or artifact ramp to cast around counters. Hold up interaction for key spells and use treasure to cast multiple cheap spells, forcing the opponent to trade counters inefficiently.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction to disrupt mana dorks and land drops. Use artifact destruction or targeted removal to slow their acceleration. Do not trade resources; win faster or lock them out with efficient interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize cheap removal and board wipes. Use treasure to cast multiple spells to stabilize and regain board control. Avoid overextending into combat; trade efficiently and punish their lack of late-game resources.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with artifacts and cantrips to force them to use interaction on low-impact threats. Win with unblockable damage, combo finishers, or by out-resourcing them through card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value trades and card advantage win mirror matches. Prioritize keeping interaction for their key spells and use treasure to cast more spells per turn. Win by out-resourcing them and timing your finisher after they blow their interaction.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath of God, Cyclonic Rift), hard counters (Mana Leak, Negate), and combo wincons.",
+    "Note when opponents tap out for lock pieces or finishers, and track how much interaction they have left to determine if you can safely go off."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

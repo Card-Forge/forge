@@ -1,0 +1,437 @@
+{
+  "schema_version": 1,
+  "name": "Hammer Time",
+  "format": "modern",
+  "colors": [
+    "W",
+    "U"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Hammer Time is an explosive aggro/combo deck in Modern that aims for fast combo kills in the early game while retaining a resilient beatdown plan for later stages. The mono-white version avoids fetch lands and shocklands to reduce mana screw and self-damage. It operates as a metagame 'dolphin' strategy, cycling in and out of popularity based on opponent hate levels.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 15,
+      "cards": [
+        "Colossus Hammer",
+        "Puresteel Paladin",
+        "Teferi, Time Raveler",
+        "Urza's Saga",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 7,
+      "cards": [
+        "Colossus Hammer",
+        "Grafdigger's Cage",
+        "Meticulous Archive"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 16,
+      "cards": [
+        "Marsh Flats",
+        "Stoneforge Mystic",
+        "Urza's Saga",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Colossus Hammer",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 38,
+      "cards": [
+        "Battlefield Improvisation",
+        "Kappa Cannoneer",
+        "Leyline Axe",
+        "Memnite",
+        "Mox Opal",
+        "Ornithopter",
+        "Pithing Needle",
+        "Puresteel Paladin",
+        "Shadowspear",
+        "Stoneforge Mystic",
+        "Teferi, Time Raveler",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 4,
+      "cards": [
+        "Inkmoth Nexus",
+        "Portable Hole",
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 8,
+      "cards": [
+        "Consign to Memory",
+        "Metallic Rebuke",
+        "Stern Scolding"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 10,
+      "cards": [
+        "Cryptic Coat",
+        "Kappa Cannoneer",
+        "Lavaspur Boots",
+        "Mox Opal",
+        "Shadowspear",
+        "Surge of Salvation"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 3
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 4,
+      "cards": [
+        "Grafdigger's Cage",
+        "Meticulous Archive",
+        "Tormod's Crypt"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Cryptic Coat",
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Stoneforge Mystic"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Windswept Heath"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Colossus Hammer",
+        "Stoneforge Mystic"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Damping Sphere",
+        "Grafdigger's Cage",
+        "Surge of Salvation"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 26,
+      "cards": [
+        "Colossus Hammer",
+        "Hallowed Fountain",
+        "Inkmoth Nexus",
+        "Marsh Flats",
+        "Meticulous Archive",
+        "Mox Opal",
+        "Urza's Saga",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 20,
+      "cards": [
+        "Hallowed Fountain",
+        "Inkmoth Nexus",
+        "Marsh Flats",
+        "Meticulous Archive",
+        "Plains",
+        "Urza's Saga",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Teferi, Time Raveler"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "interaction_density": 0.4
+  },
+  "dual_role_cards": [
+    {
+      "card": "Colossus Hammer",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "mana_fixing",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cryptic Coat",
+      "roles": [
+        "protection",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inkmoth Nexus",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kappa Cannoneer",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marsh Flats",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mox Opal",
+      "roles": [
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Puresteel Paladin",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shadowspear",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stoneforge Mystic",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Surge of Salvation",
+      "roles": [
+        "hate_pieces",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teferi, Time Raveler",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tormod's Crypt",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold off on the combo initially to handle early threats with March of Otherworldly Light",
+    "Play around opponent removals before committing to the combo",
+    "Use protections or wait for opponent to tap out before going all-in",
+    "Distribute damage rather than attacking for lethal if opponent has open mana",
+    "Save Mana Tithe and Pithing Needle for key combo pieces or hate cards"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Aim for explosive combo kills with equipment and targets"
+    },
+    {
+      "trigger": "early game",
+      "line": "Aggressive Mulligan to ensure a short-term plan"
+    },
+    {
+      "trigger": "early game",
+      "line": "Race aggro decks or play around control removals"
+    }
+  ],
+  "kill_priority": [
+    "Stoneforge Mystic",
+    "Colossus Hammer",
+    "Windswept Heath",
+    "Teferi, Time Raveler",
+    "Battlefield Improvisation",
+    "Kappa Cannoneer",
+    "Leyline Axe",
+    "Memnite"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Metallic Rebuke",
+    "Stern Scolding",
+    "Cryptic Coat",
+    "Kappa Cannoneer",
+    "Lavaspur Boots",
+    "Mox Opal",
+    "Shadowspear"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/hammer-time.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

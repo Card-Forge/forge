@@ -1,0 +1,141 @@
+{
+  "archetype": "Dimir Murktide",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/dimir-murktide.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Abhorrent Oculus"
+    },
+    {
+      "qty": 4,
+      "name": "Consider"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 3,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 4,
+      "name": "Mishra's Bauble"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 4,
+      "name": "Moonshadow"
+    },
+    {
+      "qty": 2,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Psychic Frog"
+    },
+    {
+      "qty": 2,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Sheoldred's Edict"
+    },
+    {
+      "qty": 1,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thought Scour"
+    },
+    {
+      "qty": 3,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 2,
+      "name": "Unearth"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Ashiok, Dream Render"
+    },
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Dismember"
+    },
+    {
+      "qty": 2,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 1,
+      "name": "Kaito, Bane of Nightmares"
+    },
+    {
+      "qty": 2,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 1,
+      "name": "Sheoldred's Edict"
+    },
+    {
+      "qty": 1,
+      "name": "Stern Scolding"
+    },
+    {
+      "qty": 2,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 1,
+      "name": "Unmoored Ego"
+    }
+  ]
+}

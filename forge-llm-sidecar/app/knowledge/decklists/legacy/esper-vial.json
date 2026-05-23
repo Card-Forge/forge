@@ -1,0 +1,193 @@
+{
+  "archetype": "Esper Vial",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/esper-vial.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Aang, Swift Savior"
+    },
+    {
+      "qty": 1,
+      "name": "Abhorrent Oculus"
+    },
+    {
+      "qty": 4,
+      "name": "Aether Vial"
+    },
+    {
+      "qty": 1,
+      "name": "Baleful Strix"
+    },
+    {
+      "qty": 1,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Glasspool Mimic"
+    },
+    {
+      "qty": 1,
+      "name": "Hullbreacher"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Karakas"
+    },
+    {
+      "qty": 1,
+      "name": "Lavinia, Azorius Renegade"
+    },
+    {
+      "qty": 4,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Meddling Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 1,
+      "name": "Opposition Agent"
+    },
+    {
+      "qty": 3,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 4,
+      "name": "Overlord of the Balemurk"
+    },
+    {
+      "qty": 4,
+      "name": "Phelia, Exuberant Shepherd"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 2,
+      "name": "Recruiter of the Guard"
+    },
+    {
+      "qty": 1,
+      "name": "Scrubland"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowy Backstreet"
+    },
+    {
+      "qty": 1,
+      "name": "Skyclave Apparition"
+    },
+    {
+      "qty": 3,
+      "name": "Solitude"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi, Time Raveler"
+    },
+    {
+      "qty": 2,
+      "name": "Tundra"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 1,
+      "name": "Witch Enchanter"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Clarion Conqueror"
+    },
+    {
+      "qty": 1,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 3,
+      "name": "Deafening Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Erode"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Harbinger of the Seas"
+    },
+    {
+      "qty": 4,
+      "name": "Wrath of the Skies"
+    },
+    {
+      "qty": 1,
+      "name": "Yorion, Sky Nomad"
+    }
+  ]
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early token generators or one-drops",
       "Draws containing Enduring Innocence or Caretaker's Talent",
-      "Combinations that enable turn-two Yorion attacks"
+      "Combinations that enable turn-two Yorion attacks",
+      "Keep hands with 2-3 lands, at least one early interaction spell (Path to Exile, Swords to Plowshares, or similar), and a value generator (Caretaker's Talent, Enduring Innocence, or a cheap creature).",
+      "Prioritize hands that can stabilize by turn 2-3 and have a clear path to casting Yorion by turn 4-5."
     ],
     "mulligan_criteria": [
       "High mana counts without early interaction",
       "Hands lacking token producers or Yorion",
-      "Draws with only late-game finishers and no ramp"
+      "Draws with only late-game finishers and no ramp",
+      "Mulligan on 3+ lands with no early plays, or 0-1 lands with no interaction."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Prioritize playing lands and one-drops to establish token presence",
       "Use early interaction to disrupt opponent's game plan",
-      "Look for turn-two Yorion attacks if possible"
+      "Look for turn-two Yorion attacks if possible",
+      "Turn 1: Play a land, cast Caretaker's Talent if possible to draw a card and generate a token, or hold interaction for key threats.",
+      "Turn 2: Play a land, cast Enduring Innocence if you control a creature, or develop a cheap creature.",
+      "Sequence lands to ensure untapped mana for Yorion by turn 4-5.",
+      "Prioritize playing lands that enter untapped and avoid overextending into potential sweepers."
     ],
     "mid_game": [
       "Activate Caretaker's Talent to stabilize against aggressive decks",
       "Cycle through Enduring Innocence to recover key permanents",
-      "Build a wide board of tokens to pressure life totals"
+      "Build a wide board of tokens to pressure life totals",
+      "Preserve interaction for high-impact threats like planeswalkers, key creatures, and combo pieces.",
+      "Use Yorion's +1 to cycle through your deck and find answers, but avoid overusing it if you're already ahead on board.",
+      "Don't overcommit to board wipes unless necessary",
+      "prefer targeted removal to preserve your own tokens.",
+      "Manage your graveyard by being aware of recursion threats and timing your removal accordingly.",
+      "Commit threats only when you have answered their removal or when you're ahead on board."
     ],
     "late_game": [
       "Commit Yorion to the board for massive combat damage",
       "Use Caretaker's Talent to draw into answers or finishers",
-      "Leverage Enduring Innocence to replay threats and close games"
+      "Leverage Enduring Innocence to replay threats and close games",
+      "Yorion, Sky Nomad (via -1 for a token army or +1 for card advantage), aerial threats, or combat tricks.",
+      "Win by out-valuing through multiple turns of Yorion activations and token generation, forcing opponents to trade resources inefficiently.",
+      "Go all-in when you have answered their removal, have Yorion on board, and can generate enough tokens to overwhelm their blockers or pressure their life total.",
+      "Also commit when you have a clear advantage in card advantage and they have no sweepers or interaction left."
     ]
   },
   "key_cards": [
@@ -58,7 +75,12 @@
   "sequencing_tips": [
     "Hold up mana for Yorion's attack before casting other spells",
     "Activate Caretaker's Talent in response to opponent's combat or spells",
-    "Time Enduring Innocence activations to protect your board or disrupt key turns"
+    "Time Enduring Innocence activations to protect your board or disrupt key turns",
+    "Common mistakes include overcommitting to the board too early, failing to use Yorion's +1 efficiently, miscounting life totals when activating -1, and not tracking opponent's interaction.",
+    "Unique interactions: Enduring Innocence can be cast for free if you control a creature, making it a powerful early play.",
+    "Caretaker's Talent draws a card, so sequence it before Yorion to maximize value.",
+    "Yorion's -1 creates tokens that can be used for blocking, so don't just use them for offense.",
+    "Always be mindful of the format's specific meta shifts and adjust your sideboard accordingly."
   ],
   "matchups": [
     {
@@ -76,15 +98,35 @@
         "Permanent removal",
         "Game-ending board clears"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple low-cost threats, cast Yorion when they're tapped out, use instant-speed interaction to clear the way, and consider casting spells in response to their counters to force trades. Prioritize casting Yorion's -1 to generate tokens, which are harder to counter than single threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Answer their mana accelerants early, use board wipes to reset their advantage, and race with Yorion tokens if they go wide. If they have a late-game finisher, use Yorion's +1 to out-draw them and find removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war, use Yorion's +1 to out-draw them, and be more willing to trade removal for their value engines. Prioritize keeping interaction to answer their Yorion, and track their sideboard for anti-value cards.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes",
     "Permanent removal",
-    "Card draw engines"
+    "Card draw engines",
+    "Watch for sweepers (Day of Judgment, Wrath of God, etc.), key removal, and combo pieces.",
+    "Note when opponents use their interaction on your early threats versus holding it for Yorion.",
+    "Track their graveyard if they play recursion, and monitor their mana development to predict when they can cast their win conditions.",
+    "Pay attention to their sideboard choices post-board."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:54:53+00:00",
     "model": "local-model",
@@ -100,6 +142,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

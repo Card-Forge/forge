@@ -1,0 +1,133 @@
+{
+  "archetype": "4c Ponza",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/4c-ponza.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Arbor Elf"
+    },
+    {
+      "qty": 2,
+      "name": "Armadillo Cloak"
+    },
+    {
+      "qty": 4,
+      "name": "Avenging Hunter"
+    },
+    {
+      "qty": 3,
+      "name": "Boarding Party"
+    },
+    {
+      "qty": 1,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 10,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Highland Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Jewel Thief"
+    },
+    {
+      "qty": 2,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Mwonvuli Acid-Moss"
+    },
+    {
+      "qty": 1,
+      "name": "Perilous Landscape"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Radiant Grove"
+    },
+    {
+      "qty": 2,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 3,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Rimewood Falls"
+    },
+    {
+      "qty": 1,
+      "name": "Sagu Wildling"
+    },
+    {
+      "qty": 2,
+      "name": "Snap"
+    },
+    {
+      "qty": 4,
+      "name": "Thermokarst"
+    },
+    {
+      "qty": 4,
+      "name": "Utopia Sprawl"
+    },
+    {
+      "qty": 1,
+      "name": "Wild Growth"
+    },
+    {
+      "qty": 4,
+      "name": "Writhing Chrysalis"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 1,
+      "name": "Circle of Protection: Red"
+    },
+    {
+      "qty": 2,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 3,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Structural Distortion"
+    },
+    {
+      "qty": 2,
+      "name": "Thraben Charm"
+    },
+    {
+      "qty": 3,
+      "name": "Weather the Storm"
+    }
+  ]
+}

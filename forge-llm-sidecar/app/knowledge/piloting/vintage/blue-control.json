@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing early disruption and a land drop",
       "Hands with Lurrus or Swords to Plowshares alongside two lands",
-      "Hands featuring Thing in the Ice with a way to protect or trade it"
+      "Hands featuring Thing in the Ice with a way to protect or trade it",
+      "Keep hands with 2-3 lands, at least one Swords to Plowshares or Dovin's Veto, and a turn-2 play.",
+      "Prioritize hands that can stabilize by turn 3."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction against early aggressive boards",
       "Hands with three or more lands and no removal",
-      "Hands without a clear path to stabilize or generate value"
+      "Hands without a clear path to stabilize or generate value",
+      "Mulligan hands with 0-1 lands, 3+ lands with no plays, or hands lacking early interaction against aggro/combo."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and hold up white mana for Swords to Plowshares",
       "Neutralize early threats to prevent being overwhelmed",
-      "Prioritize drawing into Lurrus to establish your recursion engine"
+      "Prioritize drawing into Lurrus to establish your recursion engine",
+      "Turn 1: Play a land, pass.",
+      "Turn 2: Play second land, cast a 2-mana interaction (Dovin's Veto, Path to Exile, or Fog) or develop mana.",
+      "If facing aggro, prioritize Swords to Plowshares or Fog on turn 2 if possible.",
+      "Sequence lands to ensure colored mana availability for WU spells."
     ],
     "mid_game": [
       "Establish board presence with Thing in the Ice when safe",
       "Use Lurrus to replay Swords for repeated removal and board clears",
-      "Maintain card advantage by trading efficiently and protecting key assets"
+      "Maintain card advantage by trading efficiently and protecting key assets",
+      "Preserve mana for interaction until turn 4-5.",
+      "Don't overcommit to board presence early.",
+      "Use Lurrus to replay cheap permanents from the graveyard to maintain hand size and board control.",
+      "Track graveyard contents to avoid dead draws.",
+      "Hold back on casting Thing in the Ice until you have at least one removal spell or counter in hand, or until you can protect it.",
+      "Prioritize trading cheap permanents for opponent's threats."
     ],
     "late_game": [
       "Leverage Lurrus recursion to outvalue opponent's resource base",
       "Stabilize with resilient creatures and sweepers",
-      "Close out games with unblockable attackers or repeated damage triggers"
+      "Close out games with unblockable attackers or repeated damage triggers",
+      "Thing in the Ice is the primary win condition.",
+      "Use Lurrus to recur Swords/Path to clear blockers or replay Fog to reset the board.",
+      "Card advantage from Thing's death trigger or Lurrus recursion closes games.",
+      "Go all-in when you have card advantage locked, opponent has no removal/counter backup, or you can safely cast Thing and follow up with protection/recursion."
     ]
   },
   "key_cards": [
@@ -58,7 +75,11 @@
   "sequencing_tips": [
     "Hold up white mana for Swords to Plowshares before committing to attacks",
     "Trigger Thing in the Ice's ability only when you have a way to save it or trade favorably",
-    "Use Lurrus to replay Swords before replaying creatures to maximize board control"
+    "Use Lurrus to replay Swords before replaying creatures to maximize board control",
+    "Thing in the Ice dies to Swords to Plowshares, so don't cast it into your own removal.",
+    "Lurrus only recurs 2-mana or less permanents, so plan your graveyard accordingly.",
+    "Watch out for Jewel Shops artifact hate or Oath of Druids combo turns.",
+    "Avoid overcommitting to the board before turn 4."
   ],
   "matchups": [
     {
@@ -87,15 +108,39 @@
         "Counterspells",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Swords to Plowshares or Path to Exile on their counterspells if they're creatures, or play around them by holding up interaction. Use Lurrus to recur cheap spells to pressure through. Consider Thing in the Ice as a threat that forces them to use multiple answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early removal (Swords, Path) on ramp targets. Use Fog or Dovin's Veto to stall. Don't let them get ahead; trade efficiently.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with Swords to Plowshares, Path to Exile, and Fog. Mulligan aggressively for early interaction. Use Lurrus to replay removal to handle multiple threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value Lurrus recursion and Thing in the Ice triggers. Prioritize keeping interaction in hand. Win by out-grinding with graveyard recursion and forcing them to overextend.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Combo pieces that win on cast",
-    "Board wipes that reset the board"
+    "Board wipes that reset the board",
+    "Watch for graveyard accumulation (Dredge), artifact acceleration (Jewel Shops), and Oath targets.",
+    "Note when opponents tap out for big threats or combo pieces.",
+    "Track if they've answered your Lurrus or Thing."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:56:08+00:00",
     "model": "local-model",
@@ -111,6 +156,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

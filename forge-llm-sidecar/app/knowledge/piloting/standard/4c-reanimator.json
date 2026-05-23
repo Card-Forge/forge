@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with a reanimation spell and a target in the deck or graveyard",
       "Hands containing Deceit paired with a cheap instant or sorcery",
-      "Hands with at least two mana sources and a way to interact"
+      "Hands with at least two mana sources and a way to interact",
+      "Keep hands with 2-3 lands (including duals/fetches for fixing), at least one enabler (Formidable Speaker or similar cheap reanimator), and a sacrifice outlet or mana source.",
+      "Prioritize hands that can play a land, cast an enabler, and have a backup plan by turn 3."
     ],
     "mulligan_criteria": [
       "Hands lacking any graveyard interaction or reanimation spells",
       "Hands with only lands and no early-game impact",
-      "Hands missing a clear path to casting a signature threat"
+      "Hands missing a clear path to casting a signature threat",
+      "Mulligan if you have 3+ lands with no enablers, only cheap threats with no reanimation spells, or no early interaction."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Discard or tutor for reanimation targets into the graveyard",
       "Play lands and cheap cantrips to set up Deceit copies",
-      "Hold up counterspells to protect key reanimation plays"
+      "Hold up counterspells to protect key reanimation plays",
+      "Turn 1: Play a land, cast a cheap enabler or cantrip if available.",
+      "Turn 2: Develop mana, cast a sacrifice outlet or cheap threat to fuel the graveyard.",
+      "Prioritize fixing over raw speed",
+      "4-color requires dual lands or fetches.",
+      "If you have a reanimation spell and a threat in GY, go off immediately."
     ],
     "mid_game": [
       "Execute the combo by casting reanimation spells to bring back Overlord of the Balemurk or Formidable Speaker",
       "Use Deceit to duplicate cheap spells and generate additional value or protection",
-      "Apply pressure with reanimated creatures while searching for win conditions"
+      "Apply pressure with reanimated creatures while searching for win conditions",
+      "Balance mana for reanimation vs. interaction.",
+      "Don't overcommit to the graveyard if you're low on life.",
+      "Use card draw to refill hand.",
+      "Keep a threat in GY as insurance.",
+      "Manage your sacrifice outlets carefully",
+      "they fuel reanimation but can be targeted."
     ],
     "late_game": [
       "Rely on Formidable Speaker's mana generation to cast multiple threats per turn",
       "Use Deceit to copy game-ending spells or board wipes if needed",
-      "Maintain graveyard depth to continuously reanimate answers and threats"
+      "Maintain graveyard depth to continuously reanimate answers and threats",
+      "Overlord of the Balemurk or other high-impact threats reanimated.",
+      "Win by going off with a reanimation spell + enabler + threat in GY.",
+      "Use sacrifice outlets to chain value.",
+      "Deceit can provide instant-speed reanimation or value to close out games.",
+      "When you have a guaranteed reanimation target, enough mana to protect it, and the opponent is at low life or has no removal in hand.",
+      "Go all-in when you've established graveyard dominance and they lack board wipes."
     ]
   },
   "key_cards": [
@@ -58,7 +78,12 @@
   "sequencing_tips": [
     "Always ensure you have a counter or removal ready before casting your reanimation spell",
     "Use Deceit to copy graveyard tutors or discard spells to set up your targets efficiently",
-    "Hold up mana for protection before committing to casting Formidable Speaker or Overlord of the Balemurk"
+    "Hold up mana for protection before committing to casting Formidable Speaker or Overlord of the Balemurk",
+    "Common mistakes: Overcommitting to the graveyard without protection, mismanaging 4-color mana, failing to track opponent's removal/counter count.",
+    "Unique interactions: Formidable Speaker likely synergizes with sacrifice outlets",
+    "Deceit may provide instant-speed reanimation or value.",
+    "Always keep a backup threat in hand/GY.",
+    "Practice stack play to win reanimation wars against control."
   ],
   "matchups": [
     {
@@ -84,15 +109,35 @@
         "Removal spells",
         "Card advantage engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use layered spells, sacrifice outlets to cast multiple cheap spells, or reanimate from GY (uncounterable if it's a sorcery speed or uses instant-speed enablers). Use protection or counterspell denial. Cast reanimation spells in response to their counters to win the stack war.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early interaction to slow them down. Board wipes or artifact destruction. Reanimate quickly before they stabilize. Use discard to remove key ramp pieces.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the graveyard war. Use discard/graveyard hate. Out-value them with better enablers. Protect your threats. Track their reanimation spells and hold up interaction for their key threats.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Counterspells and removal",
-    "Board wipes and graveyard hate"
+    "Board wipes and graveyard hate",
+    "Watch for counterspells (Izzet), token generators (Landfall), and spell triggers (Prowess/Spellementals).",
+    "Key tells: Opponent tapping for blue/black often means a counter or removal.",
+    "Watch graveyard size for their recursion or your own.",
+    "Track their hand size to know when they're out of answers."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:16:46+00:00",
     "model": "local-model",
@@ -108,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

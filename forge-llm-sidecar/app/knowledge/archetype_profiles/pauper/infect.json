@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "name": "Infect",
+  "format": "pauper",
+  "colors": [
+    "G"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "This green pauper infect deck leverages low-cost creatures and equipment to rapidly accumulate poison counters. By equipping Rancor to threats like Ichorclaw Myr, you create unblockable attackers that bypass traditional defense. Mutagenic Growth serves as a versatile tool to clear blockers, draw cards, and push lethal damage when needed.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 4,
+      "cards": [
+        "Mutagenic Growth"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Mutagenic Growth"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 10,
+      "cards": [
+        "Crop Rotation",
+        "Escape Tunnel",
+        "Go Forth"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Ichorclaw Myr",
+        "Mutagenic Growth",
+        "Rancor"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 41,
+      "cards": [
+        "Blight Mamba",
+        "Embiggen",
+        "Glistener Elf",
+        "Ichorclaw Myr",
+        "Llanowar Augur",
+        "Might of Old Krosa",
+        "Mutagenic Growth",
+        "Rancor",
+        "Scattershot Archer",
+        "Seal of Strength",
+        "Vines of Vastwood"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 21,
+      "cards": [
+        "Blight Mamba",
+        "Bojuka Bog",
+        "Glistener Elf",
+        "Gut Shot",
+        "Ichorclaw Myr",
+        "Nature's Claim",
+        "Scattershot Archer"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 9
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Scattershot Archer"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Snakeskin Veil"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 9,
+      "cards": [
+        "Bojuka Bog",
+        "Escape Tunnel",
+        "Rancor"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Rancor"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Ichorclaw Myr",
+        "Mutagenic Growth",
+        "Rancor"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 9,
+      "cards": [
+        "Bojuka Bog",
+        "Escape Tunnel",
+        "Hickory Woodlot"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Bojuka Bog",
+        "Escape Tunnel",
+        "Forest",
+        "Hickory Woodlot"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 1
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.4
+  },
+  "dual_role_cards": [
+    {
+      "card": "Blight Mamba",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Escape Tunnel",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glistener Elf",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hickory Woodlot",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ichorclaw Myr",
+      "roles": [
+        "hate_pieces",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mutagenic Growth",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "hate_pieces",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rancor",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scattershot Archer",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize casting Rancor before attacking to avoid opponent interaction",
+    "Cast Mutagenic Growth after blockers are declared to maximize card draw and damage",
+    "Hold up mana for instant-speed responses if possible, though this deck is primarily sorcery-speed",
+    "Common mistake: Overcommitting to the board without enough pump spells to close out.",
+    "Always calculate poison damage carefully."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize land drops to ensure consistent mana availability"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play Ichorclaw Myr or similar one-drops to establish early board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Attach Rancor immediately to create an unblockable threat"
+    }
+  ],
+  "kill_priority": [
+    "Ichorclaw Myr",
+    "Mutagenic Growth",
+    "Rancor",
+    "Blight Mamba",
+    "Embiggen",
+    "Glistener Elf",
+    "Llanowar Augur",
+    "Might of Old Krosa"
+  ],
+  "interaction_to_disrupt": [
+    "Snakeskin Veil",
+    "Blight Mamba",
+    "Bojuka Bog",
+    "Glistener Elf",
+    "Gut Shot",
+    "Ichorclaw Myr",
+    "Nature's Claim",
+    "Scattershot Archer"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/infect.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

@@ -1,0 +1,807 @@
+{
+  "schema_version": 1,
+  "name": "Oloro, Ageless Ascetic",
+  "format": "commander",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 100,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Aetherflux Reservoir",
+    "Approach of the Second Sun",
+    "Felidar Sovereign",
+    "Torment of Hailfire",
+    "Ajani, Strength of the Pride",
+    "Agadeem's Awakening",
+    "Amalia Benavides Aguirre",
+    "Archangel of Thune"
+  ],
+  "interaction_to_disrupt": [
+    "Disallow",
+    "Amalia Benavides Aguirre",
+    "Auriok Champion",
+    "Caduceus, Staff of Hermes",
+    "Crested Sunmare",
+    "Heliod, Sun-Crowned",
+    "Soul Warden",
+    "Teferi's Protection"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Consecrated Sphinx",
+        "Esper Sentinel",
+        "Exemplar of Light",
+        "Mystic Remora",
+        "Oloro, Ageless Ascetic",
+        "Rhystic Study",
+        "Sensei's Divining Top",
+        "Sheoldred, the Apocalypse",
+        "Smothering Tithe",
+        "Spymaster's Vault"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Bolas's Citadel",
+        "Sensei's Divining Top"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 5,
+      "cards": [
+        "Demonic Tutor",
+        "Evolving Wilds",
+        "Flooded Strand",
+        "Marsh Flats",
+        "Zur the Enchanter"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Approach of the Second Sun",
+        "Felidar Sovereign",
+        "Torment of Hailfire"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 39,
+      "cards": [
+        "Agadeem's Awakening",
+        "Ajani, Strength of the Pride",
+        "Amalia Benavides Aguirre",
+        "Archangel of Thune",
+        "Auriok Champion",
+        "Authority of the Consuls",
+        "Azorius Signet",
+        "Bloodthirsty Conqueror",
+        "Consecrated Sphinx",
+        "Council's Judgment",
+        "Crested Sunmare",
+        "Dimir Signet",
+        "Dismember",
+        "Elenda's Hierophant",
+        "Enduring Tenacity",
+        "Esper Sentinel",
+        "Exemplar of Light",
+        "Exquisite Blood",
+        "Felidar Sovereign",
+        "Heliod, Sun-Crowned",
+        "Imprisoned in the Moon",
+        "Kambal, Consul of Allocation",
+        "Karlov of the Ghost Council",
+        "Luminarch Ascension",
+        "Oloro, Ageless Ascetic",
+        "Opposition Agent",
+        "Oubliette",
+        "Sanguine Bond",
+        "Serra Ascendant",
+        "Sheoldred, the Apocalypse",
+        "Sol Ring",
+        "Soul Warden",
+        "Soul's Attendant",
+        "Starscape Cleric",
+        "Varragoth, Bloodsky Sire",
+        "Vito, Thorn of the Dusk Rose",
+        "Voice of the Blessed",
+        "Walking Ballista",
+        "Zur the Enchanter"
+      ],
+      "mainboard_count": 39,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Adarkar Wastes",
+        "Aetherflux Reservoir",
+        "Amalia Benavides Aguirre",
+        "Aura of Silence",
+        "Bojuka Bog",
+        "Caves of Koilos",
+        "City of Brass",
+        "Cyclonic Rift",
+        "Feed the Swarm",
+        "Fracture",
+        "Generous Gift",
+        "Karlov of the Ghost Council",
+        "No Mercy",
+        "Swords to Plowshares",
+        "Talisman of Hierarchy",
+        "Utter End",
+        "Walking Ballista"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Amalia Benavides Aguirre",
+        "Archangel of Thune",
+        "Breach the Multiverse",
+        "Farewell",
+        "Toxic Deluge"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 1,
+      "cards": [
+        "Disallow"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Amalia Benavides Aguirre",
+        "Auriok Champion",
+        "Caduceus, Staff of Hermes",
+        "Crested Sunmare",
+        "Heliod, Sun-Crowned",
+        "Soul Warden",
+        "Teferi's Protection",
+        "Voice of the Blessed"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 5,
+      "cards": [
+        "Amalia Benavides Aguirre",
+        "Bloodchief Ascension",
+        "Bojuka Bog",
+        "Breach the Multiverse",
+        "Farewell"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Azorius Chancery",
+        "Cyclonic Rift",
+        "Enduring Tenacity",
+        "Grasp of Fate",
+        "Orzhov Basilica"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Aetherflux Reservoir"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 3,
+      "cards": [
+        "Approach of the Second Sun",
+        "Felidar Sovereign",
+        "Torment of Hailfire"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Caduceus, Staff of Hermes"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 31,
+      "cards": [
+        "Adarkar Wastes",
+        "Arcane Sanctum",
+        "Arcane Signet",
+        "Azorius Chancery",
+        "Bojuka Bog",
+        "Caves of Koilos",
+        "Chrome Mox",
+        "City of Brass",
+        "Coldsteel Heart",
+        "Command Tower",
+        "Dismal Backwater",
+        "Drowned Catacomb",
+        "Evolving Wilds",
+        "Exotic Orchard",
+        "Flooded Strand",
+        "Floodfarm Verge",
+        "Glacial Fortress",
+        "Isolated Chapel",
+        "Jwar Isle Refuge",
+        "Mana Confluence",
+        "Marsh Flats",
+        "Minamo, School at Water's Edge",
+        "Opposition Agent",
+        "Orzhov Basilica",
+        "Scoured Barrens",
+        "Sea of Clouds",
+        "Smothering Tithe",
+        "Spymaster's Vault",
+        "Sunken Hollow",
+        "Tranquil Cove",
+        "Vault of Champions"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 32,
+      "cards": [
+        "Adarkar Wastes",
+        "Arcane Sanctum",
+        "Azorius Chancery",
+        "Bojuka Bog",
+        "Caves of Koilos",
+        "City of Brass",
+        "Command Tower",
+        "Dismal Backwater",
+        "Drowned Catacomb",
+        "Evolving Wilds",
+        "Exotic Orchard",
+        "Flooded Strand",
+        "Floodfarm Verge",
+        "Glacial Fortress",
+        "Island",
+        "Isolated Chapel",
+        "Jwar Isle Refuge",
+        "Mana Confluence",
+        "Marsh Flats",
+        "Minamo, School at Water's Edge",
+        "Orzhov Basilica",
+        "Plains",
+        "Scoured Barrens",
+        "Sea of Clouds",
+        "Spymaster's Vault",
+        "Sunken Hollow",
+        "Swamp",
+        "Tranquil Cove",
+        "Vault of Champions"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Ajani, Strength of the Pride"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.3
+  },
+  "dual_role_cards": [
+    {
+      "card": "Adarkar Wastes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Aetherflux Reservoir",
+      "roles": [
+        "engines",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ajani, Strength of the Pride",
+      "roles": [
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Amalia Benavides Aguirre",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Approach of the Second Sun",
+      "roles": [
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archangel of Thune",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Auriok Champion",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Azorius Chancery",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breach the Multiverse",
+      "roles": [
+        "graveyard_enablers",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Caduceus, Staff of Hermes",
+      "roles": [
+        "hate_pieces",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Caves of Koilos",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "City of Brass",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Consecrated Sphinx",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crested Sunmare",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cyclonic Rift",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dismal Backwater",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drowned Catacomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Enduring Tenacity",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Esper Sentinel",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Evolving Wilds",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exemplar of Light",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Farewell",
+      "roles": [
+        "graveyard_enablers",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Felidar Sovereign",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Floodfarm Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glacial Fortress",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Heliod, Sun-Crowned",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Isolated Chapel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jwar Isle Refuge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karlov of the Ghost Council",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Confluence",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marsh Flats",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Minamo, School at Water's Edge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Oloro, Ageless Ascetic",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Opposition Agent",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orzhov Basilica",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scoured Barrens",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sea of Clouds",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sensei's Divining Top",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheoldred, the Apocalypse",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smothering Tithe",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul Warden",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spymaster's Vault",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunken Hollow",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Torment of Hailfire",
+      "roles": [
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tranquil Cove",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vault of Champions",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Voice of the Blessed",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Walking Ballista",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zur the Enchanter",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/oloro-ageless-ascetic.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

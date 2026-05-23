@@ -11,11 +11,13 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with a Ninja and backup lands/cards for turn 2",
-      "Hands without Ninjas against combo decks like High Tide"
+      "Hands without Ninjas against combo decks like High Tide",
+      "Keep hands with 2\u20133 lands, at least one turn-1 or turn-2 play (Spellstutter Sprite, Delver of Secrets, or card draw), and at least one interaction spell (Snap, Counterspell, or Spell Pierce)."
     ],
     "mulligan_criteria": [
       "Hands lacking early Ninjas against aggressive or midrange decks",
-      "Hands that cannot establish board presence or interact early"
+      "Hands that cannot establish board presence or interact early",
+      "Mulligan if you have no lands, all spells costing 3+ mana, or zero interaction against aggro/combo decks."
     ],
     "examples": [
       {
@@ -53,17 +55,30 @@
     "early_game": [
       "Play a Ninja on turn 2 if possible",
       "Assess matchup to play proactively or responsively",
-      "Use counters like Spellstutter or Counterspell to disrupt early threats"
+      "Use counters like Spellstutter or Counterspell to disrupt early threats",
+      "Turn 1: Play a land, cast Spellstutter Sprite or Delver of Secrets.",
+      "Turn 2: Cast Snap or Counterspell, potentially flashing in Spellstutter Sprite to counter a key spell or protect itself.",
+      "Sequence lands to guarantee blue mana on turns 1 and 2.",
+      "If holding a hand with multiple cheap spells, prioritize establishing a board presence while saving interaction for the opponent\u2019s first meaningful play."
     ],
     "mid_game": [
       "Utilize Shrieking Drake to bounce Ninjas and repeat Ninjutsu loops",
       "Cast Aqueous Form on a Ninja to attack freely and draw cards",
-      "Counter key removal or board wipes to protect your board"
+      "Counter key removal or board wipes to protect your board",
+      "Hoards counterspells for key threats, uses flash creatures to protect combo pieces or counter removal, and manages the graveyard carefully (Snapcaster Mage needs it, but avoid giving it to opponents).",
+      "Don\u2019t overcommit mana if the opponent has interaction",
+      "preserve card advantage for late-game value.",
+      "Commit threats when you have interaction to protect them or when the opponent is tapped out.",
+      "Hold back if they have sweepers or heavy removal.",
+      "Use flash to respond to their plays and maintain board control without overextending."
     ],
     "late_game": [
       "Transition to control by countering finishers and stalling",
       "Generate massive value through repeated Ninjutsu and scry effects",
-      "Punish opponents who overextend or eat more than they can chew"
+      "Punish opponents who overextend or eat more than they can chew",
+      "Delver of Secrets transforming into Inverter of Truth (with Chalice of the Void), Spellstutter Sprite + Snap/Counterspell + Spell Queller/Inverter, or grinding with card advantage and flash threats.",
+      "Go all-in when you have card advantage, the opponent is tapped out, or you\u2019ve established board control with counterspells.",
+      "Commit if you can protect your finisher or if the opponent has no interaction left."
     ]
   },
   "key_cards": [
@@ -97,7 +112,11 @@
     "Wait for Gigadrowse to resolve to untap lands and save mana for a counter",
     "Use Shrieking Drake's bounce after Ninjutsu to return the Ninja to hand for reuse",
     "Play counters at the right time to control opponent rather than wasting them early",
-    "Adjust aggression based on opponent's removal density and deck speed"
+    "Adjust aggression based on opponent's removal density and deck speed",
+    "Common mistakes include overcommitting without protection, mismanaging Snapcaster Mage\u2019s graveyard, and forgetting that Spellstutter Sprite\u2019s counter reduces as you cast more spells.",
+    "Unique interactions: Sprite + Snap/Counterspell can counter multiple spells in a chain.",
+    "Delver combo requires precise sequencing.",
+    "Always track opponent\u2019s mana and graveyard to maximize your interaction."
   ],
   "matchups": [
     {
@@ -144,6 +163,31 @@
         "Armadillo Cloak",
         "fast pieces"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells (Pierce, Sprite) to probe, cast multiple spells in a row to overwhelm counters, use card draw to out-value, and sideboard in cheaper interaction or alternative win conditions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Deploy early interaction (Sprite, Pierce), Chalice of the Void on 1 or 2, counterspells for key ramp spells, and stabilize with flash threats. Disrupt their mana acceleration before they can cast their game-ending spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use early counterspells, flash threats to trade efficiently, Daze/Force of Will if available, and sideboard in more removal/counter. Don\u2019t overextend; stabilize by turn 3\u20134 and close out the game with evasion.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure with evasion, use card advantage to out-grind, protect your combo pieces, and sideboard in more interaction to break their control shell. Force them to spend resources on your threats rather than their own game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the interaction war. Hold counters for their key spells, use Spell Queller to protect your threats, win the card advantage race, and sideboard in more Negate/Queller. Play conservatively early and capitalize on their missteps.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -159,10 +203,12 @@
     "Ethereal Armor",
     "Armadillo Cloak",
     "Pactdoll Terror",
-    "Black Mage's Rod"
+    "Black Mage's Rod",
+    "Watch for sweepers (Wrath of God, Day of Judgment), heavy removal (Path to Exile, Lightning Bolt), combo pieces (Elves\u2019 Genesis, Affinity\u2019s Arcbound Ravager), and control finishers (Teferi, Liliana)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-upgrading-mono-blue-faeries-sideboard-guide",
     "generated_at": "2026-05-21T09:48:17+00:00",
     "model": "local-model",
@@ -180,6 +226,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

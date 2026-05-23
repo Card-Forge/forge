@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Mightform Harmonizer and at least two lands.",
       "Hands containing Consult the Star Charts and early ramp.",
-      "Hands with Full Bore and enough mana sources to cast it by turn three."
+      "Hands with Full Bore and enough mana sources to cast it by turn three.",
+      "Keep hands with 2-3 lands (preferably duals or shocklands) plus either Consult the Star Charts, Mightform Harmonizer, or a turn-2 play.",
+      "Prioritize hands that can cast Consult the Star Charts on turn 2 or Mightform Harmonizer on turn 3."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or mana acceleration.",
       "Hands with only removal or late-game finishers.",
-      "Hands missing Consult the Star Charts or Harmonizer in a slow curve."
+      "Hands missing Consult the Star Charts or Harmonizer in a slow curve.",
+      "Mulligan on 1-land hands, hands with only cheap creatures and no answers, or hands with multiple copies of the same low-impact spell."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Prioritize playing lands and casting Mightform Harmonizer to establish mana advantage.",
       "Use Consult the Star Charts to scry for combo pieces and maintain hand size.",
-      "Avoid early combat unless necessary to stabilize against aggro."
+      "Avoid early combat unless necessary to stabilize against aggro.",
+      "Turn 1: Play a land, potentially cast a cheap cantrip or threat if available.",
+      "Turn 2: Cast Consult the Star Charts to dig for key pieces or threats, or play a 2-drop creature to apply early pressure.",
+      "Turn 3: Cast Mightform Harmonizer to copy Consult the Star Charts or a key instant/sorcery, or drop Full Bore if you have the mana and have dug for it.",
+      "Sequence lands to ensure U/R/G availability by turn 3."
     ],
     "mid_game": [
       "Continue ramping while filtering your deck for Full Bore.",
       "Protect your Harmonizer and land drops from opponent disruption.",
-      "Sequence spells to maximize mana efficiency and trigger any synergies."
+      "Sequence spells to maximize mana efficiency and trigger any synergies.",
+      "Preserve mana for interaction and finishers",
+      "don't overextend into sweepers.",
+      "Use Consult the Star Charts to filter for threats or answers based on board state.",
+      "Manage graveyard by avoiding unnecessary spell duplication if the opponent has graveyard hate.",
+      "Commit threats only when you have removal or a copy effect ready to protect them.",
+      "Hold back on casting Mightform Harmonizer if the opponent has sweepers or targeted removal."
     ],
     "late_game": [
       "Cast Full Bore once land count reaches lethal threshold.",
       "Use remaining card draw to find answers to board wipes or counterspells.",
-      "Close out the game quickly to avoid attrition from opponent's threats."
+      "Close out the game quickly to avoid attrition from opponent's threats.",
+      "Full Bore is the primary win condition, often supported by Mightform Harmonizer copying Consult the Star Charts to dig for it or protect it.",
+      "Once you have a Full Bore on the board with protection or a board clear, commit to attacking.",
+      "Go all-in when you have a Full Bore, sufficient removal to handle their interaction, and no sweepers in their graveyard or hand.",
+      "Also commit when you've out-valued them and they have no answers."
     ]
   },
   "key_cards": [
@@ -59,7 +76,11 @@
     "Cast Consult the Star Charts before playing lands to scry for combo pieces.",
     "Hold Full Bore in hand until you have sufficient lands and can cast it on opponent's turn.",
     "Prioritize Harmonizer over early removal to maintain combo velocity.",
-    "Use scry effects to bury lands when you have enough mana sources."
+    "Use scry effects to bury lands when you have enough mana sources.",
+    "Common mistake: Over-digging with Consult the Star Charts when you're behind on the board.",
+    "Always weigh the risk of leaving yourself open to sweepers.",
+    "Mightform Harmonizer's copy effect is best used on Consult the Star Charts for value or on key instant/sorcery for protection.",
+    "Watch for opponent's sideboard cards like Rest in Peace or Leyline of the Void."
   ],
   "matchups": [
     {
@@ -88,16 +109,35 @@
         "Card advantage engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split casts, cheap cantrips to probe, or cast Mightform Harmonizer to copy Consult the Star Charts after they counter the first. Use mana dorks or ramp to cast threats at instant speed when they're out of mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use targeted removal on key ramp creatures. Sideboard in artifact destruction and graveyard hate.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by playing more efficiently. Prioritize keeping lands and early interaction. Use Mightform Harmonizer to copy their Consult the Star Charts or threats for value. Sideboard in additional hate and removal.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Instant-speed counterspells",
     "Early-game direct damage",
     "Board wipes",
-    "Targeted hand disruption"
+    "Targeted hand disruption",
+    "Watch for counterspells, sweepers, and graveyard hate.",
+    "Note when opponents save removal for your key creatures.",
+    "Track their mana development to predict when they can answer your threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:40:08+00:00",
     "model": "local-model",
@@ -113,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

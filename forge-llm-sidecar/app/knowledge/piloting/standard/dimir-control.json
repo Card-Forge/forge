@@ -12,11 +12,14 @@
     "keep_criteria": [
       "Has land drops",
       "Contains decent answers",
-      "Can create enough card advantage"
+      "Can create enough card advantage",
+      "Keep hands with 2-3 lands, at least one turn-1 land drop, and early interaction (counters, spot removal, or cantrips).",
+      "Keep hands that can play a land and a spell on turn 1, or two lands and a cantrip."
     ],
     "mulligan_criteria": [
       "Can't do anything for quite a time",
-      "Lacks colored mana sources early on against fast decks"
+      "Lacks colored mana sources early on against fast decks",
+      "Mulligan to hands that can stabilize against Izzet spells or Landfall ramp, typically requiring at least two lands and a way to interact or draw cards."
     ],
     "examples": [
       {
@@ -49,17 +52,31 @@
   "game_plan": {
     "early_game": [
       "Stabilize the board and use removals to counter the opponent's main strategy",
-      "Rely on Demolition Field if the mana base lacks colored sources"
+      "Rely on Demolition Field if the mana base lacks colored sources",
+      "Turn 1: Play a land, cast a cantrip or cheap interaction if available.",
+      "Turn 2: Develop mana, cast a mid-cost threat or hold interaction for key Izzet spells/Landfall triggers.",
+      "Prioritize playing lands to ensure consistent mana for both colors.",
+      "If opening with a hand that has multiple lands and no early spells, consider a mulligan unless you have a strong plan to stabilize."
     ],
     "mid_game": [
       "Be responsive instead of proactive at all times",
       "Don't let the opponent build a solid board or create excessive value",
-      "Use life points as a resource against aggressive decks"
+      "Use life points as a resource against aggressive decks",
+      "Balance mana between interaction and development.",
+      "Never overextend into known removal or board wipes.",
+      "Use cantrips to maintain hand size and dig for answers.",
+      "Track graveyard usage, as Landfall and Izzet decks often rely on it for value.",
+      "Commit threats only when you have card advantage or can answer their answers.",
+      "Hold back interaction until you see if the opponent is going for a combo or a wide board."
     ],
     "late_game": [
       "Lean into removals and card advantage until you have enough mana to play threats",
       "Put Ugin in play at the right time to potentially win the game",
-      "Make the opponent exhaust their resources until the game is under your control"
+      "Make the opponent exhaust their resources until the game is under your control",
+      "Leverage superior late-game threats like Perigee Beckoner or value engines that out-value the opponent's remaining resources.",
+      "Win by out-drawing them, removing their remaining answers, and deploying a threat they cannot interact with.",
+      "Go all-in when you have established card advantage, have answered or out-valued their interaction, and the board state allows you to push damage or deploy a finisher without fear of immediate wipe.",
+      "Also commit when the opponent is low on resources and you can close the game in 1-2 turns."
     ]
   },
   "key_cards": [
@@ -119,7 +136,10 @@
     "Don't let the opponent build a solid board",
     "Use your life points as a resource as best as you can",
     "Avoid hands that are too greedy or too slow",
-    "Put Ugin in play at the right time to maximize impact"
+    "Put Ugin in play at the right time to maximize impact",
+    "Common mistakes include overplaying interaction on low-impact threats, failing to track the opponent's graveyard, and mulliganing too aggressively.",
+    "Always prioritize card advantage in control matchups, and never assume a threat is dead if you have a way to answer their answer.",
+    "Practice recognizing when to pivot from control to aggressive value based on the board state."
   ],
   "matchups": [
     {
@@ -162,16 +182,46 @@
         "Bouncers",
         "Greedy or slow hands"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split spells, multi-target effects, or discard to remove counterspells before they can be cast. Deploy uncounterable threats or value engines that win even if countered. Force them to use multiple counterspells by threatening multiple lines of play.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with spot removal and discard to disrupt their mana development. Use board wipes to reset their board when they commit to a wide or high-value board. Prioritize removing their key ramp sources before they can cast their finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap counters and spot removal. Dig for card advantage to outlast their burst. Do not overcommit to the board; instead, trade efficiently and win the resource war. Bring in additional removal and discard post-sideboard.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with mid-game threats and card advantage. Force them to use interaction on your threats rather than their own game plan. Sideboard in hate cards that disrupt their combo or control shell. Win by out-valuing them in the late game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Card advantage wins the mirror. Hold up interaction to punish overextensions. Win the resource war by drawing more cards and deploying threats that force unfavorable trades. Sideboard in additional card draw and late-game finishers to outlast them.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Mosswood Dreadknight",
     "Ral, Crackling Wit",
     "Vivi Ornitier",
-    "Otter tokens"
+    "Otter tokens",
+    "Watch for mana bases that indicate combo or control plans.",
+    "Note when opponents hold up mana for counterspells (typically 2+ mana open on their turn).",
+    "Track graveyard accumulation for Landfall triggers or flashback/recurse engines.",
+    "Be alert to token generation or pump spells that signal an aggressive push."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-dimir-control-dimir-dragons-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T07:04:06+00:00",
     "model": "local-model",
@@ -189,6 +239,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

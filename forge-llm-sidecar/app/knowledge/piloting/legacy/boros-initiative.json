@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Hands with early Chalice of the Void and Fable of the Mirror-breaker",
       "Hands capable of generating immediate pressure and holding back opponents",
-      "Hands containing Solitude to answer early threats"
+      "Hands containing Solitude to answer early threats",
+      "Keep hands with 2+ lands or 1 land + 2 fast mana sources, plus a turn-1 or turn-2 play.",
+      "Prioritize hands that can cast Trinisphere by turn 2 or 3."
     ],
     "mulligan_criteria": [
       "Hands consisting entirely of lands",
       "Hands with only sideboard hate cards like Rest in Peace but no pressure",
-      "Hands lacking early interaction or mana sources"
+      "Hands lacking early interaction or mana sources",
+      "Mulligan hands with no fast mana, no lands, or multiple low-impact cards."
     ],
     "examples": [
       {
@@ -57,20 +60,34 @@
     "early_game": [
       "Play Chalice of the Void on turn 1 to lock mana or creatures",
       "Cast Fable of the Mirror-breaker or Forth Eorlingas! on turn 1-2",
-      "Use Solitude to remove early threats like Troll of Khazad-dûm",
-      "Establish Initiative or Monarch to restrict opponent's turns"
+      "Use Solitude to remove early threats like Troll of Khazad-d\u00fbm",
+      "Establish Initiative or Monarch to restrict opponent's turns",
+      "Turn 1: Play a land, cast Lotus Petal or Chrome Mox.",
+      "Turn 2: Use fast mana to cast Trinisphere if possible, or develop board with early threats.",
+      "Sequence lands to ensure you can hit Trinisphere's mana tax while maintaining your own acceleration."
     ],
     "mid_game": [
       "Advance Dungeon stages with Seasoned Dungeoneer to create blockers or attackers",
       "Use Fable chapters to clear opponent's board and generate Treasures",
       "Maintain board presence with Adventurers and Dungeoneers",
-      "Sideboard out vulnerable creatures against Reanimator decks"
+      "Sideboard out vulnerable creatures against Reanimator decks",
+      "Conserve fast mana for key turns (Trinisphere, big threats).",
+      "Don't overextend into removal.",
+      "Use Chrome Mox for color fixing or extra mana for spells.",
+      "Manage hand size to avoid flooding.",
+      "Commit threats only when you have protection or can follow up.",
+      "Hold back if the opponent has sweepers or hard counters."
     ],
     "late_game": [
       "Leverage Dungeon's Forge and Explore stages for massive stat boosts",
       "Swarm the board with Eorlingas tokens to overwhelm defenses",
       "Use accumulated Treasures to cast additional spells or generate copies",
-      "Manage mana efficiently with Sunbaked Canyon to avoid flooding"
+      "Manage mana efficiently with Sunbaked Canyon to avoid flooding",
+      "Large threats (e.g., Krenko, Goblin Warboss",
+      "or combo pieces like Goblin Bombardment + Krenko), or Trinisphere lock combined with board presence.",
+      "Win by overwhelming the opponent's mana denial or out-resourcing them.",
+      "Go all-in when you have Trinisphere on the board, the opponent is locked out of key spells, and you have a clear path to lethal or a win condition.",
+      "Also commit when you can protect your threats or have removal for their answers."
     ]
   },
   "key_cards": [
@@ -97,7 +114,7 @@
     {
       "name": "Solitude",
       "role": "Early interaction",
-      "notes": "Answers early threats like Troll of Khazad-dûm or Living Weapon, buying time for the deck's strategy."
+      "notes": "Answers early threats like Troll of Khazad-d\u00fbm or Living Weapon, buying time for the deck's strategy."
     }
   ],
   "sequencing_tips": [
@@ -105,7 +122,12 @@
     "Use Simian Spirit Guide to pay for potential Daze on turn 2",
     "Open with City of Traitors for Chalice to avoid exposing Cavern of Souls early",
     "Advance Dungeon carefully to avoid giving opponent reanimation targets",
-    "Use Fable chapters to generate Goblin Shaman copies for extra blockers and Treasures"
+    "Use Fable chapters to generate Goblin Shaman copies for extra blockers and Treasures",
+    "Trinisphere is a double-edged sword",
+    "be mindful of your own mana development.",
+    "Fast mana can lead to flooding, so balance land and spell ratios.",
+    "Watch for opponent's sideboard cards that target your strategy.",
+    "Common mistake: overcommitting to Trinisphere without follow-up threats."
   ],
   "matchups": [
     {
@@ -114,7 +136,7 @@
       "watch_for": [
         "Grief",
         "Reanimate",
-        "Troll of Khazad-dûm"
+        "Troll of Khazad-d\u00fbm"
       ]
     },
     {
@@ -162,12 +184,37 @@
       "watch_for": [
         "Mother of Runes"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips, multiple threats, or cost reducers to overcome counters. Play around key counters by holding up mana or using uncounterable threats. Consider artifact destruction if counters are tied to artifacts.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use removal on key ramp pieces. Trinisphere can lock them out if they overcommit to mana rocks.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal, board wipes, or early threats. Use Trinisphere to slow their mana development. Prioritize surviving turn 1-3 to set up your game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats and cantrips to find answers. Use Trinisphere to lock out their interaction. Out-value them with card advantage and efficient threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize keeping Trinisphere online. Use disruption to break their mana base. Out-value them with better sequencing and threat density.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Grief",
     "Reanimate",
-    "Troll of Khazad-dûm",
+    "Troll of Khazad-d\u00fbm",
     "Death's Shadow",
     "Mother of Runes",
     "Thalia, Guardian of Thraben",
@@ -177,10 +224,12 @@
     "Animate Dead",
     "Sheoldred's Edict",
     "Abrupt Decay",
-    "The One Ring"
+    "The One Ring",
+    "Watch for sweepers (Wrath of God, Day of Judgment), hard counters (Force of Will, Daze), and combo win conditions."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/boros-initiative-legacy-report-champion-of-eternal-challenge-21",
     "generated_at": "2026-05-21T08:52:42+00:00",
     "model": "local-model",
@@ -198,6 +247,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
@@ -220,7 +287,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "King Théoden summoned 4 Eorlingas to finish the game"
+      "evidence_span": "King Th\u00e9oden summoned 4 Eorlingas to finish the game"
     },
     {
       "confidence": 0.9,
@@ -266,7 +333,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "interaction between Troll of Khazad-dûm and Reanimate"
+      "evidence_span": "interaction between Troll of Khazad-d\u00fbm and Reanimate"
     },
     {
       "confidence": 0.9,
@@ -278,7 +345,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "combination of Thalia, Guardian of Thraben , Flickerwisp , and Umezawa’s Jitte"
+      "evidence_span": "combination of Thalia, Guardian of Thraben , Flickerwisp , and Umezawa\u2019s Jitte"
     },
     {
       "confidence": 0.9,
@@ -296,7 +363,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "Archon of Emeria fell to Sheoldred’s Edict , Abrupt Decay took down Magus of the Moon"
+      "evidence_span": "Archon of Emeria fell to Sheoldred\u2019s Edict , Abrupt Decay took down Magus of the Moon"
     }
   ]
 }

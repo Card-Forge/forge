@@ -1,0 +1,443 @@
+{
+  "schema_version": 1,
+  "name": "Cycle Storm",
+  "format": "pauper",
+  "colors": [
+    "W",
+    "B",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Cycle Storm is a combo archetype that generates storm count by casting cheap instants and sorceries, then resolves a high-damage spell to win the game. It utilizes mana acceleration to cast multiple spells in a single turn, bypassing traditional resource curves. The deck aims to assemble its pieces quickly and execute a lethal sequence before opponents can stabilize.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 12,
+      "cards": [
+        "Cabal Ritual",
+        "Dark Ritual",
+        "Songs of the Damned"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 34,
+      "cards": [
+        "Barren Moor",
+        "Chitin Gravestalker",
+        "Drannith Healer",
+        "Drannith Stinger",
+        "Horror of the Broken Lands",
+        "Imposing Vantasaur",
+        "Monstrous Carabid",
+        "Rowan's Grim Search",
+        "Street Wraith"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Rowan's Grim Search",
+        "Songs of the Damned"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Songs of the Damned"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 41,
+      "cards": [
+        "Blood Celebrant",
+        "Cabal Ritual",
+        "Chitin Gravestalker",
+        "Drannith Healer",
+        "Drannith Stinger",
+        "Faerie Macabre",
+        "Horror of the Broken Lands",
+        "Imposing Vantasaur",
+        "Monstrous Carabid",
+        "Page, Loose Leaf",
+        "Street Wraith",
+        "Writhing Necromass"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 10
+    },
+    "removal": {
+      "target_count": 11,
+      "cards": [
+        "Drannith Stinger",
+        "Reaping the Graves",
+        "Siege Smash"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "wrath": {
+      "target_count": 8,
+      "cards": [
+        "Songs of the Damned",
+        "Writhing Necromass"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Songs of the Damned"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 26,
+      "cards": [
+        "Cabal Ritual",
+        "Chitin Gravestalker",
+        "Faerie Macabre",
+        "Reaping the Graves",
+        "Rowan's Grim Search",
+        "Songs of the Damned",
+        "Writhing Necromass"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 10
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Reaping the Graves"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Dark Ritual",
+        "Songs of the Damned"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Songs of the Damned"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Songs of the Damned"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Duress",
+        "Siege Smash",
+        "Songs of the Damned"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 25,
+      "cards": [
+        "Barren Moor",
+        "Blood Celebrant",
+        "Cabal Ritual",
+        "Dark Ritual",
+        "Great Furnace",
+        "Songs of the Damned",
+        "Vault of Whispers"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 13,
+      "cards": [
+        "Barren Moor",
+        "Great Furnace",
+        "Swamp",
+        "Vault of Whispers"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.23
+  },
+  "dual_role_cards": [
+    {
+      "card": "Barren Moor",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Celebrant",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cabal Ritual",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "rituals",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chitin Gravestalker",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dark Ritual",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drannith Healer",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drannith Stinger",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Macabre",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Great Furnace",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Horror of the Broken Lands",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Imposing Vantasaur",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monstrous Carabid",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reaping the Graves",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rowan's Grim Search",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Siege Smash",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Songs of the Damned",
+      "roles": [
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "payoff_cards",
+        "rituals",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Street Wraith",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vault of Whispers",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Writhing Necromass",
+      "roles": [
+        "graveyard_enablers",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast all rituals and cheap instants before the win condition to maximize storm count",
+    "Hold up mana for interaction if the opponent has countermagic",
+    "Prioritize casting spells that generate storm count over drawing cards unless you need to find the win condition",
+    "Use Cabal Ritual's sacrifice clause strategically to avoid losing key creatures prematurely",
+    "Common mistakes include overcommitting to board presence, holding up mana for interaction when you can go off, miscounting spells needed for the finisher, and failing to track opponent's discard/counters."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize land drops and casting cheap instants to build storm count"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early interaction to disrupt opponent's board"
+    },
+    {
+      "trigger": "early game",
+      "line": "Search for mana acceleration to enable combo turns"
+    }
+  ],
+  "kill_priority": [
+    "Dark Ritual",
+    "Songs of the Damned",
+    "Blood Celebrant",
+    "Cabal Ritual",
+    "Chitin Gravestalker",
+    "Drannith Healer",
+    "Drannith Stinger",
+    "Faerie Macabre"
+  ],
+  "interaction_to_disrupt": [
+    "Drannith Stinger",
+    "Reaping the Graves",
+    "Siege Smash",
+    "Songs of the Damned",
+    "Writhing Necromass",
+    "Duress"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/cycle-storm.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

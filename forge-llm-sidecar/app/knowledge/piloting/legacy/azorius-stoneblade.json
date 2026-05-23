@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Stifle or other early interaction",
       "Two or more lands with a path to Stoneforge Mystic or Tamiyo",
-      "Hands that can respond to common Legacy opening plays"
+      "Hands that can respond to common Legacy opening plays",
+      "Keep hands with 2-3 lands (prioritize basics or fetchable duals), a turn-1 land, and at least one of: Stoneforge Mystic, Tamiyo, Inquisitive Student, Stifle, or efficient interaction (Path to Exile, Swords to Plowshares, Counterspell).",
+      "Prioritize keeping hands that can play a land and a spell on turn 1, or two lands and a spell on turn 2."
     ],
     "mulligan_criteria": [
       "Hands with no interaction or removal",
       "Hands with three or more lands",
-      "Hands lacking a clear path to the sword or card advantage engine"
+      "Hands lacking a clear path to the sword or card advantage engine",
+      "Mulligan hands with 0-1 lands, 3+ lands with no spells, or hands consisting solely of counterspells/removal without threats or Stoneforge."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Prioritize playing lands and holding up mana for Stifle",
       "Use Stifle to counter fetch lands, tutors, or early combo pieces",
-      "Play Stoneforge Mystic as early as possible to set up the sword"
+      "Play Stoneforge Mystic as early as possible to set up the sword",
+      "Turn 1: Play a land, cast a cantrip (Opt/Opt) or cheap interaction if threatened, or play a 1-drop if available.",
+      "Turn 2: Play a second land, then cast Stoneforge Mystic or Tamiyo if possible.",
+      "If opponent plays a threat, use spot removal or counterspell to stabilize.",
+      "If they pass, develop board with Tamiyo or equip Sword of Feast and Famine to a threat.",
+      "Land sequencing: Prioritize fetching/finding basic Plains/Islands early to ensure consistent casting of WU spells"
     ],
     "mid_game": [
       "Fetch the designated sword using Stoneforge Mystic",
       "Cast Tamiyo, Inquisitive Student to draw cards and find answers",
-      "Maintain a hand of interaction while developing board presence"
+      "Maintain a hand of interaction while developing board presence",
+      "Preserve counterspells for key combo pieces or game-winning threats",
+      "use spot removal on early pressure.",
+      "Tamiyo\u2019s loyalty should be spent on card draw (+1) when ahead, or exile/removal (-2/-3) when behind or facing problematic permanents.",
+      "Sword of Feast and Famine is a win condition and removal tool\u2014equip it to your best threat or use it to exile a key permanent.",
+      "Don't overcommit mana into Tamiyo if you can't protect it",
+      "keep a counterspell or Stifle in hand as insurance."
     ],
     "late_game": [
       "Stabilize with the sword's defensive or value-generating abilities",
       "Use Tamiyo's draw to out-resource the opponent",
-      "Close the game once the opponent runs out of threats or interaction"
+      "Close the game once the opponent runs out of threats or interaction",
+      "Sword of Feast and Famine equipped to a 4/4 or larger threat, Tamiyo, Inquisitive Student (especially with +1 card draw to find the sword or a finisher), and a well-timed Stifle to protect your win condition.",
+      "Sometimes a single Sword of Feast and Famine on a 3/3 with trample/first strike is enough to close out games.",
+      "Go all-in when you have a Sword equipped, Tamiyo on the board, and at least one counterspell or Stifle to protect your board.",
+      "Also commit when the opponent has no removal or sweepers in hand and you're ahead in life.",
+      "If you've stabilized and have a clear path to damage, stop holding back and start attacking with equipped threats."
     ]
   },
   "key_cards": [
@@ -59,7 +78,13 @@
     "Always hold up Stifle until you know what the opponent is casting",
     "Play Stoneforge Mystic before casting Tamiyo to ensure the sword is available for defense",
     "Use Tamiyo's draw ability when your hand is low and you need specific answers",
-    "Manage mana carefully to keep interaction available while developing board presence"
+    "Manage mana carefully to keep interaction available while developing board presence",
+    "Common mistakes include overplaying Tamiyo without protection, using Sword of Feast and Famine as mere removal instead of a win condition, and hoarding counterspells until it's too late.",
+    "Remember that Stoneforge Mystic is a 3-mana 2/2\u2014don't attack with it unless you're sure it's safe.",
+    "Tamiyo's -2 ability can exile your own threats if you're not careful",
+    "always check the exile zone.",
+    "Stifle is a 1-mana instant\u2014use it to counter key spells rather than just combo pieces.",
+    "Finally, this deck thrives on patience"
   ],
   "matchups": [
     {
@@ -106,6 +131,16 @@
         "Mana dorks",
         "Big threats on turn 4-5"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Stifle to counter their counterspells or key spells. Cast threats at end step or when they have no mana. Use Tamiyo's +1 to draw into answers or finishers. Don't overcommit to a single threat; attack with multiple small threats if possible.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war. Use Tamiyo to draw into more cards. Stifle their counterspells or key spells. Prioritize keeping Sword of Feast and Famine in play. Use spot removal efficiently and don't overcommit to a single threat. Track their hand and use counterspells to protect your win conditions.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -113,10 +148,16 @@
     "Tutors finding game-ending pieces",
     "Early aggressive creatures",
     "Counterspells targeting your engines",
-    "Board wipes resetting your board"
+    "Board wipes resetting your board",
+    "Watch for combo decks playing Show and Tell, Delver of Secrets, or Arcane Signet/Chalice of the Void.",
+    "Track opponent's hand size and discard effects",
+    "if they've Thoughtseized or Duress, expect a specific game plan.",
+    "Note when they play cheap interaction\u2014they're likely setting up a midgame threat or combo.",
+    "Pay attention to Tamiyo's exile zone"
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:07:03+00:00",
     "model": "local-model",
@@ -145,6 +186,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

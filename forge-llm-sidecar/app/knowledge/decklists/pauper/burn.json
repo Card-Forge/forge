@@ -1,0 +1,93 @@
+{
+  "archetype": "Burn",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/burn.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Clockwork Percussionist"
+    },
+    {
+      "qty": 4,
+      "name": "Experimental Synthesizer"
+    },
+    {
+      "qty": 1,
+      "name": "Fireblast"
+    },
+    {
+      "qty": 4,
+      "name": "Galvanic Blast"
+    },
+    {
+      "qty": 4,
+      "name": "Gingerbrute"
+    },
+    {
+      "qty": 3,
+      "name": "Goblin Bushwhacker"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Tomb Raider"
+    },
+    {
+      "qty": 2,
+      "name": "Goldhound"
+    },
+    {
+      "qty": 4,
+      "name": "Great Furnace"
+    },
+    {
+      "qty": 4,
+      "name": "Inventor's Axe"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 14,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Reckless Lackey"
+    },
+    {
+      "qty": 4,
+      "name": "Voldaren Epicure"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Cast into the Fire"
+    },
+    {
+      "qty": 3,
+      "name": "End the Festivities"
+    },
+    {
+      "qty": 2,
+      "name": "Flaring Pain"
+    },
+    {
+      "qty": 2,
+      "name": "Reckless Impulse"
+    },
+    {
+      "qty": 4,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 2,
+      "name": "Searing Blaze"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvok Lifestaff"
+    }
+  ]
+}

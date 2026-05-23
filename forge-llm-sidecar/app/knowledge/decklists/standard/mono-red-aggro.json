@@ -1,0 +1,93 @@
+{
+  "archetype": "Mono-Red Aggro",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/mono-red-aggro.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Burnout Bashtronaut"
+    },
+    {
+      "qty": 4,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Emberheart Challenger"
+    },
+    {
+      "qty": 4,
+      "name": "Fire Nation Palace"
+    },
+    {
+      "qty": 4,
+      "name": "Hired Claw"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Strike"
+    },
+    {
+      "qty": 2,
+      "name": "Manifold Mouse"
+    },
+    {
+      "qty": 18,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Nova Hellkite"
+    },
+    {
+      "qty": 2,
+      "name": "Ojer Axonil, Deepest Might"
+    },
+    {
+      "qty": 4,
+      "name": "Razorkin Needlehead"
+    },
+    {
+      "qty": 2,
+      "name": "Scorching Shot"
+    },
+    {
+      "qty": 1,
+      "name": "Soulstone Sanctuary"
+    },
+    {
+      "qty": 2,
+      "name": "Tersa Lightshatter"
+    },
+    {
+      "qty": 2,
+      "name": "Witchstalker Frenzy"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 4,
+      "name": "Magebane Lizard"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 2,
+      "name": "Shock"
+    },
+    {
+      "qty": 3,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 3,
+      "name": "Sunspine Lynx"
+    }
+  ]
+}

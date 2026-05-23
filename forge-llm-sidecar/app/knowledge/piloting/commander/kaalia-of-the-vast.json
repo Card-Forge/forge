@@ -1,0 +1,120 @@
+{
+  "archetype": "Kaalia of the Vast",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck aims to win by explosively chaining legendary creatures onto the battlefield using Kaalia's enter-the-battlefield ability, bypassing mana costs and tempo disadvantages to overwhelm opponents with high-impact threats. It excels against slower, resource-heavy strategies that cannot answer multiple simultaneous legendary threats or recover from sudden board swings.",
+  "win_conditions": [
+    "High-impact legendary creatures like Teferi, Time Raveler, Thassa, God-Eternal Oketra, or Teysa, Enviro that can close the game or lock opponents out.",
+    "Chain them via Kaalia's ETB or cast them directly when you have open mana and protection."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, at least one ramp artifact (Sol Ring/Arcane Signet), and Kaalia or a cheap legendary creature."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have no lands, no ramp, or only expensive spells with no viable path to casting Kaalia by turn 2-3."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring/Arcane Signet, or play a cheap mana-producing land.",
+      "Turn 2: Cast Kaalia if you have 3 mana, or continue ramping.",
+      "If you have a legendary creature in hand, cast Kaalia, let it resolve, and use its ETB to put the legendary onto the battlefield tapped and attacking to apply immediate pressure or trigger ETB/attack abilities."
+    ],
+    "mid_game": [
+      "Hoover mana for chain reactions rather than spending it on single threats.",
+      "Keep key legendary creatures in hand for Kaalia's ETB, and use the graveyard strategically for recursion or reanimation only if the deck supports it.",
+      "Prioritize keeping open mana to respond to interaction or chain additional legendaries.",
+      "Commit threats when you have removal or protection to answer their interaction.",
+      "Hold back if you're vulnerable to board wipes or targeted removal, and use Kaalia's ETB to force favorable trades or bypass timing restrictions.",
+      "Never overextend without a plan to protect your board."
+    ],
+    "late_game": [
+      "High-impact legendary creatures like Teferi, Time Raveler, Thassa, God-Eternal Oketra, or Teysa, Enviro that can close the game or lock opponents out.",
+      "Chain them via Kaalia's ETB or cast them directly when you have open mana and protection.",
+      "Go all-in when you have protection, removal, or a board state that can withstand their interaction.",
+      "Commit when you can chain multiple legendaries in one turn to overwhelm their defenses or when you have enough resources to rebuild after a board wipe."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kaalia of the Vast",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overcommitting to a single legendary without answers, leaving you vulnerable to removal or board wipes.",
+    "Unique interaction: Kaalia's ETB puts the creature onto the battlefield tapped and attacking, which can trigger 'when this creature attacks' effects immediately.",
+    "Also, you can chain multiple legendaries in one turn if you have enough mana and targets, creating a snowball effect that's hard to answer.",
+    "Always keep a legendary creature in hand when you cast Kaalia to maximize value."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast Kaalia at instant speed when they have no mana, or use it to chain threats that resolve simultaneously. Include protection spells or cheap threats that are hard to counter, and time your plays to avoid their main phase counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to win before they stabilize. Use targeted removal on their mana sources or key ramp creatures. Chain legendaries quickly to close the game before they can deploy their late-game threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal, life gain, or board wipes. Use Kaalia's ETB to put a large legendary creature onto the battlefield to trade with their attackers. Win quickly before they overwhelm you with unblockable or numerous threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with cheap legendary creatures and protection spells. Out-value them with card draw and chain reactions. Use Kaalia's ETB to bypass their counterspells by threatening multiple targets or casting at instant speed when they have no mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-valuing with better legendary creatures, more removal, or faster chain reactions. Prioritize cards that can answer their legendaries or protect yours. Use board wipes strategically to reset the board in your favor and capitalize on your remaining resources.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for removal spells aimed at Kaalia or your key legendary creatures.",
+    "Track opponent's mana to time your chain reactions and avoid casting into counterspells or sweepers.",
+    "Note when they use board wipes, as you'll need to rebuild your legendary presence quickly with cheap threats or recursion."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

@@ -14,13 +14,16 @@
       "Hands with early interaction or recursion engines",
       "Mana bases that support three-color casting by turn three",
       "Combinations of Accumulate Wisdom and cheap threats",
-      "Hands containing Gran-Gran or early removal"
+      "Hands containing Gran-Gran or early removal",
+      "Keep any hand with a land, Accumulate Wisdom, or Gran-Gran plus a land.",
+      "Prioritize hands with 2-3 lands and at least one Lessons card or early spell."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction or card draw",
       "Mana bases with four or more lands",
       "Hands without a clear path to turn two or three plays",
-      "Hands reliant solely on high-cost finishers"
+      "Hands reliant solely on high-cost finishers",
+      "Mulligan pure curve-outs, hands with only non-basic lands that enter tapped without fetches, or hands lacking a way to cast Accumulate Wisdom (needs 2U) if you have no cantrips."
     ],
     "examples": []
   },
@@ -28,17 +31,31 @@
     "early_game": [
       "Play lands and cheap interaction to disrupt opponent's early strategy",
       "Hold up mana for potential recursion or counterplay",
-      "Establish early board presence with low-cost threats"
+      "Establish early board presence with low-cost threats",
+      "Turn 1: Play a land, cast a cantrip or cheap instant to set up the graveyard.",
+      "Turn 2: Play a land, cast Accumulate Wisdom if possible, or cast Gran-Gran and follow up with instants.",
+      "If opening with Lessons, tutor for Accumulate Wisdom or a key spell like Stormchaser's Talent and cast it.",
+      "Mana base should prioritize fetching basics to ensure consistent WUU drops."
     ],
     "mid_game": [
       "Activate Gran-Gran to reuse removal and stabilize the board",
       "Cast Accumulate Wisdom to filter for answers or finishers",
-      "Trade efficiently while preserving card advantage"
+      "Trade efficiently while preserving card advantage",
+      "Treat your graveyard as a secondary hand",
+      "never cast a spell you can't afford to lose unless it's a win-con or essential interaction.",
+      "Use Lessons to find specific answers or Accumulate Wisdom if it's in the graveyard.",
+      "Manage mana to keep open for counterspells or removal when needed, but commit to casting spells to fuel Gran-Gran and card draw.",
+      "Commit threats early if the board is empty, as Gran-Gran scales with spell volume.",
+      "Hold back if facing sweepers or heavy removal"
     ],
     "late_game": [
       "Leverage recurring threats to overwhelm opponent's resources",
       "Use sorcery-speed spells to dictate the game state",
-      "Push for damage while maintaining enough cards to respond to late-game threats"
+      "Push for damage while maintaining enough cards to respond to late-game threats",
+      "A fully fueled Accumulate Wisdom paired with Gran-Gran and a graveyard full of instants/sorceries creates an unstoppable token storm.",
+      "Direct damage spells or combo finishers can close out games against control.",
+      "Go all-in when you have Accumulate Wisdom on the battlefield, a full graveyard, and enough mana to cast 3+ spells in a turn.",
+      "Also commit when your opponent has no sweepers or graveyard hate in play."
     ]
   },
   "key_cards": [
@@ -62,7 +79,12 @@
     "Prioritize holding up mana for recursion over committing to early plays",
     "Cast Accumulate Wisdom before committing to board state changes",
     "Use Gran-Gran's ability to recast removal after opponent commits resources",
-    "Balance aggression with card advantage to avoid running out of answers"
+    "Balance aggression with card advantage to avoid running out of answers",
+    "Common mistake: Overcommitting to casting spells without considering graveyard hate or sweepers.",
+    "Always keep a land in hand to ensure you can cast Accumulate Wisdom if it's in the graveyard.",
+    "Stormchaser's Talent synergizes heavily with high spell volume",
+    "use it to dig for key pieces or fuel your engine.",
+    "Remember that Accumulate Wisdom exiles spells cast from the graveyard, so you can only cast each spell once per game unless you have ways to return it to the graveyard."
   ],
   "matchups": [
     {
@@ -91,16 +113,35 @@
         "Board wipes",
         "Resource denial strategies"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split-second spells, cheap cantrips to out-value counters, or cast Accumulate Wisdom in response to their counterspells to protect it. Utilize Lessons to find protection or alternative win conditions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with cheap instants and Gran-Gran. Use artifact destruction and graveyard hate to disrupt their mana rocks and recursion. Don't let them stabilize; trade efficiently and punish their overextended mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by casting more spells to trigger Gran-Gran and draw cards. Prioritize Lessons to find Accumulate Wisdom or key interaction. Use targeted removal to eliminate their Gran-Gran or Accumulate Wisdom before they can stabilize.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Efficient value engines",
     "Board wipes and hand disruption",
-    "Late-game finishers"
+    "Late-game finishers",
+    "Watch for sweepers (e.g., Supreme Verdict, Wrath of God), graveyard hate (e.g., Rest in Peace, Leyline of the Void), and counterspells.",
+    "Note when opponents save removal for Accumulate Wisdom or Gran-Gran.",
+    "Track their mana development to predict when they can cast their win conditions."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:58:50+00:00",
     "model": "local-model",
@@ -116,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

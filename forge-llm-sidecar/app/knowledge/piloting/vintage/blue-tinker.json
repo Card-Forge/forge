@@ -13,12 +13,15 @@
       "Hands with Tinker and at least one artifact",
       "Hands with Flow State and early draw spells",
       "Hands with Stock Up and multiple artifacts",
-      "Hands containing disruption and a combo piece"
+      "Hands containing disruption and a combo piece",
+      "Keep hands with 2+ lands (including duals/fixers) and at least one draw engine (Flow State, Stock Up) or tutor.",
+      "Keep any hand with Tinker paired with a mana source or artifact ramp."
     ],
     "mulligan_criteria": [
       "Hands lacking artifacts or draw engines",
       "Hands with only high-cmc spells and no acceleration",
-      "Hands missing interaction in aggressive matchups"
+      "Hands missing interaction in aggressive matchups",
+      "Mulligan on 3+ lands with no spells, or hands consisting solely of cheap artifacts with no draw/tutors or interaction."
     ],
     "examples": []
   },
@@ -26,17 +29,32 @@
     "early_game": [
       "Prioritize drawing cards and finding artifacts to fuel Tinker",
       "Play cheap artifacts to reduce Tinker's cost and enable Flow State",
-      "Use disruption to delay opponent's game plan while assembling pieces"
+      "Use disruption to delay opponent's game plan while assembling pieces",
+      "Turn 1: Play a land, cast a cantrip/dig spell or cheap mana rock (Sol Ring, Mind Stone, Arcane Signet).",
+      "Turn 2: Develop mana, cast disruption (Duress, Thoughtseize) or continue digging for Tinker.",
+      "Land sequencing: Prioritize fetches/shocks for consistency, then mana rocks.",
+      "Avoid overextending into potential hate",
+      "maintain a hand for interaction."
     ],
     "mid_game": [
       "Cast Tinker to bring out a finisher or key artifact",
       "Activate Flow State to refill hand and find answers or additional combo pieces",
-      "Use Stock Up to accelerate artifact deployment and apply pressure"
+      "Use Stock Up to accelerate artifact deployment and apply pressure",
+      "Hold mana for Tinker or key interaction",
+      "avoid tapping out for non-essential artifacts.",
+      "Use Stock Up/Flow State to dig through the deck, but stop drawing once you have a win-con or protection.",
+      "Graveyard is secondary",
+      "prioritize hand and library resources for consistency.",
+      "Hold back on committing all artifacts until you have a win-con or protection."
     ],
     "late_game": [
       "Leverage accumulated card advantage to out-resource opponents",
       "Deploy multiple finishers or board wipes to reset unfavorable boards",
-      "Maintain artifact presence to keep Tinker relevant for follow-up turns"
+      "Maintain artifact presence to keep Tinker relevant for follow-up turns",
+      "Tinker for Mindslaver (extra turns), Mycosynth Wellspring + mana rocks (infinite mana), or Bolas's Citadel (mill/steal).",
+      "Assemble 3+ mana, cast Tinker, target win-con.",
+      "When you have 3+ mana sources, a draw spell to dig for protection, and opponent has no immediate removal/hate.",
+      "Or when you can protect the win-con (with counters or protection)."
     ]
   },
   "key_cards": [
@@ -60,7 +78,12 @@
     "Always assess opponent's hand size and known threats before casting Tinker",
     "Hold back one artifact to ensure Tinker remains legal if the first is countered",
     "Cast Flow State after playing artifacts to maximize draw potential and find follow-up pieces",
-    "Use Stock Up to trigger artifact synergies before committing to a Tinker resolution"
+    "Use Stock Up to trigger artifact synergies before committing to a Tinker resolution",
+    "Tinker is an instant, so it can be cast in response to threats, but be careful of targeted removal.",
+    "Flow State and Stock Up are key to consistency.",
+    "Don't overcommit to artifacts without a win-con.",
+    "Watch for 'Oath of Druids' and 'Esper Lurrus Control' in the metagame\u2014these decks can out-value you, so prioritize disruption and fast Tinker.",
+    "Common mistake: Tinking for a non-essential artifact when you could have waited for a win-con."
   ],
   "matchups": [
     {
@@ -89,6 +112,21 @@
         "Counterspell",
         "Game-ending spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use protection (Counterspell, Negate, or artifact protection), cast Tinker at end of opponent's turn, or use a combo that doesn't rely on Tinker (if applicable). Dig for protection.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early disruption (Duress, Thoughtseize), artifact hate (Shatterstorm), or race with fast Tinker win-con. Don't let them get to 5+ mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win with better resource management, more protection, or faster Tinker assembly. Use counterspells to protect your Tinker, disrupt theirs, and race for the win-con.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -96,10 +134,15 @@
     "Dismantle",
     "Beacon of Destruction",
     "Force of Will",
-    "Smuggler's Copter"
+    "Smuggler's Copter",
+    "Watch for counterspells (hold Tinker for when they have no mana or use protection).",
+    "Watch for artifact hate (Shatterstorm, Rest in Peace, Null Rod).",
+    "Watch for combo pieces (Oath, Lurrus, etc.).",
+    "Key tell: Opponent tapping for a big spell or holding up mana on their turn end."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:30:30+00:00",
     "model": "local-model",
@@ -115,6 +158,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

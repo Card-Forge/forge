@@ -1,0 +1,165 @@
+{
+  "archetype": "Orzhov Stoneblade",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/orzhov-stoneblade.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Aether Vial"
+    },
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 1,
+      "name": "Batterskull"
+    },
+    {
+      "qty": 1,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 2,
+      "name": "Erode"
+    },
+    {
+      "qty": 1,
+      "name": "Flagstones of Trokair"
+    },
+    {
+      "qty": 1,
+      "name": "Flickerwisp"
+    },
+    {
+      "qty": 2,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 3,
+      "name": "Karakas"
+    },
+    {
+      "qty": 1,
+      "name": "Lion Sash"
+    },
+    {
+      "qty": 4,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 4,
+      "name": "Overlord of the Balemurk"
+    },
+    {
+      "qty": 4,
+      "name": "Phelia, Exuberant Shepherd"
+    },
+    {
+      "qty": 5,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Pre-War Formalwear"
+    },
+    {
+      "qty": 4,
+      "name": "Prismatic Vista"
+    },
+    {
+      "qty": 4,
+      "name": "Recruiter of the Guard"
+    },
+    {
+      "qty": 2,
+      "name": "Scrubland"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowy Backstreet"
+    },
+    {
+      "qty": 3,
+      "name": "Skyclave Apparition"
+    },
+    {
+      "qty": 4,
+      "name": "Solitude"
+    },
+    {
+      "qty": 4,
+      "name": "Stoneforge Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 3,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "White Orchid Phantom"
+    },
+    {
+      "qty": 3,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 4,
+      "name": "Witch Enchanter"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Clarion Conqueror"
+    },
+    {
+      "qty": 2,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 1,
+      "name": "Ethersworn Canonist"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 1,
+      "name": "Plague Engineer"
+    },
+    {
+      "qty": 1,
+      "name": "Sanctifier en-Vec"
+    },
+    {
+      "qty": 1,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 3,
+      "name": "White Orchid Phantom"
+    },
+    {
+      "qty": 2,
+      "name": "Wrath of the Skies"
+    },
+    {
+      "qty": 1,
+      "name": "Yorion, Sky Nomad"
+    }
+  ]
+}

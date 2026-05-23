@@ -12,7 +12,10 @@
     "keep_criteria": [
       "Hands with at least two one- or two-drops",
       "Hands containing Defile or Troll of Khazad-dum",
-      "Hands with early removal like Cast Down"
+      "Hands with early removal like Cast Down",
+      "Keep hands with 1-2 lands and at least one interaction (Defile or Cast Down) or Troll of Khazad-dum.",
+      "Drop hands with 3+ lands, no removal, or only high-cost threats.",
+      "Prioritize hands that can play a land and a removal spell or a 2-drop threat by turn 2."
     ],
     "mulligan_criteria": [
       "Hands with only three-drops or higher",
@@ -25,17 +28,32 @@
     "early_game": [
       "Play cheap creatures immediately to establish board presence",
       "Cast Defile as soon as possible to start life drain and weaken opposing creatures",
-      "Use Cast Down to remove early blockers or finish the opponent"
+      "Use Cast Down to remove early blockers or finish the opponent",
+      "Turn 1: Play a land, optionally hold removal for turn 2.",
+      "Turn 2: Develop board with Troll or use Defile/Cast Down on opponent's key creature.",
+      "Sequence lands to ensure black mana availability for spot removal on turn 2 or 3.",
+      "If facing aggro, prioritize removal",
+      "if facing control/combo, develop Troll to apply pressure and prepare for graveyard/token synergy."
     ],
     "mid_game": [
       "Maintain pressure with additional Troll of Khazad-dum copies",
       "Trade efficiently to keep Defile's damage output relevant",
-      "Prioritize removal for threats that can stall your aggression"
+      "Prioritize removal for threats that can stall your aggression",
+      "Preserve removal for high-value targets like finishers or combo pieces.",
+      "Use Troll's death trigger to generate board presence when forced to trade.",
+      "Manage hand size by trading removal for tempo or threats, and avoid overcommitting mana when opponent is low on resources.",
+      "Commit threats when you have removal to handle counters or sweepers.",
+      "Hold back removal if opponent is out of resources or if you can out-value them with Troll's tokens.",
+      "Prioritize trading Troll for their best creature to maximize value."
     ],
     "late_game": [
       "Push for lethal with remaining creatures and Defile damage",
       "Use Cast Down to clear the path for a final combat",
-      "Accept trades if you are ahead on life total and board state"
+      "Accept trades if you are ahead on life total and board state",
+      "Troll of Khazad-dum (and its tokens) combined with spot removal to clear the path.",
+      "Cast Down/Defile to remove blockers or finish low-life opponents.",
+      "When you have board control, opponent is at low life, or you can trade removal for their win condition.",
+      "Commit when you can force favorable trades with Troll's death trigger."
     ]
   },
   "key_cards": [
@@ -58,7 +76,11 @@
   "sequencing_tips": [
     "Cast Defile before playing creatures to immediately weaken the board",
     "Save Cast Down for the opponent's turn to maximize its impact",
-    "Use Troll of Khazad-dum's trigger to remove blockers before attacking with it"
+    "Use Troll of Khazad-dum's trigger to remove blockers before attacking with it",
+    "Avoid overcommitting to board wipes if you lack follow-up.",
+    "Troll's death trigger is a key resource\u2014don't sacrifice it unnecessarily.",
+    "Track opponent's mana and hand size to predict removal usage.",
+    "In the Unknown format, adapt to specific metagame shifts by prioritizing hate cards against top-tier archetypes, and always keep a backup plan if your primary game plan is disrupted."
   ],
   "matchups": [
     {
@@ -87,15 +109,44 @@
         "Counterspells",
         "Lifelink creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use removal on threats before they can be countered, or hold removal for when they blow mana on counters. Trade Troll for their uncounterable threats and apply pressure with tokens to force suboptimal counter decisions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use spot removal on key ramp creatures. Troll's tokens can outpace their early game, and you can stabilize by removing their mana sources.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal on turn 2/3 threats. Use Troll to generate tokens and stabilize. Prioritize life gain if available, and avoid overcommitting to board wipes without follow-up.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with Troll. Use removal to clear their blockers. Out-value them with card advantage and resilient threats, forcing them to spend resources on interaction rather than their game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value trades are key. Use Troll to force unfavorable trades. Save removal for their threats. Prioritize hand disruption if present, and track their graveyard to avoid falling for reanimation or recursion.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
-    "Lifelink creatures that outvalue Defile"
+    "Lifelink creatures that outvalue Defile",
+    "Watch for sweepers, counters, or combo win conditions.",
+    "Note when opponents save removal vs. when they commit it.",
+    "Track graveyard usage if they play discard or reanimation, and monitor their mana to predict removal windows."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:51:01+00:00",
     "model": "local-model",
@@ -124,6 +175,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

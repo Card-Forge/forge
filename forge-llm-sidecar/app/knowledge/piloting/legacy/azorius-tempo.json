@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two to three lands and at least one cantrip",
       "Hands containing early disruption or a playable threat",
-      "Hands that allow you to Ponder or Brainstorm on turn one"
+      "Hands that allow you to Ponder or Brainstorm on turn one",
+      "Keep hands with 2-3 playable lands (preferably duals or fetchable), at least one cantrip (Ponder/Brainstorm), and early interaction (Spell Pierce/Thoughtseize).",
+      "Keep Flow State only if paired with a land drop and a cantrip to set up."
     ],
     "mulligan_criteria": [
       "Hands with zero or four+ lands",
       "Hands lacking any interaction or card selection",
-      "Hands that cannot play a turn-one land or cantrip"
+      "Hands that cannot play a turn-one land or cantrip",
+      "Mulligan on 3+ lands with no plays, 1 land with no cantrips/interaction, or hands lacking any way to interact with the opponent's early game."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Prioritize playing lands and resolving Ponder or Brainstorm to fix your hand",
       "Play early threats if available to force opponent responses",
-      "Hold interaction for opponent's key plays while maintaining a full hand"
+      "Hold interaction for opponent's key plays while maintaining a full hand",
+      "Turn 1: Play a land, cast Ponder or Brainstorm to dig for answers or Flow State setup.",
+      "If holding interaction, hold up Spell Pierce or Thoughtseize.",
+      "Turn 2: Resolve cantrip, play second land, and either apply early pressure with a cheap threat, hold up interaction for opponent's play, or begin casting Flow State if mana allows.",
+      "Prioritize maintaining card advantage over board presence."
     ],
     "mid_game": [
       "Cast Flow State to gain tempo and accelerate your resource curve",
       "Trade efficiently, using card advantage to outvalue opponent's board state",
-      "Apply consistent pressure to prevent opponents from setting up their win conditions"
+      "Apply consistent pressure to prevent opponents from setting up their win conditions",
+      "Preserve mana for interaction until the opponent commits.",
+      "Use Ponder/Brainstorm to dig for answers or Flow State rather than overcommitting to the board.",
+      "Manage graveyard by avoiding unnecessary scry/dig if opponent has graveyard hate.",
+      "Trade efficiently and avoid overextending.",
+      "Hold back threats if opponent has sweepers or uncounterable answers.",
+      "Use interaction to protect your Flow State or key threats, and only commit to board when you have card advantage or opponent is out of interaction."
     ],
     "late_game": [
       "Lean into card advantage to draw into finishing threats",
       "Use Flow State repeatedly if possible to maintain board control",
-      "Grind out the game by disrupting late-game plans and closing out with efficient threats"
+      "Grind out the game by disrupting late-game plans and closing out with efficient threats",
+      "Flow State (casting multiple free spells to clear the board, disrupt, or win), resolved threats, or card advantage advantage.",
+      "Set up Flow State by ensuring you have multiple cheap spells in hand and enough mana to cast it.",
+      "Go all-in when you have card advantage, opponent is out of interaction, or you can safely cast Flow State to swing the board.",
+      "Also commit when you can close the game before opponent can stabilize."
     ]
   },
   "key_cards": [
@@ -59,7 +76,12 @@
     "Always Ponder before Brainstorm if you need a specific answer, as Ponder offers more control over the top card.",
     "Hold Flow State until you have a clear follow-up play to avoid giving the opponent a free turn with a larger hand.",
     "Use Brainstorm to dig for lands when behind on mana, but keep threats in hand to apply pressure.",
-    "Prioritize playing lands before cantrips to ensure you have the mana to cast answers on the opponent's turn."
+    "Prioritize playing lands before cantrips to ensure you have the mana to cast answers on the opponent's turn.",
+    "Flow State is a sorcery, so timing is critical\u2014cast it when you can safely resolve it or when you have enough cheap spells to make it impactful.",
+    "Ponder and Brainstorm are essential for consistency",
+    "never skip them unless you're on the draw and need to stabilize.",
+    "Avoid overcommitting to the board, as Azorius Tempo wins through resource advantage and interaction, not board presence.",
+    "Watch for format-specific hate cards and adjust sequencing accordingly."
   ],
   "matchups": [
     {
@@ -88,15 +110,33 @@
         "Graveyard recursion",
         "Fast win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Ponder/Brainstorm to dig around counterspells. Cast Flow State to cast multiple spells, forcing opponent to counter the wrong ones. Use discard to remove counterspells from hand.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure and discard to disrupt mana development. Use Flow State to cast cheap removal or counters. Stabilize with sweepers if ramp establishes a board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Use discard to remove key cards, out-draw with Ponder/Brainstorm, and use counters to protect your Flow State or threats. Prioritize card advantage and efficient trades.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Combo pieces that assemble quickly",
-    "Control sweepers and counterspells"
+    "Control sweepers and counterspells",
+    "Watch for Tron's land drops (signaling a massive turn), Sneak & Show's creature package, Delver's flip condition, and Ocelot Pride's midrange threats.",
+    "Note when opponents hold up mana for counterspells or sweepers, and adjust your sequencing accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:46:02+00:00",
     "model": "local-model",
@@ -112,6 +152,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,157 @@
+{
+  "archetype": "Living End",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/living-end.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 4,
+      "name": "Bloodbraid Marauder"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Elegant Parlor"
+    },
+    {
+      "qty": 3,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 3,
+      "name": "Generous Ent"
+    },
+    {
+      "qty": 1,
+      "name": "Glassdust Hulk"
+    },
+    {
+      "qty": 1,
+      "name": "Incubation // Incongruity"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline Binding"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Guildpact"
+    },
+    {
+      "qty": 3,
+      "name": "Living End"
+    },
+    {
+      "qty": 1,
+      "name": "Lush Portico"
+    },
+    {
+      "qty": 4,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 3,
+      "name": "Oliphaunt"
+    },
+    {
+      "qty": 4,
+      "name": "Overlord of the Balemurk"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 4,
+      "name": "Scion of Draco"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 2,
+      "name": "Teferi, Time Raveler"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 3,
+      "name": "Territorial Kavu"
+    },
+    {
+      "qty": 1,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 4,
+      "name": "Wooded Foothills"
+    },
+    {
+      "qty": 1,
+      "name": "Xander's Lounge"
+    },
+    {
+      "qty": 1,
+      "name": "Zagoth Triome"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Clarion Conqueror"
+    },
+    {
+      "qty": 3,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 2,
+      "name": "Doorkeeper Thrull"
+    },
+    {
+      "qty": 1,
+      "name": "Drannith Magistrate"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 2,
+      "name": "Inevitable Betrayal"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Voice of Victory"
+    },
+    {
+      "qty": 1,
+      "name": "Wear // Tear"
+    }
+  ]
+}

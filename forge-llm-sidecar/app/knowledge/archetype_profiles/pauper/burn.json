@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "name": "Burn",
+  "format": "pauper",
+  "colors": [
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Synthesizer Burn is a revitalized Mono Red Aggro deck in Pauper that replaces the banned Kuldotha Rebirth with an artifact-focused shell. It combines classic Burn spells with damage amplifiers like Kessig Flamebreather and Thermo-Alchemist to race opponents. The deck relies on sequencing multiple spells per turn to maximize damage output while maintaining board presence with one-drops.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 14,
+      "cards": [
+        "Experimental Synthesizer",
+        "Reckless Impulse",
+        "Reckless Lackey",
+        "Voldaren Epicure"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 16,
+      "cards": [
+        "Experimental Synthesizer",
+        "Galvanic Blast",
+        "Goblin Tomb Raider",
+        "Lightning Bolt"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 37,
+      "cards": [
+        "Clockwork Percussionist",
+        "Experimental Synthesizer",
+        "Galvanic Blast",
+        "Gingerbrute",
+        "Goblin Bushwhacker",
+        "Goblin Tomb Raider",
+        "Goldhound",
+        "Inventor's Axe",
+        "Reckless Lackey",
+        "Voldaren Epicure"
+      ],
+      "mainboard_count": 37,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 23,
+      "cards": [
+        "Cast into the Fire",
+        "End the Festivities",
+        "Fireblast",
+        "Galvanic Blast",
+        "Lightning Bolt",
+        "Red Elemental Blast",
+        "Searing Blaze",
+        "Voldaren Epicure"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 10
+    },
+    "wrath": {
+      "target_count": 11,
+      "cards": [
+        "End the Festivities",
+        "Experimental Synthesizer",
+        "Galvanic Blast"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Red Elemental Blast"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Voldaren Epicure"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 10,
+      "cards": [
+        "Experimental Synthesizer",
+        "Flaring Pain",
+        "Galvanic Blast"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Flaring Pain"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Goblin Tomb Raider"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Flaring Pain",
+        "Sylvok Lifestaff"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 18,
+      "cards": [
+        "Experimental Synthesizer",
+        "Galvanic Blast",
+        "Goldhound",
+        "Great Furnace",
+        "Reckless Lackey"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Great Furnace",
+        "Mountain"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.43
+  },
+  "dual_role_cards": [
+    {
+      "card": "End the Festivities",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Experimental Synthesizer",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flaring Pain",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Galvanic Blast",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Tomb Raider",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goldhound",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Great Furnace",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lightning Bolt",
+      "roles": [
+        "removal",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reckless Lackey",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Red Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Voldaren Epicure",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Accumulate enough mana, an amplifier (Kessig Flamebreather or Thermo-Alchemist), and multiple spells to sequence between turns",
+    "Save three-damage spells like Lightning Bolt for key removal opportunities or optimal burn windows",
+    "Prioritize resolving spells that trigger amplifiers before using removal or card draw",
+    "Common mistakes include swinging Experimental Synthesizer into a board you can't clear, forgetting to count damage (hand + board + graveyard), and overcommitting to the board against sweepers.",
+    "Galvanic Blast's flexibility to target either a creature or the player is crucial for efficient damage and removal."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play one-drops like Voldaren Epicure and Clockwork Percussionist to enable Goblin Tomb Raider"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish early board presence and artifact count"
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play Experimental Synthesizer."
+    }
+  ],
+  "kill_priority": [
+    "Experimental Synthesizer",
+    "Galvanic Blast",
+    "Goblin Tomb Raider",
+    "Lightning Bolt",
+    "Clockwork Percussionist",
+    "Gingerbrute",
+    "Goblin Bushwhacker",
+    "Goldhound"
+  ],
+  "interaction_to_disrupt": [
+    "Red Elemental Blast",
+    "Cast into the Fire",
+    "End the Festivities",
+    "Fireblast",
+    "Galvanic Blast",
+    "Lightning Bolt",
+    "Searing Blaze",
+    "Voldaren Epicure"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/burn.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "archetype": "Eldrazi",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/eldrazi.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Black Lotus"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 2,
+      "name": "Dark Depths"
+    },
+    {
+      "qty": 1,
+      "name": "Eldrazi Linebreaker"
+    },
+    {
+      "qty": 2,
+      "name": "Eldrazi Temple"
+    },
+    {
+      "qty": 2,
+      "name": "Eye of Ugin"
+    },
+    {
+      "qty": 1,
+      "name": "Gaea's Cradle"
+    },
+    {
+      "qty": 4,
+      "name": "Glaring Fleshraker"
+    },
+    {
+      "qty": 1,
+      "name": "Grim Monolith"
+    },
+    {
+      "qty": 1,
+      "name": "Karn, the Great Creator"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Vault"
+    },
+    {
+      "qty": 2,
+      "name": "Manifold Key"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Emerald"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Jet"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Pearl"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Ruby"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Sapphire"
+    },
+    {
+      "qty": 4,
+      "name": "Mutated Cultist"
+    },
+    {
+      "qty": 4,
+      "name": "Sensei's Divining Top"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 4,
+      "name": "Sowing Mycospawn"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 2,
+      "name": "Talon Gates of Madara"
+    },
+    {
+      "qty": 4,
+      "name": "Tezzeret, Cruel Captain"
+    },
+    {
+      "qty": 2,
+      "name": "The One Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Time Vault"
+    },
+    {
+      "qty": 1,
+      "name": "Tolarian Academy"
+    },
+    {
+      "qty": 1,
+      "name": "Urborg, Tomb of Yawgmoth"
+    },
+    {
+      "qty": 1,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 3,
+      "name": "Wastescape Battlemage"
+    },
+    {
+      "qty": 1,
+      "name": "Yavimaya, Cradle of Growth"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Chalice of the Void"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 1,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 2,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Maze of Ith"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "The Tabernacle at Pendrell Vale"
+    },
+    {
+      "qty": 1,
+      "name": "Thought-Knot Seer"
+    },
+    {
+      "qty": 1,
+      "name": "Trinisphere"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    }
+  ]
+}

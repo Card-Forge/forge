@@ -1,0 +1,169 @@
+{
+  "archetype": "Sam Combo",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/sam-combo.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Abhorrent Oculus"
+    },
+    {
+      "qty": 4,
+      "name": "Birthing Ritual"
+    },
+    {
+      "qty": 2,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 2,
+      "name": "Carrion Feeder"
+    },
+    {
+      "qty": 4,
+      "name": "Cauldron Familiar"
+    },
+    {
+      "qty": 4,
+      "name": "Chord of Calling"
+    },
+    {
+      "qty": 1,
+      "name": "Dryad Arbor"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Gilded Goose"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 1,
+      "name": "Lush Portico"
+    },
+    {
+      "qty": 2,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Nurturing Peatland"
+    },
+    {
+      "qty": 3,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 2,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Samwise Gamgee"
+    },
+    {
+      "qty": 1,
+      "name": "Scout for Survivors"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Safekeeper"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Mortuary"
+    },
+    {
+      "qty": 4,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 2,
+      "name": "Viscera Seer"
+    },
+    {
+      "qty": 4,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 2,
+      "name": "Witherbloom Charm"
+    },
+    {
+      "qty": 2,
+      "name": "Young Wolf"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Crystal Barricade"
+    },
+    {
+      "qty": 1,
+      "name": "Dauthi Voidwalker"
+    },
+    {
+      "qty": 1,
+      "name": "Drannith Magistrate"
+    },
+    {
+      "qty": 2,
+      "name": "Endurance"
+    },
+    {
+      "qty": 2,
+      "name": "Erode"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Gaddock Teeg"
+    },
+    {
+      "qty": 1,
+      "name": "Grist, the Hunger Tide"
+    },
+    {
+      "qty": 1,
+      "name": "Lavinia, Azorius Renegade"
+    },
+    {
+      "qty": 1,
+      "name": "Suncleanser"
+    },
+    {
+      "qty": 2,
+      "name": "Thoughtseize"
+    }
+  ]
+}

@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "name": "Boros Energy",
+  "format": "modern",
+  "colors": [
+    "W",
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Boros Energy is a Modern aggro deck that leverages the Energy mechanic to cast spells for free and establish a fast clock. It merges an Energy package centered on Amped Raptor and Guide of Souls with a blink/value strategy using Phelia, Exuberant Shepherd to maximize ETB effects and card advantage.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 4,
+      "cards": [
+        "Seasoned Pyromancer",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 6,
+      "cards": [
+        "Elegant Parlor",
+        "Ocelot Pride"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 12,
+      "cards": [
+        "Arid Mesa",
+        "Flooded Strand",
+        "Marsh Flats"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Guide of Souls",
+        "Ocelot Pride"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 32,
+      "cards": [
+        "Ajani, Nacatl Pariah",
+        "Aven Mindcensor",
+        "Blood Moon",
+        "Clarion Conqueror",
+        "Containment Priest",
+        "Fable of the Mirror-Breaker",
+        "Galvanic Discharge",
+        "Guide of Souls",
+        "Ocelot Pride",
+        "Ragavan, Nimble Pilferer",
+        "Seasoned Pyromancer",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Galvanic Discharge",
+        "Goblin Bombardment",
+        "Path to Exile",
+        "Ragavan, Nimble Pilferer",
+        "Thraben Charm",
+        "Wrath of the Skies"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Ocelot Pride"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": [
+        "Mana Tithe"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Ajani, Nacatl Pariah",
+        "Ocelot Pride"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 7,
+      "cards": [
+        "Elegant Parlor",
+        "Seasoned Pyromancer",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 6,
+      "cards": [
+        "Ragavan, Nimble Pilferer",
+        "Seasoned Pyromancer"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Damping Sphere",
+        "Orim's Chant",
+        "Voice of Victory",
+        "Wear // Tear"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 7
+    },
+    "mana_fixing": {
+      "target_count": 23,
+      "cards": [
+        "Arena of Glory",
+        "Arid Mesa",
+        "Elegant Parlor",
+        "Flooded Strand",
+        "Marsh Flats",
+        "Ocelot Pride",
+        "Sacred Foundry"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 23,
+      "cards": [
+        "Arena of Glory",
+        "Arid Mesa",
+        "Elegant Parlor",
+        "Flooded Strand",
+        "Marsh Flats",
+        "Mountain",
+        "Plains",
+        "Sacred Foundry"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 4,
+      "cards": [
+        "Galvanic Discharge"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.31
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ajani, Nacatl Pariah",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arena of Glory",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Mesa",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elegant Parlor",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Galvanic Discharge",
+      "roles": [
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guide of Souls",
+      "roles": [
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marsh Flats",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ocelot Pride",
+      "roles": [
+        "dig_draw",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ragavan, Nimble Pilferer",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seasoned Pyromancer",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thraben Charm",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Voice of Victory",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Blink Amped Raptor with Phelia to generate energy for triggering Guide of Souls on the following turn.",
+    "Cast Static Prison early to generate two energy before it sacrifices itself, even without a target.",
+    "Use Galvanic Discharge on smaller creatures to store excess energy for Unstable Amulet.",
+    "Save Amped Raptor for games requiring conditional responses to avoid whiffing.",
+    "Energy management is critical"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap creatures and lands to establish a fast clock"
+    },
+    {
+      "trigger": "early game",
+      "line": "Generate energy with Static Prison or Galvanic Discharge"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Amped Raptor to cast early threats or removal for free"
+    }
+  ],
+  "kill_priority": [
+    "Guide of Souls",
+    "Ocelot Pride",
+    "Galvanic Discharge",
+    "Ajani, Nacatl Pariah",
+    "Aven Mindcensor",
+    "Blood Moon",
+    "Clarion Conqueror",
+    "Containment Priest"
+  ],
+  "interaction_to_disrupt": [
+    "Mana Tithe",
+    "Ajani, Nacatl Pariah",
+    "Ocelot Pride",
+    "Galvanic Discharge",
+    "Goblin Bombardment",
+    "Path to Exile",
+    "Ragavan, Nimble Pilferer",
+    "Thraben Charm"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/boros-energy.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

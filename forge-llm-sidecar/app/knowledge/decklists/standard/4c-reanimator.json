@@ -1,0 +1,137 @@
+{
+  "archetype": "4c Reanimator",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/4c-reanimator.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 2,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Bringer of the Last Gift"
+    },
+    {
+      "qty": 3,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Deathcap Glade"
+    },
+    {
+      "qty": 4,
+      "name": "Deceit"
+    },
+    {
+      "qty": 1,
+      "name": "Dreamroot Cascade"
+    },
+    {
+      "qty": 4,
+      "name": "Formidable Speaker"
+    },
+    {
+      "qty": 2,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 2,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 4,
+      "name": "Overlord of the Balemurk"
+    },
+    {
+      "qty": 4,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 1,
+      "name": "Sunderflock"
+    },
+    {
+      "qty": 4,
+      "name": "Superior Spider-Man"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Terror of the Peaks"
+    },
+    {
+      "qty": 2,
+      "name": "Town Greeter"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Mortuary"
+    },
+    {
+      "qty": 4,
+      "name": "Wastewood Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 2,
+      "name": "Willowrush Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Wistfulness"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Awaken the Honored Dead"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 2,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 1,
+      "name": "Glarb, Calamity's Augur"
+    },
+    {
+      "qty": 2,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 2,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 2,
+      "name": "Sunderflock"
+    },
+    {
+      "qty": 2,
+      "name": "Wistfulness"
+    }
+  ]
+}

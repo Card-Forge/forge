@@ -1,0 +1,97 @@
+{
+  "archetype": "Mono-White Humans",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/mono-white-humans.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Adeline, Resplendent Cathar"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 4,
+      "name": "Coppercoat Vanguard"
+    },
+    {
+      "qty": 3,
+      "name": "Dauntless Bodyguard"
+    },
+    {
+      "qty": 2,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 3,
+      "name": "Extraction Specialist"
+    },
+    {
+      "qty": 3,
+      "name": "Hopeful Initiate"
+    },
+    {
+      "qty": 1,
+      "name": "Kytheon, Hero of Akros"
+    },
+    {
+      "qty": 4,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 12,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Portable Hole"
+    },
+    {
+      "qty": 4,
+      "name": "Recruitment Officer"
+    },
+    {
+      "qty": 4,
+      "name": "Thalia's Lieutenant"
+    },
+    {
+      "qty": 4,
+      "name": "Thalia, Guardian of Thraben"
+    },
+    {
+      "qty": 4,
+      "name": "Warden of the Inner Sky"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Brave the Elements"
+    },
+    {
+      "qty": 2,
+      "name": "Destroy Evil"
+    },
+    {
+      "qty": 2,
+      "name": "Elite Spellbinder"
+    },
+    {
+      "qty": 2,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 1,
+      "name": "Invasion of Gobakhan"
+    },
+    {
+      "qty": 3,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 4,
+      "name": "Wedding Announcement"
+    }
+  ]
+}

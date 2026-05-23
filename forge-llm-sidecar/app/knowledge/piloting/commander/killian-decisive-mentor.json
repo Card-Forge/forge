@@ -1,0 +1,127 @@
+{
+  "archetype": "Killian, Decisive Mentor",
+  "format": "commander",
+  "strategy_type": "control",
+  "overview": "A B/W token commander that generates an army of Soldiers and buffs them to overwhelm opponents. It aims to stabilize early with ramp and removal, then transition into a relentless midgame where commander tax reduction allows for repeated lethal swings or efficient value trades.",
+  "win_conditions": [
+    "Lethal swings with buffed Soldiers, or using commander tax reduction to cast Killian + other commanders for massive value.",
+    "Sometimes a big buff spell or equipment seals the game."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including at least one that taps for W or B), Sol Ring/Arcane Signet, and Killian or a cheap early threat/removal.",
+      "Hands with 2 lands, a rock, and Killian are keepers."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 3+ lands with no ramp or Killian, or if you lack a W mana source with only 1 land."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring or Arcane Signet.",
+      "Turn 2: Play a second land, cast Killian if you have W mana, or play a cheap token producer/removal.",
+      "If you can't cast Killian T2, use signet to cast it T3.",
+      "Sequence lands to ensure W on T2 if possible.",
+      "Tap Killian for a token on T3, then attack or hold for removal protection."
+    ],
+    "mid_game": [
+      "Preserve mana for removal on key threats.",
+      "Don't overcommit to the board if the opponent has sweepers.",
+      "Use commander tax reduction to cast Killian repeatedly or cast other commanders for value.",
+      "Manage graveyard by avoiding unnecessary self-mill or sacrificing creatures to opponent effects.",
+      "Commit threats when you have removal ready for their answer or when they've blown interaction.",
+      "Hold back if they have sweepers or hard removal.",
+      "Use tokens to trade efficiently, saving Killian for late-game value or as a finisher."
+    ],
+    "late_game": [
+      "Lethal swings with buffed Soldiers, or using commander tax reduction to cast Killian + other commanders for massive value.",
+      "Sometimes a big buff spell or equipment seals the game.",
+      "When you have board presence, removal for their sweepers, and they're low on life.",
+      "When they've blown removal on one threat.",
+      "When you can swing for 5+ damage with buffed tokens."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Killian, Decisive Mentor",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Commander tax is a major factor",
+    "include ways to reduce it (Crown of Convergence, Commander's Sphere, etc.).",
+    "Killian's ability is tap, so you can't attack and generate tokens on the same turn unless you have haste or double strike.",
+    "Watch out for 'cantrip' effects that let you dig for answers.",
+    "Common mistake: Overcommitting to board without removal for sweepers.",
+    "Always track opponent's life total and board state to know when to swing."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats. Cast Killian on opponent's turn if possible. Use mana rocks to cast spells when they can't respond. Don't overcommit to expensive spells. Have a backup plan if your commander is countered.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure. Don't let them stabilize. Use removal on their mana dorks. Have a board wipe ready. Force them to trade resources instead of drawing cards.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal and early blockers. Don't trade tokens for their creatures. Use commander tax reduction to cast Killian for value. Play defensively until you can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats. Don't let them draw cards. Use commander tax reduction to cast multiple commanders. Have a win condition that's hard to answer. Force them to use removal on your threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value trades. Use commander tax reduction to cast Killian more times. Have better removal/board wipes. Track their commander tax. Win by out-resourcing them or finding a unique win condition.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes (Decree of Justice, Wrath of God), hard removal (Beast Within, Swords to Plowshares), and combo pieces.",
+    "Note if they're playing token doublers or commander tax reduction.",
+    "Track their life total and board state to gauge when to swing."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

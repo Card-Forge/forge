@@ -1,0 +1,677 @@
+{
+  "schema_version": 1,
+  "name": "Niv to Light",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 80,
+  "macro_plan": "Niv to Light is a five-color midrange toolbox deck that leverages Bring to Light to access a wide array of silver bullets and threats tailored to the metagame. Its core engine revolves around Niv-Mizzet Reborn to generate massive card advantage and apply relentless pressure, supported by ramp like Sylvan Caryatid and a rebuilt mana base for consistency. The deck aims to stabilize early with efficient removal and board wipes, then snowball into a late-game state where chaining Nivs and using Kolaghan's Command for reach closes out games.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 2,
+      "cards": [
+        "Culling Ritual"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 30,
+      "cards": [
+        "Ancient Cornucopia",
+        "Beza, the Bounding Spring",
+        "Indatha Triome",
+        "Jetmir's Garden",
+        "Ketria Triome",
+        "Niv-Mizzet Reborn",
+        "Omnath, Locus of Creation",
+        "Professor Dellian Fel",
+        "Raugrin Triome",
+        "Spara's Headquarters",
+        "Unmoored Ego",
+        "Up the Beanstalk",
+        "Xander's Lounge",
+        "Zagoth Triome",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Niv-Mizzet Reborn",
+        "Pillage the Bog"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Bring to Light",
+        "Fabled Passage"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 6,
+      "cards": [
+        "Ancient Cornucopia",
+        "Niv-Mizzet Reborn"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 24,
+      "cards": [
+        "Beza, the Bounding Spring",
+        "Bring to Light",
+        "Elesh Norn, Mother of Machines",
+        "Knight of Autumn",
+        "Kolaghan's Command",
+        "Niv-Mizzet Reborn",
+        "Niv-Mizzet, Supreme",
+        "Omnath, Locus of Creation",
+        "Professor Dellian Fel",
+        "Surrak Dragonclaw",
+        "Sylvan Caryatid",
+        "Valki, God of Lies",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 23,
+      "cards": [
+        "Abrupt Decay",
+        "Culling Ritual",
+        "Knight of Autumn",
+        "Kolaghan's Command",
+        "Leyline Binding",
+        "Lightning Helix",
+        "Maelstrom Pulse",
+        "Omnath, Locus of Creation",
+        "Professor Dellian Fel",
+        "Ultima",
+        "Vanishing Verse"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 1
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Ultima"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Dovin's Veto"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 11,
+      "cards": [
+        "Abrupt Decay",
+        "Dovin's Veto",
+        "Niv-Mizzet, Supreme",
+        "Surrak Dragonclaw",
+        "Sylvan Caryatid"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 5
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 5,
+      "cards": [
+        "Kolaghan's Command",
+        "Niv-Mizzet, Supreme",
+        "Rest in Peace",
+        "Unmoored Ego"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Kolaghan's Command",
+        "Niv-Mizzet, Supreme",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 10,
+      "cards": [
+        "Ancient Cornucopia",
+        "Niv-Mizzet Reborn",
+        "Up the Beanstalk"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Niv-Mizzet Reborn"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Ancient Cornucopia",
+        "Niv-Mizzet Reborn"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Thoughtseize"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 40,
+      "cards": [
+        "Ancient Cornucopia",
+        "Bleachbone Verge",
+        "Blood Crypt",
+        "Breeding Pool",
+        "Fabled Passage",
+        "Floodfarm Verge",
+        "Hushwood Verge",
+        "Indatha Triome",
+        "Jetmir's Garden",
+        "Ketria Triome",
+        "Niv-Mizzet Reborn",
+        "Overgrown Tomb",
+        "Raugrin Triome",
+        "Sacred Foundry",
+        "Spara's Headquarters",
+        "Stomping Ground",
+        "Sunbillow Verge",
+        "Sylvan Caryatid",
+        "Temple Garden",
+        "Wastewood Verge",
+        "Watery Grave",
+        "Xander's Lounge",
+        "Zagoth Triome",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 40,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 35,
+      "cards": [
+        "Bleachbone Verge",
+        "Blood Crypt",
+        "Breeding Pool",
+        "Fabled Passage",
+        "Floodfarm Verge",
+        "Forest",
+        "Hushwood Verge",
+        "Indatha Triome",
+        "Island",
+        "Jetmir's Garden",
+        "Ketria Triome",
+        "Mountain",
+        "Overgrown Tomb",
+        "Plains",
+        "Raugrin Triome",
+        "Sacred Foundry",
+        "Spara's Headquarters",
+        "Stomping Ground",
+        "Sunbillow Verge",
+        "Swamp",
+        "Temple Garden",
+        "Wastewood Verge",
+        "Watery Grave",
+        "Xander's Lounge",
+        "Zagoth Triome",
+        "Ziatora's Proving Ground"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 3,
+      "cards": [
+        "Professor Dellian Fel"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.28
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abrupt Decay",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Cornucopia",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Beza, the Bounding Spring",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bleachbone Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bring to Light",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Culling Ritual",
+      "roles": [
+        "removal",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dovin's Veto",
+      "roles": [
+        "counterspells",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabled Passage",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Floodfarm Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hushwood Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Indatha Triome",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jetmir's Garden",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ketria Triome",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Knight of Autumn",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kolaghan's Command",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Niv-Mizzet Reborn",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Niv-Mizzet, Supreme",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Omnath, Locus of Creation",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Professor Dellian Fel",
+      "roles": [
+        "card_advantage",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raugrin Triome",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Foundry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spara's Headquarters",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stomping Ground",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunbillow Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Surrak Dragonclaw",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sylvan Caryatid",
+      "roles": [
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ultima",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unmoored Ego",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Up the Beanstalk",
+      "roles": [
+        "card_advantage",
+        "engines"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wastewood Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Xander's Lounge",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yorion, Sky Nomad",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zagoth Triome",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ziatora's Proving Ground",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play Expressive Iteration on turn 3 or later to guarantee drawing two cards and better filter for late-game answers.",
+    "Use Growth Spiral to search for lands only when necessary, ideally after ensuring a free land drop to trigger Omnath's ability.",
+    "Double-spell with Dreadbore and another removal spell to efficiently clear threats while holding up instant-speed interaction.",
+    "Prioritize casting Sylvan Caryatid on turn 2 over Growth Spiral for better blocking and survival against removal.",
+    "Save Deafening Clarion for when you have a Niv, Omnath, or Scarab God in play to maximize life gain swings."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play a triome or basic land on turn 1 to fix mana and enable turn 2 plays."
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Sylvan Caryatid or Growth Spiral on turn 2 to accelerate to four mana and block small creatures."
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early removal like Dreadbore or Abrupt Decay to answer aggressive threats."
+    }
+  ],
+  "kill_priority": [
+    "Ancient Cornucopia",
+    "Niv-Mizzet Reborn",
+    "Up the Beanstalk",
+    "Professor Dellian Fel",
+    "Beza, the Bounding Spring",
+    "Bring to Light",
+    "Elesh Norn, Mother of Machines",
+    "Knight of Autumn"
+  ],
+  "interaction_to_disrupt": [
+    "Dovin's Veto",
+    "Abrupt Decay",
+    "Niv-Mizzet, Supreme",
+    "Surrak Dragonclaw",
+    "Sylvan Caryatid",
+    "Culling Ritual",
+    "Knight of Autumn",
+    "Kolaghan's Command"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/niv-to-light.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

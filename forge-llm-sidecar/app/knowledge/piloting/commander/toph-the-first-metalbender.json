@@ -1,0 +1,123 @@
+{
+  "archetype": "Toph, the First Metalbender",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck leverages early mana acceleration and artifact synergy to out-value opponents through resilient threats and incremental board advantage, aiming to win against control and combo by establishing an unbreakable board state while outpacing aggro with efficient removal and clock pressure.",
+  "win_conditions": [
+    "Toph with full board support, heavy artifact synergies, or direct damage spells.",
+    "Win by establishing a board state that requires multiple answers to clear, then pressure for lethal."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep any hand with at least two lands and one of Sol Ring, Arcane Signet, or a turn-1 playable creature/spell.",
+      "Prioritize hands with 2-3 lands and two mana rocks or ramp spells."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 0-1 lands, or 3+ lands with no playable turn-1 or turn-2 spells."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring or Arcane Signet if possible.",
+      "Turn 2: Play a second land, cast Signet or ramp into Toph or a key artifact/creature.",
+      "If opening with Toph, ensure you have at least two lands and a cantrip or protection spell to protect it.",
+      "Sequence lands to ensure colored mana availability for Toph's abilities or key removal."
+    ],
+    "mid_game": [
+      "Prioritize maintaining open mana for interaction and Toph's abilities.",
+      "Don't overcommit to the board if you lack answers.",
+      "Use mana rocks to fuel late-game spells and manage hand size by trading resources for card advantage when behind.",
+      "Commit threats when you have removal or a board wipe ready.",
+      "Hold back if opponents have sweepers or if you're vulnerable to targeted removal.",
+      "Use Toph's abilities to stabilize rather than overextend."
+    ],
+    "late_game": [
+      "Toph with full board support, heavy artifact synergies, or direct damage spells.",
+      "Win by establishing a board state that requires multiple answers to clear, then pressure for lethal.",
+      "Go all-in when you have card advantage, removal for key threats, and opponents are low on interaction.",
+      "Commit when you can swing for lethal or establish a board that opponents can't clear in one turn."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Toph, the First Metalbender",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overcommitting to Toph without protection or answers.",
+    "Always keep open mana for interaction.",
+    "Track opponent's graveyard and hand size.",
+    "Use mana rocks strategically to enable surprise attacks.",
+    "Be mindful of the format's power level and adjust accordingly."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, redundant threats. Cast spells in response to each other. Use mana rocks to cast multiple spells in a turn. Avoid overcommitting to single high-value spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure. Use artifact hate and targeted removal. Don't let them stabilize; trade efficiently and disrupt their mana base.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize board wipes and efficient removal. Hold up interaction for key threats. Use life gain if available. Stabilize by turn 3-4 and transition to a controlling midgame.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure the board early. Use artifact synergies to bypass control's removal. Out-value them with card draw and resilient threats. Force them to use answers on low-value targets.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card draw and value engines. Use targeted removal for key artifacts. Control the board with wipes when ahead. Out-value them in the late game.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath of God, Damnation), artifact hate (Disenchant, Abrade), and combo win conditions.",
+    "Note when opponents tap out for key spells.",
+    "Track graveyard contents for reanimation or storm threats."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

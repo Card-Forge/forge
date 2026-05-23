@@ -1,0 +1,205 @@
+{
+  "archetype": "Beanstalk Control (Non-Yorion)",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/beanstalk-control-non-yorion.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 2,
+      "name": "Baleful Strix"
+    },
+    {
+      "qty": 1,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 1,
+      "name": "Bayou"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Kaito, Bane of Nightmares"
+    },
+    {
+      "qty": 1,
+      "name": "Life from the Loam"
+    },
+    {
+      "qty": 1,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Murderous Cut"
+    },
+    {
+      "qty": 2,
+      "name": "Murktide Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Sanctuary"
+    },
+    {
+      "qty": 3,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 4,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 3,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Rakshasa's Bargain"
+    },
+    {
+      "qty": 1,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 1,
+      "name": "Sheoldred's Edict"
+    },
+    {
+      "qty": 1,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 2,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 2,
+      "name": "Tropical Island"
+    },
+    {
+      "qty": 2,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 3,
+      "name": "Up the Beanstalk"
+    },
+    {
+      "qty": 1,
+      "name": "Uro, Titan of Nature's Wrath"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 3,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 1,
+      "name": "Witherbloom Command"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 1,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 1,
+      "name": "Carpet of Flowers"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Pernicious Deed"
+    },
+    {
+      "qty": 1,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 1,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Torpor Orb"
+    },
+    {
+      "qty": 1,
+      "name": "Toxic Deluge"
+    }
+  ]
+}

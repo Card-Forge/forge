@@ -1,0 +1,440 @@
+{
+  "schema_version": 1,
+  "name": "Tron",
+  "format": "modern",
+  "colors": [
+    "U"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Tron is a Modern archetype focused on ramping mana by assembling Urza's Mine, Urza's Tower, and Urza's Power Plant to generate seven mana by turn three. Once the combo is assembled, the deck wins by casting gigantic creatures, using taxing artifacts, and controlling the board with versatile removal.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 2,
+      "cards": [
+        "Trinisphere"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 24,
+      "cards": [
+        "Devourer of Destiny",
+        "Dress Down",
+        "Force of Negation",
+        "Kozilek's Command",
+        "Relic of Progenitus",
+        "Ugin, Eye of the Storms",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 7
+    },
+    "dig_draw": {
+      "target_count": 11,
+      "cards": [
+        "Devourer of Destiny",
+        "Force of Negation",
+        "Stock Up"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Expedition Map",
+        "Ugin, Eye of the Storms"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 17,
+      "cards": [
+        "Devourer of Destiny",
+        "Emrakul, the Aeons Torn",
+        "Emrakul, the Promised End",
+        "Force of Negation",
+        "Subtlety",
+        "Tishana's Tidebinder",
+        "Ugin, Eye of the Storms"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 11,
+      "cards": [
+        "Devourer of Destiny",
+        "Kozilek's Command",
+        "Otawara, Soaring City",
+        "Talisman of Curiosity"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Force of Negation"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 10,
+      "cards": [
+        "Consign to Memory",
+        "Force of Negation",
+        "Mystical Dispute"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 6,
+      "cards": [
+        "Emrakul, the Aeons Torn",
+        "Emrakul, the Promised End",
+        "Force of Negation"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 21,
+      "cards": [
+        "Abstergo Entertainment",
+        "Devourer of Destiny",
+        "Emrakul, the Aeons Torn",
+        "Emrakul, the Promised End",
+        "Force of Negation",
+        "Kozilek's Command",
+        "Portent of Calamity",
+        "Relic of Progenitus"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 6,
+      "cards": [
+        "Abstergo Entertainment",
+        "Otawara, Soaring City",
+        "Ugin's Labyrinth"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Ugin, Eye of the Storms"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 19,
+      "cards": [
+        "Devourer of Destiny",
+        "Expedition Map",
+        "Force of Negation",
+        "Urza's Mine",
+        "Urza's Tower"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Force of Negation"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 29,
+      "cards": [
+        "Abstergo Entertainment",
+        "Force of Negation",
+        "Otawara, Soaring City",
+        "Snow-Covered Island",
+        "Trinisphere",
+        "Ugin's Labyrinth",
+        "Ugin, Eye of the Storms",
+        "Urza's Mine",
+        "Urza's Power Plant",
+        "Urza's Tower"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 2
+    },
+    "lands": {
+      "target_count": 22,
+      "cards": [
+        "Abstergo Entertainment",
+        "Island",
+        "Otawara, Soaring City",
+        "Snow-Covered Island",
+        "Ugin's Labyrinth",
+        "Urza's Mine",
+        "Urza's Power Plant",
+        "Urza's Tower"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 4,
+      "cards": [
+        "Ugin, Eye of the Storms"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.35
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abstergo Entertainment",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Devourer of Destiny",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emrakul, the Aeons Torn",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emrakul, the Promised End",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Expedition Map",
+      "roles": [
+        "combo_pieces",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kozilek's Command",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Relic of Progenitus",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Trinisphere",
+      "roles": [
+        "mana_fixing",
+        "mana_reducers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ugin's Labyrinth",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ugin, Eye of the Storms",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "mana_fixing",
+        "planeswalker_threats",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Mine",
+      "roles": [
+        "combo_pieces",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Power Plant",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Tower",
+      "roles": [
+        "combo_pieces",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play a second Urza's Tower after assembling the combo for extra mana.",
+    "Cast Expedition Map on turn 1 with two Tron pieces to crack on turn 2.",
+    "Discard Emrakul, the World Anew with The Underworld Cookbook to cast it for 6 mana via madness.",
+    "Reset The One Ring by playing another copy to avoid the life tax or maintain an indestructible attacker.",
+    "Use Karn, the Great Creator to fetch artifacts exiled by Devourer of Destiny or from the opponent's graveyard."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Dedicate turns 1 and 2 to assembling three different Tron lands"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Expedition Map on turn 1 if holding two Tron pieces to crack on turn 2"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Ugin's Labyrinth to enable a turn 1 Mind Stone for a turn 2 4-drop"
+    }
+  ],
+  "kill_priority": [
+    "Ugin, Eye of the Storms",
+    "Devourer of Destiny",
+    "Expedition Map",
+    "Force of Negation",
+    "Urza's Mine",
+    "Urza's Tower",
+    "Emrakul, the Aeons Torn",
+    "Emrakul, the Promised End"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Force of Negation",
+    "Mystical Dispute",
+    "Emrakul, the Aeons Torn",
+    "Emrakul, the Promised End",
+    "Devourer of Destiny",
+    "Kozilek's Command",
+    "Otawara, Soaring City"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/tron.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

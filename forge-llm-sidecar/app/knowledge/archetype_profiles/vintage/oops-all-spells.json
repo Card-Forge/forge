@@ -1,0 +1,370 @@
+{
+  "schema_version": 1,
+  "name": "Oops! All Spells",
+  "format": "vintage",
+  "colors": [
+    "W",
+    "U",
+    "B"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 61,
+  "macro_plan": "Oops! All Spells is a Vintage control archetype that leverages instant-speed spellcasting and powerful counters to dictate the pace of the game. By combining cheap mana acceleration with versatile interaction, the deck aims to stabilize early, outdraw opponents, and close games with efficient threats or recursive value engines. The W/U/B color identity provides a robust suite of removal, draw, and countermagic tailored to the Vintage metagame.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Dark Ritual"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 1,
+      "cards": [
+        "Jack-o'-Lantern"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 1,
+      "cards": [
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Summoner's Pact"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 5,
+      "cards": [
+        "Pact of Negation",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 47,
+      "cards": [
+        "Agadeem's Awakening",
+        "Balustrade Spy",
+        "Boggart Trawler",
+        "Chancellor of the Annex",
+        "Elvish Spirit Guide",
+        "Fell the Profane",
+        "Grief",
+        "Mox Emerald",
+        "Mox Jet",
+        "Narcomoeba",
+        "Pact of Negation",
+        "Poxwalkers",
+        "Thassa's Oracle",
+        "Undercity Informer",
+        "Unmask",
+        "Wild Cantor"
+      ],
+      "mainboard_count": 44,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 5,
+      "cards": [
+        "Dread Return",
+        "Force of Vigor"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 5,
+      "cards": [
+        "Mental Misstep",
+        "Pact of Negation"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 5,
+      "cards": [
+        "Pact of Negation",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 22,
+      "cards": [
+        "Balustrade Spy",
+        "Bridge from Below",
+        "Cabal Therapy",
+        "Dread Return",
+        "Jack-o'-Lantern",
+        "Leyline of the Void",
+        "Memory's Journey",
+        "Narcomoeba",
+        "Poxwalkers",
+        "Undercity Informer"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 7,
+      "cards": [
+        "Cabal Therapy",
+        "Dread Return",
+        "Jack-o'-Lantern",
+        "Memory's Journey",
+        "Poxwalkers"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Poxwalkers"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 5,
+      "cards": [
+        "Pact of Negation",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Pact of Negation"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Pact of Negation",
+        "Sickening Shoal"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 8,
+      "cards": [
+        "Black Lotus",
+        "Jack-o'-Lantern",
+        "Lotus Petal",
+        "Pact of Negation",
+        "Wild Cantor"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.17
+  },
+  "dual_role_cards": [
+    {
+      "card": "Balustrade Spy",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cabal Therapy",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dread Return",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jack-o'-Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Memory's Journey",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narcomoeba",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pact of Negation",
+      "roles": [
+        "combo_pieces",
+        "counterspells",
+        "hate_pieces",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Poxwalkers",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thassa's Oracle",
+      "roles": [
+        "dig_draw",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Informer",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wild Cantor",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always hold up Pact of Negation's mana requirement before committing to other spells",
+    "Cast Beseech the Mirror after your primary spell resolves to ensure the copy targets the correct state",
+    "Use Chrome Mox to fix mana for counterspells rather than accelerating threats early",
+    "Prioritize countering the opponent's most impactful spell over their mana sources",
+    "Common mistake: overcommitting to a single win condition without backup."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing lands and Chrome Mox to enable turn-one or turn-two interaction"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Pact of Negation or other counters to disrupt opponent's key plays"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up mana to respond to threats rather than committing resources prematurely"
+    }
+  ],
+  "kill_priority": [
+    "Poxwalkers",
+    "Pact of Negation",
+    "Thassa's Oracle",
+    "Agadeem's Awakening",
+    "Balustrade Spy",
+    "Boggart Trawler",
+    "Chancellor of the Annex",
+    "Elvish Spirit Guide"
+  ],
+  "interaction_to_disrupt": [
+    "Mental Misstep",
+    "Pact of Negation",
+    "Thassa's Oracle",
+    "Dread Return",
+    "Force of Vigor",
+    "Sickening Shoal"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/oops-all-spells.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

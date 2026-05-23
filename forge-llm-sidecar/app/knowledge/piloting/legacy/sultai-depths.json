@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with multiple lands and early accelerators",
       "Combinations including Crop Rotation and a non-basic land",
-      "At least two sources of mana by turn two"
+      "At least two sources of mana by turn two",
+      "Keep hands with 2-3 lands (including a fetch or shockland), at least one fast mana source (Lotus Petal, Elvish Spirit Guide, or Crop Rotation), and a removal or discard spell.",
+      "Keep hands that can play a land and cast a cantrip/removal on turn 1."
     ],
     "mulligan_criteria": [
       "Hands lacking early mana acceleration",
       "Three or more cards of the same land type without fetch synergy",
-      "Hands missing Elvish Spirit Guide or Lotus Petal"
+      "Hands missing Elvish Spirit Guide or Lotus Petal",
+      "Mulligan if you have 0-1 lands, no fast mana, or only threats with no support."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and accelerators to establish mana base",
       "Use Crop Rotation to find optimal lands while cycling",
-      "Deploy Elvish Spirit Guide for early board presence and card draw"
+      "Deploy Elvish Spirit Guide for early board presence and card draw",
+      "Turn 1: Play a land, cast Lotus Petal/Elvish Spirit Guide, and use Crop Rotation on a fetch or basic to find a shockland or Depths.",
+      "Cast Thoughtseize/Duress to disrupt.",
+      "Turn 2: Develop mana, cast removal (Fatal Push/Flaw) or dig for Undercity Regent.",
+      "Prioritize establishing a stable mana base and graveyard resources.",
+      "If facing aggro, hold up removal for turn 1/2 threats."
     ],
     "mid_game": [
       "Convert accumulated mana into mid-sized threats",
       "Maintain board control with token generation",
-      "Cycle through deck to find win conditions"
+      "Cycle through deck to find win conditions",
+      "Conserve fast mana for critical turns.",
+      "Use Crop Rotation to fix mana or find Depths.",
+      "Manage your graveyard carefully\u2014avoid unnecessary sac outlets unless generating immediate value.",
+      "Prioritize card advantage to out-resource control decks.",
+      "Commit Undercity Regent only when you can protect it or when the board is clear.",
+      "Use discard to remove key threats before they resolve."
     ],
     "late_game": [
       "Cast oversized finishers ahead of schedule",
       "Leverage mana advantage to out-resource opponents",
-      "Apply consistent pressure with recurring threats"
+      "Apply consistent pressure with recurring threats",
+      "Undercity Regent (often 10+ power) or Gravecrawler.",
+      "Win by deploying Regent with protection, or by out-graveyarding with Gravecrawler + card draw.",
+      "When you have a clear path to attack, the opponent has no sweepers, or you can protect your threat with discard/removal.",
+      "Go all-in if you're ahead on board and the opponent is out of interactive resources."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Prioritize playing Lotus Petal before Crop Rotation to maximize turn two mana",
     "Cycle Crop Rotation only when you have sufficient mana sources in play",
-    "Hold Elvish Spirit Guide in hand if you need to untap lands for a big play"
+    "Hold Elvish Spirit Guide in hand if you need to untap lands for a big play",
+    "Depths is a key tutor",
+    "don't overextend without it.",
+    "Crop Rotation is versatile",
+    "use it to find shocklands or Depths, not just basics.",
+    "Watch for Tron's mana rocks",
+    "early discard is crucial."
   ],
   "matchups": [
     {
@@ -87,15 +111,34 @@
         "Win condition setup",
         "Protection spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells. Cast threats in response to their interaction. Use Depths to tutor around counters. Overcommit with multiple threats if possible to force a trade.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Disrupt their mana with discard and removal. Use fast mana to race or stabilize. Sideboard in land destruction or hate. Prioritize removing their mana rocks early.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Protect your Regent. Use Depths to tutor for the right threat. Prioritize graveyard advantage and track their interaction to time your attacks.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Counterspell packages",
-    "Board wipe effects"
+    "Board wipe effects",
+    "Watch for counterspells, sweepers, and graveyard hate.",
+    "Note if the opponent is playing around Depths (hold up interaction).",
+    "Track their graveyard size for Gravecrawler/Regent triggers and monitor their mana development for Tron or combo turns."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:40:32+00:00",
     "model": "local-model",
@@ -111,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

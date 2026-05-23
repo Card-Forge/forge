@@ -1,0 +1,358 @@
+{
+  "schema_version": 1,
+  "name": "Necrodominance Combo",
+  "format": "legacy",
+  "colors": [
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Necrodominance Combo is a Legacy U/B/G deck that leverages fast artifact mana to accelerate into Beseech the Mirror. By copying key permanents early, the deck generates overwhelming value, infinite mana, or direct win conditions before opponents can stabilize. Success relies on precise sequencing and protecting the combo engine from disruption.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 12,
+      "cards": [
+        "Cabal Ritual",
+        "Dark Ritual",
+        "Manamorphose"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 13,
+      "cards": [
+        "Borne Upon a Wind",
+        "Manamorphose",
+        "Necrodominance",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 7,
+      "cards": [
+        "Beseech the Mirror",
+        "Summoner's Pact"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 7,
+      "cards": [
+        "Beseech the Mirror",
+        "Borne Upon a Wind"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 19,
+      "cards": [
+        "Beseech the Mirror",
+        "Elvish Spirit Guide",
+        "Foundation Breaker",
+        "Simian Spirit Guide",
+        "Tendrils of Agony",
+        "Unmask",
+        "Valakut Awakening",
+        "Wild Cantor"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 1
+    },
+    "removal": {
+      "target_count": 10,
+      "cards": [
+        "Beseech the Mirror",
+        "Force of Vigor",
+        "Foundation Breaker",
+        "Nature's Claim",
+        "Slaughter Pact"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Pact of Negation"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 6,
+      "cards": [
+        "Beseech the Mirror",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Beseech the Mirror"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 16,
+      "cards": [
+        "Beseech the Mirror",
+        "Cabal Ritual",
+        "Leyline of the Void",
+        "Necrodominance"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Beseech the Mirror"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 3,
+      "cards": [
+        "Borne Upon a Wind"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Beseech the Mirror",
+        "Lotus Petal"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Duress"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Beseech the Mirror",
+        "Chrome Mox",
+        "Gemstone Mine",
+        "Lotus Petal",
+        "Vault of Whispers",
+        "Wild Cantor"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 8,
+      "cards": [
+        "Gemstone Mine",
+        "Vault of Whispers"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.28
+  },
+  "dual_role_cards": [
+    {
+      "card": "Beseech the Mirror",
+      "roles": [
+        "combo_pieces",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Borne Upon a Wind",
+      "roles": [
+        "card_advantage",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cabal Ritual",
+      "roles": [
+        "graveyard_enablers",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Foundation Breaker",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gemstone Mine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lotus Petal",
+      "roles": [
+        "combo_pieces",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Manamorphose",
+      "roles": [
+        "card_advantage",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Necrodominance",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vault of Whispers",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veil of Summer",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wild Cantor",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always play Chrome Mox before Lotus Petal to maximize color fixing early",
+    "Hold up mana for Beseech the Mirror before committing to other spells",
+    "Prioritize copying permanents that generate mana or card advantage first",
+    "Common mistake: overcommitting to casting Beseech the Mirror when you lack follow-up or face hard counters.",
+    "Always keep a backup plan in hand."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing Chrome Mox and Lotus Petal to enable early Beseech the Mirror"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play lands and hold up colors for U/B/G spells"
+    },
+    {
+      "trigger": "early game",
+      "line": "Avoid unnecessary combat to preserve combo pieces"
+    }
+  ],
+  "kill_priority": [
+    "Beseech the Mirror",
+    "Borne Upon a Wind",
+    "Lotus Petal",
+    "Elvish Spirit Guide",
+    "Foundation Breaker",
+    "Simian Spirit Guide",
+    "Tendrils of Agony",
+    "Unmask"
+  ],
+  "interaction_to_disrupt": [
+    "Pact of Negation",
+    "Beseech the Mirror",
+    "Veil of Summer",
+    "Force of Vigor",
+    "Foundation Breaker",
+    "Nature's Claim",
+    "Slaughter Pact",
+    "Duress"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/necrodominance-combo.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

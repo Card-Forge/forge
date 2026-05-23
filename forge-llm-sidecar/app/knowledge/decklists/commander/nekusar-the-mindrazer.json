@@ -1,0 +1,348 @@
+{
+  "archetype": "Nekusar, the Mindrazer",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/nekusar-the-mindrazer.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archmage's Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Blue Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Chaos Warp"
+    },
+    {
+      "qty": 1,
+      "name": "Chromatic Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Commander's Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Commit // Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Compulsive Research"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Cyclonic Rift"
+    },
+    {
+      "qty": 1,
+      "name": "Darkslick Shores"
+    },
+    {
+      "qty": 1,
+      "name": "Day's Undoing"
+    },
+    {
+      "qty": 1,
+      "name": "Daze"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Decorum Dissertation"
+    },
+    {
+      "qty": 1,
+      "name": "Deep Analysis"
+    },
+    {
+      "qty": 1,
+      "name": "Diabolic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Dr. Eggman"
+    },
+    {
+      "qty": 1,
+      "name": "Eden, Seat of the Sanctum"
+    },
+    {
+      "qty": 1,
+      "name": "Evolving Wilds"
+    },
+    {
+      "qty": 1,
+      "name": "Exsanguinate"
+    },
+    {
+      "qty": 1,
+      "name": "Fabricate"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Mastermind"
+    },
+    {
+      "qty": 1,
+      "name": "Faithless Looting"
+    },
+    {
+      "qty": 1,
+      "name": "Fate Unraveler"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Despair"
+    },
+    {
+      "qty": 1,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 1,
+      "name": "High Fae Trickster"
+    },
+    {
+      "qty": 1,
+      "name": "Howling Mine"
+    },
+    {
+      "qty": 1,
+      "name": "In Garruk's Wake"
+    },
+    {
+      "qty": 1,
+      "name": "Iron Maiden"
+    },
+    {
+      "qty": 6,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Jace Beleren"
+    },
+    {
+      "qty": 1,
+      "name": "Knuckles the Echidna"
+    },
+    {
+      "qty": 1,
+      "name": "Languish"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Bolt"
+    },
+    {
+      "qty": 1,
+      "name": "Liliana Vess"
+    },
+    {
+      "qty": 1,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Magus of the Wheel"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Drain"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Sculpt"
+    },
+    {
+      "qty": 1,
+      "name": "Midnight Clock"
+    },
+    {
+      "qty": 1,
+      "name": "Mindcrank"
+    },
+    {
+      "qty": 1,
+      "name": "Mount Doom"
+    },
+    {
+      "qty": 6,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Nekusar, the Mindrazer"
+    },
+    {
+      "qty": 1,
+      "name": "Ob Nixilis, the Hate-Twisted"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Pongify"
+    },
+    {
+      "qty": 1,
+      "name": "Power Word Kill"
+    },
+    {
+      "qty": 1,
+      "name": "Psychosis Crawler"
+    },
+    {
+      "qty": 1,
+      "name": "Rakdos Guildgate"
+    },
+    {
+      "qty": 1,
+      "name": "Rankle, Master of Pranks"
+    },
+    {
+      "qty": 1,
+      "name": "Razorkin Needlehead"
+    },
+    {
+      "qty": 1,
+      "name": "Resonating Lute"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Reef"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Spire"
+    },
+    {
+      "qty": 1,
+      "name": "Scavenger Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Shadow the Hedgehog"
+    },
+    {
+      "qty": 1,
+      "name": "Shipwreck Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Shivan Reef"
+    },
+    {
+      "qty": 1,
+      "name": "Shoot the Sheriff"
+    },
+    {
+      "qty": 1,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 1,
+      "name": "Sleight of Hand"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 1,
+      "name": "Stroke of Genius"
+    },
+    {
+      "qty": 1,
+      "name": "Sublime Epiphany"
+    },
+    {
+      "qty": 1,
+      "name": "Subtlety"
+    },
+    {
+      "qty": 1,
+      "name": "Sulfurous Springs"
+    },
+    {
+      "qty": 6,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swiftfoot Boots"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi's Ageless Insight"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Deceit"
+    },
+    {
+      "qty": 1,
+      "name": "Tergrid, God of Fright"
+    },
+    {
+      "qty": 1,
+      "name": "Terramorphic Expanse"
+    },
+    {
+      "qty": 1,
+      "name": "The Reaver Cleaver"
+    },
+    {
+      "qty": 1,
+      "name": "Three Steps Ahead"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Underground River"
+    },
+    {
+      "qty": 1,
+      "name": "Unexpected Windfall"
+    },
+    {
+      "qty": 1,
+      "name": "Windfall"
+    },
+    {
+      "qty": 1,
+      "name": "Xantcha, Sleeper Agent"
+    }
+  ],
+  "sideboard": []
+}

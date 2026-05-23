@@ -13,12 +13,16 @@
     "keep_criteria": [
       "Hands with two or more lands and a one-drop threat",
       "Combinations featuring Nature's Rhythm and a cheap creature",
-      "Hands containing Quantum Riddler with early interaction or ramp"
+      "Hands containing Quantum Riddler with early interaction or ramp",
+      "Keep any hand with a playable land (fetch/shock/basic) and a turn-1 or turn-2 threat or interaction.",
+      "Prioritize hands with 2-3 lands and at least one of Badgermole Cub, Quantum Riddler, or Nature's Rhythm.",
+      "Keep hands with 3+ lands if they include a turn-2 play."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands and no early plays",
       "Hands lacking curve or card advantage engines",
-      "Hands with only high-cost threats and no acceleration"
+      "Hands with only high-cost threats and no acceleration",
+      "Mulligan pure curve-outs, triple-land hands, or hands lacking early interaction against Izzet spells/landfall."
     ],
     "examples": []
   },
@@ -26,17 +30,32 @@
     "early_game": [
       "Play lands and cheap creatures like Badgermole Cub to establish presence",
       "Hold interaction for opponent's early threats",
-      "Use Nature's Rhythm to untap lands or generate extra mana for turn two or three plays"
+      "Use Nature's Rhythm to untap lands or generate extra mana for turn two or three plays",
+      "Turn 1: Play a land, optionally cast a cheap interaction or hold for a threat.",
+      "Turn 2: Deploy Badgermole Cub or Nature's Rhythm if mana allows, or play a land and hold up interaction.",
+      "Sequence lands to ensure W/U/G availability by turn 3.",
+      "If facing aggro, prioritize cheap removal/counters over developing the board.",
+      "If facing control, establish a threat and hold up counterspells for key spells."
     ],
     "mid_game": [
       "Deploy Quantum Riddler to filter the deck and find answers or threats",
       "Trade efficiently to preserve your growing creatures",
-      "Begin casting larger threats accelerated by your mana base"
+      "Begin casting larger threats accelerated by your mana base",
+      "Preserve mana for flexible interaction until threats are committed.",
+      "Use the graveyard strategically for recursion but avoid overcommitting to a single engine.",
+      "Manage hand size by trading interaction for card advantage when ahead.",
+      "Commit threats only when you have answer coverage or when the board state justifies the risk.",
+      "Hold back against sweepers or mass removal.",
+      "Prioritize trading low-value creatures for high-value threats."
     ],
     "late_game": [
       "Focus on board control and value generation",
       "Let Badgermole Cub grow into a resilient blocker and attacker",
-      "Use card advantage to outmaneuver opponent's late-game resources"
+      "Use card advantage to outmaneuver opponent's late-game resources",
+      "Close games with resilient threats that can trade into removal, or by chaining recursion engines to generate incremental damage/card advantage.",
+      "Use Nature's Rhythm to fuel spells or draw into game-ending threats.",
+      "Go all-in when you have card advantage, board presence, and sufficient interaction to handle their response.",
+      "Commit when the opponent is at low life or has no answers to your key threats."
     ]
   },
   "key_cards": [
@@ -60,7 +79,10 @@
     "Hold removal or interaction until the opponent commits to a threat",
     "Cast Nature's Rhythm before deploying Quantum Riddler to maximize mana efficiency",
     "Let Badgermole Cub grow before trading it into larger blockers",
-    "Prioritize card advantage over board wipes in close games"
+    "Prioritize card advantage over board wipes in close games",
+    "Common mistakes include overcommitting to the board without answer coverage, mismanaging mana for flexible interaction, and failing to track opponent's graveyard or counterspells.",
+    "Unique interactions include using Nature's Rhythm to fuel recursion loops and leveraging Quantum Riddler to disrupt opponent's spell sequencing.",
+    "Always prioritize game plan consistency over flashy plays."
   ],
   "matchups": [
     {
@@ -89,16 +111,37 @@
         "Value creatures",
         "Hand disruption"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Bait counters with cheap spells, use split-second or uncounterable threats, and leverage recursion to out-value their interaction. Play around their main counters by holding up protection or using layered spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their land drops, use efficient removal on key ramp creatures, and stabilize with sweepers or lifegain. Out-grind them with card advantage once they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by playing more efficiently, holding up interaction for their key engines, and leveraging card advantage. Trade up on creatures, use recursion to out-value their engines, and force them to make mistakes in the late game.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast one-drop creatures",
     "Board wipe spells",
     "Counterspell packages",
-    "Hand disruption"
+    "Hand disruption",
+    "Watch for Izzet players holding up counterspells on your key engines",
+    "bait them with cheap spells first.",
+    "Monitor Landfall decks for their land drops and trigger counts.",
+    "Track graveyard size for recursion threats.",
+    "Note when opponents start tapping out for big spells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:51:08+00:00",
     "model": "local-model",
@@ -114,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

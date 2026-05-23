@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with turn-one or turn-two creature plays",
       "Curves that include cheap removal or burn spells",
-      "Multiple one-mana creatures to establish early board presence"
+      "Multiple one-mana creatures to establish early board presence",
+      "Keep hands with 2-3 lands (preferably Mountains) and at least one source of early damage or removal (Lava Spike, Wrenn's Resolve, or a creature).",
+      "Keep any hand containing Kessig Flamebreather paired with 2-3 lands."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays or curve disruption",
       "Draws with only high-cost cards or no interaction",
-      "Lack of burn spells to close out games"
+      "Lack of burn spells to close out games",
+      "Mulligan pure land hands, hands with only high-cost spells, or hands with no early interaction/damage spells."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Play cheap creatures immediately to establish board presence",
       "Use one-mana threats to force early blockers or go face",
-      "Save mana for instant-speed burn to clear blockers or apply pressure"
+      "Save mana for instant-speed burn to clear blockers or apply pressure",
+      "Turn 1: Play a Mountain, cast Lava Spike or Wrenn's Resolve if possible, or hold mana for turn 2.",
+      "Turn 2: Play a second Mountain, cast Kessig Flamebreather.",
+      "Use its ability to ping opposing creatures or go face.",
+      "If the opponent plays a creature, use Wrenn's Resolve or Lava Spike to clear it.",
+      "Sequence lands to ensure you can cast Flamebreather on time without stalling."
     ],
     "mid_game": [
       "Cast Wrenn's Resolve on attacking creatures to push through blockers and draw cards",
       "Trade one-toughness creatures efficiently into larger threats",
-      "Use Lava Spike to remove key blockers or reduce opponent life total"
+      "Use Lava Spike to remove key blockers or reduce opponent life total",
+      "Keep mana flexible for instant-speed pingers and interaction.",
+      "Use Wrenn's Resolve to clear a threat and draw a card, maintaining card advantage.",
+      "The graveyard is generally irrelevant for this archetype, so do not worry about graveyard recursion or hate.",
+      "Avoid overcommitting to the board if the opponent has known sweepers.",
+      "Commit Kessig Flamebreather early to pressure, but be ready to protect it or hold it back if the opponent has spot removal.",
+      "Use pingers to clear key blockers before attacking."
     ],
     "late_game": [
       "Flood the board with additional cheap threats to overwhelm defenses",
       "Prioritize direct damage spells to finish the game quickly",
-      "Maintain pressure to prevent opponents from setting up late-game answers"
+      "Maintain pressure to prevent opponents from setting up late-game answers",
+      "Kessig Flamebreather pinging face repeatedly, combined with Lava Spike for the kill.",
+      "If Flamebreather is removed, use remaining burn spells to close out the game.",
+      "Ensure you have a Mountain in play to maximize Lava Spike's damage.",
+      "Go all-in when you have enough pingers to bypass blockers or when the opponent is at low life (\u22645).",
+      "Commit when you've cleared their board and they have no sweepers or interaction left.",
+      "Push damage aggressively when the opponent is forced to tap out for a threat."
     ]
   },
   "key_cards": [
@@ -58,7 +78,11 @@
   "sequencing_tips": [
     "Declare attackers before casting Wrenn's Resolve to maximize combat damage triggers",
     "Hold up red mana for instant-speed burn to respond to opponent plays",
-    "Trade one-toughness creatures into larger blockers to preserve your burn spells for the opponent"
+    "Trade one-toughness creatures into larger blockers to preserve your burn spells for the opponent",
+    "Common mistakes include overcommitting Kessig Flamebreather without considering removal, and hoarding mana instead of using pingers to clear blockers.",
+    "Always ensure you have a Mountain in play before casting Lava Spike to maximize its damage.",
+    "Wrenn's Resolve can target your own creatures if needed, but is best used on opponent threats.",
+    "Track opponent's mana carefully, as Mono Red Pingers wins by making them use interaction on low-impact threats."
   ],
   "matchups": [
     {
@@ -87,15 +111,35 @@
         "Card draw engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient spells that are hard to counter. Attack with Kessig Flamebreather to force interaction and make the opponent choose between blocking or taking damage. Use Wrenn's Resolve to clear blockers and draw into answers. Avoid overcommitting to the board when the opponent has open mana.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them aggressively. Do not engage in long games. Use pingers to clear their early threats and go face immediately. Prioritize damage spells over removal. Bring in more burn and less removal pre-sideboard if you expect a heavy ramp presence.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by using Wrenn's Resolve to draw into more pingers. Track their hand for Lava Spike to avoid overcommitting. Prioritize clearing their Kessig Flamebreather with Wrenn's Resolve or Lava Spike. Control the board with pingers and go face when they have no interaction left.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipe spells",
     "Cheap removal targeting one-toughness creatures",
-    "Life gain effects that extend the game"
+    "Life gain effects that extend the game",
+    "Watch for sweepers, big finishers, and combo pieces.",
+    "Opponents playing Blue Terror or Grixis Affinity will likely have spot removal or counters",
+    "track their mana to predict interaction.",
+    "Note when they tap out for a threat, as this is your window to ping their board or go face."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:26:03+00:00",
     "model": "local-model",
@@ -111,6 +155,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

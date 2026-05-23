@@ -1,0 +1,715 @@
+{
+  "schema_version": 1,
+  "name": "Wilhelt, the Rotcleaver",
+  "format": "commander",
+  "colors": [
+    "B",
+    "U"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "Generate a swarm of flying Zombie Warrior tokens, sacrifice them en masse to Wilhelt to pump him into a lethal threat, and close out the game quickly. This deck excels against slower, control, and combo archetypes that lack immediate answers to a massive flying attacker in a single turn.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "Deadly Dispute"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Cryptbreaker",
+        "Deadly Dispute",
+        "Distant Melody",
+        "Hordewing Skaab",
+        "Midnight Reaper",
+        "Rooftop Storm",
+        "Skullclamp",
+        "Undead Augur",
+        "Village Rites",
+        "Wilhelt, the Rotcleaver"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Archghoul of Thraben",
+        "Herald's Horn",
+        "Path of Ancestry",
+        "The Scarab God"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Hordewing Skaab"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 48,
+      "cards": [
+        "Accursed Marauder",
+        "Arcane Signet",
+        "Archghoul of Thraben",
+        "Bladestitched Skaab",
+        "Butcher Ghoul",
+        "Cemetery Reaper",
+        "Champion of the Perished",
+        "Crowded Crypt",
+        "Cryptbreaker",
+        "Death Baron",
+        "Dimir Signet",
+        "Diregraf Captain",
+        "Diregraf Colossus",
+        "Dreadhorde Invasion",
+        "Empty the Laboratory",
+        "Endless Ranks of the Dead",
+        "Fleshbag Marauder",
+        "Geralf, Visionary Stitcher",
+        "Geralf, the Fleshwright",
+        "Ghoulcaller Gisa",
+        "Gisa and Geralf",
+        "Gleaming Overseer",
+        "Grave Titan",
+        "Gravecrawler",
+        "Gray Merchant of Asphodel",
+        "Headless Rider",
+        "Hordewing Skaab",
+        "Lazotep Reaver",
+        "Liliana, Death's Majesty",
+        "Lord of the Accursed",
+        "Lost Monarch of Ifnir",
+        "Midnight Reaper",
+        "Necroduality",
+        "Noxious Ghoul",
+        "Open the Graves",
+        "Plague Belcher",
+        "Ravenous Rotbelly",
+        "Rise of the Dread Marn",
+        "Rooftop Storm",
+        "Rot Hulk",
+        "Sol Ring",
+        "Tainted Adversary",
+        "The Scarab God",
+        "Tomb Tyrant",
+        "Undead Augur",
+        "Wilhelt, the Rotcleaver",
+        "Zombie Master",
+        "Zul Ashur, Lich Lord"
+      ],
+      "mainboard_count": 48,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 12,
+      "cards": [
+        "Cemetery Reaper",
+        "Death Baron",
+        "Drown in the Loch",
+        "Feed the Swarm",
+        "Go for the Throat",
+        "Hordewing Skaab",
+        "Liliana, Death's Majesty",
+        "Midnight Reaper",
+        "Talisman of Dominance",
+        "The Scarab God",
+        "Underground River",
+        "Zombie Apocalypse"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Liliana, Death's Majesty",
+        "Zombie Apocalypse"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "Counterspell",
+        "Drown in the Loch",
+        "Negate"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Gleaming Overseer",
+        "Gray Merchant of Asphodel",
+        "Rooftop Storm",
+        "Zul Ashur, Lich Lord"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Cryptbreaker"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 20,
+      "cards": [
+        "Archghoul of Thraben",
+        "Army of the Damned",
+        "Cemetery Reaper",
+        "Diregraf Colossus",
+        "Drown in the Loch",
+        "Gisa and Geralf",
+        "Graf Harvest",
+        "Gravecrawler",
+        "Liliana, Death's Majesty",
+        "Lost Monarch of Ifnir",
+        "Mortuary Mire",
+        "Rise of the Dark Realms",
+        "Rooftop Storm",
+        "Rot Hulk",
+        "The Scarab God",
+        "Tomb Tyrant",
+        "Unholy Grotto",
+        "Victimize",
+        "Zombie Apocalypse",
+        "Zul Ashur, Lich Lord"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 15,
+      "cards": [
+        "Army of the Damned",
+        "Butcher Ghoul",
+        "Gisa and Geralf",
+        "Graf Harvest",
+        "Gravecrawler",
+        "Liliana, Death's Majesty",
+        "Lost Monarch of Ifnir",
+        "Mortuary Mire",
+        "Rot Hulk",
+        "The Scarab God",
+        "Tomb Tyrant",
+        "Unholy Grotto",
+        "Victimize",
+        "Zombie Apocalypse",
+        "Zul Ashur, Lich Lord"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Diregraf Colossus",
+        "Geralf, the Fleshwright"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Hordewing Skaab"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Rooftop Storm"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 13,
+      "cards": [
+        "Arcane Signet",
+        "Choked Estuary",
+        "Command Tower",
+        "Darkwater Catacombs",
+        "Deadly Dispute",
+        "Drowned Catacomb",
+        "Mortuary Mire",
+        "Path of Ancestry",
+        "Rooftop Storm",
+        "Sunken Hollow",
+        "Tainted Isle",
+        "Underground River",
+        "Unholy Grotto"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 36,
+      "cards": [
+        "Choked Estuary",
+        "Command Tower",
+        "Darkwater Catacombs",
+        "Drowned Catacomb",
+        "Island",
+        "Mortuary Mire",
+        "Path of Ancestry",
+        "Sunken Hollow",
+        "Swamp",
+        "Tainted Isle",
+        "Underground River",
+        "Unholy Grotto"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Liliana, Death's Majesty"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.24
+  },
+  "dual_role_cards": [
+    {
+      "card": "Arcane Signet",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archghoul of Thraben",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Army of the Damned",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Butcher Ghoul",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cemetery Reaper",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Choked Estuary",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cryptbreaker",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darkwater Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Dispute",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Death Baron",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Diregraf Colossus",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drown in the Loch",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drowned Catacomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Geralf, the Fleshwright",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gisa and Geralf",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gleaming Overseer",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Graf Harvest",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gravecrawler",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gray Merchant of Asphodel",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hordewing Skaab",
+      "roles": [
+        "card_advantage",
+        "payoff_cards",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Liliana, Death's Majesty",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lost Monarch of Ifnir",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Midnight Reaper",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mortuary Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rooftop Storm",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rot Hulk",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunken Hollow",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tainted Isle",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Scarab God",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tomb Tyrant",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undead Augur",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground River",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unholy Grotto",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Victimize",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wilhelt, the Rotcleaver",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zombie Apocalypse",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zul Ashur, Lich Lord",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistakes include pumping Wilhelt without enough sacrifice outlets, overcommitting to combat without protection, and ignoring graveyard hate.",
+    "Unique interactions: Rooftop Storm\u2019s flying synergy is crucial for maximizing damage.",
+    "Sacrifice outlets can target your own tokens for value, but watch out for \u201csacrifice\u201d hate like Rest in Peace or Leyline of the Void.",
+    "Always track opponent\u2019s hand size and mana to time your pump correctly."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Arcane Signet or a mana rock."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a second land, cast Wilhelt or a key sacrifice outlet/token generator."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence mana carefully to ensure you can activate Wilhelt\u2019s ability and sacrifice on the same turn if possible."
+    }
+  ],
+  "kill_priority": [
+    "Diregraf Colossus",
+    "Geralf, the Fleshwright",
+    "Hordewing Skaab",
+    "Liliana, Death's Majesty",
+    "Accursed Marauder",
+    "Arcane Signet",
+    "Archghoul of Thraben",
+    "Bladestitched Skaab"
+  ],
+  "interaction_to_disrupt": [
+    "Counterspell",
+    "Drown in the Loch",
+    "Negate",
+    "Gleaming Overseer",
+    "Gray Merchant of Asphodel",
+    "Rooftop Storm",
+    "Zul Ashur, Lich Lord",
+    "Cemetery Reaper"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/wilhelt-the-rotcleaver.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

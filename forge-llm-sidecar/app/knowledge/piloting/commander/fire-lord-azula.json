@@ -1,0 +1,121 @@
+{
+  "archetype": "Fire Lord Azula",
+  "format": "commander",
+  "strategy_type": "control",
+  "overview": "Fire Lord Azula is a value-control archetype that leverages targeted damage and card draw to out-resource opponents, winning through attrition, precise removal, and chipping away at life totals while maintaining card advantage.",
+  "win_conditions": [
+    "Fire Lord Azula's 2-damage ability targeting players, combined with burn spells or repeated taps, to close out games.",
+    "Use the 1-damage ability to draw cards and maintain pressure while chipping away at life totals."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (ideally including one of each color), Sol Ring or Arcane Signet, and at least one early interaction or turn-2 play."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 0-1 lands, no color fixers, or only high-cost cards with no way to cast them before turn 3."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, drop Sol Ring/Arcane Signet if possible.",
+      "Turn 2: Cast a cheap cantrip or removal, or play a second land.",
+      "Prioritize stabilizing the board and setting up mana for Azula by turn 4-5.",
+      "Avoid overextending into potential sweepers."
+    ],
+    "mid_game": [
+      "Prioritize keeping mana open for Azula's abilities and interaction.",
+      "Use card draw to maintain hand size and dig for answers.",
+      "Don't overcommit to the board if you can stabilize with removal or if you need to preserve mana for interaction.",
+      "Commit Azula when you have protection (counters, hexproof, or board state advantage) or can trade effectively.",
+      "Hold back if facing sweepers or if you need to preserve mana for interaction.",
+      "Use the 1-damage ability to clear small threats or chip life, and the 2-damage ability for key creatures or planeswalkers."
+    ],
+    "late_game": [
+      "Fire Lord Azula's 2-damage ability targeting players, combined with burn spells or repeated taps, to close out games.",
+      "Use the 1-damage ability to draw cards and maintain pressure while chipping away at life totals.",
+      "When you have protection (counters, hexproof, or board state advantage) and opponents are at low life or have no sweepers.",
+      "Go all-in when you can safely tap Azula repeatedly without fear of removal or sweepers."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Fire Lord Azula",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes: Over-tapping Azula without considering protection, ignoring mana screw, failing to track opponent's life totals.",
+    "Unique interactions: Azula's abilities can target yourself to draw cards, but be careful with life total.",
+    "Synergizes well with artifact ramp and burn spells.",
+    "Always track opponent's life totals and plan your damage output accordingly."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap cantrips to dig through, cast Azula at end step, or use mana rocks to cast it when they're tapped out. Bait counterspells with cheaper threats before committing your key pieces.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use removal on key ramp pieces, and don't let them get too far ahead. Disrupt their mana development with discard or targeted removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap removal, life gain, and board wipes. Transition to Azula once threats are cleared. Don't overcommit to the board early; focus on survival and card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats, use Azula to draw into answers, and exploit their mana denial. Bait counterspells and play around their sweepers by spreading threats across the board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war, use targeted removal efficiently, and time Azula's abilities to out-value them. Prioritize protection for your Azula and force unfavorable trades.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers, targeted removal, and combo pieces.",
+    "Note when opponents tap out or hold up mana for counterspells.",
+    "Track life totals closely, as Azula's win condition relies on consistent damage output."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

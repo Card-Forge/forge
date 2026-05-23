@@ -1,0 +1,524 @@
+{
+  "schema_version": 1,
+  "name": "Asmo Food",
+  "format": "modern",
+  "colors": [
+    "W",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Asmo Food is a quadrabonus tempo deck in Modern that leverages cheap persist creatures and Asmoranomardicadaistinaculdacar to generate relentless board presence. Archon of Cruelty provides critical life total manipulation and value generation upon death. The deck aims to outlast opponents through recursive value and aggressive pressure across W/B/R/G mana bases.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 30,
+      "cards": [
+        "Archon of Cruelty",
+        "Faithless Looting",
+        "Monument to Endurance",
+        "Nihil Spellbomb",
+        "Persist",
+        "Soul-Guide Lantern",
+        "Street Wraith",
+        "Urza's Saga",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 5
+    },
+    "dig_draw": {
+      "target_count": 9,
+      "cards": [
+        "Faithless Looting",
+        "Persist",
+        "Raucous Theater"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 14,
+      "cards": [
+        "Asmoranomardicadaistinaculdacar",
+        "Bloodstained Mire",
+        "Urza's Saga",
+        "Verdant Catacombs",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Archon of Cruelty"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 32,
+      "cards": [
+        "Archon of Cruelty",
+        "Ashiok, Dream Render",
+        "Asmoranomardicadaistinaculdacar",
+        "Emperor of Bones",
+        "Haywire Mite",
+        "Inti, Seneschal of the Sun",
+        "Magus of the Moon",
+        "Ovalchase Daredevil",
+        "Persist",
+        "Street Wraith",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 18,
+      "cards": [
+        "Asmoranomardicadaistinaculdacar",
+        "Fatal Push",
+        "Fire Magic",
+        "Haywire Mite",
+        "Nihil Spellbomb",
+        "Persist",
+        "Soul-Guide Lantern",
+        "The Underworld Cookbook",
+        "Unholy Heat"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "Fire Magic"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Asmoranomardicadaistinaculdacar",
+        "Persist"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 10,
+      "cards": [
+        "Inti, Seneschal of the Sun",
+        "Monument to Endurance",
+        "The Underworld Cookbook"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 25,
+      "cards": [
+        "Ashiok, Dream Render",
+        "Emperor of Bones",
+        "Faithless Looting",
+        "Nihil Spellbomb",
+        "Ovalchase Daredevil",
+        "Persist",
+        "Raucous Theater",
+        "Soul-Guide Lantern",
+        "Surgical Extraction",
+        "The Underworld Cookbook",
+        "Unholy Heat"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 24,
+      "cards": [
+        "Archon of Cruelty",
+        "Asmoranomardicadaistinaculdacar",
+        "Faithless Looting",
+        "Ovalchase Daredevil",
+        "Persist",
+        "The Underworld Cookbook"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Archon of Cruelty",
+        "Asmoranomardicadaistinaculdacar"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Archon of Cruelty"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Asmoranomardicadaistinaculdacar",
+        "Persist"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Blood Moon",
+        "Persist"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 26,
+      "cards": [
+        "Asmoranomardicadaistinaculdacar",
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Mox Opal",
+        "Overgrown Tomb",
+        "Persist",
+        "Raucous Theater",
+        "Urza's Saga",
+        "Verdant Catacombs",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 17,
+      "cards": [
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Mountain",
+        "Overgrown Tomb",
+        "Raucous Theater",
+        "Swamp",
+        "Urza's Saga",
+        "Verdant Catacombs",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Ashiok, Dream Render"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "interaction_density": 0.28
+  },
+  "dual_role_cards": [
+    {
+      "card": "Archon of Cruelty",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "payoff_cards",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ashiok, Dream Render",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Asmoranomardicadaistinaculdacar",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emperor of Bones",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faithless Looting",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Magic",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haywire Mite",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inti, Seneschal of the Sun",
+      "roles": [
+        "discard_outlets",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monument to Endurance",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nihil Spellbomb",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ovalchase Daredevil",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overgrown Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Persist",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raucous Theater",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Street Wraith",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Underworld Cookbook",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unholy Heat",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up red mana before Asmo dies to ensure it can be cast or protected",
+    "Time Archon of Cruelty deaths to maximize life swing before opponent's turn",
+    "Prioritize returning persist creatures with Asmo to maintain board pressure",
+    "Use W/B/R/G mana efficiently to cast recursion targets before graveyard hate",
+    "Asmo's casting cost or commander tax can be mitigated with specific effects"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Deploy cheap persist creatures to establish early board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize mana development to support W/B/R/G casting costs"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up mana to protect key threats from early removal"
+    }
+  ],
+  "kill_priority": [
+    "Archon of Cruelty",
+    "Asmoranomardicadaistinaculdacar",
+    "Persist",
+    "Ashiok, Dream Render",
+    "Emperor of Bones",
+    "Haywire Mite",
+    "Inti, Seneschal of the Sun",
+    "Magus of the Moon"
+  ],
+  "interaction_to_disrupt": [
+    "Asmoranomardicadaistinaculdacar",
+    "Persist",
+    "Fatal Push",
+    "Fire Magic",
+    "Haywire Mite",
+    "Nihil Spellbomb",
+    "Soul-Guide Lantern",
+    "The Underworld Cookbook"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/asmo-food.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

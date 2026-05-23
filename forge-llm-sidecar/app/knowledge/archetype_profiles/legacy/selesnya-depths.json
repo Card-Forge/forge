@@ -1,0 +1,598 @@
+{
+  "schema_version": 1,
+  "name": "Selesnya Depths",
+  "format": "legacy",
+  "colors": [
+    "W",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 63,
+  "macro_plan": "Selesnya Depths is a Legacy combo archetype that leverages White and Green mana to assemble a game-winning board state around Dark Depths. By utilizing Green Sun's Zenith to fetch key permanents and Mox Diamond to accelerate mana production, the deck aims to quickly generate counters on Dark Depths. Once the threshold is met, the deck transitions into an aggressive attacker with a massive creature.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Dark Depths",
+        "Life from the Loam",
+        "Mox Diamond",
+        "Sylvan Library",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 6,
+      "cards": [
+        "Dark Depths",
+        "Lush Portico",
+        "Mox Diamond"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 24,
+      "cards": [
+        "Crop Rotation",
+        "Dark Depths",
+        "Elvish Reclaimer",
+        "Flagstones of Trokair",
+        "Green Sun's Zenith",
+        "Knight of the Reliquary",
+        "Mox Diamond",
+        "Urza's Saga",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 11,
+      "cards": [
+        "Dark Depths",
+        "Green Sun's Zenith",
+        "Mox Diamond",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 29,
+      "cards": [
+        "Badgermole Cub",
+        "Collector Ouphe",
+        "Dark Depths",
+        "Doorkeeper Thrull",
+        "Dryad Arbor",
+        "Elvish Reclaimer",
+        "Endurance",
+        "Gaddock Teeg",
+        "Green Sun's Zenith",
+        "Icetill Explorer",
+        "Knight of the Reliquary",
+        "Mox Diamond",
+        "Pithing Needle",
+        "Skateboard",
+        "Sylvan Safekeeper"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 18,
+      "cards": [
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Dark Depths",
+        "Erode",
+        "Force of Vigor",
+        "Ghost Quarter",
+        "Karakas",
+        "Swords to Plowshares",
+        "The Tabernacle at Pendrell Vale",
+        "Wasteland"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 3
+    },
+    "wrath": {
+      "target_count": 1,
+      "cards": [
+        "The Tabernacle at Pendrell Vale"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 7,
+      "cards": [
+        "Dark Depths",
+        "Mox Diamond",
+        "Sejiri Steppe",
+        "Shadowspear"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 19,
+      "cards": [
+        "Bojuka Bog",
+        "Echoing Deeps",
+        "Elvish Reclaimer",
+        "Endurance",
+        "Flagstones of Trokair",
+        "Icetill Explorer",
+        "Knight of the Reliquary",
+        "Life from the Loam",
+        "Lush Portico",
+        "Mox Diamond",
+        "Surgical Extraction"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 6,
+      "cards": [
+        "Badgermole Cub",
+        "Icetill Explorer",
+        "Karakas",
+        "Life from the Loam"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 11,
+      "cards": [
+        "Dark Depths",
+        "Green Sun's Zenith",
+        "Mox Diamond",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Dark Depths",
+        "Green Sun's Zenith",
+        "Mox Diamond"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Choke",
+        "Deafening Silence",
+        "Disruptor Flute",
+        "Maze of Ith"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 37,
+      "cards": [
+        "Badgermole Cub",
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Dark Depths",
+        "Dryad Arbor",
+        "Echoing Deeps",
+        "Flagstones of Trokair",
+        "Ghost Quarter",
+        "Green Sun's Zenith",
+        "Karakas",
+        "Lush Portico",
+        "Maze of Ith",
+        "Mox Diamond",
+        "Savannah",
+        "Sejiri Steppe",
+        "Talon Gates of Madara",
+        "The Tabernacle at Pendrell Vale",
+        "Thespian's Stage",
+        "Urza's Saga",
+        "Wasteland",
+        "Windswept Heath",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 37,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 28,
+      "cards": [
+        "Bojuka Bog",
+        "Boseiju, Who Endures",
+        "Dark Depths",
+        "Dryad Arbor",
+        "Echoing Deeps",
+        "Flagstones of Trokair",
+        "Forest",
+        "Ghost Quarter",
+        "Karakas",
+        "Lush Portico",
+        "Maze of Ith",
+        "Plains",
+        "Savannah",
+        "Sejiri Steppe",
+        "Talon Gates of Madara",
+        "The Tabernacle at Pendrell Vale",
+        "Thespian's Stage",
+        "Urza's Saga",
+        "Wasteland",
+        "Windswept Heath",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.29
+  },
+  "dual_role_cards": [
+    {
+      "card": "Badgermole Cub",
+      "roles": [
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dark Depths",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dryad Arbor",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Echoing Deeps",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elvish Reclaimer",
+      "roles": [
+        "graveyard_enablers",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flagstones of Trokair",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Quarter",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Green Sun's Zenith",
+      "roles": [
+        "combo_pieces",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Icetill Explorer",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karakas",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Knight of the Reliquary",
+      "roles": [
+        "graveyard_enablers",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Life from the Loam",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lush Portico",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Maze of Ith",
+      "roles": [
+        "hate_pieces",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mox Diamond",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Savannah",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sejiri Steppe",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Talon Gates of Madara",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Tabernacle at Pendrell Vale",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thespian's Stage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya, Cradle of Growth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize playing Dark Depths before activating Mox Diamond to ensure you have a counter-bearing land to tap for mana.",
+    "Time Green Sun's Zenith casts to avoid leaving yourself with insufficient mana for the turn's combo assembly.",
+    "Hold up mana for potential interaction before committing to the full Dark Depths combo sequence.",
+    "Use Mox Diamond's mana generation to pay for multiple spells in a single turn, accelerating the counter accumulation.",
+    "Dark Depths is a land, so it can be targeted by land destruction"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands efficiently and deploy Dark Depths as soon as possible"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use early ramp to establish a mana base that supports Mox Diamond"
+    },
+    {
+      "trigger": "early game",
+      "line": "Begin accumulating counters on Dark Depths through deck synergies"
+    }
+  ],
+  "kill_priority": [
+    "Dark Depths",
+    "Green Sun's Zenith",
+    "Mox Diamond",
+    "Windswept Heath",
+    "Badgermole Cub",
+    "Collector Ouphe",
+    "Doorkeeper Thrull",
+    "Dryad Arbor"
+  ],
+  "interaction_to_disrupt": [
+    "Dark Depths",
+    "Mox Diamond",
+    "Sejiri Steppe",
+    "Shadowspear",
+    "Bojuka Bog",
+    "Boseiju, Who Endures",
+    "Erode",
+    "Force of Vigor"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/selesnya-depths.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "archetype": "Caw-Gates",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/caw-gates.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Azorius Guildgate"
+    },
+    {
+      "qty": 4,
+      "name": "Basilisk Gate"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 4,
+      "name": "Citadel Gate"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Guardian of the Guildpact"
+    },
+    {
+      "qty": 2,
+      "name": "Heap Gate"
+    },
+    {
+      "qty": 1,
+      "name": "Idyllic Beachfront"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Journey to Nowhere"
+    },
+    {
+      "qty": 4,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Remora"
+    },
+    {
+      "qty": 3,
+      "name": "Outlaw Medic"
+    },
+    {
+      "qty": 3,
+      "name": "Prismatic Strands"
+    },
+    {
+      "qty": 4,
+      "name": "Sacred Cat"
+    },
+    {
+      "qty": 4,
+      "name": "Sea Gate"
+    },
+    {
+      "qty": 4,
+      "name": "Squadron Hawk"
+    },
+    {
+      "qty": 4,
+      "name": "The Modern Age"
+    },
+    {
+      "qty": 3,
+      "name": "Thraben Charm"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 3,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 3,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 2,
+      "name": "Envelop"
+    },
+    {
+      "qty": 3,
+      "name": "Red Elemental Blast"
+    }
+  ]
+}

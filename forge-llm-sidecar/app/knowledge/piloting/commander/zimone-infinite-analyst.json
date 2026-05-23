@@ -1,0 +1,121 @@
+{
+  "archetype": "Zimone, Infinite Analyst",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Zimone, Infinite Analyst is a G/U combo-control deck that generates infinite value or mana through Zimone's engine, using Elementalist's Palette to optimize spell casting and Hydroid Krasis as a high-impact finisher. It wins by out-resourcing control and combo decks while stabilizing against aggro with early interaction and late-game inevitability.",
+  "win_conditions": [
+    "Hydroid Krasis with full Krasis payoff (exiling key cards from the graveyard for maximum effect), or Zimone's infinite loop for game.",
+    "Use Elementalist's Palette to maximize Krasis effects or bypass counters when resolving Zimone."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (preferably ramp or duals that enter untapped), Zimone or Elementalist's Palette, and at least one early interaction or cantrip."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have no early plays, are missing both colors, or hold exclusively high-cost cards without a clear path to Zimone or Krasis."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land and cast a cheap ramp spell or cantrip to dig for Zimone/Palette.",
+      "Turn 2: Develop mana, cast Elementalist's Palette if possible, or play Zimone if you have sufficient mana.",
+      "Sequence lands to ensure G/U access by turn 3-4, prioritizing untapped sources to cast Zimone's activation or Krasis without tapping out prematurely."
+    ],
+    "mid_game": [
+      "Preserve mana for Zimone's engine and Hydroid Krasis.",
+      "Use the graveyard strategically to cast Krasis with maximum payoff, but avoid overloading it if the opponent has graveyard hate.",
+      "Don't overcommit to board presence if the opponent has sweepers or removal in hand.",
+      "Commit threats when the opponent's hand is empty or they've already used sweepers.",
+      "Hold back if they have potential removal, counters, or recursion.",
+      "Use Zimone's value generation to pressure while maintaining board presence, but avoid trading into unfavorable exchanges."
+    ],
+    "late_game": [
+      "Hydroid Krasis with full Krasis payoff (exiling key cards from the graveyard for maximum effect), or Zimone's infinite loop for game.",
+      "Use Elementalist's Palette to maximize Krasis effects or bypass counters when resolving Zimone.",
+      "Go all-in when you have open mana for interaction, the opponent has no sweepers, and you can safely resolve Krasis or Zimone.",
+      "Commit when you've established board control and the opponent is out of resources to disrupt your combo."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Zimone, Infinite Analyst",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Hydroid Krasis",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Elementalist's Palette",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Zimone's infinite loop requires precise sequencing and mana management",
+    "practice the exact activation order to avoid dead turns.",
+    "Hydroid Krasis needs careful graveyard setup to maximize its payoff, so avoid exiling key cards prematurely.",
+    "Elementalist's Palette's flexibility is key to overcoming counters and optimizing spell effects.",
+    "Avoid overcommitting to the board without protection, and always track the opponent's graveyard and hand size to anticipate their next move."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Elementalist's Palette for alternate casting methods or to split spells. Cast Zimone or Krasis in response to counters, use cantrips to dig past counters, and apply pressure to force interaction before your key spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early interaction, discard, or fast Krasis to disrupt their mana development. Don't let them reach their win condition; stabilize with Zimone's value and close the game quickly.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use early removal, counters, and board wipes to stabilize. Leverage Zimone's value generation to out-value their creatures, then close with Hydroid Krasis or Zimone's infinite loop.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with Zimone's value generation and use Elementalist's Palette to bypass counters. Win with Hydroid Krasis or Zimone's infinite loop, forcing them to interact with multiple threats simultaneously.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through card advantage, targeted removal, and graveyard hate. Time your Hydroid Krasis and Zimone activations to out-resource the opponent, and prioritize disrupting their combo pieces while protecting your own.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers, counterspells, graveyard recursion, and combo pieces.",
+    "Note when opponents tap out or hold up mana, as this often signals a counter or removal spell.",
+    "Track graveyard contents to anticipate Krasis payoffs or recursion threats."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

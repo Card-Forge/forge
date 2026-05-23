@@ -1,0 +1,121 @@
+{
+  "archetype": "Stiflenought",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/stiflenought.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Abhorrent Oculus"
+    },
+    {
+      "qty": 2,
+      "name": "Back to Basics"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Brazen Borrower"
+    },
+    {
+      "qty": 3,
+      "name": "Curie, Emergent Intelligence"
+    },
+    {
+      "qty": 4,
+      "name": "Daze"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 6,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 4,
+      "name": "Phyrexian Dreadnought"
+    },
+    {
+      "qty": 3,
+      "name": "Ponder"
+    },
+    {
+      "qty": 4,
+      "name": "Prismatic Vista"
+    },
+    {
+      "qty": 4,
+      "name": "Scalding Tarn"
+    },
+    {
+      "qty": 2,
+      "name": "Slip Out the Back"
+    },
+    {
+      "qty": 4,
+      "name": "Stifle"
+    },
+    {
+      "qty": 3,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 2,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Counterbalance"
+    },
+    {
+      "qty": 1,
+      "name": "Cryptic Coat"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 2,
+      "name": "Surgical Extraction"
+    }
+  ]
+}

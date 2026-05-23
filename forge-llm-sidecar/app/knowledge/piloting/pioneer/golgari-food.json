@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more land drops and a token generator",
       "Hands containing Cauldron Familiar or Badgermole Cub with early mana",
-      "Hands that can play a creature on turn one or two"
+      "Hands that can play a creature on turn one or two",
+      "Keep hands with 2-3 lands (prioritize duals/shocklands or basic swamps/forests), at least one core engine piece (Cauldron Familiar, Badgermole Cub, or Witch's Oven), and early interaction (discard or cheap removal).",
+      "Keep any hand with 3+ lands and a turn-2 play."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands and no early creatures",
       "Hands lacking token generators or food producers",
-      "Hands with only high-cost finishers and no ramp"
+      "Hands with only high-cost finishers and no ramp",
+      "Mulligan pure land hands, hands with only expensive spells, or hands lacking a sacrifice outlet if you have no early interaction."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Prioritize playing token generators like Cauldron Familiar and Badgermole Cub",
       "Use food tokens as early blockers or attackers to apply pressure",
-      "Avoid overextending into removal before establishing a board"
+      "Avoid overextending into removal before establishing a board",
+      "Turn 1: Play a land, cast a discard or cheap creature (e.g., Graveyard Trespasser, Bloodstoke Mawhorn, or a 1-drop).",
+      "Turn 2: Cast Cauldron Familiar or Badgermole Cub, sacrifice it immediately to draw a card and generate food.",
+      "If you have Oven, set it up on turn 2 or 3 with mana available.",
+      "Sequence lands to ensure you can cast key pieces on curve while maintaining mana for food activation."
     ],
     "mid_game": [
       "Stabilize against aggressive decks by maintaining a wide board of tokens",
       "Begin accumulating food tokens specifically for Witch's Oven's payoff",
-      "Trade efficiently to preserve your finisher and key token producers"
+      "Trade efficiently to preserve your finisher and key token producers",
+      "Prioritize keeping Cauldron Familiar and Badgermole Cub alive until you can sacrifice them for maximum value.",
+      "Use food tokens for mana acceleration to cast larger threats or Oven copies.",
+      "Avoid over-sacrificing early",
+      "preserve your engine for late-game value.",
+      "Manage graveyard resources carefully if facing graveyard hate.",
+      "Commit threats when you have interaction or a board state advantage."
     ],
     "late_game": [
       "Sacrifice food tokens to Witch's Oven to deal massive direct damage",
       "Use token generation to outlast control decks and refill the board",
-      "Protect your finisher with blockers until you can secure the win"
+      "Protect your finisher with blockers until you can secure the win",
+      "Witch's Oven copying a high-impact spell (removal, threat, or draw), Badgermole Cub drawing lands for mana, Cauldron Familiar drawing cards to refill hand, and efficient midrange threats (Tarmogoyf, Bloodstoke Mawhorn, Liliana).",
+      "Win by out-resourcing or comboing off Oven with cheap spells.",
+      "Go all-in when you have Oven set up, enough mana for a copy, and the opponent is low on interaction.",
+      "Commit when you can stabilize the board and have card advantage.",
+      "Push for the win when you can close the game in 1-2 turns without leaving yourself vulnerable to a sweep."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Hold back food tokens until you can sacrifice multiple for Witch's Oven's maximum impact",
     "Play token generators before committing to the finisher to ensure fuel availability",
-    "Use food tokens as blockers against aggressive threats to preserve your board state"
+    "Use food tokens as blockers against aggressive threats to preserve your board state",
+    "Common mistake: Over-sacrificing early and running out of fuel.",
+    "Always keep at least one engine piece alive until you can safely sacrifice it.",
+    "Another mistake: Setting up Oven without enough mana or interaction to protect it.",
+    "Remember that food tokens can be sacrificed for mana, but don't forget they can also be used for other effects if your deck includes them.",
+    "Watch for graveyard hate and have a plan to protect or bypass it.",
+    "In mirrors, card advantage and hate cards win games, not just threats."
   ],
   "matchups": [
     {
@@ -87,15 +111,34 @@
         "Card advantage engines",
         "Late-game value creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that are hard to counter. Set up Witch's Oven to copy spells after counters are used. Use discard to remove counterspells. Play around counters by having multiple threats or using instant-speed interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use discard to hit their ramp spells. Bring in removal and hate cards. Stabilize with efficient trades and then out-value them midgame.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by leveraging better sideboard choices, superior graveyard hate, and more efficient resource management. Track their key pieces and discard them. Use Witch's Oven to copy their threats or removal. Win the attrition war by having more answers and better late-game threats.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes that clear token boards",
     "Direct damage spells that bypass blockers",
-    "Creature removal that targets your token generators"
+    "Creature removal that targets your token generators",
+    "Watch for sweepers (Wrath of God, Damnation), targeted removal (Path to Exile, Fatal Push), and graveyard hate (Rest in Peace, Leyline).",
+    "Note when opponents tap out for big spells or planeswalkers.",
+    "Track their life total and card advantage to know when to pressure versus grind."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T03:57:37+00:00",
     "model": "local-model",
@@ -124,6 +167,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

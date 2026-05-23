@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Hands with artifact lands and cheap artifact sources like Thraben Inspector",
       "Hands containing bounce/removal tools like Tithing Blade or Glint Hawk",
-      "Hands with early disruption or card draw like Refurbished Familiar"
+      "Hands with early disruption or card draw like Refurbished Familiar",
+      "Keep hands with 2-3 lands, at least one disruption spell (Thoughtseize/Inquisition), and ideally Glint-Eye Nephilim or Glint Hawk.",
+      "Keep hands with Cast Down if you have a way to find a target or can disrupt the opponent's hand first."
     ],
     "mulligan_criteria": [
       "Hands lacking artifact lands or early artifact sources",
       "Hands with only high-cost cards or no interaction",
-      "Hands without a clear path to turn one or two plays"
+      "Hands without a clear path to turn one or two plays",
+      "Mulligan on 2+ lands with no spells, or 3+ lands with no disruption/Nephilim."
     ],
     "examples": [
       {
@@ -53,17 +56,30 @@
     "early_game": [
       "Play artifact lands and cheap artifact sources like Thraben Inspector to enable bounce effects",
       "Use Tithing Blade to remove larger threats while saving Glint Hawk for recursion",
-      "Deploy Refurbished Familiar for early disruption and eventual card advantage"
+      "Deploy Refurbished Familiar for early disruption and eventual card advantage",
+      "Turn 1: Play a land, cast Thoughtseize/Inquisition to remove key threats or combo pieces.",
+      "Turn 2: Play a land, cast Fatal Push/Sheoldred's Edict if possible, or develop board with Glint Hawk/Nephilim.",
+      "Sequence lands carefully using fetches to ensure consistent access to W and B while minimizing damage."
     ],
     "mid_game": [
       "Recycle Suffocating Fumes to handle small creatures when Tithing Blade is less efficient",
       "Use Deadly Dispute on opponent's creatures to generate card advantage",
-      "Cycle Kor Skyfisher and Omen of the Dead to maintain board presence and inevitability"
+      "Cycle Kor Skyfisher and Omen of the Dead to maintain board presence and inevitability",
+      "Prioritize keeping hand disruption for critical turns.",
+      "Use Glint Hawk for card advantage or pumping Nephilim.",
+      "Don't overcommit to the board if you can't protect the Nephilim.",
+      "Manage mana to have open mana for protection spells.",
+      "Commit the Nephilim when you have disruption or removal ready to protect it.",
+      "Hold back Glint Hawk if you need it for card draw or as a sacrifice target for pump spells."
     ],
     "late_game": [
       "Hold removal like Arms of Hadar or Thraben Charm to clear boards and protect value engines",
       "Use Dawnbringer Cleric's enchantment destruction and graveyard exile to handle combo decks",
-      "Leverage Lembas for life gain and value generation against attrition matchups"
+      "Leverage Lembas for life gain and value generation against attrition matchups",
+      "The primary finisher is sacrificing Glint Hawk to Glint-Eye Nephilim to trigger its death trigger, creating a 4/4 Angel.",
+      "Enhance with Lembas or other pumps to make the Nephilim massive before it dies, or use the Angel token to attack through blockers.",
+      "Go all-in when you have protection for the Nephilim, enough removal to clear blockers, or when the opponent has no graveyard hate/board wipes.",
+      "Also commit when you can close the game in 1-2 turns."
     ]
   },
   "key_cards": [
@@ -132,7 +148,13 @@
     "Prioritize using Tithing Blade on larger creatures while saving Suffocating Fumes for smaller ones, recycling Fumes when the board lacks X/1s.",
     "Use Duress early to extract information and remove card advantage sources, allowing better spell sequencing in subsequent turns.",
     "Chain Omen of the Dead and Kor Skyfisher to return multiple Kors to hand, ensuring you have enough resources to handle removal.",
-    "Hold Thraben Charm to respond to Sadistic Glee or exile graveyards against Tolarian Terror and Dredge."
+    "Hold Thraben Charm to respond to Sadistic Glee or exile graveyards against Tolarian Terror and Dredge.",
+    "Common mistake: Sacrificing Glint Hawk too early without a target for Lembas or without triggering Nephilim.",
+    "Always calculate the math for the Nephilim death trigger.",
+    "Be aware of graveyard hate",
+    "if it's in play, pivot to winning with the Nephilim as a standalone threat or using other finishers.",
+    "Remember that Lembas is a sorcery, so timing matters.",
+    "Glint Hawk can be sacrificed to give another creature +2/+2 and flying, but cannot be sacrificed to itself."
   ],
   "matchups": [
     {
@@ -167,6 +189,31 @@
         "Faeries",
         "Small Creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient spells that are hard to counter, or cast them at end of turn. Use hand disruption to remove counterspells. Consider playing around them with split second or instant-speed interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use early disruption to hit their mana dorks or land drops. Bring in additional removal and hate cards. Stabilize with Glint Hawk for card advantage and pump the Nephilim to race.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early disruption and cheap removal. Use Glint Hawk to trade efficiently. Bring in Rest in Peace to stop graveyard synergies. Stabilize and close out games with the Nephilim.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure with early threats and disruption. Use hand disruption to remove key control spells. Win with the Nephilim combo or out-value them with card draw from Glint Hawk.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the disruption war. Prioritize targeting their Glint Hawk and Nephilim. Use Leyline of the Void to shut down their graveyard recursion. Win by out-resourcing and protecting your combo better.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -176,10 +223,13 @@
     "Sadistic Glee",
     "Goblin Tomb Raider",
     "Makeshift Munitions",
-    "Tolarian Terror"
+    "Tolarian Terror",
+    "Watch for graveyard hate (Rest in Peace, Leyline, Surgical Extraction), board wipes (Supreme Verdict, Wrath of God), and targeted removal (Path to Exile, Swords to Plowshares).",
+    "Note if opponent is playing Blue Terror (counterspells, card draw) or Affinity (artifacts, fast board)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-orzhov-glintblade-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T09:39:35+00:00",
     "model": "local-model",
@@ -197,6 +247,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

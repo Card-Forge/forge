@@ -1,0 +1,121 @@
+{
+  "archetype": "Selesnya Ouroboroid",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/selesnya-ouroboroid.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Abandoned Air Temple"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 3,
+      "name": "Brightglass Gearhulk"
+    },
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 6,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Gene Pollinator"
+    },
+    {
+      "qty": 4,
+      "name": "Hushwood Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 2,
+      "name": "Meltstrider's Resolve"
+    },
+    {
+      "qty": 4,
+      "name": "Multiversal Passage"
+    },
+    {
+      "qty": 4,
+      "name": "Nature's Rhythm"
+    },
+    {
+      "qty": 1,
+      "name": "Nurturing Pixie"
+    },
+    {
+      "qty": 2,
+      "name": "Ouroboroid"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Sage of the Skies"
+    },
+    {
+      "qty": 3,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 4,
+      "name": "Spider Manifestation"
+    },
+    {
+      "qty": 2,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Temple Garden"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Erode"
+    },
+    {
+      "qty": 1,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 1,
+      "name": "Insidious Fungus"
+    },
+    {
+      "qty": 2,
+      "name": "Leatherhead, Swamp Stalker"
+    },
+    {
+      "qty": 3,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Sage of the Skies"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 2,
+      "name": "Surrak, Elusive Hunter"
+    }
+  ]
+}

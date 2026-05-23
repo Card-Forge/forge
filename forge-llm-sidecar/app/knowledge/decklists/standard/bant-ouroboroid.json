@@ -1,0 +1,125 @@
+{
+  "archetype": "Bant Ouroboroid",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/bant-ouroboroid.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 2,
+      "name": "Botanical Sanctum"
+    },
+    {
+      "qty": 4,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 2,
+      "name": "Brightglass Gearhulk"
+    },
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 1,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Gene Pollinator"
+    },
+    {
+      "qty": 2,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 4,
+      "name": "Hushwood Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Meltstrider's Resolve"
+    },
+    {
+      "qty": 2,
+      "name": "Mockingbird"
+    },
+    {
+      "qty": 4,
+      "name": "Nature's Rhythm"
+    },
+    {
+      "qty": 2,
+      "name": "Ouroboroid"
+    },
+    {
+      "qty": 4,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 4,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 4,
+      "name": "Spider Manifestation"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Unable to Scream"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 1,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 1,
+      "name": "Keen-Eyed Curator"
+    },
+    {
+      "qty": 3,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 3,
+      "name": "Sage of the Skies"
+    },
+    {
+      "qty": 3,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 2,
+      "name": "Wistfulness"
+    }
+  ]
+}

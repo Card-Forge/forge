@@ -1,0 +1,400 @@
+{
+  "archetype": "Atraxa, Praetors' Voice",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/atraxa-praetors-voice.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 1,
+      "name": "An Offer You Can't Refuse"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Assassin's Trophy"
+    },
+    {
+      "qty": 1,
+      "name": "Astral Cornucopia"
+    },
+    {
+      "qty": 1,
+      "name": "Atraxa, Praetors' Voice"
+    },
+    {
+      "qty": 1,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Blight Mamba"
+    },
+    {
+      "qty": 1,
+      "name": "Blighted Agent"
+    },
+    {
+      "qty": 1,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "City of Brass"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Contagion Clasp"
+    },
+    {
+      "qty": 1,
+      "name": "Contagion Engine"
+    },
+    {
+      "qty": 1,
+      "name": "Core Prowler"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Cyclonic Rift"
+    },
+    {
+      "qty": 1,
+      "name": "Cystbearer"
+    },
+    {
+      "qty": 1,
+      "name": "Dispel"
+    },
+    {
+      "qty": 1,
+      "name": "Dovin's Veto"
+    },
+    {
+      "qty": 1,
+      "name": "Farewell"
+    },
+    {
+      "qty": 1,
+      "name": "Farseek"
+    },
+    {
+      "qty": 1,
+      "name": "Fellwar Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Flesh-Eater Imp"
+    },
+    {
+      "qty": 1,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Flusterstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Fragmentize"
+    },
+    {
+      "qty": 1,
+      "name": "Glacial Fortress"
+    },
+    {
+      "qty": 1,
+      "name": "Glistener Elf"
+    },
+    {
+      "qty": 1,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 1,
+      "name": "Grateful Apparition"
+    },
+    {
+      "qty": 1,
+      "name": "Guildpact Informant"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Hand of the Praetors"
+    },
+    {
+      "qty": 1,
+      "name": "Ichor Rats"
+    },
+    {
+      "qty": 1,
+      "name": "Ichorclaw Myr"
+    },
+    {
+      "qty": 1,
+      "name": "Indatha Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Inexorable Tide"
+    },
+    {
+      "qty": 1,
+      "name": "Inkmoth Nexus"
+    },
+    {
+      "qty": 1,
+      "name": "Invigorate"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Karn's Bastion"
+    },
+    {
+      "qty": 1,
+      "name": "Lost Leonin"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Confluence"
+    },
+    {
+      "qty": 1,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Might of Oaks"
+    },
+    {
+      "qty": 1,
+      "name": "Miscast"
+    },
+    {
+      "qty": 1,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Morphic Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Mother of Runes"
+    },
+    {
+      "qty": 1,
+      "name": "Mystic Remora"
+    },
+    {
+      "qty": 1,
+      "name": "Mystical Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Claim"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Lore"
+    },
+    {
+      "qty": 1,
+      "name": "Necropede"
+    },
+    {
+      "qty": 1,
+      "name": "Noble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Crusader"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Swarmlord"
+    },
+    {
+      "qty": 1,
+      "name": "Plague Myr"
+    },
+    {
+      "qty": 1,
+      "name": "Plague Stinger"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Planewide Celebration"
+    },
+    {
+      "qty": 1,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Ponder"
+    },
+    {
+      "qty": 1,
+      "name": "Reflecting Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Rejuvenating Springs"
+    },
+    {
+      "qty": 1,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Silent Clearing"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spara's Headquarters"
+    },
+    {
+      "qty": 1,
+      "name": "Spirit Mantle"
+    },
+    {
+      "qty": 1,
+      "name": "Stonewood Invocation"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swan Song"
+    },
+    {
+      "qty": 1,
+      "name": "Sword of Truth and Justice"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Library"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Strike"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Tezzeret's Gambit"
+    },
+    {
+      "qty": 1,
+      "name": "Thrummingbird"
+    },
+    {
+      "qty": 1,
+      "name": "Tine Shrike"
+    },
+    {
+      "qty": 1,
+      "name": "Vampiric Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Viral Drake"
+    },
+    {
+      "qty": 1,
+      "name": "Viridian Corrupter"
+    },
+    {
+      "qty": 1,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 1,
+      "name": "Waterlogged Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Whispering Specter"
+    },
+    {
+      "qty": 1,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Woodland Cemetery"
+    },
+    {
+      "qty": 1,
+      "name": "Zagoth Triome"
+    }
+  ],
+  "sideboard": []
+}

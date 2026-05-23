@@ -1,0 +1,153 @@
+{
+  "archetype": "Mardu Transmogrify",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/mardu-transmogrify.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Atraxa, Grand Unifier"
+    },
+    {
+      "qty": 4,
+      "name": "Blackcleave Cliffs"
+    },
+    {
+      "qty": 4,
+      "name": "Blightstep Pathway"
+    },
+    {
+      "qty": 4,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 4,
+      "name": "Case of the Stashed Skeleton"
+    },
+    {
+      "qty": 1,
+      "name": "Duress"
+    },
+    {
+      "qty": 4,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Fountainport"
+    },
+    {
+      "qty": 2,
+      "name": "Go for the Throat"
+    },
+    {
+      "qty": 4,
+      "name": "Haunted Ridge"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 1,
+      "name": "Ob Nixilis, the Adversary"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Peril"
+    },
+    {
+      "qty": 1,
+      "name": "Rakdos Joins Up"
+    },
+    {
+      "qty": 1,
+      "name": "Raph & Mikey, Troublemakers"
+    },
+    {
+      "qty": 2,
+      "name": "Reckoner Bankbuster"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 2,
+      "name": "Torch the Tower"
+    },
+    {
+      "qty": 4,
+      "name": "Transmogrify"
+    },
+    {
+      "qty": 1,
+      "name": "Urborg, Tomb of Yawgmoth"
+    },
+    {
+      "qty": 2,
+      "name": "Volcanic Spite"
+    },
+    {
+      "qty": 1,
+      "name": "Wild Ride"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Ashiok, Dream Render"
+    },
+    {
+      "qty": 2,
+      "name": "Day of Black Sun"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Elesh Norn, Mother of Machines"
+    },
+    {
+      "qty": 1,
+      "name": "Go Blank"
+    },
+    {
+      "qty": 2,
+      "name": "Hidetsugu Consumes All"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Peril"
+    },
+    {
+      "qty": 3,
+      "name": "The Legend of Roku"
+    },
+    {
+      "qty": 2,
+      "name": "Unlicensed Hearse"
+    }
+  ]
+}

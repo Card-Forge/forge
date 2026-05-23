@@ -1,0 +1,149 @@
+{
+  "archetype": "Crashing Footfalls",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/crashing-footfalls.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 2,
+      "name": "Brazen Borrower"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Crashing Footfalls"
+    },
+    {
+      "qty": 3,
+      "name": "Dead // Gone"
+    },
+    {
+      "qty": 1,
+      "name": "Dismember"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 4,
+      "name": "Fire // Ice"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 2,
+      "name": "Gemstone Caverns"
+    },
+    {
+      "qty": 1,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Mistrise Village"
+    },
+    {
+      "qty": 4,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 3,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 1,
+      "name": "Repudiate // Replicate"
+    },
+    {
+      "qty": 4,
+      "name": "Shardless Agent"
+    },
+    {
+      "qty": 2,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 2,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 3,
+      "name": "Subtlety"
+    },
+    {
+      "qty": 1,
+      "name": "Thundering Falls"
+    },
+    {
+      "qty": 1,
+      "name": "Vibrance"
+    },
+    {
+      "qty": 4,
+      "name": "Violent Outburst"
+    },
+    {
+      "qty": 1,
+      "name": "Wistfulness"
+    },
+    {
+      "qty": 4,
+      "name": "Wooded Foothills"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Brotherhood's End"
+    },
+    {
+      "qty": 2,
+      "name": "Endurance"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 2,
+      "name": "Inevitable Betrayal"
+    },
+    {
+      "qty": 3,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 3,
+      "name": "Obsidian Charmaw"
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "archetype": "Naya Ephemerate",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/naya-ephemerate.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Basilisk Gate"
+    },
+    {
+      "qty": 1,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 4,
+      "name": "Citadel Gate"
+    },
+    {
+      "qty": 2,
+      "name": "Cliffgate"
+    },
+    {
+      "qty": 1,
+      "name": "Coalition Honor Guard"
+    },
+    {
+      "qty": 1,
+      "name": "Dawnbringer Cleric"
+    },
+    {
+      "qty": 3,
+      "name": "Ephemerate"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Gatecreeper Vine"
+    },
+    {
+      "qty": 1,
+      "name": "Guardian of the Guildpact"
+    },
+    {
+      "qty": 1,
+      "name": "Heap Gate"
+    },
+    {
+      "qty": 4,
+      "name": "Journey to Nowhere"
+    },
+    {
+      "qty": 4,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 4,
+      "name": "Manor Gate"
+    },
+    {
+      "qty": 4,
+      "name": "Militia Bugler"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 3,
+      "name": "Prismatic Strands"
+    },
+    {
+      "qty": 4,
+      "name": "Raffine's Informant"
+    },
+    {
+      "qty": 4,
+      "name": "Sacred Cat"
+    },
+    {
+      "qty": 1,
+      "name": "Saruli Gatekeepers"
+    },
+    {
+      "qty": 1,
+      "name": "Soul of Migration"
+    },
+    {
+      "qty": 4,
+      "name": "Writhing Chrysalis"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 4,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 1,
+      "name": "Guardian of the Guildpact"
+    },
+    {
+      "qty": 1,
+      "name": "Prismatic Strands"
+    },
+    {
+      "qty": 4,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 2,
+      "name": "Saruli Gatekeepers"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "archetype": "Dredgeless Dredge",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/dredgeless-dredge.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Bloodghast"
+    },
+    {
+      "qty": 4,
+      "name": "Breaking // Entering"
+    },
+    {
+      "qty": 3,
+      "name": "Clearwater Pathway"
+    },
+    {
+      "qty": 4,
+      "name": "Creeping Chill"
+    },
+    {
+      "qty": 4,
+      "name": "Darkslick Shores"
+    },
+    {
+      "qty": 1,
+      "name": "Drownyard Temple"
+    },
+    {
+      "qty": 4,
+      "name": "Founding the Third Path"
+    },
+    {
+      "qty": 1,
+      "name": "Haunted Dead"
+    },
+    {
+      "qty": 4,
+      "name": "Ipnu Rivulet"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Jace, the Perfected Mind"
+    },
+    {
+      "qty": 4,
+      "name": "Narcomoeba"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 4,
+      "name": "Otherworldly Gaze"
+    },
+    {
+      "qty": 4,
+      "name": "Prized Amalgam"
+    },
+    {
+      "qty": 4,
+      "name": "Silversmote Ghoul"
+    },
+    {
+      "qty": 3,
+      "name": "Stitcher's Supplier"
+    },
+    {
+      "qty": 4,
+      "name": "Tome Scour"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Ashiok, Dream Render"
+    },
+    {
+      "qty": 1,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 2,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 3,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 3,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 4,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Remedy"
+    }
+  ]
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early land drops and a removal spell",
       "Combinations featuring Fanatical Offering and a creature to sacrifice",
-      "Defile paired with a way to play it on curve"
+      "Defile paired with a way to play it on curve",
+      "Keep hands with 2-3 mana sources (including at least one Garden or equivalent mana rock) and a turn-1 or turn-2 play.",
+      "Prioritize hands with Fanatical Offering paired with a land, or a cheap threat/removal combo."
     ],
     "mulligan_criteria": [
       "Hands lacking early land interaction or card draw",
       "Overloaded hands with multiple Defiles and no creatures",
-      "Hands missing a clear path to turn two or three"
+      "Hands missing a clear path to turn two or three",
+      "Mulligan on 3+ lands with no early spells, 0-1 lands with no fixing, or hands with only high-cost spells and no disruption."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and cheap creatures to establish board presence",
       "Use Fanatical Offering on turn two or three to gain life and remove threats",
-      "Hold Defile for when opponent commits to a large land drop"
+      "Hold Defile for when opponent commits to a large land drop",
+      "Turn 1: Play a land, cast Thoughtseize if holding a land drop to strip key interaction.",
+      "Turn 2: Play a second land, cast a cheap threat (e.g., Bloodtithe Harvester, Tarmogoyf) or use Fanatical Offering to cast a spell from the graveyard.",
+      "Sequence lands to ensure double-green drops",
+      "use Defile or spot removal only if it enables a lethal threat or removes a critical early blocker."
     ],
     "mid_game": [
       "Cycle lands into card advantage using Lembas and other sac outlets",
       "Trade efficiently to keep the board clear while gaining life",
-      "Apply pressure with resilient creatures while waiting for opponent to run out of resources"
+      "Apply pressure with resilient creatures while waiting for opponent to run out of resources",
+      "Preserve the graveyard for high-value Fanatical Offering targets",
+      "avoid over-committing removal to low-impact threats.",
+      "Use Lembas for life gain or mana when pressured, but don't sacrifice it if you need the mana for a game-winning play.",
+      "Track hand size to avoid discarding key graveyard synergies or disruption spells.",
+      "Commit threats when the opponent has no interaction or is tapped out",
+      "hold back removal for key threats or combo pieces."
     ],
     "late_game": [
       "Use Defile to strip opponent's mana base if they are ahead",
       "Sacrifice remaining lands and creatures to stabilize and close out",
-      "Rely on life total and card advantage to outlast aggressive strategies"
+      "Rely on life total and card advantage to outlast aggressive strategies",
+      "Tarmogoyf, Bloodtithe Harvester, or a resolved Fanatical Offering targeting a high-value spell/creature.",
+      "Leverage graveyard recursion to maintain board presence and pressure.",
+      "Use Defile or spot removal to clear the path for lethal.",
+      "Go all-in when the opponent has no interaction, when you can safely cast a game-winning threat via Fanatical Offering, or when you have a clear path to lethal.",
+      "Commit aggressively against combo decks if you can disrupt their win condition or race them with resilient threats."
     ]
   },
   "key_cards": [
@@ -58,7 +76,13 @@
   "sequencing_tips": [
     "Hold Defile until after opponent's main phase to maximize land disruption",
     "Sacrifice creatures with Fanatical Offering before casting Defile to preserve life total",
-    "Use Lembas for card draw when you have a full board or need specific answers"
+    "Use Lembas for card draw when you have a full board or need specific answers",
+    "Common mistake: Overusing Fanatical Offering on low-value targets early, leaving you without answers when the game slows down.",
+    "Remember that Garden's mana ability is a triggered ability, so it can be responded to",
+    "sequence carefully.",
+    "Lembas is crucial for survival against aggressive decks, but don't sacrifice it if you need the mana for a game-winning play.",
+    "Watch for opponent's graveyard hate",
+    "if it resolves, pivot to a more direct game plan and avoid relying on graveyard recursion."
   ],
   "matchups": [
     {
@@ -87,15 +111,34 @@
         "Resilient creatures",
         "Card advantage spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multiple threats to force counterspells and trade up. Cast spells via Fanatical Offering to bypass counters if possible, though counters still work. Use discard to remove key pieces and pressure through interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to interrupt their development. Use spot removal on key mana sources and bring in graveyard hate. Don't over-invest in the graveyard if they can exile it; pivot to direct pressure.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war and prioritize keeping hand size. Use Graze/Thoughtseize to strip their key pieces and win via superior graveyard resources and efficient removal. Track their graveyard to avoid over-committing to Fanatical Offering targets.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
-    "Card draw engines"
+    "Card draw engines",
+    "Watch for graveyard hate (Rest in Peace, Scavenging Ooze), counterspells, and board wipes.",
+    "Note when opponents tap out for lock pieces or big threats.",
+    "Track their graveyard size and hand composition to anticipate when they'll have interaction available."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:21:39+00:00",
     "model": "local-model",
@@ -124,6 +167,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Two or more lands",
       "Stoneforge Mystic or Yorion, Sky Nomad",
-      "Early removal or equipment"
+      "Early removal or equipment",
+      "Keep hands with 2-3 lands (prioritizing fetch/shock or basics), Stoneforge Mystic, and at least one removal spell (Solitude, Path, or Swords).",
+      "Keep hands with 2+ lands and a threat/removal combo.",
+      "Against fast decks like Izzet Delver or Sneak & Show, prioritize hands with early interaction and a turn-2 play."
     ],
     "mulligan_criteria": [
       "Zero lands",
       "No win condition or card advantage",
-      "Slow curve with no early interaction"
+      "Slow curve with no early interaction",
+      "Mulligan pure land hands, hands with only removal and no threats/land, or hands with 3+ lands and no early plays."
     ],
     "examples": []
   },
@@ -25,17 +29,32 @@
     "early_game": [
       "Play lands efficiently and cast Stoneforge Mystic to search for a key equipment.",
       "Use Yorion, Sky Nomad to draw cards and apply early pressure.",
-      "Hold up removal for aggressive threats."
+      "Hold up removal for aggressive threats.",
+      "Turn 1: Play a land.",
+      "If you have Stoneforge Mystic, play it.",
+      "Turn 2: If you have a land and a removal/threat, play it.",
+      "If you have Stoneforge Mystic, activate to get Sword of Feast and Famine, equip to a Knight of the Reliquary or 2/2 threat.",
+      "If you have Yorion, consider holding for later unless you need the protection."
     ],
     "mid_game": [
       "Equip fetched weapons to Yorion or other creatures to maximize combat damage.",
       "Use Solitude to trade efficiently and generate card advantage.",
-      "Stabilize the board and begin out-valueing opponents."
+      "Stabilize the board and begin out-valueing opponents.",
+      "Use Solitude efficiently (save for key threats or to protect Yorion/SFM).",
+      "Don't overcommit removal on small creatures if you can stabilize with board presence.",
+      "Manage graveyard by using Solitude to exile or by playing Rest in Peace if needed.",
+      "Keep hand size healthy",
+      "discard non-essentials if flooded.",
+      "Commit threats when you have removal to protect them or when the opponent is tapped out."
     ],
     "late_game": [
       "Leverage Solitude's recursion to repeatedly deploy threats.",
       "Maintain board control with removal and equipment upgrades.",
-      "Close the game with an equipped creature or Yorion's token swarm."
+      "Close the game with an equipped creature or Yorion's token swarm.",
+      "Sword of Feast and Famine equipped to a Knight of the Reliquary or 2/2 threat, or Yorion, Sky Nomad attacking with evasion and lifelink.",
+      "Get there by stabilizing early, finding equipment, and trading efficiently.",
+      "Go all-in when you have a lethal equipped threat, when the opponent has no sweepers, or when you can trade up favorably.",
+      "Also commit when you need to race a combo deck."
     ]
   },
   "key_cards": [
@@ -59,7 +78,11 @@
     "Prioritize casting Stoneforge Mystic before playing creatures to ensure equipment is ready.",
     "Hold removal until you know what threat the opponent will play.",
     "Use Yorion, Sky Nomad's card draw to find answers before committing to a fight.",
-    "Time Solitude's recursion to maximize board presence after opponent's removal resolves."
+    "Time Solitude's recursion to maximize board presence after opponent's removal resolves.",
+    "Common mistake: Overusing Solitude on small creatures instead of saving it for key threats or to protect Yorion.",
+    "Another mistake: Forgetting to equip Sword of Feast and Famine immediately after fetching it.",
+    "Unique interaction: Yorion can protect your board from sweepers if you sacrifice a creature, but be mindful of your own removal targets.",
+    "Always track the opponent's graveyard if they run graveyard-based strategies."
   ],
   "matchups": [
     {
@@ -88,15 +111,33 @@
         "Protection spells",
         "Graveyard recursion"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Solitude to exile threats instead of targeting them. Attack with multiple threats to force multiple counters. Use Sword of Feast and Famine's deathtouch to trade efficiently.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use removal to kill key ramp creatures. Don't overextend into their late-game finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Use Solitude efficiently to remove their threats. Prioritize finding Sword of Feast and Famine first. Trade up favorably and don't overextend.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
-    "Counterspell packages"
+    "Counterspell packages",
+    "Watch for counterspells (Dimir Tempo), ramp spells (Tron), combo pieces (Sneak & Show, Izzet Delver), and midrange threats (Ocelot Pride).",
+    "Key tells: Opponent tapping for multiple mana, holding up removal, or playing non-basic lands."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:43:29+00:00",
     "model": "local-model",
@@ -112,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

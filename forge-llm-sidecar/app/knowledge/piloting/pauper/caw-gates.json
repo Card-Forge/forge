@@ -12,7 +12,10 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with early land drops and cheap interaction",
-      "Hands containing Brainstorm or Preordain to dig for answers"
+      "Hands containing Brainstorm or Preordain to dig for answers",
+      "Keep hands with 2-3 lands, at least one early threat (Squadron Hawk, Knight of the Reliquary), and a removal spell (Prismatic Strands, Lightning Bolt, or Path/Swords).",
+      "Drop hands with multiple Lorien Revealed, no early interaction, or unplayable mana curves.",
+      "Prioritize hands that can establish a board or disrupt the opponent by turn 2."
     ],
     "mulligan_criteria": [
       "Hands lacking mana sources or early game interaction",
@@ -36,17 +39,33 @@
     "early_game": [
       "Secure land drops with Lorien Revealed and Preordain",
       "Use Duress to extract information and disrupt opponent's game plan",
-      "Play cheap removal like Cast Down or Journey to Nowhere to handle early threats"
+      "Play cheap removal like Cast Down or Journey to Nowhere to handle early threats",
+      "Turn 1: Play a land, optionally cast Knight of the Reliquary or Squadron Hawk.",
+      "Turn 2: Play a second land, cast Hawk or use Bolt/Strands on a threat.",
+      "Sequence WUR mana by tapping out for a Forest/Plains via Knight if needed.",
+      "Use Knight to fetch lands for early Lorien setup or to protect against graveyard hate.",
+      "Avoid overcommitting mana before turn 3."
     ],
     "mid_game": [
       "Force fair trades with spot interaction and conditional removal",
       "Utilize Brainstorm and Squadron Hawk synergy to generate card advantage and filter dead cards",
-      "Cycle Suffocating Fumes to draw into answers while dealing with small creatures"
+      "Cycle Suffocating Fumes to draw into answers while dealing with small creatures",
+      "Preserve removal for high-value targets",
+      "don't waste Strands on chump blockers.",
+      "Use Knight of the Reliquary to fetch lands for Lorien or to protect your graveyard from hate.",
+      "Manage hand size by trading discard for key threats or answers.",
+      "Avoid casting Lorien without board control or backup threats.",
+      "Commit threats only when you have at least one answer to the opponent's primary win condition."
     ],
     "late_game": [
       "Deploy multiple Gates to fix mana and create Treasures with Heap Gate",
       "Turn any creature into a finisher with Basilisk Gate",
-      "Leverage Lorien Revealed as a major card advantage engine to outvalue opponents"
+      "Leverage Lorien Revealed as a major card advantage engine to outvalue opponents",
+      "Lorien Revealed paired with Squadron Hawk and other creatures generates infinite flying damage.",
+      "If Lorien is disrupted, close with a board of Hawks and efficient removal.",
+      "Sometimes a single Bolt or Strands on a key threat is enough to stabilize and race.",
+      "Go all-in when you have board control, sufficient mana for Lorien + activation, and can protect it or have backup threats.",
+      "Commit when the opponent has no removal for your creatures or Lorien, or when you can force them to use their answers on lesser threats."
     ]
   },
   "key_cards": [
@@ -84,7 +103,13 @@
   "sequencing_tips": [
     "Use Lorien Revealed and Suffocating Fumes to pay the Evidence cost for Extract a Confession if needed.",
     "Cast Brainstorm before Preordain to filter the cards left behind and dig for specific answers.",
-    "Pair Squadron Hawk with Basilisk Gate to bypass blockers and generate card advantage when Brainstorm fetches extra copies."
+    "Pair Squadron Hawk with Basilisk Gate to bypass blockers and generate card advantage when Brainstorm fetches extra copies.",
+    "Common mistake: Casting Lorien Revealed without board control or answers, leading to easy removal.",
+    "Knight of the Reliquary is essential for mana fixing and protecting against graveyard hate",
+    "never sacrifice it lightly.",
+    "Prismatic Strands is versatile but can be dead against combo if not careful.",
+    "Watch for Rest in Peace/Engineered Plague, which can completely shut down your game plan.",
+    "Always track opponent's discard targets to anticipate their strategy."
   ],
   "matchups": [
     {
@@ -118,6 +143,31 @@
         "Flying blockers",
         "Attrition tactics"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap threats and discard to remove counterspells. Cast Lorien in response to something or when they're tapped out. Use Knight to protect Lorien or fetch lands to bypass counters. Don't overcommit to a single spell.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prismatic Strands is your primary tool; use it to remove ramp creatures or protect your board. Use discard to hit ramp spells early. Kill ramp threats before they stabilize. Lorien closes if they cannot answer it.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal (Strands, Bolt) and discard to hit threats. Use Knight to fetch lands for Lorien setup. Apply pressure with Hawks to force trades. Don't overextend into combat if you lack answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with discard and efficient removal. Lorien is difficult for control to answer without specific hate. Use Hawks to pressure and force them to use removal. Trade resources favorably to reach your win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Race for Lorien while using discard to hit their Lorien or key creatures. Prismatic Strands is crucial for board control. Manage your graveyard carefully to avoid self-hate. Win by out-resourcing or forcing them to overcommit.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -129,10 +179,12 @@
     "Bogles",
     "Jund Wildfire",
     "Madness",
-    "Elves"
+    "Elves",
+    "Watch for graveyard hate (Rest in Peace, Engineered Plague, Bloodline Culling) and board wipes (Wrath of God, Day of Judgment)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-esper-caw-gates-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T09:30:45+00:00",
     "model": "local-model",
@@ -150,6 +202,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -12,18 +12,21 @@
     "keep_criteria": [
       "Hands containing Thoughtseize or other early disruption",
       "Playable creatures by turn two or three",
-      "At least one component of the Solitude/Overlord of the Balemurk recursion package"
+      "At least one component of the Solitude/Overlord of the Balemurk recursion package",
+      "Keep hands with 2-3 lands, at least one hand disruption spell (Thoughtseize/Duress), and a blink enabler or early threat (Blinking Spirit, Phantom Monster, or a mana rock).",
+      "Keep hands with Solitude or Overlord if paired with a cantrip or cheap enabler to ensure you can cast and blink them."
     ],
     "mulligan_criteria": [
       "Hands lacking disruption or early plays",
       "Mana bases that cannot support W/B/R spells by turn three",
-      "Hands heavy on high-cost cards without recursion setup"
+      "Hands heavy on high-cost cards without recursion setup",
+      "Mulligan to 4-5 lands if you lack disruption or enablers, as you need to find your interaction early to protect your game plan."
     ],
     "examples": [
       {
         "hand": [],
         "decision": "keep",
-        "reason": "7-card hand with Preordain and Atraxa — Atraxa is kept on top specifically to pitch to Force of Negation, protecting the Quantum Riddler + Ephemerate combo line from being disrupted."
+        "reason": "7-card hand with Preordain and Atraxa \u2014 Atraxa is kept on top specifically to pitch to Force of Negation, protecting the Quantum Riddler + Ephemerate combo line from being disrupted."
       }
     ]
   },
@@ -31,17 +34,32 @@
     "early_game": [
       "Cast Thoughtseize to remove key threats or disruption from the opponent's hand",
       "Play low-cost creatures to establish board presence and generate early value",
-      "Prioritize mana development to enable Solitude and Overlord of the Balemurk"
+      "Prioritize mana development to enable Solitude and Overlord of the Balemurk",
+      "Turn 1: Play a land, cast Thoughtseize if possible, or deploy a mana rock/cheap enabler.",
+      "Turn 2: Cast a cheap blink creature or mid-cost threat.",
+      "Sequence mana rocks into enablers, then blink your own creatures or opponent's threats.",
+      "Prioritize finding lands if you're light, and use Thoughtseize to remove combo pieces or early aggro threats."
     ],
     "mid_game": [
       "Activate Solitude to blink creatures, dodging removal or triggering death abilities",
       "Use Overlord of the Balemurk's death trigger to return blinked or removed creatures to hand",
-      "Maintain board pressure while cycling threats to exhaust opponent's resources"
+      "Maintain board pressure while cycling threats to exhaust opponent's resources",
+      "Keep mana flexible for instant-speed blinking and disruption.",
+      "Avoid overcommitting to blink without protection or follow-up.",
+      "Manage your graveyard carefully if the deck uses recursion, but prioritize exile as the primary engine.",
+      "Maintain hand size with cantrips",
+      "use Thoughtseize on game-ending threats or combo pieces.",
+      "Commit threats when you have removal or protection ready."
     ],
     "late_game": [
       "Leverage the recursion loop to generate sustained value and board presence",
       "Hold up mana for Solitude to protect key threats from late-game sweepers",
-      "Close out the game by repeatedly casting recycled threats until the opponent runs out of answers"
+      "Close out the game by repeatedly casting recycled threats until the opponent runs out of answers",
+      "Solitude and Overlord of the Balemurk are primary finishers.",
+      "Blink them repeatedly to deal damage, generate Zombie tokens (via Overlord's death trigger), and remove remaining threats.",
+      "Use Lightning Greaves to protect them from removal and ensure they survive long enough to trigger their effects.",
+      "Go all-in when you have multiple blink enablers, protection, and the opponent has no sweepers or hard interaction.",
+      "Commit when you can close the game in 1-2 turns via combat damage from blinked creatures or when you can overwhelm the opponent with token generation and threat recursion."
     ]
   },
   "key_cards": [
@@ -73,7 +91,9 @@
     "Keep a blue card (like Atraxa) on top of the library specifically to pitch to Force of Negation, protecting key combo pieces like Quantum Riddler and Ephemerate.",
     "Sacrifice a fetch land during your main phase to fetch an untapped land, then immediately kick Orum's Chant off Ischron Scepter to maintain the turn lock.",
     "Play Felia on your upkeep rather than your end step to trigger Quantum Riddler's draw step ability and draw two cards.",
-    "Cycle Failure repeatedly to keep your hand size at exactly 1, ensuring Quantum Riddler triggers on every draw step."
+    "Cycle Failure repeatedly to keep your hand size at exactly 1, ensuring Quantum Riddler triggers on every draw step.",
+    "Common mistake: Blinking your own creatures without protection, leading to removal.",
+    "Always weigh the risk of ETB triggers."
   ],
   "matchups": [
     {
@@ -107,16 +127,35 @@
       "opponent_archetype": "Esper GenericBlink",
       "advice": "Apply pressure quickly and close out the game fast. The longer you give the control opponent, the more counterspells they draw, reducing your chances to resolve key threats. (from gameplay) Prevent the opponent from establishing an Isochron Scepter and Orum's Chant lock, as pairing it with their planeswalkers completely shuts down your ability to play cards or attack. (from gameplay) Avoid leaning on a single threat; multiple threats are required to bypass Solitude and apply pressure before the combo resolves. (from gameplay) Expect Force of Negation to be used on board-flooding threats (like Cory Steel Cutter) rather than early creatures, as protecting the Quantum Riddler + Ephemerate combo is the priority. (from gameplay) Use Solitude to stop lethal aggression, then rely on Surveil lands and Gorio's Vengeance to dig for combo pieces like Atraxa or Gristlebrand. (from gameplay) Build with four Force of Negation and four Subtlety instead of Solitude; this pre-sideboards against Azorius Control by providing reliable planeswalker interaction and avoiding Solitude's liability. (from gameplay) Prioritize sticking a planeswalker like Tefairy or Narset and shutting down Quantum Riddler to secure the win. (from gameplay) Use Force of Negation early to answer Tefairy before the Ischron Scepter/Orum's Chant lock becomes unbreakable. (from gameplay)",
       "watch_for": []
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap enablers and flash threats to bypass counters. Blink in response to counterspells if possible. Use Thoughtseize to remove counterspells from hand. Sequence around them by committing multiple threats or using instant-speed blink effects to pressure through interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and cheap threats. Don't let them stabilize. Use removal to kill their ramp sources. Blink their key threats to remove them temporarily and disrupt their mana development.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the disruption war. Use Thoughtseize to find their blink enablers or threats. Prioritize killing their key threats with Solitude/Overlord. Manage mana for instant-speed responses. Win by out-resourcing their blink engine or disrupting their hand before they can stabilize.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Targeted removal spells",
     "Board wipes and sweepers",
     "Countermagic and hand disruption",
-    "Graveyard hate or exile effects"
+    "Graveyard hate or exile effects",
+    "Watch for sweepers (Wrath of God, Cyclonic Rift), hard counters, and combo win conditions.",
+    "Note when the opponent taps out for a key spell\u2014this is your window to attack or blink.",
+    "Track graveyard contents if they rely on recursion, and monitor their hand for disruption to plan your turns accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:39:56+00:00",
     "model": "local-model",
@@ -183,6 +222,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": "Mardu GenericBlink"
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

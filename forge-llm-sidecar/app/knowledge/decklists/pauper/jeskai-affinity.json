@@ -1,0 +1,113 @@
+{
+  "archetype": "Jeskai Affinity",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/jeskai-affinity.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Ancient Den"
+    },
+    {
+      "qty": 4,
+      "name": "Cryogen Relic"
+    },
+    {
+      "qty": 3,
+      "name": "Experimental Synthesizer"
+    },
+    {
+      "qty": 4,
+      "name": "Galvanic Blast"
+    },
+    {
+      "qty": 4,
+      "name": "Glint Hawk"
+    },
+    {
+      "qty": 4,
+      "name": "Great Furnace"
+    },
+    {
+      "qty": 4,
+      "name": "Kor Skyfisher"
+    },
+    {
+      "qty": 3,
+      "name": "Krark-Clan Shaman"
+    },
+    {
+      "qty": 1,
+      "name": "Makeshift Munitions"
+    },
+    {
+      "qty": 4,
+      "name": "Myr Enforcer"
+    },
+    {
+      "qty": 4,
+      "name": "Prophetic Prism"
+    },
+    {
+      "qty": 3,
+      "name": "Razortide Bridge"
+    },
+    {
+      "qty": 3,
+      "name": "Rustvale Bridge"
+    },
+    {
+      "qty": 4,
+      "name": "Seat of the Synod"
+    },
+    {
+      "qty": 2,
+      "name": "Sewer-veillance Cam"
+    },
+    {
+      "qty": 3,
+      "name": "Silverbluff Bridge"
+    },
+    {
+      "qty": 2,
+      "name": "Somber Hoverguard"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtcast"
+    },
+    {
+      "qty": 2,
+      "name": "Utrom Monitor"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 2,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 2,
+      "name": "Navigator's Compass"
+    },
+    {
+      "qty": 2,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 2,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 2,
+      "name": "Thraben Charm"
+    }
+  ]
+}

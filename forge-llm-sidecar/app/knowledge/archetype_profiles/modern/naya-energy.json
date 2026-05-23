@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "name": "Naya Energy",
+  "format": "modern",
+  "colors": [
+    "W",
+    "R",
+    "G"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Naya Energy is a Modern aggro deck that leverages life payment and +1/+1 counter synergies to rapidly scale its creature base. By cycling Guide of Souls and empowering Ocelot Pride and Ajani, Nacatl Pariah, the deck applies relentless pressure while bypassing traditional blockers. The strategy relies on trading life for board presence to close games before opponents can stabilize.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 0,
+      "cards": []
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": []
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": []
+    },
+    "threats": {
+      "target_count": 3,
+      "cards": [
+        "Ajani, Nacatl Pariah",
+        "Guide of Souls",
+        "Ocelot Pride"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 1,
+      "cards": [
+        "Guide of Souls"
+      ]
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Ocelot Pride"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Ocelot Pride"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 0,
+      "cards": []
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ocelot Pride",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guide of Souls",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Pay life for counters only when you have card advantage or board presence",
+    "Hold Ajani, Nacatl Pariah until you can bypass a key blocker",
+    "Bounce Guide of Souls to trigger death effects or reuse it against removal",
+    "Prioritize keeping life above lethal thresholds while scaling",
+    "Intentionally tap out on your turn to bait the opponent into playing multiple creatures, then clear the entire board with a mass removal spell like Supreme Verdict on your following turn."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play cheap creatures immediately to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Begin paying life to stack counters on Ocelot Pride"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Guide of Souls to trigger early recursion"
+    }
+  ],
+  "kill_priority": [
+    "Ocelot Pride",
+    "Ajani, Nacatl Pariah",
+    "Guide of Souls",
+    "Ocelot Pride"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

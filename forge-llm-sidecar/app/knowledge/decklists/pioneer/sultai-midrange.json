@@ -1,0 +1,165 @@
+{
+  "archetype": "Sultai Midrange",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/sultai-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 2,
+      "name": "Censor"
+    },
+    {
+      "qty": 1,
+      "name": "Cling to Dust"
+    },
+    {
+      "qty": 4,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 1,
+      "name": "Dreamroot Cascade"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 3,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Go for the Throat"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Make Disappear"
+    },
+    {
+      "qty": 3,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 2,
+      "name": "Professor Dellian Fel"
+    },
+    {
+      "qty": 2,
+      "name": "Rakshasa's Bargain"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Cottage"
+    },
+    {
+      "qty": 4,
+      "name": "Shark Typhoon"
+    },
+    {
+      "qty": 1,
+      "name": "Shipwreck Marsh"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Tasigur, the Golden Fang"
+    },
+    {
+      "qty": 2,
+      "name": "The Meathook Massacre"
+    },
+    {
+      "qty": 2,
+      "name": "Three Steps Ahead"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 2,
+      "name": "Urgent Necropsy"
+    },
+    {
+      "qty": 2,
+      "name": "Wastewood Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 2,
+      "name": "Willowrush Verge"
+    },
+    {
+      "qty": 3,
+      "name": "Zagoth Triome"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Bitter Triumph"
+    },
+    {
+      "qty": 1,
+      "name": "Carnage Tyrant"
+    },
+    {
+      "qty": 1,
+      "name": "Cling to Dust"
+    },
+    {
+      "qty": 2,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 2,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 2,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 1,
+      "name": "Tear Asunder"
+    },
+    {
+      "qty": 1,
+      "name": "Thought Distortion"
+    },
+    {
+      "qty": 3,
+      "name": "Thoughtseize"
+    }
+  ]
+}

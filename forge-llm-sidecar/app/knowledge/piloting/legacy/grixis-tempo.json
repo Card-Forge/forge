@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands featuring Ponder alongside a one-drop or early interaction",
       "Playable curves that include Flow State or Delver of Secrets",
-      "Balanced mana bases with at least two lands and a threat"
+      "Balanced mana bases with at least two lands and a threat",
+      "Keep hands with 2-3 lands (including fetches/shocks), Ponder, early disruption (Thoughtseize/Inquisition), and Delver/Flow State.",
+      "Prioritize hands that can Ponder into a land or cast disruption on turn one."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays or interactive spells",
       "Multiple high-cost cards without sufficient mana sources",
-      "Unplayable land counts or color screw risks"
+      "Unplayable land counts or color screw risks",
+      "Mulligan on 3+ lands with no spells, 0-1 lands with no cantrips, or hands lacking a turn-1 play."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Cast Ponder to optimize your opening hand and find lands or answers",
       "Play Delver of Secrets and counter it to establish a 4/2 flying threat",
-      "Use cheap interaction to clear opposing board states and maintain tempo"
+      "Use cheap interaction to clear opposing board states and maintain tempo",
+      "Turn 1: Ponder into a land or cast Thoughtseize/Inquisition on a key threat or combo piece.",
+      "Turn 2: Drop Delver if it's a two-drop, or cast Flow State if ahead, or play a shock land/mana source.",
+      "Sequence mana carefully to keep options open and avoid tapping out unnecessarily."
     ],
     "mid_game": [
       "Deploy Flow State to protect key threats and draw into additional resources",
       "Trade efficiently to keep pressure on while digging for finishers",
-      "Maintain board presence by replaying countered creatures or leveraging card advantage"
+      "Maintain board presence by replaying countered creatures or leveraging card advantage",
+      "Use Ponder to find lands or key spells",
+      "avoid overcommitting to the board.",
+      "Manage your graveyard carefully\u2014Flow State needs it, but be wary of hate.",
+      "Keep hand size up with cantrips and discard to maintain card advantage.",
+      "Commit Delver when you have removal for their threats or they're tapped out.",
+      "Hold back if they have sweepers or counters."
     ],
     "late_game": [
       "Leverage accumulated card advantage to outlast opponent's resources",
       "Use remaining interaction to shut down comeback attempts",
-      "Close the game with a resilient board state that opponents cannot easily clear"
+      "Close the game with a resilient board state that opponents cannot easily clear",
+      "Delver of Secrets (Aetherborn), Flow State, efficient removal, and card advantage engines.",
+      "Win by out-resourcing and closing with a lethal threat or combo.",
+      "Go all-in when you have card advantage, they're tapped out, or you've removed their key answers.",
+      "Commit with Delver + Flow State + removal to close the game."
     ]
   },
   "key_cards": [
@@ -58,7 +74,10 @@
   "sequencing_tips": [
     "Always Ponder before committing to a play to ensure you have the right answer or threat",
     "Counter Delver only when you are confident you can follow up with pressure or interaction",
-    "Use Flow State reactively to protect against sweepers or combat tricks while maintaining initiative"
+    "Use Flow State reactively to protect against sweepers or combat tricks while maintaining initiative",
+    "Common mistakes include overcommitting to the board, mismanaging mana, ignoring graveyard hate, and Pondering into dead cards.",
+    "Unique interactions: Flow State synergy with Delver, Ponder for consistency, and disruption timing.",
+    "Always track their graveyard and hand size to predict their moves."
   ],
   "matchups": [
     {
@@ -87,15 +106,34 @@
         "Key combo pieces",
         "Unexpected wins"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Ponder to dig for answers, cast threats at end step, or chain multiple threats. Flow State can bypass counters if cast from the graveyard. Sideboard in cheaper or uncounterable threats if needed.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early disruption is key. Thoughtseize/Inquisition to hit mana dorks or key rocks. Spot removal on ramp threats. Don't overextend; out-tempo them with efficient plays.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the disruption war. Out-Ponder, out-discard, and out-tempo. Sideboard for more counters and disruption. Track their hand and graveyard to predict their plays.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast one-drop creatures",
     "Board wipe spells",
-    "Hand disruption"
+    "Hand disruption",
+    "Watch for sweepers (Wrath, Damnation), counterspells, graveyard hate, and combo pieces.",
+    "Note when they tap out for big spells or when they're low on resources.",
+    "Track their graveyard for Flow State or Sneak and Show threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:39:12+00:00",
     "model": "local-model",
@@ -111,6 +149,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

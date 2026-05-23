@@ -1,0 +1,497 @@
+{
+  "schema_version": 1,
+  "name": "4c Elementals",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U",
+    "R",
+    "G"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "A four-color tribal tempo deck that leverages Collected Company to flood the board with low-cost Elementals, supported by early ramp from Llanowar Elves and tribal synergy from Risen Reef. The goal is to establish an early board presence, apply pressure, and stabilize with larger threats or removal.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Collected Company",
+        "Omnath, Locus of the Roil",
+        "Risen Reef"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 21,
+      "cards": [
+        "Collected Company",
+        "Eclipsed Flamekin",
+        "Explosive Prodigy",
+        "Fecund Greenshell",
+        "Realmwalker",
+        "Risen Reef",
+        "Temple of Abandon",
+        "Torch the Tower"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 6
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 9,
+      "cards": [
+        "Collected Company",
+        "Risen Reef",
+        "Twinflame Travelers"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 45,
+      "cards": [
+        "Ashling, Rekindled",
+        "Chomping Changeling",
+        "Collected Company",
+        "Cragcrown Pathway",
+        "Eclipsed Flamekin",
+        "Explosive Prodigy",
+        "Fecund Greenshell",
+        "Leafkin Druid",
+        "Llanowar Elves",
+        "Mossborn Hydra",
+        "Mutable Explorer",
+        "Omnath, Locus of the Roil",
+        "Realmwalker",
+        "Rimekin Recluse",
+        "Risen Reef",
+        "Tangled Florahedron",
+        "Thunderkin Awakener",
+        "Twinflame Travelers",
+        "Vine Mare",
+        "Voice of Resurgence"
+      ],
+      "mainboard_count": 38,
+      "sideboard_count": 7
+    },
+    "removal": {
+      "target_count": 14,
+      "cards": [
+        "Chomping Changeling",
+        "Explosive Prodigy",
+        "Mossborn Hydra",
+        "Omnath, Locus of the Roil",
+        "Torch the Tower"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 8,
+      "cards": [
+        "Collected Company",
+        "Risen Reef"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Vine Mare"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 12,
+      "cards": [
+        "Collected Company",
+        "Risen Reef",
+        "Thunderkin Awakener",
+        "Weathered Runestone"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Rimekin Recluse",
+        "Thunderkin Awakener"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Collected Company",
+        "Risen Reef"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Twinflame Travelers"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Collected Company",
+        "Risen Reef"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 14,
+      "cards": [
+        "Collected Company",
+        "Damping Sphere",
+        "Risen Reef",
+        "Scalding Viper",
+        "Weathered Runestone"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 26,
+      "cards": [
+        "Botanical Sanctum",
+        "Breeding Pool",
+        "Collected Company",
+        "Copperline Gorge",
+        "Frontier Bivouac",
+        "Llanowar Elves",
+        "Secluded Courtyard",
+        "Temple of Abandon",
+        "Unclaimed Territory"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 22,
+      "cards": [
+        "Botanical Sanctum",
+        "Breeding Pool",
+        "Copperline Gorge",
+        "Forest",
+        "Frontier Bivouac",
+        "Island",
+        "Mountain",
+        "Secluded Courtyard",
+        "Temple of Abandon",
+        "Unclaimed Territory"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.24
+  },
+  "dual_role_cards": [
+    {
+      "card": "Botanical Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chomping Changeling",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Collected Company",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Copperline Gorge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eclipsed Flamekin",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Explosive Prodigy",
+      "roles": [
+        "dig_draw",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fecund Greenshell",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Frontier Bivouac",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Llanowar Elves",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mossborn Hydra",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Omnath, Locus of the Roil",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Realmwalker",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rimekin Recluse",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Risen Reef",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Secluded Courtyard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Abandon",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thunderkin Awakener",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Torch the Tower",
+      "roles": [
+        "dig_draw",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Twinflame Travelers",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unclaimed Territory",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vine Mare",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Weathered Runestone",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize playing Llanowar Elves before other ramp to maximize mana efficiency",
+    "Cast Collected Company only when you have enough mana to follow up or survive board wipes",
+    "Hold up mana for interaction when facing control or midrange decks",
+    "Collected Company is the deck's engine",
+    "never cast it on an empty board unless you're desperate."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and Llanowar Elves to accelerate mana"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast low-cost Elementals to apply early pressure"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up mana for potential early interaction"
+    }
+  ],
+  "kill_priority": [
+    "Collected Company",
+    "Risen Reef",
+    "Twinflame Travelers",
+    "Ashling, Rekindled",
+    "Chomping Changeling",
+    "Cragcrown Pathway",
+    "Eclipsed Flamekin",
+    "Explosive Prodigy"
+  ],
+  "interaction_to_disrupt": [
+    "Vine Mare",
+    "Chomping Changeling",
+    "Explosive Prodigy",
+    "Mossborn Hydra",
+    "Omnath, Locus of the Roil",
+    "Torch the Tower",
+    "Collected Company",
+    "Risen Reef"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/4c-elementals.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

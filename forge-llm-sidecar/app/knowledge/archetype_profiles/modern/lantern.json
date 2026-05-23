@@ -1,0 +1,521 @@
+{
+  "schema_version": 1,
+  "name": "Lantern",
+  "format": "modern",
+  "colors": [
+    "U",
+    "B"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "Lantern Control is a highly technical, slow-paced Modern strategy that focuses on milling the opponent's deck one card at a time to strictly control their draws. By leveraging low-cost artifacts and information-gathering tools, the pilot aims to win the first game by the clock, forcing the opponent into a disadvantageous tournament position. Despite its historical success and unique tactical depth, the deck fell out of favor due to powerful artifact hate and mana restrictions.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 30,
+      "cards": [
+        "Academy Ruins",
+        "Codex Shredder",
+        "Ensnaring Bridge",
+        "Lantern of Insight",
+        "Mishra's Bauble",
+        "Narset, Parter of Veils",
+        "Thoughtseize",
+        "Urza's Saga",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 27,
+      "cards": [
+        "Codex Shredder",
+        "Ensnaring Bridge",
+        "Grafdigger's Cage",
+        "Lantern of Insight",
+        "Mishra's Bauble",
+        "Narset, Parter of Veils",
+        "Thoughtseize",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 9,
+      "cards": [
+        "Scalding Tarn",
+        "Urza's Saga",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 11,
+      "cards": [
+        "Ensnaring Bridge",
+        "Lantern of Insight",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 32,
+      "cards": [
+        "Ashiok, Dream Render",
+        "Disruptor Flute",
+        "Ensnaring Bridge",
+        "Inquisition of Kozilek",
+        "Lantern of Insight",
+        "Narset, Parter of Veils",
+        "Pithing Needle",
+        "Soulless Jailer",
+        "Thoughtseize",
+        "Torpor Orb",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 5,
+      "cards": [
+        "Codex Shredder",
+        "The Underworld Cookbook"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 15,
+      "cards": [
+        "Ensnaring Bridge",
+        "Lantern of Insight",
+        "Thoughtseize",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 15,
+      "cards": [
+        "Ensnaring Bridge",
+        "Lantern of Insight",
+        "Thoughtseize",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 16,
+      "cards": [
+        "Ensnaring Bridge",
+        "Lantern of Insight",
+        "The Underworld Cookbook",
+        "Thoughtseize",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 29,
+      "cards": [
+        "Academy Ruins",
+        "Ashiok, Dream Render",
+        "Codex Shredder",
+        "Ensnaring Bridge",
+        "Grafdigger's Cage",
+        "Lantern of Insight",
+        "Pyxis of Pandemonium",
+        "Soulless Jailer",
+        "The Underworld Cookbook",
+        "Thoughtseize",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 21,
+      "cards": [
+        "Academy Ruins",
+        "Codex Shredder",
+        "Ensnaring Bridge",
+        "Lantern of Insight",
+        "The Underworld Cookbook",
+        "Thoughtseize",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 12,
+      "cards": [
+        "Academy Ruins",
+        "Ensnaring Bridge",
+        "Lantern of Insight",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 16,
+      "cards": [
+        "Academy Ruins",
+        "Ensnaring Bridge",
+        "Lantern of Insight",
+        "Thoughtseize",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 10,
+      "cards": [
+        "Cursed Totem",
+        "Damping Sphere",
+        "Duress",
+        "Grafdigger's Cage",
+        "Soulless Jailer",
+        "Void Mirror",
+        "Welding Jar"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 9
+    },
+    "mana_fixing": {
+      "target_count": 37,
+      "cards": [
+        "Academy Ruins",
+        "Darkslick Shores",
+        "Ensnaring Bridge",
+        "Lantern of Insight",
+        "Mox Opal",
+        "Pyxis of Pandemonium",
+        "River of Tears",
+        "Scalding Tarn",
+        "Thoughtseize",
+        "Urza's Saga",
+        "Watery Grave",
+        "Whir of Invention"
+      ],
+      "mainboard_count": 37,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 20,
+      "cards": [
+        "Academy Ruins",
+        "Darkslick Shores",
+        "Island",
+        "River of Tears",
+        "Scalding Tarn",
+        "Urza's Saga",
+        "Watery Grave"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 6,
+      "cards": [
+        "Ashiok, Dream Render",
+        "Narset, Parter of Veils"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 3
+    },
+    "interaction_density": 0.21
+  },
+  "dual_role_cards": [
+    {
+      "card": "Academy Ruins",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ashiok, Dream Render",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Codex Shredder",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Darkslick Shores",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ensnaring Bridge",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grafdigger's Cage",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lantern of Insight",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mishra's Bauble",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Narset, Parter of Veils",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyxis of Pandemonium",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "River of Tears",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soulless Jailer",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Underworld Cookbook",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Whir of Invention",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Know the combos, needs, and priorities of every deck you face by heart",
+    "Control the opponent's draws one by one using Lantern of Insight",
+    "Give more lands to Burn players, fewer lands to Amulet Titan players, and always give the same copy of Urza's Land to Tron players",
+    "Use Inventor\u2019s Fair to replace artifacts after sacrificing them for their effects",
+    "Sequence milled cards to deny key combo pieces or force unfavorable draws"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play low-cost artifacts like Ghoulcaller\u2019s Bell and Codex Shredder to begin milling"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use discard spells like Thoughtseize and Inquisition of Kozilek to see the opponent's hand and disrupt their game plan"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish mana base and play Inventor\u2019s Fair for consistency"
+    }
+  ],
+  "kill_priority": [
+    "Academy Ruins",
+    "Ensnaring Bridge",
+    "Lantern of Insight",
+    "Whir of Invention",
+    "Thoughtseize",
+    "Ashiok, Dream Render",
+    "Narset, Parter of Veils",
+    "Disruptor Flute"
+  ],
+  "interaction_to_disrupt": [
+    "Ensnaring Bridge",
+    "Lantern of Insight",
+    "Thoughtseize",
+    "Whir of Invention",
+    "Codex Shredder",
+    "The Underworld Cookbook",
+    "Cursed Totem",
+    "Damping Sphere"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/lantern.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

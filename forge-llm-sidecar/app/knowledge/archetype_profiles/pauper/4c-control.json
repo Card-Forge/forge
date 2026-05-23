@@ -1,0 +1,525 @@
+{
+  "schema_version": 1,
+  "name": "4c Control",
+  "format": "pauper",
+  "colors": [
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "This four-color Pauper control deck stabilizes games by denying opponent spells and resetting aggressive boards. It leverages Counterspell for instant-speed denial, Lorien Revealed for board wipes and mana acceleration, and Skred as a resilient value engine. The goal is to outlast opponents through card advantage and late-game resilience.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 21,
+      "cards": [
+        "Brainstorm",
+        "Heritage Reclamation",
+        "L\u00f3rien Revealed",
+        "Preordain",
+        "Relic of Progenitus",
+        "Seething Landscape",
+        "Skred"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Augur of Bolas",
+        "Preordain"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 9,
+      "cards": [
+        "Generous Ent",
+        "L\u00f3rien Revealed",
+        "Mystical Teachings",
+        "Seething Landscape",
+        "Troll of Khazad-d\u00fbm"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Counterspell",
+        "Skred"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 20,
+      "cards": [
+        "Augur of Bolas",
+        "Avenging Hunter",
+        "Azure Fleet Admiral",
+        "Counterspell",
+        "Fire // Ice",
+        "Generous Ent",
+        "Gorilla Shaman",
+        "Murmuring Mystic",
+        "Skred",
+        "Thorn of the Black Rose",
+        "Troll of Khazad-d\u00fbm"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 21,
+      "cards": [
+        "Breath Weapon",
+        "Cast into the Fire",
+        "Fiery Cannonade",
+        "Gorilla Shaman",
+        "Heritage Reclamation",
+        "Hydroblast",
+        "Lightning Bolt",
+        "Pulse of Murasa",
+        "Pyroblast",
+        "Skred",
+        "Snuff Out"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 10
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 14,
+      "cards": [
+        "Counterspell",
+        "Hydroblast",
+        "Pyroblast",
+        "Skred",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Skred"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 13,
+      "cards": [
+        "Campfire",
+        "Chainer's Edict",
+        "Heritage Reclamation",
+        "Mystical Teachings",
+        "Pulse of Murasa",
+        "Relic of Progenitus",
+        "Skred"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Campfire",
+        "Chainer's Edict",
+        "Mystical Teachings",
+        "Pulse of Murasa"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 6,
+      "cards": [
+        "Murmuring Mystic",
+        "Skred"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Counterspell",
+        "Skred"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Counterspell",
+        "Skred"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Weather the Storm"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 25,
+      "cards": [
+        "Counterspell",
+        "Highland Forest",
+        "Ice Tunnel",
+        "Rimewood Falls",
+        "Seething Landscape",
+        "Skred",
+        "Snow-Covered Island",
+        "Snow-Covered Mountain",
+        "Snow-Covered Swamp",
+        "Volatile Fjord",
+        "Woodland Chasm"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 17,
+      "cards": [
+        "Highland Forest",
+        "Ice Tunnel",
+        "Rimewood Falls",
+        "Seething Landscape",
+        "Snow-Covered Island",
+        "Snow-Covered Mountain",
+        "Snow-Covered Swamp",
+        "Volatile Fjord",
+        "Woodland Chasm"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.34
+  },
+  "dual_role_cards": [
+    {
+      "card": "Augur of Bolas",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Campfire",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chainer's Edict",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Counterspell",
+      "roles": [
+        "combo_pieces",
+        "counterspells",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Generous Ent",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gorilla Shaman",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Heritage Reclamation",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Highland Forest",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ice Tunnel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Murmuring Mystic",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mystical Teachings",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Preordain",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pulse of Murasa",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Relic of Progenitus",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rimewood Falls",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seething Landscape",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Skred",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Mountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Swamp",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Troll of Khazad-d\u00fbm",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volatile Fjord",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Woodland Chasm",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up mana for Counterspell before committing to non-essential spells",
+    "Cast Lorien Revealed after opponent commits resources to maximize board reset value",
+    "Prioritize Skred's value-generating abilities over direct damage when behind on resources",
+    "Common mistake: Over-sacrificing Lorien too early.",
+    "Remember Skred\u2019s alternate cost requires a legendary creature."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands efficiently while holding up mana for Counterspell"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize denying early threats to slow aggressive decks"
+    },
+    {
+      "trigger": "early game",
+      "line": "Draw into Skred or removal to establish a foothold"
+    }
+  ],
+  "kill_priority": [
+    "Murmuring Mystic",
+    "Skred",
+    "Counterspell",
+    "Augur of Bolas",
+    "Avenging Hunter",
+    "Azure Fleet Admiral",
+    "Fire // Ice",
+    "Generous Ent"
+  ],
+  "interaction_to_disrupt": [
+    "Counterspell",
+    "Hydroblast",
+    "Pyroblast",
+    "Skred",
+    "Spell Pierce",
+    "Breath Weapon",
+    "Cast into the Fire",
+    "Fiery Cannonade"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/4c-control.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

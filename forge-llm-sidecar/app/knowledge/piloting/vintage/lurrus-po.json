@@ -1,0 +1,124 @@
+{
+  "archetype": "Lurrus PO",
+  "format": "vintage",
+  "strategy_type": "combo",
+  "overview": "This deck leverages Lurrus of the Dream-Den to repeatedly cast cheap spells from the graveyard, generating overwhelming card advantage and board presence. It aims to out-value control and combo decks through recursion while stabilizing against aggro with efficient interaction and card draw.",
+  "win_conditions": [
+    "Lurrus + cheap spells generating infinite value or a specific win condition dug for with Stock Up.",
+    "Once the engine is online, chain cheap spells to overwhelm opponents or assemble a combo finisher."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing WUR fixing), Lurrus, and at least two 1-3 mana spells.",
+      "Stock Up is keepable if paired with lands and a cheap spell."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with three or more lands, only high-cost spells, or no early interaction/recursion pieces."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a 1-mana spell or drop Thundertrap Trainer if mana allows.",
+      "Turn 2: Play Lurrus or another cheap spell to establish the engine.",
+      "Sequence lands to ensure WUR availability.",
+      "Prioritize getting Lurrus to the battlefield and filling the graveyard with castable spells rather than dead weight."
+    ],
+    "mid_game": [
+      "Balance mana between casting threats and paying recursion costs.",
+      "Use Stock Up to refill your hand when resources dip.",
+      "Avoid clogging the graveyard with uncastable spells",
+      "prioritize cheap, synergistic spells that can be cast repeatedly.",
+      "Commit threats when you have graveyard backup and opponent interaction is on cooldown.",
+      "Hold back if facing sweepers or heavy removal.",
+      "Lurrus allows calculated aggression, but don't overextend if you lack recursion answers."
+    ],
+    "late_game": [
+      "Lurrus + cheap spells generating infinite value or a specific win condition dug for with Stock Up.",
+      "Once the engine is online, chain cheap spells to overwhelm opponents or assemble a combo finisher.",
+      "Go all-in when you have Lurrus on the battlefield, a full graveyard of castable spells, and opponent interaction is depleted or on cooldown.",
+      "Also commit when you can safely attack through blockers or cast a win condition."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lurrus of the Dream-Den",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Stock Up",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Thundertrap Trainer",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Lurrus is a legendary companion, so you can only have one in command, but you can cast it from the graveyard repeatedly.",
+    "Stock Up's effect should be optimized for card advantage rather than discarding key pieces.",
+    "Thundertrap Trainer synergizes with high spell counts",
+    "ensure your deck runs enough cheap spells to maximize triggers.",
+    "Common mistake: filling the graveyard with uncastable spells or overcommitting to the board without recursion backup.",
+    "Always track opponent's graveyard and interaction availability."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells to force counters, then recast via Lurrus. Split your casts across turns or use discard to remove counterspells. Prioritize uncounterable threats or spells that provide value even if countered.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Answer early threats and ramp pieces with efficient removal. Don't let them get ahead; use Lurrus to stabilize and out-grind their acceleration. Stock Up to find answers before they snowball.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early removal and counterspells to stabilize. Use Stock Up to dig for answers. Once stabilized, transition to recursion to out-value their board. Thundertrap Trainer can help trigger on their spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with cheap threats and use recursion to out-value their removal. Lurrus allows you to cast multiple spells per turn, overwhelming their interaction. Use Stock Up to dig past their control elements.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Card advantage is paramount. Use Stock Up to out-draw them. Prioritize graveyard hate to disrupt their recursion. Win the resource war by sequencing cheaper spells and forcing them to overcommit.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (e.g., Wrath of God, Supreme Verdict), graveyard hate (Rest in Peace, Leyline of the Void), and combo win conditions.",
+    "Note when opponents tap out for key spells to identify windows for recursion or attacks."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/vintage.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

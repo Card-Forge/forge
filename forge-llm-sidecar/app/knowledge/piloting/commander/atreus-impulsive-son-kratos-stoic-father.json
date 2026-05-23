@@ -1,0 +1,125 @@
+{
+  "archetype": "Atreus, Impulsive Son // Kratos, Stoic Father",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "The deck leverages a dual-state engine to fluidly shift between explosive tempo aggression and resilient control, using Iroas, God of Victory as a combat and value anchor. It aims to out-resource and out-adapt midrange, control, and combo archetypes by dictating pace, trading efficiently, and closing out games through combat advantage or late-game inevitability.",
+  "win_conditions": [
+    "Iroas, God of Victory as a combat finisher or value engine.",
+    "Kratos/Atreus in Impulsive mode with pumped stats.",
+    "Late-game card advantage engines to out-value control and close out games through incremental damage or combat tricks."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including at least one Arcane Signet or a dual land capable of producing R/U/W), Kratos/Atreus, and a mix of turn 1-2 interaction or a finisher."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have zero lands, only single-color sources with no Signet, or a hand composed entirely of high-cost spells with no early plays or mana fixing."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Arcane Signet if available, or deploy a cheap creature/spell to establish board presence.",
+      "Turn 2: Cast Kratos/Atreus, choosing Stoic mode to draw/filter or Impulsive mode to attack/trigger effects.",
+      "Sequence lands to ensure R/U/W availability by turn 3, prioritizing Signet drops to accelerate into key spells."
+    ],
+    "mid_game": [
+      "Maintain a steady R/U/W mana base and use Arcane Signet to accelerate into pivotal spells.",
+      "Manage your hand by trading early threats for interaction, saving Iroas for late-game combat or value triggers.",
+      "Avoid overcommitting to one state",
+      "keep options open to adapt to the board state.",
+      "Commit threats when you have interaction to clear blockers or answer responses.",
+      "Hold back if the opponent has sweepers or heavy removal.",
+      "Use Kratos's defensive capabilities to stabilize, then pivot to Impulsive aggression when it is safe to do so."
+    ],
+    "late_game": [
+      "Iroas, God of Victory as a combat finisher or value engine.",
+      "Kratos/Atreus in Impulsive mode with pumped stats.",
+      "Late-game card advantage engines to out-value control and close out games through incremental damage or combat tricks.",
+      "Go all-in when you have removal for their answer, have established board presence, or when the opponent is at lethal range.",
+      "Commit when you can trade efficiently or when you've drawn into your win condition and they lack interaction."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kratos, Stoic Father",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Iroas, God of Victory",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overcommitting to Impulsive mode without backup, leaving you vulnerable to sweepers.",
+    "Always maintain a balance between the two states.",
+    "Iroas synergizes best with combat-heavy or +1/+1 counter strategies, so track opponent's board state carefully.",
+    "Arcane Signet is crucial for tempo",
+    "don't leave it untapped if you can cast a spell.",
+    "The 'Unknown' format may have specific rules about the dual-state mechanic",
+    "verify timing, priority, and stacking order before tournament play."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use layered spells (impulsive mode first, stoic mode second) and cast around counters with cheap threats. Use Arcane Signet to cast multiple spells in a turn, creating resolution windows. Employ uncounterable elements or protection if available.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use removal on key ramp creatures and hold up interaction for their big threats. Don't overextend into their late-game finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal and defensive Kratos plays. Don't overextend; trade efficiently and survive to turn 4-5. Post-sideboard, prioritize board wipes and direct damage to handle token or swarm strategies.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with resilient threats and card advantage to out-value them. Force them to use removal on multiple targets. Pivot to a longer game if they have sweepers, and use Iroas to win combat exchanges they can't answer.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing hand disruption and targeted removal. Exploit the dual-state mechanic by forcing them to guess your mode. Win combat exchanges with Iroas advantage and maintain better card selection.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Krenko's goblin tokens, Ur-Dragon's board presence), counterspells (Prismari), and combo pieces (Y'shtola, Night's Blessed).",
+    "Key tells include opponents holding up mana on their turn, playing cheap instants/artifacts, or sacrificing creatures for incremental value."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

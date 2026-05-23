@@ -1,0 +1,127 @@
+{
+  "archetype": "Lorehold, the Historian",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Lorehold is a spell-slinging engine that converts instant and sorcery density into Treasure tokens and mana acceleration. It aims to out-value opponents by casting a high volume of cheap spells, leveraging Treasure generation for card advantage, mana flexibility, and late-game finishers, while controlling the board with efficient R/W removal and counters.",
+  "win_conditions": [
+    "Hit the Mother Lode combined with a high-impact instant/sorcery like Lightning Helix, Swords to Plowshares, or a board wipe.",
+    "Treasure token chains can also fuel a win condition like a big artifact or direct damage spell."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (preferably artifact lands like Lorehold Campus or mana rocks), Sol Ring/Mana Crypt, and at least one cheap instant/sorcery.",
+      "Prioritize hands that can cast a spell on turn 2 to trigger Lorehold's Treasure generation."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 4+ lands with no ramp/spells, or 3+ spells with no lands/mana acceleration."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring or another mana rock.",
+      "Turn 2: Cast a cheap spell to trigger Lorehold's Treasure generation, or play a Campus land.",
+      "Sequence mana rocks first to enable early spell casting.",
+      "If you have a Campus, consider tapping it for mana on turn 2 if you need it for a key spell, but remember sacrificing it is part of the deck's engine."
+    ],
+    "mid_game": [
+      "Balance land drops with Lorehold's land-sacrifice mechanic.",
+      "Don't sacrifice lands you need for mana acceleration unless you're casting a high-impact spell.",
+      "Use Treasures for mana when you're mana-screwed, or for specific effects like casting more spells or activating abilities.",
+      "Keep hand size high by using Treasures for card draw or spell duplication.",
+      "Commit threats when you have interaction ready.",
+      "Use Lorehold's Treasure generation to fuel multiple spells per turn.",
+      "Hold back if you're low on removal and facing a board-stomper.",
+      "Prioritize clearing key permanents over casting filler spells."
+    ],
+    "late_game": [
+      "Hit the Mother Lode combined with a high-impact instant/sorcery like Lightning Helix, Swords to Plowshares, or a board wipe.",
+      "Treasure token chains can also fuel a win condition like a big artifact or direct damage spell.",
+      "Go all-in when you have 3+ Treasures, a cleared board, or when the opponent is at lethal range.",
+      "Commit when you can cast multiple spells in response to their interaction."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lorehold, the Historian",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Hit the Mother Lode",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Sacrificing too many lands too early, leaving you mana-flooded or unable to cast spells.",
+    "Always calculate if the Treasure generation is worth the land loss.",
+    "Synergize Treasures with cards that care about artifacts or treasure tokens.",
+    "Watch out for land destruction in a deck that relies on land sacrifice.",
+    "Prioritize casting spells over hoarding Treasures unless a specific finisher requires them."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, uncounterable threats if available, or overpay with Treasures to cast spells. Use instant-speed interaction to clear their counterspellers. Consider spell-skew or redirect effects to bypass counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with cheap spells and Treasures. Use artifact destruction and land destruction to slow them down. Don't trade resources; focus on board wipes and targeted removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with efficient removal and board wipes. Use Treasures to cast multiple spells per turn to outpace their damage. Don't overcommit to a mana sink; prioritize survival.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with cheap, resilient threats. Use Treasures to cast spells around their removal. Force them to use resources on low-impact spells, then close the game with a finisher.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by having better resource management and more efficient spell sequencing. Use counterspells to protect your key spells. Prioritize clearing their Lorehold and generating more Treasures than they can.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for opponent's mana base and hand size.",
+    "If they're holding up blue mana, assume counterspells.",
+    "If they're tapping out for a big creature, have removal ready.",
+    "Track graveyard hate if they're playing reanimation.",
+    "Note when they start sacrificing lands for mana, as they might be playing a similar engine or ramp."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

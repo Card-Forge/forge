@@ -1,0 +1,128 @@
+{
+  "archetype": "Eriette of the Charmed Apple",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck leverages the synergy between Eriette of the Charmed Apple, Sram, Senior Edificer, and All That Glitters to generate a relentless swarm of flying Angels and Soldiers by casting noncreature spells. It wins by outpacing combo and control with incremental value and evasion, while overwhelming aggro with early board presence, targeted removal, and combat advantage.",
+  "win_conditions": [
+    "The token army itself, often boosted by enchantments or equipment.",
+    "Direct damage spells or combat via flying Angels.",
+    "Sometimes a specific win-con like All That Glitters + Eriette + Angel's Grace or similar.",
+    "Close the game by attacking with 5+ Angels or leveraging a board wipe + token generation combo."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing duals or signets for fixing), at least one commander (Eriette/Sram) or All That Glitters, and 2-3 cheap noncreature spells (instants, sorceries, artifacts, or enchantments costing \u22643 mana)."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have only lands, only creatures, or no way to cast noncreature spells in the first three turns."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cheap mana accelerator or instant/sorcery if available.",
+      "Turn 2: Play a second land, cast another noncreature spell or a cheap artifact/enchantment.",
+      "If you have Eriette or Sram on the battlefield, prioritize casting a noncreature spell the turn after they enter to immediately trigger token generation.",
+      "Sequence mana rocks and ramp spells to ensure you can cast multiple noncreature spells per turn by turn 3-4."
+    ],
+    "mid_game": [
+      "Prioritize casting noncreature spells over developing creatures.",
+      "Use card draw and mana acceleration to maintain hand size and mana availability.",
+      "Don't overextend into sweepers",
+      "use the token army to trade favorably or apply pressure.",
+      "Manage mana to have priority for instant-speed noncreature spells to trigger Eriette/Sram at key moments.",
+      "Commit threats when you have removal or board wipes ready to handle opponent responses.",
+      "Hold back if facing sweepers or if you can't protect your commander.",
+      "Use the token army to block aggressively or trade into larger threats."
+    ],
+    "late_game": [
+      "The token army itself, often boosted by enchantments or equipment.",
+      "Direct damage spells or combat via flying Angels.",
+      "Sometimes a specific win-con like All That Glitters + Eriette + Angel's Grace or similar.",
+      "Close the game by attacking with 5+ Angels or leveraging a board wipe + token generation combo.",
+      "When you have enough removal to handle threats, or when the board is clear enough to attack with 5+ Angels.",
+      "Go all-in when you can close the game in 1-2 turns or when you've out-resourced the opponent in noncreature spells."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Eriette of the Charmed Apple",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sram, Senior Edificer",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "All That Glitters",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overcommitting to creatures instead of casting noncreature spells, forgetting that Eriette triggers on any noncreature spell (including instants/sorceries from hand or graveyard), and mismanaging mana for instant-speed triggers.",
+    "All That Glitters is redundant with Eriette but provides backup and can be used for specific synergies.",
+    "Watch for 'cast without targeting' effects to bypass counters.",
+    "In multiplayer, consider commander damage and political dynamics when committing to the board."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, redundant noncreature spells. Cast multiple spells in a row to overwhelm counters. Use instant-speed spells to trigger Eriette before the counter resolves. Consider artifact/enchantment ramp that doesn't target or uses alternative costs.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early interaction (removal on mana dorks/rituals). Board wipes when they have few threats. Don't overextend into their big finishers. Use the token army to trade favorably and apply pressure before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Early removal, board wipes, and life gain. Use tokens to block and trade. Stabilize before going wide. Prioritize protecting your commander and maintaining card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with cheap noncreature spells. Don't let them stabilize. Use card advantage engines. Attack with flying Angels to bypass ground blockers. Force them to use resources on your tokens rather than their win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value exchange is key. Prioritize keeping Eriette/Sram alive. Use removal efficiently. Win by having more noncreature spells in hand or better token synergies. Track graveyard and hand size to out-value the opponent.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes (especially black/white ones), targeted removal on Eriette/Sram, and opponent's combo pieces.",
+    "Note when opponents hold up mana for counterspells or removal.",
+    "Track graveyard contents for reanimation or recursion threats.",
+    "Pay attention to when opponents cast noncreature spells, as they may be setting up their own token engines or win conditions."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "archetype": "Queza, Augur of Agonies",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "The deck leverages high-volume spell casting to trigger life loss and card draw engines like Queza and Psychosis Crawler, converting incremental advantage into a lethal life-loss clock while using black and white removal to control the board. It excels against combo and control decks that rely on single big threats, as its cantrip-heavy game plan out-values them while applying steady pressure.",
+  "win_conditions": [
+    "Queza, Psychosis Crawler, and Marauding Blight-Priest (via sacrifice) form the core win conditions.",
+    "Chain cantrips to trigger life loss repeatedly, then attack with creatures or sacrifice Blight-Priest for the final burst.",
+    "If ahead, use removal to clear blockers and trade life loss for game."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep any hand with 2-3 lands and at least one of Queza, Psychosis Crawler, or Marauding Blight-Priest, plus a cheap cantrip or interaction.",
+      "Prioritize hands that can cast a 1-drop or cantrip on turn 1 to stabilize life total and dig for key pieces."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 0-1 lands, three+ non-basic lands without fetches, or only expensive spells with no early interaction."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cantrip or cheap spell to trigger life loss/card draw, then pass.",
+      "If holding a 1-drop creature, play it instead.",
+      "Turn 2: Develop mana, cast another cantrip or deploy Marauding Blight-Priest.",
+      "Sequence lands to ensure blue and black mana sources are available by turn 2, as Queza requires {U}{B}.",
+      "If drawing multiple cantrips, chain them to dig for removal or finishers while stabilizing life total."
+    ],
+    "mid_game": [
+      "Treat your graveyard as a resource for recursion or sacrifice outlets, but avoid overcommitting to it if graveyard hate is present.",
+      "Mana should be preserved for interaction on opponent's turn",
+      "use cantrips to filter into answers.",
+      "Life total is a resource\u2014track opponent's life loss triggers to calculate when you can safely attack or cast high-cost spells.",
+      "Commit threats only when you have removal or a life-loss clock that outpaces their removal.",
+      "Hold back on overextending if you lack interaction",
+      "Queza and Psychosis Crawler are vulnerable to board wipes, so protect them with counters or spot removal.",
+      "Prioritize clearing key threats that can disrupt your spell-synergy (e.g., hate bears, counters, or sweepers)."
+    ],
+    "late_game": [
+      "Queza, Psychosis Crawler, and Marauding Blight-Priest (via sacrifice) form the core win conditions.",
+      "Chain cantrips to trigger life loss repeatedly, then attack with creatures or sacrifice Blight-Priest for the final burst.",
+      "If ahead, use removal to clear blockers and trade life loss for game.",
+      "Go all-in when your life-loss clock is within 3-5 life of the opponent, you have removal for their key threats, and you can protect your engines from sweepers.",
+      "Also commit when you've drawn into multiple cantrips and a finisher, ensuring you can close the game before they stabilize."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Queza, Augur of Agonies",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Marauding Blight-Priest",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Psychosis Crawler",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Be cautious of self-inflicted life loss from Queza and Psychosis Crawler",
+    "always calculate triggers before casting spells.",
+    "Marauding Blight-Priest is a double-edged sword\u2014sacrificing it for life gain and damage can backfire if you're low on life.",
+    "In formats with graveyard hate, consider reducing recursion spells and focusing on in-the-board synergy.",
+    "Always track opponent's life total relative to your triggers to avoid accidental losses."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multi-target, or split-second spells if available. Cast cantrips in response to their counterspells to dig for answers. If they counter your key spell, use the life loss trigger to pressure them while you dig for a backup plan. Consider sideboarding in spell-skew or similar effects if the format allows.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to force them to play around your threats. Use spot removal to eliminate their mana sources or key creatures. If they stabilize, transition to a control game plan with sweepers and life loss to out-value their big spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize life gain and spot removal to stabilize. Use cantrips to dig for answers while trading life loss for board control. Once stabilized, transition to midrange by deploying Queza/Psychosis Crawler and closing the game with life loss and creature attacks.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure their life total early to force mistakes. Use cantrips to dig through their disruption and find removal for their key threats. If they stabilize, trade life loss triggers for card advantage and close the game with a combination of creature attacks and sacrifice outlets.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by optimizing your spell sequence. Prioritize keeping your life total higher than your opponent's to survive their triggers. Use targeted removal to eliminate their engines first, and sideboard in card advantage engines to out-draw them. Track life loss carefully to avoid accidentally killing yourself.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for opponent's mana development and hand size.",
+    "If they're holding up blue mana, assume counterspells",
+    "if they're tapping for multiple colors, they may have sweepers or late-game finishers.",
+    "Track life loss triggers to know when they're approaching lethal or when you're close to winning.",
+    "Note any graveyard recursion or sacrifice outlets they may be building toward."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "archetype": "Vnwxt, Verbose Host",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Vnwxt, Verbose Host is a spell-copy engine that transforms every spell you cast into a double threat, aiming to overwhelm opponents through exponential value generation and precise stack manipulation. It excels against control and combo decks that rely on single-target answers or linear game plans, as it can easily out-value and disrupt their key interactions.",
+  "win_conditions": [
+    "Copy a board wipe, a massive draw spell, or a direct damage spell to close out the game.",
+    "Use Vnwxt to copy a win condition like a large creature or a game-ending enchantment.",
+    "Arcane Denial can protect your finisher from a last-ditch counter, ensuring your game plan resolves."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 1-2 lands, Vnwxt, and at least two 1-2 mana spells (cantrips, cheap counters, or mana sources).",
+      "Prioritize hands containing Arcane Denial or other flash interaction for early protection."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 3+ lands with no spells, only high-cost spells with no early interaction, or no way to cast Vnwxt by turn 3."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land.",
+      "Turn 2: Cast a 1-mana cantrip or mana accelerator to set up the board.",
+      "Turn 3: Drop Vnwxt and cast a cheap spell to trigger the copy engine.",
+      "If opening with interaction, hold up mana for Arcane Denial flash.",
+      "Land sequencing: Prioritize untapped blue sources early to ensure you can cast Vnwxt and a follow-up spell on turn 3 without stalling."
+    ],
+    "mid_game": [
+      "Preserve mana for interaction until Vnwxt is on the board.",
+      "Use cheap spells to fuel the copy engine without overextending.",
+      "Manage your graveyard carefully since Arcane Denial lives there",
+      "avoid unnecessary discard or self-mill unless it synergizes with your win condition.",
+      "Commit threats only when you have the copy engine active or sufficient interaction to handle removal.",
+      "Hold back on casting expensive spells if you lack protection, as the copy will also be vulnerable.",
+      "Prioritize copying removal or counterspells over raw threats early to maintain board presence."
+    ],
+    "late_game": [
+      "Copy a board wipe, a massive draw spell, or a direct damage spell to close out the game.",
+      "Use Vnwxt to copy a win condition like a large creature or a game-ending enchantment.",
+      "Arcane Denial can protect your finisher from a last-ditch counter, ensuring your game plan resolves.",
+      "Go all-in when you have Vnwxt on the board, a full hand of spells, and sufficient interaction to handle one answer.",
+      "Commit when you can copy a spell that creates a board state impossible to recover from, or when you can force the opponent to use multiple answers for a single spell."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Vnwxt, Verbose Host",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Denial",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Homunculus Horde",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overcommitting to casting spells without considering that the copies will also be vulnerable to removal.",
+    "Always calculate if you can afford to lose both the original and the copy.",
+    "Unique interaction: Arcane Denial's flashback allows you to cast it from the graveyard, making it a free interaction if you can get it there.",
+    "Vnwxt copies resolve on the stack, so you can respond to the copy with your own spells.",
+    "Avoid casting spells you can't afford to lose, and always keep an eye on the stack to maximize copy value."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use flash, split second, or layered spells to overcome counters. Copy Arcane Denial to counter their counterspells. Cast spells in response to their counterspells to maximize value and force them to spend multiple resources on a single interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with cheap spells and Vnwxt. Use counterspells to stop their mana rocks or finishers. Do not let them stabilize; copy their ramp spells if possible to disrupt their plan and maintain tempo.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize bounce spells, counters, and early removal. Use Vnwxt to copy removal to clear multiple threats efficiently. Hold up interaction until they commit to an attack, and use cheap cantrips to dig for answers while stabilizing the board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card draw and spell density. Copy their removal to clear your threats and force them to spend multiple answers. Use indirect damage or evasion to bypass board wipes, and pressure them to make mistakes by threatening multiple lines of play simultaneously.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing card draw and spell recursion. Use targeted removal to eliminate their Vnwxt before they can copy key spells. Control the stack by holding up interaction until they commit to a key spell, and leverage your graveyard resources to outlast them.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers, targeted removal, and counterspells.",
+    "Note when opponents hold up mana (likely for interaction) and adjust spell timing accordingly.",
+    "Track graveyard contents for Arcane Denial or other flashback threats, and monitor their hand size to gauge their ability to respond to your key spells."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

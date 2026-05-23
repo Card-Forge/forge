@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "name": "Selesnya Angels",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "G"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "Selesnya Angels is a resilient Pioneer archetype that leverages typal interactions and massive life gain to outvalue aggressive decks. It relies on efficient mana dorks to accelerate into explosive board states via Collected Company and Kayla's Reconstruction. While it struggles against removal-heavy strategies, its ability to lock down damage-based threats and snowball with lords makes it a top-tier predator in red-heavy metagames.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 4,
+      "cards": [
+        "Enduring Innocence",
+        "Inspiring Overseer"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Collected Company",
+        "Kayla's Reconstruction"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 19,
+      "cards": [
+        "Bishop of Wings",
+        "Giada, Font of Hope",
+        "Resplendent Angel",
+        "Righteous Valkyrie",
+        "Skyclave Apparition"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 32,
+      "cards": [
+        "Archon of Emeria",
+        "Bishop of Wings",
+        "Elvish Mystic",
+        "Enduring Innocence",
+        "Giada, Font of Hope",
+        "Inspiring Overseer",
+        "Llanowar Elves",
+        "Resplendent Angel",
+        "Righteous Valkyrie",
+        "Skyclave Apparition"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 13,
+      "cards": [
+        "Brushland",
+        "Get Lost",
+        "High Noon",
+        "Seam Rip"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 9
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 3,
+      "cards": [
+        "Rest in Peace"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Enduring Innocence"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Collected Company",
+        "Kayla's Reconstruction"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 16,
+      "cards": [
+        "Bishop of Wings",
+        "Giada, Font of Hope",
+        "Resplendent Angel",
+        "Righteous Valkyrie"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Collected Company",
+        "Kayla's Reconstruction"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 14,
+      "cards": [
+        "Archon of Emeria",
+        "Collected Company",
+        "High Noon",
+        "Kayla's Reconstruction"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 20,
+      "cards": [
+        "Brushland",
+        "Giada, Font of Hope",
+        "Hushwood Verge",
+        "Razorverge Thicket",
+        "Temple Garden"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 23,
+      "cards": [
+        "Brushland",
+        "Hushwood Verge",
+        "Plains",
+        "Razorverge Thicket",
+        "Temple Garden"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.19
+  },
+  "dual_role_cards": [
+    {
+      "card": "Archon of Emeria",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bishop of Wings",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brushland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Collected Company",
+      "roles": [
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Enduring Innocence",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Giada, Font of Hope",
+      "roles": [
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "High Noon",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hushwood Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inspiring Overseer",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kayla's Reconstruction",
+      "roles": [
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Razorverge Thicket",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Resplendent Angel",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Righteous Valkyrie",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Skyclave Apparition",
+      "roles": [
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play Bishop of Wings as early as possible to maximize life gain from subsequent angel ETBs",
+    "Hold Skyclave Apparition in hand until the opponent plays Sunspine Lynx or Screaming Nemesis",
+    "Sideboard Portable Hole over Collected Company in games against heavy aggro or when facing Witch's Oven",
+    "Use Kayla's Reconstruction to dig for sideboard cards like Portable Hole when needed",
+    "Common mistake: Overextending into sweepers without backup."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play mana dorks to accelerate into Bishop of Wings and early angels"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish life gain quickly to invalidate damage-based strategies"
+    },
+    {
+      "trigger": "early game",
+      "line": "Sideboard out mana dorks if racing is not the priority"
+    }
+  ],
+  "kill_priority": [
+    "Collected Company",
+    "Kayla's Reconstruction",
+    "Bishop of Wings",
+    "Giada, Font of Hope",
+    "Resplendent Angel",
+    "Righteous Valkyrie",
+    "Skyclave Apparition",
+    "Archon of Emeria"
+  ],
+  "interaction_to_disrupt": [
+    "Brushland",
+    "Get Lost",
+    "High Noon",
+    "Seam Rip",
+    "Archon of Emeria",
+    "Collected Company",
+    "Kayla's Reconstruction"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/selesnya-angels.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

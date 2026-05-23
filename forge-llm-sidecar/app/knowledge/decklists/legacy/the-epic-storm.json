@@ -1,0 +1,145 @@
+{
+  "archetype": "The EPIC Storm",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/the-epic-storm.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ad Nauseam"
+    },
+    {
+      "qty": 1,
+      "name": "Badlands"
+    },
+    {
+      "qty": 2,
+      "name": "Beseech the Mirror"
+    },
+    {
+      "qty": 2,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 3,
+      "name": "Burning Wish"
+    },
+    {
+      "qty": 4,
+      "name": "Chrome Mox"
+    },
+    {
+      "qty": 4,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Gaea's Will"
+    },
+    {
+      "qty": 2,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 4,
+      "name": "Infernal Tutor"
+    },
+    {
+      "qty": 4,
+      "name": "Lion's Eye Diamond"
+    },
+    {
+      "qty": 4,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 2,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 1,
+      "name": "Raucous Theater"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Tendrils of Agony"
+    },
+    {
+      "qty": 3,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 3,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 2,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 2,
+      "name": "Wishclaw Talisman"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Beseech the Mirror"
+    },
+    {
+      "qty": 4,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 1,
+      "name": "Debt to the Deathless"
+    },
+    {
+      "qty": 1,
+      "name": "Helm of Obedience"
+    },
+    {
+      "qty": 1,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Peer into the Abyss"
+    },
+    {
+      "qty": 1,
+      "name": "Tendrils of Agony"
+    },
+    {
+      "qty": 1,
+      "name": "Thoughtseize"
+    }
+  ]
+}

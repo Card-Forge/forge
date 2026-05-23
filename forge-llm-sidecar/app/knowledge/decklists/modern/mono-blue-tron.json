@@ -1,0 +1,121 @@
+{
+  "archetype": "Mono-Blue Tron",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/mono-blue-tron.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Condescend"
+    },
+    {
+      "qty": 3,
+      "name": "Dress Down"
+    },
+    {
+      "qty": 1,
+      "name": "Emrakul, the Aeons Torn"
+    },
+    {
+      "qty": 1,
+      "name": "Emrakul, the Promised End"
+    },
+    {
+      "qty": 4,
+      "name": "Expedition Map"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 6,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Kozilek's Command"
+    },
+    {
+      "qty": 4,
+      "name": "Nulldrifter"
+    },
+    {
+      "qty": 2,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 4,
+      "name": "Portent of Calamity"
+    },
+    {
+      "qty": 2,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 2,
+      "name": "Subtlety"
+    },
+    {
+      "qty": 2,
+      "name": "Ugin's Binding"
+    },
+    {
+      "qty": 3,
+      "name": "Ugin's Labyrinth"
+    },
+    {
+      "qty": 4,
+      "name": "Ugin, Eye of the Storms"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Mine"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Power Plant"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Tower"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Hurkyl's Recall"
+    },
+    {
+      "qty": 3,
+      "name": "Mystical Dispute"
+    },
+    {
+      "qty": 2,
+      "name": "Stern Scolding"
+    },
+    {
+      "qty": 2,
+      "name": "Tishana's Tidebinder"
+    },
+    {
+      "qty": 1,
+      "name": "Trinisphere"
+    },
+    {
+      "qty": 2,
+      "name": "Unable to Scream"
+    }
+  ]
+}

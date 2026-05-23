@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Access to Once Upon a Time and Elvish Reclaimer on turn 1",
       "Mana acceleration on turn 1 and Wight of the Reliquary on turn 2",
-      "Threat of Natural Order as early as turn 3"
+      "Threat of Natural Order as early as turn 3",
+      "Keep hands with 2-3 lands, Ignoble Hierarch, Cradle of Safety, Green Sun's Zenith, or early interaction (Fatal Push, Lightning Helix).",
+      "Prioritize hands that can play a turn-1 Hierarch or turn-2 GSY/creature."
     ],
     "mulligan_criteria": [
       "Hands containing Craterhoof Behemoth (dead draw)",
       "Too much mana and not enough action",
-      "Vulnerability to Wasteland or Blood Moon without early protection"
+      "Vulnerability to Wasteland or Blood Moon without early protection",
+      "Mulligan pure land hands, hands with only three-drops, or hands lacking early interaction/creatures."
     ],
     "examples": [
       {
@@ -75,17 +78,31 @@
     "early_game": [
       "Play 1-mana dorks and Elvish Reclaimer to establish board presence and mana",
       "Use Once Upon a Time for consistency and card advantage",
-      "Search for lands with Wight of the Reliquary and Elvish Reclaimer"
+      "Search for lands with Wight of the Reliquary and Elvish Reclaimer",
+      "Turn 1: Play land, cast Ignoble Hierarch.",
+      "If you have a fetch and a basic, fetch into a black source for Thoughtseize/Fatal Push.",
+      "Turn 2: Cast Green Sun's Zenith to find Badgermole Cub or Thalia, or play a land + spell.",
+      "Sequence lands to ensure double black for hand disruption or green for GSY, while maintaining flexibility for fetches."
     ],
     "mid_game": [
       "Enchant Elvish Reclaimer with Springheart Nantuko to generate insect tokens",
       "Tutor for answers like Grist, the Hunger Tide or Endurance using Green Sun's Zenith",
-      "Set up Gaea's Cradle and activate Lair of the Hydra for extra mana"
+      "Set up Gaea's Cradle and activate Lair of the Hydra for extra mana",
+      "Use fetch lands to cycle and find duals, keeping hand size up with Thoughtseize/Duress.",
+      "Manage your graveyard proactively",
+      "if the opponent is running graveyard strategies, deploy Rest in Peace or Leyline of the Void early.",
+      "Avoid overcommitting mana to Cradle without a clear threat to protect.",
+      "Commit threats like Badgermole Cub or Thalia when the opponent has no spot removal or sweepers.",
+      "Hold back if they have unanswered interaction or a potential board wipe."
     ],
     "late_game": [
       "Cast Natural Order into Craterhoof Behemoth or Atraxa, Grand Unifier",
       "Copy the enchanted creature to create massive value",
-      "Win attrition wars against blue tempo and combo decks"
+      "Win attrition wars against blue tempo and combo decks",
+      "Badgermole Cub (unblockable), Thalia, Guardian of Thraben (taxes), and Knight of the Reliquary (grind).",
+      "Secure victory by establishing a protected board, then attacking with unblockable or tax-inducing creatures while using removal to clear blockers.",
+      "Go all-in when the opponent has no removal, their graveyard is empty, or they've tapped out for a non-essential spell.",
+      "Also commit when you have multiple threats on board and they lack sweepers."
     ]
   },
   "key_cards": [
@@ -134,7 +151,10 @@
     "Prioritize playing Atraxa, Grand Unifier as fast as possible against Red Stompy",
     "Avoid over-relying on mana dorks when facing Orcish Bowmasters",
     "Use Gaea's Cradle mana to activate Lair of the Hydra for powerful attacks",
-    "Tutor for specific answers with Wight, Reclaimer, and Zenith before committing to win conditions"
+    "Tutor for specific answers with Wight, Reclaimer, and Zenith before committing to win conditions",
+    "Common mistakes include overcommitting to Cradle of Safety without a threat, mismanaging fetch lands, and failing to sideboard in Rest in Peace/Leyline against combo.",
+    "Unique interactions: Ignoble Hierarch can be sacrificed to pay for Cradle of Safety or other costs, and Green Sun's Zenith is a sorcery so must be cast on your turn when the opponent lacks counters.",
+    "Always track the opponent's graveyard and removal count to make informed decisions."
   ],
   "matchups": [
     {
@@ -178,6 +198,31 @@
         "Vexing Bauble",
         "Mystic Forge"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast Green Sun's Zenith when the opponent is tapped out or has no counterspells in hand. Use cheap creatures like Ignoble Hierarch that are hard to counter, and sequence spells to force counters on less critical plays. If they counter GSY, follow up with a creature and Cradle to stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use Thoughtseize and Duress to hit mana dorks and key ramp spells. Deploy removal on early threats, and use Cradle of Safety to protect your own board from being overrun. If they run graveyard ramp, bring in Rest in Peace.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early interaction (Fatal Push, Lightning Helix), then deploy Cradle of Safety to protect your board from combat damage. Use Thalia to tax their attacks, and Rest in Peace to stop graveyard-based aggro. Trade efficiently and close out games with unblockable threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with cheap threats and hand disruption to disrupt their hand. Use Green Sun's Zenith to find value creatures, and Cradle to protect your board from spot removal. Win the attrition war by out-grinding them with Knight of the Reliquary and graveyard recursion if applicable.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Out-value with better sequencing and hand disruption. Use Thoughtseize to disrupt their Green Sun's Zenith or early threats, and Cradle to protect your board. Win the resource war by trading efficiently and leveraging graveyard hate if they run it.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -190,10 +235,12 @@
     "The One Ring",
     "Vexing Bauble",
     "Dragon's Rage Channeler",
-    "Delver of Secrets"
+    "Delver of Secrets",
+    "Watch for sweepers (Supreme Verdict, Anger of the Gods), spot removal (Lightning Helix, Go for the Throat), and graveyard strategies."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-cradle-control-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T07:38:44+00:00",
     "model": "local-model",
@@ -224,6 +271,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

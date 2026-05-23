@@ -1,0 +1,201 @@
+{
+  "archetype": "4c Control",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/4c-control.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Aang, Swift Savior"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Cornucopia"
+    },
+    {
+      "qty": 1,
+      "name": "Ba Sing Se"
+    },
+    {
+      "qty": 2,
+      "name": "Concealed Courtyard"
+    },
+    {
+      "qty": 3,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 2,
+      "name": "Deadly Cover-Up"
+    },
+    {
+      "qty": 3,
+      "name": "Dreamroot Cascade"
+    },
+    {
+      "qty": 1,
+      "name": "Duress"
+    },
+    {
+      "qty": 3,
+      "name": "Emeritus of Abundance"
+    },
+    {
+      "qty": 1,
+      "name": "Emeritus of Ideation"
+    },
+    {
+      "qty": 4,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 1,
+      "name": "Glorious Decay"
+    },
+    {
+      "qty": 2,
+      "name": "Icetill Explorer"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Pest Control"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Professor Dellian Fel"
+    },
+    {
+      "qty": 2,
+      "name": "Rakshasa's Bargain"
+    },
+    {
+      "qty": 3,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Cottage"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Reef"
+    },
+    {
+      "qty": 2,
+      "name": "Shoot the Sheriff"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 1,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 2,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 2,
+      "name": "Three Steps Ahead"
+    },
+    {
+      "qty": 2,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Willowrush Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Witherbloom Charm"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Aang, Swift Savior"
+    },
+    {
+      "qty": 1,
+      "name": "Annul"
+    },
+    {
+      "qty": 1,
+      "name": "Day of Black Sun"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Cover-Up"
+    },
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Essence Scatter"
+    },
+    {
+      "qty": 1,
+      "name": "Heritage Reclamation"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Pest Control"
+    },
+    {
+      "qty": 1,
+      "name": "Sandman, Shifting Scoundrel"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 1,
+      "name": "Urgent Necropsy"
+    }
+  ]
+}

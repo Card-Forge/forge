@@ -1,0 +1,109 @@
+{
+  "archetype": "Naya Ramp",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/naya-ramp.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Arbor Elf"
+    },
+    {
+      "qty": 2,
+      "name": "Armadillo Cloak"
+    },
+    {
+      "qty": 4,
+      "name": "Avenging Hunter"
+    },
+    {
+      "qty": 2,
+      "name": "Bannerhide Krushok"
+    },
+    {
+      "qty": 13,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Generous Ent"
+    },
+    {
+      "qty": 4,
+      "name": "Goliath Paladin"
+    },
+    {
+      "qty": 4,
+      "name": "Jewel Thief"
+    },
+    {
+      "qty": 4,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 3,
+      "name": "Nyxborn Hydra"
+    },
+    {
+      "qty": 2,
+      "name": "Pegasus Guardian"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Radiant Grove"
+    },
+    {
+      "qty": 1,
+      "name": "Sagu Wildling"
+    },
+    {
+      "qty": 4,
+      "name": "Utopia Sprawl"
+    },
+    {
+      "qty": 3,
+      "name": "Vines of Vastwood"
+    },
+    {
+      "qty": 4,
+      "name": "Wild Growth"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Armadillo Cloak"
+    },
+    {
+      "qty": 2,
+      "name": "Coalition Honor Guard"
+    },
+    {
+      "qty": 1,
+      "name": "Fiery Cannonade"
+    },
+    {
+      "qty": 1,
+      "name": "Flaring Pain"
+    },
+    {
+      "qty": 2,
+      "name": "Guardian Naga"
+    },
+    {
+      "qty": 2,
+      "name": "Moment's Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Shinen of Life's Roar"
+    },
+    {
+      "qty": 3,
+      "name": "Thraben Charm"
+    }
+  ]
+}

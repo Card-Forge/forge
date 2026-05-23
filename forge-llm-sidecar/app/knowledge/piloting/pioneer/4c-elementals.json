@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early land drops and Llanowar Elves",
       "Hands containing Collected Company with sufficient mana sources",
-      "Hands with early Elemental threats or draw spells"
+      "Hands with early Elemental threats or draw spells",
+      "Keep hands with 2-3 lands, at least one mana dork (Llanowar Elves/Elvish Mystic), and 2-3 cheap elementals or Collected Company.",
+      "Prioritize hands that can cast Collected Company by Turn 3."
     ],
     "mulligan_criteria": [
       "Hands with three or more lands",
       "Hands lacking early interaction or ramp",
-      "Hands with only high-cost Elementals and no acceleration"
+      "Hands with only high-cost Elementals and no acceleration",
+      "Mulligan hands with 3+ lands, zero acceleration, or only expensive spells."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Play lands and Llanowar Elves to accelerate mana",
       "Cast low-cost Elementals to apply early pressure",
-      "Hold up mana for potential early interaction"
+      "Hold up mana for potential early interaction",
+      "Turn 1: Play Llanowar Elves or Elvish Mystic.",
+      "Turn 2: Cast another cheap spell (e.g., Kirtar's Wrath, Risen Reef, or another dork), then play a land.",
+      "If holding Farseek, use it on Turn 2 to ensure double-forest for Turn 3.",
+      "Turn 3: Cast Collected Company targeting high-impact elementals or value planeswalkers.",
+      "If you have a strong early board, consider holding Company for a better window or to stabilize."
     ],
     "mid_game": [
       "Cast Collected Company to flood the board with Elementals",
       "Use Risen Reef to draw cards and enable tribal synergies",
-      "Stabilize against removal by maintaining board presence"
+      "Stabilize against removal by maintaining board presence",
+      "Preserve Collected Company for the best possible target",
+      "avoid casting it on Turn 3 if you can wait for a more favorable window.",
+      "Track graveyard resources if facing recursion decks.",
+      "Keep 1-2 mana open for instant-speed interaction when possible, but don't let it slow your curve.",
+      "Commit elementals aggressively early to pressure, but hold back if you suspect a board wipe or targeted removal.",
+      "Use Collected Company to stabilize or close out games rather than overextending into sweepers."
     ],
     "late_game": [
       "Push damage with wide board or large finishers",
       "Leverage card advantage from tribal draw effects",
-      "Control the board with removal or counterspells if available"
+      "Control the board with removal or counterspells if available",
+      "Collected Company into Risen Reef, Karn, Gideon, or multiple elementals.",
+      "Alternatively, cast a string of cheap elementals to win combat.",
+      "Planeswalkers like Karn or Gideon can also close out games by generating value or removing key threats.",
+      "Go all-in when you have Collected Company in hand, sufficient mana, and the opponent has no clear answer to your targets.",
+      "Also commit when you're ahead on board and can close the game in 1-2 turns, or when you're forced to race against aggro."
     ]
   },
   "key_cards": [
@@ -58,7 +77,13 @@
   "sequencing_tips": [
     "Prioritize playing Llanowar Elves before other ramp to maximize mana efficiency",
     "Cast Collected Company only when you have enough mana to follow up or survive board wipes",
-    "Hold up mana for interaction when facing control or midrange decks"
+    "Hold up mana for interaction when facing control or midrange decks",
+    "Collected Company is the deck's engine",
+    "never cast it on an empty board unless you're desperate.",
+    "Risen Reef is a finisher, not a turn-2 play.",
+    "Watch for graveyard hate if facing Niv to Light.",
+    "The deck is fragile to board wipes, so timing your Collected Company is critical.",
+    "Avoid overcommitting to the board if you have no way to recover from a sweeper."
   ],
   "matchups": [
     {
@@ -87,15 +112,34 @@
         "Card advantage engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast cheap spells first to force counters, then follow up. Use Collected Company to find threats that are hard to counter or have evasion. Split your casts across turns if needed, and be ready to pivot to a planeswalker or finisher if your main targets are countered.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "They will outpace you. Prioritize racing with cheap elementals and use Collected Company to find a game-ending threat or planeswalker. Don't get bogged down in long games; force the pace and look for early wins.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value exchange is key. Track their Collected Company targets and use spot removal efficiently. Prioritize keeping Collected Company for a better target than theirs. Don't overcommit elementals if they have removal ready, and look for opportunities to trade up on planeswalkers or finishers.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes like Supreme Verdict or Wrath of God",
     "Direct removal like Lightning Strike or Fatal Push",
-    "Counterspells like Negate or Swan Song"
+    "Counterspells like Negate or Swan Song",
+    "Watch for sweepers, targeted removal (Path, Dispel), and graveyard recursion.",
+    "Note when opponents tap out for counters or removal to time your Collected Company cast.",
+    "Track their life total to know when to race versus when to stabilize."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:37:08+00:00",
     "model": "local-model",
@@ -111,6 +155,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

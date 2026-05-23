@@ -1,0 +1,97 @@
+{
+  "archetype": "Infect",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/infect.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Blight Mamba"
+    },
+    {
+      "qty": 4,
+      "name": "Embiggen"
+    },
+    {
+      "qty": 4,
+      "name": "Escape Tunnel"
+    },
+    {
+      "qty": 9,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Glistener Elf"
+    },
+    {
+      "qty": 4,
+      "name": "Go Forth"
+    },
+    {
+      "qty": 4,
+      "name": "Hickory Woodlot"
+    },
+    {
+      "qty": 4,
+      "name": "Ichorclaw Myr"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Augur"
+    },
+    {
+      "qty": 4,
+      "name": "Might of Old Krosa"
+    },
+    {
+      "qty": 4,
+      "name": "Mutagenic Growth"
+    },
+    {
+      "qty": 4,
+      "name": "Rancor"
+    },
+    {
+      "qty": 1,
+      "name": "Seal of Strength"
+    },
+    {
+      "qty": 4,
+      "name": "Snakeskin Veil"
+    },
+    {
+      "qty": 2,
+      "name": "Vines of Vastwood"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 2,
+      "name": "Crop Rotation"
+    },
+    {
+      "qty": 3,
+      "name": "Gut Shot"
+    },
+    {
+      "qty": 3,
+      "name": "Nature's Claim"
+    },
+    {
+      "qty": 2,
+      "name": "Scattershot Archer"
+    },
+    {
+      "qty": 2,
+      "name": "Seal of Strength"
+    },
+    {
+      "qty": 2,
+      "name": "Vines of Vastwood"
+    }
+  ]
+}

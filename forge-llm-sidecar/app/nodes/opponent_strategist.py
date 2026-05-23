@@ -289,11 +289,23 @@ async def opponent_strategist_node(state: GraphState) -> GraphState:
     prior = _bayesian_prior(profile, archetype, fmt, revealed, opp_hand_size)
 
     try:
+        log.info(
+            "llm_call node=opponent_strategist archetype=%s format=%s confidence=%.2f decision=%s",
+            archetype,
+            fmt,
+            confidence,
+            decision,
+        )
         result = await generate_json(
             _build_prompt(state, profile, prior, revealed),
             system=_STRATEGIST_SYSTEM_PROMPT,
             model=CONFIG.strategist_model_name,
             temperature=0.3,
+        )
+        log.info(
+            "llm_result node=opponent_strategist archetype=%s format=%s",
+            archetype,
+            fmt,
         )
     except LLMError as exc:
         log.warning("opponent_strategist: LLM call failed (%s); keeping deterministic inference", exc)

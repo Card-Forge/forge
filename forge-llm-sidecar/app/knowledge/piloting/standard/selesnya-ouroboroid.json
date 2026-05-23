@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two one- or two-mana creatures",
       "Combinations featuring Badgermole Cub and a removal or board presence spell",
-      "Draws that include Brightglass Gearhulk or Ouroboroid alongside early curve creatures"
+      "Draws that include Brightglass Gearhulk or Ouroboroid alongside early curve creatures",
+      "Keep hands with 2-3 lands, a 1-dropper (e.g., Badgermole Cub), and a 2-dropper or Ouroboroid creature.",
+      "Prioritize hands with 3+ mana sources and at least one creature that can trigger Ouroboroid on turn 2."
     ],
     "mulligan_criteria": [
       "Hands lacking any creature or land drop by turn two",
       "Draws heavy on high-cost finishers without early acceleration",
-      "Hands missing color fixers or containing only non-creature spells"
+      "Hands missing color fixers or containing only non-creature spells",
+      "Mulligan flood, pure removal, or hands with no 1-drops."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and deploy Badgermole Cub immediately to set the tempo",
       "Prioritize attacking over holding up mana to force early concessions",
-      "Use any available white removal to clear blockers threatening your curve"
+      "Use any available white removal to clear blockers threatening your curve",
+      "Turn 1: Play a land, cast a 1-dropper.",
+      "Turn 2: Play a land, cast a 2-dropper or the Ouroboroid creature.",
+      "If you have a 1-dropper out, the Ouroboroid triggers for +1/+1.",
+      "If you have multiple, it scales.",
+      "Use mana efficiently to set up the board."
     ],
     "mid_game": [
       "Transition into Brightglass Gearhulk to apply heavy pressure and clear minor blockers",
       "Maintain board width by playing creatures on curve and trading efficiently",
-      "Begin setting up recursive loops or tribal synergies that empower Ouroboroid"
+      "Begin setting up recursive loops or tribal synergies that empower Ouroboroid",
+      "Mana should be held for key triggers or Gearhulk.",
+      "Don't overextend into sweepers.",
+      "Use graveyard strategically",
+      "Gearhulk needs targets.",
+      "Commit threats when you have protection or can outvalue removal.",
+      "Hold back if opponent has sweepers or hard removal."
     ],
     "late_game": [
       "Cast Ouroboroid to secure a self-sustaining threat that recurs or scales indefinitely",
       "Push lethal damage with a wide board while protecting key finishers",
-      "Cycle through the deck to find additional value or recursion to outlast opponent's resources"
+      "Cycle through the deck to find additional value or recursion to outlast opponent's resources",
+      "Brightglass Gearhulk recycles a 1-dropper to cast another Ouroboroid creature, triggering multiple times.",
+      "Or drop a massive Ouroboroid creature with multiple 1-drops on board.",
+      "When you have 2+ small creatures on board, enough mana for a Gearhulk + trigger, or when opponent is low on answers."
     ]
   },
   "key_cards": [
@@ -59,7 +76,11 @@
     "Always attack with Badgermole Cub before holding up removal unless a specific blocker demands it",
     "Hold up white mana selectively to bounce or remove threats that would stall Brightglass Gearhulk",
     "Delay casting Ouroboroid until you have a clear path to lethal or a way to protect it from sweepers",
-    "Prioritize playing lands before creatures to ensure you can cast your curve without tapping out unnecessarily"
+    "Prioritize playing lands before creatures to ensure you can cast your curve without tapping out unnecessarily",
+    "Ouroboroid triggers on ETB, so sequence matters.",
+    "Gearhulk can be cast in response to a trigger to maximize counters.",
+    "Don't overcommit to the board without protection.",
+    "Watch for bounce effects that can disrupt triggers."
   ],
   "matchups": [
     {
@@ -97,16 +118,34 @@
         "Mana acceleration",
         "Instant-speed win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, split spells if available, or cast around counters. Gearhulk can be cast in response to a counter if needed, or use mana dorks/rituals to cast around.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use removal on key ramp creatures, and don't let them stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value engine wins. Prioritize graveyard recursion, protect your Ouroboroid creatures, and out-resource with Gearhulk.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipe spells",
     "Targeted removal for large creatures",
     "Counterspells targeting finishers",
-    "Graveyard hate or recursion denial"
+    "Graveyard hate or recursion denial",
+    "Watch for sweepers (Wrath, Anger), hard removal (Path, Swords), and graveyard hate.",
+    "Note when opponents tap out for counterspells or board wipes."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:09:09+00:00",
     "model": "local-model",
@@ -122,6 +161,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

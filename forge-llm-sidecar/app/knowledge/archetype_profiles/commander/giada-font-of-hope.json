@@ -1,0 +1,833 @@
+{
+  "schema_version": 1,
+  "name": "Giada, Font of Hope",
+  "format": "commander",
+  "colors": [
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "Mono-white voltron-token engine that wins by attacking with Giada to generate a resilient army, then leveraging her tap ability to pump her for lethal or using tokens to control the board and out-value opponents. Excels in midrange and control matchups where it can stabilize and snowball, but must race fast aggro and artifact/ramp decks.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 11,
+      "cards": [
+        "Angelic Sleuth",
+        "Exemplar of Light",
+        "Firemane Commando",
+        "Folk Hero",
+        "Glimmer Lens",
+        "Inspiring Overseer",
+        "Mask of Memory",
+        "Minas Tirith",
+        "Rogue's Gloves",
+        "Secluded Steppe",
+        "Trouble in Pairs"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Conjurer's Mantle",
+        "Elspeth Resplendent",
+        "Gathering Stone",
+        "Herald's Horn",
+        "Monumental Henge",
+        "Path of Ancestry",
+        "Study Hall",
+        "Windbrisk Heights"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 2
+    },
+    "tutors_wildcards": {
+      "target_count": 5,
+      "cards": [
+        "Angel of the Ruins",
+        "Demolition Field",
+        "Gift of Estates",
+        "Land Tax",
+        "Myriad Landscape"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Bishop of Wings",
+        "Boon-Bringer Valkyrie",
+        "Windbrisk Heights"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 52,
+      "cards": [
+        "Angel of Destiny",
+        "Angel of Finality",
+        "Angel of Jubilation",
+        "Angel of Sanctions",
+        "Angel of Vitality",
+        "Angel of the Dire Hour",
+        "Angel of the Ruins",
+        "Angelic Curator",
+        "Angelic Sleuth",
+        "Archangel of Tithes",
+        "Basri Ket",
+        "Bishop of Wings",
+        "Blinding Light",
+        "Boon-Bringer Valkyrie",
+        "Bruna, the Fading Light",
+        "Elspeth Resplendent",
+        "Emancipation Angel",
+        "Exemplar of Light",
+        "Firemane Commando",
+        "Giada, Font of Hope",
+        "Gisela, the Broken Blade",
+        "Herald of War",
+        "Inspiring Overseer",
+        "Invasion of Gobakhan",
+        "Irregular Cohort",
+        "Kabira Takedown",
+        "Luminarch Ascension",
+        "Lyra Dawnbringer",
+        "Metropolis Reformer",
+        "Norn's Choirmaster",
+        "Ondu Inversion",
+        "Patron of the Valiant",
+        "Pearl Medallion",
+        "Ravnica at War",
+        "Razorgrass Ambush",
+        "Renounce the Guilds",
+        "Resplendent Angel",
+        "Resplendent Marshal",
+        "Roaming Throne",
+        "Segovian Angel",
+        "Sephara, Sky's Blade",
+        "Serra Redeemer",
+        "Sigarda's Vanguard",
+        "Sol Ring",
+        "Speaker of the Heavens",
+        "Stalwart Valkyrie",
+        "Starnheim Aspirant",
+        "Steel Seraph",
+        "Sunblast Angel",
+        "Thraben Watcher",
+        "Valkyrie Harbinger",
+        "Youthful Valkyrie"
+      ],
+      "mainboard_count": 47,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Angel of Destiny",
+        "Angel of Finality",
+        "Angel of Sanctions",
+        "Austere Command",
+        "Bruna, the Fading Light",
+        "Cleric Class",
+        "Damning Verdict",
+        "Demolition Field",
+        "Emeria, the Sky Ruin",
+        "Generous Gift",
+        "Mask of Memory",
+        "Mass Calcify",
+        "Rogue's Gloves",
+        "Sephara, Sky's Blade",
+        "Sunblast Angel",
+        "Swords to Plowshares",
+        "Valorous Stance"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 10,
+      "cards": [
+        "Abandoned Air Temple",
+        "Austere Command",
+        "Basri Ket",
+        "Damning Verdict",
+        "Farewell",
+        "High Ground",
+        "Mass Calcify",
+        "Patron of the Valiant",
+        "Resplendent Marshal",
+        "Sunblast Angel"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 9,
+      "cards": [
+        "Angelic Curator",
+        "Arcane Lighthouse",
+        "Basri Ket",
+        "Metropolis Reformer",
+        "Roaming Throne",
+        "Sejiri Steppe",
+        "Sephara, Sky's Blade",
+        "Surge of Salvation",
+        "Valorous Stance"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Mask of Memory"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 9,
+      "cards": [
+        "Angel of Finality",
+        "Angel of Sanctions",
+        "Bruna, the Fading Light",
+        "Cleric Class",
+        "Emeria, the Sky Ruin",
+        "Farewell",
+        "Gathering Stone",
+        "Resplendent Marshal",
+        "Stalwart Valkyrie"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 7,
+      "cards": [
+        "Angel of Sanctions",
+        "Bruna, the Fading Light",
+        "Cleric Class",
+        "Emancipation Angel",
+        "Emeria, the Sky Ruin",
+        "Resplendent Marshal",
+        "Stalwart Valkyrie"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Folk Hero",
+        "Oketra's Monument"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 3,
+      "cards": [
+        "Bishop of Wings",
+        "Boon-Bringer Valkyrie",
+        "Windbrisk Heights"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Land Tax",
+        "Surge of Salvation"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 18,
+      "cards": [
+        "Abandoned Air Temple",
+        "Arcane Lighthouse",
+        "Arcane Signet",
+        "Castle Ardenvale",
+        "Cave of the Frost Dragon",
+        "Demolition Field",
+        "Emeria, the Sky Ruin",
+        "Giada, Font of Hope",
+        "Idyllic Grange",
+        "Minas Tirith",
+        "Monumental Henge",
+        "Myriad Landscape",
+        "Path of Ancestry",
+        "Secluded Steppe",
+        "Sejiri Steppe",
+        "Study Hall",
+        "Terrain Generator",
+        "Windbrisk Heights"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 35,
+      "cards": [
+        "Abandoned Air Temple",
+        "Arcane Lighthouse",
+        "Castle Ardenvale",
+        "Cave of the Frost Dragon",
+        "Demolition Field",
+        "Emeria, the Sky Ruin",
+        "Idyllic Grange",
+        "Minas Tirith",
+        "Monumental Henge",
+        "Myriad Landscape",
+        "Path of Ancestry",
+        "Plains",
+        "Secluded Steppe",
+        "Sejiri Steppe",
+        "Study Hall",
+        "Terrain Generator",
+        "Windbrisk Heights"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Basri Ket",
+        "Elspeth Resplendent"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.32
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abandoned Air Temple",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Angel of Destiny",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Angel of Finality",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Angel of Sanctions",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Angel of the Ruins",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Angelic Curator",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Angelic Sleuth",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Lighthouse",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Austere Command",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Basri Ket",
+      "roles": [
+        "planeswalker_threats",
+        "protection",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bishop of Wings",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boon-Bringer Valkyrie",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bruna, the Fading Light",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Castle Ardenvale",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cave of the Frost Dragon",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cleric Class",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Damning Verdict",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Demolition Field",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elspeth Resplendent",
+      "roles": [
+        "dig_draw",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emancipation Angel",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emeria, the Sky Ruin",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exemplar of Light",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Farewell",
+      "roles": [
+        "graveyard_enablers",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Firemane Commando",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Folk Hero",
+      "roles": [
+        "card_advantage",
+        "engines"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gathering Stone",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Giada, Font of Hope",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Idyllic Grange",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inspiring Overseer",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Land Tax",
+      "roles": [
+        "hate_pieces",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mask of Memory",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mass Calcify",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Metropolis Reformer",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Minas Tirith",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monumental Henge",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Myriad Landscape",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Patron of the Valiant",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Resplendent Marshal",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Roaming Throne",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rogue's Gloves",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Secluded Steppe",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sejiri Steppe",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sephara, Sky's Blade",
+      "roles": [
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stalwart Valkyrie",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Study Hall",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunblast Angel",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Surge of Salvation",
+      "roles": [
+        "hate_pieces",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Terrain Generator",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Valorous Stance",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windbrisk Heights",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: Attacking with Giada without tapping creatures to pump her, leaving her vulnerable to removal or unable to close the game.",
+    "Always calculate pump math before committing.",
+    "Another mistake: Overcommitting to the board without considering sweepers.",
+    "Use tokens as a buffer, not just for damage.",
+    "Giada's lifelink is crucial for stabilizing against aggressive decks, so don't neglect blocking."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, drop Sol Ring or other ramp."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Cast Giada if possible, or play a cheap land/ramp to set up for Turn 3 Giada."
+    },
+    {
+      "trigger": "early game",
+      "line": "If you can't cast Giada early, use ramp to accelerate and play cheap white creatures or equipment to stabilize."
+    }
+  ],
+  "kill_priority": [
+    "Folk Hero",
+    "Oketra's Monument",
+    "Bishop of Wings",
+    "Boon-Bringer Valkyrie",
+    "Windbrisk Heights",
+    "Basri Ket",
+    "Elspeth Resplendent",
+    "Angel of Destiny"
+  ],
+  "interaction_to_disrupt": [
+    "Angelic Curator",
+    "Arcane Lighthouse",
+    "Basri Ket",
+    "Metropolis Reformer",
+    "Roaming Throne",
+    "Sejiri Steppe",
+    "Sephara, Sky's Blade",
+    "Surge of Salvation"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/giada-font-of-hope.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

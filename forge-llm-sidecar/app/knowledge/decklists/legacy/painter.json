@@ -1,0 +1,141 @@
+{
+  "archetype": "Painter",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/painter.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Moon"
+    },
+    {
+      "qty": 2,
+      "name": "City of Traitors"
+    },
+    {
+      "qty": 2,
+      "name": "Ensnaring Bridge"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Engineer"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Welder"
+    },
+    {
+      "qty": 2,
+      "name": "Great Furnace"
+    },
+    {
+      "qty": 2,
+      "name": "Grindstone"
+    },
+    {
+      "qty": 2,
+      "name": "Karn, the Great Creator"
+    },
+    {
+      "qty": 1,
+      "name": "Lion's Eye Diamond"
+    },
+    {
+      "qty": 1,
+      "name": "Lotus Petal"
+    },
+    {
+      "qty": 2,
+      "name": "Magus of the Moon"
+    },
+    {
+      "qty": 1,
+      "name": "Mishra's Research Desk"
+    },
+    {
+      "qty": 9,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Mox Opal"
+    },
+    {
+      "qty": 4,
+      "name": "Painter's Servant"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Dragon Engine"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 4,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 3,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 4,
+      "name": "Simian Spirit Guide"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 1,
+      "name": "Ensnaring Bridge"
+    },
+    {
+      "qty": 1,
+      "name": "Grindstone"
+    },
+    {
+      "qty": 3,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Mycosynth Lattice"
+    },
+    {
+      "qty": 3,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Void Mirror"
+    }
+  ]
+}

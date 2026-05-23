@@ -1,0 +1,157 @@
+{
+  "archetype": "Cephalid Breakfast",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/cephalid-breakfast.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 1,
+      "name": "Cabal Therapy"
+    },
+    {
+      "qty": 4,
+      "name": "Cephalid Illusionist"
+    },
+    {
+      "qty": 1,
+      "name": "Dread Return"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Flow State"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 1,
+      "name": "Murktide Regent"
+    },
+    {
+      "qty": 3,
+      "name": "Narcomoeba"
+    },
+    {
+      "qty": 3,
+      "name": "Nomads en-Kor"
+    },
+    {
+      "qty": 1,
+      "name": "Orim's Chant"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Polluted Delta"
+    },
+    {
+      "qty": 4,
+      "name": "Ponder"
+    },
+    {
+      "qty": 2,
+      "name": "Prismatic Ending"
+    },
+    {
+      "qty": 1,
+      "name": "Scrubland"
+    },
+    {
+      "qty": 2,
+      "name": "Shuko"
+    },
+    {
+      "qty": 2,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 3,
+      "name": "Tamiyo, Inquisitive Student"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 3,
+      "name": "Tundra"
+    },
+    {
+      "qty": 1,
+      "name": "Undercity Sewers"
+    },
+    {
+      "qty": 1,
+      "name": "Underground Sea"
+    },
+    {
+      "qty": 3,
+      "name": "Urza's Saga"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 1,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 2,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 1,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 1,
+      "name": "Serenity"
+    },
+    {
+      "qty": 2,
+      "name": "Swords to Plowshares"
+    }
+  ]
+}

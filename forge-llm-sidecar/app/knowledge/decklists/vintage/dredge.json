@@ -1,0 +1,105 @@
+{
+  "archetype": "Dredge",
+  "format": "vintage",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/dredge.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Bazaar of Baghdad"
+    },
+    {
+      "qty": 1,
+      "name": "Chalice of the Void"
+    },
+    {
+      "qty": 4,
+      "name": "Creeping Chill"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 4,
+      "name": "Force of Will"
+    },
+    {
+      "qty": 1,
+      "name": "Golgari Grave-Troll"
+    },
+    {
+      "qty": 4,
+      "name": "Golgari Thug"
+    },
+    {
+      "qty": 4,
+      "name": "Grief"
+    },
+    {
+      "qty": 4,
+      "name": "Hollow One"
+    },
+    {
+      "qty": 4,
+      "name": "Ichorid"
+    },
+    {
+      "qty": 1,
+      "name": "Mental Misstep"
+    },
+    {
+      "qty": 2,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 4,
+      "name": "Narcomoeba"
+    },
+    {
+      "qty": 3,
+      "name": "Noxious Revival"
+    },
+    {
+      "qty": 4,
+      "name": "Prized Amalgam"
+    },
+    {
+      "qty": 4,
+      "name": "Serum Powder"
+    },
+    {
+      "qty": 4,
+      "name": "Shambling Shell"
+    },
+    {
+      "qty": 4,
+      "name": "Stinkweed Imp"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 2,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 2,
+      "name": "Sickening Shoal"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 2,
+      "name": "Wasteland"
+    }
+  ]
+}

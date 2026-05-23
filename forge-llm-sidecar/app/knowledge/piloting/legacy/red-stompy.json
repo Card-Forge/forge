@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Hands that can play a threat or disruption on turn 1 or 2",
       "Hands containing acceleration and The One Ring to recover card disadvantage",
-      "Hands with graveyard hate when playing first against Dimir Reanimator"
+      "Hands with graveyard hate when playing first against Dimir Reanimator",
+      "Keep hands with 1-2 lands, Chrome Mox, and at least one of Chalice of the Void, a turn-1/2 threat, or discard.",
+      "Prioritize hands that can chain Mox into a threat or Chalice into a disruption piece."
     ],
     "mulligan_criteria": [
       "Hands that are too slow to return fire or lack turn 1/2 impact",
       "Hands lacking sufficient mana resources to cast key cards",
-      "Hands vulnerable to Daze or Wasteland without backup plans"
+      "Hands vulnerable to Daze or Wasteland without backup plans",
+      "Mulligan if you have 3+ lands with no Mox or threats, or if you lack any way to play a spell on turn 1 or 2."
     ],
     "examples": [
       {
@@ -61,17 +64,31 @@
     "early_game": [
       "Deploy acceleration like Ancient Tomb, Sol Lands, and Chrome Mox to cast Chalice of the Void and Blood Moon by turn 1 or 2",
       "Imprint Pyrogoyf or play Fable of the Mirror-Breaker to establish early board presence",
-      "Use The One Ring to recover cards if the opening hand is thin"
+      "Use The One Ring to recover cards if the opening hand is thin",
+      "Turn 1: Play Chrome Mox, sacrifice it to cast Chalice of the Void (usually on 1 or 2), a turn-1 threat (e.g., Monastery Swiftspear, Goblin Guide), or a discard spell.",
+      "Turn 2: Play a land, then cast your second threat or discard to remove a key opposing piece.",
+      "Sequence lands carefully to ensure you can cast your Mox/Chalice/threats on curve without flooding",
+      "if you have multiple Moxes, hold one for a potential turn-2 play."
     ],
     "mid_game": [
       "Freeze Urza's Saga at two lore counters with Blood Moon to generate Construct tokens indefinitely",
       "Equip tokens with Fable of the Mirror-Breaker and Lavaspur Boots to apply consistent pressure",
-      "Deploy graveyard hate like Soul-Guide Lantern and Pithing Needle to disrupt opponent's strategies"
+      "Deploy graveyard hate like Soul-Guide Lantern and Pithing Needle to disrupt opponent's strategies",
+      "Treat Chrome Mox as a one-time acceleration tool\u2014save it for when you need to cast a high-impact spell early.",
+      "Manage Chalice of the Void by targeting the opponent's most disruptive mana value (usually 1 or 2).",
+      "Use discard to remove counters, removal, or combo pieces rather than wasting it on irrelevant cards.",
+      "Keep your graveyard in mind if the opponent plays graveyard-based strategies, but prioritize board presence over graveyard recursion.",
+      "Commit threats aggressively on turns 1-3 to force interaction.",
+      "Hold back a threat or two if the opponent has shown sweepers or hard removal."
     ],
     "late_game": [
       "Push damage through equipped tokens and Shadowspear's lifelink to win the life total race",
       "Maintain prison board state with Chalice and Blood Moon to stall opponent's recovery",
-      "Use sideboard tools like Disruptor Flute and Fiery Confluence to handle specific late-game threats"
+      "Use sideboard tools like Disruptor Flute and Fiery Confluence to handle specific late-game threats",
+      "Win via combat damage with multiple threats, Broadside Bombardiers' triggered ability (which scales with damage dealt), or direct damage spells.",
+      "Use discard to clear the opponent's hand of blockers or removal, then commit all remaining threats to close the game.",
+      "Go all-in when the opponent has no removal, counters, or sweepers in hand or on the board, or when you can safely attack with multiple threats without risking a fatal counterattack.",
+      "Also commit when you can activate Broadside Bombardiers' ability to deal lethal damage."
     ]
   },
   "key_cards": [
@@ -130,7 +147,12 @@
     "Play Ancient Tomb, then Lavaspur Boots, then a Mox, imprint Pyrogoyf, and follow with Chalice of the Void for 1",
     "If Chalice is inefficient against the matchup, play Fable of the Mirror-Breaker on turn 1 instead",
     "Against certain decks, lead with Magus of the Moon on turn 1 if you can draw additional mana sources",
-    "Use Urza's Saga's third chapter to find a Chrome Mox and fix mana"
+    "Use Urza's Saga's third chapter to find a Chrome Mox and fix mana",
+    "Chrome Mox is a one-shot, so sequence it carefully to maximize its impact.",
+    "Chalice of the Void can be dead if the opponent's key spells are at unexpected mana values, so be flexible with your targets.",
+    "Broadside Bombardiers scales with damage dealt, so use direct damage or discard to remove blockers before attacking.",
+    "Avoid overextending into known sweepers, and always track the opponent's hand for counters and removal.",
+    "Remember that Red-Black Stompy wins by out-sping the opponent in the early game, so prioritize speed and disruption over late-game value."
   ],
   "matchups": [
     {
@@ -176,6 +198,26 @@
         "Show and Tell combo pieces",
         "Instant game-ending sorceries"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Overcommit with threats to force multiple counters, use discard to remove counterspells from hand, and play Chalice on 1 to shut down their disruption. If they counter your Mox, follow up with a land and threat to maintain pressure.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race aggressively and use Chalice on 1 or 2 to disrupt their mana acceleration. Use discard to remove ramp spells or key combo pieces. Don't let them stabilize; pressure them into mistakes before they can cast their finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use discard to remove early threats and hold back mana for spot removal if available. Prioritize blocking or trading efficiently to stabilize, then transition to a midgame pressure strategy. Use Chalice on 1 to disrupt their early game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply relentless pressure with cheap threats and discard to remove key control pieces. Win before they can stabilize or find their answer cards. Use Chalice on 1 or 2 to disrupt their mana and disruption spells.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -191,10 +233,12 @@
     "Boseiju, Who Endures",
     "Force of Vigor",
     "Tamiyo, Seasoned Scholar",
-    "Nomads en-Kor"
+    "Nomads en-Kor",
+    "Watch for counterspells, hard removal, and sweepers."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-saga-moon-red-stompy-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T07:50:23+00:00",
     "model": "local-model",
@@ -212,6 +256,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

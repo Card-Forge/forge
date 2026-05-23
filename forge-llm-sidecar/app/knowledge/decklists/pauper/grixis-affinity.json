@@ -1,0 +1,113 @@
+{
+  "archetype": "Grixis Affinity",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/grixis-affinity.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Blood Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Cryogen Relic"
+    },
+    {
+      "qty": 4,
+      "name": "Drossforge Bridge"
+    },
+    {
+      "qty": 4,
+      "name": "Galvanic Blast"
+    },
+    {
+      "qty": 3,
+      "name": "Great Furnace"
+    },
+    {
+      "qty": 4,
+      "name": "Ichor Wellspring"
+    },
+    {
+      "qty": 3,
+      "name": "Krark-Clan Shaman"
+    },
+    {
+      "qty": 1,
+      "name": "Makeshift Munitions"
+    },
+    {
+      "qty": 4,
+      "name": "Mistvault Bridge"
+    },
+    {
+      "qty": 4,
+      "name": "Myr Enforcer"
+    },
+    {
+      "qty": 3,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 4,
+      "name": "Reckoner's Bargain"
+    },
+    {
+      "qty": 4,
+      "name": "Refurbished Familiar"
+    },
+    {
+      "qty": 3,
+      "name": "Seat of the Synod"
+    },
+    {
+      "qty": 2,
+      "name": "Silverbluff Bridge"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtcast"
+    },
+    {
+      "qty": 3,
+      "name": "Toxin Analysis"
+    },
+    {
+      "qty": 3,
+      "name": "Utrom Monitor"
+    },
+    {
+      "qty": 3,
+      "name": "Vault of Whispers"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Blue Elemental Blast"
+    },
+    {
+      "qty": 2,
+      "name": "Envelop"
+    },
+    {
+      "qty": 2,
+      "name": "Extract a Confession"
+    },
+    {
+      "qty": 2,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 4,
+      "name": "Red Elemental Blast"
+    }
+  ]
+}

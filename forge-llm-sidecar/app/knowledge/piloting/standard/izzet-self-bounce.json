@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing at least one bounce spell and one ETB creature",
       "Two-mana or three-mana curves with early interaction",
-      "Hands that can trigger a bounce loop on turn one or two"
+      "Hands that can trigger a bounce loop on turn one or two",
+      "Keep hands with 2-3 lands, at least one bounce spell (e.g., Unsummon, Return to the Ranks, Fog), and Flow State or Slickshot Show-Off.",
+      "Prioritize hands that can play a land and cast a bounce spell or cheap threat on turn 1."
     ],
     "mulligan_criteria": [
       "Hands lacking bounce spells or ETB targets",
       "High-cost hands with no early game plan",
-      "Hands vulnerable to early aggro pressure without interaction"
+      "Hands vulnerable to early aggro pressure without interaction",
+      "Mulligan hands with 3+ lands and no early interaction, or hands with multiple bounce spells but no mana/land base."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play cheap ETB creatures and immediately bounce them to draw cards",
       "Use bounce spells as early interaction against opponent's threats",
-      "Establish a minimal board presence while cycling through the deck"
+      "Establish a minimal board presence while cycling through the deck",
+      "Turn 1: Play a land, cast a cheap bounce spell targeting an opponent's threat or your own creature to trigger Flow State.",
+      "If you have Slickshot Show-Off, cast it on turn 2, bounce it back to hand, and cast it again if possible, or bounce a Flow State token to generate another.",
+      "Turn 2: Continue casting bounce spells, prioritizing opponent's key permanents to disrupt their board while building your token army.",
+      "Sequence lands to ensure consistent U/R mana."
     ],
     "mid_game": [
       "Execute self-bounce loops to trigger ETB abilities multiple times per turn",
       "Maintain board presence while drawing into answers and finishers",
-      "Prioritize bouncing creatures with the highest impact ETB effects"
+      "Prioritize bouncing creatures with the highest impact ETB effects",
+      "Preserve bounce spells for maximum impact\u2014use them to trigger Flow State when you have multiple permanents on the board, or to remove opponent's key threats.",
+      "Don't overcommit mana to bouncing your own tokens if you can stabilize first.",
+      "Manage hand size by casting bounce spells as instants to respond to threats, and use Stormchaser's Talent to copy high-value bounce or removal spells.",
+      "Commit threats when you have enough bounce spells to protect them or generate enough tokens to trade favorably.",
+      "Hold back if the opponent has significant interaction (counters, removal) and you lack redundancy.",
+      "Prioritize bouncing opponent's board wipes or key combo pieces over generating tokens if survival is at stake."
     ],
     "late_game": [
       "Leverage accumulated card advantage to control the board",
       "Use bounce spells to dodge removal and sweepers",
-      "Close out games by repeatedly triggering value engines"
+      "Close out games by repeatedly triggering value engines",
+      "A fully developed Flow State board with multiple bounce spells in hand.",
+      "Stormchaser's Talent copying a bounce spell to trigger Flow State twice in one turn.",
+      "Slickshot Show-Off bouncing itself or other tokens to generate incremental value while applying pressure.",
+      "Go all-in when you have 3+ Flow State triggers, enough bounce spells to protect your board, and the opponent has no board wipes or significant interaction.",
+      "Also commit when you can close the game in 1-2 turns with token damage."
     ]
   },
   "key_cards": [
@@ -59,7 +77,13 @@
     "Bounce creatures before the opponent's turn to trigger ETBs and draw cards safely",
     "Use Flow State to untap a creature, then bounce it to trigger its ETB a second time in the same turn",
     "Prioritize bouncing creatures with the most impactful ETB abilities to maximize value",
-    "Hold bounce spells in hand to dodge opponent's removal and sweepers"
+    "Hold bounce spells in hand to dodge opponent's removal and sweepers",
+    "Common mistake: Bouncing your own tokens too early without a plan to protect them or generate value.",
+    "Always calculate Flow State triggers\u2014each bounce creates a token, so chaining bounces can snowball quickly.",
+    "Be aware of 'bounce tax' (mana cost increases for repeated spells with the same name) and plan around it.",
+    "Stormchaser's Talent can copy any instant or sorcery, so use it to copy bounce spells, removal, or even opponent's spells for value.",
+    "Don't overextend into board wipes",
+    "always keep a bounce spell or Fog to reset the board if needed."
   ],
   "matchups": [
     {
@@ -88,16 +112,35 @@
         "Card draw engines",
         "Board wipes"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use bounce spells as instants to respond to counters, or cast them in response to opponent's spells to trigger Flow State before they resolve. Use Stormchaser's Talent to copy bounce spells after they've been countered, or use cheap threats to pressure through interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize bouncing their mana sources or key ramp creatures. Use Fog or similar effects to stall while you build your board. Don't trade tokens for their large creatures\u2014focus on disruption and out-value.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by having better card advantage and more efficient bounce spells. Use Stormchaser's Talent to copy opponent's bounce spells for extra triggers. Prioritize bouncing their Flow State or key creatures to disrupt their engine. Save interaction for their most valuable spells.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes",
     "Targeted removal",
     "Counterspells",
-    "Sweepers"
+    "Sweepers",
+    "Watch for opponent's interaction spells (counters, removal, board wipes) and adjust bounce targets accordingly.",
+    "Track graveyard contents if they play graveyard-reliant decks.",
+    "Note when they run out of interaction\u2014this is your window to commit to an aggressive token push."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:43:55+00:00",
     "model": "local-model",
@@ -113,6 +156,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

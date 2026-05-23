@@ -1,0 +1,113 @@
+{
+  "archetype": "Golgari Ponza",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/golgari-ponza.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Annoyed Altisaur"
+    },
+    {
+      "qty": 4,
+      "name": "Arbor Elf"
+    },
+    {
+      "qty": 4,
+      "name": "Avenging Hunter"
+    },
+    {
+      "qty": 4,
+      "name": "Exhume"
+    },
+    {
+      "qty": 11,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Generous Ent"
+    },
+    {
+      "qty": 1,
+      "name": "Haunted Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Visionary"
+    },
+    {
+      "qty": 2,
+      "name": "Masked Vandal"
+    },
+    {
+      "qty": 4,
+      "name": "Mwonvuli Acid-Moss"
+    },
+    {
+      "qty": 1,
+      "name": "Suffocating Fumes"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Thermokarst"
+    },
+    {
+      "qty": 4,
+      "name": "Troll of Khazad-d\u00fbm"
+    },
+    {
+      "qty": 1,
+      "name": "Unexpected Fangs"
+    },
+    {
+      "qty": 4,
+      "name": "Utopia Sprawl"
+    },
+    {
+      "qty": 3,
+      "name": "Wild Growth"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Arms of Hadar"
+    },
+    {
+      "qty": 2,
+      "name": "Deglamer"
+    },
+    {
+      "qty": 1,
+      "name": "Hidden Spider"
+    },
+    {
+      "qty": 2,
+      "name": "Masked Vandal"
+    },
+    {
+      "qty": 1,
+      "name": "Monstrous Emergence"
+    },
+    {
+      "qty": 3,
+      "name": "Nihil Spellbomb"
+    },
+    {
+      "qty": 1,
+      "name": "Suffocating Fumes"
+    },
+    {
+      "qty": 1,
+      "name": "Unexpected Fangs"
+    },
+    {
+      "qty": 3,
+      "name": "Weather the Storm"
+    }
+  ]
+}

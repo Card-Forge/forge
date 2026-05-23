@@ -1,0 +1,332 @@
+{
+  "archetype": "Ayula, Queen Among Bears",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/ayula-queen-among-bears.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Adaptive Automaton"
+    },
+    {
+      "qty": 1,
+      "name": "Alpine Grizzly"
+    },
+    {
+      "qty": 1,
+      "name": "Argoth, Sanctum of Nature"
+    },
+    {
+      "qty": 1,
+      "name": "Ashcoat Bear"
+    },
+    {
+      "qty": 1,
+      "name": "Ayula's Influence"
+    },
+    {
+      "qty": 1,
+      "name": "Ayula, Queen Among Bears"
+    },
+    {
+      "qty": 1,
+      "name": "Balduvian Bears"
+    },
+    {
+      "qty": 1,
+      "name": "Basilisk Collar"
+    },
+    {
+      "qty": 1,
+      "name": "Bear Cub"
+    },
+    {
+      "qty": 1,
+      "name": "Bear Umbra"
+    },
+    {
+      "qty": 1,
+      "name": "Bearscape"
+    },
+    {
+      "qty": 1,
+      "name": "Beast Whisperer"
+    },
+    {
+      "qty": 1,
+      "name": "Beast Within"
+    },
+    {
+      "qty": 1,
+      "name": "Blast Zone"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Branching Evolution"
+    },
+    {
+      "qty": 1,
+      "name": "Castle Garenbrig"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 1,
+      "name": "Chameleon Colossus"
+    },
+    {
+      "qty": 1,
+      "name": "Chomping Changeling"
+    },
+    {
+      "qty": 1,
+      "name": "Chord of Calling"
+    },
+    {
+      "qty": 1,
+      "name": "Chronicle of Victory"
+    },
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 1,
+      "name": "Dragon-Scarred Bear"
+    },
+    {
+      "qty": 1,
+      "name": "Druid's Familiar"
+    },
+    {
+      "qty": 1,
+      "name": "Eternal Witness"
+    },
+    {
+      "qty": 1,
+      "name": "Evercoat Ursine"
+    },
+    {
+      "qty": 1,
+      "name": "Fauna Shaman"
+    },
+    {
+      "qty": 1,
+      "name": "Finale of Devastation"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 20,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Gaea's Cradle"
+    },
+    {
+      "qty": 1,
+      "name": "Goreclaw, Terror of Qal Sisma"
+    },
+    {
+      "qty": 1,
+      "name": "Green Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Grizzly Bears"
+    },
+    {
+      "qty": 1,
+      "name": "Grizzly Fate"
+    },
+    {
+      "qty": 1,
+      "name": "Guardian Project"
+    },
+    {
+      "qty": 1,
+      "name": "Hardened Scales"
+    },
+    {
+      "qty": 1,
+      "name": "Herald's Horn"
+    },
+    {
+      "qty": 1,
+      "name": "Heroic Intervention"
+    },
+    {
+      "qty": 1,
+      "name": "Inspiring Call"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Greaves"
+    },
+    {
+      "qty": 1,
+      "name": "Lumra, Bellow of the Woods"
+    },
+    {
+      "qty": 1,
+      "name": "Masked Vandal"
+    },
+    {
+      "qty": 1,
+      "name": "Metallic Mimic"
+    },
+    {
+      "qty": 1,
+      "name": "Mosswort Bridge"
+    },
+    {
+      "qty": 1,
+      "name": "Mother Bear"
+    },
+    {
+      "qty": 1,
+      "name": "Natural Order"
+    },
+    {
+      "qty": 1,
+      "name": "Nature's Lore"
+    },
+    {
+      "qty": 1,
+      "name": "Nykthos, Shrine to Nyx"
+    },
+    {
+      "qty": 1,
+      "name": "Oran-Rief, the Vastwood"
+    },
+    {
+      "qty": 1,
+      "name": "Owlbear"
+    },
+    {
+      "qty": 1,
+      "name": "Owlbear Cub"
+    },
+    {
+      "qty": 1,
+      "name": "Realmwalker"
+    },
+    {
+      "qty": 1,
+      "name": "Rishkar's Expertise"
+    },
+    {
+      "qty": 1,
+      "name": "Rishkar, Peema Renegade"
+    },
+    {
+      "qty": 1,
+      "name": "Roaming Throne"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Runeclaw Bear"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Springleaf Parade"
+    },
+    {
+      "qty": 1,
+      "name": "Strip Mine"
+    },
+    {
+      "qty": 1,
+      "name": "Striped Bears"
+    },
+    {
+      "qty": 1,
+      "name": "Surrak and Goreclaw"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Library"
+    },
+    {
+      "qty": 1,
+      "name": "The Great Henge"
+    },
+    {
+      "qty": 1,
+      "name": "The Ozolith"
+    },
+    {
+      "qty": 1,
+      "name": "Three Visits"
+    },
+    {
+      "qty": 1,
+      "name": "Toski, Bearer of Secrets"
+    },
+    {
+      "qty": 1,
+      "name": "Tyvar's Stand"
+    },
+    {
+      "qty": 1,
+      "name": "Ulvenwald Bear"
+    },
+    {
+      "qty": 1,
+      "name": "Universal Automaton"
+    },
+    {
+      "qty": 1,
+      "name": "Utopia Sprawl"
+    },
+    {
+      "qty": 1,
+      "name": "Veil of Summer"
+    },
+    {
+      "qty": 1,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Werebear"
+    },
+    {
+      "qty": 1,
+      "name": "Wild Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Wilson, Refined Grizzly"
+    },
+    {
+      "qty": 1,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Wooded Foothills"
+    },
+    {
+      "qty": 1,
+      "name": "Yavimaya, Cradle of Growth"
+    }
+  ],
+  "sideboard": []
+}

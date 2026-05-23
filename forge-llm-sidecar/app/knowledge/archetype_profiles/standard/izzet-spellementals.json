@@ -1,0 +1,467 @@
+{
+  "schema_version": 1,
+  "name": "Izzet Spellementals",
+  "format": "standard",
+  "colors": [
+    "U",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Izzet Spellementals is a fast, aggressive tempo deck that leverages cheap, high-impact spells and token generation to overwhelm opponents before they can stabilize. By cycling through Traumatic Critique for early damage and using Eddymurk Crab to flood the board with haste elementals, the deck maintains constant pressure. Hearth Elemental provides crucial graveyard recursion to replay key threats and burn spells, extending the game's reach when needed.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 2,
+      "cards": [
+        "Winternight Stories"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 23,
+      "cards": [
+        "Broadside Barrage",
+        "Hearth Elemental",
+        "Ill-Timed Explosion",
+        "Opt",
+        "Prismari Charm",
+        "Ral, Crackling Wit",
+        "Soul-Guide Lantern",
+        "Three Steps Ahead",
+        "Traumatic Critique",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 6
+    },
+    "dig_draw": {
+      "target_count": 12,
+      "cards": [
+        "Flow State",
+        "Opt",
+        "Prismari Charm",
+        "Sleight of Hand"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Winternight Stories"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 18,
+      "cards": [
+        "Colorstorm Stallion",
+        "Eddymurk Crab",
+        "Hearth Elemental",
+        "Hydro-Man, Fluid Felon",
+        "Ral, Crackling Wit",
+        "Sunderflock"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 20,
+      "cards": [
+        "Broadside Barrage",
+        "Burst Lightning",
+        "Fire Magic",
+        "Hearth Elemental",
+        "Ill-Timed Explosion",
+        "Prismari Charm",
+        "Soul-Guide Lantern",
+        "Traumatic Critique"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Fire Magic",
+        "Ill-Timed Explosion"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 7,
+      "cards": [
+        "Annul",
+        "Disdainful Stroke",
+        "Spell Pierce",
+        "Spell Snare",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Colorstorm Stallion"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 7,
+      "cards": [
+        "Broadside Barrage",
+        "Three Steps Ahead",
+        "Traumatic Critique"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 2
+    },
+    "graveyard_enablers": {
+      "target_count": 20,
+      "cards": [
+        "Eddymurk Crab",
+        "Flow State",
+        "Hearth Elemental",
+        "Prismari Charm",
+        "Soul-Guide Lantern",
+        "Traumatic Critique",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 12,
+      "cards": [
+        "Hearth Elemental",
+        "Prismari Charm",
+        "Sunderflock",
+        "Winternight Stories"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 10,
+      "cards": [
+        "Colorstorm Stallion",
+        "Hearth Elemental",
+        "Hydro-Man, Fluid Felon",
+        "Ral, Crackling Wit"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 4
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Winternight Stories"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Hearth Elemental"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "The Legend of Kuruk"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 14,
+      "cards": [
+        "Riverpyre Verge",
+        "Spirebluff Canal",
+        "Steam Vents",
+        "Stormcarved Coast"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Island",
+        "Riverpyre Verge",
+        "Spirebluff Canal",
+        "Steam Vents",
+        "Stormcarved Coast"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Ral, Crackling Wit"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "interaction_density": 0.5
+  },
+  "dual_role_cards": [
+    {
+      "card": "Broadside Barrage",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Colorstorm Stallion",
+      "roles": [
+        "engines",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eddymurk Crab",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Magic",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hearth Elemental",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydro-Man, Fluid Felon",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ill-Timed Explosion",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Opt",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismari Charm",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ral, Crackling Wit",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Riverpyre Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirebluff Canal",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormcarved Coast",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunderflock",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Three Steps Ahead",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Traumatic Critique",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Winternight Stories",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_reducers",
+        "payoff_cards",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up Traumatic Critique for instant-speed interaction when possible",
+    "Play Eddymurk Crab before Hearth Elemental to maximize token generation and board presence",
+    "Recycle high-impact spells first, then use Hearth Elemental to replay threats",
+    "Avoid overcommitting to the board if the opponent has sweepers or board wipes",
+    "Common mistakes include overcommitting without protection, mismanaging mana for spells vs. creatures, and ignoring graveyard synergy."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cheap threats like Eddymurk Crab to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Traumatic Critique to chip away at the opponent's life total or force unfavorable trades"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize keeping the board active and applying immediate pressure"
+    }
+  ],
+  "kill_priority": [
+    "Colorstorm Stallion",
+    "Hearth Elemental",
+    "Hydro-Man, Fluid Felon",
+    "Ral, Crackling Wit",
+    "Winternight Stories",
+    "Eddymurk Crab",
+    "Sunderflock"
+  ],
+  "interaction_to_disrupt": [
+    "Annul",
+    "Disdainful Stroke",
+    "Spell Pierce",
+    "Spell Snare",
+    "Three Steps Ahead",
+    "Colorstorm Stallion",
+    "Broadside Barrage",
+    "Burst Lightning"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/izzet-spellementals.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

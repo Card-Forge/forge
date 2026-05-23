@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing one or two one-drop infect creatures",
       "Hands with Rancor and a creature to equip",
-      "Hands with at least two land cards for consistent mana flow"
+      "Hands with at least two land cards for consistent mana flow",
+      "Keep hands with 1-2 lands and a turn-1 creature (Kithkin, Ichorclaw Myr) or a creature paired with a pump spell (Mutagenic Growth, Rancor).",
+      "Keep any hand with two pump spells."
     ],
     "mulligan_criteria": [
       "Hands with zero lands or four or more lands",
       "Hands lacking early infect threats or Rancor",
-      "Hands composed entirely of high-cost cards"
+      "Hands composed entirely of high-cost cards",
+      "Mulligan pure land hands, pump-only hands, or 3+ land hands with no early threats."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Prioritize land drops to ensure consistent mana availability",
       "Play Ichorclaw Myr or similar one-drops to establish early board presence",
-      "Attach Rancor immediately to create an unblockable threat"
+      "Attach Rancor immediately to create an unblockable threat",
+      "Turn 1: Play land, cast creature.",
+      "If you have a pump spell, cast it on your attacker.",
+      "Turn 2: Play land, cast a second creature or pump spell, and attack with your pumped threat.",
+      "Attach Rancor to attackers when possible.",
+      "Prioritize land drops to maintain curve and ensure you can cast threats and pumps on time."
     ],
     "mid_game": [
       "Push poison damage every turn using trample and infect",
       "Cast Mutagenic Growth on opponent's blockers to clear the path while drawing cards",
-      "Maintain board pressure to prevent the opponent from stabilizing"
+      "Maintain board pressure to prevent the opponent from stabilizing",
+      "Mana is your primary resource",
+      "always preserve enough for both threats and pumps.",
+      "Do not overextend without pump support.",
+      "Keep pump spells flexible to close out games or save creatures from targeted removal.",
+      "Track your hand size carefully, as Infect often wins by turn 4-5.",
+      "Commit threats when you have the mana to pump them or when the opponent lacks removal."
     ],
     "late_game": [
       "Flood the board with multiple infect creatures to exhaust opponent's removal",
       "Use Mutagenic Growth as a finisher to deal direct damage and refill your hand",
-      "Leverage excess mana to equip multiple Rancors or cast additional threats"
+      "Leverage excess mana to equip multiple Rancors or cast additional threats",
+      "Pump spells (Mutagenic Growth, Rancor) combined with creatures to deal 21 poison.",
+      "Ichorclaw Myr can be pumped to lethal.",
+      "Attack with a 3+ power creature or chain pumps to close out.",
+      "Calculate poison damage carefully, factoring in blockers and removal.",
+      "Go all-in when you have enough mana to pump your attacker to lethal poison, or when the opponent has no removal in hand or on the board.",
+      "If you are at 20 life and they have no threats, commit fully to close out the game."
     ]
   },
   "key_cards": [
@@ -58,7 +78,13 @@
   "sequencing_tips": [
     "Prioritize casting Rancor before attacking to avoid opponent interaction",
     "Cast Mutagenic Growth after blockers are declared to maximize card draw and damage",
-    "Hold up mana for instant-speed responses if possible, though this deck is primarily sorcery-speed"
+    "Hold up mana for instant-speed responses if possible, though this deck is primarily sorcery-speed",
+    "Common mistake: Overcommitting to the board without enough pump spells to close out.",
+    "Always calculate poison damage carefully.",
+    "Remember that Ichorclaw Myr is an artifact, so it can be targeted by artifact hate, but it also synergizes well with pump spells.",
+    "Rancor is an enchantment, so it can be destroyed by enchantment removal.",
+    "Mutagenic Growth is instant, so you can use it in response to removal to save your creature or close out.",
+    "Keep an eye on the opponent's life total and poison counters to know exactly when to go for lethal."
   ],
   "matchups": [
     {
@@ -87,16 +113,35 @@
         "Token generators",
         "Card advantage engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that can be cast in response to counterspells if needed. Rely on artifact creatures and instant-speed pumps to close out before they can counter key threats. Avoid overcommitting to expensive spells that can be countered.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them relentlessly. Do not let them stabilize. Use pump spells to close out before their mana advantage translates to board presence. If they deploy a big threat, pump your creature to trade efficiently or kill it before it attacks.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It is a race. Prioritize drawing pump spells and creatures. Track both players' life totals and poison counters. Use your pump spells to close out before they do. If you have a removal spell, use it to clear their threat before attacking.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes",
     "Targeted removal",
     "Counterspells",
-    "Token swarms"
+    "Token swarms",
+    "Watch for targeted removal (Lightning Bolt, Go for the Throat) and board wipes.",
+    "Note land destruction or discard effects.",
+    "Track the opponent's life total and poison counters meticulously to know exactly when you are at lethal range."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:47:45+00:00",
     "model": "local-model",
@@ -151,6 +196,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

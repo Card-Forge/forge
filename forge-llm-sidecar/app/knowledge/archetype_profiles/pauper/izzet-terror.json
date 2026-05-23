@@ -1,0 +1,420 @@
+{
+  "schema_version": 1,
+  "name": "Izzet Terror",
+  "format": "pauper",
+  "colors": [
+    "U",
+    "R"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "Izzet Terror is a control-oriented Pauper deck that leverages cheap removal, countermagic, and cantrips to stabilize against aggressive and combo strategies. It utilizes meta-call cards like Cast into the Fire to specifically target top-tier decks such as Affinity and Kuldotha Red. Once the opponent's resources are depleted, the deck closes games with resilient threats like Tolarian Terror or token generation from Murmuring Mystic.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 24,
+      "cards": [
+        "Bountiful Landscape",
+        "Brainstorm",
+        "Counterspell",
+        "L\u00f3rien Revealed",
+        "Ponder",
+        "Preordain",
+        "Skred"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Brainstorm",
+        "Ponder",
+        "Preordain"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 6,
+      "cards": [
+        "Bountiful Landscape",
+        "L\u00f3rien Revealed"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Counterspell",
+        "Skred",
+        "Tolarian Terror"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 22,
+      "cards": [
+        "Azure Fleet Admiral",
+        "Brainstorm",
+        "Counterspell",
+        "Crimson Fleet Commodore",
+        "Murmuring Mystic",
+        "Skred",
+        "Tolarian Terror"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Blue Elemental Blast",
+        "Breath Weapon",
+        "Cast into the Fire",
+        "Lightning Bolt",
+        "Red Elemental Blast",
+        "Skred"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 9
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Breath Weapon"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 21,
+      "cards": [
+        "Annul",
+        "Blue Elemental Blast",
+        "Counterspell",
+        "Lose Focus",
+        "Red Elemental Blast",
+        "Skred",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 9
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Tolarian Terror"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 15,
+      "cards": [
+        "Campfire",
+        "Counterspell",
+        "Skred",
+        "Tolarian Terror"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Campfire"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Murmuring Mystic"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Tolarian Terror"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Counterspell",
+        "Skred"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 20,
+      "cards": [
+        "Bountiful Landscape",
+        "Cast into the Fire",
+        "Snow-Covered Island",
+        "Snow-Covered Mountain",
+        "Volatile Fjord"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 2
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Bountiful Landscape",
+        "Snow-Covered Island",
+        "Snow-Covered Mountain",
+        "Volatile Fjord"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.48
+  },
+  "dual_role_cards": [
+    {
+      "card": "Blue Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bountiful Landscape",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brainstorm",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breath Weapon",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Campfire",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cast into the Fire",
+      "roles": [
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Counterspell",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "graveyard_enablers",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Murmuring Mystic",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Preordain",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Red Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Skred",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "graveyard_enablers",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Mountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tolarian Terror",
+      "roles": [
+        "graveyard_enablers",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volatile Fjord",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Use Brainstorm to dig deep, then follow up with Ponder to shuffle unfavorable cards on top.",
+    "Cast Lorien Revealed to search for Volatile Fjord, ensuring consistent red mana access.",
+    "Time Cast into the Fire to clear multiple tokens or lands simultaneously for maximum efficiency.",
+    "Retain Monarch by avoiding combat damage to draw an extra card each turn.",
+    "Common mistakes include overcommitting to Lorien Revealed without follow-up, holding up too many counterspells and missing early interaction windows, and underestimating Skred\u2019s vulnerability to board wipes."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and use cantrips like Brainstorm and Ponder to find answers"
+    },
+    {
+      "trigger": "early game",
+      "line": "Deploy cheap removal and Counterspell to disrupt opponent's early threats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Opt/Ponder to dig for interaction or Lorien."
+    }
+  ],
+  "kill_priority": [
+    "Murmuring Mystic",
+    "Counterspell",
+    "Skred",
+    "Tolarian Terror",
+    "Azure Fleet Admiral",
+    "Brainstorm",
+    "Crimson Fleet Commodore"
+  ],
+  "interaction_to_disrupt": [
+    "Annul",
+    "Blue Elemental Blast",
+    "Counterspell",
+    "Lose Focus",
+    "Red Elemental Blast",
+    "Skred",
+    "Spell Pierce",
+    "Tolarian Terror"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/izzet-terror.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

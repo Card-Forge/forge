@@ -1,0 +1,126 @@
+{
+  "archetype": "Morophon, the Boundless",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck aims to cast high-impact spells at drastically reduced costs by leveraging Morophon's ability to discount colored mana, supported by heavy generic mana acceleration and card draw. It wins by out-scaling opponents through exponential value generation, closing games with massive threats or game-ending spells that opponents cannot afford to answer.",
+  "win_conditions": [
+    "Cast massive creatures (e.g., Emrakul, Ulamog, Phyrexian Obliterator, or massive tribal finishers) or game-ending spells (e.g., Terminus, Wrath of God, or combo pieces) at near-zero cost.",
+    "Use Morophon to cast these when you have 5+ mana rocks in play, effectively making them free or nearly free."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, at least one generic mana accelerator (e.g., Arcane Signet, Sol Ring, Mind Stone), and a cheap draw or cost-reduction spell.",
+      "Prioritize hands that enable Turn 2 acceleration or early Morophon casting."
+    ],
+    "mulligan_criteria": [
+      "Drop hands with 3+ lands and no acceleration, 0-1 lands, or only colored mana sources without ramp."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a generic mana rock or cheap ramp spell.",
+      "Turn 2: Cast another accelerator or cheap spell, sequencing to ensure you have enough generic mana in play to maximize Morophon's discount.",
+      "If you have Morophon and enough mana rocks, cast a mid-tier creature or spell at a steep discount.",
+      "Always prioritize establishing a robust mana base that produces both colored and generic mana."
+    ],
+    "mid_game": [
+      "Hoard generic mana sources (mana rocks, ramp spells) to maximize Morophon's discount on colored spells.",
+      "Use card draw engines to maintain hand size and find key pieces.",
+      "Avoid overcommitting to Morophon without backup threats or interaction.",
+      "Manage your graveyard carefully if opponents run hate, though the deck primarily relies on the stack and battlefield.",
+      "Commit threats when you have 4+ mana rocks in play and enough card draw to sustain the turn.",
+      "Hold back if opponents have sweepers, targeted removal, or if you're low on resources.",
+      "Prioritize casting your biggest spells when opponents are tapped out or have no interaction available.",
+      "Use Morophon to cast sweepers or large blockers when the board state demands stabilization."
+    ],
+    "late_game": [
+      "Cast massive creatures (e.g., Emrakul, Ulamog, Phyrexian Obliterator, or massive tribal finishers) or game-ending spells (e.g., Terminus, Wrath of God, or combo pieces) at near-zero cost.",
+      "Use Morophon to cast these when you have 5+ mana rocks in play, effectively making them free or nearly free.",
+      "Go all-in when you have sufficient mana rocks in play to cast your finisher at a massive discount, enough card draw to sustain the turn, and opponents have no clear interaction.",
+      "Also commit when you can swing for lethal, cast a game-ending spell, or when you've forced all of your opponent's answers."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Morophon, the Boundless",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Kindred Discovery",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Morophon's cost reduction only applies to the colored mana portion of spells",
+    "generic mana costs remain unchanged.",
+    "Be careful of commander tax if Morophon leaves the battlefield, as recasting it will be expensive.",
+    "Synergize with cards that reduce generic costs (e.g., Mind Stone, Sol Ring, mana rocks) and cards that generate generic mana.",
+    "Avoid overcommitting to Morophon without backup threats.",
+    "Watch for opponents running artifact hate or counterspells, as your engine relies heavily on keeping mana rocks on the battlefield."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells to trade counterspells, cast Morophon and big spells in response to their counters, or use protection/enlightened mentor effects. Cast multiple small spells to force counterspells, then drop the big one. If they have heavy counter suites, prioritize faster win conditions or artifact destruction to remove their mana rocks.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with cheap threats, use artifact destruction to slow their mana base, and prioritize faster win conditions. Don't get out-scaled; close the game before they stabilize. Use Morophon to cast sweepers or large blockers to disrupt their board development.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early removal and board wipes. Use Morophon to cast a large blocker or sweeper. Gain life if possible. Don't overcommit to big spells early; stabilize first, then pivot to your win condition once the board is clear.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with multiple threats, use card draw to out-value them, and cast your finisher when they're tapped out or out of answers. Use cheap spells to force interaction. If they have heavy removal, use Morophon to cast your biggest spells in response to their answers or when they're tapped out.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Focus on resource denial (artifact destruction, counterspell hate), faster win conditions, and out-drawing them. Prioritize keeping Morophon safe and casting your biggest spells first. Track their mana rocks and discard or destroy them to slow their discount engine. Win the resource war by drawing more cards and casting more spells per turn.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes, targeted removal on Morophon, and opponents building up mana for their own win conditions.",
+    "Note when opponents play cheap interaction versus late-game answers, and track their graveyard and library if they run combo or mill strategies.",
+    "Pay attention to when they tap out for counterspells or protection, as this is your window to cast game-ending spells."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

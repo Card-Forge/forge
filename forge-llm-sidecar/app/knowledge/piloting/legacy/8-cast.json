@@ -12,12 +12,15 @@
   "mulligan": {
     "keep_criteria": [
       "On draw: reactive hands with access to Force of Will",
-      "On play: hands enabling a turn 2 Kappa Cannoneer or turn 1 Chalice of the Void to 1"
+      "On play: hands enabling a turn 2 Kappa Cannoneer or turn 1 Chalice of the Void to 1",
+      "Keep any hand with at least two fast mana sources (Lotus Petal, Mox Opal, Chrome Mox, etc.), one cantrip (Thoughtcast, Ponder, etc.), and one land.",
+      "Keep hands with a win condition plus two mana sources."
     ],
     "mulligan_criteria": [
       "Hands that fall halfway between the deck's various play styles",
       "Hands that offer acceleration but no cards to make use of or a way to replenish",
-      "Very slow hands in mirror matches"
+      "Very slow hands in mirror matches",
+      "Mulligan hands with three or more lands, hands with only fast mana and no cantrips/land, or hands with a win condition but no way to cast it by turn 3."
     ],
     "examples": [
       {
@@ -37,17 +40,31 @@
     "early_game": [
       "Play cheap artifacts to reduce mana costs for Cast cards and improvise Kappa Cannoneer",
       "Cast Chalice of the Void to 1 on turn 1 using mana accelerators to punish one-mana cards",
-      "Activate Urza's Saga's token generation on turn 2 to apply immediate pressure"
+      "Activate Urza's Saga's token generation on turn 2 to apply immediate pressure",
+      "Turn 1: Play a land and a fast mana piece, or two fast mana pieces if you have a land in hand.",
+      "Turn 2: Cast a cantrip to dig for your win condition or additional acceleration.",
+      "Sequence lands to ensure you can cast your win condition by turn 3-4, prioritizing untapped lands that support your mana base.",
+      "If you draw into a win condition early, consider holding up interaction if the meta favors disruption."
     ],
     "mid_game": [
       "Generate thopters with Sai, Master Thopterist and fatten Saga tokens to reach critical mass",
       "Use versatile cards like Otawara, Soaring City, Aether Spellbomb, and Shadowspear to solve game situations",
-      "Tutor for specific answers like Aether Spellbomb or Shadowspear using Urza's Saga"
+      "Tutor for specific answers like Aether Spellbomb or Shadowspear using Urza's Saga",
+      "Prioritize drawing into your win condition over developing a wide board.",
+      "Manage your graveyard carefully if your win condition is vulnerable to discard or sweepers.",
+      "Keep mana open for protection or interaction when facing disruptive opponents.",
+      "Commit threats only when you have protection or can close the game in one turn.",
+      "Hold back if the opponent has unanswered interaction or a sweeper in play.",
+      "Use cantrips to scout for the right moment to go off."
     ],
     "late_game": [
       "Adapt to opponent's sideboard hate cards and avoid putting all eggs in one basket",
       "Maintain artifact pressure while leveraging prison/control elements to lock down the opponent",
-      "Win with explosive plays or race with Shadowspear if the board is disrupted"
+      "Win with explosive plays or race with Shadowspear if the board is disrupted",
+      "Your win condition (typically a high-impact spell or combo like Empty the Warrens or a Storm finisher).",
+      "Accelerate mana with fast sources and cantrip to draw into it, then cast it when you have protection or the opponent has no interaction.",
+      "Go all-in when you have enough mana to cast your win condition, can protect it (or the opponent has no counters), and you can close the game in one turn.",
+      "Also commit when the opponent is tapped out for interaction or has no sweepers in play."
     ]
   },
   "key_cards": [
@@ -82,7 +99,10 @@
     "Sequence mana accelerators like Ancient Tomb, Lotus Petal, and Mox Opal to resolve Chalice of the Void to 1 on turn 1",
     "Activate Urza's Saga's second ability on turn 2 to maximize token generation and pressure",
     "Use Otawara, Soaring City's ability with reduced cost for Emry, Lurker of the Loch or Sai, Master Thopterist when needed",
-    "Mulligan very slow hands in mirror matches to ensure explosive early plays"
+    "Mulligan very slow hands in mirror matches to ensure explosive early plays",
+    "Common mistakes include mulliganing too aggressively (losing your fast mana engine), overcommitting to the board instead of digging for your win condition, and mismanaging fast mana sequencing (e.g., playing a land before a fast mana piece when you need to cast a cantrip).",
+    "Unique interactions: Thoughtcast synergizes with cheap spells to draw cards and generate mana, while Mox Opal requires artifacts to function, so ensure your mana base supports it.",
+    "Always track the opponent's graveyard and hand size to anticipate their interaction."
   ],
   "matchups": [
     {
@@ -159,6 +179,31 @@
         "Opponent's Kappa Cannoneer",
         "Slow hands"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple targets or cheap alternatives to your win condition. Cantrip into protection spells or use redundant acceleration to cast around counters. If possible, go off in response to their counterspells to force a trade.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use discard or counters to remove key ramp pieces. If they stabilize, out-grind them with card advantage and protect your win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with countermagic, discard, or fast removal to survive the early turns. Once stabilized, pivot to your combo or win condition. Do not overcommit to board development at the expense of your game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-grind with cantrips and card advantage to dig through their interaction. Protect your win condition with counters or discard. If they have a sweeper, wait for them to use it on a threat, then go off.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by out-drawing and out-disrupting. Protect your win condition with counters or discard. Use disruption to remove their key pieces. Prioritize drawing into your win condition over developing a board.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -176,10 +221,12 @@
     "Smash to Smithereens",
     "Hidetsugu Consumes All",
     "Fiery Confluence",
-    "Force of Vigor"
+    "Force of Vigor",
+    "Watch for counterspells, sweepers, and discard spells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-8-cast-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T08:26:10+00:00",
     "model": "local-model",
@@ -197,6 +244,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

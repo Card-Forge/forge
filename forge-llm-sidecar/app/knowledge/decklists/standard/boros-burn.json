@@ -1,0 +1,93 @@
+{
+  "archetype": "Boros Burn",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/boros-burn.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abraded Bluffs"
+    },
+    {
+      "qty": 4,
+      "name": "Boltwave"
+    },
+    {
+      "qty": 4,
+      "name": "Boros Charm"
+    },
+    {
+      "qty": 4,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Emberheart Challenger"
+    },
+    {
+      "qty": 4,
+      "name": "Fanatical Firebrand"
+    },
+    {
+      "qty": 4,
+      "name": "Hexing Squelcher"
+    },
+    {
+      "qty": 4,
+      "name": "Hired Claw"
+    },
+    {
+      "qty": 4,
+      "name": "Inspiring Vantage"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Helix"
+    },
+    {
+      "qty": 9,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 3,
+      "name": "Shock"
+    },
+    {
+      "qty": 4,
+      "name": "Slickshot Show-Off"
+    },
+    {
+      "qty": 3,
+      "name": "Sunbillow Verge"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Case of the Crimson Pulse"
+    },
+    {
+      "qty": 4,
+      "name": "Magebane Lizard"
+    },
+    {
+      "qty": 2,
+      "name": "Sear"
+    },
+    {
+      "qty": 3,
+      "name": "Shardmage's Rescue"
+    },
+    {
+      "qty": 2,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 2,
+      "name": "Sunspine Lynx"
+    }
+  ]
+}

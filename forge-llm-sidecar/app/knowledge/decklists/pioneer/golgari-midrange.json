@@ -1,0 +1,129 @@
+{
+  "archetype": "Golgari Midrange",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/golgari-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 4,
+      "name": "Blooming Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 2,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 2,
+      "name": "Darkbore Pathway"
+    },
+    {
+      "qty": 2,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 2,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 4,
+      "name": "Llanowar Wastes"
+    },
+    {
+      "qty": 4,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 4,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 3,
+      "name": "Professor Dellian Fel"
+    },
+    {
+      "qty": 4,
+      "name": "Sentinel of the Nameless City"
+    },
+    {
+      "qty": 1,
+      "name": "Sheoldred's Edict"
+    },
+    {
+      "qty": 2,
+      "name": "Sheoldred, the Apocalypse"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 4,
+      "name": "Unholy Annex // Ritual Chamber"
+    },
+    {
+      "qty": 1,
+      "name": "Urborg, Tomb of Yawgmoth"
+    },
+    {
+      "qty": 2,
+      "name": "Witherbloom Charm"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Decorum Dissertation"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 3,
+      "name": "Go Blank"
+    },
+    {
+      "qty": 1,
+      "name": "Necromentia"
+    },
+    {
+      "qty": 4,
+      "name": "Ray of Enfeeblement"
+    },
+    {
+      "qty": 2,
+      "name": "Unlicensed Hearse"
+    }
+  ]
+}

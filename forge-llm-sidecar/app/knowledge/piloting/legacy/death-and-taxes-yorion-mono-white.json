@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands containing two or more lands alongside Yorion, Sky Nomad or Solitude",
       "Hands with Stoneforge Mystic and a cheap artifact or land drop",
-      "Hands that can establish early board presence or protect key combo pieces"
+      "Hands that can establish early board presence or protect key combo pieces",
+      "Keep hands with 2-3 lands, a turn-1 play (Thalia's Lieutenant, early removal, or Solitude), and a way to cast your 4-drops.",
+      "Keep Stoneforge Mystic if you have a land and can cast it for 2 mana.",
+      "Keep Yorion if you have 3+ lands or a way to accelerate it."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or key signature cards",
       "Hands with only high-cost spells and no early interaction",
-      "Hands that cannot efficiently cast Yorion, Sky Nomad or Solitude by turn three"
+      "Hands that cannot efficiently cast Yorion, Sky Nomad or Solitude by turn three",
+      "Mulligan pure land, pure removal, or hands with no early interaction/land base."
     ],
     "examples": []
   },
@@ -25,17 +29,31 @@
     "early_game": [
       "Prioritize land drops to ensure mana availability for Stoneforge Mystic and early spells",
       "Cast Stoneforge Mystic to search for artifacts that support token generation or board control",
-      "Play cheap spells or hold mana to protect against early disruption"
+      "Play cheap spells or hold mana to protect against early disruption",
+      "Turn 1: Play land, cast Thalia's Lieutenant or a removal spell if possible.",
+      "If opening Stoneforge Mystic, play land, cast Mystic, tap for mana, search for Batterskull or a threat, and equip if mana allows.",
+      "Turn 2: Develop board with Thalia, equip Batterskull, or cast Yorion if ahead.",
+      "Prioritize playing lands to ensure consistent casting of 4-drops without stalling."
     ],
     "mid_game": [
       "Cast Yorion, Sky Nomad when you control Spirits to trigger massive token generation",
       "Play Solitude immediately after token generation to grant indestructible and +1/+1",
-      "Use fetched artifacts to stabilize the board or accelerate token production"
+      "Use fetched artifacts to stabilize the board or accelerate token production",
+      "Preserve removal for key threats (Tron artifacts, Sneak & Show creatures, Dimir counterspells).",
+      "Don't overcommit Yorion unless you can protect it or have a clear path to close.",
+      "Use Stoneforge Mystic to find Batterskull early for board control, or save it for Serra Ascendant later.",
+      "Manage your own graveyard carefully to avoid feeding Serra Ascendant prematurely or enabling opponent strategies.",
+      "Commit threats when you have interaction to protect them or when the board is clear.",
+      "Hold back Yorion if facing board wipes or heavy removal."
     ],
     "late_game": [
       "Attack with the indestructible Spirit army to close out the game",
       "Maintain mana open to counter removal or board wipes if possible",
-      "Leverage Stoneforge Mystic for late-game artifacts that provide value or win conditions"
+      "Leverage Stoneforge Mystic for late-game artifacts that provide value or win conditions",
+      "Batterskull-equipped Serra Ascendant, Yorion with flying threats, or a fully equipped Knight of the Reliquary.",
+      "Close the game by attacking with Batterskull's lifelink and trample, or flying over blockers with Yorion's +1/+1 counters.",
+      "Go all-in when you have card advantage in hand, removal to answer their last interaction, and a clear path to damage.",
+      "Commit Yorion when you can protect it or when you're ahead on the board and they lack board wipes."
     ]
   },
   "key_cards": [
@@ -59,7 +77,11 @@
     "Always play lands before casting Stoneforge Mystic to ensure you can pay for fetched artifacts",
     "Cast Yorion, Sky Nomad only when you have enough mana to follow up with Solitude on the same turn or immediately after",
     "Hold up mana for counterspells or protection if you suspect opponent interaction",
-    "Prioritize playing Solitude before attacking to ensure tokens survive combat damage and removal"
+    "Prioritize playing Solitude before attacking to ensure tokens survive combat damage and removal",
+    "Common mistakes include overcommitting Yorion without protection, failing to play Rest in Peace/Leyline when needed, missequencing Stoneforge Mystic (finding Batterskull too late), and ignoring the graveyard.",
+    "Unique interactions: Solitude can target any permanent, making it excellent against artifacts and planeswalkers.",
+    "Yorion's +1/+1 counters stack with equipment.",
+    "Serra Ascendant requires 10+ cards in graveyard, so manage your own graveyard carefully to avoid feeding it prematurely or enabling opponent strategies."
   ],
   "matchups": [
     {
@@ -88,16 +110,35 @@
         "Win condition pieces",
         "Mana acceleration"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Solitude to answer their counterspells or key permanents. Play around counters by casting threats at end step or using instant-speed interaction. Don't overcommit Yorion into a locked board; trade efficiently and wait for them to blink or tap out.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Thalia and early threats. Use Solitude to remove their ramp sources or finishers. Play Rest in Peace to disrupt their graveyard and force them to interact with your board instead of accelerating.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing with Yorion, better sequencing of Stoneforge Mystic, and more efficient removal. Prioritize trading creatures and using Solitude to answer their key threats. Control the board with Thalia and equipment, and force them to make the first mistake.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes that remove tokens",
     "Counterspells targeting Yorion, Sky Nomad or Solitude",
     "Artifact destruction targeting Stoneforge Mystic or fetched artifacts",
-    "Direct removal that bypasses indestructible"
+    "Direct removal that bypasses indestructible",
+    "Watch for counterspells (Dimir), artifact acceleration (Tron), graveyard recursion (Sneak & Show), and early aggressive threats (Delver, Ocelot).",
+    "Note when opponents tap out for big spells or hold up interaction.",
+    "Track graveyard contents if they play graveyard strategies, and adjust your hate spells accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:42:04+00:00",
     "model": "local-model",
@@ -113,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,118 @@
+{
+  "archetype": "Lurrus DRS",
+  "format": "vintage",
+  "strategy_type": "combo",
+  "overview": "Out-value opponents through relentless graveyard recursion and card advantage, leveraging Lurrus to repeatedly cast cheap dredgers while disrupting the opponent's resources. Wins by out-graveyarding control, out-speeding aggro with early pressure, and out-valuing mirrors.",
+  "win_conditions": [
+    "Griselbrand, repeated Arcanist activations, Psychic Frog bouncing, or overwhelming board state from graveyard recursion."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (preferably fetch/shock/mana dork), at least one dredger (Dreadhorde Arcanist, Griselbrand, or a cheap dredger), and discard/spell support."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on pure lands, multiple Lurrus without support, or hands missing early interaction."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a mana dork (Llanowar Elves/Birds) or discard (Thoughtseize/Duress) to protect the plan.",
+      "Turn 2: Cast Arcanist or another dredger, or cast Lurrus if ahead.",
+      "Sequence mana dorks into Arcanist to start filling the graveyard.",
+      "Use fetches to shock for early damage if needed."
+    ],
+    "mid_game": [
+      "Prioritize graveyard over hand.",
+      "Use Lurrus to cycle dredgers.",
+      "Don't overcommit mana if opponent has sweepers.",
+      "Manage fetch lands carefully to avoid flooding.",
+      "Commit threats when opponent has no sweepers or counters.",
+      "Hold back if they have spot removal or board wipes.",
+      "Psychic Frog can bounce key threats to buy time."
+    ],
+    "late_game": [
+      "Griselbrand, repeated Arcanist activations, Psychic Frog bouncing, or overwhelming board state from graveyard recursion.",
+      "When opponent has no graveyard hate, no sweepers, and you have Lurrus + 2+ dredgers in hand/graveyard."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lurrus of the Dream-Den",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Psychic Frog",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Collector Ouphe",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes: Overcommitting to Lurrus without backup threats, ignoring graveyard hate, mismanaging fetch lands, forgetting Psychic Frog's bounce timing.",
+    "Unique interactions: Lurrus can return dredgers from graveyard to hand.",
+    "Collector Ouphe shuts down artifact combos but is vulnerable to discard.",
+    "Ensure you have enough interaction to protect your engine."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells. Cast threats in response to their spells. Use fetches to shock for damage to bypass counters if needed. Consider cheap threats or multiple threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure. Use discard to hit mana dorks. Graveyard hate if they rely on it. Out-value them with Lurrus recursion.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Early discard, spot removal, Psychic Frog bounce, graveyard hate if they use it. Stabilize with Lurrus engine.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them. Use discard to strip key answers. Pressure with multiple threats. Don't let them stabilize with sweepers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the graveyard war. Use discard to remove their Lurrus/dredgers. Graveyard hate (Rest in Peace, Surgical). Out-value with better sequencing.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for graveyard hate (Rest in Peace, Leyline), sweepers (Supreme Verdict, Wrath of God), counters (Force of Will, Counterspell), and combo wincons.",
+    "Note when they tap out for interaction."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/vintage.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

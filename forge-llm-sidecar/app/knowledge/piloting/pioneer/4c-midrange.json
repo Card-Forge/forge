@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands containing early disruption like Thoughtseize or Fatal Push",
       "Hands with Quantum Riddler and a cheap play to protect it",
-      "Hands with at least two lands and a threat for turns one through three"
+      "Hands with at least two lands and a threat for turns one through three",
+      "Keep hands with 2-3 lands (including duals/fixing), a Thoughtseize or Fatal Push, and a turn-2/3 threat."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction against aggressive decks",
       "Hands with only high-cost threats and no removal",
-      "Hands missing land drops for the first three turns"
+      "Hands missing land drops for the first three turns",
+      "Mulligan if you have 0-1 lands, multiple unplayable removal without threats, or a hand that can't interact with the top meta (e.g., no discard against control/combo, no early removal against Izzet Prowess or Selesnya Company)."
     ],
     "examples": []
   },
@@ -25,17 +27,30 @@
     "early_game": [
       "Play lands and use Fatal Push to remove aggressive threats",
       "Cast Thoughtseize to disrupt opponent's combo or key pieces",
-      "Develop board with cheap creatures while holding up mana for interaction"
+      "Develop board with cheap creatures while holding up mana for interaction",
+      "Turn 1: Play a land, cast Thoughtseize if you can identify a key threat or combo piece.",
+      "Turn 2: Play a fixing land or dual, cast Fatal Push on early aggro threats, or develop a midrange threat like Quantum Riddler.",
+      "Prioritize fixing early to enable 4c spells without stalling."
     ],
     "mid_game": [
       "Deploy Quantum Riddler to generate card advantage and stabilize",
       "Trade efficiently to maintain board presence",
-      "Use four-color flexibility to answer whatever the opponent plays"
+      "Use four-color flexibility to answer whatever the opponent plays",
+      "Balance mana for interaction vs. development.",
+      "Don't overcommit to one color early.",
+      "Use discard to disrupt opponent's hand while preserving your own threats.",
+      "Manage graveyard by avoiding unnecessary self-discard unless it fuels a specific win condition.",
+      "Commit threats when you have removal ready for their response.",
+      "Hold back if you suspect a sweep or if you need to preserve interaction for a specific threat."
     ],
     "late_game": [
       "Let Quantum Riddler draw multiple cards per turn to outvalue opponents",
       "Cast larger threats to close the game",
-      "Maintain hand size and resources to outlast control decks"
+      "Maintain hand size and resources to outlast control decks",
+      "Quantum Riddler and other midrange threats combined with card advantage.",
+      "Win by out-resourcing them through discard, removal, and threat generation.",
+      "Go all-in when you have board control, sufficient card advantage, and the opponent has no sweepers or interaction left.",
+      "Also commit when you can close the game before they can stabilize."
     ]
   },
   "key_cards": [
@@ -58,7 +73,12 @@
   "sequencing_tips": [
     "Hold up Fatal Push before committing mana to threats to avoid being caught off guard",
     "Cast Thoughtseize before playing Quantum Riddler to protect it from early removal",
-    "Prioritize keeping lands in hand when facing control decks to ensure Riddler can draw safely"
+    "Prioritize keeping lands in hand when facing control decks to ensure Riddler can draw safely",
+    "Quantum Riddler's draw/discard ability synergizes with discard outlets and card advantage engines.",
+    "Avoid over-drawing if you have no way to discard.",
+    "Be mindful of mana base requirements",
+    "ensure you have enough fixing to cast 4c spells consistently.",
+    "Common mistake: overcommitting to interaction and running out of threats."
   ],
   "matchups": [
     {
@@ -84,15 +104,34 @@
         "Mana acceleration",
         "Key combo pieces"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells. Cast threats in response to their counterspells if possible. Use cheap, efficient threats that are hard to counter (e.g., instant-speed interaction, or threats that don't rely on a single spell).",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early interaction is key. Use Thoughtseize to remove ramp spells. Use Fatal Push to kill early threats. Don't let them get ahead in mana; pressure them with threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through better card advantage and efficient trades. Use discard to disrupt their hand. Prioritize keeping threats on board. Use removal efficiently.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Aggressive creature swarms",
     "Board wipe spells",
-    "Counterspell and hand trap disruption"
+    "Counterspell and hand trap disruption",
+    "Watch for sweepers (e.g., Wrath of God, Cyclonic Rift), combo pieces, and recursion engines.",
+    "Note when opponents tap out for big threats or hold up mana for counterspells.",
+    "Track graveyard usage for midrange/recursion decks."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:38:35+00:00",
     "model": "local-model",
@@ -108,6 +147,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

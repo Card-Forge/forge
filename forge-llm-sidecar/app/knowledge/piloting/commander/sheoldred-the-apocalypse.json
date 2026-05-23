@@ -1,0 +1,137 @@
+{
+  "archetype": "Sheoldred, the Apocalypse",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This Black Zombie midrange deck aims to out-value opponents through relentless token generation, death-trigger card draw, and efficient sacrifice outlets. It wins by stabilizing early with lifelink/vigilance swarms, then grinding out games with K'rrik's upkeep tokens and Sheoldred's death triggers, overwhelming control, combo, and slower midrange archetypes.",
+  "win_conditions": [
+    "Sheoldred, the Apocalypse is your primary finisher.",
+    "Once you have a board of zombies and can safely cast her, her ETB tokens and death triggers will out-draw and out-grind most decks.",
+    "K'rrik can also close games by repeatedly sac-fueling removal to clear the board while your tokens attack.",
+    "Combine token swarms with discard to lock them out of interaction."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands and at least one of Sheoldred, K'rrik, or Dark Ritual.",
+      "Prioritize hands with 2+ mana sources and a clear turn-1/2 play.",
+      "Keep hands that can play a land and cast Dark Ritual or a 2-drop on turn 1."
+    ],
+    "mulligan_criteria": [
+      "Mulligan to hands with 3+ lands and no early threats, or hands with 0-1 lands."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Dark Ritual if possible to accelerate into a 2-drop, or play a cheap Zombie/land.",
+      "Turn 2: If you have Dark Ritual, cast K'rrik or a 3-drop.",
+      "If not, play a land and a 2-drop.",
+      "Sequence lands to ensure you can cast Dark Ritual on turn 1 if possible, as it enables aggressive early plays.",
+      "If opening with multiple lands, consider holding a land for turn 2 to cast K'rrik or Sheoldred on curve."
+    ],
+    "mid_game": [
+      "Treat Dark Ritual as a tempo accelerator, not just mana.",
+      "Prioritize keeping K'rrik on the board for steady token generation and removal.",
+      "Use sacrifice outlets sparingly until you need to trigger Sheoldred's draw or remove a key threat.",
+      "Manage your graveyard carefully",
+      "avoid unnecessary sac-fills if you're facing graveyard hate.",
+      "Draw cards on death to maintain hand advantage, but don't overcommit to drawing if you're at low life.",
+      "Commit threats when you have removal or discard to answer their interaction.",
+      "Hold back if you're facing sweepers or heavy removal"
+    ],
+    "late_game": [
+      "Sheoldred, the Apocalypse is your primary finisher.",
+      "Once you have a board of zombies and can safely cast her, her ETB tokens and death triggers will out-draw and out-grind most decks.",
+      "K'rrik can also close games by repeatedly sac-fueling removal to clear the board while your tokens attack.",
+      "Combine token swarms with discard to lock them out of interaction.",
+      "Go all-in when you have 3+ zombies on board, a clear path to Sheoldred, and no immediate sweepers in play.",
+      "Commit when your opponent has exhausted their interaction (discard, removal, counters) and you can safely trade tokens into their blockers.",
+      "Also commit when you're ahead on life and can afford to trade down to trigger Sheoldred's draw."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Sheoldred, the Apocalypse",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "K'rrik, Son of Yawgmoth",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Dark Ritual",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Dark Ritual is your tempo engine",
+    "never treat it as a dead draw.",
+    "K'rrik's sacrifice ability is a pseudo-removal spell, so use it to clear key threats rather than just generating tokens.",
+    "Sheoldred's death triggers are powerful but can backfire if you're at low life",
+    "manage your life total carefully.",
+    "Avoid over-sacrificing zombies if you're facing graveyard hate.",
+    "In unknown formats, test your land base carefully to ensure you can consistently cast Dark Ritual on turn 1."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Dark Ritual to cast threats in response to counterspells if possible, or sequence your plays to hit non-interactive lands first. Rely on discard (Thoughtseize/Duress) to remove their counterspells. If they counter your key threats, use K'rrik's sac ability to remove their blockers and trade into their removal, forcing them to use more resources.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Dark Ritual acceleration. Use discard to hit their ramp spells or lands. If they outpace you, stabilize with K'rrik's tokens and sacrifice removal to clear their threats. Prioritize graveyard hate if their ramp is combo-adjacent.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize lifelink/vigilance tokens to stabilize. Use spot removal to hit their key threats. Trade your 1/1s into their removal to preserve your value engines. If they go wide, use K'rrik's sac ability to remove their biggest threats. Don't overcommit to drawing cards if you're at low life; focus on stabilization.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with K'rrik's upkeep tokens and Sheoldred's ETB. Use discard to remove their counterspells and key answers. Force them to use removal on your tokens to preserve your value engines. If they sweep, rebuild with K'rrik and draw into Sheoldred. Out-grind them with death-trigger card draw.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the mirror by controlling the board with K'rrik's tokens and using discard to disrupt their hand. Prioritize removing their K'rrik first to stop their token generation. Use Sheoldred's ETB to swing the board and trigger draw on death. Trade your tokens into their removal to force unfavorable trades. If they go wide, use K'rrik's sac ability to remove their threats while you rebuild.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (e.g., Wrath of God, Damnation) and graveyard hate (Rest in Peace, Leyline).",
+    "Track their discard spells",
+    "if they've used Thoughtseize/Duress, they likely lack interaction for your late-game.",
+    "Monitor their mana development",
+    "if they're ramping, prioritize early pressure.",
+    "Note when they save removal for your key threats (Sheoldred/K'rrik) versus their board."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

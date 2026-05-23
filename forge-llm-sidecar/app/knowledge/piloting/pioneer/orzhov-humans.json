@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Hands with multiple one-drops",
       "Hands containing lords or early interaction",
-      "Hands with a mix of creatures and removal"
+      "Hands with a mix of creatures and removal",
+      "Keep hands with 2-3 lands (preferably shocklands/duals or fetches), a turn-1 play (Adeline, Resplendent Cathar, or Thalia's Lieutenant), and Dark Confidant if possible.",
+      "Prioritize hands that can play a threat on turn 1 or 2 while maintaining a 2-land curve."
     ],
     "mulligan_criteria": [
       "Hands lacking early threats or lords",
       "Hands heavy on late-game cards or sideboard-only spells",
-      "Hands with only lands or high-cost creatures"
+      "Hands with only lands or high-cost creatures",
+      "Mulligan pure land hands, hands with only 2-drops+, or hands missing early threats and mana fixing."
     ],
     "examples": [
       {
@@ -40,17 +43,34 @@
     "early_game": [
       "Play one-drops like Bloodsoaked Champion and Dauntless Bodyguard to establish early pressure",
       "Cast lords like Thalia's Lieutenant and Rally the Ranks to buff the army",
-      "Use Kitesail Freebooter to gain information and force removal"
+      "Use Kitesail Freebooter to gain information and force removal",
+      "Turn 1: Play a land, cast Dark Confidant or a 1-drop (Adeline/Cathar/Lieutenant).",
+      "Turn 2: Play a land, cast a 2-drop or attack with existing threats.",
+      "Sequence lands to ensure consistent early drops",
+      "fetch if you have a shockland in hand.",
+      "If ahead, commit threats"
     ],
     "mid_game": [
       "Maintain board presence with recurring threats via Extraction Specialist",
       "Play around sweepers using Mutavault and Selfless Spirit",
-      "Apply continuous pressure to force opponent answers"
+      "Apply continuous pressure to force opponent answers",
+      "Treat Dark Confidant as a win condition and engine",
+      "protect it with lifegain or removal if possible, but don't over-invest if you're already ahead.",
+      "Manage hand size to avoid discarding key threats to discard spells.",
+      "Use lifegain from Cathar and Lieutenant to stabilize against burn and enable Confidant's draw engine.",
+      "Commit threats when you have removal or pump ready to protect them, or when the opponent has tapped out for answers.",
+      "Hold back if the opponent has sweepers (Wrath of God, Day of Judgment) or heavy targeted removal."
     ],
     "late_game": [
       "Utilize Brave the Elements to protect creatures and enable sudden lethal",
       "Deploy powerful lords like General Kudro of Drannith or Adeline, Resplendent Cathar to steamroll",
-      "Sideboard in graveyard hate and unconditional removal for control matchups"
+      "Sideboard in graveyard hate and unconditional removal for control matchups",
+      "Adeline, Resplendent Cathar, and Thalia's Lieutenant with pump spells or +1/+1 counters.",
+      "Dark Confidant can also close games if left unchecked.",
+      "Use lifegain to stabilize while chipping away at life totals.",
+      "Go all-in when you have card advantage, the opponent has no sweepers, or you're at lethal range.",
+      "Commit when you can protect your board with lifegain, removal, or pump spells.",
+      "Don't hold back if the opponent is on a clock and you have the tools to close the game."
     ]
   },
   "key_cards": [
@@ -89,7 +109,12 @@
     "Prioritize returning non-attacking lords like Thalia's Lieutenant or Thalia with Extraction Specialist",
     "Manipulate the day and night cycle to optimize Brutal Cathar's protection",
     "Use Brave the Elements to protect creatures from sweepers and enable sudden lethal",
-    "Play Mutavault to help play around sweepers while caring for creature types"
+    "Play Mutavault to help play around sweepers while caring for creature types",
+    "Common mistake: Overcommitting to the board without considering sweepers or holding back too long against control.",
+    "Unique interaction: Thalia's Lieutenant's lifelink and +1/+1 counter synergy with Cathar's lifegain creates a resilient board that can outlast midrange and control.",
+    "Dark Confidant is a double-edged sword",
+    "manage its death trigger carefully and don't let it die to removal if you're already ahead.",
+    "Always track the opponent's graveyard against Greasefang and midrange decks."
   ],
   "matchups": [
     {
@@ -118,6 +143,26 @@
         "Indomitable Creativity",
         "Token generation"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap 1-drops that are hard to counter effectively, or sequence around counterspells by playing around them on turns they could have mana. Use pump spells or discard to disrupt their hand. Don't overcommit to a single threat if they have multiple counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to beat their ramp out. Use removal for their mana dorks/acceleration. Don't overcommit if they have a massive finisher; stabilize with lifegain and trade efficiently. Force them to answer your threats instead of developing their board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use lifegain from Cathar and Lieutenant to stabilize. Hold removal for their key threats. Don't overextend into combat; trade efficiently and use discard to disrupt their game plan. Prioritize survival over aggression in the first few turns.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize keeping Dark Confidant alive. Use discard to remove their threats. Trade efficiently and value out their Lieutenant/Cathar. Control the board with targeted removal and graveyard hate. Don't overcommit; value out their plays and close the game when you have an advantage.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -126,10 +171,15 @@
     "Board sweepers",
     "Planeswalkers",
     "Graveyard hate",
-    "Conditional removal like Giant Killer"
+    "Conditional removal like Giant Killer",
+    "Watch for sweepers, targeted removal (Path, Murder), and discard (Thoughtseize, Inquisition).",
+    "Note when opponents tap out for counterspells or answers.",
+    "Track graveyard usage against Greasefang and midrange decks.",
+    "Pay attention to when the opponent holds up mana for multiple turns, indicating a potential board wipe or finisher."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-upgrading-the-challenger-deck-orzhov-humans",
     "generated_at": "2026-05-21T05:15:59+00:00",
     "model": "local-model",
@@ -147,6 +197,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

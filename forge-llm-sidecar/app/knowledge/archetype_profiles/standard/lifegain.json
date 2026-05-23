@@ -1,0 +1,498 @@
+{
+  "schema_version": 1,
+  "name": "Lifegain",
+  "format": "standard",
+  "colors": [
+    "W"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "An Orzhov Standard deck built around gaining life when creatures enter the battlefield to grow key threats and control the board. It offers two upgrade paths: a Bats subtheme focused on flying synergies and scrying, or a pure Lifegain build emphasizing card advantage and aggressive pressure. The strategy aims to delay explosive turns and outlast opponents through steady resource generation.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 10,
+      "cards": [
+        "Decorum Dissertation",
+        "Enduring Innocence",
+        "Fountainport",
+        "Haliya, Guided by Light",
+        "Intimidation Tactics"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Decorum Dissertation",
+        "Dream Beavers",
+        "Haliya, Guided by Light",
+        "Ral Zarek, Guest Lecturer",
+        "Shadowy Backstreet"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 2
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 7,
+      "cards": [
+        "Amalia Benavides Aguirre",
+        "Leonardo, Cutting Edge",
+        "Restless Fortress"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 33,
+      "cards": [
+        "Amalia Benavides Aguirre",
+        "Aven Interrupter",
+        "Deep-Cavern Bat",
+        "Dream Beavers",
+        "Enduring Innocence",
+        "Gumdrop Poisoner",
+        "Haliya, Guided by Light",
+        "Leonardo, Cutting Edge",
+        "Moseo, Vein's New Dean",
+        "Ral Zarek, Guest Lecturer",
+        "Shattered Acolyte",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 15,
+      "cards": [
+        "Amalia Benavides Aguirre",
+        "Aven Interrupter",
+        "Bitter Triumph",
+        "Ral Zarek, Guest Lecturer",
+        "Requiting Hex",
+        "Shattered Acolyte",
+        "Shoot the Sheriff"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 7,
+      "cards": [
+        "Abandoned Air Temple",
+        "Amalia Benavides Aguirre",
+        "Leonardo, Cutting Edge"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Amalia Benavides Aguirre"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 3,
+      "cards": [
+        "Bitter Triumph",
+        "Ral Zarek, Guest Lecturer"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "graveyard_enablers": {
+      "target_count": 17,
+      "cards": [
+        "Amalia Benavides Aguirre",
+        "Aven Interrupter",
+        "Case of the Uneaten Feast",
+        "Moseo, Vein's New Dean",
+        "Ral Zarek, Guest Lecturer",
+        "Shadowy Backstreet",
+        "Strategic Betrayal"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 15,
+      "cards": [
+        "Case of the Uneaten Feast",
+        "Enduring Innocence",
+        "Leonardo, Cutting Edge",
+        "Moseo, Vein's New Dean",
+        "Ral Zarek, Guest Lecturer"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Amalia Benavides Aguirre",
+        "Restless Fortress"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Duress",
+        "Leonardo, Cutting Edge",
+        "Voice of Victory"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 19,
+      "cards": [
+        "Abandoned Air Temple",
+        "Bleachbone Verge",
+        "Concealed Courtyard",
+        "Dalkovan Encampment",
+        "Fountainport",
+        "Godless Shrine",
+        "Petrified Hamlet",
+        "Restless Fortress",
+        "Shadowy Backstreet",
+        "Shattered Sanctum"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 24,
+      "cards": [
+        "Abandoned Air Temple",
+        "Bleachbone Verge",
+        "Concealed Courtyard",
+        "Dalkovan Encampment",
+        "Fountainport",
+        "Godless Shrine",
+        "Petrified Hamlet",
+        "Plains",
+        "Restless Fortress",
+        "Shadowy Backstreet",
+        "Shattered Sanctum",
+        "Swamp"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 1
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Ral Zarek, Guest Lecturer"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "interaction_density": 0.28
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abandoned Air Temple",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Amalia Benavides Aguirre",
+      "roles": [
+        "graveyard_enablers",
+        "payoff_cards",
+        "protection",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Aven Interrupter",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bitter Triumph",
+      "roles": [
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bleachbone Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Case of the Uneaten Feast",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Concealed Courtyard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dalkovan Encampment",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Decorum Dissertation",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dream Beavers",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Enduring Innocence",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fountainport",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haliya, Guided by Light",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leonardo, Cutting Edge",
+      "roles": [
+        "hate_pieces",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Moseo, Vein's New Dean",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Petrified Hamlet",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ral Zarek, Guest Lecturer",
+      "roles": [
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restless Fortress",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shadowy Backstreet",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shattered Acolyte",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shattered Sanctum",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Voice of Victory",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize playing Momo, Friendly Flier on turn one to unlock flying synergies",
+    "Use Starting Town's life loss to fuel Essence Channeler early",
+    "Offset life loss from Starting Town with Scoured Barrens later",
+    "Sequence Hinterland Sanctifier on turn two to maximize early triggers",
+    "Common mistakes include overextending without lifegain sources, ignoring life total math, and failing to track opponent's removal or counters."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Momo, Friendly Flier on turn one to reduce flying costs and enable early bats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Starting Town to pay life for Essence Channeler's ability"
+    },
+    {
+      "trigger": "early game",
+      "line": "Establish early life gain triggers with Case of the Uneaten Feast"
+    }
+  ],
+  "kill_priority": [
+    "Amalia Benavides Aguirre",
+    "Leonardo, Cutting Edge",
+    "Restless Fortress",
+    "Ral Zarek, Guest Lecturer",
+    "Aven Interrupter",
+    "Deep-Cavern Bat",
+    "Dream Beavers",
+    "Enduring Innocence"
+  ],
+  "interaction_to_disrupt": [
+    "Amalia Benavides Aguirre",
+    "Aven Interrupter",
+    "Bitter Triumph",
+    "Ral Zarek, Guest Lecturer",
+    "Requiting Hex",
+    "Shattered Acolyte",
+    "Shoot the Sheriff",
+    "Abandoned Air Temple"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/lifegain.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

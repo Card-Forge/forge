@@ -1,0 +1,128 @@
+{
+  "archetype": "Serpentine Curve",
+  "format": "pauper",
+  "strategy_type": "combo",
+  "overview": "Serpentine Curve is a U/R tempo-control archetype that seeks to dictate the pace of the game through efficient interaction, card advantage, and escalating threats. It wins by out-interacting aggressive and combo decks early, then closing out midrange and control games with Lorien Revealed or a fully cast Serpentine Curve.",
+  "win_conditions": [
+    "Lorien Revealed is your primary win condition",
+    "protect it with counterspells or discard.",
+    "A fully cast Serpentine Curve can also close out games if the board is open.",
+    "Use card draw to ensure you have enough resources to resolve your finisher."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands, at least one Counterspell, and a turn-1 or turn-2 play (cantrip, cheap threat, or Serpentine Curve)."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no early plays, hands with only Counterspell and no threats, or hands missing dual lands if your curve requires specific colors early."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a dual land (if possible), cast a cantrip or 1-drop to set up the curve.",
+      "Turn 2: Curve into a 2-drop threat or hold up Counterspell for key spells.",
+      "Land sequencing: Prioritize fetch/shock lands for fixing, then basics to avoid tapping on critical turns.",
+      "Always leave mana open for interaction unless you're committing to a curve play."
+    ],
+    "mid_game": [
+      "Treat Counterspell as a tempo tool, not a panic button.",
+      "Use cantrips to maintain hand size and avoid flooding.",
+      "Never tap out for a Serpentine Curve unless you have protection or the board is clear.",
+      "Manage your graveyard carefully if Lorien Revealed interacts with it.",
+      "Commit threats when you have at least one counterspell or removal left.",
+      "Hold back if the opponent has untapped mana and likely holds a sweeper or heavy interaction.",
+      "Trade efficiently: use a counterspell on a game-ending threat, not a tempo play."
+    ],
+    "late_game": [
+      "Lorien Revealed is your primary win condition",
+      "protect it with counterspells or discard.",
+      "A fully cast Serpentine Curve can also close out games if the board is open.",
+      "Use card draw to ensure you have enough resources to resolve your finisher.",
+      "Go all-in when the opponent has no interaction left, or when you can protect your finisher with a counterspell or discard.",
+      "Commit to Lorien Revealed if you have card advantage and they lack removal."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Serpentine Curve",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Lorien Revealed",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Counterspell",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overusing Counterspell on tempo plays instead of game-ending threats.",
+    "Unique interaction: Lorien Revealed\u2019s recursion engine synergizes with Serpentine Curve\u2019s escalating cost",
+    "cast Curve early to build graveyard value, then recur it later.",
+    "Always track opponent\u2019s hand size and mana",
+    "bluffing is less effective in this format due to high interaction.",
+    "Practice mulligan decisions rigorously\u2014this deck is highly sensitive to early game quality."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig through counterspells, cast threats in response to their counterspells, or overload with multiple threats. Sideboard in spells that can\u2019t be countered or that resolve partially.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure and use Counterspell on their ramp spells. Bring in artifact/enchantment hate and sweepers. Don\u2019t let them get ahead; stabilize with efficient threats and card draw.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early Counterspell and spot removal. Stabilize by trading efficiently and curving into threats that can outpace their aggression. Don\u2019t overcommit to big spells; focus on survival and card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with threats and use card draw to out-value them. Sideboard in finishers and hate on their interaction. Force them to use resources on your threats, then close out with Lorien Revealed.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the interaction war by holding up counterspells for key spells. Trade efficiently and use card draw to out-resource them. Sideboard in hate for their finishers and prioritize board presence over interaction.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (especially in Jund Wildfire and Blue Terror) and ramp spells (Elves, Grixis Affinity).",
+    "Note when opponents hold up mana past turn 3\u2014they likely have interaction.",
+    "Track their graveyard if Jund Wildfire is present, and watch for combo win conditions in Mono Red Madness."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/pauper.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "name": "Sheoldred, the Apocalypse",
+  "format": "commander",
+  "colors": [
+    "B"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This Black Zombie midrange deck aims to out-value opponents through relentless token generation, death-trigger card draw, and efficient sacrifice outlets. It wins by stabilizing early with lifelink/vigilance swarms, then grinding out games with K'rrik's upkeep tokens and Sheoldred's death triggers, overwhelming control, combo, and slower midrange archetypes.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "Dark Ritual"
+      ]
+    },
+    "card_advantage": {
+      "target_count": 1,
+      "cards": [
+        "Dark Ritual"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 1,
+      "cards": [
+        "Dark Ritual"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Sheoldred, the Apocalypse"
+      ]
+    },
+    "threats": {
+      "target_count": 2,
+      "cards": [
+        "Dark Ritual",
+        "K'rrik, Son of Yawgmoth"
+      ]
+    },
+    "removal": {
+      "target_count": 1,
+      "cards": [
+        "Dark Ritual"
+      ]
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 1,
+      "cards": [
+        "Dark Ritual"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Dark Ritual"
+      ]
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Dark Ritual"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Dark Ritual"
+      ]
+    },
+    "mana_fixing": {
+      "target_count": 1,
+      "cards": [
+        "Dark Ritual"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Dark Ritual",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "removal",
+        "rituals",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Dark Ritual is your tempo engine",
+    "never treat it as a dead draw.",
+    "K'rrik's sacrifice ability is a pseudo-removal spell, so use it to clear key threats rather than just generating tokens.",
+    "Sheoldred's death triggers are powerful but can backfire if you're at low life",
+    "manage your life total carefully."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Dark Ritual if possible to accelerate into a 2-drop, or play a cheap Zombie/land."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: If you have Dark Ritual, cast K'rrik or a 3-drop."
+    },
+    {
+      "trigger": "early game",
+      "line": "If not, play a land and a 2-drop."
+    }
+  ],
+  "kill_priority": [
+    "Dark Ritual",
+    "Sheoldred, the Apocalypse",
+    "Dark Ritual",
+    "K'rrik, Son of Yawgmoth"
+  ],
+  "interaction_to_disrupt": [
+    "Dark Ritual"
+  ],
+  "last_updated": "2026-05-22"
+}

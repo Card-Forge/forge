@@ -1,0 +1,122 @@
+{
+  "archetype": "The Gitrog Monster",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck leverages creature sacrifice outlets to fuel The Gitrog Monster\u2019s card draw and discard, creating a self-sustaining engine of card advantage and graveyard recursion. It wins by out-valuing opponents through relentless resource generation, milling them out, or overwhelming them with resilient threats like Golgari Grave-Troll.",
+  "win_conditions": [
+    "Golgari Grave-Troll (provides a 4/4 body and recursion on death), milling opponents to zero, or attacking with a board of value.",
+    "Use recursion to keep Grave-Troll or other threats in play while continuing to sacrifice for card advantage."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritize basics or fetchable duals), at least one sacrifice outlet (Icetill Explorer, Golgari Grave-Troll, or ritual/discard spells), and early interaction."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have zero lands, only non-basic lands without fetch support, or a hand of 3+ high-cost spells with no early plays."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cheap discard or sacrifice outlet if available.",
+      "Turn 2: Play a second land, cast The Gitrog Monster or a sacrificial creature.",
+      "Sequence mana to ensure black availability for discard/sacrifice and green for mana acceleration or threats.",
+      "Prioritize establishing the sacrifice outlet before committing to the Monster."
+    ],
+    "mid_game": [
+      "Treat your graveyard as a secondary hand",
+      "cycle creatures through sacrifice outlets to fuel Gitrog\u2019s draw/discard loop.",
+      "Balance mana between casting spells, playing lands, and holding creatures for sacrifice.",
+      "Avoid over-investing in recursion if the board state allows you to simply sacrifice for immediate value.",
+      "Commit threats when you have card advantage to answer responses or when opponents are low on interaction.",
+      "Hold back if you\u2019re resource-starved or facing a sweep.",
+      "Use discard to disrupt key combo pieces or counterspells before they resolve."
+    ],
+    "late_game": [
+      "Golgari Grave-Troll (provides a 4/4 body and recursion on death), milling opponents to zero, or attacking with a board of value.",
+      "Use recursion to keep Grave-Troll or other threats in play while continuing to sacrifice for card advantage.",
+      "Go all-in when you have a card advantage lead, can answer responses, or opponents are at low life/mill threshold.",
+      "Commit when you\u2019ve established a board that can absorb one or two removal spells."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "The Gitrog Monster",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Icetill Explorer",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Golgari Grave-Troll",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include sacrificing too early without a plan, ignoring graveyard hate, and over-committing to The Gitrog Monster without protection.",
+    "Unique interaction: Golgari Grave-Troll\u2019s sacrifice can trigger The Gitrog Monster\u2019s draw/discard, then you can use its death trigger to return itself or another creature, creating a recursive loop.",
+    "Fetch lands can tutor for basics to enable Gitrog\u2019s exile ability.",
+    "Always track opponents\u2019 graveyard sizes to know when milling becomes a win condition."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells from hand, cast spells in response to counters (if possible), or rely on uncounterable threats and recursion. Don\u2019t over-commit to one spell; spread risk across multiple threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and removal. Don\u2019t let them get too far ahead in mana; use board wipes and efficient removal to reset the board. Prioritize targeting their mana sources and key ramp spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize early with discard, board wipes, and efficient removal. Don\u2019t over-commit to the engine until you\u2019ve stabilized the board. Use sacrifice outlets to fuel Gitrog while answering threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure with sacrifice outlets and discard to disrupt their hand. Out-value them with card draw and recursion. Don\u2019t over-commit to one threat; force them to use multiple answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing graveyard protection, discard, and targeted removal. Out-value them in card advantage and recursion. Use discard to remove their key threats and recursion spells.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Monitor opponents for graveyard hate, board wipes, and combo assembly.",
+    "Note when players are protecting their graveyard or hoarding removal.",
+    "Watch for mana bases that indicate ramp or control, and adjust your discard/removal targets accordingly."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

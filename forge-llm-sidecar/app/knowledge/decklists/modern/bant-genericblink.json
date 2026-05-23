@@ -1,0 +1,141 @@
+{
+  "archetype": "Bant GenericBlink",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/bant-genericblink.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Birthing Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Coiling Oracle"
+    },
+    {
+      "qty": 1,
+      "name": "Endurance"
+    },
+    {
+      "qty": 4,
+      "name": "Ephemerate"
+    },
+    {
+      "qty": 1,
+      "name": "Eternal Witness"
+    },
+    {
+      "qty": 4,
+      "name": "Flare of Denial"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 3,
+      "name": "Ice-Fang Coatl"
+    },
+    {
+      "qty": 1,
+      "name": "Lush Portico"
+    },
+    {
+      "qty": 1,
+      "name": "Meticulous Archive"
+    },
+    {
+      "qty": 3,
+      "name": "Misty Rainforest"
+    },
+    {
+      "qty": 4,
+      "name": "Renegade Rallier"
+    },
+    {
+      "qty": 2,
+      "name": "Skyclave Apparition"
+    },
+    {
+      "qty": 2,
+      "name": "Snow-Covered Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Island"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Solitude"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 3,
+      "name": "Voice of Resurgence"
+    },
+    {
+      "qty": 4,
+      "name": "Watcher for Tomorrow"
+    },
+    {
+      "qty": 4,
+      "name": "Windswept Heath"
+    },
+    {
+      "qty": 1,
+      "name": "Witch Enchanter"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Collector Ouphe"
+    },
+    {
+      "qty": 2,
+      "name": "Endurance"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Negation"
+    },
+    {
+      "qty": 1,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 1,
+      "name": "Knight of Autumn"
+    },
+    {
+      "qty": 2,
+      "name": "Sanctifier en-Vec"
+    },
+    {
+      "qty": 2,
+      "name": "Suncleanser"
+    },
+    {
+      "qty": 3,
+      "name": "White Orchid Phantom"
+    }
+  ]
+}

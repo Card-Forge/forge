@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing early interaction like Thoughtseize",
       "Hands with mana acceleration such as Mox Diamond",
-      "Hands featuring early threats or board presence cards"
+      "Hands featuring early threats or board presence cards",
+      "Keep hands with 2-3 playable lands, at least one early interaction (Thoughtseize, Pox, or Orcish Bowmasters), and a turn-1 land drop.",
+      "Keep Mox Diamond if paired with a land for turn-1 casting."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or mana sources",
       "Hands heavily skewed toward late-game cards without early plays",
-      "Hands with multiple lands but no spells"
+      "Hands with multiple lands but no spells",
+      "Mulligan on 2 lands with no spells, 3+ lands with no early pressure, or hands lacking a turn-1 land drop."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Play Mox Diamond to accelerate mana production",
       "Cast Thoughtseize to remove key threats or combo pieces",
-      "Establish land drops and maintain card advantage"
+      "Establish land drops and maintain card advantage",
+      "Turn 1: Play a land, cast Thoughtseize on the opponent's draw step to strip combo pieces, removal, or key answers.",
+      "If opening with Mox Diamond, play land, Mox Diamond, then Thoughtseize.",
+      "Turn 2: Cast Orcish Bowmasters or deploy Pox/Liliana depending on hand.",
+      "Sequence lands to ensure black mana for disruption and green for threats/recursion.",
+      "Deploy Field of the Dead and Thespian's Stage as soon as you have four or more creature cards in your graveyard."
     ],
     "mid_game": [
       "Deploy Orcish Bowmasters to apply pressure and clear opposing boards",
       "Use removal to protect threats and maintain board presence",
-      "Trade efficiently to preserve resources for late-game scenarios"
+      "Trade efficiently to preserve resources for late-game scenarios",
+      "Prioritize black mana for disruption and green for threats/recursion",
+      "avoid overextending into sweepers.",
+      "Use Thoughtseize and Liliana to strip key answers and control the board state.",
+      "Treat your graveyard as a resource for Field of the Dead, but monitor opponent's graveyard hate to avoid dead cards.",
+      "Commit threats when you have lock pieces, removal, or a clear path to close.",
+      "Hold back if the opponent has sweepers, graveyard hate, or can stabilize."
     ],
     "late_game": [
       "Outvalue opponent with card advantage and mana efficiency",
       "Leverage mana advantage to cast larger threats or repeat interaction",
-      "Stabilize against aggressive strategies and close out matches"
+      "Stabilize against aggressive strategies and close out matches",
+      "Field of the Dead paired with Thespian's Stage for recursive board presence, or Orcish Bowmasters with Pox effects for early closure.",
+      "Use Liliana to mill key creatures or remove opposing threats.",
+      "Chain Pox effects to tax the opponent's board while your creatures recur.",
+      "Go all-in when you have lock pieces in play, the opponent lacks sweepers or graveyard hate, and you can stabilize or close the game.",
+      "Commit when the opponent is at low life and you have a clear path to victory, or when you can force a favorable trade that leaves you with board advantage."
     ]
   },
   "key_cards": [
@@ -58,7 +77,12 @@
   "sequencing_tips": [
     "Hold Thoughtseize for key combo pieces or answers rather than using it early on low-impact cards.",
     "Play Mox Diamond early to accelerate into Orcish Bowmasters and maintain mana efficiency.",
-    "Use Bowmasters' triggered ability to clear opposing boards before committing to larger threats."
+    "Use Bowmasters' triggered ability to clear opposing boards before committing to larger threats.",
+    "Watch for Leyline of the Void in your opening hand and mulligan accordingly if you lack removal.",
+    "Mox Diamond requires careful mana sequencing to avoid dead mana.",
+    "Orcish Bowmasters synergizes with discard by enabling early pressure while you lock the opponent out.",
+    "Field of the Dead needs careful graveyard management to avoid dead cards.",
+    "Avoid overcommitting to the graveyard if graveyard hate is likely, and always track opponent's hand size to predict their next play."
   ],
   "matchups": [
     {
@@ -87,15 +111,34 @@
         "Board wipes",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to strip counterspells before casting threats. Cast multiple threats in a row to force multiple counters, or use Pox to tax their board and make counterspells less efficient. Sequence spells to maximize value even if countered.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Thoughtseize to strip mana rocks and key ramp spells. Use Pox to tax their board and disrupt their game plan. If they rely on graveyard ramp, bring in Rest in Peace or Surgical Extraction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war by prioritizing hand disruption and tracking opponent's graveyard. Control the board with Pox to tax their threats and protect your own. Out-value with better sequencing and graveyard management. Bring in extra discard and Pox effects to dominate the midgame.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast combo pieces",
     "Aggressive creature swarms",
-    "Counterspell packages"
+    "Counterspell packages",
+    "Watch for graveyard hate (Rest in Peace, Leyline), sweepers (Wrath, Terminus), and combo wincons.",
+    "Pay attention to opponent's discard targets and hand size to predict their next play.",
+    "Note when they start drawing extra cards or playing lands, as this signals a shift to their late-game plan."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:51:47+00:00",
     "model": "local-model",
@@ -111,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

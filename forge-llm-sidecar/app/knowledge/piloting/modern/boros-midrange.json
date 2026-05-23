@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more lands and at least one early threat or card draw",
       "Hands containing Ragavan, Nimble Pilferer paired with a land drop",
-      "Hands with Ocelot Pride and a way to trigger its ability or protect it"
+      "Hands with Ocelot Pride and a way to trigger its ability or protect it",
+      "Keep hands with 2\u20133 lands (ensuring at least one white and one red source), Ragavan, or early interaction."
     ],
     "mulligan_criteria": [
       "Hands with zero lands or four or more lands",
       "Hands lacking any creatures or interactive spells",
-      "Hands with only high-cost finishers like Phlage, Titan of Fire's Fury without early plays"
+      "Hands with only high-cost finishers like Phlage, Titan of Fire's Fury without early plays",
+      "Mulligan pure land, no Ragavan/Ocelot/Phlage, or unplayable mana bases.",
+      "In a 3+ land mulligan, prioritize hands with Ragavan or a turn-2 Ocelot Pride setup."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands consistently to avoid mana screw",
       "Deploy low-cost threats to establish board presence",
-      "Use card draw to find answers to early aggression"
+      "Use card draw to find answers to early aggression",
+      "Turn 1: Play a land, hold mana for potential disruption or Ragavan.",
+      "Turn 2: Cast Ragavan (1R), tap for a card draw/spark targeting Ocelot Pride or a cantrip.",
+      "Turn 3: Cast Ocelot Pride (1W) if available, begin generating 1/1 Cat Warrior tokens.",
+      "Sequence lands to ensure you can cast Ragavan, Ocelot Pride, and ramp to Phlage\u2019s 4RR (or 3RR with a Dragon)."
     ],
     "mid_game": [
       "Transition to Ocelot Pride to generate tokens and stabilize",
       "Trade efficiently to preserve card advantage",
-      "Begin setting up Ragavan, Nimble Pilferer for tempo swings"
+      "Begin setting up Ragavan, Nimble Pilferer for tempo swings",
+      "Treat Ragavan as a value engine, not a finisher",
+      "avoid over-sparking when ahead.",
+      "Use Ocelot Pride\u2019s ability to generate blockers for stabilization or attackers for pressure.",
+      "Manage mana to keep Phlage\u2019s alternate cost open if you control a Dragon, otherwise save for full cost.",
+      "Track life total carefully due to Ragavan\u2019s life loss.",
+      "Commit threats when you have removal or blockers ready to handle sweepers."
     ],
     "late_game": [
       "Deploy Phlage, Titan of Fire's Fury as a combat trick or finisher",
       "Use stolen cards from Ragavan to disrupt opponent plans",
-      "Maintain board control while pushing for lethal damage"
+      "Maintain board control while pushing for lethal damage",
+      "Phlage, Titan of Fire\u2019s Fury is the primary win condition, entering with +1/+1 counters and threatening lethal.",
+      "Ocelot Pride\u2019s token swarm can close games if left unblocked or if you can protect it with removal.",
+      "Go all-in when you have board dominance, the opponent has no sweepers or spot removal, or you can protect Phlage with counterspells or evasion.",
+      "Commit to attacking with tokens when the opponent is forced to block, leaving Phlage open."
     ]
   },
   "key_cards": [
@@ -59,7 +76,12 @@
     "Hold back removal or counterspells until you see what the opponent is protecting.",
     "Cast Ragavan, Nimble Pilferer before committing other threats to maximize its steal potential.",
     "Use Ocelot Pride tokens to pump larger creatures or block efficiently before committing the Pride itself.",
-    "Delay casting Phlage, Titan of Fire's Fury until combat or after opponent's main phase to avoid wasting it on board wipes."
+    "Delay casting Phlage, Titan of Fire's Fury until combat or after opponent's main phase to avoid wasting it on board wipes.",
+    "Phlage\u2019s alternate cost requires controlling a Dragon",
+    "include a cheap one like Dragon Fodder if you plan to rely on it.",
+    "Ocelot Pride makes Cat Warriors, not Dragons, so don\u2019t confuse the two.",
+    "Avoid overcommitting to Ragavan sparks when ahead, and watch your life total.",
+    "In multiplayer formats, consider targeting players with the most resources to prevent snowballing."
   ],
   "matchups": [
     {
@@ -88,16 +110,35 @@
         "Card advantage engines",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Ragavan\u2019s multiple casting steps to dig through counters. Pair cheap threats with protection or discard to disrupt the opponent\u2019s hand. Force counterspells on non-critical spells to open up for Phlage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to force trades before they stabilize. Use removal on key ramp pieces (e.g., Thran Dynamo, Arcane Signet). Stabilize with Ocelot Pride tokens and sweepers once they reach their power level.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through superior card advantage and sequencing. Use targeted removal to eliminate key threats like Ocelot Pride or Phlage. Out-value with better mana management and Ragavan sparks. Control the board with sweepers when the opponent overcommits.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast one-mana creatures that apply early pressure",
     "Board wipes that clear token boards",
     "Card draw spells that outvalue midrange strategies",
-    "Counterspells that disrupt key threats"
+    "Counterspells that disrupt key threats",
+    "Watch for sweepers (Amulet Titan\u2019s Thragtusk/Trinisphere, Jeskai Blink\u2019s counters/wipes).",
+    "Track graveyard for Storm/Ruby combos.",
+    "Note if the opponent is trying to blink or counter your key pieces, and adjust your attack timing accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T02:10:18+00:00",
     "model": "local-model",
@@ -113,7 +154,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

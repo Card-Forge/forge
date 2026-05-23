@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two low-cost energy generators or threats",
       "Combinations that enable early Ragavan, Nimble Pilferer plays",
-      "Hands containing Orcish Bowmasters paired with a cheap creature to copy"
+      "Hands containing Orcish Bowmasters paired with a cheap creature to copy",
+      "Keep hands with 2-3 lands (preferably fixing/shock lands or duals), plus at least one energy-generating creature (Guide of Souls, Ragavan, or Orcish Bowmasters).",
+      "Keep hands with 2+ energy sources and a way to spend it (e.g., Lightning Strike, Fatal Push, or a pump spell)."
     ],
     "mulligan_criteria": [
       "Hands lacking early energy production or board presence",
       "Heavy hands with only high-cost spells or late-game value engines",
-      "Hands missing land drops or color fixers for the first three turns"
+      "Hands missing land drops or color fixers for the first three turns",
+      "Mulligan on 3+ lands with no creatures, or single-land hands with no fixing or creatures."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Prioritize playing Guide of Souls and other cheap creatures to begin accumulating energy",
       "Establish early board presence to force opponent responses and protect energy investment",
-      "Avoid spending energy prematurely unless it enables a decisive early play"
+      "Avoid spending energy prematurely unless it enables a decisive early play",
+      "Turn 1: Play a land, cast a cheap energy creature (Ragavan or Guide of Souls) if mana allows.",
+      "Turn 2: Play a second land, cast Orcish Bowmasters or a second creature, generating 2-3 energy.",
+      "Sequence to ensure you have enough energy to cast a removal spell or pump by turn 3.",
+      "Prioritize playing lands that enter untapped to maintain tempo."
     ],
     "mid_game": [
       "Spend accumulated energy to activate Ragavan, Nimble Pilferer for card advantage and board impact",
       "Use Orcish Bowmasters to copy high-value creatures or remove key opponent threats",
-      "Maintain a steady stream of threats to prevent opponent stabilization"
+      "Maintain a steady stream of threats to prevent opponent stabilization",
+      "Track energy carefully",
+      "hoard 3-4 energy for key spells or pumps.",
+      "Don't overcommit to ETB triggers if you can't spend the energy.",
+      "Manage graveyard by sacrificing Guide of Souls strategically for card advantage, but avoid giving opponents free targets for graveyard synergies.",
+      "Commit threats when you have enough energy to answer interaction or pump past blockers.",
+      "Hold back if facing sweepers or heavy removal"
     ],
     "late_game": [
       "Leverage stored energy to repeatedly activate Ragavan, Nimble Pilferer and outdraw opponents",
       "Create massive copies with Orcish Bowmasters to close out games quickly",
-      "Recycle Guide of Souls for energy to fuel finishing moves or answer opponent threats"
+      "Recycle Guide of Souls for energy to fuel finishing moves or answer opponent threats",
+      "High-impact spells fueled by accumulated energy (Lightning Strike, Fatal Push, or creature pumps) combined with a board of +1/+1 counters or ETB tokens.",
+      "Ragavan can close games by attacking for 3 and drawing into finishers.",
+      "Go all-in when you have 5+ energy, a board of creatures, and opponent has no clear interaction.",
+      "Also commit when you can safely cast a game-winning spell or pump a creature to lethal."
     ]
   },
   "key_cards": [
@@ -61,7 +78,13 @@
     "Prioritize copying threats with Orcish Bowmasters before spending energy on card draw if the game is on the back foot",
     "Manage energy carefully since it carries over between turns and can be used to swing late-game interactions",
     "Hold Fatal Push in response to Amped Raptor's ETB trigger to prevent energy generation, but account for trigger order with your own permanents like Guide of Souls.",
-    "When Thoughtsees reveals two Necro Dominances, take one immediately rather than waiting, as you likely won't have a second interaction before they resolve."
+    "When Thoughtsees reveals two Necro Dominances, take one immediately rather than waiting, as you likely won't have a second interaction before they resolve.",
+    "Common mistake: Overgenerating energy without a plan to spend it.",
+    "Always have a spell or threat ready.",
+    "Another: Sacrificing Guide of Souls too early without card advantage.",
+    "Track opponent's mana carefully to time your ETB triggers.",
+    "Energy is a resource that scales",
+    "don't panic if you're behind early\u2014consolidate and out-value midgame."
   ],
   "matchups": [
     {
@@ -113,6 +136,16 @@
       "opponent_archetype": "Necro Dominance",
       "advice": "Pressurize life total early; lower life totals force conservative play with the enchantment's draw/life-loss mechanic, significantly reducing its impact. (from gameplay) Identify the deck's mode: Plan A is casting the enchantment for massive card advantage, while Plan B is a Grief/Evoke strategy. Adjust aggression based on which mode they are executing. (from gameplay)",
       "watch_for": []
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use split-second or instant-speed energy generation, cast spells in response to their counters, or overcommit with multiple threats to force counter-sacrifice. Use energy to cast cheap, efficient spells that are hard to counter.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card draw (Guide of Souls) and efficient removal. Track energy carefully; out-value them in ETB triggers. Use Orcish Bowmasters to swing for value. Sideboard in targeted removal and counters to handle their pump spells.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -120,10 +153,15 @@
     "Aggro early board floods",
     "Midrange value engines and removal",
     "Combo protection and fast win conditions",
-    "Ramp-accelerated large threats"
+    "Ramp-accelerated large threats",
+    "Watch for opponent's mana development (counterspells, sweepers, combo pieces).",
+    "Note when they tap out for a key spell (potential vulnerability).",
+    "Track graveyard and exile zones for blink or recursion threats.",
+    "Pay attention to when they hold up mana (likely holding interaction)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:54:16+00:00",
     "model": "local-model",
@@ -190,6 +228,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": "Mardu Energy"
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

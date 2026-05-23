@@ -1,0 +1,125 @@
+{
+  "archetype": "Beanstalk Control (Yorion)",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "A four-color control deck that stabilizes the early game with flexible counterspells and removal, then accelerates into a massive, growing Yorion, Sky Nomad or other game-ending threats using ramp spells. It wins by out-resourcing opponents through card advantage and precise interaction, excelling against combo and midrange decks that rely on specific key pieces.",
+  "win_conditions": [
+    "Yorion, Sky Nomad (often 5/5 or larger with +1/+1 counters from spells cast), Teferi, Hero of Dominaria, Karn, the Great Creator.",
+    "Get there by ramping into them, then using removal/counters to clear the board and protect the finisher."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including at least one fetch/shock or dual land) and 2-3 spells.",
+      "Prioritize hands with Force of Negation, Flow State, or early removal (Path to Exile, Swords to Plowshares, Abrade) alongside ramp (Growth Spiral, Beast Within, Kodama's Reach)."
+    ],
+    "mulligan_criteria": [
+      "Mulligan pure land hands, hands with only removal and no interaction, or hands with multiple copies of the same spell without land support."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, potentially cast a cheap ramp spell or hold for interaction.",
+      "Turn 2: Play a second land, cast a ramp spell or early interaction.",
+      "If opening with duals/shocks, sequence to ensure colored mana for Force of Negation (U) and Flow State (U/W) or removal.",
+      "Prioritize establishing board control over committing threats early."
+    ],
+    "mid_game": [
+      "Preserve Force of Negation and Flow State for high-impact threats or combo pieces.",
+      "Use ramp spells to accelerate into Yorion or card draw engines.",
+      "Manage graveyard by avoiding unnecessary discard or mill, but be aware of opponent's graveyard strategies.",
+      "Keep a hand of 3-4 cards to maintain flexibility.",
+      "Commit Yorion or other threats only when you have sufficient interaction to protect them or when the board is clear.",
+      "Hold back counterspells for key threats (e.g., Tron's Arcane Signet, Sneak's Goblin Guide, Delver's Inverter).",
+      "Use removal efficiently to trade 1-for-1 or 1-for-2."
+    ],
+    "late_game": [
+      "Yorion, Sky Nomad (often 5/5 or larger with +1/+1 counters from spells cast), Teferi, Hero of Dominaria, Karn, the Great Creator.",
+      "Get there by ramping into them, then using removal/counters to clear the board and protect the finisher.",
+      "Go all-in when you have a clear path to casting Yorion/finisher, opponent has no interaction left, or you can protect your threat with counterspells/removal.",
+      "Also commit when you have card advantage and the opponent is low on resources."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Yorion, Sky Nomad",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Force of Negation",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Flow State",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes: Overcommitting to counterspells early, failing to ramp into Yorion/finishers, mismanaging mana for colored requirements, not tracking opponent's graveyard/hand size.",
+    "Unique interactions: Flow State can be used to dig for answers or cast multiple spells in a turn.",
+    "Force of Negation can counter non-creature spells, making it excellent against combo.",
+    "Yorion grows with every spell you cast, so ramp and interaction count toward its size.",
+    "Always be mindful of the beanstalk mechanic every spell you cast makes your finisher bigger."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Flow State and Force of Negation to counter their counters. Cast spells in response to their counters, use cheap threats to force counters, then follow up with bigger threats. Rely on card advantage to out-grind.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use Force of Negation/Flow State on key ramp spells or finishers. Use removal on early threats. Don't let them get ahead; stabilize quickly and out-value them with card draw.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use cheap removal (Abrade, Beast Within, Path) and counterspells to stall. Ramp into Yorion or Teferi for late-game stability. Don't overcommit to counterspells; use removal for efficiency.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card draw (Teferi, Karn, Flow State). Use Force of Negation to protect your threats. Pressure with Yorion once you have card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Respect counterspells. Use Flow State to dig for answers. Win the card advantage war with Teferi/Karn. Use Force of Negation on their threats. Play conservatively early, then out-value them mid/late game.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for opponent's mana development, hand size, and graveyard usage.",
+    "Key tells: Opponent holding up mana on turn 2-3 likely has a counterspell or early threat.",
+    "Opponent casting multiple ramp spells signals a combo or Tron strategy.",
+    "Opponent discarding or milling suggests a control or midrange grind."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/legacy.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

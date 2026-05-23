@@ -11,11 +11,15 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with one-drops like Fanatical Firebrand or Hired Claw",
-      "Hands with early burn spells like Plasma Bolt or Boltwave"
+      "Hands with early burn spells like Plasma Bolt or Boltwave",
+      "Keep any hand with a land and a one-mana play (creature or burn).",
+      "Keep two lands if paired with a two-mana threat or efficient interaction like Boros Charm.",
+      "Prioritize hands that can execute a turn 1 creature or burn spell."
     ],
     "mulligan_criteria": [
       "Hands lacking one-mana creatures or early damage spells",
-      "Hands heavy on three-mana cards without early threats"
+      "Hands heavy on three-mana cards without early threats",
+      "Mulligan hands with no lands, three or more lands, or only expensive spells (>2 mana) with no early pressure."
     ],
     "examples": [
       {
@@ -49,15 +53,31 @@
   "game_plan": {
     "early_game": [
       "Play one-drops like Fanatical Firebrand or Hired Claw to establish immediate pressure",
-      "Use cheap burn spells like Plasma Bolt to clear blockers or push damage"
+      "Use cheap burn spells like Plasma Bolt to clear blockers or push damage",
+      "Turn 1: Play a land, cast a one-mana creature or burn spell.",
+      "Turn 2: Play a land, cast a two-mana threat or interaction.",
+      "If opening with two lands, play both, then cast your best two-mana play.",
+      "Always prioritize establishing board presence over hoarding mana",
+      "the deck wins by dealing damage, not surviving."
     ],
     "mid_game": [
       "Leverage Slickshot Show-Off's Plot ability to play it for free, followed by Boros Charm for explosive damage",
-      "Use Screaming Nemesis to block life gain and punish blockers"
+      "Use Screaming Nemesis to block life gain and punish blockers",
+      "Treat mana as a resource to convert into damage, not a pool to hoard.",
+      "Keep one mana open for interaction if facing control, but commit aggressively against non-interactive decks.",
+      "Manage hand size by prioritizing high-impact spells",
+      "discard redundant burn if you have lethal in hand.",
+      "Graveyard is generally irrelevant for Boros Burn, so don't worry about it unless facing specific graveyard strategies.",
+      "Commit all threats when the opponent has no removal or counterspells."
     ],
     "late_game": [
       "Rely on Hired Claw's growth or finish with accumulated burn",
-      "Use sideboard cards like Rest in Peace or Magebane Lizard to shut down specific strategies if the game drags on"
+      "Use sideboard cards like Rest in Peace or Magebane Lizard to shut down specific strategies if the game drags on",
+      "Direct damage spells and unblocked creatures.",
+      "The goal is to reach 10-12 damage in a single turn or over two turns.",
+      "Slickshot Show-Off can provide immediate burst damage or finish the game on entry.",
+      "Go all-in when you have lethal damage, when the opponent has no interaction, or when you're ahead in the race and they have no way to stabilize.",
+      "If you have a lethal combination in hand, play it immediately."
     ]
   },
   "key_cards": [
@@ -106,7 +126,13 @@
     "Prioritize playing Fanatical Firebrand before casting Plasma Bolt to trigger its Void ability for extra damage.",
     "Set up Slickshot Show-Off's Plot ability early, then play it for free followed by Boros Charm or other spells to maximize damage.",
     "Consider focusing on growing Hired Claw over traditional burn lines in certain matchups to maintain pressure across multiple turns.",
-    "Use Screaming Nemesis to block life gain against specific archetypes when it's the difference between victory and defeat."
+    "Use Screaming Nemesis to block life gain against specific archetypes when it's the difference between victory and defeat.",
+    "Common mistake: hoarding mana or holding back threats out of fear of removal.",
+    "Boros Burn wins by dealing damage, not surviving.",
+    "Another mistake: misusing Boros Charm.",
+    "Prioritize the 2 damage to opponent or 1 damage to creature over drawing a card unless you're desperate for cards.",
+    "Hexing Squelcher is a versatile tool",
+    "use it to shut down key permanents or as a 2/2 body."
   ],
   "matchups": [
     {
@@ -148,6 +174,31 @@
         "Prowess triggers",
         "Large spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast threats in response to land drops or when you can't be countered. Use Boros Charm to draw cards or deal damage around counters. If facing heavy counters, consider more uncounterable threats or discard to remove the spell in response.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Outpace them. Play as fast as possible. Use direct damage to interrupt their ramp spells or kill their early threats. Hexing Squelcher is excellent here to shut down mana rocks or enchantments before they can snowball.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with efficient removal and life gain if available. Use Boros Charm's life gain to survive the early turns, then pivot to closing the game with your own threats. Don't overcommit to trading; focus on surviving until you can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure relentlessly. Force them to use resources on your threats. Use Boros Charm to draw cards and maintain hand size. If they try to stabilize, have burn ready to close the game. Don't let them get comfortable; keep the pressure on.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race. Focus on card advantage and efficient interaction. Use Boros Charm to draw cards and deal damage. Prioritize killing their threats before they can block or trade. If you're ahead, go all-in; if behind, look for ways to disrupt their game plan and stabilize.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -156,10 +207,13 @@
     "Day of Judgment",
     "Beza, the Bounding Spring",
     "Unstoppable Slasher",
-    "Enduring Curiosity cycle"
+    "Enduring Curiosity cycle",
+    "Watch for counterspells (hold up mana or cast threats in response to land drops), targeted removal (save creatures for when they're tapped or use charm to kill), and sweepers (have burn ready to close the game before or after the wipe).",
+    "Pay attention to opponent's life total and card advantage engines."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-boros-burn-eoe-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T06:37:14+00:00",
     "model": "local-model",
@@ -177,6 +231,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

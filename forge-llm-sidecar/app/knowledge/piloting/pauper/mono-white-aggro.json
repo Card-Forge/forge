@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with at least two one- or two-mana creatures",
       "Early Novice Inspector to disrupt opponent's game plan",
-      "Kor Skyfisher paired with a cheap creature in hand or graveyard"
+      "Kor Skyfisher paired with a cheap creature in hand or graveyard",
+      "Keep any 7-card hand with 2-3 lands and at least two one-drops.",
+      "Keep 6-card hands with 2 lands and two one-drops, or 3 lands and one one-drop.",
+      "Prioritize hands with Novice Inspector or Hinterland Sanctifier for early pressure and card advantage."
     ],
     "mulligan_criteria": [
       "Hands lacking early board presence or interaction",
       "Mana-heavy hands with only three-drops or higher",
-      "Hands without a clear path to apply pressure by turn three"
+      "Hands without a clear path to apply pressure by turn three",
+      "Mulligan hands with 0-1 lands, three+ lands, or only two-drops/three-drops."
     ],
     "examples": []
   },
@@ -25,17 +29,32 @@
     "early_game": [
       "Deploy one- and two-mana creatures to establish immediate board presence",
       "Cast Novice Inspector to remove key answers or threats from opponent's hand",
-      "Prioritize playing creatures over holding lands to accelerate damage output"
+      "Prioritize playing creatures over holding lands to accelerate damage output",
+      "Turn 1: Play a land, cast a one-drop if available.",
+      "Turn 2: Play a land, cast a two-drop or attack with the one-drop.",
+      "Sequence lands first to maximize combat trick potential, then cast spells.",
+      "Attack with all threats unless facing known sweepers.",
+      "Use Novice Inspector to dig for answers or additional pressure, and Hinterland Sanctifier to stabilize against early aggression."
     ],
     "mid_game": [
       "Use Kor Skyfisher to return dead creatures from the graveyard to the battlefield",
       "Trigger Hinterland Sanctifier's ability by sacrificing or losing creatures to grow a win condition",
-      "Maintain board pressure while denying opponent stabilization tools"
+      "Maintain board pressure while denying opponent stabilization tools",
+      "Treat mana as a combat resource",
+      "always leave open mana for tricks and blockers.",
+      "Prioritize threats over card draw unless you are behind or facing a control deck.",
+      "Graveyard management is minimal",
+      "avoid self-mill and respect opponent graveyard synergies by carrying graveyard hate if needed.",
+      "Commit fully when you have a clear damage advantage or the opponent has no removal."
     ],
     "late_game": [
       "Focus on growing Hinterland Sanctifier into an unblockable threat",
       "Recycle high-impact creatures repeatedly with Kor Skyfisher",
-      "Close out the game with aggressive combat tricks and flying threats"
+      "Close out the game with aggressive combat tricks and flying threats",
+      "Unblocked damage from flying or evasion threats, combat tricks on key blockers, and lifelink to out-grind.",
+      "Get there by maintaining board presence, trading efficiently, and using Novice Inspector to dig for closing threats.",
+      "Go all-in when you have 3+ threats on board, the opponent has no removal, or you can close in 2-3 turns.",
+      "Also commit when you can trade up favorably or when the opponent is at low life with no blockers."
     ]
   },
   "key_cards": [
@@ -59,7 +78,10 @@
     "Prioritize casting Novice Inspector before playing creatures to remove answers that could interact with your board",
     "Hold up mana for Kor Skyfisher's triggered ability if you have cheap creatures in the graveyard ready to replay",
     "Sequence creature deaths to maximize Hinterland Sanctifier's growth before committing to a full board trade",
-    "Play flying threats last in combat to avoid being blocked by ground creatures"
+    "Play flying threats last in combat to avoid being blocked by ground creatures",
+    "Common mistake: overcommitting to the board without considering sweepers or holding back too much and losing to slow pressure.",
+    "Unique interaction: lifelink synergizes with combat tricks to stabilize against aggressive decks, while Novice Inspector provides crucial card advantage in longer games.",
+    "Always track opponent's untapped mana and hand size, and avoid playing all lands on turn 1 if you can cast a one-drop."
   ],
   "matchups": [
     {
@@ -97,6 +119,21 @@
         "Graveyard tutors",
         "Protection spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that are hard to counter. Sequence around known counters by playing around specific spots. Use combat tricks to bypass blockers if countered spells leave you vulnerable, and prioritize threats that don't rely on spells to win.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply maximum pressure early to beat their mana acceleration. Use spot removal on key ramp creatures. Don't overextend into their late-game finishers, and use lifelink to stabilize while they dig for lands.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card draw and combat tricks. Trade efficiently and use lifelink to out-value. Sideboard tricks heavily, and track opponent hand size to know when to hold back or go all-in.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -104,10 +141,16 @@
     "Targeted removal",
     "Counterspells",
     "Graveyard hate",
-    "Large blockers"
+    "Large blockers",
+    "Watch for untapped mana, hand size, and graveyard activity.",
+    "Key tells: opponent tapping out on their turn often means no removal",
+    "opponent playing lands without spells suggests ramp or control",
+    "opponent sacrificing creatures indicates sacrifice synergies or pump spells.",
+    "Track Kor Skyfisher's potential evasion needs."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T10:10:35+00:00",
     "model": "local-model",
@@ -123,6 +166,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,121 @@
+{
+  "archetype": "Avatar Aang",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "A five-color control-midrange deck built around protecting Avatar Aang while using Airbender's Reversal for flexible interaction and Toph for board stabilization. It aims to out-value opponents through superior card quality and protection, winning against aggressive strategies via disruption and against control/combo through resilient threats and late-game inevitability.",
+  "win_conditions": [
+    "Avatar Aang as the primary win condition, supported by Toph's protection and Airbender's Reversal to bounce blockers or protect Aang from removal.",
+    "Chain value engines to out-resource opponents."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 3-4 lands (prioritize basic lands or duals that enter untapped), at least one early interaction (Airbender's Reversal) or mana accelerator."
+    ],
+    "mulligan_criteria": [
+      "Drop hands with 0-1 lands, 4+ lands with no spells, or no way to develop mana by turn 2."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, optionally cast a cheap mana rock or cantrip.",
+      "Turn 2: Develop into three mana, play Toph or a low-cost threat, and use Airbender's Reversal to bounce an opponent's early threat or protect your own.",
+      "Sequence lands to fix colors while preserving untapped lands for protection spells."
+    ],
+    "mid_game": [
+      "Five-color decks live and die by mana fixing",
+      "prioritize fetching/shocking to maintain flexibility without stalling.",
+      "Hoard interaction until you identify the primary threat, and avoid overcommitting to the board if Avatar Aang is vulnerable to sweepers or targeted removal.",
+      "Commit threats when you have answered the opponent's removal or have protection ready.",
+      "Hold back if they have sweepers, counterspells, or unanswered value engines.",
+      "Use Toph to lock down key permanents or protect your board from removal."
+    ],
+    "late_game": [
+      "Avatar Aang as the primary win condition, supported by Toph's protection and Airbender's Reversal to bounce blockers or protect Aang from removal.",
+      "Chain value engines to out-resource opponents.",
+      "Go all-in when you control the board, have protection for Aang, and can swing through remaining blockers.",
+      "Commit when the opponent has no sweepers or counterspells in hand."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Avatar Aang",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Airbender's Reversal",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Toph, the First Metalbender",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Five-color mana bases are fragile",
+    "avoid overextending into sweepers.",
+    "Airbender's Reversal is your most versatile tool\u2014use it to bounce threats, protect Aang, or trigger ETB/untap effects.",
+    "Toph likely provides static protection or board lock",
+    "coordinate your plays around her.",
+    "Watch for format-specific rules regarding legendary permanents and commander tax if applicable."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast spells in response to their counters, use cheap/cheap-to-cast threats, or split casting costs. Use Airbender's Reversal to bounce their counterspell or protect your own key spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use discard or artifact destruction, and prioritize card advantage to out-value their acceleration. Don't let them stabilize into a massive board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal and counterspells, use Toph to protect your board, and transition to a control game plan before they close out the game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure, use card draw to out-resource them, and protect Avatar Aang from targeted removal. Go wide or go big depending on their board state.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through superior card quality, targeted removal, and protection spells. Out-value them in the late game by protecting your key pieces while disrupting theirs.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for mana pools held until end step (counters/wipes), lands played out of sequence (ramp), and graveyard activity (recursion).",
+    "Key tells include discarding specific cards, playing multiple lands in a row, or targeting your creatures with spot removal."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

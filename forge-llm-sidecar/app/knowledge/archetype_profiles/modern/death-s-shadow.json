@@ -1,0 +1,435 @@
+{
+  "schema_version": 1,
+  "name": "Death's Shadow",
+  "format": "modern",
+  "colors": [
+    "U",
+    "B"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "This U/B deck leverages early disruption and card advantage to stabilize against aggressive strategies while scaling into a dominant late-game threat. By efficiently filling the graveyard with cheap spells and discard, the deck enables its namesake creature to grow into a massive, unblockable attacker. Consistent value generation ensures the pilot can outlast opponents in attrition battles.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 16,
+      "cards": [
+        "Kaito, Bane of Nightmares",
+        "Mishra's Bauble",
+        "Nihil Spellbomb",
+        "Psychic Frog",
+        "Street Wraith",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Expressive Iteration",
+        "Kaito, Bane of Nightmares",
+        "Mishra's Bauble"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 12,
+      "cards": [
+        "Bloodstained Mire",
+        "Polluted Delta",
+        "Scalding Tarn"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Death's Shadow"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 25,
+      "cards": [
+        "Death's Shadow",
+        "Kaito, Bane of Nightmares",
+        "Moonshadow",
+        "Psychic Frog",
+        "Ragavan, Nimble Pilferer",
+        "Street Wraith",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 1
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Fatal Push",
+        "Meltdown",
+        "Nihil Spellbomb",
+        "Psychic Frog",
+        "Pyroclasm",
+        "Ragavan, Nimble Pilferer",
+        "Unholy Heat"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Pyroclasm"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 12,
+      "cards": [
+        "Consign to Memory",
+        "Counterspell",
+        "Flusterstorm",
+        "Mystical Dispute",
+        "Stubborn Denial"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 7
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Kaito, Bane of Nightmares"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 8,
+      "cards": [
+        "Death's Shadow",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 20,
+      "cards": [
+        "Death's Shadow",
+        "Kaito, Bane of Nightmares",
+        "Moonshadow",
+        "Nihil Spellbomb",
+        "Psychic Frog",
+        "Thoughtseize",
+        "Unholy Heat"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 9,
+      "cards": [
+        "Kaito, Bane of Nightmares",
+        "Psychic Frog",
+        "Ragavan, Nimble Pilferer"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Death's Shadow"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Death's Shadow",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Death's Shadow",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Steam Vents",
+        "Watery Grave"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Blood Crypt",
+        "Bloodstained Mire",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Steam Vents",
+        "Swamp",
+        "Watery Grave"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Kaito, Bane of Nightmares"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "interaction_density": 0.48
+  },
+  "dual_role_cards": [
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Death's Shadow",
+      "roles": [
+        "combo_pieces",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaito, Bane of Nightmares",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mishra's Bauble",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Moonshadow",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nihil Spellbomb",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Psychic Frog",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroclasm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ragavan, Nimble Pilferer",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Street Wraith",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "combo_pieces",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unholy Heat",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Thoughtseize for the opponent's most impactful card rather than using it preemptively",
+    "Cast Flow State after the opponent commits resources to maximize value",
+    "Prioritize graveyard depth before casting Death's Shadow to ensure it enters the battlefield at a threatening size",
+    "Common mistake: overpaying for Shadow or failing to track opponent's life total.",
+    "Unique interaction: Flow State can tutor for Shadow or other threats, but be careful of graveyard hate."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play one-mana spells to build the graveyard and disrupt the opponent"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Thoughtseize to remove key threats or combo pieces"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize land drops to ensure smooth mana base"
+    }
+  ],
+  "kill_priority": [
+    "Death's Shadow",
+    "Thoughtseize",
+    "Kaito, Bane of Nightmares",
+    "Moonshadow",
+    "Psychic Frog",
+    "Ragavan, Nimble Pilferer",
+    "Street Wraith"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Counterspell",
+    "Flusterstorm",
+    "Mystical Dispute",
+    "Stubborn Denial",
+    "Kaito, Bane of Nightmares",
+    "Fatal Push",
+    "Meltdown"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/death-s-shadow.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

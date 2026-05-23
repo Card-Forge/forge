@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Thoughtseize and a one-drop creature",
       "Two-land hands with early interaction or Transmogrify enablers",
-      "Hands containing Case of the Stashed Skeleton alongside removal"
+      "Hands containing Case of the Stashed Skeleton alongside removal",
+      "Keep hands with 2-3 lands, at least one discard spell (Thoughtseize/Inquisition), and a turn-2 play (land + creature or discard into creature).",
+      "Prioritize hands that can execute a turn-1 discard into a turn-2 creature or land drop."
     ],
     "mulligan_criteria": [
       "Four or more lands with no early disruption",
       "Hands lacking creatures to sacrifice for Transmogrify",
-      "Slow hands with only high-cost finishers and no interaction"
+      "Slow hands with only high-cost finishers and no interaction",
+      "Mulligan hands with 0-1 lands, multiple discard spells with no threats, or only high-cost spells."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play cheap creatures to establish board presence and provide sacrifice outlets",
       "Use Thoughtseize to remove key threats or combo pieces before they resolve",
-      "Prioritize land drops to ensure Transmogrify can be cast by turn three"
+      "Prioritize land drops to ensure Transmogrify can be cast by turn three",
+      "Turn 1: Play a land, cast Thoughtseize on opponent's key piece (remove removal, combo pieces, or early threats).",
+      "Turn 2: Play a land, cast a cheap creature (e.g., Aethergeode Miner, Aetherborn Marauder, or Kari Zev) or another discard if needed.",
+      "If opponent plays a creature, consider using a spot removal or holding Transmogrify for a better target.",
+      "Mana base: Ensure early access to W/B/R",
+      "fetch lands and shock lands are crucial for consistency."
     ],
     "mid_game": [
       "Activate Transmogrify to recycle dead creatures into new threats or tokens",
       "Deploy Case of the Stashed Skeleton to stabilize and generate recurring value",
-      "Trade efficiently to maintain board parity while digging for answers"
+      "Trade efficiently to maintain board parity while digging for answers",
+      "Treat Transmogrify as your primary win condition and versatile answer",
+      "only use it on targets that guarantee game wins or remove unblockable threats.",
+      "Manage discard carefully\u2014don't overcommit early if you have no follow-up.",
+      "Use graveyard recursion/searchers (like Case of the Stashed Skeleton) to dig for Transmogrify or key threats when hand is empty.",
+      "Commit creatures when you have removal or discard to handle their response.",
+      "Hold back if opponent has sweepers or heavy removal."
     ],
     "late_game": [
       "Loop Transmogrify and recursion effects to outvalue control decks",
       "Flood the board with tokens to pressure aggressive opponents",
-      "Hold up interaction for sweepers or finishers while closing out with board presence"
+      "Hold up interaction for sweepers or finishers while closing out with board presence",
+      "Transmogrify into a massive creature (e.g., Aethergeode Miner, Aetherborn Marauder, or a combo piece like Arcbound Ravager if available) or use it to copy a key threat.",
+      "Alternative finishers include going wide with multiple creatures and using Transmogrify to remove a blocker or protect a swing.",
+      "Go all-in when you have board advantage, opponent has no sweepers, and you can safely cast Transmogrify into a lethal threat.",
+      "Also commit when you've established discard dominance and opponent is out of answers."
     ]
   },
   "key_cards": [
@@ -59,7 +77,12 @@
     "Hold Thoughtseize until you see the opponent's key threat or combo piece",
     "Play a creature before casting Transmogrify to ensure you have a legal sacrifice target",
     "Use Case of the Stashed Skeleton to refill your graveyard before activating Transmogrify",
-    "Prioritize land drops in the early game to avoid being mana-screwed for Transmogrify"
+    "Prioritize land drops in the early game to avoid being mana-screwed for Transmogrify",
+    "Common mistake: Overusing Transmogrify on non-essential targets.",
+    "Always ask 'Does this target win the game or remove a critical threat?' Another mistake: Hoarding discard spells too long",
+    "use them to disrupt opponent's game plan early.",
+    "Note that Case of the Stashed Skeleton's search ability can be used to find Transmogrify from library or graveyard, so plan your graveyard strategy accordingly.",
+    "Transmogrify can target your own creatures, so use it to create value or remove blockers."
   ],
   "matchups": [
     {
@@ -97,16 +120,36 @@
         "Counterspells",
         "Fast win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells early. Cast Transmogrify on turn 3 or later when they've likely used counters. Use cheap threats that can trade or force multiple blocks. Consider casting spells at end step or with mana open for protection if needed.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early disruption (Thoughtseize, Inquisition) to remove mana dorks or acceleration. Use spot removal to clear ramp threats. Transmogrify into a fast finisher to race their late-game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war by keeping more interactive hands. Prioritize removing opponent's Transmogrify or key threats. Use Case of the Stashed Skeleton to dig for Transmogrify or value creatures. Trade efficiently and avoid overextending; the player who manages resources and lands the first lethal Transmogrify wins.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive finishers",
     "Board wipe spells",
     "Counterspells and hand traps",
-    "High-impact value creatures"
+    "High-impact value creatures",
+    "Watch for sweepers (Supreme Verdict, Wrath of God, etc.), counterspells, and combo pieces.",
+    "Note when opponent saves removal for your key creatures.",
+    "Track graveyard contents for recursion threats.",
+    "Pay attention to mana development\u2014if they're ramping, prioritize early disruption."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:35:54+00:00",
     "model": "local-model",
@@ -122,6 +165,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

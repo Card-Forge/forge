@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with Goblin Charbelcher and a damage source",
       "Hands with multiple Sea Gate Restoration copies for card advantage",
-      "Hands with early Disrupting Shoal to disrupt opponent's game plan"
+      "Hands with early Disrupting Shoal to disrupt opponent's game plan",
+      "Keep hands with 1-2 lands, 2+ draw/cantrip spells (Brainstorm, Ponder, Seething Song, Fire/Ignite), and at least one combo piece or way to find it (Sea Gate Restoration, Disrupting Shoal, or direct damage)."
     ],
     "mulligan_criteria": [
       "Hands lacking Goblin Charbelcher or damage sources",
       "Hands with only high-cost cards or no cantrips",
-      "Hands with multiple lands and no combo pieces"
+      "Hands with multiple lands and no combo pieces",
+      "Mulligan hands with 3+ lands, no draw spells, or only one land and no cantrips."
     ],
     "examples": []
   },
@@ -25,17 +27,30 @@
     "early_game": [
       "Play lands and Sea Gate Restoration to draw cards",
       "Cast Goblin Charbelcher as soon as possible",
-      "Use Disrupting Shoal to remove early threats or set up damage"
+      "Use Disrupting Shoal to remove early threats or set up damage",
+      "Turn 1: Play land, cast a cantrip or draw spell.",
+      "Turn 2: Play land, cast another draw spell, sequence to find combo pieces.",
+      "Prioritize finding Goblin Piledriver, Seething Song, Fire/Ignite, or Restoration.",
+      "Never attack with creatures unless you are at lethal or need to stabilize."
     ],
     "mid_game": [
       "Continue drawing with Restoration to find damage sources",
       "Protect Charbelcher from removal",
-      "Look for ways to deal damage to yourself to trigger the ability"
+      "Look for ways to deal damage to yourself to trigger the ability",
+      "Mana is your primary resource",
+      "always keep 2 mana open for Shoal and Restoration until you are ready to combo.",
+      "Do not overdraw if you have enough pieces, and use Restoration to fetch from the graveyard when needed.",
+      "Avoid trading creatures.",
+      "Belcher wins by combo, not combat.",
+      "Hold back to protect your combo pieces and maintain mana flexibility for protection spells."
     ],
     "late_game": [
       "Execute the combo for lethal damage",
       "Use remaining disruption to stall if combo fails",
-      "Rely on card advantage to outvalue opponents"
+      "Rely on card advantage to outvalue opponents",
+      "Untapped Goblin Charbelcher plus 2 mana (or equivalent damage sources).",
+      "Ensure Charbelcher is untapped and you have exactly the right damage to hit 20.",
+      "Go all-in when you have the combo pieces, can protect them via Shoal or discard, and are ahead in life or can successfully race."
     ]
   },
   "key_cards": [
@@ -58,7 +73,12 @@
   "sequencing_tips": [
     "Always cast Sea Gate Restoration before committing to a Charbelcher trigger to ensure you have backup plans.",
     "Hold Disrupting Shoal for opponent's key threats rather than using it prematurely for self-damage.",
-    "Prioritize playing Goblin Charbelcher on turn one or two to maximize its uptime and pressure."
+    "Prioritize playing Goblin Charbelcher on turn one or two to maximize its uptime and pressure.",
+    "Common mistakes include forgetting to check Charbelcher's untapped status, miscalculating damage, or overcommitting to the board.",
+    "Always track the opponent's life total.",
+    "Shoal can be cast at instant speed to protect your combo or counter threats.",
+    "Restoration can target your own graveyard.",
+    "Do not attack with creatures unless absolutely necessary."
   ],
   "matchups": [
     {
@@ -87,15 +107,33 @@
         "Card advantage spells",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Disrupting Shoal to counter counterspells. Use Thoughtseize to remove them early. Chain cantrips to find answers and pressure through disruption.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them aggressively. Use Shoal to protect your combo. Discard their ramp spells and use damage spells to stabilize your life total.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Race to combo first. Use Shoal to protect your combo and counter theirs. Use Thoughtseize to disrupt their hand and win the disruption race.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Goblin Charbelcher",
     "Sea Gate Restoration",
-    "Disrupting Shoal"
+    "Disrupting Shoal",
+    "Watch for counterspells (Force of Will, Counterspell), graveyard hate (Rest in Peace, Leyline of the Void), and spot removal.",
+    "Track the opponent's life total carefully for Charbelcher's damage calculation."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:24:40+00:00",
     "model": "local-model",
@@ -111,7 +149,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

@@ -1,0 +1,758 @@
+{
+  "schema_version": 1,
+  "name": "Kefka, Court Mage",
+  "format": "commander",
+  "colors": [],
+  "strategy_type": "midrange",
+  "expected_deck_total": 100,
+  "macro_plan": "",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "tells": [],
+  "predicted_lines": [],
+  "kill_priority": [
+    "Harmonic Prodigy",
+    "Angrath, the Flame-Chained",
+    "Liliana of the Veil",
+    "Teferi, Master of Time",
+    "Aclazotz, Deepest Betrayal",
+    "Archfiend of Ifnir",
+    "Archon of Cruelty",
+    "Boggart Trawler"
+  ],
+  "interaction_to_disrupt": [
+    "Counterspell",
+    "Negate",
+    "Swan Song",
+    "Tourach, Dread Cantor",
+    "Blasphemous Act",
+    "Blood on the Snow",
+    "Cool but Rude",
+    "Crosis's Charm"
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 2,
+      "cards": [
+        "Cabal Ritual",
+        "Dark Ritual"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 18,
+      "cards": [
+        "Archfiend of Ifnir",
+        "Archon of Cruelty",
+        "Bandit's Talent",
+        "Bone Miser",
+        "Cool but Rude",
+        "Currency Converter",
+        "Geth's Grimoire",
+        "Glint-Horn Buccaneer",
+        "Monument to Endurance",
+        "Notion Thief",
+        "Rhystic Study",
+        "Seething Landscape",
+        "Syphon Mind",
+        "Teferi, Master of Time",
+        "Tinybones, Trinket Thief",
+        "Waste Not",
+        "Xander's Lounge",
+        "Zur's Weirding"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Harmonic Prodigy",
+        "Path of Ancestry"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 5,
+      "cards": [
+        "Cool but Rude",
+        "Demolition Field",
+        "Demonic Counsel",
+        "Myriad Landscape",
+        "Seething Landscape"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 41,
+      "cards": [
+        "Aclazotz, Deepest Betrayal",
+        "Angrath, the Flame-Chained",
+        "Archfiend of Ifnir",
+        "Archon of Cruelty",
+        "Boggart Trawler",
+        "Bone Miser",
+        "Chaos Warp",
+        "Consign // Oblivion",
+        "Cunning Lethemancer",
+        "Dimir Signet",
+        "Fell Specter",
+        "Fell the Profane",
+        "Glint-Horn Buccaneer",
+        "Gogo, Master of Mimicry",
+        "Harmonic Prodigy",
+        "Hydroelectric Specimen",
+        "Invasion of Amonkhet",
+        "Izzet Signet",
+        "Kefka, Court Mage",
+        "Lightning Greaves",
+        "Liliana of the Veil",
+        "Malakir Rebirth",
+        "Mind Rake",
+        "Nicol Bolas, the Ravager",
+        "Norman Osborn",
+        "Notion Thief",
+        "Oppression",
+        "Pinnacle Monk",
+        "Plaguecrafter",
+        "Raiders' Wake",
+        "Rakdos Signet",
+        "Sedraxis Specter",
+        "Sink into Stupor",
+        "Sol Ring",
+        "Teferi, Master of Time",
+        "Tergrid, God of Fright",
+        "The Haunt of Hightower",
+        "The Raven Man",
+        "Tinybones, Bauble Burglar",
+        "Tinybones, Trinket Thief",
+        "Tourach, Dread Cantor"
+      ],
+      "mainboard_count": 41,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 10,
+      "cards": [
+        "Blasphemous Act",
+        "Blood on the Snow",
+        "Cool but Rude",
+        "Crosis's Charm",
+        "Demolition Field",
+        "Glint-Horn Buccaneer",
+        "Sedraxis Specter",
+        "Talisman of Creativity",
+        "Talisman of Dominance",
+        "Talisman of Indulgence"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Archfiend of Ifnir",
+        "Blasphemous Act",
+        "Blood on the Snow",
+        "Evacuation",
+        "Toxic Deluge"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "Counterspell",
+        "Negate",
+        "Swan Song"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Tourach, Dread Cantor"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 7,
+      "cards": [
+        "Cool but Rude",
+        "Court of Ambition",
+        "Currency Converter",
+        "Glint-Horn Buccaneer",
+        "Monument to Endurance",
+        "Teferi, Master of Time",
+        "Tinybones Joins Up"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 12,
+      "cards": [
+        "Angrath, the Flame-Chained",
+        "Blood on the Snow",
+        "Cabal Ritual",
+        "Currency Converter",
+        "Demonic Counsel",
+        "Oscorp Industries",
+        "Reanimate",
+        "Sedraxis Specter",
+        "The Haunt of Hightower",
+        "Tinybones Joins Up",
+        "Tinybones, Bauble Burglar",
+        "Zur's Weirding"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 6,
+      "cards": [
+        "Blood on the Snow",
+        "Crosis's Charm",
+        "Currency Converter",
+        "Evacuation",
+        "Oscorp Industries",
+        "Sedraxis Specter"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Harmonic Prodigy"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 24,
+      "cards": [
+        "Arcane Signet",
+        "Blood Crypt",
+        "Command Tower",
+        "Demolition Field",
+        "Dragonskull Summit",
+        "Drowned Catacomb",
+        "Exotic Orchard",
+        "Fellwar Stone",
+        "Haunted Ridge",
+        "Ice Tunnel",
+        "Myriad Landscape",
+        "Oscorp Industries",
+        "Path of Ancestry",
+        "Reliquary Tower",
+        "Seething Landscape",
+        "Shipwreck Marsh",
+        "Smoldering Marsh",
+        "Steam Vents",
+        "Stormcarved Coast",
+        "Sulfur Falls",
+        "Sunken Hollow",
+        "Volatile Fjord",
+        "Watery Grave",
+        "Xander's Lounge"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 31,
+      "cards": [
+        "Blood Crypt",
+        "Command Tower",
+        "Demolition Field",
+        "Dragonskull Summit",
+        "Drowned Catacomb",
+        "Exotic Orchard",
+        "Haunted Ridge",
+        "Ice Tunnel",
+        "Island",
+        "Mountain",
+        "Myriad Landscape",
+        "Oscorp Industries",
+        "Path of Ancestry",
+        "Reliquary Tower",
+        "Seething Landscape",
+        "Shipwreck Marsh",
+        "Smoldering Marsh",
+        "Steam Vents",
+        "Stormcarved Coast",
+        "Sulfur Falls",
+        "Sunken Hollow",
+        "Swamp",
+        "Volatile Fjord",
+        "Watery Grave",
+        "Xander's Lounge"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 3,
+      "cards": [
+        "Angrath, the Flame-Chained",
+        "Liliana of the Veil",
+        "Teferi, Master of Time"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.18
+  },
+  "dual_role_cards": [
+    {
+      "card": "Angrath, the Flame-Chained",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archfiend of Ifnir",
+      "roles": [
+        "card_advantage",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Archon of Cruelty",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blasphemous Act",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood Crypt",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blood on the Snow",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bone Miser",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cabal Ritual",
+      "roles": [
+        "graveyard_enablers",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cool but Rude",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crosis's Charm",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Currency Converter",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Demolition Field",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Demonic Counsel",
+      "roles": [
+        "graveyard_enablers",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dragonskull Summit",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drowned Catacomb",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Evacuation",
+      "roles": [
+        "recursion",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glint-Horn Buccaneer",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Harmonic Prodigy",
+      "roles": [
+        "dig_draw",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haunted Ridge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ice Tunnel",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Liliana of the Veil",
+      "roles": [
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monument to Endurance",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Myriad Landscape",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Notion Thief",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Oscorp Industries",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sedraxis Specter",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seething Landscape",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shipwreck Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Smoldering Marsh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormcarved Coast",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sulfur Falls",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sunken Hollow",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Teferi, Master of Time",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Haunt of Hightower",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tinybones Joins Up",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tinybones, Bauble Burglar",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tinybones, Trinket Thief",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tourach, Dread Cantor",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volatile Fjord",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Xander's Lounge",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zur's Weirding",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    }
+  ],
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/kefka-court-mage.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  },
+  "last_updated": "2026-05-23"
+}

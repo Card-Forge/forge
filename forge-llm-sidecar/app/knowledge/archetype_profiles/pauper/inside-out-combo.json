@@ -1,0 +1,476 @@
+{
+  "schema_version": 1,
+  "name": "Inside Out Combo",
+  "format": "pauper",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This Pauper quadrant deck leverages Faithless Looting to rapidly dig for its core pieces: Inside Out, Tireless Tribe, and Sneaky Snacker. By reversing the text boxes of the tribe and the snacker, the deck creates a recursive loop that generates infinite +1/+1 counters, trample, and card draw. The goal is to assemble the combo quickly and execute it before the opponent can stabilize or interact.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 24,
+      "cards": [
+        "Abandon Attachments",
+        "Faithless Looting",
+        "Inside Out",
+        "Pursue the Past",
+        "Sneaky Snacker",
+        "Thrilling Discovery",
+        "Tireless Tribe"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 12,
+      "cards": [
+        "Faithless Looting",
+        "Gods Willing",
+        "Loran's Escape",
+        "Sneaky Snacker"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Escape Tunnel"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 16,
+      "cards": [
+        "Faithless Looting",
+        "Sneaky Snacker",
+        "Tireless Tribe",
+        "Wind-Scarred Crag"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 18,
+      "cards": [
+        "Aurora Eidolon",
+        "Sandstorm Eidolon",
+        "Sneaky Snacker",
+        "Spirit Mascot",
+        "Tireless Tribe"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 14,
+      "cards": [
+        "Breath Weapon",
+        "Fling",
+        "Lightning Axe",
+        "Pyroblast",
+        "Suplex",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 11
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Pyroblast"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 12,
+      "cards": [
+        "Faithless Looting",
+        "Gods Willing",
+        "Loran's Escape",
+        "Sneaky Snacker"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 19,
+      "cards": [
+        "Abandon Attachments",
+        "Faithless Looting",
+        "Lightning Axe",
+        "Pursue the Past",
+        "Sneaky Snacker",
+        "Tireless Tribe"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 34,
+      "cards": [
+        "Aurora Eidolon",
+        "Escape Tunnel",
+        "Faithless Looting",
+        "Flaring Pain",
+        "Loran's Escape",
+        "Prismatic Strands",
+        "Pursue the Past",
+        "Sandstorm Eidolon",
+        "Sneaky Snacker",
+        "Spirit Mascot",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 6
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 29,
+      "cards": [
+        "Aurora Eidolon",
+        "Boros Garrison",
+        "Faithless Looting",
+        "Flaring Pain",
+        "Prismatic Strands",
+        "Pursue the Past",
+        "Sandstorm Eidolon",
+        "Sneaky Snacker",
+        "Tireless Tribe"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 10,
+      "cards": [
+        "Aurora Eidolon",
+        "Sandstorm Eidolon",
+        "Sneaky Snacker"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Tireless Tribe",
+        "Wind-Scarred Crag"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Faithless Looting",
+        "Sneaky Snacker",
+        "Tireless Tribe"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Aurora Eidolon",
+        "Flaring Pain",
+        "Prismatic Strands"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 19,
+      "cards": [
+        "Boros Garrison",
+        "Escape Tunnel",
+        "Faithless Looting",
+        "Sneaky Snacker",
+        "Wind-Scarred Crag"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 19,
+      "cards": [
+        "Boros Garrison",
+        "Escape Tunnel",
+        "Mountain",
+        "Plains",
+        "Wind-Scarred Crag"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.4
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abandon Attachments",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Aurora Eidolon",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boros Garrison",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Escape Tunnel",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faithless Looting",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flaring Pain",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gods Willing",
+      "roles": [
+        "dig_draw",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lightning Axe",
+      "roles": [
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Loran's Escape",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismatic Strands",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pursue the Past",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sandstorm Eidolon",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sneaky Snacker",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirit Mascot",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thraben Charm",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tireless Tribe",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "payoff_cards",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wind-Scarred Crag",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always cast Faithless Looting before deploying your combo pieces to maximize dig potential",
+    "Hold up mana for potential counterspells or removal before committing to the combo",
+    "Reverse Tireless Tribe first, then Sneaky Snacker, to ensure the trigger order resolves correctly",
+    "Attack with the reversed Tribe immediately after assembling the loop to avoid opponent interaction",
+    "Common mistake: Overcommitting Sneaky Snacker too early without a primed graveyard."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cheap creatures to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Faithless Looting on turn 2 or 3 to dig for combo pieces"
+    },
+    {
+      "trigger": "early game",
+      "line": "Avoid unnecessary combat that could lose key pieces to removal"
+    }
+  ],
+  "kill_priority": [
+    "Aurora Eidolon",
+    "Sandstorm Eidolon",
+    "Sneaky Snacker",
+    "Faithless Looting",
+    "Tireless Tribe",
+    "Wind-Scarred Crag",
+    "Spirit Mascot"
+  ],
+  "interaction_to_disrupt": [
+    "Pyroblast",
+    "Faithless Looting",
+    "Gods Willing",
+    "Loran's Escape",
+    "Sneaky Snacker",
+    "Breath Weapon",
+    "Fling",
+    "Lightning Axe"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/inside-out-combo.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

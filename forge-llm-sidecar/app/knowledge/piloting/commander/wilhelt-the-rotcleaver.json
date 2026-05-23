@@ -1,0 +1,119 @@
+{
+  "archetype": "Wilhelt, the Rotcleaver",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "Generate a swarm of flying Zombie Warrior tokens, sacrifice them en masse to Wilhelt to pump him into a lethal threat, and close out the game quickly. This deck excels against slower, control, and combo archetypes that lack immediate answers to a massive flying attacker in a single turn.",
+  "win_conditions": [
+    "Lethal combat damage via Wilhelt\u2019s +2/+2 pump and sacrifice outlet.",
+    "Rooftop Storm amplifies this by granting +1/+1 to all attacking creatures with flying, turning a single pump into a board-wiping blow."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing duals or signets for UB), a turn-1 land drop, and either Wilhelt or a key mana/sacrifice enabler (Arcane Signet, Dimir Signet, or a cheap outlet).",
+      "Drop hands with 4+ lands and no early plays, or multiple early spells with no mana acceleration."
+    ],
+    "mulligan_criteria": [],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Arcane Signet or a mana rock.",
+      "Turn 2: Play a second land, cast Wilhelt or a key sacrifice outlet/token generator.",
+      "Sequence mana carefully to ensure you can activate Wilhelt\u2019s ability and sacrifice on the same turn if possible.",
+      "Prioritize establishing your mana base and enablers over rushing combat."
+    ],
+    "mid_game": [
+      "Manage mana to keep activation options open",
+      "avoid overcommitting to pump Wilhelt if you lack sufficient sacrifice outlets to close.",
+      "Use the graveyard strategically for recursion or reanimation if your deck runs them, but be mindful of graveyard hate.",
+      "Commit threats when you have enough sacrifice outlets and protection to ensure at least one survives to combat.",
+      "Hold back if facing sweepers or targeted removal you cannot answer, and use your tokens as chump blockers or sacrifice fodder to stabilize."
+    ],
+    "late_game": [
+      "Lethal combat damage via Wilhelt\u2019s +2/+2 pump and sacrifice outlet.",
+      "Rooftop Storm amplifies this by granting +1/+1 to all attacking creatures with flying, turning a single pump into a board-wiping blow.",
+      "Go all-in when you have enough tokens to sacrifice, sufficient mana to pump, and no immediate answer in the opponent\u2019s hand.",
+      "Ensure you have a backup plan if Wilhelt is removed."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Wilhelt, the Rotcleaver",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Rooftop Storm",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include pumping Wilhelt without enough sacrifice outlets, overcommitting to combat without protection, and ignoring graveyard hate.",
+    "Unique interactions: Rooftop Storm\u2019s flying synergy is crucial for maximizing damage.",
+    "Sacrifice outlets can target your own tokens for value, but watch out for \u201csacrifice\u201d hate like Rest in Peace or Leyline of the Void.",
+    "Always track opponent\u2019s hand size and mana to time your pump correctly."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap enablers, split your combo across multiple turns, or use protection/removal to clear the way. Cast Wilhelt and outlets in response to counterspells when possible.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, disrupt their mana rocks, and close before they stabilize. Use removal on their key ramp pieces and avoid overextending into their late-game board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use removal and board wipes to stabilize early. Don\u2019t overextend into combat; use your tokens as chump blockers or sacrifice fodder to survive until you can establish your win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats, use protection spells, and close quickly before they can answer. Force them to use multiple resources to deal with your pump, and exploit their lack of early interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the race by having better sacrifice outlets, more protection, or faster combo pieces. Target their Wilhelt early with removal, and prioritize establishing your mana base and enablers faster.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes, targeted removal on Wilhelt, and opponent\u2019s combo pieces.",
+    "Key tell: Opponent holding up mana with multiple lands suggests a counter or removal spell.",
+    "Track their sacrifice outlets and protection spells to time your pump accordingly."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

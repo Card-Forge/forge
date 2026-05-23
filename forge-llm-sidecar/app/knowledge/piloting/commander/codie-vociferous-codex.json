@@ -1,0 +1,121 @@
+{
+  "archetype": "Codie, Vociferous Codex",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck leverages Codie, Vociferous Codex as both a flexible mana source and a spell-copying engine to amplify high-impact instants and sorceries, particularly Mizzix's Mastery. It aims to outvalue opponents through spell synergy and flexible interaction, winning against control and combo decks by overwhelming them with copied damage or board wipes.",
+  "win_conditions": [
+    "Copied Mizzix's Mastery (via Codie or Increasing Vengeance) is the primary win condition.",
+    "Secondary finishers include copied Lightning Axe or Dragon's Fire for targeted removal."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with Codie, at least two lands (or a land plus a mana fixer/rock), and early interaction (Lightning Axe, Fatal Push, or similar)."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no Codie or interaction, or hands with only one color of mana and no fixing."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, hold up interaction if possible.",
+      "Turn 2: Play Codie if mana allows, or play a second land and hold.",
+      "If opening with Codie, play it on turn 2 or 3, then use its tap ability to fix mana for Mizzix's Mastery or Increasing Vengeance.",
+      "Prioritize establishing Codie before committing to big spells."
+    ],
+    "mid_game": [
+      "Treat Codie as a conditional mana source",
+      "avoid sacrificing it unless you have a guaranteed win or need to copy a game-ending spell.",
+      "Track graveyard contents to avoid self-targeting with Mizzix's Mastery.",
+      "Manage hand size by prioritizing high-impact spells over cantrips.",
+      "Commit Codie early to stabilize, but hold back on sacrificing it until you have a clear target for Mizzix's Mastery or a board wipe.",
+      "Use cheap removal to clear early threats, then transition to copying Mizzix's Mastery for board sweeps."
+    ],
+    "late_game": [
+      "Copied Mizzix's Mastery (via Codie or Increasing Vengeance) is the primary win condition.",
+      "Secondary finishers include copied Lightning Axe or Dragon's Fire for targeted removal.",
+      "Go all-in when you have Codie on the battlefield, sufficient mana for Mizzix's Mastery plus a copy effect, and a clear path to lethal or board control.",
+      "Commit when the opponent has no interaction left or is locked out of responding."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Codie, Vociferous Codex",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Mizzix's Mastery",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Increasing Vengeance",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Codie is legendary, so you cannot have two in play.",
+    "Sacrificing Codie to copy a spell is a one-time use, so prioritize copying Mizzix's Mastery or game-winning instants.",
+    "Be cautious of cantrip interaction that can out-value your spells.",
+    "Mizzix's Mastery damages all other creatures, so avoid having multiple copies of it in play.",
+    "Watch for artifact hate and bring in non-artifact threats if needed."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Increasing Vengeance to copy your own instants, cast spells in response to counterspells, or leverage Codie's mana to cast multiple spells in a single turn.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with cheap interaction, use Codie to copy removal, and prioritize board wipes to neutralize their big threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap removal and board wipes, then use Codie's mana to cast Mizzix's Mastery or Increasing Vengeance to clear the board and stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with Codie, force interaction, and use Mizzix's Mastery to clear their board. Copy their spells if possible, or use your own high-impact spells to outvalue them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value exchange is key. Protect Codie, use counterspells to protect your Mizzix's Mastery, and prioritize copying their Mizzix's Mastery for value. Trade efficiently and look for the first mistake.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for counterspells (hold up interaction or use Increasing Vengeance to copy your own spells), board wipes (save Codie for post-sweep value), and combo pieces (use discard or targeted removal).",
+    "Note when opponents tap out for counterspells vs. when they hold up removal."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

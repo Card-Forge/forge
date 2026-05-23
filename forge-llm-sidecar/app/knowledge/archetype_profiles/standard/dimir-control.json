@@ -1,0 +1,453 @@
+{
+  "schema_version": 1,
+  "name": "Dimir Control",
+  "format": "standard",
+  "colors": [
+    "U",
+    "B"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "Dimir Control is a Standard archetype that combines blue's value and answers with black's harsh removal and punishment. The deck aims to stabilize the board, exhaust the opponent's resources, and seize control through responsive play and card advantage. It relies on versatile Omen dragons and flexible sideboard options to navigate a creature-heavy meta.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 16,
+      "cards": [
+        "Consult the Star Charts",
+        "Deadly Cover-Up",
+        "Fountainport",
+        "Intimidation Tactics",
+        "Marang River Regent",
+        "The End",
+        "Three Steps Ahead",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Consult the Star Charts",
+        "Flow State",
+        "Stock Up",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Marang River Regent"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 14,
+      "cards": [
+        "Aclazotz, Deepest Betrayal",
+        "Duress",
+        "Emeritus of Ideation",
+        "Lord Skitter, Sewer King",
+        "Qarsi Revenant",
+        "Tishana's Tidebinder",
+        "Virtue of Persistence",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 14,
+      "cards": [
+        "Bitter Triumph",
+        "Day of Black Sun",
+        "Deadly Cover-Up",
+        "Feed the Swarm",
+        "Requiting Hex",
+        "The End",
+        "Withering Curse",
+        "Withering Torment"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 3
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Day of Black Sun",
+        "Deadly Cover-Up",
+        "Withering Curse"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 9,
+      "cards": [
+        "Negate",
+        "Phantom Interference",
+        "Spell Snare",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Glen Elendra's Answer"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 5,
+      "cards": [
+        "Bitter Triumph",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 19,
+      "cards": [
+        "Deadly Cover-Up",
+        "Flow State",
+        "Lord Skitter, Sewer King",
+        "Qarsi Revenant",
+        "Restless Reef",
+        "Strategic Betrayal",
+        "The End",
+        "Tishana's Tidebinder",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Qarsi Revenant"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Marang River Regent"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Outrageous Robbery",
+        "Tishana's Tidebinder"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 17,
+      "cards": [
+        "Fountainport",
+        "Gloomlake Verge",
+        "Petrified Hamlet",
+        "Realm of Koh",
+        "Restless Reef",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 23,
+      "cards": [
+        "Fountainport",
+        "Gloomlake Verge",
+        "Island",
+        "Petrified Hamlet",
+        "Realm of Koh",
+        "Restless Reef",
+        "Swamp",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.35
+  },
+  "dual_role_cards": [
+    {
+      "card": "Bitter Triumph",
+      "roles": [
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Consult the Star Charts",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Day of Black Sun",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deadly Cover-Up",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fountainport",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gloomlake Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lord Skitter, Sewer King",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marang River Regent",
+      "roles": [
+        "card_advantage",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Petrified Hamlet",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Qarsi Revenant",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Realm of Koh",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restless Reef",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The End",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Three Steps Ahead",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tishana's Tidebinder",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wan Shi Tong, Librarian",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Withering Curse",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Try to be responsive instead of proactive at all times",
+    "Don't let the opponent build a solid board",
+    "Use your life points as a resource as best as you can",
+    "Avoid hands that are too greedy or too slow",
+    "Put Ugin in play at the right time to maximize impact"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Stabilize the board and use removals to counter the opponent's main strategy"
+    },
+    {
+      "trigger": "early game",
+      "line": "Rely on Demolition Field if the mana base lacks colored sources"
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast a cantrip or cheap interaction if available."
+    }
+  ],
+  "kill_priority": [
+    "Marang River Regent",
+    "Aclazotz, Deepest Betrayal",
+    "Duress",
+    "Emeritus of Ideation",
+    "Lord Skitter, Sewer King",
+    "Qarsi Revenant",
+    "Tishana's Tidebinder",
+    "Virtue of Persistence"
+  ],
+  "interaction_to_disrupt": [
+    "Negate",
+    "Phantom Interference",
+    "Spell Snare",
+    "Three Steps Ahead",
+    "Glen Elendra's Answer",
+    "Bitter Triumph",
+    "Day of Black Sun",
+    "Deadly Cover-Up"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/dimir-control.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

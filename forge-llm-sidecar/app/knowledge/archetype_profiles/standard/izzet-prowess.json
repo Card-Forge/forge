@@ -1,0 +1,468 @@
+{
+  "schema_version": 1,
+  "name": "Izzet Prowess",
+  "format": "standard",
+  "colors": [
+    "U",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Izzet Prowess is a tempo strategy that leverages low-cost creatures with the Prowess mechanic to apply rapid pressure while cycling through the deck. By repeatedly casting instants and sorceries, the deck triggers Prowess to make creatures larger and faster, overwhelming opponents before they can stabilize. The package relies on efficient spell generation and evasion to bypass traditional removal.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Wild Ride"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 20,
+      "cards": [
+        "Boomerang Basics",
+        "Broadside Barrage",
+        "Flow State",
+        "Opt",
+        "Ral, Crackling Wit",
+        "Soul-Guide Lantern",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 16,
+      "cards": [
+        "Flow State",
+        "Opt",
+        "Sleight of Hand",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Flow State",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 13,
+      "cards": [
+        "Colorstorm Stallion",
+        "Elusive Otter",
+        "Ral, Crackling Wit",
+        "Slickshot Show-Off"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 20,
+      "cards": [
+        "Boomerang Basics",
+        "Broadside Barrage",
+        "Burst Lightning",
+        "Ghost Vacuum",
+        "Impractical Joke",
+        "Into the Flood Maw",
+        "Sear",
+        "Slagstorm",
+        "Soul-Guide Lantern",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Ghost Vacuum",
+        "Slagstorm"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 5,
+      "cards": [
+        "Get Out",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 5,
+      "cards": [
+        "Colorstorm Stallion",
+        "Secret Identity"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Broadside Barrage"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "graveyard_enablers": {
+      "target_count": 11,
+      "cards": [
+        "Flow State",
+        "Ghost Vacuum",
+        "Soul-Guide Lantern",
+        "Stormchaser's Talent",
+        "Wild Ride"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 14,
+      "cards": [
+        "Boomerang Basics",
+        "Get Out",
+        "Into the Flood Maw",
+        "Stormchaser's Talent",
+        "Wild Ride"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 5
+    },
+    "engines": {
+      "target_count": 17,
+      "cards": [
+        "Colorstorm Stallion",
+        "Flow State",
+        "Ral, Crackling Wit",
+        "Slickshot Show-Off",
+        "Stormchaser's Talent"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 3
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Impractical Joke",
+        "Roaring Furnace // Steaming Sauna"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 23,
+      "cards": [
+        "Breeding Pool",
+        "Flow State",
+        "Multiversal Passage",
+        "Riverpyre Verge",
+        "Spirebluff Canal",
+        "Steam Vents",
+        "Stormchaser's Talent",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Breeding Pool",
+        "Island",
+        "Multiversal Passage",
+        "Riverpyre Verge",
+        "Spirebluff Canal",
+        "Steam Vents",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Ral, Crackling Wit"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "interaction_density": 0.48
+  },
+  "dual_role_cards": [
+    {
+      "card": "Boomerang Basics",
+      "roles": [
+        "card_advantage",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Broadside Barrage",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Colorstorm Stallion",
+      "roles": [
+        "engines",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Get Out",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Vacuum",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Impractical Joke",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Into the Flood Maw",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Multiversal Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Opt",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ral, Crackling Wit",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Riverpyre Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Slagstorm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Slickshot Show-Off",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirebluff Canal",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormchaser's Talent",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wild Ride",
+      "roles": [
+        "graveyard_enablers",
+        "mana_reducers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Willowrush Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize casting instants before combat to maximize Prowess triggers",
+    "Hold up mana for counterspells when facing control decks",
+    "Cycle dead cards to find more instants and keep Prowess active",
+    "Common mistake: Overcommitting to combat without triggering Prowess first.",
+    "Always cast spells before attacking to maximize Prowess triggers."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play one-drop creatures to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast cheap instants to trigger Prowess and cycle"
+    },
+    {
+      "trigger": "early game",
+      "line": "Apply early pressure to force opponent responses"
+    }
+  ],
+  "kill_priority": [
+    "Colorstorm Stallion",
+    "Flow State",
+    "Ral, Crackling Wit",
+    "Slickshot Show-Off",
+    "Stormchaser's Talent",
+    "Elusive Otter"
+  ],
+  "interaction_to_disrupt": [
+    "Get Out",
+    "Spell Pierce",
+    "Colorstorm Stallion",
+    "Secret Identity",
+    "Boomerang Basics",
+    "Broadside Barrage",
+    "Burst Lightning",
+    "Ghost Vacuum"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/izzet-prowess.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

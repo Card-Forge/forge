@@ -1,0 +1,133 @@
+{
+  "archetype": "Eldrazi",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/eldrazi.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancient Stirrings"
+    },
+    {
+      "qty": 4,
+      "name": "Basking Broodscale"
+    },
+    {
+      "qty": 3,
+      "name": "Blade of the Bloodchief"
+    },
+    {
+      "qty": 2,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 4,
+      "name": "Devourer of Destiny"
+    },
+    {
+      "qty": 4,
+      "name": "Eldrazi Temple"
+    },
+    {
+      "qty": 2,
+      "name": "Emrakul, the Promised End"
+    },
+    {
+      "qty": 4,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Glaring Fleshraker"
+    },
+    {
+      "qty": 3,
+      "name": "Grove of the Burnwillows"
+    },
+    {
+      "qty": 1,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 4,
+      "name": "Kozilek's Command"
+    },
+    {
+      "qty": 4,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 1,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 3,
+      "name": "Sowing Mycospawn"
+    },
+    {
+      "qty": 1,
+      "name": "Springleaf Drum"
+    },
+    {
+      "qty": 4,
+      "name": "Ugin's Labyrinth"
+    },
+    {
+      "qty": 4,
+      "name": "Urza's Saga"
+    },
+    {
+      "qty": 3,
+      "name": "Vexing Bauble"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 2,
+      "name": "Dismember"
+    },
+    {
+      "qty": 1,
+      "name": "Emrakul, the Promised End"
+    },
+    {
+      "qty": 1,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Grafdigger's Cage"
+    },
+    {
+      "qty": 2,
+      "name": "Nature's Claim"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 2,
+      "name": "Thief of Existence"
+    },
+    {
+      "qty": 1,
+      "name": "Veil of Summer"
+    },
+    {
+      "qty": 1,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 2,
+      "name": "Warping Wail"
+    }
+  ]
+}

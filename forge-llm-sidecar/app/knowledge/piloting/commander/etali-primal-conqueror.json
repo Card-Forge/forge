@@ -1,0 +1,127 @@
+{
+  "archetype": "Etali, Primal Conqueror",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck operates as a midrange-control hybrid that stabilizes early with disruption and mana acceleration, then deploys Etali, Primal Conqueror as a game-ending threat that leverages the graveyard to generate overwhelming board presence. It wins against combo and control by out-resourcing them and punishing slow games, while relying on efficient spot removal and land disruption to close out aggro matchups before they snowball.",
+  "win_conditions": [
+    "Etali attacking with graveyard recursion, or comboing with bounce/flicker effects to generate multiple triggers.",
+    "Sometimes a board full of creatures from the graveyard triggers wins the game instantly.",
+    "Direct damage spells can also close out games if the opponent is at low life."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including basics for G/R), at least one mana acceleration source (Sol Ring, Arcane Signet, or equivalent ramp), and a turn-1 or turn-2 disruption spell (Thoughtseize, Lightning Strike, or Go for the Throat)."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 3+ lands and no early plays, multiple high-cost cards without acceleration, or only removal with no way to develop mana or disrupt."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, then cast disruption (Thoughtseize on combo pieces or early threats) or drop Sol Ring/Arcane Signet if opening light.",
+      "Turn 2: Develop your second land, cast acceleration if available, and evaluate whether to drop a mid-game threat or hold for Etali.",
+      "Prioritize untapped lands for flexibility and ensure you can cast your disruption spells in response to opponent's opening moves."
+    ],
+    "mid_game": [
+      "Balance mana for Etali (6 mana) against early threats and disruption.",
+      "Avoid overextending into sweepers",
+      "keep hand size optimal for answering key threats.",
+      "Use the graveyard strategically\u2014Etali's trigger is powerful but can be answered, so don't dump your entire graveyard if you can close the game faster with direct damage or a board of creatures.",
+      "Commit threats when the opponent has no sweepers or spot removal in play or hand.",
+      "Hold back Etali if they have potential board wipes (Wrath of God, Cyclonic Rift) or if you lack protection.",
+      "Use disruption to remove their answers before committing your win condition."
+    ],
+    "late_game": [
+      "Etali attacking with graveyard recursion, or comboing with bounce/flicker effects to generate multiple triggers.",
+      "Sometimes a board full of creatures from the graveyard triggers wins the game instantly.",
+      "Direct damage spells can also close out games if the opponent is at low life.",
+      "Go all-in when the opponent has no sweepers, you have mana open for protection (bounce, flash, or counterspell), or you can close the game in one combat step.",
+      "Commit when you've disrupted their key answers and have established board control."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Etali, Primal Conqueror",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Arcane Signet",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Etali's graveyard trigger is a win-more card but can close games",
+    "don't overcommit to it if you can win faster.",
+    "Watch for Leyline of the Void or Rest in Peace, which can neuter your strategy.",
+    "Mana base is crucial",
+    "ensure you can cast Etali reliably without flooding.",
+    "Common mistake: casting Etali into a sweeper without protection.",
+    "Always track opponent's hand and graveyard to predict their answers."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap disruption to remove counterspells, or cast Etali in response to their counter to potentially win before they can respond. Use bounce/flicker effects to bypass counterspells, or play around them by holding up protection until they've used their answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with disruption and spot removal on their ramp creatures. Don't let them stabilize; use land destruction and efficient removal to keep them behind on mana. Force them to answer your threats while you develop your own board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal and hold up mana for protection. Use Etali as a late-game finisher once the board is clear. Don't overextend into early aggression; prioritize survival and resource denial until you can close the game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with mid-game threats and use disruption to remove their answers. Close the game quickly before they can draw into sweepers or card advantage. Force them to use resources on your threats while you develop your own board and graveyard advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by out-sequenceing and out-valuing. Use graveyard hate to disrupt their recursion, and protect your own Etali with bounce or flash. Track their hand and graveyard to predict their plays, and don't overcommit to Etali if they have removal or sweepers ready.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers, spot removal, and graveyard hate.",
+    "Note if the opponent is playing combo pieces that need to be disrupted early.",
+    "Track their mana base to predict when they can cast their own threats or answers.",
+    "Pay attention to graveyard contents if they run recursion or mill strategies."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

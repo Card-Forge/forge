@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "name": "Mono-White Humans",
+  "format": "pioneer",
+  "colors": [
+    "W"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "This deck leverages a low curve of aggressive Human creatures to apply immediate pressure while taxing the opponent's resource advantage. Signature pieces like Thalia, Guardian of Thraben and Thalia's Lieutenant slow down opposing strategies, allowing Adeline, Resplendent Cathar to grow into a massive threat. The game plan focuses on maintaining board presence and outlasting midrange or control decks through incremental value and combat tricks.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Recruitment Officer",
+        "Warden of the Inner Sky"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Adeline, Resplendent Cathar",
+        "Thalia's Lieutenant"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 36,
+      "cards": [
+        "Adeline, Resplendent Cathar",
+        "Coppercoat Vanguard",
+        "Dauntless Bodyguard",
+        "Elite Spellbinder",
+        "Extraction Specialist",
+        "Hopeful Initiate",
+        "Kytheon, Hero of Akros",
+        "Recruitment Officer",
+        "Thalia's Lieutenant",
+        "Thalia, Guardian of Thraben",
+        "Warden of the Inner Sky"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 16,
+      "cards": [
+        "Destroy Evil",
+        "Eiganjo, Seat of the Empire",
+        "Extraction Specialist",
+        "Get Lost",
+        "Hopeful Initiate",
+        "Portable Hole"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Thalia's Lieutenant"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 20,
+      "cards": [
+        "Brave the Elements",
+        "Cavern of Souls",
+        "Coppercoat Vanguard",
+        "Dauntless Bodyguard",
+        "Thalia's Lieutenant",
+        "Warden of the Inner Sky"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 6,
+      "cards": [
+        "Extraction Specialist",
+        "Rest in Peace"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 3,
+      "cards": [
+        "Extraction Specialist"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Adeline, Resplendent Cathar"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 13,
+      "cards": [
+        "Invasion of Gobakhan",
+        "Thalia's Lieutenant",
+        "Thalia, Guardian of Thraben",
+        "Wedding Announcement"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 14,
+      "cards": [
+        "Cavern of Souls",
+        "Eiganjo, Seat of the Empire",
+        "Mutavault",
+        "Thalia's Lieutenant"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 22,
+      "cards": [
+        "Cavern of Souls",
+        "Eiganjo, Seat of the Empire",
+        "Mutavault",
+        "Plains"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.55
+  },
+  "dual_role_cards": [
+    {
+      "card": "Adeline, Resplendent Cathar",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Coppercoat Vanguard",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dauntless Bodyguard",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eiganjo, Seat of the Empire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Extraction Specialist",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hopeful Initiate",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mutavault",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Recruitment Officer",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thalia's Lieutenant",
+      "roles": [
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thalia, Guardian of Thraben",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Warden of the Inner Sky",
+      "roles": [
+        "dig_draw",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up mana for combat tricks to maximize early damage",
+    "Play tax creatures before opponent's key spells to maximize disruption",
+    "Pump Adeline only when you can follow up with combat or protection",
+    "Common mistakes include overcommitting to the board without protection for Adeline, ignoring opponent potential sweepers, and mismanaging mana for interaction.",
+    "Thalia's Lieutenant's tax applies to opponent spells, not yours, so use it to disrupt their game plan."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and cheap Humans to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize Thalia's Lieutenant to tax opponent's early spells"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use combat tricks to maximize early damage"
+    }
+  ],
+  "kill_priority": [
+    "Adeline, Resplendent Cathar",
+    "Thalia's Lieutenant",
+    "Coppercoat Vanguard",
+    "Dauntless Bodyguard",
+    "Elite Spellbinder",
+    "Extraction Specialist",
+    "Hopeful Initiate",
+    "Kytheon, Hero of Akros"
+  ],
+  "interaction_to_disrupt": [
+    "Brave the Elements",
+    "Cavern of Souls",
+    "Coppercoat Vanguard",
+    "Dauntless Bodyguard",
+    "Thalia's Lieutenant",
+    "Warden of the Inner Sky",
+    "Destroy Evil",
+    "Eiganjo, Seat of the Empire"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/mono-white-humans.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

@@ -1,0 +1,493 @@
+{
+  "schema_version": 1,
+  "name": "Esper Lurrus Control",
+  "format": "vintage",
+  "colors": [
+    "W",
+    "U",
+    "B"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "Esper Lurrus Control leverages cheap, disruptive creatures to stall aggressive strategies and dismantle combo plans in Vintage. By cycling Lurrus of the Dream-Den, the deck generates massive card advantage while recycling key threats and removal. Psychic Frog and Orcish Bowmasters provide early tempo and information, allowing you to dictate the pace until your superior resource generation closes out the game.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 20,
+      "cards": [
+        "Ancestral Recall",
+        "Brainstorm",
+        "Gitaxian Probe",
+        "Lurrus of the Dream-Den",
+        "L\u00f3rien Revealed",
+        "Nihil Spellbomb",
+        "Orcish Bowmasters",
+        "Ponder",
+        "Psychic Frog",
+        "Treasure Cruise",
+        "Urza's Saga",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Dig Through Time",
+        "Ponder"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 9,
+      "cards": [
+        "Demonic Tutor",
+        "Flooded Strand",
+        "L\u00f3rien Revealed",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Psychic Frog"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 18,
+      "cards": [
+        "Containment Priest",
+        "Lavinia, Azorius Renegade",
+        "Lurrus of the Dream-Den",
+        "Mox Jet",
+        "Mox Pearl",
+        "Mox Sapphire",
+        "Orcish Bowmasters",
+        "Psychic Frog",
+        "Time Walk"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 24,
+      "cards": [
+        "Fatal Push",
+        "Lurrus of the Dream-Den",
+        "Nihil Spellbomb",
+        "Orcish Bowmasters",
+        "Psychic Frog",
+        "Seal of Cleansing",
+        "Strip Mine",
+        "Swords to Plowshares",
+        "The Tabernacle at Pendrell Vale",
+        "Wasteland"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Psychic Frog",
+        "The Tabernacle at Pendrell Vale"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 14,
+      "cards": [
+        "Consign to Memory",
+        "Force of Negation",
+        "Force of Will",
+        "Mental Misstep",
+        "Mystical Dispute",
+        "Spell Pierce"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "protection": {
+      "target_count": 4,
+      "cards": [
+        "Psychic Frog"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Psychic Frog"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 12,
+      "cards": [
+        "Dig Through Time",
+        "Force of Negation",
+        "Lurrus of the Dream-Den",
+        "Nihil Spellbomb",
+        "Psychic Frog",
+        "Treasure Cruise"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 7,
+      "cards": [
+        "Dig Through Time",
+        "Lurrus of the Dream-Den",
+        "Psychic Frog",
+        "Treasure Cruise"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 1,
+      "cards": [
+        "Lurrus of the Dream-Den"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Lurrus of the Dream-Den",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "hate_pieces": {
+      "target_count": 11,
+      "cards": [
+        "Gitaxian Probe",
+        "Lavinia, Azorius Renegade",
+        "Null Rod",
+        "Pithing Needle",
+        "Psychic Frog",
+        "Stony Silence"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 4
+    },
+    "mana_fixing": {
+      "target_count": 19,
+      "cards": [
+        "Black Lotus",
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Strip Mine",
+        "The Tabernacle at Pendrell Vale",
+        "Tundra",
+        "Underground Sea",
+        "Urza's Saga",
+        "Wasteland"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 19,
+      "cards": [
+        "Flooded Strand",
+        "Island",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Strip Mine",
+        "The Tabernacle at Pendrell Vale",
+        "Tundra",
+        "Underground Sea",
+        "Urza's Saga",
+        "Wasteland"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 1
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.38
+  },
+  "dual_role_cards": [
+    {
+      "card": "Dig Through Time",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gitaxian Probe",
+      "roles": [
+        "card_advantage",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lavinia, Azorius Renegade",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lurrus of the Dream-Den",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nihil Spellbomb",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orcish Bowmasters",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Psychic Frog",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "protection",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strip Mine",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Tabernacle at Pendrell Vale",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Treasure Cruise",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tundra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Sea",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always cast Psychic Frog before playing other creatures to maximize information gain",
+    "Hold up Lurrus recursion until you have a clear target in the graveyard to cycle",
+    "Use Orcish Bowmasters' death trigger to remove threats that would otherwise trigger opponent's abilities",
+    "Prioritize land drops early to ensure you can pay Lurrus's recursion cost consistently",
+    "Lurrus is fragile"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize casting one-drops to establish tempo and gather information"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Psychic Frog to force reveals and adjust your game plan accordingly"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play lands and cheap disruption to stabilize against fast strategies"
+    }
+  ],
+  "kill_priority": [
+    "Lurrus of the Dream-Den",
+    "Psychic Frog",
+    "Containment Priest",
+    "Lavinia, Azorius Renegade",
+    "Mox Jet",
+    "Mox Pearl",
+    "Mox Sapphire",
+    "Orcish Bowmasters"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Force of Negation",
+    "Force of Will",
+    "Mental Misstep",
+    "Mystical Dispute",
+    "Spell Pierce",
+    "Psychic Frog",
+    "Fatal Push"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/esper-lurrus-control.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

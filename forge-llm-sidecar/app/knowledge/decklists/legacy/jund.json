@@ -1,0 +1,157 @@
+{
+  "archetype": "Jund",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/jund.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Ba Sing Se"
+    },
+    {
+      "qty": 1,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 2,
+      "name": "Barrowgoyf"
+    },
+    {
+      "qty": 3,
+      "name": "Bayou"
+    },
+    {
+      "qty": 2,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Dryad Arbor"
+    },
+    {
+      "qty": 2,
+      "name": "Endurance"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Gaddock Teeg"
+    },
+    {
+      "qty": 1,
+      "name": "Gaea's Cradle"
+    },
+    {
+      "qty": 1,
+      "name": "Ghost Quarter"
+    },
+    {
+      "qty": 4,
+      "name": "Green Sun's Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Grist, the Hunger Tide"
+    },
+    {
+      "qty": 1,
+      "name": "Icetill Explorer"
+    },
+    {
+      "qty": 4,
+      "name": "Ignoble Hierarch"
+    },
+    {
+      "qty": 3,
+      "name": "Once Upon a Time"
+    },
+    {
+      "qty": 4,
+      "name": "Scythecat Cub"
+    },
+    {
+      "qty": 2,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Sylvan Safekeeper"
+    },
+    {
+      "qty": 2,
+      "name": "Talon Gates of Madara"
+    },
+    {
+      "qty": 3,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 4,
+      "name": "Verdant Catacombs"
+    },
+    {
+      "qty": 3,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 4,
+      "name": "Wight of the Reliquary"
+    },
+    {
+      "qty": 4,
+      "name": "Windswept Heath"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Alpha Deathclaw"
+    },
+    {
+      "qty": 1,
+      "name": "Archive Trap"
+    },
+    {
+      "qty": 2,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Karakas"
+    },
+    {
+      "qty": 2,
+      "name": "Leyline of the Void"
+    },
+    {
+      "qty": 1,
+      "name": "Mindbreak Trap"
+    },
+    {
+      "qty": 1,
+      "name": "Pick Your Poison"
+    },
+    {
+      "qty": 1,
+      "name": "Thoughtseize"
+    }
+  ]
+}

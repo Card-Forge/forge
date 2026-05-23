@@ -1,0 +1,125 @@
+{
+  "archetype": "Goblins",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/goblins.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Accursed Marauder"
+    },
+    {
+      "qty": 4,
+      "name": "Boiling Rock Prison"
+    },
+    {
+      "qty": 2,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Dark-Dweller Oracle"
+    },
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Eviscerator's Insight"
+    },
+    {
+      "qty": 3,
+      "name": "Fanatical Offering"
+    },
+    {
+      "qty": 4,
+      "name": "First Day of Class"
+    },
+    {
+      "qty": 4,
+      "name": "Goblin Matron"
+    },
+    {
+      "qty": 4,
+      "name": "Ichor Wellspring"
+    },
+    {
+      "qty": 1,
+      "name": "Impulsive Pilferer"
+    },
+    {
+      "qty": 1,
+      "name": "Krark-Clan Shaman"
+    },
+    {
+      "qty": 1,
+      "name": "Makeshift Munitions"
+    },
+    {
+      "qty": 6,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Putrid Goblin"
+    },
+    {
+      "qty": 2,
+      "name": "Rakdos Carnarium"
+    },
+    {
+      "qty": 4,
+      "name": "Skirk Prospector"
+    },
+    {
+      "qty": 1,
+      "name": "Stormshriek Feral"
+    },
+    {
+      "qty": 3,
+      "name": "Swamp"
+    },
+    {
+      "qty": 3,
+      "name": "Toxin Analysis"
+    },
+    {
+      "qty": 4,
+      "name": "Unearth"
+    },
+    {
+      "qty": 2,
+      "name": "Vault of Whispers"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Cast into the Fire"
+    },
+    {
+      "qty": 2,
+      "name": "Introduction to Prophecy"
+    },
+    {
+      "qty": 1,
+      "name": "Krark-Clan Shaman"
+    },
+    {
+      "qty": 2,
+      "name": "Mesmeric Fiend"
+    },
+    {
+      "qty": 1,
+      "name": "Origin of Metalbending"
+    },
+    {
+      "qty": 4,
+      "name": "Red Elemental Blast"
+    },
+    {
+      "qty": 3,
+      "name": "Suplex"
+    }
+  ]
+}

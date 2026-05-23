@@ -33,7 +33,7 @@ import time
 # Allow running as a plain script (no package install needed).
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 
-from app.knowledge import primers  # noqa: E402
+from app.knowledge import guidance_migration, primers  # noqa: E402
 from app.knowledge.piloting import slugify  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
@@ -106,7 +106,16 @@ def _maybe_enrich(guide, arch: dict, fmt: str, *, enabled: bool, known_archetype
     )
 
 
-def build_one(arch: dict, fmt: str, *, force: bool, enrich_from_youtube: bool = False, all_archetypes: list[dict] | None = None) -> bool:
+def build_one(
+    arch: dict,
+    fmt: str,
+    *,
+    force: bool,
+    enrich_from_youtube: bool = False,
+    all_archetypes: list[dict] | None = None,
+    merge_legacy_guidance: bool = False,
+    write_profile: bool = False,
+) -> bool:
     name = arch.get("name") or ""
     slug = slugify(name)
     if not slug:
@@ -131,10 +140,18 @@ def build_one(arch: dict, fmt: str, *, force: bool, enrich_from_youtube: bool = 
     guide = _maybe_enrich(
         guide, arch, fmt, enabled=enrich_from_youtube, known_archetypes=all_archetypes or []
     )
+    payload = guide.model_dump(exclude={"stale_flags"})
+    legacy = guidance_migration.legacy_for(fmt, name)
+    if merge_legacy_guidance and legacy:
+        payload = guidance_migration.merge_legacy_into_guide(payload, legacy, fmt)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(guide.model_dump_json(indent=2, exclude={"stale_flags"}) + "\n", encoding="utf-8")
+    out_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     log.info("wrote %s (source: %s)", out_path, guide.metadata.source or "default")
+    if write_profile:
+        profile = guidance_migration.build_archetype_profile(payload, arch, legacy)
+        profile_path = guidance_migration.write_profile(profile, fmt, slug)
+        log.info("wrote %s", profile_path)
     # Clear archive duplicate if any.
     arch_path = _archive_path(fmt, slug)
     if arch_path.exists():
@@ -191,6 +208,8 @@ def build_format(
     rebuild_archived: bool,
     refresh_stale: bool,
     enrich_from_youtube: bool = False,
+    merge_legacy_guidance: bool = False,
+    write_profiles: bool = False,
 ) -> int:
     archetypes = _load_archetypes(fmt)
     if not archetypes:
@@ -202,7 +221,15 @@ def build_format(
         if not target:
             log.error("archetype %r not found in %s", archetype, fmt)
             return 0
-        return 1 if build_one(target, fmt, force=force, enrich_from_youtube=enrich_from_youtube, all_archetypes=archetypes) else 0
+        return 1 if build_one(
+            target,
+            fmt,
+            force=force,
+            enrich_from_youtube=enrich_from_youtube,
+            all_archetypes=archetypes,
+            merge_legacy_guidance=merge_legacy_guidance,
+            write_profile=write_profiles,
+        ) else 0
 
     queue: list[dict] = []
 
@@ -247,7 +274,15 @@ def build_format(
 
     ok = 0
     for i, arch in enumerate(queue):
-        if build_one(arch, fmt, force=force, enrich_from_youtube=enrich_from_youtube, all_archetypes=archetypes):
+        if build_one(
+            arch,
+            fmt,
+            force=force,
+            enrich_from_youtube=enrich_from_youtube,
+            all_archetypes=archetypes,
+            merge_legacy_guidance=merge_legacy_guidance,
+            write_profile=write_profiles,
+        ):
             ok += 1
         if i < len(queue) - 1:
             time.sleep(2)
@@ -279,6 +314,16 @@ def main(argv: list[str]) -> int:
         action="store_true",
         help="after building each guide, append gameplay heuristics extracted from cached YouTube videos",
     )
+    parser.add_argument(
+        "--merge-legacy-guidance",
+        action="store_true",
+        help="merge matching guidance/<fmt>.json entries into generated runtime guides",
+    )
+    parser.add_argument(
+        "--write-profiles",
+        action="store_true",
+        help="also write app/knowledge/archetype_profiles/<fmt>/<slug>.json",
+    )
     args = parser.parse_args(argv[1:])
 
     formats = args.formats or sorted(p.stem for p in METAGAME_DIR.glob("*.json") if not p.stem.endswith(".diff"))
@@ -295,6 +340,8 @@ def main(argv: list[str]) -> int:
             rebuild_archived=args.rebuild_archived,
             refresh_stale=args.refresh_stale,
             enrich_from_youtube=args.enrich_from_youtube,
+            merge_legacy_guidance=args.merge_legacy_guidance,
+            write_profiles=args.write_profiles,
         )
     log.info("done: %d guide(s) written", total)
     return 0 if total else 1

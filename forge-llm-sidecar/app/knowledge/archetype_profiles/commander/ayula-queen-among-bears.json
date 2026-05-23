@@ -1,0 +1,727 @@
+{
+  "schema_version": 1,
+  "name": "Ayula, Queen Among Bears",
+  "format": "commander",
+  "colors": [
+    "G"
+  ],
+  "strategy_type": "ramp",
+  "expected_deck_total": 100,
+  "macro_plan": "Green tribal beatdown focused on overwhelming the board with trampling Bear tokens and applying relentless pressure. Wins by out-scaling opponents through token generation, direct damage, and unblockable threats that punish reactive strategies.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 11,
+      "cards": [
+        "Beast Whisperer",
+        "Chronicle of Victory",
+        "Guardian Project",
+        "Inspiring Call",
+        "Owlbear",
+        "Rishkar's Expertise",
+        "Striped Bears",
+        "Sylvan Library",
+        "The Great Henge",
+        "Toski, Bearer of Secrets",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Evercoat Ursine",
+        "Herald's Horn",
+        "Mosswort Bridge",
+        "Owlbear Cub",
+        "Realmwalker"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 10,
+      "cards": [
+        "Chord of Calling",
+        "Fauna Shaman",
+        "Finale of Devastation",
+        "Green Sun's Zenith",
+        "Natural Order",
+        "Nature's Lore",
+        "Three Visits",
+        "Verdant Catacombs",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Windswept Heath"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 42,
+      "cards": [
+        "Adaptive Automaton",
+        "Alpine Grizzly",
+        "Ashcoat Bear",
+        "Ayula's Influence",
+        "Ayula, Queen Among Bears",
+        "Balduvian Bears",
+        "Bear Cub",
+        "Beast Whisperer",
+        "Branching Evolution",
+        "Chameleon Colossus",
+        "Chomping Changeling",
+        "Craterhoof Behemoth",
+        "Dragon-Scarred Bear",
+        "Druid's Familiar",
+        "Eternal Witness",
+        "Evercoat Ursine",
+        "Fauna Shaman",
+        "Goreclaw, Terror of Qal Sisma",
+        "Grizzly Bears",
+        "Hardened Scales",
+        "Lightning Greaves",
+        "Lumra, Bellow of the Woods",
+        "Masked Vandal",
+        "Metallic Mimic",
+        "Mother Bear",
+        "Owlbear",
+        "Owlbear Cub",
+        "Realmwalker",
+        "Rishkar, Peema Renegade",
+        "Roaming Throne",
+        "Runeclaw Bear",
+        "Sol Ring",
+        "Striped Bears",
+        "Surrak and Goreclaw",
+        "The Ozolith",
+        "Toski, Bearer of Secrets",
+        "Ulvenwald Bear",
+        "Universal Automaton",
+        "Utopia Sprawl",
+        "Werebear",
+        "Wild Growth",
+        "Wilson, Refined Grizzly"
+      ],
+      "mainboard_count": 42,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 14,
+      "cards": [
+        "Basilisk Collar",
+        "Bear Umbra",
+        "Beast Within",
+        "Blast Zone",
+        "Boseiju, Who Endures",
+        "Chomping Changeling",
+        "Eternal Witness",
+        "Evercoat Ursine",
+        "Force of Vigor",
+        "Inspiring Call",
+        "Masked Vandal",
+        "Strip Mine",
+        "Toski, Bearer of Secrets",
+        "Tyvar's Stand"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Chord of Calling",
+        "Gaea's Cradle",
+        "Goreclaw, Terror of Qal Sisma",
+        "Inspiring Call",
+        "Rishkar, Peema Renegade"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 9,
+      "cards": [
+        "Cavern of Souls",
+        "Chameleon Colossus",
+        "Heroic Intervention",
+        "Inspiring Call",
+        "Roaming Throne",
+        "Toski, Bearer of Secrets",
+        "Tyvar's Stand",
+        "Veil of Summer",
+        "Wilson, Refined Grizzly"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 10,
+      "cards": [
+        "Argoth, Sanctum of Nature",
+        "Bearscape",
+        "Eternal Witness",
+        "Finale of Devastation",
+        "Grizzly Fate",
+        "Guardian Project",
+        "Lumra, Bellow of the Woods",
+        "Masked Vandal",
+        "Mother Bear",
+        "Werebear"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 6,
+      "cards": [
+        "Bearscape",
+        "Eternal Witness",
+        "Grizzly Fate",
+        "Lumra, Bellow of the Woods",
+        "Masked Vandal",
+        "Mother Bear"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Beast Whisperer",
+        "Chronicle of Victory"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Windswept Heath"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 16,
+      "cards": [
+        "Argoth, Sanctum of Nature",
+        "Blast Zone",
+        "Boseiju, Who Endures",
+        "Castle Garenbrig",
+        "Cavern of Souls",
+        "Gaea's Cradle",
+        "Mosswort Bridge",
+        "Nykthos, Shrine to Nyx",
+        "Oran-Rief, the Vastwood",
+        "Rogue's Passage",
+        "Springleaf Parade",
+        "Strip Mine",
+        "Verdant Catacombs",
+        "Windswept Heath",
+        "Wooded Foothills",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 35,
+      "cards": [
+        "Argoth, Sanctum of Nature",
+        "Blast Zone",
+        "Boseiju, Who Endures",
+        "Castle Garenbrig",
+        "Cavern of Souls",
+        "Forest",
+        "Gaea's Cradle",
+        "Mosswort Bridge",
+        "Nykthos, Shrine to Nyx",
+        "Oran-Rief, the Vastwood",
+        "Rogue's Passage",
+        "Strip Mine",
+        "Verdant Catacombs",
+        "Windswept Heath",
+        "Wooded Foothills",
+        "Yavimaya, Cradle of Growth"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.3
+  },
+  "dual_role_cards": [
+    {
+      "card": "Argoth, Sanctum of Nature",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bearscape",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Beast Whisperer",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blast Zone",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Castle Garenbrig",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chameleon Colossus",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chomping Changeling",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chord of Calling",
+      "roles": [
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chronicle of Victory",
+      "roles": [
+        "card_advantage",
+        "engines"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eternal Witness",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Evercoat Ursine",
+      "roles": [
+        "dig_draw",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fauna Shaman",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Finale of Devastation",
+      "roles": [
+        "graveyard_enablers",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gaea's Cradle",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goreclaw, Terror of Qal Sisma",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grizzly Fate",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guardian Project",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Inspiring Call",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lumra, Bellow of the Woods",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Masked Vandal",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mosswort Bridge",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mother Bear",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nykthos, Shrine to Nyx",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Oran-Rief, the Vastwood",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Owlbear",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Owlbear Cub",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Realmwalker",
+      "roles": [
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rishkar, Peema Renegade",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Roaming Throne",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rogue's Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strip Mine",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Striped Bears",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Toski, Bearer of Secrets",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tyvar's Stand",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veil of Summer",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Werebear",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wilson, Refined Grizzly",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya, Cradle of Growth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Ayula's token generation scales with combat, so attacking with multiple creatures maximizes value.",
+    "Watch out for cantrips or cheap removal that can trade favorably against your tokens.",
+    "Avoid overcommitting to a single attack if you suspect a board wipe",
+    "use your tokens to probe for answers."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a Forest."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Cast Werebear or Ayula if mana allows"
+    },
+    {
+      "trigger": "early game",
+      "line": "otherwise, play a land and hold for turn 3."
+    }
+  ],
+  "kill_priority": [
+    "Beast Whisperer",
+    "Chronicle of Victory",
+    "Windswept Heath",
+    "Adaptive Automaton",
+    "Alpine Grizzly",
+    "Ashcoat Bear",
+    "Ayula's Influence",
+    "Ayula, Queen Among Bears"
+  ],
+  "interaction_to_disrupt": [
+    "Cavern of Souls",
+    "Chameleon Colossus",
+    "Heroic Intervention",
+    "Inspiring Call",
+    "Roaming Throne",
+    "Toski, Bearer of Secrets",
+    "Tyvar's Stand",
+    "Veil of Summer"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/ayula-queen-among-bears.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

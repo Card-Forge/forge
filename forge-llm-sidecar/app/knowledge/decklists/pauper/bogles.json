@@ -1,0 +1,105 @@
+{
+  "archetype": "Bogles",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/bogles.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Abundant Growth"
+    },
+    {
+      "qty": 4,
+      "name": "Ancestral Mask"
+    },
+    {
+      "qty": 4,
+      "name": "Armadillo Cloak"
+    },
+    {
+      "qty": 1,
+      "name": "Cartouche of Solidarity"
+    },
+    {
+      "qty": 4,
+      "name": "Ethereal Armor"
+    },
+    {
+      "qty": 11,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Gladecover Scout"
+    },
+    {
+      "qty": 2,
+      "name": "Khalni Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Lifelink"
+    },
+    {
+      "qty": 4,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 3,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Rancor"
+    },
+    {
+      "qty": 2,
+      "name": "Sentinel's Eyes"
+    },
+    {
+      "qty": 3,
+      "name": "Silhana Ledgewalker"
+    },
+    {
+      "qty": 4,
+      "name": "Slippery Bogle"
+    },
+    {
+      "qty": 1,
+      "name": "Spirit Link"
+    },
+    {
+      "qty": 4,
+      "name": "Utopia Sprawl"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "End the Festivities"
+    },
+    {
+      "qty": 1,
+      "name": "Flaring Pain"
+    },
+    {
+      "qty": 3,
+      "name": "Freewind Falcon"
+    },
+    {
+      "qty": 2,
+      "name": "Ram Through"
+    },
+    {
+      "qty": 1,
+      "name": "Tamiyo's Safekeeping"
+    },
+    {
+      "qty": 3,
+      "name": "Thraben Charm"
+    },
+    {
+      "qty": 2,
+      "name": "Young Wolf"
+    }
+  ]
+}

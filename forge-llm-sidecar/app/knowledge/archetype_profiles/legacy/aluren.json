@@ -1,0 +1,452 @@
+{
+  "schema_version": 1,
+  "name": "Aluren",
+  "format": "legacy",
+  "colors": [
+    "U",
+    "B",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This U/B/G Legacy deck leverages Aluren to reduce permanent costs to {1}, enabling rapid deployment of Show and Tell. Lotus Petal provides the necessary mana acceleration to cast these spells early and consistently. The goal is to bypass traditional mana curves by fetching high-mana-value threats for minimal investment.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 8,
+      "cards": [
+        "Aluren",
+        "Show and Tell"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 21,
+      "cards": [
+        "Aluren",
+        "Brainstorm",
+        "Ponder",
+        "Show and Tell",
+        "Silent Gravestone",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 10,
+      "cards": [
+        "Hedge Maze",
+        "Ponder",
+        "Stock Up"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 7,
+      "cards": [
+        "Flooded Strand",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Aluren",
+        "Show and Tell"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 20,
+      "cards": [
+        "Acererak the Archlich",
+        "Aluren",
+        "Atraxa, Grand Unifier",
+        "Emrakul, the Aeons Torn",
+        "Endurance",
+        "Harbinger of the Seas",
+        "Omniscience",
+        "Show and Tell"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 9,
+      "cards": [
+        "Ancient Tomb",
+        "Blue Elemental Blast",
+        "Boseiju, Who Endures",
+        "Force of Vigor",
+        "Nature's Claim"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 4
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 12,
+      "cards": [
+        "Aluren",
+        "Blue Elemental Blast",
+        "Consign to Memory",
+        "Force of Will"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 5,
+      "cards": [
+        "Emrakul, the Aeons Torn",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 9,
+      "cards": [
+        "Aluren",
+        "Emrakul, the Aeons Torn",
+        "Endurance",
+        "Hedge Maze",
+        "Silent Gravestone"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Acererak the Archlich"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Aluren"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Aluren",
+        "Show and Tell"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Aluren",
+        "Pithing Needle"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 33,
+      "cards": [
+        "Aluren",
+        "Ancient Tomb",
+        "Boseiju, Who Endures",
+        "Carpet of Flowers",
+        "City of Traitors",
+        "Flooded Strand",
+        "Hedge Maze",
+        "Lotus Petal",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Show and Tell",
+        "Tropical Island"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 3
+    },
+    "lands": {
+      "target_count": 20,
+      "cards": [
+        "Ancient Tomb",
+        "Boseiju, Who Endures",
+        "City of Traitors",
+        "Flooded Strand",
+        "Forest",
+        "Hedge Maze",
+        "Island",
+        "Misty Rainforest",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Tropical Island"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.31
+  },
+  "dual_role_cards": [
+    {
+      "card": "Acererak the Archlich",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Aluren",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "mana_reducers",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blue Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "City of Traitors",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emrakul, the Aeons Torn",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hedge Maze",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Show and Tell",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "mana_fixing",
+        "mana_reducers",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Silent Gravestone",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tropical Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veil of Summer",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play Lotus Petal before Aluren to generate mana for Show and Tell",
+    "Cast Aluren before Show and Tell to reduce its cost to {1}",
+    "Use Show and Tell to fetch threats with mana value 7 or greater",
+    "Prioritize fetching creatures that can immediately impact the board",
+    "Common mistakes include mulliganing too aggressively, overcommitting to the board without a win condition, and ignoring graveyard hate."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing Lotus Petal and Aluren to establish cost reduction and mana generation"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Show and Tell for {1} to fetch a large threat as soon as possible"
+    },
+    {
+      "trigger": "early game",
+      "line": "Protect key permanents from early disruption"
+    }
+  ],
+  "kill_priority": [
+    "Aluren",
+    "Show and Tell",
+    "Acererak the Archlich",
+    "Atraxa, Grand Unifier",
+    "Emrakul, the Aeons Torn",
+    "Endurance",
+    "Harbinger of the Seas",
+    "Omniscience"
+  ],
+  "interaction_to_disrupt": [
+    "Aluren",
+    "Blue Elemental Blast",
+    "Consign to Memory",
+    "Force of Will",
+    "Emrakul, the Aeons Torn",
+    "Veil of Summer",
+    "Ancient Tomb",
+    "Boseiju, Who Endures"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/aluren.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

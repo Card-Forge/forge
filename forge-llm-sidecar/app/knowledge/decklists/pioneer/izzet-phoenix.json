@@ -1,0 +1,129 @@
+{
+  "archetype": "Izzet Phoenix",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/izzet-phoenix.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Academic Dispute"
+    },
+    {
+      "qty": 4,
+      "name": "Arclight Phoenix"
+    },
+    {
+      "qty": 4,
+      "name": "Consider"
+    },
+    {
+      "qty": 4,
+      "name": "Fiery Impulse"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Axe"
+    },
+    {
+      "qty": 4,
+      "name": "Opt"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 4,
+      "name": "Picklock Prankster"
+    },
+    {
+      "qty": 4,
+      "name": "Riverglide Pathway"
+    },
+    {
+      "qty": 2,
+      "name": "Shivan Reef"
+    },
+    {
+      "qty": 4,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 4,
+      "name": "Thing in the Ice"
+    },
+    {
+      "qty": 4,
+      "name": "Traumatic Critique"
+    },
+    {
+      "qty": 4,
+      "name": "Treasure Cruise"
+    },
+    {
+      "qty": 4,
+      "name": "Vibrant Outburst"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Abandon Attachments"
+    },
+    {
+      "qty": 1,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 3,
+      "name": "Brazen Borrower"
+    },
+    {
+      "qty": 1,
+      "name": "Combustion Technique"
+    },
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 1,
+      "name": "Firebending Lesson"
+    },
+    {
+      "qty": 1,
+      "name": "Iroh's Demonstration"
+    },
+    {
+      "qty": 1,
+      "name": "It'll Quench Ya!"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Octopus Form"
+    },
+    {
+      "qty": 1,
+      "name": "Price of Freedom"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    }
+  ]
+}

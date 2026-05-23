@@ -1,0 +1,101 @@
+{
+  "archetype": "Gruul Ramp",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/gruul-ramp.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Arbor Elf"
+    },
+    {
+      "qty": 4,
+      "name": "Avenging Hunter"
+    },
+    {
+      "qty": 2,
+      "name": "Bannerhide Krushok"
+    },
+    {
+      "qty": 3,
+      "name": "Boarding Party"
+    },
+    {
+      "qty": 4,
+      "name": "Eldrazi Repurposer"
+    },
+    {
+      "qty": 1,
+      "name": "Evolution Witness"
+    },
+    {
+      "qty": 14,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Jewel Thief"
+    },
+    {
+      "qty": 4,
+      "name": "Malevolent Rumble"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Nyxborn Hydra"
+    },
+    {
+      "qty": 3,
+      "name": "Ram Through"
+    },
+    {
+      "qty": 2,
+      "name": "Sagu Wildling"
+    },
+    {
+      "qty": 4,
+      "name": "Utopia Sprawl"
+    },
+    {
+      "qty": 3,
+      "name": "Wild Growth"
+    },
+    {
+      "qty": 4,
+      "name": "Writhing Chrysalis"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Breath Weapon"
+    },
+    {
+      "qty": 1,
+      "name": "Cast into the Fire"
+    },
+    {
+      "qty": 3,
+      "name": "Deglamer"
+    },
+    {
+      "qty": 1,
+      "name": "Horrific Assault"
+    },
+    {
+      "qty": 1,
+      "name": "Ram Through"
+    },
+    {
+      "qty": 3,
+      "name": "Relic of Progenitus"
+    },
+    {
+      "qty": 3,
+      "name": "Weather the Storm"
+    }
+  ]
+}

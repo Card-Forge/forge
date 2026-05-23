@@ -1,0 +1,406 @@
+{
+  "schema_version": 1,
+  "name": "Eldrazi",
+  "format": "legacy",
+  "colors": [
+    "W",
+    "R"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "This white/red Eldrazi variant leverages mana acceleration and artifact denial to establish early board presence and disrupt opponent strategies. By utilizing Lotus Petal to cast Chalice of the Void and Kozilek's Command ahead of schedule, the deck aims to control the pace while generating incremental value. The Kozilek token serves as a flexible win condition that can attack, block, or be sacrificed for card advantage and removal.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 12,
+      "cards": [
+        "Kozilek's Command",
+        "Lotus Petal",
+        "Thought-Knot Seer"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 3,
+      "cards": [
+        "Eye of Ugin"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 30,
+      "cards": [
+        "Broadside Bombardiers",
+        "Containment Priest",
+        "Eldrazi Linebreaker",
+        "Eldrazi Obligator",
+        "Faerie Macabre",
+        "Glaring Fleshraker",
+        "Reality Smasher",
+        "Simian Spirit Guide",
+        "Thought-Knot Seer",
+        "Wastescape Battlemage"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 18,
+      "cards": [
+        "Ancient Tomb",
+        "Broadside Bombardiers",
+        "Glaring Fleshraker",
+        "Kozilek's Command",
+        "Wastescape Battlemage"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Chalice of the Void"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Cavern of Souls",
+        "Chalice of the Void"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 15,
+      "cards": [
+        "Faerie Macabre",
+        "Kozilek's Command",
+        "Lotus Petal",
+        "Wastescape Battlemage"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Wastescape Battlemage"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Glaring Fleshraker"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Kozilek's Command",
+        "Lotus Petal"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Disruptor Flute",
+        "Mindbreak Trap",
+        "Null Rod"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 9
+    },
+    "mana_fixing": {
+      "target_count": 36,
+      "cards": [
+        "Abundant Countryside",
+        "Ancient Tomb",
+        "Cavern of Souls",
+        "Chalice of the Void",
+        "Eldrazi Temple",
+        "Eye of Ugin",
+        "Kozilek's Command",
+        "Lotus Petal",
+        "Petrified Hamlet",
+        "Unclaimed Territory"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 24,
+      "cards": [
+        "Abundant Countryside",
+        "Ancient Tomb",
+        "Cavern of Souls",
+        "Eldrazi Temple",
+        "Eye of Ugin",
+        "Petrified Hamlet",
+        "Unclaimed Territory"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.3
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abundant Countryside",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Broadside Bombardiers",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chalice of the Void",
+      "roles": [
+        "counterspells",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eldrazi Temple",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eye of Ugin",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Macabre",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glaring Fleshraker",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kozilek's Command",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "removal",
+        "rituals",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lotus Petal",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Petrified Hamlet",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thought-Knot Seer",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Unclaimed Territory",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wastescape Battlemage",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Drop Chalice of the Void before the opponent's turn to maximize disruption",
+    "Use Lotus Petal to cast Kozilek's Command on turn one or two for immediate impact",
+    "Hold up mana to counter spells if Chalice is already on the battlefield",
+    "Prioritize drawing cards with Kozilek's Command when behind on resources",
+    "Common mistakes include overcommitting to Chalice without follow-up, misusing Lotus Petal on non-critical turns, and failing to track the opponent's graveyard."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Lotus Petal to enable turn-one Chalice of the Void or Kozilek's Command"
+    },
+    {
+      "trigger": "early game",
+      "line": "Set Chalice at zero or one to disrupt fast aggro and combo strategies"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Kozilek's Command to draw cards or destroy early threats"
+    }
+  ],
+  "kill_priority": [
+    "Glaring Fleshraker",
+    "Kozilek's Command",
+    "Lotus Petal",
+    "Broadside Bombardiers",
+    "Containment Priest",
+    "Eldrazi Linebreaker",
+    "Eldrazi Obligator",
+    "Faerie Macabre"
+  ],
+  "interaction_to_disrupt": [
+    "Chalice of the Void",
+    "Cavern of Souls",
+    "Ancient Tomb",
+    "Broadside Bombardiers",
+    "Glaring Fleshraker",
+    "Kozilek's Command",
+    "Wastescape Battlemage",
+    "Disruptor Flute"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/eldrazi.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

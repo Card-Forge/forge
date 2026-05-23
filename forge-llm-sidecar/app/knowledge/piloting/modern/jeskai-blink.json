@@ -12,23 +12,25 @@
     "keep_criteria": [
       "Hands with two- or three-mana blink spells or creatures",
       "Draws containing Quantum Riddler or Solitude with early interaction",
-      "Combinations that enable turn-one or turn-two board presence"
+      "Combinations that enable turn-one or turn-two board presence",
+      "Keep hands with 2-3 lands (prioritizing fetch/shock lands for WU/R), at least one cheap flicker effect (e.g., Flickerwisp, Ghostly Flicker, or Cloudshift), and a core ETB trigger (Quantum Riddler, Solitude, or Phlage)."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays or blink enablers",
       "Draws heavy on high-cost threats without acceleration",
-      "Hands missing interaction against aggressive strategies"
+      "Hands missing interaction against aggressive strategies",
+      "Mulligan if you have 4+ lands with no early plays, lack any flicker mechanism, or hold only high-cost threats with no way to trigger them."
     ],
     "examples": [
       {
         "hand": [],
         "decision": "keep",
-        "reason": "Land and Lotus Bloom in graveyard, with Tameshi and a dual land in hand — Planning to play Teferi using white mana from the dual land to bounce Lotus Bloom and generate mana. Passed on Stern Scolding due to lack of targets in the opponent's deck."
+        "reason": "Land and Lotus Bloom in graveyard, with Tameshi and a dual land in hand \u2014 Planning to play Teferi using white mana from the dual land to bounce Lotus Bloom and generate mana. Passed on Stern Scolding due to lack of targets in the opponent's deck."
       },
       {
         "hand": [],
         "decision": "keep",
-        "reason": "Hand with early threats like Kapkan Cannoneer — The combo deck is known to be a turn-4 combo, giving at least four turns to establish pressure and win the race."
+        "reason": "Hand with early threats like Kapkan Cannoneer \u2014 The combo deck is known to be a turn-4 combo, giving at least four turns to establish pressure and win the race."
       }
     ]
   },
@@ -36,17 +38,31 @@
     "early_game": [
       "Deploy low-cost blink enablers and resilient creatures",
       "Establish board presence with Quantum Riddler to begin card draw loops",
-      "Use early interaction to disrupt opponent's opening sequence"
+      "Use early interaction to disrupt opponent's opening sequence",
+      "Turn 1: Play a land, using fetch/shock to setup dual-colored mana.",
+      "Turn 2: Cast a low-cost ETB threat or Solitude, then flicker it with a cheap effect to trigger its ability.",
+      "If opening with Solitude, cast it, then flicker it with a cheap effect to copy its ETB.",
+      "Prioritize establishing a board presence with evasive or protective creatures while preserving mana for reactive flicker effects."
     ],
     "mid_game": [
       "Cycle Solitude and Phlage through exile to generate card advantage",
       "Protect key threats by blinking them into evasion or to dodge removal",
-      "Develop board state while maintaining hand size for late-game answers"
+      "Develop board state while maintaining hand size for late-game answers",
+      "Preserve flicker effects for high-impact ETBs (Solitude, Phlage, Quantum Riddler).",
+      "Avoid over-committing mana to flicker low-value creatures.",
+      "Use blue mana for card draw to maintain hand size, as Blink decks are highly vulnerable to hand disruption.",
+      "Track graveyard hate if present, as some blink engines rely on recursion or sacrifice synergies.",
+      "Commit threats when you have flicker protection or removal ready to answer targeted hate.",
+      "Hold back if the opponent has board wipes or sweepers in play."
     ],
     "late_game": [
       "Leverage repeated Phlage triggers to draw into game-ending threats",
       "Use blink effects to stabilize against sweepers or targeted removal",
-      "Close out games with resilient, counter-boosted creatures"
+      "Close out games with resilient, counter-boosted creatures",
+      "Phlage, Titan of Fire's Fury (damage on ETB and when it leaves the battlefield), repeated Quantum Riddler/Solitude triggers, or a chained flicker sequence.",
+      "Close out games by flickering Phlage for damage, then attacking with evasive threats or finishing with residual ETB damage.",
+      "Go all-in when you have enough mana to flicker multiple times, the opponent has no board wipes, or you can close the game in 1-2 turns.",
+      "Also commit when you've established card advantage and can out-value their removal, or when Phlage's damage triggers can bypass blockers."
     ]
   },
   "key_cards": [
@@ -78,7 +94,9 @@
     "Delay playing Pithing Needle if the opponent cannot combo on their next turn, preserving hand flexibility and avoiding early answers.",
     "When facing Pinnacle Emissary, use Solitude immediately upon its entry to prevent the token generation trigger from unlocking the opponent's artifact engine.",
     "If you must let Weapons Manufacturing resolve, prioritize countering the subsequent Mox Opal or Thoughtcast with Consign to Memory or Force of Negation to stall the artifact flood and preserve hand size for your combo pieces.",
-    "Play Weapons Manufacturing into an empty Tormod's Crypt to generate a Munitions token before the Crypt can be used to exile a key artifact or stop recursion."
+    "Play Weapons Manufacturing into an empty Tormod's Crypt to generate a Munitions token before the Crypt can be used to exile a key artifact or stop recursion.",
+    "Common mistake: Over-flickering low-value creatures or flickering into board wipes.",
+    "Always calculate ETB value before committing mana."
   ],
   "matchups": [
     {
@@ -122,16 +140,35 @@
       "opponent_archetype": "Affinity",
       "advice": "Maindeck three copies of Tormod's Crypt to hard counter the Gorious Vengeance package, as graveyard recursion is their primary win condition and the mana cost is negligible for a 0-mana artifact deck. (from gameplay) Prioritize winning Game 1, as Affinity's board state becomes difficult to manage post-sideboard against sweepers like Wrath of the Skies, Meltdown, and Fire Magic. (from gameplay) Single-target removal like Prismatic Ending is often insufficient against a flooded artifact board; you typically need to draw multiple copies to clear the way for your combo. (from gameplay)",
       "watch_for": []
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig for flicker effects and threats. Cast threats in response to counterspells when possible. Use instant-speed flicker effects to bypass stack interaction. Spread value across multiple triggers rather than over-committing to single high-cost spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply pressure early before they can cast their big spells. Use removal for their mana dorks and acceleration spells. Flicker threats to out-value their ramp and force them to spend resources on multiple triggers instead of developing their board.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by prioritizing flicker effects in hand and using targeted removal to break their board. Out-value them by triggering more ETBs per mana spent. Track their hand size and mana, and avoid over-committing when they have sweepers or removal ready. Use Solitude's copying to generate value faster than they can answer.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Targeted removal spells",
     "Board wipe effects",
     "Counterspell packages",
-    "Fast aggressive creatures"
+    "Fast aggressive creatures",
+    "Watch for board wipes (Supreme Verdict, Wrath of God), targeted removal (Path to Exile, Lightning Bolt), and counterspells.",
+    "Note if the opponent is playing discard or hand disruption, as Blink relies on hand resources.",
+    "Track if they're playing sacrifice hate, exile hate, or graveyard hate, and adjust flicker timing accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:21:49+00:00",
     "model": "local-model",
@@ -198,6 +235,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": "Jeskai Blink"
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

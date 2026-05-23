@@ -1,0 +1,165 @@
+{
+  "archetype": "Jeskai Ascendancy",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/jeskai-ascendancy.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Badgermole Cub"
+    },
+    {
+      "qty": 3,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 3,
+      "name": "Botanical Sanctum"
+    },
+    {
+      "qty": 4,
+      "name": "Consider"
+    },
+    {
+      "qty": 1,
+      "name": "Copperline Gorge"
+    },
+    {
+      "qty": 4,
+      "name": "Divide by Zero"
+    },
+    {
+      "qty": 1,
+      "name": "Flow State"
+    },
+    {
+      "qty": 1,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Impolite Entrance"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Jeskai Ascendancy"
+    },
+    {
+      "qty": 1,
+      "name": "Mana Confluence"
+    },
+    {
+      "qty": 4,
+      "name": "Opt"
+    },
+    {
+      "qty": 1,
+      "name": "Restless Spire"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 3,
+      "name": "Seachrome Coast"
+    },
+    {
+      "qty": 3,
+      "name": "Sleight of Hand"
+    },
+    {
+      "qty": 2,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 3,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 2,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 4,
+      "name": "Stormchaser's Talent"
+    },
+    {
+      "qty": 4,
+      "name": "Sylvan Caryatid"
+    },
+    {
+      "qty": 2,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Toph, Hardheaded Teacher"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Accumulate Wisdom"
+    },
+    {
+      "qty": 1,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 1,
+      "name": "Dai Li Indoctrination"
+    },
+    {
+      "qty": 1,
+      "name": "Enter the Avatar State"
+    },
+    {
+      "qty": 1,
+      "name": "Fiery Impulse"
+    },
+    {
+      "qty": 2,
+      "name": "Fire Magic"
+    },
+    {
+      "qty": 1,
+      "name": "Firebending Lesson"
+    },
+    {
+      "qty": 1,
+      "name": "It'll Quench Ya!"
+    },
+    {
+      "qty": 1,
+      "name": "Origin of Metalbending"
+    },
+    {
+      "qty": 1,
+      "name": "Ruinous Waterbending"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "True Ancestry"
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+{
+  "archetype": "Kuja, Genome Sorcerer",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/kuja-genome-sorcerer.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Anathemancer"
+    },
+    {
+      "qty": 1,
+      "name": "Aphotic Wisps"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Ash Barrens"
+    },
+    {
+      "qty": 1,
+      "name": "Basalt Ravager"
+    },
+    {
+      "qty": 1,
+      "name": "Bender's Waterskin"
+    },
+    {
+      "qty": 1,
+      "name": "Black Mage's Rod"
+    },
+    {
+      "qty": 1,
+      "name": "Black Waltz No. 3"
+    },
+    {
+      "qty": 1,
+      "name": "Blaze"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Cultist"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodfell Caves"
+    },
+    {
+      "qty": 1,
+      "name": "Bombard"
+    },
+    {
+      "qty": 1,
+      "name": "Boulder Dash"
+    },
+    {
+      "qty": 1,
+      "name": "Builder's Bane"
+    },
+    {
+      "qty": 1,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 1,
+      "name": "Circle of Power"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Commander's Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Cornered by Black Mages"
+    },
+    {
+      "qty": 1,
+      "name": "Corrupted Conviction"
+    },
+    {
+      "qty": 1,
+      "name": "Coruscation Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Cut Propulsion"
+    },
+    {
+      "qty": 1,
+      "name": "Decode Transmissions"
+    },
+    {
+      "qty": 1,
+      "name": "Demolish"
+    },
+    {
+      "qty": 1,
+      "name": "Diabolic Tutor"
+    },
+    {
+      "qty": 1,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Fanatical Offering"
+    },
+    {
+      "qty": 1,
+      "name": "Fell"
+    },
+    {
+      "qty": 1,
+      "name": "Fight On!"
+    },
+    {
+      "qty": 1,
+      "name": "Firebrand Archer"
+    },
+    {
+      "qty": 1,
+      "name": "Garland, Knight of Cornelia"
+    },
+    {
+      "qty": 1,
+      "name": "Geothermal Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Grab the Prize"
+    },
+    {
+      "qty": 1,
+      "name": "Gravkill"
+    },
+    {
+      "qty": 1,
+      "name": "Guttersnipe"
+    },
+    {
+      "qty": 1,
+      "name": "Heartfire"
+    },
+    {
+      "qty": 1,
+      "name": "Heartfire Immolator"
+    },
+    {
+      "qty": 1,
+      "name": "Irencrag Pyromancer"
+    },
+    {
+      "qty": 1,
+      "name": "Jagged Barrens"
+    },
+    {
+      "qty": 1,
+      "name": "Kor Dirge"
+    },
+    {
+      "qty": 1,
+      "name": "Kuja, Genome Sorcerer"
+    },
+    {
+      "qty": 1,
+      "name": "Laughing Mad"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Strike"
+    },
+    {
+      "qty": 1,
+      "name": "Lindblum, Industrial Regency"
+    },
+    {
+      "qty": 1,
+      "name": "Mind Rot"
+    },
+    {
+      "qty": 10,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Murder"
+    },
+    {
+      "qty": 1,
+      "name": "Myriad Landscape"
+    },
+    {
+      "qty": 1,
+      "name": "Mysidian Elder"
+    },
+    {
+      "qty": 1,
+      "name": "Opera Love Song"
+    },
+    {
+      "qty": 1,
+      "name": "Overkill"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Arena"
+    },
+    {
+      "qty": 1,
+      "name": "Pyromancer's Goggles"
+    },
+    {
+      "qty": 1,
+      "name": "Queen Brahne"
+    },
+    {
+      "qty": 1,
+      "name": "Razortrap Gorge"
+    },
+    {
+      "qty": 1,
+      "name": "Resentful Revelation"
+    },
+    {
+      "qty": 1,
+      "name": "Resourceful Return"
+    },
+    {
+      "qty": 1,
+      "name": "Sephiroth's Intervention"
+    },
+    {
+      "qty": 1,
+      "name": "Shock"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sorceress's Schemes"
+    },
+    {
+      "qty": 1,
+      "name": "Succumb to Temptation"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: Esper Ramuh"
+    },
+    {
+      "qty": 1,
+      "name": "Summon: G.F. Ifrit"
+    },
+    {
+      "qty": 1,
+      "name": "Suplex"
+    },
+    {
+      "qty": 13,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Thermo-Alchemist"
+    },
+    {
+      "qty": 1,
+      "name": "Thrill of Possibility"
+    },
+    {
+      "qty": 1,
+      "name": "Thriving Bluff"
+    },
+    {
+      "qty": 1,
+      "name": "Thriving Moor"
+    },
+    {
+      "qty": 1,
+      "name": "Thunder Magic"
+    },
+    {
+      "qty": 1,
+      "name": "Tithing Blade"
+    },
+    {
+      "qty": 1,
+      "name": "Tragic Trajectory"
+    },
+    {
+      "qty": 1,
+      "name": "Untimely Malfunction"
+    },
+    {
+      "qty": 1,
+      "name": "Vayne's Treachery"
+    },
+    {
+      "qty": 1,
+      "name": "Vector, Imperial Capital"
+    },
+    {
+      "qty": 1,
+      "name": "Zero Point Ballad"
+    },
+    {
+      "qty": 1,
+      "name": "Zookeeper Mechan"
+    }
+  ],
+  "sideboard": []
+}

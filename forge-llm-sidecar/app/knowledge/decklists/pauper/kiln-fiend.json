@@ -1,0 +1,97 @@
+{
+  "archetype": "Kiln Fiend",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/kiln-fiend.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancestral Anger"
+    },
+    {
+      "qty": 4,
+      "name": "Apostle's Blessing"
+    },
+    {
+      "qty": 4,
+      "name": "Assault Strobe"
+    },
+    {
+      "qty": 2,
+      "name": "Brute Force"
+    },
+    {
+      "qty": 2,
+      "name": "Crackling Cyclops"
+    },
+    {
+      "qty": 4,
+      "name": "Festival Crasher"
+    },
+    {
+      "qty": 2,
+      "name": "Ghitu Amplifier"
+    },
+    {
+      "qty": 1,
+      "name": "Highway Robbery"
+    },
+    {
+      "qty": 4,
+      "name": "Kiln Fiend"
+    },
+    {
+      "qty": 4,
+      "name": "Lava Dart"
+    },
+    {
+      "qty": 4,
+      "name": "Manamorphose"
+    },
+    {
+      "qty": 16,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Mutagenic Growth"
+    },
+    {
+      "qty": 4,
+      "name": "Rite of Flame"
+    },
+    {
+      "qty": 2,
+      "name": "Temur Battle Rage"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Brute Force"
+    },
+    {
+      "qty": 2,
+      "name": "Flaring Pain"
+    },
+    {
+      "qty": 2,
+      "name": "Immolating Souleater"
+    },
+    {
+      "qty": 4,
+      "name": "Pyroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Raze the Effigy"
+    },
+    {
+      "qty": 2,
+      "name": "Tormod's Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Underworld Rage-Hound"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "archetype": "Jeskai Humans",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/jeskai-humans.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Adeline, Resplendent Cathar"
+    },
+    {
+      "qty": 1,
+      "name": "Battlefield Forge"
+    },
+    {
+      "qty": 4,
+      "name": "Cavern of Souls"
+    },
+    {
+      "qty": 2,
+      "name": "Extraction Specialist"
+    },
+    {
+      "qty": 4,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 4,
+      "name": "Giant Killer"
+    },
+    {
+      "qty": 3,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 4,
+      "name": "Hopeful Initiate"
+    },
+    {
+      "qty": 4,
+      "name": "Inspiring Vantage"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Strike"
+    },
+    {
+      "qty": 4,
+      "name": "Luminarch Aspirant"
+    },
+    {
+      "qty": 4,
+      "name": "Mantis Rider"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Needleverge Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 3,
+      "name": "Reflector Mage"
+    },
+    {
+      "qty": 4,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Seachrome Coast"
+    },
+    {
+      "qty": 1,
+      "name": "Sunbillow Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Thalia's Lieutenant"
+    },
+    {
+      "qty": 3,
+      "name": "Thalia, Guardian of Thraben"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Authority of the Consuls"
+    },
+    {
+      "qty": 1,
+      "name": "Cathar Commando"
+    },
+    {
+      "qty": 3,
+      "name": "Devout Decree"
+    },
+    {
+      "qty": 2,
+      "name": "Embereth Shieldbreaker"
+    },
+    {
+      "qty": 3,
+      "name": "Lithomantic Barrage"
+    },
+    {
+      "qty": 1,
+      "name": "Loran of the Third Path"
+    },
+    {
+      "qty": 3,
+      "name": "Rest in Peace"
+    }
+  ]
+}

@@ -13,12 +13,16 @@
     "keep_criteria": [
       "Hands containing mana dorks like Birds of Paradise or Ignoble Hierarch",
       "Low-cost Undying creatures to start the loop",
-      "Tutors like Chord of Calling or Eldritch Evolution"
+      "Tutors like Chord of Calling or Eldritch Evolution",
+      "Keep any hand with Agatha\u2019s Soul Cauldron, Yawgmoth, Thran Physician, or Badgermole Cub paired with at least two lands.",
+      "Also keep hands with two lands plus two key pieces, or three+ lands with early interaction.",
+      "Prioritize hands that can start the engine or stabilize against early aggression."
     ],
     "mulligan_criteria": [
       "Hands lacking early mana acceleration",
       "Hands without combo pieces or tutors",
-      "Hands vulnerable to early disruption without interaction"
+      "Hands vulnerable to early disruption without interaction",
+      "Mulligan hands with three+ lands and no key pieces, or hands with one land and no early plays."
     ],
     "examples": [
       {
@@ -38,17 +42,33 @@
     "early_game": [
       "Play mana dorks like Birds of Paradise and Ignoble Hierarch to accelerate mana",
       "Use Wall of Roots to generate mana on both turns",
-      "Establish low-cost Undying creatures to enable the loop"
+      "Establish low-cost Undying creatures to enable the loop",
+      "Turn 1: Play a land.",
+      "Turn 2: Play a second land, then cast Agatha\u2019s Soul Cauldron if possible.",
+      "If you have a creature in hand and the Cauldron is in play, mill it.",
+      "Turn 3: Cast Yawgmoth, Thran Physician if you have two creatures in the graveyard, sacrifice them for life and draw, then mill more.",
+      "Sequence lands to ensure you can hit Cauldron on turn 2 or 3 without overextending into early aggression."
     ],
     "mid_game": [
       "Deploy tutors like Chord of Calling and Eldritch Evolution to find combo pieces",
       "Begin sacrificing creatures to trigger Yawgmoth, Thran Physician and draw cards",
-      "Navigate opponent's interaction by playing around counterspells and discards"
+      "Navigate opponent's interaction by playing around counterspells and discards",
+      "Balance mana between casting the Cauldron, Physician, and early interaction.",
+      "Avoid overcommitting to milling when below 15 life.",
+      "Use graveyard creatures as incremental value rather than all-in threats.",
+      "Keep cards in hand to answer sweepers or graveyard hate.",
+      "Commit threats only when you have at least two creatures in the graveyard to recoup via Physician.",
+      "Hold back against sweepers, board wipes, or heavy removal."
     ],
     "late_game": [
       "Execute the full Undying/Yawgmoth loop to drain opponent's life or draw into victory",
       "Utilize alternate win conditions like Hapatra's tokens or Grist's abilities",
-      "Manage resources to create constant combo attempts that evade answers"
+      "Manage resources to create constant combo attempts that evade answers",
+      "Cast Yawgmoth from the graveyard or library.",
+      "Once in play, sacrifice remaining graveyard creatures for massive life and card draw, then attack or cast additional Yawgmoths.",
+      "Use recursion or mill effects to keep the engine running if Yawgmoth is removed.",
+      "Go all-in when you have three or more creatures in the graveyard, sufficient life to survive a turn, and no immediate sweepers or graveyard hate on the board.",
+      "Also commit when the opponent has no interaction left or is locked into a slow game plan."
     ]
   },
   "key_cards": [
@@ -107,7 +127,13 @@
     "Identify the best plays and anticipate the opponent's worst answers to play around them.",
     "Control your own sacrifices carefully, as they are an essential resource for the loop.",
     "Expose Yawgmoth, Thran Physician at the safest time, preferably with combo possibilities in response to removal.",
-    "Manage resources to either go off quickly with dorks and Eldritch Evolution or create constant combo attempts to evade answers."
+    "Manage resources to either go off quickly with dorks and Eldritch Evolution or create constant combo attempts to evade answers.",
+    "Never mill blindly",
+    "calculate Physician value before sacrificing.",
+    "Watch for Leyline of the Void and Soul-Guide Lantern, which can completely shut down your game plan.",
+    "Sequence Agatha\u2019s Soul Cauldron carefully to avoid dying to early aggression.",
+    "Remember that Yawgmoth is a legendary creature, so you can only have one in play at a time.",
+    "Practice graveyard tracking to maximize value."
   ],
   "matchups": [
     {
@@ -136,6 +162,31 @@
         "Chalice of the Void",
         "Leyline of Sanctity"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Cast key pieces at instant speed when possible, use multiple low-cost threats to force counter decisions, and rely on graveyard recursion to bypass hand disruption. Don\u2019t overcommit to a single win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use spot removal on key ramp creatures, stabilize with Physician life gain, and out-value them with card draw. Don\u2019t race; focus on disrupting their acceleration and closing out with Yawgmoth once they overextend.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and discard to slow them down. Stabilize with Cauldron/Physician life gain and incremental threats. Once stabilized, close out the game quickly before they can recover.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats and use graveyard recursion to bypass hand disruption. Force them to use answers on the Cauldron or Physician, then win with Yawgmoth when they run out of resources. Don\u2019t overcommit to milling if they have sweepers ready.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value exchange is key. Track which Yawgmoths are in play and prioritize surviving to out-value. Use graveyard hate to disrupt their engine, and win by having more creatures in the graveyard or better sequencing. Don\u2019t over-sacrifice if it leaves you vulnerable to their Physician.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -147,10 +198,12 @@
     "Urza's Saga",
     "Hammer Time's artifacts",
     "Chalice of the Void",
-    "removal"
+    "removal",
+    "Watch for graveyard hate (Leyline of the Void, Soul-Guide Lantern, Rest in Peace) and sweepers (Wrath of God, Anger of the Gods)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-bg-yawgmoth-and-the-strength-of-complexity",
     "generated_at": "2026-05-21T01:17:59+00:00",
     "model": "local-model",
@@ -168,7 +221,27 @@
         "overview",
         "key_cards",
         "matchups"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

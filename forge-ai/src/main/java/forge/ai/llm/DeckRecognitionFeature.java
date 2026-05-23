@@ -19,6 +19,11 @@ public final class DeckRecognitionFeature {
      *  recognition path is never affected. */
     public static final String PILOT_MODE_SYS_PROP = "forge.ai.deckRecognition.pilotMode";
 
+    /** Optional run/session discriminator for clients whose in-game ids reset
+     *  across process launches. Self-play sets this so the persistent sidecar
+     *  cannot reuse per-game locks from a previous run's game_id=1. */
+    public static final String RUN_ID_SYS_PROP = "forge.ai.deckRecognition.runId";
+
     private DeckRecognitionFeature() {
     }
 
@@ -29,6 +34,19 @@ public final class DeckRecognitionFeature {
             return fromSys.trim();
         }
         return "normal";
+    }
+
+    /** @return optional run/session id to prefix sidecar game ids with. */
+    public static String runId() {
+        final String fromSys = System.getProperty(RUN_ID_SYS_PROP);
+        return fromSys == null ? "" : fromSys.trim();
+    }
+
+    /** @return a sidecar-stable game id scoped by the optional self-play run id. */
+    public static String sidecarGameId(final Object gameId) {
+        final String rawGameId = String.valueOf(gameId);
+        final String runId = runId();
+        return runId.isBlank() ? rawGameId : runId + ":" + rawGameId;
     }
 
     /** @return true if deck recognition should be active for the given AI. */

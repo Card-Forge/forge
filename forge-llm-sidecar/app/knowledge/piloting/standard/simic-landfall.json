@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two lands and a landfall-triggering creature",
       "Hands containing Earthbender Ascension with early land drops",
-      "Hands with multiple low-cost creatures that benefit from landfall"
+      "Hands with multiple low-cost creatures that benefit from landfall",
+      "Keep hands with 2-3 lands and at least one landfall creature (Badgermole Cub, Earthbender Ascension, or Mightform Harmonizer).",
+      "Prioritize keeping hands that can play a land and a creature on turn 1 or 2."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or landfall synergy",
       "Hands with only high-cost cards and no ramp",
-      "Hands with multiple removal spells but no threats"
+      "Hands with multiple removal spells but no threats",
+      "Mulligan on 3+ lands with no creatures, or hands with multiple spells but only 1-2 lands."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Prioritize playing lands to trigger landfall before casting creatures",
       "Establish early board presence with Badgermole Cub",
-      "Hold up mana for potential Earthbender Ascension plays"
+      "Hold up mana for potential Earthbender Ascension plays",
+      "Turn 1: Play a land.",
+      "Turn 2: Play a second land, then drop a landfall creature if you have the mana (Badgermole Cub can be cast on turn 2 with ramp or a two-land start).",
+      "Sequence lands first to trigger landfall immediately.",
+      "Use Mightform Harmonizer's draw engine early to dig for more threats or interaction."
     ],
     "mid_game": [
       "Play multiple lands per turn to maximize landfall triggers",
       "Use Earthbender Ascension to fetch lands and trigger landfall repeatedly",
-      "Grow Mightform Harmonizer and other threats to control the board"
+      "Grow Mightform Harmonizer and other threats to control the board",
+      "Balance land drops with creature deployment.",
+      "Never overextend into a sweep if you lack answers.",
+      "Use card draw from Mightform Harmonizer to maintain hand size.",
+      "Prioritize keeping lands in play to fuel future triggers.",
+      "Commit threats when you have landfall triggers to mitigate damage or gain advantage.",
+      "Hold back if the opponent has sweepers or heavy removal."
     ],
     "late_game": [
       "Maintain landfall triggers every turn to keep threats growing",
       "Use excess mana to play lands and trigger landfall even when ahead",
-      "Close out games with large, unblockable creatures and board presence"
+      "Close out games with large, unblockable creatures and board presence",
+      "Multiple landfall creatures attacking simultaneously, leveraging Mightform Harmonizer's card draw to find additional threats or combat tricks.",
+      "Earthbender Ascension can clear blockers or finish the game.",
+      "Go all-in when you have 3+ lands in play, multiple landfall creatures on board, and no clear interaction in hand.",
+      "Also commit when the opponent is at low life or has no sweepers."
     ]
   },
   "key_cards": [
@@ -59,7 +76,12 @@
     "Always play lands before casting creatures to ensure landfall triggers on the same turn",
     "Hold up mana for Earthbender Ascension when you suspect opponent interaction",
     "Prioritize landfall triggers over combat damage when you are ahead in board state",
-    "Sequence removal to protect key landfall beneficiaries before they are fully grown"
+    "Sequence removal to protect key landfall beneficiaries before they are fully grown",
+    "Landfall decks thrive on consistency",
+    "avoid mulliganing too aggressively for perfect hands.",
+    "Remember that land drops are your primary resource\u2014never sacrifice lands for tempo unless necessary.",
+    "Watch for format-specific land hate (like Field of Ruin or Blood Moon) and sideboard around it.",
+    "Badgermole Cub's early presence is crucial for applying pressure before the opponent can stabilize."
   ],
   "matchups": [
     {
@@ -88,16 +110,35 @@
         "Card advantage engines",
         "Late-game finishers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple low-cost threats to force counter-sacrifices. Play around counters by holding up interaction or using instant-speed land drops if available. Leverage landfall triggers that resolve independently.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use removal on key ramp creatures. Out-value them with card draw and incremental landfall triggers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card draw (Mightform Harmonizer) and efficient land drops. Trade creatures favorably using landfall triggers. Control the board with removal if available.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipes",
     "Counterspells",
-    "Efficient removal spells"
+    "Efficient removal spells",
+    "Watch for counterspells (Izzet), sweepers (Wrath of God variants), and fast aggro threats.",
+    "Note when opponents tap out for big spells or hold up interaction.",
+    "Track graveyard if they're trying to combo off."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:41:40+00:00",
     "model": "local-model",
@@ -113,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

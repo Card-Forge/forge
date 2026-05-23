@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Hands with Show and Tell and a large creature",
       "Hands with Omniscience or Flow State and cheap interaction",
-      "Hands with multiple lands and a combo piece"
+      "Hands with multiple lands and a combo piece",
+      "Keep hands with 2+ lands (preferably fetchable/shockable), 1+ acceleration (Lotus Field, Chrome Mox, Mox Opal, Arcane Signet), and 1+ combo piece (Omniscience, Flow State, Show and Tell) or draw/spell (Brainstorm, Ponder, Preordain, Thoughtseize).",
+      "Keep hands with 3+ lands if no acceleration/combo."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or combo pieces",
       "Hands with only removal or utility cards",
-      "Hands with high-cost cards and no free casting"
+      "Hands with high-cost cards and no free casting",
+      "Mulligan pure lands, pure removal, or hands with only one land and no acceleration."
     ],
     "examples": []
   },
@@ -26,17 +29,30 @@
     "early_game": [
       "Play lands and cheap interaction",
       "Look for Show and Tell or free casting enablers",
-      "Disrupt opponent's early game"
+      "Disrupt opponent's early game",
+      "Turn 1: Play a land, cast Mox/Chrome Mox, or cast Thoughtseize/Lightning Bolt.",
+      "If Lotus Field is in hand, play it untapped if possible (via fetch/shock) or hold for acceleration.",
+      "Turn 2: Cast draw spells (Brainstorm/Ponder), cast Omniscience/Flow State if mana allows, or play Show and Tell.",
+      "Sequence lands to ensure colored mana for Omniscience (WUBRG) or Flow State (U)."
     ],
     "mid_game": [
       "Cast Show and Tell to bring out a threat",
       "Activate Omniscience or Flow State to cast spells for free",
-      "Apply pressure while protecting combo pieces"
+      "Apply pressure while protecting combo pieces",
+      "Prioritize keeping hand size high",
+      "Omni-Tell thrives on card advantage.",
+      "Use fetch lands to find shock lands for colored mana when casting Omniscience.",
+      "Don't overcommit to one win condition",
+      "keep options open.",
+      "Manage graveyard carefully if facing Rest in Peace or Graveyard hate."
     ],
     "late_game": [
       "Cast multiple spells for free to overwhelm opponent",
       "Use remaining resources to close out the game",
-      "Maintain board presence with large creatures"
+      "Maintain board presence with large creatures",
+      "Omniscience + Show and Tell (Thassa's Oracle/Green Sun's Zenith), Omniscience + Emrakul, the Aeons Torn, or Flow State + Brainstorm/Ponder into a win.",
+      "When you have Omniscience/Flow State in play, enough mana to cast it, and a win condition in hand or library.",
+      "Also commit when the opponent has no interaction left."
     ]
   },
   "key_cards": [
@@ -60,7 +76,13 @@
     "Cast Show and Tell before activating free casting effects to maximize impact",
     "Hold up interaction to protect combo pieces from removal",
     "Use Flow State or Omniscience on turns with multiple spells to cast",
-    "Prioritize lands early to ensure combo pieces can be cast if needed"
+    "Prioritize lands early to ensure combo pieces can be cast if needed",
+    "Omni-Tell is highly sensitive to graveyard hate (Rest in Peace, Scavenging Ooze) and counterspells.",
+    "Practice sequencing fetch lands and shock lands to cast Omniscience on turn 2 or 3.",
+    "Don't forget that Omniscience lets you cast spells from hand for free, so you can cast Show and Tell, then cast a creature from your hand (like Thassa's Oracle) using Omniscience's effect.",
+    "Flow State works similarly but only for instants and sorceries.",
+    "Be mindful of the stack when casting multiple spells",
+    "use priority wisely."
   ],
   "matchups": [
     {
@@ -86,16 +108,36 @@
         "Fast win conditions",
         "Hand disruption"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Spell Pierce to protect your own spells. Cast Omniscience/Flow State in response to counterspells if you have priority. Use cheap draw spells to dig around. Don't overextend into sweepers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early disruption (Thoughtseize, Lightning Bolt) to hit their mana rocks or key spells. Use Dismember/Negate to remove threats. Play around their win conditions by holding up interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race to assemble your combo first. Use Thoughtseize to steal their Omniscience/Flow State/Show and Tell. Prioritize keeping hands with acceleration and draw. Win by going first and assembling faster, or by out-resolving their counterspells.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspell",
     "Thoughtseize",
     "Lightning Bolt",
-    "Rest in Peace"
+    "Rest in Peace",
+    "Watch for counterspells (Spell Pierce, Flusterstorm, Negate), sweepers, and graveyard hate.",
+    "Note if the opponent is playing fast lands or ramp spells.",
+    "Track their hand size",
+    "if they have no interaction, go all-in."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:39:35+00:00",
     "model": "local-model",
@@ -111,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

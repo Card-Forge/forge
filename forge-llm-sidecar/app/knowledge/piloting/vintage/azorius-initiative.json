@@ -1,0 +1,124 @@
+{
+  "archetype": "Azorius Initiative",
+  "format": "vintage",
+  "strategy_type": "control",
+  "overview": "Azorius Initiative is a control-arcane deck that leverages the Initiative mechanic to cast spells from the top of your library, turning card draw into immediate board impact. It aims to stabilize early, out-value opponents through recursive spell-casting, and close out games with resilient threats or unexpected finishers.",
+  "win_conditions": [
+    "Large threats cast from the top of your library, or combo pieces that win immediately.",
+    "Lorien Revealed itself can be a win condition if you can cast it multiple times or protect it while casting game-ending spells."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep any hand with a land and a turn-1 or turn-2 play (e.g., Quantum Riddler, White Plume Adventurer, or a Lorien Revealed enabler).",
+      "Prioritize hands with 2-3 lands and at least one way to find or protect Lorien Revealed."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 0-1 lands, multiple high-cost spells with no early plays, or hands lacking land acceleration/fixing."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Quantum Riddler or White Plume Adventurer if possible.",
+      "Turn 2: Play a second land, cast Lorien Revealed or another Initiative creature.",
+      "If you have Lorien Revealed and an Initiative creature, you can start casting spells from the top of your library.",
+      "Sequence lands carefully to ensure you can hit your mana requirements for Lorien (4 mana) and your threats."
+    ],
+    "mid_game": [
+      "Treat your library as a secondary hand.",
+      "Prioritize casting high-impact spells from the top when you have Initiative.",
+      "Manage mana to keep Lorien Revealed alive and maintain a board presence.",
+      "Don't overcommit to casting low-value spells from the top if you need mana for protection or interaction.",
+      "Commit threats when you have protection or a board wipe ready.",
+      "Hold back if the opponent has significant interaction or if you're behind on board.",
+      "Use your Initiative to answer threats or stabilize rather than just going wide."
+    ],
+    "late_game": [
+      "Large threats cast from the top of your library, or combo pieces that win immediately.",
+      "Lorien Revealed itself can be a win condition if you can cast it multiple times or protect it while casting game-ending spells.",
+      "Go all-in when you have a clear board advantage, the opponent has no interaction, or you've established a reliable Initiative engine.",
+      "Also commit when you can cast a high-impact spell from the top that swings the board."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Quantum Riddler",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "White Plume Adventurer",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Lorien Revealed",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Initiative recursion is powerful but vulnerable to board wipes and targeted removal.",
+    "Always protect Lorien Revealed.",
+    "Be mindful of your library size",
+    "running out of cards can limit your Initiative value.",
+    "Practice sequencing your turns to maximize spell-casting from the top.",
+    "Common mistake: overcommitting to casting low-value spells from the top instead of saving mana for protection or interaction."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple low-cost threats to force counters, then cast higher-value spells from the top. Utilize instant-speed interaction or protection spells. Don't overcommit to a single spell if you can split your threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use removal to kill their ramp creatures. If they get ahead, stabilize with board wipes and out-value them with Initiative recursion.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and spot removal. Use your Initiative to cast removal or counterspells from the top. Don't overextend into board wipes; stabilize first, then close out.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with resilient threats that are hard to remove. Use your Initiative to out-value their card draw. Force them to use interaction on your threats, then swing with the top of your library.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize protecting your Lorien Revealed and Initiative creatures. Use targeted removal to kill their key pieces. Sideboard in additional counterspells and graveyard hate if needed. Out-value them by casting more spells from the top.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for the opponent's graveyard (especially against Dredge/Oath), their mana base (to predict if they can hit 4+ mana for Lorien or key spells), and their interaction count.",
+    "Key tells include holding up blue mana (counterspell/spot removal) or black mana (Lurrus/Graveyard hate)."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/vintage.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/vintage.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

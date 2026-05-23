@@ -1,0 +1,137 @@
+{
+  "archetype": "Mardu GenericBlink",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/mardu-genericblink.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 3,
+      "name": "Bloodstained Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 2,
+      "name": "Detective's Phoenix"
+    },
+    {
+      "qty": 1,
+      "name": "Elegant Parlor"
+    },
+    {
+      "qty": 4,
+      "name": "Emperor of Bones"
+    },
+    {
+      "qty": 2,
+      "name": "Emptiness"
+    },
+    {
+      "qty": 3,
+      "name": "Ephemerate"
+    },
+    {
+      "qty": 3,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 2,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 3,
+      "name": "Hardened Academic"
+    },
+    {
+      "qty": 2,
+      "name": "Ketramose, the New Dawn"
+    },
+    {
+      "qty": 4,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 2,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 4,
+      "name": "Overlord of the Balemurk"
+    },
+    {
+      "qty": 4,
+      "name": "Phelia, Exuberant Shepherd"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Raucous Theater"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Shadowy Backstreet"
+    },
+    {
+      "qty": 4,
+      "name": "Solitude"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 3,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 3,
+      "name": "Witch Enchanter"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Ashiok, Dream Render"
+    },
+    {
+      "qty": 2,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 1,
+      "name": "Elesh Norn, Mother of Machines"
+    },
+    {
+      "qty": 2,
+      "name": "High Noon"
+    },
+    {
+      "qty": 3,
+      "name": "Obsidian Charmaw"
+    },
+    {
+      "qty": 2,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 3,
+      "name": "Wrath of the Skies"
+    }
+  ]
+}

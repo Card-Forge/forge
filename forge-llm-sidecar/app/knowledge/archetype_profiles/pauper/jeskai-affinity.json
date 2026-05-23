@@ -1,0 +1,449 @@
+{
+  "schema_version": 1,
+  "name": "Jeskai Affinity",
+  "format": "pauper",
+  "colors": [
+    "W",
+    "U",
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Jeskai Affinity is a fast, artifact-based aggressive deck that leverages All That Glitters to enchant creatures and deal accumulating combat damage. It merges the core Glitters game plan with Boros Synthesizer and third-color interaction like Galvanic Blast and Experimental Synthesizer for card advantage. While more flexible and resilient to specific hate than Azorius Affinity, it requires careful mana management and can be vulnerable to early graveyard hate like Dust to Dust.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Thoughtcast"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 23,
+      "cards": [
+        "Cryogen Relic",
+        "Experimental Synthesizer",
+        "Glint Hawk",
+        "Prophetic Prism",
+        "Relic of Progenitus",
+        "Sewer-veillance Cam",
+        "Thoughtcast"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": [
+        "Galvanic Blast",
+        "Thoughtcast"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 27,
+      "cards": [
+        "Galvanic Blast",
+        "Glint Hawk",
+        "Kor Skyfisher",
+        "Krark-Clan Shaman",
+        "Myr Enforcer",
+        "Somber Hoverguard",
+        "Thoughtcast",
+        "Utrom Monitor"
+      ],
+      "mainboard_count": 27,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Blue Elemental Blast",
+        "Breath Weapon",
+        "Galvanic Blast",
+        "Krark-Clan Shaman",
+        "Makeshift Munitions",
+        "Pyroblast",
+        "Red Elemental Blast",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 11
+    },
+    "wrath": {
+      "target_count": 15,
+      "cards": [
+        "Galvanic Blast",
+        "Krark-Clan Shaman",
+        "Myr Enforcer",
+        "Thoughtcast"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 7,
+      "cards": [
+        "Blue Elemental Blast",
+        "Pyroblast",
+        "Red Elemental Blast"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 7
+    },
+    "protection": {
+      "target_count": 13,
+      "cards": [
+        "Razortide Bridge",
+        "Rustvale Bridge",
+        "Silverbluff Bridge",
+        "Thoughtcast"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 4,
+      "cards": [
+        "Relic of Progenitus",
+        "Thraben Charm"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 8,
+      "cards": [
+        "Glint Hawk",
+        "Kor Skyfisher"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 7,
+      "cards": [
+        "Experimental Synthesizer",
+        "Thoughtcast"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Thoughtcast"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Experimental Synthesizer",
+        "Thoughtcast"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Navigator's Compass"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 35,
+      "cards": [
+        "Ancient Den",
+        "Galvanic Blast",
+        "Glint Hawk",
+        "Great Furnace",
+        "Prophetic Prism",
+        "Razortide Bridge",
+        "Rustvale Bridge",
+        "Seat of the Synod",
+        "Silverbluff Bridge",
+        "Thoughtcast"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 19,
+      "cards": [
+        "Ancient Den",
+        "Great Furnace",
+        "Razortide Bridge",
+        "Rustvale Bridge",
+        "Seat of the Synod",
+        "Silverbluff Bridge"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.5
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Den",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blue Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Experimental Synthesizer",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Galvanic Blast",
+      "roles": [
+        "dig_draw",
+        "mana_fixing",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glint Hawk",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Great Furnace",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kor Skyfisher",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Krark-Clan Shaman",
+      "roles": [
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Myr Enforcer",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prophetic Prism",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroblast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Razortide Bridge",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Red Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Relic of Progenitus",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rustvale Bridge",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Seat of the Synod",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Silverbluff Bridge",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtcast",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "rituals",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thraben Charm",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Sequence multiple Frogmites on turn 2 to cast Myr Enforcer and enchant a creature with All That Glitters by turn 3.",
+    "Cast Thoughtcast after playing a sequence of Frogmites to maximize card advantage.",
+    "Use Galvanic Blast after combat to remove blockers or finish off creatures that survived attacks.",
+    "Protect early Gearseeker Serpent with Dispel if the opponent has instant-speed removal.",
+    "Common mistake: Overcommitting artifacts without leaving mana for instant-speed interaction."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play artifact creatures like Frogmite and Novice Inspector to build affinity and board presence."
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Springleaf Drum to fix mana and enable early colored spells."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence Frogmites to cast Myr Enforcer on turn 2 and set up All That Glitters by turn 3."
+    }
+  ],
+  "kill_priority": [
+    "Experimental Synthesizer",
+    "Thoughtcast",
+    "Galvanic Blast",
+    "Glint Hawk",
+    "Kor Skyfisher",
+    "Krark-Clan Shaman",
+    "Myr Enforcer",
+    "Somber Hoverguard"
+  ],
+  "interaction_to_disrupt": [
+    "Blue Elemental Blast",
+    "Pyroblast",
+    "Red Elemental Blast",
+    "Razortide Bridge",
+    "Rustvale Bridge",
+    "Silverbluff Bridge",
+    "Thoughtcast",
+    "Breath Weapon"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/jeskai-affinity.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

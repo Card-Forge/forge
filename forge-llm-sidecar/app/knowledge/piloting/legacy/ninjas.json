@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Orcish Bowmasters and a cheap spell to cast on turn one",
       "Hands containing Yuriko paired with removal or draw spells",
-      "Hands with Tamiyo and at least two other cards to enable her draw ability"
+      "Hands with Tamiyo and at least two other cards to enable her draw ability",
+      "Keep hands with 2-3 lands, a disruption spell (Thoughtseize/Duress), and a Ninja or combat trick.",
+      "Hands with only creatures and no lands or tricks are poor."
     ],
     "mulligan_criteria": [
       "Hands lacking Orcish Bowmasters or Yuriko in a 6-card hand",
       "Hands with only high-cost creatures and no early interaction",
-      "Hands missing Tamiyo or draw engines in longer formats"
+      "Hands missing Tamiyo or draw engines in longer formats",
+      "Mulligan to lands if you have 0-1, or to disruption/Ninjas if you have 2+ lands."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Play Orcish Bowmasters on curve to steal an early threat or disrupt opponent's board",
       "Cast Yuriko to establish a body and prepare for death-trigger removal",
-      "Use Tamiyo to draw cards when casting early spells, maintaining hand size"
+      "Use Tamiyo to draw cards when casting early spells, maintaining hand size",
+      "Turn 1: Play a land, cast Thoughtseize/Duress on key threats or combo pieces.",
+      "Turn 2: Play a land, flash in a Ninja if the opponent has no removal, or hold disruption for their turn.",
+      "Sequence lands to ensure you can cast disruption on turn 1 and a Ninja/trick on turn 2."
     ],
     "mid_game": [
       "Trade Yuriko into problematic creatures to exile them permanently",
       "Sequence spells to maximize Tamiyo's draw triggers while keeping Orcish Bowmasters on board",
-      "Apply pressure with stolen creatures while holding up removal for opponent's answers"
+      "Apply pressure with stolen creatures while holding up removal for opponent's answers",
+      "Preserve hand disruption for critical turns.",
+      "Don't overcommit to the board if you lack tricks.",
+      "Use combat tricks to trade up favorably.",
+      "Manage mana carefully to maintain flash priority for opponent's turns.",
+      "Commit threats when you have removal or tricks to protect them, or when the board is clear.",
+      "Hold back if the opponent has sweepers or targeted removal."
     ],
     "late_game": [
       "Rely on Tamiyo's card advantage to find answers to late-game threats",
       "Use Yuriko's untap ability to generate extra value from stolen creatures",
-      "Stabilize with board control and win through incremental card advantage and board presence"
+      "Stabilize with board control and win through incremental card advantage and board presence",
+      "Unblocked Ninjas with combat tricks, value engines like Kagemaro, or direct damage.",
+      "Win by trading favorably and closing with unblockable damage or card advantage engines.",
+      "Go all-in when you have hand control, the opponent has no sweepers, and you can consistently trade up.",
+      "Commit when you can close the game in 1-2 turns or when you've out-valued them enough to weather a counterattack."
     ]
   },
   "key_cards": [
@@ -59,7 +75,13 @@
     "Cast Orcish Bowmasters before Yuriko to ensure you have a creature to exile if Yuriko dies",
     "Sequence Tamiyo after other spells to maximize card draw triggers",
     "Hold up removal until opponent commits to a board state, then use Yuriko's death trigger for maximum impact",
-    "Prioritize stealing creatures that can be untapped by Yuriko for extra value"
+    "Prioritize stealing creatures that can be untapped by Yuriko for extra value",
+    "Note that Yuriko is Commander-only, Orcish Bowmasters is not a Ninja, and Tamiyo, Inquisitive Student is not a real card",
+    "base your decklist on legal Dimir Ninjas like Ninja of the Deep Hours, Kagemaro, Shuriken, and Kusari-Gama.",
+    "Flash priority is crucial, so always keep mana open for opponent's turns.",
+    "Combat tricks are your primary value engine",
+    "never attack without them unless you are racing or probing.",
+    "Avoid overcommitting to the board without protection, as Ninjas are vulnerable to sweepers and targeted removal."
   ],
   "matchups": [
     {
@@ -88,6 +110,21 @@
         "Card draw engines",
         "Late-game finishers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap threats, flash in during the opponent's turn, and rely on unblockable damage to bypass counters. Use discard to remove counterspells from hand before they can be cast.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early disruption to hit lands or key spells. Flash in threats to pressure before they ramp out. Use discard to delay their game plan and stabilize with efficient trades.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by discarding their tricks and Ninjas. Trade favorably, sequence your plays to maximize value, and target their hand disruption first. Control the board with better trick usage and flash timing.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +132,13 @@
     "Instant-speed removal",
     "Hand disruption",
     "Board sweepers",
-    "Late-game value engines"
+    "Late-game value engines",
+    "Watch for sweepers (Supreme Verdict, Anger of the Gods), targeted removal (Path to Exile, Drown in the Loch), and combo win conditions.",
+    "Note when the opponent taps out for a big spell or holds up mana for protection."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:10:45+00:00",
     "model": "local-model",
@@ -114,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

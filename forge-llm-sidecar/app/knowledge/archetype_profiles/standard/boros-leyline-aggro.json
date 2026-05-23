@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "name": "Boros Leyline Aggro",
+  "format": "standard",
+  "colors": [
+    "W",
+    "R"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 60,
+  "macro_plan": "Boros Leyline Aggro is a fast, aggressive Standard deck that aims to overwhelm opponents with early combat damage and efficient creature plays. It leverages low-cost threats and combat tricks to close games before midrange or control strategies can stabilize. The deck relies on consistent curve plays and aggressive sequencing to maintain board presence.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 0,
+      "cards": []
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": []
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Voice of Victory"
+      ]
+    },
+    "threats": {
+      "target_count": 3,
+      "cards": [
+        "Emberheart Challenger",
+        "Slickshot Show-Off",
+        "Voice of Victory"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Emberheart Challenger",
+        "Slickshot Show-Off",
+        "Voice of Victory"
+      ]
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Emberheart Challenger",
+        "Slickshot Show-Off",
+        "Voice of Victory"
+      ]
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 3,
+      "cards": [
+        "Emberheart Challenger",
+        "Slickshot Show-Off",
+        "Voice of Victory"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": []
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 0,
+      "cards": []
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.8
+  },
+  "dual_role_cards": [
+    {
+      "card": "Voice of Victory",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Slickshot Show-Off",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emberheart Challenger",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play creatures before holding up mana for combat tricks to avoid being outdrawn",
+    "Use pump effects on the last creature in combat to maximize damage",
+    "Hold removal for opponent's key threats rather than trading early",
+    "Prioritize attacking with multiple creatures to force difficult blocker assignments",
+    "Slickshot Show-Off's graveyard trigger is conditional ('this turn'), so plan accordingly and avoid wasting it on low-impact spells."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and 1-drops consistently to establish early board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use combat tricks to maximize damage on turns 1 and 2"
+    },
+    {
+      "trigger": "early game",
+      "line": "Avoid trading up unless it leaves you with a larger threat"
+    }
+  ],
+  "kill_priority": [
+    "Voice of Victory",
+    "Emberheart Challenger",
+    "Slickshot Show-Off",
+    "Voice of Victory"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

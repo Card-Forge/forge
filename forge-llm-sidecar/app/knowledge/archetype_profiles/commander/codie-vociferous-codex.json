@@ -1,0 +1,774 @@
+{
+  "schema_version": 1,
+  "name": "Codie, Vociferous Codex",
+  "format": "commander",
+  "colors": [
+    "B",
+    "G",
+    "R",
+    "U",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "This deck leverages Codie, Vociferous Codex as both a flexible mana source and a spell-copying engine to amplify high-impact instants and sorceries, particularly Mizzix's Mastery. It aims to outvalue opponents through spell synergy and flexible interaction, winning against control and combo decks by overwhelming them with copied damage or board wipes.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 1,
+      "cards": [
+        "Biomancer's Familiar"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 7,
+      "cards": [
+        "Burnt Offering",
+        "Cabal Ritual",
+        "Culling Ritual",
+        "Dark Ritual",
+        "Manamorphose",
+        "Sacrifice",
+        "Strike It Rich"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 14,
+      "cards": [
+        "Ancestral Vision",
+        "Brainstorm",
+        "Codie, Vociferous Codex",
+        "Faithless Looting",
+        "Gitaxian Probe",
+        "Growth Spiral",
+        "Mana Vault",
+        "Manamorphose",
+        "Mizzix's Mastery",
+        "Mystic Remora",
+        "Ponder",
+        "Preordain",
+        "Veil of Summer",
+        "Windfall"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Faithless Looting",
+        "Mizzix's Mastery",
+        "Ponder",
+        "Preordain",
+        "Thassa's Oracle"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 19,
+      "cards": [
+        "Arid Mesa",
+        "Bloodstained Mire",
+        "Bring to Light",
+        "Crop Rotation",
+        "Demonic Tutor",
+        "Flooded Strand",
+        "Gamble",
+        "Imperial Seal",
+        "Marsh Flats",
+        "Misty Rainforest",
+        "Mystical Tutor",
+        "Polluted Delta",
+        "Profane Tutor",
+        "Scalding Tarn",
+        "Solve the Equation",
+        "Vampiric Tutor",
+        "Verdant Catacombs",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 6,
+      "cards": [
+        "Approach of the Second Sun",
+        "Codie, Vociferous Codex",
+        "Mizzix's Mastery",
+        "Thassa's Oracle",
+        "Windfall",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 21,
+      "cards": [
+        "Ad Nauseam",
+        "Biomancer's Familiar",
+        "Birds of Paradise",
+        "Claim the Firstborn",
+        "Codie, Vociferous Codex",
+        "Culling the Weak",
+        "Deflecting Swat",
+        "Demonic Consultation",
+        "Elvish Spirit Guide",
+        "Ignoble Hierarch",
+        "Inevitable Betrayal",
+        "Infernal Plunge",
+        "Jeska's Will",
+        "Mizzix's Mastery",
+        "Noble Hierarch",
+        "Prismari, the Inspiration",
+        "Simian Spirit Guide",
+        "Sol Ring",
+        "Tainted Pact",
+        "Thassa's Oracle",
+        "Tinder Wall"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 8,
+      "cards": [
+        "Ancient Tomb",
+        "Boseiju, Who Endures",
+        "City of Brass",
+        "Culling Ritual",
+        "Emerald Charm",
+        "Mana Vault",
+        "Mizzix's Mastery",
+        "Tinder Wall"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Fierce Guardianship",
+        "Flusterstorm",
+        "Force of Will",
+        "Swan Song"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": [
+        "Prismari, the Inspiration",
+        "Thassa's Oracle",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Gamble"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Brain Freeze",
+        "Cabal Ritual",
+        "Faithless Looting",
+        "Mizzix's Mastery",
+        "Noxious Revival",
+        "Rite of Flame",
+        "Strike It Rich",
+        "Underworld Breach"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Faithless Looting",
+        "Mizzix's Mastery",
+        "Strike It Rich",
+        "Underworld Breach"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Codie, Vociferous Codex",
+        "Mizzix's Mastery",
+        "Prismari, the Inspiration"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Approach of the Second Sun",
+        "Thassa's Oracle",
+        "Windfall",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 2,
+      "cards": [
+        "Codie, Vociferous Codex",
+        "Mizzix's Mastery"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Codie, Vociferous Codex",
+        "Gitaxian Probe",
+        "Mizzix's Mastery",
+        "Silence"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 30,
+      "cards": [
+        "Ancient Tomb",
+        "Arcane Signet",
+        "Arid Mesa",
+        "Bayou",
+        "Birds of Paradise",
+        "Bloodstained Mire",
+        "Boseiju, Who Endures",
+        "Carpet of Flowers",
+        "Chrome Mox",
+        "City of Brass",
+        "Codie, Vociferous Codex",
+        "Command Tower",
+        "Exotic Orchard",
+        "Flooded Strand",
+        "Gemstone Caverns",
+        "Lotus Petal",
+        "Mana Confluence",
+        "Marsh Flats",
+        "Misty Rainforest",
+        "Mizzix's Mastery",
+        "Phyrexian Tower",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Strike It Rich",
+        "Tropical Island",
+        "Underground Sea",
+        "Verdant Catacombs",
+        "Volcanic Island",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 37,
+      "cards": [
+        "Ancient Tomb",
+        "Arid Mesa",
+        "Bayou",
+        "Bloodstained Mire",
+        "Boseiju, Who Endures",
+        "City of Brass",
+        "Command Tower",
+        "Exotic Orchard",
+        "Flooded Strand",
+        "Forest",
+        "Gemstone Caverns",
+        "Island",
+        "Mana Confluence",
+        "Marsh Flats",
+        "Misty Rainforest",
+        "Mountain",
+        "Phyrexian Tower",
+        "Plains",
+        "Polluted Delta",
+        "Scalding Tarn",
+        "Swamp",
+        "Tropical Island",
+        "Underground Sea",
+        "Verdant Catacombs",
+        "Volcanic Island",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 37,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.17
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Approach of the Second Sun",
+      "roles": [
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Mesa",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bayou",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Biomancer's Familiar",
+      "roles": [
+        "mana_reducers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Birds of Paradise",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cabal Ritual",
+      "roles": [
+        "graveyard_enablers",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "City of Brass",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Codie, Vociferous Codex",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Culling Ritual",
+      "roles": [
+        "removal",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faithless Looting",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gamble",
+      "roles": [
+        "discard_outlets",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gemstone Caverns",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gitaxian Probe",
+      "roles": [
+        "card_advantage",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Confluence",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Vault",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Manamorphose",
+      "roles": [
+        "card_advantage",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marsh Flats",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mizzix's Mastery",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Phyrexian Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Preordain",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismari, the Inspiration",
+      "roles": [
+        "engines",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strike It Rich",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thassa's Oracle",
+      "roles": [
+        "dig_draw",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tinder Wall",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tropical Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Sea",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underworld Breach",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veil of Summer",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volcanic Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windfall",
+      "roles": [
+        "card_advantage",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Codie is legendary, so you cannot have two in play.",
+    "Sacrificing Codie to copy a spell is a one-time use, so prioritize copying Mizzix's Mastery or game-winning instants.",
+    "Be cautious of cantrip interaction that can out-value your spells.",
+    "Mizzix's Mastery damages all other creatures, so avoid having multiple copies of it in play.",
+    "Watch for artifact hate and bring in non-artifact threats if needed."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, hold up interaction if possible."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play Codie if mana allows, or play a second land and hold."
+    },
+    {
+      "trigger": "early game",
+      "line": "If opening with Codie, play it on turn 2 or 3, then use its tap ability to fix mana for Mizzix's Mastery or Increasing Vengeance."
+    }
+  ],
+  "kill_priority": [
+    "Codie, Vociferous Codex",
+    "Mizzix's Mastery",
+    "Prismari, the Inspiration",
+    "Approach of the Second Sun",
+    "Thassa's Oracle",
+    "Windfall",
+    "Windswept Heath",
+    "Ad Nauseam"
+  ],
+  "interaction_to_disrupt": [
+    "Fierce Guardianship",
+    "Flusterstorm",
+    "Force of Will",
+    "Swan Song",
+    "Prismari, the Inspiration",
+    "Thassa's Oracle",
+    "Veil of Summer",
+    "Ancient Tomb"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/codie-vociferous-codex.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

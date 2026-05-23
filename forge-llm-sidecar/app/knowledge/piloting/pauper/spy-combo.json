@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two land acceleration spells like Land Grant or Generous Ent",
       "Hands containing Masked Vandal alongside early land drops",
-      "Hands with a mix of mana sources and one threat"
+      "Hands with a mix of mana sources and one threat",
+      "Keep hands with 2-3 lands, at least one land acceleration spell (Land Grant), and a disruption piece (Masked Vandal) or early combo piece.",
+      "Keep any hand with a turn-1 play that sets up your combo or disruption."
     ],
     "mulligan_criteria": [
       "Hands with zero land acceleration or threats",
       "Hands with three or more lands but no creatures",
-      "Hands lacking early game interaction or ramp"
+      "Hands lacking early game interaction or ramp",
+      "Mulligan if you have 3+ lands with no acceleration, or 3+ non-lands with no way to play them on turn 1 or 2."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and cast Generous Ent or Land Grant to accelerate mana",
       "Deploy early creatures to apply pressure and protect ramp pieces",
-      "Prioritize drawing into Masked Vandal for board control"
+      "Prioritize drawing into Masked Vandal for board control",
+      "Turn 1: Play a land, cast Masked Vandal if possible, or hold for a turn-2 Land Grant + Vandal.",
+      "Turn 2: Cast Land Grant to accelerate into Generous Ent or a combo piece.",
+      "Prioritize playing lands untapped to enable mana-heavy spells.",
+      "If facing aggro, consider holding Vandal for removal",
+      "if facing control/combo, prioritize acceleration."
     ],
     "mid_game": [
       "Use accumulated mana to play multiple Masked Vandals and other threats",
       "Counter opponent key plays by targeting them with Vandal counters",
-      "Search for Forests and basic lands to ensure consistent casting of combo pieces"
+      "Search for Forests and basic lands to ensure consistent casting of combo pieces",
+      "Hoard mana for key combo turns or disruption windows.",
+      "Use Land Grant strategically to ensure you can cast Generous Ent or combo pieces without flooding.",
+      "Manage graveyard by avoiding unnecessary discards unless it enables your combo.",
+      "Commit threats only when you have protection or can follow up.",
+      "Hold back Generous Ent if the opponent has sweepers or targeted removal.",
+      "Use Masked Vandal to remove key permanents (artifacts, enchantments, or combo pieces) rather than trading into small creatures."
     ],
     "late_game": [
       "Deploy large threats accelerated by ramp spells to finish the game",
       "Use Generous Ent card draw to find answers to late game threats",
-      "Maintain board presence while outdrawing and outmaneuvering opponents"
+      "Maintain board presence while outdrawing and outmaneuvering opponents",
+      "Generous Ent combined with land acceleration and evasion/stealth mechanics to close out the game.",
+      "Execute the combo when you have protection or can bypass removal.",
+      "Go all-in when you have a guaranteed combo turn, protection from removal, or when the opponent is tapped out for a sweeper.",
+      "Also commit if you're ahead on board and can race."
     ]
   },
   "key_cards": [
@@ -59,7 +77,11 @@
     "Cast Land Grant before Generous Ent to ensure you have the green mana needed for the Ent ability",
     "Hold up black mana for Masked Vandal casting cost while using green mana for ramp spells",
     "Prioritize playing Generous Ent on turns when you can immediately use the drawn Forest for a follow up spell",
-    "Save Masked Vandal triggered ability for opponent most threatening creature rather than using it preemptively"
+    "Save Masked Vandal triggered ability for opponent most threatening creature rather than using it preemptively",
+    "Common mistake: Overcommitting to the combo too early without protection.",
+    "Another: Misusing Masked Vandal on small creatures instead of key permanents.",
+    "Unique interaction: Land Grant can enable landfall or land-based combo triggers.",
+    "Always track opponent's mana and hand size to predict responses."
   ],
   "matchups": [
     {
@@ -88,6 +110,21 @@
         "Card advantage engines",
         "Late game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use uncounterable spells, split your combo into multiple steps, or use land acceleration to cast threats before they can respond. Hold up mana for protection or use cheap disruption to clear the way.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with Masked Vandal to disrupt their mana base. Use targeted removal on key ramp creatures. Accelerate your own game plan to outpace them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by drawing more cards, disrupting their combo pieces, and using Masked Vandal to remove their key permanents. Prioritize card advantage and protection for your combo.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +132,15 @@
     "Board wipe spells",
     "Counterspell equivalents",
     "Card draw engines",
-    "Large late game threats"
+    "Large late game threats",
+    "Watch for counterspells, sweepers, and targeted removal.",
+    "Note when opponents tap out for key permanents.",
+    "Track graveyard contents for reanimation or discard threats.",
+    "Pay attention to mana bases for potential flood/screw."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:26:09+00:00",
     "model": "local-model",
@@ -114,6 +156,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

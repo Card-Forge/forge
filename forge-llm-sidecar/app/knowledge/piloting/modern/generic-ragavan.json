@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early interaction like Thoughtseize",
       "Hands containing Moonshadow or Super Shredder",
-      "Hands with two lands and a one-drop"
+      "Hands with two lands and a one-drop",
+      "Keep hands with 2-3 lands, Ragavan, and at least one interaction (Thoughtseize, Fatal Push, or Lightning Axe).",
+      "Prioritize hands with Ragavan + discard over pure curve-balls."
     ],
     "mulligan_criteria": [
       "Hands lacking early interaction",
       "Hands with three or more lands",
-      "Hands with only high-cost threats"
+      "Hands with only high-cost threats",
+      "Mulligan hands with 3+ lands and no early plays, or hands with zero interaction when facing fast aggro."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and one-drops to establish board presence",
       "Use Thoughtseize to disrupt opponent's key plays",
-      "Cast Moonshadow to apply immediate pressure"
+      "Cast Moonshadow to apply immediate pressure",
+      "Turn 1: Play a land, cast Thoughtseize if you have a 2-drop threat or Ragavan in hand.",
+      "Turn 2: Ragavan into a land, or discard into a threat.",
+      "Sequence lands to ensure you can cast Ragavan on turn 2 and follow up with a cantrip or discard.",
+      "If facing fast decks, prioritize early interaction over optimal mana."
     ],
     "mid_game": [
       "Deploy Super Shredder to clear blockers and generate value",
       "Maintain board control with efficient removal",
-      "Push damage while denying opponent's recovery"
+      "Push damage while denying opponent's recovery",
+      "Ragavan's card draw fuels your hand",
+      "don't overextend without answers.",
+      "Use discard to protect your board and disrupt opponent's key pieces.",
+      "Manage mana to keep removal/discard available for 2-3 mana threats.",
+      "Commit Ragavan early to establish pressure and draw into answers.",
+      "Hold back if opponent has clear removal or a board wipe ready."
     ],
     "late_game": [
       "Leverage card advantage from early disruption",
       "Use remaining resources to close out the game",
-      "Adapt to opponent's late-game threats with targeted answers"
+      "Adapt to opponent's late-game threats with targeted answers",
+      "Ragavan + efficient threats (Moonshadow, Super Shredder, Bloodtithe Harvester).",
+      "Win by out-valuing through card advantage and applying consistent pressure.",
+      "When you have card advantage, opponent is low on removal, or you've established board control.",
+      "Go all-in if you can close the game before they can stabilize."
     ]
   },
   "key_cards": [
@@ -58,7 +75,13 @@
   "sequencing_tips": [
     "Hold Thoughtseize for the opponent's most impactful card",
     "Cast Moonshadow before playing lands to maximize surprise",
-    "Use Super Shredder's ability to clear blockers before attacking"
+    "Use Super Shredder's ability to clear blockers before attacking",
+    "Common mistake: Overextending with Ragavan without protection.",
+    "Always have an answer ready.",
+    "Another: Forgetting that Super Shredder and Moonshadow synergize well with artifact synergies if the deck runs any, but even without, they're efficient.",
+    "Watch out for board wipes",
+    "Ragavan's value is lost if wiped without follow-up.",
+    "Keep discard flexible to hit different strategies."
   ],
   "matchups": [
     {
@@ -84,15 +107,33 @@
         "Efficient removal",
         "Card draw spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells. Cast Ragavan and threats in response to or after they tap out. Use cheap, efficient threats that are hard to counter (or cast them when they're tapped out).",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early interaction is key. Thoughtseize to find Amulet or ramp spells. Use removal to kill early threats. Super Shredder can clear artifacts.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize keeping hands with multiple threats and interaction. Use Ragavan to out-value. Sideboard in more discard and efficient removal.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early interaction spells",
     "Board wipes",
-    "Efficient removal"
+    "Efficient removal",
+    "Watch for counterspells (Jeskai), artifact acceleration (Affinity/Amulet), and combo win conditions (Ruby).",
+    "Key tells: opponent tapping out on turn 2/3, holding up mana, or playing non-basic lands that signal specific strategies."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T02:06:52+00:00",
     "model": "local-model",
@@ -108,7 +149,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

@@ -12,12 +12,16 @@
     "keep_criteria": [
       "Hands with Scapeshift and at least two basic lands",
       "Hands containing Yorion or Lumra with cheap land drops",
-      "Hands with early disruption and a clear path to turn three"
+      "Hands with early disruption and a clear path to turn three",
+      "Keep hands with 2-3 lands (including at least one Forest), Scapeshift, and a land fetcher (Farseek, Kodama's Reach, or a fetch land).",
+      "Keep Yorion if paired with a land or fetch.",
+      "Prioritize hands that can play a turn-1 Lumra or turn-2 Scapeshift/Bellow sequence."
     ],
     "mulligan_criteria": [
       "Hands with zero lands or only high-cost permanents",
       "Hands lacking Scapeshift or a clear acceleration plan",
-      "Hands with multiple high-cost creatures but no mana sources"
+      "Hands with multiple high-cost creatures but no mana sources",
+      "Mulligan hands with 4+ lands, no Scapeshift/Yorion, or only one land."
     ],
     "examples": []
   },
@@ -25,17 +29,33 @@
     "early_game": [
       "Play lands efficiently to enable Scapeshift on turn two or three",
       "Hold up mana for potential hand disruption or counterspells",
-      "Deploy Lumra early to establish a board presence and begin counter accumulation"
+      "Deploy Lumra early to establish a board presence and begin counter accumulation",
+      "Turn 1: Play a land, cast Lumra if possible, or play a fetch land/shock land.",
+      "Turn 2: If you have Scapeshift + 2 lands, fetch a Forest, untap it, and cast Bellow for 2 damage.",
+      "If you have Yorion + land, cast Yorion.",
+      "If you have Scapeshift + 3 lands, you can combo off for 3+ damage.",
+      "Sequence lands carefully to ensure you can untap a Forest after Scapeshift."
     ],
     "mid_game": [
       "Cast Scapeshift to exile lands and fetch Yorion or additional Lumra copies",
       "Use combat tricks or natural growth to pump Lumra before attacking",
-      "Position Yorion to survive combat while drawing cards upon its eventual sacrifice"
+      "Position Yorion to survive combat while drawing cards upon its eventual sacrifice",
+      "Preserve Scapeshift for when you have enough lands to combo off for lethal or near-lethal.",
+      "Use fetch lands to dig for Forests.",
+      "Don't overcommit to Yorion if you can combo off next turn.",
+      "Manage graveyard carefully if facing Rest in Peace or Surgical Extraction.",
+      "Commit Yorion or Lumra to stabilize against aggro or to pressure control.",
+      "Hold back Scapeshift until you have a clear path to lethal or to remove a key threat."
     ],
     "late_game": [
       "Leverage Yorion's massive draw to find finishers or sweepers",
       "Use Scapeshift repeatedly to bypass land count limits and stabilize",
-      "Close out games with a pumped Lumra while maintaining card advantage"
+      "Close out games with a pumped Lumra while maintaining card advantage",
+      "Scapeshift into Bellow of the Woods for lethal.",
+      "Yorion, Sky Nomad as a massive attacker or to tutor for the combo.",
+      "Lumra as a late-game finisher if you have enough mana.",
+      "Go all-in when you have Scapeshift + enough lands to combo for lethal, or when Yorion can attack for lethal or tutor for the win.",
+      "Commit to Yorion if it can stabilize or pressure to death."
     ]
   },
   "key_cards": [
@@ -59,7 +79,11 @@
     "Always play lands before casting Scapeshift to maximize the number of lands you can exile",
     "Hold up Scapeshift until you have a clear target or need to bypass a land count limit",
     "Pump Lumra during your opponent's turn or before combat to maximize surprise and combat damage",
-    "Sacrifice Yorion at the end of your turn to draw cards safely and avoid opponent interaction"
+    "Sacrifice Yorion at the end of your turn to draw cards safely and avoid opponent interaction",
+    "Common mistakes include overcommitting to Yorion when you can combo off, forgetting to untap a Forest after Scapeshift, and not tracking opponent's removal/counters.",
+    "Scapeshift is instant, so you can respond to things, but Bellow is a sorcery and can be countered.",
+    "Yorion's tutor is a sorcery.",
+    "Plan around graveyard hate and always count your lands before casting Scapeshift to ensure lethal damage."
   ],
   "matchups": [
     {
@@ -88,16 +112,36 @@
         "Removal spells",
         "Card draw engines that outpace Yorion"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Yorion as a threat that doesn't need to be countered to win. Split your combo (cast Bellow, then Scapeshift, or vice versa if possible, though Scapeshift is instant). Use fetch lands to dig for answers. Attack with Yorion/Lumra to force a response.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Out-value them with Yorion and early threats. Use discard to remove their ramp pieces. Combo off before they can stabilize or cast their win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Race to combo off first. Use discard to remove their Scapeshift or Bellow. Prioritize keeping lands and fetchers. Use Yorion to tutor for the combo when they're close.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures that pressure early",
     "Instant-speed counterspells that stop Scapeshift",
     "Hand disruption targeting Yorion or Lumra",
-    "Board wipes that clear pumped creatures"
+    "Board wipes that clear pumped creatures",
+    "Watch for removal targeting Yorion or Lumra.",
+    "Track opponent's mana to know if they can counter Bellow or kill Yorion.",
+    "Note if they're playing graveyard hate or discard.",
+    "Watch for sweepers (Wrath of God, etc.) that can reset your board."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:00:41+00:00",
     "model": "local-model",
@@ -113,6 +157,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

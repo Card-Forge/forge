@@ -1,0 +1,126 @@
+{
+  "archetype": "Auntie Ool, Cursewretch",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck leverages noncreature spells and Curse enchantments to rapidly stack +1/+1 counters on Auntie Ool, Cursewretch, then sacrifices her for game-swinging creature removal or direct damage. It wins by out-resourcing midrange and control decks with efficient value engines while leveraging sacrifice outlets to disrupt aggressive and combo strategies.",
+  "win_conditions": [
+    "Sacrificing a fully grown Auntie Ool for a massive -X/-X effect to clear the board or finish a player.",
+    "Massacre Girl, Known Killer attacking with +1/+1 counters or sacrificing for targeted removal.",
+    "Graveyard recursion of Ool or Massacre Girl for repeated value."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritize duals or shocklands, or basics if necessary), a cheap noncreature spell (e.g., Curse of the Pierced Heart, Dismember, Thoughtseize), and a sacrifice outlet or early threat.",
+      "Keep hands that can play a land, then cast a Curse or cheap noncreature spell on turn 1 or 2."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 3+ lands with no spells, or multiple high-cost spells with no early interaction."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cheap Curse or noncreature spell if mana allows.",
+      "Turn 2: Play a second land, cast another noncreature spell to grow Ool, or deploy a sacrifice outlet like Ignoble Hierarch.",
+      "If you have Ool in hand, play her on turn 2 or 3 once you have a Curse or noncreature spell ready to trigger her growth.",
+      "Prioritize establishing a board presence with cheap value creatures or enchantments while setting up the sacrifice engine."
+    ],
+    "mid_game": [
+      "Treat your graveyard as a resource for recursion or discard protection.",
+      "Prioritize casting noncreature spells over creatures when possible to maximize Ool's growth.",
+      "Manage mana to ensure you always have an open mana for sacrifice outlets and removal.",
+      "Don't overcommit to Ool if the board is stacked against you",
+      "preserve value creatures and interaction.",
+      "Commit threats when you have a clear path to value or when you can trade favorably via sacrifice.",
+      "Hold back Ool if the opponent has sweepers or targeted removal, as she's a high-value target.",
+      "Use Massacre Girl to clear key blockers or finish games when Ool is on the back foot."
+    ],
+    "late_game": [
+      "Sacrificing a fully grown Auntie Ool for a massive -X/-X effect to clear the board or finish a player.",
+      "Massacre Girl, Known Killer attacking with +1/+1 counters or sacrificing for targeted removal.",
+      "Graveyard recursion of Ool or Massacre Girl for repeated value.",
+      "Go all-in when you have a clear board advantage, the opponent has no sweepers, or you can close the game in 1-2 turns.",
+      "Commit when you can safely grow Ool to 5+ counters and have a guaranteed sacrifice outlet."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Auntie Ool, Cursewretch",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Massacre Girl, Known Killer",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Ignoble Hierarch",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overcommitting to Ool without a sacrifice outlet, neglecting to cast noncreature spells to grow her, and failing to track the opponent's removal.",
+    "Remember that Ool's ability is a sorcery-speed sacrifice, so plan your turns accordingly.",
+    "Synergize with curses that have beneficial effects or additional value.",
+    "Always keep an eye on the opponent's graveyard for recursion threats."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, multi-target, or split-second spells if available. Cast noncreature spells in response to threats to minimize counter windows. Use sacrifice outlets to trade value before they can counter. If possible, sideboard in more uncounterable or redundant threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use discard and early interaction to slow them down. Prioritize removal of their ramp sources and use sacrifice outlets to trade efficiently before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Keep early interaction and discard to slow their curve. Use sacrifice outlets to trade favorably against small creatures. Stabilize with removal and then transition to your value engine. Don't overextend into combat; use Ool's sacrifice ability to clear key threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure their hand and graveyard to limit their answers. Cast noncreature spells to grow Ool while they're tapped out. Use sacrifice outlets to bypass removal. Force them to use resources on your threats while you dig for more value.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing with better sequencing of noncreature spells and sacrifice outlets. Prioritize protecting Ool with counters or protection spells. Use discard to strip their key spells. Win trades by sacrificing Massacre Girl or Hierarch to clear their Ool while preserving yours.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (e.g., Wrath of God, Cyclonic Rift), targeted removal (e.g., Path to Exile, Fatal Push), and combo win conditions.",
+    "Note when opponents tap out for spells, as this is your window to grow Ool or cast curses.",
+    "Track graveyard content for recursion or sacrifice triggers."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

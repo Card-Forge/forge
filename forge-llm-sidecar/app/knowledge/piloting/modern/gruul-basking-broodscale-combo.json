@@ -1,0 +1,127 @@
+{
+  "archetype": "Gruul Basking Broodscale Combo",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Gruul Basking Broodscale Combo is a fast, disruptive combo deck that aims to resolve Glaring Fleshraker and Malevolent Rumble repeatedly or in tandem to force opponent sacrifices, leveraging Kozilek\u2019s Command for flexible interaction and Basking Broodscale as the combo engine to multiply threats. It excels against midrange and combo decks that rely on board presence or specific win conditions, while struggling against hyper-aggressive decks that can race it before the combo locks in.",
+  "win_conditions": [
+    "Glaring Fleshraker and Malevolent Rumble are the primary finishers.",
+    "Once you can cast them repeatedly or in response to threats, the game is often over.",
+    "Basking Broodscale enables this by copying triggers or creating additional threats.",
+    "Kozilek\u2019s Command can finish low-health decks with its 5 damage option."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep any hand with 2-3 lands plus at least one combo piece (Basking Broodscale, Glaring Fleshraker, or Malevolent Rumble) and a way to protect or enable it (Kozilek\u2019s Command, cheap acceleration, or removal).",
+      "Prioritize keeping hands that can play a land, cast a threat, and have a plan for turn 2-3."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no threats, 2+ lands with only removal and no combo pieces, or hands with 4+ lands."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, ideally a dual or shock land if the format supports it, or a basic that taps for R or G.",
+      "If you have a cheap combo piece or acceleration, play it.",
+      "Turn 2: Play a second land, then cast your first Glaring Fleshraker or Malevolent Rumble.",
+      "If you have Basking Broodscale, aim to cast it on turn 2 or 3 to trigger or copy the sacrifice effects.",
+      "Use Kozilek\u2019s Command defensively (bounce a blocker or destroy a problematic permanent) or offensively (deal 5 damage to close out games against low-HP decks)."
+    ],
+    "mid_game": [
+      "Mana should be prioritized for casting threats and holding up Kozilek\u2019s Command for interaction.",
+      "Don\u2019t overextend into sweepers",
+      "keep a threat in hand as insurance.",
+      "Manage your graveyard carefully\u2014avoid unnecessary sacrifice triggers if you\u2019re trying to combo off, and use Kozilek\u2019s Command to bounce your own threats if needed to protect them from targeted removal.",
+      "Commit threats when the opponent has no interaction or when you can follow up with a second Fleshraker/Rumble.",
+      "Hold back if the opponent has sweepers, targeted removal, or a clear win condition on the next turn.",
+      "Use Kozilek\u2019s Command to bounce a key blocker or remove a problematic permanent before committing fully."
+    ],
+    "late_game": [
+      "Glaring Fleshraker and Malevolent Rumble are the primary finishers.",
+      "Once you can cast them repeatedly or in response to threats, the game is often over.",
+      "Basking Broodscale enables this by copying triggers or creating additional threats.",
+      "Kozilek\u2019s Command can finish low-health decks with its 5 damage option.",
+      "Go all-in when you have a clear path to resolving a Fleshraker/Rumble, the opponent has no interaction, or you can follow up with a second threat.",
+      "If you\u2019re at 10+ life and the opponent is at 5 or less, use Kozilek\u2019s Command to finish them."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kozilek's Command",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Glaring Fleshraker",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Malevolent Rumble",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overcommitting to the board without follow-up, misusing Kozilek\u2019s Command\u2019s damage option when you need bounce, and failing to track opponent interaction.",
+    "Remember that Glaring Fleshraker and Malevolent Rumble are identical in function, so prioritize casting them in response to threats to maximize value.",
+    "Basking Broodscale\u2019s combo interaction is key\u2014practice trigger ordering to avoid unintended sacrifices."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Kozilek\u2019s Command to bounce your own threats or remove counterspells. Cast threats in response to their spells, or use cheap acceleration to outpace their mana. If possible, sideboard in additional protection or alternative win conditions.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction to disrupt their mana base. Use Kozilek\u2019s Command to bounce or destroy key ramp pieces. If they get ahead, commit to your combo quickly before they can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with Kozilek\u2019s Command bounce or removal. Mulligan aggressively for early interaction. Once stabilized, transition to your combo win condition. Don\u2019t overcommit to trading; focus on surviving to turn 3-4.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early threats and use Kozilek\u2019s Command to remove their key answers. If they have sweepers, wait for them to use it, then commit. Use card advantage to outlast them.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize keeping lands and early threats. Use Kozilek\u2019s Command to bounce their combo pieces or remove their threats. Track their hand size and play around their interaction.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (e.g., Wrath of God, Cyclonic Rift), targeted removal (e.g., Path to Exile, Swords to Plowshares), and combo win conditions.",
+    "Pay attention to when the opponent taps out for a spell\u2014they\u2019re likely setting up a counter or a big play.",
+    "Track graveyard hate if they\u2019re playing against Storm or Blink decks."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/modern.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

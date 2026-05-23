@@ -1,0 +1,157 @@
+{
+  "archetype": "Temur Harmonizer Combo",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/temur-harmonizer-combo.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Analyze the Pollen"
+    },
+    {
+      "qty": 2,
+      "name": "Ba Sing Se"
+    },
+    {
+      "qty": 1,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 2,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 4,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 2,
+      "name": "Earthbender Ascension"
+    },
+    {
+      "qty": 3,
+      "name": "Escape Tunnel"
+    },
+    {
+      "qty": 4,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 2,
+      "name": "Fire Magic"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Full Bore"
+    },
+    {
+      "qty": 2,
+      "name": "Ghost Vacuum"
+    },
+    {
+      "qty": 1,
+      "name": "Icetill Explorer"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Mightform Harmonizer"
+    },
+    {
+      "qty": 3,
+      "name": "Mountain"
+    },
+    {
+      "qty": 3,
+      "name": "Sear"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 2,
+      "name": "Spider-Sense"
+    },
+    {
+      "qty": 3,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 2,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 3,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 2,
+      "name": "Surrak, Elusive Hunter"
+    },
+    {
+      "qty": 2,
+      "name": "Thornspire Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Willowrush Verge"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 1,
+      "name": "Fire Magic"
+    },
+    {
+      "qty": 1,
+      "name": "Flashfreeze"
+    },
+    {
+      "qty": 1,
+      "name": "Heritage Reclamation"
+    },
+    {
+      "qty": 2,
+      "name": "Mossborn Hydra"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 2,
+      "name": "Origin of Metalbending"
+    },
+    {
+      "qty": 1,
+      "name": "Pick Your Poison"
+    },
+    {
+      "qty": 2,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 1,
+      "name": "Wan Shi Tong, Librarian"
+    }
+  ]
+}

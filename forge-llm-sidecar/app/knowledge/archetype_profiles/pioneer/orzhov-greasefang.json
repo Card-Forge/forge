@@ -1,0 +1,557 @@
+{
+  "schema_version": 1,
+  "name": "Orzhov Greasefang",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "B"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Orzhov Greasefang is a combo-focused Pioneer archetype that reanimates Parhelion II with Greasefang, Okiba Boss to create a fast two-turn clock. It synergizes with Monument to Endurance and multiple discard outlets to generate continuous card advantage and incremental damage. The deck is highly resilient, using The Mycosynth Gardens to stack triggers and maintaining a straightforward alternative game plan that doesn't interfere with its primary combo.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 21,
+      "cards": [
+        "Geier Reach Sanitarium",
+        "Greasefang, Okiba Boss",
+        "Guardian of New Benalia",
+        "Monument to Endurance",
+        "Pest Control",
+        "Soul-Guide Lantern",
+        "The Mycosynth Gardens"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Geier Reach Sanitarium",
+        "Guardian of New Benalia"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 1,
+      "cards": [
+        "Lively Dirge"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Greasefang, Okiba Boss",
+        "Monument to Endurance",
+        "Parhelion II"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 35,
+      "cards": [
+        "Brightclimb Pathway",
+        "Doorkeeper Thrull",
+        "Fatal Push",
+        "Fleeting Spirit",
+        "Greasefang, Okiba Boss",
+        "Guardian of New Benalia",
+        "Iron-Shield Elf",
+        "Monument to Endurance",
+        "Parhelion II",
+        "Sheltered by Ghosts",
+        "Takenuma, Abandoned Mire"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 26,
+      "cards": [
+        "Bitter Triumph",
+        "Eiganjo, Seat of the Empire",
+        "Fatal Push",
+        "Greasefang, Okiba Boss",
+        "High Noon",
+        "Iron-Shield Elf",
+        "Pest Control",
+        "Recommission",
+        "Sheltered by Ghosts",
+        "Soul-Guide Lantern",
+        "Vanishing Verse"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 9
+    },
+    "wrath": {
+      "target_count": 6,
+      "cards": [
+        "Fatal Push",
+        "Pest Control"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 14,
+      "cards": [
+        "Guardian of New Benalia",
+        "Iron-Shield Elf",
+        "Sheltered by Ghosts",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 28,
+      "cards": [
+        "Bitter Triumph",
+        "Fleeting Spirit",
+        "Geier Reach Sanitarium",
+        "Guardian of New Benalia",
+        "Iron-Shield Elf",
+        "Monument to Endurance",
+        "Parhelion II",
+        "Sheltered by Ghosts",
+        "The Mycosynth Gardens"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 2
+    },
+    "graveyard_enablers": {
+      "target_count": 35,
+      "cards": [
+        "Fleeting Spirit",
+        "Geier Reach Sanitarium",
+        "Go Blank",
+        "Greasefang, Okiba Boss",
+        "Guardian of New Benalia",
+        "Lively Dirge",
+        "Monument to Endurance",
+        "Parhelion II",
+        "Recommission",
+        "Sheltered by Ghosts",
+        "Soul-Guide Lantern",
+        "Takenuma, Abandoned Mire",
+        "The Mycosynth Gardens",
+        "Vanishing Verse"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 5
+    },
+    "reanimation_targets": {
+      "target_count": 8,
+      "cards": [
+        "Greasefang, Okiba Boss",
+        "Parhelion II"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 11,
+      "cards": [
+        "Fleeting Spirit",
+        "Geier Reach Sanitarium",
+        "Greasefang, Okiba Boss",
+        "Lively Dirge",
+        "Recommission",
+        "Takenuma, Abandoned Mire"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 12,
+      "cards": [
+        "Guardian of New Benalia",
+        "Monument to Endurance",
+        "The Mycosynth Gardens"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Parhelion II"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Greasefang, Okiba Boss",
+        "Monument to Endurance",
+        "Thoughtseize"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Duress",
+        "High Noon",
+        "Vanishing Verse"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 23,
+      "cards": [
+        "Bleachbone Verge",
+        "Concealed Courtyard",
+        "Eiganjo, Seat of the Empire",
+        "Fatal Push",
+        "Geier Reach Sanitarium",
+        "Godless Shrine",
+        "Takenuma, Abandoned Mire",
+        "The Mycosynth Gardens",
+        "Urborg, Tomb of Yawgmoth"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 21,
+      "cards": [
+        "Bleachbone Verge",
+        "Concealed Courtyard",
+        "Eiganjo, Seat of the Empire",
+        "Geier Reach Sanitarium",
+        "Godless Shrine",
+        "Plains",
+        "Swamp",
+        "Takenuma, Abandoned Mire",
+        "The Mycosynth Gardens",
+        "Urborg, Tomb of Yawgmoth"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.43
+  },
+  "dual_role_cards": [
+    {
+      "card": "Bitter Triumph",
+      "roles": [
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bleachbone Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Concealed Courtyard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eiganjo, Seat of the Empire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fatal Push",
+      "roles": [
+        "mana_fixing",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fleeting Spirit",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Geier Reach Sanitarium",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Godless Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Greasefang, Okiba Boss",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "graveyard_enablers",
+        "reanimation_targets",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guardian of New Benalia",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "High Noon",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Iron-Shield Elf",
+      "roles": [
+        "discard_outlets",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lively Dirge",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monument to Endurance",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Parhelion II",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers",
+        "payoff_cards",
+        "reanimation_targets",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pest Control",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Recommission",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sheltered by Ghosts",
+      "roles": [
+        "discard_outlets",
+        "graveyard_enablers",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Takenuma, Abandoned Mire",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Mycosynth Gardens",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "combo_pieces",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urborg, Tomb of Yawgmoth",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vanishing Verse",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Discard Parhelion II early to enable Monument to Endurance triggers before reanimating it.",
+    "Play Monument to Endurance before casting discard outlets to maximize triggers per turn.",
+    "Use The Mycosynth Gardens to copy Monument triggers after playing discard outlets to stack value.",
+    "Target Sheltered by Ghosts on creatures that can gain indestructible through discard effects to mitigate removal.",
+    "Crew Parhelion II immediately after reanimating it with Greasefang to attack on the same turn."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Monument to Endurance and discard Parhelion II to begin generating value."
+    },
+    {
+      "trigger": "early game",
+      "line": "Deploy cheap discard outlets like Seasoned Hallowblade, Guardian of New Benalia, or Fleeting Spirit to trigger Monument repeatedly."
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Thoughtseize or Fatal Push to disrupt aggressive opponents or protect combo pieces."
+    }
+  ],
+  "kill_priority": [
+    "Guardian of New Benalia",
+    "Monument to Endurance",
+    "The Mycosynth Gardens",
+    "Greasefang, Okiba Boss",
+    "Parhelion II",
+    "Thoughtseize",
+    "Brightclimb Pathway",
+    "Doorkeeper Thrull"
+  ],
+  "interaction_to_disrupt": [
+    "Guardian of New Benalia",
+    "Iron-Shield Elf",
+    "Sheltered by Ghosts",
+    "Thoughtseize",
+    "Bitter Triumph",
+    "Eiganjo, Seat of the Empire",
+    "Fatal Push",
+    "Greasefang, Okiba Boss"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/orzhov-greasefang.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

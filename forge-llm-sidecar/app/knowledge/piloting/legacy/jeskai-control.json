@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with Ponder or early interaction",
       "Two-land hands with a signature card",
-      "Hands containing Jace or Flow State with adequate mana"
+      "Hands containing Jace or Flow State with adequate mana",
+      "Keep hands with 2-3 lands (prioritizing basics for shock lands), Ponder, Jace, or early interaction (Lightning Helix, Path to Exile, Spell Snare)."
     ],
     "mulligan_criteria": [
       "Hands lacking Ponder or early removal",
       "Three-land hands without a win condition",
-      "Hands with only lands and high-cost cards"
+      "Hands with only lands and high-cost cards",
+      "Mulligan on 3+ lands with no spells, 0-1 lands with spells, or hands lacking early answers to aggro/combo threats."
     ],
     "examples": []
   },
@@ -25,17 +27,30 @@
     "early_game": [
       "Prioritize casting Ponder to find answers",
       "Play lands and hold up mana for interaction",
-      "Use early removal to stabilize against aggro"
+      "Use early removal to stabilize against aggro",
+      "Turn 1: Cast Ponder if possible to dig for lands or interaction, then play a land.",
+      "Turn 2: Play a land, then cast Jace, Flow State, or interaction depending on board state.",
+      "Sequence lands to maximize shock effects and Flow State triggers."
     ],
     "mid_game": [
       "Deploy Jace, the Mind Sculptor to generate tokens and control the board",
       "Cast Flow State to accelerate resources and draw cards",
-      "Maintain card advantage by trading efficiently"
+      "Maintain card advantage by trading efficiently",
+      "Use Ponder to filter for answers or threats",
+      "never cast it when you can't afford to mulligan or when mana is critical.",
+      "Manage shock lands to preserve life total and enable Flow State.",
+      "Track graveyard to prevent recursion.",
+      "Hold back on committing Jace or Flow State if the opponent has sweepers or targeted removal.",
+      "Commit threats when you have card advantage, opponent is tapped out, or you can protect your board."
     ],
     "late_game": [
       "Leverage Jace's token army to overwhelm opponents",
       "Use Flow State to draw into game-ending threats",
-      "Control the board until you can close out the game"
+      "Control the board until you can close out the game",
+      "Jace\u2019s +1 loyalty to draw into game-winning cards, Flow State\u2019s card draw and combat damage, or Anger of the Gods for board wipes.",
+      "Secure victory by out-resourcing or closing with a protected threat.",
+      "Go all-in when you have card advantage, opponent has no sweepers, or you can protect your finisher.",
+      "Cast Flow State when you can attack safely or when you need to close out the game."
     ]
   },
   "key_cards": [
@@ -59,7 +74,13 @@
     "Cast Ponder before committing to a plan to ensure you have the right answers",
     "Hold up blue for Jace's memory drain before attacking",
     "Use Flow State after playing permanents to maximize card draw and land untaps",
-    "Prioritize countering opponent's key threats over drawing cards early"
+    "Prioritize countering opponent's key threats over drawing cards early",
+    "Ponder is the deck\u2019s backbone\u2014cast it aggressively to find answers or threats, but avoid it when you\u2019re at 1 life or need to protect a board.",
+    "Flow State is a double-edged sword",
+    "only cast it when you can protect it or when you\u2019re ready to attack.",
+    "Jace is your primary engine",
+    "protect him with removal or by playing around sweepers.",
+    "Never overextend into known sweepers, and always track the opponent\u2019s graveyard and mana."
   ],
   "matchups": [
     {
@@ -88,6 +109,21 @@
         "Counterspells",
         "Late-game threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Dig through counters with Ponder, cast spells in response to counterspells, or sideboard in uncounterable threats. Use Flow State to out-value and pressure.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with interaction, use Surgical Extraction/Rest in Peace to disrupt, and leverage Jace to dig through their threats. Flow State can out-draw their ramp.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through card advantage and sideboard positioning. Prioritize Ponder, Jace, and Flow State. Bring in Anger of the Gods, Surgical Extraction, and Rest in Peace to disrupt their game plan and protect yours.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +131,13 @@
     "Instant-speed removal",
     "Counterspells",
     "Board wipes",
-    "Hand disruption"
+    "Hand disruption",
+    "Watch for Tron\u2019s land count, Sneak & Show\u2019s graveyard, Delver\u2019s flip progress, and Dimir\u2019s mana holding.",
+    "Key tells include opponent tapping for multiple colors, holding up mana on your turn, or graveyard interactions."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:43:09+00:00",
     "model": "local-model",
@@ -140,6 +179,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early interaction or draw spells",
       "Hands containing Ancient Cornucopia or dual lands",
-      "Hands with at least two lands and a one-drop"
+      "Hands with at least two lands and a one-drop",
+      "Keep hands with 2-3 lands (including duals or mana rocks), at least one early interaction (Rakshasa's Bargain, discard, or cheap removal), and a Flow State or Ancient Cornucopia if possible.",
+      "Prioritize keeping hands that can stabilize turn 1-2 while setting up the late-game engine."
     ],
     "mulligan_criteria": [
       "Hands with only lands or only high-cost cards",
       "Hands lacking early answers or card draw",
-      "Hands with three or more lands"
+      "Hands with three or more lands",
+      "Mulligan to hands with only one land, no early answers, or excessive high-cost spells."
     ],
     "examples": []
   },
@@ -25,17 +28,30 @@
     "early_game": [
       "Play lands and Ancient Cornucopia to accelerate mana",
       "Cast Flow State or Rakshasa's Bargain to draw into answers",
-      "Hold up interaction for opponent's early threats"
+      "Hold up interaction for opponent's early threats",
+      "Turn 1: Play a land, optionally cast Rakshasa's Bargain to disrupt an opponent's key play or draw into a better hand.",
+      "Turn 2: Develop your mana base, cast Ancient Cornucopia for early card advantage/mana, or play efficient removal/threats.",
+      "Sequence lands to ensure blue/black/green availability by turn 3 for key spells like counterspells or discard."
     ],
     "mid_game": [
       "Use extra cards to maintain board control",
       "Search for basics with Cornucopia to fix mana",
-      "Trade efficiently while preserving key removal"
+      "Trade efficiently while preserving key removal",
+      "Preserve mana for interaction until turn 4-5, then commit to board development.",
+      "Use Rakshasa's Bargain efficiently to maintain hand size without overcommitting.",
+      "Leverage Ancient Cornucopia's sacrifice for card draw when hand is full or mana is saturated.",
+      "Protect Flow State in the graveyard",
+      "it is your primary win condition engine.",
+      "Hold back on committing all threats until you have a clear answer to the opponent's primary win condition."
     ],
     "late_game": [
       "Lean on card advantage to outvalue opponents",
       "Cast win conditions or finish with combat tricks",
-      "Maintain hand size to pressure opponent's resources"
+      "Maintain hand size to pressure opponent's resources",
+      "Flow State recursion engine, often paired with Phyrexian Unlife or a combo finisher, plus Ancient Cornucopia for infinite card draw/mana in some configurations.",
+      "Close the game by replaying high-impact spells or combo pieces from the graveyard.",
+      "Go all-in when you have Flow State online, sufficient mana to replay key spells, and no immediate threat to your life total.",
+      "Commit when the opponent has no answers to your recursion or when you can stabilize and out-value them."
     ]
   },
   "key_cards": [
@@ -59,7 +75,13 @@
     "Prioritize casting Flow State before Rakshasa's Bargain to maximize hand size",
     "Use Ancient Cornucopia before playing high-cost spells to ensure mana availability",
     "Hold up interaction until the opponent commits to a threat",
-    "Draw into answers before committing to combat tricks"
+    "Draw into answers before committing to combat tricks",
+    "Flow State is fragile",
+    "protect it from discard and exile effects.",
+    "Ancient Cornucopia's sacrifice timing is crucial\u2014do not sacrifice prematurely.",
+    "Rakshasa's Bargain is best used to disrupt key turns or refill hand when low.",
+    "Avoid overcommitting to the board without recursion online.",
+    "Watch for opponent sideboard cards like Rest in Peace or Leyline of the Void."
   ],
   "matchups": [
     {
@@ -88,16 +110,35 @@
         "Board wipes",
         "Stax effects"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple low-cost spells to force counters, then resolve key threats. Employ flashback/graveyard recursion to bypass counters. Use Ancient Cornucopia to dig for answers or combo pieces.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction to disrupt mana development. Use counterspells and discard to slow them down. Leverage Ancient Cornucopia for card advantage to out-value their acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card advantage, efficient removal, and graveyard protection. Use Rakshasa's Bargain to out-draw them. Protect Flow State and disrupt their recursion.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
     "Efficient removal",
-    "Countermagic"
+    "Countermagic",
+    "Watch for opponent mana development (especially Izzet's ramp/mana rocks) and graveyard activity.",
+    "Note when they start casting high-cost spells or combo pieces.",
+    "Track their hand size after Rakshasa's Bargain or discard effects to anticipate their next play."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:23:15+00:00",
     "model": "local-model",
@@ -113,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

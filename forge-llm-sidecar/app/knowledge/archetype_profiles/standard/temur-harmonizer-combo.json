@@ -1,0 +1,506 @@
+{
+  "schema_version": 1,
+  "name": "Temur Harmonizer Combo",
+  "format": "standard",
+  "colors": [
+    "U",
+    "R",
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Temur Harmonizer Combo leverages mana acceleration and card selection to assemble a lethal sequence quickly. By ramping into multiple lands and drawing into key pieces, the deck aims to bypass traditional combat. The strategy culminates in a sudden burst of damage that closes the game before opponents can stabilize.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 20,
+      "cards": [
+        "Broadside Barrage",
+        "Consult the Star Charts",
+        "Full Bore",
+        "Heritage Reclamation",
+        "Mightform Harmonizer",
+        "Quantum Riddler",
+        "Surrak, Elusive Hunter",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 5
+    },
+    "dig_draw": {
+      "target_count": 15,
+      "cards": [
+        "Consult the Star Charts",
+        "Full Bore",
+        "Mightform Harmonizer",
+        "Stock Up"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 10,
+      "cards": [
+        "Analyze the Pollen",
+        "Earthbender Ascension",
+        "Escape Tunnel",
+        "Fabled Passage"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Full Bore"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 16,
+      "cards": [
+        "Full Bore",
+        "Icetill Explorer",
+        "Mightform Harmonizer",
+        "Mossborn Hydra",
+        "Quantum Riddler",
+        "Surrak, Elusive Hunter",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 5
+    },
+    "removal": {
+      "target_count": 17,
+      "cards": [
+        "Broadside Barrage",
+        "Burst Lightning",
+        "Fire Magic",
+        "Ghost Vacuum",
+        "Heritage Reclamation",
+        "Mossborn Hydra",
+        "Origin of Metalbending",
+        "Sear"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 7
+    },
+    "wrath": {
+      "target_count": 13,
+      "cards": [
+        "Consult the Star Charts",
+        "Fire Magic",
+        "Ghost Vacuum",
+        "Mightform Harmonizer"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 12,
+      "cards": [
+        "Consult the Star Charts",
+        "Disdainful Stroke",
+        "Flashfreeze",
+        "Negate",
+        "Spell Snare",
+        "Spider-Sense"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 12,
+      "cards": [
+        "Consult the Star Charts",
+        "Mightform Harmonizer",
+        "Origin of Metalbending",
+        "Surrak, Elusive Hunter"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 2,
+      "cards": [
+        "Broadside Barrage"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Analyze the Pollen",
+        "Escape Tunnel",
+        "Ghost Vacuum",
+        "Heritage Reclamation",
+        "Icetill Explorer"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 6,
+      "cards": [
+        "Analyze the Pollen",
+        "Ba Sing Se",
+        "Icetill Explorer",
+        "Spider-Sense"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Consult the Star Charts"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Full Bore"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Consult the Star Charts",
+        "Full Bore",
+        "Mightform Harmonizer"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Consult the Star Charts",
+        "Mightform Harmonizer",
+        "Pick Your Poison"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 29,
+      "cards": [
+        "Ba Sing Se",
+        "Consult the Star Charts",
+        "Escape Tunnel",
+        "Fabled Passage",
+        "Full Bore",
+        "Mightform Harmonizer",
+        "Starting Town",
+        "Steam Vents",
+        "Thornspire Verge",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Ba Sing Se",
+        "Escape Tunnel",
+        "Fabled Passage",
+        "Forest",
+        "Island",
+        "Mountain",
+        "Starting Town",
+        "Steam Vents",
+        "Thornspire Verge",
+        "Willowrush Verge"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.47
+  },
+  "dual_role_cards": [
+    {
+      "card": "Analyze the Pollen",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ba Sing Se",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Broadside Barrage",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Consult the Star Charts",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "dig_draw",
+        "engines",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Escape Tunnel",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabled Passage",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Magic",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Full Bore",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "mana_fixing",
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Vacuum",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Heritage Reclamation",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Icetill Explorer",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mightform Harmonizer",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mossborn Hydra",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Origin of Metalbending",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quantum Riddler",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spider-Sense",
+      "roles": [
+        "counterspells",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Surrak, Elusive Hunter",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thornspire Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wan Shi Tong, Librarian",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Willowrush Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast Consult the Star Charts before playing lands to scry for combo pieces.",
+    "Hold Full Bore in hand until you have sufficient lands and can cast it on opponent's turn.",
+    "Prioritize Harmonizer over early removal to maintain combo velocity.",
+    "Use scry effects to bury lands when you have enough mana sources.",
+    "Common mistake: Over-digging with Consult the Star Charts when you're behind on the board."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize playing lands and casting Mightform Harmonizer to establish mana advantage."
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Consult the Star Charts to scry for combo pieces and maintain hand size."
+    },
+    {
+      "trigger": "early game",
+      "line": "Avoid early combat unless necessary to stabilize against aggro."
+    }
+  ],
+  "kill_priority": [
+    "Consult the Star Charts",
+    "Full Bore",
+    "Mightform Harmonizer",
+    "Icetill Explorer",
+    "Mossborn Hydra",
+    "Quantum Riddler",
+    "Surrak, Elusive Hunter",
+    "Wan Shi Tong, Librarian"
+  ],
+  "interaction_to_disrupt": [
+    "Consult the Star Charts",
+    "Disdainful Stroke",
+    "Flashfreeze",
+    "Negate",
+    "Spell Snare",
+    "Spider-Sense",
+    "Mightform Harmonizer",
+    "Origin of Metalbending"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/temur-harmonizer-combo.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

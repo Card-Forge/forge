@@ -1,0 +1,127 @@
+{
+  "archetype": "Strefan, Maurer Progenitor",
+  "format": "commander",
+  "strategy_type": "control",
+  "overview": "This deck operates as a midrange-control hybrid that trades life for card advantage and board presence, aiming to out-grind opponents through efficient spell synergy, resource denial, and calculated trades. It wins by stabilizing early, leveraging Patron of the Vein and Sanctum Seeker for mana and pressure, and closing out games with Strefan's flying tokens and removal when opponents lack answers.",
+  "win_conditions": [
+    "Strefan with flying tokens, Patron of the Vein pumped to lethal, Sanctum Seeker mana for late-game spells, and removal to clear the path.",
+    "Sometimes a late-game creature like Bloodtithe Harvester or direct damage spells can close out the game."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing duals/shocklands if available), at least one early interaction (Thoughtseize, Fatal Push, Go Blank, or Lightning Strike), and a key piece (Strefan, Patron, or Sanctum Seeker).",
+      "Keep if you can play a land and a spell on turn 1, or two lands and a threat on turn 2."
+    ],
+    "mulligan_criteria": [
+      "Mulligan pure land hands, hands with only high-cost spells, or hands with multiple Strefans but no early interaction."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Thoughtseize to disrupt combo/ramp, or drop Patron if you expect a slow game.",
+      "Turn 2: Play a land, cast Sanctum Seeker for flexible mana, or play Strefan if you have the mana.",
+      "Sequence spells to trigger Strefan's token generation while preserving creatures for Patron's sacrifice outlet.",
+      "Avoid overextending if you lack removal."
+    ],
+    "mid_game": [
+      "Monitor your life total closely",
+      "Strefan's life loss is manageable early but becomes critical late-game.",
+      "Use Patron's sacrifice outlet to draw cards and pump threats, but avoid sacrificing to opponents' enter-the-battlefield triggers or graveyard synergies.",
+      "Use Sanctum Seeker to cast non-creature spells efficiently, and hoard removal for sweepers or key threats rather than trading into small blockers.",
+      "Commit threats when you have removal ready or when the opponent's hand is empty.",
+      "Hold back if they have sweepers, counterspells, or heavy interaction.",
+      "Use Strefan's flying tokens to trade efficiently against ground-based aggro or to pressure planeswalkers.",
+      "Prioritize clearing their most disruptive permanent before developing your own board."
+    ],
+    "late_game": [
+      "Strefan with flying tokens, Patron of the Vein pumped to lethal, Sanctum Seeker mana for late-game spells, and removal to clear the path.",
+      "Sometimes a late-game creature like Bloodtithe Harvester or direct damage spells can close out the game.",
+      "Go all-in when you have card advantage, removal for their blockers, and they lack sweepers or counterspells.",
+      "Commit when your life total is stable and you can trade efficiently, or when you can force them to use resources on your small threats."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Strefan, Maurer Progenitor",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Patron of the Vein",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sanctum Seeker",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Watch your life total carefully",
+    "Strefan's life loss can be fatal if you don't stabilize.",
+    "Patron of the Vein's sacrifice is a key resource, so avoid giving opponents free targets if they have graveyard synergies.",
+    "Sanctum Seeker provides flexible mana, so use it to cast non-creature spells efficiently.",
+    "Avoid overcommitting to tokens if you lack removal.",
+    "Common mistake: overusing Strefan's ability early and dying to a late-game sweeper.",
+    "Always track opponent's hand and board state before committing."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Split your spells across turns, use cheap interaction to clear the way, and cast Strefan's non-creature spells when they can't respond. If they counter your key threats, pivot to Patron's pump and token pressure.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use removal on mana dorks, and stabilize with removal. Don't get outpaced; use Patron to pressure and force them to use resources on your threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Early interaction, removal, and using tokens to block. Stabilize by turn 3-4. Use Sanctum Seeker to cast removal efficiently and Patron to trade into their threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card draw, apply pressure with tokens, and use removal to clear their threats. Force them to use resources on your small threats and close out the game before they can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Use Thoughtseize to disrupt their key pieces, trade efficiently, and leverage card draw. Prioritize clearing their removal and sweepers, and use Patron's pump to out-value their threats.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (Wrath of God, Anger of the Gods, Cyclonic Rift), counterspells, and graveyard recursion.",
+    "Note when opponents tap out for big threats or when they start hoarding removal.",
+    "Track their life total and board state to anticipate when they will go all-in or stabilize."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

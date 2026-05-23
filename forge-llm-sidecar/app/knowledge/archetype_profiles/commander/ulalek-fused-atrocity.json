@@ -1,0 +1,884 @@
+{
+  "schema_version": 1,
+  "name": "Ulalek, Fused Atrocity",
+  "format": "commander",
+  "colors": [
+    "B",
+    "G",
+    "R",
+    "U",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "This deck leverages a high volume of cheap noncreature spells to continuously generate mana and Golem tokens via Ulalek, transitioning into a massive board presence or explosive spell-slinging finisher. It excels against slower, resource-starved decks that cannot handle rapid board development or sudden mana surges.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 1,
+      "cards": [
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 12,
+      "cards": [
+        "Dreamstone Hedron",
+        "Endbringer",
+        "Ertai Resurrected",
+        "Kozilek's Command",
+        "Kutzil, Malamet Exemplar",
+        "Nulldrifter",
+        "Prophet of Distortion",
+        "Sally Sparrow",
+        "Sire of Stagnation",
+        "Snapping Voidcraw",
+        "Talisman of Impulse",
+        "Thief of Existence"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 6,
+      "cards": [
+        "Arid Archway",
+        "Conduit Pylons",
+        "Herald's Horn",
+        "Hidden Grotto",
+        "Path of Ancestry",
+        "Stock Up"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 12,
+      "cards": [
+        "Analyze the Pollen",
+        "Ash Barrens",
+        "Bring to Light",
+        "Chord of Calling",
+        "Cultivate",
+        "Eladamri's Call",
+        "Perplex",
+        "Rampant Growth",
+        "Sakura-Tribe Elder",
+        "Search for Tomorrow",
+        "Sowing Mycospawn",
+        "Urza's Cave"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 2,
+      "cards": [
+        "Sowing Mycospawn",
+        "Whirlwind Denial"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 39,
+      "cards": [
+        "Arcane Signet",
+        "Brood Monitor",
+        "Cloud Key",
+        "Dimensional Infiltrator",
+        "Drowner of Truth",
+        "Eldrazi Displacer",
+        "Emrakul's Hatcher",
+        "Endbringer",
+        "Ertai Resurrected",
+        "Eternal Witness",
+        "Glaring Fleshraker",
+        "Herald of Kozilek",
+        "Kirol, Attentive First-Year",
+        "Kutzil, Malamet Exemplar",
+        "Liberator, Urza's Battlethopter",
+        "Nameless Inversion",
+        "Nulldrifter",
+        "Omni-Changeling",
+        "Peter Parker's Camera",
+        "Pitiless Plunderer",
+        "Prophet of Distortion",
+        "Revitalizing Repast",
+        "Sakura-Tribe Elder",
+        "Sally Sparrow",
+        "Shields of Velis Vel",
+        "Sire of Stagnation",
+        "Snapping Voidcraw",
+        "Sol Ring",
+        "Sowing Mycospawn",
+        "Spawn-Gang Commander",
+        "Teferi, Mage of Zhalfir",
+        "Thief of Existence",
+        "Thran Dynamo",
+        "Ugin, the Ineffable",
+        "Ulalek, Fused Atrocity",
+        "Venser, Shaper Savant",
+        "Void Grafter",
+        "Waterlogged Teachings",
+        "Wilderness Reclamation"
+      ],
+      "mainboard_count": 39,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 26,
+      "cards": [
+        "Abstruse Appropriation",
+        "Adarkar Wastes",
+        "Brushland",
+        "Caves of Koilos",
+        "Crib Swap",
+        "Endbringer",
+        "Ertai Resurrected",
+        "Eternal Witness",
+        "Glaring Fleshraker",
+        "Karplusan Forest",
+        "Kozilek's Command",
+        "Kutzil, Malamet Exemplar",
+        "Llanowar Wastes",
+        "Shivan Reef",
+        "Sowing Mycospawn",
+        "Spawn-Gang Commander",
+        "Sulfurous Springs",
+        "Swords to Plowshares",
+        "Talisman of Curiosity",
+        "Talisman of Impulse",
+        "Talisman of Resilience",
+        "Talisman of Unity",
+        "Ugin, the Ineffable",
+        "Underground River",
+        "Venser, Shaper Savant",
+        "Yavimaya Coast"
+      ],
+      "mainboard_count": 26,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Chord of Calling",
+        "Omni-Changeling"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Counterspell",
+        "Ertai Resurrected",
+        "Negate",
+        "Perplex"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Void Grafter"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 9,
+      "cards": [
+        "Analyze the Pollen",
+        "Arid Archway",
+        "Conduit Pylons",
+        "Eternal Witness",
+        "Fact or Fiction",
+        "Hidden Grotto",
+        "Kozilek's Command",
+        "Malevolent Rumble",
+        "Pit of Offerings"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 6,
+      "cards": [
+        "Analyze the Pollen",
+        "Arid Archway",
+        "Dimensional Infiltrator",
+        "Eldrazi Displacer",
+        "Eternal Witness",
+        "Venser, Shaper Savant"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 6,
+      "cards": [
+        "Echoes of Eternity",
+        "Forsaken Monument",
+        "Glaring Fleshraker",
+        "Liberator, Urza's Battlethopter",
+        "Muraganda Raceway",
+        "Ulalek, Fused Atrocity"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 2,
+      "cards": [
+        "Sowing Mycospawn",
+        "Whirlwind Denial"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Kutzil, Malamet Exemplar"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 29,
+      "cards": [
+        "Abstruse Appropriation",
+        "Adarkar Wastes",
+        "Alchemist's Refuge",
+        "Arcane Signet",
+        "Arid Archway",
+        "Ash Barrens",
+        "Brushland",
+        "Caves of Koilos",
+        "Command Tower",
+        "Conduit Pylons",
+        "Exotic Orchard",
+        "Fellwar Stone",
+        "Hidden Grotto",
+        "Karplusan Forest",
+        "Llanowar Wastes",
+        "Muraganda Raceway",
+        "Path of Ancestry",
+        "Pit of Offerings",
+        "Pitiless Plunderer",
+        "Prismatic Lens",
+        "Shivan Reef",
+        "Spire of Industry",
+        "Sulfurous Springs",
+        "Underground River",
+        "Urza's Cave",
+        "Urza's Mine",
+        "Urza's Power Plant",
+        "Urza's Tower",
+        "Yavimaya Coast"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 33,
+      "cards": [
+        "Adarkar Wastes",
+        "Alchemist's Refuge",
+        "Arid Archway",
+        "Ash Barrens",
+        "Brushland",
+        "Caves of Koilos",
+        "Command Tower",
+        "Conduit Pylons",
+        "Exotic Orchard",
+        "Forest",
+        "Hidden Grotto",
+        "Island",
+        "Karplusan Forest",
+        "Llanowar Wastes",
+        "Mountain",
+        "Muraganda Raceway",
+        "Path of Ancestry",
+        "Pit of Offerings",
+        "Plains",
+        "Shivan Reef",
+        "Spire of Industry",
+        "Sulfurous Springs",
+        "Swamp",
+        "Underground River",
+        "Urza's Cave",
+        "Urza's Mine",
+        "Urza's Power Plant",
+        "Urza's Tower",
+        "Yavimaya Coast"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Ugin, the Ineffable"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.33
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abstruse Appropriation",
+      "roles": [
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Adarkar Wastes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Alchemist's Refuge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Analyze the Pollen",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arcane Signet",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Archway",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ash Barrens",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brushland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Caves of Koilos",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chord of Calling",
+      "roles": [
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Conduit Pylons",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dimensional Infiltrator",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eldrazi Displacer",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endbringer",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ertai Resurrected",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eternal Witness",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glaring Fleshraker",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hidden Grotto",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karplusan Forest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kozilek's Command",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kutzil, Malamet Exemplar",
+      "roles": [
+        "card_advantage",
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Liberator, Urza's Battlethopter",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Llanowar Wastes",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Muraganda Raceway",
+      "roles": [
+        "engines",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nulldrifter",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Omni-Changeling",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Perplex",
+      "roles": [
+        "counterspells",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pit of Offerings",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pitiless Plunderer",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prophet of Distortion",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sakura-Tribe Elder",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sally Sparrow",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shivan Reef",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sire of Stagnation",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snapping Voidcraw",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sowing Mycospawn",
+      "roles": [
+        "payoff_cards",
+        "removal",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spawn-Gang Commander",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spire of Industry",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sulfurous Springs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Talisman of Impulse",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thief of Existence",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ugin, the Ineffable",
+      "roles": [
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ulalek, Fused Atrocity",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground River",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Cave",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Mine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Power Plant",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Venser, Shaper Savant",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Void Grafter",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Whirlwind Denial",
+      "roles": [
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya Coast",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistakes include overcommitting to combat too early without securing the spell engine, or failing to use Golem tokens for mana acceleration.",
+    "Remember that Ulalek's upkeep trigger creates tokens for the entire turn, so casting spells in response to upkeep can double-dip.",
+    "Protect your signets and mana rocks, as they are critical for five-color consistency.",
+    "Avoid casting your most valuable noncreature spells when opponents have visible sweepers unless you have a guaranteed answer."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Sol Ring/Arcane Signet if possible, or cast a cheap cantrip/ramp spell."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Develop your mana base, cast another noncreature spell to trigger Ulalek if it's on board, or play a cheap creature/spellslinger."
+    },
+    {
+      "trigger": "early game",
+      "line": "Land sequencing: Prioritize fetches/shocks to find basics for signets, then duals for five-color fixing."
+    }
+  ],
+  "kill_priority": [
+    "Echoes of Eternity",
+    "Forsaken Monument",
+    "Glaring Fleshraker",
+    "Liberator, Urza's Battlethopter",
+    "Muraganda Raceway",
+    "Ulalek, Fused Atrocity",
+    "Sowing Mycospawn",
+    "Whirlwind Denial"
+  ],
+  "interaction_to_disrupt": [
+    "Counterspell",
+    "Ertai Resurrected",
+    "Negate",
+    "Perplex",
+    "Void Grafter",
+    "Abstruse Appropriation",
+    "Adarkar Wastes",
+    "Brushland"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/ulalek-fused-atrocity.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

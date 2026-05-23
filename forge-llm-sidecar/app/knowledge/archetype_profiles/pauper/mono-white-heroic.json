@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "name": "Mono-White Heroic",
+  "format": "pauper",
+  "colors": [
+    "W"
+  ],
+  "strategy_type": "tempo",
+  "expected_deck_total": 60,
+  "macro_plan": "Mono-White Heroic in Pauper leverages the Heroic keyword to generate incremental value and board presence while applying steady pressure. By equipping cheap artifacts and casting creatures that trigger Heroic, the deck aims to outpace opponents before they can stabilize. The strategy relies on efficient resource usage and relentless attrition to secure victory.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 2,
+      "cards": [
+        "Emerge Unscathed"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Dig Site Inventory"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 28,
+      "cards": [
+        "Akroan Skyguard",
+        "Deftblade Elite",
+        "Emerge Unscathed",
+        "Ethereal Armor",
+        "Faerie Macabre",
+        "Hyena Umbra",
+        "Lagonna-Band Trailblazer",
+        "Skyward Spider",
+        "Vault Skirge"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 10,
+      "cards": [
+        "Gut Shot",
+        "Hyena Umbra",
+        "Spirit Link"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 16,
+      "cards": [
+        "Benevolent Blessing",
+        "Emerge Unscathed",
+        "Mask of Law and Grace",
+        "Shield of Duty and Reason",
+        "Skyward Spider"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 6
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Dig Site Inventory",
+        "Faerie Macabre",
+        "Homestead Courage",
+        "Sentinel's Eyes"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 12,
+      "cards": [
+        "Dig Site Inventory",
+        "Homestead Courage",
+        "Sentinel's Eyes"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 10,
+      "cards": [
+        "Akroan Skyguard",
+        "Emerge Unscathed",
+        "Lagonna-Band Trailblazer"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Deftblade Elite",
+        "Lifelink"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 4,
+      "cards": [
+        "Remote Farm"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Plains",
+        "Remote Farm"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.4
+  },
+  "dual_role_cards": [
+    {
+      "card": "Akroan Skyguard",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deftblade Elite",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dig Site Inventory",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emerge Unscathed",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Macabre",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Homestead Courage",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hyena Umbra",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lagonna-Band Trailblazer",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Remote Farm",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sentinel's Eyes",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Skyward Spider",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Cast equipment or counter-granting spells after declaring attackers to maximize Heroic triggers",
+    "Hold up mana for combat tricks to surprise opponents and push unexpected damage",
+    "Prioritize keeping creatures alive to compound +1/+1 counters over multiple turns",
+    "Heroic triggers only when the enchantment targets only your creature",
+    "avoid multi-target enchantments."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and one-drop creatures to establish board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Trigger Heroic immediately with cheap equipment or spells"
+    },
+    {
+      "trigger": "early game",
+      "line": "Apply pressure while searching for key synergies"
+    }
+  ],
+  "kill_priority": [
+    "Akroan Skyguard",
+    "Emerge Unscathed",
+    "Lagonna-Band Trailblazer",
+    "Deftblade Elite",
+    "Ethereal Armor",
+    "Faerie Macabre",
+    "Hyena Umbra",
+    "Skyward Spider"
+  ],
+  "interaction_to_disrupt": [
+    "Benevolent Blessing",
+    "Emerge Unscathed",
+    "Mask of Law and Grace",
+    "Shield of Duty and Reason",
+    "Skyward Spider",
+    "Gut Shot",
+    "Hyena Umbra",
+    "Spirit Link"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/mono-white-heroic.dck",
+    "generated_at": "2026-05-23T04:43:59+00:00"
+  }
+}

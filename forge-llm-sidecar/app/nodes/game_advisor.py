@@ -634,7 +634,25 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     game_id = state.get("game_id", "")
     lock_key = _seat_cache_key(state)
     locked = _locked_archetype.get(lock_key) if game_id else None
-    if locked:
+    no_observation_mulligan = (
+        (state.get("decision_type") or "").lower() == "mulligan"
+        and not (state.get("observations") or [])
+    )
+    if no_observation_mulligan:
+        # Game-one mulligans happen before the AI has learned anything about
+        # the opponent. Preserve own-deck mulligan guidance, but do not spend an
+        # LLM call asking the model to guess from no evidence.
+        result = {
+            "archetype": "Unknown",
+            "confidence": 0.0,
+            "reasoning": "No opponent observations before mulligan; recognition skipped.",
+            "alternatives": [],
+        }
+        log.info(
+            "game_advisor: game %s mulligan has no opponent observations (skip recognition LLM)",
+            game_id,
+        )
+    elif locked:
         # Deck identity is settled; reuse it and skip the recognition LLM call.
         result = locked
         log.info(
@@ -643,9 +661,18 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         )
     else:
         try:
+            log.info(
+                "llm_call node=game_advisor purpose=recognition game=%s turn=%s",
+                game_id,
+                state.get("turn", 0),
+            )
             result = await generate_json(
                 _build_recognition_prompt(state),
                 system=_RECOGNITION_SYSTEM_PROMPT,
+            )
+            log.info(
+                "llm_result node=game_advisor purpose=recognition game=%s",
+                game_id,
             )
         except LLMError as exc:
             log.warning("game_advisor: recognition model call failed: %s", exc)

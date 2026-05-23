@@ -1,0 +1,121 @@
+{
+  "archetype": "Glintblade",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/glintblade.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Anchovy & Banana Pizza"
+    },
+    {
+      "qty": 4,
+      "name": "Ancient Den"
+    },
+    {
+      "qty": 2,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 4,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 2,
+      "name": "Eviscerator's Insight"
+    },
+    {
+      "qty": 3,
+      "name": "Foot Headquarters"
+    },
+    {
+      "qty": 2,
+      "name": "Foot Ninjas"
+    },
+    {
+      "qty": 4,
+      "name": "Glint Hawk"
+    },
+    {
+      "qty": 2,
+      "name": "Grim Bauble"
+    },
+    {
+      "qty": 1,
+      "name": "Kabira Crossroads"
+    },
+    {
+      "qty": 4,
+      "name": "Kor Skyfisher"
+    },
+    {
+      "qty": 4,
+      "name": "Lembas"
+    },
+    {
+      "qty": 1,
+      "name": "Mortuary Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Omen of the Dead"
+    },
+    {
+      "qty": 3,
+      "name": "Oroku Saki, Shredder Rising"
+    },
+    {
+      "qty": 3,
+      "name": "Orzhov Basilica"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Refurbished Familiar"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 2,
+      "name": "Thraben Charm"
+    },
+    {
+      "qty": 4,
+      "name": "Thraben Inspector"
+    },
+    {
+      "qty": 2,
+      "name": "Tithing Blade"
+    },
+    {
+      "qty": 4,
+      "name": "Vault of Whispers"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Arms of Hadar"
+    },
+    {
+      "qty": 4,
+      "name": "Duress"
+    },
+    {
+      "qty": 4,
+      "name": "Dust to Dust"
+    },
+    {
+      "qty": 2,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 2,
+      "name": "Tithing Blade"
+    }
+  ]
+}

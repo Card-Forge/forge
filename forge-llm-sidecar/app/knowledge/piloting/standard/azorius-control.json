@@ -12,11 +12,15 @@
     "keep_criteria": [
       "Has enough lands to develop the game plan",
       "Contains a win condition and control pieces",
-      "Includes card advantage tools like Stock Up or Three Steps Ahead"
+      "Includes card advantage tools like Stock Up or Three Steps Ahead",
+      "Keep any hand with 2+ lands and at least one removal or counter spell.",
+      "Prioritize hands with 3+ lands if they contain a turn-2 play (cantrip, early interaction, or board wipe).",
+      "With WU colors, aim for 2-3 lands that enter untapped or can fetch/fix to ensure consistent second lands."
     ],
     "mulligan_criteria": [
       "Lacks enough lands to progress the game plan",
-      "Relies solely on card draw to find mana"
+      "Relies solely on card draw to find mana",
+      "Mulligan pure land hands, hands with only high-cost spells (4+ mana), or hands lacking interaction if the metagame is aggressive."
     ],
     "examples": [
       {
@@ -52,17 +56,32 @@
   "game_plan": {
     "early_game": [
       "Play defensively and use Temporary Lockdown to buy time against early threats",
-      "Prioritize finding lands and early interaction like Ride's End"
+      "Prioritize finding lands and early interaction like Ride's End",
+      "Turn 1: Play a land, cast a cantrip or cheap interaction if available.",
+      "Turn 2: Develop mana, cast a one-mana cantrip/filter, or deploy a one-mana removal/counter.",
+      "If drawing Three Steps Ahead or Consult the Star Charts early, use them to dig for answers or set up the bottom of your library.",
+      "Land sequencing: Prioritize fetching/play lands that enter untapped to ensure consistent second lands and avoid mana screw."
     ],
     "mid_game": [
       "Stabilize the board using removal and counters",
       "Generate card advantage with Stock Up and Three Steps Ahead to find answers",
-      "Develop token engines like Overlord of the Mistmoors and Beza, the Bounding Spring"
+      "Develop token engines like Overlord of the Mistmoors and Beza, the Bounding Spring",
+      "Treat mana as a resource for answers, not just threats.",
+      "Hold open mana for interaction until the opponent commits.",
+      "Use Three Steps Ahead and Consult the Star Charts to filter dead draws and find answers to specific threats.",
+      "Avoid overcommitting to the board",
+      "control wins by trading resources efficiently.",
+      "Protect your own graveyard from hate, but be aware of opponent recursion or graveyard synergies."
     ],
     "late_game": [
       "Reach inevitability by controlling everything that happens",
       "Use Elspeth, Storm Slayer's abilities to create tokens and remove threats",
-      "Cast Jace, the Perfected Mind's ultimate to win by deck out"
+      "Cast Jace, the Perfected Mind's ultimate to win by deck out",
+      "The game is won by out-resourcing the opponent through card advantage and efficient removal, culminating in a decisive board wipe followed by a resilient threat or a series of filtered draws to find the winning answer.",
+      "Day of Judgment combined with a late-game threat or card advantage engine often closes the game.",
+      "Go all-in when you have established card advantage, the opponent has no interaction in hand, or when you've forced them to use their key answers.",
+      "Commit to a threat when you can protect it or when the board state is favorable.",
+      "Don't overcommit if the opponent still has unanswered interaction."
     ]
   },
   "key_cards": [
@@ -106,7 +125,13 @@
     "Don't rush things and let the opponent think they control the game before taking control back.",
     "Save resources and try to lead the opponent into making a mistake.",
     "Never pass a turn without enough mana to interact.",
-    "Don't let the opponent force you to play something at the end of your turn."
+    "Don't let the opponent force you to play something at the end of your turn.",
+    "Common mistake: Overusing Day of Judgment too early or too late.",
+    "Use it to maximize value, not just as a panic button.",
+    "Another mistake: Hoarding mana and missing interaction windows.",
+    "Always hold priority for counters/removal.",
+    "Unique interaction: Three Steps Ahead and Consult the Star Charts can be used to set up the bottom of your library with answers to specific threats, effectively turning your library into a sideboard.",
+    "Be mindful of format-specific hate cards that can disrupt your game plan."
   ],
   "matchups": [
     {
@@ -151,6 +176,31 @@
         "Zur, Eternal Schemer",
         "Overlords"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap threats or layered spells to force counters. Utilize cantrips to dig past counters. If possible, use artifact/enchantment spells or instant-speed threats that are harder to counter. Save your own counters for key spells and avoid overcommitting to the stack.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early interaction to disrupt mana development. Use Day of Judgment to reset when they commit to a big threat. Bring in artifact destruction and hand disruption. Don't trade resources; focus on stopping their ramp engines and out-value them with card selection.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap removal and counters. Use Day of Judgment if they establish a wide board. Filter aggressively to find answers. Don't overcommit to the board; control the pace until you can close. Prioritize life total early and don't let them stabilize with cheap blockers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure with resilient threats. Use card advantage to out-value them. Force them to use answers on less important spells. Use Three Steps Ahead and Consult the Star Charts to dig for the winning combination. Don't let them out-grind you; play efficiently and punish missteps.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-drawing and out-resolving. Prioritize card advantage spells. Save counters for their key threats or win conditions. Use Day of Judgment strategically to reset when you're ahead on board or when they're low on answers. Track their hand size and graveyard to predict their game plan.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -163,10 +213,12 @@
     "Abuelo's Awakening",
     "Omniscience",
     "Zur, Eternal Schemer",
-    "Up the Beanstalk"
+    "Up the Beanstalk",
+    "Watch for mana development (ramp vs control), hand size (combo vs control), and graveyard activity (recursion vs control)."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-the-new-azorius-control-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T06:15:22+00:00",
     "model": "local-model",
@@ -184,6 +236,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

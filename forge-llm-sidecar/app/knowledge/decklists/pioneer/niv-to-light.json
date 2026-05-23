@@ -1,0 +1,229 @@
+{
+  "archetype": "Niv to Light",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/niv-to-light.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abrupt Decay"
+    },
+    {
+      "qty": 4,
+      "name": "Ancient Cornucopia"
+    },
+    {
+      "qty": 1,
+      "name": "Beza, the Bounding Spring"
+    },
+    {
+      "qty": 1,
+      "name": "Bleachbone Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 2,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 4,
+      "name": "Bring to Light"
+    },
+    {
+      "qty": 2,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Elesh Norn, Mother of Machines"
+    },
+    {
+      "qty": 4,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Floodfarm Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Forest"
+    },
+    {
+      "qty": 2,
+      "name": "Hushwood Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Indatha Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "Jetmir's Garden"
+    },
+    {
+      "qty": 2,
+      "name": "Ketria Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Knight of Autumn"
+    },
+    {
+      "qty": 1,
+      "name": "Kolaghan's Command"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline Binding"
+    },
+    {
+      "qty": 3,
+      "name": "Lightning Helix"
+    },
+    {
+      "qty": 1,
+      "name": "Maelstrom Pulse"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Niv-Mizzet Reborn"
+    },
+    {
+      "qty": 1,
+      "name": "Niv-Mizzet, Supreme"
+    },
+    {
+      "qty": 2,
+      "name": "Omnath, Locus of Creation"
+    },
+    {
+      "qty": 1,
+      "name": "Overgrown Tomb"
+    },
+    {
+      "qty": 1,
+      "name": "Pillage the Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 3,
+      "name": "Professor Dellian Fel"
+    },
+    {
+      "qty": 1,
+      "name": "Raugrin Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Spara's Headquarters"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 1,
+      "name": "Sunbillow Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Sylvan Caryatid"
+    },
+    {
+      "qty": 1,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Ultima"
+    },
+    {
+      "qty": 4,
+      "name": "Up the Beanstalk"
+    },
+    {
+      "qty": 1,
+      "name": "Valki, God of Lies"
+    },
+    {
+      "qty": 3,
+      "name": "Vanishing Verse"
+    },
+    {
+      "qty": 1,
+      "name": "Wastewood Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 2,
+      "name": "Xander's Lounge"
+    },
+    {
+      "qty": 2,
+      "name": "Zagoth Triome"
+    },
+    {
+      "qty": 1,
+      "name": "Ziatora's Proving Ground"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Beza, the Bounding Spring"
+    },
+    {
+      "qty": 4,
+      "name": "Dovin's Veto"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 1,
+      "name": "Surrak Dragonclaw"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Ultima"
+    },
+    {
+      "qty": 1,
+      "name": "Unmoored Ego"
+    },
+    {
+      "qty": 1,
+      "name": "Yorion, Sky Nomad"
+    }
+  ]
+}

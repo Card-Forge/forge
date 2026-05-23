@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Thoughtseize and cheap spells",
       "Hands containing Moonshadow for early life drop",
-      "Hands with multiple low-cost cards to pump Shadow"
+      "Hands with multiple low-cost cards to pump Shadow",
+      "Keep hands with 2\u20133 lands, at least one Thoughtseize, and two sources of life loss (e.g., Dark Confidant, Moonshadow, Blood Crypt, or similar).",
+      "Keep hands with Death\u2019s Shadow + 2+ life loss outlets + discard."
     ],
     "mulligan_criteria": [
       "Hands lacking cheap spells or life-dropping effects",
       "Hands with only high-cost cards",
-      "Hands without Thoughtseize or early interaction"
+      "Hands without Thoughtseize or early interaction",
+      "Mulligan hands with 3+ lands, no life loss outlets, or only one land with no early interaction."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Cast Moonshadow to drop life and establish board presence",
       "Use Thoughtseize to remove key opponent threats or answers",
-      "Play cheap spells to gradually reduce life total"
+      "Play cheap spells to gradually reduce life total",
+      "Turn 1: Play a land, cast Thoughtseize (target removal, ramp, or early threat).",
+      "Turn 2: Play a land, cast Dark Confidant or Moonshadow to establish life loss.",
+      "If Death\u2019s Shadow is in hand and you have 2+ life loss sources, cast it on turn 2 or 3.",
+      "Sequence lands to ensure you can cast key spells at instant speed when needed."
     ],
     "mid_game": [
       "Cast Death's Shadow and immediately pump it with life loss",
       "Sequence Moonshadow's ability before combat to maximize power",
-      "Maintain card advantage while blocking or attacking with Shadow"
+      "Maintain card advantage while blocking or attacking with Shadow",
+      "Prioritize life loss outlets over card draw once Death\u2019s Shadow is on board.",
+      "Use Thoughtseize to remove opponent\u2019s interaction rather than redundant threats.",
+      "Manage your life total carefully\u2014never drop below 1 unless you can immediately stabilize or win.",
+      "Commit Death\u2019s Shadow only when you have consistent life loss (2+ sources) and opponent has no immediate sweepers or targeted removal in hand.",
+      "Hold back if they show signs of a board wipe or heavy interaction.",
+      "Use discard to disrupt their development rather than trading creatures."
     ],
     "late_game": [
       "Use massive Death's Shadow to clear board or close game",
       "Avoid dropping to 0 life while maintaining pressure",
-      "Leverage card draw and removal to outlast opponent"
+      "Leverage card draw and removal to outlast opponent",
+      "Death\u2019s Shadow (often 13+ power), Moonshadow, or a late-game Dark Confidant.",
+      "Close the game by attacking with Shadow while using discard to remove blockers or protection, or by out-valuing them with card advantage.",
+      "Go all-in when you have 2+ life loss sources, opponent has no sweepers or removal in hand, and you can reasonably close the game in 1\u20132 turns.",
+      "Also commit when you can discard their only answer to Shadow."
     ]
   },
   "key_cards": [
@@ -59,7 +76,11 @@
     "Always activate Moonshadow's ability before casting Death's Shadow to ensure it enters at maximum power",
     "Hold Thoughtseize for opponent's key threats or removal spells",
     "Drop life gradually using cheap spells to avoid accidentally hitting 0",
-    "Sequence removal after opponent commits resources to maximize card advantage"
+    "Sequence removal after opponent commits resources to maximize card advantage",
+    "Common mistakes include casting Shadow too early without enough life loss, overcommitting to Dark Confidant without protection, and mismanaging your life total.",
+    "Moonshadow can serve as both a life loss outlet and a protective tool\u2014use it flexibly.",
+    "Always calculate your life total before combat to avoid accidental loss.",
+    "Format legality of specific cards may vary, so adjust land and spell counts accordingly."
   ],
   "matchups": [
     {
@@ -88,6 +109,21 @@
         "Protection spells",
         "Graveyard recursion"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtseize to remove counterspells. Cast Shadow at end step or when they\u2019re tapped out. Leverage Moonshadow\u2019s abilities to protect your plays or value out their interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Thoughtseize for mana dorks, ramp spells, or extra lands. Apply early pressure to force them to interact before they stabilize. Use Surgical Strike to remove key threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war by prioritizing life loss outlets and Shadow. Surgical Strike their Shadow or key interaction. Go Blank to disrupt their life loss engine. Track life totals carefully to out-value them in combat.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -95,10 +131,13 @@
     "Board wipes",
     "Counterspells",
     "Life gain effects",
-    "Graveyard recursion"
+    "Graveyard recursion",
+    "Watch for sweepers, targeted removal, counterspells, and graveyard hate.",
+    "Note when opponents tap out for threats versus holding up interaction, and track their life total to calculate Death\u2019s Shadow\u2019s power accurately."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:16:57+00:00",
     "model": "local-model",
@@ -127,6 +166,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

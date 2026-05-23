@@ -63,6 +63,8 @@ public final class SelfPlayRunner {
     private static final String RECOGNITION_SYS_PROP = "forge.ai.deckRecognition";
     private static final String PILOT_MODE_SYS_PROP = "forge.ai.deckRecognition.pilotMode";
     private static final String SIDECAR_URL_SYS_PROP = "forge.ai.deckRecognition.url";
+    private static final String RUN_ID_SYS_PROP = "forge.ai.deckRecognition.runId";
+    private static final int DEFAULT_SIM_TIMEOUT_SECONDS = 1800;
 
     private static final Gson GSON = new Gson();
 
@@ -102,6 +104,8 @@ public final class SelfPlayRunner {
         FModel.getPreferences().setPref(FPref.UI_ENABLE_DECK_RECOGNITION, true);
         System.setProperty(RECOGNITION_SYS_PROP, "true");
         System.setProperty(SIDECAR_URL_SYS_PROP, url);
+        final String runId = (label.isBlank() ? config : label) + "-" + System.currentTimeMillis();
+        System.setProperty(RUN_ID_SYS_PROP, runId);
         if (goldfish) {
             // Quarantined solve prompt; pilotMode/url props survive createAiPlayer.
             System.setProperty(PILOT_MODE_SYS_PROP, "solve");
@@ -129,9 +133,7 @@ public final class SelfPlayRunner {
 
         final GameRules rules = new GameRules(type);
         rules.setAppliedVariants(java.util.EnumSet.of(type));
-        if (params.containsKey("c")) {
-            rules.setSimTimeout(intParam(params, "c", 120));
-        }
+        rules.setSimTimeout(intParam(params, "c", DEFAULT_SIM_TIMEOUT_SECONDS));
 
         final String p1PlayerName = "Ai(1)-" + p1Deck.getName();
         final String p2PlayerName = "Ai(2)-" + p2Deck.getName();
@@ -180,10 +182,12 @@ public final class SelfPlayRunner {
                                 final String pilotMode, final Path out,
                                 final List<Map<String, Object>> recorded) {
         final Game game = mc.createGame();
+        boolean timedOut = false;
         try {
             TimeLimitedCodeBlock.runWithTimeout(() -> mc.startGame(game),
                     rules.getSimTimeout(), TimeUnit.SECONDS);
         } catch (final TimeoutException e) {
+            timedOut = true;
             System.out.println("Game " + (iGame + 1) + " timed out (recorded as no-win).");
         } catch (final Exception | StackOverflowError e) {
             e.printStackTrace();
@@ -193,28 +197,31 @@ public final class SelfPlayRunner {
             }
         }
 
-        final String winnerName = winnerName(game);
+        // A timeout interrupts the game thread. During unwind, Forge may leave a
+        // partial outcome behind; do not trust it as a real game result.
+        final String winnerName = timedOut ? null : winnerName(game);
 
         if (p1Seat) {
             recorded.add(writeRecord(out, game, 0, p1PlayerName, p2PlayerName,
-                    p1Deck.getName(), p2Deck.getName(), pilotMode, winnerName));
+                    p1Deck.getName(), p2Deck.getName(), pilotMode, winnerName, timedOut));
         }
         if (p2Seat) {
             recorded.add(writeRecord(out, game, 1, p2PlayerName, p1PlayerName,
-                    p2Deck.getName(), p1Deck.getName(), pilotMode, winnerName));
+                    p2Deck.getName(), p1Deck.getName(), pilotMode, winnerName, timedOut));
         }
 
         // Report the winner's OWN turn count, not the global game turn.
         final int winTurn = winnerName == null ? safeTurn(game) : playerTurn(game, winnerName);
-        System.out.printf("Game %d: winner=%s turn=%d%n", iGame + 1,
-                winnerName == null ? "(none)" : winnerName, winTurn);
+        System.out.printf("Game %d: winner=%s turn=%d%s%n", iGame + 1,
+                winnerName == null ? "(none)" : winnerName, winTurn,
+                timedOut ? " timed_out=true" : "");
     }
 
     private static Map<String, Object> writeRecord(final Path out, final Game game,
                                     final int seat, final String playerName,
                                     final String opponentPlayerName, final String deckName,
                                     final String opponentName, final String pilotMode,
-                                    final String winnerName) {
+                                    final String winnerName, final boolean timedOut) {
         final boolean won = winnerName != null && winnerName.equals(playerName);
         final int turn = playerTurn(game, playerName);
         final Map<String, Object> rec = new LinkedHashMap<>();
@@ -228,6 +235,7 @@ public final class SelfPlayRunner {
         rec.put("won", won);
         rec.put("win_turn", won ? turn : null);
         rec.put("turns", turn);
+        rec.put("timed_out", timedOut);
         try {
             Files.write(out, (GSON.toJson(rec) + System.lineSeparator()).getBytes(StandardCharsets.UTF_8),
                     StandardOpenOption.CREATE, StandardOpenOption.APPEND);
@@ -384,5 +392,6 @@ public final class SelfPlayRunner {
         System.out.println("  -record:  POST the run to the sidecar results store on finish (default true).");
         System.out.println("  -url:     shared sidecar URL (default http://localhost:18970).");
         System.out.println("  -url1/-url2: per-seat sidecar URLs for the mirror gauntlet (two dashboards). Default to -url.");
+        System.out.println("  -c:       per-game timeout in seconds (default " + DEFAULT_SIM_TIMEOUT_SECONDS + ").");
     }
 }

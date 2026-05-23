@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two or more lands and a ramp spell",
       "Scapeshift paired with early landfall triggers",
-      "Spelunking to fix mana and set up the graveyard"
+      "Spelunking to fix mana and set up the graveyard",
+      "Keep hands with 2-3 lands (including fetches/mana sources), Spelunking, Lumra, or other ramp spells.",
+      "Prioritize hands that can reliably hit 3, 4, and 5 mana on curve."
     ],
     "mulligan_criteria": [
       "Zero lands or only high-cost cards",
       "Multiple Scapeshifts without landfall outlets",
-      "Hands lacking early interaction or acceleration"
+      "Hands lacking early interaction or acceleration",
+      "Mulligan pure curve decks, hands with only 1 land, or hands featuring Scapeshift without sufficient ramp or card draw to support it."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands consistently to build a base",
       "Use Spelunking to fetch specific land types and sacrifice lands to the graveyard",
-      "Deploy early landfall creatures to apply pressure"
+      "Deploy early landfall creatures to apply pressure",
+      "Turn 1: Play a land, cast Spelunking or a ramp spell.",
+      "Turn 2: Play a land, cast Lumra or another acceleration piece.",
+      "Sequence lands to ensure you can cast your spells on curve",
+      "use fetches to find duals or shock lands as needed.",
+      "Turn 3: Play a land, cast a second ramp or draw spell."
     ],
     "mid_game": [
       "Cast Scapeshift to replay lands from the graveyard",
       "Chain landfall triggers to deploy threats and generate value",
-      "Manage life total carefully when using life-drain ramp"
+      "Manage life total carefully when using life-drain ramp",
+      "Prioritize keeping lands in play and in the graveyard for Scapeshift targets.",
+      "Use Lumra\u2019s card draw to dig for Scapeshift or finishers rather than overcommitting to creatures.",
+      "Manage your graveyard carefully if hate is present, and avoid casting Scapeshift if you don\u2019t have enough lands to sacrifice for a meaningful board state.",
+      "Commit threats only when you have a clear path to going off or can stabilize against aggression.",
+      "Hold back Scapeshift if the opponent has significant removal, counters, or hate in play.",
+      "Use counterspells to protect key ramp pieces or the Scapeshift itself, and only attack with creatures when you can safely close the game or force a favorable trade."
     ],
     "late_game": [
       "Flood the board with additional lands to produce massive mana",
       "Cast win-condition threats that scale with land count",
-      "Use excess mana to cast multiple spells or activate abilities"
+      "Use excess mana to cast multiple spells or activate abilities",
+      "Scapeshift into Forest's Caress, Tron, or a massive creature/planeswalker.",
+      "Sometimes just going wide with basic lands and a finisher.",
+      "When you have 7+ lands in play/graveyard, a clear path to cast Scapeshift, and the opponent has no immediate answer.",
+      "Also commit if you're behind on board and need to go off to win."
     ]
   },
   "key_cards": [
@@ -58,7 +76,11 @@
   "sequencing_tips": [
     "Prioritize putting lands into the graveyard before casting Scapeshift",
     "Trigger landfall abilities in an order that maximizes board impact",
-    "Save Spelunking for when you need specific land types or graveyard fuel"
+    "Save Spelunking for when you need specific land types or graveyard fuel",
+    "Common mistakes: Going off too early without a finisher, overcommitting to creatures, forgetting that Scapeshift sacrifices lands (so you need enough in play/graveyard), miscounting landfall triggers.",
+    "Unique interactions: Lumra's landfall can trigger multiple times if you fetch/Scapeshift.",
+    "Spelunking can find basic lands for Scapeshift targets.",
+    "Always track opponent's removal count."
   ],
   "matchups": [
     {
@@ -87,6 +109,21 @@
         "Tempo creatures",
         "Resource denial"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap threats to force counters, cast Scapeshift in response to a counter, or use counterspells to protect your own spells. Sequence carefully.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them or disrupt their mana. Use counterspells on key ramp spells. Scapeshift faster.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a resource race. Win the card advantage war, protect your Scapeshift, and use counterspells to protect your own finishers. Track graveyard hate.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -94,10 +131,14 @@
     "Lightning Strike",
     "Thoughtseize",
     "Karn, the Great Creator",
-    "Lurrus of the Dream-Den"
+    "Lurrus of the Dream-Den",
+    "Watch for graveyard hate (Rest in Peace, Leyline of Punishment), counterspells, and board wipes.",
+    "Note if the opponent is playing fast aggro (track life total and board presence) or control (track removal count and available counters).",
+    "Pay attention to when they tap out, as that\u2019s your window to go off."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T04:46:08+00:00",
     "model": "local-model",
@@ -113,6 +154,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,173 @@
+{
+  "archetype": "Dimir Midrange",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/dimir-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 4,
+      "name": "Change the Equation"
+    },
+    {
+      "qty": 4,
+      "name": "Clearwater Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Cling to Dust"
+    },
+    {
+      "qty": 3,
+      "name": "Cryogen Relic"
+    },
+    {
+      "qty": 4,
+      "name": "Darkslick Shores"
+    },
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 1,
+      "name": "Field of Ruin"
+    },
+    {
+      "qty": 1,
+      "name": "Fountainport"
+    },
+    {
+      "qty": 4,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Go Blank"
+    },
+    {
+      "qty": 2,
+      "name": "Hive of the Eye Tyrant"
+    },
+    {
+      "qty": 4,
+      "name": "Hopeless Nightmare"
+    },
+    {
+      "qty": 1,
+      "name": "Invoke Despair"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 3,
+      "name": "Nowhere to Run"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Petrified Hamlet"
+    },
+    {
+      "qty": 1,
+      "name": "Ritual of Soot"
+    },
+    {
+      "qty": 2,
+      "name": "Sheoldred, the Apocalypse"
+    },
+    {
+      "qty": 3,
+      "name": "Shipwreck Marsh"
+    },
+    {
+      "qty": 3,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 4,
+      "name": "Stormchaser's Talent"
+    },
+    {
+      "qty": 3,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "This Town Ain't Big Enough"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 1,
+      "name": "Thundertrap Trainer"
+    },
+    {
+      "qty": 4,
+      "name": "Underground River"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Aether Gust"
+    },
+    {
+      "qty": 1,
+      "name": "Extinction Event"
+    },
+    {
+      "qty": 1,
+      "name": "Flashfreeze"
+    },
+    {
+      "qty": 1,
+      "name": "Go Blank"
+    },
+    {
+      "qty": 2,
+      "name": "Grim Bauble"
+    },
+    {
+      "qty": 1,
+      "name": "Invoke Despair"
+    },
+    {
+      "qty": 2,
+      "name": "Narset, Parter of Veils"
+    },
+    {
+      "qty": 1,
+      "name": "Nowhere to Run"
+    },
+    {
+      "qty": 1,
+      "name": "Ritual of Soot"
+    },
+    {
+      "qty": 3,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Yorion, Sky Nomad"
+    }
+  ]
+}

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early land destruction like Thermokarst or Avenging Hunter",
       "Mana base that supports at least two colors by turn two",
-      "Cheap creatures or Utopia Sprawl to establish early board presence"
+      "Cheap creatures or Utopia Sprawl to establish early board presence",
+      "Keep hands with 2-3 lands, at least one land destruction spell (Thermokarst/Ruination), and a turn-2 threat or interaction.",
+      "Prioritize hands that can play a land and a spell on turn 1, or two lands and a spell on turn 2."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays or land destruction",
       "Mana screws with too many lands or too few",
-      "High-cost cards without early support or draw"
+      "High-cost cards without early support or draw",
+      "Mulligan on 3+ lands with no early plays, or 2+ lands with only removal and no threats/land destruction."
     ],
     "examples": []
   },
@@ -25,17 +28,32 @@
     "early_game": [
       "Play lands and cheap threats to establish board presence",
       "Use Thermokarst or Avenging Hunter to destroy key opponent lands",
-      "Prioritize disrupting aggressive strategies before they gain momentum"
+      "Prioritize disrupting aggressive strategies before they gain momentum",
+      "Turn 1: Play a land, cast a cantrip or cheap interaction if available, or hold for a turn 2 land destruction.",
+      "Turn 2: Cast Thermokarst to disrupt opponent's mana, or develop a threat like Avenging Hunter.",
+      "Prioritize fetching/shocking for optimal land drops.",
+      "Against aggro, hold removal for early threats",
+      "against control/ramp, prioritize land destruction."
     ],
     "mid_game": [
       "Maintain board control while generating value with Utopia Sprawl",
       "Sequence land destruction to hit lands before opponent casts high-cost spells",
-      "Use blue cards for card draw or removal to stabilize against board wipes"
+      "Use blue cards for card draw or removal to stabilize against board wipes",
+      "Conserve mana for interaction until you establish board control.",
+      "Use cantrips to dig for answers or threats.",
+      "Avoid overcommitting to Utopia Sprawl without a threat to pump.",
+      "Manage graveyard by tracking recursion threats",
+      "hold graveyard hate if the opponent is building toward it.",
+      "Commit threats only when you have removal or land destruction to protect them or answer the opponent's response."
     ],
     "late_game": [
       "Flood the board with Treefolk tokens from Utopia Sprawl",
       "Race control decks by pushing damage while their mana is disrupted",
-      "Trade efficiently to preserve lands and close out the game"
+      "Trade efficiently to preserve lands and close out the game",
+      "Utopia Sprawl + Avenging Hunter is the primary win condition, often supported by direct damage or discard to clear the path.",
+      "Secondary finishers include resilient midrange threats and pump spells that close out games in one or two turns.",
+      "Go all-in when you have board control, the opponent has no answers to your pump, or you can clear their blockers with removal/damage.",
+      "Commit when you've disrupted their mana and they're on a resource deficit."
     ]
   },
   "key_cards": [
@@ -59,7 +77,13 @@
     "Hold Thermokarst until after opponent commits to a land or before combat to maximize impact",
     "Trigger Avenging Hunter's death ability strategically, often by trading it into a removal spell or sacrificing it",
     "Use Utopia Sprawl's untap ability to cast multiple spells in a turn or to generate tokens for combat tricks",
-    "Prioritize destroying opponent's nonbasic lands or lands that enable their key strategies"
+    "Prioritize destroying opponent's nonbasic lands or lands that enable their key strategies",
+    "Utopia Sprawl + Avenging Hunter is a powerful but fragile combo",
+    "protect it with removal or discard.",
+    "Thermokarst is your best early game spell against ramp/affinity but useless against non-land strategies.",
+    "Don't overcommit to land destruction in control mirrors.",
+    "Watch for graveyard recursion in Jund/Wildfire.",
+    "Practice sequencing cantrips to dig for answers without flooding your board."
   ],
   "matchups": [
     {
@@ -88,15 +112,34 @@
         "Removal spells",
         "Card advantage engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig past counters, cast spells in response to their counters, or use uncounterable threats. Hold up mana for protection, but don't overextend. Consider discard to remove key pieces before they can be countered.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Aggressive land destruction is key. Prioritize Thermokarst on turn 1-2. Use discard to remove key ramp pieces. Stabilize with early threats and removal. Don't let them get to 4+ lands.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through card advantage and efficient trades. Prioritize keeping removal for their threats. Use discard to disrupt their game plan. Win the resource war by out-grinding them with better sequencing and sideboard cards.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Early aggressive creatures that apply pressure before land destruction can stabilize",
     "Board wipe spells that clear your creature board and tokens",
-    "Card draw and value engines that outpace your resource generation"
+    "Card draw and value engines that outpace your resource generation",
+    "Watch for mana acceleration (Elves, Affinity), combo win conditions (Madness, Terror), and control win cons (Jund, Grixis).",
+    "Key tells: opponent playing multiple lands early, drawing extra cards, or setting up enchantments/auras.",
+    "Track their graveyard for recursion or mill threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T11:00:17+00:00",
     "model": "local-model",
@@ -112,6 +155,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

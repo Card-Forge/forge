@@ -1,0 +1,131 @@
+{
+  "archetype": "Through the Breach",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Through the Breach is a combo-control deck that uses cheap, aggressive threats and pump spells to pressure the board, then casts Through the Breach to exile a massive Eldrazi from your library or graveyard. It wins by leveraging Emrakul\u2019s game-ending enter-the-battlefield triggers or Ulamog\u2019s board-clearing and card advantage to overwhelm opponents before they can stabilize.",
+  "win_conditions": [
+    "Through the Breach targeting Emrakul, the Aeons Torn (exiles half opponent\u2019s hand, shuffles library, draws cards) or Ulamog, the Defiler (exiles two permanents, draws cards).",
+    "Emrakul typically wins immediately",
+    "Ulamog sets up an inevitable win by clearing the board and refilling your hand."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 1\u20132 lands, Kessig Wolf Run, at least one cheap threat (Goblin Guide, Monastery Swiftspear, Krenko, etc.), and Through the Breach.",
+      "Keep hands with discard (Thoughtseize, Liliana) if paired with a threat or Wolf Run."
+    ],
+    "mulligan_criteria": [
+      "Mulligan flood, hands with only lands, or hands lacking cheap threats/Wolf Run unless you have multiple discard spells to disrupt early."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Kessig Wolf Run if available, or play a 1-mana threat.",
+      "Turn 2: Play a land, cast another cheap threat or pump spell.",
+      "If you have 5 mana and a threat, cast Through the Breach targeting Emrakul/Ulamog.",
+      "Prioritize setting up a 3/3 or larger threat by turn 3 to pressure and threaten a TtB finish on turn 3 or 4."
+    ],
+    "mid_game": [
+      "Treat your graveyard as a secondary hand",
+      "Through the Breach must be cast from the graveyard, so avoid unnecessary graveyard fillers unless they enable the combo.",
+      "Preserve mana for TtB (5 mana) and interaction.",
+      "Use discard to remove key opponent cards rather than hoarding it.",
+      "Track your library for Emrakul/Ulamog and ensure you have enough mana to cast TtB when needed.",
+      "Commit threats early to pressure and force interaction, but hold back a pump spell or discard if the opponent has significant removal or counterspells.",
+      "If you\u2019ve established a 4/4+ threat, you can often commit fully to casting TtB, as the Eldrazi\u2019s ETB will likely win the game or clear the board.",
+      "Avoid overextending if you lack a TtB backup."
+    ],
+    "late_game": [
+      "Through the Breach targeting Emrakul, the Aeons Torn (exiles half opponent\u2019s hand, shuffles library, draws cards) or Ulamog, the Defiler (exiles two permanents, draws cards).",
+      "Emrakul typically wins immediately",
+      "Ulamog sets up an inevitable win by clearing the board and refilling your hand.",
+      "Go all-in when you have a pumped threat, 5 mana available, and the opponent has no counterspells or instant-speed interaction.",
+      "Also commit if you\u2019re ahead on board and need to close the game before they can stabilize.",
+      "If you\u2019ve forced the opponent to use their interaction on your early threats, it\u2019s usually safe to cast TtB."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Through the Breach",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Emrakul, the Aeons Torn",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Ulamog, the Defiler",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Through the Breach is a sorcery, so it can be countered",
+    "always time it carefully.",
+    "Emrakul\u2019s ETB triggers are mandatory and cannot be responded to, making it a hard win condition.",
+    "Avoid casting TtB if you don\u2019t have a threat to protect it or if the opponent has significant interaction.",
+    "Kessig Wolf Run is essential for pumping threats and enabling early TtB.",
+    "Watch out for Blood Moon and other mana disruption, as your deck is mana-intensive.",
+    "Finally, practice recognizing when to go for the TtB finish versus when to stabilize, as misplays here are the most common reason for losses."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells before casting TtB. Cast TtB in response to their counterspells if you can, or wait until they tap out for interaction. If they have multiple counters, prioritize discarding them or using cheap threats to pressure them into using mana defensively.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race with cheap threats and use discard to disrupt their mana development. If they outpace you, cast TtB to exile their permanents with Ulamog or clear their hand with Emrakul. Don\u2019t overcommit to a race if they have heavy ramp; instead, aim to stabilize and win with the Eldrazi.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use cheap threats to race and discard to disrupt their early plays. Cast TtB to stabilize by exiling their board with Ulamog or drawing into answers with Emrakul. Prioritize survival over aggression if you\u2019re low on life, but don\u2019t delay TtB if it\u2019s your only win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early with threats to force them to use removal or counterspells. Use discard to remove key answers (counterspells, board wipes). Cast TtB when they tap out for interaction or after they\u2019ve used their removal. Emrakul\u2019s ETB bypasses board wipes and hand size limits, making it ideal against control.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Track the opponent\u2019s graveyard to know if they have Through the Breach. Use discard to remove it or their Eldrazi. Race with threats and prioritize killing their pump spells or Wolf Run. Sideboard in more discard and graveyard hate to disrupt their combo. Win by going first and establishing early pressure, or by out-resolving their TtB with better hand disruption.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for counterspells (especially in control), board wipes (Supreme Verdict, Anger of the Gods), and graveyard hate (Rest in Peace, Leyline of the Void).",
+    "Note when opponents tap out for interaction, as this is your window to cast TtB.",
+    "Track their hand size",
+    "Emrakul\u2019s ETB exiles half, so a full hand is a major advantage."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/modern.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

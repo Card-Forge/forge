@@ -1,0 +1,123 @@
+{
+  "archetype": "Ayula, Queen Among Bears",
+  "format": "commander",
+  "strategy_type": "ramp",
+  "overview": "Green tribal beatdown focused on overwhelming the board with trampling Bear tokens and applying relentless pressure. Wins by out-scaling opponents through token generation, direct damage, and unblockable threats that punish reactive strategies.",
+  "win_conditions": [
+    "Ayula attacking with multiple tokens, often boosted by pump spells.",
+    "Unblocked trampling damage is the primary win condition."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 Forests and a turn-1 or turn-2 threat (Ayula, Werebear, or a cheap bear generator/pump)."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 0-1 lands, multiple high-cost spells without early threats, or hands that cannot cast Ayula/Werebear by turn 2-3."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a Forest.",
+      "Turn 2: Cast Werebear or Ayula if mana allows",
+      "otherwise, play a land and hold for turn 3.",
+      "Sequence lands to hit 3 mana on turn 2 or 4 mana on turn 3.",
+      "Attack immediately to establish board presence and trigger token generation."
+    ],
+    "mid_game": [
+      "Prioritize mana efficiency",
+      "avoid overcommitting to one side of the board if you cannot follow up.",
+      "Use card draw to maintain hand size, as bear tribal decks often run thin.",
+      "Protect key threats with pump spells or protection if available.",
+      "Commit threats when you have removal or protection ready for the opponent's answer.",
+      "Hold back if the opponent has a board wipe or hard counter in play.",
+      "Use tokens to trade efficiently and force unfavorable blocks."
+    ],
+    "late_game": [
+      "Ayula attacking with multiple tokens, often boosted by pump spells.",
+      "Unblocked trampling damage is the primary win condition.",
+      "Go all-in when you have established a board of 3+ creatures, the opponent has no sweepers, or you can clear their blockers with removal/pump.",
+      "Also commit when you have card advantage and can out-value their removal."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ayula, Queen Among Bears",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Wilson, Refined Grizzly",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Werebear",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Ayula's token generation scales with combat, so attacking with multiple creatures maximizes value.",
+    "Watch out for cantrips or cheap removal that can trade favorably against your tokens.",
+    "Avoid overcommitting to a single attack if you suspect a board wipe",
+    "use your tokens to probe for answers."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap threats, multikicker, or split the cast. Attack with multiple small creatures to force counter decisions. Use pump spells on resolution or cast threats in response to counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race them before they hit their big mana. Use removal to answer their ramp targets or finishers. Consider hate bears or discard if the format allows.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with removal and board wipes. Play defensively until you can establish your own board, then transition to offense. Use life gain to survive early damage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure consistently to force them to use resources on interaction rather than combo/finishers. Use unblockable threats and pump spells to bypass board wipes. Out-value them with card draw and efficient removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing with better card draw, more efficient removal, or superior pump spells. Trade creatures efficiently and prioritize clearing their Ayula/Werebear first.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes, targeted removal, and counterspells.",
+    "Note if the opponent is playing sweepers or hate cards.",
+    "Track their mana development to anticipate when they can cast their answers."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

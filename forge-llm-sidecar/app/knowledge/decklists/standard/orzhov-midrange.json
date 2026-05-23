@@ -1,0 +1,117 @@
+{
+  "archetype": "Orzhov Midrange",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/orzhov-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Abandoned Air Temple"
+    },
+    {
+      "qty": 4,
+      "name": "Bleachbone Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Cecil, Dark Knight"
+    },
+    {
+      "qty": 4,
+      "name": "Concealed Courtyard"
+    },
+    {
+      "qty": 4,
+      "name": "Daydream"
+    },
+    {
+      "qty": 4,
+      "name": "Deep-Cavern Bat"
+    },
+    {
+      "qty": 4,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 2,
+      "name": "Haliya, Guided by Light"
+    },
+    {
+      "qty": 4,
+      "name": "Momo, Friendly Flier"
+    },
+    {
+      "qty": 4,
+      "name": "Nurturing Pixie"
+    },
+    {
+      "qty": 6,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Practiced Offense"
+    },
+    {
+      "qty": 4,
+      "name": "Sage of the Skies"
+    },
+    {
+      "qty": 1,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 1,
+      "name": "Shoot the Sheriff"
+    },
+    {
+      "qty": 4,
+      "name": "Springleaf Drum"
+    },
+    {
+      "qty": 4,
+      "name": "Starfield Shepherd"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Tinybones Joins Up"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Barrensteppe Siege"
+    },
+    {
+      "qty": 2,
+      "name": "Clarion Conqueror"
+    },
+    {
+      "qty": 3,
+      "name": "Duress"
+    },
+    {
+      "qty": 1,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 4,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 1,
+      "name": "Split Up"
+    },
+    {
+      "qty": 1,
+      "name": "Tomik, Wielder of Law"
+    }
+  ]
+}

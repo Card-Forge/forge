@@ -1,0 +1,124 @@
+{
+  "archetype": "Golgari Gardens",
+  "format": "pauper",
+  "strategy_type": "midrange",
+  "overview": "Golgari Gardens is a resilient token midrange deck that wins by generating a growing board of Saprolings, using them as fuel for efficient removal and card advantage, and leveraging recurring threats like Avenging Hunter to out-value opponents in attrition wars.",
+  "win_conditions": [
+    "A board of 4+ Saprolings, Avenging Hunter, and efficient removal.",
+    "Win by trading up with Fanatical Offering, pumping your board with Defile, and racing to lethal or out-grinding control through card advantage."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing duals or fetches if available, otherwise basics that hit B/G), at least one early interaction or threat, and a curve-1/2 play."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 3+ lands, no early plays, or only removal without threats or mana development."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land.",
+      "Turn 2: Develop mana and cast a cheap creature or land, then use Defile on your own creature/token to generate a Saproling, or on an opponent's threat if ahead.",
+      "Turn 3: Deploy Avenging Hunter or other midrange threats, using Saprolings to fuel Fanatical Offering for removal and card draw.",
+      "Sequence lands to ensure B/G mana by turn 2/3."
+    ],
+    "mid_game": [
+      "Treat Saprolings as currency.",
+      "Use them to fuel Fanatical Offering for removal and draw, but preserve enough to maintain board presence and fuel Avenging Hunter's death triggers.",
+      "Manage your graveyard carefully if the format contains hate cards",
+      "otherwise, leverage it for recursion and value.",
+      "Commit threats when you have removal or card advantage to follow up.",
+      "Hold back if facing sweepers or heavy spot removal.",
+      "Use Defile to clear key blockers or pump your own board, and time Fanatical Offering to trade up efficiently."
+    ],
+    "late_game": [
+      "A board of 4+ Saprolings, Avenging Hunter, and efficient removal.",
+      "Win by trading up with Fanatical Offering, pumping your board with Defile, and racing to lethal or out-grinding control through card advantage.",
+      "Go all-in when you have card advantage, removal for key threats, and the opponent is low on answers.",
+      "Commit when you can protect your board or when the opponent has no sweepers or spot removal left."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Avenging Hunter",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Fanatical Offering",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Defile",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overcommitting Saprolings to Fanatical Offering without considering board state.",
+    "Always weigh the trade-off between removal/draw and board presence.",
+    "Defile can be used on your own creatures to grow your board, but don't waste it if you're ahead.",
+    "Avenging Hunter's death trigger is a key win condition",
+    "protect it or plan for its eventual sacrifice.",
+    "Watch for format-specific hate cards like Rest in Peace or Leyline of the Void."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use removal that doesn't target spells, cast threats in response to counterspells, and rely on board presence that doesn't require stacking spells. Prioritize instant-speed interaction and value engines that don't rely on the stack.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use efficient removal to stop key ramp creatures, and race to close the game before they stabilize. Use Defile to clear early threats and Fanatical Offering to trade up.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with Defile and Fanatical Offering, use Saprolings to block and trade, and transition to midrange once the initial assault is weathered. Prioritize survival over aggression in the first two turns.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early, use card advantage to out-value them, and close out games quickly before they can stabilize. Use removal efficiently to clear blockers and avoid overcommitting to a single threat.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by better resource management, superior sequencing, and sideboard adjustments. Prioritize card advantage and removal, and be willing to trade up with Fanatical Offering. Control the board state and force unfavorable trades.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (e.g., Wrath of God, Terror), spot removal, and combo win conditions.",
+    "Note when opponents save removal for your Avenging Hunter or key Saproling generators.",
+    "Track graveyard usage and opponent's hand size to gauge their ability to answer your board."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/pauper.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

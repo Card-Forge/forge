@@ -1,0 +1,436 @@
+{
+  "schema_version": 1,
+  "name": "Nykthos Ramp",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "G"
+  ],
+  "strategy_type": "ramp",
+  "expected_deck_total": 60,
+  "macro_plan": "Nykthos Ramp is a Mono-Green deck that leverages Devotion to Green and massive mana acceleration to flood the board with creatures quickly. Though it lost its previous combo-focused identity after Karn, the Great Creator was banned, it now functions as a consistent ramp-combo hybrid that aims to win on explosive turns. The deck relies on a core engine of Nykthos, Shrine to Nyx, dorks, and board-fillers to overwhelm opponents before they can stabilize.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 19,
+      "cards": [
+        "Cavalier of Thorns",
+        "Kenrith's Transformation",
+        "Kiora, Behemoth Beckoner",
+        "Leyline of the Guildpact",
+        "Outcaster Trailblazer",
+        "Scrapshooter",
+        "The Stone Brain"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 2
+    },
+    "dig_draw": {
+      "target_count": 14,
+      "cards": [
+        "Cavalier of Thorns",
+        "Leyline of the Guildpact",
+        "Oath of Nissa",
+        "Storm the Festival"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Cavalier of Thorns",
+        "Vibrance"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Kiora, Behemoth Beckoner",
+        "Leyline of the Guildpact"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 40,
+      "cards": [
+        "Cavalier of Thorns",
+        "Elesh Norn, Mother of Machines",
+        "Elvish Mystic",
+        "Kiora, Behemoth Beckoner",
+        "Leyline of the Guildpact",
+        "Llanowar Elves",
+        "Old-Growth Troll",
+        "Outcaster Trailblazer",
+        "Questing Beast",
+        "Scrapshooter",
+        "Storm the Festival",
+        "Ulvenwald Oddity",
+        "Vibrance"
+      ],
+      "mainboard_count": 38,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 12,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Questing Beast",
+        "Scrapshooter",
+        "Seam Rip",
+        "Skysovereign, Consul Flagship",
+        "Vibrance"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 6
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Leyline of the Guildpact"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Leyline of the Guildpact"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 15,
+      "cards": [
+        "Cavalier of Thorns",
+        "Leyline of the Guildpact",
+        "Storm the Festival",
+        "The Stone Brain",
+        "Unlicensed Hearse"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 11,
+      "cards": [
+        "Cavalier of Thorns",
+        "Old-Growth Troll",
+        "Storm the Festival"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Nykthos, Shrine to Nyx"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Kiora, Behemoth Beckoner"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Nykthos, Shrine to Nyx"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Leyline of the Guildpact",
+        "Pithing Needle",
+        "Questing Beast",
+        "Wolfwillow Haven"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 5
+    },
+    "mana_fixing": {
+      "target_count": 35,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Cavalier of Thorns",
+        "Hushwood Verge",
+        "Leyline of the Guildpact",
+        "Llanowar Elves",
+        "Nykthos, Shrine to Nyx",
+        "Oath of Nissa",
+        "Outcaster Trailblazer",
+        "Storm the Festival",
+        "Temple Garden"
+      ],
+      "mainboard_count": 35,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 20,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Forest",
+        "Hushwood Verge",
+        "Nykthos, Shrine to Nyx",
+        "Temple Garden"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 4,
+      "cards": [
+        "Kiora, Behemoth Beckoner"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.27
+  },
+  "dual_role_cards": [
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavalier of Thorns",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hushwood Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kiora, Behemoth Beckoner",
+      "roles": [
+        "card_advantage",
+        "payoff_cards",
+        "planeswalker_threats",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Leyline of the Guildpact",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Llanowar Elves",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nykthos, Shrine to Nyx",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Oath of Nissa",
+      "roles": [
+        "dig_draw",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Old-Growth Troll",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Outcaster Trailblazer",
+      "roles": [
+        "card_advantage",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Questing Beast",
+      "roles": [
+        "hate_pieces",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scrapshooter",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Storm the Festival",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple Garden",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Stone Brain",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vibrance",
+      "roles": [
+        "removal",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play mana dorks as early as possible to accelerate into Devotion creatures.",
+    "Prioritize playing Cavalier of Thorns and Old-Growth Troll quickly to maximize Nykthos's mana generation.",
+    "Use Oath of Nissa and Invasion of Ixalan to dig for missing key pieces like Nykthos or Kiora.",
+    "Plan turns carefully, especially the first few, to jump ahead in mana and flood the board.",
+    "Leyline of the Guildpact enables your ramp but makes you vulnerable to Leyline of Punishment or artifact/enchantment hate."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play mana dorks like Llanowar Elves on turn 1 to accelerate"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize lands and Devotion creatures like Cavalier of Thorns and Old-Growth Troll"
+    },
+    {
+      "trigger": "early game",
+      "line": "Utilize Leyline of the Guildpact for explosive opening turns"
+    }
+  ],
+  "kill_priority": [
+    "Nykthos, Shrine to Nyx",
+    "Kiora, Behemoth Beckoner",
+    "Leyline of the Guildpact",
+    "Cavalier of Thorns",
+    "Elesh Norn, Mother of Machines",
+    "Elvish Mystic",
+    "Llanowar Elves",
+    "Old-Growth Troll"
+  ],
+  "interaction_to_disrupt": [
+    "Boseiju, Who Endures",
+    "Questing Beast",
+    "Scrapshooter",
+    "Seam Rip",
+    "Skysovereign, Consul Flagship",
+    "Vibrance",
+    "Leyline of the Guildpact",
+    "Pithing Needle"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/nykthos-ramp.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

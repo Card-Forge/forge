@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "name": "Orzhov Midrange",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "B"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Orzhov Midrange controls the early game through targeted disruption and efficient removal, then out-values opponents by leveraging graveyard recursion and incremental board advantage. It wins against combo and control by stabilizing and outlasting them, and against aggro/midrange by trading efficiently and closing out with resilient threats.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 3,
+      "cards": [
+        "Fatal Push",
+        "Gifted Aetherborn",
+        "Thoughtseize"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Fatal Push",
+        "Gifted Aetherborn",
+        "Thoughtseize"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 3,
+      "cards": [
+        "Fatal Push",
+        "Gifted Aetherborn",
+        "Thoughtseize"
+      ]
+    },
+    "threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 3,
+      "cards": [
+        "Fatal Push",
+        "Gifted Aetherborn",
+        "Thoughtseize"
+      ]
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": []
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Fatal Push",
+        "Gifted Aetherborn",
+        "Thoughtseize"
+      ]
+    },
+    "mana_fixing": {
+      "target_count": 0,
+      "cards": []
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Thoughtseize",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fatal Push",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gifted Aetherborn",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "hate_pieces",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistakes: Overcommitting to the board without removal, misusing Fatal Push on low-value targets, neglecting to track the opponent's graveyard, and failing to sideboard effectively.",
+    "Unique interactions: Gifted Aetherborn can be a powerful finisher if you have a way to sacrifice it or draw cards, but be cautious of graveyard hate.",
+    "Thoughtseize is your most important card",
+    "use it to disrupt the opponent's game plan rather than just grabbing the most powerful card in hand."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, Thoughtseize opponent's most disruptive card (prioritize removal, early threats, or combo pieces)."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a second land, then either cast a cheap creature (like Gifted Aetherborn) or use Fatal Push on a problematic early threat."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence lands to ensure W/B mana availability"
+    }
+  ],
+  "kill_priority": [
+    "Fatal Push",
+    "Gifted Aetherborn",
+    "Thoughtseize"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

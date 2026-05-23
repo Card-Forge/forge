@@ -11,11 +11,14 @@
   "mulligan": {
     "keep_criteria": [
       "Hands containing Superior Spider-Man alongside cheap graveyard fillers or cantrips",
-      "Hands with multiple low-cost utility creatures and Proft's Eidetic Memory"
+      "Hands with multiple low-cost utility creatures and Proft's Eidetic Memory",
+      "Keep any hand with a land, a turn-1 discard spell (e.g., Deceit), and a graveyard enabler or threat.",
+      "Prioritize keeping 3-4 lands if you have a turn-1 discard and a tutor/graveyard enabler, as you need to cast disruption immediately to protect your game plan."
     ],
     "mulligan_criteria": [
       "Hands lacking Superior Spider-Man or a reliable way to interact with the graveyard",
-      "Hands composed only of high-cost threats without early game acceleration"
+      "Hands composed only of high-cost threats without early game acceleration",
+      "Mulligan hands with two or more lands, no early disruption, or only reanimation spells without a threat or graveyard setup."
     ],
     "examples": [
       {
@@ -50,17 +53,32 @@
     "early_game": [
       "Play lands and cheap utility creatures like Kavaero, Mind-Bitten or Steamcore Scholar",
       "Use Proft's Eidetic Memory to dig for Superior Spider-Man and Bringer of the Last Gift",
-      "Avoid unnecessary combat to preserve creatures for the graveyard"
+      "Avoid unnecessary combat to preserve creatures for the graveyard",
+      "Turn 1: Play a land, cast Deceit to disrupt the opponent's hand or set up your graveyard.",
+      "Turn 2: Play a second land, dig for your reanimation engine or primary threat.",
+      "If you have a threat in hand and a reanimation spell in the graveyard, sequence mana to cast the reanimation spell on turn 2 or 3.",
+      "Land sequencing: Start with untapped dual or shock lands when possible to ensure turn-1 disruption, but prioritize basic lands if they guarantee you can cast your early spells."
     ],
     "mid_game": [
       "Cast Superior Spider-Man to copy Bringer of the Last Gift",
       "Trigger Bringer to return the entire graveyard, including Ardyn, the Usurper",
-      "Prepare to swing for lethal on the following turn"
+      "Prepare to swing for lethal on the following turn",
+      "Treat graveyard resources as a shared pool.",
+      "Don't overcommit to reanimating low-impact threats if you can save the mana for a game-winning threat.",
+      "Keep 2-3 cards in hand to answer unexpected threats or protect your graveyard.",
+      "Mana should be hoarded for reanimation windows, but spent on disruption if the opponent is ahead or developing a threatening board.",
+      "Commit threats when you have graveyard redundancy or can protect them with counterspells/removal.",
+      "Hold back if the opponent has board wipes, graveyard hate, or significant removal."
     ],
     "late_game": [
       "Execute the OTK combat phase with Ardyn's 5/5 triggers and boosted demons",
       "Use remaining resources to stabilize if the combo is interrupted",
-      "Look for alternate win conditions like Overlord of the Balemurk if the primary plan fails"
+      "Look for alternate win conditions like Overlord of the Balemurk if the primary plan fails",
+      "Superior Spider-Man and Overlord of the Balemurk are your primary win conditions.",
+      "Reanimate them when you have a clear path to damage or when the opponent cannot interact.",
+      "Use discard spells to clear the way or force the opponent to discard key answers, then close the game with unblockable or resilient threats.",
+      "Go all-in when you have a reanimated threat on the board, the opponent has no graveyard hate or board wipes in play, and you have enough mana to protect your threat or close the game.",
+      "Also commit if you can win before the opponent's next turn or if they are tapped out from trying to stabilize against your early pressure."
     ]
   },
   "key_cards": [
@@ -99,7 +117,13 @@
     "Cast Superior Spider-Man targeting a copy of Bringer of the Last Gift to trigger the mass return effect",
     "Ensure Ardyn, the Usurper is in the graveyard before casting Bringer so it returns to the battlefield",
     "Wait until the beginning of combat to trigger Ardyn's ability, reanimating a utility creature as a 5/5",
-    "Swing with Bringer of the Last Gift and all other demons simultaneously to maximize Ardyn's combat boost"
+    "Swing with Bringer of the Last Gift and all other demons simultaneously to maximize Ardyn's combat boost",
+    "Common mistake: overcommitting to reanimating low-impact threats early, leaving you vulnerable to board wipes or graveyard hate.",
+    "Always keep a backup plan in hand.",
+    "Unique interaction: Deceit can be used to both disrupt the opponent and set up your own graveyard, so sequence it carefully to maximize value.",
+    "Superior Spider-Man and Overlord of the Balemurk likely have synergies with your graveyard engine",
+    "test their specific interactions to maximize value.",
+    "In an unknown format, always be prepared to adapt your sideboard based on the actual metagame shifts, and track opponent play patterns to predict when they will interact with your graveyard."
   ],
   "matchups": [
     {
@@ -125,15 +149,44 @@
         "Fast attackers",
         "Card draw engines"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard spells to force counterspells out of hand, then cast your reanimation spells when they're empty. Sequence your plays to make the opponent guess, and use cheap threats to pressure them into using counters on non-critical spells. If they counter your reanimation, pivot to digging for backup threats or graveyard hate.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and cheap threats. Don't let them stabilize; use graveyard hate if available, or race them with reanimated threats. Prioritize disrupting their mana development with hand disruption, and be ready to answer their large early threats with removal or counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early discard and removal. Don't overcommit to reanimation until you have a board presence or can answer their threats. Use your graveyard as a resource to dig for answers, and close the game quickly once stabilized. If they go wide, prioritize board wipes or targeted removal to protect your life total.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with card advantage and graveyard recursion. Force them to use resources on your threats, then reanimate bigger threats when they're tapped out. Use discard to disrupt their combo or lock pieces, and be patient if they have board wipes; wait for them to use them on your early threats before committing your finishers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the graveyard war. Prioritize graveyard hate and targeted removal. Force the opponent to break their own resources with discard, and protect your graveyard with counterspells or protection spells. Win by out-resourcing their graveyard, answering their reanimation threats, or forcing them to mulligan into a dead hand.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Agatha's Soul Cauldron",
     "Graveyard hate pieces",
-    "Early game aggression"
+    "Early game aggression",
+    "Watch for graveyard hate (exile effects, discard spells targeting your graveyard), board wipes, and counterspells.",
+    "Note when the opponent starts playing around your reanimation (e.g., holding up removal, playing exile effects).",
+    "Track their mana development to predict when they can answer your threats, and watch for landfall triggers or elemental synergies that could swing the board quickly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Draftsim",
+    "source": "Draftsim + legacy_guidance",
     "source_url": "https://draftsim.com/sultai-reanimator-standard/",
     "generated_at": "2026-05-21T06:50:11+00:00",
     "model": "local-model",
@@ -154,6 +207,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {
@@ -166,7 +237,7 @@
     "confidence": 0.95,
     "kind": "explicit",
     "source_index": 0,
-    "evidence_span": "A novel Reanimator brew sits in a comfortable tier two under Cauldrons and Mountains , and has been brought back thanks to the excellent teamwork of two Universes Beyond cards: Superior Spider-Man , and Final Fantasy ‘s Ardyn, The Usurper ."
+    "evidence_span": "A novel Reanimator brew sits in a comfortable tier two under Cauldrons and Mountains , and has been brought back thanks to the excellent teamwork of two Universes Beyond cards: Superior Spider-Man , and Final Fantasy \u2018s Ardyn, The Usurper ."
   },
   "win_conditions_evidence": [
     {

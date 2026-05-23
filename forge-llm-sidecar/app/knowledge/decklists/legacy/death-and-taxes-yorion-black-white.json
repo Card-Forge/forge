@@ -1,0 +1,153 @@
+{
+  "archetype": "Death and Taxes (Yorion) - Black/White",
+  "format": "legacy",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/death-and-taxes-yorion-black-white.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Aether Vial"
+    },
+    {
+      "qty": 1,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 3,
+      "name": "Emperor of Bones"
+    },
+    {
+      "qty": 1,
+      "name": "Flickerwisp"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Karakas"
+    },
+    {
+      "qty": 1,
+      "name": "Lion Sash"
+    },
+    {
+      "qty": 4,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Meteor Sword"
+    },
+    {
+      "qty": 1,
+      "name": "Orcish Bowmasters"
+    },
+    {
+      "qty": 4,
+      "name": "Overlord of the Balemurk"
+    },
+    {
+      "qty": 4,
+      "name": "Phelia, Exuberant Shepherd"
+    },
+    {
+      "qty": 2,
+      "name": "Pre-War Formalwear"
+    },
+    {
+      "qty": 4,
+      "name": "Prismatic Vista"
+    },
+    {
+      "qty": 4,
+      "name": "Recruiter of the Guard"
+    },
+    {
+      "qty": 2,
+      "name": "Scrubland"
+    },
+    {
+      "qty": 2,
+      "name": "Shadowy Backstreet"
+    },
+    {
+      "qty": 2,
+      "name": "Skyclave Apparition"
+    },
+    {
+      "qty": 4,
+      "name": "Snow-Covered Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Snow-Covered Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Solitude"
+    },
+    {
+      "qty": 4,
+      "name": "Stoneforge Mystic"
+    },
+    {
+      "qty": 4,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 4,
+      "name": "Wasteland"
+    },
+    {
+      "qty": 4,
+      "name": "White Orchid Phantom"
+    },
+    {
+      "qty": 2,
+      "name": "Witch Enchanter"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 2,
+      "name": "Deafening Silence"
+    },
+    {
+      "qty": 3,
+      "name": "Disruptor Flute"
+    },
+    {
+      "qty": 3,
+      "name": "Erode"
+    },
+    {
+      "qty": 1,
+      "name": "Faerie Macabre"
+    },
+    {
+      "qty": 1,
+      "name": "Surgical Extraction"
+    },
+    {
+      "qty": 3,
+      "name": "Wrath of the Skies"
+    },
+    {
+      "qty": 1,
+      "name": "Yorion, Sky Nomad"
+    }
+  ]
+}

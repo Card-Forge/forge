@@ -1,0 +1,404 @@
+{
+  "schema_version": 1,
+  "name": "Creative Technique",
+  "format": "legacy",
+  "colors": [
+    "U",
+    "R"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Creative Technique is a Legacy combo deck designed to win on turn 3 by demonstrating the namesake spell to cascade into multiple copies, Emrakul, the Aeons Torn, and other cascade cards. The deck floods the board with creatures that gain haste from Maelstrom Wanderer, while Emrakul provides a backup extra turn. It operates as a glass cannon that is naturally resistant to counterspells but highly vulnerable to land destruction, discard, and mana disruption.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Emrakul, the Aeons Torn"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 22,
+      "cards": [
+        "Bloodbraid Elf",
+        "Emrakul, the Aeons Torn",
+        "Raph & Mikey, Troublemakers",
+        "Sire of Insanity",
+        "Ulamog, the Infinite Gyre",
+        "Violent Outburst"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 16,
+      "cards": [
+        "Ancient Tomb",
+        "Boseiju, Who Endures",
+        "Ulamog, the Infinite Gyre",
+        "Volcanic Torrent"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 8
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Volcanic Torrent"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "counterspells": {
+      "target_count": 4,
+      "cards": [
+        "Tibalt's Trickery"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Emrakul, the Aeons Torn",
+        "Ulamog, the Infinite Gyre"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 4,
+      "cards": [
+        "Tibalt's Trickery"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 16,
+      "cards": [
+        "Emrakul, the Aeons Torn",
+        "Throes of Chaos",
+        "Tibalt's Trickery",
+        "Ulamog, the Infinite Gyre"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Throes of Chaos"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 4,
+      "cards": [
+        "Creative Technique"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Emrakul, the Aeons Torn"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Ancient Tomb",
+        "Creative Technique",
+        "Tibalt's Trickery"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Tibalt's Trickery"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 40,
+      "cards": [
+        "Ancient Tomb",
+        "Boseiju, Who Endures",
+        "City of Traitors",
+        "Creative Technique",
+        "Hickory Woodlot",
+        "Mossfire Valley",
+        "Petrified Hamlet",
+        "Sandstone Needle",
+        "Taiga",
+        "Talon Gates of Madara",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 33,
+      "sideboard_count": 7
+    },
+    "lands": {
+      "target_count": 37,
+      "cards": [
+        "Ancient Tomb",
+        "Boseiju, Who Endures",
+        "City of Traitors",
+        "Hickory Woodlot",
+        "Mossfire Valley",
+        "Mountain",
+        "Petrified Hamlet",
+        "Sandstone Needle",
+        "Taiga",
+        "Talon Gates of Madara",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 7
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.29
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "combo_pieces",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "City of Traitors",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Creative Technique",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emrakul, the Aeons Torn",
+      "roles": [
+        "graveyard_enablers",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hickory Woodlot",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mossfire Valley",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Petrified Hamlet",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sandstone Needle",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Taiga",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Talon Gates of Madara",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Throes of Chaos",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tibalt's Trickery",
+      "roles": [
+        "combo_pieces",
+        "counterspells",
+        "discard_outlets",
+        "graveyard_enablers",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ulamog, the Infinite Gyre",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volcanic Torrent",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play Ancient Tomb only on the turn you will summon the combo card to minimize Wasteland impact.",
+    "Demonstrate Creative Technique to put two copies on the stack, letting the opponent's resolve first.",
+    "Use any 6-mana cascade card as an alternative trigger if Creative Technique is not in hand.",
+    "Sideboard Tibalt's Trickery and Throes of Chaos together to cascade into a counter that finds the combo.",
+    "Avoid casting Carnosaur without a follow-up plan."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Ramp to 5-6 mana using dual lands and channel lands"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play Creative Technique or a 6-mana cascade on turn 3"
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast acceleration or a cantrip."
+    }
+  ],
+  "kill_priority": [
+    "Creative Technique",
+    "Emrakul, the Aeons Torn",
+    "Ancient Tomb",
+    "Tibalt's Trickery",
+    "Bloodbraid Elf",
+    "Raph & Mikey, Troublemakers",
+    "Sire of Insanity",
+    "Ulamog, the Infinite Gyre"
+  ],
+  "interaction_to_disrupt": [
+    "Tibalt's Trickery",
+    "Emrakul, the Aeons Torn",
+    "Ulamog, the Infinite Gyre",
+    "Ancient Tomb",
+    "Boseiju, Who Endures",
+    "Volcanic Torrent"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/creative-technique.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

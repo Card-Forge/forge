@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early interaction like Firebending Lesson or Boomerang Basics",
       "Hands containing Gran-Gran or Accumulate Wisdom with adequate land count",
-      "Hands that can proactively use mana to set up permanents"
+      "Hands that can proactively use mana to set up permanents",
+      "Keep hands with 2-3 lands (prioritizing duals or shock-equivalents for fixing), 3+ spells, and at least one early interaction or mana accelerator.",
+      "Prioritize hands containing Artist's Talent or Gran-Gran if mana supports them."
     ],
     "mulligan_criteria": [
       "Hands lacking early mana sources to proactively play permanents",
       "Hands heavy on late-game cards without early interaction or one-drops",
-      "Hands without ways to fill the graveyard for Accumulate Wisdom"
+      "Hands without ways to fill the graveyard for Accumulate Wisdom",
+      "Mulligan pure land hands, triple-colored mana without spells, or hands lacking early plays in faster formats."
     ],
     "examples": [
       {
@@ -48,17 +51,31 @@
     "early_game": [
       "Play Gran-Gran as a one-drop to protect against early beatdown and enable Monument to Endurance",
       "Use Firebending Lesson or Boomerang Basics for early spot removal and stalling",
-      "Proactively spend mana to set up permanents and avoid flooding"
+      "Proactively spend mana to set up permanents and avoid flooding",
+      "Turn 1: Play a land, cast a cheap cantrip or spell trigger to establish board presence and activate 'lesson' effects.",
+      "Turn 2: Develop mana, cast a mid-cost spell or threat, leveraging spell triggers for card advantage.",
+      "Sequence lands to ensure color fixing without stalling",
+      "prioritize dual/shock lands if the format allows."
     ],
     "mid_game": [
       "Loot cards with Abandon Attachments to dig for answers and fill the graveyard with Lessons",
       "Activate Monument to Endurance triggers by looting or attacking with Gran-Gran",
-      "Use Artist's Talent to reduce costs and filter the hand for combo pieces"
+      "Use Artist's Talent to reduce costs and filter the hand for combo pieces",
+      "Preserve mana for interaction during opponent's turns.",
+      "Use cantrips to maintain hand size and dig for key pieces.",
+      "Don't overcommit to the board if the opponent has sweepers or heavy interaction.",
+      "Track spell count carefully, as it fuels your primary win conditions.",
+      "Commit threats when you have removal or counterspells to protect them.",
+      "Hold back if the opponent has potential sweepers or holds up mana for interaction."
     ],
     "late_game": [
       "Cast Accumulate Wisdom with three Lessons in the graveyard to draw three cards and create a massive resource disparity",
       "Use Gran-Gran as a cost reducer for late-game spells",
-      "Leverage Monument to Endurance to recover from unfavorable matchups by generating mana or Lava Spikes"
+      "Leverage Monument to Endurance to recover from unfavorable matchups by generating mana or Lava Spikes",
+      "Gran-Gran as a late-game threat that scales with total spells cast, or copying effects via Artist's Talent to swing the board.",
+      "Monument to Endurance provides the survivability needed to close out games against aggressive or midrange decks.",
+      "Go all-in when you have card advantage, removal for key threats, and the opponent is low on interaction.",
+      "Commit when spell triggers guarantee value on the stack and you can protect your board state."
     ]
   },
   "key_cards": [
@@ -107,7 +124,11 @@
     "Sequence looting effects like Abandon Attachments before Monument to Endurance is on the battlefield to maximize value.",
     "Return Stormchaser's Talent or Monument to Endurance to hand with Boomerang Basics to reset them as new objects and reuse all triggers.",
     "Prioritize playing Gran-Gran early to protect against beatdown and enable Monument to Endurance triggers through combat.",
-    "Use Firebending Lesson early for spot removal, but hold it if you need to fill the graveyard with Lessons for Accumulate Wisdom."
+    "Use Firebending Lesson early for spot removal, but hold it if you need to fill the graveyard with Lessons for Accumulate Wisdom.",
+    "Common mistake: overcommitting to the board without protection.",
+    "Unique interaction: Gran-Gran's triggers scale with total spells cast, so don't forget to count your own cantrips and opponent's spells if they trigger.",
+    "Artist's Talent can copy instant-speed spells for additional value.",
+    "Monument to Endurance is your primary win condition enabler against aggressive decks."
   ],
   "matchups": [
     {
@@ -157,6 +178,31 @@
         "Recurring threats",
         "Death trigger creatures"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap spells to force counter trade-offs. Employ protection, hexproof, or uncounterable effects. Cast spells in response to known counterspells to maximize value and pressure.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt land drops. Use spot removal on key ramp creatures. Stabilize with Monument to Endurance and clear the board when possible to slow their acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and spot removal. Use cantrips to dig for answers and stabilize with Monument to Endurance. Transition to value spells once the board is clear.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value with card draw and spell triggers. Pressure the board to force mistakes and resource depletion. Use Artist's Talent to copy key spells or threats, overwhelming their interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through better resource management and sideboard choices. Prioritize targeted removal and counterspells. Out-value in the late game with Gran-Gran and spell triggers, leveraging hand size and board presence.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -164,10 +210,14 @@
     "Boards full of tokens",
     "Recurring threats or creatures with death triggers",
     "Problematic artifacts and enchantments",
-    "Larger threats that require stack interaction"
+    "Larger threats that require stack interaction",
+    "Watch for sweepers, counterspells, and combo pieces.",
+    "Note when opponents tap out for big spells or hold up mana for interaction.",
+    "Track spell count to anticipate trigger value and predict when you can safely commit to the board."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-izzet-lessons-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T05:39:53+00:00",
     "model": "local-model",
@@ -185,6 +235,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

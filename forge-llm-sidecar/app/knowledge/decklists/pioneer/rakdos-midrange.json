@@ -1,0 +1,117 @@
+{
+  "archetype": "Rakdos Midrange",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/rakdos-midrange.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Abrade"
+    },
+    {
+      "qty": 4,
+      "name": "Blackcleave Cliffs"
+    },
+    {
+      "qty": 3,
+      "name": "Blazemire Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Blightstep Pathway"
+    },
+    {
+      "qty": 4,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 4,
+      "name": "Bloodtithe Harvester"
+    },
+    {
+      "qty": 1,
+      "name": "Day of Black Sun"
+    },
+    {
+      "qty": 4,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 4,
+      "name": "Fatal Push"
+    },
+    {
+      "qty": 4,
+      "name": "Fear of Missing Out"
+    },
+    {
+      "qty": 2,
+      "name": "Graveyard Trespasser"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 3,
+      "name": "Sheoldred, the Apocalypse"
+    },
+    {
+      "qty": 2,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Takenuma, Abandoned Mire"
+    },
+    {
+      "qty": 4,
+      "name": "Thoughtseize"
+    },
+    {
+      "qty": 3,
+      "name": "Torch the Tower"
+    },
+    {
+      "qty": 4,
+      "name": "Unholy Annex // Ritual Chamber"
+    },
+    {
+      "qty": 1,
+      "name": "Urborg, Tomb of Yawgmoth"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Abrade"
+    },
+    {
+      "qty": 1,
+      "name": "Anoint with Affliction"
+    },
+    {
+      "qty": 1,
+      "name": "Day of Black Sun"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 4,
+      "name": "Hidetsugu Consumes All"
+    },
+    {
+      "qty": 2,
+      "name": "Invoke Despair"
+    },
+    {
+      "qty": 3,
+      "name": "Ray of Enfeeblement"
+    }
+  ]
+}

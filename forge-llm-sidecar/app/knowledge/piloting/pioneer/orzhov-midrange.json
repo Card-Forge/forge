@@ -1,0 +1,124 @@
+{
+  "archetype": "Orzhov Midrange",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "Orzhov Midrange controls the early game through targeted disruption and efficient removal, then out-values opponents by leveraging graveyard recursion and incremental board advantage. It wins against combo and control by stabilizing and outlasting them, and against aggro/midrange by trading efficiently and closing out with resilient threats.",
+  "win_conditions": [
+    "Efficient midrange creatures, graveyard recursion loops, and incremental value from discard/removal.",
+    "Close out games by applying pressure with unblockable or resilient threats while holding removal for last-ditch answers."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (including basics for W/B), a Thoughtseize, and a turn-1 or turn-2 play (e.g., Gifted Aetherborn, efficient creature, or Fatal Push).",
+      "Keep if you can play a land and Thoughtseize on turn 1."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no early interaction, or hands with only removal and no threats/lands."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, Thoughtseize opponent's most disruptive card (prioritize removal, early threats, or combo pieces).",
+      "Turn 2: Play a second land, then either cast a cheap creature (like Gifted Aetherborn) or use Fatal Push on a problematic early threat.",
+      "Sequence lands to ensure W/B mana availability",
+      "fetch/enter-the-battlefield lands if applicable."
+    ],
+    "mid_game": [
+      "Prioritize keeping a full hand of interaction until you establish board control.",
+      "Use Fatal Push efficiently (save for uncounterable or high-value threats).",
+      "Manage graveyard by balancing recursion with the risk of giving opponents targets",
+      "use discard to keep your own graveyard clean if needed.",
+      "Commit threats when you have removal ready for countersweeps or removal.",
+      "Hold back if the opponent has unanswered interaction or a clear win condition.",
+      "Trade efficiently: use removal on threats that can't be blocked or that enable combos, and use creatures to trade up."
+    ],
+    "late_game": [
+      "Efficient midrange creatures, graveyard recursion loops, and incremental value from discard/removal.",
+      "Close out games by applying pressure with unblockable or resilient threats while holding removal for last-ditch answers.",
+      "Go all-in when you have card advantage, the opponent has no sweepers, or you've established a board that forces them to overcommit.",
+      "Also commit when you can safely cast a finisher without fear of being countered or removed."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Thoughtseize",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Fatal Push",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Gifted Aetherborn",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes: Overcommitting to the board without removal, misusing Fatal Push on low-value targets, neglecting to track the opponent's graveyard, and failing to sideboard effectively.",
+    "Unique interactions: Gifted Aetherborn can be a powerful finisher if you have a way to sacrifice it or draw cards, but be cautious of graveyard hate.",
+    "Thoughtseize is your most important card",
+    "use it to disrupt the opponent's game plan rather than just grabbing the most powerful card in hand."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Thoughtseize to remove counterspells early. Cast threats at end step or when they have no mana. Use discard to force them to reveal interaction. If possible, use spells that can't be countered or cast multiple threats to force counter-sweeps.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early disruption (Thoughtseize, Fatal Push) to slow their mana development. Use removal on key ramp spells or mana dorks. Apply pressure to force them to interact instead of ramping.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap removal and discard. Don't overcommit to threats early; focus on surviving turns 1-3. Use Gifted Aetherborn to recur threats or gain life if applicable. Transition to midrange threats once stabilized.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with efficient threats. Use Thoughtseize to remove key answers or win conditions. Leverage graveyard value to out-value their card draw. Force them to use multiple spells to deal with your threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize Thoughtseize on their key threats or recursion enablers. Use Fatal Push on their early threats. Track graveyard contents to disrupt recursion. Win by out-resourcing and making better trades.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers, counterspells, and graveyard recursion engines.",
+    "Note when opponents tap out for key spells.",
+    "Track graveyard contents if they have recursion.",
+    "Pay attention to mana development\u2014midrange decks often commit to a specific mana base, so timing your attacks around their land drops is crucial."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/pioneer.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

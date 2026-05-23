@@ -1,0 +1,855 @@
+{
+  "schema_version": 1,
+  "name": "Zimone, Infinite Analyst",
+  "format": "commander",
+  "colors": [
+    "G",
+    "U"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "Zimone, Infinite Analyst is a G/U combo-control deck that generates infinite value or mana through Zimone's engine, using Elementalist's Palette to optimize spell casting and Hydroid Krasis as a high-impact finisher. It wins by out-resourcing control and combo decks while stabilizing against aggro with early interaction and late-game inevitability.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 19,
+      "cards": [
+        "Brass Infiniscope",
+        "Commander's Insight",
+        "Elementalist's Palette",
+        "Eureka Moment",
+        "Hydroid Krasis",
+        "Ingenious Prodigy",
+        "Kinetic Ooze",
+        "Lifeblood Hydra",
+        "Mathemagics",
+        "Nexus Mentality",
+        "Ozolith, the Shattered Spire",
+        "Pull from Tomorrow",
+        "Rain-Slicked Copse",
+        "Sporocyst",
+        "Stroke of Genius",
+        "Terrasymbiosis",
+        "The Goose Mother",
+        "Wan Shi Tong, Librarian",
+        "Zimone, Infinite Analyst"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 6,
+      "cards": [
+        "Castle Vantress",
+        "Geometer's Arthropod",
+        "Ingenious Prodigy",
+        "Quandrix Apprentice",
+        "Study Hall",
+        "Temple of Mystery"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 7,
+      "cards": [
+        "Ash Barrens",
+        "Fabled Passage",
+        "Misty Rainforest",
+        "Nature's Lore",
+        "Sporocyst",
+        "Terramorphic Expanse",
+        "Three Visits"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 5,
+      "cards": [
+        "Curse of the Swine",
+        "Elementalist's Palette",
+        "Hydroid Krasis",
+        "Overflowing Basin",
+        "Zimone, Infinite Analyst"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 39,
+      "cards": [
+        "Altered Ego",
+        "Benevolent Hydra",
+        "Biomass Mutation",
+        "Champion of Lambholt",
+        "Elusive Otter",
+        "Emil, Vastlands Roamer",
+        "Entrancing Melody",
+        "Expansion Algorithm",
+        "Forgotten Ancient",
+        "Geometer's Arthropod",
+        "Goldvein Hydra",
+        "Guardian Augmenter",
+        "Hardened Scales",
+        "High Fae Trickster",
+        "Hydroid Krasis",
+        "Ingenious Prodigy",
+        "Kalonian Hydra",
+        "Kami of Whispered Hopes",
+        "Kinetic Ooze",
+        "Lifeblood Hydra",
+        "Nev, the Practical Dean",
+        "Open the Way",
+        "Owlin Spiralmancer",
+        "Primo, the Unbounded",
+        "Primordial Hydra",
+        "Quandrix Apprentice",
+        "Sol Ring",
+        "Sporocyst",
+        "Steelbane Hydra",
+        "Stonecoil Serpent",
+        "Tanazir Quandrix",
+        "The Earth Crystal",
+        "The Goose Mother",
+        "Walking Ballista",
+        "Wan Shi Tong, Librarian",
+        "Wilderness Reclamation",
+        "Yavimaya Bloomsage",
+        "Zimone, Infinite Analyst",
+        "Zimone, Paradox Sculptor"
+      ],
+      "mainboard_count": 39,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 11,
+      "cards": [
+        "Decisive Denial",
+        "Kinetic Ooze",
+        "Primal Might",
+        "Primo, the Unbounded",
+        "Quandrix Charm",
+        "Quandrix Command",
+        "Rapid Hybridization",
+        "Steelbane Hydra",
+        "Tyvar's Stand",
+        "Walking Ballista",
+        "Yavimaya Coast"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 3,
+      "cards": [
+        "Curse of the Swine",
+        "Kalonian Hydra",
+        "Zimone's Hypothesis"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "Decisive Denial",
+        "Quandrix Charm",
+        "Quandrix Command"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 7,
+      "cards": [
+        "Altered Ego",
+        "Elementalist's Palette",
+        "Guardian Augmenter",
+        "Hydroid Krasis",
+        "Silkguard",
+        "Stonecoil Serpent",
+        "Tyvar's Stand"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Pull from Tomorrow"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 4,
+      "cards": [
+        "Animist's Awakening",
+        "Elementalist's Palette",
+        "Hydroid Krasis",
+        "Quandrix Command"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 2,
+      "cards": [
+        "Quandrix Command",
+        "Zimone's Hypothesis"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Elementalist's Palette",
+        "Geometer's Arthropod",
+        "Hydroid Krasis",
+        "Nev, the Practical Dean",
+        "Owlin Spiralmancer",
+        "Quandrix Apprentice",
+        "Unbound Flourishing",
+        "Zimone, Infinite Analyst"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Curse of the Swine",
+        "Elementalist's Palette",
+        "Hydroid Krasis",
+        "Overflowing Basin"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Elementalist's Palette",
+        "Hydroid Krasis",
+        "Zimone, Infinite Analyst"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 31,
+      "cards": [
+        "Alchemist's Refuge",
+        "Arcane Signet",
+        "Ash Barrens",
+        "Astral Cornucopia",
+        "Brass Infiniscope",
+        "Breeding Pool",
+        "Castle Vantress",
+        "Command Tower",
+        "Elementalist's Palette",
+        "Exotic Orchard",
+        "Fabled Passage",
+        "Flooded Grove",
+        "Hinterland Harbor",
+        "Hydroid Krasis",
+        "Kami of Whispered Hopes",
+        "Karn's Bastion",
+        "Misty Rainforest",
+        "Opal Palace",
+        "Oran-Rief, the Vastwood",
+        "Overflowing Basin",
+        "Rain-Slicked Copse",
+        "Reliquary Tower",
+        "Rogue's Passage",
+        "Sodden Verdure",
+        "Study Hall",
+        "Temple of Mystery",
+        "Terramorphic Expanse",
+        "Turbulent Wilderness",
+        "Vineglimmer Snarl",
+        "Yavimaya Coast",
+        "Zimone, Infinite Analyst"
+      ],
+      "mainboard_count": 31,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 36,
+      "cards": [
+        "Alchemist's Refuge",
+        "Ash Barrens",
+        "Breeding Pool",
+        "Castle Vantress",
+        "Command Tower",
+        "Exotic Orchard",
+        "Fabled Passage",
+        "Flooded Grove",
+        "Forest",
+        "Hinterland Harbor",
+        "Island",
+        "Karn's Bastion",
+        "Misty Rainforest",
+        "Opal Palace",
+        "Oran-Rief, the Vastwood",
+        "Overflowing Basin",
+        "Rain-Slicked Copse",
+        "Reliquary Tower",
+        "Rogue's Passage",
+        "Sodden Verdure",
+        "Study Hall",
+        "Temple of Mystery",
+        "Terramorphic Expanse",
+        "Turbulent Wilderness",
+        "Vineglimmer Snarl",
+        "Yavimaya Coast"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.22
+  },
+  "dual_role_cards": [
+    {
+      "card": "Alchemist's Refuge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Altered Ego",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ash Barrens",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Brass Infiniscope",
+      "roles": [
+        "card_advantage",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Breeding Pool",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Castle Vantress",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Curse of the Swine",
+      "roles": [
+        "payoff_cards",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Decisive Denial",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Elementalist's Palette",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fabled Passage",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Grove",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Geometer's Arthropod",
+      "roles": [
+        "dig_draw",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guardian Augmenter",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hinterland Harbor",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hydroid Krasis",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ingenious Prodigy",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kalonian Hydra",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kami of Whispered Hopes",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karn's Bastion",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kinetic Ooze",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lifeblood Hydra",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nev, the Practical Dean",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Opal Palace",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Oran-Rief, the Vastwood",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overflowing Basin",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Owlin Spiralmancer",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Primo, the Unbounded",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pull from Tomorrow",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quandrix Apprentice",
+      "roles": [
+        "dig_draw",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quandrix Charm",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quandrix Command",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rain-Slicked Copse",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rogue's Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sodden Verdure",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sporocyst",
+      "roles": [
+        "card_advantage",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steelbane Hydra",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stonecoil Serpent",
+      "roles": [
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Study Hall",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Mystery",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Terramorphic Expanse",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "The Goose Mother",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Turbulent Wilderness",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tyvar's Stand",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vineglimmer Snarl",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Walking Ballista",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wan Shi Tong, Librarian",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yavimaya Coast",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zimone's Hypothesis",
+      "roles": [
+        "recursion",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Zimone, Infinite Analyst",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Zimone's infinite loop requires precise sequencing and mana management",
+    "practice the exact activation order to avoid dead turns.",
+    "Hydroid Krasis needs careful graveyard setup to maximize its payoff, so avoid exiling key cards prematurely.",
+    "Elementalist's Palette's flexibility is key to overcoming counters and optimizing spell effects.",
+    "Avoid overcommitting to the board without protection, and always track the opponent's graveyard and hand size to anticipate their next move."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land and cast a cheap ramp spell or cantrip to dig for Zimone/Palette."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Develop mana, cast Elementalist's Palette if possible, or play Zimone if you have sufficient mana."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence lands to ensure G/U access by turn 3-4, prioritizing untapped sources to cast Zimone's activation or Krasis without tapping out prematurely."
+    }
+  ],
+  "kill_priority": [
+    "Elementalist's Palette",
+    "Geometer's Arthropod",
+    "Hydroid Krasis",
+    "Nev, the Practical Dean",
+    "Owlin Spiralmancer",
+    "Quandrix Apprentice",
+    "Unbound Flourishing",
+    "Zimone, Infinite Analyst"
+  ],
+  "interaction_to_disrupt": [
+    "Decisive Denial",
+    "Quandrix Charm",
+    "Quandrix Command",
+    "Altered Ego",
+    "Elementalist's Palette",
+    "Guardian Augmenter",
+    "Hydroid Krasis",
+    "Silkguard"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/zimone-infinite-analyst.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

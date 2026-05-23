@@ -1,0 +1,129 @@
+{
+  "archetype": "Izzet Spellementals",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/izzet-spellementals.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Burst Lightning"
+    },
+    {
+      "qty": 2,
+      "name": "Colorstorm Stallion"
+    },
+    {
+      "qty": 4,
+      "name": "Eddymurk Crab"
+    },
+    {
+      "qty": 2,
+      "name": "Flow State"
+    },
+    {
+      "qty": 4,
+      "name": "Hearth Elemental"
+    },
+    {
+      "qty": 7,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Opt"
+    },
+    {
+      "qty": 2,
+      "name": "Prismari Charm"
+    },
+    {
+      "qty": 4,
+      "name": "Riverpyre Verge"
+    },
+    {
+      "qty": 4,
+      "name": "Sleight of Hand"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 2,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 4,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 2,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 3,
+      "name": "Sunderflock"
+    },
+    {
+      "qty": 1,
+      "name": "Three Steps Ahead"
+    },
+    {
+      "qty": 4,
+      "name": "Traumatic Critique"
+    },
+    {
+      "qty": 2,
+      "name": "Winternight Stories"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Annul"
+    },
+    {
+      "qty": 2,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 2,
+      "name": "Colorstorm Stallion"
+    },
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 1,
+      "name": "Fire Magic"
+    },
+    {
+      "qty": 1,
+      "name": "Hydro-Man, Fluid Felon"
+    },
+    {
+      "qty": 1,
+      "name": "Ill-Timed Explosion"
+    },
+    {
+      "qty": 1,
+      "name": "Ral, Crackling Wit"
+    },
+    {
+      "qty": 2,
+      "name": "Soul-Guide Lantern"
+    },
+    {
+      "qty": 1,
+      "name": "Sunderflock"
+    },
+    {
+      "qty": 1,
+      "name": "The Legend of Kuruk"
+    }
+  ]
+}

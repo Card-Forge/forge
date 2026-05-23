@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least two creatures and one removal spell",
       "Hands featuring early mana acceleration or multiple Fanatical Offering copies",
-      "Hands containing Ichor Wellspring with early creature sources"
+      "Hands containing Ichor Wellspring with early creature sources",
+      "Keep hands with 2-3 lands (prioritizing Ichor Wellspring or duals), 1-2 early threats (1-2 mana creatures), and at least one interaction (Cast Down, discard, or sacrifice outlet).",
+      "Keep hands that can play a land and a spell on turn 1, or two lands on turn 1 if you have a turn 2 threat."
     ],
     "mulligan_criteria": [
       "Hands lacking interaction or creature sacrifices",
       "Hands with only late-game cards and no early pressure",
-      "Hands missing black mana for Ichor Wellspring or Cast Down"
+      "Hands missing black mana for Ichor Wellspring or Cast Down",
+      "Mulligan if you have 0-1 lands, all spells costing 3+ mana, or no way to interact before turn 3."
     ],
     "examples": []
   },
@@ -25,17 +28,33 @@
     "early_game": [
       "Prioritize casting removal on threatening aggro creatures to preserve board presence",
       "Play cheap creatures early to feed Fanatical Offering for tempo swings",
-      "Ensure mana availability to cast Cast Down or hold back for Wellspring"
+      "Ensure mana availability to cast Cast Down or hold back for Wellspring",
+      "Turn 1: Play a land, optionally cast a 1-drop or hold for disruption.",
+      "Turn 2: Play Ichor Wellspring or a dual land, cast a 2-drop threat or disruption.",
+      "Prioritize establishing a functional mana base and early board presence.",
+      "Against aggro, hold removal for turn 2-3 threats",
+      "against control, develop board and apply pressure while preserving interaction for key spells."
     ],
     "mid_game": [
       "Begin cycling creatures through Fanatical Offering to deal direct damage and trigger Ichor Wellspring",
       "Use Cast Down to clear the path for token advancement or to trigger additional value",
-      "Balance aggression with board control, sacrificing high-power creatures for maximum impact"
+      "Balance aggression with board control, sacrificing high-power creatures for maximum impact",
+      "Balance mana for interaction versus threat development.",
+      "Use Ichor Wellspring to fuel graveyard/sacrifice synergies and draw into answers.",
+      "Avoid overcommitting to the board if the opponent has sweepers or unanswered removal.",
+      "Trade efficiently to maintain card advantage, and use Fanatical Offering to convert excess creatures into value or damage when ahead.",
+      "Commit threats when you have removal ready for opponent's answers or when you can close the game in 1-2 turns.",
+      "Hold back if you suspect a board wipe, if your removal is exhausted, or if the opponent is building a combo."
     ],
     "late_game": [
       "Flood the board with Zombie tokens to overwhelm opponent removal",
       "Use Fanatical Offering on multiple tokens or large threats to close out the game",
-      "Maintain mana discipline to keep Ichor Wellspring active and respond to late-game threats"
+      "Maintain mana discipline to keep Ichor Wellspring active and respond to late-game threats",
+      "High-impact creatures, sacrifice-to-damage combos via Fanatical Offering, and graveyard-fueled burn.",
+      "Cast Down can clear key blockers or deal 2 damage to controllers.",
+      "Use incremental damage and card advantage to close out games when the opponent is at low life or out of answers.",
+      "Go all-in when you have card advantage, the opponent is at low life, or you have removed their main answers.",
+      "Commit when you can close the game in 1-2 turns and have enough interaction to protect your board from sweepers or targeted removal."
     ]
   },
   "key_cards": [
@@ -58,7 +77,10 @@
   "sequencing_tips": [
     "Always hold up black mana when expecting a creature death to activate Ichor Wellspring",
     "Prioritize sacrificing creatures with Fanatical Offering before using Cast Down to maximize token generation",
-    "Save Cast Down for threats that would otherwise stall your token strategy or deal lethal damage"
+    "Save Cast Down for threats that would otherwise stall your token strategy or deal lethal damage",
+    "Common mistakes include overcommitting to the board without removal, leaving you vulnerable to sweepers, and mismanaging Ichor Wellspring's mana/draw engine, leading to dead draws.",
+    "Unique interaction: Fanatical Offering can be used to sacrifice low-cost creatures for value, but avoid sacrificing your only win condition.",
+    "Always track opponent's graveyard and removal count, and remember that Cast Down's 2 damage to its controller can be used strategically to finish off low-life threats or disrupt combo pieces."
   ],
   "matchups": [
     {
@@ -87,15 +109,35 @@
         "Card draw spells",
         "Board control effects"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that are hard to counter or can be cast in response. Hold up interaction for key spells and use sacrifice outlets to bypass counters if they target spells. Force them to use resources on your threats rather than their win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use Cast Down on key ramp creatures and don't let them stabilize. Trade efficiently and close out before they hit their big threats. Prioritize graveyard hate if they rely on recursion.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win through better resource management and sideboard cards. Prioritize graveyard advantage and targeted removal. Trade efficiently and out-value them in the late game. Use Fanatical Offering to convert excess creatures into value, and track their removal to time your commits.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures that bypass early removal",
     "Board wipes that clear token boards",
-    "Card draw engines that outpace token generation"
+    "Card draw engines that outpace token generation",
+    "Watch for sweepers, big finishers, and graveyard recursion.",
+    "Note when opponents tap out for key spells or hold up interaction.",
+    "Track how many removal spells they have answered and whether they are protecting specific creatures.",
+    "Pay attention to graveyard contents to anticipate recursion or sacrifice synergies."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T09:05:18+00:00",
     "model": "local-model",
@@ -124,6 +166,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pauper.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

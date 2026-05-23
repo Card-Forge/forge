@@ -13,12 +13,15 @@
     "keep_criteria": [
       "Hands with Painter's Servant and a land",
       "Hands with Goblin Welder and an artifact or creature",
-      "Hands with Pyroblast and a low-cost spell or land"
+      "Hands with Pyroblast and a low-cost spell or land",
+      "Keep any hand containing Painter's Servant plus at least two of the other combo pieces (Goblin Welder or a 0-cost creature like Tangle Wire/Myr Retriever/Arcbound Ravager).",
+      "Keep hands with 2-3 lands that can produce red mana or fetch, plus at least one protection spell (Pyroblast/Flusterstorm) if missing a piece."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or key combo pieces",
       "Hands with only high-cost cards",
-      "Hands without interaction or acceleration"
+      "Hands without interaction or acceleration",
+      "Mulligan hands with 0-1 lands, multiple non-fetching lands, or hands with only one combo piece and no protection/mana fixing."
     ],
     "examples": []
   },
@@ -26,17 +29,32 @@
     "early_game": [
       "Cast lands efficiently and look for Pyroblast to disrupt opponent's early threats",
       "Play Painter's Servant as soon as possible to set up type-changing effects",
-      "Use Goblin Welder to sacrifice early artifacts or creatures for value"
+      "Use Goblin Welder to sacrifice early artifacts or creatures for value",
+      "Turn 1: Play a land and cast a cantrip or protection spell if holding combo pieces.",
+      "Turn 2: Cast Goblin Welder or the 0-cost creature, then use Painter's Servant to paint it.",
+      "If all three pieces are in play, cast Painter's Servant, paint the 0-cost creature, then use Goblin Welder to bounce it to hand and cast it again for free, repeating to generate infinite mana/combat.",
+      "Sequence lands to ensure you can cast the non-0-cost pieces on time."
     ],
     "mid_game": [
       "Leverage Painter's Servant to turn opponent's permanents into 0/1 creatures",
       "Trigger Goblin Welder repeatedly to generate card advantage or damage",
-      "Maintain board presence while searching for combo enablers or board wipes"
+      "Maintain board presence while searching for combo enablers or board wipes",
+      "Mana is largely irrelevant once the combo is online, but before that, conserve lands for casting the combo pieces.",
+      "Use cantrips to dig for pieces and avoid clogging your hand.",
+      "Do not overextend with non-combo threats",
+      "the engine is your primary board presence.",
+      "Hold back on attacking with the combo until you have infinite power or a clear win condition.",
+      "If you have infinite mana, use it to cast win-cons or pump creatures."
     ],
     "late_game": [
       "Execute infinite loops or lethal sequences using Painter's Servant and sacrifice outlets",
       "Clear opponent's board with targeted removal or board wipes",
-      "Stall with Pyroblast if opponent attempts a comeback"
+      "Stall with Pyroblast if opponent attempts a comeback",
+      "Infinite combat damage via Tangle Wire/Myr Retriever/Arcbound Ravager, or infinite mana to cast a win-con like Tangle Wire or a pump spell.",
+      "Sometimes simply attacking with infinite power is sufficient.",
+      "Go all-in when you have the full combo online and no immediate threat can stop it.",
+      "If you have infinite mana, use it to win immediately.",
+      "If facing a slow deck, commit to the combo and ignore minor threats."
     ]
   },
   "key_cards": [
@@ -60,7 +78,10 @@
     "Prioritize casting Painter's Servant before opponent's permanents enter the battlefield",
     "Save Pyroblast for high-impact threats rather than early creatures",
     "Use Goblin Welder's ability strategically to trigger death triggers or draw cards at optimal moments",
-    "Maintain mana efficiency to keep interaction available for opponent's turns"
+    "Maintain mana efficiency to keep interaction available for opponent's turns",
+    "Common mistakes include overcommitting to the board before the combo is online, failing to protect the combo pieces, not sequencing the combo correctly (e.g., painting the wrong target), and ignoring hate cards.",
+    "Unique interaction: Goblin Welder can bounce the painted creature to hand and cast it again for free, triggering Painter's Servant's ability again to create infinite mana/combat.",
+    "Always check for artifact hate before committing."
   ],
   "matchups": [
     {
@@ -89,16 +110,35 @@
         "Protection spells",
         "Fast win conditions"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use protection spells (Pyroblast, Flusterstorm) to counter their counters. Sequence the combo so the final piece is cast in response to their counter, or use cantrips to dig around it. Sometimes you can win before they can respond.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply pressure quickly. Do not let them get to their big threats. Use Pyroblast to counter their ramp spells or finish them off with Lightning Bolt.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It is a race. Try to combo off faster. Use protection to counter their combo pieces. If they go first, try to disrupt their early plays. If you go first, try to combo off before they can respond.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Counterspells and removal",
     "Board wipes",
-    "Card draw engines"
+    "Card draw engines",
+    "Watch for counterspells (Flusterstorm, Mana Leak, Force of Will), artifact hate (Ensnaring Bridge, Rest in Peace, Leyline of the Void), and sweepers (Wrath of God, Day of Judgment).",
+    "If they have a sweeper, try to win before it resolves or protect the combo.",
+    "Track their hand for disruption and adjust sequencing accordingly."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + Cards Realm + Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:34:15+00:00",
     "model": "local-model",
@@ -153,6 +193,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

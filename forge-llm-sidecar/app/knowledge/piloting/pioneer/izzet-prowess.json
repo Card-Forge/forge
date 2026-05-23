@@ -7,16 +7,19 @@
     "Triggering Cori-Steel Cutter with cheap cantrips and spells to generate 1/1 tokens and deal damage",
     "Explosive turns with Monastery Swiftspear and Slickshot Show-Off to close out games quickly",
     "Using Burst Lightning and Play with Fire to clear blockers and deal direct damage",
-    "Leveraging Stormchaser’s Talent for late-game damage and breathing room"
+    "Leveraging Stormchaser\u2019s Talent for late-game damage and breathing room"
   ],
   "mulligan": {
     "keep_criteria": [
       "Hands with one-mana spells and early threats like Monastery Swiftspear",
-      "Hands with dual lands and cantrips to trigger Cori-Steel Cutter"
+      "Hands with dual lands and cantrips to trigger Cori-Steel Cutter",
+      "Keep hands with 2-3 lands (at least one Island and one Mountain), at least one Prowess creature (Cori-Steel Cutter), and 2-3 cheap instants/sorceries (Opt, Shock, Lightning Strike, etc.).",
+      "Hands with 1 land and 3+ spells are playable if they contain a Prowess creature and a cantrip."
     ],
     "mulligan_criteria": [
       "Hands lacking cheap spells to trigger equipment",
-      "Hands with only high-cost cards or multiple lands"
+      "Hands with only high-cost cards or multiple lands",
+      "Mulligan if you have 3+ lands with no spells, no Prowess creatures, or only expensive spells with no early game."
     ],
     "examples": [
       {
@@ -38,17 +41,33 @@
     "early_game": [
       "Play cheap threats and cantrips to trigger Cori-Steel Cutter",
       "Apply pressure with Monastery Swiftspear and burn spells",
-      "Use Plot cost on Slickshot Show-Off to cast multiple spells"
+      "Use Plot cost on Slickshot Show-Off to cast multiple spells",
+      "Turn 1: Play a land, cast a cantrip or cheap instant if available.",
+      "Turn 2: Play a second land, cast Cori-Steel Cutter, then follow up with an instant/sorcery to trigger Prowess and attack for 3+ damage.",
+      "If drawing lands, play them and hold up removal for potential early threats.",
+      "Always cast instants/sorceries before creatures to maximize Prowess scaling, and prioritize keeping a creature on the board to maintain pressure."
     ],
     "mid_game": [
       "Filter deck with Play with Fire scry effect at upkeep",
       "Bounce problematic permanents with Into the Flood Maw",
-      "Maintain tempo with Spell Pierce and instant-speed cantrips"
+      "Maintain tempo with Spell Pierce and instant-speed cantrips",
+      "Balance mana for Prowess triggers versus holding up removal.",
+      "Use cantrips to dig for answers or threats without overcommitting.",
+      "Avoid casting multiple instants/sorceries in a row if you lack a creature to grow, as this wastes value.",
+      "Manage your graveyard carefully if the format includes graveyard hate, but prioritize keeping spells in hand for instant-speed interaction.",
+      "Commit threats when you have sufficient instants/sorceries in hand or graveyard to keep growing them, and when the opponent has no sweepers.",
+      "Hold back if they have potential board wipes or if you're low on resources."
     ],
     "late_game": [
-      "Rely on Stormchaser’s Talent for damage and resilience",
+      "Rely on Stormchaser\u2019s Talent for damage and resilience",
       "Use Den of the Bugbear and Otawara, Soaring City for utility and threats",
-      "Avoid bad topdecks by sideboarding out Monstrous Rage against heavy removal"
+      "Avoid bad topdecks by sideboarding out Monstrous Rage against heavy removal",
+      "Emberheart Challenger and fully grown Cori-Steel Cutters.",
+      "Win via combat damage or direct damage from Stormchaser's Talent.",
+      "Use cantrips to dig for the right finisher and ensure you have enough instants/sorceries to grow them to lethal size.",
+      "Go all-in when you have 3+ instants/sorceries in hand/graveyard, the opponent has no sweepers, and you can attack for lethal or force a trade that leaves you ahead.",
+      "Commit when you've forced interaction and can safely grow a threat to 5+ toughness.",
+      "Use Stormchaser's Talent to clear blockers or finish the game directly."
     ]
   },
   "key_cards": [
@@ -68,7 +87,7 @@
       "notes": "Exponentially grows with one-mana spells and can close games via Plot cost."
     },
     {
-      "name": "Stormchaser’s Talent",
+      "name": "Stormchaser\u2019s Talent",
       "role": "Late-game threat",
       "notes": "Provides a 1/1 Prowess creature and a second ability for late-game breathing room."
     },
@@ -106,7 +125,13 @@
   "sequencing_tips": [
     "Cast instant-speed cantrips like Opt and Consider on the opponent's turn to trigger Cori-Steel Cutter before they respond.",
     "Use Play with Fire's Scry 1 effect during your upkeep to filter the top card before drawing.",
-    "Hold Into the Flood Maw until the end of the opponent's turn to bounce temporary answers like Temporary Lockdown and attack for lethal."
+    "Hold Into the Flood Maw until the end of the opponent's turn to bounce temporary answers like Temporary Lockdown and attack for lethal.",
+    "Common mistake: Overcasting instants/sorceries without threats to grow, or overcommitting to a single Prowess creature.",
+    "Always keep a Prowess creature on the board to maximize trigger value.",
+    "Remember that Prowess triggers when you cast the spell, not when it resolves, so timing matters.",
+    "Use cantrips to dig for both threats and answers.",
+    "In specific formats, check for format-specific hate cards like graveyard hate or specific removal.",
+    "Practice counting your instants/sorceries in hand and graveyard to accurately predict Prowess scaling."
   ],
   "matchups": [
     {
@@ -180,6 +205,31 @@
         "Big creatures",
         "Burn spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, redundant spells to force counterspells. Cast threats in response to their counterspells. Use cantrips to dig for answers. Don't overcommit to one big play. Value Prowess triggers over raw damage, and be willing to trade a creature if it forces a counter and leaves you ahead in cards.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to punish their mana development. Use removal on their mana dorks/rocks. Stabilize with cheap instants and close quickly. Don't let them reach their late-game threats; win before they can cast their big spells. Use Stormchaser's Talent to remove key ramp pieces.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use removal on key early threats. Cast Prowess creatures to block and grow. Don't overextend into combat tricks. Stabilize by turn 3-4. Use cantrips to dig for answers and keep pressure on. Win by outvaluing their early board with efficient removal and growing threats to block their entire lineup.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early to force interaction. Use cantrips to dig for answers. Win with unblockable Prowess threats or direct damage. Don't let them stabilize with sweepers. Force them to use resources on your early threats, then close with a fully grown Emberheart Challenger. Use Stormchaser's Talent to clear blockers or finish the game.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value Prowess triggers. Cast instants/sorceries in response to their creatures. Sideboard in more removal/counterspells. Win by outvaluing spell interactions and closing with a bigger threat. Track their graveyard and hand size, and be willing to trade creatures if it leaves you with more resources. Use Stormchaser's Talent to remove their key threats or finish the game.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -189,13 +239,15 @@
     "Cori-Steel Cutter",
     "Fable of the Mirror-Breaker",
     "Unholy Annex",
-    "Caretaker’s Talent",
+    "Caretaker\u2019s Talent",
     "Artist's Talent",
     "Monument to Endurance",
-    "Mayhem Devil"
+    "Mayhem Devil",
+    "Watch for sweepers (e.g., Supreme Verdict, Wrath of God), targeted removal, and ramp/mana rocks."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-izzet-prowess-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T03:41:48+00:00",
     "model": "local-model",
@@ -213,6 +265,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
@@ -299,7 +369,7 @@
       "confidence": 0.9,
       "kind": "explicit",
       "source_index": 0,
-      "evidence_span": "format that includes Cori-Steel Cutter, Fable of the Mirror-Breaker, Unholy Annex, Caretaker’s Talent, Artist's Talent and Monument to Endurance"
+      "evidence_span": "format that includes Cori-Steel Cutter, Fable of the Mirror-Breaker, Unholy Annex, Caretaker\u2019s Talent, Artist's Talent and Monument to Endurance"
     }
   ]
 }

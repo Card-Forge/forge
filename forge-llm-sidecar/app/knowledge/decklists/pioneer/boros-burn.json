@@ -1,0 +1,101 @@
+{
+  "archetype": "Boros Burn",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/boros-burn.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Battlefield Forge"
+    },
+    {
+      "qty": 4,
+      "name": "Boltwave"
+    },
+    {
+      "qty": 4,
+      "name": "Boros Charm"
+    },
+    {
+      "qty": 2,
+      "name": "Den of the Bugbear"
+    },
+    {
+      "qty": 4,
+      "name": "Eidolon of the Great Revel"
+    },
+    {
+      "qty": 4,
+      "name": "Inspiring Vantage"
+    },
+    {
+      "qty": 4,
+      "name": "Lightning Helix"
+    },
+    {
+      "qty": 4,
+      "name": "Monastery Swiftspear"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Play with Fire"
+    },
+    {
+      "qty": 4,
+      "name": "Ramunap Ruins"
+    },
+    {
+      "qty": 4,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 4,
+      "name": "Screaming Nemesis"
+    },
+    {
+      "qty": 4,
+      "name": "Searing Blood"
+    },
+    {
+      "qty": 4,
+      "name": "Skewer the Critics"
+    },
+    {
+      "qty": 4,
+      "name": "Skullcrack"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Deflecting Palm"
+    },
+    {
+      "qty": 3,
+      "name": "Erode"
+    },
+    {
+      "qty": 2,
+      "name": "Exquisite Firecraft"
+    },
+    {
+      "qty": 3,
+      "name": "Magebane Lizard"
+    },
+    {
+      "qty": 2,
+      "name": "Smash to Smithereens"
+    },
+    {
+      "qty": 3,
+      "name": "Sunspine Lynx"
+    }
+  ]
+}

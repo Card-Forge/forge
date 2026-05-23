@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with early land drops (2-3)",
       "Hands containing Emeritus of Ideation or Rakshasa's Bargain",
-      "Hands with a mix of creatures and recursion/removal"
+      "Hands with a mix of creatures and recursion/removal",
+      "Keep hands with 2-3 lands (prioritizing duals or fetches if available, otherwise basic Swamps, Islands, or Forests), Rakshasa's Bargain, and a turn-2 play (Emeritus of Ideation or Deceit)."
     ],
     "mulligan_criteria": [
       "Hands with 0-1 lands",
       "Hands lacking any graveyard interaction or threats",
-      "Hands with only high-cost cards and no early plays"
+      "Hands with only high-cost cards and no early plays",
+      "Mulligan on 3+ lands with no early interaction, 0 lands, or hands lacking a way to disrupt the opponent's early game."
     ],
     "examples": []
   },
@@ -25,17 +27,31 @@
     "early_game": [
       "Play lands and low-cost creatures to establish board presence",
       "Use early disruption or Deceit to counter opponent's opening strategy",
-      "Begin cycling creatures to set up the graveyard for recursion"
+      "Begin cycling creatures to set up the graveyard for recursion",
+      "Turn 1: Play a land and hold up mana for Rakshasa's Bargain or Deceit.",
+      "Turn 2: Cast Rakshasa's Bargain to disrupt Izzet spell chains or Landfall mana acceleration, or play a cheap threat/land.",
+      "If drawing Emeritus, sequence with a land drop and hold for graveyard recursion.",
+      "Avoid overcommitting to the board without answering potential removal."
     ],
     "mid_game": [
       "Cast Emeritus of Ideation to replay key spells from the graveyard",
       "Activate Rakshasa's Bargain to convert excess creatures into card advantage and life gain",
-      "Maintain board control while building toward a winning board state"
+      "Maintain board control while building toward a winning board state",
+      "Preserve mana for interaction on the opponent's turn.",
+      "Use Rakshasa's Bargain on high-impact spells (counters, big threats, win conditions).",
+      "Manage your graveyard by feeding Emeritus when you have a high-value instant or sorcery to cast, but avoid overcommitting if the opponent has graveyard hate or board wipes.",
+      "Commit threats only when you have answered their removal or can stabilize.",
+      "Hold back if the board is empty and you have disruption",
+      "trade up with removal before playing expensive creatures."
     ],
     "late_game": [
       "Leverage repeated recursion to overwhelm opponent's resources",
       "Use life gain to stabilize against burn or aggressive finishes",
-      "Close out games with resilient threats that are difficult to remove permanently"
+      "Close out games with resilient threats that are difficult to remove permanently",
+      "Emeritus of Ideation casting a high-impact spell (like a board wipe or targeted removal) plus a flying Spirit token, or Rakshasa's Bargain exiling a win condition and replaying it.",
+      "Direct damage spells and resilient creatures with flying or evasion.",
+      "When you have card advantage, have answered their removal, and can follow up with a threat or recursive spell.",
+      "Go all-in when you can close the game in 1-2 turns without leaving yourself vulnerable to a counter-swing or graveyard hate."
     ]
   },
   "key_cards": [
@@ -58,7 +74,12 @@
   "sequencing_tips": [
     "Prioritize cycling creatures before casting Rakshasa's Bargain to maximize draw and life gain",
     "Hold Deceit for opponent's key plays rather than using it preemptively",
-    "Cast Emeritus of Ideation after filling the graveyard with relevant spells to maximize replay value"
+    "Cast Emeritus of Ideation after filling the graveyard with relevant spells to maximize replay value",
+    "Avoid overcommitting to Emeritus without a clear graveyard target or follow-up.",
+    "Rakshasa's Bargain is best used on high-impact spells, not filler.",
+    "Watch for graveyard hate in control mirrors.",
+    "Deceit should be saved for critical moments or to disrupt spell chains.",
+    "Practice sequencing to avoid mana screw/flood, and always prioritize answering win conditions over developing your own board."
   ],
   "matchups": [
     {
@@ -87,16 +108,36 @@
         "Card draw engines",
         "Board control spells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Rakshasa's Bargain to exile their counterspells or key spells. Cast Emeritus or threats in response to their counters, or sequence spells to force counters on low-value targets. Utilize uncounterable threats or instant-speed recursion to bypass counters.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early disruption is key. Rakshasa's Bargain on mana rocks or big threats. Board wipes or targeted removal. Do not let them stabilize; pressure early and disrupt their mana development. Use flying tokens to bypass early ground blockers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Prioritize hand disruption and targeted removal. Rakshasa's Bargain is key to exiling their Emeritus or key spells. Win the resource war by managing your graveyard, forcing unfavorable trades, and out-recursing their high-value spells.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipe spells",
     "Counterspells and removal",
-    "Graveyard hate"
+    "Graveyard hate",
+    "Watch for Izzet's spell chains and prowess triggers.",
+    "Note Landfall's mana acceleration and token generation.",
+    "Track graveyard contents for Emeritus targets and potential graveyard hate.",
+    "Monitor opponent's hand for Rakshasa's Bargain or Deceit to avoid overcommitting to high-value spells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:00:23+00:00",
     "model": "local-model",
@@ -112,6 +153,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

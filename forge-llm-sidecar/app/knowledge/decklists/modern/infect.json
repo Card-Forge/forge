@@ -1,0 +1,109 @@
+{
+  "archetype": "Infect",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/infect.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Blighted Agent"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 3,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 2,
+      "name": "Forest"
+    },
+    {
+      "qty": 4,
+      "name": "Glistener Elf"
+    },
+    {
+      "qty": 4,
+      "name": "Groundswell"
+    },
+    {
+      "qty": 1,
+      "name": "Hedge Maze"
+    },
+    {
+      "qty": 3,
+      "name": "Ignoble Hierarch"
+    },
+    {
+      "qty": 3,
+      "name": "Inkmoth Nexus"
+    },
+    {
+      "qty": 4,
+      "name": "Might of Old Krosa"
+    },
+    {
+      "qty": 4,
+      "name": "Mutagenic Growth"
+    },
+    {
+      "qty": 4,
+      "name": "Noble Hierarch"
+    },
+    {
+      "qty": 1,
+      "name": "Pendelhaven"
+    },
+    {
+      "qty": 2,
+      "name": "Preordain"
+    },
+    {
+      "qty": 4,
+      "name": "Royal Treatment"
+    },
+    {
+      "qty": 4,
+      "name": "Scale Up"
+    },
+    {
+      "qty": 4,
+      "name": "Vines of Vastwood"
+    },
+    {
+      "qty": 4,
+      "name": "Waterlogged Grove"
+    },
+    {
+      "qty": 4,
+      "name": "Windswept Heath"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Annul"
+    },
+    {
+      "qty": 4,
+      "name": "Consign to Memory"
+    },
+    {
+      "qty": 3,
+      "name": "Force of Vigor"
+    },
+    {
+      "qty": 1,
+      "name": "Pithing Needle"
+    },
+    {
+      "qty": 3,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 3,
+      "name": "Tishana's Tidebinder"
+    }
+  ]
+}

@@ -1,0 +1,564 @@
+{
+  "schema_version": 1,
+  "name": "Cradle Control",
+  "format": "legacy",
+  "colors": [
+    "W",
+    "B",
+    "G"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "Cradle Control evolved from the traditional Elves aggro-combo deck into a resilient control archetype in Legacy. It leverages Gaea's Cradle and Natural Order alongside Modern Horizons 3 additions like Wight of the Reliquary and Springheart Nantuko to generate massive mana and token value. The deck aims to outlast opponents in attrition wars before closing the game with Craterhoof Behemoth or Atraxa, Grand Unifier.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 5,
+      "cards": [
+        "Green Sun's Zenith",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 4,
+      "cards": [
+        "Once Upon a Time",
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 20,
+      "cards": [
+        "Green Sun's Zenith",
+        "Misty Rainforest",
+        "Natural Order",
+        "Talon Gates of Madara",
+        "Verdant Catacombs",
+        "Wight of the Reliquary",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 5,
+      "cards": [
+        "Natural Order",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 42,
+      "cards": [
+        "Atraxa, Grand Unifier",
+        "Badgermole Cub",
+        "Birds of Paradise",
+        "Collector Ouphe",
+        "Craterhoof Behemoth",
+        "Dryad Arbor",
+        "Endurance",
+        "Faerie Macabre",
+        "Gaddock Teeg",
+        "Gaea's Cradle",
+        "Green Sun's Zenith",
+        "Grist, the Hunger Tide",
+        "Ignoble Hierarch",
+        "Keen-Eyed Curator",
+        "Noble Hierarch",
+        "Quirion Ranger",
+        "Springheart Nantuko",
+        "Sylvan Safekeeper",
+        "Thoughtseize",
+        "Wight of the Reliquary"
+      ],
+      "mainboard_count": 36,
+      "sideboard_count": 6
+    },
+    "removal": {
+      "target_count": 13,
+      "cards": [
+        "Abrupt Decay",
+        "Bojuka Bog",
+        "Force of Vigor",
+        "Grist, the Hunger Tide",
+        "Keen-Eyed Curator",
+        "Snuff Out",
+        "Wasteland"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 8
+    },
+    "wrath": {
+      "target_count": 8,
+      "cards": [
+        "Gaea's Cradle",
+        "Wight of the Reliquary"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Abrupt Decay",
+        "Green Sun's Zenith",
+        "Talon Gates of Madara",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 3
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 20,
+      "cards": [
+        "Bojuka Bog",
+        "Endurance",
+        "Faerie Macabre",
+        "Green Sun's Zenith",
+        "Grist, the Hunger Tide",
+        "Ignoble Hierarch",
+        "Keen-Eyed Curator",
+        "Underground Mortuary",
+        "Wight of the Reliquary"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": [
+        "Badgermole Cub",
+        "Quirion Ranger"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 5,
+      "cards": [
+        "Natural Order",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 8,
+      "cards": [
+        "Green Sun's Zenith",
+        "Ignoble Hierarch"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 11,
+      "cards": [
+        "Endurance",
+        "Green Sun's Zenith",
+        "Ignoble Hierarch"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 43,
+      "cards": [
+        "Badgermole Cub",
+        "Bayou",
+        "Birds of Paradise",
+        "Bojuka Bog",
+        "Dryad Arbor",
+        "Gaea's Cradle",
+        "Green Sun's Zenith",
+        "Ignoble Hierarch",
+        "Lair of the Hydra",
+        "Misty Rainforest",
+        "Once Upon a Time",
+        "Springheart Nantuko",
+        "Talon Gates of Madara",
+        "Underground Mortuary",
+        "Verdant Catacombs",
+        "Wasteland",
+        "Wight of the Reliquary",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 43,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 23,
+      "cards": [
+        "Bayou",
+        "Bojuka Bog",
+        "Dryad Arbor",
+        "Forest",
+        "Gaea's Cradle",
+        "Lair of the Hydra",
+        "Misty Rainforest",
+        "Talon Gates of Madara",
+        "Underground Mortuary",
+        "Verdant Catacombs",
+        "Wasteland",
+        "Windswept Heath",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Grist, the Hunger Tide"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.32
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abrupt Decay",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Badgermole Cub",
+      "roles": [
+        "mana_fixing",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bayou",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Birds of Paradise",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bojuka Bog",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dryad Arbor",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Endurance",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Macabre",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gaea's Cradle",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Green Sun's Zenith",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "protection",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grist, the Hunger Tide",
+      "roles": [
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ignoble Hierarch",
+      "roles": [
+        "combo_pieces",
+        "graveyard_enablers",
+        "hate_pieces",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Keen-Eyed Curator",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lair of the Hydra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Natural Order",
+      "roles": [
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Once Upon a Time",
+      "roles": [
+        "dig_draw",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Quirion Ranger",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Springheart Nantuko",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Talon Gates of Madara",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Mortuary",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veil of Summer",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Verdant Catacombs",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wight of the Reliquary",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats",
+        "tutors_wildcards",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize playing Atraxa, Grand Unifier as fast as possible against Red Stompy",
+    "Avoid over-relying on mana dorks when facing Orcish Bowmasters",
+    "Use Gaea's Cradle mana to activate Lair of the Hydra for powerful attacks",
+    "Tutor for specific answers with Wight, Reclaimer, and Zenith before committing to win conditions",
+    "Common mistakes include overcommitting to Cradle of Safety without a threat, mismanaging fetch lands, and failing to sideboard in Rest in Peace/Leyline against combo."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play 1-mana dorks and Elvish Reclaimer to establish board presence and mana"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Once Upon a Time for consistency and card advantage"
+    },
+    {
+      "trigger": "early game",
+      "line": "Search for lands with Wight of the Reliquary and Elvish Reclaimer"
+    }
+  ],
+  "kill_priority": [
+    "Natural Order",
+    "Windswept Heath",
+    "Green Sun's Zenith",
+    "Ignoble Hierarch",
+    "Grist, the Hunger Tide",
+    "Atraxa, Grand Unifier",
+    "Badgermole Cub",
+    "Birds of Paradise"
+  ],
+  "interaction_to_disrupt": [
+    "Abrupt Decay",
+    "Green Sun's Zenith",
+    "Talon Gates of Madara",
+    "Veil of Summer",
+    "Bojuka Bog",
+    "Force of Vigor",
+    "Grist, the Hunger Tide",
+    "Keen-Eyed Curator"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/cradle-control.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

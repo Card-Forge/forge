@@ -1,0 +1,93 @@
+{
+  "archetype": "Song of Creation",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/song-of-creation.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Aether Hub"
+    },
+    {
+      "qty": 4,
+      "name": "An Offer You Can't Refuse"
+    },
+    {
+      "qty": 4,
+      "name": "Astral Cornucopia"
+    },
+    {
+      "qty": 4,
+      "name": "Beseech the Mirror"
+    },
+    {
+      "qty": 4,
+      "name": "Bone Saw"
+    },
+    {
+      "qty": 3,
+      "name": "Deadly Dispute"
+    },
+    {
+      "qty": 4,
+      "name": "Gilded Goose"
+    },
+    {
+      "qty": 4,
+      "name": "Mana Confluence"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Amber"
+    },
+    {
+      "qty": 4,
+      "name": "Mox Jasper"
+    },
+    {
+      "qty": 4,
+      "name": "Song of Creation"
+    },
+    {
+      "qty": 4,
+      "name": "Spire of Industry"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Stonecoil Serpent"
+    },
+    {
+      "qty": 1,
+      "name": "Thassa's Oracle"
+    },
+    {
+      "qty": 4,
+      "name": "Tormod's Crypt"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Into the Flood Maw"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of Sanctity"
+    },
+    {
+      "qty": 4,
+      "name": "Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 2,
+      "name": "Voice of Victory"
+    }
+  ]
+}

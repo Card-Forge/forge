@@ -1,0 +1,470 @@
+{
+  "schema_version": 1,
+  "name": "Blue Tinker",
+  "format": "vintage",
+  "colors": [
+    "W",
+    "U",
+    "B"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "Blue Tinker is a Vintage combo archetype that leverages artifact synergy and card draw to bypass traditional resource curves. By combining Tinker's mana reduction with Flow State's draw engine and Stock Up's artifact acceleration, the deck aims to assemble high-impact spells quickly. The WUB color scheme provides versatile disruption and finishers while maintaining a focused artifact-centric game plan.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 5,
+      "cards": [
+        "Stock Up",
+        "Tinker"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 16,
+      "cards": [
+        "Ancestral Recall",
+        "Flow State",
+        "Gitaxian Probe",
+        "L\u00f3rien Revealed",
+        "Ponder",
+        "Stock Up",
+        "Tinker",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 12,
+      "cards": [
+        "Bolas's Citadel",
+        "Flow State",
+        "Meticulous Archive",
+        "Ponder",
+        "Stock Up",
+        "Tinker"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 10,
+      "cards": [
+        "Flooded Strand",
+        "L\u00f3rien Revealed",
+        "Mystical Tutor",
+        "Tinker",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 10,
+      "cards": [
+        "Flow State",
+        "Sphinx of the Steel Wind",
+        "Stock Up",
+        "Tinker"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 1
+    },
+    "threats": {
+      "target_count": 27,
+      "cards": [
+        "Containment Priest",
+        "Flow State",
+        "Karn, the Great Creator",
+        "Monastery Mentor",
+        "Mox Emerald",
+        "Mox Jet",
+        "Mox Pearl",
+        "Mox Ruby",
+        "Mox Sapphire",
+        "Sol Ring",
+        "Sphinx of the Steel Wind",
+        "Stock Up",
+        "Time Walk",
+        "Tinker",
+        "White Plume Adventurer"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 7
+    },
+    "removal": {
+      "target_count": 9,
+      "cards": [
+        "Strip Mine",
+        "Swords to Plowshares",
+        "Wasteland"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "White Plume Adventurer"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 15,
+      "cards": [
+        "Consign to Memory",
+        "Flusterstorm",
+        "Force of Negation",
+        "Force of Will",
+        "Mental Misstep"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 6
+    },
+    "protection": {
+      "target_count": 1,
+      "cards": [
+        "Sphinx of the Steel Wind"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": [
+        "Flow State",
+        "Force of Negation",
+        "Meticulous Archive"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 1,
+      "cards": [
+        "Hurkyl's Recall"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 6,
+      "cards": [
+        "Flow State",
+        "Monastery Mentor",
+        "Tinker"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 1,
+      "cards": [
+        "Sphinx of the Steel Wind"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "combo_pieces": {
+      "target_count": 5,
+      "cards": [
+        "Flow State",
+        "Tinker"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Gitaxian Probe"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 23,
+      "cards": [
+        "Black Lotus",
+        "Flooded Strand",
+        "Flow State",
+        "Meticulous Archive",
+        "Mycosynth Lattice",
+        "Strip Mine",
+        "Tinker",
+        "Tolarian Academy",
+        "Tundra",
+        "Urza's Saga",
+        "Wasteland"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Flooded Strand",
+        "Island",
+        "Meticulous Archive",
+        "Plains",
+        "Strip Mine",
+        "Tolarian Academy",
+        "Tundra",
+        "Urza's Saga",
+        "Wasteland"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Karn, the Great Creator"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.26
+  },
+  "dual_role_cards": [
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flow State",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gitaxian Probe",
+      "roles": [
+        "card_advantage",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karn, the Great Creator",
+      "roles": [
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "L\u00f3rien Revealed",
+      "roles": [
+        "card_advantage",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Monastery Mentor",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sphinx of the Steel Wind",
+      "roles": [
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stock Up",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "mana_reducers",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Strip Mine",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tinker",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "mana_fixing",
+        "mana_reducers",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tolarian Academy",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tundra",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wasteland",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "White Plume Adventurer",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always assess opponent's hand size and known threats before casting Tinker",
+    "Hold back one artifact to ensure Tinker remains legal if the first is countered",
+    "Cast Flow State after playing artifacts to maximize draw potential and find follow-up pieces",
+    "Use Stock Up to trigger artifact synergies before committing to a Tinker resolution",
+    "Tinker is an instant, so it can be cast in response to threats, but be careful of targeted removal."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize drawing cards and finding artifacts to fuel Tinker"
+    },
+    {
+      "trigger": "early game",
+      "line": "Play cheap artifacts to reduce Tinker's cost and enable Flow State"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use disruption to delay opponent's game plan while assembling pieces"
+    }
+  ],
+  "kill_priority": [
+    "Flow State",
+    "Monastery Mentor",
+    "Tinker",
+    "Sphinx of the Steel Wind",
+    "Stock Up",
+    "Karn, the Great Creator",
+    "Containment Priest",
+    "Mox Emerald"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Flusterstorm",
+    "Force of Negation",
+    "Force of Will",
+    "Mental Misstep",
+    "Sphinx of the Steel Wind",
+    "Strip Mine",
+    "Swords to Plowshares"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/vintage/blue-tinker.dck",
+    "generated_at": "2026-05-23T04:44:35+00:00"
+  }
+}

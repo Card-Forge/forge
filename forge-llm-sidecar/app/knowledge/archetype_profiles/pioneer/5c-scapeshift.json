@@ -1,0 +1,519 @@
+{
+  "schema_version": 1,
+  "name": "5c Scapeshift",
+  "format": "pioneer",
+  "colors": [
+    "W",
+    "U",
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "ramp",
+  "expected_deck_total": 61,
+  "macro_plan": "5c Scapeshift is a Pioneer ramp archetype that uses Scapeshift to rapidly accelerate mana and play oversized threats. By leveraging five-color synergy, the deck efficiently tutors for and casts powerful spells like Lumra, Bellow of the Woods. Formidable Speaker provides additional value by casting cheap spells for free, enabling a smooth transition from early disruption to late-game dominance.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 4,
+      "cards": [
+        "Lumra, Bellow of the Woods"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Culling Ritual"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 4
+    },
+    "card_advantage": {
+      "target_count": 18,
+      "cards": [
+        "Binding the Old Gods",
+        "Formidable Speaker",
+        "Kenrith, the Returned King",
+        "Lessons from Life",
+        "Scapeshift",
+        "Spelunking",
+        "Summon: Leviathan"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 5
+    },
+    "dig_draw": {
+      "target_count": 12,
+      "cards": [
+        "Arid Archway",
+        "Hedge Maze",
+        "Scapeshift",
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 10,
+      "cards": [
+        "Binding the Old Gods",
+        "Formidable Speaker",
+        "Scapeshift"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 2
+    },
+    "win_conditions": {
+      "target_count": 8,
+      "cards": [
+        "Lumra, Bellow of the Woods",
+        "Scapeshift"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 28,
+      "cards": [
+        "Aftermath Analyst",
+        "Arboreal Grazer",
+        "Emrakul, the Promised End",
+        "Formidable Speaker",
+        "Glasspool Mimic",
+        "Kaervek, the Spiteful",
+        "Kenrith, the Returned King",
+        "Lumra, Bellow of the Woods",
+        "Scapeshift",
+        "Summon: Leviathan",
+        "Terror of the Peaks",
+        "The Wandering Minstrel"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 14,
+      "cards": [
+        "Abrupt Decay",
+        "Binding the Old Gods",
+        "Boseiju, Who Endures",
+        "Culling Ritual",
+        "Otawara, Soaring City",
+        "Terror of the Peaks"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 10
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Kenrith, the Returned King",
+        "Summon: Leviathan"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 14,
+      "cards": [
+        "Abrupt Decay",
+        "Emrakul, the Promised End",
+        "Lotus Field",
+        "Scapeshift",
+        "Summon: Leviathan"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 6
+    },
+    "discard_outlets": {
+      "target_count": 8,
+      "cards": [
+        "Formidable Speaker",
+        "Scapeshift"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 24,
+      "cards": [
+        "Aftermath Analyst",
+        "Arid Archway",
+        "Emrakul, the Promised End",
+        "Hedge Maze",
+        "Kenrith, the Returned King",
+        "Lumra, Bellow of the Woods",
+        "Port of Karfell",
+        "Scapeshift",
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 14,
+      "cards": [
+        "Aftermath Analyst",
+        "Arid Archway",
+        "Kenrith, the Returned King",
+        "Lumra, Bellow of the Woods",
+        "Otawara, Soaring City",
+        "Port of Karfell",
+        "Summon: Leviathan"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Formidable Speaker",
+        "Scapeshift"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 8,
+      "cards": [
+        "Lumra, Bellow of the Woods",
+        "Scapeshift"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Scapeshift"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 42,
+      "cards": [
+        "Arid Archway",
+        "Boseiju, Who Endures",
+        "Castle Garenbrig",
+        "Crumbling Vestige",
+        "Formidable Speaker",
+        "Hedge Maze",
+        "Lotus Field",
+        "Lumra, Bellow of the Woods",
+        "Otawara, Soaring City",
+        "Port of Karfell",
+        "Scapeshift",
+        "Starting Town",
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 42,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 32,
+      "cards": [
+        "Arid Archway",
+        "Boseiju, Who Endures",
+        "Castle Garenbrig",
+        "Crumbling Vestige",
+        "Forest",
+        "Hedge Maze",
+        "Lotus Field",
+        "Otawara, Soaring City",
+        "Port of Karfell",
+        "Starting Town",
+        "Underground Mortuary"
+      ],
+      "mainboard_count": 32,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.39
+  },
+  "dual_role_cards": [
+    {
+      "card": "Abrupt Decay",
+      "roles": [
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Aftermath Analyst",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Archway",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Binding the Old Gods",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Castle Garenbrig",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Crumbling Vestige",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Culling Ritual",
+      "roles": [
+        "removal",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emrakul, the Promised End",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Formidable Speaker",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "engines",
+        "mana_fixing",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hedge Maze",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kenrith, the Returned King",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lotus Field",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lumra, Bellow of the Woods",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing",
+        "mana_reducers",
+        "payoff_cards",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Port of Karfell",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scapeshift",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Starting Town",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Summon: Leviathan",
+      "roles": [
+        "card_advantage",
+        "protection",
+        "recursion",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Terror of the Peaks",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Underground Mortuary",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Play lands before casting Scapeshift to maximize the number of lands you can put onto the battlefield",
+    "Hold Scapeshift until you have a clear path to play Lumra or another high-cost threat",
+    "Use Formidable Speaker's triggered ability before or after Scapeshift depending on whether you need immediate interaction or want to save cheap spells for later",
+    "Avoid overcommitting to the board early if you plan to Scapeshift, as discarded lands can be replaced",
+    "Scapeshift is a sorcery, so it's vulnerable to instant-speed interaction"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and hold Scapeshift until you have a safe window to dump lands"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Formidable Speaker to cast cheap interaction or draw cards"
+    },
+    {
+      "trigger": "early game",
+      "line": "Avoid playing unnecessary lands before Scapeshift to maximize land count for the spell"
+    }
+  ],
+  "kill_priority": [
+    "Formidable Speaker",
+    "Scapeshift",
+    "Lumra, Bellow of the Woods",
+    "Aftermath Analyst",
+    "Arboreal Grazer",
+    "Emrakul, the Promised End",
+    "Glasspool Mimic",
+    "Kaervek, the Spiteful"
+  ],
+  "interaction_to_disrupt": [
+    "Abrupt Decay",
+    "Emrakul, the Promised End",
+    "Lotus Field",
+    "Scapeshift",
+    "Summon: Leviathan",
+    "Binding the Old Gods",
+    "Boseiju, Who Endures",
+    "Culling Ritual"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/5c-scapeshift.dck",
+    "generated_at": "2026-05-23T04:43:28+00:00"
+  }
+}

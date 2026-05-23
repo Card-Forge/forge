@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with at least one land and a draw engine or interaction",
       "Early Ponder or Flow State to stabilize turn one",
-      "Cephalid Illusionist with a way to cast it early"
+      "Cephalid Illusionist with a way to cast it early",
+      "Keep hands with 2-3 lands (prioritize fetch/dual lands for WUB consistency), Ponder or Flow State, and at least one early game piece (Cephalid Illusionist or a cheap cantrip).",
+      "Keep any hand with Ponder + 2 lands as it provides immediate setup."
     ],
     "mulligan_criteria": [
       "Hands lacking lands or draw spells",
       "Hands with only high-cost cards and no early game plan",
-      "Hands without Ponder or Flow State in a 6-card hand"
+      "Hands without Ponder or Flow State in a 6-card hand",
+      "Mulligan if you have 0-1 lands, only high-cost spells, or no way to interact/develop on turn 1-2."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and cast Ponder to filter for Flow State or Illusionist",
       "Prioritize keeping the hand size up to maintain options",
-      "Use cheap interaction to protect your draw engine"
+      "Use cheap interaction to protect your draw engine",
+      "Turn 1: Play a land, cast Ponder if possible to filter into key pieces or lands.",
+      "Turn 2: Play a land, cast Cephalid Illusionist or a cheap cantrip, then follow up with Flow State if you have multiple spells with CMC < 3 in hand.",
+      "Sequence lands to ensure WUB mana by turn 3, prioritizing utility lands that can enter untapped or fetch basics."
     ],
     "mid_game": [
       "Attack with Cephalid Illusionist to trigger its card draw ability",
       "Cast Flow State repeatedly to generate massive card advantage",
-      "Use drawn cards to answer opponent threats and maintain board control"
+      "Use drawn cards to answer opponent threats and maintain board control",
+      "Prioritize keeping Flow State for turns where you can cast 3+ spells with CMC < 3.",
+      "Use Ponder to dig for key pieces or lands rather than spending it on filler.",
+      "Don't overcommit mana if you can't follow up",
+      "mill strategically to set up recursion or win conditions while preserving interaction for critical turns.",
+      "Commit threats when you have card advantage in hand or can protect them with counterspells/removal.",
+      "Hold back if the opponent has sweepers or heavy interaction."
     ],
     "late_game": [
       "Leverage near-infinite card draw to find win conditions",
       "Apply pressure with Illusionist while cycling through the deck",
-      "Close out games by outdrawing and outmaneuvering opponents"
+      "Close out games by outdrawing and outmaneuvering opponents",
+      "Cephalid Illusionist + Flow State combos, milling the opponent's library to zero, or recursive value engines that out-value the board.",
+      "Get there by stabilizing the board, maintaining card advantage, and setting up the graveyard for recursion or lethal damage.",
+      "Go all-in when you have Flow State on the stack, multiple cheap spells in hand, and the opponent has no sweepers or interaction.",
+      "Also commit when you can mill the opponent's library to zero or when you have a guaranteed lethal combo.",
+      "Don't hesitate to cast Flow State if you can cast 3+ spells and the opponent has no counterspells."
     ]
   },
   "key_cards": [
@@ -58,7 +75,13 @@
   "sequencing_tips": [
     "Always Ponder before committing to a big play to ensure you have answers",
     "Attack with Illusionist before casting Flow State to maximize card draw in a single turn",
-    "Hold up mana for interaction before committing to draw spells to avoid being countered"
+    "Hold up mana for interaction before committing to draw spells to avoid being countered",
+    "Flow State is your most powerful card but requires careful sequencing",
+    "don't cast it unless you have a clear plan to cast 3+ spells with CMC < 3.",
+    "Ponder is essential for consistency",
+    "never skip it unless you're on the play and need to develop.",
+    "Watch out for Leyline of the Void or Rest in Peace as they can shut down your recursion.",
+    "Practice your mana base to ensure WUB consistency, and always prioritize card selection over raw power in the early game."
   ],
   "matchups": [
     {
@@ -87,16 +110,35 @@
         "Graveyard recursion",
         "Mana acceleration"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Flow State to cast multiple spells, making it hard to counter all. Use Ponder to dig for uncounterable threats or protection. Sequence spells to force counters on less important ones, and save counterspells for their key interaction. Consider casting Flow State in response to their counterspell to maximize value.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure, use Thoughtseize to steal key ramp pieces, and use Dismember to remove their mana sources. Out-value them with card draw and mill strategically to disrupt their late-game plan. Don't let them stabilize; keep the pressure on with cheap threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war. Use Thoughtseize to strip their Flow State or key cantrips. Prioritize keeping lands and interaction. Win by out-drawing and out-recursing. Sequence Ponder to find the right pieces and use Flow State to cast multiple spells when the opponent has no counterspells.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Counterspell packages",
     "Board wipe spells",
-    "Graveyard hate"
+    "Graveyard hate",
+    "Watch for sweepers (e.g., Wrath of God, Supreme Verdict), counterspells, and graveyard hate.",
+    "Note when opponents hold up mana for multiple turns (likely holding interaction).",
+    "Track their graveyard size if they play graveyard synergies, and monitor their library size if they're running mill or combo win conditions."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T08:03:56+00:00",
     "model": "local-model",
@@ -125,6 +167,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

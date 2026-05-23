@@ -1,0 +1,380 @@
+{
+  "archetype": "Animar, Soul of Elements",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/animar-soul-of-elements.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abundant Countryside"
+    },
+    {
+      "qty": 1,
+      "name": "Aether Channeler"
+    },
+    {
+      "qty": 1,
+      "name": "Ainok Survivalist"
+    },
+    {
+      "qty": 1,
+      "name": "Ancestral Statue"
+    },
+    {
+      "qty": 1,
+      "name": "Ancient Ziggurat"
+    },
+    {
+      "qty": 1,
+      "name": "Animar, Soul of Elements"
+    },
+    {
+      "qty": 1,
+      "name": "Anticausal Vestige"
+    },
+    {
+      "qty": 1,
+      "name": "Augur of Autumn"
+    },
+    {
+      "qty": 1,
+      "name": "Barkchannel Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Beast Whisperer"
+    },
+    {
+      "qty": 1,
+      "name": "Beastcaller Savant"
+    },
+    {
+      "qty": 1,
+      "name": "Biophagus"
+    },
+    {
+      "qty": 1,
+      "name": "Birds of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Bolt Bend"
+    },
+    {
+      "qty": 1,
+      "name": "Boltbender"
+    },
+    {
+      "qty": 1,
+      "name": "Boseiju, Who Endures"
+    },
+    {
+      "qty": 1,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Broodguard Elite"
+    },
+    {
+      "qty": 1,
+      "name": "City of Brass"
+    },
+    {
+      "qty": 1,
+      "name": "Cloud of Faeries"
+    },
+    {
+      "qty": 1,
+      "name": "Cloudstone Curio"
+    },
+    {
+      "qty": 1,
+      "name": "Command Beacon"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Cragcrown Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Craterhoof Behemoth"
+    },
+    {
+      "qty": 1,
+      "name": "Den Protector"
+    },
+    {
+      "qty": 1,
+      "name": "Dreamroot Cascade"
+    },
+    {
+      "qty": 1,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Fanatic of Rhonas"
+    },
+    {
+      "qty": 5,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Fyndhorn Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Germinating Wurm"
+    },
+    {
+      "qty": 1,
+      "name": "Glen Elendra Archmage"
+    },
+    {
+      "qty": 1,
+      "name": "Glimpse of Nature"
+    },
+    {
+      "qty": 1,
+      "name": "Guardian Project"
+    },
+    {
+      "qty": 1,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 1,
+      "name": "Hideous Taskmaster"
+    },
+    {
+      "qty": 1,
+      "name": "Hullbreaker Horror"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroelectric Specimen"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroid Krasis"
+    },
+    {
+      "qty": 1,
+      "name": "Imperial Recruiter"
+    },
+    {
+      "qty": 1,
+      "name": "Inga and Esika"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Karplusan Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Kinnan, Bonder Prodigy"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Elves"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Loamspeaker"
+    },
+    {
+      "qty": 1,
+      "name": "Lord of Change"
+    },
+    {
+      "qty": 1,
+      "name": "Mawloc"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Mulldrifter"
+    },
+    {
+      "qty": 1,
+      "name": "Nulldrifter"
+    },
+    {
+      "qty": 1,
+      "name": "Ornithopter of Paradise"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Peregrine Drake"
+    },
+    {
+      "qty": 1,
+      "name": "Phyrexian Metamorph"
+    },
+    {
+      "qty": 1,
+      "name": "Primordial Sage"
+    },
+    {
+      "qty": 1,
+      "name": "Purphoros, God of the Forge"
+    },
+    {
+      "qty": 1,
+      "name": "Rattleclaw Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Rejuvenating Springs"
+    },
+    {
+      "qty": 1,
+      "name": "Riverglide Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Rockfall Vale"
+    },
+    {
+      "qty": 1,
+      "name": "Shivan Reef"
+    },
+    {
+      "qty": 1,
+      "name": "Shrieking Drake"
+    },
+    {
+      "qty": 1,
+      "name": "Simian Simulacrum"
+    },
+    {
+      "qty": 1,
+      "name": "Sister of Silence"
+    },
+    {
+      "qty": 1,
+      "name": "Slash, Reptile Rampager"
+    },
+    {
+      "qty": 1,
+      "name": "Slip Out the Back"
+    },
+    {
+      "qty": 1,
+      "name": "Smirking Spelljacker"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Soul of the Harvest"
+    },
+    {
+      "qty": 1,
+      "name": "Spellseeker"
+    },
+    {
+      "qty": 1,
+      "name": "Spider Manifestation"
+    },
+    {
+      "qty": 1,
+      "name": "Spire Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 1,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 1,
+      "name": "Stratus Dancer"
+    },
+    {
+      "qty": 1,
+      "name": "Stubborn Denial"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Caryatid"
+    },
+    {
+      "qty": 1,
+      "name": "Sylvan Safekeeper"
+    },
+    {
+      "qty": 1,
+      "name": "Temur Sabertooth"
+    },
+    {
+      "qty": 1,
+      "name": "The Ozolith"
+    },
+    {
+      "qty": 1,
+      "name": "Tishana's Tidebinder"
+    },
+    {
+      "qty": 1,
+      "name": "Training Center"
+    },
+    {
+      "qty": 1,
+      "name": "Treasonous Ogre"
+    },
+    {
+      "qty": 1,
+      "name": "Vizier of the Menagerie"
+    },
+    {
+      "qty": 1,
+      "name": "Walking Ballista"
+    },
+    {
+      "qty": 1,
+      "name": "Weird Harvest"
+    },
+    {
+      "qty": 1,
+      "name": "Yavimaya Coast"
+    },
+    {
+      "qty": 1,
+      "name": "Yavimaya, Cradle of Growth"
+    },
+    {
+      "qty": 1,
+      "name": "Zoanthrope"
+    }
+  ],
+  "sideboard": []
+}

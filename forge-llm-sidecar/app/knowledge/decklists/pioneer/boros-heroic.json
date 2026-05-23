@@ -1,0 +1,125 @@
+{
+  "archetype": "Boros Heroic",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/boros-heroic.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ancestral Anger"
+    },
+    {
+      "qty": 4,
+      "name": "Battlefield Forge"
+    },
+    {
+      "qty": 4,
+      "name": "Defiant Strike"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 4,
+      "name": "Favored Hoplite"
+    },
+    {
+      "qty": 4,
+      "name": "Gods Willing"
+    },
+    {
+      "qty": 4,
+      "name": "Honor"
+    },
+    {
+      "qty": 4,
+      "name": "Illuminator Virtuoso"
+    },
+    {
+      "qty": 4,
+      "name": "Inspiring Vantage"
+    },
+    {
+      "qty": 4,
+      "name": "Leyline of Resonance"
+    },
+    {
+      "qty": 4,
+      "name": "Monastery Swiftspear"
+    },
+    {
+      "qty": 4,
+      "name": "Monstrous Rage"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Needleverge Pathway"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Reckless Rage"
+    },
+    {
+      "qty": 4,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 1,
+      "name": "Sokenzan, Crucible of Defiance"
+    },
+    {
+      "qty": 2,
+      "name": "Sunbillow Verge"
+    },
+    {
+      "qty": 3,
+      "name": "Tenth District Legionnaire"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Boros Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Lorehold Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Portable Hole"
+    },
+    {
+      "qty": 2,
+      "name": "Reckless Rage"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Rip Apart"
+    },
+    {
+      "qty": 1,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 1,
+      "name": "Shardmage's Rescue"
+    },
+    {
+      "qty": 3,
+      "name": "Sheltered by Ghosts"
+    }
+  ]
+}

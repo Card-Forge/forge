@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with early interaction and a land",
       "Hands containing Tablet of Discovery or Ashling's Command with mana",
-      "Hands with two-land starts that include a counterspell or removal"
+      "Hands with two-land starts that include a counterspell or removal",
+      "Keep any hand with two lands (preferably one fetchable or dual) and at least one removal spell (Ashling's Command) or a turn-1/2 play.",
+      "Keep hands with Tablet of Discovery if paired with a land and a cantrip/removal."
     ],
     "mulligan_criteria": [
       "Mana screws with no early interaction",
       "Hands heavy on finishers without disruption",
-      "Three-land starts lacking early game answers"
+      "Three-land starts lacking early game answers",
+      "Mulligan anything with three+ lands, three+ non-basic lands without fetches, or hands lacking early interaction against aggro/ramp."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Play lands and hold up mana for counterspells",
       "Use red removal to clear early threats",
-      "Prioritize surviving turns 1-3 over developing board presence"
+      "Prioritize surviving turns 1-3 over developing board presence",
+      "Turn 1: Play a land, optionally cast a cantrip or hold up interaction.",
+      "Turn 2: Play a second land, cast Tablet of Discovery for mana acceleration and card draw, or play a cheap threat/interaction.",
+      "Prioritize maintaining open mana for counterspells/removal through opponent's turns."
     ],
     "mid_game": [
       "Deploy Tablet of Discovery to filter and draw into answers",
       "Use Ashling's Command to stabilize and generate card advantage",
-      "Begin applying pressure with resilient creatures like Colorstorm Stallion"
+      "Begin applying pressure with resilient creatures like Colorstorm Stallion",
+      "Preserve mana for interaction until the opponent commits.",
+      "Use Tablet of Discovery to cycle into answers or threats.",
+      "Never overextend into known removal",
+      "keep a hand of 3-4 cards to navigate the late game.",
+      "Manage graveyard by avoiding unnecessary sacrifice outlets unless necessary, as Ashling's Command can exile threats.",
+      "Commit threats only when you have answered or out-value the opponent's board."
     ],
     "late_game": [
       "Leverage Ashling's Command's triggered abilities to outvalue opponents",
       "Use Colorstorm Stallion's evasion and power to close the game",
-      "Maintain hand size and mana advantage to dictate the pace"
+      "Maintain hand size and mana advantage to dictate the pace",
+      "Colorstorm Stallion serves as the primary win condition, often supported by Ashling's Command for protection or removal.",
+      "Tablet of Discovery ensures you draw into your finisher and have mana to cast it.",
+      "Chain cantrips and interaction to stabilize, then deploy the Stallion when the board is clear or protected.",
+      "Go all-in when you have card advantage, the opponent has no answers in hand, or you've removed their primary interaction.",
+      "Commit when you can safely cast Colorstorm Stallion and have backup interaction to protect it or close the game."
     ]
   },
   "key_cards": [
@@ -58,7 +75,13 @@
   "sequencing_tips": [
     "Hold up blue mana for counterspells before committing to red removal",
     "Trigger Ashling's Command abilities before casting Tablet of Discovery to maximize card draw",
-    "Save Colorstorm Stallion's ability for when it can bypass a key blocker or deal lethal damage"
+    "Save Colorstorm Stallion's ability for when it can bypass a key blocker or deal lethal damage",
+    "Common mistakes include overcommitting to threats without answering the board, mismanaging open mana for interaction, and failing to track opponent's graveyard/hand size.",
+    "Tablet of Discovery is a double-edged sword",
+    "use it to dig for answers early, but be mindful of flooding your board with non-creatures.",
+    "Ashling's Command's modes should be chosen based on the board state: exile for key threats, draw for card advantage, or life gain for stabilization.",
+    "Colorstorm Stallion requires protection or a clear board to be effective",
+    "don't cast it into known removal."
   ],
   "matchups": [
     {
@@ -87,15 +110,34 @@
         "Card draw spells",
         "Resilient threats"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Ashling's Command to remove counterspellers or protect your spells. Cast threats in response to their counterspells to force trades. Use Tablet of Discovery to dig for alternative paths or additional interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Prioritize early removal and discard to disrupt their mana development. Use Tablet of Discovery to race their acceleration while maintaining card advantage. Bring in artifact/enchantment hate and early board control.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war. Use Tablet of Discovery to out-draw them. Protect your threats with Ashling's Command. Hold up counterspells for their key plays. Force them to overcommit by threatening with Colorstorm Stallion when they've exhausted their interaction.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Fast aggressive creatures",
     "Board wipes",
-    "Direct damage spells"
+    "Direct damage spells",
+    "Watch for mana bases and land drops to predict ramp or combo turns.",
+    "Track opponent's hand size and graveyard to anticipate combo pieces or value engines.",
+    "Note when they hold up mana past turn 3, indicating potential counterspells or late-game threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm + builder_llm_default",
+    "source": "Cards Realm + builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T06:26:14+00:00",
     "model": "local-model",
@@ -124,6 +166,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

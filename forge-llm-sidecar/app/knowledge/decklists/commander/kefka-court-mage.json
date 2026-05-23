@@ -1,0 +1,384 @@
+{
+  "archetype": "Kefka, Court Mage",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/kefka-court-mage.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Aclazotz, Deepest Betrayal"
+    },
+    {
+      "qty": 1,
+      "name": "Angrath, the Flame-Chained"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archfiend of Ifnir"
+    },
+    {
+      "qty": 1,
+      "name": "Archon of Cruelty"
+    },
+    {
+      "qty": 1,
+      "name": "Bandit's Talent"
+    },
+    {
+      "qty": 1,
+      "name": "Blasphemous Act"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Blood on the Snow"
+    },
+    {
+      "qty": 1,
+      "name": "Boggart Trawler"
+    },
+    {
+      "qty": 1,
+      "name": "Bone Miser"
+    },
+    {
+      "qty": 1,
+      "name": "Cabal Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Chaos Warp"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Consign // Oblivion"
+    },
+    {
+      "qty": 1,
+      "name": "Cool but Rude"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Court of Ambition"
+    },
+    {
+      "qty": 1,
+      "name": "Crosis's Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Cunning Lethemancer"
+    },
+    {
+      "qty": 1,
+      "name": "Currency Converter"
+    },
+    {
+      "qty": 1,
+      "name": "Dark Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Demolition Field"
+    },
+    {
+      "qty": 1,
+      "name": "Demonic Counsel"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonskull Summit"
+    },
+    {
+      "qty": 1,
+      "name": "Drowned Catacomb"
+    },
+    {
+      "qty": 1,
+      "name": "Evacuation"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Fell Specter"
+    },
+    {
+      "qty": 1,
+      "name": "Fell the Profane"
+    },
+    {
+      "qty": 1,
+      "name": "Fellwar Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Geth's Grimoire"
+    },
+    {
+      "qty": 1,
+      "name": "Glint-Horn Buccaneer"
+    },
+    {
+      "qty": 1,
+      "name": "Gogo, Master of Mimicry"
+    },
+    {
+      "qty": 1,
+      "name": "Harmonic Prodigy"
+    },
+    {
+      "qty": 1,
+      "name": "Haunted Ridge"
+    },
+    {
+      "qty": 1,
+      "name": "Hydroelectric Specimen"
+    },
+    {
+      "qty": 1,
+      "name": "Ice Tunnel"
+    },
+    {
+      "qty": 1,
+      "name": "Invasion of Amonkhet"
+    },
+    {
+      "qty": 3,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Izzet Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Kefka, Court Mage"
+    },
+    {
+      "qty": 1,
+      "name": "Lightning Greaves"
+    },
+    {
+      "qty": 1,
+      "name": "Liliana of the Veil"
+    },
+    {
+      "qty": 1,
+      "name": "Malakir Rebirth"
+    },
+    {
+      "qty": 1,
+      "name": "Mind Rake"
+    },
+    {
+      "qty": 1,
+      "name": "Monument to Endurance"
+    },
+    {
+      "qty": 3,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Myriad Landscape"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Nicol Bolas, the Ravager"
+    },
+    {
+      "qty": 1,
+      "name": "Norman Osborn"
+    },
+    {
+      "qty": 1,
+      "name": "Notion Thief"
+    },
+    {
+      "qty": 1,
+      "name": "Oppression"
+    },
+    {
+      "qty": 1,
+      "name": "Oscorp Industries"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Pinnacle Monk"
+    },
+    {
+      "qty": 1,
+      "name": "Plaguecrafter"
+    },
+    {
+      "qty": 1,
+      "name": "Raiders' Wake"
+    },
+    {
+      "qty": 1,
+      "name": "Rakdos Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Reanimate"
+    },
+    {
+      "qty": 1,
+      "name": "Reliquary Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Rhystic Study"
+    },
+    {
+      "qty": 1,
+      "name": "Sedraxis Specter"
+    },
+    {
+      "qty": 1,
+      "name": "Seething Landscape"
+    },
+    {
+      "qty": 1,
+      "name": "Shipwreck Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Sink into Stupor"
+    },
+    {
+      "qty": 1,
+      "name": "Smoldering Marsh"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 1,
+      "name": "Stormcarved Coast"
+    },
+    {
+      "qty": 1,
+      "name": "Sulfur Falls"
+    },
+    {
+      "qty": 1,
+      "name": "Sunken Hollow"
+    },
+    {
+      "qty": 3,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Swan Song"
+    },
+    {
+      "qty": 1,
+      "name": "Syphon Mind"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Creativity"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Dominance"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Indulgence"
+    },
+    {
+      "qty": 1,
+      "name": "Teferi, Master of Time"
+    },
+    {
+      "qty": 1,
+      "name": "Tergrid, God of Fright"
+    },
+    {
+      "qty": 1,
+      "name": "The Haunt of Hightower"
+    },
+    {
+      "qty": 1,
+      "name": "The Raven Man"
+    },
+    {
+      "qty": 1,
+      "name": "Tinybones Joins Up"
+    },
+    {
+      "qty": 1,
+      "name": "Tinybones, Bauble Burglar"
+    },
+    {
+      "qty": 1,
+      "name": "Tinybones, Trinket Thief"
+    },
+    {
+      "qty": 1,
+      "name": "Tourach, Dread Cantor"
+    },
+    {
+      "qty": 1,
+      "name": "Toxic Deluge"
+    },
+    {
+      "qty": 1,
+      "name": "Volatile Fjord"
+    },
+    {
+      "qty": 1,
+      "name": "Waste Not"
+    },
+    {
+      "qty": 1,
+      "name": "Watery Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Xander's Lounge"
+    },
+    {
+      "qty": 1,
+      "name": "Zur's Weirding"
+    }
+  ],
+  "sideboard": []
+}

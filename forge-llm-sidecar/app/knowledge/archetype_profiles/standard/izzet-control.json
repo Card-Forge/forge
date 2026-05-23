@@ -1,0 +1,488 @@
+{
+  "schema_version": 1,
+  "name": "Izzet Control",
+  "format": "standard",
+  "colors": [
+    "U",
+    "R"
+  ],
+  "strategy_type": "control",
+  "expected_deck_total": 60,
+  "macro_plan": "Izzet Control in Standard leverages blue disruption and red removal to stabilize against early pressure before deploying resilient finishers. The deck aims to outlast opponents by controlling the board and generating incremental card advantage. Signature cards like Tablet of Discovery and Ashling's Command provide the necessary value engines to transition into a late-game advantage.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 17,
+      "cards": [
+        "Ashling's Command",
+        "Broadside Barrage",
+        "Colorstorm Stallion",
+        "Prismari Charm",
+        "Tablet of Discovery",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 21,
+      "cards": [
+        "Ashling's Command",
+        "Colorstorm Stallion",
+        "Consult the Star Charts",
+        "Improvisation Capstone",
+        "Prismari Charm",
+        "Stock Up",
+        "Tablet of Discovery",
+        "Thundering Falls"
+      ],
+      "mainboard_count": 20,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 4,
+      "cards": [
+        "Colorstorm Stallion"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 21,
+      "cards": [
+        "Ashling's Command",
+        "Colorstorm Stallion",
+        "Devastating Onslaught",
+        "Molten-Core Maestro",
+        "Sanar, Unfinished Genius",
+        "Tablet of Discovery"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 20,
+      "cards": [
+        "Ashling's Command",
+        "Broadside Barrage",
+        "Burst Lightning",
+        "Fire Magic",
+        "Firebending Lesson",
+        "Ghost Vacuum",
+        "Into the Flood Maw",
+        "Prismari Charm",
+        "Pyroclasm",
+        "Sear",
+        "Sorceress's Schemes"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 8,
+      "cards": [
+        "Ashling's Command",
+        "Fire Magic",
+        "Ghost Vacuum",
+        "Pyroclasm"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 2
+    },
+    "counterspells": {
+      "target_count": 6,
+      "cards": [
+        "Annul",
+        "Flashfreeze",
+        "Spell Pierce",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 4
+    },
+    "protection": {
+      "target_count": 15,
+      "cards": [
+        "Ashling's Command",
+        "Colorstorm Stallion",
+        "Mistrise Village",
+        "Octopus Form",
+        "Tablet of Discovery"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 3,
+      "cards": [
+        "Broadside Barrage",
+        "Three Steps Ahead"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 1
+    },
+    "graveyard_enablers": {
+      "target_count": 19,
+      "cards": [
+        "Ashling's Command",
+        "Colorstorm Stallion",
+        "Ghost Vacuum",
+        "Prismari Charm",
+        "Sorceress's Schemes",
+        "Tablet of Discovery",
+        "Thundering Falls"
+      ],
+      "mainboard_count": 17,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 6,
+      "cards": [
+        "Aetherize",
+        "Into the Flood Maw",
+        "Prismari Charm",
+        "Sorceress's Schemes"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "engines": {
+      "target_count": 12,
+      "cards": [
+        "Ashling's Command",
+        "Colorstorm Stallion",
+        "Molten-Core Maestro"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 1
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": [
+        "Colorstorm Stallion"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Ashling's Command"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 35,
+      "cards": [
+        "Ashling's Command",
+        "Colorstorm Stallion",
+        "Cori Mountain Monastery",
+        "Mistrise Village",
+        "Molten-Core Maestro",
+        "Multiversal Passage",
+        "Riverpyre Verge",
+        "Spirebluff Canal",
+        "Steam Vents",
+        "Stormcarved Coast",
+        "Tablet of Discovery",
+        "Thundering Falls"
+      ],
+      "mainboard_count": 34,
+      "sideboard_count": 1
+    },
+    "lands": {
+      "target_count": 24,
+      "cards": [
+        "Cori Mountain Monastery",
+        "Island",
+        "Mistrise Village",
+        "Mountain",
+        "Multiversal Passage",
+        "Riverpyre Verge",
+        "Spirebluff Canal",
+        "Steam Vents",
+        "Stormcarved Coast",
+        "Thundering Falls"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.54
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ashling's Command",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "removal",
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Broadside Barrage",
+      "roles": [
+        "card_advantage",
+        "discard_outlets",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Colorstorm Stallion",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "payoff_cards",
+        "protection",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cori Mountain Monastery",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fire Magic",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghost Vacuum",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Into the Flood Maw",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mistrise Village",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Molten-Core Maestro",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Multiversal Passage",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismari Charm",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pyroclasm",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Riverpyre Verge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sorceress's Schemes",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Spirebluff Canal",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stormcarved Coast",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tablet of Discovery",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Three Steps Ahead",
+      "roles": [
+        "card_advantage",
+        "counterspells",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thundering Falls",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold up blue mana for counterspells before committing to red removal",
+    "Trigger Ashling's Command abilities before casting Tablet of Discovery to maximize card draw",
+    "Save Colorstorm Stallion's ability for when it can bypass a key blocker or deal lethal damage",
+    "Common mistakes include overcommitting to threats without answering the board, mismanaging open mana for interaction, and failing to track opponent's graveyard/hand size.",
+    "Tablet of Discovery is a double-edged sword"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands and hold up mana for counterspells"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use red removal to clear early threats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize surviving turns 1-3 over developing board presence"
+    }
+  ],
+  "kill_priority": [
+    "Ashling's Command",
+    "Colorstorm Stallion",
+    "Molten-Core Maestro",
+    "Devastating Onslaught",
+    "Sanar, Unfinished Genius",
+    "Tablet of Discovery"
+  ],
+  "interaction_to_disrupt": [
+    "Annul",
+    "Flashfreeze",
+    "Spell Pierce",
+    "Three Steps Ahead",
+    "Ashling's Command",
+    "Colorstorm Stallion",
+    "Mistrise Village",
+    "Octopus Form"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/izzet-control.dck",
+    "generated_at": "2026-05-23T04:42:23+00:00"
+  }
+}

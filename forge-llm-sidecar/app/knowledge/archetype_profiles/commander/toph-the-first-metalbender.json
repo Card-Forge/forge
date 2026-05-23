@@ -1,0 +1,908 @@
+{
+  "schema_version": 1,
+  "name": "Toph, the First Metalbender",
+  "format": "commander",
+  "colors": [
+    "G",
+    "R",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "This deck leverages early mana acceleration and artifact synergy to out-value opponents through resilient threats and incremental board advantage, aiming to win against control and combo by establishing an unbreakable board state while outpacing aggro with efficient removal and clock pressure.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 11,
+      "cards": [
+        "Bitter Work",
+        "Chromatic Star",
+        "Combat Thresher",
+        "Horizon Spellbomb",
+        "Melded Moxite",
+        "Novice Inspector",
+        "Nutrient Block",
+        "Origin Spellbomb",
+        "Solemn Simulacrum",
+        "Thraben Inspector",
+        "Tireless Tracker"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 5,
+      "cards": [
+        "Path of Ancestry",
+        "Seismic Sense",
+        "Temple of Abandon",
+        "Temple of Plenty",
+        "Temple of Triumph"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 18,
+      "cards": [
+        "Angel of the Ruins",
+        "Ash Barrens",
+        "Burnished Hart",
+        "Cultivate",
+        "Cycle of Renewal",
+        "Escape Tunnel",
+        "Evolving Wilds",
+        "Glacier Godmaw",
+        "Horizon Spellbomb",
+        "Larval Scoutlander",
+        "Myriad Landscape",
+        "Navigation Orb",
+        "Pilgrim's Eye",
+        "Sakura-Tribe Elder",
+        "Solemn Simulacrum",
+        "Springbloom Druid",
+        "Vibrant Cityscape",
+        "Warped Landscape"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 37,
+      "cards": [
+        "Angel of the Ruins",
+        "Arboreal Grazer",
+        "Badgermole",
+        "Baloth Prime",
+        "Burnished Hart",
+        "Clockwork Percussionist",
+        "Cogwork Assembler",
+        "Cogworker's Puzzleknot",
+        "Combat Thresher",
+        "Drix Fatemaker",
+        "Dundoolin Weaver",
+        "Foundry Inspector",
+        "Gene Pollinator",
+        "Glacier Godmaw",
+        "Glider Staff",
+        "Inspiring Statuary",
+        "Kaslem's Stonetree",
+        "Llanowar Elves",
+        "Loamcrafter Faun",
+        "Novice Inspector",
+        "Pilgrim's Eye",
+        "Reckless Fireweaver",
+        "Reclamation Sage",
+        "Sabotender",
+        "Saheeli's Lattice",
+        "Sakura-Tribe Elder",
+        "Sarpadian Simulacrum",
+        "Sol Ring",
+        "Solemn Simulacrum",
+        "Springbloom Druid",
+        "Struggle // Survive",
+        "Thraben Inspector",
+        "Tireless Tracker",
+        "Toph, the Blind Bandit",
+        "Toph, the First Metalbender",
+        "Tormod's Cryptkeeper",
+        "Tuskguard Captain"
+      ],
+      "mainboard_count": 37,
+      "sideboard_count": 0
+    },
+    "removal": {
+      "target_count": 16,
+      "cards": [
+        "Chain Reaction",
+        "Codex Shredder",
+        "Dundoolin Weaver",
+        "Fumigate",
+        "Lux Artillery",
+        "Nutrient Block",
+        "Phoenix Down",
+        "Portable Hole",
+        "Reckless Fireweaver",
+        "Reclamation Sage",
+        "Sabotender",
+        "Sarpadian Simulacrum",
+        "Tormod's Cryptkeeper",
+        "Vanquish the Horde",
+        "White Auracite",
+        "Worldsoul's Rage"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "wrath": {
+      "target_count": 5,
+      "cards": [
+        "Chain Reaction",
+        "Drix Fatemaker",
+        "Fumigate",
+        "Tuskguard Captain",
+        "Vanquish the Horde"
+      ],
+      "mainboard_count": 5,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 2,
+      "cards": [
+        "Nutrient Block",
+        "Rustvale Bridge"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 1,
+      "cards": [
+        "Melded Moxite"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Chromatic Star",
+        "Codex Shredder",
+        "Dundoolin Weaver",
+        "Escape Tunnel",
+        "Escape to the Wilds",
+        "Horizon Spellbomb",
+        "Loamcrafter Faun",
+        "Mishra's Research Desk",
+        "Nutrient Block",
+        "Origin Spellbomb",
+        "Phoenix Down",
+        "Servo Schematic",
+        "Tormod's Cryptkeeper",
+        "Worldsoul's Rage"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 9,
+      "cards": [
+        "Badgermole",
+        "Bitter Work",
+        "Codex Shredder",
+        "Dundoolin Weaver",
+        "Loamcrafter Faun",
+        "Mishra's Research Desk",
+        "Phoenix Down",
+        "Toph, the Blind Bandit",
+        "Toph, the First Metalbender"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 2,
+      "cards": [
+        "Eusocial Engineering",
+        "Lux Artillery"
+      ],
+      "mainboard_count": 2,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "mana_fixing": {
+      "target_count": 28,
+      "cards": [
+        "Ash Barrens",
+        "Chromatic Star",
+        "Command Tower",
+        "Escape Tunnel",
+        "Evolving Wilds",
+        "Exotic Orchard",
+        "Foundry Inspector",
+        "Gene Pollinator",
+        "Graypelt Refuge",
+        "Jungle Shrine",
+        "Kazandu Refuge",
+        "Myriad Landscape",
+        "Path of Ancestry",
+        "Public Thoroughfare",
+        "Radiant Grove",
+        "Raging Ravine",
+        "Restless Ridgeline",
+        "Rustvale Bridge",
+        "Sacred Peaks",
+        "Solar Transformer",
+        "Springleaf Drum",
+        "Temple of Abandon",
+        "Temple of Plenty",
+        "Temple of Triumph",
+        "Temple of the False God",
+        "Throne of the High City",
+        "Vibrant Cityscape",
+        "Warped Landscape"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 38,
+      "cards": [
+        "Ash Barrens",
+        "Command Tower",
+        "Escape Tunnel",
+        "Evolving Wilds",
+        "Exotic Orchard",
+        "Forest",
+        "Foundry Inspector",
+        "Graypelt Refuge",
+        "Jungle Shrine",
+        "Kazandu Refuge",
+        "Mountain",
+        "Myriad Landscape",
+        "Path of Ancestry",
+        "Plains",
+        "Public Thoroughfare",
+        "Radiant Grove",
+        "Raging Ravine",
+        "Restless Ridgeline",
+        "Rustvale Bridge",
+        "Sacred Peaks",
+        "Temple of Abandon",
+        "Temple of Plenty",
+        "Temple of Triumph",
+        "Temple of the False God",
+        "Throne of the High City",
+        "Vibrant Cityscape",
+        "Warped Landscape"
+      ],
+      "mainboard_count": 38,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.21
+  },
+  "dual_role_cards": [
+    {
+      "card": "Angel of the Ruins",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ash Barrens",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Badgermole",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bitter Work",
+      "roles": [
+        "card_advantage",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Burnished Hart",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chain Reaction",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Chromatic Star",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Codex Shredder",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Combat Thresher",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Command Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Drix Fatemaker",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Dundoolin Weaver",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Escape Tunnel",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Evolving Wilds",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exotic Orchard",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Foundry Inspector",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Fumigate",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gene Pollinator",
+      "roles": [
+        "mana_fixing",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glacier Godmaw",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Graypelt Refuge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Horizon Spellbomb",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Jungle Shrine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kazandu Refuge",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Loamcrafter Faun",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lux Artillery",
+      "roles": [
+        "engines",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Melded Moxite",
+      "roles": [
+        "card_advantage",
+        "discard_outlets"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mishra's Research Desk",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Myriad Landscape",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Novice Inspector",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nutrient Block",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Origin Spellbomb",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Path of Ancestry",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Phoenix Down",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pilgrim's Eye",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Public Thoroughfare",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Radiant Grove",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Raging Ravine",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reckless Fireweaver",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reclamation Sage",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Restless Ridgeline",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Rustvale Bridge",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sabotender",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sacred Peaks",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sakura-Tribe Elder",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sarpadian Simulacrum",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Solemn Simulacrum",
+      "roles": [
+        "card_advantage",
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Springbloom Druid",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Abandon",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Plenty",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of Triumph",
+      "roles": [
+        "dig_draw",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Temple of the False God",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thraben Inspector",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Throne of the High City",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tireless Tracker",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Toph, the Blind Bandit",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Toph, the First Metalbender",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tormod's Cryptkeeper",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tuskguard Captain",
+      "roles": [
+        "threats",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vanquish the Horde",
+      "roles": [
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vibrant Cityscape",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Warped Landscape",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Worldsoul's Rage",
+      "roles": [
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: Overcommitting to Toph without protection or answers.",
+    "Always keep open mana for interaction.",
+    "Track opponent's graveyard and hand size.",
+    "Use mana rocks strategically to enable surprise attacks.",
+    "Be mindful of the format's power level and adjust accordingly."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Sol Ring or Arcane Signet if possible."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a second land, cast Signet or ramp into Toph or a key artifact/creature."
+    },
+    {
+      "trigger": "early game",
+      "line": "If opening with Toph, ensure you have at least two lands and a cantrip or protection spell to protect it."
+    }
+  ],
+  "kill_priority": [
+    "Eusocial Engineering",
+    "Lux Artillery",
+    "Angel of the Ruins",
+    "Arboreal Grazer",
+    "Badgermole",
+    "Baloth Prime",
+    "Burnished Hart",
+    "Clockwork Percussionist"
+  ],
+  "interaction_to_disrupt": [
+    "Nutrient Block",
+    "Rustvale Bridge",
+    "Chain Reaction",
+    "Codex Shredder",
+    "Dundoolin Weaver",
+    "Fumigate",
+    "Lux Artillery",
+    "Phoenix Down"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/toph-the-first-metalbender.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

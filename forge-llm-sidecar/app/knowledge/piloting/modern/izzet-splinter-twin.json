@@ -12,12 +12,14 @@
     "keep_criteria": [
       "Hands with Tamiyo, Inquisitive Student or Splinter Twin",
       "Low mana value pump spells like Flow State or Fear of Missing Out",
-      "Hands containing early interaction or lands to stabilize"
+      "Hands containing early interaction or lands to stabilize",
+      "Keep hands with 2-3 lands (preferably fixing), at least one combo piece (Splinter Twin or protection creature), and disruption or a Tamiyo/Flow State enabler."
     ],
     "mulligan_criteria": [
       "High mana curve hands with no combo pieces",
       "Hands lacking lands or card draw",
-      "Hands with only pump spells but no creatures to attach them to"
+      "Hands with only pump spells but no creatures to attach them to",
+      "Mulligan to single-color fixing if it delays turn-2 plays, or hands with only threats and no protection/disruption."
     ],
     "examples": []
   },
@@ -25,17 +27,30 @@
     "early_game": [
       "Play Tamiyo to find Splinter Twin or a key creature",
       "Cast pump spells on opponent's turn to protect them",
-      "Establish board presence and draw cards to find combo pieces"
+      "Establish board presence and draw cards to find combo pieces",
+      "Turn 1: Play a land, cast Spell Pierce/Thoughtseize if possible, or set up with Tamiyo if mana allows.",
+      "Turn 2: Cast Goblin Electromancer/Ironshell Crab or Splinter Twin, using Flow State or Fear of Missing Out to dig for protection or combo pieces.",
+      "Prioritize establishing the combo threat while holding up counterspells/removal for turn-2 interaction."
     ],
     "mid_game": [
       "Cast Splinter Twin to copy a creature with a relevant ability",
       "Sequence pump spells to maximize combat damage or card draw",
-      "Begin combo loops or apply pressure to force opponent into mistakes"
+      "Begin combo loops or apply pressure to force opponent into mistakes",
+      "Preserve counterspells for critical combo pieces or opponent threats.",
+      "Use Flow State to dig for protection or combo pieces when running low.",
+      "Manage Tamiyo loyalty carefully to maintain card advantage and protection.",
+      "Avoid overcommitting mana on non-essential spells.",
+      "Commit threats only when you have protection or can trade favorably.",
+      "Hold back if the opponent has sweepers or hard removal."
     ],
     "late_game": [
       "Stabilize with card advantage from pump spells",
       "Execute infinite damage or draw loops to close the game",
-      "Use remaining resources to protect the combo from late-game interaction"
+      "Use remaining resources to protect the combo from late-game interaction",
+      "Splinter Twin paired with a protection creature (Ironshell Crab/Goblin Electromancer) or a direct damage spell.",
+      "Use Flow State to dig for the final piece or Fear of Missing Out to set up a lethal turn.",
+      "Go all-in when you have protection, enough mana for a lethal blow, and the opponent has no sweepers or hard removal in hand.",
+      "Also commit when you can out-value them with Tamiyo's ability or Flow State's library advantage."
     ]
   },
   "key_cards": [
@@ -64,7 +79,13 @@
     "Hold pump spells until the opponent's turn to avoid counterspells",
     "Cast Tamiyo before Twin to ensure you have the copy target or necessary lands",
     "Sequence Twin after pump spells are on the stack or resolved to maximize combat damage",
-    "Prioritize drawing cards with pump spells to find answers to interaction"
+    "Prioritize drawing cards with pump spells to find answers to interaction",
+    "Common mistake: Overcommitting to the combo without protection.",
+    "Always hold up interaction for turn-2 threats.",
+    "Flow State requires careful sequencing\u2014don't cast it without a plan to dig for protection or combo pieces.",
+    "Tamiyo's loyalty abilities are crucial for card advantage and protection, so don't exhaust them prematurely.",
+    "Fear of Missing Out is best used to set up your next turn or dig for a specific piece.",
+    "Watch for opponent's sideboard cards, especially artifact hate against Affinity and sweepers against control."
   ],
   "matchups": [
     {
@@ -93,16 +114,35 @@
         "Tempo creatures",
         "Late-game finishers"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Fear of Missing Out to dig around counters, cast threats at end step, or use Tamiyo to protect key pieces. Employ cheap, uncounterable threats or split your combo across multiple turns.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race their big spells. Use disruption to steal their mana rocks or counterspell their ramp spells. Prioritize removing their key ramp pieces before they can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by out-drawing with Tamiyo and Flow State. Prioritize disruption to steal their combo pieces or counter their key spells. Control the board with efficient removal and counterspells.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspells that disrupt the combo sequence",
     "Board wipes that clear Twin and pump spell targets",
     "Hate cards that tax spell casting or creature abilities",
-    "Fast aggro decks that race the combo"
+    "Fast aggro decks that race the combo",
+    "Watch for sweepers (Wrath of God, Boros Charm), hard removal (Path to Exile, Swords to Plowshares), and combo finishers.",
+    "Note when opponents tap out for big spells or hold up interaction.",
+    "Track graveyard contents for reanimation or storm threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T01:56:16+00:00",
     "model": "local-model",
@@ -118,7 +158,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with cheap reanimation spells like Zombify",
       "Hands containing enablers like Kiora, the Rising Tide or Evangel of Synthesis",
-      "Hands with early interaction and lands"
+      "Hands with early interaction and lands",
+      "Keep hands with 2-3 lands (prioritizing fetches/duals for consistent Dimir fixing), at least one cheap disruption spell (Deceit), and a reanimation payoff or graveyard enabler.",
+      "Keep any hand with Winternight Stories plus a land and a cheap spell, as it provides immediate engine value."
     ],
     "mulligan_criteria": [
       "Hands lacking reanimation targets or spells",
       "Hands without early game disruption or filtering",
-      "Hands with too many high-cost bombs without enablers"
+      "Hands with too many high-cost bombs without enablers",
+      "Mulligan hands with 0-1 lands, only expensive spells, or no interaction/reanimation tools."
     ],
     "examples": [
       {
@@ -52,17 +55,33 @@
     "early_game": [
       "Filter draws with Kiora, the Rising Tide and Evangel of Synthesis",
       "Play cheap removal like Cut Down and Anoint with Affliction to stabilize",
-      "Dump cards into the graveyard to enable Zombify and threshold"
+      "Dump cards into the graveyard to enable Zombify and threshold",
+      "Turn 1: Play a land, cast Deceit if the opponent plays a land or casts a non-basic spell, or hold for a better spot.",
+      "Turn 2: Develop mana, cast a second disruption or begin filling the graveyard with cheap spells/sacrifice outlets.",
+      "Prioritize untapped lands or fetches to ensure consistent blue-black mana.",
+      "Use Winternight Stories to dig for reanimation spells or protect your graveyard if the opponent shows early disruption."
     ],
     "mid_game": [
       "Cast reanimation spells like Zombify and Nullpriest of Oblivion to bring back threats",
       "Use Overlord of the Balemurk to recur enablers and reanimation spells",
-      "Apply pressure with reanimated creatures or Kiora tokens"
+      "Apply pressure with reanimated creatures or Kiora tokens",
+      "Balance mana for interaction versus reanimation.",
+      "Do not overcommit to the graveyard without a reanimation payoff in hand.",
+      "Use hand disruption to protect your reanimation spells and manage your graveyard carefully to avoid giving opponents free targets for their own synergies or graveyard hate.",
+      "Hold back reanimation threats until you have protection or the board is clear of sweepers.",
+      "Use cheap spells to clear early threats or disrupt opponent key plays.",
+      "Commit when you can follow up with additional value or have answered their removal."
     ],
     "late_game": [
       "Win with board presence from Atraxa or Valgavoth",
       "Use sideboard answers like Malicious Eclipse or Withering Torment to clear wide boards or enchantments",
-      "Leverage card advantage from reanimated threats to outvalue opponents"
+      "Leverage card advantage from reanimated threats to outvalue opponents",
+      "Superior Spider-Man is the primary finisher.",
+      "Get there by filling the graveyard with cheap spells, then casting reanimation spells when you have mana and protection.",
+      "Use Winternight Stories to dig for the reanimation spell or to recur Superior Spider-Man if it dies unexpectedly.",
+      "Go all-in when you have a reanimation spell in hand, a threat in the graveyard, and enough mana to cast it plus a protection spell or follow-up.",
+      "Also commit if the opponent has no sweepers or graveyard hate in play, or if they are tapped out for a key spell.",
+      "Use Deceit to remove a blocker or answer a threat before committing."
     ]
   },
   "key_cards": [
@@ -122,7 +141,13 @@
     "Prioritize reanimating Atraxa or Valgavoth with Zombify, but consider reanimating Kiora or Overlord if you need immediate filtering or recursion.",
     "Attack with Overlord of the Balemurk to trigger its ability and return Kiora or Nullpriest of Oblivion to your hand.",
     "Use Bitter Triumph to discard cards to the graveyard while efficiently removing opponent's threats.",
-    "Save counterspells like Negate or Disdainful Stroke for spells that prevent your combo or for opponent's answers to your reanimated creatures."
+    "Save counterspells like Negate or Disdainful Stroke for spells that prevent your combo or for opponent's answers to your reanimated creatures.",
+    "Common mistakes include overcommitting to the graveyard without reanimation payoffs, holding up too much mana for interaction, and failing to track opponent graveyard hate.",
+    "Unique interactions: Winternight Stories likely provides recursion or card advantage",
+    "use it to fuel your graveyard or dig for reanimation spells.",
+    "Superior Spider-Man may have enter-the-battlefield or death triggers",
+    "time your reanimation to maximize value.",
+    "Always respect the opponent's mana and plan your reanimation around their most likely answers."
   ],
   "matchups": [
     {
@@ -164,6 +189,31 @@
         "Aggressive creatures",
         "Board wipes"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells to force counterspells, then reanimate with uncounterable effects or stack your reanimation spell on top. Use flashback, exile, or instant-speed recursion to bypass counters. Hold up blue mana for counterspells if the opponent is known for heavy disruption, but do not overcommit to interaction at the expense of your reanimation plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and cheap removal. Do not let them stabilize; reanimate threats before they can deploy their mana rocks. Use graveyard hate if they rely on it. Prioritize removing their mana sources and disrupting their early plays to delay their win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early disruption and cheap removal. Hold up mana for counterspells or spot removal to protect your reanimation plan. Reanimate a threat once you have stabilized the board. Use Deceit to remove key blockers or answer aggressive threats. Do not overextend into sweepers or board wipes.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Trade resources efficiently. Use hand disruption to dig through their deck. Reanimate threats when they are tapped out or out of counterspells. Use card draw to out-value them. Force them to use their answers on your cheap spells, then strike with Superior Spider-Man when they are out of resources.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize graveyard hate, discard, and protection spells. Force them to use their reanimation spells inefficiently. Control the board with spot removal and sweepers when necessary. Track their graveyard and hand to anticipate their reanimation threats, and use Deceit to disrupt their setup.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -177,10 +227,12 @@
     "Unholy Annex",
     "Leyline Binding",
     "Rest in Peace",
-    "Leyline of the Void"
+    "Leyline of the Void",
+    "Watch for sweepers, graveyard hate, and counterspells."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-dimir-reanimator-foundations-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T07:05:50+00:00",
     "model": "local-model",
@@ -201,6 +253,24 @@
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {
@@ -213,7 +283,7 @@
     "confidence": 0.9,
     "kind": "explicit",
     "source_index": 0,
-    "evidence_span": "Empowered by the inclusion of Zombify in Foundations and the ability of Valgavoth, Terror Eater to take over games... The rest of the deck is classic Midrange with cheap removal and disruption... On the one hand, we have an unfair plan that wins games for free... since we require them for the “combo” to work."
+    "evidence_span": "Empowered by the inclusion of Zombify in Foundations and the ability of Valgavoth, Terror Eater to take over games... The rest of the deck is classic Midrange with cheap removal and disruption... On the one hand, we have an unfair plan that wins games for free... since we require them for the \u201ccombo\u201d to work."
   },
   "win_conditions_evidence": [
     {

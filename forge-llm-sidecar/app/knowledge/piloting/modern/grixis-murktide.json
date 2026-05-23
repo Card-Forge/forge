@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with Thoughtseize and a one- or two-drop threat",
       "Mana bases that enable early interaction",
-      "Draw engines like Abhorrent Oculus paired with cheap removal"
+      "Draw engines like Abhorrent Oculus paired with cheap removal",
+      "Keep hands with 2-3 lands (including at least one basic for shock/bloodstained utility), at least one discard spell (Thoughtseize/Inquisition/Duress), and ideally a turn-2 play.",
+      "Keep hands with Agatha's Soul Cauldron if supported by 2+ lands and a discard."
     ],
     "mulligan_criteria": [
       "Mana-heavy hands with no interaction",
       "Hands lacking graveyard synergy or card advantage",
-      "Slow, three-drop heavy hands without disruption"
+      "Slow, three-drop heavy hands without disruption",
+      "Mulligan pure land hands, hands with only non-basic lands and no basics, or hands with multiple discard spells but no lands."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Cast Thoughtseize to disrupt opponent's game plan",
       "Play cheap threats or draw engines to establish board presence",
-      "Prioritize mana efficiency to enable turn-two interaction"
+      "Prioritize mana efficiency to enable turn-two interaction",
+      "Turn 1: Play a land, cast Thoughtseize on the opponent's key piece (e.g., Energy token generator, Artifact, Combo piece, or Amulet).",
+      "Turn 2: Play a second land, cast another discard or dig spell.",
+      "If you have Agatha's, sequence land, sacrifice a creature (like Murktide Predator or a cheap discard target) to it, draw a card, and ramp.",
+      "Prioritize shock/bloodstained sequencing to ensure U/B/R access."
     ],
     "mid_game": [
       "Activate Abhorrent Oculus and Murktide Regent abilities to draw cards and exile threats",
       "Build graveyard depth to fuel Agatha's Soul Cauldron",
-      "Use removal and disruption to maintain tempo while developing board"
+      "Use removal and disruption to maintain tempo while developing board",
+      "Prioritize keeping discard in hand for protection and disruption.",
+      "Use Agatha's to dig for threats or answers, but avoid over-sacrificing if you're low on life.",
+      "Manage mana to ensure you can cast threats when the board is clear or when you can pay the free-cast condition.",
+      "Never sacrifice your only removal or threat to Agatha's unless you have a clear path to closing.",
+      "Commit threats only when you have protection (discard, removal, or board sweepers) or when you can close the game.",
+      "Hold back if the opponent has sweepers or can stabilize."
     ],
     "late_game": [
       "Cast Agatha's Soul Cauldron as a primary win condition and card advantage engine",
       "Leverage +1/-1 counters to create unblockable or high-toughness creatures",
-      "Outvalue opponents through continuous draw and graveyard recursion"
+      "Outvalue opponents through continuous draw and graveyard recursion",
+      "Abhorrent Oculus (untaps for each opponent permanent, attacks for 2 each) or Murktide Predator (enters with X counters, attacks for X each).",
+      "Win by casting them when the opponent has 5+ permanents (free cast) or by using Agatha's to generate enough mana to cast them and follow up with discard/removal.",
+      "Go all-in when you have a clear path to combat damage, the opponent has no sweepers, or you can protect your threat with discard.",
+      "Also commit when you can close the game in 1-2 turns, or when the opponent is tapped out and you can resolve a threat safely."
     ]
   },
   "key_cards": [
@@ -58,7 +75,13 @@
   "sequencing_tips": [
     "Hold Thoughtseize until you see a key threat or combo piece",
     "Prioritize drawing cards with Oculus before casting Agatha to maximize counter generation",
-    "Use +1/-1 counter abilities strategically to exile threats or draw into answers"
+    "Use +1/-1 counter abilities strategically to exile threats or draw into answers",
+    "Agatha's Soul Cauldron is a double-edged sword",
+    "sacrificing too early can leave you vulnerable to combat or sweepers.",
+    "Abhorrent Oculus untaps for each nonland permanent an opponent controls, not just creatures (includes artifacts, enchantments, and even your own permanents if they control them).",
+    "Murktide Predator's free cast condition triggers when you cast it if an opponent has five or more permanents.",
+    "Don't forget to use discard to protect your own Agatha's or threats.",
+    "In the mirror, the first player to resolve a threat often wins, so prioritize turn 1-2 interaction and protect your own Agatha's."
   ],
   "matchups": [
     {
@@ -96,6 +119,31 @@
         "Rest in Peace",
         "Tormod's Cryptbreaker"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to remove counterspells or key pieces. Cast threats in response to their spells, or use Agatha's to generate mana for multiple threats. Consider cheap threats that can be cast in response to counters, or hold up mana to protect your own spells with discard or removal.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure with discard and Agatha's value. Use Rest in Peace or Surgical Extraction to disrupt mana dorks. Out-value them with card advantage and don't let them stabilize; pressure their life total while they're digging for lands.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early discard to disrupt their curve. Use Agatha's to stabilize and draw into removal or threats. Don't overcommit to Agatha's if you're dying to combat; keep life total in check and prioritize survival over value generation.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with discard to disrupt their hand. Use Agatha's to dig through your deck faster than they can control. Cast threats when they're tapped out or when you can protect them. Force them to use resources on your threats rather than their own game plan.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the discard war. Prioritize keeping Inquisition/Duress/Thoughtseize. Use Agatha's to out-draw. Target their discard spells and key threats. Sideboard Duress and Liliana's Caress heavily. The first player to resolve a threat often wins, so prioritize turn 1-2 interaction and protect your own Agatha's.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -103,10 +151,15 @@
     "Abrupt Decay",
     "Rest in Peace",
     "Field of the Dead",
-    "Duress"
+    "Duress",
+    "Watch for sweepers (Wrath of God, Anger, etc.), artifact hate, combo win conditions, and blink engines.",
+    "Note when opponents tap out for big spells or when they're low on resources.",
+    "Track graveyard contents for Surgical Extraction or Rest in Peace targets.",
+    "Pay attention to whether the opponent is playing around your discard or saving it for your threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T00:55:56+00:00",
     "model": "local-model",
@@ -122,7 +175,27 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

@@ -1,0 +1,117 @@
+{
+  "archetype": "Edgar Markov",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This deck generates a relentless stream of goblin tokens, sacrifices them for combat tricks and value, and swings for lethal using Edgar Markov as the primary finisher. It excels against control and combo decks that lack early interaction, while struggling against fast aggro or heavy board wipes.",
+  "win_conditions": [
+    "Edgar Markov with combat tricks, sacrifice outlets for extra damage, or a massive goblin swarm.",
+    "Get there by establishing board presence, protecting Edgar, and trading efficiently."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing fetch/shock or non-rotating duals), Sol Ring or other mana acceleration, and at least one early goblin or token generator."
+    ],
+    "mulligan_criteria": [
+      "Mulligan if you have 3+ lands with no acceleration or early threats, or if you lack a way to cast Edgar Markov by turn 4-5."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast Sol Ring or a cheap goblin (e.g., Goblin Piker, Goblin Ringleader).",
+      "Turn 2: Ramp into a token generator or combat trick.",
+      "Land sequencing: Prioritize non-basic lands that enter untapped or can fetch basics, ensuring you can cast your turn-2/3 plays.",
+      "If you have a shockland, play it tapped if you can pay 2 life, otherwise fetch."
+    ],
+    "mid_game": [
+      "Don't overcommit mana to token generation if you can't protect them.",
+      "Use graveyard for sacrifice outlets or recursion.",
+      "Keep hand size above 3 when facing sweepers.",
+      "Commit threats when you have removal or combat tricks to protect them.",
+      "Hold back if the board is clear and you can stabilize with a sweeper or counter."
+    ],
+    "late_game": [
+      "Edgar Markov with combat tricks, sacrifice outlets for extra damage, or a massive goblin swarm.",
+      "Get there by establishing board presence, protecting Edgar, and trading efficiently.",
+      "Go all-in when you have a clear path to lethal, opponent has no removal, or you can swing past blockers with tricks."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Edgar Markov",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Sol Ring",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Swords to Plowshares",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Overcommitting to token generation without a plan to protect Edgar Markov.",
+    "Unique interaction: Swords to Plowshares creates a Spirit token that can be sacrificed for value or used as a blocker.",
+    "Always track opponent's graveyard for recursion threats."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, redundant threats. Cast Edgar Markov in response to a counter if possible, or use it as a sacrifice outlet. Rely on non-creature spells or sacrifice outlets that don't target.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use removal on key ramp creatures. Don't trade tokens for their mana dorks.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with Swords to Plowshares, pathfinders, or cheap removal. Don't overextend into combat. Use Edgar Markov as a blocker or trade efficiently.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure the board with tokens and combat tricks. Force them to use removal on low-value targets. Win through attrition and card advantage.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Value trades are key. Use better sacrifice outlets, combat tricks, and targeted removal. Prioritize Edgar Markov survival.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for board wipes (Wrath of God, Damnation), targeted removal on Edgar, and opponent's mana base.",
+    "Key tell: Opponent holding up mana on their end step often means a counter or removal."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

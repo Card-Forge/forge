@@ -1,0 +1,127 @@
+{
+  "archetype": "Temur Prowess",
+  "format": "standard",
+  "strategy_type": "combo",
+  "overview": "Temur Prowess aims to cast a stream of cheap, efficient noncreature spells to trigger Prowess, then attack with a single creature to deal massive burst damage. It excels at racing slower control, combo, and midrange decks, but must close games quickly before opponents can stabilize or answer its threats.",
+  "win_conditions": [
+    "A fully pumped creature (3+ Prowess triggers) attacking for 5\u20137 damage.",
+    "Win quickly by chaining cheap spells into a single attacker.",
+    "Use Stormchaser\u2019s Talent or Elusive Otter to draw into more triggers if needed."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2\u20133 lands, at least one Prowess trigger spell (e.g., Stormchaser\u2019s Talent, Elusive Otter, or cheap instants like Lightning Strike/Opt), and a creature to attack with.",
+      "Prioritize hands with 2\u20133 mana sources and 2+ spells."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 3+ lands, 0 spells, or only high-cost spells that can\u2019t trigger Prowess early."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cheap spell (Opt, Lightning Strike, or similar) to set up Prowess and draw/filter.",
+      "Turn 2: Play a land, cast another spell, then attack with a creature (e.g., Slickshot Show-Off or a 2/2 body) for 2\u20133 damage.",
+      "Sequence lands to ensure you can cast colored spells and tap for combat.",
+      "Always leave open mana for protection or counterspells if possible."
+    ],
+    "mid_game": [
+      "Avoid overcommitting to casting spells if you cannot attack with a creature.",
+      "Save mana for protection, counters, or removal.",
+      "Manage hand size by using draw spells (Elusive Otter) only when you have a creature ready to attack.",
+      "Don\u2019t waste Prowess triggers on creatures that can\u2019t attack or will die to removal.",
+      "Commit threats when you have interaction (counters, removal, or discard) to protect them.",
+      "Hold back if the opponent has sweepers, heavy interaction, or a clear win condition.",
+      "Prowess is about timing the pump",
+      "don\u2019t trigger Prowess on a creature that will be blocked or removed before combat."
+    ],
+    "late_game": [
+      "A fully pumped creature (3+ Prowess triggers) attacking for 5\u20137 damage.",
+      "Win quickly by chaining cheap spells into a single attacker.",
+      "Use Stormchaser\u2019s Talent or Elusive Otter to draw into more triggers if needed.",
+      "Go all-in when you have removal/counters to protect your attacker, when the opponent is at low life (\u22645), or when you can close the game before they can stabilize.",
+      "Don\u2019t hold back if you have a clear path to victory."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Stormchaser's Talent",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Slickshot Show-Off",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Elusive Otter",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistakes include overcasting spells without attacking, mismanaging mana for colors, and triggering Prowess on creatures that can\u2019t attack.",
+    "Use Elusive Otter to draw into more triggers, but only when you have a creature ready to attack.",
+    "Stormchaser\u2019s Talent can pump and draw, but be careful of timing.",
+    "Prowess relies on timing",
+    "always ask yourself if you can attack after casting a spell."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap spells (Opt, Lightning Strike) to force counters, then attack with a pumped creature. Sequence spells to bait counters, and use uncounterable threats if available. Don\u2019t overcommit to casting multiple spells if the opponent has multiple counterspells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to prevent them from stabilizing. Use targeted removal on key ramp creatures. Don\u2019t let them get ahead in mana; Prowess wins by racing, not outlasting.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use removal and counterspells to stall and survive the early game. Prowess is slow against fast aggro; prioritize survival, then close the game with a fully pumped attacker once you stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure early and force interaction. Use discard or cheap spells to disrupt their plan, then attack with pumped creatures. Don\u2019t let them stabilize; keep the pressure on and win before they can draw their answer.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the spell war. Use counterspells, discard, and efficient removal to disrupt their Prowess triggers. Prioritize protecting your own triggers and attacking with a single creature. Control the board by forcing them to use interaction on your spells.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for counterspells, sweepers (e.g., Wrath of God), and targeted removal.",
+    "Note when opponents tap out for big spells or have no interaction left.",
+    "Track graveyard hate if relevant, and monitor life totals to know when to go all-in or play defensively."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/standard.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

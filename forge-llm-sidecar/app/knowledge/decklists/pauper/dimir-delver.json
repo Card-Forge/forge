@@ -1,0 +1,105 @@
+{
+  "archetype": "Dimir Delver",
+  "format": "pauper",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pauper/dimir-delver.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Abjure"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 4,
+      "name": "Brainstorm"
+    },
+    {
+      "qty": 2,
+      "name": "Cast Down"
+    },
+    {
+      "qty": 4,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 4,
+      "name": "Cryogen Relic"
+    },
+    {
+      "qty": 4,
+      "name": "Delver of Secrets"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir Aqueduct"
+    },
+    {
+      "qty": 3,
+      "name": "Dirgur Island Dragon"
+    },
+    {
+      "qty": 4,
+      "name": "Hard Evidence"
+    },
+    {
+      "qty": 3,
+      "name": "Ice Tunnel"
+    },
+    {
+      "qty": 12,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "L\u00f3rien Revealed"
+    },
+    {
+      "qty": 4,
+      "name": "Murmuring Mystic"
+    },
+    {
+      "qty": 3,
+      "name": "Perilous Research"
+    },
+    {
+      "qty": 2,
+      "name": "Snuff Out"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Annul"
+    },
+    {
+      "qty": 2,
+      "name": "Campfire"
+    },
+    {
+      "qty": 2,
+      "name": "Drown in Sorrow"
+    },
+    {
+      "qty": 1,
+      "name": "Feed the Swarm"
+    },
+    {
+      "qty": 4,
+      "name": "Hydroblast"
+    },
+    {
+      "qty": 2,
+      "name": "Steel Sabotage"
+    },
+    {
+      "qty": 2,
+      "name": "Tormod's Crypt"
+    }
+  ]
+}

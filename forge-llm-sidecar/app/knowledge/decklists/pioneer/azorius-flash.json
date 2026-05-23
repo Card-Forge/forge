@@ -1,0 +1,117 @@
+{
+  "archetype": "Azorius Flash",
+  "format": "pioneer",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/pioneer/azorius-flash.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Adarkar Wastes"
+    },
+    {
+      "qty": 2,
+      "name": "Brazen Borrower"
+    },
+    {
+      "qty": 3,
+      "name": "Curious Obsession"
+    },
+    {
+      "qty": 1,
+      "name": "Eiganjo, Seat of the Empire"
+    },
+    {
+      "qty": 2,
+      "name": "Enduring Curiosity"
+    },
+    {
+      "qty": 4,
+      "name": "Geistlight Snare"
+    },
+    {
+      "qty": 4,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 4,
+      "name": "Hengegate Pathway"
+    },
+    {
+      "qty": 2,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Mausoleum Wanderer"
+    },
+    {
+      "qty": 2,
+      "name": "Mutavault"
+    },
+    {
+      "qty": 1,
+      "name": "Otawara, Soaring City"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Rattlechains"
+    },
+    {
+      "qty": 4,
+      "name": "Seachrome Coast"
+    },
+    {
+      "qty": 4,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 2,
+      "name": "Sheltered by Ghosts"
+    },
+    {
+      "qty": 4,
+      "name": "Spectral Sailor"
+    },
+    {
+      "qty": 4,
+      "name": "Spell Queller"
+    },
+    {
+      "qty": 4,
+      "name": "Supreme Phantom"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 2,
+      "name": "Destroy Evil"
+    },
+    {
+      "qty": 2,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 3,
+      "name": "Enduring Innocence"
+    },
+    {
+      "qty": 1,
+      "name": "Plains"
+    },
+    {
+      "qty": 2,
+      "name": "Portable Hole"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 3,
+      "name": "Skyclave Apparition"
+    }
+  ]
+}

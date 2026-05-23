@@ -1,0 +1,501 @@
+{
+  "schema_version": 1,
+  "name": "Esper Midrange",
+  "format": "modern",
+  "colors": [
+    "W",
+    "U",
+    "B"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 60,
+  "macro_plan": "Esper Midrange in Modern leverages efficient disruption and tempo plays to control the board state while gradually building value. By combining early hand disruption with versatile counterspells and resilient creatures like Psychic Frog, the deck aims to outmaneuver opponents in resource exchanges. The goal is to stabilize early, trade favorably in the mid-game, and close out matches with superior card advantage and efficient threats.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 16,
+      "cards": [
+        "Cling to Dust",
+        "Kaito, Bane of Nightmares",
+        "Nihil Spellbomb",
+        "Orcish Bowmasters",
+        "Pest Control",
+        "Psychic Frog",
+        "Shark Typhoon",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 3
+    },
+    "dig_draw": {
+      "target_count": 11,
+      "cards": [
+        "Consult the Star Charts",
+        "Kaito, Bane of Nightmares",
+        "Meticulous Archive",
+        "Psychic Frog",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Flooded Strand",
+        "Polluted Delta"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 20,
+      "cards": [
+        "Counterspell",
+        "Kaito, Bane of Nightmares",
+        "Orcish Bowmasters",
+        "Psychic Frog",
+        "Sheoldred's Edict",
+        "Snapcaster Mage",
+        "Subtlety",
+        "Wan Shi Tong, Librarian"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 1
+    },
+    "removal": {
+      "target_count": 23,
+      "cards": [
+        "Break the Ice",
+        "Cling to Dust",
+        "Fatal Push",
+        "Field of Ruin",
+        "High Noon",
+        "Nihil Spellbomb",
+        "Orcish Bowmasters",
+        "Otawara, Soaring City",
+        "Pest Control",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": [
+        "Pest Control"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "counterspells": {
+      "target_count": 17,
+      "cards": [
+        "Consign to Memory",
+        "Counterspell",
+        "Force of Negation",
+        "Mystical Dispute",
+        "Psychic Frog",
+        "Spell Pierce",
+        "Spell Snare",
+        "Stern Scolding"
+      ],
+      "mainboard_count": 10,
+      "sideboard_count": 7
+    },
+    "protection": {
+      "target_count": 8,
+      "cards": [
+        "Counterspell",
+        "Kaito, Bane of Nightmares",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 6,
+      "cards": [
+        "Counterspell",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 19,
+      "cards": [
+        "Cling to Dust",
+        "Counterspell",
+        "Force of Negation",
+        "Graveyard Trespasser",
+        "Kaito, Bane of Nightmares",
+        "Meticulous Archive",
+        "Nihil Spellbomb",
+        "Psychic Frog",
+        "Snapcaster Mage",
+        "Strategic Betrayal",
+        "Undercity Sewers"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 4
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 8,
+      "cards": [
+        "Cling to Dust",
+        "Kaito, Bane of Nightmares",
+        "Otawara, Soaring City",
+        "Psychic Frog",
+        "Snapcaster Mage"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 3,
+      "cards": [
+        "Psychic Frog",
+        "Shark Typhoon"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Counterspell",
+        "Psychic Frog"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": [
+        "High Noon"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 2
+    },
+    "mana_fixing": {
+      "target_count": 25,
+      "cards": [
+        "Counterspell",
+        "Field of Ruin",
+        "Flooded Strand",
+        "Hallowed Fountain",
+        "Meticulous Archive",
+        "Otawara, Soaring City",
+        "Polluted Delta",
+        "Psychic Frog",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 24,
+      "cards": [
+        "Field of Ruin",
+        "Flooded Strand",
+        "Hallowed Fountain",
+        "Island",
+        "Meticulous Archive",
+        "Otawara, Soaring City",
+        "Polluted Delta",
+        "Swamp",
+        "Undercity Sewers",
+        "Watery Grave"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 2,
+      "cards": [
+        "Kaito, Bane of Nightmares"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "interaction_density": 0.53
+  },
+  "dual_role_cards": [
+    {
+      "card": "Cling to Dust",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Counterspell",
+      "roles": [
+        "combo_pieces",
+        "counterspells",
+        "discard_outlets",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Field of Ruin",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hallowed Fountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "High Noon",
+      "roles": [
+        "hate_pieces",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kaito, Bane of Nightmares",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "graveyard_enablers",
+        "planeswalker_threats",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Meticulous Archive",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Nihil Spellbomb",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Orcish Bowmasters",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Otawara, Soaring City",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pest Control",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Psychic Frog",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "counterspells",
+        "dig_draw",
+        "discard_outlets",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shark Typhoon",
+      "roles": [
+        "card_advantage",
+        "engines"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snapcaster Mage",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Undercity Sewers",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wan Shi Tong, Librarian",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Watery Grave",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Hold Counterspell until you see the opponent's priority threat or need to protect Psychic Frog",
+    "Use Thoughtseize before casting Frog to clear the way for it to resolve safely",
+    "Prioritize trading Frog's abilities against opponent's creatures to generate value while maintaining board presence",
+    "Save interaction for spells that enable the opponent's win condition or remove your key threats",
+    "Common mistake: Overplaying Psychic Frog into removal without protection."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Thoughtseize on turn one to strip key combo pieces or early threats"
+    },
+    {
+      "trigger": "early game",
+      "line": "Cast Psychic Frog to establish a resilient board presence and generate card advantage"
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold Counterspell for priority threats or to protect your Frog"
+    }
+  ],
+  "kill_priority": [
+    "Psychic Frog",
+    "Shark Typhoon",
+    "Counterspell",
+    "Kaito, Bane of Nightmares",
+    "Orcish Bowmasters",
+    "Sheoldred's Edict",
+    "Snapcaster Mage",
+    "Subtlety"
+  ],
+  "interaction_to_disrupt": [
+    "Consign to Memory",
+    "Counterspell",
+    "Force of Negation",
+    "Mystical Dispute",
+    "Psychic Frog",
+    "Spell Pierce",
+    "Spell Snare",
+    "Stern Scolding"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/esper-midrange.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

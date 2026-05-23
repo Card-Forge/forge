@@ -1,0 +1,125 @@
+{
+  "archetype": "Boros Energy",
+  "format": "modern",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/boros-energy.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Ajani, Nacatl Pariah"
+    },
+    {
+      "qty": 2,
+      "name": "Arena of Glory"
+    },
+    {
+      "qty": 4,
+      "name": "Arid Mesa"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Moon"
+    },
+    {
+      "qty": 2,
+      "name": "Elegant Parlor"
+    },
+    {
+      "qty": 3,
+      "name": "Fable of the Mirror-Breaker"
+    },
+    {
+      "qty": 4,
+      "name": "Flooded Strand"
+    },
+    {
+      "qty": 4,
+      "name": "Galvanic Discharge"
+    },
+    {
+      "qty": 3,
+      "name": "Goblin Bombardment"
+    },
+    {
+      "qty": 4,
+      "name": "Guide of Souls"
+    },
+    {
+      "qty": 2,
+      "name": "Mana Tithe"
+    },
+    {
+      "qty": 4,
+      "name": "Marsh Flats"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Ocelot Pride"
+    },
+    {
+      "qty": 1,
+      "name": "Path to Exile"
+    },
+    {
+      "qty": 3,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Ragavan, Nimble Pilferer"
+    },
+    {
+      "qty": 3,
+      "name": "Sacred Foundry"
+    },
+    {
+      "qty": 2,
+      "name": "Seasoned Pyromancer"
+    },
+    {
+      "qty": 3,
+      "name": "Thraben Charm"
+    },
+    {
+      "qty": 2,
+      "name": "Voice of Victory"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Aven Mindcensor"
+    },
+    {
+      "qty": 1,
+      "name": "Clarion Conqueror"
+    },
+    {
+      "qty": 2,
+      "name": "Containment Priest"
+    },
+    {
+      "qty": 3,
+      "name": "Damping Sphere"
+    },
+    {
+      "qty": 2,
+      "name": "Orim's Chant"
+    },
+    {
+      "qty": 2,
+      "name": "Vexing Bauble"
+    },
+    {
+      "qty": 2,
+      "name": "Wear // Tear"
+    },
+    {
+      "qty": 2,
+      "name": "Wrath of the Skies"
+    }
+  ]
+}

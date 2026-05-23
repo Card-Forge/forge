@@ -1,0 +1,300 @@
+{
+  "archetype": "Atarka, World Render",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/atarka-world-render.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Atarka Monument"
+    },
+    {
+      "qty": 1,
+      "name": "Atarka, World Render"
+    },
+    {
+      "qty": 1,
+      "name": "Beast Within"
+    },
+    {
+      "qty": 1,
+      "name": "Belbe's Portal"
+    },
+    {
+      "qty": 1,
+      "name": "Blossoming Defense"
+    },
+    {
+      "qty": 1,
+      "name": "Carnelian Orb of Dragonkind"
+    },
+    {
+      "qty": 1,
+      "name": "Cinder Glade"
+    },
+    {
+      "qty": 1,
+      "name": "Clan Defiance"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Crucible of Fire"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivate"
+    },
+    {
+      "qty": 1,
+      "name": "Demanding Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Domri, Anarch of Bolas"
+    },
+    {
+      "qty": 1,
+      "name": "Dracogenesis"
+    },
+    {
+      "qty": 1,
+      "name": "Dragon Tempest"
+    },
+    {
+      "qty": 1,
+      "name": "Dragon's Hoard"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonkin Berserker"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonlord's Servant"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonmaster Outcast"
+    },
+    {
+      "qty": 1,
+      "name": "Dragonspeaker Shaman"
+    },
+    {
+      "qty": 1,
+      "name": "Drakuseth, Maw of Flames"
+    },
+    {
+      "qty": 1,
+      "name": "Drumhunter"
+    },
+    {
+      "qty": 1,
+      "name": "Earthquake Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Elemental Bond"
+    },
+    {
+      "qty": 1,
+      "name": "Elvish Piper"
+    },
+    {
+      "qty": 1,
+      "name": "Fires of Yavimaya"
+    },
+    {
+      "qty": 1,
+      "name": "Flameblast Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Foe-Razer Regent"
+    },
+    {
+      "qty": 12,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Frontier Siege"
+    },
+    {
+      "qty": 1,
+      "name": "Game Trail"
+    },
+    {
+      "qty": 1,
+      "name": "Ganax, Astral Hunter"
+    },
+    {
+      "qty": 1,
+      "name": "Garruk's Uprising"
+    },
+    {
+      "qty": 1,
+      "name": "Goblin Anarchomancer"
+    },
+    {
+      "qty": 1,
+      "name": "Harmonize"
+    },
+    {
+      "qty": 1,
+      "name": "Haven of the Spirit Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Hellkite Charger"
+    },
+    {
+      "qty": 1,
+      "name": "Hoard-Smelter Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Kazandu Refuge"
+    },
+    {
+      "qty": 1,
+      "name": "Kodama's Reach"
+    },
+    {
+      "qty": 1,
+      "name": "Krosan Grip"
+    },
+    {
+      "qty": 1,
+      "name": "Lathliss, Dragon Queen"
+    },
+    {
+      "qty": 1,
+      "name": "Magmaquake"
+    },
+    {
+      "qty": 1,
+      "name": "Minion of the Mighty"
+    },
+    {
+      "qty": 1,
+      "name": "Mordant Dragon"
+    },
+    {
+      "qty": 17,
+      "name": "Mountain"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Primal Might"
+    },
+    {
+      "qty": 1,
+      "name": "Rapacious Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Rhythm of the Wild"
+    },
+    {
+      "qty": 1,
+      "name": "Rugged Highlands"
+    },
+    {
+      "qty": 1,
+      "name": "Sakura-Tribe Elder"
+    },
+    {
+      "qty": 1,
+      "name": "Sarkhan's Triumph"
+    },
+    {
+      "qty": 1,
+      "name": "Savage Ventmaw"
+    },
+    {
+      "qty": 1,
+      "name": "Scourge of Valkas"
+    },
+    {
+      "qty": 1,
+      "name": "Scourge of the Throne"
+    },
+    {
+      "qty": 1,
+      "name": "Shivan Oasis"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Spit Flame"
+    },
+    {
+      "qty": 1,
+      "name": "Steel Hellkite"
+    },
+    {
+      "qty": 1,
+      "name": "Sweltering Suns"
+    },
+    {
+      "qty": 1,
+      "name": "Swiftfoot Boots"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Impulse"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Abandon"
+    },
+    {
+      "qty": 1,
+      "name": "Thrakkus the Butcher"
+    },
+    {
+      "qty": 1,
+      "name": "Thunderbreak Regent"
+    },
+    {
+      "qty": 1,
+      "name": "Thundermaw Hellkite"
+    },
+    {
+      "qty": 1,
+      "name": "Timber Gorge"
+    },
+    {
+      "qty": 1,
+      "name": "Tyrant's Familiar"
+    },
+    {
+      "qty": 1,
+      "name": "Unleash Fury"
+    },
+    {
+      "qty": 1,
+      "name": "Vandalblast"
+    },
+    {
+      "qty": 1,
+      "name": "Warstorm Surge"
+    }
+  ],
+  "sideboard": []
+}

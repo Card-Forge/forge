@@ -14,12 +14,15 @@
     "keep_criteria": [
       "Hands that put your plan in motion straight away",
       "Hands that accelerate your mana curve as much as possible",
-      "Hands that enable Ugin's Labyrinth on turn 1 and guarantee a Seer on turn 2"
+      "Hands that enable Ugin's Labyrinth on turn 1 and guarantee a Seer on turn 2",
+      "Keep hands with two or more Tron lands (Ancient Tron, Eye of Ugin, Urza's Tower), or one Tron land plus two mana-producing lands that can fetch basics.",
+      "Keep Thought-Knot Seer if paired with at least two lands."
     ],
     "mulligan_criteria": [
       "Hands that give Karn on turn 4 with dead cards if green mana is inaccessible",
       "Complicated hands that might fail to find the third Urza land piece",
-      "Hands with Chalice of the Void and Talismans when playing first against an unknown opponent"
+      "Hands with Chalice of the Void and Talismans when playing first against an unknown opponent",
+      "Mulligan on three or more lands with zero Tron pieces, or hands with only one land and no acceleration."
     ],
     "examples": [
       {
@@ -68,17 +71,29 @@
       "Complete Urza's Land Trio or accelerate mana curve through alternative means",
       "Enable Ugin's Labyrinth on turn 1 to reduce Eldrazi costs",
       "Use Devourer of Destiny to manipulate the top four cards and find lands or spells",
-      "Cast Mystic Forge to play spells directly from the library"
+      "Cast Mystic Forge to play spells directly from the library",
+      "Turn 1: Play a land, cast Thought-Knot Seer if possible, or play a Tron land.",
+      "Turn 2: Play another land, cast Seer or a second Tron piece.",
+      "Sequence lands to ensure you can fetch basics for Tron activation.",
+      "Prioritize getting the trio online over casting threats prematurely."
     ],
     "mid_game": [
       "Play giant Eldrazi threats like Kozilek's Command or Thought-Knot Seer",
       "Utilize Karn, the Great Creator to access sideboard hate cards",
-      "Apply pressure and survive early disruption while developing the board"
+      "Apply pressure and survive early disruption while developing the board",
+      "Mana is your primary resource",
+      "hoard it until you can cast a threat with a backup removal spell.",
+      "Use Thought-Knot Seer to disrupt opponent hands and dig for answers.",
+      "Manage the graveyard by using Kozilek's Command to exile key recursive threats or combo pieces.",
+      "Commit threats when you have a Kozilek's Command or Dispel ready to answer removal.",
+      "Don't drop Emrakul into a spot where it can be countered or removed without a backup."
     ],
     "late_game": [
       "Use Karn's +1 ability with Liquimetal Coating for land destruction",
       "Cast Sowing Mycospawn to fix mana and destroy opponent's lands",
-      "Maintain board presence with resilient Eldrazi and targeted removal"
+      "Maintain board presence with resilient Eldrazi and targeted removal",
+      "Emrakul, the Aeons Torn (unblockable, draws cards, exiles permanents), Ulamog, the Ceaseless Hunger (exiles permanents, destroys lands), Kozilek, the Great Distortion (taps/untaps, destroys artifacts/enchantments), and Ugin, the Spirit Dragon (exiles permanents, deals damage).",
+      "When you have the Tron lands online, enough mana to cast a threat and have a removal spell ready, or when the opponent is at low life and you can go wide with unblockable threats."
     ]
   },
   "key_cards": [
@@ -112,7 +127,11 @@
     "Prioritize enabling Ugin's Labyrinth on turn 1 alongside Devourer of Destiny to manipulate the top cards and accelerate mana.",
     "Use Mystic Forge early to bypass mana constraints and play spells directly from the library.",
     "Deploy Kozilek's Command to develop the game plan and handle critical moments.",
-    "Avoid playing Chalice of the Void or Talismans on turn 1 if playing first against an unknown opponent, as they may cost the game."
+    "Avoid playing Chalice of the Void or Talismans on turn 1 if playing first against an unknown opponent, as they may cost the game.",
+    "Common mistakes include overextending into sweepers, forgetting to fetch basics for Tron, mismanaging Kozilek's Command (exiling the wrong thing), and not using Thought-Knot Seer early enough.",
+    "Tron lands produce colorless mana that can be used for other spells.",
+    "Emrakul's draw step can be used to dig for answers.",
+    "Ugin's -3 can be used to exile key cards."
   ],
   "matchups": [
     {
@@ -143,7 +162,7 @@
       ]
     },
     {
-      "opponent_archetype": "Goryo’s Vengeance",
+      "opponent_archetype": "Goryo\u2019s Vengeance",
       "advice": "Guarantee a strong start to catch them off guard. Use Karn to get Pithing Needle and rely on graveyard hate in the sideboard.",
       "watch_for": [
         "FON",
@@ -159,6 +178,31 @@
         "Sowing Mycospawn",
         "Mirror match variance"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use Kozilek's Command to exile the counter spell, or cast threats in response to their casting triggers. Use Thought-Knot Seer to dig for answers. Split your mana to cast threats when they're tapped out.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Use Kozilek's Command to exile their ramp sources or finishers. Thought-Knot Seer to disrupt their hand. Don't overcommit if they can out-value you.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Early Thought-Knot Seer to disrupt their curve. Kozilek's Command for sweepers. Hold back a threat to answer their key attacker. Stabilize with Ugin or Kozilek.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure with Seer and early threats. Don't let them stabilize. Use Kozilek's Command to remove their key permanents. Go wide with multiple threats if possible.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "It's a race and a resource war. Prioritize hand disruption. Use Kozilek's Command to exile their Tron pieces or finishers. Win the mana race by optimizing land drops. Dispel is key.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -168,10 +212,13 @@
     "FON",
     "Counterspell",
     "Psychic Frog",
-    "Amped Raptor"
+    "Amped Raptor",
+    "Watch for sweepers (Day of Judgment, Boros Energy finishers), counterspells, and graveyard recursion.",
+    "Note when opponents tap out for big spells or when they start tapping lands for Tron-like acceleration."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-eldrazi-tron-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T01:08:55+00:00",
     "model": "local-model",
@@ -189,7 +236,27 @@
         "overview",
         "key_cards",
         "matchups"
-      ]
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/modern.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
     }
   ],
   "legal_era": {

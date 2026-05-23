@@ -5,9 +5,13 @@
 ```bash
 # This repo lives inside the larger Forge monorepo at ../forge-llm-sidecar/
 pip install -e ".[dev]"      # install package + dev deps
-uvicorn app.main:app --port 18970   # dev server
+uvicorn app.main:app --host 0.0.0.0 --port 18970   # dev server
 pytest                       # fully offline tests (LLM + Scryfall stubbed)
 ```
+
+When Codex starts the sidecar, dashboard, or other local servers for this
+project, bind them to `0.0.0.0` unless the user explicitly asks for localhost
+only. This keeps the service reachable from the user's Tailscale devices.
 
 ## Verify commands (run in this order)
 
@@ -67,6 +71,9 @@ Package data (JSON files) is bundled via `[tool.setuptools.package-data]`:
 
 - `scripts/scrape_metagame.py` — scrapes MTGGoldfish, writes `app/knowledge/metagame_data/*.json`
 - `scripts/build_piloting_guides.py` — generates piloting guide JSON from archetype data
+- `scripts/build_card_buckets.py` — parses imported `.dck` decklists, refreshes the
+  Scryfall card cache, writes normalized decklists, regenerates archetype
+  profile buckets, and emits coverage reports
 - `scripts/analyze_forge_log.py` — CLI for parsing Forge game logs via `app.forge_log`
 - `scripts/selfplay_report.py` — one-shot aggregation of runner JSONL (win-rate / turns table)
 - `scripts/record_run.py` — ingest a runner JSONL batch into the persistent results DB,
@@ -94,8 +101,9 @@ that deck). The runner's `-record false` disables auto-record; `-format`/`-label
 |---|---|---|
 | `LLM_BASE_URL` | `http://localhost:8080/v1` | OpenAI-compatible endpoint |
 | `MODEL_NAME` | `local-model` | Model name in LLM requests |
+| `LLM_TIMEOUT` | `300` | LLM request timeout (seconds) |
 | `LLM_DISABLE_THINKING` | `true` | Send `enable_thinking:false` — skip the `<think>` block (~20x faster) |
-| `HOST` | `127.0.0.1` | uvicorn bind interface; `0.0.0.0` for remote access |
+| `HOST` | `0.0.0.0` | uvicorn bind interface; use `127.0.0.1` for localhost only |
 | `PORT` | `18970` | uvicorn listen port |
 | `METAGAME_ENABLE` | `true` | Score guesses against metagame data |
 | `FORMAT_DETECT_ENABLE` | `true` | Scryfall-based format detection |

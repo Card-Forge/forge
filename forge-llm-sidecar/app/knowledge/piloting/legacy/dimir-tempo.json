@@ -13,11 +13,13 @@
   "mulligan": {
     "keep_criteria": [
       "balanced amount of mana, action, and card draw",
-      "hands that lean more on attrition"
+      "hands that lean more on attrition",
+      "Keep hands with 2-3 lands (preferably duals or fetchable sources), a turn-1 discard outlet or cantrip, and at least one efficient one-drop threat."
     ],
     "mulligan_criteria": [
       "hands that don't do anything directly and rely on next draws",
-      "hands with too many lands that risk disabling Force of Will when using Ponder"
+      "hands with too many lands that risk disabling Force of Will when using Ponder",
+      "Mulligan on 3+ lands with no early interaction, or hands consisting solely of high-cost spells with no protection or cantrips to enable them."
     ],
     "examples": [
       {
@@ -72,17 +74,30 @@
     "early_game": [
       "Play aggressive 1-drops like Nethergoyf and Brazen Borrower.",
       "Use disruption like Thoughtseize and Fatal Push to slow opponents.",
-      "Transform Tamiyo, Inquisitive Student early for card flow."
+      "Transform Tamiyo, Inquisitive Student early for card flow.",
+      "Turn 1 typically involves casting a cantrip or Thoughtseize to dig for threats and strip key early pieces.",
+      "Turn 2 focuses on deploying a resilient threat or using counterspells to protect it while disrupting the opponent's plan.",
+      "Land sequencing should prioritize fetching and dual-land bases to ensure consistent access to both colors, allowing you to cast interaction and threats on the same turn."
     ],
     "mid_game": [
       "Deploy Orcish Bowmasters to prey on opponent cantrips.",
       "Cast Murktide Regent for evasive damage against damage-based removal.",
-      "Use Kaito, Bane of Nightmares via Ninjutsu for board control and resources."
+      "Use Kaito, Bane of Nightmares via Ninjutsu for board control and resources.",
+      "Treat mana as a weapon",
+      "never let it sit empty if you can disrupt or develop.",
+      "Manage hand size by using cantrips to filter into answers or threats.",
+      "Avoid overcommitting to the board without protection.",
+      "Use the graveyard as a resource for discard outlets and recursion, but be mindful of opponent hate.",
+      "Commit threats only when you have interaction to protect them or when the opponent lacks removal."
     ],
     "late_game": [
       "Rely on attrition and card advantage from Tamiyo and Stock Up.",
       "Recycle Nethergoyf for continued pressure.",
-      "Sideboard in Barrowgoyf for resilient lifelink threats."
+      "Sideboard in Barrowgoyf for resilient lifelink threats.",
+      "High-impact mid-game threats that demand an answer, combined with card advantage engines that out-value the opponent.",
+      "Win by out-resourcing them in extended turns or closing out with a protected threat they cannot remove.",
+      "Go all-in when you have card advantage secured, the opponent has no removal in hand, or you've established board dominance with protected threats.",
+      "Commit when you can safely cast your win condition knowing you can protect it or trade up."
     ]
   },
   "key_cards": [
@@ -141,7 +156,11 @@
     "Only fetch red mana when you specifically need to play red sideboard cards to avoid Wasteland.",
     "Fetch basic lands early against Red Stompy to mitigate Blood Moon.",
     "Avoid tapping mana on your turn when facing Show and Tell to prevent Sneak Attack exploitation.",
-    "Be cautious when using Ponder in land-heavy hands as it may disable Force of Will."
+    "Be cautious when using Ponder in land-heavy hands as it may disable Force of Will.",
+    "Common mistakes include overcommitting to the board without protection, hoarding counterspells until it's too late, and failing to use cantrips effectively.",
+    "Dimir Tempo thrives on information and tempo",
+    "always prioritize playing around key opponent threats rather than reacting to them.",
+    "Remember that discard is both a tool and a resource\u2014use it to dig and disrupt simultaneously."
   ],
   "matchups": [
     {
@@ -185,6 +204,31 @@
         "Red Elemental Blast",
         "Painter's Servant"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig for answers or threats that are hard to counter. Employ layered interaction, such as discarding into a threat and then protecting it. Avoid overcommitting to the stack; wait for them to use their counterspell on a less important spell before playing your win condition.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to punish their slow start. Use discard to strip key ramp pieces or finishers. Prioritize fast interaction to disrupt their mana development before they stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early counterspells and spot removal. Use discard to strip key early threats. Transition to a slightly more controlling game plan, then close out with resilient threats once the board is clear.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with efficient threats that demand immediate answers. Use discard to strip their counterspells and card advantage. Out-value them by playing around their removal with layered threats and cantrips.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by playing more efficiently. Prioritize card advantage and disruption. Trade up on the stack, and be willing to concede a minor board position to secure a key interaction. Sideboard in cards that beat the mirror's specific threats.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -195,10 +239,13 @@
     "Red Elemental Blast",
     "Sneak Attack",
     "Simian Spirit Guide",
-    "Fable of the Mirror-Breaker"
+    "Fable of the Mirror-Breaker",
+    "Watch for mana bases and land drops to predict combo or ramp turns.",
+    "Track the opponent's graveyard for recursion or flashback threats."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-dimir-tempo-deck-tech-and-sideboard-guide",
     "generated_at": "2026-05-21T07:07:29+00:00",
     "model": "local-model",
@@ -216,6 +263,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

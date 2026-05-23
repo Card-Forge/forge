@@ -1,0 +1,137 @@
+{
+  "archetype": "5c Control",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/5c-control.dck",
+  "mainboard": [
+    {
+      "qty": 3,
+      "name": "Breeding Pool"
+    },
+    {
+      "qty": 1,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 3,
+      "name": "Day of Judgment"
+    },
+    {
+      "qty": 2,
+      "name": "Erode"
+    },
+    {
+      "qty": 1,
+      "name": "Flashback"
+    },
+    {
+      "qty": 4,
+      "name": "Great Hall of the Biblioplex"
+    },
+    {
+      "qty": 2,
+      "name": "Inevitable Defeat"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Jeskai Revelation"
+    },
+    {
+      "qty": 2,
+      "name": "Lightning Helix"
+    },
+    {
+      "qty": 1,
+      "name": "Maelstrom Pulse"
+    },
+    {
+      "qty": 1,
+      "name": "Mistrise Village"
+    },
+    {
+      "qty": 1,
+      "name": "Mountain"
+    },
+    {
+      "qty": 2,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 4,
+      "name": "Shared Roots"
+    },
+    {
+      "qty": 4,
+      "name": "Shimmerwilds Growth"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Stock Up"
+    },
+    {
+      "qty": 4,
+      "name": "Stomping Ground"
+    },
+    {
+      "qty": 1,
+      "name": "Swamp"
+    },
+    {
+      "qty": 4,
+      "name": "Tablet of Discovery"
+    },
+    {
+      "qty": 4,
+      "name": "Temple Garden"
+    },
+    {
+      "qty": 2,
+      "name": "Together as One"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 3,
+      "name": "Arcane Omens"
+    },
+    {
+      "qty": 1,
+      "name": "Day of Judgment"
+    },
+    {
+      "qty": 2,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 1,
+      "name": "Leatherhead, Swamp Stalker"
+    },
+    {
+      "qty": 1,
+      "name": "Pyroclasm"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 2,
+      "name": "Strategic Betrayal"
+    },
+    {
+      "qty": 3,
+      "name": "Voice of Victory"
+    }
+  ]
+}

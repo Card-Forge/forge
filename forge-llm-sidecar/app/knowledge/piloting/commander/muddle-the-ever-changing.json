@@ -1,0 +1,125 @@
+{
+  "archetype": "Muddle, the Ever-Changing",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This R/U archetype functions as a reactive control-combo hybrid that leverages card advantage and flexible threats to out-value opponents. It aims to stabilize early, accumulate resources through Curiosity Crafter and Muddle, and close games with adaptable, high-impact plays that exploit matchup-specific weaknesses.",
+  "win_conditions": [
+    "Muddle the Ever-Changing's ultimate mode, often combined with Curiosity Crafter's value generation or Enter the Enigma's board impact.",
+    "Secure these by protecting Muddle with counters, evasion, or timely removal."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep any hand with 2-3 lands (including duals/fixing), Muddle the Ever-Changing, and at least one card draw or early interaction.",
+      "Prioritize hands that can cast Muddle or Curiosity Crafter by turn 2-3."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 0-1 lands, multiple unplayable early spells, or no way to establish board presence by turn 2."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, cast a cantrip or cheap interaction if available.",
+      "Turn 2: Develop mana base, cast Curiosity Crafter or Muddle if possible, or hold up counters/removal.",
+      "Land sequencing: Prioritize fetching/drawing duals or shock lands to ensure consistent R/U access",
+      "avoid flooding with single-color sources."
+    ],
+    "mid_game": [
+      "Conserve mana for interaction until Muddle enters",
+      "use Curiosity Crafter to fuel card advantage without overextending.",
+      "Track graveyard for recursion threats.",
+      "Never cast Muddle's cheaper modes if the opponent has sweepers",
+      "save the high-impact mode for when it's safe.",
+      "Commit threats only when you have answered or out-value the opponent's board.",
+      "Hold back Muddle if the opponent has sweepers or targeted removal",
+      "use Curiosity Crafter to pressure while preserving Muddle as a finisher or answer."
+    ],
+    "late_game": [
+      "Muddle the Ever-Changing's ultimate mode, often combined with Curiosity Crafter's value generation or Enter the Enigma's board impact.",
+      "Secure these by protecting Muddle with counters, evasion, or timely removal.",
+      "Go all-in when the opponent has no interaction in hand, when you have lethal in hand/board, or when Muddle's ever-changing ability can bypass their defense.",
+      "Also commit when you've out-valued them in card advantage."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Muddle, the Ever-Changing",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Curiosity Crafter",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Enter the Enigma",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: overcommitting Muddle too early without protection.",
+    "Unique interaction: Muddle's ever-changing mechanic allows you to adapt its effect to the current board state, so always evaluate the opponent's most threatening resource before choosing a mode.",
+    "Avoid playing Enter the Enigma into a known board wipe",
+    "wait for a safe turn or use it as a surprise answer."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use evasion, split casting costs, or cheap threats that don't rely on a single spell. Cast Muddle or Enter the Enigma in response to their counterspells if possible, or use cantrips to dig past their interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use targeted removal on key ramp creatures and counterspells on their acceleration spells. Don't let them stabilize; trade efficiently and punish their overextension.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with efficient removal and counterspells. Prioritize answering their early threats over developing your own board. Once stabilized, transition to value engines and close the game before they can recover.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Grind out card advantage with Curiosity Crafter and cantrips. Apply incremental pressure with Muddle's flexible modes. Force them to use interaction on low-value threats, then strike with Muddle's high-impact mode.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-valuing in card advantage and protecting your Muddle. Use targeted removal to eliminate their Muddle or key engines. Sideboard in hate that targets their specific interaction, and prioritize board presence over hand disruption.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for opponent's mana development (ramp vs control), graveyard activity (recursion), and hand size (combo vs control).",
+    "Key tells: holding up blue mana suggests counterspells",
+    "tapping for red suggests removal",
+    "playing multiple low-cost spells indicates combo or aggro."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

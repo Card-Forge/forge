@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands with two- and three-drops that establish early board presence",
       "Combinations featuring Thalia's Lieutenant or early Humans",
-      "Hands with removal or tax effects to disrupt opponent's early game"
+      "Hands with removal or tax effects to disrupt opponent's early game",
+      "Keep hands with 1-2 lands and at least 3-4 one-mana Human creatures (e.g., Knight-Captain, Ambitious Assault, Thalia's Lieutenant, or early pump spells).",
+      "Prioritize hands that can play a creature on turn 1 and a second on turn 2."
     ],
     "mulligan_criteria": [
       "Hands lacking early plays or curve breakers",
       "Mana-heavy hands with only four-drops or higher",
-      "Hands missing synergistic Humans or tax effects"
+      "Hands missing synergistic Humans or tax effects",
+      "Mulligan if you have 3+ lands with no early threats, 0-1 lands with no recovery plan, or hands missing both lands and one-mana threats."
     ],
     "examples": []
   },
@@ -25,17 +28,34 @@
     "early_game": [
       "Play lands and cheap Humans to establish board presence",
       "Prioritize Thalia's Lieutenant to tax opponent's early spells",
-      "Use combat tricks to maximize early damage"
+      "Use combat tricks to maximize early damage",
+      "Turn 1: Play a Plains, cast a one-mana Human (Knight-Captain, Ambitious Assault, or Thalia's Lieutenant).",
+      "Turn 2: Play a Plains, cast a second Human or a pump spell (Rally the Righteous, Steelshaper's Gift).",
+      "If you have Thalia's Lieutenant, prioritize casting it to tax opponent non-Human spells.",
+      "Land sequencing: Play basic Plains first",
+      "if using fetch/shock, ensure you can hit basics for consistency."
     ],
     "mid_game": [
       "Deploy Thalia, Guardian of Thraben to further tax opponent's resources",
       "Begin pumping Adeline, Resplendent Cathar with +1/+1 counters",
-      "Maintain board pressure while answering opponent's threats"
+      "Maintain board pressure while answering opponent's threats",
+      "Preserve mana for interaction and finishing blows.",
+      "Avoid overcommitting to the board if the opponent has sweepers or heavy removal.",
+      "Use combat to trigger lifelink/vigilance and maintain card advantage.",
+      "Protect your graveyard from discard effects and keep key pieces (especially Adeline) safe from targeted removal.",
+      "Commit threats when you have protection for Adeline or the opponent has no sweepers.",
+      "Hold back if the opponent has potential board wipes or heavy removal."
     ],
     "late_game": [
       "Focus on growing Adeline into a massive blocker and attacker",
       "Use tax effects to stall opponent's finishers",
-      "Close out the game with combat damage or a pumped Adeline"
+      "Close out the game with combat damage or a pumped Adeline",
+      "Adeline, Resplendent Cathar (with pump/vigilance), and fully buffed Humans.",
+      "Win by trading efficiently, leveraging lifelink to stabilize, and using combat tricks to close out the game.",
+      "Adeline's +1/+1 and vigilance make her a formidable finisher that can outlast control and midrange decks.",
+      "Go all-in when you have protection for Adeline, the opponent has no sweepers, or you can trade up favorably.",
+      "Commit when you can close the game in 1-2 turns or when the opponent has exhausted their interaction.",
+      "Use combat tricks to maximize damage and secure lethal."
     ]
   },
   "key_cards": [
@@ -58,7 +78,12 @@
   "sequencing_tips": [
     "Hold up mana for combat tricks to maximize early damage",
     "Play tax creatures before opponent's key spells to maximize disruption",
-    "Pump Adeline only when you can follow up with combat or protection"
+    "Pump Adeline only when you can follow up with combat or protection",
+    "Common mistakes include overcommitting to the board without protection for Adeline, ignoring opponent potential sweepers, and mismanaging mana for interaction.",
+    "Thalia's Lieutenant's tax applies to opponent spells, not yours, so use it to disrupt their game plan.",
+    "Adeline's +1/+1 and vigilance make her a formidable finisher, but she requires protection.",
+    "Use combat tricks to maximize damage and watch for format-specific removal and sweepers.",
+    "Practice tracking opponent interaction to know when to commit or hold back."
   ],
   "matchups": [
     {
@@ -87,15 +112,35 @@
         "Board wipes",
         "Resource denial"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that are hard to counter (1-mana Humans). Save interaction for key spells. Use pump spells or combat tricks to close out before counters can react. If possible, bring in more uncounterable threats or protection spells.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to beat them out. Use removal to kill their mana dorks or key ramp creatures. Thalia's tax makes their ramp spells expensive, slowing them down. Force them to spend resources on interaction rather than acceleration.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-valuing. Use removal to kill their key pieces. Save counters for their Adeline or Thalia. Trade efficiently and use pump spells to win combat. Card advantage and protection are key. Look for opportunities to trade your less valuable creatures for their better ones.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Board wipes that clear your Human army",
     "Counterspells that stop your tax creatures",
-    "High-toughness blockers that stall Adeline"
+    "High-toughness blockers that stall Adeline",
+    "Watch for board wipes (Wrath of God, Day of Judgment), targeted removal (Path to Exile, Swords to Plowshares), and counterspells.",
+    "Note when the opponent taps out for a sweeper or heavy removal.",
+    "Track graveyard hate if facing combo/midrange.",
+    "Pay attention to when the opponent uses their last interaction, as this is your window to close out the game."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T05:09:29+00:00",
     "model": "local-model",
@@ -111,6 +156,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

@@ -1,0 +1,461 @@
+{
+  "schema_version": 1,
+  "name": "Goblins",
+  "format": "legacy",
+  "colors": [
+    "B",
+    "R",
+    "G"
+  ],
+  "strategy_type": "aggro",
+  "expected_deck_total": 61,
+  "macro_plan": "Rakdos Goblins is a Legacy aggro deck that relies on cheating creatures into play early using Aether Vial and Goblin Lackey. It aims to overwhelm opponents with a wide board of hasty Goblins, using toolbox cards like Goblin Matron and removal like Broadside Bombardiers to control the game. The deck wins by racing opponents with combat damage or draining life with Sling-Gang Lieutenant.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 12,
+      "cards": [
+        "Food Chain",
+        "Goblin Lackey",
+        "Hexing Squelcher"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "dig_draw": {
+      "target_count": 3,
+      "cards": [
+        "Commercial District",
+        "Once Upon a Time"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 8,
+      "cards": [
+        "Goblin Matron",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 11,
+      "cards": [
+        "Food Chain",
+        "Goblin Lackey",
+        "Muxus, Goblin Grandee"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 41,
+      "cards": [
+        "Broadside Bombardiers",
+        "Food Chain",
+        "Fury",
+        "General Kreat, the Boltbringer",
+        "Goblin Lackey",
+        "Goblin Matron",
+        "Goblin Ringleader",
+        "Goblin Trashmaster",
+        "Hexing Squelcher",
+        "Howlsquad Heavy",
+        "Ignoble Hierarch",
+        "Magus of the Moon",
+        "Muxus, Goblin Grandee",
+        "Skirk Prospector",
+        "Sling-Gang Lieutenant",
+        "Squee, the Immortal",
+        "Stingscourger"
+      ],
+      "mainboard_count": 39,
+      "sideboard_count": 2
+    },
+    "removal": {
+      "target_count": 19,
+      "cards": [
+        "Ancient Tomb",
+        "Broadside Bombardiers",
+        "General Kreat, the Boltbringer",
+        "Goblin Lackey",
+        "Goblin Trashmaster",
+        "Meltdown",
+        "Red Elemental Blast",
+        "Stingscourger"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 3,
+      "cards": [
+        "Red Elemental Blast"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 3
+    },
+    "protection": {
+      "target_count": 16,
+      "cards": [
+        "Cavern of Souls",
+        "Food Chain",
+        "Goblin Lackey",
+        "Hexing Squelcher"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 18,
+      "cards": [
+        "Commercial District",
+        "Food Chain",
+        "Goblin Lackey",
+        "Hexing Squelcher",
+        "Howlsquad Heavy",
+        "Leyline of the Void",
+        "Squee, the Immortal"
+      ],
+      "mainboard_count": 15,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 14,
+      "cards": [
+        "Food Chain",
+        "Goblin Lackey",
+        "Hexing Squelcher",
+        "Squee, the Immortal",
+        "Stingscourger"
+      ],
+      "mainboard_count": 14,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 13,
+      "cards": [
+        "Food Chain",
+        "Goblin Lackey",
+        "Hexing Squelcher",
+        "Howlsquad Heavy"
+      ],
+      "mainboard_count": 13,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 3,
+      "cards": [
+        "Muxus, Goblin Grandee"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 12,
+      "cards": [
+        "Food Chain",
+        "Goblin Lackey",
+        "Hexing Squelcher"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 6,
+      "cards": [
+        "Chalice of the Void",
+        "Disruptor Flute",
+        "Mindbreak Trap"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 6
+    },
+    "mana_fixing": {
+      "target_count": 29,
+      "cards": [
+        "Ancient Tomb",
+        "Cavern of Souls",
+        "Chrome Mox",
+        "Commercial District",
+        "Food Chain",
+        "Goblin Lackey",
+        "Hexing Squelcher",
+        "Taiga",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 29,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 18,
+      "cards": [
+        "Ancient Tomb",
+        "Cavern of Souls",
+        "Commercial District",
+        "Forest",
+        "Mountain",
+        "Taiga",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.34
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Broadside Bombardiers",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Commercial District",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Food Chain",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "General Kreat, the Boltbringer",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Lackey",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Matron",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Goblin Trashmaster",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hexing Squelcher",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "mana_fixing",
+        "protection",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Howlsquad Heavy",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Muxus, Goblin Grandee",
+      "roles": [
+        "payoff_cards",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Red Elemental Blast",
+      "roles": [
+        "counterspells",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Squee, the Immortal",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stingscourger",
+      "roles": [
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Taiga",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize resolving Aether Vial or Goblin Lackey on turn 1 to set the pace",
+    "Use Greasewrench Goblin's ability to filter lands or unused Aether Vials when needed",
+    "Save Stingscourger to bounce big threats like Emrakul, the Aeons Torn back to hand",
+    "Create gigantic boards and sacrifice them instantly with Sling-Gang Lieutenant to kill opponents on their turn against The One Ring",
+    "Common mistakes: Overcommitting to Food Chain without a target, forgetting to protect your combo pieces, mismanaging the graveyard, not tracking opponent's hand size."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play Aether Vial or Goblin Lackey on turn 1 to establish early board presence"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use 1-drops like Greasewrench Goblin to filter lands or play aggressively"
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play land, cast Goblin Lackey."
+    }
+  ],
+  "kill_priority": [
+    "Food Chain",
+    "Goblin Lackey",
+    "Hexing Squelcher",
+    "Howlsquad Heavy",
+    "Muxus, Goblin Grandee",
+    "Broadside Bombardiers",
+    "Fury",
+    "General Kreat, the Boltbringer"
+  ],
+  "interaction_to_disrupt": [
+    "Red Elemental Blast",
+    "Cavern of Souls",
+    "Food Chain",
+    "Goblin Lackey",
+    "Hexing Squelcher",
+    "Ancient Tomb",
+    "Broadside Bombardiers",
+    "General Kreat, the Boltbringer"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/goblins.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

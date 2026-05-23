@@ -1,0 +1,373 @@
+{
+  "archetype": "Giada, Font of Hope",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/giada-font-of-hope.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Abandoned Air Temple"
+    },
+    {
+      "qty": 1,
+      "name": "Angel of Finality"
+    },
+    {
+      "qty": 1,
+      "name": "Angel of Vitality"
+    },
+    {
+      "qty": 1,
+      "name": "Angel of the Dire Hour"
+    },
+    {
+      "qty": 1,
+      "name": "Angel of the Ruins"
+    },
+    {
+      "qty": 1,
+      "name": "Angelic Curator"
+    },
+    {
+      "qty": 1,
+      "name": "Angelic Sleuth"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Lighthouse"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archangel of Tithes"
+    },
+    {
+      "qty": 1,
+      "name": "Basri Ket"
+    },
+    {
+      "qty": 1,
+      "name": "Bishop of Wings"
+    },
+    {
+      "qty": 1,
+      "name": "Blinding Light"
+    },
+    {
+      "qty": 1,
+      "name": "Boon-Bringer Valkyrie"
+    },
+    {
+      "qty": 1,
+      "name": "Bruna, the Fading Light"
+    },
+    {
+      "qty": 1,
+      "name": "Castle Ardenvale"
+    },
+    {
+      "qty": 1,
+      "name": "Cave of the Frost Dragon"
+    },
+    {
+      "qty": 1,
+      "name": "Cleric Class"
+    },
+    {
+      "qty": 1,
+      "name": "Damning Verdict"
+    },
+    {
+      "qty": 1,
+      "name": "Demolition Field"
+    },
+    {
+      "qty": 1,
+      "name": "Elspeth Resplendent"
+    },
+    {
+      "qty": 1,
+      "name": "Emancipation Angel"
+    },
+    {
+      "qty": 1,
+      "name": "Emeria, the Sky Ruin"
+    },
+    {
+      "qty": 1,
+      "name": "Exemplar of Light"
+    },
+    {
+      "qty": 1,
+      "name": "Farewell"
+    },
+    {
+      "qty": 1,
+      "name": "Firemane Commando"
+    },
+    {
+      "qty": 1,
+      "name": "Folk Hero"
+    },
+    {
+      "qty": 1,
+      "name": "Generous Gift"
+    },
+    {
+      "qty": 1,
+      "name": "Giada, Font of Hope"
+    },
+    {
+      "qty": 1,
+      "name": "Gift of Estates"
+    },
+    {
+      "qty": 1,
+      "name": "Gisela, the Broken Blade"
+    },
+    {
+      "qty": 1,
+      "name": "Herald of War"
+    },
+    {
+      "qty": 1,
+      "name": "Herald's Horn"
+    },
+    {
+      "qty": 1,
+      "name": "High Ground"
+    },
+    {
+      "qty": 1,
+      "name": "Idyllic Grange"
+    },
+    {
+      "qty": 1,
+      "name": "Inspiring Overseer"
+    },
+    {
+      "qty": 1,
+      "name": "Invasion of Gobakhan"
+    },
+    {
+      "qty": 1,
+      "name": "Irregular Cohort"
+    },
+    {
+      "qty": 1,
+      "name": "Kabira Takedown"
+    },
+    {
+      "qty": 1,
+      "name": "Land Tax"
+    },
+    {
+      "qty": 1,
+      "name": "Luminarch Ascension"
+    },
+    {
+      "qty": 1,
+      "name": "Lyra Dawnbringer"
+    },
+    {
+      "qty": 1,
+      "name": "Mask of Memory"
+    },
+    {
+      "qty": 1,
+      "name": "Mass Calcify"
+    },
+    {
+      "qty": 1,
+      "name": "Metropolis Reformer"
+    },
+    {
+      "qty": 1,
+      "name": "Minas Tirith"
+    },
+    {
+      "qty": 1,
+      "name": "Monumental Henge"
+    },
+    {
+      "qty": 1,
+      "name": "Myriad Landscape"
+    },
+    {
+      "qty": 1,
+      "name": "Norn's Choirmaster"
+    },
+    {
+      "qty": 1,
+      "name": "Oketra's Monument"
+    },
+    {
+      "qty": 1,
+      "name": "Ondu Inversion"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Patron of the Valiant"
+    },
+    {
+      "qty": 1,
+      "name": "Pearl Medallion"
+    },
+    {
+      "qty": 19,
+      "name": "Plains"
+    },
+    {
+      "qty": 1,
+      "name": "Ravnica at War"
+    },
+    {
+      "qty": 1,
+      "name": "Razorgrass Ambush"
+    },
+    {
+      "qty": 1,
+      "name": "Renounce the Guilds"
+    },
+    {
+      "qty": 1,
+      "name": "Resplendent Angel"
+    },
+    {
+      "qty": 1,
+      "name": "Resplendent Marshal"
+    },
+    {
+      "qty": 1,
+      "name": "Roaming Throne"
+    },
+    {
+      "qty": 1,
+      "name": "Rogue's Gloves"
+    },
+    {
+      "qty": 1,
+      "name": "Secluded Steppe"
+    },
+    {
+      "qty": 1,
+      "name": "Segovian Angel"
+    },
+    {
+      "qty": 1,
+      "name": "Sejiri Steppe"
+    },
+    {
+      "qty": 1,
+      "name": "Sephara, Sky's Blade"
+    },
+    {
+      "qty": 1,
+      "name": "Serra Redeemer"
+    },
+    {
+      "qty": 1,
+      "name": "Sigarda's Vanguard"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Stalwart Valkyrie"
+    },
+    {
+      "qty": 1,
+      "name": "Starnheim Aspirant"
+    },
+    {
+      "qty": 1,
+      "name": "Steel Seraph"
+    },
+    {
+      "qty": 1,
+      "name": "Study Hall"
+    },
+    {
+      "qty": 1,
+      "name": "Surge of Salvation"
+    },
+    {
+      "qty": 1,
+      "name": "Swords to Plowshares"
+    },
+    {
+      "qty": 1,
+      "name": "Terrain Generator"
+    },
+    {
+      "qty": 1,
+      "name": "Thraben Watcher"
+    },
+    {
+      "qty": 1,
+      "name": "Trouble in Pairs"
+    },
+    {
+      "qty": 1,
+      "name": "Valkyrie Harbinger"
+    },
+    {
+      "qty": 1,
+      "name": "Valorous Stance"
+    },
+    {
+      "qty": 1,
+      "name": "Windbrisk Heights"
+    },
+    {
+      "qty": 1,
+      "name": "Youthful Valkyrie"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Angel of Destiny"
+    },
+    {
+      "qty": 1,
+      "name": "Angel of Jubilation"
+    },
+    {
+      "qty": 1,
+      "name": "Angel of Sanctions"
+    },
+    {
+      "qty": 1,
+      "name": "Austere Command"
+    },
+    {
+      "qty": 1,
+      "name": "Conjurer's Mantle"
+    },
+    {
+      "qty": 1,
+      "name": "Gathering Stone"
+    },
+    {
+      "qty": 1,
+      "name": "Glimmer Lens"
+    },
+    {
+      "qty": 1,
+      "name": "Speaker of the Heavens"
+    },
+    {
+      "qty": 1,
+      "name": "Sunblast Angel"
+    }
+  ]
+}

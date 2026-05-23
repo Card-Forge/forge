@@ -1,0 +1,909 @@
+{
+  "schema_version": 1,
+  "name": "Vivi Ornitier",
+  "format": "commander",
+  "colors": [
+    "R",
+    "U"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 100,
+  "macro_plan": "This deck leverages mana acceleration and card draw to out-resource opponents, transitioning from early tempo to late-game card advantage and combat dominance. It excels against slower, resource-starved decks and struggles against hyper-aggressive or combo strategies that can close the game before your engine stabilizes.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 3,
+      "cards": [
+        "Desperate Ritual",
+        "Mana Drain",
+        "Pyretic Ritual"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 26,
+      "cards": [
+        "Brainstorm",
+        "Confound",
+        "Curiosity",
+        "Deliberate",
+        "Enter the Enigma",
+        "Finale of Revelation",
+        "Flame of Anor",
+        "Frantic Search",
+        "Gitaxian Probe",
+        "Mishra's Bauble",
+        "Niv-Mizzet, Visionary",
+        "Ophidian Eye",
+        "Opt",
+        "Overmaster",
+        "Ponder",
+        "Preordain",
+        "Ral, Crackling Wit",
+        "Rhystic Study",
+        "Slip Through Space",
+        "Sol Ring",
+        "Tandem Lookout",
+        "Timetwister",
+        "Urza's Bauble",
+        "Vivi Ornitier",
+        "Wheel of Fortune",
+        "Will of the Jeskai"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 9,
+      "cards": [
+        "Curiosity",
+        "Deliberate",
+        "Harmonic Prodigy",
+        "Mishra's Bauble",
+        "Opt",
+        "Ponder",
+        "Preordain",
+        "Sol Ring",
+        "Vivi Ornitier"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 11,
+      "cards": [
+        "Arid Mesa",
+        "Bloodstained Mire",
+        "Flooded Strand",
+        "Merchant Scroll",
+        "Misty Rainforest",
+        "Mystical Tutor",
+        "Personal Tutor",
+        "Polluted Delta",
+        "Prismatic Vista",
+        "Scalding Tarn",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 26,
+      "cards": [
+        "Coruscation Mage",
+        "Deflecting Swat",
+        "Electro, Assaulting Battery",
+        "Exalted Flamer of Tzeentch",
+        "Final Fortune",
+        "Ghyrson Starn, Kelermorph",
+        "Guttersnipe",
+        "Harmonic Prodigy",
+        "Hullbreaker Horror",
+        "Isochron Scepter",
+        "Kessig Flamebreather",
+        "Last Chance",
+        "Lightning Greaves",
+        "Niv-Mizzet, Visionary",
+        "Ojer Axonil, Deepest Might",
+        "Ral, Crackling Wit",
+        "Ruby Medallion",
+        "Sapphire Medallion",
+        "Savor the Moment",
+        "Sea Gate Restoration",
+        "Seething Song",
+        "Tandem Lookout",
+        "Thought Vessel",
+        "Time Warp",
+        "Veyran, Voice of Duality",
+        "Vivi Ornitier"
+      ],
+      "mainboard_count": 23,
+      "sideboard_count": 3
+    },
+    "removal": {
+      "target_count": 27,
+      "cards": [
+        "Abrade",
+        "Aetherflux Reservoir",
+        "Ancient Tomb",
+        "Chandra's Ignition",
+        "Coruscation Mage",
+        "Crackle with Power",
+        "Curiosity",
+        "Cyclonic Rift",
+        "Electro, Assaulting Battery",
+        "Exalted Flamer of Tzeentch",
+        "Flame of Anor",
+        "Ghyrson Starn, Kelermorph",
+        "Gut Shot",
+        "Guttersnipe",
+        "Hullbreaker Horror",
+        "Jaya's Immolating Inferno",
+        "Kessig Flamebreather",
+        "Lightning Bolt",
+        "Mizzix's Mastery",
+        "Niv-Mizzet, Visionary",
+        "Ophidian Eye",
+        "Pongify",
+        "Rapid Hybridization",
+        "Riptide Laboratory",
+        "Snap",
+        "Tandem Lookout",
+        "Vivi Ornitier"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 3
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 9,
+      "cards": [
+        "Confound",
+        "Counterspell",
+        "Fierce Guardianship",
+        "Force of Negation",
+        "Force of Will",
+        "Mana Drain",
+        "Negate",
+        "Swan Song",
+        "Turn Aside"
+      ],
+      "mainboard_count": 9,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 9,
+      "cards": [
+        "Curiosity",
+        "Ghyrson Starn, Kelermorph",
+        "Hullbreaker Horror",
+        "Mistrise Village",
+        "Mithril Coat",
+        "Overmaster",
+        "Sol Ring",
+        "Swiftfoot Boots",
+        "Vivi Ornitier"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 2
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 10,
+      "cards": [
+        "Exalted Flamer of Tzeentch",
+        "Finale of Revelation",
+        "Force of Negation",
+        "Mizzix's Mastery",
+        "Mox Diamond",
+        "Mystic Sanctuary",
+        "Past in Flames",
+        "Timetwister",
+        "Will of the Jeskai",
+        "Wisdom of Ages"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 10,
+      "cards": [
+        "Cyclonic Rift",
+        "Exalted Flamer of Tzeentch",
+        "Hullbreaker Horror",
+        "Mizzix's Mastery",
+        "Mystic Sanctuary",
+        "Past in Flames",
+        "Riptide Laboratory",
+        "Snap",
+        "Will of the Jeskai",
+        "Wisdom of Ages"
+      ],
+      "mainboard_count": 6,
+      "sideboard_count": 4
+    },
+    "engines": {
+      "target_count": 14,
+      "cards": [
+        "Aetherflux Reservoir",
+        "Coruscation Mage",
+        "Curiosity",
+        "Electro, Assaulting Battery",
+        "Exalted Flamer of Tzeentch",
+        "Guttersnipe",
+        "Harmonic Prodigy",
+        "Hullbreaker Horror",
+        "Kessig Flamebreather",
+        "Ral, Crackling Wit",
+        "Sol Ring",
+        "Thousand-Year Storm",
+        "Veyran, Voice of Duality",
+        "Vivi Ornitier"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 3
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 3,
+      "cards": [
+        "Curiosity",
+        "Sol Ring",
+        "Vivi Ornitier"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 4,
+      "cards": [
+        "Birgi, God of Storytelling",
+        "Gitaxian Probe",
+        "Jeska's Will",
+        "Urabrask"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 3
+    },
+    "mana_fixing": {
+      "target_count": 28,
+      "cards": [
+        "Ancient Tomb",
+        "Arcane Signet",
+        "Arid Mesa",
+        "Bloodstained Mire",
+        "Chrome Mox",
+        "Electro, Assaulting Battery",
+        "Flooded Strand",
+        "Lotus Petal",
+        "Mistrise Village",
+        "Misty Rainforest",
+        "Mox Amber",
+        "Mox Diamond",
+        "Mox Opal",
+        "Mystic Sanctuary",
+        "Polluted Delta",
+        "Prismatic Vista",
+        "Reliquary Tower",
+        "Riptide Laboratory",
+        "Scalding Tarn",
+        "Scorched Geyser",
+        "Snow-Covered Island",
+        "Snow-Covered Mountain",
+        "Steam Vents",
+        "Vivi Ornitier",
+        "Volcanic Island",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 28,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 25,
+      "cards": [
+        "Ancient Tomb",
+        "Arid Mesa",
+        "Bloodstained Mire",
+        "Flooded Strand",
+        "Island",
+        "Mistrise Village",
+        "Misty Rainforest",
+        "Mountain",
+        "Mystic Sanctuary",
+        "Polluted Delta",
+        "Prismatic Vista",
+        "Reliquary Tower",
+        "Riptide Laboratory",
+        "Scalding Tarn",
+        "Scorched Geyser",
+        "Snow-Covered Island",
+        "Snow-Covered Mountain",
+        "Steam Vents",
+        "Volcanic Island",
+        "Wooded Foothills"
+      ],
+      "mainboard_count": 25,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 1,
+      "cards": [
+        "Ral, Crackling Wit"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.38
+  },
+  "dual_role_cards": [
+    {
+      "card": "Aetherflux Reservoir",
+      "roles": [
+        "engines",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Arid Mesa",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Bloodstained Mire",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Confound",
+      "roles": [
+        "card_advantage",
+        "counterspells"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Coruscation Mage",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Curiosity",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "protection",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cyclonic Rift",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Deliberate",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Electro, Assaulting Battery",
+      "roles": [
+        "engines",
+        "mana_fixing",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Exalted Flamer of Tzeentch",
+      "roles": [
+        "engines",
+        "graveyard_enablers",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Finale of Revelation",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flame of Anor",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Force of Negation",
+      "roles": [
+        "counterspells",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ghyrson Starn, Kelermorph",
+      "roles": [
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Gitaxian Probe",
+      "roles": [
+        "card_advantage",
+        "hate_pieces"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Guttersnipe",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Harmonic Prodigy",
+      "roles": [
+        "dig_draw",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Hullbreaker Horror",
+      "roles": [
+        "engines",
+        "protection",
+        "recursion",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kessig Flamebreather",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mana Drain",
+      "roles": [
+        "counterspells",
+        "rituals"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mishra's Bauble",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mistrise Village",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Misty Rainforest",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mizzix's Mastery",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mox Diamond",
+      "roles": [
+        "graveyard_enablers",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Mystic Sanctuary",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Niv-Mizzet, Visionary",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ophidian Eye",
+      "roles": [
+        "card_advantage",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Opt",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overmaster",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Past in Flames",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Polluted Delta",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ponder",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Preordain",
+      "roles": [
+        "card_advantage",
+        "dig_draw"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismatic Vista",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ral, Crackling Wit",
+      "roles": [
+        "card_advantage",
+        "engines",
+        "planeswalker_threats",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Reliquary Tower",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Riptide Laboratory",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scalding Tarn",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scorched Geyser",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snap",
+      "roles": [
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Snow-Covered Mountain",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sol Ring",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Steam Vents",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Tandem Lookout",
+      "roles": [
+        "card_advantage",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Timetwister",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veyran, Voice of Duality",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Vivi Ornitier",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "mana_fixing",
+        "protection",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Volcanic Island",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Will of the Jeskai",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wisdom of Ages",
+      "roles": [
+        "graveyard_enablers",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Wooded Foothills",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: overcommitting to Curiosity too early without protection or follow-up.",
+    "Unique interaction: Vivi Ornitier likely synergizes with card draw",
+    "maximize triggers and use cantrips to dig into your engine.",
+    "Watch for format-specific rules regarding Sol Ring (if banned/limited).",
+    "Always track opponent's life total and board state to determine when to pivot from control to aggression or vice versa."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Sol Ring if mana allows."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Play a second land, cast Curiosity or Vivi Ornitier."
+    },
+    {
+      "trigger": "early game",
+      "line": "Sequence lands to ensure red/blue mana availability by turn 2-3."
+    }
+  ],
+  "kill_priority": [
+    "Aetherflux Reservoir",
+    "Coruscation Mage",
+    "Curiosity",
+    "Electro, Assaulting Battery",
+    "Exalted Flamer of Tzeentch",
+    "Guttersnipe",
+    "Harmonic Prodigy",
+    "Hullbreaker Horror"
+  ],
+  "interaction_to_disrupt": [
+    "Confound",
+    "Counterspell",
+    "Fierce Guardianship",
+    "Force of Negation",
+    "Force of Will",
+    "Mana Drain",
+    "Negate",
+    "Swan Song"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/vivi-ornitier.dck",
+    "generated_at": "2026-05-23T04:47:20+00:00"
+  }
+}

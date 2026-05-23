@@ -15,11 +15,14 @@
   "mulligan": {
     "keep_criteria": [
       "Hands with early interaction like Censor or Lay Down Arms",
-      "Hands containing proper answers tailored to the specific matchup"
+      "Hands containing proper answers tailored to the specific matchup",
+      "Keep hands with 2-3 lands (including fetches/shocks), at least one early interaction (e.g., Dissolve, Path to Exile, or similar), and a Star Charts or Teferi if possible.",
+      "Keep 2 lands + 2+ spells if they synergize (e.g., Star Charts + removal)."
     ],
     "mulligan_criteria": [
       "Hands lacking early counterspells or removal",
-      "Hands without enough lands to support a heavy curve"
+      "Hands without enough lands to support a heavy curve",
+      "Mulligan to 4-5 lands if no early plays, or 3+ lands with zero interaction against aggro."
     ],
     "examples": [
       {
@@ -41,16 +44,30 @@
     "early_game": [
       "Play lands to support a heavy curve of 4+ mana spells",
       "Use early counterspells like Censor as a Force Spike",
-      "Remove small creatures with Lay Down Arms"
+      "Remove small creatures with Lay Down Arms",
+      "Turn 1: Play a land, potentially cast a cantrip or hold up interaction.",
+      "Turn 2: Develop mana, cast early removal or counterspell, or start setting up Star Charts.",
+      "Prioritize untapped lands for shock/fetch sequencing.",
+      "Against aggro, prioritize cheap interaction",
+      "against control/midrange, prioritize card draw/setup."
     ],
     "mid_game": [
       "Stabilize by countering key threats and using board wipes like Supreme Verdict or Farewell",
-      "Exhaust opponent's resources while maintaining card advantage with Memory Deluge"
+      "Exhaust opponent's resources while maintaining card advantage with Memory Deluge",
+      "Preserve mana for interaction until the late game.",
+      "Use Star Charts to dig for answers or threats.",
+      "Don't overcommit to the board",
+      "keep a removal spell for key threats.",
+      "Manage graveyard if needed, though it's not a primary focus.",
+      "Commit Kaheera or Teferi only when you have a clear path to victory or can protect them."
     ],
     "late_game": [
       "Deploy win conditions like Teferi, Hero of Dominaria and The Wandering Emperor",
       "Attack with manlands or Regal Caracal tokens",
-      "Finish with Shark Typhoon or Starnheim Unleashed"
+      "Finish with Shark Typhoon or Starnheim Unleashed",
+      "Teferi, Hero of Dominaria (draws cards, protects board, wins via loyalty), Kaheera (flying threat that grows), and occasionally a late-game sweeper or direct damage.",
+      "When you have card advantage advantage, can protect your finisher, or when the opponent has no sweepers/removal left.",
+      "Go all-in with Teferi + Kaheera or multiple threats if you can stabilize."
     ]
   },
   "key_cards": [
@@ -65,7 +82,7 @@
       "notes": "Main removal that synergizes with Plains-type lands and handles both small and large creatures."
     },
     {
-      "name": "Dovin’s Veto",
+      "name": "Dovin\u2019s Veto",
       "role": "Counterspell",
       "notes": "Mighty counter against Midranges and in the mirror match."
     },
@@ -94,7 +111,13 @@
     "Play backwards by responding to opponent threats before deploying your own",
     "Save answers in mirror matches and avoid rushing to prevent fatal mistakes",
     "Prioritize countering Storm the Festival and preventing Karn from entering the board against Nykthos Ramp",
-    "Do not save removal against Gruul Midrange; kill elves immediately to prevent explosive damage"
+    "Do not save removal against Gruul Midrange; kill elves immediately to prevent explosive damage",
+    "Teferi's -2 is your most important tool",
+    "use it to dig for answers or threats rather than just drawing cards.",
+    "Kaheera's +1/+1 counter from combat is a great way to bypass removal.",
+    "Consult the Star Charts is fragile",
+    "protect it or have a backup plan.",
+    "Avoid casting multiple spells in a row without assessing their interaction."
   ],
   "matchups": [
     {
@@ -144,6 +167,31 @@
         "Day's Undoing",
         "counterspells"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cantrips to dig past counters. Cast spells at end step or with flash. Use Teferi's -2 to draw into uncounterable threats or protection. Don't overcommit to one spell.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Early interaction is key. Use cheap removal/counters to slow them down. Teferi shuts down their mana development. Kaheera pressures before they can cast big threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize cheap interaction (Dissolve, Path). Use Teferi's -2 to draw into more answers. Kaheera can trade efficiently. Don't overextend; stabilize first.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-value them with Star Charts and Teferi. Force them to use multiple spells on one threat. Pressure with Kaheera to make them use removal inefficiently.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the card advantage war. Teferi is the best card. Use Kaheera to pressure while holding up interaction. Don't overcommit to the board; win via loyalty and card draw.",
+      "watch_for": []
     }
   ],
   "common_threats": [
@@ -160,10 +208,12 @@
     "Yorion, Sky Nomad",
     "Narset, Parter of Veils",
     "Creativity",
-    "Transmogrify"
+    "Transmogrify",
+    "Watch for sweepers (Supreme Verdict, Wrath of God), removal (Path, Murder), and combo pieces."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "Cards Realm",
+    "source": "Cards Realm + legacy_guidance",
     "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-azorius-control-kaheera-deck-tech-sideboard-guide",
     "generated_at": "2026-05-21T03:43:26+00:00",
     "model": "local-model",
@@ -181,6 +231,24 @@
         "overview",
         "key_cards",
         "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/pioneer.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

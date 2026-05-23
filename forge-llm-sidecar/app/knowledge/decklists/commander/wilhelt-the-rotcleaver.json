@@ -1,0 +1,312 @@
+{
+  "archetype": "Wilhelt, the Rotcleaver",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/wilhelt-the-rotcleaver.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Accursed Marauder"
+    },
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Archghoul of Thraben"
+    },
+    {
+      "qty": 1,
+      "name": "Army of the Damned"
+    },
+    {
+      "qty": 1,
+      "name": "Bladestitched Skaab"
+    },
+    {
+      "qty": 1,
+      "name": "Butcher Ghoul"
+    },
+    {
+      "qty": 1,
+      "name": "Cemetery Reaper"
+    },
+    {
+      "qty": 1,
+      "name": "Champion of the Perished"
+    },
+    {
+      "qty": 1,
+      "name": "Choked Estuary"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Counterspell"
+    },
+    {
+      "qty": 1,
+      "name": "Crowded Crypt"
+    },
+    {
+      "qty": 1,
+      "name": "Cryptbreaker"
+    },
+    {
+      "qty": 1,
+      "name": "Darkwater Catacombs"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Dispute"
+    },
+    {
+      "qty": 1,
+      "name": "Death Baron"
+    },
+    {
+      "qty": 1,
+      "name": "Dimir Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Diregraf Captain"
+    },
+    {
+      "qty": 1,
+      "name": "Diregraf Colossus"
+    },
+    {
+      "qty": 1,
+      "name": "Distant Melody"
+    },
+    {
+      "qty": 1,
+      "name": "Dreadhorde Invasion"
+    },
+    {
+      "qty": 1,
+      "name": "Drown in the Loch"
+    },
+    {
+      "qty": 1,
+      "name": "Drowned Catacomb"
+    },
+    {
+      "qty": 1,
+      "name": "Empty the Laboratory"
+    },
+    {
+      "qty": 1,
+      "name": "Endless Ranks of the Dead"
+    },
+    {
+      "qty": 1,
+      "name": "Feed the Swarm"
+    },
+    {
+      "qty": 1,
+      "name": "Fleshbag Marauder"
+    },
+    {
+      "qty": 1,
+      "name": "Geralf, Visionary Stitcher"
+    },
+    {
+      "qty": 1,
+      "name": "Geralf, the Fleshwright"
+    },
+    {
+      "qty": 1,
+      "name": "Ghoulcaller Gisa"
+    },
+    {
+      "qty": 1,
+      "name": "Gisa and Geralf"
+    },
+    {
+      "qty": 1,
+      "name": "Gleaming Overseer"
+    },
+    {
+      "qty": 1,
+      "name": "Go for the Throat"
+    },
+    {
+      "qty": 1,
+      "name": "Graf Harvest"
+    },
+    {
+      "qty": 1,
+      "name": "Grave Titan"
+    },
+    {
+      "qty": 1,
+      "name": "Gravecrawler"
+    },
+    {
+      "qty": 1,
+      "name": "Gray Merchant of Asphodel"
+    },
+    {
+      "qty": 1,
+      "name": "Headless Rider"
+    },
+    {
+      "qty": 1,
+      "name": "Herald's Horn"
+    },
+    {
+      "qty": 1,
+      "name": "Hordewing Skaab"
+    },
+    {
+      "qty": 10,
+      "name": "Island"
+    },
+    {
+      "qty": 1,
+      "name": "Lazotep Reaver"
+    },
+    {
+      "qty": 1,
+      "name": "Liliana, Death's Majesty"
+    },
+    {
+      "qty": 1,
+      "name": "Lord of the Accursed"
+    },
+    {
+      "qty": 1,
+      "name": "Lost Monarch of Ifnir"
+    },
+    {
+      "qty": 1,
+      "name": "Midnight Reaper"
+    },
+    {
+      "qty": 1,
+      "name": "Mortuary Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Necroduality"
+    },
+    {
+      "qty": 1,
+      "name": "Negate"
+    },
+    {
+      "qty": 1,
+      "name": "Noxious Ghoul"
+    },
+    {
+      "qty": 1,
+      "name": "Open the Graves"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Plague Belcher"
+    },
+    {
+      "qty": 1,
+      "name": "Ravenous Rotbelly"
+    },
+    {
+      "qty": 1,
+      "name": "Rise of the Dark Realms"
+    },
+    {
+      "qty": 1,
+      "name": "Rise of the Dread Marn"
+    },
+    {
+      "qty": 1,
+      "name": "Rooftop Storm"
+    },
+    {
+      "qty": 1,
+      "name": "Rot Hulk"
+    },
+    {
+      "qty": 1,
+      "name": "Skullclamp"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Sunken Hollow"
+    },
+    {
+      "qty": 16,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Adversary"
+    },
+    {
+      "qty": 1,
+      "name": "Tainted Isle"
+    },
+    {
+      "qty": 1,
+      "name": "Talisman of Dominance"
+    },
+    {
+      "qty": 1,
+      "name": "The Scarab God"
+    },
+    {
+      "qty": 1,
+      "name": "Tomb Tyrant"
+    },
+    {
+      "qty": 1,
+      "name": "Undead Augur"
+    },
+    {
+      "qty": 1,
+      "name": "Underground River"
+    },
+    {
+      "qty": 1,
+      "name": "Unholy Grotto"
+    },
+    {
+      "qty": 1,
+      "name": "Victimize"
+    },
+    {
+      "qty": 1,
+      "name": "Village Rites"
+    },
+    {
+      "qty": 1,
+      "name": "Wilhelt, the Rotcleaver"
+    },
+    {
+      "qty": 1,
+      "name": "Zombie Apocalypse"
+    },
+    {
+      "qty": 1,
+      "name": "Zombie Master"
+    },
+    {
+      "qty": 1,
+      "name": "Zul Ashur, Lich Lord"
+    }
+  ],
+  "sideboard": []
+}

@@ -1,0 +1,352 @@
+{
+  "archetype": "Dina, Essence Brewer",
+  "format": "commander",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/commander/dina-essence-brewer.dck",
+  "mainboard": [
+    {
+      "qty": 1,
+      "name": "Arcane Signet"
+    },
+    {
+      "qty": 1,
+      "name": "Assassin's Trophy"
+    },
+    {
+      "qty": 1,
+      "name": "Awakening Zone"
+    },
+    {
+      "qty": 1,
+      "name": "Beledros Witherbloom"
+    },
+    {
+      "qty": 1,
+      "name": "Blight Mound"
+    },
+    {
+      "qty": 1,
+      "name": "Blood Artist"
+    },
+    {
+      "qty": 1,
+      "name": "Bloodghast"
+    },
+    {
+      "qty": 1,
+      "name": "Blossoming Bogbeast"
+    },
+    {
+      "qty": 1,
+      "name": "Bojuka Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Casualties of War"
+    },
+    {
+      "qty": 1,
+      "name": "Command Tower"
+    },
+    {
+      "qty": 1,
+      "name": "Creakwood Liege"
+    },
+    {
+      "qty": 1,
+      "name": "Culling Ritual"
+    },
+    {
+      "qty": 1,
+      "name": "Cultivate"
+    },
+    {
+      "qty": 1,
+      "name": "Deadly Brew"
+    },
+    {
+      "qty": 1,
+      "name": "Defiling Daemogoth"
+    },
+    {
+      "qty": 1,
+      "name": "Dina, Essence Brewer"
+    },
+    {
+      "qty": 1,
+      "name": "Dina, Soul Steeper"
+    },
+    {
+      "qty": 1,
+      "name": "Eccentric Pestfinder"
+    },
+    {
+      "qty": 1,
+      "name": "Elvish Mystic"
+    },
+    {
+      "qty": 1,
+      "name": "Exotic Orchard"
+    },
+    {
+      "qty": 1,
+      "name": "Fabled Passage"
+    },
+    {
+      "qty": 1,
+      "name": "Feral Appetite"
+    },
+    {
+      "qty": 1,
+      "name": "Festering Thicket"
+    },
+    {
+      "qty": 1,
+      "name": "Final Act"
+    },
+    {
+      "qty": 8,
+      "name": "Forest"
+    },
+    {
+      "qty": 1,
+      "name": "Gilded Goose"
+    },
+    {
+      "qty": 1,
+      "name": "Gorma, the Gullet"
+    },
+    {
+      "qty": 1,
+      "name": "Grim Backwoods"
+    },
+    {
+      "qty": 1,
+      "name": "Gyome, Master Chef"
+    },
+    {
+      "qty": 1,
+      "name": "Haunted Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Haywire Mite"
+    },
+    {
+      "qty": 1,
+      "name": "High Market"
+    },
+    {
+      "qty": 1,
+      "name": "Immoral Bargain"
+    },
+    {
+      "qty": 1,
+      "name": "Infernal Grasp"
+    },
+    {
+      "qty": 1,
+      "name": "Jadar, Ghoulcaller of Nephalia"
+    },
+    {
+      "qty": 1,
+      "name": "Llanowar Wastes"
+    },
+    {
+      "qty": 1,
+      "name": "Mazirek, Kraul Death Priest"
+    },
+    {
+      "qty": 1,
+      "name": "Merchant of Venom"
+    },
+    {
+      "qty": 1,
+      "name": "Moldervine Reclamation"
+    },
+    {
+      "qty": 1,
+      "name": "Morbid Opportunist"
+    },
+    {
+      "qty": 1,
+      "name": "Mortality Spear"
+    },
+    {
+      "qty": 1,
+      "name": "Mycoloth"
+    },
+    {
+      "qty": 1,
+      "name": "Necroblossom Snarl"
+    },
+    {
+      "qty": 1,
+      "name": "Nether Traitor"
+    },
+    {
+      "qty": 1,
+      "name": "Night's Whisper"
+    },
+    {
+      "qty": 1,
+      "name": "Ohran Frostfang"
+    },
+    {
+      "qty": 1,
+      "name": "Ominous Harvest"
+    },
+    {
+      "qty": 1,
+      "name": "Ophiomancer"
+    },
+    {
+      "qty": 1,
+      "name": "Path of Ancestry"
+    },
+    {
+      "qty": 1,
+      "name": "Pawn of Ulamog"
+    },
+    {
+      "qty": 1,
+      "name": "Pest Infestation"
+    },
+    {
+      "qty": 1,
+      "name": "Pest Rescuer"
+    },
+    {
+      "qty": 1,
+      "name": "Plumb the Forbidden"
+    },
+    {
+      "qty": 1,
+      "name": "Priest of Forgotten Gods"
+    },
+    {
+      "qty": 1,
+      "name": "Ribtruss Roaster"
+    },
+    {
+      "qty": 1,
+      "name": "Sakura-Tribe Elder"
+    },
+    {
+      "qty": 1,
+      "name": "Smothering Abomination"
+    },
+    {
+      "qty": 1,
+      "name": "Sol Ring"
+    },
+    {
+      "qty": 1,
+      "name": "Springbloom Druid"
+    },
+    {
+      "qty": 1,
+      "name": "Stensian Sanguinist"
+    },
+    {
+      "qty": 1,
+      "name": "Study Hall"
+    },
+    {
+      "qty": 8,
+      "name": "Swamp"
+    },
+    {
+      "qty": 1,
+      "name": "Teacher's Pest"
+    },
+    {
+      "qty": 1,
+      "name": "Temple of Malady"
+    },
+    {
+      "qty": 1,
+      "name": "Tendershoot Dryad"
+    },
+    {
+      "qty": 1,
+      "name": "Terramorphic Expanse"
+    },
+    {
+      "qty": 1,
+      "name": "Titan's Grave"
+    },
+    {
+      "qty": 1,
+      "name": "Toxic Deluge"
+    },
+    {
+      "qty": 1,
+      "name": "Trudge Garden"
+    },
+    {
+      "qty": 1,
+      "name": "Turbulent Fen"
+    },
+    {
+      "qty": 1,
+      "name": "Twilight Mire"
+    },
+    {
+      "qty": 1,
+      "name": "Umbral Collar Zealot"
+    },
+    {
+      "qty": 1,
+      "name": "Veinwitch Coven"
+    },
+    {
+      "qty": 1,
+      "name": "Vernal Fen"
+    },
+    {
+      "qty": 1,
+      "name": "Viridescent Bog"
+    },
+    {
+      "qty": 1,
+      "name": "Viscera Seer"
+    },
+    {
+      "qty": 1,
+      "name": "Wight of the Reliquary"
+    },
+    {
+      "qty": 1,
+      "name": "Witch of the Moors"
+    },
+    {
+      "qty": 1,
+      "name": "Witherbloom Campus"
+    },
+    {
+      "qty": 1,
+      "name": "Witherbloom Charm"
+    },
+    {
+      "qty": 1,
+      "name": "Witherbloom Command"
+    },
+    {
+      "qty": 1,
+      "name": "Woe Strider"
+    },
+    {
+      "qty": 1,
+      "name": "Woodland Cemetery"
+    },
+    {
+      "qty": 1,
+      "name": "Yahenni, Undying Partisan"
+    },
+    {
+      "qty": 1,
+      "name": "Zulaport Cutthroat"
+    }
+  ],
+  "sideboard": []
+}

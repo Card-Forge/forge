@@ -1,0 +1,134 @@
+{
+  "archetype": "Boros Tokens",
+  "format": "standard",
+  "strategy_type": "combo",
+  "overview": "Boros Tokens aims to rapidly generate a swarm of 1/1 creatures and leverage efficient pump effects, combat tricks, and direct damage to overwhelm opponents before they can stabilize. It excels against slower, control-oriented, or combo decks that struggle to answer a wide board state, while needing to race or out-value fast aggro and landfall strategies.",
+  "win_conditions": [
+    "A fully pumped Howlsquad Heavy or Warleader's Call with multiple tokens.",
+    "Use combat tricks, pump effects, and direct damage to push lethal.",
+    "Voice of Victory can finish games by dealing 3 damage or countering a key answer.",
+    "Calculate damage carefully, factoring in flying and trample if applicable."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands (prioritizing duals or shocklands if available, otherwise basic Plains/Red sources) and at least one turn 1 or 2 play.",
+      "Prioritize hands containing Warleader's Call, Howlsquad Heavy, or efficient one-drop token producers.",
+      "Keep hands with interaction like Voice of Victory only if paired with a land and a threat to establish board presence."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no early threats, or 1 land with multiple expensive spells."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, optionally cast a cheap threat or hold for interaction.",
+      "Turn 2: Play a second land, cast Warleader's Call or Howlsquad Heavy if mana allows, or deploy a one-drop token producer.",
+      "Sequence lands to ensure red mana is available for Warleader's Call's activated ability and pump effects.",
+      "Against fast Izzet or Landfall decks, prioritize early threats and hold interaction for key disruption spells."
+    ],
+    "mid_game": [
+      "Optimize mana for Warleader's Call's token generation and pump effects.",
+      "Avoid overextending into known sweepers.",
+      "Use Voice of Victory flexibly: counter key disruption or pump a token for lethal.",
+      "Manage hand size by trading tokens for removal or using pump effects to close games.",
+      "Preserve interaction for critical turns rather than burning it on minor threats.",
+      "Commit threats when the opponent has no sweepers or interaction.",
+      "Hold back if they have potential removal or a counterspell.",
+      "Use pump effects to break through blockers or push damage."
+    ],
+    "late_game": [
+      "A fully pumped Howlsquad Heavy or Warleader's Call with multiple tokens.",
+      "Use combat tricks, pump effects, and direct damage to push lethal.",
+      "Voice of Victory can finish games by dealing 3 damage or countering a key answer.",
+      "Calculate damage carefully, factoring in flying and trample if applicable.",
+      "Go all-in when the opponent has no sweepers, low life total, or when you can safely pump through their blockers.",
+      "Commit when you have card advantage and can trade favorably.",
+      "Push damage when you can close the game or force a fatal response."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Voice of Victory",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Warleader's Call",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Howlsquad Heavy",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: overcommitting to the board without assessing sweepers.",
+    "Always track opponent's mana and hand size.",
+    "Voice of Victory is a versatile tool",
+    "don't waste it on non-critical targets.",
+    "Warleader's Call's pump ability synergizes with token generators",
+    "use it to close games or break through blockers.",
+    "In fast formats, prioritize speed and efficiency over complex combos.",
+    "Practice calculating lethal damage and managing pump resources to avoid leaving yourself vulnerable to counterattacks."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that can be cast in response to counterspells. Utilize Voice of Victory to counter their counters or pump through. Sequence spells to force counterspells on non-critical targets. Consider artifact or instant-speed threats if available to bypass traditional counterspell windows.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to race their mana acceleration. Use spot removal to kill their ramp creatures or key threats. Don't overcommit; hold interaction for their finishers. Force them to spend resources clearing your board instead of developing their own.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with early removal and board wipes. Use Voice of Victory to counter key spells or pump a token for block. Transition to a control-oriented midgame, then close with your own threats. Prioritize life total and board presence over card advantage in the early turns.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure their life total while they dig for answers. Use pump effects to break through blockers. Force them to use multiple spells to clear your board. Win through combat damage and direct damage, leveraging your token swarm to out-value their single-target answers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card advantage, efficient removal, and pump effects. Trade tokens favorably. Use Voice of Victory to counter their key spells or pump your threats. Control the board state and force them to overextend. Value card quality and mana efficiency over raw board width.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (like Wrath of God or Cyclonic Rift), targeted removal (Path to Exile, Lightning Strike), and combo win conditions.",
+    "Note when opponents tap out for interaction or hold up mana unexpectedly.",
+    "Track graveyard hate if they're trying to recur threats, and monitor life totals to calculate lethal damage."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/standard.json",
+    "generated_at": "2026-05-23T01:29:38+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/standard.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:38+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

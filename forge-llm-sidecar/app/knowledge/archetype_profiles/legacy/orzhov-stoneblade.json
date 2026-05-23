@@ -1,0 +1,537 @@
+{
+  "schema_version": 1,
+  "name": "Orzhov Stoneblade",
+  "format": "legacy",
+  "colors": [
+    "W",
+    "B"
+  ],
+  "strategy_type": "midrange",
+  "expected_deck_total": 80,
+  "macro_plan": "Orzhov Stoneblade is a midrange deck that leverages Stoneforge Mystic to fetch powerful equipment early, while Yorion, Sky Nomad provides consistent card advantage and board presence. Solitude acts as a resilient finisher and recursion engine, allowing the deck to stabilize against aggressive strategies and close out games with efficient value loops.",
+  "win_turn_window": [
+    6,
+    12
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 9,
+      "cards": [
+        "Solitude",
+        "Stoneforge Mystic",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Shadowy Backstreet",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 1,
+      "sideboard_count": 1
+    },
+    "tutors_wildcards": {
+      "target_count": 22,
+      "cards": [
+        "Flagstones of Trokair",
+        "Flooded Strand",
+        "Marsh Flats",
+        "Prismatic Vista",
+        "Recruiter of the Guard",
+        "Stoneforge Mystic",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Solitude",
+        "Stoneforge Mystic",
+        "Windswept Heath",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 11,
+      "sideboard_count": 1
+    },
+    "threats": {
+      "target_count": 55,
+      "cards": [
+        "Aether Vial",
+        "Barrowgoyf",
+        "Boggart Trawler",
+        "Clarion Conqueror",
+        "Containment Priest",
+        "Ethersworn Canonist",
+        "Faerie Macabre",
+        "Flickerwisp",
+        "Lion Sash",
+        "Overlord of the Balemurk",
+        "Phelia, Exuberant Shepherd",
+        "Plague Engineer",
+        "Recruiter of the Guard",
+        "Sanctifier en-Vec",
+        "Skyclave Apparition",
+        "Solitude",
+        "Stoneforge Mystic",
+        "Thoughtseize",
+        "White Orchid Phantom",
+        "Witch Enchanter",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 43,
+      "sideboard_count": 12
+    },
+    "removal": {
+      "target_count": 24,
+      "cards": [
+        "Ancient Tomb",
+        "Barrowgoyf",
+        "Erode",
+        "Karakas",
+        "Lion Sash",
+        "Pre-War Formalwear",
+        "Swords to Plowshares",
+        "White Orchid Phantom",
+        "Wrath of the Skies"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 5
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Solitude"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 5,
+      "cards": [
+        "Sanctifier en-Vec",
+        "Solitude"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 1
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 19,
+      "cards": [
+        "Barrowgoyf",
+        "Faerie Macabre",
+        "Flagstones of Trokair",
+        "Lion Sash",
+        "Overlord of the Balemurk",
+        "Pre-War Formalwear",
+        "Sanctifier en-Vec",
+        "Shadowy Backstreet",
+        "Solitude",
+        "Surgical Extraction"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 3
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 19,
+      "cards": [
+        "Batterskull",
+        "Flickerwisp",
+        "Karakas",
+        "Overlord of the Balemurk",
+        "Phelia, Exuberant Shepherd",
+        "Pre-War Formalwear",
+        "Solitude",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 18,
+      "sideboard_count": 1
+    },
+    "engines": {
+      "target_count": 6,
+      "cards": [
+        "Plague Engineer",
+        "Solitude",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 2
+    },
+    "payoff_cards": {
+      "target_count": 7,
+      "cards": [
+        "Solitude",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 7,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 9,
+      "cards": [
+        "Solitude",
+        "Stoneforge Mystic",
+        "Yorion, Sky Nomad"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 1
+    },
+    "hate_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Ethersworn Canonist"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 1
+    },
+    "mana_fixing": {
+      "target_count": 24,
+      "cards": [
+        "Ancient Tomb",
+        "Flagstones of Trokair",
+        "Flooded Strand",
+        "Karakas",
+        "Marsh Flats",
+        "Prismatic Vista",
+        "Scrubland",
+        "Shadowy Backstreet",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 0
+    },
+    "lands": {
+      "target_count": 30,
+      "cards": [
+        "Ancient Tomb",
+        "Flagstones of Trokair",
+        "Flooded Strand",
+        "Karakas",
+        "Marsh Flats",
+        "Plains",
+        "Prismatic Vista",
+        "Scrubland",
+        "Shadowy Backstreet",
+        "Swamp",
+        "Windswept Heath"
+      ],
+      "mainboard_count": 30,
+      "sideboard_count": 0
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.29
+  },
+  "dual_role_cards": [
+    {
+      "card": "Ancient Tomb",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Barrowgoyf",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ethersworn Canonist",
+      "roles": [
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Faerie Macabre",
+      "roles": [
+        "graveyard_enablers",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flagstones of Trokair",
+      "roles": [
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flickerwisp",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Flooded Strand",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Karakas",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Lion Sash",
+      "roles": [
+        "graveyard_enablers",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Marsh Flats",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Overlord of the Balemurk",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Phelia, Exuberant Shepherd",
+      "roles": [
+        "recursion",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Plague Engineer",
+      "roles": [
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Pre-War Formalwear",
+      "roles": [
+        "graveyard_enablers",
+        "recursion",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Prismatic Vista",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Recruiter of the Guard",
+      "roles": [
+        "threats",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Sanctifier en-Vec",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Scrubland",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Shadowy Backstreet",
+      "roles": [
+        "dig_draw",
+        "graveyard_enablers",
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Solitude",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "engines",
+        "graveyard_enablers",
+        "payoff_cards",
+        "protection",
+        "recursion",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Stoneforge Mystic",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "threats",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "White Orchid Phantom",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Windswept Heath",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "payoff_cards",
+        "tutors_wildcards",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Yorion, Sky Nomad",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "engines",
+        "recursion",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Prioritize casting Stoneforge Mystic before playing creatures to ensure equipment is ready.",
+    "Hold removal until you know what threat the opponent will play.",
+    "Use Yorion, Sky Nomad's card draw to find answers before committing to a fight.",
+    "Time Solitude's recursion to maximize board presence after opponent's removal resolves.",
+    "Common mistake: Overusing Solitude on small creatures instead of saving it for key threats or to protect Yorion."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Play lands efficiently and cast Stoneforge Mystic to search for a key equipment."
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Yorion, Sky Nomad to draw cards and apply early pressure."
+    },
+    {
+      "trigger": "early game",
+      "line": "Hold up removal for aggressive threats."
+    }
+  ],
+  "kill_priority": [
+    "Plague Engineer",
+    "Solitude",
+    "Yorion, Sky Nomad",
+    "Stoneforge Mystic",
+    "Windswept Heath",
+    "Aether Vial",
+    "Barrowgoyf",
+    "Boggart Trawler"
+  ],
+  "interaction_to_disrupt": [
+    "Sanctifier en-Vec",
+    "Solitude",
+    "Ancient Tomb",
+    "Barrowgoyf",
+    "Erode",
+    "Karakas",
+    "Lion Sash",
+    "Pre-War Formalwear"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/legacy/orzhov-stoneblade.dck",
+    "generated_at": "2026-05-23T04:44:22+00:00"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "archetype": "Esper Self-Bounce",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/esper-self-bounce.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Aang, Swift Savior"
+    },
+    {
+      "qty": 4,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 4,
+      "name": "Concealed Courtyard"
+    },
+    {
+      "qty": 3,
+      "name": "Dream Beavers"
+    },
+    {
+      "qty": 4,
+      "name": "Floodpits Drowner"
+    },
+    {
+      "qty": 1,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 4,
+      "name": "Gloomlake Verge"
+    },
+    {
+      "qty": 2,
+      "name": "Godless Shrine"
+    },
+    {
+      "qty": 2,
+      "name": "Grim Bauble"
+    },
+    {
+      "qty": 4,
+      "name": "Hallowed Fountain"
+    },
+    {
+      "qty": 1,
+      "name": "Island"
+    },
+    {
+      "qty": 4,
+      "name": "Kaito, Bane of Nightmares"
+    },
+    {
+      "qty": 1,
+      "name": "Momentum Breaker"
+    },
+    {
+      "qty": 4,
+      "name": "Nowhere to Run"
+    },
+    {
+      "qty": 4,
+      "name": "Nurturing Pixie"
+    },
+    {
+      "qty": 4,
+      "name": "Starting Town"
+    },
+    {
+      "qty": 4,
+      "name": "Stormchaser's Talent"
+    },
+    {
+      "qty": 4,
+      "name": "Sunpearl Kirin"
+    },
+    {
+      "qty": 4,
+      "name": "Watery Grave"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Disdainful Stroke"
+    },
+    {
+      "qty": 2,
+      "name": "Duress"
+    },
+    {
+      "qty": 2,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 1,
+      "name": "Kutzil's Flanker"
+    },
+    {
+      "qty": 1,
+      "name": "Momentum Breaker"
+    },
+    {
+      "qty": 2,
+      "name": "No More Lies"
+    },
+    {
+      "qty": 2,
+      "name": "Requisition Raid"
+    },
+    {
+      "qty": 1,
+      "name": "Requiting Hex"
+    },
+    {
+      "qty": 2,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 1,
+      "name": "Seam Rip"
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "name": "Omnath, Locus of Creation",
+  "format": "commander",
+  "colors": [
+    "G",
+    "R",
+    "U",
+    "W"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This deck aims to rapidly accelerate mana using ramp spells and mana rocks, deploy Omnath, Locus of Creation to trigger its powerful mana and card-draw abilities, and overwhelm opponents with massive X-spells or game-winning threats. It wins by out-resourcing and out-scaling opponents, excelling against slower decks and combo strategies that give it time to assemble its game plan.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "rituals": {
+      "target_count": 0,
+      "cards": []
+    },
+    "card_advantage": {
+      "target_count": 2,
+      "cards": [
+        "Growth Spiral",
+        "Omnath, Locus of Creation"
+      ]
+    },
+    "dig_draw": {
+      "target_count": 2,
+      "cards": [
+        "Growth Spiral",
+        "Omnath, Locus of Creation"
+      ]
+    },
+    "tutors_wildcards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "win_conditions": {
+      "target_count": 1,
+      "cards": [
+        "Omnath, Locus of Creation"
+      ]
+    },
+    "threats": {
+      "target_count": 2,
+      "cards": [
+        "Omnath, Locus of Creation",
+        "Swords to Plowshares"
+      ]
+    },
+    "removal": {
+      "target_count": 0,
+      "cards": []
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": []
+    },
+    "protection": {
+      "target_count": 0,
+      "cards": []
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 0,
+      "cards": []
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 0,
+      "cards": []
+    },
+    "engines": {
+      "target_count": 0,
+      "cards": []
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": []
+    },
+    "combo_pieces": {
+      "target_count": 1,
+      "cards": [
+        "Omnath, Locus of Creation"
+      ]
+    },
+    "hate_pieces": {
+      "target_count": 0,
+      "cards": []
+    },
+    "mana_fixing": {
+      "target_count": 2,
+      "cards": [
+        "Growth Spiral",
+        "Omnath, Locus of Creation"
+      ]
+    },
+    "lands": {
+      "target_count": 0,
+      "cards": []
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": []
+    },
+    "interaction_density": 0.0
+  },
+  "dual_role_cards": [
+    {
+      "card": "Omnath, Locus of Creation",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "mana_fixing",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Growth Spiral",
+      "roles": [
+        "card_advantage",
+        "dig_draw",
+        "mana_fixing"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Common mistake: Overcommitting to the board before Omnath is active, leaving you vulnerable to removal.",
+    "Another: Forgetting to fetch basic lands for Omnath's triggers, which can slow down your mana and card draw.",
+    "Unique interaction: Omnath's ETB triggers can be responded to, so don't assume they're free.",
+    "Also, Growth Spiral can target your own permanents for value, but be careful not to give opponents triggers if they have relevant abilities."
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Turn 1: Play a land, cast Sol Ring/Chrome Mox/Arcane Signet, or cast Growth Spiral if you have 2 lands."
+    },
+    {
+      "trigger": "early game",
+      "line": "Turn 2: Ramp further with Growth Spiral or another rock, or cast Omnath if you have 4+ mana."
+    },
+    {
+      "trigger": "early game",
+      "line": "Prioritize fetching basic lands for Omnath's triggers and shock lands for early life loss mitigation."
+    }
+  ],
+  "kill_priority": [
+    "Omnath, Locus of Creation",
+    "Omnath, Locus of Creation",
+    "Swords to Plowshares"
+  ],
+  "interaction_to_disrupt": [],
+  "last_updated": "2026-05-22"
+}

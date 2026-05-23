@@ -1,0 +1,124 @@
+{
+  "archetype": "Witherbloom, the Balancer",
+  "format": "commander",
+  "strategy_type": "combo",
+  "overview": "This archetype is a fast mana and ramp strategy that leverages Witherbloom, the Balancer as both a flexible mana source and a late-game pump engine. It aims to outpace opponents by accelerating into massive threats or pumping a single creature to lethal, thriving against slower control and combo decks while struggling against hyper-aggressive strategies.",
+  "win_conditions": [
+    "Witherbloom pumped to lethal (often 10+ power), or a separate massive creature accelerated via ramp.",
+    "Use pump spells or Witherbloom's ability to close out games.",
+    "Combine with direct damage or combat tricks if available."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep hands with 2-3 lands plus at least one mana dweeb (Llanowar Elves/Elvish Mystic) or a turn-2 play.",
+      "Prioritize hands that can play a land and a dweeb on turn 1, or a land and Witherbloom on turn 2/3."
+    ],
+    "mulligan_criteria": [
+      "Mulligan on 3+ lands with no ramp, or 1 land with any other card."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a land, tap Llanowar/Elvish for green.",
+      "Turn 2: Play another land, tap dweeb + land for {G}, cast another dweeb or low-cost ramp spell.",
+      "If opening with Witherbloom, play land, tap for {G}, and cast it on turn 2 if possible, or hold for turn 3.",
+      "Always prioritize untapped lands to enable Witherbloom's {T} ability for flexible mana or pump."
+    ],
+    "mid_game": [
+      "Mana is your primary resource",
+      "always maintain at least 3-4 available for Witherbloom's pump or responses.",
+      "Avoid overcommitting to the board without protection.",
+      "Use graveyard strategically if included, but track opponent interaction to avoid dead cards.",
+      "Commit threats when you have a way to protect them or when the board is clear of sweepers.",
+      "Hold back if opponents have removal or board wipes.",
+      "Witherbloom's 4/4 body allows it to trade, but saving it for a pump finish is often superior."
+    ],
+    "late_game": [
+      "Witherbloom pumped to lethal (often 10+ power), or a separate massive creature accelerated via ramp.",
+      "Use pump spells or Witherbloom's ability to close out games.",
+      "Combine with direct damage or combat tricks if available.",
+      "Go all-in when you have enough mana to pump Witherbloom to lethal, or when you've established board dominance and opponents lack sweepers.",
+      "Also commit when you can protect your pump target or when the opponent is at low life."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Witherbloom, the Balancer",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Llanowar Elves",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Elvish Mystic",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Common mistake: Tapping Witherbloom for mana when you should be saving it for a pump, or overcommitting to the board without protection.",
+    "Unique interaction: Witherbloom's pump scales with mana spent to cast it, so casting it for its converted mana cost or using it as a pump source is key.",
+    "Always balance its dual role as a mana source and finisher based on game state."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use cheap, efficient threats that are hard to counter (e.g., mana dweebs, instant-speed ramp). Save Witherbloom for when counters are on cooldown. Use protection or pump in response to counters, and attack with multiple threats to force counter trade-offs.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their mana development. Use removal on their key ramp creatures. Out-value them with efficient threats and card advantage. Don't let them stabilize; keep the board state unfavorable.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early removal and board wipes. Mulligan aggressively for interaction. Use Witherbloom as a blocker or pump a smaller creature to trade favorably. Stabilize before going for the win, and don't overextend into combat traps.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with efficient threats. Don't overextend into sweepers. Use Witherbloom's pump to break through blockers. Force them to use resources on your threats rather than their win conditions, and attack with multiple creatures to pressure their life total.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war. Prioritize card draw and efficient removal. Control the board with sweepers if available. Use Witherbloom's pump to out-value their creatures. Track their mana to know when they can pump, and don't overcommit to a board they can wipe.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (board wipes), targeted removal (Duress, Fatal Push), and combo pieces.",
+    "Note if opponents are tapping out for counters or protection.",
+    "Track graveyard activity if playing against graveyard decks, and monitor their mana development to time your attacks."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

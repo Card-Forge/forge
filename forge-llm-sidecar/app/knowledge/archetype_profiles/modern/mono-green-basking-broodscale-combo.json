@@ -1,0 +1,439 @@
+{
+  "schema_version": 1,
+  "name": "Mono-Green Basking Broodscale Combo",
+  "format": "modern",
+  "colors": [
+    "G"
+  ],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "This mono-green Modern deck leverages +1/+1 counter synergies and life-loss acceleration to rapidly assemble a massive, equipped threat. By combining Basking Broodscale's combat damage triggers with Kozilek's Command and Blade of the Bloodchief, it aims to overwhelm opponents before they can stabilize. Devourer of Destiny provides board control while further fueling the counter engine.",
+  "win_turn_window": [
+    4,
+    8
+  ],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "rituals": {
+      "target_count": 4,
+      "cards": [
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "card_advantage": {
+      "target_count": 25,
+      "cards": [
+        "Blade of the Bloodchief",
+        "Devourer of Destiny",
+        "Kozilek's Command",
+        "Soul-Guide Lantern",
+        "Thief of Existence",
+        "Urza's Saga",
+        "Veil of Summer",
+        "Vexing Bauble"
+      ],
+      "mainboard_count": 21,
+      "sideboard_count": 4
+    },
+    "dig_draw": {
+      "target_count": 12,
+      "cards": [
+        "Ancient Stirrings",
+        "Devourer of Destiny",
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "tutors_wildcards": {
+      "target_count": 4,
+      "cards": [
+        "Urza's Saga"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "win_conditions": {
+      "target_count": 12,
+      "cards": [
+        "Blade of the Bloodchief",
+        "Devourer of Destiny",
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 0
+    },
+    "threats": {
+      "target_count": 28,
+      "cards": [
+        "Basking Broodscale",
+        "Blade of the Bloodchief",
+        "Devourer of Destiny",
+        "Emrakul, the Promised End",
+        "Glaring Fleshraker",
+        "Haywire Mite",
+        "Kozilek's Command",
+        "Soulless Jailer",
+        "Thief of Existence"
+      ],
+      "mainboard_count": 24,
+      "sideboard_count": 4
+    },
+    "removal": {
+      "target_count": 18,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Devourer of Destiny",
+        "Glaring Fleshraker",
+        "Haywire Mite",
+        "Kozilek's Command",
+        "Nature's Claim",
+        "Soul-Guide Lantern"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 2
+    },
+    "wrath": {
+      "target_count": 4,
+      "cards": [
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "counterspells": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "protection": {
+      "target_count": 7,
+      "cards": [
+        "Cavern of Souls",
+        "Emrakul, the Promised End",
+        "Veil of Summer"
+      ],
+      "mainboard_count": 3,
+      "sideboard_count": 4
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "graveyard_enablers": {
+      "target_count": 14,
+      "cards": [
+        "Emrakul, the Promised End",
+        "Kozilek's Command",
+        "Malevolent Rumble",
+        "Soul-Guide Lantern",
+        "Soulless Jailer"
+      ],
+      "mainboard_count": 12,
+      "sideboard_count": 2
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "recursion": {
+      "target_count": 4,
+      "cards": [
+        "Ugin's Labyrinth"
+      ],
+      "mainboard_count": 4,
+      "sideboard_count": 0
+    },
+    "engines": {
+      "target_count": 8,
+      "cards": [
+        "Basking Broodscale",
+        "Glaring Fleshraker"
+      ],
+      "mainboard_count": 8,
+      "sideboard_count": 0
+    },
+    "payoff_cards": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "combo_pieces": {
+      "target_count": 16,
+      "cards": [
+        "Basking Broodscale",
+        "Blade of the Bloodchief",
+        "Devourer of Destiny",
+        "Kozilek's Command"
+      ],
+      "mainboard_count": 16,
+      "sideboard_count": 0
+    },
+    "hate_pieces": {
+      "target_count": 7,
+      "cards": [
+        "Dismember",
+        "Pithing Needle",
+        "Soulless Jailer",
+        "Torpor Orb"
+      ],
+      "mainboard_count": 0,
+      "sideboard_count": 7
+    },
+    "mana_fixing": {
+      "target_count": 21,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Cavern of Souls",
+        "Eldrazi Temple",
+        "Grove of the Burnwillows",
+        "Springleaf Drum",
+        "Ugin's Labyrinth",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 19,
+      "sideboard_count": 2
+    },
+    "lands": {
+      "target_count": 24,
+      "cards": [
+        "Boseiju, Who Endures",
+        "Cavern of Souls",
+        "Eldrazi Temple",
+        "Forest",
+        "Grove of the Burnwillows",
+        "Ugin's Labyrinth",
+        "Urza's Saga"
+      ],
+      "mainboard_count": 22,
+      "sideboard_count": 2
+    },
+    "planeswalker_threats": {
+      "target_count": 0,
+      "cards": [],
+      "mainboard_count": 0,
+      "sideboard_count": 0
+    },
+    "interaction_density": 0.38
+  },
+  "dual_role_cards": [
+    {
+      "card": "Basking Broodscale",
+      "roles": [
+        "combo_pieces",
+        "engines",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Blade of the Bloodchief",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Boseiju, Who Endures",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Cavern of Souls",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "protection"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Devourer of Destiny",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "removal",
+        "threats",
+        "win_conditions"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Eldrazi Temple",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Emrakul, the Promised End",
+      "roles": [
+        "graveyard_enablers",
+        "protection",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Glaring Fleshraker",
+      "roles": [
+        "engines",
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Grove of the Burnwillows",
+      "roles": [
+        "lands",
+        "mana_fixing"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Haywire Mite",
+      "roles": [
+        "removal",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Kozilek's Command",
+      "roles": [
+        "card_advantage",
+        "combo_pieces",
+        "dig_draw",
+        "graveyard_enablers",
+        "removal",
+        "rituals",
+        "threats",
+        "win_conditions",
+        "wrath"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soul-Guide Lantern",
+      "roles": [
+        "card_advantage",
+        "graveyard_enablers",
+        "removal"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Soulless Jailer",
+      "roles": [
+        "graveyard_enablers",
+        "hate_pieces",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Thief of Existence",
+      "roles": [
+        "card_advantage",
+        "threats"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Ugin's Labyrinth",
+      "roles": [
+        "lands",
+        "mana_fixing",
+        "recursion"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Urza's Saga",
+      "roles": [
+        "card_advantage",
+        "lands",
+        "mana_fixing",
+        "tutors_wildcards"
+      ],
+      "notes": ""
+    },
+    {
+      "card": "Veil of Summer",
+      "roles": [
+        "card_advantage",
+        "protection"
+      ],
+      "notes": ""
+    }
+  ],
+  "tells": [
+    "Always equip Blade of the Bloodchief before declaring attackers to ensure the life-loss bonus applies to combat damage",
+    "Cast Kozilek's Command on your turn before combat to maximize the +X/+X bonus from the Blade",
+    "Use Devourer of Destiny in response to opponent's ETB triggers or during their combat phase to disrupt their game plan",
+    "Save life total for Kozilek's Command when you need to draw into sweepers or additional finishers",
+    "Be mindful of Blade of the Bloodchief's death trigger timing"
+  ],
+  "predicted_lines": [
+    {
+      "trigger": "early game",
+      "line": "Prioritize land drops and play Basking Broodscale to establish early counter generation"
+    },
+    {
+      "trigger": "early game",
+      "line": "Use Kozilek's Command for small X values to draw cards and add initial counters"
+    },
+    {
+      "trigger": "early game",
+      "line": "Avoid overcommitting to life loss if opponent has early removal or burn"
+    }
+  ],
+  "kill_priority": [
+    "Basking Broodscale",
+    "Glaring Fleshraker",
+    "Blade of the Bloodchief",
+    "Devourer of Destiny",
+    "Kozilek's Command",
+    "Emrakul, the Promised End",
+    "Haywire Mite",
+    "Soulless Jailer"
+  ],
+  "interaction_to_disrupt": [
+    "Cavern of Souls",
+    "Emrakul, the Promised End",
+    "Veil of Summer",
+    "Boseiju, Who Endures",
+    "Devourer of Destiny",
+    "Glaring Fleshraker",
+    "Haywire Mite",
+    "Kozilek's Command"
+  ],
+  "last_updated": "2026-05-23",
+  "decklist_source": {
+    "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/modern/mono-green-basking-broodscale-combo.dck",
+    "generated_at": "2026-05-23T04:43:06+00:00"
+  }
+}

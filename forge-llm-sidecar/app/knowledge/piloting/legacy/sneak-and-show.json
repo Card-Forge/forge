@@ -12,12 +12,15 @@
     "keep_criteria": [
       "Hands containing Lotus Petal paired with Show and Tell or Sneak Attack",
       "Hands with multiple cantrips and at least one combo piece",
-      "Hands that can assemble the combo by turn two or three"
+      "Hands that can assemble the combo by turn two or three",
+      "Keep hands with 1-2 lands plus at least one acceleration source (Lotus Petal, Dark Ritual, Chrome Mox, etc.) and a win condition (Show and Tell, Sneak Attack, or a creature to cheat).",
+      "Keep hands with Thoughtseize/Liliana of the Veil if paired with a land or acceleration."
     ],
     "mulligan_criteria": [
       "Hands lacking Lotus Petal or other mana acceleration",
       "Hands with only slow, non-combo cards",
-      "Hands that cannot cast Show and Tell or Sneak Attack by turn three"
+      "Hands that cannot cast Show and Tell or Sneak Attack by turn three",
+      "Mulligan pure land draws, hands with only threats and no acceleration, hands with multiple copies of the same key spell without mana support, or hands with zero interaction against interactive formats."
     ],
     "examples": []
   },
@@ -25,17 +28,31 @@
     "early_game": [
       "Prioritize playing Lotus Petal to generate excess mana",
       "Draw cards to locate Show and Tell or Sneak Attack",
-      "Protect your combo pieces from early disruption"
+      "Protect your combo pieces from early disruption",
+      "Turn 1: Play a land, cast Lotus Petal/Dark Ritual, activate for mana, cast Show and Tell or Sneak Attack, and put a threat onto the battlefield.",
+      "If holding discard, use it on turn 1 to strip key answers or combo pieces.",
+      "Turn 2: Often the win turn if turn 1 was disrupted, or continue accelerating/attacking with Sneak Attack creatures.",
+      "Sequence lands carefully to ensure you can cast acceleration spells without flooding, and prioritize fetching basic lands if your deck runs duals that require specific colors for protection or interaction."
     ],
     "mid_game": [
       "Cast Show and Tell to cheat a high-impact threat onto the battlefield",
       "Use Sneak Attack to put multiple creatures into play simultaneously",
-      "Establish board presence that forces opponents to use interaction"
+      "Establish board presence that forces opponents to use interaction",
+      "Mana is your most critical resource",
+      "always prioritize keeping open mana for acceleration and key spells.",
+      "Manage hand by using discard early to disrupt, but don't overcommit if you have no win condition.",
+      "Graveyard is a resource for recursion (Liliana, Fetchlands) but also a vulnerability",
+      "be mindful of graveyard hate and avoid overloading it with dead cards.",
+      "Commit threats only when you can protect them or win immediately."
     ],
     "late_game": [
       "Leverage cheated-in threats to control the board or generate value",
       "Use Sneak Attack tokens or creatures to push lethal damage",
-      "Maintain card advantage to outlast opponent resources"
+      "Maintain card advantage to outlast opponent resources",
+      "Progenitus or Emrakul for board wipes and protection, Kiki-Jiki, Niavar's Genius with Mirror Image for infinite combat, Thassa's Oracle with Tendrils of Agony for a combo finish, or Sneak Attack creatures attacking twice.",
+      "Get there by accelerating into Show and Tell/Sneak Attack, or by setting up the combo pieces in hand/graveyard through discard or recursion.",
+      "Go all-in when you have the full combo package in hand/graveyard, when the opponent has no interaction left, or when you can win before they can respond.",
+      "Also commit if you are ahead on board and can close out the game, or if the opponent is tapped out for a key answer."
     ]
   },
   "key_cards": [
@@ -59,7 +76,10 @@
     "Always play Lotus Petal before casting Show and Tell to minimize mana requirements",
     "Cast Show and Tell before Sneak Attack if you need a single powerful threat to stabilize",
     "Save Sneak Attack for when you can go for lethal or when opponents have exhausted their counterspells",
-    "Use card draw spells to find combo pieces before committing to the board"
+    "Use card draw spells to find combo pieces before committing to the board",
+    "Common mistakes include overcommitting to a single win condition without backup, mulliganing too aggressively (you need acceleration plus win condition), ignoring the opponent's interaction, and failing to sequence lands properly.",
+    "Unique interactions include using fetchlands to tutor for lands or shuffle away unwanted cards, and activating Lotus Petal for mana even if you have no spells to cast immediately (though it is dead if not used).",
+    "Always be mindful of the stack and priority when casting Show and Tell/Sneak Attack, and practice your turn sequences to ensure you can execute under pressure."
   ],
   "matchups": [
     {
@@ -97,16 +117,36 @@
         "Card draw",
         "Tempo plays"
       ]
+    },
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use discard to strip counterspells, cast acceleration spells that are hard to counter, sequence Show and Tell/Sneak Attack when they are tapped out, or use uncounterable threats. If they have multiple counters, consider going for a cheaper win condition or using free spells (like Force of Will if in your list) to protect your combo.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them with your own acceleration, use discard to strip their mana rocks, or bring in graveyard hate and board wipes. If they are ahead, use counterspells and discard to disrupt their key spells, and look for ways to win before they can cast their massive threats.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win the resource war by drawing more cards, using discard effectively, and sideboarding in hate for their key threats. Prioritize keeping hands with acceleration and win conditions, and do not overcommit if they have backup interaction. Track their graveyard and hand to anticipate their win condition, and be ready to disrupt it with discard or counters.",
+      "watch_for": []
     }
   ],
   "common_threats": [
     "Counterspell",
     "Thoughtseize",
     "Lightning Bolt",
-    "Rest in Peace"
+    "Rest in Peace",
+    "Watch for counterspells (Force of Will, Daze, Spell Pierce), removal (Path to Exile, Lightning Bolt), and graveyard hate.",
+    "Note when opponents tap out for interaction versus when they hold up mana for protection.",
+    "Track if they are playing a control shell (holding multiple answers) or a combo shell (going for the win).",
+    "Pay attention to whether they are playing fetchlands or shock lands, as this indicates their mana base and potential for quick interaction."
   ],
+  "combo_profile": null,
   "metadata": {
-    "source": "builder_llm_default",
+    "source": "builder_llm_default + legacy_guidance",
     "source_url": "",
     "generated_at": "2026-05-21T07:11:57+00:00",
     "model": "local-model",
@@ -122,6 +162,24 @@
       "http_status": 0,
       "used_for_fields": [
         "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/legacy.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
       ],
       "transcript_timestamp_range": null,
       "extracted_for_archetype": ""

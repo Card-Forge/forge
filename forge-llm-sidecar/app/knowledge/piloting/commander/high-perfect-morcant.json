@@ -1,0 +1,131 @@
+{
+  "archetype": "High Perfect Morcant",
+  "format": "commander",
+  "strategy_type": "control",
+  "overview": "This deck aims to rapidly accelerate mana and flood the board with creatures using green ramp and black recursion, then capitalize on a specific board state with High Perfect Morcant or Imperious Perfect to overwhelm opponents. It excels against slower, resource-heavy decks that cannot handle early creature swarms, but struggles against fast aggro and hard control.",
+  "win_conditions": [
+    "High Perfect Morcant and Imperious Perfect are your primary win conditions.",
+    "Once you have 3+ mana and a board of creatures, cast them to trigger their 'perfect' conditions or scale with your board state.",
+    "Follow up with creature pumps or additional attackers to close the game."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Keep any hand with 2-3 lands (preferably including a fetchable source or mana rock) and at least one early creature like Elvish Archdruid, Imperious Perfect, or a cheap two-drop.",
+      "Keep hands with 3+ lands if they contain a turn-1 or turn-2 ramp spell.",
+      "Prioritize hands that can legally play a land and a creature by turn 2."
+    ],
+    "mulligan_criteria": [
+      "Mulligan hands with 0-1 lands, or 3+ lands with no early plays."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Turn 1: Play a basic land.",
+      "If you have a cheap creature or ramp spell, play it.",
+      "Turn 2: Play a second land, then cast Elvish Archdruid or a mana-producing creature.",
+      "If you have two lands, play Archdruid and tap for mana, or play a two-drop creature.",
+      "The goal is to establish a mana base that produces 3-4 mana by turn 3 to cast your key finishers or board flooders."
+    ],
+    "mid_game": [
+      "Prioritize mana acceleration over card advantage early.",
+      "Use graveyard recursion sparingly to protect your win conditions.",
+      "Keep a hand of 3-4 cards to handle interaction.",
+      "Don't overcommit to a single threat if the board is unstable.",
+      "Commit creatures when you have a clear path to damage or when you can stabilize against aggro.",
+      "Hold back if the opponent has sweepers or hard removal.",
+      "Use creatures as blockers only when necessary",
+      "your win condition relies on board presence."
+    ],
+    "late_game": [
+      "High Perfect Morcant and Imperious Perfect are your primary win conditions.",
+      "Once you have 3+ mana and a board of creatures, cast them to trigger their 'perfect' conditions or scale with your board state.",
+      "Follow up with creature pumps or additional attackers to close the game.",
+      "Go all-in when you have a clear board advantage, the opponent has no sweepers in play or in hand, and you can attack for lethal or trigger win conditions.",
+      "Also commit when you've stabilized against aggro and have a clear path to victory."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "High Perfect Morcant",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Elvish Archdruid",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    },
+    {
+      "name": "Imperious Perfect",
+      "role": "signature card",
+      "notes": "From metagame signature cards."
+    }
+  ],
+  "sequencing_tips": [
+    "Be mindful of the 'perfect' condition on your signature cards",
+    "it likely requires a specific board state or creature count.",
+    "Don't overcommit to a single turn if the opponent has sweepers.",
+    "Track opponent's graveyard for recursion threats.",
+    "In the Unknown format, meta shifts quickly, so be ready to adjust your sideboard based on local play patterns.",
+    "Avoid playing around cards that aren't in the format",
+    "focus on the current metagame."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Countermagic",
+      "advice": "Use multiple cheap threats to force counter spells, then cast your finisher with protection or on an opponent's turn. Utilize mana rocks to ensure you have enough mana to cast around counters or use instant-speed interaction.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure to disrupt their land drops. Use removal on their key ramp creatures. If they get ahead, prioritize board wipes and life gain to survive until you can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize life gain and early removal. Use creatures as blockers to buy time for your ramp. Once stabilized, transition to your win condition quickly before they can stabilize.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Pressure with early creatures to force interaction. Use card draw to out-value them. If they lock the board, use removal to clear the way for your finisher. Don't overextend into sweepers.",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Win by out-resourcing and better sequencing. Prioritize removing their key creatures first. Use graveyard hate to disrupt recursion. Control the board with targeted removal and win by having the higher total power/toughness or better late-game resources.",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Watch for sweepers (board wipes), targeted removal on your key creatures, and combo pieces.",
+    "Note if the opponent is playing lands that produce unusual mana or drawing extra cards, as this indicates control or combo.",
+    "Track graveyard content for recursion threats."
+  ],
+  "metadata": {
+    "source": "legacy_guidance_migration",
+    "source_url": "guidance/commander.json",
+    "generated_at": "2026-05-23T01:29:39+00:00",
+    "model": "legacy",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "legacy_guidance",
+      "author": "scripts/generate_guidance.py",
+      "source_url": "guidance/commander.json",
+      "publish_date": "",
+      "fetched_at": "2026-05-23T01:29:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "overview",
+        "mulligan",
+        "game_plan",
+        "sequencing_tips",
+        "matchups",
+        "common_threats"
+      ]
+    }
+  ]
+}

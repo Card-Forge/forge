@@ -1,0 +1,85 @@
+{
+  "archetype": "Mono-White Momo",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/mono-white-momo.dck",
+  "mainboard": [
+    {
+      "qty": 4,
+      "name": "Abandoned Air Temple"
+    },
+    {
+      "qty": 4,
+      "name": "Cosmogrand Zenith"
+    },
+    {
+      "qty": 1,
+      "name": "Curious Farm Animals"
+    },
+    {
+      "qty": 2,
+      "name": "Figure of Fable"
+    },
+    {
+      "qty": 4,
+      "name": "Get Lost"
+    },
+    {
+      "qty": 4,
+      "name": "Haliya, Guided by Light"
+    },
+    {
+      "qty": 4,
+      "name": "Momo, Friendly Flier"
+    },
+    {
+      "qty": 3,
+      "name": "Nurturing Pixie"
+    },
+    {
+      "qty": 17,
+      "name": "Plains"
+    },
+    {
+      "qty": 4,
+      "name": "Sage of the Skies"
+    },
+    {
+      "qty": 4,
+      "name": "Seam Rip"
+    },
+    {
+      "qty": 4,
+      "name": "Springleaf Drum"
+    },
+    {
+      "qty": 4,
+      "name": "Starfield Shepherd"
+    },
+    {
+      "qty": 2,
+      "name": "Voice of Victory"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 4,
+      "name": "Clarion Conqueror"
+    },
+    {
+      "qty": 1,
+      "name": "Elspeth, Storm Slayer"
+    },
+    {
+      "qty": 2,
+      "name": "Requisition Raid"
+    },
+    {
+      "qty": 4,
+      "name": "Rest in Peace"
+    },
+    {
+      "qty": 4,
+      "name": "Sheltered by Ghosts"
+    }
+  ]
+}

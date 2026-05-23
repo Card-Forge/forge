@@ -1,0 +1,121 @@
+{
+  "archetype": "Izzet Lessons",
+  "format": "standard",
+  "source_file": "/home/lou/Development/forge-1/forge-llm-sidecar/selfplay/decks/standard/izzet-lessons.dck",
+  "mainboard": [
+    {
+      "qty": 2,
+      "name": "Abandon Attachments"
+    },
+    {
+      "qty": 4,
+      "name": "Accumulate Wisdom"
+    },
+    {
+      "qty": 2,
+      "name": "Agna Qel'a"
+    },
+    {
+      "qty": 4,
+      "name": "Artist's Talent"
+    },
+    {
+      "qty": 2,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 4,
+      "name": "Combustion Technique"
+    },
+    {
+      "qty": 3,
+      "name": "Consult the Star Charts"
+    },
+    {
+      "qty": 4,
+      "name": "Firebending Lesson"
+    },
+    {
+      "qty": 4,
+      "name": "Gran-Gran"
+    },
+    {
+      "qty": 2,
+      "name": "Iroh's Demonstration"
+    },
+    {
+      "qty": 6,
+      "name": "Island"
+    },
+    {
+      "qty": 2,
+      "name": "It'll Quench Ya!"
+    },
+    {
+      "qty": 4,
+      "name": "Monument to Endurance"
+    },
+    {
+      "qty": 2,
+      "name": "Mountain"
+    },
+    {
+      "qty": 4,
+      "name": "Riverpyre Verge"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 4,
+      "name": "Spirebluff Canal"
+    },
+    {
+      "qty": 4,
+      "name": "Steam Vents"
+    },
+    {
+      "qty": 2,
+      "name": "Three Steps Ahead"
+    }
+  ],
+  "sideboard": [
+    {
+      "qty": 1,
+      "name": "Boomerang Basics"
+    },
+    {
+      "qty": 1,
+      "name": "Broadside Barrage"
+    },
+    {
+      "qty": 3,
+      "name": "Flashfreeze"
+    },
+    {
+      "qty": 2,
+      "name": "Negate"
+    },
+    {
+      "qty": 2,
+      "name": "Quantum Riddler"
+    },
+    {
+      "qty": 2,
+      "name": "Ral, Crackling Wit"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Pierce"
+    },
+    {
+      "qty": 1,
+      "name": "Spell Snare"
+    },
+    {
+      "qty": 2,
+      "name": "Stormchaser's Talent"
+    }
+  ]
+}
