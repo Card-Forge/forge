@@ -21,7 +21,7 @@ Commands themselves are case-sensitive. Arguments with spaces need double quotes
 | give item &lt;item id&gt; | Adds an Adventure item (such as "Leather Boots", case-insensitive, defined in items.json) |
 | give life &lt;amount&gt; | Increases your current health AND max health by an amount |
 | give print &lt;edition code&gt; &lt;collector number&gt; \[amount\] | Adds a specific printing of a card to your inventory (case-insensitive, for example, "Black Lotus" from Alpha edition is LEA 232) |
-| give quest &lt;id&gt; | Adds the quest by its numeric id (defined in quests.json) |
+| give quest &lt;id&gt; | Adds a quest by its numeric id (defined in quests.json) |
 | give set &lt;edition code&gt; | Adds 4 copies of every card of a set to your inventory, flagged as having no sell value (for example, the edition code for "Secret Lair Drop" is SLD) |
 | give shards &lt;amount&gt; | Adds an amount of shards |
 | heal amount &lt;amount&gt; | Adds an amount to your current health, capping at max health |
@@ -44,8 +44,8 @@ Commands themselves are case-sensitive. Arguments with spaces need double quotes
 | resetMapQuests | Resets the current POI map's local quest flags; all side quest progress within that location will be lost |
 | resetQuests | Resets the player's global quest flags; current quests won't be abandoned or restarted, but they will lose track of what had been done; POI side quests will be unaffected. |
 | sanitize editions | Replaces all cards from non-allowed editions in decks and inventory with printings from allowed editions (if configured for the Adventure plane) |
-| dumpEnemyColorIdentity | Prints all enemies, with their colour affinity and deck name, to stdout (warning: y useless on mobile and makes the app unresponsive) |
-| dumpEnemyDeckColors | Prints all decks available to enemies and their affinities to stdout (warning: y useless on mobile and makes the app unresponsive) |
+| dumpEnemyColorIdentity | Prints all enemies, with their color affinity and deck name, to stdout (warning: currently useless on mobile and makes the app unresponsive) |
+| dumpEnemyDeckColors | Prints all decks available to enemies and their affinities to stdout (warning: currently useless on mobile and makes the app unresponsive) |
 | dumpEnemyDeckList | Prints all enemy deck lists to stdout (warning: currently useless on mobile and makes the app unresponsive) |
 | listPOI | Prints all POIs, with their name and type, to stdout (defined in points_of_interest.json; currently useless on mobile) |
 | fullHeal | Same as `heal full` command (redundant) |
