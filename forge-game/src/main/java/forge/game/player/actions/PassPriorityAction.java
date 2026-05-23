@@ -33,9 +33,9 @@ public class PassPriorityAction extends PlayerAction {
 
     private static String describePhase(final PhaseType phase) {
         return switch (phase) {
-            case MAIN1 -> "Main Phase 1";
-            case MAIN2 -> "Main Phase 2";
-            default -> phase.nameForScripts;
+            case MAIN1 -> localize("lblMacroPhaseMain1");
+            case MAIN2 -> localize("lblMacroPhaseMain2");
+            default -> phase.nameForUi;
         };
     }
 }
