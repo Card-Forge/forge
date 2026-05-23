@@ -9,8 +9,9 @@ import forge.adventure.util.*;
 import java.util.*;
 
 /// --- The checks below are mostly functional offline and should not be called from the networked part of the AP implementation. ---
-public class LocalRandomizer extends ArchipelagoData {
-    protected static LocalRandomizer localRandomizerInstance = null;
+public class LocalRandomizer {
+    private static final LocalRandomizer localRandomizerInstance = new LocalRandomizer();
+    private final ArchipelagoData archipelagoDataInstance;
 
     protected final Set<String> colorlessEquipmentShopList = new HashSet<>();
     protected final Set<String> whiteEquipmentShopList = new HashSet<>();
@@ -25,15 +26,12 @@ public class LocalRandomizer extends ArchipelagoData {
     protected final Set<String> greenItemShopList = new HashSet<>();
     protected final Set<String> remainingEquipmentPool = new HashSet<>();
 
-    public LocalRandomizer() {
-        localRandomizerInstance = this;
+    private LocalRandomizer() {
+        archipelagoDataInstance = ArchipelagoData.getInstance();
     }
 
     public static LocalRandomizer getInstance() {
-        if (archipelagoDataInstance == null) {
-            ArchipelagoData.getInstance();
-        }
-        return localRandomizerInstance == null ? localRandomizerInstance = new LocalRandomizer() : localRandomizerInstance;
+        return localRandomizerInstance;
     }
 
     public void setupFreshSaveFile() {
@@ -164,15 +162,15 @@ public class LocalRandomizer extends ArchipelagoData {
     }
 
     public void unlockRandomRegion() {
-        if (lockedWorldRegionsByName.isEmpty()) {
+        if (archipelagoDataInstance.lockedWorldRegionsByName.isEmpty()) {
             return;
         }
 
-        int targetRegionIndex = new Random().nextInt(lockedWorldRegionsByName.size());
+        int targetRegionIndex = new Random().nextInt(archipelagoDataInstance.lockedWorldRegionsByName.size());
         int setIndex = 0;
-        for (String region : lockedWorldRegionsByName) {
+        for (String region : archipelagoDataInstance.lockedWorldRegionsByName) {
             if (setIndex++ == targetRegionIndex) {
-                for (String runeName : regionTeleportingRunes) {
+                for (String runeName : archipelagoDataInstance.regionTeleportingRunes) {
                     if (runeName.toLowerCase().contains(region.toLowerCase())) {
                         Current.player().addItem(runeName);
                         return;

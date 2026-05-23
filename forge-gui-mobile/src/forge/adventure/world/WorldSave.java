@@ -38,7 +38,6 @@ public class WorldSave {
     private final AdventurePlayer player = new AdventurePlayer();
     private final World world = new World();
     private final PointOfInterestChanges.Map pointOfInterestChanges = new PointOfInterestChanges.Map();
-    private final ArchipelagoData archipelagoData = new ArchipelagoData();
 
 
     private final SignalList onLoadList = new SignalList();
@@ -78,7 +77,7 @@ public class WorldSave {
                 try {
                     currentSave.world.load(mainData.readSubData("world"));
                     currentSave.pointOfInterestChanges.load(mainData.readSubData("pointOfInterestChanges"));
-                    currentSave.archipelagoData.load(mainData.readSubData("archipelago"));
+                    ArchipelagoData.getInstance().load(mainData.readSubData("archipelago"));
                     WorldStage.getInstance().load(mainData.readSubData("worldStage"));
 
                 } catch (Exception e) {

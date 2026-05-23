@@ -15,7 +15,7 @@ import java.util.*;
 // This class will keep track of data relevant for the Archipelago implementation
 // Persists and loads data inside/from the user's save file
 public class ArchipelagoData implements SaveFileContent {
-    protected static ArchipelagoData archipelagoDataInstance = null;
+    private static final ArchipelagoData archipelagoDataInstance = new ArchipelagoData();
     protected ArchipelagoMode archipelagoMode = ArchipelagoMode.disabled;
 
     // Data we need from Forge
@@ -53,19 +53,16 @@ public class ArchipelagoData implements SaveFileContent {
 
     protected int totalAmountOfSetUnlockChecks = 100; // This is set based on the value we receive in the APWorld
     private final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
-    private final int totalTownQuestsAndEventsBreakpoint = 2; // Reward for every 2 town events or quests done.
+    private final int totalTownQuestsBreakpoint = 1; // Reward for every 1 town quests done.
+    private final int totalTownEventsBreakpoint = 1; // Reward for every 1 town events done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
 
-    public enum ARCHIPELAGO_CHECK_TYPES {BATTLES_WON, TOWN_QUESTS_AND_EVENTS_DONE, TOTAL_CARDS_EARNED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, BOSS_WUBRG_DEFEATED, WIN_CONDITION_CLEARED};
+    public enum ARCHIPELAGO_CHECK_TYPES {BATTLES_WON, TOWN_QUESTS, TOWN_EVENTS, TOTAL_CARDS_EARNED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, BOSS_WUBRG_DEFEATED, WIN_CONDITION_CLEARED};
 
-    public ArchipelagoData() {
-        if (getClass() == ArchipelagoData.class) {
-            archipelagoDataInstance = this;
-        }
-    }
+    private ArchipelagoData() {}
 
     public static ArchipelagoData getInstance() {
-        return archipelagoDataInstance == null ? archipelagoDataInstance = new ArchipelagoData() : archipelagoDataInstance;
+        return archipelagoDataInstance;
     }
 
     // Keep this updated to reset any sets/maps/variables
@@ -119,18 +116,25 @@ public class ArchipelagoData implements SaveFileContent {
                 }
                 // Todo: Signal the APWorld that the next battles won location is triggered
             }
-            case TOWN_QUESTS_AND_EVENTS_DONE -> {
-                int totalTownQuestsAndEventsDone = 0;
-                for (long count : completedTownInnEvents.values()) {
-                    totalTownQuestsAndEventsDone += (int) count;
-                }
+            case TOWN_QUESTS -> {
+                int totalTownQuestsDone = 0;
                 for (long count : completedTownQuests.values()) {
-                    totalTownQuestsAndEventsDone += (int) count;
+                    totalTownQuestsDone += (int) count;
                 }
-                if (totalTownQuestsAndEventsDone > 0 && totalTownQuestsAndEventsDone % totalTownQuestsAndEventsBreakpoint == 0) {
+                if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
                     LocalRandomizer.getInstance().unlockRandomRegion();
                 }
-                // Todo: Signal the APWorld that the next quest/event location is triggered
+                // Todo: Signal the APWorld that the next quest location is triggered
+            }
+            case TOWN_EVENTS -> {
+                int totalTownEventsDone = 0;
+                for (long count : completedTownInnEvents.values()) {
+                    totalTownEventsDone += (int) count;
+                }
+                if (totalTownEventsDone > 0 && totalTownEventsDone % totalTownEventsBreakpoint == 0) {
+                    LocalRandomizer.getInstance().unlockRandomRegion();
+                }
+                // Todo: Signal the APWorld that the next event location is triggered
             }
             case TOTAL_CARDS_EARNED -> {
                 long totalCardsEarned = 0;
@@ -180,7 +184,13 @@ public class ArchipelagoData implements SaveFileContent {
 
     public boolean isRegionUnlocked(String regionName) {
         if (archipelagoMode == ArchipelagoMode.disabled) return true;
-        if (lockedWorldRegionsByName.contains(regionName)) {
+
+        System.out.println("THIS: " + System.identityHashCode(this));
+        System.out.println("INSTANCE: " + System.identityHashCode(archipelagoDataInstance));
+
+        System.out.println("SET SIZE: " + lockedWorldRegionsByName.size());
+
+        if (archipelagoDataInstance.lockedWorldRegionsByName.contains(regionName)) {
             return false;
         }
         return true;
@@ -330,14 +340,14 @@ public class ArchipelagoData implements SaveFileContent {
         String townName = TileMapScene.instance().rootPoint.getDisplayName();
         completedTownInnEvents.merge(townName, 1L, Long::sum);
         System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + completedTownInnEvents.get(townName));
-        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOWN_QUESTS_AND_EVENTS_DONE);
+        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOWN_EVENTS);
     }
 
     public void addCompletedQuests(AdventureQuestEvent event) {
         String townName = event.poi.getDisplayName();
         completedTownQuests.merge(townName, 1L, Long::sum);
         System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + completedTownQuests.get(townName));
-        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOWN_QUESTS_AND_EVENTS_DONE);
+        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOWN_QUESTS);
     }
 
     public void addCardByRarity(String rarity) {
