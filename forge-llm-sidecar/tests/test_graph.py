@@ -7,6 +7,7 @@ from app.graph import get_graph
 from app.knowledge import format_detect, loader, metagame
 from app.nodes import combo_strategist
 from app.nodes import game_advisor
+from app.nodes import opponent_strategist
 from app.schema import ActionScore, RecognitionRequest
 
 
@@ -77,6 +78,27 @@ async def test_graph_returns_archetype_and_piloting(monkeypatch, sample_state):
     # piloting outputs are present alongside recognition outputs, but local/guide-derived.
     assert result["recommended_play"]
     assert result["own_archetype"]  # identified deterministically from deck_cards
+    assert result["recognition_complete"] is True
+    assert result["recognition_source"] == "llm"
+
+
+@pytest.mark.asyncio
+async def test_opponent_strategist_waits_for_completed_recognition(monkeypatch):
+    async def should_not_run(*args, **kwargs):
+        raise AssertionError("strategist work ran before recognition completed")
+
+    monkeypatch.setattr(opponent_strategist, "_run_mana_planner", should_not_run)
+    monkeypatch.setattr(opponent_strategist, "_run_opponent_inference", should_not_run)
+
+    state = {
+        "game_id": "incomplete-recognition",
+        "format": "Modern",
+        "archetype": "Boros Energy",
+        "confidence": 0.9,
+        "recognition_complete": False,
+    }
+    result = await opponent_strategist.opponent_strategist_node(state)
+    assert result == state
 
 
 @pytest.mark.asyncio
@@ -492,7 +514,7 @@ class TestActionsInGraphOutput:
 
         monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
         result = await get_graph().ainvoke(state)
-        assert [t["turn"] for t in result["early_game_plan"]["planned_turns"]] == [3, 4, 5, 6]
+        assert [t["turn"] for t in result["early_game_plan"]["planned_turns"]] == [2, 3, 4, 5]
 
     @pytest.mark.asyncio
     async def test_early_plan_filters_current_actions_to_legal_options(self, monkeypatch):
@@ -522,6 +544,37 @@ class TestActionsInGraphOutput:
             if a.get("action_type") == "PLAY_SPELL" and a.get("target") == "Lightning Bolt"
         ]
         assert illegal == []
+
+    @pytest.mark.asyncio
+    async def test_early_plan_sequences_castable_low_curve_before_expensive_spells(self, monkeypatch):
+        state = {
+            "game_id": "curve-plan",
+            "format": "Constructed",
+            "turn": 1,
+            "observations": [],
+            "deck_cards": ["Hired Claw", "Nova Hellkite", "Mountain", "Mountain"],
+            "hand": ["Mountain", "Nova Hellkite", "Hired Claw"],
+            "own_board": [],
+            "alternatives": [],
+            "legal_actions": [
+                {"action_type": "PLAY_LAND", "card": "Mountain"},
+                {"action_type": "PLAY_SPELL", "card": "Hired Claw"},
+            ],
+        }
+        game_advisor._resolved_format["curve-plan"] = "standard"
+
+        async def fake_generate_json(prompt, system=None):
+            return {"archetype": "Unknown", "confidence": 0.0, "reasoning": "", "alternatives": []}
+
+        monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
+        result = await get_graph().ainvoke(state)
+        current_spells = [
+            a.get("target")
+            for a in result["actions"]
+            if a.get("action_type") == "PLAY_SPELL"
+        ]
+        assert "Hired Claw" in current_spells
+        assert "Nova Hellkite" not in current_spells
 
     @pytest.mark.asyncio
     async def test_personality_influences_aggro_action_percentages(self, monkeypatch):

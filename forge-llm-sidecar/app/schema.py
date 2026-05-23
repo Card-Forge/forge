@@ -517,6 +517,10 @@ class GraphState(TypedDict, total=False):
     confidence: float | None
     reasoning: str | None
     alternatives: list[str]
+    recognition_complete: bool
+    recognition_skipped: bool
+    recognition_source: str | None
+    recognition_error: str | None
     # piloting outputs of the game_advisor node
     recommended_play: str | None
     play_reasoning: str | None

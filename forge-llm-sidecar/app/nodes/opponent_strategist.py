@@ -609,6 +609,10 @@ async def opponent_strategist_node(state: GraphState) -> GraphState:
     mana planning, as two focused LLM calls run concurrently so total latency is
     the slower of the two, not their sum. Either branch is independently
     fail-soft; the node only ever enriches state."""
+    if not state.get("recognition_complete"):
+        log.info("opponent_strategist: skipped because recognition is not complete")
+        return state
+
     archetype = state.get("archetype") or ""
     fmt = (state.get("resolved_format") or state.get("format") or "").lower()
 

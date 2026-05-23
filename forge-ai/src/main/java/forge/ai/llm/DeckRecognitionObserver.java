@@ -13,6 +13,8 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.ai.AiController;
 import forge.ai.AiProps;
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilMana;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
@@ -520,6 +522,72 @@ public final class DeckRecognitionObserver {
         return new ArrayList<>(colors);
     }
 
+    /** Current legal actions the sidecar may directly recommend. */
+    private List<LegalAction> legalActions() {
+        final List<LegalAction> actions = new ArrayList<>();
+        final Set<String> seen = new LinkedHashSet<>();
+        try {
+            for (final Card card : aiPlayer.getCardsIn(ZoneType.Hand)) {
+                if (card == null || card.getName() == null) {
+                    continue;
+                }
+                for (final SpellAbility sa : card.getAllPossibleAbilities(aiPlayer, true)) {
+                    sa.setActivatingPlayer(aiPlayer);
+                    if (sa.isLandAbility()) {
+                        addLegalAction(actions, seen, "PLAY_LAND", card, sa);
+                    } else if (sa.isSpell()
+                            && canPayMana(sa)
+                            && ComputerUtilAbility.isFullyTargetable(sa)) {
+                        addLegalAction(actions, seen, "PLAY_SPELL", card, sa);
+                    }
+                }
+            }
+            for (final Card card : aiPlayer.getCardsIn(ZoneType.Battlefield)) {
+                if (card == null || card.getName() == null) {
+                    continue;
+                }
+                for (final SpellAbility sa : card.getAllPossibleAbilities(aiPlayer, true)) {
+                    sa.setActivatingPlayer(aiPlayer);
+                    if (!sa.isManaAbility()
+                            && !sa.isLandAbility()
+                            && !sa.isSpell()
+                            && canPayMana(sa)
+                            && ComputerUtilAbility.isFullyTargetable(sa)) {
+                        addLegalAction(actions, seen, "ACTIVATE_ABILITY", card, sa);
+                    }
+                }
+            }
+        } catch (final RuntimeException ex) {
+            Logger.debug("DeckRecognition: failed to collect legal actions: " + ex.getMessage());
+        }
+        return actions;
+    }
+
+    private boolean canPayMana(final SpellAbility sa) {
+        try {
+            return sa.getPayCosts() == null
+                    || !sa.getPayCosts().hasManaCost()
+                    || ComputerUtilMana.canPayManaCost(sa, aiPlayer, 0, false);
+        } catch (final RuntimeException ex) {
+            return false;
+        }
+    }
+
+    private void addLegalAction(final List<LegalAction> actions, final Set<String> seen,
+                                final String actionType, final Card card, final SpellAbility sa) {
+        final String key = actionType + "\u0000" + card.getName();
+        if (!seen.add(key)) {
+            return;
+        }
+        actions.add(new LegalAction(
+                actionType,
+                card.getName(),
+                "",
+                List.of(),
+                false,
+                sa.isLandAbility() ? producibleColors(card) : List.of()));
+    }
+
     /** Build the personality map from AI profile properties, or empty map. */
     private Map<String, Object> buildPersonality() {
         try {
@@ -554,6 +622,7 @@ public final class DeckRecognitionObserver {
         final List<String> oppManaColors = opponentLandColors(opponent);
         final ManaPicture oppMana = opponentManaPicture(opponent);
         final String decisionType = currentDecisionType();
+        final List<LegalAction> legalActions = legalActions();
 
         final RecognitionRequest request = new RecognitionRequest(
                 RecognitionRequest.CLIENT,
@@ -587,7 +656,7 @@ public final class DeckRecognitionObserver {
                 oppMana.spent(),
                 decisionType,
                 oppMana.untappedSources(),
-                List.of(),
+                legalActions,
                 0,
                 aiController.getIntProperty(AiProps.SIDECAR_INFLUENCE_WEIGHT),
                 DeckRecognitionFeature.pilotMode());

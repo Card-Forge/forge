@@ -534,6 +534,10 @@ def _fail_soft(state: GraphState, exc: Exception) -> GraphState:
         "confidence": 0.0,
         "reasoning": f"Model unavailable: {exc}",
         "alternatives": [],
+        "recognition_complete": False,
+        "recognition_skipped": False,
+        "recognition_source": "error",
+        "recognition_error": str(exc),
         "recommended_play": "",
         "play_reasoning": "",
         "play_alternatives": [],
@@ -601,12 +605,12 @@ def _merge_actions(
     return merged
 
 
-async def game_advisor_node(state: GraphState) -> GraphState:
-    """LangGraph node: opponent recognition plus local own-deck guidance.
+async def recognition_node(state: GraphState) -> GraphState:
+    """LangGraph node: opponent recognition and own-guide resolution.
 
     One LLM call recognizes the human opponent from observed human plays only.
-    The AI's own archetype and piloting guide are resolved deterministically and
-    converted into lightweight local advice without another model call.
+    The AI's own archetype and piloting guide are resolved deterministically so
+    later nodes can consume a completed recognition state.
     """
     slug = await _resolve_meta_slug(state)
     state["resolved_format"] = slug
@@ -656,6 +660,7 @@ async def game_advisor_node(state: GraphState) -> GraphState:
             "game_advisor: game %s mulligan has no opponent observations (skip recognition LLM)",
             game_id,
         )
+        recognition_source = "skipped"
     elif locked:
         # Deck identity is settled; reuse it and skip the recognition LLM call.
         result = locked
@@ -663,6 +668,7 @@ async def game_advisor_node(state: GraphState) -> GraphState:
             "game_advisor: game %s using locked archetype '%s' (skip recognition LLM)",
             game_id, locked.get("archetype"),
         )
+        recognition_source = "cache"
     else:
         try:
             log.info(
@@ -678,6 +684,7 @@ async def game_advisor_node(state: GraphState) -> GraphState:
                 "llm_result node=game_advisor purpose=recognition game=%s",
                 game_id,
             )
+            recognition_source = "llm"
         except LLMError as exc:
             log.warning("game_advisor: recognition model call failed: %s", exc)
             return _fail_soft(state, exc)
@@ -720,6 +727,38 @@ async def game_advisor_node(state: GraphState) -> GraphState:
 
     reasoning = str(result.get("reasoning", "")).strip()
 
+    return {
+        **state,
+        "archetype": archetype,
+        "confidence": confidence,
+        "reasoning": reasoning,
+        "alternatives": alternatives,
+        "recognition_complete": True,
+        "recognition_skipped": no_observation_mulligan,
+        "recognition_source": recognition_source,
+        "recognition_error": None,
+    }
+
+
+async def game_advisor_node(state: GraphState) -> GraphState:
+    """LangGraph node: local own-deck guidance after recognition completes."""
+    if not state.get("recognition_complete"):
+        return _fail_soft(state, RuntimeError("recognition did not complete"))
+
+    slug = state.get("resolved_format") or await _resolve_meta_slug(state)
+    archetypes = state.get("candidate_archetypes") or []
+    own_name = state.get("own_archetype")
+    archetype = str(state.get("archetype") or "Unknown").strip() or "Unknown"
+    try:
+        confidence = float(state.get("confidence") or 0.0)
+    except (TypeError, ValueError):
+        confidence = 0.0
+    confidence = max(0.0, min(1.0, confidence))
+    reasoning = str(state.get("reasoning") or "").strip()
+    alternatives = state.get("alternatives") or []
+    if not isinstance(alternatives, list):
+        alternatives = []
+    alternatives = [str(x) for x in alternatives][:3]
     piloting_result = _local_piloting_advice(state)
 
     play_alternatives = piloting_result.get("play_alternatives", [])
@@ -828,6 +867,7 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     ai_is_token_deck = bool(ai_own_signals.get("is_token_deck"))
 
     card_actions_kwargs = dict(
+        legal_actions=state.get("legal_actions") or [],
         opp_hand_inference=opp_hand,
         opp_board_details=state.get("opponent_board_details") or [],
         own_board_details=state.get("own_board_details") or [],

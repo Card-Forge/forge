@@ -1667,7 +1667,7 @@ public class AiController {
                     // Sidecar discourages attacking — clear attackers
                     combat.clearAttackers();
                     lastAttackAggression = 0;
-                    Logger.debug("AiController: sidecar discouraged attack (eff %.0f%%)", effectivePct);
+                    Logger.debug("AiController: sidecar discouraged attack (eff {}%)", String.format("%.0f", effectivePct));
                 }
             }
         }
@@ -2002,10 +2002,9 @@ public class AiController {
             return null;
         }
         final double threshold = sidecarOverrideThreshold();
-        // PLAY_SPELL: try each recommended card in priority order; pick the
+        // PLAY_SPELL: try every recommended card in priority order; pick the
         // first one we can legally play and pay for.
-        for (final var spellAction : sidecarInfluence.getActions()) {
-            if (!"PLAY_SPELL".equals(spellAction.actionType())) continue;
+        for (final var spellAction : sidecarInfluence.playSpellActions()) {
             if (spellAction.percentage() < threshold) continue;
             final String targetCard = spellAction.target();
             if (targetCard == null || targetCard.isEmpty()) continue;
@@ -2014,7 +2013,7 @@ public class AiController {
                 sa.setActivatingPlayer(player);
                 final String cardName = sa.getHostCard() != null ? sa.getHostCard().getName() : "";
                 if (cardName.equalsIgnoreCase(targetCard) || cardName.contains(targetCard)) {
-                    if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
+                    if (canPlayAndPayFor(sa).willingToPlay()) {
                         return sa;
                     }
                 }
@@ -2029,7 +2028,7 @@ public class AiController {
                     sa.setActivatingPlayer(player);
                     final String cardName = sa.getHostCard() != null ? sa.getHostCard().getName() : "";
                     if (cardName.equalsIgnoreCase(targetCard) || cardName.contains(targetCard)) {
-                        if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
+                        if (canPlayAndPayFor(sa).willingToPlay()) {
                             return sa;
                         }
                     }
@@ -2048,7 +2047,10 @@ public class AiController {
             return false;
         }
         var passAction = sidecarInfluence.bestAction("PASS");
-        return passAction.isPresent() && passAction.get().percentage() >= sidecarOverrideThreshold();
+        // PASS is a veto over the stock play search. At 100% influence the
+        // generic threshold is zero, so require a real PASS signal here.
+        final double passThreshold = Math.max(sidecarOverrideThreshold(), 60.0);
+        return passAction.isPresent() && passAction.get().percentage() >= passThreshold;
     }
 
     private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
@@ -2072,7 +2074,7 @@ public class AiController {
             if (getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE) && sidecarInfluence.hasData()) {
                 SpellAbility sidecarPick = trySidecarRecommendedPlay(all, skipCounter);
                 if (sidecarPick != null) {
-                    Logger.debug("AiController: sidecar recommended play %s", sidecarPick);
+                    Logger.debug("AiController: sidecar recommended play {}", sidecarPick);
                     return sidecarPick;
                 }
                 // A fetchland crack endorsed by the mana plan is itself a
@@ -2081,7 +2083,7 @@ public class AiController {
                 // passes forever, never cracks, and never has colored mana).
                 SpellAbility fetchCrack = trySidecarFetchCrack(all);
                 if (fetchCrack != null) {
-                    Logger.debug("AiController: sidecar fetch crack %s", fetchCrack);
+                    Logger.debug("AiController: sidecar fetch crack {}", fetchCrack);
                     return fetchCrack;
                 }
                 // If sidecar strongly recommends PASS, skip looking for plays

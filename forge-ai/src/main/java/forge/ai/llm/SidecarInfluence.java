@@ -102,7 +102,7 @@ public final class SidecarInfluence {
             f.get(timeoutMs, TimeUnit.MILLISECONDS);
             return true;
         } catch (final TimeoutException ex) {
-            Logger.debug("SidecarInfluence: awaitLatest timed out after %d ms", timeoutMs);
+            Logger.debug("SidecarInfluence: awaitLatest timed out after {} ms", timeoutMs);
             return false;
         } catch (final InterruptedException ex) {
             Thread.currentThread().interrupt();
@@ -203,7 +203,7 @@ public final class SidecarInfluence {
         }
 
         enabled = true;
-        Logger.debug("SidecarInfluence: updated actions=%d, hand=%d, opp=%d, targets=%d, role=%s, plan=%s",
+        Logger.debug("SidecarInfluence: updated actions={}, hand={}, opp={}, targets={}, role={}, plan={}",
                 latestActions.size(), latestHandValues.size(),
                 latestOpponentHand.size(), latestTargetPriorities.size(),
                 latestRole != null ? latestRole.aiRole() : "none",
@@ -399,5 +399,14 @@ public final class SidecarInfluence {
             return List.of();
         }
         return List.of(spell.target());
+    }
+
+    /** @return all PLAY_SPELL actions in priority order. */
+    public List<ActionScore> playSpellActions() {
+        if (!latestPlaySpells.isEmpty()) {
+            return latestPlaySpells;
+        }
+        final ActionScore spell = latestActions.get("PLAY_SPELL");
+        return spell == null ? List.of() : List.of(spell);
     }
 }

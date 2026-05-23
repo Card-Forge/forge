@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 from collections import Counter
+from functools import lru_cache
 from math import comb
+from pathlib import Path
+import re
 
 from app import advice
 from app.schema import GraphState
@@ -58,6 +61,8 @@ _SURVEIL_LANDS = {
 }
 
 _FETCH_HINTS = ("fetch", "mesa", "strand", "delta", "catacombs", "foothills", "tarn", "rainforest", "flats", "marsh", "heath")
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+_CARDS_DIR = _REPO_ROOT / "forge-gui" / "res" / "cardsfolder"
 
 
 def _norm(name: str) -> str:
@@ -116,6 +121,43 @@ def _spell_colors(name: str, guide: dict) -> list[str]:
         if any(w in guide_text for w in words):
             out.append(code)
     return list(dict.fromkeys(out))
+
+
+def _card_slug(name: str) -> str:
+    return re.sub(r"_+", "_", re.sub(r"[^a-z0-9]+", "_", _norm(name))).strip("_")
+
+
+@lru_cache(maxsize=4096)
+def _mana_value(name: str) -> int:
+    """Best-effort mana value from Forge card scripts.
+
+    Forge remains authoritative for legality and payment; this only keeps the
+    sidecar's early-turn plan from putting five-drops before one-drops.
+    Unknown cards default to 2 so we do not over-prioritize them.
+    """
+    slug = _card_slug(name)
+    if not slug:
+        return 2
+    path = _CARDS_DIR / slug[:1] / f"{slug}.txt"
+    try:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.startswith("ManaCost:"):
+                continue
+            cost = line.split(":", 1)[1].strip()
+            if not cost or cost.lower() in {"no cost", "none"}:
+                return 0
+            total = 0
+            for token in cost.split():
+                if token.isdigit():
+                    total += int(token)
+                elif token.upper() == "X":
+                    continue
+                else:
+                    total += 1
+            return total
+    except OSError:
+        return 2
+    return 2
 
 
 def _draw_probability(successes: int, population: int, looks: int) -> float:
@@ -248,20 +290,30 @@ def _planned_turns(state: GraphState, land_sequence: list[str], spells: list[str
     if turn <= 0:
         start, end = 1, 4
     else:
-        start, end = turn + 1, turn + 4
+        start, end = turn, turn + 3
     out: list[dict] = []
-    spell_idx = 0
+    remaining_spells = list(spells)
+    base_mana = max(
+        len(state.get("available_mana") or []),
+        sum(1 for c in (state.get("own_board") or []) if _is_land(str(c))),
+    )
     for t in range(start, end + 1):
         land = land_sequence[min(t - start, len(land_sequence) - 1)] if land_sequence else ""
+        planned_land_drops = min(t - start + 1, len(land_sequence))
+        mana_budget = base_mana + planned_land_drops
+        if t == turn and state.get("available_mana"):
+            mana_budget = len(state.get("available_mana") or [])
         turn_spells: list[str] = []
-        if spell_idx < len(spells):
-            candidate = spells[spell_idx]
-            if not legal_spells or candidate in legal_spells or t > turn:
-                turn_spells.append(candidate)
-                spell_idx += 1
-        if spell_idx < len(spells) and t >= start + 1:
-            turn_spells.append(spells[spell_idx])
-            spell_idx += 1
+        for candidate in sorted(remaining_spells, key=lambda c: (_mana_value(c), _norm(c))):
+            if t == turn and legal_spells and candidate not in legal_spells:
+                continue
+            cost = _mana_value(candidate)
+            if cost > mana_budget:
+                continue
+            turn_spells.append(candidate)
+            mana_budget -= cost
+        for spell in turn_spells:
+            remaining_spells.remove(spell)
         out.append(
             {
                 "turn": t,

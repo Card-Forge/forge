@@ -1159,6 +1159,7 @@ def card_specific_actions(
     role: dict,
     phase_bucket: str,
     *,
+    legal_actions: list[dict] | None = None,
     opp_hand_inference: list[dict] | None = None,
     opp_board_details: list[dict] | None = None,
     own_board_details: list[dict] | None = None,
@@ -1177,8 +1178,26 @@ def card_specific_actions(
     ai_role = (role or {}).get("ai_role", "contested")
     is_beatdown = ai_role == "beatdown"
 
-    lands = [hv for hv in hand_values if hv.get("role") == "land"]
-    spells = [hv for hv in hand_values if hv.get("role") != "land"]
+    legal_lands = {
+        (a.get("card") or "").strip().lower()
+        for a in legal_actions or []
+        if (a.get("action_type") or "").upper() == "PLAY_LAND"
+    }
+    legal_spells = {
+        (a.get("card") or "").strip().lower()
+        for a in legal_actions or []
+        if (a.get("action_type") or "").upper() == "PLAY_SPELL"
+    }
+    lands = [
+        hv for hv in hand_values
+        if hv.get("role") == "land"
+        and (not legal_lands or (hv.get("card") or "").strip().lower() in legal_lands)
+    ]
+    spells = [
+        hv for hv in hand_values
+        if hv.get("role") != "land"
+        and (not legal_spells or (hv.get("card") or "").strip().lower() in legal_spells)
+    ]
 
     actions: list[dict] = []
     if lands:
