@@ -98,3 +98,4 @@ ScryfallCode=PMEI
 2026-08 R Appa, Aang's Companion @Kieran Yanner
 2026-10 R The Goose Mother @Jesper Ejsing
 2026-11 R Zetalpa, Primal Dawn @Chris Rallis
+2026-12 R Turtle Lair @Marina Ortega Lorente
