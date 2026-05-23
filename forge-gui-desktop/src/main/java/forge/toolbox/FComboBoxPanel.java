@@ -111,6 +111,14 @@ public class FComboBoxPanel<E> extends JPanel {
         return comboBox.getSelectedItem();
     }
 
+    public int getSelectedIndex() {
+        return comboBox.getSelectedIndex();
+    }
+
+    public void setSelectedIndex(final int index) {
+        comboBox.setSelectedIndex(index);
+    }
+
     private void refreshSkin() {
         comboBox = FComboBoxWrapper.refreshComboBoxSkin(comboBox);
     }

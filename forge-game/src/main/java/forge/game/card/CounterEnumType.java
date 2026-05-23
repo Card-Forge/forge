@@ -35,6 +35,8 @@ public enum CounterEnumType implements CounterType {
 
     ACORN("ACORN", 139, 69, 19, CounterAiCategory.Positive),
 
+    ACQUIREDTASTE("acquired taste", "ATASTE", 139, 19, 69, CounterAiCategory.Positive),
+
     AEGIS("AEGIS", 207, 207, 207, CounterAiCategory.Positive),
 
     AGE("AGE", 255, 137, 57, CounterAiCategory.Negative),

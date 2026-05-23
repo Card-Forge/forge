@@ -1,0 +1,5 @@
+Name:Gamer Token
+ManaCost:no cost
+Types:Creature Gamer
+PT:1/1
+Oracle:
