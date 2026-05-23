@@ -134,8 +134,6 @@ public final class CommanderDraftUtil {
      * and must not leak into the generic Commander Draft partner rule.</p>
      */
     public static boolean isPartnerEligible(final PaperCard commander) {
-        // Backgrounds are valid second commanders but never drive the partner
-        // decision themselves via the generic ≤1-color Commander Draft rule.
         if (commander.getRules().canBeBackground()) {
             return false;
         }

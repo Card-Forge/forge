@@ -335,6 +335,20 @@ public final class CardRules implements ICardCharacteristics {
         return false;
     }
 
+    public boolean canBePartnerCommanders(CardRules b, boolean commanderDraft) {
+        if (commanderDraft) {
+            if (!canBeBackground() && !canBeCommander()) {
+                return false;
+            }
+
+            if (this.getColorIdentity().countColors() <= 1 && b.getColorIdentity().countColors() <= 1) {
+                return true;
+            }
+        }
+
+        return canBePartnerCommanders(b);
+    }
+
     public boolean canBePartnerCommanders(CardRules b) {
         if (!(canBePartnerCommander() && b.canBePartnerCommander())) {
             return false;

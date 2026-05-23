@@ -130,6 +130,10 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
             selectCommanders();
         }
 
+        if (selectedPartner == null) {
+            selectPartner();
+        }
+
         // 2. Lock the deck colors to the combined color identity of the commanders
         if (selectedCommander != null) {
             final List<PaperCard> cmdrs = new ArrayList<>();
@@ -150,10 +154,10 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
             availableList.remove(selectedPartner);
         }
 
-        // 4. Set targets: 22 lands + 36-37 spells = 58-59 main cards
+        // 4. Set targets: 24 lands + 34-35 spells = 58-59 main cards
         final int mainTarget = getDeckSizeTarget();
-        numSpellsNeeded = mainTarget - CMD_LAND_COUNT;  // 36 or 37
-        landsNeeded     = CMD_LAND_COUNT;               // 22
+        numSpellsNeeded = mainTarget - CMD_LAND_COUNT;
+        landsNeeded     = CMD_LAND_COUNT;
 
         // Expanded CMC targets for a 60-card deck
         targetCMCs = java.util.Map.of(
@@ -283,6 +287,19 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
                     + selectedCommander + " (identity="
                     + selectedCommander.getRules().getColorIdentity() + ")");
         }
+    }
+
+    public void selectPartner() {
+        final List<PaperCard> candidates = aiPlayables.stream()
+                .filter(c -> c.getRules().canBeCommander())
+                .collect(Collectors.toList());
+
+        addFreeCommanderIfAbsent(candidates, freeCommanderName);
+        for (final String fallback : CommanderDraftUtil.FREE_COMMANDER_FALLBACKS) {
+            addFreeCommanderIfAbsent(candidates, fallback);
+        }
+
+        candidates.remove(selectedCommander);
 
         // --- Optionally pick a partner ---
         if (CommanderDraftUtil.isPartnerEligible(selectedCommander) && candidates.size() > 1) {
@@ -290,7 +307,7 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
             int bestScore = -1;
             for (int i = 1; i < candidates.size(); i++) {
                 final PaperCard candidate = candidates.get(i);
-                if (!candidate.getRules().canBePartnerCommanders(selectedCommander.getRules())) {
+                if (!candidate.getRules().canBePartnerCommanders(selectedCommander.getRules(), true)) {
                     continue;
                 }
                 final int score = scoreCommanderFit(candidate, selectedCommander);

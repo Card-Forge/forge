@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Deck editor for post-draft Commander Draft deck building.
@@ -65,7 +66,7 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited {
     public CEditorCommanderDraftLimited(final IStorage<DeckGroup> deckMap0,
             final FScreen screen0, final CDetailPicture cDetailPicture0,
             final String freeCommanderName) {
-        super(deckMap0, screen0, cDetailPicture0);
+        super(deckMap0, DeckGroup::new, screen0, cDetailPicture0);
         this.freeCommanderName = freeCommanderName;
 
         // Insert the Commander section at position 0 so it appears first
@@ -81,8 +82,8 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited {
 
         // Rebuild the section combo box to include Commander
         this.getCbxSection().removeAllItems();
-        for (DeckSection section : allSections) {
-            this.getCbxSection().addItem(section);
+        for (Object section : allSections) {
+            this.getCbxSection().addItem((DeckSection)section);
         }
 
         // Restore the listeners now that the combo box is in its final state
@@ -150,8 +151,7 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited {
     // -------------------------------------------------------------------------
 
     @Override
-    protected void onAddItems(final Iterable<Map.Entry<PaperCard, Integer>> items,
-            final boolean toAlternate) {
+    protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
         if (toAlternate) { return; }
         if (sectionMode == DeckSection.Commander) {
             handleCommanderAdd(items.iterator().next().getKey());
@@ -161,11 +161,10 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited {
     }
 
     @Override
-    protected void onRemoveItems(final Iterable<Map.Entry<PaperCard, Integer>> items,
-            final boolean toAlternate) {
+    protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
         if (toAlternate) { return; }
         if (sectionMode == DeckSection.Commander) {
-            for (final Map.Entry<PaperCard, Integer> entry : items) {
+            for (final Entry<PaperCard, Integer> entry : items) {
                 this.getDeckManager().removeItem(entry.getKey(), entry.getValue());
 //                if (!isFreeOption(entry.getKey())) {
 //                    this.getCatalogManager().addItem(entry.getKey(), entry.getValue())
