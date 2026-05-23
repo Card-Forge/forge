@@ -26,6 +26,7 @@ import forge.gamemodes.net.*;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
 import forge.gui.SwingPrefBinders;
+import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
 import forge.interfaces.IPlayerChangeListener;
@@ -433,6 +434,11 @@ public class VLobby implements ILobbyView {
     }
 
     public CLobby getController() {
+        return controller;
+    }
+
+    @Override
+    public IDraftEventHandler getDraftHandler() {
         return controller;
     }
 
@@ -1193,24 +1199,4 @@ public class VLobby implements ILobbyView {
         }
     }
 
-    @Override
-    public void onDraftPackArrived(int seatIndex, List<PaperCard> pack,
-            int packNumber, int pickNumber, int timerDurationSeconds) {
-        controller.onDraftPackArrived(seatIndex, pack, packNumber, pickNumber, timerDurationSeconds);
-    }
-
-    @Override
-    public void onDraftSeatPicked(int seatIndex, int[] seatQueueDepths) {
-        controller.onDraftSeatPicked(seatIndex, seatQueueDepths);
-    }
-
-    @Override
-    public void onDraftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack) {
-        controller.onDraftAutoPicked(seatIndex, card, packNumber, pickInPack);
-    }
-
-    @Override
-    public void onReceiveEventPool(String eventId, Deck pool) {
-        controller.onReceiveEventPool(eventId, pool);
-    }
 }
