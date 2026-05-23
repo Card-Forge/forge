@@ -213,6 +213,11 @@ public class FGameClient implements IToServer, IHasForgeLog {
                     listener.draftSeatPicked(event.getSeatIndex(), event.getSeatQueueDepths());
                 }
                 return;
+            } else if (msg instanceof LobbyAlertEvent event) {
+                for (final ILobbyListener listener : lobbyListeners) {
+                    listener.lobbyAlert(event.getTitle(), event.getMessage());
+                }
+                return;
             }
             super.channelRead(ctx, msg);
         }

@@ -19,4 +19,5 @@ public interface ILobbyListener {
     default void draftSeatPicked(int seatIndex, int[] seatQueueDepths) { }
     default void draftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack) { }
     default void receiveEventPool(String eventId, Deck pool) { }
+    default void lobbyAlert(String title, String message) { }
 }

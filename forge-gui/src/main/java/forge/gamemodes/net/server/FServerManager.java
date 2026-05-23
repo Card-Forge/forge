@@ -285,6 +285,21 @@ public final class FServerManager implements IHasForgeLog {
         broadcastTo(event, clients.values());
     }
 
+    // TODO: remove when mobile supports online draft/sealed
+    public void broadcastMobileLimitedAlert() {
+        final List<String> mobileNames = new ArrayList<>();
+        for (final RemoteClient client : clients.values()) {
+            if (client.isLibgdx()) {
+                mobileNames.add(client.getUsername());
+            }
+        }
+        if (mobileNames.isEmpty()) return;
+        final Localizer loc = Localizer.getInstance();
+        broadcast(new LobbyAlertEvent(
+                loc.getMessage("lblMobileLimitedUnsupportedTitle"),
+                loc.getMessage("lblMobileLimitedUnsupportedMessage", String.join(", ", mobileNames))));
+    }
+
     /**
      * Dispatch a broadcast event to the host's local listener — the host does
      * not receive its own broadcasts over the network, so we mirror them here.
@@ -304,6 +319,8 @@ public final class FServerManager implements IHasForgeLog {
                     e.getPackNumber(), e.getPickNumber(), e.getTimerDurationSeconds());
         } else if (event instanceof DraftSeatPickedEvent e) {
             lobbyListener.draftSeatPicked(e.getSeatIndex(), e.getSeatQueueDepths());
+        } else if (event instanceof LobbyAlertEvent e) {
+            lobbyListener.lobbyAlert(e.getTitle(), e.getMessage());
         }
     }
 
@@ -1005,6 +1022,13 @@ public final class FServerManager implements IHasForgeLog {
                             broadcast(new MessageEvent(String.format("%s joined the lobby.", event.getUsername())));
                             broadcastTo(new MessageEvent(formatAfkTimeoutMessage()),
                                     Collections.singleton(client));
+                        }
+                        // TODO: remove when mobile supports online draft/sealed
+                        if (event.isLibgdx() && localLobby.getData().isLimitedMode()) {
+                            final Localizer loc = Localizer.getInstance();
+                            broadcast(new LobbyAlertEvent(
+                                    loc.getMessage("lblMobileLimitedUnsupportedTitle"),
+                                    loc.getMessage("lblMobileLimitedUnsupportedMessage", event.getUsername())));
                         }
                         // Warn if client version differs from host
                         final String clientVersion = event.getVersion();

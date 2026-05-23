@@ -50,8 +50,13 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
 
     /** Set the lobby's declared mode (Constructed / Limited) and broadcast to clients. */
     public void setLimitedMode(boolean limited) {
+        final boolean wasLimited = getData().isLimitedMode();
         getData().setLimitedMode(limited);
         updateView(true);
+        // TODO: remove when mobile supports online draft/sealed
+        if (limited && !wasLimited) {
+            FServerManager.getInstance().broadcastMobileLimitedAlert();
+        }
     }
 
     public ServerGameLobby() {
