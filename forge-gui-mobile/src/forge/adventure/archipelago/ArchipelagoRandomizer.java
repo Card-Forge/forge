@@ -48,8 +48,4 @@ public class ArchipelagoRandomizer {
     public int getLastArchipelagoRewardIndex() {
         return archipelagoDataInstance.lastArchipelagoRewardIndex;
     }
-
-    public void generateGameNotification(String message) {
-        archipelagoDataInstance.generateGameNotification(message);
-    }
 }

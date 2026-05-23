@@ -13,11 +13,12 @@ public class ReceiveItem {
     @ArchipelagoEventListener
     public void onReceiveItem(ReceiveItemEvent event) {
         ArchipelagoRandomizer APRandomizer = ArchipelagoRandomizer.getInstance();
+        ArchipelagoData APData = ArchipelagoData.getInstance();
         NetworkItem item = event.getItem();
         if (event.getIndex() > APRandomizer.getLastArchipelagoRewardIndex()) {
             APRandomizer.unlockItemReward(ItemRegistry.getItem(item.itemID));
             //TODO: Make this fancy
-            APRandomizer.generateGameNotification(String.format("%s sent you %s%s{RESET} (%s%s{RESET})", item.playerName, ArchipelagoColors.Blue, item.itemName, ArchipelagoColors.Green, item.locationName));
+            APData.generateGameNotification(String.format("%s sent you %s%s{RESET} (%s%s{RESET})", item.playerName, ArchipelagoColors.Blue, item.itemName, ArchipelagoColors.Green, item.locationName));
             APRandomizer.incrementLastArchipelagoRewardIndex();
         }
     }
