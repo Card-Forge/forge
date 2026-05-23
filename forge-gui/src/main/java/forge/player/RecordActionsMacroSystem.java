@@ -394,7 +394,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             return;
         }
         final PlayerAction previous = actionList.get(actionList.size() - 1);
-        if (previous instanceof SelectCardAction && view.equals(previous.getGameEntityView())) {
+        if (view.equals(previous.getSelectedCardView())) {
             actionList.remove(actionList.size() - 1);
         }
     }
@@ -537,7 +537,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             final PlayerAction acceptedAction = playbackActions.remove(actionIndex);
             playbackRetries = 0;
             pendingStackOrderPriorityPasses = 0;
-            if (acceptedAction instanceof PassPriorityAction || isSelectionAction(acceptedAction)) {
+            if (acceptedAction.clearsPostStackOrderWait()) {
                 waitingForSelectionAfterStackOrder = false;
             }
         } else if (actionIndex == WAIT_FOR_NEXT_INPUT) {
@@ -622,7 +622,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         } else if (inp instanceof InputSelectTargets targetInput) {
             for (int i = 0; i < playbackActions.size(); i++) {
                 final PlayerAction action = playbackActions.get(i);
-                if (action instanceof PassPriorityAction && noRemainingTargetSelectionsBefore(i)) {
+                if (action.asPassPriorityAction() != null && noRemainingTargetSelectionsBefore(i)) {
                     return waitForInput(inp);
                 }
                 if (action instanceof FinishTargetingAction) {
@@ -631,7 +631,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
                     }
                     continue;
                 }
-                if (isSelectionAction(action)) {
+                if (action.isSelectionAction()) {
                     if (processAction(action)) {
                         return i;
                     }
@@ -725,10 +725,10 @@ public class RecordActionsMacroSystem implements IMacroSystem {
 
         for (int i = 0; i < playbackActions.size(); i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (inp instanceof InputAttack && action instanceof PassPriorityAction) {
+            if (inp instanceof InputAttack && action.asPassPriorityAction() != null) {
                 return processAttackPassPriority(i, inp);
             }
-            if (inp instanceof InputPassPriority && action instanceof PassPriorityAction
+            if (inp instanceof InputPassPriority && action.asPassPriorityAction() != null
                     && !noRemainingTargetSelectionsBefore(i)) {
                 continue;
             }
@@ -737,7 +737,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
                 debug("skipped obsolete " + action.describe());
                 return i;
             }
-            if (!(inp instanceof InputSelectTargets) && isTargetSelectionAction(action)) {
+            if (!(inp instanceof InputSelectTargets) && action.isTargetSelectionAction()) {
                 continue;
             }
             if (processAction(action)) {
@@ -773,11 +773,11 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         if (actionIndex < 0) {
             return NO_ACTION_ACCEPTED;
         }
-        final PlayerAction action = playbackActions.get(actionIndex);
-        if (!(action instanceof PassPriorityAction passPriorityAction)) {
+        final PassPriorityAction passPriorityAction = playbackActions.get(actionIndex).asPassPriorityAction();
+        if (passPriorityAction == null) {
             return NO_ACTION_ACCEPTED;
         }
-        if (!passPriorityAction.wasStackEmpty() && passPriorityAction.getPhase() == getCurrentPhase()) {
+        if (passPriorityAction.isStackPassFor(getCurrentPhase())) {
             return waitForInput(input);
         }
         final int result = processActionAt(actionIndex);
@@ -790,7 +790,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private int processNextListSelectionAction(final InputSelectEntitiesFromList<?> selectInput) {
         for (int i = 0; i < playbackActions.size(); i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (!isSelectionAction(action)) {
+            if (!action.isSelectionAction()) {
                 continue;
             }
             if (processAction(action)) {
@@ -805,14 +805,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return input.getSelected().isEmpty() ? NO_ACTION_ACCEPTED : waitForInput(input);
     }
 
-    private boolean isTargetSelectionAction(final PlayerAction action) {
-        return isSelectionAction(action) || action instanceof FinishTargetingAction;
-    }
-
-    private boolean isSelectionAction(final PlayerAction action) {
-        return action instanceof SelectCardAction || action instanceof SelectPlayerAction;
-    }
-
     private boolean hasFutureSelectionAction() {
         return findNextAction(SelectCardAction.class, SelectPlayerAction.class) >= 0;
     }
@@ -822,9 +814,8 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     }
 
     private boolean isObsoleteStackPass(final PlayerAction action) {
-        return action instanceof PassPriorityAction passPriorityAction
-                && !passPriorityAction.wasStackEmpty()
-                && isStackEmpty();
+        final PassPriorityAction passPriorityAction = action.asPassPriorityAction();
+        return passPriorityAction != null && passPriorityAction.isObsoleteWhen(isStackEmpty());
     }
 
     private boolean shouldSkipPassPriorityAction(final int actionIndex) {
@@ -835,11 +826,8 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     }
 
     private boolean isStalePhasePass(final PlayerAction action) {
-        if (!(action instanceof PassPriorityAction passPriorityAction) || passPriorityAction.getPhase() == null) {
-            return false;
-        }
-        final PhaseType currentPhase = getCurrentPhase();
-        return currentPhase != null && passPriorityAction.getPhase().isBefore(currentPhase);
+        final PassPriorityAction passPriorityAction = action.asPassPriorityAction();
+        return passPriorityAction != null && passPriorityAction.isStaleFor(getCurrentPhase());
     }
 
     private boolean isTrailingMainPhasePassBeforeNextIteration(final int actionIndex) {
@@ -847,32 +835,21 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             return false;
         }
         final PlayerAction action = playbackActions.get(actionIndex);
-        if (!(action instanceof PassPriorityAction passPriorityAction) || !passPriorityAction.wasStackEmpty()
-                || passPriorityAction.getPhase() != PhaseType.MAIN1
-                || getCurrentPhase() != PhaseType.MAIN1) {
+        final PassPriorityAction passPriorityAction = action.asPassPriorityAction();
+        if (passPriorityAction == null || !passPriorityAction.isTrailingMainPhasePassCandidate(getCurrentPhase())) {
             return false;
         }
         for (int i = actionIndex + 1; i < playbackActions.size(); i++) {
-            if (!(playbackActions.get(i) instanceof PassPriorityAction remainingPass)
-                    || !remainingPass.wasStackEmpty()) {
+            final PassPriorityAction remainingPass = playbackActions.get(i).asPassPriorityAction();
+            if (remainingPass == null || !remainingPass.wasStackEmpty()) {
                 return false;
             }
         }
-        return !actions.isEmpty() && !(actions.get(0) instanceof PassPriorityAction);
+        return !actions.isEmpty() && actions.get(0).asPassPriorityAction() == null;
     }
 
     private boolean canReplayPassPriority(final PassPriorityAction action) {
-        if (action.wasStackEmpty() != isStackEmpty()) {
-            return false;
-        }
-        final PhaseType currentPhase = getCurrentPhase();
-        return action.getPhase() == null
-                || action.getPhase() == currentPhase
-                || canAdvanceTowardRecordedCombatPass(action, currentPhase);
-    }
-
-    private boolean canReplayAttackPassPriority(final PassPriorityAction action) {
-        return action.getPhase() == null || action.getPhase() == getCurrentPhase();
+        return action.canReplay(isStackEmpty(), getCurrentPhase());
     }
 
     private PhaseType getCurrentPhase() {
@@ -915,20 +892,10 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             return false;
         }
         final PlayerAction firstAction = actions.get(0);
-        return (isSelectionAction(firstAction)
+        return (firstAction.isSelectionAction()
                 && (input instanceof InputSelectTargets || input instanceof InputSelectEntitiesFromList<?>))
                 || (firstAction instanceof ConfirmAction && input instanceof InputConfirm)
                 || (firstAction instanceof PayManaFromPoolAction && input instanceof InputPayMana);
-    }
-
-    private boolean canAdvanceTowardRecordedCombatPass(final PassPriorityAction action, final PhaseType currentPhase) {
-        final PhaseType recordedPhase = action.getPhase();
-        return action.wasStackEmpty()
-                && currentPhase != null
-                && recordedPhase != null
-                && currentPhase.isBefore(recordedPhase)
-                && isCombatPhase(currentPhase)
-                && (isCombatPhase(recordedPhase) || recordedPhase == PhaseType.MAIN2);
     }
 
     private int waitForPendingCardAction(final Input input, final int actionIndex, final boolean waitingForRecordedStackOrder) {
@@ -964,10 +931,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return WAIT_FOR_NEXT_INPUT;
     }
 
-    private boolean isCombatPhase(final PhaseType phase) {
-        return phase.name().startsWith("COMBAT_");
-    }
-
     private boolean isWaitingForAttackDeclaration(final int actionIndex) {
         final Card card = findPendingPlayerCard(actionIndex);
         if (card == null || !card.isCreature()) {
@@ -993,7 +956,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         if (actionIndex < 0 || actionIndex >= playbackActions.size()) {
             return null;
         }
-        final Card card = findCard(selectedCardView(playbackActions.get(actionIndex)));
+        final Card card = findCard(playbackActions.get(actionIndex).getSelectedCardView());
         return isControlledByPlayer(card) ? card : null;
     }
 
@@ -1056,7 +1019,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         final int size = findLeadingManaSourceSearchSize();
         for (int i = 0; i < size; i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (activateRecordedManaSource(findCard(selectedCardView(action)), action)) {
+            if (activateRecordedManaSource(findCard(action.getSelectedCardView()), action)) {
                 return i;
             }
         }
@@ -1066,7 +1029,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private int findLeadingManaSourceSearchSize() {
         for (int i = 0; i < playbackActions.size(); i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (!(action instanceof SelectCardAction)) {
+            if (action.getSelectedCardView() == null) {
                 return i;
             }
         }
@@ -1077,7 +1040,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         final int start = findLeadingManaSourceSearchSize();
         for (int i = start; i < playbackActions.size(); i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (activateRecordedManaSource(exactRecordedLandManaSource(selectedCardView(action)), action)) {
+            if (activateRecordedManaSource(exactRecordedLandManaSource(action.getSelectedCardView()), action)) {
                 return true;
             }
         }
@@ -1087,7 +1050,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private boolean hasFutureUsableRecordedLandSelection() {
         final int start = findLeadingManaSourceSearchSize();
         for (int i = start; i < playbackActions.size(); i++) {
-            if (exactRecordedLandManaSource(selectedCardView(playbackActions.get(i))) != null) {
+            if (exactRecordedLandManaSource(playbackActions.get(i).getSelectedCardView()) != null) {
                 return true;
             }
         }
@@ -1132,7 +1095,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private boolean noRemainingTargetSelectionsBefore(final int endIndex) {
         final int size = Math.min(endIndex, playbackActions.size());
         for (int i = 0; i < size; i++) {
-            if (isSelectionAction(playbackActions.get(i))) {
+            if (playbackActions.get(i).isSelectionAction()) {
                 return false;
             }
         }
@@ -1183,71 +1146,57 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         if (DEBUG) {
             debug("try " + action.describe());
         }
-        final Input inp = playerControllerHuman.getInputProxy().getInput();
+        final Input input = playerControllerHuman.getInputProxy().getInput();
         if (action instanceof ActivateAbilityAction activateAbilityAction) {
-            if (inp instanceof InputPassPriority passPriorityInput) {
+            if (input instanceof InputPassPriority passPriorityInput) {
                 return debugResult(action, activateAbility(passPriorityInput, activateAbilityAction));
             }
         } else if (action instanceof PassPriorityAction passPriorityAction) {
-            if (inp instanceof InputPassPriority && canReplayPassPriority(passPriorityAction)) {
-                inp.selectButtonOK();
+            if (input instanceof InputPassPriority && canReplayPassPriority(passPriorityAction)) {
+                input.selectButtonOK();
                 return debugResult(action, true);
             }
-            if (inp instanceof InputAttack && canReplayAttackPassPriority(passPriorityAction)) {
-                inp.selectButtonOK();
+            if (input instanceof InputAttack && passPriorityAction.canReplayDuringAttack(getCurrentPhase())) {
+                input.selectButtonOK();
                 return debugResult(action, true);
             }
         } else if (action instanceof FinishTargetingAction) {
-            if (inp instanceof InputSelectTargets || inp instanceof InputAttack) {
-                inp.selectButtonOK();
+            if (input instanceof InputSelectTargets || input instanceof InputAttack) {
+                input.selectButtonOK();
                 return debugResult(action, true);
             }
-        } else if (action instanceof PayManaFromPoolAction) {
-            if (inp instanceof InputPayMana) {
-                ((InputPayMana) inp).useManaFromPool(((PayManaFromPoolAction) action).getSelectedColor());
+        } else if (action instanceof PayManaFromPoolAction payManaFromPoolAction) {
+            if (input instanceof InputPayMana manaInput) {
+                manaInput.useManaFromPool(payManaFromPoolAction.getSelectedColor());
                 return debugResult(action, true);
             }
         } else if (action instanceof PayCostAction) {
-            if (inp instanceof InputConfirm) {
-                inp.selectButtonOK();
+            if (input instanceof InputConfirm) {
+                input.selectButtonOK();
                 return debugResult(action, true);
             }
         } else if (action instanceof ConfirmAction confirmAction) {
-            if (!confirmAction.isConfirmed() && inp instanceof InputPayMana manaInput
+            if (!confirmAction.isConfirmed() && input instanceof InputPayMana manaInput
                     && manaInput.canCancelPaymentForMacro()) {
-                inp.selectButtonCancel();
+                input.selectButtonCancel();
                 return debugResult(action, true);
             }
-            if (inp instanceof InputConfirm confirmInput && canReplayConfirm(confirmInput, confirmAction)) {
+            if (input instanceof InputConfirm confirmInput
+                    && confirmAction.matchesPrompt(confirmInput.getCardViewForMacro(),
+                            confirmInput.getMessageForMacro())) {
                 if (confirmAction.isConfirmed()) {
-                    inp.selectButtonOK();
+                    input.selectButtonOK();
                 } else {
-                    inp.selectButtonCancel();
+                    input.selectButtonCancel();
                 }
                 return debugResult(action, true);
             }
-        } else {
-            GameEntityView gev = action.getGameEntityView();
-            if (gev instanceof CardView cardView) {
-                return debugResult(action, selectCard(cardView));
-            } else if (gev instanceof PlayerView playerView) {
-                return debugResult(action, selectPlayer(playerView));
-            }
+        } else if (action.getGameEntityView() instanceof CardView cardView) {
+            return debugResult(action, selectCard(cardView));
+        } else if (action.getGameEntityView() instanceof PlayerView playerView) {
+            return debugResult(action, selectPlayer(playerView));
         }
         return debugResult(action, false);
-    }
-
-    private boolean canReplayConfirm(final InputConfirm input, final ConfirmAction action) {
-        final GameEntityView recordedView = action.getGameEntityView();
-        if (!(recordedView instanceof CardView recordedCard)) {
-            return true;
-        }
-        final CardView inputCard = input.getCardViewForMacro();
-        if (inputCard != null && recordedCard.getName().equals(inputCard.getName())) {
-            return true;
-        }
-        final String message = input.getMessageForMacro();
-        return message != null && message.contains(recordedCard.getName());
     }
 
     private boolean canAcceptImplicitTriggerConfirm(final InputConfirm input) {
@@ -1443,10 +1392,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return original.getName().equals(candidate.getView().getName())
                 && original.isToken() == candidate.isToken()
                 && hasSameController(original, candidate);
-    }
-
-    private CardView selectedCardView(final PlayerAction action) {
-        return action instanceof SelectCardAction && action.getGameEntityView() instanceof CardView cardView ? cardView : null;
     }
 
     private boolean debugResult(final PlayerAction action, final boolean result) {

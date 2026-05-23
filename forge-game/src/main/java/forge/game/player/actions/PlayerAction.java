@@ -1,7 +1,7 @@
 package forge.game.player.actions;
 
 import forge.game.GameEntityView;
-import forge.game.player.PlayerController;
+import forge.game.card.CardView;
 import forge.util.Localizer;
 
 import java.util.List;
@@ -24,9 +24,24 @@ public abstract class PlayerAction {
         name = actionName;
     }
 
-    public void run(PlayerController controller) {
-        // Turn this abstract soon
-        // This should try to replicate the recorded macro action
+    public boolean isSelectionAction() {
+        return false;
+    }
+
+    public boolean isTargetSelectionAction() {
+        return isSelectionAction();
+    }
+
+    public boolean clearsPostStackOrderWait() {
+        return isSelectionAction();
+    }
+
+    public PassPriorityAction asPassPriorityAction() {
+        return null;
+    }
+
+    public CardView getSelectedCardView() {
+        return null;
     }
 
     public GameEntityView getGameEntityView() {

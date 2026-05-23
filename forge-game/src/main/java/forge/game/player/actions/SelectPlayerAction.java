@@ -8,6 +8,11 @@ public class SelectPlayerAction extends PlayerAction {
     }
 
     @Override
+    public boolean isSelectionAction() {
+        return true;
+    }
+
+    @Override
     public String describe() {
         return localize("lblMacroActionSelectPlayer", describeEntity());
     }
