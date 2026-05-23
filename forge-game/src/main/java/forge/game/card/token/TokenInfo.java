@@ -2,6 +2,8 @@ package forge.game.card.token;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardType;
@@ -22,7 +24,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
 import org.apache.commons.lang3.StringUtils;
-import org.testng.collections.Sets;
 
 import java.util.List;
 import java.util.Map;
