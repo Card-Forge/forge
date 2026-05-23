@@ -29,6 +29,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventCombatUpdate;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.player.actions.FinishTargetingAction;
 import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.ZoneType;
 import forge.gui.events.UiEventAttackerDeclared;
@@ -97,10 +98,15 @@ public class InputAttack extends InputSyncronizedBase {
 
     @Override
     protected final void onOk() {
+        getController().macros().addRememberedAction(new FinishTargetingAction());
         // Propaganda costs could have been paid here.
         setCurrentDefender(null); // remove highlights
         activateBand(null);
         stop();
+    }
+
+    public boolean isDeclaredAttackerForMacro(final Card card) {
+        return combat.isAttacking(card);
     }
 
     @Override

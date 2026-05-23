@@ -377,6 +377,20 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         return targets.contains(card) && targets.size() > oldTargetCount;
     }
 
+    public Iterable<Card> getValidCardsForMacro() {
+        return choices;
+    }
+
+    public boolean canFinishTargetingForMacro() {
+        if (!sa.isMinTargetChosen()) {
+            return false;
+        }
+        if (numTargets != null && targets.size() != numTargets) {
+            return false;
+        }
+        return divisionValues == null || divisionValues.isEmpty() || sa.getStillToDivide() <= 0;
+    }
+
     protected Boolean onDividedAsYouChoose(GameObject go) {
         String apiBasedMessage = "Distribute how much to ";
         if (sa.getApi() == ApiType.DealDamage) {

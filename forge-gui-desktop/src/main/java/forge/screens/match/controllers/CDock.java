@@ -115,15 +115,22 @@ public class CDock implements ICDoc {
         update();
     }
 
-    private void toggleMacroRecording() {
+    public void toggleMacroRecording() {
+        final boolean wasRecording = matchUI.getGameController().macros().isRecording();
         matchUI.getGameController().macros().setRememberedActions();
         refreshMacroButtons();
-        showPromptTab();
+        if (!wasRecording && matchUI.getGameController().macros().isRecording()) {
+            matchUI.getCMacro().showWindow();
+        } else {
+            matchUI.getCMacro().update();
+            showPromptTab();
+        }
     }
 
     private void playMacro() {
         matchUI.getGameController().macros().repeatRememberedActions();
         refreshMacroButtons();
+        matchUI.getCMacro().update();
         showPromptTab();
     }
 

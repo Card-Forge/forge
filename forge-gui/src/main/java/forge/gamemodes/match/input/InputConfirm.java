@@ -150,6 +150,17 @@ public class InputConfirm extends InputSyncronizedBase {
         return result;
     }
 
+    public CardView getCardViewForMacro() {
+        if (card != null) {
+            return card;
+        }
+        return sa == null ? null : sa.getCardView();
+    }
+
+    public String getMessageForMacro() {
+        return message;
+    }
+
     @Override
     public String getActivateAction(Card card) {
         return null;

@@ -448,6 +448,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     public boolean isActivatingManaAbility() { return locked; }
 
+    public boolean canCancelPaymentForMacro() { return !mandatory; }
+
     protected String messagePrefix;
     public void setMessagePrefix(String prompt) {
         // TODO Auto-generated method stub

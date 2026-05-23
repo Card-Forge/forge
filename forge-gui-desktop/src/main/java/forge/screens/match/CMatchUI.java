@@ -104,6 +104,7 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.screens.match.controllers.CDev;
 import forge.screens.match.controllers.CDock;
 import forge.screens.match.controllers.CLog;
+import forge.screens.match.controllers.CMacro;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
 import forge.screens.match.menus.CMatchUIMenus;
@@ -172,6 +173,7 @@ public final class CMatchUI
     private final CDev cDev = new CDev(this);
     private final CDock cDock = new CDock(this);
     private final CLog cLog = new CLog(this);
+    private final CMacro cMacro = new CMacro(this);
     private final CPrompt cPrompt = new CPrompt(this);
     private final CStack cStack = new CStack(this);
     private int nextNotifiableStackIndex = 0;
@@ -193,6 +195,7 @@ public final class CMatchUI
         this.myDocs.put(EDocID.REPORT_STACK, getCStack().getView());
         this.myDocs.put(EDocID.REPORT_COMBAT, cCombat.getView());
         this.myDocs.put(EDocID.REPORT_DEPENDENCIES, cDependencies.getView());
+        this.myDocs.put(EDocID.REPORT_MACRO, cMacro.getView());
         this.myDocs.put(EDocID.REPORT_LOG, cLog.getView());
         this.myDocs.put(EDocID.DEV_MODE, getCDev().getView());
         this.myDocs.put(EDocID.BUTTON_DOCK, getCDock().getView());
@@ -293,7 +296,11 @@ public final class CMatchUI
     public CDock getCDock() {
         return cDock;
     }
-    CPrompt getCPrompt() {
+
+    public CMacro getCMacro() {
+        return cMacro;
+    }
+    public CPrompt getCPrompt() {
         return cPrompt;
     }
     public CStack getCStack() {
@@ -737,6 +744,7 @@ public final class CMatchUI
         FloatingZone.closeAll();
         updatePlayerControl();
         KeyboardShortcuts.attachKeyboardShortcuts(this);
+        hideStartupHiddenDoc(cMacro.getView());
         for (final IVDoc<? extends ICDoc> view : myDocs.values()) {
             if (view == null) {
                 continue;
@@ -744,6 +752,14 @@ public final class CMatchUI
             final ICDoc layoutControl = view.getLayoutControl();
             layoutControl.initialize();
             layoutControl.update();
+        }
+    }
+
+    private void hideStartupHiddenDoc(final IVDoc<? extends ICDoc> view) {
+        final DragCell parent = view.getParentCell();
+        if (parent != null) {
+            parent.removeDoc(view);
+            view.setParentCell(null);
         }
     }
 
@@ -915,6 +931,7 @@ public final class CMatchUI
 
     @Override
     public void finishGame() {
+        cMacro.closeForMatchEnd();
         FloatingZone.closeAll(); //ensure floating card areas cleared and closed after the game
         if (isNetGame()) {
             writeMatchPreferences();
@@ -1247,6 +1264,7 @@ public final class CMatchUI
     @Override
     public void afterGameEnd() {
         super.afterGameEnd();
+        cMacro.closeForMatchEnd();
         Singletons.getView().getLpnDocument().remove(targetingOverlay.getPanel());
         FThreads.invokeInEdtNowOrLater(() -> {
             Singletons.getView().getNavigationBar().closeTab(screen);

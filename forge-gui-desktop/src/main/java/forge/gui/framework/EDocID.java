@@ -93,6 +93,7 @@ public enum EDocID {
     REPORT_STACK (),
     REPORT_COMBAT (),
     REPORT_DEPENDENCIES (),
+    REPORT_MACRO (),
     REPORT_LOG (),
 
     DEV_MODE (),

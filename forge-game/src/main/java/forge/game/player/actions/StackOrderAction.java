@@ -1,5 +1,7 @@
 package forge.game.player.actions;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class StackOrderAction extends PlayerAction {
@@ -7,7 +9,7 @@ public class StackOrderAction extends PlayerAction {
 
     public StackOrderAction(final List<String> abilityDescriptions) {
         super(null, "Order simultaneous abilities");
-        this.abilityDescriptions = abilityDescriptions;
+        this.abilityDescriptions = Collections.unmodifiableList(new ArrayList<>(abilityDescriptions));
     }
 
     public List<String> getAbilityDescriptions() {
@@ -15,7 +17,7 @@ public class StackOrderAction extends PlayerAction {
     }
 
     @Override
-    protected void appendDetails(final StringBuilder sb) {
-        sb.append(" order=").append(abilityDescriptions);
+    public String describe() {
+        return localize("lblMacroActionOrderAbilities", describeList(abilityDescriptions));
     }
 }

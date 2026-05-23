@@ -843,9 +843,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 cardView = spellAbilityView.getHostCard();
             else
                 cardView = wrapper.getCardView();
-            return this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
+            final boolean result = this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
+            recordConfirm(cardView, result);
+            return result;
         }
-        return InputConfirm.confirm(this, wrapper, buildQuestion.toString());
+        final boolean result = InputConfirm.confirm(this, wrapper, buildQuestion.toString());
+        recordConfirm(wrapper.getCardView(), result);
+        return result;
     }
 
     @Override
@@ -2118,6 +2122,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             for (final int index : savedOrder) {
                 orderedSAs.add(activePlayerSAs.get(index));
             }
+            macros().addRememberedAction(new StackOrderAction(describeAbilityOrder(orderedSAs)));
             return orderedSAs;
         }
 

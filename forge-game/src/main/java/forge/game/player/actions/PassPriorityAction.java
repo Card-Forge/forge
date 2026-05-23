@@ -25,10 +25,17 @@ public class PassPriorityAction extends PlayerAction {
     }
 
     @Override
-    protected void appendDetails(final StringBuilder sb) {
-        sb.append(" stackWasEmpty=").append(stackWasEmpty);
-        if (phase != null) {
-            sb.append(" phase=").append(phase);
-        }
+    public String describe() {
+        final String phaseText = phase == null ? "" : " " + localize("lblMacroActionDuringPhase", describePhase(phase));
+        final String stackText = localize(stackWasEmpty ? "lblMacroStackEmpty" : "lblMacroStackNotEmpty");
+        return localize("lblMacroActionPassPriority", phaseText, stackText);
+    }
+
+    private static String describePhase(final PhaseType phase) {
+        return switch (phase) {
+            case MAIN1 -> "Main Phase 1";
+            case MAIN2 -> "Main Phase 2";
+            default -> phase.nameForScripts;
+        };
     }
 }

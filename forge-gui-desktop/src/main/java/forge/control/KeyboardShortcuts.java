@@ -193,7 +193,7 @@ public class KeyboardShortcuts {
             }
         };
 
-        final Action actMacroRecord = macroAction(matchUI, ui -> ui.getGameController().macros().setRememberedActions());
+        final Action actMacroRecord = macroAction(matchUI, ui -> ui.getCDock().toggleMacroRecording());
         
         final Action actMacroNextAction = macroAction(matchUI, ui -> ui.getGameController().macros().nextRememberedAction());
 
@@ -306,6 +306,7 @@ public class KeyboardShortcuts {
                 }
                 command.accept(matchUI);
                 matchUI.getCDock().refreshMacroButtons();
+                matchUI.getCMacro().update();
             }
         };
     }

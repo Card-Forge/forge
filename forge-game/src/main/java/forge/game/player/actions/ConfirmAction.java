@@ -15,7 +15,9 @@ public class ConfirmAction extends PlayerAction {
     }
 
     @Override
-    protected void appendDetails(final StringBuilder sb) {
-        sb.append(" confirmed=").append(confirmed);
+    public String describe() {
+        final String action = localize(confirmed ? "lblMacroActionConfirm" : "lblMacroActionDecline");
+        final String entity = describeEntity();
+        return entity.isEmpty() ? action : localize("lblMacroActionChoiceFor", action, entity);
     }
 }
