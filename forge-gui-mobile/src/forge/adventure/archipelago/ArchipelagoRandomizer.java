@@ -26,7 +26,7 @@ public class ArchipelagoRandomizer {
     }
 
     // Todo: Verify that this is actually what we want and it's working
-    public void unlockChallengeCoinReward(Map<String, Integer> itemNamesAndAmounts) {
+    public void unlockMultipleItemReward(Map<String, Integer> itemNamesAndAmounts) {
         for (Map.Entry<String, Integer> item : itemNamesAndAmounts.entrySet()) {
             for (int i = 0; i < item.getValue(); i++) {
                 Current.player().addItem(item.getKey());

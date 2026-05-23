@@ -29,8 +29,20 @@ public class ArchipelagoData implements SaveFileContent {
     private final Set<String> mainBosses = new HashSet<>(Arrays.asList("Lorthos","Emrakul","Lathliss","Ghalta","Griselbrand","Akroma","Sliver Queen"));
 
     // Actual user data we want to store
-    private final Map<String, Long> completedTownInnEvents = new HashMap<>();
-    private final Map<String, Long> completedTownQuests = new HashMap<>();
+    private final Map<String, Long> colorlessCompletedTownInnEvents = new HashMap<>();
+    private final Map<String, Long> whiteCompletedTownInnEvents = new HashMap<>();
+    private final Map<String, Long> blueCompletedTownInnEvents = new HashMap<>();
+    private final Map<String, Long> blackCompletedTownInnEvents = new HashMap<>();
+    private final Map<String, Long> redCompletedTownInnEvents = new HashMap<>();
+    private final Map<String, Long> greenCompletedTownInnEvents = new HashMap<>();
+
+    private final Map<String, Long> colorlessCompletedTownQuests = new HashMap<>();
+    private final Map<String, Long> whiteCompletedTownQuests = new HashMap<>();
+    private final Map<String, Long> blueCompletedTownQuests = new HashMap<>();
+    private final Map<String, Long> blackCompletedTownQuests = new HashMap<>();
+    private final Map<String, Long> redCompletedTownQuests = new HashMap<>();
+    private final Map<String, Long> greenCompletedTownQuests = new HashMap<>();
+
     private final Map<String, Long> cardsEarnedByRarity = new HashMap<>();
     protected final Map<String, Long> itemsGainedByName = new HashMap<>();
     private final Map<String, Long> packsEarnedBySet = new HashMap<>();
@@ -44,7 +56,13 @@ public class ArchipelagoData implements SaveFileContent {
     private int totalGoldEarned = 0;
     private int totalExtraMaxLifeEarned = 0;
     private int totalShardsEarned = 0;
-    private int totalBattlesWon = 0;
+    private int totalBattlesWonWhite = 0;
+    private int totalBattlesWonBlue = 0;
+    private int totalBattlesWonBlack = 0;
+    private int totalBattlesWonRed = 0;
+    private int totalBattlesWonGreen = 0;
+    private int totalBattlesWonColorless = 0;
+    private String lastTraversedRegion = "wastes";
 
     // List of unlockable checks
     // Todo: Fill list based on archipelago xml contents
@@ -57,7 +75,7 @@ public class ArchipelagoData implements SaveFileContent {
     private final int totalTownEventsBreakpoint = 1; // Reward for every 1 town events done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
 
-    public enum ARCHIPELAGO_CHECK_TYPES {BATTLES_WON, TOWN_QUESTS, TOWN_EVENTS, TOTAL_CARDS_EARNED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, BOSS_WUBRG_DEFEATED, WIN_CONDITION_CLEARED};
+    public enum ARCHIPELAGO_CHECK_TYPES {COLORLESS_BATTLE_WON, WHITE_BATTLE_WON, BLUE_BATTLE_WON, BLACK_BATTLE_WON, RED_BATTLE_WON, GREEN_BATTLE_WON, COLORLESS_TOWN_QUESTS, WHITE_TOWN_QUESTS, BLUE_TOWN_QUESTS, BLACK_TOWN_QUESTS, RED_TOWN_QUESTS, GREEN_TOWN_QUESTS, TOWN_EVENTS, TOTAL_CARDS_EARNED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, BOSS_WUBRG_DEFEATED, WIN_CONDITION_CLEARED};
 
     private ArchipelagoData() {}
 
@@ -65,7 +83,7 @@ public class ArchipelagoData implements SaveFileContent {
         return archipelagoDataInstance;
     }
 
-    // Keep this updated to reset any sets/maps/variables
+    // This must be updated to reset any sets/maps/variables otherwise things persist between loads of different save files!
     public void setupFreshSaveFile(ArchipelagoMode archipelagoMode) {
         GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
         cardsUnlockedByName.clear();
@@ -76,8 +94,19 @@ public class ArchipelagoData implements SaveFileContent {
         this.addCardUnlockedByName("Island");
         this.addCardUnlockedByName("Wastes");
 
-        completedTownInnEvents.clear();
-        completedTownQuests.clear();
+        colorlessCompletedTownInnEvents.clear();
+        whiteCompletedTownInnEvents.clear();
+        blueCompletedTownInnEvents.clear();
+        blackCompletedTownInnEvents.clear();
+        redCompletedTownInnEvents.clear();
+        blackCompletedTownInnEvents.clear();
+
+        colorlessCompletedTownQuests.clear();
+        whiteCompletedTownQuests.clear();
+        blueCompletedTownQuests.clear();
+        blackCompletedTownQuests.clear();
+        redCompletedTownQuests.clear();
+        greenCompletedTownQuests.clear();
         cardsEarnedByRarity.clear();
         itemsGainedByName.clear();
         packsEarnedBySet.clear();
@@ -92,7 +121,13 @@ public class ArchipelagoData implements SaveFileContent {
         totalGoldEarned = 0;
         totalExtraMaxLifeEarned = 0;
         totalShardsEarned = 0;
-        totalBattlesWon = 0;
+        totalBattlesWonWhite = 0;
+        totalBattlesWonBlue = 0;
+        totalBattlesWonBlack = 0;
+        totalBattlesWonRed = 0;
+        totalBattlesWonGreen = 0;
+        totalBattlesWonColorless = 0;
+        lastTraversedRegion = "wastes";
 
         receivedAmountOfSetUnlockChecks = 0;
         setUnlockChecksRestAmount = 0f;
@@ -110,15 +145,85 @@ public class ArchipelagoData implements SaveFileContent {
     private void updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES type) {
         if (archipelagoMode == ArchipelagoMode.disabled) return;
         switch (type) {
-            case BATTLES_WON -> {
-                if (totalBattlesWon > 0 && totalBattlesWon % totalBattlesWonBreakpoint == 0) {
+            case COLORLESS_BATTLE_WON -> {
+                if (totalBattlesWonColorless > 0 && totalBattlesWonColorless % totalBattlesWonBreakpoint == 0) {
                     unlockRandomSet();
                 }
                 // Todo: Signal the APWorld that the next battles won location is triggered
             }
-            case TOWN_QUESTS -> {
+            case WHITE_BATTLE_WON -> {
+                if (totalBattlesWonWhite > 0 && totalBattlesWonWhite % totalBattlesWonBreakpoint == 0) {
+                    unlockRandomSet();
+                }
+                // Todo: Signal the APWorld that the next battles won location is triggered
+            }
+            case BLUE_BATTLE_WON -> {
+                if (totalBattlesWonBlue > 0 && totalBattlesWonBlue % totalBattlesWonBreakpoint == 0) {
+                    unlockRandomSet();
+                }
+                // Todo: Signal the APWorld that the next battles won location is triggered
+            }
+            case BLACK_BATTLE_WON -> {
+                if (totalBattlesWonBlack > 0 && totalBattlesWonBlack % totalBattlesWonBreakpoint == 0) {
+                    unlockRandomSet();
+                }
+                // Todo: Signal the APWorld that the next battles won location is triggered
+            }
+            case RED_BATTLE_WON -> {
+                if (totalBattlesWonRed > 0 && totalBattlesWonRed % totalBattlesWonBreakpoint == 0) {
+                    unlockRandomSet();
+                }
+                // Todo: Signal the APWorld that the next battles won location is triggered
+            }
+            case GREEN_BATTLE_WON -> {
+                if (totalBattlesWonGreen > 0 && totalBattlesWonGreen % totalBattlesWonBreakpoint == 0) {
+                    unlockRandomSet();
+                }
+                // Todo: Signal the APWorld that the next battles won location is triggered
+            }
+            case COLORLESS_TOWN_QUESTS -> {
                 int totalTownQuestsDone = 0;
-                for (long count : completedTownQuests.values()) {
+                for (long count : colorlessCompletedTownQuests.values()) {
+                    totalTownQuestsDone += (int) count;
+                }
+                if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
+                    LocalRandomizer.getInstance().unlockRandomRegion();
+                }
+                // Todo: Signal the APWorld that the next quest location is triggered
+            }
+            case WHITE_TOWN_QUESTS -> {
+                int totalTownQuestsDone = 0;
+                for (long count : whiteCompletedTownQuests.values()) {
+                    totalTownQuestsDone += (int) count;
+                }
+                if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
+                    LocalRandomizer.getInstance().unlockRandomRegion();
+                }
+                // Todo: Signal the APWorld that the next quest location is triggered
+            }
+            case BLUE_TOWN_QUESTS -> {
+                int totalTownQuestsDone = 0;
+                for (long count : blueCompletedTownQuests.values()) {
+                    totalTownQuestsDone += (int) count;
+                }
+                if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
+                    LocalRandomizer.getInstance().unlockRandomRegion();
+                }
+                // Todo: Signal the APWorld that the next quest location is triggered
+            }
+            case RED_TOWN_QUESTS -> {
+                int totalTownQuestsDone = 0;
+                for (long count : redCompletedTownQuests.values()) {
+                    totalTownQuestsDone += (int) count;
+                }
+                if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
+                    LocalRandomizer.getInstance().unlockRandomRegion();
+                }
+                // Todo: Signal the APWorld that the next quest location is triggered
+            }
+            case GREEN_TOWN_QUESTS -> {
+                int totalTownQuestsDone = 0;
+                for (long count : greenCompletedTownQuests.values()) {
                     totalTownQuestsDone += (int) count;
                 }
                 if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
@@ -128,7 +233,7 @@ public class ArchipelagoData implements SaveFileContent {
             }
             case TOWN_EVENTS -> {
                 int totalTownEventsDone = 0;
-                for (long count : completedTownInnEvents.values()) {
+                for (long count : colorlessCompletedTownQuests.values()) {
                     totalTownEventsDone += (int) count;
                 }
                 if (totalTownEventsDone > 0 && totalTownEventsDone % totalTownEventsBreakpoint == 0) {
@@ -184,13 +289,8 @@ public class ArchipelagoData implements SaveFileContent {
 
     public boolean isRegionUnlocked(String regionName) {
         if (archipelagoMode == ArchipelagoMode.disabled) return true;
-
-        System.out.println("THIS: " + System.identityHashCode(this));
-        System.out.println("INSTANCE: " + System.identityHashCode(archipelagoDataInstance));
-
-        System.out.println("SET SIZE: " + lockedWorldRegionsByName.size());
-
-        if (archipelagoDataInstance.lockedWorldRegionsByName.contains(regionName)) {
+        lastTraversedRegion = regionName;
+        if (archipelagoDataInstance.lockedWorldRegionsByName.contains(lastTraversedRegion)) {
             return false;
         }
         return true;
@@ -306,20 +406,27 @@ public class ArchipelagoData implements SaveFileContent {
     public boolean addBossDefeated(String bossName) {
         boolean result = bossesDefeatedByName.add(bossName);
         switch (bossName.toLowerCase()) {
-            case "akroma":
+            case "akroma" -> {
                 updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_WHITE_DEFEATED);
-            case "lorthos":
+            }
+            case "lorthos" -> {
                 updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_BLUE_DEFEATED);
-            case "griselbrand":
+            }
+            case "griselbrand" -> {
                 updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_BLACK_DEFEATED);
-            case "lathliss":
+            }
+            case "lathliss" -> {
                 updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_RED_DEFEATED);
-            case "ghalta":
+            }
+            case "ghalta" -> {
                 updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_GREEN_DEFEATED);
-            case "emrakul":
+            }
+            case "emrakul" -> {
                 updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_COLORLESS_DEFEATED);
-            case "sliver queen":
+            }
+            case "sliver queen" -> {
                 updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_WUBRG_DEFEATED);
+            }
         }
         // Win condition is reached if all bosses have been defeated.
         if (bossesDefeatedByName.containsAll(mainBosses)) {
@@ -338,16 +445,46 @@ public class ArchipelagoData implements SaveFileContent {
 
     public void addCompletedTownInnEvents() {
         String townName = TileMapScene.instance().rootPoint.getDisplayName();
-        completedTownInnEvents.merge(townName, 1L, Long::sum);
-        System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + completedTownInnEvents.get(townName));
+        colorlessCompletedTownQuests.merge(townName, 1L, Long::sum);
+        System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + colorlessCompletedTownQuests.get(townName));
         updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOWN_EVENTS);
     }
 
     public void addCompletedQuests(AdventureQuestEvent event) {
         String townName = event.poi.getDisplayName();
-        completedTownQuests.merge(townName, 1L, Long::sum);
-        System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + completedTownQuests.get(townName));
-        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOWN_QUESTS);
+
+        switch (lastTraversedRegion) {
+            case "wastes" -> {
+                colorlessCompletedTownQuests.merge(townName, 1L, Long::sum);
+                System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + colorlessCompletedTownQuests.get(townName));
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.COLORLESS_TOWN_QUESTS);
+            }
+            case "white" -> {
+                whiteCompletedTownQuests.merge(townName, 1L, Long::sum);
+                System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + whiteCompletedTownQuests.get(townName));
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.WHITE_TOWN_QUESTS);
+            }
+            case "blue" -> {
+                blueCompletedTownQuests.merge(townName, 1L, Long::sum);
+                System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + blueCompletedTownQuests.get(townName));
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BLUE_TOWN_QUESTS);
+            }
+            case "black" -> {
+                blackCompletedTownQuests.merge(townName, 1L, Long::sum);
+                System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + blackCompletedTownQuests.get(townName));
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BLACK_TOWN_QUESTS);
+            }
+            case "red" -> {
+                redCompletedTownQuests.merge(townName, 1L, Long::sum);
+                System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + redCompletedTownQuests.get(townName));
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.RED_TOWN_QUESTS);
+            }
+            case "green" -> {
+                greenCompletedTownQuests.merge(townName, 1L, Long::sum);
+                System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + greenCompletedTownQuests.get(townName));
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.GREEN_TOWN_QUESTS);
+            }
+        }
     }
 
     public void addCardByRarity(String rarity) {
@@ -407,8 +544,32 @@ public class ArchipelagoData implements SaveFileContent {
     }
 
     public void addTotalBattlesWon(int amount) {
-        totalBattlesWon += amount;
-        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BATTLES_WON);
+        switch (lastTraversedRegion) {
+            case "wastes" -> {
+                totalBattlesWonColorless += amount;
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.COLORLESS_BATTLE_WON);
+            }
+            case "white" -> {
+                totalBattlesWonWhite += amount;
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.WHITE_BATTLE_WON);
+            }
+            case "blue" -> {
+                totalBattlesWonBlue += amount;
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BLUE_BATTLE_WON);
+            }
+            case "black" -> {
+                totalBattlesWonBlack += amount;
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BLACK_BATTLE_WON);
+            }
+            case "red" -> {
+                totalBattlesWonRed += amount;
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.RED_BATTLE_WON);
+            }
+            case "green" -> {
+                totalBattlesWonGreen += amount;
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.GREEN_BATTLE_WON);
+            }
+        }
     }
     /// --- End ---
 
@@ -477,8 +638,18 @@ public class ArchipelagoData implements SaveFileContent {
         LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
 
         // Load save data
-        loadStringLongMap(data, "townEvents", completedTownInnEvents);
-        loadStringLongMap(data, "townQuests", completedTownQuests);
+        loadStringLongMap(data, "colorlessTownEvents", colorlessCompletedTownInnEvents);
+        loadStringLongMap(data, "whiteTownEvents", whiteCompletedTownInnEvents);
+        loadStringLongMap(data, "blueTownEvents", blueCompletedTownInnEvents);
+        loadStringLongMap(data, "blackTownEvents", blackCompletedTownInnEvents);
+        loadStringLongMap(data, "redTownEvents", redCompletedTownInnEvents);
+        loadStringLongMap(data, "greenTownEvents", greenCompletedTownInnEvents);
+        loadStringLongMap(data, "colorlessTownQuests", colorlessCompletedTownQuests);
+        loadStringLongMap(data, "whiteTownQuests", whiteCompletedTownQuests);
+        loadStringLongMap(data, "blueTownQuests", blueCompletedTownQuests);
+        loadStringLongMap(data, "blackTownQuests", blackCompletedTownQuests);
+        loadStringLongMap(data, "redTownQuests", redCompletedTownQuests);
+        loadStringLongMap(data, "greenTownQuests", greenCompletedTownQuests);
         loadStringLongMap(data, "cardsByRarity", cardsEarnedByRarity);
         loadStringLongMap(data, "items", itemsGainedByName);
         loadStringLongMap(data, "packs", packsEarnedBySet);
@@ -506,7 +677,13 @@ public class ArchipelagoData implements SaveFileContent {
 
         setUnlockChecksRestAmount = data.containsKey("setUnlocksReceivedRest") ? data.readFloat("setUnlocksReceivedRest") : 0;
         receivedAmountOfSetUnlockChecks = data.containsKey("setUnlocksReceived") ? data.readInt("setUnlocksReceived") : 0;
-        totalBattlesWon = data.containsKey("totalBattlesWon") ? data.readInt("totalBattlesWon") : 0;
+        totalBattlesWonColorless = data.containsKey("totalBattlesWonColorless") ? data.readInt("totalBattlesWonColorless") : 0;
+        totalBattlesWonWhite = data.containsKey("totalBattlesWonWhite") ? data.readInt("totalBattlesWonWhite") : 0;
+        totalBattlesWonBlue = data.containsKey("totalBattlesWonBlue") ? data.readInt("totalBattlesWonBlue") : 0;
+        totalBattlesWonBlack = data.containsKey("totalBattlesWonBlack") ? data.readInt("totalBattlesWonBlack") : 0;
+        totalBattlesWonRed = data.containsKey("totalBattlesWonRed") ? data.readInt("totalBattlesWonRed") : 0;
+        totalBattlesWonGreen = data.containsKey("totalBattlesWonGreen") ? data.readInt("totalBattlesWonGreen") : 0;
+        lastTraversedRegion = data.containsKey("lastTraversedRegion") ? data.readString("lastTraversedRegion") : "wastes";
         totalGoldEarned = data.containsKey("totalGold") ? data.readInt("totalGold") : 0;
         totalExtraMaxLifeEarned = data.containsKey("extraLife") ? data.readInt("extraLife") : 0;
         totalShardsEarned = data.containsKey("shards") ? data.readInt("shards") : 0;
@@ -527,8 +704,18 @@ public class ArchipelagoData implements SaveFileContent {
         SaveFileData data = new SaveFileData();
         LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
 
-        saveStringLongMap(data, "townEvents", completedTownInnEvents);
-        saveStringLongMap(data, "townQuests", completedTownQuests);
+        saveStringLongMap(data, "colorlessTownEvents", colorlessCompletedTownInnEvents);
+        saveStringLongMap(data, "whiteTownEvents", whiteCompletedTownInnEvents);
+        saveStringLongMap(data, "blueTownEvents", blueCompletedTownInnEvents);
+        saveStringLongMap(data, "blackTownEvents", blackCompletedTownInnEvents);
+        saveStringLongMap(data, "redTownEvents", redCompletedTownInnEvents);
+        saveStringLongMap(data, "greenTownEvents", greenCompletedTownInnEvents);
+        saveStringLongMap(data, "colorlessTownQuests", colorlessCompletedTownQuests);
+        saveStringLongMap(data, "whiteTownQuests", whiteCompletedTownQuests);
+        saveStringLongMap(data, "blueTownQuests", blueCompletedTownQuests);
+        saveStringLongMap(data, "blackTownQuests", blackCompletedTownQuests);
+        saveStringLongMap(data, "redTownQuests", redCompletedTownQuests);
+        saveStringLongMap(data, "greenTownQuests", greenCompletedTownQuests);
         saveStringLongMap(data, "cardsByRarity", cardsEarnedByRarity);
         saveStringLongMap(data, "items", itemsGainedByName);
         saveStringLongMap(data, "packs", packsEarnedBySet);
@@ -555,7 +742,13 @@ public class ArchipelagoData implements SaveFileContent {
 
         data.store("setUnlocksReceivedRest", setUnlockChecksRestAmount);
         data.store("setUnlocksReceived", receivedAmountOfSetUnlockChecks);
-        data.store("totalBattlesWon", totalBattlesWon);
+        data.store("totalBattlesWonColorless", totalBattlesWonColorless);
+        data.store("totalBattlesWonWhite", totalBattlesWonWhite);
+        data.store("totalBattlesWonBlue", totalBattlesWonBlue);
+        data.store("totalBattlesWonBlack", totalBattlesWonBlack);
+        data.store("totalBattlesWonRed", totalBattlesWonRed);
+        data.store("totalBattlesWonGreen", totalBattlesWonGreen);
+        data.store("lastTraversedRegion", lastTraversedRegion);
         data.store("totalGold", totalGoldEarned);
         data.store("extraLife", totalExtraMaxLifeEarned);
         data.store("shards", totalShardsEarned);
