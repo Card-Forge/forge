@@ -66,12 +66,12 @@ public class ReplacementHandlerTest extends SimulationTest {
 
         // Add the replacement effect as a perpetual change to the card
         CardTraitChanges changes = new CardTraitChanges(
-            null, null, null,
+            null, null,
             Lists.newArrayList(re),
             null, null
         );
         creature.addPerpetual(new PerpetualAbilities(timestamp, changes));
-        creature.addChangedCardTraits(null, null, null,
+        creature.addChangedCardTraits(null, null,
             Lists.newArrayList(re), null, null, timestamp, 0);
 
         // Now move the card from hand to battlefield

@@ -4943,7 +4943,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void addChangedCardTraitsByText(Collection<SpellAbility> spells,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics, long timestamp, long staticId) {
         changedCardTraitsByText.put(timestamp, staticId, new CardTraitChanges(
-            spells, null, trigger, replacements, statics, e -> true
+            spells, trigger, replacements, statics, e -> true
         ));
 
         // setting card traits via text, does overwrite any other word change effects?
@@ -4952,16 +4952,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         updateChangedText();
     }
 
-    public final ICardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
+    public final ICardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
             Predicate<CardTraitBase> remove, long timestamp, long staticId) {
-        return addChangedCardTraits(spells, removedAbilities, trigger, replacements, statics, remove, timestamp, staticId, true);
+        return addChangedCardTraits(spells, trigger, replacements, statics, remove, timestamp, staticId, true);
     }
-    public final ICardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
+    public final ICardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
             Predicate<CardTraitBase> remove, long timestamp, long staticId, boolean updateView) {
         CardTraitChanges result = new CardTraitChanges(
-            spells, removedAbilities, trigger, replacements, statics, remove
+            spells, trigger, replacements, statics, remove
         );
         return addChangedCardTraits(result, timestamp, staticId, updateView);
     }
