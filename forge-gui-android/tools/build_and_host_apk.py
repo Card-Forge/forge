@@ -136,7 +136,9 @@ def build_apk(android_home: Path, *, output=None) -> None:
 
 
 def build_desktop(*, output=None) -> None:
-    run(["mvn", "-pl", "forge-gui-desktop", "-am", "package"], output=output)
+    env = os.environ.copy()
+    env["DISPLAY"] = ":1"
+    run(["mvn", "-pl", "forge-gui-desktop", "-am", "package"], env=env, output=output)
 
 
 def build_sidecar(*, output=None) -> None:

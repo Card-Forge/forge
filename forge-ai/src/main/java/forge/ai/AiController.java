@@ -2008,12 +2008,13 @@ public class AiController {
             if (spellAction.percentage() < threshold) continue;
             final String targetCard = spellAction.target();
             if (targetCard == null || targetCard.isEmpty()) continue;
+            final String targetAbility = spellAction.ability();
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
                 if (skipCounter && sa.getApi() == ApiType.Counter) continue;
                 sa.setActivatingPlayer(player);
                 final String cardName = sa.getHostCard() != null ? sa.getHostCard().getName() : "";
                 if (cardName.equalsIgnoreCase(targetCard) || cardName.contains(targetCard)) {
-                    if (canPlayAndPayFor(sa).willingToPlay()) {
+                    if (sidecarAbilityMatches(sa, targetAbility) && canPlayAndPayFor(sa).willingToPlay()) {
                         return sa;
                     }
                 }
@@ -2024,11 +2025,12 @@ public class AiController {
         if (abilityAction.isPresent() && abilityAction.get().percentage() >= threshold) {
             final String targetCard = abilityAction.get().target();
             if (targetCard != null && !targetCard.isEmpty()) {
+                final String targetAbility = abilityAction.get().ability();
                 for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
                     sa.setActivatingPlayer(player);
                     final String cardName = sa.getHostCard() != null ? sa.getHostCard().getName() : "";
                     if (cardName.equalsIgnoreCase(targetCard) || cardName.contains(targetCard)) {
-                        if (canPlayAndPayFor(sa).willingToPlay()) {
+                        if (sidecarAbilityMatches(sa, targetAbility) && canPlayAndPayFor(sa).willingToPlay()) {
                             return sa;
                         }
                     }
@@ -2036,6 +2038,35 @@ public class AiController {
             }
         }
         return null;
+    }
+
+    private static boolean sidecarAbilityMatches(final SpellAbility sa, final String requestedAbility) {
+        if (requestedAbility == null || requestedAbility.isBlank()) {
+            return true;
+        }
+        final String requested = requestedAbility.trim().toLowerCase(Locale.ROOT);
+        String desc = "";
+        try {
+            desc = sa.getDescription();
+        } catch (final RuntimeException ex) {
+            desc = "";
+        }
+        if (desc != null && !desc.isBlank()) {
+            final String normalized = desc.trim().toLowerCase(Locale.ROOT);
+            if (normalized.equals(requested) || normalized.contains(requested) || requested.contains(normalized)) {
+                return true;
+            }
+        }
+        try {
+            final String stack = sa.getStackDescription();
+            if (stack != null && !stack.isBlank()) {
+                final String normalized = stack.trim().toLowerCase(Locale.ROOT);
+                return normalized.equals(requested) || normalized.contains(requested) || requested.contains(normalized);
+            }
+        } catch (final RuntimeException ex) {
+            return false;
+        }
+        return false;
     }
 
     /**

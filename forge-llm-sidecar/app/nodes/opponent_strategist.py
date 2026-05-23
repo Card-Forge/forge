@@ -35,6 +35,14 @@ _STRATEGIST_SYSTEM_PROMPT = (
     "with a single JSON object and nothing else."
 )
 
+_ACTION_SYSTEM_PROMPT = (
+    "You are a Pro Tour-level Magic: The Gathering pilot choosing the AI's next "
+    "legal action. Use only the provided legal actions. Prefer casting spells "
+    "before activating abilities in normal development turns, but override that "
+    "when the deck guide and board state make an ability more important. Always "
+    "answer with a single JSON object and nothing else."
+)
+
 # Decisions worth the extra LLM latency. Routine priority passes at low
 # confidence skip the strategist and fall back to the deterministic inference.
 _ALWAYS_RUN_DECISIONS = {"mulligan", "combat", "critical"}
@@ -226,6 +234,186 @@ def _build_prompt(
         '  "threat_priorities": [{"name": string, "score": number, "reason": '
         "string}] ordered most-dangerous-first"
     )
+
+
+def _format_own_guide(guide: dict | None) -> str:
+    if not guide:
+        return "(no own-deck piloting guide available)"
+    parts = [
+        f"Own deck: {guide.get('archetype', '?')} ({guide.get('strategy_type', '?')})",
+        f"Overview: {guide.get('overview', '')}",
+    ]
+    gp = guide.get("game_plan") or {}
+    for key in ("early_game", "mid_game", "late_game"):
+        vals = gp.get(key) or []
+        if vals:
+            parts.append(f"{key}: " + "; ".join(vals[:4]))
+    if guide.get("key_cards"):
+        parts.append(
+            "Key cards: "
+            + "; ".join(
+                f"{c.get('name')} ({c.get('role')})"
+                for c in (guide.get("key_cards") or [])[:8]
+                if c.get("name")
+            )
+        )
+    if guide.get("sequencing_tips"):
+        parts.append("Sequencing: " + "; ".join((guide.get("sequencing_tips") or [])[:5]))
+    if guide.get("learnings"):
+        parts.append(
+            "Self-play learnings: "
+            + "; ".join(
+                (f"when {x.get('trigger')}, " if x.get("trigger") else "")
+                + (x.get("recommendation") or "")
+                for x in (guide.get("learnings") or [])[:5]
+            )
+        )
+    return "\n".join(p for p in parts if p)
+
+
+def _format_legal_actions(actions: list[dict]) -> str:
+    if not actions:
+        return "(none)"
+    lines = []
+    for i, action in enumerate(actions[:40], start=1):
+        typ = action.get("action_type", "")
+        card = action.get("card", "")
+        ability = action.get("ability", "") or "(default cast/play)"
+        cost = action.get("cost", "") or "no explicit cost"
+        zone = action.get("source_zone", "") or "unknown zone"
+        produces = "/".join(action.get("produces") or [])
+        produces_text = f"; produces {produces}" if produces else ""
+        lines.append(f"{i}. {typ}: {card}; ability={ability}; cost={cost}; zone={zone}{produces_text}")
+    return "\n".join(lines)
+
+
+def _build_action_prompt(state: GraphState) -> str:
+    own_board = ", ".join(state.get("own_board", []) or []) or "(empty)"
+    opp_board = ", ".join(state.get("opponent_board", []) or []) or "(empty)"
+    hand = ", ".join(state.get("hand", []) or []) or "(empty)"
+    gy = ", ".join(state.get("your_graveyard", []) or []) or "(empty)"
+    opp_hand = state.get("opponent_hand") or []
+    opp_read = "; ".join(
+        f"{g.get('category')} {int(float(g.get('probability') or 0) * 100)}%"
+        for g in opp_hand[:6]
+        if isinstance(g, dict)
+    ) or "(none)"
+    return (
+        f"Turn: {state.get('turn', 0)}\n"
+        f"Phase: {state.get('phase', '') or '?'}\n"
+        f"Life totals: {state.get('life_totals') or {}}\n"
+        f"AI hand: {hand}\n"
+        f"AI battlefield: {own_board}\n"
+        f"AI graveyard: {gy}\n"
+        f"Opponent archetype/read: {state.get('archetype', 'Unknown')} "
+        f"({float(state.get('confidence') or 0.0):.2f})\n"
+        f"Opponent battlefield: {opp_board}\n"
+        f"Opponent inferred hand buckets: {opp_read}\n\n"
+        f"OWN DECK GUIDANCE\n{_format_own_guide(state.get('piloting_guide'))}\n\n"
+        f"CURRENT LEGAL ACTIONS FROM FORGE\n{_format_legal_actions(state.get('legal_actions') or [])}\n\n"
+        "Choose the most important next action from CURRENT LEGAL ACTIONS. "
+        "In general, prefer PLAY_SPELL before ACTIVATE_ABILITY before PLAY_LAND, "
+        "but use the deck guide, phase, board, mana plan, and opponent read to "
+        "override that default. If activating an ability is best, return the "
+        "same card and ability text exactly as listed.\n"
+        "Respond with exactly this JSON shape:\n"
+        '{ "actions": ['
+        '{"action_type":"PLAY_SPELL|PLAY_LAND|ACTIVATE_ABILITY|PASS",'
+        '"target":"card name or empty", "ability":"exact ability text or empty",'
+        '"percentage":0-100, "reasoning":"one sentence"}'
+        "] }"
+    )
+
+
+def _legal_action_keys(state: GraphState) -> set[tuple[str, str, str]]:
+    keys: set[tuple[str, str, str]] = set()
+    for action in state.get("legal_actions") or []:
+        typ = str(action.get("action_type") or "").upper()
+        card = _norm(str(action.get("card") or ""))
+        ability = _norm(str(action.get("ability") or ""))
+        if typ and card:
+            keys.add((typ, card, ability))
+    return keys
+
+
+def _coerce_action_plan(raw: dict, state: GraphState) -> list[dict]:
+    if not isinstance(raw, dict):
+        return []
+    legal = _legal_action_keys(state)
+    out: list[dict] = []
+    for item in raw.get("actions") or []:
+        if not isinstance(item, dict):
+            continue
+        typ = str(item.get("action_type") or "").upper()
+        target = str(item.get("target") or "").strip()
+        ability = str(item.get("ability") or "").strip()
+        if typ == "PASS":
+            pass
+        elif (typ, _norm(target), _norm(ability)) not in legal:
+            if not ability and any(k[0] == typ and k[1] == _norm(target) for k in legal):
+                pass
+            else:
+                continue
+        try:
+            pct = float(item.get("percentage") or 0.0)
+        except (TypeError, ValueError):
+            pct = 0.0
+        out.append(
+            {
+                "action_type": typ,
+                "target": target,
+                "ability": ability,
+                "targets": None,
+                "percentage": max(0.0, min(100.0, pct)),
+                "reasoning": str(item.get("reasoning") or "").strip(),
+            }
+        )
+    return out[:5]
+
+
+def _merge_strategist_actions(existing: list[dict], planned: list[dict]) -> list[dict]:
+    if not planned:
+        return existing or []
+    return planned + [
+        a for a in (existing or [])
+        if not any(
+            (a.get("action_type") or "").upper() == (p.get("action_type") or "").upper()
+            and _norm(a.get("target") or "") == _norm(p.get("target") or "")
+            and _norm(a.get("ability") or "") == _norm(p.get("ability") or "")
+            for p in planned
+        )
+    ]
+
+
+async def _run_action_planner(state: GraphState) -> GraphState:
+    """Ask the strategist model to choose among Forge-provided legal actions,
+    including activated abilities. The result is validated against the legal
+    action list before it can influence the Java engine."""
+    if (
+        int(state.get("turn", 0) or 0) <= 0
+        or int(state.get("sidecar_influence", 50) or 0) <= 0
+        or not (state.get("legal_actions") or [])
+    ):
+        return {}
+    try:
+        log.info(
+            "llm_call node=opponent_strategist purpose=action_plan turn=%s legal=%s",
+            state.get("turn", 0),
+            len(state.get("legal_actions") or []),
+        )
+        raw = await generate_json(
+            _build_action_prompt(state),
+            system=_ACTION_SYSTEM_PROMPT,
+            model=CONFIG.strategist_model_name,
+            temperature=0.15,
+        )
+    except LLMError as exc:
+        log.warning("opponent_strategist: action planner failed (%s); keeping existing actions", exc)
+        return {}
+    planned = _coerce_action_plan(raw, state)
+    if not planned:
+        return {}
+    return {"actions": _merge_strategist_actions(state.get("actions") or [], planned)}
 
 
 def _valid_card_pool(profile: dict, revealed: set[str], fmt: str, archetype: str) -> set[str]:
@@ -609,7 +797,7 @@ async def opponent_strategist_node(state: GraphState) -> GraphState:
     mana planning, as two focused LLM calls run concurrently so total latency is
     the slower of the two, not their sum. Either branch is independently
     fail-soft; the node only ever enriches state."""
-    if not state.get("recognition_complete"):
+    if state.get("recognition_complete") is False:
         log.info("opponent_strategist: skipped because recognition is not complete")
         return state
 
@@ -625,9 +813,12 @@ async def opponent_strategist_node(state: GraphState) -> GraphState:
             return {}
         return await _run_opponent_inference(state, opp_profile, fmt, archetype)
 
-    opp_update, mana_update = await asyncio.gather(_opp(), _run_mana_planner(state))
+    opp_update, mana_update, action_update = await asyncio.gather(
+        _opp(), _run_mana_planner(state), _run_action_planner(state)
+    )
 
     out: GraphState = {**state}
     out.update(opp_update or {})
     out.update(mana_update or {})
+    out.update(action_update or {})
     return out

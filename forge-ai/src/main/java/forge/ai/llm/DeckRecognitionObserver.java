@@ -527,40 +527,40 @@ public final class DeckRecognitionObserver {
         final List<LegalAction> actions = new ArrayList<>();
         final Set<String> seen = new LinkedHashSet<>();
         try {
-            for (final Card card : aiPlayer.getCardsIn(ZoneType.Hand)) {
-                if (card == null || card.getName() == null) {
-                    continue;
-                }
-                for (final SpellAbility sa : card.getAllPossibleAbilities(aiPlayer, true)) {
-                    sa.setActivatingPlayer(aiPlayer);
-                    if (sa.isLandAbility()) {
-                        addLegalAction(actions, seen, "PLAY_LAND", card, sa);
-                    } else if (sa.isSpell()
-                            && canPayMana(sa)
-                            && ComputerUtilAbility.isFullyTargetable(sa)) {
-                        addLegalAction(actions, seen, "PLAY_SPELL", card, sa);
-                    }
-                }
-            }
-            for (final Card card : aiPlayer.getCardsIn(ZoneType.Battlefield)) {
-                if (card == null || card.getName() == null) {
-                    continue;
-                }
-                for (final SpellAbility sa : card.getAllPossibleAbilities(aiPlayer, true)) {
-                    sa.setActivatingPlayer(aiPlayer);
-                    if (!sa.isManaAbility()
-                            && !sa.isLandAbility()
-                            && !sa.isSpell()
-                            && canPayMana(sa)
-                            && ComputerUtilAbility.isFullyTargetable(sa)) {
-                        addLegalAction(actions, seen, "ACTIVATE_ABILITY", card, sa);
-                    }
-                }
-            }
+            collectLegalActionsFrom(actions, seen, ZoneType.Hand);
+            collectLegalActionsFrom(actions, seen, ZoneType.Battlefield);
+            collectLegalActionsFrom(actions, seen, ZoneType.Graveyard);
+            collectLegalActionsFrom(actions, seen, ZoneType.Flashback);
+            collectLegalActionsFrom(actions, seen, ZoneType.Exile);
+            collectLegalActionsFrom(actions, seen, ZoneType.Command);
         } catch (final RuntimeException ex) {
             Logger.debug("DeckRecognition: failed to collect legal actions: " + ex.getMessage());
         }
         return actions;
+    }
+
+    private void collectLegalActionsFrom(final List<LegalAction> actions, final Set<String> seen,
+                                         final ZoneType sourceZone) {
+        for (final Card card : aiPlayer.getCardsIn(sourceZone)) {
+            if (card == null || card.getName() == null) {
+                continue;
+            }
+            for (final SpellAbility sa : card.getAllPossibleAbilities(aiPlayer, true)) {
+                sa.setActivatingPlayer(aiPlayer);
+                if (sa.isLandAbility()) {
+                    addLegalAction(actions, seen, "PLAY_LAND", card, sa, sourceZone);
+                } else if (sa.isSpell()
+                        && canPayMana(sa)
+                        && ComputerUtilAbility.isFullyTargetable(sa)) {
+                    addLegalAction(actions, seen, "PLAY_SPELL", card, sa, sourceZone);
+                } else if (!sa.isManaAbility()
+                        && !sa.isLandAbility()
+                        && canPayMana(sa)
+                        && ComputerUtilAbility.isFullyTargetable(sa)) {
+                    addLegalAction(actions, seen, "ACTIVATE_ABILITY", card, sa, sourceZone);
+                }
+            }
+        }
     }
 
     private boolean canPayMana(final SpellAbility sa) {
@@ -574,18 +574,55 @@ public final class DeckRecognitionObserver {
     }
 
     private void addLegalAction(final List<LegalAction> actions, final Set<String> seen,
-                                final String actionType, final Card card, final SpellAbility sa) {
-        final String key = actionType + "\u0000" + card.getName();
+                                final String actionType, final Card card, final SpellAbility sa,
+                                final ZoneType sourceZone) {
+        final String ability = abilityText(sa);
+        final String cost = costText(sa);
+        final String key = actionType + "\u0000" + card.getName() + "\u0000" + ability + "\u0000" + sourceZone;
         if (!seen.add(key)) {
             return;
         }
         actions.add(new LegalAction(
                 actionType,
                 card.getName(),
+                ability,
+                cost,
+                sourceZone.name(),
                 "",
                 List.of(),
                 false,
                 sa.isLandAbility() ? producibleColors(card) : List.of()));
+    }
+
+    private static String abilityText(final SpellAbility sa) {
+        if (sa == null) {
+            return "";
+        }
+        try {
+            final String desc = sa.getDescription();
+            if (desc != null && !desc.isBlank()) {
+                return desc.replace('\n', ' ').trim();
+            }
+        } catch (final RuntimeException ex) {
+            // fall through
+        }
+        try {
+            final String stack = sa.getStackDescription();
+            return stack == null ? "" : stack.replace('\n', ' ').trim();
+        } catch (final RuntimeException ex) {
+            return "";
+        }
+    }
+
+    private static String costText(final SpellAbility sa) {
+        if (sa == null || sa.getPayCosts() == null) {
+            return "";
+        }
+        try {
+            return sa.getCostDescription() == null ? "" : sa.getCostDescription().replace('\n', ' ').trim();
+        } catch (final RuntimeException ex) {
+            return "";
+        }
     }
 
     /** Build the personality map from AI profile properties, or empty map. */

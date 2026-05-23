@@ -1188,6 +1188,12 @@ def card_specific_actions(
         for a in legal_actions or []
         if (a.get("action_type") or "").upper() == "PLAY_SPELL"
     }
+    legal_abilities = [
+        a
+        for a in legal_actions or []
+        if (a.get("action_type") or "").upper() == "ACTIVATE_ABILITY"
+        and (a.get("card") or "").strip()
+    ]
     lands = [
         hv for hv in hand_values
         if hv.get("role") == "land"
@@ -1292,9 +1298,47 @@ def card_specific_actions(
             {
                 "action_type": "PLAY_SPELL",
                 "target": hv["card"],
+                "ability": None,
                 "targets": None,
                 "percentage": max(0.0, min(95.0, adj)),
                 "reasoning": " ".join(reasons),
+            }
+        )
+
+    ability_scores: list[tuple[float, dict, str]] = []
+    for legal in legal_abilities:
+        card = (legal.get("card") or "").strip()
+        ability_text = (legal.get("ability") or "").strip()
+        blob = f"{card} {ability_text}".lower()
+        score = 44.0
+        reasons = ["Legal activated ability from current board."]
+        if any(word in blob for word in ("draw", "investigate", "surveil", "scry", "seek")):
+            score += 14.0
+            reasons.append("Generates selection or cards.")
+        if any(word in blob for word in ("destroy", "exile", "damage", "counter target", "-x/-x")):
+            score += 16.0
+            reasons.append("Can answer a threat.")
+        if any(word in blob for word in ("create", "token", "+1/+1 counter", "put two +1/+1")):
+            score += 10.0 if is_beatdown else 6.0
+            reasons.append("Develops pressure.")
+        if any(word in blob for word in ("sacrifice", "discard")):
+            score -= 8.0
+            reasons.append("Has a material resource cost.")
+        cost = (legal.get("cost") or "").strip()
+        if "tap" in cost.lower() or "{t}" in cost.lower():
+            score -= 4.0
+            reasons.append("Uses a tap resource.")
+        ability_scores.append((score, legal, " ".join(reasons)))
+    ability_scores.sort(key=lambda t: -t[0])
+    for score, legal, reason in ability_scores[:3]:
+        actions.append(
+            {
+                "action_type": "ACTIVATE_ABILITY",
+                "target": legal.get("card") or "",
+                "ability": legal.get("ability") or "",
+                "targets": None,
+                "percentage": max(0.0, min(90.0, score)),
+                "reasoning": reason,
             }
         )
 

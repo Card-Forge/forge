@@ -176,3 +176,39 @@ async def test_low_confidence_priority_skips(monkeypatch):
     state = _base_state(confidence=0.3, decision_type="priority")
     await strat.opponent_strategist_node(state)
     assert called["n"] == 0  # routine low-confidence decision: no extra call
+
+
+def test_action_plan_keeps_only_legal_abilities():
+    state = _base_state(
+        legal_actions=[
+            {
+                "action_type": "ACTIVATE_ABILITY",
+                "card": "Clue",
+                "ability": "{2}, Sacrifice this artifact: Draw a card.",
+            }
+        ]
+    )
+    raw = {
+        "actions": [
+            {
+                "action_type": "ACTIVATE_ABILITY",
+                "target": "Clue",
+                "ability": "{2}, Sacrifice this artifact: Draw a card.",
+                "percentage": 82,
+                "reasoning": "Use spare mana for cards.",
+            },
+            {
+                "action_type": "ACTIVATE_ABILITY",
+                "target": "Clue",
+                "ability": "Made up ability.",
+                "percentage": 99,
+                "reasoning": "Illegal.",
+            },
+        ]
+    }
+
+    out = strat._coerce_action_plan(raw, state)
+    assert len(out) == 1
+    assert out[0]["action_type"] == "ACTIVATE_ABILITY"
+    assert out[0]["target"] == "Clue"
+    assert out[0]["ability"] == "{2}, Sacrifice this artifact: Draw a card."

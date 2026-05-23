@@ -8,6 +8,9 @@ import com.google.gson.annotations.SerializedName;
 public record LegalAction(
         @SerializedName("action_type") String actionType,
         String card,
+        String ability,
+        String cost,
+        @SerializedName("source_zone") String sourceZone,
         String target,
         List<String> colors,
         @SerializedName("enters_tapped") boolean entersTapped,

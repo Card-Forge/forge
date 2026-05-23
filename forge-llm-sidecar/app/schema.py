@@ -59,6 +59,7 @@ class ActionScore(BaseModel):
         ""  # PLAY_SPELL | PLAY_LAND | ATTACK | BLOCK | ACTIVATE_ABILITY | MULLIGAN | PASS
     )
     target: str | None = None  # primary target (card name, "all_attackers", etc.)
+    ability: str | None = None  # exact activated/cast ability text when disambiguating a card
     targets: list[str] | None = None  # secondary / multiple targets
     percentage: float = 0.0  # 0.0–100.0 — how good this action is
     reasoning: str = ""
@@ -69,6 +70,9 @@ class LegalAction(BaseModel):
 
     action_type: str = ""
     card: str = ""
+    ability: str = ""
+    cost: str = ""
+    source_zone: str = ""
     target: str = ""
     colors: list[str] = Field(default_factory=list)
     enters_tapped: bool = False

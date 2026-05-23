@@ -140,6 +140,7 @@ public final class SidecarInfluence {
                 final ActionScore weightedAction = new ActionScore(
                         action.actionType(),
                         action.target(),
+                        action.ability(),
                         action.targets(),
                         adjusted,
                         action.reasoning()

@@ -12,6 +12,7 @@ import com.google.gson.annotations.SerializedName;
 public record ActionScore(
         @SerializedName("action_type") String actionType,
         String target,
+        String ability,
         List<String> targets,
         double percentage,
         String reasoning) {
@@ -19,8 +20,9 @@ public record ActionScore(
     /** Human-readable summary for the game log. */
     public String toLogMessage() {
         final String tgt = target != null && !target.isEmpty() ? " -> " + target : "";
-        return String.format("[Sidecar] %s%s (%.0f%%): %s",
-                actionType, tgt, percentage,
+        final String ab = ability != null && !ability.isEmpty() ? " [" + ability + "]" : "";
+        return String.format("[Sidecar] %s%s%s (%.0f%%): %s",
+                actionType, tgt, ab, percentage,
                 reasoning != null ? reasoning : "");
     }
 }
