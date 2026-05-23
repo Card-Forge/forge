@@ -711,7 +711,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         // try to remove Quest counter on something with enough counters for the
         // effect to continue
-        if (c > toRemove && (cost.counter == null || cost.counter.is(CounterEnumType.QUEST))) {
+        CounterType quest = CounterType.getType("QUEST");
+        if (c > toRemove && (cost.counter == null || quest == cost.counter)) {
             List<Card> prefs = CardLists.filter(typeList, crd -> {
                 // a Card without MaxQuestEffect doesn't need any Quest
                 // counters
@@ -719,19 +720,19 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 if (crd.hasSVar("MaxQuestEffect")) {
                     e = Integer.parseInt(crd.getSVar("MaxQuestEffect"));
                 }
-                return crd.getCounters(CounterEnumType.QUEST) > e;
+                return crd.getCounters(quest) > e;
             });
-            prefs.sort(Collections.reverseOrder(CardPredicates.compareByCounterType(CounterEnumType.QUEST)));
+            prefs.sort(Collections.reverseOrder(CardPredicates.compareByCounterType(quest)));
 
             for (final Card crd : prefs) {
                 int e = 0;
                 if (crd.hasSVar("MaxQuestEffect")) {
                     e = Integer.parseInt(crd.getSVar("MaxQuestEffect"));
                 }
-                int over = Math.min(crd.getCounters(CounterEnumType.QUEST) - e, c - toRemove);
+                int over = Math.min(crd.getCounters(quest) - e, c - toRemove);
                 if (over > 0) {
                     toRemove += over;
-                    table.put(null, crd, CounterEnumType.QUEST, over);
+                    table.put(null, crd, quest, over);
                 }
             }
         }
