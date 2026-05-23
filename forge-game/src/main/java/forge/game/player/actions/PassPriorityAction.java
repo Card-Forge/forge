@@ -55,12 +55,7 @@ public class PassPriorityAction extends PlayerAction {
     }
 
     private static boolean isCombatPhase(final PhaseType phase) {
-        return phase == PhaseType.COMBAT_BEGIN
-                || phase == PhaseType.COMBAT_DECLARE_ATTACKERS
-                || phase == PhaseType.COMBAT_DECLARE_BLOCKERS
-                || phase == PhaseType.COMBAT_FIRST_STRIKE_DAMAGE
-                || phase == PhaseType.COMBAT_DAMAGE
-                || phase == PhaseType.COMBAT_END;
+        return phase.name().startsWith("COMBAT_");
     }
 
     @Override

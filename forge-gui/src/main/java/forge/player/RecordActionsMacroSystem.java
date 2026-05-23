@@ -247,7 +247,8 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             playbackActions.remove(actionIndex);
             playbackRetries = 0;
             pendingStackOrderPriorityPasses = 0;
-            waitingForSelectionAfterStackOrder = action instanceof StackOrderAction && hasFutureSelectionAction();
+            waitingForSelectionAfterStackOrder = action instanceof StackOrderAction
+                    && findNextAction(SelectCardAction.class, SelectPlayerAction.class) >= 0;
             playerControllerHuman.getInputQueue().updateObservers();
             notifyStatusListeners();
             return result;
@@ -289,17 +290,13 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     @Override
     public String playbackText() {
         if (repeatIterations > 0) {
-            return playbackProgressText(repeatIteration, repeatIterations);
+            return repeatIteration + " / " + repeatIterations;
         }
         if (playbackActions.isEmpty()) {
             return null;
         }
 
-        return playbackProgressText(actions.size() - playbackActions.size(), actions.size());
-    }
-
-    private String playbackProgressText(final int current, final int total) {
-        return current + " / " + total;
+        return actions.size() - playbackActions.size() + " / " + actions.size();
     }
 
     public boolean startRecording() {
@@ -598,18 +595,20 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             final int passPriority = findNextAction(PassPriorityAction.class);
             final int finishAttack = findNextActionBefore(passPriority, FinishTargetingAction.class);
             final int actionBoundary = finishAttack >= 0 ? finishAttack : passPriority;
-            final int playerAction = findNextPlayerSelectionBefore(actionBoundary);
+            final int playerAction = findNextActionBefore(actionBoundary, SelectPlayerAction.class);
             if (playerAction >= 0) {
                 return processActionAt(playerAction);
             }
 
-            final int cardAction = findNextCardSelectionBefore(actionBoundary);
+            final int cardAction = findNextActionBefore(actionBoundary, SelectCardAction.class);
             final int cardResult = processActionAt(cardAction);
             if (cardResult >= 0) {
                 return cardResult;
             }
             if (cardAction >= 0) {
-                return waitForPendingAttackInputAction(inp, cardAction);
+                return findPendingPlayerCard(cardAction) == null ? NO_ACTION_ACCEPTED
+                        : waitForInput(inp, "waiting for postcombat main before "
+                                + playbackActions.get(cardAction).describe());
             }
             if (finishAttack >= 0) {
                 return processActionAt(finishAttack);
@@ -685,10 +684,10 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             return waitForInput(inp);
         } else if (inp instanceof InputPassPriority) {
             final int passPriority = findNextAction(PassPriorityAction.class);
-            final int cardAction = findNextCardSelectionBefore(passPriority);
+            final int cardAction = findNextActionBefore(passPriority, SelectCardAction.class);
             final int stackOrderAction = findNextActionBefore(cardAction, StackOrderAction.class);
             if (stackOrderAction >= 0 && !isStackEmpty()) {
-                if (hasSimultaneousStackEntries()) {
+                if (playerControllerHuman.getGame().getStack().hasSimultaneousStackEntries()) {
                     return WAIT_FOR_NEXT_INPUT;
                 }
                 if (pendingStackOrderPriorityPasses > 0) {
@@ -713,7 +712,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
                 return processActionAt(cardAction, () -> waitForPendingCardAction(inp, cardAction, stackOrderAction >= 0));
             }
 
-            final int playerAction = findNextPlayerSelectionBefore(passPriority);
+            final int playerAction = findNextActionBefore(passPriority, SelectPlayerAction.class);
             if (playerAction >= 0) {
                 return processActionAt(playerAction);
             }
@@ -781,22 +780,15 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             return waitForInput(input);
         }
         final int result = processActionAt(actionIndex);
-        if (result >= 0) {
-            return result;
-        }
-        return waitForInput(input);
+        return result >= 0 ? result : waitForInput(input);
     }
 
     private int processNextListSelectionAction(final InputSelectEntitiesFromList<?> selectInput) {
         for (int i = 0; i < playbackActions.size(); i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (!action.isSelectionAction()) {
-                continue;
+            if (action.isSelectionAction()) {
+                return processAction(action) ? i : finishListSelectionIfAny(selectInput);
             }
-            if (processAction(action)) {
-                return i;
-            }
-            return finishListSelectionIfAny(selectInput);
         }
         return finishListSelectionIfAny(selectInput);
     }
@@ -805,29 +797,17 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return input.getSelected().isEmpty() ? NO_ACTION_ACCEPTED : waitForInput(input);
     }
 
-    private boolean hasFutureSelectionAction() {
-        return findNextAction(SelectCardAction.class, SelectPlayerAction.class) >= 0;
-    }
-
     private boolean isPriorityInput(final Input input) {
         return input instanceof InputPassPriority || input instanceof InputAttack;
     }
 
-    private boolean isObsoleteStackPass(final PlayerAction action) {
-        final PassPriorityAction passPriorityAction = action.asPassPriorityAction();
-        return passPriorityAction != null && passPriorityAction.isObsoleteWhen(isStackEmpty());
-    }
-
     private boolean shouldSkipPassPriorityAction(final int actionIndex) {
         final PlayerAction action = playbackActions.get(actionIndex);
-        return isObsoleteStackPass(action)
-                || isStalePhasePass(action)
-                || isTrailingMainPhasePassBeforeNextIteration(actionIndex);
-    }
-
-    private boolean isStalePhasePass(final PlayerAction action) {
         final PassPriorityAction passPriorityAction = action.asPassPriorityAction();
-        return passPriorityAction != null && passPriorityAction.isStaleFor(getCurrentPhase());
+        return passPriorityAction != null
+                && (passPriorityAction.isObsoleteWhen(isStackEmpty())
+                || passPriorityAction.isStaleFor(getCurrentPhase()))
+                || isTrailingMainPhasePassBeforeNextIteration(actionIndex);
     }
 
     private boolean isTrailingMainPhasePassBeforeNextIteration(final int actionIndex) {
@@ -848,20 +828,12 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return !actions.isEmpty() && actions.get(0).asPassPriorityAction() == null;
     }
 
-    private boolean canReplayPassPriority(final PassPriorityAction action) {
-        return action.canReplay(isStackEmpty(), getCurrentPhase());
-    }
-
     private PhaseType getCurrentPhase() {
         return playerControllerHuman.getGame().getPhaseHandler().getPhase();
     }
 
     private boolean isStackEmpty() {
         return playerControllerHuman.getGame().getStack().isEmpty();
-    }
-
-    private boolean hasSimultaneousStackEntries() {
-        return playerControllerHuman.getGame().getStack().hasSimultaneousStackEntries();
     }
 
     private boolean waitForInterIterationStackClear() {
@@ -912,13 +884,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             return waitForInput(input, "waiting for attack declaration before " + action.describe());
         }
         return NO_ACTION_ACCEPTED;
-    }
-
-    private int waitForPendingAttackInputAction(final Input input, final int actionIndex) {
-        if (findPendingPlayerCard(actionIndex) == null) {
-            return NO_ACTION_ACCEPTED;
-        }
-        return waitForInput(input, "waiting for postcombat main before " + playbackActions.get(actionIndex).describe());
     }
 
     private int waitForInput(final Input input, final String debugMessage) {
@@ -1088,10 +1053,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return NO_ACTION_ACCEPTED;
     }
 
-    private int findNextCardSelectionBefore(final int endIndex) { return findNextActionBefore(endIndex, SelectCardAction.class); }
-
-    private int findNextPlayerSelectionBefore(final int endIndex) { return findNextActionBefore(endIndex, SelectPlayerAction.class); }
-
     private boolean noRemainingTargetSelectionsBefore(final int endIndex) {
         final int size = Math.min(endIndex, playbackActions.size());
         for (int i = 0; i < size; i++) {
@@ -1152,7 +1113,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
                 return debugResult(action, activateAbility(passPriorityInput, activateAbilityAction));
             }
         } else if (action instanceof PassPriorityAction passPriorityAction) {
-            if (input instanceof InputPassPriority && canReplayPassPriority(passPriorityAction)) {
+            if (input instanceof InputPassPriority && passPriorityAction.canReplay(isStackEmpty(), getCurrentPhase())) {
                 input.selectButtonOK();
                 return debugResult(action, true);
             }
