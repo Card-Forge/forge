@@ -2,6 +2,21 @@
 
 [Official repo](https://github.com/Card-Forge/forge.git).
 
+## Contents
+
+- [Requirements / Tools](#requirements--tools)
+- [Project Quick Setup](#project-quick-setup)
+  - [IntelliJ](#intellij)
+  - [Eclipse](#eclipse)
+  - [Windows](#windows)
+  - [Linux / Mac OSX](#linux--mac-osx)
+  - [Android Platform](#android-platform)
+  - [Proguard update](#proguard-update)
+- [Card Scripting](#card-scripting)
+- [General Notes](#general-notes)
+- [Using AI coding agents](#using-ai-coding-agents)
+- [Project Hierarchy](#project-hierarchy)
+
 ## Requirements / Tools
 
 - your favourite Java IDE (IntelliJ, Eclipse, VSCodium, Emacs, Vi...)
@@ -21,20 +36,20 @@
 - Go to the project location on your machine. Run Maven to download all dependencies and build a snapshot.
   - Example for Windows & Linux: `mvn -U -B clean -P windows-linux install`
 
-## IntelliJ
+### IntelliJ
 
 IntelliJ is the recommended IDE for Forge development. Quick start guide for [setting up the Forge project within IntelliJ](https://github.com/Card-Forge/forge/wiki/IntelliJ-setup).
 
-## Eclipse
+### Eclipse
 
 Eclipse includes Maven integration so a separate install is not necessary.
 Google no longer supports Android SDK releases for Eclipse.
 
-## Windows
+### Windows
 
 TBD
 
-## Linux / Mac OSX
+### Linux / Mac OSX
 
 TBD
 
@@ -60,7 +75,8 @@ Card scripting resources are found in the forge-gui/res/ path.
 
 ## General Notes
 
-Art files need to be copyright-free and they should be in the public domain.
+- Art files need to be copyright-free and they should be in the public domain. Credits and attribution should be included in [Credit and Thanks](https://github.com/Card-Forge/forge/wiki/Credit-and-Thanks).
+- If your contribution adds new UI elements consider the [UI guidelines](https://github.com/Card-Forge/forge/wiki/UI-Guidelines).
 
 ## Using AI coding agents
 
@@ -68,7 +84,7 @@ If you use an AI agent (e.g. Claude Code, OpenAI Codex) to substantially code a 
 
 Agents have a tendency to add unnecessary new unit or wiring tests to the CI suite. This should be avoided unless necessary to catch potential future integration regressions.
 
-### Project Hierarchy
+## Project Hierarchy
 
 Forge is divided into 4 primary projects with additional projects that target specific platform releases. The primary projects are:
 
