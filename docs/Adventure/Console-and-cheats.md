@@ -31,7 +31,7 @@ Commands themselves are case-sensitive. Arguments with spaces need double quotes
 | leave | Exits the current POI map (town/dungeon/cave) and returns you to the overworld |
 | remove enemy all | Removes all the enemies from the POI map or the overworld |
 | remove enemy nearest | Removes the nearest overworld enemy |
-| remove enemy &lt;object id&gt; | Removes the enemy from the current POI map (enemy object ids are defined in the POI's *.tmx file) |
+| remove enemy &lt;object id&gt; | Removes a specific enemy from the current POI map (enemy object ids are defined in the POI's *.tmx file) |
 | set event &lt;block name or edition code&gt; \[event format\] | Sets the competitive event at the current town POI with an inn (format is case-insensitive, such as Draft, Jumpstart, or Sealed; an omitted format will default to Draft, or Jumpstart for a Jumpstart block like "Dominaria United Jumpstart"; blocks are defined in blocks.txt; Constructed events are not currently implemented) |
 | setColorID &lt;color letters&gt; | Sets the player color identity (one or more of WUBRGC, one word, case-insensitive); probably used for testing and shops |
 | spawn enemy &lt;name&gt; | Spawns an enemy nearby in the overworld (not in a POI map; use a name or nameOverride defined in enemies.json, case-sensitive, as seen in-game) |
