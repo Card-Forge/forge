@@ -289,14 +289,17 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     @Override
     public String playbackText() {
         if (repeatIterations > 0) {
-            return localizer.getMessage("lblMacroPlaybackProgress", repeatIteration, repeatIterations);
+            return playbackProgressText(repeatIteration, repeatIterations);
         }
         if (playbackActions.isEmpty()) {
             return null;
         }
 
-        return localizer.getMessage("lblMacroPlaybackProgress",
-                actions.size() - playbackActions.size(), actions.size());
+        return playbackProgressText(actions.size() - playbackActions.size(), actions.size());
+    }
+
+    private String playbackProgressText(final int current, final int total) {
+        return current + " / " + total;
     }
 
     public boolean startRecording() {

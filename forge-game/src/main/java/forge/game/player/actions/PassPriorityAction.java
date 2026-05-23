@@ -26,16 +26,8 @@ public class PassPriorityAction extends PlayerAction {
 
     @Override
     public String describe() {
-        final String phaseText = phase == null ? "" : " " + localize("lblMacroActionDuringPhase", describePhase(phase));
+        final String phaseText = phase == null ? "" : " " + localize("lblMacroActionDuringPhase", phase.nameForUi);
         final String stackText = localize(stackWasEmpty ? "lblMacroStackEmpty" : "lblMacroStackNotEmpty");
         return localize("lblMacroActionPassPriority", phaseText, stackText);
-    }
-
-    private static String describePhase(final PhaseType phase) {
-        return switch (phase) {
-            case MAIN1 -> localize("lblMacroPhaseMain1");
-            case MAIN2 -> localize("lblMacroPhaseMain2");
-            default -> phase.nameForUi;
-        };
     }
 }
