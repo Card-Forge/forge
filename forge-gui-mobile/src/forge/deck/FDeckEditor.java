@@ -1,5 +1,6 @@
 package forge.deck;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
@@ -34,6 +35,7 @@ import forge.menu.*;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
+import forge.screens.match.views.VChat;
 import forge.screens.match.views.VLog;
 import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
@@ -330,6 +332,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     public static DeckEditorConfig EditorConfigSealed = new GameTypeDeckEditorConfig(GameType.Sealed,
             new FileDeckGroupController(FModel.getDecks().getSealed(), DeckGroup::new, DeckPreferences::setSealedDeck))
+            .setSideboardConfig(ItemManagerConfig.SEALED_POOL);
+    /** Editor for network-event sealed/draft pools stored in {@code getNetworkEventDecks()}. */
+    public static DeckEditorConfig EditorConfigNetworkEventPool = new GameTypeDeckEditorConfig(GameType.Sealed,
+            new FileDeckController<>(FModel.getDecks().getNetworkEventDecks(), Deck::new, null))
             .setSideboardConfig(ItemManagerConfig.SEALED_POOL);
     public static DeckEditorConfig EditorConfigWinston = new GameTypeDeckEditorConfig(GameType.Winston,
             new FileDeckGroupController(FModel.getDecks().getWinston(), DeckGroup::new, null));
@@ -747,7 +753,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public Deck getDeck() {
         return deck;
     }
-    private void setDeck(Deck deck) {
+    public void setDeck(Deck deck) {
         if (this.deck == deck) { return; }
         this.deck = deck;
         setHeaderText(getDeckController().getDeckDisplayName());
@@ -1123,6 +1129,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected final FLabel btnSave;
         protected final FLabel btnMoreOptions;
         protected FDisplayObject btnDraftLog;
+        protected ChatHeaderButton btnChat;
 
         protected DeckHeader() {
             setHeight(HEADER_HEIGHT);
@@ -1171,13 +1178,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth / 2));
                 btnDraftLog.setSize(width, height);
                 out.add(btnDraftLog);
+                remainingWidth -= width;
+            }
+            if(btnChat != null) {
+                float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth / 2));
+                btnChat.setSize(width, height);
+                out.add(btnChat);
             }
             return out;
         }
 
         public void initDraftLog(GameLog draftLog, FContainer parentScreen) {
-            VLog draftLogContainer = new VLog(() -> draftLog);
+            VLog draftLogContainer = new VLog(() -> draftLog, true);
             draftLogContainer.setDropDownContainer(parentScreen);
+            // Live-refresh the open dropdown so a remote player's pick shows without local interaction
+            draftLog.addObserver((o, arg) -> FThreads.invokeInEdtNowOrLater(draftLogContainer::refresh));
             this.btnDraftLog = new FLabel.ButtonBuilder()
                     .text(Localizer.getInstance().getMessage("lblEditorLog"))
                     .pressedColor(Header.getBtnPressedColor())
@@ -1186,6 +1201,47 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     .build();
             draftLogContainer.setDropdownOwner(btnDraftLog);
             this.add(btnDraftLog);
+        }
+
+        public VChat initChat(FContainer parentScreen) {
+            VChat chat = new VChat();
+            chat.setDropDownContainer(parentScreen);
+            this.btnChat = new ChatHeaderButton(new FLabel.ButtonBuilder()
+                    .text(Localizer.getInstance().getMessage("lblChat"))
+                    .pressedColor(Header.getBtnPressedColor())
+                    .command((e) -> chat.show())
+                    .font(FSkinFont.get(20)));
+            chat.setDropdownOwner(btnChat);
+            this.add(btnChat);
+            return chat;
+        }
+    }
+
+    /** Header chat button that renders the unread-message badge shared with the in-match chat tab. */
+    protected static class ChatHeaderButton extends FLabel implements IUnreadIndicator {
+        private int unreadCount;
+
+        protected ChatHeaderButton(Builder builder) {
+            super(builder);
+        }
+
+        @Override
+        public void incrementUnread() {
+            unreadCount++;
+            Gdx.graphics.requestRendering();
+        }
+
+        @Override
+        public void clearUnread() {
+            if (unreadCount == 0) { return; }
+            unreadCount = 0;
+            Gdx.graphics.requestRendering();
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            super.draw(g);
+            FMenuTab.drawUnreadBadge(g, unreadCount, getWidth());
         }
     }
 
@@ -1911,14 +1967,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    protected static class DeckSectionPage extends CardManagerPage {
+    public static class DeckSectionPage extends CardManagerPage {
         private final String captionPrefix;
-        protected final DeckSection deckSection;
+        public final DeckSection deckSection;
 
         protected DeckSectionPage(CardManager cardManager, DeckSection deckSection) {
             this(cardManager, deckSection, ItemManagerConfig.DECK_EDITOR);
         }
-        protected DeckSectionPage(CardManager cardManager, DeckSection deckSection, ItemManagerConfig config) {
+        public DeckSectionPage(CardManager cardManager, DeckSection deckSection, ItemManagerConfig config) {
             this(cardManager, deckSection, config, deckSection.getLocalizedShortName(), iconFromDeckSection(deckSection));
         }
         protected DeckSectionPage(CardManager cardManager, DeckSection deckSection, ItemManagerConfig config, String caption, FImage icon) {

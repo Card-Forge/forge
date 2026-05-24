@@ -17,7 +17,7 @@ public interface IDraftEventHandler {
     void draftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack);
     void receiveEventPool(String eventId, Deck pool);
 
-    /** Returns true if {@code event} was a draft event and was dispatched. */
+    /** Returns true if {@code event} was a recognized draft/event-pool event and was dispatched. */
     default boolean dispatch(NetEvent event) {
         if (event instanceof DraftPackArrivedEvent e) {
             draftPackArrived(e.getSeatIndex(), e.getPack(),

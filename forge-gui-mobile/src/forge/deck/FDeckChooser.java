@@ -601,6 +601,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.PRECONSTRUCTED_DECK);
                 cmbDeckTypes.addItem(DeckType.PRECON_COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
+                cmbDeckTypes.addItem(DeckType.NET_EVENT_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_STANDARD_DECK);
@@ -1058,6 +1059,10 @@ public class FDeckChooser extends FScreen {
                 pool = DeckProxy.getNetArchiveBlockDecks(NetDeckArchiveBlock);
                 config = ItemManagerConfig.NET_ARCHIVE_BLOCK_DECKS;
                 break;
+        case NET_EVENT_DECK:
+            pool = DeckProxy.getAllNetworkEventDecks();
+            config = ItemManagerConfig.NET_EVENT_DECKS;
+            break;
         case NET_DECK:
         case NET_COMMANDER_DECK:
             if (netDeckCategory != null) {
@@ -1356,12 +1361,7 @@ public class FDeckChooser extends FScreen {
                     NetDeckArchiveBlock = NetDeckArchiveBlock.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveBlock.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_BLOCK_DECK;
                 }
-                DeckType resolved = DeckType.valueOf(deckType);
-                // TODO: remove when network draft/sealed support is added to mobile.
-                if (resolved == DeckType.NET_EVENT_DECK) {
-                    return selectedDeckType;
-                }
-                return resolved;
+                return DeckType.valueOf(deckType);
             }
         }
         catch (IllegalArgumentException ex) {

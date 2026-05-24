@@ -55,7 +55,7 @@ import forge.util.GuiPrefBinders;
 
 public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     private static final ForgePreferences prefs = FModel.getPreferences();
-    private static final float PADDING = Utils.scale(5);
+    protected static final float PADDING = Utils.scale(5);
     public static final int MAX_PLAYERS = 4;
     private static final FSkinFont VARIANTS_FONT = FSkinFont.get(12);
 
@@ -911,6 +911,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         lblGamesInMatch.setVisible(visible);
         cbGamesInMatch.setVisible(visible);
         playersScroll.setVisible(visible);
+    }
+
+    protected void setVariantsVisible(boolean visible) {
+        lblVariants.setVisible(visible);
+        cbVariants.setVisible(visible);
     }
 
     public void setStartButtonAvailability() {

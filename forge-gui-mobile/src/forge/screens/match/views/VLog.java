@@ -39,11 +39,19 @@ public class VLog extends FDropDown {
     }
 
     protected final Supplier<GameLog> logSupplier;
+    private final boolean showAllEntries;
 
     protected FDisplayObject owner;
 
     public VLog(Supplier<GameLog> logSupplier) {
+        this(logSupplier, false);
+    }
+
+    /** {@code showAllEntries} bypasses the match-log verbosity preference — the draft
+     *  log holds only DRAFT entries, which the default verbosity would filter out. */
+    public VLog(Supplier<GameLog> logSupplier, boolean showAllEntries) {
         this.logSupplier = logSupplier;
+        this.showAllEntries = showAllEntries;
     }
 
     @Override
@@ -73,17 +81,28 @@ public class VLog extends FDropDown {
         g.fillRect(getRowColor(), 0, 0, w, h); //can fill background with main row color since drop down will never be taller than number of rows
     }
 
+    /** Re-lay out the open dropdown so newly added entries appear without reopening it. */
+    public void refresh() {
+        if (isVisible()) {
+            updateSizeAndPosition();
+        }
+    }
+
     @Override
     protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
         clear();
 
-        GameLogVerbosity verbosity = GameLogVerbosity.fromString(FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE));
         List<GameLogEntry> logEntrys;
-        if (verbosity == GameLogVerbosity.CUSTOM) {
-            logEntrys = logSupplier.get().getLogEntriesForTypes(
-                    FModel.getPreferences().getCustomLogTypes());
+        if (showAllEntries) {
+            logEntrys = logSupplier.get().getLogEntries(null);
         } else {
-            logEntrys = logSupplier.get().getLogEntriesForVerbosity(verbosity);
+            GameLogVerbosity verbosity = GameLogVerbosity.fromString(FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE));
+            if (verbosity == GameLogVerbosity.CUSTOM) {
+                logEntrys = logSupplier.get().getLogEntriesForTypes(
+                        FModel.getPreferences().getCustomLogTypes());
+            } else {
+                logEntrys = logSupplier.get().getLogEntriesForVerbosity(verbosity);
+            }
         }
 
         LogEntryDisplay logEntryDisplay;
