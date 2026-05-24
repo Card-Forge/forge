@@ -1,5 +1,6 @@
 package forge.adventure.stage;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.files.FileHandle;
@@ -75,6 +76,9 @@ public abstract class GameStage extends Stage {
     private float animationTimeout = 0;
     public static float maximumScrollDistance = 1.5f;
     public static float minimumScrollDistance = 0.3f;
+    private final Vector2 keyboardInput = new Vector2();
+    private final Vector2 controllerInput = new Vector2();
+    private final Vector2 touchInput = new Vector2();
 
     private String extraAnnouncement = "";
 
@@ -253,8 +257,7 @@ public abstract class GameStage extends Stage {
         if (MapStage.getInstance().isDialogOnlyInput() || isPaused()) {
             return true;
         }
-        player.getMovementDirection().x = controller.getAxis(0);
-        player.getMovementDirection().y = -controller.getAxis(1);
+        controllerInput.set(controller.getAxis(0), -controller.getAxis(1));
         if (player.getMovementDirection().len() < 0.2) {
             player.stop();
         }
@@ -354,6 +357,55 @@ public abstract class GameStage extends Stage {
 
     @Override
     public final void act(float delta) {
+        keyboardInput.setZero();
+
+        for (int key : KeyBinding.Left.getBindings()) {
+            if (Gdx.input.isKeyPressed(key)) {
+                keyboardInput.x = -1;
+                break;
+            }
+        }
+
+        for (int key : KeyBinding.Right.getBindings()) {
+            if (Gdx.input.isKeyPressed(key)) {
+                keyboardInput.x = 1;
+                break;
+            }
+        }
+
+        for (int key : KeyBinding.Up.getBindings()) {
+            if (Gdx.input.isKeyPressed(key)) {
+                keyboardInput.y = 1;
+                break;
+            }
+        }
+
+        for (int key : KeyBinding.Down.getBindings()) {
+            if (Gdx.input.isKeyPressed(key)) {
+                keyboardInput.y = -1;
+                break;
+            }
+        }
+
+
+        Vector2 dir = new Vector2();
+
+        // Input priority: touch > controller > keyboard
+        if (touchX >= 0 && touchInput.len() > 0.2f) {
+            dir.set(touchInput);
+
+        } else if (controllerInput.len() > 0.2f) {
+            dir.set(controllerInput);
+
+        } else {
+            dir.set(keyboardInput);
+        }
+        if (dir.len() < 0.01f) {
+            player.stop();
+        } else {
+            player.getMovementDirection().set(dir);
+        }
+
         super.act(delta);
 
         if (animationTimeout >= 0) {
@@ -375,7 +427,6 @@ public abstract class GameStage extends Stage {
             return;
         }
 
-
         if (onEndAction != null) {
 
             onEndAction.run();
@@ -384,14 +435,15 @@ public abstract class GameStage extends Stage {
 
         if (touchX >= 0) {
             Vector2 target = this.screenToStageCoordinates(new Vector2(touchX, touchY));
+
             target.x -= player.getWidth() / 2f;
             Vector2 diff = target.sub(player.pos());
 
             if (diff.len() < 2) {
-                diff.setZero();
-                player.stop();
+                touchInput.setZero();
+            } else {
+                touchInput.set(diff);
             }
-            player.setMovementDirection(diff);
         }
         camera.position.x = Math.min(Math.max(Scene.getIntendedWidth() / 2f, player.pos().x), getViewport().getWorldWidth() - Scene.getIntendedWidth() / 2f);
         camera.position.y = Math.min(Math.max(Scene.getIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.getIntendedHeight() / 2f);
@@ -422,16 +474,16 @@ public abstract class GameStage extends Stage {
         if (isPaused())
             return true;
         if (KeyBinding.Left.isPressed(keycode)) {
-            player.getMovementDirection().x = -1;
+            keyboardInput.x = -1;
         }
         if (KeyBinding.Right.isPressed(keycode)) {
-            player.getMovementDirection().x = +1;
+            keyboardInput.x = +1;
         }
         if (KeyBinding.Up.isPressed(keycode)) {
-            player.getMovementDirection().y = +1;
+            keyboardInput.y = +1;
         }
         if (KeyBinding.Down.isPressed(keycode)) {
-            player.getMovementDirection().y = -1;
+            keyboardInput.y = -1;
         }
         if (keycode == Input.Keys.F5)//todo config
         {
@@ -558,12 +610,10 @@ public abstract class GameStage extends Stage {
         if (isPaused())
             return true;
         if (KeyBinding.Left.isPressed(keycode) || KeyBinding.Right.isPressed(keycode)) {
-            player.getMovementDirection().x = 0;
             if (!player.isMoving())
                 stop();
         }
         if (KeyBinding.Down.isPressed(keycode) || KeyBinding.Up.isPressed(keycode)) {
-            player.getMovementDirection().y = 0;
             if (!player.isMoving())
                 stop();
         }
