@@ -153,10 +153,8 @@ public class DuelScene extends ForgeScene {
             if (enemy.getData().boss) {
                 // Check if the enemy's deck is stored in a path containing "miniboss" or just "boss".
                 if (enemy.getData().deck[0].toLowerCase().contains("miniboss")) {
-                    System.out.println("FORGE_ARCHIPELAGO: DETECTED MINI BOSS DEFEATED: " + enemyName);
                     ArchipelagoData.getInstance().addMiniBossDefeated(enemyName);
                 } else {
-                    System.out.println("FORGE_ARCHIPELAGO: DETECTED CASTLE BOSS DEFEATED: " + enemyName);
                     ArchipelagoData.getInstance().addBossDefeated(enemyName);
                 }
             }

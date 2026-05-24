@@ -14819,6 +14819,7 @@
 		"decks/miniboss/angel_rainbow_encounter.dck"
 	],
 	"ai": "",
+	"boss": true,
 	"difficulty": 0.2,
 	"speed": 20,
 	"life": 50,
@@ -20621,6 +20622,7 @@
 		"decks/miniboss/nahiri.dck"
 	],
 	"ai": "",
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -26386,6 +26388,7 @@
 		"decks/miniboss/teferi_boss.dck"
 	],
 	"ai": "",
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
@@ -26763,6 +26766,7 @@
 		"decks/miniboss/torturer.dck"
 	],
 	"ai": "",
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
@@ -27171,6 +27175,7 @@
 		"decks/miniboss/valyx.dck"
 	],
 	"ai": "",
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,

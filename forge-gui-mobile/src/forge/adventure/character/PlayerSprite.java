@@ -9,7 +9,7 @@ import forge.adventure.data.BiomeData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.Scene;
 import forge.adventure.stage.GameStage;
-import forge.adventure.util.ArchipelagoUtil;
+import forge.adventure.archipelago.ArchipelagoUtil;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.world.World;

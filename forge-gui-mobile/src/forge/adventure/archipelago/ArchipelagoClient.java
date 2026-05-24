@@ -1,7 +1,6 @@
-package forge.adventure.util;
+package forge.adventure.archipelago;
 
 import com.github.tommyettinger.textra.TypingLabel;
-import forge.adventure.archipelago.SlotData;
 import forge.adventure.archipelago.events.ConnectResult;
 import forge.adventure.archipelago.events.LocationChecked;
 import forge.adventure.archipelago.events.OnDeathLink;

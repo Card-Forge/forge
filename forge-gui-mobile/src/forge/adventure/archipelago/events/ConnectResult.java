@@ -3,7 +3,7 @@ package forge.adventure.archipelago.events;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.archipelago.SlotData;
-import forge.adventure.util.ArchipelagoClient;
+import forge.adventure.archipelago.ArchipelagoClient;
 import io.github.archipelagomw.events.ArchipelagoEventListener;
 import io.github.archipelagomw.events.ConnectionResultEvent;
 import io.github.archipelagomw.network.ConnectionResult;

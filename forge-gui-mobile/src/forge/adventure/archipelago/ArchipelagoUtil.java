@@ -1,4 +1,4 @@
-package forge.adventure.util;
+package forge.adventure.archipelago;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import forge.Graphics;
 import forge.adventure.data.RewardData;
+import forge.adventure.util.Config;
+import forge.adventure.util.Reward;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
 

@@ -24,9 +24,9 @@ public class ArchipelagoData implements SaveFileContent {
     // Todo: This works fine for singleplayer even when updates come out but the fact that the list of all sets can grow will cause problems in Archipelago due to a variable amount of checks.
     protected final Set<String> allCardSets = new HashSet<>();
     // List of teleportation runes that we use to gate regions
-    protected final Set<String> regionTeleportingRunes = new HashSet<>(Arrays.asList("White rune","Black rune","Blue rune","Red rune","Green rune"));
+    protected final Set<String> regionTeleportingRunes = new HashSet<>(Arrays.asList("white rune","black rune","blue rune","red rune","green rune"));
     // List of known main bosses that contribute to APWorld completion
-    private final Set<String> mainBosses = new HashSet<>(Arrays.asList("Lorthos","Emrakul","Lathliss","Ghalta","Griselbrand","Akroma","Sliver Queen"));
+    private final Set<String> mainBosses = new HashSet<>(Arrays.asList("lorthos","emrakul","lathliss","ghalta","griselbrand","akroma","sliver queen"));
 
     // Actual user data we want to store
     private final Map<String, Long> colorlessCompletedTownInnEvents = new HashMap<>();
@@ -75,7 +75,7 @@ public class ArchipelagoData implements SaveFileContent {
     private final int totalTownEventsBreakpoint = 1; // Reward for every 1 town events done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
 
-    public enum ARCHIPELAGO_CHECK_TYPES {COLORLESS_BATTLE_WON, WHITE_BATTLE_WON, BLUE_BATTLE_WON, BLACK_BATTLE_WON, RED_BATTLE_WON, GREEN_BATTLE_WON, COLORLESS_TOWN_QUESTS, WHITE_TOWN_QUESTS, BLUE_TOWN_QUESTS, BLACK_TOWN_QUESTS, RED_TOWN_QUESTS, GREEN_TOWN_QUESTS, TOWN_EVENTS, TOTAL_CARDS_EARNED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, BOSS_WUBRG_DEFEATED, WIN_CONDITION_CLEARED};
+    public enum ARCHIPELAGO_CHECK_TYPES {COLORLESS_BATTLE_WON, WHITE_BATTLE_WON, BLUE_BATTLE_WON, BLACK_BATTLE_WON, RED_BATTLE_WON, GREEN_BATTLE_WON, COLORLESS_TOWN_QUESTS, WHITE_TOWN_QUESTS, BLUE_TOWN_QUESTS, BLACK_TOWN_QUESTS, RED_TOWN_QUESTS, GREEN_TOWN_QUESTS, TOWN_EVENTS, TOTAL_CARDS_EARNED, MINIBOSS_DEFEATED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, BOSS_WUBRG_DEFEATED, WIN_CONDITION_CLEARED};
 
     private ArchipelagoData() {}
 
@@ -110,7 +110,6 @@ public class ArchipelagoData implements SaveFileContent {
         cardsEarnedByRarity.clear();
         itemsGainedByName.clear();
         packsEarnedBySet.clear();
-
         setsUnlockedByCode.clear();
         bossesDefeatedByName.clear();
         miniBossesDefeatedByName.clear();
@@ -251,6 +250,9 @@ public class ArchipelagoData implements SaveFileContent {
                 }
                 // Todo: Signal the APWorld that the next card location is triggered
             }
+            case MINIBOSS_DEFEATED -> {
+                // Todo: Signal the APWorld that the miniboss is defeated
+            }
             case BOSS_WHITE_DEFEATED -> {
                 // Todo: Signal the APWorld that the boss is defeated
             }
@@ -351,9 +353,10 @@ public class ArchipelagoData implements SaveFileContent {
         if (booster != null) {
             Current.player().addBooster(AdventureEventController.instance().generateBooster(setToUnlock));
             setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD + BOOSTER DETECTED: " + setToUnlock;
+            System.out.println(setUnlockedText);
         }
-        System.out.println(setUnlockedText);
-        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+        // Archipelago does not know what set will be unlocked, this randomized locally. Therefore, we always wanna show the player a notificatin.
+        if (archipelagoMode != ArchipelagoMode.disabled) {
             generateGameNotification(setUnlockedText);
         }
     }
@@ -400,11 +403,14 @@ public class ArchipelagoData implements SaveFileContent {
     // Note that the name of a boss is not unique so we'll need to filter from all enemies which have a `boss` value of `true`.
     // Returns `true` if the boss was not already defeated before.
     public boolean addMiniBossDefeated(String miniBossName) {
-        return miniBossesDefeatedByName.add(miniBossName);
+        boolean result = miniBossesDefeatedByName.add(miniBossName);
+        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.MINIBOSS_DEFEATED);
+        System.out.println("FORGE_ARCHIPELAGO: DETECTED MINI BOSS DEFEATED: " + miniBossName);
+        return result;
     }
 
     public boolean addBossDefeated(String bossName) {
-        boolean result = bossesDefeatedByName.add(bossName);
+        boolean result = bossesDefeatedByName.add(bossName.toLowerCase());
         switch (bossName.toLowerCase()) {
             case "akroma" -> {
                 updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_WHITE_DEFEATED);
@@ -432,6 +438,8 @@ public class ArchipelagoData implements SaveFileContent {
         if (bossesDefeatedByName.containsAll(mainBosses)) {
             updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.WIN_CONDITION_CLEARED);
         }
+
+        System.out.println("FORGE_ARCHIPELAGO: DETECTED CASTLE BOSS DEFEATED: " + bossName);
         return result;
     }
 
@@ -440,6 +448,7 @@ public class ArchipelagoData implements SaveFileContent {
     }
 
     public boolean addSetUnlockedByCode(String setCode) {
+        System.out.println("FORGE_ARCHIPELAGO: CARD SET REWARD: " + setCode);
         return setsUnlockedByCode.add(setCode);
     }
 
@@ -505,7 +514,7 @@ public class ArchipelagoData implements SaveFileContent {
     // Due to MapDialog.SetEffects() using just a name string to add items to the player's inventory, it's likely that the name is unique.
     // Todo: Verify that item names are unique.
     public void addItem(String itemName) {
-        if (regionTeleportingRunes.contains(itemName)) {
+        if (regionTeleportingRunes.contains(itemName.toLowerCase())) {
             // Unlock the region based on the color found in the itemName
             if (itemName.toLowerCase().contains("white")) {
                 addUnlockedRegionByName("white");
@@ -520,6 +529,7 @@ public class ArchipelagoData implements SaveFileContent {
             }
             String regionUnlockMessage = "FORGE_ARCHIPELAGO: REGION REWARD DETECTED: " + itemName;
             System.out.println(regionUnlockMessage);
+            // Only show added items when solo randomizer is enabled. otherwise Archipelago will already show a pop-up
             if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
                 generateGameNotification(regionUnlockMessage);
             }

@@ -27,6 +27,7 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.archipelago.ArchipelagoMode;
+import forge.adventure.archipelago.ArchipelagoUtil;
 import forge.adventure.archipelago.LocalRandomizer;
 import forge.adventure.character.*;
 import forge.adventure.data.*;

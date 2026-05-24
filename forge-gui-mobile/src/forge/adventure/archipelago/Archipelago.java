@@ -1,7 +1,6 @@
 package forge.adventure.archipelago;
 
 import com.github.tommyettinger.textra.TypingLabel;
-import forge.adventure.util.ArchipelagoClient;
 import io.github.archipelagomw.ClientStatus;
 
 import java.net.URISyntaxException;
