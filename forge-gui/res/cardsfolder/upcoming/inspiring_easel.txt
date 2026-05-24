@@ -1,0 +1,9 @@
+Name:Inspiring Easel
+ManaCost:U R
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add one mana of any color. Spend this mana only to cast an instant or sorcery spell.
+A:AB$ ChooseCard | Cost$ T | ChoiceZone$ Hand | Choices$ Instant.YouOwn,Sorcery.YouOwn | ChoiceTitle$ Choose an instant or sorcery card in your hand | SorcerySpeed$ True | SubAbility$ DBAnimate | SpellDescription$ Choose an instant or sorcery card in your hand. It perpetually incorporates {U}{R} and gains "When you cast this spell, copy it. You may choose new targets for the copy." Activate only as a sorcery.
+SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Incorporate$ U R | Triggers$ CastTrig | Duration$ Perpetual
+SVar:CastTrig:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When you cast this spell, copy it. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+Oracle:{T}: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell.\n{T}: Choose an instant or sorcery card in your hand. It perpetually incorporates {U}{R} and gains "When you cast this spell, copy it. You may choose new targets for the copy." Activate only as a sorcery.
