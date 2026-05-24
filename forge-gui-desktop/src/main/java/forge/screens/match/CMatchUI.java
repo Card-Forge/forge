@@ -296,6 +296,10 @@ public final class CMatchUI
     CPrompt getCPrompt() {
         return cPrompt;
     }
+    /** True if either prompt input button (OK/Cancel) is currently enabled. */
+    public boolean isInputButtonEnabled() {
+        return view.getBtnOK().isEnabled() || view.getBtnCancel().isEnabled();
+    }
     public CStack getCStack() {
         return cStack;
     }
