@@ -506,7 +506,6 @@ public class QuestWinLoseController {
 
         String title;
         if (qData.getFormat() == null) {
-
             final List<GameFormat> formats = new ArrayList<>();
             final String preferredFormat = FModel.getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
 
@@ -527,9 +526,7 @@ public class QuestWinLoseController {
             qData.getCards().addAllCards(cardsWon);
 
             title = Localizer.getInstance().getMessage("lblBonusFormatBoosterPack", selected.getName());
-
         } else {
-
             final List<String> sets = new ArrayList<>();
 
             for (final SealedTemplate bd : FModel.getMagicDb().getBoosters()) {
@@ -592,7 +589,6 @@ public class QuestWinLoseController {
 
             qData.getCards().addAllCards(cardsWon);
             title = Localizer.getInstance().getMessage("lblBonusSetBoosterPack", chooseEd.getName());
-
         }
 
         if (cardsWon != null) {

@@ -374,7 +374,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 localizer.getMessage("lblMana").toLowerCase());
         Map<Byte, Integer> result = new HashMap<>();
         if (vResult != null) { //fix for netplay
-            for (MagicColor.Color  color : colorSet) {
+            for (MagicColor.Color color : colorSet) {
                 if (vResult.containsKey(color)) {
                     result.put(color.getColorMask(), vResult.get(color));
                 }

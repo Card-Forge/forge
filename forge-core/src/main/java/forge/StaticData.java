@@ -416,7 +416,6 @@ public class StaticData {
         return this.allowCustomCardsInDecksConformance;
     }
 
-
     public void setStandardPredicate(Predicate<PaperCard> standardPredicate) { this.standardPredicate = standardPredicate; }
 
     public void setPioneerPredicate(Predicate<PaperCard> pioneerPredicate) { this.pioneerPredicate = pioneerPredicate; }
