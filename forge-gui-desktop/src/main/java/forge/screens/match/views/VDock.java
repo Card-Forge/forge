@@ -443,7 +443,9 @@ public class VDock implements IVDoc<CDock> {
             this.setOpaque(false);
             this.img = i0;
 
-            setButtonSize(this);
+            setPreferredSize(BUTTON_SIZE);
+            setMinimumSize(BUTTON_SIZE);
+            setMaximumSize(BUTTON_SIZE);
 
             // FMouseAdapter(true): drag past 3px suppresses the click action
             final FMouseAdapter adapter = new FMouseAdapter(true) {
@@ -664,12 +666,6 @@ public class VDock implements IVDoc<CDock> {
                 FSkin.drawImage(g, this.img, 0, 0, width, height);
             }
         }
-    }
-
-    private static void setButtonSize(final javax.swing.JComponent component) {
-        component.setPreferredSize(BUTTON_SIZE);
-        component.setMinimumSize(BUTTON_SIZE);
-        component.setMaximumSize(BUTTON_SIZE);
     }
 
 }
