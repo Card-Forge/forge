@@ -356,6 +356,23 @@ public abstract class GameLobby implements IHasGameType {
         }
     }
 
+    /** Formats one "name: problem" line, indenting any card list the problem appends. */
+    private static String legalityProblemEntry(final String name, final String problem) {
+        return name + ": " + problem.replace("\n", "\n    ");
+    }
+
+    /** Lists every illegal deck in one warning and offers to ignore it. Returns true if the user chose to continue anyway. */
+    private static boolean confirmIgnoreDeckLegality(final List<String> problems) {
+        final Localizer localizer = Localizer.getInstance();
+        final StringBuilder message = new StringBuilder(localizer.getMessage("lblDecksNotLegal"));
+        message.append('\n');
+        for (final String problem : problems) {
+            message.append('\n').append(problem);
+        }
+        return SOptionPane.showConfirmDialog(message.toString(), localizer.getMessage("lblInvalidDeck"),
+                localizer.getMessage("lblIgnore"), localizer.getMessage("lblCancel"), false);
+    }
+
     /** Returns a runnable to start a match with the applied variants if allowed. */
     public Runnable startGame() {
         final List<LobbySlot> activeSlots = Lists.newArrayListWithCapacity(getNumberOfSlots());
@@ -415,6 +432,7 @@ public abstract class GameLobby implements IHasGameType {
         }
 
         final boolean checkLegality = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
+        final List<String> legalityProblems = new ArrayList<>();
 
         //Auto-generated decks don't need to be checked here
         //Commander deck replaces regular deck and is checked later
@@ -424,8 +442,7 @@ public abstract class GameLobby implements IHasGameType {
                 final String name = slot.getName();
                 final String errMsg = deckFormat.getDeckConformanceProblem(slot.getDeck());
                 if (null != errMsg) {
-                    SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidDeck"));
-                    return null;
+                    legalityProblems.add(legalityProblemEntry(name, errMsg));
                 }
             }
         }
@@ -474,8 +491,7 @@ public abstract class GameLobby implements IHasGameType {
                     if (checkLegality) {
                         final String errMsg = commanderGameType.getDeckFormat().getDeckConformanceProblem(deck);
                         if (errMsg != null) {
-                            SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidCommanderGameTypeDeck", commanderGameType));
-                            return null;
+                            legalityProblems.add(legalityProblemEntry(name, errMsg));
                         }
                     }
                 }
@@ -491,8 +507,7 @@ public abstract class GameLobby implements IHasGameType {
                     if (checkLegality) {
                         final String errMsg = DeckFormat.getSchemeSectionConformanceProblem(schemePool);
                         if (null != errMsg) {
-                            SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidSchemeDeck"));
-                            return null;
+                            legalityProblems.add(legalityProblemEntry(name, errMsg));
                         }
                     }
                     schemes = schemePool == null ? Collections.emptyList() : schemePool.toFlatList();
@@ -503,8 +518,7 @@ public abstract class GameLobby implements IHasGameType {
                     if (checkLegality) {
                         final String errMsg = DeckFormat.getPlaneSectionConformanceProblem(planePool);
                         if (null != errMsg) {
-                            SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidPlanarDeck"));
-                            return null;
+                            legalityProblems.add(legalityProblemEntry(name, errMsg));
                         }
                     }
                     planes = planePool == null ? Collections.emptyList() : planePool.toFlatList();
@@ -533,6 +547,10 @@ public abstract class GameLobby implements IHasGameType {
                 }
             }
             playerToSlot.put(rp, slot);
+        }
+
+        if (!legalityProblems.isEmpty() && !confirmIgnoreDeckLegality(legalityProblems)) {
+            return null;
         }
 
         //if above checks succeed, return runnable that can be used to finish starting game
