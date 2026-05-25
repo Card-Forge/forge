@@ -54,30 +54,28 @@ public class InputConfirm extends InputSyncronizedBase {
         return InputConfirm.confirm(controller, card, message, true, defaultOptions);
     }
     public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final String message, final boolean defaultIsYes, final List<String> options) {
-         if (controller.getGui().isLibgdxPort()) {
-             return controller.getGui().confirm(card, message, defaultIsYes, options);
-         }
         return confirm(controller, card, null, message, defaultIsYes, options);
     }
     public static boolean confirm(final PlayerControllerHuman controller, final SpellAbility sa, final String message) {
         return InputConfirm.confirm(controller, sa, message, true, defaultOptions);
     }
     public static boolean confirm(final PlayerControllerHuman controller, final SpellAbility sa, final String message, final boolean defaultIsYes, final List<String> options) {
-         if (controller.getGui().isLibgdxPort()) {
-             if (sa == null)
-                 return controller.getGui().confirm(null, message, defaultIsYes, options);
-             if (sa.getTargets() != null && sa.getTargets().isTargetingAnyCard() && sa.getTargets().size() == 1)
-                 return controller.getGui().confirm((sa.getTargetCard()==null)?null:CardView.get(sa.getTargetCard()), message, defaultIsYes, options);
-             return controller.getGui().confirm(CardView.get(sa.getHostCard()), message, defaultIsYes, options);
-         }
-         return confirm(controller, null, sa, message, defaultIsYes, options);
+        return confirm(controller, null, sa, message, defaultIsYes, options);
     }
      public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final SpellAbility sa, final String message) {
          return InputConfirm.confirm(controller, card, sa, message, true, defaultOptions);
      }
      public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final SpellAbility sa, final String message, final boolean defaultIsYes, final List<String> options) {
          if (controller.getGui().isLibgdxPort()) {
-             return controller.getGui().confirm(card, message, defaultIsYes, options);
+             CardView dialogCard = card;
+             if (dialogCard == null && sa != null) {
+                 if (sa.getTargets() != null && sa.getTargets().isTargetingAnyCard() && sa.getTargets().size() == 1) {
+                     dialogCard = sa.getTargetCard() == null ? null : CardView.get(sa.getTargetCard());
+                 } else {
+                     dialogCard = CardView.get(sa.getHostCard());
+                 }
+             }
+             return controller.getGui().confirm(dialogCard, message, defaultIsYes, options);
          }
          InputConfirm inp;
          if (options.size() == 2) {
