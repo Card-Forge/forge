@@ -17,7 +17,7 @@ Base=Common:fromSheet("SPM cards")
 
 [Common-Borderless]
 Base=Common:fromSheet("SPM cards")
-Replace=.0416F fromSheet("SPM borderless")
+Replace=.0416F fromSheet("SPM source material")
 
 [Uncommon]
 Base=Uncommon:fromSheet("SPM cards")
@@ -415,6 +415,48 @@ Replace=0.05F BasicLand:fromSheet("SPM cards"):!fromSheet("SPM allied lands")
 1 Peter Parker|SPM|[232]
 1 Eddie Brock|SPM|[233]
 1 Miles Morales|SPM|[234]
+
+[source material]
+1 Comeuppance|MAR|[1]
+1 Leyline Binding|MAR|[2]
+1 Nine Lives|MAR|[3]
+1 Path to Exile|MAR|[4]
+1 Reprieve|MAR|[5]
+1 Rest in Peace|MAR|[6]
+1 Wedding Ring|MAR|[7]
+1 Clever Impersonator|MAR|[8]
+1 Counterspell|MAR|[9]
+1 Lorthos, the Tidemaker|MAR|[10]
+1 Mindbreak Trap|MAR|[11]
+1 Mystic Confluence|MAR|[12]
+1 Ponder|MAR|[13]
+1 Rite of Replication|MAR|[14]
+1 Traumatize|MAR|[15]
+1 Feed the Swarm|MAR|[16]
+1 Hex|MAR|[17]
+1 Infernal Grasp|MAR|[18]
+1 Opposition Agent|MAR|[19]
+1 Reanimate|MAR|[20]
+1 Saw in Half|MAR|[21]
+1 Skithiryx, the Blight Dragon|MAR|[22]
+1 Goblin Bombardment|MAR|[23]
+1 Najeela, the Blade-Blossom|MAR|[24]
+1 Relentless Assault|MAR|[25]
+1 Savage Beating|MAR|[26]
+1 Shock|MAR|[27]
+1 Thrill of Possibility|MAR|[28]
+1 Unexpected Windfall|MAR|[29]
+1 Winds of Change|MAR|[30]
+1 Arachnogenesis|MAR|[31]
+1 Arasta of the Endless Web|MAR|[32]
+1 Beast Within|MAR|[33]
+1 Heroic Intervention|MAR|[34]
+1 Hunter's Insight|MAR|[35]
+1 Parallel Lives|MAR|[36]
+1 Silkguard|MAR|[37]
+1 Tangle|MAR|[38]
+1 Alibou, Ancient Witness|MAR|[39]
+1 Terminate|MAR|[40]
 
 [tokens]
 2 u_3_3_illusion_villain @Anthony Devine
