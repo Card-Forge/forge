@@ -223,7 +223,6 @@ public class NetConnectUtil {
             }
             @Override
             public void close() {
-                GuiBase.setInterrupted(true);
                 onlineLobby.closeConn(Localizer.getInstance().getMessage("lblYourConnectionToHostWasInterrupted", url));
             }
             @Override
