@@ -39,7 +39,6 @@ public class CardThemedCommanderDeckBuilder extends CardThemedDeckBuilder {
         this.availableList = uniqueCardNamesForSingletonDeck(availableList);
         targetSize=format.getMainRange().getMinimum();
         colors = keyCard.getRules().getColorIdentity();
-        colors = ColorSet.combine(colors, keyCard.getRules().getColorIdentity());
         if (secondKeyCard != null && !format.equals(DeckFormat.Oathbreaker)) {
             colors = ColorSet.combine(colors, secondKeyCard.getRules().getColorIdentity());
             targetSize--;

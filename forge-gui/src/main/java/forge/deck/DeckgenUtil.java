@@ -693,29 +693,15 @@ public class DeckgenUtil {
 
             if (format.equals(DeckFormat.Oathbreaker)) {
                 //check for signature spells
-                List<PaperCard> signatureSpells = new ArrayList<>();
-                for (PaperCard c : preSelectedCards) {
-                    if (c.getRules().canBeSignatureSpell()) {
-                        signatureSpells.add(c);
-                    }
-                }
-
-                if (signatureSpells.size() > 0) { //pass signature spell as partner for simplicity
-                    selectedPartner = signatureSpells.get(MyRandom.getRandom().nextInt(signatureSpells.size()));
+                selectedPartner = getRandomSignatureSpell(preSelectedCards);
+                if (selectedPartner != null) { //pass signature spell as partner for simplicity
                     preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
                 }
             }
             else if (commander.getRules().canBePartnerCommander()) {
                 //check for partner commanders
-                List<PaperCard> partners = new ArrayList<>();
-                for (PaperCard c : preSelectedCards) {
-                    if (c.getRules().canBePartnerCommanders(commander.getRules())) {
-                        partners.add(c);
-                    }
-                }
-
-                if (partners.size() > 0) {
-                    selectedPartner = partners.get(MyRandom.getRandom().nextInt(partners.size()));
+                selectedPartner = getRandomPartnerCommander(preSelectedCards, commander);
+                if (selectedPartner != null) {
                     preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
                 }
             }
@@ -754,30 +740,12 @@ public class DeckgenUtil {
                 break;
             case Oathbreaker:
                 //check for signature spells
-                List<PaperCard> signatureSpells = new ArrayList<>();
-                for (PaperCard c : colorList) {
-                    if (c.getRules().canBeSignatureSpell()) {
-                        signatureSpells.add(c);
-                    }
-                }
-
-                if (signatureSpells.size() > 0) { //pass signature spell as partner for simplicity
-                    selectedPartner = signatureSpells.get(MyRandom.getRandom().nextInt(signatureSpells.size()));
-                }
+                selectedPartner = getRandomSignatureSpell(colorList); //pass signature spell as partner for simplicity
                 break;
             default:
                 if (commander.getRules().canBePartnerCommander()) {
                     //check for partner commanders
-                    List<PaperCard> partners = new ArrayList<>();
-                    for (PaperCard c : colorList) {
-                        if (c.getRules().canBePartnerCommanders(commander.getRules())) {
-                            partners.add(c);
-                        }
-                    }
-
-                    if (partners.size() > 0) {
-                        selectedPartner = partners.get(MyRandom.getRandom().nextInt(partners.size()));
-                    }
+                    selectedPartner = getRandomPartnerCommander(colorList, commander);
                 }
                 break;
             }
@@ -816,6 +784,31 @@ public class DeckgenUtil {
         }
 
         return deck;
+    }
+
+    private static PaperCard getRandomSignatureSpell(final Iterable<PaperCard> cards) {
+        final List<PaperCard> signatureSpells = new ArrayList<>();
+        for (final PaperCard card : cards) {
+            if (card.getRules().canBeSignatureSpell()) {
+                signatureSpells.add(card);
+            }
+        }
+        return getRandomCard(signatureSpells);
+    }
+
+    private static PaperCard getRandomPartnerCommander(final Iterable<PaperCard> cards, final PaperCard commander) {
+        final List<PaperCard> partners = new ArrayList<>();
+        for (final PaperCard card : cards) {
+            if (!card.getName().equals(commander.getName())
+                    && card.getRules().canBePartnerCommanders(commander.getRules())) {
+                partners.add(card);
+            }
+        }
+        return getRandomCard(partners);
+    }
+
+    private static PaperCard getRandomCard(final List<PaperCard> cards) {
+        return cards.isEmpty() ? null : cards.get(MyRandom.getRandom().nextInt(cards.size()));
     }
 
     private static List<Map.Entry<PaperCard, Integer>> getWeightedRandomizedCardPool(final List<Map.Entry<PaperCard, Integer>> potentialCards) {

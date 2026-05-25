@@ -63,8 +63,14 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
         return uniqueCards.toFlatList().stream()
                 .filter(format.isLegalCardPredicate())
                 .filter(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_BRAWL_COMMANDER.and(canPlay)))
+                .filter(CommanderDeckGenerator::canGenerateBrawlDeck)
                 .map(legend -> new CommanderDeckGenerator(legend, format, isForAi, isCardGen))
                 .collect(Collectors.toList());
+    }
+
+    private static boolean canGenerateBrawlDeck(final PaperCard legend) {
+        // The current random Brawl generator cannot reliably build a legal mana base for colorless commanders.
+        return !legend.getRules().getColorIdentity().isColorless();
     }
 
     private final PaperCard legend;

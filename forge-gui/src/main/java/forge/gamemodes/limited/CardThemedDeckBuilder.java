@@ -72,7 +72,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected static final boolean logToConsole = false;
     protected static final boolean logColorsToConsole = false;
 
-    protected Iterable<PaperCard> keyCards;
     protected Map<Integer,Integer> targetCMCs;
 
     public CardThemedDeckBuilder(IDeckGenPool pool, DeckFormat format){
@@ -326,8 +325,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
     //Extend to playsets for non land cards to fill out deck for when no other suitable cards are available
     protected void extendPlaysets(int numSpellsNeeded){
-        Map<PaperCard,Integer> currentCounts = new HashMap<>();
-        List<PaperCard> cardsToAdd = new ArrayList<>();
+        final Map<PaperCard,Integer> currentCounts = new HashMap<>();
+        final List<PaperCard> cardsToAdd = new ArrayList<>();
+        final Map<String, Integer> countsByName = getDeckListCountsByName();
         int i=0;
         for(PaperCard card: deckList){
             if(card.getRules().getType().isLand()){
@@ -336,8 +336,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             currentCounts.merge(card, 1, Integer::sum);
         }
         for(PaperCard card: currentCounts.keySet()){
-            if(currentCounts.get(card)==2 || currentCounts.get(card)==3){
-                cardsToAdd.add(card);
+            if((currentCounts.get(card)==2 || currentCounts.get(card)==3)
+                    && addCardForGeneration(card, cardsToAdd, countsByName)){
                 ++i;
                 if(i >= numSpellsNeeded ){
                     break;
@@ -375,43 +375,33 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected void addKeyCards(){
         // Add the first keycard if not land
         if(!keyCard.getRules().getMainPart().getType().isLand()) {
-            keyCards = IterableUtil.filter(aiPlayables, PaperCardPredicates.name(keyCard.getName()));
-            final List<PaperCard> keyCardList = Lists.newArrayList(keyCards);
-            deckList.addAll(keyCardList);
-            aiPlayables.removeAll(keyCardList);
-            rankedColorList.removeAll(keyCardList);
+            addKeyCardCopies(keyCard);
         }
         // Add the second keycard if not land
         if(secondKeyCard!=null && !secondKeyCard.getRules().getMainPart().getType().isLand()) {
-            final List<PaperCard> keyCardList = aiPlayables.stream()
-                    .filter(PaperCardPredicates.name(secondKeyCard.getName()))
-                    .collect(Collectors.toList());
-            deckList.addAll(keyCardList);
-            aiPlayables.removeAll(keyCardList);
-            rankedColorList.removeAll(keyCardList);
+            addKeyCardCopies(secondKeyCard);
         }
     }
 
     protected void addLandKeyCards(){
         // Add the deck card
         if(keyCard.getRules().getMainPart().getType().isLand()) {
-            keyCards = IterableUtil.filter(aiPlayables, PaperCardPredicates.name(keyCard.getName()));
-            final List<PaperCard> keyCardList = Lists.newArrayList(keyCards);
-            deckList.addAll(keyCardList);
-            aiPlayables.removeAll(keyCardList);
-            rankedColorList.removeAll(keyCardList);
-            landsNeeded--;
+            landsNeeded -= addKeyCardCopies(keyCard).size();
         }
         // Add the deck card
         if(secondKeyCard!=null && secondKeyCard.getRules().getMainPart().getType().isLand()) {
-            final List<PaperCard> keyCardList = aiPlayables.stream()
-                    .filter(PaperCardPredicates.name(secondKeyCard.getName()))
-                    .collect(Collectors.toList());
-            deckList.addAll(keyCardList);
-            aiPlayables.removeAll(keyCardList);
-            rankedColorList.removeAll(keyCardList);
-            landsNeeded--;
+            landsNeeded -= addKeyCardCopies(secondKeyCard).size();
         }
+    }
+
+    private List<PaperCard> addKeyCardCopies(final PaperCard card) {
+        final List<PaperCard> keyCardList = limitCopiesForGeneration(aiPlayables.stream()
+                .filter(PaperCardPredicates.name(card.getName()))
+                .collect(Collectors.toList()));
+        deckList.addAll(keyCardList);
+        aiPlayables.removeAll(keyCardList);
+        rankedColorList.removeAll(keyCardList);
+        return keyCardList;
     }
 
     public static class MatchColorIdentity implements Predicate<CardRules> {
@@ -451,7 +441,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             // We haven't yet ranked the off-color cards.
             // Compare them to the cards already in the deckList.
             //List<PaperCard> rankedOthers = CardRanker.rankCardsInPack(others, deckList, colors, true);
-            List<PaperCard> toAdd = new ArrayList<>();
+            final List<PaperCard> toAdd = new ArrayList<>();
             for (final PaperCard card : others) {
                 // Want a card that has just one "off" color.
                 final ColorSet off = colors.getOffColors(card.getRules().getColor());
@@ -465,16 +455,17 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                     .or(DeckGeneratorBase.COLORLESS_CARDS));
             final Iterable<PaperCard> threeColorList = IterableUtil.filter(aiPlayables,
                     PaperCardPredicates.fromRules(hasColor));
+            final Map<String, Integer> countsByName = getDeckListCountsByName();
             for (final PaperCard card : threeColorList) {
-                if (num > 0) {
-                    toAdd.add(card);
+                if (num <= 0) {
+                    break;
+                }
+                if (addCardForGeneration(card, toAdd, countsByName)) {
                     num--;
                     if (logToConsole) {
                         System.out.println("Third Color[" + num + "]:" + card.getName() + "("
                                 + card.getRules().getManaCost() + ")");
                     }
-                } else {
-                    break;
                 }
             }
             deckList.addAll(toAdd);
@@ -483,8 +474,10 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     }
 
     protected void addLowCMCCard(){
+        final Map<String, Integer> countsByName = getDeckListCountsByName();
         final PaperCard card = rankedColorList.stream()
                 .filter(PaperCardPredicates.IS_NON_LAND)
+                .filter(cardToAdd -> canAddCardForGeneration(cardToAdd, countsByName))
                 .findFirst().orElse(null);
         if (card != null) {
             deckList.add(card);
@@ -787,7 +780,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      */
     private void addNonBasicLands() {
         Iterable<PaperCard> lands = IterableUtil.filter(aiPlayables, PaperCardPredicates.IS_NONBASIC_LAND);
-        List<PaperCard> landsToAdd = new ArrayList<>();
+        final List<PaperCard> landsToAdd = new ArrayList<>();
+        final Map<String, Integer> countsByName = getDeckListCountsByName();
         int minBasics;//Keep a minimum number of basics to ensure playable decks
         if(colors.isColorless()) {
             minBasics = 0;
@@ -802,8 +796,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         for (final PaperCard card : lands) {
             if (landsNeeded > minBasics) {
                 // Use only lands that are within our colors
-                if (card.getRules().getDeckbuildingColors().hasNoColorsExcept(colors)) {
-                    landsToAdd.add(card);
+                if (card.getRules().getDeckbuildingColors().hasNoColorsExcept(colors)
+                        && addCardForGeneration(card, landsToAdd, countsByName)) {
                     landsNeeded--;
                 } else if (logToConsole) {
                     System.out.println("Excluding NonBasicLand: " + card.getName());
@@ -845,21 +839,39 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     }
 
     protected List<PaperCard> limitCopiesForGeneration(final List<PaperCard> cards) {
-        final Map<String, Integer> countsByName = new HashMap<>();
-        for (final PaperCard card : deckList) {
-            countsByName.merge(card.getName(), 1, Integer::sum);
-        }
+        final Map<String, Integer> countsByName = getDeckListCountsByName();
 
         final List<PaperCard> result = new ArrayList<>();
         for (final PaperCard card : cards) {
-            final String name = card.getName();
-            final int currentCount = countsByName.getOrDefault(name, 0);
-            if (currentCount < getMaxCopiesForGeneration(card)) {
-                result.add(card);
-                countsByName.put(name, currentCount + 1);
-            }
+            addCardForGeneration(card, result, countsByName);
         }
         return result;
+    }
+
+    private Map<String, Integer> getDeckListCountsByName() {
+        final Map<String, Integer> countsByName = new HashMap<>();
+        for (final PaperCard card : deckList) {
+            addCardToGenerationCounts(card, countsByName);
+        }
+        return countsByName;
+    }
+
+    private boolean canAddCardForGeneration(final PaperCard card, final Map<String, Integer> countsByName) {
+        return countsByName.getOrDefault(card.getName(), 0) < getMaxCopiesForGeneration(card);
+    }
+
+    private boolean addCardForGeneration(final PaperCard card, final List<PaperCard> cards,
+            final Map<String, Integer> countsByName) {
+        if (!canAddCardForGeneration(card, countsByName)) {
+            return false;
+        }
+        cards.add(card);
+        addCardToGenerationCounts(card, countsByName);
+        return true;
+    }
+
+    private void addCardToGenerationCounts(final PaperCard card, final Map<String, Integer> countsByName) {
+        countsByName.merge(card.getName(), 1, Integer::sum);
     }
 
     private int getMaxCopiesForGeneration(final PaperCard card) {
@@ -876,17 +888,19 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      *            number to add
      */
     private void addCards(final Iterable<PaperCard> cards, int num) {
-        List<PaperCard> cardsToAdd = new ArrayList<>();
+        final List<PaperCard> cardsToAdd = new ArrayList<>();
+        final Map<String, Integer> countsByName = getDeckListCountsByName();
         for (final PaperCard card : cards) {
             if(card.getRules().getMainPart().getType().isLand()){
                 continue;
             }
             if (num > 0) {
-                cardsToAdd.add(card);
-                if (logToConsole) {
-                    System.out.println("Extra needed[" + num + "]:" + card.getName() + " (" + card.getRules().getManaCost() + ")");
+                if (addCardForGeneration(card, cardsToAdd, countsByName)) {
+                    if (logToConsole) {
+                        System.out.println("Extra needed[" + num + "]:" + card.getName() + " (" + card.getRules().getManaCost() + ")");
+                    }
+                    num--;
                 }
-                num--;
             } else {
                 break;
             }
@@ -919,12 +933,17 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         final Map<Integer, Long> creatureCosts = deckList.stream().filter(PaperCardPredicates.IS_CREATURE)
             .collect(Collectors.groupingBy(c -> Ints.constrainToRange(c.getRules().getManaCost().getCMC(), 1, 6), Collectors.counting()));
 
-        List<PaperCard> creaturesToAdd = new ArrayList<>();
+        final List<PaperCard> creaturesToAdd = new ArrayList<>();
+        final Map<String, Integer> countsByName = getDeckListCountsByName();
         for (final PaperCard card : creatures) {
             int cmc = Ints.constrainToRange(card.getRules().getManaCost().getCMC(), 1, 6);
 
+            if (!canAddCardForGeneration(card, countsByName)) {
+                continue;
+            }
+
             if (creatureCosts.getOrDefault(cmc, 0l) < targetCMCs.get(cmc)) {
-                creaturesToAdd.add(card);
+                addCardForGeneration(card, creaturesToAdd, countsByName);
                 num--;
                 creatureCosts.merge(cmc, 1l, Long::sum);
                 if (logToConsole) {
