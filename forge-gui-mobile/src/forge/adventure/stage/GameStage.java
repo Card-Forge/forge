@@ -252,7 +252,6 @@ public abstract class GameStage extends Stage {
         showDialog();
     }
 
-
     public boolean axisMoved(Controller controller, int axisIndex, float value) {
         if (MapStage.getInstance().isDialogOnlyInput() || isPaused()) {
             return true;
@@ -267,7 +266,6 @@ public abstract class GameStage extends Stage {
         Fly
 
     }
-
 
     HashMap<PlayerModification, Float> currentModifications = new HashMap<>();
 
@@ -355,28 +353,24 @@ public abstract class GameStage extends Stage {
     @Override
     public final void act(float delta) {
         keyboardInput.setZero();
-
         for (int key : KeyBinding.Left.getBindings()) {
             if (Gdx.input.isKeyPressed(key)) {
                 keyboardInput.x = -1;
                 break;
             }
         }
-
         for (int key : KeyBinding.Right.getBindings()) {
             if (Gdx.input.isKeyPressed(key)) {
                 keyboardInput.x = 1;
                 break;
             }
         }
-
         for (int key : KeyBinding.Up.getBindings()) {
             if (Gdx.input.isKeyPressed(key)) {
                 keyboardInput.y = 1;
                 break;
             }
         }
-
         for (int key : KeyBinding.Down.getBindings()) {
             if (Gdx.input.isKeyPressed(key)) {
                 keyboardInput.y = -1;
@@ -384,9 +378,8 @@ public abstract class GameStage extends Stage {
             }
         }
 
-        Vector2 dir = new Vector2();
-
         // Input priority: touch > controller > keyboard
+        Vector2 dir = new Vector2();
         if (touchX >= 0 && touchInput.len() > 0.2f) {
             dir.set(touchInput);
 
@@ -462,7 +455,6 @@ public abstract class GameStage extends Stage {
     }
 
     abstract protected void onActing(float delta);
-
 
     @Override
     public boolean keyDown(int keycode) {
