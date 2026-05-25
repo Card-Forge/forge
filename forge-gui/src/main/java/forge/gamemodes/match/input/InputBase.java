@@ -25,7 +25,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
-import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
@@ -124,16 +123,10 @@ public abstract class InputBase implements java.io.Serializable, Input {
         controller.getGui().showPromptMessage(getOwner(), message);
     }
     protected final void showMessage(final String message, final SpellAbilityView sav) {
-        if (GuiBase.isNetPlay(controller.getGui())) //todo additional check to pass this
-            controller.getGui().showPromptMessage(getOwner(), message);
-        else
-            controller.getGui().showCardPromptMessage(getOwner(), message, sav.getHostCard());
+        controller.getGui().showCardPromptMessage(getOwner(), message, sav.getHostCard());
     }
     protected final void showMessage(final String message, final CardView card) {
-        if (GuiBase.isNetPlay(controller.getGui())) //todo additional check to pass this
-            controller.getGui().showPromptMessage(getOwner(), message);
-        else
-            controller.getGui().showCardPromptMessage(getOwner(), message, card);
+        controller.getGui().showCardPromptMessage(getOwner(), message, card);
     }
 
     protected String getTurnPhasePriorityMessage(final Game game) {
