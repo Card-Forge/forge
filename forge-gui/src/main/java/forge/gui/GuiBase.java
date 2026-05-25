@@ -10,7 +10,6 @@ public class GuiBase {
     private static IGuiBase guiInterface;
     private static boolean isAndroidport = false;
     private static String adventureDirectory = null;
-    private static boolean interrupted = false;
     private static int androidAPI = 0;
     private static String downloadsDir = "";
     private static boolean usingAppDirectory = false;
@@ -82,7 +81,4 @@ public class GuiBase {
         // to check all available IGuiGame
         return getInterface().hasNetGame();
     }
-
-    public static void setInterrupted(boolean value) { interrupted = value; }
-    public static boolean isInterrupted() { return interrupted; }
 }
