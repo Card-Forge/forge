@@ -262,9 +262,6 @@ public abstract class GameStage extends Stage {
             return true;
         }
         controllerInput.set(controller.getAxis(0), -controller.getAxis(1));
-        if (player.getMovementDirection().len() < 0.2) {
-            player.stop();
-        }
         return true;
     }
 
@@ -390,7 +387,6 @@ public abstract class GameStage extends Stage {
                 break;
             }
         }
-
 
         Vector2 dir = new Vector2();
 
