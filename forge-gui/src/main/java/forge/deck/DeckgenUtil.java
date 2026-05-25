@@ -32,6 +32,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /** 
  * Utility collection for various types of decks.
@@ -684,8 +685,7 @@ public class DeckgenUtil {
             }else {
                 String matrixKey = (format.equals(DeckFormat.TinyLeaders) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders
                 List<Map.Entry<PaperCard, Integer>> potentialCards = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(matrixKey).get(commander.getName()));
-                Collections.shuffle(potentialCards, MyRandom.getRandom());
-                for(Map.Entry<PaperCard,Integer> pair:potentialCards){
+                for(Map.Entry<PaperCard,Integer> pair:getWeightedRandomizedCardPool(potentialCards)){
                     if(format.isLegalCard(pair.getKey())) {
                         preSelectedCards.add(pair.getKey());
                     }
@@ -817,6 +817,25 @@ public class DeckgenUtil {
         }
 
         return deck;
+    }
+
+    private static List<Map.Entry<PaperCard, Integer>> getWeightedRandomizedCardPool(final List<Map.Entry<PaperCard, Integer>> potentialCards) {
+        final List<WeightedCommanderCard> weightedCards = new ArrayList<>();
+        for (final Map.Entry<PaperCard, Integer> cardEntry : potentialCards) {
+            weightedCards.add(new WeightedCommanderCard(cardEntry, getWeightedRandomSortKey(cardEntry)));
+        }
+        weightedCards.sort(Comparator.comparingDouble(WeightedCommanderCard::sortKey).reversed());
+        return weightedCards.stream()
+                .map(WeightedCommanderCard::cardEntry)
+                .collect(Collectors.toList());
+    }
+
+    private static double getWeightedRandomSortKey(final Map.Entry<PaperCard, Integer> cardEntry) {
+        final int weight = Math.max(1, cardEntry.getValue());
+        return Math.log(MyRandom.getRandom().nextDouble()) / weight;
+    }
+
+    private record WeightedCommanderCard(Map.Entry<PaperCard, Integer> cardEntry, double sortKey) {
     }
 
     public static Map<ManaCostShard, Integer> suggestBasicLandCount(Deck d) {

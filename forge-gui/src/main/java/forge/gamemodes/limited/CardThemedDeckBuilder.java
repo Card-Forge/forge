@@ -604,7 +604,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                         && !card.getRules().getMainPart().getType().isLand();
             }
         };
-        List<PaperCard> possibleList = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
+        List<PaperCard> possibleList = limitCopiesForFormat(Lists.newArrayList(pool.getAllCards(possibleFromFullPool)));
         //ensure we do not add more keycards in case they are commanders
         if (keyCard != null) {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard));
@@ -830,7 +830,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 && !card.getRules().getAiHints().getRemRandomDecks()
                 && !card.getRules().getMainPart().getType().isLand();
 
-        List<PaperCard> possibleList = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
+        List<PaperCard> possibleList = limitCopiesForFormat(Lists.newArrayList(pool.getAllCards(possibleFromFullPool)));
         //ensure we do not add more keycards in case they are commanders
         if (keyCard != null) {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard));
@@ -842,6 +842,24 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         //addManaCurveCards(CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize*3 <= possibleList.size() ? targetSize*3 : possibleList.size())),
                 //num, "Random Card");
         addManaCurveCards(possibleList, num, "Random Card");
+    }
+
+    protected List<PaperCard> limitCopiesForFormat(final List<PaperCard> cards) {
+        final Map<String, Integer> countsByName = new HashMap<>();
+        for (final PaperCard card : deckList) {
+            countsByName.merge(card.getName(), 1, Integer::sum);
+        }
+
+        final List<PaperCard> result = new ArrayList<>();
+        for (final PaperCard card : cards) {
+            final String name = card.getName();
+            final int currentCount = countsByName.getOrDefault(name, 0);
+            if (currentCount < format.getMaxCardCopies(card)) {
+                result.add(card);
+                countsByName.put(name, currentCount + 1);
+            }
+        }
+        return result;
     }
 
     /**

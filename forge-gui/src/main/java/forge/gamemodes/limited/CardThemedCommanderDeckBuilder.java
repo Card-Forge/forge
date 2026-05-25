@@ -1,6 +1,9 @@
 package forge.gamemodes.limited;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
@@ -20,7 +23,7 @@ public class CardThemedCommanderDeckBuilder extends CardThemedDeckBuilder {
 
     public CardThemedCommanderDeckBuilder(PaperCard commanderCard0, PaperCard partner0, final List<PaperCard> dList, boolean isForAI, DeckFormat format) {
         super(new DeckGenPool(FModel.getMagicDb().getCommonCards().getUniqueCards()), format);
-        this.availableList = dList;
+        this.availableList = new ArrayList<>(dList);
         keyCard = commanderCard0;
         secondKeyCard = partner0;
         // remove Unplayables
@@ -32,6 +35,8 @@ public class CardThemedCommanderDeckBuilder extends CardThemedDeckBuilder {
             this.aiPlayables = Lists.newArrayList(availableList);
         }
         this.availableList.removeAll(aiPlayables);
+        this.aiPlayables = uniqueCardNamesForSingletonDeck(aiPlayables);
+        this.availableList = uniqueCardNamesForSingletonDeck(availableList);
         targetSize=format.getMainRange().getMinimum();
         colors = keyCard.getRules().getColorIdentity();
         colors = ColorSet.combine(colors, keyCard.getRules().getColorIdentity());
@@ -60,6 +65,13 @@ public class CardThemedCommanderDeckBuilder extends CardThemedDeckBuilder {
     }
 
     @Override
+    protected void extendPlaysets(int numSpellsNeeded) {
+        // Commander-family formats are singleton except for basic lands and cards
+        // with explicit deckbuilding exceptions. Do not fill gaps by duplicating
+        // cards already selected for the main deck.
+    }
+
+    @Override
     protected void addThirdColorCards(int num) {
         //do nothing as we cannot add extra colours beyond commanders
     }
@@ -76,6 +88,27 @@ public class CardThemedCommanderDeckBuilder extends CardThemedDeckBuilder {
     @Override
     protected String generateName() {
         return keyCard.getName() +" based commander deck";
+    }
+
+    private List<PaperCard> uniqueCardNamesForSingletonDeck(final List<PaperCard> cards) {
+        final List<PaperCard> result = new ArrayList<>();
+        final Map<String, Integer> countsByName = new HashMap<>();
+        countsByName.put(keyCard.getName(), 1);
+        if (secondKeyCard != null) {
+            countsByName.put(secondKeyCard.getName(), 1);
+        }
+
+        for (final PaperCard card : cards) {
+            final int maxCopies = format.getMaxCardCopies(card);
+            final String name = card.getName();
+            final int currentCount = countsByName.getOrDefault(name, 0);
+            if (currentCount < maxCopies) {
+                result.add(card);
+                countsByName.put(name, currentCount + 1);
+            }
+        }
+
+        return result;
     }
 
 }
