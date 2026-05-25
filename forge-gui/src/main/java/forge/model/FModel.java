@@ -45,6 +45,7 @@ import forge.gamemodes.quest.QuestWorld;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.tournament.TournamentData;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.gui.card.CardPreferences;
 import forge.gui.interfaces.IProgressBar;
 import forge.item.PaperCard;
@@ -92,7 +93,6 @@ public final class FModel {
        ConquestUtil.updateRarityFilterOdds(cp);
        return cp;
     });
-    private static final Supplier<ForgePreferences> preferences = Suppliers.memoize(ForgePreferences::new);
     private static final Supplier<ForgeNetPreferences> netPreferences = Suppliers.memoize(ForgeNetPreferences::new);
     private static final Supplier<Map<GameType, AchievementCollection>> achievements = Suppliers.memoize(() -> {
         final Map<GameType, AchievementCollection> a = Maps.newHashMap();
@@ -364,7 +364,7 @@ public final class FModel {
     }
 
     public static ForgePreferences getPreferences() {
-        return preferences.get();
+        return GuiBase.getForgePrefs();
     }
     public static ForgeNetPreferences getNetPreferences() {
         return netPreferences.get();
