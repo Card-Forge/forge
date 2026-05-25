@@ -32,7 +32,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /** 
  * Utility collection for various types of decks.
@@ -820,22 +819,17 @@ public class DeckgenUtil {
     }
 
     private static List<Map.Entry<PaperCard, Integer>> getWeightedRandomizedCardPool(final List<Map.Entry<PaperCard, Integer>> potentialCards) {
-        final List<WeightedCommanderCard> weightedCards = new ArrayList<>();
+        final Map<Map.Entry<PaperCard, Integer>, Double> sortKeys = new IdentityHashMap<>();
         for (final Map.Entry<PaperCard, Integer> cardEntry : potentialCards) {
-            weightedCards.add(new WeightedCommanderCard(cardEntry, getWeightedRandomSortKey(cardEntry)));
+            sortKeys.put(cardEntry, getWeightedRandomSortKey(cardEntry));
         }
-        weightedCards.sort(Comparator.comparingDouble(WeightedCommanderCard::sortKey).reversed());
-        return weightedCards.stream()
-                .map(WeightedCommanderCard::cardEntry)
-                .collect(Collectors.toList());
+        potentialCards.sort(Comparator.comparingDouble(sortKeys::get).reversed());
+        return potentialCards;
     }
 
     private static double getWeightedRandomSortKey(final Map.Entry<PaperCard, Integer> cardEntry) {
         final int weight = Math.max(1, cardEntry.getValue());
         return Math.log(MyRandom.getRandom().nextDouble()) / weight;
-    }
-
-    private record WeightedCommanderCard(Map.Entry<PaperCard, Integer> cardEntry, double sortKey) {
     }
 
     public static Map<ManaCostShard, Integer> suggestBasicLandCount(Deck d) {
