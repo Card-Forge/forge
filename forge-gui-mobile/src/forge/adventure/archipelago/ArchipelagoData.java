@@ -62,7 +62,7 @@ public class ArchipelagoData implements SaveFileContent {
     private int totalBattlesWonRed = 0;
     private int totalBattlesWonGreen = 0;
     private int totalBattlesWonColorless = 0;
-    private String lastTraversedRegion = "wastes";
+    private String lastTraversedRegion = "waste";
 
     // List of unlockable checks
     // Todo: Fill list based on archipelago xml contents
@@ -126,7 +126,7 @@ public class ArchipelagoData implements SaveFileContent {
         totalBattlesWonRed = 0;
         totalBattlesWonGreen = 0;
         totalBattlesWonColorless = 0;
-        lastTraversedRegion = "wastes";
+        lastTraversedRegion = "waste";
 
         receivedAmountOfSetUnlockChecks = 0;
         setUnlockChecksRestAmount = 0f;
@@ -463,7 +463,7 @@ public class ArchipelagoData implements SaveFileContent {
         String townName = event.poi.getDisplayName();
 
         switch (lastTraversedRegion) {
-            case "wastes" -> {
+            case "waste" -> {
                 colorlessCompletedTownQuests.merge(townName, 1L, Long::sum);
                 System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + colorlessCompletedTownQuests.get(townName));
                 updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.COLORLESS_TOWN_QUESTS);
@@ -555,7 +555,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     public void addTotalBattlesWon(int amount) {
         switch (lastTraversedRegion) {
-            case "wastes" -> {
+            case "waste" -> {
                 totalBattlesWonColorless += amount;
                 updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.COLORLESS_BATTLE_WON);
             }
@@ -693,7 +693,7 @@ public class ArchipelagoData implements SaveFileContent {
         totalBattlesWonBlack = data.containsKey("totalBattlesWonBlack") ? data.readInt("totalBattlesWonBlack") : 0;
         totalBattlesWonRed = data.containsKey("totalBattlesWonRed") ? data.readInt("totalBattlesWonRed") : 0;
         totalBattlesWonGreen = data.containsKey("totalBattlesWonGreen") ? data.readInt("totalBattlesWonGreen") : 0;
-        lastTraversedRegion = data.containsKey("lastTraversedRegion") ? data.readString("lastTraversedRegion") : "wastes";
+        lastTraversedRegion = data.containsKey("lastTraversedRegion") ? data.readString("lastTraversedRegion") : "waste";
         totalGoldEarned = data.containsKey("totalGold") ? data.readInt("totalGold") : 0;
         totalExtraMaxLifeEarned = data.containsKey("extraLife") ? data.readInt("extraLife") : 0;
         totalShardsEarned = data.containsKey("shards") ? data.readInt("shards") : 0;
