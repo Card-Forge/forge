@@ -218,6 +218,18 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         searchChangeListener = listener;
     }
 
+    @Override
+    protected int getDisplayCount(final Iterable<Entry<DeckProxy, Integer>> items) {
+        int total = 0;
+        for (final Entry<DeckProxy, Integer> entry : items) {
+            final DeckProxy deck = entry.getKey();
+            if (!(deck instanceof DeckBrowserEntry) || ((DeckBrowserEntry) deck).isDeck()) {
+                total += entry.getValue();
+            }
+        }
+        return total;
+    }
+
     public void notifySearchChanged(final String searchText) {
         if (searchChangeListener != null) {
             searchChangeListener.accept(searchText);

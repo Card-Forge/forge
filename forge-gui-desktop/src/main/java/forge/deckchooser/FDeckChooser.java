@@ -1190,6 +1190,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         browserHasDecksHomeParent = false;
         clearBrowserListParent();
         sortBrowserRows(rows);
+        lstDecks.setCaption("Decks");
         lstDecks.setAllowMultipleSelections(false);
         final List<DeckProxy> displayedRows = setBrowserPoolAndSetup(rows);
         btnRandom.setText(localizer.getMessage("lblRandomDeck"));

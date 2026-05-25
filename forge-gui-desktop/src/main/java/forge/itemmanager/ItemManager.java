@@ -1078,21 +1078,27 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
 
         //update ratio of # in filtered pool / # in total pool
+        final int filteredCount = getDisplayCount(this.getFilteredItems());
         int total;
         if (!useFilter) {
-            total = this.getFilteredItems().countAll();
+            total = filteredCount;
         }
         else if (this.wantUnique) {
-            total = 0;
             final Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(this.pool, from -> from.getKey().getName());
-            for (final Entry<T, Integer> entry : items) {
-                total += entry.getValue();
-            }
+            total = getDisplayCount(items);
         }
         else {
-            total = this.pool.countAll();
+            total = getDisplayCount(this.pool);
         }
-        this.lblRatio.setText("(" + this.getFilteredItems().countAll() + " / " + total + ")");
+        this.lblRatio.setText("(" + filteredCount + " / " + total + ")");
+    }
+
+    protected int getDisplayCount(final Iterable<Entry<T, Integer>> items) {
+        int total = 0;
+        for (final Entry<T, Integer> entry : items) {
+            total += entry.getValue();
+        }
+        return total;
     }
 
     /**
