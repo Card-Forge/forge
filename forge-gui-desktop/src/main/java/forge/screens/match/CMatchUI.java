@@ -66,9 +66,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
-import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldMarker;
-import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.interfaces.IGameController;
 import forge.gui.FNetOverlay;
@@ -76,6 +74,7 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.gui.GuiUtils;
 import forge.gui.MenuScroller;
 import forge.gui.SOverlayUtils;
@@ -296,6 +295,10 @@ public final class CMatchUI
     }
     CPrompt getCPrompt() {
         return cPrompt;
+    }
+    /** True if either prompt input button (OK/Cancel) is currently enabled. */
+    public boolean isInputButtonEnabled() {
+        return view.getBtnOK().isEnabled() || view.getBtnCancel().isEnabled();
     }
     public CStack getCStack() {
         return cStack;
@@ -651,8 +654,8 @@ public final class CMatchUI
     }
 
     @Override
-    public void setSelectables(final Iterable<CardView> cards) {
-        super.setSelectables(cards);
+    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
+        super.setSelectables(cards, min, max);
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
@@ -681,7 +684,16 @@ public final class CMatchUI
                 }
             }
             FloatingZone.refreshAll();
+            FloatingZone.clearAllHotkeyAffordance();
         });
+    }
+
+    @Override
+    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
+        super.setHighlighted(entities, b);
+        if (isSelecting()) {
+            FThreads.invokeInEdtNowOrLater(FloatingZone::refreshSelectionPrompts);
+        }
     }
 
     @Override
@@ -802,10 +814,14 @@ public final class CMatchUI
     @Override
     public void updateButtons(final PlayerView owner, final String label1, final String label2, final boolean enable1, final boolean enable2, final boolean focus1) {
         final FButton btn1 = view.getBtnOK(), btn2 = view.getBtnCancel();
-        btn1.setText(label1);
-        btn2.setText(label2);
+        final boolean macroReplaying = getGameController() != null && getGameController().macros().isReplaying();
+        final boolean actualEnable1 = macroReplaying ? false : enable1;
+        final boolean actualEnable2 = macroReplaying ? true : enable2;
+        final boolean actualFocus1 = macroReplaying ? false : focus1;
+        btn1.setText(macroReplaying ? "" : label1);
+        btn2.setText(macroReplaying ? Localizer.getInstance().getMessage("lblCancel") : label2);
 
-        final FButton toFocus = enable1 && focus1 ? btn1 : (enable2 ? btn2 : null);
+        final FButton toFocus = actualEnable1 && actualFocus1 ? btn1 : (actualEnable2 ? btn2 : null);
 
         //pfps This seems wrong so I've commented it out for now and put a replacement in the runnable
         // Remove focusable so the right button grabs focus properly
@@ -818,10 +834,10 @@ public final class CMatchUI
             // The only button that is focusable is the enabled default button
             // This prevents the user from somehow focusing on on some other button
             // and then using the keyboard to try to select it
-            btn1.setEnabled(enable1);
-            btn2.setEnabled(enable2);
-            btn1.setFocusable(enable1 && focus1);
-            btn2.setFocusable(enable2 && !focus1);
+            btn1.setEnabled(actualEnable1);
+            btn2.setEnabled(actualEnable2);
+            btn1.setFocusable(actualEnable1 && actualFocus1);
+            btn2.setFocusable(actualEnable2 && !actualFocus1);
             // ensure we don't steal focus from an overlay
             if (toFocus != null && !FNetOverlay.SINGLETON_INSTANCE.getTxtInput().hasFocus() ) {
                 toFocus.requestFocus(); // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
@@ -833,6 +849,7 @@ public final class CMatchUI
         } else {
             FThreads.invokeInEdtAndWait(focusRoutine);
         }
+        getCDock().refreshMacroButtons();
     }
 
     @Override
@@ -1261,14 +1278,9 @@ public final class CMatchUI
     }
 
     @Override
-    public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
-        /*if ((sourceChoices != null && !sourceChoices.isEmpty() && sourceChoices.iterator().next() instanceof GameObject)
-                || (destChoices != null && !destChoices.isEmpty() && destChoices.iterator().next() instanceof GameObject)) {
-            System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
-            Thread.dumpStack();
-        }*/
-        return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, this);
+    public <T> OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final boolean showRememberCheckbox) {
+        return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, showRememberCheckbox, this);
     }
 
     @Override
@@ -1376,39 +1388,14 @@ public final class CMatchUI
                 final PhaseLabel label = pi.getLabelFor(phase);
                 label.setEnabled(prefs.getPrefBoolean(keys[p - 1]));
                 label.setOnToggled(() -> pushSkipPhaseToControllers(player, phase));
-                label.setOnRightClick(() -> handleYieldMarkerToggle(label, player, phase));
+                label.setOnRightClick(() -> handleYieldMarkerToggle(player, phase, () -> {
+                    label.setEnabled(true);
+                    label.repaintOnlyThisLabel();
+                }));
             }
         }
 
         seedYieldStateOnHost();
-    }
-
-    private void handleYieldMarkerToggle(final PhaseLabel label, final PlayerView phaseOwner, final PhaseType phase) {
-        PlayerView local = getCurrentPlayer();
-        if (local == null) {
-            return;
-        }
-        IGameController controller = getGameController(local);
-        if (controller == null) {
-            return;
-        }
-        YieldMarker existing = controller.getYieldController().getAutoPassUntilMarker();
-        boolean clickedSameLabel = existing != null
-                && phaseOwner.equals(existing.getPhaseOwner())
-                && phase == existing.getPhase();
-        if (clickedSameLabel) {
-            controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
-        } else {
-            // Setting a marker implies we want to stop here — un-skip the cell
-            // so the marker can fire (skip-phase pref + marker would skip past).
-            label.setEnabled(true);
-            label.repaintOnlyThisLabel();
-            boolean atOrPast = YieldController.isPriorityAtOrPastMarker(getGameView(), phaseOwner, phase);
-            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase, atOrPast));
-            // Pass current priority so the marker takes effect immediately.
-            controller.selectButtonOk();
-        }
-        refreshYieldUi(local);
     }
 
     @Override

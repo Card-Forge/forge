@@ -1,0 +1,10 @@
+Name:Vision, Synthezoid Avenger
+ManaCost:4
+Types:Legendary Creature Robot Hero
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player.NonActive | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell, if it isn't that player's turn, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBPhaseOut
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on NICKNAME.
+Svar:DBPhaseOut:DB$ Phases | Defined$ Self | SpellDescription$ NICKNAME phases out. (Treat him and anything attached to him as though they don't exist until your next turn.)
+Oracle:Flying\nWhenever a player casts a spell, if it isn't that player's turn, choose one —\n• Put a +1/+1 counter on Vision.\n• Vision phases out. (Treat him and anything attached to him as though they don't exist until your next turn.)

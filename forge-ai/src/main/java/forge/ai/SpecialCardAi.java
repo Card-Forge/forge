@@ -1198,27 +1198,13 @@ public class SpecialCardAi {
     public static class MairsilThePretender {
         // Scan the fetch list for a card with at least one activated ability.
         // TODO: can be improved to a full consider(sa, ai) logic which would scan the graveyard first and hand last
-        public static Card considerCardFromList(final CardCollection fetchList) {
-            for (Card c : CardLists.filter(fetchList, CardPredicates.ARTIFACTS.or(CardPredicates.CREATURES))) {
-                for (SpellAbility ab : c.getSpellAbilities()) {
-                    if (ab.isActivatedAbility()) {
-                        Player controller = c.getController();
-                        boolean wasCaged = false;
-                        for (Card caged : CardLists.filter(controller.getCardsIn(ZoneType.Exile),
-                                CardPredicates.hasCounter(CounterEnumType.CAGE))) {
-                            if (c.getName().equals(caged.getName())) {
-                                wasCaged = true;
-                                break;
-                            }
-                        }
-
-                        if (!wasCaged) {
-                            return c;
-                        }
-                    }
-                }
-            }
-            return null;
+        public static Card considerCardFromList(final CardCollection fetchList, SpellAbility sa) {
+            CardCollectionView caged = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Exile),
+                    CardPredicates.hasCounter(CounterType.getType("CAGE")));
+            return fetchList.stream().filter(CardPredicates.ARTIFACTS.or(CardPredicates.CREATURES))
+                .filter(c -> c.getSpellAbilities().stream().anyMatch(SpellAbility::isActivatedAbility))
+                .filter(c -> caged.stream().noneMatch(CardPredicates.sharesNameWith(c)))
+                .findFirst().orElse(null);
         }
     }
 
@@ -1680,11 +1666,12 @@ public class SpecialCardAi {
                                 return copy.getNetToughness() > 0;
                             })
             );
-            CardLists.sortByCmcDesc(creaturesToGet);
 
             if (creaturesToGet.isEmpty()) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+
+            CardLists.sortByCmcDesc(creaturesToGet);
 
             // pick the best creature that will stay on the battlefield
             Card best = creaturesToGet.getFirst();
@@ -1742,7 +1729,7 @@ public class SpecialCardAi {
 
             // Cards in hand that are below the max CMC affordable by the AI
             CardCollection belowMaxCMC = CardLists.filter(creatsInHand, CardPredicates.lessCMC(numManaSrcs - 1));
-            belowMaxCMC.sort(Collections.reverseOrder(CardLists.CmcComparatorInv));
+            belowMaxCMC.sort(CardLists.CmcComparator);
 
             // Cards in hand that are above the max CMC affordable by the AI
             CardCollection aboveMaxCMC = CardLists.filter(creatsInHand, CardPredicates.greaterCMC(numManaSrcs + 1));
@@ -1788,7 +1775,7 @@ public class SpecialCardAi {
         }
 
         public static Card considerCardToGet(final Player ai, final SpellAbility sa) {
-            CardCollectionView creatsInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.CREATURES);
+            CardCollection creatsInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.CREATURES);
             if (creatsInLib.isEmpty()) {
                 return null;
             }
@@ -1805,13 +1792,12 @@ public class SpecialCardAi {
             }
             atTargetCMCInLib.sort(CardLists.CmcComparatorInv);
 
-            Card bestInLib = atTargetCMCInLib != null ? atTargetCMCInLib.getFirst() : null;
+            Card bestInLib = atTargetCMCInLib.getFirst();
 
             if (bestInLib == null && ComputerUtil.isPlayingReanimator(ai)) {
                 // For Reanimator, we don't mind grabbing the biggest thing possible to recycle it again with SotF later.
-                CardCollection creatsInLibByCMC = new CardCollection(creatsInLib);
-                creatsInLibByCMC.sort(CardLists.CmcComparatorInv);
-                return creatsInLibByCMC.getFirst();
+                creatsInLib.sort(CardLists.CmcComparatorInv);
+                return creatsInLib.getFirst();
             }
 
             return bestInLib;
@@ -1827,7 +1813,7 @@ public class SpecialCardAi {
 
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             int lifeInDanger = aic.getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD);
-            int numCtrs = sa.getHostCard().getCounters(CounterEnumType.BURDEN);
+            int numCtrs = sa.getHostCard().getCounters(CounterType.getType("BURDEN"));
 
             if (ai.getLife() > numCtrs + 1 && ai.getLife() > lifeInDanger
                     && ai.getMaxHandSize() >= ai.getCardsIn(ZoneType.Hand).size() + numCtrs + 1) {

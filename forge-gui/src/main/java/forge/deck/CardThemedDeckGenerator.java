@@ -15,7 +15,7 @@ public class CardThemedDeckGenerator extends GeneratedDeckProxy implements Compa
         final List<DeckProxy> decks = new ArrayList<>();
             for (String card: CardArchetypeLDAGenerator.ldaPools.get(format.getName()).keySet()) {
                 //exclude non AI playables as keycards for AI decks
-                if (isForAi&&FModel.getMagicDb().getCommonCards().getUniqueByName(card).getRules().getAiHints().getRemAIDecks()) {
+                if (isForAi&&FModel.getMagicDb().getCommonCards().getRules(card, true).getAiHints().getRemAIDecks()) {
                     continue;
                 }
                 decks.add(new CardThemedDeckGenerator(card, format, isForAi));

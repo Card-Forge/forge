@@ -267,6 +267,7 @@ public final class ForgeConstants {
     public static final String DECK_OATHBREAKER_DIR       = DECK_BASE_DIR + "oathbreaker" + PATH_SEPARATOR;
     public static final String DECK_NET_DIR               = DECK_BASE_DIR + "net" + PATH_SEPARATOR;
     public static final String DECK_NET_ARCHIVE_DIR       = DECK_BASE_DIR + "archive" + PATH_SEPARATOR;
+    public static final String DECK_NET_EVENT_DIR         = DECK_BASE_DIR + "network-events" + PATH_SEPARATOR;
     public static final String QUEST_SAVE_DIR             = USER_QUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String CONQUEST_SAVE_DIR          = USER_CONQUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String DECK_TINY_LEADERS_DIR      = DECK_BASE_DIR + "tiny_leaders" + PATH_SEPARATOR;
@@ -325,6 +326,7 @@ public final class ForgeConstants {
             DECK_COMMANDER_DIR,
             DECK_OATHBREAKER_DIR,
             DECK_NET_DIR,
+            DECK_NET_EVENT_DIR,
             QUEST_SAVE_DIR,
             CACHE_TOKEN_PICS_DIR,
             CACHE_ICON_PICS_DIR,
@@ -337,7 +339,7 @@ public final class ForgeConstants {
 
     // URLs
     public static final String URL_CARDFORGE = "https://downloads.cardforge.org";
-    private static final String GITHUB_ASSETS_BASE = "https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/";
+    public static final String GITHUB_ASSETS_BASE = "https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/";
 
     public static final String URL_PIC_DOWNLOAD = URL_CARDFORGE + "/images/cards/";
     public static final String URL_TOKEN_DOWNLOAD = URL_CARDFORGE + "/images/tokens/";

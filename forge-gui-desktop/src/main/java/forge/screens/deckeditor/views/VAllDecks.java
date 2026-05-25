@@ -2,7 +2,6 @@ package forge.screens.deckeditor.views;
 
 import javax.swing.JPanel;
 
-import forge.deck.DeckProxy;
 import forge.deck.DeckType;
 import forge.game.GameType;
 import forge.deckchooser.FDeckChooser;
@@ -83,13 +82,6 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
         deckBrowser.populate();
         parentBody.add(deckBrowser, "push, grow");
-    }
-
-    public static void editPreferredDeck(DeckManager lstDecks, String preferredDeck) {
-        DeckProxy deckProxy = lstDecks.stringToItem(preferredDeck);
-        lstDecks.editDeck(deckProxy);
-        if (deckProxy != null)
-            lstDecks.setSelectedItem(deckProxy);
     }
 
     //========== Retrieval methods

@@ -22,6 +22,7 @@ import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckBrowserEntry;
+import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
@@ -441,15 +442,15 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 break;
             case Sealed:
                 screen = FScreen.DECK_EDITOR_SEALED;
-                editorCtrl = new CEditorLimited(FModel.getDecks().getSealed(), screen, getCDetailPicture());
+                editorCtrl = new CEditorLimited<>(FModel.getDecks().getSealed(), DeckGroup::new, screen, getCDetailPicture());
                 break;
             case Draft:
                 screen = FScreen.DECK_EDITOR_DRAFT;
-                editorCtrl = new CEditorLimited(FModel.getDecks().getDraft(), screen, getCDetailPicture());
+                editorCtrl = new CEditorLimited<>(FModel.getDecks().getDraft(), DeckGroup::new, screen, getCDetailPicture());
                 break;
             case Winston:
                 screen = FScreen.DECK_EDITOR_DRAFT;
-                editorCtrl = new CEditorLimited(FModel.getDecks().getWinston(), screen, getCDetailPicture());
+                editorCtrl = new CEditorLimited<>(FModel.getDecks().getWinston(), DeckGroup::new, screen, getCDetailPicture());
                 break;
 
             default:

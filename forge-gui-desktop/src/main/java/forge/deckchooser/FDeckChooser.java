@@ -686,12 +686,22 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateDecks(final Iterable<DeckProxy> decks) {
+        updateDecks(decks, null);
+    }
+
+    private void updateDecks(final Iterable<DeckProxy> decks, final ItemManagerConfig config) {
         updateBrowserOptions(decks, false, localizer.getMessage("lblRandomDeck"),
-                this::randomSelectBrowserDeck, new Integer[]{0});
+                this::randomSelectBrowserDeck, new Integer[]{0}, config);
     }
 
     private void updateBrowserOptions(final Iterable<DeckProxy> decks, final boolean allowMultipleSelections,
             final String randomText, final UiCommand randomCommand, final Integer[] defaultSelection) {
+        updateBrowserOptions(decks, allowMultipleSelections, randomText, randomCommand, defaultSelection, null);
+    }
+
+    private void updateBrowserOptions(final Iterable<DeckProxy> decks, final boolean allowMultipleSelections,
+            final String randomText, final UiCommand randomCommand, final Integer[] defaultSelection,
+            final ItemManagerConfig config) {
         lstDecks.setAllowMultipleSelections(allowMultipleSelections);
 
         final List<DeckProxy> rows = wrapGeneratedOptions(decks);
@@ -706,7 +716,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             rows.add(0, DeckBrowserEntry.parentFolder("", null));
             leadingRows = 1;
         }
-        final List<DeckProxy> displayedRows = setBrowserPoolAndSetup(rows);
+        final List<DeckProxy> displayedRows = setBrowserPoolAndSetup(rows, config);
 
         btnRandom.setText(randomText);
         btnRandom.setCommand(randomCommand);
@@ -902,11 +912,15 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private List<DeckProxy> setBrowserPoolAndSetup(final List<DeckProxy> rows) {
+        return setBrowserPoolAndSetup(rows, null);
+    }
+
+    private List<DeckProxy> setBrowserPoolAndSetup(final List<DeckProxy> rows, final ItemManagerConfig config) {
         final List<DeckProxy> displayedRows = browserSearchActive ? buildRecursiveSearchRows() : rows;
         browserHasDeckRows = containsDeckRows(displayedRows);
         browserHasCommanderDeckRows = containsCommanderDeckRows(displayedRows);
         lstDecks.setPool(displayedRows);
-        lstDecks.setup(getBrowserItemManagerConfig());
+        lstDecks.setup(config == null ? getBrowserItemManagerConfig() : config);
         return displayedRows;
     }
 
@@ -1640,6 +1654,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 : deckType + " - " + category.getName();
     }
 
+    private void updateNetEventDecks() {
+        updateDecks(DeckProxy.getAllNetworkEventDecks(), ItemManagerConfig.NET_EVENT_DECKS);
+    }
+
     public Deck getDeck() {
         final DeckProxy proxy = getSelectedDeckProxy();
         if (proxy == null) {
@@ -1879,6 +1897,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             case NET_DECK:
             case NET_COMMANDER_DECK:
                 updateBrowserRoot(deckType);
+                break;
+            case NET_EVENT_DECK:
+                updateNetEventDecks();
                 break;
             default:
                 break; //other deck types not currently supported here

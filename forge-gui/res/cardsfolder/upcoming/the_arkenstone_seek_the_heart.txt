@@ -1,0 +1,18 @@
+Name:The Arkenstone
+ManaCost:5
+Types:Legendary Artifact
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw a card.
+SVar:TrigDraw:DB$ Draw
+AlternateMode:Adventure
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control get +1/+1.\nAt the beginning of your end step, draw a card.
+
+ALTERNATE
+
+Name:Seek the Heart
+ManaCost:2 W
+Types:Sorcery Adventure
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Legendary | ChangeTypeDesc$ legendary creature | SpellDescription$ Search your library for a legendary creature card, reveal it, put it into your hand, then shuffle. (Then exile this card. You may cast the artifact later from exile.)
+DeckHints:Type$Legendary
+Oracle:Search your library for a legendary creature card, reveal it, put it into your hand, then shuffle. (Then exile this card. You may cast the artifact later from exile.)

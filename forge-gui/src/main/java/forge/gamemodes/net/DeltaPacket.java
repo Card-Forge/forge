@@ -6,7 +6,6 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
-import forge.gamemodes.net.server.RemoteClient;
 import forge.gamemodes.net.event.NetEvent;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
@@ -177,10 +176,6 @@ public final class DeltaPacket implements NetEvent {
             size += 4 + props.size() * 50; // key + properties
         }
         return size;
-    }
-
-    @Override
-    public void updateForClient(final RemoteClient client) {
     }
 
     @Override

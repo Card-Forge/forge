@@ -1,0 +1,12 @@
+Name:Lucky the Pizza Dog
+ManaCost:1 G
+Types:Legendary Creature Dog
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Cat,Dog,Hero | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a Cat, Dog, or Hero spell, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, if you gained life this turn, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$LifeYouGainedThisTurn
+SVar:PlayMain1:TRUE
+DeckHints:Type$Cat|Dog|Hero & Ability$LifeGain
+Oracle:Whenever you cast a Cat, Dog, or Hero spell, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")\nAt the beginning of each end step, if you gained life this turn, put a +1/+1 counter on Lucky.

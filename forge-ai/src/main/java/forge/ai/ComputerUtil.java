@@ -589,9 +589,7 @@ public class ComputerUtil {
 
         if (CardLists.getTotalCMC(typeList) < amount) return null;
 
-        // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
-        CardLists.sortByCmcDesc(typeList);
-        Collections.reverse(typeList);
+        typeList.sort(CardLists.CmcComparator);
 
         // TODO AI needs some improvements here
         // What's the best way to choose evidence to collect?
@@ -2843,15 +2841,15 @@ public class ComputerUtil {
         if (type.isKeywordCounter() && c.hasKeyword(type.toString())) {
             return CounterAiCategory.Neutral;
         }
-        if (type.is(CounterEnumType.BLAZE) && c.isLand()) {
+        if (type.is(CounterEnumType.TIME) && !c.isInPlay()) {
             return CounterAiCategory.Negative;
         }
-        if (type.is(CounterEnumType.TIME) && !c.isInPlay()) {
+        if (type == CounterType.getType("BLAZE") && c.isLand()) {
             return CounterAiCategory.Negative;
         }
         // Quest counter on a card without MaxQuestEffect are useless
         // this checks for over max quest to mark them negative
-        if (type.is(CounterEnumType.QUEST) && c.hasSVar("MaxQuestEffect")) {
+        if (type == CounterType.getType("QUEST") && c.hasSVar("MaxQuestEffect")) {
             if (c.getCounters(type) > Integer.parseInt(c.getSVar("MaxQuestEffect"))) {
                 return CounterAiCategory.Negative;
             }

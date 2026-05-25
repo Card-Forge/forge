@@ -20,6 +20,7 @@ import com.google.common.collect.Maps;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.GuiMobile;
 import forge.LobbyPlayer;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -38,14 +39,13 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldMarker;
-import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.match.HostedMatch;
 import forge.interfaces.IGameController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
@@ -515,8 +515,8 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public void setSelectables(final Iterable<CardView> cards) {
-        super.setSelectables(cards);
+    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
+        super.setSelectables(cards, min, max);
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
@@ -575,37 +575,12 @@ public class MatchController extends NetworkGuiGame {
                 final VPhaseIndicator.PhaseLabel label = pi.getLabel(phase);
                 label.setStopAtPhase(prefs.getPrefBoolean(keys[p - 1]));
                 label.setOnToggled(() -> instance.pushSkipPhaseToControllers(player, phase));
-                label.setOnLongPress(() -> instance.handleYieldMarkerToggle(label, player, phase));
+                label.setOnLongPress(() -> instance.handleYieldMarkerToggle(player, phase,
+                        () -> label.setStopAtPhase(true)));
             }
         }
 
         instance.seedYieldStateOnHost();
-    }
-
-    private void handleYieldMarkerToggle(final VPhaseIndicator.PhaseLabel label, final PlayerView phaseOwner, final PhaseType phase) {
-        PlayerView local = getCurrentPlayer();
-        if (local == null) {
-            return;
-        }
-        IGameController controller = getGameController(local);
-        if (controller == null) {
-            return;
-        }
-        YieldMarker existing = controller.getYieldController().getAutoPassUntilMarker();
-        boolean clickedSameLabel = existing != null
-                && phaseOwner.equals(existing.getPhaseOwner())
-                && phase == existing.getPhase();
-        if (clickedSameLabel) {
-            controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
-        } else {
-            // Setting a marker implies we want to stop here — un-skip the cell so the marker can fire.
-            label.setStopAtPhase(true);
-            boolean atOrPast = YieldController.isPriorityAtOrPastMarker(getGameView(), phaseOwner, phase);
-            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase, atOrPast));
-            // Pass current priority so the marker takes effect immediately.
-            controller.selectButtonOk();
-        }
-        refreshYieldUi(local);
     }
 
     public static void writeMatchPreferences() {
@@ -660,8 +635,8 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax, final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
-        return GuiBase.getInterface().order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices);
+    public <T> OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax, final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final boolean showRememberCheckbox) {
+        return ((GuiMobile) GuiBase.getInterface()).order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, showRememberCheckbox);
     }
 
     @Override

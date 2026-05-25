@@ -13,6 +13,7 @@ import forge.gamemodes.net.ProtocolMethod;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.interfaces.IMacroSystem;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.AutoYieldStore;
 import forge.util.ITriggerEvent;
 
@@ -84,11 +85,6 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void passPriorityUntilEndOfTurn() {
-        send(ProtocolMethod.passPriorityUntilEndOfTurn);
-    }
-
-    @Override
     public void passPriority() {
         send(ProtocolMethod.passPriority);
     }
@@ -142,19 +138,11 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public boolean shouldAutoYield(final String key) {
-        return yieldController.shouldAutoYield(key);
-    }
-    @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
         String storageKey = yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
         send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.CardAutoYield(storageKey, autoYield, isAbilityScope));
     }
 
-    @Override
-    public boolean getDisableAutoYields() {
-        return yieldController.getDisableAutoYields();
-    }
     @Override
     public void setDisableAutoYields(final boolean disable) {
         yieldController.setDisableAutoYields(disable);
@@ -162,19 +150,11 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public AutoYieldStore.TriggerDecision getTriggerDecision(final String key) {
-        return yieldController.getTriggerDecision(key);
-    }
-    @Override
     public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
         String storageKey = yieldController.setTriggerDecision(key, decision, isAbilityScope);
         send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(storageKey, decision, isAbilityScope));
     }
 
-    @Override
-    public boolean getDisableAutoTriggers() {
-        return yieldController.getDisableAutoTriggers();
-    }
     @Override
     public void setDisableAutoTriggers(final boolean disable) {
         yieldController.setDisableAutoTriggers(disable);
@@ -187,15 +167,7 @@ public class NetGameController implements IGameController {
 
     @Override
     public void applyYieldUpdate(final YieldUpdate update) {
-        // Local self-apply for marker/stack-yield user actions that route through
-        // sendYieldUpdate. Other cases dispatch via dedicated setters above.
-        if (update instanceof YieldUpdate.SetMarker u) {
-            yieldController.setMarker(u.phaseOwner(), u.phase(), u.atOrPastAtClick());
-        } else if (update instanceof YieldUpdate.ClearMarker) {
-            yieldController.clearMarker();
-        } else if (update instanceof YieldUpdate.StackYield u) {
-            yieldController.setAutoPassUntilStackEmpty(u.active());
-        }
+        yieldController.apply(update);
     }
 
     /**
@@ -215,6 +187,11 @@ public class NetGameController implements IGameController {
      */
     public void seedYieldStateOnHost(Map<PlayerView, EnumSet<PhaseType>> skipPhases) {
         send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SeedFromClient(yieldController.buildClientSnapshot(skipPhases)));
+    }
+
+    @Override
+    public void setYieldPref(final FPref pref, final String value) {
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetYieldPref(pref, value));
     }
 
     private IMacroSystem macros;
@@ -239,11 +216,6 @@ public class NetGameController implements IGameController {
         @Override
         public void nextRememberedAction() {
             send(ProtocolMethod.nextRememberedAction);
-        }
-
-        @Override
-        public boolean isRecording() {
-            return false;
         }
 
         @Override

@@ -11,6 +11,8 @@ import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CounterType;
+import forge.game.keyword.KeywordView;
+import forge.game.keyword.KeywordCollectionView;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
@@ -208,11 +210,15 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.HasLost, val);
     }
 
-    public int getAvatarLifeDifference() {
-        return (int)get(TrackableProperty.AvatarLifeDifference);
+    public boolean hasAvailableActions() {
+        return get(TrackableProperty.HasAvailableActions);
     }
-    public boolean wasAvatarLifeChanged() {
-        return (int)get(TrackableProperty.AvatarLifeDifference) != 0;
+    public void setHasAvailableActions(boolean value) {
+        set(TrackableProperty.HasAvailableActions, value);
+    }
+
+    public int getAvatarLifeDifference() {
+        return get(TrackableProperty.AvatarLifeDifference);
     }
     public void setAvatarLifeDifference(final int val) {
         set(TrackableProperty.AvatarLifeDifference, val);
@@ -324,14 +330,11 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.AdditionalVillainousChoices, p.getAdditionalVotesAmount());
     }
 
-    public List<String> getKeywords() {
+    public KeywordCollectionView getKeywords() {
         return get(TrackableProperty.Keywords);
     }
-    public boolean hasKeyword(String keyword) {
-        return getKeywords().contains(keyword);
-    }
     void updateKeywords(Player p) {
-        set(TrackableProperty.Keywords, p.getKeywords().asStringList());
+        set(TrackableProperty.Keywords, p.getKeywords().getView());
     }
 
     public List<CardView> getCommanders() {
@@ -540,7 +543,7 @@ public class PlayerView extends GameEntityView {
         }
         details.add(Localizer.getInstance().getMessage("lblExtraTurnCountHas", getExtraTurnCount()));
 
-        final String keywords = Lang.joinHomogenous(getKeywords());
+        final String keywords = Lang.joinHomogenous(getKeywords().getValues(), KeywordView::title);
         if (!keywords.isEmpty()) {
             details.add(keywords);
         }
