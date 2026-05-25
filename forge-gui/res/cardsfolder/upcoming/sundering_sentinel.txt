@@ -9,10 +9,8 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBInte
 SVar:DBIntensify:DB$ Intensify
 SVar:X:Count$Intensity
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your end step, exile this creature. At the beginning of your next upkeep, return it to the battlefield under its owner's control. It gains haste.
-SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrigEffect
-SVar:DelTrigEffect:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | Execute$ TrigReturn | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup1 | TriggerDescription$ At the beginning of your next upkeep, return it to the battlefield under its owner's control. It gains haste.
-SVar:TrigReturn:DB$ ChangeZone | Imprint$ True | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Keywords$ Haste | Duration$ Permanent | Defined$ Imprinted | SubAbility$ DBCleanup2
-SVar:DBCleanup1:DB$ Cleanup | ClearRemembered$ True
-SVar:DBCleanup2:DB$ Cleanup | ClearImprinted$ True
+SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrigEffect
+SVar:DelTrigEffect:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigReturn | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberObjects$ Remembered | TriggerDescription$ At the beginning of your next upkeep, return it to the battlefield under its owner's control. It gains haste.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | KW$ Haste | Duration$ Permanent | Defined$ Remembered
 Oracle:Starting intensity 2\nWhen this creature enters, it deals X damage to any target and you gain X life, where X is this creature's intensity. Then it intensifies.\nAt the beginning of your end step, exile this creature. At the beginning of your next upkeep, return it to the battlefield under its owner's control. It gains haste.
