@@ -1,0 +1,12 @@
+Name:Phoenix of Iteration
+ManaCost:U R
+Types:Creature Elemental Phoenix
+PT:2/1
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield,Graveyard | Execute$ TrigPump | TriggerDescription$ Opus — Whenever you cast an instant or sorcery spell, Phoenix of Iteration perpetually gets +1/+1. If five or more mana was spent to cast that spell, you may exile Phoenix of Iteration, then return it to the battlefield tapped under its owner’s control. This ability also triggers if this card is in your graveyard.
+SVar:TrigPump:DB$ Pump | PumpZone$ Battlefield,Graveyard | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield,Graveyard | Destination$ Exile | RememberChanged$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | Optional$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Tapped$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredCard$CastTotalManaSpent
+Oracle:Flying\nOpus — Whenever you cast an instant or sorcery spell, Phoenix of Iteration perpetually gets +1/+1. If five or more mana was spent to cast that spell, you may exile Phoenix of Iteration, then return it to the battlefield tapped under its owner’s control. This ability also triggers if this card is in your graveyard.
