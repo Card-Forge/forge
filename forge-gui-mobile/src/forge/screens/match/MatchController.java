@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
+
 import forge.adventure.scene.DuelScene;
 import forge.adventure.util.Config;
 import forge.ai.GameState;
@@ -14,10 +17,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.FullControlFlag;
 import forge.item.IPaperCard;
 import forge.util.collect.FCollection;
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Maps;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.GuiMobile;

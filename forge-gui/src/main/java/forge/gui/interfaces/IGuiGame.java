@@ -48,8 +48,6 @@ public interface IGuiGame {
         return GuiBase.getInterface().isLibgdxPort();
     }
 
-    void setGameView(GameView gameView);
-
     /**
      * Set the game view with a sequence number for delta sync baseline.
      * Local games ignore the sequence number.
@@ -57,6 +55,7 @@ public interface IGuiGame {
     default void setGameView(GameView gameView, long sequenceNumber) {
         setGameView(gameView);
     }
+    void setGameView(GameView gameView);
     GameView getGameView();
 
     void setOriginalGameController(PlayerView view, IGameController gameController);

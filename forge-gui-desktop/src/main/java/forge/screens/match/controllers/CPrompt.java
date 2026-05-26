@@ -145,7 +145,7 @@ public class CPrompt implements ICDoc {
     }
 
     public void setMessage(final String s0, final CardView card) {
-    	view.getTarMessage().setText(FSkin.encodeSymbols(s0, false));
+        view.getTarMessage().setText(FSkin.encodeSymbols(s0, false));
         view.setCardView(card);
     }
 
