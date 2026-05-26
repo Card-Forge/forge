@@ -1064,19 +1064,13 @@ public final class CMatchUI
         return null; //delay ability until choice made
     }
 
-    @Override
-    public void showPromptMessage(final PlayerView playerView, final String message) {
-        cancelWaitingTimer();
-        cPrompt.setMessage(message);
-        notePromptMessage(message);
-    }
     public void showPromptMessageNoCancel(final PlayerView playerView, final String message) {
-        cPrompt.setMessage(message);
+        cPrompt.setMessage(message, null);
         notePromptMessage(message);
     }
 
     @Override
-    public void showCardPromptMessage(PlayerView playerView, String message, CardView card) {
+    public void showPromptMessage(PlayerView playerView, String message, CardView card) {
         cancelWaitingTimer();
         cPrompt.setMessage(message, card);
         notePromptMessage(message);

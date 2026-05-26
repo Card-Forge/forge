@@ -51,26 +51,26 @@ public class InputConfirm extends InputSyncronizedBase {
     public static ImmutableList<String> defaultOptions = ImmutableList.of(Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"));
 
     public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final String message) {
-        return InputConfirm.confirm(controller, card, message, true, defaultOptions);
+        return confirm(controller, card, message, true, defaultOptions);
     }
     public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final String message, final boolean defaultIsYes, final List<String> options) {
         return confirm(controller, card, null, message, defaultIsYes, options);
     }
     public static boolean confirm(final PlayerControllerHuman controller, final SpellAbility sa, final String message) {
-        return InputConfirm.confirm(controller, sa, message, true, defaultOptions);
+        return confirm(controller, sa, message, true, defaultOptions);
     }
     public static boolean confirm(final PlayerControllerHuman controller, final SpellAbility sa, final String message, final boolean defaultIsYes, final List<String> options) {
         return confirm(controller, null, sa, message, defaultIsYes, options);
     }
      public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final SpellAbility sa, final String message) {
-         return InputConfirm.confirm(controller, card, sa, message, true, defaultOptions);
+         return confirm(controller, card, sa, message, true, defaultOptions);
      }
      public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final SpellAbility sa, final String message, final boolean defaultIsYes, final List<String> options) {
          if (controller.getGui().isLibgdxPort()) {
              CardView dialogCard = card;
              if (dialogCard == null && sa != null) {
                  if (sa.getTargets() != null && sa.getTargets().isTargetingAnyCard() && sa.getTargets().size() == 1) {
-                     dialogCard = sa.getTargetCard() == null ? null : CardView.get(sa.getTargetCard());
+                     dialogCard = CardView.get(sa.getTargetCard());
                  } else {
                      dialogCard = CardView.get(sa.getHostCard());
                  }

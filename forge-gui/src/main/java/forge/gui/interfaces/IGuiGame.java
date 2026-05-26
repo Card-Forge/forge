@@ -70,9 +70,10 @@ public interface IGuiGame {
 
     void showCombat();
 
-    void showPromptMessage(PlayerView playerView, String message);
-
-    void showCardPromptMessage(PlayerView playerView, String message, CardView card);
+    default void showPromptMessage(PlayerView playerView, String message) {
+        showPromptMessage(playerView, message, null);
+    }
+    void showPromptMessage(PlayerView playerView, String message, CardView card);
 
     default void updateButtons(final PlayerView owner, final boolean okEnabled, final boolean cancelEnabled, final boolean focusOk) {
         updateButtons(owner, Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"), okEnabled, cancelEnabled, focusOk);
