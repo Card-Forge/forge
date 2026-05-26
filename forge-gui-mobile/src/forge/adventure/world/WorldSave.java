@@ -2,6 +2,7 @@ package forge.adventure.world;
 
 import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.archipelago.ArchipelagoMode;
+import forge.adventure.archipelago.LocalRandomizer;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -135,6 +136,14 @@ public class WorldSave {
     }
 
     public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode, int customDeckIndex, CardEdition starterEdition, long seed, ArchipelagoMode archipelagoMode) {
+        ArchipelagoData archipelagoData = ArchipelagoData.getInstance();
+        // Initial archipelago setup
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            LocalRandomizer.getInstance().setupFreshSaveFile();
+        } else {
+            archipelagoData.setupFreshSaveFile(archipelagoMode);
+        }
+
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
         boolean chaos = mode == AdventureModes.Chaos;

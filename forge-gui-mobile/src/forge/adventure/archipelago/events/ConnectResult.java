@@ -25,7 +25,7 @@ public class ConnectResult {
                 connectStatusLabel.setText("");
                 connectStatusLabel.setText("{FADE=GREEN;GREEN;0.1}Connected!");
                 APClient.slotData = event.getSlotData(SlotData.class);
-                ArchipelagoData.getInstance().setTotalAmountOfSetUnlockChecks(APClient.slotData.SetUnlocks);
+//                ArchipelagoData.getInstance().setTotalAmountOfSetUnlockChecks(APClient.slotData.SetUnlocks);
 //                APClient.slotData.parseStartingItems(registries);
             } catch (Exception e) {
                 if (APClient.slotData != null) {
