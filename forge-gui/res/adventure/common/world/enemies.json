@@ -493,7 +493,6 @@
 		"decks/standard/bluedragon.dck"
 	],
 	"ai": "",
-	"boss": true,
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.3,
@@ -7191,7 +7190,6 @@
 		"decks/standard/darkenchanter.dck"
 	],
 	"ai": "",
-	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -16406,7 +16404,7 @@
 	"name": "The Hydra of Shandalaar",
 	"sprite": "sprites/enemy/monstrosity/hydra_large.atlas",
 	"deck": [
-		"decks/standard/hydraboss.dck"
+		"decks/miniboss/hydraboss.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -24107,7 +24105,7 @@
 	"name": "Scarecrow Captain",
 	"sprite": "sprites/enemy/construct/scarecrow.atlas",
 	"deck": [
-		"decks/standard/scarecrowcaptain.dck"
+		"decks/miniboss/scarecrowcaptain.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -25380,7 +25378,7 @@
 	"name": "Sliver Queen",
 	"sprite": "sprites/enemy/aberration/sliver_queen.atlas",
 	"deck": [
-		"decks/boss/sliver_queen.dck"
+		"decks/miniboss/sliver_queen.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -28661,7 +28659,6 @@
 		"decks/miniboss/sliver_shandalar.dck"
 	],
 	"ai": "reckless",
-	"boss": true,
 	"life": 28,
 	"rewards": [
 		{

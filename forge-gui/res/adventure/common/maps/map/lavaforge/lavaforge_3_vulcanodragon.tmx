@@ -157,7 +157,7 @@
  &quot;lifeModifier&quot;: 4,
  &quot;startBattleWithCard&quot;: [ &quot;Fearsome Whelp&quot; ]
 }</property>
-    <property name="enemy" value="Vulcano Dragon"/>
+    <property name="enemy" value="Volcano Dragon"/>
     <property name="fleeRange" value="0"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
