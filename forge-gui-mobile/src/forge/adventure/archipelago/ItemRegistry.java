@@ -21,6 +21,8 @@ public class ItemRegistry {
             .put(1007L, "Silver Challenge Coin")
             .put(1008L, "Gold Challenge Coin")
             .put(1009L, "Set Unlock")
+            .put(1010L, "Life +1")
+            .put(1011L, "Life +2")
             .put(2000L, "Unlock White")
             .put(2001L, "Unlock Blue")
             .put(2002L, "Unlock Black")

@@ -11,6 +11,9 @@ import forge.adventure.util.Reward;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ArchipelagoUtil {
     private static final FImage CARD_LOCKED_ICON = FSkinImage.LOCK;
 
@@ -106,5 +109,14 @@ public class ArchipelagoUtil {
             return replacedAPReward.get(0);
         }
         return null;
+    }
+
+    public static List<String> getArchipelagoPois() {
+        return Arrays.asList("slime cave", "slobads factory", "xiras hive", "emrakul", "quest_aportaltonowhere", "quest_digsite", "quest_primaljungle", "quest_banditcave",
+                                "nahiri encampment", "unhallowedabbey",
+                                "kiora island", "teferi hideout", "jacehold", "skep", "quest_libraryofvarsil",
+                                "slimefoots lair", "temple of liliana", "grolnoks bog", "vampirecastle3",
+                                "temple of chandra", "tibalts fortress", "zedruu city", "quest_shardmines",
+                                "garruk forest", "scarecrow farm", "quest_frostbittencavern", "grove7");
     }
 }
