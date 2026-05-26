@@ -52,7 +52,7 @@ import java.util.Map.Entry;
  *       limit and the Commander Draft partner rules.</li>
  * </ul>
  */
-public final class CEditorCommanderDraftLimited extends CEditorLimited {
+public final class CEditorCommanderDraftLimited extends CEditorLimited<DeckGroup> {
 
     private final String freeCommanderName;
     private final Localizer localizer = Localizer.getInstance();
