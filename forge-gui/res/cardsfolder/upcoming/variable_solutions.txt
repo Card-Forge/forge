@@ -2,7 +2,7 @@ Name:Variable Solutions
 ManaCost:X G
 Types:Sorcery
 A:SP$ GainLife | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE4 | SubAbility$ DBSeek | StackDescription$ None
-SVar:DBSeek:DB$  Seek | Type$ Card.Land+Basic | SubAbility$ DBPut | RememberFound$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | OrOtherConditionSVarCompare$ GE4 | StackDescription$ SpellDescription | SpellDescription$ If X is 1, seek a basic land card and put it onto the battlefield tapped.,,,,,,
+SVar:DBSeek:DB$ Seek | Type$ Card.Land+Basic | SubAbility$ DBPut | RememberFound$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | OrOtherConditionSVarCompare$ GE4 | StackDescription$ SpellDescription | SpellDescription$ If X is 1, seek a basic land card and put it onto the battlefield tapped.,,,,,,
 SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered | Tapped$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | OrOtherConditionSVarCompare$ GE4 | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Artifact | Amount$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ2 | OrOtherConditionSVarCompare$ GE4 | SubAbility$ DBNameCard | StackDescription$ SpellDescription | SpellDescription$ If X is 2, each opponent sacrifices an artifact of their choice.,,,,,,
