@@ -1,7 +1,7 @@
 [metadata]
 Code=WHO
 Date=2023-10-13
-Name=Doctor Who Commander
+Name=Doctor Who
 Type=Commander
 ScryfallCode=WHO
 

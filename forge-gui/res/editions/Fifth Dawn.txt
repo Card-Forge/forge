@@ -42,7 +42,7 @@ ScryfallCode=5DN
 28 U Disruption Aura @Ron Spears
 29 C Early Frost @Ben Thompson
 30 U Eyes of the Watcher @Ron Spears
-31 U Fold into Aether @Anthony S. Waters
+31 U Fold into Aether @Anthony S. Waters & Cara Mitten
 32 R Hoverguard Sweepers @Mark A. Nelson
 33 C Into Thin Air @Ittoku
 34 U Plasma Elemental @Kev Walker
@@ -67,7 +67,7 @@ ScryfallCode=5DN
 53 R Mephidross Vampire @Matthew D. Wilson
 54 R Moriok Rigger @Wayne England
 55 U Night's Whisper @David Martin
-56 U Nim Grotesque @Anthony S. Waters
+56 U Nim Grotesque @Anthony S. Waters & Cara Mitten
 57 R Plunge into Darkness @Justin Sweet
 58 U Relentless Rats @Thomas M. Baxa
 59 U Shattered Dreams @Greg Staples
@@ -87,7 +87,7 @@ ScryfallCode=5DN
 73 U Magma Jet @Justin Sweet
 74 U Magnetic Theft @Dave Dorman
 75 C Mana Geyser @Martina Pilcerova
-76 C Rain of Rust @Tim Hildebrandt
+76 C Rain of Rust @Greg Hildebrandt
 77 R Reversal of Fortune @Greg Hildebrandt
 78 C Screaming Fury @Edward P. Beard, Jr.
 79 C Spark Elemental @John Avon
@@ -99,7 +99,7 @@ ScryfallCode=5DN
 85 C Dawn's Reflection @John Avon
 86 U Eternal Witness @Terese Nielsen
 87 U Fangren Pathcutter @Rob Alexander
-88 C Ferocious Charge @Anthony S. Waters
+88 C Ferocious Charge @Anthony S. Waters & Cara Mitten
 89 R Joiner Adept @Christopher Rush
 90 U Ouphe Vandals @Thomas M. Baxa
 91 R Rite of Passage @Kev Walker
@@ -145,14 +145,14 @@ ScryfallCode=5DN
 131 R Helm of Kaldra @Donato Giancola
 132 C Horned Helm @Martina Pilcerova
 133 U Infused Arrows @Stephen Tappin
-134 U Krark-Clan Ironworks @Tim Hildebrandt
-135 U Lantern of Insight @Tim Hildebrandt
+134 U Krark-Clan Ironworks @Greg Hildebrandt
+135 U Lantern of Insight @Greg Hildebrandt
 136 U Lunar Avenger @Paolo Parente
 137 R Mycosynth Golem @Paolo Parente
 138 C Myr Quadropod @Christopher Rush
 139 C Myr Servitor @John Matson
 140 C Neurok Stealthsuit @Francis Tsai
-141 C Opaline Bracers @Anthony S. Waters
+141 C Opaline Bracers @Anthony S. Waters & Cara Mitten
 142 U Paradise Mantle @Greg Hildebrandt
 143 C Pentad Prism @David Martin
 144 R Possessed Portal @Tony Szczudlo

@@ -1,0 +1,53 @@
+[metadata]
+Code=OARC
+Date=2010-06-18
+Name=Archenemy Schemes
+Type=Multiplayer
+ScryfallCode=OARC
+
+[cards]
+1★ C All in Good Time @Nic Klein
+2★ C All Shall Smolder in My Wake @Jim Nelson
+3★ C Approach My Molten Realm @Jim Pavelec
+4★ C Behold the Power of Destruction @Jesper Ejsing
+5★ C Choose Your Champion @Jim Nelson
+6★ C Dance, Pathetic Marionette @Steve Prescott
+7★ C The Dead Shall Serve @Jesper Ejsing
+8★ C A Display of My Dark Power @Jim Nelson
+9★ C Embrace My Diabolical Vision @Franz Vohwinkel
+10★ C Every Hope Shall Vanish @John Stanko
+11★ C Every Last Vestige Shall Rot @Martina Pilcerova
+12★ C Evil Comes to Fruition @Austin Hsu
+13★ C The Fate of the Flammable @Paul Bonner
+14★ C Feed the Machine @Wayne Reynolds
+15★ C I Bask in Your Silent Awe @Wayne Reynolds
+16★ C I Call on the Ancient Magics @John Matson
+17★ C I Delight in Your Convulsions @Wayne Reynolds
+18★ C I Know All, I See All @Chuck Lukacs
+19★ C Ignite the Cloneforge! @Ralph Horsley
+20★ C Into the Earthen Maw @Paul Bonner
+21★ C Introductions Are in Order @Nils Hamm
+22★ C The Iron Guardian Stirs @Jesper Ejsing
+23★ C Know Naught but Fire @Val Mayerik
+24★ C Look Skyward and Despair @Todd Lockwood
+25★ C May Civilization Collapse @John Matson
+26★ C Mortal Flesh Is Weak @Howard Lyon
+27★ C My Crushing Masterstroke @Alex Horley-Orlandelli
+28★ C My Genius Knows No Bounds @John Stanko
+29★ C My Undead Horde Awakens @Thomas M. Baxa
+30★ C My Wish Is Your Command @Steve Prescott
+31★ C Nature Demands an Offering @John Matson
+32★ C Nature Shields Its Own @John Stanko
+33★ C Nothing Can Stop Me Now @Jesper Ejsing
+34★ C Only Blood Ends Your Nightmares @Paul Bonner
+35★ C The Pieces Are Coming Together @Ralph Horsley
+36★ C Realms Befitting My Majesty @Véronique Meignaud
+37★ C Roots of All Evil @Paul Bonner
+38★ C Rotted Ones, Lay Siege @Steve Prescott
+39★ C Surrender Your Thoughts @Howard Lyon
+40★ C Tooth, Claw, and Tail @Paul Bonner
+41★ C The Very Soil Shall Shake @Val Mayerik
+42★ C Which of You Burns Brightest? @Steve Prescott
+43★ C Your Fate Is Thrice Sealed @Steve Prescott
+44★ C Your Puny Minds Cannot Fathom @Martina Pilcerova
+45★ C Your Will Is Not Your Own @Alex Horley-Orlandelli
