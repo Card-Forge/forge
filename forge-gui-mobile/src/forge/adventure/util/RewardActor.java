@@ -249,7 +249,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private void calcAutoSellWidth() {
         float btnHeight = autoSell.getTextraLabel().layout.getHeight() * 1.8f;
         float width = btnHeight - 2f;
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_DISPLAY_PRICE_IN_REWARD_SCREEN)) {
+        if (FModel.getPreferences().getPrefBoolean(FPref.ADV_DISPLAY_PRICE_IN_REWARD_SCREEN)) {
             width = Math.max(autoSell.getTextraLabel().layout.getWidth() + 6f, width);
         };
         autoSell.setSize(width, btnHeight);
@@ -269,7 +269,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             case Card: {
                 if (!reward.isNoSell) {
                     int sellPrice = AdventurePlayer.current().cardSellPrice(reward.getCard());
-                    priceTag = FModel.getPreferences().getPrefBoolean(FPref.UI_DISPLAY_PRICE_IN_REWARD_SCREEN) && sellPrice > 0 ? String.valueOf(sellPrice) : "";
+                    priceTag = FModel.getPreferences().getPrefBoolean(FPref.ADV_DISPLAY_PRICE_IN_REWARD_SCREEN) && sellPrice > 0 ? String.valueOf(sellPrice) : "";
                     autoSell = Controls.newTextButton("[%85][GRAY] " + priceTag);
                     autoSell.getColor().a = 0.7f; // semi-transparent by default
                     autoSell.addListener(new InputListener() {
