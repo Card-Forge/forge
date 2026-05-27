@@ -160,7 +160,6 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_ZONE_TAB_NEW_COUNT("true"),
         UI_ENABLE_AI_PICKER("false"),
         UI_GROUP_IDENTICAL_CARDS("false"),
-        UI_DISPLAY_PRICE_IN_REWARD_SCREEN("true"),
 
         UI_ENABLE_SOUNDS ("true"),
         UI_ENABLE_MUSIC ("true"),
@@ -346,7 +345,9 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         SHORTCUT_PANELTABS("17 84"),
         SHORTCUT_CARDOVERLAYS("17 79"),
 
-        LAST_IMPORTED_CUBE_ID("");
+        LAST_IMPORTED_CUBE_ID(""),
+
+        ADV_DISPLAY_PRICE_IN_REWARD_SCREEN("true");
 
         private final String strDefaultVal;
 
