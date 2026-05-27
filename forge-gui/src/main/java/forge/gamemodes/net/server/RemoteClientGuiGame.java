@@ -323,18 +323,13 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
-    public void showPromptMessage(final PlayerView playerView, final String message) {
-        send(ProtocolMethod.showPromptMessage, playerView, message);
-    }
-
-    @Override
     public void applyYieldUpdate(final YieldUpdate update) {
         send(ProtocolMethod.applyYieldUpdate, update);
     }
 
     @Override
-    public void showCardPromptMessage(final PlayerView playerView, final String message, final CardView card) {
-        syncAndSend(ProtocolMethod.showCardPromptMessage, playerView, message, card);
+    public void showPromptMessage(final PlayerView playerView, final String message, final CardView card) {
+        syncAndSend(ProtocolMethod.showPromptMessage, playerView, message, card);
     }
 
     @Override
