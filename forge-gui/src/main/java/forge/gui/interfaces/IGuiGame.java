@@ -48,8 +48,6 @@ public interface IGuiGame {
         return GuiBase.getInterface().isLibgdxPort();
     }
 
-    void setGameView(GameView gameView);
-
     /**
      * Set the game view with a sequence number for delta sync baseline.
      * Local games ignore the sequence number.
@@ -57,6 +55,7 @@ public interface IGuiGame {
     default void setGameView(GameView gameView, long sequenceNumber) {
         setGameView(gameView);
     }
+    void setGameView(GameView gameView);
     GameView getGameView();
 
     void setOriginalGameController(PlayerView view, IGameController gameController);
@@ -70,9 +69,10 @@ public interface IGuiGame {
 
     void showCombat();
 
-    void showPromptMessage(PlayerView playerView, String message);
-
-    void showCardPromptMessage(PlayerView playerView, String message, CardView card);
+    default void showPromptMessage(PlayerView playerView, String message) {
+        showPromptMessage(playerView, message, null);
+    }
+    void showPromptMessage(PlayerView playerView, String message, CardView card);
 
     default void updateButtons(final PlayerView owner, final boolean okEnabled, final boolean cancelEnabled, final boolean focusOk) {
         updateButtons(owner, Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"), okEnabled, cancelEnabled, focusOk);

@@ -251,7 +251,6 @@ public class MatchScreen extends FScreen {
 
         @Override
         protected void buildMenu() {
-
             if (isTopHumanPlayerActive() == getRotate180()) {
                 addItem(new MenuItem(Forge.getLocalizer().getMessage("lblGame"), gameMenu));
                 addItem(new MenuItem(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players));
