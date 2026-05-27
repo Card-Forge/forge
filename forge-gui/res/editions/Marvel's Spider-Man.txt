@@ -175,7 +175,7 @@ Replace=0.05F BasicLand:fromSheet("SPM cards"):!fromSheet("SPM allied lands")
 105 R Kraven's Last Hunt @Bill Sienkiewicz
 106 R Lizard, Connors's Curse @Steve Prescott
 107 C Lurking Lizards @Rafater
-108 M Miles Morales @LA Draws
+108 M Miles Morales @L.A. Draws
 109 U Pictures of Spider-Man @Rafater
 110 C Professional Wrestler @Kevin Sidharta
 111 R Radioactive Spider @Pavel Kolomeyets
