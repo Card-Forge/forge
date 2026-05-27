@@ -158,6 +158,7 @@ Hyena:Hyenas
 Illusion:Illusions
 Imp:Imps
 Incarnation:Incarnations
+Inhuman:Inhumans
 Inkling:Inklings
 Inquisitor:Inquisitors
 Insect:Insects
@@ -173,6 +174,7 @@ Knight:Knights
 Kobold:Kobolds
 Kor:Kors
 Kraken:Krakens
+Kree:Kree
 Lamia:Lamias
 Lammasu:Lammasus
 Leech:Leeches
