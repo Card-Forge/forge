@@ -50,6 +50,8 @@ import forge.game.card.CardView;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.MyRandom;
@@ -1008,8 +1010,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         ? DeckFormat.Commander
                         : DeckFormat.Adventure;
                     int maxCopies = deckFormat.getMaxCardCopies(pc);
+                    boolean autoSellVariantCommanderMode = FModel.getPreferences().getPrefBoolean(FPref.ADV_COMMANDER_AUTOSELL_VARIANT);
+                    boolean isPresentAutoSell = AdventurePlayer.current().getAutoSellCards().contains(pc);
 
-                    if (AdventurePlayer.current().isCommanderMode()) {
+                    if (isPresentAutoSell) {
+                        setAutoSell(true);
+                    } else if (deckFormat.equals(DeckFormat.Commander) && autoSellVariantCommanderMode) {
                         setAutoSell(maxCopies == 1 && inCollectionLike(pc));
                     } else {
                         int ownedCount = AdventurePlayer.current().getCollectionCards(true).count(pc);
@@ -1217,7 +1223,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         float[] val = worldTransform.getValues();
         //val[Matrix4.M32]=0.0002f;
         worldTransform.set(val);
-        float originX = this.getOriginX(), originY = this.getOriginY();
         worldTransform.translate(getX() + getWidth() / 2, getY() + getHeight() / 2, 0);
         if (clicked) {
             worldTransform.rotate(0, 1, 0, 180 * flipProcess);
