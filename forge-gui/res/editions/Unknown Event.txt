@@ -60,7 +60,7 @@ CA02c C Item Crate @
 CB02 C Reverse Ninja @
 CB02a C Demon Detective @
 CB02b C Syr Konrad's Squire @
-CB02c C Fear (Not the Alpha One) @
+CB02c C Fear (Not the Alpha One) // Loathing @
 CG02a C Naturalize the Phyresis @
 CG02b C That's No Moonmist @
 CR02 C Fear of Going 0-2 Drop @
@@ -166,7 +166,7 @@ RU03a R Dockbreacher @
 RU03b R Wrath of Oko @
 RU03c R The Covert Blue Mage @
 RU03d R Second Stage of Magic Design @
-RU03e R Yeah Nah @
+RU03e R Yeah Nah // Nah Yeah @
 RW03a R Azorius Traffic Enforcement @
 RW03b R Fioran Reformist @
 RW03c R Ratatwotwo @

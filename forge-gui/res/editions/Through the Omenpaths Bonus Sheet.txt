@@ -1,7 +1,7 @@
 [metadata]
 Code=OMB
 Date=2025-09-23
-Name=Through the Omenpaths 1 Bonus Sheet
+Name=Through the Omenpaths Bonus Sheet
 Type=Online
 ScryfallCode=OMB
 

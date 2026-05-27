@@ -75,7 +75,7 @@ ScryfallCode=WOE
 63 C Obyra's Attendants @Andreas Zafiratos
 64 U Picklock Prankster @Iris Compiet
 65 C Quick Study @Iris Compiet
-66 R Sleep-Cursed Faerie @Heonhwa Choe
+66 R Sleep-Cursed Faerie @Heonhwa
 67 C Sleight of Hand @Scott Murphy
 68 C Snaremaster Sprite @Christina Kraus
 69 C Spell Stutter @Liiga Smilshkalne
@@ -351,7 +351,7 @@ ScryfallCode=WOE
 331 R Extraordinary Journey @Volkan Baǵa
 332 R Farsight Ritual @Randy Gallegos
 333 R Ingenious Prodigy @Brian Valeza
-334 R Sleep-Cursed Faerie @Heonhwa Choe
+334 R Sleep-Cursed Faerie @Heonhwa
 335 R Talion's Messenger @Marta Nael
 336 M Beseech the Mirror @Cynthia Sheppard
 337 R The End @Donato Giancola

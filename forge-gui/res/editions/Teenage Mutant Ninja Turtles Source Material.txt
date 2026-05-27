@@ -1,7 +1,7 @@
 [metadata]
 Code=PZA
 Date=2026-03-06
-Name=Teenage Mutant Hero Turtles Source Material
+Name=Teenage Mutant Ninja Turtles Source Material
 Type=Collector_Edition
 
 [cards]
