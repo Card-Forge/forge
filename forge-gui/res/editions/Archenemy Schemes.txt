@@ -2,6 +2,7 @@
 Code=OARC
 Date=2010-06-18
 Name=Archenemy Schemes
+Alias=ARC
 Type=Multiplayer
 ScryfallCode=OARC
 
