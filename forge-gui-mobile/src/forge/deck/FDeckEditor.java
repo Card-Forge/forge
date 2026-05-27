@@ -1514,11 +1514,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected void addCommanderItems(final FDropDownMenu menu, final PaperCard card) {
             if(!parentScreen.isCommanderEditor())
                 return;
-            if(parentScreen.getMaxMovable(card, this, parentScreen.getCommanderPage()) <= 0)
+            DeckSectionPage commanderPage = parentScreen.getCommanderPage();
+            if(commanderPage == null)
+                return;
+            if(parentScreen.getMaxMovable(card, this, commanderPage) <= 0)
                 return;
             Localizer localizer = Forge.getLocalizer();
             String captionPrefix = localizer.getMessage("lblAddCommander");
-            FImage icon = parentScreen.getCommanderPage().icon;
+            FImage icon = commanderPage.icon;
             if (canBeMainCommander(card) && canEditMainCommander()) {
                 String captionSuffix;
                 if(parentScreen.editorConfig.getGameType() == GameType.Oathbreaker)
