@@ -2,9 +2,8 @@ Name:The Fantastic Four
 ManaCost:R G W U
 Types:Legendary Creature Human Hero
 PT:4/4
-:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enter and whenever you cast a spell with power, toughness, or mana value 4, choose one that hasn't been chosen this turn.
-T:Mode$ SpellCast | ValidCard$ Card.cmcEQ4,Card.powerEQ4,Card.toughnessEQ4 | ValidActivatingPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enter and whenever you cast a spell with power, toughness, or mana value 4, choose one that hasn't been chosen this turn.
+T:Mode$ SpellCast | ValidCard$ Card.cmcEQ4,Card.powerEQ4,Card.toughnessEQ4 | ValidActivatingPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When CARDNAME enter and whenever you cast a spell with power, toughness, or mana value 4, choose one that hasn't been chosen this turn.
 SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBDamage,DBPutCounter,DBDraw | ChoiceRestriction$ ThisTurn
 SVar:DBToken:DB$ Token | TokenScript$ c_0_4_wall_defender | SpellDescription$ Create a 0/4 colorless Wall creature token with defender.
 SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 3 | AILogic$ Good | SpellDescription$ CARDNAME deal 3 damage to each opponent.
