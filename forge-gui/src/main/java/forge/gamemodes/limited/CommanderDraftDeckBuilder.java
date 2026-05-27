@@ -339,17 +339,16 @@ public class CommanderDraftDeckBuilder extends LimitedDeckBuilder {
         }
         final ColorSet combined = ColorSet.fromMask(mask);
 
-        int score = 0;
+        double score = 0;
         for (final PaperCard card : aiPlayables) {
             if (card == candidate || card == primary) { continue; }
-            if (card.getRules().canBeCommander()) { continue; } // Don't count other candidates
             if (card.getRules().getColorIdentity().hasNoColorsExcept(combined)) {
-                score++;
+                score += CardRanker.getRawScore(card) / 2.0;
             }
         }
         // Quality bonus: prefer high-powered legends when coverage is equal
-        score += (int) (CardRanker.getRawScore(candidate) * 2.0);
-        return score;
+        score += CardRanker.getRawScore(candidate) * 2.0;
+        return (int)score*10;
     }
 
     private void addFreeCommanderIfAbsent(final List<PaperCard> candidates, final String name) {
