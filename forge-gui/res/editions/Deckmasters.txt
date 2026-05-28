@@ -1,7 +1,7 @@
 [metadata]
 Code=DKM
 Date=2001-12-01
-Name=Deckmasters: Garfield vs. Finkel
+Name=Deckmasters
 Type=Boxed_Set
 Border=White
 ScryfallCode=DKM
@@ -24,6 +24,7 @@ ScryfallCode=DKM
 13a C Guerrilla Tactics @Randy Asplund-Faith
 13b C Guerrilla Tactics @Randy Asplund-Faith
 14 C Incinerate @Mark Poole
+14★ C Incinerate @Mark Poole
 15 R Jokulhaups @Richard Thomas
 16 C Lava Burst @Tom Wänerstrand
 17 U Orcish Cannoneers @Dan Frazier
@@ -48,6 +49,7 @@ ScryfallCode=DKM
 34 C Barbed Sextant @Amy Weber
 35 R Elkin Bottle @Quinton Hoover
 36 U Icy Manipulator @Amy Weber
+36★ U Icy Manipulator @Amy Weber
 37a C Phyrexian War Beast @Bill Sienkiewicz
 37b C Phyrexian War Beast @Bill Sienkiewicz
 38 U Walking Wall @Anthony S. Waters
