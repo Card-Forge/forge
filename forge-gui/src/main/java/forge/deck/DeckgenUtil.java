@@ -682,7 +682,7 @@ public class DeckgenUtil {
             }
 
             if (format.equals(DeckFormat.Oathbreaker)) {
-                 //pass signature spell as partner for simplicity
+                //pass signature spell as partner for simplicity
                 selectedPartner = getRandomSignatureSpell(preSelectedCards);
             }
             else if (commander.getRules().canBePartnerCommander()) {
@@ -729,7 +729,6 @@ public class DeckgenUtil {
                 //pass signature spell as partner for simplicity
                 selectedPartner = getRandomSignatureSpell(colorList);
                 break;
-            default:
             default:
                 if (commander.getRules().canBePartnerCommander()) {
                     selectedPartner = getRandomPartnerCommander(colorList, commander);
