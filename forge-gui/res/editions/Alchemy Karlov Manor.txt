@@ -26,9 +26,9 @@ ScryfallCode=YMKM
 17 R Guildpact Greenwalker @Monztre
 18 R Rampaging Ursaguana @Slawomir Maniak
 19 R Relics of the Rubblebelt @Alexandre Honoré
-20 R Sproutwatch Dryad @Marzena Nereida Piwowar
+20 R Sproutwatch Dryad @Nereida
 21 U Woodland Investigation @Constantin Marin
-22 R Emmara, Voice of the Conclave @Marzena Nereida Piwowar
+22 R Emmara, Voice of the Conclave @Nereida
 23 R Furgul, Quag Nurturer @Warren Mahy
 24 R Izzet Polarizer @Michele Giorgi
 25 M Juggle the Performance @Domenico Cava
@@ -36,4 +36,4 @@ ScryfallCode=YMKM
 27 U Scour the Scene @Francisco Miyara
 28 M Tajic, Legion's Valor @Julia Metzger
 29 R Thought-String Analyst @Diana Cearley
-30 R Veko, Death's Doorkeeper @Marzena Nereida Piwowar
+30 R Veko, Death's Doorkeeper @Nereida

@@ -583,12 +583,7 @@ public class DeckgenUtil {
 
     public static CardPool generateSchemePool() {
         CardPool schemes = new CardPool();
-        List<PaperCard> allSchemes = new ArrayList<>();
-        for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
-            if (c.getRules().getType().isScheme()) {
-                allSchemes.add(c);
-            }
-        }
+        List<PaperCard> allSchemes = FModel.getArchenemyCards().toFlatList();
 
         int schemesToAdd = 20;
         int attemptsLeft = 100; // to avoid endless loop
@@ -615,12 +610,7 @@ public class DeckgenUtil {
 
     public static CardPool generatePlanarPool() {
         CardPool res = new CardPool();
-        List<PaperCard> allPlanars = new ArrayList<>();
-        for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
-            if (c.getRules().getType().isPlane() || c.getRules().getType().isPhenomenon()) {
-                allPlanars.add(c);
-            }
-        }
+        List<PaperCard> allPlanars = FModel.getPlanechaseCards().toFlatList();
 
         int phenoms = 0;
         int targetsize = MyRandom.getRandom().nextInt(allPlanars.size()-10)+10;
@@ -692,6 +682,7 @@ public class DeckgenUtil {
             }
 
             if (format.equals(DeckFormat.Oathbreaker)) {
+<<<<<<< FixIllegalDeckGeneration
                 //check for signature spells
                 selectedPartner = getRandomSignatureSpell(preSelectedCards);
                 if (selectedPartner != null) { //pass signature spell as partner for simplicity
@@ -704,7 +695,18 @@ public class DeckgenUtil {
                 if (selectedPartner != null) {
                     preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
                 }
+=======
+                //pass signature spell as partner for simplicity
+                selectedPartner = getRandomSignatureSpell(preSelectedCards);
             }
+            else if (commander.getRules().canBePartnerCommander()) {
+                selectedPartner = getRandomPartnerCommander(preSelectedCards, commander);
+>>>>>>> master
+            }
+            if (selectedPartner != null) {
+                preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
+            }
+
             //randomly remove cards
             int removeCount=0;
             int i=0;
@@ -739,12 +741,20 @@ public class DeckgenUtil {
                 colorList = IterableUtil.filter(colorList,FModel.getFormats().getStandard().getFilterPrinted());
                 break;
             case Oathbreaker:
+<<<<<<< FixIllegalDeckGeneration
                 //check for signature spells
                 selectedPartner = getRandomSignatureSpell(colorList); //pass signature spell as partner for simplicity
                 break;
             default:
                 if (commander.getRules().canBePartnerCommander()) {
                     //check for partner commanders
+=======
+                //pass signature spell as partner for simplicity
+                selectedPartner = getRandomSignatureSpell(colorList);
+                break;
+            default:
+                if (commander.getRules().canBePartnerCommander()) {
+>>>>>>> master
                     selectedPartner = getRandomPartnerCommander(colorList, commander);
                 }
                 break;
@@ -756,10 +766,8 @@ public class DeckgenUtil {
                 shortlistlength=cardList.size();
             }
             List<PaperCard> shortList = cardList.subList(0, shortlistlength);
-            shortList.remove(commander);
             shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(commander));
             if (selectedPartner != null) {
-                shortList.remove(selectedPartner);
                 shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
             }
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner, shortList, forAi, format);
@@ -795,7 +803,10 @@ public class DeckgenUtil {
         }
         return getRandomCard(signatureSpells);
     }
+<<<<<<< FixIllegalDeckGeneration
 
+=======
+>>>>>>> master
     private static PaperCard getRandomPartnerCommander(final Iterable<PaperCard> cards, final PaperCard commander) {
         final List<PaperCard> partners = new ArrayList<>();
         for (final PaperCard card : cards) {
@@ -806,11 +817,15 @@ public class DeckgenUtil {
         }
         return getRandomCard(partners);
     }
+<<<<<<< FixIllegalDeckGeneration
 
+=======
+>>>>>>> master
     private static PaperCard getRandomCard(final List<PaperCard> cards) {
         return cards.isEmpty() ? null : cards.get(MyRandom.getRandom().nextInt(cards.size()));
     }
 
+<<<<<<< FixIllegalDeckGeneration
     private static List<Map.Entry<PaperCard, Integer>> getWeightedRandomizedCardPool(final List<Map.Entry<PaperCard, Integer>> potentialCards) {
         final Map<Map.Entry<PaperCard, Integer>, Double> sortKeys = new IdentityHashMap<>();
         for (final Map.Entry<PaperCard, Integer> cardEntry : potentialCards) {
@@ -825,6 +840,8 @@ public class DeckgenUtil {
         return Math.log(MyRandom.getRandom().nextDouble()) / weight;
     }
 
+=======
+>>>>>>> master
     public static Map<ManaCostShard, Integer> suggestBasicLandCount(Deck d) {
         int W=0, U=0, R=0, B=0, G=0, total=0;
         List<PaperCard> cards = d.getOrCreate(DeckSection.Main).toFlatList();

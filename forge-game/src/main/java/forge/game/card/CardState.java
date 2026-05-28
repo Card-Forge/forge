@@ -404,10 +404,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         for (KeywordInterface k : intrinsicKeyword0) {
             intrinsicKeywords.insert(k.copy(card, lki));
         }
-        updateKeywordsCache();
-    }
-
-    public final void updateKeywordsCache() {
         card.updateKeywordsCache(this);
     }
 
@@ -445,12 +441,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
         }
         return changed;
-    }
-
-    public void addIntrinsicKeywords(Collection<KeywordInterface> intrinsicKeywords2) {
-        for (KeywordInterface inst : intrinsicKeywords2) {
-            intrinsicKeywords.insert(inst);
-        }
     }
 
     public final boolean removeIntrinsicKeyword(final String s) {

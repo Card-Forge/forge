@@ -272,7 +272,7 @@ ScryfallCode=NCC
 264 R Blasphemous Act @Daarken
 265 R Chain Reaction @Trevor Claxton
 266 R Chaos Warp @Trevor Claxton
-267 R Double Vision @Heonhwa Choe
+267 R Double Vision @Heonhwa
 268 R Etali, Primal Storm @Raymond Swanland
 269 M Inferno Titan @Kev Walker
 270 R Kazuul, Tyrant of the Cliffs @Paul Bonner

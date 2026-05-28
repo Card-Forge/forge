@@ -31,7 +31,7 @@ ScryfallCode=AFC
 23 R Death Tyrant @Nicholas Gregory
 24 R Grave Endeavor @YW Tang
 25 R Grim Hireling @Tomas Duchek
-26 R Hellish Rebuke @Heonhwa Choe
+26 R Hellish Rebuke @Heonhwa
 27 R Lorcan, Warlock Collector @Andrew Mar
 28 R Wand of Orcus @Andrew Mar
 29 R Berserker's Frenzy @Caio Monteiro
@@ -300,7 +300,7 @@ ScryfallCode=AFC
 292 R Death Tyrant @Nicholas Gregory
 293 R Grave Endeavor @YW Tang
 294 R Grim Hireling @Tomas Duchek
-295 R Hellish Rebuke @Heonhwa Choe
+295 R Hellish Rebuke @Heonhwa
 296 R Lorcan, Warlock Collector @Andrew Mar
 297 R Wand of Orcus @Andrew Mar
 298 R Berserker's Frenzy @Caio Monteiro
