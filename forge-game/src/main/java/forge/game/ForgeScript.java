@@ -351,7 +351,7 @@ public class ForgeScript {
         } else if (property.equals("OppCtrl")) {
             return sa.getActivatingPlayer().isOpponentOf(sourceController);
         } else if (property.startsWith("cmc")) {
-            int y = 0;
+            int y;
             // spell was on the stack
             if (sa.getHostCard().isInZone(ZoneType.Stack)) {
                 y = sa.getHostCard().getCMC();

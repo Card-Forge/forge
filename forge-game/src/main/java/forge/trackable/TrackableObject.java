@@ -134,7 +134,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         if (copyingProps) { return; } //prevent infinite loop from circular reference
         copyingProps = true;
         for (final TrackableProperty prop : from.props.keySet()) {
-            prop.copyChangedProps(from, this);
+            prop.getType().copyChangedProps(from, this, prop);
         }
         // Remove properties that reverted to default on the source.
         // set() removes props that equal their default value, so they won't

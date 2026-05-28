@@ -428,7 +428,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
             }
 
             // reset the game
-            Game game = resetGame();
+            Game game = initAndCreateGame();
             Player p = game.getPlayers().get(1);
             Player opponent = game.getPlayers().get(0);
             opponent.setLife(20, null);
@@ -473,7 +473,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         System.out.println(funky);
         for (Card c : funky) {
             GameStateEvaluator gse = new GameStateEvaluator();
-            Game game = resetGame();
+            Game game = initAndCreateGame();
             System.out.println(c.getName() + ": " + gse.evalCard(game, game.getStartingPlayer(), c));
         }
         AssertJUnit.assertEquals(0, funky.size());
