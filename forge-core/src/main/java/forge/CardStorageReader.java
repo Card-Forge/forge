@@ -299,7 +299,11 @@ public class CardStorageReader {
                     result.addAll(c.call());
                 }
             }
-        } catch (InterruptedException | ExecutionException e) {
+        } catch (InterruptedException e) {
+            // Propagate so callers don't cache a partially-loaded card set as if it were complete.
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (final Exception e) { // this clause comes from non-threaded branch
             throw new RuntimeException(e);

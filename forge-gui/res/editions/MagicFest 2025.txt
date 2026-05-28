@@ -1,6 +1,6 @@
 [metadata]
 Code=PF25
-Date=2025-02-03
+Date=2025-01-01
 Name=MagicFest 2025
 Type=Promo
 ScryfallCode=PF25

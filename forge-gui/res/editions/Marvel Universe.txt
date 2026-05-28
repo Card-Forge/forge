@@ -10,7 +10,7 @@ ScryfallCode=MAR
 2 M Leyline Binding @Ron Frenz & Joe Rubinstein
 3 M Nine Lives @C.F. Villa & Brian Reber
 4 M Path to Exile @John Romita Sr.
-5 M Reprieve @Alex Ross & Frank Giacoia
+5 M Reprieve @Ross Andru & Frank Giacoia
 6 M Rest in Peace @Mark Buckingham & D'Israeli
 7 M Wedding Ring @John Romita Sr.
 8 M Clever Impersonator @Mark Bagley & Andrew Hennessy
@@ -46,3 +46,16 @@ ScryfallCode=MAR
 38 M Tangle @Humberto Ramos & Edgar Delgado
 39 M Alibou, Ancient Witness @Michael Turner & Mark Roslan ${"flavorName": "Iron Spider, Civil Warrior"}
 40 M Terminate @Mark Bagley & Randy Emberlin
+44 M Ephemerate @Mateus Manhanini
+54 M Dig Through Time @Kael Ngu
+55 M Harbinger of the Seas @Michael Turner
+56 M Lord of Atlantis @Mike Mignola & Dave Stewart
+63 M Dauthi Voidwalker @Adam Hughes ${"flavorName": "Widow-Making Infiltrator"}
+65 M Extinction Event @George Perez & Joe Rubinstein
+67 M Massacre Girl @Bill Sienkiewicz ${"flavorName": "Elektra, Deadly Assassin"}
+69 M Chaos Warp @Joe Quesada & Danny Miki
+77 M Force of Vigor @Alex Ross
+78 M Heroic Intervention @Bob Layton
+79 M Heroic Intervention @Jack Kirby & Don Heck
+80 M Heroic Intervention @Jack Kirby & Dick Ayers
+98 M Horn of Greed @Winslow Mortimer & Mike Esposito

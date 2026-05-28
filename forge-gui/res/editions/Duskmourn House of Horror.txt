@@ -392,7 +392,7 @@ Replace=.078F RareMythic:fromSheet("DSK cards")
 367 R Marvin, Murderous Mimic @Sam Wolfe Connelly
 386 M Enduring Innocence @Kawasumi
 387 M Overlord of the Mistmoors @Takeuchi Moto
-388 R Enduring Curiosity @D-suzuki
+388 M Enduring Curiosity @D-suzuki
 389 M Overlord of the Floodpits @Sansyu
 390 M Enduring Tenacity @TAPIOCA
 391 M Overlord of the Balemurk @Mikio Masuda
@@ -400,9 +400,9 @@ Replace=.078F RareMythic:fromSheet("DSK cards")
 393 M Overlord of the Boilerbilges @akio
 394 M Enduring Vitality @Issei Murakami
 395 M Overlord of the Hauntwoods @Aogachou
-396 R Enduring Innocence @Kawasumi
+396 M Enduring Innocence @Kawasumi
 397 M Overlord of the Mistmoors @Takeuchi Moto
-398 R Enduring Curiosity @D-suzuki
+398 M Enduring Curiosity @D-suzuki
 399 M Overlord of the Floodpits @Sansyu
 400 M Enduring Tenacity @TAPIOCA
 401 M Overlord of the Balemurk @Mikio Masuda

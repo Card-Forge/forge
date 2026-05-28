@@ -620,7 +620,11 @@ public class FloatingZone extends FloatingCardArea {
         onShow();
         // Override the base class's focusableWindowState=false so the search field can take keystrokes.
         getWindow().setFocusableWindowState(true);
-        if (getMatchUI().isSelecting()) {
+        // The window auto-grabs focus to the filter on show; suppress that while the prompt has an
+        // actionable button so OK/Cancel keep keyboard focus (the field stays clickable to filter).
+        final boolean takeFilterFocus = !getMatchUI().isInputButtonEnabled();
+        getWindow().setAutoRequestFocus(takeFilterFocus);
+        if (takeFilterFocus) {
             getWindow().setDefaultFocus(searchField);
         }
         getWindow().setVisible(true);

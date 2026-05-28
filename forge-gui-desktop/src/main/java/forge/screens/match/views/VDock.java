@@ -303,9 +303,9 @@ public class VDock implements IVDoc<CDock> {
      */
     public enum DockButtonId {
         AUTO_PASS      (FSkinProp.ICO_AUTOPASS,         "lblYieldBtnAutoPassTooltip", true),
+        YIELD_SETTINGS (FSkinProp.ICO_DOCK_SETTINGS,    "lblYieldSettings",           true),
         MACRO_RECORD   (FSkinProp.ICO_DOCK_MACRO_RECORD, "lblMacroRecordStartTooltip", true),
         MACRO_PLAY     (FSkinProp.ICO_DOCK_MACRO_PLAY,  "lblMacroPlayUnavailableTooltip", true),
-        YIELD_SETTINGS (FSkinProp.ICO_DOCK_SETTINGS,    "lblYieldSettings",           true),
         END_TURN       (FSkinProp.ICO_DOCK_ENDTURN,     "lblEndTurn",                 true),
         ALPHA_STRIKE   (FSkinProp.ICO_DOCK_ALPHASTRIKE, "lblAlphaStrike",             true),
         TARGETING      (FSkinProp.ICO_ARCSOFF,          "lblTargetingArcs",           true),
@@ -443,7 +443,9 @@ public class VDock implements IVDoc<CDock> {
             this.setOpaque(false);
             this.img = i0;
 
-            setButtonSize(this);
+            setPreferredSize(BUTTON_SIZE);
+            setMinimumSize(BUTTON_SIZE);
+            setMaximumSize(BUTTON_SIZE);
 
             // FMouseAdapter(true): drag past 3px suppresses the click action
             final FMouseAdapter adapter = new FMouseAdapter(true) {
@@ -664,12 +666,6 @@ public class VDock implements IVDoc<CDock> {
                 FSkin.drawImage(g, this.img, 0, 0, width, height);
             }
         }
-    }
-
-    private static void setButtonSize(final javax.swing.JComponent component) {
-        component.setPreferredSize(BUTTON_SIZE);
-        component.setMinimumSize(BUTTON_SIZE);
-        component.setMaximumSize(BUTTON_SIZE);
     }
 
 }

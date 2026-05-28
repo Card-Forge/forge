@@ -1,0 +1,8 @@
+Name:Blood Age Muster
+ManaCost:R W
+Types:Enchantment
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | ActivationLimit$ 1 | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever one or more cards leave your graveyard, conjure a random card from Blood Age Muster's spellbook onto the battlefield. Its base power and toughness perpetually become 2/2. This ability triggers only once each turn.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Blood Age General,Charging Strifeknight,Fuming Effigy,Pillardrop Warden,Spirit Mascot,Stonebinder's Familiar,Stonebound Mentor,Stone Docent,Stonerise Spirit,Summoned Dromedary | RememberMade$ True | SubAbility$ DBAnimate | Zone$ Battlefield
+SVar:DBAnimate:DB$ Animate | Duration$ Perpetual | Defined$ Remembered | Power$ 2 | Toughness$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever one or more cards leave your graveyard, conjure a random card from Blood Age Muster's spellbook onto the battlefield. Its base power and toughness perpetually become 2/2. This ability triggers only once each turn.

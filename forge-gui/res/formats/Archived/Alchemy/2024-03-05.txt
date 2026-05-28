@@ -3,4 +3,4 @@ Name:Alchemy (YMKM)
 Type:Archived
 Subtype:Arena
 Effective:2024-03-05
-Sets:ANA, ANB, DMU, YDMU, BRO, YBRO, ONE, YONE, MOM, MAT, LTR, WOE, YWOE, LCI, YLCI, MKM, YMKM
+Sets:ANB, DMU, YDMU, BRO, YBRO, ONE, YONE, MOM, MAT, LTR, WOE, YWOE, LCI, YLCI, MKM, YMKM

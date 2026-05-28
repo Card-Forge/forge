@@ -2291,12 +2291,29 @@ public class ComputerUtil {
     }
 
     public static CardCollection getCardsToDiscardFromOpponent(Player chooser, Player discarder, SpellAbility sa, CardCollection validCards, int min, int max) {
-        CardCollection goodChoices = CardLists.filter(validCards, c -> !c.hasSVar("DiscardMeByOpp") && !c.hasSVar("DiscardMe"));
+        // Focus on keycards
+        boolean foundKeycard = false;
+        List<String> keyCards = discarder.getRegisteredPlayer().getDeck().getKeyCards();
+        CardCollection goodChoices = CardLists.filter(validCards, c -> keyCards.contains(c.getName()) && !c.hasSVar("DiscardMeByOpp") && !c.hasSVar("DiscardMe"));
         if (goodChoices.isEmpty()) {
-            goodChoices = validCards;
+            goodChoices = CardLists.filter(validCards, c -> !c.hasSVar("DiscardMeByOpp") && !c.hasSVar("DiscardMe"));
+
+            if (goodChoices.isEmpty()) {
+                goodChoices = validCards;
+            }
+        } else {
+            foundKeycard = true;
+            goodChoices.sort(Comparator.comparingInt(c -> {
+                int idx = keyCards.indexOf(c.getName());
+                return idx == -1 ? Integer.MAX_VALUE : idx;
+            }));
         }
 
         if (min == 1 && max == 1) {
+            if (foundKeycard) {
+                return new CardCollection(goodChoices.getFirst());
+            }
+
             if (sa.hasParam("DiscardValid")) {
                 final String validString = sa.getParam("DiscardValid");
                 if (validString.contains("Creature") && !validString.contains("nonCreature")) {
@@ -2311,16 +2328,47 @@ public class ComputerUtil {
         // not enough good choices, need to fill the rest
         int minDiff = min - goodChoices.size();
         if (minDiff > 0) {
-            List<Card> choices = validCards.stream()
+            // Filter validCards to the leftover cards not already in goodChoices, then group
+            // them by their DiscardMe / DiscardMeByOpp weight (0 when neither SVar is present).
+            // Process buckets in ascending weight order so the most-desirable targets are
+            // taken first. Add an entire bucket when it fits within what is still needed;
+            // otherwise randomly sample the required amount from that bucket.
+            List<Card> remaining = validCards.stream()
                     .filter(Predicate.not(goodChoices::contains))
-                    .collect(StreamUtil.random(minDiff));
-            goodChoices.addAll(choices);
+                    .collect(Collectors.toList());
+
+            Map<Integer, List<Card>> weightBuckets = remaining.stream()
+                    .collect(Collectors.groupingBy(c -> {
+                        if (c.hasSVar("DiscardMeByOpp")) {
+                            return Integer.parseInt(c.getSVar("DiscardMeByOpp"));
+                        } else if (c.hasSVar("DiscardMe")) {
+                            return Integer.parseInt(c.getSVar("DiscardMe"));
+                        }
+                        return 0;
+                    }));
+
+            int needed = minDiff;
+            for (int weight : weightBuckets.keySet().stream().sorted().collect(Collectors.toList())) {
+                if (needed <= 0) {
+                    break;
+                }
+                List<Card> bucket = weightBuckets.get(weight);
+                if (bucket.size() <= needed) {
+                    goodChoices.addAll(bucket);
+                    needed -= bucket.size();
+                } else {
+                    goodChoices.addAll(bucket.stream().collect(StreamUtil.random(needed)));
+                    needed = 0;
+                }
+            }
+
             return goodChoices;
         }
 
-        goodChoices.sort(CardLists.TextLenComparator);
-
-        CardLists.sortByCmcDesc(goodChoices);
+        if (!foundKeycard) {
+            goodChoices.sort(CardLists.TextLenComparator);
+            CardLists.sortByCmcDesc(goodChoices);
+        }
 
         return goodChoices.subList(0, max);
     }
@@ -2841,15 +2889,15 @@ public class ComputerUtil {
         if (type.isKeywordCounter() && c.hasKeyword(type.toString())) {
             return CounterAiCategory.Neutral;
         }
-        if (type.is(CounterEnumType.BLAZE) && c.isLand()) {
+        if (type.is(CounterEnumType.TIME) && !c.isInPlay()) {
             return CounterAiCategory.Negative;
         }
-        if (type.is(CounterEnumType.TIME) && !c.isInPlay()) {
+        if (type == CounterType.getType("BLAZE") && c.isLand()) {
             return CounterAiCategory.Negative;
         }
         // Quest counter on a card without MaxQuestEffect are useless
         // this checks for over max quest to mark them negative
-        if (type.is(CounterEnumType.QUEST) && c.hasSVar("MaxQuestEffect")) {
+        if (type == CounterType.getType("QUEST") && c.hasSVar("MaxQuestEffect")) {
             if (c.getCounters(type) > Integer.parseInt(c.getSVar("MaxQuestEffect"))) {
                 return CounterAiCategory.Negative;
             }

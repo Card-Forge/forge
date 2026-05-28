@@ -182,7 +182,6 @@ public abstract class DeckGeneratorBase {
     protected void addBasicLand(int cnt) {
     	addBasicLand(cnt, null);
     }
-
     protected void addBasicLand(int cnt, String edition) {
         trace.append(cnt).append(" basic lands remain").append("\n");
 

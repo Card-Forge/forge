@@ -1,6 +1,6 @@
 [metadata]
 Code=C18
-Date=2018-08-09
+Date=2018-08-10
 Name=Commander 2018
 Type=Commander
 ScryfallCode=C18
@@ -297,7 +297,7 @@ ScryfallCode=C18
 289 U Tranquil Expanse @Cliff Childs
 290 C Tranquil Thicket @Heather Hudson
 291 C Warped Landscape @Cliff Childs
-292 C Woodland Stream @Efflam Mercier
+292 C Woodland Stream @Enora Mercier
 293 L Plains @John Avon
 294 L Plains @Steven Belledin
 295 L Plains @Adam Paquette

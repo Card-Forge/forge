@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -256,12 +256,14 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         addCardToZone("Urborg, Tomb of Yawgmoth", p, ZoneType.Library);
         addCardToZone("Swamp", p, ZoneType.Library);
 
-        darkDepths.setCounters(CounterEnumType.ICE, 10);
+        CounterType ice = CounterType.getType("ICE");
+
+        darkDepths.setCounters(ice, 10);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        AssertJUnit.assertEquals(10, darkDepths.getCounters(CounterEnumType.ICE));
+        AssertJUnit.assertEquals(10, darkDepths.getCounters(ice));
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(cropRotation.getSpellAbilities().get(0), sa);

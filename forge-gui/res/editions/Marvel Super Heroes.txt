@@ -21,6 +21,7 @@ ScryfallCode=MSH
 197 R World War Hulk @Serena Malyon
 212 M The Coming of Galactus @Serena Malyon
 223 R Moon Girl and Devil Dinosaur @Zezhou Chen
+240 R Wolverinem Fierce Fighter @Dan Brereton
 255 R The Vision @Carissa Susilo
 304 R World War Hulk @Steve Ellis
 307 M The Coming of Galactus @Veronica Fish

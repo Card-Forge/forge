@@ -52,10 +52,6 @@ public final class MenuUtil {
         Singletons.getControl().getForgeMenu().setProvider(provider);
     }
 
-    public static void setMenuHint(final JMenuItem menu, final String hint) {
-        menu.setToolTipText(hint);
-    }
-
     /** Adds a stay-open checkbox that toggles the given preference. Returns the item for further customization. */
     public static JCheckBoxMenuItem addPrefCheckBox(final JMenu menu, final String label, final FPref pref) {
         final ForgePreferences prefs = FModel.getPreferences();

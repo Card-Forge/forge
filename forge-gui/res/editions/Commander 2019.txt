@@ -56,7 +56,7 @@ ScryfallCode=C19
 48 M Rayami, First of the Fallen @Kieran Yanner
 49 M Sevinne, the Chronoclasm @Zoltan Boros
 50 R Tahngarth, First Mate @Anna Steinbauer
-51 M Volrath, the Shapestealer @Heonhwa Choe
+51 M Volrath, the Shapestealer @Heonhwa
 52 R Aeon Engine @Ralph Horsley
 53 U Bloodthirsty Blade @Jason Kang
 54 R Empowered Autogenerator @Piotr Dura
@@ -291,7 +291,7 @@ ScryfallCode=C19
 283 C Thornwood Falls @Eytan Zana
 284 C Tranquil Cove @John Avon
 285 C Wind-Scarred Crag @Eytan Zana
-286 C Woodland Stream @Efflam Mercier
+286 C Woodland Stream @Enora Mercier
 287 R Yavimaya Coast @Anthony S. Waters
 288 L Plains @Alayna Danner
 289 L Plains @Jonas De Ro

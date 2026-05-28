@@ -296,6 +296,10 @@ public final class CMatchUI
     CPrompt getCPrompt() {
         return cPrompt;
     }
+    /** True if either prompt input button (OK/Cancel) is currently enabled. */
+    public boolean isInputButtonEnabled() {
+        return view.getBtnOK().isEnabled() || view.getBtnCancel().isEnabled();
+    }
     public CStack getCStack() {
         return cStack;
     }
@@ -1060,19 +1064,13 @@ public final class CMatchUI
         return null; //delay ability until choice made
     }
 
-    @Override
-    public void showPromptMessage(final PlayerView playerView, final String message) {
-        cancelWaitingTimer();
-        cPrompt.setMessage(message);
-        notePromptMessage(message);
-    }
     public void showPromptMessageNoCancel(final PlayerView playerView, final String message) {
-        cPrompt.setMessage(message);
+        cPrompt.setMessage(message, null);
         notePromptMessage(message);
     }
 
     @Override
-    public void showCardPromptMessage(PlayerView playerView, String message, CardView card) {
+    public void showPromptMessage(PlayerView playerView, String message, CardView card) {
         cancelWaitingTimer();
         cPrompt.setMessage(message, card);
         notePromptMessage(message);

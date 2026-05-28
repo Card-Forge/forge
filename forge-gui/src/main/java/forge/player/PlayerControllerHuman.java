@@ -138,7 +138,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public final IGuiGame getGui() {
         return gui;
     }
-
     public final void setGui(final IGuiGame gui) {
         this.gui = gui;
     }
@@ -374,7 +373,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 localizer.getMessage("lblMana").toLowerCase());
         Map<Byte, Integer> result = new HashMap<>();
         if (vResult != null) { //fix for netplay
-            for (MagicColor.Color  color : colorSet) {
+            for (MagicColor.Color color : colorSet) {
                 if (vResult.containsKey(color)) {
                     result.put(color.getColorMask(), vResult.get(color));
                 }
@@ -554,7 +553,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         return choices;
     }
-
 
     @Override
     public boolean helpPayForAssistSpell(ManaCostBeingPaid cost, SpellAbility sa, int max, int requested) {
@@ -798,7 +796,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private void recordConfirm(final SpellAbility sa, final boolean result) {
         recordConfirm(sa == null ? null : sa.getCardView(), result);
     }
-
     private void recordConfirm(final CardView cardView, final boolean result) {
         macros().addRememberedAction(new ConfirmAction(cardView, result));
     }
@@ -1032,33 +1029,31 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
             toTop = result.getLeft();
             toBottom = result.getRight();
-        } else {
-            if (topN.size() == 1) {
-                if (willPutCardOnTop(topN.get(0))) {
-                    toTop = topN;
-                } else {
-                    toBottom = topN;
-                }
+        } else if (topN.size() == 1) {
+            if (willPutCardOnTop(topN.get(0))) {
+                toTop = topN;
             } else {
-                GameEntityViewMap<Card, CardView> cardCacheScry = GameEntityView.getMap(topN);
+                toBottom = topN;
+            }
+        } else {
+            GameEntityViewMap<Card, CardView> cardCacheScry = GameEntityView.getMap(topN);
 
-                toBottom = new CardCollection();
-                List<CardView> views = getGui().many(localizer.getMessage("lblSelectCardsToBeOutOnTheBottomOfYourLibrary"),
-                        localizer.getMessage("lblCardsToPutOnTheBottom"), -1, cardCacheScry.getTrackableKeys(), null);
-                cardCacheScry.addToList(views, toBottom);
+            toBottom = new CardCollection();
+            List<CardView> views = getGui().many(localizer.getMessage("lblSelectCardsToBeOutOnTheBottomOfYourLibrary"),
+                    localizer.getMessage("lblCardsToPutOnTheBottom"), -1, cardCacheScry.getTrackableKeys(), null);
+            cardCacheScry.addToList(views, toBottom);
 
-                topN.removeAll(toBottom);
-                if (topN.isEmpty()) {
-                    toTop = null;
-                } else if (topN.size() == 1) {
-                    toTop = topN;
-                } else {
-                    GameEntityViewMap<Card, CardView> cardCacheOrder = GameEntityView.getMap(topN);
-                    toTop = new CardCollection();
-                    views = getGui().order(localizer.getMessage("lblArrangeCardsToBePutOnTopOfYourLibrary"),
-                            localizer.getMessage("lblTopOfLibrary"), cardCacheOrder.getTrackableKeys(), null);
-                    cardCacheOrder.addToList(views, toTop);
-                }
+            topN.removeAll(toBottom);
+            if (topN.isEmpty()) {
+                toTop = null;
+            } else if (topN.size() == 1) {
+                toTop = topN;
+            } else {
+                GameEntityViewMap<Card, CardView> cardCacheOrder = GameEntityView.getMap(topN);
+                toTop = new CardCollection();
+                views = getGui().order(localizer.getMessage("lblArrangeCardsToBePutOnTopOfYourLibrary"),
+                        localizer.getMessage("lblTopOfLibrary"), cardCacheOrder.getTrackableKeys(), null);
+                cardCacheOrder.addToList(views, toTop);
             }
         }
         endTempShowCards();
@@ -1079,7 +1074,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             tempShowCard(c);
             getGui().setCard(view);
             boolean result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardsOnTheTopLibraryOrGraveyard", CardTranslation.getTranslatedName(view.getName())),
-                    true, ImmutableList.of(localizer.getMessage("lblLibrary"), localizer.getMessage("lblGraveyard")));
+                    true, List.of(localizer.getMessage("lblLibrary"), localizer.getMessage("lblGraveyard")));
             if (result) {
                 toTop = topN;
             } else {
@@ -1116,7 +1111,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         getGui().setCard(c.getView());
 
         boolean result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardOnTopOrBottomLibrary", CardTranslation.getTranslatedName(view.getName())),
-                true, ImmutableList.of(localizer.getMessage("lblTop"), localizer.getMessage("lblBottom")));
+                true, List.of(localizer.getMessage("lblTop"), localizer.getMessage("lblBottom")));
 
         endTempShowCards();
         return result;
@@ -1511,9 +1506,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             else //fallback
                 cardView = effectSA == null ? null : effectSA.getCardView();
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
-        } else {
-            return InputConfirm.confirm(this, effectSA, question);
         }
+        return InputConfirm.confirm(this, effectSA, question);
     }
 
     @Override
@@ -1790,18 +1784,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final String message = MessageUtil.formatNotificationMessage(sa, player, realtedTarget, value);
         if (sa != null && sa.isManaAbility()) {
             getGame().fireEvent(new GameEventAddLog(GameLogEntryType.LAND, message));
+        } else if (sa != null && sa.getHostCard() != null && getGui().isLibgdxPort()) {
+            CardView cardView;
+            IPaperCard iPaperCard = sa.getHostCard().getPaperCard();
+            if (iPaperCard != null)
+                cardView = CardView.getCardForUi(iPaperCard);
+            else
+                cardView = sa.getHostCard().getView();
+            getGui().confirm(cardView, message, true, ImmutableList.of(localizer.getMessage("lblOK")));
         } else {
-            if (sa != null && sa.getHostCard() != null && getGui().isLibgdxPort()) {
-                CardView cardView;
-                IPaperCard iPaperCard = sa.getHostCard().getPaperCard();
-                if (iPaperCard != null)
-                    cardView = CardView.getCardForUi(iPaperCard);
-                else
-                    cardView = sa.getHostCard().getView();
-                getGui().confirm(cardView, message, true, ImmutableList.of(localizer.getMessage("lblOK")));
-            } else {
-                getGui().message(message, sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
-            }
+            getGui().message(message, sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
         }
     }
 
@@ -1830,7 +1822,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final List<String> choiceDescriptions = Lists.newArrayList();
         final Map<String, AbilitySub> modesByDescription = Maps.newLinkedHashMap();
         for (final AbilitySub sub : spellViewCache.values()) {
-            final String description = describeModeChoice(sub);
+            final String description = sub.toUnsuppressedString();
             choiceDescriptions.add(description);
             modesByDescription.put(description, sub);
         }
@@ -1872,14 +1864,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final List<String> chosenDescriptions = Lists.newArrayListWithCapacity(chosen.size());
         for (final AbilitySub sub : chosen) {
-            chosenDescriptions.add(describeModeChoice(sub));
+            chosenDescriptions.add(sub.toUnsuppressedString());
         }
         macros().addRememberedAction(new ModeChoiceAction(chosenDescriptions));
         return chosen;
-    }
-
-    private String describeModeChoice(final AbilitySub sub) {
-        return sub.toUnsuppressedString();
     }
 
     @Override
@@ -3491,8 +3479,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             getGame().getAction().checkGameOverCondition();
             if (getGame().isGameOver()) {
                 // Remote-client controllers on the server have no FControlGameEventHandler,
-                // so their input queues won't be released by the normal event path
-                for (Player p : getGame().getPlayers()) {
+                // so their input queues won't be released by the normal event path.
+                // Iterate registered players (not getPlayers(), which excludes the
+                // conceding player after onPlayerLost removes them from ingamePlayers).
+                for (Player p : getGame().getRegisteredPlayers()) {
                     if (p.getController() instanceof PlayerControllerHuman pch) {
                         pch.getInputQueue().onGameOver(true);
                     }

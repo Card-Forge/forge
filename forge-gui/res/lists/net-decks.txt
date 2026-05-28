@@ -10,18 +10,16 @@ Building on a Budget | https://github.com/Card-Forge/forge-extras/raw/refs/heads
 Card Preview | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/cardpreview.zip
 Community Cup | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/communitycup.zip
 Current Alchemy Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentalchemymetagame.zip
-Current Alchemy-BO1 Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentalchemybo1metagame.zip
 Current Historic Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currenthistoricmetagame.zip
-Current Historic-BO1 Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currenthistoricbo1metagame.zip
 Current Legacy Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentlegacymetagame.zip
 Current Modern Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentmodernmetagame.zip
 Current Pauper Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentpaupermetagame.zip
 Current Penny Dreadful Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentpennydreadfulmetagame.zip
 Current Pioneer Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentpioneermetagame.zip
+Current Premodern Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentpremodernmetagame.zip
 Current Standard Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentstandardmetagame.zip
 Current Standard-BO1 Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentstandardbo1metagame.zip
 Current Timeless Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currenttimelessmetagame.zip
-Current Timeless-BO1 Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currenttimelessbo1metagame.zip
 Current Vintage Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentvintagemetagame.zip
 Daily Deck List | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/dailydecks.zip
 Daily Magic Update | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/dailymagicupdate.zip
