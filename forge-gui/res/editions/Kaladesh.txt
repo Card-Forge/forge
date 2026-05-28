@@ -282,12 +282,12 @@ ScryfallCode=KLD
 266 C Flame Lash @Viktor Titov
 267 R Liberating Combustion @Lius Lasahido
 268 U Renegade Firebrand @John Stanko
-269 C Stone Quarry @Efflam Mercier
+269 C Stone Quarry @Enora Mercier
 270 M Nissa, Nature's Artisan @Willian Murai
 271 U Guardian of the Great Conduit @Christine Choi
 272 C Terrain Elemental @Magali Villeneuve
 273 R Verdant Crescendo @Zack Stella
-274 C Woodland Stream @Efflam Mercier
+274 C Woodland Stream @Enora Mercier
 
 [Kaladesh Inventions]
 Cataclysmic Gearhulk|MPS_KLD
