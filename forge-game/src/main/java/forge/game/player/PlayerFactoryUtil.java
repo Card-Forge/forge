@@ -2,6 +2,7 @@ package forge.game.player;
 
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+import forge.game.keyword.Hexproof;
 import forge.game.keyword.KeywordInterface;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -12,23 +13,28 @@ public class PlayerFactoryUtil {
     public static void addStaticAbility(final KeywordInterface inst, final Player player) {
         String keyword = inst.getOriginal();
 
-        if (keyword.startsWith("Hexproof")) {
-            final StringBuilder sbDesc = new StringBuilder("Hexproof");
+        if (keyword.startsWith("Hexproof")
+                && inst instanceof Hexproof hexproof) {
             final StringBuilder sbValid = new StringBuilder();
 
-            if (!keyword.equals("Hexproof")) {
-                final String[] k = keyword.split(":");
-
-                sbDesc.append(" from ").append(k[2]);
-                sbValid.append("| ValidSource$ ").append(k[1]);
+            if (!hexproof.getValidType().isEmpty()) {
+                sbValid.append("| ValidSource$ ")
+                    .append(hexproof.getValidType());
             }
 
-            String effect = "Mode$ CantTarget | ValidTarget$ Player.You | Secondary$ True "
-                    + sbValid.toString() + " | Activator$ Opponent | EffectZone$ Command | Description$ "
-                    + sbDesc.toString() + " (" + inst.getReminderText() + ")";
+            String effect = "Mode$ CantTarget"
+                + " | ValidTarget$ Player.You"
+                + " | Secondary$ True "
+                + sbValid
+                + " | Activator$ Opponent"
+                + " | EffectZone$ Command"
+                + " | Description$ "
+                + inst.getTitle()
+                + " (" + inst.getReminderText() + ")";
 
             final Card card = player.getKeywordCard();
-            inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
+            inst.addStaticAbility(StaticAbility.create(
+                effect, card, card.getCurrentState(), false));
         } else if (keyword.equals("Shroud")) {
             String effect = "Mode$ CantTarget | ValidTarget$ Player.You | Secondary$ True "
                     + "| EffectZone$ Command | Description$ Shroud (" + inst.getReminderText() + ")";
