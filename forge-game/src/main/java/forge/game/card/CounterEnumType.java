@@ -531,6 +531,11 @@ public enum CounterEnumType implements CounterType {
     }
 
     @Override
+    public CounterAiCategory getAiCategory() {
+        return aiCategory;
+    }
+
+    @Override
     public String getCounterOnCardDisplayName() {
         return counterOnCardDisplayName;
     }
