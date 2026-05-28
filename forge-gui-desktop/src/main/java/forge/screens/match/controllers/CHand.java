@@ -89,7 +89,7 @@ public class CHand implements ICDoc {
 
         //update card panels in hand area
         final List<CardView> cards;
-        if (player.getHand() == null) {
+        if (player.getHand().isEmpty()) {
             cards = ImmutableList.of();
         } else {
             synchronized (player) {

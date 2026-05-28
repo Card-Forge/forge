@@ -22,7 +22,6 @@ import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.*;
-import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -468,12 +467,12 @@ public class CardView extends GameEntityView {
     void updateMarkedColors(Card c) {
         set(TrackableProperty.MarkedColors, c.getMarkedColors());
     }
-    public FCollectionView<CardView> getMergedCardsCollection() {
-        return get(TrackableProperty.MergedCardsCollection);
+    public List<CardView> getMergedCardsCollection() {
+        return Objects.requireNonNullElse(get(TrackableProperty.MergedCardsCollection), List.of());
     }
 
-    public FCollectionView<CardView> getChosenCards() {
-        return get(TrackableProperty.ChosenCards);
+    public List<CardView> getChosenCards() {
+        return Objects.requireNonNullElse(get(TrackableProperty.ChosenCards), List.of());
     }
 
     public PlayerView getChosenPlayer() {
@@ -742,12 +741,12 @@ public class CardView extends GameEntityView {
         return isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer);
     }
 
-    public FCollectionView<CardView> getEncodedCards() {
-        return get(TrackableProperty.EncodedCards);
+    public List<CardView> getEncodedCards() {
+        return Objects.requireNonNullElse(get(TrackableProperty.EncodedCards), List.of());
     }
 
-    public FCollectionView<CardView> getUntilLeavesBattlefield() {
-        return get(TrackableProperty.UntilLeavesBattlefield);
+    public List<CardView> getUntilLeavesBattlefield() {
+        return Objects.requireNonNullElse(get(TrackableProperty.UntilLeavesBattlefield), List.of());
     }
 
     public GameEntityView getEntityAttachedTo() {
@@ -772,8 +771,8 @@ public class CardView extends GameEntityView {
         return null;
     }
 
-    public FCollectionView<CardView> getGainControlTargets() {
-        return get(TrackableProperty.GainControlTargets);
+    public List<CardView> getGainControlTargets() {
+        return Objects.requireNonNullElse(get(TrackableProperty.GainControlTargets), List.of());
     }
 
     public CardView getCloneOrigin() {
@@ -784,24 +783,24 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.ExiledWith);
     }
 
-    public FCollectionView<CardView> getImprintedCards() {
-        return get(TrackableProperty.ImprintedCards);
+    public List<CardView> getImprintedCards() {
+        return Objects.requireNonNullElse(get(TrackableProperty.ImprintedCards), List.of());
     }
 
-    public FCollectionView<CardView> getExiledCards() {
-        return get(TrackableProperty.ExiledCards);
+    public List<CardView> getExiledCards() {
+        return Objects.requireNonNullElse(get(TrackableProperty.ExiledCards), List.of());
     }
 
-    public FCollectionView<CardView> getHauntedBy() {
-        return get(TrackableProperty.HauntedBy);
+    public List<CardView> getHauntedBy() {
+        return Objects.requireNonNullElse(get(TrackableProperty.HauntedBy), List.of());
     }
 
     public CardView getHaunting() {
         return get(TrackableProperty.Haunting);
     }
 
-    public FCollectionView<CardView> getMustBlockCards() {
-        return get(TrackableProperty.MustBlockCards);
+    public List<CardView> getMustBlockCards() {
+        return Objects.requireNonNullElse(get(TrackableProperty.MustBlockCards), List.of());
     }
     void updateMustBlockCards(Card c) {
         setCards(null, c.getMustBlockCards(), TrackableProperty.MustBlockCards);
@@ -1732,129 +1731,6 @@ public class CardView extends GameEntityView {
         }
     }
 
-    //special methods for updating card and player properties as needed and returning the new collection
-    Card setCard(Card oldCard, Card newCard, TrackableProperty key) {
-        if (newCard != oldCard) {
-            set(key, CardView.get(newCard));
-        }
-        return newCard;
-    }
-    CardCollection setCards(CardCollection oldCards, CardCollection newCards, TrackableProperty key) {
-        if (newCards == null || newCards.isEmpty()) { //avoid storing empty collections
-            set(key, null);
-            return null;
-        }
-        set(key, CardView.getCollection(newCards)); //TODO prevent overwriting list if not necessary
-        return newCards;
-    }
-    CardCollection setCards(CardCollection oldCards, Iterable<Card> newCards, TrackableProperty key) {
-        if (newCards == null) {
-            set(key, null);
-            return null;
-        }
-        return setCards(oldCards, new CardCollection(newCards), key);
-    }
-    CardCollection addCard(CardCollection oldCards, Card cardToAdd, TrackableProperty key) {
-        if (cardToAdd == null) { return oldCards; }
-
-        if (oldCards == null) {
-            oldCards = new CardCollection();
-        }
-        if (oldCards.add(cardToAdd)) {
-            TrackableCollection<CardView> views = get(key);
-            if (views == null) {
-                views = new TrackableCollection<>();
-                views.add(cardToAdd.getView());
-                set(key, views);
-            }
-            else if (views.add(cardToAdd.getView())) {
-                flagAsChanged(key);
-            }
-        }
-        return oldCards;
-    }
-    CardCollection addCards(CardCollection oldCards, Iterable<Card> cardsToAdd, TrackableProperty key) {
-        if (cardsToAdd == null) { return oldCards; }
-
-        TrackableCollection<CardView> views = get(key);
-        if (oldCards == null) {
-            oldCards = new CardCollection();
-        }
-        boolean needFlagAsChanged = false;
-        for (Card c : cardsToAdd) {
-            if (c != null && oldCards.add(c)) {
-                if (views == null) {
-                    views = new TrackableCollection<>();
-                    views.add(c.getView());
-                    set(key, views);
-                }
-                else if (views.add(c.getView())) {
-                    needFlagAsChanged = true;
-                }
-            }
-        }
-        if (needFlagAsChanged) {
-            flagAsChanged(key);
-        }
-        return oldCards;
-    }
-    CardCollection removeCard(CardCollection oldCards, Card cardToRemove, TrackableProperty key) {
-        if (cardToRemove == null || oldCards == null) { return oldCards; }
-
-        if (oldCards.remove(cardToRemove)) {
-            TrackableCollection<CardView> views = get(key);
-            if (views == null) {
-                set(key, null);
-            } else if (views.remove(cardToRemove.getView())) {
-                if (views.isEmpty()) {
-                    set(key, null); //avoid keeping around an empty collection
-                }
-                else {
-                    flagAsChanged(key);
-                }
-            }
-            if (oldCards.isEmpty()) {
-                oldCards = null; //avoid keeping around an empty collection
-            }
-        }
-        return oldCards;
-    }
-    CardCollection removeCards(CardCollection oldCards, Iterable<Card> cardsToRemove, TrackableProperty key) {
-        if (cardsToRemove == null || oldCards == null) { return oldCards; }
-
-        TrackableCollection<CardView> views = get(key);
-        boolean needFlagAsChanged = false;
-        for (Card c : cardsToRemove) {
-            if (oldCards.remove(c)) {
-                if (views == null) {
-                    set(key, null);
-                } else if (views.remove(c.getView())) {
-                    if (views.isEmpty()) {
-                        views = null;
-                        set(key, null); //avoid keeping around an empty collection
-                        needFlagAsChanged = false; //doesn't need to be flagged a second time
-                    }
-                    else {
-                        needFlagAsChanged = true;
-                    }
-                }
-                if (oldCards.isEmpty()) {
-                    oldCards = null; //avoid keeping around an empty collection
-                    break;
-                }
-            }
-        }
-        if (needFlagAsChanged) {
-            flagAsChanged(key);
-        }
-        return oldCards;
-    }
-    CardCollection clearCards(CardCollection oldCards, TrackableProperty key) {
-        if (oldCards != null) {
-            set(key, null);
-        }
-        return null;
-    }
     void updateMergeCollections(CardCollection cards) {
         TrackableCollection<CardView> views = get(TrackableProperty.MergedCardsCollection);
         boolean needFlagAsChanged = false;
