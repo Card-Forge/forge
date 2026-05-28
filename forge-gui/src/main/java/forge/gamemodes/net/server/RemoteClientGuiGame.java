@@ -329,7 +329,13 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public void showPromptMessage(final PlayerView playerView, final String message, final CardView card) {
-        syncAndSend(ProtocolMethod.showPromptMessage, playerView, message, card);
+        // card == null is the await/auto-pass timer path, which fires while the game thread is live — walking the graph there races it.
+        // card != null comes from blocking input with the game thread parked on its latch, so syncAndSend is safe and ships the CardView.
+        if (card == null) {
+            send(ProtocolMethod.showPromptMessage, playerView, message, null);
+        } else {
+            syncAndSend(ProtocolMethod.showPromptMessage, playerView, message, card);
+        }
     }
 
     @Override
