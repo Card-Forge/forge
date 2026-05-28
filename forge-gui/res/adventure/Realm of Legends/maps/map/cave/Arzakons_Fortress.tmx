@@ -135,7 +135,9 @@
 {
    &quot;text&quot;: &quot;The barren fortress ahead has been entirely hollowed out, containing only a single resident, the towering demonic entity that stands before you. It seems it can barely move, bound by the remnant wards that still hold despite the fortress's ruined state. You recall ancient tales of a being known as Arzakon, the Doom of Shandalar, that was sealed away milennia ago - it would seem this is that very same being.
 
-Your manasight stone blazes with power, near-blindingly bright.&quot;,
+Your manasight stone blazes with power, near-blindingly bright.
+
+(NOTE: For this encounter, switch 'enable non-legal cards' to ON in settings)&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
