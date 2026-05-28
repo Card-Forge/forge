@@ -740,7 +740,7 @@ ScryfallCode=LTR
 738 M Spiteful Banditry @Micha Huigen
 739 M Last March of the Ents @Ian Jepson
 740 M Radagast the Brown @Micha Huigen
-741 M Aragorn, the Uniter @Daniel Correia
+741 M Aragorn, the Uniter @Pedro Correa
 742 M Arwen, Mortal Queen @Marlene Yui
 743 M Saruman of Many Colors @Scott Balmer
 744 M Sauron, the Dark Lord @Justine Jones

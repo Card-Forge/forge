@@ -98,7 +98,7 @@ ScryfallCode=TOR
 83 U Sickening Dreams @Scott M. Fischer
 84 U Slithery Stalker @John Avon
 85 C Soul Scourge @Carl Critchlow
-86 U Strength of Lunacy @Greg Hildebrandt & Tim Hildebrandt
+86 U Strength of Lunacy @Greg Hildebrandt
 87 C Unhinge @Keith Garletts
 88 C Waste Away @Alan Pollack
 89 U Zombie Trailblazer @Brian Snõddy
@@ -109,7 +109,7 @@ ScryfallCode=TOR
 94 U Crazed Firecat @Ron Spears
 95 R Devastating Dreams @Tony Szczudlo
 96 C Enslaved Dwarf @Terese Nielsen
-97 C Fiery Temper @Greg Hildebrandt & Tim Hildebrandt
+97 C Fiery Temper @Greg Hildebrandt
 98 U Flaming Gambit @Donato Giancola
 99 C Flash of Defiance @Carl Critchlow
 100 R Grim Lavamancer @Jim Nelson
