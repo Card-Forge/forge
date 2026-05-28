@@ -61,7 +61,9 @@ public class AmassEffect extends TokenEffectBase {
             StringBuilder sb = new StringBuilder("b_0_0_");
             sb.append(sa.getOriginalParam("Type").toLowerCase()).append("_army");
 
-            final Card result = TokenInfo.getProtoType(sb.toString(), sa, activator, false);
+            Card result = TokenInfo.getProtoType(sb.toString(), sa, activator, false);
+            if (result == null) //Custom Amass type.
+                result = TokenInfo.getProtoType("b_0_0_army", sa, activator, false);
             // need to alter the token to add the Type from the Parameter
             result.setCreatureTypes(Lists.newArrayList(type, "Army"));
             result.setName(type + " Army Token");
