@@ -4943,7 +4943,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void addChangedCardTraitsByText(Collection<SpellAbility> spells,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics, long timestamp, long staticId) {
         changedCardTraitsByText.put(timestamp, staticId, new CardTraitChanges(
-            spells, null, trigger, replacements, statics, e -> true
+            spells, trigger, replacements, statics, e -> true
         ));
 
         // setting card traits via text, does overwrite any other word change effects?
@@ -4952,16 +4952,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         updateChangedText();
     }
 
-    public final ICardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
+    public final ICardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
             Predicate<CardTraitBase> remove, long timestamp, long staticId) {
-        return addChangedCardTraits(spells, removedAbilities, trigger, replacements, statics, remove, timestamp, staticId, true);
+        return addChangedCardTraits(spells, trigger, replacements, statics, remove, timestamp, staticId, true);
     }
-    public final ICardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
+    public final ICardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
             Predicate<CardTraitBase> remove, long timestamp, long staticId, boolean updateView) {
         CardTraitChanges result = new CardTraitChanges(
-            spells, removedAbilities, trigger, replacements, statics, remove
+            spells, trigger, replacements, statics, remove
         );
         return addChangedCardTraits(result, timestamp, staticId, updateView);
     }
@@ -5232,7 +5232,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void updateKeywordsCache() {
         updateKeywordsCache(getCurrentState());
     }
-
     public final void updateKeywordsCache(final CardState state) {
         KeywordCollection keywords = new KeywordCollection();
 
@@ -5275,10 +5274,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void addIntrinsicKeywords(final Iterable<String> s) {
         addIntrinsicKeywords(s, true);
     }
-    public final void addIntrinsicKeywords(final Iterable<String> s, boolean initTraits) {
+    public final boolean addIntrinsicKeywords(final Iterable<String> s, boolean initTraits) {
         if (currentState.addIntrinsicKeywords(s, initTraits)) {
-            updateKeywords();
+            if (initTraits) {
+                updateKeywords();
+            }
+            return true;
         }
+        return false;
     }
 
     public final void removeIntrinsicKeyword(final Keyword k) {
@@ -5290,9 +5293,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // Hidden Keywords will be returned without the indicator HIDDEN
     public final Iterable<String> getHiddenExtrinsicKeywords() {
         return Iterables.concat(this.hiddenExtrinsicKeywords.values());
-    }
-    public final Table<Long, Long, List<String>> getHiddenExtrinsicKeywordsTable() {
-        return hiddenExtrinsicKeywords;
     }
 
     public final void addHiddenExtrinsicKeywords(long timestamp, long staticId, Iterable<String> keywords) {
@@ -6848,102 +6848,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public String getProtectionKey() {
-        String protectKey = "";
-        boolean pR = false; boolean pG = false; boolean pB = false; boolean pU = false; boolean pW = false;
-        for (final KeywordInterface inst : getKeywords(Keyword.PROTECTION)) {
-            String kw = inst.getOriginal();
-            if (kw.equals("Protection from red") || kw.contains(":red")) {
-                if (!pR) {
-                    pR = true;
-                    protectKey += "R";
-                }
-            } else if (kw.equals("Protection from green") || kw.contains(":green")) {
-                if (!pG) {
-                    pG = true;
-                    protectKey += "G";
-                }
-            } else if (kw.equals("Protection from black") || kw.contains(":black")) {
-                if (!pB) {
-                    pB = true;
-                    protectKey += "B";
-                }
-            } else if (kw.equals("Protection from blue") || kw.contains(":blue")) {
-                if (!pU) {
-                    pU = true;
-                    protectKey += "U";
-                }
-            } else if (kw.equals("Protection from white") || kw.contains(":white")) {
-                if (!pW) {
-                    pW = true;
-                    protectKey += "W";
-                }
-            } else if (kw.contains("each color")) {
-                protectKey += "allcolors:";
-            } else if (kw.equals("Protection from everything")) {
-                protectKey += "everything:";
-            } else if (kw.contains("colored spells")) {
-                protectKey += "coloredspells:";
-            } else {
-                protectKey += "generic";
-            }
-        }
-        return protectKey;
-    }
-    public String getHexproofKey() {
-        String hexproofKey = "";
-        boolean generic = false;
-        Set<MagicColor.Color> colors = EnumSet.noneOf(MagicColor.Color.class);
-        for (final KeywordInterface inst : getKeywords(Keyword.HEXPROOF)) {
-            String kw = inst.getOriginal();
-            if (kw.equals("Hexproof")) {
-                generic = true;
-            }
-            if (kw.startsWith("Hexproof:")) {
-                String[] k = kw.split(":");
-                if (k[1].equals("Red")) {
-                    colors.add(MagicColor.Color.RED);
-                } else if (k[1].equals("Green")) {
-                    colors.add(MagicColor.Color.GREEN);
-                } else if (k[1].equals("Black")) {
-                    colors.add(MagicColor.Color.BLACK);
-                } else if (k[1].equals("Blue")) {
-                    colors.add(MagicColor.Color.BLUE);
-                } else if (k[1].equals("White")) {
-                    colors.add(MagicColor.Color.WHITE);
-                } else if (k.length > 2 && k[2].equals("monocolored")) {
-                    hexproofKey += "monocolored:";
-                } else if (k.length > 2 && k[2].equals("multicolored")) {
-                    generic = true; // no multicolored icon yet
-                } else if (k.length > 2 && k[2].equals("each color")) {
-                    colors.add(MagicColor.Color.RED);
-                    colors.add(MagicColor.Color.GREEN);
-                    colors.add(MagicColor.Color.BLACK);
-                    colors.add(MagicColor.Color.BLUE);
-                    colors.add(MagicColor.Color.WHITE);
-                } else {
-                    // no extra icon
-                    generic = true;
-                }
-            }
-        }
-        if (generic) {
-            hexproofKey += "generic:";
-        }
-        for (MagicColor.Color c : colors) {
-            hexproofKey += c.getShortName() + ":";
-        }
-        return hexproofKey;
-    }
-    public String getKeywordKey() {
-        List<String> ability = new ArrayList<>();
-        for (final KeywordInterface inst : getKeywords()) {
-            ability.add(inst.getOriginal());
-        }
-        Collections.sort(ability);
-        return StringUtils.join(ability.toArray(), ","); //fix nosuchmethod on some android devices...
-    }
-
     public Zone getZone() {
         return currentZone;
     }
@@ -8203,6 +8107,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         this.changedCardColorsCharacterDefining.putAll(in.changedCardColorsCharacterDefining);
 
         setChangedCardKeywords(in.getChangedCardKeywords());
+        for (Table.Cell<Long, Long, List<String>> kw : in.hiddenExtrinsicKeywords.cellSet()) {
+            hiddenExtrinsicKeywords.put(kw.getRowKey(), kw.getColumnKey(), kw.getValue());
+        }
 
         this.changedCardTypes.putAll(in.changedCardTypes);
         this.changedCardTypesCharacterDefining.putAll(in.changedCardTypesCharacterDefining);

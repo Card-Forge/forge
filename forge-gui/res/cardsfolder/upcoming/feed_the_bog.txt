@@ -1,0 +1,7 @@
+Name:Feed the Bog
+ManaCost:1 B
+Types:Sorcery
+K:Replicate:1 B
+A:SP$ PumpAll | PumpZone$ Graveyard | ValidCards$ Creature.YouOwn | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SubAbility$ DBReturn | SpellDescription$ Creature cards in your graveyard perpetually get +1/+1. Then return target creature card with mana value 3 or less from your graveyard to the battlefield.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.cmcLE3+YouCtrl | TgtPrompt$ Select target creature card with mana value 3 in your graveyard
+Oracle:Replicate {1}{B}\nCreature cards in your graveyard perpetually get +1/+1. Then return target creature card with mana value 3 or less from your graveyard to the battlefield.

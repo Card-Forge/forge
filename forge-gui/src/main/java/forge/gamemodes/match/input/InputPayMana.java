@@ -95,14 +95,14 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             List<SpellAbility> manaAbilities = getAllManaAbilities(card);
             // Desktop Forge floating menu functionality
             if (manaAbilities.size() == 1) {
-                activateManaAbility(card, manaAbilities.get(0));
+                return activateManaAbility(card, manaAbilities.get(0));
             } else {
                 SpellAbility spellAbility = getController().getAbilityToPlay(card, manaAbilities, triggerEvent);
                 if (spellAbility != null) {
-                    activateManaAbility(card, spellAbility);
+                    return activateManaAbility(card, spellAbility);
                 }
             }
-            return true;
+            return false;
         }
     }
 
@@ -445,6 +445,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     public boolean isPaid() { return bPaid; }
+
+    public boolean isActivatingManaAbility() { return locked; }
 
     protected String messagePrefix;
     public void setMessagePrefix(String prompt) {

@@ -79,6 +79,7 @@ public class VPrompt implements IVDoc<CPrompt> {
                     && (FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN)
                             || !btnCancel.getText().equals(Localizer.getInstance().getMessage("lblEndTurn")))) {
                 btnCancel.doClick();
+                e.consume();
             }
         }
     };

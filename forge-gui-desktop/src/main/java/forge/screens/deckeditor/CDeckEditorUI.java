@@ -36,6 +36,9 @@ import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CEditorConstructed;
+import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
+import forge.screens.deckeditor.controllers.CEditorLimited;
+import forge.screens.deckeditor.controllers.CEditorNetworkDraft;
 import forge.screens.deckeditor.controllers.CEditorQuestCardShop;
 import forge.screens.deckeditor.controllers.CProbabilities;
 import forge.screens.deckeditor.controllers.CStatistics;
@@ -213,6 +216,14 @@ public enum CDeckEditorUI implements ICDoc {
         Singletons.getControl().getForgeMenu().setProvider(childController0);
 
         if (childController == null) { return; }
+
+        // Draft log panel is shown for any editor involved in a limited flow —
+        // the shared pool editor, the network drafting controller, or the offline
+        // one. Add new editor classes here if they should display the draft log.
+        boolean isLimitedEditor = childController instanceof CEditorLimited
+                || childController instanceof CEditorNetworkDraft
+                || childController instanceof CEditorDraftingProcess;
+        vEditorLog.setDraftLogVisible(isLimitedEditor);
 
         final ItemManager<? extends InventoryItem> catView  = childController.getCatalogManager();
         final ItemManager<? extends InventoryItem> deckView = childController.getDeckManager();

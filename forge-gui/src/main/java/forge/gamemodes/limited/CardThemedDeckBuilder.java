@@ -715,7 +715,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * Only adds wastes if present in the card pool but if present adds them all
      */
     private void addWastesIfRequired(){
-        PaperCard waste = FModel.getMagicDb().getCommonCards().getUniqueByName("Wastes");
+        PaperCard waste = FModel.getMagicDb().getCommonCards().getUniqueByNameNoAlt("Wastes");
         if(colors.isColorless()&& keyCard.getRules().getColorIdentity().isColorless()
                 && format.isLegalCard(waste)) {
             while (landsNeeded > 0) {

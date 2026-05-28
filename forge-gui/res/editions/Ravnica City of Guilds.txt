@@ -40,7 +40,7 @@ ScryfallCode=RAV
 26 C Nightguard Patrol @Dany Orizio
 27 U Oathsworn Giant @Daren Bader
 28 U Sandsower @Kev Walker
-29 C Screeching Griffin @Tim Hildebrandt
+29 C Screeching Griffin @Greg Hildebrandt
 30 U Seed Spark @Jeff Miracola
 31 U Suppression Field @John Avon
 32 R Three Dreams @Shishizaru

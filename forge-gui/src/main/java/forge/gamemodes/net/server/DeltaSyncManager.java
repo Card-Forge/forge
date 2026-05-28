@@ -561,6 +561,11 @@ public class DeltaSyncManager implements IHasForgeLog {
         if (lastChecksumDetail != null) {
             netLog.error("[DeltaSync] Server checksum detail: {}", lastChecksumDetail);
         }
+        // Clear so a later resync only logs if a fresh checksum has been
+        // computed since — otherwise we'd log a breakdown that postdates the
+        // mismatch the client is reporting.
+        lastChecksumBreakdown = null;
+        lastChecksumDetail = null;
     }
 
     /**

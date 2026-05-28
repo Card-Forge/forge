@@ -274,24 +274,24 @@ public class UntapAi extends SpellAbilityAi {
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
         CardCollection tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source, sa);
 
-        if (untapTargetList(source, tgt, sa, mandatory, tapList)) {
+        if (untapTargetList(source, sa, mandatory, tapList)) {
             return true;
         }
 
         // try to just tap already tapped things
         tapList = CardLists.filter(list, CardPredicates.UNTAPPED);
 
-        if (untapTargetList(source, tgt, sa, mandatory, tapList)) {
+        if (untapTargetList(source, sa, mandatory, tapList)) {
             return true;
         }
 
         // just tap whatever we can
         tapList = list;
 
-        return untapTargetList(source, tgt, sa, mandatory, tapList);
+        return untapTargetList(source, sa, mandatory, tapList);
     }
 
-    private boolean untapTargetList(final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory, 
+    private boolean untapTargetList(final Card source, final SpellAbility sa, final boolean mandatory,
             final CardCollection tapList) {
         tapList.removeAll(sa.getTargets().getTargetCards());
 
@@ -303,7 +303,7 @@ public class UntapAi extends SpellAbilityAi {
             Card choice = null;
 
             if (tapList.isEmpty()) {
-                if (sa.getTargets().size() < tgt.getMinTargets(source, sa) || sa.getTargets().size() == 0) {
+                if (sa.getTargets().size() < sa.getMinTargets() || sa.getTargets().size() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -317,7 +317,7 @@ public class UntapAi extends SpellAbilityAi {
             choice = ComputerUtilCard.getBestAI(tapList);
 
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().size() < tgt.getMinTargets(source, sa) || sa.getTargets().size() == 0) {
+                if (sa.getTargets().size() < sa.getMinTargets() || sa.getTargets().size() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }

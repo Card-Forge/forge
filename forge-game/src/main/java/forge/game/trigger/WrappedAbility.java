@@ -170,7 +170,8 @@ public class WrappedAbility extends Ability {
         String card = getHostCard().toString();
         if (!desc.contains(card) && desc.contains(" this ")) { /* a hack for Evolve and similar that don't have CARDNAME */
                 return card + ": " + desc;
-        } else return desc;
+        }
+        return desc;
     }
 
     @Override

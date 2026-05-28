@@ -88,13 +88,15 @@ public class CountersRemoveAi extends SpellAbilityAi {
         CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
         boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
 
+        CounterType iceType = CounterType.getType("ICE");
+
         if (type.matches("All")) {
             // Logic Part for Vampire Hexmage
             // Break Dark Depths
             if (maritEmpty) {
                 CardCollectionView depthsList = ai.getCardsIn(ZoneType.Battlefield, "Dark Depths");
                 depthsList = CardLists.filter(depthsList, CardPredicates.isTargetableBy(sa),
-                        CardPredicates.hasCounter(CounterEnumType.ICE, 3));
+                        CardPredicates.hasCounter(iceType, 3));
                 if (!depthsList.isEmpty()) {
                     sa.getTargets().add(depthsList.getFirst());
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -130,13 +132,13 @@ public class CountersRemoveAi extends SpellAbilityAi {
             // try to remove them from Dark Depths and Planeswalkers too
 
             if (maritEmpty) {
-                CardCollectionView depthsList = ai.getCardsIn(ZoneType.Battlefield, "Dark Depths");
-                depthsList = CardLists.filter(depthsList, CardPredicates.isTargetableBy(sa),
-                        CardPredicates.hasCounter(CounterEnumType.ICE));
+                CardCollectionView depthsList = CardLists.filter(
+                    ai.getCardsIn(ZoneType.Battlefield, "Dark Depths"),
+                    CardPredicates.isTargetableBy(sa), CardPredicates.hasCounter(iceType));
 
                 if (!depthsList.isEmpty()) {
                     Card depth = depthsList.getFirst();
-                    int ice = depth.getCounters(CounterEnumType.ICE);
+                    int ice = depth.getCounters(iceType);
                     if (amount >= ice) {
                         sa.getTargets().add(depth);
                         if (xPay) {

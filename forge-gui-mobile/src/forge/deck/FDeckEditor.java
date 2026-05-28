@@ -1512,7 +1512,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void addCommanderItems(final FDropDownMenu menu, final PaperCard card) {
-            if(!parentScreen.isCommanderEditor())
+            if(!parentScreen.isCommanderEditor() || parentScreen.getCommanderPage() == null)
                 return;
             if(parentScreen.getMaxMovable(card, this, parentScreen.getCommanderPage()) <= 0)
                 return;

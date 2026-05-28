@@ -8,12 +8,10 @@ import forge.trackable.TrackableProperty;
 import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
 import forge.trackable.Tracker;
+import forge.util.IHasForgeLog;
 
 import io.netty.handler.codec.serialization.ClassResolver;
 import io.netty.handler.codec.serialization.ClassResolvers;
-
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
 
 import net.jpountz.lz4.LZ4BlockOutputStream;
 
@@ -30,8 +28,7 @@ import java.util.List;
  * {@link CompatibleObjectDecoder}) via the underlying object streams
  * ({@link CObjectOutputStream}, {@link CObjectInputStream}).
  */
-public final class TrackableSerializer {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+public final class TrackableSerializer implements IHasForgeLog {
 
     private static final ClassResolver INNER_CLASS_RESOLVER = ClassResolvers.cacheDisabled(null);
 
@@ -171,10 +168,8 @@ public final class TrackableSerializer {
      * full object graphs. Unwrapped after delta state is applied, when the
      * client tracker is populated.
      */
-    static final class WrappedEvent implements Serializable {
+    record WrappedEvent(byte[] data) implements Serializable {
         private static final long serialVersionUID = 1L;
-        final byte[] data;
-        WrappedEvent(byte[] data) { this.data = data; }
     }
 
     /**

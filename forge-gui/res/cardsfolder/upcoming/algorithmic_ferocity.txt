@@ -1,0 +1,7 @@
+Name:Algorithmic Ferocity
+ManaCost:G
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose target creature you control | KW$ Indestructible | NumAtt$ +X | SubAbility$ DBFight | SpellDescription$ Until end of turn, target creature you control gains indestructible and gets +1/+0 for each card in your hand with mana value 4 or greater. Then it fights target creature an opponent controls.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | AILogic$ Always | TgtPrompt$ Choose target creature an opponent controls
+SVar:X:Count$ValidHand Card.YouOwn+cmcGE4
+Oracle:Until end of turn, target creature you control gains indestructible and gets +1/+0 for each card in your hand with mana value 4 or greater. Then it fights target creature an opponent controls.

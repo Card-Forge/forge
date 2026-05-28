@@ -2,8 +2,12 @@ package forge.screens.match.views;
 
 import forge.Forge;
 import forge.assets.FSkinImage;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
+import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FEvent;
@@ -16,7 +20,6 @@ public class VGameMenu extends FDropDownMenu {
 
     @Override
     protected void buildMenu() {
-
         addItem(new FMenuItem(MatchController.instance.getConcedeCaption(), FSkinImage.CONCEDE, e ->
                 ThreadUtil.invokeInGameThread(MatchController.instance::concede)
         ));
@@ -36,13 +39,13 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAutoYieldsAndTriggers"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                final boolean autoYieldsDisabled = MatchController.instance.getGameController().getDisableAutoYields();
+                final boolean autoYieldsDisabled = MatchController.instance.getGameController().getYieldController().getDisableAutoYields();
                 final VAutoYieldsAndTriggers dialog = new VAutoYieldsAndTriggers() {
                     @Override
                     public void setVisible(boolean b0) {
                         super.setVisible(b0);
                         if (!b0) {
-                            if (autoYieldsDisabled && !MatchController.instance.getGameController().getDisableAutoYields()) {
+                            if (autoYieldsDisabled && !MatchController.instance.getGameController().getYieldController().getDisableAutoYields()) {
                                 //if re-enabling auto-yields, auto-yield to current ability on stack if applicable
                                 if (MatchController.instance.getGameView().peekStack() != null) {
                                     final String key = MatchController.instance.getGameView().peekStack().getKey();
@@ -61,6 +64,16 @@ public class VGameMenu extends FDropDownMenu {
                 dialog.show();
             }
         }));
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldSettings"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, e -> {
+            new VYieldOptions().show();
+        }));
+        String autoPassLabel = Forge.getLocalizer().getMessage(FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS) ? "lblYieldBtnAutoPassOn" : "lblYieldBtnAutoPass");
+        addItem(new FMenuItem(autoPassLabel, Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, e -> {
+            YieldController.toggleAutoPassNoActions(MatchController.instance.getGameController());
+        }));
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblResetSavedAbilityOrders"), FSkinImage.WARNING, e ->
+                MatchController.instance.getGameController().sendYieldUpdate(new YieldUpdate.ClearAbilityOrders())
+        ));
         if (!Forge.isMobileAdventureMode) {
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
                 //pause game when spectating AI Match

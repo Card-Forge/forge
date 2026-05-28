@@ -324,6 +324,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
     }
 
+    private void updateNetEventDecks() {
+        updateDecks(DeckProxy.getAllNetworkEventDecks(), ItemManagerConfig.NET_EVENT_DECKS);
+    }
+
     public Deck getDeck() {
         final DeckProxy proxy = lstDecks.getSelectedItem();
         if (proxy == null) {
@@ -769,6 +773,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 break;
             case PROVIDED_DECK_URL:
                 updateProvidedDeckUrl();
+                break;
+            case NET_EVENT_DECK:
+                updateNetEventDecks();
                 break;
             default:
                 break; //other deck types not currently supported here

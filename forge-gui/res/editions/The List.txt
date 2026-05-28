@@ -8,27 +8,6 @@ ScryfallCode=PLST
 TokensCode=PLST
 
 [cards]
-10E-20 U High Ground @rk post
-10E-30 R Nomad Mythmaker @Darrell Riche
-10E-32 R Paladin en-Vec @Dave Kendall
-10E-33 R Pariah @Jon J Muth
-10E-45 U Spirit Link @Kev Walker
-10E-52 U Treasure Hunter @Adam Rex
-10E-105 R Scalpelexis @Mark Tedin
-10E-145 R Graveborn Muse @Kev Walker
-10E-165 U No Rest for the Wicked @Carl Critchlow
-10E-173 U Relentless Rats @Thomas M. Baxa
-10E-178 R Sleeper Agent @Randy Gallegos
-10E-182 C Terror @Adam Rex
-10E-211 U Guerrilla Tactics @Dave Dorman
-10E-220 U Orcish Artillery @Jeff Miracola
-10E-229 U Shatterstorm @Paolo Parente
-10E-270 R Hurricane @John Howe
-10E-291 R Rhox @Mark Zug
-10E-317 R Colossus of Sardia @Greg Staples
-10E-321 R Doubling Cube @Mark Tedin
-10E-343 U Spellbook @Andrew Goldhawk
-10E-352 U Forbidding Watchtower @Aleksi Briclot
 2X2-9 C Doomed Traveler @Lars Grant-West
 2X2-17 U Mentor of the Meek @Jana Schirmer & Johannes Voss
 2X2-19 C Militia Bugler @David Gaillet
@@ -95,6 +74,27 @@ TokensCode=PLST
 9ED-100 C Storm Crow @John Matson
 9ED-187 R Form of the Dragon @Carl Critchlow
 9ED-262 C Overgrowth @Christopher Rush
+10E-20 U High Ground @rk post
+10E-30 R Nomad Mythmaker @Darrell Riche
+10E-32 R Paladin en-Vec @Dave Kendall
+10E-33 R Pariah @Jon J Muth
+10E-45 U Spirit Link @Kev Walker
+10E-52 U Treasure Hunter @Adam Rex
+10E-105 R Scalpelexis @Mark Tedin
+10E-145 R Graveborn Muse @Kev Walker
+10E-165 U No Rest for the Wicked @Carl Critchlow
+10E-173 U Relentless Rats @Thomas M. Baxa
+10E-178 R Sleeper Agent @Randy Gallegos
+10E-182 C Terror @Adam Rex
+10E-211 U Guerrilla Tactics @Dave Dorman
+10E-220 U Orcish Artillery @Jeff Miracola
+10E-229 U Shatterstorm @Paolo Parente
+10E-270 R Hurricane @John Howe
+10E-291 R Rhox @Mark Zug
+10E-317 R Colossus of Sardia @Greg Staples
+10E-321 R Doubling Cube @Mark Tedin
+10E-343 U Spellbook @Andrew Goldhawk
+10E-352 U Forbidding Watchtower @Aleksi Briclot
 A25-7 C Cloudshift @Howard Lyon
 A25-13 C Fencing Ace @David Rapoza
 A25-15 C Geist of the Moors @Aaron Miller
@@ -1938,6 +1938,12 @@ FRF-152 C Ethereal Ambush @Lius Lasahido
 FRF-153 C Grim Contest @Phill Simmer
 FRF-157 R Silumgar, the Drifting Death @Steven Belledin
 FRF-163 R Scroll of the Masters @Lake Hurwitz
+FTKHM-21 C Tibalt, Cosmic Impostor Emblem @Yongjae Choi
+FTORI-12 C Jace, Telepath Unbound Emblem @Jaime Jones
+FTORI-13 C Liliana, Defiant Necromancer Emblem @Karla Ortiz
+FTORI-14 C Chandra, Roaring Flame Emblem @Eric Deschamps
+FTSOI-18 C Arlinn, Embraced by the Moon Emblem @Winona Nelson
+FTSTX-8 C Lukka, Wayward Bonder Emblem @Kieran Yanner
 FUT-12 R Magus of the Moat @John Avon
 FUT-17 U Spirit en-Dal @Daren Bader
 FUT-25 C Lumithread Field @Scott Altmann
@@ -2668,6 +2674,12 @@ LRW-268 R Gilt-Leaf Palace @Christopher Moeller
 LRW-272 R Shelldock Isle @Mark Tedin
 LRW-277 U Vivid Grove @Howard Lyon
 LRW-280 R Wanderwine Hub @Warren Mahy
+M3C-168 U Crib Swap @Michele Giorgi
+M3C-316 R Adarkar Wastes @Piotr Dura
+M3C-324 R Brushland @Thomas Stoop
+M3C-351 R Karplusan Forest @Sam Burley
+M3C-362 R Overflowing Basin @Sarah Finnigan
+M3C-363 C Path of Ancestry @Alayna Danner
 M10-37 U Undead Slayer @Eric Fortune
 M10-41 U White Knight @Christopher Moeller
 M10-52 U Fabricate @Warren Mahy
@@ -2972,12 +2984,6 @@ M21-303 C Chandra's Magmutt @Kimonas Theodossiou
 M21-328 M Liliana, Death Mage @Kieran Yanner
 M21-335 C Storm Caller @Manuel Castañón
 M21-339 C Wildwood Patrol @Dan Murayama Scott
-M3C-168 U Crib Swap @Michele Giorgi
-M3C-316 R Adarkar Wastes @Piotr Dura
-M3C-324 R Brushland @Thomas Stoop
-M3C-351 R Karplusan Forest @Sam Burley
-M3C-362 R Overflowing Basin @Sarah Finnigan
-M3C-363 C Path of Ancestry @Alayna Danner
 MAT-12 U Blot Out @Chris Cold
 MAT-14 U Markov Baron @Ina Wong
 MAT-67 U Kolaghan Warmonger @Domenico Cava
@@ -4062,7 +4068,7 @@ RNA-90 U Vindictive Vampire @Randy Gallegos
 RNA-91 C Act of Treason @Scott Murphy
 RNA-107 U Light Up the Stage @Dmitry Burmak
 RNA-108 R Mirror March @Johannes Voss
-RNA-115 C Skewer the Critics @Heonhwa Choe
+RNA-115 C Skewer the Critics @Heonhwa
 RNA-123 U Biogenic Upgrade @Tomasz Jedruszek
 RNA-130 R Guardian Project @Chris Rallis
 RNA-148 U Trollbred Guardian @Mathias Kollros
@@ -4760,7 +4766,7 @@ WAR-37 U The Wanderer @Wesley Burt
 WAR-38 C Wanderer's Strike @Sara Winters
 WAR-47 C Crush Dissent @Mike Bierek
 WAR-50 R Fblthp, the Lost @Jesper Ejsing
-WAR-52 U Flux Channeler @Heonhwa Choe
+WAR-52 U Flux Channeler @Heonhwa
 WAR-54 R Jace, Wielder of Mysteries @Anna Steinbauer
 WAR-56 U Kasmina, Enigmatic Mentor @Magali Villeneuve
 WAR-58 C Kiora's Dambreaker @Mathias Kollros

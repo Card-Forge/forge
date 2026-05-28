@@ -27,7 +27,7 @@ import java.util.function.Supplier;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.DeckGroup;
+import forge.deck.DeckBase;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gui.UiCommand;
@@ -60,9 +60,9 @@ import forge.util.storage.IStorage;
  * @author Forge
  * @version $Id: DeckEditorCommon.java 12850 2011-12-26 14:55:09Z slapshot5 $
  */
-public final class CEditorLimited extends CDeckEditor<DeckGroup> {
+public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
 
-    private final DeckController<DeckGroup> controller;
+    private final DeckController<T> controller;
     private DragCell constructedDecksParent = null;
     private DragCell commanderDecksParent = null;
     private DragCell oathbreakerDecksParent = null;
@@ -79,7 +79,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
     @SuppressWarnings("serial")
-    public CEditorLimited(final IStorage<DeckGroup> deckMap0, final FScreen screen0, final CDetailPicture cDetailPicture0) {
+    public CEditorLimited(final IStorage<T> deckMap0, final Supplier<T> newCreator, final FScreen screen0, final CDetailPicture cDetailPicture0) {
         super(screen0, cDetailPicture0, GameType.Sealed);
 
         final CardManager catalogManager = new CardManager(cDetailPicture0, false, false, FScreen.DECK_EDITOR_DRAFT.equals(screen0));
@@ -93,7 +93,6 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
 
-        final Supplier<DeckGroup> newCreator = DeckGroup::new;
         this.controller = new DeckController<>(deckMap0, this, newCreator);
 
         getBtnAddBasicLands().setCommand((UiCommand) () -> CEditorLimited.addBasicLands(CEditorLimited.this));
@@ -181,11 +180,11 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
      * @see forge.gui.deckeditor.ACEditorBase#getController()
      */
     @Override
-    public DeckController<DeckGroup> getDeckController() {
+    public DeckController<T> getDeckController() {
         return this.controller;
     }
 
-    public static void addBasicLands(ACEditorBase<PaperCard, DeckGroup> editor) {
+    public static void addBasicLands(ACEditorBase<PaperCard, ? extends DeckBase> editor) {
         Deck deck = editor.getHumanDeck();
         if (deck == null) { return; }
 

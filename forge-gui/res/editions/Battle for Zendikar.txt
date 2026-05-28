@@ -1,7 +1,7 @@
 [metadata]
-Name=Battle for Zendikar
-Date=2015-10-02
 Code=BFZ
+Date=2015-10-02
+Name=Battle for Zendikar
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common:fromSheet("BFZ cards"), 3 Uncommon:fromSheet("BFZ cards"), 1 RareMythic:fromSheet("BFZ cards"), 1 BasicLand BFZ

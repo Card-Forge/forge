@@ -16,7 +16,8 @@
   - [Easier creature type selection](#easier-creature-type-selection)
   - [Auto-Target](#auto-target)
   - [Auto-Pay](#auto-pay)
-  - [Auto-Yield](#auto-yield)
+  - [Auto-Pass and Yield Options](#auto-pass-and-yield-options)
+  - [Auto-Yield and Trigger Decisions](#auto-yield-and-trigger-decisions)
   - [Shift Key helper](#shift-key-helper)
   - [Full Control](#full-control)
   - [Repeatable Sequences (Macros)](#repeatable-sequences-macros)
@@ -189,16 +190,32 @@ When paying mana costs, you can press Enter/Spacebar or click the Auto button in
 - You can still manually pay the cost by clicking mana sources in play (e.g. lands) or clicking symbols in your mana pool, which might be a good idea if you want to save specific mana sources for a later play that turn.
 - you'll still be prompted when paying Sunburst or cards that care what colors are spent to cast it (ex. Firespout).
 
-## Auto-Yield
-- When a spell or an ability appears on the stack and it says "(OPTIONAL)" you can right-click it to decide if you want to always accept or to decline it.
+## Auto-Pass and Yield Options
+**Yielding** lets you hand priority to Forge so it passes on your behalf instead of you needing to click through every priority pass. This helps you get to your desired phase of action quickly.
 
-  It is possible to specify the granularity level for auto-yields: the difference is that, for example, when choosing per ability if you auto-yield to Hellrider's triggered ability once, all triggers from other Hellrider cards will be automatically yielded to as well. When choosing per card, you will need to auto-yield to each Hellrider separately.
+Forge offers several yield options depending on how long you want to skip prompts:
 
-  Note that in when auto-yielding per ability, yields will NOT be automatically cleared between games in a match, which should speed the game up. When auto-yielding per card, yields WILL be automatically cleared between games because they are dependent on card IDs which change from game to game, thus you will need to auto-yield to each card again in each game of the match.
+- **Auto-Pass** — a persistent toggle that automatically yields priority when you have no playable actions. Available on **Desktop** via the Auto-Pass dock icon and the **P** hotkey, or on **Mobile** from the in-match Game menu.
+- **End Turn** — auto-pass through the rest of the current turn, bypassing any phase stops. Triggered by the End Turn dock button.
+- **Yield markers** — auto-pass until a specific phase is reached. Right-click (or long-press) a phase indicator to set one; a fast-forward symbol marks the active cell. Each (player, phase) cell is independent, so in multiplayer you can yield to a specific opponent's end step.
+- **Yield to stack / Resolve entire stack** — auto-pass while the stack resolves. Right-click a stack item to choose: **Yield to stack** auto-passes until the stack empties or an interrupt fires (for example, an opponent casts another spell); **Resolve entire stack** keeps auto-passing until the whole stack is empty even if opponents cast more spells.
 
-- Pressing "End Turn" skips your attack phase and doesn't get cancelled automatically if a spell or ability is put on the stack. You'll still be given a chance to declare blockers if your opponent attacks, but after that the rest of your opponent's turn will then progress without you receiving priority.
+> [!NOTE]
+> For more information and configuration options — including interrupt conditions, automatic yield suggestions, and speed settings — see [Advanced Yield Options](Advanced-Yield-Options.md).
 
-  To alleviate pressing this accidentally, as long as you're passing this way, you'll be able to press Escape or the Cancel button to be given the chance to act again. Phases with stops and spells/abilities resolving will be given a slight delay to allow you to see what's going on.
+## Individual Yields and Trigger Decisions
+When a spell or an ability appears on the stack you can right-click it to decide if you want to always accept (Always Yes) or always decline it (Always No). For abilities marked "(OPTIONAL)" the same right-click lets you set an auto-yield so you don't get prompted on subsequent activations.
+
+The granularity and lifetime of these decisions are controlled by the **Auto Yield/Trigger Mode** setting under Settings → Preferences:
+
+- **Per Card (Each Game)** — decisions are tied to a specific card instance and cleared at the end of each game. You'll need to set them again in the next game of the match. (For example, auto-yielding one Hellrider does not affect another copy of Hellrider.)
+- **Per Ability (Each Match)** — decisions apply to every copy of the ability and persist across games within the current match, then clear when you start a new match.
+- **Per Ability (Each Session)** — decisions persist across matches until you close Forge.
+- **Per Ability (Each Install)** — decisions are saved to disk and persist across Forge restarts.
+
+Pick a longer-lived scope when you want recurring triggers (e.g. routine ETBs, upkeep optional triggers) to stay yielded across many games; pick a shorter scope when you want a clean slate each game.
+
+The current list of active auto-yields and Always Yes / Always No trigger decisions is visible from Game → Auto-Yields and Triggers, where individual entries can be cleared.
 
 ## Shift Key helper
 * When you mouse over a flip, transform or Morph (controlled by you) card in battlefield, hold SHIFT to see other state of that card at the side panel that displays card picture and details.
@@ -212,9 +229,19 @@ This feature lets you skip different helpers that streamline gameplay by avoidin
 e.g. the opposite cost order is needed if activating an animated "Halo Fountain" that's also tapped.
 
 ## Repeatable Sequences (Macros)
-A feature for advanced users: during a match, you can use the default shortcut shift-R to specify a sequence of actions (mouse clicks, essentially, in the desktop paradigm). Type the IDs of cards/players you'd like to interact with, in order. Then the default shortcut @ (shift-2) will execute your sequence, one "click" at a time, repeating when it reaches the end. This is useful for executing repeated combos, such as sacrificing a recurring creature to Goblin Bombardment. You can see the IDs of cards by turning them on under "Card Overlays" in the "Game" menu.
+Macros let advanced users record and replay a short sequence of match actions. They are mainly useful for deterministic combo loops where the same prompts, priority passes, targets, mana choices, and stack-order decisions repeat several times.
 
-The macro will dutifully execute your click sequence without regard to changes in game state (so if an opponent kills your specified creature mid-macro, and you continue to execute it, you will be essentially clicking on the creature in the graveyard, which may or may not be what you want).
+On desktop, use the macro buttons in the match dock or the configurable keyboard shortcuts:
+
+- **Record Macro** defaults to Shift+R. Press it once to start recording, then take the actions you want to repeat. Press it again to stop recording and choose how many times to repeat the recorded sequence.
+- **Play Macro Once** defaults to Shift+2. This replays the next recorded sequence once.
+- **Repeat Macro** defaults to Shift+3. This asks for a repeat count and replays the recorded sequence that many times.
+
+Recorded macros can include common match choices such as selecting cards or players, activating abilities, passing priority, paying mana from the pool, choosing colors or mana combinations, choosing modes, confirming prompts, ordering simultaneous abilities, and resolving scry choices.
+
+Macro replay is prompt-aware: Forge attempts each recorded action only when the current game prompt can accept it. If the game state diverges from the recording, playback stops instead of blindly clicking through unrelated prompts. Macros are best suited for predictable loops. If a card changes zones, a target becomes illegal, or an opponent interrupts the loop, you may need to stop and record a new sequence.
+
+For troubleshooting, macro replay logging can be enabled from the command line with `-Dforge.macro.debug=true`.
 
 # Desktop User Interface
 
