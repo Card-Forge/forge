@@ -36,7 +36,6 @@ public class CardThemedLDAIO {
             System.out.println("Error reading LDA data: " + e);
             return null;
         }
-
     }
 
     public static void saveLDA(String format, Map<String,List<List<Pair<String, Double>>>> map){
@@ -62,11 +61,10 @@ public class CardThemedLDAIO {
     }
 
     public static File getLDAFile(final String name) {
-        return new File(ForgeConstants.DECK_GEN_DIR, name + SUFFIX_DATA);
+        return getMatrixFolder(name + SUFFIX_DATA);
     }
-
     public static File getRAWLDAFile(final String name) {
-        return new File(ForgeConstants.DECK_GEN_DIR, name + RAW_SUFFIX_DATA);
+        return getMatrixFolder(name + RAW_SUFFIX_DATA);
     }
 
     public static File getMatrixFolder(final String name) {

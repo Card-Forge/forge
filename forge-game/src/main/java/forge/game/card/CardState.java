@@ -443,12 +443,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return changed;
     }
 
-    public void addIntrinsicKeywords(Collection<KeywordInterface> intrinsicKeywords2) {
-        for (KeywordInterface inst : intrinsicKeywords2) {
-            intrinsicKeywords.insert(inst);
-        }
-    }
-
     public final boolean removeIntrinsicKeyword(final String s) {
         return intrinsicKeywords.remove(s);
     }

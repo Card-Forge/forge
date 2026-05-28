@@ -5274,14 +5274,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void addIntrinsicKeywords(final Iterable<String> s) {
         addIntrinsicKeywords(s, true);
     }
-    public final boolean addIntrinsicKeywords(final Iterable<String> s, boolean initTraits) {
+    public final void addIntrinsicKeywords(final Iterable<String> s, boolean initTraits) {
         if (currentState.addIntrinsicKeywords(s, initTraits)) {
-            if (initTraits) {
-                updateKeywords();
-            }
-            return true;
+            updateKeywords();
         }
-        return false;
     }
 
     public final void removeIntrinsicKeyword(final Keyword k) {
@@ -5524,7 +5520,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     trait.changeText();
                 }
             } else {
-                final String newtxt = AbilityUtils.applyKeywordTextChangeEffects(oldtxt, this);
+                final String newtxt = AbilityUtils.applyKeywordTextChangeEffects(oldtxt, getChangedTextColorWords(), getChangedTextTypeWords());
                 if (!newtxt.equals(oldtxt)) {
                     KeywordInterface newKw = Keyword.getInstance(newtxt);
                     newKw.createTraits(this, true);

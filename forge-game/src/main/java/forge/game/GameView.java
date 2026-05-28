@@ -107,7 +107,6 @@ public class GameView extends TrackableObject {
     public PlayerView getPlayerTurn() {
         return get(TrackableProperty.PlayerTurn);
     }
-
     void updatePlayerTurn(PhaseHandler phaseHandler) {
         set(TrackableProperty.PlayerTurn, PlayerView.get(phaseHandler.getPlayerTurn()));
     }
@@ -115,7 +114,6 @@ public class GameView extends TrackableObject {
     public void updatePlanarPlayer(PlayerView p) {
         set(TrackableProperty.PlanarPlayer, p);
     }
-
     public PlayerView getPlanarPlayer() {
         return get(TrackableProperty.PlanarPlayer);
     }
