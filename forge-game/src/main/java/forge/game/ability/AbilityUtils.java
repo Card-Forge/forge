@@ -7,6 +7,7 @@ import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.CardTypeView;
 import forge.card.ColorSet;
+import forge.card.ITextChanges;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -2977,21 +2978,21 @@ public class AbilityUtils {
         if (ability == null || !ability.isIntrinsic() || ability.hasParam("LockInText")) {
             return def;
         }
-        return applyTextChangeEffects(def, ability.getHostCard(), false);
+        return applyTextChangeEffects(def, false, ability.getTextChanges());
     }
 
-    public static final String applyKeywordTextChangeEffects(final String kw, final Card card) {
+    public static final String applyKeywordTextChangeEffects(final String kw, ITextChanges changes) {
         if (!CardUtil.isKeywordModifiable(kw)) {
             return kw;
         }
-        return applyTextChangeEffects(kw, card, false);
+        return applyTextChangeEffects(kw, false, changes);
     }
 
     public static final String applyDescriptionTextChangeEffects(final String def, final CardTraitBase ability) {
         if (ability == null || !ability.isIntrinsic() || ability.hasParam("LockInText")) {
             return def;
         }
-        return applyTextChangeEffects(def, ability.getHostCard(), true);
+        return applyTextChangeEffects(def, true, ability.getTextChanges());
     }
 
     /**
@@ -3006,35 +3007,19 @@ public class AbilityUtils {
         return applyTextChangeEffects(def, card, true);
     }
     private static String applyTextChangeEffects(final String def, final Card card, final boolean isDescriptive) {
-        return applyTextChangeEffects(def, isDescriptive, card.getChangedTextColorWords(), card.getChangedTextTypeWords());
+        return applyTextChangeEffects(def, isDescriptive, card.getTextChanges());
     }
 
-    public static final String applyTextChangeEffects(final String def, final boolean isDescriptive,
-            Map<String,String> colorMap, Map<String,String> typeMap) {
+    public static final String applyTextChangeEffects(final String def, final boolean isDescriptive, ITextChanges changes) {
         if (StringUtils.isEmpty(def)) {
             return def;
         }
-
         String replaced = def;
-        for (final Entry<String, String> e : colorMap.entrySet()) {
-            final String key = e.getKey();
-            if (key.equals("Any")) {
-                for (final byte c : MagicColor.WUBRG) {
-                    final String colorLowerCase = MagicColor.toLongString(c).toLowerCase(),
-                            colorCaptCase = StringUtils.capitalize(MagicColor.toLongString(c));
-                    // Color should not replace itself.
-                    if (e.getValue().equalsIgnoreCase(colorLowerCase)) {
-                        continue;
-                    }
-                    replaced = getReplacedText(replaced, colorLowerCase, e.getValue().toLowerCase(), isDescriptive);
-                    replaced = getReplacedText(replaced, colorCaptCase, e.getValue(), isDescriptive);
-                }
-            } else {
-                replaced = getReplacedText(replaced, key.toLowerCase(), e.getValue().toLowerCase(), isDescriptive);
-                replaced = getReplacedText(replaced, key, e.getValue(), isDescriptive);
-            }
+        for (final Entry<MagicColor.Color, MagicColor.Color> e : changes.colorChanges().entrySet()) {
+            replaced = getReplacedText(replaced, e.getKey().getName().toLowerCase(), e.getValue().getName().toLowerCase(), isDescriptive);
+            replaced = getReplacedText(replaced, StringUtils.capitalize(e.getKey().getName()), StringUtils.capitalize(e.getValue().getName()), isDescriptive);
         }
-        for (final Entry<String, String> e : typeMap.entrySet()) {
+        for (final Entry<String, String> e : changes.typeChanges().entrySet()) {
             final String key = e.getKey();
             if (isDescriptive) {
                 replaced = getReplacedText(replaced, CardType.getPluralType(key), CardType.getPluralType(e.getValue()), isDescriptive);

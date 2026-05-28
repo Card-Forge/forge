@@ -88,8 +88,6 @@ public class CardView extends GameEntityView {
         this(id0, tracker);
         getCurrentState().setName(name0);
         set(TrackableProperty.Name, name0);
-        set(TrackableProperty.ChangedColorWords, new HashMap<String, String>());
-        set(TrackableProperty.ChangedTypes, new HashMap<String, String>());
         set(TrackableProperty.Sickness, true);
     }
     public CardView(final int id0, final Tracker tracker, final String name0, final PlayerView ownerAndController, final String imageKey) {
@@ -811,17 +809,11 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.PairedWith);
     }
 
-    public Map<String, String> getChangedColorWords() {
-        return get(TrackableProperty.ChangedColorWords);
+    public ITextChanges getTextChanges() {
+        return get(TrackableProperty.TextChanges);
     }
-    void updateChangedColorWords(Card c) {
-        set(TrackableProperty.ChangedColorWords, c.getChangedTextColorWords());
-    }
-    public Map<String, String> getChangedTypes() {
-        return get(TrackableProperty.ChangedTypes);
-    }
-    void updateChangedTypes(Card c) {
-        set(TrackableProperty.ChangedTypes, c.getChangedTextTypeWords());
+    void updateTextChanges(Card c) {
+        set(TrackableProperty.TextChanges, c.getTextChanges().getView());
     }
 
     void updateNonAbilityText(Card c) {
