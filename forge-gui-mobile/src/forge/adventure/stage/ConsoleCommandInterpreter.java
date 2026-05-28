@@ -27,8 +27,11 @@ import forge.item.PaperCard;
 import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.screens.CoverScreen;
+import forge.deck.io.DeckSerializer;
 import forge.util.Aggregates;
+import forge.util.FileUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -560,6 +563,62 @@ public class ConsoleCommandInterpreter {
             MapStage.getInstance().clearOnExit();
             
             return "Exit the map to reset it.";
+        });
+        registerCommand(new String[]{"load", "deck"}, s -> {
+            if (s.length < 1) return "Command needs 1 parameter: file path.";
+            File file = CardUtil.resolveFilePath(s[0]);
+            if (!file.exists()) return "File not found: " + file.getAbsolutePath();
+            CardUtil.ImportResult result = CardUtil.importDeckFromFile(file, Current.player(), CardUtil.ImportMode.GIVE_MISSING);
+            if (!result.success) return "Import failed: " + result.message;
+            return String.format("Imported '%s' into slot %d (%d cards added to collection)",
+                result.deckName, result.slot + 1, result.cardsAdded);
+        });
+        registerCommand(new String[]{"load", "deck", "buy"}, s -> {
+            if (s.length < 1) return "Command needs 1 parameter: file path.";
+            File file = CardUtil.resolveFilePath(s[0]);
+            if (!file.exists()) return "File not found: " + file.getAbsolutePath();
+            CardUtil.ImportResult result = CardUtil.importDeckFromFile(file, Current.player(), CardUtil.ImportMode.BUY_MISSING);
+            if (!result.success) return "Import failed: " + result.message;
+            return String.format("Imported '%s' into slot %d (%d cards purchased)",
+                result.deckName, result.slot + 1, result.cardsAdded);
+        });
+        registerCommand(new String[]{"check", "deck"}, s -> {
+            if (s.length < 1) return "Command needs 1 parameter: file path.";
+            File file = CardUtil.resolveFilePath(s[0]);
+            if (!file.exists()) return "File not found: " + file.getAbsolutePath();
+            CardUtil.ImportResult result = CardUtil.importDeckFromFile(file, Current.player(), CardUtil.ImportMode.REPORT_ONLY);
+            return result.formatMissingReport();
+        });
+        registerCommand(new String[]{"save", "deck"}, s -> {
+            if (s.length < 1) return "Command needs 1 parameter: file path.";
+            File file = CardUtil.resolveFilePath(s[0]);
+            try {
+                DeckSerializer.writeDeck(Current.player().getSelectedDeck(), file);
+                return "Saved deck to " + file.getAbsolutePath();
+            } catch (Exception e) {
+                return "Save failed: " + e.getMessage();
+            }
+        });
+        registerCommand(new String[]{"export", "collection"}, s -> {
+            if (s.length < 1) return "Command needs 1 parameter: file path.";
+            File file = CardUtil.resolveFilePath(s[0]);
+            try {
+                String arenaList = CardUtil.exportCollectionAsArena(Current.player());
+                FileUtil.writeFile(file, arenaList);
+                return String.format("Exported %d unique cards to %s (Arena format)",
+                    Current.player().getCards().countDistinct(), file.getAbsolutePath());
+            } catch (Exception e) {
+                return "Export failed: " + e.getMessage();
+            }
+        });
+        registerCommand(new String[]{"mark", "sell"}, s -> {
+            if (s.length < 1) return "Command needs 1 parameter: file path.";
+            File file = CardUtil.resolveFilePath(s[0]);
+            if (!file.exists()) return "File not found: " + file.getAbsolutePath();
+            CardUtil.MarkSellResult result = CardUtil.markCardsForSale(file, Current.player());
+            if (!result.success) return "Mark failed: " + result.message;
+            return String.format("Marked %d cards for sale (%d skipped: in decks/already marked/not owned)",
+                result.marked, result.skipped);
         });
     }
 }

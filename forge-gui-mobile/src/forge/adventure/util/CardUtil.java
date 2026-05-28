@@ -12,10 +12,15 @@ import forge.card.*;
 import forge.card.DeckHints.Type;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.adventure.player.AdventurePlayer;
+import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckRecognizer;
 import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.deck.io.DeckSerializer;
+import forge.util.FileUtil;
+import forge.util.ItemPool;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.item.BoosterPack;
@@ -27,6 +32,7 @@ import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
 import forge.card.MagicColor;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -976,5 +982,236 @@ public class CardUtil {
                 return p;
         }
         return card;
+    }
+
+    // ===== Deck Import/Export Feature =====
+
+    public enum ImportMode {
+        GIVE_MISSING,
+        BUY_MISSING,
+        REPORT_ONLY
+    }
+
+    public static class MissingCard {
+        public final PaperCard card;
+        public final int quantity;
+        public MissingCard(PaperCard card, int quantity) {
+            this.card = card;
+            this.quantity = quantity;
+        }
+    }
+
+    public static class ImportResult {
+        public final boolean success;
+        public final String message;
+        public final String deckName;
+        public final int slot;
+        public final int cardsAdded;
+        public final List<MissingCard> missingCards;
+
+        private ImportResult(boolean success, String message, String deckName, int slot, int cardsAdded, List<MissingCard> missingCards) {
+            this.success = success;
+            this.message = message;
+            this.deckName = deckName;
+            this.slot = slot;
+            this.cardsAdded = cardsAdded;
+            this.missingCards = missingCards != null ? missingCards : new ArrayList<>();
+        }
+
+        public static ImportResult success(int slot, String deckName, int cardsAdded) {
+            return new ImportResult(true, null, deckName, slot, cardsAdded, null);
+        }
+
+        public static ImportResult failure(String message) {
+            return new ImportResult(false, message, null, -1, 0, null);
+        }
+
+        public static ImportResult reportOnly(String deckName, List<MissingCard> missing) {
+            return new ImportResult(true, null, deckName, -1, 0, missing);
+        }
+
+        public String formatMissingReport() {
+            if (missingCards.isEmpty()) return "You own all cards in this deck!";
+            StringBuilder sb = new StringBuilder();
+            sb.append("Missing cards for \"").append(deckName != null ? deckName : "Unknown").append("\":\n");
+            for (MissingCard mc : missingCards) {
+                sb.append(mc.quantity).append("x ").append(mc.card.getName()).append('\n');
+            }
+            sb.append("(").append(missingCards.size()).append(" unique cards missing)");
+            return sb.toString();
+        }
+    }
+
+    public static class MarkSellResult {
+        public final boolean success;
+        public final String message;
+        public final int marked;
+        public final int skipped;
+
+        private MarkSellResult(boolean success, String message, int marked, int skipped) {
+            this.success = success;
+            this.message = message;
+            this.marked = marked;
+            this.skipped = skipped;
+        }
+
+        public static MarkSellResult success(int marked, int skipped) {
+            return new MarkSellResult(true, null, marked, skipped);
+        }
+
+        public static MarkSellResult failure(String message) {
+            return new MarkSellResult(false, message, 0, 0);
+        }
+    }
+
+    public static File resolveFilePath(String rawPath) {
+        String normalized = rawPath.replace('\\', File.separatorChar)
+                                   .replace('/', File.separatorChar);
+        if (normalized.startsWith("~" + File.separator) || normalized.equals("~")) {
+            normalized = System.getProperty("user.home") + normalized.substring(1);
+        }
+        File file = new File(normalized);
+        if (!file.isAbsolute()) {
+            file = new File(System.getProperty("user.home"), normalized);
+        }
+        return file;
+    }
+
+    public static Deck parseDeckFile(File file) {
+        if (!file.exists()) return null;
+        List<String> lines = FileUtil.readFile(file);
+        if (lines == null || lines.isEmpty()) return null;
+
+        boolean isNativeDck = lines.stream().anyMatch(l ->
+            l.trim().equals("[metadata]") || l.trim().equals("[Main]"));
+
+        if (isNativeDck) {
+            return DeckSerializer.fromFile(file);
+        }
+
+        DeckRecognizer recognizer = new DeckRecognizer();
+        List<DeckRecognizer.Token> tokens = recognizer.parseCardList(
+            lines.toArray(new String[0]));
+
+        Deck deck = new Deck();
+        for (DeckRecognizer.Token t : tokens) {
+            if (t.getType() == DeckRecognizer.TokenType.DECK_NAME) {
+                deck.setName(t.getText());
+            } else if (t.isTokenForDeck()) {
+                deck.getOrCreate(t.getTokenSection()).add(t.getCard(), t.getQuantity());
+            }
+        }
+
+        if (deck.getName() == null || deck.getName().isEmpty()) {
+            String fname = file.getName();
+            int dot = fname.lastIndexOf('.');
+            deck.setName(dot > 0 ? fname.substring(0, dot) : fname);
+        }
+        return deck;
+    }
+
+    public static ImportResult importDeckFromFile(File file, AdventurePlayer player, ImportMode mode) {
+        Deck importedDeck = parseDeckFile(file);
+        if (importedDeck == null) return ImportResult.failure("Could not parse file");
+
+        List<MissingCard> missingCards = new ArrayList<>();
+        for (java.util.Map.Entry<DeckSection, CardPool> entry : importedDeck) {
+            for (java.util.Map.Entry<PaperCard, Integer> cardEntry : entry.getValue()) {
+                PaperCard card = cardEntry.getKey();
+                int needed = cardEntry.getValue();
+                int owned = player.getCards().count(card);
+                if (owned < needed) {
+                    missingCards.add(new MissingCard(card, needed - owned));
+                }
+            }
+        }
+
+        if (mode == ImportMode.REPORT_ONLY) {
+            return ImportResult.reportOnly(importedDeck.getName(), missingCards);
+        }
+
+        if (mode == ImportMode.BUY_MISSING) {
+            int totalCost = 0;
+            for (MissingCard mc : missingCards) {
+                totalCost += player.cardSellPrice(mc.card) * mc.quantity;
+            }
+            if (player.getGold() < totalCost) {
+                return ImportResult.failure(String.format(
+                    "Not enough gold. Need %d, have %d. Missing %d cards.",
+                    totalCost, player.getGold(), missingCards.size()));
+            }
+            player.giveGold(-totalCost);
+        }
+
+        int cardsAdded = 0;
+        for (MissingCard mc : missingCards) {
+            player.addCard(mc.card, mc.quantity);
+            cardsAdded += mc.quantity;
+        }
+
+        int slot = player.findFirstEmptySlot();
+        if (slot == -1) return ImportResult.failure("All deck slots full (max 99)");
+        player.importIntoSlot(slot, importedDeck);
+
+        return ImportResult.success(slot, importedDeck.getName(), cardsAdded);
+    }
+
+    public static MarkSellResult markCardsForSale(File file, AdventurePlayer player) {
+        Deck parsed = parseDeckFile(file);
+        if (parsed == null) return MarkSellResult.failure("Could not parse file");
+
+        int marked = 0;
+        int skipped = 0;
+        CardPool collection = player.getCards();
+        ItemPool<PaperCard> autoSell = player.getAutoSellCards();
+
+        for (java.util.Map.Entry<DeckSection, CardPool> entry : parsed) {
+            for (java.util.Map.Entry<PaperCard, Integer> cardEntry : entry.getValue()) {
+                PaperCard card = cardEntry.getKey();
+                int requestedQty = cardEntry.getValue();
+
+                int owned = collection.count(card);
+                int inDecks = player.getCopiesUsedInDecks(card);
+                int alreadyMarked = autoSell.count(card);
+                int canMark = owned - inDecks - alreadyMarked;
+
+                if (card.getMarkedFlags() != null && card.getMarkedFlags().noSellValue) {
+                    skipped += requestedQty;
+                    continue;
+                }
+
+                int toMark = Math.min(requestedQty, Math.max(canMark, 0));
+                if (toMark > 0) {
+                    autoSell.add(card, toMark);
+                    marked += toMark;
+                }
+                skipped += (requestedQty - toMark);
+            }
+        }
+
+        return MarkSellResult.success(marked, skipped);
+    }
+
+    public static String exportCollectionAsArena(AdventurePlayer player) {
+        StringBuilder sb = new StringBuilder();
+        CardPool collection = player.getCards();
+        List<java.util.Map.Entry<PaperCard, Integer>> sorted = new ArrayList<>();
+        for (java.util.Map.Entry<PaperCard, Integer> e : collection) sorted.add(e);
+        sorted.sort(java.util.Comparator.comparing(e -> e.getKey().getName()));
+        for (java.util.Map.Entry<PaperCard, Integer> entry : sorted) {
+            PaperCard card = entry.getKey();
+            int count = entry.getValue();
+            String set = card.getEdition();
+            String collNum = card.getCollectorNumber();
+            sb.append(count).append(' ').append(card.getName());
+            if (set != null && !set.isEmpty()) {
+                sb.append(" (").append(set).append(')');
+                if (collNum != null && !collNum.isEmpty()) {
+                    sb.append(' ').append(collNum);
+                }
+            }
+            sb.append('\n');
+        }
+        return sb.toString();
     }
 }

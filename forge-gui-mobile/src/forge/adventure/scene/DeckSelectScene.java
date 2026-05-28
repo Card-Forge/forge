@@ -11,14 +11,20 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.util.CardUtil;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
+import forge.deck.io.DeckSerializer;
+import forge.util.FileUtil;
+
+import java.io.File;
 
 public class DeckSelectScene extends UIScene {
     private final IntMap<TextraButton> buttons = new IntMap<>();
     private final IntMap<Label> labels = new IntMap<>();
     Color defColor;
     TextField textInput;
+    TextField filePathInput;
     Table layout;
     TextraLabel header;
     TextraButton back, edit, rename, add;
@@ -49,6 +55,17 @@ public class DeckSelectScene extends UIScene {
         this.layoutDeckButtons();
 
         textInput = Controls.newTextField("");
+        filePathInput = Controls.newTextField("");
+
+        root.row();
+        Table fileOpsTable = new Table();
+        fileOpsTable.add(Controls.newTextButton("Import Deck", this::importDeck)).pad(2).expandX().fillX();
+        fileOpsTable.add(Controls.newTextButton("Export Deck", this::exportDeck)).pad(2).expandX().fillX();
+        fileOpsTable.row();
+        fileOpsTable.add(Controls.newTextButton("Export Collection", this::exportCollection)).pad(2).expandX().fillX();
+        fileOpsTable.add(Controls.newTextButton("Mark for Sale", this::markForSale)).pad(2).expandX().fillX();
+        root.add(fileOpsTable).colspan(2).fillX();
+
         back = ui.findActor("return");
         edit = ui.findActor("edit");
         rename = ui.findActor("rename");
@@ -241,5 +258,128 @@ public class DeckSelectScene extends UIScene {
         DeckEditScene editScene = DeckEditScene.getInstance();
         editScene.loadEvent(null);
         Forge.switchScene(editScene);
+    }
+
+    private void importDeck() {
+        Dialog modeDialog = new Dialog("Import Deck", Controls.getSkin());
+        modeDialog.getContentTable().add(Controls.newTextraLabel("Choose import mode:"));
+        modeDialog.button(Controls.newTextButton("Give missing (free)", () -> {
+            removeDialog();
+            showFilePathDialog("Import Deck - File Path", path -> {
+                File file = CardUtil.resolveFilePath(path);
+                if (!file.exists()) {
+                    showResultDialog("Import Deck", "File not found: " + file.getAbsolutePath());
+                    return;
+                }
+                CardUtil.ImportResult result = CardUtil.importDeckFromFile(file, Current.player(), CardUtil.ImportMode.GIVE_MISSING);
+                if (!result.success) {
+                    showResultDialog("Import Deck", "Import failed: " + result.message);
+                } else {
+                    refreshDeckButtons();
+                    select(result.slot);
+                    showResultDialog("Import Deck", String.format("Imported '%s' into slot %d (%d cards added to collection)",
+                        result.deckName, result.slot + 1, result.cardsAdded));
+                }
+            });
+        }));
+        modeDialog.button(Controls.newTextButton("Buy missing cards", () -> {
+            removeDialog();
+            showFilePathDialog("Import Deck - File Path", path -> {
+                File file = CardUtil.resolveFilePath(path);
+                if (!file.exists()) {
+                    showResultDialog("Import Deck", "File not found: " + file.getAbsolutePath());
+                    return;
+                }
+                CardUtil.ImportResult result = CardUtil.importDeckFromFile(file, Current.player(), CardUtil.ImportMode.BUY_MISSING);
+                if (!result.success) {
+                    showResultDialog("Import Deck", "Import failed: " + result.message);
+                } else {
+                    refreshDeckButtons();
+                    select(result.slot);
+                    showResultDialog("Import Deck", String.format("Imported '%s' into slot %d (%d cards purchased)",
+                        result.deckName, result.slot + 1, result.cardsAdded));
+                }
+            });
+        }));
+        modeDialog.button(Controls.newTextButton("Check only (report)", () -> {
+            removeDialog();
+            showFilePathDialog("Import Deck - File Path", path -> {
+                File file = CardUtil.resolveFilePath(path);
+                if (!file.exists()) {
+                    showResultDialog("Import Deck", "File not found: " + file.getAbsolutePath());
+                    return;
+                }
+                CardUtil.ImportResult result = CardUtil.importDeckFromFile(file, Current.player(), CardUtil.ImportMode.REPORT_ONLY);
+                showResultDialog("Import Deck", result.formatMissingReport());
+            });
+        }));
+        showDialog(modeDialog);
+    }
+
+    private void exportDeck() {
+        showFilePathDialog("Export Deck - Save Path", path -> {
+            File file = CardUtil.resolveFilePath(path);
+            try {
+                DeckSerializer.writeDeck(Current.player().getSelectedDeck(), file);
+                showResultDialog("Export Deck", "Saved deck to " + file.getAbsolutePath());
+            } catch (Exception e) {
+                showResultDialog("Export Deck", "Save failed: " + e.getMessage());
+            }
+        });
+    }
+
+    private void exportCollection() {
+        showFilePathDialog("Export Collection - Save Path", path -> {
+            File file = CardUtil.resolveFilePath(path);
+            try {
+                String arenaList = CardUtil.exportCollectionAsArena(Current.player());
+                FileUtil.writeFile(file, arenaList);
+                showResultDialog("Export Collection", String.format("Exported %d unique cards to %s (Arena format)",
+                    Current.player().getCards().countDistinct(), file.getAbsolutePath()));
+            } catch (Exception e) {
+                showResultDialog("Export Collection", "Export failed: " + e.getMessage());
+            }
+        });
+    }
+
+    private void markForSale() {
+        showFilePathDialog("Mark for Sale - File Path", path -> {
+            File file = CardUtil.resolveFilePath(path);
+            if (!file.exists()) {
+                showResultDialog("Mark for Sale", "File not found: " + file.getAbsolutePath());
+                return;
+            }
+            CardUtil.MarkSellResult result = CardUtil.markCardsForSale(file, Current.player());
+            if (!result.success) {
+                showResultDialog("Mark for Sale", "Mark failed: " + result.message);
+            } else {
+                showResultDialog("Mark for Sale", String.format("Marked %d cards for sale (%d skipped: in decks/already marked/not owned)",
+                    result.marked, result.skipped));
+            }
+        });
+    }
+
+    private void showFilePathDialog(String title, java.util.function.Consumer<String> onConfirm) {
+        filePathInput.setText("");
+        Dialog dialog = createGenericDialog(title, null,
+            Forge.getLocalizer().getMessage("lblOK"),
+            Forge.getLocalizer().getMessage("lblAbort"), () -> {
+                String path = filePathInput.getText();
+                removeDialog();
+                if (path != null && !path.trim().isEmpty()) {
+                    onConfirm.accept(path.trim());
+                }
+            }, this::removeDialog);
+        dialog.getContentTable().add(Controls.newLabel("File path:")).align(Align.left).colspan(2);
+        dialog.getContentTable().row();
+        dialog.getContentTable().add(filePathInput).fillX().expandX().colspan(2);
+        dialog.getContentTable().row();
+        showDialog(dialog);
+    }
+
+    private void showResultDialog(String title, String message) {
+        Dialog dialog = createGenericDialog(title, message,
+            Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+        showDialog(dialog);
     }
 }

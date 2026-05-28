@@ -1587,6 +1587,40 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return -1;
     }
 
+    /**
+     * Finds the first empty deck slot, expanding if needed.
+     * Returns -1 only if all 99 slots are occupied.
+     */
+    public int findFirstEmptySlot() {
+        for (int i = 0; i < maxDeckCount; i++) {
+            if (i >= getDeckCount()) addDeck();
+            if (isEmptyDeck(i)) return i;
+        }
+        if (getDeckCount() < 99) {
+            maxDeckCount = Math.min(maxDeckCount + 1, 99);
+            addDeck();
+            return getDeckCount() - 1;
+        }
+        return -1;
+    }
+
+    /**
+     * Replaces the contents of a deck slot with an imported deck.
+     * Clears all existing sections and copies from the source.
+     */
+    public void importIntoSlot(int slot, Deck importedDeck) {
+        Deck target = getDeck(slot);
+        for (DeckSection section : DeckSection.values()) {
+            if (target.has(section)) target.get(section).clear();
+        }
+        for (java.util.Map.Entry<DeckSection, CardPool> entry : importedDeck) {
+            target.getOrCreate(entry.getKey()).addAll(entry.getValue());
+        }
+        if (importedDeck.getName() != null && !importedDeck.getName().isEmpty()) {
+            target.setName(importedDeck.getName());
+        }
+    }
+
     private void ensureDeckLoadoutsSize() {
         while (deckLoadouts.size() < getDeckCount()) {
             deckLoadouts.add(null);
