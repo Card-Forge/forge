@@ -312,7 +312,7 @@ ScryfallCode=FIC
 304 R Forgotten Ancient @Esuthio
 305 R Generous Patron @Shiren
 306 R Gyre Sage @Touge369
-307 R Hardened Scales @Toshiaki Takayama
+307 R Hardened Scales @Takayama Toshiaki
 308 U Harmonize @Magali Villeneuve
 309 R Incubation Druid @IWAO
 310 U Inspiring Call @Francesca Resta

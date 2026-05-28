@@ -427,7 +427,7 @@ Replace=.1F fromSheet("ECL full art")+
 382 M Winnowing @Yukoring
 383 M Glen Elendra Guardian @NgN
 384 M Harmonized Crescendo @konomura
-385 M Bloodline Bidding @Morizo
+385 M Bloodline Bidding @morizo
 386 M Moonshadow @Mizugoromaru
 387 M Collective Inferno @YUE
 388 M Meek Attack @Yoshioka
@@ -437,7 +437,7 @@ Replace=.1F fromSheet("ECL full art")+
 392 M Winnowing @Yukoring
 393 M Glen Elendra Guardian @NgN
 394 M Harmonized Crescendo @konomura
-395 M Bloodline Bidding @Morizo
+395 M Bloodline Bidding @morizo
 396 M Moonshadow @Mizugoromaru
 397 M Collective Inferno @YUE
 398 M Meek Attack @Yoshioka
