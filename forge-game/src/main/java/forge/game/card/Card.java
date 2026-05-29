@@ -1980,7 +1980,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // used for LKI
         for (Map<CounterType, Integer> m : etbCounters.values()) {
             for (Map.Entry<CounterType, Integer> e : m.entrySet()) {
-            CounterType ct = e.getKey();
+                CounterType ct = e.getKey();
                 if (canReceiveCounters(ct)) {
                     setCounters(ct, getCounters(ct) + e.getValue());
                 }
