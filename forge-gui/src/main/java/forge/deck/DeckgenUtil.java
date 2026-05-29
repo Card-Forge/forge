@@ -661,7 +661,6 @@ public class DeckgenUtil {
     /** Generate a random Commander deck with an optional maximum bracket. */
     public static Deck generateRandomCommanderDeck(PaperCard commander, DeckFormat format, boolean forAi, boolean isCardGen, int maxBracket) {
         final Deck deck;
-        IDeckGenPool cardDb;
         DeckGeneratorBase gen = null;
         PaperCard selectedPartner = null;
         List<PaperCard> preSelectedCards = new ArrayList<>();
@@ -728,16 +727,16 @@ public class DeckgenUtil {
             preSelectedCards = limitCardsToCommanderBracket(preSelectedCards, commander, selectedPartner, maxBracket);
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner, preSelectedCards, forAi, format);
         }else{
-            cardDb = FModel.getMagicDb().getCommonCards();
-            //shuffle first 400 random cards
+            IDeckGenPool cardDb = FModel.getMagicDb().getCommonCards();
             Iterable<PaperCard> colorList = IterableUtil.filter(format.getCardPool(cardDb).getAllCards(),
                     format.isLegalCardPredicate().and(PaperCardPredicates.fromRules(
                             new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity())
                                     .or(DeckGeneratorBase.COLORLESS_CARDS))));
             if (format == DeckFormat.Brawl) {
-                //for Brawl - add additional filterprinted rule to remove old reprints for a consistent look
+                // add additional filterprinted rule to remove old reprints for a consistent look
                 colorList = IterableUtil.filter(colorList,FModel.getFormats().getStandard().getFilterPrinted());
             }
+            //shuffle first 400 random cards
             List<PaperCard> cardList = Lists.newArrayList(colorList);
             Collections.shuffle(cardList, MyRandom.getRandom());
             int shortlistlength=400;

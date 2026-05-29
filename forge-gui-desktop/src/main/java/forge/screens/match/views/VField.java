@@ -413,7 +413,7 @@ public class VField implements IVDoc<CField> {
         }
 
         final boolean highlighted = isHighlighted();
-        this.avatarArea.setBorder(highlighted ? borderAvatarHighlighted : borderAvatarSimple );
+        this.avatarArea.setBorder(highlighted ? borderAvatarHighlighted : borderAvatarSimple);
         this.avatarArea.setOpaque(highlighted);
         this.avatarArea.setToolTipText(getPlayerDetailsHtml());
     }
@@ -443,28 +443,25 @@ public class VField implements IVDoc<CField> {
         }
 
         commanderBracketTooltipCalculated = true;
-        if (matchUI == null || matchUI.getGameView() == null || !matchUI.getGameView().isCommander()
-                || !shouldShowCommanderBracketTooltip()) {
+        if (matchUI == null || matchUI.getGameView() == null || !matchUI.getGameView().isCommander()) {
             return null;
         }
-
+        final GameType gameType = matchUI.getGameView().getGameType();
+        if (gameType == GameType.Adventure || gameType == GameType.AdventureEvent) {
+            return null;
+        }
+        final int maximumBracket = FModel.getPreferences().getPrefInt(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET);
+        if (maximumBracket < 1 || maximumBracket > 4) {
+            return null;
+        }
         final Deck deck = matchUI.getGameView().getDeck(player);
         if (deck == null) {
             return null;
         }
 
         commanderBracketTooltipLine = Localizer.getInstance().getMessage("lblBracket")
-                + ": " + CommanderBracketCalculator.getDisplayBracket(deck);
+                + ": " + CommanderBracketCalculator.getBracket(deck);
         return commanderBracketTooltipLine;
     }
 
-    private boolean shouldShowCommanderBracketTooltip() {
-        final GameType gameType = matchUI.getGameView().getGameType();
-        if (gameType == GameType.Adventure || gameType == GameType.AdventureEvent) {
-            return false;
-        }
-
-        final int maximumBracket = FModel.getPreferences().getPrefInt(FPref.UI_MAXIMUM_COMMANDER_BRACKET);
-        return maximumBracket >= 1 && maximumBracket <= 4;
-    }
 }
