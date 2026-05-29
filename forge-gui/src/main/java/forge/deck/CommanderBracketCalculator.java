@@ -20,6 +20,7 @@ public final class CommanderBracketCalculator {
     private static final String EARLY_GAME = "early_game";
 
     private static final Data DATA = new Data();
+    private static final Localizer localizer = Localizer.getInstance();
 
     private CommanderBracketCalculator() {
     }
@@ -29,7 +30,12 @@ public final class CommanderBracketCalculator {
             return Result.empty();
         }
 
-        final Set<String> deckCards = getDeckCardNames(deck);
+        return calculate(getDeckCardNames(deck));
+    }
+
+    public static Result calculate(final Set<String> cardNames) {
+        final Set<String> deckCards = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        deckCards.addAll(cardNames);
         final List<String> gamechangers = DATA.findCards(deckCards, DATA.gamechangers);
         final List<String> massLandDenial = DATA.findCards(deckCards, DATA.massLandDenial);
         final List<String> extraTurns = DATA.findCards(deckCards, DATA.extraTurns);
@@ -73,10 +79,6 @@ public final class CommanderBracketCalculator {
         return calculate(deck).getBracket();
     }
 
-    public static String getDisplayBracket(final Deck deck) {
-        return String.valueOf(getBracket(deck));
-    }
-
     public static String getExplanation(final Deck deck) {
         return calculate(deck).toExplanation();
     }
@@ -85,6 +87,14 @@ public final class CommanderBracketCalculator {
         final Set<String> result = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         for (final Entry<PaperCard, Integer> cardEntry : deck.getAllCardsInASinglePool()) {
             result.addAll(cardEntry.getKey().getAllSearchableNames());
+        }
+        return result;
+    }
+
+    public static Set<String> getCardNames(final PaperCard card) {
+        final Set<String> result = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        if (card != null) {
+            result.addAll(card.getAllSearchableNames());
         }
         return result;
     }
@@ -217,28 +227,26 @@ public final class CommanderBracketCalculator {
         }
 
         public String toExplanation() {
-            final Localizer localizer = Localizer.getInstance();
             final StringBuilder sb = new StringBuilder();
             sb.append(localizer.getMessage("lblCommanderBracketMinimum", bracket)).append("\n\n");
-            appendCards(sb, localizer, localizer.getMessage("lblCommanderBracketGameChangers"), gamechangers,
+            appendCards(sb, localizer.getMessage("lblCommanderBracketGameChangers"), gamechangers,
                     gamechangers.size() >= 4 ? localizer.getMessage("lblCommanderBracketReasonGameChangersFour")
                             : !gamechangers.isEmpty() ? localizer.getMessage("lblCommanderBracketReasonGameChangersOne")
                             : null);
-            appendCards(sb, localizer, localizer.getMessage("lblCommanderBracketMassLandDenial"), massLandDenial,
+            appendCards(sb, localizer.getMessage("lblCommanderBracketMassLandDenial"), massLandDenial,
                     massLandDenial.isEmpty() ? null : localizer.getMessage("lblCommanderBracketReasonMassLandDenial"));
-            appendCards(sb, localizer, localizer.getMessage("lblCommanderBracketExtraTurns"), extraTurns,
+            appendCards(sb, localizer.getMessage("lblCommanderBracketExtraTurns"), extraTurns,
                     extraTurns.size() >= 4 ? localizer.getMessage("lblCommanderBracketReasonExtraTurnsFour")
                             : extraTurns.size() >= 3 ? localizer.getMessage("lblCommanderBracketReasonExtraTurnsThree")
                             : extraTurns.size() >= 2 ? localizer.getMessage("lblCommanderBracketReasonExtraTurnsTwo")
                             : extraTurns.isEmpty() ? null : localizer.getMessage("lblCommanderBracketReasonExtraTurnsFew"));
-            appendCards(sb, localizer, localizer.getMessage("lblCommanderBracketChainedExtraTurns"), chainedExtraTurns,
+            appendCards(sb, localizer.getMessage("lblCommanderBracketChainedExtraTurns"), chainedExtraTurns,
                     chainedExtraTurns.isEmpty() ? null : localizer.getMessage("lblCommanderBracketReasonChainedExtraTurn"));
-            appendCombos(sb, localizer, lateGameCombos, earlyGameCombos);
+            appendCombos(sb, lateGameCombos, earlyGameCombos);
             return sb.toString();
         }
 
-        private static void appendCards(final StringBuilder sb, final Localizer localizer,
-                                        final String title, final List<String> cards, final String reason) {
+        private static void appendCards(final StringBuilder sb, final String title, final List<String> cards, final String reason) {
             sb.append(title).append("\n");
             if (cards.isEmpty()) {
                 sb.append("  ").append(localizer.getMessage("lblNone")).append("\n");
@@ -254,8 +262,7 @@ public final class CommanderBracketCalculator {
             sb.append("\n");
         }
 
-        private static void appendCombos(final StringBuilder sb, final Localizer localizer,
-                                         final List<Combo> lateGameCombos, final List<Combo> earlyGameCombos) {
+        private static void appendCombos(final StringBuilder sb, final List<Combo> lateGameCombos, final List<Combo> earlyGameCombos) {
             sb.append(localizer.getMessage("lblCommanderBracketTwoCardCombos")).append("\n");
             if (lateGameCombos.isEmpty() && earlyGameCombos.isEmpty()) {
                 sb.append("  ").append(localizer.getMessage("lblNone")).append("\n");

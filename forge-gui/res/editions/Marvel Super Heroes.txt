@@ -6,6 +6,7 @@ Type=Expansion
 ScryfallCode=MSH
 
 [cards]
+2 U Agent Maria Hill @Jake Murray
 9 M Captain America, Super-Soldier @Anna Podedworna
 21 M The Mind Stone @Volkan Baǵa
 35 R The Sentry, Golden Guardian @Alexander Skripnikov
@@ -15,13 +16,16 @@ ScryfallCode=MSH
 87 R Baron Helmut Zemo @Wero Gallo
 95 M Doctor Doom @David Palumbo
 96 R Doom Reigns Supreme @Alexander Gering
+112 U Ronin, Shadow Stalker @Lie Setiawan
 115 R Super-Skrull @Zoltan Boros
 117 R Thunderbolts Conspiracy @Lucio Parrillo
 148 R Quicksilver, Brash Blur @Michael MacRae
 197 R World War Hulk @Serena Malyon
 212 M The Coming of Galactus @Serena Malyon
+216 U Iron Man, Master of Machines @John Tyler Christopher
 223 R Moon Girl and Devil Dinosaur @Zezhou Chen
-240 R Wolverinem Fierce Fighter @Dan Brereton
+234 U Thor Odinson @Sean Vo
+240 R Wolverine, Fierce Fighter @Dan Brereton
 255 R The Vision @Carissa Susilo
 304 R World War Hulk @Steve Ellis
 307 M The Coming of Galactus @Veronica Fish
