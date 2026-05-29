@@ -150,12 +150,12 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
 
     // doesn't include phased out cards
     public final CardCollectionView getAttachedCards() {
-        return CardLists.filter(attachedCards, CardPredicates.phasedIn());
+        return CardLists.filter(getAllAttachedCards(), CardPredicates.phasedIn());
     }
 
     // for view does include phased out cards
     public final CardCollectionView getAllAttachedCards() {
-        return attachedCards;
+        return CardCollection.getView(attachedCards);
     }
 
     public final void setAttachedCards(final Iterable<Card> cards) {
