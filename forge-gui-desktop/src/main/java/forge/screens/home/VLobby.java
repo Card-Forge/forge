@@ -109,6 +109,7 @@ public class VLobby implements ILobbyView {
     private final FCheckBox cbSingletons = new FCheckBox(localizer.getMessage("cbSingletons"));
     private final FCheckBox cbArtifacts = new FCheckBox(localizer.getMessage("cbRemoveArtifacts"));
     private final Deck[] decks = new Deck[MAX_PLAYERS];
+    private final int[] generatedCommanderDeckMaximumBrackets = new int[MAX_PLAYERS];
 
     // Variants
     private final List<FList<Object>> schemeDeckLists = new ArrayList<>();
@@ -281,6 +282,7 @@ public class VLobby implements ILobbyView {
             addConstructedStartControls();
             // Start button event handling
             btnStart.addActionListener(arg0 -> {
+                // Generated Commander decks are stored when selected; refresh only if the bracket cap changed.
                 updateCommanderGeneratedDeckSelections();
                 Runnable startGame = lobby.startGame();
                 if (startGame != null) {
@@ -552,6 +554,7 @@ public class VLobby implements ILobbyView {
         final Deck copy = deck == null ? new Deck() : new Deck(decks[index]);
         copy.putSection(section, cards);
         decks[index] = copy;
+        generatedCommanderDeckMaximumBrackets[index] = 0;
         if (playerChangeListener != null) {
             playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(section, cards));
         }
@@ -620,7 +623,8 @@ public class VLobby implements ILobbyView {
     }
 
     private void selectMainDeck(final FDeckChooser mainChooser, final int playerIndex, final boolean isCommanderDeck) {
-        mainChooser.setMaximumCommanderBracket(getMaximumCommanderBracket());
+        final int maximumBracket = getMaximumCommanderBracket();
+        mainChooser.setMaximumCommanderBracket(maximumBracket);
         final Deck deck = mainChooser.getDeck();
         // something went wrong, clear selection to prevent error loop
         if (deck == null) {
@@ -636,6 +640,7 @@ public class VLobby implements ILobbyView {
                 getPlayerPanel(playerIndex).setDeckSelectorButtonText(text);
             }
             fireDeckChangeListener(playerIndex, deck);
+            generatedCommanderDeckMaximumBrackets[playerIndex] = isGeneratedCommanderDeckType(type) ? maximumBracket : 0;
         }
         mainChooser.saveState();
     }
@@ -651,7 +656,8 @@ public class VLobby implements ILobbyView {
                 continue;
             }
             deckChooser.setMaximumCommanderBracket(maximumBracket);
-            if (isGeneratedCommanderDeckType(deckChooser.getSelectedDeckType())) {
+            if (isGeneratedCommanderDeckType(deckChooser.getSelectedDeckType())
+                    && generatedCommanderDeckMaximumBrackets[i] != maximumBracket) {
                 selectMainDeck(deckChooser, i, true);
             }
         }
