@@ -460,7 +460,7 @@ public class CardDetailUtil {
         }
 
         // chosen cards
-        if (card.getChosenCards() != null) {
+        if (!card.getChosenCards().isEmpty()) {
             area.append("\n");
             area.append("(chosen card").append(card.getChosenCards().size() == 1 ? ": " : "s: ");
             area.append(Lang.joinHomogenous(card.getChosenCards())).append(")");
