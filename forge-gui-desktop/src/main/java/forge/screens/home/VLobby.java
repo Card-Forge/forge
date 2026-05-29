@@ -267,15 +267,12 @@ public class VLobby implements ILobbyView {
         // Start Button
         if (lobby.hasControl()) {
             pnlStart.setOpaque(false);
-            maximumCommanderBracket.addActionListener(e -> applyMaximumCommanderBracketToDeckChoosers());
             maximumCommanderBracketFrame.add(newLabel("Maximum Bracket:"), "w " + START_ROW_LABEL_WIDTH + "px!, h 30px!");
             maximumCommanderBracketFrame.add(maximumCommanderBracket, "w " + START_ROW_COMBO_WIDTH + "px!, h 30px!");
             maximumCommanderBracketFrame.setOpaque(false);
             addConstructedStartControls();
             // Start button event handling
             btnStart.addActionListener(arg0 -> {
-                // Generated Commander decks are stored when selected; refresh only if the bracket cap changed.
-                updateCommanderGeneratedDeckSelections();
                 Runnable startGame = lobby.startGame();
                 if (startGame != null) {
                     startGame.run();
@@ -615,8 +612,6 @@ public class VLobby implements ILobbyView {
     }
 
     private void selectMainDeck(final FDeckChooser mainChooser, final int playerIndex, final boolean isCommanderDeck) {
-        final int maximumBracket = getMaximumCommanderBracket();
-        mainChooser.setMaximumCommanderBracket(maximumBracket);
         final Deck deck = mainChooser.getDeck();
         // something went wrong, clear selection to prevent error loop
         if (deck == null) {
@@ -632,41 +627,8 @@ public class VLobby implements ILobbyView {
                 getPlayerPanel(playerIndex).setDeckSelectorButtonText(text);
             }
             fireDeckChangeListener(playerIndex, deck);
-            generatedCommanderDeckMaximumBrackets[playerIndex] = isGeneratedCommanderDeckType(type) ? maximumBracket : 0;
         }
         mainChooser.saveState();
-    }
-
-    private void updateCommanderGeneratedDeckSelections() {
-        final int maximumBracket = getMaximumCommanderBracket();
-        for (int i = 0; i < activePlayersNum && i < playerPanels.size(); i++) {
-            if (!lobby.mayEdit(i)) {
-                continue;
-            }
-            final FDeckChooser deckChooser = getDeckChooser(i);
-            if (deckChooser == null) {
-                continue;
-            }
-            deckChooser.setMaximumCommanderBracket(maximumBracket);
-            if (isGeneratedCommanderDeckType(deckChooser.getSelectedDeckType())
-                    && generatedCommanderDeckMaximumBrackets[i] != maximumBracket) {
-                selectMainDeck(deckChooser, i, true);
-            }
-        }
-    }
-
-    private void applyMaximumCommanderBracketToDeckChoosers() {
-        final int maximumBracket = getMaximumCommanderBracket();
-        for (int i = 0; i < activePlayersNum && i < playerPanels.size(); i++) {
-            final FDeckChooser deckChooser = getDeckChooser(i);
-            if (deckChooser != null) {
-                deckChooser.setMaximumCommanderBracket(maximumBracket);
-            }
-        }
-    }
-
-    private static boolean isGeneratedCommanderDeckType(final DeckType type) {
-        return type == DeckType.RANDOM_COMMANDER_DECK || type == DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
     }
 
     private void selectSchemeDeck(final int playerIndex) {
@@ -1160,7 +1122,6 @@ public class VLobby implements ILobbyView {
         return cachedDeckChoosers.computeIfAbsent(prefKey, (key) -> {
             final GameType gameType = forCommander ? type : GameType.Constructed;
             final FDeckChooser fdc = new FDeckChooser(null, ai, gameType, forCommander);
-            fdc.setMaximumCommanderBracket(getMaximumCommanderBracket());
             fdc.initialize(prefKey, deckType);
             fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, forCommander));
             return fdc;

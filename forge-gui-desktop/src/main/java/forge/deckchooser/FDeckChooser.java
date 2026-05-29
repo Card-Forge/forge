@@ -56,7 +56,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private final FLabel btnRandom = new FLabel.ButtonBuilder().fontSize(14).build();
 
     private boolean isAi;
-    private int maximumCommanderBracket = 5;
 
     private final ForgePreferences prefs = FModel.getPreferences();
     private FPref stateSetting = null;
@@ -299,19 +298,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         if (proxy == null) {
             return null;
         }
-        if (isGeneratedCommanderDeckType() && proxy instanceof CommanderDeckGenerator commanderDeckGenerator) {
-            return commanderDeckGenerator.getDeck(maximumCommanderBracket);
-        }
         return proxy.getDeck();
-    }
-
-    private boolean isGeneratedCommanderDeckType() {
-        return selectedDeckType == DeckType.RANDOM_COMMANDER_DECK
-                || selectedDeckType == DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
-    }
-
-    public void setMaximumCommanderBracket(final int maximumCommanderBracket0) {
-        maximumCommanderBracket = maximumCommanderBracket0;
     }
 
     /** Generates deck from current list selection(s). */

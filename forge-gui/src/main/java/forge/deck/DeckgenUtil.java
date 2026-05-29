@@ -24,6 +24,7 @@ import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.itemmanager.IItemManager;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.*;
@@ -636,11 +637,6 @@ public class DeckgenUtil {
 
     /** Generate a 2-5-color Commander deck. */
     public static Deck generateCommanderDeck(boolean forAi, GameType gameType) {
-        return generateCommanderDeck(forAi, gameType, 0);
-    }
-
-    /** Generate a 2-5-color Commander deck with an optional maximum bracket. */
-    public static Deck generateCommanderDeck(boolean forAi, GameType gameType, int maxBracket) {
         // Get random multicolor Legendary creature
         final DeckFormat format = gameType.getDeckFormat();
         Predicate<CardRules> canPlay = forAi ? DeckGeneratorBase.AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
@@ -650,12 +646,11 @@ public class DeckgenUtil {
                 .filter(format.isLegalCommanderPredicate())
                 .filter(PaperCardPredicates.fromRules(canPlay))
                 .collect(StreamUtil.random()).get();
-        return generateRandomCommanderDeck(commander, format, forAi, false, maxBracket);
+        return generateRandomCommanderDeck(commander, format, forAi, false);
     }
 
-    /** Generate a random Commander deck. */
     public static Deck generateRandomCommanderDeck(PaperCard commander, DeckFormat format, boolean forAi, boolean isCardGen) {
-        return generateRandomCommanderDeck(commander, format, forAi, isCardGen, 0);
+        return generateRandomCommanderDeck(commander, format, forAi, isCardGen, FModel.getPreferences().getPrefInt(ForgePreferences.FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET));
     }
 
     /** Generate a random Commander deck with an optional maximum bracket. */
