@@ -103,7 +103,11 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
 
     @Override
     public Deck getDeck() {
-        return DeckgenUtil.generateRandomCommanderDeck(legend, format, isForAi, isCardgen);
+        return getDeck(0);
+    }
+
+    public Deck getDeck(final int maxBracket) {
+        return DeckgenUtil.generateRandomCommanderDeck(legend, format, isForAi, isCardgen, maxBracket);
     }
 
     @Override

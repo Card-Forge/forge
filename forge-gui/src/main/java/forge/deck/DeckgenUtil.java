@@ -636,6 +636,11 @@ public class DeckgenUtil {
 
     /** Generate a 2-5-color Commander deck. */
     public static Deck generateCommanderDeck(boolean forAi, GameType gameType) {
+        return generateCommanderDeck(forAi, gameType, 0);
+    }
+
+    /** Generate a 2-5-color Commander deck with an optional maximum bracket. */
+    public static Deck generateCommanderDeck(boolean forAi, GameType gameType, int maxBracket) {
         // Get random multicolor Legendary creature
         final DeckFormat format = gameType.getDeckFormat();
         Predicate<CardRules> canPlay = forAi ? DeckGeneratorBase.AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
@@ -645,11 +650,16 @@ public class DeckgenUtil {
                 .filter(format.isLegalCommanderPredicate())
                 .filter(PaperCardPredicates.fromRules(canPlay))
                 .collect(StreamUtil.random()).get();
-        return generateRandomCommanderDeck(commander, format, forAi, false);
+        return generateRandomCommanderDeck(commander, format, forAi, false, maxBracket);
     }
 
-    /** Generate a ramdom Commander deck. */
+    /** Generate a random Commander deck. */
     public static Deck generateRandomCommanderDeck(PaperCard commander, DeckFormat format, boolean forAi, boolean isCardGen) {
+        return generateRandomCommanderDeck(commander, format, forAi, isCardGen, 0);
+    }
+
+    /** Generate a random Commander deck with an optional maximum bracket. */
+    public static Deck generateRandomCommanderDeck(PaperCard commander, DeckFormat format, boolean forAi, boolean isCardGen, int maxBracket) {
         final Deck deck;
         IDeckGenPool cardDb;
         DeckGeneratorBase gen = null;
@@ -682,6 +692,7 @@ public class DeckgenUtil {
                 }
             }
 
+            preSelectedCards = limitCardsToCommanderBracket(preSelectedCards, commander, null, maxBracket);
             if (format.equals(DeckFormat.Oathbreaker)) {
                 //pass signature spell as partner for simplicity
                 selectedPartner = getRandomSignatureSpell(preSelectedCards);
@@ -714,6 +725,7 @@ public class DeckgenUtil {
             }
             preSelectedCards.removeAll(toRemove);
             preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(commander));
+            preSelectedCards = limitCardsToCommanderBracket(preSelectedCards, commander, selectedPartner, maxBracket);
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner, preSelectedCards, forAi, format);
         }else{
             cardDb = FModel.getMagicDb().getCommonCards();
@@ -726,14 +738,7 @@ public class DeckgenUtil {
             case Brawl: //for Brawl - add additional filterprinted rule to remove old reprints for a consistent look
                 colorList = IterableUtil.filter(colorList,FModel.getFormats().getStandard().getFilterPrinted());
                 break;
-            case Oathbreaker:
-                //pass signature spell as partner for simplicity
-                selectedPartner = getRandomSignatureSpell(colorList);
-                break;
             default:
-                if (commander.getRules().canBePartnerCommander()) {
-                    selectedPartner = getRandomPartnerCommander(colorList, commander);
-                }
                 break;
             }
             List<PaperCard> cardList = Lists.newArrayList(colorList);
@@ -742,11 +747,24 @@ public class DeckgenUtil {
             if(cardList.size()<shortlistlength){
                 shortlistlength=cardList.size();
             }
-            List<PaperCard> shortList = cardList.subList(0, shortlistlength);
-            shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(commander));
+            List<PaperCard> shortList = new ArrayList<>(cardList.subList(0, shortlistlength));
+            shortList = limitCardsToCommanderBracket(shortList, commander, null, maxBracket);
+            switch (format) {
+            case Oathbreaker:
+                //pass signature spell as partner for simplicity
+                selectedPartner = getRandomSignatureSpell(shortList);
+                break;
+            default:
+                if (commander.getRules().canBePartnerCommander()) {
+                    selectedPartner = getRandomPartnerCommander(shortList, commander);
+                }
+                break;
+            }
             if (selectedPartner != null) {
                 shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
+                shortList = limitCardsToCommanderBracket(shortList, commander, selectedPartner, maxBracket);
             }
+            shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(commander));
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner, shortList, forAi, format);
         }
 
@@ -769,6 +787,29 @@ public class DeckgenUtil {
         }
 
         return deck;
+    }
+
+    private static List<PaperCard> limitCardsToCommanderBracket(final Iterable<PaperCard> cards,
+            final PaperCard commander, final PaperCard selectedPartner, final int maxBracket) {
+        if (maxBracket < 1 || maxBracket >= 4) {
+            return Lists.newArrayList(cards);
+        }
+
+        final List<PaperCard> result = new ArrayList<>();
+        Set<String> prospectiveDeckNames = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        prospectiveDeckNames.addAll(CommanderBracketCalculator.getCardNames(commander));
+        prospectiveDeckNames.addAll(CommanderBracketCalculator.getCardNames(selectedPartner));
+        for (final PaperCard card : cards) {
+            final Set<String> cardNames = CommanderBracketCalculator.getCardNames(card);
+            final Set<String> candidateDeckNames = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+            candidateDeckNames.addAll(prospectiveDeckNames);
+            candidateDeckNames.addAll(cardNames);
+            if (CommanderBracketCalculator.calculate(candidateDeckNames).getBracket() <= maxBracket) {
+                result.add(card);
+                prospectiveDeckNames = candidateDeckNames;
+            }
+        }
+        return result;
     }
 
     private static PaperCard getRandomSignatureSpell(final Iterable<PaperCard> cards) {

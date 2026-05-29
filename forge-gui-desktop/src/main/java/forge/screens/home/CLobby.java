@@ -177,6 +177,7 @@ public class CLobby {
             view.getBtnStart().requestFocusInWindow();
         });
         view.getGamesInMatchBinder().load();
+        view.getMaximumCommanderBracketBinder().load();
     }
 
     /** React to a lobby-data change: detect event-state transitions and refresh the panel. */

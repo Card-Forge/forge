@@ -29,7 +29,12 @@ public final class CommanderBracketCalculator {
             return Result.empty();
         }
 
-        final Set<String> deckCards = getDeckCardNames(deck);
+        return calculate(getDeckCardNames(deck));
+    }
+
+    public static Result calculate(final Set<String> cardNames) {
+        final Set<String> deckCards = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        deckCards.addAll(cardNames);
         final List<String> gamechangers = DATA.findCards(deckCards, DATA.gamechangers);
         final List<String> massLandDenial = DATA.findCards(deckCards, DATA.massLandDenial);
         final List<String> extraTurns = DATA.findCards(deckCards, DATA.extraTurns);
@@ -85,6 +90,14 @@ public final class CommanderBracketCalculator {
         final Set<String> result = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         for (final Entry<PaperCard, Integer> cardEntry : deck.getAllCardsInASinglePool()) {
             result.addAll(cardEntry.getKey().getAllSearchableNames());
+        }
+        return result;
+    }
+
+    public static Set<String> getCardNames(final PaperCard card) {
+        final Set<String> result = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        if (card != null) {
+            result.addAll(card.getAllSearchableNames());
         }
         return result;
     }

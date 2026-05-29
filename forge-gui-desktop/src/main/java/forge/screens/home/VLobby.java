@@ -50,6 +50,12 @@ public class VLobby implements ILobbyView {
     static final int MAX_PLAYERS = 8;
     private static final int EVENT_BTN_WIDTH = 200;
     private static final int EVENT_BTN_HEIGHT = 50;
+    private static final int START_ROW_LABEL_WIDTH = 150;
+    private static final int START_ROW_COMBO_WIDTH = 50;
+    private static final int START_ROW_GAMES_WIDTH = START_ROW_LABEL_WIDTH + START_ROW_COMBO_WIDTH;
+    private static final int COMMANDER_BRACKET_SIDE_WIDTH = START_ROW_LABEL_WIDTH * 2 + START_ROW_COMBO_WIDTH;
+    private static final int COMMANDER_GAMES_SIDE_WIDTH = COMMANDER_BRACKET_SIDE_WIDTH + START_ROW_GAMES_WIDTH;
+    private static final String DEFAULT_MAXIMUM_COMMANDER_BRACKET = "5";
     final Localizer localizer = Localizer.getInstance();
     private static final ForgePreferences prefs = FModel.getPreferences();
 
@@ -62,7 +68,11 @@ public class VLobby implements ILobbyView {
     private int playerWithFocus = 0; // index of the player that currently has focus
 
     private final StartButton btnStart  = new StartButton();
-    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 3"));
+    private final JComboBox<String> maximumCommanderBracket = createMaximumCommanderBracketCombo();
+    private final SwingPrefBinders.ComboBox maximumCommanderBracketBinder =
+      new SwingPrefBinders.ComboBox(FPref.UI_MAXIMUM_COMMANDER_BRACKET, maximumCommanderBracket);
+    private final JPanel maximumCommanderBracketFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
     private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] {"1","3","5"});
     private final SwingPrefBinders.ComboBox gamesInMatchBinder =
       new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
@@ -146,6 +156,12 @@ public class VLobby implements ILobbyView {
     private final FButton btnStartMatch = new FButton(Localizer.getInstance().getMessage("lblNetworkStartMatch"));
 
     // (network draft state lives in CLobby)
+
+    private static JComboBox<String> createMaximumCommanderBracketCombo() {
+        final JComboBox<String> comboBox = new JComboBox<String>(new String[] {"1","2","3","4","5"});
+        comboBox.setSelectedItem(DEFAULT_MAXIMUM_COMMANDER_BRACKET);
+        return comboBox;
+    }
 
     // CTR
     public VLobby(final GameLobby lobby) {
@@ -260,9 +276,14 @@ public class VLobby implements ILobbyView {
         // Start Button
         if (lobby.hasControl()) {
             pnlStart.setOpaque(false);
-            pnlStart.add(btnStart, "align center");
+            maximumCommanderBracket.addActionListener(e -> applyMaximumCommanderBracketToDeckChoosers());
+            maximumCommanderBracketFrame.add(newLabel("Maximum Bracket:"), "w " + START_ROW_LABEL_WIDTH + "px!, h 30px!");
+            maximumCommanderBracketFrame.add(maximumCommanderBracket, "w " + START_ROW_COMBO_WIDTH + "px!, h 30px!");
+            maximumCommanderBracketFrame.setOpaque(false);
+            addConstructedStartControls();
             // Start button event handling
             btnStart.addActionListener(arg0 -> {
+                updateCommanderGeneratedDeckSelections();
                 Runnable startGame = lobby.startGame();
                 if (startGame != null) {
                     startGame.run();
@@ -287,11 +308,32 @@ public class VLobby implements ILobbyView {
             defaultGamesInMatch = "3";
         }
 
-        gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w 150px!, h 30px!");
-        gamesInMatchFrame.add(gamesInMatch, "w 50px!, h 30px!");
+        gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w " + START_ROW_LABEL_WIDTH + "px!, h 30px!");
+        gamesInMatchFrame.add(gamesInMatch, "w " + START_ROW_COMBO_WIDTH + "px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
+    }
 
-        pnlStart.add(gamesInMatchFrame);
+    private int getMaximumCommanderBracket() {
+        return Integer.parseInt((String) maximumCommanderBracket.getSelectedItem());
+    }
+
+    private void addConstructedStartControls() {
+        if (isCommanderBracketSelectorVisible()) {
+            maximumCommanderBracketFrame.setVisible(true);
+            pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 3"));
+            pnlStart.add(maximumCommanderBracketFrame, "w " + COMMANDER_BRACKET_SIDE_WIDTH + "px!, align left");
+            pnlStart.add(btnStart, "align center");
+            pnlStart.add(gamesInMatchFrame, "w " + COMMANDER_GAMES_SIDE_WIDTH + "px!, align left");
+        } else {
+            maximumCommanderBracketFrame.setVisible(false);
+            pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+            pnlStart.add(btnStart, "align center");
+            pnlStart.add(gamesInMatchFrame, "align center");
+        }
+    }
+
+    private boolean isCommanderBracketSelectorVisible() {
+        return lobby.getGameType() == GameType.Commander || hasVariant(GameType.Commander);
     }
 
     public void updateDeckPanel() {
@@ -588,6 +630,7 @@ public class VLobby implements ILobbyView {
 
     private void selectMainDeck(final FDeckChooser mainChooser, final int playerIndex, final boolean isCommanderDeck) {
         final DeckType type = mainChooser.getSelectedDeckType();
+        mainChooser.setMaximumCommanderBracket(getMaximumCommanderBracket());
         final Deck deck = mainChooser.getDeck();
         // something went wrong, clear selection to prevent error loop
         if (deck == null) {
@@ -604,6 +647,37 @@ public class VLobby implements ILobbyView {
             fireDeckChangeListener(playerIndex, deck);
         }
         mainChooser.saveState();
+    }
+
+    private void updateCommanderGeneratedDeckSelections() {
+        final int maximumBracket = getMaximumCommanderBracket();
+        for (int i = 0; i < activePlayersNum && i < playerPanels.size(); i++) {
+            if (!lobby.mayEdit(i)) {
+                continue;
+            }
+            final FDeckChooser deckChooser = getDeckChooser(i);
+            if (deckChooser == null) {
+                continue;
+            }
+            deckChooser.setMaximumCommanderBracket(maximumBracket);
+            if (isGeneratedCommanderDeckType(deckChooser.getSelectedDeckType())) {
+                selectMainDeck(deckChooser, i, true);
+            }
+        }
+    }
+
+    private void applyMaximumCommanderBracketToDeckChoosers() {
+        final int maximumBracket = getMaximumCommanderBracket();
+        for (int i = 0; i < activePlayersNum && i < playerPanels.size(); i++) {
+            final FDeckChooser deckChooser = getDeckChooser(i);
+            if (deckChooser != null) {
+                deckChooser.setMaximumCommanderBracket(maximumBracket);
+            }
+        }
+    }
+
+    private static boolean isGeneratedCommanderDeckType(final DeckType type) {
+        return type == DeckType.RANDOM_COMMANDER_DECK || type == DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
     }
 
     private void selectSchemeDeck(final int playerIndex) {
@@ -888,10 +962,7 @@ public class VLobby implements ILobbyView {
                 pnlStart.add(btnStartMatch, "cell 2 0, " + eventBtn);
                 pnlStart.add(gamesInMatchFrame, "cell 2 1, align center");
             } else {
-                // Constructed mode: Start button centered with games-in-match below
-                pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
-                pnlStart.add(btnStart, "align center, spanx 2, wrap");
-                pnlStart.add(gamesInMatchFrame, "spanx 2, align center");
+                addConstructedStartControls();
             }
         }
         // Non-host: nothing to show here — match controls are host-only.
@@ -1061,6 +1132,7 @@ public class VLobby implements ILobbyView {
                     lobby.removeVariant(variantType);
                 }
                 VLobby.this.update(false);
+                VLobby.this.updateActionButtons();
             });
         }
     }
@@ -1099,6 +1171,7 @@ public class VLobby implements ILobbyView {
         return cachedDeckChoosers.computeIfAbsent(prefKey, (key) -> {
             final GameType gameType = forCommander ? type : GameType.Constructed;
             final FDeckChooser fdc = new FDeckChooser(null, ai, gameType, forCommander);
+            fdc.setMaximumCommanderBracket(getMaximumCommanderBracket());
             fdc.initialize(prefKey, deckType);
             fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, forCommander));
             return fdc;
@@ -1157,6 +1230,11 @@ public class VLobby implements ILobbyView {
     /** Return the gamesInMatchBinder */
     public SwingPrefBinders.ComboBox getGamesInMatchBinder() {
       return gamesInMatchBinder;
+    }
+
+    /** Return the maximumCommanderBracketBinder. */
+    public SwingPrefBinders.ComboBox getMaximumCommanderBracketBinder() {
+      return maximumCommanderBracketBinder;
     }
 
     /** Populate vanguard lists. */

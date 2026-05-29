@@ -27,6 +27,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import forge.deck.CommanderBracketCalculator;
+import forge.deck.Deck;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -64,7 +66,10 @@ public class VField implements IVDoc<CField> {
     private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblField"));
 
     // Other fields
+    private final CMatchUI matchUI;
     private final PlayerView player;
+    private boolean commanderBracketTooltipCalculated = false;
+    private String commanderBracketTooltipLine;
 
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
@@ -100,6 +105,7 @@ public class VField implements IVDoc<CField> {
     public VField(final CMatchUI matchUI, final EDocID id0, final PlayerView p, final boolean mirror) {
         this.docID = id0;
 
+        this.matchUI = matchUI;
         this.player = p;
         if (p != null) { tab.setText(Localizer.getInstance().getMessage("lblPlayField", p.getName())); }
         else { tab.setText(Localizer.getInstance().getMessage("lblNoPlayerForEDocID", docID.toString())); }
@@ -406,6 +412,45 @@ public class VField implements IVDoc<CField> {
         final boolean highlighted = isHighlighted();
         this.avatarArea.setBorder(highlighted ? borderAvatarHighlighted : borderAvatarSimple );
         this.avatarArea.setOpaque(highlighted);
-        this.avatarArea.setToolTipText(player.getDetailsHtml());
+        this.avatarArea.setToolTipText(getPlayerDetailsHtml());
+    }
+
+    private String getPlayerDetailsHtml() {
+        final String detailsHtml = player.getDetailsHtml();
+        final String commanderBracketLine = getCommanderBracketTooltipLine();
+        if (commanderBracketLine == null) {
+            return detailsHtml;
+        }
+
+        final String nameSeparator = "<hr/>";
+        final int insertIndex = detailsHtml.indexOf(nameSeparator);
+        if (insertIndex < 0) {
+            return detailsHtml;
+        }
+
+        final int lineIndex = insertIndex + nameSeparator.length();
+        return detailsHtml.substring(0, lineIndex)
+                + commanderBracketLine + "<br/>"
+                + detailsHtml.substring(lineIndex);
+    }
+
+    private String getCommanderBracketTooltipLine() {
+        if (commanderBracketTooltipCalculated) {
+            return commanderBracketTooltipLine;
+        }
+
+        commanderBracketTooltipCalculated = true;
+        if (matchUI == null || matchUI.getGameView() == null || !matchUI.getGameView().isCommander()) {
+            return null;
+        }
+
+        final Deck deck = matchUI.getGameView().getDeck(player);
+        if (deck == null) {
+            return null;
+        }
+
+        commanderBracketTooltipLine = Localizer.getInstance().getMessage("lblBracket")
+                + ": " + CommanderBracketCalculator.getDisplayBracket(deck);
+        return commanderBracketTooltipLine;
     }
 }
