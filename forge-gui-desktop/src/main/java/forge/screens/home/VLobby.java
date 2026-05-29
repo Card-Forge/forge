@@ -107,7 +107,6 @@ public class VLobby implements ILobbyView {
     private final FCheckBox cbSingletons = new FCheckBox(localizer.getMessage("cbSingletons"));
     private final FCheckBox cbArtifacts = new FCheckBox(localizer.getMessage("cbRemoveArtifacts"));
     private final Deck[] decks = new Deck[MAX_PLAYERS];
-    private final int[] generatedCommanderDeckMaximumBrackets = new int[MAX_PLAYERS];
 
     // Variants
     private final List<FList<Object>> schemeDeckLists = new ArrayList<>();
@@ -543,7 +542,6 @@ public class VLobby implements ILobbyView {
         final Deck copy = deck == null ? new Deck() : new Deck(decks[index]);
         copy.putSection(section, cards);
         decks[index] = copy;
-        generatedCommanderDeckMaximumBrackets[index] = 0;
         if (playerChangeListener != null) {
             playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(section, cards));
         }
@@ -612,12 +610,12 @@ public class VLobby implements ILobbyView {
     }
 
     private void selectMainDeck(final FDeckChooser mainChooser, final int playerIndex, final boolean isCommanderDeck) {
+        final DeckType type = mainChooser.getSelectedDeckType();
         final Deck deck = mainChooser.getDeck();
         // something went wrong, clear selection to prevent error loop
         if (deck == null) {
             mainChooser.getLstDecks().setSelectedIndex(0);
         }
-        final DeckType type = mainChooser.getSelectedDeckType();
         final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
         if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
             final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy::getName);
