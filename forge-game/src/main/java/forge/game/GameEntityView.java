@@ -69,12 +69,4 @@ public abstract class GameEntityView extends TrackableObject {
     public boolean hasAnyCardAttachments() {
         return getAllAttachedCards().isEmpty();
     }
-
-    protected void updateAttachedCards(GameEntity e) {
-        if (!e.getAllAttachedCards().isEmpty()) {
-            set(TrackableProperty.AttachedCards, CardView.getCollection(e.getAllAttachedCards()));
-        } else {
-            set(TrackableProperty.AttachedCards, null);
-        }
-    }
 }
