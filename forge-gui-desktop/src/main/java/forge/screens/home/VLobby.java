@@ -152,6 +152,8 @@ public class VLobby implements ILobbyView {
     private final FButton btnStartEvent = new FButton(Localizer.getInstance().getMessage("lblNetworkStartDraft"));
     private final FButton btnStartMatch = new FButton(Localizer.getInstance().getMessage("lblNetworkStartMatch"));
 
+    private boolean refreshGeneratedDecks = false;
+
     // (network draft state lives in CLobby)
 
     public VLobby(final GameLobby lobby) {
@@ -272,6 +274,10 @@ public class VLobby implements ILobbyView {
             addConstructedStartControls();
             // Start button event handling
             btnStart.addActionListener(arg0 -> {
+                if (refreshGeneratedDecks) {
+                    refreshGeneratedDecks = false;
+                    update(true);
+                }
                 Runnable startGame = lobby.startGame();
                 if (startGame != null) {
                     startGame.run();
@@ -299,10 +305,6 @@ public class VLobby implements ILobbyView {
         gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w " + START_ROW_LABEL_WIDTH + "px!, h 30px!");
         gamesInMatchFrame.add(gamesInMatch, "w " + START_ROW_COMBO_WIDTH + "px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
-    }
-
-    private int getMaximumCommanderBracket() {
-        return Integer.parseInt((String) maximumCommanderBracket.getSelectedItem());
     }
 
     private void addConstructedStartControls() {
@@ -484,7 +486,6 @@ public class VLobby implements ILobbyView {
     boolean getConformanceSelected() {
         return cbDeckConformance.isSelected();
     }
-
     void setConformanceSelected(boolean selected) {
         cbDeckConformance.setSelected(selected);
     }
@@ -550,6 +551,7 @@ public class VLobby implements ILobbyView {
     void removePlayer(final int index) {
         lobby.removeSlot(index);
     }
+
     boolean hasVariant(final GameType variant) {
         return lobby.hasVariant(variant);
     }
@@ -610,6 +612,7 @@ public class VLobby implements ILobbyView {
     }
 
     private void selectMainDeck(final FDeckChooser mainChooser, final int playerIndex, final boolean isCommanderDeck) {
+        refreshGeneratedDecks = false;
         final DeckType type = mainChooser.getSelectedDeckType();
         final Deck deck = mainChooser.getDeck();
         // something went wrong, clear selection to prevent error loop
@@ -1062,6 +1065,10 @@ public class VLobby implements ILobbyView {
             names.add(pp.getPlayerName());
         }
         return names;
+    }
+
+    public void markDirty() {
+        refreshGeneratedDecks = true;
     }
 
     /////////////////////////////////////////////

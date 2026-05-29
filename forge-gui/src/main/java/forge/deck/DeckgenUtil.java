@@ -324,7 +324,7 @@ public class DeckgenUtil {
             CardDb cardDb = FModel.getMagicDb().getCommonCards();
             if (formatFilter == null){
                 if (selection.size() == 1) {
-                    gen = new DeckGeneratorMonoColor(cardDb, DeckFormat.Constructed,selection.get(0));
+                    gen = new DeckGeneratorMonoColor(cardDb, DeckFormat.Constructed, selection.get(0));
                 }
                 else if (selection.size() == 2) {
                     gen = new DeckGenerator2Color(cardDb, DeckFormat.Constructed,selection.get(0), selection.get(1));
