@@ -780,10 +780,10 @@ public class DeckgenUtil {
         return deck;
     }
 
-    private static List<PaperCard> limitCardsToCommanderBracket(final Iterable<PaperCard> cards,
+    private static List<PaperCard> limitCardsToCommanderBracket(final List<PaperCard> cards,
             final PaperCard commander, final PaperCard selectedPartner, final int maxBracket) {
         if (maxBracket < 1 || maxBracket >= 4) {
-            return Lists.newArrayList(cards);
+            return cards;
         }
 
         final List<PaperCard> result = new ArrayList<>();
