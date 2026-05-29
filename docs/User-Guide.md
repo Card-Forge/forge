@@ -256,7 +256,7 @@ The match screen is divided into resizable panels. The numbers below identify ea
 3. **Player field tabs** — switch between opponents' fields in multiplayer; the (N new) indicator highlights cards that have changed since you last viewed that field. See [Sort Player Fields in Turn Order](#sort-player-fields-in-turn-order) for ordering options.
 4. **Card Detail** — selected card's text and metadata.
 5. **Opponent's field** — same layout as your own field (items 6-10 describe its components).
-6. **Avatar and life total** — left-click to target the player, hover to see more info including Commander damage and estimated Commander bracket.
+6. **Avatar and life total** — left-click to target the player, hover to see more info including Commander damage and, when a Commander bracket cap is active, estimated Commander bracket.
 7. **Zone buttons** — hand, library, graveyard, exile, command, and sideboard with live counts; click to view, right-click for display options. See [Viewing cards in different zones](#viewing-cards-in-different-zones) for details.
 8. **Turn Phases** — click any pip to toggle a priority stop in that phase; right-click to yield to that phase.
 9. **Mana pool** — floating mana; click a symbol to spend it during cost payment.

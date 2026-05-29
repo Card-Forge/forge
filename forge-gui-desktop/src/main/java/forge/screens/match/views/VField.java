@@ -29,6 +29,7 @@ import javax.swing.border.LineBorder;
 
 import forge.deck.CommanderBracketCalculator;
 import forge.deck.Deck;
+import forge.game.GameType;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -36,7 +37,9 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
+import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CField;
 import forge.toolbox.FLabel;
@@ -440,7 +443,8 @@ public class VField implements IVDoc<CField> {
         }
 
         commanderBracketTooltipCalculated = true;
-        if (matchUI == null || matchUI.getGameView() == null || !matchUI.getGameView().isCommander()) {
+        if (matchUI == null || matchUI.getGameView() == null || !matchUI.getGameView().isCommander()
+                || !shouldShowCommanderBracketTooltip()) {
             return null;
         }
 
@@ -452,5 +456,15 @@ public class VField implements IVDoc<CField> {
         commanderBracketTooltipLine = Localizer.getInstance().getMessage("lblBracket")
                 + ": " + CommanderBracketCalculator.getDisplayBracket(deck);
         return commanderBracketTooltipLine;
+    }
+
+    private boolean shouldShowCommanderBracketTooltip() {
+        final GameType gameType = matchUI.getGameView().getGameType();
+        if (gameType == GameType.Adventure || gameType == GameType.AdventureEvent) {
+            return false;
+        }
+
+        final int maximumBracket = FModel.getPreferences().getPrefInt(FPref.UI_MAXIMUM_COMMANDER_BRACKET);
+        return maximumBracket >= 1 && maximumBracket <= 4;
     }
 }
