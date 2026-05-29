@@ -68,13 +68,11 @@ public class VLobby implements ILobbyView {
 
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 3"));
-    private final JComboBox<String> maximumCommanderBracket = createMaximumCommanderBracketCombo();
-    private final SwingPrefBinders.ComboBox maximumCommanderBracketBinder =
-      new SwingPrefBinders.ComboBox(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET, maximumCommanderBracket);
+    private final JComboBox<String> maximumCommanderBracket = new JComboBox<>(new String[]{"1", "2", "3", "4", "5"});
+    private final SwingPrefBinders.ComboBox maximumCommanderBracketBinder = new SwingPrefBinders.ComboBox(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET, maximumCommanderBracket);
     private final JPanel maximumCommanderBracketFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
-    private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] {"1","3","5"});
-    private final SwingPrefBinders.ComboBox gamesInMatchBinder =
-      new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
+    private final JComboBox<String> gamesInMatch = new JComboBox<>(new String[]{"1", "3", "5"});
+    private final SwingPrefBinders.ComboBox gamesInMatchBinder = new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
     private final JPanel gamesInMatchFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
     private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2, hidemode 3")); // Main content frame
 
@@ -156,12 +154,6 @@ public class VLobby implements ILobbyView {
     private final FButton btnStartMatch = new FButton(Localizer.getInstance().getMessage("lblNetworkStartMatch"));
 
     // (network draft state lives in CLobby)
-
-    private static JComboBox<String> createMaximumCommanderBracketCombo() {
-        final JComboBox<String> comboBox = new JComboBox<>(new String[]{"1", "2", "3", "4", "5"});
-        comboBox.setSelectedItem(prefs.getPref(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET));
-        return comboBox;
-    }
 
     public VLobby(final GameLobby lobby) {
         this.lobby = lobby;
