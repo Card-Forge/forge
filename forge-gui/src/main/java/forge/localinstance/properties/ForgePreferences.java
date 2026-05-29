@@ -254,10 +254,11 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         PRELOAD_CUSTOM_DRAFTS ("false"),
 
         DECK_DEFAULT_CARD_LIMIT ("4"),
+        DECKGEN_CARDBASED ("true"),
         DECKGEN_SINGLETONS ("false"),
         DECKGEN_ARTIFACTS ("false"),
         DECKGEN_NOSMALL ("false"),
-        DECKGEN_CARDBASED ("true"),
+        DECKGEN_MAXIMUM_COMMANDER_BRACKET("5"),
 
         PHASE_AI_UPKEEP ("false"),
         PHASE_AI_DRAW ("false"),

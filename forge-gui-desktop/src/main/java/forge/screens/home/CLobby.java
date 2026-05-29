@@ -177,6 +177,7 @@ public class CLobby {
             view.getBtnStart().requestFocusInWindow();
         });
         view.getGamesInMatchBinder().load();
+        view.getMaximumCommanderBracketBinder().load();
     }
 
     /** React to a lobby-data change: detect event-state transitions and refresh the panel. */
@@ -537,11 +538,17 @@ public class CLobby {
         view.getCbSingletons().addActionListener(arg0 -> {
             prefs.setPref(FPref.DECKGEN_SINGLETONS, String.valueOf(view.getCbSingletons().isSelected()));
             prefs.save();
+            view.markDirty();
         });
 
         view.getCbArtifacts().addActionListener(arg0 -> {
             prefs.setPref(FPref.DECKGEN_ARTIFACTS, String.valueOf(view.getCbArtifacts().isSelected()));
             prefs.save();
+            view.markDirty();
+        });
+
+        view.getMaximumCommanderBracketBinder().getComponent().addActionListener(arg0 -> {
+            view.markDirty();
         });
 
         // Pre-select checkboxes

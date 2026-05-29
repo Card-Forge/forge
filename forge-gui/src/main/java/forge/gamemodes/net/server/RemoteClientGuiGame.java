@@ -88,11 +88,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     public void pause() {
         paused = true;
     }
-
     public void resume() {
         paused = false;
     }
-
     public boolean isPaused() {
         return paused;
     }
