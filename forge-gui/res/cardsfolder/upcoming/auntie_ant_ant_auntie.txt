@@ -1,0 +1,12 @@
+Name:Auntie Ant, Ant Auntie
+ManaCost:3 R R
+Types:Legendary Creature Goblin Warlock
+PT:7/7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When NICKNAME enters, multiblight 4. (Distribute four -1/-1 counters among creatures you control.)
+SVar:TrigPutCounter:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose any number of creatures you control to distribute counters to | CounterType$ M1M1 | CounterNum$ 4 | ChoiceAmount$ 4 | DividedAsYouChoose$ 4
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever NICKNAME attacks, for each creature you control, you may remove a counter from it. Create a 1/1 green Insect creature token for each counter removed this way.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | Choices$ Creature.YouCtrl | CounterType$ Any | CounterNum$ 1 | ChoiceOptional$ True | SubAbility$ DBToken | RememberAmount$ True
+SVar:DBToken:DB$ Token | TokenScript$ g_1_1_insect | TokenAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedNumber
+Oracle:When Auntie Ant enters, multiblight 4. (Distribute four -1/-1 counters among creatures you control.)\nWhenever Auntie Ant attacks, for each creature you control, you may remove a counter from it. Create a 1/1 green Insect creature token for each counter removed this way.

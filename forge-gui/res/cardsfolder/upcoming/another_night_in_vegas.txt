@@ -1,0 +1,13 @@
+Name:Another Night in Vegas
+ManaCost:2 B B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ WakeUp,VIPLineAccess,LifeOfParty,BreakfastAtDawn | ChoiceRestriction$ ThisGame
+SVar:WakeUp:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature in a graveyard to return | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Wake Up! — Return target creature card from a graveyard to its owner's hand.
+SVar:VIPLineAccess:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ VIP Line Access — Search your library for a card, then shuffle and put that card on top.
+SVar:LifeOfParty:DB$ Effect | Triggers$ TrigCast | SpellDescription$ Life of the Party — Whenever a spell is cast this turn, you gain 2 life.
+SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigGainLife | TriggerDescription$ Whenever a spell is cast this turn, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+SVar:BreakfastAtDawn:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_food_sac | TokenOwner$ You | SubAbility$ DBSac | SpellDescription$ Breakfast at Dawn — Create two Food tokens. Sacrifice this enchantment.
+SVar:DBSac:DB$ Sacrifice | SacValid$ Self
+Oracle:At the beginning of your upkeep, choose one that hasn't been chosen —\n• Wake Up! — Return target creature card from a graveyard to its owner's hand.\n• VIP Line Access — Search your library for a card, then shuffle and put that card on top.\n• Life of the Party — Whenever a spell is cast this turn, you gain 2 life.\n• Breakfast at Dawn — Create two Food tokens. Sacrifice this enchantment.

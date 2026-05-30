@@ -1,0 +1,11 @@
+Name:Evy, Fang Keeper
+ManaCost:1 B G U
+Types:Legendary Creature Human Artist
+PT:3/4
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigGenericChoice | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, you may draw on it. If you drew wings, it enters with a flying counter on it. If you drew boots, it enters with a haste counter on it. If you drew fangs, it enters with a deathtouch counter on it. If you drew something else, it enters with a +1/+1 counter on it.
+SVar:TrigGenericChoice:DB$ GenericChoice | Choices$ Wings,Boots,Fangs,Else | Defined$ You | ShowChoice$ ExceptSelf
+SVar:Wings:DB$ Pump | PumpZone$ Stack | Defined$ TriggeredCard | KW$ etbCounter:Flying:1 | Duration$ Permanent | SpellDescription$ Draw wings? (flying counter)
+SVar:Boots:DB$ Pump | PumpZone$ Stack | Defined$ TriggeredCard | KW$ etbCounter:Haste:1 | Duration$ Permanent | SpellDescription$ Draw boots? (haste counter)
+SVar:Fangs:DB$ Pump | PumpZone$ Stack | Defined$ TriggeredCard | KW$ etbCounter:Deathtouch:1 | Duration$ Permanent | SpellDescription$ Draw fangs? (deathtouch counter)
+SVar:Else:DB$ Pump | PumpZone$ Stack | Defined$ TriggeredCard | KW$ etbCounter:P1P1:1 | Duration$ Permanent | SpellDescription$ Draw something else? (+1/+1 counter)
+Oracle:Whenever you cast a creature spell, you may draw on it. If you drew wings, it enters with a flying counter on it. If you drew boots, it enters with a haste counter on it. If you drew fangs, it enters with a deathtouch counter on it. If you drew something else, it enters with a +1/+1 counter on it. (Previous drawings don't count. For example, if you gave it boots last game, give it more boots. Bigger boots. Boots in unexpected places.)
