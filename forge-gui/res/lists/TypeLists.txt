@@ -30,10 +30,12 @@ Archer:Archers
 Archon:Archons
 Armadillo:Armadillos
 Artificer:Artificers
+Artist:Artists
 Army:Armies
 Assassin:Assassins
 Assembly-Worker:Assembly-Workers
 Astartes:Astartes
+Athlete:Athletes
 Atog:Atogs
 Aurochs:Aurochs
 Avatar:Avatars
