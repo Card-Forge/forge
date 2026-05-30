@@ -1,0 +1,5 @@
+Name:Human Token
+ManaCost:no cost
+Types:Creature Human
+PT:1/1
+Oracle:
