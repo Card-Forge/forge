@@ -21,8 +21,8 @@ public final class DrawOfferCoordinator {
         if (game.isGameOver() || offerer == null) {
             return;
         }
-        if (game.hasActiveDrawOffer()) {
-            final DrawOffer existing = game.getDrawOffer();
+        final DrawOffer existing = game.getDrawOffer();
+        if (existing != null) {
             final boolean offererPresent = game.getPlayers().contains(existing.getOfferer());
             final boolean anyResponderPresent = existing.getVotes().keySet().stream().anyMatch(game.getPlayers()::contains);
             if (offererPresent && anyResponderPresent) {
@@ -30,12 +30,8 @@ public final class DrawOfferCoordinator {
             }
             game.setDrawOffer(null); // stale (offerer/responders left) — supersede it
         }
-        final List<Player> responders = new ArrayList<>();
-        for (final Player p : game.getPlayers()) {
-            if (p != offerer) {
-                responders.add(p);
-            }
-        }
+        final List<Player> responders = new ArrayList<>(game.getPlayers());
+        responders.remove(offerer);
         if (responders.isEmpty()) {
             return;
         }
@@ -70,7 +66,6 @@ public final class DrawOfferCoordinator {
     private static void broadcast(final Game game, final DrawOffer offer) {
         broadcast(game, offer, null);
     }
-
     private static void broadcast(final Game game, final DrawOffer offer, final DrawOfferMessage.Result result) {
         // Drop any responder who has left the game since the offer was made.
         offer.getVotes().keySet().removeIf(p -> !game.getPlayers().contains(p));

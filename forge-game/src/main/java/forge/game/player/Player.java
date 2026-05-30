@@ -2455,9 +2455,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return getZone(ZoneType.Command).contains(CardPredicates.nameEquals(cardName));
     }
 
-    public CardCollectionView getColoredCardsInPlay(final String color) {
-        return getColoredCardsInPlay(MagicColor.fromName(color));
-    }
     public CardCollectionView getColoredCardsInPlay(final byte color) {
         return CardLists.getColor(getCardsIn(ZoneType.Battlefield), color);
     }
