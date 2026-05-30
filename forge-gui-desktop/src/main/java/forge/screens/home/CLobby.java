@@ -30,7 +30,6 @@ import forge.gui.FDraftOverlay;
 import forge.gui.GuiChoose;
 import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.framework.FScreen;
-import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
