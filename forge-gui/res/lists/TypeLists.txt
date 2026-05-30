@@ -172,6 +172,7 @@ Killbot:Killbots
 Kirin:Kirins
 Kithkin:Kithkin
 Knight:Knights
+Koala:Koalas
 Kobold:Kobolds
 Kor:Kors
 Kraken:Krakens
