@@ -121,6 +121,7 @@ public class Game {
     private Map<Card, Integer> facedownWhileCasting = Maps.newHashMap();
 
     private Player initiative;
+    private DrawOffer drawOffer;
     private Player monarch;
     private Player monarchBeginTurn;
     private Player startingPlayer;
@@ -155,6 +156,16 @@ public class Game {
     }
     public void setStartingPlayer(final Player p) {
         startingPlayer = p;
+    }
+
+    public DrawOffer getDrawOffer() {
+        return drawOffer;
+    }
+    public void setDrawOffer(final DrawOffer drawOffer) {
+        this.drawOffer = drawOffer;
+    }
+    public boolean hasActiveDrawOffer() {
+        return drawOffer != null;
     }
 
     public Player getMonarch() {

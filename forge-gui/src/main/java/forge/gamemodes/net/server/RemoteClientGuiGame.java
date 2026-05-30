@@ -13,6 +13,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
@@ -334,6 +335,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
         } else {
             syncAndSend(ProtocolMethod.showPromptMessage, playerView, message, card);
         }
+    }
+
+    @Override
+    public void updateDrawOffer(final DrawOfferMessage.Status update) {
+        send(ProtocolMethod.updateDrawOffer, update);
     }
 
     @Override

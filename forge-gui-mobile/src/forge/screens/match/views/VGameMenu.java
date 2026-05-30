@@ -2,6 +2,7 @@ package forge.screens.match.views;
 
 import forge.Forge;
 import forge.assets.FSkinImage;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -22,6 +23,12 @@ public class VGameMenu extends FDropDownMenu {
     protected void buildMenu() {
         addItem(new FMenuItem(MatchController.instance.getConcedeCaption(), FSkinImage.CONCEDE, e ->
                 ThreadUtil.invokeInGameThread(MatchController.instance::concede)
+        ));
+        // Called directly, not via invokeInGameThread like concede: the offer must register even while
+        // the game thread is busy (a frozen thread would never drain a queued task). It's applied
+        // off-thread like concede, safe because a human acts only while the game thread is parked at priority.
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblOfferDraw"), FSkinImage.OFFERDRAW, e ->
+                MatchController.instance.getGameController().drawOfferAction(DrawOfferMessage.Action.OFFER)
         ));
         /*addItem(new FMenuItem("Save Game", FSkinImage.SAVE, new FEventHandler() {
             @Override
