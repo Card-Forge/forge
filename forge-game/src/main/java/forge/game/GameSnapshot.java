@@ -196,7 +196,7 @@ public class GameSnapshot {
         Game toGame = toPlayer.getGame();
         toPlayer.getManaPool().resetPool();
         for (Mana m : fromPlayer.getManaPool()) {
-            toPlayer.getManaPool().addMana(copyMana(m, toGame, toPlayer), false);
+            toPlayer.getManaPool().addManaNoEvent(copyMana(m, toGame, toPlayer));
         }
         toPlayer.updateManaForView();
     }

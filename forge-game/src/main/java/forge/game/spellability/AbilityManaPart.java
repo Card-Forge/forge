@@ -193,7 +193,7 @@ public class AbilityManaPart implements java.io.Serializable {
             }
         }
 
-        manaPool.add(this.lastManaProduced);
+        manaPool.addMana(this.lastManaProduced);
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
         runParams.put(AbilityKey.Player, player);
