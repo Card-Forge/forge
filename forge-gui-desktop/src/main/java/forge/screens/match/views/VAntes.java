@@ -121,13 +121,10 @@ public class VAntes implements IVDoc<CAntes> {
         }
 
         for (final PlayerView p : gameView.getPlayers()) {
-            final Iterable<CardView> ante = p.getAnte();
-            if (ante != null) {
-                for (final CardView c : ante) {
-                    final AntePanel pnlTemp = new AntePanel(c);
-                    allAntes.add(pnlTemp);
-                    pnl.add(pnlTemp);
-                }
+            for (final CardView c : p.getAnte()) {
+                final AntePanel pnlTemp = new AntePanel(c);
+                allAntes.add(pnlTemp);
+                pnl.add(pnlTemp);
             }
         }
     }

@@ -28,6 +28,7 @@ import forge.gamemodes.net.event.DraftPickEvent;
 import forge.gamemodes.net.server.ServerGameLobby;
 import forge.gui.FDraftOverlay;
 import forge.gui.GuiChoose;
+import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.framework.FScreen;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
@@ -47,7 +48,7 @@ import forge.toolbox.FTextField;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
-public class CLobby {
+public class CLobby implements IDraftEventHandler {
 
     public enum LobbyMode { CONSTRUCTED, LIMITED }
 
@@ -405,7 +406,8 @@ public class CLobby {
         }
     }
 
-    void onDraftPackArrived(int seatIndex, List<PaperCard> pack,
+    @Override
+    public void draftPackArrived(int seatIndex, List<PaperCard> pack,
             int packNumber, int pickNumber, int timerDurationSeconds) {
         SwingUtilities.invokeLater(() -> {
             if (networkDraftEditor == null) {
@@ -475,7 +477,8 @@ public class CLobby {
         return EventParticipant.resolveName(seatIndex, viewParticipants, currentParticipants);
     }
 
-    void onDraftSeatPicked(int seatIndex, int[] seatQueueDepths) {
+    @Override
+    public void draftSeatPicked(int seatIndex, int[] seatQueueDepths) {
         SwingUtilities.invokeLater(() -> {
             FDraftOverlay.SINGLETON_INSTANCE.onSeatPicked(seatQueueDepths);
 
@@ -490,7 +493,8 @@ public class CLobby {
         });
     }
 
-    void onDraftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack) {
+    @Override
+    public void draftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack) {
         SwingUtilities.invokeLater(() -> {
             if (networkDraftEditor != null) {
                 networkDraftEditor.addAutoPickedCard(card, packNumber, pickInPack);
@@ -504,7 +508,8 @@ public class CLobby {
         FDraftOverlay.SINGLETON_INSTANCE.reset();
     }
 
-    void onReceiveEventPool(String eventId, Deck pool) {
+    @Override
+    public void receiveEventPool(String eventId, Deck pool) {
         SwingUtilities.invokeLater(() -> {
             if (networkDraftEditor != null) {
                 networkDraftEditor.completeDraft(pool);

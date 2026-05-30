@@ -75,7 +75,6 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.gui.GuiUtils;
 import forge.gui.MenuScroller;
 import forge.gui.SOverlayUtils;
@@ -580,7 +579,7 @@ public final class CMatchUI
                 if (isNetGame()) {
                     netLog.debug("updateHand for player {}, vHand={}, handSize={}",
                             owner.getId(), (vHand != null ? "exists" : "NULL"),
-                            (owner.getHand() != null ? String.valueOf(owner.getHand().size()) : "null"));
+                            String.valueOf(owner.getHand().size()));
                 }
                 if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
@@ -699,12 +698,8 @@ public final class CMatchUI
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
-                if (p.getCards(ZoneType.Hand) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
             FloatingZone.refreshAll();
         });
@@ -716,12 +711,8 @@ public final class CMatchUI
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
-                if (p.getCards(ZoneType.Hand) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
             FloatingZone.refreshAll();
             FloatingZone.clearAllHotkeyAffordance();
@@ -741,9 +732,7 @@ public final class CMatchUI
         super.refreshField();
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
             }
             FloatingZone.refreshAll();
         });

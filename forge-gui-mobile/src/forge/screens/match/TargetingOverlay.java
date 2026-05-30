@@ -73,7 +73,6 @@ public class TargetingOverlay {
             return;
         for (CardView c : cardsonBattlefield) {
             final CardView attachedTo = c.getAttachedTo();
-            final Iterable<CardView> attachedCards = c.getAttachedCards();
             final CardView paired = c.getPairedWith();
             if (null != attachedTo) {
                 if (attachedTo.getController() != null && !attachedTo.getController().equals(c.getController())) {
@@ -83,11 +82,9 @@ public class TargetingOverlay {
             if (null != attachedTo && c == attachedTo.getAttachedTo()) {
                 drawArrow(g, endpoints.get(attachedTo.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
             }
-            if (null != attachedCards) {
-                for (final CardView enc : attachedCards) {
-                    if (enc.getController() != null && !enc.getController().equals(c.getController())) {
-                        drawArrow(g, endpoints.get(c.getId()), endpoints.get(enc.getId()), ArcConnection.Friends);
-                    }
+            for (final CardView enc : c.getAttachedCards()) {
+                if (enc.getController() != null && !enc.getController().equals(c.getController())) {
+                    drawArrow(g, endpoints.get(c.getId()), endpoints.get(enc.getId()), ArcConnection.Friends);
                 }
             }
             if (null != paired) {

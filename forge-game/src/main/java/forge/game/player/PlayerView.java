@@ -95,8 +95,8 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.CurrentPlane, plane);
     }
 
-    public FCollectionView<PlayerView> getOpponents() {
-        return Objects.requireNonNullElse(this.<FCollectionView<PlayerView>>get(TrackableProperty.Opponents), new FCollection<>());
+    public List<PlayerView> getOpponents() {
+        return Objects.requireNonNullElse(get(TrackableProperty.Opponents), List.of());
     }
     void updateOpponents(Player p) {
         set(TrackableProperty.Opponents, PlayerView.getCollection(p.getOpponents()));
@@ -132,7 +132,7 @@ public class PlayerView extends GameEntityView {
             return Collections.emptyList();
         }
 
-        final FCollectionView<PlayerView> opponents = getOpponents();
+        final List<PlayerView> opponents = getOpponents();
         for (PlayerView opponent: opponents) {
             if (opponent.getCommanders() == null) {
                 return Collections.emptyList();
@@ -402,47 +402,47 @@ public class PlayerView extends GameEntityView {
     }
 
     public FCollectionView<CardView> getAnte() {
-        return get(TrackableProperty.Ante);
+        return Objects.requireNonNullElse(get(TrackableProperty.Ante), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getBattlefield() {
-        return get(TrackableProperty.Battlefield);
+        return Objects.requireNonNullElse(get(TrackableProperty.Battlefield), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getCommand() {
-        return get(TrackableProperty.Command);
+        return Objects.requireNonNullElse(get(TrackableProperty.Command), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getExile() {
-        return get(TrackableProperty.Exile);
+        return Objects.requireNonNullElse(get(TrackableProperty.Exile), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getFlashback() {
-        return get(TrackableProperty.Flashback);
+        return Objects.requireNonNullElse(get(TrackableProperty.Flashback), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getGraveyard() {
-        return get(TrackableProperty.Graveyard);
+        return Objects.requireNonNullElse(get(TrackableProperty.Graveyard), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getHand() {
-        return get(TrackableProperty.Hand);
+        return Objects.requireNonNullElse(get(TrackableProperty.Hand), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getLibrary() {
-        return get(TrackableProperty.Library);
+        return Objects.requireNonNullElse(get(TrackableProperty.Library), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getSideboard() {
-        return get(TrackableProperty.Sideboard);
+        return Objects.requireNonNullElse(get(TrackableProperty.Sideboard), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getCards(final ZoneType zone) {
         TrackableProperty prop = zone.getTrackableProperty();
         if (prop != null) {
-            return get(prop);
+            return Objects.requireNonNullElse(get(prop), FCollection.getEmpty());
         }
-        return null;
+        return FCollection.getEmpty();
     }
     private int getZoneSize(TrackableProperty zoneProp) {
         TrackableCollection<CardView> cards = get(zoneProp);
@@ -548,7 +548,7 @@ public class PlayerView extends GameEntityView {
             details.add(keywords);
         }
         final FCollectionView<CardView> ante = getAnte();
-        if (ante != null && !ante.isEmpty()) {
+        if (!ante.isEmpty()) {
             details.add(Localizer.getInstance().getMessage("lblAntedHas", Lang.joinHomogenous(ante)));
         }
         details.addAll(getPlayerCommanderInfo());
