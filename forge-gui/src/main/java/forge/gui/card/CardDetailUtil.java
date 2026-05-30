@@ -460,7 +460,7 @@ public class CardDetailUtil {
         }
 
         // chosen cards
-        if (card.getChosenCards() != null) {
+        if (!card.getChosenCards().isEmpty()) {
             area.append("\n");
             area.append("(chosen card").append(card.getChosenCards().size() == 1 ? ": " : "s: ");
             area.append(Lang.joinHomogenous(card.getChosenCards())).append(")");
@@ -553,7 +553,7 @@ public class CardDetailUtil {
         }
 
         // controlling
-        if (card.getGainControlTargets() != null) {
+        if (!card.getGainControlTargets().isEmpty()) {
             area.append("\n");
             area.append("+Controlling: ");
             area.append(StringUtils.join(card.getGainControlTargets(), ", "));
@@ -580,21 +580,21 @@ public class CardDetailUtil {
         }
 
         // Imprint
-        if (card.getImprintedCards() != null) {
+        if (!card.getImprintedCards().isEmpty()) {
             area.append("\n");
             area.append("Imprinting: ");
             area.append(StringUtils.join(card.getImprintedCards(), ", "));
         }
 
         // CardsExiledBy
-        if (card.getExiledCards() != null) {
+        if (!card.getExiledCards().isEmpty()) {
             area.append("\n");
             area.append("Exiled: ");
             area.append(StringUtils.join(card.getExiledCards(), ", "));
         }
 
         // Haunt
-        if (card.getHauntedBy() != null) {
+        if (!card.getHauntedBy().isEmpty()) {
             area.append("\n");
             area.append("Haunted by: ");
             area.append(StringUtils.join(card.getHauntedBy(), ", "));
@@ -605,18 +605,18 @@ public class CardDetailUtil {
         }
 
         // Cipher
-        if (card.getEncodedCards() != null) {
+        if (!card.getEncodedCards().isEmpty()) {
             area.append("\n");
             area.append("Encoded: ").append(card.getEncodedCards());
         }
 
-        if (card.getUntilLeavesBattlefield() != null) {
+        if (!card.getUntilLeavesBattlefield().isEmpty()) {
             area.append("\n");
             area.append("Exiled until this leaves the battlefield: ").append(card.getUntilLeavesBattlefield());
         }
 
         // must block
-        if (card.getMustBlockCards() != null) {
+        if (!card.getMustBlockCards().isEmpty()) {
             area.append("\n");
             final String mustBlockThese = Lang.joinHomogenous(card.getMustBlockCards());
             area.append("Must block ").append(mustBlockThese);

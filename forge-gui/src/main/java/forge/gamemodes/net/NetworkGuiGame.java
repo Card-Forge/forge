@@ -593,9 +593,9 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
         netLog.error("[DeltaSync]   Phase: {}", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
         netLog.error("[DeltaSync]   Sampled properties: {}", NetworkChecksumUtil.sampledPropertyNames(packet.getChecksumProperties()));
         for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
-            int handSize = player.getHand() != null ? player.getHand().size() : 0;
-            int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
-            int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
+            int handSize = player.getHand().size();
+            int graveyardSize = player.getGraveyard().size();
+            int battlefieldSize = player.getBattlefield().size();
             netLog.error("[DeltaSync]   Player {} ({}): Life={}, Hand={}, GY={}, BF={}",
                     player.getId(), player.getName(), player.getLife(),
                     handSize, graveyardSize, battlefieldSize);

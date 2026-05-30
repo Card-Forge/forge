@@ -28,6 +28,7 @@ import forge.gamemodes.net.event.DraftPickEvent;
 import forge.gamemodes.net.server.ServerGameLobby;
 import forge.gui.FDraftOverlay;
 import forge.gui.GuiChoose;
+import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.framework.FScreen;
 import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.util.SOptionPane;
