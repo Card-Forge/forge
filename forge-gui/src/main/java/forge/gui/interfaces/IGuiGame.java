@@ -29,6 +29,7 @@ import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
+import forge.util.collect.FCollectionView;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -120,6 +121,7 @@ public interface IGuiGame {
     void updateSingleCard(CardView card);
 
     void updateCards(Iterable<CardView> cards);
+    default void updateCardsNetSafe(FCollectionView<CardView> cards) { updateCards(isNetGame() ? cards.threadSafeIterable() : cards); }
 
     void updateRevealedCards(TrackableCollection<CardView> collection);
 
