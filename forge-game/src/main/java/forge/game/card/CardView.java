@@ -22,6 +22,9 @@ import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.*;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -467,12 +470,12 @@ public class CardView extends GameEntityView {
     void updateMarkedColors(Card c) {
         set(TrackableProperty.MarkedColors, c.getMarkedColors());
     }
-    public List<CardView> getMergedCardsCollection() {
-        return Objects.requireNonNullElse(get(TrackableProperty.MergedCardsCollection), List.of());
+    public FCollectionView<CardView> getMergedCardsCollection() {
+        return Objects.requireNonNullElse(get(TrackableProperty.MergedCardsCollection), FCollection.getEmpty());
     }
 
-    public List<CardView> getChosenCards() {
-        return Objects.requireNonNullElse(get(TrackableProperty.ChosenCards), List.of());
+    public FCollectionView<CardView> getChosenCards() {
+        return Objects.requireNonNullElse(get(TrackableProperty.ChosenCards), FCollection.getEmpty());
     }
 
     public PlayerView getChosenPlayer() {
@@ -741,12 +744,12 @@ public class CardView extends GameEntityView {
         return isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer);
     }
 
-    public List<CardView> getEncodedCards() {
-        return Objects.requireNonNullElse(get(TrackableProperty.EncodedCards), List.of());
+    public FCollectionView<CardView> getEncodedCards() {
+        return Objects.requireNonNullElse(get(TrackableProperty.EncodedCards), FCollection.getEmpty());
     }
 
-    public List<CardView> getUntilLeavesBattlefield() {
-        return Objects.requireNonNullElse(get(TrackableProperty.UntilLeavesBattlefield), List.of());
+    public FCollectionView<CardView> getUntilLeavesBattlefield() {
+        return Objects.requireNonNullElse(get(TrackableProperty.UntilLeavesBattlefield), FCollection.getEmpty());
     }
 
     public GameEntityView getEntityAttachedTo() {
@@ -771,8 +774,8 @@ public class CardView extends GameEntityView {
         return null;
     }
 
-    public List<CardView> getGainControlTargets() {
-        return Objects.requireNonNullElse(get(TrackableProperty.GainControlTargets), List.of());
+    public FCollectionView<CardView> getGainControlTargets() {
+        return Objects.requireNonNullElse(get(TrackableProperty.GainControlTargets), FCollection.getEmpty());
     }
 
     public CardView getCloneOrigin() {
@@ -783,24 +786,24 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.ExiledWith);
     }
 
-    public List<CardView> getImprintedCards() {
-        return Objects.requireNonNullElse(get(TrackableProperty.ImprintedCards), List.of());
+    public FCollectionView<CardView> getImprintedCards() {
+        return Objects.requireNonNullElse(get(TrackableProperty.ImprintedCards), FCollection.getEmpty());
     }
 
-    public List<CardView> getExiledCards() {
-        return Objects.requireNonNullElse(get(TrackableProperty.ExiledCards), List.of());
+    public FCollectionView<CardView> getExiledCards() {
+        return Objects.requireNonNullElse(get(TrackableProperty.ExiledCards), FCollection.getEmpty());
     }
 
-    public List<CardView> getHauntedBy() {
-        return Objects.requireNonNullElse(get(TrackableProperty.HauntedBy), List.of());
+    public FCollectionView<CardView> getHauntedBy() {
+        return Objects.requireNonNullElse(get(TrackableProperty.HauntedBy), FCollection.getEmpty());
     }
 
     public CardView getHaunting() {
         return get(TrackableProperty.Haunting);
     }
 
-    public List<CardView> getMustBlockCards() {
-        return Objects.requireNonNullElse(get(TrackableProperty.MustBlockCards), List.of());
+    public FCollectionView<CardView> getMustBlockCards() {
+        return Objects.requireNonNullElse(get(TrackableProperty.MustBlockCards), FCollection.getEmpty());
     }
     void updateMustBlockCards(Card c) {
         setCards(null, c.getMustBlockCards(), TrackableProperty.MustBlockCards);
