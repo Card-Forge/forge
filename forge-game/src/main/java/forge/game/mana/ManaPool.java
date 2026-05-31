@@ -148,11 +148,10 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             final List<Mana> pMana = Lists.newArrayList();
             if (isEndOfPhase && !owner.getGame().getPhaseHandler().is(PhaseType.CLEANUP)) {
                 for (final Mana mana : cm) {
-                    if (mana.getManaAbility() != null && mana.getManaAbility().isPersistentMana()) {
+                    if (mana.isPersistentMana()) {
                         pMana.add(mana);
                     }
-                    if (mana.getManaAbility() != null && mana.getManaAbility().isCombatMana() &&
-                            !owner.getGame().getPhaseHandler().is(PhaseType.COMBAT_END)) {
+                    if (mana.isCombatMana() && !owner.getGame().getPhaseHandler().is(PhaseType.COMBAT_END)) {
                         pMana.add(mana);
                     }
                 }
@@ -177,7 +176,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         List<Mana> convert = Lists.newArrayList();
         Collection<Mana> cm = floatingMana.get(originalColor);
         for (Mana m : cm) {
-            convert.add(new Mana(toColor, m.getSourceCard(), m.getManaAbility(), m.getPlayer()));
+            convert.add(m.convertColor(toColor));
         }
         cm.clear();
         floatingMana.putAll(toColor, convert);
@@ -228,7 +227,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         Collection<Mana> cm = floatingMana.get(colorCode);
 
         for (final Mana mana : cm) {
-            if (mana.getManaAbility() != null && !mana.getManaAbility().meetsManaRestrictions(saPaidFor)) {
+            if (!mana.meetsManaRestrictions(saPaidFor)) {
                 continue;
             }
 
