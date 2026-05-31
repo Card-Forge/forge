@@ -3608,37 +3608,15 @@ public class Player extends GameEntity implements Comparable<Player> {
                 headerAdded = true;
                 kw.append(this.getName()).append(" has: \n");
             }
-            kw.append(k).append("\n");
+            kw.append(k.getTitle()).append("\n");
         }
         if (!kw.toString().isEmpty()) {
-            keywordEffect.setText(trimKeywords(kw.toString()));
+            keywordEffect.setText(kw.toString());
         }
         keywordEffect.updateAbilityTextForView();
         this.updateZoneForView(com);
     }
-    public String trimKeywords(String keywordTexts) {
-        if (keywordTexts.contains("Protection:")) {
-            List <String> lines = Arrays.asList(keywordTexts.split("\n"));
-            for (String line : lines) {
-                if (line.startsWith("Protection:")) {
-                    List<String> parts = Arrays.asList(line.split(":"));
-                    if (parts.size() > 2) {
-                        keywordTexts = TextUtil.fastReplace(keywordTexts, line, parts.get(2));
-                    }
-                }
-            }
-        }
-        keywordTexts = TextUtil.fastReplace(keywordTexts,":Card.named", " from ");
-        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.Black:", " from ");
-        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.Blue:", " from ");
-        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.Red:", " from ");
-        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.Green:", " from ");
-        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.White:", " from ");
-        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.MonoColor:", " from ");
-        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.MultiColor:", " from ");
-        keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.Colorless:", " from ");
-        return keywordTexts;
-    }
+
     public void checkKeywordCard() {
         if (keywordEffect == null)
             return;

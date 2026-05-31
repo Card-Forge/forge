@@ -33473,7 +33473,7 @@
       {
         "type": "item",
         "count": 1,
-        "cardName": "Spidersilk Helm"
+        "itemName": "Spidersilk Helm"
       },
       {
         "type": "card",
@@ -44514,7 +44514,7 @@
       {
         "type": "item",
         "count": 1,
-        "cardName": "Ajani's Amulet"
+        "itemName": "Ajani's Amulet"
       },
       {
         "type": "card",
@@ -44741,7 +44741,7 @@
       {
         "type": "item",
         "count": 1,
-        "cardName": "Pack Leader Pants"
+        "itemName": "Pack Leader Pants"
       },
       {
         "type": "card",
@@ -59276,7 +59276,7 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Cragflame"
+        "itemName": "Cragflame"
       },
       {
         "type": "card",
