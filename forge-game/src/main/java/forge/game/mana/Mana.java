@@ -76,6 +76,9 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
             if (mp.isPersistentMana() != mp2.isPersistentMana()) {
                 return false;
             }
+            if (mp.isCombatMana() != mp2.isCombatMana()) {
+                return false;
+            }
         }
 
         return mp == mp2 || (mp.getManaRestrictions().equals(mp2.getManaRestrictions()) && mp.getExtraManaRestriction().equals(mp2.getExtraManaRestriction()));
@@ -99,6 +102,9 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
 
     public boolean isRestricted() {
         return this.manaAbility != null && (!manaAbility.getManaRestrictions().isEmpty() || !manaAbility.getExtraManaRestriction().isEmpty());
+    }
+    public boolean meetsManaRestrictions(SpellAbility saBeingPaid) {
+        return this.manaAbility == null || manaAbility.meetsManaRestrictions(saBeingPaid);
     }
 
     public boolean addsNoCounterMagic(SpellAbility saBeingPaid) {
@@ -128,6 +134,12 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
     public boolean triggersWhenSpent() {
         return this.manaAbility != null && manaAbility.getTriggersWhenSpent();
     }
+    public boolean isPersistentMana() {
+        return this.manaAbility != null && manaAbility.isPersistentMana();
+    }
+    public boolean isCombatMana() {
+        return this.manaAbility != null && manaAbility.isCombatMana();
+    }
 
     public byte getColor() {
         return this.color;
@@ -149,4 +161,7 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
         return color == (byte)ManaAtom.COLORLESS;
     }
 
+    public Mana convertColor(byte color) {
+        return new Mana(color, this.sourceCard, this.manaAbility, this.player);
+    }
 }
