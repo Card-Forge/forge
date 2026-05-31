@@ -51,8 +51,12 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.util.Utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDraftEventHandler {
@@ -224,6 +228,20 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
             ServerGameLobby sgl = serverLobby();
             if (sgl == null) return;
 
+            List<NetworkEvent.EventChoice> pastEvents = scanPastEvents();
+            if (!pastEvents.isEmpty()) {
+                String create = Forge.getLocalizer().getMessage("lblNetworkSetUpEventCreate");
+                String loadPast = Forge.getLocalizer().getMessage("lblNetworkSetUpEventLoadPast");
+                String setupChoice = SGuiChoose.oneOrNone(
+                        Forge.getLocalizer().getMessage("lblNetworkSetUpEventPrompt"),
+                        Arrays.asList(create, loadPast));
+                if (setupChoice == null) return;
+                if (setupChoice.equals(loadPast)) {
+                    loadPastEvent(pastEvents);
+                    return;
+                }
+            }
+
             String lblDraft  = Forge.getLocalizer().getMessage("lblDraft");
             String lblSealed = Forge.getLocalizer().getMessage("lblSealed");
             String chosen = SGuiChoose.oneOrNone(
@@ -291,6 +309,42 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
         } catch (NumberFormatException e) {
             return fallback;
         }
+    }
+
+    private List<NetworkEvent.EventChoice> scanPastEvents() {
+        Map<String, String> datesByEventId = new LinkedHashMap<>();
+        for (Deck d : FModel.getDecks().getNetworkEventDecks()) {
+            String eventId = DeckProxy.getEventTag(d, "eventId");
+            if (eventId != null) {
+                datesByEventId.putIfAbsent(eventId, DeckProxy.getEventTag(d, "eventDate"));
+            }
+        }
+        List<String> ids = new ArrayList<>(datesByEventId.keySet());
+        // eventDate is "yyyy-MM-dd HH:mm", so reverse lexical order lists newest first
+        ids.sort(Comparator.comparing(
+                (String id) -> datesByEventId.get(id) != null ? datesByEventId.get(id) : "",
+                Comparator.reverseOrder()));
+        List<NetworkEvent.EventChoice> choices = new ArrayList<>(ids.size());
+        for (String id : ids) {
+            choices.add(new NetworkEvent.EventChoice(id, NetworkEvent.getEventDisplayLabel(id)));
+        }
+        return choices;
+    }
+
+    private void loadPastEvent(List<NetworkEvent.EventChoice> pastEvents) {
+        NetworkEvent.EventChoice chosen = SGuiChoose.oneOrNone(
+                Forge.getLocalizer().getMessage("lblNetworkLoadPastEventPrompt"), pastEvents);
+        if (chosen == null) return;
+        FThreads.invokeInEdtLater(() -> {
+            activeEventId = chosen.id();
+            activeConformance = true;
+            cbDeckConformance.setSelected(true);
+            broadcastEventSelection();
+            updateDeckListFilter();
+            refreshEventPanel();
+            updateActionButtons();
+            revalidate();
+        });
     }
 
     private void startEvent() {
@@ -628,7 +682,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
 
             // Event info and the deck-filter toggle sit in a band at the bottom of the
             // lobby, just above the action buttons; shrink the player list to fit above it.
-            boolean hasEvent = currentEvent != null || lastEventView != null;
+            boolean hasEvent = currentEvent != null || lastEventView != null || activeEventId != null;
             boolean showConformance = isLimitedMode() && (currentEvent != null || activeEventId != null);
             float panelH = hasEvent ? lblEventPanel.getAutoSizeBounds().height : 0;
             float checkH = showConformance ? Utils.AVG_FINGER_HEIGHT * 0.75f : 0;
