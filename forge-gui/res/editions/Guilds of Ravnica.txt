@@ -121,7 +121,7 @@ ScryfallCode=GRN
 107 U Inescapable Blaze @Steve Argyle
 108 U Lava Coil @Wesley Burt
 109 R Legion Warboss @Alex Konstad
-110 C Maniacal Rage @Heonhwa Choe
+110 C Maniacal Rage @Heonhwa
 111 C Maximize Velocity @Svetlin Velinov
 112 C Ornery Goblin @Johann Bodin
 113 R Risk Factor @Chris Seaman

@@ -38,6 +38,7 @@
 }</property>
     <property name="enemy" value="Xira"/>
     <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
    </properties>
   </object>
   <object id="68" template="../../obj/entry_up.tx" x="401.5" y="416.5" width="61.5" height="16">

@@ -14,7 +14,11 @@ ScryfallCode=MSC
 6 M Doctor Doom, King of Latveria @Nathaniel Himawan
 7 M T'Challa, the Black Panther @Eli Minaya
 119 R Vision, Synthezoid Avenger @Mark Spears
+626 R Iron Man, Bleeding Edge @Ryan Pancoast
+723 R Hit-Monkey @Peter Scanlan
 726 R Lucky the Pizza Dog @Rudy Siswanto
+741 M The Fantastic Four @Yasmine Putri
+793 U Dark Ritual @Nino Is
 N.A. R Abomination, Irradiated Brute @
 N.A. R Absorbing Man and Titania @
 N.A. R Black Widow, Intel Expert @

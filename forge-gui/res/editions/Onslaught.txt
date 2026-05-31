@@ -26,7 +26,7 @@ ScryfallCode=ONS
 11 U Catapult Squad @Brian Snõddy
 12 U Chain of Silence @Randy Gallegos
 13 R Circle of Solace @Greg Hildebrandt & Tim Hildebrandt
-14 R Convalescent Care @Greg Hildebrandt & Tim Hildebrandt
+14 R Convalescent Care @Greg Hildebrandt
 15 U Crowd Favorites @Roger Raupp
 16 C Crown of Awe @Randy Elliott
 17 U Crude Rampart @Sam Wood

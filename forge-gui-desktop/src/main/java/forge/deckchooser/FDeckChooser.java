@@ -1716,7 +1716,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     public final boolean isAi() {
         return isAi;
     }
-
     public void setIsAi(final boolean isAiDeck) {
         isAi = isAiDeck;
     }

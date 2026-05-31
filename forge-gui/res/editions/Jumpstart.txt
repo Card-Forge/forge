@@ -502,5 +502,8 @@ ScryfallCode=JMP
 494 R Riptide Laboratory @John Avon
 495 C Rupture Spire @Jaime Jones
 
+[promo]
+496 R Scholar of the Lost Trove @Volkan Baǵa
+
 [rebalanced]
 A-206 U A-Blood Artist @Johannes Voss

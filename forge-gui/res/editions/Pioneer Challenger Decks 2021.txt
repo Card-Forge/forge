@@ -1,7 +1,7 @@
 [metadata]
 Code=Q06
 Date=2021-10-15
-Name=Pioneer Challenge Decks 2021
+Name=Pioneer Challenger Decks 2021
 Type=Promo
 ScryfallCode=Q06
 

@@ -1,7 +1,7 @@
 [metadata]
 Code=PZ2
 Date=2016-11-16
-Name=Treasure Chests
+Name=Treasure Chest
 Type=Online
 ScryfallCode=PZ2
 

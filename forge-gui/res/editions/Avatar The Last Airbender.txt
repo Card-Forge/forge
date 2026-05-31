@@ -137,7 +137,7 @@ Replace=0.025F BasicLand:fromSheet("TLA appa basic")+
 58 C It'll Quench Ya! @Nathaniel Himawan
 59 U Katara, Bending Prodigy @Mephisto
 60 U Knowledge Seeker @Shiren
-61 M The Legend of Kuruk @Toshiaki Takayama
+61 M The Legend of Kuruk @Takayama Toshiaki
 62 C Lost Days @Matteo Bassini
 63 U Master Pakku @Olena Richards
 64 R The Mechanist, Aerial Artisan @Le Vuong
@@ -208,7 +208,7 @@ Replace=0.025F BasicLand:fromSheet("TLA appa basic")+
 129 U Crescent Island Temple @Luc Courtois
 130 C Cunning Maneuver @Robin Har
 131 C Deserter's Disciple @HAIKEI
-132 M Fated Firepower @Toshiaki Takayama
+132 M Fated Firepower @Takayama Toshiaki
 133 U Fire Nation Attacks @Claudiu-Antoniu Magherusan
 134 C Fire Nation Cadets @Rafater
 135 C Fire Nation Raider @Tubaki Halsame
@@ -439,7 +439,7 @@ Replace=0.025F BasicLand:fromSheet("TLA appa basic")+
 344 R The Earth King @Brigitte Roka & Clifton Stommel
 345 R Great Divide Guide @Shane Beresford
 346 R Aang, at the Crossroads @Brigitte Roka & Clifton Stommel
-347 R Aang, Swift Savior @Shane Beresford
+347 R Aang, Swift Savior @Shane Beresford & Perci Chen
 348 M Bumi, Unleashed @Brigitte Roka
 349 R Iroh, Grand Lotus @Dalton Pencarinha
 350 R Katara, the Fearless @Barbara Rosiak

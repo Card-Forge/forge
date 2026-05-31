@@ -147,9 +147,7 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
         ZoneType[] zonesToCheck = {ZoneType.Hand, ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Library};
         for (PlayerView pv : clientGameView.getPlayers()) {
             for (ZoneType zone : zonesToCheck) {
-                FCollectionView<CardView> cards = pv.getCards(zone);
-                if (cards == null) continue;
-                for (CardView cv : cards) {
+                for (CardView cv : pv.getCards(zone)) {
                     Assert.assertEquals(cv.getZone(), zone,
                             "CardView id=" + cv.getId() + " in " + pv.getName() + "'s " + zone +
                             " has stale zone: " + cv.getZone());

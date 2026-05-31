@@ -394,7 +394,7 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
         }
 
         @Override
-        public void showPromptMessage(forge.game.player.PlayerView playerView, String message) {
+        public void showPromptMessage(forge.game.player.PlayerView playerView, String message, forge.game.card.CardView cv) {
             netLog.info("Prompt: {}", message);
 
             // Detect player selection prompts (like "who goes first")

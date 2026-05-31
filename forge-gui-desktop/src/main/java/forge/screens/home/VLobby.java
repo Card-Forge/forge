@@ -26,6 +26,7 @@ import forge.gamemodes.net.*;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
 import forge.gui.SwingPrefBinders;
+import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
 import forge.interfaces.IPlayerChangeListener;
@@ -50,6 +51,11 @@ public class VLobby implements ILobbyView {
     static final int MAX_PLAYERS = 8;
     private static final int EVENT_BTN_WIDTH = 200;
     private static final int EVENT_BTN_HEIGHT = 50;
+    private static final int START_ROW_LABEL_WIDTH = 150;
+    private static final int START_ROW_COMBO_WIDTH = 50;
+    private static final int START_ROW_GAMES_WIDTH = START_ROW_LABEL_WIDTH + START_ROW_COMBO_WIDTH;
+    private static final int COMMANDER_BRACKET_SIDE_WIDTH = START_ROW_LABEL_WIDTH * 2 + START_ROW_COMBO_WIDTH;
+    private static final int COMMANDER_GAMES_SIDE_WIDTH = COMMANDER_BRACKET_SIDE_WIDTH + START_ROW_GAMES_WIDTH;
     final Localizer localizer = Localizer.getInstance();
     private static final ForgePreferences prefs = FModel.getPreferences();
 
@@ -62,10 +68,12 @@ public class VLobby implements ILobbyView {
     private int playerWithFocus = 0; // index of the player that currently has focus
 
     private final StartButton btnStart  = new StartButton();
-    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
-    private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] {"1","3","5"});
-    private final SwingPrefBinders.ComboBox gamesInMatchBinder =
-      new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
+    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 3"));
+    private final JComboBox<String> maximumCommanderBracket = new JComboBox<>(new String[]{"1", "2", "3", "4", "5"});
+    private final SwingPrefBinders.ComboBox maximumCommanderBracketBinder = new SwingPrefBinders.ComboBox(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET, maximumCommanderBracket);
+    private final JPanel maximumCommanderBracketFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+    private final JComboBox<String> gamesInMatch = new JComboBox<>(new String[]{"1", "3", "5"});
+    private final SwingPrefBinders.ComboBox gamesInMatchBinder = new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
     private final JPanel gamesInMatchFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
     private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2, hidemode 3")); // Main content frame
 
@@ -145,9 +153,10 @@ public class VLobby implements ILobbyView {
     private final FButton btnStartEvent = new FButton(Localizer.getInstance().getMessage("lblNetworkStartDraft"));
     private final FButton btnStartMatch = new FButton(Localizer.getInstance().getMessage("lblNetworkStartMatch"));
 
+    private boolean refreshGeneratedDecks = false;
+
     // (network draft state lives in CLobby)
 
-    // CTR
     public VLobby(final GameLobby lobby) {
         this.lobby = lobby;
         // Create controller first — VLobby.update() and render methods rely on a non-null
@@ -260,9 +269,16 @@ public class VLobby implements ILobbyView {
         // Start Button
         if (lobby.hasControl()) {
             pnlStart.setOpaque(false);
-            pnlStart.add(btnStart, "align center");
+            maximumCommanderBracketFrame.add(newLabel("Maximum Bracket:"), "w " + START_ROW_LABEL_WIDTH + "px!, h 30px!");
+            maximumCommanderBracketFrame.add(maximumCommanderBracket, "w " + START_ROW_COMBO_WIDTH + "px!, h 30px!");
+            maximumCommanderBracketFrame.setOpaque(false);
+            addConstructedStartControls();
             // Start button event handling
             btnStart.addActionListener(arg0 -> {
+                if (refreshGeneratedDecks) {
+                    refreshGeneratedDecks = false;
+                    update(true);
+                }
                 Runnable startGame = lobby.startGame();
                 if (startGame != null) {
                     startGame.run();
@@ -287,11 +303,24 @@ public class VLobby implements ILobbyView {
             defaultGamesInMatch = "3";
         }
 
-        gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w 150px!, h 30px!");
-        gamesInMatchFrame.add(gamesInMatch, "w 50px!, h 30px!");
+        gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w " + START_ROW_LABEL_WIDTH + "px!, h 30px!");
+        gamesInMatchFrame.add(gamesInMatch, "w " + START_ROW_COMBO_WIDTH + "px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
+    }
 
-        pnlStart.add(gamesInMatchFrame);
+    private void addConstructedStartControls() {
+        if (lobby.getGameType() == GameType.Commander || hasVariant(GameType.Commander)) {
+            maximumCommanderBracketFrame.setVisible(true);
+            pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 3"));
+            pnlStart.add(maximumCommanderBracketFrame, "w " + COMMANDER_BRACKET_SIDE_WIDTH + "px!, align left");
+            pnlStart.add(btnStart, "align center");
+            pnlStart.add(gamesInMatchFrame, "w " + COMMANDER_GAMES_SIDE_WIDTH + "px!, align left");
+        } else {
+            maximumCommanderBracketFrame.setVisible(false);
+            pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+            pnlStart.add(btnStart, "align center");
+            pnlStart.add(gamesInMatchFrame, "align center");
+        }
     }
 
     public void updateDeckPanel() {
@@ -431,8 +460,12 @@ public class VLobby implements ILobbyView {
     public void setController(final CLobby controller) {
         this.controller = controller;
     }
-
     public CLobby getController() {
+        return controller;
+    }
+
+    @Override
+    public IDraftEventHandler getDraftHandler() {
         return controller;
     }
 
@@ -447,7 +480,6 @@ public class VLobby implements ILobbyView {
     int getCurrentModeIndex() {
         return cboModePanel.getSelectedIndex();
     }
-
     void setCurrentModeIndex(int idx) {
         cboModePanel.setSelectedIndex(idx);
     }
@@ -460,7 +492,6 @@ public class VLobby implements ILobbyView {
     boolean getConformanceSelected() {
         return cbDeckConformance.isSelected();
     }
-
     void setConformanceSelected(boolean selected) {
         cbDeckConformance.setSelected(selected);
     }
@@ -473,7 +504,6 @@ public class VLobby implements ILobbyView {
         // Limited mode: deck is produced by the draft/sealed flow (no pre-selection
         // required when starting a new event) or is selected from the filtered event
         // deck list when running a match from a past event. Skip the generic check.
-        boolean deckRequired = !controller.isLimitedMode();
         if (ready && decks[index] == null && !lobby.hasAutoGeneratedVariant() && !controller.isLimitedMode()) {
             SOptionPane.showErrorDialog(localizer.getMessage("msgSelectAdeckBeforeReadying"));
             update(false);
@@ -527,6 +557,7 @@ public class VLobby implements ILobbyView {
     void removePlayer(final int index) {
         lobby.removeSlot(index);
     }
+
     boolean hasVariant(final GameType variant) {
         return lobby.hasVariant(variant);
     }
@@ -587,6 +618,7 @@ public class VLobby implements ILobbyView {
     }
 
     private void selectMainDeck(final FDeckChooser mainChooser, final int playerIndex, final boolean isCommanderDeck) {
+        refreshGeneratedDecks = false;
         final DeckType type = mainChooser.getSelectedDeckType();
         Deck deck = mainChooser.getDeck();
         // Folders are navigable browser rows, not playable deck selections.
@@ -897,10 +929,7 @@ public class VLobby implements ILobbyView {
                 pnlStart.add(btnStartMatch, "cell 2 0, " + eventBtn);
                 pnlStart.add(gamesInMatchFrame, "cell 2 1, align center");
             } else {
-                // Constructed mode: Start button centered with games-in-match below
-                pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
-                pnlStart.add(btnStart, "align center, spanx 2, wrap");
-                pnlStart.add(gamesInMatchFrame, "spanx 2, align center");
+                addConstructedStartControls();
             }
         }
         // Non-host: nothing to show here — match controls are host-only.
@@ -1053,6 +1082,10 @@ public class VLobby implements ILobbyView {
         return names;
     }
 
+    public void markDirty() {
+        refreshGeneratedDecks = true;
+    }
+
     /////////////////////////////////////////////
     //========== Various listeners in build order
 
@@ -1070,6 +1103,7 @@ public class VLobby implements ILobbyView {
                     lobby.removeVariant(variantType);
                 }
                 VLobby.this.update(false);
+                VLobby.this.updateActionButtons();
             });
         }
     }
@@ -1168,6 +1202,11 @@ public class VLobby implements ILobbyView {
       return gamesInMatchBinder;
     }
 
+    /** Return the maximumCommanderBracketBinder. */
+    public SwingPrefBinders.ComboBox getMaximumCommanderBracketBinder() {
+      return maximumCommanderBracketBinder;
+    }
+
     /** Populate vanguard lists. */
     private void populateVanguardLists() {
         humanListData.add("Use deck's default avatar (random if unavailable)");
@@ -1202,24 +1241,4 @@ public class VLobby implements ILobbyView {
         }
     }
 
-    @Override
-    public void onDraftPackArrived(int seatIndex, List<PaperCard> pack,
-            int packNumber, int pickNumber, int timerDurationSeconds) {
-        controller.onDraftPackArrived(seatIndex, pack, packNumber, pickNumber, timerDurationSeconds);
-    }
-
-    @Override
-    public void onDraftSeatPicked(int seatIndex, int[] seatQueueDepths) {
-        controller.onDraftSeatPicked(seatIndex, seatQueueDepths);
-    }
-
-    @Override
-    public void onDraftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack) {
-        controller.onDraftAutoPicked(seatIndex, card, packNumber, pickInPack);
-    }
-
-    @Override
-    public void onReceiveEventPool(String eventId, Deck pool) {
-        controller.onReceiveEventPool(eventId, pool);
-    }
 }

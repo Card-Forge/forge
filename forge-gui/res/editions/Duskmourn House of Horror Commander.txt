@@ -24,13 +24,13 @@ ScryfallCode=DSC
 16 R Ancient Cellarspawn @Alexandre Honoré
 17 R Cramped Vents // Access Maze @Arthur Yuan
 18 R Deluge of Doom @Nereida
-19 R Demonic Covenant @LA Draws
+19 R Demonic Covenant @L.A. Draws
 20 R Into the Pit @Greg Staples
 21 R Metamorphosis Fanatic @Andreas Zafiratos
 22 R Persistent Constrictor @Steve Ellis
 23 R Polluted Cistern // Dim Oubliette @Arthur Yuan
 24 R Sadistic Shell Game @Karl Kopinski
-25 R Suspended Sentence @LA Draws
+25 R Suspended Sentence @L.A. Draws
 26 R Barbflare Gremlin @Matt Stewart
 27 R Gleeful Arsonist @Nereida
 28 R Spiked Corridor // Torture Pit @Arthur Yuan
@@ -42,7 +42,7 @@ ScryfallCode=DSC
 34 R Formless Genesis @Mark Poole
 35 R Shriekwood Devourer @David Astruga
 36 R Ursine Monstrosity @Carlos Palma Cruchaga
-37 R Convert to Slime @LA Draws
+37 R Convert to Slime @L.A. Draws
 38 R Phenomenon Investigators @Viko Menezes
 39 R Giggling Skitterspike @Nino Is
 40 R Séance Board @Robin Olausson
@@ -54,12 +54,12 @@ ScryfallCode=DSC
 46 R Zimone's Hypothesis @Crystal Fae
 47 R Ancient Cellarspawn @Alexandre Honoré
 48 R Deluge of Doom @Nereida
-49 R Demonic Covenant @LA Draws
+49 R Demonic Covenant @L.A. Draws
 50 R Into the Pit @Greg Staples
 51 R Metamorphosis Fanatic @Andreas Zafiratos
 52 R Persistent Constrictor @Steve Ellis
 53 R Sadistic Shell Game @Karl Kopinski
-54 R Suspended Sentence @LA Draws
+54 R Suspended Sentence @L.A. Draws
 55 R Barbflare Gremlin @Matt Stewart
 56 R Gleeful Arsonist @Nereida
 57 R Star Athlete @Andrey Kuzinskiy
@@ -69,7 +69,7 @@ ScryfallCode=DSC
 61 R Formless Genesis @Mark Poole
 62 R Shriekwood Devourer @David Astruga
 63 R Ursine Monstrosity @Carlos Palma Cruchaga
-64 R Convert to Slime @LA Draws
+64 R Convert to Slime @L.A. Draws
 65 R Phenomenon Investigators @Viko Menezes
 66 R Giggling Skitterspike @Nino Is
 67 R Séance Board @Robin Olausson
@@ -80,7 +80,7 @@ ScryfallCode=DSC
 72 R Cackling Counterpart @Zezhou Chen
 73 C Ponder @Ernanda Souza
 74 C Portent @Bartek Fedyczak
-75 U Telling Time @LA Draws
+75 U Telling Time @L.A. Draws
 76 C Blood Pact @Camille Alquier
 77 C Blood Seeker @David Astruga
 78 C Feed the Swarm @Nino Is
@@ -101,7 +101,7 @@ ScryfallCode=DSC
 93 U Lightning Greaves @Adrián Rodríguez Pérez
 94 U Sol Ring @John Stanko
 95 U Suspicious Bookcase @Tyler Walpole
-96 C Command Tower @Eddie Schillo
+96 C Command Tower @Eddie Mendoza
 97 C Auramancer @Rebecca Guay
 98 U Cast Out @Magali Villeneuve
 99 M Entreat the Angels @Todd Lockwood
@@ -137,15 +137,15 @@ ScryfallCode=DSC
 129 C Thirst for Meaning @Brian Valeza
 130 M Arvinox, the Mind Flail @Nikola Matkovic
 131 U Bastion of Remembrance @Volkan Baǵa
-132 U Blood Artist @LA Draws
-133 R Braids, Arisen Nightmare @Heonhwa Choe
-134 C Carrion Grub @Nicholas Gregory
+132 U Blood Artist @L.A. Draws
+133 R Braids, Arisen Nightmare @Heonhwa
+134 U Carrion Grub @Nicholas Gregory
 135 R Cemetery Tampering @Taras Susak
 136 R Decree of Pain @Mathias Kollros
 137 R Demon of Fate's Design @Fajareka Setiawan
 138 R Doomwake Giant @Kev Walker
 139 U The Eldest Reborn @Ravenna Tran
-140 U Falkenrath Noble @Slawomir Maniak
+140 C Falkenrath Noble @Slawomir Maniak
 141 R Fate Unraveler @David Palumbo
 142 U Gray Merchant of Asphodel @Scott Murphy
 143 U Infernal Grasp @Naomi Baker
@@ -207,12 +207,12 @@ ScryfallCode=DSC
 199 C Skola Grovedancer @Josh Hass
 200 R Temur War Shaman @Raymond Swanland
 201 R Thunderfoot Baloth @Nicholas Gregory
-202 M Titania, Nature's Force @Heonhwa Choe
+202 M Titania, Nature's Force @Heonhwa
 203 R Trail of Mystery @Raymond Swanland
 204 M Whisperwood Elemental @Raymond Swanland
 205 U Wilderness Reclamation @Tyler Walpole
 206 M Worldspine Wurm @Richard Wright
-207 M Wrenn and Seven @Heonhwa Choe
+207 M Wrenn and Seven @Heonhwa
 208 C Yavimaya Elder @Matt Cavotta
 209 U Yedora, Grave Gardener @Svetlin Velinov
 210 M Aesi, Tyrant of Gyre Strait @Viktor Titov
@@ -223,11 +223,11 @@ ScryfallCode=DSC
 215 M Deadbridge Chant @Zoltan Boros
 216 C Eureka Moment @Anna Steinbauer
 217 R Florian, Voldaren Scion @Justine Cruz
-218 R Grim Flayer @Mathias Kollros
+218 M Grim Flayer @Mathias Kollros
 219 C Grisly Salvage @Dave Kendall
 220 M Grist, the Hunger Tide @Yongjae Choi
 221 R Inkshield @Jarel Threat
-222 R Kaervek the Merciless @Heonhwa Choe
+222 R Kaervek the Merciless @Heonhwa
 223 U Kardur, Doomscourge @Chris Rahn
 224 R Life Insurance @Brian Valeza
 225 U Mayhem Devil @Dmitry Burmak
@@ -251,7 +251,7 @@ ScryfallCode=DSC
 243 U Burnished Hart @Yeong-Hao Han
 244 C Commander's Sphere @Ryan Alexander Lee
 245 U Fellwar Stone @John Avon
-246 C Golgari Signet @Raoul Vitale
+246 U Golgari Signet @Raoul Vitale
 247 U Haywire Mite @Izzy
 248 U Mind Stone @Camille Alquier
 249 U Orzhov Signet @Martina Pilcerova
@@ -261,7 +261,7 @@ ScryfallCode=DSC
 253 R Solemn Simulacrum @Donato Giancola
 254 U Talisman of Indulgence @Mike Dringenberg
 255 U Talisman of Resilience @Lindsey Look
-256 U Thought Vessel @rk post
+256 C Thought Vessel @rk post
 257 U Whispersilk Cloak @Daren Bader
 258 R Adarkar Wastes @Piotr Dura
 259 U Arcane Sanctum @Anthony Francisco

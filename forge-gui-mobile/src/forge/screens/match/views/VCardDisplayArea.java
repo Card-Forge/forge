@@ -322,13 +322,10 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
             attachedPanels.clear();
 
-            if (card.hasAnyCardAttachments()) {
-                final Iterable<CardView> enchants = card.getAllAttachedCards();
-                for (final CardView e : enchants) {
-                    final CardAreaPanel cardE = CardAreaPanel.get(e);
-                    if (cardE != null) {
-                        attachedPanels.add(cardE);
-                    }
+            for (final CardView e : card.getAllAttachedCards()) {
+                final CardAreaPanel cardE = CardAreaPanel.get(e);
+                if (cardE != null) {
+                    attachedPanels.add(cardE);
                 }
             }
             CardView getAttachedto = card.getAttachedTo();

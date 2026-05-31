@@ -296,7 +296,7 @@ ScryfallCode=KTK
 97y U Arc Lightning @Nathaniel Himawan
 106y R Crater's Claws @Nathaniel Himawan
 115y U Mardu Blazebringer @Nathaniel Himawan
-192y R Rakshasa Deathdealer @Marzena Nereida Piwowar
+192y R Rakshasa Deathdealer @Nereida
 193y R Rakshasa Vizier @Nathaniel Himawan
 198y U Secret Plans @Inkognit
 199y M Sidisi, Brood Tyrant @Zezhou Chen

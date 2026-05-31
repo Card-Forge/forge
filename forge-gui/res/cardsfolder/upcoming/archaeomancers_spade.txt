@@ -1,0 +1,9 @@
+Name:Archaeomancer's Spade
+ManaCost:1 R W
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeekTwo | TriggerDescription$ When this artifact enters, seek two cards with flashback and put them into your graveyard.
+SVar:TrigSeekTwo:DB$ Seek | RememberFound$ True | Num$ 2 | Type$ Card.withFlashback | SubAbility$ DBEntomb
+SVar:DBEntomb:DB$ ChangeZone | Origin$ Hand | Destination$ Graveyard | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Mana | Cost$ T | Produced$ R W | RestrictValid$ CantCastSpellFromHand | SpellDescription$ Add {R}{W}. This mana can't be spent to cast spells from your hand.
+Oracle:When this artifact enters, seek two cards with flashback and put them into your graveyard.\n{T}: Add {R}{W}. This mana can't be spent to cast spells from your hand.

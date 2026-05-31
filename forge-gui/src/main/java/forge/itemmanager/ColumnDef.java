@@ -352,7 +352,7 @@ public enum ColumnDef {
             },
             from -> {
                 DeckProxy deck = toDeckProxy(from.getKey());
-                return isCommanderDeck(deck) ? CommanderBracketCalculator.getDisplayBracket(deck.getDeck()) : "-";
+                return isCommanderDeck(deck) ? String.valueOf(CommanderBracketCalculator.getBracket(deck.getDeck())) : "-";
             }),
     /**
      * The main library size column.

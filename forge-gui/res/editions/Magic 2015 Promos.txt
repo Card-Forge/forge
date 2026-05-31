@@ -12,7 +12,7 @@ TokenFallbackCode=M15
 47 R Chief Engineer @Ryan Barger
 68 R Mercurial Pretender @Karla Ortiz
 100 R In Garruk's Wake @Brad Rigney
-100p R In Garruk's Wake @Brad Rigney
+100p R In Garruk's Wake @Chase Stone
 101 R Indulgent Tormentor @Karl Kopinski
 110p R Ob Nixilis, Unshackled @Karl Kopinski
 145 R Goblin Rabblemaster @Zoltan Boros

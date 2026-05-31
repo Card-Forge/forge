@@ -92,7 +92,7 @@ public class CommanderDeckGenerator extends GeneratedDeckProxy implements Compar
 
     @Override
     public Deck getDeck() {
-        return DeckgenUtil.generateRandomCommanderDeck(legend, format,isForAi, isCardgen);
+        return DeckgenUtil.generateRandomCommanderDeck(legend, format, isForAi, isCardgen);
     }
 
     @Override

@@ -42,7 +42,7 @@ ScryfallCode=DMU
 29 U Resolute Reinforcements @Billy Christian
 30 U Runic Shot @Cristi Balanescu
 31 C Samite Herbalist @Alessandra Pisano
-32 M Serra Paragon @Heonhwa Choe
+32 M Serra Paragon @Heonhwa
 33 U Shalai's Acolyte @Zara Alfonso
 34 C Stall for Time @Ryan Alexander Lee
 35 C Take Up the Shield @Manuel Castañón
@@ -69,7 +69,7 @@ ScryfallCode=DMU
 56 U Joint Exploration @Zezhou Chen
 57 U Micromancer @Ernanda Souza
 58 C Negate @Isis
-59 R The Phasing of Zhalfir @LA Draws
+59 R The Phasing of Zhalfir @L.A. Draws
 60 C Phyrexian Espionage @Allen Williams
 61 C Pixie Illusionist @Anastasia Ovchinnikova
 62 U Protect the Negotiators @Dominik Mayer
@@ -94,7 +94,7 @@ ScryfallCode=DMU
 81 C Battlefly Swarm @Xavier Ribeiro
 82 U Blight Pile @Olivier Bernard
 83 C Bone Splinters @Jeremy Wilson
-84 R Braids, Arisen Nightmare @Heonhwa Choe
+84 R Braids, Arisen Nightmare @Heonhwa
 85 U Braids's Frightful Return @Dominik Mayer
 86 U Choking Miasma @Inka Schulz
 87 R The Cruelty of Gix @Volkan Baǵa
@@ -406,7 +406,7 @@ ScryfallCode=DMU
 385 R Defiler of Faith @Magali Villeneuve
 386 R Guardian of New Benalia @Ernanda Souza
 387 R Leyline Binding @Cristi Balanescu
-388 M Serra Paragon @Heonhwa Choe
+388 M Serra Paragon @Heonhwa
 389 R Temporary Lockdown @Bryan Sola
 390 R Valiant Veteran @Néstor Ossandón Leal
 391 R Academy Loremaster @Marcela Medeiros
