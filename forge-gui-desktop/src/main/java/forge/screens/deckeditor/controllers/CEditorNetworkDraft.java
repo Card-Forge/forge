@@ -216,6 +216,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
     public void update() {
         if (VEditorLog.SINGLETON_INSTANCE.getParentCell() == null) {
             VCardCatalog.SINGLETON_INSTANCE.getParentCell().addDoc(VEditorLog.SINGLETON_INSTANCE);
+            VEditorLog.SINGLETON_INSTANCE.showView();
         }
 
         ccAddLabel = this.getBtnAdd().getText();
