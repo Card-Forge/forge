@@ -548,10 +548,11 @@ public abstract class GameLobby implements IHasGameType {
         }
 
         //if above checks succeed, return runnable that can be used to finish starting game
+        final GameType baseGameType = data.isLimitedMode() ? GameType.Draft : GameType.Constructed;
         return () -> {
             hostedMatch = GuiBase.getInterface().hostMatch();
             hostedMatch.setOnMatchOver(this::onMatchOver);
-            hostedMatch.startMatch(GameType.Constructed, variantTypes, players, guis);
+            hostedMatch.startMatch(baseGameType, variantTypes, players, guis);
 
             for (final Player p : hostedMatch.getGame().getPlayers()) {
                 final LobbySlot slot = playerToSlot.get(p.getRegisteredPlayer());
