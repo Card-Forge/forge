@@ -253,7 +253,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
         // only pay mana into manaCost when the Mana could be removed from the Mana pool
         // if the mana wasn't in the mana pool then something is wrong
-        if (!removeMana(List.of(mana))) {
+        if (!removeMana(mana)) {
             return false;
         }
         manaCost.payMana(mana, this);
