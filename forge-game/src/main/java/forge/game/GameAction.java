@@ -2207,6 +2207,7 @@ public class GameAction {
 
         final ZoneType zone = cards.getFirst().getZone().getZoneType();
         final Player owner = cards.getFirst().getOwner();
+        logReveal(cards, zone, owner);
         for (final Player p : to) {
             p.getController().reveal(cards, zone, owner, messagePrefix, addSuffix);
         }
@@ -2233,12 +2234,25 @@ public class GameAction {
         reveal(cards, zt, cardOwner, dontRevealToOwner, messagePrefix, true);
     }
     public void reveal(CardCollectionView cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner, String messagePrefix, boolean msgAddSuffix) {
+        logReveal(cards, zt, cardOwner);
         for (Player p : game.getPlayers()) {
             if (dontRevealToOwner && cardOwner == p) {
                 continue;
             }
             p.getController().reveal(cards, zt, cardOwner, messagePrefix, msgAddSuffix);
         }
+    }
+
+    /** Add a single game-log line naming the revealed cards and the zone they came from.
+     *  Fired once here (not per viewer) so a hand reveal is one entry, not one-per-card or
+     *  one-per-opponent. Gated for display by the REVEAL verbosity category. */
+    private void logReveal(final CardCollectionView cards, final ZoneType zone, final Player owner) {
+        if (cards.isEmpty()) {
+            return;
+        }
+        game.fireEvent(new GameEventAddLog(GameLogEntryType.REVEAL,
+                Localizer.getInstance().getMessage("lblRevealLogEntry",
+                        Lang.joinHomogenous(cards), owner, zone.getTranslatedName().toLowerCase())));
     }
 
     public void revealUnplayableByAI(String title, Map<Player, Map<DeckSection, List<? extends PaperCard>>> unplayableCards) {

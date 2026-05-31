@@ -8,6 +8,7 @@ public enum GameLogEntryType {
     ANTE("Ante"),
     DRAFT("Draft"),
     ZONE_CHANGE("Zone Change"),
+    REVEAL("Reveal"),
     PLAYER_CONTROL("Player Control"),
     DAMAGE("Damage"),
     LIFE("Life"),

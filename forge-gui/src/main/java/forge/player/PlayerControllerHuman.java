@@ -958,7 +958,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final String fm = MessageUtil.formatMessage(message, getLocalPlayerView(), owner);
         // While yielding with the reveal interrupt off, skip the modal the auto-pass would just
-        // plow through. Consistent with a normal reveal, nothing is logged.
+        // plow through. The reveal is still recorded in the game log (GameAction logs it once,
+        // independent of the modal), so the information isn't lost.
         if (shouldSuppressRevealModal()) {
             return;
         }
@@ -1895,9 +1896,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final String message = MessageUtil.formatNotificationMessage(sa, player, realtedTarget, value);
         if (sa != null && sa.isManaAbility()) {
             getGame().fireEvent(new GameEventAddLog(GameLogEntryType.LAND, message));
-        } else if (!shouldSuppressRevealModal()) {
-            // While yielding with the reveal interrupt off the modal is skipped entirely; like a
-            // normal reveal, nothing is logged.
+        } else {
+            // notifyOfValue carries many non-reveal messages (coin flips, vote results,
+            // "Attack declaration invalid", ...), some important, so it is never suppressed.
             if (sa != null && sa.getHostCard() != null && getGui().isLibgdxPort()) {
                 CardView cardView;
                 IPaperCard iPaperCard = sa.getHostCard().getPaperCard();
@@ -1913,13 +1914,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     /**
-     * True when a reveal/notifyOfValue modal should be skipped while yielding:
+     * True when a card-reveal modal should be skipped while yielding:
      * INTERRUPT_ON_REVEAL is off (if it were on, the reveal just interrupted, so
      * the modal is meaningful) and {@link #mayAutoPass} confirms we'd auto-pass
      * past it anyway (i.e. an explicit yield is active or APINA would fire — both
      * of which already filter for autoPassInterrupted). Skipping is inherent to
      * having the reveal interrupt off; there's no separate pref. Want the reveals?
-     * Turn on the reveal interrupt (with APINA-respects-interrupts).
+     * Turn on the reveal interrupt (with APINA-respects-interrupts). Only gates the
+     * reveal modal — the reveal is still written to the game log either way.
      */
     private boolean shouldSuppressRevealModal() {
         if (yieldController.getBoolPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) return false;
