@@ -1062,9 +1062,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                     realFolderNames.add(subFolder.getName());
                 }
             }
-            final Map<String, NetDeckCategory> categories = NetDeckCategory.getCategories(lstDecks.getGameType());
+            final Iterable<NetDeckCategory> categories = NetDeckCategory.getAvailableCategories(lstDecks.getGameType());
             if (categories != null) {
-                for (final NetDeckCategory category : categories.values()) {
+                for (final NetDeckCategory category : categories) {
                     if (!realFolderNames.contains(category.getName())) {
                         rows.add(DeckBrowserEntry.netFolder(category.getName(), childPath(path, category.getName()), null, DeckType.NET_DECK));
                     }
@@ -1454,9 +1454,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 }
             }
             if (StringUtils.isBlank(browserPath) && !isEditorOnlyBrowser() && isNetBrowserRoot()) {
-                final Map<String, NetDeckCategory> categories = NetDeckCategory.getCategories(lstDecks.getGameType());
+                final Iterable<NetDeckCategory> categories = NetDeckCategory.getAvailableCategories(lstDecks.getGameType());
                 if (categories != null) {
-                    for (final NetDeckCategory category : categories.values()) {
+                    for (final NetDeckCategory category : categories) {
                         if (!realFolderNames.contains(category.getName())) {
                             NetDeckCategory cached = NetDeckCategory.selectAndLoad(lstDecks.getGameType(), category.getName());
                             rows.add(DeckBrowserEntry.netFolder(category.getName(), childPath(browserPath, category.getName()), cached, DeckType.NET_DECK));
