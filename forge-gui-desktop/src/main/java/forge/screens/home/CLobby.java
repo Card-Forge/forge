@@ -367,6 +367,8 @@ public class CLobby implements IDraftEventHandler {
                 Localizer.getInstance().getMessage("lblNetworkLoadPastEventPrompt"), choices);
         if (chosen == null) return;
         activeEventId = chosen.id();
+        activeConformance = true;
+        view.setConformanceSelected(true);
         view.updateEventPanelState();
         view.updateActionButtons();
         view.updateDeckListFilter();
