@@ -375,14 +375,25 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             }
         }
 
-        if (matchUI.isSelectable(getCard())) { // White border for selectable cards to further highlight them
-            g2d.setColor(Color.WHITE);
-            final int ins = 1;
-            g2d.fillRoundRect(cardXOffset+ins, cardYOffset+ins, cardWidth-ins*2, cardHeight-ins*2, cornerSize-ins, cornerSize-ins);
+        // Inner highlight: white for fully selectable cards, the configured colour for
+        // actionable (weakly selectable) ones. With black borders enabled this sits in the
+        // border gap as a 1px inset; with borders disabled the card image fills the whole
+        // panel and would cover an inset, so draw it as an outset (like the frames above).
+        Color innerBorder = null;
+        if (matchUI.isSelectable(getCard())) {
+            innerBorder = Color.WHITE;
         } else if (isPreferenceEnabled(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS) && matchUI.isWeaklySelectable(getCard())) {
-            g2d.setColor(parseActionableHighlightColor());
-            final int ins = 1;
-            g2d.fillRoundRect(cardXOffset+ins, cardYOffset+ins, cardWidth-ins*2, cardHeight-ins*2, cornerSize-ins, cornerSize-ins);
+            innerBorder = parseActionableHighlightColor();
+        }
+        if (innerBorder != null) {
+            g2d.setColor(innerBorder);
+            if (noBorderPref) {
+                final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+                g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n, cornerSize + n);
+            } else {
+                final int ins = 1;
+                g2d.fillRoundRect(cardXOffset + ins, cardYOffset + ins, cardWidth - ins * 2, cardHeight - ins * 2, cornerSize - ins, cornerSize - ins);
+            }
         }
     }
 
