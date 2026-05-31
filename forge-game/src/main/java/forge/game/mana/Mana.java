@@ -34,16 +34,6 @@ import forge.game.spellability.SpellAbility;
 public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Player player) {
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + color;
-        result = prime * result + ((manaAbility == null) ? 0 : manaAbility.hashCode());
-        result = prime * result + ((sourceCard == null) ? 0 : sourceCard.hashCode());
-        return result;
-    }
-
-    @Override
     public boolean equals(Object other) {
         if (!(other instanceof Mana)) {
             return false;
