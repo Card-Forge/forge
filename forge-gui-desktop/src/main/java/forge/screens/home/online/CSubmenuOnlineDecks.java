@@ -1,15 +1,8 @@
 package forge.screens.home.online;
 
-import forge.Singletons;
-import forge.deck.Deck;
 import forge.deck.DeckProxy;
-import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
-import forge.model.FModel;
-import forge.screens.deckeditor.CDeckEditorUI;
-import forge.screens.deckeditor.SEditorIO;
-import forge.screens.deckeditor.controllers.CEditorLimited;
 
 /**
  * Controls the online draft/sealed decks submenu in the home UI.
@@ -25,29 +18,6 @@ public enum CSubmenuOnlineDecks implements ICDoc {
 
     @Override
     public void initialize() {
-        final VSubmenuOnlineDecks view = VSubmenuOnlineDecks.SINGLETON_INSTANCE;
-        // Override editDeck so both double-click and the per-row edit button open
-        // from getNetworkEventDecks() instead of the getSealed() pool DeckManager would pick
-        view.getLstDecks().setEditDeckCommand(deck -> {
-            final FScreen screen = CEditorLimited.networkEventEditorScreen(deck != null ? deck.getDeck() : null);
-            final CEditorLimited<Deck> editorCtrl = new CEditorLimited<>(
-                    FModel.getDecks().getNetworkEventDecks(), Deck::new, screen,
-                    CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
-
-            if (!Singletons.getControl().ensureScreenActive(screen)) {
-                return;
-            }
-            // Confirm before installing the new controller so a Cancel doesn't
-            // clobber the previous editor's unsaved state.
-            if (!SEditorIO.confirmSaveChanges(screen, true)) {
-                return;
-            }
-            CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editorCtrl);
-            if (deck != null) {
-                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController()
-                        .getDeckController().load(deck.getPath(), deck.getName());
-            }
-        });
     }
 
     @Override

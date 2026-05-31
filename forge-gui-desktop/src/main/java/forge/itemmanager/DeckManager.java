@@ -8,7 +8,6 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.function.Consumer;
 
 import javax.swing.JMenu;
 import javax.swing.JTable;
@@ -65,7 +64,6 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
     private final GameType gameType;
     private UiCommand cmdDelete, cmdSelect;
-    private Consumer<DeckProxy> editDeckCommand;
 
     /**
      * Creates deck list for selected decks for quick deleting, editing, and
@@ -148,11 +146,6 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
     public UiCommand getSelectCommand() {
         return this.cmdSelect;
-    }
-
-    /** Overrides {@link #editDeck} so a view can open the deck from its own storage. */
-    public void setEditDeckCommand(final Consumer<DeckProxy> c0) {
-        this.editDeckCommand = c0;
     }
 
     @Override
@@ -334,12 +327,15 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
 
     public void editDeck(final DeckProxy deck) {
-        if (editDeckCommand != null) {
-            editDeckCommand.accept(deck);
-            return;
-        }
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
+
+        if (deck != null && DeckProxy.getEventTag(deck.getDeck(), "eventFormat") != null) {
+            screen = CEditorLimited.networkEventEditorScreen(deck.getDeck());
+            editorCtrl = new CEditorLimited<>(FModel.getDecks().getNetworkEventDecks(), Deck::new, screen, getCDetailPicture());
+            openEditor(deck, screen, editorCtrl);
+            return;
+        }
 
         switch (this.gameType) {
             case Quest:
@@ -388,6 +384,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 return;
         }
 
+        openEditor(deck, screen, editorCtrl);
+    }
+
+    private void openEditor(final DeckProxy deck, final FScreen screen, final ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl) {
         if (!Singletons.getControl().ensureScreenActive(screen)) {
             return;
         }
