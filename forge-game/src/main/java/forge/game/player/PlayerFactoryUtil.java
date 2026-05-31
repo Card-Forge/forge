@@ -1,8 +1,9 @@
 package forge.game.player;
 
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
+import forge.game.keyword.Hexproof;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.Protection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.staticability.StaticAbility;
@@ -12,20 +13,14 @@ public class PlayerFactoryUtil {
     public static void addStaticAbility(final KeywordInterface inst, final Player player) {
         String keyword = inst.getOriginal();
 
-        if (keyword.startsWith("Hexproof")) {
-            final StringBuilder sbDesc = new StringBuilder("Hexproof");
+        if (keyword.startsWith("Hexproof") && inst instanceof Hexproof hexproof) {
             final StringBuilder sbValid = new StringBuilder();
-
-            if (!keyword.equals("Hexproof")) {
-                final String[] k = keyword.split(":");
-
-                sbDesc.append(" from ").append(k[2]);
-                sbValid.append("| ValidSource$ ").append(k[1]);
+            if (!hexproof.getValidType().isEmpty()) {
+                sbValid.append("| ValidSource$ ").append(hexproof.getValidType());
             }
-
             String effect = "Mode$ CantTarget | ValidTarget$ Player.You | Secondary$ True "
-                    + sbValid.toString() + " | Activator$ Opponent | EffectZone$ Command | Description$ "
-                    + sbDesc.toString() + " (" + inst.getReminderText() + ")";
+                    + sbValid + " | Activator$ Opponent | EffectZone$ Command | Description$ "
+                    + inst.getTitle() + " (" + inst.getReminderText() + ")";
 
             final Card card = player.getKeywordCard();
             inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
@@ -36,7 +31,7 @@ public class PlayerFactoryUtil {
             final Card card = player.getKeywordCard();
             inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
         } else if (keyword.startsWith("Protection")) {
-            String valid = CardFactoryUtil.getProtectionValid(keyword, false);
+            String valid = Protection.getProtectionValid(keyword, false);
             String effect = "Mode$ CantTarget | ValidTarget$ Player.You | EffectZone$ Command | Secondary$ True ";
             if (!valid.isEmpty()) {
                 effect += "| ValidSource$ " + valid;
@@ -68,7 +63,7 @@ public class PlayerFactoryUtil {
         String effect = null;
 
         if (keyword.startsWith("Protection")) {
-            String validSource = CardFactoryUtil.getProtectionValid(keyword, true);
+            String validSource = Protection.getProtectionValid(keyword, true);
 
             effect = "Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You";
             if (!validSource.isEmpty()) {
