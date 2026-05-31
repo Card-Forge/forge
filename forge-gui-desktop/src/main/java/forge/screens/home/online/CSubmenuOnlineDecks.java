@@ -26,10 +26,9 @@ public enum CSubmenuOnlineDecks implements ICDoc {
     @Override
     public void initialize() {
         final VSubmenuOnlineDecks view = VSubmenuOnlineDecks.SINGLETON_INSTANCE;
-        // Override the default editDeck command so it uses getNetworkEventDecks()
-        // instead of the default getSealed() that DeckManager would pick
-        view.getLstDecks().setItemActivateCommand(() -> {
-            final DeckProxy deck = view.getLstDecks().getSelectedItem();
+        // Override editDeck so both double-click and the per-row edit button open
+        // from getNetworkEventDecks() instead of the getSealed() pool DeckManager would pick
+        view.getLstDecks().setEditDeckCommand(deck -> {
             final FScreen screen = FScreen.DECK_EDITOR_SEALED;
             final CEditorLimited<Deck> editorCtrl = new CEditorLimited<>(
                     FModel.getDecks().getNetworkEventDecks(), Deck::new, screen,
