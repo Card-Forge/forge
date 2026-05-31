@@ -45,6 +45,9 @@ public class WrappedAbility extends Ability {
         sa = sa0;
         sa.setTrigger(regtrig0);
         decider = decider0;
+
+        // Support for custom named abilities
+        setName(sa.getName());
     }
 
     public SpellAbility getWrappedAbility() {
