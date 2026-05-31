@@ -188,8 +188,7 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
         FDraftOverlay.SINGLETON_INSTANCE.reset();
         FScreen.DRAFTING_PROCESS.close();
 
-        // Reuse the sealed editor for post-draft pool editing — the UI is identical
-        FScreen editScreen = FScreen.DECK_EDITOR_SEALED;
+        FScreen editScreen = FScreen.DECK_EDITOR_DRAFT;
         CEditorLimited<Deck> editorCtrl = new CEditorLimited<>(
                 FModel.getDecks().getNetworkEventDecks(), Deck::new, editScreen, getCDetailPicture());
         Singletons.getControl().setCurrentScreen(editScreen);

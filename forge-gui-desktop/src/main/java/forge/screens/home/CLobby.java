@@ -527,10 +527,11 @@ public class CLobby implements IDraftEventHandler {
                 networkDraftEditor = null;
             } else {
                 FModel.getDecks().getNetworkEventDecks().add(pool);
+                final FScreen screen = CEditorLimited.networkEventEditorScreen(pool);
                 CEditorLimited<Deck> editor = new CEditorLimited<>(
                         FModel.getDecks().getNetworkEventDecks(), Deck::new,
-                        FScreen.DECK_EDITOR_SEALED, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
-                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_SEALED);
+                        screen, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
+                Singletons.getControl().setCurrentScreen(screen);
                 CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editor);
                 editor.getDeckController().load(null, pool.getName());
             }

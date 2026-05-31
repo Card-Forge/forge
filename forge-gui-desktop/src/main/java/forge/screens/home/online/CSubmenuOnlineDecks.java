@@ -29,7 +29,7 @@ public enum CSubmenuOnlineDecks implements ICDoc {
         // Override editDeck so both double-click and the per-row edit button open
         // from getNetworkEventDecks() instead of the getSealed() pool DeckManager would pick
         view.getLstDecks().setEditDeckCommand(deck -> {
-            final FScreen screen = FScreen.DECK_EDITOR_SEALED;
+            final FScreen screen = CEditorLimited.networkEventEditorScreen(deck != null ? deck.getDeck() : null);
             final CEditorLimited<Deck> editorCtrl = new CEditorLimited<>(
                     FModel.getDecks().getNetworkEventDecks(), Deck::new, screen,
                     CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
