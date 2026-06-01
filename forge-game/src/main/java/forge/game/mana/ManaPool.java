@@ -17,8 +17,11 @@
  */
 package forge.game.mana;
 
-import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multiset;
+import com.google.common.collect.Multisets;
+import com.google.common.collect.Sets;
 
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -37,6 +40,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityUnspentMana;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -48,7 +53,8 @@ import java.util.*;
  */
 public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     private final Player owner;
-    private final ArrayListMultimap<Byte, Mana> floatingMana = ArrayListMultimap.create();
+
+    private final Multiset<Mana> floatingMana = HashMultiset.create();
 
     public ManaPool(final Player player) {
         owner = player;
@@ -56,22 +62,28 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     public final int getAmountOfColor(final byte color) {
-        Collection<Mana> ofColor = floatingMana.get(color);
-        return ofColor == null ? 0 : ofColor.size();
+        return Multisets.filter(this.floatingMana, m -> m.getColor() == color).size();
     }
 
     public void addManaNoEvent(final Mana mana) {
-        floatingMana.put(mana.getColor(), mana);
+        this.floatingMana.add(mana);
     }
 
     public final void addMana(final Mana... manaList) {
         addMana(Arrays.asList(manaList));
     }
     public final void addMana(final Iterable<Mana> manaList) {
-        Set<MagicColor.Color> colors = EnumSet.noneOf(MagicColor.Color.class);
-        for (final Mana m : manaList) {
-            floatingMana.put(m.getColor(), m);
-            colors.add(MagicColor.Color.fromByte(m.getColor()));
+        Set<MagicColor.Color> colors;
+
+        if (manaList instanceof Multiset<Mana> manaSet) {
+            colors = manaSet.elementSet().stream().map(m -> MagicColor.Color.fromByte(m.getColor())).collect(Collectors.toSet());
+            floatingMana.addAll(manaSet);
+        } else {
+            colors = EnumSet.noneOf(MagicColor.Color.class);
+            for (final Mana m : manaList) {
+                floatingMana.add(m);
+                colors.add(MagicColor.Color.fromByte(m.getColor()));
+            }
         }
         owner.updateManaForView();
         owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Added, colors));
@@ -94,10 +106,8 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             return false;
         }
 
-        int safeMana = 0;
-        for (final byte c : StaticAbilityUnspentMana.getManaToKeep(owner)) {
-            safeMana += getAmountOfColor(c);
-        }
+        Collection<Byte> safeColors = StaticAbilityUnspentMana.getManaToKeep(owner);
+        int safeMana = Multisets.filter(this.floatingMana, m -> safeColors.contains(m.getColor())).size();
 
         // TODO isPersistentMana
 
@@ -135,36 +145,39 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
         }
 
-        final List<Byte> keys = Lists.newArrayList(floatingMana.keySet());
+        final Set<Byte> safeKeys = Sets.newHashSet();
+
         if (isEndOfPhase) {
-            keys.removeAll(StaticAbilityUnspentMana.getManaToKeep(owner));
+            safeKeys.addAll(StaticAbilityUnspentMana.getManaToKeep(owner));
         }
         if (convertTo != null) {
-            keys.remove(convertTo);
+            safeKeys.add(convertTo);
         }
 
-        for (Byte b : keys) {
-            Collection<Mana> cm = floatingMana.get(b);
-            final List<Mana> pMana = Lists.newArrayList();
-            if (isEndOfPhase && !owner.getGame().getPhaseHandler().is(PhaseType.CLEANUP)) {
-                for (final Mana mana : cm) {
-                    if (mana.isPersistentMana()) {
-                        pMana.add(mana);
-                    }
-                    if (mana.isCombatMana() && !owner.getGame().getPhaseHandler().is(PhaseType.COMBAT_END)) {
-                        pMana.add(mana);
-                    }
+        Predicate<Mana> retain = m -> safeKeys.contains(m.getColor());
+
+        if (isEndOfPhase && !owner.getGame().getPhaseHandler().is(PhaseType.CLEANUP)) {
+            retain.or(m -> {
+                if (m.isPersistentMana()) {
+                    return true;
                 }
+                if (m.isCombatMana() && !owner.getGame().getPhaseHandler().is(PhaseType.COMBAT_END)) {
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        Multiset<Mana> convertedMana = null;
+        if (convertTo != null) {
+            convertedMana = HashMultiset.create();
+            for (Multiset.Entry<Mana> e : Multisets.filter(floatingMana, Predicate.not(retain)::test).entrySet()) {
+                convertedMana.add(e.getElement().convertColor(convertTo), e.getCount());
             }
-            cm.removeAll(pMana);
-            if (convertTo != null) {
-                convertManaColor(b, convertTo);
-                cm.addAll(pMana);
-            } else {
-                cleared.addAll(cm);
-                cm.clear();
-                floatingMana.putAll(b, pMana);
-            }
+        }
+        floatingMana.removeIf(Predicate.not(retain)::test);
+        if (convertedMana != null) {
+            floatingMana.addAll(convertedMana);
         }
 
         owner.updateManaForView();
@@ -172,19 +185,8 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         return cleared;
     }
 
-    private void convertManaColor(final byte originalColor, final byte toColor) {
-        List<Mana> convert = Lists.newArrayList();
-        Collection<Mana> cm = floatingMana.get(originalColor);
-        for (Mana m : cm) {
-            convert.add(m.convertColor(toColor));
-        }
-        cm.clear();
-        floatingMana.putAll(toColor, convert);
-        owner.updateManaForView();
-    }
-
     public boolean removeManaNoEvent(final Mana mana) {
-        return floatingMana.remove(mana.getColor(), mana);
+        return floatingMana.remove(mana);
     }
 
     public boolean removeMana(Mana... manaList) {
@@ -192,10 +194,16 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     public boolean removeMana(final Iterable<Mana> manaList) {
-        Set<MagicColor.Color> colors = EnumSet.noneOf(MagicColor.Color.class);
-        for (Mana m : manaList) {
-            if (floatingMana.remove(m.getColor(), m)) {
-                colors.add(MagicColor.Color.fromByte(m.getColor()));
+        Set<MagicColor.Color> colors;
+        if (manaList instanceof Multiset<Mana> manaSet) {
+            colors = manaSet.elementSet().stream().map(m -> MagicColor.Color.fromByte(m.getColor())).collect(Collectors.toSet());
+            Multisets.removeOccurrences(floatingMana, manaSet);
+        } else {
+            colors = EnumSet.noneOf(MagicColor.Color.class);
+            for (Mana m : manaList) {
+                if (floatingMana.remove(m)) {
+                    colors.add(MagicColor.Color.fromByte(m.getColor()));
+                }
             }
         }
         owner.updateManaForView();
@@ -224,9 +232,8 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
     public boolean tryPayCostWithColor(byte colorCode, SpellAbility saPaidFor, ManaCostBeingPaid manaCost, List<Mana> manaSpentToPay) {
         Mana manaFound = null;
-        Collection<Mana> cm = floatingMana.get(colorCode);
 
-        for (final Mana mana : cm) {
+        for (final Mana mana : Multisets.filter(this.floatingMana, m -> m.getColor() == colorCode)) {
             if (!mana.meetsManaRestrictions(saPaidFor)) {
                 continue;
             }
@@ -265,7 +272,15 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     public final int totalMana() {
-        return floatingMana.values().size();
+        return floatingMana.size();
+    }
+
+    public final Map<Byte, Integer> getView() {
+        return floatingMana.entrySet().stream().collect(Collectors.groupingBy(e -> e.getElement().getColor(), Collectors.summingInt(Multiset.Entry::getCount)));
+    }
+
+    public final Multiset<Mana> filter(final Predicate<Mana> predicate) {
+        return Multisets.filter(this.floatingMana, predicate::test);
     }
 
     //Account for mana part of ability when undoing it
@@ -277,29 +292,14 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             return false;
         }
 
-        final List<Mana> removeFloating = Lists.newArrayList();
-
-        boolean manaNotAccountedFor = false;
         // loop over mana produced by mana ability
-        for (Mana mana : ma.getLastManaProduced()) {
-            Collection<Mana> poolLane = floatingMana.get(mana.getColor());
+        Multiset<Mana> produced = HashMultiset.create(ma.getLastManaProduced());
 
-            if (poolLane != null && poolLane.contains(mana)) {
-                removeFloating.add(mana);
-            } else {
-                manaNotAccountedFor = true;
-                break;
-            }
+        if (Multisets.containsOccurrences(floatingMana, produced)) {
+            removeMana(produced);
+            return true;
         }
-
-        // When is it legitimate for all the mana not to be accountable?
-        // TODO: Does this condition really indicate an bug in Forge?
-        if (manaNotAccountedFor) {
-            return false;
-        }
-
-        removeMana(removeFloating);
-        return true;
+        return false;
     }
 
     public void refundMana(List<Mana> manaSpent) {
@@ -363,7 +363,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
     @Override
     public Iterator<Mana> iterator() {
-        return floatingMana.values().iterator();
+        return floatingMana.iterator();
     }
 
 }
