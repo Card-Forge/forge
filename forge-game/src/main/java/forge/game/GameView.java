@@ -1,6 +1,7 @@
 package forge.game;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import com.google.common.collect.Iterables;
@@ -26,6 +27,7 @@ import forge.game.zone.MagicStack;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
+import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
 public class GameView extends TrackableObject {
@@ -119,7 +121,7 @@ public class GameView extends TrackableObject {
     }
 
     public FCollectionView<StackItemView> getStack() {
-        return get(TrackableProperty.Stack);
+        return Objects.requireNonNullElse(get(TrackableProperty.Stack), FCollection.getEmpty());
     }
 
     public StackItemView peekStack() {

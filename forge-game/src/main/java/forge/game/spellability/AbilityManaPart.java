@@ -17,7 +17,10 @@
  */
 package forge.game.spellability;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
+
 import forge.card.ColorSet;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
@@ -49,6 +52,7 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -78,7 +82,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private final boolean persistentMana;
     private final boolean combatMana;
 
-    private transient List<Mana> lastManaProduced = Lists.newArrayList();
+    private transient Multiset<Mana> lastManaProduced = HashMultiset.create();
 
     private transient Card sourceCard;
     private transient IHasSVars sVarHolder;
@@ -177,23 +181,24 @@ public class AbilityManaPart implements java.io.Serializable {
         //clear lastProduced
         this.lastManaProduced.clear();
 
+        // TODO use MagicColor
+        Map<Byte, Mana> manaHolder = Maps.newHashMap();
+
         // loop over mana produced string
         for (final String c : afterReplace.split(" ")) {
             if (StringUtils.isNumeric(c)) {
-                for (int i = Integer.parseInt(c); i > 0; i--) {
-                    this.lastManaProduced.add(new Mana((byte) ManaAtom.COLORLESS, source, this, player));
-                }
+                this.lastManaProduced.add(manaHolder.computeIfAbsent((byte) ManaAtom.COLORLESS, b -> new Mana(b, source, this, player)), Integer.parseInt(c));
             } else {
                 byte attemptedMana = MagicColor.fromName(c);
                 if (attemptedMana == 0) {
                     attemptedMana = (byte)ManaAtom.COLORLESS;
                 }
 
-                this.lastManaProduced.add(new Mana(attemptedMana, source, this, player));
+                this.lastManaProduced.add(manaHolder.computeIfAbsent(attemptedMana, b -> new Mana(b, source, this, player)));
             }
         }
 
-        manaPool.add(this.lastManaProduced);
+        manaPool.addMana(this.lastManaProduced);
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
         runParams.put(AbilityKey.Player, player);
@@ -566,7 +571,7 @@ public class AbilityManaPart implements java.io.Serializable {
      *
      * @return a {@link java.lang.String} object.
      */
-    public List<Mana> getLastManaProduced() {
+    public Collection<Mana> getLastManaProduced() {
         return this.lastManaProduced;
     }
 
