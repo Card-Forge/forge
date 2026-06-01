@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
-import forge.adventure.scene.AdventureDeckEditor;
 import forge.Graphics;
 import forge.assets.*;
 import forge.card.CardEdition;
@@ -712,20 +711,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     protected void toggleGroupIdenticalCards() {
         FModel.getPreferences().togglePrefBoolean(FPref.UI_GROUP_IDENTICAL_CARDS);
 
-        if(getCatalogPage() != null) {
-            getCatalogPage().scheduleRefresh();
-        }
-
-        if (getMainDeckPage() != null) {
-            getMainDeckPage().cardManager.updateView(false, null);
-        }
-
-        if (getSideboardPage() != null) {
-            getSideboardPage().cardManager.updateView(false, null);
-        }
-
-        if(this instanceof AdventureDeckEditor adventureEditor) {
-            adventureEditor.refresh();
+        for (TabPage<FDeckEditor> tabPage  : tabPages) {
+            if (tabPage instanceof CardManagerPage cmp) {
+                cmp.cardManager.updateView(false, null);
+            }
         }
     }
 
@@ -2220,7 +2209,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         public DraftPackPage(CardManager cardManager) {
             super(cardManager, ItemManagerConfig.DRAFT_PACK, Localizer.getInstance().getMessage("lblPackN", String.valueOf(1)), FSkinImage.PACK);
             cardManager.setShowRanking(true);
-            cardManager.setAllowGroupIdenticalCards(false);
+            cardManager.setAllowGroupIdentical(false);
         }
 
         @Override

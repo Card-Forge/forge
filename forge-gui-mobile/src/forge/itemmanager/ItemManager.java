@@ -66,7 +66,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private boolean showRanking = false;
     private boolean showPriceInfo = false;
     private boolean multiSelectMode = false;
-    private boolean allowGroupIdenticalCards = false;
+    private boolean allowGroupIdentical = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private ContextMenuBuilder<T> contextMenuBuilder;
     private ContextMenu contextMenu;
@@ -965,16 +965,16 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return showPriceInfo;
     }
 
-    public boolean getAllowGroupIdenticalCards() {
-        return allowGroupIdenticalCards;
+    public boolean getAllowGroupIdentical() {
+        return allowGroupIdentical;
     }
 
-    public void setAllowGroupIdenticalCards(boolean allowGroupIdenticalCards0) {
-        if(allowGroupIdenticalCards == allowGroupIdenticalCards0) {
+    public void setAllowGroupIdentical(boolean allowGroupIdentical0) {
+        if(allowGroupIdentical == allowGroupIdentical0) {
             return;
         }
             
-        allowGroupIdenticalCards = allowGroupIdenticalCards0;
+        allowGroupIdentical = allowGroupIdentical0;
         if (pool != null) {
             updateView(false, null);
         }

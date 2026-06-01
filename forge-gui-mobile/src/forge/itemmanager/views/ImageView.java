@@ -472,7 +472,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private boolean showQtyOnCard(T item) {
-        return item instanceof PaperCard && itemManager.getAllowGroupIdenticalCards() && FModel.getPreferences().getPrefBoolean(FPref.UI_GROUP_IDENTICAL_CARDS);
+        return item instanceof PaperCard && itemManager.getAllowGroupIdentical() && FModel.getPreferences().getPrefBoolean(FPref.UI_GROUP_IDENTICAL_CARDS);
     }
 
     @Override
