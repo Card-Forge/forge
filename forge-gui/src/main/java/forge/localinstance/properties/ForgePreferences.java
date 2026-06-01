@@ -25,12 +25,12 @@ import forge.MulliganDefs;
 import forge.game.GameLogEntryType;
 import forge.game.GameLogVerbosity;
 
-public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
+public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref> {
 
     /**
      * Preference identifiers and their default values.
      */
-    public enum FPref implements PreferencesStore.IPref {
+    public enum FPref implements AbstractPreferences.IPref {
         PLAYER_NAME (""),
 
         // Desktop only
@@ -456,11 +456,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         catch (final Exception e) {
             return null;
         }
-    }
-
-    @Override
-    protected String getPrefDefault(final FPref key) {
-        return key.getDefault();
     }
 
     // one for normal mode, one for quest mode
