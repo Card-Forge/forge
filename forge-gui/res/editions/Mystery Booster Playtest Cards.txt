@@ -128,3 +128,10 @@ ScryfallCode=CMB1
 119 R Rift @Zach Francks
 120 R Taiga Stadium @Tara Rueping
 121 R Waste Land @Patrick Kuhlman
+
+[CreatureTypes]
+Mammoth:Mammoths
+[ArtifactTypes]
+Key:Keys
+[WalkerTypes]
+Duck
