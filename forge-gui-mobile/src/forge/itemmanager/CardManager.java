@@ -31,6 +31,7 @@ import forge.toolbox.FList.CompactModeHandler;
 public class CardManager extends ItemManager<PaperCard> {
     public CardManager(boolean wantUnique0) {
         super(PaperCard.class, wantUnique0);
+        setAllowGroupIdenticalCards(true);
     }
 
     @Override

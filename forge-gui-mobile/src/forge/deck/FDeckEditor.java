@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
+import forge.adventure.scene.AdventureDeckEditor;
 import forge.Graphics;
 import forge.assets.*;
 import forge.card.CardEdition;
@@ -639,6 +640,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     );
                 }
                 addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e -> FDeckViewer.copyDeckToClipboard(deck)));
+                addItem(new FCheckBoxMenuItem(localizer.getMessage("lblGroupIdenticalCards"), getGroupIdenticalCards(), e -> toggleGroupIdenticalCards()));
                 boolean devMode = FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED);
                 if(!FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY) || devMode)
                     addItem(new FCheckBoxMenuItem(localizer.getMessage("cbEnforceDeckLegality"), shouldEnforceConformity(), e -> toggleConformity()));
@@ -701,6 +703,30 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             tags.add(DECK_TAG_SUPPRESS_CONFORMITY);
         if(getCatalogPage() != null)
             getCatalogPage().scheduleRefresh(); //Refresh to update commander options.
+    }
+
+    protected boolean getGroupIdenticalCards() {
+        return FModel.getPreferences().getPrefBoolean(FPref.UI_GROUP_IDENTICAL_CARDS);
+    }
+
+    protected void toggleGroupIdenticalCards() {
+        FModel.getPreferences().togglePrefBoolean(FPref.UI_GROUP_IDENTICAL_CARDS);
+
+        if(getCatalogPage() != null) {
+            getCatalogPage().scheduleRefresh();
+        }
+
+        if (getMainDeckPage() != null) {
+            getMainDeckPage().cardManager.updateView(false, null);
+        }
+
+        if (getSideboardPage() != null) {
+            getSideboardPage().cardManager.updateView(false, null);
+        }
+
+        if(this instanceof AdventureDeckEditor adventureEditor) {
+            adventureEditor.refresh();
+        }
     }
 
     protected void showDevAddCardDialog() {
@@ -2194,6 +2220,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         public DraftPackPage(CardManager cardManager) {
             super(cardManager, ItemManagerConfig.DRAFT_PACK, Localizer.getInstance().getMessage("lblPackN", String.valueOf(1)), FSkinImage.PACK);
             cardManager.setShowRanking(true);
+            cardManager.setAllowGroupIdenticalCards(false);
         }
 
         @Override

@@ -26,6 +26,7 @@ import forge.item.PaperCard;
 import forge.itemmanager.*;
 import forge.itemmanager.filters.ItemFilter;
 import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.toolbox.*;
 import forge.util.ImageFetcher;
@@ -450,8 +451,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     group = otherItems;
                 }
 
-                for (int i = 0; i < qty; i++) {
-                    group.add(new ItemInfo(item, group));
+                if (showQtyOnCard(item)) {
+                    group.add(new ItemInfo(item, group, qty));
+                } else {
+                    for (int i = 0; i < qty; i++) {
+                        group.add(new ItemInfo(item, group));
+                    }
                 }
             }
         }
@@ -464,6 +469,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
 
         updateLayout(true);
+    }
+
+    private boolean showQtyOnCard(T item) {
+        return item instanceof PaperCard && itemManager.getAllowGroupIdenticalCards() && FModel.getPreferences().getPrefBoolean(FPref.UI_GROUP_IDENTICAL_CARDS);
     }
 
     @Override
@@ -1094,7 +1103,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private final T item;
         private Integer cardPrice;
         private final Group group;
-        private int index, draftRank;
+        private int index, draftRank, qty;
         private FSkinImage draftRankImage = FSkinImage.DRAFTRANK_D;
         private CardStackPosition pos;
         private boolean selected, deckSelectMode, showRanking;
@@ -1106,8 +1115,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         //private TextureRegion tr;
 
         private ItemInfo(T item0, Group group0) {
+            this(item0, group0, 1);
+        }
+
+        private ItemInfo(T item0, Group group0, int qty0) {
             item = item0;
             group = group0;
+            qty = qty0;
+
             if (item instanceof DeckProxy) {
                 deckSelectMode = true;
                 deckProxy = (DeckProxy) item;
@@ -1167,6 +1182,19 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             textRenderer.drawText(g, message, skinFont, Color.BLACK, x, y + ymod, w, fontHeight, y + ymod, fontHeight, false, Align.center, true);
         }
 
+        private void drawSubLabel(Graphics g, String message, Color bgColor, float x, float y, float w, float h) {
+            FSkinFont skinFont = FSkinFont.forHeight(w / 8);
+            float fontHeight = skinFont.getLineHeight();
+            float ymod = h * 0.8f - fontHeight / 2;
+            float oldAlpha = g.getfloatAlphaComposite();
+            float width = w / 4;
+            float start  = x + w - (width);
+            g.setAlphaComposite(0.6f);
+            g.fillRect(bgColor, start, y + ymod, width, fontHeight);
+            g.setAlphaComposite(oldAlpha);
+            textRenderer.drawText(g, message, skinFont, Color.BLACK, start, y + ymod, width, fontHeight, y + ymod, fontHeight, false, Align.center, true);
+        }
+
         @Override
         public void draw(Graphics g) {
             final float x = getLeft() - group.getScrollLeft();
@@ -1197,6 +1225,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     float x2 = x + rankSize / 2;
                     g.drawImage(draftRankImage, x2, y2 + 1, rankSize, rankSize);
                     g.drawText(String.valueOf(draftRank), FSkinFont.forHeight(rankSize / 4), Color.WHITE, x, y, w, h, true, Align.center, true);
+                }
+
+                if (qty > 1) {
+                    drawSubLabel(g, "x" + qty, Color.TAN, x, y, w, h);
                 }
 
                 if (itemManager.showPriceInfo()) {
