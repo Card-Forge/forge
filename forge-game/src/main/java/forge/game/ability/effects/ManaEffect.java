@@ -254,8 +254,8 @@ public class ManaEffect extends SpellAbilityEffect {
                 abMana.setExpressChoice(sb.toString().trim());
             } else if (type.startsWith("DoubleManaInPool")) {
                 StringBuilder sb = new StringBuilder();
-                for (byte color : ManaAtom.MANATYPES) {
-                    sb.append(StringUtils.repeat(MagicColor.toShortString(color) + " ", chooser.getManaPool().getAmountOfColor(color)));
+                for (Map.Entry<Byte, Integer> e : chooser.getManaPool().getView().entrySet()) {
+                    sb.append(StringUtils.repeat(MagicColor.toShortString(e.getKey()) + " ", e.getValue()));
                 }
                 abMana.setExpressChoice(sb.toString().trim());
             }
