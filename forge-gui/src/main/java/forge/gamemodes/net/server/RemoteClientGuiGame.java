@@ -28,6 +28,7 @@ import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
+import forge.trackable.Tracker;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
@@ -583,6 +584,17 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
             forge.trackable.Tracker tracker = gameView != null ? gameView.getTracker() : null;
             sender.send(ProtocolMethod.applyDelta, DeltaPacket.eventsOnly(TrackableSerializer.wrapEvents(events, tracker)));
         }
+    }
+
+    /**
+     * Send events as a standalone applyDelta without running {@link DeltaSyncManager#collectDeltas},
+     * which is game-thread-only and would also redundantly re-send the full graph right after a reconnect's sendFullState.
+     */
+    public void replayEvents(final List<GameEvent> events) {
+        if (paused) { return; }
+        final GameView gameView = getGameView();
+        final Tracker tracker = gameView != null ? gameView.getTracker() : null;
+        sender.send(ProtocolMethod.applyDelta, DeltaPacket.eventsOnly(TrackableSerializer.wrapEvents(events, tracker)));
     }
 
     @Override

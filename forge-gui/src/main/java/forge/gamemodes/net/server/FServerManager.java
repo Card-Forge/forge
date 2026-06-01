@@ -3,6 +3,10 @@ package forge.gamemodes.net.server;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
+import forge.game.GameLogEntry;
+import forge.game.GameView;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventAddLog;
 import forge.game.player.Player;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
@@ -841,6 +845,19 @@ public final class FServerManager implements IHasForgeLog {
         netGui.updateGameView();
         netGui.openView(new forge.trackable.TrackableCollection<>(netGui.getLocalPlayers()));
         netLog.info("[Reconnect] Sent game state and openView to slot {}", slotIndex);
+
+        // Replay the host's log entries to rebuild the client's log on re-connect
+        final GameView gameView = netGui.getGameView();
+        if (gameView != null && gameView.getGameLog() != null) {
+            final List<GameEvent> logEvents = new ArrayList<>();
+            for (final GameLogEntry entry : gameView.getGameLog().getAllEntries()) {
+                logEvents.add(new GameEventAddLog(entry.type(), entry.message(), entry.sourceCard()));
+            }
+            if (!logEvents.isEmpty()) {
+                netGui.replayEvents(logEvents);
+                netLog.info("[Reconnect] Replayed {} game log entries for slot {} ({})", logEvents.size(), slotIndex, client.getUsername());
+            }
+        }
 
         // Replay current prompt
         final PlayerControllerHuman pch = findRemoteController(slotIndex);
