@@ -516,3 +516,8 @@ RW90a R The Keeper of Favorite Cards @
 RW90b R The Keeper of Favorite Cards @
 RW90c R The Keeper of Favorite Cards @
 MZ99 M The Collector @
+
+[CreatureTypes]
+Artist:Artists
+Athlete:Athletes
+Koala:Koalas
