@@ -430,8 +430,11 @@ public class PlayerPanel extends FPanel {
         final boolean isArchenemyApplied = mayEdit && lobby.hasVariant(GameType.Archenemy);
         final boolean archenemyVisiblity = mayEdit && lobby.hasVariant(GameType.ArchenemyRumble) || (isArchenemyApplied && isArchenemy());
         // Commander deck building replaces normal one, so hide it
+        // In Limited mode there's nothing to pick until a pool exists (draft/sealed done or past event loaded)
+        final CLobby controller = lobby.getController();
         final boolean isDeckBuildingAllowed = mayEdit && !isCommanderApplied && !lobby.hasVariant(GameType.MomirBasic)
-                && !lobby.hasVariant(GameType.MoJhoSto);
+                && !lobby.hasVariant(GameType.MoJhoSto)
+                && (!controller.isLimitedMode() || controller.getActiveEventId() != null);
 
         deckLabel.setVisible(isDeckBuildingAllowed);
         deckBtn.setVisible(isDeckBuildingAllowed);
