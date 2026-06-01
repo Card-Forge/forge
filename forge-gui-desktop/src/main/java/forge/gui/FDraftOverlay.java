@@ -1,13 +1,21 @@
 package forge.gui;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -31,16 +39,26 @@ public enum FDraftOverlay {
     SINGLETON_INSTANCE;
 
     private static final int DEFAULT_WIDTH  = 420;
-    private static final int DEFAULT_HEIGHT = 123;
+    private static final int MAX_PACK_ICONS = 9;
+    private static final int TABLE_FONT_SIZE = 12;
+    private static final int TABLE_ICON_W = 13;
+    private static final int TABLE_ICON_H = 18;
+    private static final int TABLE_ROW_H  = TABLE_ICON_H + 4;
+    private static final Color HIGHLIGHT_BG   = new Color(245, 232, 150);
+    private static final Color HIGHLIGHT_TEXT = new Color(30, 30, 25);
 
     private boolean hasBeenShown;
 
     private final FSkin.SkinnedLabel lblPackInfo  = makeTextLabel("");
     private final FSkin.SkinnedLabel lblTimer     = makeTextLabel("");
+    private final FSkin.SkinnedLabel lblAllSeats  = makeTextLabel("");
     private final DraftTimerRope     rope         = new DraftTimerRope();
     private final JPanel pnlNeighbors = new JPanel(new FlowLayout(FlowLayout.CENTER, 4, 0));
+    private final JPanel pnlSeatTable = new JPanel(new MigLayout("insets 4 0 4 0, gap 0, wrap 3",
+            "[][grow,sizegroup tcol][grow,sizegroup tcol]", ""));
 
     private static ImageIcon cardBackIcon;
+    private static ImageIcon tableCardBackIcon;
 
     private String   leftName, rightName;
     private boolean  leftAI,   rightAI;
@@ -49,6 +67,9 @@ public enum FDraftOverlay {
     private int      currentPick, initialPackSize;
     private boolean  passingRight;
     private int[]    queueDepths = new int[0];
+    private String[] allNames = new String[0];
+    private boolean[] allAI   = new boolean[0];
+    private boolean  expanded;
 
     /** Countdown timer (client-side fire-and-forget). */
     private Timer countdownTimer;
@@ -63,13 +84,26 @@ public enum FDraftOverlay {
         window.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         window.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
 
-        // Rows: [pack info | timer], [timer rope spanning 2 cols], [neighbor strip spanning 2 cols, grows]
-        window.setLayout(new MigLayout("insets 8 4 4 4, gap 0, wrap 2", "", "[]10[10!]10[grow]"));
+        // Rows: [pack info | timer], [timer rope], [neighbor strip], [separator], [all-seats toggle], [seat table]
+        window.setLayout(new MigLayout("insets 8 4 4 4, gap 0, wrap 2", "", "[]10[10!]10[]6[]6[]0[]"));
 
         lblPackInfo.setHorizontalAlignment(SwingConstants.LEFT);
         lblTimer.setHorizontalAlignment(SwingConstants.RIGHT);
 
         pnlNeighbors.setOpaque(false);
+        pnlSeatTable.setOpaque(false);
+        pnlSeatTable.setVisible(false);
+
+        // Smaller than the body text — this is a secondary control, sized to match the seat table
+        lblAllSeats.setFont(FSkin.getBoldFont(TABLE_FONT_SIZE));
+        lblAllSeats.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        lblAllSeats.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftClick(MouseEvent e) {
+                toggleExpanded();
+            }
+        });
+        updateAllSeatsLabel();
 
         // Row 1: pack info on the left, timer on the right
         window.add(lblPackInfo,  "pushx, growx, gapleft 4");
@@ -78,6 +112,12 @@ public enum FDraftOverlay {
         window.add(rope,         "span 2, growx, h 10!, gapleft 4, gapright 4");
         // Row 3: neighbor strip spans both columns, vertically centered in its cell
         window.add(pnlNeighbors, "span 2, pushx, growx, gapleft 4, gapright 4, ay center");
+        // Row 4: separator dividing the neighbor strip from the disclosure toggle
+        window.add(new JSeparator(JSeparator.HORIZONTAL), "span 2, growx, gapleft 4, gapright 4");
+        // Row 5: clickable disclosure toggle for the full seat table
+        window.add(lblAllSeats,  "span 2, growx, gapleft 4");
+        // Row 6: full seat table, hidden until expanded (hidemode 3 keeps it out of the collapsed layout)
+        window.add(pnlSeatTable, "span 2, growx, gapleft 4, gapright 4, hidemode 3");
 
         // Load card back icon (scaled to small size)
         loadCardBackIcon();
@@ -106,6 +146,8 @@ public enum FDraftOverlay {
             // visible pack indicator on pack 1 / pick 1
             this.queueDepths = new int[names.length];
             for (int i = 0; i < queueDepths.length; i++) queueDepths[i] = 1;
+            this.allNames = names.clone();
+            this.allAI    = aiFlags.clone();
 
             int podSize = names.length;
             int leftIdx  = (mySeat - 1 + podSize) % podSize;
@@ -162,6 +204,9 @@ public enum FDraftOverlay {
                 System.arraycopy(newDepths, 0, queueDepths, 0, newDepths.length);
             }
             updateDisplay();
+            if (expanded) {
+                buildSeatTable();
+            }
         });
     }
 
@@ -187,10 +232,16 @@ public enum FDraftOverlay {
             currentPack = totalPacks = 0;
             passingRight = false;
             queueDepths = new int[0];
+            allNames = new String[0];
+            allAI = new boolean[0];
             waitingForPack = false;
+            expanded = false;
             lblPackInfo.setText("");
             lblTimer.setText("");
             pnlNeighbors.removeAll();
+            pnlSeatTable.removeAll();
+            pnlSeatTable.setVisible(false);
+            updateAllSeatsLabel();
             hide();
         });
     }
@@ -203,7 +254,7 @@ public enum FDraftOverlay {
     public void show() {
         if (!hasBeenShown) {
             FFrame mainFrame = Singletons.getView().getFrame();
-            window.setBounds(mainFrame.getX() + 10, mainFrame.getY() + 50, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+            window.setLocation(mainFrame.getX() + 10, mainFrame.getY() + 50);
             window.getTitleBar().addMouseListener(new FMouseAdapter() {
                 @Override
                 public void onLeftDoubleClick(MouseEvent e) {
@@ -212,6 +263,7 @@ public enum FDraftOverlay {
             });
             hasBeenShown = true;
         }
+        sizeToContent();
         window.setVisible(true);
         OnlineMenu.draftItem.setState(true);
     }
@@ -347,12 +399,138 @@ public enum FDraftOverlay {
         pnlNeighbors.repaint();
     }
 
+    private void toggleExpanded() {
+        expanded = !expanded;
+        updateAllSeatsLabel();
+        if (expanded) {
+            buildSeatTable();
+        }
+        pnlSeatTable.setVisible(expanded);
+        sizeToContent();
+    }
+
+    /**
+     * Fits the window height to its laid-out content, keeping the fixed width and current location.
+     * {@code pack()} measures the title bar (a JMenuBar), contents, and border insets, and the seat
+     * table is {@code hidemode 3} so it adds nothing while collapsed — so this stays correct across
+     * skins and font scales without a hardcoded height.
+     */
+    private void sizeToContent() {
+        int x = window.getX();
+        int y = window.getY();
+        window.pack();
+        window.setBounds(x, y, DEFAULT_WIDTH, window.getHeight());
+    }
+
+    private void updateAllSeatsLabel() {
+        // Paint the triangle — the skin font (Roboto) lacks the right-pointing glyph, so a font glyph would tofu
+        lblAllSeats.setText(Localizer.getInstance().getMessage("lblDraftOverlayAllSeats"));
+        FSkin.SkinColor c = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+        lblAllSeats.setIcon(new TriangleIcon(expanded, c != null ? c.getColor() : Color.LIGHT_GRAY));
+    }
+
+    /** A small filled triangle: right-pointing when collapsed, down-pointing when expanded. */
+    private static final class TriangleIcon implements Icon {
+        private static final int SIZE = 8;
+        private final boolean down;
+        private final Color color;
+
+        TriangleIcon(boolean down, Color color) {
+            this.down = down;
+            this.color = color;
+        }
+
+        @Override public int getIconWidth()  { return SIZE; }
+        @Override public int getIconHeight() { return SIZE; }
+
+        @Override public void paintIcon(Component c, Graphics g, int x, int y) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(color);
+            int[] xs, ys;
+            if (down) {
+                xs = new int[] {x, x + SIZE, x + SIZE / 2};
+                ys = new int[] {y + 1, y + 1, y + SIZE - 1};
+            } else {
+                xs = new int[] {x + 1, x + 1, x + SIZE - 1};
+                ys = new int[] {y, y + SIZE, y + SIZE / 2};
+            }
+            g2.fillPolygon(xs, ys, 3);
+            g2.dispose();
+        }
+    }
+
+    /** Rebuilds the per-seat table: every seat in pod order on the left, its current pack count on the right. */
+    private void buildSeatTable() {
+        pnlSeatTable.removeAll();
+        final Localizer localizer = Localizer.getInstance();
+
+        pnlSeatTable.add(makeTableLabel(localizer.getMessage("lblDraftOverlaySeat")), "gapleft 8, gapbottom 4");
+        pnlSeatTable.add(makeTableLabel(localizer.getMessage("lblPlayer")), "growx, gapleft 14, gapbottom 4");
+        pnlSeatTable.add(makePacksCell(localizer.getMessage("lblDraftOverlayPacks"), -1, null, null), "growx, gapbottom 4");
+
+        String aiSuffix = " (" + localizer.getMessage("lblAI") + ")";
+        Color zebra  = FSkin.getColor(FSkin.Colors.CLR_ZEBRA).getColor();
+        Color stripe = blend(zebra, FSkin.getColor(FSkin.Colors.CLR_HOVER).getColor(), 0.5f);
+        // growx/growy make the bands contiguous; hmin keeps rows from shrinking when a seat has no packs
+        String rowCon = "growx, growy, hmin " + TABLE_ROW_H;
+        for (int i = 0; i < allNames.length; i++) {
+            String name = allNames[i];
+            if (i < allAI.length && allAI[i]) name += aiSuffix;
+            int depth = (i < queueDepths.length) ? queueDepths[i] : 0;
+
+            boolean me = (i == mySeat);
+            Color bg = me ? HIGHLIGHT_BG : (i % 2 == 0 ? zebra : stripe);
+            // The light-yellow highlight needs dark text for contrast; other rows keep the default light text
+            Color fg = me ? HIGHLIGHT_TEXT : null;
+
+            pnlSeatTable.add(makeRowLabel(String.valueOf(i + 1), bg, fg, 8), rowCon);
+            pnlSeatTable.add(makeRowLabel(name, bg, fg, 14), rowCon);
+            pnlSeatTable.add(makePacksCell(null, depth, bg, fg), rowCon);
+        }
+        pnlSeatTable.revalidate();
+        pnlSeatTable.repaint();
+    }
+
+    private static Color blend(Color a, Color b, float t) {
+        return new Color(
+                Math.round(a.getRed()   + (b.getRed()   - a.getRed())   * t),
+                Math.round(a.getGreen() + (b.getGreen() - a.getGreen()) * t),
+                Math.round(a.getBlue()  + (b.getBlue()  - a.getBlue())  * t));
+    }
+
+    /**
+     * Builds the packs cell: one pack sleeve per held pack followed by a {@code (×N)} count.
+     * A negative depth marks the header cell — text only.
+     */
+    private JPanel makePacksCell(String headerText, int depth, Color bg, Color fg) {
+        JPanel cell = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 0));
+        cell.setOpaque(bg != null);
+        if (bg != null) cell.setBackground(bg);
+        cell.setBorder(BorderFactory.createEmptyBorder(2, 10, 2, 0));
+        if (depth < 0) {
+            cell.add(tableText(headerText, fg));
+        } else if (depth == 0) {
+            cell.add(tableText("0", fg));
+        } else {
+            int shown = Math.min(depth, MAX_PACK_ICONS);
+            for (int k = 0; k < shown && tableCardBackIcon != null; k++) {
+                JLabel icon = new JLabel(tableCardBackIcon);
+                icon.setOpaque(false);
+                cell.add(icon);
+            }
+            cell.add(tableText("(×" + depth + ")", fg));
+        }
+        return cell;
+    }
+
     private static void loadCardBackIcon() {
         if (cardBackIcon != null) return;
         try {
             FSkin.SkinImage sleeve = FSkin.getSleeves().get(0);
             if (sleeve != null) {
                 cardBackIcon = sleeve.resize(18, 25).getIcon();
+                tableCardBackIcon = sleeve.resize(TABLE_ICON_W, TABLE_ICON_H).getIcon();
             }
         } catch (Exception e) {
             // Fallback: icon stays null, text "[P]" will be used
@@ -369,7 +547,7 @@ public enum FDraftOverlay {
             pnlNeighbors.add(makeTextLabel("[P]"));
         }
         if (depth > 1) {
-            FSkin.SkinnedLabel plus = new FSkin.SkinnedLabel("x" + depth);
+            FSkin.SkinnedLabel plus = new FSkin.SkinnedLabel("×" + depth);
             plus.setFont(FSkin.getBoldFont(12));
             FSkin.SkinColor color = FSkin.getColor(FSkin.Colors.CLR_TEXT);
             if (color != null) plus.setForeground(color);
@@ -387,6 +565,26 @@ public enum FDraftOverlay {
         FSkin.SkinColor color = FSkin.getColor(FSkin.Colors.CLR_TEXT);
         if (color != null) lbl.setForeground(color);
         lbl.setOpaque(false);
+        return lbl;
+    }
+
+    private FSkin.SkinnedLabel makeTableLabel(String text) {
+        FSkin.SkinnedLabel lbl = makeTextLabel(text);
+        lbl.setFont(FSkin.getBoldFont(TABLE_FONT_SIZE));
+        return lbl;
+    }
+
+    private FSkin.SkinnedLabel tableText(String text, Color fg) {
+        FSkin.SkinnedLabel lbl = makeTableLabel(text);
+        if (fg != null) lbl.setForeground(fg);
+        return lbl;
+    }
+
+    private FSkin.SkinnedLabel makeRowLabel(String text, Color bg, Color fg, int leftPad) {
+        FSkin.SkinnedLabel lbl = tableText(text, fg);
+        lbl.setOpaque(true);
+        lbl.setBackground(bg);
+        lbl.setBorder(BorderFactory.createEmptyBorder(0, leftPad, 0, 0));
         return lbl;
     }
 
