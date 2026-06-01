@@ -234,7 +234,6 @@ public class MapStage extends GameStage {
 
         if (MP.get("dungeonEffect") != null && !MP.get("dungeonEffect").toString().isEmpty()) {
             effect = JSONStringLoader.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
-            effectDialog(effect);
         }
         if (MP.get("respawnEnemies") != null && MP.get("respawnEnemies") instanceof Boolean && (Boolean) MP.get("respawnEnemies")) {
             respawnEnemies = true;
@@ -270,6 +269,10 @@ public class MapStage extends GameStage {
             }
         }
         spawn(spawnTargetId);
+
+        if (effect != null && enemies.size() > 0) {
+            effectDialog(effect);
+        }
 
         //reduce geometry in collision rectangles
         int oldSize;
