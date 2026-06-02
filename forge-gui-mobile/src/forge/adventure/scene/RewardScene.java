@@ -621,9 +621,13 @@ public class RewardScene extends UIScene {
             setWidth(actor.getWidth());
             setX(actor.getX());
             setY(actor.getY() - getHeight());
-            price = CardUtil.getRewardPrice(actor.getReward());
-            price *= Current.player().goldModifier();
-            price *= shopModifier;
+            if (Reward.Type.Card.equals(reward.getType()) && reward.getCard() != null) {
+                price = Current.player().cardShopBuyPrice(reward.getCard(), shopModifier);
+            } else {
+                price = CardUtil.getRewardPrice(actor.getReward());
+                price *= Current.player().goldModifier();
+                price *= shopModifier;
+            }
             setText("[+GoldCoin] " + price);
             updateOwned();
             addListener(new ClickListener() {

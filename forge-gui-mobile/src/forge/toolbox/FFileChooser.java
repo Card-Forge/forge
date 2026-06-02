@@ -140,6 +140,7 @@ public class FFileChooser extends FDialog {
             //don't list files if getting directory
             filter = (dir1, name) -> new File(dir1, name).isDirectory();
         }
+        // Open/save: no extension filter — show all files (deck lists often lack extensions)
         lstFiles.setListData(dir.listFiles(filter));
     }
 

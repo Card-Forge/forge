@@ -1285,6 +1285,29 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     /**
+     * Adventure card shop buy price (same formula as {@link forge.adventure.scene.RewardScene}).
+     *
+     * @param locationPriceModifier town × shop reputation factor from the current shop
+     */
+    public int cardShopBuyPrice(PaperCard card, float locationPriceModifier) {
+        if (card == null || card.hasNoSellValue()) {
+            return 0;
+        }
+        int price = CardUtil.getCardPrice(card);
+        price *= goldModifier();
+        price *= locationPriceModifier;
+        return Math.max(0, price);
+    }
+
+    /**
+     * Deck import buy-missing: same as a card shop in a town with no reputation (modifier 1.0),
+     * including the player's equipment/blessing shop discounts via {@link #goldModifier()}.
+     */
+    public int cardBuyPrice(PaperCard card) {
+        return cardShopBuyPrice(card, 1f);
+    }
+
+    /**
      * Sells a number of copies of a card.
      * @return the number of copies successfully sold.
      */

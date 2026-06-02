@@ -32,7 +32,11 @@ import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
 import forge.card.MagicColor;
+import forge.Forge;
+import forge.gui.GuiBase;
+import com.badlogic.gdx.Gdx;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -989,7 +993,62 @@ public class CardUtil {
     public enum ImportMode {
         GIVE_MISSING,
         BUY_MISSING,
+        /** Import when collection has enough copies (any printing); otherwise report missing. */
         REPORT_ONLY
+    }
+
+    public enum DeckListExportFormat {
+        FORGE_DCK,
+        PLAINTEXT,
+        ARENA,
+        MTGO;
+
+        public String getDisplayName() {
+            return switch (this) {
+                case FORGE_DCK -> "Forge (.dck)";
+                case PLAINTEXT -> "Plain text";
+                case ARENA -> "Arena";
+                case MTGO -> "MTGO";
+            };
+        }
+
+        public String getDefaultExtension() {
+            return switch (this) {
+                case FORGE_DCK -> ".dck";
+                case PLAINTEXT, ARENA, MTGO -> ".txt";
+            };
+        }
+    }
+
+    public enum CollectionExportFormat {
+        PLAINTEXT,
+        ARENA,
+        MTGO;
+
+        public String getDisplayName() {
+            return switch (this) {
+                case PLAINTEXT -> "Plain text";
+                case ARENA -> "Arena";
+                case MTGO -> "MTGO";
+            };
+        }
+
+        public String getDefaultExtension() {
+            return ".txt";
+        }
+    }
+
+    /** Base filename with the extension for the chosen export format (adds ext if missing). */
+    public static String defaultSaveFilename(String baseName, String extension) {
+        String name = baseName != null ? baseName.trim() : "";
+        if (name.isEmpty()) {
+            name = "file";
+        }
+        String ext = extension != null && extension.startsWith(".") ? extension : "." + extension;
+        if (name.toLowerCase().endsWith(ext.toLowerCase())) {
+            return name;
+        }
+        return name + ext;
     }
 
     public static class MissingCard {
@@ -1030,6 +1089,14 @@ public class CardUtil {
             return new ImportResult(true, null, deckName, -1, 0, missing);
         }
 
+        public static ImportResult reportWithImport(int slot, String deckName, List<MissingCard> missing) {
+            return new ImportResult(true, null, deckName, slot, 0, missing);
+        }
+
+        public boolean importedDeck() {
+            return success && slot >= 0;
+        }
+
         public String formatMissingReport() {
             if (missingCards.isEmpty()) return "You own all cards in this deck!";
             StringBuilder sb = new StringBuilder();
@@ -1042,39 +1109,152 @@ public class CardUtil {
         }
     }
 
+    public static final class MarkedForSaleEntry {
+        public final String cardName;
+        public final int quantity;
+
+        public MarkedForSaleEntry(String cardName, int quantity) {
+            this.cardName = cardName;
+            this.quantity = quantity;
+        }
+    }
+
+    /**
+     * Auto-sell state before this mark-for-sale run (card identity + prior marked copy count).
+     * Rollback restores that count so cards already marked stay marked.
+     */
+    public static final class MarkedForSaleOp {
+        public final PaperCard card;
+        public final int previousAutoSellCount;
+
+        public MarkedForSaleOp(PaperCard card, int previousAutoSellCount) {
+            this.card = card;
+            this.previousAutoSellCount = previousAutoSellCount;
+        }
+    }
+
     public static class MarkSellResult {
         public final boolean success;
         public final String message;
         public final int marked;
         public final int skipped;
+        public final List<MarkedForSaleEntry> markedEntries;
+        public final List<MarkedForSaleOp> rollbackOps;
 
-        private MarkSellResult(boolean success, String message, int marked, int skipped) {
+        private MarkSellResult(boolean success, String message, int marked, int skipped,
+                List<MarkedForSaleEntry> markedEntries, List<MarkedForSaleOp> rollbackOps) {
             this.success = success;
             this.message = message;
             this.marked = marked;
             this.skipped = skipped;
+            this.markedEntries = markedEntries != null ? markedEntries : List.of();
+            this.rollbackOps = rollbackOps != null ? rollbackOps : List.of();
         }
 
-        public static MarkSellResult success(int marked, int skipped) {
-            return new MarkSellResult(true, null, marked, skipped);
+        public static MarkSellResult success(int marked, int skipped, List<MarkedForSaleEntry> markedEntries,
+                List<MarkedForSaleOp> rollbackOps) {
+            return new MarkSellResult(true, null, marked, skipped, markedEntries, rollbackOps);
+        }
+
+        public void rollback(AdventurePlayer player) {
+            ItemPool<PaperCard> autoSell = player.getAutoSellCards();
+            for (MarkedForSaleOp op : rollbackOps) {
+                autoSell.removeAll(op.card);
+                if (op.previousAutoSellCount > 0) {
+                    autoSell.add(op.card, op.previousAutoSellCount);
+                }
+            }
         }
 
         public static MarkSellResult failure(String message) {
-            return new MarkSellResult(false, message, 0, 0);
+            return new MarkSellResult(false, message, 0, 0, List.of(), List.of());
+        }
+
+        public String formatMarkedReport(String loadedMessage) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(loadedMessage).append("\n\n");
+            if (markedEntries.isEmpty()) {
+                sb.append(Forge.getLocalizer().getMessage("lblAdvMarkForSaleNone")).append('\n');
+            } else {
+                for (MarkedForSaleEntry entry : markedEntries) {
+                    sb.append(entry.quantity).append("x ").append(entry.cardName).append('\n');
+                }
+            }
+            if (skipped > 0) {
+                sb.append('\n').append("(").append(skipped).append(" copies skipped)");
+            }
+            return sb.toString();
         }
     }
 
     public static File resolveFilePath(String rawPath) {
-        String normalized = rawPath.replace('\\', File.separatorChar)
+        if (rawPath == null || rawPath.isBlank()) {
+            return new File("");
+        }
+        String normalized = rawPath.trim().replace('\\', File.separatorChar)
                                    .replace('/', File.separatorChar);
         if (normalized.startsWith("~" + File.separator) || normalized.equals("~")) {
-            normalized = System.getProperty("user.home") + normalized.substring(1);
+            String home = System.getProperty("user.home");
+            normalized = (home != null ? home : "") + normalized.substring(1);
         }
-        File file = new File(normalized);
-        if (!file.isAbsolute()) {
-            file = new File(System.getProperty("user.home"), normalized);
+
+        File direct = new File(normalized);
+        if (direct.isAbsolute() && direct.exists()) {
+            return direct;
         }
-        return file;
+
+        String home = System.getProperty("user.home");
+        if (home != null) {
+            File fromHome = new File(home, normalized);
+            if (fromHome.exists()) {
+                return fromHome;
+            }
+            if (!direct.isAbsolute()) {
+                direct = fromHome;
+            }
+        }
+
+        if (GuiBase.isAndroid()) {
+            File downloads = new File(Forge.getDeviceAdapter().getDownloadsDir(), normalized);
+            if (downloads.exists()) {
+                return downloads;
+            }
+            try {
+                if (Gdx.files.local(normalized).exists()) {
+                    return Gdx.files.local(normalized).file();
+                }
+                if (Gdx.files.external(normalized).exists()) {
+                    return Gdx.files.external(normalized).file();
+                }
+            } catch (Exception ignored) {
+            }
+        }
+
+        return direct;
+    }
+
+    /**
+     * Missing copies by card name (any printing in the collection counts toward ownership).
+     */
+    public static List<MissingCard> findMissingCards(Deck importedDeck, AdventurePlayer player) {
+        Map<String, Integer> neededByName = new LinkedHashMap<>();
+        Map<String, PaperCard> representativeByName = new HashMap<>();
+        for (java.util.Map.Entry<DeckSection, CardPool> entry : importedDeck) {
+            for (java.util.Map.Entry<PaperCard, Integer> cardEntry : entry.getValue()) {
+                String name = cardEntry.getKey().getName();
+                neededByName.merge(name, cardEntry.getValue(), Integer::sum);
+                representativeByName.putIfAbsent(name, cardEntry.getKey());
+            }
+        }
+        List<MissingCard> missingCards = new ArrayList<>();
+        for (java.util.Map.Entry<String, Integer> needed : neededByName.entrySet()) {
+            int owned = player.getCards().countByName(needed.getKey());
+            int qty = needed.getValue();
+            if (owned < qty) {
+                missingCards.add(new MissingCard(representativeByName.get(needed.getKey()), qty - owned));
+            }
+        }
+        return missingCards;
     }
 
     public static Deck parseDeckFile(File file) {
@@ -1110,30 +1290,63 @@ public class CardUtil {
         return deck;
     }
 
+    public static class ImportPreview {
+        public final Deck deck;
+        public final List<MissingCard> missingCards;
+        public final int totalCost;
+
+        public ImportPreview(Deck deck, List<MissingCard> missingCards, int totalCost) {
+            this.deck = deck;
+            this.missingCards = missingCards;
+            this.totalCost = totalCost;
+        }
+
+        public int missingCopyCount() {
+            int n = 0;
+            for (MissingCard mc : missingCards) {
+                n += mc.quantity;
+            }
+            return n;
+        }
+
+        public boolean canAfford(int playerGold) {
+            return playerGold >= totalCost;
+        }
+    }
+
+    public static ImportPreview previewImport(File file, AdventurePlayer player) {
+        Deck deck = parseDeckFile(file);
+        if (deck == null) {
+            return null;
+        }
+        List<MissingCard> missingCards = findMissingCards(deck, player);
+        int totalCost = 0;
+        for (MissingCard mc : missingCards) {
+            totalCost += player.cardBuyPrice(mc.card) * mc.quantity;
+        }
+        return new ImportPreview(deck, missingCards, totalCost);
+    }
+
     public static ImportResult importDeckFromFile(File file, AdventurePlayer player, ImportMode mode) {
         Deck importedDeck = parseDeckFile(file);
         if (importedDeck == null) return ImportResult.failure("Could not parse file");
 
-        List<MissingCard> missingCards = new ArrayList<>();
-        for (java.util.Map.Entry<DeckSection, CardPool> entry : importedDeck) {
-            for (java.util.Map.Entry<PaperCard, Integer> cardEntry : entry.getValue()) {
-                PaperCard card = cardEntry.getKey();
-                int needed = cardEntry.getValue();
-                int owned = player.getCards().count(card);
-                if (owned < needed) {
-                    missingCards.add(new MissingCard(card, needed - owned));
-                }
-            }
-        }
+        List<MissingCard> missingCards = findMissingCards(importedDeck, player);
 
         if (mode == ImportMode.REPORT_ONLY) {
-            return ImportResult.reportOnly(importedDeck.getName(), missingCards);
+            if (!missingCards.isEmpty()) {
+                return ImportResult.reportOnly(importedDeck.getName(), missingCards);
+            }
+            int slot = player.findFirstEmptySlot();
+            if (slot == -1) return ImportResult.failure("All deck slots full (max 99)");
+            player.importIntoSlot(slot, importedDeck);
+            return ImportResult.reportWithImport(slot, importedDeck.getName(), missingCards);
         }
 
         if (mode == ImportMode.BUY_MISSING) {
             int totalCost = 0;
             for (MissingCard mc : missingCards) {
-                totalCost += player.cardSellPrice(mc.card) * mc.quantity;
+                totalCost += player.cardBuyPrice(mc.card) * mc.quantity;
             }
             if (player.getGold() < totalCost) {
                 return ImportResult.failure(String.format(
@@ -1164,6 +1377,8 @@ public class CardUtil {
         int skipped = 0;
         CardPool collection = player.getCards();
         ItemPool<PaperCard> autoSell = player.getAutoSellCards();
+        Map<String, Integer> markedByName = new LinkedHashMap<>();
+        Map<PaperCard, Integer> previousAutoSellByCard = new LinkedHashMap<>();
 
         for (java.util.Map.Entry<DeckSection, CardPool> entry : parsed) {
             for (java.util.Map.Entry<PaperCard, Integer> cardEntry : entry.getValue()) {
@@ -1182,36 +1397,156 @@ public class CardUtil {
 
                 int toMark = Math.min(requestedQty, Math.max(canMark, 0));
                 if (toMark > 0) {
+                    previousAutoSellByCard.putIfAbsent(card, alreadyMarked);
                     autoSell.add(card, toMark);
                     marked += toMark;
+                    markedByName.merge(card.getName(), toMark, Integer::sum);
                 }
                 skipped += (requestedQty - toMark);
             }
         }
 
-        return MarkSellResult.success(marked, skipped);
+        List<MarkedForSaleEntry> entries = new ArrayList<>(markedByName.size());
+        for (Map.Entry<String, Integer> nameEntry : markedByName.entrySet()) {
+            entries.add(new MarkedForSaleEntry(nameEntry.getKey(), nameEntry.getValue()));
+        }
+        List<MarkedForSaleOp> rollbackOps = new ArrayList<>(previousAutoSellByCard.size());
+        for (Map.Entry<PaperCard, Integer> snap : previousAutoSellByCard.entrySet()) {
+            rollbackOps.add(new MarkedForSaleOp(snap.getKey(), snap.getValue()));
+        }
+        return MarkSellResult.success(marked, skipped, entries, rollbackOps);
+    }
+
+    public static void exportDeck(Deck deck, File file, DeckListExportFormat format) throws IOException {
+        switch (format) {
+            case FORGE_DCK -> DeckSerializer.writeDeck(deck, file);
+            case PLAINTEXT -> FileUtil.writeFile(file, deck.generateTextExport());
+            case ARENA -> FileUtil.writeFile(file, exportDeckAsArena(deck));
+            case MTGO -> FileUtil.writeFile(file, exportDeckAsMtgo(deck));
+            default -> throw new IllegalArgumentException("Unknown deck export format: " + format);
+        }
+    }
+
+    public static void exportCollection(AdventurePlayer player, File file,
+            CollectionExportFormat format) throws IOException {
+        switch (format) {
+            case PLAINTEXT -> FileUtil.writeFile(file, exportCollectionAsPlaintext(player));
+            case ARENA -> FileUtil.writeFile(file, exportCollectionAsArena(player));
+            case MTGO -> FileUtil.writeFile(file, exportCollectionAsMtgo(player));
+            default -> throw new IllegalArgumentException(
+                    "Unknown collection export format: " + format);
+        }
+    }
+
+    public static String exportDeckAsArena(Deck deck) {
+        StringBuilder sb = new StringBuilder();
+        String name = deck.getName();
+        if (name != null && !name.isEmpty()) {
+            sb.append("Deck: ").append(name).append('\n').append('\n');
+        }
+        appendPoolAsArena(sb, deck, DeckSection.Main, "Main");
+        appendPoolAsArena(sb, deck, DeckSection.Sideboard, "Sideboard");
+        appendPoolAsArena(sb, deck, DeckSection.Commander, "Commander");
+        return sb.toString();
+    }
+
+    private static void appendPoolAsArena(StringBuilder sb, Deck deck, DeckSection section, String label) {
+        if (!deck.has(section) || deck.get(section).isEmpty()) {
+            return;
+        }
+        sb.append(label).append(":\n");
+        appendCardsArenaStyle(sb, deck.get(section));
+        sb.append('\n');
+    }
+
+    private static void appendCardsArenaStyle(StringBuilder sb, CardPool pool) {
+        List<java.util.Map.Entry<PaperCard, Integer>> sorted = new ArrayList<>();
+        for (java.util.Map.Entry<PaperCard, Integer> e : pool) {
+            sorted.add(e);
+        }
+        sorted.sort(java.util.Comparator.comparing(e -> e.getKey().getName()));
+        for (java.util.Map.Entry<PaperCard, Integer> entry : sorted) {
+            appendArenaLine(sb, entry.getKey(), entry.getValue());
+        }
+    }
+
+    private static void appendArenaLine(StringBuilder sb, PaperCard card, int count) {
+        sb.append(count).append(' ').append(card.getName());
+        String set = card.getEdition();
+        String collNum = card.getCollectorNumber();
+        if (set != null && !set.isEmpty()) {
+            sb.append(" (").append(set).append(')');
+            if (collNum != null && !collNum.isEmpty()) {
+                sb.append(' ').append(collNum);
+            }
+        }
+        sb.append('\n');
+    }
+
+    public static String exportDeckAsMtgo(Deck deck) {
+        StringBuilder sb = new StringBuilder();
+        String name = deck.getName();
+        if (name != null && !name.isEmpty()) {
+            sb.append("// ").append(name).append('\n');
+        }
+        appendPoolAsMtgo(sb, deck, DeckSection.Main);
+        appendPoolAsMtgo(sb, deck, DeckSection.Sideboard);
+        appendPoolAsMtgo(sb, deck, DeckSection.Commander);
+        return sb.toString();
+    }
+
+    private static void appendPoolAsMtgo(StringBuilder sb, Deck deck, DeckSection section) {
+        if (!deck.has(section) || deck.get(section).isEmpty()) {
+            return;
+        }
+        if (section == DeckSection.Sideboard) {
+            sb.append("Sideboard:\n");
+        }
+        appendCardsMtgoStyle(sb, deck.get(section));
+    }
+
+    private static void appendCardsMtgoStyle(StringBuilder sb, CardPool pool) {
+        List<java.util.Map.Entry<PaperCard, Integer>> sorted = new ArrayList<>();
+        for (java.util.Map.Entry<PaperCard, Integer> e : pool) {
+            sorted.add(e);
+        }
+        sorted.sort(java.util.Comparator.comparing(e -> e.getKey().getName()));
+        for (java.util.Map.Entry<PaperCard, Integer> entry : sorted) {
+            PaperCard card = entry.getKey();
+            sb.append(entry.getValue()).append(' ').append(card.getName());
+            String set = card.getEdition();
+            if (set != null && !set.isEmpty()) {
+                sb.append(" (").append(set).append(')');
+            }
+            sb.append('\n');
+        }
     }
 
     public static String exportCollectionAsArena(AdventurePlayer player) {
         StringBuilder sb = new StringBuilder();
-        CardPool collection = player.getCards();
-        List<java.util.Map.Entry<PaperCard, Integer>> sorted = new ArrayList<>();
-        for (java.util.Map.Entry<PaperCard, Integer> e : collection) sorted.add(e);
-        sorted.sort(java.util.Comparator.comparing(e -> e.getKey().getName()));
-        for (java.util.Map.Entry<PaperCard, Integer> entry : sorted) {
-            PaperCard card = entry.getKey();
-            int count = entry.getValue();
-            String set = card.getEdition();
-            String collNum = card.getCollectorNumber();
-            sb.append(count).append(' ').append(card.getName());
-            if (set != null && !set.isEmpty()) {
-                sb.append(" (").append(set).append(')');
-                if (collNum != null && !collNum.isEmpty()) {
-                    sb.append(' ').append(collNum);
-                }
-            }
-            sb.append('\n');
-        }
+        appendCardsArenaStyle(sb, player.getCards());
         return sb.toString();
+    }
+
+    public static String exportCollectionAsMtgo(AdventurePlayer player) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("// Collection").append('\n');
+        appendCardsMtgoStyle(sb, player.getCards());
+        return sb.toString();
+    }
+
+    public static String exportCollectionAsPlaintext(AdventurePlayer player) {
+        final String nl = System.lineSeparator();
+        final StringBuilder collectionList = new StringBuilder();
+        Set<String> accounted = new HashSet<>();
+        CardPool pool = player.getCards();
+        for (final java.util.Map.Entry<PaperCard, Integer> entry : pool) {
+            String cardName = entry.getKey().getCardName();
+            if (!accounted.contains(cardName)) {
+                collectionList.append(pool.countByName(cardName)).append(" ").append(cardName).append(nl);
+                accounted.add(cardName);
+            }
+        }
+        return collectionList.toString();
     }
 }

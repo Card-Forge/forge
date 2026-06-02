@@ -86,19 +86,30 @@ public class UIScene extends Scene {
     }
 
     public void showDialog(Dialog dialog) {
+        showDialog(dialog, null);
+    }
+
+    /**
+     * @param scrollFocus when non-null, mouse wheel / scroll keys target this pane (e.g. file list)
+     */
+    public void showDialog(Dialog dialog, ScrollPane scrollFocus) {
         stage.addActor(dialog);
         possibleSelectionStack.add(new Array<>());
         addToSelectable(dialog.getContentTable());
         addToSelectable(dialog.getButtonTable());
         dialog.getColor().a = 0;
         stage.setKeyboardFocus(dialog);
-        stage.setScrollFocus(dialog);
+        stage.setScrollFocus(scrollFocus != null ? scrollFocus : dialog);
         for (Dialog otherDialogs : dialogs)
             otherDialogs.hide();
         dialogs.add(dialog);
         selectFirst();
         dialog.show(stage);
-
+        AdventureDialogUtil.fitOnStage(stage, dialog);
+        if (scrollFocus != null) {
+            stage.setScrollFocus(scrollFocus);
+            AdventureDialogUtil.retainScrollFocus(scrollFocus);
+        }
     }
 
     private void requestTextInput(String text, KeyBoardDialog.ScreenKeyboardFinished e) {
@@ -237,6 +248,19 @@ public class UIScene extends Scene {
         } else {
             possibleSelectionStack.removeIndex(possibleSelectionStack.size - 1);
         }
+        if (dialogs.isEmpty()) {
+            onDialogClosed();
+        }
+    }
+
+    public void removeAllDialogs() {
+        while (!dialogs.isEmpty()) {
+            removeDialog();
+        }
+    }
+
+    /** Called after the last dialog is dismissed; override to restore scene focus. */
+    protected void onDialogClosed() {
     }
 
     public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo) {
@@ -257,6 +281,12 @@ public class UIScene extends Scene {
 
         if (cancelButton)
             dialog.button(Controls.newTextButton(stringCancel, this::removeDialog));
+
+        if (runnableNo != null) {
+            dialog.setUserObject(runnableNo);
+        } else if (runnableYes != null && stringNo == null) {
+            dialog.setUserObject(runnableYes);
+        }
 
         return dialog;
     }
@@ -343,6 +373,10 @@ public class UIScene extends Scene {
     public boolean keyPressed(int keycode) {
         ui.pressDown(keycode);
 
+        if (dialogShowing() && tryDialogAbort(keycode)) {
+            return true;
+        }
+
         Selectable selection = getSelected();
         if (KeyBinding.Use.isPressed(keycode)) {
             if (selection != null) {
@@ -361,7 +395,7 @@ public class UIScene extends Scene {
             }
         }
 
-        if (KeyBinding.Back.isPressed(keycode) && selection != null) {
+        if (KeyBinding.Back.isPressed(keycode) && selection != null && !dialogShowing()) {
             selection.onDeSelect();
             stage.setKeyboardFocus(null);
         }
@@ -408,6 +442,20 @@ public class UIScene extends Scene {
 
     private boolean dialogShowing() {
         return !dialogs.isEmpty();
+    }
+
+    /** Escape / Back runs the top dialog's abort handler when set via {@link Dialog#setUserObject}. */
+    private boolean tryDialogAbort(int keycode) {
+        if (keycode != Input.Keys.ESCAPE && !KeyBinding.Back.isPressed(keycode)) {
+            return false;
+        }
+        Dialog top = dialogs.get(dialogs.size - 1);
+        Object handler = top.getUserObject();
+        if (handler instanceof Runnable abort) {
+            abort.run();
+            return true;
+        }
+        return false;
     }
 
 

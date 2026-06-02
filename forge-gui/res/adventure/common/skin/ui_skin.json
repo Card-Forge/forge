@@ -520,10 +520,18 @@
 },
 "ScrollPaneStyle": {
 	"default": {
-		"background": "windowMain10Patch"
+		"background": "windowMain10Patch",
+		"vScroll": "scroll",
+		"vScrollKnob": "scroll",
+		"hScroll": "bar",
+		"hScrollKnob": "bar"
 	},
 	"paper": {
-		"background": "paper10Patch"
+		"background": "paper10Patch",
+		"vScroll": "scroll",
+		"vScrollKnob": "scroll",
+		"hScroll": "bar",
+		"hScrollKnob": "bar"
 	},
 	"gold": {
 		"background": "9patch4"

@@ -587,6 +587,11 @@ public class ConsoleCommandInterpreter {
             File file = CardUtil.resolveFilePath(s[0]);
             if (!file.exists()) return "File not found: " + file.getAbsolutePath();
             CardUtil.ImportResult result = CardUtil.importDeckFromFile(file, Current.player(), CardUtil.ImportMode.REPORT_ONLY);
+            if (!result.success) return "Import failed: " + result.message;
+            if (result.importedDeck()) {
+                return String.format("You own all cards. Imported '%s' into slot %d.",
+                    result.deckName, result.slot + 1);
+            }
             return result.formatMissingReport();
         });
         registerCommand(new String[]{"save", "deck"}, s -> {

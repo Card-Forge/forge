@@ -1,30 +1,34 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.IntMap;
+import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.util.AdventureDialogUtil;
+import forge.adventure.util.AdventureFilePicker;
 import forge.adventure.util.CardUtil;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
-import forge.deck.io.DeckSerializer;
-import forge.util.FileUtil;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class DeckSelectScene extends UIScene {
     private final IntMap<TextraButton> buttons = new IntMap<>();
     private final IntMap<Label> labels = new IntMap<>();
     Color defColor;
     TextField textInput;
-    TextField filePathInput;
     Table layout;
     TextraLabel header;
     TextraButton back, edit, rename, add;
@@ -55,15 +59,21 @@ public class DeckSelectScene extends UIScene {
         this.layoutDeckButtons();
 
         textInput = Controls.newTextField("");
-        filePathInput = Controls.newTextField("");
 
         root.row();
         Table fileOpsTable = new Table();
-        fileOpsTable.add(Controls.newTextButton("Import Deck", this::importDeck)).pad(2).expandX().fillX();
-        fileOpsTable.add(Controls.newTextButton("Export Deck", this::exportDeck)).pad(2).expandX().fillX();
+        float opsBtnH = AdventureDialogUtil.compactButtonHeight();
+        fileOpsTable.add(compactOpsButton(
+            Forge.getLocalizer().getMessage("lblAdvImportDeck"), this::importDeck, opsBtnH)).pad(1).expandX().fillX();
+        fileOpsTable.add(compactOpsButton(
+            Forge.getLocalizer().getMessage("lblAdvExportDeck"), this::exportDeck, opsBtnH)).pad(1).expandX().fillX();
         fileOpsTable.row();
-        fileOpsTable.add(Controls.newTextButton("Export Collection", this::exportCollection)).pad(2).expandX().fillX();
-        fileOpsTable.add(Controls.newTextButton("Mark for Sale", this::markForSale)).pad(2).expandX().fillX();
+        fileOpsTable.add(compactOpsButton(
+            Forge.getLocalizer().getMessage("lblAdvExportCollection"), this::exportCollection, opsBtnH))
+            .pad(1).expandX().fillX();
+        fileOpsTable.add(compactOpsButton(
+            Forge.getLocalizer().getMessage("lblAdvMarkForSale"), this::markForSale, opsBtnH))
+            .pad(1).expandX().fillX();
         root.add(fileOpsTable).colspan(2).fillX();
 
         back = ui.findActor("return");
@@ -195,9 +205,19 @@ public class DeckSelectScene extends UIScene {
         }
     }
 
+    private static TextraButton compactOpsButton(String text, Runnable onClick, float height) {
+        TextraButton button = Controls.newTextButton(text, onClick);
+        button.getTextraLabel().layout.setTargetWidth(Scene.getIntendedWidth() * 0.22f);
+        button.setHeight(height);
+        return button;
+    }
+
     private TextraButton addDeckButton(int i) {
+        float rowH = AdventureDialogUtil.compactButtonHeight();
         TextraButton button = Controls.newTextButton("-");
         String name = Forge.getLocalizer().getMessage("lblDeck") + ": " + (i + 1);
+        button.getTextraLabel().layout.setTargetWidth(Scene.getIntendedWidth() * 0.42f);
+        button.setHeight(rowH);
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -212,8 +232,8 @@ public class DeckSelectScene extends UIScene {
 
         button.setText(Current.player().getDeck(i).getName());
         Label label = Controls.newLabel(name);
-        layout.add(Controls.newLabel(name)).pad(2);
-        layout.add(button).fill(true, false).expand(true, false).align(Align.left).expandX().pad(2);
+        layout.add(label).pad(1);
+        layout.add(button).height(rowH).fillX().expandX().align(Align.left).pad(1);
         buttons.put(i, button);
         labels.put(i, label);
         addToSelectable(new Selectable(button));
@@ -239,11 +259,24 @@ public class DeckSelectScene extends UIScene {
 
 
     @Override
+    protected void onDialogClosed() {
+        restoreDeckListScrollFocus();
+    }
+
+    private void restoreDeckListScrollFocus() {
+        if (scrollPane != null) {
+            stage.setScrollFocus(scrollPane);
+            stage.setKeyboardFocus(scrollPane);
+        }
+    }
+
+    @Override
     public void enter() {
         refreshDeckButtons();
         GameHUD.getInstance().updateBGM();
         select(Current.player().getSelectedDeckIndex());
         performTouch(scrollPane); //can use mouse wheel if available to scroll after selection
+        restoreDeckListScrollFocus();
         super.enter();
     }
 
@@ -261,125 +294,248 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void importDeck() {
-        Dialog modeDialog = new Dialog("Import Deck", Controls.getSkin());
-        modeDialog.getContentTable().add(Controls.newTextraLabel("Choose import mode:"));
-        modeDialog.button(Controls.newTextButton("Give missing (free)", () -> {
-            removeDialog();
-            showFilePathDialog("Import Deck - File Path", path -> {
-                File file = CardUtil.resolveFilePath(path);
-                if (!file.exists()) {
-                    showResultDialog("Import Deck", "File not found: " + file.getAbsolutePath());
-                    return;
-                }
-                CardUtil.ImportResult result = CardUtil.importDeckFromFile(file, Current.player(), CardUtil.ImportMode.GIVE_MISSING);
-                if (!result.success) {
-                    showResultDialog("Import Deck", "Import failed: " + result.message);
-                } else {
-                    refreshDeckButtons();
-                    select(result.slot);
-                    showResultDialog("Import Deck", String.format("Imported '%s' into slot %d (%d cards added to collection)",
-                        result.deckName, result.slot + 1, result.cardsAdded));
-                }
-            });
-        }));
-        modeDialog.button(Controls.newTextButton("Buy missing cards", () -> {
-            removeDialog();
-            showFilePathDialog("Import Deck - File Path", path -> {
-                File file = CardUtil.resolveFilePath(path);
-                if (!file.exists()) {
-                    showResultDialog("Import Deck", "File not found: " + file.getAbsolutePath());
-                    return;
-                }
-                CardUtil.ImportResult result = CardUtil.importDeckFromFile(file, Current.player(), CardUtil.ImportMode.BUY_MISSING);
-                if (!result.success) {
-                    showResultDialog("Import Deck", "Import failed: " + result.message);
-                } else {
-                    refreshDeckButtons();
-                    select(result.slot);
-                    showResultDialog("Import Deck", String.format("Imported '%s' into slot %d (%d cards purchased)",
-                        result.deckName, result.slot + 1, result.cardsAdded));
-                }
-            });
-        }));
-        modeDialog.button(Controls.newTextButton("Check only (report)", () -> {
-            removeDialog();
-            showFilePathDialog("Import Deck - File Path", path -> {
-                File file = CardUtil.resolveFilePath(path);
-                if (!file.exists()) {
-                    showResultDialog("Import Deck", "File not found: " + file.getAbsolutePath());
-                    return;
-                }
-                CardUtil.ImportResult result = CardUtil.importDeckFromFile(file, Current.player(), CardUtil.ImportMode.REPORT_ONLY);
-                showResultDialog("Import Deck", result.formatMissingReport());
-            });
-        }));
+        var loc = Forge.getLocalizer();
+        Dialog modeDialog = AdventureDialogUtil.buildImportDeckDialog(
+            loc.getMessage("lblAdvDeckImportIntro"),
+            loc.getMessage("lblAdvChooseImportMode"),
+            loc.getMessage("lblAdvDeckImportUseOwned"),
+            () -> {
+                removeDialog();
+                pickImportFile(CardUtil.ImportMode.REPORT_ONLY);
+            },
+            loc.getMessage("lblAdvDeckImportBuyMissing"),
+            () -> {
+                removeDialog();
+                pickImportFile(CardUtil.ImportMode.BUY_MISSING);
+            },
+            loc.getMessage("lblAdvDeckImportGiveMissing"),
+            () -> {
+                removeDialog();
+                pickImportFile(CardUtil.ImportMode.GIVE_MISSING);
+            },
+            this::removeDialog);
         showDialog(modeDialog);
     }
 
-    private void exportDeck() {
-        showFilePathDialog("Export Deck - Save Path", path -> {
-            File file = CardUtil.resolveFilePath(path);
-            try {
-                DeckSerializer.writeDeck(Current.player().getSelectedDeck(), file);
-                showResultDialog("Export Deck", "Saved deck to " + file.getAbsolutePath());
-            } catch (Exception e) {
-                showResultDialog("Export Deck", "Save failed: " + e.getMessage());
+    private void pickImportFile(CardUtil.ImportMode mode) {
+        var loc = Forge.getLocalizer();
+        AdventureFilePicker.chooseOpenFile(loc.getMessage("lblAdvImportDeck"), file -> {
+            if (!file.exists()) {
+                removeAllDialogs();
+                showOkDialog(loc.getMessage("lblAdvImportDeck"),
+                    loc.getMessage("lblAdvFileNotFound", file.getAbsolutePath()));
+                return;
             }
+            if (mode == CardUtil.ImportMode.BUY_MISSING) {
+                confirmBuyImport(file);
+            } else {
+                handleImportResult(CardUtil.importDeckFromFile(file, Current.player(), mode), mode);
+            }
+        });
+    }
+
+    private void confirmBuyImport(File file) {
+        var loc = Forge.getLocalizer();
+        String title = loc.getMessage("lblAdvImportDeck");
+        AdventurePlayer player = Current.player();
+        CardUtil.ImportPreview preview = CardUtil.previewImport(file, player);
+        if (preview == null) {
+            showOkDialog(title, loc.getMessage("lblAdvImportDeckFailed", "Could not parse file"));
+            return;
+        }
+        if (preview.missingCards.isEmpty()) {
+            handleImportResult(CardUtil.importDeckFromFile(file, player, CardUtil.ImportMode.BUY_MISSING),
+                CardUtil.ImportMode.BUY_MISSING);
+            return;
+        }
+        int gold = player.getGold();
+        if (!preview.canAfford(gold)) {
+            showOkDialog(title, loc.getMessage("lblAdvBuyNotEnoughGold",
+                preview.totalCost, gold));
+            return;
+        }
+        String message = loc.getMessage("lblAdvBuyConfirm",
+            preview.missingCopyCount(), preview.missingCards.size(),
+            preview.totalCost, gold);
+        Dialog confirm = AdventureDialogUtil.buildConfirmDialog(title, message,
+            loc.getMessage("lblOK"),
+            () -> {
+                removeDialog();
+                handleImportResult(CardUtil.importDeckFromFile(file, player, CardUtil.ImportMode.BUY_MISSING),
+                    CardUtil.ImportMode.BUY_MISSING);
+            },
+            this::removeDialog);
+        showDialog(confirm);
+    }
+
+    private void handleImportResult(CardUtil.ImportResult result, CardUtil.ImportMode mode) {
+        var loc = Forge.getLocalizer();
+        String title = loc.getMessage("lblAdvImportDeck");
+        if (!result.success) {
+            removeAllDialogs();
+            showOkDialog(title, loc.getMessage("lblAdvImportDeckFailed", result.message));
+            return;
+        }
+        if (result.importedDeck()) {
+            refreshDeckButtons();
+            select(result.slot);
+            showBriefToast(loc.getMessage("lblAdvImportDone"));
+            return;
+        }
+        showMissingCardsDialog(result);
+    }
+
+    private void exportDeck() {
+        String deckName = Current.player().getSelectedDeck().getName();
+        String baseName = deckName != null && !deckName.isEmpty() ? deckName : "deck";
+        var loc = Forge.getLocalizer();
+        chooseExportFormat(loc.getMessage("lblAdvExportDeck"), CardUtil.DeckListExportFormat.values(), format -> {
+            String defaultName = CardUtil.defaultSaveFilename(baseName, format.getDefaultExtension());
+            AdventureFilePicker.chooseSaveFile(loc.getMessage("lblAdvExportDeck"), defaultName, file -> {
+                try {
+                    CardUtil.exportDeck(Current.player().getSelectedDeck(), file, format);
+                    showSavedThenReturnToDeckList();
+                } catch (Exception e) {
+                    removeAllDialogs();
+                    showOkDialog(loc.getMessage("lblAdvExportDeck"),
+                        loc.getMessage("lblAdvMissingListSaveFailed", e.getMessage()));
+                }
+            });
         });
     }
 
     private void exportCollection() {
-        showFilePathDialog("Export Collection - Save Path", path -> {
-            File file = CardUtil.resolveFilePath(path);
-            try {
-                String arenaList = CardUtil.exportCollectionAsArena(Current.player());
-                FileUtil.writeFile(file, arenaList);
-                showResultDialog("Export Collection", String.format("Exported %d unique cards to %s (Arena format)",
-                    Current.player().getCards().countDistinct(), file.getAbsolutePath()));
-            } catch (Exception e) {
-                showResultDialog("Export Collection", "Export failed: " + e.getMessage());
-            }
+        var loc = Forge.getLocalizer();
+        chooseExportFormat(loc.getMessage("lblAdvExportCollection"), CardUtil.CollectionExportFormat.values(), format -> {
+            String defaultName = CardUtil.defaultSaveFilename("collection", format.getDefaultExtension());
+            AdventureFilePicker.chooseSaveFile(loc.getMessage("lblAdvExportCollection"), defaultName, file -> {
+                try {
+                    CardUtil.exportCollection(Current.player(), file, format);
+                    showSavedThenReturnToDeckList();
+                } catch (Exception e) {
+                    removeAllDialogs();
+                    showOkDialog(loc.getMessage("lblAdvExportCollection"),
+                        loc.getMessage("lblAdvMissingListSaveFailed", e.getMessage()));
+                }
+            });
         });
     }
 
     private void markForSale() {
-        showFilePathDialog("Mark for Sale - File Path", path -> {
-            File file = CardUtil.resolveFilePath(path);
+        var loc = Forge.getLocalizer();
+        AdventureFilePicker.chooseOpenFile(loc.getMessage("lblAdvMarkForSale"),
+            loc.getMessage("lblAdvMarkForSaleHelp"), file -> {
             if (!file.exists()) {
-                showResultDialog("Mark for Sale", "File not found: " + file.getAbsolutePath());
+                removeAllDialogs();
+                showOkDialog(loc.getMessage("lblAdvMarkForSale"),
+                    loc.getMessage("lblAdvFileNotFound", file.getAbsolutePath()));
                 return;
             }
             CardUtil.MarkSellResult result = CardUtil.markCardsForSale(file, Current.player());
             if (!result.success) {
-                showResultDialog("Mark for Sale", "Mark failed: " + result.message);
+                removeAllDialogs();
+                showOkDialog(loc.getMessage("lblAdvMarkForSale"),
+                    loc.getMessage("lblAdvMarkForSaleFailed", result.message));
             } else {
-                showResultDialog("Mark for Sale", String.format("Marked %d cards for sale (%d skipped: in decks/already marked/not owned)",
-                    result.marked, result.skipped));
+                showMarkForSaleResult(result);
             }
         });
     }
 
-    private void showFilePathDialog(String title, java.util.function.Consumer<String> onConfirm) {
-        filePathInput.setText("");
-        Dialog dialog = createGenericDialog(title, null,
-            Forge.getLocalizer().getMessage("lblOK"),
-            Forge.getLocalizer().getMessage("lblAbort"), () -> {
-                String path = filePathInput.getText();
+    private void showMarkForSaleResult(CardUtil.MarkSellResult result) {
+        var loc = Forge.getLocalizer();
+        String title = loc.getMessage("lblAdvMarkForSale");
+        String body = result.formatMarkedReport(loc.getMessage("lblAdvLoaded"));
+        ScrollPane[] scroll = new ScrollPane[1];
+        Runnable onRollback = result.rollbackOps.isEmpty() ? null : () -> {
+            result.rollback(Current.player());
+            removeDialog();
+            showBriefToast(loc.getMessage("lblAdvRolledBack"));
+        };
+        Dialog dialog = AdventureDialogUtil.buildScrollableOkDialog(title, body,
+            this::removeDialog, onRollback, scroll);
+        removeAllDialogs();
+        showDialog(dialog, scroll[0]);
+    }
+
+    private <T extends Enum<T>> void chooseExportFormat(String title, T[] formats, Consumer<T> onChosen) {
+        var loc = Forge.getLocalizer();
+        List<AdventureDialogUtil.ChoiceOption> options = new ArrayList<>(formats.length);
+        for (T format : formats) {
+            T chosen = format;
+            options.add(new AdventureDialogUtil.ChoiceOption(formatLabel(format), () -> {
                 removeDialog();
-                if (path != null && !path.trim().isEmpty()) {
-                    onConfirm.accept(path.trim());
-                }
-            }, this::removeDialog);
-        dialog.getContentTable().add(Controls.newLabel("File path:")).align(Align.left).colspan(2);
-        dialog.getContentTable().row();
-        dialog.getContentTable().add(filePathInput).fillX().expandX().colspan(2);
-        dialog.getContentTable().row();
+                onChosen.accept(chosen);
+            }));
+        }
+        Dialog dialog = AdventureDialogUtil.buildChoiceDialog(title,
+            loc.getMessage("lblAdvChooseExportFormat"), options, this::removeDialog);
         showDialog(dialog);
     }
 
+    private static String formatLabel(Enum<?> format) {
+        if (format instanceof CardUtil.DeckListExportFormat df) {
+            return df.getDisplayName();
+        }
+        if (format instanceof CardUtil.CollectionExportFormat cf) {
+            return cf.getDisplayName();
+        }
+        return format.name();
+    }
+
     private void showResultDialog(String title, String message) {
-        Dialog dialog = createGenericDialog(title, message,
-            Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
-        showDialog(dialog);
+        showDialog(AdventureDialogUtil.buildMessageDialog(title, message, this::removeDialog));
+    }
+
+    private void showOkDialog(String title, String message) {
+        var loc = Forge.getLocalizer();
+        showDialog(AdventureDialogUtil.buildMessageDialog(title, message,
+            loc.getMessage("lblOK"), this::removeDialog));
+    }
+
+    private void showSavedThenReturnToDeckList() {
+        showBriefToast(Forge.getLocalizer().getMessage("lblAdvSaved"));
+    }
+
+    private void showBriefToast(String message) {
+        removeAllDialogs();
+        showDialog(AdventureDialogUtil.buildTransientMessage(message));
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                Gdx.app.postRunnable(DeckSelectScene.this::removeDialog);
+            }
+        }, 3f);
+    }
+
+    private void showMissingCardsDialog(CardUtil.ImportResult result) {
+        var loc = Forge.getLocalizer();
+        String title = loc.getMessage("lblAdvImportDeck");
+        String body = result.formatMissingReport();
+        if (result.missingCards == null || result.missingCards.isEmpty()) {
+            showResultDialog(title, body);
+            return;
+        }
+        String safeName = result.deckName != null
+            ? result.deckName.replaceAll("[^a-zA-Z0-9._-]+", "_") : "deck";
+        String defaultFile = "missing_" + safeName + ".txt";
+        ScrollPane[] scroll = new ScrollPane[1];
+        Dialog dialog = AdventureDialogUtil.buildScrollableReportDialog(title, body,
+            loc.getMessage("lblSave"),
+            () -> {
+                removeDialog();
+                AdventureFilePicker.chooseSaveFile(title, defaultFile, file -> {
+                    try {
+                        forge.util.FileUtil.writeFile(file, body);
+                        showSavedThenReturnToDeckList();
+                    } catch (Exception e) {
+                        removeAllDialogs();
+                        showOkDialog(title, loc.getMessage("lblAdvMissingListSaveFailed",
+                            e.getMessage()));
+                    }
+                });
+            },
+            this::removeDialog, scroll);
+        showDialog(dialog, scroll[0]);
     }
 }
