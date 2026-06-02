@@ -62,19 +62,22 @@ public class DeckSelectScene extends UIScene {
 
         root.row();
         Table fileOpsTable = new Table();
-        float opsBtnH = AdventureDialogUtil.compactButtonHeight();
-        fileOpsTable.add(compactOpsButton(
-            Forge.getLocalizer().getMessage("lblAdvImportDeck"), this::importDeck, opsBtnH)).pad(1).expandX().fillX();
-        fileOpsTable.add(compactOpsButton(
-            Forge.getLocalizer().getMessage("lblAdvExportDeck"), this::exportDeck, opsBtnH)).pad(1).expandX().fillX();
+        fileOpsTable.defaults().pad(0.5f);
+        float opsBtnH = AdventureDialogUtil.deckSelectFileOpsButtonHeight();
+        fileOpsTable.add(deckSelectOpsButton(
+            Forge.getLocalizer().getMessage("lblAdvImportDeck"), this::importDeck, opsBtnH))
+            .height(opsBtnH).maxHeight(opsBtnH).expandX().fillX();
+        fileOpsTable.add(deckSelectOpsButton(
+            Forge.getLocalizer().getMessage("lblAdvExportDeck"), this::exportDeck, opsBtnH))
+            .height(opsBtnH).maxHeight(opsBtnH).expandX().fillX();
         fileOpsTable.row();
-        fileOpsTable.add(compactOpsButton(
+        fileOpsTable.add(deckSelectOpsButton(
             Forge.getLocalizer().getMessage("lblAdvExportCollection"), this::exportCollection, opsBtnH))
-            .pad(1).expandX().fillX();
-        fileOpsTable.add(compactOpsButton(
+            .height(opsBtnH).maxHeight(opsBtnH).expandX().fillX();
+        fileOpsTable.add(deckSelectOpsButton(
             Forge.getLocalizer().getMessage("lblAdvMarkForSale"), this::markForSale, opsBtnH))
-            .pad(1).expandX().fillX();
-        root.add(fileOpsTable).colspan(2).fillX();
+            .height(opsBtnH).maxHeight(opsBtnH).expandX().fillX();
+        root.add(fileOpsTable).colspan(2).fillX().padTop(1f);
 
         back = ui.findActor("return");
         edit = ui.findActor("edit");
@@ -205,9 +208,10 @@ public class DeckSelectScene extends UIScene {
         }
     }
 
-    private static TextraButton compactOpsButton(String text, Runnable onClick, float height) {
-        TextraButton button = Controls.newTextButton(text, onClick);
-        button.getTextraLabel().layout.setTargetWidth(Scene.getIntendedWidth() * 0.22f);
+    /** Compact file-op buttons under the deck scroll list (smaller than dialog option rows). */
+    private static TextraButton deckSelectOpsButton(String text, Runnable onClick, float height) {
+        TextraButton button = Controls.newTextButton("[%58]" + text, onClick);
+        button.getTextraLabel().layout.setTargetWidth(Scene.getIntendedWidth() * 0.2f);
         button.setHeight(height);
         return button;
     }

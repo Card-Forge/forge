@@ -85,6 +85,11 @@ public final class AdventureDialogUtil {
         return OPTION_ROW_MIN;
     }
 
+    /** Deck select screen: Import / Export / Mark-for-sale row (fits under scroll list). */
+    public static float deckSelectFileOpsButtonHeight() {
+        return fileListRowHeight();
+    }
+
     public static float compactFieldHeight() {
         return 13f;
     }
