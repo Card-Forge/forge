@@ -161,6 +161,7 @@ public final class CMatchUI
     private boolean allHands;
     private boolean showOverlay = true;
     private JPopupMenu openAbilityMenu;
+    private CardPanel lastClickedCardPanel;
 
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
 
@@ -765,6 +766,10 @@ public final class CMatchUI
         return panels;
     }
 
+    public void setLastClickedCardPanel(final CardPanel panel) {
+        lastClickedCardPanel = panel;
+    }
+
     /**
      * Find the card panel belonging to a card, bringing up the corresponding
      * window or tab if necessary.
@@ -1012,7 +1017,10 @@ public final class CMatchUI
             // TODO: do we need a user setting for the scrollCount?
             MenuScroller.setScrollerFor(menu, 8, 125, 3, 1);
 
-            final CardPanel panel = findCardPanel(hostCard);
+            // Prefer the panel the user clicked so the menu opens there if the card shows in multiple windows
+            final CardPanel panel = lastClickedCardPanel != null && lastClickedCardPanel.isShowing()
+                    && hostCard.equals(lastClickedCardPanel.getCard())
+                    ? lastClickedCardPanel : findCardPanel(hostCard);
             final Component menuParent;
             final int x, y;
             if (panel == null || !panel.isShowing()) {
