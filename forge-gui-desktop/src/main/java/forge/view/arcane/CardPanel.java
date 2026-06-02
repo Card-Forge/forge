@@ -387,7 +387,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
         if (innerBorder != null) {
             g2d.setColor(innerBorder);
-            if (noBorderPref) {
+            if (noBorderPref && !isSelected) {
                 final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
                 g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n, cornerSize + n);
             } else {
@@ -1015,7 +1015,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         // Card name overlay
         titleText.setText(CardTranslation.getTranslatedName(card.getCurrentState().getName()));
         // Screen readers can't tell if a card is tapped.
-        if (isPreferenceEnabled(FPref.UI_SR_OPTIMIZE)) {
+        if (isPreferenceEnabled(FPref.UI_SCREENREADER_OPTIMIZE)) {
                 if (this.isTapped()) {
                     titleText.getAccessibleContext().setAccessibleDescription("tapped");
                 } else {
