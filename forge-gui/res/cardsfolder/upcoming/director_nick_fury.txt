@@ -5,5 +5,6 @@ PT:2/4
 S:Mode$ ReduceCost | ValidCard$ Hero | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Hero spells you cast cost {1} less to cast.
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, look at the top four cards of your library. You may reveal a Hero card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.
 SVar:TrigDig:DB$ Dig | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Hero| RestRandomOrder$ True
+SVar:PlayMain1:TRUE
 DeckHints:Type$Hero
 Oracle:Hero spells you cast cost {1} less to cast.\nWhenever you attack, look at the top four cards of your library. You may reveal a Hero card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.
