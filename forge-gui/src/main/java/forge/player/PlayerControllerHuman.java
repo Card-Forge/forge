@@ -1384,7 +1384,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         for (String token : sa.getParam("TokenScript").split(",")) {
                             Card protoType = TokenInfo.getProtoType(token, sa, null);
                             for (String type : protoType.getType().getCreatureTypes()) {
-                                Integer count = typesInDeck.getOrDefault(type, 0);
                                 typesInDeck.merge(type, 1, Integer::sum);
                             }
                         }
@@ -1560,8 +1559,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private Set<CardView> cachedActionableCards;
 
     /** Push the actionable-card set to the GUI. Payment mode falls back to the
-     *  "playable mana ability" predicate; non-payment reuses {@link #cachedActionableCards}.
-     *  Gated on {@link FPref#UI_SHOW_ACTIONABLE_HIGHLIGHTS}. */
+     *  "playable mana ability" predicate; non-payment reuses {@link #cachedActionableCards}. */
     public void pushActionableCards(boolean paymentMode) {
         if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
             getGui().clearWeaklySelectable();
@@ -1600,17 +1598,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         getGui().clearWeaklySelectable();
     }
 
-    /** Push undeclared, legal attacker candidates.
-     *  Gated on {@link FPref#UI_SHOW_ACTIONABLE_HIGHLIGHTS}. */
-    public void pushAttackerCandidates(final Player attackingPlayer,
-            final forge.game.combat.Combat combat) {
+    /** Push undeclared, legal attacker candidates. */
+    public void pushAttackerCandidates(final Player attackingPlayer, final Combat combat) {
         if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
             getGui().clearWeaklySelectable();
             return;
         }
         final Set<CardView> result = Sets.newHashSet();
         for (final Card c : attackingPlayer.getCreaturesInPlay()) {
-            if (!forge.game.combat.CombatUtil.canAttack(c)) continue;
+            if (!CombatUtil.canAttack(c)) continue;
             // Drop already-declared attackers.
             if (combat != null && combat.isAttacking(c)) continue;
             result.add(c.getView());
@@ -1618,10 +1614,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         getGui().setWeaklySelectable(result);
     }
 
-    /** Push defenders that could block at least one current attacker.
-     *  Gated on {@link FPref#UI_SHOW_ACTIONABLE_HIGHLIGHTS}. */
-    public void pushBlockerCandidates(final Player defendingPlayer,
-            final forge.game.combat.Combat combat) {
+    /** Push defenders that could block at least one current attacker. */
+    public void pushBlockerCandidates(final Player defendingPlayer, final Combat combat) {
         if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
             getGui().clearWeaklySelectable();
             return;
@@ -1633,11 +1627,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final Iterable<Card> attackers = combat.getAttackers();
         for (final Card blocker : defendingPlayer.getCreaturesInPlay()) {
-            if (!forge.game.combat.CombatUtil.canBlock(blocker)) continue;
+            if (!CombatUtil.canBlock(blocker)) continue;
             // Only highlight if the blocker can block at least one live attacker.
             boolean canBlockSomething = false;
             for (final Card atk : attackers) {
-                if (forge.game.combat.CombatUtil.canBlock(atk, blocker, combat)) {
+                if (CombatUtil.canBlock(atk, blocker, combat)) {
                     canBlockSomething = true;
                     break;
                 }
