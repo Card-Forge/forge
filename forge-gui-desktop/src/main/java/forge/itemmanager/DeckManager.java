@@ -255,7 +255,6 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             }
         });
 
-
         GuiUtils.addMenuItem(menu, localizer.getMessage("lblSets") + "...", null, () -> {
             final DeckSetFilter existingFilter = getFilter(DeckSetFilter.class);
             if (existingFilter != null) {

@@ -37,6 +37,7 @@ public final class DisplayMenu {
         menu.add(getSubmenu_StackGroupPermanents());
         menu.add(getMenuItem_TokensSeparateRow());
         menu.add(getMenuItem_SeparateCombatStacks());
+        menu.add(getMenuItem_ActionableHighlights());
         return menu;
     }
 
@@ -107,6 +108,20 @@ public final class DisplayMenu {
             prefs.setPref(FPref.UI_SEPARATE_COMBAT_STACKS, enabled);
             prefs.save();
             relayoutFields();
+        });
+        return menuItem;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_ActionableHighlights() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedCheckBoxMenuItem menuItem = MenuUtil.createStayOpenSkinnedCheckBox(localizer.getMessage("cbShowActionableHighlights"));
+        menuItem.setToolTipText(localizer.getMessage("nlShowActionableHighlights"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS));
+        menuItem.addActionListener(e -> {
+            final boolean enabled = !prefs.getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
+            prefs.setPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, enabled);
+            prefs.save();
+            matchUI.repaintCardOverlays();
         });
         return menuItem;
     }

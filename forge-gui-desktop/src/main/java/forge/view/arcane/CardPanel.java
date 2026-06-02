@@ -375,11 +375,36 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             }
         }
 
-        if (matchUI.isSelectable(getCard())) { // White border for selectable cards to further highlight them
-            g2d.setColor(Color.WHITE);
-            final int ins = 1;
-            g2d.fillRoundRect(cardXOffset+ins, cardYOffset+ins, cardWidth-ins*2, cardHeight-ins*2, cornerSize-ins, cornerSize-ins);
+        // Inner highlight: white for fully selectable cards, the configured colour for
+        // actionable (weakly selectable) ones. With black borders enabled this sits in the
+        // border gap as a 1px inset; with borders disabled the card image fills the whole
+        // panel and would cover an inset, so draw it as an outset (like the frames above).
+        Color innerBorder = null;
+        if (matchUI.isSelectable(getCard())) {
+            innerBorder = Color.WHITE;
+        } else if (isPreferenceEnabled(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS) && matchUI.isWeaklySelectable(getCard())) {
+            innerBorder = parseActionableHighlightColor();
         }
+        if (innerBorder != null) {
+            g2d.setColor(innerBorder);
+            if (noBorderPref && !isSelected) {
+                final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+                g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n, cornerSize + n);
+            } else {
+                final int ins = 1;
+                g2d.fillRoundRect(cardXOffset + ins, cardYOffset + ins, cardWidth - ins * 2, cardHeight - ins * 2, cornerSize - ins, cornerSize - ins);
+            }
+        }
+    }
+
+    /** Pref is normalized to 6 hex chars on the write side; this just parses,
+     *  falling back to the FPref default if the stored value is malformed. */
+    private static Color parseActionableHighlightColor() {
+        String s = forge.model.FModel.getPreferences().getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR);
+        try {
+            if (s != null && s.length() == 6) return new Color(Integer.parseInt(s, 16));
+        } catch (NumberFormatException ignored) {}
+        return new Color(Integer.parseInt(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR.getDefault(), 16));
     }
 
     private void drawManaCost(final Graphics g, final ManaCost cost, final int deltaY) {

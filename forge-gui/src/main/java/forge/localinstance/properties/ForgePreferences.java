@@ -109,6 +109,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_TOKENS_IN_SEPARATE_ROW("false"),
         UI_SCALE_LARGER ("true"),
         UI_RENDER_BLACK_BORDERS ("true"),
+        UI_SHOW_ACTIONABLE_HIGHLIGHTS ("false"),
+        UI_ACTIONABLE_HIGHLIGHT_COLOR ("66CCFF"),
         UI_LARGE_CARD_VIEWERS ("false"),
         UI_RANDOM_ART_IN_POOLS ("true"),
         UI_COMPACT_PROMPT ("false"),

@@ -499,6 +499,18 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
+    public void setWeaklySelectable(final Iterable<CardView> cards) {
+        updateGameView();
+        send(ProtocolMethod.setWeaklySelectable, cards);
+    }
+
+    @Override
+    public void clearWeaklySelectable() {
+        updateGameView();
+        send(ProtocolMethod.clearWeaklySelectable);
+    }
+
+    @Override
     public void setPlayerAvatar(final LobbyPlayer player, final IHasIcon ihi) {
         // TODO Auto-generated method stub
     }
