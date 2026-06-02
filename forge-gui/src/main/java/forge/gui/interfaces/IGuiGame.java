@@ -266,13 +266,10 @@ public interface IGuiGame {
      * select-min hotkeys). Callers without a known range pass {@code (0, 0)}.
      */
     void setSelectables(Iterable<CardView> cards, int min, int max);
-
     void clearSelectables();
-
     boolean isSelecting();
 
     void setWeaklySelectable(final Iterable<CardView> cards);
-
     void clearWeaklySelectable();
 
     boolean isGamePaused();
