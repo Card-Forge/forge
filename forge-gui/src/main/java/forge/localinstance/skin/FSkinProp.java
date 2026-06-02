@@ -286,6 +286,7 @@ public enum FSkinProp {
     ICO_DOCK_MACRO_RECORD (new int[] {400, 1760, 80, 80}, PropType.ICON),
     ICO_DOCK_MACRO_PLAY   (new int[] {480, 1760, 80, 80}, PropType.ICON),
     ICO_DOCK_SETTINGS    (new int[] {560, 1760, 80, 80}, PropType.ICON),
+    ICO_DOCK_OFFERDRAW   (new int[] {0, 1840, 80, 80}, PropType.ICON),
 
     //choice-search-misc
     ICO_HDCHOICE     (new int[] {2, 1792, 128, 128}, PropType.BUTTONS),

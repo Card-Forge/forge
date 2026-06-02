@@ -58,6 +58,8 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DeclineScope;
+import forge.gamemodes.match.DrawOfferCoordinator;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
@@ -3592,6 +3594,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     }
                 }
             }
+        }
+    }
+
+    @Override
+    public void drawOfferAction(final DrawOfferMessage.Action action) {
+        switch (action) {
+            case OFFER -> DrawOfferCoordinator.offer(getGame(), player);
+            case ACCEPT -> DrawOfferCoordinator.respond(getGame(), player, true);
+            case DECLINE -> DrawOfferCoordinator.respond(getGame(), player, false);
         }
     }
 
