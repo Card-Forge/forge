@@ -58,6 +58,11 @@ public class GameLog extends Observable implements Serializable {
         this.notifyObservers();
     }
 
+    /** All entries in chronological (insertion) order — note {@link #getLogEntries} returns newest-first. */
+    public List<GameLogEntry> getAllEntries() {
+        return new ArrayList<>(log);
+    }
+
     /**
      * Gets the log entries below a certain level as a list.
      *
