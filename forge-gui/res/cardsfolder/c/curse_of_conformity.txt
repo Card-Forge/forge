@@ -3,5 +3,5 @@ ManaCost:4 W
 Types:Enchantment Aura Curse
 K:Enchant:Player
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.nonlegendary+EnchantedPlayerCtrl | SetPower$ 3 | SetToughness$ 3 | AddType$ Creature | RemoveCreatureTypes$ True | Description$ Nonlegendary creatures enchanted player controls have base power and toughness 3/3 and lose all creature types.
+S:Mode$ Continuous | Affected$ Creature.nonLegendary+EnchantedPlayerCtrl | SetPower$ 3 | SetToughness$ 3 | AddType$ Creature | RemoveCreatureTypes$ True | Description$ Nonlegendary creatures enchanted player controls have base power and toughness 3/3 and lose all creature types.
 Oracle:Enchant player\nNonlegendary creatures enchanted player controls have base power and toughness 3/3 and lose all creature types.
