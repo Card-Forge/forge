@@ -531,12 +531,8 @@ public class MatchController extends NetworkGuiGame {
         super.setWeaklySelectable(cards);
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if ( p.getCards(ZoneType.Battlefield) != null ) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
-                if ( p.getCards(ZoneType.Hand) != null ) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
         });
     }
@@ -546,12 +542,8 @@ public class MatchController extends NetworkGuiGame {
         super.clearWeaklySelectable();
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if ( p.getCards(ZoneType.Battlefield) != null ) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
-                if ( p.getCards(ZoneType.Hand) != null ) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
         });
     }
