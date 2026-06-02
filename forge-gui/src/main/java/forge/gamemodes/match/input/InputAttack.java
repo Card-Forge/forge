@@ -68,7 +68,6 @@ public class InputAttack extends InputSyncronizedBase {
 
     @Override
     public final void showMessage() {
-        getController().pushAttackerCandidates(playerAttacks, combat);
         setCurrentDefender(defenders.getFirst());
 
         if (currentDefender == null) {
