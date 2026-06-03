@@ -639,6 +639,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     );
                 }
                 addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e -> FDeckViewer.copyDeckToClipboard(deck)));
+                addItem(new FCheckBoxMenuItem(localizer.getMessage("lblGroupIdenticalCards"), getGroupIdenticalCards(), e -> toggleGroupIdenticalCards()));
                 boolean devMode = FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED);
                 if(!FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY) || devMode)
                     addItem(new FCheckBoxMenuItem(localizer.getMessage("cbEnforceDeckLegality"), shouldEnforceConformity(), e -> toggleConformity()));
@@ -701,6 +702,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             tags.add(DECK_TAG_SUPPRESS_CONFORMITY);
         if(getCatalogPage() != null)
             getCatalogPage().scheduleRefresh(); //Refresh to update commander options.
+    }
+
+    protected boolean getGroupIdenticalCards() {
+        return FModel.getPreferences().getPrefBoolean(FPref.UI_GROUP_IDENTICAL_CARDS);
+    }
+
+    protected void toggleGroupIdenticalCards() {
+        FModel.getPreferences().togglePrefBoolean(FPref.UI_GROUP_IDENTICAL_CARDS);
+
+        for (TabPage<FDeckEditor> tabPage  : tabPages) {
+            if (tabPage instanceof CardManagerPage cmp) {
+                cmp.cardManager.updateView(false, null);
+            }
+        }
     }
 
     protected void showDevAddCardDialog() {
@@ -2194,6 +2209,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         public DraftPackPage(CardManager cardManager) {
             super(cardManager, ItemManagerConfig.DRAFT_PACK, Localizer.getInstance().getMessage("lblPackN", String.valueOf(1)), FSkinImage.PACK);
             cardManager.setShowRanking(true);
+            cardManager.setAllowGroupIdentical(false);
         }
 
         @Override
