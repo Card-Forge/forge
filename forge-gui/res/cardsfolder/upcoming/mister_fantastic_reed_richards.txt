@@ -1,0 +1,9 @@
+Name:Mister Fantastic, Reed Richards
+ManaCost:3 U
+Types:Legendary Creature Human Scientist Hero
+PT:2/4
+K:Reach
+T:Mode$ ChangesZoneAll | ValidCards$ Card.token+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever one or more tokens you control enter, you may draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Ability$Token
+Oracle:Reach\nWhenever one or more tokens you control enter, you may draw a card.
