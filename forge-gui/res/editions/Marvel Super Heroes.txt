@@ -7,31 +7,196 @@ ScryfallCode=MSH
 
 [cards]
 2 U Agent Maria Hill @Jake Murray
+4 R Agent Phil Coulson @Marc Aspinall
+6 M Avengers Assemble! @Alex Horley-Orlandelli
 9 M Captain America, Super-Soldier @Anna Podedworna
+11 M Captain Marvel, Earth's Protector @Victor Adame Minguez
+17 U Invisible Woman, Sue Storm @Paolo Rivera
 21 M The Mind Stone @Volkan Baǵa
+23 M Monica Rambeau @Xabi Gaztelua & Marta Nael
+24 C Murdock's Crusade @Gal Or
 35 R The Sentry, Golden Guardian @Alexander Skripnikov
 47 U Attuma, Atlantean Warlord @Nanna Marie Steffensen
 49 M Bruce Banner @Tommy Arnold
+51 U Echo, Perceptive Prodigy @Jurijus Chitrovas
+62 M Kang the Conqueror @Peter Scanlan
+64 R Leader, Super-Genius @Anthony Devine
+65 R Loki, God of Mischief @Vilhelmas Banys
+66 U Mister Fantastic, Reed Richards @Rimas Valeikis
+68 M Multiversal Incursion @Lordigan
 69 M Namor the Sub-Mariner @Chris Rallis
+72 R Secret Invasion @Nino Is
+74 R S.H.I.E.L.D. Flying Car @Paulius Daščioras
+75 U Shuri, Wakandan Inventor @Wayne Wu
+80 M Tony Stark @Alexander Lozano
 87 R Baron Helmut Zemo @Wero Gallo
+90 R Construct a Cosmic Cube @Eugene Maslovski
+93 U Dark Deed @Lixin Yin
 95 M Doctor Doom @David Palumbo
 96 R Doom Reigns Supreme @Alexander Gering
+97 R Elektra, Daughter of the Hand @Bastien L. Deharme
+105 U The Masters of Evil @Bastien L. Deharme
+106 M M.O.D.O.K. @Simon Dominic
 112 U Ronin, Shadow Stalker @Lie Setiawan
 115 R Super-Skrull @Zoltan Boros
 117 R Thunderbolts Conspiracy @Lucio Parrillo
+135 C HULK SMASH! @Chris Rahn
+136 U Human Torch, Johnny Storm @Alexander Skripnikov
+138 U Iron Fist, Living Weapon @Erikas Perl
+146 M Mjölnir, Hammer of Thor @Wayne Reynolds
+147 U Photon Blast Barrage @Immanuela Crovius
 148 R Quicksilver, Brash Blur @Michael MacRae
+151 R The Scarlet Witch @Magali Villeneuve
+156 M Thor, God of Thunder @Jesper Ejsing
+164 U Doc Samson, Super Psychiatrist @Ryan Pancoast
+168 C Go Nuts! @Ignatius Budi
+170 U Hellcat, Undying Vigilante @Solan
+182 U Reptil, Dinomorpher @Paolo Parente
+190 U The Thing, Ben Grimm @Gintas Galvanauskas
+191 U Tigra, Feline Fury @Ben Harvey
+193 R The Unbeatable Squirrel Girl @Kim Dingwall
 197 R World War Hulk @Serena Malyon
+201 U Ant-Man, Colony Commander @Nathaniel Himawan
+203 R Armor Wars @Serena Malyon
+207 U Black Panther, Vanguard @Aniekan Udofia
+208 U Black Widow, Double Agent @Michael MacRae
+210 U Captain America, Living Legend @Smirtouille
 212 M The Coming of Galactus @Serena Malyon
+213 R Daredevil, Man Without Fear @Dan Brereton
+215 U Hulk, Gamma Goliath @Zezhou Chen
 216 U Iron Man, Master of Machines @John Tyler Christopher
+217 U Kang, Temporal Tyrant @David Szabo
+218 U Killmonger, Scourge of Wakanda @Sean Vo
+219 M King T'Challa @Aaron J. Riley & Eric Wilkerson
+220 R The Kingpin of Crime @Steve Morris
+221 U Madame Hydra @Pauline Voss
 223 R Moon Girl and Devil Dinosaur @Zezhou Chen
+224 R The Ruinous Wrecking Crew @Kevin Sidharta
+229 U Spider-Woman, Secret Agent @Pauline Voss
+231 R The Super Hero Civil War @Serena Malyon
+233 M Thanos, the Mad Titan @Björn Barends
 234 U Thor Odinson @Sean Vo
 240 R Wolverine, Fierce Fighter @Dan Brereton
+241 R Worlds Within Worlds @Michael MacRae
+243 R Arc Reactor @Maxim Ruabtsev
+251 M The Ten Rings @Arthur Yuan
+252 M Ultron, Artificial Malevolence @Nino Is
 255 R The Vision @Carissa Susilo
+264 R Dark Fortress @Arthur Yuan
+266 R Gathering Place @Pablo Mendoza
+267 R Gleaming Bastion @Arthur Yuan
+269 R Hidden Lair @Pavel Kolomeyets
+275 R Training Compound @Jonas De Ro
+277 L Plains @Marc Aspinall
+278 L Plains @Sylvia Liu
+279 L Island @Marc Aspinall
+280 L Island @Sylvia Liu
+281 L Swamp @Marc Aspinall
+282 L Swamp @Sylvia Liu
+283 L Mountain @Marc Aspinall
+284 L Mountain @Sylvia Liu
+285 L Forest @Marc Aspinall
+286 L Forest @Sylvia Liu
+287 L Plains @Domenico Cava
+288 L Plains @Jurijus Chitrovas
+289 L Island @Raymond Bonilla
+290 L Island @Rytis Sabaliauskas
+291 L Swamp @Eugene Maslovski
+292 L Swamp @Oliver Wetter
+293 L Mountain @Rockey Chen
+294 L Mountain @Pace Wilder
+295 L Forest @Domenico Cava
+296 L Forest @Rytis Sabaliauskas
+297 M Avengers Assemble! @Steve Ellis
+300 M Multiversal Incursion @Jim Cheung
+301 R Secret Invasion @Veronica Fish
+303 M Mjölnir, Hammer of Thor @Jim Cheung
 304 R World War Hulk @Steve Ellis
+305 R Armor Wars @Andrew Griffith
 307 M The Coming of Galactus @Veronica Fish
+308 R The Super Hero Civil War @Roberta Ingranata
+310 R Arc Reactor @Steve Ellis
+313 M The Ten Rings @Jim Cheung
+316 M Captain America, Super-Soldier @Annie Wu
+318 U Madame Hydra @Annie Wu
+320 U Mister Fantastic, Reed Richards @Leinil Francis Yu
+321 U Human Torch, Johnny Storm @Leinil Francis Yu
+322 U The Thing, Ben Grimm @Leinil Francis Yu
+323 U Invisible Woman, Sue Storm @Leinil Francis Yu
+324 R Daredevil, Man Without Fear @Kev Walker
+326 R Elektra, Daughter of the Hand @Kev Walker
+327 R The Kingpin of Crime @Kev Walker
+330 R Leader, Super-Genius @Adi Granov
+331 M Bruce Banner @Chris Bachalo & Adi Granov
+332 C HULK SMASH! @Adi Granov
+336 M Doctor Doom @Johan Grenier
+338 M Thor, God of Thunder @Johan Grenier
+339 M Mjölnir, Hammer of Thor @Johan Grenier
+341 M Avengers Assemble! @Johan Grenier
+342 M Captain Marvel, Earth's Protector @Johan Grenier
+343 R Loki, God of Mischief @Johan Grenier
+344 M Ultron, Artificial Malevolence @Johan Grenier
+345 M Monica Rambeau @Chris Bachalo & Johan Grenier
+346 M King T'Challa @Chris Bachalo & Johan Grenier
+350 M Tony Stark @Chris Bachalo & Johan Grenier
+352 M Captain America, Super-Soldier @Jim Cheung
+354 M Captain Marvel, Earth's Protector @Swayart
+356 M Monica Rambeau @Trevor Hairsine
+358 R The Sentry, Golden Guardian @Todd Nauck
+359 M Bruce Banner @Jim Cheung
+362 M Namor the Sub-Mariner @Todd Nauck
+363 M Tony Stark @Jim Cheung
+365 M Doctor Doom @Leonardo Vincent (Levinky)
+366 R Elektra, Daughter of the Hand @Leinil Francis Yu
+368 R The Scarlet Witch @Swayart
+369 M Thor, God of Thunder @Leinil Francis Yu
+371 R The Unbeatable Squirrel Girl @Swayart
+372 R Daredevil, Man Without Fear @Trevor Hairsine
+373 M King T'Challa @John Tyler Christopher
+374 R The Kingpin of Crime @Trevor Hairsine
+376 M Thanos, the Mad Titan @Trevor Hairsine
+378 R Wolverine, Fierce Fighter @Todd Nauck
+379 R The Vision @Trevor Hairsine
+380 R Dark Fortress @David Álvarez
+381 R Gathering Place @David Álvarez
+382 R Gleaming Bastion @David Álvarez
+383 R Hidden Lair @David Álvarez
+384 R Training Compound @David Álvarez
 385 M The Mind Stone @Madeline Boni
 386 M The Mind Stone @Leinil Francis Yu & Sunny Gho
 387 M Captain America, Super-Soldier @Jack Kirby & John Romita Sr.
 390 M Bruce Banner @Jack Kirby & Paul Reinman
 391 M Namor the Sub-Mariner @John Buscema & Sol Brodsky
+392 M Tony Stark @Johnny Craig
 394 M Doctor Doom @Larry Lieber & Vince Colletta
+395 R Elektra, Daughter of the Hand @Mike Deodato Jr.
+398 R Daredevil, Man Without Fear @Jack Kirby
+399 M King T'Challa @Jack Kirby
+400 M Thanos, the Mad Titan @Jen Bartel
+401 M Ultron, Artificial Malevolence @Sal Buscema & Sam Grainger
+402 R Agent Phil Coulson @Marc Aspinall
+403 M Kang the Conqueror @Peter Scanlan
+405 R Baron Helmut Zemo @Wero Gallo
+406 R Construct a Cosmic Cube @Eugene Maslovski
+407 R Doom Reigns Supreme @Alexander Gering
+408 M M.O.D.O.K. @Simon Dominic
+409 R Super-Skrull @Zoltan Boros
+421 R Moon Girl and Devil Dinosaur @Zezhou Chen
+422 R The Ruinous Wrecking Crew @Kevin Sidharta
+426 R Worlds Within Worlds @Michael MacRae
+431 R The Scarlet Witch @Julia Vasilyeva
+432 R Daredevil, Man Without Fear @Eric Deschamps
+433 L Plains @Marc Aspinall
+434 L Plains @Sylvia Liu
+435 L Island @Marc Aspinall
+436 L Island @Sylvia Liu
+437 L Swamp @Marc Aspinall
+438 L Swamp @Sylvia Liu
+439 L Mountain @Marc Aspinall
+440 L Mountain @Sylvia Liu
+441 L Forest @Marc Aspinall
+442 L Forest @Sylvia Liu
+445 U Mister Fantastic, Reed Richards @Rimas Valeikis
+449 U Captain America, Living Legend @Smirtouille
+450 U Kang, Temporal Tyrant @David Szabo
+451 U Madame Hydra @Pauline Voss

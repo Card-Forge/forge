@@ -13,12 +13,30 @@ ScryfallCode=MSC
 5 M Captain America, Team Leader @Mark Spears
 6 M Doctor Doom, King of Latveria @Nathaniel Himawan
 7 M T'Challa, the Black Panther @Eli Minaya
+33 R Iron Man, Armored Avenger @Carlos Dattoli
+54 R Lady Loki, Agent of Chaos @Marta Nael
+78 R Captain Marvel, Apex Avenger @Julie Bell
+81 M Director Nick Fury @Javier Charro
+85 R Kang Prime @Lixin Yin
+86 M Loki, the Deceiver @Alexander Mokhov
+89 R Okoye, Mighty and Adored @Aniekan Udofia
+95 M Shuri, the Black Panther @L.A. Draws
+97 R Storm, Queen of Wakanda @Pauline Voss
+105 R Heart-Shaped Herb @Andreia Ugrai
 119 R Vision, Synthezoid Avenger @Mark Spears
+460 R Vision, Synthezoid Avenger @Mark Spears
 626 R Iron Man, Bleeding Edge @Ryan Pancoast
 723 R Hit-Monkey @Peter Scanlan
 726 R Lucky the Pizza Dog @Rudy Siswanto
 741 M The Fantastic Four @Yasmine Putri
 793 U Dark Ritual @Nino Is
+875 M Invisible Woman @Erikas Perl
+876 M Mister Fantastic @Gintas Galvanauskas
+877 M Human Torch @Vilhelmas Banys
+878 M The Thing @Darius Zablockis
+879 M Captain America, Team Leader @Mark Spears
+880 M Doctor Doom, King of Latveria @Nathaniel Himawan
+881 M T'Challa, the Black Panther @Eli Minaya
 N.A. R Abomination, Irradiated Brute @
 N.A. R Absorbing Man and Titania @
 N.A. R Black Widow, Intel Expert @
