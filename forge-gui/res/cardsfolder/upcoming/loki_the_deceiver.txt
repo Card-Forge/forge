@@ -1,0 +1,13 @@
+Name:Loki, the Deceiver
+ManaCost:1 U B R
+Types:Legendary Creature God Sorcerer Villain
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, create a tapped and attacking token that's a copy of another target Villain you control, except it isn't legendary and it's an Illusion in addition to its other types. Sacrifice that token at the beginning of the next end step.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Villain.Other+YouCtrl | ValidTgtDesc$ another Villain you control | TokenTapped$ True | TokenAttacking$ True | AddTypes$ Illusion | AtEOT$ Sacrifice
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Villain.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigDraw | TriggerDescription$ Whenever one or more Villains you control deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:HasAttackEffect:TRUE
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Villain
+Oracle:Whenever Loki attacks, create a tapped and attacking token that's a copy of another target Villain you control, except it isn't legendary and it's an Illusion in addition to its other types. Sacrifice that token at the beginning of the next end step.\nWhenever one or more Villains you control deal combat damage to a player, draw a card.
