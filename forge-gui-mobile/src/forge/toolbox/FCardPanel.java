@@ -9,10 +9,13 @@ import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardStateName;
+import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.game.combat.CombatView;
 import forge.game.zone.ZoneType;
 import forge.gui.control.PlaybackSpeed;
 import forge.screens.match.MatchController;
+import forge.screens.match.ModernTheme;
 import forge.util.Utils;
 
 import static forge.assets.FSkin.getDefaultSkinFile;
@@ -170,12 +173,43 @@ public class FCardPanel extends FDisplayObject {
             transformAnimation.drawCard(g, card, x, y, w, h);
         } else {
             CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
+            drawCombatGlow(g, x, y, w, h);
             if (Forge.hasGamepad() && isHovered())
                 g.drawRect(3f, Color.LIME, x, y, w, h);
         }
         if (tapped) {
             g.endTransform();
         }
+    }
+
+    private static final Color ATTACKER_GLOW = new Color(1f, 0.38f, 0.15f, 1f);
+    private static final Color BLOCKER_GLOW = new Color(0.32f, 0.62f, 1f, 1f);
+
+    /** Modern theme only: draw a soft colored glow around creatures currently in combat
+     * (red-orange for attackers, blue for blockers) for Arena-style combat readability. */
+    private void drawCombatGlow(Graphics g, float x, float y, float w, float h) {
+        if (card == null || !ModernTheme.enabled()) {
+            return;
+        }
+        GameView gameView = MatchController.instance.getGameView();
+        if (gameView == null) {
+            return;
+        }
+        CombatView combat = gameView.getCombat();
+        if (combat == null) {
+            return;
+        }
+        Color glow;
+        if (combat.isAttacking(card)) {
+            glow = ATTACKER_GLOW;
+        } else if (combat.isBlocking(card)) {
+            glow = BLOCKER_GLOW;
+        } else {
+            return;
+        }
+        float r = w / 12f;
+        g.drawRoundRect(Utils.scale(3f), new Color(glow.r, glow.g, glow.b, 0.35f), x, y, w, h, r);
+        g.drawRoundRect(Utils.scale(1.5f), glow, x, y, w, h, r);
     }
 
     private class CardDestroyedAnimation extends ForgeAnimation {

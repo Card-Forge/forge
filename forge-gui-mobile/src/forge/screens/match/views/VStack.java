@@ -36,6 +36,7 @@ import forge.player.AutoYieldStore.TriggerDecision;
 import forge.player.PlayerZoneUpdates;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
+import forge.screens.match.ModernTheme;
 import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
@@ -362,13 +363,22 @@ public class VStack extends FDropDown {
 
             g.startClip(0, 0, w, getHeight()); //clip based on actual height
 
-            g.fillRect(isHovered() ? Color.GRAY : Color.BLACK, x, y, w, h); //draw rectangle for border
+            boolean modern = ModernTheme.enabled();
+            if (modern) {
+                g.fillRoundRect(isHovered() ? ModernTheme.accent() : ModernTheme.borderColor(), x, y, w, h, ModernTheme.cornerRadius(h)); //rounded border backing
+            } else {
+                g.fillRect(isHovered() ? Color.GRAY : Color.BLACK, x, y, w, h); //draw rectangle for border
+            }
 
             x += BORDER_THICKNESS;
             y += BORDER_THICKNESS;
             w -= 2 * BORDER_THICKNESS;
             h -= 2 * BORDER_THICKNESS;
-            g.fillRect(backColor, x, y, w, h);
+            if (modern) {
+                g.fillRoundRect(backColor, x, y, w, h, ModernTheme.cornerRadius(h));
+            } else {
+                g.fillRect(backColor, x, y, w, h);
+            }
 
             x += PADDING;
             y += PADDING;

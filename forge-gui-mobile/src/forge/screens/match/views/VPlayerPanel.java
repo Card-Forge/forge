@@ -25,6 +25,7 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
+import forge.screens.match.ModernTheme;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -513,7 +514,12 @@ public class VPlayerPanel extends FContainer {
             float top = selectedDisplayArea == null ? 0 : selectedDisplayArea.getTop();
             float h = selectedDisplayArea == null ? 0 : selectedDisplayArea.getHeight();
             float bottom = selectedDisplayArea == null ? 0 : selectedDisplayArea.getBottom();
-            g.fillRect(Forge.isHorizontalTabLayout() ? getAltDisplayAreaBackColor() : getDisplayAreaBackColor(), x - pad, top, w + pad, h + pad);
+            FSkinColor areaBack = Forge.isHorizontalTabLayout() ? getAltDisplayAreaBackColor() : getDisplayAreaBackColor();
+            if (ModernTheme.enabled()) {
+                g.fillRoundRect(areaBack, x - pad, top, w + pad, h + pad, ModernTheme.cornerRadius(h + pad));
+            } else {
+                g.fillRect(areaBack, x - pad, top, w + pad, h + pad);
+            }
             if (Forge.isHorizontalTabLayout())
                 g.drawLine(1, MatchScreen.getBorderColor(), x, isFlipped() ? bottom : top, x + w, isFlipped() ? bottom : top);
 
