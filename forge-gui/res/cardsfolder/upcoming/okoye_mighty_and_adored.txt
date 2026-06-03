@@ -1,0 +1,12 @@
+Name:Okoye, Mighty and Adored
+ManaCost:2 G U
+Types:Legendary Creature Human Warrior Hero
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When NICKNAME enters, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put a +1/+1 counter on target creature. Whenever that creature attacks the monarch this turn, it gains double strike and trample until end of turn.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Triggers$ TrigAttacks | RememberObjects$ Targeted | SpellDescription$ Whenever that creature attacks the monarch this turn, it gains double strike and trample until end of turn.
+SVar:TrigAttacks:Mode$ Attacks | ValidCard$ Creature.IsRemembered | Attacked$ Player.isMonarch | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever that creature attacks the monarch this turn, it gains double strike and trample until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Double Strike & Trample
+Oracle:When Okoye enters, you become the monarch.\nAt the beginning of combat on your turn, put a +1/+1 counter on target creature. Whenever that creature attacks the monarch this turn, it gains double strike and trample until end of turn.
