@@ -13,6 +13,7 @@ import forge.assets.TextRenderer;
 import forge.card.CardZoom;
 import forge.game.card.CardView;
 import forge.menu.FMagnifyView;
+import forge.screens.match.ModernTheme;
 import forge.toolbox.FButton;
 import forge.toolbox.FButton.Corner;
 import forge.toolbox.FContainer;
@@ -56,6 +57,8 @@ public class VPrompt extends FContainer {
         btnCancel.setSize(BTN_WIDTH, HEIGHT);
         btnOk.setCorner(Corner.BottomLeft);
         btnCancel.setCorner(Corner.BottomRight);
+        btnOk.setModernStyle(true);
+        btnCancel.setModernStyle(true);
         btnOk.setEnabled(false); //disable buttons until first input queued
         btnCancel.setEnabled(false);
     }
@@ -101,7 +104,11 @@ public class VPrompt extends FContainer {
 
     @Override
     protected void drawBackground(Graphics g) {
-        g.fillRect(getBackColor(), 0, 0, getWidth(), getHeight());
+        if (ModernTheme.enabled()) {
+            ModernTheme.drawSoftPanel(g, 0, 0, getWidth(), getHeight());
+        } else {
+            g.fillRect(getBackColor(), 0, 0, getWidth(), getHeight());
+        }
     }
     
     private class MessageLabel extends FDisplayObject {

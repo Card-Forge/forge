@@ -12,6 +12,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.game.phase.PhaseType;
+import forge.screens.match.ModernTheme;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.util.TextBounds;
@@ -184,26 +185,68 @@ public class VPhaseIndicator extends FContainer {
 
             //determine back color according to skip or active state of label
             if (yieldMarked) {
-                g.fillRect(YIELD_MARKER_COLOR, x, 0, w, h);
+                if (ModernTheme.enabled()) {
+                    float pad = Utils.scale(1.5f);
+                    float r = Math.min(Math.min(w, h - 2 * pad) * 0.4f, Utils.scale(8));
+                    g.fillRoundRect(YIELD_MARKER_COLOR, x, pad, w, h - 2 * pad, r);
+                } else {
+                    g.fillRect(YIELD_MARKER_COLOR, x, 0, w, h);
+                }
                 drawChevron(g, x, w, h);
                 // Skip the caption when marked — chevron replaces the phase abbreviation.
+            } else if (ModernTheme.enabled()) {
+                drawModernPip(g);
             } else {
-                FSkinColor backColor;
-                if (active && stopAtPhase) {
-                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED);
-                }
-                else if (!active && stopAtPhase) {
-                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED);
-                }
-                else if (active && !stopAtPhase) {
-                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_DISABLED);
-                }
-                else {
-                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
-                }
+                FSkinColor backColor = getStateColor();
                 g.fillRect(isHovered() ? backColor.brighter() : backColor, x, 0, w, h);
                 g.drawText(caption, isHovered() && font.canIncrease() ? font.increase() : font, Color.BLACK, x, 0, w, h, false, Align.center, true);
             }
+        }
+
+        /** Four-state phase color, shared by the classic and modern draw paths. */
+        private FSkinColor getStateColor() {
+            if (active && stopAtPhase) {
+                return Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED);
+            }
+            else if (!active && stopAtPhase) {
+                return Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED);
+            }
+            else if (active && !stopAtPhase) {
+                return Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_DISABLED);
+            }
+            else {
+                return Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
+            }
+        }
+
+        /** Modern look: a rounded pill per phase; the current phase glows in the accent color,
+         * phases flagged to stop at get an accent outline. Captions are kept for clarity. */
+        private void drawModernPip(final Graphics g) {
+            float pad = Utils.scale(1.5f);
+            float x = PADDING_X + pad;
+            float y = pad;
+            float w = getWidth() - 2 * (PADDING_X + pad);
+            float h = getHeight() - 2 * pad;
+            if (w <= 0 || h <= 0) {
+                return;
+            }
+            float r = Math.min(Math.min(w, h) * 0.4f, Utils.scale(8));
+
+            Color textColor;
+            if (active) {
+                g.fillRoundRect(ModernTheme.accent().alphaColor(0.30f), x - pad, y - pad, w + 2 * pad, h + 2 * pad, r + pad); //glow halo
+                g.fillRoundRect(ModernTheme.accent(), x, y, w, h, r);
+                textColor = FSkinColor.getHighContrastColor(ModernTheme.accent().getColor());
+            } else {
+                FSkinColor body = getStateColor().alphaColor(isHovered() ? 0.75f : 0.55f);
+                g.fillRoundRect(body, x, y, w, h, r);
+                textColor = Color.BLACK;
+            }
+            if (stopAtPhase) {
+                g.drawRoundRect(Utils.scale(1.5f), ModernTheme.accent().brighter(), x, y, w, h, r);
+            }
+            FSkinFont f = active && font.canIncrease() ? font.increase() : font;
+            g.drawText(caption, f, textColor, PADDING_X, 0, getWidth() - 2 * PADDING_X, getHeight(), false, Align.center, true);
         }
 
         private void drawChevron(final Graphics g, float x, float w, float h) {

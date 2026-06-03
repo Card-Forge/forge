@@ -488,6 +488,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         }
 
         // GRAPHICS OPTIONS TAB
+        lstSettings.addItem(new BooleanSetting(FPref.UI_MODERN_BATTLE_THEME,
+            Forge.getLocalizer().getMessage("lblModernBattleTheme"),
+            Forge.getLocalizer().getMessage("nlModernBattleTheme")), 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DISABLE_CARD_IMAGES,
             Forge.getLocalizer().getMessage("lblDisableCardImages"),
             Forge.getLocalizer().getMessage("nlDisableCardImages")) {
