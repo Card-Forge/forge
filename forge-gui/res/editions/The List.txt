@@ -1938,12 +1938,6 @@ FRF-152 C Ethereal Ambush @Lius Lasahido
 FRF-153 C Grim Contest @Phill Simmer
 FRF-157 R Silumgar, the Drifting Death @Steven Belledin
 FRF-163 R Scroll of the Masters @Lake Hurwitz
-FTKHM-21 C Tibalt, Cosmic Impostor Emblem @Yongjae Choi
-FTORI-12 C Jace, Telepath Unbound Emblem @Jaime Jones
-FTORI-13 C Liliana, Defiant Necromancer Emblem @Karla Ortiz
-FTORI-14 C Chandra, Roaring Flame Emblem @Eric Deschamps
-FTSOI-18 C Arlinn, Embraced by the Moon Emblem @Winona Nelson
-FTSTX-8 C Lukka, Wayward Bonder Emblem @Kieran Yanner
 FUT-12 R Magus of the Moat @John Avon
 FUT-17 U Spirit en-Dal @Daren Bader
 FUT-25 C Lumithread Field @Scott Altmann
