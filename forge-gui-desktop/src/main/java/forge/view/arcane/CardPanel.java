@@ -1015,7 +1015,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         // Card name overlay
         titleText.setText(CardTranslation.getTranslatedName(card.getCurrentState().getName()));
         // Screen readers can't tell if a card is tapped.
-        if (isPreferenceEnabled(FPref.UI_SR_OPTIMIZE)) {
+        if (isPreferenceEnabled(FPref.UI_SCREENREADER_OPTIMIZE)) {
                 if (this.isTapped()) {
                     titleText.getAccessibleContext().setAccessibleDescription("tapped");
                 } else {
