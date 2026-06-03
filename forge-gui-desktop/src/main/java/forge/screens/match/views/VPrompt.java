@@ -134,7 +134,7 @@ public class VPrompt implements IVDoc<CPrompt> {
 
         container.add(messageScroller, "span 2, w 10:100%, h 0:100%");
 
-        boolean largerButtons = prefs.getPrefBoolean(FPref.UI_FOR_TOUCHSCREN);
+        boolean largerButtons = prefs.getPrefBoolean(FPref.UI_TOUCHSCREEN_OPTIMIZE);
         String constraints = largerButtons ? "w 10:50%, h 40%:40%:60px" : "w 10:50%, hmin 24px";
         constraints += ", gaptop 2px!";
 
