@@ -1,0 +1,8 @@
+Name:Ronin, Shadow Stalker
+ManaCost:2 B
+Types:Legendary Creature Human Rogue Hero
+PT:3/3
+A:AB$ Mana | Cost$ PayLife<2> | Produced$ Any | Amount$ 2 | RestrictValid$ Spell.Equipment,Activated.Equip | ActivationLimit$ 1 | SpellDescription$ Add two mana of any one color. Spend this mana only to cast Equipment spells or activate equip abilities. Activate only once each turn.
+A:AB$ Pump | Cost$ T Sac<1/Equipment.Attached/an Equipment attached to NICKNAME> | ValidTgts$ Creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SorcerySpeed$ True | SpellDescription$ Target creature gets -4/-4 until end of turn. Activate only as a sorcery.
+DeckNeeds:Type$Equipment
+Oracle:Pay 2 life: Add two mana of any one color. Spend this mana only to cast Equipment spells or activate equip abilities. Activate only once each turn.\n{T}, Sacrifice an Equipment attached to Ronin: Target creature gets -4/-4 until end of turn. Activate only as a sorcery.
