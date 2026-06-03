@@ -1,0 +1,8 @@
+Name:Elektra, Daughter of the Hand
+ManaCost:2 B B
+Types:Legendary Creature Human Ninja Villain
+PT:3/3
+K:Sneak:1 B B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When NICKNAME enters, destroy target creature an opponent controls with power 3 or less.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl+powerLE3 | ValidTgtDesc$ creature an opponent controls with power 3 or less
+Oracle:Sneak {1}{B}{B} (You may cast this spell for {1}{B}{B} if you also return an unblocked attacker you control to hand during the declare blockers step. She enters tapped and attacking.)\nWhen Elektra enters, destroy target creature an opponent controls with power 3 or less.
