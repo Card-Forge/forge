@@ -1105,4 +1105,13 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     public String getTranslatedName() {
         return CardTranslation.getTranslatedName(this);
     }
+
+    public boolean isWorthy() {
+        CardTypeView type = getTypeWithChanges();
+        if (!type.isCreature() || !type.isLegendary() || type.hasSubtype("Villain")) {
+            return false;
+        }
+        ColorSet color = getCard().getColor(this);
+        return color.hasRed() || color.hasWhite();
+    }
 }

@@ -92,6 +92,8 @@ public class ForgeScript {
                 default:
                     return false;
             }
+        } else if (property.equals("Worthy")) {
+            return cardState.isWorthy();
         } else if (property.equals("Outlaw")) {
             return type.isOutlaw();
         } else if (property.equals("Party")) {
