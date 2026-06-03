@@ -5,9 +5,9 @@ PT:3/4
 K:Vigilance
 K:Haste
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouOwn | AffectedZone$ Library | MayLookAt$ You | Description$ Radar Sense — You may look at the top card of your library any time.
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigUnblockable | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you attack, you may exile the top card of your library. If that card is a Hero card, NICKNAME gets +2/+1 until end of turn. You may play that card this turn.
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you attack, you may exile the top card of your library. If that card is a Hero card, NICKNAME gets +2/+1 until end of turn. You may play that card this turn.
 SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPump
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +1 | ConditionDefined$ Remembered | ConditionPresent$ Hero | ConditionCompare$ GT0 | SubAbility$ DBEffect
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +1 | ConditionDefined$ Remembered | ConditionPresent$ Hero | ConditionCompare$ GT0 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
