@@ -218,6 +218,8 @@ public class ForgeScript {
             return sa.isPwAbility();
         } else if (property.equals("Aftermath")) {
             return sa.isAftermath();
+        } else if (property.equals("PowerUp")) {
+            return sa.isPowerUp();
         } else if (property.equals("MorphUp")) {
             return sa.isMorphUp();
         } else if (property.equals("ManifestUp")) {
