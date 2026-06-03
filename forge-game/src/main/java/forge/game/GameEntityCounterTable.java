@@ -87,11 +87,12 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         return result;
     }
 
-    public Map<GameEntity, Integer> filterTable(CounterType type, String valid, Card host, CardTraitBase sa) {
+    public Map<GameEntity, Integer> filterTable(CounterType type, String valid, String validSource, Card host, CardTraitBase sa) {
         return columnMap().entrySet().stream().filter(gm -> gm.getKey().isValid(valid, host.getController(), host, sa))
             .collect(Collectors.groupingBy(gm -> gm.getKey(),
-                    Collectors.flatMapping(gm -> gm.getValue().values().stream(),
-                            Collectors.summingInt(m -> m.getOrDefault(type, 0)))));
+                    Collectors.flatMapping(gm -> gm.getValue().entrySet().stream().
+                                    filter(e -> validSource == null || (e.getKey().isPresent() && e.getKey().get().isValid(validSource, host.getController(), host, sa))),
+                            Collectors.summingInt(m -> m.getValue().getOrDefault(type, 0)))));
     }
 
     public void triggerCountersPutAll(final Game game) {
