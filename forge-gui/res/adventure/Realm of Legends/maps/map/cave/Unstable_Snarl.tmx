@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="87">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Terramorphic Expanse&quot;, &quot;Rancorous Archaic&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJyllksOwjAMRFnS67CFNUI9K0fqunAMqJDFMMzYDlgaqYjYL/4k7XLa7ZambtNL96fOiZQvWsU5Ht7afmcsFvpynIzD4hyztbjuYvLvcGfBUuyoCbIvYp2rtcs1y9EJuZt1uY450qOYx47/9nxP+tllYq+v+29/19Ng8p5QcXbUvtScZz2baX3EVXx1ZqOH6N/lYp1UnatzyVy8P9Rsd7iVHDe0mphzwurMk1NY7GedPmPOtMdObmqd83V3mso3O+vuXcB5cn8j5279RuqsDP35blVrfu2n4uLsIbfqL57T7hxx7Go++H9VC+6d4sazYo7c+ZWwX8jN5jFT7JljVnnyPV19J6lZQItYbNX3kHp/KB5zVD0dt7MPZmd9wzo7G+W7szjKzfahlPn9w30AB/l31A==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztkksOgCAMBT2RCyFRTy5IvJsQf5W0UR8ENywmGsAOr9W0TWM9s8cIHPvuBdw3yw7dc0Jt6Q4otL5NqDN1/slgu3tGmpW6pV7E52LXoHhGvbk5l2v5Oz3RCy7OTbOjvmXPOuh33tOvMBeSNacXyRrPupSTm3UpJ9pzZKYcNvT7B+/X/2vy501in79mTXEHl1EbiBNxo/meZh3eOd+xntN5Zo7Rl7Mk/Q/O6q3e6r1YASr6U50=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzllMEOwiAMhnv3ZczYYcDR19HnE/ZMevIFZFka5wK2lBIT/ZMeRrZ+/RibHwD8pjB+kJdWj1xPbqSckoskUu4209jPnet5OqylyaXycPpcTpD5LW4u1gDEyu8Kc0v7eHcyX5vOXtjNT51nzNkDXPxn55po7PGvcHvmn7gtzMmU1yPxz251DePKwRmQGQszaXGvqX8wLz6HSXFr3i862wbPWr47vnOXaw0mxZ933LkDNzcD11eTvZS2L/dejq8Gp9aXev4JrQOokA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lm1uwyAMhvm/uzRZM2kagfzZfbbzBZIcqb3CjGY3jocJXdpXsoTCx4MN2DGmTsPZmIg2gfWdbgH6/XmdG08w5/Tb/njNr+8bYDTrOJJjLAcWC2aRHQU/aWTcsVnbM7SXZjt2QB9p3akrxyYgO+3RMi75pMm30N9ufXWCpcWLvgfyHbm2zfvENcOYBbnkq/RxVLjyO3FD+3esJmJKX+9RYPeRznos+MyZe+f5+aL3WXHPZ7CFnbkV8XGVTOKSSQVxzz3uQZPDM704Y65un62Jz097mHEPJW7Slzfm2/+fq82X71pyLzDneoCrzdfyilP2c0Q8b9gun1OfweV5I7C7Zp/MzSmw90U151HqIVe5Qr7i7+tIjkoa3tZ2BOZU4PL3VZMvcpI15bY25KWINmGOKuVLbR1NvKZw5szy4aLUlL11SO8VMSFmD745sFDwUZOMi8bluZ7eZ+L157Xe0J6isKkiFjX+8n+eyGqcjD2p5v1Wxbnb1kKqccSk+JOWCp9ruMQu/ZvlavAjuPfqKLf0Pn8AMGmgDg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="242" y="397.667" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="447.166" y="102.444">
+   <properties>
+    <property name="enemy" value="Lluwen"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="74.8337" y="167.5">
+   <properties>
+    <property name="enemy" value="Abigale"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="156.325" y="202.224">
+   <properties>
+    <property name="enemy" value="Sanar"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/treasure.tx" x="270.667" y="67.3333">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Magmablood Archaic&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Wildgrowth Archaic&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Abstruse Archaic&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Wandering Archaic&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Mana Confluence&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Transcendent Archaic&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="267.333" y="114">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Chaos Wand&quot;, &quot;Wandering Archaic&quot;, &quot;Unstable Amulet&quot;]
+}</property>
+    <property name="enemy" value="The Dawning Archaic"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="70"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/collision.tx" x="-0.833333" y="-16.6667" width="481" height="16"/>
+  <object id="69" template="../../../../common/maps/obj/collision.tx" x="479.667" y="0.9585" width="16" height="414.416"/>
+  <object id="70" template="../../../../common/maps/obj/collision.tx" x="-15.6667" y="0.458667" width="16" height="414.416"/>
+  <object id="71" template="../../../../common/maps/obj/collision.tx" x="-0.833333" y="401" width="481" height="16"/>
+  <object id="72" template="../../../../common/maps/obj/manashards.tx" x="344.333" y="89.9997"/>
+  <object id="73" template="../../../../common/maps/obj/manashards.tx" x="143.334" y="25.3333"/>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="349.583" y="199.167">
+   <properties>
+    <property name="enemy" value="Tam"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="256.667" y="238.667">
+   <properties>
+    <property name="enemy" value="Kirol"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/manashards.tx" x="446.667" y="78"/>
+  <object id="78" template="../../../../common/maps/obj/manashards.tx" x="10" y="34.6667"/>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="233.333" y="323.933" width="56.6667" height="16.1335" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Five Strixhaven students circle around a massive, horrifying archaic creature ahead, barely contained by shimmering snarls of raw mana. As you enter, they spare only a second to glance at you, not daring to risk losing their tenuous hold on the monster they're binding.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/manashards.tx" x="189.333" y="86"/>
+  <object id="82" template="../../../../common/maps/obj/manashards.tx" x="242.667" y="54"/>
+  <object id="83" template="../../../../common/maps/obj/manashards.tx" x="298" y="54"/>
+ </objectgroup>
+</map>
