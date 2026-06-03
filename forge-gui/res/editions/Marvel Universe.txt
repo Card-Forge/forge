@@ -46,16 +46,51 @@ ScryfallCode=MAR
 38 M Tangle @Humberto Ramos & Edgar Delgado
 39 M Alibou, Ancient Witness @Michael Turner & Mark Roslan ${"flavorName": "Iron Spider, Civil Warrior"}
 40 M Terminate @Mark Bagley & Randy Emberlin
+42 M Concerted Effort @Jack Kirby
 44 M Ephemerate @Mateus Manhanini
+45 M Final Showdown @John Buscema & Tom Palmer
+46 M Light of Promise @David Lopez
+48 M Return to the Ranks @Jack Kirby
+50 M Steelshaper's Gift @John Cassaday
+51 M Teferi's Protection @Jack Kirby ${"flavorName": "T'Challa's Protection"}
+52 M Counterspell @Adi Granov
 54 M Dig Through Time @Kael Ngu
 55 M Harbinger of the Seas @Michael Turner
 56 M Lord of Atlantis @Mike Mignola & Dave Stewart
+57 M Mechanized Production @
+59 M Reconnaissance Mission @Kaare Andrews
+60 M Show and Tell @John Buscema
+61 M Simulacrum Synthesizer @Jack Kirby
 63 M Dauthi Voidwalker @Adam Hughes ${"flavorName": "Widow-Making Infiltrator"}
-65 M Extinction Event @George Perez & Joe Rubinstein
+64 M Deadly Dispute @Mark Brooks
+65 M Extinction Event @George Pérez & Joe Rubinstein
+66 M Final Act @Jack Kirby
 67 M Massacre Girl @Bill Sienkiewicz ${"flavorName": "Elektra, Deadly Assassin"}
+68 M No Mercy @Jack Kirby
 69 M Chaos Warp @Joe Quesada & Danny Miki
+70 M Fiery Emancipation @Alex Ross
+72 M Monstrous Rage @
+73 M Seize the Day @David Mazzucchelli
+74 M Bedlam @Dave Cockrum & Irving Watanabe
+75 M Beast Within @Jack Kirby ${"flavorName": "Grimm Fate"}
+76 M Defense of the Heart @Nick Cardy
 77 M Force of Vigor @Alex Ross
 78 M Heroic Intervention @Bob Layton
 79 M Heroic Intervention @Jack Kirby & Don Heck
 80 M Heroic Intervention @Jack Kirby & Dick Ayers
+81 M Primal Vigor @John Buscema & Frank Giacoia
+83 M Steely Resolve @Dan Adkins
+84 M Unnatural Growth @Alex Ross
+85 M Anthem of Champions @John Romita Jr. & Bob Layton
+87 M Black Panther, Wakandan King @Brian Stelfreeze
+88 M Captain America, First Avenger @Carmen Carnero & Alejandro Sánchez
+89 M Escape to the Wilds @Alex Ross
+90 M Fight to the Death @Klaus Janson
+91 M Iron Man, Titan of Innovation @Jong-Ju Kim
+92 M Privileged Position @Mike Mayhew
+93 M Ravenous Tyrannosaurus @Jack Kirby
+94 M Storm, Force of Nature @Ken Lashley & Juan Fernandez
+95 M Sundering Growth @
+96 M Warleader's Call @George Pérez & Tom Smith
+97 M Wolverine, Best There Is @Tony S. Daniel & Rain Beredo
 98 M Horn of Greed @Winslow Mortimer & Mike Esposito
