@@ -1,0 +1,10 @@
+Name:Iron Man, Bleeding Edge
+ManaCost:3 U U
+Types:Legendary Artifact Creature Human Hero
+PT:3/5
+K:Flying
+T:Mode$ SpellCast | TriggerZones$ Battlefield | OptionalDecider$ You | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigCopy | ResolvedLimit$ 1 | OptionalDecider$ You | TriggerDescription$ Whenever you cast an artifact spell, you may copy it, except the copy isn't legendary. Do this only once each turn. (The copy becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | NonLegendary$ True
+DeckHas:Ability$Token
+DeckHints:Type$Artifact
+Oracle:Flying\nWhenever you cast an artifact spell, you may copy it, except the copy isn't legendary. Do this only once each turn. (The copy becomes a token.)
