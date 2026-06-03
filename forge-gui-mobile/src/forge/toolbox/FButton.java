@@ -15,6 +15,7 @@ import forge.assets.FSkinImage;
 import forge.gui.UiCommand;
 import forge.gui.interfaces.IButton;
 import forge.localinstance.skin.FSkinProp;
+import forge.screens.match.ModernTheme;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.TextBounds;
@@ -34,6 +35,7 @@ public class FButton extends FDisplayObject implements IButton {
     private FSkinColor foreColor = getDefaultForeColor();
     private boolean toggled = false;
     private boolean pressed = false;
+    private boolean modernStyle = false;
     private FEventHandler command;
 
     public enum Corner {
@@ -187,6 +189,12 @@ public class FButton extends FDisplayObject implements IButton {
         corner = corner0;
     }
 
+    /** Opt this button into the modern (rounded gradient) look when the Modern Battle Theme is on.
+     * Used by battle-screen buttons only, so shared widgets elsewhere keep the classic look. */
+    public void setModernStyle(boolean modernStyle0) {
+        modernStyle = modernStyle0;
+    }
+
     public void setCommand(FEventHandler command0) {
         command = command0;
     }
@@ -264,6 +272,19 @@ public class FButton extends FDisplayObject implements IButton {
         float y = 0;
         float w = getWidth();
         float h = getHeight();
+
+        if (modernStyle && ModernTheme.enabled()) {
+            float pad = Utils.scale(2);
+            boolean enabledLook = isEnabled() || isToggled();
+            ModernTheme.drawModernButton(g, pad, pad, w - 2 * pad, h - 2 * pad, pressed || isToggled(), enabledLook);
+            if (!StringUtils.isEmpty(text)) {
+                FSkinColor textColor = enabledLook
+                        ? FSkinColor.getStandardColor(FSkinColor.getHighContrastColor(ModernTheme.accent().getColor()))
+                        : ModernTheme.text().alphaColor(0.5f);
+                g.drawText(text, font, textColor, pad + PADDING, pad, w - 2 * (pad + PADDING), h - 2 * pad, false, Align.center, true);
+            }
+            return;
+        }
 
         float cornerButtonWidth = w / 2;
         float cornerButtonHeight = h * 1.5f;
