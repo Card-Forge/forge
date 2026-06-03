@@ -26,41 +26,7 @@ As mentioned in the opening section, we'll be partially implementing the **MSEM 
 
 > Note: The file's name don't matter, but it'll be easier to find it if you ever need to edit anything.
 
-Let's paste the following inside it:
-
-```
-[metadata]
-Code=MSEM_CHAMPIONS
-Name=MSEM Champions
-Date=2017-10-01
-Type=Custom
-
-[cards]
-7 M Master Chef
-33 M Golden Touch
-34 M Avatar of Basat
-35 M Exeunt
-62 M Unearth
-78 M Fox of the Orange Orchard
-78★ S Fox of the Orange Orchard
-107 M Inked Summoner
-107★ S Inked Summoner
-130 M Plains
-131 M Island
-132 M Swamp
-133 M Mountain
-134 M Forest
-
-[tokens]
-b_1_1_bird_flying
-b_3_3_cat_deathtouch
-b_5_5_golem_trample
-
-[CreatureTypes]
-Artist:Artists
-```
-
-Let's break it down.
+Let's break down the different sections for you to paste into it.
 
 ```
 [metadata]
@@ -106,7 +72,7 @@ Each line is as follow: `CollectorNumber Rarity CardName @ArtistName`.
 
 > Note: You can put the cards in the list even if they aren't scripted yet. Forge will skip over them.
 
-```text
+```
 [tokens]
 1 b_1_1_bird_flying
 2 b_3_3_cat_deathtouch
@@ -119,7 +85,7 @@ If you load the game with just file, you'll be able to see that Master Chef, Une
 
 Let's comment out Master Chef to avoid a name conflict with an existing MTG card:
 
-```text
+```
 [cards]
 #7 M Master Chef
 33 M Golden Touch

@@ -1,0 +1,9 @@
+Name:Hellcat, Undying Vigilante
+ManaCost:G G
+Types:Legendary Creature Human Hero
+PT:2/2
+K:Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When NICKNAME dies, return her to the battlefield under her owner's control with a +1/+1 counter on her. She loses all abilities and gains haste.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ P1P1 | StaticEffect$ Animate
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | RemoveAllAbilities$ True | AddKeyword$ Haste
+Oracle:Haste\nWhen Hellcat dies, return her to the battlefield under her owner's control with a +1/+1 counter on her. She loses all abilities and gains haste.
