@@ -1,0 +1,6 @@
+Name:Sturdy Shield
+ManaCost:no cost
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | Description$ Equipped creature gets +1/+2.
+K:Equip:2
+Oracle:Equipped creature gets +1/+2.\nEquip {2}
