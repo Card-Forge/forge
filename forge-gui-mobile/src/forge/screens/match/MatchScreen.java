@@ -413,7 +413,10 @@ public class MatchScreen extends FScreen {
                                         vPlayerPanel = getPlayerPanel(cardView.getOwner());
                                     if (vPlayerPanel != null) {
                                         boolean rotate = CardRendererUtils.needsRotation(cardView) && !Forge.magnifyShowDetails;
-                                        boolean inBattlefield = ZoneType.Battlefield.equals(cardView.getZone());
+                                        // A ghost's card is in exile, but it sits on the battlefield attached to its
+                                        // host, so position its preview like a battlefield card (on the host's side)
+                                        boolean inBattlefield = ZoneType.Battlefield.equals(cardView.getZone())
+                                                || (cardPanel instanceof CardAreaPanel cap && cap.isGhost());
                                         float mul = 0.45f;
                                         float div = inBattlefield ? cardPanel.isTapped() ? 2.7f : 2.4f : 1.6f;
                                         float adjX = rotate ? cardPanel.getWidth() / div : 0f;

@@ -91,6 +91,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbScaleLarger = new OptionsCheckBox(localizer.getMessage("cbScaleLarger"));
     private final JCheckBox cbRenderBlackCardBorders = new OptionsCheckBox(localizer.getMessage("cbRenderBlackCardBorders"));
     private final JCheckBox cbShowActionableHighlights = new OptionsCheckBox(localizer.getMessage("cbShowActionableHighlights"));
+    private final JCheckBox cbShowLinkedExileCards = new OptionsCheckBox(localizer.getMessage("cbShowLinkedExileCards"));
     private final FTextField txtActionableHighlightColor = new FTextField.Builder().ghostText("66CCFF").maxLength(6).build();
     private final JCheckBox cbLargeCardViewers = new OptionsCheckBox(localizer.getMessage("cbLargeCardViewers"));
     private final JCheckBox cbSmallDeckViewer = new OptionsCheckBox(localizer.getMessage("cbSmallDeckViewer"));
@@ -414,6 +415,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(getActionableHighlightColorPanel(), titleConstraints + ", h 26px!");
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlActionableHighlightColor")), descriptionConstraints);
+
+        pnlPrefs.add(cbShowLinkedExileCards, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlShowLinkedExileCards")), descriptionConstraints);
 
         pnlPrefs.add(cbLargeCardViewers, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLargeCardViewers")), descriptionConstraints);
@@ -826,6 +830,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbShowActionableHighlights() {
         return cbShowActionableHighlights;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbShowLinkedExileCards() {
+        return cbShowLinkedExileCards;
     }
 
     /** @return text field holding the hex color for actionable highlights */

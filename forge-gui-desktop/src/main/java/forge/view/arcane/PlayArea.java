@@ -34,6 +34,7 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.combat.CombatView;
 import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
@@ -82,6 +83,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private Map<Integer, Integer> combatAssignments = Collections.emptyMap();
     // Coalesces multiple invokeLater(doLayout) calls within a single EDT cycle.
     private boolean layoutPending;
+    // Ghost panel (a single card a permanent holds in exile), keyed by host card id; not in the battlefield model
+    private final Map<Integer, CardPanel> ghostPanels = new HashMap<>();
 
     // Computed in layout.
     private List<CardStackRow> rows = new ArrayList<>();
@@ -748,6 +751,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
+        if (panel.isGhost()) {
+            // Route to the exiled card's own path; the engine gates whether anything happens
+            getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
+            return;
+        }
         boolean isLocal = getMatchUI().isLocalPlayer(model);
         boolean selectAll = evt.isShiftDown();
         if (!selectAll && panel.getGroupCount() >= 2) {
@@ -939,6 +947,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         //as a last resort try to select attached panels not in stack
         for (CardPanel p : panel.getAttachedPanels()) {
+            if (p.isGhost()) {
+                continue; //ghosts cast only via a direct click, never through the host
+            }
             if (p.getStack() != stack) { //ensure same panel not checked more than once
                 if (selectCard(p, triggerEvent, selectEntireStack)) {
                     return true;
@@ -986,6 +997,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (final CardView card : toDelete) {
                 removeCardPanel(getCardPanel(card.getId()),false);
             }
+        }
+        for (final CardView card : toDelete) {
+            removeGhost(card.getId());
         }
 
         final List<CardView> toAdd = new ArrayList<>(modelCopy);
@@ -1059,6 +1073,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
 
+        if (reconcileGhosts(card, toPanel)) {
+            needLayoutRefresh = true;
+        }
+
         CardPanel attachedToPanel;
         if (card.getAttachedTo() != null) {
             if (card != card.getAttachedTo().getAttachedTo())
@@ -1096,6 +1114,69 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
         return needLayoutRefresh || tappedStateChanged;
+    }
+
+    // Ghosts aren't in the battlefield model, so they're created here; shown only when the permanent holds exactly one linked exile card
+    private boolean reconcileGhosts(final CardView card, final CardPanel toPanel) {
+        final CardView linked = FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_LINKED_EXILE_CARDS)
+                ? singleLinkedExileCard(card) : null;
+        final CardPanel existing = ghostPanels.get(card.getId());
+        if (linked == null) {
+            if (existing != null) {
+                removeGhost(card.getId());
+                return true;
+            }
+            return false;
+        }
+
+        boolean changed = false;
+        CardPanel ghost = existing;
+        if (ghost == null || ghost.getCard() == null || ghost.getCard().getId() != linked.getId()) {
+            if (ghost != null) {
+                remove(ghost);
+                ghost.dispose();
+            }
+            ghost = new CardPanel(getMatchUI(), linked);
+            ghost.setGhost(true);
+            ghostPanels.put(card.getId(), ghost);
+            add(ghost);
+            changed = true;
+        } else if (ghost.getParent() != this) {
+            add(ghost); // container was reset (e.g. clear()) while the map survived
+            changed = true;
+        }
+        ghost.setAttachedToPanel(toPanel);
+        toPanel.getAttachedPanels().add(ghost);
+        return changed;
+    }
+
+    // The one card this permanent holds in exile, or null if it holds none or more than one
+    private static CardView singleLinkedExileCard(final CardView card) {
+        final CardView prepared = card.getPreparedSpell();
+        final FCollectionView<CardView> untilLeaves = card.getUntilLeavesBattlefield();
+        if (prepared != null) {
+            return untilLeaves.isEmpty() ? prepared : null;
+        }
+        return untilLeaves.size() == 1 ? untilLeaves.iterator().next() : null;
+    }
+
+    private void removeGhost(final int hostId) {
+        final CardPanel ghost = ghostPanels.remove(hostId);
+        if (ghost != null) {
+            remove(ghost);
+            ghost.dispose();
+        }
+    }
+
+    public void refreshGhosts() {
+        FThreads.assertExecutedByEdt(true);
+        for (final CardPanel panel : new ArrayList<>(getCardPanels())) {
+            if (panel.getCard() != null) {
+                doUpdateCard(panel.getCard(), true);
+            }
+        }
+        doLayout();
+        repaint();
     }
 
     private enum RowType {

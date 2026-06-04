@@ -2,11 +2,14 @@ package forge.screens.match.views;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 import com.google.common.base.Supplier;
@@ -17,10 +20,13 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
 import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
+import forge.util.collect.FCollectionView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
@@ -32,6 +38,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     protected Supplier<List<CardView>> orderedCards = Suppliers.memoize(ArrayList::new);
     protected Supplier<List<CardAreaPanel>> cardPanels = Suppliers.memoize(ArrayList::new);
+    // Cards shown only as informational exile ghosts here, so the zoom carousel doesn't act on them
+    private final Supplier<Set<Integer>> infoGhostCardIds = Suppliers.memoize(HashSet::new);
     private boolean rotateCards180;
 
     public Iterable<CardView> getOrderedCards() {
@@ -161,6 +169,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         orderedCards.get().add(cardPanel.getCard());
+        if (cardPanel.isInfoGhost()) {
+            infoGhostCardIds.get().add(cardPanel.getCard().getId());
+        }
         cardPanel.setBounds(x, y, cardWidth, cardHeight);
 
         if (cardPanel.getNextPanelInStack() != null) { //add next panel in stack if needed
@@ -181,6 +192,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
         orderedCards.get().clear();
+        infoGhostCardIds.get().clear();
 
         float x = 0;
         float y = 0;
@@ -219,14 +231,21 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     public void setSelectedIndex(int index) {
         //just scroll card into view
         if (index < orderedCards.get().size()) {
-            final CardAreaPanel cardPanel = CardAreaPanel.get(orderedCards.get().get(index));
-            scrollIntoView(cardPanel);
+            final CardView card = orderedCards.get().get(index);
+            if (infoGhostCardIds.get().contains(card.getId())) {
+                return;
+            }
+            scrollIntoView(CardAreaPanel.get(card));
         }
     }
 
     @Override
     public void activate(int index) {
-        final CardAreaPanel cardPanel = CardAreaPanel.get(orderedCards.get().get(index));
+        final CardView card = orderedCards.get().get(index);
+        if (infoGhostCardIds.get().contains(card.getId())) {
+            return; //informational exile ghost: not actionable
+        }
+        final CardAreaPanel cardPanel = CardAreaPanel.get(card);
         //must invoke in game thread in case a dialog needs to be shown
         ThreadUtil.invokeInGameThread(() -> cardPanel.selectCard(false));
     }
@@ -263,6 +282,11 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         private List<CardAreaPanel> attachedPanels = new ArrayList<>();
         private CardAreaPanel nextPanelInStack, prevPanelInStack;
 
+        // CASTABLE = a prepared spell (tap to cast); INFO = a card exiled until this permanent leaves (inspect only)
+        public enum GhostKind { NONE, CASTABLE, INFO }
+        private static final Color GHOST_TINT = new Color(90 / 255f, 120 / 255f, 175 / 255f, 0.45f);
+        private GhostKind ghostKind = GhostKind.NONE;
+
         //use static get(card) function instead
         private CardAreaPanel(CardView card0) {
             super(card0);
@@ -274,6 +298,14 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         public CardAreaPanel getAttachedToPanel() {
             return attachedToPanel;
+        }
+
+        public boolean isGhost() {
+            return ghostKind != GhostKind.NONE;
+        }
+
+        public boolean isInfoGhost() {
+            return ghostKind == GhostKind.INFO;
         }
 
         public void setAttachedToPanel(final CardAreaPanel attachedToPanel0) {
@@ -339,6 +371,41 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             } else {
                 setAttachedToPanel(null);
             }
+
+            addLinkedExileGhosts(card);
+        }
+
+        // Fresh instances each refresh, never the shared CardAreaPanel cache (which the exile zone reuses)
+        private void addLinkedExileGhosts(final CardView card) {
+            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_LINKED_EXILE_CARDS)) {
+                return;
+            }
+            final CardView prepared = card.getPreparedSpell();
+            final FCollectionView<CardView> untilLeaves = card.getUntilLeavesBattlefield();
+            if (prepared != null) {
+                if (untilLeaves.isEmpty()) {
+                    attachedPanels.add(newGhost(prepared, GhostKind.CASTABLE));
+                }
+            } else if (untilLeaves.size() == 1) {
+                attachedPanels.add(newGhost(untilLeaves.iterator().next(), GhostKind.INFO));
+            }
+        }
+
+        private CardAreaPanel newGhost(final CardView ghostCard, final GhostKind kind) {
+            final CardAreaPanel ghost = new CardAreaPanel(ghostCard);
+            ghost.ghostKind = kind;
+            ghost.setAttachedToPanel(this);
+            return ghost;
+        }
+
+        private void drawGhostOverlay(Graphics g) {
+            final float padding = getPadding();
+            float w = getWidth() - 2 * padding;
+            final float h = getHeight() - 2 * padding;
+            if (w == h) {
+                w = h / ASPECT_RATIO;
+            }
+            g.fillRect(GHOST_TINT, padding, padding, w, h);
         }
 
         //clear and reset all pointers from this panel
@@ -416,6 +483,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             }
             //as a last resort try to select attached panels
             for (CardAreaPanel panel : attachedPanels) {
+                if (panel.isGhost()) {
+                    continue; //ghosts are selected only by a direct tap, never via the host
+                }
                 if (panel.selectCard(selectEntireStack)) {
                     Gdx.graphics.requestRendering();
                     return true;
@@ -538,6 +608,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 g.endTransform();
             } else {
                 super.draw(g);
+            }
+            if (ghostKind != GhostKind.NONE) {
+                drawGhostOverlay(g);
             }
         }
     }

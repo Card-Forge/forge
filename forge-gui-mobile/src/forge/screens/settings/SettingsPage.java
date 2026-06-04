@@ -257,6 +257,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS,
             Forge.getLocalizer().getMessage("cbShowActionableHighlights"),
             Forge.getLocalizer().getMessage("nlShowActionableHighlights")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_LINKED_EXILE_CARDS,
+            Forge.getLocalizer().getMessage("cbShowLinkedExileCards"),
+            Forge.getLocalizer().getMessage("nlShowLinkedExileCards")), 1);
         lstSettings.addItem(new HexColorSetting(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR,
             Forge.getLocalizer().getMessage("lblActionableHighlightColor"),
             Forge.getLocalizer().getMessage("nlActionableHighlightColor"),

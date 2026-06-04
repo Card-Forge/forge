@@ -103,6 +103,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         ZoneType.Flashback, new Color(80, 20, 100)
     );
     private static final Color DEFAULT_ZONE_COLOR = new Color(60, 60, 80);
+    private static final Color GHOST_TINT = new Color(90, 120, 175, 110);
 
     private final CMatchUI matchUI;
     private CardView card;
@@ -118,6 +119,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private OutlinedLabel damageText;
     private OutlinedLabel cardIdText;
     private boolean displayEnabled = true;
+    private boolean ghost; // faded stand-in for a card this permanent holds in exile
     private boolean isAnimationPanel;
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
     private boolean isSelected;
@@ -744,6 +746,17 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 }
             }
         }
+        if (ghost) {
+            drawGhostOverlay(g);
+        }
+    }
+
+    private void drawGhostOverlay(final Graphics g) {
+        final Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        final int cornerSize = Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
+        g2d.setColor(GHOST_TINT);
+        g2d.fillRoundRect(cardXOffset, cardYOffset, cardWidth, cardHeight, cornerSize, cornerSize);
     }
 
     private void drawZoneBanner(final Graphics g) {
@@ -1099,6 +1112,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     public final List<CardPanel> getAttachedPanels() {
         return attachedPanels;
+    }
+
+    public final boolean isGhost() {
+        return ghost;
+    }
+    public final void setGhost(final boolean ghost0) {
+        ghost = ghost0;
     }
 
     public final List<CardPanel> getStack() {

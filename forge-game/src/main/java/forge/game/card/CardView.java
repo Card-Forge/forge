@@ -786,6 +786,13 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.ExiledWith);
     }
 
+    public CardView getPreparedSpell() {
+        return get(TrackableProperty.PreparedSpell);
+    }
+    void updatePreparedSpell(Card c) {
+        set(TrackableProperty.PreparedSpell, CardView.get(c.getPreparedSpell()));
+    }
+
     public FCollectionView<CardView> getImprintedCards() {
         return Objects.requireNonNullElse(get(TrackableProperty.ImprintedCards), FCollection.getEmpty());
     }
