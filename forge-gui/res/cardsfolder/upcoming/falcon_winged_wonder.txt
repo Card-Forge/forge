@@ -1,0 +1,8 @@
+Name:Falcon, Winged Wonder
+ManaCost:4 U
+Types:Legendary Creature Human Hero
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Avian Telepathy — When NICKNAME enters, create Redwing, a legendary 1/1 blue Bird Scout creature token with flying and "Whenever Redwing attacks, surveil 1." (Look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigToken:DB$ Token | TokenScript$ redwing | TokenOwner$ You
+Oracle:Flying\nAvian Telepathy — When Falcon enters, create Redwing, a legendary 1/1 blue Bird Scout creature token with flying and "Whenever Redwing attacks, surveil 1." (Look at the top card of your library. You may put it into your graveyard.)
