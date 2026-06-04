@@ -1,0 +1,94 @@
+[metadata]
+Code=PMOA
+Date=2003-01-01
+Name=Magic Online Avatars
+ScryfallCode=PMOA
+Type=Other
+Foil=NotSupported
+
+[cards]
+1 R Serra Angel Avatar @UDON
+2 R Serra Angel Avatar @UDON
+5 R Goblin Warchief Avatar @UDON
+6 R Goblin Warchief Avatar @UDON
+7 R Stalking Tiger Avatar @UDON
+8 R Birds of Paradise Avatar @UDON
+9 R Fallen Angel Avatar @UDON
+14 R Flametongue Kavu Avatar @UDON
+17 R Prodigal Sorcerer Avatar @UDON
+18 R Prodigal Sorcerer Avatar @UDON
+27 R Erhnam Djinn Avatar @UDON
+28 R Erhnam Djinn Avatar @UDON
+29 R Grinning Demon Avatar @UDON
+30 R Grinning Demon Avatar @UDON
+31 R Phage the Untouchable Avatar @UDON
+33 R Akroma, Angel of Wrath Avatar @UDON
+34 R Karona, False God Avatar @UDON
+36 R Two-Headed Giant of Foriys Avatar @UDON
+37 R Elvish Champion Avatar @UDON
+38 R Royal Assassin Avatar @UDON
+39 R Bosh, Iron Golem Avatar @UDON
+40 R Platinum Angel Avatar @UDON
+41 R Viridian Zealot Avatar @UDON
+42 R Arcbound Overseer Avatar @UDON
+43 R Raksha Golden Cub Avatar @UDON
+44 R Etched Oracle Avatar @UDON
+45 R Eight-and-a-Half-Tails Avatar @UDON
+46 R Seshiro the Anointed Avatar @UDON
+47 R Higure, the Still Wind Avatar @UDON
+48 R Ink-Eyes, Servant of Oni Avatar @UDON
+49 R Sakashima the Impostor Avatar @UDON
+50 R Oni of Wild Places Avatar @UDON
+51 R Hell's Caretaker Avatar @UDON
+52 R Maro Avatar @UDON
+53 R Frenetic Efreet Avatar @UDON
+54 R Loxodon Hierarch Avatar @UDON
+55 R Sisters of Stone Death Avatar @UDON
+56 R Rumbling Slum Avatar @UDON
+57 R Teysa, Orzhov Scion Avatar @UDON
+58 R Nekrataal Avatar @UDON
+59 R Chronatog Avatar @UDON
+60 R Lyzolda, the Blood Witch Avatar @UDON
+61 R Momir Vig, Simic Visionary Avatar @UDON
+61a R Momir Vig, Simic Visionary Avatar @UDON
+62 R Haakon, Stromgald Scourge Avatar @UDON
+63 R Diamond Faerie Avatar @UDON
+64 R Jaya Ballard Avatar @UDON
+65 R Stuffy Doll Avatar @UDON
+66 R Braids, Conjurer Adept Avatar @UDON
+67 R Mirri the Cursed Avatar @UDON
+68 R Heartwood Storyteller Avatar @UDON
+69 R Jhoira of the Ghitu Avatar @UDON
+70 R Arcanis, the Omnipotent Avatar @UDON
+71 R Squee, Goblin Nabob Avatar @UDON
+72 R Dakkon Blackblade Avatar @UDON
+73 R Ashling the Pilgrim Avatar @UDON
+74 R Mirror Entity Avatar @UDON
+75 R Peacekeeper Avatar @UDON
+76 R Morinfen Avatar @UDON
+77 R Stonehewer Giant Avatar @UDON
+78 R Maralen of the Mornsong Avatar @UDON
+79 R Reaper King Avatar @UDON
+80 R Murderous Redcap Avatar @UDON
+81 R Ashling, the Extinguisher Avatar @UDON
+82 R Figure of Destiny Avatar @UDON
+83 R Necropotence Avatar @UDON
+84 R Orcish Squatters Avatar @UDON
+85 R Rith, the Awakener Avatar @UDON
+86 R Mayael the Anima Avatar @UDON
+87 R Kresh the Bloodbraided Avatar @UDON
+88 R Eladamri, Lord of Leaves Avatar @UDON
+89 R Tradewind Rider Avatar @UDON
+90 R Malfegor Avatar @UDON
+91 R Maelstrom Archangel Avatar @UDON
+92 R Sliver Queen Avatar @UDON
+93 R Hermit Druid Avatar @UDON
+94 R Dauntless Escort Avatar @UDON
+95 R Enigma Sphinx Avatar @UDON
+96 R Master of the Wild Hunt Avatar @UDON
+97 R Vampire Nocturnus Avatar @UDON
+104 R Tradewind Rider Avatar @UDON
+105 R Royal Assassin Avatar @UDON
+106 R Rith, the Awakener Avatar @UDON
+107 R Birds of Paradise Avatar @UDON
+108 R Platinum Angel Avatar @UDON
