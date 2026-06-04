@@ -1,0 +1,8 @@
+Name:The Thing, Ben Grimm
+ManaCost:5 G
+Types:Legendary Creature Human Hero
+PT:7/7
+K:Trample
+T:Mode$ DamageDoneOnce | ValidSource$ Hero.YouCtrl | ValidTarget$ Player | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Heroes you control deal damage to a player, put two +1/+1 counters on NICKNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+Oracle:Trample\nWhenever one or more Heroes you control deal damage to a player, put two +1/+1 counters on The Thing.
