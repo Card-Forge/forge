@@ -129,7 +129,9 @@
 {
    &quot;text&quot;: &quot;Five Strixhaven students circle around a massive, horrifying archaic creature ahead, barely contained by shimmering snarls of raw mana. As you enter, they spare only a second to glance at you, not daring to risk losing their tenuous hold on the monster they're binding.
 
-Your manasight stone glows, sensing the power of the legends here.&quot;,
+Your manasight stone glows, sensing the power of the legends here.
+
+BEWARE: The monster ahead is not subject to usual card limits.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
