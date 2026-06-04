@@ -2714,6 +2714,99 @@
       ]
     }
   },
+  {
+    "name": "Team Pennant",
+    "description": "Equip 3 or Equip token 1. +1/+1, vigilance, and trample.",
+    "equipmentSlot": "Right",
+    "iconName": "TeamPennant",
+    "effect": {
+      "startBattleWithCard": [
+        "Team Pennant"
+      ]
+    }
+  },
+  {
+    "name": "Referee's Shoes",
+    "description": "2/1, gets a +1/+1 counter when you cast a multicolored spell.",
+    "equipmentSlot": "Boots",
+    "iconName": "Referee'sShoes",
+    "effect": {
+      "lifeModifier": -2,
+      "startBattleWithCard": [
+        "Mage Tower Referee"
+      ]
+    }
+  },
+  {
+    "name": "Girlfriend's Skirt",
+    "description": "2/2 lesbians w/ first strike. When opp. has more cards, prepare a date.",
+    "equipmentSlot": "Boots",
+    "iconName": "Girlfriend'sSkirt",
+    "effect": {
+      "lifeModifier": -2,
+      "startBattleWithCard": [
+        "Joined Researchers"
+      ]
+    }
+  },
+  {
+    "name": "Leech Breeches",
+    "description": "2/2. When you gain life 1st time, prepare: B: Opp loses 2 life.",
+    "equipmentSlot": "Boots",
+    "iconName": "LeechBreeches",
+    "effect": {
+      "startBattleWithCard": [
+        "Leech Collector"
+      ]
+    }
+  },
+  {
+    "name": "Chaos Wand",
+    "description": "4, T: Cast a random instant/sorcery from opp's deck.",
+    "equipmentSlot": "Right",
+    "iconName": "ChaosWand",
+    "effect": {
+      "startBattleWithCard": [
+        "Chaos Wand"
+      ]
+    }
+  },
+  {
+    "name": "Bear Helm",
+    "description": "1G, exile 2 cards from your yard: Create a 2/2 bear. The bear is gay.",
+    "equipmentSlot": "Neck",
+    "iconName": "BearHelm",
+    "effect": {
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+        "Bearscape|SLD|[1008]"
+      ]
+    }
+  },
+  {
+    "name": "Alesha's War Skirt",
+    "description": "3/2 transfem legend w/ first strike. On atk, pay B/W B/W to revive 2< power attacking.",
+    "equipmentSlot": "Boots",
+    "iconName": "Alesha'sWarSkirt",
+    "effect": {
+      "lifeModifier": -3,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Alesha, Who Smiles at Death"
+      ]
+    }
+  },
+  {
+    "name": "Acolyte's Anklet",
+    "description": "2/2 trans guy, pay 2 and discard to specialize into a variety of forms.",
+    "equipmentSlot": "Boots",
+    "iconName": "Acolyte'sAnklet",
+    "effect": {
+      "startBattleWithCard": [
+        "Klement, Novice Acolyte"
+      ]
+    }
+  },
     {
     "name": "Mask of Compulsion",
     "description": "1U and discard to draw or 1U and sac to draw",

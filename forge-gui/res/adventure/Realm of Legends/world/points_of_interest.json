@@ -1416,6 +1416,30 @@
 			"Story"]
 	},
 	{
+		"name": "Strixhaven Stadium",
+		"displayName": "Strixhaven Stadium",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building94",
+		"map": "../Realm of Legends/maps/map/cave/Strixhaven_Stadium.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Unstable Snarl",
+		"displayName": "Unstable Snarl",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Snarl",
+		"map": "../Realm of Legends/maps/map/cave/Unstable_Snarl.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Black Castle",
 		"displayName": "Fallen Black Castle",
 		"type": "castle",
