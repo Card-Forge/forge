@@ -2,7 +2,7 @@ Name:Nick Fury, Agent of S.H.I.E.L.D.
 ManaCost:W
 Types:Legendary Creature Human Spy Hero
 PT:2/1
-A:AB$ PutCounter | Cost$ W U B R G | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | PowerUp$ True | SubAbility$ TrigDig | SpellDescription$ Put two +1/+1 counters on Nick Fury, then look at the top seven cards of your library. You may put a Hero, Equipment, or Vehicle card from among them onto the battlefield. If it's a double-faced card, you may transform it. Put the rest on the bottom of your library in a random order. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+A:AB$ PutCounter | Cost$ W U B R G | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | PowerUp$ True | SubAbility$ TrigDig | SpellDescription$ Put two +1/+1 counters on NICKNAME, then look at the top seven cards of your library. You may put a Hero, Equipment, or Vehicle card from among them onto the battlefield. If it's a double-faced card, you may transform it. Put the rest on the bottom of your library in a random order. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
 SVar:TrigDig:DB$ Dig | DigNum$ 7 | ChangeNum$ 1 | ChangeValid$ Hero,Equipment,Vehicle | Optional$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | RememberChanged$ True | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.DoubleFaced | Mode$ Transform | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
