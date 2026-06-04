@@ -8,7 +8,6 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.toolbox.FDisplayObject;
@@ -19,23 +18,23 @@ public class FMenuTab extends FDisplayObject {
     boolean iconOnly = false;
     boolean active = false;
     private static FSkinColor getSelBackColor() {
-        if (Forge.isMobileAdventureMode)
-            return FSkinColor.get(Colors.ADV_CLR_ACTIVE);
-        return FSkinColor.get(Colors.CLR_ACTIVE);
+        return FSkinColor.getStandardColor(52, 58, 64);
     }
+
     private static FSkinColor getSelBorderColor() {
-        return FDropDown.getBorderColor();
+        return FSkinColor.getStandardColor(78, 86, 94);
     }
+
     private static FSkinColor getSelForeColor() {
-        if (Forge.isMobileAdventureMode)
-            return FSkinColor.get(Colors.ADV_CLR_TEXT);
-        return FSkinColor.get(Colors.CLR_TEXT);
+        return FSkinColor.getStandardColor(235, 238, 240);
     }
+
     private static FSkinColor getForeColor() {
-        return getSelForeColor().alphaColor(0.5f);
+        return FSkinColor.getStandardColor(170, 176, 182);
     }
+
     private static FSkinColor getSeparatorColor() {
-        return getSelForeColor().alphaColor(0.3f);
+        return FSkinColor.getStandardColor(0, 0, 0).alphaColor(0f);
     }
     public static final float PADDING = Utils.scale(2);
     private static final float SEPARATOR_WIDTH = Utils.scale(1);
@@ -144,41 +143,35 @@ public class FMenuTab extends FDisplayObject {
 
         FSkinColor foreColor;
         if (dropDown.isVisible()) {
-            x = PADDING; //round so lines show up reliably
+            x = PADDING;
             y = PADDING;
             w = getWidth() - 2 * x + 1;
             h = getHeight() - y + 1;
 
             g.startClip(x, y, w, h);
-            g.fillRect(getSelBackColor(), x, y, w, h);
-            g.drawRect(2, getSelBorderColor(), x, y, w, h);
+            g.fillRect(FSkinColor.getStandardColor(52, 58, 64), x, y, w, h);
             g.endClip();
 
-            foreColor = getSelForeColor();
+            foreColor = FSkinColor.getStandardColor(235, 238, 240);
         }
-        else { 
-            foreColor = getForeColor();
-        }
-
-        //draw right separator
-        if (index < menuBar.getTabCount() - 1) {
-            x = getWidth();
-            y = getHeight() / 4;
-            g.drawLine(SEPARATOR_WIDTH, getSeparatorColor(), x, y, x, getHeight() - y);
+        else {
+            foreColor = FSkinColor.getStandardColor(170, 176, 182);
         }
 
         x = PADDING;
         y = PADDING;
         w = getWidth() - 2 * PADDING;
         h = getHeight() - 2 * PADDING;
-        if (isHovered())
-            g.fillRect(getSelBackColor().brighter(), x, y, w, h);
 
-        //flash overlay while a recent unread message highlights the tab
+        if (isHovered()) {
+            g.fillRect(FSkinColor.getStandardColor(66, 72, 78), x, y, w, h);
+            foreColor = FSkinColor.getStandardColor(235, 238, 240);
+        }
+
         if (flashStartMs > 0) {
             long elapsed = System.currentTimeMillis() - flashStartMs;
             if (elapsed < FLASH_DURATION_MS) {
-                float alpha = 0.55f * (1f - (float) elapsed / FLASH_DURATION_MS);
+                float alpha = 0.45f * (1f - (float) elapsed / FLASH_DURATION_MS);
                 g.fillRect(BADGE_COLOR.alphaColor(alpha), x, y, w, h);
                 Gdx.graphics.requestRendering();
             } else {
@@ -187,15 +180,13 @@ public class FMenuTab extends FDisplayObject {
         }
 
         if (iconOnly) {
-            float mod = w * 0.75f;
             FImage icon = active ? FSkinImage.SEE : FSkinImage.UNSEE;
-            float scaleW = w * 0.8f;
+            float scaleW = w * 0.76f;
             float scaleH = scaleW * 0.6f;
             g.drawImage(icon, x + w/2 - scaleW/2, y + h/2 - scaleH/2, scaleW, scaleH);
         } else
             g.drawText(text, FONT, foreColor, x, y, w, h, false, Align.center, true);
 
-        //unread badge in the top-right corner
         if (unreadCount > 0) {
             String label = unreadCount > 99 ? "99+" : Integer.toString(unreadCount);
             float textW = BADGE_FONT.getBounds(label).width;

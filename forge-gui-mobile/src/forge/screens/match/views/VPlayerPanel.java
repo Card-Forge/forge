@@ -504,41 +504,17 @@ public class VPlayerPanel extends FContainer {
     @Override
     public void drawBackground(Graphics g) {
         float y;
-        InfoTab infoTab = selectedTab;
-        float pad = Forge.isHorizontalTabLayout() ? avatarWidth / 16f : 0f;
-        if (infoTab != null) { //draw background and border for selected zone if needed
-            VDisplayArea selectedDisplayArea = infoTab.getDisplayArea();
-            float x = selectedDisplayArea == null ? 0 : selectedDisplayArea.getLeft();
-            float w = selectedDisplayArea == null ? 0 : selectedDisplayArea.getWidth();
-            float top = selectedDisplayArea == null ? 0 : selectedDisplayArea.getTop();
-            float h = selectedDisplayArea == null ? 0 : selectedDisplayArea.getHeight();
-            float bottom = selectedDisplayArea == null ? 0 : selectedDisplayArea.getBottom();
-            g.fillRect(Forge.isHorizontalTabLayout() ? getAltDisplayAreaBackColor() : getDisplayAreaBackColor(), x - pad, top, w + pad, h + pad);
-            if (Forge.isHorizontalTabLayout())
-                g.drawLine(1, MatchScreen.getBorderColor(), x, isFlipped() ? bottom : top, x + w, isFlipped() ? bottom : top);
 
-            if (Forge.isLandscapeMode()) {
-                g.drawLine(1, MatchScreen.getBorderColor(), x, top, x, bottom);
-            } else {
-                y = isFlipped() ? top + 1 : bottom;
-                //don't know why infotab gets null here, either way don't crash the gui..
-                float left = infoTab == null ? 0 : infoTab.getLeft();
-                float right = infoTab == null ? 0 : infoTab.getRight();
-                //leave gap at selected zone tab
-                g.drawLine(1, MatchScreen.getBorderColor(), x, y, left, y);
-                g.drawLine(1, MatchScreen.getBorderColor(), right, y, w, y);
-            }
-        }
-        if (commandZone != null && commandZone.isVisible()) { //draw border for command zone if needed
-            float x = commandZone.getLeft();
-            y = commandZone.getTop();
-            g.drawLine(1, MatchScreen.getBorderColor(), x, y, x, y + commandZone.getHeight());
-            /*if (Forge.isHorizontalTabLayout())
-                g.fillRect(getAltDisplayAreaBackColor(), x - pad, y, commandZoneWidth + pad, commandZone.getHeight() + pad);*/
-            if (isFlipped()) {
-                y += commandZone.getHeight();
-            }
-            g.drawLine(1, MatchScreen.getBorderColor(), x, y, x + commandZone.getWidth(), y);
+        if (Forge.isLandscapeMode()) {
+            float leftPanelWidth = avatar.getWidth() + phaseIndicator.getWidth();
+
+            g.fillRect(
+                FSkinColor.getStandardColor(38, 43, 48),
+                0,
+                0,
+                leftPanelWidth,
+                getHeight()
+            );
         }
     }
 
@@ -600,6 +576,14 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public void draw(Graphics g) {
+            g.fillRect(
+                FSkinColor.getStandardColor(38, 43, 48),
+                0,
+                0,
+                getWidth(),
+                getHeight()
+            );
+
             adjustHeight = 1;
             float divider = Gdx.app.getGraphics().getHeight() > 900 ? 1.2f : 2f;
             if (Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode()) {
@@ -722,8 +706,14 @@ public class VPlayerPanel extends FContainer {
             float x, y, w, h;
             boolean drawOverlay = MatchController.getView().selectedPlayerPanel().getPlayer() == player && Forge.hasGamepad();
             if (Forge.altZoneTabs && this.isAlignedRightForAltDisplay()) {
-                //draw extra
-                g.fillRect(FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2), 0, 0, getWidth(), getHeight());
+                // Dark Slate background
+                g.fillRect(
+                    FSkinColor.getStandardColor(38, 43, 48),
+                    0,
+                    0,
+                    getWidth(),
+                    getHeight()
+                );
                 if (isSelected()) {
                     if (drawOverlay)
                         g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);

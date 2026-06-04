@@ -22,7 +22,7 @@ import forge.util.TextBounds;
 import forge.util.Utils;
 
 public class VPrompt extends FContainer {
-    public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
+    public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 1.15f;
     public static final float BTN_WIDTH = HEIGHT * 1.5f;
     public static final float PADDING = Utils.scale(2);
     public static final FSkinFont FONT = FSkinFont.get(14);
@@ -101,7 +101,13 @@ public class VPrompt extends FContainer {
 
     @Override
     protected void drawBackground(Graphics g) {
-        g.fillRect(getBackColor(), 0, 0, getWidth(), getHeight());
+        g.fillRect(
+            FSkinColor.getStandardColor(38, 43, 48),
+            0,
+            0,
+            getWidth(),
+            getHeight()
+        );
     }
     
     private class MessageLabel extends FDisplayObject {
@@ -138,10 +144,12 @@ public class VPrompt extends FContainer {
         @Override
         public void draw(Graphics g) {
             if (!StringUtils.isEmpty(message)) {
-                float x = PADDING;
-                float y = PADDING;
-                float w = getWidth() - 2 * PADDING;
-                float h = getHeight() - 2 * PADDING;
+                float paddingX = Utils.scale(8);
+                float paddingY = Utils.scale(8);
+                float x = paddingX;
+                float y = paddingY;
+                float w = getWidth() - 2 * paddingX;
+                float h = getHeight() - 2 * paddingY;
                 renderer.drawText(g, message, FONT, getForeColor(), x, y, w, h, y, h, true, Align.center, true);
             }
         }

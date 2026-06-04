@@ -1061,27 +1061,27 @@ public class MatchScreen extends FScreen {
             float w = getWidth();
 
             //field separator lines
-            if (!Forge.isLandscapeMode()) {
-                for (VPlayerPanel playerPanel : playerPanelsList) {
-                    midField = playerPanel.getTop();
-                    y = midField - playerPanel.getField().getHeight();
-                    if (playerPanel.getSelectedTab() == null) {
-                        y++;
-                    }
-                    g.drawLine(1, getBorderColor(), x, y, w, y);
-                }
-            }
+            // if (!Forge.isLandscapeMode()) {
+            //     for (VPlayerPanel playerPanel : playerPanelsList) {
+            //         midField = playerPanel.getTop();
+            //         y = midField - playerPanel.getField().getHeight();
+            //         if (playerPanel.getSelectedTab() == null) {
+            //             y++;
+            //         }
+            //         g.drawLine(1, getBorderColor(), x, y, w, y);
+            //     }
+            // }
 
-            for (VPlayerPanel playerPanel : playerPanelsList) {
-                midField = playerPanel.getTop();
-                y = midField - 0.5f;
-                g.drawLine(1, getBorderColor(), x, y, w, y);
-            }
+            // for (VPlayerPanel playerPanel : playerPanelsList) {
+            //     midField = playerPanel.getTop();
+            //     y = midField - 0.5f;
+            //     g.drawLine(1, getBorderColor(), x, y, w, y);
+            // }
 
-            if (!Forge.isLandscapeMode()) {
-                y = bottomPlayerPanel.getTop() + bottomPlayerPanel.getField().getHeight();
-                g.drawLine(1, getBorderColor(), x, y, w, y);
-            }
+            // if (!Forge.isLandscapeMode()) {
+            //     y = bottomPlayerPanel.getTop() + bottomPlayerPanel.getField().getHeight();
+            //     g.drawLine(1, getBorderColor(), x, y, w, y);
+            // }
         }
 
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {

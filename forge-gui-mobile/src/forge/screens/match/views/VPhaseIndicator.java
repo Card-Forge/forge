@@ -6,10 +6,8 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
-import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.game.phase.PhaseType;
 import forge.toolbox.FContainer;
@@ -179,31 +177,51 @@ public class VPhaseIndicator extends FContainer {
         @Override
         public void draw(final Graphics g) {
             float x = PADDING_X;
+            float y = Utils.scale(1);
             float w = getWidth() - 2 * PADDING_X;
-            float h = getHeight();
+            float h = getHeight() - 2 * Utils.scale(1);
+            float radius = Math.min(w, h) * 0.22f;
 
-            //determine back color according to skip or active state of label
             if (yieldMarked) {
-                g.fillRect(YIELD_MARKER_COLOR, x, 0, w, h);
+                FSkinColor markerColor = FSkinColor.getStandardColor(120, 85, 150);
+
+                g.fillRoundRect(markerColor, x, y, w, h, radius);
                 drawChevron(g, x, w, h);
-                // Skip the caption when marked — chevron replaces the phase abbreviation.
-            } else {
-                FSkinColor backColor;
-                if (active && stopAtPhase) {
-                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED);
-                }
-                else if (!active && stopAtPhase) {
-                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED);
-                }
-                else if (active && !stopAtPhase) {
-                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_DISABLED);
-                }
-                else {
-                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
-                }
-                g.fillRect(isHovered() ? backColor.brighter() : backColor, x, 0, w, h);
-                g.drawText(caption, isHovered() && font.canIncrease() ? font.increase() : font, Color.BLACK, x, 0, w, h, false, Align.center, true);
+                return;
             }
+
+            FSkinColor backColor;
+            if (active && stopAtPhase) {
+                backColor = FSkinColor.getStandardColor(80, 210, 200);
+            }
+            else if (!active && stopAtPhase) {
+                backColor = FSkinColor.getStandardColor(54, 94, 91);
+            }
+            else if (active && !stopAtPhase) {
+                backColor = FSkinColor.getStandardColor(255, 150, 70);
+            }
+            else {
+                backColor = FSkinColor.getStandardColor(105, 54, 45);
+            }
+
+            if (isHovered()) {
+                backColor = backColor.brighter();
+            }
+
+            g.fillRoundRect(backColor, x, y, w, h, radius);
+
+            g.drawText(
+                caption,
+                isHovered() && font.canIncrease() ? font.increase() : font,
+                FSkinColor.getStandardColor(235, 238, 240),
+                x,
+                y,
+                w,
+                h,
+                false,
+                Align.center,
+                true
+            );
         }
 
         private void drawChevron(final Graphics g, float x, float w, float h) {

@@ -6,6 +6,7 @@ import java.util.List;
 import com.badlogic.gdx.Input;
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FSkinColor;
 import forge.screens.FScreen.Header;
 import forge.screens.match.MatchController;
 
@@ -74,9 +75,13 @@ public class FMenuBar extends Header {
 
     @Override
     protected void drawBackground(Graphics g) {
-        float w = getWidth();
-        float h = getHeight();
-        g.fillRect(getBackColor(), 0, 0, w, h);
+        g.fillRect(
+            FSkinColor.getStandardColor(38, 43, 48),
+            0,
+            0,
+            getWidth(),
+            getHeight()
+        );
     }
 
     @Override
