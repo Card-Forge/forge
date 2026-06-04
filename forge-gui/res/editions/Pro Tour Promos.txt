@@ -24,3 +24,4 @@ ScryfallCode=PPRO
 2022-3 R Nykthos, Shrine to Nyx @Alayna Danner
 2025-1 M Cloud, Midgar Mercenary @Tetsuya Nomura
 2025-3 R Aerith Gainsborough @Susumu Kuroi
+2026-1 R Quicksilver, Brash Blur @Junggeun Yoon

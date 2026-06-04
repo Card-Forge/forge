@@ -17,3 +17,4 @@ ScryfallCode=PSPL
 9 M Super Shredder @Chris Seaman
 10 M Liliana Vess @Justyna Dura
 11 R Riddles in the Dark @Tomas Duchek
+12 R Elektra, Daughter of the Hand @Alessandra Pisano

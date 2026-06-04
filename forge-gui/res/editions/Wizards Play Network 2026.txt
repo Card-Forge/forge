@@ -19,3 +19,7 @@ ScryfallCode=PW26
 11 R Bilbo, Luckwearer @Yigit Koroglu
 13 R Wood Elves @Ramza Psyru
 14 R Tom, Bert, and William @Narendra Bintara Adi
+15 R Mister Fantastic, Reed Richards @Tyler Walpole
+16 R Echo, Perceptive Prodigy @Alessandra Pisano
+17 R Dark Deed @Jason Smith
+18 R Hellcat, Undying Vigilante @David Talaski
