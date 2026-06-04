@@ -20,7 +20,6 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
 import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
-import forge.util.collect.FCollectionView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
@@ -380,14 +379,29 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_LINKED_EXILE_CARDS)) {
                 return;
             }
+            int cap = maxStackDepth() - attachedPanels.size();
+            if (cap <= 0) {
+                return;
+            }
             final CardView prepared = card.getPreparedSpell();
-            final FCollectionView<CardView> untilLeaves = card.getUntilLeavesBattlefield();
             if (prepared != null) {
-                if (untilLeaves.isEmpty()) {
-                    attachedPanels.add(newGhost(prepared, GhostKind.CASTABLE));
+                attachedPanels.add(newGhost(prepared, GhostKind.CASTABLE));
+                cap--;
+            }
+            for (final CardView exiled : card.getUntilLeavesBattlefield()) {
+                if (cap <= 0) {
+                    break;
                 }
-            } else if (untilLeaves.size() == 1) {
-                attachedPanels.add(newGhost(untilLeaves.iterator().next(), GhostKind.INFO));
+                attachedPanels.add(newGhost(exiled, GhostKind.INFO));
+                cap--;
+            }
+        }
+
+        private static int maxStackDepth() {
+            try {
+                return Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_MAX_STACK_DEPTH));
+            } catch (NumberFormatException e) {
+                return 4;
             }
         }
 
