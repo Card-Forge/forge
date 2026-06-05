@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Odysseus
+Title=Odysseus
+Icon=Odysseus.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Sandiagos_-_Abzan_Lifegain_(Standard,_#2924644).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodthirsty Conqueror
+4 Deep-Cavern Bat
+4 Momo, Friendly Flier
+4 Starscape Cleric
+3 Darkstar Augur
+3 Zoraline, Cosmos Caller
+2 Moseo, Vein's New Dean
+1 Amalia Benavides Aguirre
+1 Blech, Loafing Pest
+1 Raven Eagle
+3 Reroute Systems
+4 Case of the Uneaten Feast
+4 Sheltered by Ghosts
+4 Godless Shrine
+4 Starting Town
+2 Bleachbone Verge
+2 Cavern of Souls
+2 Plains
+2 Swamp
+2 Temple Garden
+1 Concealed Courtyard
+1 Forest
+1 Hushwood Verge
+1 Shattered Sanctum
+[Sideboard]
+2 Aven Interrupter
+2 Clarion Conqueror
+2 Duress
+2 Requisition Raid
+2 Rest in Peace
+2 Spectacular Spider-Man
+1 Authority of the Consuls
+1 Blech, Loafing Pest
+1 Feldon's Cane

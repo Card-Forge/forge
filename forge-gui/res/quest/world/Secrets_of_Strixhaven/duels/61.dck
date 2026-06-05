@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Alouroua
+Title=Alouroua
+Icon=Alouroua.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Ben_Moyer_-_Dimir_Mill_(Modern,_#2926409).dck
+Deck Type=constructed
+
+[Main]
+4 Exhibition Tidecaller
+4 Ruin Crab
+4 Archive Trap
+4 Drown in the Loch
+4 Fatal Push
+4 Surgical Extraction
+2 Visions of Beyond
+4 Fractured Sanity
+4 Glimpse the Unthinkable
+3 Tasha's Hideous Laughter
+1 Preordain
+1 Jace, the Perfected Mind
+4 Flooded Strand
+4 Polluted Delta
+3 Field of Ruin
+3 Island
+2 Undercity Sewers
+2 Watery Grave
+1 Oboro, Palace in the Clouds
+1 Shelldock Isle
+1 Swamp
+[Sideboard]
+2 Consign to Memory
+2 Crypt Incursion
+2 Extirpate
+2 Nihil Spellbomb
+1 Ensnaring Bridge
+1 Harbinger of the Seas
+1 Shoot the Sheriff
+1 Strategic Betrayal
+1 Tasha's Hideous Laughter
+1 The Meathook Massacre
+1 Toxic Deluge

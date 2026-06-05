@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Bela Lugosi
+Title=Bela Lugosi
+Icon=Bela Lugosi.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Logan_Hoberty_-_Dimir_(Modern,_#2941194).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+4 Psychic Frog
+3 Murktide Regent
+2 Subtlety
+2 Wan Shi Tong, Librarian
+4 Counterspell
+4 Fatal Push
+2 Force of Negation
+2 Sink into Stupor
+2 Spell Snare
+1 Cling to Dust
+4 Flow State
+4 Preordain
+4 Thoughtseize
+4 Polluted Delta
+2 Darkslick Shores
+2 Flooded Strand
+2 Island
+2 Marsh Flats
+2 Watery Grave
+1 Hallowed Fountain
+1 Meticulous Archive
+1 Swamp
+1 Undercity Sewers
+[Sideboard]
+3 Consign to Memory
+3 Pest Control
+2 Mystical Dispute
+2 Sheoldred's Edict
+2 Stern Scolding
+2 Surgical Extraction
+1 Celestial Purge

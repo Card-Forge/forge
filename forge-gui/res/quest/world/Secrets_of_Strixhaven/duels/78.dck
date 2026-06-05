@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Niv-Mizzet
+Title=Niv-Mizzet
+Icon=Niv-Mizzet.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Thorne66_-_Mono-White_Aggro_(Modern,_#2942527).dck
+Deck Type=constructed
+
+[Main]
+4 Essence Channeler
+4 Guide of Souls
+4 Ocelot Pride
+4 Solitude
+4 Voice of the Blessed
+3 Righteous Valkyrie
+3 Soul Warden
+3 Soul's Attendant
+2 Ajani, Nacatl Pariah
+2 Voice of Victory
+2 Witch Enchanter
+3 March of Otherworldly Light
+2 Erode
+2 Razorgrass Ambush
+1 Path to Exile
+8 Plains
+4 Flagstones of Trokair
+1 Abandoned Air Temple
+1 Castle Ardenvale
+1 Cave of the Frost Dragon
+1 Eiganjo, Seat of the Empire
+1 Fountainport
+[Sideboard]
+2 Damping Sphere
+2 Deafening Silence
+2 Exorcise
+2 Rest in Peace
+2 Surgical Extraction
+2 Wrath of the Skies
+1 Clarion Conqueror
+1 Kataki, War's Wage
+1 Stony Silence

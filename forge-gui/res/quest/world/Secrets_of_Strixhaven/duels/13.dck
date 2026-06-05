@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Odysseus
+Title=Odysseus
+Icon=Odysseus.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Alex_Warschauer_-_Golgari_Midrange_(Standard,_#2933490).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Llanowar Elves
+2 Elegy Acolyte
+2 Emeritus of Abundance
+2 Keen-Eyed Curator
+2 Firdoch Core
+3 Requiting Hex
+2 Shoot the Sheriff
+1 Bitter Triumph
+1 Witherbloom Charm
+3 Duress
+2 Maelstrom Pulse
+1 Strategic Betrayal
+4 Unholy Annex
+3 Professor Dellian Fel
+4 Blooming Marsh
+4 Overgrown Tomb
+4 Wastewood Verge
+3 Forest
+3 Swamp
+2 Multiversal Passage
+2 Soulstone Sanctuary
+1 Ba Sing Se
+1 Restless Cottage
+[Sideboard]
+2 Cruelclaw's Heist
+2 Day of Black Sun
+2 Heritage Reclamation
+2 Qarsi Revenant
+2 Surrak, Elusive Hunter
+1 Bitter Triumph
+1 Deadly Cover-Up
+1 Keen-Eyed Curator
+1 Leatherhead, Swamp Stalker
+1 Soul-Guide Lantern

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Crows in the Field
+Title=Crows in the Field
+Icon=Crows in the Field.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Edward_Orsi_-_Boros_Mice_(Standard,_#2940406).dck
+Deck Type=constructed
+
+[Main]
+4 Cheeky House-Mouse
+4 Emberheart Challenger
+4 Flowerfoot Swordmaster
+4 Manifold Mouse
+3 Mabel, Heir to Cragflame
+3 Raging Battle Mouse
+3 Valley Questcaller
+1 Spectacular Spider-Man
+4 Boros Charm
+4 Sheltered by Ghosts
+2 Painter's Studio
+4 Inspiring Vantage
+4 Sacred Foundry
+3 Sunbillow Verge
+2 Mountain
+2 Multiversal Passage
+2 Plains
+2 Rockface Village
+2 Soulstone Sanctuary
+1 Restless Bivouac
+1 Secret Tunnel
+1 Starting Town
+[Sideboard]
+4 Rest in Peace
+3 Clarion Conqueror
+3 Voice of Victory
+2 Get Lost
+1 Abrade
+1 Erode
+1 Sear

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Redwall
+Title=Redwall
+Icon=Redwall.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Jack_Goldsworthy_-_Temur_Prowess_(Standard,_#2927296).dck
+Deck Type=constructed
+
+[Main]
+4 Elusive Otter
+4 Slickshot Show-Off
+2 Eddymurk Crab
+4 Burst Lightning
+4 Opt
+1 Bounce Off
+1 Get Out
+1 Vibrant Outburst
+4 Boomerang Basics
+4 Sleight of Hand
+3 Flow State
+2 Stock Up
+1 Impractical Joke
+4 Stormchaser's Talent
+6 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+2 Multiversal Passage
+1 Willowrush Verge
+[Sideboard]
+2 Into the Flood Maw
+2 Ral, Crackling Wit
+2 Roaring Furnace
+2 Slagstorm
+2 Spell Pierce
+1 Broadside Barrage
+1 Eddymurk Crab
+1 Get Out
+1 Ghost Vacuum
+1 Soul-Guide Lantern
