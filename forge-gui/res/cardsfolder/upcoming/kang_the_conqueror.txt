@@ -4,7 +4,7 @@ Types:Legendary Creature Human Villain
 PT:4/5
 K:Flying
 A:AB$ PutCounter | Cost$ 5 U U U | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | PowerUp$ True | SubAbility$ DBAddTurn | SpellDescription$ Put a +1/+1 counter on NICKNAME. Take an extra turn after this one. During that turn, power-up abilities can't be activated. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
-SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1 | ExtraTurnDelayedTrigger$ DBDelTrig | ExtraTurnDelayedTriggerExcute$ TrigEffect
+SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1 | ExtraTurnDelayedTrigger$ DBDelTrig | ExtraTurnDelayedTriggerExecute$ TrigEffect
 SVar:DBDelTrig:ThisTurn$ True | Static$ True | Mode$ Phase | Phase$ Upkeep | TriggerDescription$ During that turn, power-up abilities can't be activated.
 SVar:TrigEffect:DB$ Effect | Defined$ You | StaticAbilities$ STCantPowerUp
 SVar:STCantPowerUp:Mode$ CantBeActivated | ValidCard$ Card | ValidSA$ Activated.PowerUp | Description$ Power-up abilities can't be activated.
