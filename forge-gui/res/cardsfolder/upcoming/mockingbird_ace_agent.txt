@@ -1,0 +1,8 @@
+Name:Mockingbird, Ace Agent
+ManaCost:3 W
+Types:Legendary Creature Human Spy Hero
+PT:2/2
+K:Double Strike
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TargetsValid$ Creature.YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell that targets a creature you control, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Double strike\nWhenever you cast a spell that targets a creature you control, put a +1/+1 counter on Mockingbird.
