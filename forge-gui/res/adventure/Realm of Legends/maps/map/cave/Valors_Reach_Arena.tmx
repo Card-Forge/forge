@@ -443,7 +443,7 @@
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;A woman with long red hair sits on a once-opulent sofa backstage, now ravaged by time and the elements. Despite her clear confidence and comfort, she is dressed in armor and he twin blades gleam with blood.
+   &quot;text&quot;: &quot;A woman with long red hair sits on a once-opulent sofa backstage, now ravaged by time and the elements. Despite her clear confidence and comfort, she is dressed in armor and her twin blades gleam with blood.
 
 'So, you're the one everyone thinks has what it takes to unseat me as champ? I really should be doing this properly in the arena, but something about you just rubs me the wrong way. I think I'll kill you now!'&quot;,
    &quot;options&quot;: [{
