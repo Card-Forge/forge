@@ -564,14 +564,10 @@ public class Assets implements Disposable {
                     parameter = (AssetLoaderParameters<T>) getTextureFilter();
                 }
 
-                final AssetLoaderParameters.LoadedCallback prevCallback = parameter.loadedCallback;
-                parameter.loadedCallback = (assetManager, fileName1, type1) -> {
-                    if (prevCallback != null) {
-                        prevCallback.finishedLoading(assetManager, fileName1, type1);
-                    }
-
-                    currentMemory = calculateTextureSize(assetManager, fileName1, type1);
-                };
+                // getTextureFilter() returns a shared instance; replace rather than wrap, or
+                // callbacks accumulate every load and eventually overflow the stack
+                parameter.loadedCallback = (assetManager, fileName1, type1) ->
+                        currentMemory = calculateTextureSize(assetManager, fileName1, type1);
             }
             super.load(fileName, type, parameter);
         }
