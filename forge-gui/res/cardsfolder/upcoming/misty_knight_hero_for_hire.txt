@@ -1,0 +1,8 @@
+Name:Misty Knight, Hero for Hire
+ManaCost:1 R
+Types:Legendary Creature Human Detective Hero
+PT:3/1
+A:AB$ Draw | Cost$ 2 T Discard<1/Card> | Defined$ You | NumCards$ X | SpellDescription$ Draw a card for each card you've discarded this turn.
+SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
+DeckHints:Ability$Discard
+Oracle:{2}, {T}, Discard a card: Draw a card for each card you've discarded this turn.
