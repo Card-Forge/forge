@@ -4,7 +4,7 @@ Types:Legendary Creature Human God Hero
 PT:3/3
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever NICKNAME attacks, exile up to one target nontoken artifact or creature, then return that card to the battlefield tapped under its owner's control.
-SVar:DBExile:DB$ ChangeZone | ValidTgts$ Artifact.!token,Creature.!token | ValidTgtDesc$ nontoken artifact or creature | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Artifact.!token,Creature.!token | ValidTgtDesc$ nontoken artifact or creature | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | Tapped$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Equipment.YouCtrl | Execute$ TrigDraw | TriggerDescription$ Whenever an Equipment you control enters, draw a card.
