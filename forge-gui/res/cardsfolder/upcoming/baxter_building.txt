@@ -1,0 +1,8 @@
+Name:Baxter Building
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 4 T | Produced$ Combo Any | Amount$ 4 | SpellDescription$ Add four mana in any combination of colors.
+A:AB$ Draw | Cost$ 4 T | IsPresent$ Creature.YouCtrl+toughnessGE4 | SpellDescription$ Draw a card. Activate only if you control a creature with toughness 4 or greater.
+DeckHas:Ability$Mana.Colorless
+Oracle:{T}: Add {C}.\n{4}, {T}: Add four mana in any combination of colors.\n{4}, {T}: Draw a card. Activate only if you control a creature with toughness 4 or greater.

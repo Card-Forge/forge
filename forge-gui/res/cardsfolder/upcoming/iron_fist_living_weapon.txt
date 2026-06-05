@@ -1,0 +1,9 @@
+Name:Iron Fist, Living Weapon
+ManaCost:2 R
+Types:Legendary Creature Human Warrior Hero
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TargetsValid$ Creature.YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a spell that targets a creature you control, NICKNAME gains "{T}: NICKNAME deals damage equal to his power to any other target" until end of turn.
+SVar:TrigAnimate:DB$ AnimateAll | ValidCards$ Card.Self | Abilities$ ABDamage
+SVar:ABDamage:AB$ DealDamage | Cost$ T | ValidTgts$ Any.Other | ValidTgtDesc$ any other | NumDmg$ X | SpellDescription$ NICKNAME deals damage equal to his power to any other target.
+SVar:X:Count$CardPower
+Oracle:Whenever you cast a spell that targets a creature you control, Iron Fist gains "{T}: Iron Fist deals damage equal to his power to any other target" until end of turn.

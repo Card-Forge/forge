@@ -1,0 +1,11 @@
+Name:Captain Marvel, Apex Avenger
+ManaCost:5 R W
+Types:Legendary Creature Human Kree Hero
+PT:4/4
+K:Flying
+K:Double Strike
+K:Indestructible
+T:Mode$ CounterPlayerAddedAll | ValidObject$ Creature.inRealZoneBattlefield+Other+nonKree | TriggerZones$ Battlefield | ValidSource$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you put one or more counters on another creature, if it's not a Kree, you may put the same number and kind of counters on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Placer$ TriggeredSource | TriggeredCounterMap$ True | Defined$ Self | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+SVar:X:TriggeredObject$Valid Kree
+Oracle:Flying, double strike, indestructible\nWhenever you put one or more counters on another creature, if it's not a Kree, you may put the same number and kind of counters on Captain Marvel.
