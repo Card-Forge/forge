@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/MHayashi_-_Mono_White_Control_(Modern,_#2918814).dck
+Deck Type=constructed
+
+[Main]
+4 Candy Trail
+4 Relic of Progenitus
+4 Mazemind Tome
+4 Get Lost
+4 Erode
+4 Path to Exile
+4 Settle the Wreckage
+4 March of Otherworldly Light
+4 Wrath of God
+4 Demolition Field
+4 Fountainport
+4 Castle Ardenvale
+4 Field of Ruin
+8 Plains
+[Sideboard]
+4 High Noon
+4 Wrath of the Skies
+4 Emergency Eject
+1 Kaheera, the Orphanguard
+2 Solitude

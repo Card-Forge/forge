@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Electro
+Title=Electro
+Icon=Electro.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/Jacob_Tano_-_Izzet_Cauldron_(Standard,_#2929420).dck
+Deck Type=constructed
+
+[Main]
+4 Eddymurk Crab
+4 Slickshot Show-Off
+4 Burst Lightning
+2 Get Out
+4 Opt
+1 Spell Pierce
+4 Boomerang Basics
+4 Flow State
+1 Impractical Joke
+4 Sleight of Hand
+2 Stock Up
+1 Roaring Furnace
+4 Stormchaser's Talent
+7 Island
+2 Multiversal Passage
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+[Sideboard]
+1 Annul
+1 Disdainful Stroke
+1 Get Out
+1 Impractical Joke
+1 Negate
+1 Sear
+2 Slagstorm
+1 Soul-Guide Lantern
+1 Spell Pierce
+1 Spell Snare
+2 Sunderflock
+2 The Legend of Kuruk

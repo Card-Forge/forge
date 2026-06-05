@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ra
+Title=Ra
+Icon=Ra.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Goerajaponica_-_Izzet_Control_(Modern,_#2908402).dck
+Deck Type=constructed
+
+[Main]
+3 Marang River Regent
+3 Wan Shi Tong, Librarian
+4 Snapcaster Mage
+2 Fable of the Mirror-Breaker
+4 Flame of Anor
+4 Galvanic Discharge
+2 Invert Polarity
+2 Prismari Charm
+3 Lightning Bolt
+3 Spell Snare
+4 Counterspell
+2 Blood Moon
+2 Thundering Falls
+1 Polluted Delta
+1 Agna Qel'a
+4 Scalding Tarn
+3 Steam Vents
+4 Flooded Strand
+2 Spirebluff Canal
+7 Island
+[Sideboard]
+3 Meltdown
+3 Consign to Memory
+1 Ghost Vacuum
+1 Surgical Extraction
+1 Force of Negation
+2 Mystical Dispute
+3 Obsidian Charmaw
+1 Vampires' Vengeance

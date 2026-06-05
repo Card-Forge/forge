@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Isperia
+Title=Isperia
+Icon=Isperia.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Michael_Morfopoulos_-_Eldrazi_Tron_(Modern,_#2927030).dck
+Deck Type=constructed
+
+[Main]
+3 Devourer of Destiny
+2 Sire of Seven Deaths
+4 Sowing Mycospawn
+3 Thought-Knot Seer
+1 Ulamog, the Ceaseless Hunger
+4 Expedition Map
+1 Talisman of Impulse
+4 Talisman of Resilience
+2 Trinisphere
+2 Dismember
+4 Kozilek's Command
+1 All Is Dust
+4 Karn, the Great Creator
+4 Ugin, Eye of the Storms
+1 Abstergo Entertainment
+4 Eldrazi Temple
+1 Petrified Hamlet
+4 Ugin's Labyrinth
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+[Sideboard]
+1 Cityscape Leveler
+1 Crucible of Worlds
+2 Disruptor Flute
+1 Engineered Explosives
+1 Ensnaring Bridge
+1 Extinguisher Battleship
+1 Grafdigger's Cage
+1 Haywire Mite
+1 Liquimetal Coating
+1 Phyrexian Metamorph
+1 The Stone Brain
+1 Tormod's Crypt
+1 Torpor Orb
+1 Trinisphere

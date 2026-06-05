@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=House Party
+Title=House Party
+Icon=House Party.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/AlekRivera_-_Temur_Aggro_(Standard,_#2932784).dck
+Deck Type=constructed
+
+[Main]
+4 Elusive Otter
+4 Slickshot Show-Off
+2 Eddymurk Crab
+4 Burst Lightning
+4 Opt
+1 Bounce Off
+1 Spell Pierce
+1 Spell Snare
+4 Boomerang Basics
+4 Flow State
+4 Sleight of Hand
+1 Impractical Joke
+1 Stock Up
+4 Stormchaser's Talent
+1 Roaring Furnace
+5 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+2 Multiversal Passage
+1 Willowrush Verge
+[Sideboard]
+2 Annul
+2 Broadside Barrage
+2 Colorstorm Stallion
+2 Eddymurk Crab
+2 Slagstorm
+1 Negate
+1 Ral, Crackling Wit
+1 Roaring Furnace
+1 Spell Pierce
+1 Spell Snare

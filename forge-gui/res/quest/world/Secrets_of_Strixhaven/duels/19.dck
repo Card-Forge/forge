@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=PresterJohn
+Title=PresterJohn
+Icon=PresterJohn.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/GregorV_-_Golgari_Midrange_(Standard,_#2915361).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+3 Keen-Eyed Curator
+2 Emeritus of Abundance
+4 Llanowar Elves
+2 Firdoch Core
+4 Requiting Hex
+1 Bitter Triumph
+1 Shoot the Sheriff
+1 Long Goodbye
+3 Duress
+2 Maelstrom Pulse
+1 Strategic Betrayal
+4 Unholy Annex
+4 Professor Dellian Fel
+3 Forest
+4 Wastewood Verge
+3 Swamp
+4 Blooming Marsh
+4 Overgrown Tomb
+2 Soulstone Sanctuary
+1 Restless Cottage
+1 Underground Mortuary
+1 Deathcap Glade
+1 Multiversal Passage
+[Sideboard]
+1 Heritage Reclamation
+2 Qarsi Revenant
+1 Duress
+2 Day of Black Sun
+1 Leatherhead, Swamp Stalker
+1 Surrak, Elusive Hunter
+1 Scrapshooter
+1 Intimidation Tactics
+1 Strategic Betrayal
+1 Decorum Dissertation
+1 Long Goodbye
+2 Torpor Orb

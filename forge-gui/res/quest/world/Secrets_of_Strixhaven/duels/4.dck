@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Anubis
+Title=Anubis
+Icon=Anubis.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Jack_Young_-_Izzet_Prowess_(Standard,_#2914504).dck
+Deck Type=constructed
+
+[Main]
+4 Colorstorm Stallion
+4 Eddymurk Crab
+4 Burst Lightning
+4 Opt
+2 Get Out
+2 Prismari Charm
+2 Spell Pierce
+2 Traumatic Critique
+4 Boomerang Basics
+4 Sleight of Hand
+3 Flow State
+4 Stormchaser's Talent
+7 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+2 Stormcarved Coast
+[Sideboard]
+2 Broadside Barrage
+2 Disdainful Stroke
+2 Ral, Crackling Wit
+2 Sear
+2 Soul-Guide Lantern
+1 Annul
+1 Get Out
+1 Ghost Vacuum
+1 Negate
+1 Roaring Furnace
