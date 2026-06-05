@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, create a 1/1 red Alien creature token with haste and "This token attacks each combat if able." Put a +1/+1 counter on it for each invasion counter on this enchantment, then put an invasion counter on this enchantment.
 SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_alien_haste_must_attack | RememberTokens$ True | SubAbility$ DBPutCounter1
 SVar:DBPutCounter1:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBPutCounter2
-SVar:DBPutCounter2:DB$ PutCounter | Defined$ SELF | CounterType$ INVASION | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:DBPutCounter2:DB$ PutCounter | Defined$ Self | CounterType$ INVASION | CounterNum$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardCounters.INVASION
 SVar:PlayMain1:TRUE
