@@ -116,12 +116,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.groupTokensAndCreatures = "group_creatures".equals(groupScope) || "group_all".equals(groupScope);
         this.groupAll = "group_all".equals(groupScope);
         this.grouping = groupTokensAndCreatures || groupAll;
-        int prefDepth;
-        try {
-            prefDepth = Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_MAX_STACK_DEPTH));
-        } catch (NumberFormatException e) {
-            prefDepth = 4;
-        }
+        int prefDepth = FModel.getPreferences().getPrefInt(FPref.UI_MAX_STACK_DEPTH);
         this.maxStackDepth = Math.max(MIN_STACK_DEPTH, Math.min(MAX_STACK_DEPTH, prefDepth));
     }
 

@@ -379,7 +379,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_LINKED_EXILE_CARDS)) {
                 return;
             }
-            int cap = maxStackDepth() - attachedPanels.size();
+            int cap = FModel.getPreferences().getPrefInt(FPref.UI_MAX_STACK_DEPTH) - attachedPanels.size();
             if (cap <= 0) {
                 return;
             }
@@ -394,14 +394,6 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 }
                 attachedPanels.add(newGhost(exiled, GhostKind.INFO));
                 cap--;
-            }
-        }
-
-        private static int maxStackDepth() {
-            try {
-                return Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_MAX_STACK_DEPTH));
-            } catch (NumberFormatException e) {
-                return 4;
             }
         }
 
