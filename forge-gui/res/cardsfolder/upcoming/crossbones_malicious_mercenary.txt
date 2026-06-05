@@ -1,0 +1,12 @@
+Name:Crossbones, Malicious Mercenary
+ManaCost:3 B
+Types:Legendary Creature Human Mercenary Villain
+PT:3/3
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Villain.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivationLimit$ 1 | TriggerDescription$ Whenever another Villain you control enters, put a +1/+1 counter on NICKNAME. He deals 2 damage to each opponent. This ability triggers only once each turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
+SVar:BuffedBy:Villain
+DeckHas:Ability$Counters
+DeckHints:Type$Villain
+Oracle:Deathtouch\nWhenever another Villain you control enters, put a +1/+1 counter on Crossbones. He deals 2 damage to each opponent. This ability triggers only once each turn.

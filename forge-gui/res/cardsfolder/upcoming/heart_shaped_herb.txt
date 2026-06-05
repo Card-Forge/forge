@@ -1,0 +1,10 @@
+Name:Heart-Shaped Herb
+ManaCost:4
+Types:Artifact
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.OppCtrl,Emblem.OppCtrl | ValidTarget$ You | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a source an opponent controls would deal damage to you, prevent 1 of that damage.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
+A:AB$ Sacrifice | Cost$ 2 T Sac<1/CARDNAME/this artifact> | SacValid$ Creature | SacMessage$ creature | Optional$ True | RememberSacrificed$ True | SubAbility$ DBChangeZone | SpellDescription$ You may sacrifice a creature. If you do, return that card to the battlefield under its owner's control with three +1/+1 counters on it and you become the monarch.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Battlefield | GainControl$ True | Defined$ Remembered | WithCountersType$ P1P1 | WithCountersAmount$ 3 | SubAbility$ DBMonarch
+SVar:DBMonarch:DB$ BecomeMonarch | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:If a source an opponent controls would deal damage to you, prevent 1 of that damage.\n{2}, {T}, Sacrifice this artifact: You may sacrifice a creature. If you do, return that card to the battlefield under its owner's control with three +1/+1 counters on it and you become the monarch.

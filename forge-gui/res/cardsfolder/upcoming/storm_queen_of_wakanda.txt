@@ -1,0 +1,11 @@
+Name:Storm, Queen of Wakanda
+ManaCost:3 G W
+Types:Legendary Creature Mutant Noble Hero
+PT:4/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME attacks, until end of turn, another target attacking creature gains flying and gets +X/+0, where X is NICKNAME's power.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+attacking | ValidTgtDesc$ another attacking creature | KW$ Flying | NumAtt$ +X
+T:Mode$ Attacks | ValidCard$ Creature.withFlying | Attacked$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature with flying attacks you, NICKNAME deals damage equal to her power to that creature.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredAttackerLKICopy | NumDmg$ X
+SVar:X:Count$CardPower
+Oracle:Flying\nWhenever Storm attacks, until end of turn, another target attacking creature gains flying and gets +X/+0, where X is Storm's power.\nWhenever a creature with flying attacks you, Storm deals damage equal to her power to that creature.

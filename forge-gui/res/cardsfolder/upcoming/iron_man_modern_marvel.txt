@@ -1,0 +1,10 @@
+Name:Iron Man, Modern Marvel
+ManaCost:2 U U
+Types:Legendary Artifact Creature Human Hero
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.Artifact+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other artifact creatures you control get +1/+1.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | IsPresent$ Creature.Artifact+Other+YouCtrl | TriggerDescription$ Whenever NICKNAME attacks, if you control another artifact creature, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:PlayMain1:TRUE
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nOther artifact creatures you control get +1/+1.\nWhenever Iron Man attacks, if you control another artifact creature, draw a card.
