@@ -1,0 +1,7 @@
+Name:Scientist Supreme of A.I.M.
+ManaCost:U B
+Types:Legendary Creature Human Scientist Villain
+PT:2/2
+A:AB$ CopySpellAbility | Cost$ PayLife<2> | ActivationLimit$ 1 | PlayerTurn$ True | TargetType$ Activated.YouCtrl,Triggered.YouCtrl | ValidTgts$ Artifact | MayChooseTarget$ True | SpellDescription$ Copy target activated or triggered ability you control from an artifact source. You may choose new targets for the copy. Activate only during your turn and only once each turn. (Mana abilities can't be targeted.)
+DeckHints:Type$Artifact
+Oracle:Pay 2 life: Copy target activated or triggered ability you control from an artifact source. You may choose new targets for the copy. Activate only during your turn and only once each turn. (Mana abilities can't be targeted.)
