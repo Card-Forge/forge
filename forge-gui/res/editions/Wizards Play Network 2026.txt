@@ -15,11 +15,10 @@ ScryfallCode=PW26
 7 R Spicy Oatmeal Pizza @Fajareka Setiawan
 8 R Into the Flood Maw @Danny Schwartz
 9 R Access Tunnel @Alayna Danner
-10 R An Unexpected Party @Tomas Duchek
-11 R Bilbo, Luckwearer @Yigit Koroglu
-13 R Wood Elves @Ramza Psyru
-14 R Tom, Bert, and William @Narendra Bintara Adi
-15 R Mister Fantastic, Reed Richards @Tyler Walpole
-16 R Echo, Perceptive Prodigy @Alessandra Pisano
-17 R Dark Deed @Jason Smith
-18 R Hellcat, Undying Vigilante @David Talaski
+10 R Mister Fantastic, Reed Richards @Tyler Walpole
+11 R Echo, Perceptive Prodigy @Alessandra Pisano
+12 R Dark Deed @Jason Smith
+13 R Hellcat, Undying Vigilante @David Talaski
+14 R An Unexpected Party @Tomas Duchek
+15 R Bilbo, Luckwearer @Yigit Koroglu
+16 R Wood Elves @Ramza Psyru
