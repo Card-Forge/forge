@@ -1,0 +1,8 @@
+Name:Speedball, New Warrior
+ManaCost:2 UR
+Types:Legendary Creature Human Hero
+PT:2/2
+T:Mode$ SpellCast | TriggerZones$ Battlefield | TargetsValid$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever a player casts a spell that targets Speedball, he gets +2/+2 until end of turn. You may choose new targets for that spell.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBChangeTargets
+SVar:DBChangeTargets:DB$ ChangeTargets | Defined$ TriggeredSpellAbility | Optional$ True
+Oracle:Whenever a player casts a spell that targets Speedball, he gets +2/+2 until end of turn. You may choose new targets for that spell.
