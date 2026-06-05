@@ -1,0 +1,7 @@
+Name:The Tiger God
+ManaCost:no cost
+Colors:green
+Types:Legendary Creature Cat God
+PT:4/4
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
+Oracle:The Tiger God can't be blocked by more than one creature.
