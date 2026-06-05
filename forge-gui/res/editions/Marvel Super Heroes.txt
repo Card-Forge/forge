@@ -11,24 +11,34 @@ ScryfallCode=MSH
 4 R Agent Phil Coulson @Marc Aspinall
 6 M Avengers Assemble! @Alex Horley-Orlandelli
 9 M Captain America, Super-Soldier @Anna Podedworna
+10 R Captain America, Wings of Freedom @Dan Dos Santos
 11 M Captain Marvel, Earth's Protector @Victor Adame Minguez
 12 U Captain Mar-Vell, Space-Born @Gintas Galvanauskas
+13 U Colleen Wing, Street Samurai @Jurijus Chitrovas
 17 U Invisible Woman, Sue Storm @Paolo Rivera
+18 M Jennifer Walters @Taurin Clarke
 20 U Luke Cage, Power Man @Aniekan Udofia
 21 M The Mind Stone @Volkan Baǵa
+22 U Mockingbird, Ace Agent @Sveta Pikul
 23 M Monica Rambeau @Xabi Gaztelua & Marta Nael
 24 C Murdock's Crusade @Gal Or
 25 R Nick Fury, Agent of S.H.I.E.L.D. @Marco Turini
+27 U Okoye, Dora Milaje Leader @L.A. Draws
 28 R Origin of the Avengers @Serena Malyon
 30 U Patriot, Shield Wielder @Vlad Petruchik
 31 U Political Triumph @Monztre
+32 U Quake, Agent of S.H.I.E.L.D. @Josu Solano
 35 R The Sentry, Golden Guardian @Alexander Skripnikov
 38 R Super-Soldier Serum @Rafater
 42 U White Widow, Free Agent @Smirtouille
+44 C A.I.M. Scientists @Bartek Fedyczak
 47 U Attuma, Atlantean Warlord @Nanna Marie Steffensen
 49 M Bruce Banner @Tommy Arnold
 51 U Echo, Perceptive Prodigy @Jurijus Chitrovas
 52 U Falcon, Winged Wonder @Vilhelmas Banys
+53 U Falcon's Wing Harness @David Álvarez
+59 U Iron Lad, Diverging Destiny @Erikas Perl
+60 R Ironheart, Clever Champion @Julia Vasilyeva
 62 M Kang the Conqueror @Peter Scanlan
 64 R Leader, Super-Genius @Anthony Devine
 65 R Loki, God of Mischief @Vilhelmas Banys
@@ -36,12 +46,16 @@ ScryfallCode=MSH
 67 R Ms. Marvel, Kamala Khan @Smirtouille
 68 M Multiversal Incursion @Lordigan
 69 M Namor the Sub-Mariner @Chris Rallis
+70 U Pym Particles @Eli Minaya
 71 U Rewrite History @Allen Douglas
 72 R Secret Invasion @Nino Is
 74 R S.H.I.E.L.D. Flying Car @Paulius Daščioras
 75 U Shuri, Wakandan Inventor @Wayne Wu
+76 U Stature, Size Shifter @Mintautas Šukys
 77 U Super Intelligence @Michele Giorgi
+79 U Thirst for Knowledge @Greg Smallwood
 80 M Tony Stark @Alexander Lozano
+84 R The Wondrous Wasp @Gal Or
 87 R Baron Helmut Zemo @Wero Gallo
 88 U Baron Strucker, HYDRA Overlord @InHyuk Lee
 90 R Construct a Cosmic Cube @Eugene Maslovski
@@ -50,28 +64,40 @@ ScryfallCode=MSH
 95 M Doctor Doom @David Palumbo
 96 R Doom Reigns Supreme @Alexander Gering
 97 R Elektra, Daughter of the Hand @Bastien L. Deharme
+98 U Grim Reaper, Lethal Legionnaire @Lie Setiawan
+101 C HYDRA Troopers @Zoltan Boros
 105 U The Masters of Evil @Bastien L. Deharme
 106 M M.O.D.O.K. @Simon Dominic
+111 U Robot Domination @Borja Pindado
 112 U Ronin, Shadow Stalker @Lie Setiawan
+113 C Roxxon Brutes @Zoltan Boros
 115 R Super-Skrull @Zoltan Boros
 117 R Thunderbolts Conspiracy @Lucio Parrillo
 124 R Avengers Disassembled @David Szabo
+127 U Death to Our Enemies @Lee Woo-chul
 128 U Evil's Thrall @Mintautas Šukys
 129 R Fin Fang Foom @Filipe Pagliuso
 130 R Hawkeye, Master Marksman @Bachzim
 135 C HULK SMASH! @Chris Rahn
 136 U Human Torch, Johnny Storm @Alexander Skripnikov
 138 U Iron Fist, Living Weapon @Erikas Perl
+139 U Jessica Jones, Private Eye @Julia Vasilyeva
+145 U Misty Knight, Hero for Hire @Eglė Mosakaitė
 146 M Mjölnir, Hammer of Thor @Wayne Reynolds
 147 U Photon Blast Barrage @Immanuela Crovius
 148 R Quicksilver, Brash Blur @Michael MacRae
+149 U Red Hulk @Vilhelmas Banys
 151 R The Scarlet Witch @Magali Villeneuve
 156 M Thor, God of Thunder @Jesper Ejsing
+163 U Claim the Kingdom @Lius Lasahido
 164 U Doc Samson, Super Psychiatrist @Ryan Pancoast
+165 M Earth's Mightiest Heroes @Steve Morris
 168 C Go Nuts! @Ignatius Budi
 170 U Hellcat, Undying Vigilante @Solan
 171 U Hercules, Prince of Power @David Talaski
+174 U Ka-Zar of the Savage Land @Paolo Parente
 177 R Mole Man, Moloid Master @Michele Giorgi
+180 U Punishing Punch @Bachzim
 182 U Reptil, Dinomorpher @Paolo Parente
 190 U The Thing, Ben Grimm @Gintas Galvanauskas
 191 U Tigra, Feline Fury @Ben Harvey
@@ -79,8 +105,12 @@ ScryfallCode=MSH
 197 R World War Hulk @Serena Malyon
 198 U Abomination, Terrifying Titan @Piotr Dura
 199 R Absorbing Man @Nathaniel Himawan
+200 R Alien Invasion @Björn Barends
 201 U Ant-Man, Colony Commander @Nathaniel Himawan
+202 R Ares, God of War @Fesbra
 203 R Armor Wars @Serena Malyon
+204 R The Astonishing Ant-Man @Randy Gallegos
+206 U Beast, Erudite Aerialist @Bachzim
 207 U Black Panther, Vanguard @Aniekan Udofia
 208 U Black Widow, Double Agent @Michael MacRae
 210 U Captain America, Living Legend @Smirtouille
@@ -93,24 +123,30 @@ ScryfallCode=MSH
 219 M King T'Challa @Aaron J. Riley & Eric Wilkerson
 220 R The Kingpin of Crime @Steve Morris
 221 U Madame Hydra @Pauline Voss
+222 R The Mighty Thor, Jane Foster @Victor Adame Minguez
 223 R Moon Girl and Devil Dinosaur @Zezhou Chen
 224 R The Ruinous Wrecking Crew @Kevin Sidharta
+225 R Scientist Supreme of A.I.M. @Gal Or
+226 R The Serpent Society @Rimas Valeikis
 229 U Spider-Woman, Secret Agent @Pauline Voss
 230 R Storm, Windrider @Immanuela Crovius
 231 R The Super Hero Civil War @Serena Malyon
 233 M Thanos, the Mad Titan @Björn Barends
 234 U Thor Odinson @Sean Vo
+235 U Titania, Rugged Rumbler @Taurin Clarke
 236 U U.S.Agent, John Walker @Julia Vasilyeva
 239 R Winter Soldier, Icy Assassin @Riccardo Federici
 240 R Wolverine, Fierce Fighter @Dan Brereton
 241 R Worlds Within Worlds @Michael MacRae
 243 R Arc Reactor @Maxim Ruabtsev
 244 R Captain America's Shield @Eglė Mosakaitė
+245 M Cosmic Cube @Justyna Dura
 251 M The Ten Rings @Arthur Yuan
 252 M Ultron, Artificial Malevolence @Nino Is
 255 R The Vision @Carissa Susilo
 260 U Avengers Tower @Arthur Yuan
 261 U Baxter Building @Paulius Daščioras
+263 R Castle Doom @Nino Is
 264 R Dark Fortress @Arthur Yuan
 266 R Gathering Place @Pablo Mendoza
 267 R Gleaming Bastion @Arthur Yuan
@@ -141,6 +177,7 @@ ScryfallCode=MSH
 299 R Super-Soldier Serum @Tyler Walpole
 300 M Multiversal Incursion @Jim Cheung
 301 R Secret Invasion @Veronica Fish
+302 R Avengers Disassembled @Roberta Ingranata
 303 M Mjölnir, Hammer of Thor @Jim Cheung
 304 R World War Hulk @Steve Ellis
 305 R Armor Wars @Andrew Griffith
@@ -148,7 +185,9 @@ ScryfallCode=MSH
 308 R The Super Hero Civil War @Roberta Ingranata
 310 R Arc Reactor @Steve Ellis
 311 R Captain America's Shield @Jim Cheung
+312 M Cosmic Cube @Jim Cheung & Jay David Ramos
 313 M The Ten Rings @Jim Cheung
+314 R Nick Fury, Agent of S.H.I.E.L.D. @Annie Wu
 315 U Baron Strucker, HYDRA Overlord @Annie Wu
 316 M Captain America, Super-Soldier @Annie Wu
 317 R Captain America's Shield @Annie Wu
@@ -160,10 +199,15 @@ ScryfallCode=MSH
 324 R Daredevil, Man Without Fear @Kev Walker
 326 R Elektra, Daughter of the Hand @Kev Walker
 327 R The Kingpin of Crime @Kev Walker
+328 M Jennifer Walters @Chris Bachalo & Adi Granov
+329 U Red Hulk @Adi Granov
 330 R Leader, Super-Genius @Adi Granov
 331 M Bruce Banner @Chris Bachalo & Adi Granov
 332 C HULK SMASH! @Adi Granov
+333 U Abomination, Terrifying Titan @Adi Granov
+334 U Avengers Tower @Johan Grenier
 336 M Doctor Doom @Johan Grenier
+337 M Cosmic Cube @Johan Grenier
 338 M Thor, God of Thunder @Johan Grenier
 339 M Mjölnir, Hammer of Thor @Johan Grenier
 341 M Avengers Assemble! @Johan Grenier
@@ -172,23 +216,30 @@ ScryfallCode=MSH
 344 M Ultron, Artificial Malevolence @Johan Grenier
 345 M Monica Rambeau @Chris Bachalo & Johan Grenier
 346 M King T'Challa @Chris Bachalo & Johan Grenier
+349 M Earth's Mightiest Heroes @Johan Grenier
 350 M Tony Stark @Chris Bachalo & Johan Grenier
 352 M Captain America, Super-Soldier @Jim Cheung
+353 R Captain America, Wings of Freedom @Elena Casagrande
 354 M Captain Marvel, Earth's Protector @Swayart
+355 M Jennifer Walters @Trevor Hairsine
 356 M Monica Rambeau @Trevor Hairsine
+357 R Nick Fury, Agent of S.H.I.E.L.D. @Leinil Francis Yu
 358 R The Sentry, Golden Guardian @Todd Nauck
 359 M Bruce Banner @Jim Cheung
+360 R Ironheart, Clever Champion @Kael Ngu
 361 R Ms. Marvel, Kamala Khan @Roberta Ingranata
 362 M Namor the Sub-Mariner @Todd Nauck
 363 M Tony Stark @Jim Cheung
 365 M Doctor Doom @Leonardo Vincent (Levinky)
 366 R Elektra, Daughter of the Hand @Leinil Francis Yu
+367 R Hawkeye, Master Marksman @Todd Nauck
 368 R The Scarlet Witch @Swayart
 369 M Thor, God of Thunder @Leinil Francis Yu
 371 R The Unbeatable Squirrel Girl @Swayart
 372 R Daredevil, Man Without Fear @Trevor Hairsine
 373 M King T'Challa @John Tyler Christopher
 374 R The Kingpin of Crime @Trevor Hairsine
+375 R Storm, Windrider @Terry Dodson
 376 M Thanos, the Mad Titan @Trevor Hairsine
 377 R Winter Soldier, Icy Assassin @Todd Nauck
 378 R Wolverine, Fierce Fighter @Todd Nauck
@@ -201,11 +252,14 @@ ScryfallCode=MSH
 385 M The Mind Stone @Madeline Boni
 386 M The Mind Stone @Leinil Francis Yu & Sunny Gho
 387 M Captain America, Super-Soldier @Jack Kirby & John Romita Sr.
+388 M Jennifer Walters @John Buscema & Chic Stone
+389 R Nick Fury, Agent of S.H.I.E.L.D. @Marie Severin
 390 M Bruce Banner @Jack Kirby & Paul Reinman
 391 M Namor the Sub-Mariner @John Buscema & Sol Brodsky
 392 M Tony Stark @Johnny Craig
 394 M Doctor Doom @Larry Lieber & Vince Colletta
 395 R Elektra, Daughter of the Hand @Mike Deodato Jr.
+397 R The Astonishing Ant-Man @Bob Layton
 398 R Daredevil, Man Without Fear @Jack Kirby
 399 M King T'Challa @Jack Kirby
 400 M Thanos, the Mad Titan @Jen Bartel
@@ -221,9 +275,18 @@ ScryfallCode=MSH
 410 R Thunderbolts Conspiracy @Lucio Parrillo
 411 R Fin Fang Foom @Filipe Pagliuso
 412 R Quicksilver, Brash Blur @Michael MacRae
+413 M Earth's Mightiest Heroes @Steve Morris
+415 R Mole Man, Moloid Master @Michele Giorgi
+416 R Absorbing Man @Nathaniel Himawan
+417 R Alien Invasion @Björn Barends
+418 R Ares, God of War @Fesbra
+420 R The Mighty Thor, Jane Foster @Victor Adame Minguez
 421 R Moon Girl and Devil Dinosaur @Zezhou Chen
 422 R The Ruinous Wrecking Crew @Kevin Sidharta
+423 R Scientist Supreme of A.I.M. @Gal Or
+424 R The Serpent Society @Rimas Valeikis
 426 R Worlds Within Worlds @Michael MacRae
+429 R Castle Doom @Nino Is
 431 R The Scarlet Witch @Julia Vasilyeva
 432 R Daredevil, Man Without Fear @Eric Deschamps
 433 L Plains @Marc Aspinall
@@ -237,8 +300,11 @@ ScryfallCode=MSH
 441 L Forest @Marc Aspinall
 442 L Forest @Sylvia Liu
 443 U Captain Mar-Vell, Space-Born @Gintas Galvanauskas
+444 U Patriot, Shield Wielder @Vlad Petruchik
 445 U Mister Fantastic, Reed Richards @Rimas Valeikis
+446 U Baron Strucker, HYDRA Overlord @InHyuk Lee
 449 U Captain America, Living Legend @Smirtouille
 450 U Kang, Temporal Tyrant @David Szabo
 451 U Madame Hydra @Pauline Voss
+452 U Avengers Tower @Arthur Yuan
 453 U Baxter Building @Paulius Daščioras
