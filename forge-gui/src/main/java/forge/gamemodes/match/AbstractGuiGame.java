@@ -354,6 +354,23 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return selectionMax;
     }
 
+    private final Set<CardView> weaklySelectableCards = Sets.newHashSet();
+
+    public void setWeaklySelectable(final Iterable<CardView> cards) {
+        weaklySelectableCards.clear();
+        for (CardView cv : cards) {
+            weaklySelectableCards.add(cv);
+        }
+    }
+
+    public void clearWeaklySelectable() {
+        weaklySelectableCards.clear();
+    }
+
+    public boolean isWeaklySelectable(final CardView card) {
+        return weaklySelectableCards.contains(card);
+    }
+
     public boolean isGamePaused() {
         return gamePause;
     }
@@ -490,9 +507,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     checkAwaitNextInputTimer();
                     synchronized (awaitNextInputTimer) {
                         if (awaitNextInputTask != null) {
-                            updatePromptForAwait(getCurrentPlayer());
+                            String waitingForName = updatePromptForAwait(getCurrentPlayer());
                             if (GuiBase.isNetPlay(AbstractGuiGame.this)) {
-                                showWaitingTimer(getCurrentPlayer(), findWaitingForPlayerName(getCurrentPlayer()));
+                                showWaitingTimer(getCurrentPlayer(), waitingForName);
                             }
                             awaitNextInputTask = null;
                         }
@@ -512,10 +529,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
-    protected final void updatePromptForAwait(final PlayerView playerView) {
+    protected final String updatePromptForAwait(final PlayerView playerView) {
         // Append "Waiting for opponent..." below the yield prompt so the user keeps the
         // cancel-yield UI during opponent turns instead of losing it to the await prompt.
-        String waiting = Localizer.getInstance().getMessage("lblWaitingForOpponent");
+        String waitingForName = findWaitingForPlayerName(playerView);
+        String waiting = waitingForName != null
+                ? Localizer.getInstance().getMessage("lblWaitingForPlayer", waitingForName)
+                : Localizer.getInstance().getMessage("lblWaitingForOpponent");
         String yieldMsg = currentYieldMessage();
         if (yieldMsg != null) {
             cancelAwaitNextInput();
@@ -525,6 +545,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             showPromptMessage(playerView, waiting);
             updateButtons(playerView, false, false, false);
         }
+        return waitingForName;
     }
 
     private String currentYieldMessage() {

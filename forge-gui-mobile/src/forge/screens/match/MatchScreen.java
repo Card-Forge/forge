@@ -251,7 +251,6 @@ public class MatchScreen extends FScreen {
 
         @Override
         protected void buildMenu() {
-
             if (isTopHumanPlayerActive() == getRotate180()) {
                 addItem(new MenuItem(Forge.getLocalizer().getMessage("lblGame"), gameMenu));
                 addItem(new MenuItem(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players));
@@ -493,7 +492,7 @@ public class MatchScreen extends FScreen {
                 if (playerPanel != null && playerPanelsList.contains(playerPanel)) {
                     playerViewSet.add(p);
                     FCollectionView<CardView> battlefield = p.getBattlefield();
-                    if (battlefield != null) {
+                    if (!battlefield.isEmpty()) {
                         Iterable<CardView> bfIter = MatchController.instance.isNetGame()
                                 ? battlefield.threadSafeIterable() : battlefield;
                         for (CardView c : bfIter) {

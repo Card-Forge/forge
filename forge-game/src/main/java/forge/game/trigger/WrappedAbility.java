@@ -513,4 +513,9 @@ public class WrappedAbility extends Ability {
     public boolean isKeyword(Keyword kw) {
         return sa.isKeyword(kw);
     }
+
+    @Override
+    public String getName() {
+        return sa.getName();
+    }
 }

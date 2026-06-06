@@ -87,6 +87,7 @@ ScryfallCode=PMEI
 2025-23 M Spider-Man, Miles Morales @InHyuk Lee
 2025-24 R Iroh, Grand Lotus @Jo Cordisco
 2025-25 R Aang, Air Nomad @Jinho Bae
+2025-26 R Zidane, Tantalus Thief @Eiji Kaneda
 2026-1 R Command Tower @Constantin Marin
 2026-2 R Crop Rotation @DiTerlizzi
 2026-3 R Zack Fair @Tetsuya Nomura
@@ -98,3 +99,4 @@ ScryfallCode=PMEI
 2026-08 R Appa, Aang's Companion @Kieran Yanner
 2026-10 R The Goose Mother @Jesper Ejsing
 2026-11 R Zetalpa, Primal Dawn @Chris Rallis
+2026-12 R Turtle Lair @Marina Ortega Lorente

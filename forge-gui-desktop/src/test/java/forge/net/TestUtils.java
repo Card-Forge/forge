@@ -1,5 +1,6 @@
 package forge.net;
 
+import forge.StaticData;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkChecksumUtil;
 import forge.gamemodes.net.server.RemoteClientGuiGame;
@@ -41,7 +42,7 @@ public final class TestUtils {
         if (!(GuiBase.getInterface() instanceof HeadlessGuiDesktop)) {
             GuiBase.setInterface(new HeadlessGuiDesktop());
         }
-        if (FModel.getPreferences() == null) {
+        if (StaticData.instance() == null) {
             FModel.initialize(null, preferences -> {
                 preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
                 preferences.setPref(FPref.UI_LANGUAGE, "en-US");

@@ -9,6 +9,7 @@ import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
 import forge.control.KeyboardShortcuts;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
 import forge.localinstance.properties.ForgePreferences;
@@ -37,6 +38,7 @@ public final class GameMenu {
         menu.setMnemonic(KeyEvent.VK_G);
         menu.add(getMenuItem_Undo());
         menu.add(getMenuItem_Concede());
+        menu.add(getMenuItem_OfferDraw());
         menu.add(getMenuItem_EndTurn());
         menu.add(getMenuItem_AlphaStrike());
         menu.addSeparator();
@@ -77,6 +79,13 @@ public final class GameMenu {
         final SkinnedMenuItem menuItem = new SkinnedMenuItem(matchUI.getConcedeCaption());
         setAcceleratorFromPref(menuItem, FPref.SHORTCUT_CONCEDE);
         menuItem.addActionListener(e -> matchUI.concede());
+        return menuItem;
+    }
+
+    private SkinnedMenuItem getMenuItem_OfferDraw() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblOfferDraw"));
+        menuItem.addActionListener(e -> matchUI.getGameController().drawOfferAction(DrawOfferMessage.Action.OFFER));
         return menuItem;
     }
 

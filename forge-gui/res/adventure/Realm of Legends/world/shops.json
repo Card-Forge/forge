@@ -984,6 +984,22 @@
       {"type": "cardPackShop", "count": 1, "editions": ["VOW"] }
     ]
   },
+  {
+    "name":"StrixhavenBoosters",
+    "description":"Pack to School",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["STX"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["STX"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["STX"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["STX"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["SOS"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["SOS"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["SOS"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["SOS"] }
+    ]
+  },
 {                                      
 "name":"Swamp",    
 "description":"Swamps For Sale",

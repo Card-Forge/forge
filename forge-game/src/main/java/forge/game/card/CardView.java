@@ -22,7 +22,9 @@ import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.*;
+import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -469,11 +471,11 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.MarkedColors, c.getMarkedColors());
     }
     public FCollectionView<CardView> getMergedCardsCollection() {
-        return get(TrackableProperty.MergedCardsCollection);
+        return Objects.requireNonNullElse(get(TrackableProperty.MergedCardsCollection), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getChosenCards() {
-        return get(TrackableProperty.ChosenCards);
+        return Objects.requireNonNullElse(get(TrackableProperty.ChosenCards), FCollection.getEmpty());
     }
 
     public PlayerView getChosenPlayer() {
@@ -743,11 +745,11 @@ public class CardView extends GameEntityView {
     }
 
     public FCollectionView<CardView> getEncodedCards() {
-        return get(TrackableProperty.EncodedCards);
+        return Objects.requireNonNullElse(get(TrackableProperty.EncodedCards), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getUntilLeavesBattlefield() {
-        return get(TrackableProperty.UntilLeavesBattlefield);
+        return Objects.requireNonNullElse(get(TrackableProperty.UntilLeavesBattlefield), FCollection.getEmpty());
     }
 
     public GameEntityView getEntityAttachedTo() {
@@ -773,7 +775,7 @@ public class CardView extends GameEntityView {
     }
 
     public FCollectionView<CardView> getGainControlTargets() {
-        return get(TrackableProperty.GainControlTargets);
+        return Objects.requireNonNullElse(get(TrackableProperty.GainControlTargets), FCollection.getEmpty());
     }
 
     public CardView getCloneOrigin() {
@@ -785,15 +787,15 @@ public class CardView extends GameEntityView {
     }
 
     public FCollectionView<CardView> getImprintedCards() {
-        return get(TrackableProperty.ImprintedCards);
+        return Objects.requireNonNullElse(get(TrackableProperty.ImprintedCards), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getExiledCards() {
-        return get(TrackableProperty.ExiledCards);
+        return Objects.requireNonNullElse(get(TrackableProperty.ExiledCards), FCollection.getEmpty());
     }
 
     public FCollectionView<CardView> getHauntedBy() {
-        return get(TrackableProperty.HauntedBy);
+        return Objects.requireNonNullElse(get(TrackableProperty.HauntedBy), FCollection.getEmpty());
     }
 
     public CardView getHaunting() {
@@ -801,7 +803,7 @@ public class CardView extends GameEntityView {
     }
 
     public FCollectionView<CardView> getMustBlockCards() {
-        return get(TrackableProperty.MustBlockCards);
+        return Objects.requireNonNullElse(get(TrackableProperty.MustBlockCards), FCollection.getEmpty());
     }
     void updateMustBlockCards(Card c) {
         setCards(null, c.getMustBlockCards(), TrackableProperty.MustBlockCards);
@@ -1732,129 +1734,6 @@ public class CardView extends GameEntityView {
         }
     }
 
-    //special methods for updating card and player properties as needed and returning the new collection
-    Card setCard(Card oldCard, Card newCard, TrackableProperty key) {
-        if (newCard != oldCard) {
-            set(key, CardView.get(newCard));
-        }
-        return newCard;
-    }
-    CardCollection setCards(CardCollection oldCards, CardCollection newCards, TrackableProperty key) {
-        if (newCards == null || newCards.isEmpty()) { //avoid storing empty collections
-            set(key, null);
-            return null;
-        }
-        set(key, CardView.getCollection(newCards)); //TODO prevent overwriting list if not necessary
-        return newCards;
-    }
-    CardCollection setCards(CardCollection oldCards, Iterable<Card> newCards, TrackableProperty key) {
-        if (newCards == null) {
-            set(key, null);
-            return null;
-        }
-        return setCards(oldCards, new CardCollection(newCards), key);
-    }
-    CardCollection addCard(CardCollection oldCards, Card cardToAdd, TrackableProperty key) {
-        if (cardToAdd == null) { return oldCards; }
-
-        if (oldCards == null) {
-            oldCards = new CardCollection();
-        }
-        if (oldCards.add(cardToAdd)) {
-            TrackableCollection<CardView> views = get(key);
-            if (views == null) {
-                views = new TrackableCollection<>();
-                views.add(cardToAdd.getView());
-                set(key, views);
-            }
-            else if (views.add(cardToAdd.getView())) {
-                flagAsChanged(key);
-            }
-        }
-        return oldCards;
-    }
-    CardCollection addCards(CardCollection oldCards, Iterable<Card> cardsToAdd, TrackableProperty key) {
-        if (cardsToAdd == null) { return oldCards; }
-
-        TrackableCollection<CardView> views = get(key);
-        if (oldCards == null) {
-            oldCards = new CardCollection();
-        }
-        boolean needFlagAsChanged = false;
-        for (Card c : cardsToAdd) {
-            if (c != null && oldCards.add(c)) {
-                if (views == null) {
-                    views = new TrackableCollection<>();
-                    views.add(c.getView());
-                    set(key, views);
-                }
-                else if (views.add(c.getView())) {
-                    needFlagAsChanged = true;
-                }
-            }
-        }
-        if (needFlagAsChanged) {
-            flagAsChanged(key);
-        }
-        return oldCards;
-    }
-    CardCollection removeCard(CardCollection oldCards, Card cardToRemove, TrackableProperty key) {
-        if (cardToRemove == null || oldCards == null) { return oldCards; }
-
-        if (oldCards.remove(cardToRemove)) {
-            TrackableCollection<CardView> views = get(key);
-            if (views == null) {
-                set(key, null);
-            } else if (views.remove(cardToRemove.getView())) {
-                if (views.isEmpty()) {
-                    set(key, null); //avoid keeping around an empty collection
-                }
-                else {
-                    flagAsChanged(key);
-                }
-            }
-            if (oldCards.isEmpty()) {
-                oldCards = null; //avoid keeping around an empty collection
-            }
-        }
-        return oldCards;
-    }
-    CardCollection removeCards(CardCollection oldCards, Iterable<Card> cardsToRemove, TrackableProperty key) {
-        if (cardsToRemove == null || oldCards == null) { return oldCards; }
-
-        TrackableCollection<CardView> views = get(key);
-        boolean needFlagAsChanged = false;
-        for (Card c : cardsToRemove) {
-            if (oldCards.remove(c)) {
-                if (views == null) {
-                    set(key, null);
-                } else if (views.remove(c.getView())) {
-                    if (views.isEmpty()) {
-                        views = null;
-                        set(key, null); //avoid keeping around an empty collection
-                        needFlagAsChanged = false; //doesn't need to be flagged a second time
-                    }
-                    else {
-                        needFlagAsChanged = true;
-                    }
-                }
-                if (oldCards.isEmpty()) {
-                    oldCards = null; //avoid keeping around an empty collection
-                    break;
-                }
-            }
-        }
-        if (needFlagAsChanged) {
-            flagAsChanged(key);
-        }
-        return oldCards;
-    }
-    CardCollection clearCards(CardCollection oldCards, TrackableProperty key) {
-        if (oldCards != null) {
-            set(key, null);
-        }
-        return null;
-    }
     void updateMergeCollections(CardCollection cards) {
         TrackableCollection<CardView> views = get(TrackableProperty.MergedCardsCollection);
         boolean needFlagAsChanged = false;

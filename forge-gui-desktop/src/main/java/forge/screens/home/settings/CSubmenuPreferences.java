@@ -106,10 +106,11 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbAnte(), FPref.UI_ANTE));
         lstControls.add(Pair.of(view.getCbAnteMatchRarity(), FPref.UI_ANTE_MATCH_RARITY));
         lstControls.add(Pair.of(view.getCbAnteIncludeBasicLands(), FPref.UI_ANTE_INCLUDE_BASIC_LANDS));
-        lstControls.add(Pair.of(view.getCbManaBurn(), FPref.UI_MANABURN));
+        lstControls.add(Pair.of(view.getCbManaBurn(), FPref.LEGACY_MANABURN));
         lstControls.add(Pair.of(view.getCbOrderCombatants(), FPref.LEGACY_ORDER_COMBATANTS));
         lstControls.add(Pair.of(view.getCbScaleLarger(), FPref.UI_SCALE_LARGER));
         lstControls.add(Pair.of(view.getCbRenderBlackCardBorders(), FPref.UI_RENDER_BLACK_BORDERS));
+        lstControls.add(Pair.of(view.getCbShowActionableHighlights(), FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS));
         lstControls.add(Pair.of(view.getCbLargeCardViewers(), FPref.UI_LARGE_CARD_VIEWERS));
         lstControls.add(Pair.of(view.getCbSmallDeckViewer(), FPref.UI_SMALL_DECK_VIEWER));
         lstControls.add(Pair.of(view.getCbRandomArtInPools(), FPref.UI_RANDOM_ART_IN_POOLS));
@@ -133,8 +134,8 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbRandomFoil(), FPref.UI_RANDOM_FOIL));
         lstControls.add(Pair.of(view.getCbEnableSounds(), FPref.UI_ENABLE_SOUNDS));
         lstControls.add(Pair.of(view.getCbAltSoundSystem(), FPref.UI_ALT_SOUND_SYSTEM));
-        lstControls.add(Pair.of(view.getCbSROptimize(), FPref.UI_SR_OPTIMIZE));
-        lstControls.add(Pair.of(view.getCbUiForTouchScreen(), FPref.UI_FOR_TOUCHSCREN));
+        lstControls.add(Pair.of(view.getCbSROptimize(), FPref.UI_SCREENREADER_OPTIMIZE));
+        lstControls.add(Pair.of(view.getCbUiForTouchScreen(), FPref.UI_TOUCHSCREEN_OPTIMIZE));
         lstControls.add(Pair.of(view.getCbTimedTargOverlay(), FPref.UI_TIMED_TARGETING_OVERLAY_UPDATES));
         lstControls.add(Pair.of(view.getCbCompactMainMenu(), FPref.UI_COMPACT_MAIN_MENU));
         lstControls.add(Pair.of(view.getCbUseSentry(), FPref.USE_SENTRY));
@@ -228,8 +229,40 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeServerPortButton();
         initializeAfkTimeoutButton();
         initializeDefaultLanguageComboBox();
+        initializeActionableHighlightColorField();
 
         disableLazyLoading();
+    }
+
+    private void initializeActionableHighlightColorField() {
+        final forge.toolbox.FTextField field = view.getTxtActionableHighlightColor();
+        field.setText(prefs.getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR));
+        field.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override public void focusLost(java.awt.event.FocusEvent e) { saveActionableHighlightColor(field); }
+        });
+        field.addActionListener(e -> saveActionableHighlightColor(field));
+    }
+
+    private void saveActionableHighlightColor(forge.toolbox.FTextField field) {
+        if (updating) return;
+        String normalized = normalizeHexColor(field.getText());
+        if (normalized == null) {
+            // Invalid input: revert the field to the persisted value rather than silently keeping garbage.
+            field.setText(prefs.getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR));
+            return;
+        }
+        field.setText(normalized);
+        prefs.setPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR, normalized);
+        prefs.save();
+    }
+
+    /** Accepts a case-insensitive 6-char RGB hex; returns it uppercased, or
+     *  null when input isn't 6 hex characters. */
+    private static String normalizeHexColor(String raw) {
+        if (raw == null) return null;
+        String s = raw.trim();
+        if (s.length() != 6 || !s.matches("[0-9A-Fa-f]{6}")) return null;
+        return s.toUpperCase();
     }
 
     /* (non-Javadoc)
@@ -249,6 +282,7 @@ public enum CSubmenuPreferences implements ICDoc {
         for(final Pair<JCheckBox, FPref> kv: lstControls) {
             kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));
         }
+        view.getTxtActionableHighlightColor().setText(prefs.getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR));
         view.reloadShortcuts();
 
         SwingUtilities.invokeLater(() -> view.getCbRemoveSmall().requestFocusInWindow());

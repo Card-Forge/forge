@@ -961,12 +961,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private void recalculateCardPanels(final PlayerView model, final ZoneType zone) {
         final List<CardView> modelCopy;
         synchronized (model) {
-            Iterable<CardView> cards = model.getCards(zone);
-            if (cards != null) {
-                modelCopy = Lists.newArrayList(cards);
-            } else {
-                modelCopy = Lists.newArrayList();
-            }
+            modelCopy = Lists.newArrayList(model.getCards(zone));
         }
 
         final List<CardView> oldCards = Lists.newArrayList();
@@ -1053,17 +1048,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         toPanel.getAttachedPanels().clear();
 
-        if (card.hasAnyCardAttachments()) {
-            final Iterable<CardView> enchants = card.getAllAttachedCards();
-            for (final CardView e : enchants) {
-                final CardPanel cardE = getCardPanel(e.getId());
-                if (cardE != null) {
-                    if (cardE.getAttachedToPanel() != toPanel) {
-                        cardE.setAttachedToPanel(toPanel);
-                        needLayoutRefresh = true; //ensure layout refreshed if any attachments change
-                    }
-                    toPanel.getAttachedPanels().add(cardE);
+        for (final CardView e : card.getAllAttachedCards()) {
+            final CardPanel cardE = getCardPanel(e.getId());
+            if (cardE != null) {
+                if (cardE.getAttachedToPanel() != toPanel) {
+                    cardE.setAttachedToPanel(toPanel);
+                    needLayoutRefresh = true; //ensure layout refreshed if any attachments change
                 }
+                toPanel.getAttachedPanels().add(cardE);
             }
         }
 

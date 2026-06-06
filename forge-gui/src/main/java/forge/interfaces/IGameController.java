@@ -5,6 +5,7 @@ import java.util.List;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
@@ -19,6 +20,8 @@ public interface IGameController {
     boolean canPlayUnlimitedLands();
 
     void concede();
+
+    void drawOfferAction(DrawOfferMessage.Action action);
 
     void alphaStrike();
 

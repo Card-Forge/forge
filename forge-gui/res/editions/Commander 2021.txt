@@ -60,7 +60,7 @@ ScryfallCode=C21
 52 R Inferno Project @Olivier Bernard
 53 R Laelia, the Blade Reforged @Wisnu Tan
 54 R Radiant Performer @Alessandra Pisano
-55 R Rionya, Fire Dancer @Heonhwa Choe
+55 R Rionya, Fire Dancer @Heonhwa
 56 R Rousing Refrain @Izzy
 57 R Ruin Grinder @Hector Ortiz
 58 R Surge to Victory @Grzegorz Rutkowski
@@ -387,7 +387,7 @@ ScryfallCode=C21
 379 R Inferno Project @Olivier Bernard
 380 R Laelia, the Blade Reforged @Wisnu Tan
 381 R Radiant Performer @Alessandra Pisano
-382 R Rionya, Fire Dancer @Heonhwa Choe
+382 R Rionya, Fire Dancer @Heonhwa
 383 R Rousing Refrain @Izzy
 384 R Ruin Grinder @Hector Ortiz
 385 R Surge to Victory @Grzegorz Rutkowski

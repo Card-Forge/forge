@@ -6,42 +6,48 @@ Holding the character image again will close the console (as will typing `exit`)
 
 To scroll the console window, click and drag the text box.
 
+Commands themselves are case-sensitive. Arguments with spaces need double quotes. Amounts are integers. Durations can have a decimal point.
+
 ## Available commands
 
 | Command Example | Description |
 | -- | -- |
-| resetMapQuests | Resets the map quests, resulting in all side-quest progress being lost and all side-quest types being re-picked |
-| give gold 1000 | Give 1000 gold |
-| give shards 1000 | Give 1000 shards |
-| give print lea 232 | Add an alpha (LEA set code) black lotus (232 collector number) |
-| give item <item id> | Adds an in game item such as leather boots |
-| give set sld | Give 4 copies of every card in the Secret Lair Drop (set code SLD), flagged as having no sell value |
-| give nosell card forest | Gives a forest with no sell value |
-| give boosters leb | Add a booster from beta (LEB set code) |
-| give quest 123 | Add the quest by its number ID |
-| give life 10 | Add 10 life to yourself |
-| give card forest | Adds a forest to your inventory |
+| clearnosell | Removes all 'no sell value' cards you own, that are not used in a deck, from your inventory |
+| crack | Cracks a random item you have equipped |
+| fly &lt;duration&gt; | Allows you to walk over obstacles in the overworld or POI map for a number of seconds (currently useless in POIs, in which there will only be a visual effect on the player sprite) |
+| give boosters &lt;edition code&gt; \[amount\] | Adds a booster of a set (case-insensitive; for example, the edition code for "Limited Edition Beta" is LEB) |
+| give \[nosell\] card &lt;name&gt; \[amount\] | Adds a card to your inventory, optionally with no sell value (case insensitive; if a card has multiple titles, any title will work) |
+| give gold &lt;amount&gt; | Adds an amount of gold |
+| give item &lt;item id&gt; | Adds an Adventure item (such as "Leather Boots", case-insensitive, defined in items.json) |
+| give life &lt;amount&gt; | Increases your current health AND max health by an amount |
+| give print &lt;edition code&gt; &lt;collector number&gt; \[amount\] | Adds a specific printing of a card to your inventory (case-insensitive, for example, "Black Lotus" from Alpha edition is LEA 232) |
+| give quest &lt;id&gt; | Adds a quest by its numeric id (defined in quests.json) |
+| give set &lt;edition code&gt; | Adds 4 copies of every card of a set to your inventory, flagged as having no sell value (for example, the edition code for "Secret Lair Drop" is SLD) |
+| give shards &lt;amount&gt; | Adds an amount of shards |
+| heal amount &lt;amount&gt; | Adds an amount to your current health, capping at max health |
+| heal full | Sets current health to max health |
+| heal percent &lt;float&gt; | Adds a percentage of your max health to your current health, capping at max health (adding 25% is 0.25) |
+| hide &lt;duration&gt; | Makes enemies not chase you in the overworld or POI map for a number of seconds (currently useless in POIs, in which there will only be a visual effect on the player sprite) |
+| leave | Exits the current POI map (town/dungeon/cave) and returns you to the overworld |
+| remove enemy all | Removes all the enemies from the POI map or the overworld |
+| remove enemy nearest | Removes the nearest overworld enemy |
+| remove enemy &lt;object id&gt; | Removes a specific enemy from the current POI map (enemy object ids are defined in the POI's *.tmx file) |
+| set event &lt;block name or edition code&gt; \[event format\] | Sets the competitive event at the current town POI with an inn (format is case-insensitive, such as Draft, Jumpstart, or Sealed; an omitted format will default to Draft, or Jumpstart for a Jumpstart block like "Dominaria United Jumpstart"; blocks are defined in blocks.txt; Constructed events are not currently implemented) |
+| setColorID &lt;color letters&gt; | Sets the player color identity (one or more of WUBRGC, one word, case-insensitive); probably used for testing and shops |
+| spawn enemy &lt;name&gt; | Spawns an enemy nearby in the overworld (not in a POI map; use a name or nameOverride defined in enemies.json, case-sensitive, as seen in-game) |
+| sprint &lt;duration&gt; | Increases your walk speed in the overworld or POI map for a number of seconds |
+| teleport to &lt;x&gt; &lt;y&gt; | Moves you x tiles east and y tiles north from the left bottom corner |
 | debug collision | Displays bounding boxes around entities |
-| debug map | TODO |
+| debug map | Enables drag gestures on the overworld's mini map (while it's small) to fast travel where the gesture is released |
 | debug off | Turns off debugging |
-| teleport to 6000 5000 | Moves you 6000 tiles east and 5000 tiles north from the left bottom corner |
-| fullHeal | Returns your health back to baseline |
-| sprint 100 | Increases your speed for 100 seconds |
-| setColorId R | Sets the player color identity; Probably used for testing and shops |
-| clearnosell | Clears the no sell value flag from all cards you own that are not used in a deck |
-| remove enemy abc | Remove the enemy from the map with the map ID abc |
-| remove enemy all | Remove all the enemies from the map |
-| dumpEnemyDeckList | Print the enemy deck lists to terminal output stream |
-| getShards amount 100 | Similar to give shards command; Gives 100 shards to the player |
-| resetQuests | Resets the world quests. In progress quests are not abandonned or reset including dungeons. Does not reroll abandoned quests. Not really sure what this does. | 
-| hide 100 | Enemies do not chase you for 100 seconds |
-| fly 100 | You can walk over obstacles for 100 seconds |
-| crack | Cracks a random item you are wearing |
-| spawn enemy Sliver | Spawns a Sliver on your screen |
-| listPOI | Prints all locations in terminal output stream as ID-type pairings |
-| leave | Gets you out of the current town/dungeon/cave |
-| dumpEnemyColorIdentity | Prints all enemies, their colour affinity and deck name to terminal output |
-| heal | Recover your full health |
-| dumpEnemyDeckColors | Prints all decks available to enemies and their affinities |
-| reset map | Reset the current map (not overworld) after you exit it |
-| exit | Close the console |
+| reset map | Flags the current POI map to reset when you exit it, restoring all deleted POI map objects like enemies |
+| resetMapQuests | Resets the current POI map's local quest flags; all side quest progress within that location will be lost |
+| resetQuests | Resets the player's global quest flags; current quests won't be abandoned or restarted, but they will lose track of what had been done; POI side quests will be unaffected. |
+| sanitize editions | Replaces all cards from non-allowed editions in decks and inventory with printings from allowed editions (if configured for the Adventure plane) |
+| dumpEnemyColorIdentity | Prints all enemies, with their color affinity and deck name, to stdout (warning: currently useless on mobile and makes the app unresponsive) |
+| dumpEnemyDeckColors | Prints all decks available to enemies and their affinities to stdout (warning: currently useless on mobile and makes the app unresponsive) |
+| dumpEnemyDeckList | Prints all enemy deck lists to stdout (warning: currently useless on mobile and makes the app unresponsive) |
+| listPOI | Prints all POIs, with their name and type, to stdout (defined in points_of_interest.json; currently useless on mobile) |
+| fullHeal | Same as `heal full` command (redundant) |
+| getShards amount &lt;amount&gt; | Same as `give shards` command (redundant) |
+| exit | Closes the console |

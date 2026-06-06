@@ -40,7 +40,7 @@ public class VPrompt extends FContainer {
     private final FButton btnOk, btnCancel;
     private final MessageLabel lblMessage;
     private String message;
-    private CardView card = null;
+    private CardView card;
 
     public void setCardView(final CardView card) {
         this.card = card;
@@ -73,7 +73,7 @@ public class VPrompt extends FContainer {
     }
     public void setMessage(String message0) {
         message = message0;
-        card = null ;
+        card = null;
     }
     public void setMessage(String message0, CardView card0) {
         message = message0;

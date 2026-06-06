@@ -49,7 +49,7 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     private CLobby lobby;
 
     void setLobby(final VLobby lobbyView) {
-        lobby = new CLobby(lobbyView);
+        lobby = lobbyView.getController();
         initialize();
     }
 

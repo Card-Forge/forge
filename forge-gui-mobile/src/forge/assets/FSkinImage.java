@@ -85,6 +85,7 @@ public enum FSkinImage implements FSkinImageInterface {
     SETTINGS     (FSkinProp.ICO_SETTINGS),
     ENDTURN      (FSkinProp.ICO_ENDTURN),
     CONCEDE      (FSkinProp.ICO_CONCEDE),
+    OFFERDRAW    (FSkinProp.ICO_DOCK_OFFERDRAW),
     DECKLIST     (FSkinProp.ICO_DECKLIST),
     ALPHASTRIKE  (FSkinProp.ICO_ALPHASTRIKE),
     ARCSOFF      (FSkinProp.ICO_ARCSOFF),
