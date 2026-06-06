@@ -6,8 +6,6 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
-import forge.game.cost.Cost;
-import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.OptionalCost;
@@ -177,44 +175,19 @@ public class CharmAi extends SpellAbilityAi {
 
     private boolean canPayForAdditionalMode(SpellAbility sa, List<AbilitySub> chosen, AbilitySub sub, Player ai) {
         Card source = sa.getHostCard();
-        if (source.hasStartOfKeyword("Spree") || source.hasStartOfKeyword("Tiered")) {
-            Cost fullCost = sa.getPayCosts().copy();
-            for (AbilitySub mode : chosen) {
-                if (!mode.hasParam("ModeCost")) {
-                    return false;
-                }
-                fullCost.add(new Cost(mode.getParam("ModeCost"), false));
-            }
-            if (!sub.hasParam("ModeCost")) {
-                return false;
-            }
-            fullCost.add(new Cost(sub.getParam("ModeCost"), false));
-            return ComputerUtilCost.canPayCost(sa.copyWithDefinedCost(fullCost), ai, false);
-        }
-
-        if (!source.hasStartOfKeyword("Escalate")) {
+        if (!source.hasStartOfKeyword("Escalate") && !source.hasStartOfKeyword("Spree")
+                && !source.hasStartOfKeyword("Tiered")) {
             return true;
         }
-        String escalateCost = getEscalateCost(source);
-        if (escalateCost == null) {
-            return false;
+        try {
+            List<AbilitySub> testModes = Lists.newArrayList(chosen);
+            testModes.add(sub);
+            sa.setSubAbility(null);
+            CharmEffect.chainAbilities(sa, testModes);
+            return ComputerUtilCost.canPayCost(sa, ai, false);
+        } finally {
+            sa.setSubAbility(null);
         }
-
-        Cost fullCost = sa.getPayCosts().copy();
-        for (int i = 0; i < chosen.size(); i++) {
-            fullCost.add(new Cost(escalateCost, false));
-        }
-        return ComputerUtilCost.canPayCost(sa.copyWithDefinedCost(fullCost), ai, false);
-    }
-
-    private String getEscalateCost(Card source) {
-        for (KeywordInterface inst : source.getKeywords()) {
-            String kw = inst.getOriginal();
-            if (kw.startsWith("Escalate:")) {
-                return kw.substring("Escalate:".length());
-            }
-        }
-        return null;
     }
 
     private List<AbilitySub> chooseTriskaidekaphobia(List<AbilitySub> choices, final Player ai) {
