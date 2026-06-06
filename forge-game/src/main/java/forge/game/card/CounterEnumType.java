@@ -245,6 +245,8 @@ public enum CounterEnumType implements CounterType {
 
     INTERVENTION("INTRV", 205, 203, 105, CounterAiCategory.Positive),
 
+    INVASION("INVAS", 235, 120, 60, CounterAiCategory.Positive),
+    
     INVITATION("INVIT", 205, 0, 26, CounterAiCategory.Positive),
 
     ISOLATION("ISOLT", 250, 190, 0, CounterAiCategory.Positive),

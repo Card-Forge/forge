@@ -1,0 +1,9 @@
+Name:Chase Stein, Runaway
+ManaCost:1 R
+Types:Legendary Creature Human Hero
+PT:2/2
+ A:AB$ Dig | Cost$ T Discard<1/Card> | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. Until the end of your next turn, you may play that card.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ StaticMayPlay | Duration$ UntilTheEndOfYourNextTurn | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:StaticMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | Description$ Until the end of your next turn, you may play that card.
+Oracle:{T}, Discard a card: Exile the top card of your library. Until the end of your next turn, you may play that card.
