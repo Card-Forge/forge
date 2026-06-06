@@ -972,13 +972,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
                 zonesToUpdate.add(new PlayerZoneUpdate(owner, zone));
                 final Iterable<PlayerZoneUpdate>[] zonesShown = new Iterable[1];
+                final InputConfirm inp = new InputConfirm(this, fm,
+                        localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true);
+                inputQueue.setInput(inp);
                 FThreads.invokeInEdtNowOrLater(() -> {
                     getGui().updateZones(zonesToUpdate);
                     zonesShown[0] = getGui().tempShowZones(getLocalPlayerView(), zonesToUpdate);
                 });
-                final InputConfirm inp = new InputConfirm(this, fm,
-                        localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true);
-                inp.showAndWait();
+                inp.awaitLatchRelease();
                 if (!inp.getResult()) {
                     FThreads.invokeInEdtLater(this::autoPassUntilEndOfTurn);
                 }
