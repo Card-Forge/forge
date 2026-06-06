@@ -50,7 +50,9 @@ ScryfallCode=MAR
 44 M Ephemerate @Mateus Manhanini
 45 M Final Showdown @John Buscema & Tom Palmer
 46 M Light of Promise @David Lopez
+47 M Path to Exile @Klaus Janson & Mike Zeck
 48 M Return to the Ranks @Jack Kirby
+49 M Righteous Fury @Jim Cheung & Justin Ponsor
 50 M Steelshaper's Gift @John Cassaday
 51 M Teferi's Protection @Jack Kirby ${"flavorName": "T'Challa's Protection"}
 52 M Counterspell @Adi Granov
@@ -58,6 +60,7 @@ ScryfallCode=MAR
 55 M Harbinger of the Seas @Michael Turner
 56 M Lord of Atlantis @Mike Mignola & Dave Stewart
 57 M Mechanized Production @
+58 M Narset's Reversal @Mark Texeira & Dave Kemp ${"flavorName": "Black Panther's Redirection"}
 59 M Reconnaissance Mission @Kaare Andrews
 60 M Show and Tell @John Buscema
 61 M Simulacrum Synthesizer @Jack Kirby

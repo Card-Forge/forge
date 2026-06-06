@@ -30,6 +30,11 @@ ScryfallCode=MSC
 726 R Lucky the Pizza Dog @Rudy Siswanto
 741 M The Fantastic Four @Yasmine Putri
 793 U Dark Ritual @Nino Is
+829 M Black Panther, Claws of Bast @Alex Horley-Orlandelli
+830 M Iron Man, Modern Marvel @Milivoj Ćeran
+831 M Black Widow, Daring Operative @Julie Bell
+832 M Spider-Man, Web-Spinner @Junggeun Yoon
+833 M Hulk, Brutal Brawler @Myles Wohl
 875 M Invisible Woman @Erikas Perl
 876 M Mister Fantastic @Gintas Galvanauskas
 877 M Human Torch @Vilhelmas Banys
