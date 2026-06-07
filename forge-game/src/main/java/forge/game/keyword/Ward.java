@@ -1,9 +1,8 @@
 package forge.game.keyword;
 
 import java.util.List;
-import java.util.StringJoiner;
 
-import org.testng.collections.Lists;
+import com.google.common.collect.Lists;
 
 import forge.game.cost.Cost;
 import forge.util.Lang;
@@ -45,12 +44,7 @@ public class Ward extends KeywordWithCost {
             return costToReminderDesc(getCost());
         }
 
-        StringJoiner sj = new StringJoiner(" or ");
-        for (Cost c : costs) {
-            sj.add(costToReminderDesc(c));
-        }
-
-        return sj.toString();
+        return Lang.joinHomogenous(costs, this::costToReminderDesc, "or");
     }
 
     protected String costToReminderDesc(Cost c) {
