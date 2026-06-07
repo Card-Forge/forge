@@ -163,23 +163,23 @@ public class TrackableTypes {
             }
         }
     };
-    public static final TrackableType<CardTypeView> CardTypeViewType = new TrackableType<CardTypeView>(CardType.EMPTY);
-    public static final TrackableObjectType<PlayerView> PlayerViewType = new TrackableObjectType<PlayerView>();
-    public static final TrackableCollectionType<PlayerView> PlayerViewCollectionType = new TrackableCollectionType<PlayerView>(PlayerViewType);
-    public static final TrackableObjectType<GameEntityView> GameEntityViewType = new TrackableObjectType<GameEntityView>();
-    public static final TrackableObjectType<StackItemView> StackItemViewType = new TrackableObjectType<StackItemView>();
-    public static final TrackableCollectionType<StackItemView> StackItemViewListType = new TrackableCollectionType<StackItemView>(StackItemViewType);
-    public static final TrackableObjectType<CombatView> CombatViewType = new TrackableObjectType<CombatView>();
-    public static final TrackableType<ManaCost> ManaCostType = new TrackableType<ManaCost>(ManaCost.NO_COST);
-    public static final TrackableType<ColorSet> ColorSetType = new TrackableType<ColorSet>(ColorSet.C);
-    public static final TrackableType<List<String>> StringListType = new TrackableType<List<String>>(null);
-    public static final TrackableType<Set<String>> StringSetType = new TrackableType<Set<String>>(null);
-    public static final TrackableType<Map<String, String>> StringMapType = new TrackableType<Map<String, String>>(null);
+    public static final TrackableType<CardTypeView> CardTypeViewType = new TrackableType<>(CardType.EMPTY);
+    public static final TrackableObjectType<PlayerView> PlayerViewType = new TrackableObjectType<>();
+    public static final TrackableCollectionType<PlayerView> PlayerViewCollectionType = new TrackableCollectionType<>(PlayerViewType);
+    public static final TrackableObjectType<GameEntityView> GameEntityViewType = new TrackableObjectType<>();
+    public static final TrackableObjectType<StackItemView> StackItemViewType = new TrackableObjectType<>();
+    public static final TrackableCollectionType<StackItemView> StackItemViewListType = new TrackableCollectionType<>(StackItemViewType);
+    public static final TrackableObjectType<CombatView> CombatViewType = new TrackableObjectType<>();
+    public static final TrackableType<ManaCost> ManaCostType = new TrackableType<>(ManaCost.NO_COST);
+    public static final TrackableType<ColorSet> ColorSetType = new TrackableType<>(ColorSet.C);
+    public static final TrackableType<List<String>> StringListType = new TrackableType<>(null);
+    public static final TrackableType<Set<String>> StringSetType = new TrackableType<>(null);
+    public static final TrackableType<Map<String, String>> StringMapType = new TrackableType<>(null);
 
-    public static final TrackableType<Set<Integer>> IntegerSetType = new TrackableType<Set<Integer>>(null);
-    public static final TrackableType<Map<Integer, Integer>> IntegerMapType = new TrackableType<Map<Integer, Integer>>(null);
-    public static final TrackableType<Map<Byte, Integer>> ManaMapType = new TrackableType<Map<Byte, Integer>>(null);
-    public static final TrackableType<Map<CounterType, Integer>> CounterMapType = new TrackableType<Map<CounterType, Integer>>(null);
-    public static final TrackableType<Map<Object, Object>> GenericMapType = new TrackableType<Map<Object, Object>>(null);
-    public static final TrackableType<KeywordCollectionView> KeywordCollectionViewType = new TrackableType<KeywordCollectionView>(KeywordCollectionView.EMPTY);
+    public static final TrackableType<Set<Integer>> IntegerSetType = new TrackableType<>(null);
+    public static final TrackableType<Map<Integer, Integer>> IntegerMapType = new TrackableType<>(null);
+    public static final TrackableType<Map<Byte, Integer>> ManaMapType = new TrackableType<>(null);
+    public static final TrackableType<Map<CounterType, Integer>> CounterMapType = new TrackableType<>(null);
+    public static final TrackableType<Map<Object, Object>> GenericMapType = new TrackableType<>(null);
+    public static final TrackableType<KeywordCollectionView> KeywordCollectionViewType = new TrackableType<>(KeywordCollectionView.EMPTY);
 }

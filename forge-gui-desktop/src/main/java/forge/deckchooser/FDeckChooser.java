@@ -120,8 +120,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateDecks(final Iterable<DeckProxy> decks, final ItemManagerConfig config) {
         lstDecks.setAllowMultipleSelections(false);
 
-        lstDecks.setPool(decks);
         lstDecks.setup(config);
+        lstDecks.setPool(decks);
 
         btnRandom.setText(localizer.getMessage("lblRandomDeck"));
         btnRandom.setCommand((UiCommand) () -> DeckgenUtil.randomSelect(lstDecks));
@@ -153,8 +153,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateColors(Predicate<PaperCard> formatFilter) {
         lstDecks.setAllowMultipleSelections(true);
 
-        lstDecks.setPool(ColorDeckGenerator.getColorDecks(lstDecks, formatFilter, isAi));
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
+        lstDecks.setPool(ColorDeckGenerator.getColorDecks(lstDecks, formatFilter, isAi));
 
         btnRandom.setText(localizer.getMessage("lblRandomColors"));
         btnRandom.setCommand((UiCommand) () -> DeckgenUtil.randomSelectColors(lstDecks));
@@ -166,8 +166,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateMatrix(GameFormat format) {
         lstDecks.setAllowMultipleSelections(false);
 
-        lstDecks.setPool(ArchetypeDeckGenerator.getMatrixDecks(format, isAi));
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
+        lstDecks.setPool(ArchetypeDeckGenerator.getMatrixDecks(format, isAi));
 
         btnRandom.setText("Random");
         btnRandom.setCommand((UiCommand) () -> DeckgenUtil.randomSelect(lstDecks));
@@ -183,8 +183,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
 
         lstDecks.setAllowMultipleSelections(false);
-        lstDecks.setPool(CommanderDeckGenerator.getCommanderDecks(deckFormat, isAi, false));
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
+        lstDecks.setPool(CommanderDeckGenerator.getCommanderDecks(deckFormat, isAi, false));
 
         btnRandom.setText("Random");
         btnRandom.setCommand((UiCommand) () -> DeckgenUtil.randomSelect(lstDecks));
@@ -200,8 +200,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
 
         lstDecks.setAllowMultipleSelections(false);
-        lstDecks.setPool(CommanderDeckGenerator.getCommanderDecks(deckFormat, isAi, true));
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
+        lstDecks.setPool(CommanderDeckGenerator.getCommanderDecks(deckFormat, isAi, true));
 
         btnRandom.setText("Random");
         btnRandom.setCommand((UiCommand) () -> DeckgenUtil.randomSelect(lstDecks));
