@@ -16,7 +16,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-import forge.game.phase.PhaseType;
 import forge.gui.MouseUtil;
 import forge.toolbox.FSkin;
 
