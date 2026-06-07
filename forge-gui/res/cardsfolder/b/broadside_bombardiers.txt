@@ -6,4 +6,4 @@ K:Menace
 K:Haste
 A:AB$ DealDamage | Cost$ Sac<1/Artifact.Other;Creature.Other/another creature or artifact> | ValidTgts$ Any | NumDmg$ X | Boast$ True | SpellDescription$ CARDNAME deals damage equal to 2 plus the sacrificed permanent's mana value to any target.
 SVar:X:Sacrificed$CardManaCost/Plus.2
-Oracle:Menace, Haste\nBoast — Sacrifice another creature or artifact: Broadside Bombardiers deals damage equal to 2 plus the sacrificed permanent's mana value to any target. (Activate only if this creature attacked this turn and only once each turn.)
+Oracle:Menace, haste\nBoast — Sacrifice another creature or artifact: Broadside Bombardiers deals damage equal to 2 plus the sacrificed permanent's mana value to any target. (Activate only if this creature attacked this turn and only once each turn.)

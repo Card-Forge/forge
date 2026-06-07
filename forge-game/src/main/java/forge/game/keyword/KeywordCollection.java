@@ -3,6 +3,7 @@ package forge.game.keyword;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -157,6 +158,10 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
             result.add(kw.getOriginal());
         }
         return result;
+    }
+
+    public KeywordCollectionView getView() {
+        return new KeywordCollectionView(getValues().stream().map(KeywordInterface::getView).collect(Collectors.toList()));
     }
 
     public void setHostCard(final Card host) {

@@ -30,7 +30,6 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
 import forge.util.Utils;
-import forge.util.collect.FCollectionView;
 import org.apache.commons.text.WordUtils;
 
 public class VPlayerPanel extends FContainer {
@@ -942,8 +941,7 @@ public class VPlayerPanel extends FContainer {
             super(DEFAULT_ICON);
             this.displayAreas = new EnumMap<>(ZoneType.class);
             for (ZoneType zoneType : EXTRA_ZONES) {
-                FCollectionView<CardView> cards = player.getCards(zoneType);
-                if (cards == null || cards.isEmpty())
+                if (player.getCards(zoneType).isEmpty())
                     continue;
                 createZoneIfMissing(zoneType);
                 hasCardsInExtraZone = true;
@@ -1028,8 +1026,7 @@ public class VPlayerPanel extends FContainer {
             if (!displayAreas.containsKey(zoneType)) {
                 if (!EXTRA_ZONES.contains(zoneType))
                     return;
-                FCollectionView<CardView> cards = player.getCards(zoneType);
-                if (cards == null || cards.isEmpty())
+                if (player.getCards(zoneType).isEmpty())
                     return;
                 createZoneIfMissing(zoneType);
             }

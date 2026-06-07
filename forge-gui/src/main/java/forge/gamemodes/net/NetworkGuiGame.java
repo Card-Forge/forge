@@ -10,6 +10,9 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
 import forge.gamemodes.net.client.NetGameController;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 import forge.interfaces.IGameController;
 import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
@@ -590,17 +593,19 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
         netLog.error("[DeltaSync]   Phase: {}", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
         netLog.error("[DeltaSync]   Sampled properties: {}", NetworkChecksumUtil.sampledPropertyNames(packet.getChecksumProperties()));
         for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
-            int handSize = player.getHand() != null ? player.getHand().size() : 0;
-            int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
-            int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
+            int handSize = player.getHand().size();
+            int graveyardSize = player.getGraveyard().size();
+            int battlefieldSize = player.getBattlefield().size();
             netLog.error("[DeltaSync]   Player {} ({}): Life={}, Hand={}, GY={}, BF={}",
                     player.getId(), player.getName(), player.getLife(),
                     handSize, graveyardSize, battlefieldSize);
         }
         netLog.error("[DeltaSync] Compare with server state in host log at seq={}", packet.getSequenceNumber());
         int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
-        netLog.error("[DeltaSync] Client breakdown: {}",
-                NetworkChecksumUtil.computeChecksumBreakdown(gameView.getTurn(), phaseOrdinal, gameView));
+        String breakdown = NetworkChecksumUtil.computeChecksumBreakdown(gameView.getTurn(), phaseOrdinal, gameView);
+        if (breakdown != null) {
+            netLog.error("[DeltaSync] Client breakdown: {}", breakdown);
+        }
     }
 
     protected final void pushSkipPhaseToControllers(final PlayerView player, final PhaseType phase) {
@@ -616,16 +621,28 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
         }
     }
 
-    protected final void seedSkipPhaseCache() {
+    /**
+     * Replace the host's persistent yield state for each controlled player
+     * in one atomic message: auto-yields from the AutoYieldStore,
+     * skip-phase prefs from PhaseLabel state. Per-key edits
+     * during play flow as individual YieldUpdate deltas.
+     */
+    protected final void seedYieldStateOnHost() {
+        Map<PlayerView, EnumSet<PhaseType>> skipPhases = new HashMap<>();
+        for (PlayerView p : getGameView().getPlayers()) {
+            EnumSet<PhaseType> set = EnumSet.noneOf(PhaseType.class);
+            for (PhaseType ph : PhaseType.values()) {
+                if (isUiSetToSkipPhase(p, ph)) {
+                    set.add(ph);
+                }
+            }
+            if (!set.isEmpty()) {
+                skipPhases.put(p, set);
+            }
+        }
         for (final IGameController c : getOriginalGameControllers()) {
             if (c instanceof NetGameController nc) {
-                for (PlayerView p : getGameView().getPlayers()) {
-                    for (PhaseType ph : PhaseType.values()) {
-                        if (isUiSetToSkipPhase(p, ph)) {
-                            nc.setUiShouldSkipPhase(p, ph, Boolean.TRUE);
-                        }
-                    }
-                }
+                nc.seedYieldStateOnHost(skipPhases);
             }
         }
     }

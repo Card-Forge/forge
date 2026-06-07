@@ -1,0 +1,11 @@
+Name:Tom, Bert, and William
+ManaCost:3 B G
+Types:Legendary Creature Troll
+PT:0/5
+A:AB$ Draw | Cost$ 1 Sac<1/Creature.Other/another creature> | NumCards$ X | SubAbility$ DBDiscard | SpellDescription$ Draw cards equal to the sacrificed creature's power, then discard a card.
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+Creature | Execute$ DBReturn | TriggerDescription$ When CARDNAME die, if they were a creature, return them to the battlefield. They're an artifact. (They're no longer a creature.)
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | StaticEffect$ Animate
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Artifact | RemoveCardTypes$ True
+SVar:X:Sacrificed$CardPower
+Oracle:{1}, Sacrifice another creature: Draw cards equal to the sacrificed creature's power, then discard a card.\nWhen Tom, Bert, and William die, if they were a creature, return them to the battlefield. They're an artifact. (They're no longer a creature.)

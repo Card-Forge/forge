@@ -235,7 +235,32 @@ public final class SColumnUtil {
         return columns;
     }
 
+    public static Map<ColumnDef, ItemColumnConfig> getNetworkEventDeckColumns(boolean allowEdit) {
+        List<ColumnDef> colDefs = new ArrayList<>();
+        colDefs.add(ColumnDef.DECK_FAVORITE);
+        if (allowEdit) {
+            colDefs.add(ColumnDef.DECK_ACTIONS);
+        }
+        colDefs.add(ColumnDef.NAME);
+        colDefs.add(ColumnDef.DECK_COLOR);
+        colDefs.add(ColumnDef.DECK_EVENT_TYPE);
+        colDefs.add(ColumnDef.DECK_EVENT_PRODUCT);
+        colDefs.add(ColumnDef.DECK_EVENT_DATE);
+        colDefs.add(ColumnDef.DECK_MAIN);
+        colDefs.add(ColumnDef.DECK_SIDE);
+
+        Map<ColumnDef, ItemColumnConfig> columns = getColumns(colDefs);
+        columns.get(ColumnDef.DECK_EVENT_DATE).setSortPriority(1);
+        columns.get(ColumnDef.DECK_FAVORITE).setSortPriority(2);
+        columns.get(ColumnDef.NAME).setSortPriority(3);
+        return columns;
+    }
+
     public static Map<ColumnDef, ItemColumnConfig> getDecksDefaultColumns(boolean allowEdit, boolean includeFolder) {
+        return getDecksDefaultColumns(allowEdit, includeFolder, false);
+    }
+
+    public static Map<ColumnDef, ItemColumnConfig> getDecksDefaultColumns(boolean allowEdit, boolean includeFolder, boolean includeBracket) {
         List<ColumnDef> colDefs = new ArrayList<>();
         colDefs.add(ColumnDef.DECK_FAVORITE);
         if (allowEdit) {
@@ -248,6 +273,9 @@ public final class SColumnUtil {
         colDefs.add(ColumnDef.DECK_COLOR);
         colDefs.add(ColumnDef.DECK_FORMAT);
         colDefs.add(ColumnDef.DECK_EDITION);
+        if (includeBracket) {
+            colDefs.add(ColumnDef.DECK_BRACKET);
+        }
         colDefs.add(ColumnDef.DECK_MAIN);
         colDefs.add(ColumnDef.DECK_SIDE);
         colDefs.add(ColumnDef.DECK_AI);

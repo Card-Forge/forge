@@ -29,7 +29,7 @@
 | **Platforms** | Desktop and Mobile. **Cross-platform play is supported** — any platform can host or join. |
 | **Players** | Up to **8 players** per game (1 host + up to 7 remote players) |
 | **Roles** | **Host** runs Forge as the server; **Client** connects to it |
-| **Game Types** | **Constructed** formats only (no Draft or Sealed). Supported variants: Commander, Oathbreaker, Tiny Leaders, Brawl, Archenemy, Planechase, Vanguard. |
+| **Game Types** | **Constructed** formats. Supported variants: Commander, Oathbreaker, Tiny Leaders, Brawl, Archenemy, Planechase, Vanguard.<br>**Limited** formats: Draft and Sealed modes available on desktop (mobile support planned). |
 | **Network** | Local (same Wi-Fi, Wi-Fi Direct, Ethernet) or Remote (IPv4 internet) |
 | **Port** | Default: **36743** (TCP). Can be changed in Forge's network preferences. |
 | **Firewall** | Host must allow Forge or the server port through its firewall. Do **not** disable the firewall entirely. |
@@ -45,22 +45,22 @@
 
 1. **Configure network** — Host must configure network settings to enable external connections (see [Network Configuration](#network-configuration) below).
 2. **Verify versions** — Confirm all devices are running the same Forge version (see [Version Compatibility](#version-compatibility) below).
-3. **Launch Forge** on all devices.
+3. **Launch Forge** on all devices and navigate to the online play screen.
      - Mobile: Choose "Classic Mode", then "Play Online"
-     - Desktop: "Online Multiplayer" > "Lobby" > "Connect to Server"
-4. **Host** leaves the server address field **empty** and clicks OK.
+     - Desktop: "Online Multiplayer" > "Lobby"
+4. **Host** clicks **"Host a Game"** to start the server.
      - On first host, Forge will ask whether to **automatically open the port via UPnP** (see [UPnP](#upnp-automatic-port-forwarding) below). If your router supports UPnP, choosing "Just Once" or "Always" can skip manual port forwarding entirely.
 5. **Host** determines address to share with clients:
      - **Local play:** Use the **Copy Local URL** button in the lobby — this copies the address in the correct format. Forge displays the host's IP (typically `192.168.x.x`). Verify against the device's network settings. Ignore any suggestion to use `localhost`.
      - **Remote play:** Use the **Copy External URL** button in the lobby — if necessary verify the external IP at [canyouseeme.org](http://canyouseeme.org).
- 7. **Client** enters the host's IP address in the connection dialog and clicks OK.
+6. **Client** clicks **"Join a Game"** and enters the host's address.
      - The address format is **`IP:port`** — for example: `192.168.1.50:36743` (local) or `203.0.113.45:36743` (remote).
      - If the port is omitted, Forge defaults to 36743 (=FORGE on older phone keypads).
-8. **Configure the match:**
+7. **Configure the match:**
      - Host selects match type, teams, and game settings.
      - All players select decks, sleeves, and avatars.
      - Each player toggles their **Ready** switch.
-9. **Host starts the match** once all players are ready.
+8. **Host starts the match** once all players are ready.
 
 ---
 
@@ -273,9 +273,6 @@ A common cause for this is that the client and server resource (res) folder cont
 
 ## Version Compatibility
 Forge automatically warns in the lobby chat when a client's version differs from the host's but **does not block the connection**. While network play between different versions of Forge can be possible, mismatched versions may cause desync or crashes mid-game. If possible always use the same version on all devices to avoid network compatibility issues.
-
-## Lag / High Bandwidth
-Network play currently lacks traffic optimization. A single game can transfer hundreds of megabytes. Slow connections will experience significant lag.
 
 ---
 

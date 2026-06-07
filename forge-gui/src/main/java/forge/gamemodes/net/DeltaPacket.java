@@ -6,12 +6,9 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
-import forge.gamemodes.net.server.RemoteClient;
 import forge.gamemodes.net.event.NetEvent;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
-import forge.trackable.TrackableTypes;
-import forge.trackable.TrackableTypes.TrackableType;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -83,15 +80,6 @@ public final class DeltaPacket implements NetEvent {
             id |= 0xF0000000;
         }
         return id;
-    }
-
-    public static TrackableType<?> trackableTypeFor(int typeTag) {
-        switch (typeTag) {
-            case TYPE_CARD_VIEW: return TrackableTypes.CardViewType;
-            case TYPE_PLAYER_VIEW: return TrackableTypes.PlayerViewType;
-            case TYPE_STACK_ITEM_VIEW: return TrackableTypes.StackItemViewType;
-            default: return null;
-        }
     }
 
     /** Each entry represents one attacking band with its defender, blockers, and planned blockers. */
@@ -188,10 +176,6 @@ public final class DeltaPacket implements NetEvent {
             size += 4 + props.size() * 50; // key + properties
         }
         return size;
-    }
-
-    @Override
-    public void updateForClient(final RemoteClient client) {
     }
 
     @Override

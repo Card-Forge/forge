@@ -103,7 +103,7 @@ ScryfallCode=CMR
 92 C Scholar of Stars @Tommy Arnold
 93 U Scholar of the Ages @Micah Epstein
 94 C Scrapdiver Serpent @Adrian Smith
-95 U Siani, Eye of the Storm @Heonhwa Choe
+95 U Siani, Eye of the Storm @Heonhwa
 96 U Siren Stormtamer @Josu Hernaiz
 97 C Skaab Goliath @Volkan Baǵa
 98 U Skilled Animator @Jason A. Engle
@@ -299,7 +299,7 @@ ScryfallCode=CMR
 288 R Nymris, Oona's Trickster @Johannes Voss
 289 R Obeka, Brute Chronologist @Jesper Ejsing
 290 U Reyav, Master Smith @Scott Murphy
-291 U Thalisse, Reverent Medium @Heonhwa Choe
+291 U Thalisse, Reverent Medium @Heonhwa
 292 U Tuya Bearclaw @Lius Lasahido
 293 R Yurlok of Scorch Thrash @Jesper Ejsing
 294 R Zara, Renegade Recruiter @Chris Rallis
@@ -513,7 +513,7 @@ ScryfallCode=CMR
 500 U Vivid Creek @Fred Fields
 501 U Vivid Grove @Howard Lyon
 502 C Wind-Scarred Crag @Eytan Zana
-503 C Woodland Stream @Efflam Mercier
+503 C Woodland Stream @Enora Mercier
 504 L Plains @Noah Bradley
 505 L Plains @Tingting Yeh
 506 L Island @Babyson Chen & Uzhen Lin
@@ -576,7 +576,7 @@ ScryfallCode=CMR
 559 U Glacian, Powerstone Engineer @Magali Villeneuve
 560 U Malcolm, Keen-Eyed Navigator @Eric Deschamps
 561 M Sakashima of a Thousand Faces @Jason A. Engle
-562 U Siani, Eye of the Storm @Heonhwa Choe
+562 U Siani, Eye of the Storm @Heonhwa
 563 U Armix, Filigree Thrasher @Daniel Ljunggren
 564 U Falthis, Shadowcat Familiar @Jesper Ejsing
 565 U Keskit, the Flesh Sculptor @Yongjae Choi
@@ -625,7 +625,7 @@ ScryfallCode=CMR
 608 R Nymris, Oona's Trickster @Johannes Voss
 609 R Obeka, Brute Chronologist @Jesper Ejsing
 610 U Reyav, Master Smith @Scott Murphy
-611 U Thalisse, Reverent Medium @Heonhwa Choe
+611 U Thalisse, Reverent Medium @Heonhwa
 612 U Tuya Bearclaw @Lius Lasahido
 613 R Yurlok of Scorch Thrash @Jesper Ejsing
 614 R Zara, Renegade Recruiter @Chris Rallis

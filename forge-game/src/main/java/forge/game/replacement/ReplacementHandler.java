@@ -73,12 +73,10 @@ public class ReplacementHandler {
             // if it was caused by an replacement effect, use the already calculated RE list
             // otherwise the RIOT card would cause a StackError
             final ReplacementEffect causeRE = (ReplacementEffect) runParams.get(AbilityKey.ReplacementEffect);
-            if (causeRE != null) {
+            if (causeRE != null && !causeRE.getOtherChoices().isEmpty()
+                    && ReplacementType.Moved.equals(causeRE.getMode()) && layer.equals(causeRE.getLayer())) {
                 // only return for same layer
-                if (ReplacementType.Moved.equals(causeRE.getMode()) && layer.equals(causeRE.getLayer())) {
-                    if (!causeRE.getOtherChoices().isEmpty())
-                        return causeRE.getOtherChoices();
-                }
+                return causeRE.getOtherChoices();
             }
 
             // CR 614.12 ETB replacements look at what the card would be on the battlefield

@@ -101,7 +101,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 33 U Snow Villiers @Fariba Khamseh
 34 R Stiltzkin, Moogle Merchant @Hendry Iwanaga
 35 C Summon: Choco/Mog @Madeline Boni
-36 M Summon: Knights of Round @Toshiaki Takayama
+36 M Summon: Knights of Round @Takayama Toshiaki
 37 U Summon: Primal Garuda @Madeline Boni
 38 R Ultima @Gintas Galvanauskas
 39 R Venat, Heart of Hydaelyn @Colin Boyer
@@ -138,7 +138,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 70 C Sage's Nouliths @Justyna Dura
 71 C Sahagin @Nino Is
 72 C Scorpion Sentinel @HAISIRO
-73 U Sidequest: Card Collection @Erikas Perl
+73 U Sidequest: Card Collection @Erikas Perl & Jurijus Chitrovas
 74 U Sleep Magic @Le Vuong
 75 U Stolen Uniform @Daniel Correia
 76 C Stuck in Summoner's Sanctum @Susumu Kuroi
@@ -206,7 +206,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 138 U Freya Crescent @Nereida
 139 R Gilgamesh, Master-at-Arms @Lorenzo Mastroianni
 140 C Haste Magic @David Astruga
-141 C Hill Gigas @Heonhwa Choe
+141 C Hill Gigas @Heonhwa
 142 C Item Shopkeep @IWAO
 143 C Laughing Mad @RARE ENGINE
 144 C Light of Judgment @Daniel Landerman
@@ -284,7 +284,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 216 U Cid, Timeless Artificer @Lius Lasahido
 217 U Cloud of Darkness @Fariba Khamseh
 218 M Emet-Selch, Unsundered @Néstor Ossandón Leal
-219 U The Emperor of Palamecia @Heonhwa Choe
+219 U The Emperor of Palamecia @Heonhwa
 220 U Exdeath, Void Warlock @Jessica Fong
 221 U Garland, Knight of Cornelia @Billy Christian
 222 U Garnet, Princess of Alexandria @Daniel Correia
@@ -556,7 +556,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 481 U Cloud of Darkness @Fariba Khamseh
 482 M Cloud, Planet's Champion @Magali Villeneuve
 483 M Emet-Selch, Unsundered @Néstor Ossandón Leal
-484 U The Emperor of Palamecia @Heonhwa Choe
+484 U The Emperor of Palamecia @Heonhwa
 485 U Exdeath, Void Warlock @Jessica Fong
 486 U Garland, Knight of Cornelia @Billy Christian
 487 U Garnet, Princess of Alexandria @Daniel Correia

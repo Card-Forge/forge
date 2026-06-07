@@ -44,11 +44,14 @@ import forge.assets.ImageCache;
 import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardSplitType;
+import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.card.CardView;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.MyRandom;
@@ -1000,10 +1003,24 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (autoSell != null && !autoSell.isVisible() && flipProcess == 1) {
                 autoSell.setVisible(true);
 
-                if (AdventurePlayer.current().isCommanderMode()) {
-                    PaperCard pc = reward.getCard();
-                    if (pc != null) {
-                        setAutoSell(inCollectionLike(pc));
+                PaperCard pc = reward.getCard();
+
+                if (pc != null) {
+                    DeckFormat deckFormat = AdventurePlayer.current().isCommanderMode() 
+                        ? DeckFormat.Commander
+                        : DeckFormat.Adventure;
+                    int maxCopies = deckFormat.getMaxCardCopies(pc);
+                    boolean autoSellVariantCommanderMode = FModel.getPreferences().getPrefBoolean(FPref.ADV_COMMANDER_AUTOSELL_VARIANT);
+                    boolean isPresentAutoSell = AdventurePlayer.current().getAutoSellCards().contains(pc);
+
+                    if (isPresentAutoSell) {
+                        setAutoSell(true);
+                    } else if (deckFormat.equals(DeckFormat.Commander) && autoSellVariantCommanderMode) {
+                        setAutoSell(maxCopies == 1 && inCollectionLike(pc));
+                    } else {
+                        int ownedCount = AdventurePlayer.current().getCollectionCards(true).count(pc);
+
+                        setAutoSell(ownedCount >= maxCopies);
                     }
                 }
             }
@@ -1206,7 +1223,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         float[] val = worldTransform.getValues();
         //val[Matrix4.M32]=0.0002f;
         worldTransform.set(val);
-        float originX = this.getOriginX(), originY = this.getOriginY();
         worldTransform.translate(getX() + getWidth() / 2, getY() + getHeight() / 2, 0);
         if (clicked) {
             worldTransform.rotate(0, 1, 0, 180 * flipProcess);

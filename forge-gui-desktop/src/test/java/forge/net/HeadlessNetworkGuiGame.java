@@ -19,6 +19,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.net.NetworkGuiGame;
+import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
@@ -74,8 +75,7 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
 
     @Override public void showCombat() { }
     @Override public void finishGame() { }
-    @Override public void showPromptMessage(PlayerView playerView, String message) { }
-    @Override public void showCardPromptMessage(PlayerView playerView, String message, CardView card) { }
+    @Override public void showPromptMessage(PlayerView playerView, String message, CardView card) { }
     @Override public void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1) { }
     @Override public void flashIncorrectAction() { }
     @Override public void alertUser() { }
@@ -167,8 +167,8 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
     }
 
     @Override
-    public <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices, CardView referenceCard, boolean sideboardingMode) {
-        return sourceChoices != null ? sourceChoices : Collections.emptyList();
+    public <T> IGuiGame.OrderResult<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices, CardView referenceCard, boolean sideboardingMode, boolean showRememberCheckbox) {
+        return new IGuiGame.OrderResult<>(sourceChoices != null ? sourceChoices : Collections.emptyList(), false);
     }
 
     @Override

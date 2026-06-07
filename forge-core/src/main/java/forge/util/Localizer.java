@@ -173,11 +173,6 @@ public class Localizer {
         }
     }
 
-    public List<Language> getLanguages() {
-        //TODO List all languages by getting their files
-        return null;
-    }
-
     public void registerObserver(LocalizationChangeObserver observer) {
         observers.add(observer);
     }
@@ -186,11 +181,6 @@ public class Localizer {
         for (LocalizationChangeObserver observer : observers) {
             observer.localizationChanged();
         }
-    }
-
-    public static class Language {
-        public String languageName;
-        public String languageID;
     }
 
 }

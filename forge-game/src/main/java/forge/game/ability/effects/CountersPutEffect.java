@@ -786,15 +786,15 @@ public class CountersPutEffect extends SpellAbilityEffect {
             sa.putParam("TargetMax", n);
             sa.putParam("CounterType", "P1P1");
             sa.putParam("CounterNum", "1");
-            // 701.41a
+            // CR 701.41a
             String desc;
-            if (!sa.getHostCard().isPermanent()) {
-                sa.putParam("ValidTgts", "Creature");
-                desc = "target creature";
-            } else {
+            if (sa.getHostCard().isPermanent()) {
                 sa.putParam("ValidTgts", "Creature.Other");
                 sa.putParam("ValidTgtsDesc", "other creature");
                 desc = "other target creature";
+            } else {
+                sa.putParam("ValidTgts", "Creature");
+                desc = "target creature";
             }
             sa.setTargetRestrictions(new TargetRestrictions(sa.getMapParams()));
             if (!sa.hasParam("SpellDescription")) {

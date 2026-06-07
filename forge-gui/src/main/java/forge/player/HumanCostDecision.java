@@ -17,7 +17,6 @@ import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.match.input.InputSelectCardsFromList;
 import forge.gamemodes.match.input.InputSelectManyBase;
-import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
 import forge.util.*;
 import forge.util.collect.FCollectionView;
@@ -869,7 +868,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (cost.payCostFromSource()) {
             // UnlessCost so player might not want to pay (Fabricate)
-            if (ability.hasParam("UnlessCost") && !confirmAction(cost, Localizer.getInstance().getMessage("lblPutNTypeCounterOnTarget", c, cost.getCounter().getName(), ability.getHostCard().getDisplayName()))) {
+            if (isEffect() && ability.hasParam("UnlessCost") && !confirmAction(cost, Localizer.getInstance().getMessage("lblPutNTypeCounterOnTarget", c, cost.getCounter().getName(), ability.getHostCard().getDisplayName()))) {
                 return null;
             }
             return PaymentDecision.card(source);
@@ -1504,10 +1503,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     private boolean confirmAction(CostPart costPart, String message) {
         CardView cardView = ability.getCardView();
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (controller.getGui().isLibgdxPort()) {
             try {
                 //for cards like Sword-Point Diplomacy and others that uses imprinted as container for their ability
-                if (cardView != null && cardView.getImprintedCards() != null && cardView.getImprintedCards().size() == 1)
+                if (cardView != null && cardView.getImprintedCards().size() == 1)
                     cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getImprintedCards().get(0).getCurrentState().getTrackableImageKey()));
                 else if (ability.getTargets() != null && ability.getTargets().isTargetingAnyCard() && ability.getTargets().size() == 1)
                     cardView = CardView.get(ability.getTargetCard());
@@ -1520,8 +1519,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 cardView = ability.getCardView();
             }
             return controller.getGui().confirm(cardView, message.replaceAll("\n", " "));
-        } else {
-            return controller.confirmPayment(costPart, message, ability);
         }
+        return controller.confirmPayment(costPart, message, ability);
     }
 }

@@ -105,61 +105,13 @@ public final class NetworkChecksumUtil {
         }
 
         // Battlefield card properties (sorted by ID for determinism)
-        List<CardView> allBattlefieldCards = new ArrayList<>();
-        for (PlayerView player : getSortedPlayers(gameView)) {
-            Object bf = getEffectiveValue(player, TrackableProperty.Battlefield);
-            if (bf instanceof Iterable<?>) {
-                for (Object item : (Iterable<?>) bf) {
-                    if (item instanceof CardView cv) allBattlefieldCards.add(cv);
-                }
-            }
-        }
-        allBattlefieldCards.sort(Comparator.comparingInt(CardView::getId));
-
-        for (CardView card : allBattlefieldCards) {
-            hash = 31 * hash + card.getId();
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Tapped)) ? 1 : 0);
-            Object stateObj = getEffectiveValue(card, TrackableProperty.CurrentState);
-            CardView.CardStateView state = stateObj instanceof CardView.CardStateView ? (CardView.CardStateView) stateObj : null;
-            if (state != null) {
-                Object pow = getEffectiveValue(state, TrackableProperty.Power);
-                Object tou = getEffectiveValue(state, TrackableProperty.Toughness);
-                hash = 31 * hash + (pow instanceof Integer ? (int) pow : 0);
-                hash = 31 * hash + (tou instanceof Integer ? (int) tou : 0);
-            }
-            Object zone = getEffectiveValue(card, TrackableProperty.Zone);
-            hash = 31 * hash + (zone instanceof ZoneType ? ((ZoneType) zone).ordinal() : -1);
-            Object ctrl = getEffectiveValue(card, TrackableProperty.Controller);
-            hash = 31 * hash + (ctrl instanceof PlayerView ? ((PlayerView) ctrl).getId() : -1);
-
-            Object countersObj = getEffectiveValue(card, TrackableProperty.Counters);
-            int counterTotal = 0;
-            if (countersObj instanceof Map) {
-                for (Object count : ((Map<?, ?>) countersObj).values()) {
-                    if (count instanceof Integer) counterTotal += (int) count;
-                }
-            }
-            hash = 31 * hash + counterTotal;
-
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Sickness)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Attacking)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Blocking)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.PhasedOut)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Facedown)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Flipped)) ? 1 : 0);
+        for (CardView card : collectSortedBattlefieldCards(gameView)) {
+            hash = hashCardProps(hash, card);
         }
 
         Object combatObj = getEffectiveValue(gameView, TrackableProperty.CombatView);
         if (combatObj instanceof CombatView combat) {
-            hash = 31 * hash + combat.getNumAttackers();
-            List<Integer> attackerIds = new ArrayList<>();
-            for (CardView attacker : combat.getAttackers()) {
-                attackerIds.add(attacker.getId());
-            }
-            attackerIds.sort(null);
-            for (int id : attackerIds) {
-                hash = 31 * hash + id;
-            }
+            hash = hashCombatAttackers(hash, combat);
         }
 
         Object stackObj = getEffectiveValue(gameView, TrackableProperty.Stack);
@@ -176,12 +128,87 @@ public final class NetworkChecksumUtil {
     }
 
     /**
+     * Collect battlefield cards from all players, sorted by id. Determinism
+     * across server/client requires identical iteration order.
+     */
+    private static List<CardView> collectSortedBattlefieldCards(GameView gv) {
+        List<CardView> all = new ArrayList<>();
+        for (PlayerView player : getSortedPlayers(gv)) {
+            Object bf = getEffectiveValue(player, TrackableProperty.Battlefield);
+            if (bf instanceof Iterable<?>) {
+                for (Object item : (Iterable<?>) bf) {
+                    if (item instanceof CardView cv) all.add(cv);
+                }
+            }
+        }
+        all.sort(Comparator.comparingInt(CardView::getId));
+        return all;
+    }
+
+    /**
+     * Fold the hashable properties of one battlefield card into the running
+     * hash. The property ordering and value extraction here is the
+     * load-bearing contract: server and client must apply the exact same
+     * operations in the exact same order to agree on the checksum.
+     */
+    private static int hashCardProps(int hash, CardView card) {
+        hash = 31 * hash + card.getId();
+        hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Tapped)) ? 1 : 0);
+        Object stateObj = getEffectiveValue(card, TrackableProperty.CurrentState);
+        CardView.CardStateView state = stateObj instanceof CardView.CardStateView ? (CardView.CardStateView) stateObj : null;
+        if (state != null) {
+            Object pow = getEffectiveValue(state, TrackableProperty.Power);
+            Object tou = getEffectiveValue(state, TrackableProperty.Toughness);
+            hash = 31 * hash + (pow instanceof Integer ? (int) pow : 0);
+            hash = 31 * hash + (tou instanceof Integer ? (int) tou : 0);
+        }
+        Object zone = getEffectiveValue(card, TrackableProperty.Zone);
+        hash = 31 * hash + (zone instanceof ZoneType ? ((ZoneType) zone).ordinal() : -1);
+        Object ctrl = getEffectiveValue(card, TrackableProperty.Controller);
+        hash = 31 * hash + (ctrl instanceof PlayerView ? ((PlayerView) ctrl).getId() : -1);
+        Object countersObj = getEffectiveValue(card, TrackableProperty.Counters);
+        int counterTotal = 0;
+        if (countersObj instanceof Map) {
+            for (Object count : ((Map<?, ?>) countersObj).values()) {
+                if (count instanceof Integer) counterTotal += (int) count;
+            }
+        }
+        hash = 31 * hash + counterTotal;
+        hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Sickness)) ? 1 : 0);
+        hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Attacking)) ? 1 : 0);
+        hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Blocking)) ? 1 : 0);
+        hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.PhasedOut)) ? 1 : 0);
+        hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Facedown)) ? 1 : 0);
+        hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Flipped)) ? 1 : 0);
+        return hash;
+    }
+
+    /**
+     * Fold the combat attacker count + sorted attacker ids into the running
+     * hash. Caller is responsible for the null-combat path.
+     */
+    private static int hashCombatAttackers(int hash, CombatView combat) {
+        hash = 31 * hash + combat.getNumAttackers();
+        List<Integer> attackerIds = new ArrayList<>();
+        for (CardView attacker : combat.getAttackers()) {
+            attackerIds.add(attacker.getId());
+        }
+        attackerIds.sort(null);
+        for (int id : attackerIds) {
+            hash = 31 * hash + id;
+        }
+        return hash;
+    }
+
+    /**
      * Compute a diagnostic breakdown of the stable checksum, showing the hash
      * after each component. Used to identify exactly where server/client diverge.
+     * Returns null when stableChecksum is off or gameView is null — callers
+     * should skip logging in that case.
      */
     public static String computeChecksumBreakdown(int turn, int phaseOrdinal, GameView gameView) {
         if (gameView == null || !stableChecksum) {
-            return "stable checksum disabled or gameView null";
+            return null;
         }
         // This must mirror computeStateChecksum exactly so that
         // breakdown final == actual checksum, enabling accurate mismatch diagnosis
@@ -225,16 +252,7 @@ public final class NetworkChecksumUtil {
             sb.append("M").append(manaHash).append(")");
         }
 
-        List<CardView> allBattlefieldCards = new ArrayList<>();
-        for (PlayerView player : getSortedPlayers(gameView)) {
-            Object bf = getEffectiveValue(player, TrackableProperty.Battlefield);
-            if (bf instanceof Iterable<?>) {
-                for (Object item : (Iterable<?>) bf) {
-                    if (item instanceof CardView cv) allBattlefieldCards.add(cv);
-                }
-            }
-        }
-        allBattlefieldCards.sort(Comparator.comparingInt(CardView::getId));
+        List<CardView> allBattlefieldCards = collectSortedBattlefieldCards(gameView);
         sb.append(" | cards(").append(allBattlefieldCards.size()).append(")=[");
         for (CardView card : allBattlefieldCards) {
             boolean tapped = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Tapped));
@@ -283,34 +301,7 @@ public final class NetworkChecksumUtil {
 
         // Hash cards using same path as computeStateChecksum
         for (CardView card : allBattlefieldCards) {
-            hash = 31 * hash + card.getId();
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Tapped)) ? 1 : 0);
-            Object stObj = getEffectiveValue(card, TrackableProperty.CurrentState);
-            CardView.CardStateView state = stObj instanceof CardView.CardStateView ? (CardView.CardStateView) stObj : null;
-            if (state != null) {
-                Object pow = getEffectiveValue(state, TrackableProperty.Power);
-                Object tou = getEffectiveValue(state, TrackableProperty.Toughness);
-                hash = 31 * hash + (pow instanceof Integer ? (int) pow : 0);
-                hash = 31 * hash + (tou instanceof Integer ? (int) tou : 0);
-            }
-            Object zone = getEffectiveValue(card, TrackableProperty.Zone);
-            hash = 31 * hash + (zone instanceof ZoneType ? ((ZoneType) zone).ordinal() : -1);
-            Object ctrl = getEffectiveValue(card, TrackableProperty.Controller);
-            hash = 31 * hash + (ctrl instanceof PlayerView ? ((PlayerView) ctrl).getId() : -1);
-            Object countersObj = getEffectiveValue(card, TrackableProperty.Counters);
-            int counterTotal = 0;
-            if (countersObj instanceof Map) {
-                for (Object count : ((Map<?, ?>) countersObj).values()) {
-                    if (count instanceof Integer) counterTotal += (int) count;
-                }
-            }
-            hash = 31 * hash + counterTotal;
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Sickness)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Attacking)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Blocking)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.PhasedOut)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Facedown)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Flipped)) ? 1 : 0);
+            hash = hashCardProps(hash, card);
         }
         sb.append(" afterCards=").append(hash);
 
@@ -318,15 +309,7 @@ public final class NetworkChecksumUtil {
         CombatView combat = combatObj instanceof CombatView ? (CombatView) combatObj : null;
         sb.append(" | combat=").append(combat != null ? combat.getNumAttackers() : "null");
         if (combat != null) {
-            hash = 31 * hash + combat.getNumAttackers();
-            List<Integer> attackerIds = new ArrayList<>();
-            for (CardView attacker : combat.getAttackers()) {
-                attackerIds.add(attacker.getId());
-            }
-            attackerIds.sort(null);
-            for (int id : attackerIds) {
-                hash = 31 * hash + id;
-            }
+            hash = hashCombatAttackers(hash, combat);
         }
         sb.append(" afterCombat=").append(hash);
 

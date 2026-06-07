@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Wyatt_Freden_-_Grixis_Control_(Modern,_#2919683).dck
+Deck Type=constructed
+
+[Main]
+3 Orcish Bowmasters
+3 Snapcaster Mage
+2 Subtlety
+2 Tamiyo, Inquisitive Student
+1 Vendilion Clique
+3 Wan Shi Tong, Librarian
+2 Cling to Dust
+1 Consult the Star Charts
+4 Counterspell
+4 Fatal Push
+3 Flame of Anor
+2 Force of Negation
+2 Lightning Bolt
+1 Prismari Charm
+1 Sink into Stupor
+2 Spell Snare
+1 Kaito, Bane of Nightmares
+4 Bloodstained Mire
+2 Island
+1 Otawara, Soaring City
+4 Polluted Delta
+3 Scalding Tarn
+2 Steam Vents
+1 Swamp
+1 Thundering Falls
+2 Undercity Sewers
+3 Watery Grave
+[Sideboard]
+3 Break the Ice
+4 Consign to Memory
+1 Fire Magic
+1 Jace, the Mind Sculptor
+2 Meltdown
+3 Mystical Dispute
+1 Surgical Extraction

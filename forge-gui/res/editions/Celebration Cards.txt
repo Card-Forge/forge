@@ -17,3 +17,6 @@ ScryfallCode=PCEL
 
 [eternal]
 8 R Zur the Enchanter @Chase Stone ${"flavorName": "Post the Enchanter"}
+
+[WalkerTypes]
+Deb

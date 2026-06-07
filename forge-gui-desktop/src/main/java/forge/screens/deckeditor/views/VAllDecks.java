@@ -2,12 +2,14 @@ package forge.screens.deckeditor.views;
 
 import javax.swing.JPanel;
 
+import forge.Singletons;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.IVDoc;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
@@ -84,7 +86,10 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
         parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
-        editPreferredDeck(lstDecks, preferredDeck);
+        // Skip on other screens (e.g. DRAFTING_PROCESS) — editing would switch screens back here
+        if (Singletons.getControl().getCurrentScreen() == FScreen.DECK_EDITOR_CONSTRUCTED) {
+            editPreferredDeck(lstDecks, preferredDeck);
+        }
     }
 
     public static void editPreferredDeck(DeckManager lstDecks, String preferredDeck) {

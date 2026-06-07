@@ -80,7 +80,7 @@ ScryfallCode=2X2
 67 U Wash Out @Steven Belledin
 68 C Balustrade Spy @Jaime Jones
 69 M Bitterblossom @Rebecca Guay
-70 U Blood Artist @LA Draws
+70 U Blood Artist @L.A. Draws
 71 C Bloodflow Connoisseur @Slawomir Maniak
 72 C Carrier Thrall @Lius Lasahido
 73 R Damnation @Kev Walker

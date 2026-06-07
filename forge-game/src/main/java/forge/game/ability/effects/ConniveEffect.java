@@ -9,15 +9,17 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
+import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ConniveEffect extends SpellAbilityEffect {
 
@@ -51,18 +53,8 @@ public class ConniveEffect extends SpellAbilityEffect {
             return;
         }
 
-        List<Player> controllers = new ArrayList<>();
-        for (Card c : toConnive) {
-            final Player controller = c.getController();
-            if (!controllers.contains(controller)) {
-                controllers.add(controller);
-            }
-        }
-        //order controllers by APNAP
-        int indexAP = controllers.indexOf(game.getPhaseHandler().getPlayerTurn());
-        if (indexAP != -1) {
-            Collections.rotate(controllers, - indexAP);
-        }
+        PlayerCollection controllers = new PlayerCollection(game.getPlayersInTurnOrder(game.getPhaseHandler().getPlayerTurn()));
+        controllers.retainAll(toConnive.stream().map(Card::getController).collect(Collectors.toSet()));
 
         for (final Player p : controllers) {
             final CardCollection connivers = CardLists.filterControlledBy(toConnive, p);
@@ -74,6 +66,11 @@ public class ConniveEffect extends SpellAbilityEffect {
                 Card conniver = connivers.size() > 1 ? p.getController().chooseSingleEntityForEffect(connivers, sa,
                         Localizer.getInstance().getMessage("lblChooseConniver"), null) : connivers.get(0);
                 connivers.remove(conniver);
+
+                if (game.getReplacementHandler().run(ReplacementType.Explore, AbilityKey.mapFromAffected(conniver))
+                        != ReplacementResult.NotReplaced) {
+                    continue;
+                }
 
                 p.drawCards(num, sa, moveParams);
 
