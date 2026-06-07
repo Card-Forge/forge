@@ -82,6 +82,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private Map<Integer, Integer> combatAssignments = Collections.emptyMap();
     // Coalesces multiple invokeLater(doLayout) calls within a single EDT cycle.
     private boolean layoutPending;
+    // Ghost panels (cards a permanent holds in exile), keyed by host card id; not in the battlefield model
+    private final Map<Integer, List<CardPanel>> ghostPanels = new HashMap<>();
 
     // Computed in layout.
     private List<CardStackRow> rows = new ArrayList<>();
@@ -114,12 +116,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.groupTokensAndCreatures = "group_creatures".equals(groupScope) || "group_all".equals(groupScope);
         this.groupAll = "group_all".equals(groupScope);
         this.grouping = groupTokensAndCreatures || groupAll;
-        int prefDepth;
-        try {
-            prefDepth = Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_MAX_STACK_DEPTH));
-        } catch (NumberFormatException e) {
-            prefDepth = 4;
-        }
+        int prefDepth = FModel.getPreferences().getPrefInt(FPref.UI_MAX_STACK_DEPTH);
         this.maxStackDepth = Math.max(MIN_STACK_DEPTH, Math.min(MAX_STACK_DEPTH, prefDepth));
     }
 
@@ -748,6 +745,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
+        if (panel.isGhost()) {
+            // Route to the exiled card's own path; the engine gates whether anything happens
+            getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
+            return;
+        }
         boolean isLocal = getMatchUI().isLocalPlayer(model);
         boolean selectAll = evt.isShiftDown();
         if (!selectAll && panel.getGroupCount() >= 2) {
@@ -939,6 +941,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         //as a last resort try to select attached panels not in stack
         for (CardPanel p : panel.getAttachedPanels()) {
+            if (p.isGhost()) {
+                continue; //ghosts cast only via a direct click, never through the host
+            }
             if (p.getStack() != stack) { //ensure same panel not checked more than once
                 if (selectCard(p, triggerEvent, selectEntireStack)) {
                     return true;
@@ -986,6 +991,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (final CardView card : toDelete) {
                 removeCardPanel(getCardPanel(card.getId()),false);
             }
+        }
+        for (final CardView card : toDelete) {
+            removeGhosts(card.getId());
         }
 
         final List<CardView> toAdd = new ArrayList<>(modelCopy);
@@ -1059,6 +1067,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
 
+        if (reconcileGhosts(card, toPanel)) {
+            needLayoutRefresh = true;
+        }
+
         CardPanel attachedToPanel;
         if (card.getAttachedTo() != null) {
             if (card != card.getAttachedTo().getAttachedTo())
@@ -1096,6 +1108,100 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
         return needLayoutRefresh || tappedStateChanged;
+    }
+
+    // Ghosts aren't in the battlefield model, so they're created and attached here, reusing existing panels across refreshes
+    private boolean reconcileGhosts(final CardView card, final CardPanel toPanel) {
+        final List<CardView> desired = linkedExileGhostCards(card, toPanel);
+        final List<CardPanel> existing = ghostPanels.get(card.getId());
+        if (desired.isEmpty()) {
+            if (existing != null) {
+                removeGhosts(card.getId());
+                return true;
+            }
+            return false;
+        }
+
+        boolean changed = false;
+        final List<CardPanel> leftovers = existing == null ? new ArrayList<>() : new ArrayList<>(existing);
+        final List<CardPanel> result = new ArrayList<>();
+        for (final CardView cv : desired) {
+            CardPanel ghost = takeGhost(leftovers, cv.getId());
+            if (ghost == null) {
+                ghost = new CardPanel(getMatchUI(), cv);
+                ghost.setGhost(true);
+                add(ghost);
+                changed = true;
+            } else if (ghost.getParent() != this) {
+                add(ghost); // container was reset (e.g. clear()) while the map survived
+                changed = true;
+            }
+            result.add(ghost);
+        }
+        for (final CardPanel p : leftovers) { // anything not reused this round is stale
+            remove(p);
+            p.dispose();
+            changed = true;
+        }
+
+        ghostPanels.put(card.getId(), result);
+        for (final CardPanel ghost : result) {
+            ghost.setAttachedToPanel(toPanel);
+            toPanel.getAttachedPanels().add(ghost);
+        }
+        return changed;
+    }
+
+    // Cards this permanent holds in exile, capped so ghosts plus existing attachments stay within the stack depth
+    private List<CardView> linkedExileGhostCards(final CardView card, final CardPanel toPanel) {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_LINKED_EXILE_CARDS)) {
+            return Collections.emptyList();
+        }
+        final int cap = maxStackDepth - toPanel.getAttachedPanels().size();
+        if (cap <= 0) {
+            return Collections.emptyList();
+        }
+        final List<CardView> linked = new ArrayList<>();
+        final CardView prepared = card.getPreparedSpell();
+        if (prepared != null) {
+            linked.add(prepared);
+        }
+        for (final CardView exiled : card.getUntilLeavesBattlefield()) {
+            linked.add(exiled);
+        }
+        return linked.size() > cap ? linked.subList(0, cap) : linked;
+    }
+
+    private static CardPanel takeGhost(final List<CardPanel> panels, final int cardId) {
+        for (final Iterator<CardPanel> it = panels.iterator(); it.hasNext();) {
+            final CardPanel p = it.next();
+            if (p.getCard() != null && p.getCard().getId() == cardId) {
+                it.remove();
+                return p;
+            }
+        }
+        return null;
+    }
+
+    private void removeGhosts(final int hostId) {
+        final List<CardPanel> ghosts = ghostPanels.remove(hostId);
+        if (ghosts != null) {
+            for (final CardPanel ghost : ghosts) {
+                remove(ghost);
+                ghost.dispose();
+            }
+        }
+    }
+
+    public void refreshGhosts() {
+        FThreads.assertExecutedByEdt(true);
+        for (final CardPanel panel : new ArrayList<>(getCardPanels())) {
+            if (panel.getCard() != null) {
+                doUpdateCard(panel.getCard(), true);
+            }
+        }
+        doLayout();
+        repaint();
     }
 
     private enum RowType {

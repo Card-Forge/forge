@@ -23,12 +23,14 @@ ScryfallCode=MSH
 23 M Monica Rambeau @Xabi Gaztelua & Marta Nael
 24 C Murdock's Crusade @Gal Or
 25 R Nick Fury, Agent of S.H.I.E.L.D. @Marco Turini
+26 U Night Nurse, Healer of Heroes @Gal Or
 27 U Okoye, Dora Milaje Leader @L.A. Draws
 28 R Origin of the Avengers @Serena Malyon
 30 U Patriot, Shield Wielder @Vlad Petruchik
 31 U Political Triumph @Monztre
 32 U Quake, Agent of S.H.I.E.L.D. @Josu Solano
 35 R The Sentry, Golden Guardian @Alexander Skripnikov
+37 U Super Villain Lockup @Jurijus Chitrovas
 38 R Super-Soldier Serum @Rafater
 42 U White Widow, Free Agent @Smirtouille
 44 C A.I.M. Scientists @Bartek Fedyczak
@@ -55,6 +57,7 @@ ScryfallCode=MSH
 77 U Super Intelligence @Michele Giorgi
 79 U Thirst for Knowledge @Greg Smallwood
 80 M Tony Stark @Alexander Lozano
+83 U Wiccan, Rising Magician @Josu Hernaiz
 84 R The Wondrous Wasp @Gal Or
 87 R Baron Helmut Zemo @Wero Gallo
 88 U Baron Strucker, HYDRA Overlord @InHyuk Lee
@@ -68,6 +71,7 @@ ScryfallCode=MSH
 101 C HYDRA Troopers @Zoltan Boros
 105 U The Masters of Evil @Bastien L. Deharme
 106 M M.O.D.O.K. @Simon Dominic
+107 U Moonstone, Harsh Mistress @Grace Zhu
 111 U Robot Domination @Borja Pindado
 112 U Ronin, Shadow Stalker @Lie Setiawan
 113 C Roxxon Brutes @Zoltan Boros
@@ -89,9 +93,11 @@ ScryfallCode=MSH
 149 U Red Hulk @Vilhelmas Banys
 151 R The Scarlet Witch @Magali Villeneuve
 156 M Thor, God of Thunder @Jesper Ejsing
+157 U Truck Toss @Alexander Skripnikov
 163 U Claim the Kingdom @Lius Lasahido
 164 U Doc Samson, Super Psychiatrist @Ryan Pancoast
 165 M Earth's Mightiest Heroes @Steve Morris
+166 R Epic Fight @Wei Guan
 168 C Go Nuts! @Ignatius Budi
 170 U Hellcat, Undying Vigilante @Solan
 171 U Hercules, Prince of Power @David Talaski
@@ -102,6 +108,7 @@ ScryfallCode=MSH
 190 U The Thing, Ben Grimm @Gintas Galvanauskas
 191 U Tigra, Feline Fury @Ben Harvey
 193 R The Unbeatable Squirrel Girl @Kim Dingwall
+196 U White Tiger, Ava Ayala @Jennifer Hrabota Lesser
 197 R World War Hulk @Serena Malyon
 198 U Abomination, Terrifying Titan @Piotr Dura
 199 R Absorbing Man @Nathaniel Himawan
@@ -110,6 +117,7 @@ ScryfallCode=MSH
 202 R Ares, God of War @Fesbra
 203 R Armor Wars @Serena Malyon
 204 R The Astonishing Ant-Man @Randy Gallegos
+205 R Avengers: Under Siege @Serena Malyon
 206 U Beast, Erudite Aerialist @Bachzim
 207 U Black Panther, Vanguard @Aniekan Udofia
 208 U Black Widow, Double Agent @Michael MacRae
@@ -181,6 +189,7 @@ ScryfallCode=MSH
 303 M Mjölnir, Hammer of Thor @Jim Cheung
 304 R World War Hulk @Steve Ellis
 305 R Armor Wars @Andrew Griffith
+306 R Avengers: Under Siege @Andrew Griffith
 307 M The Coming of Galactus @Veronica Fish
 308 R The Super Hero Civil War @Roberta Ingranata
 310 R Arc Reactor @Steve Ellis
@@ -218,6 +227,7 @@ ScryfallCode=MSH
 346 M King T'Challa @Chris Bachalo & Johan Grenier
 349 M Earth's Mightiest Heroes @Johan Grenier
 350 M Tony Stark @Chris Bachalo & Johan Grenier
+351 R Epic Fight @Johan Grenier
 352 M Captain America, Super-Soldier @Jim Cheung
 353 R Captain America, Wings of Freedom @Elena Casagrande
 354 M Captain Marvel, Earth's Protector @Swayart
@@ -259,6 +269,7 @@ ScryfallCode=MSH
 392 M Tony Stark @Johnny Craig
 394 M Doctor Doom @Larry Lieber & Vince Colletta
 395 R Elektra, Daughter of the Hand @Mike Deodato Jr.
+396 R Shang-Chi, Master of Kung Fu @Jim Cheung & Laura Martin
 397 R The Astonishing Ant-Man @Bob Layton
 398 R Daredevil, Man Without Fear @Jack Kirby
 399 M King T'Challa @Jack Kirby

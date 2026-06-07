@@ -2908,6 +2908,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (isCloaked()) {
             sb.append("Cloaked\r\n");
         }
+        if (isPrepared()) {
+            sb.append("Prepared\r\n");
+        }
         String keywordText = keywordsToText(getUnhiddenKeywords(state).getValues());
         sb.append(keywordText).append(keywordText.length() > 0 ? linebreak : "");
 
@@ -6590,6 +6593,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public Card getPrepared() {
         return preparedEffect;
     }
+    public Card getPreparedSpell() {
+        return preparedEffect == null ? null : (Card) preparedEffect.getFirstRemembered();
+    }
     public void setPrepared(final Card eff) {
         if (eff == null && preparedEffect != null) {
             Card prepared = (Card) preparedEffect.getFirstRemembered();
@@ -6599,6 +6605,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             game.getAction().exileEffect(preparedEffect);
         }
         preparedEffect = eff;
+        view.updatePreparedSpell(this);
+        updateAbilityTextForView();
     }
 
     public final boolean isManifested() {

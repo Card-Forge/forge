@@ -2,10 +2,7 @@ package forge.screens.settings;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -37,6 +34,7 @@ import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.util.FileUtil;
+import forge.util.LogExporter;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class FilesPage extends TabPage<SettingsScreen> {
@@ -95,22 +93,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
         lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("lblExportLogs"), Forge.getLocalizer().getMessage("lblExportLogsDescription")) {
             @Override
             public void select() {
-                List<File> files = new ArrayList<>();
-                File userDir = new File(ForgeProfileProperties.getUserDir());
-                if (userDir.isDirectory()) {
-                    File[] forgeLogs = userDir.listFiles((d, n) -> n.startsWith("forge") && n.endsWith(".log"));
-                    if (forgeLogs != null) {
-                        Collections.addAll(files, forgeLogs);
-                    }
-                }
-                File netDir = new File(ForgeConstants.NETWORK_LOGS_DIR);
-                if (netDir.isDirectory()) {
-                    File[] netLogs = netDir.listFiles((d, n) -> n.startsWith("network-debug-") && n.endsWith(".log"));
-                    if (netLogs != null) {
-                        Collections.addAll(files, netLogs);
-                    }
-                }
-                exportLogs(files);
+                exportLogs();
             }
         }, 0);
         //Auditer
@@ -257,7 +240,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
         lstItems.setBounds(0, 0, width, height);
     }
 
-    private void exportLogs(List<File> files) {
+    private void exportLogs() {
         if (Forge.getDeviceAdapter().needFileAccess()) {
             Forge.getDeviceAdapter().requestFileAcces();
             return;
@@ -265,14 +248,12 @@ public class FilesPage extends TabPage<SettingsScreen> {
         final String dialogTitle = Forge.getLocalizer().getMessage("lblExportLogs");
         FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblExporting"), true, () -> {
             try {
-                if (files.isEmpty()) {
+                File downloads = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
+                File zipFile = LogExporter.exportLogs(downloads);
+                if (zipFile == null) {
                     FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblNoLogFilesFound"), dialogTitle, FOptionPane.INFORMATION_ICON);
                     return;
                 }
-                String stamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
-                File downloads = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
-                File zipFile = new File(downloads, "forge-logs-" + stamp + ".zip");
-                ZipUtil.zipFiles(files, zipFile);
                 FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + zipFile.getAbsolutePath(), dialogTitle, FOptionPane.INFORMATION_ICON);
             } catch (IOException e) {
                 FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
