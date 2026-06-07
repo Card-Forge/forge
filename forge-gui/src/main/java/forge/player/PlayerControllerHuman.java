@@ -982,12 +982,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (!inp.getResult()) {
                     FThreads.invokeInEdtLater(this::autoPassUntilEndOfTurn);
                 }
-                getGui().updateRevealedCards(collection);
                 FThreads.invokeInEdtNowOrLater(() -> getGui().hideZones(getLocalPlayerView(), zonesShown[0]));
             } else {
                 getGui().reveal(fm, collection);
-                getGui().updateRevealedCards(collection);
             }
+            getGui().updateRevealedCards(collection);
             endTempShowCards();
         }
     }

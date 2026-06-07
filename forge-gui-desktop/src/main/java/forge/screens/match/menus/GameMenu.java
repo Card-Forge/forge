@@ -49,7 +49,6 @@ public final class GameMenu {
         final SkinnedCheckBoxMenuItem autoPassItem = getMenuItem_AutoPass();
         menu.add(autoPassItem);
         menu.add(getMenuItem_ClearRememberedAbilityOrders());
-        menu.addSeparator();
         menu.addMenuListener(new MenuListener() {
             @Override public void menuSelected(final MenuEvent e) {
                 autoPassItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));

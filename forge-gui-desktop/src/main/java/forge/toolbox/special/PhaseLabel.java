@@ -30,7 +30,6 @@ public class PhaseLabel extends JLabel {
     /** Tint used when a yield marker is targeted at this (player, phase) cell. */
     private static final Color YIELD_MARKER_COLOR = new Color(0xFFA528);
 
-    private final PhaseType phaseType;
     private boolean enabled = true;
     private boolean active = false;
     private boolean hover = false;
@@ -47,11 +46,9 @@ public class PhaseLabel extends JLabel {
      * "this phase is (not) skipped" and "this is the current phase".
      *
      * @param txt &emsp; Label text
-     * @param phaseType0 &emsp; The PhaseType this label represents (may be null for header/spacer labels)
      */
-    public PhaseLabel(final String txt, final PhaseType phaseType0) {
+    public PhaseLabel(final String txt) {
         super(txt);
-        this.phaseType = phaseType0;
         this.setHorizontalTextPosition(SwingConstants.CENTER);
         this.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -93,10 +90,6 @@ public class PhaseLabel extends JLabel {
                 PhaseLabel.this.repaintOnlyThisLabel();
             }
         });
-    }
-
-    public PhaseType getPhaseType() {
-        return phaseType;
     }
 
     public boolean isYieldMarked() {
