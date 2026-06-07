@@ -1606,7 +1606,7 @@
   },
     {
     "name": "Bloodsworn Bite",
-    "description": "2/1 vampire with flying, can't block, pay R to give a vampire hate",
+    "description": "2/1 vampire with flying, can't block, pay R to give a vampire haste",
     "equipmentSlot": "Boots",
     "iconName": "BloodswornBite",
     "effect": {
