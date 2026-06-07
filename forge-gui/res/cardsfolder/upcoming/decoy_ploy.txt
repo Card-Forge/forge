@@ -1,0 +1,7 @@
+Name:Decoy Ploy
+ManaCost:1 B
+Types:Instant
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBVillain,DBHero
+SVar:DBVillain:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Villain.YouOwn | ValidTgtDesc$ Villain card in your graveyard | SpellDescription$ Return target Villain card from your graveyard to your hand.
+SVar:DBHero:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Hero.YouOwn | ValidTgtDesc$ Hero card in your graveyard | SpellDescription$ Return target Hero card from your graveyard to your hand.
+Oracle:Choose one or both —\n• Return target Villain card from your graveyard to your hand.\n• Return target Hero card from your graveyard to your hand.
