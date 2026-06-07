@@ -2581,7 +2581,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing:")
                         || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway") || keyword.startsWith("Toxic")
                         || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
-                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Ripple")) {
+                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Ripple")
+                        || keyword.startsWith("Ward")) {
                     sbLong.append(inst.getTitle()).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner with:")) {
                     final String[] k = keyword.split(":");
@@ -2659,17 +2660,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     }
                     sb.append(descStr).append(" ").append(" (").append(inst.getReminderText()).append(")");
                     printedKW.add(keyword);
-                } else if (keyword.startsWith("Ward")) {
-                    final String[] k = keyword.split(":");
-                    final Cost cost = new Cost(k[1], false);
-                    final boolean onlyMana = cost.isOnlyManaCost();
-                    final boolean complex = k[1].contains("X") || (k[1].contains (" ") && k[1].contains("<"));
-                    final String extra = k.length > 2 ? ", " + k[2] + "." : "";
-
-                    sbLong.append(k[0]).append(onlyMana ? " " : "—").append(cost.toSimpleString());
-                    sbLong.append(onlyMana? "" : ".").append(extra);
-                    sbLong.append(!complex ? " (" + (inst.getReminderText()) + ")" : "");
-                    sbLong.append("\r\n");
                 } else if (keyword.startsWith("Offering")) {
                     String type = keyword.split(":")[1];
                     if (sb.length() != 0) {
