@@ -1,0 +1,10 @@
+Name:Hawkeye, Young Avenger
+ManaCost:3 R
+Types:Legendary Creature Human Archer Hero
+PT:2/4
+K:Reach
+R::Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Permanent.OppCtrl,Opponent | IsCombat$ False | ReplaceWith$ DmgPlusX | Description$ If a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, instead it deals that much damage plus X, where X is NICKNAME's power.
+SVar:DmgPlusX:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.Y
+SVar:Y:Count$CardPower
+Oracle:Reach\nIf a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, instead it deals that much damage plus X, where X is Hawkeye's power.
