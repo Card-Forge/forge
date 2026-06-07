@@ -31,12 +31,12 @@ public class Ward extends KeywordWithCost {
 
     @Override
     public boolean isComplexCost() {
-        return !costs.isEmpty() || super.isComplexCost();
+        return costs != null || super.isComplexCost();
     }
 
     @Override
     public String getTitleCost() {
-        if (costs.isEmpty()) {
+        if (costs == null) {
             return super.getTitleCost();
         }
 
@@ -45,7 +45,7 @@ public class Ward extends KeywordWithCost {
 
     @Override
     public String costReminderText() {
-        if (costs.isEmpty()) {
+        if (costs == null) {
             return costToReminderDesc(getCost());
         }
 
