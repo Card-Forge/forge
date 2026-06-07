@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=SerendibGenie
+Title=SerendibGenie
+Icon=SerendibGenie.jpg
+Difficulty=Easy
+Description=./Standard/Secrets_of_Strixhaven/Hojun_Yoon_-_Izzet_Aggro_(Standard,_#2926621).dck
+Deck Type=constructed
+
+[Main]
+4 Eddymurk Crab
+4 Slickshot Show-Off
+4 Burst Lightning
+4 Opt
+2 Prismari Charm
+1 Get Out
+1 Spell Pierce
+4 Boomerang Basics
+4 Flow State
+4 Sleight of Hand
+1 Impractical Joke
+4 Stormchaser's Talent
+2 Roaring Furnace
+6 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+1 Great Hall of the Biblioplex
+1 Multiversal Passage
+1 Stormcarved Coast
+[Sideboard]
+2 Disdainful Stroke
+2 Ral, Crackling Wit
+2 Slagstorm
+2 Wan Shi Tong, Librarian
+1 Abrade
+1 Annul
+1 Bounce Off
+1 Broadside Barrage
+1 Get Out
+1 Sear
+1 Spell Pierce

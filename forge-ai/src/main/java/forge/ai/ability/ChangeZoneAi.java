@@ -956,7 +956,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // if it's blink or bounce, try to save my about to die stuff
             final boolean blink = (destination.equals(ZoneType.Exile) && (subApi == ApiType.DelayedTrigger
                     || "DelayedBlink".equals(sa.getParam("AILogic")) || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered"))));
-            if ((destination.equals(ZoneType.Hand) || blink) && (sa.getMinTargets() <= 1)) {
+            if ((destination.equals(ZoneType.Hand) || blink) && sa.getMinTargets() <= 1) {
                 // save my about to die stuff
                 Card tobounce = canBouncePermanent(ai, sa, list);
                 if (tobounce != null) {

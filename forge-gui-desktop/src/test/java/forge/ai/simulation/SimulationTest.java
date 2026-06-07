@@ -23,7 +23,7 @@ import forge.model.FModel;
 
 public class SimulationTest extends AITest {
 
-    public Game resetGame() {
+    public Game initAndCreateGame() {
         // need to be done after FModel.initialize, or the Localizer isn't loaded yet
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();

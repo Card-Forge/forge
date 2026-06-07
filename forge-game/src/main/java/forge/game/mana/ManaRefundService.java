@@ -9,6 +9,8 @@ import forge.game.zone.ZoneType;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ManaRefundService {
 
@@ -22,10 +24,9 @@ public class ManaRefundService {
         PlayerCollection payers = new PlayerCollection(sa.getActivatingPlayer());
 
         // move non-undoable paying mana back to floating
-        for (Mana mana : sa.getPayingMana()) {
-            Player pl = mana.getPlayer();
-            pl.getManaPool().addMana(mana);
-            payers.add(pl);
+        for (Map.Entry<Player, List<Mana>> e : sa.getPayingMana().stream().collect(Collectors.groupingBy(Mana::getPlayer)).entrySet()) {
+            e.getKey().getManaPool().addMana(e.getValue());
+            payers.add(e.getKey());
         }
 
         sa.getPayingMana().clear();

@@ -2,8 +2,10 @@ package forge.screens.home;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import java.util.function.Consumer;
 
@@ -28,6 +30,7 @@ import forge.gamemodes.net.event.DraftPickEvent;
 import forge.gamemodes.net.server.ServerGameLobby;
 import forge.gui.FDraftOverlay;
 import forge.gui.GuiChoose;
+import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.framework.FScreen;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
@@ -47,7 +50,7 @@ import forge.toolbox.FTextField;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
-public class CLobby {
+public class CLobby implements IDraftEventHandler {
 
     public enum LobbyMode { CONSTRUCTED, LIMITED }
 
@@ -177,6 +180,7 @@ public class CLobby {
             view.getBtnStart().requestFocusInWindow();
         });
         view.getGamesInMatchBinder().load();
+        view.getMaximumCommanderBracketBinder().load();
     }
 
     /** React to a lobby-data change: detect event-state transitions and refresh the panel. */
@@ -254,12 +258,19 @@ public class CLobby {
     }
 
     void scanAvailableEvents() {
-        LinkedHashSet<String> eventIds = new LinkedHashSet<>();
+        Map<String, String> datesByEventId = new LinkedHashMap<>();
         for (Deck d : FModel.getDecks().getNetworkEventDecks()) {
             String eventId = DeckProxy.getEventTag(d, "eventId");
-            if (eventId != null) eventIds.add(eventId);
+            if (eventId != null) {
+                datesByEventId.putIfAbsent(eventId, DeckProxy.getEventTag(d, "eventDate"));
+            }
         }
-        eventIdsByDropdownIndex = new ArrayList<>(eventIds);
+        List<String> ids = new ArrayList<>(datesByEventId.keySet());
+        // eventDate is "yyyy-MM-dd HH:mm", so reverse lexical order lists newest first
+        ids.sort(Comparator.comparing(
+                (String id) -> datesByEventId.get(id) != null ? datesByEventId.get(id) : "",
+                Comparator.reverseOrder()));
+        eventIdsByDropdownIndex = ids;
     }
 
     void openEventConfigDialog() {
@@ -365,6 +376,8 @@ public class CLobby {
                 Localizer.getInstance().getMessage("lblNetworkLoadPastEventPrompt"), choices);
         if (chosen == null) return;
         activeEventId = chosen.id();
+        activeConformance = true;
+        view.setConformanceSelected(true);
         view.updateEventPanelState();
         view.updateActionButtons();
         view.updateDeckListFilter();
@@ -404,7 +417,8 @@ public class CLobby {
         }
     }
 
-    void onDraftPackArrived(int seatIndex, List<PaperCard> pack,
+    @Override
+    public void draftPackArrived(int seatIndex, List<PaperCard> pack,
             int packNumber, int pickNumber, int timerDurationSeconds) {
         SwingUtilities.invokeLater(() -> {
             if (networkDraftEditor == null) {
@@ -474,7 +488,8 @@ public class CLobby {
         return EventParticipant.resolveName(seatIndex, viewParticipants, currentParticipants);
     }
 
-    void onDraftSeatPicked(int seatIndex, int[] seatQueueDepths) {
+    @Override
+    public void draftSeatPicked(int seatIndex, int[] seatQueueDepths) {
         SwingUtilities.invokeLater(() -> {
             FDraftOverlay.SINGLETON_INSTANCE.onSeatPicked(seatQueueDepths);
 
@@ -489,7 +504,8 @@ public class CLobby {
         });
     }
 
-    void onDraftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack) {
+    @Override
+    public void draftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack) {
         SwingUtilities.invokeLater(() -> {
             if (networkDraftEditor != null) {
                 networkDraftEditor.addAutoPickedCard(card, packNumber, pickInPack);
@@ -503,17 +519,19 @@ public class CLobby {
         FDraftOverlay.SINGLETON_INSTANCE.reset();
     }
 
-    void onReceiveEventPool(String eventId, Deck pool) {
+    @Override
+    public void receiveEventPool(String eventId, Deck pool) {
         SwingUtilities.invokeLater(() -> {
             if (networkDraftEditor != null) {
                 networkDraftEditor.completeDraft(pool);
                 networkDraftEditor = null;
             } else {
                 FModel.getDecks().getNetworkEventDecks().add(pool);
+                final FScreen screen = CEditorLimited.networkEventEditorScreen(pool);
                 CEditorLimited<Deck> editor = new CEditorLimited<>(
                         FModel.getDecks().getNetworkEventDecks(), Deck::new,
-                        FScreen.DECK_EDITOR_SEALED, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
-                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_SEALED);
+                        screen, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
+                Singletons.getControl().setCurrentScreen(screen);
                 CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editor);
                 editor.getDeckController().load(null, pool.getName());
             }
@@ -537,11 +555,17 @@ public class CLobby {
         view.getCbSingletons().addActionListener(arg0 -> {
             prefs.setPref(FPref.DECKGEN_SINGLETONS, String.valueOf(view.getCbSingletons().isSelected()));
             prefs.save();
+            view.markDirty();
         });
 
         view.getCbArtifacts().addActionListener(arg0 -> {
             prefs.setPref(FPref.DECKGEN_ARTIFACTS, String.valueOf(view.getCbArtifacts().isSelected()));
             prefs.save();
+            view.markDirty();
+        });
+
+        view.getMaximumCommanderBracketBinder().getComponent().addActionListener(arg0 -> {
+            view.markDirty();
         });
 
         // Pre-select checkboxes

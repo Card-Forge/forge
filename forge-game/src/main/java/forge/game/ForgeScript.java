@@ -92,6 +92,8 @@ public class ForgeScript {
                 default:
                     return false;
             }
+        } else if (property.equals("Worthy")) {
+            return cardState.isWorthy();
         } else if (property.equals("Outlaw")) {
             return type.isOutlaw();
         } else if (property.equals("Party")) {
@@ -216,6 +218,8 @@ public class ForgeScript {
             return sa.isPwAbility();
         } else if (property.equals("Aftermath")) {
             return sa.isAftermath();
+        } else if (property.equals("PowerUp")) {
+            return sa.isPowerUp();
         } else if (property.equals("MorphUp")) {
             return sa.isMorphUp();
         } else if (property.equals("ManifestUp")) {
@@ -351,7 +355,7 @@ public class ForgeScript {
         } else if (property.equals("OppCtrl")) {
             return sa.getActivatingPlayer().isOpponentOf(sourceController);
         } else if (property.startsWith("cmc")) {
-            int y = 0;
+            int y;
             // spell was on the stack
             if (sa.getHostCard().isInZone(ZoneType.Stack)) {
                 y = sa.getHostCard().getCMC();

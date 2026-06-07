@@ -10,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
+import forge.gamemodes.net.NetworkLogConfig;
 import forge.gui.FDraftOverlay;
 import forge.gui.FNetOverlay;
 import forge.localinstance.properties.ForgeConstants;
@@ -25,6 +26,8 @@ public final class OnlineMenu {
         menu.setMnemonic(KeyEvent.VK_O);
         menu.add(getMenuItem_HostGame());
         menu.add(getMenuItem_JoinGame());
+        menu.add(new JSeparator());
+        menu.add(getMenuItem_OpenNetworkLog());
         menu.add(getMenuItem_OpenNetworkLogs());
         menu.add(new JSeparator());
         menu.add(chatItem);
@@ -68,6 +71,12 @@ public final class OnlineMenu {
         return menuItem;
     }
 
+    private static JMenuItem getMenuItem_OpenNetworkLog() {
+        JMenuItem menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblOpenNetworkLog"));
+        menuItem.addActionListener(e -> openInOS(NetworkLogConfig.getCurrentLogFile()));
+        return menuItem;
+    }
+
     private static JMenuItem getMenuItem_OpenNetworkLogs() {
         JMenuItem menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblOpenNetworkLogs"));
         menuItem.addActionListener(e -> {
@@ -75,16 +84,23 @@ public final class OnlineMenu {
             if (!dir.exists()) {
                 dir.mkdirs();
             }
-            try {
-                if (System.getProperty("os.name").toLowerCase().contains("windows")) {
-                    Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + dir.getCanonicalPath());
-                } else {
-                    Desktop.getDesktop().open(dir);
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            openInOS(dir);
         });
         return menuItem;
+    }
+
+    private static void openInOS(File file) {
+        if (file == null) {
+            return;
+        }
+        try {
+            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + file.getCanonicalPath());
+            } else {
+                Desktop.getDesktop().open(file);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

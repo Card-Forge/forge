@@ -58,10 +58,12 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
 
     @Override
     protected boolean shouldDispatchToGuiThread(final ProtocolMethod protocolMethod) {
-        // Libgdx blocking prompts deadlock if run on the GL thread — route return-value
-        // protocol methods to a background thread.
+        // Libgdx modal prompts block via WaitCallback and deadlock on the GL thread. Return-value
+        // methods always block; message/showErrorDialog return void but still open a blocking modal.
         if (GuiBase.getInterface().isLibgdxPort()
-                && !protocolMethod.getReturnType().equals(Void.TYPE)) {
+                && (!protocolMethod.getReturnType().equals(Void.TYPE)
+                    || protocolMethod == ProtocolMethod.message
+                    || protocolMethod == ProtocolMethod.showErrorDialog)) {
             return false;
         }
         return super.shouldDispatchToGuiThread(protocolMethod);

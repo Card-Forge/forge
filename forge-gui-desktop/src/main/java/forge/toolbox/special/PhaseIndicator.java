@@ -34,7 +34,7 @@ public class PhaseIndicator extends JPanel {
     }
 
     private void addPhaseLabel(String caption, PhaseType phaseType) {
-        PhaseLabel lbl = new PhaseLabel(caption, phaseType);
+        PhaseLabel lbl = new PhaseLabel(caption);
         lbl.setToolTipText(Localizer.getInstance().getMessage("htmlPhaseTooltipFmt", phaseType.nameForUi));
         phaseLabels.put(phaseType, lbl);
         add(lbl, CONSTRAINTS);

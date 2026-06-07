@@ -423,17 +423,6 @@ public class FloatingZone extends FloatingCardArea {
         }
     }
 
-    /** Deregister all zone docs. Called on game end before closeAll. */
-    public static void deregisterZoneDocs() {
-        for (final VZone vZone : dockedZones.values()) {
-            final EDocID docID = vZone.getDocumentID();
-            if (docID != null) {
-                docID.setDoc(null);
-            }
-        }
-        // Don't clear dockedZones here — closeAll() handles that
-    }
-
     /** Remove dockedZones entries that weren't placed into cells by loadLayout. */
     public static void pruneUnparentedDocks() {
         dockedZones.values().removeIf(vZone -> vZone.getParentCell() == null);
@@ -564,23 +553,22 @@ public class FloatingZone extends FloatingCardArea {
 
     protected Iterable<CardView> getCards() {
         FCollectionView<CardView> zoneCards = player.getCards(zone);
-        if (zoneCards != null) {
-            Iterable<CardView> safe = getMatchUI().isNetGame() ? zoneCards.threadSafeIterable() : zoneCards;
-            cardList = new FCollection<>(safe);
-            if (sortedByName) {
-                cardList.sort(comp);
-            } else if (zone == ZoneType.Flashback) {
-                cardList.sort(ZONE_ORDER_COMPARATOR);
-            }
-            if (!filter.isEmpty()) {
-                final String needle = filter.toLowerCase(Locale.ROOT);
-                cardList.removeIf(card -> !getMatchUI().mayView(card)
-                        || !card.getName().toLowerCase(Locale.ROOT).contains(needle));
-            }
-            return cardList;
-        } else {
-            return null;
+        if (zoneCards.isEmpty()) {
+            return zoneCards;
         }
+        Iterable<CardView> safe = getMatchUI().isNetGame() ? zoneCards.threadSafeIterable() : zoneCards;
+        cardList = new FCollection<>(safe);
+        if (sortedByName) {
+            cardList.sort(comp);
+        } else if (zone == ZoneType.Flashback) {
+            cardList.sort(ZONE_ORDER_COMPARATOR);
+        }
+        if (!filter.isEmpty()) {
+            final String needle = filter.toLowerCase(Locale.ROOT);
+            cardList.removeIf(card -> !getMatchUI().mayView(card)
+                    || !card.getName().toLowerCase(Locale.ROOT).contains(needle));
+        }
+        return cardList;
     }
 
     private FloatingZone(final CMatchUI matchUI, final PlayerView player0, final ZoneType zone0) {
@@ -642,29 +630,26 @@ public class FloatingZone extends FloatingCardArea {
     @Override
     protected void doRefresh() {
         List<CardPanel> cardPanels = new ArrayList<>();
-        Iterable<CardView> cards = getCards();
-        if (cards != null) {
-            for (final CardView card : cards) {
-                CardPanel cardPanel = getCardPanel(card.getId());
-                if (cardPanel == null) {
-                    cardPanel = new CardPanel(getMatchUI(), card);
-                    cardPanel.setDisplayEnabled(true);
-                } else {
-                    cardPanel.setCard(card);
-                }
-                if (zone == ZoneType.Flashback) {
-                    final ZoneType cardZone = card.getZone();
-                    if (cardZone != null) {
-                        cardPanel.setZoneBanner(cardZone.getTranslatedName().toUpperCase(), cardZone);
-                    }
-                }
-                cardPanels.add(cardPanel);
+
+        for (final CardView card : getCards()) {
+            CardPanel cardPanel = getCardPanel(card.getId());
+            if (cardPanel == null) {
+                cardPanel = new CardPanel(getMatchUI(), card);
+                cardPanel.setDisplayEnabled(true);
+            } else {
+                cardPanel.setCard(card);
             }
+            if (zone == ZoneType.Flashback) {
+                final ZoneType cardZone = card.getZone();
+                if (cardZone != null) {
+                    cardPanel.setZoneBanner(cardZone.getTranslatedName().toUpperCase(), cardZone);
+                }
+            }
+            cardPanels.add(cardPanel);
         }
         setCardPanels(cardPanels);
         final int shown = cardPanels.size();
-        final FCollectionView<CardView> zoneCards = player.getCards(zone);
-        final int total = zoneCards != null ? zoneCards.size() : shown;
+        final int total = player.getZoneSize(zone);
         if (!filter.isEmpty() && shown < total) {
             final String sortDetail = sortedByName
                     ? Localizer.getInstance().getMessage("lblRightClickToUnSort")
@@ -678,7 +663,7 @@ public class FloatingZone extends FloatingCardArea {
     }
 
     private void updatePromptVisibility() {
-        final boolean show = getCards() != null && StreamUtil.stream(getCards()).anyMatch(c -> getMatchUI().isSelectable(c));
+        final boolean show = StreamUtil.stream(getCards()).anyMatch(c -> getMatchUI().isSelectable(c));
         final String prompt = show ? getMatchUI().getPromptMessage() : null;
         if (prompt != null && !prompt.isEmpty()) {
             promptLabel.setText(FSkin.encodeSymbols(prompt, false));

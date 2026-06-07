@@ -34,10 +34,14 @@ public interface KeywordInterface extends Cloneable, IHasSVars, ICardTraitChange
     long getIdx();
     void setIdx(long i);
 
-    void createTraits(final Card host, final boolean intrinsic);
+    default void createTraits(final Card host, final boolean intrinsic) {
+        createTraits(host, intrinsic, false);
+    }
     void createTraits(final Card host, final boolean intrinsic, final boolean clear);
 
-    void createTraits(final Player player);
+    default void createTraits(final Player player) {
+        createTraits(player, false);
+    }
     void createTraits(final Player player, final boolean clear);
 
     boolean hasTraits();
@@ -48,7 +52,6 @@ public interface KeywordInterface extends Cloneable, IHasSVars, ICardTraitChange
 
     void addSpellAbility(final SpellAbility s);
     void addStaticAbility(final StaticAbility st);
-
 
     /**
      * @return the triggers

@@ -60,7 +60,6 @@ public enum VEditorLog implements IVDoc<CEditorLog> {
 
     public void showView() {
         tab.setVisible(true);
-        tab.setOpaque(true);
         pnlContent.setOpaque(true);
         pnlContent.setVisible(true);
     }

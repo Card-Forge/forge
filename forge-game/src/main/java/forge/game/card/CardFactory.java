@@ -407,7 +407,7 @@ public class CardFactory {
                 c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
 
             // keywords not before variables
-            if (c.addIntrinsicKeywords(face.getKeywords(), false)) {
+            if (c.getCurrentState().addIntrinsicKeywords(face.getKeywords(), false)) {
                 c.updateKeywordsCache();
             }
 

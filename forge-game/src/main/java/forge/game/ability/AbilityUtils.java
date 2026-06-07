@@ -2980,11 +2980,11 @@ public class AbilityUtils {
         return applyTextChangeEffects(def, ability.getHostCard(), false);
     }
 
-    public static final String applyKeywordTextChangeEffects(final String kw, final Card card) {
+    public static final String applyKeywordTextChangeEffects(final String kw, Map<String,String> colorMap, Map<String,String> typeMap) {
         if (!CardUtil.isKeywordModifiable(kw)) {
             return kw;
         }
-        return applyTextChangeEffects(kw, card, false);
+        return applyTextChangeEffects(kw, false, colorMap, typeMap);
     }
 
     public static final String applyDescriptionTextChangeEffects(final String def, final CardTraitBase ability) {

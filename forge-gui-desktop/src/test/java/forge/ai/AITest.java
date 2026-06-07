@@ -47,7 +47,7 @@ public class AITest {
         initialized = true;
     }
 
-    public Game resetGame() {
+    protected Game initAndCreateGame() {
         // need to be done after FModel.initialize, or the Localizer isn't loaded yet
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
@@ -63,10 +63,6 @@ public class AITest {
         // game.getAction().checkStateEffects(true);
 
         return game;
-    }
-
-    protected Game initAndCreateGame() {
-        return resetGame();
     }
 
     protected Game initAndCreateThreePlayerGame() {

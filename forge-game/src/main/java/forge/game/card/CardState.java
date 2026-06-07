@@ -443,12 +443,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return changed;
     }
 
-    public void addIntrinsicKeywords(Collection<KeywordInterface> intrinsicKeywords2) {
-        for (KeywordInterface inst : intrinsicKeywords2) {
-            intrinsicKeywords.insert(inst);
-        }
-    }
-
     public final boolean removeIntrinsicKeyword(final String s) {
         return intrinsicKeywords.remove(s);
     }
@@ -1110,5 +1104,14 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     @Override
     public String getTranslatedName() {
         return CardTranslation.getTranslatedName(this);
+    }
+
+    public boolean isWorthy() {
+        CardTypeView type = getTypeWithChanges();
+        if (!type.isCreature() || !type.isLegendary() || type.hasSubtype("Villain")) {
+            return false;
+        }
+        ColorSet color = getCard().getColor(this);
+        return color.hasRed() || color.hasWhite();
     }
 }
