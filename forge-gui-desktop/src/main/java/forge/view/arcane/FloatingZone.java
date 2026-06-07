@@ -641,6 +641,7 @@ public class FloatingZone extends FloatingCardArea {
     @Override
     protected void doRefresh() {
         List<CardPanel> cardPanels = new ArrayList<>();
+        boolean anyViewable = false;
 
         for (final CardView card : getCards()) {
             CardPanel cardPanel = getCardPanel(card.getId());
@@ -657,6 +658,11 @@ public class FloatingZone extends FloatingCardArea {
                 }
             }
             cardPanels.add(cardPanel);
+            anyViewable |= getMatchUI().mayView(card);
+        }
+        // When only some cards in a zone are revealed, dim the un-revealed ones which render as blank cards
+        for (final CardPanel panel : cardPanels) {
+            panel.setDimmed(anyViewable && !getMatchUI().mayView(panel.getCard()));
         }
         setCardPanels(cardPanels);
         final int shown = cardPanels.size();
