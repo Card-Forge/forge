@@ -13,23 +13,24 @@ import java.util.regex.Pattern;
 final class ArchidektDeckUrlProvider implements DeckUrlProvider {
     private static final Pattern DECK_URL = Pattern.compile("(?i)(?:^|/)decks/(\\d+)(?:[/?#]|$)");
     private static final String API_BASE = "https://archidekt.com/api/decks/";
+    private static final String PROVIDER_NAME = "Archidekt";
     private static final Localizer localizer = Localizer.getInstance();
 
     @Override
     public RemoteDeck load(final String normalizedUrl, final Iterable<Deck> savedDecks) throws IOException {
         final String deckId = getDeckId(normalizedUrl);
-        final Map<?, ?> root = DeckUrlLoader.readJsonObject(API_BASE + deckId + "/", "Archidekt", "lblArchidektUnexpectedResponse");
+        final Map<?, ?> root = DeckUrlLoader.readJsonObject(API_BASE + deckId + "/", PROVIDER_NAME);
 
         final DeckUrlImportTextBuilder builder = new DeckUrlImportTextBuilder();
         addCards(builder, root);
 
         return new RemoteDeck(
-                DeckUrlLoader.getDeckName(root, deckId, normalizedUrl, localizer.getMessage("lblArchidektDeck"), savedDecks),
+                DeckUrlLoader.getDeckName(root, deckId, normalizedUrl,
+                        localizer.getMessage("lblDeckUrlDefaultDeckName", PROVIDER_NAME), savedDecks),
                 getDeckFormat(root.get("deckFormat")),
                 normalizedUrl,
                 builder.toString(),
-                "lblArchidektCardNotFound",
-                "lblNoPlayableCardsInArchidektDeck");
+                PROVIDER_NAME);
     }
 
     static String getDeckId(final String deckUrl) throws IOException {
@@ -37,12 +38,12 @@ final class ArchidektDeckUrlProvider implements DeckUrlProvider {
         if (matcher.find()) {
             return matcher.group(1);
         }
-        throw new IOException(localizer.getMessage("lblCouldNotFindArchidektDeckId"));
+        throw new IOException(localizer.getMessage("lblCouldNotFindDeckUrlId", PROVIDER_NAME));
     }
 
     private static void addCards(final DeckUrlImportTextBuilder builder, final Map<?, ?> root) throws IOException {
         if (!(root.get("cards") instanceof List<?> cards)) {
-            throw new IOException(localizer.getMessage("lblArchidektUnexpectedResponse"));
+            throw new IOException(localizer.getMessage("lblDeckUrlUnexpectedResponse", PROVIDER_NAME));
         }
 
         final Set<String> excludedCategories = getExcludedCategories(root);

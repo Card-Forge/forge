@@ -29,6 +29,7 @@ public final class DeckUrlLoader {
     private static final Pattern PRINTING_HINT = Pattern.compile(
             "^(\\s*\\d+\\s+.+?)\\s+\\[[A-Z0-9_]{2,7}\\](?:\\s+\\*?[0-9A-Z]+(?:\\S[0-9A-Z]*)?)?\\s*$");
     private static final String URL_DECK_DIR_NAME = "URL";
+    private static final String SUPPORTED_PROVIDERS = "Moxfield, Archidekt";
     private static final Localizer localizer = Localizer.getInstance();
 
     public static DeckProxy load(final String deckUrl) throws IOException {
@@ -59,7 +60,7 @@ public final class DeckUrlLoader {
         if (host.endsWith("archidekt.com")) {
             return new ArchidektDeckUrlProvider();
         }
-        throw new IOException(localizer.getMessage("lblOnlySupportedDeckUrls"));
+        throw new IOException(localizer.getMessage("lblOnlySupportedDeckUrls", SUPPORTED_PROVIDERS));
     }
 
     private static Deck importDeck(final DeckUrlProvider.RemoteDeck remoteDeck) throws IOException {
@@ -70,7 +71,7 @@ public final class DeckUrlLoader {
         for (final Token token : tokens) {
             final TokenType type = token.getType();
             if (type == TokenType.UNKNOWN_CARD || type == TokenType.UNSUPPORTED_CARD) {
-                throw new IOException(localizer.getMessage(remoteDeck.cardNotFoundMessageKey(), token.getText()));
+                throw new IOException(localizer.getMessage("lblDeckUrlCardNotFound", remoteDeck.providerName(), token.getText()));
             }
             if (!token.isTokenForDeck() || type == TokenType.DECK_NAME) {
                 continue;
@@ -80,7 +81,7 @@ public final class DeckUrlLoader {
 
         deck.setDeckFormat(remoteDeck.format());
         deck.setSourceUrl(remoteDeck.sourceUrl());
-        requirePlayableCards(deck, remoteDeck.noPlayableCardsMessageKey());
+        requirePlayableCards(deck, remoteDeck.providerName());
         return deck;
     }
 
@@ -110,9 +111,9 @@ public final class DeckUrlLoader {
         return token != null && token.isCardToken();
     }
 
-    private static void requirePlayableCards(final Deck deck, final String messageKey) throws IOException {
+    private static void requirePlayableCards(final Deck deck, final String providerName) throws IOException {
         if (deck.getMain().isEmpty() && !deck.has(DeckSection.Commander)) {
-            throw new IOException(localizer.getMessage(messageKey));
+            throw new IOException(localizer.getMessage("lblNoPlayableCardsInDeckUrl", providerName));
         }
     }
 
@@ -215,12 +216,12 @@ public final class DeckUrlLoader {
         return out.toString();
     }
 
-    static Map<?, ?> readJsonObject(final String requestUrl, final String providerName, final String unexpectedResponseKey) throws IOException {
+    static Map<?, ?> readJsonObject(final String requestUrl, final String providerName) throws IOException {
         final Object parsed = new JsonParser(readUrl(requestUrl, providerName)).parse();
         if (parsed instanceof Map<?, ?> root) {
             return root;
         }
-        throw new IOException(localizer.getMessage(unexpectedResponseKey));
+        throw new IOException(localizer.getMessage("lblDeckUrlUnexpectedResponse", providerName));
     }
 
     static String getNestedString(final Map<?, ?> map, final String... keys) {

@@ -316,6 +316,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void setDeckPoolWithConfig(final Iterable<DeckProxy> decks, final ItemManagerConfig config) {
         updatingDeckPool = true;
         try {
+            // Clear the old source before applying a new ItemManagerConfig; otherwise stale items can
+            // be sorted/rendered with columns from the next deck browser during source transitions.
             lstDecks.setPool(ImmutableList.of());
             lstDecks.setup(config);
             lstDecks.setPool(decks);
