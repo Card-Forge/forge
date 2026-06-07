@@ -152,12 +152,14 @@ public class CharmAi extends SpellAbilityAi {
                 }
             }
         }
-        if (!isTrigger && chosen.size() < num && min < num) {
+        if (!isTrigger && !chosen.isEmpty() && chosen.size() < num && min < num) {
             // Optional extra modes can be worth adding even when canPlaySa() is too strict for a standalone mode.
             choices.removeAll(chosen);
             for (AbilitySub sub : choices) {
                 handleDependentModes(sa, chosen, sub);
-                if (aic.doTrigger(sub, false) && canPayForAdditionalMode(sa, chosen, sub, ai)) {
+                sub.setActivatingPlayer(ai);
+                if (SpellApiToAi.Converter.get(sub).chkDrawbackWithSubs(ai, sub).willingToPlay()
+                        && canPayForAdditionalMode(sa, chosen, sub, ai)) {
                     chosen.add(sub);
                     if (chosen.size() == num) {
                         break;
