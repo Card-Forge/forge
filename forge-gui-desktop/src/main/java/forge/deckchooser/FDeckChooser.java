@@ -301,8 +301,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setAllowMultipleSelections(false);
         setDeckPoolWithConfig(DeckUrlLoader.getUrlDecks(), ItemManagerConfig.NET_DECKS);
 
-        btnRandom.setText(localizer.getMessage("lblReload"));
-        btnRandom.setCommand(this::loadDeckFromUrl);
+        btnRandom.setText(localizer.getMessage("lblRandomDeck"));
+        btnRandom.setCommand((UiCommand) () -> DeckgenUtil.randomSelect(lstDecks));
 
         if (lastLoadedUrlDeckName != null) {
             lstDecks.setSelectedString(lastLoadedUrlDeckName);
@@ -393,8 +393,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateDeckUrlPanelVisibility() {
+        final boolean isProvidedDeckUrl = selectedDeckType == DeckType.PROVIDED_DECK_URL;
         if (pnlDeckUrl != null) {
-            pnlDeckUrl.setVisible(selectedDeckType == DeckType.PROVIDED_DECK_URL);
+            pnlDeckUrl.setVisible(isProvidedDeckUrl);
         }
     }
 
