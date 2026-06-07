@@ -1,10 +1,9 @@
 package forge.deck;
 
-import forge.StaticData;
-import forge.card.CardDb;
+import forge.deck.DeckRecognizer.Token;
+import forge.deck.DeckRecognizer.TokenType;
 import forge.deck.io.DeckStorage;
 import forge.game.GameType;
-import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.Localizer;
 import forge.util.storage.StorageImmediatelySerialized;
@@ -20,68 +19,27 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class DeckUrlLoader {
-    private static final Pattern MOXFIELD_DECK_URL = Pattern.compile("(?i)(?:^|/)decks/([^/?#]+)");
-    private static final Pattern ARCHIDEKT_DECK_URL = Pattern.compile("(?i)(?:^|/)decks/(\\d+)(?:[/?#]|$)");
-    private static final String MOXFIELD_API_BASE = "https://api.moxfield.com/v2/decks/all/";
-    private static final String ARCHIDEKT_API_BASE = "https://archidekt.com/api/decks/";
+    private static final Pattern PRINTING_HINT = Pattern.compile(
+            "^(\\s*\\d+\\s+.+?)\\s+\\[[A-Z0-9_]{2,7}\\](?:\\s+\\*?[0-9A-Z]+(?:\\S[0-9A-Z]*)?)?\\s*$");
     private static final String URL_DECK_DIR_NAME = "URL";
     private static final Localizer localizer = Localizer.getInstance();
 
     public static DeckProxy load(final String deckUrl) throws IOException {
         final String normalizedUrl = normalizeUrl(deckUrl);
-        final String host = getHost(normalizedUrl);
+        final DeckUrlProvider provider = getProvider(normalizedUrl);
         final StorageImmediatelySerialized<Deck> storage = getStorage();
-        final Deck deck;
-        if (host.endsWith("moxfield.com")) {
-            deck = loadMoxfieldDeck(normalizedUrl, storage);
-        } else if (host.endsWith("archidekt.com")) {
-            deck = loadArchidektDeck(normalizedUrl, storage);
-        } else {
-            throw new IOException(localizer.getMessage("lblOnlySupportedDeckUrls"));
-        }
+        final DeckUrlProvider.RemoteDeck remoteDeck = provider.load(normalizedUrl, storage);
+        final Deck deck = importDeck(remoteDeck);
 
         storage.add(deck);
         return new DeckProxy(deck, localizer.getMessage("lblUrlDeck"), GameType.Constructed, storage);
-    }
-
-    private static Deck loadMoxfieldDeck(final String normalizedUrl, final Iterable<Deck> savedDecks) throws IOException {
-        final String deckId = getMoxfieldDeckId(normalizedUrl);
-        final Map<?, ?> root = readJsonObject(MOXFIELD_API_BASE + deckId, "Moxfield", "lblMoxfieldUnexpectedResponse");
-
-        final Deck deck = new Deck(getDeckName(root, deckId, normalizedUrl, localizer.getMessage("lblMoxfieldDeck"), savedDecks));
-        deck.setSourceUrl(normalizedUrl);
-        deck.setDeckFormat(getDeckFormat(root.get("format")));
-        addMoxfieldSection(deck, root.get("commanders"), DeckSection.Commander);
-        addMoxfieldSection(deck, root.get("mainboard"), DeckSection.Main);
-        addMoxfieldSection(deck, root.get("sideboard"), DeckSection.Sideboard);
-        addMoxfieldSection(deck, root.get("companions"), DeckSection.Sideboard);
-
-        requirePlayableCards(deck, "lblNoPlayableCardsInMoxfieldDeck");
-        return deck;
-    }
-
-    private static Deck loadArchidektDeck(final String normalizedUrl, final Iterable<Deck> savedDecks) throws IOException {
-        final String deckId = getArchidektDeckId(normalizedUrl);
-        final Map<?, ?> root = readJsonObject(ARCHIDEKT_API_BASE + deckId + "/", "Archidekt", "lblArchidektUnexpectedResponse");
-
-        final Deck deck = new Deck(getDeckName(root, deckId, normalizedUrl, localizer.getMessage("lblArchidektDeck"), savedDecks));
-        deck.setSourceUrl(normalizedUrl);
-        deck.setDeckFormat(getArchidektDeckFormat(root.get("deckFormat")));
-        addArchidektCards(deck, root);
-
-        requirePlayableCards(deck, "lblNoPlayableCardsInArchidektDeck");
-        return deck;
     }
 
     public static List<DeckProxy> getUrlDecks() {
@@ -93,55 +51,63 @@ public final class DeckUrlLoader {
         return decks;
     }
 
-    private static void addMoxfieldSection(final Deck deck, final Object sectionValue, final DeckSection section) throws IOException {
-        if (!(sectionValue instanceof Map<?, ?> cards)) {
-            return;
+    private static DeckUrlProvider getProvider(final String normalizedUrl) throws IOException {
+        final String host = getHost(normalizedUrl);
+        if (host.endsWith("moxfield.com")) {
+            return new MoxfieldDeckUrlProvider();
         }
-        final CardPool pool = deck.getOrCreate(section);
-        for (final Map.Entry<?, ?> entry : cards.entrySet()) {
-            if (!(entry.getValue() instanceof Map<?, ?> cardEntry)) {
-                continue;
-            }
-
-            final int quantity = getInt(cardEntry.get("quantity"), 1);
-            String cardName = getNestedString(cardEntry, "card", "name");
-            if (cardName == null) {
-                cardName = String.valueOf(entry.getKey());
-            }
-            if (!cardName.isBlank() && quantity > 0) {
-                final String setCode = getNestedString(cardEntry, "card", "set");
-                final String collectorNumber = getNestedString(cardEntry, "card", "cn");
-                pool.add(getRequiredCard(cardName, setCode, collectorNumber, "lblMoxfieldCardNotFound"), quantity);
-            }
+        if (host.endsWith("archidekt.com")) {
+            return new ArchidektDeckUrlProvider();
         }
+        throw new IOException(localizer.getMessage("lblOnlySupportedDeckUrls"));
     }
 
-    private static void addArchidektCards(final Deck deck, final Map<?, ?> root) throws IOException {
-        if (!(root.get("cards") instanceof List<?> cards)) {
-            throw new IOException(localizer.getMessage("lblArchidektUnexpectedResponse"));
+    private static Deck importDeck(final DeckUrlProvider.RemoteDeck remoteDeck) throws IOException {
+        final DeckRecognizer recognizer = new DeckRecognizer();
+        recognizer.forceImportBannedAndRestrictedCards();
+        final List<Token> tokens = recognizer.parseCardList(getRecognizableImportLines(recognizer, remoteDeck.importText()));
+        final Deck deck = new Deck(remoteDeck.name());
+        for (final Token token : tokens) {
+            final TokenType type = token.getType();
+            if (type == TokenType.UNKNOWN_CARD || type == TokenType.UNSUPPORTED_CARD) {
+                throw new IOException(localizer.getMessage(remoteDeck.cardNotFoundMessageKey(), token.getText()));
+            }
+            if (!token.isTokenForDeck() || type == TokenType.DECK_NAME) {
+                continue;
+            }
+            deck.getOrCreate(token.getTokenSection()).add(token.getCard(), token.getQuantity());
         }
 
-        final Set<String> excludedCategories = getArchidektExcludedCategories(root);
-        for (final Object cardValue : cards) {
-            if (!(cardValue instanceof Map<?, ?> cardEntry) || cardEntry.get("deletedAt") != null) {
+        deck.setDeckFormat(remoteDeck.format());
+        deck.setSourceUrl(remoteDeck.sourceUrl());
+        requirePlayableCards(deck, remoteDeck.noPlayableCardsMessageKey());
+        return deck;
+    }
+
+    private static String[] getRecognizableImportLines(final DeckRecognizer recognizer, final String importText) {
+        final String[] lines = importText.split("\n");
+        DeckSection section = null;
+        for (int i = 0; i < lines.length; i++) {
+            final Token token = recognizer.recognizeLine(lines[i], section);
+            if (token == null) {
                 continue;
             }
-
-            final int quantity = getInt(cardEntry.get("quantity"), 1);
-            if (quantity <= 0 || isArchidektExcludedCard(cardEntry, excludedCategories)) {
+            if (token.getType() == TokenType.DECK_SECTION_NAME) {
+                section = DeckSection.valueOf(token.getText());
                 continue;
             }
-
-            final String cardName = getArchidektCardName(cardEntry);
-            if (cardName == null) {
-                continue;
+            if (token.getType() == TokenType.UNKNOWN_CARD) {
+                final String fallbackLine = PRINTING_HINT.matcher(lines[i]).replaceFirst("$1");
+                if (!fallbackLine.equals(lines[i]) && isCardToken(recognizer.recognizeLine(fallbackLine, section))) {
+                    lines[i] = fallbackLine;
+                }
             }
-
-            final String setCode = getNestedString(cardEntry, "card", "edition", "editioncode");
-            final String collectorNumber = getNestedString(cardEntry, "card", "collectorNumber");
-            deck.getOrCreate(getArchidektSection(cardEntry)).add(
-                    getRequiredCard(cardName, setCode, collectorNumber, "lblArchidektCardNotFound"), quantity);
         }
+        return lines;
+    }
+
+    private static boolean isCardToken(final Token token) {
+        return token != null && token.isCardToken();
     }
 
     private static void requirePlayableCards(final Deck deck, final String messageKey) throws IOException {
@@ -150,72 +116,7 @@ public final class DeckUrlLoader {
         }
     }
 
-    private static PaperCard getRequiredCard(final String cardName, final String setCode, final String collectorNumber,
-            final String messageKey) throws IOException {
-        final PaperCard card = findCard(cardName, setCode, collectorNumber);
-        if (card == null) {
-            throw new IOException(localizer.getMessage(messageKey, cardName));
-        }
-        return card;
-    }
-
-    private static Set<String> getArchidektExcludedCategories(final Map<?, ?> root) {
-        final Set<String> excludedCategories = new HashSet<>();
-        if (!(root.get("categories") instanceof List<?> categories)) {
-            return excludedCategories;
-        }
-        for (final Object categoryValue : categories) {
-            if (categoryValue instanceof Map<?, ?> category && Boolean.FALSE.equals(category.get("includedInDeck"))) {
-                final String name = getString(category.get("name"), null);
-                if (name != null && !"Sideboard".equalsIgnoreCase(name)) {
-                    excludedCategories.add(name);
-                }
-            }
-        }
-        return excludedCategories;
-    }
-
-    private static boolean isArchidektExcludedCard(final Map<?, ?> cardEntry, final Set<String> excludedCategories) {
-        if (!(cardEntry.get("categories") instanceof List<?> categories)) {
-            return false;
-        }
-        for (final Object categoryValue : categories) {
-            if (categoryValue instanceof String category && excludedCategories.contains(category)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static DeckSection getArchidektSection(final Map<?, ?> cardEntry) {
-        if (Boolean.TRUE.equals(cardEntry.get("companion"))) {
-            return DeckSection.Sideboard;
-        }
-        if (cardEntry.get("categories") instanceof List<?> categories) {
-            for (final Object categoryValue : categories) {
-                if (!(categoryValue instanceof String category)) {
-                    continue;
-                }
-                if ("Commander".equalsIgnoreCase(category)) {
-                    return DeckSection.Commander;
-                }
-                if ("Sideboard".equalsIgnoreCase(category)) {
-                    return DeckSection.Sideboard;
-                }
-            }
-        }
-        return DeckSection.Main;
-    }
-
-    private static String getArchidektCardName(final Map<?, ?> cardEntry) {
-        String cardName = getNestedString(cardEntry, "card", "displayName");
-        if (cardName == null) {
-            cardName = getNestedString(cardEntry, "card", "oracleCard", "name");
-        }
-        return cardName;
-    }
-
-    private static String getDeckName(final Map<?, ?> root, final String deckId, final String sourceUrl, final String defaultName,
+    static String getDeckName(final Map<?, ?> root, final String deckId, final String sourceUrl, final String defaultName,
             final Iterable<Deck> savedDecks) throws IOException {
         final String requestedName = getString(root.get("name"), defaultName);
         for (final Deck deck : savedDecks) {
@@ -237,7 +138,7 @@ public final class DeckUrlLoader {
         }
     }
 
-    private static DeckFormat getDeckFormat(final Object formatValue) {
+    static DeckFormat getDeckFormat(final Object formatValue) {
         try {
             return DeckFormat.smartValueOf(getString(formatValue, null), DeckFormat.Constructed);
         } catch (final IllegalArgumentException ex) {
@@ -245,93 +146,10 @@ public final class DeckUrlLoader {
         }
     }
 
-    private static DeckFormat getArchidektDeckFormat(final Object formatValue) {
-        if (!(formatValue instanceof Number number)) {
-            return DeckFormat.Constructed;
-        }
-        return switch (number.intValue()) {
-            case 3, 11, 12 -> DeckFormat.Commander;
-            case 6 -> DeckFormat.Pauper;
-            case 13 -> DeckFormat.Brawl;
-            default -> DeckFormat.Constructed;
-        };
-    }
-
     private static StorageImmediatelySerialized<Deck> getStorage() {
         return new StorageImmediatelySerialized<>("URL decks",
                 new DeckStorage(new File(ForgeConstants.DECK_BASE_DIR + URL_DECK_DIR_NAME + ForgeConstants.PATH_SEPARATOR),
                         ForgeConstants.DECK_BASE_DIR));
-    }
-
-    private static PaperCard findCard(final String cardName, final String setCode, final String collectorNumber) {
-        PaperCard card = findCardInDatabases(cardName, setCode, collectorNumber);
-        if (card != null) {
-            return card;
-        }
-
-        StaticData.instance().attemptToLoadCard(cardName, setCode);
-        card = findCardInDatabases(cardName, setCode, collectorNumber);
-        if (card != null) {
-            return card;
-        }
-
-        final String frontFaceName = getFrontFaceName(cardName);
-        if (frontFaceName.equals(cardName)) {
-            return null;
-        }
-
-        card = findCardInDatabases(frontFaceName, setCode, collectorNumber);
-        if (card != null) {
-            return card;
-        }
-
-        StaticData.instance().attemptToLoadCard(frontFaceName, setCode);
-        return findCardInDatabases(frontFaceName, setCode, collectorNumber);
-    }
-
-    private static PaperCard findCardInDatabases(final String cardName, final String setCode, final String collectorNumber) {
-        final String normalizedSetCode = setCode == null ? null : setCode.toUpperCase(Locale.ROOT);
-        for (final CardDb db : StaticData.instance().getAvailableDatabases().values()) {
-            PaperCard card = collectorNumber == null ? null : db.getCard(cardName, normalizedSetCode, collectorNumber);
-            if (card == null) {
-                card = db.getCard(cardName, normalizedSetCode);
-            }
-            if (card == null) {
-                card = db.getCard(cardName);
-            }
-            if (card != null) {
-                return card;
-            }
-        }
-        return null;
-    }
-
-    private static String getFrontFaceName(final String cardName) {
-        final int splitIndex = cardName.indexOf(" // ");
-        return splitIndex < 0 ? cardName : cardName.substring(0, splitIndex);
-    }
-
-    private static String getMoxfieldDeckId(final String deckUrl) throws IOException {
-        final Matcher matcher = MOXFIELD_DECK_URL.matcher(deckUrl);
-        if (matcher.find()) {
-            return matcher.group(1);
-        }
-        final int lastSlash = deckUrl.lastIndexOf('/');
-        final String id = lastSlash >= 0 ? deckUrl.substring(lastSlash + 1) : deckUrl;
-        final int query = id.indexOf('?');
-        final String cleanId = query >= 0 ? id.substring(0, query) : id;
-        if (cleanId.isBlank()) {
-            throw new IOException(localizer.getMessage("lblCouldNotFindMoxfieldDeckId"));
-        }
-        return cleanId;
-    }
-
-    private static String getArchidektDeckId(final String deckUrl) throws IOException {
-        final Matcher matcher = ARCHIDEKT_DECK_URL.matcher(deckUrl);
-        if (matcher.find()) {
-            return matcher.group(1);
-        }
-        throw new IOException(localizer.getMessage("lblCouldNotFindArchidektDeckId"));
     }
 
     private static String getSourceDeckKey(final String deckUrl) throws IOException {
@@ -341,10 +159,10 @@ public final class DeckUrlLoader {
         final String normalizedUrl = normalizeUrl(deckUrl);
         final String host = getHost(normalizedUrl);
         if (host.endsWith("moxfield.com")) {
-            return "moxfield:" + getMoxfieldDeckId(normalizedUrl);
+            return "moxfield:" + MoxfieldDeckUrlProvider.getDeckId(normalizedUrl);
         }
         if (host.endsWith("archidekt.com")) {
-            return "archidekt:" + getArchidektDeckId(normalizedUrl);
+            return "archidekt:" + ArchidektDeckUrlProvider.getDeckId(normalizedUrl);
         }
         return null;
     }
@@ -397,7 +215,7 @@ public final class DeckUrlLoader {
         return out.toString();
     }
 
-    private static Map<?, ?> readJsonObject(final String requestUrl, final String providerName, final String unexpectedResponseKey) throws IOException {
+    static Map<?, ?> readJsonObject(final String requestUrl, final String providerName, final String unexpectedResponseKey) throws IOException {
         final Object parsed = new JsonParser(readUrl(requestUrl, providerName)).parse();
         if (parsed instanceof Map<?, ?> root) {
             return root;
@@ -405,7 +223,7 @@ public final class DeckUrlLoader {
         throw new IOException(localizer.getMessage(unexpectedResponseKey));
     }
 
-    private static String getNestedString(final Map<?, ?> map, final String... keys) {
+    static String getNestedString(final Map<?, ?> map, final String... keys) {
         Object value = map;
         for (final String key : keys) {
             if (!(value instanceof Map<?, ?> current)) {
@@ -416,11 +234,11 @@ public final class DeckUrlLoader {
         return getString(value, null);
     }
 
-    private static String getString(final Object value, final String defaultValue) {
+    static String getString(final Object value, final String defaultValue) {
         return value instanceof String str && !str.isBlank() ? str : defaultValue;
     }
 
-    private static int getInt(final Object value, final int defaultValue) {
+    static int getInt(final Object value, final int defaultValue) {
         if (value instanceof Number number) {
             return number.intValue();
         }
