@@ -106,6 +106,7 @@ public class ComputerUtil {
 
         sa = GameActionUtil.addExtraKeywordCost(sa);
 
+
         if (sa.getApi() == ApiType.Charm && !CharmEffect.makeChoices(sa)) {
             // 603.3c If no mode is chosen, the ability is removed from the stack.
             return false;

@@ -716,7 +716,7 @@ public class DamageDealAi extends DamageAiBase {
             if (mandatory) {
                 // Sanity check: if there are any legal non-owned targets after the check (which may happen for complex cards like Rift Bolt),
                 // choose a random opponent's target before forcing targeting of own stuff
-                List<GameEntity> allTgtEntities = sa.getTargetRestrictions().getAllCandidates(sa, true);
+                List<GameEntity> allTgtEntities = sa.getTargetRestrictions().getAllCandidates(sa);
                 for (GameEntity ent : allTgtEntities) {
                     if ((ent instanceof Player && ((Player)ent).isOpponentOf(ai))
                             || (ent instanceof Card && ((Card)ent).getController().isOpponentOf(ai))) {

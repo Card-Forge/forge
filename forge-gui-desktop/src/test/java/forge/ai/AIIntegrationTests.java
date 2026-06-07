@@ -129,6 +129,7 @@ public class AIIntegrationTests extends AITest {
         Card crushContraband = addCardToZone("Crush Contraband", p, ZoneType.Hand);
         SpellAbility sa = crushContraband.getSpellAbilities().get(0);
         sa.setActivatingPlayer(p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
 
         Player opponent = game.getPlayers().get(0);
         opponent.setTeam(1);

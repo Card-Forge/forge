@@ -91,6 +91,10 @@ public class CharmAi extends SpellAbilityAi {
             CharmEffect.chainAbilities(sa, chosenList);
         }
 
+        if (chosenList.size() < num) {
+            // TODO return lower score since the SA wouldn't be used to its full effectiveness
+        }
+
         return super.checkApiLogic(ai, sa);
     }
 
