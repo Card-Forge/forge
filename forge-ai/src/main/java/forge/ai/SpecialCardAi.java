@@ -890,7 +890,7 @@ public class SpecialCardAi {
             sa.getHostCard().setSVar("TgtNum", String.valueOf(numTgts));
 
             // Simulate random targeting
-            List<GameEntity> validTgts = sa.getTargetRestrictions().getAllCandidates(sa, true);
+            List<GameEntity> validTgts = sa.getTargetRestrictions().getAllCandidates(sa);
             sa.resetTargets();
             sa.getTargets().addAll(Aggregates.random(validTgts, numTgts));
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -1486,7 +1486,7 @@ public class SpecialCardAi {
     // Power Struggle
     public static class PowerStruggle {
         public static boolean considerFirstTarget(final Player ai, final SpellAbility sa) {
-            Card firstTgt = (Card) Aggregates.random(sa.getTargetRestrictions().getAllCandidates(sa, true));
+            Card firstTgt = (Card) Aggregates.random(sa.getTargetRestrictions().getAllCandidates(sa));
             if (firstTgt != null) {
                 sa.getTargets().add(firstTgt);
                 return true;
