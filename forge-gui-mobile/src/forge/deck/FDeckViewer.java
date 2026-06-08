@@ -50,9 +50,9 @@ public class FDeckViewer extends FScreen {
         FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblDeckListCopiedClipboard", deck.getName()));
     }
 
-    public static void copyCollectionToClipboard() {
+    public static void copyCollectionToClipboard(CardPool pool) {
         ItemPool<PaperCard> autoSellCards = AdventurePlayer.current().getAutoSellCards();
-        CardPool pool = AdventurePlayer.current().getCards().getFilteredPool(card -> !autoSellCards.contains(card));
+        CardPool playedCards = pool.getFilteredPool(card -> !autoSellCards.contains(card));
 
         final String nl = System.lineSeparator();
         final StringBuilder collectionList = new StringBuilder();
@@ -62,7 +62,7 @@ public class FDeckViewer extends FScreen {
         Pattern regexEdNem = Pattern.compile("NMS");
         Pattern regexEdP02 = Pattern.compile("PO2");
 
-        for (final Entry<PaperCard, Integer> entry : pool) {
+        for (final Entry<PaperCard, Integer> entry : playedCards) {
             PaperCard card = entry.getKey();
             if (!card.isVeryBasicLand()) {
                 String cleanCardName = regexQuote.matcher(card.getCardName()).replaceAll("\"\"");
