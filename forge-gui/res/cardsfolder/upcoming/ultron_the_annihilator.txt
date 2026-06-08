@@ -8,7 +8,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | 
 SVar:TrigToken:DB$ Token | TokenScript$ c_2_2_a_robot_villain | TokenOwner$ You
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.Other+YouOwn | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another artifact is put into your graveyard from the battlefield or an artifact card is put into your graveyard from anywhere other than the battlefield, each opponent loses 1 life.
 T:Mode$ ChangesZone | ValidCard$ Artifact.!token+YouOwn | Origin$ Library,Hand,Exile,Command,Stack | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever another artifact is put into your graveyard from the battlefield or an artifact card is put into your graveyard from anywhere other than the battlefield, each opponent loses 1 life.
-SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1
 SVar:HasAttackEffect:TRUE
 Oracle:Flying\nWhenever Ultron enters or attacks, create a 2/2 colorless Robot Villain artifact creature token.\nWhenever another artifact is put into your graveyard from the battlefield or an artifact card is put into your graveyard from anywhere other than the battlefield, each opponent loses 1 life.
