@@ -185,10 +185,6 @@ public class CardPool extends ItemPool<PaperCard> {
         return this.countAll((c) -> c.getName().equals(card.getName()));
     }
 
-    public int countByNameAndEdition(PaperCard card) {
-        return this.countAll((c) -> c.getName().equals(card.getName()) && c.getEdition().equals(card.getEdition()));
-    }
-
     /**
      * Get the Map of frequencies (i.e. counts) for all the CardEdition found
      * among cards in the Pool.
