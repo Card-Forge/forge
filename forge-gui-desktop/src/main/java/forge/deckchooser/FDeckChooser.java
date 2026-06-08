@@ -51,14 +51,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.EnumMap;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Predicate;
+
+import static forge.deck.DeckBrowserGeneratedRows.HOME_PATH;
+import static forge.deck.DeckBrowserGeneratedRows.RANDOM_PATH;
 
 @SuppressWarnings("serial")
 public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
@@ -66,87 +66,74 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private DeckType selectedDeckType;
     private ItemManagerContainer lstDecksContainer;
     private NetDeckCategory netDeckCategory;
-    private final Map<DeckType, NetDeckStorageBase> loadedNetArchiveCategories = new EnumMap<>(DeckType.class);
+    private final DeckBrowserNetService netService = new DeckBrowserNetService();
 
     private boolean refreshingDeckType;
     private boolean isForCommander;
     private final boolean editorOnlyBrowser;
-    private IStorage<Deck> browserFolder;
-    private IStorage<Deck> browserParentFolder;
-    private String browserPath = "";
-    private String browserGeneratedParentPath = "";
-    private DeckType browserRootType;
-    private boolean browserGeneratedFolder;
-    private boolean browserHasDecksHomeParent;
-    private IStorage<Deck> browserListParentFolder;
-    private String browserListParentPath = "";
-    private DeckType browserListParentRootType;
-    private boolean browserListParentHasDecksHomeParent;
-    private String pendingBrowserSelectionPath;
-    private String pendingBrowserSelectionName;
-    private DeckType pendingBrowserSelectionDeckType;
-    private boolean browserSearchActive;
-    private boolean browserHasDeckRows;
-    private boolean browserHasCommanderDeckRows;
-    private static final String GENERATED_HOME_PATH = "";
-    private static final String GENERATED_RANDOM_PATH = "random";
-    private static final String GENERATED_RANDOM_COLORS_PATH = "random/colors";
-    private static final String GENERATED_RANDOM_ARCHETYPES_PATH = "random/archetypes";
-    private static final String RANDOM_ARCHETYPE_GROUP_NAME = "Random Archetype Decks";
+    private final BrowserState browser = new BrowserState();
     private static final Integer[] DEFAULT_DECK_SELECTION = {0};
     private static final Integer[] DEFAULT_COLOR_SELECTION = {0, 1};
-    private interface NetArchiveLoader {
-        NetDeckStorageBase selectAndLoad(GameType gameType, String name, boolean forceDownload);
-    }
 
-    private static final class NetArchiveSpec {
-        private final DeckType deckType;
-        private final String prefix;
-        private final NetArchiveLoader loader;
+    private static final class BrowserState {
+        private IStorage<Deck> folder;
+        private IStorage<Deck> parentFolder;
+        private String path = "";
+        private String generatedParentPath = "";
+        private DeckType rootType;
+        private boolean generatedFolder;
+        private boolean hasDecksHomeParent;
+        private IStorage<Deck> listParentFolder;
+        private String listParentPath = "";
+        private DeckType listParentRootType;
+        private boolean listParentHasDecksHomeParent;
+        private String pendingSelectionPath;
+        private String pendingSelectionName;
+        private DeckType pendingSelectionDeckType;
+        private boolean searchActive;
+        private boolean hasDeckRows;
+        private boolean hasCommanderDeckRows;
 
-        private NetArchiveSpec(final DeckType deckType0, final String prefix0, final NetArchiveLoader loader0) {
-            deckType = deckType0;
-            prefix = prefix0;
-            loader = loader0;
+        private boolean hasListParent() {
+            return listParentFolder != null || !StringUtils.isBlank(listParentPath) || listParentRootType != null
+                    || listParentHasDecksHomeParent;
+        }
+
+        private void clearListParent() {
+            listParentFolder = null;
+            listParentPath = "";
+            listParentRootType = null;
+            listParentHasDecksHomeParent = false;
+        }
+
+        private void rememberCurrentAsListParent() {
+            listParentFolder = folder;
+            listParentPath = path;
+            listParentRootType = rootType;
+            listParentHasDecksHomeParent = hasDecksHomeParent;
+        }
+
+        private void rememberSelection(final String path0, final String name0) {
+            rememberSelection(path0, name0, null);
+        }
+
+        private void rememberSelection(final String path0, final String name0, final DeckType deckType0) {
+            pendingSelectionPath = path0;
+            pendingSelectionName = name0;
+            pendingSelectionDeckType = deckType0;
+        }
+
+        private boolean hasPendingSelection() {
+            return StringUtils.isNotBlank(pendingSelectionPath) || StringUtils.isNotBlank(pendingSelectionName)
+                    || pendingSelectionDeckType != null;
+        }
+
+        private void clearPendingSelection() {
+            pendingSelectionPath = null;
+            pendingSelectionName = null;
+            pendingSelectionDeckType = null;
         }
     }
-
-    private static final NetArchiveSpec[] NET_ARCHIVE_SPECS = {
-            new NetArchiveSpec(DeckType.NET_ARCHIVE_STANDARD_DECK, NetDeckArchiveStandard.PREFIX, NetDeckArchiveStandard::selectAndLoad),
-            new NetArchiveSpec(DeckType.NET_ARCHIVE_MODERN_DECK, NetDeckArchiveModern.PREFIX, NetDeckArchiveModern::selectAndLoad),
-            new NetArchiveSpec(DeckType.NET_ARCHIVE_PAUPER_DECK, NetDeckArchivePauper.PREFIX, NetDeckArchivePauper::selectAndLoad),
-            new NetArchiveSpec(DeckType.NET_ARCHIVE_PIONEER_DECK, NetDeckArchivePioneer.PREFIX, NetDeckArchivePioneer::selectAndLoad),
-            new NetArchiveSpec(DeckType.NET_ARCHIVE_LEGACY_DECK, NetDeckArchiveLegacy.PREFIX, NetDeckArchiveLegacy::selectAndLoad),
-            new NetArchiveSpec(DeckType.NET_ARCHIVE_VINTAGE_DECK, NetDeckArchiveVintage.PREFIX, NetDeckArchiveVintage::selectAndLoad),
-            new NetArchiveSpec(DeckType.NET_ARCHIVE_BLOCK_DECK, NetDeckArchiveBlock.PREFIX, NetDeckArchiveBlock::selectAndLoad)
-    };
-    private static final DeckType[] RANDOM_ARCHETYPE_DECK_TYPES = {
-            DeckType.STANDARD_CARDGEN_DECK,
-            DeckType.PIONEER_CARDGEN_DECK,
-            DeckType.HISTORIC_CARDGEN_DECK,
-            DeckType.MODERN_CARDGEN_DECK,
-            DeckType.LEGACY_CARDGEN_DECK,
-            DeckType.VINTAGE_CARDGEN_DECK,
-            DeckType.PAUPER_CARDGEN_DECK
-    };
-    private static final DeckType[] RANDOM_COLOR_DECK_TYPES = {
-            DeckType.STANDARD_COLOR_DECK,
-            DeckType.MODERN_COLOR_DECK,
-            DeckType.PAUPER_COLOR_DECK
-    };
-    private static final Set<DeckType> RANDOM_ARCHETYPE_DECK_TYPE_SET = EnumSet.copyOf(Arrays.asList(RANDOM_ARCHETYPE_DECK_TYPES));
-    private static final Set<DeckType> RANDOM_COLOR_DECK_TYPE_SET = EnumSet.copyOf(Arrays.asList(RANDOM_COLOR_DECK_TYPES));
-    private static final Set<DeckType> COMMANDER_GENERATED_DECK_TYPES = EnumSet.of(
-            DeckType.RANDOM_COMMANDER_DECK,
-            DeckType.RANDOM_CARDGEN_COMMANDER_DECK);
-    private static final Set<DeckType> CONSTRUCTED_LIST_DECK_TYPES = EnumSet.of(
-            DeckType.PRECONSTRUCTED_DECK,
-            DeckType.QUEST_OPPONENT_DECK);
-    private static final Set<DeckType> GENERATED_RANDOM_PARENT_DECK_TYPES = EnumSet.of(
-            DeckType.THEME_DECK,
-            DeckType.RANDOM_COMMANDER_DECK,
-            DeckType.RANDOM_CARDGEN_COMMANDER_DECK);
-    private static final Set<DeckType> GENERATED_DECK_TYPES = getGeneratedDeckTypes();
 
     private final DeckManager lstDecks;
     final Localizer localizer = Localizer.getInstance();
@@ -247,9 +234,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void refreshCurrentEditorBrowserLocation() {
-        if (browserGeneratedFolder) {
+        if (browser.generatedFolder) {
             updateDecksHome();
-        } else if (browserFolder != null) {
+        } else if (browser.folder != null) {
             reloadBrowserFolderFromDisk();
             updateBrowserFolder();
         } else {
@@ -264,11 +251,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             refreshNetArchiveFolderFromSource(getNetArchiveFolderName());
         } else if (editorOnlyBrowser) {
             refreshCurrentEditorBrowserLocation();
-        } else if (browserFolder == null && StringUtils.isNotBlank(browserGeneratedParentPath)) {
-            updateGeneratedGroup(browserGeneratedParentPath);
-        } else if (browserGeneratedFolder || hasBrowserListParent()) {
+        } else if (browser.folder == null && StringUtils.isNotBlank(browser.generatedParentPath)) {
+            updateGeneratedGroup(browser.generatedParentPath);
+        } else if (browser.generatedFolder || browser.hasListParent()) {
             refreshDecksList(selectedDeckType, true, new DecksComboBoxEvent(decksComboBox, selectedDeckType));
-        } else if (browserFolder != null) {
+        } else if (browser.folder != null) {
             reloadBrowserFolderFromDisk();
             updateBrowserFolder();
         } else {
@@ -282,33 +269,33 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private boolean isInNetDeckFolder() {
-        if (isNetBrowserRoot() && StringUtils.isNotBlank(browserPath)) {
+        if (isNetBrowserRoot() && StringUtils.isNotBlank(browser.path)) {
             return true;
         }
-        return isFolderUnder(browserFolder, ForgeConstants.DECK_NET_DIR)
-                && !isFolderPath(browserFolder, ForgeConstants.DECK_NET_DIR);
+        return isFolderUnder(browser.folder, ForgeConstants.DECK_NET_DIR)
+                && !isFolderPath(browser.folder, ForgeConstants.DECK_NET_DIR);
     }
 
     private boolean isInNetArchiveFolder() {
-        if (isNetArchiveBrowser() && StringUtils.isNotBlank(browserPath)) {
+        if (isNetArchiveBrowser() && StringUtils.isNotBlank(browser.path)) {
             return true;
         }
-        return isFolderUnder(browserFolder, ForgeConstants.DECK_NET_ARCHIVE_DIR)
-                && !isFolderPath(browserFolder, ForgeConstants.DECK_NET_ARCHIVE_DIR);
+        return isFolderUnder(browser.folder, ForgeConstants.DECK_NET_ARCHIVE_DIR)
+                && !isFolderPath(browser.folder, ForgeConstants.DECK_NET_ARCHIVE_DIR);
     }
 
     private String getNetFolderName() {
-        if (isNetBrowserRoot() && StringUtils.isNotBlank(browserPath)) {
-            return firstPathSegment(browserPath);
+        if (isNetBrowserRoot() && StringUtils.isNotBlank(browser.path)) {
+            return firstPathSegment(browser.path);
         }
-        return firstPathSegment(relativeFolderPath(browserFolder, ForgeConstants.DECK_NET_DIR));
+        return firstPathSegment(relativeFolderPath(browser.folder, ForgeConstants.DECK_NET_DIR));
     }
 
     private String getNetArchiveFolderName() {
-        if (StringUtils.startsWith(browserPath, "archive/")) {
-            return firstPathSegment(StringUtils.removeStart(browserPath, "archive/"));
+        if (StringUtils.startsWith(browser.path, "archive/")) {
+            return firstPathSegment(StringUtils.removeStart(browser.path, "archive/"));
         }
-        return firstPathSegment(relativeFolderPath(browserFolder, ForgeConstants.DECK_NET_ARCHIVE_DIR));
+        return firstPathSegment(relativeFolderPath(browser.folder, ForgeConstants.DECK_NET_ARCHIVE_DIR));
     }
 
     private boolean isFolderUnder(final IStorage<Deck> folder, final String rootPath) {
@@ -343,27 +330,27 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private void reloadBrowserFolderFromDisk() {
         final IStorage<Deck> rootFolder;
-        if (StringUtils.startsWith(browserPath, "archive/")) {
+        if (StringUtils.startsWith(browser.path, "archive/")) {
             rootFolder = getArchiveStorage();
-        } else if (browserRootType == null) {
+        } else if (browser.rootType == null) {
             rootFolder = getDecksHomeStorage();
         } else {
-            rootFolder = getFreshStorageForDeckType(browserRootType);
+            rootFolder = getFreshStorageForDeckType(browser.rootType);
         }
         if (rootFolder == null) {
             return;
         }
 
-        final String storagePath = StringUtils.startsWith(browserPath, "archive/")
-                ? StringUtils.removeStart(browserPath, "archive/") : browserPath;
+        final String storagePath = StringUtils.startsWith(browser.path, "archive/")
+                ? StringUtils.removeStart(browser.path, "archive/") : browser.path;
         final IStorage<Deck> refreshedFolder = StringUtils.isBlank(storagePath)
                 ? rootFolder : rootFolder.tryGetFolder(storagePath);
         if (refreshedFolder == null) {
             return;
         }
 
-        browserFolder = refreshedFolder;
-        browserParentFolder = StringUtils.isBlank(storagePath) ? null : rootFolder.tryGetFolder(parentPath(storagePath));
+        browser.folder = refreshedFolder;
+        browser.parentFolder = StringUtils.isBlank(storagePath) ? null : rootFolder.tryGetFolder(parentPath(storagePath));
     }
 
     private void activateBrowserSelection() {
@@ -371,32 +358,32 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         if (selected instanceof DeckBrowserEntry entry) {
             switch (entry.getKind()) {
             case FOLDER:
-                clearBrowserListParent();
+                browser.clearListParent();
                 if (entry.getDeckType() != null) {
-                    browserRootType = entry.getDeckType();
-                    final IStorage<Deck> shortcutRoot = getStorageForDeckType(browserRootType);
-                    browserPath = isSameFolder(entry.getFolder(), shortcutRoot)
-                            ? "" : getPathRelativeToShortcutRoot(entry.getPath(), browserRootType);
-                    browserHasDecksHomeParent = true;
+                    browser.rootType = entry.getDeckType();
+                    final IStorage<Deck> shortcutRoot = getStorageForDeckType(browser.rootType);
+                    browser.path = isSameFolder(entry.getFolder(), shortcutRoot)
+                            ? "" : getPathRelativeToShortcutRoot(entry.getPath(), browser.rootType);
+                    browser.hasDecksHomeParent = true;
                     setShortcutDeckType(entry.getDeckType());
                 } else {
-                    browserParentFolder = browserFolder;
-                    browserPath = entry.getPath();
-                    browserHasDecksHomeParent = false;
+                    browser.parentFolder = browser.folder;
+                    browser.path = entry.getPath();
+                    browser.hasDecksHomeParent = false;
                 }
-                browserFolder = entry.getFolder();
-                browserGeneratedFolder = false;
-                if (browserRootType != null) {
-                    setShortcutDeckType(browserRootType);
+                browser.folder = entry.getFolder();
+                browser.generatedFolder = false;
+                if (browser.rootType != null) {
+                    setShortcutDeckType(browser.rootType);
                 }
-                final IStorage<Deck> folderRoot = browserRootType == null ? getDecksHomeStorage() : getStorageForDeckType(browserRootType);
-                browserParentFolder = StringUtils.isBlank(browserPath) || folderRoot == null ? null : folderRoot.tryGetFolder(parentPath(browserPath));
+                final IStorage<Deck> folderRoot = browser.rootType == null ? getDecksHomeStorage() : getStorageForDeckType(browser.rootType);
+                browser.parentFolder = StringUtils.isBlank(browser.path) || folderRoot == null ? null : folderRoot.tryGetFolder(parentPath(browser.path));
                 updateBrowserFolder();
                 return;
             case PARENT_FOLDER:
                 rememberCurrentBrowserLocationForParentSelection();
-                if (!hasBrowserListParent() && browserHasDecksHomeParent
-                        && StringUtils.isBlank(browserPath) && StringUtils.isBlank(entry.getPath())) {
+                if (!browser.hasListParent() && browser.hasDecksHomeParent
+                        && StringUtils.isBlank(browser.path) && StringUtils.isBlank(entry.getPath())) {
                     updateDecksHome();
                     return;
                 }
@@ -408,26 +395,26 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                     }
                     return;
                 }
-                browserFolder = entry.getFolder();
-                browserPath = entry.getPath();
-                final DeckType parentShortcutType = getShortcutDeckTypeForFolder(browserFolder);
+                browser.folder = entry.getFolder();
+                browser.path = entry.getPath();
+                final DeckType parentShortcutType = getShortcutDeckTypeForFolder(browser.folder);
                 if (parentShortcutType != null) {
-                    browserRootType = parentShortcutType;
-                    browserPath = getPathRelativeToShortcutRoot(browserPath, browserRootType);
-                    browserHasDecksHomeParent = true;
+                    browser.rootType = parentShortcutType;
+                    browser.path = getPathRelativeToShortcutRoot(browser.path, browser.rootType);
+                    browser.hasDecksHomeParent = true;
                 } else {
-                    browserRootType = browserListParentRootType == null ? browserRootType : browserListParentRootType;
-                    if (browserRootType == null && StringUtils.isBlank(browserPath)) {
-                        browserRootType = getShortcutDeckTypeForFolder(browserFolder);
+                    browser.rootType = browser.listParentRootType == null ? browser.rootType : browser.listParentRootType;
+                    if (browser.rootType == null && StringUtils.isBlank(browser.path)) {
+                        browser.rootType = getShortcutDeckTypeForFolder(browser.folder);
                     }
-                    browserHasDecksHomeParent = browserListParentHasDecksHomeParent;
+                    browser.hasDecksHomeParent = browser.listParentHasDecksHomeParent;
                 }
-                clearBrowserListParent();
-                final IStorage<Deck> rootFolder = browserRootType == null ? getDecksHomeStorage() : getStorageForDeckType(browserRootType);
-                browserParentFolder = StringUtils.isBlank(browserPath) || rootFolder == null ? null : rootFolder.tryGetFolder(parentPath(browserPath));
-                browserGeneratedFolder = false;
-                if (browserRootType != null) {
-                    setShortcutDeckType(browserRootType);
+                browser.clearListParent();
+                final IStorage<Deck> rootFolder = browser.rootType == null ? getDecksHomeStorage() : getStorageForDeckType(browser.rootType);
+                browser.parentFolder = StringUtils.isBlank(browser.path) || rootFolder == null ? null : rootFolder.tryGetFolder(parentPath(browser.path));
+                browser.generatedFolder = false;
+                if (browser.rootType != null) {
+                    setShortcutDeckType(browser.rootType);
                 }
                 updateBrowserFolder();
                 return;
@@ -442,15 +429,15 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 updateGeneratedGroup(entry.getPath());
                 return;
             case GENERATED_FOLDER:
-                if (isCommanderGeneratedDeckType(entry.getDeckType())) {
-                    rememberCurrentBrowserLocationAsListParent();
-                    browserGeneratedFolder = false;
-                } else if (isGeneratedDeckType(entry.getDeckType())) {
-                    browserGeneratedFolder = true;
-                    browserGeneratedParentPath = entry.getPath();
+                if (DeckBrowserGeneratedRows.isCommanderGeneratedDeckType(entry.getDeckType())) {
+                    browser.rememberCurrentAsListParent();
+                    browser.generatedFolder = false;
+                } else if (DeckBrowserGeneratedRows.isGeneratedDeckType(entry.getDeckType())) {
+                    browser.generatedFolder = true;
+                    browser.generatedParentPath = entry.getPath();
                 } else {
-                    rememberCurrentBrowserLocationAsListParent();
-                    browserGeneratedFolder = false;
+                    browser.rememberCurrentAsListParent();
+                    browser.generatedFolder = false;
                 }
                 setShortcutDeckType(entry.getDeckType());
                 refreshDecksList(entry.getDeckType(), true, new DecksComboBoxEvent(decksComboBox, entry.getDeckType()));
@@ -516,7 +503,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     @SuppressWarnings({"rawtypes", "unchecked"})
     private void loadEditorDeck(final DeckProxy selected) {
         final DeckProxy deck = getDeckProxy(selected);
-        if (deck == null || browserFolder == null) {
+        if (deck == null || browser.folder == null) {
             return;
         }
 
@@ -525,7 +512,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
         }
 
-        final GameType gameType = getGameTypeForDeckType(browserRootType);
+        final GameType gameType = getGameTypeForDeckType(browser.rootType);
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editor =
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (editor == null || editor.getGameType() != gameType) {
@@ -536,7 +523,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
         }
 
-        IStorage<Deck> currentFolder = browserFolder;
+        IStorage<Deck> currentFolder = browser.folder;
         final IStorage<? extends IHasName> deckStorage = deck.getStorage();
         if (deckStorage != null) {
             currentFolder = (IStorage<Deck>) deckStorage;
@@ -568,62 +555,48 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void openNetFolder(final DeckBrowserEntry entry) {
-        final DeckType rootType = browserRootType == null ? entry.getDeckType() : browserRootType;
+        final DeckType rootType = browser.rootType == null ? entry.getDeckType() : browser.rootType;
         final String name = entry.getName();
         refreshNetFolder(rootType, name);
     }
 
     private void refreshNetFolderFromSource(final String name) {
-        final DeckType rootType = isNetBrowserRoot() ? browserRootType
+        final DeckType rootType = isNetBrowserRoot() ? browser.rootType
                 : isForCommander ? DeckType.NET_COMMANDER_DECK : DeckType.NET_DECK;
         refreshNetFolder(rootType, name);
     }
 
     private void refreshNetFolder(final DeckType rootType, final String name) {
         FThreads.invokeInBackgroundThread(() -> {
-            DeckType resolvedRootType = rootType;
-            NetDeckCategory category = reloadNetCategory(resolvedRootType, name);
-            if (category == null && NetDeckCategory.selectAndLoad(getGameTypeForDeckType(resolvedRootType), name) == null) {
-                resolvedRootType = rootType == DeckType.NET_COMMANDER_DECK ? DeckType.NET_DECK : DeckType.NET_COMMANDER_DECK;
-                category = reloadNetCategory(resolvedRootType, name);
-            }
-            final DeckType finalRootType = resolvedRootType;
-            final NetDeckCategory finalCategory = category;
+            final DeckBrowserNetService.LoadedNetFolder loadedFolder =
+                    netService.reloadNetFolder(rootType, getGameTypeForDeckType(rootType), name);
             FThreads.invokeInEdtLater(() -> {
-                if (finalCategory == null) {
+                if (loadedFolder == null || loadedFolder.category == null) {
                     return;
                 }
-                final IStorage<Deck> netRoot = getStorageForDeckType(finalRootType);
+                final IStorage<Deck> netRoot = getStorageForDeckType(loadedFolder.rootType);
                 final IStorage<Deck> downloadedFolder = netRoot == null ? null : netRoot.tryGetFolder(name);
-                browserRootType = finalRootType;
-                browserParentFolder = netRoot;
-                browserFolder = downloadedFolder == null ? finalCategory : downloadedFolder;
-                browserPath = childPath("", name);
-                browserGeneratedFolder = false;
-                clearBrowserListParent();
+                browser.rootType = loadedFolder.rootType;
+                browser.parentFolder = netRoot;
+                browser.folder = downloadedFolder == null ? loadedFolder.category : downloadedFolder;
+                browser.path = childPath("", name);
+                browser.generatedFolder = false;
+                browser.clearListParent();
                 updateBrowserFolder();
             });
         });
     }
 
-    private NetDeckCategory reloadNetCategory(final DeckType rootType, final String name) {
-        final GameType gameType = getGameTypeForDeckType(rootType);
-        if (NetDeckCategory.selectAndLoad(gameType, name) == null) {
-            return null;
-        }
-        return NetDeckCategory.selectAndLoad(gameType, name, true);
-    }
-
     private void openNetArchiveFolder(final IStorage<Deck> category) {
         final IStorage<Deck> archiveRoot = getArchiveStorage();
         final IStorage<Deck> downloadedFolder = archiveRoot.tryGetFolder(category.getName());
-        browserRootType = null;
-        browserParentFolder = archiveRoot;
-        browserFolder = downloadedFolder == null ? category : downloadedFolder;
-        browserPath = childPath("archive", category.getName());
-        browserGeneratedFolder = false;
-        browserHasDecksHomeParent = false;
-        clearBrowserListParent();
+        browser.rootType = null;
+        browser.parentFolder = archiveRoot;
+        browser.folder = downloadedFolder == null ? category : downloadedFolder;
+        browser.path = childPath("archive", category.getName());
+        browser.generatedFolder = false;
+        browser.hasDecksHomeParent = false;
+        browser.clearListParent();
         updateBrowserFolder();
     }
 
@@ -631,10 +604,12 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         final DeckType deckType = selectedDeckType;
         final GameType gameType = lstDecks.getGameType();
         FThreads.invokeInBackgroundThread(() -> {
-            final IStorage<Deck> category = reloadNetArchiveCategory(gameType, deckType, name);
+            final DeckBrowserNetService.LoadedArchiveFolder loadedFolder =
+                    netService.reloadNetArchiveCategory(gameType, deckType, name);
             FThreads.invokeInEdtLater(() -> {
-                if (category != null) {
-                    openNetArchiveFolder(category);
+                if (loadedFolder != null && loadedFolder.category != null) {
+                    selectedDeckType = loadedFolder.deckType;
+                    openNetArchiveFolder(loadedFolder.category);
                 }
             });
         });
@@ -643,7 +618,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void openNetArchiveVirtualFolder(final DeckType deckType) {
         final GameType gameType = lstDecks.getGameType();
         FThreads.invokeInBackgroundThread(() -> {
-            final IStorage<Deck> category = reloadSelectedNetArchiveCategory(gameType, deckType, null);
+            final IStorage<Deck> category = netService.reloadSelectedNetArchiveCategory(gameType, deckType, null);
             FThreads.invokeInEdtLater(() -> {
                 if (category != null) {
                     selectedDeckType = deckType;
@@ -652,40 +627,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 }
             });
         });
-    }
-
-    private IStorage<Deck> reloadNetArchiveCategory(final GameType gameType, final DeckType deckType, final String name) {
-        if (findSelectedNetArchiveCategory(gameType, deckType, name) != null) {
-            return reloadSelectedNetArchiveCategory(gameType, deckType, name);
-        }
-
-        for (final NetArchiveSpec spec : NET_ARCHIVE_SPECS) {
-            if (findSelectedNetArchiveCategory(gameType, spec.deckType, name) != null) {
-                final IStorage<Deck> category = reloadSelectedNetArchiveCategory(gameType, spec.deckType, name);
-                if (category != null) {
-                    selectedDeckType = spec.deckType;
-                }
-                return category;
-            }
-        }
-        return null;
-    }
-
-    private IStorage<Deck> findSelectedNetArchiveCategory(final GameType gameType, final DeckType deckType, final String name) {
-        return loadSelectedNetArchiveCategory(gameType, deckType, name, false);
-    }
-
-    private IStorage<Deck> reloadSelectedNetArchiveCategory(final GameType gameType, final DeckType deckType, final String name) {
-        return loadSelectedNetArchiveCategory(gameType, deckType, name, true);
-    }
-
-    private IStorage<Deck> loadSelectedNetArchiveCategory(final GameType gameType, final DeckType deckType,
-            final String name, final boolean forceDownload) {
-        if (deckType == null) {
-            return null;
-        }
-        final NetArchiveSpec spec = getNetArchiveSpec(deckType);
-        return spec == null ? null : spec.loader.selectAndLoad(gameType, name, forceDownload);
     }
 
     private void updateDecks(final Iterable<DeckProxy> decks) {
@@ -709,11 +650,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
         final List<DeckProxy> rows = wrapGeneratedOptions(decks);
         int leadingRows = 0;
-        if (browserGeneratedFolder) {
-            rows.add(0, DeckBrowserEntry.parentFolder(browserGeneratedParentPath, null));
+        if (browser.generatedFolder) {
+            rows.add(0, DeckBrowserEntry.parentFolder(browser.generatedParentPath, null));
             leadingRows = 1;
-        } else if (hasBrowserListParent()) {
-            rows.add(0, DeckBrowserEntry.parentFolder(browserListParentPath, browserListParentFolder));
+        } else if (browser.hasListParent()) {
+            rows.add(0, DeckBrowserEntry.parentFolder(browser.listParentPath, browser.listParentFolder));
             leadingRows = 1;
         } else if (isHomeShortcutList(selectedDeckType)) {
             rows.add(0, DeckBrowserEntry.parentFolder("", null));
@@ -737,7 +678,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             }
             lstDecks.setSelectedIndices(shiftedSelection);
         } else {
-            lstDecks.setSelectedIndex(browserSearchActive ? 0
+            lstDecks.setSelectedIndex(browser.searchActive ? 0
                     : leadingRows > 0 ? Math.min(leadingRows, displayedRows.size() - 1) : defaultSelection[0]);
         }
     }
@@ -902,13 +843,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private List<DeckProxy> wrapGeneratedOptions(final Iterable<DeckProxy> decks) {
         final List<DeckProxy> entries = new ArrayList<>();
         for (final DeckProxy deck : decks) {
-            if (deck instanceof DeckBrowserEntry) {
-                entries.add(deck);
-            } else if (deck.isGeneratedDeck()) {
-                entries.add(DeckBrowserEntry.generatedOption(deck));
-            } else {
-                entries.add(DeckBrowserEntry.deck(deck));
-            }
+            entries.add(DeckBrowserEntry.fromDeckProxy(deck));
         }
         sortBrowserRows(entries);
         return entries;
@@ -919,9 +854,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private List<DeckProxy> setBrowserPoolAndSetup(final List<DeckProxy> rows, final ItemManagerConfig config) {
-        final List<DeckProxy> displayedRows = browserSearchActive ? buildRecursiveSearchRows() : rows;
-        browserHasDeckRows = containsDeckRows(displayedRows);
-        browserHasCommanderDeckRows = containsCommanderDeckRows(displayedRows);
+        final List<DeckProxy> displayedRows = browser.searchActive ? buildRecursiveSearchRows() : rows;
+        browser.hasDeckRows = containsDeckRows(displayedRows);
+        browser.hasCommanderDeckRows = containsCommanderDeckRows(displayedRows);
         lstDecks.setup(config == null ? getBrowserItemManagerConfig() : config);
         lstDecks.setPool(displayedRows);
         return displayedRows;
@@ -956,22 +891,22 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private void setBrowserSearchText(final String searchText) {
         final boolean active = StringUtils.isNotBlank(searchText);
-        if (browserSearchActive == active) {
+        if (browser.searchActive == active) {
             return;
         }
 
-        browserSearchActive = active;
+        browser.searchActive = active;
         refreshCurrentBrowserRows();
     }
 
     private void refreshCurrentBrowserRows() {
         if (isGeneratedOrListBrowserView()) {
             refreshDecksList(selectedDeckType, true, new DecksComboBoxEvent(decksComboBox, selectedDeckType));
-        } else if (StringUtils.isNotBlank(browserGeneratedParentPath) && browserFolder == null) {
-            updateGeneratedGroup(browserGeneratedParentPath);
+        } else if (StringUtils.isNotBlank(browser.generatedParentPath) && browser.folder == null) {
+            updateGeneratedGroup(browser.generatedParentPath);
         } else if (isSearchGeneratedListType()) {
             refreshDecksList(selectedDeckType, true, new DecksComboBoxEvent(decksComboBox, selectedDeckType));
-        } else if (browserFolder != null) {
+        } else if (browser.folder != null) {
             updateBrowserFolder();
         } else {
             updateDecksHome();
@@ -981,20 +916,20 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private List<DeckProxy> buildRecursiveSearchRows() {
         final List<DeckProxy> rows = new ArrayList<>();
         if (editorOnlyBrowser) {
-            if (browserFolder == null) {
+            if (browser.folder == null) {
                 addDecksHomeRowsRecursively(rows, false);
             } else {
-                addFolderRowsRecursively(rows, browserFolder, browserPath, browserRootType);
+                addFolderRowsRecursively(rows, browser.folder, browser.path, browser.rootType);
             }
         } else if (isGeneratedOrListBrowserView()) {
-            addGeneratedRowsRecursively(rows, selectedDeckType);
-        } else if (StringUtils.isNotBlank(browserGeneratedParentPath) && browserFolder == null) {
-            addGeneratedGroupRowsRecursively(rows, browserGeneratedParentPath);
+            DeckBrowserGeneratedRows.addGeneratedRows(rows, selectedDeckType, lstDecks, lstDecks, isAi);
+        } else if (StringUtils.isNotBlank(browser.generatedParentPath) && browser.folder == null) {
+            DeckBrowserGeneratedRows.addGeneratedGroupRows(rows, browser.generatedParentPath, lstDecks, lstDecks, isAi, true);
         } else if (isSearchGeneratedListType()) {
-            addGeneratedRowsRecursively(rows, selectedDeckType);
-        } else if (browserFolder != null) {
-            addFolderRowsRecursively(rows, browserFolder, browserPath, browserRootType);
-            addVirtualRowsForFolderRecursively(rows, browserPath, browserRootType, browserFolder);
+            DeckBrowserGeneratedRows.addGeneratedRows(rows, selectedDeckType, lstDecks, lstDecks, isAi);
+        } else if (browser.folder != null) {
+            addFolderRowsRecursively(rows, browser.folder, browser.path, browser.rootType);
+            addVirtualRowsForFolderRecursively(rows, browser.path, browser.rootType, browser.folder);
         } else {
             addDecksHomeRowsRecursively(rows, true);
         }
@@ -1016,7 +951,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private boolean isSearchGeneratedListType() {
-        return selectedDeckType != null && isGeneratedDeckType(selectedDeckType);
+        return selectedDeckType != null && DeckBrowserGeneratedRows.isGeneratedDeckType(selectedDeckType);
     }
 
     private void addFolderRowsRecursively(final List<DeckProxy> rows, final IStorage<Deck> folder,
@@ -1049,15 +984,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
         }
         if (rootType == DeckType.CUSTOM_DECK) {
-            rows.add(DeckBrowserEntry.generatedGroup(DeckType.RANDOM_DECK.toString(), GENERATED_RANDOM_PATH));
-            addGeneratedGroupRowsRecursively(rows, GENERATED_RANDOM_PATH);
-            addGeneratedFolderRows(rows, path, true, DeckType.PRECONSTRUCTED_DECK, DeckType.QUEST_OPPONENT_DECK);
+            DeckBrowserGeneratedRows.addConstructedFolderRows(rows, path, true, lstDecks, lstDecks, isAi);
         } else if (rootType == DeckType.COMMANDER_DECK) {
-            addGeneratedFolderRows(rows, path, true, DeckType.RANDOM_COMMANDER_DECK);
-            if (FModel.isdeckGenMatrixLoaded()) {
-                addGeneratedFolderRows(rows, path, true, DeckType.RANDOM_CARDGEN_COMMANDER_DECK);
-            }
-            addGeneratedFolderRows(rows, path, true, DeckType.PRECON_COMMANDER_DECK);
+            DeckBrowserGeneratedRows.addCommanderFolderRows(rows, path, true, lstDecks, lstDecks, isAi);
         } else if (rootType == DeckType.NET_DECK || rootType == DeckType.NET_COMMANDER_DECK) {
             final Set<String> realFolderNames = new HashSet<>();
             if (folder != null) {
@@ -1074,106 +1003,23 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 }
             }
         } else if (isArchiveRoot) {
-            addNetArchiveVirtualFolders(rows, path);
-        }
-    }
-
-    private void addNetArchiveVirtualFolders(final List<DeckProxy> rows, final String path) {
-        for (final NetArchiveSpec spec : NET_ARCHIVE_SPECS) {
-            rows.add(DeckBrowserEntry.netFolder(spec.deckType.toString(), childPath(path, spec.deckType.name()), null, spec.deckType));
-        }
-    }
-
-    private void addGeneratedGroupRowsRecursively(final List<DeckProxy> rows, final String path) {
-        if (GENERATED_RANDOM_PATH.equals(path)) {
-            rows.addAll(wrapGeneratedOptions(RandomDeckGenerator.getRandomDecks(lstDecks, isAi)));
-            rows.add(DeckBrowserEntry.generatedGroup(RANDOM_ARCHETYPE_GROUP_NAME, GENERATED_RANDOM_ARCHETYPES_PATH));
-            addGeneratedGroupRowsRecursively(rows, GENERATED_RANDOM_ARCHETYPES_PATH);
-            rows.add(DeckBrowserEntry.generatedGroup(DeckType.COLOR_DECK.toString(), GENERATED_RANDOM_COLORS_PATH));
-            addGeneratedGroupRowsRecursively(rows, GENERATED_RANDOM_COLORS_PATH);
-            addGeneratedFolderRows(rows, path, true, DeckType.THEME_DECK);
-        } else if (GENERATED_RANDOM_COLORS_PATH.equals(path)) {
-            rows.addAll(wrapGeneratedOptions(ColorDeckGenerator.getColorDecks(lstDecks, null, isAi)));
-            addGeneratedFolderRows(rows, path, true, RANDOM_COLOR_DECK_TYPES);
-        } else if (GENERATED_RANDOM_ARCHETYPES_PATH.equals(path) && FModel.isdeckGenMatrixLoaded()) {
-            addGeneratedFolderRows(rows, path, true, RANDOM_ARCHETYPE_DECK_TYPES);
-        }
-    }
-
-    private void addGeneratedFolderRows(final List<DeckProxy> rows, final String path,
-            final boolean includeGeneratedOptions, final DeckType... deckTypes) {
-        for (final DeckType deckType : deckTypes) {
-            rows.add(DeckBrowserEntry.generatedFolder(deckType.toString(), path, deckType));
-            if (includeGeneratedOptions) {
-                addGeneratedRowsRecursively(rows, deckType);
-            }
-        }
-    }
-
-    private void addGeneratedRowsRecursively(final List<DeckProxy> rows, final DeckType deckType) {
-        if (deckType == null) {
-            return;
-        }
-        rows.addAll(wrapGeneratedOptions(getGeneratedDecksForSearch(deckType)));
-    }
-
-    private Iterable<DeckProxy> getGeneratedDecksForSearch(final DeckType deckType) {
-        switch (deckType) {
-        case COLOR_DECK:
-            return ColorDeckGenerator.getColorDecks(lstDecks, null, isAi);
-        case STANDARD_COLOR_DECK:
-            return ColorDeckGenerator.getColorDecks(lstDecks, FModel.getFormats().getStandard().getFilterPrinted(), isAi);
-        case MODERN_COLOR_DECK:
-            return ColorDeckGenerator.getColorDecks(lstDecks, FModel.getFormats().getModern().getFilterPrinted(), isAi);
-        case PAUPER_COLOR_DECK:
-            return ColorDeckGenerator.getColorDecks(lstDecks, FModel.getFormats().getPauper().getFilterPrinted(), isAi);
-        case STANDARD_CARDGEN_DECK:
-            return FModel.isdeckGenMatrixLoaded() ? ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().getStandard(), isAi) : ImmutableList.of();
-        case PIONEER_CARDGEN_DECK:
-            return FModel.isdeckGenMatrixLoaded() ? ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().getPioneer(), isAi) : ImmutableList.of();
-        case HISTORIC_CARDGEN_DECK:
-            return FModel.isdeckGenMatrixLoaded() ? ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().getHistoric(), isAi) : ImmutableList.of();
-        case MODERN_CARDGEN_DECK:
-            return FModel.isdeckGenMatrixLoaded() ? ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().getModern(), isAi) : ImmutableList.of();
-        case LEGACY_CARDGEN_DECK:
-            return FModel.isdeckGenMatrixLoaded() ? ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().get("Legacy"), isAi) : ImmutableList.of();
-        case VINTAGE_CARDGEN_DECK:
-            return FModel.isdeckGenMatrixLoaded() ? ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().get("Vintage"), isAi) : ImmutableList.of();
-        case PAUPER_CARDGEN_DECK:
-            return FModel.isdeckGenMatrixLoaded() ? ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().getPauper(), isAi) : ImmutableList.of();
-        case RANDOM_COMMANDER_DECK:
-            return CommanderDeckGenerator.getCommanderDecks(DeckFormat.Commander, isAi, false);
-        case RANDOM_CARDGEN_COMMANDER_DECK:
-            return FModel.isdeckGenMatrixLoaded()
-                    ? CommanderDeckGenerator.getCommanderDecks(DeckFormat.Commander, isAi, true) : ImmutableList.of();
-        case THEME_DECK:
-            return DeckProxy.getAllThemeDecks();
-        case QUEST_OPPONENT_DECK:
-            return DeckProxy.getAllQuestEventAndChallenges();
-        case PRECONSTRUCTED_DECK:
-            return DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons());
-        case PRECON_COMMANDER_DECK:
-            return DeckProxy.getAllCommanderPreconDecks();
-        case RANDOM_DECK:
-            return RandomDeckGenerator.getRandomDecks(lstDecks, isAi);
-        default:
-            return ImmutableList.of();
+            netService.addNetArchiveVirtualFolders(rows, path);
         }
     }
 
     private void updateBrowserRoot(final DeckType deckType) {
-        browserRootType = deckType;
-        browserGeneratedFolder = false;
-        browserFolder = getStorageForDeckType(deckType);
-        final DeckType folderShortcut = browserFolder == null ? null : getShortcutDeckTypeForFolder(browserFolder);
+        browser.rootType = deckType;
+        browser.generatedFolder = false;
+        browser.folder = getStorageForDeckType(deckType);
+        final DeckType folderShortcut = browser.folder == null ? null : getShortcutDeckTypeForFolder(browser.folder);
         if (folderShortcut != null) {
-            browserRootType = folderShortcut;
+            browser.rootType = folderShortcut;
             setShortcutDeckType(folderShortcut);
         }
-        browserParentFolder = null;
-        browserPath = "";
-        browserHasDecksHomeParent = true;
-        clearBrowserListParent();
+        browser.parentFolder = null;
+        browser.path = "";
+        browser.hasDecksHomeParent = true;
+        browser.clearListParent();
         updateBrowserFolder();
     }
 
@@ -1184,14 +1030,14 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             final DeckType shortcutDeckType = getShortcutDeckTypeForFolder(folder);
             rows.add(DeckBrowserEntry.folder(folder.getName(), folder.getName(), folder, shortcutDeckType));
         }
-        browserFolder = null;
-        browserParentFolder = null;
-        browserPath = "";
-        browserGeneratedParentPath = GENERATED_HOME_PATH;
-        browserRootType = null;
-        browserGeneratedFolder = false;
-        browserHasDecksHomeParent = false;
-        clearBrowserListParent();
+        browser.folder = null;
+        browser.parentFolder = null;
+        browser.path = "";
+        browser.generatedParentPath = HOME_PATH;
+        browser.rootType = null;
+        browser.generatedFolder = false;
+        browser.hasDecksHomeParent = false;
+        browser.clearListParent();
         lstDecks.setCaption("Decks");
         displaySingleSelectBrowserRows(rows);
     }
@@ -1199,54 +1045,33 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateGeneratedGroup(final String path) {
         syncComboBoxForGeneratedGroup(path);
         final List<DeckProxy> rows = new ArrayList<>();
-        rows.add(DeckBrowserEntry.parentFolder(getGeneratedGroupParentPath(path), getGeneratedGroupParentFolder(path)));
-        if (GENERATED_RANDOM_PATH.equals(path)) {
-            rows.addAll(wrapGeneratedOptions(RandomDeckGenerator.getRandomDecks(lstDecks, isAi)));
-            rows.add(DeckBrowserEntry.generatedGroup(RANDOM_ARCHETYPE_GROUP_NAME, GENERATED_RANDOM_ARCHETYPES_PATH));
-            rows.add(DeckBrowserEntry.generatedGroup(DeckType.COLOR_DECK.toString(), GENERATED_RANDOM_COLORS_PATH));
-            addGeneratedFolderRows(rows, path, false, DeckType.THEME_DECK);
-        } else if (GENERATED_RANDOM_COLORS_PATH.equals(path)) {
-            rows.addAll(wrapGeneratedOptions(ColorDeckGenerator.getColorDecks(lstDecks, null, isAi)));
-            addGeneratedFolderRows(rows, path, false, RANDOM_COLOR_DECK_TYPES);
-        } else if (GENERATED_RANDOM_ARCHETYPES_PATH.equals(path)) {
-            if (FModel.isdeckGenMatrixLoaded()) {
-                addGeneratedFolderRows(rows, path, false, RANDOM_ARCHETYPE_DECK_TYPES);
-            }
-        }
-        browserFolder = null;
-        browserParentFolder = null;
-        browserPath = "";
-        browserGeneratedParentPath = path;
-        browserRootType = null;
-        browserGeneratedFolder = false;
-        browserHasDecksHomeParent = false;
-        clearBrowserListParent();
+        rows.add(DeckBrowserEntry.parentFolder(DeckBrowserGeneratedRows.getGeneratedGroupParentPath(path),
+                getGeneratedGroupParentFolder(path)));
+        DeckBrowserGeneratedRows.addGeneratedGroupRows(rows, path, lstDecks, lstDecks, isAi, false);
+        browser.folder = null;
+        browser.parentFolder = null;
+        browser.path = "";
+        browser.generatedParentPath = path;
+        browser.rootType = null;
+        browser.generatedFolder = false;
+        browser.hasDecksHomeParent = false;
+        browser.clearListParent();
         displaySingleSelectBrowserRows(rows);
     }
 
-    private String getGeneratedGroupParentPath(final String path) {
-        if (GENERATED_RANDOM_COLORS_PATH.equals(path) || GENERATED_RANDOM_ARCHETYPES_PATH.equals(path)) {
-            return GENERATED_RANDOM_PATH;
-        }
-        return GENERATED_HOME_PATH;
-    }
-
     private IStorage<Deck> getGeneratedGroupParentFolder(final String path) {
-        if (GENERATED_RANDOM_PATH.equals(path)) {
-            return getStorageForDeckType(DeckType.CUSTOM_DECK);
-        }
-        return null;
+        final DeckType parentRootType = DeckBrowserGeneratedRows.getGeneratedGroupParentRootType(path);
+        return parentRootType == null ? null : getStorageForDeckType(parentRootType);
     }
 
     private void syncComboBoxForGeneratedGroup(final String path) {
-        if (GENERATED_RANDOM_PATH.equals(path)) {
-            setShortcutDeckType(DeckType.RANDOM_DECK);
-        } else if (GENERATED_RANDOM_COLORS_PATH.equals(path)) {
-            setShortcutDeckType(DeckType.COLOR_DECK);
-        } else if (GENERATED_RANDOM_ARCHETYPES_PATH.equals(path) && decksComboBox != null) {
-            selectedDeckType = DeckType.RANDOM_DECK;
-            decksComboBox.setText(RANDOM_ARCHETYPE_GROUP_NAME);
-            lstDecks.setCaption(RANDOM_ARCHETYPE_GROUP_NAME);
+        final DeckType shortcutDeckType = DeckBrowserGeneratedRows.getGeneratedGroupShortcutDeckType(path);
+        if (shortcutDeckType != null && decksComboBox != null) {
+            selectedDeckType = shortcutDeckType;
+            decksComboBox.setDisplayedDeckType(shortcutDeckType);
+            final String displayName = DeckBrowserGeneratedRows.getGeneratedGroupDisplayName(path);
+            decksComboBox.setText(displayName);
+            lstDecks.setCaption(displayName);
         }
     }
 
@@ -1289,47 +1114,30 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setCaption(deckType.toString());
     }
 
-    private boolean hasBrowserListParent() {
-        return browserListParentFolder != null || !StringUtils.isBlank(browserListParentPath) || browserListParentRootType != null
-                || browserListParentHasDecksHomeParent;
-    }
-
-    private void clearBrowserListParent() {
-        browserListParentFolder = null;
-        browserListParentPath = "";
-        browserListParentRootType = null;
-        browserListParentHasDecksHomeParent = false;
-    }
-
-    private void rememberCurrentBrowserLocationAsListParent() {
-        browserListParentFolder = browserFolder;
-        browserListParentPath = browserPath;
-        browserListParentRootType = browserRootType;
-        browserListParentHasDecksHomeParent = browserHasDecksHomeParent;
-    }
-
     private boolean isGeneratedOrListBrowserView() {
-        return browserGeneratedFolder || hasBrowserListParent()
-                || isConstructedListDeckType(selectedDeckType) || selectedDeckType == DeckType.PRECON_COMMANDER_DECK;
+        return browser.generatedFolder || browser.hasListParent()
+                || DeckBrowserGeneratedRows.isConstructedListDeckType(selectedDeckType)
+                || selectedDeckType == DeckType.PRECON_COMMANDER_DECK;
     }
 
     private void rememberCurrentBrowserLocationForParentSelection() {
-        if (browserGeneratedFolder) {
-            rememberBrowserSelection(browserGeneratedParentPath, getGeneratedFolderDisplayName(selectedDeckType), selectedDeckType);
+        if (browser.generatedFolder) {
+            browser.rememberSelection(browser.generatedParentPath, getGeneratedFolderDisplayName(selectedDeckType), selectedDeckType);
             return;
         }
-        if (hasBrowserListParent()) {
-            rememberBrowserSelection(browserListParentPath, getGeneratedFolderDisplayName(selectedDeckType), selectedDeckType);
+        if (browser.hasListParent()) {
+            browser.rememberSelection(browser.listParentPath, getGeneratedFolderDisplayName(selectedDeckType), selectedDeckType);
             return;
         }
-        if (browserFolder == null && StringUtils.isNotBlank(browserGeneratedParentPath)) {
-            rememberBrowserSelection(browserGeneratedParentPath, getGeneratedGroupDisplayName(browserGeneratedParentPath));
+        if (browser.folder == null && StringUtils.isNotBlank(browser.generatedParentPath)) {
+            browser.rememberSelection(browser.generatedParentPath,
+                    DeckBrowserGeneratedRows.getGeneratedGroupDisplayName(browser.generatedParentPath));
             return;
         }
-        if (StringUtils.isNotBlank(browserPath)) {
-            rememberBrowserSelection(browserPath, lastPathSegment(browserPath));
-        } else if (browserFolder != null) {
-            rememberBrowserSelection(null, browserFolder.getName(), getShortcutDeckTypeForFolder(browserFolder));
+        if (StringUtils.isNotBlank(browser.path)) {
+            browser.rememberSelection(browser.path, lastPathSegment(browser.path));
+        } else if (browser.folder != null) {
+            browser.rememberSelection(null, browser.folder.getName(), getShortcutDeckTypeForFolder(browser.folder));
         }
     }
 
@@ -1337,53 +1145,29 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         return deckType == null ? null : deckType.toString();
     }
 
-    private String getGeneratedGroupDisplayName(final String path) {
-        if (GENERATED_RANDOM_ARCHETYPES_PATH.equals(path)) {
-            return RANDOM_ARCHETYPE_GROUP_NAME;
-        }
-        if (GENERATED_RANDOM_COLORS_PATH.equals(path)) {
-            return DeckType.COLOR_DECK.toString();
-        }
-        if (GENERATED_RANDOM_PATH.equals(path)) {
-            return DeckType.RANDOM_DECK.toString();
-        }
-        return lastPathSegment(path);
-    }
-
-    private void rememberBrowserSelection(final String path, final String name) {
-        rememberBrowserSelection(path, name, null);
-    }
-
-    private void rememberBrowserSelection(final String path, final String name, final DeckType deckType) {
-        pendingBrowserSelectionPath = path;
-        pendingBrowserSelectionName = name;
-        pendingBrowserSelectionDeckType = deckType;
-    }
-
     private boolean selectPendingBrowserRow(final List<DeckProxy> rows) {
-        if (StringUtils.isBlank(pendingBrowserSelectionPath) && StringUtils.isBlank(pendingBrowserSelectionName)
-                && pendingBrowserSelectionDeckType == null) {
+        if (!browser.hasPendingSelection()) {
             return false;
         }
         for (int i = 0; i < rows.size(); i++) {
             if (!(rows.get(i) instanceof DeckBrowserEntry entry)) {
                 continue;
             }
-            final boolean pathMatches = StringUtils.isBlank(pendingBrowserSelectionPath)
-                    || StringUtils.equals(entry.getPath(), pendingBrowserSelectionPath);
-            final boolean nameMatches = StringUtils.isBlank(pendingBrowserSelectionName)
-                    || StringUtils.equals(entry.getName(), pendingBrowserSelectionName);
-            final boolean deckTypeMatches = pendingBrowserSelectionDeckType == null
-                    || entry.getDeckType() == pendingBrowserSelectionDeckType;
-            final boolean identityMatches = pendingBrowserSelectionDeckType == null ? nameMatches
+            final boolean pathMatches = StringUtils.isBlank(browser.pendingSelectionPath)
+                    || StringUtils.equals(entry.getPath(), browser.pendingSelectionPath);
+            final boolean nameMatches = StringUtils.isBlank(browser.pendingSelectionName)
+                    || StringUtils.equals(entry.getName(), browser.pendingSelectionName);
+            final boolean deckTypeMatches = browser.pendingSelectionDeckType == null
+                    || entry.getDeckType() == browser.pendingSelectionDeckType;
+            final boolean identityMatches = browser.pendingSelectionDeckType == null ? nameMatches
                     : deckTypeMatches || nameMatches;
             if (pathMatches && identityMatches) {
-                clearPendingBrowserSelection();
+                browser.clearPendingSelection();
                 selectBrowserRow(i);
                 return true;
             }
         }
-        clearPendingBrowserSelection();
+        browser.clearPendingSelection();
         return false;
     }
 
@@ -1396,12 +1180,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         SwingUtilities.invokeLater(lstDecks::scrollSelectionIntoView);
     }
 
-    private void clearPendingBrowserSelection() {
-        pendingBrowserSelectionPath = null;
-        pendingBrowserSelectionName = null;
-        pendingBrowserSelectionDeckType = null;
-    }
-
     private String lastPathSegment(final String path) {
         final String cleanPath = StringUtils.stripEnd(StringUtils.defaultString(path), "/");
         final int idx = cleanPath.lastIndexOf('/');
@@ -1410,45 +1188,40 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private void updateBrowserFolder() {
         final List<DeckProxy> rows = new ArrayList<>();
-        if (browserParentFolder != null || !StringUtils.isBlank(browserPath) || browserRootType != null || browserHasDecksHomeParent) {
-            rows.add(DeckBrowserEntry.parentFolder(parentPath(browserPath), browserParentFolder));
+        if (browser.parentFolder != null || !StringUtils.isBlank(browser.path) || browser.rootType != null || browser.hasDecksHomeParent) {
+            rows.add(DeckBrowserEntry.parentFolder(parentPath(browser.path), browser.parentFolder));
         }
-        if (browserFolder != null) {
+        if (browser.folder != null) {
             final Set<String> realFolderNames = new HashSet<>();
-            final GameType gameType = getGameTypeForDeckType(browserRootType);
-            for (final IStorage<Deck> folder : browserFolder.getFolders()) {
+            final GameType gameType = getGameTypeForDeckType(browser.rootType);
+            for (final IStorage<Deck> folder : browser.folder.getFolders()) {
                 realFolderNames.add(folder.getName());
-                rows.add(DeckBrowserEntry.folder(folder.getName(), childPath(browserPath, folder.getName()), folder,
+                rows.add(DeckBrowserEntry.folder(folder.getName(), childPath(browser.path, folder.getName()), folder,
                         getShortcutDeckTypeForFolder(folder)));
             }
-            for (final Deck deck : browserFolder) {
-                rows.add(DeckBrowserEntry.deck(new DeckProxy(deck, gameType.toString(), gameType, browserPath, browserFolder, null)));
+            for (final Deck deck : browser.folder) {
+                rows.add(DeckBrowserEntry.deck(new DeckProxy(deck, gameType.toString(), gameType, browser.path, browser.folder, null)));
             }
-            if (StringUtils.isBlank(browserPath) && !editorOnlyBrowser) {
-                if (browserRootType == DeckType.CUSTOM_DECK) {
-                    rows.add(DeckBrowserEntry.generatedGroup(DeckType.RANDOM_DECK.toString(), GENERATED_RANDOM_PATH));
-                    addGeneratedFolderRows(rows, browserPath, false, DeckType.PRECONSTRUCTED_DECK, DeckType.QUEST_OPPONENT_DECK);
-                } else if (browserRootType == DeckType.COMMANDER_DECK) {
-                    addGeneratedFolderRows(rows, browserPath, false, DeckType.RANDOM_COMMANDER_DECK);
-                    if (FModel.isdeckGenMatrixLoaded()) {
-                        addGeneratedFolderRows(rows, browserPath, false, DeckType.RANDOM_CARDGEN_COMMANDER_DECK);
-                    }
-                    addGeneratedFolderRows(rows, browserPath, false, DeckType.PRECON_COMMANDER_DECK);
+            if (StringUtils.isBlank(browser.path) && !editorOnlyBrowser) {
+                if (browser.rootType == DeckType.CUSTOM_DECK) {
+                    DeckBrowserGeneratedRows.addConstructedFolderRows(rows, browser.path, false, lstDecks, lstDecks, isAi);
+                } else if (browser.rootType == DeckType.COMMANDER_DECK) {
+                    DeckBrowserGeneratedRows.addCommanderFolderRows(rows, browser.path, false, lstDecks, lstDecks, isAi);
                 }
             }
-            if (StringUtils.isBlank(browserPath) && !editorOnlyBrowser && isNetBrowserRoot()) {
+            if (StringUtils.isBlank(browser.path) && !editorOnlyBrowser && isNetBrowserRoot()) {
                 final Iterable<NetDeckCategory> categories = NetDeckCategory.getAvailableCategories(lstDecks.getGameType());
                 if (categories != null) {
                     for (final NetDeckCategory category : categories) {
                         if (!realFolderNames.contains(category.getName())) {
                             NetDeckCategory cached = NetDeckCategory.selectAndLoad(lstDecks.getGameType(), category.getName());
-                            rows.add(DeckBrowserEntry.netFolder(category.getName(), childPath(browserPath, category.getName()), cached, DeckType.NET_DECK));
+                            rows.add(DeckBrowserEntry.netFolder(category.getName(), childPath(browser.path, category.getName()), cached, DeckType.NET_DECK));
                         }
                     }
                 }
             }
             if (isNetArchiveBrowserRoot()) {
-                addNetArchiveVirtualFolders(rows, browserPath);
+                netService.addNetArchiveVirtualFolders(rows, browser.path);
             }
         }
         displaySingleSelectBrowserRows(rows);
@@ -1468,19 +1241,19 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     private void updateEditorSaveTarget() {
-        if (!editorOnlyBrowser || browserFolder == null) {
+        if (!editorOnlyBrowser || browser.folder == null) {
             return;
         }
         updateEditorDeckMode();
         final DeckController controller = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController() == null
                 ? null : CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
         if (controller != null) {
-            controller.setCurrentFolder(browserFolder, browserPath);
+            controller.setCurrentFolder(browser.folder, browser.path);
         }
     }
 
     private void updateEditorDeckMode() {
-        final GameType gameType = getGameTypeForDeckType(browserRootType);
+        final GameType gameType = getGameTypeForDeckType(browser.rootType);
         final ACEditorBase<? extends InventoryItem, ? extends DeckBase> editor =
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (editor == null || editor.getGameType() != gameType) {
@@ -1490,9 +1263,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private ItemManagerConfig getBrowserItemManagerConfig() {
         final ItemManagerConfig config = editorOnlyBrowser ? ItemManagerConfig.DECK_EDITOR_BROWSER : ItemManagerConfig.DECK_BROWSER;
-        setBrowserColumnVisible(config, ColumnDef.DECK_FAVORITE, browserHasDeckRows);
-        setBrowserColumnVisible(config, ColumnDef.DECK_ACTIONS, browserHasDeckRows);
-        setBrowserColumnVisible(config, ColumnDef.DECK_BRACKET, browserHasCommanderDeckRows && !isGeneratedOrListBrowserView());
+        setBrowserColumnVisible(config, ColumnDef.DECK_FAVORITE, browser.hasDeckRows);
+        setBrowserColumnVisible(config, ColumnDef.DECK_ACTIONS, browser.hasDeckRows);
+        setBrowserColumnVisible(config, ColumnDef.DECK_BRACKET, browser.hasCommanderDeckRows && !isGeneratedOrListBrowserView());
         return config;
     }
 
@@ -1504,44 +1277,20 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private boolean isNetBrowserRoot() {
-        return browserRootType == DeckType.NET_DECK || browserRootType == DeckType.NET_COMMANDER_DECK;
+        return browser.rootType == DeckType.NET_DECK || browser.rootType == DeckType.NET_COMMANDER_DECK;
     }
 
     private boolean isNetArchiveBrowser() {
-        return isNetArchiveDeckType(selectedDeckType) && StringUtils.startsWith(browserPath, "archive/");
+        return isNetArchiveDeckType(selectedDeckType) && StringUtils.startsWith(browser.path, "archive/");
     }
 
     private boolean isNetArchiveBrowserRoot() {
-        return !editorOnlyBrowser && StringUtils.equals(browserPath, "archive")
-                && isFolderPath(browserFolder, ForgeConstants.DECK_NET_ARCHIVE_DIR);
+        return !editorOnlyBrowser && StringUtils.equals(browser.path, "archive")
+                && isFolderPath(browser.folder, ForgeConstants.DECK_NET_ARCHIVE_DIR);
     }
 
     private boolean isNetArchiveDeckType(final DeckType deckType) {
-        return getNetArchiveSpec(deckType) != null;
-    }
-
-    private NetArchiveSpec getNetArchiveSpec(final DeckType deckType) {
-        if (deckType == null) {
-            return null;
-        }
-        for (final NetArchiveSpec spec : NET_ARCHIVE_SPECS) {
-            if (spec.deckType == deckType) {
-                return spec;
-            }
-        }
-        return null;
-    }
-
-    private NetArchiveSpec getNetArchiveSpec(final String savedDeckType) {
-        if (savedDeckType == null) {
-            return null;
-        }
-        for (final NetArchiveSpec spec : NET_ARCHIVE_SPECS) {
-            if (savedDeckType.startsWith(spec.prefix)) {
-                return spec;
-            }
-        }
-        return null;
+        return netService.isNetArchiveDeckType(deckType);
     }
 
     private void sortBrowserRows(final List<DeckProxy> rows) {
@@ -1610,32 +1359,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateNetArchiveDecks(final DeckType deckType) {
-        final IStorage<Deck> category = getLoadedNetArchiveCategory(deckType);
+        final IStorage<Deck> category = netService.getLoadedNetArchiveCategory(deckType);
         if (category != null) {
-            decksComboBox.setText(getLoadedNetArchiveDeckTypeLabel(deckType));
+            decksComboBox.setText(netService.getLoadedNetArchiveDeckTypeLabel(deckType));
             openNetArchiveFolder(category);
         }
-    }
-
-    private IStorage<Deck> getLoadedNetArchiveCategory(final DeckType deckType) {
-        return deckType == null ? null : loadedNetArchiveCategories.get(deckType);
-    }
-
-    private void setLoadedNetArchiveCategory(final DeckType deckType, final IStorage<Deck> category) {
-        if (!isNetArchiveDeckType(deckType)) {
-            return;
-        }
-        if (category instanceof NetDeckStorageBase) {
-            loadedNetArchiveCategories.put(deckType, (NetDeckStorageBase) category);
-        } else {
-            loadedNetArchiveCategories.remove(deckType);
-        }
-    }
-
-    private String getLoadedNetArchiveDeckTypeLabel(final DeckType deckType) {
-        final IStorage<Deck> category = getLoadedNetArchiveCategory(deckType);
-        return category == null || deckType == null ? StringUtils.defaultString(deckType == null ? null : deckType.toString())
-                : deckType + " - " + category.getName();
     }
 
     private void updateNetEventDecks() {
@@ -1724,15 +1452,15 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
 
         FThreads.invokeInBackgroundThread(() -> {
-            final IStorage<Deck> category = findSelectedNetArchiveCategory(lstDecks.getGameType(), deckType, null);
+            final IStorage<Deck> category = netService.findSelectedNetArchiveCategory(lstDecks.getGameType(), deckType, null);
             FThreads.invokeInEdtLater(() -> {
                 if (category == null) {
                     decksComboBox.setDeckType(selectedDeckType);
-                    decksComboBox.setText(getLoadedNetArchiveDeckTypeLabel(selectedDeckType));
+                    decksComboBox.setText(netService.getLoadedNetArchiveDeckTypeLabel(selectedDeckType));
                     return;
                 }
 
-                setLoadedNetArchiveCategory(deckType, category);
+                netService.setLoadedNetArchiveCategory(deckType, category);
                 refreshDecksList(deckType, true, ev);
             });
         });
@@ -1758,30 +1486,30 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void setBrowserListParentRoot(final DeckType rootType) {
-        browserListParentRootType = rootType;
-        browserListParentFolder = getStorageForDeckType(rootType);
-        browserListParentPath = "";
-        browserListParentHasDecksHomeParent = true;
-        browserRootType = rootType;
-        browserGeneratedFolder = false;
+        browser.listParentRootType = rootType;
+        browser.listParentFolder = getStorageForDeckType(rootType);
+        browser.listParentPath = "";
+        browser.listParentHasDecksHomeParent = true;
+        browser.rootType = rootType;
+        browser.generatedFolder = false;
     }
 
     private void refreshDecksList(final DeckType deckType, final boolean forceRefresh, final DecksComboBoxEvent ev) {
         if (decksComboBox == null) { return; } // Not yet populated
         if (selectedDeckType == deckType && !forceRefresh) { return; }
         selectedDeckType = deckType;
-        if (isCommanderGeneratedDeckType(deckType)) {
+        if (DeckBrowserGeneratedRows.isCommanderGeneratedDeckType(deckType)) {
             setBrowserListParentRoot(DeckType.COMMANDER_DECK);
-        } else if (isGeneratedDeckType(deckType)) {
-            if (!browserGeneratedFolder) {
-                browserGeneratedParentPath = getDefaultGeneratedParentPath(deckType);
+        } else if (DeckBrowserGeneratedRows.isGeneratedDeckType(deckType)) {
+            if (!browser.generatedFolder) {
+                browser.generatedParentPath = DeckBrowserGeneratedRows.getDefaultGeneratedParentPath(deckType);
             }
-            browserRootType = isCommanderGeneratedDeckType(deckType) ? DeckType.COMMANDER_DECK : DeckType.CUSTOM_DECK;
-            browserGeneratedFolder = true;
-            clearBrowserListParent();
-        } else if (isConstructedListDeckType(deckType) && !hasBrowserListParent()) {
+            browser.rootType = DeckBrowserGeneratedRows.isCommanderGeneratedDeckType(deckType) ? DeckType.COMMANDER_DECK : DeckType.CUSTOM_DECK;
+            browser.generatedFolder = true;
+            browser.clearListParent();
+        } else if (DeckBrowserGeneratedRows.isConstructedListDeckType(deckType) && !browser.hasListParent()) {
             setBrowserListParentRoot(DeckType.CUSTOM_DECK);
-        } else if (deckType == DeckType.PRECON_COMMANDER_DECK && !hasBrowserListParent()) {
+        } else if (deckType == DeckType.PRECON_COMMANDER_DECK && !browser.hasListParent()) {
             setBrowserListParentRoot(DeckType.COMMANDER_DECK);
         }
 
@@ -1875,7 +1603,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 updateCommanderPrecons();
                 break;
             case RANDOM_DECK:
-                updateGeneratedGroup(GENERATED_RANDOM_PATH);
+                updateGeneratedGroup(RANDOM_PATH);
                 break;
             case NET_DECK:
             case NET_COMMANDER_DECK:
@@ -1903,7 +1631,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         final StringBuilder state = new StringBuilder();
         DeckType selectedDeckType = this.selectedDeckType;   // decksComboBox.getDeckType()
         if (isNetArchiveDeckType(selectedDeckType)) {
-            if (!appendLoadedNetArchiveState(state, selectedDeckType)) { return ""; }
+            if (!netService.appendLoadedNetArchiveState(state, selectedDeckType)) { return ""; }
         } else if (selectedDeckType == null || selectedDeckType == DeckType.NET_DECK) {
             //handle special case of net decks
             if (netDeckCategory == null) { return ""; }
@@ -1915,21 +1643,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         state.append(";");
         joinSelectedDecks(state, SELECTED_DECK_DELIMITER);
         return state.toString();
-    }
-
-    private boolean appendLoadedNetArchiveState(final StringBuilder state, final DeckType deckType) {
-        final IStorage<Deck> category = getLoadedNetArchiveCategory(deckType);
-        final String prefix = getNetArchivePrefix(deckType);
-        if (category == null || prefix == null) {
-            return false;
-        }
-        state.append(prefix).append(category.getName());
-        return true;
-    }
-
-    private String getNetArchivePrefix(final DeckType deckType) {
-        final NetArchiveSpec spec = getNetArchiveSpec(deckType);
-        return spec == null ? null : spec.prefix;
     }
 
     private void joinSelectedDecks(final StringBuilder state, final String delimiter) {
@@ -1971,12 +1684,12 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
         }
         final String deckName = lastPathSegment(selectedDecks.get(0));
-        if (isGeneratedDeckType(deckType)) {
-            rememberBrowserSelection(getDefaultGeneratedParentPath(deckType), deckName, deckType);
-        } else if (isConstructedListDeckType(deckType) || deckType == DeckType.PRECON_COMMANDER_DECK) {
-            rememberBrowserSelection("", deckName, deckType);
+        if (DeckBrowserGeneratedRows.isGeneratedDeckType(deckType)) {
+            browser.rememberSelection(DeckBrowserGeneratedRows.getDefaultGeneratedParentPath(deckType), deckName, deckType);
+        } else if (DeckBrowserGeneratedRows.isConstructedListDeckType(deckType) || deckType == DeckType.PRECON_COMMANDER_DECK) {
+            browser.rememberSelection("", deckName, deckType);
         } else if (isNetArchiveDeckType(deckType) || deckType == DeckType.NET_DECK || deckType == DeckType.NET_COMMANDER_DECK) {
-            rememberBrowserSelection(null, deckName, deckType);
+            browser.rememberSelection(null, deckName, deckType);
         }
     }
 
@@ -2019,11 +1732,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                     netDeckCategory = NetDeckCategory.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckCategory.PREFIX.length()));
                     return DeckType.NET_DECK;
                 }
-                final NetArchiveSpec spec = getNetArchiveSpec(deckType);
-                if (spec != null) {
-                    setLoadedNetArchiveCategory(spec.deckType,
-                            spec.loader.selectAndLoad(lstDecks.getGameType(), deckType.substring(spec.prefix.length()), false));
-                    return spec.deckType;
+                final DeckType netArchiveDeckType = netService.restoreSavedNetArchiveState(deckType, lstDecks.getGameType());
+                if (netArchiveDeckType != null) {
+                    return netArchiveDeckType;
                 }
                 return DeckType.valueOf(deckType);
             }
@@ -2031,10 +1742,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             System.err.println(ex.getMessage() + ". Using default : " + selectedDeckType);
             return selectedDeckType;
         }
-    }
-
-    private boolean isGeneratedDeckType(final DeckType deckType) {
-        return GENERATED_DECK_TYPES.contains(deckType);
     }
 
     private boolean isHomeShortcutList(final DeckType deckType) {
@@ -2047,36 +1754,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         default:
             return false;
         }
-    }
-
-    private boolean isConstructedListDeckType(final DeckType deckType) {
-        return CONSTRUCTED_LIST_DECK_TYPES.contains(deckType);
-    }
-
-    private boolean isCommanderGeneratedDeckType(final DeckType deckType) {
-        return COMMANDER_GENERATED_DECK_TYPES.contains(deckType);
-    }
-
-    private String getDefaultGeneratedParentPath(final DeckType deckType) {
-        if (deckType == DeckType.COLOR_DECK || RANDOM_COLOR_DECK_TYPE_SET.contains(deckType)) {
-            return GENERATED_RANDOM_COLORS_PATH;
-        }
-        if (RANDOM_ARCHETYPE_DECK_TYPE_SET.contains(deckType)) {
-            return GENERATED_RANDOM_ARCHETYPES_PATH;
-        }
-        if (GENERATED_RANDOM_PARENT_DECK_TYPES.contains(deckType)) {
-            return GENERATED_RANDOM_PATH;
-        }
-        return GENERATED_HOME_PATH;
-    }
-
-    private static Set<DeckType> getGeneratedDeckTypes() {
-        final EnumSet<DeckType> deckTypes = EnumSet.of(DeckType.COLOR_DECK, DeckType.RANDOM_DECK);
-        deckTypes.addAll(RANDOM_COLOR_DECK_TYPE_SET);
-        deckTypes.addAll(RANDOM_ARCHETYPE_DECK_TYPE_SET);
-        deckTypes.addAll(COMMANDER_GENERATED_DECK_TYPES);
-        deckTypes.addAll(GENERATED_RANDOM_PARENT_DECK_TYPES);
-        return deckTypes;
     }
 
     private List<String> getSelectedDecksFromSavedState(final String savedState) {

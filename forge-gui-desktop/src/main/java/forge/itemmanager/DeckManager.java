@@ -87,7 +87,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         this.addSelectionListener(e -> {
             final DeckProxy selected = getSelectedItem();
             updateCommanderBracketViewVisibility(selected);
-            if (selected instanceof DeckBrowserEntry && !((DeckBrowserEntry) selected).isDeck()) {
+            if (!isDeckRow(selected)) {
                 return;
             }
             if (cmdSelect != null) {
@@ -129,6 +129,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     private boolean isCommanderDeck(final DeckProxy deck) {
         final DeckProxy realDeck = getRealDeckProxy(deck);
         return realDeck != null && realDeck.hasCommanderSection();
+    }
+
+    private boolean isDeckRow(final DeckProxy deck) {
+        return getRealDeckProxy(deck) != null;
     }
 
     private DeckProxy getRealDeckProxy(final DeckProxy deck) {
@@ -222,8 +226,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     protected int getDisplayCount(final Iterable<Entry<DeckProxy, Integer>> items) {
         int total = 0;
         for (final Entry<DeckProxy, Integer> entry : items) {
-            final DeckProxy deck = entry.getKey();
-            if (!(deck instanceof DeckBrowserEntry) || ((DeckBrowserEntry) deck).isDeck()) {
+            if (isDeckRow(entry.getKey())) {
                 total += entry.getValue();
             }
         }
@@ -410,7 +413,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
 
     public void editDeck(final DeckProxy deck) {
-        if (deck instanceof DeckBrowserEntry && !((DeckBrowserEntry) deck).isDeck()) {
+        if (!isDeckRow(deck)) {
             return;
         }
         if (editCommand != null) {
@@ -609,12 +612,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             if (!(value instanceof DeckProxy)) {
                 return null;
             }
-            final DeckProxy deck = (DeckProxy) value;
-            if (deck instanceof DeckBrowserEntry) {
-                final DeckBrowserEntry entry = (DeckBrowserEntry) deck;
-                return entry.getDeckRowProxy();
-            }
-            return deck;
+            return DeckManager.this.getRealDeckProxy((DeckProxy) value);
         }
 
         /*private void setOverActionIndex(final ItemListView<?> listView, int overActionIndex0) {

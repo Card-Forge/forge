@@ -97,6 +97,11 @@ public class DeckBrowserEntry extends DeckProxy {
         return new DeckBrowserEntry(Kind.GENERATED_OPTION, deck.getName(), deck.getPath(), null, deck, null);
     }
 
+    public static DeckProxy fromDeckProxy(final DeckProxy deck) {
+        return deck instanceof DeckBrowserEntry ? deck
+                : deck.isGeneratedDeck() ? generatedOption(deck) : deck(deck);
+    }
+
     public Kind getKind() {
         return kind;
     }
