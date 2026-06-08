@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.regex.Pattern;
 
 import forge.Forge;
+import forge.adventure.player.AdventurePlayer;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
@@ -21,6 +22,7 @@ import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.toolbox.FOptionPane;
+import forge.util.ItemPool;
 
 public class FDeckViewer extends FScreen {
     private static FDeckViewer deckViewer;
@@ -52,7 +54,10 @@ public class FDeckViewer extends FScreen {
         FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblDeckListCopiedClipboard", deck.getName()));
     }
 
-    public static void copyCollectionToClipboard(CardPool pool) {
+    public static void copyCollectionToClipboard() {
+        ItemPool<PaperCard> autoSellCards = AdventurePlayer.current().getAutoSellCards();
+        CardPool pool = AdventurePlayer.current().getCards().getFilteredPool(card -> !autoSellCards.contains(card));
+
         final String nl = System.lineSeparator();
         final StringBuilder collectionList = new StringBuilder();
         Map<String, String> accountedMap = new HashMap<>();
