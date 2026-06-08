@@ -110,10 +110,6 @@ public abstract class AbstractPreferences<T extends Enum<T> & IPreferences.IPref
 
         return val;
     }
-    
-    public final void togglePrefBoolean(final T q0) {
-        setPref(q0, !getPrefBoolean(q0));
-    }
 
     public void setGameType(final T q0, final Set<GameType> gameTypes) {
         String s0 = "";
