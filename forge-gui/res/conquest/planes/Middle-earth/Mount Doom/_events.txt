@@ -1,0 +1,9 @@
+Name:Gothmog, Morgul Lieutenant|Deck:Gothmog, Morgul Lieutenant.dck|Variant:Commander|Avatar:Gothmog, Morgul Lieutenant|Desc:
+Name:Gollum, Patient Plotter|Deck:Gollum, Patient Plotter.dck|Variant:Commander|Avatar:Gollum, Patient Plotter|Desc:
+Name:Grond, the Gatebreaker|Deck:Grond, the Gatebreaker.dck|Variant:Commander|Avatar:Grond, the Gatebreaker|Desc:
+Name:Shagrat, Loot Bearer|Deck:Shagrat, Loot Bearer.dck|Variant:Commander|Avatar:Shagrat, Loot Bearer|Desc:
+Name:Black Planar Portal|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Shelob, Dread Weaver|Deck:Shelob, Dread Weaver.dck|Variant:Commander|Avatar:Shelob, Dread Weaver|Desc:
+Name:Witch-king, Sky Scourge|Deck:Witch-king, Sky Scourge.dck|Variant:Commander|Avatar:Witch-king, Sky Scourge|Desc:
+Name:The Mouth of Sauron|Deck:The Mouth of Sauron.dck|Variant:Commander|Avatar:The Mouth of Sauron|Desc:
+Name:Sauron, Lord of the Rings|Deck:Sauron, Lord of the Rings.dck|Variant:Commander|Avatar:Sauron, Lord of the Rings|Desc:
