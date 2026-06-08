@@ -23,6 +23,7 @@ import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.toolbox.FOptionPane;
 import forge.util.ItemPool;
+import org.apache.commons.lang3.StringUtils;
 
 public class FDeckViewer extends FScreen {
     private static FDeckViewer deckViewer;
@@ -63,11 +64,6 @@ public class FDeckViewer extends FScreen {
         Map<String, String> accountedMap = new HashMap<>();
         collectionList.append("\"Count\",\"Name\",\"Edition\"").append(nl);
         Pattern regexQuote = Pattern.compile("\"");
-        Pattern regexA = Pattern.compile("[\u00E0\u00E1\u00E2\u00E3\u00E4\u00E5]");
-        Pattern regexE = Pattern.compile("[\u00E8\u00E9\u00EA\u00EB]");
-        Pattern regexI = Pattern.compile("[\u00EC\u00ED\u00EE\u00EF]");
-        Pattern regexO = Pattern.compile("[\u00F2\u00F3\u00F4\u00F5\u00F6]");
-        Pattern regexU = Pattern.compile("[\u00F9\u00FA\u00FB\u00FC]");
         Pattern regexEdPlst = Pattern.compile("PLIST|MB1");
         Pattern regexEdNem = Pattern.compile("NMS");
         Pattern regexEdP02 = Pattern.compile("PO2");
@@ -79,11 +75,7 @@ public class FDeckViewer extends FScreen {
             String accountedKey = cardName + '\t' + cardEdition;
             if (!accountedMap.containsKey(accountedKey) && !card.isVeryBasicLand()) {
                 String regexCardName = regexQuote.matcher(cardName).replaceAll("\"\"");
-                regexCardName = regexA.matcher(regexCardName).replaceAll("a");
-                regexCardName = regexE.matcher(regexCardName).replaceAll("e");
-                regexCardName = regexI.matcher(regexCardName).replaceAll("i");
-                regexCardName = regexO.matcher(regexCardName).replaceAll("o");
-                regexCardName = regexU.matcher(regexCardName).replaceAll("u");
+                regexCardName = StringUtils.stripAccents(regexCardName);
                 String regexCardEdition = regexEdPlst.matcher(cardEdition).replaceAll("PLST");
                 regexCardEdition = regexEdNem.matcher(regexCardEdition).replaceAll("NEM");
                 regexCardEdition = regexEdP02.matcher(regexCardEdition).replaceAll("P02");
