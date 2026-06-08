@@ -1,0 +1,11 @@
+Name:Sky Cycle
+ManaCost:4 R
+Types:Artifact Vehicle
+PT:4/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this Vehicle enters, it deals X damage to up to one target creature, where X is twice the number of Vehicles you control.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ X
+K:Crew:2
+SVar:X:Count$Valid Vehicle.YouCtrl/Twice
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWhen this Vehicle enters, it deals X damage to up to one target creature, where X is twice the number of Vehicles you control.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
