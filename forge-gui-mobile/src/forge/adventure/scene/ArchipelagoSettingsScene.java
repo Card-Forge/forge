@@ -55,6 +55,42 @@ public class ArchipelagoSettingsScene extends UIScene {
         return object;
     }
 
+    public void setConnectStatusLabel(String string) {
+        connectStatusLabel.setText("");
+        connectStatusLabel.setText(string);
+    }
+
+    public void setIpTextField(String string) {
+        ipTextField.setText(string);
+    }
+
+    public String getIpTextField() {
+        return ipTextField.getText();
+    }
+
+    public void setPortTextField(String string) {
+        portTextField.setText(string);
+    }
+
+    public String getPortTextField() {
+        return portTextField.getText();
+    }
+
+    public void setSlotNameTextField(String string) {
+        slotNameTextField.setText(string);
+    }
+
+    public String getSlotNameTextField() {
+        return slotNameTextField.getText();
+    }
+
+    public void setPasswordTextField(String string) {
+        passwordTextField.setText(string);
+    }
+
+    public String getPasswordTextField() {
+        return passwordTextField.getText();
+    }
 
     @Override
     public void dispose() {

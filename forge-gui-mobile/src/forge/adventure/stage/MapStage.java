@@ -25,10 +25,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
-import forge.adventure.archipelago.ArchipelagoData;
-import forge.adventure.archipelago.ArchipelagoMode;
-import forge.adventure.archipelago.ArchipelagoUtil;
-import forge.adventure.archipelago.LocalRandomizer;
+import forge.adventure.archipelago.*;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
 import forge.adventure.player.AdventurePlayer;
@@ -755,10 +752,14 @@ public class MapStage extends GameStage {
                                 }
                                 break;
                             case networked_archipelago:
-                                // Todo: Get randomized subset from networked APWorld via ArchipelagoData.
-                                //  This code is a stub and should be replaced.
-                                for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
-                                    ret.addAll(rdata.generate(false, false));
+                                if (data.name.toLowerCase().contains("equipment") || data.name.toLowerCase().contains("items")) {
+                                    Set<ItemData> shopItems = ArchipelagoRandomizer.getInstance().getShopItems(data.name);
+
+                                    if (shopItems != null && shopItems.size() <= data.rewards.size) {
+                                        for (ItemData item : shopItems) {
+                                            ret.add(new Reward(item));
+                                        }
+                                    }
                                 }
                         }
                         ShopActor actor = new ShopActor(this, id, ret, data);

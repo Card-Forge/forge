@@ -1,6 +1,7 @@
 package forge.adventure.archipelago;
 
 import forge.StaticData;
+import forge.adventure.data.ItemData;
 import forge.adventure.data.WorldData;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.GameHUD;
@@ -26,7 +27,7 @@ public class ArchipelagoData implements SaveFileContent {
     // List of teleportation runes that we use to gate regions
     protected final Set<String> regionTeleportingRunes = new HashSet<>(Arrays.asList("white rune","black rune","blue rune","red rune","green rune"));
     // List of known main bosses that contribute to APWorld completion
-    private final Set<String> mainBosses = new HashSet<>(Arrays.asList("lorthos","emrakul","lathliss","ghalta","griselbrand","akroma","sliver queen"));
+    private final Set<String> mainBosses = new HashSet<>(Arrays.asList("lorthos","emrakul","lathliss","ghalta","griselbrand","akroma"));
 
     // Actual user data we want to store
     private final Map<String, Long> colorlessCompletedTownInnEvents = new HashMap<>();
@@ -75,7 +76,7 @@ public class ArchipelagoData implements SaveFileContent {
     private final int totalTownEventsBreakpoint = 1; // Reward for every 1 town events done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
 
-    public enum ARCHIPELAGO_CHECK_TYPES {COLORLESS_BATTLE_WON, WHITE_BATTLE_WON, BLUE_BATTLE_WON, BLACK_BATTLE_WON, RED_BATTLE_WON, GREEN_BATTLE_WON, COLORLESS_TOWN_QUESTS, WHITE_TOWN_QUESTS, BLUE_TOWN_QUESTS, BLACK_TOWN_QUESTS, RED_TOWN_QUESTS, GREEN_TOWN_QUESTS, TOWN_EVENTS, TOTAL_CARDS_EARNED, MINIBOSS_DEFEATED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, BOSS_WUBRG_DEFEATED, WIN_CONDITION_CLEARED};
+    public enum ARCHIPELAGO_CHECK_TYPES {COLORLESS_BATTLE_WON, WHITE_BATTLE_WON, BLUE_BATTLE_WON, BLACK_BATTLE_WON, RED_BATTLE_WON, GREEN_BATTLE_WON, COLORLESS_TOWN_QUESTS, WHITE_TOWN_QUESTS, BLUE_TOWN_QUESTS, BLACK_TOWN_QUESTS, RED_TOWN_QUESTS, GREEN_TOWN_QUESTS, TOWN_EVENTS, TOTAL_CARDS_EARNED, MINIBOSS_DEFEATED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, WIN_CONDITION_CLEARED};
 
     private ArchipelagoData() {}
 
@@ -143,42 +144,88 @@ public class ArchipelagoData implements SaveFileContent {
 
     private void updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES type) {
         if (archipelagoMode == ArchipelagoMode.disabled) return;
+        boolean networkedAP = archipelagoMode == ArchipelagoMode.networked_archipelago;
+        SlotData slotData = null;
+        if (networkedAP) slotData =  ArchipelagoRandomizer.getInstance().getSlotData();
+
         switch (type) {
             case COLORLESS_BATTLE_WON -> {
-                if (totalBattlesWonColorless > 0 && totalBattlesWonColorless % totalBattlesWonBreakpoint == 0) {
-                    unlockRandomSet();
+                if (networkedAP) {
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (totalBattlesWonColorless > 0 && totalBattlesWonColorless % slotData.FightsPerLocation == 0 && totalBattlesWonColorless / slotData.FightsPerLocation <= slotData.FightLocations) {
+                        Archipelago.getInstance().checkLocation(9999L + totalBattlesWonColorless / slotData.FightsPerLocation);
+                    }
+                } else {
+                    if (totalBattlesWonColorless > 0 && totalBattlesWonColorless % totalBattlesWonBreakpoint == 0) {
+                        unlockRandomSet();
+                    }
                 }
-                // Todo: Signal the APWorld that the next battles won location is triggered
             }
             case WHITE_BATTLE_WON -> {
-                if (totalBattlesWonWhite > 0 && totalBattlesWonWhite % totalBattlesWonBreakpoint == 0) {
-                    unlockRandomSet();
+                if (networkedAP) {
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (totalBattlesWonWhite > 0 && totalBattlesWonWhite % slotData.FightsPerLocation == 0 && totalBattlesWonWhite / slotData.FightsPerLocation <= slotData.FightLocations) {
+                        Archipelago.getInstance().checkLocation(19999L + totalBattlesWonWhite / slotData.FightsPerLocation);
+                    }
+                } else {
+                    if (totalBattlesWonWhite > 0 && totalBattlesWonWhite % totalBattlesWonBreakpoint == 0) {
+                        unlockRandomSet();
+                    }
                 }
-                // Todo: Signal the APWorld that the next battles won location is triggered
             }
             case BLUE_BATTLE_WON -> {
-                if (totalBattlesWonBlue > 0 && totalBattlesWonBlue % totalBattlesWonBreakpoint == 0) {
-                    unlockRandomSet();
+                if (networkedAP) {
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (totalBattlesWonBlue > 0 && totalBattlesWonBlue % slotData.FightsPerLocation == 0 && totalBattlesWonBlue / slotData.FightsPerLocation <= slotData.FightLocations) {
+                        Archipelago.getInstance().checkLocation(29999L + totalBattlesWonBlue / slotData.FightsPerLocation);
+                    }
+                } else {
+                    if (totalBattlesWonBlue > 0 && totalBattlesWonBlue % totalBattlesWonBreakpoint == 0) {
+                        unlockRandomSet();
+                    }
                 }
-                // Todo: Signal the APWorld that the next battles won location is triggered
             }
             case BLACK_BATTLE_WON -> {
-                if (totalBattlesWonBlack > 0 && totalBattlesWonBlack % totalBattlesWonBreakpoint == 0) {
-                    unlockRandomSet();
+                if (networkedAP) {
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (totalBattlesWonBlack > 0 && totalBattlesWonBlack % slotData.FightsPerLocation == 0 && totalBattlesWonBlack / slotData.FightsPerLocation <= slotData.FightLocations) {
+                        Archipelago.getInstance().checkLocation(39999L + totalBattlesWonBlack / slotData.FightsPerLocation);
+                    }
+                } else {
+                    if (totalBattlesWonBlack > 0 && totalBattlesWonBlack % totalBattlesWonBreakpoint == 0) {
+                        unlockRandomSet();
+                    }
                 }
-                // Todo: Signal the APWorld that the next battles won location is triggered
             }
             case RED_BATTLE_WON -> {
-                if (totalBattlesWonRed > 0 && totalBattlesWonRed % totalBattlesWonBreakpoint == 0) {
-                    unlockRandomSet();
+                if (networkedAP) {
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (totalBattlesWonRed > 0 && totalBattlesWonRed % slotData.FightsPerLocation == 0 && totalBattlesWonRed / slotData.FightsPerLocation <= slotData.FightLocations) {
+                        Archipelago.getInstance().checkLocation(49999L + totalBattlesWonRed / slotData.FightsPerLocation);
+                    }
+                } else {
+                    if (totalBattlesWonRed > 0 && totalBattlesWonRed % totalBattlesWonBreakpoint == 0) {
+                        unlockRandomSet();
+                    }
                 }
-                // Todo: Signal the APWorld that the next battles won location is triggered
             }
             case GREEN_BATTLE_WON -> {
-                if (totalBattlesWonGreen > 0 && totalBattlesWonGreen % totalBattlesWonBreakpoint == 0) {
-                    unlockRandomSet();
+                if (networkedAP) {
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (totalBattlesWonGreen > 0 && totalBattlesWonGreen % slotData.FightsPerLocation == 0 && totalBattlesWonGreen / slotData.FightsPerLocation <= slotData.FightLocations) {
+                        Archipelago.getInstance().checkLocation(59999L + totalBattlesWonGreen / slotData.FightsPerLocation);
+                    }
+                } else {
+                    if (totalBattlesWonGreen > 0 && totalBattlesWonGreen % totalBattlesWonBreakpoint == 0) {
+                        unlockRandomSet();
+                    }
                 }
-                // Todo: Signal the APWorld that the next battles won location is triggered
             }
             case COLORLESS_TOWN_QUESTS -> {
                 int totalTownQuestsDone = 0;
@@ -269,9 +316,6 @@ public class ArchipelagoData implements SaveFileContent {
                 // Todo: Signal the APWorld that the boss is defeated
             }
             case BOSS_COLORLESS_DEFEATED -> {
-                // Todo: Signal the APWorld that the boss is defeated
-            }
-            case BOSS_WUBRG_DEFEATED -> {
                 // Todo: Signal the APWorld that the boss is defeated
             }
             case  WIN_CONDITION_CLEARED -> {
@@ -430,9 +474,6 @@ public class ArchipelagoData implements SaveFileContent {
             case "emrakul" -> {
                 updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_COLORLESS_DEFEATED);
             }
-            case "sliver queen" -> {
-                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_WUBRG_DEFEATED);
-            }
         }
         // Win condition is reached if all bosses have been defeated.
         if (bossesDefeatedByName.containsAll(mainBosses)) {
@@ -555,7 +596,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     public void addTotalBattlesWon(int amount) {
         switch (lastTraversedRegion) {
-            case "wastes" -> {
+            case "waste" -> {
                 totalBattlesWonColorless += amount;
                 updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.COLORLESS_BATTLE_WON);
             }
@@ -626,6 +667,19 @@ public class ArchipelagoData implements SaveFileContent {
         }
     }
 
+    private static void saveItemDataSet(SaveFileData parent, String key, Set<ItemData> set) {
+        parent.storeObject(key, set.toArray(new ItemData[0]));
+    }
+
+    private static void loadItemDataSet(SaveFileData parent, String key, Set<ItemData> set) {
+        set.clear();
+
+        if (!parent.containsKey(key)) return;
+
+        ItemData[] values = (ItemData[]) parent.readObject(key);
+        Collections.addAll(set, values);
+    }
+
     private void loadAllAvailableSets() {
         Set<String> newSetCodes = new HashSet<>();
         for (CardEdition edition : allOrderedEditions) {
@@ -646,8 +700,9 @@ public class ArchipelagoData implements SaveFileContent {
         }
         loadAllAvailableSets();
         LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
-
+        ArchipelagoRandomizer networkedRandomizer = ArchipelagoRandomizer.getInstance();
         // Load save data
+        archipelagoMode = ArchipelagoMode.values()[data.containsKey("archipelagoMode") ? data.readInt("archipelagoMode") : 0];
         loadStringLongMap(data, "colorlessTownEvents", colorlessCompletedTownInnEvents);
         loadStringLongMap(data, "whiteTownEvents", whiteCompletedTownInnEvents);
         loadStringLongMap(data, "blueTownEvents", blueCompletedTownInnEvents);
@@ -678,11 +733,31 @@ public class ArchipelagoData implements SaveFileContent {
             loadStringSet(data, "redEquipmentShop", localRandomizer.redEquipmentShopList);
             loadStringSet(data, "greenEquipmentShop", localRandomizer.greenEquipmentShopList);
             loadStringSet(data, "whiteItemShop", localRandomizer.whiteItemShopList);
-            loadStringSet(data, "blueEquipmentShop", localRandomizer.blueItemShopList);
-            loadStringSet(data, "blackEquipmentShop", localRandomizer.blackItemShopList);
-            loadStringSet(data, "redEquipmentShop", localRandomizer.redItemShopList);
+            loadStringSet(data, "blueItemShop", localRandomizer.blueItemShopList);
+            loadStringSet(data, "blackItemShop", localRandomizer.blackItemShopList);
+            loadStringSet(data, "redItemShop", localRandomizer.redItemShopList);
             loadStringSet(data, "greenItemShop", localRandomizer.greenItemShopList);
             loadStringSet(data, "remainingEquipment", localRandomizer.remainingEquipmentPool);
+        }
+        if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
+            WorldData.resetShopLists();
+            loadItemDataSet(data, "colorlessEquipmentShop", networkedRandomizer.colorlessEquipmentShopList);
+            loadItemDataSet(data, "whiteEquipmentShop", networkedRandomizer.whiteEquipmentShopList);
+            loadItemDataSet(data, "blueEquipmentShop", networkedRandomizer.blueEquipmentShopList);
+            loadItemDataSet(data, "blackEquipmentShop", networkedRandomizer.blackEquipmentShopList);
+            loadItemDataSet(data, "redEquipmentShop", networkedRandomizer.redEquipmentShopList);
+            loadItemDataSet(data, "greenEquipmentShop", networkedRandomizer.greenEquipmentShopList);
+            loadItemDataSet(data, "whiteItemShop", networkedRandomizer.whiteItemShopList);
+            loadItemDataSet(data, "blueItemShop", networkedRandomizer.blueItemShopList);
+            loadItemDataSet(data, "blackItemShop", networkedRandomizer.blackItemShopList);
+            loadItemDataSet(data, "redItemShop", networkedRandomizer.redItemShopList);
+            loadItemDataSet(data, "greenItemShop", networkedRandomizer.greenItemShopList);
+            if (data.containsKey("slotData")) networkedRandomizer.setSlotData((SlotData) data.readObject("slotData"));
+            if (data.containsKey("lastIp")) networkedRandomizer.setLastIp(data.readString("lastIp"));
+            if (data.containsKey("lastPort")) networkedRandomizer.setLastPort(data.readString("lastPort"));
+            if (data.containsKey("lastSlotName")) networkedRandomizer.setLastSlotName(data.readString("lastSlotName"));
+            if (data.containsKey("lastPassword")) networkedRandomizer.setLastPassword(data.readString("lastPassword"));
+            networkedRandomizer.setupAPSettingScene();
         }
 
         setUnlockChecksRestAmount = data.containsKey("setUnlocksReceivedRest") ? data.readFloat("setUnlocksReceivedRest") : 0;
@@ -698,10 +773,10 @@ public class ArchipelagoData implements SaveFileContent {
         totalExtraMaxLifeEarned = data.containsKey("extraLife") ? data.readInt("extraLife") : 0;
         totalShardsEarned = data.containsKey("shards") ? data.readInt("shards") : 0;
         lastArchipelagoRewardIndex = data.containsKey("lastArchipelagoRewardIndex") ? data.readInt("lastArchipelagoRewardIndex") : 0;
-        archipelagoMode = ArchipelagoMode.values()[data.containsKey("archipelagoMode") ? data.readInt("archipelagoMode") : 0];
         setTotalAmountOfSetUnlockChecks(data.containsKey("totalSetUnlockChecks") ? data.readInt("totalSetUnlockChecks") : 100);
         GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
+            Archipelago.getInstance().disconnect();
             // 1. Init APWorld
             // 2. Get current "index"
             // 3. Store state in this object
@@ -713,6 +788,7 @@ public class ArchipelagoData implements SaveFileContent {
     public SaveFileData save() {
         SaveFileData data = new SaveFileData();
         LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
+        ArchipelagoRandomizer networkedRandomizer = ArchipelagoRandomizer.getInstance();
 
         saveStringLongMap(data, "colorlessTownEvents", colorlessCompletedTownInnEvents);
         saveStringLongMap(data, "whiteTownEvents", whiteCompletedTownInnEvents);
@@ -743,11 +819,29 @@ public class ArchipelagoData implements SaveFileContent {
             saveStringSet(data, "redEquipmentShop", localRandomizer.redEquipmentShopList);
             saveStringSet(data, "greenEquipmentShop", localRandomizer.greenEquipmentShopList);
             saveStringSet(data, "whiteItemShop", localRandomizer.whiteItemShopList);
-            saveStringSet(data, "blueEquipmentShop", localRandomizer.blueItemShopList);
-            saveStringSet(data, "blackEquipmentShop", localRandomizer.blackItemShopList);
-            saveStringSet(data, "redEquipmentShop", localRandomizer.redItemShopList);
+            saveStringSet(data, "blueItemShop", localRandomizer.blueItemShopList);
+            saveStringSet(data, "blackItemShop", localRandomizer.blackItemShopList);
+            saveStringSet(data, "redItemShop", localRandomizer.redItemShopList);
             saveStringSet(data, "greenItemShop", localRandomizer.greenItemShopList);
             saveStringSet(data, "remainingEquipment", localRandomizer.remainingEquipmentPool);
+        }
+        if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
+            saveItemDataSet(data, "colorlessEquipmentShop", networkedRandomizer.colorlessEquipmentShopList);
+            saveItemDataSet(data, "whiteEquipmentShop", networkedRandomizer.whiteEquipmentShopList);
+            saveItemDataSet(data, "blueEquipmentShop", networkedRandomizer.blueEquipmentShopList);
+            saveItemDataSet(data, "blackEquipmentShop", networkedRandomizer.blackEquipmentShopList);
+            saveItemDataSet(data, "redEquipmentShop", networkedRandomizer.redEquipmentShopList);
+            saveItemDataSet(data, "greenEquipmentShop", networkedRandomizer.greenEquipmentShopList);
+            saveItemDataSet(data, "whiteItemShop", networkedRandomizer.whiteItemShopList);
+            saveItemDataSet(data, "blueItemShop", networkedRandomizer.blueItemShopList);
+            saveItemDataSet(data, "blackItemShop", networkedRandomizer.blackItemShopList);
+            saveItemDataSet(data, "redItemShop", networkedRandomizer.redItemShopList);
+            saveItemDataSet(data, "greenItemShop", networkedRandomizer.greenItemShopList);
+            data.storeObject("slotData", networkedRandomizer.getSlotData());
+            data.store("lastIp", networkedRandomizer.getLastIp());
+            data.store("lastPort", networkedRandomizer.getLastPort());
+            data.store("lastSlotName", networkedRandomizer.getLastSlotName());
+            data.store("lastPassword", networkedRandomizer.getLastPassword());
         }
 
         data.store("setUnlocksReceivedRest", setUnlockChecksRestAmount);
