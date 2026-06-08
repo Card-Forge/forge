@@ -215,7 +215,8 @@ public class ImageCache {
             return Pair.of(null, false);
         }
 
-        // Owner's sleeve for hidden-zone cards, resolved before the generic t:hidden image
+        // Owner's sleeve as the back for any card the viewer can't see
+        // With no sleeve set, fall through so the standard t:hidden back renders
         if (imageKey.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))) {
             final BufferedImage back = FSkin.getSleeveImage(sleeveIndexOf(cardView));
             if (back != null) {

@@ -27,11 +27,6 @@ public class SleeveSelector extends FDialog {
     private final List<FLabel> selectables = new ArrayList<>();
     private final Map<Integer, FSkin.SkinImage> sleeveMap = FSkin.getSleeves();
 
-    /**
-     * @param playerName   shown in the dialog title
-     * @param currentIndex the sleeve currently chosen; it is highlighted and given default focus
-     * @param usedIndices  sleeve indices already in use by other players
-     */
     public SleeveSelector(final String playerName, final int currentIndex, final Collection<Integer> usedIndices) {
         this.setTitle(Localizer.getInstance().getMessage("lblSelectSleeveForPlayer", playerName));
 
