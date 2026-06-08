@@ -16,7 +16,7 @@ PT:5/5
 K:Flying
 K:Haste
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may put an artifact card from your hand onto the battlefield. If it's an Equipment, attach it to CARDNAME.
-SVar:TrigChangeZone:DB$ ChangeZone | ChangeType$ Artifact | Origin$ Hand | Destination$ Battlefield | RememberChanged$ True | SelectPrompt$ Select artifact card from your hand | SubAbility$ DBAttach
+SVar:TrigChangeZone:DB$ ChangeZone | ChangeType$ Artifact | Origin$ Hand | Destination$ Battlefield | RememberChanged$ True | SelectPrompt$ Select an artifact card from your hand | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Object$ Remembered | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Equipment | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Flying, haste\nAt the beginning of combat on your turn, you may put an artifact card from your hand onto the battlefield. If it's an Equipment, attach it to The Invincible Iron Man.

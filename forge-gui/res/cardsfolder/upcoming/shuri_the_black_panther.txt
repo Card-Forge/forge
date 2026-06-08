@@ -1,0 +1,9 @@
+Name:Shuri, the Black Panther
+ManaCost:G W
+Types:Legendary Creature Human Noble Hero
+PT:2/3
+K:Lifelink
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, draw a card if you control three or more artifacts. Then if you control six or more artifacts, creatures you control get +2/+2 until end of turn.
+SVar:TrigDraw:DB$ Draw | Defined$ You | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE3 | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE6
+Oracle:Lifelink\nWhenever Shuri attacks, draw a card if you control three or more artifacts. Then if you control six or more artifacts, creatures you control get +2/+2 until end of turn.

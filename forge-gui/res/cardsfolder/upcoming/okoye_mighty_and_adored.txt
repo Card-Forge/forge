@@ -1,5 +1,5 @@
 Name:Okoye, Mighty and Adored
-ManaCost:2 G U
+ManaCost:2 G W
 Types:Legendary Creature Human Warrior Hero
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When NICKNAME enters, you become the monarch.

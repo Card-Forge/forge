@@ -65,7 +65,6 @@ public class GameView extends TrackableObject {
     public FCollectionView<PlayerView> getPlayers() {
         return get(TrackableProperty.Players);
     }
-
     public void updatePlayers(final Game game) {
         set(TrackableProperty.Players, PlayerView.getCollection(game.getPlayers()));
     }
@@ -93,7 +92,6 @@ public class GameView extends TrackableObject {
     public int getTurn() {
         return get(TrackableProperty.Turn);
     }
-
     void updateTurn(PhaseHandler phaseHandler) {
         set(TrackableProperty.Turn, phaseHandler.getTurn());
     }
@@ -101,7 +99,6 @@ public class GameView extends TrackableObject {
     public PhaseType getPhase() {
         return get(TrackableProperty.Phase);
     }
-
     void updatePhase(PhaseHandler phaseHandler) {
         set(TrackableProperty.Phase, phaseHandler.getPhase());
     }
@@ -141,20 +138,18 @@ public class GameView extends TrackableObject {
         return get(TrackableProperty.NumPlayedGamesInMatch);
     }
 
-    public boolean isGameOver() {
-        return get(TrackableProperty.GameOver);
-    }
-
-    public boolean isMatchOver() {
-        return get(TrackableProperty.MatchOver);
-    }
-
     public boolean isMulligan() {
         return get(TrackableProperty.Mulligan);
     }
-
     public void updateIsMulligan(boolean value) {
         set(TrackableProperty.Mulligan, value);
+    }
+
+    public boolean isGameOver() {
+        return get(TrackableProperty.GameOver);
+    }
+    public boolean isMatchOver() {
+        return get(TrackableProperty.MatchOver);
     }
 
     public String getWinningPlayerName() {

@@ -105,7 +105,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         continue;
                     }
 
-                    FCollection<GameEntity> all = new FCollection<>(IterableUtil.filter(targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true), GameObjectPredicates.restriction(sa.getParam("CopyForEachCanTarget").split(","), sa.getActivatingPlayer(), card, sa)));
+                    FCollection<GameEntity> all = new FCollection<>(IterableUtil.filter(targetedSA.getTargetRestrictions().getAllCandidates(targetedSA), GameObjectPredicates.restriction(sa.getParam("CopyForEachCanTarget").split(","), sa.getActivatingPlayer(), card, sa)));
                     // Remove targeted players because getAllCandidates include all the valid players
                     all.removeAll(getTargetPlayers(targetedSA));
 
