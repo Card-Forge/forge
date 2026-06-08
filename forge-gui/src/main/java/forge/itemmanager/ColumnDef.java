@@ -347,11 +347,11 @@ public enum ColumnDef {
             }),
     DECK_BRACKET("lblBracket", "ttCommanderBracket", 55, true, SortState.ASC,
             from -> {
-                DeckProxy deck = toDeckProxy(from.getKey());
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
                 return isCommanderDeck(deck) ? CommanderBracketCalculator.getBracket(deck.getDeck()) : 1;
             },
             from -> {
-                DeckProxy deck = toDeckProxy(from.getKey());
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
                 return isCommanderDeck(deck) ? String.valueOf(CommanderBracketCalculator.getBracket(deck.getDeck())) : "-";
             }),
     /**
@@ -372,12 +372,12 @@ public enum ColumnDef {
      */
     DECK_SIDE("lblSide", "lblSideboard", 30, true, SortState.ASC,
             from -> {
-                DeckProxy deck = toDeck(from.getKey());
-                return deck == null || deck.isGeneratedDeck() ? -1 : deck.getSideSize();
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
+                return deck == null ? -1 : deck.getSideSize();
             },
             from -> {
-                DeckProxy deck = toDeck(from.getKey());
-                int size = deck == null || deck.isGeneratedDeck() ? -1 : deck.getSideSize();
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
+                int size = deck == null ? -1 : deck.getSideSize();
                 return size < 0 ? null : size;
             }),
     /**
@@ -526,8 +526,8 @@ public enum ColumnDef {
     }
 
     private static String eventTag(final InventoryItem i, final String key) {
-        DeckProxy d = toDeck(i);
-        if (d == null || d.isGeneratedDeck()) return "";
+        DeckProxy d = toNonGeneratedDeck(i);
+        if (d == null) return "";
         String v = DeckProxy.getEventTag(d.getDeck(), key);
         return v != null ? v : "";
     }

@@ -92,6 +92,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private static final String GENERATED_RANDOM_PATH = "random";
     private static final String GENERATED_RANDOM_COLORS_PATH = "random/colors";
     private static final String GENERATED_RANDOM_ARCHETYPES_PATH = "random/archetypes";
+    private static final String RANDOM_ARCHETYPE_GROUP_NAME = "Random Archetype Decks";
+    private static final Integer[] DEFAULT_DECK_SELECTION = {0};
+    private static final Integer[] DEFAULT_COLOR_SELECTION = {0, 1};
     private interface NetArchiveLoader {
         NetDeckStorageBase selectAndLoad(GameType gameType, String name, boolean forceDownload);
     }
@@ -691,7 +694,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private void updateDecks(final Iterable<DeckProxy> decks, final ItemManagerConfig config) {
         updateBrowserOptions(decks, false, localizer.getMessage("lblRandomDeck"),
-                this::randomSelectBrowserDeck, new Integer[]{0}, config);
+                this::randomSelectBrowserDeck, DEFAULT_DECK_SELECTION, config);
     }
 
     private void updateBrowserOptions(final Iterable<DeckProxy> decks, final boolean allowMultipleSelections,
@@ -1023,7 +1026,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
         for (final IStorage<Deck> subFolder : folder.getFolders()) {
             final String subPath = childPath(path, subFolder.getName());
-            rows.add(DeckBrowserEntry.folder(subFolder.getName(), subPath, subFolder, getFolderDeckTypeForBrowserRow(subFolder)));
+            rows.add(DeckBrowserEntry.folder(subFolder.getName(), subPath, subFolder, getShortcutDeckTypeForFolder(subFolder)));
             addFolderRowsRecursively(rows, subFolder, subPath, rootType);
             addVirtualRowsForFolderRecursively(rows, subPath, rootType, subFolder);
         }
@@ -1084,7 +1087,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void addGeneratedGroupRowsRecursively(final List<DeckProxy> rows, final String path) {
         if (GENERATED_RANDOM_PATH.equals(path)) {
             rows.addAll(wrapGeneratedOptions(RandomDeckGenerator.getRandomDecks(lstDecks, isAi)));
-            rows.add(DeckBrowserEntry.generatedGroup("Random Archetype Decks", GENERATED_RANDOM_ARCHETYPES_PATH));
+            rows.add(DeckBrowserEntry.generatedGroup(RANDOM_ARCHETYPE_GROUP_NAME, GENERATED_RANDOM_ARCHETYPES_PATH));
             addGeneratedGroupRowsRecursively(rows, GENERATED_RANDOM_ARCHETYPES_PATH);
             rows.add(DeckBrowserEntry.generatedGroup(DeckType.COLOR_DECK.toString(), GENERATED_RANDOM_COLORS_PATH));
             addGeneratedGroupRowsRecursively(rows, GENERATED_RANDOM_COLORS_PATH);
@@ -1189,16 +1192,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         browserGeneratedFolder = false;
         browserHasDecksHomeParent = false;
         clearBrowserListParent();
-        sortBrowserRows(rows);
         lstDecks.setCaption("Decks");
-        lstDecks.setAllowMultipleSelections(false);
-        final List<DeckProxy> displayedRows = setBrowserPoolAndSetup(rows);
-        btnRandom.setText(localizer.getMessage("lblRandomDeck"));
-        btnRandom.setCommand(this::randomSelectBrowserDeck);
-        if (!selectPendingBrowserRow(displayedRows) && !displayedRows.isEmpty()) {
-            lstDecks.setSelectedIndex(0);
-        }
-        updateEditorSaveTarget();
+        displaySingleSelectBrowserRows(rows);
     }
 
     private void updateGeneratedGroup(final String path) {
@@ -1207,7 +1202,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         rows.add(DeckBrowserEntry.parentFolder(getGeneratedGroupParentPath(path), getGeneratedGroupParentFolder(path)));
         if (GENERATED_RANDOM_PATH.equals(path)) {
             rows.addAll(wrapGeneratedOptions(RandomDeckGenerator.getRandomDecks(lstDecks, isAi)));
-            rows.add(DeckBrowserEntry.generatedGroup("Random Archetype Decks", GENERATED_RANDOM_ARCHETYPES_PATH));
+            rows.add(DeckBrowserEntry.generatedGroup(RANDOM_ARCHETYPE_GROUP_NAME, GENERATED_RANDOM_ARCHETYPES_PATH));
             rows.add(DeckBrowserEntry.generatedGroup(DeckType.COLOR_DECK.toString(), GENERATED_RANDOM_COLORS_PATH));
             addGeneratedFolderRows(rows, path, false, DeckType.THEME_DECK);
         } else if (GENERATED_RANDOM_COLORS_PATH.equals(path)) {
@@ -1226,15 +1221,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         browserGeneratedFolder = false;
         browserHasDecksHomeParent = false;
         clearBrowserListParent();
-        sortBrowserRows(rows);
-        lstDecks.setAllowMultipleSelections(false);
-        final List<DeckProxy> displayedRows = setBrowserPoolAndSetup(rows);
-        btnRandom.setText(localizer.getMessage("lblRandomDeck"));
-        btnRandom.setCommand(this::randomSelectBrowserDeck);
-        if (!selectPendingBrowserRow(displayedRows) && !displayedRows.isEmpty()) {
-            lstDecks.setSelectedIndex(0);
-        }
-        updateEditorSaveTarget();
+        displaySingleSelectBrowserRows(rows);
     }
 
     private String getGeneratedGroupParentPath(final String path) {
@@ -1258,8 +1245,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             setShortcutDeckType(DeckType.COLOR_DECK);
         } else if (GENERATED_RANDOM_ARCHETYPES_PATH.equals(path) && decksComboBox != null) {
             selectedDeckType = DeckType.RANDOM_DECK;
-            decksComboBox.setText("Random Archetype Decks");
-            lstDecks.setCaption("Random Archetype Decks");
+            decksComboBox.setText(RANDOM_ARCHETYPE_GROUP_NAME);
+            lstDecks.setCaption(RANDOM_ARCHETYPE_GROUP_NAME);
         }
     }
 
@@ -1284,10 +1271,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return isForCommander ? DeckType.NET_COMMANDER_DECK : DeckType.NET_DECK;
         }
         return null;
-    }
-
-    private DeckType getFolderDeckTypeForBrowserRow(final IStorage<Deck> folder) {
-        return getShortcutDeckTypeForFolder(folder);
     }
 
     private boolean isSameFolder(final IStorage<Deck> first, final IStorage<Deck> second) {
@@ -1356,7 +1339,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private String getGeneratedGroupDisplayName(final String path) {
         if (GENERATED_RANDOM_ARCHETYPES_PATH.equals(path)) {
-            return "Random Archetype Decks";
+            return RANDOM_ARCHETYPE_GROUP_NAME;
         }
         if (GENERATED_RANDOM_COLORS_PATH.equals(path)) {
             return DeckType.COLOR_DECK.toString();
@@ -1436,12 +1419,12 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             for (final IStorage<Deck> folder : browserFolder.getFolders()) {
                 realFolderNames.add(folder.getName());
                 rows.add(DeckBrowserEntry.folder(folder.getName(), childPath(browserPath, folder.getName()), folder,
-                        getFolderDeckTypeForBrowserRow(folder)));
+                        getShortcutDeckTypeForFolder(folder)));
             }
             for (final Deck deck : browserFolder) {
                 rows.add(DeckBrowserEntry.deck(new DeckProxy(deck, gameType.toString(), gameType, browserPath, browserFolder, null)));
             }
-            if (StringUtils.isBlank(browserPath) && !isEditorOnlyBrowser()) {
+            if (StringUtils.isBlank(browserPath) && !editorOnlyBrowser) {
                 if (browserRootType == DeckType.CUSTOM_DECK) {
                     rows.add(DeckBrowserEntry.generatedGroup(DeckType.RANDOM_DECK.toString(), GENERATED_RANDOM_PATH));
                     addGeneratedFolderRows(rows, browserPath, false, DeckType.PRECONSTRUCTED_DECK, DeckType.QUEST_OPPONENT_DECK);
@@ -1453,7 +1436,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                     addGeneratedFolderRows(rows, browserPath, false, DeckType.PRECON_COMMANDER_DECK);
                 }
             }
-            if (StringUtils.isBlank(browserPath) && !isEditorOnlyBrowser() && isNetBrowserRoot()) {
+            if (StringUtils.isBlank(browserPath) && !editorOnlyBrowser && isNetBrowserRoot()) {
                 final Iterable<NetDeckCategory> categories = NetDeckCategory.getAvailableCategories(lstDecks.getGameType());
                 if (categories != null) {
                     for (final NetDeckCategory category : categories) {
@@ -1468,6 +1451,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 addNetArchiveVirtualFolders(rows, browserPath);
             }
         }
+        displaySingleSelectBrowserRows(rows);
+    }
+
+    private void displaySingleSelectBrowserRows(final List<DeckProxy> rows) {
         sortBrowserRows(rows);
         lstDecks.setAllowMultipleSelections(false);
         final List<DeckProxy> displayedRows = setBrowserPoolAndSetup(rows);
@@ -1499,10 +1486,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         if (editor == null || editor.getGameType() != gameType) {
             CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorConstructed(lstDecks.getCDetailPicture(), gameType));
         }
-    }
-
-    private boolean isEditorOnlyBrowser() {
-        return editorOnlyBrowser;
     }
 
     private ItemManagerConfig getBrowserItemManagerConfig() {
@@ -1578,12 +1561,12 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateColors(Predicate<PaperCard> formatFilter) {
         updateBrowserOptions(ColorDeckGenerator.getColorDecks(lstDecks, formatFilter, isAi), true,
                 localizer.getMessage("lblRandomColors"), this::randomSelectBrowserColors,
-                new Integer[]{0, 1});
+                DEFAULT_COLOR_SELECTION);
     }
 
     private void updateMatrix(GameFormat format) {
         updateBrowserOptions(ArchetypeDeckGenerator.getMatrixDecks(format, isAi), false,
-                "Random", this::randomSelectBrowserDeck, new Integer[]{0});
+                "Random", this::randomSelectBrowserDeck, DEFAULT_DECK_SELECTION);
     }
 
     private void updateRandomCommander() {
