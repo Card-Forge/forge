@@ -4,4 +4,3 @@ Types:Legendary Creature Gamma Berserker Hero
 PT:7/4
 K:Trample
 Oracle:Trample (This creature can deal excess combat damage to the player he's attacking.)
-
