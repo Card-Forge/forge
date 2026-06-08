@@ -1,11 +1,6 @@
 package forge.deck;
 
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.regex.Pattern;
 
 import forge.Forge;
@@ -61,8 +56,7 @@ public class FDeckViewer extends FScreen {
 
         final String nl = System.lineSeparator();
         final StringBuilder collectionList = new StringBuilder();
-        Map<String, String> accountedMap = new HashMap<>();
-        collectionList.append("\"Count\",\"Name\",\"Edition\"").append(nl);
+        collectionList.append("\"Count\",\"Name\",\"Edition\",\"Collector Number\",\"Foil\"").append(nl);
         Pattern regexQuote = Pattern.compile("\"");
         Pattern regexEdPlst = Pattern.compile("PLIST|MB1");
         Pattern regexEdNem = Pattern.compile("NMS");
@@ -70,24 +64,16 @@ public class FDeckViewer extends FScreen {
 
         for (final Entry<PaperCard, Integer> entry : pool) {
             PaperCard card = entry.getKey();
-            String cardName = card.getCardName();
-            String cardEdition = card.getEdition();
-            String accountedKey = cardName + '\t' + cardEdition;
-            if (!accountedMap.containsKey(accountedKey) && !card.isVeryBasicLand()) {
-                String regexCardName = regexQuote.matcher(cardName).replaceAll("\"\"");
-                regexCardName = StringUtils.stripAccents(regexCardName);
-                String regexCardEdition = regexEdPlst.matcher(cardEdition).replaceAll("PLST");
-                regexCardEdition = regexEdNem.matcher(regexCardEdition).replaceAll("NEM");
-                regexCardEdition = regexEdP02.matcher(regexCardEdition).replaceAll("P02");
-                String cardLine = "\"" + pool.countByNameAndEdition(card) + "\",\"" + regexCardName + "\",\"" + regexCardEdition + "\"" + nl;
-                accountedMap.put(accountedKey, cardLine);
+            if (!card.isVeryBasicLand()) {
+                String cleanCardName = regexQuote.matcher(card.getCardName()).replaceAll("\"\"");
+                // Moxfield import will choke on accented characters so replace them with ASCII equivalents
+                cleanCardName = StringUtils.stripAccents(cleanCardName);
+                String cleanCardEdition = regexEdPlst.matcher(card.getEdition()).replaceAll("PLST");
+                cleanCardEdition = regexEdNem.matcher(cleanCardEdition).replaceAll("NEM");
+                cleanCardEdition = regexEdP02.matcher(cleanCardEdition).replaceAll("P02");
+                String cardLine = "\"1\",\"" + cleanCardName + "\",\"" + cleanCardEdition + "\",\"" + card.getCollectorNumber() + "\",\"" + (card.isFoil() ? "foil" : "") + "\"" + nl;
+                collectionList.append(cardLine);
             }
-        }
-
-        List<String> sortedKeys = new ArrayList<>(accountedMap.keySet());
-        Collections.sort(sortedKeys);
-        for (String key : sortedKeys) {
-            collectionList.append(accountedMap.get(key));
         }
 
         Forge.getClipboard().setContents(collectionList.toString());
