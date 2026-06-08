@@ -511,7 +511,11 @@ public class AdventureDeckEditor extends FDeckEditor {
             super.buildDeckMenu(menu);
             if (!(parentScreen instanceof AdventureDeckEditor adventureEditor) || adventureEditor.getAutoSellPage() == null)
                 return;
-            menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyCollectionToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyCollectionToClipboard(AdventurePlayer.current().getCards())));
+
+            ItemPool<PaperCard> autoSellCards = AdventurePlayer.current().getAutoSellCards();
+            CardPool playedCards = AdventurePlayer.current().getCards().getFilteredPool(card -> !autoSellCards.contains(card));
+            menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyCollectionToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyCollectionToClipboard(playedCards)));
+
             FMenuItem sellCurrentFilters = new FMenuItem(Forge.getLocalizer().getMessage("lblAutoSellCurrentFilters"), FSkinImage.QUEST_COINSTACK, e1 -> autoSellAllByFilter(adventureEditor.getAutoSellPage()));
             sellCurrentFilters.setTextColor(255, 0, 0);
             menu.addItem(sellCurrentFilters);
