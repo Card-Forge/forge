@@ -289,7 +289,7 @@ public enum ColumnDef {
      */
     DECK_FORMAT("lblFormat", "ttFormats", 60, false, SortState.DESC,
             from -> {
-                DeckProxy deck = toDeck(from.getKey());
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
                 if (deck == null) {
                     return -1;
                 }
@@ -303,7 +303,7 @@ public enum ColumnDef {
                 return acc;
             },
             from -> {
-                DeckProxy deck = toDeck(from.getKey());
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
                 if (deck == null) {
                     return null;
                 }
@@ -338,11 +338,11 @@ public enum ColumnDef {
             from -> eventTag(from.getKey(), "eventDate")),
     DECK_AI("lblAI", "lblAIStatus", 38, true, SortState.DESC,
             from -> {
-                DeckProxy deck = toDeck(from.getKey());
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
                 return deck == null ? -1 : deck.getAI().inMainDeck;
             },
             from -> {
-                DeckProxy deck = toDeck(from.getKey());
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
                 return deck == null ? null : deck.getAI();
             }),
     DECK_BRACKET("lblBracket", "ttCommanderBracket", 55, true, SortState.ASC,
@@ -373,11 +373,11 @@ public enum ColumnDef {
     DECK_SIDE("lblSide", "lblSideboard", 30, true, SortState.ASC,
             from -> {
                 DeckProxy deck = toDeck(from.getKey());
-                return deck == null ? -1 : deck.getSideSize();
+                return deck == null || deck.isGeneratedDeck() ? -1 : deck.getSideSize();
             },
             from -> {
                 DeckProxy deck = toDeck(from.getKey());
-                int size = deck == null ? -1 : deck.getSideSize();
+                int size = deck == null || deck.isGeneratedDeck() ? -1 : deck.getSideSize();
                 return size < 0 ? null : size;
             }),
     /**
@@ -500,9 +500,17 @@ public enum ColumnDef {
         }
         if (i instanceof DeckProxy) {
             DeckProxy deck = (DeckProxy) i;
+            if (deck.isGeneratedDeck()) {
+                return deck;
+            }
             return deck.getDeck() == null ? null : deck;
         }
         return null;
+    }
+
+    private static DeckProxy toNonGeneratedDeck(final InventoryItem i) {
+        final DeckProxy deck = toDeck(i);
+        return deck == null || deck.isGeneratedDeck() ? null : deck;
     }
 
     private static DeckProxy toDeckProxy(final InventoryItem i) {
@@ -519,7 +527,7 @@ public enum ColumnDef {
 
     private static String eventTag(final InventoryItem i, final String key) {
         DeckProxy d = toDeck(i);
-        if (d == null) return "";
+        if (d == null || d.isGeneratedDeck()) return "";
         String v = DeckProxy.getEventTag(d.getDeck(), key);
         return v != null ? v : "";
     }

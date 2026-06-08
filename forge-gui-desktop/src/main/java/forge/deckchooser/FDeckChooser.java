@@ -919,8 +919,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         final List<DeckProxy> displayedRows = browserSearchActive ? buildRecursiveSearchRows() : rows;
         browserHasDeckRows = containsDeckRows(displayedRows);
         browserHasCommanderDeckRows = containsCommanderDeckRows(displayedRows);
-        lstDecks.setPool(displayedRows);
         lstDecks.setup(config == null ? getBrowserItemManagerConfig() : config);
+        lstDecks.setPool(displayedRows);
         return displayedRows;
     }
 
