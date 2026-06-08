@@ -1520,7 +1520,7 @@ public class FSkin {
 
     public static BufferedImage getSleeveImage(int index) {
         SkinImage s = sleeves.get(index);
-        return (s != null && s.image instanceof BufferedImage) ? (BufferedImage) s.image : null;
+        return (s != null && s.image instanceof BufferedImage bi) ? bi : null;
     }
 
     public static boolean isLoaded() { return loaded; }

@@ -408,6 +408,7 @@ public class VLobby implements ILobbyView {
                 panel.setType(type);
                 panel.setPlayerName(slot.getName());
                 panel.setAvatarIndex(slot.getAvatarIndex());
+                panel.setSleeveIndex(slot.getSleeveIndex());
                 panel.setTeam(slot.getTeam());
                 panel.setIsReady(slot.isReady());
                 panel.setIsDevMode(slot.isDevMode());
