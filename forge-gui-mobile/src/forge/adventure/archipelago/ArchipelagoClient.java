@@ -1,10 +1,7 @@
 package forge.adventure.archipelago;
 
 import com.github.tommyettinger.textra.TypingLabel;
-import forge.adventure.archipelago.events.ConnectResult;
-import forge.adventure.archipelago.events.LocationChecked;
-import forge.adventure.archipelago.events.OnDeathLink;
-import forge.adventure.archipelago.events.ReceiveItem;
+import forge.adventure.archipelago.events.*;
 import io.github.archipelagomw.Client;
 import io.github.archipelagomw.flags.ItemsHandling;
 
@@ -23,7 +20,12 @@ public class ArchipelagoClient extends Client {
         this.getEventManager().registerListener(new ConnectResult(this, connectStatusLabel));
         this.getEventManager().registerListener(new ReceiveItem());
         this.getEventManager().registerListener(new LocationChecked());
+        this.getEventManager().registerListener(new LocationInfo(this));
         this.getEventManager().registerListener(new OnDeathLink());
+    }
+
+    public void setSlotData(SlotData slotData) {
+        this.slotData = slotData;
     }
 
     @Nullable

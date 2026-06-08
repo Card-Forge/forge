@@ -2,9 +2,11 @@ package forge.adventure.archipelago;
 
 import com.google.gson.annotations.SerializedName;
 
-public class SlotData {
+import java.io.Serializable;
+
+public class SlotData implements Serializable {
     @SerializedName("color_sanity")
-    public boolean ColorSanity;
+    public int ColorSanity;
     @SerializedName("starting_color")
     public int StartColor;
     @SerializedName("fight_locations")
@@ -16,15 +18,15 @@ public class SlotData {
     @SerializedName("event_locations")
     public int EventLocations;
     @SerializedName("include_miniboss_locations")
-    public boolean IncludeMinibossLocations;
+    public int IncludeMinibossLocations;
     @SerializedName("include_power")
-    public boolean IncludePower;
+    public int IncludePower;
     @SerializedName("include_cheat")
-    public boolean IncludeCheat;
+    public int IncludeCheat;
     @SerializedName("set_unlocks_percentage")
     public int SetUnlocksPercentage;
     @SerializedName("gift_pack")
-    public boolean GiftPack;
+    public int GiftPack;
     @SerializedName("gold_percentage")
     public int GoldPercentage;
     @SerializedName("mana_shard_percentage")
@@ -34,11 +36,13 @@ public class SlotData {
     @SerializedName("equipment_percentage")
     public int EquipmentPercentage;
     @SerializedName("try_include_all_equipment")
-    public boolean TryIncludeAllEquipment;
+    public int TryIncludeAllEquipment;
     @SerializedName("min_shop_price")
     public int MinShopPrice;
     @SerializedName("max_shop_price")
     public int MaxShopPrice;
     @SerializedName("gold_multiplier_percentage")
     public int GoldMultiplierPercentage;
+    @SerializedName("seed")
+    public String Seed;
 }
