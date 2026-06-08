@@ -11,6 +11,10 @@ public interface IPreferences<T extends IPreferences.IPref> {
     default void setPref(T q0, boolean val) {
         setPref(q0, String.valueOf(val));
     }
+    
+    default void togglePrefBoolean(final T q0) {
+        setPref(q0, !getPrefBoolean(q0));
+    }
 
     String getPref(T fp0);
 
