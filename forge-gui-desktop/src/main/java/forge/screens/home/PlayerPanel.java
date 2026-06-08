@@ -135,11 +135,10 @@ public class PlayerPanel extends FPanel {
         this.add(closeBtn, "w 20, h 20, pos (container.w-20) 0");
 
         createAvatar();
-        this.add(avatarLabel, "spany 2, width 80px, height 80px");
+        this.add(avatarLabel, "cell 0 0, spany 2, split 2, width 80px, height 80px");
 
-        /*TODO Layout and Override for PC*/
-        //createSleeve();
-        //this.add(sleeveLabel, "spany 2, width 60px, height 80px");
+        createSleeve();
+        this.add(sleeveLabel, "width 58px, height 80px, gapleft 5px");
 
         createNameEditor();
         this.add(lobby.newLabel(localizer.getMessage("lblName") +":"), "w 40px, h 30px, gaptop 5px");

@@ -17,13 +17,23 @@ import forge.toolbox.FSkin;
 import forge.util.Localizer;
 import forge.view.FDialog;
 
+/**
+ * Modal lobby dialog for choosing a player's card-back sleeve, shown as a grid of the
+ * available built-in sleeves. The dialog only builds the grid; the caller wires the
+ * click behaviour through {@link #getSelectables()}.
+ */
 @SuppressWarnings("serial")
 public class SleeveSelector extends FDialog {
     private final List<FLabel> selectables = new ArrayList<>();
     private final Map<Integer, FSkin.SkinImage> sleeveMap = FSkin.getSleeves();
 
+    /**
+     * @param playerName   shown in the dialog title
+     * @param currentIndex the sleeve currently chosen; it is highlighted and given default focus
+     * @param usedIndices  sleeve indices already in use by other players
+     */
     public SleeveSelector(final String playerName, final int currentIndex, final Collection<Integer> usedIndices) {
-        this.setTitle(Localizer.getInstance().getMessage("lblSelectSleevesFroPlayer", playerName));
+        this.setTitle(Localizer.getInstance().getMessage("lblSelectSleeveForPlayer", playerName));
 
         final JPanel pnlSleevePics = new JPanel(new WrapLayout());
 
@@ -54,7 +64,7 @@ public class SleeveSelector extends FDialog {
                 .iconInBackground(true).hoverable(true).selectable(true).selected(oldIndex == index0)
                 .unhoveredAlpha(oldIndex == index0 ? 0.9f : 0.7f).build();
 
-        final Dimension size = new Dimension(60, 80);
+        final Dimension size = new Dimension(116, 160);
         lbl.setPreferredSize(size);
         lbl.setMaximumSize(size);
         lbl.setMinimumSize(size);
@@ -69,6 +79,10 @@ public class SleeveSelector extends FDialog {
         return lbl;
     }
 
+    /**
+     * The selectable sleeve labels, one per sleeve. Each label is named {@code "SleeveLabel" + index};
+     * callers parse that index (e.g. via {@code name.substring(11)}) to apply the chosen sleeve.
+     */
     public List<FLabel> getSelectables() {
         return this.selectables;
     }

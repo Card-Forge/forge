@@ -121,7 +121,8 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
 
     private BufferedImage getImage() {
         if (!mayView) {
-            return ImageCache.getOriginalImage(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), true, null);
+            return ImageCache.getOriginalImage(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), true,
+                    displayed instanceof CardStateView ? ((CardStateView) displayed).getCard() : null);
         }
 
         if (displayed instanceof InventoryItem) {
