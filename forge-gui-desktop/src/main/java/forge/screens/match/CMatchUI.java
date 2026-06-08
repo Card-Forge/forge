@@ -66,6 +66,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.interfaces.IGameController;
@@ -106,6 +107,7 @@ import forge.screens.match.controllers.CLog;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
 import forge.screens.match.menus.CMatchUIMenus;
+import forge.screens.match.views.VDrawOfferDialog;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
 import forge.toolbox.FButton;
@@ -161,6 +163,7 @@ public final class CMatchUI
     private boolean allHands;
     private boolean showOverlay = true;
     private JPopupMenu openAbilityMenu;
+    private CardPanel lastClickedCardPanel;
 
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
 
@@ -232,6 +235,44 @@ public final class CMatchUI
     @Override
     protected void afterDeltaApplied() {
         refreshAllViews();
+    }
+
+    private VDrawOfferDialog drawOfferDialog;
+
+    @Override
+    public void updateDrawOffer(final DrawOfferMessage.Status update) {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (update.result() != null) {
+                if (drawOfferDialog == null) {
+                    drawOfferDialog = new VDrawOfferDialog(this);
+                }
+                drawOfferDialog.showResult(update);
+                drawOfferDialog = null;
+                return;
+            }
+            PlayerView localTarget = null;
+            for (final PlayerView lp : getLocalPlayers()) {
+                if (update.isPending(lp)) {
+                    localTarget = lp;
+                    break;
+                }
+            }
+            if (localTarget != null) {
+                // a local player still owes a vote — always (re)present it, even if previously hidden
+                if (drawOfferDialog == null) {
+                    drawOfferDialog = new VDrawOfferDialog(this);
+                }
+                drawOfferDialog.refresh(update, localTarget);
+            } else {
+                // only watchers locally — show the read-only tally but respect dismissal
+                if (drawOfferDialog == null) {
+                    drawOfferDialog = new VDrawOfferDialog(this);
+                } else if (!drawOfferDialog.isVisible()) {
+                    return;
+                }
+                drawOfferDialog.refresh(update, null);
+            }
+        });
     }
 
     @Override
@@ -688,6 +729,30 @@ public final class CMatchUI
     }
 
     @Override
+    public void setWeaklySelectable(final Iterable<CardView> cards) {
+        super.setWeaklySelectable(cards);
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+            FloatingZone.refreshAll();
+        });
+    }
+
+    @Override
+    public void clearWeaklySelectable() {
+        super.clearWeaklySelectable();
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+            FloatingZone.refreshAll();
+        });
+    }
+
+    @Override
     public void refreshField() {
         super.refreshField();
         FThreads.invokeInEdtNowOrLater(() -> {
@@ -763,6 +828,10 @@ public final class CMatchUI
             panels.addAll(f.getTabletop().getCardPanels());
         }
         return panels;
+    }
+
+    public void setLastClickedCardPanel(final CardPanel panel) {
+        lastClickedCardPanel = panel;
     }
 
     /**
@@ -1012,11 +1081,14 @@ public final class CMatchUI
             // TODO: do we need a user setting for the scrollCount?
             MenuScroller.setScrollerFor(menu, 8, 125, 3, 1);
 
-            final CardPanel panel = findCardPanel(hostCard);
+            // Prefer the panel the user clicked so the menu opens there if the card shows in multiple windows
+            final CardPanel panel = lastClickedCardPanel != null && lastClickedCardPanel.isShowing()
+                    && hostCard.equals(lastClickedCardPanel.getCard())
+                    ? lastClickedCardPanel : findCardPanel(hostCard);
             final Component menuParent;
             final int x, y;
-            if (panel == null) {
-                // Fall back to showing in VPrompt if no panel can be found
+            if (panel == null || !panel.isShowing()) {
+                // Fall back to VPrompt when there's no on-screen anchor — panel missing, or hidden (e.g. a closed Sideboard window)
                 menuParent = getCPrompt().getView().getTarMessage();
                 x = 0;
                 y = 0;

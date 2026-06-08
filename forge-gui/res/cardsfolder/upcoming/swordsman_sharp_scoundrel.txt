@@ -1,0 +1,11 @@
+Name:Swordsman, Sharp Scoundrel
+ManaCost:1 B
+Types:Legendary Creature Human Hero Villain
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Villain.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another Villain you control enters, attach up to one target Equipment you control to target creature you control.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Equipment.YouCtrl | ValidTgtDesc$ Equipment you control | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ Select creature you control
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+equipped | TriggerZones$ Battlefield | Execute$ TrigConnive | TriggerDescription$ Whenever an equipped creature you control attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:TrigConnive:DB$ Connive | Defined$ TriggeredAttackerLKICopy
+DeckHints:Type$Villain|Equipment
+Oracle:Whenever another Villain you control enters, attach up to one target Equipment you control to target creature you control.\nWhenever an equipped creature you control attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

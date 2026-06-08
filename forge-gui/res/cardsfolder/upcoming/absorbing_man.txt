@@ -1,0 +1,8 @@
+Name:Absorbing Man
+ManaCost:1 G U
+Types:Legendary Creature Human Villain
+PT:4/4
+K:Vigilance
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | Execute$ TrigClone | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your first main phase, until your next turn, CARDNAME becomes a copy of up to one target artifact, non-Aura enchantment, or land, except his name is Absorbing Man, he's a legendary 4/4 Human Villain creature in addition to his other types, and he has vigilance.
+SVar:TrigClone:DB$ Clone | ValidTgts$ Artifact,Enchantment.nonAura,Land | ValidTgtDesc$ artifact, non-Aura enchantment, or land | TargetMin$ 0 | TargetMax$ 1 | Duration$ UntilYourNextTurn | NewName$ Absorbing Man | AddTypes$ Legendary & Creature & Human & Villain | SetPower$ 4 | SetToughness$ 4 | AddKeywords$ Vigilance
+Oracle:Vigilance\nAt the beginning of your first main phase, until your next turn, Absorbing Man becomes a copy of up to one target artifact, non-Aura enchantment, or land, except his name is Absorbing Man, he's a legendary 4/4 Human Villain creature in addition to his other types, and he has vigilance.

@@ -1331,12 +1331,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void removeUntilLeavesBattlefield(final Card c) {
         untilLeavesBattlefield = view.removeCard(untilLeavesBattlefield, c, TrackableProperty.UntilLeavesBattlefield);
     }
-    public final void removeUntilLeavesBattlefield(final Iterable<Card> cards) {
-        untilLeavesBattlefield = view.removeCards(untilLeavesBattlefield, cards, TrackableProperty.UntilLeavesBattlefield);
-    }
-    public final void clearUntilLeavesBattlefield() {
-        untilLeavesBattlefield = view.clearCards(untilLeavesBattlefield, TrackableProperty.UntilLeavesBattlefield);
-    }
 
     public final CardCollectionView getExiledCards() {
         return CardCollection.getView(exiledCards);
@@ -1355,12 +1349,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final void removeExiledCard(final Card c) {
         exiledCards = view.removeCard(exiledCards, c, TrackableProperty.ExiledCards);
-    }
-    public final void removeExiledCards(final Iterable<Card> cards) {
-        exiledCards = view.removeCards(exiledCards, cards, TrackableProperty.ExiledCards);
-    }
-    public final void clearExiledCards() {
-        exiledCards = view.clearCards(exiledCards, TrackableProperty.ExiledCards);
     }
 
     public final CardCollectionView getHauntedBy() {
@@ -2561,17 +2549,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     sbLong.append("\r\n");
                 } else if (keyword.startsWith("Protection:")) {
                     final String[] k = keyword.split(":");
-                    sbLong.append("Protection from ");
                     if (k.length > 2) {
-                        sbLong.append(k[2]);
+                        sbLong.append("Protection from ").append(k[2]);
                     } else {
-                        if (MagicColor.Constant.ONLY_COLORS.contains(k[1])) {
-                            // lower-case color
-                            sbLong.append(k[1]);
-                        } else {
-                            // plural card types
-                            sbLong.append(CardType.getPluralType(k[1]));
-                        }
+                        sbLong.append(inst.getTitle());
                     }
                     sbLong.append("\r\n");
                 } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
@@ -2600,7 +2581,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing:")
                         || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway") || keyword.startsWith("Toxic")
                         || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
-                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Ripple")) {
+                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Ripple")
+                        || keyword.startsWith("Ward")) {
                     sbLong.append(inst.getTitle()).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner with:")) {
                     final String[] k = keyword.split(":");
@@ -2678,17 +2660,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     }
                     sb.append(descStr).append(" ").append(" (").append(inst.getReminderText()).append(")");
                     printedKW.add(keyword);
-                } else if (keyword.startsWith("Ward")) {
-                    final String[] k = keyword.split(":");
-                    final Cost cost = new Cost(k[1], false);
-                    final boolean onlyMana = cost.isOnlyManaCost();
-                    final boolean complex = k[1].contains("X") || (k[1].contains (" ") && k[1].contains("<"));
-                    final String extra = k.length > 2 ? ", " + k[2] + "." : "";
-
-                    sbLong.append(k[0]).append(onlyMana ? " " : "—").append(cost.toSimpleString());
-                    sbLong.append(onlyMana? "" : ".").append(extra);
-                    sbLong.append(!complex ? " (" + (inst.getReminderText()) + ")" : "");
-                    sbLong.append("\r\n");
                 } else if (keyword.startsWith("Offering")) {
                     String type = keyword.split(":")[1];
                     if (sb.length() != 0) {
@@ -2926,6 +2897,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         if (isCloaked()) {
             sb.append("Cloaked\r\n");
+        }
+        if (isPrepared()) {
+            sb.append("Prepared\r\n");
         }
         String keywordText = keywordsToText(getUnhiddenKeywords(state).getValues());
         sb.append(keywordText).append(keywordText.length() > 0 ? linebreak : "");
@@ -6609,6 +6583,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public Card getPrepared() {
         return preparedEffect;
     }
+    public Card getPreparedSpell() {
+        return preparedEffect == null ? null : (Card) preparedEffect.getFirstRemembered();
+    }
     public void setPrepared(final Card eff) {
         if (eff == null && preparedEffect != null) {
             Card prepared = (Card) preparedEffect.getFirstRemembered();
@@ -6618,6 +6595,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             game.getAction().exileEffect(preparedEffect);
         }
         preparedEffect = eff;
+        view.updatePreparedSpell(this);
+        updateAbilityTextForView();
     }
 
     public final boolean isManifested() {

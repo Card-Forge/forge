@@ -1,0 +1,16 @@
+Name:Thor, God of Thunder
+ManaCost:3 R R
+Types:Legendary Creature God Warrior Hero
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When NICKNAME enters, exile target Equipment, instant, or sorcery card from your graveyard. Until the end of your next turn, you may play that card.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Equipment.YouOwn,Instant.YouOwn,Sorcery.YouOwn | ValidTgtDesc$ Equipment, instant, or sorcery card in your graveyard | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:STPlay:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | Description$ Until the end of your next turn, you may play that card.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, NICKNAME deals damage equal to that spell's mana value to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:TriggeredSpellAbility$CardManaCostLKI
+DeckHas:Ability$Graveyard
+DeckHints:Type$Equipment|Instant|Sorcery
+Oracle:Flying\nWhen Thor enters, exile target Equipment, instant, or sorcery card from your graveyard. Until the end of your next turn, you may play that card.\nWhenever you cast a noncreature spell, Thor deals damage equal to that spell's mana value to any target.

@@ -339,7 +339,6 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             }
         });
 
-
         GuiUtils.addMenuItem(menu, localizer.getMessage("lblSets") + "...", null, () -> {
             final DeckSetFilter existingFilter = getFilter(DeckSetFilter.class);
             if (existingFilter != null) {
@@ -422,6 +421,13 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
 
+        if (deck != null && DeckProxy.getEventTag(deck.getDeck(), "eventFormat") != null) {
+            screen = CEditorLimited.networkEventEditorScreen(deck.getDeck());
+            editorCtrl = new CEditorLimited<>(FModel.getDecks().getNetworkEventDecks(), Deck::new, screen, getCDetailPicture());
+            openEditor(deck, screen, editorCtrl);
+            return;
+        }
+
         switch (this.gameType) {
             case Quest:
                 screen = FScreen.DECK_EDITOR_QUEST;
@@ -469,6 +475,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 return;
         }
 
+        openEditor(deck, screen, editorCtrl);
+    }
+
+    private void openEditor(final DeckProxy deck, final FScreen screen, final ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl) {
         if (!Singletons.getControl().ensureScreenActive(screen)) {
             return;
         }

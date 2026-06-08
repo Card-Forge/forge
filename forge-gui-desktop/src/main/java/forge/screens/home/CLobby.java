@@ -2,8 +2,10 @@ package forge.screens.home;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import java.util.function.Consumer;
 
@@ -256,12 +258,19 @@ public class CLobby implements IDraftEventHandler {
     }
 
     void scanAvailableEvents() {
-        LinkedHashSet<String> eventIds = new LinkedHashSet<>();
+        Map<String, String> datesByEventId = new LinkedHashMap<>();
         for (Deck d : FModel.getDecks().getNetworkEventDecks()) {
             String eventId = DeckProxy.getEventTag(d, "eventId");
-            if (eventId != null) eventIds.add(eventId);
+            if (eventId != null) {
+                datesByEventId.putIfAbsent(eventId, DeckProxy.getEventTag(d, "eventDate"));
+            }
         }
-        eventIdsByDropdownIndex = new ArrayList<>(eventIds);
+        List<String> ids = new ArrayList<>(datesByEventId.keySet());
+        // eventDate is "yyyy-MM-dd HH:mm", so reverse lexical order lists newest first
+        ids.sort(Comparator.comparing(
+                (String id) -> datesByEventId.get(id) != null ? datesByEventId.get(id) : "",
+                Comparator.reverseOrder()));
+        eventIdsByDropdownIndex = ids;
     }
 
     void openEventConfigDialog() {
@@ -367,6 +376,8 @@ public class CLobby implements IDraftEventHandler {
                 Localizer.getInstance().getMessage("lblNetworkLoadPastEventPrompt"), choices);
         if (chosen == null) return;
         activeEventId = chosen.id();
+        activeConformance = true;
+        view.setConformanceSelected(true);
         view.updateEventPanelState();
         view.updateActionButtons();
         view.updateDeckListFilter();
@@ -516,10 +527,11 @@ public class CLobby implements IDraftEventHandler {
                 networkDraftEditor = null;
             } else {
                 FModel.getDecks().getNetworkEventDecks().add(pool);
+                final FScreen screen = CEditorLimited.networkEventEditorScreen(pool);
                 CEditorLimited<Deck> editor = new CEditorLimited<>(
                         FModel.getDecks().getNetworkEventDecks(), Deck::new,
-                        FScreen.DECK_EDITOR_SEALED, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
-                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_SEALED);
+                        screen, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
+                Singletons.getControl().setCurrentScreen(screen);
                 CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editor);
                 editor.getDeckController().load(null, pool.getName());
             }

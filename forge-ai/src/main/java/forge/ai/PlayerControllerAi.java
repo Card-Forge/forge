@@ -401,6 +401,11 @@ public class PlayerControllerAi extends PlayerController {
         return getAi().confirmStaticApplication(hostCard, logic);
     }
 
+    // TODO: accept based on game state (infinite loop / unwinnable position); always declines for now
+    public boolean acceptsDrawOffer() {
+        return false;
+    }
+
     @Override
     public boolean confirmTrigger(WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();

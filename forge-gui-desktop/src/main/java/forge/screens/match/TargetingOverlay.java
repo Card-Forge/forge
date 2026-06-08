@@ -463,7 +463,7 @@ public class TargetingOverlay {
                 addArc(endpoints.get(defender.getId()), endpoints.get(c.getId()), ArcConnection.FoesAttacking);
             }
             // if c is attacking a player
-	    if (defender instanceof PlayerView) {
+            if (defender instanceof PlayerView) {
                 final JPanel avatarArea = matchUI.getFieldViewFor((PlayerView)defender).getAvatarArea();
                 if(avatarArea.isShowing()) {
                     Point locOnScreen = this.getPanel().getLocationOnScreen();

@@ -109,7 +109,7 @@ public class GameCopier {
             newPlayer.setCrankCounter(origPlayer.getCrankCounter());
             // TODO creatureAttackedThisTurn
             for (Mana m : origPlayer.getManaPool()) {
-                newPlayer.getManaPool().addMana(m, false);
+                newPlayer.getManaPool().addManaNoEvent(m);
             }
             playerMap.put(origPlayer, newPlayer);
         }

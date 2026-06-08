@@ -515,4 +515,5 @@ RU72 R The Rhystic Storyteller @
 RW90a R The Keeper of Favorite Cards @
 RW90b R The Keeper of Favorite Cards @
 RW90c R The Keeper of Favorite Cards @
+RW90d R The Keeper of Favorite Cards @
 MZ99 M The Collector @

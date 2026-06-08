@@ -69,7 +69,7 @@ public final class MenuUtil {
     public static JCheckBoxMenuItem createStayOpenCheckBox(final String text) {
         return new JCheckBoxMenuItem(text) {
             @Override protected void processMouseEvent(final MouseEvent e) {
-                handleStayOpen(this, e, super::processMouseEvent);
+                MenuUtil.handleStayOpen(this, e, super::processMouseEvent);
             }
         };
     }
@@ -78,7 +78,7 @@ public final class MenuUtil {
     public static JRadioButtonMenuItem createStayOpenRadioButton(final String text) {
         return new JRadioButtonMenuItem(text) {
             @Override protected void processMouseEvent(final MouseEvent e) {
-                handleStayOpen(this, e, super::processMouseEvent);
+                MenuUtil.handleStayOpen(this, e, super::processMouseEvent);
             }
         };
     }
@@ -87,7 +87,7 @@ public final class MenuUtil {
     public static SkinnedCheckBoxMenuItem createStayOpenSkinnedCheckBox(final String text) {
         return new SkinnedCheckBoxMenuItem(text) {
             @Override protected void processMouseEvent(final MouseEvent e) {
-                handleStayOpen(this, e, super::processMouseEvent);
+                MenuUtil.handleStayOpen(this, e, super::processMouseEvent);
             }
         };
     }
@@ -96,7 +96,7 @@ public final class MenuUtil {
     public static SkinnedRadioButtonMenuItem createStayOpenSkinnedRadioButton(final String text) {
         return new SkinnedRadioButtonMenuItem(text) {
             @Override protected void processMouseEvent(final MouseEvent e) {
-                handleStayOpen(this, e, super::processMouseEvent);
+                MenuUtil.handleStayOpen(this, e, super::processMouseEvent);
             }
         };
     }

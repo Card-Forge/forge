@@ -1,0 +1,8 @@
+Name:Black Widow, Double Agent
+ManaCost:1 W B
+Types:Legendary Creature Human Hero Villain
+PT:3/2
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gains first strike and menace until end of turn. (It can't be blocked except by two or more creatures.)
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ First Strike & Menace
+Oracle:Deathtouch\nWhenever a creature you control attacks alone, it gains first strike and menace until end of turn. (It can't be blocked except by two or more creatures.)

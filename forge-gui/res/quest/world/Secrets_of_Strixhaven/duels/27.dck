@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Trostani
+Title=Trostani
+Icon=Trostani.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Adam_Fischer_-_Selesnya_Landfall_(Standard,_#2933641).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Llanowar Elves
+4 Mightform Harmonizer
+4 Sazh's Chocobo
+3 Mossborn Hydra
+2 Dyadrine, Synthesis Amalgam
+2 Icetill Explorer
+1 Keen-Eyed Curator
+4 Erode
+1 Snakeskin Veil
+2 Bushwhack
+4 Earthbender Ascension
+7 Forest
+4 Escape Tunnel
+4 Fabled Passage
+4 Hushwood Verge
+3 Ba Sing Se
+2 Plains
+1 Temple Garden
+[Sideboard]
+3 Rest in Peace
+3 Sheltered by Ghosts
+3 Surrak, Elusive Hunter
+2 Voice of Victory
+1 Ba Sing Se
+1 Keen-Eyed Curator
+1 Mossborn Hydra
+1 Snakeskin Veil
