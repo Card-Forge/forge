@@ -271,6 +271,7 @@ Shaman:Shamans
 Shapeshifter:Shapeshifters
 Shark:Sharks
 Sheep:Sheep
+Shi'ar:Shi'ar
 Siren:Sirens
 Skeleton:Skeletons
 Skrull:Skrulls
