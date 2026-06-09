@@ -1,0 +1,9 @@
+Name:Suspend Aggression
+ManaCost:1 R W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | ValidTgtDesc$ nonland permanent | ThisDefinedAndTgts$ TopOfLibrary | Destination$ Exile | RememberChanged$ True | SubAbility$ DBRepeatEach
+SVar:DBRepeatEach:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ Remembered | RepeatSubAbility$ DBEffect | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | StaticAbilities$ SusPlay | Duration$ UntilTheEndOfYourNextTurn | ExileOnMoved$ Exile | RememberObjects$ Imprinted | EffectOwner$ ImprintedOwner
+SVar:SusPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayPlayer$ CardOwner | AffectedZone$ Exile | Description$ For each of those cards, its owner may play it until the end of their next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Exile target nonland permanent and the top card of your library. For each of those cards, its owner may play it until the end of their next turn.

@@ -1,0 +1,15 @@
+Name:Thorin, Mountain-king
+ManaCost:3 R
+Types:Legendary Creature Dwarf Noble
+PT:3/4
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When NICKNAME enters, attach any number of target Equipment you control to target creature you control. When one or more Equipment become attached to that creature this way, that creature deals damage equal to its power to up to one target creature.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Equipment.YouCtrl | TargetMin$ 0 | TargetMax$ MaxTargets | ValidTgtDesc$ Equipment you control | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | RememberAttached$ True | SubAbility$ DBImmediateTrig
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | Execute$ TrigDamage | RememberObjects$ ParentTarget | SubAbility$ DBCleanup | TriggerDescription$ When one or more Equipment become attached to that creature this way, that creature deals damage equal to its power to up to one target creature.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | DamageSource$ DelayTriggerRemembered | NumDmg$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:MaxTargets:Count$Valid Equipment.YouCtrl
+SVar:X:TriggerRemembered$CardPower
+DeckHints:Type$Equipment
+Oracle:Trample\nWhen Thorin enters, attach any number of target Equipment you control to target creature you control. When one or more Equipment become attached to that creature this way, that creature deals damage equal to its power to up to one target creature.

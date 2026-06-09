@@ -6,6 +6,7 @@
   - [AI](ai.md)
   - [Network Play](network-play.md)
   - [Advanced search](Advanced-Search.md)
+  - [Advanced Yield Options](Advanced-Yield-Options.md)
 
 - Adventure Mode
 
@@ -49,6 +50,8 @@
   - [Dev Mode](Development/DevMode.md)
   - [Ownership](Development/ownership.md)
   - [Docker Container](docker-setup.md)
+  - [Network Testing](Development/Network-Testing.md)
+  - [UI Guidelines](Development/UI-Guidelines.md)
 
 - Customization & Themes
   - [Skins](Skins.md)

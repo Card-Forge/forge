@@ -39,10 +39,9 @@ public class ComputerUtilAbility {
         if (!game.getStack().isEmpty() || !game.getPhaseHandler().getPhase().isMain()) {
             return null;
         }
-        CardCollection landList = new CardCollection(player.getCardsIn(ZoneType.Hand));
 
         //filter out cards that can't be played
-        landList = CardLists.filter(landList, c -> {
+        CardCollection landList = CardLists.filter(player.getCardsIn(ZoneType.Hand), c -> {
             if (!c.hasPlayableLandFace()) {
                 return false;
             }
@@ -61,9 +60,6 @@ public class ComputerUtilAbility {
             if (!crd.mayPlay(player).isEmpty()) {
                 landList.add(crd);
             }
-        }
-        if (landList.isEmpty()) {
-            return null;
         }
         return landList;
     }
@@ -233,7 +229,7 @@ public class ComputerUtilAbility {
     public static boolean isFullyTargetable(SpellAbility sa) {
         SpellAbility sub = sa;
         while (sub != null) {
-            if (sub.usesTargeting() && sub.getTargetRestrictions().getNumCandidates(sub, true) < sub.getMinTargets()) {
+            if (sub.usesTargeting() && sub.getTargetRestrictions().getNumCandidates(sub) < sub.getMinTargets()) {
                 return false;
             }
             sub = sub.getSubAbility();

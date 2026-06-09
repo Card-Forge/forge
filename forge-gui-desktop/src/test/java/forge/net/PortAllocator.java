@@ -72,7 +72,9 @@ public class PortAllocator {
         try (ServerSocket socket = new ServerSocket()) {
             // Enable address reuse to speed up port availability after close
             socket.setReuseAddress(true);
-            socket.bind(new InetSocketAddress("localhost", port));
+            // Bind to wildcard (all interfaces) to match Netty's b.bind(port);
+            // a loopback-only probe misses ports occupied on other interfaces.
+            socket.bind(new InetSocketAddress(port));
             return true;
         } catch (IOException e) {
             // Port is in use or otherwise unavailable

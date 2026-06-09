@@ -988,6 +988,9 @@ public class AbilityUtils {
             addPlayer(card.getImprintedCards(), defined, players);
         } else if (defined.startsWith("EffectSource")) {
             Card root = findEffectRoot(card);
+            if (root == null) {
+                root = findEffectRoot(sa.getHostCard());
+            }
             if (root != null) {
                 addPlayer(Lists.newArrayList(root), defined, players);
             }
@@ -2198,8 +2201,8 @@ public class AbilityUtils {
             int cmc = c.getCMC();
 
             if (sq[0].contains("LKI") && !c.isInZone(ZoneType.Stack) && c.getManaCost() != null) {
-                if (ctb instanceof SpellAbility && ((SpellAbility) ctb).getXManaCostPaid() != null) {
-                    cmc += ((SpellAbility) ctb).getXManaCostPaid() * c.getManaCost().countX();
+                if (ctb instanceof SpellAbility sa && sa.getXManaCostPaid() != null) {
+                    cmc += sa.getXManaCostPaid() * c.getManaCost().countX();
                 } else {
                     cmc += c.getXManaCostPaid() * c.getManaCost().countX();
                 }
@@ -2977,11 +2980,11 @@ public class AbilityUtils {
         return applyTextChangeEffects(def, ability.getHostCard(), false);
     }
 
-    public static final String applyKeywordTextChangeEffects(final String kw, final Card card) {
+    public static final String applyKeywordTextChangeEffects(final String kw, Map<String,String> colorMap, Map<String,String> typeMap) {
         if (!CardUtil.isKeywordModifiable(kw)) {
             return kw;
         }
-        return applyTextChangeEffects(kw, card, false);
+        return applyTextChangeEffects(kw, false, colorMap, typeMap);
     }
 
     public static final String applyDescriptionTextChangeEffects(final String def, final CardTraitBase ability) {

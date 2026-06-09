@@ -66,6 +66,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private boolean showRanking = false;
     private boolean showPriceInfo = false;
     private boolean multiSelectMode = false;
+    private boolean allowGroupIdentical = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private ContextMenuBuilder<T> contextMenuBuilder;
     private ContextMenu contextMenu;
@@ -962,6 +963,21 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         if(currentSort != null && currentSort.getConfig().getDef() == ColumnDef.PRICE)
             return true;
         return showPriceInfo;
+    }
+
+    public boolean getAllowGroupIdentical() {
+        return allowGroupIdentical;
+    }
+
+    public void setAllowGroupIdentical(boolean allowGroupIdentical0) {
+        if(allowGroupIdentical == allowGroupIdentical0) {
+            return;
+        }
+            
+        allowGroupIdentical = allowGroupIdentical0;
+        if (pool != null) {
+            updateView(false, null);
+        }
     }
 
     public void setWantUnique(boolean unique) {

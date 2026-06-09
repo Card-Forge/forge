@@ -1,7 +1,7 @@
 package forge.gamemodes.net.server;
 
 import forge.gamemodes.net.GameProtocolHandler;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
@@ -9,7 +9,7 @@ import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import io.netty.channel.ChannelHandlerContext;
 
-final class GameServerHandler extends GameProtocolHandler<IGameController> implements IHasNetLog {
+final class GameServerHandler extends GameProtocolHandler<IGameController> implements IHasForgeLog {
 
     private final FServerManager server = FServerManager.getInstance();
 
@@ -33,7 +33,8 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> imple
 
     @Override
     protected IGameController getToInvoke(final ChannelHandlerContext ctx) {
-        return server.getController(getClient(ctx).getIndex());
+        final RemoteClient client = getClient(ctx);
+        return client != null ? server.getController(client.getIndex()) : null;
     }
 
     @Override

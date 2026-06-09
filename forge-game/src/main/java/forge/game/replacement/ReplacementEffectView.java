@@ -25,11 +25,11 @@ public class ReplacementEffectView extends TrackableObject implements IHasCardVi
     }
 
     public CardView getHostCard() {
-        return get(TrackableProperty.RE_HostCard);
+        return get(TrackableProperty.HostCard);
     }
 
     void updateHostCard(ReplacementEffect re) {
-        set(TrackableProperty.RE_HostCard, CardView.get(re.getHostCard()));
+        set(TrackableProperty.HostCard, CardView.get(re.getHostCard()));
     }
 
     @Override
@@ -38,10 +38,10 @@ public class ReplacementEffectView extends TrackableObject implements IHasCardVi
     }
 
     public String getDescription() {
-        return get(TrackableProperty.RE_Description);
+        return get(TrackableProperty.Description);
     }
 
     void updateDescription(ReplacementEffect re) {
-        set(TrackableProperty.RE_Description, re.getDescription());
+        set(TrackableProperty.Description, re.getDescription());
     }
 }

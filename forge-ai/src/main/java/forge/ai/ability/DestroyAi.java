@@ -19,6 +19,8 @@ import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 
 public class DestroyAi extends SpellAbilityAi {
+    private static final String LOGIC_GHOST_QUARTER = "GhostQuarter";
+
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         return checkApiLogic(ai, sa);
@@ -210,16 +212,15 @@ public class DestroyAi extends SpellAbilityAi {
                     if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                         sa.resetTargets();
                         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-                    } else {
-                        // TODO is this good enough? for up to amounts?
-                        break;
                     }
+                    // TODO is this good enough? for up to amounts?
+                    break;
                 }
 
-                Card choice = null;
+                Card choice;
                 // If the targets are only of one type, take the best
                 if (CardLists.getNotType(list, "Creature").isEmpty()) {
-                    choice = ComputerUtilCard.getBestCreatureAI(list);
+                    choice = ComputerUtilCard.getBestRemovalTargetAI(ai, list);
                     if ("OppDestroyYours".equals(logic)) {
                         Card aiBest = ComputerUtilCard.getBestCreatureAI(ai.getCreaturesInPlay());
                         if (ComputerUtilCard.evaluateCreature(aiBest) > ComputerUtilCard.evaluateCreature(choice) - 40) {
@@ -227,17 +228,17 @@ public class DestroyAi extends SpellAbilityAi {
                         }
                     }
                 } else if (CardLists.getNotType(list, "Land").isEmpty()) {
-                    choice = ComputerUtilCard.getBestLandAI(list);
+                    choice = ComputerUtilCard.getBestLandToRemoveAI(ai, list, sa);
 
-                    if ("LandForLand".equals(logic) || "GhostQuarter".equals(logic)) {
-                        // Strip Mine, Wasteland - cut short if the relevant logic fails
+                    if (shouldApplyLandRemovalLogic(sa, logic)) {
+                        // Strip Mine, Wasteland, Dust Bowl, and similar lands.
                         if (!doLandForLandRemovalLogic(sa, ai, choice, logic)) {
                             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                     }
                 } else {
                     // TODO look for "exiled until leaves" of own stuff
-                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list);
+                    choice = ComputerUtilCard.getBestRemovalTargetAI(ai, list);
                 }
                 //option to hold removal instead only applies for single targeted removal
                 if (!sa.isTrigger() && sa.getMaxTargets() == 1) {
@@ -300,6 +301,33 @@ public class DestroyAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
+    private boolean shouldApplyLandRemovalLogic(SpellAbility sa, String logic) {
+        return LOGIC_GHOST_QUARTER.equals(logic) || isLandDestroyAbilityFromLand(sa);
+    }
+
+    private boolean isLandDestroyAbilityFromLand(SpellAbility sa) {
+        Cost cost = sa.getPayCosts();
+        return sa.isActivatedAbility()
+                && sa.getHostCard().getOriginalType().isLand()
+                && cost != null
+                && (cost.hasTapCost() || cost.hasManaCost()
+                        || cost.hasSpecificCostType(CostSacrifice.class));
+    }
+
+    private boolean hasNonSourceLandSacrificeCost(SpellAbility sa) {
+        Cost cost = sa.getPayCosts();
+        if (cost == null) {
+            return false;
+        }
+        for (CostPart part : cost.getCostParts()) {
+            if (part instanceof CostSacrifice && !part.payCostFromSource()
+                    && part.getType().contains("Land")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final boolean noRegen = sa.hasParam("NoRegen");
@@ -353,7 +381,7 @@ public class DestroyAi extends SpellAbilityAi {
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 } else {
-                    Card c = ComputerUtilCard.getBestAI(preferred);
+                    Card c = ComputerUtilCard.getBestRemovalTargetAI(ai, preferred);
 
                     if (sa.canTarget(c)) {
                         sa.getTargets().add(c);
@@ -425,26 +453,45 @@ public class DestroyAi extends SpellAbilityAi {
         boolean canColorLock = (oppSkippedLandDrop || oppLands.size() > 3)
                 && tgtLand.isBasicLand() && CardLists.count(oppLands, CardPredicates.nameEquals(tgtLand.getName())) == 1;
 
-        // Non-basic lands are currently not ranked in any way in ComputerUtilCard#getBestLandAI, so if a non-basic land is best target,
-        // consider killing it off unless there's too much potential tempo loss.
-        // TODO: actually rank non-basics in that method and then kill off the potentially dangerous (manlands, Valakut) or lucrative
-        // (dual/triple mana that opens access to a certain color) lands
-        boolean nonBasicTgt = !tgtLand.isBasicLand();
+        int targetPriority = ComputerUtilCard.evaluateLandRemovalPriority(ai, tgtLand, sa);
+        boolean mediumPriorityTgt = targetPriority >= 50;
+        boolean highPriorityTgt = targetPriority >= 150;
 
         // Try not to lose tempo too much and not to mana-screw yourself when considering this logic
         int numLandsInHand = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS_PRODUCING_MANA);
         int numLandsOTB = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
 
         // If the opponent skipped a land drop, consider not looking at having the extra land in hand if the profile allows it
-        boolean isHighPriority = highPriorityIfNoLandDrop && oppSkippedLandDrop;
+        boolean isHighPriority = highPriorityTgt || (highPriorityIfNoLandDrop && oppSkippedLandDrop);
 
-        boolean timingCheck = canManaLock || canColorLock || nonBasicTgt;
+        boolean timingCheck = canManaLock || canColorLock || mediumPriorityTgt;
         boolean tempoCheck = numLandsOTB >= amountNoTempoCheck
                 || ((numLandsInHand >= amountLandsInHand || isHighPriority) && ((numLandsInHand + numLandsOTB >= amountNoTimingCheck) || timingCheck));
 
+        // Dust Bowl-style costs are not a simple land-for-land exchange: the
+        // AI spends mana, taps a mana source, and sacrifices another land. Only
+        // accept that rate for a real lock or a high-priority land.
+        int manaCost = sa.getPayCosts() == null ? 0 : sa.getPayCosts().getTotalMana().getCMC();
+        if ((hasNonSourceLandSacrificeCost(sa) || manaCost >= 2)
+                && !highPriorityTgt && !canManaLock && !canColorLock) {
+            return false;
+        }
+
+        // Tectonic Edge, Strip Mine, and Wasteland should not cash in a large
+        // share of the AI's own mana base for a merely medium utility target.
+        boolean sacrificesSourceLand = sa.getHostCard().isLand()
+                && ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts());
+        if (sacrificesSourceLand && !highPriorityTgt && !canManaLock && !canColorLock && numLandsOTB <= 3) {
+            return false;
+        }
+
+        if (!mediumPriorityTgt && ai.getGame().getPlayers().size() > 2 && !canManaLock && !canColorLock) {
+            return false;
+        }
+
         // For Ghost Quarter, only use it if you have either more lands in play than your opponent
         // or the same number of lands but an extra land in hand (otherwise the AI plays too suboptimally)
-        if ("GhostQuarter".equals(logic)) {
+        if (LOGIC_GHOST_QUARTER.equals(logic)) {
             return tempoCheck && (numLandsOTB > oppLands.size() || (numLandsOTB == oppLands.size() && numLandsInHand > 0));
         } else {
             return tempoCheck;

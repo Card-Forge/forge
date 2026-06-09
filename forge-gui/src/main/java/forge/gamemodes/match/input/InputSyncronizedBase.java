@@ -1,13 +1,13 @@
 package forge.gamemodes.match.input;
 
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gui.FThreads;
 import forge.gui.error.BugReporter;
 import forge.player.PlayerControllerHuman;
 
 import java.util.concurrent.CountDownLatch;
 
-public abstract class InputSyncronizedBase extends InputBase implements InputSynchronized, IHasNetLog {
+public abstract class InputSyncronizedBase extends InputBase implements InputSynchronized, IHasForgeLog {
 
     private static final long serialVersionUID = 8756177361251703052L;
     private final CountDownLatch cdlDone;

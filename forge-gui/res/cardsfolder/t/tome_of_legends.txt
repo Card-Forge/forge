@@ -1,6 +1,6 @@
 Name:Tome of Legends
 ManaCost:2
-Types:Artifact
+Types:Artifact Book
 K:etbCounter:PAGE:1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.IsCommander+YouOwn | Execute$ TrigPutCounter | TriggerDescription$ Whenever your commander enters or attacks, put a page counter on CARDNAME.
 T:Mode$ Attacks | ValidCard$ Card.IsCommander+YouOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever your commander enters or attacks, put a page counter on CARDNAME.

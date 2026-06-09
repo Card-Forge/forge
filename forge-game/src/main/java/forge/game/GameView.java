@@ -1,6 +1,7 @@
 package forge.game;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import com.google.common.collect.Iterables;
@@ -26,6 +27,7 @@ import forge.game.zone.MagicStack;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
+import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
 public class GameView extends TrackableObject {
@@ -63,7 +65,6 @@ public class GameView extends TrackableObject {
     public FCollectionView<PlayerView> getPlayers() {
         return get(TrackableProperty.Players);
     }
-
     public void updatePlayers(final Game game) {
         set(TrackableProperty.Players, PlayerView.getCollection(game.getPlayers()));
     }
@@ -91,7 +92,6 @@ public class GameView extends TrackableObject {
     public int getTurn() {
         return get(TrackableProperty.Turn);
     }
-
     void updateTurn(PhaseHandler phaseHandler) {
         set(TrackableProperty.Turn, phaseHandler.getTurn());
     }
@@ -99,7 +99,6 @@ public class GameView extends TrackableObject {
     public PhaseType getPhase() {
         return get(TrackableProperty.Phase);
     }
-
     void updatePhase(PhaseHandler phaseHandler) {
         set(TrackableProperty.Phase, phaseHandler.getPhase());
     }
@@ -107,7 +106,6 @@ public class GameView extends TrackableObject {
     public PlayerView getPlayerTurn() {
         return get(TrackableProperty.PlayerTurn);
     }
-
     void updatePlayerTurn(PhaseHandler phaseHandler) {
         set(TrackableProperty.PlayerTurn, PlayerView.get(phaseHandler.getPlayerTurn()));
     }
@@ -115,13 +113,12 @@ public class GameView extends TrackableObject {
     public void updatePlanarPlayer(PlayerView p) {
         set(TrackableProperty.PlanarPlayer, p);
     }
-
     public PlayerView getPlanarPlayer() {
         return get(TrackableProperty.PlanarPlayer);
     }
 
     public FCollectionView<StackItemView> getStack() {
-        return get(TrackableProperty.Stack);
+        return Objects.requireNonNullElse(get(TrackableProperty.Stack), FCollection.getEmpty());
     }
 
     public StackItemView peekStack() {
@@ -137,30 +134,22 @@ public class GameView extends TrackableObject {
         set(TrackableProperty.StormCount, stack.getSpellsCastThisTurn().size());
     }
 
-    public boolean isFirstGameInMatch() {
-        return getNumPlayedGamesInMatch() == 0;
-    }
-
     public int getNumPlayedGamesInMatch() {
         return get(TrackableProperty.NumPlayedGamesInMatch);
+    }
+
+    public boolean isMulligan() {
+        return get(TrackableProperty.Mulligan);
+    }
+    public void updateIsMulligan(boolean value) {
+        set(TrackableProperty.Mulligan, value);
     }
 
     public boolean isGameOver() {
         return get(TrackableProperty.GameOver);
     }
-
     public boolean isMatchOver() {
         return get(TrackableProperty.MatchOver);
-    }
-
-    public boolean isMulligan() {
-        if (get(TrackableProperty.Mulligan) == null)
-            return false;
-        return get(TrackableProperty.Mulligan);
-    }
-
-    public void updateIsMulligan(boolean value) {
-        set(TrackableProperty.Mulligan, value);
     }
 
     public String getWinningPlayerName() {

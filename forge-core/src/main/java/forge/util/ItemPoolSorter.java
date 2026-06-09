@@ -17,8 +17,6 @@
  */
 package forge.util;
 
-import forge.item.PaperCard;
-
 import java.util.Comparator;
 import java.util.Map.Entry;
 import java.util.function.Function;
@@ -54,9 +52,6 @@ public class ItemPoolSorter<T> implements Comparator<Entry<T, Integer>> {
         this.field = field;
         this.ascending = inAscending;
     }
-
-    /** The Constant byNameThenSet. */
-    public static final ItemPoolSorter<PaperCard> BY_NAME_THEN_SET = new ItemPoolSorter<>(Entry::getKey, true);
 
     /*
      * (non-Javadoc)

@@ -127,7 +127,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;tinder wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Jolly Gerbils|BLB&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;Tinder Wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Jolly Gerbils|BLB&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
     <property name="enemy" value="Santa"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
@@ -533,7 +533,7 @@ With that, he vanishes in a cloud of smoke. Almost immediately after, another be
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;tinder wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;Tinder Wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
     <property name="enemy" value="Santa"/>
     <property name="spawn.Hard" type="bool" value="false"/>
     <property name="spawn.Insane" type="bool" value="false"/>

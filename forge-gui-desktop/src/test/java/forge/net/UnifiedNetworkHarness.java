@@ -11,11 +11,13 @@ import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
-import forge.gamemodes.net.IHasNetLog;
+import forge.gamemodes.net.ChatMessage;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkByteTracker;
 import forge.gamemodes.net.NetworkLogConfig;
 import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.server.FServerManager;
+import forge.gamemodes.net.server.RemoteClient;
 import forge.gamemodes.net.server.ServerGameLobby;
 import forge.interfaces.ILobbyListener;
 
@@ -51,7 +53,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *     .playerCount(2).remoteClients(1).execute();
  * </pre>
  */
-public class UnifiedNetworkHarness implements IHasNetLog {
+public class UnifiedNetworkHarness implements IHasForgeLog {
 
     private static final String[] PLAYER_NAMES = {"Alice (Host AI)", "Bob (Remote)", "Charlie (Remote)", "Diana (Remote)"};
 
@@ -166,7 +168,7 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         long startTime = System.currentTimeMillis();
 
         try {
-            ensureFModelInitialized();
+            TestUtils.ensureFModelInitialized();
 
             int port = (specifiedPort > 0) ? specifiedPort : PortAllocator.allocatePort();
             result.port = port;
@@ -255,7 +257,7 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         AtomicInteger successfulConnections = new AtomicInteger(0);
 
         try {
-            ensureFModelInitialized();
+            TestUtils.ensureFModelInitialized();
 
             int port = (specifiedPort > 0) ? specifiedPort : PortAllocator.allocatePort();
             result.port = port;
@@ -472,10 +474,6 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         }
     }
 
-    private void ensureFModelInitialized() {
-        TestUtils.ensureFModelInitialized();
-    }
-
     private List<Deck> getDecks(int count) {
         if (decks != null && decks.size() >= count) {
             return decks.subList(0, count);
@@ -496,7 +494,7 @@ public class UnifiedNetworkHarness implements IHasNetLog {
             }
 
             @Override
-            public void message(String source, String message) {
+            public void message(String source, String message, ChatMessage.MessageType type) {
                 netLog.info("Lobby message from {}: {}", source, message);
             }
 
@@ -661,9 +659,15 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         for (int i = 1; i <= remoteClientCount; i++) {
             LobbySlot slot = lobby.getSlot(i);
             String playerName = slot.getName();
-            server.convertToAI(i, playerName);
-            netLog.info("  Slot {} ({}): converted to AI via server.convertToAI",
-                    i, playerName);
+            RemoteClient client = server.findClientByIndex(i);
+            if (client != null) {
+                server.convertToAI(client);
+                netLog.info("  Slot {} ({}): converted to AI via server.convertToAI",
+                        i, playerName);
+            } else {
+                netLog.warn("  Slot {} ({}): no connected client found, skipping",
+                        i, playerName);
+            }
         }
     }
 

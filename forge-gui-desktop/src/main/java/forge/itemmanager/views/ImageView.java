@@ -1093,9 +1093,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         InventoryItem item = itemInfo.item;
                         itemInfo.alt = false;
                         if (!FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER)) {
-                            if ((hoveredItem == null || !hoveredItem.item.equals(item)) || (FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS))) {
-                                if (item instanceof PaperCard) {
-                                    if (((PaperCard)item).hasBackFace()) {
+                            if ((hoveredItem == null || !hoveredItem.item.equals(item)) || FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS)) {
+                                if (item instanceof PaperCard pc) {
+                                    if (pc.hasBackFace()) {
                                         if (item.equals(lastAltCard)) {
                                             itemInfo.alt = true;
                                             lastAltCard = null;
@@ -1238,8 +1238,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
                 
                 // Draw key card indicator if applicable
-                drawKeyCardIndicator(g, (PaperCard) paperCard, bounds);
-                
+                if (paperCard instanceof PaperCard pc) {
+                    drawKeyCardIndicator(g, pc, bounds);
+                }
+
                 //draw draft ranking
                 if (showRanking && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_OVERLAY_DRAFT_RANKING)) {
                     double score = CardRanker.getRawScore((PaperCard) item);

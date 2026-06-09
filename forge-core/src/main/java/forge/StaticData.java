@@ -66,7 +66,6 @@ public class StaticData {
     public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards) {
         this(cardReader, null, customCardReader, null, editionFolder, customEditionsFolder, blockDataFolder, "", cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false);
     }
-
     public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
@@ -102,7 +101,7 @@ public class StaticData {
             for (CardRules card : cardReader.loadCards()) {
                 if (null == card) continue;
 
-                final String cardName = card.getName();
+                final String cardName = card.getPreInitName();
 
                 if (!loadNonLegalCards && funnyCards.contains(cardName) && !card.getType().isBasicLand())
                     filtered.add(cardName);
@@ -119,7 +118,7 @@ public class StaticData {
 
                     final String cardName = card.getName();
                     card.setCustom();
-                    if(card.isVariant()) { //Append loaded custom cards to the respective list.
+                    if (card.isVariant()) { //Append loaded custom cards to the respective list.
                         variantsCards.put(cardName, card);
                     } else {
                         regularCards.put(cardName, card);
@@ -415,7 +414,6 @@ public class StaticData {
     public boolean allowCustomCardsInDecksConformance() {
         return this.allowCustomCardsInDecksConformance;
     }
-
 
     public void setStandardPredicate(Predicate<PaperCard> standardPredicate) { this.standardPredicate = standardPredicate; }
 

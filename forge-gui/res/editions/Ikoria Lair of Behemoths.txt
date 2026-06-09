@@ -115,7 +115,7 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 104 U Void Beckoner @Daarken
 105 C Whisper Squad @Stepan Alekseev
 106 U Zagoth Mamba @Yeong-Hao Han
-107 C Blazing Volley @Heonhwa Choe
+107 C Blazing Volley @Heonhwa
 108 C Blisterspit Gremlin @Simon Dominic
 109 U Blitz of the Thunder-Raptor @Zack Stella
 110 C Cathartic Reunion @Jakub Kasper
@@ -393,6 +393,7 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 371 M Luminous Broodmoth @Nick Southam ${"flavorName": "Mothra, Supersonic Queen"}
 372 U Pollywog Symbiote @Simon Dominic ${"flavorName": "Babygodzilla, Ruin Reborn"}
 373 U Void Beckoner @Zezhou Chen ${"flavorName": "Spacegodzilla, Death Corona"}
+373A U Void Beckoner @Zezhou Chen ${"flavorName": "Spacegodzilla, Void Invader"}
 374 R Everquill Phoenix @JOZ ${"flavorName": "Destoroyah, Perfect Lifeform"}
 375 R Yidaro, Wandering Monster @Yigit Koroglu ${"flavorName": "Godzilla, Doom Inevitable"}
 376 R Gemrazer @Sam Rowan ${"flavorName": "Anguirus, Armored Killer"}

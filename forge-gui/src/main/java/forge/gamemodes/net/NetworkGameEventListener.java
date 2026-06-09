@@ -11,6 +11,7 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.event.GameEventTurnPhase;
+import forge.util.IHasForgeLog;
 
 /**
  * Listener for game events during network play.
@@ -20,7 +21,7 @@ import forge.game.event.GameEventTurnPhase;
  * Log output uses the [GAME EVENT] prefix for easy filtering and
  * clear visual separation from network categories like [DeltaSync].
  */
-public class NetworkGameEventListener implements IHasNetLog {
+public class NetworkGameEventListener implements IHasForgeLog {
 
     private static final String LOG_PREFIX = "[GAME EVENT]";
 

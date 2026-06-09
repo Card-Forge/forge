@@ -302,9 +302,8 @@ public class TokenAi extends SpellAbilityAi {
             if (combat != null && combat.getAttackingPlayer() != null
                     && !combat.getAttackingPlayer().isOpponentOf(ai)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

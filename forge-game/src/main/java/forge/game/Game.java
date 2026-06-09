@@ -51,6 +51,8 @@ import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.tuple.Pair;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -59,6 +61,8 @@ import java.util.function.Predicate;
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
 public class Game {
+
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
 
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
@@ -132,8 +136,9 @@ public class Game {
     private final Match match;
     private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
-    private final Game maingame;
+    private DrawOffer drawOffer;
 
+    private final Game maingame;
     private final GameView view;
     private final Tracker tracker = new Tracker();
 
@@ -151,6 +156,13 @@ public class Game {
     }
     public void setStartingPlayer(final Player p) {
         startingPlayer = p;
+    }
+
+    public DrawOffer getDrawOffer() {
+        return drawOffer;
+    }
+    public void setDrawOffer(final DrawOffer drawOffer) {
+        this.drawOffer = drawOffer;
     }
 
     public Player getMonarch() {
@@ -551,6 +563,11 @@ public class Game {
     }
 
     public synchronized void setGameOver(GameEndReason reason) {
+        // early exit in case many events causing a game over have fired
+        if (isGameOver()) {
+            return;
+        }
+
         for (Player p : allPlayers) {
             p.clearController();
         }
@@ -627,7 +644,7 @@ public class Game {
         return getCardsIn(ZoneType.Command).anyMatch(CardPredicates.nameEquals(cardName));
     }
 
-    public CardCollectionView getColoredCardsInPlay(final String color) {
+    public CardCollectionView getColoredCardsInPlay(final byte color) {
         final CardCollection cards = new CardCollection();
         for (Player p : getPlayers()) {
             cards.addAll(p.getColoredCardsInPlay(color));
@@ -694,11 +711,23 @@ public class Game {
         if (ZoneType.Stack.equals(view.getZone())) {
             visit.visitAll(getStackZone());
         } else if (view.getController() != null && view.getZone() != null) {
-            visit.visitAll(getPlayer(view.getController()).getZone(view.getZone()));
-        } else { // fallback if view doesn't has controller or zone set for some reason
+            Player p = getPlayer(view.getController());
+            if (p != null) {
+                visit.visitAll(p.getZone(view.getZone()));
+            }
+        }
+        // Zone-specific search may miss if the view has stale zone info
+        // (e.g. IdRef resolved from a tracker that wasn't updated after a
+        // zone change). Fall back to global search.
+        if (visit.getFound() == null) {
             forEachCardInGame(visit);
         }
-        return visit.getFound();
+        Card found = visit.getFound();
+        if (found == null) {
+            netLog.error("findByView: id={} (zone={}, controller={}) not found in any zone — returning null",
+                    view.getId(), view.getZone(), view.getController());
+        }
+        return found;
     }
 
     public Card findById(int id) {
@@ -1208,7 +1237,7 @@ public class Game {
 
     public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, CardTraitBase ctb) {
         int result = 0;
-        Set<CounterType> types = null;
+        Set<CounterType> types;
         if (cType == null) {
             types = countersAddedThisTurn.rowKeySet();
         } else if (!countersAddedThisTurn.containsRow(cType)) {
@@ -1231,7 +1260,7 @@ public class Game {
     }
     public int getCounterAddedThisTurn(CounterType cType, Card card) {
         int result = 0;
-        Set<CounterType> types = null;
+        Set<CounterType> types;
         if (cType == null) {
             types = countersAddedThisTurn.rowKeySet();
         } else if (!countersAddedThisTurn.containsRow(cType)) {
@@ -1258,7 +1287,6 @@ public class Game {
     public void addCounterRemovedThisTurn(CounterType cType, Card card, Integer value) {
         countersRemovedThisTurn.put(cType, Pair.of(CardCopyService.getLKICopy(card), value));
     }
-
     public void addCounterRemovedThisTurn(CounterType cType, Player player, Integer value) {
         countersRemovedThisTurn.put(cType, Pair.of(player, value));
     }

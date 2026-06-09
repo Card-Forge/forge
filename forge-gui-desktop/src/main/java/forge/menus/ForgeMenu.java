@@ -15,6 +15,7 @@ import javax.swing.event.PopupMenuListener;
 import forge.Singletons;
 import forge.gui.GuiUtils;
 import forge.screens.home.online.OnlineMenu;
+import forge.screens.match.menus.DisplayMenu;
 import forge.util.Localizer;
 import forge.util.ReflectionUtil;
 
@@ -73,6 +74,7 @@ public final class ForgeMenu {
             }
         }
         add(new LayoutMenu().getMenu());
+        MenuUtil.withMatchUI(vmu -> add(new DisplayMenu(vmu.getControl()).getMenu()));
         add(new AudioMenu().getMenu());
         add(HelpMenu.getMenu());
         addSeparator();

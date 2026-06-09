@@ -1,0 +1,7 @@
+Name:Scintillating Encore
+ManaCost:WB
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2 | Duration$ Perpetual | SubAbility$ DBDelayedTrigger | SpellDescription$ Target creature you control perpetually gets +2/+0. When that creature dies this turn, return it to the battlefield tapped under its owner's control.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigReturn | StackDescription$ None | SpellDescription$ When that creature dies this turn, return it to the battlefield tapped under its owner's control.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard
+Oracle:Target creature you control perpetually gets +2/+0. When that creature dies this turn, return it to the battlefield tapped under its owner's control.

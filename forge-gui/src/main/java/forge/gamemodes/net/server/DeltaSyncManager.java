@@ -12,7 +12,7 @@ import forge.gamemodes.net.NetworkChecksumUtil;
 import forge.game.combat.CombatView;
 import forge.util.collect.FCollection;
 
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
@@ -39,7 +39,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Tracks changes to TrackableObjects via per-consumer dirty tracking and builds
  * minimal delta packets using property maps.
  */
-public class DeltaSyncManager implements IHasNetLog {
+public class DeltaSyncManager implements IHasForgeLog {
 
     // How often to include a checksum for validation (every N packets)
     public static final int CHECKSUM_INTERVAL = 20;
@@ -69,6 +69,11 @@ public class DeltaSyncManager implements IHasNetLog {
     // each DeltaSyncManager gets a unique ID
     private static final AtomicInteger NEXT_CONSUMER_ID = new AtomicInteger(0);
     private final int consumerId = NEXT_CONSUMER_ID.getAndIncrement();
+
+    /** Per-client ID used to gate IdRef substitution on the outer codec. */
+    public int getConsumerId() {
+        return consumerId;
+    }
 
     private long sequenceNumber = 0;
 
@@ -556,6 +561,11 @@ public class DeltaSyncManager implements IHasNetLog {
         if (lastChecksumDetail != null) {
             netLog.error("[DeltaSync] Server checksum detail: {}", lastChecksumDetail);
         }
+        // Clear so a later resync only logs if a fresh checksum has been
+        // computed since — otherwise we'd log a breakdown that postdates the
+        // mismatch the client is reporting.
+        lastChecksumBreakdown = null;
+        lastChecksumDetail = null;
     }
 
     /**

@@ -47,15 +47,15 @@ public class GameLogMetrics {
 
     private List<String> deckNames = new ArrayList<>();
 
-    // Network performance metrics (from Encoded/send() blocked lines)
+    // Network performance metrics (from Encoded / outbound saturation lines)
     private long totalEncodedBytes;
     private int encodedMessageCount;
     private long minEncodedBytes = Long.MAX_VALUE;
     private long maxEncodedBytes;
-    private int sendBlockedCount;
-    private long totalBlockedMs;
-    private long minBlockedMs = Long.MAX_VALUE;
-    private long maxBlockedMs;
+    private int saturationEpisodeCount;
+    private long totalSaturationMs;
+    private long maxSaturationMs;
+    private long totalSendsDuringSaturation;
 
     // Game timing
     private String firstTimestamp;
@@ -186,11 +186,11 @@ public class GameLogMetrics {
         if (bytes > maxEncodedBytes) maxEncodedBytes = bytes;
     }
 
-    public void recordSendBlocked(long ms) {
-        sendBlockedCount++;
-        totalBlockedMs += ms;
-        if (ms < minBlockedMs) minBlockedMs = ms;
-        if (ms > maxBlockedMs) maxBlockedMs = ms;
+    public void recordSaturationEpisode(long durationMs, int sendsDuringEpisode) {
+        saturationEpisodeCount++;
+        totalSaturationMs += durationMs;
+        if (durationMs > maxSaturationMs) maxSaturationMs = durationMs;
+        totalSendsDuringSaturation += sendsDuringEpisode;
     }
 
     public long getTotalEncodedBytes() { return totalEncodedBytes; }
@@ -199,11 +199,10 @@ public class GameLogMetrics {
     public long getMaxEncodedBytes() { return maxEncodedBytes; }
     public double getAvgEncodedBytes() { return encodedMessageCount > 0 ? (double) totalEncodedBytes / encodedMessageCount : 0; }
 
-    public int getSendBlockedCount() { return sendBlockedCount; }
-    public long getTotalBlockedMs() { return totalBlockedMs; }
-    public long getMinBlockedMs() { return sendBlockedCount > 0 ? minBlockedMs : 0; }
-    public long getMaxBlockedMs() { return maxBlockedMs; }
-    public double getAvgBlockedMs() { return sendBlockedCount > 0 ? (double) totalBlockedMs / sendBlockedCount : 0; }
+    public int getSaturationEpisodeCount() { return saturationEpisodeCount; }
+    public long getTotalSaturationMs() { return totalSaturationMs; }
+    public long getMaxSaturationMs() { return maxSaturationMs; }
+    public long getTotalSendsDuringSaturation() { return totalSendsDuringSaturation; }
 
     public String getFirstTimestamp() { return firstTimestamp; }
     public void setFirstTimestamp(String ts) { this.firstTimestamp = ts; }

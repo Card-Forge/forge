@@ -19,7 +19,6 @@ package forge.itemmanager.views;
 
 import java.awt.Component;
 import java.awt.event.MouseEvent;
-import java.util.List;
 
 import javax.swing.JTable;
 
@@ -42,27 +41,24 @@ public class DeckKeyCardRenderer extends ItemCellRenderer {
     @Override
     public <T extends InventoryItem> void processMouseEvent(final MouseEvent e, final ItemListView<T> listView, final Object value, final int row, final int column) {
         if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1) {
-            if (value instanceof PaperCard card) {
-                final Deck currentDeck = (Deck) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().getModel();
-                
-                if (currentDeck != null) {
-                    toggleKeyCard(currentDeck, card);
-                    // Repaint the current table
-                    listView.getTable().repaint();
-                    // Also repaint the other manager's table to update all cards with this name
-                    refreshOtherManagerTable();
-                    e.consume();
-                }
+            if (value instanceof PaperCard card &&
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().getModel() instanceof Deck deck) {
+                toggleKeyCard(deck, card);
+                // Repaint the current table
+                listView.getTable().repaint();
+                // Also repaint the other manager's table to update all cards with this name
+                refreshOtherManagerTable();
+                e.consume();
             }
         }
     }
-    
+
     private void refreshOtherManagerTable() {
         try {
             final CDeckEditorUI editor = CDeckEditorUI.SINGLETON_INSTANCE;
             final forge.itemmanager.ItemManager<?> deckManager = editor.getCurrentEditorController().getDeckManager();
             final forge.itemmanager.ItemManager<?> catalogManager = editor.getCurrentEditorController().getCatalogManager();
-            
+
             // Refresh both managers to update all cards with this name
             if (deckManager != null) {
                 deckManager.refresh();
@@ -79,38 +75,33 @@ public class DeckKeyCardRenderer extends ItemCellRenderer {
     public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column) {
         final StringBuilder label = new StringBuilder();
         final StringBuilder tooltip = new StringBuilder();
-        
-        if (value instanceof PaperCard card) {
-            final Deck currentDeck = (Deck) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().getModel();
-            
-            if (currentDeck != null) {
-                final List<String> keyCards = currentDeck.getKeyCards();
-                
-                // Check if this card is in the key cards list
-                boolean isKeyCard = false;
-                for (String keyCardName : keyCards) {
-                    if (keyCardName.equalsIgnoreCase(card.getName())) {
-                        isKeyCard = true;
-                        break;
-                    }
-                }
-                
-                if (isKeyCard) {
-                    label.append(KEY_CARD_INDICATOR);
-                    tooltip.append("Click to unmark as key card");
-                } else {
-                    tooltip.append("Click to mark as key card");
+
+        if (value instanceof PaperCard card &&
+                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().getModel() instanceof Deck deck) {
+            // Check if this card is in the key cards list
+            boolean isKeyCard = false;
+            for (String keyCardName : deck.getKeyCards()) {
+                if (keyCardName.equalsIgnoreCase(card.getName())) {
+                    isKeyCard = true;
+                    break;
                 }
             }
+
+            if (isKeyCard) {
+                label.append(KEY_CARD_INDICATOR);
+                tooltip.append("Click to unmark as key card");
+            } else {
+                tooltip.append("Click to mark as key card");
+            }
         }
-        
-        this.setToolTipText(!tooltip.isEmpty() ? tooltip.toString() : null);
+
+        this.setToolTipText(tooltip.isEmpty() ? null : tooltip.toString());
         return super.getTableCellRendererComponent(table, label.toString(), isSelected, hasFocus, row, column);
     }
 
     private void toggleKeyCard(final Deck deck, final PaperCard card) {
         String cardName = card.getName();
-        
+
         if (deck.isKeyCard(cardName)) {
             // Remove from key cards
             deck.removeKeyCard(cardName);
@@ -118,7 +109,7 @@ public class DeckKeyCardRenderer extends ItemCellRenderer {
             // Add to key cards
             deck.addKeyCard(cardName);
         }
-        
+
         // Mark deck as modified so it will be saved
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().notifyModelChanged();
     }

@@ -27,12 +27,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztl0tOwzAQhi0hUbFIE1YVcI1uoz52nIbXike3IDgCQiqPJUKsoELiJoC4CraSUS3XMx43TlJRj/SpbeI2X+3G87ffFaIfiUQikcg/Zy8T4qMGdrNm/Hfkdfa35lyNC/RjwOVAnhssHre9p7eC/ptDITrD1fM3y+auoEr569Wmf4iK/jwmqRBnDM7TwuuUOf4ibcbfd52amtd18Vf9653BrPR/Y46v2r9cfRU+v677Ny89RpJfB0Nkvc2+cpPP6TXkP+gW174eF9h6Xu7pr/fHVfanskvT/lSG4vib2aUtf1uGwvyxUuvWpD93bAj/A9k3D5fgKA3rPyl7Ptbvob+b/smS+3aa2Z2eEiHuLTxIpuXzxwTvma5+iflvy8dXBllG+2OodcHGQE9VPdPVL2eIv+7zubEINV7Vlzz2TfDTnY8x+1eVexLz74z9/H3KXIc6/H3nf539ff+TLOMP34HynyJ7jwm2/7iwrVPI+XftQRRUrqeys+/vgeM/IvYhW3YGN8h4JlR2qMNf7fWQP6HgNbZGur8qyH1t+4MHx18vyH2qOP4nSL4x89FxyvO3eehjOPcmFMcfyzeu8y5/bIwJld+w7KbqGck5LxnvvM3NluEgv1F7pyu/1ZX9XXMLa1I1v5nZLXRRGa6u/NZGhcw/bZQt/3Byhw93SXGt28CfWyX/+AB7YJVM0ybRn8cfanhYTQ==
+   eJztl0tOwzAQho2QqFikCasKuEa3VUt3nIbXike3IDgCQiqPJUKsoELiJoCQOAm2klGM8YzHjZNU4JE+tU3c5EvceP72u0L0I5FIJBL542xmQrzUwEbWjP+6PM/2asnZOEffBpwO5b7h7+227/QW0H9lJERntHj+ZtncFVQpf73a9A9R0Z/HJBXiiMFxmnsdMsefpM34+85TU/f1v/ir/vXMYFb4PzHHV+1frr4Kx6/r+R0UHluSTwcjZL7NvnIxKOk15D/s5uc+H+fYet7A01/vj4vsT2WXpv2pDMXxN7NLW/62DIX5Y6XmrUl/7tgQ/juyb+7OwV4a1n9S9Hys30N/N/2TOdftNLM73SVCXFu4kUyL97cJ3jNd/RLzX5OvjwyyjPbHUPOCjYGeqnqmq1/OEH/d53W55Gspf6XGq3qT294JPrrlGLN/VXkmMf/O+Od1uPx9ypyHOvxNoj/u7/ufZB5/uAbKf4qsPSbY+uPCNk8h779rDaKgcj2VnX1/Dxz/LWIdsmVncIOMZ0Jlhzr81VoP+RMKPmNzpPurgtzXtj94cPz1gtyniuN/gOQbMx/tpzx/m4c+hvNsQnH8sXzj2u/yx8aYUPkNy26q7pGc85Dx9tvcbBkO8hu1drryW13Z33VvYU6q5jczu4UuKsPVld/aqJD5p42y5R9O7vDhKsnPdRn4uFXyjw+wBlbJNG0S/Xl8A3kYWHE=
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt2E8KQEAYh+EpGzs3cAKncDDsbJ3DGRzLAZCUJpI/Y+bH+9S3EfU2TSOMAQAAaup8HtfPuHK2Zbk/lH4A31MkxpTjVInvkvua2HcBAOBNXeS74LqpfT1veuJ9uXT3aRg9Z9nrr7SX7Fal9sm6V3Ht7X41qvt+i3o/cIXq93ubzXN0DftC+98RWg/cUz1/8C8D5IImGQ==
+   eJzt2E8KQEAYh+GRjZ2LOIWDYWfrHM7gNE6CpDSR/BkzP96nvo2ot2kaYQwAAFBT5/O4fsaVsy3L/aH0A/ieIjWmHKdKfZfc1yS+CwAAb+pi3wXXTe3redMT78ulu4/C6DnLXn+lvWS3KrVP1r2Ka2/3q1Hd91vU+4ErVL/f22yeo2vYF9r/jtB64J7q+YN/GQA1ISXq
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -68,7 +68,7 @@
   </object>
   <object id="114" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="368.874" y="488.152">
    <properties>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Mirrorpool&quot;, &quot;Oboro, Palace in the Clouds&quot;, &quot;Minamo, School at Water's Edge&quot;, &quot;Patron of the Moon&quot;, &quot;Mirror Shield&quot;, &quot;Mirror Box&quot;, &quot;Leyline of Singularity&quot;, &quot;Mirrorworks&quot;, &quot;The Magic Mirror&quot;, &quot;Mirage Mirror&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Oboro, Palace in the Clouds&quot;, &quot;Minamo, School at Water's Edge&quot;, &quot;Patron of the Moon&quot;, &quot;Mirror Shield&quot;, &quot;Mirror Box&quot;, &quot;Leyline of Singularity&quot;, &quot;Mirrorworks&quot;, &quot;The Magic Mirror&quot;, &quot;Mirage Mirror&quot;
 ]}</property>
     <property name="enemy" value="Meloku"/>
    </properties>

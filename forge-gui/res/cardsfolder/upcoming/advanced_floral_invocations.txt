@@ -1,0 +1,16 @@
+Name:Advanced Floral Invocations
+ManaCost:BG
+Types:Enchantment Class
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigMill | TriggerDescription$ Landfall — Whenever a land you control enters, mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
+K:Class:2:BG:AddTrigger$ LandfallTrigger
+SVar:LandfallTrigger:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ DBPumpAll | TriggerDescription$ Whenever a land you control enters, creature cards in your graveyard perpetually get +1/+1.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | PumpZone$ Graveyard | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual
+K:Class:3:4 BG BG:AddStaticAbility$ ProdigysWill | AddTrigger$ STrigCounter
+SVar:ProdigysWill:Mode$ Continuous | Affected$ Land.YouCtrl,Creature.YouCtrl | Condition$ PlayerTurn | MayPlay$ True | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ You may play lands and cast creature spells from your graveyard. If you cast a spell this way, that creature enters with a finality counter on it.
+SVar:STrigCounter:Mode$ SpellCast | ValidCard$ Card.CastSa Spell.MayPlaySource | Execute$ TrigEffect | Static$ True | TriggerZones$ Battlefield
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ReMoved | RememberObjects$ TriggeredCard
+SVar:ReMoved:Event$ Moved | Origin$ Stack | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBCounter
+SVar:ETBCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ FINALITY | CounterNum$ 1 | SubAbility$ RemoveSelf
+SVar:RemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:Landfall — Whenever a land you control enters, mill two cards.\n{B/G}: Level 2\nWhenever a land you control enters, creature cards in your graveyard perpetually get +1/+1.\n{4}{B/G}{B/G}: Level 3\nYou may play lands and cast creature spells from your graveyard. If you cast a spell this way, that creature enters with a finality counter on it.

@@ -143,6 +143,7 @@ ScryfallCode=7ED
 128 R Darkest Hour @Ciruelo
 129 R Dregs of Sorrow @Massimiliano Frezzato
 130 C Drudge Skeletons @Jim Nelson
+130s C Drudge Skeletons @Arnie Swekel
 131 C Duress @Pete Venters
 132 R Eastern Paladin @Kev Walker
 133 U Engineered Plague @Andrew Goldhawk
@@ -170,10 +171,12 @@ ScryfallCode=7ED
 155 C Plague Beetle @Matt Cavotta
 156 R Rag Man @Scott M. Fischer
 157 C Raise Dead @Carl Critchlow
+157s C Raise Dead @Douglas Shuler
 158 C Razortooth Rats @Carl Critchlow
 159 R Reprocess @John Howe
 160 R Revenant @Andrew Goldhawk
 161 C Scathe Zombies @Kev Walker
+161s C Scathe Zombies @John Howe
 162 C Serpent Warrior @Eric Peterson
 163 U Soul Feast @Adam Rex
 164 C Spineless Thug @Alan Pollack
@@ -302,6 +305,7 @@ ScryfallCode=7ED
 287 R Beast of Burden @Chippy
 288 U Caltrops @Eric Peterson
 289 U Charcoal Diamond @David Martin
+289s U Charcoal Diamond @David Martin
 290 R Coat of Arms @D. Alexander Gregory
 291 U Crystal Rod @Ciruelo
 292 R Dingus Egg @Tony Szczudlo

@@ -44,6 +44,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttach;
 import forge.game.zone.ZoneType;
+import forge.trackable.TrackableProperty;
 import forge.util.Lang;
 
 public abstract class GameEntity implements GameObject, IIdentifiable {
@@ -149,25 +150,20 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
 
     // doesn't include phased out cards
     public final CardCollectionView getAttachedCards() {
-        return CardLists.filter(attachedCards, CardPredicates.phasedIn());
+        return CardLists.filter(getAllAttachedCards(), CardPredicates.phasedIn());
     }
 
     // for view does include phased out cards
     public final CardCollectionView getAllAttachedCards() {
-        return attachedCards;
+        return CardCollection.getView(attachedCards);
     }
 
     public final void setAttachedCards(final Iterable<Card> cards) {
-        attachedCards = new CardCollection(cards);
-        updateAttachedCards();
+        attachedCards = getView().setCards(attachedCards, cards, TrackableProperty.AttachedCards);
     }
 
     public final void clearAttachedCards() {
-        if (attachedCards.isEmpty()) {
-            return;
-        }
-        attachedCards.clear();
-        updateAttachedCards();
+        attachedCards = getView().clearCards(attachedCards, TrackableProperty.AttachedCards);
     }
 
     public final boolean hasCardAttachments() {
@@ -196,19 +192,15 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
     }
 
     public final void addAttachedCard(final Card c) {
-        if (attachedCards.add(c)) {
-            updateAttachedCards();
-        }
+        attachedCards = getView().addCard(attachedCards, c, TrackableProperty.AttachedCards);
     }
 
     public final void removeAttachedCard(final Card c) {
-        if (attachedCards.remove(c)) {
-            updateAttachedCards();
-        }
+        attachedCards = getView().removeCard(attachedCards, c, TrackableProperty.AttachedCards);
     }
 
     public final void updateAttachedCards() {
-        getView().updateAttachedCards(this);
+        getView().setCards(null, attachedCards, TrackableProperty.AttachedCards);
     }
 
     public final void unAttachAllCards(Card old) {

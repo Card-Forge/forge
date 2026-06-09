@@ -3,4 +3,4 @@ Name:Alchemy (2021-12-09)
 Type:Archived
 Subtype:Arena
 Effective:2021-12-09
-Sets:ANA, ANB, ZNR, KHM, STX, AFR, MID, VOW, YMID
+Sets:ANB, ZNR, KHM, STX, AFR, MID, VOW, YMID

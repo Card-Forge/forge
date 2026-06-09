@@ -1,0 +1,7 @@
+Name:Loki, God of Mischief
+ManaCost:1 U
+Types:Legendary Creature God Sorcerer Villain
+PT:2/1
+T:Mode$ BecomesTarget | ValidTarget$ Player,Permanent | ValidSource$ Ability.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever a player or permanent becomes the target of an ability you control, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+Oracle:Whenever a player or permanent becomes the target of an ability you control, draw a card. This ability triggers only once each turn.

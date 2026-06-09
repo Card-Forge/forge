@@ -162,7 +162,7 @@ public class ImageUtil {
                     return card.getOtherPart().getName();
                 } else if (!card.getMeldWith().isEmpty()) {
                     final CardDb db = StaticData.instance().getCommonCards();
-                    return db.getRules(card.getMeldWith()).getOtherPart().getName();
+                    return db.getRulesOrElseUnsupported(card.getMeldWith()).getOtherPart().getName();
                 } else {
                     return null;
                 }
@@ -235,24 +235,7 @@ public class ImageUtil {
 
         if (cp.getRules().getSplitType() == CardSplitType.Meld) {
             if (face.equals("back")) {
-                PaperCard meldBasePc = cp.getMeldBaseCard();
-                cardCollectorNumber = meldBasePc.getCollectorNumber();
-                String collectorNumberSuffix = "";
-
-                if (cardCollectorNumber.endsWith("a")) {
-                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
-                } else if (cardCollectorNumber.endsWith("as")) {
-                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
-                    collectorNumberSuffix = "s";
-                } else if (cardCollectorNumber.endsWith("ap")) {
-                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
-                    collectorNumberSuffix = "p";
-                } else if (cp.getCollectorNumber().endsWith("a")) {
-                    // SIR
-                    cardCollectorNumber = cp.getCollectorNumber().substring(0, cp.getCollectorNumber().length() - 1);
-                }
-
-                cardCollectorNumber += "b" + collectorNumberSuffix;
+                cardCollectorNumber = cp.getMeldBaseCard().getCollectorNumber().replaceAll("(\\d+)([sp]?)", "$1b$2");
             }
 
             faceParam = "&face=front";

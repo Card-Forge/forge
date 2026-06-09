@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="138">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="139">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -29,7 +29,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -160,6 +160,14 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
     <property name="spawn.Insane" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="138" template="../../../../common/maps/obj/shop.tx" x="881.5" y="311">
+   <properties>
+    <property name="commonShopList" value="Hydra"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

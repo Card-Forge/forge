@@ -161,7 +161,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
                             if (row(z).containsKey(zt)) {
                                 for (Card c : row(z).get(zt)) {
                                     if (lkiLookup != CardCollection.EMPTY && !lkiLookup.contains(c)) {
-                                        // this can happen if e. g. a mutated permanent dies
+                                        // this can happen if e.g. a mutated permanent dies
                                         continue;
                                     }
                                     allCards.add(lkiLookup.get(c));

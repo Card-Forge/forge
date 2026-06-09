@@ -33,7 +33,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAooA2f4B8beLk3amn9XnYHhnjrxNLXAT6BZv9SJp0kBAA0ZG0s=
+   eJxjYBgFo2AUjIJRMAooA48YB8beLk3amn9XnYHhnjrxNLXAT6BZv9SJp0kBABqHG1M=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -60,7 +60,7 @@
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="80" template="../../../../common/maps/obj/dialog.tx" x="93" y="194" width="226.5" height="23" visible="1">
+  <object id="80" template="../../../../common/maps/obj/dialog.tx" x="94.3333" y="188.667" width="226.5" height="23" visible="1">
    <properties>
     <property name="dialog">[
 {

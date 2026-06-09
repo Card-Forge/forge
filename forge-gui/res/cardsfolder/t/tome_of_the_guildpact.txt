@@ -1,6 +1,6 @@
 Name:Tome of the Guildpact
 ManaCost:5
-Types:Artifact
+Types:Artifact Book
 T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a multicolored spell, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 AI:RemoveDeck:Random

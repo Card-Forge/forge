@@ -10,7 +10,7 @@ SVar:No:DB$ Pump | SpellDescription$ Do not discard a card.
 SVar:DBDiscard:DB$ Discard | Defined$ Player.NotedForDiscard | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ RememberedOwner | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ w_1_2_moogle_lifelink | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Creature | SubAbility$ DBPutCounterAll
-SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Moogle.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Moogle.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.nonCreature | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBClearNotes
 SVar:DBClearNotes:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Discard
 DeckHas:Ability$Discard|Token

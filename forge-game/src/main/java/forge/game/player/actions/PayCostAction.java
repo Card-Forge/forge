@@ -4,8 +4,6 @@ import forge.game.GameEntityView;
 
 public class PayCostAction extends PlayerAction {
     public PayCostAction(GameEntityView cardView) {
-        super(cardView);
-        name = "Pay cost";
-        gameEntityView = cardView;
+        super(cardView, "Pay cost");
     }
 }

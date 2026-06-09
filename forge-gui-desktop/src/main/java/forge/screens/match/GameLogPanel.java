@@ -1,6 +1,7 @@
 package forge.screens.match;
 
 import java.awt.AWTEvent;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -135,6 +136,14 @@ public class GameLogPanel extends JPanel {
 
     public void addLogEntry(final String text) {
         addLogEntry(text, null, null);
+    }
+
+    public void addLogEntry(final String text, final java.awt.Color foreground) {
+        addLogEntry(text, null, null);
+        if (foreground != null) {
+            final Component[] kids = scrollablePanel.getComponents();
+            if (kids.length > 0) kids[kids.length - 1].setForeground(foreground);
+        }
     }
 
     public void addLogEntry(final String text, final CardView card, final Iterable<PlayerView> viewers) {

@@ -38,7 +38,7 @@ import forge.game.trigger.Trigger;
  */
 public class KeywordsChange implements ICardTraitChanges, IKeywordsChange, Cloneable {
     private KeywordCollection keywords = new KeywordCollection();
-    private List<KeywordInterface> removeKeywordInterfaces = Lists.newArrayList();
+    private KeywordCollection removeKeywordInterfaces = new KeywordCollection();
     private List<String> removeKeywords = Lists.newArrayList();
     private boolean removeAllKeywords;
 
@@ -73,7 +73,7 @@ public class KeywordsChange implements ICardTraitChanges, IKeywordsChange, Clone
         }
 
         if (removeKeywordInterfaces != null) {
-            this.removeKeywordInterfaces.addAll(removeKeywordInterfaces);
+            this.removeKeywordInterfaces.insertAll(removeKeywordInterfaces);
         }
 
         this.removeAllKeywords = removeAll;
@@ -90,7 +90,7 @@ public class KeywordsChange implements ICardTraitChanges, IKeywordsChange, Clone
     }
 
     public final Collection<KeywordInterface> getRemovedKeywordInstances() {
-        return this.removeKeywordInterfaces;
+        return this.removeKeywordInterfaces.getValues();
     }
     /**
      *
@@ -132,17 +132,9 @@ public class KeywordsChange implements ICardTraitChanges, IKeywordsChange, Clone
         try {
             KeywordsChange result = (KeywordsChange)super.clone();
 
-            result.keywords = new KeywordCollection();
-            for (KeywordInterface ki : this.keywords.getValues()) {
-                result.keywords.insert(ki.copy(host, lki));
-            }
-
+            result.keywords = this.keywords.copy(host, lki);
             result.removeKeywords = Lists.newArrayList(removeKeywords);
-
-            result.removeKeywordInterfaces = Lists.newArrayList();
-            for (KeywordInterface ki : this.removeKeywordInterfaces) {
-                result.removeKeywordInterfaces.add(ki.copy(host, lki));
-            }
+            result.removeKeywordInterfaces = this.removeKeywordInterfaces.copy(host, lki);
 
             return result;
         }  catch (final Exception ex) {
@@ -151,28 +143,16 @@ public class KeywordsChange implements ICardTraitChanges, IKeywordsChange, Clone
     }
 
     public List<SpellAbility> applySpellAbility(List<SpellAbility> list) {
-        for (KeywordInterface k : this.keywords.getValues()) {
-            k.applySpellAbility(list);
-        }
-        return list;
+        return keywords.applySpellAbility(list);
     }
     public List<Trigger> applyTrigger(List<Trigger> list) {
-        for (KeywordInterface k : this.keywords.getValues()) {
-            k.applyTrigger(list);
-        }
-        return list;
+        return keywords.applyTrigger(list);
     }
     public List<ReplacementEffect> applyReplacementEffect(List<ReplacementEffect> list) {
-        for (KeywordInterface k : this.keywords.getValues()) {
-            k.applyReplacementEffect(list);
-        }
-        return list;
+        return keywords.applyReplacementEffect(list);
     }
     public List<StaticAbility> applyStaticAbility(List<StaticAbility> list) {
-        for (KeywordInterface k : this.keywords.getValues()) {
-            k.applyStaticAbility(list);
-        }
-        return list;
+        return keywords.applyStaticAbility(list);
     }
 
     public void applyKeywords(KeywordCollection list) {

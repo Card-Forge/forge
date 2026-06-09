@@ -289,13 +289,12 @@ public class Combat {
     public final Player getDefenderPlayerByAttacker(final Card c) {
         GameEntity defender = getDefenderByAttacker(c);
 
-        if (defender instanceof Player) {
-            return (Player) defender;
+        if (defender instanceof Player def) {
+            return def;
         }
 
         // maybe attack on a controlled planeswalker?
-        if (defender instanceof Card) {
-            Card def = (Card)defender;
+        if (defender instanceof Card def) {
             if (def.isBattle()) {
                 return def.getProtectingPlayer();
             } else {

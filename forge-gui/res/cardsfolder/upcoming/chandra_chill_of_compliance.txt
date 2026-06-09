@@ -1,0 +1,15 @@
+Name:Chandra, Chill of Compliance
+ManaCost:1 U U
+Types:Legendary Planeswalker Chandra
+Loyalty:3
+A:AB$ Surveil | Cost$ AddCounter<1/LOYALTY> | Amount$ 1 | RememberMoved$ True | Planeswalker$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Surveil 1. If you put a noncreature, nonland card into your graveyard this way, put that card into your hand.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Hand | ChangeType$ Card.nonCreature+nonLand+IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ U | Amount$ 1 | RestrictValid$ Spell.nonCreature | SpellDescription$ Add {U}. Spend this mana only to cast a noncreature spell.
+A:AB$ Tap | Cost$ SubCounter<X/LOYALTY> | ValidTgts$ Artifact,Creature | ValidTgtDesc$ artifact or creature | Planeswalker$ True | SubAbility$ DBPutCounter | SpellDescription$ Tap target artifact or creature. Put X stun counters on it.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ X
+A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem — Chandra, Chill of Compliance | Image$ emblem_chandra_chill_of_compliance | Triggers$ TrigSpellCast | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a spell, draw a card."
+SVar:TrigSpellCast:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a spell, draw a card.
+SVar:EffSpellCast:DB$ Draw
+SVar:X:Count$xPaid
+Oracle:[+1]: Surveil 1. If you put a noncreature, nonland card into your graveyard this way, put that card into your hand.\n[+1]: Add {U}. Spend this mana only to cast a noncreature spell.\n[-X]: Tap target artifact or creature. Put X stun counters on it.\n[-6]: You get an emblem with "Whenever you cast a spell, draw a card."

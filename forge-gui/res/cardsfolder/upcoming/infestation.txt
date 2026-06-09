@@ -1,0 +1,11 @@
+Name:Infestation
+ManaCost:3 B B
+Types:Creature Elemental Incarnation
+PT:6/5
+K:Wither
+K:Evoke:2 B B PayLife<2>
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When this creature enters, conjure a card named Blowfly Infestation onto the battlefield. Then put a -1/-1 counter on each creature.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Blowfly Infestation | Zone$ Battlefield | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounterAll | ValidCards$ Creature | CounterType$ M1M1 | CounterNum$ 1
+DeckHas:Ability$Counters|Sacrifice
+Oracle:Wither\nWhen this creature enters, conjure a card named Blowfly Infestation onto the battlefield. Then put a -1/-1 counter on each creature.\nEvoke—{2}{B}{B}, Pay 2 life.

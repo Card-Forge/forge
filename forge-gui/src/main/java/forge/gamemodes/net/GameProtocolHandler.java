@@ -5,6 +5,8 @@ import forge.gamemodes.net.event.ReplyEvent;
 import forge.gui.FThreads;
 import forge.gui.util.SOptionPane;
 import forge.localinstance.skin.FSkinProp;
+import forge.trackable.TrackableObject;
+import forge.util.IHasForgeLog;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -12,7 +14,7 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapter implements IHasNetLog {
+public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapter implements IHasForgeLog {
 
     private final boolean runInEdt;
     protected GameProtocolHandler(final boolean runInEdt) {
@@ -24,6 +26,10 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
 
     protected abstract T getToInvoke(ChannelHandlerContext ctx);
     protected abstract void beforeCall(ChannelHandlerContext ctx, ProtocolMethod protocolMethod, Object[] args);
+
+    protected boolean shouldDispatchToGuiThread(final ProtocolMethod protocolMethod) {
+        return runInEdt;
+    }
 
     @Override
     public final void channelRead(final ChannelHandlerContext ctx, final Object msg) {
@@ -46,6 +52,18 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
             protocolMethod.checkArgs(args);
 
             final Object toInvoke = getToInvoke(ctx);
+            if (toInvoke == null) {
+                netLog.info("Ignoring {} — controller no longer available (game ended)", methodName);
+                // For methods expecting a reply, send null so the client doesn't hang
+                final Class<?> earlyReturnType = protocolMethod.getReturnType();
+                if (!earlyReturnType.equals(Void.TYPE)) {
+                    final IRemote remote = getRemote(ctx);
+                    if (remote != null) {
+                        remote.send(new ReplyEvent(event.getId(), null));
+                    }
+                }
+                return;
+            }
 
             // Pre-call actions (runs on IO thread — blocks all subsequent messages)
             final long beforeCallStart = System.currentTimeMillis();
@@ -64,11 +82,11 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                     try {
                         method.invoke(toInvoke, args);
                     } catch (final IllegalAccessException | IllegalArgumentException e) {
-                        netLog.error("Unknown protocol method {} with {} args", methodName, args == null ? 0 : args.length);
+                        netLog.error("Unknown protocol method {} args={}", methodName, describeArgs(args));
                     } catch (final InvocationTargetException e) {
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += (String.format("RuntimeException: %s (GameProtocolHandler.java Line 65)\n", e.getTargetException().toString()));
-                        netLog.error(e.getTargetException(), "InvocationTargetException in {}", methodName);
+                        netLog.error(e.getTargetException(), "InvocationTargetException in {} args={}", methodName, describeArgs(args));
                     }
                 } else {
                     Serializable reply = null;
@@ -81,12 +99,12 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                             netLog.warn("Non-serializable return type {} for method {}, returning null", returnType.getName(), methodName);
                         }
                     } catch (final IllegalAccessException | IllegalArgumentException e) {
-                        netLog.error("Unknown protocol method {} with {} args, replying with null", methodName, args == null ? 0 : args.length);
+                        netLog.error("Unknown protocol method {} args={}, replying with null", methodName, describeArgs(args));
                     } catch (final NullPointerException | InvocationTargetException e) {
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += e.toString();
                         SOptionPane.showMessageDialog(catchedError[0], "Error", FSkinProp.ICO_WARNING);
-                        netLog.error("Exception in protocol method {}: {}", methodName, e.toString());
+                        netLog.error("Exception in protocol method {} args={}: {}", methodName, describeArgs(args), e.toString());
                     }
                     getRemote(ctx).send(new ReplyEvent(event.getId(), reply));
                 }
@@ -96,12 +114,30 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                 }
             };
 
-            if (runInEdt) {
+            if (shouldDispatchToGuiThread(protocolMethod)) {
                 FThreads.invokeInEdtNowOrLater(toRun);
             } else {
                 FThreads.invokeInBackgroundThread(toRun);
             }
         }
+    }
+
+    private static String describeArgs(Object[] args) {
+        if (args == null) return "[]";
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < args.length; i++) {
+            if (i > 0) sb.append(", ");
+            Object a = args[i];
+            if (a == null) {
+                sb.append("null");
+            } else {
+                sb.append(a.getClass().getSimpleName());
+                if (a instanceof TrackableObject to) {
+                    sb.append('#').append(to.getId());
+                }
+            }
+        }
+        return sb.append(']').toString();
     }
 
     @Override

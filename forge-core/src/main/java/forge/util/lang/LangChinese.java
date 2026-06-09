@@ -24,4 +24,11 @@ public class LangChinese extends Lang {
         return name;
     }
 
+    @Override
+    public String getFontFile() {
+        return "SourceHanSansCN";
+    }
+    public char canDisplayCheck() {
+        return '鹫';
+    }
 }

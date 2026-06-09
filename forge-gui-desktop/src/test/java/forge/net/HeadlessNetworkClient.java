@@ -2,7 +2,8 @@ package forge.net;
 
 import forge.game.GameView;
 import forge.gamemodes.net.DeltaPacket;
-import forge.gamemodes.net.IHasNetLog;
+import forge.gamemodes.net.ChatMessage;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.client.FGameClient;
@@ -28,7 +29,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * Internally extends {@link HeadlessNetworkGuiGame} via {@code DeltaLoggingGuiGame}
  * to process delta packets and provide auto-response behavior.
  */
-public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
+public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
 
     private final String username;
     private final String hostname;
@@ -63,7 +64,7 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
 
         try {
             guiGame = new DeltaLoggingGuiGame(this);
-            client = new FGameClient(username, "0", guiGame, hostname, port);
+            client = new FGameClient(username, guiGame, hostname, port);
             lobby = new ClientGameLobby();
             client.addLobbyListener(new ClientLobbyListener());
             client.connect();
@@ -237,7 +238,7 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         }
 
         @Override
-        public void message(String source, String message) {
+        public void message(String source, String message, ChatMessage.MessageType type) {
             netLog.info("Chat: {}: {}", source, message);
         }
 
@@ -363,9 +364,9 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
             }
             for (forge.game.event.GameEventCardTapped tapEvent : lastTapPerCard.values()) {
                 forge.game.card.CardView card = tapEvent.card();
-                if (card != null && card.isTapped() != tapEvent.tapped()) {
+                if (card != null && card.getZone() == forge.game.zone.ZoneType.Battlefield && card.isTapped() != tapEvent.tapped()) {
                     client.eventStateMismatches.incrementAndGet();
-                    netLog.warn("[EventDeltaCheck] MISMATCH: GameEventCardTapped says tapped={} but CardView.isTapped()={} for {} (may be zone-transition artifact)",
+                    netLog.warn("[EventDeltaCheck] MISMATCH: GameEventCardTapped says tapped={} but CardView.isTapped()={} for {}",
                             tapEvent.tapped(), card.isTapped(), card);
                 }
             }
@@ -393,7 +394,7 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         }
 
         @Override
-        public void showPromptMessage(forge.game.player.PlayerView playerView, String message) {
+        public void showPromptMessage(forge.game.player.PlayerView playerView, String message, forge.game.card.CardView cv) {
             netLog.info("Prompt: {}", message);
 
             // Detect player selection prompts (like "who goes first")
@@ -464,8 +465,8 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         }
 
         @Override
-        public void setSelectables(Iterable<forge.game.card.CardView> cards) {
-            super.setSelectables(cards);
+        public void setSelectables(Iterable<forge.game.card.CardView> cards, int min, int max) {
+            super.setSelectables(cards, min, max);
             synchronized (pendingSelectables) {
                 // Track selectable cards for multi-selection prompts
                 pendingSelectables.clear();

@@ -2,7 +2,10 @@ package forge.gamemodes.net;
 
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeNetPreferences.FNetPref;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.util.FileUtil;
+import forge.util.IHasForgeLog;
 import org.tinylog.ThreadContext;
 
 import java.io.File;
@@ -23,7 +26,7 @@ import java.time.format.DateTimeFormatter;
  * The {@link NetworkLogWriter} routes file output to per-instance files based on
  * the {@code logfileKey} thread context value.
  */
-public final class NetworkLogConfig implements IHasNetLog {
+public final class NetworkLogConfig implements IHasForgeLog {
 
     private static final String LOG_PREFIX = "network-debug";
 
@@ -116,14 +119,6 @@ public final class NetworkLogConfig implements IHasNetLog {
             return "~" + normalizedPath.substring(normalizedHome.length());
         }
         return path;
-    }
-
-    /**
-     * Generate a new session ID for correlating host/client logs.
-     * @return the generated session ID (6 hex characters)
-     */
-    public static String generateSessionId() {
-        return String.format("%06x", new java.util.Random().nextInt(0xFFFFFF));
     }
 
     /**
@@ -250,11 +245,28 @@ public final class NetworkLogConfig implements IHasNetLog {
         if (testMode && (batchId != null || globalInstanceSuffix != null)) {
             return computeLogfileKey();
         }
-        // In normal mode, use timestamp-based key
+        // In normal mode, only return a key if logging was explicitly activated
+        return normalModeKey;
+    }
+
+    /**
+     * Activate network logging for a real (non-test) network game.
+     * Sets the timestamp-based log file key so the writer starts routing to files.
+     */
+    public static void activateNetworkLogging() {
         if (normalModeKey == null) {
             normalModeKey = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+            cleanupOldLogs();
         }
-        return normalModeKey;
+    }
+
+    /**
+     * Deactivate network logging after a network game ends.
+     * Clears the normal-mode key so the writer stops routing to files.
+     * Does not affect test mode.
+     */
+    public static void deactivateNetworkLogging() {
+        normalModeKey = null;
     }
 
     /**
@@ -293,7 +305,7 @@ public final class NetworkLogConfig implements IHasNetLog {
      * Delete old log subdirectories from the network logs directory, respecting:
      * - Grace period: skip directories modified within the last 5 minutes
      * - Current batch protection: skip the current batchId subdirectory
-     * - Max directory limit from NET_MAX_LOG_FILES preference
+     * - Max directory limit from MAX_LOG_FILES preference (shared with forge.log rotation)
      * - Cleanup can be disabled via NET_LOG_CLEANUP_ENABLED preference
      * - Also cleans up legacy flat log files (network-debug-*.log)
      */
@@ -305,7 +317,7 @@ public final class NetworkLogConfig implements IHasNetLog {
             if (!FModel.getNetPreferences().getPrefBoolean(FNetPref.NET_LOG_CLEANUP_ENABLED)) {
                 return;
             }
-            int maxEntries = FModel.getNetPreferences().getPrefInt(FNetPref.NET_MAX_LOG_FILES);
+            int maxEntries = FModel.getPreferences().getPrefInt(FPref.MAX_LOG_FILES);
             if (maxEntries <= 0) {
                 return;
             }
@@ -341,10 +353,7 @@ public final class NetworkLogConfig implements IHasNetLog {
                 if (currentBatch != null && f.getName().equals(currentBatch)) {
                     continue;
                 }
-                if (f.isDirectory()) {
-                    deleteDirectory(f);
-                    deleted++;
-                } else if (f.delete()) {
+                if (FileUtil.deleteDirectory(f)) {
                     deleted++;
                 }
             }
@@ -357,20 +366,4 @@ public final class NetworkLogConfig implements IHasNetLog {
         }
     }
 
-    /**
-     * Recursively delete a directory and its contents.
-     */
-    private static void deleteDirectory(File dir) {
-        File[] files = dir.listFiles();
-        if (files != null) {
-            for (File f : files) {
-                if (f.isDirectory()) {
-                    deleteDirectory(f);
-                } else {
-                    f.delete();
-                }
-            }
-        }
-        dir.delete();
-    }
 }

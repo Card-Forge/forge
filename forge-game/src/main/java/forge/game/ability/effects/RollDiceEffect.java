@@ -401,7 +401,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
      */
     @SuppressWarnings("unchecked")
     private static List<Integer> rollAction(int amount, int sides, int ignore, List<Integer> rollsResult, List<Integer> ignored, Map<Player, Integer> ignoreChosenMap, Set<Card> dicePTExchanges, Player player, Map<AbilityKey, Object> repParams) {
-
         repParams.put(AbilityKey.Sides, sides);
         repParams.put(AbilityKey.Number, amount);
         repParams.put(AbilityKey.Ignore, ignore);

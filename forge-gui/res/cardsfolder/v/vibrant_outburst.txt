@@ -1,0 +1,6 @@
+Name:Vibrant Outburst
+ManaCost:U R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBTap | SpellDescription$ CARDNAME deals 3 damage to any target. Tap up to one target creature.
+SVar:DBTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature
+Oracle:Vibrant Outburst deals 3 damage to any target. Tap up to one target creature.

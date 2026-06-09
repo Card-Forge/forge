@@ -139,8 +139,6 @@ public class AdventureDeckEditor extends FDeckEditor {
     public boolean isCommanderEditor() {
         if (isLimitedEditor())
             return false;
-        if (AdventurePlayer.current().isCommanderMode())
-            return true;
         return super.isCommanderEditor();
     }
 
@@ -151,6 +149,11 @@ public class AdventureDeckEditor extends FDeckEditor {
                     new StoreCatalogPage(),
                     new CollectionAutoSellPage()
             };
+        }
+        
+        @Override
+        public boolean hasCommander() {
+            return false; // No commanders in the shop, even if player is in commander mode.
         }
     }
 

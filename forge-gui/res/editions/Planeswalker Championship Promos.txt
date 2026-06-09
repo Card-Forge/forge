@@ -45,3 +45,7 @@ ScryfallCode=PWCS
 2025-2 M Nissa, Resurgent Animist @Hitowa
 2025-3 M Delney, Streetwise Lookout @Kei Satsuki
 2025-4 R Inti, Seneschal of the Sun @Hagiya Kaoru
+2025-5 R Monstrous Rage @Kawasumi
+2025-6 R Slickshot Show-Off @KIYA
+2026-1 M Beza, the Bounding Spring @Hale
+2026-2 R Into the Flood Maw @Kaeru DX

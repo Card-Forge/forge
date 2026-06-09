@@ -30,7 +30,6 @@ import forge.gui.control.WatchLocalGame;
 import forge.gui.events.*;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
-import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -56,6 +55,7 @@ public class HostedMatch {
     public HashMap<LobbySlot, IGameController> gameControllers = null;
     private Runnable startGameHook = null;
     private Runnable endGameHook = null;
+    private Runnable onMatchOver = null;
     private final List<PlayerControllerHuman> humanControllers = Lists.newArrayList();
     private Map<RegisteredPlayer, IGuiGame> guis;
     private int humanCount;
@@ -67,27 +67,18 @@ public class HostedMatch {
 
     public HostedMatch() {}
 
-    /**
-     * Look up the IGuiGame for a given Player from the guis map.
-     * This is the authoritative source for the GUI assigned to each player,
-     * unlike PlayerControllerHuman.getGui() which may be overwritten.
-     */
-    public IGuiGame getGuiForPlayer(final Player player) {
-        if (guis == null || player == null) { return null; }
-        return guis.get(player.getRegisteredPlayer());
-    }
-
     public void setStartGameHook(Runnable hook) {
         startGameHook = hook;
     }
     public void setEndGameHook(Runnable hook) { endGameHook = hook; }
+    public void setOnMatchOver(Runnable callback) { onMatchOver = callback; }
 
     private static GameRules getDefaultRules(final GameType gameType) {
         final GameRules gameRules = new GameRules(gameType);
         gameRules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
         gameRules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
         gameRules.setAnteIncludeBasicLands(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_INCLUDE_BASIC_LANDS));
-        gameRules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+        gameRules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_MANABURN));
         gameRules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
         gameRules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
         gameRules.setGamesPerMatch(FModel.getPreferences().getPrefInt(FPref.UI_MATCHES_PER_GAME));
@@ -303,6 +294,17 @@ public class HostedMatch {
                 endGameHook.run();
             }
 
+            // Flush any buffered game events to remote clients so they receive
+            // GameEventGameOutcome and GameEventGameFinished before we proceed.
+            for (PlayerControllerHuman hc : humanControllers) {
+                if (hc.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
+                    forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+                    if (fwd != null) {
+                        fwd.flush();
+                    }
+                }
+            }
+
             // After game is over...
             isMatchOver = match.isMatchOver();
             if (humanCount == 0) {
@@ -366,18 +368,21 @@ public class HostedMatch {
 
         for (final PlayerControllerHuman humanController : humanControllers) {
             if (humanController.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
+                forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+                if (fwd != null) {
+                    for (PlayerControllerHuman allHc : humanControllers) {
+                        allHc.getInputQueue().deleteObserver(fwd);
+                    }
+                }
                 ngg.shutdownForwarder();
             }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
-            if (FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_CARD) || isMatchOver()) {
-                // when autoyielding per card, we need to clear auto yields between games since card IDs change
-                humanController.getGui().clearAutoYields();
-            }
+            humanController.getYieldController().clearAutoYields();
 
-            if (humanCount > 0) //conceded
+            //conceded
+            if (humanCount > 0 || !GuiBase.getInterface().isLibgdxPort() || !isMatchOver) {
                 humanController.getGui().afterGameEnd();
-            else if (!GuiBase.getInterface().isLibgdxPort()||!isMatchOver)
-                humanController.getGui().afterGameEnd();
+            }
             humanController.getGui().updateDayTime(null);
         }
         humanControllers.clear();
@@ -410,10 +415,6 @@ public class HostedMatch {
         public Void visit(final UiEventBlockerAssigned event) {
             for (final PlayerControllerHuman humanController : humanControllers) {
                 humanController.getGui().updateSingleCard(event.blocker());
-                final PlayerView p = humanController.getPlayer().getView();
-                if (event.attackerBeingBlocked() != null && event.attackerBeingBlocked().getController().equals(p)) {
-                    humanController.getGui().autoPassCancel(p);
-                }
             }
             return null;
         }
@@ -520,6 +521,9 @@ public class HostedMatch {
             FThreads.invokeInEdtNowOrLater(() -> {
                 endCurrentGame();
                 isMatchOver = true;
+                if (onMatchOver != null) {
+                    onMatchOver.run();
+                }
             });
             return; // if any player chooses quit, quit the match
         }
