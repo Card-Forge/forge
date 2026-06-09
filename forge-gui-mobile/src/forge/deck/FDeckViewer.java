@@ -65,13 +65,14 @@ public class FDeckViewer extends FScreen {
         for (final Entry<PaperCard, Integer> entry : playedCards) {
             PaperCard card = entry.getKey();
             if (!card.isVeryBasicLand()) {
+                Integer count = entry.getValue();
                 String cleanCardName = regexQuote.matcher(card.getCardName()).replaceAll("\"\"");
                 // Moxfield import will choke on accented characters so replace them with ASCII equivalents
                 cleanCardName = StringUtils.stripAccents(cleanCardName);
                 String cleanCardEdition = regexEdPlst.matcher(card.getEdition()).replaceAll("PLST");
                 cleanCardEdition = regexEdNem.matcher(cleanCardEdition).replaceAll("NEM");
                 cleanCardEdition = regexEdP02.matcher(cleanCardEdition).replaceAll("P02");
-                String cardLine = "\"1\",\"" + cleanCardName + "\",\"" + cleanCardEdition + "\",\"" + card.getCollectorNumber() + "\",\"" + (card.isFoil() ? "foil" : "") + "\"" + nl;
+                String cardLine = "\"" + count + "\",\"" + cleanCardName + "\",\"" + cleanCardEdition + "\",\"" + card.getCollectorNumber() + "\",\"" + (card.isFoil() ? "foil" : "") + "\"" + nl;
                 collectionList.append(cardLine);
             }
         }
