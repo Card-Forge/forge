@@ -1,0 +1,10 @@
+Name:Ant-Man's Army
+ManaCost:2 G
+Types:Creature Insect
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTokenChoice | TriggerDescription$ When this creature enters, create a Food token or a Treasure token. (A Food token is an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life." A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+SVar:TrigTokenChoice:DB$ GenericChoice | Defined$ You | Choices$ Food,Treasure | AILogic$ FoodOrTreasure | SpellDescription$ When this creature enters, create a Food token or a Treasure token.
+SVar:Food:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Food
+SVar:Treasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Treasure
+DeckHas:Ability$Token|LifeGain
+Oracle:When this creature enters, create a Food token or a Treasure token. (A Food token is an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life." A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

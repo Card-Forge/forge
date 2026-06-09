@@ -786,6 +786,13 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.ExiledWith);
     }
 
+    public CardView getPreparedSpell() {
+        return get(TrackableProperty.PreparedSpell);
+    }
+    void updatePreparedSpell(Card c) {
+        set(TrackableProperty.PreparedSpell, CardView.get(c.getPreparedSpell()));
+    }
+
     public FCollectionView<CardView> getImprintedCards() {
         return Objects.requireNonNullElse(get(TrackableProperty.ImprintedCards), FCollection.getEmpty());
     }
@@ -1135,6 +1142,12 @@ public class CardView extends GameEntityView {
         if ((isSplitCard || c.isDoubleFaced()) && isFaceDown()) {
             // face-down (e.g. manifested) split cards should show the original face on their flip side
             alternateState = c.getState(CardStateName.Original);
+        }
+
+        // When a card is cloned as an Adventure creature, getAlternateState() returns null
+        // because it only checks original states. Fall back to the Secondary clone state.
+        if (alternateState == null && c.hasState(CardStateName.Secondary)) {
+            alternateState = c.getState(CardStateName.Secondary);
         }
 
         if (alternateState == null) {

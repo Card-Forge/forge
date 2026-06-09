@@ -423,17 +423,6 @@ public class FloatingZone extends FloatingCardArea {
         }
     }
 
-    /** Deregister all zone docs. Called on game end before closeAll. */
-    public static void deregisterZoneDocs() {
-        for (final VZone vZone : dockedZones.values()) {
-            final EDocID docID = vZone.getDocumentID();
-            if (docID != null) {
-                docID.setDoc(null);
-            }
-        }
-        // Don't clear dockedZones here — closeAll() handles that
-    }
-
     /** Remove dockedZones entries that weren't placed into cells by loadLayout. */
     public static void pruneUnparentedDocks() {
         dockedZones.values().removeIf(vZone -> vZone.getParentCell() == null);
