@@ -63,6 +63,12 @@ public class ReplaceDraw extends ReplacementEffect {
             }
         }
 
+        if (hasParam("FirstExtraCardDrawnThisTurn")) {
+            if ((int)runParams.getOrDefault(AbilityKey.ExtraDraws, 0) != 1) {
+                return false;
+            }
+        }
+
         return true;
     }
 

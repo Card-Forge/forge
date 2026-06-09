@@ -91,6 +91,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private boolean unlimitedHandSize = false;
     private Card lastDrawnCard;
     private int numDrawnThisTurn;
+    private int numExtraDrawsThisTurn;
     private int numDrawnLastTurn;
     private int numDrawnThisDrawStep;
     private int numCardsInHandStartedThisTurnWith;
@@ -1248,6 +1249,12 @@ public class Player extends GameEntity implements Comparable<Player> {
                     runParams.putAll(params);
                 }
 
+                if (sa == null) {
+                    // if this draw is not caused by a SA, it must be the normal draw at the beginning of the turn, so update the flag for that
+                    numExtraDrawsThisTurn++;
+                    runParams.put(AbilityKey.ExtraDraws, numExtraDrawsThisTurn);
+                }
+
                 // CR 121.8 card was drawn as part of another sa (e.g. paying with Chromantic Sphere), hide it temporarily
                 if (game.getTopLibForPlayer(this) != null && getPaidForSA() != null && cause != null && getPaidForSA() != cause.getRootAbility()) {
                     c.turnFaceDown();
@@ -1273,6 +1280,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void resetNumDrawnThisTurn() {
         numDrawnThisTurn = 0;
+        numExtraDrawsThisTurn = 0;
         view.updateNumDrawnThisTurn(this);
     }
 
@@ -1285,6 +1293,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int numDrawnThisDrawStep() {
         return numDrawnThisDrawStep;
     }
+    public final int getNumExtraDrawsThisTurn() { return numExtraDrawsThisTurn; }
 
     /**
      * Returns PlayerZone corresponding to the given zone of game.
