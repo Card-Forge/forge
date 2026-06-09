@@ -72,9 +72,9 @@ public class BugReportDialog {
         options.add(new JButton(new _Report()));
         // option to enable automatic Sentry submission
         options.add(new JCheckBox(new _ActivateSentry()));
-        options.add(new JLabel(BugReporter.SENTRY));
+        options.add(new JLabel(Localizer.getInstance().getMessage("lblAutoSubmitBugReports")));
         options.add(new JButton(new _SaveAction(area)));
-        options.add(BugReporter.DISCARD);
+        options.add(Localizer.getInstance().getMessage("lblDiscardError"));
         if (showExitAppBtn) {
             options.add(new JButton(new _ExitAction()));
         }
@@ -106,7 +106,7 @@ public class BugReportDialog {
     private static class _Report extends AbstractAction {
 
         public _Report() {
-            super(BugReporter.REPORT);
+            super(Localizer.getInstance().getMessage("lblReport"));
             this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
 
@@ -122,7 +122,7 @@ public class BugReportDialog {
         private final JTextArea area;
 
         public _SaveAction(final JTextArea areaParam) {
-            super(BugReporter.SAVE);
+            super(Localizer.getInstance().getMessage("lblSave"));
             this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
             this.area = areaParam;
         }
@@ -136,7 +136,7 @@ public class BugReportDialog {
     @SuppressWarnings("serial")
     private static class _ExitAction extends AbstractAction {
         public _ExitAction() {
-            super(BugReporter.EXIT);
+            super(Localizer.getInstance().getMessage("lblExit"));
             this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
 
