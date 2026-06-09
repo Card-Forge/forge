@@ -91,7 +91,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private boolean unlimitedHandSize = false;
     private Card lastDrawnCard;
     private int numDrawnThisTurn;
-    private int numExtraDrawsThisTurn;
+    private int numExtraDrawnThisTurn;
     private int numDrawnLastTurn;
     private int numDrawnThisDrawStep;
     private int numCardsInHandStartedThisTurnWith;
@@ -1195,6 +1195,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (gameStarted) {
             Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
             repParams.put(AbilityKey.Cause, cause);
+            repParams.put(AbilityKey.ExtraDraws, numExtraDrawnThisTurn);
             if (params != null) {
                 repParams.putAll(params);
             }
@@ -1224,7 +1225,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             // CR 121.6c additional actions can't be performed when draw gets replaced
             // but "drawn this way" effects should still count them
-            if (cause != null && cause.hasParam("RememberDrawn") && cause.getParam("RememberDrawn").equals("AllReplaced")) {
+            if (cause != null && "AllReplaced".equals(cause.getParam("RememberDrawn"))) {
                 cause.getHostCard().addRemembered(drawn);
             }
 
@@ -1239,20 +1240,18 @@ public class Player extends GameEntity implements Comparable<Player> {
                 setLastDrawnCard(c);
                 c.setDrawnThisTurn(true);
                 numDrawnThisTurn++;
+                numExtraDrawnThisTurn++;
                 if (game.getPhaseHandler().is(PhaseType.DRAW)) {
                     numDrawnThisDrawStep++;
+                    if (numDrawnThisDrawStep == 1) {
+                        numExtraDrawnThisTurn--;
+                    }
                 }
                 view.updateNumDrawnThisTurn(this);
 
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
                 if (params != null) {
                     runParams.putAll(params);
-                }
-
-                if (sa == null) {
-                    // if this draw is not caused by a SA, it must be the normal draw at the beginning of the turn, so update the flag for that
-                    numExtraDrawsThisTurn++;
-                    runParams.put(AbilityKey.ExtraDraws, numExtraDrawsThisTurn);
                 }
 
                 // CR 121.8 card was drawn as part of another sa (e.g. paying with Chromantic Sphere), hide it temporarily
@@ -1280,7 +1279,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void resetNumDrawnThisTurn() {
         numDrawnThisTurn = 0;
-        numExtraDrawsThisTurn = 0;
+        numExtraDrawnThisTurn = 0;
         view.updateNumDrawnThisTurn(this);
     }
 
@@ -1293,7 +1292,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int numDrawnThisDrawStep() {
         return numDrawnThisDrawStep;
     }
-    public final int getNumExtraDrawsThisTurn() { return numExtraDrawsThisTurn; }
 
     /**
      * Returns PlayerZone corresponding to the given zone of game.
