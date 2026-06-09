@@ -1,0 +1,10 @@
+Name:Loki Laufeyson
+ManaCost:1 R
+Types:Legendary Creature God Sorcerer Villain
+PT:2/1
+A:AB$ DelayedTrigger | Cost$ 1 T | AILogic$ SpellCopy | Mode$ SpellCast | ValidCard$ Instant.cmcLEX,Sorcery.cmcLEX | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy | SpellDescription$ When you next cast an instant or sorcery spell with mana value less than or equal to NICKNAME's power this turn, copy that spell. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+A:AB$ PutCounter | Cost$ 4 R | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | PowerUp$ True | SpellDescription$ Put two +1/+1 counters on NICKNAME. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+SVar:X:Count$CardPower
+SVar:BuffedBy:Instant,Sorcery
+Oracle:{1}, {T}: When you next cast an instant or sorcery spell with mana value less than or equal to Loki's power this turn, copy that spell. You may choose new targets for the copy.\nPower-up — {4}{R}: Put two +1/+1 counters on Loki. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
