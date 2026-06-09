@@ -41,6 +41,7 @@ import forge.gui.WrapLayout;
 import forge.gui.error.BugReporter;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 /**

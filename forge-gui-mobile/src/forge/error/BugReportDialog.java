@@ -12,6 +12,7 @@ import forge.screens.FScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
+import forge.util.Localizer;
 import forge.util.TextBounds;
 import forge.util.Utils;
 
