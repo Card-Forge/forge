@@ -9,9 +9,4 @@ public class FinishTargetingAction extends PlayerAction {
     public boolean isTargetSelectionAction() {
         return true;
     }
-
-    @Override
-    public String describe() {
-        return localize("lblMacroActionFinishSelecting");
-    }
 }

@@ -1,7 +1,5 @@
 package forge.game.player.actions;
 
-import forge.card.MagicColor;
-
 public class PayManaFromPoolAction extends PlayerAction {
     private final byte colorSelected;
 
@@ -15,7 +13,7 @@ public class PayManaFromPoolAction extends PlayerAction {
     }
 
     @Override
-    public String describe() {
-        return localize("lblMacroActionPayManaFromPool", MagicColor.toSymbol(colorSelected));
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" mana=").append(colorSelected);
     }
 }

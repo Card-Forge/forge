@@ -17,7 +17,7 @@ public class StackOrderAction extends PlayerAction {
     }
 
     @Override
-    public String describe() {
-        return localize("lblMacroActionOrderAbilities", describeList(abilityDescriptions));
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" order=").append(abilityDescriptions);
     }
 }

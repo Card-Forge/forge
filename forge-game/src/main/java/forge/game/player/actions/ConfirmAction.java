@@ -23,11 +23,8 @@ public class ConfirmAction extends PlayerAction {
         return (inputCard != null && recordedCard.getName().equals(inputCard.getName()))
                 || (message != null && message.contains(recordedCard.getName()));
     }
-
     @Override
-    public String describe() {
-        final String action = localize(confirmed ? "lblMacroActionConfirm" : "lblMacroActionDecline");
-        final String entity = describeEntity();
-        return entity.isEmpty() ? action : localize("lblMacroActionChoiceFor", action, entity);
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" confirmed=").append(confirmed);
     }
 }

@@ -2,14 +2,11 @@ package forge.game.player.actions;
 
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
-import forge.util.Localizer;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 public abstract class PlayerAction {
     private static final Pattern ENTITY_ID_SUFFIX = Pattern.compile(" \\((\\d+)\\)$");
-    private static final Localizer LOCALIZER = Localizer.getInstance();
 
     private final String name;
     private final GameEntityView gameEntityView;
@@ -62,23 +59,8 @@ public abstract class PlayerAction {
         return gameEntityView == null ? "" : describeEntity(gameEntityView);
     }
 
-    protected static String describeEntity(final GameEntityView entity) {
+    private static String describeEntity(final GameEntityView entity) {
         return entity == null ? "" : ENTITY_ID_SUFFIX.matcher(String.valueOf(entity)).replaceAll(" $1");
-    }
-
-    protected static String describeList(final List<String> values) {
-        if (values == null || values.isEmpty()) {
-            return localize("lblMacroNone");
-        }
-        final StringBuilder sb = new StringBuilder();
-        for (final String value : values) {
-            sb.append('\n').append("- ").append(value);
-        }
-        return sb.toString();
-    }
-
-    protected static String localize(final String key, final Object... args) {
-        return LOCALIZER.getMessage(key, args);
     }
 
     protected void appendDetails(final StringBuilder sb) {

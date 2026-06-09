@@ -7,9 +7,4 @@ public class TargetEntityAction extends PlayerAction {
     public TargetEntityAction(GameEntityView cardView) {
         super(cardView, "Target game entity");
     }
-
-    @Override
-    public String describe() {
-        return localize("lblMacroActionChooseTarget", describeEntity());
-    }
 }

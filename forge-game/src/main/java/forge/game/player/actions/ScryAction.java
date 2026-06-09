@@ -37,7 +37,8 @@ public class ScryAction extends PlayerAction {
     }
 
     @Override
-    public String describe() {
-        return localize("lblMacroActionScry", describeList(topCardNames), describeList(bottomCardNames));
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" top=").append(topCardNames);
+        sb.append(" bottom=").append(bottomCardNames);
     }
 }

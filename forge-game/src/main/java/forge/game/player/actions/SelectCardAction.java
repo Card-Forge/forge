@@ -17,9 +17,4 @@ public class SelectCardAction extends PlayerAction {
     public CardView getSelectedCardView() {
         return getGameEntityView() instanceof CardView cardView ? cardView : null;
     }
-
-    @Override
-    public String describe() {
-        return localize("lblMacroActionSelectCard", describeEntity());
-    }
 }

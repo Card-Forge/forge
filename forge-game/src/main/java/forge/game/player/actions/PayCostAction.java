@@ -6,9 +6,4 @@ public class PayCostAction extends PlayerAction {
     public PayCostAction(GameEntityView cardView) {
         super(cardView, "Pay cost");
     }
-
-    @Override
-    public String describe() {
-        return localize("lblMacroActionPayCost", describeEntity());
-    }
 }

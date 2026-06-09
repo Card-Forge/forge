@@ -17,8 +17,7 @@ public class ModeChoiceAction extends PlayerAction {
     }
 
     @Override
-    public String describe() {
-        return localize(modeDescriptions.size() == 1 ? "lblMacroActionChooseMode" : "lblMacroActionChooseModes",
-                describeList(modeDescriptions));
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" modes=").append(modeDescriptions);
     }
 }

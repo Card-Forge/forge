@@ -15,7 +15,7 @@ public class ColorChoiceAction extends PlayerAction {
     }
 
     @Override
-    public String describe() {
-        return localize("lblMacroActionChooseColor", MagicColor.toLongString(color));
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" color=").append(MagicColor.toShortString(color));
     }
 }

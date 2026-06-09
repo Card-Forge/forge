@@ -15,7 +15,7 @@ public class ActivateAbilityAction extends PlayerAction {
     }
 
     @Override
-    public String describe() {
-        return localize("lblMacroActionActivateAbility", describeEntity(), abilityDescription);
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" ability=\"").append(abilityDescription).append("\"");
     }
 }
