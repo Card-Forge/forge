@@ -15,14 +15,16 @@ public final class OnboardingPresets {
             FPref.YIELD_AUTO_PASS_NO_ACTIONS, "true",
             FPref.UI_REMIND_ON_PRIORITY, "true",
             FPref.UI_SHOW_STORM_COUNT_IN_PROMPT, "true",
-            FPref.UI_DETAILED_SPELLDESC_IN_PROMPT, "true");
+            FPref.UI_DETAILED_SPELLDESC_IN_PROMPT, "true",
+            FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, "true");
     public static final Map<FPref, String> AI_EXPERT = build(
             FPref.UI_OVERLAY_DRAFT_RANKING, "false",
             FPref.UI_ORDER_HAND, "false",
             FPref.YIELD_AUTO_PASS_NO_ACTIONS, "false",
             FPref.UI_REMIND_ON_PRIORITY, "false",
             FPref.UI_SHOW_STORM_COUNT_IN_PROMPT, "false",
-            FPref.UI_DETAILED_SPELLDESC_IN_PROMPT, "false");
+            FPref.UI_DETAILED_SPELLDESC_IN_PROMPT, "false",
+            FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, "false");
 
     public static final Map<FPref, String> LAYOUT_DEFAULT = build(
             FPref.UI_GROUP_PERMANENTS, "default");
@@ -31,10 +33,12 @@ public final class OnboardingPresets {
 
     public static final Map<FPref, String> OVERLAYS_NONE = build(
             FPref.UI_SHOW_CARD_OVERLAYS, "false",
-            FPref.UI_TARGETING_OVERLAY, "0");
+            FPref.UI_TARGETING_OVERLAY, "0",
+            FPref.UI_SHOW_LINKED_EXILE_CARDS, "false");
     public static final Map<FPref, String> OVERLAYS_ON = build(
             FPref.UI_SHOW_CARD_OVERLAYS, "true",
-            FPref.UI_TARGETING_OVERLAY, "2");
+            FPref.UI_TARGETING_OVERLAY, "2",
+            FPref.UI_SHOW_LINKED_EXILE_CARDS, "true");
 
     private static Map<FPref, String> build(Object... kvs) {
         EnumMap<FPref, String> m = new EnumMap<>(FPref.class);

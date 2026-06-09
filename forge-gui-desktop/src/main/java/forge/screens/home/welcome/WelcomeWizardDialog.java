@@ -414,6 +414,8 @@ public final class WelcomeWizardDialog extends FDialog {
             case UI_TARGETING_OVERLAY:             return L.getMessage("lblTargetingArcs");
             case UI_GROUP_PERMANENTS:         return L.getMessage("cbpStackGroupPermanents");
             case UI_SHOW_CARD_OVERLAYS:       return L.getMessage("lblShowCardOverlays");
+            case UI_SHOW_ACTIONABLE_HIGHLIGHTS: return L.getMessage("cbShowActionableHighlights");
+            case UI_SHOW_LINKED_EXILE_CARDS:  return L.getMessage("cbShowLinkedExileCards");
             default:                          return key.name();
         }
     }
