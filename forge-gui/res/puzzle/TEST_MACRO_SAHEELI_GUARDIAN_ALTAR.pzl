@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Test - Macro Replay - Saheeli Guardian Altar
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:2
+
+Difficulty:Rare
+
+Description:Test puzzle for replaying a planeswalker-copy blink loop: Saheeli Rai copies Felidar Guardian, the Guardian token blinks Saheeli, and Altar of the Brood mills the opponent as permanents enter. Record one cycle that uses Saheeli's copy ability on Felidar Guardian, resolves the token's blink trigger targeting Saheeli, and lets Altar of the Brood triggers resolve.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Saheeli Rai|Counters:LOYALTY=20;Felidar Guardian;Altar of the Brood
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

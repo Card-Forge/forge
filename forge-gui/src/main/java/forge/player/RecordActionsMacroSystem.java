@@ -39,7 +39,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.IntSupplier;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 // Iteration on the current limited macro system. Instead of asking for IDs to click on
 // Instead we wrap the input queue in a way that we can record what the player is doing and
@@ -61,16 +60,13 @@ public class RecordActionsMacroSystem implements IMacroSystem {
 
     private final List<PlayerAction> actions = Lists.newArrayList();
     private final List<PlayerAction> playbackActions = Lists.newArrayList();
-    private final List<Runnable> statusListeners = Lists.newArrayList();
     private boolean recording;
     private int repeatIteration;
     private int repeatIterations;
     private int playbackRetries;
-    private int activeActionIndex = -1;
     private int pendingStackOrderPriorityPasses;
     private boolean waitingForSelectionAfterStackOrder;
     private ManaComboAction pendingRecordedManaCombo;
-    private final List<String> playbackMessages = Lists.newArrayList();
 
     public RecordActionsMacroSystem(final PlayerControllerHuman playerControllerHuman) {
         this.playerControllerHuman = playerControllerHuman;
@@ -85,39 +81,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
 
     @Override
     public boolean hasRememberedActions() { return !actions.isEmpty(); }
-
-    @Override
-    public List<String> getRememberedActionDescriptions() {
-        return actions.stream().map(PlayerAction::describe).collect(Collectors.toList());
-    }
-
-    @Override
-    public int getActiveActionIndex() {
-        return activeActionIndex;
-    }
-
-    @Override
-    public List<String> getPlaybackMessages() {
-        return Lists.newArrayList(playbackMessages);
-    }
-
-    @Override
-    public void addStatusListener(final Runnable listener) {
-        if (listener != null && !statusListeners.contains(listener)) {
-            statusListeners.add(listener);
-        }
-    }
-
-    @Override
-    public void removeStatusListener(final Runnable listener) {
-        statusListeners.remove(listener);
-    }
-
-    private void notifyStatusListeners() {
-        for (final Runnable listener : Lists.newArrayList(statusListeners)) {
-            listener.run();
-        }
-    }
 
     @Override
     public Byte consumeRememberedColorChoice(final List<MagicColor.Color> choices) {
@@ -244,7 +207,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             waitingForSelectionAfterStackOrder = action instanceof StackOrderAction
                     && findNextAction(SelectCardAction.class, SelectPlayerAction.class) >= 0;
             playerControllerHuman.getInputQueue().updateObservers();
-            notifyStatusListeners();
             return result;
         }
         debug("rejected " + action.describe());
@@ -302,12 +264,9 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             finishPlayback();
         }
         recording = true;
-        activeActionIndex = -1;
         actions.clear();
         playbackActions.clear();
-        playbackMessages.clear();
         playerControllerHuman.getInputQueue().updateObservers();
-        notifyStatusListeners();
 
         return true;
     }
@@ -320,7 +279,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         recording = false;
         flushPendingRecordedManaCombo();
         playerControllerHuman.getInputQueue().updateObservers();
-        notifyStatusListeners();
 
         return true;
     }
@@ -377,7 +335,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private void rememberAction(final PlayerAction action) {
         actions.add(action);
         playbackActions.add(action);
-        notifyStatusListeners();
     }
 
     private void removeLastCardSelectionFor(final GameEntityView view, final List<PlayerAction> actionList) {
@@ -470,21 +427,17 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         pendingRecordedManaCombo = null;
         cancelPlayback();
         playerControllerHuman.getInputQueue().updateObservers();
-        notifyStatusListeners();
     }
 
     private void startPlayback(final int loops) {
         repeatIterations = loops;
         repeatIteration = 1;
         resetPlaybackProgress();
-        activeActionIndex = -1;
-        playbackMessages.clear();
         restartPlaybackActions();
         if (DEBUG) {
             debug("start loops=" + loops + " actions=" + describeActions(playbackActions));
         }
         playerControllerHuman.getInputQueue().updateObservers();
-        notifyStatusListeners();
         FThreads.delayInEDT(50, this::continuePlayback);
     }
 
@@ -498,7 +451,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             final int pendingInputResult = processPendingInputAfterActions();
             if (pendingInputResult == WAIT_FOR_NEXT_INPUT) {
                 if (++playbackRetries > MAX_WAIT_RETRIES) {
-                    stopPlayback("lblMacroPlaybackStoppedWaitingAfterFinalAction");
+                    stopPlayback("waiting after final recorded action");
                     return;
                 }
                 FThreads.delayInEDT(50, this::continuePlayback);
@@ -517,12 +470,9 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             repeatIteration++;
             restartPlaybackActions();
             resetPlaybackProgress();
-            activeActionIndex = -1;
             playerControllerHuman.getInputQueue().updateObservers();
-            notifyStatusListeners();
         }
 
-        setActiveAction(playbackActions.isEmpty() ? null : playbackActions.get(0));
         final int actionIndex = processNextAcceptedAction();
         if (actionIndex >= 0) {
             final PlayerAction acceptedAction = playbackActions.remove(actionIndex);
@@ -533,11 +483,11 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             }
         } else if (actionIndex == WAIT_FOR_NEXT_INPUT) {
             if (++playbackRetries > MAX_WAIT_RETRIES) {
-                stopPlayback("lblMacroPlaybackStoppedWaiting");
+                stopPlayback("waiting for next input");
                 return;
             }
         } else if (++playbackRetries > MAX_REJECTED_ACTION_RETRIES) {
-            stopPlayback("lblMacroPlaybackStoppedGeneric");
+            stopPlayback("next recorded action rejected");
             return;
         }
 
@@ -726,7 +676,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
                 continue;
             }
             if (shouldSkipPassPriorityAction(i)) {
-                setActiveAction(action);
                 debug("skipped obsolete " + action.describe());
                 return i;
             }
@@ -847,7 +796,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             return true;
         }
         if (++playbackRetries > MAX_WAIT_RETRIES) {
-            stopPlayback("lblMacroPlaybackStoppedWaitingBetweenIterations");
+            stopPlayback("waiting between iterations for stack to clear");
             return true;
         }
         return true;
@@ -1041,19 +990,11 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     }
 
     private void finishPlayback() {
-        finishPlayback(true);
-    }
-
-    private void finishPlayback(final boolean clearActiveAction) {
         repeatIteration = 0;
         repeatIterations = 0;
         resetPlaybackProgress();
-        if (clearActiveAction) {
-            activeActionIndex = -1;
-        }
         playbackActions.clear();
         playerControllerHuman.getInputQueue().updateObservers();
-        notifyStatusListeners();
     }
 
     private void restartPlaybackActions() {
@@ -1067,20 +1008,17 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         waitingForSelectionAfterStackOrder = false;
     }
 
-    private void stopPlayback(final String reasonKey) {
-        final String message = localizer.getMessage("lblMacroPlaybackStoppedAt",
-                localizer.getMessage(reasonKey), describeActiveAction(), describeInput());
-        playbackMessages.add(message);
+    private void stopPlayback(final String reason) {
         if (DEBUG) {
-            debug(message + " remaining=" + describeActions(playbackActions));
+            debug("stopped: " + reason + " input=" + describeInput()
+                    + " remaining=" + describeActions(playbackActions));
         }
-        finishPlayback(false);
+        finishPlayback();
         playerControllerHuman.getGui().message(localizer.getMessage("lblMacroPlaybackStopped"),
                 localizer.getMessage("lblRepeatActionSequence"));
     }
 
     public boolean processAction(PlayerAction action) {
-        setActiveAction(action);
         if (DEBUG) {
             debug("try " + action.describe());
         }
@@ -1099,28 +1037,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         if (DEBUG) {
             debug((result ? "accepted " : "rejected ") + action.describe());
         }
-        if (!result && repeatIterations > 0 && playbackRetries == MAX_REJECTED_ACTION_RETRIES) {
-            playbackMessages.add(localizer.getMessage("lblMacroCouldNotReplay", action.describe(), describeInput()));
-            notifyStatusListeners();
-        }
         return result;
-    }
-
-    private void setActiveAction(final PlayerAction action) {
-        final int index = action == null ? -1 : actions.indexOf(action);
-        if (activeActionIndex == index) {
-            return;
-        }
-        activeActionIndex = index;
-        notifyStatusListeners();
-    }
-
-    private String describeActiveAction() {
-        if (activeActionIndex >= 0 && activeActionIndex < actions.size()) {
-            return localizer.getMessage("lblMacroStepDescription",
-                    activeActionIndex + 1, actions.get(activeActionIndex).describe());
-        }
-        return localizer.getMessage("lblMacroNextRecordedStep");
     }
 
     private void debug(final String message) {

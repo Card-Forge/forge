@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Test - Macro Replay - Ghostly Flicker Drake
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Rare
+
+Description:Test puzzle for replaying a spell-recursion blink loop: Ghostly Flicker targets Peregrine Drake and Archaeomancer, Drake untaps lands, Archaeomancer returns Ghostly Flicker, and Impact Tremors damages the opponent. Record one cycle that casts Ghostly Flicker targeting both creatures, orders and resolves the enter triggers, returns Ghostly Flicker from the graveyard, and untaps the Islands that paid for the spell. Repeat until Impact Tremors defeats the opponent.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=Ghostly Flicker
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Archaeomancer|NoETBTrigs;Peregrine Drake|NoETBTrigs;Impact Tremors|NoETBTrigs;Island|NoETBTrigs;Island|NoETBTrigs;Island|NoETBTrigs;Island|NoETBTrigs;Island|NoETBTrigs
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

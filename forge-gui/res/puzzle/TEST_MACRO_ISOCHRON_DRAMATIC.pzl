@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Test - Macro Replay - Isochron Dramatic
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Rare
+
+Description:Test puzzle for replaying a mana loop from the commander combo list: Isochron Scepter plus Dramatic Reversal. Dramatic Reversal is already imprinted on Isochron Scepter. Record one cycle that taps Sol Ring and Mana Vault, activates Isochron Scepter, casts the Dramatic Reversal copy, and resolves it. Repeat the cycle enough times to build lethal mana, then cast Banefire targeting the opponent.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=Banefire
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Isochron Scepter|Id:1|Imprinting:2;Sol Ring;Mana Vault;Mountain
+
+humanexile=Dramatic Reversal|Id:2|ExiledWith:1
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

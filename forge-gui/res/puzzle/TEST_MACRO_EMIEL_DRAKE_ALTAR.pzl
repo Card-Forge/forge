@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Test - Macro Replay - Emiel Drake Altar
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:2
+
+Difficulty:Rare
+
+Description:Test puzzle for replaying a blink loop with mana payment and multi-land untap choices: Emiel the Blessed blinks Peregrine Drake, Drake untaps lands, and Altar of the Brood mills the opponent. Record one cycle that activates Emiel targeting Peregrine Drake, pays with three Islands, resolves Drake's untap trigger, and declines Emiel's optional counter trigger.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Emiel the Blessed|NoETBTrigs;Peregrine Drake|NoETBTrigs;Altar of the Brood|NoETBTrigs;Island|NoETBTrigs;Island|NoETBTrigs;Island|NoETBTrigs;Island|NoETBTrigs;Island|NoETBTrigs
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

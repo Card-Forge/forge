@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Test - Macro Replay - Aggravated Assault Reaver Cleaver
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Rare
+
+Description:Test puzzle for replaying an infinite combat loop from the commander combo list: Aggravated Assault plus The Reaver Cleaver. The Reaver Cleaver is attached to a large hasty Dragon token. Attack to create enough Treasure tokens, then use those Treasures to activate Aggravated Assault for another combat phase. Record one combat cycle and repeat until the opponent is defeated.
+
+[state]
+
+humanlife=20
+ailife=40
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Aggravated Assault;The Reaver Cleaver|AttachedTo:1;t:Dragon,P:5,T:5,Cost:no cost,Color:R,Types:Creature-Dragon,Keywords:Flying-Haste,Image:r_5_5_dragon_flying|Id:1
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

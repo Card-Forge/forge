@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Test - Macro Replay - Goblin Bombardment
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Common
+
+Description:Test puzzle for replaying a recorded loop shortcut. You control Goblin Bombardment and twenty 1/1 Goblin creature tokens. Your opponent is at 20 life. Record one activation that sacrifices a Goblin token and targets the opponent, then repeat the recorded sequence nineteen additional times.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Goblin Bombardment;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM;t:Goblin,P:1,T:1,Cost:no cost,Color:R,Types:Creature-Goblin,Keywords:,Image:r_1_1_goblin_SOM
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

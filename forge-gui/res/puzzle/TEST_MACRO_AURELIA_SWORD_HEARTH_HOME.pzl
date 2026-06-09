@@ -1,0 +1,46 @@
+[metadata]
+
+Name:Test - Macro Replay - Aurelia Sword Hearth and Home
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Rare
+
+Description:Test puzzle for replaying an infinite combat loop with Sword of Hearth and Home on a token plus Aurelia, the Warleader. Attack with Aurelia and the equipped Spirit token. Sword of Hearth and Home should blink Aurelia, resetting her first-attack trigger for the next combat. Record one combat cycle and repeat until the opponent is defeated.
+
+[state]
+
+humanlife=20
+ailife=40
+
+activeplayer=human
+
+activephase=MAIN1
+activephaseadvance=BEGINCOMBAT
+
+humanhand=
+
+humanlibrary=Plains;Plains;Plains;Plains;Plains
+
+humangraveyard=
+
+humanbattlefield=Aurelia, the Warleader|Id:1;Sword of Hearth and Home|AttachedTo:2;t:Spirit,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Spirit,Keywords:Flying,Image:w_1_1_spirit_flying|Id:2
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

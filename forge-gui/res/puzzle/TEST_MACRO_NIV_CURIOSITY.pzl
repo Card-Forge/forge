@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Test - Macro Replay - Niv-Mizzet Curiosity
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Uncommon
+
+Description:Test puzzle for replaying a draw-damage loop from the commander combo list: Niv-Mizzet, Parun plus Curiosity. Curiosity is already attached to Niv-Mizzet. Cast Opt to start the loop, then record one cycle of targeting the opponent with Niv-Mizzet's damage trigger and accepting Curiosity's draw. Repeat until the opponent is defeated.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=Opt
+
+humanlibrary=Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island
+
+humangraveyard=
+
+humanbattlefield=Niv-Mizzet, Parun|Id:1;Curiosity|AttachedTo:1;Island
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

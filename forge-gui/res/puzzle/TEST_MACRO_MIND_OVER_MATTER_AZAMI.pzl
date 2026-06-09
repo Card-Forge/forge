@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Test - Macro Replay - Mind Over Matter Azami
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Rare
+
+Description:Test puzzle for replaying a draw-discard untap loop from the commander combo list: Mind Over Matter plus Azami, Lady of Scrolls. Psychosis Crawler turns each draw into damage. Record one cycle that taps Azami to draw a card, resolves Psychosis Crawler, then discards an Island to Mind Over Matter targeting Azami to untap her. Repeat until the opponent is defeated.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=Island;Island;Island
+
+humanlibrary=Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island
+
+humangraveyard=
+
+humanbattlefield=Mind Over Matter;Azami, Lady of Scrolls;Psychosis Crawler
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

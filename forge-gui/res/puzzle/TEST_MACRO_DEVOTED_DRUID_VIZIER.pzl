@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Test - Macro Replay - Devoted Druid Vizier
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Uncommon
+
+Description:Test puzzle for replaying a mana loop from the commander combo list: Devoted Druid plus Vizier of Remedies. Record one cycle that taps Devoted Druid for mana and untaps it by putting a -1/-1 counter on it. Repeat to build enough mana, then cast Walking Ballista large enough to defeat the opponent.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=Walking Ballista
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Devoted Druid;Vizier of Remedies
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

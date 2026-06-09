@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Test - Macro Replay - Axebane Umbral Mantle
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Rare
+
+Description:Test puzzle for replaying an untap-symbol mana loop: Axebane Guardian equipped with Umbral Mantle and enough defenders to make extra mana. Record one cycle that taps Axebane Guardian for red mana, activates the Umbral Mantle ability to untap it, and repeats until enough red mana is available to cast Banefire targeting the opponent.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=Banefire
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Axebane Guardian|Id:1|NoETBTrigs;Umbral Mantle|AttachedTo:1|NoETBTrigs;Wall of Omens|NoETBTrigs;Wall of Blossoms|NoETBTrigs;Wall of Roots|NoETBTrigs;Overgrown Battlement|NoETBTrigs
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=Island;Island;Island;Island;Island;Island;Island;Island
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

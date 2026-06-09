@@ -1,0 +1,47 @@
+[metadata]
+
+Name:Test - Macro Replay - Pili-Pala Architect
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Rare
+
+Description:Test puzzle for replaying a mana loop from the commander combo list: Pili-Pala plus Grand Architect. First use Grand Architect to make Pili-Pala blue. Then record one cycle that taps Pili-Pala for Grand Architect's artifact-only mana and untaps Pili-Pala to add one mana of any color. Repeat to build enough mana, then cast Walking Ballista large enough to defeat the opponent.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanpersistentmana=U
+
+humanhand=Walking Ballista
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Pili-Pala;Grand Architect
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

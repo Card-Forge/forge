@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Test - Macro Replay - Retreat Scout Crab
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:2
+
+Difficulty:Rare
+
+Description:Test puzzle for replaying a landfall/bounce loop: Sakura-Tribe Scout plus Retreat to Coralhelm plus Ruin Crab and Simic Growth Chamber. Record one cycle that puts Simic Growth Chamber from hand onto the battlefield, uses Retreat to untap Sakura-Tribe Scout, returns Simic Growth Chamber to hand, and lets Ruin Crab mill the opponent. Repeat until the opponent has no library, then pass the turn.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=Simic Growth Chamber
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Sakura-Tribe Scout;Retreat to Coralhelm;Ruin Crab;Forest
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

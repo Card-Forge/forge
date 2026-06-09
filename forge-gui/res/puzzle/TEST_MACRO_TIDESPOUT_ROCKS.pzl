@@ -1,0 +1,47 @@
+[metadata]
+
+Name:Test - Macro Replay - Tidespout Rocks
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Rare
+
+Description:Test puzzle for replaying an alternating spell-cast loop from the commander combo list: Tidespout Tyrant plus cheap mana rocks. Aetherflux Reservoir turns repeated casts into life. Record one full cycle that casts Sol Ring bouncing Mana Vault with Tidespout Tyrant, then casts Mana Vault bouncing Sol Ring. Repeat until you have enough life, then activate Aetherflux Reservoir targeting the opponent.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanpersistentmana=C
+
+humanhand=Sol Ring
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Tidespout Tyrant;Aetherflux Reservoir;Mana Vault
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

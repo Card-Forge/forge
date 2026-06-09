@@ -1,0 +1,47 @@
+[metadata]
+
+Name:Test - Macro Replay - Sliver Queen Ashnod's Altar
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Uncommon
+
+Description:Test puzzle for replaying a token resource loop from the commander combo list: Sliver Queen plus Ashnod's Altar. Impact Tremors turns each token into damage. Record one cycle that creates a Sliver token, resolves Impact Tremors, then sacrifices that token to Ashnod's Altar. Repeat until the opponent is defeated.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanpersistentmana=C C
+
+humanhand=
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Sliver Queen;Ashnod's Altar;Impact Tremors
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

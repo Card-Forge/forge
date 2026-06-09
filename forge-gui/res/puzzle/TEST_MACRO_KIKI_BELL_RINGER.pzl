@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Test - Macro Replay - Kiki-Jiki Bell-Ringer
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Uncommon
+
+Description:Test puzzle for replaying a copied-token untap loop from the commander combo list: Kiki-Jiki, Mirror Breaker plus Village Bell-Ringer. Record one cycle by activating Kiki-Jiki targeting Village Bell-Ringer, then let the token untap your creatures. Repeat the recorded cycle until you have enough hasty Bell-Ringer tokens to attack for lethal damage.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Kiki-Jiki, Mirror Breaker;Village Bell-Ringer
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=

@@ -1,0 +1,47 @@
+[metadata]
+
+Name:Test - Macro Replay - Reveillark Guide Altar
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Rare
+
+Description:Test puzzle for replaying a two-creature recursion loop: Karmic Guide plus Reveillark plus Altar of Dementia. The graveyard includes extra small creatures so Reveillark's optional multi-target trigger must consistently choose only Karmic Guide and finish targeting. Record one cycle that sacrifices Karmic Guide to Altar of Dementia targeting the opponent, sacrifices Reveillark to Altar of Dementia targeting the opponent, returns Karmic Guide with Reveillark, then returns Reveillark with Karmic Guide. Repeat until the opponent has no library, then cast Sign in Blood targeting the opponent.
+
+[state]
+
+humanlife=20
+ailife=20
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanpersistentmana=B B
+
+humanhand=Sign in Blood
+
+humanlibrary=
+
+humangraveyard=Soul Warden;Wall of Omens;Elvish Visionary;Sakura-Tribe Elder
+
+humanbattlefield=Karmic Guide|NoETBTrigs;Reveillark|NoETBTrigs;Altar of Dementia|NoETBTrigs
+
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island;Island
+
+aigraveyard=
+
+aibattlefield=
+
+aiexile=
+
+aicommand=
