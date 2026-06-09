@@ -1,0 +1,11 @@
+Name:Hit-Monkey
+ManaCost:3 G
+Types:Legendary Creature Monkey Assassin
+PT:3/3
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+K:Reach
+K:Vigilance
+K:Deathtouch
+K:Hexproof
+K:Haste
+Oracle:This spell can't be countered.\nReach, vigilance, deathtouch, hexproof, haste

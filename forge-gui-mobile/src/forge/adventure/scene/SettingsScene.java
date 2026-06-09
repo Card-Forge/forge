@@ -302,6 +302,7 @@ public class SettingsScene extends UIScene {
             }
         });
         addCheckBox(Forge.getLocalizer().getMessage("lblPromptAutoSell"), ForgePreferences.FPref.PROMPT_FOR_AUTOSELL);
+        addCheckBox(Forge.getLocalizer().getMessage("lblAutoSellVariantsCommander"), ForgePreferences.FPref.ADV_COMMANDER_AUTOSELL_VARIANT);
         addCheckBox(Forge.getLocalizer().getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);
@@ -311,7 +312,6 @@ public class SettingsScene extends UIScene {
         addCheckBox(Forge.getLocalizer().getMessage("lblCardID"), ForgePreferences.FPref.UI_OVERLAY_CARD_ID);
         addCheckBox(Forge.getLocalizer().getMessage("lblAbilityIcon"), ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS);
         addCheckBox(Forge.getLocalizer().getMessage("cbImageFetcher"), ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
-
 
         if (!GuiBase.isAndroid()) {
             addCheckBox(Forge.getLocalizer().getMessage("lblBattlefieldTextureFiltering"), ForgePreferences.FPref.UI_LIBGDX_TEXTURE_FILTERING);

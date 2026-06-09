@@ -1,6 +1,6 @@
 [metadata]
 Code=MH3
-Date=2024-06-07
+Date=2024-06-14
 Name=Modern Horizons 3
 Type=Draft
 BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,NewToModern,Common-Land,Wildcard
@@ -79,7 +79,7 @@ Replace=.042F fromSheet("MH3 commanders")
 28 U Guardian of the Forgotten @Ron Spears
 29 R Guide of Souls @Ryan Valle
 30 C Hexgold Slith @Michele Giorgi
-31 U Indebted Spirit @LA Draws
+31 U Indebted Spirit @L.A. Draws
 32 C Inspired Inventor @Ryan Valle
 33 C Jolted Awake @Steven Russell Black
 34 C Mandibular Kite @Bruno Biazotto
@@ -123,7 +123,7 @@ Replace=.042F fromSheet("MH3 commanders")
 72 U Tamiyo Meets the Story Circle @Xabi Gaztelua
 73 C Tempest Harvester @Runa I. Rosenberger
 74 U Triton Wavebreaker @Christina Kraus
-75 C Tune the Narrative @Marzena Nereida Piwowar
+75 C Tune the Narrative @Nereida
 76 M Ugin's Binding @Drew Baker
 77 C Unfathomable Truths @Drew Tucker
 78 C Utter Insignificance @Lius Lasahido
@@ -181,7 +181,7 @@ Replace=.042F fromSheet("MH3 commanders")
 130 U Phyrexian Ironworks @Mathias Kollros
 131 R Powerbalance @Steve Ellis
 132 U Ral and the Implicit Maze @Andrew Mar
-133 U Reckless Pyrosurfer @LA Draws
+133 U Reckless Pyrosurfer @L.A. Draws
 134 U Reiterating Bolt @G-host Lee
 135 C Sarpadian Simulacrum @Forrest Schehl
 136 C Siege Smash @Joshua Cairos
@@ -199,7 +199,7 @@ Replace=.042F fromSheet("MH3 commanders")
 148 C Colossal Dreadmask @Caio Monteiro
 149 M Eladamri, Korvecdal @Zoltan Boros
 150 C Eldrazi Repurposer @Daren Bader
-151 C Evolution Witness @Marzena Nereida Piwowar
+151 C Evolution Witness @Nereida
 152 R Fanatic of Rhonas @Scott Murphy
 153 U Fangs of Kalonia @Leanna Crossan
 154 R Flare of Cultivation @Billy Christian
@@ -467,7 +467,7 @@ Replace=.042F fromSheet("MH3 commanders")
 400 R Flare of Denial @Jason A. Engle
 401 R Kappa Cannoneer @Jesper Ejsing
 402 M Shadow of the Second Sun @Danny Schwartz
-403 C Tune the Narrative @Marzena Nereida Piwowar
+403 C Tune the Narrative @Nereida
 404 R Volatile Stormdrake @Campbell White
 405 C Accursed Marauder @Paolo Parente
 406 R Chthonian Nightmare @Josu Solano
@@ -488,7 +488,7 @@ Replace=.042F fromSheet("MH3 commanders")
 421 U Unstable Amulet @José Parodi
 422 R Wheel of Potential @Drew Baker
 423 M Eladamri, Korvecdal @Zoltan Boros
-424 C Evolution Witness @Marzena Nereida Piwowar
+424 C Evolution Witness @Nereida
 425 R Flare of Cultivation @Billy Christian
 426 U Lion Umbra @Julia Metzger
 427 U Monstrous Vortex @Deruchenko Alexander

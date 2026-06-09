@@ -266,11 +266,11 @@ ScryfallCode=M19
 253 C Meandering River @Cliff Childs
 254 U Reliquary Tower @Jesper Ejsing
 255 U Rupture Spire @Jaime Jones
-256 C Stone Quarry @Efflam Mercier
+256 C Stone Quarry @Enora Mercier
 257 C Submerged Boneyard @Cliff Childs
 258 C Timber Gorge @Cliff Childs
 259 C Tranquil Expanse @Sam Burley
-260 C Woodland Stream @Efflam Mercier
+260 C Woodland Stream @Enora Mercier
 261 L Plains @John Avon
 262 L Plains @Zoltan Boros & Gabor Szikszai
 263 L Plains @Nils Hamm

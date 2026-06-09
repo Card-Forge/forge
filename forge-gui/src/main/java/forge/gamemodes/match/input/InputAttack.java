@@ -97,6 +97,12 @@ public class InputAttack extends InputSyncronizedBase {
     }
 
     @Override
+    protected void onStop() {
+        // Clear so highlights don't survive autopass.
+        getController().clearActionableCards();
+    }
+
+    @Override
     protected final void onOk() {
         getController().macros().addRememberedAction(new FinishTargetingAction());
         // Propaganda costs could have been paid here.
@@ -350,6 +356,10 @@ public class InputAttack extends InputSyncronizedBase {
         showMessage(message);
 
         updatePrompt();
+
+        // Re-push after each click so declared attackers stop glowing.
+        // Can't reuse showMessage() — it also resets currentDefender.
+        getController().pushAttackerCandidates(playerAttacks, combat);
 
         if (combat != null)
             getController().getGame().fireEvent(GameEventCombatUpdate.fromCards(combat.getAttackers(), combat.getAllBlockers()));

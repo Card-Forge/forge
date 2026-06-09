@@ -201,7 +201,7 @@ Forge offers several yield options depending on how long you want to skip prompt
 - **Yield to stack / Resolve entire stack** — auto-pass while the stack resolves. Right-click a stack item to choose: **Yield to stack** auto-passes until the stack empties or an interrupt fires (for example, an opponent casts another spell); **Resolve entire stack** keeps auto-passing until the whole stack is empty even if opponents cast more spells.
 
 > [!NOTE]
-> For more information and configuration options — including interrupt conditions, automatic yield suggestions, and speed settings — see [Advanced Yield Options](advanced-yield-options.md).
+> For more information and configuration options — including interrupt conditions, automatic yield suggestions, and speed settings — see [Advanced Yield Options](Advanced-Yield-Options.md).
 
 ## Individual Yields and Trigger Decisions
 When a spell or an ability appears on the stack you can right-click it to decide if you want to always accept (Always Yes) or always decline it (Always No). For abilities marked "(OPTIONAL)" the same right-click lets you set an auto-yield so you don't get prompted on subsequent activations.
@@ -256,7 +256,7 @@ The match screen is divided into resizable panels. The numbers below identify ea
 3. **Player field tabs** — switch between opponents' fields in multiplayer; the (N new) indicator highlights cards that have changed since you last viewed that field. See [Sort Player Fields in Turn Order](#sort-player-fields-in-turn-order) for ordering options.
 4. **Card Detail** — selected card's text and metadata.
 5. **Opponent's field** — same layout as your own field (items 6-10 describe its components).
-6. **Avatar and life total** — left-click to target the player, hover to see more info including Commander damage.
+6. **Avatar and life total** — left-click to target the player, hover to see more info including Commander damage and, when a Commander bracket cap is active, estimated Commander bracket.
 7. **Zone buttons** — hand, library, graveyard, exile, command, and sideboard with live counts; click to view, right-click for display options. See [Viewing cards in different zones](#viewing-cards-in-different-zones) for details.
 8. **Turn Phases** — click any pip to toggle a priority stop in that phase; right-click to yield to that phase.
 9. **Mana pool** — floating mana; click a symbol to spend it during cost payment.

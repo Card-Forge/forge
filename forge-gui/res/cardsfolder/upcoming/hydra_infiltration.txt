@@ -1,0 +1,10 @@
+Name:HYDRA Infiltration
+ManaCost:3 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When this enchantment enters, target opponent discards two cards.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature you control attacks alone, target opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVAr:PlayMain1:TRUE
+Oracle:When this enchantment enters, target opponent discards two cards.\nWhenever a creature you control attacks alone, target opponent loses 1 life and you gain 1 life.

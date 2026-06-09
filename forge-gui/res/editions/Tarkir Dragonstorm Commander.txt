@@ -311,7 +311,7 @@ ScryfallCode=TDC
 303 M Sidar Kondo of Jamuraa @Ryan Alexander Lee
 304 U Skull Prophet @Nils Hamm
 305 R Temur Ascendancy @Jaime Jones
-306 U Thalisse, Reverent Medium @Heonhwa Choe
+306 U Thalisse, Reverent Medium @Heonhwa
 307 U Third Path Iconoclast @Manuel Castañón
 308 R Time Wipe @Svetlin Velinov
 309 M Velomachus Lorehold @Raymond Swanland

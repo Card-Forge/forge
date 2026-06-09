@@ -84,7 +84,7 @@ ScryfallCode=ANB
 74 C Hurloon Minotaur @Izzy
 75 R Immortal Phoenix @Daarken
 76 U Inescapable Blaze @Steve Argyle
-77 C Maniacal Rage @Heonhwa Choe
+77 C Maniacal Rage @Heonhwa
 78 C Molten Ravager @Dave Kendall
 79 C Nest Robber @Jonathan Kuo
 80 R Ogre Battledriver @Greg Staples

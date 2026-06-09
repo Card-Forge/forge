@@ -158,7 +158,7 @@ ScryfallCode=M20
 146 C Keldon Raider @Chris Seaman
 147 C Lavakin Brawler @Victor Adame Minguez
 148 R Leyline of Combustion @Noah Bradley
-149 C Maniacal Rage @Heonhwa Choe
+149 C Maniacal Rage @Heonhwa
 150 R Marauding Raptor @Bayard Wu
 151 U Mask of Immolation @Igor Kieryluk
 152 C Pack Mastiff @Svetlin Velinov
@@ -360,7 +360,7 @@ ScryfallCode=M20
 344 C Woodland Mystic @Uriah Voth
 
 [rebalanced]
-A-115 A-Sorin, Imperious Bloodlord @Chase Stone
+A-115 M A-Sorin, Imperious Bloodlord @Chase Stone
 
 [Lands]
 6 Bloodfell Caves|M20

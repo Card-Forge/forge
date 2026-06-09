@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Totoro
+Title=Totoro
+Icon=Totoro.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Sprouts_-_Dimir_Reanimator_(Modern,_#2931827).dck
+Deck Type=constructed
+
+[Main]
+2 Psychic Frog
+4 Boggart Trawler
+4 Abhorrent Oculus
+4 Stitcher's Supplier
+4 Eyetwitch
+3 Archon of Cruelty
+4 Flare of Malice
+4 Otherworldly Gaze
+4 Unearth
+4 Thoughtseize
+4 Persist
+2 Chthonian Nightmare
+2 Undercity Sewers
+4 Polluted Delta
+2 Bloodstained Mire
+2 Watery Grave
+4 Darkslick Shores
+1 Island
+2 Swamp
+[Sideboard]
+2 Consign to Memory
+2 Harbinger of the Seas
+2 Vexing Bauble
+1 Boomerang Basics
+1 It'll Quench Ya!
+1 Octopus Form
+2 Mai, Scornful Striker
+1 Ruinous Waterbending
+1 Decorum Dissertation
+1 Surgical Extraction
+1 Dauthi Voidwalker

@@ -168,7 +168,7 @@ public class UnifiedNetworkHarness implements IHasForgeLog {
         long startTime = System.currentTimeMillis();
 
         try {
-            ensureFModelInitialized();
+            TestUtils.ensureFModelInitialized();
 
             int port = (specifiedPort > 0) ? specifiedPort : PortAllocator.allocatePort();
             result.port = port;
@@ -257,7 +257,7 @@ public class UnifiedNetworkHarness implements IHasForgeLog {
         AtomicInteger successfulConnections = new AtomicInteger(0);
 
         try {
-            ensureFModelInitialized();
+            TestUtils.ensureFModelInitialized();
 
             int port = (specifiedPort > 0) ? specifiedPort : PortAllocator.allocatePort();
             result.port = port;
@@ -472,10 +472,6 @@ public class UnifiedNetworkHarness implements IHasForgeLog {
             }
             finishedLatch.countDown();
         }
-    }
-
-    private void ensureFModelInitialized() {
-        TestUtils.ensureFModelInitialized();
     }
 
     private List<Deck> getDecks(int count) {

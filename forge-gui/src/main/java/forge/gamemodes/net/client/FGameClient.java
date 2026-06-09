@@ -8,6 +8,7 @@ import forge.gamemodes.net.NetworkLogConfig;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.*;
+import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import io.netty.bootstrap.Bootstrap;
@@ -34,6 +35,7 @@ public class FGameClient implements IToServer, IHasForgeLog {
     private final Integer port;
     private final String username;
     private final List<ILobbyListener> lobbyListeners = Lists.newArrayList();
+    private IDraftEventHandler draftHandler;
     private final ReplyPool replies = new ReplyPool();
     private volatile boolean disconnectSimulated;
     private Channel channel;
@@ -164,6 +166,10 @@ public class FGameClient implements IToServer, IHasForgeLog {
         lobbyListeners.add(listener);
     }
 
+    public void setDraftHandler(final IDraftEventHandler handler) {
+        this.draftHandler = handler;
+    }
+
     void setGameControllers(final Iterable<PlayerView> myPlayers) {
         for (final PlayerView p : myPlayers) {
             NetGameController controller = new NetGameController(this);
@@ -190,28 +196,8 @@ public class FGameClient implements IToServer, IHasForgeLog {
                 for (final ILobbyListener listener : lobbyListeners) {
                     listener.update(event.getState(), event.getSlot());
                 }
-            } else if (msg instanceof ReceiveEventPoolEvent event) {
-                for (final ILobbyListener listener : lobbyListeners) {
-                    listener.receiveEventPool(event.getEventId(), event.getPool());
-                }
-                return;
-            } else if (msg instanceof DraftAutoPickedEvent event) {
-                for (final ILobbyListener listener : lobbyListeners) {
-                    listener.draftAutoPicked(event.getSeatIndex(), event.getCard(),
-                            event.getPackNumber(), event.getPickInPack());
-                }
-                return;
-            } else if (msg instanceof DraftPackArrivedEvent event) {
-                for (final ILobbyListener listener : lobbyListeners) {
-                    listener.draftPackArrived(event.getSeatIndex(), event.getPack(),
-                            event.getPackNumber(), event.getPickNumber(),
-                            event.getTimerDurationSeconds());
-                }
-                return;
-            } else if (msg instanceof DraftSeatPickedEvent event) {
-                for (final ILobbyListener listener : lobbyListeners) {
-                    listener.draftSeatPicked(event.getSeatIndex(), event.getSeatQueueDepths());
-                }
+            } else if (msg instanceof NetEvent netEvent && draftHandler != null
+                    && draftHandler.dispatch(netEvent)) {
                 return;
             }
             super.channelRead(ctx, msg);

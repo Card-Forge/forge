@@ -3,4 +3,4 @@ Name:Alchemy (OM1)
 Type:Archived
 Subtype:Arena
 Effective:2025-09-23
-Sets:ANA, ANB, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN, EOE, YEOE, OM1
+Sets:ANB, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN, EOE, YEOE, OM1

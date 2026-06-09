@@ -956,7 +956,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // if it's blink or bounce, try to save my about to die stuff
             final boolean blink = (destination.equals(ZoneType.Exile) && (subApi == ApiType.DelayedTrigger
                     || "DelayedBlink".equals(sa.getParam("AILogic")) || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered"))));
-            if ((destination.equals(ZoneType.Hand) || blink) && (sa.getMinTargets() <= 1)) {
+            if ((destination.equals(ZoneType.Hand) || blink) && sa.getMinTargets() <= 1) {
                 // save my about to die stuff
                 Card tobounce = canBouncePermanent(ai, sa, list);
                 if (tobounce != null) {
@@ -1488,7 +1488,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                 return ComputerUtilCard.getBestAI(fetchList); // generally also means the most expensive one or close to it
             } else if ("Mairsil".equals(logic)) {
-                return SpecialCardAi.MairsilThePretender.considerCardFromList(fetchList);
+                return SpecialCardAi.MairsilThePretender.considerCardFromList(fetchList, sa);
             } else if ("SurvivalOfTheFittest".equals(logic)) {
                 return SpecialCardAi.SurvivalOfTheFittest.considerCardToGet(decider, sa);
             } else if ("MazesEnd".equals(logic)) {

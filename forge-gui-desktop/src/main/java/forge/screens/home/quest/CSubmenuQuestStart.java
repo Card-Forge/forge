@@ -65,6 +65,7 @@ public enum CSubmenuQuestStart implements ICDoc {
         unselectableSets.add("LEB");
         unselectableSets.add("MBP");
         unselectableSets.add("VAN");
+        unselectableSets.add("PMOA");
         unselectableSets.add("ARC");
         unselectableSets.add("PC2");
 

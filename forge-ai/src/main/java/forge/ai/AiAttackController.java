@@ -593,7 +593,7 @@ public class AiAttackController {
             final CardCollectionView beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;
             for (final Card beastion : beastions) {
-                final int counters = beastion.getCounters(CounterEnumType.QUEST);
+                final int counters = beastion.getCounters(CounterType.getType("QUEST"));
                 minCreatures = Math.min(minCreatures, 7 - counters);
             }
             if (this.attackers.size() >= minCreatures) {

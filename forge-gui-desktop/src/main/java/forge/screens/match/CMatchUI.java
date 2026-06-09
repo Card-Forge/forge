@@ -66,6 +66,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.interfaces.IGameController;
@@ -74,7 +75,6 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.gui.GuiUtils;
 import forge.gui.MenuScroller;
 import forge.gui.SOverlayUtils;
@@ -108,6 +108,7 @@ import forge.screens.match.controllers.CMacro;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
 import forge.screens.match.menus.CMatchUIMenus;
+import forge.screens.match.views.VDrawOfferDialog;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
 import forge.toolbox.FButton;
@@ -163,6 +164,7 @@ public final class CMatchUI
     private boolean allHands;
     private boolean showOverlay = true;
     private JPopupMenu openAbilityMenu;
+    private CardPanel lastClickedCardPanel;
 
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
 
@@ -238,6 +240,44 @@ public final class CMatchUI
         refreshAllViews();
     }
 
+    private VDrawOfferDialog drawOfferDialog;
+
+    @Override
+    public void updateDrawOffer(final DrawOfferMessage.Status update) {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (update.result() != null) {
+                if (drawOfferDialog == null) {
+                    drawOfferDialog = new VDrawOfferDialog(this);
+                }
+                drawOfferDialog.showResult(update);
+                drawOfferDialog = null;
+                return;
+            }
+            PlayerView localTarget = null;
+            for (final PlayerView lp : getLocalPlayers()) {
+                if (update.isPending(lp)) {
+                    localTarget = lp;
+                    break;
+                }
+            }
+            if (localTarget != null) {
+                // a local player still owes a vote — always (re)present it, even if previously hidden
+                if (drawOfferDialog == null) {
+                    drawOfferDialog = new VDrawOfferDialog(this);
+                }
+                drawOfferDialog.refresh(update, localTarget);
+            } else {
+                // only watchers locally — show the read-only tally but respect dismissal
+                if (drawOfferDialog == null) {
+                    drawOfferDialog = new VDrawOfferDialog(this);
+                } else if (!drawOfferDialog.isVisible()) {
+                    return;
+                }
+                drawOfferDialog.refresh(update, null);
+            }
+        });
+    }
+
     @Override
     public void refreshYieldUi(final PlayerView player) {
         FThreads.invokeInEdtNowOrLater(() -> {
@@ -302,6 +342,10 @@ public final class CMatchUI
     }
     public CPrompt getCPrompt() {
         return cPrompt;
+    }
+    /** True if either prompt input button (OK/Cancel) is currently enabled. */
+    public boolean isInputButtonEnabled() {
+        return view.getBtnOK().isEnabled() || view.getBtnCancel().isEnabled();
     }
     public CStack getCStack() {
         return cStack;
@@ -543,7 +587,7 @@ public final class CMatchUI
                 if (isNetGame()) {
                     netLog.debug("updateHand for player {}, vHand={}, handSize={}",
                             owner.getId(), (vHand != null ? "exists" : "NULL"),
-                            (owner.getHand() != null ? String.valueOf(owner.getHand().size()) : "null"));
+                            String.valueOf(owner.getHand().size()));
                 }
                 if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
@@ -662,12 +706,8 @@ public final class CMatchUI
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
-                if (p.getCards(ZoneType.Hand) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
             FloatingZone.refreshAll();
         });
@@ -679,12 +719,8 @@ public final class CMatchUI
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
-                if (p.getCards(ZoneType.Hand) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
             FloatingZone.refreshAll();
             FloatingZone.clearAllHotkeyAffordance();
@@ -700,13 +736,35 @@ public final class CMatchUI
     }
 
     @Override
+    public void setWeaklySelectable(final Iterable<CardView> cards) {
+        super.setWeaklySelectable(cards);
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+            FloatingZone.refreshAll();
+        });
+    }
+
+    @Override
+    public void clearWeaklySelectable() {
+        super.clearWeaklySelectable();
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+            FloatingZone.refreshAll();
+        });
+    }
+
+    @Override
     public void refreshField() {
         super.refreshField();
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
             }
             FloatingZone.refreshAll();
         });
@@ -786,6 +844,10 @@ public final class CMatchUI
             panels.addAll(f.getTabletop().getCardPanels());
         }
         return panels;
+    }
+
+    public void setLastClickedCardPanel(final CardPanel panel) {
+        lastClickedCardPanel = panel;
     }
 
     /**
@@ -1036,11 +1098,14 @@ public final class CMatchUI
             // TODO: do we need a user setting for the scrollCount?
             MenuScroller.setScrollerFor(menu, 8, 125, 3, 1);
 
-            final CardPanel panel = findCardPanel(hostCard);
+            // Prefer the panel the user clicked so the menu opens there if the card shows in multiple windows
+            final CardPanel panel = lastClickedCardPanel != null && lastClickedCardPanel.isShowing()
+                    && hostCard.equals(lastClickedCardPanel.getCard())
+                    ? lastClickedCardPanel : findCardPanel(hostCard);
             final Component menuParent;
             final int x, y;
-            if (panel == null) {
-                // Fall back to showing in VPrompt if no panel can be found
+            if (panel == null || !panel.isShowing()) {
+                // Fall back to VPrompt when there's no on-screen anchor — panel missing, or hidden (e.g. a closed Sideboard window)
                 menuParent = getCPrompt().getView().getTarMessage();
                 x = 0;
                 y = 0;
@@ -1077,19 +1142,13 @@ public final class CMatchUI
         return null; //delay ability until choice made
     }
 
-    @Override
-    public void showPromptMessage(final PlayerView playerView, final String message) {
-        cancelWaitingTimer();
-        cPrompt.setMessage(message);
-        notePromptMessage(message);
-    }
     public void showPromptMessageNoCancel(final PlayerView playerView, final String message) {
-        cPrompt.setMessage(message);
+        cPrompt.setMessage(message, null);
         notePromptMessage(message);
     }
 
     @Override
-    public void showCardPromptMessage(PlayerView playerView, String message, CardView card) {
+    public void showPromptMessage(PlayerView playerView, String message, CardView card) {
         cancelWaitingTimer();
         cPrompt.setMessage(message, card);
         notePromptMessage(message);

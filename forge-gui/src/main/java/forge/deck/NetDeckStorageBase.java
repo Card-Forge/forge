@@ -75,7 +75,9 @@ public abstract class NetDeckStorageBase extends StorageBase<Deck> {
         }
 
         List<T> category = new ArrayList<>(categories.values());
-        Collections.reverse(category);
+        if (chooserTitle.contains("Archive")) {
+            Collections.reverse(category);
+        }
 
         final T c = SGuiChoose.oneOrNone(chooserTitle, category);
         if (c == null) { return null; }

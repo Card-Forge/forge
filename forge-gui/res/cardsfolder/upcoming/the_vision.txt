@@ -5,7 +5,7 @@ PT:2/5
 K:Flying
 K:Vigilance
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, ABILITY
-SVar:TrigCharm:DB$ Charm | Choices$ DBSolarBeam,DBDensityControlPump,DBTechnopathy | ChoiceRestriction$ ThisTurn
+SVar:TrigCharm:DB$ Charm | Choices$ DBSolarBeam,DBDensityControl,DBTechnopathy | ChoiceRestriction$ ThisTurn
 SVar:DBSolarBeam:DB$ Pump | Defined$ Self | KW$ Double Strike | SpellDescription$ Solar Beam — CARDNAME gains double strike until end of turn.
 SVar:DBDensityControl:DB$ Pump | Defined$ Self | KW$ Indestructible | SpellDescription$ Density Control — CARDNAME gains indestructible until end of turn.
 SVar:DBTechnopathy:DB$ Draw | SpellDescription$ Technopathy — Draw a card.
