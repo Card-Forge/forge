@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Legendary Creature Human Noble Villain
 PT:4/4
 K:Ward:2
-T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigConnive | TriggerZones$ Battlefield | TriggerDescription$Whenever you cast a noncreature spell, CARDNAME connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigConnive | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
 SVar:TrigConnive:DB$ Connive
 SVar:BuffedBy:nonCreature
 DeckHas:Ability$Discard|Counters
