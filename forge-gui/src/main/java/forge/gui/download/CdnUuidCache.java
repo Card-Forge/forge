@@ -51,7 +51,18 @@ public final class CdnUuidCache {
     private static final ConcurrentHashMap<String, Map<String, Map<String, LangUuids>>> setCache =
             new ConcurrentHashMap<>();
 
+    /**
+     * Override the CDN UUID base directory. Package-private for unit tests only.
+     * Must end with the platform file separator when set.
+     */
+    static volatile String cdnBaseDirOverride = null;
+
     private CdnUuidCache() {}
+
+    /** Clears the in-memory cache. Package-private for unit tests only. */
+    static void clearCacheForTesting() {
+        setCache.clear();
+    }
 
     /**
      * Returns the Scryfall CDN image URL for a given card face, or {@code null}
@@ -90,8 +101,10 @@ public final class CdnUuidCache {
         Map<String, Map<String, LangUuids>> cached = setCache.get(setCode);
         if (cached != null) return cached;
 
-        File setDir = new File(ForgeConstants.CDN_UUID_DIR + setCode);
+        String baseDir = cdnBaseDirOverride != null ? cdnBaseDirOverride : ForgeConstants.CDN_UUID_DIR;
+        File setDir = new File(baseDir + setCode);
         if (!setDir.isDirectory()) {
+            Logger.debug("CdnUuidCache: set directory not found: {}", setDir.getAbsolutePath());
             setCache.put(setCode, MISSING_SET);
             return MISSING_SET;
         }
