@@ -25,7 +25,7 @@ public class ScryAction extends PlayerAction {
         for (final Card card : cards) {
             names.add(card.getName());
         }
-        return names;
+        return Collections.unmodifiableList(names);
     }
 
     public List<String> getTopCardNames() {
@@ -37,8 +37,7 @@ public class ScryAction extends PlayerAction {
     }
 
     @Override
-    protected void appendDetails(final StringBuilder sb) {
-        sb.append(" top=").append(topCardNames);
-        sb.append(" bottom=").append(bottomCardNames);
+    public String describe() {
+        return localize("lblMacroActionScry", describeList(topCardNames), describeList(bottomCardNames));
     }
 }

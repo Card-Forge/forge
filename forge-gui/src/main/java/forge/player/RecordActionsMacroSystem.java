@@ -2,14 +2,10 @@ package forge.player;
 
 import com.google.common.collect.Lists;
 import forge.card.MagicColor;
-import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
-import forge.game.player.PlayerView;
 import forge.game.player.actions.ActivateAbilityAction;
 import forge.game.player.actions.ColorChoiceAction;
 import forge.game.player.actions.ConfirmAction;
@@ -24,8 +20,6 @@ import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
 import forge.game.player.actions.ScryAction;
 import forge.game.player.actions.StackOrderAction;
-import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.Input;
 import forge.gamemodes.match.input.InputAttack;
 import forge.gamemodes.match.input.InputConfirm;
@@ -36,7 +30,6 @@ import forge.gamemodes.match.input.InputSelectEntitiesFromList;
 import forge.gamemodes.match.input.InputSelectTargets;
 import forge.gui.FThreads;
 import forge.interfaces.IMacroSystem;
-import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -45,6 +38,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.IntSupplier;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 // Iteration on the current limited macro system. Instead of asking for IDs to click on
 // Instead we wrap the input queue in a way that we can record what the player is doing and
@@ -57,21 +52,29 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private static final int WAIT_FOR_NEXT_INPUT = -2;
     private static final int MAX_REJECTED_ACTION_RETRIES = 40;
     private static final int MAX_WAIT_RETRIES = 400;
+    private static final Pattern CARD_ID_PATTERN = Pattern.compile(" \\((\\d+)\\)");
+    private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
 
     private final PlayerControllerHuman playerControllerHuman;
+    private final MacroActionReplayer actionReplayer;
     private final Localizer localizer = Localizer.getInstance();
-    private final ITriggerEvent replayTriggerEvent = new DummyTriggerEvent();
 
     private final List<PlayerAction> actions = Lists.newArrayList();
     private final List<PlayerAction> playbackActions = Lists.newArrayList();
+    private final List<Runnable> statusListeners = Lists.newArrayList();
     private boolean recording;
     private int repeatIteration;
     private int repeatIterations;
     private int playbackRetries;
+    private int activeActionIndex = -1;
+    private int pendingStackOrderPriorityPasses;
+    private boolean waitingForSelectionAfterStackOrder;
     private ManaComboAction pendingRecordedManaCombo;
+    private final List<String> playbackMessages = Lists.newArrayList();
 
     public RecordActionsMacroSystem(final PlayerControllerHuman playerControllerHuman) {
         this.playerControllerHuman = playerControllerHuman;
+        this.actionReplayer = new MacroActionReplayer(playerControllerHuman, this::debug);
     }
 
     @Override
@@ -82,6 +85,39 @@ public class RecordActionsMacroSystem implements IMacroSystem {
 
     @Override
     public boolean hasRememberedActions() { return !actions.isEmpty(); }
+
+    @Override
+    public List<String> getRememberedActionDescriptions() {
+        return actions.stream().map(PlayerAction::describe).collect(Collectors.toList());
+    }
+
+    @Override
+    public int getActiveActionIndex() {
+        return activeActionIndex;
+    }
+
+    @Override
+    public List<String> getPlaybackMessages() {
+        return Lists.newArrayList(playbackMessages);
+    }
+
+    @Override
+    public void addStatusListener(final Runnable listener) {
+        if (listener != null && !statusListeners.contains(listener)) {
+            statusListeners.add(listener);
+        }
+    }
+
+    @Override
+    public void removeStatusListener(final Runnable listener) {
+        statusListeners.remove(listener);
+    }
+
+    private void notifyStatusListeners() {
+        for (final Runnable listener : Lists.newArrayList(statusListeners)) {
+            listener.run();
+        }
+    }
 
     @Override
     public Byte consumeRememberedColorChoice(final List<MagicColor.Color> choices) {
@@ -147,21 +183,41 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     @Override
     public List<String> consumeRememberedAbilityOrder(final List<String> choices) {
         return consumeRememberedAction(StackOrderAction.class,
-                action -> isValidAbilityOrder(action.getAbilityDescriptions(), choices)
-                        ? Lists.newArrayList(action.getAbilityDescriptions()) : null);
+                action -> buildRememberedAbilityOrder(action.getAbilityDescriptions(), choices));
     }
 
-    private boolean isValidAbilityOrder(final List<String> selectedOrder, final List<String> choices) {
+    private List<String> buildRememberedAbilityOrder(final List<String> selectedOrder, final List<String> choices) {
         if (selectedOrder.size() != choices.size()) {
-            return false;
+            return null;
         }
-        final List<String> available = Lists.newArrayList(choices);
+        final List<String> available = normalizeAbilityDescriptions(choices);
+        final List<String> availableChoices = Lists.newArrayList(choices);
+        final List<String> orderedChoices = Lists.newArrayListWithCapacity(selectedOrder.size());
         for (final String selected : selectedOrder) {
-            if (!available.remove(selected)) {
-                return false;
+            final int choiceIndex = available.indexOf(normalizeAbilityDescription(selected));
+            if (choiceIndex < 0) {
+                return null;
             }
+            available.remove(choiceIndex);
+            orderedChoices.add(availableChoices.remove(choiceIndex));
         }
-        return available.isEmpty();
+        return available.isEmpty() ? orderedChoices : null;
+    }
+
+    private List<String> normalizeAbilityDescriptions(final List<String> descriptions) {
+        final List<String> normalized = Lists.newArrayListWithCapacity(descriptions.size());
+        for (final String description : descriptions) {
+            normalized.add(normalizeAbilityDescription(description));
+        }
+        return normalized;
+    }
+
+    private String normalizeAbilityDescription(final String description) {
+        if (description == null) {
+            return "";
+        }
+        return WHITESPACE_PATTERN.matcher(CARD_ID_PATTERN.matcher(description).replaceAll(""))
+                .replaceAll(" ").trim();
     }
 
     @Override
@@ -184,7 +240,11 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             debug("accepted " + action.describe());
             playbackActions.remove(actionIndex);
             playbackRetries = 0;
+            pendingStackOrderPriorityPasses = 0;
+            waitingForSelectionAfterStackOrder = action instanceof StackOrderAction
+                    && findNextAction(SelectCardAction.class, SelectPlayerAction.class) >= 0;
             playerControllerHuman.getInputQueue().updateObservers();
+            notifyStatusListeners();
             return result;
         }
         debug("rejected " + action.describe());
@@ -242,9 +302,12 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             finishPlayback();
         }
         recording = true;
+        activeActionIndex = -1;
         actions.clear();
         playbackActions.clear();
+        playbackMessages.clear();
         playerControllerHuman.getInputQueue().updateObservers();
+        notifyStatusListeners();
 
         return true;
     }
@@ -257,6 +320,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         recording = false;
         flushPendingRecordedManaCombo();
         playerControllerHuman.getInputQueue().updateObservers();
+        notifyStatusListeners();
 
         return true;
     }
@@ -313,6 +377,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private void rememberAction(final PlayerAction action) {
         actions.add(action);
         playbackActions.add(action);
+        notifyStatusListeners();
     }
 
     private void removeLastCardSelectionFor(final GameEntityView view, final List<PlayerAction> actionList) {
@@ -320,7 +385,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             return;
         }
         final PlayerAction previous = actionList.get(actionList.size() - 1);
-        if (previous instanceof SelectCardAction && view.equals(previous.getGameEntityView())) {
+        if (view.equals(previous.getSelectedCardView())) {
             actionList.remove(actionList.size() - 1);
         }
     }
@@ -386,7 +451,9 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     @Override
     public void cancelPlayback() {
         if (repeatIterations > 0 || !playbackActions.isEmpty()) {
-            debug("cancelled input=" + describeInput() + " remaining=" + describeActions(playbackActions));
+            if (DEBUG) {
+                debug("cancelled input=" + describeInput() + " remaining=" + describeActions(playbackActions));
+            }
             finishPlayback();
         }
     }
@@ -394,22 +461,30 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     @Override
     public void cancelCurrentMacro() {
         if (recording) {
-            debug("cancelled recording actions=" + describeActions(actions));
+            if (DEBUG) {
+                debug("cancelled recording actions=" + describeActions(actions));
+            }
             recording = false;
             actions.clear();
         }
         pendingRecordedManaCombo = null;
         cancelPlayback();
         playerControllerHuman.getInputQueue().updateObservers();
+        notifyStatusListeners();
     }
 
     private void startPlayback(final int loops) {
         repeatIterations = loops;
         repeatIteration = 1;
-        playbackRetries = 0;
+        resetPlaybackProgress();
+        activeActionIndex = -1;
+        playbackMessages.clear();
         restartPlaybackActions();
-        debug("start loops=" + loops + " actions=" + describeActions(playbackActions));
+        if (DEBUG) {
+            debug("start loops=" + loops + " actions=" + describeActions(playbackActions));
+        }
         playerControllerHuman.getInputQueue().updateObservers();
+        notifyStatusListeners();
         FThreads.delayInEDT(50, this::continuePlayback);
     }
 
@@ -420,60 +495,127 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         }
 
         if (playbackActions.isEmpty()) {
+            final int pendingInputResult = processPendingInputAfterActions();
+            if (pendingInputResult == WAIT_FOR_NEXT_INPUT) {
+                if (++playbackRetries > MAX_WAIT_RETRIES) {
+                    stopPlayback("lblMacroPlaybackStoppedWaitingAfterFinalAction");
+                    return;
+                }
+                FThreads.delayInEDT(50, this::continuePlayback);
+                return;
+            }
             if (repeatIteration >= repeatIterations) {
                 finishPlayback();
                 return;
             }
+            if (waitForInterIterationStackClear()) {
+                if (repeatIterations > 0) {
+                    FThreads.delayInEDT(50, this::continuePlayback);
+                }
+                return;
+            }
             repeatIteration++;
             restartPlaybackActions();
+            resetPlaybackProgress();
+            activeActionIndex = -1;
             playerControllerHuman.getInputQueue().updateObservers();
+            notifyStatusListeners();
         }
 
+        setActiveAction(playbackActions.isEmpty() ? null : playbackActions.get(0));
         final int actionIndex = processNextAcceptedAction();
         if (actionIndex >= 0) {
-            playbackActions.remove(actionIndex);
+            final PlayerAction acceptedAction = playbackActions.remove(actionIndex);
             playbackRetries = 0;
+            pendingStackOrderPriorityPasses = 0;
+            if (acceptedAction.clearsPostStackOrderWait()) {
+                waitingForSelectionAfterStackOrder = false;
+            }
         } else if (actionIndex == WAIT_FOR_NEXT_INPUT) {
             if (++playbackRetries > MAX_WAIT_RETRIES) {
-                stopPlayback("stopped waiting");
+                stopPlayback("lblMacroPlaybackStoppedWaiting");
                 return;
             }
         } else if (++playbackRetries > MAX_REJECTED_ACTION_RETRIES) {
-            stopPlayback("stopped");
+            stopPlayback("lblMacroPlaybackStoppedGeneric");
             return;
         }
 
         FThreads.delayInEDT(50, this::continuePlayback);
     }
 
+    private int processPendingInputAfterActions() {
+        final Input input = playerControllerHuman.getInputProxy().getInput();
+        if (input instanceof InputLockUI) {
+            debug("waiting for pending game action after final recorded action");
+            return WAIT_FOR_NEXT_INPUT;
+        }
+        if (!isStackEmpty() && isPriorityInput(input)) {
+            debug("clearing pending stack after final recorded action");
+            return waitForInput(input);
+        }
+        if (input instanceof InputPayMana || input instanceof InputConfirm) {
+            debug("handling pending " + describeInput() + " after final recorded action");
+            return processNextAcceptedAction();
+        }
+        if (input instanceof InputSelectEntitiesFromList<?> selectInput) {
+            debug("finishing pending list selection after final recorded action");
+            return finishListSelectionIfAny(selectInput);
+        }
+        return NO_ACTION_ACCEPTED;
+    }
+
     private int processNextAcceptedAction() {
         final Input inp = playerControllerHuman.getInputProxy().getInput();
-        debug("input=" + describeInput() + " remaining=" + describeActions(playbackActions));
+        debugPlaybackState();
         if (inp instanceof InputLockUI) {
             return WAIT_FOR_NEXT_INPUT;
         } else if (inp instanceof InputPassPriority passPriorityInput && passPriorityInput.getChosenSa() != null) {
             return WAIT_FOR_NEXT_INPUT;
+        } else if (waitingForSelectionAfterStackOrder && isPriorityInput(inp)) {
+            final int nextSelection = findNextAction(SelectCardAction.class, SelectPlayerAction.class);
+            if (nextSelection < 0) {
+                waitingForSelectionAfterStackOrder = false;
+                return NO_ACTION_ACCEPTED;
+            }
+            if (!isStackEmpty()) {
+                return waitForInput(inp, "waiting for post-order selection before "
+                        + playbackActions.get(nextSelection).describe());
+            }
+            waitingForSelectionAfterStackOrder = false;
+            debug("stack emptied before post-order selection " + playbackActions.get(nextSelection).describe());
+            return NO_ACTION_ACCEPTED;
         } else if (inp instanceof InputAttack) {
             final int passPriority = findNextAction(PassPriorityAction.class);
-            final int playerAction = findNextPlayerSelectionBefore(passPriority);
+            final int finishAttack = findNextActionBefore(passPriority, FinishTargetingAction.class);
+            final int actionBoundary = finishAttack >= 0 ? finishAttack : passPriority;
+            final int playerAction = findNextActionBefore(actionBoundary, SelectPlayerAction.class);
             if (playerAction >= 0) {
                 return processActionAt(playerAction);
             }
 
-            final int cardAction = findNextCardSelectionBefore(passPriority);
+            final int cardAction = findNextActionBefore(actionBoundary, SelectCardAction.class);
             final int cardResult = processActionAt(cardAction);
             if (cardResult >= 0) {
                 return cardResult;
+            }
+            if (cardAction >= 0) {
+                return findPendingPlayerCard(cardAction) == null ? NO_ACTION_ACCEPTED
+                        : waitForInput(inp, "waiting for postcombat main before "
+                                + playbackActions.get(cardAction).describe());
+            }
+            if (finishAttack >= 0) {
+                return processActionAt(finishAttack);
             }
 
             final int passResult = processAttackPassPriority(passPriority, inp);
             if (passResult >= 0) {
                 return passResult;
             }
-        } else if (inp instanceof InputSelectTargets) {
+        } else if (inp instanceof InputSelectTargets targetInput) {
             for (int i = 0; i < playbackActions.size(); i++) {
                 final PlayerAction action = playbackActions.get(i);
-                if (action instanceof PassPriorityAction && noRemainingTargetSelectionsBefore(i)) {
+                if (action.asPassPriorityAction() != null && noRemainingTargetSelectionsBefore(i)) {
                     return waitForInput(inp);
                 }
                 if (action instanceof FinishTargetingAction) {
@@ -482,9 +624,13 @@ public class RecordActionsMacroSystem implements IMacroSystem {
                     }
                     continue;
                 }
-                if (isSelectionAction(action)) {
+                if (action.isSelectionAction()) {
                     if (processAction(action)) {
                         return i;
+                    }
+                    if (targetInput.canFinishTargetingForMacro()) {
+                        debug("finished current target prompt before " + action.describe());
+                        return waitForInput(targetInput);
                     }
                 }
             }
@@ -520,18 +666,35 @@ public class RecordActionsMacroSystem implements IMacroSystem {
                 return WAIT_FOR_NEXT_INPUT;
             }
             return waitForInput(inp);
-        } else if (inp instanceof InputConfirm) {
+        } else if (inp instanceof InputConfirm confirmInput) {
             final int confirmAction = findNextAction(PayCostAction.class, ConfirmAction.class);
             if (confirmAction >= 0 && processAction(playbackActions.get(confirmAction))) {
                 return confirmAction;
             }
+            if (canAcceptImplicitTriggerConfirm(confirmInput)) {
+                return waitForInput(confirmInput, "accepting trigger before "
+                        + playbackActions.get(findNextAction(SelectCardAction.class, SelectPlayerAction.class)).describe());
+            }
             return waitForInput(inp);
         } else if (inp instanceof InputPassPriority) {
             final int passPriority = findNextAction(PassPriorityAction.class);
-            final int cardAction = findNextCardSelectionBefore(passPriority);
+            final int cardAction = findNextActionBefore(passPriority, SelectCardAction.class);
+            final int stackOrderAction = findNextActionBefore(cardAction, StackOrderAction.class);
+            if (stackOrderAction >= 0 && !isStackEmpty()) {
+                if (playerControllerHuman.getGame().getStack().hasSimultaneousStackEntries()) {
+                    return WAIT_FOR_NEXT_INPUT;
+                }
+                if (pendingStackOrderPriorityPasses > 0) {
+                    debug("not passing priority again while waiting for simultaneous ability order");
+                    return NO_ACTION_ACCEPTED;
+                }
+                pendingStackOrderPriorityPasses++;
+                return waitForInput(inp, "waiting for simultaneous ability order before "
+                        + playbackActions.get(stackOrderAction).describe());
+            }
             final int activateAbility = findNextActionBefore(passPriority, ActivateAbilityAction.class);
             if (cardAction >= 0 && (activateAbility < 0 || cardAction < activateAbility)) {
-                return processActionAt(cardAction, () -> waitForPendingCardAction(inp, cardAction));
+                return processActionAt(cardAction, () -> waitForPendingCardAction(inp, cardAction, stackOrderAction >= 0));
             }
 
             final int activateResult = processActionAt(activateAbility);
@@ -540,10 +703,10 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             }
 
             if (cardAction >= 0) {
-                return processActionAt(cardAction, () -> waitForPendingCardAction(inp, cardAction));
+                return processActionAt(cardAction, () -> waitForPendingCardAction(inp, cardAction, stackOrderAction >= 0));
             }
 
-            final int playerAction = findNextPlayerSelectionBefore(passPriority);
+            final int playerAction = findNextActionBefore(passPriority, SelectPlayerAction.class);
             if (playerAction >= 0) {
                 return processActionAt(playerAction);
             }
@@ -555,18 +718,19 @@ public class RecordActionsMacroSystem implements IMacroSystem {
 
         for (int i = 0; i < playbackActions.size(); i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (inp instanceof InputAttack && action instanceof PassPriorityAction) {
+            if (inp instanceof InputAttack && action.asPassPriorityAction() != null) {
                 return processAttackPassPriority(i, inp);
             }
-            if (inp instanceof InputPassPriority && action instanceof PassPriorityAction
+            if (inp instanceof InputPassPriority && action.asPassPriorityAction() != null
                     && !noRemainingTargetSelectionsBefore(i)) {
                 continue;
             }
             if (shouldSkipPassPriorityAction(i)) {
+                setActiveAction(action);
                 debug("skipped obsolete " + action.describe());
                 return i;
             }
-            if (!(inp instanceof InputSelectTargets) && isTargetSelectionAction(action)) {
+            if (!(inp instanceof InputSelectTargets) && action.isTargetSelectionAction()) {
                 continue;
             }
             if (processAction(action)) {
@@ -602,30 +766,23 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         if (actionIndex < 0) {
             return NO_ACTION_ACCEPTED;
         }
-        final PlayerAction action = playbackActions.get(actionIndex);
-        if (!(action instanceof PassPriorityAction passPriorityAction)) {
+        final PassPriorityAction passPriorityAction = playbackActions.get(actionIndex).asPassPriorityAction();
+        if (passPriorityAction == null) {
             return NO_ACTION_ACCEPTED;
         }
-        if (!passPriorityAction.wasStackEmpty() && passPriorityAction.getPhase() == getCurrentPhase()) {
+        if (passPriorityAction.isStackPassFor(getCurrentPhase())) {
             return waitForInput(input);
         }
         final int result = processActionAt(actionIndex);
-        if (result >= 0) {
-            return result;
-        }
-        return waitForInput(input);
+        return result >= 0 ? result : waitForInput(input);
     }
 
     private int processNextListSelectionAction(final InputSelectEntitiesFromList<?> selectInput) {
         for (int i = 0; i < playbackActions.size(); i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (!isSelectionAction(action)) {
-                continue;
+            if (action.isSelectionAction()) {
+                return processAction(action) ? i : finishListSelectionIfAny(selectInput);
             }
-            if (processAction(action)) {
-                return i;
-            }
-            return finishListSelectionIfAny(selectInput);
         }
         return finishListSelectionIfAny(selectInput);
     }
@@ -634,23 +791,17 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return input.getSelected().isEmpty() ? NO_ACTION_ACCEPTED : waitForInput(input);
     }
 
-    private boolean isTargetSelectionAction(final PlayerAction action) {
-        return isSelectionAction(action) || action instanceof FinishTargetingAction;
-    }
-
-    private boolean isSelectionAction(final PlayerAction action) {
-        return action instanceof SelectCardAction || action instanceof SelectPlayerAction;
-    }
-
-    private boolean isObsoleteStackPass(final PlayerAction action) {
-        return action instanceof PassPriorityAction passPriorityAction
-                && !passPriorityAction.wasStackEmpty()
-                && isStackEmpty();
+    private boolean isPriorityInput(final Input input) {
+        return input instanceof InputPassPriority || input instanceof InputAttack;
     }
 
     private boolean shouldSkipPassPriorityAction(final int actionIndex) {
         final PlayerAction action = playbackActions.get(actionIndex);
-        return isObsoleteStackPass(action) || isTrailingMainPhasePassBeforeNextIteration(actionIndex);
+        final PassPriorityAction passPriorityAction = action.asPassPriorityAction();
+        return passPriorityAction != null
+                && (passPriorityAction.isObsoleteWhen(isStackEmpty())
+                || passPriorityAction.isStaleFor(getCurrentPhase()))
+                || isTrailingMainPhasePassBeforeNextIteration(actionIndex);
     }
 
     private boolean isTrailingMainPhasePassBeforeNextIteration(final int actionIndex) {
@@ -658,32 +809,17 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             return false;
         }
         final PlayerAction action = playbackActions.get(actionIndex);
-        if (!(action instanceof PassPriorityAction passPriorityAction) || !passPriorityAction.wasStackEmpty()
-                || passPriorityAction.getPhase() != PhaseType.MAIN1
-                || getCurrentPhase() != PhaseType.MAIN1) {
+        final PassPriorityAction passPriorityAction = action.asPassPriorityAction();
+        if (passPriorityAction == null || !passPriorityAction.isTrailingMainPhasePassCandidate(getCurrentPhase())) {
             return false;
         }
         for (int i = actionIndex + 1; i < playbackActions.size(); i++) {
-            if (!(playbackActions.get(i) instanceof PassPriorityAction remainingPass)
-                    || !remainingPass.wasStackEmpty()) {
+            final PassPriorityAction remainingPass = playbackActions.get(i).asPassPriorityAction();
+            if (remainingPass == null || !remainingPass.wasStackEmpty()) {
                 return false;
             }
         }
-        return !actions.isEmpty() && !(actions.get(0) instanceof PassPriorityAction);
-    }
-
-    private boolean canReplayPassPriority(final PassPriorityAction action) {
-        if (action.wasStackEmpty() != isStackEmpty()) {
-            return false;
-        }
-        final PhaseType currentPhase = getCurrentPhase();
-        return action.getPhase() == null
-                || action.getPhase() == currentPhase
-                || canAdvanceTowardRecordedCombatPass(action, currentPhase);
-    }
-
-    private boolean canReplayAttackPassPriority(final PassPriorityAction action) {
-        return action.getPhase() == null || action.getPhase() == getCurrentPhase();
+        return !actions.isEmpty() && actions.get(0).asPassPriorityAction() == null;
     }
 
     private PhaseType getCurrentPhase() {
@@ -694,20 +830,46 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return playerControllerHuman.getGame().getStack().isEmpty();
     }
 
-    private boolean canAdvanceTowardRecordedCombatPass(final PassPriorityAction action, final PhaseType currentPhase) {
-        final PhaseType recordedPhase = action.getPhase();
-        return action.wasStackEmpty()
-                && currentPhase != null
-                && recordedPhase != null
-                && currentPhase.isBefore(recordedPhase)
-                && isCombatPhase(currentPhase)
-                && (isCombatPhase(recordedPhase) || recordedPhase == PhaseType.MAIN2);
+    private boolean waitForInterIterationStackClear() {
+        if (isStackEmpty()) {
+            playbackRetries = 0;
+            return false;
+        }
+
+        final Input input = playerControllerHuman.getInputProxy().getInput();
+        if (canStartNextIterationBeforeStackClear(input)) {
+            playbackRetries = 0;
+            return false;
+        }
+        if (input instanceof InputPassPriority || input instanceof InputAttack) {
+            input.selectButtonOK();
+            playbackRetries = 0;
+            return true;
+        }
+        if (++playbackRetries > MAX_WAIT_RETRIES) {
+            stopPlayback("lblMacroPlaybackStoppedWaitingBetweenIterations");
+            return true;
+        }
+        return true;
     }
 
-    private int waitForPendingCardAction(final Input input, final int actionIndex) {
+    private boolean canStartNextIterationBeforeStackClear(final Input input) {
+        if (actions.isEmpty()) {
+            return false;
+        }
+        final PlayerAction firstAction = actions.get(0);
+        return (firstAction.isSelectionAction()
+                && (input instanceof InputSelectTargets || input instanceof InputSelectEntitiesFromList<?>))
+                || (firstAction instanceof ConfirmAction && input instanceof InputConfirm)
+                || (firstAction instanceof PayManaFromPoolAction && input instanceof InputPayMana);
+    }
+
+    private int waitForPendingCardAction(final Input input, final int actionIndex, final boolean waitingForRecordedStackOrder) {
         final PlayerAction action = playbackActions.get(actionIndex);
         if (!isStackEmpty()) {
-            return waitForInput(input, "waiting for stack before " + action.describe());
+            final String reason = waitingForRecordedStackOrder ? "waiting for stack before "
+                    : "waiting for pending stack item before ";
+            return waitForInput(input, reason + action.describe());
         }
         if (isWaitingForPostCombatMainAction(actionIndex)) {
             return waitForInput(input, "waiting for postcombat main before " + action.describe());
@@ -726,10 +888,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private int waitForInput(final Input input) {
         input.selectButtonOK();
         return WAIT_FOR_NEXT_INPUT;
-    }
-
-    private boolean isCombatPhase(final PhaseType phase) {
-        return phase.name().startsWith("COMBAT_");
     }
 
     private boolean isWaitingForAttackDeclaration(final int actionIndex) {
@@ -757,8 +915,8 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         if (actionIndex < 0 || actionIndex >= playbackActions.size()) {
             return null;
         }
-        final Card card = findCard(selectedCardView(playbackActions.get(actionIndex)));
-        return isControlledByPlayer(card) ? card : null;
+        final Card card = actionReplayer.findCard(playbackActions.get(actionIndex).getSelectedCardView());
+        return actionReplayer.isControlledByPlayer(card) ? card : null;
     }
 
     private int findNextAction(final Class<?>... actionClasses) {
@@ -820,7 +978,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         final int size = findLeadingManaSourceSearchSize();
         for (int i = 0; i < size; i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (activateRecordedManaSource(findCard(selectedCardView(action)), action)) {
+            if (actionReplayer.selectManaSource(actionReplayer.findCard(action.getSelectedCardView()), action)) {
                 return i;
             }
         }
@@ -830,7 +988,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private int findLeadingManaSourceSearchSize() {
         for (int i = 0; i < playbackActions.size(); i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (!(action instanceof SelectCardAction)) {
+            if (action.getSelectedCardView() == null) {
                 return i;
             }
         }
@@ -841,7 +999,8 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         final int start = findLeadingManaSourceSearchSize();
         for (int i = start; i < playbackActions.size(); i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (activateRecordedManaSource(exactRecordedLandManaSource(selectedCardView(action)), action)) {
+            if (actionReplayer.selectManaSource(
+                    actionReplayer.exactRecordedLandManaSource(action.getSelectedCardView()), action)) {
                 return true;
             }
         }
@@ -851,29 +1010,11 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private boolean hasFutureUsableRecordedLandSelection() {
         final int start = findLeadingManaSourceSearchSize();
         for (int i = start; i < playbackActions.size(); i++) {
-            if (exactRecordedLandManaSource(selectedCardView(playbackActions.get(i))) != null) {
+            if (actionReplayer.exactRecordedLandManaSource(playbackActions.get(i).getSelectedCardView()) != null) {
                 return true;
             }
         }
         return false;
-    }
-
-    private Card exactRecordedLandManaSource(final CardView recordedCard) {
-        final Card card = playerControllerHuman.getCard(recordedCard);
-        return isControlledByPlayer(card) && !card.isTapped() && card.isLand() ? card : null;
-    }
-
-    private boolean activateRecordedManaSource(final Card card, final PlayerAction action) {
-        if (card == null || card.isTapped() || card.getManaAbilities().isEmpty()
-                || !playerControllerHuman.selectCard(card.getView(), null, replayTriggerEvent)) {
-            return false;
-        }
-        debug("using future mana source " + action.describe());
-        return true;
-    }
-
-    private boolean isControlledByPlayer(final Card card) {
-        return card != null && playerControllerHuman.getPlayer().equals(card.getController());
     }
 
     private int findNextActionBefore(final int endIndex, final Class<?>... actionClasses) {
@@ -889,14 +1030,10 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return NO_ACTION_ACCEPTED;
     }
 
-    private int findNextCardSelectionBefore(final int endIndex) { return findNextActionBefore(endIndex, SelectCardAction.class); }
-
-    private int findNextPlayerSelectionBefore(final int endIndex) { return findNextActionBefore(endIndex, SelectPlayerAction.class); }
-
     private boolean noRemainingTargetSelectionsBefore(final int endIndex) {
         final int size = Math.min(endIndex, playbackActions.size());
         for (int i = 0; i < size; i++) {
-            if (isSelectionAction(playbackActions.get(i))) {
+            if (playbackActions.get(i).isSelectionAction()) {
                 return false;
             }
         }
@@ -904,11 +1041,19 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     }
 
     private void finishPlayback() {
+        finishPlayback(true);
+    }
+
+    private void finishPlayback(final boolean clearActiveAction) {
         repeatIteration = 0;
         repeatIterations = 0;
-        playbackRetries = 0;
+        resetPlaybackProgress();
+        if (clearActiveAction) {
+            activeActionIndex = -1;
+        }
         playbackActions.clear();
         playerControllerHuman.getInputQueue().updateObservers();
+        notifyStatusListeners();
     }
 
     private void restartPlaybackActions() {
@@ -916,214 +1061,77 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         playbackActions.addAll(actions);
     }
 
-    private void stopPlayback(final String reason) {
-        debug(reason + " input=" + describeInput() + " remaining=" + describeActions(playbackActions));
-        finishPlayback();
+    private void resetPlaybackProgress() {
+        playbackRetries = 0;
+        pendingStackOrderPriorityPasses = 0;
+        waitingForSelectionAfterStackOrder = false;
+    }
+
+    private void stopPlayback(final String reasonKey) {
+        final String message = localizer.getMessage("lblMacroPlaybackStoppedAt",
+                localizer.getMessage(reasonKey), describeActiveAction(), describeInput());
+        playbackMessages.add(message);
+        if (DEBUG) {
+            debug(message + " remaining=" + describeActions(playbackActions));
+        }
+        finishPlayback(false);
         playerControllerHuman.getGui().message(localizer.getMessage("lblMacroPlaybackStopped"),
                 localizer.getMessage("lblRepeatActionSequence"));
     }
 
     public boolean processAction(PlayerAction action) {
-        debug("try " + action.describe());
-        final Input inp = playerControllerHuman.getInputProxy().getInput();
-        if (action instanceof ActivateAbilityAction activateAbilityAction) {
-            if (inp instanceof InputPassPriority passPriorityInput) {
-                return debugResult(action, activateAbility(passPriorityInput, activateAbilityAction));
-            }
-        } else if (action instanceof PassPriorityAction passPriorityAction) {
-            if (inp instanceof InputPassPriority && canReplayPassPriority(passPriorityAction)) {
-                inp.selectButtonOK();
-                return debugResult(action, true);
-            }
-            if (inp instanceof InputAttack && canReplayAttackPassPriority(passPriorityAction)) {
-                inp.selectButtonOK();
-                return debugResult(action, true);
-            }
-        } else if (action instanceof FinishTargetingAction) {
-            if (inp instanceof InputSelectTargets) {
-                inp.selectButtonOK();
-                return debugResult(action, true);
-            }
-        } else if (action instanceof PayManaFromPoolAction) {
-            if (inp instanceof InputPayMana) {
-                ((InputPayMana) inp).useManaFromPool(((PayManaFromPoolAction) action).getSelectedColor());
-                return debugResult(action, true);
-            }
-        } else if (action instanceof PayCostAction) {
-            if (inp instanceof InputConfirm) {
-                inp.selectButtonOK();
-                return debugResult(action, true);
-            }
-        } else if (action instanceof ConfirmAction confirmAction) {
-            if (inp instanceof InputConfirm || inp instanceof InputPayMana) {
-                if (confirmAction.isConfirmed()) {
-                    inp.selectButtonOK();
-                } else {
-                    inp.selectButtonCancel();
-                }
-                return debugResult(action, true);
-            }
-        } else {
-            GameEntityView gev = action.getGameEntityView();
-            if (gev instanceof CardView cardView) {
-                return debugResult(action, selectCard(cardView));
-            } else if (gev instanceof PlayerView playerView) {
-                return debugResult(action, selectPlayer(playerView));
-            }
+        setActiveAction(action);
+        if (DEBUG) {
+            debug("try " + action.describe());
         }
-        return debugResult(action, false);
+        return debugResult(action, actionReplayer.replay(action));
     }
 
-    private boolean activateAbility(final InputPassPriority input, final ActivateAbilityAction action) {
-        final GameEntityView view = action.getGameEntityView();
-        if (!(view instanceof CardView cardView)) {
+    private boolean canAcceptImplicitTriggerConfirm(final InputConfirm input) {
+        final String message = input.getMessageForMacro();
+        if (message == null || !message.startsWith(localizer.getMessage("lblUseTriggeredAbilityOf"))) {
             return false;
         }
-
-        final Card card = findCard(cardView);
-        return card != null && activateAbility(input, action, card);
-    }
-
-    private boolean activateAbility(final InputPassPriority input, final ActivateAbilityAction action, final Card card) {
-        for (final SpellAbility ability : card.getAllPossibleAbilities(playerControllerHuman.getPlayer(), true)) {
-            if (ability.toUnsuppressedString().equals(action.getAbilityDescription())) {
-                return input.selectAbility(ability);
-            }
-        }
-        return false;
-    }
-
-    private boolean selectPlayer(final PlayerView playerView) {
-        final Input inp = playerControllerHuman.getInputProxy().getInput();
-        if (!(inp instanceof InputSelectTargets targetInput)) {
-            return false;
-        }
-        final Player player = playerControllerHuman.getGame().getPlayer(playerView);
-        return player != null && targetInput.selectPlayerForMacro(player, replayTriggerEvent);
-    }
-
-    private boolean selectCard(final CardView cardView) {
-        final Input inp = playerControllerHuman.getInputProxy().getInput();
-        if (inp instanceof InputSelectEntitiesFromList<?> selectInput) {
-            final Card choice = findListChoice(cardView, selectInput);
-            return choice != null && playerControllerHuman.selectCard(choice.getView(), null, replayTriggerEvent);
-        }
-
-        final Card directCard = findCard(cardView);
-        if (inp instanceof InputSelectTargets targetInput) {
-            return directCard != null && targetInput.selectCardForMacro(directCard, replayTriggerEvent);
-        }
-
-        if (inp instanceof InputPassPriority passPriorityInput) {
-            if (directCard == null) {
-                return false;
-            }
-            final List<SpellAbility> abilities = directCard.getAllPossibleAbilities(playerControllerHuman.getPlayer(), true);
-            if (abilities.size() == 1) {
-                return passPriorityInput.selectAbility(abilities.get(0));
-            }
-            return playerControllerHuman.selectCard(directCard.getView(), null, replayTriggerEvent)
-                    && passPriorityInput.getChosenSa() != null;
-        }
-        if (directCard != null && playerControllerHuman.selectCard(directCard.getView(), null, replayTriggerEvent)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private Card findListChoice(final CardView recordedChoice, final InputSelectEntitiesFromList<?> selectInput) {
-        final Card exactChoice = playerControllerHuman.getCard(recordedChoice);
-        if (exactChoice != null && selectInput.getValidChoices().contains(exactChoice)) {
-            return exactChoice;
-        }
-        if (recordedChoice == null || isRecordedBattlefieldLandChoice(recordedChoice, exactChoice, selectInput)) {
-            return null;
-        }
-        for (final GameEntity validChoice : selectInput.getValidChoices()) {
-            if (validChoice instanceof Card card && isEquivalentCard(recordedChoice, card)) {
-                return card;
-            }
-        }
-        for (final GameEntity validChoice : selectInput.getValidChoices()) {
-            if (validChoice instanceof Card card && isEquivalentToken(recordedChoice, card)) {
-                return card;
-            }
-        }
-        debug("no list match for " + recordedChoice + " choices=" + selectInput.getValidChoices());
-        return null;
-    }
-
-    private boolean isRecordedBattlefieldLandChoice(final CardView recordedChoice, final Card exactChoice,
-                                                    final InputSelectEntitiesFromList<?> selectInput) {
-        if (!(exactChoice == null ? recordedChoice.getCurrentState().getType().isLand() : exactChoice.isLand())) {
-            return false;
-        }
-        for (final GameEntity validChoice : selectInput.getValidChoices()) {
-            if (validChoice instanceof Card card && card.isInZone(ZoneType.Battlefield)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isEquivalentToken(final CardView original, final Card candidate) {
-        return isTokenLike(original)
-                && isTokenLike(candidate.getView())
-                && hasSameController(original, candidate)
-                && normalizeTokenName(original.getName()).equals(normalizeTokenName(candidate.getView().getName()));
-    }
-
-    private boolean isTokenLike(final CardView card) {
-        return card.isToken() || card.getName().endsWith(" Token");
-    }
-
-    private String normalizeTokenName(final String name) {
-        String normalized = name;
-        while (normalized.endsWith(" Token")) {
-            normalized = normalized.substring(0, normalized.length() - " Token".length());
-        }
-        return normalized;
-    }
-
-    private boolean hasSameController(final CardView original, final Card candidate) {
-        return original.getController() == null || original.getController().equals(candidate.getView().getController());
-    }
-
-    private Card findCard(final CardView cardView) {
-        if (cardView == null) {
-            return null;
-        }
-        final Card directCard = playerControllerHuman.getCard(cardView);
-        if (directCard != null) {
-            return directCard;
-        }
-        for (final Card card : playerControllerHuman.getGame().getCardsInGame()) {
-            if (isEquivalentCard(cardView, card)) {
-                return card;
-            }
-        }
-        return null;
-    }
-
-    private boolean isEquivalentCard(final CardView original, final Card candidate) {
-        return original.getName().equals(candidate.getView().getName())
-                && original.isToken() == candidate.isToken()
-                && hasSameController(original, candidate);
-    }
-
-    private CardView selectedCardView(final PlayerAction action) {
-        return action instanceof SelectCardAction && action.getGameEntityView() instanceof CardView cardView ? cardView : null;
+        return findNextAction(SelectCardAction.class, SelectPlayerAction.class) >= 0;
     }
 
     private boolean debugResult(final PlayerAction action, final boolean result) {
-        debug((result ? "accepted " : "rejected ") + action.describe());
+        if (DEBUG) {
+            debug((result ? "accepted " : "rejected ") + action.describe());
+        }
+        if (!result && repeatIterations > 0 && playbackRetries == MAX_REJECTED_ACTION_RETRIES) {
+            playbackMessages.add(localizer.getMessage("lblMacroCouldNotReplay", action.describe(), describeInput()));
+            notifyStatusListeners();
+        }
         return result;
+    }
+
+    private void setActiveAction(final PlayerAction action) {
+        final int index = action == null ? -1 : actions.indexOf(action);
+        if (activeActionIndex == index) {
+            return;
+        }
+        activeActionIndex = index;
+        notifyStatusListeners();
+    }
+
+    private String describeActiveAction() {
+        if (activeActionIndex >= 0 && activeActionIndex < actions.size()) {
+            return localizer.getMessage("lblMacroStepDescription",
+                    activeActionIndex + 1, actions.get(activeActionIndex).describe());
+        }
+        return localizer.getMessage("lblMacroNextRecordedStep");
     }
 
     private void debug(final String message) {
         if (DEBUG) {
             System.out.println(DEBUG_PREFIX + message);
+        }
+    }
+
+    private void debugPlaybackState() {
+        if (DEBUG) {
+            debug("input=" + describeInput() + " remaining=" + describeActions(playbackActions));
         }
     }
 
@@ -1144,20 +1152,4 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return sb.toString();
     }
 
-    private class DummyTriggerEvent implements ITriggerEvent {
-        @Override
-        public int getButton() {
-            return 1; // Emulate left mouse button
-        }
-
-        @Override
-        public int getX() {
-            return 0; // Hopefully this doesn't do anything wonky!
-        }
-
-        @Override
-        public int getY() {
-            return 0;
-        }
-    }
 }

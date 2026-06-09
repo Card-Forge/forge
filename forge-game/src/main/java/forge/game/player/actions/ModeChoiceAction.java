@@ -1,5 +1,7 @@
 package forge.game.player.actions;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ModeChoiceAction extends PlayerAction {
@@ -7,7 +9,7 @@ public class ModeChoiceAction extends PlayerAction {
 
     public ModeChoiceAction(final List<String> modeDescriptions) {
         super(null, "Choose mode");
-        this.modeDescriptions = modeDescriptions;
+        this.modeDescriptions = Collections.unmodifiableList(new ArrayList<>(modeDescriptions));
     }
 
     public List<String> getModeDescriptions() {
@@ -15,7 +17,8 @@ public class ModeChoiceAction extends PlayerAction {
     }
 
     @Override
-    protected void appendDetails(final StringBuilder sb) {
-        sb.append(" modes=").append(modeDescriptions);
+    public String describe() {
+        return localize(modeDescriptions.size() == 1 ? "lblMacroActionChooseMode" : "lblMacroActionChooseModes",
+                describeList(modeDescriptions));
     }
 }

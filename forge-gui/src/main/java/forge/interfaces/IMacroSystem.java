@@ -18,6 +18,11 @@ public interface IMacroSystem {
     default boolean isRecording() { return false; }
     default boolean isReplaying() { return false; }
     default boolean hasRememberedActions() { return false; }
+    default List<String> getRememberedActionDescriptions() { return List.of(); }
+    default int getActiveActionIndex() { return -1; }
+    default List<String> getPlaybackMessages() { return List.of(); }
+    default void addStatusListener(final Runnable listener) { }
+    default void removeStatusListener(final Runnable listener) { }
     default Byte consumeRememberedColorChoice(final List<MagicColor.Color> choices) { return null; }
     default Map<Byte, Integer> consumeRememberedManaCombo(final List<MagicColor.Color> choices,
                                                           final int manaAmount, final boolean different) {

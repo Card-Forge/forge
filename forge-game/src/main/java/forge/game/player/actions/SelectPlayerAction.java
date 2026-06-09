@@ -7,4 +7,13 @@ public class SelectPlayerAction extends PlayerAction {
         super(playerView, "Select player");
     }
 
+    @Override
+    public boolean isSelectionAction() {
+        return true;
+    }
+
+    @Override
+    public String describe() {
+        return localize("lblMacroActionSelectPlayer", describeEntity());
+    }
 }
