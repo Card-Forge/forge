@@ -93,6 +93,7 @@ public final class ForgeConstants {
     public static final String CARD_DATA_DIR                = RES_DIR + "cardsfolder" + PATH_SEPARATOR;
     public static final String TOKEN_DATA_DIR               = RES_DIR + "tokenscripts" + PATH_SEPARATOR;
     public static final String EDITIONS_DIR                 = RES_DIR + "editions" + PATH_SEPARATOR;
+    public static final String CDN_UUID_DIR                 = RES_DIR + "cdn_uuid" + PATH_SEPARATOR;
     public static final String BLOCK_DATA_DIR               = RES_DIR + "blockdata" + PATH_SEPARATOR;
     public static final String FORMATS_DATA_DIR             = RES_DIR + "formats" + PATH_SEPARATOR;
     public static final String DECK_CUBE_DIR                = RES_DIR + "cube" + PATH_SEPARATOR;

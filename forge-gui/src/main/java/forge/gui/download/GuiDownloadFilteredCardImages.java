@@ -18,9 +18,13 @@ import java.util.function.Predicate;
 
 /**
  * Downloads card images for all cards that match the supplied predicate.
- * Uses Scryfall as the primary source (matching the auto-downloader path) so
- * that images are actually available; falls back to the cardforge hosted server
- * for cards that lack a collector number.
+ *
+ * URL priority per card face:
+ *  1. cards.scryfall.io CDN (not rate-limited) — when a UUID JSON file exists at
+ *     {@code res/cdn_uuid/{scryfallCode}/{collectorNumber}.json} for this card
+ *  2. api.scryfall.com per-card API (rate-limited, 100 ms/request) — fallback when
+ *     no UUID is available but the card has a collector number
+ *  3. cardforge hosted server — final fallback
  */
 public class GuiDownloadFilteredCardImages extends GuiDownloadService {
 
@@ -60,28 +64,30 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
 
     private static void addIfMissing(PaperCard c, String face, Map<String, String> downloads) {
         final String imageKey = ImageUtil.getImageKey(c, face, true);
-        if (imageKey == null) { return; }
+        if (imageKey == null) return;
 
-        // Destination path for this card face in the local cache
-        final File destFull   = new File(ForgeConstants.CACHE_CARD_PICS_DIR, imageKey + ".jpg");
-        // Also check for the fullborder variant that LibGDXImageFetcher produces from Scryfall
-        final String fbKey    = TextUtil.fastReplace(imageKey, ".full", ".fullborder") +
-                                (!imageKey.contains(".full") ? ".fullborder" : "") ;
-        final File destFb     = new File(ForgeConstants.CACHE_CARD_PICS_DIR, fbKey + ".jpg");
+        final File destFull = new File(ForgeConstants.CACHE_CARD_PICS_DIR, imageKey + ".jpg");
+        final String fbKey = TextUtil.fastReplace(imageKey, ".full", ".fullborder") +
+                             (!imageKey.contains(".full") ? ".fullborder" : "");
+        final File destFb = new File(ForgeConstants.CACHE_CARD_PICS_DIR, fbKey + ".jpg");
 
-        if (destFull.exists() || destFb.exists()) { return; }
-        if (downloads.containsKey(destFull.getAbsolutePath())) { return; }
+        if (destFull.exists() || destFb.exists()) return;
+        if (downloads.containsKey(destFull.getAbsolutePath())) return;
 
         final String url = buildUrl(c, face);
-        if (url == null) { return; }
+        if (url == null) return;
 
         downloads.put(destFull.getAbsolutePath(), url);
     }
 
     /**
-     * Builds the download URL for one card face.
-     * Prefers Scryfall (which works) for cards that have a collector number;
-     * falls back to the cardforge hosted server otherwise.
+     * Returns the best available download URL for one card face.
+     *
+     * Priority:
+     *  1. cards.scryfall.io CDN URL from cdn_uuid JSON file (no rate limit; optional assets)
+     *  2. api.scryfall.com per-card API URL (rate-limited; GuiDownloadService
+     *     enforces 100 ms between requests to api.scryfall.com URLs automatically)
+     *  3. cardforge hosted server
      */
     private static String buildUrl(PaperCard c, String face) {
         final String collectorNum = c.getCollectorNumber();
@@ -89,21 +95,26 @@ public class GuiDownloadFilteredCardImages extends GuiDownloadService {
                 && !"0".equals(collectorNum)
                 && !StringUtils.isBlank(collectorNum);
 
-        if (hasCollectorNum) {
-            CardEdition edition = StaticData.instance().getEditions().get(c.getEdition());
-            if (edition != null) {
-                String scryfallCode = edition.getScryfallCode();
-                if (!StringUtils.isBlank(scryfallCode)) {
-                    String langCode = edition.getCardsLangCode();
-                    String path = ImageUtil.getScryfallDownloadUrl(c, face, scryfallCode, langCode, false);
-                    if (path != null) {
-                        return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + path;
-                    }
-                }
-            }
+        CardEdition edition = hasCollectorNum
+                ? StaticData.instance().getEditions().get(c.getEdition()) : null;
+        String scryfallCode = (edition != null) ? edition.getScryfallCode() : null;
+        boolean hasScryfallCode = !StringUtils.isBlank(scryfallCode);
+
+        // 1. CDN — fast, no rate limit; requires cdn_uuid JSON files in assets
+        if (edition != null && hasCollectorNum && hasScryfallCode) {
+            String cdnUrl = CdnUuidCache.getCdnUrl(
+                    scryfallCode, collectorNum, edition.getCardsLangCode(), face, "normal");
+            if (cdnUrl != null) return cdnUrl;
         }
 
-        // Fallback: cardforge hosted server
+        // 2. Scryfall per-card API — rate-limited (100 ms/request via GuiDownloadService)
+        if (hasCollectorNum && edition != null && hasScryfallCode) {
+            String apiPath = ImageUtil.getScryfallDownloadUrl(
+                    c, face, scryfallCode, edition.getCardsLangCode(), false);
+            if (apiPath != null) return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + apiPath;
+        }
+
+        // 3. Cardforge hosted server
         String cardforgeUrl = ImageUtil.getDownloadUrl(c, face);
         return cardforgeUrl != null ? ForgeConstants.URL_PIC_DOWNLOAD + cardforgeUrl : null;
     }
