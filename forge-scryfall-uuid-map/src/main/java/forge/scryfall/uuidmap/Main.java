@@ -8,9 +8,9 @@ import java.util.stream.Stream;
 /**
  * Entry point for the Scryfall CDN UUID map generator.
  *
- * <p>Reads a Scryfall bulk JSON file and writes one JSON file per card print:
+ * <p>Reads a Scryfall bulk JSON file and writes one JSON file per set:
  * <pre>
- *   {outputDir}/{setCode}/{collectorNumber}.json  →  {"en":"uuid","ja":"uuid",...}
+ *   {outputDir}/{setCode}.json  →  {"cn":{"en":"uuid","ja":"uuid",...}, ...}
  * </pre>
  *
  * <p>Uses the {@code all_cards} Scryfall dataset by default (every language, every
