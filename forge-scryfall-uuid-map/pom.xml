@@ -13,19 +13,12 @@
     <packaging>jar</packaging>
     <name>Forge Scryfall UUID Map Builder</name>
     <description>
-        Standalone tool that parses a Scryfall all_cards bulk JSON file and writes a
-        (set_code, collector_number, lang) to (front_uuid, back_uuid) lookup table
-        in Apache Parquet format. Covers all cards, all languages, and all art variants.
+        Standalone tool that parses a Scryfall bulk JSON file and writes one JSON file per
+        card print: {outputDir}/{setCode}/{collectorNumber}.json mapping language codes to
+        Scryfall UUIDs. Used to generate the res/cdn_uuid assets shipped with Forge.
     </description>
 
     <dependencies>
-        <!-- Lightweight Parquet reader/writer — no Hadoop, no Avro dependency. -->
-        <dependency>
-            <groupId>blue.strategic.parquet</groupId>
-            <artifactId>parquet-floor</artifactId>
-            <version>2.1</version>
-        </dependency>
-
         <!-- JSON streaming for bulk data parsing -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -37,6 +30,16 @@
     <build>
         <finalName>forge-scryfall-uuid-map-${revision}</finalName>
         <plugins>
+            <!-- Pre-configure mainClass so `mvn exec:java -Dexec.args="..."` works without specifying it -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <mainClass>forge.scryfall.uuidmap.Main</mainClass>
+                </configuration>
+            </plugin>
+
             <!-- Produce a self-contained executable fat JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
