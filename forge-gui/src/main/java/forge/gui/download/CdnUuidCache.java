@@ -7,62 +7,76 @@ import com.google.gson.JsonParser;
 import forge.localinstance.properties.ForgeConstants;
 import org.tinylog.Logger;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Lazy-loading, thread-safe cache for Scryfall CDN UUIDs stored in
- * {@code forge-gui/res/cdn_uuid/{setCode}/{collectorNumber}.json}.
+ * Lazy-loading, thread-safe cache for Scryfall CDN UUIDs.
  *
- * <p>Each JSON file maps language codes to the CDN UUID for that card print:
- * <ul>
- *   <li>{@code {"en":"uuid"}} — single language</li>
- *   <li>{@code {"en":"uuid","ja":"ja-uuid"}} — multiple languages</li>
- *   <li>{@code {"en":["frontUuid","backUuid"]}} — DFC with distinct face UUIDs (rare)</li>
- * </ul>
+ * <p>UUID data lives in per-set JSON files hosted in the forge-extras repository.
+ * On the first lookup for a set, the cache checks for a local copy under
+ * {@code {cacheDir}/cdn_uuid/{setCode}.json}. If absent it fetches the file from
+ * forge-extras and writes it locally so subsequent lookups are instant.
+ * Returns {@code null} on any failure so callers fall back to the rate-limited
+ * Scryfall API or the cardforge server.
  *
- * <p>On the first lookup for a given set, all {@code {cn}.json} files in that set's
- * directory are loaded at once and held in memory for the lifetime of the process.
- * Returns {@code null} when no UUID data is available (caller falls back to the
- * rate-limited Scryfall API or the cardforge server).
+ * <p>Set JSON format:
+ * <pre>
+ *   {
+ *     "1":   {"en": "uuid"},
+ *     "2":   {"en": "uuid", "ja": "ja-uuid"},
+ *     "A-40":{"en": ["frontUuid", "backUuid"]}
+ *   }
+ * </pre>
  */
 public final class CdnUuidCache {
 
-    private static final String FALLBACK_LANG = "en";
-    /** Sentinel: set directory was scanned and found empty / absent. */
+    private static final String FALLBACK_LANG    = "en";
+    private static final int    FETCH_TIMEOUT_MS = 10_000;
+
+    /** Sentinel: set was looked up and no data exists (locally or remotely). */
     private static final Map<String, Map<String, LangUuids>> MISSING_SET = Collections.emptyMap();
 
-    /**
-     * Holds the front and (optionally different) back UUID for one language of one card.
-     * {@code back} is null when both faces share the same UUID.
-     */
     private static final class LangUuids {
         final String front;
-        final String back; // null → same as front
+        final String back; // null → same UUID for both faces
         LangUuids(String front, String back) { this.front = front; this.back = back; }
     }
 
-    /** Cache: setCode -> (collectorNumber -> (lang -> LangUuids)) */
+    /** Cache: setCode → (collectorNumber → (lang → LangUuids)) */
     private static final ConcurrentHashMap<String, Map<String, Map<String, LangUuids>>> setCache =
             new ConcurrentHashMap<>();
 
     /**
-     * Override the CDN UUID base directory. Package-private for unit tests only.
+     * Override the local cache directory. Package-private for unit tests.
      * Must end with the platform file separator when set.
      */
-    static volatile String cdnBaseDirOverride = null;
+    static volatile String localCacheDirOverride = null;
+
+    /**
+     * Override the remote base URL. Package-private for unit tests.
+     * Must end with '/'. Supports {@code file://} URLs for offline testing.
+     */
+    static volatile String remoteBaseUrlOverride = null;
 
     private CdnUuidCache() {}
 
     /** Clears the in-memory cache. Package-private for unit tests only. */
-    static void clearCacheForTesting() {
-        setCache.clear();
-    }
+    static void clearCacheForTesting() { setCache.clear(); }
 
     /**
      * Returns the Scryfall CDN image URL for a given card face, or {@code null}
@@ -101,61 +115,134 @@ public final class CdnUuidCache {
         Map<String, Map<String, LangUuids>> cached = setCache.get(setCode);
         if (cached != null) return cached;
 
-        String baseDir = cdnBaseDirOverride != null ? cdnBaseDirOverride : ForgeConstants.CDN_UUID_DIR;
-        File setDir = new File(baseDir + setCode);
-        if (!setDir.isDirectory()) {
-            Logger.debug("CdnUuidCache: set directory not found: {}", setDir.getAbsolutePath());
-            setCache.put(setCode, MISSING_SET);
-            return MISSING_SET;
-        }
+        Map<String, Map<String, LangUuids>> loaded = loadSet(setCode);
+        // putIfAbsent: if another thread raced and loaded first, use its result
+        Map<String, Map<String, LangUuids>> existing = setCache.putIfAbsent(setCode, loaded);
+        return existing != null ? existing : loaded;
+    }
 
-        File[] files = setDir.listFiles(f -> f.getName().endsWith(".json"));
-        if (files == null || files.length == 0) {
-            setCache.put(setCode, MISSING_SET);
-            return MISSING_SET;
-        }
+    private static Map<String, Map<String, LangUuids>> loadSet(String setCode) {
+        File localFile = localCacheFile(setCode);
 
-        Map<String, Map<String, LangUuids>> cardMap = new HashMap<>(files.length * 2);
-        for (File f : files) {
-            String cn = f.getName().substring(0, f.getName().length() - 5); // strip .json
+        // 1. Try local disk cache
+        if (localFile.exists()) {
             try {
-                Map<String, LangUuids> langMap = parseCardFile(f);
-                if (!langMap.isEmpty()) cardMap.put(cn, langMap);
+                return parseSetFile(localFile);
             } catch (Exception e) {
-                Logger.warn("CdnUuidCache: failed to parse {}: {}", f, e.getMessage());
+                Logger.warn("CdnUuidCache: corrupt local cache {}: {}", localFile, e.getMessage());
+                //noinspection ResultOfMethodCallIgnored
+                localFile.delete();
             }
         }
 
-        Map<String, Map<String, LangUuids>> result = Collections.unmodifiableMap(cardMap);
-        setCache.put(setCode, result);
-        return result;
+        // 2. Fetch from remote, cache locally
+        String remoteUrl = remoteUrl(setCode);
+        try {
+            String json = fetchString(remoteUrl);
+            if (json != null) {
+                writeLocalCache(localFile, json);
+                return parseSetJson(json);
+            }
+        } catch (Exception e) {
+            Logger.debug("CdnUuidCache: no UUID data for set '{}': {}", setCode, e.getMessage());
+        }
+
+        return MISSING_SET;
+    }
+
+    private static File localCacheFile(String setCode) {
+        String dir = localCacheDirOverride != null
+                ? localCacheDirOverride
+                : ForgeConstants.CACHE_CDN_UUID_DIR;
+        return new File(dir, setCode + ".json");
+    }
+
+    private static String remoteUrl(String setCode) {
+        String base = remoteBaseUrlOverride != null
+                ? remoteBaseUrlOverride
+                : ForgeConstants.FORGE_EXTRAS_CDN_UUID_URL;
+        return base + setCode + ".json";
+    }
+
+    /** Fetches {@code urlStr} and returns the body as a string, or {@code null} for HTTP 404. */
+    private static String fetchString(String urlStr) throws Exception {
+        URLConnection conn = new URL(urlStr).openConnection();
+        conn.setConnectTimeout(FETCH_TIMEOUT_MS);
+        conn.setReadTimeout(FETCH_TIMEOUT_MS);
+        conn.setRequestProperty("Accept", "application/json");
+        conn.connect();
+        if (conn instanceof HttpURLConnection) {
+            int status = ((HttpURLConnection) conn).getResponseCode();
+            if (status == 404) return null;
+            if (status != 200) throw new Exception("HTTP " + status + " for " + urlStr);
+        }
+        try (InputStream is = conn.getInputStream();
+             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) sb.append(line).append('\n');
+            return sb.toString();
+        }
+    }
+
+    private static void writeLocalCache(File file, String json) {
+        try {
+            //noinspection ResultOfMethodCallIgnored
+            file.getParentFile().mkdirs();
+            Path tmp = Files.createTempFile(file.getParentFile().toPath(), "cdn-", ".tmp");
+            try {
+                Files.write(tmp, json.getBytes(StandardCharsets.UTF_8));
+                Files.move(tmp, file.toPath(),
+                        StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+            } catch (Exception e) {
+                Files.deleteIfExists(tmp);
+                throw e;
+            }
+        } catch (Exception e) {
+            Logger.warn("CdnUuidCache: could not write local cache {}: {}", file, e.getMessage());
+        }
+    }
+
+    private static Map<String, Map<String, LangUuids>> parseSetFile(File file) throws Exception {
+        try (FileReader reader = new FileReader(file, StandardCharsets.UTF_8)) {
+            return parseSetObject(JsonParser.parseReader(reader).getAsJsonObject());
+        }
+    }
+
+    private static Map<String, Map<String, LangUuids>> parseSetJson(String json) {
+        return parseSetObject(JsonParser.parseString(json).getAsJsonObject());
     }
 
     /**
-     * Parses a single {@code {cn}.json} file.
-     * Format: {@code {"en":"uuid","ja":["fuuid","buuid"],...}}
+     * Parses a set JSON object.
+     * Format: {@code {"cn": {"lang": "uuid"|["frontUuid","backUuid"]}, ...}}
      */
-    private static Map<String, LangUuids> parseCardFile(File file) throws Exception {
-        JsonObject obj;
-        try (FileReader reader = new FileReader(file, StandardCharsets.UTF_8)) {
-            obj = JsonParser.parseReader(reader).getAsJsonObject();
-        }
-        Map<String, LangUuids> result = new HashMap<>(obj.size() * 2);
-        for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-            JsonElement val = entry.getValue();
-            if (val.isJsonPrimitive()) {
-                result.put(entry.getKey(), new LangUuids(val.getAsString(), null));
-            } else if (val.isJsonArray()) {
-                JsonArray arr = val.getAsJsonArray();
-                if (arr.size() >= 2) {
-                    String front = arr.get(0).getAsString();
-                    String back  = arr.get(1).getAsString();
-                    result.put(entry.getKey(), new LangUuids(front, back.equals(front) ? null : back));
-                } else if (arr.size() == 1) {
-                    result.put(entry.getKey(), new LangUuids(arr.get(0).getAsString(), null));
+    private static Map<String, Map<String, LangUuids>> parseSetObject(JsonObject setObj) {
+        Map<String, Map<String, LangUuids>> cardMap = new HashMap<>(setObj.size() * 2);
+        for (Map.Entry<String, JsonElement> cnEntry : setObj.entrySet()) {
+            if (!cnEntry.getValue().isJsonObject()) continue;
+            JsonObject langObj = cnEntry.getValue().getAsJsonObject();
+            Map<String, LangUuids> langMap = new HashMap<>(langObj.size() * 2);
+            for (Map.Entry<String, JsonElement> langEntry : langObj.entrySet()) {
+                JsonElement val = langEntry.getValue();
+                if (val.isJsonPrimitive()) {
+                    langMap.put(langEntry.getKey(), new LangUuids(val.getAsString(), null));
+                } else if (val.isJsonArray()) {
+                    JsonArray arr = val.getAsJsonArray();
+                    if (arr.size() >= 2) {
+                        String front = arr.get(0).getAsString();
+                        String back  = arr.get(1).getAsString();
+                        langMap.put(langEntry.getKey(),
+                                new LangUuids(front, back.equals(front) ? null : back));
+                    } else if (arr.size() == 1) {
+                        langMap.put(langEntry.getKey(),
+                                new LangUuids(arr.get(0).getAsString(), null));
+                    }
                 }
             }
+            if (!langMap.isEmpty())
+                cardMap.put(cnEntry.getKey(), Collections.unmodifiableMap(langMap));
         }
-        return result;
+        return Collections.unmodifiableMap(cardMap);
     }
 }

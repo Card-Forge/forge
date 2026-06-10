@@ -93,7 +93,6 @@ public final class ForgeConstants {
     public static final String CARD_DATA_DIR                = RES_DIR + "cardsfolder" + PATH_SEPARATOR;
     public static final String TOKEN_DATA_DIR               = RES_DIR + "tokenscripts" + PATH_SEPARATOR;
     public static final String EDITIONS_DIR                 = RES_DIR + "editions" + PATH_SEPARATOR;
-    public static final String CDN_UUID_DIR                 = RES_DIR + "cdn_uuid" + PATH_SEPARATOR;
     public static final String BLOCK_DATA_DIR               = RES_DIR + "blockdata" + PATH_SEPARATOR;
     public static final String FORMATS_DATA_DIR             = RES_DIR + "formats" + PATH_SEPARATOR;
     public static final String DECK_CUBE_DIR                = RES_DIR + "cube" + PATH_SEPARATOR;
@@ -241,6 +240,7 @@ public final class ForgeConstants {
     }
 
     // data that is only in the profile dirs
+    public static final String CACHE_CDN_UUID_DIR         = CACHE_DIR + "cdn_uuid" + PATH_SEPARATOR;
     public static final String USER_QUEST_DIR             = USER_DIR + "quest" + PATH_SEPARATOR;
     public static final String USER_QUEST_WORLD_DIR       = USER_QUEST_DIR + "world" + PATH_SEPARATOR;
     public static final String USER_CONQUEST_DIR          = USER_DIR + "conquest" + PATH_SEPARATOR;
@@ -347,6 +347,7 @@ public final class ForgeConstants {
     private static final String URL_SCRYFALL = "https://api.scryfall.com";
     public static final String URL_PIC_SCRYFALL_DOWNLOAD = URL_SCRYFALL + "/cards/";
     public static final String URL_SCRYFALL_CDN = "https://cards.scryfall.io/";
+    public static final String FORGE_EXTRAS_CDN_UUID_URL = GITHUB_ASSETS_BASE + "cdn_uuid/";
 
     // Constants for Display Card Identity game setting
     public static final String DISP_CURRENT_COLORS_ALWAYS = "Always";
