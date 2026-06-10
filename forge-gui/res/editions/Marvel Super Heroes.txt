@@ -398,7 +398,7 @@ ScryfallCode=MSH
 390 M Bruce Banner @Jack Kirby & Paul Reinman
 391 M Namor the Sub-Mariner @John Buscema & Sol Brodsky
 392 M Tony Stark @Johnny Craig
-393 M Black Widow, Super Spy @Emanuela Lapacchino & Neeraj Menon
+393 M Black Widow, Super Spy @Emanuela Lupacchino & Neeraj Menon
 394 M Doctor Doom @Larry Lieber & Vince Colletta
 395 R Elektra, Daughter of the Hand @Mike Deodato Jr.
 396 M Shang-Chi, Master of Kung Fu @Jim Cheung
@@ -451,6 +451,7 @@ ScryfallCode=MSH
 444 U Patriot, Shield Wielder @Vlad Petruchik
 445 U Mister Fantastic, Reed Richards @Rimas Valeikis
 446 U Baron Strucker, HYDRA Overlord @InHyuk Lee
+448 U Speed, Young Avenger @Tyler Walpole
 449 U Captain America, Living Legend @Smirtouille
 450 U Kang, Temporal Tyrant @David Szabo
 451 U Madame Hydra @Pauline Voss
