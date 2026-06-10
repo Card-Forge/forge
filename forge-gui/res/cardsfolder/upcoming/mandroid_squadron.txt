@@ -1,0 +1,7 @@
+Name:Mandroid Squadron
+ManaCost:1 W
+Types:Artifact Creature Human Soldier
+PT:0/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this creature enters, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+Oracle:When this creature enters, you gain 2 life.
