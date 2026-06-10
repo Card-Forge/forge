@@ -24,9 +24,11 @@ import forge.util.FileUtil;
 import forge.util.IItemReader;
 import forge.util.IItemSerializer;
 import forge.util.storage.StorageReaderFolder;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -76,6 +78,45 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
         return new File(this.directory, deck.getBestFileName() + FILE_EXTENSION);
     }
 
+    public boolean saveMetadata(final Deck deck) {
+        final File file = makeFileFor(deck);
+        if (!file.exists()) {
+            return false;
+        }
+        try {
+            final List<String> lines = FileUtil.readFile(file);
+            final int metadataStart = findMetadataSection(lines);
+            if (metadataStart < 0) {
+                return false;
+            }
+
+            final List<String> updatedLines = new ArrayList<>(lines);
+            int insertAt = metadataStart + 1;
+            for (int i = metadataStart + 1; i < updatedLines.size(); i++) {
+                final String line = updatedLines.get(i).trim();
+                if (line.startsWith("[") && line.endsWith("]")) {
+                    break;
+                }
+                if (isMetadataLine(line, DeckFileHeader.DECK_HASH) || isMetadataLine(line, DeckFileHeader.COMMANDER_BRACKET)) {
+                    updatedLines.remove(i--);
+                    continue;
+                }
+                if (isMetadataLine(line, DeckFileHeader.NAME) || isMetadataLine(line, DeckFileHeader.COMMENT)) {
+                    insertAt = i + 1;
+                }
+            }
+            if (StringUtils.isNotBlank(deck.getDeckHash()) && deck.getCommanderBracket() != null) {
+                updatedLines.add(insertAt, DeckFileHeader.DECK_HASH + "=" + deck.getDeckHash());
+                updatedLines.add(insertAt + 1, DeckFileHeader.COMMANDER_BRACKET + "=" + deck.getCommanderBracket());
+            }
+            FileUtil.writeFile(file, updatedLines);
+            return true;
+        }
+        catch (final RuntimeException ignored) {
+            return false;
+        }
+    }
+
     @Override
     protected Deck read(final File file) {
         final Map<String, List<String>> sections = FileSection.parseSections(FileUtil.readFile(file));
@@ -106,5 +147,17 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
     protected FilenameFilter getFileFilter() {
         return DCK_FILE_FILTER;
     }
-}
 
+    private static int findMetadataSection(final List<String> lines) {
+        for (int i = 0; i < lines.size(); i++) {
+            if ("[metadata]".equalsIgnoreCase(lines.get(i).trim())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private static boolean isMetadataLine(final String line, final String key) {
+        return line.regionMatches(true, 0, key + "=", 0, key.length() + 1);
+    }
+}

@@ -4,6 +4,7 @@ import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCostShard;
 import forge.deck.io.DeckPreferences;
+import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
@@ -84,17 +85,20 @@ public class DeckProxy implements InventoryItem {
     }
 
     public void saveDeckMetadata() {
-        if (storage == null || !(deck instanceof Deck)) {
+        if (!canSaveDeckMetadata()) {
             return;
         }
-        try {
-            @SuppressWarnings("unchecked")
-            final IStorage<IHasName> writableStorage = (IStorage<IHasName>) storage;
-            writableStorage.add(deck);
+        if (storage instanceof DeckStorage deckStorage) {
+            deckStorage.saveMetadata((Deck) deck);
         }
-        catch (final RuntimeException ignored) {
-            // Some deck sources are read-only; the in-memory tag still avoids duplicate requests this session.
-        }
+    }
+
+    public boolean canSaveDeckMetadata() {
+        return storage != null && deck instanceof Deck && !isGeneratedDeck() && !isPreconstructedDeck();
+    }
+
+    public boolean isPreconstructedDeck() {
+        return deck instanceof PreconDeck || "Precon".equals(deckType) || "Commander Precon".equals(deckType);
     }
 
     public String getPath() {

@@ -12,6 +12,7 @@ import java.lang.ref.WeakReference;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -33,12 +34,18 @@ public final class CommanderBracketService {
         if (deck != null && deck.isGeneratedDeck()) {
             return 1;
         }
+        if (deck != null && deck.isPreconstructedDeck()) {
+            return CommanderBracketCalculator.getBracket(deck.getDeck());
+        }
         return getResult(deck == null ? null : deck.getDeck(), deck, CommanderBracketApiClient.Priority.LOW, false).getBracket();
     }
 
     public static Object getBracketDisplay(final DeckProxy deck) {
         if (deck != null && deck.isGeneratedDeck()) {
             return "";
+        }
+        if (deck != null && deck.isPreconstructedDeck()) {
+            return CommanderBracketCalculator.getBracket(deck.getDeck());
         }
         return getResult(deck == null ? null : deck.getDeck(), deck, CommanderBracketApiClient.Priority.LOW, true).getBracketDisplay();
     }
@@ -138,6 +145,21 @@ public final class CommanderBracketService {
         return sb.toString().trim();
     }
 
+    private static String toCanonicalCommanderBracketDecklist(final Deck deck) {
+        final List<String> lines = new ArrayList<>();
+        for (final PaperCard commander : deck.getCommanders()) {
+            lines.add("C 1 " + commander.getName());
+        }
+        final CardPool main = deck.getMain();
+        if (main != null) {
+            for (final Entry<PaperCard, Integer> entry : main) {
+                lines.add("M " + entry.getValue() + " " + entry.getKey().getName());
+            }
+        }
+        lines.sort(String.CASE_INSENSITIVE_ORDER);
+        return String.join("\n", lines);
+    }
+
     private static String hashDecklist(final String decklist) {
         try {
             final MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -165,6 +187,9 @@ public final class CommanderBracketService {
     }
 
     private static void cacheRemoteResult(final Deck deck, final DeckProxy deckProxy, final RemoteResult result) {
+        if (deckProxy != null && !deckProxy.canSaveDeckMetadata()) {
+            return;
+        }
         deck.setCommanderBracket(result.deckHash, result.bracket);
         if (deckProxy != null) {
             deckProxy.saveDeckMetadata();
@@ -190,7 +215,8 @@ public final class CommanderBracketService {
                 return new DeckContext(null, CommanderBracketCalculator.calculate((Deck)null), "", "");
             }
             final String decklist = toCommanderBracketDecklist(deck);
-            return new DeckContext(deck, null, decklist, decklist.isEmpty() ? "" : hashDecklist(decklist));
+            return new DeckContext(deck, null, decklist,
+                    decklist.isEmpty() ? "" : hashDecklist(toCanonicalCommanderBracketDecklist(deck)));
         }
 
         private boolean canUseApi() {
