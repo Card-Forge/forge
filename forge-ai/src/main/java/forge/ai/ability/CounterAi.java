@@ -22,11 +22,84 @@ import forge.game.cost.CostSacrifice;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
 public class CounterAi extends SpellAbilityAi {
+
+    private static SpellAbilityStackInstance getTopSpellAbilityStackInstance(final Game game, final SpellAbility sa) {
+        final Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
+        if (!it.hasNext()) {
+            return null;
+        }
+
+        SpellAbilityStackInstance target = it.next();
+        if (sa.equals(target.getSpellAbility()) && it.hasNext()) {
+            target = it.next();
+        }
+        return target;
+    }
+
+    private static boolean targetsOnlyOtherOpponents(final Player ai, final Player activator, final TargetChoices targets) {
+        boolean foundTarget = false;
+
+        for (final Player targetedPlayer : targets.getTargetPlayers()) {
+            if (!targetedPlayer.isOpponentOf(ai) || !targetedPlayer.isOpponentOf(activator)) {
+                return false;
+            }
+            foundTarget = true;
+        }
+
+        for (final Card targetedCard : targets.getTargetCards()) {
+            final Player controller = targetedCard.getController();
+            if (controller == null || !controller.isOpponentOf(ai) || !controller.isOpponentOf(activator)) {
+                return false;
+            }
+            foundTarget = true;
+        }
+
+        for (final SpellAbility targetedSpell : targets.getTargetSpells()) {
+            final Player controller = targetedSpell.getActivatingPlayer();
+            if (controller == null || !controller.isOpponentOf(ai) || !controller.isOpponentOf(activator)) {
+                return false;
+            }
+            foundTarget = true;
+        }
+
+        return foundTarget;
+    }
+
+    private static boolean isOpponentInteractionWithOtherOpponent(final Player ai, final SpellAbilityStackInstance si) {
+        if (ai.getGame().getPlayers().size() < 3 || si == null) {
+            return false;
+        }
+
+        final Player activator = si.getSpellAbility().getActivatingPlayer();
+        if (activator == null || !activator.isOpponentOf(ai)) {
+            return false;
+        }
+
+        boolean foundTargetedOpponent = false;
+        for (SpellAbilityStackInstance current = si; current != null; current = current.getSubInstance()) {
+            final SpellAbility currentAbility = current.getSpellAbility();
+            if (!currentAbility.usesTargeting()) {
+                continue;
+            }
+
+            final TargetChoices targets = current.getTargetChoices();
+            if (targets == null || targets.isEmpty()) {
+                continue;
+            }
+            if (!targetsOnlyOtherOpponents(ai, activator, targets)) {
+                return false;
+            }
+            foundTargetedOpponent = true;
+        }
+
+        return foundTargetedOpponent;
+    }
 
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
@@ -35,6 +108,7 @@ public class CounterAi extends SpellAbilityAi {
         final Game game = ai.getGame();
         int tgtCMC = 0;
         SpellAbility tgtSA = null;
+        SpellAbilityStackInstance tgtSI = null;
 
         if (game.getStack().isEmpty()) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
@@ -47,7 +121,12 @@ public class CounterAi extends SpellAbilityAi {
         }
 
         if (sa.usesTargeting()) {
-            final SpellAbility topSA = ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
+            tgtSI = getTopSpellAbilityStackInstance(game, sa);
+            if (tgtSI == null) {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+
+            final SpellAbility topSA = tgtSI.getSpellAbility();
             if ((topSA.isSpell() && !topSA.isCounterableBy(sa)) || ai.getYourTeam().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -220,6 +299,10 @@ public class CounterAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
+        if (isOpponentInteractionWithOtherOpponent(ai, tgtSI)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
@@ -328,6 +411,9 @@ public class CounterAi extends SpellAbilityAi {
             }
 
             if (bestOption == null) {
+                if (!mandatory && isOpponentInteractionWithOtherOpponent(ai, si)) {
+                    continue;
+                }
                 bestOption = tgtSA;
             } else {
                 // TODO Determine if this option is better than the current best option
