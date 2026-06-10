@@ -33,7 +33,6 @@ public class SleeveSelector extends FDialog {
         final JPanel pnlSleevePics = new JPanel(new WrapLayout());
 
         pnlSleevePics.setOpaque(false);
-        pnlSleevePics.setOpaque(false);
 
         final FLabel initialSelection = makeSleeveLabel(sleeveMap.get(currentIndex), currentIndex, currentIndex);
         pnlSleevePics.add(initialSelection);
