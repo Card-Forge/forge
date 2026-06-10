@@ -124,6 +124,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbEnableNonLegalCards = new OptionsCheckBox(localizer.getMessage("lblEnableNonLegalCards"));
     private final JCheckBox cbAllowCustomCardsDeckConformance = new OptionsCheckBox(localizer.getMessage("lblAllowCustomCardsInDecks"));
     private final JCheckBox cbAiPicker = new OptionsCheckBox(localizer.getMessage("lblAiPickerSettings"));
+    private final JCheckBox cbUseCommanderBracketApi = new OptionsCheckBox(localizer.getMessage("cbUseCommanderBracketApi"));
     private final JCheckBox cbCardArtCoreExpansionsOnlyOpt = new OptionsCheckBox(localizer.getMessage("lblPrefArtExpansionOnly"));
     private final JCheckBox cbSmartCardArtSelectionOpt = new OptionsCheckBox(localizer.getMessage("lblSmartCardArtOpt"));
     private final JCheckBox cbShowDraftRanking = new OptionsCheckBox(localizer.getMessage("lblShowDraftRankingOverlay"));
@@ -382,6 +383,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbAiPicker, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAiPickerSettings")), descriptionConstraints);
+
+        pnlPrefs.add(cbUseCommanderBracketApi, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlUseCommanderBracketApi")), descriptionConstraints);
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GraphicOptions")), sectionConstraints + ", gaptop 2%");
@@ -1082,6 +1086,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbAiPicker() {
         return cbAiPicker;
+    }
+
+    public final JCheckBox getCbUseCommanderBracketApi() {
+        return cbUseCommanderBracketApi;
     }
 
     public final FComboBoxPanel<String> getCbpGraveyardOrdering() {

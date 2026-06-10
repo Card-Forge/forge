@@ -53,6 +53,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private final Set<String> aiHints = new TreeSet<>();
     private final List<String> keyCards = new ArrayList<>();
     private final Map<String, String> draftNotes = new HashMap<>();
+    private String deckHash;
+    private Integer commanderBracket;
     private Map<String, List<String>> deferredSections = null;
     private Map<String, List<String>> loadedSections = null;
     private String lastCardArtPreferenceUsed = "";
@@ -253,6 +255,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         }
         result.setAiHints(StringUtils.join(aiHints, " | "));
         result.setDraftNotes(draftNotes);
+        result.setCommanderBracket(deckHash, commanderBracket);
         //noinspection ConstantValue
         if(tags != null) //Can happen deserializing old Decks.
             result.tags.addAll(this.tags);
@@ -524,6 +527,19 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
      */
     public Set<String> getTags() {
         return tags;
+    }
+
+    public String getDeckHash() {
+        return deckHash;
+    }
+
+    public Integer getCommanderBracket() {
+        return commanderBracket;
+    }
+
+    public void setCommanderBracket(final String hash, final Integer bracket) {
+        deckHash = hash;
+        commanderBracket = bracket;
     }
 
     public CardPool getAllCardsInASinglePool() {

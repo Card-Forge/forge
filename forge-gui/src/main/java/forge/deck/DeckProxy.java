@@ -83,6 +83,20 @@ public class DeckProxy implements InventoryItem {
         return deck instanceof Deck && fnGetDeck == null ? (Deck) deck : fnGetDeck.apply(deck);
     }
 
+    public void saveDeckMetadata() {
+        if (storage == null || !(deck instanceof Deck)) {
+            return;
+        }
+        try {
+            @SuppressWarnings("unchecked")
+            final IStorage<IHasName> writableStorage = (IStorage<IHasName>) storage;
+            writableStorage.add(deck);
+        }
+        catch (final RuntimeException ignored) {
+            // Some deck sources are read-only; the in-memory tag still avoids duplicate requests this session.
+        }
+    }
+
     public String getPath() {
         return path;
     }

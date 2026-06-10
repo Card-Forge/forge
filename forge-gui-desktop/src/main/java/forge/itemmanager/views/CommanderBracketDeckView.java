@@ -1,6 +1,6 @@
 package forge.itemmanager.views;
 
-import forge.deck.CommanderBracketCalculator;
+import forge.deck.CommanderBracketService;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -18,6 +18,11 @@ public final class CommanderBracketDeckView extends CommanderBracketTextView<Pap
 
     @Override
     protected String getText() {
-        return deck.getName() + "\n\n" + CommanderBracketCalculator.getExplanation(deck);
+        return deck.getName() + "\n\n" + CommanderBracketService.getExplanation(deck);
+    }
+
+    @Override
+    protected boolean isRefreshPending() {
+        return CommanderBracketService.isPending(deck);
     }
 }
