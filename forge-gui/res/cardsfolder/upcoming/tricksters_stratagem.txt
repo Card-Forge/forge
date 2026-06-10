@@ -1,0 +1,6 @@
+Name:Trickster's Stratagem
+ManaCost:3 U
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Creature.OppCtrl | ValidTgtDesc$ creature an opponent controls | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 1 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | SubAbility$ DBConnive | SpellDescription$ The owner of target creature an opponent controls puts it into their library second from the top or on the bottom. Then up to one target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:DBConnive:DB$ Connive | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | TargetMin$ 0 | TargetMax$ 1
+Oracle:The owner of target creature an opponent controls puts it into their library second from the top or on the bottom. Then up to one target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

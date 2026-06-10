@@ -1,4 +1,4 @@
-Name:Leader, Super-Genus
+Name:Leader, Super-Genius
 ManaCost:2 U U
 Types:Legendary Creature Gamma Scientist Villain
 PT:1/3
