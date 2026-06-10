@@ -262,23 +262,23 @@ ScryfallCode=MSH
 254 C Vibranium Energy Daggers @Irvin Rodriguez
 255 R The Vision @Carissa Susilo
 256 U Viv Vision, Teen Synthezoid @Nereida
-257 C A.I.M. Labs @Lixin Yin
-258 C Asgardian Citadel @Paulius Daščioras
-259 C Avengers Hangar @Pablo Mendoza
+257 L A.I.M. Labs @Lixin Yin
+258 L Asgardian Citadel @Paulius Daščioras
+259 L Avengers Hangar @Pablo Mendoza
 260 U Avengers Tower @Arthur Yuan
 261 U Baxter Building @Paulius Daščioras
-262 C Birnin Zana Plaza @Raymond Bonilla
+262 L Birnin Zana Plaza @Raymond Bonilla
 263 R Castle Doom @Nino Is
 264 R Dark Fortress @Arthur Yuan
-265 C Fisk Tower @Arthur Yuan
+265 L Fisk Tower @Arthur Yuan
 266 R Gathering Place @Pablo Mendoza
 267 R Gleaming Bastion @Arthur Yuan
-268 C Hell's Kitchen @Shahab Alizadeh
+268 L Hell's Kitchen @Shahab Alizadeh
 269 R Hidden Lair @Pavel Kolomeyets
-270 C Los Diablos Missile Base @Rockey Chen
-271 C Pym Technologies @John Tyler Christopher
-272 C Stark Industries @Leon Tukker
-273 C Subterranean Cavern @JB Casacop
+270 L Los Diablos Missile Base @Rockey Chen
+271 L Pym Technologies @John Tyler Christopher
+272 L Stark Industries @Leon Tukker
+273 L Subterranean Cavern @JB Casacop
 274 C Surveillance Room @Maxim Ruabtsev
 275 R Training Compound @Jonas De Ro
 276 U Villainous Hideout @Paulius Daščioras
