@@ -478,7 +478,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             final PlayerAction acceptedAction = playbackActions.remove(actionIndex);
             playbackRetries = 0;
             pendingStackOrderPriorityPasses = 0;
-            if (acceptedAction.clearsPostStackOrderWait()) {
+            if (acceptedAction.isSelectionAction() || acceptedAction instanceof PassPriorityAction) {
                 waitingForSelectionAfterStackOrder = false;
             }
         } else if (actionIndex == WAIT_FOR_NEXT_INPUT) {
@@ -565,7 +565,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         } else if (inp instanceof InputSelectTargets targetInput) {
             for (int i = 0; i < playbackActions.size(); i++) {
                 final PlayerAction action = playbackActions.get(i);
-                if (action.asPassPriorityAction() != null && noRemainingTargetSelectionsBefore(i)) {
+                if (action instanceof PassPriorityAction && noRemainingTargetSelectionsBefore(i)) {
                     return waitForInput(inp);
                 }
                 if (action instanceof FinishTargetingAction) {
@@ -662,22 +662,18 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             }
 
             if (passPriority >= 0 && noRemainingTargetSelectionsBefore(passPriority)) {
-                return skipOrProcessPassPriority(passPriority);
+                return processActionAt(passPriority);
             }
         }
 
         for (int i = 0; i < playbackActions.size(); i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (inp instanceof InputAttack && action.asPassPriorityAction() != null) {
+            if (inp instanceof InputAttack && action instanceof PassPriorityAction) {
                 return processAttackPassPriority(i, inp);
             }
-            if (inp instanceof InputPassPriority && action.asPassPriorityAction() != null
+            if (inp instanceof InputPassPriority && action instanceof PassPriorityAction
                     && !noRemainingTargetSelectionsBefore(i)) {
                 continue;
-            }
-            if (shouldSkipPassPriorityAction(i)) {
-                debug("skipped obsolete " + action.describe());
-                return i;
             }
             if (!(inp instanceof InputSelectTargets) && action.isTargetSelectionAction()) {
                 continue;
@@ -700,23 +696,12 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return processAction(playbackActions.get(actionIndex)) ? actionIndex : fallback.getAsInt();
     }
 
-    private int skipOrProcessPassPriority(final int actionIndex) {
-        if (actionIndex < 0) {
-            return NO_ACTION_ACCEPTED;
-        }
-        if (shouldSkipPassPriorityAction(actionIndex)) {
-            debug("skipped obsolete " + playbackActions.get(actionIndex).describe());
-            return actionIndex;
-        }
-        return processActionAt(actionIndex);
-    }
-
     private int processAttackPassPriority(final int actionIndex, final Input input) {
         if (actionIndex < 0) {
             return NO_ACTION_ACCEPTED;
         }
-        final PassPriorityAction passPriorityAction = playbackActions.get(actionIndex).asPassPriorityAction();
-        if (passPriorityAction == null) {
+        final PlayerAction action = playbackActions.get(actionIndex);
+        if (!(action instanceof PassPriorityAction passPriorityAction)) {
             return NO_ACTION_ACCEPTED;
         }
         if (passPriorityAction.isStackPassFor(getCurrentPhase())) {
@@ -742,33 +727,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
 
     private boolean isPriorityInput(final Input input) {
         return input instanceof InputPassPriority || input instanceof InputAttack;
-    }
-
-    private boolean shouldSkipPassPriorityAction(final int actionIndex) {
-        final PlayerAction action = playbackActions.get(actionIndex);
-        final PassPriorityAction passPriorityAction = action.asPassPriorityAction();
-        return passPriorityAction != null
-                && (passPriorityAction.isObsoleteWhen(isStackEmpty())
-                || passPriorityAction.isStaleFor(getCurrentPhase()))
-                || isTrailingMainPhasePassBeforeNextIteration(actionIndex);
-    }
-
-    private boolean isTrailingMainPhasePassBeforeNextIteration(final int actionIndex) {
-        if (repeatIteration >= repeatIterations || !isStackEmpty()) {
-            return false;
-        }
-        final PlayerAction action = playbackActions.get(actionIndex);
-        final PassPriorityAction passPriorityAction = action.asPassPriorityAction();
-        if (passPriorityAction == null || !passPriorityAction.isTrailingMainPhasePassCandidate(getCurrentPhase())) {
-            return false;
-        }
-        for (int i = actionIndex + 1; i < playbackActions.size(); i++) {
-            final PassPriorityAction remainingPass = playbackActions.get(i).asPassPriorityAction();
-            if (remainingPass == null || !remainingPass.wasStackEmpty()) {
-                return false;
-            }
-        }
-        return !actions.isEmpty() && actions.get(0).asPassPriorityAction() == null;
     }
 
     private PhaseType getCurrentPhase() {

@@ -29,14 +29,6 @@ public abstract class PlayerAction {
         return isSelectionAction();
     }
 
-    public boolean clearsPostStackOrderWait() {
-        return isSelectionAction();
-    }
-
-    public PassPriorityAction asPassPriorityAction() {
-        return null;
-    }
-
     public CardView getSelectedCardView() {
         return null;
     }
