@@ -7,4 +7,4 @@ SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | AILogic$ PowerDmg |
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | ValidTgtDesc$ artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 K:Rebound
 SVar:X:ParentTargeted$CardPower
-Oracle:Sorcery\nChoose one —\n• Target creature you control deals damage equal to its power to target creature an opponent controls.\n• Destroy target artifact or enchantment.\nRebound
+Oracle:Choose one —\n• Target creature you control deals damage equal to its power to target creature an opponent controls.\n• Destroy target artifact or enchantment.\nRebound
