@@ -43,6 +43,10 @@ public class DiscardAi extends SpellAbilityAi {
             return SpecialCardAi.VolrathsShapeshifter.consider(ai, sa);
         }
 
+        if (ComputerUtilCard.shouldAvoidMassDrawIntoOpponentPunisher(ai, sa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CurseEffects);
+        }
+
         final boolean humanHasHand = !ai.getWeakestOpponent().getCardsIn(ZoneType.Hand).isEmpty();
 
         if (sa.usesTargeting()) {

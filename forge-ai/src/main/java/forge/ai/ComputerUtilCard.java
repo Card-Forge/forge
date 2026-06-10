@@ -76,6 +76,8 @@ import forge.util.MyRandom;
 import forge.util.TextUtil;
 
 public class ComputerUtilCard {
+    private static final int DANGEROUS_MASS_DRAW_COUNT = 3;
+
     public static Card getMostExpensivePermanentAI(final CardCollectionView list, final SpellAbility spell, final boolean targeted) {
         CardCollectionView all = list;
         if (targeted) {
@@ -891,6 +893,164 @@ public class ComputerUtilCard {
         final List<Card> attackers = Lists.newArrayList(attacker);
         aiBlk.assignBlockersGivenAttackers(combat, attackers);
         return ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat);
+    }
+
+    public static boolean shouldAvoidMassDrawIntoOpponentPunisher(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null) {
+            return false;
+        }
+
+        final int estimatedDraws = estimateSelfDrawsFromAbilityChain(ai, sa);
+        if (estimatedDraws < DANGEROUS_MASS_DRAW_COUNT) {
+            return false;
+        }
+        if (massDrawCanWinNow(ai, estimatedDraws)) {
+            return false;
+        }
+
+        for (final Player opponent : ai.getOpponents()) {
+            if (opponentHasActiveDrawPunisher(ai, opponent, estimatedDraws)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static int estimateSelfDrawsFromAbilityChain(final Player ai, final SpellAbility sa) {
+        int draws = 0;
+        for (SpellAbility cur = sa; cur != null; cur = cur.getSubAbility()) {
+            if (cur.getApi() == ApiType.Draw && abilityDrawsForSelf(cur)) {
+                draws = Math.max(draws, estimateDrawAmount(ai, cur));
+            }
+        }
+        return draws;
+    }
+
+    private static boolean abilityDrawsForSelf(final SpellAbility sa) {
+        final String defined = sa.getParamOrDefault("Defined", "You");
+        if (defined.contains("Opponent")) {
+            return false;
+        }
+        return defined.contains("You")
+                || defined.contains("Player")
+                || defined.contains("Controller")
+                || defined.contains("TargetedAndYou")
+                || defined.contains("TriggeredPlayer");
+    }
+
+    private static int estimateDrawAmount(final Player ai, final SpellAbility sa) {
+        final String numCards = sa.getParamOrDefault("NumCards", "1");
+        try {
+            return Integer.parseInt(numCards);
+        } catch (NumberFormatException ignored) {
+            if ("X".equals(numCards) && sa.getXManaCostPaid() != null) {
+                return sa.getXManaCostPaid();
+            }
+            if ("X".equals(numCards)) {
+                int maxHandSize = ai.getCardsIn(ZoneType.Hand).size();
+                for (final Player player : ai.getGame().getPlayers()) {
+                    maxHandSize = Math.max(maxHandSize, player.getCardsIn(ZoneType.Hand).size());
+                }
+                return Math.max(1, maxHandSize);
+            }
+            if (numCards.startsWith("Count$ValidHand")) {
+                return Math.max(1, ai.getCardsIn(ZoneType.Hand).size());
+            }
+            return 1;
+        }
+    }
+
+    private static boolean opponentHasActiveDrawPunisher(final Player ai, final Player opponent,
+            final int estimatedDraws) {
+        for (final Card card : opponent.getCardsIn(ZoneType.Battlefield)) {
+            if (cardHasDrawPunisher(ai, card, estimatedDraws)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean massDrawCanWinNow(final Player ai, final int estimatedDraws) {
+        for (final Player opponent : ai.getOpponents()) {
+            int impact = 0;
+            for (final Card card : ai.getCardsIn(ZoneType.Battlefield)) {
+                impact += cardDrawPunisherImpactAgainstPlayer(card, opponent, estimatedDraws);
+            }
+            if (impact >= opponent.getLife()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean cardHasDrawPunisher(final Player ai, final Card card, final int estimatedDraws) {
+        return cardDrawPunisherImpactAgainstPlayer(card, ai, estimatedDraws) >= estimatedDraws;
+    }
+
+    private static int cardDrawPunisherImpactAgainstPlayer(final Card card, final Player player,
+            final int estimatedDraws) {
+        int impact = 0;
+        for (final Trigger trigger : card.getTriggers()) {
+            if (trigger.getMode() != TriggerType.Drawn || !drawTriggerCanAffectPlayer(trigger, player)) {
+                continue;
+            }
+            if (!trigger.requirementsCheck(card.getGame())) {
+                continue;
+            }
+            impact += drawPunisherImpact(trigger.ensureAbility(), estimatedDraws);
+        }
+        return impact;
+    }
+
+    private static boolean drawTriggerCanAffectPlayer(final Trigger trigger, final Player player) {
+        if (trigger.hasParam("ValidPlayer")) {
+            return triggerMayAffectPlayer(trigger, player);
+        }
+
+        final String validCard = trigger.getParamOrDefault("ValidCard", "Card");
+        if (validCard.contains("Opp")) {
+            return trigger.getHostCard().getController().isOpponentOf(player);
+        }
+        if (validCard.contains("You")) {
+            return trigger.getHostCard().getController().equals(player);
+        }
+        return validCard.contains("Card");
+    }
+
+    private static boolean triggerMayAffectPlayer(final Trigger trigger, final Player player) {
+        final String validPlayer = trigger.getParamOrDefault("ValidPlayer", "Player");
+        if (validPlayer.contains("Opponent")) {
+            return trigger.getHostCard().getController().isOpponentOf(player);
+        }
+        if (validPlayer.contains("You")) {
+            return trigger.getHostCard().getController().equals(player);
+        }
+        return validPlayer.contains("Player");
+    }
+
+    private static int drawPunisherImpact(final SpellAbility sa, final int estimatedDraws) {
+        int impact = 0;
+        for (SpellAbility cur = sa; cur != null; cur = cur.getSubAbility()) {
+            if (cur.getApi() == ApiType.DealDamage) {
+                impact += estimateNumericParam(cur, "NumDmg", 1) * estimatedDraws;
+            } else if (cur.getApi() == ApiType.LoseLife) {
+                impact += estimateNumericParam(cur, "LifeAmount", 1) * estimatedDraws;
+            } else if (cur.getApi() == ApiType.Token) {
+                impact += estimatedDraws;
+            }
+        }
+        return impact;
+    }
+
+    private static int estimateNumericParam(final SpellAbility sa, final String param, final int fallback) {
+        if (!sa.hasParam(param)) {
+            return fallback;
+        }
+        try {
+            return Integer.parseInt(sa.getParam(param));
+        } catch (NumberFormatException ignored) {
+            return fallback;
+        }
     }
 
     public static boolean canBeKilledByRoyalAssassin(final Player ai, final Card card) {
