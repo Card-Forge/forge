@@ -4,7 +4,6 @@ import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCostShard;
 import forge.deck.io.DeckPreferences;
-import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
@@ -88,9 +87,9 @@ public class DeckProxy implements InventoryItem {
         if (!canSaveDeckMetadata()) {
             return;
         }
-        if (storage instanceof DeckStorage deckStorage) {
-            deckStorage.saveMetadata((Deck) deck);
-        }
+        @SuppressWarnings("unchecked")
+        final IStorage<IHasName> writableStorage = (IStorage<IHasName>) storage;
+        writableStorage.saveMetadata(deck);
     }
 
     public boolean canSaveDeckMetadata() {

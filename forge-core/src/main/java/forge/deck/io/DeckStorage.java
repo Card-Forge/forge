@@ -28,7 +28,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +77,7 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
         return new File(this.directory, deck.getBestFileName() + FILE_EXTENSION);
     }
 
+    @Override
     public boolean saveMetadata(final Deck deck) {
         final File file = makeFileFor(deck);
         if (!file.exists()) {
@@ -90,15 +90,14 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
                 return false;
             }
 
-            final List<String> updatedLines = new ArrayList<>(lines);
             int insertAt = metadataStart + 1;
-            for (int i = metadataStart + 1; i < updatedLines.size(); i++) {
-                final String line = updatedLines.get(i).trim();
+            for (int i = metadataStart + 1; i < lines.size(); i++) {
+                final String line = lines.get(i).trim();
                 if (line.startsWith("[") && line.endsWith("]")) {
                     break;
                 }
                 if (isMetadataLine(line, DeckFileHeader.DECK_HASH) || isMetadataLine(line, DeckFileHeader.COMMANDER_BRACKET)) {
-                    updatedLines.remove(i--);
+                    lines.remove(i--);
                     continue;
                 }
                 if (isMetadataLine(line, DeckFileHeader.NAME) || isMetadataLine(line, DeckFileHeader.COMMENT)) {
@@ -106,10 +105,10 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
                 }
             }
             if (StringUtils.isNotBlank(deck.getDeckHash()) && deck.getCommanderBracket() != null) {
-                updatedLines.add(insertAt, DeckFileHeader.DECK_HASH + "=" + deck.getDeckHash());
-                updatedLines.add(insertAt + 1, DeckFileHeader.COMMANDER_BRACKET + "=" + deck.getCommanderBracket());
+                lines.add(insertAt, DeckFileHeader.DECK_HASH + "=" + deck.getDeckHash());
+                lines.add(insertAt + 1, DeckFileHeader.COMMANDER_BRACKET + "=" + deck.getCommanderBracket());
             }
-            FileUtil.writeFile(file, updatedLines);
+            FileUtil.writeFile(file, lines);
             return true;
         }
         catch (final RuntimeException ignored) {

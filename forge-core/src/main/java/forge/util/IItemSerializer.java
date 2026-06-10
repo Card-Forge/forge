@@ -33,6 +33,8 @@ public interface IItemSerializer<T> extends IItemReader<T> {
      */
     void save(T unit);
 
+    default boolean saveMetadata(T unit) { return false; }
+
     /**
      * Erase.
      *
