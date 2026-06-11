@@ -3,7 +3,10 @@ ManaCost:2 G U
 Types:Instant
 A:SP$ Draw | NumCards$ X | LockInText$ True | SubAbility$ DBGainLife | SpellDescription$ You draw X cards and gain X life, where X is the number of colors among permanents you control and spells you've cast this turn.
 SVar:DBGainLife:DB$ GainLife | LockInText$ True | LifeAmount$ X
-SVar:X:SVar$W/Plus.U/Plus.B/Plus.R/Plus.G
+SVar:X:SVar$WUBR/Plus.G
+SVar:WUBR:SVar$WU/Plus.BR
+SVar:WU:SVar$W/Plus.U
+SVar:BR:SVar$B/Plus.R
 SVar:W:SVar$WP/Plus.WS/LimitMax.1
 SVar:U:SVar$UP/Plus.US/LimitMax.1
 SVar:B:SVar$BP/Plus.BS/LimitMax.1
