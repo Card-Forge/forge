@@ -228,7 +228,7 @@ public class PlayerPanel extends FPanel {
         avatarLabel.repaintSelf();
 
         sleeveLabel.setEnabled(mayEdit);
-        setSleeveIcon(FSkin.getSleeves().get(type == LobbySlotType.OPEN ? -1 : sleeveIndex));
+        sleeveLabel.setIcon(FSkin.getSleeves().get(type == LobbySlotType.OPEN ? -1 : sleeveIndex));
         sleeveLabel.repaintSelf();
 
         txtPlayerName.setEnabled(mayEdit);
@@ -699,7 +699,7 @@ public class PlayerPanel extends FPanel {
         final String[] currentPrefs = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
         if (index < currentPrefs.length) {
             sleeveIndex = Integer.parseInt(currentPrefs[index]);
-            setSleeveIcon(FSkin.getSleeves().get(sleeveIndex));
+            sleeveLabel.setIcon(FSkin.getSleeves().get(sleeveIndex));
         } else {
             setRandomSleeve(false);
         }
@@ -805,13 +805,9 @@ public class PlayerPanel extends FPanel {
     }
     public void setSleeveIndex(final int sleeveIndex0) {
         sleeveIndex = sleeveIndex0;
-        setSleeveIcon(FSkin.getSleeves().get(sleeveIndex));
+        final SkinImage icon = FSkin.getSleeves().get(sleeveIndex);
+        sleeveLabel.setIcon(icon);
         sleeveLabel.repaintSelf();
-    }
-
-    // Scaling the full-size source straight to this small label looks rough; pre-scale once at 2x for HiDPI headroom
-    private void setSleeveIcon(final SkinImage icon) {
-        sleeveLabel.setIcon(icon == null ? null : icon.resize(58 * 2, 80 * 2));
     }
 
     public int getTeam() {

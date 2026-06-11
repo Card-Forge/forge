@@ -274,6 +274,8 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
 
     // Various variables used in image rendering.
     private Image img;
+    private Image scaledBg;
+    private int scaledBgW, scaledBgH;
 
     private Runnable cmdClick, cmdRightClick;
 
@@ -492,6 +494,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         // Will need image (not icon) for scaled and non-scaled.
         // Will need image if not in background, but scaled.
         if (iconInBackground || iconScaleAuto) {
+            scaledBg = null;
             if (i0 != null) {
                 img = ((ImageIcon) i0).getImage();
                 iw = img.getWidth(null);
@@ -599,8 +602,24 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
 
                     final int y = (int) (((h - sh) / 2) + iconInsets.getY());
 
+            // A source much larger than the draw size aliases in a single bicubic pass; pre-scale it once to 2x
+            // with area-averaging and cache it, growing the cache only as needed so a resize can't re-trigger it
+            Image src = img;
+            int srcW = iw, srcH = ih;
+            if (sw > 0 && sh > 0 && (iw > sw * 3 || ih > sh * 3)) {
+                final int tw = sw * 2, th = sh * 2;
+                if (scaledBg == null || scaledBgW < tw || scaledBgH < th) {
+                    scaledBg = new ImageIcon(img.getScaledInstance(tw, th, Image.SCALE_SMOOTH)).getImage();
+                    scaledBgW = tw;
+                    scaledBgH = th;
+                }
+                src = scaledBg;
+                srcW = scaledBgW;
+                srcH = scaledBgH;
+            }
+
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-                    g.drawImage(img, x, y, sw + x, sh + y, 0, 0, iw, ih, null);
+                    g.drawImage(src, x, y, sw + x, sh + y, 0, 0, srcW, srcH, null);
         }
 
         super.paintComponent(g);
