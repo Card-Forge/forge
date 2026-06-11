@@ -80,7 +80,7 @@ public class TriggerTaps extends Trigger {
 
         if (hasParam("Teamwork")) {
             IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
-            if (currentPayment == null || !currentPayment.getCost() instanceof CostTeamwork) {
+            if (currentPayment == null || !(currentPayment.getCost() instanceof CostTeamwork)) {
                 return false;
             }
         }
