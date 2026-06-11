@@ -179,8 +179,8 @@ public class PlayerPanel extends FPanel {
             this.add(chkReady, "cell 5 4, ax left, sx 2, wrap");
         }
 
-        this.add(deckLabel, variantBtnConstraints + ", cell 0 5, sx 2, ax right");
-        this.add(deckBtn, variantBtnConstraints + ", cell 2 5, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
+        this.add(deckLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
+        this.add(deckBtn, variantBtnConstraints + ", cell 2 3, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
 
         addHandlersDeckSelector();
 
