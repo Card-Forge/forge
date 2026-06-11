@@ -23,14 +23,14 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
+public class CardDamageTable extends ForwardingTable<Card, GameEntity, Integer> {
     private Table<Card, GameEntity, Integer> dataMap = HashBasedTable.create();
 
-    public CardDamageMap(Table<Card, GameEntity, Integer> damageMap) {
+    public CardDamageTable(Table<Card, GameEntity, Integer> damageMap) {
         putAll(damageMap);
     }
 
-    public CardDamageMap() {
+    public CardDamageTable() {
     }
 
     public void triggerPreventDamage(boolean isCombat) {
@@ -89,6 +89,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 runParams.put(AbilityKey.DamageTarget, ge);
                 runParams.put(AbilityKey.DamageMap, Maps.newHashMap(e.getValue()));
                 runParams.put(AbilityKey.IsCombatDamage, isCombat);
+                runParams.put(AbilityKey.FirstTime, sum == ge.getAssignedDamage(isCombat, null));
 
                 game.getTriggerHandler().runTrigger(TriggerType.DamageDoneOnce, runParams, false);
             }
@@ -104,7 +105,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         }
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.DamageMap, new CardDamageMap(this));
+        runParams.put(AbilityKey.DamageMap, new CardDamageTable(this));
         runParams.put(AbilityKey.IsCombatDamage, isCombat);
         game.getTriggerHandler().runTrigger(TriggerType.DamageAll, runParams, false);
     }
@@ -183,8 +184,8 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         return result;
     }
 
-    public CardDamageMap filteredMap(String validSource, String validTarget, Card host, CardTraitBase sa) {
-        CardDamageMap result = new CardDamageMap();
+    public CardDamageTable filteredMap(String validSource, String validTarget, Card host, CardTraitBase sa) {
+        CardDamageTable result = new CardDamageTable();
         Set<Card> filteredSource = null;
         Set<GameEntity> filteredTarget = null;
         if (validSource != null) {

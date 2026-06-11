@@ -599,8 +599,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
             final int x = iconAlignX == SwingConstants.CENTER
                     ? (int) ((w - sw) / 2 + iconInsets.getX())
                             : (int) iconInsets.getX();
-
-                    final int y = (int) (((h - sh) / 2) + iconInsets.getY());
+            final int y = (int) (((h - sh) / 2) + iconInsets.getY());
 
             // A source much larger than the draw size aliases in a single bicubic pass; pre-scale it once to 2x
             // with area-averaging and cache it, growing the cache only as needed so a resize can't re-trigger it
@@ -619,7 +618,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
             }
 
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-                    g.drawImage(src, x, y, sw + x, sh + y, 0, 0, srcW, srcH, null);
+            g.drawImage(src, x, y, sw + x, sh + y, 0, 0, srcW, srcH, null);
         }
 
         super.paintComponent(g);

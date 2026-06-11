@@ -451,9 +451,11 @@ ScryfallCode=MSH
 444 U Patriot, Shield Wielder @Vlad Petruchik
 445 U Mister Fantastic, Reed Richards @Rimas Valeikis
 446 U Baron Strucker, HYDRA Overlord @InHyuk Lee
+447 U Moonstone, Harsh Mistress @Grace Zhu
 448 U Speed, Young Avenger @Tyler Walpole
 449 U Captain America, Living Legend @Smirtouille
 450 U Kang, Temporal Tyrant @David Szabo
 451 U Madame Hydra @Pauline Voss
 452 U Avengers Tower @Arthur Yuan
 453 U Baxter Building @Paulius Daščioras
+454 U Villainous Hideout @Paulius Daščioras

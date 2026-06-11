@@ -1,5 +1,5 @@
 Name:Speed, Young Avenger
-ManaCost:1 G
+ManaCost:1 R
 Types:Legendary Creature Mutant Hero
 PT:2/2
 K:Haste
