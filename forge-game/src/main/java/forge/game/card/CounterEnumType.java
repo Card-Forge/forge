@@ -389,6 +389,8 @@ public enum CounterEnumType implements CounterType {
 
     RUST("RUST", 255, 181, 116, CounterAiCategory.Negative),
 
+    SAURIAN("SAUR", 120, 203, 161, CounterAiCategory.Positive),
+
     SCREAM("SCREM", 0, 220, 255, CounterAiCategory.Positive),
 
     SCROLL("SCRLL", 206, 199, 162, CounterAiCategory.Positive),
