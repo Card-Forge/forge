@@ -14,6 +14,7 @@ ScryfallCode=MSC
 6 M Doctor Doom, King of Latveria @Nathaniel Himawan
 7 M T'Challa, the Black Panther @Eli Minaya
 8 R Galactus, Devourer of Worlds @Piotr Dura
+9 R Molecule Man @Simon Dominic
 10 R Silver Surfer, Galactus's Herald @Irvin Rodriguez
 11 R Avenge @Alex Horley-Orlandelli
 13 R Everett K. Ross, Hapless Attaché @Alexander Mokhov
@@ -27,27 +28,45 @@ ScryfallCode=MSC
 26 R Ultimate Nullification @Erikas Perl
 27 R Winter Soldier, Reborn Avenger @Lucio Parrillo
 28 R Council of Reeds @Vlad Petruchik
+29 R Extract Power @Ioannis Fiore
 30 R Fantastic Elasticity @Mintautas Šukys
+31 R Glorious Purpose @Fariba Khamseh
+32 R Helmut Zemo, Mastermind @Bartek Fedyczak
 33 R Iron Man, Armored Avenger @Carlos Dattoli
 34 R Jarvis, Earth's Mightiest Butler @Gintas Galvanauskas
+35 R Kang Dynasty @Serena Malyon
 36 R Lockjaw, Slobbering Teleporter @Thomas Chamberlain-Keen
 37 R Professor Hulk @Leroy Steinmann
 38 R Valeria Richards, Precocious @Justyna Dura
 39 R The Wasp, Winsome Avenger @Raoul Vitale
 40 R West Coast Expansion @E. M. Gist
+41 R Age of Ultron @Serena Malyon
+42 R Damocles Base, Sword of Kang @Anthony Devine
+43 R Endless Ranks of HYDRA @Bartek Fedyczak
+44 R The Frightful Four @Björn Barends
+45 R Iron Monger, Sadistic Tycoon @Bartek Fedyczak
+46 R Klaw, Master of Sound @Ioannis Fiore
+47 R Abomination, World Ravager @Pavel Kolomeyets
 48 R Alicia Masters, Skilled Sculptor @Erion Makuo
+49 R Batroc the Leaper @Lucio Parrillo
 50 R Firebird, Blazing Ranger @Alessandra Pisano
 51 R Flame On! @Rafater
 52 R Franklin Richards, Ascendant @Julia Vasilyeva
+53 R Killmonger, Ruthless Usurper @L.A. Draws
 54 R Lady Loki, Agent of Chaos @Marta Nael
+55 R Living Laser @Nathaniel Himawan
 56 R Loki's Scepter @L J Koh
 57 R Nova Flame @Erikas Perl
 58 R Photon, Mighty Marvel @Tran Nguyen
+59 R Puppet Master, String Puller @John Tyler Christopher
 60 R She-Hulk, Wallbreaker @Julia Vasilyeva
+61 R Stilt-Man, Towering Terror @Zoltan Boros
+62 R Titania, Proud Pummeler @Filipe Pagliuso
 63 R War Machine, Avenging Arsenal @David Seeley
 66 R It's Clobberin' Time! @Thomas Chamberlain-Keen
 68 R Medusa, Inhuman Queen @Irvin Rodriguez
 73 R Ant-Man, Elusive Avenger @Steve Morris
+74 R Archnemesis @Riccardo Federici
 76 R Black Bolt, Inhuman King @Irvin Rodriguez
 77 R Black Widow, Agile Avenger @Junggeun Yoon
 78 R Captain Marvel, Apex Avenger @Julie Bell
@@ -64,18 +83,24 @@ ScryfallCode=MSC
 89 R Okoye, Mighty and Adored @Aniekan Udofia
 90 R Power Pack @Billy Christian
 91 R Quicksilver, Speedster @Leroy Steinmann
+92 R Red Ghost, Intangible Genius @Nathaniel Himawan
 93 R Scarlet Witch, Chaotic Avenger @Solan
 94 R Shang-Chi and the Ten Rings @Carissa Susilo
 95 M Shuri, the Black Panther @L.A. Draws
+96 R The Squadron Sinister @Javier Charro
 97 R Storm, Queen of Wakanda @Pauline Voss
+99 R Typhoid Mary, Fractured @Javier Charro
+100 R Ultron, Unlimited @Nathaniel Himawan
 101 R Willie Lumpkin, Postman @Gintas Galvanauskas
 102 R Avengers Quinjet @Maxim Ruabtsev
+103 R Doom's Time Platform @L J Koh
 104 R The Fantasticar @Maxim Ruabtsev
 105 R Heart-Shaped Herb @Andreia Ugrai
 106 R H.E.R.B.I.E., Lovable Robot @Nanna Marie Steffensen
 107 R Hulkbuster Armor @Maxim Ruabtsev
 108 R Jocasta, Automaton Avenger @Myles Wohl
 111 R Negative Zone Portal @Vilhelmas Banys
+115 R Tri-Sentinel, Act of Vengeance @Nathaniel Himawan
 116 R Unstable Molecule Suit @Jurijus Chitrovas
 119 R Vision, Synthezoid Avenger @Mark Spears
 121 R Austere Command @Taurin Clarke
@@ -96,55 +121,90 @@ ScryfallCode=MSC
 143 U Swords to Plowshares @Greg Smallwood
 144 R Tragic Arrogance @Rimas Valeikis
 147 C Arcane Denial @Bastien L. Deharme
+148 U Chameleon, Master of Disguise @Javier Charro
 149 C Deep Analysis @Michael MacRae
 150 R Kindred Discovery @Stephanie Hans
+151 U Propaganda @Borja Pindado
 152 R Quantum Misalignment @Alexander Skripnikov
 153 U Reconnaissance Mission @Berto Martinez
 154 R Recurring Insight @Gintas Galvanauskas
+155 R Black Market Connections @Xabi Gaztelua
+156 R Kindred Dominance @Lordigan
+157 R Lethal Scheme @Néstor Ossandón Leal
+158 C Night's Whisper @Fariba Khamseh
+159 C Syphon Mind @Néstor Ossandón Leal
+160 U Tombstone, Career Criminal @Bartek Fedyczak
+161 R Toxic Deluge @Anthony Devine
+162 U Withering Torment @John Tyler Christopher
+163 R Blasphemous Act @Immanuela Crovius
+164 R Chaos Warp @Filipe Pagliuso
 165 R Into the Time Vortex @Rimas Valeikis
 166 R Seize the Day @Michael MacRae
+167 U Superior Foes of Spider-Man @Ben Harvey
+168 U Vandalblast @Javier Charro
 172 C Cultivate @Darius Zablockis
 173 C Farseek @Rimas Valeikis
 179 R Path of Discovery @Rytis Sabaliauskas
 180 U Terramorph @Eglė Mosakaitė
 181 U Three Visits @Eugene Maslovski
+182 R Bedevil @Björn Barends
 183 U Expressive Iteration @Rimas Valeikis
 184 R Galvanic Iteration @Eglė Mosakaitė
 185 C Hull Breach @Alexander Skripnikov
+186 U Prowler, Clawed Thief @Anthony Devine
 187 U Rip Apart @Marco Turini
 188 R Taunt from the Rampart @Thomas Chamberlain-Keen
+189 U Terminate @Lordigan
 190 R Whirlwind of Thought @Viktor Fetsch
 191 U Arcane Signet @Jason Smith
 192 U Arcane Signet @Vilhelmas Banys
+193 U Arcane Signet @Ioannis Fiore
 195 R Chromatic Lantern @Rytis Sabaliauskas
+197 R Currency Converter @Néstor Ossandón Leal
 198 R Door of Destinies @David Szabo
 201 U Hero's Blade @Jason Smith
 202 U Lightning Greaves @Darius Zablockis
 203 R Metallic Mimic @Greg Smallwood
 206 R Mirage Mirror @Sveta Pikul
+207 U Patchwork Banner @Bartek Fedyczak
+208 R Progenitor's Icon @Jonas De Ro
 209 U Relic of Legends @Milivoj Ćeran
+210 R Skullclamp @Lordigan
 211 U Sol Ring @Myles Wohl
 212 U Sol Ring @Pace Wilder
+213 U Sol Ring @Alexander Gering
+216 U Swiftfoot Boots @Immanuela Crovius
 217 U Talisman of Conviction @Uzuri
 218 U Talisman of Creativity @Andreia Ugrai
+219 U Talisman of Dominance @Pavel Kolomeyets
+220 U Talisman of Indulgence @Ioannis Fiore
 221 U Talisman of Progress @John Tyler Christopher
 222 U Thought Vessel @Svetlin Velinov
 223 R Tome of Legends @Monztre
 227 R Canopy Vista @Anthony Devine
+228 R Canyon Slough @Arthur Yuan
+229 R Choked Estuary @Shahab Alizadeh
 230 R Cinder Glade @Pace Wilder
 231 R Clifftop Retreat @Arthur Yuan
 232 R Coastal Peak @Jonas De Ro
 233 C Command Tower @Leon Tukker
 234 C Command Tower @Paulius Daščioras
+235 C Command Tower @Lordigan
+237 U Crumbling Necropolis @Shahab Alizadeh
+238 R Dragonskull Summit @Jonas De Ro
+239 R Drowned Catacomb @Jonas De Ro
 240 C Evolving Wilds @Rytis Sabaliauskas
 241 R Exotic Orchard @David Szabo
 242 R Fabled Passage @Mintautas Šukys
+243 R Fetid Pools @Jonas De Ro
+244 R Foreboding Ruins @Alexander Gering
 246 R Frostboil Snarl @Fariba Khamseh
 247 R Furycalm Snarl @Pablo Mendoza
 248 R Glacial Fortress @Eugene Maslovski
 249 R Glittering Massif @Jonas De Ro
 250 R Hinterland Harbor @Pace Wilder
 251 R Irrigated Farmland @Milivoj Ćeran
+252 R Luxury Suite @Leon Tukker
 253 U Mystic Monastery @Arthur Yuan
 254 C Path of Ancestry @Ben Harvey
 255 R Plaza of Heroes @Taurin Clarke
@@ -156,16 +216,21 @@ ScryfallCode=MSC
 263 R Scavenger Grounds @Bastien Grivet
 264 R Scorched Geyser @Maxim Ruabtsev
 265 U Secluded Courtyard @Jonas De Ro
+266 R Smoldering Marsh @Shahab Alizadeh
 267 R Sodden Verdure @Rytis Sabaliauskas
 268 R Spectator Seating @Pablo Mendoza
 269 R Sulfur Falls @Piotr Dura
+271 R Sunken Hollow @Pavel Kolomeyets
 272 R Sunpetal Grove @Rafater
 273 C Terramorphic Expanse @Arthur Yuan
 275 U Unclaimed Territory @Pavel Kolomeyets
 277 M Mind's Dilation @Rafater ${"flavorName": "The Watcher's Warning"}
 278 R Raise the Palisade @Arthur Yuan
+279 R Spark Double @Immanuela Crovius ${"flavorName": "Loki's Double"}
+280 R Titan of Littjara @Néstor Ossandón Leal ${"flavorName": "Lady Loki's Manifestation"}
 281 R Annie Joins Up @Nanna Marie Steffensen ${"flavorName": "Franklin's Finality"}
 283 R Genesis Ultimatum @Mintautas Šukys ${"flavorName": "The Five Arrive"}
+284 U Containment Construct @John Tyler Christopher ${"flavorName": "Awesome Android"}
 285 U Fellwar Stone @Carlos Dattoli
 287 U Herald's Horn @Pablo Mendoza ${"flavorName": "Avengers Monitoring Station"}
 460 R Vision, Synthezoid Avenger @Mark Spears
