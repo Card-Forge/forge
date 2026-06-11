@@ -60,8 +60,6 @@ public class ConniveEffect extends SpellAbilityEffect {
         for (final Player p : controllers) {
             final CardCollection connivers = CardLists.filterControlledBy(toConnive, p);
             while (!connivers.isEmpty()) {
-                final Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                final CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
                 final GameEntityCounterTable counterPlacements = new GameEntityCounterTable();
 
                 Card conniver = connivers.size() > 1 ? p.getController().chooseSingleEntityForEffect(connivers, sa,
@@ -73,7 +71,10 @@ public class ConniveEffect extends SpellAbilityEffect {
                     continue;
                 }
 
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
                 p.drawCards(num, sa, moveParams);
+                zoneMovements.triggerChangesZoneAll(game, sa);
 
                 // in case anything triggers from drawing that happened before discard, e.g. Sneaky Snacker
                 game.getTriggerHandler().collectTriggerForWaiting();
@@ -93,6 +94,9 @@ public class ConniveEffect extends SpellAbilityEffect {
                         int numCntrs = CardLists.count(toBeDiscarded, CardPredicates.NON_LANDS);
                         conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, counterPlacements);
                     }
+
+                    moveParams = AbilityKey.newMap();
+                    zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
                     final Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
                     discardedMap.put(p, CardCollection.getView(toBeDiscarded));
                     discard(sa, true, discardedMap, moveParams);
