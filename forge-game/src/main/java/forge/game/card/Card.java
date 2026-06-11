@@ -4710,6 +4710,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.Player, tapper);
         runParams.put(AbilityKey.FirstTime, tappedThisTurn == 0);
+        runParams.put(AbilityKey.CostStack, getGame().costPaymentStack);
+        runParams.put(AbilityKey.IndividualCostPaymentInstance, getGame().costPaymentStack.peek());
         getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
 
         tappedThisTurn++;
