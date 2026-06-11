@@ -1686,6 +1686,10 @@ public class AbilityUtils {
                     return doXMath(calculateAmount(c, sq[kicked ? 1 : 2], ctb), expr, c, ctb);
                 }
 
+                if (sq[0].startsWith("Teamwork")) {
+                    return doXMath(calculateAmount(c, sq[sa.isOptionalCostPaid(OptionalCost.Teamwork) ? 1 : 2], ctb), expr, c, ctb);
+                }
+
                 if (sq[0].startsWith("OptionalGenericCostPaid")) {
                     return doXMath(calculateAmount(c, sq[sa.isOptionalCostPaid(OptionalCost.Generic) ? 1 : 2], ctb), expr, c, ctb);
                 }
@@ -2033,7 +2037,7 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isGiftPromised() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].startsWith("Teamwork")) {
-            return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isEntwine() ? 1 : 2], ctb), expr, c, ctb);
+            return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isTeamwork() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].startsWith("Escaped")) {
             return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2], ctb), expr, c, ctb);
