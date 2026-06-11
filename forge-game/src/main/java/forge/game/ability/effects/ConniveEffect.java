@@ -67,7 +67,7 @@ public class ConniveEffect extends SpellAbilityEffect {
                         Localizer.getInstance().getMessage("lblChooseConniver"), null) : connivers.get(0);
                 connivers.remove(conniver);
 
-                if (game.getReplacementHandler().run(ReplacementType.Explore, AbilityKey.mapFromAffected(conniver))
+                if (game.getReplacementHandler().run(ReplacementType.Connive, AbilityKey.mapFromAffected(conniver))
                         != ReplacementResult.NotReplaced) {
                     continue;
                 }
