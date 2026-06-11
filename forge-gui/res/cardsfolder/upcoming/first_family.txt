@@ -7,11 +7,16 @@ SVar:X:SVar$WUBR/Plus.G
 SVar:WUBR:SVar$WU/Plus.BR
 SVar:WU:SVar$W/Plus.U
 SVar:BR:SVar$B/Plus.R
-SVar:W:SVar$WP/Plus.WS/LimitMax.1
-SVar:U:SVar$UP/Plus.US/LimitMax.1
-SVar:B:SVar$BP/Plus.BS/LimitMax.1
-SVar:R:SVar$RP/Plus.RS/LimitMax.1
-SVar:G:SVar$GP/Plus.GS/LimitMax.1
+SVar:W:SVar$W2/LimitMax.1
+SVar:U:SVar$U2/LimitMax.1
+SVar:B:SVar$B2/LimitMax.1
+SVar:R:SVar$R2/LimitMax.1
+SVar:G:SVar$G2/LimitMax.1
+SVar:W2:SVar$WP/Plus.WS
+SVar:U2:SVar$UP/Plus.US
+SVar:B2:SVar$BP/Plus.BS
+SVar:R2:SVar$RP/Plus.RS
+SVar:G2:SVar$GP/Plus.GS
 SVar:WP:Count$Valid Permanent.White+YouCtrl
 SVar:UP:Count$Valid Permanent.Blue+YouCtrl
 SVar:BP:Count$Valid Permanent.Black+YouCtrl
