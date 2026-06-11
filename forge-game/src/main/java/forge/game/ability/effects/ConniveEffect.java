@@ -93,7 +93,7 @@ public class ConniveEffect extends SpellAbilityEffect {
                 Card gamec = game.getCardState(conniver);
                 // if the card is not in the game anymore, this might still return true, but it's no problem
                 if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithGameTimestamp(conniver)) {
-                    int numCntrs = CardLists.count(toBeDiscarded, CardPredicates.NON_LANDS);;
+                    int numCntrs = CardLists.count(toBeDiscarded, CardPredicates.NON_LANDS);
                     conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, counterPlacements);
                 }
                 final Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
