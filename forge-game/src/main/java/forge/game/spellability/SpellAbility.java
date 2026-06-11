@@ -165,8 +165,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private final Supplier<CardCollection> rollbackEffects = Suppliers.memoize(CardCollection::new);
 
-    private CardDamageMap damageMap;
-    private CardDamageMap preventMap;
+    private CardDamageTable damageMap;
+    private CardDamageTable preventMap;
     private GameEntityCounterTable counterTable;
     private CardZoneTable changeZoneTable;
     private Map<Player, Integer> loseLifeMap;
@@ -1248,10 +1248,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             // need to copy the damage tables
             if (damageMap != null) {
-                clone.damageMap = new CardDamageMap(damageMap);
+                clone.damageMap = new CardDamageTable(damageMap);
             }
             if (preventMap != null) {
-                clone.preventMap = new CardDamageMap(preventMap);
+                clone.preventMap = new CardDamageTable(preventMap);
             }
             if (counterTable != null) {
                 clone.counterTable = new GameEntityCounterTable(counterTable);
@@ -2424,7 +2424,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return score;
     }
 
-    public CardDamageMap getDamageMap() {
+    public CardDamageTable getDamageMap() {
         if (damageMap != null) {
             return damageMap;
         } else if (getParent() != null) {
@@ -2433,7 +2433,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return null;
     }
 
-    public CardDamageMap getPreventMap() {
+    public CardDamageTable getPreventMap() {
         if (preventMap != null) {
             return preventMap;
         } else if (getParent() != null) {
@@ -2469,10 +2469,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return null;
     }
 
-    public void setDamageMap(final CardDamageMap map) {
+    public void setDamageMap(final CardDamageTable map) {
         damageMap = map;
     }
-    public void setPreventMap(final CardDamageMap map) {
+    public void setPreventMap(final CardDamageTable map) {
         preventMap = map;
     }
     public void setCounterTable(final GameEntityCounterTable table) {
