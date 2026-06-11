@@ -1757,6 +1757,11 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isGiftPromised();
+        } else if (property.equals("Teamwork")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isTeamwork();
         } else if (property.equals("impended")) {
             if (card.getCastSA() == null) {
                 return false;
