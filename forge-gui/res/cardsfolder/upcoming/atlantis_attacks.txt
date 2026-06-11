@@ -2,7 +2,7 @@ Name:Atlantis Attacks
 ManaCost:5 U U
 Types:Sorcery
 K:Teamwork:4
-A:SP$ Charm | CharmNum$ X | Choices$ DBCreate,DBBounce | AdditionalDescription$ . If this spell was kicked, choose both instead.
+A:SP$ Charm | CharmNum$ X | Choices$ DBCreate,DBBounce | AdditionalDescription$ . If this spell was cast using teamwork, choose both instead.
 SVar:DBCreate:DB$ Token | ValidTgts$ Player | TokenScript$ u_6_5_leviathan_hexproof | TokenOwner$ TargetedPlayer | SpellDescription$ Target player creates a 6/5 blue Leviathan creature token with hexproof.
 SVar:DBBounce:DB$ ChangeZone | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Permanent.nonLand | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return one or two target nonland permanents to their owners' hands.
 SVar:X:Count$Teamwork.2.1
