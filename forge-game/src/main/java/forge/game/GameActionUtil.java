@@ -473,7 +473,7 @@ public final class GameActionUtil {
             } else if (keyword.startsWith("Teamwork")) {
                 String[] k = keyword.split(":");
                 // tapXType has a special check for withTotalPower, and NEEDS it to be "+withTotalPowerGE"
-                String costString = "tapXType<Any/Creature.YouCtrl+withTotalPowerGE" + k[1] + ">";
+                String costString = "Teamwork<" + k[1] + ">";
                 final Cost cost = new Cost(costString, false);
                 costs.add(new OptionalCostValue(OptionalCost.Teamwork, cost));
             } else if (keyword.startsWith("Gift")) {
