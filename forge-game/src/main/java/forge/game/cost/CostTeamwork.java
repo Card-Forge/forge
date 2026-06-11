@@ -21,7 +21,7 @@ package forge.game.cost;
  * The Class CostTeamwork.
  */
 public class CostTeamwork extends CostTapType {
-    public CostTeamwork(final String amount, final String description) {
-        super("Any", "Creature.YouCtrl+withTotalPowerGE" + amount, description, false);
+    public CostTeamwork(final String amount) {
+        super("Any", "Creature.YouCtrl+withTotalPowerGE" + amount, null, false);
     }
 }
