@@ -22,6 +22,7 @@ import java.util.Map;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.cost.CostTeamwork;
+import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
