@@ -1,0 +1,11 @@
+Name:Negative Zone Portal
+ManaCost:2
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 2 T | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in an opponent's graveyard | ValidTgts$ Card.OppCtrl | SubAbility$ DBDraw | SpellDescription$ Exile target card from an opponent's graveyard. If it's a creature card, draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1
+SVar:X:Count$ValidExile Creature.ExiledWithSource
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE4 | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if there are four or more creature cards exiled with this artifact, flip a coin. If you lose the flip, sacrifice this artifact and return a card exiled with it at random to its owner's hand.
+SVar:TrigFlip:DB$ FlipCoin | LoseSubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | AtRandom$ True | Hidden$ True | ChangeType$ Card.ExiledWithSource | ChangeNum$ 1
+Oracle:{2}, {T}: Exile target card from an opponent's graveyard. If it's a creature card, draw a card.\nAt the beginning of your upkeep, if there are four or more creature cards exiled with this artifact, flip a coin. If you lose the flip, sacrifice this artifact and return a card exiled with it at random to its owner's hand.
