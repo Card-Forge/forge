@@ -562,6 +562,29 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         titleText.setVisible(isVisible);
     }
 
+    private static String formatGroupCount(int count) {
+        if (count < 1000) {
+            return String.valueOf(count);
+        }
+        if (count < 1000000) {
+            return formatLargeValue(count / 1000.0) + "k";
+        }
+        if (count < 1000000000) {
+            return formatLargeValue(count / 1000000.0) + "M";
+        }
+        return formatLargeValue(count / 1000000000.0) + "B";
+    }
+
+    private static String formatLargeValue(double val) {
+        if (val >= 100) {
+            return String.format(java.util.Locale.ENGLISH, "%.0f", val);
+        }
+        if (val >= 10) {
+            return String.format(java.util.Locale.ENGLISH, "%.1f", val).replace(".0", "");
+        }
+        return String.format(java.util.Locale.ENGLISH, "%.2f", val).replace(".00", "").replace(".0", "");
+    }
+
     private void drawGroupCountBadge(final Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -571,7 +594,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             badgeFontCardWidth = cardWidth;
         }
 
-        String text = "\u00D7" + groupCount;
+        String text = "\u00D7" + formatGroupCount(groupCount);
         FontMetrics fm = g2d.getFontMetrics(badgeFont);
 
         int textWidth = fm.stringWidth(text);

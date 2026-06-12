@@ -267,6 +267,21 @@ public class VField extends FContainer {
         }
 
         @Override
+        protected boolean isGroupingEnabled(CardAreaPanel cardPanel) {
+            String groupScope = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_GROUP_PERMANENTS);
+            if ("group_all".equals(groupScope)) {
+                return true;
+            }
+            if ("group_creatures".equals(groupScope)) {
+                return cardPanel.getCard().isCreature() || cardPanel.getCard().isToken();
+            }
+            if ("group_tokens".equals(groupScope)) {
+                return cardPanel.getCard().isToken();
+            }
+            return false;
+        }
+
+        @Override
         protected float getCardWidth(float cardHeight) {
             return cardHeight; //allow cards room to tap
         }

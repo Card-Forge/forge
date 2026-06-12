@@ -153,6 +153,10 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
     }
 
+    protected boolean isGroupingEnabled(CardAreaPanel cardPanel) {
+        return false;
+    }
+
     private int addCards(CardAreaPanel cardPanel, float x, float y, float cardWidth, float cardHeight) {
         int totalCount = 0;
         List<CardAreaPanel> attachedPanels = cardPanel.getAttachedPanels();
@@ -174,9 +178,20 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         cardPanel.setBounds(x, y, cardWidth, cardHeight);
 
         if (cardPanel.getNextPanelInStack() != null) { //add next panel in stack if needed
-            x += cardWidth * getCardStackOffset();
+            float offset = getCardStackOffset();
+            if (isGroupingEnabled(cardPanel)) {
+                offset = 0;
+            }
+            x += cardWidth * offset;
             totalCount += addCards(cardPanel.getNextPanelInStack(), x, y, cardWidth, cardHeight);
         }
+
+        if (cardPanel.getPrevPanelInStack() == null) {
+            cardPanel.setGroupCount(totalCount + 1);
+        } else {
+            cardPanel.setGroupCount(0);
+        }
+
         return totalCount + 1;
     }
 
@@ -201,7 +216,11 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         for (CardAreaPanel cardPanel : new ArrayList<>(cardPanels.get())) {
             if (cardPanel != null) {
                 int count = addCards(cardPanel, x, y, cardWidth, cardHeight);
-                x += cardWidth + (count - 1) * cardWidth * getCardStackOffset();
+                float offset = getCardStackOffset();
+                if (isGroupingEnabled(cardPanel)) {
+                    offset = 0;
+                }
+                x += cardWidth + (count - 1) * cardWidth * offset;
             }
         }
 
