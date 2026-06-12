@@ -814,7 +814,14 @@ public abstract class SpellAbilityEffect {
 
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
-        hostCard.addUntilLeavesBattlefield(triggerList.allCards());
+        // tokens cease to exist once exiled and never return, and nothing ever cleans them from this list
+        final CardCollection toTrack = new CardCollection();
+        for (final Card c : triggerList.allCards()) {
+            if (!c.isToken()) {
+                toTrack.add(c);
+            }
+        }
+        hostCard.addUntilLeavesBattlefield(toTrack);
         final TriggerHandler trigHandler = game.getTriggerHandler();
 
         final Card lki;
