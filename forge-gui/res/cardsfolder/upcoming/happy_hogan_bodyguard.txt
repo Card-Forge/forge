@@ -1,0 +1,8 @@
+Name:Happy Hogan, Bodyguard
+ManaCost:5 U
+Types:Legendary Creature Human Advisor
+PT:3/3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME enters, the owner of target creature an opponent controls puts it into their library second from the top or on the bottom.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | ValidTgtDesc$ creature an opponent controls | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 1 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1
+Oracle:Vigilance\nWhen Happy Hogan enters, the owner of target creature an opponent controls puts it into their library second from the top or on the bottom.
