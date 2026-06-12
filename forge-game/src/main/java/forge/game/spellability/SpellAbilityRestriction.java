@@ -29,13 +29,13 @@ import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
-import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.staticability.StaticAbilityExhaust;
 import forge.game.staticability.StaticAbilityNumLoyaltyAct;
+import forge.game.zone.CostPaymentStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -527,8 +527,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         // Rule 605.3c about Mana Abilities
         if (sa.isManaAbility()) {
-            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
-                if (i.getPayment().getAbility().equals(sa)) {
+            for (CostPaymentStack.Entry i : game.costPaymentStack) {
+                if (i.payment().getAbility().equals(sa)) {
                     return false;
                 }
             }
