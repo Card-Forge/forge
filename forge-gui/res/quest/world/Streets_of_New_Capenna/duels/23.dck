@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Hans
+Title=Hans
+Icon=Hans.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Franck_Goubier_-_Naya_Aggro_(Standard,_#1377439).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+1 Sanctuary Warden
+2 Skyclave Apparition
+2 Workshop Warchief
+4 Fable of the Mirror-Breaker
+4 Gala Greeters
+4 Luminarch Aspirant
+4 Esika's Chariot
+1 Valorous Stance
+4 Voltage Surge
+4 Emeria's Call
+4 Wedding Announcement
+3 The Wandering Emperor
+1 Plains
+1 Rockfall Vale
+1 Den of the Bugbear
+1 Forest
+1 Mountain
+3 Overgrown Farmland
+3 Needleverge Pathway
+3 Jetmir's Garden
+4 Cragcrown Pathway
+4 Branchloft Pathway
+[Sideboard]
+1 Skyclave Apparition
+1 Portable Hole
+2 Broken Wings
+2 Tamiyo's Safekeeping
+2 Brutal Cathar
+3 Legion Angel
+4 Archon of Emeria

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/Modern_PTQ_#9339583/asobius_-_UBR_Aggro_(Modern,_#528077).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+4 Eldrazi Mimic
+4 Eldrazi Skyspawner
+4 Endless One
+4 Reality Smasher
+4 Ruination Guide
+4 Thought-Knot Seer
+4 Vile Aggregate
+4 Dismember
+4 Cavern of Souls
+4 Eldrazi Temple
+4 Eye of Ugin
+1 Island
+4 Scalding Tarn
+2 Shivan Reef
+4 Steam Vents
+1 Wastes
+[Sideboard]
+4 Dragon's Claw
+3 Hurkyl's Recall
+4 Relic of Progenitus
+4 Spellskite

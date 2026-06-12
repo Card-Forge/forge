@@ -1,0 +1,63 @@
+[duel]
+[metadata]
+Name=Higgins
+Title=Higgins
+Icon=Higgins.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Adam_Yusuf_-_Five-color_Planeswalkers_(Standard,_#965685).dck
+Deck Type=constructed
+
+[Main]
+2 Questing Beast
+2 Kenrith, the Returned King
+2 Agent of Treachery
+2 Niv-Mizzet Reborn
+2 Hydroid Krasis
+2 Golos, Tireless Pilgrim
+2 Paradise Druid
+3 Deputy of Detention
+2 Assassin's Trophy
+2 Dovin's Veto
+3 Erebos's Intervention
+1 Time Wipe
+1 Kaya's Wrath
+2 Genesis Ultimatum
+2 Casualties of War
+3 Circuitous Route
+1 Ajani, the Greathearted
+2 Teferi, Time Raveler
+2 Nissa, Who Shakes the World
+2 Garruk, Cursed Huntsman
+2 Nicol Bolas, Dragon-God
+1 Boros Guildgate
+1 Gruul Guildgate
+1 Temple of Malady
+1 Overgrown Tomb
+1 Golgari Guildgate
+1 Temple of Malice
+1 Temple of Epiphany
+1 Watery Grave
+1 Orzhov Guildgate
+1 Sacred Foundry
+1 Selesnya Guildgate
+1 Temple Garden
+1 Plaza of Harmony
+1 Indatha Triome
+1 Temple of Mystery
+1 Simic Guildgate
+1 Breeding Pool
+1 Temple of Enlightenment
+1 Castle Locthwain
+1 Temple of Abandon
+2 Azorius Guildgate
+3 Zagoth Triome
+[Sideboard]
+1 Inspired Ultimatum
+1 Ignite the Beacon
+1 Shatter the Sky
+1 Murderous Rider
+1 Ruinous Ultimatum
+1 Eerie Ultimatum
+2 The Elderspell
+2 Pulse of Murasa
+3 Fry

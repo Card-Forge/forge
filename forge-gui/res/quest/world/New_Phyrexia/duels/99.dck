@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Milhouse_van_Houten
+Title=Milhouse_van_Houten
+Icon=Milhouse_van_Houten.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Milano_-_Bubbo_Natale_Day/Andrea_Ciotta_-_Infect_(Modern,_#43145).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+4 Plague Stinger
+2 Apostle's Blessing
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+2 Distortion Strike
+4 Rancor
+2 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+1 Darkblast
+4 Dismember
+1 Hurkyl's Recall
+3 Inquisition of Kozilek
+4 Nature's Claim
+2 Spellskite

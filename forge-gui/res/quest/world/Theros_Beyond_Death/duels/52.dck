@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Dr Watson
+Title=Dr Watson
+Icon=Dr Watson.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/Bastien_Blandin_-_Br_Unearth_(Modern,_#933245).dck
+Deck Type=constructed
+
+[Main]
+2 Dark Confidant
+4 Kroxa, Titan of Death's Hunger
+4 Lightning Skelemental
+4 Seasoned Pyromancer
+1 Kolaghan's Command
+3 Fatal Push
+4 Lightning Bolt
+3 Inquisition of Kozilek
+3 Unearth
+4 Thoughtseize
+4 Ransack the Lab
+3 Liliana of the Veil
+1 Castle Embereth
+1 Castle Locthwain
+2 Mountain
+3 Swamp
+3 Marsh Flats
+3 Blood Crypt
+4 Bloodstained Mire
+4 Blackcleave Cliffs
+[Sideboard]
+1 Dreadbore
+1 Abrade
+1 Kolaghan's Command
+2 Chandra, Torch of Defiance
+2 Ashiok, Dream Render
+2 Surgical Extraction
+3 Fulminator Mage
+3 Collective Brutality

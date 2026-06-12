@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=King Goldemar
+Title=King Goldemar
+Icon=King Goldemar.jpg
+Difficulty=Easy
+Description=Dark_Ascension/Silver_TCQ_-_Denton,_TX/Chris_Gravelle_-_Tokens_(Standard,_#29984).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+4 Doomed Traveler
+3 Elite Vanguard
+4 Midnight Haunting
+4 Gather the Townsfolk
+4 Lingering Souls
+4 Honor of the Pure
+4 Intangible Virtue
+4 Oblivion Ring
+2 Sorin, Lord of Innistrad
+4 Isolated Chapel
+15 Plains
+2 Swamp
+2 Vault of the Archangel
+[Sideboard]
+2 Day of Judgment
+2 Ghost Quarter
+3 Go for the Throat
+4 Revoke Existence
+4 Shrine of Loyal Legions

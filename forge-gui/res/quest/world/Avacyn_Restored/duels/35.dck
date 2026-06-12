@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Bugs Bunny
+Title=Bugs Bunny
+Icon=Bugs Bunny.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/Standard_Platinum_TCQ_-_Lowell,_MA_-_9-21-12/KyleCraig_-_BW_Tokens_(Standard,_#38060).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+4 Doomed Traveler
+3 Fiend Hunter
+4 Go for the Throat
+3 Midnight Haunting
+4 Gather the Townsfolk
+4 Lingering Souls
+4 Honor of the Pure
+4 Intangible Virtue
+2 Sorin, Lord of Innistrad
+4 Isolated Chapel
+12 Plains
+6 Swamp
+2 Vault of the Archangel
+[Sideboard]
+1 Angel of Jubilation
+3 Celestial Purge
+2 Geth's Verdict
+3 Oblivion Ring
+2 Tormod's Crypt
+2 Torpor Orb
+2 Witchbane Orb

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Orzhov-precon
+Title=Orzhov-precon
+Icon=Orzhov-precon.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/PT_Ravnica_-_Top_Modern_Decks/Mike_Hoffman_-_Dredgevine_(Modern,_#39427).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+3 Bloodbraid Elf
+4 Deathrite Shaman
+4 Fauna Shaman
+4 Gravecrawler
+4 Hedron Crab
+1 Kitchen Finks
+4 Lotleth Troll
+1 Shriekmaw
+3 Skaab Ruinator
+4 Vengevine
+4 Ancient Ziggurat
+2 Breeding Pool
+2 Forest
+1 Island
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Scalding Tarn
+1 Stomping Ground
+1 Swamp
+4 Verdant Catacombs
+1 Watery Grave
+[Sideboard]
+2 Abrupt Decay
+2 Ancient Grudge
+1 Darkblast
+2 Fulminator Mage
+1 Ingot Chewer
+1 Phantasmal Image
+4 Thoughtseize

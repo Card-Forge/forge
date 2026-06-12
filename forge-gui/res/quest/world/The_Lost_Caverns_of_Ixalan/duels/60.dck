@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/dea_pecuniae_-_Rakdos_Reanimator_(Modern,_#1975439).dck
+Deck Type=constructed
+
+[Main]
+4 Archon of Cruelty
+4 Troll of Khazad-dûm
+1 Sheoldred, the Apocalypse
+4 Fable of the Mirror-Breaker
+4 Orcish Bowmasters
+4 The One Ring
+4 Fatal Push
+3 Beseech the Mirror
+1 Damnation
+4 Persist
+3 Thoughtseize
+4 Bitter Reunion
+4 Bloodstained Mire
+4 Marsh Flats
+3 Blood Crypt
+1 Smoldering Marsh
+3 Blackcleave Cliffs
+1 Mountain
+4 Swamp
+[Sideboard]
+1 Sheoldred, the Apocalypse
+2 Molten Collapse
+2 Engineered Explosives
+2 Chalice of the Void
+1 Magus of the Moon
+1 Hidetsugu Consumes All
+1 Thoughtseize
+2 Blood Moon
+3 Leyline of the Void

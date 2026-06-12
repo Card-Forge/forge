@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/albertogipsy_-_Temur_Ravagan_(Modern,_#1220901).dck
+Deck Type=constructed
+
+[Main]
+2 Snapcaster Mage
+1 Aether Spellbomb
+1 Pyrite Spellbomb
+1 Relic of Progenitus
+1 Spell Pierce
+2 Cryptic Command
+4 Archmage's Charm
+4 Lightning Bolt
+4 Unholy Heat
+4 Counterspell
+4 Expressive Iteration
+4 Urza's Saga
+2 Jace, the Mind Sculptor
+4 Wrenn and Six
+1 Lonely Sandbar
+1 Lumbering Falls
+1 Mountain
+1 Steam Vents
+1 Stomping Ground
+1 Ketria Triome
+1 Forest
+1 Breeding Pool
+1 Hall of Storm Giants
+1 Fiery Islet
+1 Flooded Strand
+3 Island
+4 Misty Rainforest
+4 Scalding Tarn
+[Sideboard]
+1 Pithing Needle
+1 Shadowspear
+2 Alpine Moon
+2 Engineered Explosives
+2 Flusterstorm
+3 Natural State
+4 Tarmogoyf

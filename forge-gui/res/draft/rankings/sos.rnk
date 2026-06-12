@@ -1,0 +1,348 @@
+//Rank|Name|Rarity|Set
+#1|Ark of Hunger|R|SOS
+#2|Improvisation Capstone|M|SOS
+#3|Moment of Reckoning|R|SOS
+#4|Antiquities on the Loose|R|SOS
+#5|Practiced Offense|R|SOS
+#6|Stirring Hopesinger|R|SOS
+#7|Together as One|R|SOS
+#8|Emeritus of Ideation|M|SOS
+#9|Colorstorm Stallion|R|SOS
+#10|Professor Dellian Fel|M|SOS
+#11|Hardened Academic|R|SOS
+#12|Informed Inkwright|R|SOS
+#13|Ambitious Augmenter|R|SOS
+#14|Environmental Scientist|U|SOS
+#15|Snarl Song|U|SOS
+#16|Subterranean Tremors|M|SOA
+#17|Crackle with Power|M|SOA
+#18|Arcane Omens|U|SOS
+#19|Exhibition Tidecaller|R|SOS
+#20|Quandrix, the Proof|M|SOS
+#21|Winds of Abandon|M|SOA
+#22|Dismember|R|SOA
+#23|Mathemagics|M|SOS
+#24|Postmortem Professor|R|SOS
+#25|Stress Dream|U|SOS
+#26|Moseo, Vein's New Dean|R|SOS
+#27|Reprieve|R|SOA
+#28|Molten-Core Maestro|R|SOS
+#29|Practiced Scrollsmith|U|SOS
+#30|Traumatic Critique|R|SOS
+#31|Splatter Technique|R|SOS
+#32|Pursue the Past|C|SOS
+#33|Brotherhood's End|R|SOA
+#34|Awaken the Woods|M|SOA
+#35|Molten Note|U|SOS
+#36|Impractical Joke|U|SOS
+#37|Emeritus of Truce|M|SOS
+#38|Colossus of the Blood Age|U|SOS
+#39|Silverquill Charm|U|SOS
+#40|Blech, Loafing Pest|R|SOS
+#41|Germination Practicum|M|SOS
+#42|Scolding Administrator|U|SOS
+#43|Strixhaven Skycoach|U|SOS
+#44|Elite Interceptor|C|SOS
+#45|Emeritus of Woe|M|SOS
+#46|Pestbrood Sloth|U|SOS
+#47|Repel Calamity|U|SOA
+#48|Slumbering Trudge|R|SOS
+#49|End of the Hunt|U|SOS
+#50|Scheming Silvertongue|R|SOS
+#51|Applied Geometry|R|SOS
+#52|Stock Up|U|SOA
+#53|Akroma's Will|M|SOA
+#54|Library of Alexandria|M|SPG
+#55|Sundering Archaic|U|SOS
+#56|Divergent Equation|U|SOS
+#57|Paradox Surveyor|U|SOS
+#58|Conciliator's Duelist|R|SOS
+#59|Pensive Professor|R|SOS
+#60|Additive Evolution|U|SOS
+#61|Echocasting Symposium|M|SOS
+#62|Emeritus of Abundance|M|SOS
+#63|Jadzi, Steward of Fate|R|SOS
+#64|Stirring Honormancer|U|SOS
+#65|Vicious Rivalry|R|SOS
+#66|Rubble Rouser|C|SOS
+#67|Essenceknit Scholar|U|SOS
+#68|Vibrant Outburst|U|SOS
+#69|Abrade|U|SOA
+#70|Burst Lightning|U|SOA
+#71|Expressive Iteration|R|SOA
+#72|Archaic's Agony|U|SOS
+#73|Suspend Aggression|R|SOS
+#74|Foolish Fate|U|SOS
+#75|Sanar, Unfinished Genius|U|SOS
+#76|Restoration Seminar|M|SOS
+#77|Artistic Process|U|SOS
+#78|Ajani's Response|C|SOS
+#79|Matterbending Mage|U|SOS
+#80|Tome Blast|C|SOS
+#81|Unsubtle Mockery|C|SOS
+#82|Startled Relic Sloth|U|SOS
+#83|Stand Up for Yourself|U|SOS
+#84|Wisdom of Ages|R|SOS
+#85|Stormcarved Coast|R|SOS
+#86|Lorehold, the Historian|M|SOS
+#87|Last Gasp|C|SOS
+#88|Charging Strifeknight|U|SOS
+#89|Proctor's Gaze|U|SOS
+#90|Render Speechless|C|SOS
+#91|Wilt in the Heat|C|SOS
+#92|Potioner's Trove|C|SOS
+#93|Fields of Strife|C|SOS
+#94|Bitter Triumph|U|SOA
+#95|Transcendent Archaic|U|SOS
+#96|Dreamroot Cascade|R|SOS
+#97|Magmablood Archaic|R|SOS
+#98|Mana Sculpt|R|SOS
+#99|Sundown Pass|R|SOS
+#100|Inkshape Demonstrator|U|SOS
+#101|Brush Off|U|SOS
+#102|Quill-Blade Laureate|U|SOS
+#103|Group Project|U|SOS
+#104|Great Hall of the Biblioplex|R|SOS
+#105|Skycoach Conductor|R|SOS
+#106|Grapple with Death|C|SOS
+#107|Flow State|U|SOS
+#108|Garrison Excavator|U|SOS
+#109|Prismari Charm|U|SOS
+#110|Quandrix Charm|U|SOS
+#111|Vastlands Scavenger|M|SOS
+#112|Mind into Matter|R|SOS
+#113|Stone Docent|C|SOS
+#114|Run Behind|C|SOS
+#115|Living History|U|SOS
+#116|Tablet of Discovery|U|SOS
+#117|Imperious Inkmage|C|SOS
+#118|Prismatic Ending|R|SOA
+#119|Daze|R|SOA
+#120|Murmuring Mystic|M|SPG
+#121|Heated Argument|C|SOS
+#122|Shattered Sanctum|R|SOS
+#123|Erode|R|SOS
+#124|Studious First-Year|C|SOS
+#125|Killian's Confidence|R|SOS
+#126|Kirol, History Buff|U|SOS
+#127|Wildgrowth Archaic|R|SOS
+#128|Essence Scatter|C|SOS
+#129|Cost of Brilliance|C|SOS
+#130|Lecturing Scornmage|U|SOS
+#131|Spectacle Summit|C|SOS
+#132|Deduce|U|SOA
+#133|Cyclonic Rift|M|SOA
+#134|Brain Freeze|R|SOA
+#135|Monstrous Rage|U|SOA
+#136|Knockout Maneuver|U|SOA
+#137|Joined Researchers|R|SOS
+#138|Terramorphic Expanse|C|SOS
+#139|Eager Glyphmage|C|SOS
+#140|Dissection Practice|R|SOS
+#141|Inkling Mascot|C|SOS
+#142|Spirit Mascot|C|SOS
+#143|Cuboid Colony|U|SOS
+#144|Lluwen, Exchange Student|U|SOS
+#145|Cauldron of Essence|R|SOS
+#146|Snooping Page|U|SOS
+#147|Dig Site Inventory|C|SOS
+#148|Forum of Amity|C|SOS
+#149|Disdainful Stroke|U|SOA
+#150|Hop to It|U|SOA
+#151|Shattered Acolyte|C|SOS
+#152|Expressive Firedancer|C|SOS
+#153|Deathcap Glade|R|SOS
+#154|Flashback|R|SOS
+#155|Thunderdrum Soloist|U|SOS
+#156|Duel Tactics|U|SOS
+#157|Homesickness|U|SOS
+#158|Melancholic Poet|C|SOS
+#159|Primary Research|U|SOS
+#160|Emeritus of Conflict|M|SOS
+#161|Resonating Lute|R|SOS
+#162|Ascendant Dustspeaker|C|SOS
+#163|Interjection|C|SOS
+#164|Owlin Historian|C|SOS
+#165|Burrog Barrage|C|SOS
+#166|Noxious Newt|C|SOS
+#167|Thornfist Striker|U|SOS
+#168|Embrace the Paradox|C|SOS
+#169|Visionary's Dance|C|SOS
+#170|Paradox Gardens|C|SOS
+#171|Preordain|R|SOA
+#172|Sleight of Hand|U|SOA
+#173|Fracture|R|SOA
+#174|Grim Haruspex|M|SPG
+#175|Sylvan Library|M|SPG
+#176|Bogwater Lumaret|C|SOS
+#177|Elemental Mascot|C|SOS
+#178|Banishing Betrayal|C|SOS
+#179|Poisoner's Apprentice|U|SOS
+#180|Tragedy Feaster|R|SOS
+#181|Lorehold Charm|U|SOS
+#182|Berta, Wise Extrapolator|R|SOS
+#183|Silverquill, the Disputant|M|SOS
+#184|Send in the Pest|C|SOS
+#185|Wander Off|C|SOS
+#186|Infirmary Healer|U|SOS
+#187|Titan's Grave|C|SOS
+#188|Big Score|R|SOA
+#189|Stargaze|U|SOA
+#190|Royal Treatment|U|SOA
+#191|Shared Roots|U|SOA
+#192|Planar Engineering|R|SOS
+#193|Eternal Student|U|SOS
+#194|Rancorous Archaic|C|SOS
+#195|Seize the Spoils|C|SOS
+#196|Campus Composer|U|SOS
+#197|Masterful Flourish|C|SOS
+#198|Geometer's Arthropod|R|SOS
+#199|Decorum Dissertation|M|SOS
+#200|Prismari, the Inspiration|M|SOS
+#201|Soaring Stoneglider|U|SOS
+#202|Zealous Lorecaster|C|SOS
+#203|Feed the Swarm|U|SOA
+#204|Rapier Wit|U|SOS
+#205|Mica, Reader of Ruins|U|SOS
+#206|Tester of the Tangential|U|SOS
+#207|Fractal Mascot|C|SOS
+#208|Old-Growth Educator|U|SOS
+#209|Summoned Dromedary|U|SOS
+#210|Teacher's Pest|U|SOS
+#211|Abigale, Poet Laureate|U|SOS
+#212|The Dawning Archaic|M|SOS
+#213|Grave Researcher|R|SOS
+#214|Rehearsed Debater|C|SOS
+#215|Hydro-Channeler|C|SOS
+#216|Quick Study|C|SOS
+#217|Goblin Glasswright|C|SOS
+#218|Topiary Lecturer|U|SOS
+#219|Stadium Tidalmage|C|SOS
+#220|Pterafractyl|C|SOS
+#221|Aziza, Mage Tower Captain|R|SOS
+#222|Fractal Tender|U|SOS
+#223|Withering Curse|M|SOS
+#224|Zimone's Experiment|U|SOS
+#225|Harmonized Trio|R|SOS
+#226|Orysa, Tide Choreographer|U|SOS
+#227|Witherbloom Charm|U|SOS
+#228|Ral Zarek, Guest Lecturer|M|SOS
+#229|Honorbound Page|C|SOS
+#230|Chase Inspiration|C|SOS
+#231|Adventurous Eater|C|SOS
+#232|Burrog Banemaker|C|SOS
+#233|Ancestral Anger|C|SOS
+#234|Emil, Vastlands Roamer|U|SOS
+#235|Flusterstorm|R|SOA
+#236|Helping Hand|U|SOA
+#237|Culling Ritual|R|SOA
+#238|Sheoldred's Edict|R|SOA
+#239|Muse's Encouragement|C|SOS
+#240|Rapturous Moment|U|SOS
+#241|Pest Mascot|C|SOS
+#242|Muse Seeker|U|SOS
+#243|Sneering Shadewriter|C|SOS
+#244|Tackle Artist|C|SOS
+#245|Shopkeeper's Bane|C|SOS
+#246|Mind Roots|U|SOS
+#247|Force of Will|M|SOA
+#248|Spell Pierce|U|SOA
+#249|Shamanic Revelation|R|SOA
+#250|Archaeomancer|M|SPG
+#251|Dualcaster Mage|M|SPG
+#252|Landscape Painter|C|SOS
+#253|Tam, Observant Sequencer|U|SOS
+#254|Mindful Biomancer|C|SOS
+#255|Page, Loose Leaf|C|SOS
+#256|Duty Beyond Death|U|SOA
+#257|Fractalize|U|SOS
+#258|Pull from the Grave|C|SOS
+#259|Spiritcall Enthusiast|U|SOS
+#260|Procrastinate|C|SOS
+#261|Deluge Virtuoso|C|SOS
+#262|Spectacular Skywhale|U|SOS
+#263|Pigment Wrangler|U|SOS
+#264|Wild Hypothesis|C|SOS
+#265|Mage Tower Referee|C|SOS
+#266|Locust Spray|U|SOA
+#267|Berserk|M|SOA
+#268|Glimpse of Nature|R|SOA
+#269|Zaffai and the Tempests|R|SOS
+#270|Steal the Show|R|SOS
+#271|Graduation Day|U|SOS
+#272|Textbook Tabulator|C|SOS
+#273|Cheerful Osteomancer|C|SOS
+#274|Leech Collector|U|SOS
+#275|Follow the Lumarets|C|SOS
+#276|Tenured Concocter|C|SOS
+#277|Root Manipulation|U|SOS
+#278|Giant Growth|U|SOA
+#279|Requisition Raid|U|SOA
+#280|Empty the Warrens|R|SOA
+#281|Lumaret's Favor|U|SOS
+#282|Diary of Dreams|U|SOS
+#283|Nita, Forum Conciliator|R|SOS
+#284|Forum Necroscribe|U|SOS
+#285|Scathing Shadelock|U|SOS
+#286|Strife Scholar|C|SOS
+#287|Abstract Paintmage|U|SOS
+#288|Return to the Ranks|R|SOA
+#289|Return the Favor|U|SOA
+#290|Bring to Light|R|SOA
+#291|Ennis, Debate Moderator|M|SOS
+#292|Encouraging Aviator|U|SOS
+#293|Spellbook Seeker|C|SOS
+#294|Arnyn, Deathbloom Botanist|U|SOS
+#295|Aberrant Manawurm|U|SOS
+#296|Archmage Emeritus|M|SPG
+#297|Codie, Vociferous Codex|M|SPG
+#298|Skycoach Waypoint|U|SOS
+#299|Social Snub|U|SOS
+#300|Maelstrom Artisan|R|SOS
+#301|Witherbloom, the Balancer|M|SOS
+#302|Rabid Attack|U|SOS
+#303|Rearing Embermare|C|SOS
+#304|Triumph of the Hordes|U|SOA
+#305|Vampiric Tutor|M|SOA
+#306|Armageddon|M|SOA
+#307|Ad Nauseam|M|SOA
+#308|Adrix and Nev, Twincasters|M|SPG
+#309|Library of Leng|M|SPG
+#310|Pongify|U|SOA
+#311|Magus of the Library|M|SPG
+#312|Blazing Firesinger|U|SOS
+#313|Chelonian Tackle|U|SOS
+#314|Hungry Graffalon|C|SOS
+#315|Culling the Weak|R|SOA
+#316|Jeska's Will|M|SOA
+#317|Deflecting Palm|R|SOA
+#318|Smallpox|U|SOA
+#319|Living End|M|SOA
+#320|Pyretic Ritual|R|SOA
+#321|Harsh Annotation|U|SOS
+#322|Biblioplex Tomekeeper|C|SOS
+#323|Fractal Anomaly|U|SOS
+#324|Efflorescence|R|SOS
+#325|Dina's Guidance|R|SOS
+#326|Oracle's Restoration|C|SOS
+#327|Growth Curve|U|SOS
+#328|Daydream|U|SOS
+#329|Borrowed Knowledge|U|SOS
+#330|Comforting Counsel|R|SOS
+#331|Fix What's Broken|R|SOS
+#332|Ulna Alley Shopkeep|C|SOS
+#333|Choreographed Sparks|R|SOS
+#334|Glorious Decay|C|SOS
+#335|Zombify|U|SOA
+#336|Bulk Up|U|SOA
+#337|Pick Your Poison|U|SOA
+#338|Pox Plague|R|SOS
+#339|Angel's Grace|R|SOA
+#340|Crop Rotation|R|SOA
+#341|Petrified Hamlet|R|SOS
+#342|Veil of Summer|R|SOA
+#343|Forest|C|SOS
+#344|Island|C|SOS
+#345|Mountain|C|SOS
+#346|Plains|C|SOS
+#347|Swamp|C|SOS

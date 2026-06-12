@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Gimli
+Title=Gimli
+Icon=Gimli.jpg
+Difficulty=Medium
+Description=./Standard/Avatar_The_Last_Airbender/ATmagic_-_Izzet_Looting_(Standard,_#2712777).dck
+Deck Type=constructed
+
+[Main]
+4 Duelist of the Mind
+4 Marauding Mako
+4 Quantum Riddler
+3 Tiger-Seal
+4 Fear of Missing Out
+4 Torch the Tower
+4 Boomerang Basics
+4 Winternight Stories
+1 Frostcliff Siege
+2 Roaring Furnace
+3 Stormchaser's Talent
+7 Island
+4 Multiversal Passage
+4 Riverpyre Verge
+4 Spirebluff Canal
+3 Mountain
+1 Soulstone Sanctuary
+[Sideboard]
+1 Spell Pierce
+2 Annul
+2 Soul-Guide Lantern
+1 Fire Magic
+1 Pyroclasm
+1 Obliterating Bolt
+1 Roaring Furnace
+1 Disdainful Stroke
+1 Abrade
+2 Detect Intrusion
+2 Ghost Vacuum

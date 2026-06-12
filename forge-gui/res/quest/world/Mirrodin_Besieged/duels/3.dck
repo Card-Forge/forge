@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Green Lantern
+Title=Green Lantern
+Icon=Green Lantern.jpg
+Difficulty=Easy
+Description=Mirrodin_Besieged/2011_TCGplayer.com_TCQ_-_Daytona_Beach_(2-19)/DominicUjcic_-_Infect_(Standard,_#10262).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ichorclaw Myr
+4 Phyrexian Crusader
+4 Phyrexian Vatmother
+4 Plague Myr
+4 Plague Stinger
+2 Skithiryx, the Blight Dragon
+3 Piston Sledge
+3 Go for the Throat
+3 Groundswell
+3 Vines of Vastwood
+3 Duress
+4 Forest
+4 Inkmoth Nexus
+11 Swamp
+4 Terramorphic Expanse
+[Sideboard]
+4 Acidic Slime
+4 Nature's Claim
+3 Tumble Magnet
+3 Vampire Hexmage

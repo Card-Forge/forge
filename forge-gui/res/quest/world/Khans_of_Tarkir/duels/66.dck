@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ancient Battlefield
+Title=Ancient Battlefield
+Icon=Ancient Battlefield.jpg
+Difficulty=Hard
+Description=../Modern/Khans_of_Tarkir/Modern_Festival_Prelim_#8418449/esmyth_-_Boros_(Modern,_#278497).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+1 Flame Javelin
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+1 Arid Mesa
+4 Bloodstained Mire
+5 Mountain
+4 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+3 Kor Firewalker
+2 Molten Rain
+2 Path to Exile
+1 Torpor Orb

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Odysseus
+Title=Odysseus
+Icon=Odysseus.jpg
+Difficulty=Easy
+Description=Zendikar/2010_TCGplayer.com_$5k_Series_-_Atlanta/Jeff_Akers_-_Vampires_(Standard,_#2775).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Bloodghast
+4 Gatekeeper of Malakir
+2 Malakir Bloodwitch
+4 Vampire Hexmage
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+4 Disfigure
+4 Tendrils of Corruption
+2 Grim Discovery
+2 Mind Sludge
+4 Sign in Blood
+4 Marsh Flats
+15 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Deathmark
+4 Duress
+2 Marsh Casualties

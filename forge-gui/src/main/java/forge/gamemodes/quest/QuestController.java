@@ -442,7 +442,6 @@ public class QuestController {
      * Reset the duels manager.
      */
     public void resetDuelsManager() {
-
         QuestWorld world = getWorld();
         String path = ForgeConstants.DEFAULT_CHALLENGES_DIR;
 
@@ -478,7 +477,6 @@ public class QuestController {
         } else {
             this.duelManager = new QuestEventDuelManager(new File(path));            
         }
-
     }
 
     public HashSet<StarRating> GetRating() {
@@ -491,7 +489,6 @@ public class QuestController {
      * Reset the challenges manager.
      */
     public void resetChallengesManager() {
-
         QuestWorld world = getWorld();
         String path = ForgeConstants.DEFAULT_CHALLENGES_DIR;
 
@@ -514,7 +511,6 @@ public class QuestController {
         }
 
         this.allChallenges = new StorageBase<>("Quest Challenges", new QuestChallengeReader(new File(path)));
-
     }
 
     /**
@@ -564,7 +560,6 @@ public class QuestController {
         }
     }
 
-
     public int getTurnsToUnlockChallenge() {
     	int turns = FModel.getQuestPreferences().getPrefInt(QPref.WINS_NEW_CHALLENGE);
 
@@ -578,7 +573,6 @@ public class QuestController {
 
         return Math.max(turns, 1);
     }
-
 
     public final void regenerateChallenges() {
         final QuestAchievements achievements = model.getAchievements();

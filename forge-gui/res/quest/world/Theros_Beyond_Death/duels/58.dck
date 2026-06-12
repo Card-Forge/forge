@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Nekusar the Mindrazer
+Title=Nekusar the Mindrazer
+Icon=Nekusar the Mindrazer.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/Antoine_Morisse_-_Abzan_Company_(Modern,_#925139).dck
+Deck Type=constructed
+
+[Main]
+1 Charming Prince
+1 Birds of Paradise
+1 Wall of Omens
+1 Fiend Hunter
+1 Scavenging Ooze
+2 Kitesail Freebooter
+2 Knight of the Reliquary
+3 Eternal Witness
+4 Wasteland Strangler
+4 Giver of Runes
+4 Flickerwisp
+4 Tidehollow Sculler
+4 Aether Vial
+1 Once Upon a Time
+3 Ephemerate
+4 Collected Company
+1 Snow-Covered Forest
+1 Snow-Covered Swamp
+1 Temple Garden
+1 Razorverge Thicket
+1 Field of Ruin
+1 Overgrown Tomb
+1 Godless Shrine
+1 Horizon Canopy
+1 Bojuka Bog
+2 Snow-Covered Plains
+2 Verdant Catacombs
+3 Marsh Flats
+4 Windswept Heath
+[Sideboard]
+1 Magus of the Moon
+1 Phyrexian Revoker
+1 Spellskite
+1 Auriok Champion
+1 Collector Ouphe
+1 Kambal, Consul of Allocation
+1 Kunoros, Hound of Athreos
+2 Plague Engineer
+2 Eldritch Evolution
+2 Gaddock Teeg
+2 Veil of Summer

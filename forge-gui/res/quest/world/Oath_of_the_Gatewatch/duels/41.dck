@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Princess Selenia
+Title=Princess Selenia
+Icon=Princess Selenia.jpg
+Difficulty=Easy
+Description=Oath_of_the_Gatewatch/SCG_Standard_Open_-_Atlanta/Willie_Porges_-_Abzan_Midrange_(Standard,_#519278).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+2 Den Protector
+4 Reflector Mage
+4 Siege Rhino
+2 Tasigur, the Golden Fang
+4 Warden of the First Tree
+1 Wingmate Roc
+2 Dromoka's Command
+2 Murderous Cut
+3 Stubborn Denial
+4 Oath of Nissa
+3 Gideon, Ally of Zendikar
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+1 Plains
+4 Polluted Delta
+1 Prairie Stream
+1 Smoldering Marsh
+1 Sunken Hollow
+1 Swamp
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Disdainful Stroke
+1 Dispel
+1 Exert Influence
+2 Hallowed Moonlight
+2 Jace, Vryn's Prodigy
+1 Ojutai's Command
+2 Painful Truths
+4 Self-Inflicted Wound

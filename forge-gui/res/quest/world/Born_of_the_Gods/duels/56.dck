@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Dr Strangelove
+Title=Dr Strangelove
+Icon=Dr Strangelove.jpg
+Difficulty=Hard
+Description=../Modern/Born_of_the_Gods/2014_Modern_State_Championships_-_Connecticut/Adrian_Perez_-_Red_Deck_Wins_(Modern,_#84741).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Grim Lavamancer
+4 Flames of the Blood Hand
+4 Lightning Bolt
+4 Magma Jet
+4 Shard Volley
+4 Skullcrack
+2 Arc Trail
+4 Forked Bolt
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+12 Mountain
+4 Scalding Tarn
+[Sideboard]
+3 Anger of the Gods
+3 Molten Rain
+2 Relic of Progenitus
+3 Searing Blood
+3 Smash to Smithereens
+1 Thundermaw Hellkite

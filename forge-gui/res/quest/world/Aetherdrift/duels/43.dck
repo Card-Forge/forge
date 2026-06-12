@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ancient Battlefield
+Title=Ancient Battlefield
+Icon=Ancient Battlefield.jpg
+Difficulty=Easy
+Description=./Standard/Aetherdrift/Golgarburr_-_Azorius_Tempo_(Standard,_#2379306).dck
+Deck Type=constructed
+
+[Main]
+4 Picklock Prankster
+4 Haughty Djinn
+4 Abhorrent Oculus
+2 Bounce Off
+2 Spell Pierce
+4 Moment of Truth
+2 Soul Partition
+4 Helping Hand
+4 Chart a Course
+2 Recommission
+4 Founding the Third Path
+2 Temporary Lockdown
+2 Plains
+4 Floodfarm Verge
+1 Undercity Sewers
+4 Meticulous Archive
+4 Seachrome Coast
+4 Island
+3 Adarkar Wastes
+[Sideboard]
+1 Split Up
+1 Sheltered by Ghosts
+2 Exorcise
+3 Elspeth's Smite
+1 Temporary Lockdown
+1 Destroy Evil
+2 Monastery Mentor
+2 Negate
+2 Disdainful Stroke

@@ -1,7 +1,6 @@
 package forge.gamemodes.net.event;
 
 import forge.gamemodes.net.ProtocolMethod;
-import forge.gamemodes.net.server.RemoteClient;
 
 public final class GuiGameEvent implements IdentifiableNetEvent {
     private static final long serialVersionUID = 6223690008522514574L;
@@ -20,10 +19,6 @@ public final class GuiGameEvent implements IdentifiableNetEvent {
     @Override
     public String toString() {
         return String.format("GuiGameEvent %d: %s (%d args)", id, method, objects.length);
-    }
-
-    @Override
-    public void updateForClient(final RemoteClient client) {
     }
 
     @Override

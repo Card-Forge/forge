@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Redwall
+Title=Redwall
+Icon=Redwall.jpg
+Difficulty=Easy
+Description=Fate_Reforged/Standard_Daily_#8107913/GALL_-_Sultai_Midrange_(Standard,_#218218).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Elvish Mystic
+4 Genesis Hydra
+4 Polukranos, World Eater
+1 Reclamation Sage
+4 Sylvan Caryatid
+1 Temur Sabertooth
+4 Voyaging Satyr
+4 Whisperwood Elemental
+4 Mastery of the Unseen
+2 Ugin, the Spirit Dragon
+1 Blossoming Sands
+9 Forest
+4 Nykthos, Shrine to Nyx
+2 Plains
+4 Temple of Plenty
+4 Windswept Heath
+[Sideboard]
+2 Fleecemane Lion
+2 Glare of Heresy
+3 Mistcutter Hydra
+4 Nylea's Disciple
+1 Setessan Tactics
+2 Valorous Stance

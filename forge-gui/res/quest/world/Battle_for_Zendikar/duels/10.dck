@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=BaronCimitiere
+Title=BaronCimitiere
+Icon=BaronCimitiere.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/Standard_Champs_#8987706/mfsoccer7_-_GW_Aggro_(Standard,_#337522).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Deathmist Raptor
+4 Den Protector
+2 Hangarback Walker
+3 Knight of the White Orchid
+2 Nissa, Vastwood Seer
+1 Stratus Dancer
+4 Warden of the First Tree
+2 Wingmate Roc
+4 Dromoka's Command
+3 Silkwrap
+2 Stasis Snare
+4 Gideon, Ally of Zendikar
+3 Canopy Vista
+4 Flooded Strand
+3 Forest
+1 Lumbering Falls
+4 Plains
+1 Prairie Stream
+4 Windswept Heath
+4 Wooded Foothills
+1 Yavimaya Coast
+[Sideboard]
+2 Arashin Cleric
+4 Disdainful Stroke
+1 Dispel
+1 Evolutionary Leap
+2 Mastery of the Unseen
+2 Surge of Righteousness
+2 Valorous Stance

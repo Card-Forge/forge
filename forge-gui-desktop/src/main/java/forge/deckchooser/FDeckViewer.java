@@ -13,6 +13,7 @@ import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerContainer;
 import forge.itemmanager.ItemManagerModel;
+import forge.itemmanager.views.CommanderBracketDeckView;
 import forge.itemmanager.views.ImageView;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -52,17 +53,27 @@ public class FDeckViewer extends FDialog {
     private boolean isDisplayAlt = false;
 
     public static void show(final Deck deck) {
+        show(deck, false);
+    }
+
+    public static void show(final Deck deck, final boolean showCommanderBracket) {
         if (deck == null) { return; }
 
-        final FDeckViewer deckViewer = new FDeckViewer(deck);
+        final FDeckViewer deckViewer = new FDeckViewer(deck, showCommanderBracket);
         deckViewer.setVisible(true);
         deckViewer.dispose();
     }
 
-    private FDeckViewer(final Deck deck0) {
+    private FDeckViewer(final Deck deck0, final boolean showCommanderBracket) {
         this.deck = deck0;
         this.setTitle(deck.getName());
         this.cardManager = new CardManager(null, false, false, false) {
+            {
+                if (showCommanderBracket) {
+                    addView(new CommanderBracketDeckView(this, getModel(), FDeckViewer.this.deck));
+                }
+            }
+
             @Override //show hovered card in Image View in dialog instead of main Detail/Picture panes
             protected ImageView<PaperCard> createImageView(final ItemManagerModel<PaperCard> model0) {
                 return new ImageView<PaperCard>(this, model0, false) {
@@ -95,7 +106,7 @@ public class FDeckViewer extends FDialog {
             this.sections.add(entry.getKey());
         }
         this.currentSection = DeckSection.Main;
-        updateCaption();
+        this.cardManager.setCaption(deck.getName() + " - ");
 
         this.lblFlipcard.setIcon(FSkin.getIcon(FSkinProp.ICO_FLIPCARD));
         this.lblFlipcard.setVisible(false);
@@ -150,6 +161,20 @@ public class FDeckViewer extends FDialog {
         this.add(this.btnClose, "w 120px!, h 26px!, ax right");
 
         this.cardManager.setup(ItemManagerConfig.DECK_VIEWER);
+        if (this.sections.size() > 1) {
+            for (DeckSection section : this.sections) {
+                this.cardManager.getCbxSection().addItem(section);
+            }
+            this.cardManager.getCbxSection().setSelectedItem(this.currentSection);
+            this.cardManager.getCbxSection().addActionListener(arg0 -> {
+                DeckSection selected = (DeckSection) cardManager.getCbxSection().getSelectedItem();
+                if (selected != null && selected != currentSection) {
+                    currentSection = selected;
+                    cardManager.setPool(deck.get(currentSection));
+                }
+            });
+            this.cardManager.getCbxSection().setVisible(true);
+        }
         this.setDefaultFocus(this.cardManager.getCurrentView().getComponent());
 
         FMouseAdapter mouseListener = new FMouseAdapter() {
@@ -191,12 +216,8 @@ public class FDeckViewer extends FDialog {
         int index = sections.indexOf(currentSection);
         index = (index + 1) % sections.size();
         currentSection = sections.get(index);
+        this.cardManager.getCbxSection().setSelectedItem(currentSection);
         this.cardManager.setPool(this.deck.get(currentSection));
-        updateCaption();
-    }
-
-    private void updateCaption() {
-        this.cardManager.setCaption(deck.getName() + " - " + currentSection.name());
     }
 
     private void copyToClipboard() {

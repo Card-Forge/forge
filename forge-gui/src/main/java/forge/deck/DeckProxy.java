@@ -344,6 +344,16 @@ public class DeckProxy implements InventoryItem {
         return key;
     }
 
+    public static String getEventTag(Deck deck, String key) {
+        String prefix = key + ":";
+        for (String tag : deck.getTags()) {
+            if (tag.startsWith(prefix)) {
+                return tag.substring(prefix.length());
+            }
+        }
+        return null;
+    }
+
     public Set<GameFormat> getFormats() {
         if (formats == null) {
             formats = FModel.getFormats().getAllFormatsOfDeck(getDeck());
@@ -568,9 +578,9 @@ public class DeckProxy implements InventoryItem {
         @Override
         public Deck getDeck() {
             final DeckGeneratorTheme gen = new DeckGeneratorTheme(FModel.getMagicDb().getCommonCards());
-            final Deck deck = new Deck();
             gen.setSingleton(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
             gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+            final Deck deck = new Deck();
             final StringBuilder errorBuilder = new StringBuilder();
             deck.getMain().addAll(gen.getThemeDeck(this.getName(), 60, errorBuilder));
             if (errorBuilder.length() > 0) {
@@ -692,6 +702,15 @@ public class DeckProxy implements InventoryItem {
         final IStorage<DeckGroup> draft = FModel.getDecks().getDraft();
         for (final DeckGroup d : draft) {
             decks.add(new DeckProxy(d, "Draft", ((Function<IHasName, Deck>)(Object) (Function<DeckGroup, Deck>) DeckGroup::getHumanDeck), GameType.Draft, draft));
+        }
+        return decks;
+    }
+
+    public static List<DeckProxy> getAllNetworkEventDecks() {
+        final List<DeckProxy> decks = new ArrayList<>();
+        final IStorage<Deck> networkEvent = FModel.getDecks().getNetworkEventDecks();
+        for (final Deck d : networkEvent) {
+            decks.add(new DeckProxy(d, "Event", GameType.Draft, networkEvent));
         }
         return decks;
     }

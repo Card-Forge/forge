@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=WitchDoctor
+Title=WitchDoctor
+Icon=WitchDoctor.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Arrias_-_Human_(Modern,_#1037327).dck
+Deck Type=constructed
+
+[Main]
+2 General Kudro of Drannith
+3 Kitesail Freebooter
+4 Champion of the Parish
+4 Thalia's Lieutenant
+4 Thalia, Guardian of Thraben
+4 Reflector Mage
+4 Phantasmal Image
+4 Meddling Mage
+4 Mantis Rider
+4 Noble Hierarch
+4 Aether Vial
+1 Plains
+1 Island
+1 Silent Clearing
+4 Cavern of Souls
+4 Unclaimed Territory
+4 Ancient Ziggurat
+4 Horizon Canopy
+[Sideboard]
+1 Sin Collector
+2 Deputy of Detention
+2 Gaddock Teeg
+2 Plague Engineer
+2 Grafdigger's Cage
+2 Dismember
+4 Auriok Champion

@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Milhouse_van_Houten
+Title=Milhouse_van_Houten
+Icon=Milhouse_van_Houten.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/27TrueRunes_-_Mono_White_Midrange_(Standard,_#1618874).dck
+Deck Type=constructed
+
+[Main]
+2 Ambitious Farmhand
+4 Giada, Font of Hope
+4 Spirited Companion
+4 Inspiring Overseer
+4 Archangel of Wrath
+3 Elesh Norn, Mother of Machines
+4 Sanctuary Warden
+3 Cut Down
+4 Sheoldred's Edict
+4 Ossification
+9 Plains
+3 Swamp
+4 Haunted Ridge
+4 Shattered Sanctum
+4 Sundown Pass
+[Sideboard]

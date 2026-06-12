@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Spock
+Title=Spock
+Icon=Spock.jpg
+Difficulty=Easy
+Description=Mirrodin_Besieged/Nationals_2011_-_Finland/Mikko_Nurmi_-_Valakut_Ramp_(Standard,_#18883).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Avenger of Zendikar
+1 Birds of Paradise
+1 Obstinate Baloth
+4 Oracle of Mul Daya
+4 Primeval Titan
+1 Wurmcoil Engine
+2 Summoning Trap
+4 Explore
+4 Green Sun's Zenith
+3 Pyroclasm
+4 Rampant Growth
+3 Khalni Heart Expedition
+2 Evolving Wilds
+4 Forest
+11 Mountain
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+3 Verdant Catacombs
+[Sideboard]
+1 Gaea's Revenge
+4 Memoricide
+2 Nature's Claim
+2 Ricochet Trap
+1 Swamp

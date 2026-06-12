@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Boros-precon
+Title=Boros-precon
+Icon=Boros-precon.jpg
+Difficulty=Hard
+Description=./Modern/Dominaria_United/Doni_Dominaria_-_Domain_Aggro_(Modern,_#1493797).dck
+Deck Type=constructed
+
+[Main]
+1 Territorial Kavu
+1 Scion of Draco
+3 Scion of Draco
+3 Territorial Kavu
+4 Wild Nacatl
+4 Nishoba Brawler
+4 Ragavan, Nimble Pilferer
+1 Fire // Ice
+2 Fire // Ice
+4 Stubborn Denial
+4 Lightning Bolt
+1 Tribal Flames
+3 Tribal Flames
+4 Leyline Binding
+1 Temple Garden
+1 Windswept Heath
+1 Xander's Lounge
+1 Stomping Ground
+1 Breeding Pool
+1 Wooded Foothills
+1 Sacred Foundry
+1 Arid Mesa
+1 Verdant Catacombs
+1 Forest
+1 Steam Vents
+1 Plains
+1 Indatha Triome
+1 Blood Crypt
+2 Windswept Heath
+2 Flooded Strand
+3 Wooded Foothills
+[Sideboard]
+2 Veil of Summer
+2 Remand
+2 Flusterstorm
+3 Spreading Seas
+3 Path to Exile
+3 Tear Asunder

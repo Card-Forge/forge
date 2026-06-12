@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Boris Karloff
+Title=Boris Karloff
+Icon=Boris Karloff.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/Composure_-_Mono_Blue_v2_(Standard,_#1495458).dck
+Deck Type=constructed
+
+[Main]
+4 Tolarian Terror
+4 Haughty Djinn
+2 Spell Pierce
+2 Make Disappear
+3 Slip Out the Back
+3 Negate
+4 Consider
+4 Thirst for Discovery
+4 Fading Hope
+4 Impulse
+4 Essence Scatter
+1 Otawara, Soaring City
+21 Island
+[Sideboard]

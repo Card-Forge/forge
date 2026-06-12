@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Surtr
+Title=Surtr
+Icon=Surtr.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/MisterAsiago_-_Gruul_Counters_(Standard,_#1968850).dck
+Deck Type=constructed
+
+[Main]
+4 Teething Wurmlet
+3 Inti, Seneschal of the Sun
+4 Gingerbrute
+4 Iron Apprentice
+4 Quirion Beastcaller
+4 Sentinel of the Nameless City
+2 Thundering Raiju
+4 Voldaren Thrillseeker
+4 Ozolith, the Shattered Spire
+3 Agatha's Soul Cauldron
+4 Copperline Gorge
+4 Karplusan Forest
+4 Mishra's Foundry
+4 Forest
+2 Rockfall Vale
+1 Sokenzan, Crucible of Defiance
+3 Mountain
+2 Boseiju, Who Endures
+[Sideboard]
+2 Arlinn, the Pack's Hope
+2 End the Festivities
+2 Haywire Mite
+2 Lithomantic Barrage
+2 Tamiyo's Safekeeping
+3 Voltage Surge
+2 Urabrask's Forge

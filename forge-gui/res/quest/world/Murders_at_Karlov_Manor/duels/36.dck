@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Ned Flanders
+Title=Ned Flanders
+Icon=Ned Flanders.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/Bartosz_Regent_-_Dimir_Reanimator_(Standard,_#1977969).dck
+Deck Type=constructed
+
+[Main]
+2 Titan of Industry
+3 Atraxa, Grand Unifier
+3 Fallaji Archaeologist
+3 Steamcore Scholar
+4 Picklock Prankster
+2 Portal to Phyrexia
+4 Otherworldly Gaze
+2 Terror Tide
+3 Wail of the Forgotten
+4 Squirming Emergence
+2 One with the Multiverse
+4 Founding the Third Path
+1 Jace, the Perfected Mind
+1 Boseiju, Who Endures
+1 Otawara, Soaring City
+1 Dreamroot Cascade
+1 Island
+1 Underground Mortuary
+1 Shipwreck Marsh
+1 Undercity Sewers
+2 Hedge Maze
+2 Yavimaya Coast
+4 Underground River
+4 Darkslick Shores
+4 Deathcap Glade
+[Sideboard]
+3 Negate
+1 Malicious Eclipse
+1 Virtue of Persistence
+2 Path of Peril
+3 Duress
+2 Cut Down
+1 Jace, the Perfected Mind
+1 Tear Asunder
+1 Turn the Earth

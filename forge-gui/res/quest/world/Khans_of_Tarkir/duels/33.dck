@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Sidisi
+Title=Sidisi
+Icon=Sidisi.jpg
+Difficulty=Easy
+Description=Khans_of_Tarkir/TCGplayer_Open_5K_Milwaukee,_WI/Ryan_Sabin_-_Abzan_Midrange_(Standard,_#149721).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Fleecemane Lion
+4 Rakshasa Deathdealer
+4 Siege Rhino
+4 Wingmate Roc
+3 Abzan Charm
+3 Bile Blight
+3 Hero's Downfall
+1 Murderous Cut
+2 Elspeth, Sun's Champion
+2 Sorin, Solemn Visitor
+2 Caves of Koilos
+2 Forest
+3 Llanowar Wastes
+1 Mana Confluence
+2 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+3 Temple of Silence
+2 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Back to Nature
+4 Drown in Sorrow
+3 Glare of Heresy
+4 Thoughtseize

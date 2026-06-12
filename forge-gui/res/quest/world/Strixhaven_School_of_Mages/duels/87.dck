@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=SantaMuerte
+Title=SantaMuerte
+Icon=SantaMuerte.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Sahara_Kouhei_-_UR_Prowess_(Modern,_#1156047)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Sprite Dragon
+4 Stormwing Entity
+4 Soul-Scar Mage
+2 Vapor Snag
+2 Wild Slash
+3 Mutagenic Growth
+3 Opt
+4 Lightning Bolt
+4 Lava Dart
+4 Manamorphose
+4 Expressive Iteration
+2 Steam Vents
+2 Bloodstained Mire
+2 Wooded Foothills
+4 Mountain
+4 Fiery Islet
+4 Spirebluff Canal
+[Sideboard]
+1 Shrine of Burning Rage
+2 Spell Pierce
+2 Kozilek's Return
+2 Abrade
+2 Soul-Guide Lantern
+3 Cleansing Wildfire
+3 Dragon's Claw

@@ -315,7 +315,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             // update source
             game.updateLastStateForCard(source);
         }
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, sa);
     } // moveCounterResolve
 
     protected void removeCounter(SpellAbility sa, final Card src, final Card dest, CounterType cType, String counterNum, Map<CounterType, Integer> countersToAdd) {

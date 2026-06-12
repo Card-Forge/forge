@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Regigigas
+Title=Regigigas
+Icon=Regigigas.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Clay0301_-_Boros_Reanimator_(Standard,_#1337093).dck
+Deck Type=constructed
+
+[Main]
+1 Inferno of the Star Mounts
+2 Mila, Crafty Companion
+4 Velomachus Lorehold
+4 Spirited Companion
+2 Sejiri Shelter
+2 Spikefield Hazard
+2 Lorehold Command
+2 Cinderclasm
+3 Invoke Calamity
+3 Cathartic Pyre
+3 Unexpected Windfall
+1 Burn Down the House
+2 Devastating Mastery
+3 Thrilling Discovery
+4 Invoke Justice
+1 Eiganjo, Seat of the Empire
+1 Den of the Bugbear
+1 Cave of the Frost Dragon
+1 Furycalm Snarl
+1 Sokenzan, Crucible of Defiance
+2 Field of Ruin
+3 Plains
+4 Needleverge Pathway
+4 Sundown Pass
+4 Mountain
+[Sideboard]
+1 Pithing Needle
+1 Devastating Mastery
+2 Burn Down the House
+2 Fateful Absence
+2 Cinderclasm
+3 Farewell
+4 Rip Apart

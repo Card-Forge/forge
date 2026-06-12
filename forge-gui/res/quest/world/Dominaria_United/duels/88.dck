@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=BaronCimitiere
+Title=BaronCimitiere
+Icon=BaronCimitiere.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Baran_Alex_-_Bant_(Modern,_#1511895).dck
+Deck Type=constructed
+
+[Main]
+1 Venser, Shaper Savant
+2 Wall of Blossoms
+2 Solitude
+3 Eternal Witness
+4 Noble Hierarch
+4 Aether Channeler
+4 Soulherder
+4 Ice-Fang Coatl
+4 Wall of Omens
+4 Collected Company
+4 Ephemerate
+2 Time Warp
+1 Breeding Pool
+1 Spara's Headquarters
+1 Boseiju, Who Endures
+1 Snow-Covered Plains
+2 Glasspool Mimic
+2 Temple Garden
+2 Snow-Covered Island
+2 Snow-Covered Forest
+2 Hallowed Fountain
+4 Misty Rainforest
+4 Windswept Heath
+[Sideboard]
+1 Endurance
+1 Solitude
+1 Lavinia, Azorius Renegade
+4 Prismatic Ending
+4 Deputy of Detention
+4 Knight of Autumn

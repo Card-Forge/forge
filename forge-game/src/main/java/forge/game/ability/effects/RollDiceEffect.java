@@ -49,14 +49,14 @@ public class RollDiceEffect extends SpellAbilityEffect {
             this.naturalValue = naturalValue;
             this.modifiedValue = modifiedValue;
         }
-        // Getters
+
         public int getNaturalValue() {
             return naturalValue;
         }
         public int getModifiedValue() {
             return modifiedValue;
         }
-        // Setters
+
         public void setNaturalValue(int naturalValue) {
             this.naturalValue = naturalValue;
         }
@@ -401,7 +401,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
      */
     @SuppressWarnings("unchecked")
     private static List<Integer> rollAction(int amount, int sides, int ignore, List<Integer> rollsResult, List<Integer> ignored, Map<Player, Integer> ignoreChosenMap, Set<Card> dicePTExchanges, Player player, Map<AbilityKey, Object> repParams) {
-
         repParams.put(AbilityKey.Sides, sides);
         repParams.put(AbilityKey.Number, amount);
         repParams.put(AbilityKey.Ignore, ignore);

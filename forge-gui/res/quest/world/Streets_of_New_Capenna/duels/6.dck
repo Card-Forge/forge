@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Tutankhamon
+Title=Tutankhamon
+Icon=Tutankhamon.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/GELY_Baptiste_-_Izzet_Control_(Standard,_#1382800).dck
+Deck Type=constructed
+
+[Main]
+1 Hullbreaker Horror
+2 Lier, Disciple of the Drowned
+4 Goldspan Dragon
+1 Unexpected Windfall
+1 Dragon's Fire
+1 Memory Deluge
+2 Prismari Command
+2 Flame-Blessed Bolt
+4 Fading Hope
+4 Galvanic Iteration
+4 Big Score
+4 Spikefield Hazard
+4 Jwari Disruption
+2 Strangle
+4 Expressive Iteration
+1 Otawara, Soaring City
+2 Hall of Storm Giants
+2 Frostboil Snarl
+3 Island
+4 Mountain
+4 Stormcarved Coast
+4 Riverglide Pathway
+[Sideboard]
+1 Cinderclasm
+1 Hullbreaker Horror
+1 Test of Talents
+1 Negate
+2 Burn Down the House
+2 Rowan, Scholar of Sparks
+2 Flame-Blessed Bolt
+2 Smoldering Egg
+3 Disdainful Stroke

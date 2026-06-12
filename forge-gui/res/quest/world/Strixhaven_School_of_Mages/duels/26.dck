@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Tom Bombadil
+Title=Tom Bombadil
+Icon=Tom Bombadil.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/Elina_Yortirev_-_Temur_Ramp_(Standard,_#1148535).dck
+Deck Type=constructed
+
+[Main]
+1 Keruga, the Macrosage
+1 Elder Gargaroth
+2 Zimone, Quandrix Prodigy
+2 Radha, Heart of Keld
+3 Cosima, God of the Voyage
+4 Dryad of the Ilysian Grove
+4 Chainweb Aracnir
+4 Esika's Chariot
+2 Depart the Realm
+4 Scorching Dragonfire
+1 Inscription of Insight
+4 Mythos of Illuna
+1 Valakut Exploration
+2 Waking the Trolls
+1 Vivien, Monsters' Advocate
+2 Gnottvold Slumbermound
+3 Island
+3 Forest
+4 Ketria Triome
+4 Cragcrown Pathway
+4 Barkchannel Pathway
+4 Riverglide Pathway
+[Sideboard]
+1 Snakeskin Veil
+1 Soul-Guide Lantern
+1 Vivien, Monsters' Advocate
+1 Garruk, Unleashed
+2 Test of Talents
+2 Confounding Conundrum
+2 Soul Sear
+2 Phoenix of Ash
+3 Mystical Dispute

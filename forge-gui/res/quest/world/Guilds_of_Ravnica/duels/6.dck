@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Jack Sparrow
+Title=Jack Sparrow
+Icon=Jack Sparrow.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Akatsuka_Hidenori_-_WUR_Control_(Standard,_#767152).dck
+Deck Type=constructed
+
+[Main]
+2 Crackling Drake
+2 Niv-Mizzet, Parun
+1 Azor's Gateway
+1 Blink of an Eye
+4 Chemister's Insight
+1 Essence Scatter
+2 Expansion // Explosion
+3 Justice Strike
+1 Settle the Wreckage
+4 Sinister Sabotage
+2 Syncopate
+1 Banefire
+3 Deafening Clarion
+2 Lava Coil
+1 Search for Azcanta
+1 Ral, Izzet Viceroy
+3 Teferi, Hero of Dominaria
+4 Clifftop Retreat
+4 Glacial Fortress
+3 Island
+2 Mountain
+1 Plains
+4 Sacred Foundry
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+4 Adanto Vanguard
+1 Banefire
+2 Disdainful Stroke
+1 Lyra Dawnbringer
+3 Negate
+1 Shalai, Voice of Plenty
+3 Tocatli Honor Guard

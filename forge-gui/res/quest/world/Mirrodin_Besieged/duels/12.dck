@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Quest for Ulas Temple
+Title=Quest for Ulas Temple
+Icon=Quest for Ulas Temple.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/2011_Trials_-_WWS_Miami_Winners/MiguelRondon_-_Valakut_Ramp_(Standard,_#10561).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+1 Inferno Titan
+4 Overgrown Battlement
+4 Primeval Titan
+1 Terastodon
+3 Lightning Bolt
+3 Summoning Trap
+4 Cultivate
+4 Explore
+2 Green Sun's Zenith
+4 Growth Spasm
+2 Evolving Wilds
+6 Forest
+11 Mountain
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Fog
+2 Koth of the Hammer
+2 Nature's Claim
+3 Pyroclasm
+3 Ricochet Trap

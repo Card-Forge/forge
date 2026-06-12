@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Rakdos
+Title=Rakdos
+Icon=Rakdos.jpg
+Difficulty=Medium
+Description=./Standard/Theros_Beyond_Death/Albert_Chyn_-_Mardu_Hero_(Standard,_#981311).dck
+Deck Type=constructed
+
+[Main]
+1 Kunoros, Hound of Athreos
+1 Rakdos Firewheeler
+2 Mayhem Devil
+3 Judith, the Scourge Diva
+3 Kroxa, Titan of Death's Hunger
+4 Dreadhorde Butcher
+4 Hero of Precinct One
+4 Footlight Fiend
+1 Bedeck // Bedazzle
+1 Despark
+1 Bedevil
+2 Heartfire
+3 Angrath's Rampage
+3 Carnival // Carnage
+1 Theater of Horrors
+4 Oath of Kaya
+1 Temple of Triumph
+1 Mountain
+2 Swamp
+2 Plains
+4 Sacred Foundry
+4 Blood Crypt
+4 Godless Shrine
+4 Fabled Passage
+[Sideboard]
+1 Theater of Horrors
+2 Agonizing Remorse
+2 Despark
+2 Tibalt, Rakish Instigator
+2 Kaya, Orzhov Usurper
+2 Kaya's Wrath
+4 Basilica Bell-Haunt

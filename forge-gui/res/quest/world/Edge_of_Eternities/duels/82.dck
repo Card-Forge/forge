@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Dr Watson
+Title=Dr Watson
+Icon=Dr Watson.jpg
+Difficulty=Very Hard
+Description=./Modern/Edge_of_Eternities/AlanCrespo_-_Dimir_Murktide_(Modern,_#2642516).dck
+Deck Type=constructed
+
+[Main]
+4 Psychic Frog
+3 Orcish Bowmasters
+3 Tamiyo, Inquisitive Student
+2 Murktide Regent
+2 Quantum Riddler
+2 Subtlety
+4 Counterspell
+4 Fatal Push
+3 Force of Negation
+2 Sink into Stupor
+2 Spell Snare
+1 Sheoldred's Edict
+1 Shoot the Sheriff
+4 Preordain
+3 Thoughtseize
+1 Kaito, Bane of Nightmares
+4 Polluted Delta
+3 Darkslick Shores
+2 Bloodstained Mire
+2 Flooded Strand
+2 Island
+2 Undercity Sewers
+2 Watery Grave
+1 Otawara, Soaring City
+1 Swamp
+[Sideboard]
+4 Consign to Memory
+3 Harbinger of the Seas
+2 Ghost Vacuum
+2 Torpor Orb
+2 Toxic Deluge
+1 Nihil Spellbomb
+1 Stern Scolding

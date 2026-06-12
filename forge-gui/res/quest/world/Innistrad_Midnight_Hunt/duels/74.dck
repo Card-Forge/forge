@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Electro
+Title=Electro
+Icon=Electro.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/RespectTheCat_-_Death_and_Taxes_(Modern,_#1219501).dck
+Deck Type=constructed
+
+[Main]
+2 Augur of Autumn
+2 Scavenging Ooze
+4 Noble Hierarch
+4 Leonin Arbiter
+4 Giver of Runes
+4 Flickerwisp
+4 Skyclave Apparition
+4 Solitude
+4 Stoneforge Mystic
+4 Thalia, Guardian of Thraben
+1 Maul of the Skyclaves
+1 Kaldra Compleat
+1 Batterskull
+1 Sword of Fire and Ice
+4 Aether Vial
+1 Path to Exile
+4 Oath of Nissa
+1 Horizon Canopy
+2 Cave of the Frost Dragon
+2 Forest
+3 Plains
+3 Field of Ruin
+4 Temple Garden
+4 Razorverge Thicket
+4 Ghost Quarter
+4 Brushland
+4 Branchloft Pathway
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Scavenging Ooze
+2 Path to Exile
+2 Collector Ouphe
+2 Gaddock Teeg
+2 Outland Liberator
+2 Sanctifier en-Vec
+3 Burrenton Forge-Tender

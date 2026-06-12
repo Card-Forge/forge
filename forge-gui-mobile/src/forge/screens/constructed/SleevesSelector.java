@@ -61,7 +61,7 @@ public class SleevesSelector  extends FScreen {
     };
 
     private SleevesSelector(final String playerName, final int currentIndex0, final List<Integer> usedSleeves0, final Consumer<Integer> callback0) {
-        super(Forge.getLocalizer().getMessage("lblSelectSleevesFroPlayer", playerName));
+        super(Forge.getLocalizer().getMessage("lblSelectSleeveForPlayer", playerName));
 
         currentIndex = currentIndex0;
         usedSleeves = usedSleeves0;

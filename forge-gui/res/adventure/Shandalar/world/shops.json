@@ -2419,9 +2419,14 @@
 "sprite":"AssassinShop",
   "rewards": [
     {
-      "count":8,
+      "count":4,
       "subTypes": ["Assassin"]
-    }]
+    },
+    {
+      "count":4,
+      "subTypes": ["Ninja"]
+    }
+    ]
 },{
   "name":"Enchantment",
   "description":"Charms and Curiosities",

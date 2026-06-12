@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=White Knight
+Title=White Knight
+Icon=White Knight.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Greg_Rahn_-_Kiki's_Delivery_Service_(Modern,_#1368123).dck
+Deck Type=constructed
+
+[Main]
+1 Pashalik Mons
+1 Goblin Warchief
+1 Goblin Chieftain
+2 Sling-Gang Lieutenant
+2 Kiki-Jiki, Mirror Breaker
+3 Boggart Harbinger
+3 Goblin Ringleader
+4 Munitions Expert
+4 Skirk Prospector
+4 Goblin Matron
+4 Conspicuous Snoop
+4 Mogg War Marshal
+4 Aether Vial
+1 Swamp
+1 Stomping Ground
+1 Sokenzan, Crucible of Defiance
+1 Den of the Bugbear
+2 Blood Crypt
+3 Scalding Tarn
+3 Secluded Courtyard
+3 Mountain
+4 Cavern of Souls
+4 Bloodstained Mire
+[Sideboard]
+1 Tarfire
+1 Masked Vandal
+1 Goblin Trashmaster
+2 Fury
+2 Blood Moon
+4 Chalice of the Void
+4 Leyline of the Void

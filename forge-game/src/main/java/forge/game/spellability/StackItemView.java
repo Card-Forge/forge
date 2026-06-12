@@ -5,6 +5,7 @@ import forge.game.card.IHasCardView;
 import forge.game.player.PlayerView;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
+import forge.trackable.Tracker;
 import forge.trackable.TrackableProperty;
 import forge.util.collect.FCollectionView;
 
@@ -39,6 +40,14 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         updateOptionalTrigger(si);
         updateSubInstance(si);
         updateOptionalCost(si);
+    }
+
+    /**
+     * Constructor for network deserialization.
+     * Creates an empty StackItemView that will be populated via property deserialization.
+     */
+    public StackItemView(final int id0, final Tracker tracker) {
+        super(id0, tracker);
     }
 
     public String getKey() {
@@ -109,10 +118,10 @@ public class StackItemView extends TrackableObject implements IHasCardView {
     }
 
     public String getText() {
-        return get(TrackableProperty.Text);
+        return get(TrackableProperty.Description);
     }
     void updateText(SpellAbilityStackInstance si) {
-        set(TrackableProperty.Text, si.getStackDescription());
+        set(TrackableProperty.Description, si.getStackDescription());
     }
 
     public CardView getSourceCard() {

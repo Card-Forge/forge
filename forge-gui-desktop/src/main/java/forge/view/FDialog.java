@@ -130,12 +130,13 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     //Make Escape key close dialog if allowed
     @Override
     public boolean dispatchKeyEvent(final KeyEvent e) {
-        if (e.getID() == KeyEvent.KEY_PRESSED) {
-            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                final WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-                Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
-                return true;
-            }
+        if (e.getID() == KeyEvent.KEY_PRESSED && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            // Non-modal floats (e.g. the chat panel) shouldn't swallow ESC unless the user
+            // has actually focused them — otherwise pressing ESC anywhere in the app closes
+            // any open non-modal instead of running the focused window's own ESC handler.
+            if (!isModal() && !isFocused()) return false;
+            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+            return true;
         }
         return false;
     }

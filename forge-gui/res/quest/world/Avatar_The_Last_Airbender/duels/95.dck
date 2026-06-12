@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Anubis
+Title=Anubis
+Icon=Anubis.jpg
+Difficulty=Very Hard
+Description=./Modern/Avatar_The_Last_Airbender/Sakamoto_Naoki_-_Mono_Blue_Control_(Modern,_#2831963).dck
+Deck Type=constructed
+
+[Main]
+4 Subtlety
+4 Harbinger of the Seas
+4 Tamiyo, Inquisitive Student
+4 Quantum Riddler
+1 Wan Shi Tong, Librarian
+4 Counterspell
+3 Cryptic Command
+3 Essence Flux
+3 Force of Negation
+2 Strix Serenade
+4 Sink into Stupor
+4 Consult the Star Charts
+16 Island
+1 Otawara, Soaring City
+1 Soulstone Sanctuary
+2 Agna Qel'a
+[Sideboard]
+2 Cursed Totem
+3 Surgical Extraction
+1 Nexus of Fate
+3 Mystical Dispute
+2 Tishana's Tidebinder
+4 Consign to Memory

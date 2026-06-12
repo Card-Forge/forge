@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Leela
+Title=Leela
+Icon=Leela.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/CARLOS_HENRIQUE_GUIMARAES_-_Azorius_Control_(Modern,_#977098).dck
+Deck Type=constructed
+
+[Main]
+1 Spell Snare
+1 Mana Leak
+2 Archmage's Charm
+2 Logic Knot
+3 Cryptic Command
+3 Force of Negation
+4 Opt
+4 Path to Exile
+1 Entreat the Angels
+4 Terminus
+4 Counterbalance
+4 Omen of the Sea
+2 Teferi, Time Raveler
+3 Jace, the Mind Sculptor
+1 Plains
+1 Scalding Tarn
+1 Prairie Stream
+2 Hallowed Fountain
+3 Mystic Sanctuary
+4 Flooded Strand
+4 Polluted Delta
+6 Island
+[Sideboard]
+1 Teferi, Hero of Dominaria
+1 Disdainful Stroke
+1 Kaheera, the Orphanguard
+2 Ashiok, Dream Render
+2 Aether Gust
+2 Flusterstorm
+3 Celestial Purge
+3 Timely Reinforcements

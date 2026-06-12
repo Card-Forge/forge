@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ned Flanders
+Title=Ned Flanders
+Icon=Ned Flanders.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Okuyama_Sanshirou_-_WU_Aggro_(Standard,_#668537).dck
+Deck Type=constructed
+
+[Main]
+3 Archangel Avacyn
+4 Scrapheap Scrounger
+4 Spell Queller
+2 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Toolcraft Exemplar
+3 Heart of Kiran
+4 Metallic Rebuke
+1 Declaration in Stone
+3 Stasis Snare
+4 Gideon, Ally of Zendikar
+4 Concealed Courtyard
+4 Island
+8 Plains
+4 Port Town
+3 Prairie Stream
+1 Spire of Industry
+[Sideboard]
+2 Blessed Alliance
+2 Fragmentize
+2 Fumigate
+2 Negate
+1 Quarantine Field
+2 Selfless Spirit
+1 Thalia, Heretic Cathar
+3 Unsubstantiate

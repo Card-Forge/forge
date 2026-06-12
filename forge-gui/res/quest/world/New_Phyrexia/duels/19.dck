@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Momir
+Title=Momir
+Icon=Momir.jpg
+Difficulty=Medium
+Description=New_Phyrexia/National_Qualifiers_2011_-_Kaissa_Victorias/GENNADIS_THEMIS_-_RDW_(Standard,_#16176).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodcrazed Goblin
+4 Goblin Guide
+4 Kiln Fiend
+4 Shrine of Burning Rage
+3 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+4 Staggershock
+3 Arc Trail
+4 Forked Bolt
+22 Mountain
+[Sideboard]
+4 Ember Hauler
+4 Galvanic Blast
+1 Moltensteel Dragon
+4 Perilous Myr

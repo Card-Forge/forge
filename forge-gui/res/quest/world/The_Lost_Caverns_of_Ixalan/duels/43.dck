@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Homer Simpson
+Title=Homer Simpson
+Icon=Homer Simpson.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Patrick_Wiens_-_Angry_Beasts_(Standard,_#1981498).dck
+Deck Type=constructed
+
+[Main]
+4 Archangel of Wrath
+3 Atraxa, Grand Unifier
+1 Elesh Norn, Mother of Machines
+1 Imodane's Recruiter
+4 Topiary Stomper
+2 Courier's Briefcase
+1 Assassin's Trophy
+4 Herd Migration
+4 Sunfall
+1 Vanquish the Horde
+1 Virtue of Persistence
+4 Leyline Binding
+2 Up the Beanstalk
+3 Invasion of Zendikar
+1 Boseiju, Who Endures
+3 Cavern of Souls
+4 Forest
+1 Island
+4 Jetmir's Garden
+1 Mountain
+2 Plains
+4 Spara's Headquarters
+2 Swamp
+4 Ziatora's Proving Ground
+[Sideboard]
+2 Anoint with Affliction
+1 Disdainful Stroke
+2 Duress
+1 Elspeth's Smite
+1 Farewell
+1 Jace, the Perfected Mind
+2 Knockout Blow
+2 Negate
+1 Obstinate Baloth
+1 Tishana's Tidebinder
+1 Tranquil Frillback

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=WitchDoctor
+Title=WitchDoctor
+Icon=WitchDoctor.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Aikawa_Tomoyuki_-_WG_Token_(Standard,_#796368).dck
+Deck Type=constructed
+
+[Main]
+4 Tithe Taker
+3 Benalish Marshal
+3 Venerated Loxodon
+2 Emmara, Soul of the Accord
+1 Trostani Discordant
+4 March of the Multitudes
+1 Unbreakable Formation
+4 Saproling Migration
+4 Flower // Flourish
+4 Legion's Landing
+3 Conclave Tribunal
+4 History of Benalia
+1 Ajani, the Greathearted
+10 Plains
+4 Forest
+4 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+2 Tocatli Honor Guard
+2 Lyra Dawnbringer
+2 Carnage Tyrant
+1 Vivien Reid
+1 Nissa, Who Shakes the World
+1 Gideon Blackblade
+1 Gideon's Triumph
+2 Settle the Wreckage
+3 Crushing Canopy

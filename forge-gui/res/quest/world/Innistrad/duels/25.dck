@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=BlackTalon
+Title=BlackTalon
+Icon=BlackTalon.jpg
+Difficulty=Easy
+Description=Innistrad/1er_Torneo_Magic_El_Prat/Chema_-__Aleman__(Standard,_#23599).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+2 Doomed Traveler
+3 Elite Vanguard
+2 Fiend Hunter
+3 Geist of Saint Traft
+3 Hero of Bladehold
+4 Mirran Crusader
+1 Phyrexian Metamorph
+3 Angelic Destiny
+4 Honor of the Pure
+3 Oblivion Ring
+4 Glacial Fortress
+1 Island
+4 Moorland Haunt
+11 Plains
+4 Seachrome Coast
+[Sideboard]
+3 Dismember
+1 Divine Reckoning
+2 Leonin Arbiter
+2 Nevermore
+3 Revoke Existence
+1 Stony Silence
+3 Timely Reinforcements

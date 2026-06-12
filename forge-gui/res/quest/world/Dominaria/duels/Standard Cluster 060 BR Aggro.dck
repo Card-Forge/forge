@@ -1,0 +1,44 @@
+[metadata]
+Name=BR Aggro
+Deck Type=constructed
+Title=BR Aggro
+Description=BR Aggro
+Difficulty=Medium
+Icon=Nyarvirazi
+[Main]
+4 Abrade
+4 Aether Hub
+2 Aethersphere Harvester
+1 Arch of Orazca
+4 Canyon Slough
+2 Chandra, Torch of Defiance
+1 Cinder Barrens
+4 Dragonskull Summit
+3 Dusk Legion Zealot
+4 Glint-Sleeve Siphoner
+3 Glorybringer
+3 Harnessed Lightning
+2 Ifnir Deadlands
+3 Magma Spray
+2 Mountain
+1 Mountain
+1 Mountain
+2 Mountain
+2 Pia Nalaar
+4 Rekindling Phoenix
+1 Scavenger Grounds
+1 Swamp
+1 Swamp
+4 Vraska's Contempt
+1 Walking Ballista
+[Sideboard]
+1 Angrath, the Flame-Chained
+2 Cartouche of Ambition
+1 Chandra, Torch of Defiance
+1 Conqueror's Galleon
+1 Doomfall
+3 Dreamstealer
+1 Duress
+3 Scrapheap Scrounger
+1 The Immortal Sun
+1 Vona's Hunger

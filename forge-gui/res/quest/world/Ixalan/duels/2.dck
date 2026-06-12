@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Robot2
+Title=Robot2
+Icon=Secret Squirrel.jpg
+Difficulty=Hard
+Description=Abzan Control 
+Deck Type=constructed
+
+[Main]
+4 Anointer Priest
+4 Renegade Map
+4 Fatal Push
+4 Fumigate
+4 Anointed Procession
+4 Cast Out
+4 Hidden Stockpile
+3 Legion's Landing
+3 Vraska, Relic Seeker
+4 Concealed Courtyard
+4 Evolving Wilds
+1 Forest
+1 Ifnir Deadlands
+5 Plains
+4 Shefet Dunes
+3 Swamp
+[Sideboard]
+3 Angel of Sanctions
+2 Arguel's Blood Fast
+4 Duress
+2 Fragmentize
+2 Lost Legacy
+2 Sunscourge Champion

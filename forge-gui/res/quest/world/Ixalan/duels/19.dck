@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Robot19
+Title=Robot19
+Icon=Saladin.jpg
+Difficulty=Easy
+Description=Mardu Vehicles 
+Deck Type=constructed
+
+[Main]
+4 Bomat Courier
+2 Glory-Bound Initiate
+2 Hazoret the Fervent
+1 Pia Nalaar
+4 Ruin Raider
+4 Scrapheap Scrounger
+4 Toolcraft Exemplar
+1 Aethersphere Harvester
+4 Heart of Kiran
+4 Fatal Push
+4 Unlicensed Disintegration
+2 Chandra, Torch of Defiance
+4 Aether Hub
+3 Canyon Slough
+4 Concealed Courtyard
+4 Inspiring Vantage
+3 Plains
+4 Spire of Industry
+2 Swamp
+[Sideboard]
+2 Abrade
+2 Aethersphere Harvester
+4 Duress
+2 Glorybringer
+2 Magma Spray
+1 Skysovereign, Consul Flagship
+2 Sunscourge Champion

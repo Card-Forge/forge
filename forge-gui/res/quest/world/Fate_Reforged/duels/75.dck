@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Jacob Grimm
+Title=Jacob Grimm
+Icon=Jacob Grimm.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/2015_Modern_State_Championships_-_Montana/Travis_Thomas_-_Red_Deck_Wins_(Modern,_#226042).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+1 Lightning Helix
+4 Searing Blaze
+2 Shard Volley
+3 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Bloodstained Mire
+3 Clifftop Retreat
+5 Mountain
+3 Sacred Foundry
+1 Stomping Ground
+[Sideboard]
+3 Ash Zealot
+2 Boros Reckoner
+2 Destructive Revelry
+1 Outpost Siege
+3 Wear // Tear

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Zatanna
+Title=Zatanna
+Icon=Zatanna.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Avignon_-_Omnath_Control_(Modern,_#1090604).dck
+Deck Type=constructed
+
+[Main]
+4 Omnath, Locus of Creation
+4 Uro, Titan of Nature's Wrath
+1 Mana Leak
+1 Lightning Bolt
+1 Cryptic Command
+3 Path to Exile
+4 Force of Negation
+4 Growth Spiral
+3 Time Warp
+1 Jace, the Mind Sculptor
+2 Teferi, Hero of Dominaria
+2 Teferi, Time Raveler
+4 Wrenn and Six
+1 Breeding Pool
+1 Forest
+1 Hallowed Fountain
+1 Island
+1 Polluted Delta
+1 Steam Vents
+1 Temple Garden
+2 Raugrin Triome
+2 Ketria Triome
+3 Mystic Sanctuary
+4 Scalding Tarn
+4 Misty Rainforest
+4 Flooded Strand
+[Sideboard]
+2 Veil of Summer
+2 Lightning Bolt
+2 Ancient Grudge
+2 Celestial Purge
+2 Mystical Dispute
+2 Soul-Guide Lantern
+3 Aether Gust

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Jubilee
+Title=Jubilee
+Icon=Jubilee.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/SCG_Super_IQ_-_Kissimmee,_FL/Sam_Lefevre_-_Bant_(Standard,_#633625).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Archangel Avacyn
+2 Bounding Krasis
+4 Duskwatch Recruiter
+3 Jace, Vryn's Prodigy
+2 Nissa, Vastwood Seer
+4 Reflector Mage
+4 Spell Queller
+4 Sylvan Advocate
+2 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+1 Ojutai's Command
+3 Canopy Vista
+4 Evolving Wilds
+4 Forest
+2 Island
+2 Lumbering Falls
+3 Plains
+4 Prairie Stream
+3 Yavimaya Coast
+[Sideboard]
+2 Aerial Volley
+2 Declaration in Stone
+1 Dispel
+1 Dragonlord Dromoka
+3 Lambholt Pacifist
+2 Negate
+3 Tragic Arrogance

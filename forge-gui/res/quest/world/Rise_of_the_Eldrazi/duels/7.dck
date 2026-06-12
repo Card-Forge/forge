@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Odin
+Title=Odin
+Icon=Odin.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/Nationals_2010_-_Ukrainian/Oleg_Chorny_-_UW_Tapout_(Standard,_#1246).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+4 Knight of the White Orchid
+4 Wall of Omens
+4 Fieldmist Borderpost
+3 Path to Exile
+3 Day of Judgment
+2 Martial Coup
+2 Mind Spring
+3 Oblivion Ring
+4 Spreading Seas
+2 Elspeth, Knight-Errant
+3 Jace, the Mind Sculptor
+4 Celestial Colonnade
+4 Glacial Fortress
+6 Island
+7 Plains
+1 Tectonic Edge
+[Sideboard]
+2 Emeria Angel
+2 Kor Firewalker
+3 Kor Sanctifiers
+3 Luminarch Ascension
+3 Negate

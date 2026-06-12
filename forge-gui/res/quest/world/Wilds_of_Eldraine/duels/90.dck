@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Firestorm
+Title=Firestorm
+Icon=Firestorm.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Cameron_Lamont_-_RB_Scam_(Modern,_#1753949).dck
+Deck Type=constructed
+
+[Main]
+4 Dauthi Voidwalker
+4 Fable of the Mirror-Breaker
+4 Fury
+4 Grief
+1 Kroxa, Titan of Death's Hunger
+4 Orcish Bowmasters
+4 Ragavan, Nimble Pilferer
+1 Feign Death
+2 Lightning Bolt
+4 Not Dead After All
+3 Terminate
+1 Undying Malice
+4 Thoughtseize
+3 Blackcleave Cliffs
+4 Blood Crypt
+2 Bloodstained Mire
+2 Marsh Flats
+3 Polluted Delta
+3 Snow-Covered Swamp
+1 Takenuma, Abandoned Mire
+2 Verdant Catacombs
+[Sideboard]
+3 Blood Moon
+3 Chalice of the Void
+2 Engineered Explosives
+1 Fatal Push
+1 Hidetsugu Consumes All
+1 Kolaghan's Command
+3 Leyline of the Void
+1 Sheoldred, the Apocalypse

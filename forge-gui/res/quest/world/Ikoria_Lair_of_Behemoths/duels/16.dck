@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=PresterJohn
+Title=PresterJohn
+Icon=PresterJohn.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Akimasa_Yamamoto_-_Mono_Green_(Standard,_#992600).dck
+Deck Type=constructed
+
+[Main]
+4 Syr Faren, the Hengehammer
+4 Stonecoil Serpent
+4 Questing Beast
+4 Pelt Collector
+4 Lovestruck Beast
+4 Gingerbrute
+4 Gemrazer
+4 Barkhide Troll
+3 Titanic Growth
+4 Giant Growth
+1 Castle Garenbrig
+20 Forest
+[Sideboard]
+2 Kraul Harpooner
+3 Thrash // Threat
+3 Soul-Guide Lantern
+3 Oakhame Adversary
+4 Ram Through

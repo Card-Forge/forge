@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Storytime_-_Reanimator_(Modern,_#1165539)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Insolent Neonate
+4 Karmic Guide
+4 Merchant of the Vale
+4 Seasoned Pyromancer
+4 Archon of Cruelty
+4 Fatal Push
+4 Persist
+4 Thoughtseize
+4 Unmarked Grave
+2 Goblin Bombardment
+1 Godless Shrine
+1 Blood Crypt
+1 Arid Mesa
+1 Savai Triome
+2 Plains
+2 Sacred Foundry
+2 Swamp
+4 Marsh Flats
+4 Bloodstained Mire
+4 Blackcleave Cliffs
+[Sideboard]
+2 Collective Brutality
+2 Liliana of the Veil
+2 Damn
+2 Soul-Guide Lantern
+3 Fracture
+4 Blood Moon

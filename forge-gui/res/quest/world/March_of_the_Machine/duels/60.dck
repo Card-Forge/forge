@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Robin
+Title=Robin
+Icon=Robin.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/Ben_Powell_-_Azorius_Hammer_(Modern,_#1634402)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Esper Sentinel
+2 Memnite
+3 Ornithopter
+2 Giver of Runes
+1 The Reality Chip
+1 Kemba, Kha Enduring
+4 Stoneforge Mystic
+4 Puresteel Paladin
+1 Shadowspear
+1 Sword of Fire and Ice
+1 Kaldra Compleat
+2 Springleaf Drum
+4 Colossus Hammer
+2 Surge of Salvation
+2 Spell Pierce
+4 Sigarda's Aid
+4 Urza's Saga
+4 Marsh Flats
+4 Seachrome Coast
+2 Hallowed Fountain
+3 Inkmoth Nexus
+1 Eiganjo, Seat of the Empire
+4 Plains
+[Sideboard]
+2 Spell Pierce
+1 Pithing Needle
+1 Relic of Progenitus
+2 Path to Exile
+2 March of Otherworldly Light
+4 Sanctifier en-Vec
+3 Lavinia, Azorius Renegade

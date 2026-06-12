@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Amphibian
+Title=Amphibian
+Icon=Amphibian.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/LegenVD_-_Faeries_(Standard,_#1739015).dck
+Deck Type=constructed
+
+[Main]
+4 Faerie Dreamthief
+4 Faerie Mastermind
+2 Faerie Vandal
+1 Halo Forager
+2 Obyra, Dreaming Duelist
+2 Talion, the Kindly Lord
+4 Talion's Messenger
+2 Sleep-Cursed Faerie
+2 Cut Down
+2 Faerie Fencing
+3 Go for the Throat
+2 Make Disappear
+4 Spell Stutter
+4 Ego Drain
+4 Darkslick Shores
+4 Island
+1 Otawara, Soaring City
+4 Shipwreck Marsh
+4 Swamp
+1 Takenuma, Abandoned Mire
+4 Underground River
+[Sideboard]

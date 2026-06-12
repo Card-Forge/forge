@@ -33,9 +33,8 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             if (logic.equals("CursedScroll")) {
                 if (SpecialCardAi.CursedScroll.consider(ai, sa)) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -103,7 +102,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
         final CardDb cardDb = StaticData.instance().getCommonCards();
 
         for (ICardFace face : faces) {
-            final CardRules rules = cardDb.getRules(face.getName());
+            final CardRules rules = cardDb.getRulesOrElseUnsupported(face.getName());
             boolean isOther = rules.getOtherPart() == face;
             final PaperCard paper = cardDb.getCard(rules.getName());
             final Card card = Card.fromPaperCard(paper, ai);

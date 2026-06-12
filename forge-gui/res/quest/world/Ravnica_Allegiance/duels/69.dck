@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Waterlord
+Title=Waterlord
+Icon=Waterlord.jpg
+Difficulty=Very Hard
+Description=./Modern/Ravnica_Allegiance/Adam_Johnson_-_Orzhov_Eldrazi_(Modern,_#792085).dck
+Deck Type=constructed
+
+[Main]
+4 Tidehollow Sculler
+1 Blade Splicer
+4 Eldrazi Displacer
+4 Flickerwisp
+4 Leonin Arbiter
+4 Thought-Knot Seer
+3 Wasteland Strangler
+4 Thalia, Guardian of Thraben
+1 Thalia, Heretic Cathar
+4 Aether Vial
+4 Path to Exile
+2 Plains
+1 Swamp
+4 Caves of Koilos
+4 Concealed Courtyard
+4 Eldrazi Temple
+4 Ghost Quarter
+1 Godless Shrine
+3 Shambling Vent
+[Sideboard]
+1 Burrenton Forge-Tender
+2 Mirran Crusader
+3 Rest in Peace
+2 Stony Silence
+1 Dismember
+1 Fatal Push
+1 Settle the Wreckage
+2 Kambal, Consul of Allocation
+1 Gideon, Ally of Zendikar
+1 Kaya, Orzhov Usurper

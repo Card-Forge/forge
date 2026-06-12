@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Robot96
+Title=Robot96
+Icon=Orunmila.jpg
+Difficulty=Easy
+Description=Dannycord 
+Deck Type=constructed
+
+[Main]
+3 Ahn-Crop Crasher
+4 Bomat Courier
+2 Captain Lannery Storm
+2 Earthshaker Khenra
+4 Glory-Bound Initiate
+2 Glorybringer
+3 Hazoret the Fervent
+4 Honored Crop-Captain
+4 Toolcraft Exemplar
+3 Lightning Strike
+1 Magma Spray
+4 Shock
+1 Solemnity
+4 Inspiring Vantage
+14 Mountain
+5 Plains
+[Sideboard]
+4 Aerial Responder
+1 Ahn-Crop Crasher
+1 Captain Lannery Storm
+1 Lightning Strike
+1 Magma Spray
+2 Rampaging Ferocidon
+1 Sky Terror
+3 Solemnity

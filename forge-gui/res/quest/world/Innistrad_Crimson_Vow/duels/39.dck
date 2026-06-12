@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Brekyirihunuade
+Title=Brekyirihunuade
+Icon=Brekyirihunuade.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Daniel_Hodson_-_Boros_Aggro_(Standard,_#1235610).dck
+Deck Type=constructed
+
+[Main]
+2 Thalia, Guardian of Thraben
+2 Parish-Blade Trainee
+4 Cemetery Gatekeeper
+4 Ollenbock Escort
+4 Drogskol Infantry
+4 Twinblade Geist
+2 Fierce Retribution
+2 Abrade
+3 Rending Flame
+3 Flame-Blessed Bolt
+3 Lantern Flare
+3 Reckless Impulse
+3 Evolving Wilds
+3 Sundown Pass
+7 Mountain
+11 Plains
+[Sideboard]
+1 Rending Flame
+1 Stensia Uprising
+1 Cemetery Protector
+3 Lightning Wolf
+3 Magma Pummeler
+3 Sigarda's Imprisonment
+3 Circle of Confinement

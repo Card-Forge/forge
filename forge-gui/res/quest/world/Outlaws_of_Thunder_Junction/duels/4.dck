@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Aquaman
+Title=Aquaman
+Icon=Aquaman.jpg
+Difficulty=Easy
+Description=./Standard/Outlaws_of_Thunder_Junction/Foo_ZhiJie_-_UR_Spell_(Standard,_#2010332).dck
+Deck Type=constructed
+
+[Main]
+3 Delver of Secrets
+4 Monastery Swiftspear
+4 Kumano Faces Kakkazan
+4 Ledger Shredder
+3 Slickshot Show-Off
+2 Spell Pierce
+4 Consider
+4 Play with Fire
+3 Monstrous Rage
+4 Slick Sequence
+4 Sleight of Hand
+1 Proft's Eidetic Memory
+2 Demonic Ruckus
+2 Island
+3 Mountain
+4 Spirebluff Canal
+4 Shivan Reef
+2 Stormcarved Coast
+1 Otawara, Soaring City
+1 Sokenzan, Crucible of Defiance
+1 Restless Spire
+[Sideboard]
+2 Negate
+2 Abrade
+1 Soul-Guide Lantern
+2 Unlicensed Hearse
+3 Third Path Iconoclast
+2 Urabrask's Forge
+2 Tishana's Tidebinder
+1 Scorching Shot

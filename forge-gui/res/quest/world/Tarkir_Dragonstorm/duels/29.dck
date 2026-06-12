@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Captain America
+Title=Captain America
+Icon=Captain America.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Brian_Dang_-_Mono-Red_Aggro_(Standard,_#2452748).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Manifold Mouse
+4 Screaming Nemesis
+4 Tersa Lightshatter
+4 Burst Lightning
+4 Lightning Strike
+4 Monstrous Rage
+1 Witchstalker Frenzy
+17 Mountain
+4 Rockface Village
+2 Soulstone Sanctuary
+[Sideboard]
+3 Case of the Crimson Pulse
+3 Lithomantic Barrage
+4 Sunspine Lynx
+4 Torch the Tower
+1 Witchstalker Frenzy

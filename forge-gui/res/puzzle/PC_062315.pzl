@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 062315 - Darker Than Black
 URL:http://www.gatheringmagic.com/seanuy-062315-darker-than-black/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:Win on this turn. Opponent has Sprinting Warbrute in hand.
 [state]
 ActivePlayer=human

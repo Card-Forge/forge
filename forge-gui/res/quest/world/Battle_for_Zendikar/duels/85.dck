@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Ghost Council
+Title=Ghost Council
+Icon=Ghost Council.jpg
+Difficulty=Very Hard
+Description=../Modern/Battle_for_Zendikar/axksel_-_Tokens_(Modern,_#660995).dck
+Deck Type=constructed
+
+[Main]
+3 Abbot of Keral Keep
+3 Butcher of the Horde
+4 Dark Confidant
+1 Grim Lavamancer
+1 Kolaghan's Command
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+1 Dreadbore
+3 Inquisition of Kozilek
+4 Lingering Souls
+3 Thoughtseize
+3 Bitterblossom
+2 Arid Mesa
+4 Blackcleave Cliffs
+1 Blood Crypt
+2 Bloodstained Mire
+1 Godless Shrine
+4 Marsh Flats
+1 Mountain
+1 Plains
+1 Sacred Foundry
+3 Shambling Vent
+1 Swamp
+1 Vault of the Archangel
+[Sideboard]
+2 Anger of the Gods
+1 Avalanche Riders
+2 Aven Mindcensor
+2 Blood Baron of Vizkopa
+3 Rest in Peace
+3 Stony Silence
+1 Timely Reinforcements
+1 Zealous Persecution

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Ala
+Title=Ala
+Icon=Ala.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/Angel_Zamora_-_Orzhov_Blink_(Modern,_#2370083).dck
+Deck Type=constructed
+
+[Main]
+1 Aven Interrupter
+2 Boggart Trawler
+4 Emperor of Bones
+3 Flickerwisp
+4 Overlord of the Balemurk
+4 Phelia, Exuberant Shepherd
+4 Solitude
+3 White Orchid Phantom
+3 Witch Enchanter
+3 Ketramose, the New Dawn
+1 Skyclave Apparition
+4 Aether Vial
+3 Ephemerate
+4 Fatal Push
+4 Marsh Flats
+4 Arid Mesa
+2 Plains
+2 Flagstones of Trokair
+2 Godless Shrine
+2 Shadowy Backstreet
+1 Swamp
+[Sideboard]
+2 Aven Interrupter
+2 March of Otherworldly Light
+3 Thoughtseize
+1 White Orchid Phantom
+3 Wrath of the Skies
+1 Elesh Norn, Mother of Machines
+1 Soulless Jailer
+1 Stony Silence
+1 Relic of Progenitus

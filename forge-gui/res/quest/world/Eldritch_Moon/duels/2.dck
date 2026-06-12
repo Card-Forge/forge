@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Blue Devil
+Title=Blue Devil
+Icon=Blue Devil.jpg
+Difficulty=Easy
+Description=Eldritch_Moon/SCG_Invitational_Qualifier_-_Newington,_CT/Oscar_Pereiro_-_Bant_(Standard,_#633378).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Archangel Avacyn
+4 Bounding Krasis
+4 Duskwatch Recruiter
+3 Gisela, the Broken Blade
+4 Reflector Mage
+4 Spell Queller
+4 Sylvan Advocate
+4 Dromoka's Command
+2 Unsubstantiate
+3 Tamiyo, Field Researcher
+3 Canopy Vista
+4 Evolving Wilds
+4 Forest
+1 Island
+2 Lumbering Falls
+4 Plains
+4 Prairie Stream
+3 Yavimaya Coast
+[Sideboard]
+1 Declaration in Stone
+2 Gideon, Ally of Zendikar
+2 Hallowed Moonlight
+2 Negate
+2 Thalia, Heretic Cathar
+2 Tragic Arrogance
+3 Void Grafter

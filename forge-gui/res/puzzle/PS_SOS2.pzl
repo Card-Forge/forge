@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Secrets of Strixhaven #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/05/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Remember that your solution must satisfy all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Growth Curve;Mutagen Man, Living Ooze;Run Away Together;Auroral Procession;Fractalize;Snakeskin Veil
+p0battlefield=Berta, Wise Extrapolator;Elusive Otter;Obyra's Attendants;Emil, Vastlands Roamer;Island;Island;Forest;Forest;Forest
+p1life=29
+p1battlefield=Startled Relic Sloth;Startled Relic Sloth;Practiced Scrollsmith

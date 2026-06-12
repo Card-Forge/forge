@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=The Shade
+Title=The Shade
+Icon=The Shade.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/DoctorofTime_-_Living_End_(Modern,_#1168085).dck
+Deck Type=constructed
+
+[Main]
+4 Brazen Borrower
+4 Curator of Mysteries
+4 Grief
+4 Horror of the Broken Lands
+4 Shardless Agent
+4 Street Wraith
+4 Striped Riverwinder
+4 Architects of Will
+2 Force of Negation
+4 Violent Outburst
+3 Living End
+1 Breeding Pool
+1 Blood Crypt
+1 Blackcleave Cliffs
+1 Island
+1 Overgrown Tomb
+1 Steam Vents
+1 Swamp
+1 Wooded Foothills
+1 Blooming Marsh
+2 Spirebluff Canal
+2 Gemstone Mine
+2 Botanical Sanctum
+4 Polluted Delta
+[Sideboard]
+1 Foundation Breaker
+2 Unmoored Ego
+2 Baleful Mastery
+3 Mystical Dispute
+3 Faerie Macabre
+4 Ingot Chewer

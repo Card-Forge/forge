@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Hameln
+Title=Hameln
+Icon=Hameln.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Andrea_Del_Moro_-_Grixis_Dragons_(Standard,_#1184838).dck
+Deck Type=constructed
+
+[Main]
+1 Inferno of the Star Mounts
+3 Kalain, Reclusive Painter
+3 Galazeth Prismari
+4 Shambling Ghast
+4 Bonecrusher Giant
+4 Goldspan Dragon
+1 Negate
+1 Magma Opus
+1 Soul Shatter
+1 Eliminate
+2 Prismari Command
+2 Heartless Act
+4 Deadly Dispute
+1 Shatterskull Smashing
+1 Extinction Event
+4 Alrund's Epiphany
+1 Island
+1 Swamp
+1 Mountain
+1 Zagoth Triome
+1 Temple of Malice
+2 Fabled Passage
+2 Hive of the Eye Tyrant
+2 Temple of the Dragon Queen
+4 Riverglide Pathway
+4 Blightstep Pathway
+4 Clearwater Pathway
+[Sideboard]
+1 Kaervek, the Spiteful
+1 Disdainful Stroke
+1 Test of Talents
+1 Negate
+2 Mystical Dispute
+2 Power Word Kill
+2 Duress
+2 Ox of Agonas
+3 Shadows' Verdict

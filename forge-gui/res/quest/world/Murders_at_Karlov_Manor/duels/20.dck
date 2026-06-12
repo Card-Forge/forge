@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dr Doom
+Title=Dr Doom
+Icon=Dr Doom.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Arca_de_Karn_-_Dimir_Midrange_(Standard,_#2007281).dck
+Deck Type=constructed
+
+[Main]
+1 Aclazotz, Deepest Betrayal
+4 Deep-Cavern Bat
+2 Ertai Resurrected
+3 Faerie Mastermind
+4 Preacher of the Schism
+1 Lazav, Wearer of Faces
+2 Sheoldred, the Apocalypse
+4 Spyglass Siren
+3 Gix, Yawgmoth Praetor
+3 Cut Down
+4 Go for the Throat
+4 Make Disappear
+3 Island
+3 Mirrex
+1 Otawara, Soaring City
+3 Shipwreck Marsh
+4 Darkslick Shores
+1 Takenuma, Abandoned Mire
+3 Swamp
+4 Underground River
+3 Restless Reef
+[Sideboard]
+1 Blot Out
+1 Cut Down
+1 Disdainful Stroke
+2 Duress
+1 Gix's Command
+2 Glistening Deluge
+1 Graveyard Trespasser
+1 Kaito Shizuki
+1 Liliana of the Veil
+1 Negate
+1 Spell Pierce
+2 Tishana's Tidebinder

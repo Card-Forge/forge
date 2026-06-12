@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Joe Kidd
+Title=Joe Kidd
+Icon=Joe Kidd.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Austin_Smith_-_Blue_Moon_(Modern,_#1210206).dck
+Deck Type=constructed
+
+[Main]
+3 Murktide Regent
+4 Snapcaster Mage
+1 Fire // Ice
+1 Prismari Command
+1 Spell Snare
+2 Cryptic Command
+3 Force of Negation
+3 Archmage's Charm
+4 Lightning Bolt
+4 Opt
+4 Thought Scour
+4 Counterspell
+2 Blood Moon
+2 Jace, the Mind Sculptor
+2 Sulfur Falls
+3 Steam Vents
+4 Misty Rainforest
+4 Scalding Tarn
+9 Island
+[Sideboard]
+1 Dragon's Claw
+1 Emrakul, the Aeons Torn
+1 Soul-Guide Lantern
+1 Shatterstorm
+1 Flame Slash
+2 Abrade
+2 Torpor Orb
+2 Anger of the Gods
+2 Flusterstorm
+2 Aether Gust

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Elegua
+Title=Elegua
+Icon=Elegua.jpg
+Difficulty=Easy
+Description=Gatecrash/SCG_Super_IQ_Indian_Trail/Stephen_Martin_-_Naya_Aggro_(Standard,_#52779).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boros Reckoner
+4 Burning-Tree Emissary
+4 Flinthoof Boar
+3 Ghor-Clan Rampager
+4 Hellrider
+4 Lightning Mauler
+4 Rakdos Cackler
+4 Stromkirk Noble
+3 Thalia, Guardian of Thraben
+2 Boros Charm
+4 Searing Spear
+4 Clifftop Retreat
+4 Mountain
+4 Rootbound Crag
+4 Sacred Foundry
+4 Stomping Ground
+[Sideboard]
+3 Domri Rade
+2 Mizzium Mortars
+4 Pillar of Flame
+2 Traitorous Blood
+3 Volcanic Strength

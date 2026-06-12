@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=MamanBrigitte
+Title=MamanBrigitte
+Icon=MamanBrigitte.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/Asiago_-_Azorius_Convoke_(Standard,_#2275245).dck
+Deck Type=constructed
+
+[Main]
+3 Steel Seraph
+4 Mockingbird
+4 Novice Inspector
+4 Regal Bunnicorn
+4 Spyglass Siren
+4 Warden of the Inner Sky
+2 Subterranean Schooner
+2 Unidentified Hovership
+1 Case of the Filched Falcon
+4 Sheltered by Ghosts
+1 Shardmage's Rescue
+4 Zoetic Glyph
+4 Seachrome Coast
+2 Restless Anchorage
+2 Plains
+5 Island
+4 Floodfarm Verge
+4 Adarkar Wastes
+2 Mirrex
+[Sideboard]
+2 Destroy Evil
+3 Tishana's Tidebinder
+2 Elspeth's Smite
+2 Loran of the Third Path
+2 Rest in Peace
+1 Get Lost
+2 No More Lies
+1 Disdainful Stroke

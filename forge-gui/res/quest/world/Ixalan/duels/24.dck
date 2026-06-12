@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Robot24
+Title=Robot24
+Icon=Gimli.jpg
+Difficulty=Medium
+Description=Esper 
+Deck Type=constructed
+
+[Main]
+4 Anointer Priest
+4 Champion of Wits
+1 Oketra the True
+3 Sacred Cat
+2 The Scarab God
+4 Renegade Map
+3 Fatal Push
+3 Fumigate
+1 Start // Finish
+4 Anointed Procession
+1 Cast Out
+4 Hidden Stockpile
+4 Legion's Landing
+4 Concealed Courtyard
+2 Drowned Catacomb
+4 Evolving Wilds
+2 Glacial Fortress
+1 Island
+4 Plains
+3 Shefet Dunes
+2 Swamp
+[Sideboard]
+2 Arguel's Blood Fast
+2 Crook of Condemnation
+3 Duress
+1 Lost Legacy
+3 Negate
+2 River's Rebuke
+2 Vraska's Contempt

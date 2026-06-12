@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Storm2
+Title=Storm2
+Icon=Storm2.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Abe_Kenichi_-_UBR_Control_(Standard,_#2385998).dck
+Deck Type=constructed
+
+[Main]
+1 Harvester of Misery
+4 Thundertrap Trainer
+3 Collector's Vault
+2 Cryptcaller Chariot
+4 Monument to Endurance
+1 Go for the Throat
+3 Stern Lesson
+3 Torch the Tower
+2 Three Steps Ahead
+1 Shoot the Sheriff
+2 Broadside Barrage
+1 Molten Collapse
+3 Deadly Cover-Up
+2 Ill-Timed Explosion
+3 Artist's Talent
+3 Island
+1 Swamp
+3 Mountain
+2 Shivan Reef
+2 Underground River
+1 Fabled Passage
+2 Raucous Theater
+2 Thundering Falls
+2 Undercity Sewers
+1 Blazemire Verge
+2 Gloomlake Verge
+4 Riverpyre Verge
+[Sideboard]
+2 Negate
+2 Pyroclasm
+2 Disdainful Stroke
+2 Withering Torment
+2 Ghost Vacuum
+1 Ancient Vendetta
+2 Chandra, Spark Hunter
+2 Skycrash

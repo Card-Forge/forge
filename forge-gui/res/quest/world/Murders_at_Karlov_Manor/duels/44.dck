@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Black Abott
+Title=Black Abott
+Icon=Black Abott.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/Brian_Flynn_-_Simic_Artifacts_(Standard,_#1981177).dck
+Deck Type=constructed
+
+[Main]
+4 Gingerbrute
+3 Kitesail Larcenist
+4 Sentinel of the Nameless City
+3 Spyglass Siren
+3 Surge Engine
+4 Teething Wurmlet
+3 Tough Cookie
+3 Agatha's Soul Cauldron
+3 Subterranean Schooner
+2 Hard-Hitting Question
+2 Case of the Filched Falcon
+4 Zoetic Glyph
+2 Boseiju, Who Endures
+3 Dreamroot Cascade
+2 Forest
+3 Island
+3 Mirrex
+2 Otawara, Soaring City
+3 Restless Vinestalk
+4 Yavimaya Coast
+[Sideboard]
+2 Atraxa's Fall
+2 Cryptic Coat
+1 Hard-Hitting Question
+2 Haywire Mite
+2 Repulsive Mutation
+2 Spell Pierce
+2 Syr Ginger, the Meal Ender
+2 Tishana's Tidebinder

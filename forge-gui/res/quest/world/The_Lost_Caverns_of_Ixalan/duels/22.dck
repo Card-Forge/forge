@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Eldrazi
+Title=Eldrazi
+Icon=Eldrazi.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Oscar_Fadlala_-_Pirate_King_Asunceno_(Standard,_#1973762).dck
+Deck Type=constructed
+
+[Main]
+4 Breeches, Eager Pillager
+3 Captain Storm, Cosmium Raider
+4 Goblin Tomb Raider
+4 Kitesail Larcenist
+2 Malcolm, Alluring Scoundrel
+2 Roaming Throne
+4 Spyglass Siren
+4 Staunch Crewmate
+4 Subterranean Schooner
+3 Spell Pierce
+2 Voltage Surge
+2 Witchstalker Frenzy
+2 Cavern of Souls
+5 Island
+1 Mirrex
+4 Mountain
+1 Otawara, Soaring City
+2 Restless Spire
+4 Shivan Reef
+1 Sokenzan, Crucible of Defiance
+2 Stormcarved Coast
+[Sideboard]
+3 End the Festivities
+4 Lithomantic Barrage
+3 Negate
+2 Witchstalker Frenzy
+3 Zoetic Glyph

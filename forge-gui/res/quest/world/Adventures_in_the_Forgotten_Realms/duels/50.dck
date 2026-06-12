@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Szadek
+Title=Szadek
+Icon=Szadek.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Brackmeister_-_Mono-Red_Goblins_(Standard,_#1220729).dck
+Deck Type=constructed
+
+[Main]
+3 Hobgoblin Captain
+4 Hulking Bugbear
+4 Hobgoblin Bandit Lord
+4 Goblin Javelineer
+4 Battle Cry Goblin
+4 Grotag Bug-Catcher
+4 Fissure Wizard
+4 Fireblade Charger
+4 You See a Pair of Goblins
+4 Frost Bite
+2 Den of the Bugbear
+19 Snow-Covered Mountain
+[Sideboard]
+3 Goblin Morningstar

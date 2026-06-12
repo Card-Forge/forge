@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Abassi
+Title=Abassi
+Icon=Abassi.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/Akroma_-_Mono_Black_(Standard,_#1574741).dck
+Deck Type=constructed
+
+[Main]
+2 Sheoldred, the Apocalypse
+3 Archfiend of the Dross
+1 Gix, Yawgmoth Praetor
+4 Graveyard Trespasser
+2 Evolved Sleeper
+4 Tenacious Underdog
+2 Phyrexian Fleshgorger
+4 Reckoner Bankbuster
+3 Go for the Throat
+2 Cut Down
+1 Gix's Command
+2 Annihilating Glare
+4 Invoke Despair
+1 Takenuma, Abandoned Mire
+24 Swamp
+1 Mishra's Foundry
+[Sideboard]
+1 Razorlash Transmogrant
+1 Gix's Command
+2 Soul Transfer
+2 Malicious Malfunction
+3 Unlicensed Hearse
+2 Parasitic Grasp
+3 Duress
+1 The Stone Brain

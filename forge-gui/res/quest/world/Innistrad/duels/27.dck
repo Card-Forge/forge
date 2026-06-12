@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Lisa Simpson
+Title=Lisa Simpson
+Icon=Lisa Simpson.jpg
+Difficulty=Easy
+Description=Innistrad/2011_States_Iowa/Luke_Potter_-_Bant_Aggro_(Standard,_#21157).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Geist of Saint Traft
+4 Mirran Crusader
+2 Priests of Norn
+3 Sword of War and Peace
+3 Feeling of Dread
+4 Mana Leak
+3 Mutagenic Growth
+4 Angelic Destiny
+3 Spectral Flight
+6 Forest
+4 Hinterland Harbor
+4 Razorverge Thicket
+4 Seachrome Coast
+4 Sunpetal Grove
+[Sideboard]
+3 Dismember
+3 Oblivion Ring
+3 Phyrexian Metamorph
+3 Thrun, the Last Troll
+3 Timely Reinforcements

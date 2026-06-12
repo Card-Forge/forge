@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Tarzan
+Title=Tarzan
+Icon=Tarzan.jpg
+Difficulty=Easy
+Description=./Standard/Dominaria_United/Alberto_Souza_de_Almeida_-_Mono-White_Aggro_(Standard,_#1460563).dck
+Deck Type=constructed
+
+[Main]
+1 Sanctuary Warden
+1 Sungold Sentinel
+2 Brutal Cathar
+2 Serra Paragon
+3 Spirited Companion
+4 Ambitious Farmhand
+4 The Restoration of Eiganjo
+2 Reckoner Bankbuster
+1 March of Otherworldly Light
+1 Valorous Stance
+3 Fateful Absence
+2 Farewell
+3 Touch the Spirit Realm
+4 Wedding Announcement
+2 Elspeth Resplendent
+4 The Wandering Emperor
+1 Field of Ruin
+3 Eiganjo, Seat of the Empire
+17 Plains
+[Sideboard]
+1 Valorous Stance
+1 Fateful Absence
+1 Pithing Needle
+1 Unlicensed Hearse
+1 March of Otherworldly Light
+1 Sungold Sentinel
+2 Farewell
+2 Banishing Slash
+2 Curse of Silence
+3 Sunset Revelry

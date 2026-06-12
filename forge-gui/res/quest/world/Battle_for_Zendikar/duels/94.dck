@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=The Torpor Orb
+Title=The Torpor Orb
+Icon=The Torpor Orb.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/Standard_Daily_#9286433/aytor_92_-_aytor_92_(4-0)_(Modern,_#519519).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Hangarback Walker
+4 Knight of the White Orchid
+3 Wingmate Roc
+3 Murderous Cut
+3 Secure the Wastes
+1 Ultimate Price
+1 Duress
+1 Painful Truths
+4 Silkwrap
+3 Stasis Snare
+4 Gideon, Ally of Zendikar
+1 Ob Nixilis Reignited
+2 Sorin, Solemn Visitor
+2 Caves of Koilos
+4 Flooded Strand
+4 Plains
+4 Polluted Delta
+2 Prairie Stream
+1 Scoured Barrens
+4 Shambling Vent
+2 Sunken Hollow
+3 Swamp
+[Sideboard]
+1 Arashin Cleric
+2 Disdainful Stroke
+1 Dispel
+1 Hallowed Moonlight
+1 Hidden Dragonslayer
+2 Infinite Obliteration
+1 Languish
+1 Negate
+1 Self-Inflicted Wound
+1 Surge of Righteousness
+1 Transgress the Mind
+1 Valorous Stance

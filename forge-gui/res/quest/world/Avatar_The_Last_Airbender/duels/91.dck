@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Quest for Ulas Temple
+Title=Quest for Ulas Temple
+Icon=Quest for Ulas Temple.jpg
+Difficulty=Hard
+Description=./Modern/Avatar_The_Last_Airbender/Jake_LaBrado_-_Izzet_Control_(Modern,_#2713299).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+4 Subtlety
+3 Tamiyo, Inquisitive Student
+2 Brazen Borrower
+2 Tishana's Tidebinder
+1 Wan Shi Tong, Librarian
+4 Counterspell
+4 Lightning Bolt
+3 Flame of Anor
+3 Force of Negation
+2 Consult the Star Charts
+2 Sink into Stupor
+2 Spell Snare
+2 Stern Scolding
+1 Spider-Sense
+5 Island
+4 Scalding Tarn
+3 Steam Vents
+3 Thundering Falls
+2 Flooded Strand
+2 Polluted Delta
+1 Mountain
+1 Otawara, Soaring City
+[Sideboard]
+4 Consign to Memory
+3 Mystical Dispute
+2 Dress Down
+2 Fire Magic
+2 Meltdown
+2 Surgical Extraction

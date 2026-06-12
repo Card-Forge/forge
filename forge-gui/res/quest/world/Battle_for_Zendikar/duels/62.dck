@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Krypto
+Title=Krypto
+Icon=Krypto.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/Standard_Constructed_League/klupicki_-_klupicki_(5-0)_(Modern,_#518390).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Den Protector
+4 Siege Rhino
+4 Warden of the First Tree
+2 Wingmate Roc
+4 Abzan Charm
+2 Murderous Cut
+2 Ultimate Price
+4 Silkwrap
+4 Gideon, Ally of Zendikar
+2 Canopy Vista
+2 Forest
+4 Llanowar Wastes
+3 Plains
+4 Shambling Vent
+1 Smoldering Marsh
+2 Swamp
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Arashin Cleric
+3 Duress
+3 Hallowed Moonlight
+1 Ob Nixilis Reignited
+1 Painful Truths
+3 Self-Inflicted Wound
+1 Tasigur, the Golden Fang
+1 Transgress the Mind

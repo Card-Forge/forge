@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Totoro
+Title=Totoro
+Icon=Totoro.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Chris_Chao_-_Rb_Scam_(Modern,_#1746450).dck
+Deck Type=constructed
+
+[Main]
+4 Dauthi Voidwalker
+4 Fury
+4 Grief
+1 Kroxa, Titan of Death's Hunger
+4 Orcish Bowmasters
+4 Ragavan, Nimble Pilferer
+4 Fable of the Mirror-Breaker
+1 Fatal Push
+1 Feign Death
+2 Lightning Bolt
+3 Not Dead After All
+2 Terminate
+2 Undying Malice
+4 Thoughtseize
+4 Blackcleave Cliffs
+4 Blood Crypt
+4 Bloodstained Mire
+4 Polluted Delta
+3 Swamp
+1 Takenuma, Abandoned Mire
+[Sideboard]
+1 Alpine Moon
+3 Blood Moon
+2 Chalice of the Void
+1 Engineered Explosives
+2 Hidetsugu Consumes All
+1 Kolaghan's Command
+4 Leyline of the Void
+1 Sheoldred, the Apocalypse

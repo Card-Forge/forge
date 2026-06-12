@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Izzet-precon
+Title=Izzet-precon
+Icon=Izzet-precon.jpg
+Difficulty=Easy
+Description=./Standard/Outlaws_of_Thunder_Junction/Adam_Saba_-_Azorius_Control_(Standard,_#2076162).dck
+Deck Type=constructed
+
+[Main]
+1 Tishana's Tidebinder
+4 No More Lies
+4 Memory Deluge
+4 Three Steps Ahead
+3 March of Otherworldly Light
+4 Deduce
+2 Get Lost
+3 Sunfall
+1 Depopulate
+2 Temporary Lockdown
+4 The Wandering Emperor
+1 Jace, the Perfected Mind
+4 Deserted Beach
+2 Adarkar Wastes
+4 Restless Anchorage
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+4 Field of Ruin
+4 Plains
+4 Island
+2 Seachrome Coast
+1 Mirrex
+[Sideboard]
+2 Chrome Host Seedshark
+1 Dust Animus
+2 Elspeth's Smite
+2 Temporary Lockdown
+2 Kutzil's Flanker
+2 Negate
+2 Tishana's Tidebinder
+1 Unlicensed Hearse
+1 Get Lost

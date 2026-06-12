@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Firestorm
+Title=Firestorm
+Icon=Firestorm.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/Modern_Constructed_League/Andreas_Mueller_-_Andreas_Mueller_(5-0)_(Modern,_#613151).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Glistener Elf
+4 Noble Hierarch
+4 Phyrexian Crusader
+4 Plague Stinger
+3 Abrupt Decay
+3 Become Immense
+3 Groundswell
+3 Might of Old Krosa
+4 Vines of Vastwood
+4 Inquisition of Kozilek
+3 Rancor
+1 Forest
+4 Inkmoth Nexus
+4 Overgrown Tomb
+2 Pendelhaven
+2 Swamp
+1 Urborg, Tomb of Yawgmoth
+2 Verdant Catacombs
+1 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Carrion Call
+2 Darkblast
+2 Dismember
+4 Duress
+3 Nature's Claim
+2 Pulse of Murasa
+1 Spellskite

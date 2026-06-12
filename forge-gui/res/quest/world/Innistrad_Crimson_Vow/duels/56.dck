@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Shanna
+Title=Shanna
+Icon=Shanna.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/Chris_Kosmowski_-_Bant_Infect_(Modern,_#1363020).dck
+Deck Type=constructed
+
+[Main]
+4 Noble Hierarch
+4 Blighted Agent
+4 Ignoble Hierarch
+4 Glistener Elf
+1 Mordenkainen's Polymorph
+1 Temur Battle Rage
+3 Massive Might
+3 Serpentine Ambush
+3 Vines of Vastwood
+4 Blossoming Defense
+4 Mutagenic Growth
+2 Phytoburst
+3 Scale Up
+2 Rancor
+1 Hallowed Fountain
+1 Forest
+3 Temple Garden
+3 Windswept Heath
+4 Breeding Pool
+4 Inkmoth Nexus
+4 Misty Rainforest
+[Sideboard]
+3 Apostle's Blessing
+3 Chalice of the Void
+3 Pithing Needle
+3 Meddling Mage
+3 Teferi, Time Raveler

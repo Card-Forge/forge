@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Conan the Barbarian
+Title=Conan the Barbarian
+Icon=Conan the Barbarian.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Joshzigler23_-_Mono-Green_(Standard,_#2780166).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Icetill Explorer
+4 Llanowar Elves
+4 Mightform Harmonizer
+4 Sazh's Chocobo
+2 Surrak, Elusive Hunter
+4 Esper Origins
+2 Lumbering Worldwagon
+1 Royal Treatment
+4 Earthbender Ascension
+1 Hunter's Talent
+1 Sapling Nursery
+14 Forest
+4 Ba Sing Se
+4 Fabled Passage
+3 Escape Tunnel
+[Sideboard]
+3 Meltstrider's Resolve
+3 Mossborn Hydra
+2 Keen-Eyed Curator
+2 Origin of Metalbending
+2 Pawpatch Formation
+2 Soul-Guide Lantern
+1 Vivien Reid

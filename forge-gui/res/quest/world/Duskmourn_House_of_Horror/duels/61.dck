@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Conan the Barbarian
+Title=Conan the Barbarian
+Icon=Conan the Barbarian.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/Alex_Bianchi_-_Dimir_Unearth_(Modern,_#2273004).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+1 Graveyard Trespasser
+1 Murktide Regent
+3 Orcish Bowmasters
+4 Psychic Frog
+1 Bitter Triumph
+4 Consider
+4 Counterspell
+4 Fatal Push
+3 Force of Negation
+1 Sink into Stupor
+3 Spell Snare
+4 Thought Scour
+4 Unearth
+3 Bloodstained Mire
+3 Darkslick Shores
+2 Island
+4 Polluted Delta
+2 Scalding Tarn
+1 Swamp
+2 Undercity Sewers
+2 Watery Grave
+[Sideboard]
+4 Consign to Memory
+1 Darkblast
+2 Graveyard Trespasser
+2 Harbinger of the Seas
+1 Mystical Dispute
+2 Stern Scolding
+1 Surgical Extraction
+2 Toxic Deluge

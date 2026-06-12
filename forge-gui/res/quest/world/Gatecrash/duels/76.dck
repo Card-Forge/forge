@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Obatala
+Title=Obatala
+Icon=Obatala.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/IV_Torneo_Liga_Modern_-_Madrid/Hector_Sanz_-_Infect_(Modern,_#54412).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+2 Ichorclaw Myr
+4 Noble Hierarch
+4 Apostle's Blessing
+4 Groundswell
+4 Mutagenic Growth
+2 Prey's Vengeance
+3 Simic Charm
+4 Vines of Vastwood
+2 Rancor
+3 Wild Defiance
+4 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+4 Dismember
+4 Dispel
+1 Dryad Arbor
+3 Spellskite
+3 Torpor Orb

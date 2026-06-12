@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=SantaMuerte
+Title=SantaMuerte
+Icon=SantaMuerte.jpg
+Difficulty=Very Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/Andrea_Furini_-_Temur_Prowess_(Modern,_#2041561).dck
+Deck Type=constructed
+
+[Main]
+4 Dragon's Rage Channeler
+4 Monastery Swiftspear
+4 Soul-Scar Mage
+4 Slickshot Show-Off
+4 Mishra's Bauble
+4 Lava Dart
+4 Lightning Bolt
+2 Mutagenic Growth
+2 Unholy Heat
+4 Preordain
+4 Expressive Iteration
+2 Underworld Breach
+2 Arid Mesa
+1 Bloodstained Mire
+1 Fiery Islet
+4 Mountain
+4 Scalding Tarn
+3 Steam Vents
+2 Stomping Ground
+1 Wooded Foothills
+[Sideboard]
+2 Tormod's Crypt
+4 Pick Your Poison
+4 Spell Pierce
+1 Blood Moon
+2 Flame of Anor
+1 Magus of the Moon
+1 Jegantha, the Wellspring

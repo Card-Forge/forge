@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Pinky and the Brain
+Title=Pinky and the Brain
+Icon=Pinky and the Brain.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Gainsay_-_Treasures_(Standard,_#1370397).dck
+Deck Type=constructed
+
+[Main]
+1 Moonveil Regent
+1 Kappa Tech-Wrecker
+2 Professional Face-Breaker
+2 Ziatora, the Incinerator
+4 Jaspera Sentinel
+4 Goldspan Dragon
+4 Fable of the Mirror-Breaker
+4 Prosperous Innkeeper
+4 Magda, Brazen Outlaw
+4 Esika's Chariot
+4 Voltage Surge
+4 Shatterskull Smashing
+1 Boseiju, Who Endures
+1 Rockfall Vale
+2 Forest
+2 Lair of the Hydra
+4 Blightstep Pathway
+4 Ziatora's Proving Ground
+4 Darkbore Pathway
+4 Cragcrown Pathway
+[Sideboard]
+1 Tamiyo's Safekeeping
+1 Dragon's Fire
+1 Kappa Tech-Wrecker
+1 Ob Nixilis, the Adversary
+2 Go Blank
+2 Ray of Enfeeblement
+2 Duress
+2 Unleash the Inferno
+3 Riveteers Charm

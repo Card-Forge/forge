@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Chewbacca
+Title=Chewbacca
+Icon=Chewbacca.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/WMCQ_#2_-_Manille,_Philippines/Marco_Serafica_-_Zoo_(Modern,_#632210).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+3 Flinthoof Boar
+2 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+4 Reckless Bushwhacker
+2 Vexing Devil
+4 Wild Nacatl
+4 Atarka's Command
+4 Lightning Bolt
+2 Mutagenic Growth
+1 Path to Exile
+2 Arid Mesa
+4 Bloodstained Mire
+1 Forest
+1 Mountain
+2 Sacred Foundry
+3 Stomping Ground
+1 Temple Garden
+1 Windswept Heath
+3 Wooded Foothills
+[Sideboard]
+1 Ancient Grudge
+2 Destructive Revelry
+2 Kor Firewalker
+2 Lightning Helix
+1 Pyroclasm
+2 Rest in Peace
+3 Thalia, Guardian of Thraben

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Niv Mizzet
+Title=Niv Mizzet
+Icon=Niv Mizzet.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/Standard_Champs_#8396756/robokate_-_Big_Red_(Standard,_#264926).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+2 Goblin Heelcutter
+3 Goblin Rabblemaster
+3 Lightning Berserker
+4 Monastery Swiftspear
+2 Zurgo Bellstriker
+4 Lightning Strike
+4 Stoke the Flames
+4 Wild Slash
+4 Dragon Fodder
+4 Hordeling Outburst
+2 Impact Tremors
+20 Mountain
+[Sideboard]
+2 Arc Lightning
+1 Hall of Triumph
+4 Roast
+2 Scouring Sands
+3 Searing Blood
+2 Thunderbreak Regent

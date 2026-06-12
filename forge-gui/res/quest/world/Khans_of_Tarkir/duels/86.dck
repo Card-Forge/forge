@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Izzet-precon
+Title=Izzet-precon
+Icon=Izzet-precon.jpg
+Difficulty=Hard
+Description=../Modern/Khans_of_Tarkir/Modern_Daily_#8107851/BlueSkiesJ_-_Burn_(Modern,_#216483).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Boros Charm
+1 Flames of the Blood Hand
+4 Lightning Bolt
+4 Lightning Helix
+3 Searing Blaze
+1 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+6 Mountain
+4 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+4 Combust
+3 Destructive Revelry
+4 Kor Firewalker
+2 Searing Blood

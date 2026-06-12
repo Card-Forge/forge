@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sakpata
+Title=Sakpata
+Icon=Sakpata.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/Arcore_(MB)_-_5┬¬Tappa_PMCup(AGM17)/Redaelli_Marco_-_Red_Deck_Wins_(Modern,_#30286).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Ball Lightning
+4 Goblin Guide
+2 Hellspark Elemental
+2 Keldon Marauders
+4 Spark Elemental
+2 Flames of the Blood Hand
+4 Incinerate
+4 Lightning Bolt
+1 Magma Jet
+3 Searing Blaze
+2 Staggershock
+2 Volcanic Fallout
+2 Lava Spike
+4 Rift Bolt
+2 Genju of the Spires
+23 Mountain
+[Sideboard]
+1 Banefire
+2 Blasphemous Act
+3 Combust
+1 Demonfire
+3 Leyline of Punishment
+2 Nihil Spellbomb
+3 Smash to Smithereens

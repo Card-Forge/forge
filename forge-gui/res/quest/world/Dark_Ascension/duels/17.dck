@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Magnum
+Title=Magnum
+Icon=Magnum.jpg
+Difficulty=Medium
+Description=Dark_Ascension/Pro_Tour_Dark_Ascension_Top_Standard_Decks/Dominic_Morel_-_UW_Humans_(Standard,_#25977).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+4 Doomed Traveler
+4 Fiend Hunter
+4 Gideon's Lawkeeper
+4 Hero of Bladehold
+4 Leonin Relic-Warder
+4 Loyal Cathar
+4 Gather the Townsfolk
+4 Honor of the Pure
+1 Oblivion Ring
+3 Gavony Township
+12 Plains
+4 Razorverge Thicket
+4 Sunpetal Grove
+[Sideboard]
+2 Angelic Destiny
+1 Divine Offering
+2 Gideon Jura
+4 Mirran Crusader
+1 Revoke Existence
+1 Sword of Feast and Famine
+3 Sword of War and Peace

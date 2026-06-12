@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Saruman
+Title=Saruman
+Icon=Saruman.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/T-OPen_SCG_IQ_#3_Amsterdam_Main_Event_Standard/Alfredo_Rapetta_-_Tokens_(Standard,_#629787).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+1 Dragonlord Dromoka
+4 Hangarback Walker
+2 Hanweir Militia Captain
+4 Sylvan Advocate
+3 Tireless Tracker
+3 Dromoka's Command
+4 Secure the Wastes
+3 Oath of Nissa
+1 Quarantine Field
+1 Stasis Snare
+4 Gideon, Ally of Zendikar
+4 Nissa, Voice of Zendikar
+4 Canopy Vista
+2 Evolving Wilds
+7 Forest
+7 Plains
+4 Westvale Abbey
+[Sideboard]
+2 Angelic Purge
+3 Declaration in Stone
+3 Hallowed Moonlight
+2 Sigarda, Heron's Grace
+2 Tragic Arrogance

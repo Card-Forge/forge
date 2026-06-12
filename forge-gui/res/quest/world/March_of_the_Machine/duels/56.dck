@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Dr Strangelove
+Title=Dr Strangelove
+Icon=Dr Strangelove.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/bcs8995_-_Glimpse_Cascade_(Modern,_#1633648).dck
+Deck Type=constructed
+
+[Main]
+4 Chancellor of the Forge
+4 Wavesifter
+4 Shardless Agent
+4 Fury
+4 Seasoned Pyromancer
+4 Halo Forager
+4 Violent Outburst
+4 Glimpse of Tomorrow
+4 Invasion of Alara
+1 Sacred Foundry
+1 Steam Vents
+1 Breeding Pool
+1 Snow-Covered Forest
+4 Khalni Garden
+1 Blood Crypt
+1 Polluted Delta
+3 Wooded Foothills
+1 Overgrown Tomb
+1 Temple Garden
+1 Stomping Ground
+1 Raugrin Triome
+1 Zagoth Triome
+1 Snow-Covered Island
+4 Misty Rainforest
+1 Scalding Tarn
+[Sideboard]
+4 Teferi, Time Raveler
+2 Mystical Dispute
+2 Inevitable Betrayal
+3 Endurance
+4 Force of Vigor

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Saladin
+Title=Saladin
+Icon=Saladin.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/1-3drop_-_Jeskai_Control_(Standard,_#770795).dck
+Deck Type=constructed
+
+[Main]
+3 Crackling Drake
+2 Niv-Mizzet, Parun
+2 Chemister's Insight
+2 Essence Scatter
+1 Expansion // Explosion
+1 Fiery Cannonade
+4 Ionize
+1 Negate
+4 Opt
+4 Shivan Fire
+4 Deafening Clarion
+2 Divination
+1 Star of Extinction
+1 Search for Azcanta
+3 Teferi, Hero of Dominaria
+4 Clifftop Retreat
+4 Glacial Fortress
+4 Island
+2 Mountain
+4 Sacred Foundry
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+1 Cleansing Nova
+1 Dream Eater
+1 Fiery Cannonade
+2 Invoke the Divine
+2 Justice Strike
+1 Lyra Dawnbringer
+2 Negate
+1 Ral, Izzet Viceroy
+1 Seal Away
+1 Search for Azcanta
+2 Star of Extinction

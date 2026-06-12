@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Wolverine
+Title=Wolverine
+Icon=Wolverine.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Adam_Ramsay_-_Jeskai_Control_(Standard,_#1051560).dck
+Deck Type=constructed
+
+[Main]
+4 Dream Trawler
+4 Glass Casket
+4 Mazemind Tome
+2 Spikefield Hazard
+2 Mystical Dispute
+2 Negate
+2 Essence Scatter
+2 Shatter the Sky
+4 Transmogrify
+3 Elspeth Conquers Death
+4 Omen of the Sun
+4 The Birth of Meletis
+4 Shark Typhoon
+4 Omen of the Sea
+2 Lukka, Coppercoat Outcast
+1 Castle Vantress
+2 Castle Ardenvale
+2 Temple of Enlightenment
+2 Mountain
+4 Fabled Passage
+4 Plains
+4 Needleverge Pathway
+4 Riverglide Pathway
+4 Raugrin Triome
+6 Island
+[Sideboard]
+1 Yorion, Sky Nomad
+2 Scorching Dragonfire
+2 Essence Scatter
+2 Mystical Dispute
+2 Negate
+2 Ox of Agonas
+2 Brazen Borrower
+2 Shatter the Sky

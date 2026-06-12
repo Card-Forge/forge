@@ -3,7 +3,7 @@ Name:MTG Puzzles #03 - Crews Control
 URL:https://mtgpuzzles.com/puzzle/3
 Goal:Win
 Turns:1
-Difficulty:Medium
+Difficulty:Uncommon
 Description:Win this turn. The Illusions are winning! Saddle up your creatures and become victorious!
 [state]
 turn=1

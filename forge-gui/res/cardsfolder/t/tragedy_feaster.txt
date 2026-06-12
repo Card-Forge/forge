@@ -1,0 +1,11 @@
+Name:Tragedy Feaster
+ManaCost:2 B B
+Types:Creature Demon
+PT:7/6
+K:Trample
+K:Ward:Discard<1/Card>
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Infusion — At the beginning of your end step, sacrifice a permanent unless you gained life this turn.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Permanent | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHints:Ability$LifeGain
+Oracle:Trample\nWard—Discard a card.\nInfusion — At the beginning of your end step, sacrifice a permanent unless you gained life this turn.

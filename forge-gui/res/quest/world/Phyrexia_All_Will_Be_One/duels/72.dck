@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Peregrin Took
+Title=Peregrin Took
+Icon=Peregrin Took.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Gaku_Oohashi_-_Four-color_Elementals_(Modern,_#1576099).dck
+Deck Type=constructed
+
+[Main]
+2 Risen Reef
+4 Omnath, Locus of Creation
+4 Felidar Guardian
+4 Solitude
+1 Fury
+1 Elesh Norn, Mother of Machines
+3 Eladamri's Call
+4 Oath of Nissa
+4 Leyline Binding
+4 Wrenn and Six
+4 Teferi, Time Raveler
+3 Saheeli Rai
+4 Wooded Foothills
+4 Windswept Heath
+3 Flooded Strand
+1 Cavern of Souls
+1 Boseiju, Who Endures
+1 Breeding Pool
+1 Stomping Ground
+1 Savai Triome
+1 Raugrin Triome
+1 Temple Garden
+1 Steam Vents
+1 Hallowed Fountain
+1 Forest
+1 Plains
+[Sideboard]
+1 Boseiju, Who Endures
+2 Flusterstorm
+1 Giant Killer
+1 Wear // Tear
+2 Endurance
+2 Force of Vigor
+1 Orvar, the All-Form
+1 Obsidian Charmaw
+2 Fury
+1 Engineered Explosives
+1 Emrakul, the Promised End

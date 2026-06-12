@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Bushwhacked
+Title=Bushwhacked
+Icon=Bushwhacked.jpg
+Difficulty=Hard
+Description=./Modern/Edge_of_Eternities/Ed_Gen_-_Sultai_Cosmofrog_(Modern,_#2583881).dck
+Deck Type=constructed
+
+[Main]
+1 Boggart Trawler
+3 Cecil, Dark Knight
+4 Psychic Frog
+4 Kishla Skimmer
+4 Cosmogoyf
+2 Graveyard Trespasser
+4 Relic of Progenitus
+4 Fatal Push
+1 Murderous Cut
+3 Spell Snare
+4 Counterspell
+4 Thoughtseize
+3 Preordain
+4 Misty Rainforest
+4 Polluted Delta
+4 Verdant Catacombs
+1 Swamp
+1 Island
+1 Breeding Pool
+1 Overgrown Tomb
+2 Watery Grave
+1 Undercity Sewers
+[Sideboard]
+4 Consign to Memory
+3 Pick Your Poison
+1 Toxic Deluge
+2 Fade from History
+1 Break the Ice
+3 Collector Ouphe
+1 Graveyard Trespasser

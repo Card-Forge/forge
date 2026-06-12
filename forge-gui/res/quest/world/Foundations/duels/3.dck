@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sharee
+Title=Sharee
+Icon=Sharee.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/Deguchi_Daisuke_-_WU_Aggro_(Standard,_#2281483).dck
+Deck Type=constructed
+
+[Main]
+2 Steel Seraph
+4 Regal Bunnicorn
+4 Warden of the Inner Sky
+4 Spyglass Siren
+4 Novice Inspector
+4 Mockingbird
+2 Subterranean Schooner
+4 Leyline Axe
+2 Get Lost
+4 Zoetic Glyph
+2 Case of the Filched Falcon
+1 Shardmage's Rescue
+1 Sheltered by Ghosts
+3 Plains
+3 Island
+4 Adarkar Wastes
+4 Seachrome Coast
+2 Restless Anchorage
+2 Fountainport
+4 Floodfarm Verge
+[Sideboard]
+2 Negate
+1 Disdainful Stroke
+2 Destroy Evil
+2 Loran of the Third Path
+3 Elspeth's Smite
+2 Tishana's Tidebinder
+3 Ghost Vacuum

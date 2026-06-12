@@ -1,0 +1,15 @@
+Name:The Ruinous Wrecking Crew
+ManaCost:X B R
+Types:Legendary Creature Human Villain
+PT:2/2
+K:etbCounter:P1P1:X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 0 | CharmNum$ X | Choices$ DBDiscard,DBLoseLife,DBDestroy,DBSac
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Discard a card, then draw a card.
+SVar:DBDraw:DB$ Draw
+SVar:DBLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SpellDescription$ Target opponent loses 2 life.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Card.token | ValidTgtDesc$ token | SpellDescription$ Destroy target token.
+SVar:DBSac:DB$ Sacrifice | Defined$ Player | SacValid$ Creature | SpellDescription$ Each player sacrifices a creature of their choice.
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:The Ruinous Wrecking Crew enters with X +1/+1 counters on it.\nWhen The Ruinous Wrecking Crew enters, choose up to X —\n• Discard a card, then draw a card.\n• Target opponent loses 2 life.\n• Destroy target token.\n• Each player sacrifices a creature of their choice.

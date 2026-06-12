@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Fred Flintstone
+Title=Fred Flintstone
+Icon=Fred Flintstone.jpg
+Difficulty=Easy
+Description=Zendikar/New_Year_Standard_Tournament/Panagiotis_Papadopoulos_-_USA_Control_(Standard,_#3010).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Sphinx of Jwar Isle
+4 Wall of Denial
+2 Double Negative
+4 Flashfreeze
+4 Lightning Bolt
+2 Path to Exile
+2 Divination
+2 Earthquake
+2 Mind Spring
+4 Spreading Seas
+3 Ajani Vengeant
+2 Jace Beleren
+4 Arid Mesa
+4 Glacial Fortress
+4 Island
+2 Mountain
+4 Plains
+4 Scalding Tarn
+4 Sejiri Refuge
+[Sideboard]
+4 Baneslayer Angel
+2 Essence Scatter
+3 Luminarch Ascension
+2 Mind Control
+2 Negate
+2 Swerve

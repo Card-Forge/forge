@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gold Finger
+Title=Gold Finger
+Icon=Gold Finger.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/AdamAntMTG_-_Golgari_Midrange_(Standard,_#961577).dck
+Deck Type=constructed
+
+[Main]
+3 Arboreal Grazer
+4 Cavalier of Thorns
+4 Leafkin Druid
+4 Questing Beast
+4 Shifting Ceratops
+3 Heartless Act
+3 Adventurous Impulse
+4 Casualties of War
+2 Karn, the Great Creator
+4 Nissa, Who Shakes the World
+2 Fabled Passage
+2 Indatha Triome
+4 Overgrown Tomb
+6 Swamp
+11 Forest
+[Sideboard]
+1 Bolas's Citadel
+1 God-Pharaoh's Statue
+1 Grafdigger's Cage
+1 Kaheera, the Orphanguard
+1 Shadowspear
+1 Soul-Guide Lantern
+1 The Great Henge
+2 Sorcerous Spyglass
+2 Duress
+2 Cry of the Carnarium
+2 Wilt

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Spike Spiegel
+Title=Spike Spiegel
+Icon=Spike Spiegel.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Bubuchi_Naila_-_UW_Artifact_Control_(Standard,_#1403060).dck
+Deck Type=constructed
+
+[Main]
+1 Network Terminal
+1 The Celestus
+3 Portable Hole
+4 Reckoner Bankbuster
+4 Mnemonic Sphere
+4 Moonsnare Prototype
+2 Fateful Absence
+3 March of Otherworldly Light
+4 Disruption Protocol
+4 Depopulate
+3 Tezzeret, Betrayer of Flesh
+3 The Wandering Emperor
+1 Cave of the Frost Dragon
+2 Eiganjo, Seat of the Empire
+2 Treasure Vault
+2 Hall of Storm Giants
+3 Plains
+4 Hengegate Pathway
+4 Deserted Beach
+6 Island
+[Sideboard]

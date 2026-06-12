@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Thing
+Title=The Thing
+Icon=The Thing.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/Modern_Turniers_vom_23.08.2011/Jonas_Rutz_-_5c_Zoo_(Modern,_#19149).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+4 Goblin Guide
+4 Kird Ape
+4 Loam Lion
+4 Tarmogoyf
+4 Wild Nacatl
+4 Lightning Bolt
+3 Lightning Helix
+4 Path to Exile
+4 Tribal Flames
+4 Arid Mesa
+1 Blood Crypt
+1 Hallowed Fountain
+4 Misty Rainforest
+2 Overgrown Tomb
+1 Plains
+1 Sacred Foundry
+4 Scalding Tarn
+2 Stomping Ground
+1 Temple Garden
+[Sideboard]
+2 Act of Aggression
+3 Deathmark
+3 Gaddock Teeg
+4 Thoughtseize
+2 Vexing Shusher

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Easy
+Description=./Standard/Outlaws_of_Thunder_Junction/Alex_Bell_-_Jund_Analyst_(Standard,_#2076185).dck
+Deck Type=constructed
+
+[Main]
+4 Nissa, Resurgent Animist
+4 Aftermath Analyst
+1 Shigeki, Jukai Visionary
+4 Splendid Reclamation
+4 Pillage the Bog
+4 Pitiless Carnage
+3 Worldsoul's Rage
+2 Gix's Command
+1 Terror Tide
+4 Spelunking
+4 Riveteers Overlook
+4 Cabaretti Courtyard
+3 Maestros Theater
+2 Echoing Deeps
+8 Forest
+7 Swamp
+1 Mountain
+[Sideboard]
+3 Pick Your Poison
+2 Tear Asunder
+1 Go for the Throat
+2 Cut Down
+2 Choking Miasma
+1 Titan of Industry
+3 Duress
+1 Titania, Voice of Gaea

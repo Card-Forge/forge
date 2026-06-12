@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Very Hard
+Description=../Modern/Kaladesh/Competitive_Modern_Constructed_League/aryaroohi_-_Burn_(Modern,_#656039).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+4 Bloodstained Mire
+2 Inspiring Vantage
+4 Mountain
+3 Sacred Foundry
+1 Scalding Tarn
+3 Wooded Foothills
+[Sideboard]
+3 Ensnaring Bridge
+2 Flames of the Blood Hand
+2 Lightning Helix
+3 Path to Exile
+3 Surgical Extraction
+2 Wear // Tear

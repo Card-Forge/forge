@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Captain America
+Title=Captain America
+Icon=Captain America.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/AHG_Captain_-_Rakdos_Sacrifice_(Standard,_#955981).dck
+Deck Type=constructed
+
+[Main]
+2 Lurrus of the Dream-Den
+4 Mayhem Devil
+4 Serrated Scorpion
+4 Whisper Squad
+4 Woe Strider
+4 Cauldron Familiar
+4 Witch's Oven
+3 Call of the Death-Dweller
+4 Claim the Firstborn
+3 Dead Weight
+2 Temple of Malice
+3 Castle Locthwain
+4 Mountain
+4 Fabled Passage
+4 Blood Crypt
+7 Swamp
+[Sideboard]
+1 Obosh, the Preypiercer
+2 Grafdigger's Cage
+2 Blazing Volley
+2 Act of Treason
+4 Duress
+4 Davriel, Rogue Shadowmage

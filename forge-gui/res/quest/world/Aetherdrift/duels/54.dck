@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Wonder Twins
+Title=Wonder Twins
+Icon=Wonder Twins.jpg
+Difficulty=Hard
+Description=./Modern/Aetherdrift/Yamamura_Toshiki_-_Rogue_(Modern,_#2385519).dck
+Deck Type=constructed
+
+[Main]
+4 Renegade Rallier
+3 Ranger-Captain of Eos
+3 Skyclave Apparition
+4 Solitude
+2 Extraction Specialist
+1 Haywire Mite
+4 Guide of Souls
+4 Ocelot Pride
+4 White Orchid Phantom
+4 Witch Enchanter
+1 Brightglass Gearhulk
+4 Ephemerate
+4 Birthing Ritual
+3 Plains
+1 Forest
+2 Flooded Strand
+4 Windswept Heath
+3 Temple Garden
+2 Flagstones of Trokair
+1 Boseiju, Who Endures
+2 Lush Portico
+[Sideboard]
+2 Surgical Extraction
+1 Collector Ouphe
+2 Drannith Magistrate
+1 Skyclave Apparition
+2 Sanctifier en-Vec
+2 Endurance
+1 Haywire Mite
+1 Elesh Norn, Mother of Machines
+3 Wrath of the Skies

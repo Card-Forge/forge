@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Robot43
+Title=Robot43
+Icon=Green Hornet.jpg
+Difficulty=Hard
+Description=Mardu 
+Deck Type=constructed
+
+[Main]
+4 Bomat Courier
+3 Hazoret the Fervent
+2 Pia Nalaar
+4 Scrapheap Scrounger
+4 Toolcraft Exemplar
+4 Veteran Motorist
+2 Aethersphere Harvester
+4 Heart of Kiran
+4 Lightning Strike
+3 Unlicensed Disintegration
+2 Chandra, Torch of Defiance
+3 Aether Hub
+1 Canyon Slough
+4 Concealed Courtyard
+4 Inspiring Vantage
+3 Mountain
+1 Plains
+3 Ramunap Ruins
+2 Shefet Dunes
+3 Spire of Industry
+[Sideboard]
+3 Authority of the Consuls
+1 Chandra, Torch of Defiance
+4 Duress
+2 Fumigate
+1 Hazoret the Fervent
+4 Rampaging Ferocidon

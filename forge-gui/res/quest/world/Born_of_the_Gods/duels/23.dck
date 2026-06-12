@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=The Kings Contest
+Title=The Kings Contest
+Icon=The Kings Contest.jpg
+Difficulty=Easy
+Description=Born_of_the_Gods/SCG_Invitational_Qualifier_-_San_Diego,_CA/Junyu_Li_-_Mono_Black_(Standard,_#70125).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Desecration Demon
+4 Gray Merchant of Asphodel
+1 Lifebane Zombie
+4 Nightveil Specter
+4 Pack Rat
+2 Bile Blight
+3 Devour Flesh
+4 Hero's Downfall
+1 Dreadbore
+1 Rakdos's Return
+4 Thoughtseize
+3 Underworld Connections
+4 Blood Crypt
+3 Mutavault
+1 Rakdos Guildgate
+1 Steam Vents
+12 Swamp
+4 Temple of Malice
+[Sideboard]
+2 Dark Betrayal
+2 Doom Blade
+4 Duress
+2 Erebos, God of the Dead
+1 Slaughter Games

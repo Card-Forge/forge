@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Genghis Khan
+Title=Genghis Khan
+Icon=Genghis Khan.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Doggo10358_-_Dimir_Midrange_(Standard,_#2002501).dck
+Deck Type=constructed
+
+[Main]
+1 Aclazotz, Deepest Betrayal
+4 Deep-Cavern Bat
+2 Ertai Resurrected
+3 Faerie Mastermind
+4 Gix, Yawgmoth Praetor
+2 Preacher of the Schism
+2 Sheoldred, the Apocalypse
+4 Spyglass Siren
+2 Tishana's Tidebinder
+3 Cut Down
+4 Go for the Throat
+4 Make Disappear
+1 Cavern of Souls
+4 Darkslick Shores
+2 Island
+3 Mirrex
+1 Otawara, Soaring City
+3 Restless Reef
+3 Shipwreck Marsh
+3 Swamp
+1 Takenuma, Abandoned Mire
+4 Underground River
+[Sideboard]
+2 Gix's Command
+1 Aclazotz, Deepest Betrayal
+2 Tishana's Tidebinder
+1 Night Clubber
+1 Liliana of the Veil
+3 Glistening Deluge
+1 Negate
+2 Disdainful Stroke
+2 Duress

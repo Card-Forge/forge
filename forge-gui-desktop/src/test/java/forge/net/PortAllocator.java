@@ -28,15 +28,6 @@ public class PortAllocator {
     // Maximum number of attempts to find an available port
     private static final int MAX_ATTEMPTS = 100;
 
-    /**
-     * Allocate an available port for testing.
-     *
-     * This method tries multiple ports until finding one that's available,
-     * helping avoid "Address already in use" errors in rapid test execution.
-     *
-     * @return an available port number
-     * @throws RuntimeException if no available port could be found
-     */
     public static int allocatePort() {
         return allocatePort(MAX_ATTEMPTS);
     }
@@ -81,7 +72,9 @@ public class PortAllocator {
         try (ServerSocket socket = new ServerSocket()) {
             // Enable address reuse to speed up port availability after close
             socket.setReuseAddress(true);
-            socket.bind(new InetSocketAddress("localhost", port));
+            // Bind to wildcard (all interfaces) to match Netty's b.bind(port);
+            // a loopback-only probe misses ports occupied on other interfaces.
+            socket.bind(new InetSocketAddress(port));
             return true;
         } catch (IOException e) {
             // Port is in use or otherwise unavailable

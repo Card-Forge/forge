@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/Bohe_-_Dimir_Delver_(Standard,_#1475681).dck
+Deck Type=constructed
+
+[Main]
+1 Ertai Resurrected
+4 Delver of Secrets
+4 Haughty Djinn
+1 Thirst for Discovery
+2 Ertai's Scorn
+2 Hero's Downfall
+2 Essence Scatter
+2 Negate
+3 Cut Down
+3 Rona's Vortex
+4 Make Disappear
+4 Impulse
+4 Fading Hope
+2 Kaito Shizuki
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+2 Xander's Lounge
+4 Shipwreck Marsh
+4 Swamp
+10 Island
+[Sideboard]
+1 Kotose, the Silent Spider
+1 Cut Down
+2 Negate
+2 Graveyard Trespasser
+2 Sheoldred, the Apocalypse
+2 Essence Scatter
+2 Duress
+3 Disdainful Stroke

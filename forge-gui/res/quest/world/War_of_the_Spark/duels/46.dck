@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Higgins
+Title=Higgins
+Icon=Higgins.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/18dindin_-_Izzet_Phoenix_(Standard,_#796669).dck
+Deck Type=constructed
+
+[Main]
+4 Arclight Phoenix
+2 Crackling Drake
+4 Dreadhorde Arcanist
+2 God-Eternal Kefnet
+4 Opt
+4 Shock
+2 Spell Pierce
+4 Chart a Course
+3 Crash Through
+3 Finale of Promise
+3 Lava Coil
+2 Tormenting Voice
+3 Warlord's Fury
+1 Saheeli, Sublime Artificer
+5 Island
+6 Mountain
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+1 Lava Coil
+2 Spell Pierce
+1 Beacon Bolt
+1 Disdainful Stroke
+4 Legion Warboss
+1 Lightning Strike
+3 Murmuring Mystic
+2 Narset, Parter of Veils

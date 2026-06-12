@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Higgins
+Title=Higgins
+Icon=Higgins.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/SCG_Invitational_Qualifier_Raleigh/Dylan_Donegan_-_B-G_Devotion_(Standard,_#75133).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Desecration Demon
+4 Gray Merchant of Asphodel
+4 Lifebane Zombie
+4 Pack Rat
+4 Abrupt Decay
+1 Bile Blight
+3 Devour Flesh
+3 Hero's Downfall
+4 Thoughtseize
+4 Underworld Connections
+1 Forest
+1 Golgari Guildgate
+4 Mutavault
+4 Overgrown Tomb
+11 Swamp
+4 Temple of Malady
+[Sideboard]
+3 Dark Betrayal
+3 Doom Blade
+4 Duress
+2 Erebos, God of the Dead
+1 Golgari Charm
+2 Whip of Erebos

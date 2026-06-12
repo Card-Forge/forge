@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Spiderman
+Title=Spiderman
+Icon=Spiderman.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/2radMTG_-_Izzet_Prowess_(Modern,_#2000088).dck
+Deck Type=constructed
+
+[Main]
+4 Dragon's Rage Channeler
+4 Soul-Scar Mage
+3 Sprite Dragon
+4 Monastery Swiftspear
+4 Lava Dart
+3 Mutagenic Growth
+4 Lightning Bolt
+4 Unholy Heat
+3 Spell Pierce
+4 Expressive Iteration
+4 Preordain
+2 Underworld Breach
+4 Bloodstained Mire
+1 Fiery Islet
+4 Wooded Foothills
+3 Mountain
+3 Steam Vents
+1 Scalding Tarn
+1 Stomping Ground
+[Sideboard]
+1 Dragon's Claw
+1 Flame of Anor
+1 Jegantha, the Wellspring
+4 Pick Your Poison
+2 Shattering Spree
+2 Alpine Moon
+1 Spell Pierce
+3 Soul-Guide Lantern

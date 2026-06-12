@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Scarecrow
+Title=Scarecrow
+Icon=Scarecrow.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/U_Kashin_-_WUB_Control_(Standard,_#2283023).dck
+Deck Type=constructed
+
+[Main]
+3 Beza, the Bounding Spring
+3 Go for the Throat
+3 Anoint with Affliction
+2 Get Lost
+4 No More Lies
+3 Three Steps Ahead
+1 Day of Judgment
+4 Sunfall
+4 Caretaker's Talent
+1 Liliana, Dreadhorde General
+1 The Eternal Wanderer
+1 Kaya, Intangible Slayer
+1 Archangel Elspeth
+1 Ashiok, Wicked Manipulator
+1 Kaito, Cunning Infiltrator
+1 Plains
+1 Island
+1 Swamp
+3 Concealed Courtyard
+1 Caves of Koilos
+4 Adarkar Wastes
+2 Underground River
+4 Darkslick Shores
+3 Seachrome Coast
+2 Restless Anchorage
+1 Meticulous Archive
+1 Shadowy Backstreet
+3 Fountainport
+[Sideboard]
+1 Negate
+3 Authority of the Consuls
+1 Confiscate
+1 Day of Judgment
+2 Rest in Peace
+1 Anoint with Affliction
+2 Breach the Multiverse
+1 Get Lost
+1 Three Steps Ahead
+2 Crystal Barricade

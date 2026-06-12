@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Redwall
+Title=Redwall
+Icon=Redwall.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Anton_Kuchumov_-_Red_Deck_Wins_(Standard,_#1626376).dck
+Deck Type=constructed
+
+[Main]
+4 Kumano Faces Kakkazan
+4 Monastery Swiftspear
+4 Phoenix Chick
+2 Kessig Flamebreather
+1 Khenra Spellspear
+4 Play with Fire
+4 Lightning Strike
+2 Stoke the Flames
+4 Ancestral Anger
+3 Strangle
+4 Reckless Impulse
+2 Invasion of Regatha
+21 Mountain
+1 Sokenzan, Crucible of Defiance
+[Sideboard]
+2 Lithomantic Barrage
+3 Rending Flame
+2 Vampires' Vengeance

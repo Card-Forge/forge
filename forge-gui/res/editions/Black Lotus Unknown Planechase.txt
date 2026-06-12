@@ -6,8 +6,8 @@ Type=Funny
 ScryfallCode=PUNK
 
 [cards]
-PLA001 C Artist Alley @
-PLA001a C Artist Alley @
+PLA001 C Artist Alley (Plane) @
+PLA001a C Artist Alley (Plane) @
 PLA002 C The Bean @
 PLA002a C The Bean @
 PLA003 C Black Lotus Lounge @

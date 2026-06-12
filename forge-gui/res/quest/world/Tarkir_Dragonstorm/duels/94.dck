@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Niv Mizzet
+Title=Niv Mizzet
+Icon=Niv Mizzet.jpg
+Difficulty=Very Hard
+Description=./Modern/Tarkir_Dragonstorm/Daniel_Wong_-_Mono-Blue_Combo_(Modern,_#2445186).dck
+Deck Type=constructed
+
+[Main]
+4 Devourer of Destiny
+4 Nulldrifter
+4 Tamiyo, Inquisitive Student
+4 Talisman of Dominance
+1 Talisman of Creativity
+1 Talisman of Progress
+4 Kozilek's Command
+3 Brainsurge
+1 Sink into Stupor
+4 Temporal Mastery
+4 Time Warp
+3 Lórien Revealed
+3 Jace, the Mind Sculptor
+2 Ugin, Eye of the Storms
+5 Island
+4 Eldrazi Temple
+4 Ugin's Labyrinth
+1 Flooded Strand
+1 Otawara, Soaring City
+1 Polluted Delta
+1 Scalding Tarn
+1 Undercity Sewers
+[Sideboard]
+4 Consign to Memory
+3 Mystical Dispute
+2 Ashiok, Dream Render
+2 Dismember
+2 Torpor Orb
+1 All Is Dust
+1 Force of Negation

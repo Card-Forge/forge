@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Seth
+Title=Seth
+Icon=Seth.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Alexander_Uy_-_Gruul_Deck_Wins_(Standard,_#798749).dck
+Deck Type=constructed
+
+[Main]
+2 Gruul Spellbreaker
+3 Goblin Chainwhirler
+4 Ghitu Lavarunner
+4 Runaway Steam-Kin
+4 Viashino Pyromancer
+4 Fanatical Firebrand
+2 Risk Factor
+3 Shock
+4 Lightning Strike
+4 Wizard's Lightning
+4 Light Up the Stage
+2 Chandra, Fire Artisan
+4 Rootbound Crag
+4 Stomping Ground
+12 Mountain
+[Sideboard]
+2 Tibalt, Rakish Instigator
+3 Status // Statue
+3 Lava Coil
+1 Forest
+2 Cindervines
+1 Risk Factor
+2 Gruul Spellbreaker
+1 Goblin Chainwhirler

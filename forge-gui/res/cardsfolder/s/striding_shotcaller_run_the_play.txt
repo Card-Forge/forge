@@ -1,0 +1,20 @@
+Name:Striding Shotcaller
+ManaCost:G U
+Types:Creature Troll Druid
+PT:0/4
+K:Reach
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigPrepare | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:Reach\nWhenever one or more creatures you control deal combat damage to a player, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Run the Play
+ManaCost:X G U
+Types:Sorcery
+A:SP$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on each of up to X target creatures. Those creatures gain flying until end of turn. Draw a card.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Flying | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+SVar:X:Count$xPaid
+Oracle:Put a +1/+1 counter on each of up to X target creatures. Those creatures gain flying until end of turn. Draw a card.

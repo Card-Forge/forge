@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Endora
+Title=Endora
+Icon=Endora.jpg
+Difficulty=Easy
+Description=Battle_for_Zendikar/PPTQ_Finibus_Terrae_&_The_Magic_Spot_-_Bari,_Italy/Paolo_Marchese_-_Red_Deck_Wins_(Standard,_#331225).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Abbot of Keral Keep
+1 Goblin Heelcutter
+4 Lightning Berserker
+4 Monastery Swiftspear
+3 Zurgo Bellstriker
+4 Atarka's Command
+1 Become Immense
+2 Titan's Strength
+4 Wild Slash
+4 Dragon Fodder
+4 Exquisite Firecraft
+4 Hordeling Outburst
+4 Bloodstained Mire
+4 Cinder Glade
+9 Mountain
+4 Wooded Foothills
+[Sideboard]
+2 Arc Lightning
+2 Fiery Impulse
+2 Outpost Siege
+4 Roast
+1 Scab-Clan Berserker
+2 Smash to Smithereens
+1 Thunderbreak Regent

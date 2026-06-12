@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Finn the Human
+Title=Finn the Human
+Icon=Finn the Human.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/AKA_Syx_-_Ratdos_Midrange_(Standard,_#1739028).dck
+Deck Type=constructed
+
+[Main]
+4 Okiba Reckoner Raid
+3 Gnawing Vermin
+4 Tangled Colony
+4 Nezumi Informant
+3 Karumonix, the Rat King
+3 Lord Skitter, Sewer King
+3 Redcap Gutter-Dweller
+2 Mishra, Claimed by Gix
+3 Play with Fire
+3 Lightning Strike
+3 Go for the Throat
+2 Song of Totentanz
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+5 Swamp
+2 Mountain
+4 Haunted Ridge
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+2 Mirrex
+[Sideboard]
+1 Blightbelly Rat
+1 Nashi, Moon Sage's Scion
+1 Nezumi Prowler

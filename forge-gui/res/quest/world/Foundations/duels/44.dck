@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Gix
+Title=Gix
+Icon=Gix.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Hando_Shinnosuke_-_BG_Aggro_(Standard,_#2273501).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+2 Scavenging Ooze
+1 Sheoldred, the Apocalypse
+4 Archfiend of the Dross
+3 Glissa Sunslayer
+4 Mosswood Dreadknight
+1 Aclazotz, Deepest Betrayal
+3 Sentinel of the Nameless City
+4 Go for the Throat
+3 Cut Down
+2 Anoint with Affliction
+4 Unholy Annex // Ritual Chamber
+5 Swamp
+6 Forest
+4 Blooming Marsh
+4 Llanowar Wastes
+4 Restless Cottage
+1 Fountainport
+1 Soulstone Sanctuary
+[Sideboard]
+3 Duress
+1 Vivien Reid
+2 Choking Miasma
+1 Sheoldred, the Apocalypse
+2 Tear Asunder
+1 Gix's Command
+1 Nissa, Ascended Animist
+2 Tranquil Frillback
+2 Ghost Vacuum

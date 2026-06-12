@@ -222,6 +222,7 @@ public class StaticEffect {
                 // Revert changed color words
                 if (hasParam("ChangeColorWordsTo")) {
                     affectedCard.removeChangedTextColorWord(getTimestamp(), ability.getId());
+                    addCard(affectedPerLayer, StaticAbilityLayer.TEXT, affectedCard);
                 }
 
                 // remove changed name

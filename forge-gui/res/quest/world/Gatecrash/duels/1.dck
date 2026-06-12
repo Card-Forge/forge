@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Medium
+Description=Gatecrash/Fantasy_Fieber_Standard_-_Br├╝hl/Sandra_Hamacher_-_Boros_(Standard,_#48125).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Boros Reckoner
+3 Hellrider
+3 Legion Loyalist
+2 Lightning Mauler
+2 Rakdos Cackler
+3 Stromkirk Noble
+2 Vexing Devil
+4 Boros Charm
+4 Brimstone Volley
+4 Searing Spear
+4 Pillar of Flame
+2 Cavern of Souls
+4 Clifftop Retreat
+10 Mountain
+4 Sacred Foundry
+1 Slayers' Stronghold
+[Sideboard]
+2 Blind Obedience
+2 Mizzium Mortars
+2 Pyreheart Wolf
+2 Rest in Peace
+4 Skullcrack
+3 Volcanic Strength

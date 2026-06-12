@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Montgomery Burns
+Title=Montgomery Burns
+Icon=Montgomery Burns.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/Alex_Yatsenko_-_Mono-Blue_Aggro_(Standard,_#2274391).dck
+Deck Type=constructed
+
+[Main]
+3 Kiora, the Rising Tide
+3 Steamcore Scholar
+3 Mockingbird
+3 Faerie Mastermind
+3 Enduring Curiosity
+4 Spyglass Siren
+3 Spectral Sailor
+2 Shore Up
+4 Opt
+4 Into the Flood Maw
+4 Unsummon
+4 Proft's Eidetic Memory
+2 Fountainport
+18 Island
+[Sideboard]
+2 Plumecreed Escort
+2 Ghost Vacuum
+2 Aetherize
+2 Negate
+2 Disdainful Stroke
+3 Tishana's Tidebinder

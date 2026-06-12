@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Reactor Meltdown
+Title=Reactor Meltdown
+Icon=Reactor Meltdown.jpg
+Difficulty=Medium
+Description=Kaladesh/SCG_Invitational_Qualifier_Bernardsville/Michael_Novins_-_W-R_Vehicles_(Standard,_#659591).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+4 Depala, Pilot Exemplar
+2 Pia Nalaar
+4 Selfless Spirit
+1 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+4 Smuggler's Copter
+2 Harnessed Lightning
+2 Always Watching
+3 Gideon, Ally of Zendikar
+4 Inspiring Vantage
+6 Mountain
+4 Needle Spires
+10 Plains
+[Sideboard]
+1 Chandra, Torch of Defiance
+2 Declaration in Stone
+4 Galvanic Bombardment
+1 Skysovereign, Consul Flagship
+2 Skywhaler's Shot
+2 Stasis Snare
+1 Thalia, Heretic Cathar
+2 Weaver of Lightning

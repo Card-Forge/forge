@@ -27,10 +27,27 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.net.HeadlessGuiDesktop;
 
+import org.testng.annotations.BeforeMethod;
+
 public class AITest {
     private static boolean initialized = false;
 
-    public Game resetGame() {
+    // One-time card DB load must run outside any @Test(timeOut) window, or a timeout interrupt mid-load corrupts the shared StaticData cache.
+    @BeforeMethod
+    public void initializeModel() {
+        if (initialized) {
+            return;
+        }
+        GuiBase.setInterface(new GuiDesktop());
+        FModel.initialize(null, preferences -> {
+            preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
+            preferences.setPref(FPref.UI_LANGUAGE, "en-US");
+            return null;
+        });
+        initialized = true;
+    }
+
+    protected Game initAndCreateGame() {
         // need to be done after FModel.initialize, or the Localizer isn't loaded yet
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
@@ -59,7 +76,20 @@ public class AITest {
             initialized = true;
         }
 
-        return resetGame();
+        List<RegisteredPlayer> players = Lists.newArrayList();
+        Deck d1 = new Deck();
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("opponent", null)));
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ai", null)));
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ally", null)));
+
+        GameRules rules = new GameRules(GameType.Constructed);
+        Match match = new Match(rules, players, "Test");
+        Game game = new Game(players, rules, match);
+        Player ai = game.getPlayers().get(1);
+        game.setAge(GameStage.Play);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getPhaseHandler().onStackResolved();
+        return game;
     }
 
     protected void gameLoopUntilNextPhase(Game game) {
@@ -98,11 +128,9 @@ public class AITest {
         return null;
     }
 
-
     protected SpellAbility findSAWithPrefix(Card c, String prefix) {
         return findSAWithPrefix(c.getSpellAbilities(), prefix);
     }
-
     protected SpellAbility findSAWithPrefix(Iterable<SpellAbility> abilities, String prefix) {
         for (SpellAbility sa : abilities) {
             if (sa.getDescription().startsWith(prefix)) {

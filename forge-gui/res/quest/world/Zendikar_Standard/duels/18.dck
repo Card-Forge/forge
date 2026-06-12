@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=SantaMuerte
+Title=SantaMuerte
+Icon=SantaMuerte.jpg
+Difficulty=Easy
+Description=Zendikar/Southern_Invitational_-_Zuran,_Laguna,_Philippines/Richard_Calucag_-_New_Moon_(Standard,_#3291).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodghast
+4 Gatekeeper of Malakir
+3 Malakir Bloodwitch
+4 Vampire Hexmage
+3 Vampire Nighthawk
+4 Vampire Nocturnus
+3 Disfigure
+4 Tendrils of Corruption
+3 Duress
+1 Grim Discovery
+2 Mind Sludge
+3 Sign in Blood
+4 Marsh Flats
+14 Swamp
+4 Verdant Catacombs
+[Sideboard]
+3 Black Knight
+3 Deathmark
+3 Marsh Casualties
+3 Pithing Needle

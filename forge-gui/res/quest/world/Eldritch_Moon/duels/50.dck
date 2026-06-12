@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Niv-Mizzet
+Title=Niv-Mizzet
+Icon=Niv-Mizzet.jpg
+Difficulty=Easy
+Description=Eldritch_Moon/7th_Standard_God_Challenger_Finals/Okai_Toshiki_-_Collected_Bant_(Standard,_#635651).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Duskwatch Recruiter
+4 Jace, Vryn's Prodigy
+2 Nissa, Vastwood Seer
+4 Reflector Mage
+4 Spell Queller
+4 Sylvan Advocate
+4 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+1 Ojutai's Command
+3 Canopy Vista
+4 Evolving Wilds
+4 Forest
+1 Island
+2 Lumbering Falls
+4 Plains
+4 Prairie Stream
+3 Yavimaya Coast
+[Sideboard]
+2 Archangel Avacyn
+2 Declaration in Stone
+3 Negate
+1 Quarantine Field
+4 Selfless Spirit

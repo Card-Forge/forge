@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=WereHyena
+Title=WereHyena
+Icon=WereHyena.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Adam_Oberkreser_-_Esper_Midrange_(Standard,_#799012).dck
+Deck Type=constructed
+
+[Main]
+3 Deputy of Detention
+4 Hero of Precinct One
+3 Seraph of the Scales
+4 Thief of Sanity
+3 Mortify
+4 Tyrant's Scorn
+2 Enter the God-Eternals
+4 Thought Erasure
+3 Sorin, Vengeful Bloodlord
+2 Teferi, Hero of Dominaria
+3 Teferi, Time Raveler
+1 Swamp
+4 Drowned Catacomb
+4 Glacial Fortress
+4 Godless Shrine
+4 Hinterland Harbor
+4 Isolated Chapel
+4 Watery Grave
+[Sideboard]
+2 Hostage Taker
+2 Despark
+3 Dovin's Veto
+1 Oath of Kaya
+1 Liliana, Dreadhorde General
+3 Duress
+1 Enter the God-Eternals
+2 Time Wipe

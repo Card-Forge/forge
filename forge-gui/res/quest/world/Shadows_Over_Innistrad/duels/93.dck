@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Edward Scissorhands
+Title=Edward Scissorhands
+Icon=Edward Scissorhands.jpg
+Difficulty=Very Hard
+Description=../Modern/Shadows_over_Innistrad/Dreamcrusher119_-_GW_Auras_(Modern,_#660742).dck
+Deck Type=constructed
+
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+3 Kor Spiritdancer
+4 Slippery Bogle
+4 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+2 Gryff's Boon
+4 Hyena Umbra
+4 Rancor
+4 Spider Umbra
+1 Spirit Link
+2 Spirit Mantle
+1 Forest
+4 Horizon Canopy
+1 Plains
+4 Razorverge Thicket
+3 Temple Garden
+4 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+3 Disenchant
+3 Dismember
+4 Leyline of Sanctity
+2 Spirit Link
+3 Stony Silence

@@ -1,0 +1,8 @@
+Name:Burrog Barrage
+ManaCost:1 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | NumAtt$ +1 | ValidTgtDesc$ creature you control | SubAbility$ DBDamage | ConditionCheckSVar$ X | SpellDescription$ Target creature you control gets +1/+0 until end of turn if you've cast another instant or sorcery spell this turn. Then it deals damage equal to its power to up to one target creature an opponent controls.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | AILogic$ PowerDmg | ValidTgtDesc$ creature an opponent controls | NumDmg$ Y | DamageSource$ ParentTarget | StackDescription$ Then {c:ParentTarget} deals damage equal to its power to {c:ThisTargetedCard}.
+SVar:X:Count$ThisTurnCast_Card.!CastSaSource+Instant+YouCtrl,Card.!CastSaSource+Sorcery+YouCtrl
+SVar:Y:ParentTargeted$CardPower
+Oracle:Target creature you control gets +1/+0 until end of turn if you've cast another instant or sorcery spell this turn. Then it deals damage equal to its power to up to one target creature an opponent controls.

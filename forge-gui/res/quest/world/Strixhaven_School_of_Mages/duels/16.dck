@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Piper
+Title=Piper
+Icon=Piper.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/Abe_Corrigan_-_Boros_Winota_(Standard,_#1145445).dck
+Deck Type=constructed
+
+[Main]
+1 Kenrith, the Returned King
+1 Reidane, God of the Worthy
+1 Shaile, Dean of Radiance
+3 Elite Spellbinder
+4 Selfless Savior
+4 Usher of the Fallen
+4 Professor of Symbology
+4 Skyclave Apparition
+4 Bonecrusher Giant
+4 Blade Historian
+4 Winota, Joiner of Forces
+4 Shatterskull Smashing
+4 Mountain
+4 Furycalm Snarl
+4 Needleverge Pathway
+10 Plains
+[Sideboard]
+1 Academic Probation
+1 Spirit Summoning
+1 Reidane, God of the Worthy
+1 Elite Spellbinder
+1 Inkling Summoning
+2 Roiling Vortex
+2 Drannith Magistrate
+3 Ox of Agonas
+3 Glass Casket

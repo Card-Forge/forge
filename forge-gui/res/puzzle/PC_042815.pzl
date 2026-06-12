@@ -4,7 +4,7 @@ URL:http://www.gatheringmagic.com/seanuy-042815-perplexing-chimera-5-dracophobia
 Goal:Destroy Specified Creatures
 Targets:Creature.Dragon+OppCtrl
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:Destroy all opponent's Dragons. Windstorm is on top of your library.
 [state]
 ActivePlayer=human

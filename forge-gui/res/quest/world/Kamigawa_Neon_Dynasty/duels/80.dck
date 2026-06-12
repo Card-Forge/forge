@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Superman
+Title=Superman
+Icon=Superman.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Alex_Blair_-_Mono-Red_Prowess_(Modern,_#1439410)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Blood Artist
+1 Geralf's Messenger
+1 Endurance
+4 Yawgmoth, Thran Physician
+4 Ignoble Hierarch
+4 Birds of Paradise
+4 Wall of Omens
+4 Strangleroot Geist
+4 Young Wolf
+4 Chord of Calling
+4 Eldritch Evolution
+4 Grist, the Hunger Tide
+1 Windswept Heath
+1 Twilight Mire
+1 Forest
+1 Yavimaya, Cradle of Growth
+1 Dryad Arbor
+1 Swamp
+2 Nurturing Peatland
+2 Boseiju, Who Endures
+3 Overgrown Tomb
+4 Blooming Marsh
+4 Verdant Catacombs
+[Sideboard]
+1 Necromentia
+1 Essence Warden
+1 Magus of the Moon
+1 Collector Ouphe
+1 Scavenging Ooze
+2 Force of Vigor
+2 Veil of Summer
+2 Endurance
+4 Thoughtseize

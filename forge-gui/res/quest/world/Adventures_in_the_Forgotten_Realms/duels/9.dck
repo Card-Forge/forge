@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Snow White
+Title=Snow White
+Icon=Snow White.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Aldo_Gimenez_-_Dimir_Rogues_(Standard,_#1204980).dck
+Deck Type=constructed
+
+[Main]
+4 Merfolk Windrobber
+4 Soaring Thought-Thief
+4 Thieves' Guild Enforcer
+4 Ruin Crab
+1 Negate
+1 Disdainful Stroke
+2 Cling to Dust
+2 Into the Story
+4 Drown in the Loch
+4 Power Word Kill
+2 Crippling Fear
+3 Of One Mind
+3 Agadeem's Awakening
+1 Castle Locthwain
+2 Hive of the Eye Tyrant
+3 Swamp
+4 Temple of Deceit
+4 Island
+4 Fabled Passage
+4 Clearwater Pathway
+[Sideboard]
+1 Disdainful Stroke
+1 Negate
+1 Lurrus of the Dream-Den
+1 Heartless Act
+1 Test of Talents
+1 Call of the Death-Dweller
+1 Crippling Fear
+2 Tasha's Hideous Laughter
+2 Tymaret, Chosen from Death
+2 Glimpse of Freedom
+2 Mystical Dispute

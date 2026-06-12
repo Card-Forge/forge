@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Diablo
+Title=Diablo
+Icon=Diablo.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/Christos_Dalis_-_Rakdos_Reanimator_(Standard,_#1614919).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+3 Atsushi, the Blazing Sky
+1 Sheoldred, the Apocalypse
+4 Atraxa, Grand Unifier
+3 Reckoner Bankbuster
+4 Cut Down
+3 Go for the Throat
+1 Duress
+3 Brotherhood's End
+4 The Cruelty of Gix
+3 Plaza of Heroes
+1 Takenuma, Abandoned Mire
+1 Mountain
+1 Swamp
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+4 Haunted Ridge
+2 Sundown Pass
+1 Llanowar Wastes
+1 Darkslick Shores
+2 Xander's Lounge
+2 Ziatora's Proving Ground
+[Sideboard]
+3 Duress
+1 Reckoner Bankbuster
+1 Go for the Throat
+1 Burn Down the House
+1 Toxrill, the Corrosive
+2 Abrade
+2 Graveyard Trespasser
+2 Sheoldred, the Apocalypse
+2 Anoint with Affliction

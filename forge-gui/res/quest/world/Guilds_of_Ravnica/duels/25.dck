@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Mister Fantastic
+Title=Mister Fantastic
+Icon=Mister Fantastic.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Agata_Takeru_-_Mono_Red_(Standard,_#773696).dck
+Deck Type=constructed
+
+[Main]
+4 Dismissive Pyromancer
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Goblin Chainwhirler
+4 Runaway Steam-Kin
+4 Lightning Strike
+4 Risk Factor
+4 Shock
+4 Wizard's Lightning
+2 Vance's Blasting Cannons
+22 Mountain
+[Sideboard]
+2 Banefire
+2 Captain Lannery Storm
+2 Fight with Fire
+4 Lava Coil
+1 Mountain
+4 The Flame of Keld

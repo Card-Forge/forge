@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Electro
+Title=Electro
+Icon=Electro.jpg
+Difficulty=Easy
+Description=Oath_of_the_Gatewatch/RPTQ_Shadows_Over_Innistrad_-_Montreal,_QB/David_Laskar_-_Abzan_(Standard,_#606642).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+3 Heir of the Wilds
+4 Reflector Mage
+4 Siege Rhino
+3 Sylvan Advocate
+4 Warden of the First Tree
+3 Wingmate Roc
+2 Dromoka's Command
+4 Murderous Cut
+3 Stubborn Denial
+1 Canopy Vista
+4 Flooded Strand
+2 Forest
+1 Plains
+2 Polluted Delta
+1 Prairie Stream
+2 Shambling Vent
+1 Smoldering Marsh
+1 Sunken Hollow
+1 Swamp
+4 Windswept Heath
+4 Wooded Foothills
+2 Yavimaya Coast
+[Sideboard]
+2 Den Protector
+2 Disdainful Stroke
+1 Duress
+2 Hallowed Moonlight
+1 Kalitas, Traitor of Ghet
+2 Pitiless Horde
+3 Transgress the Mind
+2 Virulent Plague

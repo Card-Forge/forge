@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Ukulunkulu
+Title=Ukulunkulu
+Icon=Ukulunkulu.jpg
+Difficulty=Hard
+Description=../Modern/Born_of_the_Gods/SCG_Invitational_Qualifier_Columbia/Jacob_Krause_-_Four-Color_Tokens_(Modern,_#140919).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Doomed Traveler
+4 Voice of Resurgence
+4 Young Pyromancer
+3 Abrupt Decay
+2 Beckon Apparition
+2 Boros Charm
+4 Lightning Bolt
+4 Raise the Alarm
+4 Lingering Souls
+4 Intangible Virtue
+3 Rancor
+1 Sarkhan Vol
+1 Bloodstained Mire
+1 Forest
+3 Godless Shrine
+1 Mountain
+1 Overgrown Tomb
+2 Plains
+4 Sacred Foundry
+3 Stomping Ground
+1 Swamp
+1 Temple Garden
+1 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+3 Erase
+2 Martyr of Sands
+4 Path to Exile
+2 Spirit of the Labyrinth
+2 Vandalblast

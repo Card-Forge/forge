@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Osiris
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/SCG_Invitational_Qualifier_Jefferson_City/Richard_Temmen_-_B-W_Midrange_(Standard,_#85659).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Blood Baron of Vizkopa
+3 Desecration Demon
+3 Lifebane Zombie
+1 Obzedat, Ghost Council
+4 Pack Rat
+3 Bile Blight
+3 Devour Flesh
+3 Hero's Downfall
+1 Ultimate Price
+4 Thoughtseize
+2 Banishing Light
+2 Underworld Connections
+2 Elspeth, Sun's Champion
+4 Caves of Koilos
+4 Godless Shrine
+4 Mutavault
+1 Plains
+8 Swamp
+4 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+1 Deicide
+3 Doom Blade
+3 Drown in Sorrow
+3 Duress
+1 Erebos, God of the Dead
+1 Last Breath
+1 Pharika's Cure
+1 Sin Collector

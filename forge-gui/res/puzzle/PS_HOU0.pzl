@@ -3,7 +3,7 @@ Name:Possibility Storm - Hour of Devastation #00
 URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/Patreon-JFF2.jpg
 Goal:Win
 Turns:1
-Difficulty:Medium
+Difficulty:Uncommon
 Description:Win this turn.
 [state]
 humanlife=20

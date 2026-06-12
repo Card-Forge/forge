@@ -6,7 +6,10 @@ import forge.deck.Deck;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.IntConsumer;
 
 public final class LobbySlot implements Serializable {
     private static final long serialVersionUID = 9203252798721142264L;
@@ -41,68 +44,43 @@ public final class LobbySlot implements Serializable {
 
     boolean apply(final UpdateLobbyPlayerEvent data) {
         boolean changed = false;
-        if (data.getType() != null) {
-            setType(data.getType());
-            changed = true;
-        }
-        if (data.getName() != null) {
-            setName(data.getName());
-            changed = true;
-        }
-        if (data.getAvatarIndex() != -1) {
-            setAvatarIndex(data.getAvatarIndex());
-            changed = true;
-        }
-        if (data.getSleeveIndex() != -1) {
-            setSleeveIndex(data.getSleeveIndex());
-            changed = true;
-        }
-        if (data.getTeam() != -1) {
-            setTeam(data.getTeam());
-            changed = true;
-        }
-        if (data.getArchenemy() != null) {
-            setIsArchenemy(data.getArchenemy());
-            changed = true;
-        }
-        if (data.getReady() != null) {
-            setIsReady(data.getReady());
-            changed = true;
-        }
-        if (data.getDevMode() != null) {
-            setIsDevMode(data.getDevMode());
-            changed = true;
-        }
-        if (data.getAiOptions() != null) {
-            setAiOptions(data.getAiOptions());
-            changed = true;
-        }
+        changed |= setIfChanged(data.getType(),            this.type,           this::setType);
+        changed |= setIfChanged(data.getName(),            this.name,           this::setName);
+        changed |= setIntIfChanged(data.getAvatarIndex(),  this.avatarIndex,    this::setAvatarIndex);
+        changed |= setIntIfChanged(data.getSleeveIndex(),  this.sleeveIndex,    this::setSleeveIndex);
+        changed |= setIntIfChanged(data.getTeam(),         this.team,           this::setTeam);
+        changed |= setIfChanged(data.getArchenemy(),       this.isArchenemy,    this::setIsArchenemy);
+        changed |= setIfChanged(data.getReady(),           this.isReady,        this::setIsReady);
+        changed |= setIfChanged(data.getDevMode(),         this.isDevMode,      this::setIsDevMode);
+        changed |= setIfChanged(data.getAiOptions(),       this.aiOptions,      this::setAiOptions);
+        changed |= setIfChanged(data.getSchemeDeckName(),  this.SchemeDeckName, this::setSchemeDeckName);
+        changed |= setIfChanged(data.getAvatarVanguard(),  this.AvatarVanguard, this::setAvatarVanguard);
+        changed |= setIfChanged(data.getPlanarDeckName(),  this.PlanarDeckName, this::setPlanarDeckName);
+        changed |= setIfChanged(data.getDeckName(),        this.DeckName,       this::setDeckName);
+
         final Deck oldDeck = getDeck();
         if (data.getDeck() != null) {
             setDeck(data.getDeck());
         } else if (oldDeck != null && data.getSection() != null && data.getCards() != null) {
             oldDeck.putSection(data.getSection(), data.getCards());
         }
-        if (data.getSchemeDeckName() != null) {
-            setSchemeDeckName(data.getSchemeDeckName());
-            changed = true;
-        }
-        if (data.getAvatarVanguard() != null) {
-            setAvatarVanguard(data.getAvatarVanguard());
-            changed = true;
-        }
-        if (data.getPlanarDeckName() != null) {
-            setPlanarDeckName(data.getPlanarDeckName());
-            changed = true;
-        }
-        if (data.getDeckName() != null) {
-            setDeckName(data.getDeckName());
-            changed = true;
-        }
         if (data.getAiProfile() != null) {
             setAiProfile(data.getAiProfile());
         }
         return changed;
+    }
+
+    private static <T> boolean setIfChanged(T newValue, T oldValue, Consumer<T> setter) {
+        if (newValue == null || Objects.equals(newValue, oldValue)) return false;
+        setter.accept(newValue);
+        return true;
+    }
+
+    // -1 is the "field absent" sentinel for ints in UpdateLobbyPlayerEvent.
+    private static boolean setIntIfChanged(int newValue, int oldValue, IntConsumer setter) {
+        if (newValue == -1 || newValue == oldValue) return false;
+        setter.accept(newValue);
+        return true;
     }
 
     public LobbySlotType getType() {

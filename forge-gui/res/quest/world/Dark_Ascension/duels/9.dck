@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Beast
+Title=Beast
+Icon=Beast.jpg
+Difficulty=Medium
+Description=Dark_Ascension/Starcitygames_Open_Series__Tampa/Nick_Holcomb_-_Mono_Green_(Standard,_#26970).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+1 Bellowing Tanglewurm
+4 Birds of Paradise
+1 Daybreak Ranger
+4 Dungrove Elder
+4 Llanowar Elves
+2 Phyrexian Metamorph
+4 Strangleroot Geist
+4 Sword of War and Peace
+2 Dismember
+4 Green Sun's Zenith
+1 Overrun
+3 Garruk Relentless
+1 Garruk, Primal Hunter
+24 Forest
+[Sideboard]
+3 Act of Aggression
+3 Corrosive Gale
+2 Naturalize
+1 Porcelain Legionnaire
+2 Precursor Golem
+2 Sword of Feast and Famine
+1 Viridian Corrupter

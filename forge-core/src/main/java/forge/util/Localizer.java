@@ -147,7 +147,6 @@ public class Localizer {
 
         //Don't reload the language if nothing changed
         if (oldLocale == null || !oldLocale.equals(locale)) {
-
             File file = new File(languagesDirectory);
             URL[] urls = null;
 
@@ -171,13 +170,7 @@ public class Localizer {
             System.out.println("Language '" + resourceBundle.getBaseBundleName() + "' loaded successfully.");
 
             notifyObservers();
-
         }
-    }
-
-    public List<Language> getLanguages() {
-        //TODO List all languages by getting their files
-        return null;
     }
 
     public void registerObserver(LocalizationChangeObserver observer) {
@@ -188,11 +181,6 @@ public class Localizer {
         for (LocalizationChangeObserver observer : observers) {
             observer.localizationChanged();
         }
-    }
-
-    public static class Language {
-        public String languageName;
-        public String languageID;
     }
 
 }

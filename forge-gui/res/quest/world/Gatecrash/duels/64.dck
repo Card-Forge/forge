@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Repressed Magic
+Title=Repressed Magic
+Icon=Repressed Magic.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/1_Open_Modern_de_Catalunya/Ferran_Donoso_-_Gruul_Aggro_(Modern,_#51821).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+4 Tarmogoyf
+4 Vexing Devil
+3 Dismember
+4 Lightning Bolt
+1 Rancor
+1 Arid Mesa
+4 Copperline Gorge
+1 Forest
+2 Mountain
+4 Scalding Tarn
+4 Stomping Ground
+4 Verdant Catacombs
+[Sideboard]
+3 Combust
+3 Deglamer
+1 Grafdigger's Cage
+4 Molten Rain
+3 Smash to Smithereens
+1 Torpor Orb

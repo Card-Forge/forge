@@ -1,0 +1,43 @@
+[metadata]
+Name=Rogue
+Deck Type=constructed
+Title=Rogue
+Description=Rogue
+Difficulty=Medium
+Icon=The Torpor Orb
+[Main]
+4 Abrade
+2 Aether Hub
+1 Canyon Slough
+2 Cast Out
+4 Chandra, Torch of Defiance
+3 Concealed Courtyard
+2 Cut // Ribbons
+4 Dragonskull Summit
+4 Evolving Wilds
+4 Fatal Push
+2 Gideon of the Trials
+4 Glint-Sleeve Siphoner
+4 Glorybringer
+2 Gonti, Lord of Luxury
+3 Inspiring Vantage
+1 Liliana, Death's Majesty
+1 Mountain
+1 Mountain
+1 Mountain
+1 Plains
+1 Plains
+2 Swamp
+1 Swamp
+3 Sweltering Suns
+1 Treasure Map
+2 Vraska's Contempt
+[Sideboard]
+1 Arguel's Blood Fast
+2 Chandra's Defeat
+2 Doomfall
+4 Duress
+2 Fumigate
+1 Ixalan's Binding
+2 Lost Legacy
+1 Silent Gravestone

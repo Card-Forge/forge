@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Kangee
+Title=Kangee
+Icon=Kangee.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/DInglis_-_White_Weenie_(Standard,_#1167688).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+2 Archon of Emeria
+2 Reidane, God of the Worthy
+3 Drannith Magistrate
+4 Skyclave Apparition
+4 Selfless Savior
+4 Seasoned Hallowblade
+4 Luminarch Aspirant
+4 Giant Killer
+4 Elite Spellbinder
+4 Alseid of Life's Bounty
+4 Faceless Haven
+20 Snow-Covered Plains
+[Sideboard]
+1 Shadowspear
+1 Reidane, God of the Worthy
+1 Maul of the Skyclaves
+2 Lurrus of the Dream-Den
+2 Baneslayer Angel
+2 Banishing Light
+3 Glass Casket
+3 Legion Angel

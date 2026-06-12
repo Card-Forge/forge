@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Wolverine
+Title=Wolverine
+Icon=Wolverine.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/Anton_Kuchumov_-_BG_Toxic_City_(Standard,_#1581973).dck
+Deck Type=constructed
+
+[Main]
+4 Bilious Skulldweller
+4 Venerated Rotpriest
+3 Blightbelly Rat
+3 Bloated Contaminator
+2 Glissa Sunslayer
+2 Necrogen Rotpriest
+4 Tamiyo's Safekeeping
+3 Undying Malice
+3 Infectious Bite
+3 Sheoldred's Edict
+4 Drown in Ichor
+2 Necrogen Communion
+10 Forest
+8 Swamp
+3 Llanowar Wastes
+1 Deathcap Glade
+1 Takenuma, Abandoned Mire
+[Sideboard]
+1 Cut Down
+2 Tyvar's Stand
+2 Infernal Grasp
+1 Return to Nature
+1 Vraska, Betrayal's Sting

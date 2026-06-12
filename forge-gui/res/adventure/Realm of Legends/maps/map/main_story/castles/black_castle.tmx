@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="95">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="102">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -95,6 +95,8 @@
 ]}</property>
     <property name="enemy" value="Riku"/>
     <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -111,6 +113,8 @@
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Urza Assembles the Titans&quot;, &quot;Fight or Flight&quot;, &quot;Pramikon, Sky Rampart&quot;]}"/>
     <property name="enemy" value="Commodore Guff"/>
     <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -128,6 +132,8 @@
 ]}</property>
     <property name="enemy" value="Amareth"/>
     <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -145,6 +151,8 @@
 ]}</property>
     <property name="enemy" value="Omnath"/>
     <property name="pursueRange" type="int" value="10"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -162,6 +170,8 @@
 ]}</property>
     <property name="enemy" value="Marath"/>
     <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -216,6 +226,100 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="mythicShopList" value=""/>
     <property name="rareShopList" value=""/>
     <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../../common/maps/obj/enemy.tx" x="116" y="603.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Double Vision&quot;, &quot;Mirror Gallery&quot;
+]}</property>
+    <property name="enemy" value="Riku"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../../common/maps/obj/enemy.tx" x="121.5" y="415">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine&quot;, &quot;Creeping Trailblazer&quot;, &quot;Afiya Grove&quot;
+]}</property>
+    <property name="enemy" value="Marath"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../../common/maps/obj/enemy.tx" x="370.5" y="240">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Voice of Resurgence&quot;, &quot;Celestial Colonnade&quot;, &quot;Raging Ravine&quot;
+]}</property>
+    <property name="enemy" value="Omnath"/>
+    <property name="pursueRange" type="int" value="10"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../../common/maps/obj/enemy.tx" x="635.5" y="413.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Destiny Spinner&quot;, &quot;Seaside Citadel&quot;, &quot;Helm of the Gods&quot;
+]}</property>
+    <property name="enemy" value="Amareth"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../../common/maps/obj/enemy.tx" x="639.5" y="608">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Fight or Flight&quot;, &quot;Pramikon, Sky Rampart&quot;]}"/>
+    <property name="enemy" value="Commodore Guff"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

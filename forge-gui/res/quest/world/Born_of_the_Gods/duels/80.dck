@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Hard
+Description=../Modern/Born_of_the_Gods/PPTQ_Lucena,_Kanal_Ocio_y_Asociaci├│n_los_Jueguistas/Diego_Jesus_Gonzalez_Garcia_-_Mono_Green_(Modern,_#182016).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dryad Militant
+2 Dungrove Elder
+4 Experiment One
+4 Kalonian Tusker
+3 Leatherback Baloth
+3 Scavenging Ooze
+4 Strangleroot Geist
+1 Thrun, the Last Troll
+1 Aspect of Hydra
+2 Dismember
+3 Mutagenic Growth
+4 Vines of Vastwood
+4 Rancor
+17 Forest
+2 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+2 Apostle's Blessing
+2 Creeping Corrosion
+1 Fracturing Gust
+1 Guttural Response
+1 Nature's Claim
+2 Obstinate Baloth
+2 Skylasher
+1 Unnatural Predation
+2 Windstorm

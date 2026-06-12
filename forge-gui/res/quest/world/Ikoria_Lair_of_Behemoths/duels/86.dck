@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Negoogunogumbar
+Title=Negoogunogumbar
+Icon=Negoogunogumbar.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Aczino_-_Red_Deck_Wins_(Modern,_#1102896).dck
+Deck Type=constructed
+
+[Main]
+3 Bomat Courier
+4 Bonecrusher Giant
+4 Monastery Swiftspear
+4 Seasoned Pyromancer
+4 Soul-Scar Mage
+4 Lava Dart
+4 Lightning Bolt
+1 Flame Slash
+4 Firebolt
+4 Light Up the Stage
+4 Blood Moon
+1 Fiery Islet
+1 Sunbaked Canyon
+2 Castle Embereth
+16 Mountain
+[Sideboard]
+1 Flame Slash
+1 Obosh, the Preypiercer
+2 Blast Zone
+2 Kozilek's Return
+2 Pithing Needle
+3 Shattering Spree
+4 Relic of Progenitus

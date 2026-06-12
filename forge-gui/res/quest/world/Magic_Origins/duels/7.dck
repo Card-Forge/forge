@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Doran
+Title=Doran
+Icon=Doran.jpg
+Difficulty=Medium
+Description=Magic_Origins/SCG_Invitational_Qualifier_Granite_Falls/Karlin_Hansen_-_Abzan_Aggro_(Standard,_#325583).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Den Protector
+4 Fleecemane Lion
+4 Hangarback Walker
+4 Siege Rhino
+2 Wingmate Roc
+3 Abzan Charm
+3 Dromoka's Command
+2 Hero's Downfall
+2 Ultimate Price
+2 Sorin, Solemn Visitor
+4 Caves of Koilos
+2 Forest
+2 Llanowar Wastes
+1 Mana Confluence
+2 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+2 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+1 Ajani, Mentor of Heroes
+1 Drown in Sorrow
+2 Elspeth, Sun's Champion
+2 Self-Inflicted Wound
+4 Thoughtseize
+3 Tragic Arrogance

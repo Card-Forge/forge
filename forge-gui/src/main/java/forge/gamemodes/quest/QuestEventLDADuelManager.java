@@ -53,7 +53,6 @@ public class QuestEventLDADuelManager implements QuestEventDuelManagerInterface 
     }
 
     private void assembleDuelDifficultyLists() {
-
         sortedDuels.clear();
 
         int i=0;
@@ -71,8 +70,6 @@ public class QuestEventLDADuelManager implements QuestEventDuelManagerInterface 
             sortedDuels.put(diff, duel);
             i++;
         }
-
-
     }
 
     private QuestEventDuel getRandomDuel(final QuestEventDifficulty difficulty) {
@@ -88,7 +85,6 @@ public class QuestEventLDADuelManager implements QuestEventDuelManagerInterface 
     }
 
     public final List<QuestEventDuel> generateDuels() {
-
         final QuestPreferences questPreferences = FModel.getQuestPreferences();
         boolean moreDuelChoices = questPreferences.getPrefInt(QPref.MORE_DUEL_CHOICES) > 0;
 
@@ -150,7 +146,6 @@ public class QuestEventLDADuelManager implements QuestEventDuelManagerInterface 
         }
 
         return duelOpponents;
-
     }
 
     private void addDuel(List<QuestEventDuel> outList, QuestEventDifficulty targetDifficulty, int toAdd) {

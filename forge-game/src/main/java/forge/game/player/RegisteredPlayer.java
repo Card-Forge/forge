@@ -25,7 +25,6 @@ public class RegisteredPlayer {
     private int startingLife = 20;
     private int startingHand = 7;
     private int manaShards = 0;
-    private Iterable<IPaperCard> cardsOnBattlefield = null;
     private Iterable<IPaperCard> extraCardsOnBattlefield = null;
     private Iterable<IPaperCard> extraCardsInCommandZone = null;
     private Iterable<? extends IPaperCard> schemes = null;
@@ -79,16 +78,10 @@ public class RegisteredPlayer {
     }
 
     public final Iterable<? extends IPaperCard> getCardsOnBattlefield() {
-        return Iterables.concat(cardsOnBattlefield == null ? EmptyList : cardsOnBattlefield,
-                extraCardsOnBattlefield == null ? EmptyList : extraCardsOnBattlefield);
+        return extraCardsOnBattlefield == null ? EmptyList : extraCardsOnBattlefield;
     }
-
     public final Iterable<? extends IPaperCard> getExtraCardsInCommandZone() {
         return extraCardsInCommandZone == null ? EmptyList : extraCardsInCommandZone;
-    }
-
-    public final void setCardsOnBattlefield(Iterable<IPaperCard> cardsOnTable) {
-        this.cardsOnBattlefield = cardsOnTable;
     }
 
     public final void addExtraCardsOnBattlefield(Iterable<IPaperCard> extraCardsonTable) {
@@ -97,7 +90,6 @@ public class RegisteredPlayer {
         else
             this.extraCardsOnBattlefield = Iterables.concat(this.extraCardsOnBattlefield, extraCardsonTable);
     }
-
     public final void addExtraCardsInCommandZone(Iterable<IPaperCard> extraCardsInCommandZone) {
         if (this.extraCardsInCommandZone == null)
             this.extraCardsInCommandZone = extraCardsInCommandZone;
@@ -150,7 +142,6 @@ public class RegisteredPlayer {
     		final Set<GameType> appliedVariants, final Deck deck,	              //General vars
     		final Iterable<PaperCard> schemes, final boolean playerIsArchenemy,   //Archenemy specific vars
     		final Iterable<PaperCard> planes, final CardPool vanguardAvatar) {   //Planechase and Vanguard
-
     	RegisteredPlayer start = new RegisteredPlayer(deck);
     	if (appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy) {
     		start.setStartingLife(40); // 904.5: The Archenemy has 40 life.
@@ -174,7 +165,11 @@ public class RegisteredPlayer {
         }
         if (appliedVariants.contains(GameType.Brawl)) {
             start.commanders = deck.getCommanders();
-            start.setStartingLife(start.getStartingLife() + 10);
+            if (playerCount == 2) {
+                start.setStartingLife(start.getStartingLife() + 5);
+            } else {
+                start.setStartingLife(start.getStartingLife() + 10);
+            }
         }
     	if (appliedVariants.contains(GameType.Planechase)) {
             start.planes = planes;

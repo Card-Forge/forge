@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ala
+Title=Ala
+Icon=Ala.jpg
+Difficulty=Medium
+Description=Aether_Revolt/Itou_Kouei_-_WUG_Aggro_(Standard,_#664686).dck
+Deck Type=constructed
+
+[Main]
+3 Archangel Avacyn
+4 Scrapheap Scrounger
+4 Spell Queller
+4 Thraben Inspector
+4 Tireless Tracker
+4 Toolcraft Exemplar
+4 Heart of Kiran
+4 Metallic Rebuke
+4 Gideon, Ally of Zendikar
+4 Botanical Sanctum
+2 Forest
+2 Fortified Village
+2 Island
+9 Plains
+2 Port Town
+4 Spire of Industry
+[Sideboard]
+2 Declaration in Stone
+1 Fragmentize
+2 Fumigate
+4 Gisela, the Broken Blade
+1 Natural Obsolescence
+1 Natural State
+1 Negate
+1 Skysovereign, Consul Flagship
+2 Stasis Snare

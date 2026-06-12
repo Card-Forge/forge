@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Ekolo
+Title=Ekolo
+Icon=Ekolo.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/Sugiura_Yuki_-_Faerie_(Modern,_#1246421).dck
+Deck Type=constructed
+
+[Main]
+1 Fallen Shinobi
+2 Subtlety
+2 Brazen Borrower
+2 Dauthi Voidwalker
+3 Snapcaster Mage
+4 Spellstutter Sprite
+2 Fatal Push
+2 Cling to Dust
+2 Infernal Grasp
+3 Cryptic Command
+3 Force of Negation
+3 Counterspell
+4 Thoughtseize
+3 Bitterblossom
+1 Swamp
+1 Riptide Laboratory
+1 Hive of the Eye Tyrant
+2 Mutavault
+2 Field of Ruin
+3 Creeping Tar Pit
+3 Darkslick Shores
+3 Watery Grave
+4 Island
+4 Polluted Delta
+[Sideboard]
+1 Liliana, the Last Hope
+1 Engineered Explosives
+1 Plague Engineer
+1 Kalitas, Traitor of Ghet
+1 Damnation
+2 Overcharged Amalgam
+2 Spell Snare
+2 Stern Dismissal
+2 Pithing Needle
+2 Nihil Spellbomb

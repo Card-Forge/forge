@@ -1,0 +1,7 @@
+Name:Hire a Crew
+ManaCost:2 R
+Types:Instant
+A:SP$ Token | TokenScript$ b_2_1_villain_menace | TokenOwner$ You | SubAbility$ DBPumpAll | SpellDescription$ Create a 2/1 black Villain creature token with menace, then creatures you control get +1/+0 until end of turn. (A creature with menace can't be blocked except by two or more creatures.)
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
+DeckHas:Ability$Token
+Oracle:Create a 2/1 black Villain creature token with menace, then creatures you control get +1/+0 until end of turn. (A creature with menace can't be blocked except by two or more creatures.)

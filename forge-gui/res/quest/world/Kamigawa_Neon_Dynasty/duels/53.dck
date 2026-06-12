@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Lupin the Third
+Title=Lupin the Third
+Icon=Lupin the Third.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Akiyama_Daisuke_-_Gruul_Moon_(Modern,_#1479145).dck
+Deck Type=constructed
+
+[Main]
+2 Klothys, God of Destiny
+3 Seasoned Pyromancer
+3 Bonecrusher Giant
+3 Endurance
+4 Fury
+4 Ignoble Hierarch
+4 Fable of the Mirror-Breaker
+3 Unholy Heat
+4 Lightning Bolt
+4 Blood Moon
+1 Chandra, Torch of Defiance
+2 Wrenn and Six
+3 Karn, the Great Creator
+1 Mountain
+1 Sokenzan, Crucible of Defiance
+1 Boseiju, Who Endures
+2 Windswept Heath
+2 Arid Mesa
+4 Wooded Foothills
+4 Stomping Ground
+5 Forest
+[Sideboard]
+1 Witchbane Orb
+1 Pithing Needle
+1 Tormod's Crypt
+1 Phyrexian Metamorph
+1 Batterskull
+1 Ensnaring Bridge
+1 Liquimetal Coating
+2 Engineered Explosives
+2 Nature's Claim
+2 Run Afoul
+2 Veil of Summer

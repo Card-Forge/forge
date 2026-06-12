@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Ned Flanders
+Title=Ned Flanders
+Icon=Ned Flanders.jpg
+Difficulty=Medium
+Description=Magic_Origins/SCG_Invitational_Qualifier_Cockeysville/James_O'Shaughnessy_-_Mono-Red_Aggro_(Standard,_#324446).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Abbot of Keral Keep
+4 Eidolon of the Great Revel
+1 Goblin Heelcutter
+3 Lightning Berserker
+4 Monastery Swiftspear
+3 Zurgo Bellstriker
+4 Lightning Strike
+4 Searing Blood
+4 Stoke the Flames
+4 Wild Slash
+4 Exquisite Firecraft
+21 Mountain
+[Sideboard]
+2 Arc Lightning
+2 Chandra, Pyromaster
+4 Goblin Rabblemaster
+1 Outpost Siege
+4 Roast

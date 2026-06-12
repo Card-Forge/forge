@@ -1,0 +1,11 @@
+Name:Steal the Show
+ManaCost:2 R
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBDiscard,DBDamage
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Target player discards any number of cards, then draws that many cards.
+SVar:DBDraw:DB$ Draw | Defined$ ParentTarget | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | ValidTgtDesc$ creature or planeswalker | NumDmg$ Y | SpellDescription$ CARDNAME deals damage equal to the number of instant and sorcery cards in your graveyard to target creature or planeswalker.
+SVar:X:Remembered$Amount
+SVar:Y:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+Oracle:Choose one or both —\n• Target player discards any number of cards, then draws that many cards.\n• Steal the Show deals damage equal to the number of instant and sorcery cards in your graveyard to target creature or planeswalker.

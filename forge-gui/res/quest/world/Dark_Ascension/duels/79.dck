@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=MamiWata
+Title=MamiWata
+Icon=MamiWata.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/3er_Encuentro_Modern_Castell├│n/Dani_Martin_-_White_Weenie_(Modern,_#57262).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Elite Vanguard
+4 Gideon's Lawkeeper
+4 Kor Duelist
+4 Memnite
+4 Mirran Crusader
+4 Ornithopter
+4 Squadron Hawk
+4 Raise the Alarm
+4 Gather the Townsfolk
+4 Quest for the Holy Relic
+20 Plains
+[Sideboard]

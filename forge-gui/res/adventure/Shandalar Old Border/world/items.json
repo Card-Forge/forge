@@ -160,102 +160,122 @@
   {
     "name": "Landscape Sketchbook - Limited Edition Alpha",
     "description": "A leather bound notebook containing the original basic land artwork from Magic's first set",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Limited Edition Beta",
     "description": "A leather bound notebook containing classic basic land artwork from Magic's second printing",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Revised Edition",
     "description": "A leather bound notebook containing Third Edition basic lands with white borders",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Fourth Edition",
     "description": "A leather bound notebook containing Fourth Edition basic lands",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Fifth Edition",
     "description": "A leather bound notebook containing Fifth Edition basic lands",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Sixth Edition",
     "description": "A leather bound notebook containing Sixth Edition basic lands",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Ice Age",
     "description": "A leather bound notebook containing sketches of frost covered vistas and snow-covered lands",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Mirage",
     "description": "A leather bound notebook containing sketches of tropical locations",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Tempest",
     "description": "A leather bound notebook containing sketches of stormy, volcanic landscapes",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Urza's Saga",
     "description": "A leather bound notebook containing many different angles of the same terrain features",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Mercadian Masques",
     "description": "A leather bound notebook containing sketches of bustling marketplaces and grand architecture",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Odyssey",
     "description": "A leather bound notebook containing sketches of ancient ruins and mystical landscapes",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Onslaught",
     "description": "A leather bound notebook containing sketches of war-torn battlefields",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Portal",
     "description": "A leather bound notebook containing sketches designed for new planeswalkers",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Portal Second Age",
     "description": "A leather bound notebook containing sketches from the second portal",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Portal Three Kingdoms",
     "description": "A leather bound notebook containing sketches of ancient Eastern landscapes",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Starter 1999",
     "description": "A leather bound notebook containing sketches from the 1999 starter collection",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Starter 2000",
     "description": "A leather bound notebook containing sketches from the millennial starter collection",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Battle Royale",
     "description": "A leather bound notebook containing sketches from legendary battles",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Beatdown Box Set",
     "description": "A leather bound notebook containing sketches of intense combat arenas",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Haunted Robes",

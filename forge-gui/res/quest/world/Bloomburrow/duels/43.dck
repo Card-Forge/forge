@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Fin Fang Foom
+Title=Fin Fang Foom
+Icon=Fin Fang Foom.jpg
+Difficulty=Easy
+Description=./Standard/Bloomburrow/Hirota_Kengo_-_Mono_Black_(Standard,_#2192236).dck
+Deck Type=constructed
+
+[Main]
+1 Sheoldred, the Apocalypse
+1 Gix, Yawgmoth Praetor
+3 Ayara's Oathsworn
+4 Urborg Scavengers
+2 Bloodletter of Aclazotz
+4 Deep-Cavern Bat
+4 Preacher of the Schism
+3 Tinybones, the Pickpocket
+1 Hostile Investigator
+4 Go for the Throat
+1 Phyrexian Arena
+4 Hopeless Nightmare
+4 Bandit's Talent
+2 Liliana of the Veil
+19 Swamp
+2 Demolition Field
+1 Hidden Necropolis
+[Sideboard]
+3 Duress
+2 Phyrexian Obliterator
+3 Cut Down
+1 Argentum Masticore
+2 The Filigree Sylex
+2 Aclazotz, Deepest Betrayal
+2 Deadly Cover-Up

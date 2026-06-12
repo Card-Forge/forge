@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Solaire
+Title=Solaire
+Icon=Solaire.jpg
+Difficulty=Very Hard
+Description=../Modern/Khans_of_Tarkir/Modern_Daily_#8245628/bembem_-_Burn_(Modern,_#234476).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+3 Searing Blaze
+2 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+7 Mountain
+3 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Back to Nature
+3 Combust
+4 Destructive Revelry
+3 Kor Firewalker
+3 Molten Rain

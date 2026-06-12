@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Boros-precon
+Title=Boros-precon
+Icon=Boros-precon.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/Arcore_(MI)_-_Gran_Modern_7/Breviglieri_Massimo_-_Elves_(Modern,_#25566).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Birds of Paradise
+4 Bramblewood Paragon
+2 Elvish Archdruid
+2 Ezuri, Renegade Leader
+3 Joraga Warcaller
+3 Llanowar Elves
+2 Mikaeus, the Lunarch
+3 Wren's Run Vanquisher
+2 Fog
+3 Gilt-Leaf Ambush
+2 Path to Exile
+2 Vines of Vastwood
+2 Harmonize
+2 Travel Preparations
+1 Angelic Destiny
+3 Oblivion Ring
+3 Garruk, Primal Hunter
+11 Forest
+1 Gavony Township
+2 Plains
+4 Sunpetal Grove
+[Sideboard]
+2 Asceticism
+3 Autumn's Veil
+1 Gideon Jura
+2 Grand Abolisher
+2 Incremental Growth
+1 Leyline of Lifeforce
+2 Naturalize

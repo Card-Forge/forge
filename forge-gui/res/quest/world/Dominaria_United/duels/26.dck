@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Scarecrow
+Title=Scarecrow
+Icon=Scarecrow.jpg
+Difficulty=Easy
+Description=./Standard/Dominaria_United/Furukawa_Takuto_-_UBR_Junk_(Standard,_#1461827).dck
+Deck Type=constructed
+
+[Main]
+2 Sheoldred, the Apocalypse
+3 Ertai Resurrected
+4 Fable of the Mirror-Breaker
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+2 Reckoner Bankbuster
+1 Abrade
+2 Infernal Grasp
+2 Cut Down
+2 Voltage Surge
+3 Make Disappear
+4 Invoke Despair
+2 The Meathook Massacre
+1 Mountain
+1 Sokenzan, Crucible of Defiance
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+2 Shivan Reef
+3 Swamp
+4 Xander's Lounge
+4 Sulfurous Springs
+4 Haunted Ridge
+4 Shipwreck Marsh
+[Sideboard]
+1 Hostile Takeover
+1 Cut Down
+1 Sheoldred, the Apocalypse
+1 Reckoner Bankbuster
+1 Corpse Explosion
+2 Graveyard Trespasser
+2 Sorin the Mirthless
+2 Disdainful Stroke
+2 Negate
+2 Abrade

@@ -160,9 +160,8 @@ public class DigAi extends SpellAbilityAi {
 
         if (sa.getActivatingPlayer().isOpponentOf(ai) && relatedPlayer.isOpponentOf(ai)) {
             return ComputerUtilCard.getWorstPermanentAI(valid, false, true, false, false);
-        } else {
-            return ComputerUtilCard.getBestAI(valid);
         }
+        return ComputerUtilCard.getBestAI(valid);
     }
 
     /* (non-Javadoc)

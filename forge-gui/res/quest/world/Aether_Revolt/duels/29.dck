@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Andrew_Jessup_-_Temur_Energy_(Standard,_#668313).dck
+Deck Type=constructed
+
+[Main]
+4 Bristling Hydra
+4 Electrostatic Pummeler
+4 Longtusk Cub
+4 Servant of the Conduit
+4 Voltaic Brawler
+4 Blossoming Defense
+4 Harnessed Lightning
+4 Invigorated Rampage
+4 Attune with Aether
+4 Larger Than Life
+4 Aether Hub
+1 Botanical Sanctum
+8 Forest
+4 Game Trail
+3 Mountain
+[Sideboard]
+1 Arlinn Kord
+1 Heroic Intervention
+1 Island
+4 Lathnu Hellion
+2 Natural State
+2 Negate
+4 Shock

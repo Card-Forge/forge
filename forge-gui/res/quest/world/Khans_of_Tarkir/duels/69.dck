@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Jubilee
+Title=Jubilee
+Icon=Jubilee.jpg
+Difficulty=Hard
+Description=../Modern/Khans_of_Tarkir/SCG_Invitational_Qualifier_Rockville/Anthony_Come_-_Birthing_Pod_(Modern,_#152449).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Birds of Paradise
+1 Eidolon of Rhetoric
+3 Kitchen Finks
+3 Loxodon Smiter
+4 Noble Hierarch
+2 Scavenging Ooze
+2 Siege Rhino
+1 Spellskite
+3 Thalia, Guardian of Thraben
+3 Voice of Resurgence
+3 Wilt-Leaf Liege
+2 Birthing Pod
+3 Abrupt Decay
+4 Path to Exile
+2 Forest
+3 Gavony Township
+1 Godless Shrine
+2 Marsh Flats
+1 Overgrown Tomb
+1 Plains
+4 Razorverge Thicket
+1 Swamp
+2 Temple Garden
+3 Verdant Catacombs
+3 Windswept Heath
+[Sideboard]
+1 Aven Mindcensor
+2 Dismember
+1 Linvala, Keeper of Silence
+1 Mirran Crusader
+1 Reclamation Sage
+2 Stony Silence
+4 Thoughtseize
+1 Thrun, the Last Troll
+2 Zealous Persecution

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Bamm Bamm Rubble
+Title=Bamm Bamm Rubble
+Icon=Bamm Bamm Rubble.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/PTQ_Barcelona_-_Pohar_&#269;erneho_ryti&#345;e_&#269;/Petr_Soch&#367;rek_-_Rogue_(Modern,_#28883).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Figure of Destiny
+4 Geist of Saint Traft
+3 Knight of the White Orchid
+4 Mirran Crusader
+4 Steppe Lynx
+4 Thalia, Guardian of Thraben
+1 Dismember
+4 Path to Exile
+4 Honor of the Pure
+3 Elspeth, Knight-Errant
+4 Arid Mesa
+4 Flagstones of Trokair
+3 Hallowed Fountain
+2 Horizon Canopy
+4 Marsh Flats
+3 Moorland Haunt
+5 Plains
+[Sideboard]
+2 Disenchant
+1 Kor Firewalker
+1 Mana Leak
+3 Relic of Progenitus
+2 Spell Pierce
+2 Tectonic Edge
+3 Timely Reinforcements

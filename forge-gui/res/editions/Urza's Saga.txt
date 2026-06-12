@@ -129,6 +129,7 @@ ScryfallCode=USG
 117 U Bereavement @Andrew Goldhawk
 118 C Blood Vassal @Chippy
 119 C Bog Raiders @Carl Critchlow
+119s C Bog Raiders @Carl Critchlow
 120 C Breach @Greg Staples
 121 C Cackling Fiend @Brian Despain
 122 C Carrion Beetles @Ron Spencer
@@ -140,6 +141,7 @@ ScryfallCode=USG
 128 R Darkest Hour @Heather Hudson
 129 C Despondency @D. Alexander Gregory
 130 U Diabolic Servitude @Scott M. Fischer
+130s U Diabolic Servitude @Scott M. Fischer
 131 R Discordant Dirge @Carl Critchlow
 132 C Duress @Lawrence Snelly
 133 R Eastern Paladin @Carl Critchlow
@@ -149,9 +151,11 @@ ScryfallCode=USG
 137 C Hollow Dogs @Jeff Miracola
 138 R Ill-Gotten Gains @Greg Staples
 139 C Looming Shade @Vincent Evans
+139s C Looming Shade @Vincent Evans
 140 R Lurking Evil @Scott Kirschner
 141 U Mana Leech @Mark A. Nelson
 142 U No Rest for the Wicked @Carl Critchlow
+142s U No Rest for the Wicked @Carl Critchlow
 143 R Oppression @Pete Venters
 144 U Order of Yawgmoth @Chippy
 145 U Parasitic Bond @Scott Kirschner
@@ -173,7 +177,9 @@ ScryfallCode=USG
 161 R Tainted Aether @Thomas M. Baxa
 162 C Unnerve @Terese Nielsen
 163 C Unworthy Dead @Carl Critchlow
+163s C Unworthy Dead @Carl Critchlow
 164 U Vampiric Embrace @Thomas M. Baxa
+164s U Vampiric Embrace @Thomas M. Baxa
 165 R Vebulid @Ron Spencer
 166 U Victimize @Val Mayerik
 167 U Vile Requiem @Carl Critchlow
@@ -197,6 +203,7 @@ ScryfallCode=USG
 185 R Fault Line @Ron Spencer
 186 C Fiery Mantle @Bob Eggleton
 187 U Fire Ants @Tom Fleming
+187s U Fire Ants @Tom Fleming
 188 R Gamble @Andrew Goldhawk
 189 U Goblin Cadets @Jerry Tiritilli
 190 U Goblin Lackey @Jerry Tiritilli

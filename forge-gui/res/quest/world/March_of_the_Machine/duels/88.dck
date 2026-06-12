@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Ajok
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/Victor_Lenoble_-_Humans_Wizards_(Modern,_#1637558).dck
+Deck Type=constructed
+
+[Main]
+1 Magus of the Moon
+1 Meddling Mage
+1 Rona, Herald of Invasion
+1 Venser, Shaper Savant
+3 Seasoned Pyromancer
+4 Unsettled Mariner
+4 Thalia's Lieutenant
+4 Harmonic Prodigy
+4 Esper Sentinel
+4 Champion of the Parish
+4 Reflector Mage
+4 Aether Vial
+4 Step Through
+1 Hallowed Fountain
+1 Otawara, Soaring City
+1 Sacred Foundry
+1 Riptide Laboratory
+1 Steam Vents
+2 Secluded Courtyard
+2 Arid Mesa
+2 Plains
+2 Island
+4 Flooded Strand
+4 Cavern of Souls
+[Sideboard]
+4 Sanctifier en-Vec
+1 Phyrexian Censor
+1 Orvar, the All-Form
+1 Drannith Magistrate
+2 Deputy of Detention
+2 Chalice of the Void
+2 Magus of the Moon
+2 Meddling Mage

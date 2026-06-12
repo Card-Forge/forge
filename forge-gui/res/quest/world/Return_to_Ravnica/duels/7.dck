@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robin Hood
+Title=Robin Hood
+Icon=Robin Hood.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Marietta/Allen_Evan_-_B-R_Aggro_(Standard,_#44498).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Diregraf Ghoul
+4 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+3 Hellrider
+4 Knight of Infamy
+3 Thundermaw Hellkite
+1 Brimstone Volley
+4 Searing Spear
+2 Victim of Night
+3 Pillar of Flame
+4 Blood Crypt
+4 Cavern of Souls
+4 Dragonskull Summit
+1 Mountain
+4 Rakdos Guildgate
+7 Swamp
+[Sideboard]
+2 Appetite for Brains
+3 Bonfire of the Damned
+2 Mark of the Vampire
+2 Rakdos Charm
+2 Underworld Connections
+2 Vampire Nighthawk
+2 Zealous Conscripts

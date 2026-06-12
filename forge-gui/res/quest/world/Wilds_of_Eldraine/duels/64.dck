@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Comic Book Guy
+Title=Comic Book Guy
+Icon=Comic Book Guy.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/LegoSheepy_-_Abzan_Cauldron_(Modern,_#1749968)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Spike Feeder
+1 Walking Ballista
+4 Giver of Runes
+4 Ranger-Captain of Eos
+4 Heliod, Sun-Crowned
+1 Mikaeus, the Lunarch
+4 Orcish Bowmasters
+4 Delighted Halfling
+4 Agatha's Soul Cauldron
+4 Collected Company
+4 Grist, the Hunger Tide
+1 Dryad Arbor
+4 Verdant Catacombs
+2 Temple Garden
+1 Overgrown Tomb
+4 Windswept Heath
+2 Godless Shrine
+1 Plains
+1 Swamp
+1 Forest
+1 Wooded Bastion
+2 Marsh Flats
+2 Razorverge Thicket
+[Sideboard]
+1 Burrenton Forge-Tender
+1 Chalice of the Void
+2 Fulminator Mage
+2 Archon of Emeria
+2 Sanctifier en-Vec
+4 Endurance
+3 Haywire Mite

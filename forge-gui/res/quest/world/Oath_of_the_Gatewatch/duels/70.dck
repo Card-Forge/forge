@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Robot Santa
+Title=Robot Santa
+Icon=Robot Santa.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/SCG_States_Duluth/Andrew_Ray_-_Eldrazi_(Modern,_#619377).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Eldrazi Displacer
+4 Eldrazi Mimic
+4 Endless One
+4 Matter Reshaper
+4 Reality Smasher
+4 Thought-Knot Seer
+1 Ulamog, the Ceaseless Hunger
+4 Expedition Map
+4 Dismember
+3 Path to Exile
+1 Ghostly Prison
+1 Karn Liberated
+1 Ugin, the Spirit Dragon
+2 Cavern of Souls
+4 Eldrazi Temple
+5 Plains
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+1 Wastes
+[Sideboard]
+1 Ghost Quarter
+2 Kataki, War's Wage
+3 Leyline of Sanctity
+2 Phyrexian Unlife
+2 Rest for the Weary
+4 Spellskite

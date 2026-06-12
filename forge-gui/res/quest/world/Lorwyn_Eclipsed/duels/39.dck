@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Gambit
+Title=Gambit
+Icon=Gambit.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/BestSmurgNA_-_Dimir_Demons_(Standard,_#2822230).dck
+Deck Type=constructed
+
+[Main]
+4 Deceit
+4 Superior Spider-Man
+3 Doomsday Excruciator
+2 Harvester of Misery
+4 Requiting Hex
+3 Bitter Triumph
+3 Insatiable Avarice
+3 Intimidation Tactics
+3 Stock Up
+2 Deadly Cover-Up
+2 Winternight Stories
+1 Cruelclaw's Heist
+11 Swamp
+4 Gloomlake Verge
+4 Restless Reef
+4 Watery Grave
+2 Multiversal Passage
+1 Undercity Sewers
+[Sideboard]
+3 Duress
+2 Flashfreeze
+2 Oildeep Gearhulk
+2 Soul-Guide Lantern
+1 Annul
+1 Black Cat, Cunning Thief
+1 Disdainful Stroke
+1 Negate
+1 Shoot the Sheriff
+1 The End

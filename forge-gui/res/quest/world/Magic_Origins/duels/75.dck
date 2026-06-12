@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Flandre Scarlet
+Title=Flandre Scarlet
+Icon=Flandre Scarlet.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/PPTQ_-_Giga-Bites_Cafe_-_Marietta,_GA/Tan_Le_-_Naya_Burn_(Modern,_#310531).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+1 Lightning Helix
+1 Searing Blaze
+2 Exquisite Firecraft
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+4 Bloodstained Mire
+2 Copperline Gorge
+3 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+4 Destructive Revelry
+3 Path to Exile
+2 Skullcrack

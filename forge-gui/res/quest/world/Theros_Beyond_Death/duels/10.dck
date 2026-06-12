@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Reverend Lovejoy
+Title=Reverend Lovejoy
+Icon=Reverend Lovejoy.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/Ariel_Guillermo_Ibanez_-_Bant_Midrange_(Standard,_#947622).dck
+Deck Type=constructed
+
+[Main]
+1 Realm-Cloaked Giant
+2 Dream Trawler
+3 Hydroid Krasis
+3 Uro, Titan of Nature's Wrath
+3 Mystical Dispute
+3 Aether Gust
+4 Growth Spiral
+3 Shatter the Sky
+3 Elspeth Conquers Death
+4 Teferi, Time Raveler
+4 Nissa, Who Shakes the World
+1 Temple of Plenty
+1 Island
+1 Plains
+1 Thornwood Falls
+1 Blossoming Sands
+2 Tranquil Cove
+2 Temple of Mystery
+3 Forest
+3 Fabled Passage
+4 Temple Garden
+4 Hallowed Fountain
+4 Breeding Pool
+[Sideboard]
+1 Aether Gust
+2 Knight of Autumn
+2 Tolsimir, Friend to Wolves
+3 Dovin's Veto
+3 Apostle of Purifying Light
+4 Devout Decree

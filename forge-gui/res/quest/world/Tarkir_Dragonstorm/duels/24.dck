@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Ekolo
+Title=Ekolo
+Icon=Ekolo.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Hirayama_Rei_-_RG_Midrange_(Standard,_#2434954).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+2 Shivan Devastator
+4 Kolaghan Warmonger
+4 Bonehoard Dracosaur
+4 Magmatic Hellkite
+4 Sarkhan, Dragon Ascendant
+2 Bloomvine Regent
+4 Twinmaw Stormbrood
+4 Herd Heirloom
+4 Invasion of Tarkir
+1 Mountain
+7 Forest
+4 Karplusan Forest
+4 Copperline Gorge
+2 Hushwood Verge
+3 Thornspire Verge
+3 Maelstrom of the Spirit Dragon
+[Sideboard]

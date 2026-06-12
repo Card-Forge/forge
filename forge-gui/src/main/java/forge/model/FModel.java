@@ -28,6 +28,7 @@ import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.CardRelationMatrixGenerator;
 import forge.deck.io.DeckPreferences;
+import forge.error.ExceptionHandler;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.card.CardUtil;
@@ -44,7 +45,6 @@ import forge.gamemodes.quest.QuestWorld;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.tournament.TournamentData;
 import forge.gui.FThreads;
-import forge.gui.GuiBase;
 import forge.gui.card.CardPreferences;
 import forge.gui.interfaces.IProgressBar;
 import forge.item.PaperCard;
@@ -92,7 +92,7 @@ public final class FModel {
        ConquestUtil.updateRarityFilterOdds(cp);
        return cp;
     });
-    private static ForgePreferences preferences;
+    private static final Supplier<ForgePreferences> preferences = Suppliers.memoize(ForgePreferences::new);
     private static final Supplier<ForgeNetPreferences> netPreferences = Suppliers.memoize(ForgeNetPreferences::new);
     private static final Supplier<Map<GameType, AchievementCollection>> achievements = Suppliers.memoize(() -> {
         final Map<GameType, AchievementCollection> a = Maps.newHashMap();
@@ -115,18 +115,9 @@ public final class FModel {
     private static final Supplier<ConquestController> conquest = Suppliers.memoize(ConquestController::new);
     private static final Supplier<CardCollections> decks = Suppliers.memoize(CardCollections::new);
 
-    private static final Supplier<IStorage<CardBlock>> blocks = Suppliers.memoize(() -> {
-        final IStorage<CardBlock> cb = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", getMagicDb().getEditions()));
-        // SetblockLands
-        for (final CardBlock b : cb) {
-            try {
-                getMagicDb().getBlockLands().add(b.getLandSet().getCode());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return cb;
-    });
+    private static final Supplier<IStorage<CardBlock>> blocks = Suppliers.memoize(
+            () -> (IStorage<CardBlock>) new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader(
+                    ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", getMagicDb().getEditions())));
     private static final Supplier<IStorage<CardBlock>> fantasyBlocks = Suppliers.memoize(() -> new StorageBase<>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", getMagicDb().getEditions())));
     private static final Supplier<IStorage<ThemedChaosDraft>> themedChaosDrafts = Suppliers.memoize(() -> new StorageBase<>("Themed Chaos Drafts", new ThemedChaosDraft.Reader(ForgeConstants.BLOCK_DATA_DIR + "chaosdraftthemes.txt")));
     private static final Supplier<IStorage<ConquestPlane>> planes = Suppliers.memoize(() -> new StorageBase<>("Conquest planes", new ConquestPlane.Reader(ForgeConstants.CONQUEST_PLANES_DIR + "planes.txt")));
@@ -138,15 +129,14 @@ public final class FModel {
         final IStorage<QuestWorld> w = new StorageBase<>("Quest worlds", null, standardWorlds);
         return w;
     });
-    private static final Supplier<GameFormat.Collection> formats = Suppliers.memoize(() -> new GameFormat.Collection(new GameFormat.Reader( new File(ForgeConstants.FORMATS_DATA_DIR), new File(ForgeConstants.USER_FORMATS_DIR), preferences.getPrefBoolean(FPref.LOAD_ARCHIVED_FORMATS))));
-    private static final Supplier<ItemPool<PaperCard>> uniqueCardsNoAlt = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getUniqueCardsNoAlt(), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> allCardsNoAlt = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(), PaperCard.class));
+    private static final Supplier<GameFormat.Collection> formats = Suppliers.memoize(() -> new GameFormat.Collection(new GameFormat.Reader( new File(ForgeConstants.FORMATS_DATA_DIR), new File(ForgeConstants.USER_FORMATS_DIR), getPreferences().getPrefBoolean(FPref.LOAD_ARCHIVED_FORMATS))));
+    private static final Supplier<ItemPool<PaperCard>> allCards = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> planechaseCards = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_PLANE_OR_PHENOMENON)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> archenemyCards = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_SCHEME)), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> brawlCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(getFormats().get("Brawl").getFilterPrinted().and(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_BRAWL_COMMANDER))), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> oathbreakerCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_OATHBREAKER.or(CardRulesPredicates.CAN_BE_SIGNATURE_SPELL))), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> tinyLeadersCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_TINY_LEADERS_COMMANDER)), PaperCard.class));
-    private static final Supplier<ItemPool<PaperCard>> commanderPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(PaperCardPredicates.CAN_BE_COMMANDER), PaperCard.class));
+    private static final Supplier<ItemPool<PaperCard>> brawlCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(getFormats().get("Brawl").getFilterPrinted().and(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_BRAWL_COMMANDER))), PaperCard.class));
+    private static final Supplier<ItemPool<PaperCard>> oathbreakerCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_OATHBREAKER.or(CardRulesPredicates.CAN_BE_SIGNATURE_SPELL))), PaperCard.class));
+    private static final Supplier<ItemPool<PaperCard>> tinyLeadersCommander = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_TINY_LEADERS_COMMANDER)), PaperCard.class));
+    private static final Supplier<ItemPool<PaperCard>> commanderPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getCommonCards().getAllCards(PaperCardPredicates.CAN_BE_COMMANDER), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> avatarPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_VANGUARD)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> conspiracyPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONSPIRACY)), PaperCard.class));
     private static final Supplier<ItemPool<PaperCard>> dungeonPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_DUNGEON)), PaperCard.class));
@@ -164,15 +154,17 @@ public final class FModel {
         // Instantiate preferences: quest and regular
         // Preferences are initialized first so that the splash screen can be translated.
         try {
-            preferences = GuiBase.getForgePrefs();
             if (adjustPrefs != null) {
-                adjustPrefs.apply(preferences);
+                adjustPrefs.apply(getPreferences());
             }
-            GamePlayerUtil.getGuiPlayer().setName(preferences.getPref(FPref.PLAYER_NAME));
+            GamePlayerUtil.getGuiPlayer().setName(getPreferences().getPref(FPref.PLAYER_NAME));
         }
         catch (final Exception exn) {
             throw new RuntimeException(exn);
         }
+
+        // Runs here because preferences must be loaded before MAX_LOG_FILES is readable
+        ExceptionHandler.pruneForgeLogs(getPreferences().getPrefInt(FPref.MAX_LOG_FILES));
 
         Lang.createInstance(getPreferences().getPref(FPref.UI_LANGUAGE));
         Localizer.getInstance().initialize(getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
@@ -220,7 +212,7 @@ public final class FModel {
         }
 
         // Do this first so PaperCards see the real preference
-        CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
+        CardTranslation.preloadTranslation(getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
         // Create profile dirs if they don't already exist
         for (final String dname : ForgeConstants.PROFILE_DIRS) {
@@ -234,8 +226,7 @@ public final class FModel {
             }
         }
 
-        ForgePreferences.DEV_MODE = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
-        ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN;
+        ForgePreferences.DEV_MODE = getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
         getMagicDb().setStandardPredicate(getFormats().getStandard().getFilterRules());
         getMagicDb().setPioneerPredicate(getFormats().getPioneer().getFilterRules());
@@ -244,14 +235,14 @@ public final class FModel {
         getMagicDb().setOathbreakerPredicate(getFormats().get("Oathbreaker").getFilterRules());
         getMagicDb().setBrawlPredicate(getFormats().get("Brawl").getFilterRules());
 
-        getMagicDb().setFilteredHandsEnabled(preferences.getPrefBoolean(FPref.FILTERED_HANDS));
+        getMagicDb().setFilteredHandsEnabled(getPreferences().getPrefBoolean(FPref.FILTERED_HANDS));
         try {
-            getMagicDb().setMulliganRule(MulliganDefs.MulliganRule.valueOf(preferences.getPref(FPref.MULLIGAN_RULE)));
+            getMagicDb().setMulliganRule(MulliganDefs.MulliganRule.valueOf(getPreferences().getPref(FPref.MULLIGAN_RULE)));
         } catch(Exception e) {
             getMagicDb().setMulliganRule(MulliganDefs.MulliganRule.London);
         }
 
-        Spell.setPerformanceMode(preferences.getPrefBoolean(FPref.PERFORMANCE_MODE));
+        Spell.setPerformanceMode(getPreferences().getPrefBoolean(FPref.PERFORMANCE_MODE));
 
         if (progressBar != null) {
             FThreads.invokeInEdtLater(() -> progressBar.setDescription(Localizer.getInstance().getMessage("splash.loading.decks")));
@@ -289,12 +280,8 @@ public final class FModel {
         return conquest.get();
     }
 
-    public static ItemPool<PaperCard> getUniqueCardsNoAlt() {
-        return uniqueCardsNoAlt.get();
-    }
-
-    public static ItemPool<PaperCard> getAllCardsNoAlt() {
-        return allCardsNoAlt.get();
+    public static ItemPool<PaperCard> getAllCards() {
+        return allCards.get();
     }
 
     public static ItemPool<PaperCard> getArchenemyCards() {
@@ -377,10 +364,16 @@ public final class FModel {
     }
 
     public static ForgePreferences getPreferences() {
-        return preferences;
+        return preferences.get();
     }
     public static ForgeNetPreferences getNetPreferences() {
         return netPreferences.get();
+    }
+    public static QuestPreferences getQuestPreferences() {
+        return questPreferences.get();
+    }
+    public static ConquestPreferences getConquestPreferences() {
+        return conquestPreferences.get();
     }
 
     public static AchievementCollection getAchievements(GameType gameType) {
@@ -395,14 +388,6 @@ public final class FModel {
 
     public static IStorage<CardBlock> getBlocks() {
         return blocks.get();
-    }
-
-    public static QuestPreferences getQuestPreferences() {
-        return questPreferences.get();
-    }
-
-    public static ConquestPreferences getConquestPreferences() {
-        return conquestPreferences.get();
     }
 
     public static GauntletData getGauntletData() {

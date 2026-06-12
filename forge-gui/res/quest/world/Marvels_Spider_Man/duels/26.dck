@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Medium
+Description=./Standard/Marvels_Spider_Man/Abe_Kodai_-_Mono_Red_Aggro_(Standard,_#2636136).dck
+Deck Type=constructed
+
+[Main]
+1 Magda, the Hoardmaster
+2 Stingerback Terror
+4 Hired Claw
+4 Screaming Nemesis
+4 Burnout Bashtronaut
+4 Sarkhan, Dragon Ascendant
+4 Twinmaw Stormbrood
+4 Nova Hellkite
+1 J. Jonah Jameson
+2 Lightning Strike
+4 Burst Lightning
+2 Scorching Shot
+18 Mountain
+3 Soulstone Sanctuary
+3 Maelstrom of the Spirit Dragon
+[Sideboard]
+2 Abrade
+3 Magebane Lizard
+4 Sunspine Lynx
+2 Vengeful Possession
+1 Chandra, Spark Hunter
+2 Fire Magic
+1 Ruinous Rampage

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Dino
+Title=Dino
+Icon=Dino.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/ArcadioGiron_-_Burn_(Modern,_#1456878).dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+1 Eidolon of the Great Revel
+1 Runaway Steam-Kin
+1 Soul-Scar Mage
+2 Electrostatic Infantry
+4 Monastery Swiftspear
+4 Vexing Devil
+2 Dragon's Claw
+1 Searing Blaze
+2 Brute Force
+4 Lightning Bolt
+4 Thunderous Wrath
+2 Lava Spike
+3 Rift Bolt
+4 Light Up the Stage
+4 Skewer the Critics
+4 Roiling Vortex
+1 Valakut, the Molten Pinnacle
+15 Mountain
+[Sideboard]
+1 Shenanigans
+2 Manabarbs
+4 Unlicensed Hearse
+4 Smash to Smithereens
+4 Detection Tower

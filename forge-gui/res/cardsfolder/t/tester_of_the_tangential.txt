@@ -1,0 +1,11 @@
+Name:Tester of the Tangential
+ManaCost:1 U
+Types:Creature Djinn Wizard
+PT:1/1
+K:Increment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ At the beginning of combat on your turn, you may pay {X}. When you do, move X +1/+1 counters from this creature onto another target creature.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ X | Execute$ TrigMoveCounter | TriggerDescription$ When you do, move X +1/+1 counters from this creature onto another target creature.
+SVar:TrigMoveCounter:DB$ MoveCounter | Source$ Self | ValidTgts$ Creature.Other | ValidTgtDesc$ another creature | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:Increment (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.)\nAt the beginning of combat on your turn, you may pay {X}. When you do, move X +1/+1 counters from this creature onto another target creature.

@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Hard
+Description=../Modern/Fate_Reforged/Liga_Modern_Defantasy_Z_(3a)/Ruben_Perez_Vilches_-_Rogue_(Modern,_#201398).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Birds of Paradise
+2 Courser of Kruphix
+4 Doran, the Siege Tower
+4 Noble Hierarch
+3 Spellskite
+4 Tarmogoyf
+4 Zur the Enchanter
+4 Abrupt Decay
+1 Path to Exile
+3 Inquisition of Kozilek
+2 Thoughtseize
+3 Detention Sphere
+1 Threads of Disloyalty
+1 Unflinching Courage
+1 Breeding Pool
+1 Forest
+2 Godless Shrine
+1 Hallowed Fountain
+3 Marsh Flats
+1 Misty Rainforest
+1 Overgrown Tomb
+1 Plains
+1 Sunpetal Grove
+1 Swamp
+1 Temple Garden
+4 Verdant Catacombs
+1 Watery Grave
+2 Windswept Heath
+1 Woodland Cemetery
+[Sideboard]
+1 Bow of Nylea
+1 Choke
+1 Eidolon of Rhetoric
+1 Ghostly Prison
+1 Illness in the Ranks
+1 Monastery Siege
+1 Nevermore
+3 Spreading Seas
+2 Stony Silence
+2 Swan Song
+1 Thrun, the Last Troll

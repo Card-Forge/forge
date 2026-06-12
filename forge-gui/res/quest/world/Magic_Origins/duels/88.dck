@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Hard
+Description=../Modern/Magic_Origins/SCG_Classic_Worcester/Eric_Turner_-_Red_Deck_Wins_(Modern,_#631305).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+1 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+3 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+4 Destructive Revelry
+2 Exquisite Firecraft
+2 Molten Rain
+2 Mutagenic Growth
+3 Path to Exile
+1 Searing Blood

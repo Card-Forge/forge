@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Imperial Guard
+Title=Imperial Guard
+Icon=Imperial Guard.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/SCG_Invitational_Qualifier_-_Brooklyn,_NY/Caupolican_Lopez_Yapor_-_Bant_Humans_(Standard,_#638313).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Duskwatch Recruiter
+1 Jace, Vryn's Prodigy
+2 Knight of the White Orchid
+4 Lambholt Pacifist
+4 Reflector Mage
+4 Thalia's Lieutenant
+3 Thalia, Heretic Cathar
+3 Thraben Inspector
+3 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+2 Tamiyo, Field Researcher
+2 Canopy Vista
+4 Evolving Wilds
+3 Forest
+4 Fortified Village
+1 Island
+6 Plains
+3 Prairie Stream
+2 Yavimaya Coast
+[Sideboard]
+2 Clash of Wills
+2 Declaration in Stone
+2 Hallowed Moonlight
+1 Learn from the Past
+2 Negate
+1 Nissa, Vastwood Seer
+1 Ojutai's Command
+2 Summary Dismissal
+2 Tragic Arrogance

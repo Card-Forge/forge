@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Zegana
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Inagaki_Hiroto_-_WUG_Control_(Modern,_#1031089).dck
+Deck Type=constructed
+
+[Main]
+1 Snapcaster Mage
+3 Uro, Titan of Nature's Wrath
+1 Spell Snare
+2 Remand
+2 Mana Leak
+3 Force of Negation
+3 Cryptic Command
+4 Path to Exile
+4 Growth Spiral
+1 Hour of Promise
+1 Supreme Verdict
+2 Teferi, Hero of Dominaria
+2 Jace, the Mind Sculptor
+3 Teferi, Time Raveler
+1 Temple Garden
+1 Snow-Covered Forest
+1 Plains
+1 Polluted Delta
+1 Forest
+1 Scalding Tarn
+2 Mystic Sanctuary
+2 Breeding Pool
+2 Field of Ruin
+2 Hallowed Fountain
+2 Island
+2 Snow-Covered Island
+4 Flooded Strand
+4 Misty Rainforest
+[Sideboard]
+1 Supreme Verdict
+1 Mystical Dispute
+1 Dovin's Veto
+1 Celestial Purge
+2 Timely Reinforcements
+2 Ashiok, Dream Render
+2 Ceremonious Rejection
+2 Veil of Summer
+3 Aether Gust

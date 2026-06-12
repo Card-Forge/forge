@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling White
+Title=Dungeon Crawling White
+Icon=Dungeon Crawling White.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Billy_Kilby_-_Dimir_Tempo_(Standard,_#2784583).dck
+Deck Type=constructed
+
+[Main]
+4 Bitterbloom Bearer
+4 Enduring Curiosity
+4 Floodpits Drowner
+4 Spyglass Siren
+4 Tishana's Tidebinder
+2 Cecil, Dark Knight
+2 Deep-Cavern Bat
+3 Requiting Hex
+3 Shoot the Sheriff
+2 Spell Snare
+1 Heartless Act
+2 Kaito, Bane of Nightmares
+7 Swamp
+4 Gloomlake Verge
+4 Watery Grave
+3 Restless Reef
+3 Starting Town
+2 Island
+2 Soulstone Sanctuary
+[Sideboard]
+3 Mai, Scornful Striker
+3 Preacher of the Schism
+2 Duress
+2 Flashfreeze
+2 Kaito, Bane of Nightmares
+1 Soul-Guide Lantern
+1 Strategic Betrayal
+1 The Unagi of Kyoshi Island

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Obatala
+Title=Obatala
+Icon=Obatala.jpg
+Difficulty=Very Hard
+Description=../Modern/Shadows_over_Innistrad/Competitive_Modern_Constructed_League/yougottoldfarb_-_GW_Auras_(Modern,_#654612).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+3 Kor Spiritdancer
+4 Slippery Bogle
+4 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+2 Gryff's Boon
+3 Hyena Umbra
+4 Rancor
+4 Spider Umbra
+1 Spirit Link
+2 Spirit Mantle
+1 Unflinching Courage
+1 Forest
+4 Horizon Canopy
+1 Plains
+4 Razorverge Thicket
+3 Temple Garden
+4 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+2 Disenchant
+1 Gaddock Teeg
+3 Leyline of Sanctity
+3 Melira, Sylvok Outcast
+1 Natural State
+2 Rest in Peace
+3 Stony Silence

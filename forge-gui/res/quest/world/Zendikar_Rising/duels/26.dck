@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Zapp Brannigan
+Title=Zapp Brannigan
+Icon=Zapp Brannigan.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/Adam_Fraking_-_Mono-Green_Food_(Standard,_#1067803).dck
+Deck Type=constructed
+
+[Main]
+1 Kogla, the Titan Ape
+1 Klothys, God of Destiny
+1 Thrashing Brontodon
+2 Terror of the Peaks
+2 Tangled Florahedron
+3 Feasting Troll King
+3 Bonecrusher Giant
+4 Gilded Goose
+4 Kazandu Mammoth
+4 Wicked Wolf
+2 The Great Henge
+3 Witch's Oven
+2 Spikefield Hazard
+2 Shatterskull Smashing
+4 Claim the Firstborn
+1 The Akroan War
+4 Trail of Crumbs
+1 Temple of Abandon
+1 Castle Garenbrig
+3 Cragcrown Pathway
+3 Mountain
+4 Fabled Passage
+5 Forest
+[Sideboard]
+1 Klothys, God of Destiny
+1 Storm's Wrath
+1 The Akroan War
+1 Chainweb Aracnir
+2 Scavenging Ooze
+2 Thrashing Brontodon
+2 Questing Beast
+2 Vivien, Monsters' Advocate
+3 Ox of Agonas

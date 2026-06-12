@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Green Hornet
+Title=Green Hornet
+Icon=Green Hornet.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/MoosePlural_-_Worldsoul's_Ramp_(Standard,_#1983433).dck
+Deck Type=constructed
+
+[Main]
+4 Aftermath Analyst
+1 Colossal Skyturtle
+1 Shigeki, Jukai Visionary
+4 Nissa, Resurgent Animist
+2 Kellan, Inquisitive Prodigy
+4 Memory Deluge
+4 Ill-Timed Explosion
+4 Worldsoul's Rage
+3 Virtue of Strength
+3 Spelunking
+4 Brokers Hideout
+4 Cabaretti Courtyard
+6 Forest
+5 Mountain
+4 Maestros Theater
+1 Echoing Deeps
+6 Island
+[Sideboard]
+2 Lithomantic Barrage
+2 Negate
+3 Abrade
+1 Turn the Earth
+2 Tranquil Frillback
+1 Doppelgang
+1 End the Festivities
+2 Vampires' Vengeance
+1 Into the Fire

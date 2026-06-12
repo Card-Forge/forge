@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Harry Potter
+Title=Harry Potter
+Icon=Harry Potter.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/PTQ_Seattle_-_College_Park,_Maryland/Steven_Juseck_-_Humans_(Standard,_#33622).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+3 Champion of Lambholt
+4 Champion of the Parish
+4 Fiend Hunter
+1 Grand Abolisher
+4 Hero of Bladehold
+4 Mayor of Avabruck
+4 Nearheath Pilgrim
+4 Silverblade Paladin
+4 Thalia, Guardian of Thraben
+2 Angelic Destiny
+4 Cavern of Souls
+4 Forest
+1 Gavony Township
+5 Plains
+4 Razorverge Thicket
+4 Sunpetal Grove
+[Sideboard]
+2 Crushing Vines
+3 Mirran Crusader
+2 Nevermore
+3 Oblivion Ring
+1 Riders of Gavony
+2 Sword of War and Peace

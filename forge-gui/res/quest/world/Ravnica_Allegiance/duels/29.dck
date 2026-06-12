@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Alejandro_Gonzalez_-_Selesnya_Tokens_(Standard,_#787646).dck
+Deck Type=constructed
+
+[Main]
+2 Venerated Loxodon
+3 Trostani Discordant
+3 Tithe Taker
+3 Emmara, Soul of the Accord
+2 Unbreakable Formation
+4 March of the Multitudes
+4 Saproling Migration
+4 Flower // Flourish
+4 Legion's Landing
+4 History of Benalia
+4 Conclave Tribunal
+1 Ajani, Adversary of Tyrants
+1 Huatli, Radiant Champion
+1 Arch of Orazca
+4 Sunpetal Grove
+4 Temple Garden
+3 Forest
+9 Plains
+[Sideboard]
+1 Ajani, Adversary of Tyrants
+1 Lyra Dawnbringer
+1 Vivien Reid
+3 Baffling End
+3 Knight of Autumn
+2 Kraul Harpooner
+1 Citywide Bust
+3 Adanto Vanguard

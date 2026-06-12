@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Eomer
+Title=Eomer
+Icon=Eomer.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/States-Champs_Iowa/Aaron_Mechtensimer_-_Valakut_Ramp_(Standard,_#7669).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+1 Inferno Titan
+3 Oracle of Mul Daya
+4 Primeval Titan
+2 Wurmcoil Engine
+4 Harrow
+4 Lightning Bolt
+3 Summoning Trap
+4 Cultivate
+4 Khalni Heart Expedition
+2 Koth of the Hammer
+1 Evolving Wilds
+5 Forest
+12 Mountain
+1 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+3 Acidic Slime
+3 Naturalize
+4 Obstinate Baloth
+4 Pyroclasm

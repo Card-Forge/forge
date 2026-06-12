@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Gruul-precon
+Title=Gruul-precon
+Icon=Gruul-precon.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Adam_Fischer_-_Golgari_Midrange_(Standard,_#2785219).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Llanowar Elves
+4 Sentinel of the Nameless City
+3 Mutable Explorer
+3 Ouroboroid
+2 Deep-Cavern Bat
+2 Preacher of the Schism
+2 Bitter Triumph
+2 Requiting Hex
+1 Long Goodbye
+1 Shoot the Sheriff
+1 The End
+1 Analyze the Pollen
+1 Intimidation Tactics
+1 Maelstrom Pulse
+4 Unholy Annex
+4 Blooming Marsh
+4 Overgrown Tomb
+4 Wastewood Verge
+3 Restless Cottage
+3 Swamp
+2 Forest
+2 Multiversal Passage
+2 Soulstone Sanctuary
+[Sideboard]
+4 Duress
+2 Day of Black Sun
+2 Heritage Reclamation
+2 Snakeskin Veil
+2 Zero Point Ballad
+1 Soul-Guide Lantern
+1 The End
+1 Vivien Reid

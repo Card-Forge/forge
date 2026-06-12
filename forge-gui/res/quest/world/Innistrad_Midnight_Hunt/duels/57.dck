@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=IdiAmin
+Title=IdiAmin
+Icon=IdiAmin.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/crazybaloth_-_Golgari_Evolution_(Modern,_#1225672)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Zulaport Cutthroat
+1 Birds of Paradise
+1 Outland Liberator
+1 Hapatra, Vizier of Poisons
+1 Gilded Goose
+2 Prosperous Innkeeper
+3 Geralf's Messenger
+3 Wall of Roots
+4 Ignoble Hierarch
+4 Strangleroot Geist
+4 Yawgmoth, Thran Physician
+4 Young Wolf
+4 Chord of Calling
+4 Eldritch Evolution
+2 Grist, the Hunger Tide
+1 Khalni Garden
+1 Dryad Arbor
+1 Forest
+1 Yavimaya, Cradle of Growth
+1 Nurturing Peatland
+1 Urborg, Tomb of Yawgmoth
+1 Swamp
+2 Overgrown Tomb
+4 Blooming Marsh
+4 Verdant Catacombs
+4 Twilight Mire
+[Sideboard]
+1 Crime // Punishment
+1 Assassin's Trophy
+1 Outland Liberator
+1 Damping Sphere
+1 Scavenging Ooze
+1 Slaughter Pact
+1 Thragtusk
+2 Thoughtseize
+2 Force of Vigor
+2 Endurance
+2 Veil of Summer

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Firestorm
+Title=Firestorm
+Icon=Firestorm.jpg
+Difficulty=Medium
+Description=Kaladesh/Game_Day_Kaladesh_Read_&_Play/Cristian_Paez_-_UW_Cojo_Flash_(Standard,_#643985).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Archangel Avacyn
+4 Rattlechains
+4 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+4 Thraben Inspector
+3 Smuggler's Copter
+2 Negate
+2 Declaration in Stone
+2 Always Watching
+3 Stasis Snare
+6 Island
+9 Plains
+4 Port Town
+4 Prairie Stream
+2 Westvale Abbey
+[Sideboard]
+2 Always Watching
+2 Authority of the Consuls
+2 Ceremonious Rejection
+2 Declaration in Stone
+2 Lone Rider
+1 Negate
+1 Quarantine Field
+1 Summary Dismissal
+2 Void Shatter

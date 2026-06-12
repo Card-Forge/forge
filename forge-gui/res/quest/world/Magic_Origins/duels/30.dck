@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Magnum
+Title=Magnum
+Icon=Magnum.jpg
+Difficulty=Easy
+Description=Magic_Origins/SCG_Invitational_Qualifier_Marion/Matthew_Townsend_-_G-B_Elves_(Standard,_#300069).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dwynen's Elite
+3 Dwynen, Gilt-Leaf Daen
+4 Elvish Mystic
+4 Elvish Visionary
+1 Gilt-Leaf Winnower
+4 Gnarlroot Trapper
+4 Nissa, Vastwood Seer
+4 Shaman of the Pack
+2 Sylvan Messenger
+2 Whisperwood Elemental
+1 Woodland Bellower
+2 Chord of Calling
+4 Collected Company
+9 Forest
+4 Llanowar Wastes
+1 Mana Confluence
+3 Swamp
+3 Temple of Malady
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+1 Duress
+1 Eyeblight Massacre
+2 Hero's Downfall
+1 Infinite Obliteration
+2 Nylea's Disciple
+1 Pharika, God of Affliction
+1 Reclamation Sage
+2 Self-Inflicted Wound
+2 Thoughtseize
+2 Ultimate Price

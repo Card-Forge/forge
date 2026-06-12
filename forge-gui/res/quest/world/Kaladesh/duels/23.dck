@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Medium
+Description=Kaladesh/Grand_Prix_Kuala_Lumpur_2016_-_Day_1_Undefeated/Ichikawa_Yuuki_-_WU_Aggro_(Standard,_#643541).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Archangel Avacyn
+2 Rattlechains
+4 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+4 Thraben Inspector
+4 Smuggler's Copter
+1 Declaration in Stone
+4 Stasis Snare
+4 Gideon, Ally of Zendikar
+6 Island
+10 Plains
+4 Port Town
+4 Prairie Stream
+1 Westvale Abbey
+[Sideboard]
+1 Bruna, the Fading Light
+2 Declaration in Stone
+1 Fragmentize
+4 Gisela, the Broken Blade
+1 Jace, Unraveler of Secrets
+1 Linvala, the Preserver
+1 Negate
+4 Spell Shrivel

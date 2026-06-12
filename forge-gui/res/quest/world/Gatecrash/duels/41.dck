@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Easy
+Description=Gatecrash/Magickeller_Hannover_Standard-Liga_03-2013/Colja_W├╝rdemann_-_Golgari_Aggro_(Standard,_#48279).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Deathrite Shaman
+4 Dreg Mangler
+3 Duskmantle Seer
+4 Experiment One
+3 Lotleth Troll
+2 Shambleshark
+4 Strangleroot Geist
+3 Zameck Guildmage
+3 Abrupt Decay
+3 Tragic Slip
+4 Rancor
+1 Garruk Relentless
+4 Breeding Pool
+5 Forest
+4 Hinterland Harbor
+4 Overgrown Tomb
+3 Watery Grave
+4 Woodland Cemetery
+[Sideboard]
+3 Duress
+2 Golgari Charm
+1 Grafdigger's Cage
+4 Illness in the Ranks
+2 Syncopate

@@ -135,11 +135,10 @@ public class PlayerPanel extends FPanel {
         this.add(closeBtn, "w 20, h 20, pos (container.w-20) 0");
 
         createAvatar();
-        this.add(avatarLabel, "spany 2, width 80px, height 80px");
+        this.add(avatarLabel, "cell 0 0, spany 2, split 2, width 80px, height 80px");
 
-        /*TODO Layout and Override for PC*/
-        //createSleeve();
-        //this.add(sleeveLabel, "spany 2, width 60px, height 80px");
+        createSleeve();
+        this.add(sleeveLabel, "width 58px, height 80px, gapleft 5px");
 
         createNameEditor();
         this.add(lobby.newLabel(localizer.getMessage("lblName") +":"), "w 40px, h 30px, gaptop 5px");
@@ -180,8 +179,8 @@ public class PlayerPanel extends FPanel {
             this.add(chkReady, "cell 5 4, ax left, sx 2, wrap");
         }
 
-        this.add(deckLabel, variantBtnConstraints + ", cell 0 5, sx 2, ax right");
-        this.add(deckBtn, variantBtnConstraints + ", cell 2 5, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
+        this.add(deckLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
+        this.add(deckBtn, variantBtnConstraints + ", cell 2 3, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
 
         addHandlersDeckSelector();
 
@@ -322,101 +321,11 @@ public class PlayerPanel extends FPanel {
         }
     };
 
-    private final FMouseAdapter avatarMouseListener = new FMouseAdapter() {
-        @Override public void onLeftClick(final MouseEvent e) {
-            if (!avatarLabel.isEnabled()) {
-                return;
-            }
-
-            final FLabel avatar = (FLabel)e.getSource();
-
-            lobby.changePlayerFocus(index);
-            avatar.requestFocusInWindow();
-
-            final AvatarSelector aSel = new AvatarSelector(playerName, avatarIndex, lobby.getUsedAvatars());
-            for (final FLabel lbl : aSel.getSelectables()) {
-                lbl.setCommand((UiCommand) () -> {
-                    setAvatarIndex(Integer.parseInt(lbl.getName().substring(11)));
-                    aSel.setVisible(false);
-                });
-            }
-
-            aSel.setVisible(true);
-            aSel.dispose();
-
-            if (index < 2) {
-                lobby.updateAvatarPrefs();
-            }
-
-            lobby.firePlayerChangeListener(index);
-        }
-
-        @Override public void onRightClick(final MouseEvent e) {
-            if (!avatarLabel.isEnabled()) {
-                return;
-            }
-
-            lobby.changePlayerFocus(index);
-            avatarLabel.requestFocusInWindow();
-
-            setRandomAvatar();
-
-            if (index < 2) {
-                lobby.updateAvatarPrefs();
-            }
-        }
-    };
-
     /** Listens to sleeve buttons and gives the appropriate player focus. */
     private final FocusAdapter sleeveFocusListener = new FocusAdapter() {
         @Override
         public void focusGained(final FocusEvent e) {
             lobby.changePlayerFocus(index);
-        }
-    };
-
-    private final FMouseAdapter sleeveMouseListener = new FMouseAdapter() {
-        @Override public void onLeftClick(final MouseEvent e) {
-            if (!sleeveLabel.isEnabled()) {
-                return;
-            }
-
-            final FLabel sleeve = (FLabel)e.getSource();
-
-            lobby.changePlayerFocus(index);
-            sleeve.requestFocusInWindow();
-
-            final SleeveSelector sSel = new SleeveSelector(playerName, sleeveIndex, lobby.getUsedSleeves());
-            for (final FLabel lbl : sSel.getSelectables()) {
-                lbl.setCommand((UiCommand) () -> {
-                    setSleeveIndex(Integer.parseInt(lbl.getName().substring(11)));
-                    sSel.setVisible(false);
-                });
-            }
-
-            sSel.setVisible(true);
-            sSel.dispose();
-
-            if (index < 2) {
-                lobby.updateSleevePrefs();
-            }
-
-            lobby.firePlayerChangeListener(index);
-        }
-
-        @Override public void onRightClick(final MouseEvent e) {
-            if (!sleeveLabel.isEnabled()) {
-                return;
-            }
-
-            lobby.changePlayerFocus(index);
-            sleeveLabel.requestFocusInWindow();
-
-            setRandomSleeve();
-
-            if (index < 2) {
-                lobby.updateSleevePrefs();
-            }
         }
     };
 
@@ -753,7 +662,37 @@ public class PlayerPanel extends FPanel {
 
         avatarLabel.setToolTipText(localizer.getMessage("ttlblAvatar"));
         avatarLabel.addFocusListener(avatarFocusListener);
-        avatarLabel.addMouseListener(avatarMouseListener);
+        avatarLabel.setCommand((UiCommand) () -> {
+            lobby.changePlayerFocus(index);
+            avatarLabel.requestFocusInWindow();
+
+            final AvatarSelector aSel = new AvatarSelector(playerName, avatarIndex, lobby.getUsedAvatars());
+            for (final FLabel lbl : aSel.getSelectables()) {
+                lbl.setCommand((UiCommand) () -> {
+                    setAvatarIndex(Integer.parseInt(lbl.getName().substring(11)));
+                    aSel.setVisible(false);
+                });
+            }
+
+            aSel.setVisible(true);
+            aSel.dispose();
+
+            if (index < 2) {
+                lobby.updateAvatarPrefs();
+            }
+
+            lobby.firePlayerChangeListener(index);
+        });
+        avatarLabel.setRightClickCommand((UiCommand) () -> {
+            lobby.changePlayerFocus(index);
+            avatarLabel.requestFocusInWindow();
+
+            setRandomAvatar();
+
+            if (index < 2) {
+                lobby.updateAvatarPrefs();
+            }
+        });
     }
 
     private void createSleeve() {
@@ -767,7 +706,37 @@ public class PlayerPanel extends FPanel {
 
         sleeveLabel.setToolTipText("L-click: Select sleeve. R-click: Randomize sleeve.");
         sleeveLabel.addFocusListener(sleeveFocusListener);
-        sleeveLabel.addMouseListener(sleeveMouseListener);
+        sleeveLabel.setCommand((UiCommand) () -> {
+            lobby.changePlayerFocus(index);
+            sleeveLabel.requestFocusInWindow();
+
+            final SleeveSelector sSel = new SleeveSelector(playerName, sleeveIndex, lobby.getUsedSleeves());
+            for (final FLabel lbl : sSel.getSelectables()) {
+                lbl.setCommand((UiCommand) () -> {
+                    setSleeveIndex(Integer.parseInt(lbl.getName().substring(11)));
+                    sSel.setVisible(false);
+                });
+            }
+
+            sSel.setVisible(true);
+            sSel.dispose();
+
+            if (index < 2) {
+                lobby.updateSleevePrefs();
+            }
+
+            lobby.firePlayerChangeListener(index);
+        });
+        sleeveLabel.setRightClickCommand((UiCommand) () -> {
+            lobby.changePlayerFocus(index);
+            sleeveLabel.requestFocusInWindow();
+
+            setRandomSleeve();
+
+            if (index < 2) {
+                lobby.updateSleevePrefs();
+            }
+        });
     }
 
     /** Applies a random avatar, avoiding avatars already used. */

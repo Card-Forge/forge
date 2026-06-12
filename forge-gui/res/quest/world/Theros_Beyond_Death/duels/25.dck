@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Orzhov-precon
+Title=Orzhov-precon
+Icon=Orzhov-precon.jpg
+Difficulty=Medium
+Description=./Standard/Theros_Beyond_Death/Appollus#62880_-_WB_(Standard,_#941410).dck
+Deck Type=constructed
+
+[Main]
+1 Rankle, Master of Pranks
+2 Archon of Sun's Grace
+4 Aphemia, the Cacophony
+4 Murderous Rider
+2 Agonizing Remorse
+4 Funeral Rites
+2 The Birth of Meletis
+4 Elspeth Conquers Death
+4 Mire's Grasp
+2 Kaya, Orzhov Usurper
+2 Elspeth, Sun's Nemesis
+4 Liliana, Dreadhorde General
+1 Mobilized District
+1 Castle Locthwain
+2 Fabled Passage
+2 Castle Ardenvale
+3 Plains
+4 Temple of Silence
+4 Swamp
+4 Scoured Barrens
+4 Godless Shrine
+[Sideboard]
+1 Giant Killer
+1 Finale of Glory
+2 Sorcerous Spyglass
+2 Agonizing Remorse
+2 Noxious Grasp
+3 Duress
+4 Devout Decree

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Repressed Magic
+Title=Repressed Magic
+Icon=Repressed Magic.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/416FrowningTable_-_Boros_Convoke_(Standard,_#2010769).dck
+Deck Type=constructed
+
+[Main]
+4 Novice Inspector
+4 Knight-Errant of Eos
+4 Imodane's Recruiter
+4 Resolute Reinforcements
+4 Voldaren Epicure
+4 Warden of the Inner Sky
+1 Yotian Frontliner
+3 Sanguine Evangelist
+4 Gleeful Demolition
+4 Case of the Gateway Express
+2 Warleader's Call
+4 Inspiring Vantage
+1 Sundown Pass
+2 Eiganjo, Seat of the Empire
+3 Plains
+3 Mountain
+4 Battlefield Forge
+2 Sokenzan, Crucible of Defiance
+3 Cavern of Souls
+[Sideboard]
+3 Rest in Peace
+1 End the Festivities
+4 Urabrask's Forge
+2 Lithomantic Barrage
+2 Kutzil's Flanker
+3 Destroy Evil

@@ -1,6 +1,6 @@
 Name:Spellbook
 ManaCost:0
-Types:Artifact
+Types:Artifact Book
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True

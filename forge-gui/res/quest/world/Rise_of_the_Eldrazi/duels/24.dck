@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/PTQ_Amsterdam_2010_-_Utrecht_-_Netherlands/Frank_Wessels_-_Grixis_(Standard,_#941).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Gatekeeper of Malakir
+4 Sedraxis Specter
+4 Siege-Gang Commander
+1 Into the Roil
+4 Lightning Bolt
+3 Terminate
+4 Blightning
+2 Cruel Ultimatum
+1 Earthquake
+4 Spreading Seas
+3 Jace, the Mind Sculptor
+3 Creeping Tar Pit
+4 Crumbling Necropolis
+3 Dragonskull Summit
+2 Drowned Catacomb
+2 Island
+3 Lavaclaw Reaches
+2 Mountain
+4 Scalding Tarn
+4 Swamp
+[Sideboard]
+2 Consuming Vapors
+4 Countersquall
+2 Deathmark
+4 Goblin Ruinblaster
+2 Malakir Bloodwitch
+1 Thought Hemorrhage

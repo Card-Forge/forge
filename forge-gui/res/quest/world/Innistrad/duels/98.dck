@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Tutankhamon
+Title=Tutankhamon
+Icon=Tutankhamon.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/Worlds_2011_-_4-2_Record_or_Better/Mikko_Nurmi_-_12_points_-_Dark_Burn_(Modern,_#22487).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+3 Keldon Marauders
+3 Flame Javelin
+4 Incinerate
+4 Lightning Bolt
+3 Searing Blaze
+4 Shard Volley
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+3 Volcanic Hammer
+4 Arid Mesa
+2 Blackcleave Cliffs
+2 Blood Crypt
+8 Mountain
+4 Scalding Tarn
+[Sideboard]
+2 Ball Lightning
+2 Combust
+2 Flamebreak
+1 Rain of Gore
+2 Shattering Spree
+2 Smash to Smithereens
+3 Torpor Orb

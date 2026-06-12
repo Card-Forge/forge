@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Princess Selenia
+Title=Princess Selenia
+Icon=Princess Selenia.jpg
+Difficulty=Very Hard
+Description=./Modern/Avatar_The_Last_Airbender/AlexanderRosdahl_-_Grixis_Control_(Modern,_#2820740).dck
+Deck Type=constructed
+
+[Main]
+3 Orcish Bowmasters
+4 Snapcaster Mage
+4 Tamiyo, Inquisitive Student
+3 Wan Shi Tong, Librarian
+2 Cling to Dust
+4 Counterspell
+3 Consuming Corruption
+4 Fatal Push
+4 Flame of Anor
+1 Force of Negation
+2 Spell Snare
+1 Sink into Stupor
+2 Kaito, Bane of Nightmares
+1 Blood Crypt
+4 Polluted Delta
+4 Scalding Tarn
+2 Island
+1 Swamp
+3 Watery Grave
+1 Thundering Falls
+2 Undercity Sewers
+1 Steam Vents
+2 Bloodstained Mire
+2 Urborg, Tomb of Yawgmoth
+[Sideboard]
+3 Break the Ice
+4 Consign to Memory
+3 Fire Magic
+3 Mystical Dispute
+2 Meltdown

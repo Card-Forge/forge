@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Robot71
+Title=Robot71
+Icon=Ancient Battlefield.jpg
+Difficulty=Hard
+Description=Temur Energy 
+Deck Type=constructed
+
+[Main]
+4 Bristling Hydra
+3 Glorybringer
+4 Longtusk Cub
+1 Rhonas the Indomitable
+4 Rogue Refiner
+4 Servant of the Conduit
+4 Whirler Virtuoso
+1 Abrade
+1 Essence Scatter
+4 Harnessed Lightning
+2 Magma Spray
+4 Attune with Aether
+2 Chandra, Torch of Defiance
+4 Aether Hub
+4 Botanical Sanctum
+4 Forest
+1 Island
+2 Mountain
+2 Rootbound Crag
+3 Sheltered Thicket
+2 Spirebluff Canal
+[Sideboard]
+1 Aethersphere Harvester
+1 Appetite for the Unnatural
+2 Carnage Tyrant
+2 Confiscation Coup
+1 Essence Scatter
+3 Negate
+1 Slice in Twain
+1 Spell Pierce
+1 Supreme Will
+2 Sweltering Suns

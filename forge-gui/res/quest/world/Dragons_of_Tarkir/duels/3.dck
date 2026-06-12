@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Neith
+Title=Neith
+Icon=Neith.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/Standard_Champs_#8396756/Rybanys_-_Bant_(Standard,_#264925).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Courser of Kruphix
+4 Deathmist Raptor
+4 Den Protector
+3 Dragonlord Ojutai
+4 Elvish Mystic
+4 Fleecemane Lion
+1 Rattleclaw Mystic
+1 Stratus Dancer
+2 Sylvan Caryatid
+2 Disdainful Stroke
+2 Dromoka's Command
+2 Valorous Stance
+2 Mastery of the Unseen
+2 Ajani Steadfast
+3 Flooded Strand
+4 Forest
+1 Island
+2 Mana Confluence
+2 Plains
+4 Temple of Plenty
+4 Windswept Heath
+4 Yavimaya Coast
+[Sideboard]
+2 Elspeth, Sun's Champion
+2 Glare of Heresy
+2 Hornet Nest
+1 Negate
+2 Plummet
+1 Radiant Purge

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Silver Surfer
+Title=Silver Surfer
+Icon=Silver Surfer.jpg
+Difficulty=Very Hard
+Description=../Modern/Dark_Ascension/San_Diego,_California/Fernando_Gomez_in_PTQ_Barcelona_-_Splinter_Twin_(Modern,_#27293).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Grim Lavamancer
+2 Mistbind Clique
+2 Sower of Temptation
+4 Spellstutter Sprite
+4 Vendilion Clique
+2 Vedalken Shackles
+4 Cryptic Command
+3 Lightning Bolt
+3 Mana Leak
+3 Remand
+4 Spell Snare
+1 Arid Mesa
+1 Breeding Pool
+6 Island
+4 Misty Rainforest
+1 Mountain
+4 Mutavault
+4 Scalding Tarn
+1 Steam Vents
+1 Sulfur Falls
+2 Tectonic Edge
+[Sideboard]
+2 Ancient Grudge
+3 Blood Moon
+1 Combust
+2 Dispel
+3 Firespout
+1 Glen Elendra Archmage
+1 Grafdigger's Cage
+1 Pithing Needle
+1 Relic of Progenitus

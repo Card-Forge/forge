@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Crocodile Dundee
+Title=Crocodile Dundee
+Icon=Crocodile Dundee.jpg
+Difficulty=Hard
+Description=../Modern/Mirrodin_Besieged/Fin_de_semana_Magic_Villena/Jose_Antonio_Perez_-_Zoo_(Modern,_#39771).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+3 Burning-Tree Shaman
+3 Kitchen Finks
+4 Knight of the Reliquary
+4 Noble Hierarch
+4 Tarmogoyf
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+2 Boom // Bust
+3 Blood Moon
+4 Arid Mesa
+3 Forest
+1 Horizon Canopy
+3 Misty Rainforest
+2 Mountain
+2 Plains
+3 Sacred Foundry
+2 Stomping Ground
+1 Temple Garden
+[Sideboard]
+3 Ancient Grudge
+2 Ethersworn Canonist
+2 Gaddock Teeg
+3 Pyroclasm
+3 Relic of Progenitus
+1 Thrun, the Last Troll

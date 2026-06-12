@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Brekyirihunuade
+Title=Brekyirihunuade
+Icon=Brekyirihunuade.jpg
+Difficulty=Very Hard
+Description=../Modern/Eldritch_Moon/Competitive_Modern_Constructed_League/STLCards_-_STLCards_(5-0)_(Modern,_#640175).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Champion of the Parish
+4 Fiend Hunter
+4 Mayor of Avabruck
+4 Noble Hierarch
+4 Thalia's Lieutenant
+3 Thalia, Guardian of Thraben
+3 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Collected Company
+4 Collective Effort
+4 Cavern of Souls
+2 Forest
+1 Gavony Township
+2 Ghost Quarter
+4 Plains
+4 Temple Garden
+1 Westvale Abbey
+4 Windswept Heath
+[Sideboard]
+4 Knight of the White Orchid
+3 Mirran Crusader
+2 Rest in Peace
+4 Spellskite
+2 Stony Silence

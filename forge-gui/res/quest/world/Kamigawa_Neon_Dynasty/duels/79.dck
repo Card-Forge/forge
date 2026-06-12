@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Reverend Lovejoy
+Title=Reverend Lovejoy
+Icon=Reverend Lovejoy.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/6argamel_-_4_Color_Blink_(Modern,_#1415526).dck
+Deck Type=constructed
+
+[Main]
+1 Endurance
+1 Titania, Protector of Argoth
+1 Thunderkin Awakener
+1 Omnath, Locus of the Roil
+1 Fulminator Mage
+1 Foundation Breaker
+4 Flamekin Harbinger
+4 Fury
+4 Omnath, Locus of Creation
+4 Risen Reef
+4 Solitude
+4 Voice of Resurgence
+4 Ephemerate
+2 Wrenn and Six
+1 Temple Garden
+1 Stomping Ground
+1 Steam Vents
+1 Sacred Foundry
+1 Raugrin Triome
+1 Plains
+1 Island
+1 Forest
+1 Breeding Pool
+1 Boseiju, Who Endures
+2 Wooded Foothills
+4 Windswept Heath
+4 Misty Rainforest
+4 Cavern of Souls
+[Sideboard]
+1 Kaheera, the Orphanguard
+2 Force of Negation
+2 Engineered Explosives
+2 Chalice of the Void
+2 Alpine Moon
+3 Rest in Peace
+3 Prismatic Ending

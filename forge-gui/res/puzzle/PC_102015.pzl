@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 102015 - Tightrope
 URL:http://www.gatheringmagic.com/seanuy-102015-tightrope/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description: Win this turn.
 [state]
 ActivePlayer=human

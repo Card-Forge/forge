@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Momir
+Title=Momir
+Icon=Momir.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Frederick_Tan_-_Esper_Midrange_(Standard,_#1400235).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+3 Obscura Interceptor
+4 Tenacious Underdog
+4 Luminarch Aspirant
+4 Raffine, Scheming Seer
+1 Disdainful Stroke
+2 Vanishing Verse
+2 Make Disappear
+2 Infernal Grasp
+1 Emeria's Call
+1 The Meathook Massacre
+4 Wedding Announcement
+2 Kaito Shizuki
+3 The Wandering Emperor
+1 Swamp
+1 Eiganjo, Seat of the Empire
+1 Hive of the Eye Tyrant
+1 Plains
+2 Shattered Sanctum
+2 Shipwreck Marsh
+2 Deserted Beach
+4 Raffine's Tower
+4 Brightclimb Pathway
+4 Clearwater Pathway
+4 Hengegate Pathway
+[Sideboard]
+1 Depopulate
+1 The Meathook Massacre
+1 Archon of Emeria
+1 Portable Hole
+1 Disdainful Stroke
+2 Negate
+2 Go Blank
+3 Legion Angel
+3 Ray of Enfeeblement

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Crocodile Dundee
+Title=Crocodile Dundee
+Icon=Crocodile Dundee.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/Guf_Brisbane_-_Brisbane_Circuit_Series_Qualifier_#7/Boyd_Fernicola_-_Zoo_(Modern,_#658018).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+3 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+4 Reckless Bushwhacker
+4 Tarmogoyf
+4 Wild Nacatl
+3 Atarka's Command
+2 Boros Charm
+4 Lightning Bolt
+4 Path to Exile
+2 Arid Mesa
+2 Forest
+1 Mountain
+2 Sacred Foundry
+3 Stomping Ground
+2 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Atarka's Command
+2 Destructive Revelry
+2 Domri Rade
+2 Dromoka's Command
+2 Feed the Clan
+2 Grafdigger's Cage
+2 Searing Blood

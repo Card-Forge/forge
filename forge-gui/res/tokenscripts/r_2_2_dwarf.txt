@@ -1,0 +1,6 @@
+Name:Dwarf Token
+ManaCost:no cost
+Colors:red
+Types:Creature Dwarf
+PT:2/2
+Oracle:

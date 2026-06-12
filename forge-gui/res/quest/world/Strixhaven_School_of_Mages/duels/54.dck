@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Saruman
+Title=Saruman
+Icon=Saruman.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/thepensword_-_Counter_Burn_(Modern,_#1212135).dck
+Deck Type=constructed
+
+[Main]
+1 Brazen Borrower
+3 Murktide Regent
+4 Snapcaster Mage
+1 Spell Snare
+1 Force of Negation
+1 Fire // Ice
+1 Electrolyze
+1 Dead // Gone
+2 Cryptic Command
+3 Opt
+4 Archmage's Charm
+4 Counterspell
+4 Lightning Bolt
+4 Thought Scour
+2 Blood Moon
+2 Jace, the Mind Sculptor
+1 Raugrin Triome
+1 Polluted Delta
+1 Flooded Strand
+2 Sulfur Falls
+2 Steam Vents
+2 Misty Rainforest
+4 Scalding Tarn
+9 Snow-Covered Island
+[Sideboard]
+1 Test of Talents
+1 Blood Moon
+1 Surgical Extraction
+1 Mystical Dispute
+1 Shatterstorm
+2 Relic of Progenitus
+2 Abrade
+2 Aether Gust
+2 Engineered Explosives
+2 Flusterstorm

@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Hookah-Smoking Caterpillar
+Title=Hookah-Smoking Caterpillar
+Icon=Hookah-Smoking Caterpillar.jpg
+Difficulty=Medium
+Description=./Standard/Kamigawa_Neon_Dynasty/Achux_-_S_-_Monowhite_Aggro_(Standard,_#1321389).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+1 Skyclave Apparition
+3 Adeline, Resplendent Cathar
+3 Thalia, Guardian of Thraben
+4 Elite Spellbinder
+4 Brutal Cathar
+4 Usher of the Fallen
+4 Intrepid Adversary
+4 Hopeful Initiate
+4 Luminarch Aspirant
+2 Portable Hole
+2 Fateful Absence
+1 The Wandering Emperor
+1 Eiganjo, Seat of the Empire
+2 Cave of the Frost Dragon
+20 Plains
+[Sideboard]
+3 Legion Angel

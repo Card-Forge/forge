@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Kane
+Title=Kane
+Icon=Kane.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine_The_Aftermath/LucaBina94_-_Mono-White_Humans_(Standard,_#1724554).dck
+Deck Type=constructed
+
+[Main]
+3 Lunarch Veteran
+4 Recruitment Officer
+4 Hopeful Initiate
+4 Intrepid Adversary
+2 Cathar Commando
+4 Guardian of New Benalia
+4 Coppercoat Vanguard
+3 Thalia, Guardian of Thraben
+2 Extraction Specialist
+4 Brutal Cathar
+4 Adeline, Resplendent Cathar
+1 Knight-Errant of Eos
+21 Plains
+[Sideboard]

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Elrond
+Title=Elrond
+Icon=Elrond.jpg
+Difficulty=Medium
+Description=Aether_Revolt/panoma_-_BG_Constrictor_(Standard,_#667363).dck
+Deck Type=constructed
+
+[Main]
+4 Glint-Sleeve Siphoner
+4 Greenbelt Rampager
+4 Longtusk Cub
+4 Rishkar, Peema Renegade
+4 Verdurous Gearhulk
+4 Walking Ballista
+4 Winding Constrictor
+1 Aethersphere Harvester
+4 Fatal Push
+2 Grasp of Darkness
+4 Attune with Aether
+4 Aether Hub
+4 Blooming Marsh
+6 Forest
+3 Hissing Quagmire
+4 Swamp
+[Sideboard]
+2 Kalitas, Traitor of Ghet
+3 Lifecrafter's Bestiary
+2 Murder
+2 Natural State
+1 Noxious Gearhulk
+2 Ob Nixilis Reignited
+1 Skysovereign, Consul Flagship
+2 Transgress the Mind

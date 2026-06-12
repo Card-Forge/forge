@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Dr Watson
+Title=Dr Watson
+Icon=Dr Watson.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/Kimura_Shigeki_-_Reanimator_(Modern,_#2224792).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+4 Psychic Frog
+4 Abhorrent Oculus
+2 Unlicensed Hearse
+4 Fatal Push
+1 Spell Pierce
+4 Counterspell
+3 Spell Snare
+1 Dismember
+2 Force of Negation
+4 Consider
+1 Shoot the Sheriff
+1 Sink into Stupor
+4 Unearth
+1 The Meathook Massacre
+3 Island
+1 Swamp
+2 Watery Grave
+1 Bloodstained Mire
+1 Flooded Strand
+4 Polluted Delta
+1 Marsh Flats
+1 Misty Rainforest
+1 Scalding Tarn
+3 Darkslick Shores
+2 Undercity Sewers
+[Sideboard]
+1 Spell Snare
+1 Mystical Dispute
+2 Break the Ice
+1 The Meathook Massacre
+2 Unlicensed Hearse
+2 Stern Scolding
+3 Consign to Memory
+2 Harbinger of the Seas
+1 Feed the Cycle

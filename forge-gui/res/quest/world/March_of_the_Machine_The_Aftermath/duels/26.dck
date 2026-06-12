@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Finn the Human
+Title=Finn the Human
+Icon=Finn the Human.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine_The_Aftermath/Aoyama_Katsuhiko_-_RG_Aggro_(Standard,_#1747636).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Bloodthirsty Adversary
+4 Kumano Faces Kakkazan
+2 Squee, Dubious Monarch
+4 Feldon, Ronom Excavator
+4 Samut, Vizier of Naktamun
+2 Lightning Strike
+2 Abrade
+4 Play with Fire
+2 Strangle
+2 Obliterating Bolt
+4 Nahiri's Warcrafting
+7 Mountain
+1 Forest
+4 Karplusan Forest
+4 Copperline Gorge
+2 Rockfall Vale
+1 Boseiju, Who Endures
+1 Sokenzan, Crucible of Defiance
+1 Plaza of Heroes
+1 Mirrex
+[Sideboard]
+1 Bloody Betrayal
+2 End the Festivities
+1 Unlicensed Hearse
+2 Tyvar's Stand
+1 The Filigree Sylex
+2 Sword of Forge and Frontier
+2 Lithomantic Barrage
+2 Atraxa's Fall
+2 Sword of Once and Future

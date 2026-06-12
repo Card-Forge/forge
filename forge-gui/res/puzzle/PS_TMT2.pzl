@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Teenage Mutant Ninja Turtles #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/03/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume your opponent has no untapped lands or other available mana sources. Remember that your solution must satisfy all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Haliya, Guided by Light;All-Fates Stalker;Leonardo, Big Brother;Cheeky House-Mouse;Catharsis
+p0battlefield=The Neutrinos;Leonardo, Cutting Edge|Counters:P1P1=1;Leonardo, Leader in Blue;Plains;Plains;Plains;Dimension X|NoETBTrigs;Dimension X|NoETBTrigs;Dimension X|NoETBTrigs;Dimension X|NoETBTrigs
+p1life=21
+p1battlefield=Krang, Master Mind;Technodrome|Counters:P1P1=3;Metalhead

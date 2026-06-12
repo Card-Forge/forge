@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Aaron_Eng_-_Temur_Mill_(Standard,_#955650).dck
+Deck Type=constructed
+
+[Main]
+1 Thassa's Oracle
+3 Brazen Borrower
+3 Fae of Wishes
+4 Uro, Titan of Nature's Wrath
+4 Arboreal Grazer
+4 Merfolk Secretkeeper
+4 Opt
+2 Flood of Tears
+2 Storm's Wrath
+4 Song of Creation
+1 Jace, Wielder of Mysteries
+1 Mountain
+2 Forest
+2 Island
+2 Castle Vantress
+3 Steam Vents
+3 Stomping Ground
+3 Fabled Passage
+4 Temple of Mystery
+4 Ketria Triome
+4 Breeding Pool
+[Sideboard]
+1 Flood of Tears
+1 Callous Dismissal
+1 Negate
+1 Underworld Breach
+1 Tamiyo, Collector of Tales
+1 Root Snare
+1 Jace, Wielder of Mysteries
+1 Storm's Wrath
+1 Grafdigger's Cage
+1 Mystical Dispute
+1 Survivors' Bond
+4 Aether Gust

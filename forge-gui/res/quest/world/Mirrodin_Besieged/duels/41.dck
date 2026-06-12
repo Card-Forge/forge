@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/StarCityGames.com_Standard_Open_Memphis/Nick_Glavich_-_Eldrazi_Ramp_(Standard,_#11150).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+1 Avenger of Zendikar
+4 Birds of Paradise
+1 Emrakul, the Aeons Torn
+1 Kozilek, Butcher of Truth
+4 Overgrown Battlement
+4 Primeval Titan
+1 Ulamog, the Infinite Gyre
+2 Wurmcoil Engine
+2 Summoning Trap
+2 All Is Dust
+3 Cultivate
+3 Explore
+3 Green Sun's Zenith
+4 Growth Spasm
+4 Eldrazi Temple
+1 Eye of Ugin
+11 Forest
+4 Khalni Garden
+1 Mystifying Maze
+3 Tectonic Edge
+[Sideboard]
+1 Contagion Engine
+1 Mindslaver
+3 Obstinate Baloth
+2 Phyrexian Revoker
+3 Ratchet Bomb
+1 Steel Hellkite

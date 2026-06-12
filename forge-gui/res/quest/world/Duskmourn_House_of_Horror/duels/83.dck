@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Flandre Scarlet
+Title=Flandre Scarlet
+Icon=Flandre Scarlet.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/Egor_Yureskul_-_Golgari_Midrange_(Modern,_#2273808).dck
+Deck Type=constructed
+
+[Main]
+1 Fulminator Mage
+4 Orcish Bowmasters
+1 Haywire Mite
+1 Overlord of the Balemurk
+1 Sheoldred, the Apocalypse
+4 Delighted Halfling
+1 Endurance
+1 Nihil Spellbomb
+4 The One Ring
+1 Shadowspear
+4 Agatha's Soul Cauldron
+4 Fatal Push
+2 Abrupt Decay
+4 Malevolent Rumble
+4 Urza's Saga
+4 Grist, the Hunger Tide
+4 Verdant Catacombs
+2 Swamp
+1 Polluted Delta
+2 Overgrown Tomb
+2 Forest
+2 Shifting Woodland
+2 Underground Mortuary
+1 Urborg, Tomb of Yawgmoth
+2 Windswept Heath
+2 Boseiju, Who Endures
+[Sideboard]
+3 Culling Ritual
+2 Damping Sphere
+3 Fulminator Mage
+1 Ghost Vacuum
+2 Haywire Mite
+1 Pithing Needle
+1 Undercity Informer
+1 Veil of Summer
+1 Bitter Triumph

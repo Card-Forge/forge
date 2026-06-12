@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Quicksilver
+Title=Quicksilver
+Icon=Quicksilver.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/Alex_Friedrichsen_-_Temur_Analyst_(Standard,_#2021573).dck
+Deck Type=constructed
+
+[Main]
+1 Kellan, Inquisitive Prodigy
+4 Aftermath Analyst
+4 Nissa, Resurgent Animist
+1 Shigeki, Jukai Visionary
+1 Colossal Skyturtle
+3 Memory Deluge
+2 Seismic Wave
+1 Fires of Victory
+4 Worldsoul's Rage
+4 Ill-Timed Explosion
+3 Virtue of Strength
+1 Doppelgang
+2 Spelunking
+6 Island
+4 Maestros Theater
+6 Forest
+3 Mountain
+4 Brokers Hideout
+2 Cabaretti Courtyard
+2 Riveteers Overlook
+1 Echoing Deeps
+1 Boseiju, Who Endures
+[Sideboard]
+2 Bonny Pall, Clearcutter
+2 Bristly Bill, Spine Sower
+1 Malevolent Hermit
+1 Titania, Voice of Gaea
+1 Tranquil Frillback
+2 Negate
+1 Turn the Earth
+2 Vampires' Vengeance
+2 Pick Your Poison
+1 End the Festivities

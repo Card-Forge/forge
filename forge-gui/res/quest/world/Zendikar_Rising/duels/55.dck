@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Krypto
+Title=Krypto
+Icon=Krypto.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Bedell_-_Gifts_Control_(Modern,_#1069213).dck
+Deck Type=constructed
+
+[Main]
+2 Snapcaster Mage
+3 Uro, Titan of Nature's Wrath
+1 Spell Snare
+1 Tale's End
+1 Assassin's Trophy
+1 Cling to Dust
+2 Abrupt Decay
+2 Force of Negation
+3 Remand
+3 Cryptic Command
+4 Fatal Push
+4 Growth Spiral
+1 Bloodchief's Thirst
+3 Shark Typhoon
+2 Jace, the Mind Sculptor
+1 Forest
+1 Sunken Hollow
+1 Breeding Pool
+1 Field of Ruin
+1 Flooded Strand
+1 Snow-Covered Forest
+1 Overgrown Tomb
+1 Swamp
+1 Watery Grave
+1 Zagoth Triome
+1 Oboro, Palace in the Clouds
+2 Snow-Covered Island
+2 Mystic Sanctuary
+2 Field of the Dead
+2 Island
+4 Polluted Delta
+4 Misty Rainforest
+[Sideboard]
+1 Arasta of the Endless Web
+2 Tale's End
+2 Elder Gargaroth
+2 Nihil Spellbomb
+2 Ceremonious Rejection
+2 Veil of Summer
+4 Aether Gust

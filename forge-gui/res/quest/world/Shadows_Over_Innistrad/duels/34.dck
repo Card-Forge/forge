@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Seth
+Title=Seth
+Icon=Seth.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/Grand_Prix_Costa_Rica_2016/Christian_Calcano_-_Bant_(Standard,_#624576).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Duskwatch Recruiter
+3 Eldrazi Displacer
+4 Jace, Vryn's Prodigy
+2 Nissa, Vastwood Seer
+4 Reflector Mage
+4 Sylvan Advocate
+3 Tireless Tracker
+4 Collected Company
+3 Dromoka's Command
+1 Ojutai's Command
+2 Declaration in Stone
+3 Canopy Vista
+1 Caves of Koilos
+4 Evolving Wilds
+3 Forest
+1 Island
+2 Lumbering Falls
+4 Plains
+3 Prairie Stream
+1 Wastes
+4 Yavimaya Coast
+[Sideboard]
+1 Archangel Avacyn
+1 Clip Wings
+2 Gideon, Ally of Zendikar
+2 Lambholt Pacifist
+3 Negate
+3 Tragic Arrogance

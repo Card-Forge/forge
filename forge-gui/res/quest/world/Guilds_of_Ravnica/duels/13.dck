@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gold Finger
+Title=Gold Finger
+Icon=Gold Finger.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Adolfo_Berrios_-_Big_Red_(Standard,_#777195).dck
+Deck Type=constructed
+
+[Main]
+1 Charging Monstrosaur
+2 Dire Fleet Daredevil
+2 Electrostatic Field
+4 Goblin Chainwhirler
+4 Rekindling Phoenix
+3 Siege-Gang Commander
+4 Treasure Map
+2 Fiery Cannonade
+4 Shock
+2 Banefire
+3 Fight with Fire
+3 Lava Coil
+1 Star of Extinction
+1 Arch of Orazca
+24 Mountain
+[Sideboard]
+1 Charging Monstrosaur
+1 Chromatic Lantern
+1 Dire Fleet Daredevil
+2 Electrostatic Field
+2 Fiery Cannonade
+1 Fight with Fire
+2 Karn, Scion of Urza
+1 Lava Coil
+3 Legion Warboss
+1 Star of Extinction

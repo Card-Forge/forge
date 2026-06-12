@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Hans
+Title=Hans
+Icon=Hans.jpg
+Difficulty=Hard
+Description=./Modern/Aetherdrift/Viatt_-_Esper_Reanimator_(Modern,_#2372713).dck
+Deck Type=constructed
+
+[Main]
+4 Atraxa, Grand Unifier
+2 Ketramose, the New Dawn
+1 Griselbrand
+4 Fallaji Archaeologist
+2 Emperor of Bones
+4 Psychic Frog
+4 Solitude
+4 Ephemerate
+1 Sink into Stupor
+4 Goryo's Vengeance
+4 Force of Negation
+2 Pest Control
+4 Thoughtseize
+4 Polluted Delta
+1 Swamp
+1 Plains
+3 Marsh Flats
+1 Hedge Maze
+1 Island
+1 Hallowed Fountain
+1 Meticulous Archive
+1 Godless Shrine
+4 Flooded Strand
+1 Undercity Sewers
+1 Watery Grave
+[Sideboard]
+4 Consign to Memory
+2 Nihil Spellbomb
+1 Prismatic Ending
+3 Stony Silence
+1 Murderous Cut
+2 Teferi, Time Raveler
+2 Wrath of the Skies

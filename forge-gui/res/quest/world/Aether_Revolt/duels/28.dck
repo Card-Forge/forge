@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Scotty
+Title=Scotty
+Icon=Scotty.jpg
+Difficulty=Easy
+Description=Aether_Revolt/TheCoolGuy_-_Deck_(Standard,_#664540).dck
+Deck Type=constructed
+
+[Main]
+4 Sylvan Advocate
+2 Verdurous Gearhulk
+2 Anguished Unmaking
+2 Essence Extraction
+3 Grasp of Darkness
+2 Declaration in Stone
+1 Fumigate
+1 Painful Truths
+2 Ruinous Path
+1 Yahenni's Expertise
+4 Oath of Nissa
+2 Gideon, Ally of Zendikar
+3 Liliana, the Last Hope
+1 Nissa, Vital Force
+1 Ob Nixilis Reignited
+2 Sorin, Grim Nemesis
+4 Blooming Marsh
+2 Canopy Vista
+4 Evolving Wilds
+2 Forest
+4 Hissing Quagmire
+2 Plains
+4 Shambling Vent
+3 Swamp
+[Sideboard]
+1 Fragmentize
+1 Fumigate
+2 Kalitas, Traitor of Ghet
+3 Kambal, Consul of Allocation
+2 Lost Legacy
+2 Pulse of Murasa
+2 Transgress the Mind

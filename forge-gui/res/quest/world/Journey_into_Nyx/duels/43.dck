@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Princess Selenia
+Title=Princess Selenia
+Icon=Princess Selenia.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/SCG_Invitational_Qualifier_Tallahassee/Paul_Rinaldi_-_Mono-Blue_Devotion_(Standard,_#81162).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Cloudfin Raptor
+4 Frostburn Weird
+1 Hypnotic Siren
+4 Judge's Familiar
+4 Master of Waves
+4 Nightveil Specter
+4 Thassa, God of the Sea
+4 Tidebinder Mage
+2 Bident of Thassa
+1 Cyclonic Rift
+1 Rapid Hybridization
+2 Domestication
+20 Island
+4 Mutavault
+1 Nykthos, Shrine to Nyx
+[Sideboard]
+1 Dispel
+1 Dissolve
+2 Gainsay
+3 Jace, Architect of Thought
+1 Jace, Memory Adept
+2 Negate
+1 Omenspeaker
+1 Swan Song

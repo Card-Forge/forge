@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 030916 - Fifty-Fifty
 URL:https://www.coolstuffinc.com/a/seanuy-030916-fifty-fifty
 Goal:Win
 Turns:2
-Difficulty:Hard
+Difficulty:Rare
 Description: Win on your turn.
 [state]
 ActivePlayer=AI

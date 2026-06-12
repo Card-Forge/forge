@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Robin
+Title=Robin
+Icon=Robin.jpg
+Difficulty=Very Hard
+Description=./Modern/Wilds_of_Eldraine/Betrix2688_-_Yawgmoth_Evolution_(Modern,_#1750004)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Wall of Roots
+4 Young Wolf
+2 Strangleroot Geist
+1 Blood Artist
+1 Walking Ballista
+1 Yawgmoth, Thran Physician
+3 Yawgmoth, Thran Physician
+1 Ignoble Hierarch
+2 Endurance
+2 Delighted Halfling
+2 Delighted Halfling
+4 Orcish Bowmasters
+2 Agatha's Soul Cauldron
+4 Chord of Calling
+1 Eldritch Evolution
+4 Grist, the Hunger Tide
+2 Khalni Garden
+2 Blooming Marsh
+1 Pendelhaven
+1 Forest
+2 Overgrown Tomb
+2 Nurturing Peatland
+2 Twilight Mire
+1 Dryad Arbor
+4 Verdant Catacombs
+2 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+1 Swamp
+1 Forest
+[Sideboard]
+1 Spike Feeder
+1 Go for the Throat
+2 Force of Vigor
+2 Fulminator Mage
+2 Thoughtseize
+2 Chalice of the Void
+2 Endurance
+1 Sheoldred, the Apocalypse
+1 Haywire Mite
+1 Pile On

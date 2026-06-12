@@ -1,0 +1,7 @@
+Name:Charging Strifeknight
+ManaCost:2 R
+Types:Creature Spirit Knight
+PT:3/3
+K:Haste
+A:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
+Oracle:Haste\n{T}, Discard a card: Draw a card.

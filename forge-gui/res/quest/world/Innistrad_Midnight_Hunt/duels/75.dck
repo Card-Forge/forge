@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Blue
+Title=Dungeon Crawling Blue
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Offbeat_Hero_-_Death_and_Taxes_(Modern,_#1227070).dck
+Deck Type=constructed
+
+[Main]
+4 Brutal Cathar
+4 Charming Prince
+4 Stoneforge Mystic
+4 Flickerwisp
+4 Solitude
+4 Skyclave Apparition
+4 Restoration Angel
+4 Giver of Runes
+4 Ambitious Farmhand
+1 Sword of Hearth and Home
+1 Sword of Fire and Ice
+1 Kaldra Compleat
+1 Batterskull
+4 Aether Vial
+4 Ephemerate
+4 Emeria's Call
+1 Castle Ardenvale
+3 Cave of the Frost Dragon
+4 Mishra's Factory
+4 Field of Ruin
+16 Plains
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Elspeth, Sun's Champion
+1 Elspeth, Knight-Errant
+4 Faerie Macabre
+4 Drannith Magistrate
+4 Burrenton Forge-Tender

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Boba Fett
+Title=Boba Fett
+Icon=Boba Fett.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/Kevin_Li_-_Esper_Midrange_(Modern,_#2227949).dck
+Deck Type=constructed
+
+[Main]
+4 Guide of Souls
+3 Mockingbird
+4 Ocelot Pride
+4 Orcish Bowmasters
+4 Psychic Frog
+4 Vein Ripper
+4 Fatal Push
+3 Force of Negation
+1 Spell Pierce
+1 Inquisition of Kozilek
+2 Kaito Shizuki
+4 Sorin, Imperious Bloodlord
+1 Concealed Courtyard
+4 Flooded Strand
+2 Godless Shrine
+2 Hallowed Fountain
+1 Island
+2 Marsh Flats
+1 Meticulous Archive
+1 Plains
+4 Polluted Delta
+1 Shadowy Backstreet
+1 Swamp
+2 Watery Grave
+[Sideboard]
+1 Aven Interrupter
+2 Break the Ice
+4 Consign to Memory
+1 Deafening Silence
+1 Drannith Magistrate
+1 High Noon
+1 Nihil Spellbomb
+2 Thraben Charm
+1 Thoughtseize
+1 Spell Snare

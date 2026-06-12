@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Jack Sparrow
+Title=Jack Sparrow
+Icon=Jack Sparrow.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/BadBalbin_-_Naya_Enchantments_(Standard,_#1427746).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+2 The Restoration of Eiganjo
+2 Michiko's Reign of Truth
+4 Jukai Naturalist
+4 Runeforge Champion
+4 Kami of Transience
+4 Generous Visitor
+2 Rune of Sustenance
+2 Circle of Confinement
+4 Showdown of the Skalds
+4 Rune of Speed
+4 Rune of Might
+1 Mountain
+3 Furycalm Snarl
+3 Sundown Pass
+3 Plains
+4 Overgrown Farmland
+4 Cragcrown Pathway
+5 Forest
+[Sideboard]
+1 Ranger Class
+1 Borrowed Time
+2 Valorous Stance
+2 Circle of Confinement
+2 Flame-Blessed Bolt
+2 Portable Hole
+2 Tamiyo's Safekeeping
+3 Legion Angel

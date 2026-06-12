@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Black Flame
+Title=Black Flame
+Icon=Black Flame.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/James_Hamilton_-_Gruul_Aggro_(Standard,_#2275313).dck
+Deck Type=constructed
+
+[Main]
+4 Slickshot Show-Off
+4 Screaming Nemesis
+4 Questing Druid
+4 Monastery Swiftspear
+4 Hired Claw
+4 Shock
+2 Lightning Strike
+4 Burst Lightning
+4 Monstrous Rage
+4 Boltwave
+2 Innkeeper's Talent
+6 Mountain
+4 Karplusan Forest
+4 Copperline Gorge
+4 Thornspire Verge
+2 Restless Ridgeline
+[Sideboard]
+2 Case of the Crimson Pulse
+3 Witchstalker Frenzy
+2 Pyroclasm
+2 Ghost Vacuum
+3 Torch the Tower
+3 Pawpatch Formation

@@ -1,0 +1,7 @@
+Name:Avengers Tower
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Hero,Activated.Hero | SpellDescription$ Add one mana of any color. Spend this mana only to cast a Hero spell or to activate an ability of a Hero source.
+A:AB$ Dig | Cost$ 4 T | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Hero | RestRandomOrder$ True | SpellDescription$ Look at the top three cards of your library. You may reveal a Hero card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Hero spell or to activate an ability of a Hero source.\n{4}, {T}: Look at the top three cards of your library. You may reveal a Hero card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

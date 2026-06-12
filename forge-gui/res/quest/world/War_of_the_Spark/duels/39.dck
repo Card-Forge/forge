@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Nelson Muntz
+Title=Nelson Muntz
+Icon=Nelson Muntz.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Aaron_Kosinski_-_Esper_Control_(Standard,_#797553).dck
+Deck Type=constructed
+
+[Main]
+4 Absorb
+1 Cast Down
+2 Chemister's Insight
+2 Dovin's Veto
+2 Moment of Craving
+2 Mortify
+1 Settle the Wreckage
+1 Tyrant's Scorn
+3 Vraska's Contempt
+2 Kaya's Wrath
+4 Thought Erasure
+1 Oath of Kaya
+2 Search for Azcanta
+1 Kaya, Orzhov Usurper
+1 Narset, Parter of Veils
+3 Teferi, Hero of Dominaria
+2 Teferi, Time Raveler
+1 Island
+1 Swamp
+4 Drowned Catacomb
+4 Glacial Fortress
+4 Godless Shrine
+4 Hallowed Fountain
+4 Isolated Chapel
+4 Watery Grave
+[Sideboard]
+3 Thief of Sanity
+1 Dovin's Veto
+1 Moment of Craving
+1 God-Eternal Kefnet
+1 Oath of Kaya
+1 Narset, Parter of Veils
+1 Teferi, Time Raveler
+1 Ugin, the Ineffable
+1 Cry of the Carnarium
+3 Duress
+1 The Elderspell

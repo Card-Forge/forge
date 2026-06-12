@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Robot Santa
+Title=Robot Santa
+Icon=Robot Santa.jpg
+Difficulty=Easy
+Description=Dark_Ascension/Topdecker.gr_-_e-Fantasy.gr_-_AVR_Gameday_2/Thanos_Lattos_-_Tokens_(Standard,_#32208).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Doomed Traveler
+2 Dismember
+4 Midnight Haunting
+4 Tragic Slip
+4 Gather the Townsfolk
+4 Lingering Souls
+3 Timely Reinforcements
+4 Honor of the Pure
+4 Intangible Virtue
+3 Sorin, Lord of Innistrad
+4 Evolving Wilds
+4 Isolated Chapel
+9 Plains
+4 Swamp
+3 Vault of the Archangel
+[Sideboard]
+3 Celestial Purge
+3 Divine Offering
+2 Grafdigger's Cage
+2 Liliana of the Veil
+2 Revoke Existence
+3 Surgical Extraction

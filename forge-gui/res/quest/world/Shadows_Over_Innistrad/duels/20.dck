@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Bilbo Baggins
+Title=Bilbo Baggins
+Icon=Bilbo Baggins.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/SCG_Invitational_Qualifier_Wilbraham/Joe_Ligus_-_G-R_Ramp_(Standard,_#612643).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Dragonlord Atarka
+2 Hangarback Walker
+1 Kozilek, the Great Distortion
+1 Nissa, Vastwood Seer
+2 Ulamog, the Ceaseless Hunger
+1 Void Winnower
+3 World Breaker
+1 Hedron Archive
+3 Kozilek's Return
+4 Explosive Vegetation
+4 Nissa's Pilgrimage
+2 Ruin in Their Wake
+2 Traverse the Ulvenwald
+4 Oath of Nissa
+2 Chandra, Flamecaller
+4 Cinder Glade
+10 Forest
+1 Haven of the Spirit Dragon
+2 Mountain
+3 Sanctum of Ugin
+3 Shrine of the Forsaken Gods
+2 Wastes
+[Sideboard]
+3 Clip Wings
+1 From Beyond
+3 Jaddi Offshoot
+2 Oblivion Sower
+2 Retreat to Kazandu
+2 Roast
+2 Warping Wail

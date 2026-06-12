@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Leela
+Title=Leela
+Icon=Leela.jpg
+Difficulty=Medium
+Description=Magic_Origins/WMCQ_Fanatic_Roskilde/Kasper_Nielsen_-_Abzan_Aggro_(Standard,_#315159).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Den Protector
+4 Fleecemane Lion
+4 Hangarback Walker
+4 Siege Rhino
+1 Warden of the First Tree
+2 Wingmate Roc
+4 Abzan Charm
+4 Dromoka's Command
+1 Hero's Downfall
+2 Ultimate Price
+1 Sorin, Solemn Visitor
+3 Caves of Koilos
+2 Forest
+3 Llanowar Wastes
+1 Mana Confluence
+2 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+2 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Elspeth, Sun's Champion
+1 Herald of Torment
+2 Self-Inflicted Wound
+1 Tasigur, the Golden Fang
+4 Thoughtseize
+2 Tragic Arrogance
+1 Unravel the AEther

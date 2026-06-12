@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Alan_Swan_-_Azorius_Spirits_(Modern,_#779406).dck
+Deck Type=constructed
+
+[Main]
+2 Deputy of Detention
+4 Drogskol Captain
+4 Mausoleum Wanderer
+2 Phantasmal Image
+4 Rattlechains
+3 Selfless Spirit
+4 Spell Queller
+4 Supreme Phantom
+3 Thalia, Guardian of Thraben
+2 Tithe Taker
+4 Aether Vial
+1 Echoing Truth
+2 Path to Exile
+1 Cavern of Souls
+4 Flooded Strand
+2 Hallowed Fountain
+2 Horizon Canopy
+3 Island
+1 Moorland Haunt
+2 Mutavault
+2 Plains
+4 Seachrome Coast
+[Sideboard]
+2 Damping Sphere
+1 Deputy of Detention
+1 Disdainful Stroke
+1 Eidolon of Rhetoric
+2 Geist of Saint Traft
+1 Kira, Great Glass-Spinner
+2 Path to Exile
+1 Remorseful Cleric
+2 Rest in Peace
+2 Unified Will

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Oshun
+Title=Oshun
+Icon=Oshun.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/Izumiya_Yoshiaki_-_Library_Destruction_(Modern,_#1239699).dck
+Deck Type=constructed
+
+[Main]
+1 Snapcaster Mage
+4 Hedron Crab
+4 Ruin Crab
+1 Into the Story
+3 Surgical Extraction
+4 Drown in the Loch
+4 Fatal Push
+4 Archive Trap
+4 Visions of Beyond
+4 Fractured Sanity
+4 Tasha's Hideous Laughter
+1 Oboro, Palace in the Clouds
+1 Swamp
+1 Urborg, Tomb of Yawgmoth
+2 Shelldock Isle
+2 Misty Rainforest
+4 Island
+4 Watery Grave
+4 Polluted Delta
+4 Field of Ruin
+[Sideboard]
+1 Ratchet Bomb
+1 Lurrus of the Dream-Den
+1 Path of Peril
+2 Engineered Explosives
+2 Bloodchief's Thirst
+2 Soul-Guide Lantern
+3 Extirpate
+3 Crypt Incursion

@@ -20,7 +20,7 @@ ScryfallCode=NEC
 12 R Cyberdrive Awakener @Zezhou Chen
 13 R Imposter Mech @Andrew Mar
 14 R Kappa Cannoneer @Jesper Ejsing
-15 R Katsumasa, the Animator @Heonhwa Choe
+15 R Katsumasa, the Animator @Heonhwa
 16 R Research Thief @Cristi Balanescu
 17 R Universal Surveillance @Aaron J. Riley
 18 R Akki Battle Squad @Steve Prescott
@@ -56,7 +56,7 @@ ScryfallCode=NEC
 48 R Cyberdrive Awakener @Zezhou Chen
 49 R Imposter Mech @Andrew Mar
 50 R Kappa Cannoneer @Jesper Ejsing
-51 R Katsumasa, the Animator @Heonhwa Choe
+51 R Katsumasa, the Animator @Heonhwa
 52 R Myojin of Cryptic Dreams @Yigit Koroglu
 53 R Research Thief @Cristi Balanescu
 54 R Universal Surveillance @Aaron J. Riley

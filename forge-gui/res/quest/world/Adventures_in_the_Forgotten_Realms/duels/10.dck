@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=BaronSamedi
+Title=BaronSamedi
+Icon=BaronSamedi.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Sal_Orrico_-_Boros_Aggro_(Standard,_#1186871).dck
+Deck Type=constructed
+
+[Main]
+4 Hulking Bugbear
+4 Blade Historian
+4 Hobgoblin Captain
+4 Goblin Javelineer
+4 Luminarch Aspirant
+4 Winota, Joiner of Forces
+4 Ardenvale Tactician
+4 Hobgoblin Bandit Lord
+4 Paladin Class
+12 Plains
+12 Mountain
+[Sideboard]
+3 Sentinel's Eyes
+4 Shock

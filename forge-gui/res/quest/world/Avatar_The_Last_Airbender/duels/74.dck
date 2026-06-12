@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=BaronCimitiere
+Title=BaronCimitiere
+Icon=BaronCimitiere.jpg
+Difficulty=Very Hard
+Description=./Modern/Avatar_The_Last_Airbender/Abe_Kodai_-_Merfolk_(Modern,_#2714417).dck
+Deck Type=constructed
+
+[Main]
+4 Silvergill Adept
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+2 Cursecatcher
+4 Tide Shaper
+4 Vodalian Hexcatcher
+3 Tishana's Tidebinder
+2 Harbinger of the Seas
+4 Floodpits Drowner
+2 Mindspring Merfolk
+4 Aether Vial
+2 Flare of Denial
+3 Sink into Stupor
+9 Island
+2 Cavern of Souls
+4 Mutavault
+1 Fiery Islet
+1 Otawara, Soaring City
+1 Agna Qel'a
+[Sideboard]
+2 Hurkyl's Recall
+2 Harbinger of the Tides
+2 Dismember
+3 Surgical Extraction
+3 Consign to Memory
+2 Strix Serenade
+1 Unable to Scream

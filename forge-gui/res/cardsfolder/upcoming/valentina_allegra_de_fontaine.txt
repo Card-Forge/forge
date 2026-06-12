@@ -1,0 +1,7 @@
+Name:Valentina Allegra de Fontaine
+ManaCost:2 B
+Types:Legendary Creature Human Spy Villain
+PT:2/3
+S:Mode$ Continuous | Affected$ Villain.Other+YouCtrl | AddType$ Hero | Description$ Other Villains you control are Heroes in addition to their other types.
+A:AB$ Connive | Cost$ T | ValidTgts$ Hero.YouCtrl | TgtPrompt$ Select target Hero you control | SorcerySpeed$ True | SpellDescription$ Target Hero you control connives. Activate only as a sorcery. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+Oracle:Other Villains you control are Heroes in addition to their other types.\n{T}: Target Hero you control connives. Activate only as a sorcery. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

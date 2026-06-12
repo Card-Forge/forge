@@ -1,0 +1,10 @@
+Name:Primary Research
+ManaCost:4 W
+Types:Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When this enchantment enters, return target nonland permanent card with mana value 3 or less from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+cmcLE3+YouOwn | ValidTgtDesc$ nonland permanent card with mana value 3 or less in your graveyard | Origin$ Graveyard | Destination$ Battlefield
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | CheckSVar$ X | TriggerDescription$ At the beginning of your end step, if a card left your graveyard this turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:Count$LeftGraveyardThisTurn Card.YouOwn
+DeckHas:Ability$Graveyard
+Oracle:When this enchantment enters, return target nonland permanent card with mana value 3 or less from your graveyard to the battlefield.\nAt the beginning of your end step, if a card left your graveyard this turn, draw a card.

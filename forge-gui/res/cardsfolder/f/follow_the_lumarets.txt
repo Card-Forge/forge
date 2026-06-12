@@ -1,0 +1,7 @@
+Name:Follow the Lumarets
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Dig | DigNum$ 4 | ChangeNum$ X | Optional$ True | ChangeValid$ Creature,Land | ForceRevealToController$ True | RestRandomOrder$ True | SpellDescription$ Infusion — Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. If you gained life this turn, you may instead reveal two creature and/or land cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
+SVar:X:Count$Compare Y GE1.2.1
+SVar:Y:Count$LifeYouGainedThisTurn
+Oracle:Infusion — Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. If you gained life this turn, you may instead reveal two creature and/or land cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order.

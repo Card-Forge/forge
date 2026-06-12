@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/Dustin_Sukle_-_Dimir_Tempo_(Modern,_#2260098).dck
+Deck Type=constructed
+
+[Main]
+4 Tamiyo, Inquisitive Student
+4 Moon-Circuit Hacker
+2 Ninja of the Deep Hours
+4 Ingenious Infiltrator
+4 Ornithopter
+4 Orcish Bowmasters
+3 Satoru, the Infiltrator
+4 Flare of Denial
+4 Fatal Push
+2 Sink into Stupor
+4 Force of Negation
+3 Kaito, Bane of Nightmares
+3 Watery Grave
+4 Polluted Delta
+1 Bloodstained Mire
+2 Island
+1 Swamp
+2 Flooded Strand
+2 Undercity Sewers
+2 Gloomlake Verge
+1 Otawara, Soaring City
+[Sideboard]
+2 Glistening Deluge
+2 Damping Sphere
+2 Surgical Extraction
+1 Nihil Spellbomb
+4 Consign to Memory
+2 Stern Scolding
+2 Mystical Dispute

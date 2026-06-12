@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Princess Selenia
+Title=Princess Selenia
+Icon=Princess Selenia.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/SCG_Invitational_Grinder_-_Ohio/Riley_Curran_-_Red_Deck_Wins_(Modern,_#27254).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Grim Lavamancer
+4 Hellspark Elemental
+3 Keldon Marauders
+4 Incinerate
+4 Lightning Bolt
+4 Searing Blaze
+3 Shard Volley
+1 Arc Trail
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+13 Mountain
+4 Scalding Tarn
+[Sideboard]
+2 Combust
+3 Ensnaring Bridge
+3 Molten Rain
+2 Relic of Progenitus
+1 Shattering Spree
+2 Torpor Orb
+2 Volcanic Fallout

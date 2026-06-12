@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Storm2
+Title=Storm2
+Icon=Storm2.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Eric_Jan_Cawaling_-_Mono_Black_(Standard,_#2008318).dck
+Deck Type=constructed
+
+[Main]
+1 Aclazotz, Deepest Betrayal
+2 Archfiend of the Dross
+4 Bloodletter of Aclazotz
+4 Deep-Cavern Bat
+4 Preacher of the Schism
+2 Sheoldred, the Apocalypse
+4 Vein Ripper
+4 Bitter Triumph
+3 Cut Down
+1 Virtue of Persistence
+3 Case of the Stashed Skeleton
+3 Liliana of the Veil
+2 Demolition Field
+2 Mirrex
+1 Mishra's Foundry
+17 Swamp
+1 Takenuma, Abandoned Mire
+2 Underground Mortuary
+[Sideboard]
+3 Duress
+1 Gix's Command
+1 Go for the Throat
+1 Liliana of the Veil
+1 Long Goodbye
+3 Path of Peril
+2 Pilfer
+2 Push // Pull
+1 The Stone Brain

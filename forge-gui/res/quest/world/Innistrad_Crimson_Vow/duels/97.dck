@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Wally
+Title=Wally
+Icon=Wally.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/John_Colby_-_Simic_Infect_(Modern,_#1438214).dck
+Deck Type=constructed
+
+[Main]
+2 Spellskite
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+3 Spell Pierce
+4 Vines of Vastwood
+4 Blossoming Defense
+4 Might of Old Krosa
+4 Mutagenic Growth
+2 Distortion Strike
+4 Scale Up
+2 Rancor
+2 Reflecting Pool
+2 Pendelhaven
+2 City of Brass
+2 Dreamroot Cascade
+3 Forest
+4 Yavimaya Coast
+4 Inkmoth Nexus
+[Sideboard]
+2 Void Mirror
+2 Surgical Extraction
+2 Ashiok, Dream Render
+3 Test of Talents
+3 Nature's Claim
+3 Dismember

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Ra
+Title=Ra
+Icon=Ra.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/States-Champs_South_Carolina/Scott_Murray_-_Valakut_Ramp_(Standard,_#7977).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avenger of Zendikar
+4 Oracle of Mul Daya
+4 Primeval Titan
+4 Harrow
+4 Lightning Bolt
+4 Summoning Trap
+4 Cultivate
+2 Pyroclasm
+4 Khalni Heart Expedition
+2 Evolving Wilds
+8 Forest
+12 Mountain
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+3 All Is Dust
+3 Fog
+3 Memoricide
+3 Naturalize
+1 Swamp

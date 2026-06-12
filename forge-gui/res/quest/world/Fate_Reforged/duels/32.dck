@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Medium
+Description=Fate_Reforged/Standard_Daily_#8088735/JordanTheJew_-_Temur_Ascendancy_(Standard,_#205921).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Arbor Colossus
+2 Boon Satyr
+4 Courser of Kruphix
+4 Eidolon of Blossoms
+4 Elvish Mystic
+4 Genesis Hydra
+1 Hornet Queen
+1 Nylea, God of the Hunt
+2 Polukranos, World Eater
+2 Sylvan Caryatid
+4 Temur Sabertooth
+4 Voyaging Satyr
+3 Temur Ascendancy
+6 Forest
+4 Frontier Bivouac
+1 Mountain
+4 Nykthos, Shrine to Nyx
+4 Wooded Foothills
+4 Yavimaya Coast
+[Sideboard]
+3 Hornet Nest
+3 Magma Spray
+4 Nylea's Disciple
+3 Ranger's Guile
+2 Reclamation Sage

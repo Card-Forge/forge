@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Demon
+Title=Demon
+Icon=Demon.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/AshenFenix_-_Gruul_Werewolves_(Standard,_#1500180).dck
+Deck Type=constructed
+
+[Main]
+1 Howlpack Piper
+1 Halana and Alena, Partners
+2 Child of the Pack
+3 Tovolar, Dire Overlord
+4 Reckless Stormseeker
+4 Fable of the Mirror-Breaker
+4 Packsong Pup
+4 Outland Liberator
+4 Kessig Naturalist
+1 Tail Swipe
+1 Flame-Blessed Bolt
+2 Rending Flame
+3 Play with Fire
+2 Unnatural Moonrise
+1 Howling Moon
+2 Arlinn, the Pack's Hope
+1 Rockfall Vale
+2 Racers' Ring
+4 Rugged Highlands
+9 Forest
+9 Mountain
+[Sideboard]

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Ala
+Title=Ala
+Icon=Ala.jpg
+Difficulty=Easy
+Description=./Standard/Bloomburrow/Fink64_-_Big_Red_(Standard,_#2206789).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+2 Squee, Dubious Monarch
+4 Fugitive Codebreaker
+4 Emberheart Challenger
+4 Hired Claw
+4 Urabrask's Forge
+4 Shock
+4 Lightning Strike
+4 Torch the Tower
+2 Scorching Shot
+2 Obliterating Bolt
+18 Mountain
+4 Fountainport
+[Sideboard]
+4 Brotherhood's End
+4 Charming Scoundrel
+4 Sunspine Lynx
+2 Goddric, Cloaked Reveler
+1 Mirrex

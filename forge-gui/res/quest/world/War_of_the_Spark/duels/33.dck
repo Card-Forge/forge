@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Andy_Chan_-_Gruul_Midrange_(Standard,_#801666).dck
+Deck Type=constructed
+
+[Main]
+3 Ghalta, Primal Hunger
+4 Gruul Spellbreaker
+4 Llanowar Elves
+4 Merfolk Branchwalker
+4 Nullhide Ferox
+4 Paradise Druid
+4 Regisaur Alpha
+4 Rekindling Phoenix
+4 Domri, Anarch of Bolas
+2 Sarkhan the Masterless
+10 Forest
+5 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+[Sideboard]
+2 Carnage Tyrant
+4 Lava Coil
+1 Raptor Hatchling
+4 Thrashing Brontodon
+4 Vivien Reid

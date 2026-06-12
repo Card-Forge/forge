@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Storm
+Title=Storm
+Icon=Storm.jpg
+Difficulty=Easy
+Description=./Standard/Final_Fantasy/Davi_Montenegro_-_Boros_Aggro_(Standard,_#2534622).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Manifold Mouse
+4 Screaming Nemesis
+4 Twinmaw Stormbrood
+1 Magebane Lizard
+4 Burst Lightning
+4 Monstrous Rage
+4 Sheltered by Ghosts
+1 Shardmage's Rescue
+6 Mountain
+4 Battlefield Forge
+4 Inspiring Vantage
+4 Rockface Village
+2 Sunbillow Verge
+1 Restless Bivouac
+1 Starting Town
+[Sideboard]
+4 Sunspine Lynx
+3 Magebane Lizard
+2 Abrade
+2 Destroy Evil
+2 Soul-Guide Lantern
+1 High Noon
+1 Torch the Tower

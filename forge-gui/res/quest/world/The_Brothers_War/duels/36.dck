@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=James T Kirk
+Title=James T Kirk
+Icon=James T Kirk.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/Daikoku_Sora_-_Rogue_(Standard,_#1502013).dck
+Deck Type=constructed
+
+[Main]
+1 The Restoration of Eiganjo
+2 Ambitious Farmhand
+2 Spirited Companion
+3 Clay Champion
+4 Sanctuary Warden
+4 Fable of the Mirror-Breaker
+4 Steel Seraph
+4 Fleetfoot Dancer
+4 Gala Greeters
+3 Destroy Evil
+1 Elspeth Resplendent
+2 The Wandering Emperor
+1 Forest
+1 Karplusan Forest
+1 Boseiju, Who Endures
+1 Eiganjo, Seat of the Empire
+2 Battlefield Forge
+2 Brushland
+2 Rockfall Vale
+4 Plains
+4 Overgrown Farmland
+4 Sundown Pass
+4 Jetmir's Garden
+[Sideboard]
+1 Jetmir, Nexus of Revels
+1 Workshop Warchief
+1 Vivien on the Hunt
+1 Arlinn, the Pack's Hope
+1 Angelfire Ignition
+2 Serra Paragon
+2 Unlicensed Hearse
+2 Touch the Spirit Realm
+2 Farewell
+2 Abrade

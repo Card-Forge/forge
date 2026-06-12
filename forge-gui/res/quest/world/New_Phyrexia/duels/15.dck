@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Simic-precon
+Title=Simic-precon
+Icon=Simic-precon.jpg
+Difficulty=Easy
+Description=New_Phyrexia/2011_TCGplayer_TCQ_-_EK1K_-_6-18/GarrettYoung_-_Valakut_Ramp_(Standard,_#16263).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Avenger of Zendikar
+2 Inferno Titan
+1 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+4 Harrow
+4 Nature's Claim
+4 Summoning Trap
+4 Explore
+4 Green Sun's Zenith
+2 Evolving Wilds
+6 Forest
+11 Mountain
+2 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+1 Artisan of Kozilek
+1 Beast Within
+4 Combust
+3 Obstinate Baloth
+3 Pyroclasm
+1 Slagstorm
+2 Tumble Magnet

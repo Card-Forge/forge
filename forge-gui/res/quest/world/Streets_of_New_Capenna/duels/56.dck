@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Sphinx
+Title=Sphinx
+Icon=Sphinx.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Joshua_Hakim_-_Bant_Control_(Modern,_#1438209).dck
+Deck Type=constructed
+
+[Main]
+2 Wall of Blossoms
+2 Endurance
+2 Deputy of Detention
+3 Solitude
+3 Eternal Witness
+4 Wall of Omens
+4 Noble Hierarch
+4 Ice-Fang Coatl
+4 Soulherder
+4 Collected Company
+4 Ephemerate
+2 Time Warp
+1 Snow-Covered Plains
+1 Spara's Headquarters
+1 Breeding Pool
+1 Temple Garden
+2 Hallowed Fountain
+2 Glasspool Mimic
+2 Snow-Covered Forest
+2 Snow-Covered Island
+3 Flooded Strand
+3 Windswept Heath
+4 Misty Rainforest
+[Sideboard]
+1 Solitude
+1 Endurance
+1 Time Warp
+2 Burrenton Bombardier
+2 Venser, Shaper Savant
+2 Silence
+3 Knight of Autumn
+3 Meddling Mage

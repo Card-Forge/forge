@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dead Girl
+Title=Dead Girl
+Icon=Dead Girl.jpg
+Difficulty=Very Hard
+Description=../Modern/Eldritch_Moon/Competitive_Modern_Constructed_League/Sqlut_-_Red_Deck_Wins_(Modern,_#660074).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+2 Shard Volley
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+1 Blood Crypt
+2 Bloodstained Mire
+2 Mountain
+2 Sacred Foundry
+3 Scalding Tarn
+2 Stomping Ground
+3 Wooded Foothills
+[Sideboard]
+1 Ancient Grudge
+4 Collective Brutality
+4 Destructive Revelry
+1 Grafdigger's Cage
+2 Molten Rain
+1 Ravenous Trap
+2 Rest in Peace

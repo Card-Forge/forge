@@ -75,7 +75,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected Iterable<PaperCard> keyCards;
     protected Map<Integer,Integer> targetCMCs;
 
-
     public CardThemedDeckBuilder(IDeckGenPool pool, DeckFormat format){
         super(pool,format);
     }
@@ -83,7 +82,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     public CardThemedDeckBuilder(PaperCard keyCard0, PaperCard secondKeyCard0, final List<PaperCard> dList, GameFormat format, boolean isForAI){
         this(keyCard0,secondKeyCard0, dList, format, isForAI, DeckFormat.Constructed);
     }
-
 
     /**
      *
@@ -150,7 +148,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         }
         findBasicLandSets();
     }
-
 
     @Override
     public CardPool getDeck(final int size, final boolean forAi) {
@@ -610,10 +607,10 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         List<PaperCard> possibleList = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
         //ensure we do not add more keycards in case they are commanders
         if (keyCard != null) {
-            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard.getName()));
+            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard));
         }
         if (secondKeyCard != null) {
-            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
+            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard));
         }
         //Iterator<PaperCard> iRandomPool = CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize <= possibleList.size() ? targetSize : possibleList.size())).iterator();
         Collections.shuffle(possibleList);
@@ -718,7 +715,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * Only adds wastes if present in the card pool but if present adds them all
      */
     private void addWastesIfRequired(){
-        PaperCard waste = FModel.getMagicDb().getCommonCards().getUniqueByName("Wastes");
+        PaperCard waste = FModel.getMagicDb().getCommonCards().getUniqueByNameNoAlt("Wastes");
         if(colors.isColorless()&& keyCard.getRules().getColorIdentity().isColorless()
                 && format.isLegalCard(waste)) {
             while (landsNeeded > 0) {
@@ -836,10 +833,10 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         List<PaperCard> possibleList = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
         //ensure we do not add more keycards in case they are commanders
         if (keyCard != null) {
-            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard.getName()));
+            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard));
         }
         if (secondKeyCard != null) {
-            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
+            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard));
         }
         Collections.shuffle(possibleList);
         //addManaCurveCards(CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize*3 <= possibleList.size() ? targetSize*3 : possibleList.size())),

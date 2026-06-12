@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Aurelia
+Title=Aurelia
+Icon=Aurelia.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/Standard_Constructed_League/Snake_Pliskan_-_Snake_Pliskan_(5-0)_(Modern,_#518895).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Hangarback Walker
+2 Nissa, Vastwood Seer
+4 Rattleclaw Mystic
+4 Ulamog, the Ceaseless Hunger
+4 Hedron Archive
+2 Map the Wastes
+4 Nissa's Pilgrimage
+4 Nissa's Renewal
+3 Sylvan Scrying
+4 Ugin, the Spirit Dragon
+2 Blighted Woodland
+14 Forest
+1 Haven of the Spirit Dragon
+4 Sanctum of Ugin
+4 Shrine of the Forsaken Gods
+[Sideboard]
+2 Den Protector
+4 Jaddi Offshoot
+3 Oblivion Sower
+1 Void Winnower
+4 Whisperwood Elemental
+1 Windstorm

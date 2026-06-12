@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Grumpy
+Title=Grumpy
+Icon=Grumpy.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/Adrian_Casabo_-_Four-color_Adventures_(Standard,_#977160).dck
+Deck Type=constructed
+
+[Main]
+4 Lovestruck Beast
+4 Fae of Wishes
+4 Edgewall Innkeeper
+4 Brazen Borrower
+4 Bonecrusher Giant
+4 Beanstalk Giant
+4 Lucky Clover
+2 Adventurous Impulse
+3 Escape to the Wilds
+1 Temple of Mystery
+1 Temple of Abandon
+2 Mountain
+2 Ketria Triome
+4 Stomping Ground
+4 Breeding Pool
+4 Island
+4 Steam Vents
+5 Forest
+[Sideboard]
+1 Unsummon
+1 Disdainful Stroke
+1 Escape to the Wilds
+1 Expansion // Explosion
+1 Flame Sweep
+1 Fling
+1 Redcap Melee
+1 Grafdigger's Cage
+1 Mystic Repeal
+1 Negate
+1 Once and Future
+1 Return to Nature
+1 Shadowspear
+1 Storm's Wrath
+1 Soul-Guide Lantern

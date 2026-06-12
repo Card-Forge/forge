@@ -210,7 +210,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 }
             }
             triggerList.triggerChangesZoneAll(game, sa);
-            counterTable.replaceCounterEffect(game, sa, true);
+            counterTable.replaceCounterEffect(game, sa);
 
             if (sa.hasParam("Reveal")) {
                 game.getAction().reveal(cards, player, true);

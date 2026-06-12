@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Regigigas
+Title=Regigigas
+Icon=Regigigas.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/TCGplayer_Open_5K_Boxborough,_MA/Christopher_Barone_-_Boros_Burn_(Standard,_#73403).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Chandra's Phoenix
+4 Young Pyromancer
+4 Boros Charm
+4 Lightning Strike
+4 Magma Jet
+2 Searing Blood
+4 Shock
+4 Skullcrack
+4 Warleader's Helix
+3 Chained to the Rocks
+2 Boros Guildgate
+8 Mountain
+4 Sacred Foundry
+1 Temple of Malice
+1 Temple of Silence
+4 Temple of Triumph
+[Sideboard]
+3 Banishing Light
+2 Mizzium Mortars
+1 Mutavault
+2 Nyx-Fleece Ram
+4 Viashino Firstblade
