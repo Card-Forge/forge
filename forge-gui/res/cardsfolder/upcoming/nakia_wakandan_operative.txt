@@ -1,0 +1,10 @@
+Name:Nakia, Wakandan Operative
+ManaCost:2 G
+Types:Legendary Creature Human Warrior Hero
+PT:3/3
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.IsCommander+YouOwn | Execute$ TrigMonarch | TriggerDescription$ Whenever your commander enters, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch
+A:AB$ PutCounter | Cost$ 2 T | ValidTgts$ Creature,Vehicle | ValidTgtDesc$ creature or Vehicle | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two +1/+1 counters on target creature or Vehicle. Activate only as a sorcery.
+DeckHas:Ability$Counters
+Oracle:Reach\nWhenever your commander enters, you become the monarch.\n{2}, {T}: Put two +1/+1 counters on target creature or Vehicle. Activate only as a sorcery.
