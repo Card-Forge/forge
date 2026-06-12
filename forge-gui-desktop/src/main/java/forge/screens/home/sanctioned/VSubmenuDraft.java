@@ -10,12 +10,14 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
 import forge.game.GameType;
+import forge.gui.SwingPrefBinders;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.SwingPrefBinders;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
@@ -27,8 +29,6 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FRadioButton;
 import forge.toolbox.FSkin;
 import forge.toolbox.JXButtonPanel;
-import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.model.FModel;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
@@ -56,14 +56,16 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
 
     private final JRadioButton radSingle = new FRadioButton(localizer.getMessage("lblPlayAnOpponent"));
     private final JRadioButton radMultiple = new FRadioButton(localizer.getMessage("lblPlayMultipleOpponents"));
+    private final JRadioButton radGauntlet = new FRadioButton(localizer.getMessage("lblPlayGauntletRounds"));
     private final JRadioButton radAll = new FRadioButton(localizer.getMessage("lblPlayAll7opponents"));
 
     private final JComboBox<String> cbOpponent = new JComboBox<>();
 
-    private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] {"1","3","5"});
+    private final JComboBox<String> gamesInMatch = new JComboBox<>(new String[] {"1","3","5"});
     private final SwingPrefBinders.ComboBox gamesInMatchBinder =
         new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
     private final JPanel gamesInMatchFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+    private final javax.swing.JButton btnGauntletOptions = new javax.swing.JButton(localizer.getMessage("lblOptions", "Options"));
 
     private final JLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
@@ -97,11 +99,13 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         lstDecks.setCaption(localizer.getMessage("lblDraftDecks"));
 
         final JXButtonPanel grpPanel = new JXButtonPanel();
-        grpPanel.add(radSingle, "w 200px!, h 30px!");
-        grpPanel.add(radMultiple, "w 200px!, h 30px!");
-        grpPanel.add(radAll, "w 200px!, h 30px!");
+        // Increased widths so longer labels fit without truncation
+        grpPanel.add(radSingle, "w 320px!, h 30px!");
+        grpPanel.add(radMultiple, "w 320px!, h 30px!");
+        grpPanel.add(radGauntlet, "w 320px!, h 30px!");
+        grpPanel.add(radAll, "w 320px!, h 30px!");
         radSingle.setSelected(true);
-        grpPanel.add(cbOpponent, "w 200px!, h 30px!");
+        grpPanel.add(cbOpponent, "w 320px!, h 30px!");
 
         pnlStart.setLayout(new MigLayout("insets 0, gap 0",
                                          "[grow][pref!]",
@@ -113,10 +117,14 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         if (defaultGamesInMatch == null || defaultGamesInMatch.isEmpty()) {
             defaultGamesInMatch = "3";
         }
-        gamesInMatchFrame.add(lblGamesInMatch, "w 150px!, h 30px!");
+        gamesInMatch.setSelectedItem(defaultGamesInMatch);
+        // Slightly reduce games label width to balance layout
+        gamesInMatchFrame.add(lblGamesInMatch, "w 120px!, h 30px!");
         gamesInMatchFrame.add(gamesInMatch, "w 50px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
         pnlStart.add(gamesInMatchFrame, "cell 1 0, alignx center, aligny top");
+        // Add options button for gauntlet configuration
+        pnlStart.add(btnGauntletOptions, "cell 1 1, alignx center");
 
         pnlStart.add(btnStart, "cell 1 2, alignx center, aligny bottom");
     }
@@ -158,6 +166,11 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     public boolean isSingleSelected() {
         return radSingle.isSelected();
     }
+
+    public boolean isLimitedGauntletSelected() {
+        return radGauntlet.isSelected();
+    }
+
     public boolean isGauntlet() {
         return radAll.isSelected();
     }
@@ -170,8 +183,10 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     public JComboBox<String> getCbOpponent() { return cbOpponent; }
     public JRadioButton getRadSingle() { return radSingle; }
     public JRadioButton getRadMultiple() { return radMultiple; }
+    public JRadioButton getRadGauntlet() { return radGauntlet; }
     public JRadioButton getRadAll() { return radAll; }
     public SwingPrefBinders.ComboBox getGamesInMatchBinder() { return gamesInMatchBinder; }
+    public javax.swing.JButton getBtnGauntletOptions() { return btnGauntletOptions; }
 
     //========== Overridden from IVDoc
 
