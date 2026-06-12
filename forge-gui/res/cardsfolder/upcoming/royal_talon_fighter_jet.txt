@@ -1,0 +1,13 @@
+Name:Royal Talon Fighter Jet
+ManaCost:X W W
+Types:Artifact Vehicle
+PT:1/1
+K:Flying
+K:etbCounter:P1P1:X
+SVar:X:Count$xPaid
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this Vehicle enters or attacks, create a number of 1/1 white Soldier creature tokens equal to the number of +1/+1 counters on it.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever this Vehicle enters or attacks, create a number of 1/1 white Soldier creature tokens equal to the number of +1/+1 counters on it.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier | TokenOwner$ You | TokenAmount$ Y
+SVar:Y:Count$CardCounters.P1P1
+K:Crew:2
+Oracle:Flying\nThis Vehicle enters with X +1/+1 counters on it.\nWhenever this Vehicle enters or attacks, create a number of 1/1 white Soldier creature tokens equal to the number of +1/+1 counters on it.\nCrew 2
