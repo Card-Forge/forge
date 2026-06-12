@@ -335,6 +335,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     public boolean isRegionUnlocked(String regionName) {
         if (archipelagoMode == ArchipelagoMode.disabled) return true;
+        if (!Arrays.asList(ArchipelagoUtil.regionNames).contains(regionName.toLowerCase())) return true;
         lastTraversedRegion = regionName;
         if (archipelagoDataInstance.lockedWorldRegionsByName.contains(lastTraversedRegion)) {
             return false;
@@ -348,6 +349,10 @@ public class ArchipelagoData implements SaveFileContent {
 
     public void setTotalAmountOfSetUnlockChecks(int newTotalAmountOfSetUnlockChecks) {
         totalAmountOfSetUnlockChecks = newTotalAmountOfSetUnlockChecks;
+    }
+
+    public void setLastTraversedRegion(String lastTraversedRegion) {
+        this.lastTraversedRegion = lastTraversedRegion;
     }
 
     public boolean checkCardUnlocked(PaperCard card) {

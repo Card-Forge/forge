@@ -5,6 +5,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.StaticData;
+import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoMode;
+import forge.adventure.archipelago.ArchipelagoUtil;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -93,6 +96,11 @@ public class ConsoleCommandInterpreter {
             return "Command not found. Available commands:\n" + String.join(" ", Arrays.copyOfRange(words, 0, i)) + "\n" + String.join("\n", currentCommand.children.keySet());
         }
         String[] parameters = Arrays.copyOfRange(words, i, words.length);
+        if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled) {
+            if (text.toLowerCase().contains("teleport to poi")) {
+                ArchipelagoUtil.updateLastTraversedRegionOnTeleport(text);
+            }
+        }
         // this removes apostrophe...
         /*for (int j = 0; j < parameters.length; j++)
             parameters[j] = parameters[j].replaceAll("[\"']", "");*/
