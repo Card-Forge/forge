@@ -54,6 +54,8 @@ import java.util.stream.Collectors;
  * Handles phase skips for now.
  */
 public class PlayerControllerAi extends PlayerController {
+    private static final String AI_PROFILE_HINT = "AiProfile";
+
     private final AiController brains;
 
     private boolean pilotsNonAggroDeck = false;
@@ -70,6 +72,11 @@ public class PlayerControllerAi extends PlayerController {
 
     public void setupAutoProfile(Deck deck) {
         pilotsNonAggroDeck = deck.getName().contains("Control") || deck.getAverageCMC() > 3;
+        final String deckAiProfile = deck.getAiHint(AI_PROFILE_HINT);
+        if (StringUtils.isNotBlank(deckAiProfile) && lobbyPlayer instanceof LobbyPlayerAi aiPlayer) {
+            aiPlayer.setRotateProfileEachGame(false);
+            aiPlayer.setAiProfile(deckAiProfile);
+        }
     }
 
     public void setUseSimulation(boolean value) {
