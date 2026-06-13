@@ -1,4 +1,4 @@
-Name:Hawwkeye, Bowslinger
+Name:Hawkeye, Bowslinger
 ManaCost:2 W
 Types:Legendary Creature Human Archer Hero
 PT:3/3
