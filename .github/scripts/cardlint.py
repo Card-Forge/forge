@@ -22,8 +22,9 @@ LINE_PREFIXES = {"Name","ManaCost","Types","PT","Loyalty","Defense","Colors","Te
     "Oracle","K","A","T","S","R","SVar","AI","DeckHints","DeckNeeds","DeckHas",
     "AlternateMode","Variant","ALTERNATE","SetColor"}
 PFX_LOWER = {p.lower():p for p in LINE_PREFIXES}
-REF_KEYS = {"Execute","SubAbility","TrueSubAbility","FalseSubAbility","AbilityX",
-            "RepeatSubAbility","ChosenSubAbility"}
+# The sub-ability keys in the engine's additionalAbilityKeys are validated against
+# defined SVars by the build's Java test; only the keys outside that list stay here.
+REF_KEYS = {"Execute","SubAbility","AbilityX","ChosenSubAbility"}
 LIST_REF_KEYS = {"Choices"}
 AMP_LIST_KEYS = {"AddTypes","AddKeyword","AddKeywords","RemoveKeywords",
                  "AddTrigger","AddStatic","AddReplacement","Triggers"}

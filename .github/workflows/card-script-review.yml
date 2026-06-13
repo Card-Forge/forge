@@ -1,79 +1,88 @@
-# On a PR that touches card scripts, runs a deterministic linter + a Scryfall
-# frame fact-check and posts terse inline comments. It is purely ADVISORY: it
-# never fails the check, it only comments. A reviewer still decides what to act on.
+# Posts terse, advisory inline comments on PRs that touch card scripts: a
+# deterministic DSL linter, a Scryfall frame fact-check, and engine-validated API
+# names. It only comments; it never fails a check. A reviewer decides what to act on.
 #
-# Trigger: pull_request_target, because almost all PRs come from forks and a plain
-# pull_request token is read-only (can't comment). pull_request_target runs in the
-# base repo with a write token, so the hard rule is: NEVER execute PR code.
-# This workflow upholds that — it runs only the BASE repo's scripts (checked out
-# from the target branch) and pulls in just the PR's `cardsfolder/*.txt` files as
-# DATA to lint. The changed-file filter excludes `.github/**`, so a PR cannot swap
-# in its own linter, and nothing from the PR is ever built or executed.
+# Why this is a separate workflow from the build. The analysis runs inside the
+# build (the Card-script review test in `mvn test` + the linter here), but a
+# `pull_request` build has a READ-ONLY token on fork PRs — almost all card PRs —
+# so it cannot post comments. `workflow_run` runs after the build completes in the
+# base-repo context with a write token, which is GitHub's supported pattern for
+# "untrusted build produces findings, a privileged job posts them". The build
+# itself stays on the safe read-only token; only this poster can write.
 #
-# Stable across engine changes: the linter derives "known params" from the corpus
-# itself, and the Scryfall side only compares stable frame fields (name/type/P-T/
-# cost/loyalty). Neither is coupled to how a card ability is scripted.
+# Trust boundary: the build that produced the artifact ran PR code, so the
+# downloaded files are treated as DATA only (parsed, never executed). The linter
+# and corpus are the BASE repo's, checked out fresh here; the PR's card files are
+# pulled in as data to lint, never run.
 
 name: Card-script review
 
 on:
-  pull_request_target:
-    paths:
-      - 'forge-gui/res/cardsfolder/**'
+  workflow_run:
+    workflows: ["Test build"]
+    types: [completed]
 
 permissions:
   contents: read
+  actions: read
   pull-requests: write
 
 concurrency:
-  group: card-script-review-${{ github.event.pull_request.number }}
+  group: card-script-review-${{ github.event.workflow_run.head_branch }}
   cancel-in-progress: true
 
 jobs:
   review:
     runs-on: ubuntu-latest
+    # Only PR builds carry review data; push builds have nothing to comment on.
+    if: github.event.workflow_run.event == 'pull_request'
     steps:
-      # Trusted base checkout: the scripts we run and the card corpus the linter
-      # compares against. NOT the PR's code.
-      - name: Check out base repo
+      # Check out first: actions/checkout cleans the workspace, so it must run
+      # before the artifact download and the files the resolve step writes.
+      - name: Check out base scripts and corpus
         uses: actions/checkout@v5
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Download review data from the build
+        uses: actions/download-artifact@v4
         with:
-          python-version: '3.11'
+          name: card-script-review
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: review-data
+        continue-on-error: true   # no artifact (non-card PR) -> nothing to do
 
-      - name: List changed card files
+      - name: Resolve PR and changed cards
+        id: pr
         uses: actions/github-script@v8
         with:
           script: |
             const fs = require('fs');
+            let meta;
+            try { meta = JSON.parse(fs.readFileSync('review-data/card-script-pr-meta.json', 'utf8')); }
+            catch (e) { core.info('no PR metadata — nothing to review'); return; }
+            const pull_number = meta.number;
             const files = await github.paginate(github.rest.pulls.listFiles, {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number,
-            });
-            // Only cardsfolder .txt files — this also guarantees we never pull a
-            // PR's version of .github/** (incl. the scripts we're about to run).
+              owner: context.repo.owner, repo: context.repo.repo, pull_number });
             const cards = files.filter(f => f.status !== 'removed'
                         && f.filename.startsWith('forge-gui/res/cardsfolder/')
                         && f.filename.endsWith('.txt'));
+            if (!cards.length) { core.info('no card files changed'); return; }
+            core.setOutput('pull_number', String(pull_number));
+            core.setOutput('head_sha', meta.head_sha);
             fs.writeFileSync('changed_files.txt', cards.map(f => f.filename).join('\n'));
 
-            // For each card, the set of NEW-file line numbers it actually adds or
-            // changes (the '+' lines of the diff). We only comment on these — a
-            // finding on a line the PR didn't touch is pre-existing and out of scope.
-            // For an added file the whole file is '+' lines, so nothing is lost.
+            // For each card, the NEW-file line numbers it adds or changes (the '+'
+            // lines). We only comment on these — a finding on an untouched line of an
+            // edited file is pre-existing and out of scope.
             const addedLines = {};
             for (const f of cards) {
-              const lines = [];
-              let newLine = 0;
+              const lines = []; let newLine = 0;
               for (const ln of (f.patch || '').split('\n')) {
                 const h = ln.match(/^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/);
                 if (h) { newLine = parseInt(h[1], 10); continue; }
                 if (ln.startsWith('\\')) continue;           // "\ No newline at end of file"
                 if (ln.startsWith('+')) { lines.push(newLine); newLine++; }
-                else if (ln.startsWith('-')) { /* old-side only: no new line */ }
+                else if (ln.startsWith('-')) { /* old-side only */ }
                 else { newLine++; }                          // context line
               }
               addedLines[f.filename] = lines;
@@ -81,16 +90,22 @@ jobs:
             fs.writeFileSync('diff_lines.json', JSON.stringify(addedLines));
             core.info(`${cards.length} changed card file(s)`);
 
-      # Bring in the PR's versions of those card files as plain data, overwriting
+      - name: Set up Python
+        if: steps.pr.outputs.pull_number != ''
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      # Bring in the PR's versions of the changed cards as plain data, overwriting
       # the base copies in place. We only read them; we never run them.
       - name: Materialize PR card files (data only)
+        if: steps.pr.outputs.pull_number != ''
         env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_NUMBER: ${{ steps.pr.outputs.pull_number }}
         run: |
           [ -s changed_files.txt ] || { echo "no card files changed"; exit 0; }
           git fetch --no-tags --depth=1 origin "+refs/pull/${PR_NUMBER}/head:refs/remotes/pr/head"
-          # `|| [ -n "$f" ]` processes the final line even when the file has no
-          # trailing newline (changed_files.txt is written with join('\n')).
+          # `|| [ -n "$f" ]` processes the final line even without a trailing newline.
           while IFS= read -r f || [ -n "$f" ]; do
             [ -n "$f" ] || continue
             mkdir -p "$(dirname "$f")"
@@ -98,16 +113,23 @@ jobs:
           done < changed_files.txt
 
       - name: Run review checks
+        if: steps.pr.outputs.pull_number != ''
         continue-on-error: true   # advisory: a script hiccup must never fail the PR
         env:
-          PYTHONIOENCODING: utf-8   # the comments contain '→'; don't depend on runner locale
+          PYTHONIOENCODING: utf-8   # comments contain '→'; don't depend on runner locale
         run: |
-          python .github/scripts/card_script_review.py changed_files.txt > comments.json
+          JF=review-data/card-script-findings.json
+          ARGS=""; [ -f "$JF" ] && ARGS="--java-findings $JF"
+          python .github/scripts/card_script_review.py $ARGS changed_files.txt > comments.json
           echo "---- comments ----"
           cat comments.json
 
       - name: Post inline comments
+        if: steps.pr.outputs.pull_number != ''
         uses: actions/github-script@v8
+        env:
+          PULL_NUMBER: ${{ steps.pr.outputs.pull_number }}
+          HEAD_SHA: ${{ steps.pr.outputs.head_sha }}
         with:
           script: |
             const fs = require('fs');
@@ -119,12 +141,10 @@ jobs:
             if (!comments.length) { core.info('no findings'); return; }
 
             const { owner, repo } = context.repo;
-            const pull_number = context.issue.number;
-            const commit_id = context.payload.pull_request.head.sha;
+            const pull_number = Number(process.env.PULL_NUMBER);
+            const commit_id = process.env.HEAD_SHA;
 
-            // Diff-lines-only: comment only on lines the PR added or changed. A
-            // finding on an untouched line of an edited file is pre-existing and
-            // out of scope, so we skip it (no summary comment).
+            // Diff-lines-only: comment only on lines the PR added or changed.
             const inDiff = (c) => (diffLines[c.path] || []).includes(c.line);
 
             // De-dupe against what the bot already said on this PR (re-runs on push).

@@ -17,6 +17,11 @@ of `{path, line, body}` comments for the workflow to post. Both are advisory.
      When the card is not on Scryfall (e.g. an unreleased card) it stays silent;
      see scryfall_facts().
 
+  3. Engine API findings (optional, --java-findings) — ability/trigger/replacement
+     API names validated by the build against the engine's own enums, the same
+     check the engine runs at card load. This is the one engine-coupled input, and
+     only to the stable API vocabulary; it is produced by the build, not here.
+
 This file never interprets ability semantics. It only (a) relays the linter's
 structured findings and (b) diffs frame fields — both decoupled from how any
 individual card is scripted, which is what keeps it stable across engine changes.
@@ -123,6 +128,10 @@ def terse_comment(code, msg):
         t = grab(r"token '([^']+)'")
         if t:
             return f"illegal mana token `{t}`"
+    elif code == "API-UNKNOWN":
+        m = re.match(r"(\w+\$) '([^']+)' is not a known (.+)", msg)
+        if m:
+            return f"`{m.group(1)} {m.group(2)}` {ARROW} unknown {m.group(3)}"
     # default: the linter message is already human-readable
     return msg
 
@@ -288,11 +297,40 @@ def scryfall_facts(path):
 # --------------------------------------------------------------------------- #
 # main
 # --------------------------------------------------------------------------- #
+def java_findings_comments(path, changed):
+    """Load engine-validated API findings emitted by the build, scoped to changed cards.
+
+    The build's Java test validates every card's ability/trigger/replacement API
+    names against the engine's own enums and writes {path, line, code, body}. We
+    only keep findings on cards this PR changed; the workflow further scopes them
+    to the diff lines before posting.
+    """
+    try:
+        items = json.load(open(path, encoding="utf-8"))
+    except Exception as e:
+        print(f"no java findings ({e})", file=sys.stderr)
+        return []
+    out = []
+    for f in items:
+        p = f.get("path", "").replace("\\", "/")
+        if p in changed:
+            out.append({"path": p, "line": f["line"],
+                        "body": terse_comment(f.get("code", ""), f.get("body", ""))})
+    return out
+
+
 def main():
-    if len(sys.argv) < 2:
-        print("usage: card_script_review.py <changed_files.txt>", file=sys.stderr)
+    args = sys.argv[1:]
+    java_path = None
+    if "--java-findings" in args:
+        i = args.index("--java-findings")
+        java_path = args[i + 1]
+        del args[i:i + 2]
+    if not args:
+        print("usage: card_script_review.py [--java-findings <file>] <changed_files.txt>",
+              file=sys.stderr)
         return 2
-    paths = [l.strip() for l in open(sys.argv[1], encoding="utf-8") if l.strip()]
+    paths = [l.strip() for l in open(args[0], encoding="utf-8") if l.strip()]
     cards = [p for p in paths if p.endswith(".txt")
              and "cardsfolder" in p.replace("\\", "/") and os.path.exists(p)]
 
@@ -321,6 +359,9 @@ def main():
             print(f"scryfall error on {path}: {e}", file=sys.stderr)
         for line, body in found:
             comments.append({"path": path.replace("\\", "/"), "line": line, "body": body})
+
+    if java_path:
+        comments += java_findings_comments(java_path, set(c.replace("\\", "/") for c in cards))
 
     json.dump(comments, sys.stdout, ensure_ascii=False, indent=2)
     print(f"\n{len(comments)} comment(s) across {len(cards)} card(s)", file=sys.stderr)
