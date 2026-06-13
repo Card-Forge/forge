@@ -91,6 +91,8 @@ public class SpellAbilityProperty {
             return sa.isMorphUp();
         } else if (property.equals("ManifestUp")) {
             return sa.isManifestUp();
+        } else if (property.equals("Teamwork")) {
+            return sa.isTeamwork();
         } else if (property.equals("Unlock")) {
             return sa.isUnlock();
         } else if (property.equals("isTurnFaceUp")) {
