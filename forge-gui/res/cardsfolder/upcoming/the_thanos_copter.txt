@@ -1,6 +1,6 @@
 Name:The Thanos-Copter
 ManaCost:6
-Types:Artifact Vehicle
+Types:Legendary Artifact Vehicle
 PT:5/5
 K:Flying
 K:Haste
