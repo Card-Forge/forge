@@ -36,15 +36,15 @@ jobs:
       # Trusted base checkout: the scripts we run and the card corpus the linter
       # compares against. NOT the PR's code.
       - name: Check out base repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
       - name: List changed card files
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const fs = require('fs');
@@ -107,7 +107,7 @@ jobs:
           cat comments.json
 
       - name: Post inline comments
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const fs = require('fs');
