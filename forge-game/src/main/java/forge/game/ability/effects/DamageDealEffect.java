@@ -144,7 +144,6 @@ public class DamageDealEffect extends DamageBaseEffect {
 
         int dmg = AbilityUtils.calculateAmount(hostCard, sa.getParam("NumDmg"), sa);
 
-        final boolean removeDamage = sa.hasParam("Remove");
         final boolean divideOnResolution = sa.hasParam("DividerOnResolution");
 
         List<GameEntity> tgts = Lists.newArrayList();
@@ -246,11 +245,9 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
 
             for (final GameEntity o : tgts) {
-                if (!removeDamage) {
-                    dmg = (sa.usesTargeting() && sa.isDividedAsYouChoose()) ? sa.getDividedValue(o) : dmg;
-                    if (dmg <= 0) {
-                        continue;
-                    }
+                dmg = (sa.usesTargeting() && sa.isDividedAsYouChoose()) ? sa.getDividedValue(o) : dmg;
+                if (dmg <= 0) {
+                    continue;
                 }
                 if (o instanceof Card c) {
                     final Card gc = game.getCardState(c, null);
@@ -286,11 +283,7 @@ public class DamageDealEffect extends DamageBaseEffect {
             excess = dmg - dmgToTarget;
         }
 
-        if (sa.hasParam("Remove")) {
-            c.setDamage(0);
-            c.setHasBeenDealtDeathtouchDamage(false);
-            c.clearAssignedDamage();
-        } else if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
+        if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
                 sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
             damageMap.put(sourceLKI, c, dmgToTarget);
 
