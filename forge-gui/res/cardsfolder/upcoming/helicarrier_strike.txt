@@ -1,4 +1,4 @@
-Name:Helicarrier Strikle
+Name:Helicarrier Strike
 ManaCost:W
 Types:Instant
 K:Teamwork:2
