@@ -1,0 +1,9 @@
+Name:Mjölnir's Might
+ManaCost:3 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Player | NumDmg$ 4 | SubAbility$ DBExile | SpellDescription$ CARDNAME deals 4 damage to target player.,,,,,,
+SVar:DBExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | StackDescription$ REP Exile_{p:You} exiles & your library_their library & your next_their next & you may_{p:You} may | SpellDescription$ Exile the top card of your library. Until the end of your next turn, you may play that card.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | Duration$ UntilTheEndOfYourNextTurn | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play that card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Mjölnir’s Might deals 4 damage to target player.\nExile the top card of your library. Until the end of your next turn, you may play that card.
