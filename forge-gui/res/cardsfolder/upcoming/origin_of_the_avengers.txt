@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Enchantment Saga
 K:Chapter:3:DBScry,DBChangeZone,DBPutCounterAll
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | SpellDescription$ Scry 2.
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Hero.cmcLE3 | ChangeNum$ 1 | RememberChanged$ True | SpellDescription$ You may put a Hero creature card with mana value 3 or less from your hand onto the battlefield. If you don't, draw a card.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Hero.cmcLE3 | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBDraw | SpellDescription$ You may put a Hero creature card with mana value 3 or less from your hand onto the battlefield. If you don't, draw a card.
 SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
