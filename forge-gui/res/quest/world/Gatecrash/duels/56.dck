@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Robin Hood
+Title=Robin Hood
+Icon=Robin Hood.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/SCG_Premier_IQ_Washington/Michael_Glanzer_-_Burn_(Modern,_#172538).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Keldon Marauders
+4 Flames of the Blood Hand
+3 Incinerate
+4 Lightning Bolt
+4 Magma Jet
+4 Searing Blaze
+2 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+1 Keldon Megaliths
+18 Mountain
+[Sideboard]
+4 Dismember
+3 Dragon's Claw
+4 Molten Rain
+4 Smash to Smithereens

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Green Arrow
+Title=Green Arrow
+Icon=Green Arrow.jpg
+Difficulty=Hard
+Description=./Modern/The_Brothers_War/Alberto_Pardo_-_Four-Color_Rhinos_(Modern,_#1520085).dck
+Deck Type=constructed
+
+[Main]
+2 Arcane Proxy
+4 Fury
+4 Shardless Agent
+4 Violent Outburst
+4 Dead // Gone
+4 Fire // Ice
+4 Force of Negation
+4 Crashing Footfalls
+2 Ardent Plea
+4 Leyline Binding
+1 Plains
+1 Xander's Lounge
+1 Fiery Islet
+1 Temple Garden
+1 Stomping Ground
+1 Steam Vents
+1 Otawara, Soaring City
+1 Island
+1 Indatha Triome
+1 Forest
+1 Boseiju, Who Endures
+1 Breeding Pool
+4 Wooded Foothills
+4 Misty Rainforest
+4 Flooded Strand
+[Sideboard]
+1 Gemstone Caverns
+3 Force of Vigor
+3 Teferi, Time Raveler
+4 Mystical Dispute
+4 Endurance

@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Isperia
+Title=Isperia
+Icon=Isperia.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Samuel_Brousseau_-_Orzhov_Midrange_(Standard,_#1331839).dck
+Deck Type=constructed
+
+[Main]
+1 Henrika Domnathi
+1 Legion Angel
+1 Edgar, Charmed Groom
+2 Reidane, God of the Worthy
+2 Grazilaxx, Illithid Scholar
+3 Professor of Symbology
+2 Reckoner Bankbuster
+2 The Celestus
+1 Disdainful Stroke
+2 Memory Deluge
+4 Vanishing Verse
+1 Doomskar
+2 Bloodchief's Thirst
+3 Emeria's Call
+2 The Meathook Massacre
+1 Kaya the Inexorable
+2 Kaito Shizuki
+2 The Wandering Emperor
+3 Lolth, Spider Queen
+1 Swamp
+1 Eiganjo, Seat of the Empire
+1 Takenuma, Abandoned Mire
+1 Island
+1 Otawara, Soaring City
+2 Shipwreck Marsh
+2 Plains
+3 Hengegate Pathway
+3 Brightclimb Pathway
+4 Shattered Sanctum
+4 Deserted Beach
+[Sideboard]
+1 Confront the Past
+1 Academic Probation
+1 Environmental Sciences
+1 Mascot Exhibition
+2 Doomskar
+2 Fracture
+2 Memory Deluge
+2 Farewell
+3 Legion Angel

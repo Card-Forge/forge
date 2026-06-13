@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Seabiscuit
+Title=Seabiscuit
+Icon=Seabiscuit.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Midnight_Hunt/Ancient_de_-_Golgari_Midrange_(Standard,_#1224652).dck
+Deck Type=constructed
+
+[Main]
+2 Neverwinter Dryad
+2 Vorinclex, Monstrous Raider
+4 Sculptor of Winter
+4 Briarbridge Tracker
+4 Esika's Chariot
+2 Soul Shatter
+2 Infernal Grasp
+2 Blood on the Snow
+2 Cram Session
+2 Field Trip
+4 Binding the Old Gods
+4 Wrenn and Seven
+2 Lair of the Hydra
+2 Faceless Haven
+4 Woodland Chasm
+9 Snow-Covered Forest
+9 Snow-Covered Swamp
+[Sideboard]
+1 Necrotic Fumes
+1 Shadows' Verdict
+1 Lolth, Spider Queen
+1 Environmental Sciences
+1 Containment Breach
+1 Introduction to Prophecy
+1 Confront the Past
+2 Soul Shatter
+2 Mascot Exhibition
+2 Infernal Grasp
+2 Professor Onyx

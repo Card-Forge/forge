@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=KingKong
+Title=KingKong
+Icon=KingKong.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/Competitive_Standard_Constructed_League/jp0822_-_Bant_Company_(Standard,_#634928).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Archangel Avacyn
+3 Duskwatch Recruiter
+1 Nissa, Vastwood Seer
+4 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+4 Sylvan Advocate
+2 Thalia, Heretic Cathar
+4 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+3 Canopy Vista
+4 Evolving Wilds
+3 Forest
+1 Island
+2 Lumbering Falls
+5 Plains
+4 Prairie Stream
+3 Yavimaya Coast
+[Sideboard]
+2 Declaration in Stone
+1 Hallowed Moonlight
+3 Lambholt Pacifist
+2 Negate
+2 Ojutai's Command
+2 Tragic Arrogance
+2 Ulvenwald Mysteries

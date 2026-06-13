@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Fred Flintstone
+Title=Fred Flintstone
+Icon=Fred Flintstone.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/SCG_Premier_IQ_Los_Angeles/Steven_Cotera_-_R-W_Aggro_(Modern,_#183530).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Mentor
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+2 Searing Blaze
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+4 Mountain
+4 Sacred Foundry
+1 Stomping Ground
+3 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+3 Destructive Revelry
+3 Kor Firewalker
+2 Molten Rain
+1 Path to Exile
+2 Smash to Smithereens
+1 Wear // Tear

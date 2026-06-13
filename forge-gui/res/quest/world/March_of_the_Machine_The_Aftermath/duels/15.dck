@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine_The_Aftermath/Hamuda_-_Boros_Thopters_(Standard,_#1703240).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+2 Atsushi, the Blazing Sky
+4 Kumano Faces Kakkazan
+4 Pia Nalaar, Consul of Revival
+4 Mishra's Research Desk
+4 Play with Fire
+4 Reckless Impulse
+2 Nahiri's Warcrafting
+4 Wrenn's Resolve
+4 Ossification
+2 Invasion of Tarkir
+1 Jaya, Fiery Negotiator
+9 Mountain
+4 Battlefield Forge
+4 Wind-Scarred Crag
+4 Sundown Pass
+[Sideboard]
+3 Brutal Cathar
+2 Cathar Commando
+2 Destroy Evil
+3 Invasion of Gobakhan
+2 Invasion of Kaldheim
+3 Lithomantic Barrage

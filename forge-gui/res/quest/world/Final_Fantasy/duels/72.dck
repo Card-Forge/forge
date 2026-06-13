@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Tom Bombadil
+Title=Tom Bombadil
+Icon=Tom Bombadil.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/togoresmtg_-_Modern_Replenish_(Modern,_#2521090).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodbraid Marauder
+2 Fear of Missing Out
+4 Summon: Bahamut
+4 Cache Grab
+2 Cathartic Pyre
+4 Malevolent Rumble
+4 Resurgent Belief
+3 Bitter Reunion
+4 Leyline Binding
+4 Omniscience
+3 Overwhelming Splendor
+1 Commercial District
+1 Forest
+2 Lush Portico
+1 Plains
+1 Sacred Foundry
+4 Shifting Woodland
+1 Stomping Ground
+2 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+1 Zagoth Triome
+[Sideboard]
+3 Dead // Gone
+1 Heritage Reclamation
+1 Pyroclasm
+1 Stony Silence
+2 Unlicensed Hearse
+3 Wear // Tear
+4 Wrath of the Skies

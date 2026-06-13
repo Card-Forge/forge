@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Bilbo Baggins
+Title=Bilbo Baggins
+Icon=Bilbo Baggins.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/GombleWhop_-_Mono_White_Midrange_(Standard,_#1625784).dck
+Deck Type=constructed
+
+[Main]
+4 Ambitious Farmhand
+4 The Restoration of Eiganjo
+2 Loran of the Third Path
+2 Elesh Norn
+4 Reckoner Bankbuster
+2 Farewell
+4 Lay Down Arms
+4 Wedding Announcement
+4 Ossification
+4 The Wandering Emperor
+2 The Eternal Wanderer
+2 Archangel Elspeth
+15 Plains
+1 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+2 Mirrex
+[Sideboard]
+2 Fateful Absence
+2 Intrepid Adversary
+2 Depopulate
+2 Sanctuary Warden
+2 Destroy Evil
+3 Steel Seraph
+2 The Stone Brain

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Obatala
+Title=Obatala
+Icon=Obatala.jpg
+Difficulty=Hard
+Description=../Modern/Dragons_of_Tarkir/RPTQ_Oath_of_the_Gatewatch_-_Prague,_Czech_Republic/Ivan_Lendvaj_-_Zoo_(Modern,_#362759).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+4 Loam Lion
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+1 Become Immense
+2 Boros Charm
+4 Lightning Bolt
+4 Mutagenic Growth
+3 Rancor
+4 Arid Mesa
+1 Forest
+1 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Ancient Grudge
+2 Destructive Revelry
+2 Kor Firewalker
+2 Lightning Helix
+4 Path to Exile
+2 Thalia, Guardian of Thraben
+2 Vines of Vastwood

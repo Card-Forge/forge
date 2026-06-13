@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=IsaBere
+Title=IsaBere
+Icon=IsaBere.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/ACG88_-_4_Color_Humans_(Modern,_#780923).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Parish
+1 Dark Confidant
+1 Kessig Malcontents
+4 Kitesail Freebooter
+4 Mantis Rider
+4 Meddling Mage
+1 Militia Bugler
+4 Noble Hierarch
+3 Phantasmal Image
+4 Reflector Mage
+4 Thalia's Lieutenant
+3 Thalia, Guardian of Thraben
+1 Thalia, Heretic Cathar
+4 Aether Vial
+4 Ancient Ziggurat
+4 Cavern of Souls
+4 Horizon Canopy
+1 Island
+1 Plains
+1 Seachrome Coast
+4 Unclaimed Territory
+[Sideboard]
+1 Anafenza, the Foremost
+2 Auriok Champion
+1 Dire Fleet Daredevil
+1 Dismember
+1 Gut Shot
+2 Izzet Staticaster
+1 Kambal, Consul of Allocation
+1 Kataki, War's Wage
+2 Knight of Autumn
+1 Phyrexian Revoker
+2 Sin Collector

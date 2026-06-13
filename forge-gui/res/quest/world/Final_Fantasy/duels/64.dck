@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Dr No
+Title=Dr No
+Icon=Dr No.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/demonictutors_-_Grixis_Control_(Modern,_#2520663).dck
+Deck Type=constructed
+
+[Main]
+2 Boggart Trawler
+2 Emet-Selch, Unsundered
+4 Snapcaster Mage
+2 Tamiyo, Inquisitive Student
+4 Thundertrap Trainer
+2 Tishana's Tidebinder
+4 Counterspell
+4 Fatal Push
+3 Flame of Anor
+2 Flare of Denial
+2 Force of Negation
+3 Kolaghan's Command
+4 Lightning Bolt
+2 Spell Snare
+1 Blood Crypt
+1 Creeping Tar Pit
+1 Island
+1 Mountain
+1 Otawara, Soaring City
+4 Polluted Delta
+4 Scalding Tarn
+2 Steam Vents
+1 Swamp
+1 Thundering Falls
+1 Undercity Sewers
+2 Watery Grave
+[Sideboard]
+1 Bribery
+2 Cleansing Wildfire
+1 Flusterstorm
+3 Hidetsugu Consumes All
+2 Sheoldred's Edict
+2 Sheoldred, the Apocalypse
+2 Surgical Extraction
+2 Thoughtseize

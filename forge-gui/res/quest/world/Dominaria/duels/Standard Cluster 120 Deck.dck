@@ -1,0 +1,40 @@
+[metadata]
+Name=Deck
+Deck Type=constructed
+Title=Deck
+Description=Deck
+Difficulty=Hard
+Icon=Gold Finger
+[Main]
+4 Aether Hub
+4 Approach of the Second Sun
+1 Arch of Orazca
+2 Battle at the Bridge
+4 Cast Out
+3 Drowned Catacomb
+3 Fatal Push
+1 Fetid Pools
+3 Fumigate
+3 Glacial Fortress
+4 Glimmer of Genius
+3 Hieroglyphic Illumination
+4 Irrigated Farmland
+1 Island
+1 Island
+1 Island
+1 Nezahal, Primal Tide
+3 Opt
+1 Plains
+3 Plains
+1 Plains
+3 Search for Azcanta
+3 Settle the Wreckage
+2 Supreme Will
+1 Swamp
+[Sideboard]
+2 Authority of the Consuls
+3 Disallow
+2 Negate
+1 The Scarab God
+4 Torrential Gearhulk
+3 Vraska's Contempt

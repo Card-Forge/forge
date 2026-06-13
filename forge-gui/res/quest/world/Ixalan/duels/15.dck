@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Robot15
+Title=Robot15
+Icon=Sorin.jpg
+Difficulty=Hard
+Description=R-W Approach 
+Deck Type=constructed
+
+[Main]
+1 Angel of Sanctions
+1 Oketra the True
+3 Abrade
+1 Lightning Strike
+1 Magma Spray
+3 Settle the Wreckage
+3 Approach of the Second Sun
+3 Fumigate
+4 Cast Out
+2 Ixalan's Binding
+4 Sunbird's Invocation
+2 Vance's Blasting Cannons
+3 Chandra, Torch of Defiance
+3 Gideon of the Trials
+1 Huatli, Warrior Poet
+4 Inspiring Vantage
+9 Mountain
+8 Plains
+4 Stone Quarry
+[Sideboard]
+1 Captain Lannery Storm
+1 Chandra's Defeat
+2 Combustible Gearhulk
+4 Glory-Bound Initiate
+3 Heart of Kiran
+3 Regal Caracal
+1 Solemnity

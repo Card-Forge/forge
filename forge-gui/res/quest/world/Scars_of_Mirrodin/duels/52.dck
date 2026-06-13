@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Boros-precon
+Title=Boros-precon
+Icon=Boros-precon.jpg
+Difficulty=Hard
+Description=../Modern/Scars_of_Mirrodin/Arcore_(MI)_-_Gran_Modern/Luppino_Marcello_-_Red_Deck_Wins_(Modern,_#23889).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Spitfire
+3 Ember Hauler
+4 Kiln Fiend
+3 Perilous Myr
+3 Prodigal Pyromancer
+4 Galvanic Blast
+4 Lightning Bolt
+4 Shock
+4 Staggershock
+4 Assault Strobe
+4 Forked Bolt
+20 Mountain
+[Sideboard]
+4 Combust
+4 Pyroclasm
+4 Shatter
+3 Tunnel Ignus

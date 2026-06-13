@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Andrew_Fields_-_Four-Color_Saheeli_(Standard,_#665572).dck
+Deck Type=constructed
+
+[Main]
+3 Cloudblazer
+4 Felidar Guardian
+4 Rogue Refiner
+4 Servant of the Conduit
+1 Whirler Virtuoso
+2 Aetherworks Marvel
+4 Harnessed Lightning
+3 Shock
+4 Attune with Aether
+4 Oath of Nissa
+1 Ajani Unyielding
+1 Nahiri, the Harbinger
+4 Saheeli Rai
+4 Aether Hub
+4 Botanical Sanctum
+2 Evolving Wilds
+4 Forest
+2 Inspiring Vantage
+1 Island
+1 Mountain
+1 Plains
+2 Spirebluff Canal
+[Sideboard]
+2 Aethersphere Harvester
+2 Authority of the Consuls
+1 Blessed Alliance
+1 Declaration in Stone
+2 Immolating Glare
+1 Linvala, the Preserver
+1 Nahiri, the Harbinger
+4 Negate
+1 Nissa, Vital Force

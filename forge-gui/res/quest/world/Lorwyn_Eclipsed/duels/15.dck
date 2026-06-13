@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Michael_Mascilak_-_Dimir_Tempo_(Standard,_#2816384).dck
+Deck Type=constructed
+
+[Main]
+4 Azure Beastbinder
+4 Enduring Curiosity
+3 Deep-Cavern Bat
+3 Spyglass Siren
+3 Tishana's Tidebinder
+2 Cecil, Dark Knight
+2 Floodpits Drowner
+1 Flitterwing Nuisance
+1 Wan Shi Tong, Librarian
+2 Bitter Triumph
+2 Requiting Hex
+2 Shoot the Sheriff
+2 Spell Snare
+1 Phantom Interference
+4 Kaito, Bane of Nightmares
+4 Gloomlake Verge
+4 Island
+4 Swamp
+4 Watery Grave
+3 Multiversal Passage
+2 Restless Reef
+1 Fountainport
+1 Soulstone Sanctuary
+1 Starting Town
+[Sideboard]
+3 Annul
+2 Disdainful Stroke
+2 Duress
+1 Day of Black Sun
+1 Entropic Battlecruiser
+1 Ghost Vacuum
+1 Kaito, Cunning Infiltrator
+1 The Unagi of Kyoshi Island
+1 Tragic Trajectory
+1 Vren, the Relentless
+1 Zero Point Ballad

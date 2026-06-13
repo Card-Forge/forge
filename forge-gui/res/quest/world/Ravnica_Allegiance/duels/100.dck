@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Red
+Title=Dungeon Crawling Red
+Icon=Dungeon Crawling Red.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Gael_Hamot_-_Merfolk_Tempo_(Modern,_#787159).dck
+Deck Type=constructed
+
+[Main]
+4 Silvergill Adept
+3 Merrow Reejerey
+4 Merfolk Trickster
+4 Master of the Pearl Trident
+4 Lord of Atlantis
+2 Harbinger of the Tides
+4 Benthic Biomancer
+4 Aether Vial
+3 Vapor Snag
+2 Spell Pierce
+3 Cryptic Command
+2 Spreading Seas
+1 Oboro, Palace in the Clouds
+2 Mutavault
+18 Island
+[Sideboard]
+3 Wizard's Retort
+3 Surgical Extraction
+2 Spellskite
+4 Dismember
+3 Commandeer

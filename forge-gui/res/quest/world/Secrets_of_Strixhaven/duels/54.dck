@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Napoleon
+Title=Napoleon
+Icon=Napoleon.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/Paolo_marcello_-_Esper_Frog_(Modern,_#2932067).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+4 Psychic Frog
+2 Subtlety
+2 Murktide Regent
+1 Cling to Dust
+2 Spell Snare
+4 Fatal Push
+2 Drown in the Loch
+3 Counterspell
+2 Sink into Stupor
+2 Force of Negation
+4 Thoughtseize
+4 Preordain
+2 Pest Control
+3 Flow State
+4 Polluted Delta
+2 Undercity Sewers
+1 Hallowed Fountain
+1 Gloomlake Verge
+2 Island
+1 Otawara, Soaring City
+1 Swamp
+2 Marsh Flats
+3 Flooded Strand
+2 Watery Grave
+[Sideboard]
+3 Consign to Memory
+1 Surgical Extraction
+2 Stern Scolding
+1 High Noon
+2 Celestial Purge
+2 Harbinger of the Seas
+2 Toxic Deluge
+2 Mystical Dispute

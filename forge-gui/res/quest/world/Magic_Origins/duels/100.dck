@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Bela Lugosi
+Title=Bela Lugosi
+Icon=Bela Lugosi.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/2016_TCGplayer_Modern_State_Championship_-_TN/Benjamin_Gwirtsman_-_Affinity_(Modern,_#624248).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Arcbound Ravager
+4 Etched Champion
+2 Hangarback Walker
+3 Memnite
+4 Ornithopter
+4 Signal Pest
+4 Vault Skirge
+4 Cranial Plating
+4 Darksteel Citadel
+2 Ghostfire Blade
+4 Mox Opal
+2 Welding Jar
+4 Galvanic Blast
+4 Thoughtcast
+1 Academy Ruins
+4 Blinkmoth Nexus
+4 Glimmervoid
+3 Inkmoth Nexus
+[Sideboard]
+2 Blood Moon
+1 Dismember
+2 Dispatch
+1 Ghirapur AEther Grid
+2 Spell Pierce
+2 Spellskite
+2 Thoughtseize
+1 Torpor Orb
+2 Wear // Tear

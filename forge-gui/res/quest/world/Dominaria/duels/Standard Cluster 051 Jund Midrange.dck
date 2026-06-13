@@ -1,0 +1,46 @@
+[metadata]
+Name=Jund Midrange
+Deck Type=constructed
+Title=Jund Midrange
+Description=Jund Midrange
+Difficulty=Hard
+Icon=Fred Flintstone
+[Main]
+3 Abrade
+4 Aether Hub
+4 Blooming Marsh
+4 Canyon Slough
+2 Carnage Tyrant
+2 Chandra, Torch of Defiance
+1 Dragonskull Summit
+2 Forest
+1 Forest
+4 Glint-Sleeve Siphoner
+3 Glorybringer
+3 Jadelight Ranger
+2 Magma Spray
+1 Mountain
+1 Mountain
+4 Rootbound Crag
+2 Scrapheap Scrounger
+4 Servant of the Conduit
+2 Sheltered Thicket
+1 Swamp
+1 Swamp
+1 Treasure Map
+4 Vraska's Contempt
+1 Vraska, Relic Seeker
+3 Walking Ballista
+[Sideboard]
+1 Abrade
+1 Carnage Tyrant
+1 Chandra, Torch of Defiance
+1 Doomfall
+3 Duress
+1 Hour of Glory
+2 Magma Spray
+1 Naturalize
+1 Scrapheap Scrounger
+1 Sweltering Suns
+1 Vraska, Relic Seeker
+1 Walking Ballista

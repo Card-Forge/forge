@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Anakin Skywalker
+Title=Anakin Skywalker
+Icon=Anakin Skywalker.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/AJOCHUM_-_Temur_Reclamation_(Modern,_#1033347).dck
+Deck Type=constructed
+
+[Main]
+1 Snapcaster Mage
+3 Uro, Titan of Nature's Wrath
+1 Nexus of Fate
+1 Magmatic Sinkhole
+2 Thought Scour
+3 Cryptic Command
+3 Fact or Fiction
+3 Force of Negation
+4 Growth Spiral
+4 Lightning Bolt
+4 Remand
+2 Wilderness Reclamation
+2 Wrenn and Six
+1 Ketria Triome
+1 Wooded Foothills
+1 Stomping Ground
+1 Steam Vents
+1 Castle Vantress
+1 Snow-Covered Island
+1 Snow-Covered Forest
+1 Forest
+1 Mountain
+2 Mystic Sanctuary
+2 Misty Rainforest
+2 Island
+2 Breeding Pool
+2 Field of Ruin
+2 Field of the Dead
+2 Flooded Strand
+4 Scalding Tarn
+[Sideboard]
+1 Abrade
+1 Klothys, God of Destiny
+1 Crumble to Dust
+1 Ceremonious Rejection
+2 Ashiok, Dream Render
+2 Anger of the Gods
+2 Shark Typhoon
+2 Veil of Summer
+3 Aether Gust

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=RasAlGhul
+Title=RasAlGhul
+Icon=RasAlGhul.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/SCG_Invitational_Qualifier_West_Nyack/Robert_Victory_-_B-G_Devotion_(Standard,_#76743).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Desecration Demon
+4 Gray Merchant of Asphodel
+4 Lifebane Zombie
+3 Pack Rat
+2 Abrupt Decay
+2 Bile Blight
+2 Devour Flesh
+1 Golgari Charm
+4 Hero's Downfall
+1 Ultimate Price
+4 Thoughtseize
+4 Underworld Connections
+2 Golgari Guildgate
+4 Mutavault
+4 Overgrown Tomb
+11 Swamp
+4 Temple of Malady
+[Sideboard]
+2 Doom Blade
+1 Drown in Sorrow
+3 Duress
+1 Erebos, God of the Dead
+2 Pharika's Cure
+3 Staff of the Death Magus
+1 Vraska the Unseen

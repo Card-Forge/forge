@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sabertooth
+Title=Sabertooth
+Icon=Sabertooth.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Manacymbal_-_4_Color_Creativity_(Modern,_#1191975).dck
+Deck Type=constructed
+
+[Main]
+2 Velomachus Lorehold
+3 Remand
+3 Prismari Command
+4 Growth Spiral
+4 Lightning Bolt
+4 Indomitable Creativity
+4 Savor the Moment
+4 Time Warp
+4 Wrenn and Six
+4 Teferi, Time Raveler
+1 Sacred Foundry
+1 Raugrin Triome
+1 Snow-Covered Island
+1 Snow-Covered Mountain
+1 Ketria Triome
+1 Stomping Ground
+2 Steam Vents
+4 Dwarven Mine
+4 Wooded Foothills
+4 Scalding Tarn
+4 Arid Mesa
+[Sideboard]
+1 Kozilek, Butcher of Truth
+1 Snow-Covered Plains
+2 Nahiri, the Harbinger
+2 Wear // Tear
+3 Veil of Summer
+3 Prismatic Ending
+3 Aether Gust

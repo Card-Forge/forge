@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mawu
+Title=Mawu
+Icon=Mawu.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/Depian_-_Golgari_Roots_(Standard,_#1969075).dck
+Deck Type=constructed
+
+[Main]
+3 Haywire Mite
+4 Rubblebelt Maverick
+3 Scorn-Blade Berserker
+3 Souls of the Lost
+3 Undead Butler
+2 Voldaren Thrillseeker
+4 Mosswood Dreadknight
+3 Agatha's Soul Cauldron
+4 Seed of Hope
+4 Urborg Repossession
+4 Insidious Roots
+4 Tyvar, Jubilant Brawler
+1 Boseiju, Who Endures
+4 Deathcap Glade
+4 Underground Mortuary
+1 Takenuma, Abandoned Mire
+4 Llanowar Wastes
+3 Forest
+2 Swamp
+[Sideboard]
+1 Haywire Mite
+3 Night Clubber
+4 Duress
+2 Soul-Guide Lantern
+1 Tear Asunder
+2 Assassin's Trophy
+2 Liliana of the Veil

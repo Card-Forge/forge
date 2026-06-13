@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Obatala
+Title=Obatala
+Icon=Obatala.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Ohkuma_Shion_-_White_Aggro_(Standard,_#1997437).dck
+Deck Type=constructed
+
+[Main]
+4 Thalia, Guardian of Thraben
+4 Adeline, Resplendent Cathar
+4 Brutal Cathar
+1 Intrepid Adversary
+4 Hopeful Initiate
+4 Recruitment Officer
+4 Phyrexian Vindicator
+4 Coppercoat Vanguard
+2 Spellbook Vendor
+1 Kellan, Daring Traveler
+1 Virtue of Loyalty
+4 Ossification
+18 Plains
+1 Eiganjo, Seat of the Empire
+4 Mishra's Foundry
+[Sideboard]
+4 Wedding Announcement
+3 Extraction Specialist
+2 Destroy Evil
+1 Loran of the Third Path
+2 Elspeth's Smite
+1 Expel the Interlopers
+2 Get Lost

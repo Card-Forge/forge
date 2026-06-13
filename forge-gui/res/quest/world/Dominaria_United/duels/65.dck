@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Gbadu
+Title=Gbadu
+Icon=Gbadu.jpg
+Difficulty=Hard
+Description=./Modern/Dominaria_United/CliffBoyardee_-_Temur_Cascade_(Modern,_#1532095).dck
+Deck Type=constructed
+
+[Main]
+4 Scion of Draco
+4 Fury
+4 Shardless Agent
+2 Dead // Gone
+4 Violent Outburst
+4 Fire // Ice
+4 Force of Negation
+4 Crashing Footfalls
+4 Leyline Binding
+3 Teferi, Time Raveler
+1 Otawara, Soaring City
+1 Stomping Ground
+1 Indatha Triome
+1 Temple Garden
+1 Boseiju, Who Endures
+1 Island
+1 Forest
+1 Xander's Lounge
+1 Mountain
+1 Breeding Pool
+1 Steam Vents
+4 Flooded Strand
+4 Wooded Foothills
+4 Misty Rainforest
+[Sideboard]
+2 Qasali Ambusher
+2 Orvar, the All-Form
+3 Mystical Dispute
+4 Leyline of the Void
+4 Force of Vigor

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=King Kong
+Title=King Kong
+Icon=King Kong.jpg
+Difficulty=Easy
+Description=./Standard/Final_Fantasy/DskBayWolf_-_Boros_Paragon_(Standard,_#2537216).dck
+Deck Type=constructed
+
+[Main]
+4 Voice of Victory
+4 Magebane Lizard
+4 Screaming Nemesis
+4 Bruse Tarl, Roving Rancher
+1 Joshua, Phoenix's Dominant
+2 Lightning, Army of One
+2 Summon: Brynhildr
+1 Lavaspur Boots
+4 Burst Lightning
+4 Lightning Helix
+4 Sheltered by Ghosts
+1 Elspeth, Storm Slayer
+4 Battlefield Forge
+1 Cori Mountain Monastery
+3 Soulstone Sanctuary
+4 Inspiring Vantage
+4 Sunbillow Verge
+3 Plains
+4 Mountain
+2 Restless Bivouac
+[Sideboard]
+3 Destroy Evil
+2 Torch the Tower
+2 Rest in Peace
+1 Abrade
+1 Elspeth, Storm Slayer
+1 Get Lost
+1 Beza, the Bounding Spring
+2 Loran of the Third Path
+1 Serra Paragon
+1 Chandra, Spark Hunter

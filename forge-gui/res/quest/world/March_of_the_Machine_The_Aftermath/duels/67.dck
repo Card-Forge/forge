@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Aigamuxa
+Title=Aigamuxa
+Icon=Aigamuxa.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Dave_Sapanghila_-_Gruul_Midrange_(Modern,_#1744669).dck
+Deck Type=constructed
+
+[Main]
+2 Arbor Elf
+4 Endurance
+4 Fury
+1 Klothys, God of Destiny
+1 Kogla and Yidaro
+3 Magus of the Moon
+1 Migloz, Maze Crusher
+1 Nissa, Resurgent Animist
+4 Ragavan, Nimble Pilferer
+4 Seasoned Pyromancer
+4 Fable of the Mirror-Breaker
+4 Lightning Bolt
+2 Blood Moon
+4 Utopia Sprawl
+1 Chandra, Dressed to Kill
+1 Chandra, Torch of Defiance
+1 Lukka, Bound to Ruin
+1 Wrenn and Six
+1 Blast Zone
+1 Boseiju, Who Endures
+2 Forest
+1 Mountain
+4 Stomping Ground
+4 Verdant Catacombs
+1 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Brotherhood's End
+1 Chalice of the Void
+1 Elixir of Immortality
+2 Engineered Explosives
+2 Force of Vigor
+2 Relic of Progenitus
+2 Surgical Extraction
+2 Veil of Summer
+1 Void Mirror

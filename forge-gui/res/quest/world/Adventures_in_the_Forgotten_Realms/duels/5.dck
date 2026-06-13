@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Agrus
+Title=Agrus
+Icon=Agrus.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Connor_O’Dwyer_-_Grixis_Treasures_(Standard,_#1186880).dck
+Deck Type=constructed
+
+[Main]
+4 Kalain, Reclusive Painter
+4 Skullport Merchant
+4 Goldspan Dragon
+2 Power Word Kill
+2 Negate
+4 Essence Scatter
+4 Prismari Command
+4 Baleful Mastery
+4 Alrund's Epiphany
+3 Ugin, the Spirit Dragon
+1 Swamp
+1 Island
+3 Temple of Epiphany
+4 Mountain
+4 Temple of Malice
+4 Blightstep Pathway
+4 Clearwater Pathway
+4 Riverglide Pathway
+[Sideboard]
+2 Power Word Kill
+2 Negate
+2 Disdainful Stroke
+2 Burning Hands
+3 Mystical Dispute
+4 Shadows' Verdict

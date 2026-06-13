@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dr Strangelove
+Title=Dr Strangelove
+Icon=Dr Strangelove.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Andrew_Lahn_-_Bogles_(Modern,_#1205238).dck
+Deck Type=constructed
+
+[Main]
+2 Kor Spiritdancer
+4 Slippery Bogle
+4 Gladecover Scout
+2 Path to Exile
+4 Wild Shape
+1 Rune of Might
+3 Gryff's Boon
+3 Spider Umbra
+3 Spirit Mantle
+4 Rancor
+4 Hyena Umbra
+4 Daybreak Coronet
+4 Ethereal Armor
+1 Forest
+1 Plains
+4 Windswept Heath
+4 Horizon Canopy
+4 Temple Garden
+4 Razorverge Thicket
+[Sideboard]
+1 Suppression Field
+1 Dryad Arbor
+1 Lurrus of the Dream-Den
+2 Torpor Orb
+3 Leyline of Sanctity
+3 Force of Vigor
+4 Sanctifier en-Vec

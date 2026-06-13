@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Wally
+Title=Wally
+Icon=Wally.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/Competitive_Standard_Constructed_League/truthordare_-_Bant_Company_(Standard,_#638876).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+3 Duskwatch Recruiter
+2 Jace, Vryn's Prodigy
+2 Nissa, Vastwood Seer
+4 Reflector Mage
+2 Selfless Spirit
+3 Spell Queller
+4 Sylvan Advocate
+4 Tireless Tracker
+4 Collected Company
+1 Dromoka's Command
+1 Ojutai's Command
+2 Declaration in Stone
+4 Evolving Wilds
+4 Forest
+3 Fortified Village
+1 Island
+2 Lumbering Falls
+4 Plains
+4 Prairie Stream
+4 Yavimaya Coast
+[Sideboard]
+2 Gideon, Ally of Zendikar
+2 Negate
+3 Noose Constrictor
+2 Summary Dismissal
+2 Tragic Arrogance

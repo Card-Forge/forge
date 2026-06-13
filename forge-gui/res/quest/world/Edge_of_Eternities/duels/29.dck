@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=The Great Gatsby
+Title=The Great Gatsby
+Icon=The Great Gatsby.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/ATmagic_-_Gruul_Aggro_(Standard,_#2569393).dck
+Deck Type=constructed
+
+[Main]
+4 Tifa Lockhart
+4 Llanowar Elves
+4 Mossborn Hydra
+3 Sazh Katzroy
+4 Sazh's Chocobo
+4 Traveling Chocobo
+3 Bristly Bill, Spine Sower
+4 Snakeskin Veil
+4 Worldsoul's Rage
+4 Escape Tunnel
+4 Fabled Passage
+14 Forest
+2 Terramorphic Expanse
+1 Evolving Wilds
+1 Mountain
+[Sideboard]
+2 Insidious Fungus
+4 Pawpatch Recruit
+3 Magebane Lizard
+3 Seedship Impact
+1 Sazh Katzroy
+2 Scavenging Ooze

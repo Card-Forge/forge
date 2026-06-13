@@ -1,0 +1,7 @@
+Name:Decorum Dissertation
+ManaCost:3 B B
+Types:Sorcery Lesson
+A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws two cards and loses 2 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Targeted
+K:Paradigm
+Oracle:Target player draws two cards and loses 2 life.\nParadigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)

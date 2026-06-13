@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Anubis
+Title=Anubis
+Icon=Anubis.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/Fujii_Yu_-_Mono_Green_Aggro_(Standard,_#2625236).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+4 Goldvein Hydra
+4 Keen-Eyed Curator
+4 Pawpatch Recruit
+2 Scrapshooter
+4 Summon: Fenrir
+4 Frenzied Baloth
+4 Ouroboroid
+4 Giant Growth
+2 Royal Treatment
+4 Innkeeper's Talent
+20 Forest
+[Sideboard]
+2 Snakeskin Veil
+2 Hard-Hitting Question
+2 Hunter's Talent
+4 Overprotect
+2 Scrapshooter
+3 Surrak, Elusive Hunter

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Beast2
+Title=Beast2
+Icon=Beast2.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Andrew_Fiedler_-_Gruul_Aggro_(Standard,_#786663).dck
+Deck Type=constructed
+
+[Main]
+4 Growth-Chamber Guardian
+4 Gruul Spellbreaker
+2 Kraul Harpooner
+2 Legion Warboss
+4 Llanowar Elves
+4 Pelt Collector
+4 Rekindling Phoenix
+1 Skarrgan Hellkite
+1 Thrashing Brontodon
+3 Zhur-Taa Goblin
+2 Collision // Colossus
+4 Lightning Strike
+2 Shock
+1 Karn, Scion of Urza
+7 Forest
+6 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+1 Unclaimed Territory
+[Sideboard]
+2 Thrashing Brontodon
+4 Cindervines
+1 Crushing Canopy
+2 Fiery Cannonade
+2 Vivien Reid
+4 Lava Coil

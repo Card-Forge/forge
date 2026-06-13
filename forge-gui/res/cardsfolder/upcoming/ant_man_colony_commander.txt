@@ -1,0 +1,10 @@
+Name:Ant-Man, Colony Commander
+ManaCost:1 G U
+Types:Legendary Creature Human Rogue Hero
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever NICKNAME attacks, you may pay {1}. When you do, put a +1/+1 counter on target creature.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigPutCounter | TriggerDescription$ When you do, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | ValidTgts$ Creature
+T:Mode$ CounterAdded | ValidCard$ Creature | ValidSource$ You | CounterType$ P1P1 | TriggerZones$ Battlefield | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever you put a +1/+1 counter on a creature, create a 1/1 green Insect creature token. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_insect | TokenOwner$ You
+Oracle:Whenever Ant-Man attacks, you may pay {1}. When you do, put a +1/+1 counter on target creature.\nWhenever you put a +1/+1 counter on a creature, create a 1/1 green Insect creature token. This ability triggers only once each turn.

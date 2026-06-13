@@ -1,0 +1,8 @@
+Name:Stature, Young Avenger
+ManaCost:1 RG
+Types:Legendary Creature Human Hero
+PT:2/2
+K:Reach
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a noncreature spell, NICKNAME has base power and toughness 4/4 until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 4
+Oracle:Reach (This creature can block creatures with flying.)\nWhenever you cast a noncreature spell, Stature has base power and toughness 4/4 until end of turn.

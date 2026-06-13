@@ -1,5 +1,7 @@
 [metadata]
 Name=WC00 Jon Finkel - Mono Blue Tinker
+AiHints=DeckArchetype$Combo
+KeyCards=Tinker;Phyrexian Colossus;Voltaic Key;Grim Monolith
 [Main]
 4 Masticore|UDS
 4 Metalworker|UDS

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman
+Title=Gunnery Sergeant Hartman
+Icon=Gunnery Sergeant Hartman.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/PTQ_Barcelona_on_MTGO/SilverRocket_-_R-G_Aggro_(Modern,_#29006).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Grim Lavamancer
+4 Kird Ape
+1 Spikeshot Elder
+3 Sulfur Elemental
+4 Tarmogoyf
+4 Shrine of Burning Rage
+2 Gut Shot
+2 Incinerate
+4 Lightning Bolt
+4 Searing Blaze
+1 Arc Trail
+1 Seal of Fire
+4 Arid Mesa
+1 Misty Rainforest
+7 Mountain
+3 Mutavault
+4 Scalding Tarn
+3 Stomping Ground
+[Sideboard]
+1 Ancient Grudge
+1 Fulminator Mage
+3 Huntmaster of the Fells
+1 Leyline of the Void
+1 Shattering Spree
+2 Tattermunge Maniac
+4 Thorn of Amethyst
+2 Tin Street Hooligan

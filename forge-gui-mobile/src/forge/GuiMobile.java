@@ -2,6 +2,7 @@ package forge;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Texture;
 import forge.adventure.stage.MapStage;
 import forge.assets.*;
@@ -105,9 +106,15 @@ public class GuiMobile implements IGuiBase {
         }
     }
 
+    private volatile Thread glThread;
+
+    void captureGlThread() {
+        this.glThread = Thread.currentThread();
+    }
+
     @Override
     public boolean isGuiThread() {
-        return !ThreadUtil.isGameThread();
+        return Thread.currentThread() == glThread;
     }
 
     @Override
@@ -124,11 +131,6 @@ public class GuiMobile implements IGuiBase {
 
         //use a delay load image to avoid an error if called from background thread
         return new FDelayLoadImage(path);
-    }
-
-    @Override
-    public ISkinImage getCardArt(final PaperCard card) {
-        return CardRenderer.getCardArt(card);
     }
 
     @Override
@@ -209,10 +211,15 @@ public class GuiMobile implements IGuiBase {
     @Override
     public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices) {
-        return new WaitCallback<List<T>>() {
+        return order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, false).ordered();
+    }
+
+    public <T> IGuiGame.OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final boolean showRememberCheckbox) {
+        return new WaitCallback<IGuiGame.OrderResult<T>>() {
             @Override
             public void run() {
-                GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, null, this);
+                GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, null, showRememberCheckbox, this);
             }
         }.invokeAndWait();
     }
@@ -370,5 +377,24 @@ public class GuiMobile implements IGuiBase {
     @Override
     public float getScreenScale() {
         return 1f;
+    }
+
+    @Override
+    public void vibrate(int milliseconds, int amplitude) {
+        if (milliseconds > 0 && amplitude > 0 && Gdx.app.getType() != ApplicationType.Desktop) {
+            Gdx.input.vibrate(milliseconds, amplitude, true);
+        }
+    }
+
+    @Override
+    public void vibrateController(int milliseconds, float amplitude) {
+        if (milliseconds > 0 && Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate()) {
+            Controllers.getCurrent().startVibration(milliseconds, amplitude);
+        }
+    }
+
+    @Override
+    public boolean useControllerForHaptics() {
+        return Forge.hasGamepad() && Forge.lastInputWasController();
     }
 }

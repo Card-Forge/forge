@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Dino
+Title=Dino
+Icon=Dino.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/Standard_Platinum_TCQ_-_Niles,_IL_-_4-26-12/PaulMorelli_-_Naya_Pod_(Standard,_#31650).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+4 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Blade Splicer
+1 Borderland Ranger
+2 Fiend Hunter
+3 Huntmaster of the Fells
+1 Phyrexian Metamorph
+4 Restoration Angel
+3 Strangleroot Geist
+1 Thalia, Guardian of Thraben
+2 Wolfir Silverheart
+1 Zealous Conscripts
+2 Birthing Pod
+2 Oblivion Ring
+1 Garruk Relentless
+2 Cavern of Souls
+4 Copperline Gorge
+6 Forest
+3 Gavony Township
+1 Mountain
+1 Plains
+4 Razorverge Thicket
+2 Rootbound Crag
+1 Sunpetal Grove
+[Sideboard]
+2 Ancient Grudge
+2 Bonfire of the Damned
+2 Combust
+1 Ray of Revelation
+2 Sword of War and Peace

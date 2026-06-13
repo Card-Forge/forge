@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Daniel_Fischer_-_Jund_(Modern,_#1426818).dck
+Deck Type=constructed
+
+[Main]
+3 Tireless Tracker
+3 Fable of the Mirror-Breaker
+4 Tarmogoyf
+4 Ragavan, Nimble Pilferer
+1 Unlicensed Hearse
+1 Shadowspear
+1 Pithing Needle
+1 Nihil Spellbomb
+1 Brainstone
+2 Assassin's Trophy
+3 Lightning Bolt
+3 Fatal Push
+2 Inquisition of Kozilek
+4 Thoughtseize
+3 Urza's Saga
+4 Wrenn and Six
+1 Nurturing Peatland
+1 Wooded Foothills
+1 Ziatora's Proving Ground
+1 Swamp
+1 Stomping Ground
+1 Overgrown Tomb
+1 Mountain
+1 Forest
+1 Boseiju, Who Endures
+1 Blackcleave Cliffs
+2 Blood Crypt
+4 Verdant Catacombs
+4 Bloodstained Mire
+[Sideboard]
+1 Unlicensed Hearse
+1 Jegantha, the Wellspring
+1 Hidetsugu Consumes All
+1 Ancient Grudge
+1 Boil
+1 Chalice of the Void
+1 Ghost Quarter
+2 Engineered Explosives
+2 Tourach, Dread Cantor
+2 Boseiju, Who Endures
+2 Void Mirror

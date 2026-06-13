@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=He-Man
+Title=He-Man
+Icon=He-Man.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/Andrew_Cuneo_-_White_Aggro_(Standard,_#788748).dck
+Deck Type=constructed
+
+[Main]
+4 Benalish Marshal
+4 Dauntless Bodyguard
+4 Hunted Witness
+2 Rustwing Falcon
+4 Skymarcher Aspirant
+4 Tithe Taker
+4 Venerated Loxodon
+3 Unbreakable Formation
+3 Conclave Tribunal
+4 History of Benalia
+4 Legion's Landing
+20 Plains
+[Sideboard]

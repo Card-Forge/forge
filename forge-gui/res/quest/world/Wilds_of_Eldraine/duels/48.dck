@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm
+Title=Wilhelm Grimm
+Icon=Wilhelm Grimm.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Kakashi__-_Golgari_Midrange_(Standard,_#1750910).dck
+Deck Type=constructed
+
+[Main]
+2 Tenacious Underdog
+3 Sheoldred, the Apocalypse
+1 Misery's Shadow
+3 Glissa Sunslayer
+1 Lord Skitter, Sewer King
+3 Blossoming Tortoise
+2 Sentinel of Lost Lore
+4 Mosswood Dreadknight
+3 Cut Down
+1 Tear Asunder
+4 Go for the Throat
+1 Sheoldred's Edict
+1 Gix's Command
+2 Virtue of Persistence
+2 Liliana of the Veil
+1 Nissa, Ascended Animist
+4 Deathcap Glade
+1 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+1 Riveteers Overlook
+4 Llanowar Wastes
+2 Mishra's Foundry
+4 Restless Cottage
+5 Swamp
+4 Forest
+[Sideboard]
+1 Graveyard Trespasser
+1 Parasitic Grasp
+2 Path of Peril
+1 The Cruelty of Gix
+1 Liliana of the Veil
+4 Duress
+1 Ashiok, Wicked Manipulator
+1 The End
+2 Rankle's Prank
+1 Stormkeld Vanguard

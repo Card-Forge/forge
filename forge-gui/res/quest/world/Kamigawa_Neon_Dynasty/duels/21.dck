@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=StAnastacia
+Title=StAnastacia
+Icon=StAnastacia.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Agata_Takeru_-_Mono_Red_(Standard,_#1334208).dck
+Deck Type=constructed
+
+[Main]
+3 Bloodthirsty Adversary
+4 Kumano Faces Kakkazan
+4 Falkenrath Pit Fighter
+4 Twinshot Sniper
+4 Reckless Stormseeker
+4 Ogre-Head Helm
+4 Voldaren Epicure
+4 Play with Fire
+2 Thundering Rebuke
+4 Roil Eruption
+1 Sokenzan, Crucible of Defiance
+2 Den of the Bugbear
+20 Mountain
+[Sideboard]
+1 Thundering Rebuke
+2 Rending Flame
+2 Chandra, Dressed to Kill
+3 Roiling Vortex
+3 Abrade
+4 Burning Hands

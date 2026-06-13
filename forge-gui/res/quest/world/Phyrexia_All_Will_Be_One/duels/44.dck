@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=King Arthur
+Title=King Arthur
+Icon=King Arthur.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/Carlos_Jofre_-_Mono-White_Midrange_(Standard,_#1606169).dck
+Deck Type=constructed
+
+[Main]
+4 Ambitious Farmhand
+2 Mondrak, Glory Dominus
+2 Loran of the Third Path
+4 The Restoration of Eiganjo
+4 Reckoner Bankbuster
+4 Lay Down Arms
+2 Farewell
+4 Ossification
+4 Wedding Announcement
+2 Elspeth Resplendent
+4 The Wandering Emperor
+2 The Eternal Wanderer
+1 Eiganjo, Seat of the Empire
+15 Plains
+2 Mirrex
+4 Roadside Reliquary
+[Sideboard]
+3 Depopulate
+2 Destroy Evil
+3 Steel Seraph
+2 Sanctuary Warden
+2 Intrepid Adversary
+2 Fateful Absence
+1 Loran of the Third Path

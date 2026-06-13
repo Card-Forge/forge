@@ -1,0 +1,8 @@
+Name:Quandrix Charm
+ManaCost:G U
+Types:Instant
+A:SP$ Charm | Choices$ DBCounter,DBDestroy,DBAnimate
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | ValidTgtDesc$ spell | UnlessCost$ 2 | SpellDescription$ Counter target spell unless its controller pays {2}.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | Power$ 5 | Toughness$ 5 | SpellDescription$ Target creature has base power and toughness 5/5 until end of turn.
+Oracle:Choose one —\n• Counter target spell unless its controller pays {2}.\n• Destroy target enchantment.\n• Target creature has base power and toughness 5/5 until end of turn.

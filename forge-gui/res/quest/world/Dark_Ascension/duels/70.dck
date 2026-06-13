@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ododua
+Title=Ododua
+Icon=Ododua.jpg
+Difficulty=Very Hard
+Description=../Modern/Dark_Ascension/Spain/Facundo_Zocola_in_PTQ_Barcelona_-_Faeries_(Modern,_#27070).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+3 Vedalken Shackles
+4 Cryptic Command
+2 Mana Leak
+3 Remand
+2 Spell Pierce
+4 Spell Snare
+18 Island
+4 Mutavault
+3 Tectonic Edge
+[Sideboard]
+2 Dismember
+1 Grafdigger's Cage
+1 Hurkyl's Recall
+2 Ratchet Bomb
+1 Relic of Progenitus
+2 Steel Sabotage
+1 Surgical Extraction
+3 Threads of Disloyalty

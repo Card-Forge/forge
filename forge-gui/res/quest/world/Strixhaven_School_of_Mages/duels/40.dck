@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Sakpata
+Title=Sakpata
+Icon=Sakpata.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Shizura_the_wizard_-_Esper_Tempo_(Standard,_#1162609).dck
+Deck Type=constructed
+
+[Main]
+2 Dream Trawler
+4 Mazemind Tome
+1 Eliminate
+2 Vanishing Verse
+2 Cling to Dust
+3 Heartless Act
+4 Saw It Coming
+4 Behold the Multiverse
+1 Shadows' Verdict
+2 Extinction Event
+4 Doomskar
+4 Ashiok, Nightmare Muse
+1 Island
+2 Field of Ruin
+2 Swamp
+2 Plains
+4 Temple of Deceit
+4 Clearwater Pathway
+4 Hengegate Pathway
+4 Brightclimb Pathway
+4 Temple of Enlightenment
+[Sideboard]
+1 Kaervek, the Spiteful
+1 Disdainful Stroke
+1 Baneslayer Angel
+1 Heartless Act
+1 Epic Downfall
+1 Elspeth's Nightmare
+1 Vanishing Verse
+1 Eliminate
+2 Test of Talents
+2 Agonizing Remorse
+3 Negate

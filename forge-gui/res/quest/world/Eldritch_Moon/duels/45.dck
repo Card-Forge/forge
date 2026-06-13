@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dino
+Title=Dino
+Icon=Dino.jpg
+Difficulty=Easy
+Description=Eldritch_Moon/World_Championship_2016_-_Standard_Deck/BRIAN_BRAUN-DUIN_-_WUG_Aggro_(Standard,_#638066).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Duskwatch Recruiter
+2 Knight of the White Orchid
+4 Lambholt Pacifist
+4 Reflector Mage
+4 Thalia's Lieutenant
+3 Thalia, Heretic Cathar
+3 Thraben Inspector
+4 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+2 Tamiyo, Field Researcher
+2 Canopy Vista
+4 Evolving Wilds
+3 Forest
+4 Fortified Village
+1 Island
+6 Plains
+3 Prairie Stream
+2 Yavimaya Coast
+[Sideboard]
+2 Day's Undoing
+2 Declaration in Stone
+3 Gideon, Ally of Zendikar
+2 Negate
+2 Nissa, Vastwood Seer
+2 Tragic Arrogance

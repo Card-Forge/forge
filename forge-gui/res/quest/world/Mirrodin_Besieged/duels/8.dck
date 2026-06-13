@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=King Kong
+Title=King Kong
+Icon=King Kong.jpg
+Difficulty=Easy
+Description=Mirrodin_Besieged/2011_TCGplayer.com_WWS_Miami/JimmyHartman_-_Valakut_Ramp_(Standard,_#10534).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Avenger of Zendikar
+2 Inferno Titan
+2 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+3 Harrow
+1 Summoning Trap
+3 Cultivate
+4 Explore
+4 Green Sun's Zenith
+1 Slagstorm
+4 Khalni Heart Expedition
+2 Evolving Wilds
+6 Forest
+11 Mountain
+2 Raging Ravine
+2 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+1 Acidic Slime
+2 Creeping Corrosion
+2 Gaea's Revenge
+2 Pyroclasm
+2 Reverberate
+2 Thrun, the Last Troll

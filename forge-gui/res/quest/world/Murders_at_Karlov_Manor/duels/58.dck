@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Hard
+Description=./Modern/Murders_at_Karlov_Manor/Daikoku_Sora_-_UB_Control_(Modern,_#1977696).dck
+Deck Type=constructed
+
+[Main]
+3 Subtlety
+3 Sheoldred, the Apocalypse
+4 Orcish Bowmasters
+3 Tishana's Tidebinder
+4 The One Ring
+4 Fatal Push
+4 Counterspell
+2 Archmage's Charm
+3 Sheoldred's Edict
+1 Sauron's Ransom
+3 Preordain
+2 Damnation
+4 Lórien Revealed
+5 Island
+1 Swamp
+1 Sunken Hollow
+3 Watery Grave
+4 Polluted Delta
+2 Misty Rainforest
+1 Scalding Tarn
+1 Prismatic Vista
+1 Otawara, Soaring City
+1 Undercity Sewers
+[Sideboard]
+2 Cursed Totem
+2 Engineered Explosives
+3 Spreading Seas
+2 Surgical Extraction
+2 Flusterstorm
+2 Force of Negation
+2 Stone of Erech

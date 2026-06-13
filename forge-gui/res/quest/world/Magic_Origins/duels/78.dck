@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Mystique
+Title=Mystique
+Icon=Mystique.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/GPT_Bologna_Gamecraft_-_Chieti,_Italy/Giordano_Mellouki_-_The_Rock_(Modern,_#556783).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Eternal Witness
+3 Hangarback Walker
+2 Kitchen Finks
+4 Noble Hierarch
+2 Scavenging Ooze
+3 Siege Rhino
+4 Tarmogoyf
+4 Voice of Resurgence
+3 Abrupt Decay
+4 Path to Exile
+4 Glittering Wish
+1 Maelstrom Pulse
+3 Thoughtseize
+1 Blood Crypt
+1 Forest
+2 Godless Shrine
+1 Overgrown Tomb
+1 Plains
+1 Stomping Ground
+1 Swamp
+2 Temple Garden
+4 Verdant Catacombs
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Blood Baron of Vizkopa
+1 Firespout
+1 Fracturing Gust
+2 Fulminator Mage
+1 Sigarda, Host of Herons
+1 Slaughter Games
+1 Sorin, Solemn Visitor
+2 Terminate
+1 Wear // Tear

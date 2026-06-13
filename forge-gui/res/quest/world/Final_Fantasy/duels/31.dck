@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Doran
+Title=Doran
+Icon=Doran.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/AKIRA_HOMMA_-_Orzhov_Demons_(Standard,_#2535360).dck
+Deck Type=constructed
+
+[Main]
+4 Preacher of the Schism
+3 Demon Wall
+2 Archfiend of the Dross
+2 Qarsi Revenant
+2 Sheoldred, the Apocalypse
+1 Elenda, Saint of Dusk
+4 Cut Down
+4 Go for the Throat
+1 Anoint with Affliction
+4 Duress
+1 Cruelclaw's Heist
+1 Intimidation Tactics
+1 Legions to Ashes
+4 Unholy Annex // Ritual Chamber
+8 Swamp
+4 Bleachbone Verge
+4 Caves of Koilos
+4 Concealed Courtyard
+4 Soulstone Sanctuary
+2 Shadowy Backstreet
+[Sideboard]
+3 Cruelclaw's Heist
+3 High Noon
+2 Lord Skitter, Sewer King
+2 Pest Control
+1 Authority of the Consuls
+1 Ghost Vacuum
+1 Gix's Command
+1 Legions to Ashes
+1 Loran of the Third Path

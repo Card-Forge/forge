@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Captain America
+Title=Captain America
+Icon=Captain America.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/Crewe-wyatt,_Shane_-_WRG_(Modern,_#794405).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodbraid Elf
+2 Knight of Autumn
+4 Knight of the Reliquary
+4 Noble Hierarch
+3 Scavenging Ooze
+4 Tarmogoyf
+2 Voice of Resurgence
+4 Wild Nacatl
+4 Lightning Bolt
+2 Lightning Helix
+4 Path to Exile
+2 Forest
+2 Ghost Quarter
+1 Horizon Canopy
+1 Kessig Wolf Run
+1 Mountain
+2 Plains
+1 Sacred Foundry
+2 Stomping Ground
+1 Temple Garden
+2 Treetop Village
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Abrade
+1 Anger of the Gods
+1 Blood Moon
+1 Damping Sphere
+1 Gaddock Teeg
+1 Grafdigger's Cage
+1 Shatterstorm
+1 Stony Silence
+1 Surgical Extraction
+1 Thalia, Guardian of Thraben

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/SCG_Invitational_Qualifier_Kearny/Kyle_Shane_-_Mono-Black_Devotion_(Standard,_#82713).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Desecration Demon
+4 Gray Merchant of Asphodel
+4 Lifebane Zombie
+1 Whip of Erebos
+2 Bile Blight
+3 Devour Flesh
+4 Hero's Downfall
+2 Dreadbore
+2 Rakdos's Return
+4 Thoughtseize
+4 Underworld Connections
+4 Blood Crypt
+4 Mutavault
+2 Rakdos Guildgate
+12 Swamp
+4 Temple of Malice
+[Sideboard]
+3 Doom Blade
+3 Duress
+1 Erebos, God of the Dead
+4 Pharika's Cure
+3 Slaughter Games

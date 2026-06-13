@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Wonder Twins
+Title=Wonder Twins
+Icon=Wonder Twins.jpg
+Difficulty=Hard
+Description=./Modern/Aetherdrift/Joshua_Willis_-_Orzhov_Blink_(Modern,_#2370085).dck
+Deck Type=constructed
+
+[Main]
+3 Emperor of Bones
+1 White Orchid Phantom
+3 Flickerwisp
+3 Recruiter of the Guard
+1 Boggart Trawler
+4 Witch Enchanter
+4 Solitude
+4 Overlord of the Balemurk
+1 Aven Interrupter
+1 Skyclave Apparition
+4 Phelia, Exuberant Shepherd
+3 Ketramose, the New Dawn
+4 Aether Vial
+4 Ephemerate
+3 Fatal Push
+4 Marsh Flats
+1 Windswept Heath
+1 Flooded Strand
+2 Godless Shrine
+2 Shadowy Backstreet
+2 Plains
+1 Swamp
+4 Concealed Courtyard
+[Sideboard]
+3 White Orchid Phantom
+2 March of Otherworldly Light
+1 Stony Silence
+3 Drannith Magistrate
+1 Aven Interrupter
+2 Shatter Assumptions
+1 Dauthi Voidwalker
+2 Thoughtseize

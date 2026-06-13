@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Snow White
+Title=Snow White
+Icon=Snow White.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/Magic-League_Modern_Trial_10-12-2011/Naisirc_-_RUG_Tempo_(Modern,_#23572).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Delver of Secrets
+3 Knight of the Reliquary
+4 Tarmogoyf
+3 Vendilion Clique
+4 Cryptic Command
+4 Lightning Bolt
+4 Mana Leak
+4 Punishing Fire
+3 Spell Pierce
+3 Spell Snare
+2 Breeding Pool
+4 Grove of the Burnwillows
+2 Hallowed Fountain
+2 Island
+4 Misty Rainforest
+1 Mountain
+1 Sacred Foundry
+4 Scalding Tarn
+3 Steam Vents
+1 Temple Garden
+[Sideboard]
+4 Ethersworn Canonist
+4 Leyline of Sanctity
+4 Nature's Claim
+3 Relic of Progenitus

@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Hard
+Description=./Modern/Foundations/buliaK_-_Incinerator_Burn_post_Foundations_(Modern,_#2262684).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Eidolon of the Great Revel
+4 Chandra's Incinerator
+4 Lightning Bolt
+4 Boltwave
+4 Lava Spike
+4 Rift Bolt
+4 Skewer the Critics
+4 Light Up the Stage
+4 Seal of Fire
+16 Mountain
+[Sideboard]

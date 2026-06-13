@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Token
+Title=Token
+Icon=Token.jpg
+Difficulty=Easy
+Description=Magic_Origins/Standard_PTQ_#8618995/Zartos_-_Goblins_(Standard,_#315517).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+2 Frenzied Goblin
+4 Goblin Glory Chaser
+4 Goblin Piledriver
+4 Goblin Rabblemaster
+4 Obelisk of Urd
+3 Lightning Strike
+4 Stoke the Flames
+2 Wild Slash
+4 Dragon Fodder
+4 Hordeling Outburst
+21 Mountain
+[Sideboard]
+3 Mardu Scout
+2 Outpost Siege
+4 Roast
+3 Searing Blood
+3 Smash to Smithereens

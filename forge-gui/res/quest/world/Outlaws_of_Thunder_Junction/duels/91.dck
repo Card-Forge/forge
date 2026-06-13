@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Treebeard
+Title=Treebeard
+Icon=Treebeard.jpg
+Difficulty=Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/Hamuda_-_Gruul_Prowess_(Modern,_#2054707).dck
+Deck Type=constructed
+
+[Main]
+4 Dragon's Rage Channeler
+4 Monastery Swiftspear
+4 Slickshot Show-Off
+4 Questing Druid
+4 Tarmogoyf
+4 Mishra's Bauble
+2 Wild Slash
+4 Lava Dart
+4 Lightning Bolt
+2 Mutagenic Growth
+4 Abundant Harvest
+2 Underworld Breach
+3 Mountain
+1 Commercial District
+3 Stomping Ground
+2 Arid Mesa
+1 Sunbaked Canyon
+2 Wooded Foothills
+4 Scalding Tarn
+2 Bloodstained Mire
+[Sideboard]
+2 Blood Moon
+2 Destructive Revelry
+1 Jegantha, the Wellspring
+1 Magus of the Moon
+4 Pick Your Poison
+2 Tormod's Crypt
+1 Unholy Heat
+2 Surgical Extraction

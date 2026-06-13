@@ -30,6 +30,9 @@ public class ReplaceTurnFaceUp extends ReplacementEffect {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
             return false;
         }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
+        }
         return true;
     }
 
@@ -39,6 +42,7 @@ public class ReplaceTurnFaceUp extends ReplacementEffect {
     @Override
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject(AbilityKey.Card, runParams.get(AbilityKey.Affected));
+        sa.setReplacingObjectsFrom(runParams, AbilityKey.Cause);
     }
 
 }

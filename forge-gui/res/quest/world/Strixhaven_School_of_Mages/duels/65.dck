@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Han Solo
+Title=Han Solo
+Icon=Han Solo.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Asaka_Wataru_-_WBG_Aggro_(Modern,_#1147422).dck
+Deck Type=constructed
+
+[Main]
+2 Tidehollow Sculler
+3 Skyclave Apparition
+3 Hexdrinker
+4 Tarmogoyf
+4 Stoneforge Mystic
+1 Sword of Feast and Famine
+1 Batterskull
+1 Sword of Fire and Ice
+1 Vanishing Verse
+1 Baleful Mastery
+3 Fatal Push
+3 Path to Exile
+3 Thoughtseize
+3 Inquisition of Kozilek
+1 Gideon, Ally of Zendikar
+4 Liliana of the Veil
+1 Forest
+1 Indatha Triome
+1 Temple Garden
+1 Godless Shrine
+1 Overgrown Tomb
+1 Swamp
+2 Verdant Catacombs
+2 Plains
+2 Silent Clearing
+2 Nurturing Peatland
+3 Windswept Heath
+4 Marsh Flats
+[Sideboard]
+1 Kaya's Guile
+1 Assassin's Trophy
+1 Damping Sphere
+1 Maul of the Skyclaves
+1 Lingering Souls
+2 Fulminator Mage
+2 Surgical Extraction
+2 Ashiok, Dream Render
+2 Plague Engineer
+2 Scavenging Ooze

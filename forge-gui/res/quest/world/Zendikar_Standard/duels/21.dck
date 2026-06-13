@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Crows in the Field
+Title=Crows in the Field
+Icon=Crows in the Field.jpg
+Difficulty=Easy
+Description=Zendikar/Magic-League_Standard_Trial_24-08-2010/JosueS_-_Mono_Black_Control_(Standard,_#468).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Black Knight
+4 Gatekeeper of Malakir
+3 Ob Nixilis, the Fallen
+4 Vampire Nighthawk
+4 Tendrils of Corruption
+3 Corrupt
+3 Duress
+3 Marsh Casualties
+3 Mind Sludge
+4 Sign in Blood
+4 Marsh Flats
+17 Swamp
+4 Verdant Catacombs
+[Sideboard]
+3 Deathmark
+4 Disfigure
+4 Malakir Bloodwitch
+4 Vampire Hexmage

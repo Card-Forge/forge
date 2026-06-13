@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Jubilee
+Title=Jubilee
+Icon=Jubilee.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Felix_Oeltjen_-_Mono-Blue_Merfolk_(Modern,_#1978306).dck
+Deck Type=constructed
+
+[Main]
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+3 Merfolk Trickster
+4 Rishadan Dockhand
+3 Svyelun of Sea and Sky
+4 Tide Shaper
+4 Tishana's Tidebinder
+4 Vodalian Hexcatcher
+4 Aether Vial
+2 Dismember
+2 Force of Negation
+2 Spreading Seas
+3 Cavern of Souls
+12 Island
+3 Mutavault
+1 Otawara, Soaring City
+1 Waterlogged Grove
+[Sideboard]
+2 Chalice of the Void
+3 Cursed Totem
+2 Force of Negation
+2 Hibernation
+2 Relic of Progenitus
+4 Subtlety

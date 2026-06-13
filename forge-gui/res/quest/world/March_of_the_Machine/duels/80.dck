@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Hameln
+Title=Hameln
+Icon=Hameln.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/Boas_Renfors_-_Hammer_Time_(Modern,_#1639074)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+4 Stoneforge Mystic
+1 Memnite
+1 Giver of Runes
+4 Esper Sentinel
+1 Solitude
+3 Puresteel Paladin
+1 The Reality Chip
+1 Haywire Mite
+2 Ornithopter
+1 Skrelv, Defector Mite
+1 Paradise Mantle
+1 Shadowspear
+4 Colossus Hammer
+2 Springleaf Drum
+1 Kaldra Compleat
+1 Nettlecyst
+1 Mana Tithe
+1 Blacksmith's Skill
+2 Spell Pierce
+4 Sigarda's Aid
+4 Urza's Saga
+3 Plains
+2 Hallowed Fountain
+1 Temple Garden
+3 Inkmoth Nexus
+1 Windswept Heath
+2 Horizon Canopy
+2 Arid Mesa
+4 Marsh Flats
+[Sideboard]
+1 Haywire Mite
+1 Grafdigger's Cage
+2 Lavinia, Azorius Renegade
+1 Teferi, Time Raveler
+2 Hallowed Moonlight
+1 Mana Leak
+1 Sanctifier en-Vec
+1 Pithing Needle
+1 March of Otherworldly Light
+1 Path to Exile
+3 Surge of Salvation

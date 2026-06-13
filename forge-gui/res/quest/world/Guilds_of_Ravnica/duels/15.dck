@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Jubilee
+Title=Jubilee
+Icon=Jubilee.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Alex_Chang_-_Mono_Blue_Tempo_(Standard,_#768772).dck
+Deck Type=constructed
+
+[Main]
+1 Exclusion Mage
+4 Merfolk Trickster
+4 Mist-Cloaked Herald
+2 Nightveil Sprite
+4 Siren Stormtamer
+4 Tempest Djinn
+2 Warkite Marauder
+1 Blink of an Eye
+2 Dive Down
+3 Essence Scatter
+2 Spell Pierce
+4 Wizard's Retort
+2 Chart a Course
+4 Curious Obsession
+21 Island
+[Sideboard]
+3 Diamond Mare
+2 Disdainful Stroke
+1 Exclusion Mage
+3 Negate
+1 Sentinel Totem
+2 Sleep
+3 Syncopate

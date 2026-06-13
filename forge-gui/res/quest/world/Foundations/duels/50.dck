@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Mr Smith
+Title=Mr Smith
+Icon=Mr Smith.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Drugo_-_Rakdos_Reanimator_(Standard,_#2277114).dck
+Deck Type=constructed
+
+[Main]
+4 Fear of Missing Out
+4 Koma, World-Eater
+3 Preacher of the Schism
+1 Valgavoth, Terror Eater
+4 Atraxa, Grand Unifier
+3 Bitter Triumph
+2 Cut Down
+2 Duress
+2 Push // Pull
+4 Zombify
+4 Bitter Reunion
+2 The Cruelty of Gix
+3 The Elder Dragon War
+4 Swamp
+2 Sulfurous Springs
+2 Mountain
+1 Fountainport
+4 Raucous Theater
+1 Restless Vents
+4 Blazemire Verge
+4 Blackcleave Cliffs
+[Sideboard]
+2 Duress
+3 Brotherhood's End
+2 Abrade
+2 Ghost Vacuum
+2 Molten Collapse
+2 Sheoldred, the Apocalypse
+2 Virtue of Persistence

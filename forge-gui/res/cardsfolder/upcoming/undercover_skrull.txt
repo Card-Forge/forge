@@ -1,0 +1,7 @@
+Name:Undercover Skrull
+ManaCost:1 G
+Types:Creature Skrull Shapeshifter Villain
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddAllCreatureTypes$ True | IsPresent$ Creature.YouOwn | PresentCompare$ GE2 | PresentZone$ Graveyard | Description$ As long as there are two or more creature cards in your graveyard, this creature gets +2/+2 and is all creature types.
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:As long as there are two or more creature cards in your graveyard, this creature gets +2/+2 and is all creature types.\n{T}: Add one mana of any color.

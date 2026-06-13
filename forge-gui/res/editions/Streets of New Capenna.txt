@@ -476,7 +476,7 @@ ScryfallCode=SNC
 454 R Gala Greeters @Samy Halim
 455 R Gala Greeters @Katerina Ladon
 456 R Gala Greeters @Kotakan
-457 R Gala Greeters @Heonhwa Choe
+457 R Gala Greeters @Heonhwa
 458 R Gala Greeters @Daniel Correia
 459 R Gala Greeters @Olga Tereshenko
 460 R Gala Greeters @Voyager Illustration

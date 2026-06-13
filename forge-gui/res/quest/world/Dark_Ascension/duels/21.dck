@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Bela Lugosi
+Title=Bela Lugosi
+Icon=Bela Lugosi.jpg
+Difficulty=Medium
+Description=Dark_Ascension/Pro_Tour_Dark_Ascension_Top_Standard_Decks/Naoki_Nakada_-_BR_SmallPox_(Standard,_#25981).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Diregraf Ghoul
+1 Dross Hopper
+3 Falkenrath Aristocrat
+4 Fume Spitter
+4 Geralf's Messenger
+4 Gravecrawler
+4 Highborn Ghoul
+4 Skirsdag High Priest
+4 Brimstone Volley
+2 Dismember
+4 Tragic Slip
+4 Blackcleave Cliffs
+4 Dragonskull Summit
+14 Swamp
+[Sideboard]
+4 Distress
+2 Go for the Throat
+2 Manabarbs
+2 Mental Misstep
+2 Phyrexian Obliterator
+2 Ratchet Bomb

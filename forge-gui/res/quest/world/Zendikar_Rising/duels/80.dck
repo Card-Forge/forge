@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/CavalloGoloso_-_Counter_Burn_(Modern,_#1056771).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+4 Thing in the Ice
+1 Burst Lightning
+1 Abrade
+1 Magmatic Sinkhole
+2 Cryptic Command
+3 Archmage's Charm
+3 Force of Negation
+4 Lightning Bolt
+4 Opt
+4 Remand
+4 Serum Visions
+2 Blood Moon
+2 Jace, the Mind Sculptor
+1 Spirebluff Canal
+1 Mountain
+2 Mystic Sanctuary
+2 Steam Vents
+2 Misty Rainforest
+3 Flooded Strand
+4 Scalding Tarn
+6 Island
+[Sideboard]
+1 Ashiok, Dream Render
+1 Engineered Explosives
+1 Entrancing Melody
+1 Mystical Dispute
+2 Anger of the Gods
+2 Cleansing Wildfire
+2 Dragon's Claw
+2 Relic of Progenitus
+3 Aether Gust

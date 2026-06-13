@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Tarzan
+Title=Tarzan
+Icon=Tarzan.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/1234finnemans_-_Jund_Midrange_(Standard,_#1585865).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+3 Glissa Sunslayer
+1 Graveyard Trespasser
+2 Sheoldred, the Apocalypse
+4 Armored Scrapgorger
+4 Fable of the Mirror-Breaker
+2 Reckoner Bankbuster
+2 Unleash the Inferno
+4 Go for the Throat
+2 Abrade
+4 Invoke Despair
+2 Tyvar, Jubilant Brawler
+2 Copperline Gorge
+1 Takenuma, Abandoned Mire
+3 Sulfurous Springs
+4 Ziatora's Proving Ground
+4 Blackcleave Cliffs
+4 Llanowar Wastes
+4 Haunted Mire
+4 Deathcap Glade
+[Sideboard]
+1 Abrade
+4 Duress
+1 Sorin the Mirthless
+1 Nissa, Ascended Animist
+1 Workshop Warchief
+2 Brotherhood's End
+2 Cut Down
+1 Riveteers Charm
+1 Titan of Industry
+1 Thrun, Breaker of Silence

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Harry Potter
+Title=Harry Potter
+Icon=Harry Potter.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/WPN_Qualifier_Modern_Turniers_vom_14.08.2012/Kostler_Jonas_-_Faeries_(Modern,_#36236).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+4 Vendilion Clique
+3 Vedalken Shackles
+4 Cryptic Command
+2 Mana Leak
+4 Remand
+4 Spell Snare
+2 Faerie Conclave
+16 Island
+1 Misty Rainforest
+4 Mutavault
+1 Pendelhaven
+1 Scalding Tarn
+[Sideboard]
+1 Annul
+2 Disrupting Shoal
+3 Engineered Explosives
+1 Jace Beleren
+1 Relic of Progenitus
+1 Sower of Temptation
+1 Steel Sabotage
+3 Threads of Disloyalty
+1 Trickbind
+1 Wurmcoil Engine

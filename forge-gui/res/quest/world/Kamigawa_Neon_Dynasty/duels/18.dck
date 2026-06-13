@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sidisi
+Title=Sidisi
+Icon=Sidisi.jpg
+Difficulty=Medium
+Description=./Standard/Kamigawa_Neon_Dynasty/Santosvella_-_Bant_Aggro_(Standard,_#1306937).dck
+Deck Type=constructed
+
+[Main]
+2 Reidane, God of the Worthy
+4 Spectral Adversary
+4 Cathar Commando
+4 Brutal Cathar
+4 Elite Spellbinder
+4 Luminarch Aspirant
+2 Negate
+2 Snakeskin Veil
+3 Fateful Absence
+2 Ranger Class
+4 The Wandering Emperor
+1 Island
+1 Eiganjo, Seat of the Empire
+2 Plains
+2 Dreamroot Cascade
+3 Overgrown Farmland
+4 Deserted Beach
+4 Hengegate Pathway
+4 Barkchannel Pathway
+4 Branchloft Pathway
+[Sideboard]
+2 Negate
+2 Disdainful Stroke
+3 Thalia, Guardian of Thraben
+4 Esika's Chariot
+4 Skyclave Apparition

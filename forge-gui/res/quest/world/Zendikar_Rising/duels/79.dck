@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Savra
+Title=Savra
+Icon=Savra.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/CptGrumblecakes_-_Abzan_Ephemerate_(Modern,_#1071925).dck
+Deck Type=constructed
+
+[Main]
+2 Eternal Witness
+3 Flickerwisp
+3 Eldrazi Displacer
+3 Wasteland Strangler
+4 Skyclave Apparition
+4 Tidehollow Sculler
+4 Charming Prince
+4 Birds of Paradise
+4 Aether Vial
+4 Collected Company
+4 Ephemerate
+1 Swamp
+1 Overgrown Tomb
+1 Forest
+2 Plains
+2 Field of Ruin
+2 Caves of Koilos
+2 Temple Garden
+2 Silent Clearing
+4 Windswept Heath
+4 Brushland
+[Sideboard]
+1 Rest in Peace
+2 Archon of Emeria
+2 Damping Sphere
+2 Gaddock Teeg
+2 Qasali Pridemage
+3 Aven Mindcensor
+3 Relic of Progenitus

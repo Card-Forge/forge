@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Zegana
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=Very Hard
+Description=./Modern/Wilds_of_Eldraine/JT_Lemmon_-_Rakdos_Midrange_(Modern,_#1751795).dck
+Deck Type=constructed
+
+[Main]
+4 Ragavan, Nimble Pilferer
+4 Dauthi Voidwalker
+4 Orcish Bowmasters
+1 Kroxa, Titan of Death's Hunger
+4 Grief
+4 Fury
+4 Fable of the Mirror-Breaker
+3 Terminate
+2 Undying Malice
+1 Feign Death
+3 Not Dead After All
+2 Lightning Bolt
+3 Thoughtseize
+1 Blood Moon
+1 Takenuma, Abandoned Mire
+4 Bloodstained Mire
+4 Blood Crypt
+3 Marsh Flats
+1 Verdant Catacombs
+3 Swamp
+3 Blackcleave Cliffs
+1 Mount Doom
+[Sideboard]
+1 Hidetsugu Consumes All
+2 Engineered Explosives
+2 Fatal Push
+1 Sheoldred, the Apocalypse
+2 Tourach, Dread Cantor
+3 Leyline of the Void
+3 Chalice of the Void
+1 Blood Moon

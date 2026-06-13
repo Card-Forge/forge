@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Surtr
+Title=Surtr
+Icon=Surtr.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Aprosdoketon_-_Izzet_Control_(Standard,_#1636123).dck
+Deck Type=constructed
+
+[Main]
+4 Fable of the Mirror-Breaker
+3 Chrome Host Seedshark
+1 Zurgo and Ojutai
+3 Reckoner Bankbuster
+2 Abrade
+3 Fires of Victory
+2 Memory Deluge
+2 Flame-Blessed Bolt
+2 Make Disappear
+4 Disruption Protocol
+1 Depopulate
+2 Farewell
+1 Brotherhood's End
+3 The Wandering Emperor
+3 Shivan Reef
+1 Island
+3 Seachrome Coast
+4 Stormcarved Coast
+2 Battlefield Forge
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+1 Adarkar Wastes
+1 Plains
+1 Mountain
+4 Sundown Pass
+1 Sokenzan, Crucible of Defiance
+4 Deserted Beach
+[Sideboard]
+1 Farewell
+1 Reckoner Bankbuster
+2 Negate
+1 Brotherhood's End
+3 Lithomantic Barrage
+3 Sunset Revelry
+2 Disdainful Stroke
+2 Destroy Evil

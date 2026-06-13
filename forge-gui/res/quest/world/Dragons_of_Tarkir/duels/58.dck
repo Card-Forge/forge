@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Yemaya
+Title=Yemaya
+Icon=Yemaya.jpg
+Difficulty=Hard
+Description=../Modern/Dragons_of_Tarkir/States_Pawtucket/Dar_Francis_Castillo_-_Burn_(Modern,_#333589).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+3 Searing Blaze
+4 Skullcrack
+2 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+2 Blackcleave Cliffs
+1 Blood Crypt
+2 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+4 Wooded Foothills
+[Sideboard]
+3 Kor Firewalker
+1 Path to Exile
+1 Rakdos Charm
+2 Rending Volley
+4 Self-Inflicted Wound
+1 Shattering Spree
+1 Smash to Smithereens
+1 War Priest of Thune
+1 Wear // Tear

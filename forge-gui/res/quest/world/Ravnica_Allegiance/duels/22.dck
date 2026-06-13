@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/Akira_Asahara_-_Simic_(Standard,_#786957).dck
+Deck Type=constructed
+
+[Main]
+3 Hydroid Krasis
+2 Blink of an Eye
+4 Chemister's Insight
+4 Growth Spiral
+4 Nexus of Fate
+4 Opt
+4 Root Snare
+3 Sinister Sabotage
+3 Search for Azcanta
+4 Wilderness Reclamation
+1 Arch of Orazca
+4 Breeding Pool
+6 Forest
+4 Hinterland Harbor
+6 Island
+4 Memorial to Genius
+[Sideboard]
+3 Biogenic Ooze
+3 Crushing Canopy
+3 Druid of the Cowl
+3 Kraul Harpooner
+3 Negate

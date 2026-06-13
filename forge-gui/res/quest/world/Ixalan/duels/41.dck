@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Robot41
+Title=Robot41
+Icon=Tibalt.jpg
+Difficulty=Easy
+Description=Mardu 
+Deck Type=constructed
+
+[Main]
+4 Bomat Courier
+3 Glory-Bound Initiate
+4 Hazoret the Fervent
+1 Pia Nalaar
+2 Ruin Raider
+4 Scrapheap Scrounger
+4 Toolcraft Exemplar
+1 Aethersphere Harvester
+4 Heart of Kiran
+4 Fatal Push
+4 Unlicensed Disintegration
+1 Cut // Ribbons
+2 Canyon Slough
+4 Concealed Courtyard
+2 Ifnir Deadlands
+4 Inspiring Vantage
+1 Mountain
+3 Plains
+2 Ramunap Ruins
+4 Spire of Industry
+2 Swamp
+[Sideboard]
+2 Chandra, Torch of Defiance
+2 Doomfall
+4 Duress
+1 Glory-Bound Initiate
+2 Magma Spray
+2 Rampaging Ferocidon
+2 Sunscourge Champion

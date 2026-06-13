@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Crows in the Field
+Title=Crows in the Field
+Icon=Crows in the Field.jpg
+Difficulty=Easy
+Description=./Standard/Bloomburrow/Al-Pacino_-_Rakdos_Lizards_(Standard,_#2214560).dck
+Deck Type=constructed
+
+[Main]
+4 Fireglass Mentor
+4 Flamecache Gecko
+4 Forsaken Miner
+4 Hired Claw
+4 Iridescent Vinelasher
+4 Laughing Jasper Flint
+4 Gev, Scaled Scorch
+4 Thought-Stalker Warlock
+2 Bitter Triumph
+4 Go for the Throat
+6 Swamp
+4 Sulfurous Springs
+1 Mountain
+2 Mudflat Village
+1 Rockface Village
+4 Cavern of Souls
+4 Blackcleave Cliffs
+[Sideboard]
+3 Anoint with Affliction
+4 Cut Down
+4 Duress
+4 Glistening Deluge

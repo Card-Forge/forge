@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Colorless
+Title=Dungeon Crawling Colorless
+Icon=Dungeon Crawling Colorless.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Vestavia_Hills,_Alabama/Mark_Redwine_-_W-U_Weenie_(Standard,_#40105).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Angel of Jubilation
+4 Champion of the Parish
+4 Elite Inquisitor
+4 Geist of Saint Traft
+4 Judge's Familiar
+4 Precinct Captain
+4 Silverblade Paladin
+4 Thalia, Guardian of Thraben
+4 War Falcon
+4 Glacial Fortress
+4 Hallowed Fountain
+2 Island
+2 Moorland Haunt
+10 Plains
+[Sideboard]
+2 Dryad Militant
+4 Negate
+3 Pithing Needle
+2 Riders of Gavony
+4 Syncopate

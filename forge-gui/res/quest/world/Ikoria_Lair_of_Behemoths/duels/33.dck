@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Green Lantern
+Title=Green Lantern
+Icon=Green Lantern.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Aaron_Barich_-_Orzhov_Aristocrats_(Standard,_#962208).dck
+Deck Type=constructed
+
+[Main]
+2 Hunted Witness
+4 Midnight Reaper
+4 Cauldron Familiar
+4 Woe Strider
+4 Whisper Squad
+4 Priest of Forgotten Gods
+4 Cruel Celebrant
+4 Witch's Oven
+2 Gruesome Menagerie
+4 Bastion of Remembrance
+1 Castle Locthwain
+1 Castle Ardenvale
+2 Temple of Silence
+4 Godless Shrine
+4 Fabled Passage
+6 Swamp
+6 Plains
+[Sideboard]
+1 Leyline of the Void
+2 Duress
+2 Devout Decree
+2 Noxious Grasp
+2 Despark
+2 Conclave Tribunal
+2 Dire Tactics
+2 Tithe Taker

@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Abraham Lincoln
+Title=Abraham Lincoln
+Icon=Abraham Lincoln.jpg
+Difficulty=Hard
+Description=./Modern/Tarkir_Dragonstorm/Paul_Creedy_-_Sultai_Frog_(Modern,_#2444309).dck
+Deck Type=constructed
+
+[Main]
+4 Psychic Frog
+2 Orcish Bowmasters
+2 Murktide Regent
+1 Subtlety
+4 Abhorrent Oculus
+4 Fatal Push
+4 Counterspell
+2 Force of Negation
+2 Rakshasa's Bargain
+2 Thought Scour
+2 Consider
+2 Spell Snare
+2 Sink into Stupor
+1 Dismember
+1 Sheoldred's Edict
+4 Unearth
+1 Thoughtseize
+2 Grist, the Hunger Tide
+3 Verdant Catacombs
+3 Polluted Delta
+2 Hedge Maze
+1 Undercity Sewers
+1 Watery Grave
+1 Overgrown Tomb
+1 Darkslick Shores
+1 Gloomlake Verge
+1 Otawara, Soaring City
+1 Forest
+1 Swamp
+2 Island
+[Sideboard]
+1 Soul-Guide Lantern
+1 Harbinger of the Seas
+4 Consign to Memory
+1 Mystical Dispute
+1 Nihil Spellbomb
+1 Toxic Deluge
+1 Thoughtseize
+1 Damping Sphere
+1 Surgical Extraction

@@ -16,7 +16,6 @@ import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostAdjustment;
-import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordWithCostAndType;
@@ -31,6 +30,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.CostPaymentStack;
 import forge.game.zone.ZoneType;
 import forge.util.*;
 import forge.util.collect.FCollection;
@@ -43,6 +43,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -987,6 +988,9 @@ public class AbilityUtils {
             addPlayer(card.getImprintedCards(), defined, players);
         } else if (defined.startsWith("EffectSource")) {
             Card root = findEffectRoot(card);
+            if (root == null) {
+                root = findEffectRoot(sa.getHostCard());
+            }
             if (root != null) {
                 addPlayer(Lists.newArrayList(root), defined, players);
             }
@@ -1682,6 +1686,10 @@ public class AbilityUtils {
                     return doXMath(calculateAmount(c, sq[kicked ? 1 : 2], ctb), expr, c, ctb);
                 }
 
+                if (sq[0].startsWith("Teamwork")) {
+                    return doXMath(calculateAmount(c, sq[sa.isOptionalCostPaid(OptionalCost.Teamwork) ? 1 : 2], ctb), expr, c, ctb);
+                }
+
                 if (sq[0].startsWith("OptionalGenericCostPaid")) {
                     return doXMath(calculateAmount(c, sq[sa.isOptionalCostPaid(OptionalCost.Generic) ? 1 : 2], ctb), expr, c, ctb);
                 }
@@ -1829,18 +1837,13 @@ public class AbilityUtils {
                 }
 
                 if (sq[0].startsWith("TotalManaSpent ")) {
-                    final String[] k = sq[0].split(" ");
-                    int v = 0;
-                    if (sa.getRootAbility().getPayingMana() != null) {
-                        for (Mana m : sa.getRootAbility().getPayingMana()) {
-                            Card source = m.getSourceCard();
-                            if (source != null) {
-                                if (source.isValid(k[1].split(","), player, c, sa)) {
-                                    v += 1;
-                                }
-                            }
-                        }
+                    if (sa.getRootAbility().getPayingMana() == null) {
+                        return doXMath(0, expr, c, ctb);
                     }
+                    final String[] k = sq[0].split(" ");
+                    int v = (int) sa.getRootAbility().getPayingMana().stream().map(Mana::getSourceCard)
+                            .filter(Predicate.<Card>not(Objects::isNull).and(CardPredicates.restriction(k[1].split(","), player, c, ctb)))
+                            .count();
                     return doXMath(v, expr, c, ctb);
                 }
 
@@ -1878,17 +1881,12 @@ public class AbilityUtils {
             }
             if (sq[0].startsWith("CastTotalManaSpent ")) {
                 final String[] k = sq[0].split(" ");
-                int v = 0;
-                if (c.getCastSA() != null) {
-                    for (Mana m : c.getCastSA().getPayingMana()) {
-                        Card source = m.getSourceCard();
-                        if (source != null) {
-                            if (source.isValid(k[1].split(","), player, c, ctb)) {
-                                v += 1;
-                            }
-                        }
-                    }
+                if (c.getCastSA() == null) {
+                    return doXMath(0, expr, c, ctb);
                 }
+                int v = (int) c.getCastSA().getPayingMana().stream().map(Mana::getSourceCard)
+                        .filter(Predicate.<Card>not(Objects::isNull).and(CardPredicates.restriction(k[1].split(","), player, c, ctb)))
+                        .count();
                 return doXMath(v, expr, c, ctb);
             }
 
@@ -2037,6 +2035,9 @@ public class AbilityUtils {
         }
         if (sq[0].startsWith("PromisedGift")) {
             return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isGiftPromised() ? 1 : 2], ctb), expr, c, ctb);
+        }
+        if (sq[0].startsWith("Teamwork")) {
+            return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isTeamwork() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].startsWith("Escaped")) {
             return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2], ctb), expr, c, ctb);
@@ -2207,8 +2208,8 @@ public class AbilityUtils {
             int cmc = c.getCMC();
 
             if (sq[0].contains("LKI") && !c.isInZone(ZoneType.Stack) && c.getManaCost() != null) {
-                if (ctb instanceof SpellAbility && ((SpellAbility) ctb).getXManaCostPaid() != null) {
-                    cmc += ((SpellAbility) ctb).getXManaCostPaid() * c.getManaCost().countX();
+                if (ctb instanceof SpellAbility sa && sa.getXManaCostPaid() != null) {
+                    cmc += sa.getXManaCostPaid() * c.getManaCost().countX();
                 } else {
                     cmc += c.getXManaCostPaid() * c.getManaCost().countX();
                 }
@@ -2775,8 +2776,8 @@ public class AbilityUtils {
             final String validFilter = workingCopy[1];
             // use objectXCount ?
             int activated = CardUtil.getThisTurnActivated(validFilter, c, ctb, player).size();
-            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
-                if (i.getPayment().getAbility().isValid(validFilter, player, c, ctb)) {
+            for (CostPaymentStack.Entry i : game.costPaymentStack) {
+                if (i.payment().getAbility().isValid(validFilter, player, c, ctb)) {
                     activated++;
                 }
             }
@@ -2986,11 +2987,11 @@ public class AbilityUtils {
         return applyTextChangeEffects(def, ability.getHostCard(), false);
     }
 
-    public static final String applyKeywordTextChangeEffects(final String kw, final Card card) {
+    public static final String applyKeywordTextChangeEffects(final String kw, Map<String,String> colorMap, Map<String,String> typeMap) {
         if (!CardUtil.isKeywordModifiable(kw)) {
             return kw;
         }
-        return applyTextChangeEffects(kw, card, false);
+        return applyTextChangeEffects(kw, false, colorMap, typeMap);
     }
 
     public static final String applyDescriptionTextChangeEffects(final String def, final CardTraitBase ability) {

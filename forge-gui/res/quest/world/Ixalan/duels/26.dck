@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Robot26
+Title=Robot26
+Icon=Hugo Drax.jpg
+Difficulty=Easy
+Description=Esper 
+Deck Type=constructed
+
+[Main]
+4 Anointer Priest
+1 Marionette Master
+2 The Scarab God
+4 Renegade Map
+3 Treasure Map
+4 Fatal Push
+3 Fumigate
+2 Start // Finish
+3 Anointed Procession
+4 Cast Out
+4 Hidden Stockpile
+4 Legion's Landing
+4 Concealed Courtyard
+1 Drowned Catacomb
+4 Evolving Wilds
+1 Glacial Fortress
+2 Ifnir Deadlands
+1 Island
+5 Plains
+1 Shefet Dunes
+3 Swamp
+[Sideboard]
+4 Duress
+1 Fumigate
+3 Ixalan's Binding
+2 Lost Legacy
+3 Negate
+2 Sunscourge Champion

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Wolverine
+Title=Wolverine
+Icon=Wolverine.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine/Matti_Kuisma_-_Rogue_(Standard,_#1621287).dck
+Deck Type=constructed
+
+[Main]
+4 Spectral Adversary
+3 Ao, the Dawn Sky
+2 Serra Paragon
+4 Steel Seraph
+4 Faerie Mastermind
+3 Errant and Giada
+2 Negate
+4 Make Disappear
+2 Destroy Evil
+2 Surge of Salvation
+4 The Wandering Emperor
+6 Plains
+5 Island
+4 Adarkar Wastes
+4 Seachrome Coast
+4 Deserted Beach
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+1 Mirrex
+[Sideboard]

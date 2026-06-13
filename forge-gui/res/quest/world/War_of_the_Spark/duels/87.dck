@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=BlackPanther
+Title=BlackPanther
+Icon=BlackPanther.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/Kondo_Shohei_-_Kiki_Combo_(Modern,_#798873).dck
+Deck Type=constructed
+
+[Main]
+4 Tarmogoyf
+4 Snapcaster Mage
+3 Deceiver Exarch
+2 Pestermite
+2 Kiki-Jiki, Mirror Breaker
+4 Lightning Bolt
+4 Remand
+2 Cryptic Command
+1 Spell Snare
+1 Electrolyze
+4 Serum Visions
+3 Sleight of Hand
+2 Flame Slash
+2 Jace, the Mind Sculptor
+4 Scalding Tarn
+4 Misty Rainforest
+4 Sulfur Falls
+1 Copperline Gorge
+2 Steam Vents
+1 Stomping Ground
+1 Breeding Pool
+3 Island
+1 Forest
+1 Mountain
+[Sideboard]
+2 Anger of the Gods
+2 Surgical Extraction
+2 Huntmaster of the Fells
+2 Ancient Grudge
+1 Alpine Moon
+1 Negate
+1 Ceremonious Rejection
+1 Disdainful Stroke
+1 Engineered Explosives
+1 Rending Volley
+1 Ashiok, Dream Render

@@ -1,0 +1,14 @@
+Name:Mister Hyde, Monster Within
+ManaCost:2 G
+Types:Legendary Creature Human Villain
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBRemoveCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on NICKNAME.
+SVar:DBRemoveCounter:DB$ RemoveCounter | Choices$ Creature.YouCtrl+HasCounters | CounterType$ Any | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBDraw | SpellDescription$ Remove a counter from a creature you control. If you do, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:At the beginning of your upkeep, choose one —\n• Put a +1/+1 counter on Mister Hyde.\n• Remove a counter from a creature you control. If you do, draw a card.

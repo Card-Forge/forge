@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=JuzamGenie
+Title=JuzamGenie
+Icon=JuzamGenie.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/Arcore_(MI)_-_7┬¬_Tappa_PMCup/Longhi_Jacopo_-_Faeries_(Modern,_#31377).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+1 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+2 Vedalken Shackles
+4 Cryptic Command
+2 Electrolyze
+3 Lightning Bolt
+3 Mana Leak
+3 Remand
+3 Rune Snag
+1 Tamiyo, the Moon Sage
+2 Cavern of Souls
+1 Faerie Conclave
+10 Island
+1 Misty Rainforest
+4 Mutavault
+2 Scalding Tarn
+3 Steam Vents
+[Sideboard]
+2 Blood Moon
+2 Bonfire of the Damned
+2 Hurkyl's Recall
+2 Ratchet Bomb
+2 Relic of Progenitus
+1 Sower of Temptation
+1 Tectonic Edge
+2 Threads of Disloyalty

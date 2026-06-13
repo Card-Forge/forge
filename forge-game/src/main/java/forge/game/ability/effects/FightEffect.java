@@ -12,7 +12,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
+import forge.game.card.CardDamageTable;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
@@ -140,14 +140,14 @@ public class FightEffect extends DamageBaseEffect {
 
     private void dealDamage(final SpellAbility sa, Card fighterA, Card fighterB) {
         boolean usedDamageMap = true;
-        CardDamageMap damageMap = sa.getDamageMap();
-        CardDamageMap preventMap = sa.getPreventMap();
+        CardDamageTable damageMap = sa.getDamageMap();
+        CardDamageTable preventMap = sa.getPreventMap();
         GameEntityCounterTable counterTable = sa.getCounterTable();
 
         if (damageMap == null) {
             // make a new damage map
-            damageMap = new CardDamageMap();
-            preventMap = new CardDamageMap();
+            damageMap = new CardDamageTable();
+            preventMap = new CardDamageTable();
             counterTable = new GameEntityCounterTable();
             usedDamageMap = false;
         }

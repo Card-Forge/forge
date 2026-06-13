@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Gruul-precon
+Title=Gruul-precon
+Icon=Gruul-precon.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Cristiano_Imada_-_Red_Deck_Wins_(Standard,_#2152073).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Heartfire Hero
+4 Emberheart Challenger
+4 Slickshot Show-Off
+2 Manifold Mouse
+4 Lightning Strike
+2 Shock
+4 Might of the Meek
+4 Monstrous Rage
+4 Blazing Crescendo
+4 Demonic Ruckus
+19 Mountain
+1 Mishra's Foundry
+[Sideboard]

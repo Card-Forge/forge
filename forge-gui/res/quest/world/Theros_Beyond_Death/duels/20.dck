@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=WereHyena
+Title=WereHyena
+Icon=WereHyena.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/Appollus##62880_-_Orzhov_Midrange_(Standard,_#943326).dck
+Deck Type=constructed
+
+[Main]
+2 Archon of Sun's Grace
+4 Aphemia, the Cacophony
+4 Murderous Rider
+4 Funeral Rites
+4 Agonizing Remorse
+1 The Birth of Meletis
+4 Elspeth Conquers Death
+4 Mire's Grasp
+2 Kaya, Orzhov Usurper
+2 Elspeth, Sun's Nemesis
+4 Liliana, Dreadhorde General
+1 Mobilized District
+1 Castle Locthwain
+2 Plains
+2 Castle Ardenvale
+2 Fabled Passage
+4 Godless Shrine
+4 Temple of Silence
+4 Scoured Barrens
+5 Swamp
+[Sideboard]
+1 Heliod's Intervention
+1 Kaya's Wrath
+2 Noxious Grasp
+2 Sorcerous Spyglass
+2 The Wanderer
+3 Duress
+4 Devout Decree

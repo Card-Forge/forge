@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=The Mac Nac Feegle
+Title=The Mac Nac Feegle
+Icon=The Mac Nac Feegle.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Andrew_Tenjum_-_Temur_Control_(Standard,_#764904).dck
+Deck Type=constructed
+
+[Main]
+4 Treasure Map
+2 Assassin's Trophy
+2 Cast Down
+2 Moment of Craving
+4 Vraska's Contempt
+2 Golden Demise
+2 Ritual of Soot
+2 Thought Erasure
+2 Walk the Plank
+2 Search for Azcanta
+4 The Eldest Reborn
+4 Karn, Scion of Urza
+2 Vraska, Relic Seeker
+4 Drowned Catacomb
+3 Hinterland Harbor
+3 Island
+4 Overgrown Tomb
+4 Swamp
+4 Watery Grave
+4 Woodland Cemetery
+[Sideboard]
+1 Cast Down
+2 Disdainful Stroke
+4 Duress
+1 Golden Demise
+2 Moment of Craving
+2 Negate
+1 Ritual of Soot
+2 Spell Pierce

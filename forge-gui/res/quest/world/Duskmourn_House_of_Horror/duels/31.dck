@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Scooby Doo
+Title=Scooby Doo
+Icon=Scooby Doo.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/Cabezadebolo_-_Domain_Overlords_(Standard,_#2250983).dck
+Deck Type=constructed
+
+[Main]
+2 Overlord of the Floodpits
+4 Overlord of the Hauntwoods
+3 Overlord of the Mistmoors
+3 Zur, Eternal Schemer
+4 Get Lost
+2 Scrollshift
+2 Pawpatch Formation
+1 Herd Migration
+2 Sunfall
+4 Leyline Binding
+3 Temporary Lockdown
+4 Up the Beanstalk
+3 Plains
+2 Floodfarm Verge
+1 Island
+2 Hedge Maze
+4 Hushwood Verge
+4 Lush Portico
+2 Meticulous Archive
+2 Forest
+2 Shadowy Backstreet
+3 Cavern of Souls
+1 Swamp
+[Sideboard]
+3 Negate
+4 Elspeth's Smite
+3 Ghost Vacuum
+1 Doppelgang
+2 Not on My Watch
+1 Pawpatch Formation
+1 Sunfall

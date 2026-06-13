@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Izzet-precon
+Title=Izzet-precon
+Icon=Izzet-precon.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/11_jaguar_11_-_Red_Deck_Wins_(Standard,_#765583).dck
+Deck Type=constructed
+
+[Main]
+1 Dismissive Pyromancer
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Goblin Chainwhirler
+4 Runaway Steam-Kin
+4 Viashino Pyromancer
+4 Lightning Strike
+3 Risk Factor
+4 Shock
+4 Wizard's Lightning
+3 The Flame of Keld
+21 Mountain
+[Sideboard]
+3 Experimental Frenzy
+3 Fight with Fire
+4 Lava Coil
+1 Mountain
+4 Shivan Fire

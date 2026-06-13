@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=StAnastacia
+Title=StAnastacia
+Icon=StAnastacia.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/Modern_Daily_#9370706/T4COTASTIC_-_UR_Eldrazi_(Modern,_#601149).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+4 Eldrazi Mimic
+4 Eldrazi Obligator
+4 Eldrazi Skyspawner
+4 Endless One
+4 Reality Smasher
+4 Thought-Knot Seer
+4 Vile Aggregate
+3 Dismember
+3 Cavern of Souls
+4 Eldrazi Temple
+4 Eye of Ugin
+4 Flooded Strand
+2 Ghost Quarter
+2 Island
+4 Shivan Reef
+2 Steam Vents
+[Sideboard]
+2 Chalice of the Void
+2 Echoing Truth
+2 Gut Shot
+3 Hurkyl's Recall
+2 Oblivion Sower
+2 Relic of Progenitus
+1 Spellskite

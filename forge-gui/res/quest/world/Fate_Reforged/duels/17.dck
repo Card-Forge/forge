@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jack Sparrow
+Title=Jack Sparrow
+Icon=Jack Sparrow.jpg
+Difficulty=Easy
+Description=Fate_Reforged/Standard_PTQ_#8046212/IwalkAlone_-_Abzan_Midrange_(Standard,_#190911).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Siege Rhino
+2 Tasigur, the Golden Fang
+4 Abzan Charm
+3 Bile Blight
+4 Hero's Downfall
+1 Murderous Cut
+2 Read the Bones
+4 Thoughtseize
+1 Ajani, Mentor of Heroes
+3 Elspeth, Sun's Champion
+1 Garruk, Apex Predator
+1 Ugin, the Spirit Dragon
+2 Caves of Koilos
+2 Forest
+3 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+4 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+3 Drown in Sorrow
+2 End Hostilities
+2 Erase
+4 Fleecemane Lion
+2 Glare of Heresy
+2 Sorin, Solemn Visitor

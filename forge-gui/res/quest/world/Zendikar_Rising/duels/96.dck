@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mystique
+Title=Mystique
+Icon=Mystique.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/Amplumnox_-_Burn_(Modern,_#1054844).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Goblin Guide
+4 Eidolon of the Great Revel
+3 Searing Blaze
+3 Lightning Helix
+4 Skullcrack
+4 Lightning Bolt
+4 Boros Charm
+3 Skewer the Critics
+3 Rift Bolt
+4 Lava Spike
+1 Fiery Islet
+2 Wooded Foothills
+2 Sacred Foundry
+3 Mountain
+4 Sunbaked Canyon
+4 Scalding Tarn
+4 Inspiring Vantage
+[Sideboard]
+2 Wear // Tear
+2 Deflecting Palm
+2 Roiling Vortex
+3 Relic of Progenitus
+3 Path to Exile
+3 Kor Firewalker

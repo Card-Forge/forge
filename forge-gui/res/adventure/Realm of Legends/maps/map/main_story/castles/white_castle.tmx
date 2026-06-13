@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="91">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="98">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -92,9 +92,11 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis&quot;, &quot;Arcane Melee&quot;, &quot;Mirari&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis&quot;, &quot;Arcane Melee&quot;]}"/>
     <property name="enemy" value="Jeleva"/>
     <property name="pursueRange" type="int" value="30"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -111,6 +113,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Opulent Palace&quot;, &quot;Reaper of the Wilds&quot;, &quot;Tam, Mindful First-Year&quot;
 ]}</property>
     <property name="enemy" value="Damia"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -128,6 +132,8 @@
 ]}</property>
     <property name="enemy" value="Thrasios and Vial Smasher"/>
     <property name="pursueRange" type="int" value="30"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -144,6 +150,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Savage Lands&quot;, &quot;Soul of Windgrace&quot;, &quot;Valakut Exploration&quot;
 ]}</property>
     <property name="enemy" value="Lord Windgrace"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -160,6 +168,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Frontier Bivouac&quot;, &quot;Hexing Squelcher|ECL&quot;, &quot;Rattleclaw Mystic&quot;, &quot;Aven Courier&quot;
 ]}</property>
     <property name="enemy" value="Animar"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -214,6 +224,98 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="mythicShopList" value=""/>
     <property name="rareShopList" value=""/>
     <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../../common/maps/obj/enemy.tx" x="83.6667" y="606">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Savage Lands&quot;, &quot;Valakut Exploration&quot;
+]}</property>
+    <property name="enemy" value="Lord Windgrace"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../../common/maps/obj/enemy.tx" x="83.6667" y="405">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Frontier Bivouac&quot;, &quot;Hexing Squelcher|ECL&quot;, &quot;Aven Courier&quot;
+]}</property>
+    <property name="enemy" value="Animar"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../../common/maps/obj/enemy.tx" x="363.667" y="229">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Command Tower&quot;, &quot;Fireglass Mentor&quot;, &quot;Biomancer's Familiar&quot;
+]}</property>
+    <property name="enemy" value="Thrasios and Vial Smasher"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../../common/maps/obj/enemy.tx" x="671.333" y="409.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Opulent Palace&quot;, &quot;Tam, Mindful First-Year&quot;
+]}</property>
+    <property name="enemy" value="Damia"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../../common/maps/obj/enemy.tx" x="675.333" y="596">
+   <properties>
+    <property name="deckOverride" value=""/>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis&quot;, &quot;Arcane Melee&quot;, &quot;Mirari&quot;]}"/>
+    <property name="enemy" value="Jeleva"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

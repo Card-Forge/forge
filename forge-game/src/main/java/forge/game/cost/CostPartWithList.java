@@ -35,7 +35,14 @@ public abstract class CostPartWithList extends CostPart {
 
     private boolean intrinsic = true;
 
-    protected final CardZoneTable table = new CardZoneTable();
+    // transient: only used server-side during cost payment, never needed by the client.
+    // CardZoneTable is not Serializable and must not enter the network serialization graph.
+    protected transient CardZoneTable table = new CardZoneTable();
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        table = new CardZoneTable();
+    }
 
     public final CardCollectionView getLKIList() {
         return lkiList;

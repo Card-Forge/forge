@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gambit
+Title=Gambit
+Icon=Gambit.jpg
+Difficulty=Easy
+Description=Kaladesh/Gpt__Madrid_El_Nucli/Aleix_Andreu_-_Mardu_Vehicles_(Standard,_#654416).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Inventor's Apprentice
+3 Pia Nalaar
+4 Scrapheap Scrounger
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+2 Cultivator's Caravan
+4 Smuggler's Copter
+4 Harnessed Lightning
+2 Unlicensed Disintegration
+2 Gideon, Ally of Zendikar
+4 Aether Hub
+4 Concealed Courtyard
+4 Inspiring Vantage
+5 Mountain
+1 Needle Spires
+4 Plains
+1 Shambling Vent
+[Sideboard]
+2 Fragmentize
+3 Galvanic Bombardment
+2 Gideon, Ally of Zendikar
+2 Gideon, Ally of Zendikar
+4 Selfless Spirit
+2 Stasis Snare
+2 Weaver of Lightning

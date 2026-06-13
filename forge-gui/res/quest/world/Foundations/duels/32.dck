@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/James_Hamilton_-_Gruul_Prowess_(Standard,_#2272939).dck
+Deck Type=constructed
+
+[Main]
+4 Slickshot Show-Off
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Monastery Swiftspear
+4 Questing Druid
+2 Two-Headed Hunter
+4 Monstrous Rage
+4 Shock
+4 Burst Lightning
+4 Boltwave
+2 Innkeeper's Talent
+4 Copperline Gorge
+2 Restless Ridgeline
+1 Rockface Village
+5 Mountain
+4 Thornspire Verge
+4 Karplusan Forest
+[Sideboard]
+3 Torch the Tower
+3 Pawpatch Formation
+2 Case of the Crimson Pulse
+2 Pyroclasm
+3 Witchstalker Frenzy
+2 Ghost Vacuum

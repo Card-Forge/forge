@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Aurelia
+Title=Aurelia
+Icon=Aurelia.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Elias_Martins_-_Izzet_Prowess_(Modern,_#1221514)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Sprite Dragon
+4 Monastery Swiftspear
+4 Stormwing Entity
+4 Stormchaser Mage
+1 Shadowspear
+1 Vapor Snag
+2 Mutagenic Growth
+4 Unholy Heat
+4 Lightning Bolt
+4 Manamorphose
+2 Expressive Iteration
+2 Finale of Promise
+4 Serum Visions
+3 Seal of Removal
+1 Scalding Tarn
+2 Steam Vents
+4 Sulfur Falls
+5 Island
+6 Mountain
+[Sideboard]
+1 Soul-Guide Lantern
+2 Tormod's Crypt
+2 Alpine Moon
+2 Spell Pierce
+2 Abrade
+2 Test of Talents
+2 Prismari Command
+2 Mystical Dispute

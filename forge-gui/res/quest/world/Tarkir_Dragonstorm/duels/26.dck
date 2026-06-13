@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/Hongo_Yuichiro_-_WUR_Control_(Standard,_#2440102).dck
+Deck Type=constructed
+
+[Main]
+2 Beza, the Bounding Spring
+2 Marang River Regent
+2 Shiko, Paragon of the Way
+2 Urabrask's Forge
+2 Negate
+4 Get Lost
+4 Ride's End
+4 Day of Judgment
+2 Song of Totentanz
+4 Stock Up
+3 Temporary Lockdown
+3 Elspeth, Storm Slayer
+3 Plains
+3 Island
+3 Adarkar Wastes
+2 Elegant Parlor
+4 Meticulous Archive
+2 Fountainport
+4 Floodfarm Verge
+4 Sunbillow Verge
+1 Maelstrom of the Spirit Dragon
+[Sideboard]
+1 Negate
+2 Wilt-Leaf Liege
+1 Temporary Lockdown
+2 The Stone Brain
+3 Kutzil's Flanker
+3 Tishana's Tidebinder
+3 Overlord of the Mistmoors

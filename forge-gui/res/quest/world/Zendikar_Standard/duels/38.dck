@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=LeChuck
+Title=LeChuck
+Icon=LeChuck.jpg
+Difficulty=Medium
+Description=Zendikar/US_States_2009_-_South_Carolina/Ali_Aintrazi_-_Jund_(Standard,_#3258).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+3 Broodmate Dragon
+3 Siege-Gang Commander
+4 Sprouting Thrinax
+2 Bituminous Blast
+4 Lightning Bolt
+2 Terminate
+4 Blightning
+4 Maelstrom Pulse
+3 Rampant Growth
+2 Garruk Wildspeaker
+4 Dragonskull Summit
+3 Forest
+3 Mountain
+4 Rootbound Crag
+4 Savage Lands
+3 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Goblin Ruinblaster
+2 Jund Charm
+3 Malakir Bloodwitch
+2 Mind Rot
+2 Pyroclasm

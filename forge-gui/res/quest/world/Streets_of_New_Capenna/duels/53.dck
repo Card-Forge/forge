@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Joe Kidd
+Title=Joe Kidd
+Icon=Joe Kidd.jpg
+Difficulty=Hard
+Description=./Modern/Streets_of_New_Capenna/Jake_Beardsley_-_Grixis_Archon_(Modern,_#1474253).dck
+Deck Type=constructed
+
+[Main]
+4 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+2 Lightning Bolt
+2 Fatal Push
+3 Prismari Command
+4 Tainted Indulgence
+1 Transmogrify
+4 Thoughtseize
+4 Persist
+4 Indomitable Creativity
+4 Hard Evidence
+1 Xander's Lounge
+1 Mountain
+2 Steam Vents
+2 Blood Crypt
+3 Scalding Tarn
+3 Wooded Foothills
+4 Dwarven Mine
+4 Bloodstained Mire
+4 Arid Mesa
+[Sideboard]
+1 Spell Pierce
+1 Pyroclasm
+1 Mystical Dispute
+1 Ashiok, Dream Render
+1 Inquisition of Kozilek
+1 Emrakul, the Aeons Torn
+2 Alpine Moon
+2 Collective Brutality
+2 Flusterstorm
+3 Unmoored Ego

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="120">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="122">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -23,7 +23,7 @@
  </layer>
  <layer id="7" name="Dirt Above" width="30" height="25">
   <data encoding="base64" compression="zlib">
-   eJytlktOxDAMhrOlHbFBLY9DsJ2CukKCO7CHYcEFEBvmGuV1DU4AN6BMB8GCkxCT/KrrSdKkwtKvjqqJP9txEytlrM6VWmndZ0YPmZpk51tKNZ71jfXd5f27d/271XrW7yv9PM4317kMDOJBc5uDZBPjKTOSRmsqzzoXc21jBBP+Kf4YHzImWhfKGcxH/fxw/I+zu0g+fB4FuIjPxXTlEJN7nQ/3mOpXzox2tQ7z4X6OWWzda0/9OqqD1r5mH8ziuZzt2zvUWMZGTGLd5EYp+fJ8XDnzXuGxke/C1vlLv//ONplXO73GcpZ9w+vLv0HyT/l+2jgLVuOTiyGTtCzDORMXZwj5p3iwp7xfkdctixNcyST9FOGcyaev15qs/+7AoF7m3FWRzpUxSLbsP7DPFloeXiqXzPXt8LqDTVyyEDuVO3YXcO7f78g6++4ncFHnt2uthUeXPRd5nwrdlX7fsM7euaEz3mehPLi5zipitRFnvIvpujtets3zdW8Yl7yTU1mYR2Lqw1lj53OIubb3VDXCbDyxye/jP5nwj3kpdIdLhuyVeQKTs1N6xjWTYeZrE+uUYlPmoimGeZbPzHymTZkJU+wXnEHSBg==
+   eJytlk1OwzAQhb0lrtigtIUzVGxASkFZIcEd2ENZcIGKDVwj/F2DE8ANCE0RLDgJM9ijTCa2Y1eM9JQobeabN3ZsK2Wi1EqtQPeZ0UOmNorzLaUmM6Wms/5vlc3d6PbZO9zXoGd4Pofrse6/54rK1og80gEwD2f92pHxlBnJKLThovchz8hc2xqJSfmx/pgcsiZ8L+SZmI9w/XD8j7ObSD7lPApwqT4X0+Uhxnupu2OM/RuPjCagfd0dz6GI7Xvp6V+DfQDtAntvFM/lbN/YUY9lbchE1lIbpfjlflye+VzhtWHu3Pb5C55/Z33m1U6rIc9y3vD+Fqw2zI9+P22dOevxyUWXibobhz0jl9YQzI/10Jjy+Uq+blidxJVM1E8e9ow5fXOtytrvjhg4lzl3ladzZQ2SLecfsc8WIA8vlYvh+nZ434mNXIwQO5U7tBdw7t99ZJ9p7/Bxqc9v16CFR5ctl3yfCt2O/bkpGrvnhtZ4X4R88HCtVciqI9Z4F9O1d7xsm+vrtFtXITynsug8EtMfzhpan0PMtd2n5gPMylOb/D7+k0n56bwU2sMlQ86VIoHJ2SlzRo4/5aitUvqUEpucizYJOs/yMzM/06acCVPiF64c0N8=
   </data>
  </layer>
  <layer id="8" name="Lava" width="30" height="25">
@@ -115,7 +115,7 @@
   <object id="88" template="../../../../common/maps/obj/collision.tx" x="-2.98" y="-16" width="483.96" height="16"/>
   <object id="89" template="../../../../common/maps/obj/collision.tx" x="479.5" y="-16.472" width="16" height="434.944"/>
   <object id="90" template="../../../../common/maps/obj/collision.tx" x="-17" y="-15.472" width="16" height="434.944"/>
-  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="111" y="81.5">
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="110.461" y="80.9613">
    <properties>
     <property name="defeatDialog">[
 	{
@@ -128,6 +128,8 @@
 	]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Torch Courier|GRN&quot;, &quot;Goblin Burrows|ONS&quot;, &quot;Goblinslide|KTK&quot;, &quot;Goblin Influx Array|YDMU&quot; ] }"/>
     <property name="enemy" value="Krenko"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>
    </properties>
@@ -241,5 +243,34 @@ EXCEPT THE MEAT PIE LADY!&quot;,
   <object id="116" template="../../../../common/maps/obj/collision.tx" x="398.145" y="162.75" width="31.71" height="10.5"/>
   <object id="118" template="../../../../common/maps/obj/collision.tx" x="341.145" y="162" width="43.71" height="13"/>
   <object id="119" template="../../../../common/maps/obj/collision.tx" x="419.145" y="166.75" width="9.71" height="36"/>
+  <object id="120" template="../../../../common/maps/obj/enemy.tx" x="110.505" y="80.3403">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Krekno stumbles back from the force of your final strike, landing against the mound of dead goblins that piled up during your battle.
+
+'Looks like da mob life finally caught up wit' me...' With that, his body falls limp and lifeless.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Torch Courier|GRN&quot;, &quot;Goblin Burrows|ONS&quot;, &quot;Goblinslide|KTK&quot; ] }"/>
+    <property name="enemy" value="Krenko"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="121" template="../../../../common/maps/obj/shop.tx" x="336.204" y="38.8634">
+   <properties>
+    <property name="commonShopList" value="Goblin"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

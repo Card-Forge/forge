@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=LeChuck
+Title=LeChuck
+Icon=LeChuck.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Koga_Ichiro_-_Human_Aggro_(Modern,_#1221200).dck
+Deck Type=constructed
+
+[Main]
+2 Kitesail Freebooter
+2 Adeline, Resplendent Cathar
+2 Phantasmal Image
+3 Thalia, Guardian of Thraben
+4 Werewolf Pack Leader
+4 Mantis Rider
+4 Meddling Mage
+4 Noble Hierarch
+4 Reflector Mage
+4 Thalia's Lieutenant
+4 Champion of the Parish
+4 Aether Vial
+1 Botanical Sanctum
+1 Plains
+1 Waterlogged Grove
+4 Ancient Ziggurat
+4 Cavern of Souls
+4 Horizon Canopy
+4 Unclaimed Territory
+[Sideboard]
+1 Magus of the Moon
+1 Lavinia, Azorius Renegade
+1 Chalice of the Void
+1 Cursed Totem
+1 Damping Sphere
+2 Dismember
+2 Deputy of Detention
+2 Outland Liberator
+2 Containment Priest
+2 Relic of Progenitus

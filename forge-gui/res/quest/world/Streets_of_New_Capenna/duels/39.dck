@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Flandre Scarlet
+Title=Flandre Scarlet
+Icon=Flandre Scarlet.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/GELY_Baptiste_-_Grixis_Vampires_(Standard,_#1382830).dck
+Deck Type=constructed
+
+[Main]
+1 Anje, Maid of Dishonor
+1 Tenacious Underdog
+2 Bloodthirsty Adversary
+2 Evelyn, the Covetous
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+1 Spell Pierce
+1 Disdainful Stroke
+2 Infernal Grasp
+4 Voltage Surge
+1 Soul Transfer
+1 Duress
+2 The Meathook Massacre
+1 Sorin the Mirthless
+3 Kaito Shizuki
+1 Takenuma, Abandoned Mire
+1 Shipwreck Marsh
+1 Swamp
+1 Mountain
+2 Hive of the Eye Tyrant
+2 Haunted Ridge
+3 Stormcarved Coast
+3 Clearwater Pathway
+4 Xander's Lounge
+4 Blightstep Pathway
+4 Riverglide Pathway
+[Sideboard]
+1 The Meathook Massacre
+1 Soul Transfer
+1 Go Blank
+1 Abrade
+1 Negate
+1 Reckoner Bankbuster
+1 Duress
+1 Mind Flayer
+2 Disdainful Stroke
+2 Annul
+3 Ray of Enfeeblement

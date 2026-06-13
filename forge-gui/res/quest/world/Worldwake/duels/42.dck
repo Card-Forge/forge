@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Wilma Flintstone
+Title=Wilma Flintstone
+Icon=Wilma Flintstone.jpg
+Difficulty=Medium
+Description=Worldwake/National_Qualifier_2010_-_Bielsko-Biala_-_Poland/Jacek_O&#347;mia&#322;owski_-_Vampires_(Standard,_#2092).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodghast
+3 Gatekeeper of Malakir
+3 Malakir Bloodwitch
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+4 Lightning Bolt
+4 Terminate
+4 Blightning
+2 Earthquake
+1 Grim Discovery
+4 Sign in Blood
+2 Akoum Refuge
+4 Dragonskull Summit
+4 Lavaclaw Reaches
+4 Marsh Flats
+9 Swamp
+[Sideboard]
+4 Anathemancer
+3 Deathmark
+3 Duress
+3 Thought Hemorrhage

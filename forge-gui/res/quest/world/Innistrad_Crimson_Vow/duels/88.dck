@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Aragorn
+Title=Aragorn
+Icon=Aragorn.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/Kyle_White_-_Puresteel_Paladin_(Modern,_#1242094)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Hushbringer
+3 Memnite
+4 Esper Sentinel
+4 Giver of Runes
+4 Ornithopter
+4 Puresteel Paladin
+4 Stoneforge Mystic
+1 Shadowspear
+2 Nettlecyst
+3 Springleaf Drum
+4 Colossus Hammer
+1 Steelshaper's Gift
+4 Sigarda's Aid
+4 Urza's Saga
+2 Horizon Canopy
+3 Inkmoth Nexus
+4 Silent Clearing
+8 Plains
+[Sideboard]
+1 Pithing Needle
+1 Lantern of the Lost
+1 Defense Grid
+2 Sanctifier en-Vec
+2 Cathar Commando
+2 Hushbringer
+3 Path to Exile
+3 Silence

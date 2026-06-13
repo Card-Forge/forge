@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Shade
+Title=The Shade
+Icon=The Shade.jpg
+Difficulty=Medium
+Description=Kaladesh/SCG_Players'_Championship_Roanoke/Todd_Anderson_-_G-B_Aggro_(Standard,_#659006).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Catacomb Sifter
+2 Gnarlwood Dryad
+4 Grim Flayer
+3 Kalitas, Traitor of Ghet
+4 Servant of the Conduit
+4 Verdurous Gearhulk
+4 Smuggler's Copter
+3 Blossoming Defense
+3 Grasp of Darkness
+2 Traverse the Ulvenwald
+2 Dead Weight
+1 Liliana, the Last Hope
+4 Blooming Marsh
+1 Evolving Wilds
+8 Forest
+4 Hissing Quagmire
+7 Swamp
+[Sideboard]
+1 Dead Weight
+1 Flaying Tendrils
+2 Fleetwheel Cruiser
+1 Gnarlwood Dryad
+1 Liliana, the Last Hope
+3 Natural State
+2 Skysovereign, Consul Flagship
+4 Transgress the Mind

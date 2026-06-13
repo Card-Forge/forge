@@ -1,6 +1,7 @@
 package forge.screens.match;
 
 import java.awt.AWTEvent;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -137,12 +138,20 @@ public class GameLogPanel extends JPanel {
         addLogEntry(text, null, null);
     }
 
+    public void addLogEntry(final String text, final java.awt.Color foreground) {
+        addLogEntry(text, null, null);
+        if (foreground != null) {
+            final Component[] kids = scrollablePanel.getComponents();
+            if (kids.length > 0) kids[kids.length - 1].setForeground(foreground);
+        }
+    }
+
     public void addLogEntry(final String text, final CardView card, final Iterable<PlayerView> viewers) {
         final boolean useAlternateBackColor = (scrollablePanel.getComponents().length % 2 == 0);
         final boolean showCardImages = FModel.getPreferences().getPrefBoolean(FPref.UI_LOG_SHOW_CARD_IMAGES);
 
         final JTextArea tar;
-        if (card != null && showCardImages && viewers != null) {
+        if (card != null && showCardImages) {
             tar = new LogEntryTextArea(text, useAlternateBackColor, card, viewers);
         } else {
             tar = createNewLogEntryJTextArea(text, useAlternateBackColor);

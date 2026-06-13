@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sherlock Holmes
+Title=Sherlock Holmes
+Icon=Sherlock Holmes.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/2011_Regionals_-_Dallas,_Texas/Ed_Novak_-_Eldrazi_Green_(Standard,_#13289).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Emrakul, the Aeons Torn
+4 Joraga Treespeaker
+2 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+1 Terastodon
+4 Ulamog, the Infinite Gyre
+2 Wall of Tanglecord
+4 Summoning Trap
+4 Explore
+3 Growth Spasm
+4 Eldrazi Temple
+1 Eye of Ugin
+13 Forest
+3 Khalni Garden
+1 Mystifying Maze
+4 Tectonic Edge
+1 Verdant Catacombs
+[Sideboard]
+1 Blightsteel Colossus
+4 Contagion Clasp
+4 Obstinate Baloth
+2 Tumble Magnet
+2 Wurmcoil Engine

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Robot11
+Title=Robot11
+Icon=Picard.jpg
+Difficulty=Very Hard
+Description=Temur Energy 
+Deck Type=constructed
+
+[Main]
+4 Bristling Hydra
+1 Carnage Tyrant
+3 Glorybringer
+4 Longtusk Cub
+4 Rogue Refiner
+4 Servant of the Conduit
+3 Whirler Virtuoso
+1 Abrade
+2 Censor
+4 Harnessed Lightning
+2 Magma Spray
+4 Attune with Aether
+2 Chandra, Torch of Defiance
+4 Aether Hub
+4 Botanical Sanctum
+4 Forest
+1 Island
+2 Mountain
+3 Rootbound Crag
+2 Sheltered Thicket
+2 Spirebluff Canal
+[Sideboard]
+1 Abrade
+2 Aethersphere Harvester
+2 Chandra's Defeat
+1 Confiscation Coup
+1 Essence Scatter
+1 Jace's Defeat
+2 Negate
+1 Nissa, Vital Force
+2 Prowling Serpopard
+1 Struggle // Survive
+1 Vizier of Many Faces

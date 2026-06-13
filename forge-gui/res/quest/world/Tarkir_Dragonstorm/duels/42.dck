@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Kojak
+Title=Kojak
+Icon=Kojak.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/HouseOfManaMTG_-_Abzan_Pixie_(Standard,_#2455978).dck
+Deck Type=constructed
+
+[Main]
+2 Overlord of the Balemurk
+2 Loran of the Third Path
+4 Nurturing Pixie
+4 Severance Priest
+1 Sheoldred, the Apocalypse
+4 Skirmish Rhino
+4 Sunpearl Kirin
+4 Yathan Roadwatcher
+1 Grim Bauble
+1 Maelstrom Pulse
+4 Hopeless Nightmare
+2 Momentum Breaker
+3 Nowhere to Run
+4 Bleachbone Verge
+1 Plains
+4 Concealed Courtyard
+3 Brushland
+4 Razorverge Thicket
+2 Underground Mortuary
+2 Swamp
+4 Blooming Marsh
+[Sideboard]
+2 Anoint with Affliction
+2 Deep-Cavern Bat
+2 Dreams of Steel and Oil
+1 Glissa Sunslayer
+1 Ghost Vacuum
+2 Duress
+1 Grim Bauble
+2 Kutzil's Flanker
+1 Temporary Lockdown
+1 Sheoldred, the Apocalypse

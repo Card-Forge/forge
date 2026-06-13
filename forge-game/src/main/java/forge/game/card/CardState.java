@@ -30,6 +30,7 @@ import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.card.CardView.CardStateView;
+import forge.game.cost.Cost;
 import forge.game.keyword.IKeywordsChange;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
@@ -373,8 +374,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         view.updateAttractionLights(this);
     }
 
-    public final Collection<KeywordInterface> getCachedKeywords() {
-        return cachedKeywords.getValues();
+    public final KeywordCollection getCachedKeywords() {
+        return cachedKeywords;
     }
 
     public final Collection<KeywordInterface> getCachedKeyword(final Keyword keyword) {
@@ -403,10 +404,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         for (KeywordInterface k : intrinsicKeyword0) {
             intrinsicKeywords.insert(k.copy(card, lki));
         }
-        updateKeywordsCache();
-    }
-
-    public final void updateKeywordsCache() {
         card.updateKeywordsCache(this);
     }
 
@@ -444,12 +441,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
         }
         return changed;
-    }
-
-    public void addIntrinsicKeywords(Collection<KeywordInterface> intrinsicKeywords2) {
-        for (KeywordInterface inst : intrinsicKeywords2) {
-            intrinsicKeywords.insert(inst);
-        }
     }
 
     public final boolean removeIntrinsicKeyword(final String s) {
@@ -628,12 +619,11 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         // this happens if it's transformed backside (e.g. Disturbed)
         if (type.isAura()) {
             return getAuraSpell();
-        } else {
-            if (permanentAbility == null) {
-                permanentAbility = new SpellPermanent(card, this);
-            }
-            return permanentAbility;
         }
+        if (permanentAbility == null) {
+            permanentAbility = new SpellPermanent(card, this);
+        }
+        return permanentAbility;
     }
 
     public final SpellAbility getAuraSpell() {
@@ -754,6 +744,12 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
             result.add(defenseRep);
         }
+        if (type.isSaga() && !hasKeyword(Keyword.READ_AHEAD)) {
+            if (sagaRep == null) {
+                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, true);
+            }
+            result.add(sagaRep);
+        }
 
         card.updateReplacementEffects(result, this, rulesHost);
 
@@ -762,12 +758,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         }
 
         // below are global rules
-        if (type.hasSubtype("Saga") && !hasKeyword(Keyword.READ_AHEAD)) {
-            if (sagaRep == null) {
-                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, false);
-            }
-            result.add(sagaRep);
-        }
         if (type.hasSubtype("Adventure")) {
             if (this.adventureRep == null) {
                 adventureRep = CardFactoryUtil.setupAdventureAbility(this);
@@ -1044,7 +1034,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     public void resetOriginalHost(Card oldHost) {
         for (final CardTraitBase ctb : getTraits()) {
-            if (ctb.isIntrinsic() && ctb.getOriginalHost() != null && ctb.getOriginalHost().equals(oldHost)) {
+            if (ctb.isIntrinsic() && oldHost.equals(ctb.getOriginalHost())) {
                 // only update traits with undesired host or SVar lookup would fail
                 ctb.setCardState(this);
             }
@@ -1083,13 +1073,13 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     public SpellAbility getManifestUp() {
         if (this.manifestUp == null) {
-            manifestUp = CardFactoryUtil.abilityTurnFaceUp(this, "ManifestUp", "Unmanifest");
+            manifestUp = CardFactoryUtil.abilityTurnFaceUp(this, new Cost(this.getManaCost(), true), "ManifestUp", "Unmanifest", "manacost");
         }
         return manifestUp;
     }
     public SpellAbility getCloakUp() {
         if (this.cloakUp == null) {
-            cloakUp = CardFactoryUtil.abilityTurnFaceUp(this, "CloakUp", "Uncloak");
+            cloakUp = CardFactoryUtil.abilityTurnFaceUp(this, new Cost(this.getManaCost(), true), "CloakUp", "Uncloak", "manacost");
         }
         return cloakUp;
     }
@@ -1114,5 +1104,14 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     @Override
     public String getTranslatedName() {
         return CardTranslation.getTranslatedName(this);
+    }
+
+    public boolean isWorthy() {
+        CardTypeView type = getTypeWithChanges();
+        if (!type.isCreature() || !type.isLegendary() || type.hasSubtype("Villain")) {
+            return false;
+        }
+        ColorSet color = getCard().getColor(this);
+        return color.hasRed() || color.hasWhite();
     }
 }

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Robot56
+Title=Robot56
+Icon=Tweedledum.jpg
+Difficulty=Medium
+Description=Mono Black 
+Deck Type=constructed
+
+[Main]
+2 Ammit Eternal
+4 Bone Picker
+4 Dread Wanderer
+4 Gifted Aetherborn
+4 Night Market Lookout
+4 Ruin Raider
+4 Scrapheap Scrounger
+2 Vicious Conquistador
+4 Heart of Kiran
+4 Fatal Push
+2 Supernatural Stamina
+2 Walk the Plank
+4 Ifnir Deadlands
+16 Swamp
+[Sideboard]
+3 Aethersphere Harvester
+2 Duress
+3 Harsh Scrutiny
+1 Key to the City
+2 Lost Legacy
+2 Supernatural Stamina
+2 Walk the Plank

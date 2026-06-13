@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Robot90
+Title=Robot90
+Icon=Reactor Meltdown.jpg
+Difficulty=Easy
+Description=Dimir 
+Deck Type=constructed
+
+[Main]
+4 Gifted Aetherborn
+1 Gonti, Lord of Luxury
+4 Kitesail Freebooter
+3 The Scarab God
+2 Torrential Gearhulk
+1 Commit // Memory
+1 Essence Extraction
+2 Essence Scatter
+4 Fatal Push
+2 Glimmer of Genius
+3 Supreme Will
+2 Vraska's Contempt
+4 Chart a Course
+1 Search for Azcanta
+4 Drowned Catacomb
+4 Evolving Wilds
+4 Fetid Pools
+1 Field of Ruin
+5 Island
+8 Swamp
+[Sideboard]
+2 Contraband Kingpin
+4 Duress
+1 Essence Extraction
+1 Gonti, Lord of Luxury
+4 Negate
+1 River's Rebuke
+1 Search for Azcanta
+1 Vraska's Contempt

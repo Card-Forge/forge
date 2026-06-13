@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Redwall
+Title=Redwall
+Icon=Redwall.jpg
+Difficulty=Easy
+Description=Fate_Reforged/SCG_Invitational_Qualifier_Carbondale/Austin_Holcomb_-_Abzan_Midrange_(Standard,_#218928).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Fleecemane Lion
+4 Siege Rhino
+2 Sylvan Caryatid
+1 Tasigur, the Golden Fang
+4 Warden of the First Tree
+2 Whisperwood Elemental
+4 Abzan Charm
+2 Hero's Downfall
+2 Murderous Cut
+2 Mastery of the Unseen
+2 Elspeth, Sun's Champion
+1 Garruk, Apex Predator
+2 Sorin, Solemn Visitor
+2 Caves of Koilos
+3 Forest
+2 Llanowar Wastes
+3 Plains
+4 Sandsteppe Citadel
+1 Swamp
+2 Temple of Malady
+1 Temple of Plenty
+1 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Back to Nature
+3 Bile Blight
+2 Drown in Sorrow
+2 End Hostilities
+1 Hornet Queen
+2 Stain the Mind
+2 Thoughtseize

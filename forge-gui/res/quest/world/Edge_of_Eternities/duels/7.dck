@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Buffy
+Title=Buffy
+Icon=Buffy.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/DAISUKE_KISHI_-_Izzet_Cauldron_(Standard,_#2638052).dck
+Deck Type=constructed
+
+[Main]
+4 Steamcore Scholar
+4 Fear of Missing Out
+4 Marauding Mako
+1 Tersa Lightshatter
+4 Vivi Ornitier
+2 Quantum Riddler
+4 Agatha's Soul Cauldron
+3 Torch the Tower
+3 Into the Flood Maw
+4 Winternight Stories
+1 Wild Ride
+4 Proft's Eidetic Memory
+5 Island
+5 Mountain
+4 Spirebluff Canal
+2 Thundering Falls
+2 Soulstone Sanctuary
+4 Riverpyre Verge
+[Sideboard]
+2 Spell Pierce
+2 Abrade
+2 Disdainful Stroke
+2 Annul
+2 Obliterating Bolt
+2 Broadside Barrage
+1 Marang River Regent
+2 Fire Magic

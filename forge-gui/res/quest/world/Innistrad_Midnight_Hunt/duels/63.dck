@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Demon
+Title=Demon
+Icon=Demon.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/jpintermtg_-_Orzhov_Hammer_(Modern,_#1228011)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Ingenious Smith
+4 Puresteel Paladin
+4 Esper Sentinel
+4 Memnite
+4 Ornithopter
+4 Stoneforge Mystic
+1 Shadowspear
+1 Cranial Plating
+1 Nihil Spellbomb
+4 Springleaf Drum
+4 Colossus Hammer
+4 Urza's Saga
+4 Sigarda's Aid
+1 Flooded Strand
+1 Godless Shrine
+1 Marsh Flats
+3 Inkmoth Nexus
+4 Concealed Courtyard
+4 Silent Clearing
+4 Plains
+[Sideboard]
+1 Cathar Commando
+1 Pithing Needle
+1 Lurrus of the Dream-Den
+2 Knight of Malice
+2 Path to Exile
+2 Prismatic Ending
+2 Void Mirror
+4 Thoughtseize

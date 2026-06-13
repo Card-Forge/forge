@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Bilbo Baggins
+Title=Bilbo Baggins
+Icon=Bilbo Baggins.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/2016_SCG_Classic_Standard_-_NJ_-_8-21/Kent_Ketter_-_Bant_Company_(Standard,_#636830).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+3 Duskwatch Recruiter
+3 Eldrazi Displacer
+2 Nissa, Vastwood Seer
+4 Reflector Mage
+4 Selfless Spirit
+4 Sylvan Advocate
+4 Tireless Tracker
+4 Collected Company
+3 Dromoka's Command
+1 Ojutai's Command
+4 Evolving Wilds
+3 Forest
+3 Fortified Village
+1 Island
+2 Lumbering Falls
+5 Plains
+3 Prairie Stream
+1 Wastes
+4 Yavimaya Coast
+[Sideboard]
+2 Clash of Wills
+2 Learn from the Past
+2 Negate
+3 Spell Queller
+1 Stasis Snare
+2 Tamiyo, Field Researcher
+2 Tragic Arrogance

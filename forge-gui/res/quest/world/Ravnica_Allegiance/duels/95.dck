@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Saladin
+Title=Saladin
+Icon=Saladin.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Harlie_Smale_-_UW_Spirits_(Modern,_#782498).dck
+Deck Type=constructed
+
+[Main]
+3 Deputy of Detention
+4 Drogskol Captain
+4 Mausoleum Wanderer
+4 Rattlechains
+1 Remorseful Cleric
+4 Spell Queller
+3 Supreme Phantom
+3 Thalia, Guardian of Thraben
+4 Aether Vial
+3 Path to Exile
+5 Island
+2 Plains
+2 Cavern of Souls
+4 Flooded Strand
+2 Hallowed Fountain
+1 Horizon Canopy
+1 Moorland Haunt
+2 Mutavault
+4 Seachrome Coast
+[Sideboard]
+2 Damping Sphere
+2 Rest in Peace
+2 Stony Silence
+1 Eidolon of Rhetoric
+2 Blessed Alliance
+2 Disdainful Stroke
+1 Dispel
+1 Forsake the Worldly
+1 Settle the Wreckage
+1 Ephara, God of the Polis

@@ -1,0 +1,8 @@
+Name:Pym Particles
+ManaCost:U
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | KW$ Vigilance | SubAbility$ DBUnblockable | SpellDescription$ Target creature gains vigilance until end of turn and can't be blocked this turn.
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SubAbility$ DBDraw
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:Target creature gains vigilance until end of turn and can't be blocked this turn.\nDraw a card.

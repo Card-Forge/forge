@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Crows in the Field
+Title=Crows in the Field
+Icon=Crows in the Field.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/Bsk_Hercules_-_Sultai_Control_(Modern,_#1084227).dck
+Deck Type=constructed
+
+[Main]
+4 Uro, Titan of Nature's Wrath
+1 Spell Snare
+1 Aether Gust
+2 Abrupt Decay
+3 Cryptic Command
+3 Force of Negation
+3 Mana Leak
+4 Archmage's Charm
+4 Fatal Push
+1 Bloodchief's Thirst
+3 Thoughtseize
+3 Jace, the Mind Sculptor
+1 Swamp
+1 River of Tears
+1 Island
+1 Zagoth Triome
+1 Snow-Covered Forest
+2 Field of Ruin
+2 Flooded Strand
+2 Mystic Sanctuary
+2 Breeding Pool
+2 Field of the Dead
+2 Watery Grave
+3 Snow-Covered Island
+4 Misty Rainforest
+4 Polluted Delta
+[Sideboard]
+1 Bloodchief's Thirst
+1 Damnation
+1 Nature's Claim
+1 Thoughtseize
+1 Assassin's Trophy
+1 Engineered Explosives
+2 Ashiok, Dream Render
+2 Veil of Summer
+2 Mystical Dispute
+3 Aether Gust

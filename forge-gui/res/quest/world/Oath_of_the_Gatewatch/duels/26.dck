@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Rakdos
+Title=Rakdos
+Icon=Rakdos.jpg
+Difficulty=Easy
+Description=Oath_of_the_Gatewatch/SCG_Super_IQ_Columbus/Corey_Castelli_-_Four-Color_Midrange_(Standard,_#579040).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Bounding Krasis
+2 Den Protector
+3 Jace, Vryn's Prodigy
+4 Mantis Rider
+4 Rattleclaw Mystic
+3 Reflector Mage
+4 Savage Knuckleblade
+3 Sylvan Advocate
+1 Void Grafter
+4 Collected Company
+1 Disdainful Stroke
+1 Dispel
+2 Wild Slash
+1 Roast
+1 Canopy Vista
+2 Cinder Glade
+3 Flooded Strand
+3 Forest
+1 Island
+2 Lumbering Falls
+2 Mountain
+1 Plains
+3 Prairie Stream
+4 Windswept Heath
+3 Wooded Foothills
+[Sideboard]
+2 Arashin Cleric
+1 Felidar Cub
+2 Hallowed Moonlight
+1 Negate
+1 Netcaster Spider
+3 Surge of Righteousness
+2 Valorous Stance

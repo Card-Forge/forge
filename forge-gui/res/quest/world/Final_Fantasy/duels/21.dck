@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Orzhov-precon
+Title=Orzhov-precon
+Icon=Orzhov-precon.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/Litt_-_Azorius_Artifacts_(Standard,_#2535788).dck
+Deck Type=constructed
+
+[Main]
+4 Braided Net
+4 Perilous Snare
+4 Simulacrum Synthesizer
+3 Clay-Fired Bricks
+3 Spring-Loaded Sawblades
+3 The Irencrag
+2 Candy Trail
+2 Repurposing Bay
+1 Ether
+1 Thousand Moons Smithy
+4 United Battlefront
+2 Kayla's Reconstruction
+3 High Noon
+4 Adarkar Wastes
+4 Floodfarm Verge
+4 Island
+4 Plains
+4 Seachrome Coast
+2 Fomori Vault
+2 Sunbillow Verge
+[Sideboard]
+3 Get Lost
+3 Ghost Vacuum
+3 No More Lies
+2 Authority of the Consuls
+2 Split Up
+2 Three Steps Ahead

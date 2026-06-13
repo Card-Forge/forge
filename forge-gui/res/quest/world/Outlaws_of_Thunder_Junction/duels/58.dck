@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=The Torpor Orb
+Title=The Torpor Orb
+Icon=The Torpor Orb.jpg
+Difficulty=Very Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/Takemura_Youji_-_Rogue_(Modern,_#2080901).dck
+Deck Type=constructed
+
+[Main]
+1 Murktide Regent
+4 Dauthi Voidwalker
+4 Grief
+1 Sheoldred, the Apocalypse
+4 Orcish Bowmasters
+1 Troll of Khazad-dûm
+1 The Rack
+1 Pithing Needle
+1 Soul-Guide Lantern
+2 Cryptic Coat
+1 Lavaspur Boots
+3 Fatal Push
+2 Spell Pierce
+2 Sheoldred's Edict
+4 Not Dead After All
+4 Thoughtseize
+4 Urza's Saga
+2 Liliana of the Veil
+3 Swamp
+2 Watery Grave
+4 Polluted Delta
+1 Urborg, Tomb of Yawgmoth
+3 Verdant Catacombs
+1 Phyrexian Tower
+1 Overgrown Tomb
+1 Castle Locthwain
+1 Undercity Sewers
+1 Underground Mortuary
+[Sideboard]
+2 Damping Sphere
+1 Pithing Needle
+1 Damnation
+1 Nihil Spellbomb
+2 Assassin's Trophy
+1 Ashiok, Dream Render
+1 Legion's End
+1 Shadowspear
+2 Break the Ice
+2 Stern Scolding
+1 Pick Your Poison

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Surtr
+Title=Surtr
+Icon=Surtr.jpg
+Difficulty=Hard
+Description=./Modern/Avatar_The_Last_Airbender/AChord4Five_-_Golgari_Yawgmoth_(Modern,_#2752325).dck
+Deck Type=constructed
+
+[Main]
+4 Young Wolf
+4 Delighted Halfling
+2 Orcish Bowmasters
+1 Endurance
+1 Ignoble Hierarch
+1 Sephiroth, Fabled SOLDIER
+4 Walking Ballista
+3 Badgermole Cub
+3 Yawgmoth, Thran Physician
+4 Agatha's Soul Cauldron
+4 Malevolent Rumble
+3 Green Sun's Zenith
+4 Dredger's Insight
+1 Grist, the Hunger Tide
+4 Windswept Heath
+4 Verdant Catacombs
+1 Underground Mortuary
+1 Swamp
+3 Spymaster's Vault
+2 Forest
+1 Dryad Arbor
+3 Overgrown Tomb
+2 Boseiju, Who Endures
+[Sideboard]
+2 Ashiok, Dream Render
+2 Culling Ritual
+1 Endurance
+3 Fatal Push
+1 Force of Vigor
+1 Murderous Cut
+3 Thoughtseize
+2 Vexing Bauble

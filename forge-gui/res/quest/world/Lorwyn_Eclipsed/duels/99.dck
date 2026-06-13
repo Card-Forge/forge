@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=JuzamGenie
+Title=JuzamGenie
+Icon=JuzamGenie.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/termidor_-_Dimir_Faeries_(Modern,_#2778508).dck
+Deck Type=constructed
+
+[Main]
+4 Bitterbloom Bearer
+4 Spellstutter Sprite
+1 Obyra, Dreaming Duelist
+4 Scion of Oona
+1 Brazen Borrower
+3 Subtlety
+4 Tamiyo, Inquisitive Student
+4 Fatal Push
+1 Counterspell
+2 Drown in the Loch
+2 Spell Snare
+1 Cling to Dust
+1 Force of Negation
+1 Sink into Stupor
+3 Thoughtseize
+1 Bitterblossom
+3 Kaito, Bane of Nightmares
+2 Watery Grave
+4 Secluded Glen
+4 Polluted Delta
+4 Darkslick Shores
+1 Undercity Sewers
+1 Bloodstained Mire
+1 Island
+1 Swamp
+1 Cavern of Souls
+1 Mutavault
+[Sideboard]
+3 Consign to Memory
+3 Toxic Deluge
+1 Wan Shi Tong, Librarian
+1 Subtlety
+1 Force of Negation
+1 Vendilion Clique
+1 Harbinger of the Seas
+1 Thoughtseize
+3 Mistbind Clique

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Cyclops
+Title=Cyclops
+Icon=Cyclops.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/Modern_Event_-_BAC_2013_Charleville_Mezi├¿res/Christopher_Debecq_-_Rogue_(Modern,_#55311).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Geist of Saint Traft
+4 Invisible Stalker
+4 Kor Spiritdancer
+4 Silhana Ledgewalker
+4 Slippery Bogle
+3 Path to Exile
+2 Canopy Cover
+3 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+4 Rancor
+2 Spider Umbra
+2 Spirit Link
+2 Spirit Mantle
+4 Glacial Fortress
+4 Hallowed Fountain
+4 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+2 Blind Obedience
+1 Detention Sphere
+2 Ghostly Prison
+2 Nevermore
+2 Oblivion Ring
+3 Runed Halo
+2 Sundering Growth
+1 Supreme Verdict

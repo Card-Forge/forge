@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class ForgeScript {
@@ -91,6 +92,8 @@ public class ForgeScript {
                 default:
                     return false;
             }
+        } else if (property.equals("Worthy")) {
+            return cardState.isWorthy();
         } else if (property.equals("Outlaw")) {
             return type.isOutlaw();
         } else if (property.equals("Party")) {
@@ -215,6 +218,8 @@ public class ForgeScript {
             return sa.isPwAbility();
         } else if (property.equals("Aftermath")) {
             return sa.isAftermath();
+        } else if (property.equals("PowerUp")) {
+            return sa.isPowerUp();
         } else if (property.equals("MorphUp")) {
             return sa.isMorphUp();
         } else if (property.equals("ManifestUp")) {
@@ -265,6 +270,11 @@ public class ForgeScript {
             return sa.isKeyword(Keyword.WARD);
         } else if (property.equals("CumulativeUpkeep")) {
             return sa.isCumulativeUpkeep();
+        } else if (property.equals("SameKeyword")) {
+            if (sa.getKeyword() == null || spellAbility == null) {
+                return false;
+            }
+            return Objects.equals(sa.getKeyword(), spellAbility.getKeyword());
         } else if (property.equals("ChapterNotLore")) {
             if (!sa.isChapter()) {
                 return false;
@@ -345,7 +355,7 @@ public class ForgeScript {
         } else if (property.equals("OppCtrl")) {
             return sa.getActivatingPlayer().isOpponentOf(sourceController);
         } else if (property.startsWith("cmc")) {
-            int y = 0;
+            int y;
             // spell was on the stack
             if (sa.getHostCard().isInZone(ZoneType.Stack)) {
                 y = sa.getHostCard().getCMC();

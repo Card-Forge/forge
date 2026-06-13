@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/SCG_Invitational_Qualifier_Arvada/Julian_Burke_-_Auras_(Modern,_#87065).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+2 Silhana Ledgewalker
+4 Slippery Bogle
+1 Nature's Claim
+3 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+2 Fists of Ironwood
+4 Hyena Umbra
+1 Keen Sense
+4 Rancor
+4 Spider Umbra
+4 Spirit Mantle
+1 Brushland
+4 Horizon Canopy
+2 Misty Rainforest
+3 Razorverge Thicket
+4 Temple Garden
+4 Verdant Catacombs
+[Sideboard]
+2 Guttural Response
+4 Leyline of Sanctity
+2 Rest in Peace
+2 Stony Silence
+2 Suppression Field

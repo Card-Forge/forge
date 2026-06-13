@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Higgins
+Title=Higgins
+Icon=Higgins.jpg
+Difficulty=Easy
+Description=Magic_Origins/SCG_Invitational_Qualifier_Denton/Guo_Quan_Lim_-_Abzan_Midrange_(Standard,_#320709).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Anafenza, the Foremost
+3 Den Protector
+3 Fleecemane Lion
+2 Nissa, Vastwood Seer
+4 Siege Rhino
+1 Tasigur, the Golden Fang
+4 Abzan Charm
+1 Bile Blight
+2 Dromoka's Command
+4 Hero's Downfall
+2 Languish
+3 Thoughtseize
+2 Elspeth, Sun's Champion
+1 Ugin, the Spirit Dragon
+2 Caves of Koilos
+3 Forest
+3 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+3 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+3 Windswept Heath
+[Sideboard]
+2 Glare of Heresy
+2 Hangarback Walker
+1 Self-Inflicted Wound
+2 Tragic Arrogance
+2 Ultimate Price
+2 Utter End

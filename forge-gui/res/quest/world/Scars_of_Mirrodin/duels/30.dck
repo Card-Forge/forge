@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Zegana
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/2010_MtG_Worlds__Thursday_Standard_Constructed/Yoshimasa_Hase_-_Valakut_Ramp_(Standard,_#8490).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+1 Oracle of Mul Daya
+4 Primeval Titan
+3 Harrow
+3 Summoning Trap
+4 Cultivate
+4 Explore
+4 Pyroclasm
+4 Khalni Heart Expedition
+2 Koth of the Hammer
+2 Evolving Wilds
+6 Forest
+2 Misty Rainforest
+11 Mountain
+1 Raging Ravine
+2 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Gaea's Revenge
+4 Joraga Treespeaker
+2 Lightning Bolt
+2 Ratchet Bomb
+2 Traitorous Instinct
+3 Tumble Magnet

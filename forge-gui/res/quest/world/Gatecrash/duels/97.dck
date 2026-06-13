@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Betty Rubble
+Title=Betty Rubble
+Icon=Betty Rubble.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/Magic-League_Modern_Trial_19-02-2013/MechTech_-_Rogue_(Modern,_#46047).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Akoum Battlesinger
+4 Champion of the Parish
+4 Hada Freeblade
+3 Kabira Evangel
+4 Kazandu Blademaster
+4 Oran-Rief Survivalist
+3 Phyrexian Metamorph
+1 Ranger of Eos
+2 Talus Paladin
+3 Thalia, Guardian of Thraben
+2 Boros Charm
+2 Path to Exile
+4 Ancient Ziggurat
+4 Arid Mesa
+2 Marsh Flats
+1 Mountain
+3 Plains
+4 Razorverge Thicket
+2 Sacred Foundry
+1 Stomping Ground
+3 Temple Garden
+[Sideboard]
+2 Aven Mindcensor
+4 Leyline of Sanctity
+2 Pithing Needle
+2 Rest in Peace
+2 Stony Silence

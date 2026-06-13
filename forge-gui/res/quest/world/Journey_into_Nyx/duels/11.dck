@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/SCG_Standard_Open_Las_Vegas/Josh_Grando_-_Junk_Midrange_(Standard,_#77496).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel of Thune
+1 Blood Baron of Vizkopa
+3 Courser of Kruphix
+2 Obzedat, Ghost Council
+2 Scavenging Ooze
+4 Sylvan Caryatid
+3 Abrupt Decay
+2 Devour Flesh
+4 Hero's Downfall
+3 Thoughtseize
+2 Banishing Light
+2 Underworld Connections
+2 Ajani, Mentor of Heroes
+2 Elspeth, Sun's Champion
+1 Forest
+4 Godless Shrine
+1 Mana Confluence
+4 Overgrown Tomb
+2 Swamp
+3 Temple Garden
+4 Temple of Malady
+4 Temple of Plenty
+3 Temple of Silence
+[Sideboard]
+2 Bile Blight
+2 Deicide
+2 Golgari Charm
+2 Lifebane Zombie
+2 Nyx-Fleece Ram
+2 Sin Collector
+2 Whip of Erebos

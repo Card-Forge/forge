@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ned Flanders
+Title=Ned Flanders
+Icon=Ned Flanders.jpg
+Difficulty=Medium
+Description=Gatecrash/SCG_Invitational_Qualifier_Farmingdale/Alexander_Finchler_-_Boros_Humans_(Standard,_#47726).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boros Reckoner
+4 Champion of the Parish
+3 Daring Skyjek
+4 Elite Inquisitor
+3 Fiend Hunter
+4 Silverblade Paladin
+4 Sublime Archangel
+3 Thalia, Guardian of Thraben
+4 War Falcon
+4 Boros Charm
+3 Cavern of Souls
+4 Clifftop Retreat
+12 Plains
+4 Sacred Foundry
+[Sideboard]
+2 Assemble the Legion
+4 Nearheath Pilgrim
+2 Nevermore
+2 Oblivion Ring
+3 Rest in Peace
+2 Skullcrack

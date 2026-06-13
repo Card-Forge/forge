@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Neith
+Title=Neith
+Icon=Neith.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/States-Champs_Delaware/Brad_Wantz_-_U-G-R_Force_(Standard,_#7630).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Frost Titan
+4 Primeval Titan
+3 Into the Roil
+4 Lightning Bolt
+4 Mana Leak
+3 Cultivate
+3 Destructive Force
+4 Explore
+3 Garruk Wildspeaker
+3 Jace, the Mind Sculptor
+4 Forest
+4 Halimar Depths
+2 Island
+1 Khalni Garden
+4 Misty Rainforest
+3 Mountain
+1 Mystifying Maze
+4 Raging Ravine
+2 Scalding Tarn
+1 Tectonic Edge
+[Sideboard]
+2 Burst Lightning
+3 Combust
+4 Negate
+3 Pyroclasm
+2 Volition Reins

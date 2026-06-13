@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Napoleon
+Title=Napoleon
+Icon=Napoleon.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Kanto_-_Japan/Hirotaka_Imamura_-_UWR_Control_(Standard,_#1898).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Sphinx of Jwar Isle
+4 Wall of Omens
+1 Obelisk of Alara
+3 Double Negative
+3 Essence Scatter
+2 Lightning Bolt
+2 Path to Exile
+3 Day of Judgment
+2 Oblivion Ring
+4 Spreading Seas
+4 Ajani Vengeant
+4 Jace, the Mind Sculptor
+1 Arid Mesa
+4 Celestial Colonnade
+4 Glacial Fortress
+2 Island
+3 Mountain
+2 Plains
+2 Rupture Spire
+3 Scalding Tarn
+3 Tectonic Edge
+2 Terramorphic Expanse
+[Sideboard]
+2 Baneslayer Angel
+4 Celestial Purge
+4 Flashfreeze
+4 Negate

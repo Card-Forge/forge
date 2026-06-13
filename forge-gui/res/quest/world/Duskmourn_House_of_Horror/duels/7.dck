@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Aladdin
+Title=Aladdin
+Icon=Aladdin.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Arianne_-_Dimir_Midrange_(Standard,_#2281398).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+3 Enduring Curiosity
+4 Faerie Mastermind
+4 Preacher of the Schism
+1 Tishana's Tidebinder
+2 Sheoldred, the Apocalypse
+3 Floodpits Drowner
+2 Anoint with Affliction
+3 Cut Down
+3 Go for the Throat
+2 Phantom Interference
+2 Gix's Command
+2 Kaito, Bane of Nightmares
+2 Fountainport
+4 Underground River
+5 Island
+4 Darkslick Shores
+3 Swamp
+3 Restless Reef
+4 Gloomlake Verge
+[Sideboard]
+2 Anoint with Affliction
+1 Blot Out
+1 Cut Down
+3 Duress
+2 Negate
+1 Sheoldred, the Apocalypse
+2 Three Steps Ahead
+1 Tishana's Tidebinder
+2 Ghost Vacuum

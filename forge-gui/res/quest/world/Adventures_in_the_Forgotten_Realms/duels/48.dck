@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Kojak
+Title=Kojak
+Icon=Kojak.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Aaron_Mechtensimer_-_Mono-Green_Aggro_❄_(Standard,_#1183299).dck
+Deck Type=constructed
+
+[Main]
+1 Vorinclex, Monstrous Raider
+1 Scavenging Ooze
+3 Lovestruck Beast
+3 Questing Beast
+4 Gemrazer
+4 Swarm Shambler
+4 Werewolf Pack Leader
+4 Stonecoil Serpent
+1 Inscription of Abundance
+2 Snakeskin Veil
+1 Blizzard Brawl
+3 Primal Might
+3 Ranger Class
+3 Faceless Haven
+3 Castle Garenbrig
+4 Kazandu Mammoth
+16 Snow-Covered Forest
+[Sideboard]
+1 Scavenging Ooze
+2 Kogla, the Titan Ape
+2 Garruk, Unleashed
+2 Ram Through
+4 Run Afoul
+4 Garruk's Harbinger

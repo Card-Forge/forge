@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Diablo
+Title=Diablo
+Icon=Diablo.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/Andrea_Rose_-_Golgari_Yawgmoth_(Modern,_#1621098).dck
+Deck Type=constructed
+
+[Main]
+4 Ignoble Hierarch
+3 Birds of Paradise
+4 Young Wolf
+4 Wall of Roots
+4 Strangleroot Geist
+1 Prosperous Innkeeper
+1 Blood Artist
+1 Hapatra, Vizier of Poisons
+1 Endurance
+1 Geralf's Messenger
+4 Yawgmoth, Thran Physician
+4 Chord of Calling
+3 Eldritch Evolution
+4 Grist, the Hunger Tide
+1 Dryad Arbor
+1 Boseiju, Who Endures
+1 Yavimaya, Cradle of Growth
+1 Urborg, Tomb of Yawgmoth
+1 Breeding Pool
+1 Forest
+1 Swamp
+4 Overgrown Tomb
+2 Blooming Marsh
+2 Misty Rainforest
+4 Verdant Catacombs
+2 Nurturing Peatland
+[Sideboard]
+1 Halo Forager
+1 Phyrexian Metamorph
+2 Force of Vigor
+1 Sheoldred, the Apocalypse
+2 Veil of Summer
+2 Necromentia
+2 Haywire Mite
+1 Crime // Punishment
+1 Endurance
+1 Scavenging Ooze
+1 Magus of the Moon

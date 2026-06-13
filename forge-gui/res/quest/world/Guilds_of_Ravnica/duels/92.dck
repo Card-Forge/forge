@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Dino
+Title=Dino
+Icon=Dino.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Alejandro_Pais_-_The_Rock_(Modern,_#776410).dck
+Deck Type=constructed
+
+[Main]
+4 Dark Confidant
+1 Kalitas, Traitor of Ghet
+3 Scavenging Ooze
+4 Tarmogoyf
+2 Tireless Tracker
+4 Assassin's Trophy
+4 Fatal Push
+2 Collective Brutality
+3 Inquisition of Kozilek
+1 Maelstrom Pulse
+3 Thoughtseize
+4 Liliana of the Veil
+1 Liliana, the Last Hope
+4 Blooming Marsh
+4 Field of Ruin
+2 Forest
+2 Hissing Quagmire
+2 Overgrown Tomb
+4 Swamp
+2 Treetop Village
+4 Verdant Catacombs
+[Sideboard]
+1 Collective Brutality
+1 Damnation
+2 Damping Sphere
+1 Duress
+1 Grafdigger's Cage
+1 Kalitas, Traitor of Ghet
+2 Languish
+1 Liliana, the Last Hope
+2 Nihil Spellbomb
+3 Surgical Extraction

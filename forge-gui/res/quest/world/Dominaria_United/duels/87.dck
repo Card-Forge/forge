@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Blue
+Title=Dungeon Crawling Blue
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=Hard
+Description=./Modern/Dominaria_United/Álvaro_Carvalho_-_Temur_Affinity_(Modern,_#1481017)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Etched Champion
+2 Ornithopter
+3 Meria, Scholar of Antiquity
+4 Sojourner's Companion
+4 Thought Monitor
+4 Frogmite
+4 Patchwork Automaton
+4 Memnite
+1 Nettlecyst
+1 Welding Jar
+1 Shadowspear
+4 Cranial Plating
+4 Springleaf Drum
+3 Thoughtcast
+4 Urza's Saga
+1 Island
+2 Silverbluff Bridge
+2 Tanglepool Bridge
+2 Otawara, Soaring City
+2 Treasure Vault
+3 Spire of Industry
+3 Darksteel Citadel
+[Sideboard]
+1 Tormod's Crypt
+1 Pithing Needle
+1 Grafdigger's Cage
+2 Relic of Progenitus
+2 Nature's Claim
+2 Damping Sphere
+3 Metallic Rebuke
+3 Galvanic Blast

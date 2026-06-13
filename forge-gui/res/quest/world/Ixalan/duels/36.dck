@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Robot36
+Title=Robot36
+Icon=Nibbler.jpg
+Difficulty=Hard
+Description=Bug Energy 
+Deck Type=constructed
+
+[Main]
+4 Glint-Sleeve Siphoner
+3 Hostage Taker
+4 Longtusk Cub
+2 Rishkar, Peema Renegade
+4 Rogue Refiner
+2 The Scarab God
+3 Walking Ballista
+4 Winding Constrictor
+4 Blossoming Defense
+4 Fatal Push
+1 Vraska's Contempt
+4 Attune with Aether
+4 Aether Hub
+4 Blooming Marsh
+4 Botanical Sanctum
+2 Fetid Pools
+4 Forest
+1 Island
+2 Swamp
+[Sideboard]
+1 Aethersphere Harvester
+4 Deathgorge Scavenger
+4 Duress
+1 Essence Scatter
+2 Negate
+2 Vraska's Contempt
+1 Vraska, Relic Seeker

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Wolverine
+Title=Wolverine
+Icon=Wolverine.jpg
+Difficulty=Hard
+Description=../Modern/Aether_Revolt/Joost_Verburg_-_Ub_Tezzerator_Thopter_(Modern,_#665773).dck
+Deck Type=constructed
+
+[Main]
+4 Glint-Nest Crane
+1 Spellskite
+1 Batterskull
+4 Darksteel Citadel
+2 Mox Opal
+1 Pithing Needle
+2 Relic of Progenitus
+3 Sword of the Meek
+4 Talisman of Dominance
+4 Thopter Foundry
+4 Fatal Push
+4 Thirst for Knowledge
+1 Damnation
+4 Inquisition of Kozilek
+4 Tezzeret, Agent of Bolas
+1 Academy Ruins
+2 Creeping Tar Pit
+4 Darkslick Shores
+2 Inventors' Fair
+1 Island
+4 Polluted Delta
+1 Swamp
+2 Watery Grave
+[Sideboard]
+2 Ashiok, Nightmare Weaver
+1 Damnation
+1 Duress
+3 Fulminator Mage
+1 Grafdigger's Cage
+1 Negate
+1 Padeem, Consul of Innovation
+1 Pithing Needle
+2 Spell Snare
+1 Spellskite
+1 Torpor Orb

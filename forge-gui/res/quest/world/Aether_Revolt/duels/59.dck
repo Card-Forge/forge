@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Montgomery Burns
+Title=Montgomery Burns
+Icon=Montgomery Burns.jpg
+Difficulty=Hard
+Description=../Modern/Aether_Revolt/Sakaino_Yuuta_-_Zoo_(Modern,_#665626).dck
+Deck Type=constructed
+
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+2 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+4 Reckless Bushwhacker
+4 Tarmogoyf
+4 Wild Nacatl
+4 Atarka's Command
+4 Lightning Bolt
+3 Path to Exile
+3 Arid Mesa
+1 Forest
+1 Mountain
+2 Sacred Foundry
+3 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Burrenton Forge-Tender
+2 Destructive Revelry
+1 Engineered Explosives
+2 Grafdigger's Cage
+1 Path to Exile
+1 Pyroclasm
+3 Renegade Rallier
+2 Thalia, Guardian of Thraben
+1 Worship

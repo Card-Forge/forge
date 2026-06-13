@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=The Thing
+Title=The Thing
+Icon=The Thing.jpg
+Difficulty=Very Hard
+Description=./Modern/Wilds_of_Eldraine/intellectualba_-_Asmo_Food_(Modern,_#1743847).dck
+Deck Type=constructed
+
+[Main]
+4 Academy Manufactor
+4 Asmoranomardicadaistinaculdacar
+3 Experimental Confectioner
+4 Gilded Goose
+4 Ovalchase Daredevil
+3 Peregrin Took
+4 Sarinth Steelseeker
+1 Shadowspear
+4 The Underworld Cookbook
+4 Finale of Devastation
+4 Unearth
+4 Urza's Saga
+2 Forest
+2 Gingerbread Cabin
+3 Misty Rainforest
+4 Overgrown Tomb
+3 Verdant Catacombs
+3 Wooded Foothills
+[Sideboard]
+3 Force of Vigor
+4 Haywire Mite
+4 Leyline of the Void
+1 Nihil Spellbomb
+2 Pithing Needle
+1 Pyrite Spellbomb

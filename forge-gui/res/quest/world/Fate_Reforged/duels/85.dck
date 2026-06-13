@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Marge Simpson
+Title=Marge Simpson
+Icon=Marge Simpson.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/SCG_Invitational_Qualifier_Columbia/Bryan_Lada_-_Infect_(Modern,_#518321).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Glistener Elf
+4 Noble Hierarch
+4 Phyrexian Crusader
+2 Plague Stinger
+3 Abrupt Decay
+2 Become Immense
+2 Dismember
+4 Groundswell
+2 Might of Old Krosa
+4 Vines of Vastwood
+4 Inquisition of Kozilek
+1 Sylvan Scrying
+2 Rancor
+1 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+4 Overgrown Tomb
+1 Pendelhaven
+2 Swamp
+1 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+[Sideboard]
+1 Disfigure
+2 Illness in the Ranks
+4 Nature's Claim
+2 Nihil Spellbomb
+2 Spellskite
+1 Tasigur, the Golden Fang
+1 Vampiric Link
+2 Viridian Corrupter

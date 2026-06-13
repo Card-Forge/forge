@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Zatanna
+Title=Zatanna
+Icon=Zatanna.jpg
+Difficulty=Very Hard
+Description=../Modern/Shadows_over_Innistrad/SCG_Invitational_Qualifier_Athens/Tim_Harris_-_Eldrazi_(Modern,_#615045).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Blight Herder
+1 Eldrazi Displacer
+4 Reality Smasher
+4 Thought-Knot Seer
+3 Wasteland Strangler
+4 Relic of Progenitus
+1 Anguished Unmaking
+1 Dismember
+4 Path to Exile
+3 Inquisition of Kozilek
+4 Lingering Souls
+2 Thoughtseize
+1 Sorin, Solemn Visitor
+4 Caves of Koilos
+4 Eldrazi Temple
+3 Ghost Quarter
+2 Godless Shrine
+4 Marsh Flats
+2 Plains
+2 Shambling Vent
+2 Swamp
+1 Vault of the Archangel
+1 Wastes
+[Sideboard]
+1 Celestial Purge
+1 Damnation
+2 Disenchant
+2 Flaying Tendrils
+2 Spellskite
+2 Stony Silence
+2 Surgical Extraction
+3 Timely Reinforcements

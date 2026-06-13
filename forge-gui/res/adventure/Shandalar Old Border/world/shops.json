@@ -5347,6 +5347,98 @@
     ]
   },
   {
+    "name": "SketchbookShop",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "LegendShop",
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Revised Edition"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Fifth Edition"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Sixth Edition"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Ice Age"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Mirage"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Tempest"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Urza's Saga"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Mercadian Masques"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Odyssey"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Onslaught"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Portal"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Portal Second Age"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Portal Three Kingdoms"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Starter 1999"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Starter 2000"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Battle Royale"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Beatdown Box Set"
+      }
+    ]
+  },
+  {
     "name": "ArtificerBazaar",
     "description": "The Artificer's Bazaar",
     "spriteAtlas": "maps/tileset/buildings.atlas",

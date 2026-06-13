@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=NanaBuruku
+Title=NanaBuruku
+Icon=NanaBuruku.jpg
+Difficulty=Hard
+Description=./Modern/Avatar_The_Last_Airbender/AleS9_-_Mono-Green_Landfall_(Modern,_#2714174).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+4 Sazh's Chocobo
+4 Tifa Lockhart
+2 Bristly Bill, Spine Sower
+4 Origin of Metalbending
+4 Snakeskin Veil
+4 Explore
+4 Green Sun's Zenith
+4 Rockalanche
+4 Scale Up
+12 Forest
+3 Escape Tunnel
+3 Fabled Passage
+2 Verdant Catacombs
+2 Windswept Heath
+[Sideboard]
+4 Veil of Summer
+3 Force of Vigor
+2 Damping Sphere
+2 Endurance
+2 Keen-Eyed Curator
+2 Tifa's Limit Break

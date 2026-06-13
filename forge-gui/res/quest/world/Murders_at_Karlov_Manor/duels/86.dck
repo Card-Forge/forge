@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Shanna
+Title=Shanna
+Icon=Shanna.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/Aaron_Larsen_-_Crabvine_(Modern,_#2003299).dck
+Deck Type=constructed
+
+[Main]
+4 Stitcher's Supplier
+4 Souls of the Lost
+4 Vengevine
+4 Hedron Crab
+1 Wonder
+3 Gravecrawler
+3 Bloodghast
+2 Narcomoeba
+4 Prized Amalgam
+4 Merfolk Secretkeeper
+4 Otherworldly Gaze
+4 Creeping Chill
+4 Misty Rainforest
+4 Polluted Delta
+1 Island
+4 Watery Grave
+1 Swamp
+1 Overgrown Tomb
+3 Verdant Catacombs
+1 Breeding Pool
+[Sideboard]
+3 Pick Your Poison
+3 Assassin's Trophy
+4 Leyline of the Void
+2 Cursed Totem
+3 Fatal Push

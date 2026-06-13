@@ -1,0 +1,219 @@
+package forge.gamemodes.net;
+
+import forge.game.card.CardView;
+import forge.game.event.GameEvent;
+import forge.game.player.PlayerView;
+import forge.trackable.TrackableObject;
+import forge.trackable.TrackableProperty;
+import forge.trackable.TrackableTypes;
+import forge.trackable.TrackableTypes.TrackableType;
+import forge.trackable.Tracker;
+import forge.util.IHasForgeLog;
+
+import io.netty.handler.codec.serialization.ClassResolver;
+import io.netty.handler.codec.serialization.ClassResolvers;
+
+import net.jpountz.lz4.LZ4BlockOutputStream;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Handles serialization of {@link TrackableObject} references across the network.
+ * Replaces CardView/PlayerView with lightweight {@link IdRef} markers during
+ * encoding and resolves them back from the Tracker during decoding.
+ *
+ * <p>Used by the Netty encoder/decoder pipeline ({@link CompatibleObjectEncoder},
+ * {@link CompatibleObjectDecoder}) via the underlying object streams
+ * ({@link CObjectOutputStream}, {@link CObjectInputStream}).
+ */
+public final class TrackableSerializer implements IHasForgeLog {
+
+    private static final ClassResolver INNER_CLASS_RESOLVER = ClassResolvers.cacheDisabled(null);
+
+    static final byte TYPE_CARD_VIEW = 0;
+    static final byte TYPE_PLAYER_VIEW = 1;
+
+    /** Marker for tracker-stable refs (top-level protocol method args, and PlayerView in events). */
+    record IdRef(byte typeTag, int id) implements Serializable {
+        @Serial private static final long serialVersionUID = 1L;
+    }
+
+    /** CardView ref inside a wrapped event. {@code preserveSnapshot=true} forces fallback even if the tracker has the id. */
+    record EventCardRef(int id, String name, String imageKey, boolean preserveSnapshot) implements Serializable {
+        @Serial private static final long serialVersionUID = 1L;
+    }
+
+    static byte typeTagFor(TrackableObject obj) {
+        if (obj instanceof CardView) return TYPE_CARD_VIEW;
+        if (obj instanceof PlayerView) return TYPE_PLAYER_VIEW;
+        return -1;
+    }
+
+    static TrackableType<?> trackableTypeFor(byte typeTag) {
+        switch (typeTag) {
+            case TYPE_CARD_VIEW: return TrackableTypes.CardViewType;
+            case TYPE_PLAYER_VIEW: return TrackableTypes.PlayerViewType;
+            default: return null;
+        }
+    }
+
+    /**
+     * Replaces TrackableObject references with {@link IdRef} markers, or
+     * {@link EventCardRef} markers for CardViews inside wrapped events
+     * ({@code eventMode = true}). When the tracker holds a different object
+     * for the CardView's id (zone-change copy), {@code preserveSnapshot} is
+     * set so the receiver decodes a detached CardView from the carried name
+     * and image key.
+     * <p>
+     * In non-event mode, a CardView is substituted with an IdRef only when
+     * the receiver is known to have it: server-side (consumerId &ge; 0) that
+     * means {@code DeltaSyncManager} has registered this consumer on the
+     * object (i.e. its properties have been included in a delta for that
+     * client); client-side (consumerId &lt; 0) the encoder falls back to
+     * tracker presence, which is sound there because the client's tracker
+     * <em>is</em> exactly what the client knows.
+     * <p>
+     * CardViews that fail the gate pass through unchanged so Java serializes
+     * the full object inline (covers Jhoira-style ephemeral choice copies
+     * that never enter a tracked zone and are never broadcast).
+     */
+    static Object replace(Object obj, Tracker tracker, int consumerId, boolean eventMode) {
+        if (obj instanceof TrackableObject trackable) {
+            byte tag = typeTagFor(trackable);
+            if (tag < 0) return obj;
+
+            if (tag == TYPE_PLAYER_VIEW) {
+                return new IdRef(tag, trackable.getId());
+            }
+
+            if (!eventMode) {
+                boolean receiverKnows = consumerId >= 0
+                        ? trackable.hasConsumer(consumerId)
+                        : tracker != null && tracker.getObj(trackableTypeFor(tag), trackable.getId()) != null;
+                if (receiverKnows) {
+                    return new IdRef(tag, trackable.getId());
+                }
+                return obj;
+            }
+
+            boolean preserveSnapshot = false;
+            if (tracker != null) {
+                Object tracked = tracker.getObj(trackableTypeFor(tag), trackable.getId());
+                if (tracked != null && tracked != trackable) {
+                    preserveSnapshot = true;
+                }
+            }
+            CardView cv = (CardView) trackable;
+            String imgKey = cv.getCurrentState() != null
+                    ? cv.getCurrentState().getImageKey() : null;
+            return new EventCardRef(trackable.getId(), cv.getName(), imgKey, preserveSnapshot);
+        }
+        return obj;
+    }
+
+    /**
+     * Resolves {@link IdRef} and {@link EventCardRef} markers back to
+     * TrackableObjects from the given Tracker.
+     */
+    static Object resolve(Object obj, Tracker tracker) {
+        if (obj instanceof EventCardRef ref) {
+            if (!ref.preserveSnapshot()) {
+                CardView fromTracker = tracker.getObj(TrackableTypes.CardViewType, ref.id());
+                if (fromTracker != null) return fromTracker;
+            }
+            CardView detached = new CardView(ref.id(), tracker);
+            if (ref.name() != null) {
+                detached.set(TrackableProperty.Name, ref.name());
+                detached.getCurrentState().set(TrackableProperty.Name, ref.name());
+            }
+            if (ref.imageKey() != null) {
+                detached.getCurrentState().set(TrackableProperty.ImageKey, ref.imageKey());
+            }
+            return detached;
+        }
+        if (obj instanceof IdRef ref) {
+            Object resolved = tracker.getObj(trackableTypeFor(ref.typeTag()), ref.id());
+            if (resolved == null) {
+                netLog.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag(), ref.id());
+            }
+            return resolved;
+        }
+        return obj;
+    }
+
+    /**
+     * Measures serialized size matching the encoder wire format
+     * for applyDelta messages with IdRef replacement (when tracker not null).
+     * otherwise for setGameView messages.
+     */
+    public static int measureSize(Object obj, Tracker tracker) {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            LZ4BlockOutputStream lz4Out = new LZ4BlockOutputStream(baos);
+            try (CObjectOutputStream oos = new CObjectOutputStream(lz4Out, tracker != null, tracker, -1, false)) {
+                oos.writeObject(obj);
+            }
+            return baos.size();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Serializable wrapper for a GameEvent whose TrackableObject references
+     * have been replaced with IdRef/EventCardRef markers. Stored in
+     * DeltaPacket.events so events travel as compact byte arrays rather than
+     * full object graphs. Unwrapped after delta state is applied, when the
+     * client tracker is populated.
+     */
+    record WrappedEvent(byte[] data) implements Serializable {
+        private static final long serialVersionUID = 1L;
+    }
+
+    /**
+     * Wraps GameEvents by serializing each with IdRef replacement.
+     * Events that fail to serialize are dropped (logged).
+     */
+    public static List<Object> wrapEvents(List<GameEvent> events, Tracker tracker) {
+        List<Object> wrapped = new ArrayList<>(events.size());
+        for (GameEvent event : events) {
+            try {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream(256);
+                try (CObjectOutputStream out = new CObjectOutputStream(baos, true, tracker, -1, true)) {
+                    out.writeObject(event);
+                }
+                wrapped.add(new WrappedEvent(baos.toByteArray()));
+            } catch (IOException e) {
+                netLog.warn("Failed to wrap event {}: {}", event.getClass().getSimpleName(), e.getMessage());
+            }
+        }
+        return wrapped;
+    }
+
+    /**
+     * Unwraps events by deserializing with IdRef resolution from the tracker.
+     * Called after delta state is applied so new objects are resolvable.
+     * Events that fail to unwrap are dropped (logged).
+     */
+    public static List<GameEvent> unwrapEvents(List<Object> items, Tracker tracker) {
+        List<GameEvent> events = new ArrayList<>(items.size());
+        for (Object item : items) {
+            if (item instanceof WrappedEvent we) {
+                try {
+                    ByteArrayInputStream bais = new ByteArrayInputStream(we.data);
+                    try (CObjectInputStream in = new CObjectInputStream(bais, INNER_CLASS_RESOLVER, tracker)) {
+                        Object obj = in.readObject();
+                        if (obj instanceof GameEvent e) events.add(e);
+                    }
+                } catch (IOException | ClassNotFoundException e) {
+                    netLog.warn("Failed to unwrap event: {}", e.getMessage());
+                }
+            }
+        }
+        return events;
+    }
+
+    private TrackableSerializer() {}
+}

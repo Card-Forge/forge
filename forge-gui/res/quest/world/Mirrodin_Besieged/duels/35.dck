@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Jacob Grimm
+Title=Jacob Grimm
+Icon=Jacob Grimm.jpg
+Difficulty=Easy
+Description=Mirrodin_Besieged/Nationals_2011_-_Malaysia/Nico_Surinindran_-_Valakut_Ramp_(Standard,_#17533).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+2 Avenger of Zendikar
+1 Birds of Paradise
+4 Oracle of Mul Daya
+3 Overgrown Battlement
+4 Primeval Titan
+2 Lightning Bolt
+4 Cultivate
+1 Explore
+4 Green Sun's Zenith
+4 Rampant Growth
+2 Slagstorm
+2 Evolving Wilds
+5 Forest
+10 Mountain
+1 Raging Ravine
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+2 Verdant Catacombs
+[Sideboard]
+1 Back to Nature
+3 Creeping Corrosion
+3 Memoricide
+3 Nature's Claim
+3 Pyroclasm
+1 Swamp
+1 Thrun, the Last Troll

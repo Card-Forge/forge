@@ -15,6 +15,7 @@ import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
+import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 
@@ -86,11 +87,12 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         return result;
     }
 
-    public Map<GameEntity, Integer> filterTable(CounterType type, String valid, Card host, CardTraitBase sa) {
+    public Map<GameEntity, Integer> filterTable(CounterType type, String valid, String validSource, Card host, CardTraitBase sa) {
         return columnMap().entrySet().stream().filter(gm -> gm.getKey().isValid(valid, host.getController(), host, sa))
             .collect(Collectors.groupingBy(gm -> gm.getKey(),
-                    Collectors.flatMapping(gm -> gm.getValue().values().stream(),
-                            Collectors.filtering(m -> m.containsKey(type), Collectors.summingInt(m -> m.getOrDefault(type, 0))))));
+                    Collectors.flatMapping(gm -> gm.getValue().entrySet().stream().
+                                    filter(e -> validSource == null || (e.getKey().isPresent() && e.getKey().get().isValid(validSource, host.getController(), host, sa))),
+                            Collectors.summingInt(m -> m.getValue().getOrDefault(type, 0)))));
     }
 
     public void triggerCountersPutAll(final Game game) {
@@ -112,10 +114,9 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         game.getTriggerHandler().runTrigger(TriggerType.CounterAddedAll, runParams, false);
     }
 
-    public void replaceCounterEffect(final Game game, final SpellAbility cause, final boolean effect) {
-        replaceCounterEffect(game, cause, effect, false, null);
+    public void replaceCounterEffect(final Game game, final SpellAbility cause) {
+        replaceCounterEffect(game, cause, cause != null && !(cause instanceof AbilityStatic), false, null);
     }
-
     @SuppressWarnings("unchecked")
     public boolean replaceCounterEffect(final Game game, final SpellAbility cause, final boolean effect, final boolean etb, Map<AbilityKey, Object> params) {
         if (isEmpty()) {

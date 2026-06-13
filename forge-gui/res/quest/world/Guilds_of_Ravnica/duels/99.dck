@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Black Abott
+Title=Black Abott
+Icon=Black Abott.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/Alex_Sheridan_-_Golgari_Midrange_(Modern,_#791028).dck
+Deck Type=constructed
+
+[Main]
+4 Dark Confidant
+3 Scavenging Ooze
+4 Tarmogoyf
+3 Tireless Tracker
+2 Kalitas, Traitor of Ghet
+2 Nihil Spellbomb
+1 Abrupt Decay
+3 Assassin's Trophy
+4 Fatal Push
+3 Inquisition of Kozilek
+1 Maelstrom Pulse
+3 Thoughtseize
+3 Liliana of the Veil
+2 Forest
+4 Swamp
+4 Blooming Marsh
+4 Field of Ruin
+2 Hissing Quagmire
+3 Overgrown Tomb
+1 Treetop Village
+4 Verdant Catacombs
+[Sideboard]
+1 Damping Sphere
+1 Engineered Explosives
+1 Grafdigger's Cage
+1 Nihil Spellbomb
+3 Fulminator Mage
+3 Surgical Extraction
+1 Liliana, the Last Hope
+1 Nissa, Vital Force
+1 Collective Brutality
+1 Damnation
+1 Duress

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Iblis
+Title=Iblis
+Icon=Iblis.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/Topdecker.gr_-_Xmas_Modern_Event_-_eFantasy.gr/Zalakosta_Pinelopi_-_RDW_(Modern,_#64446).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+2 Hellspark Elemental
+4 Keldon Marauders
+4 Vexing Devil
+3 Flames of the Blood Hand
+4 Lightning Bolt
+4 Searing Blaze
+4 Shard Volley
+4 Skullcrack
+1 Thunderous Wrath
+4 Lava Spike
+4 Rift Bolt
+18 Mountain
+[Sideboard]
+4 Leyline of Punishment
+3 Molten Rain
+4 Relic of Progenitus
+4 Smash to Smithereens

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Crows in the Field
+Title=Crows in the Field
+Icon=Crows in the Field.jpg
+Difficulty=Easy
+Description=Kaladesh/Grand_Prix_Providence_2016_-_Top_8_Decklists/Zachary_Kiihne_-_W-U_Flash_(Standard,_#643768).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Archangel Avacyn
+2 Rattlechains
+4 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+4 Thraben Inspector
+4 Smuggler's Copter
+1 Negate
+4 Stasis Snare
+4 Gideon, Ally of Zendikar
+6 Island
+9 Plains
+4 Port Town
+4 Prairie Stream
+2 Westvale Abbey
+[Sideboard]
+2 Ceremonious Rejection
+2 Declaration in Stone
+2 Fragmentize
+1 Fumigate
+2 Gisela, the Broken Blade
+2 Jace, Unraveler of Secrets
+2 Negate
+2 Summary Dismissal

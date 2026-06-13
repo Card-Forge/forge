@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/Guilherme_Adissy_-_Golgari_Yawgmoth_(Modern,_#2515910).dck
+Deck Type=constructed
+
+[Main]
+1 Walking Ballista
+4 Young Wolf
+4 Delighted Halfling
+2 Wall of Roots
+1 Hapatra, Vizier of Poisons
+1 Outland Liberator
+2 Orcish Bowmasters
+1 Endurance
+2 Sephiroth, Fabled SOLDIER
+4 Yawgmoth, Thran Physician
+3 Agatha's Soul Cauldron
+4 Chord of Calling
+2 Green Sun's Zenith
+3 Malevolent Rumble
+2 Dredger's Insight
+3 Grist, the Hunger Tide
+1 Dryad Arbor
+2 Boseiju, Who Endures
+2 Shifting Woodland
+4 Verdant Catacombs
+1 Wooded Foothills
+2 Forest
+1 Misty Rainforest
+3 Wastewood Verge
+2 Underground Mortuary
+1 Swamp
+2 Overgrown Tomb
+[Sideboard]
+3 Thoughtseize
+2 Fatal Push
+1 Abrupt Decay
+2 Damping Sphere
+2 Fulminator Mage
+1 Endurance
+2 Force of Vigor
+2 Culling Ritual

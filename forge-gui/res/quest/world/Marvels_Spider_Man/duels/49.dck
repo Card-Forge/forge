@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Genghis Khan
+Title=Genghis Khan
+Icon=Genghis Khan.jpg
+Difficulty=Medium
+Description=./Standard/Marvels_Spider_Man/Abe_Kodai_-_Mono_White_Aggro_(Standard,_#2692344).dck
+Deck Type=constructed
+
+[Main]
+4 Spellbook Vendor
+4 Optimistic Scavenger
+4 Veteran Survivor
+1 Zack Fair
+4 Skyward Spider
+4 Ethereal Armor
+4 Feather of Flight
+4 Shardmage's Rescue
+4 Sheltered by Ghosts
+4 Seam Rip
+2 Origin of Spider-Man
+21 Plains
+[Sideboard]
+3 Rest in Peace
+1 Devout Decree
+3 Cathar Commando
+2 Werefox Bodyguard
+3 Petrify
+2 Aven Interrupter
+1 Spectacular Spider-Man

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Odin
+Title=Odin
+Icon=Odin.jpg
+Difficulty=Easy
+Description=Born_of_the_Gods/SCG_Invitational_Qualifier_-_High_Point,_NC/Paul_Hester_-_Esper_Control_(Standard,_#71687).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Elixir of Immortality
+3 Azorius Charm
+4 Dissolve
+1 Fated Retribution
+3 Last Breath
+4 Sphinx's Revelation
+2 Syncopate
+2 Divination
+4 Supreme Verdict
+4 Detention Sphere
+2 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+4 Hallowed Fountain
+5 Island
+3 Mutavault
+5 Plains
+4 Temple of Deceit
+4 Temple of Enlightenment
+2 Temple of Silence
+[Sideboard]
+1 AEtherling
+2 Archangel of Thune
+1 Blind Obedience
+2 Dark Betrayal
+2 Doom Blade
+2 Gainsay
+2 Glare of Heresy
+2 Negate
+1 Pithing Needle

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Szadek
+Title=Szadek
+Icon=Szadek.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/9acky_-_Red_Deck_Wins_(Standard,_#979844).dck
+Deck Type=constructed
+
+[Main]
+2 Phoenix of Ash
+4 Tin Street Dodger
+4 Scorch Spitter
+4 Grim Initiate
+4 Fervent Champion
+4 Bonecrusher Giant
+4 Anax, Hardened in the Forge
+4 Heraldic Banner
+4 Shock
+4 Light Up the Stage
+4 Castle Embereth
+18 Mountain
+[Sideboard]
+1 Obosh, the Preypiercer
+2 Tibalt, Rakish Instigator
+2 Soul-Guide Lantern
+2 Irreverent Revelers
+2 Chandra, Acolyte of Flame
+2 Blazing Volley
+4 Redcap Melee

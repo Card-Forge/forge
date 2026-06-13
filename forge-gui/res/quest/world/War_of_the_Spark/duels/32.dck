@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Trostani
+Title=Trostani
+Icon=Trostani.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Benjamin_Chi_-_Sultai_Midrange_(Standard,_#797940).dck
+Deck Type=constructed
+
+[Main]
+3 Hostage Taker
+4 Hydroid Krasis
+1 Carnage Tyrant
+4 Jadelight Ranger
+4 Llanowar Elves
+4 Merfolk Branchwalker
+2 Paradise Druid
+4 Wildgrowth Walker
+2 Cast Down
+2 Find // Finality
+1 The Elderspell
+2 Nissa, Who Shakes the World
+3 Vivien Reid
+4 Breeding Pool
+2 Drowned Catacomb
+4 Forest
+2 Hinterland Harbor
+4 Overgrown Tomb
+4 Watery Grave
+4 Woodland Cemetery
+[Sideboard]
+1 Cast Down
+1 The Elderspell
+2 Davriel, Rogue Shadowmage
+1 Disdainful Stroke
+4 Duress
+2 Finale of Eternity
+2 Kraul Harpooner
+1 Massacre Girl
+1 Narset's Reversal

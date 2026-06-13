@@ -1,0 +1,13 @@
+Name:Yavimaya Bloomsage
+ManaCost:2 G
+Types:Creature Dryad Druid
+PT:2/2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on target creature you control. Then if that creature has power 7 or greater, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | CounterType$ P1P1 | SubAbility$ DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | ConditionDefined$ Targeted | ConditionPresent$ Creature.powerGE7
+AlternateMode:Prepare
+Oracle:At the beginning of your end step, put a +1/+1 counter on target creature you control. Then if that creature has power 7 or greater, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+CopyFaceFrom:Channel

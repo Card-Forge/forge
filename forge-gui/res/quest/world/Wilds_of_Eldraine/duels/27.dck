@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Zapp Brannigan
+Title=Zapp Brannigan
+Icon=Zapp Brannigan.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Reid_Duke_-_Esper_Gumdrops_(Standard,_#1739296).dck
+Deck Type=constructed
+
+[Main]
+4 Intrepid Adversary
+3 Phyrexian Missionary
+4 Dennick, Pious Apprentice
+4 Gumdrop Poisoner
+4 Raffine, Scheming Seer
+3 Sheoldred, the Apocalypse
+1 Make Disappear
+1 Void Rend
+2 Go for the Throat
+1 Virtue of Persistence
+4 Wedding Announcement
+3 The Wandering Emperor
+3 Restless Fortress
+4 Raffine's Tower
+4 Shipwreck Marsh
+2 Deserted Beach
+2 Caves of Koilos
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+3 Plaza of Heroes
+2 Adarkar Wastes
+1 Takenuma, Abandoned Mire
+2 Shattered Sanctum
+1 Island
+[Sideboard]

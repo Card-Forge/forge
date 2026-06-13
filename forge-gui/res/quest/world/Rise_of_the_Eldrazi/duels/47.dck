@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Cave Troll
+Title=Cave Troll
+Icon=Cave Troll.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/Nationals_2010_-_Belorussian/Pavel_Medvedsky_-_BR_Blightning_Aggro_(Standard,_#1226).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Hell's Thunder
+4 Hellspark Elemental
+4 Kiln Fiend
+3 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+4 Staggershock
+4 Blightning
+3 Akoum Refuge
+4 Arid Mesa
+2 Dragonskull Summit
+4 Lavaclaw Reaches
+6 Mountain
+3 Scalding Tarn
+1 Swamp
+[Sideboard]
+2 Consuming Vapors
+2 Deathmark
+3 Doom Blade
+2 Dragon's Claw
+2 Ravenous Trap
+2 Shatter
+2 Thought Hemorrhage

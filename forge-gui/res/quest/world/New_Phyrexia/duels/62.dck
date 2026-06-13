@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gruul-precon
+Title=Gruul-precon
+Icon=Gruul-precon.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Garden_City,_Michigan/Eric_S._in_PTQ_Barcelona_-_Faeries_(Modern,_#27344).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+1 Vedalken Shackles
+4 Cryptic Command
+4 Mana Leak
+1 Psionic Blast
+3 Remand
+1 Spell Pierce
+3 Spell Snare
+1 Vapor Snag
+2 Faerie Conclave
+17 Island
+4 Mutavault
+2 Tectonic Edge
+[Sideboard]
+1 Dismember
+3 Hurkyl's Recall
+1 Into the Roil
+1 Negate
+3 Ratchet Bomb
+2 Relic of Progenitus
+1 Think Twice

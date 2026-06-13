@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Superman
+Title=Superman
+Icon=Superman.jpg
+Difficulty=Very Hard
+Description=../Modern/Kaladesh/SCG_Invitational_Qualifier_Monroeville/Eric_Swanson_-_All-In_Red_(Modern,_#658433).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Magus of the Moon
+4 Simian Spirit Guide
+4 Ensnaring Bridge
+2 Relic of Progenitus
+4 Desperate Ritual
+4 Lightning Bolt
+3 Magma Jet
+2 Pyretic Ritual
+2 Anger of the Gods
+4 Blood Moon
+4 Chandra, Torch of Defiance
+2 Koth of the Hammer
+22 Mountain
+[Sideboard]
+1 Dragon's Claw
+1 Engineered Explosives
+1 Grafdigger's Cage
+1 Orbs of Warding
+1 Pithing Needle
+1 Pyroclasm
+1 Relic of Progenitus
+1 Shattering Spree
+1 Staff of Domination
+2 Sudden Shock
+2 Sun Droplet
+1 Torpor Orb
+1 Vandalblast

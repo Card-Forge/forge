@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Easy
+Description=Innistrad/2011_States_Puerto_Rico/Michael_Velazquez_-_Township_Tokens_(Standard,_#21075).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Blade Splicer
+3 Fiend Hunter
+2 Geist-Honored Monk
+4 Hero of Bladehold
+4 Mentor of the Meek
+2 Sun Titan
+1 Sword of Feast and Famine
+2 Sword of War and Peace
+2 Midnight Haunting
+3 Oblivion Ring
+2 Elspeth Tirel
+1 Garruk Relentless
+6 Forest
+4 Gavony Township
+4 Plains
+4 Razorverge Thicket
+4 Sunpetal Grove
+[Sideboard]
+1 Beast Within
+3 Celestial Purge
+2 Gideon Jura
+2 Grand Abolisher
+1 Naturalize
+1 Sylvok Replica
+2 Thrun, the Last Troll
+1 Tree of Redemption
+1 Wurmcoil Engine

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Ezio
+Title=Ezio
+Icon=Ezio.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Chema_Alvarez_-_Orzhov_Midrange_(Standard,_#1313814).dck
+Deck Type=constructed
+
+[Main]
+2 Fell Stinger
+2 Edgar, Charmed Groom
+4 Shambling Ghast
+4 Eyetwitch
+1 March of Otherworldly Light
+4 Deadly Dispute
+4 Vanishing Verse
+1 Rite of Oblivion
+4 Blood on the Snow
+2 The Meathook Massacre
+3 Wedding Announcement
+1 The Wandering Emperor
+3 Lolth, Spider Queen
+1 Eiganjo, Seat of the Empire
+1 Hive of the Eye Tyrant
+1 Cave of the Frost Dragon
+2 Field of Ruin
+4 Snowfield Sinkhole
+6 Snow-Covered Plains
+10 Snow-Covered Swamp
+[Sideboard]
+1 Necrotic Fumes
+1 Environmental Sciences
+1 Mascot Exhibition
+1 March of Otherworldly Light
+1 Kaya the Inexorable
+2 Infernal Grasp
+2 Reduce to Memory
+2 The Meathook Massacre
+2 Go Blank
+2 Duress

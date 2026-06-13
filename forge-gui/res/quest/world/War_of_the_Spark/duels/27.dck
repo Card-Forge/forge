@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Spiderman
+Title=Spiderman
+Icon=Spiderman.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Aurelien_Bleriot_-_Izzet_Phoenix_(Standard,_#795923).dck
+Deck Type=constructed
+
+[Main]
+4 Arclight Phoenix
+2 Augur of Bolas
+2 Crackling Drake
+4 Goblin Electromancer
+2 Lightning Strike
+4 Opt
+2 Radical Idea
+4 Shock
+1 Beacon Bolt
+4 Chart a Course
+2 Discovery // Dispersal
+2 Finale of Promise
+2 Lava Coil
+2 Tormenting Voice
+3 Saheeli, Sublime Artificer
+6 Island
+6 Mountain
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+1 Beacon Bolt
+1 Island
+2 Lava Coil
+2 Disdainful Stroke
+3 Legion Warboss
+2 Narset, Parter of Veils
+2 Negate
+2 Spell Pierce

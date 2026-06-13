@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Tutankhamon
+Title=Tutankhamon
+Icon=Tutankhamon.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/AKINARI_Shimokawabe_-_Mono-Red_Aggro_(Standard,_#2535071).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Magebane Lizard
+4 Manifold Mouse
+4 Screaming Nemesis
+4 Twinmaw Stormbrood
+1 Monastery Swiftspear
+1 Tersa Lightshatter
+4 Burst Lightning
+4 Monstrous Rage
+16 Mountain
+4 Rockface Village
+2 Soulstone Sanctuary
+[Sideboard]
+4 Soul-Guide Lantern
+4 Sunspine Lynx
+3 Torch the Tower
+2 Lithomantic Barrage
+1 Obliterating Bolt
+1 Suplex

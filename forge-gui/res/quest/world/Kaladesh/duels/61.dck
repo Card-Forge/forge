@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Odin
+Title=Odin
+Icon=Odin.jpg
+Difficulty=Very Hard
+Description=../Modern/Kaladesh/Nicholas_Bray_-_Naya_Burn_(Modern,_#663562).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+2 Searing Blaze
+2 Shard Volley
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+2 Bloodstained Mire
+2 Inspiring Vantage
+4 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+2 Exquisite Firecraft
+2 Kor Firewalker
+3 Path to Exile
+2 Skullcrack

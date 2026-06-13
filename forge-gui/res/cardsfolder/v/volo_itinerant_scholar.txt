@@ -9,4 +9,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Targeted$CardNumNotedTypes
 K:Choose a Background
 DeckHas:Ability$Token & Type$Artifact
-Oracle:When Volo enters, create Volo's Journal, a legendary colorless artifact token with hexproof and "Whenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact."\n{2}, {T}: Draw a card for each creature type noted for target permanent you control named Volo's Journal.\nChoose a Background
+Oracle:When Volo enters, create Volo's Journal, a legendary colorless Book artifact token with hexproof and "Whenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact."\n{2}, {T}: Draw a card for each creature type noted for target permanent you control named Volo's Journal.\nChoose a Background

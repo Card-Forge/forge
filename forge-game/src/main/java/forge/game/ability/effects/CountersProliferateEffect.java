@@ -69,7 +69,7 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
                     ge.addCounter(ct, 1, p, table);
                 }
             }
-            table.replaceCounterEffect(game, sa, true);
+            table.replaceCounterEffect(game, sa);
 
             game.getTriggerHandler().runTrigger(TriggerType.Proliferate, AbilityKey.mapFromPlayer(p), false);
         }

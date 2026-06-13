@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Teysa
+Title=Teysa
+Icon=Teysa.jpg
+Difficulty=Hard
+Description=../Modern/Dragons_of_Tarkir/Modern_Daily_#9016982/hogpog_98_-_Naya_Burn_(Modern,_#342911).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+2 Boros Charm
+4 Lightning Bolt
+3 Searing Blaze
+2 Shard Volley
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+4 Bloodstained Mire
+3 Mountain
+4 Sacred Foundry
+3 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Back to Nature
+3 Destructive Revelry
+1 Molten Rain
+3 Path to Exile
+2 Rest in Peace
+2 Skullcrack
+1 Stony Silence

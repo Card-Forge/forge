@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Agrus
+Title=Agrus
+Icon=Agrus.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/2014_Modern_State_Championships_-_Pennsylvania/Byron_King_-_Burn_(Modern,_#81975).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+3 Searing Blaze
+1 Shard Volley
+4 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Blackcleave Cliffs
+1 Blood Crypt
+1 Marsh Flats
+2 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+1 Stomping Ground
+[Sideboard]
+2 Combust
+4 Destructive Revelry
+3 Molten Rain
+2 Relic of Progenitus
+3 Searing Blood

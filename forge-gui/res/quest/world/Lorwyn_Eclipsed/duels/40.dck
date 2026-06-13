@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Regigigas
+Title=Regigigas
+Icon=Regigigas.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/Evan_Kerr_-_W-U-B-G_Midrange_(Standard,_#2823854).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Deep-Cavern Bat
+4 Delney, Streetwise Lookout
+4 Dwynen, Gilt-Leaf Daen
+4 Icetill Explorer
+4 Lluwen, Imperfect Naturalist
+4 Ojer Kaslem, Deepest Growth
+4 Superior Spider-Man
+1 Zahur, Glory's Past
+4 Get Lost
+4 Lost Days
+4 With Great Power . . .
+4 Cavern of Souls
+4 Forest
+4 Island
+4 Mountain
+4 Plains
+4 Swamp
+[Sideboard]
+4 Annul
+4 Spell Pierce
+3 Negate
+3 Spell Snare
+1 Spellbook Vendor

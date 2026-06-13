@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Kane
+Title=Kane
+Icon=Kane.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Midnight_Hunt/Daniel_James_-_Selesnya_Midrange_(Standard,_#1223181).dck
+Deck Type=constructed
+
+[Main]
+2 Scute Swarm
+2 Brutal Cathar
+2 Murasa Rootgrazer
+3 Reidane, God of the Worthy
+3 Skyclave Apparition
+4 Yasharn, Implacable Earth
+4 Prosperous Innkeeper
+4 Esika's Chariot
+3 Storm the Festival
+4 Emeria's Call
+4 Wrenn and Seven
+3 Lair of the Hydra
+4 Branchloft Pathway
+4 Tangled Florahedron
+4 Overgrown Farmland
+5 Plains
+5 Forest
+[Sideboard]
+1 Brutal Cathar
+2 Vanquish the Horde
+2 Portable Hole
+2 Scute Swarm
+2 Vorinclex, Monstrous Raider
+3 Toski, Bearer of Secrets
+3 Tangletrap

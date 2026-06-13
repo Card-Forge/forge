@@ -1,0 +1,7 @@
+Name:Extremis Elite
+ManaCost:1 R
+Types:Creature Human Mercenary Villain
+PT:2/2
+A:AB$ PutCounter | Cost$ 5 RG RG | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | PowerUp$ True | SubAbility$ DBDamage | SpellDescription$ Put two +1/+1 counters on this creature. It deals 1 damage to any target. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+Oracle:Power-up — {4}{R}: Put two +1/+1 counters on this creature. It deals 1 damage to any target. (Activate each power-up ability only once. Reduce the cost by its mana cost if it entered this turn.)

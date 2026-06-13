@@ -588,6 +588,11 @@ public class Cost implements Serializable {
             return new CostBlight(splitStr[0]);
         }
 
+        if (parse.startsWith("Teamwork<")) {
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostTeamwork(splitStr[0]);
+        }
+
         if (parse.equals("Forage")) {
             return new CostForage();
         }
@@ -872,8 +877,7 @@ public class Cost implements Serializable {
         return cost.toString();
     }
 
-    // TODO: If a Cost needs to pay more than 10 of something, fill this array
-    // as appropriate
+    // TODO: If a Cost needs to pay more than 10 of something, fill this array as appropriate
     /**
      * Constant.
      * <code>numNames="{zero, a, two, three, four, five, six, "{trunked}</code>

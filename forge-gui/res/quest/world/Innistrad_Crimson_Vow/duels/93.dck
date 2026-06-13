@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Iblis
+Title=Iblis
+Icon=Iblis.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/benjamin13_-_Red_Deck_Wins_(Modern,_#1304460)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Abbot of Keral Keep
+4 Soul-Scar Mage
+4 Monastery Swiftspear
+4 Dragon's Rage Channeler
+2 Tarfire
+3 Manamorphose
+4 Lightning Bolt
+4 Lava Dart
+2 Reckless Impulse
+3 Crash Through
+4 Light Up the Stage
+4 Seal of Fire
+2 Wooded Foothills
+4 Bloodstained Mire
+4 Sunbaked Canyon
+8 Mountain
+[Sideboard]
+2 Soul-Guide Lantern
+2 Shattering Spree
+2 Relic of Progenitus
+3 Claim the Firstborn
+3 Bonecrusher Giant
+3 Blood Moon

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robot10
+Title=Robot10
+Icon=Agrus.jpg
+Difficulty=Medium
+Description=Abzan Control 
+Deck Type=constructed
+
+[Main]
+4 Anointer Priest
+4 Champion of Wits
+2 Sacred Cat
+2 The Scarab God
+2 Treasure Map
+4 Fatal Push
+3 Fumigate
+4 Anointed Procession
+4 Hidden Stockpile
+2 Ixalan's Binding
+3 Legion's Landing
+4 Concealed Courtyard
+3 Drowned Catacomb
+4 Evolving Wilds
+3 Glacial Fortress
+1 Island
+4 Plains
+2 Shefet Dunes
+3 Swamp
+[Sideboard]
+3 Authority of the Consuls
+4 Duress
+1 Ixalan's Binding
+2 Lost Legacy
+3 Negate
+2 River's Rebuke

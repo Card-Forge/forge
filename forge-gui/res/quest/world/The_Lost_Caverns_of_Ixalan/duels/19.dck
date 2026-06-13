@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=King Goldemar
+Title=King Goldemar
+Icon=King Goldemar.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Onodera_Kyohei_-_Vampire_(Standard,_#1990397).dck
+Deck Type=constructed
+
+[Main]
+4 Falkenrath Pit Fighter
+4 Bloodtithe Harvester
+4 Kumano Faces Kakkazan
+2 Sheoldred, the Apocalypse
+4 Voldaren Thrillseeker
+4 Deep-Cavern Bat
+4 Preacher of the Schism
+4 Roaming Throne
+1 Go for the Throat
+2 Cut Down
+2 Bitter Triumph
+4 Swamp
+5 Mountain
+3 Cavern of Souls
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+3 Haunted Ridge
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+[Sideboard]
+3 Duress
+2 Phyrexian Arena
+1 Go for the Throat
+1 Soul-Guide Lantern
+1 Path of Peril
+1 Sorin the Mirthless
+1 Vampires' Vengeance
+1 Hidetsugu Consumes All
+1 Gix's Command
+1 Urabrask's Forge
+2 Lithomantic Barrage

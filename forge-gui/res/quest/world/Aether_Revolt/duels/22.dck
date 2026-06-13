@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=MahamotiGenie
+Title=MahamotiGenie
+Icon=MahamotiGenie.jpg
+Difficulty=Medium
+Description=Aether_Revolt/maxxattack_-_Mardu_Vehicles_(Standard,_#668832).dck
+Deck Type=constructed
+
+[Main]
+2 Depala, Pilot Exemplar
+2 Pia Nalaar
+4 Scrapheap Scrounger
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+2 Cultivator's Caravan
+4 Heart of Kiran
+3 Shock
+4 Unlicensed Disintegration
+4 Gideon, Ally of Zendikar
+1 Aether Hub
+4 Concealed Courtyard
+4 Inspiring Vantage
+2 Mountain
+1 Needle Spires
+4 Plains
+1 Shambling Vent
+4 Spire of Industry
+2 Spirebluff Canal
+[Sideboard]
+1 Chandra, Torch of Defiance
+1 Cultivator's Caravan
+2 Fatal Push
+4 Metallic Rebuke
+2 Release the Gremlins
+1 Skysovereign, Consul Flagship
+1 Skywhaler's Shot
+2 Spirebluff Canal
+1 Thalia, Heretic Cathar

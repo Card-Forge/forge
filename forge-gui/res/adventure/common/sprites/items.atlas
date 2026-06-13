@@ -516,6 +516,12 @@ RobesOfOmniscience
 AngelicGreaves
   xy: 144, 144
   size: 16, 16
+AngelicArmaments
+  xy: 272, 368
+  size: 16, 16
+EvilAnkh
+  xy: 144, 512
+  size: 16, 16
 ConcordantBoots
   xy: 48, 128
   size: 16, 16

@@ -1,0 +1,8 @@
+Name:Punishing Punch
+ManaCost:2 G
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Creature.YouOwn | PresentCompare$ GE2 | PresentZone$ Graveyard | Description$ This spell costs {2} less to cast if there are two or more creature cards in your graveyard.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to twice its power to target creature an opponent controls.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | AILogic$ PowerDmg | ValidTgtDesc$ creature an opponent controls | NumDmg$ X | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower/Times.2
+Oracle:This spell costs {2} less to cast if there are two or more creature cards in your graveyard.\nTarget creature you control deals damage equal to twice its power to target creature an opponent controls.

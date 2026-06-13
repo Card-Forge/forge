@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Aleksander_Hudson_-_Gate_Control_(Standard,_#786160).dck
+Deck Type=constructed
+
+[Main]
+2 Archway Angel
+3 Gate Colossus
+4 Gatebreaker Ram
+2 Hydroid Krasis
+2 Expansion // Explosion
+4 Growth Spiral
+1 Negate
+4 Circuitous Route
+2 Deafening Clarion
+4 Gates Ablaze
+2 Lava Coil
+4 Guild Summit
+1 Azorius Guildgate
+2 Breeding Pool
+1 Dimir Guildgate
+4 Forest
+1 Gateway Plaza
+4 Gruul Guildgate
+4 Izzet Guildgate
+4 Plaza of Harmony
+1 Selesnya Guildgate
+4 Simic Guildgate
+[Sideboard]
+2 Archway Angel
+2 Hydroid Krasis
+3 Negate
+1 Banefire
+2 Crushing Canopy
+1 Mass Manipulation
+2 Niv-Mizzet, Parun
+2 Unmoored Ego

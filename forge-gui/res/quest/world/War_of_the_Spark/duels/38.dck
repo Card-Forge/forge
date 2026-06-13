@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Black Panther
+Title=Black Panther
+Icon=Black Panther.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Alan_Ngo_-_Grixis_Control_(Standard,_#797596).dck
+Deck Type=constructed
+
+[Main]
+4 Nicol Bolas, the Ravager
+2 Bedeck // Bedazzle
+4 Bedevil
+3 Angrath's Rampage
+2 Cry of the Carnarium
+3 Discovery // Dispersal
+2 Duress
+2 Enter the God-Eternals
+4 Thought Erasure
+2 Liliana, Dreadhorde General
+2 Narset, Parter of Veils
+4 Nicol Bolas, Dragon-God
+1 Ugin, the Ineffable
+2 Swamp
+4 Blood Crypt
+4 Dragonskull Summit
+4 Drowned Catacomb
+3 Steam Vents
+4 Sulfur Falls
+4 Watery Grave
+[Sideboard]
+1 Hostage Taker
+4 Legion Warboss
+2 Thief of Sanity
+2 Moment of Craving
+2 Duress
+1 Enter the God-Eternals
+1 The Elderspell
+2 Unmoored Ego

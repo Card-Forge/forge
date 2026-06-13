@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="139">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="142">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -12,7 +12,7 @@
  <tileset firstgid="36241" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="1" name="Background" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1zsOABAURUGtjVmi9Wp1Cp9HTDH9PZEINadUATYoF2zQC/CP0oneolfvquboDbNnNRK9FeAn7mcAANjnpff0ir/AS70ApzTJd8Q8
+   eJzt17EJACAMRUFbF3PEzCt2dhYqEbzi+vcJCEYtJQAuaA802AvwjzbJbrHX3lObsxt2b7WS3QrwE+8zAAAw+AsA3NEBOBzGHA==
   </data>
  </layer>
  <layer id="2" name="Walls" width="60" height="40">
@@ -30,7 +30,7 @@
  </layer>
  <layer id="8" name="Clutter" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmcFOgzAcxpt4ZWcVdttQH8Fn0QcwPoCLB48+AWMJKxxIBlPvHjzoY3nz4Ndgs+KgYVJawP6SL/+mXUq//kuBjhCLpT2Px+r6uk+LuPiJd6m6vvsGnzdvtYtMKufTJJcvu/JsScgcmgWIkB+Uy6zNX5obqwreBL8beMmgDbxlUB6Uy6wtH7jfOvh6Foni7q/L7pvU2ZeJ++kk0X9Nk+jI76E8rPelij7mt8ofq6MRITGURH/vu6/5rcJFvQdNW+S7j/mtg8JnDCWStT6m569LkV9oSsv1ovcxPX8pfMZQQuW/U73HDYEu9vYhYP2Ol6eQkOfw/6zrc3wvXFR8M1gsFoulez6cIr47Zsehi+tJEa8mZsehk68j0yPQSxO/OueEn0NmeLfLoW1YLrelzguvZ9HEGpjj3c6HzlblclNuX6vrRS/cm+jRlN/fVJ2Hy5D5rZPYzstDp4lHnX7Fs4bPlJCbbfX5gyzfp7jPXcgL5f9LyHKta10vaL2asoZPCsUK9jeLxWIZC9+8Hrmc
+   eJztmU9PgzAYxpt4ZWcVdttQP4KfRT+A8ajGxYNHPwFjCSscCIOpdw8e9EOp8ebBhyBZ2aBBKe3A/pInb/N2gT59y7+OEI2mOXe74o51E2Zx8hOvQ3HH3jbyebNmq5hK5Hyq5Phx1R5NCRlDIwcRsp1iO+2zp+rGKoJnxu8CXmJoAW8xlDjFdtqXdNxvFfl6ZvH89s+bXjehsSkV19NeIP+cKpFR399yO9+UKLaxvmX+0hz1CPGhwPv7sWXU9yIi5BK6iurlq+ppIm9Bwwb1llHfN/h5hz6ievkqKHz6UMBZ6316/poU9YWGtJhnvffp+Uvh04cCyv+d6HtcF2jj3t4FtN/+cu8S8uD+n3V9iO+Fo5JvBo1Go9G0z6uRxRdD7ThkcTrI4slA7Thk8rWjegRyqeNX5pzk+5Ax3u0SaOkW202p8pLn06hiDYzxbmdDB7Niuy7nT+V51kvujfWoyu86ZfvhPHh+q8T25+2uU8ejTL/sXsNnSMjZsnz/gVfvfVznJmS5/P8leLWWta4ntFp1mcMnhXwB9zeNRqPpC98+gsmM
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -72,8 +72,10 @@
   </object>
   <object id="110" template="../../../../common/maps/obj/enemy.tx" x="416" y="304">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Olivia's Bloodsworn|SOI&quot;, &quot;bride's gown|VOW&quot;, &quot;wedding invitation|VOW&quot;, &quot;Call the bloodline|SOI&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;bride's gown|VOW&quot;, &quot;wedding invitation|VOW&quot;, &quot;Call the bloodline|SOI&quot;]}"/>
     <property name="enemy" value="Olivia"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="60"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
@@ -185,5 +187,31 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   <object id="136" template="../../../../common/maps/obj/collision.tx" x="485.982" y="468.188" width="20.036" height="22.6238"/>
   <object id="137" template="../../../../common/maps/obj/collision.tx" x="519.482" y="465.688" width="17.036" height="22.6238"/>
   <object id="138" template="../../../../common/maps/obj/collision.tx" x="544.088" y="164.044" width="46.3242" height="11.9116"/>
+  <object id="139" template="../../../../common/maps/obj/enemy.tx" x="416.667" y="305">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Olivia's Bloodsworn|SOI&quot;, &quot;bride's gown|VOW&quot;, &quot;wedding invitation|VOW&quot;, &quot;Call the bloodline|SOI&quot;]}"/>
+    <property name="enemy" value="Olivia"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="140" template="../../../../common/maps/obj/shop.tx" x="260" y="208" width="34" height="16">
+   <properties>
+    <property name="commonShopList" value="Vampire"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="141" template="../../../../common/maps/obj/shop.tx" x="356.333" y="210.667" width="34" height="16">
+   <properties>
+    <property name="commonShopList" value="InnistradBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

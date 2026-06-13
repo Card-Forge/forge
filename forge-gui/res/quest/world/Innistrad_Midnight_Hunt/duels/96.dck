@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Gold
+Title=Dungeon Crawling Gold
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Will_Krueger_-_Orzhov_Hammer_(Modern,_#1224898)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Giver of Runes
+4 Stoneforge Mystic
+4 Esper Sentinel
+4 Puresteel Paladin
+4 Memnite
+4 Ornithopter
+1 Shadowspear
+1 Cranial Plating
+4 Springleaf Drum
+4 Colossus Hammer
+1 Steelshaper's Gift
+4 Urza's Saga
+4 Sigarda's Aid
+1 Godless Shrine
+1 Marsh Flats
+1 Windswept Heath
+3 Inkmoth Nexus
+4 Plains
+4 Silent Clearing
+4 Concealed Courtyard
+[Sideboard]
+1 Lurrus of the Dream-Den
+1 Cathar Commando
+1 Nihil Spellbomb
+1 Prismatic Ending
+1 Pithing Needle
+2 Void Mirror
+2 Path to Exile
+2 Knight of Malice
+4 Thoughtseize

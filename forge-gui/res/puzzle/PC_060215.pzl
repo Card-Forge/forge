@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 060215 - Burning Bright
 URL:http://www.gatheringmagic.com/seanuy-060215-burning-bright/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:Win this turn.
 [state]
 ActivePlayer=Human

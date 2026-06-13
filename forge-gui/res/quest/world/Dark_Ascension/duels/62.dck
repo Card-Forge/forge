@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Raven
+Title=Raven
+Icon=Raven.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/Melendians_2_-_Modern_Open/Carlos_Mas_-_Red_Deck_Wins_(Modern,_#29109).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+4 Goblin Guide
+4 Grim Lavamancer
+4 Incinerate
+4 Lightning Bolt
+4 Searing Blaze
+4 Shard Volley
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Blackcleave Cliffs
+4 Blood Crypt
+4 Mountain
+4 Scalding Tarn
+[Sideboard]
+3 Anathemancer
+2 Ball Lightning
+2 Flamebreak
+2 Grafdigger's Cage
+2 Guttural Response
+2 Rain of Gore
+2 Smash to Smithereens

@@ -1,0 +1,11 @@
+Name:Nev, the Practical Dean
+ManaCost:2 G
+Types:Legendary Creature Merfolk Wizard
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+HasCounters | AddKeyword$ Trample | Description$ Creatures you control with counters on them have trample.
+T:Mode$ SpellCast | ValidCard$ Card.hasXCost | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast your first spell with {X} in its mana cost each turn, put X +1/+1 counters on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$xPaid
+AI:RemoveDeck:Random
+DeckHas:Ability$Token
+Oracle:Creatures you control with counters on them have trample.\nWhenever you cast your first spell with {X} in its mana cost each turn, put X +1/+1 counters on Nev.

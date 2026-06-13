@@ -1,0 +1,18 @@
+Name:Bilbo, Luckwearer
+ManaCost:1 U
+Types:Legendary Creature Halfling Rogue
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ NICKNAME can't be blocked.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+AlternateMode:Adventure
+Oracle:Bilbo can't be blocked.\nWhenever Bilbo deals combat damage to a player, draw a card, then discard a card.
+
+ALTERNATE
+
+Name:Burglar's Plot
+ManaCost:4 U
+Types:Sorcery Adventure
+A:SP$ ExchangeControl | ValidTgts$ Permanent.nonLand | TargetsWithSameCardType$ True | TargetMin$ 2 | TargetMax$ 2 | ValidTgtDesc$ nonland permanent | SpellDescription$ Exchange control of two target nonland permanents that share a card type. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Exchange control of two target nonland permanents that share a card type. (Then exile this card. You may cast the creature later from exile.)

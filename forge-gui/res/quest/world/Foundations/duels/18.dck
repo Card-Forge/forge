@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=The Court Jester
+Title=The Court Jester
+Icon=The Court Jester.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/Fukutoku_Kazuto_-_Mono_Red_(Standard,_#2281630).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Manifold Mouse
+4 Screaming Nemesis
+1 Kellan, Planar Trailblazer
+2 Shock
+4 Lightning Strike
+4 Burst Lightning
+4 Monstrous Rage
+17 Mountain
+4 Rockface Village
+[Sideboard]
+4 Urabrask's Forge
+2 Lithomantic Barrage
+1 Torch the Tower
+4 Twisted Fealty
+4 Scorching Shot

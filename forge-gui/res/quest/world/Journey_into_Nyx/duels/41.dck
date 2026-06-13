@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Treebeard
+Title=Treebeard
+Icon=Treebeard.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/Gautier/Brad_Amos_-_Naya_Hexproof_(Standard,_#77325).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bassara Tower Archer
+3 Boon Satyr
+4 Experiment One
+4 Ghor-Clan Rampager
+4 Voice of Resurgence
+4 Witchstalker
+4 Advent of the Wurm
+3 Boros Charm
+4 Selesnya Charm
+3 Ajani, Caller of the Pride
+1 Forest
+4 Mana Confluence
+4 Sacred Foundry
+4 Stomping Ground
+4 Temple Garden
+2 Temple of Abandon
+4 Temple of Plenty
+[Sideboard]
+4 Ethereal Armor
+2 Gift of Orzhova
+4 Madcap Skills
+4 Unflinching Courage

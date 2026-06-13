@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=RasAlGhul
+Title=RasAlGhul
+Icon=RasAlGhul.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/DavidB6_-_Abzan_Aggro_(Modern,_#2250624).dck
+Deck Type=constructed
+
+[Main]
+4 Psychic Frog
+4 Abhorrent Oculus
+4 Archon of Cruelty
+2 Spell Snare
+1 Sink into Stupor
+4 Fatal Push
+4 Consider
+2 Force of Negation
+1 Sauron's Ransom
+4 Counterspell
+3 Bitter Triumph
+3 Thought Scour
+4 Persist
+1 Unearth
+4 Polluted Delta
+2 Island
+1 Swamp
+2 Undercity Sewers
+3 Watery Grave
+1 Verdant Catacombs
+1 Marsh Flats
+2 Scalding Tarn
+2 Gloomlake Verge
+1 Darkslick Shores
+[Sideboard]
+3 Cry of the Carnarium
+1 The Meathook Massacre
+1 Ghost Vacuum
+1 Stern Scolding
+2 Harbinger of the Seas
+3 Consign to Memory
+2 Nihil Spellbomb
+2 Tamiyo, Inquisitive Student

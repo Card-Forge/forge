@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Robot49
+Title=Robot49
+Icon=Boba Fett.jpg
+Difficulty=Hard
+Description=Esper Tokens 
+Deck Type=constructed
+
+[Main]
+4 Anointer Priest
+4 Champion of Wits
+3 Sacred Cat
+2 The Scarab God
+3 Fatal Push
+3 Fumigate
+1 Start // Finish
+4 Anointed Procession
+2 Cast Out
+4 Hidden Stockpile
+3 Legion's Landing
+3 Search for Azcanta
+4 Concealed Courtyard
+3 Drowned Catacomb
+4 Evolving Wilds
+3 Glacial Fortress
+2 Irrigated Farmland
+1 Island
+3 Plains
+1 Shefet Dunes
+3 Swamp
+[Sideboard]
+1 Aven Wind Guide
+4 Duress
+1 Fatal Push
+2 Forsake the Worldly
+2 Lost Legacy
+4 Negate
+1 Sunscourge Champion

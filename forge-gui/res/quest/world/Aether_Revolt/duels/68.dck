@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Joe Kidd
+Title=Joe Kidd
+Icon=Joe Kidd.jpg
+Difficulty=Hard
+Description=../Modern/Aether_Revolt/UWRgeist_-_UWRgeist_(5-0)_(Modern,_#666313).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodghast
+3 Diregraf Ghoul
+3 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+2 Relentless Dead
+3 Fatal Push
+2 Kolaghan's Command
+4 Lightning Bolt
+1 Terminate
+1 Blightning
+3 Collective Brutality
+2 Inquisition of Kozilek
+2 Thoughtseize
+3 Blackcleave Cliffs
+2 Blood Crypt
+4 Bloodstained Mire
+1 Dragonskull Summit
+4 Marsh Flats
+8 Swamp
+[Sideboard]
+2 Blood Artist
+3 Blood Moon
+3 Leyline of Sanctity
+2 Leyline of the Void
+1 Nihil Spellbomb
+3 Shatterstorm
+1 Terminate

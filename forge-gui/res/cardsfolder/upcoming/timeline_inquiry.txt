@@ -1,0 +1,7 @@
+Name:Timeline Inquiry
+ManaCost:3 U
+Types:Instant
+K:Teamwork:2
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBDiscard | StackDescription$ SpellDescription | SpellDescription$ Draw three cards. Then discard a card unless this spell was cast using teamwork.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | ConditionZone$ Stack | ConditionPresent$ Card.Self+Teamwork | ConditionCompare$ EQ0
+Oracle:Teamwork 2 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 2 or more.)\nDraw three cards. Then discard a card unless this spell was cast using teamwork.

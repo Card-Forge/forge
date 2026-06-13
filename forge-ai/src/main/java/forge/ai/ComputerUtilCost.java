@@ -680,6 +680,7 @@ public class ComputerUtilCost {
 
         if (root.costHasManaX()) {
             val = ComputerUtilMana.determineLeftoverMana(root, ai, effect);
+            // TODO find a way to consider lower value due to Ward
             if (sa.hasParam("AIXMax")) {
                 sa.setXManaCostPaid(val);
                 int calculated = AbilityUtils.calculateAmount(source, sa.getParam("AIXMax"), sa);

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ghost Rider
+Title=Ghost Rider
+Icon=Ghost Rider.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Tyler_Allen_-_Mono-Black_Control_(Modern,_#2003376).dck
+Deck Type=constructed
+
+[Main]
+4 Dauthi Voidwalker
+4 Grief
+3 Sheoldred, the Apocalypse
+2 Troll of Khazad-dûm
+4 The One Ring
+1 Cling to Dust
+4 Fatal Push
+4 Not Dead After All
+3 Sheoldred's Edict
+4 Thoughtseize
+4 Liliana of the Veil
+3 Castle Locthwain
+2 Demolition Field
+4 Field of Ruin
+3 Sunken Citadel
+9 Swamp
+1 Takenuma, Abandoned Mire
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+3 Ashiok, Dream Render
+2 Cursed Totem
+2 Damnation
+1 Pithing Needle
+3 Tourach, Dread Cantor
+3 Surgical Extraction
+1 Legion's End

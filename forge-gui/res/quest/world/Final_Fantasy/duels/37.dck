@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Totoro
+Title=Totoro
+Icon=Totoro.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/Caleb_Yetman_-_Izzet_Prowess_(Standard,_#2523877).dck
+Deck Type=constructed
+
+[Main]
+2 Drake Hatcher
+4 Vivi Ornitier
+4 Cori-Steel Cutter
+3 Into the Flood Maw
+2 Monstrous Rage
+2 This Town Ain't Big Enough
+3 Torch the Tower
+4 Opt
+1 Spell Pierce
+4 Stock Up
+4 Sleight of Hand
+2 Roaring Furnace // Steaming Sauna
+4 Stormchaser's Talent
+3 Mountain
+6 Island
+4 Riverpyre Verge
+4 Shivan Reef
+4 Spirebluff Canal
+[Sideboard]
+1 Spell Pierce
+1 Disdainful Stroke
+1 Enduring Curiosity
+1 Fiery Annihilation
+1 Get Out
+1 Ghost Vacuum
+1 Lithomantic Barrage
+1 Magic Damper
+2 Ral, Crackling Wit
+2 Abrade
+1 Torch the Tower
+2 Unable to Scream

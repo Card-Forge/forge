@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Hugo Drax
+Title=Hugo Drax
+Icon=Hugo Drax.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/Afiq_Tuah_-_Temur_Ramp_(Standard,_#1067362).dck
+Deck Type=constructed
+
+[Main]
+2 Brazen Borrower
+3 Terror of the Peaks
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+4 Beanstalk Giant
+2 The Great Henge
+2 Spikefield Hazard
+4 Mystical Dispute
+4 Cultivate
+4 Genesis Ultimatum
+2 Riverglide Pathway
+3 Mountain
+3 Fabled Passage
+3 Island
+4 Cragcrown Pathway
+4 Forest
+4 Ketria Triome
+[Sideboard]
+1 Obosh, the Preypiercer
+1 Ox of Agonas
+2 Soul Sear
+2 Soul-Guide Lantern
+2 The Akroan War
+3 Phoenix of Ash
+4 Miscast

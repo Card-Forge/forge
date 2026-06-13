@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=BrotherVoodoo
+Title=BrotherVoodoo
+Icon=BrotherVoodoo.jpg
+Difficulty=Hard
+Description=./Modern/Streets_of_New_Capenna/David_Phelps_-_Azorius_Midrange_(Modern,_#1447563).dck
+Deck Type=constructed
+
+[Main]
+1 Giant Killer
+3 Ambitious Farmhand
+4 Thraben Inspector
+4 Charming Prince
+4 Wall of Omens
+4 Sun Titan
+4 Solitude
+4 Skyclave Apparition
+4 Ranger-Captain of Eos
+4 March of Otherworldly Light
+4 Ephemerate
+4 Supreme Verdict
+1 Elspeth Resplendent
+4 Teferi, Time Raveler
+1 Prairie Stream
+1 Idyllic Grange
+3 Arid Mesa
+3 Ghost Quarter
+3 Emeria, the Sky Ruin
+4 Hallowed Fountain
+4 Field of Ruin
+4 Flooded Strand
+8 Plains
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Heliod's Intervention
+1 Burrenton Forge-Tender
+2 Sanctifier en-Vec
+2 Engineered Explosives
+4 Unlicensed Hearse
+4 Ratchet Bomb

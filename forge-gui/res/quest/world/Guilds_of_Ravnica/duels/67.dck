@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Hameln
+Title=Hameln
+Icon=Hameln.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Archgaze_-_Traverse_Death's_Shadow_(Modern,_#774790).dck
+Deck Type=constructed
+
+[Main]
+1 Cragganwick Cremator
+4 Death's Shadow
+4 Street Wraith
+4 Tarmogoyf
+2 Nihil Spellbomb
+3 Assassin's Trophy
+2 Fatal Push
+2 Kolaghan's Command
+3 Lightning Bolt
+1 Tarfire
+1 Temur Battle Rage
+2 Find // Finality
+3 Inquisition of Kozilek
+4 Thoughtseize
+4 Traverse the Ulvenwald
+2 Liliana of the Veil
+2 Blood Crypt
+4 Bloodstained Mire
+1 Forest
+1 Mountain
+2 Overgrown Tomb
+1 Stomping Ground
+1 Swamp
+4 Verdant Catacombs
+2 Wooded Foothills
+[Sideboard]
+1 Alpine Moon
+2 Ancient Grudge
+2 Anger of the Gods
+3 Collective Brutality
+1 Damping Sphere
+1 Engineered Explosives
+1 Grafdigger's Cage
+1 Grim Lavamancer
+2 Surgical Extraction
+1 Temur Battle Rage

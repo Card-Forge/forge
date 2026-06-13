@@ -17,12 +17,12 @@
  </layer>
  <layer id="6" name="Floor" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJztmGEKwjAMRnuD9gQO0YvOobfSXcoDKIj/xpbYL+3A9yD/QvI22iUsJQAAAAAAAABYYswpXYQx5bb+Q9HWO4rrbfH1v77f26P8Hrfc17+2r6pOr7749+27Z//n4RO1dSLw+K89g9rfOpfO4vNzKpo5551LKn9Vv3vjueOdg7PonP3D96dlnYi+o+HO7dlflRMB/vacCPC350SAvz3Hg3d/W9u7VDmR+1trVPubZ8er/UcRsb9Z6HU3VeBv4wXbyIKc
+   eJztmGEKwjAMRgs7QHsDEb3oJnoqnVdTEP+NLbFf2oHvQf+F5K20TVhKAAAAAAAAALDEmFOahOuS2/ofijbfUZxvi6//9b1vc/l93XJf/9q6qjy96uLft+6e/e/DZ9XmicDjv/YNan9rXzqL9/9UNH3O25dU519V79G473j74FN0zv7h/WmZJ6LuaLhze/ZXxUSAvz0mAvztMRHgb4/x4J3f1uYuVUzk/NYa1fzmmfFq/1FEzG8Wet1NFfjbeAFfqIJ7
   </data>
  </layer>
  <layer id="2" name="Ground" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt1yEOgDAMQNFZDOEAhHAd7i8wHIMDkAWBwKAoHe8lzWS/arJSAAC+Y+miCwDyGYfznYbYDgB4auvvk80+XZNR5nZowRp896L3w1+18H+fE7dX+mPpj1PvT+13f+K80X8AaXoOlw==
+   eJzt17EJgEAMQFHBykZuABHXcWf3sHEYOSwsbKyM0fcgXJlfBa5pAADeY+6iCwDyGcrxjiW2AwDu2vrrZLO052SUuR2+YA2+e9H74a++8H+fErdX+mPpj1PvT+13f+I80b8DKAAM+A==
   </data>
  </layer>
  <layer id="3" name="Foreground" width="48" height="48">
@@ -30,12 +30,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmEFuwjAQRcOyi3CEniLbCFj2iqhSC9yJDSAkztADkKixmlgez3c841TtWPqrWDMPk/h/u1lXVWMymUwm0x/XrtNVQdtC/JtOby/yao0f5vcHxZQyluSXGMaP6VRX1SegQ/3N9QHOP9Zl+FP/p1Lr+l/4Uf+6DfwXcH6uf3Fcrr7294usT+i3cr7UFuJH/DH0Thq/8efyo/W1+dG5Evyov1L+LMV/GmpSPM7f/fpz/YmqQ+WTMRuVNfqaHA/V19+3H6sfIT6C9KXmuN69Z3J+eSP6jnm+Xqf8vbj35Az0dWy+f+V8k1L8c3pq8vsyfpo/9Uyixa991gn1lOTPOSvEcmssO6e+Dwg/wpLiv0hPSX6Exfinz/w9gLp/oHLI0vxUvZR+Ofyx/BZbs97T7wGNz++x5yG20H7u2GJ7J5fftLI/t7YcG5rfQmsmObjeGvltiSGZf5YYc/NPit6H/XOvULvEXe9vvf80flk9AfkaanQ=
+   eJztmE0KwjAQhSuuXNTTuBV16RVF8O8ansONFsGT2GKDsWQyL80kFZ2Bt2qY+ZqmeZPMpkUxU6lUKpXqx7WqdUugZSb+Ra31RF5z5Yf5u0ExhcSQ/BKh/JhOZVHsAR3KF9cOHH8s8/CHfqdc8/ov/Kh/VS3/FRwf618cl8mf+v9F5sf1rpwvzTPxI/7oWpPKr/yx/Gj+1PzoWAl+1F8pf5biP7U5KR7j7938ff2JykP1JzYb1Ws0OTkeqq69b5/Hbz1GmI8gdakxpnbjmZxfVkRdm8fmN+/ArZMLUNewdf0r5p+U4u9TMxd/I+Wn+UPPJKn4U591XDUl+WPOCr6+1dc7h64HhB9hCfFfpKYkP8Ki/J/PunsAdf9A9SFD81P5QurF8Pv6N9+cNZ5+d8g+v/ueu9hc+7lh8+2dXP+Wqvfn5pZjQ/s315xJBlc7Rf82REj2P0NE3/4nRNt2/9wkyJ3jrvdb7z+VX1ZP0MViBw==
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt18EJgEAMBMBYwXVgBdao1mNZ1mABehy+/anhZmAh5LWvQCIAAAD6NpeI5cpavm4CAP04xoh9aKlzNrXzHQDgHVn/921qedoB/5X1/tCXEyGWD3c=
+   eJzt18EJgDAMBdCAA7iIM6rzOIPDKYhQ9OBRY96Df+npN9BAIwAAAGob+4hpz9y/3QQAali7e7LJ2j1j56uss2+1/bPd4w/v95S9P1SU9f++DEeezoDvyrp/qGUDuHkZgA==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

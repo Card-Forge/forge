@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Kojak
+Title=Kojak
+Icon=Kojak.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Missouri_-_USA/Larry_Waymon_-_Vampires_(Standard,_#1793).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Arrogant Bloodlord
+4 Gatekeeper of Malakir
+3 Malakir Bloodwitch
+4 Vampire Hexmage
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+4 Terminate
+4 Blightning
+4 Duress
+4 Sign in Blood
+4 Dragonskull Summit
+4 Lavaclaw Reaches
+1 Mountain
+12 Swamp
+3 Terramorphic Expanse
+[Sideboard]
+1 Consuming Vapors
+2 Doom Blade
+2 Executioner's Capsule
+4 Mind Rot
+2 Suffer the Past
+4 Thought Hemorrhage

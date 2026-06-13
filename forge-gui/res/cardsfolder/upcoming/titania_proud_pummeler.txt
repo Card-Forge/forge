@@ -1,0 +1,9 @@
+Name:Titania, Proud Pummeler
+ManaCost:3 R
+Types:Legendary Creature Human Villain
+PT:3/3
+K:First strike
+K:Melee
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Melee | Description$ Other creatures you control have melee.
+SVar:PlayMain1:TRUE
+Oracle:First strike\nMelee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nOther creatures you control have melee.

@@ -15,6 +15,11 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.YieldUpdate;
+import forge.gamemodes.match.input.InputConfirm;
+import forge.gamemodes.net.DeltaPacket;
+import forge.gui.GuiBase;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
 import forge.item.PaperCard;
@@ -24,18 +29,38 @@ import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
+import forge.util.Localizer;
+import forge.util.collect.FCollectionView;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 public interface IGuiGame {
-    void setGameView(GameView gameView);
+    record OrderResult<T>(List<T> ordered, boolean rememberDecision) implements Serializable {}
 
+    /**
+     * Whether the renderer for this GUI is the mobile port.
+     * For non-local GUIs this reflects the connected client's renderer
+     * (learned at lobby handshake), letting the host pick code paths that
+     * are actually implemented on the target.
+     */
+    default boolean isLibgdxPort() {
+        return GuiBase.getInterface().isLibgdxPort();
+    }
+
+    /**
+     * Set the game view with a sequence number for delta sync baseline.
+     * Local games ignore the sequence number.
+     */
+    default void setGameView(GameView gameView, long sequenceNumber) {
+        setGameView(gameView);
+    }
+    void setGameView(GameView gameView);
     GameView getGameView();
 
     void setOriginalGameController(PlayerView view, IGameController gameController);
-
     void setGameController(PlayerView player, IGameController gameController);
 
     void setSpectator(IGameController spectator);
@@ -46,12 +71,17 @@ public interface IGuiGame {
 
     void showCombat();
 
-    void showPromptMessage(PlayerView playerView, String message);
+    default void showPromptMessage(PlayerView playerView, String message) {
+        showPromptMessage(playerView, message, null);
+    }
+    void showPromptMessage(PlayerView playerView, String message, CardView card);
 
-    void showCardPromptMessage(PlayerView playerView, String message, CardView card);
+    /** Open or refresh the draw-offer dialog with the current tally. Default no-op for GUIs that don't render it. */
+    default void updateDrawOffer(DrawOfferMessage.Status update) { }
 
-    void updateButtons(PlayerView owner, boolean okEnabled, boolean cancelEnabled, boolean focusOk);
-
+    default void updateButtons(final PlayerView owner, final boolean okEnabled, final boolean cancelEnabled, final boolean focusOk) {
+        updateButtons(owner, Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"), okEnabled, cancelEnabled, focusOk);
+    }
     void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1);
 
     void flashIncorrectAction();
@@ -65,19 +95,16 @@ public interface IGuiGame {
     void updatePlayerControl();
 
     void enableOverlay();
-
     void disableOverlay();
 
     void finishGame();
 
     void showManaPool(PlayerView player);
-
     void hideManaPool(PlayerView player);
 
     void updateStack();
 
     void notifyStackAddition(final GameEventSpellAbilityCast event);
-
     void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
 
     void handleLandPlayed(CardView land);
@@ -98,6 +125,7 @@ public interface IGuiGame {
     void updateSingleCard(CardView card);
 
     void updateCards(Iterable<CardView> cards);
+    default void updateCardsNetSafe(FCollectionView<CardView> cards) { updateCards(isNetGame() ? cards.threadSafeIterable() : cards); }
 
     void updateRevealedCards(TrackableCollection<CardView> collection);
 
@@ -123,49 +151,41 @@ public interface IGuiGame {
     // The Object passed should be GameEntityView for most case. Can be Byte for "generate mana of any combination" effect
     Map<Object, Integer> assignGenericAmount(CardView effectSource, Map<Object, Integer> target, int amount, final boolean atLeastOne, final String amountLabel);
 
-    void message(String message);
-
+    default void message(final String message) {
+        message(message, "Forge");
+    }
     void message(String message, String title);
 
-    void showErrorDialog(String message);
-
+    default void showErrorDialog(final String message) {
+        showErrorDialog(message, "Error");
+    }
     void showErrorDialog(String message, String title);
 
-    boolean showConfirmDialog(String message, String title);
-
-    boolean showConfirmDialog(String message, String title, boolean defaultYes);
-
-    boolean showConfirmDialog(String message, String title, String yesButtonText, String noButtonText);
-
+    default boolean showConfirmDialog(final String message, final String title) {
+        return showConfirmDialog(message, title, InputConfirm.defaultOptions.get(0), InputConfirm.defaultOptions.get(1));
+    }
+    default boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText) {
+        return showConfirmDialog(message, title, yesButtonText, noButtonText, true);
+    }
     boolean showConfirmDialog(String message, String title, String yesButtonText, String noButtonText, boolean defaultYes);
 
     int showOptionDialog(String message, String title, FSkinProp icon, List<String> options, int defaultOption);
 
-    String showInputDialog(String message, String title, boolean isNumeric);
-
-    String showInputDialog(String message, String title, FSkinProp icon);
-
-    String showInputDialog(String message, String title, FSkinProp icon, String initialInput);
-
     String showInputDialog(String message, String title, FSkinProp icon, String initialInput, List<String> inputOptions, boolean isNumeric);
 
-    boolean confirm(CardView c, String question);
-
-    boolean confirm(CardView c, String question, List<String> options);
-
+    default boolean confirm(final CardView c, final String question) {
+        return confirm(c, question, true, InputConfirm.defaultOptions);
+    }
     boolean confirm(CardView c, String question, boolean defaultIsYes, List<String> options);
 
-    <T> List<T> getChoices(String message, int min, int max, List<T> choices);
-
+    // returned Object will never be null
+    default <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices) {
+        return getChoices(message, min, max, choices, null, null);
+    }
     <T> List<T> getChoices(String message, int min, int max, List<T> choices, List<T> selected, FSerializableFunction<T, String> display);
 
     // Get Integer in range
-    Integer getInteger(String message, int min);
-
-    Integer getInteger(String message, int min, int max);
-
     Integer getInteger(String message, int min, int max, boolean sortDesc);
-
     Integer getInteger(String message, int min, int max, int cutoff);
 
     /**
@@ -190,20 +210,28 @@ public interface IGuiGame {
      * @param choices a T object.
      * @return One of {@code choices}. Can only be {@code null} if {@code choices} is empty.
      */
-    <T> T one(String message, List<T> choices);
+    default <T> T one(final String message, final List<T> choices) {
+        return one(message, choices, null);
+    }
     <T> T one(String message, List<T> choices, FSerializableFunction<T, String> display);
 
     <T> void reveal(String message, List<T> items);
 
-    <T> List<T> many(String title, String topCaption, int cnt, List<T> sourceChoices, CardView c);
-
-    <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, CardView c);
-
+    default <T> List<T> many(final String title, final String topCaption, final int cnt, final List<T> sourceChoices, final CardView c) {
+        return many(title, topCaption, cnt, cnt, sourceChoices, c);
+    }
+    default <T> List<T> many(final String title, final String topCaption, final int min, final int max, final List<T> sourceChoices, final CardView c) {
+        return many(title, topCaption, min, max, sourceChoices, null, c);
+    }
     <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, List<T> destChoices, CardView c);
 
-    <T> List<T> order(String title, String top, List<T> sourceChoices, CardView c);
-
-    <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices, CardView referenceCard, boolean sideboardingMode);
+    default <T> List<T> order(String title, String top, List<T> sourceChoices, CardView c) {
+        return order(title, top, 0, 0, sourceChoices, null, c, false, false).ordered();
+    }
+    default <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices, CardView referenceCard, boolean sideboardingMode) {
+        return order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, false).ordered();
+    }
+    <T> OrderResult<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices, CardView referenceCard, boolean sideboardingMode, boolean showRememberCheckbox);
 
     /**
      * Ask the user to insert an object into a list of other objects. The
@@ -234,61 +262,52 @@ public interface IGuiGame {
 
     void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates);
 
-    void setHighlighted(PlayerView pv, boolean b);
+    void setHighlighted(Iterable<GameEntityView> entities, boolean b);
 
-    void setUsedToPay(CardView card, boolean value);
-
-    void setSelectables(final Iterable<CardView> cards);
-
+    /**
+     * Mark {@code cards} as selectable and publish the active selection's
+     * minimum / maximum required count for client-side use (e.g.,
+     * select-min hotkeys). Callers without a known range pass {@code (0, 0)}.
+     */
+    void setSelectables(Iterable<CardView> cards, int min, int max);
     void clearSelectables();
-
     boolean isSelecting();
 
-    boolean isGamePaused();
+    void setWeaklySelectable(final Iterable<CardView> cards);
+    void clearWeaklySelectable();
 
+    boolean isGamePaused();
     void setGamePause(boolean pause);
 
     PlaybackSpeed getGameSpeed();
     void setGameSpeed(PlaybackSpeed gameSpeed);
 
     String getDayTime();
-
     void updateDayTime(String daytime);
 
     void awaitNextInput();
-
     void cancelAwaitNextInput();
-
-    boolean isUiSetToSkipPhase(PlayerView playerTurn, PhaseType phase);
-
-    void autoPassUntilEndOfTurn(PlayerView player);
-
-    boolean mayAutoPass(PlayerView player);
-
-    void autoPassCancel(PlayerView player);
-
-    void updateAutoPassPrompt();
-
-    boolean shouldAutoYield(String key);
-
-    void setShouldAutoYield(String key, boolean autoYield);
-
-    boolean shouldAlwaysAcceptTrigger(int trigger);
-
-    boolean shouldAlwaysDeclineTrigger(int trigger);
-
-    void setShouldAlwaysAcceptTrigger(int trigger);
-
-    void setShouldAlwaysDeclineTrigger(int trigger);
-
-    void setShouldAlwaysAskTrigger(int trigger);
-
-    void clearAutoYields();
-
-    void setCurrentPlayer(PlayerView player);
 
     /** Signal to start a client-side elapsed timer for waiting display. */
     void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
+
+    boolean isUiSetToSkipPhase(PlayerView playerTurn, PhaseType phase);
+
+    void updateAutoPassPrompt();
+
+    void setCurrentPlayer(PlayerView player);
+
+    /**
+     * Apply a delta update packet to the local game state.
+     * @param packet the delta packet containing changes
+     */
+    void applyDelta(DeltaPacket packet);
+
+    /** Repaint marker chevron / stack-yield UI for the given player. */
+    default void refreshYieldUi(PlayerView player) {}
+
+    /** Apply an authoritative yield-state change. {@link forge.gamemodes.match.AbstractGuiGame} routes to the local {@link forge.interfaces.IGameController}; {@link forge.gamemodes.net.server.RemoteClientGuiGame} forwards over the wire. */
+    void applyYieldUpdate(YieldUpdate update);
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();

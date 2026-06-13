@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Tanit
+Title=Tanit
+Icon=Tanit.jpg
+Difficulty=Hard
+Description=./Modern/Streets_of_New_Capenna/Aron_Allen_-_Dimir_Tempo_(Modern,_#1391807)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Murktide Regent
+2 Ledger Shredder
+2 Snapcaster Mage
+3 Sedgemoor Witch
+1 Spell Pierce
+1 Darkblast
+1 Cling to Dust
+2 Thought Scour
+2 Tainted Indulgence
+2 Archmage's Charm
+3 Drown in the Loch
+3 Fatal Push
+4 Counterspell
+4 Consider
+1 Bloodchief's Thirst
+1 Unearth
+2 Thoughtseize
+3 Inquisition of Kozilek
+1 Sunken Ruins
+1 Otawara, Soaring City
+1 Swamp
+1 Creeping Tar Pit
+2 River of Tears
+2 Flooded Strand
+2 Watery Grave
+3 Island
+4 Polluted Delta
+4 Darkslick Shores
+[Sideboard]
+1 Tourach, Dread Cantor
+1 Break the Ice
+1 Engineered Explosives
+1 Cling to Dust
+1 Sudden Edict
+1 Flusterstorm
+1 Memory Deluge
+1 Chalice of the Void
+1 Jace, the Mind Sculptor
+2 Aether Gust
+2 Nihil Spellbomb
+2 Dress Down

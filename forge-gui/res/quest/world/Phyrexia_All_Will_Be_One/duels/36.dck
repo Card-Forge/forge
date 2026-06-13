@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Tibalt
+Title=Tibalt
+Icon=Tibalt.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/Gabriele_Nardella_-_Azorius_Aggro_(Standard,_#1583445).dck
+Deck Type=constructed
+
+[Main]
+4 Recruitment Officer
+3 Yotian Frontliner
+2 Skrelv, Defector Mite
+4 Thalia, Guardian of Thraben
+4 Valiant Veteran
+3 Dennick, Pious Apprentice
+2 Guardian of New Benalia
+4 Skystrike Officer
+4 Siege Veteran
+2 Myrel, Shield of Argive
+3 Harbin, Vanguard Aviator
+2 Resolute Reinforcements
+4 Adarkar Wastes
+4 Seachrome Coast
+4 Secluded Courtyard
+2 Otawara, Soaring City
+2 Eiganjo, Seat of the Empire
+2 Plaza of Heroes
+1 Plains
+4 Fortified Beachhead
+[Sideboard]
+3 Lantern Flare
+3 Make Disappear
+3 Fateful Absence
+2 Slip Out the Back
+2 Knockout Blow
+2 Destroy Evil

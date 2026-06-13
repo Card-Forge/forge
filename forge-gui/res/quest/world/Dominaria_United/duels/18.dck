@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Riptide
+Title=Riptide
+Icon=Riptide.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/Freshlop_-_Mono_Red_Aggro_(Standard,_#1455891).dck
+Deck Type=constructed
+
+[Main]
+2 Squee, Dubious Monarch
+3 Thundering Raiju
+4 Kumano Faces Kakkazan
+4 Reckless Stormseeker
+4 Bloodthirsty Adversary
+4 Falkenrath Pit Fighter
+4 Shivan Devastator
+2 Rending Flame
+3 Lightning Strike
+2 Light Up the Night
+2 Jaya, Fiery Negotiator
+2 Chandra, Dressed to Kill
+1 Sokenzan, Crucible of Defiance
+23 Mountain
+[Sideboard]
+1 Lightning Strike
+1 Abrade
+1 Thundering Raiju
+1 Jaya, Fiery Negotiator
+2 Rending Flame
+2 Chandra, Dressed to Kill
+3 Strangle
+4 Fable of the Mirror-Breaker

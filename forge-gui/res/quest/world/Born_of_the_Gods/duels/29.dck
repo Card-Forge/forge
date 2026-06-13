@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Abiku
+Title=Abiku
+Icon=Abiku.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/SCG_Invitational_Qualifier_-_Stroudsburg,_PA/Enver_Ahmeti_-_Red_Deck_Wins_(Standard,_#70144).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Chandra's Phoenix
+2 Satyr Firedancer
+4 Boros Charm
+4 Lightning Strike
+4 Magma Jet
+3 Searing Blood
+4 Shock
+4 Skullcrack
+4 Warleader's Helix
+1 Rakdos's Return
+4 Toil // Trouble
+2 Blood Crypt
+6 Mountain
+4 Sacred Foundry
+2 Temple of Malice
+4 Temple of Silence
+4 Temple of Triumph
+[Sideboard]
+3 Boros Reckoner
+3 Chained to the Rocks
+4 Oracle of Bones
+2 Slaughter Games

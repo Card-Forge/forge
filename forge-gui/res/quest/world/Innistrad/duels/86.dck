@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=BlackTalon
+Title=BlackTalon
+Icon=BlackTalon.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/WPN_Qualifier_Modern_Turniers_vom_13.03.2012/Sebastian_Hausmann_-_Red_Deck_Wins_(Modern,_#28061).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Grim Lavamancer
+3 Hellspark Elemental
+4 Mogg Fanatic
+4 Stormblood Berserker
+4 Tarmogoyf
+1 Brimstone Volley
+4 Lightning Bolt
+1 Searing Blaze
+1 Shard Volley
+4 Lava Spike
+4 Rift Bolt
+3 Seal of Fire
+4 Arid Mesa
+4 Copperline Gorge
+4 Mountain
+4 Scalding Tarn
+3 Stomping Ground
+[Sideboard]
+2 Ancient Grudge
+3 Blood Moon
+2 Seal of Primordium
+4 Sulfur Elemental
+1 Sword of Body and Mind
+1 Sword of Feast and Famine
+2 Torpor Orb

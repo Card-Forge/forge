@@ -851,7 +851,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         triggerList.triggerChangesZoneAll(game, sa);
-        counterTable.replaceCounterEffect(game, sa, true);
+        counterTable.replaceCounterEffect(game, sa);
 
         if (sa.hasParam("AtEOT") && !triggerList.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());
@@ -894,8 +894,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     private void changeHiddenOriginResolve(final SpellAbility sa) {
-        List<Player> fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
+        final Card source = sa.getHostCard();
+        final Game game = source.getGame();
+        final boolean chooseFromDef = sa.hasParam("ChooseFromDefined");
+        final boolean defined = sa.hasParam("Defined") || chooseFromDef;
+        final String changeType = sa.getParamOrDefault("ChangeType", "");
+        boolean mandatory = sa.hasParam("Mandatory");
+        Map<Player, HiddenOriginChoices> hiddenChoices = Maps.newHashMap();
 
+        List<Player> fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
         Player chooser = null;
         if (sa.hasParam("Chooser")) {
             final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
@@ -903,18 +910,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 chooser = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
             }
         }
-
-        changeZonePlayerInvariant(chooser, sa, fetchers);
-    }
-
-    private void changeZonePlayerInvariant(Player chooser, SpellAbility sa, List<Player> fetchers) {
-        final Card source = sa.getHostCard();
-        final Game game = source.getGame();
-        final boolean chooseFromDef = sa.hasParam("ChooseFromDefined");
-        final boolean defined = sa.hasParam("Defined") || chooseFromDef;
-        final String changeType = sa.getParamOrDefault("ChangeType", "");
-        boolean mandatory = sa.hasParam("Mandatory");
-        Map<Player, HiddenOriginChoices> HiddenOriginChoicesMap = Maps.newHashMap();
 
         for (Player player : fetchers) {
             Player decider = chooser;
@@ -1145,8 +1140,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
                 // ensure that selection is within maximum allowed changeNum
+                final int multiMin = sa.hasParam("Mandatory") ? Math.min(changeNum, fetchList.size()) : 0;
                 do {
-                    selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, 0, changeNum, delayedReveal, selectPrompt, decider);
+                    selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, multiMin, changeNum, delayedReveal, selectPrompt, decider);
                 } while (selectedCards != null && selectedCards.size() > changeNum);
                 if (selectedCards != null) {
                     chosenCards.addAll(selectedCards);
@@ -1279,7 +1275,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             choices.libraryPos = libraryPos;
             choices.origin = origin;
             choices.destination = destination;
-            HiddenOriginChoicesMap.put(player, choices);
+            hiddenChoices.put(player, choices);
         }
 
         final boolean remember = sa.hasParam("RememberChanged");
@@ -1290,13 +1286,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         boolean combatChanged = false;
         final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
 
-        for (Player player : HiddenOriginChoicesMap.keySet()) {
-            boolean searchedLibrary = HiddenOriginChoicesMap.get(player).searchedLibrary;
-            boolean shuffleMandatory = HiddenOriginChoicesMap.get(player).shuffleMandatory;
-            CardCollection chosenCards = HiddenOriginChoicesMap.get(player).chosenCards;
-            int libraryPos = HiddenOriginChoicesMap.get(player).libraryPos;
-            List<ZoneType> origin = HiddenOriginChoicesMap.get(player).origin;
-            ZoneType destination = HiddenOriginChoicesMap.get(player).destination;
+        for (Player player : hiddenChoices.keySet()) {
+            boolean searchedLibrary = hiddenChoices.get(player).searchedLibrary;
+            boolean shuffleMandatory = hiddenChoices.get(player).shuffleMandatory;
+            CardCollection chosenCards = hiddenChoices.get(player).chosenCards;
+            int libraryPos = hiddenChoices.get(player).libraryPos;
+            List<ZoneType> origin = hiddenChoices.get(player).origin;
+            ZoneType destination = hiddenChoices.get(player).destination;
             CardCollection movedCards = new CardCollection();
             Player decider = Objects.requireNonNullElse(chooser, player);
 
@@ -1504,7 +1500,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     int cAmount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
                     GameEntityCounterTable table = new GameEntityCounterTable();
                     movedCard.addCounter(cType, cAmount, player, table);
-                    table.replaceCounterEffect(game, sa, true);
+                    table.replaceCounterEffect(game, sa);
                 }
             }
 
@@ -1565,8 +1561,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     }
 
     private static boolean allowMultiSelect(Player decider, SpellAbility sa) {
-        return decider.getController().isGuiPlayer()        // limit mass selection to human players for now
-                && !sa.hasParam("Mandatory")                // only handle optional decisions, for now
+        return !decider.getController().isAI()
                 && !sa.hasParam("ShareLandType")
                 && !sa.hasParam("DifferentNames")
                 && !sa.hasParam("DifferentPower")

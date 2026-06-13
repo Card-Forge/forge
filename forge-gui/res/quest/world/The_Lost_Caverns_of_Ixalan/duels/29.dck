@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Endora
+Title=Endora
+Icon=Endora.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/MadHatter1442_-_Golgari_Midrange_(Standard,_#1968852).dck
+Deck Type=constructed
+
+[Main]
+2 Archfiend of the Dross
+3 Glissa Sunslayer
+2 Sheoldred, the Apocalypse
+4 Mosswood Dreadknight
+1 Aclazotz, Deepest Betrayal
+4 Deep-Cavern Bat
+4 Sentinel of the Nameless City
+4 Graveyard Trespasser
+3 Cut Down
+4 Go for the Throat
+2 Virtue of Persistence
+2 Gix's Command
+4 Forest
+1 Boseiju, Who Endures
+4 Restless Cottage
+1 Takenuma, Abandoned Mire
+4 Deathcap Glade
+4 Llanowar Wastes
+7 Swamp
+[Sideboard]
+4 Path of Peril
+1 Tear Asunder
+3 Duress
+2 Tranquil Frillback
+2 Liliana of the Veil
+2 Nissa, Ascended Animist
+1 The End

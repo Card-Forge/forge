@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Denethor
+Title=Denethor
+Icon=Denethor.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Clement_"nokcaj"_Sillere_-_Azorius_Miracle_(Modern,_#1218286).dck
+Deck Type=constructed
+
+[Main]
+2 Snapcaster Mage
+1 Archmage's Charm
+2 Fateful Absence
+3 Counterspell
+4 Path to Exile
+4 Opt
+4 Cryptic Command
+4 Terminus
+4 Omen of the Sea
+1 Teferi, Hero of Dominaria
+3 Teferi, Time Raveler
+3 Jace, the Mind Sculptor
+1 Prismatic Vista
+2 Glacial Fortress
+2 Plains
+2 Castle Vantress
+2 Hallowed Fountain
+3 Field of Ruin
+4 Celestial Colonnade
+4 Flooded Strand
+5 Island
+[Sideboard]
+1 Settle the Wreckage
+1 Aether Gust
+1 Engineered Explosives
+2 Fateful Absence
+2 Dovin's Veto
+2 Surgical Extraction
+2 Shark Typhoon
+4 Sunset Revelry

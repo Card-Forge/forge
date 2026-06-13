@@ -1,0 +1,8 @@
+[metadata]
+Code=FRC
+Date=2026-10-02
+Name=Reality Fracture Commander
+Type=Commander
+ScryfallCode=FRC
+
+[cards]

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=R2-D2
+Title=R2-D2
+Icon=R2-D2.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Kazemoto_Ryosuke_-_BR_Aggro_(Standard,_#1754370).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+4 Okiba Reckoner Raid
+4 Kumano Faces Kakkazan
+4 Tenacious Underdog
+4 Braids, Arisen Nightmare
+2 Sheoldred, the Apocalypse
+3 Charming Scoundrel
+4 Lightning Strike
+3 Play with Fire
+4 Hopeless Nightmare
+2 Liliana of the Veil
+7 Swamp
+2 Mountain
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+3 Haunted Ridge
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+[Sideboard]
+2 Duress
+2 Go for the Throat
+2 Ob Nixilis, the Adversary
+2 Unlicensed Hearse
+3 Cut Down
+2 Soulless Jailer
+2 Glistening Deluge

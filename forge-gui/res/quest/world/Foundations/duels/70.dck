@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=SerendibGenie
+Title=SerendibGenie
+Icon=SerendibGenie.jpg
+Difficulty=Hard
+Description=./Modern/Foundations/MagicalSnap_-_Dimir_Murktide_(Modern,_#2282001).dck
+Deck Type=constructed
+
+[Main]
+1 Harbinger of the Seas
+2 Kiora, the Rising Tide
+2 Orcish Bowmasters
+4 Psychic Frog
+4 Abhorrent Oculus
+3 Spell Snare
+2 Force of Negation
+2 Sink into Stupor
+4 Counterspell
+4 Thought Scour
+4 Fatal Push
+1 Shoot the Sheriff
+2 Spell Pierce
+4 Unearth
+3 Thoughtseize
+2 Bloodstained Mire
+1 Swamp
+3 Watery Grave
+2 Flooded Strand
+4 Polluted Delta
+1 Darkslick Shores
+2 Island
+2 Undercity Sewers
+1 Otawara, Soaring City
+[Sideboard]
+4 Consign to Memory
+2 Mystical Dispute
+2 Toxic Deluge
+2 Graveyard Trespasser
+2 Harbinger of the Seas
+1 Nihil Spellbomb
+2 Dreams of Steel and Oil

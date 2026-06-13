@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Anakin Skywalker
+Title=Anakin Skywalker
+Icon=Anakin Skywalker.jpg
+Difficulty=Medium
+Description=Magic_Origins/SCG_Invitational_Qualifier_Portland/Kian_Dye_-_Abzan_Control_(Standard,_#318469).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+3 Den Protector
+1 Dragonlord Dromoka
+2 Nissa, Vastwood Seer
+4 Siege Rhino
+1 Tasigur, the Golden Fang
+4 Abzan Charm
+1 Bile Blight
+1 Dromoka's Command
+3 Hero's Downfall
+2 Ultimate Price
+2 Languish
+3 Thoughtseize
+2 Elspeth, Sun's Champion
+1 Ugin, the Spirit Dragon
+2 Caves of Koilos
+4 Forest
+3 Llanowar Wastes
+1 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+4 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+1 Back to Nature
+2 Drown in Sorrow
+2 Duress
+1 End Hostilities
+3 Fleecemane Lion
+2 Read the Bones
+1 Tragic Arrogance
+1 Unravel the AEther

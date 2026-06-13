@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Surtr
+Title=Surtr
+Icon=Surtr.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine/Chris_Cousens_-_Orzhov_Phyrexians_(Standard,_#1636190).dck
+Deck Type=constructed
+
+[Main]
+2 Sheoldred, the Apocalypse
+2 Elas il-Kor, Sadistic Pilgrim
+4 Grafted Butcher
+2 Elesh Norn
+2 Gix, Yawgmoth Praetor
+2 Vraan, Executioner Thane
+4 Crawling Chorus
+4 Progenitor Exarch
+4 Bloated Processor
+2 Knight-Errant of Eos
+4 Skrelv, Defector Mite
+3 Go for the Throat
+1 Takenuma, Abandoned Mire
+2 Secluded Courtyard
+4 The Seedcore
+2 Plains
+2 Swamp
+4 Caves of Koilos
+4 Mirrex
+4 Shattered Sanctum
+2 Eiganjo, Seat of the Empire
+[Sideboard]
+2 Graveyard Trespasser
+1 Surge of Salvation
+3 Loran of the Third Path
+3 Skrelv's Hive
+3 Invasion of Gobakhan
+3 Cut Down

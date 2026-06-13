@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Trostani
+Title=Trostani
+Icon=Trostani.jpg
+Difficulty=Hard
+Description=./Modern/Aetherdrift/Sadie_Braun_-_Orzhov_Death_&_Taxes_(Modern,_#2384539).dck
+Deck Type=constructed
+
+[Main]
+2 Boggart Trawler
+3 Emperor of Bones
+3 Flickerwisp
+4 Ketramose, the New Dawn
+2 Orcish Bowmasters
+4 Overlord of the Balemurk
+4 Phelia, Exuberant Shepherd
+4 Solitude
+4 Witch Enchanter
+4 Aether Vial
+3 Relic of Progenitus
+3 Ephemerate
+4 Fatal Push
+4 Flooded Strand
+2 Godless Shrine
+4 Marsh Flats
+3 Plains
+2 Shadowy Backstreet
+1 Swamp
+[Sideboard]
+2 Aven Interrupter
+2 Damping Sphere
+2 Drannith Magistrate
+1 Elesh Norn, Mother of Machines
+1 March of Otherworldly Light
+2 Stony Silence
+2 White Orchid Phantom
+3 Wrath of the Skies

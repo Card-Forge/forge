@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="137">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="138">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJydVk1uEzEUdpqkmQxSF5AGOAMSYqYnSNM0SCAugVCbLroCJGAVRDkEV0DqGagqkbTpGpCADSfhfdhf/MaxJxGWPo3Hfs/f+/ObGewZM4igrRDbXwet19lA/qy0ciOH5n9wUr9VWow3OAc6kGsUxmwJhnsW22UVsXPaSp9j0rUYJrhHpdeB3EA49wWzzJgsN+ZangvBlsyvMm8L43LontQP0Sji3KOyqjMVufeFqYxvPWO+C3700nPqt0S3LdgurJ0D58PQ2afjC/lL2f8aYOb4X+4a80rwejc9J++B6IwEh+DPrR+N3M4HyJXKySyL55L5ut035o6g10/PyftBeM4EH1WujhnL0uYF5/6UGP0S/O5Zm1gT1MHQMjcPPfQ6eevycFFan3H2G4nRW8E7FysOcI7F5s87VRnNG+oCdXk4cT435ey7EqN7gvv9qp/gJK+W0byhLlCXB/g6df6i5sL4nHY976WrL577rLS2aGiZJ7dW8WnH5xeA38eR+Nxknrepap4IebVMM/d1wgHeeWbze1F6GfitY4L1ltsbuvp7XHiE/MNE39C86D847yjYw1i4PeqNXc/EPMZLdAqLVC2Dl+9hLDCYa827H+GlHO/cC8F5P13L4OX7un5HXtbMF+F40LFcXMNAjtCPzmt6Cnj5nrJN2zB7JLnGd4O137G50GvsgeDNVP5Qs8gp84sYhXWk59oGzfu8a3n/1axbY11OXJxxD8ira5a2IR+49xio707un9oGzXvkeK+Uv3V9MTU/XdNLaTM5YC9423mVd5NvlZ7jfq77pumYTiJxruuLdf1y3TdNc8yzeJyXuSzqQVnewT+NVWD9aWlBjkW2GueGOg+9spUAe+gs6EsxLHmV3jLO/EdVvOiVBwmwh57U8IW8uveSl2vTwvsxz/ydYCzBg/rdzu067vdfMuZc3g==
+   eJydVstuEzEUdZrXZJBYQBrgG5AQM/2CNE1TCcRPINSmi64ACVgFUX4Gqd9AVYmkTddQCdjwJdyDfeI7rj2JsHQ0Hvten/vynRnuGDOMoK0Q218HrdfdQP60tHJjh+Z/cFK/VVpMNjgHOpBrFMZsCUY7Fp2yitg5baXPMe1ZjBLc49LrQG4onLuCeWZMlhtzJc+lYEvml5m3hXHZd0/qh2gUce5xWdWZidzHwlTG974xPwQ3/fSc+i3RbQs6hbVz6HwYOft0fCF/IfvfAswd/+ttY94I3m6n5+TdE52xYB/8ufWjkdv5ELlSOZln8VwyX/cGxtwX9AfpOXk/Cc+p4LPK1RFjWdq84NyfEqNfgt99axNrgjoYWub6iYdeJ29dHs5L6zPOficxei/44GLFAc6J2PzlblVG84a6QF0ejp3PTTn7gcTooeDRoOonOMmrZTRvqAvU5QG+zpy/qLkwPic9z3vh6ovnviitLRpa5tmd2/jT8PkF4PdRJD7XmedtqponQl4t08x9nXCAd5HZ/J6XXgZ+65hgveX2Rq7+DgqPkH+U6BuaF/0H5x0GexhLt0e9ieuZmMd4iW5hkapl8PI9jAUGc615dyO8lOOdeyU4G6RrGbx8X9fvyMua+Socj7uWi2sYyBH60VlNTwEv31O2aRvmTyXX+G6w9rs2F3qNPRC8mcofahY5ZX4Ro7CO9FzboHlf9izvv5p1a6zLqYsz7gF5dc3SNuQD9x4D9d3N/VPboHkPHe+l8reuL6bmJ2t6KW0mB+wFbzuv8m7yrdJz3M913zQd02kkznV9sa5frvumaY5FFo/zKpdFPSjLO4haC4H156UFOZbZ7Tg31Hnola0E2EPnQV+KYcWr9FZx5j+q4kWv3EuAPfS4hi/k1b2XvFybFd6PRebvBGMJHtRvJ7fruN9/AZidXns=
   </data>
  </layer>
  <layer id="7" name="ClutterAbove" width="30" height="25">
@@ -33,7 +33,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBheoE0Vwe5Uxa2O2kBFjYHhlxAEq6vRz15qARUc4uvEUDEtALod2DA+gMvt1AJHSRQfaABzF6MhplyXJnY9uMRJBaC4cMRiLz1AI5XtncVHXfMosRdbXKIDSvMBNnvJjUtK3YIel6TmNfYBSoPExBMtAL54omU5RU6eozRtgMLY24hCQ8gAjgNkbyON7CUmXZCSnqmZ9kkpd0BqDzBAsAZUjNw0T0p6bkSy9wCZ9iEDYtwMUwMAgv0muw==
+   eJxjYBheoE0Vwe5Uxa2O2kBFjYHhlxAEq6vRz15qARUc4uvEUDEtALod2DA+gMvt1AJHSRQfaABzF6MhplyXJnY9uMRJBaC4cMRiLz1AI5XtfcRIXfMosRdbXKIDSvMBNnvJjUtS3ILNXvS4JDWvsRPhblrELzHxRAt78cUTLOxoYS85eY7SdAoKY28jCg0hAzgOkL2NNLKXmDxFTHomRy0hQEq5A1J7gAGCNaBi5NbNpKTnRiR7D5BpHzIgxs0wNQC5MCr4
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -101,6 +101,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Enormous Energy Blade|NEO&quot;, &quot;Weaver of Harmony|NEO&quot;, &quot;Era of Enlightenment|NEO&quot;]}"/>
     <property name="enemy" value="Go-Shintai"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
@@ -195,5 +197,14 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   <object id="134" template="../../../../common/maps/obj/collision.tx" x="110.833" y="138.908" width="16.9997" height="27.5166"/>
   <object id="135" template="../../../../common/maps/obj/collision.tx" x="95.5001" y="41.2417" width="16.9997" height="27.5166"/>
   <object id="136" template="../../../../common/maps/obj/collision.tx" x="288.167" y="248.908" width="16.9997" height="27.5166"/>
+  <object id="137" template="../../../../common/maps/obj/enemy.tx" x="237.715" y="143.138">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Enormous Energy Blade|NEO&quot;, &quot;Era of Enlightenment|NEO&quot;]}"/>
+    <property name="enemy" value="Go-Shintai"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

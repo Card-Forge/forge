@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Da Vinci
+Title=Da Vinci
+Icon=Da Vinci.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/Aoki_Masahiro_-_Jeskai_Control_(Standard,_#2534481).dck
+Deck Type=constructed
+
+[Main]
+3 Lightning, Army of One
+3 Shiko, Paragon of the Way
+2 Enduring Curiosity
+2 Overlord of the Mistmoors
+4 Get Lost
+4 Lightning Helix
+3 No More Lies
+3 Three Steps Ahead
+4 Stock Up
+3 Day of Judgment
+2 Ultima
+2 Temporary Lockdown
+1 Ral, Crackling Wit
+4 Floodfarm Verge
+4 Riverpyre Verge
+3 Meticulous Archive
+2 Elegant Parlor
+2 Sunbillow Verge
+2 Thundering Falls
+1 Cori Mountain Monastery
+1 Island
+1 Mistrise Village
+1 Mountain
+1 Plains
+1 Restless Anchorage
+1 Starting Town
+[Sideboard]
+2 Authority of the Consuls
+2 Beza, the Bounding Spring
+2 Fire Magic
+2 High Noon
+2 Negate
+2 Tishana's Tidebinder
+1 Enduring Curiosity
+1 Ghost Vacuum
+1 Loran of the Third Path

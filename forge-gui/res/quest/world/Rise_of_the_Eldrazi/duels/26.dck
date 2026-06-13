@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Homer Simpson
+Title=Homer Simpson
+Icon=Homer Simpson.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Alberta_-_Canada/Paul_MacKinnon_-_Red_Deck_Wins_(Standard,_#1851).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ball Lightning
+4 Goblin Guide
+4 Hell's Thunder
+4 Kargan Dragonlord
+4 Plated Geopede
+4 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+4 Staggershock
+1 Banefire
+4 Arid Mesa
+15 Mountain
+4 Scalding Tarn
+[Sideboard]
+3 Flame Slash
+4 Goblin Ruinblaster
+3 Mark of Mutiny
+4 Pithing Needle

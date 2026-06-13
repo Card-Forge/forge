@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Apu Nahasapeemapetilon
+Title=Apu Nahasapeemapetilon
+Icon=Apu Nahasapeemapetilon.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Midnight_Hunt/AliEldrazi_-_Sultai_Ramp_(Standard,_#1220151).dck
+Deck Type=constructed
+
+[Main]
+1 Quandrix Cultivator
+3 Iymrith, Desert Doom
+4 Prosperous Innkeeper
+4 Rootcoil Creeper
+3 Esika's Chariot
+1 Memory Deluge
+2 Infernal Grasp
+2 Divide by Zero
+1 Dryad's Revival
+3 Storm the Festival
+2 The Meathook Massacre
+2 Binding the Old Gods
+2 Lolth, Spider Queen
+4 Wrenn and Seven
+1 Woodland Chasm
+1 Rimewood Falls
+1 Swamp
+1 Island
+1 Lair of the Hydra
+2 Hall of Storm Giants
+3 Forest
+4 Shipwreck Marsh
+4 Darkbore Pathway
+4 Barkchannel Pathway
+4 Clearwater Pathway
+[Sideboard]
+1 Malevolent Hermit
+1 Environmental Sciences
+1 Mascot Exhibition
+1 Teachings of the Archaics
+1 Containment Breach
+2 Disdainful Stroke

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Rocky
+Title=Rocky
+Icon=Rocky.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Danielstallone_-_Burn_(Modern,_#1031828).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Goblin Guide
+4 Eidolon of the Great Revel
+3 Lightning Helix
+3 Skullcrack
+4 Searing Blaze
+4 Lightning Bolt
+4 Boros Charm
+3 Skewer the Critics
+4 Rift Bolt
+4 Lava Spike
+1 Fiery Islet
+2 Sacred Foundry
+2 Mountain
+2 Wooded Foothills
+4 Sunbaked Canyon
+4 Scalding Tarn
+4 Inspiring Vantage
+[Sideboard]
+1 Lurrus of the Dream-Den
+1 Skullcrack
+3 Path to Exile
+3 Relic of Progenitus
+3 Smash to Smithereens
+4 Kor Firewalker

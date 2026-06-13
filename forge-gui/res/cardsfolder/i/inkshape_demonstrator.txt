@@ -1,0 +1,8 @@
+Name:Inkshape Demonstrator
+ManaCost:3 W
+Types:Creature Elephant Cleric
+PT:3/4
+K:Ward:2
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigPump | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Creature.inZoneBattlefield | TriggerDescription$ Repartee — Whenever you cast an instant or sorcery spell that targets a creature, this creature gets +1/+0 and gains lifelink until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | KW$ Lifelink
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nRepartee — Whenever you cast an instant or sorcery spell that targets a creature, this creature gets +1/+0 and gains lifelink until end of turn.

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Deadpool
+Title=Deadpool
+Icon=Deadpool.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/Killah_SUV_-_Jeskai_Oculus_(Standard,_#2455986).dck
+Deck Type=constructed
+
+[Main]
+4 Marauding Mako
+4 Abhorrent Oculus
+4 Fear of Missing Out
+4 Steamcore Scholar
+2 Tersa Lightshatter
+2 Spell Pierce
+1 Abrade
+4 Torch the Tower
+3 Glacial Dragonhunt
+1 Winternight Stories
+4 Helping Hand
+1 Recommission
+4 Proft's Eidetic Memory
+4 Inspiring Vantage
+1 Mountain
+2 Adarkar Wastes
+4 Shivan Reef
+1 Island
+1 Battlefield Forge
+4 Seachrome Coast
+1 Restless Anchorage
+4 Spirebluff Canal
+[Sideboard]
+1 Pyroclasm
+2 Negate
+3 Destroy Evil
+2 Ghost Vacuum
+1 Disdainful Stroke
+1 Loran of the Third Path
+2 Sheltered by Ghosts
+1 Chandra, Spark Hunter
+1 Ral, Crackling Wit
+1 High Noon

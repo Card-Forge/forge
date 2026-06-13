@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Bumba
+Title=Bumba
+Icon=Bumba.jpg
+Difficulty=Medium
+Description=Magic_Origins/Standard_Champs_#8619023/Butakov_-_Abzan_Aggro_(Standard,_#315802).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+2 Brimaz, King of Oreskos
+4 Den Protector
+4 Fleecemane Lion
+4 Hangarback Walker
+4 Siege Rhino
+4 Abzan Charm
+4 Dromoka's Command
+2 Ultimate Price
+2 Ajani, Mentor of Heroes
+3 Caves of Koilos
+2 Forest
+3 Llanowar Wastes
+1 Mana Confluence
+2 Plains
+4 Sandsteppe Citadel
+1 Temple of Malady
+2 Temple of Plenty
+2 Temple of Silence
+2 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Elspeth, Sun's Champion
+4 Thoughtseize
+3 Tragic Arrogance
+2 Valorous Stance
+3 Wingmate Roc

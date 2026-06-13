@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Snow White
+Title=Snow White
+Icon=Snow White.jpg
+Difficulty=Easy
+Description=Kaladesh/Grand_Prix_Madrid/Tibor_Viniczai_-_W-R_Vehicles_(Standard,_#657217).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Depala, Pilot Exemplar
+2 Inventor's Apprentice
+4 Scrapheap Scrounger
+2 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Toolcraft Exemplar
+3 Veteran Motorist
+3 Cultivator's Caravan
+4 Smuggler's Copter
+4 Unlicensed Disintegration
+4 Incendiary Flow
+2 Gideon, Ally of Zendikar
+4 Concealed Courtyard
+4 Inspiring Vantage
+4 Mountain
+2 Needle Spires
+5 Plains
+4 Smoldering Marsh
+[Sideboard]
+1 Chandra, Torch of Defiance
+3 Declaration in Stone
+2 Fragmentize
+4 Galvanic Bombardment
+2 Gideon, Ally of Zendikar
+1 Key to the City
+2 Skysovereign, Consul Flagship

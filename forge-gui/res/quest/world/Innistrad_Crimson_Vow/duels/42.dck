@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Saladin
+Title=Saladin
+Icon=Saladin.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/JimDavisMTG_-_Snow_Red_(Standard,_#1234995).dck
+Deck Type=constructed
+
+[Main]
+1 Kessig Wolfrider
+4 Bloodthirsty Adversary
+4 Falkenrath Pit Fighter
+4 Flame Channeler
+4 Moonveil Regent
+3 Spikefield Hazard
+3 Frost Bite
+4 Play with Fire
+2 Shatterskull Smashing
+3 Tundra Fumarole
+4 Roil Eruption
+4 Chandra, Dressed to Kill
+3 Faceless Haven
+3 Den of the Bugbear
+14 Snow-Covered Mountain
+[Sideboard]

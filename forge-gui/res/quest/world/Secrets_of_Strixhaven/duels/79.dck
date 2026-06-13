@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Caprio
+Title=Caprio
+Icon=Caprio.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Kawamura_Atsuto_-_Rogue_(Modern,_#2912633).dck
+Deck Type=constructed
+
+[Main]
+3 Flickerwisp
+3 Bloodghast
+4 Solitude
+4 Guide of Souls
+3 Phelia, Exuberant Shepherd
+3 Emperor of Bones
+2 Phlage, Titan of Fire's Fury
+1 Witch Enchanter
+4 Overlord of the Balemurk
+4 Hardened Academic
+4 Static Prison
+3 Chthonian Nightmare
+1 Plains
+1 Swamp
+1 Blood Crypt
+2 Godless Shrine
+1 Sacred Foundry
+4 Bloodstained Mire
+4 Arid Mesa
+4 Marsh Flats
+1 Elegant Parlor
+1 Raucous Theater
+1 Shadowy Backstreet
+1 Arena of Glory
+[Sideboard]
+3 Thoughtseize
+2 Surgical Extraction
+2 Archon of Emeria
+1 Temporary Lockdown
+2 Sheoldred's Edict
+2 White Orchid Phantom
+1 Wrath of the Skies
+2 Clarion Conqueror

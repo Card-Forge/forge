@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Darth Vader
+Title=Darth Vader
+Icon=Darth Vader.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Chad_Seeley_-_Esper_Mill_(Modern,_#1542000).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+1 Baleful Mastery
+2 Spell Pierce
+3 Surgical Extraction
+4 Archive Trap
+4 Fatal Push
+4 Visions of Beyond
+4 Drown in the Loch
+4 Tasha's Hideous Laughter
+4 Fractured Sanity
+1 Swamp
+1 Oboro, Palace in the Clouds
+1 Otawara, Soaring City
+1 Raffine's Tower
+1 Hallowed Fountain
+2 Watery Grave
+2 Scalding Tarn
+2 Darkslick Shores
+3 Island
+4 Field of Ruin
+4 Polluted Delta
+[Sideboard]
+1 Ensnaring Bridge
+1 Path to Exile
+2 Mystical Dispute
+2 Flusterstorm
+2 Crypt Incursion
+2 Engineered Explosives
+2 Teferi, Time Raveler
+3 Soul-Guide Lantern

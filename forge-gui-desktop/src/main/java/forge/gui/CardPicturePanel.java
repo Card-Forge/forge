@@ -121,7 +121,10 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
 
     private BufferedImage getImage() {
         if (!mayView) {
-            return ImageCache.getOriginalImage(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), true, null);
+            // Pass the card even though its face is hidden: ImageCache reads only the owner's sleeve
+            // index from it to pick the card-back. The face is never shown because the key stays HIDDEN_CARD.
+            return ImageCache.getOriginalImage(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), true,
+                    displayed instanceof CardStateView csv ? csv.getCard() : null);
         }
 
         if (displayed instanceof InventoryItem) {

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Green Lantern
+Title=Green Lantern
+Icon=Green Lantern.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/MASAHIDE_MORIYAMA_-_Gruul_Aggro_(Standard,_#2367424).dck
+Deck Type=constructed
+
+[Main]
+4 Cacophony Scamp
+4 Heartfire Hero
+2 Callous Sell-Sword
+4 Emberheart Challenger
+4 Manifold Mouse
+3 Slickshot Show-Off
+4 Monstrous Rage
+4 Turn Inside Out
+4 Giant Growth
+1 Defend the Rider
+1 Snakeskin Veil
+4 Leyline of Resonance
+4 Copperline Gorge
+4 Karplusan Forest
+9 Mountain
+4 Thornspire Verge
+[Sideboard]
+2 Burst Lightning
+2 Lithomantic Barrage
+1 Ghost Vacuum
+2 Scorching Shot
+3 Questing Druid
+3 Pawpatch Recruit
+2 Pawpatch Formation

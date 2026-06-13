@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Buffy
+Title=Buffy
+Icon=Buffy.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Riley_Hicks_-_Jeskai_Tempo_(Standard,_#1144224).dck
+Deck Type=constructed
+
+[Main]
+2 Pollywog Symbiote
+3 Sea-Dasher Octopus
+3 Lore Drakkis
+4 Vadrok, Apex of Thunder
+4 Goldspan Dragon
+2 Spikefield Hazard
+2 Into the Roil
+3 Open the Omenpaths
+4 Prismari Command
+4 Unsubstantiate
+2 Search for Glory
+3 Seize the Spoils
+2 Showdown of the Skalds
+2 Snow-Covered Plains
+2 Snow-Covered Mountain
+2 Snow-Covered Island
+2 Fabled Passage
+3 Hengegate Pathway
+3 Raugrin Triome
+4 Needleverge Pathway
+4 Riverglide Pathway
+[Sideboard]
+1 Hushbringer
+1 Into the Roil
+1 Showdown of the Skalds
+2 Mystical Dispute
+2 Negate
+2 Soul-Guide Lantern
+3 Fire Prophecy
+3 Ox of Agonas

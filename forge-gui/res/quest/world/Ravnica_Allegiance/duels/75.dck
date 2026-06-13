@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Selesnya-precon
+Title=Selesnya-precon
+Icon=Selesnya-precon.jpg
+Difficulty=Very Hard
+Description=./Modern/Ravnica_Allegiance/AbelMolto_-_Naya_Burn_(Modern,_#798180).dck
+Deck Type=constructed
+
+[Main]
+3 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Lightning Bolt
+4 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+4 Skewer the Critics
+3 Arid Mesa
+4 Bloodstained Mire
+3 Copperline Gorge
+2 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Eidolon of the Great Revel
+1 Grim Lavamancer
+1 Deflecting Palm
+4 Destructive Revelry
+2 Path to Exile
+2 Relic of Progenitus
+4 Rest in Peace

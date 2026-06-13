@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=WereHyena
+Title=WereHyena
+Icon=WereHyena.jpg
+Difficulty=Medium
+Description=New_Phyrexia/SCG_Invitational_Qualifier_-_Winter_Park,_Florida/Eric_Muench_-_Valakut_(Standard,_#18330).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Inferno Titan
+1 Oracle of Mul Daya
+4 Primeval Titan
+2 Solemn Simulacrum
+3 Harrow
+4 Lightning Bolt
+1 Cultivate
+4 Explore
+1 Green Sun's Zenith
+4 Rampant Growth
+4 Khalni Heart Expedition
+2 Evolving Wilds
+5 Forest
+11 Mountain
+2 Raging Ravine
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Beast Within
+2 Combust
+2 Obstinate Baloth
+2 Pyroclasm
+4 Summoning Trap
+3 Tumble Magnet

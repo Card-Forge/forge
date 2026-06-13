@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm
+Title=Wilhelm Grimm
+Icon=Wilhelm Grimm.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Bret_Farrell_-_Temur_Creativity_(Modern,_#1444717).dck
+Deck Type=constructed
+
+[Main]
+4 Fable of the Mirror-Breaker
+4 Primeval Titan
+2 Fire // Ice
+3 Spell Pierce
+3 Prismari Command
+4 Lightning Bolt
+1 Transmogrify
+4 Indomitable Creativity
+4 Explore
+4 Wrenn and Six
+2 Steam Vents
+2 Ketria Triome
+2 Mountain
+3 Scalding Tarn
+3 Bloodstained Mire
+3 Valakut, the Molten Pinnacle
+4 Dwarven Mine
+4 Wooded Foothills
+4 Stomping Ground
+[Sideboard]
+1 Emrakul, the Aeons Torn
+1 Ancient Grudge
+1 Aether Gust
+2 Boseiju, Who Endures
+2 Anger of the Gods
+2 Force of Vigor
+3 Flusterstorm
+3 Veil of Summer

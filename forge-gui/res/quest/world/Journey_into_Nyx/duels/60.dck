@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Han Solo
+Title=Han Solo
+Icon=Han Solo.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/SCG_Invitational_Qualifier_Manticore_Game_Store/Rodrigo_Souza_Silva_-_Red_Deck_Wins_(Modern,_#88342).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+3 Grim Lavamancer
+4 Vexing Devil
+3 Ensnaring Bridge
+1 Flame Javelin
+4 Lightning Bolt
+3 Searing Blood
+3 Shard Volley
+4 Skullcrack
+4 Lava Spike
+1 Molten Rain
+4 Rift Bolt
+4 Bloodstained Mire
+8 Mountain
+2 Sacred Foundry
+4 Wooded Foothills
+[Sideboard]
+4 Leyline of Punishment
+2 Shatterstorm
+4 Stony Silence
+2 Wear // Tear

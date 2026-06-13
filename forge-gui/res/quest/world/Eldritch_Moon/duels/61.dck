@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Robin
+Title=Robin
+Icon=Robin.jpg
+Difficulty=Hard
+Description=../Modern/Eldritch_Moon/SCG_Invitational_Qualifier_-_Chatham,_NJ/Eric_Swain_-_Mono_Green_Stompy_(Modern,_#635423).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avatar of the Resolute
+4 Dryad Militant
+2 Dungrove Elder
+4 Experiment One
+2 Kessig Prowler
+4 Leatherback Baloth
+2 Scavenging Ooze
+4 Strangleroot Geist
+3 Aspect of Hydra
+3 Dismember
+4 Vines of Vastwood
+4 Rancor
+18 Forest
+2 Treetop Village
+[Sideboard]
+2 Choke
+2 Display of Dominance
+3 Hunt the Hunter
+3 Natural State
+1 Phyrexian Revoker
+1 Pithing Needle

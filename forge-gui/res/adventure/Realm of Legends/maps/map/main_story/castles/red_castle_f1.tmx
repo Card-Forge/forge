@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="63">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="64">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -64,6 +64,8 @@
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower&quot;, &quot;Exotic Orchard&quot;, &quot;Witch-Maw Nephilim|GPT&quot;, &quot;Tablet of Compleation|ONE&quot;]}"/>
     <property name="enemy" value="Atraxa"/>
     <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="100"/>
    </properties>
@@ -106,6 +108,26 @@
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
   &quot;colors&quot;: [ &quot;white&quot; ]
 }]</property>
+   </properties>
+  </object>
+  <object id="63" template="../../../../../common/maps/obj/enemy.tx" x="207.757" y="266.333">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Atraxa plummets to the ground from your final strike, colliding with a loud crack. Oil leaks from her barely mobile body as she struggles to get out a few last words.
+
+'Mother of Machines... forgive my imperfection...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower&quot;, &quot;Witch-Maw Nephilim|GPT&quot;, &quot;Tablet of Compleation|ONE&quot;]}"/>
+    <property name="enemy" value="Atraxa"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="100"/>
    </properties>
   </object>
  </objectgroup>

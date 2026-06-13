@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Gold
+Title=Dungeon Crawling Gold
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=Easy
+Description=Gatecrash/Grand_Prix_Quebec_City/Bradley_Grant_-_Jund_Aggro_(Standard,_#46472).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+3 Dreg Mangler
+4 Experiment One
+4 Falkenrath Aristocrat
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Mogg Flunkies
+4 Rakdos Cackler
+2 Abrupt Decay
+2 Searing Spear
+3 Dreadbore
+4 Blood Crypt
+2 Dragonskull Summit
+2 Forest
+1 Mountain
+4 Overgrown Tomb
+3 Rootbound Crag
+4 Stomping Ground
+2 Woodland Cemetery
+[Sideboard]
+3 Domri Rade
+3 Duress
+1 Kessig Wolf Run
+2 Olivia Voldaren
+2 Vampire Nighthawk
+2 Wolfir Silverheart

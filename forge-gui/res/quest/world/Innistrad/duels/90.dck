@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Harry Potter
+Title=Harry Potter
+Icon=Harry Potter.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/GPT_Madrid_(Jester's_Cap)/Cuneo_Lorenzo_-_Mono_W_Control_(Modern,_#24455).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Aven Mindcensor
+3 Flickerwisp
+4 Kitchen Finks
+4 Pilgrim's Eye
+2 Solemn Simulacrum
+4 Sun Titan
+4 Wall of Omens
+4 Path to Exile
+4 Day of Judgment
+3 Oblivion Ring
+3 Arid Mesa
+4 Emeria, the Sky Ruin
+14 Plains
+4 Tectonic Edge
+[Sideboard]
+2 Angel's Grace
+2 Chalice of the Void
+2 Kataki, War's Wage
+3 Leyline of Sanctity
+3 Nevermore
+2 Wrath of God

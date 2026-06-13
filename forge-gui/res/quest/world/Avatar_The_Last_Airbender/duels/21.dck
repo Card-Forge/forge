@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Homer Simpson
+Title=Homer Simpson
+Icon=Homer Simpson.jpg
+Difficulty=Easy
+Description=./Standard/Avatar_The_Last_Airbender/Jay_Taubman_-_Jeskai_Pixie_(Standard,_#2784560).dck
+Deck Type=constructed
+
+[Main]
+4 Clarion Conqueror
+4 Momo, Friendly Flier
+4 Nurturing Pixie
+4 Quantum Riddler
+3 Starfield Shepherd
+4 Boomerang Basics
+4 Frostcliff Siege
+4 Seam Rip
+4 Stormchaser's Talent
+2 Roaring Furnace
+4 Floodfarm Verge
+4 Hallowed Fountain
+4 Starting Town
+3 Steam Vents
+2 Plains
+2 Spirebluff Canal
+2 Sunbillow Verge
+1 Multiversal Passage
+1 Sacred Foundry
+[Sideboard]
+4 Get Lost
+3 Rest in Peace
+3 Sage of the Skies
+2 Requisition Raid
+2 Spider-Sense
+1 Chandra, Spark Hunter

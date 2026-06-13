@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=BabaluAye
+Title=BabaluAye
+Icon=BabaluAye.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/SCG_Invitational_Qualifier_Falls_Church/Jordan_Wicht_-_U-W_Tempo_(Modern,_#219294).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Fathom Seer
+4 Flickerwisp
+2 Jotun Grunt
+3 Knight of the White Orchid
+4 Serra Avenger
+4 Steppe Lynx
+4 AEther Vial
+4 Mana Leak
+4 Remand
+4 Vapor Snag
+4 Spreading Seas
+4 Flooded Strand
+3 Hallowed Fountain
+2 Island
+1 Marsh Flats
+3 Plains
+2 Polluted Delta
+4 Tectonic Edge
+[Sideboard]
+2 Azorius Charm
+2 Disenchant
+2 Kitchen Finks
+4 Leyline of Sanctity
+1 Path to Exile
+2 Stony Silence
+2 Timely Reinforcements

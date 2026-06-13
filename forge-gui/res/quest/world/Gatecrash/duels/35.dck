@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Trostani
+Title=Trostani
+Icon=Trostani.jpg
+Difficulty=Medium
+Description=Gatecrash/SCG_Invitational_Qualifier_Pikeville/Trey_Bivens_-_Esper_Control_(Standard,_#49890).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Obzedat, Ghost Council
+4 Azorius Charm
+1 Devour Flesh
+3 Dissipate
+4 Sphinx's Revelation
+4 Think Twice
+1 Ultimate Price
+4 Supreme Verdict
+4 Dead Weight
+2 Detention Sphere
+1 Rest in Peace
+2 Jace, Architect of Thought
+2 Tamiyo, the Moon Sage
+4 Drowned Catacomb
+4 Glacial Fortress
+2 Godless Shrine
+4 Hallowed Fountain
+2 Island
+3 Isolated Chapel
+3 Nephalia Drownyard
+1 Plains
+4 Watery Grave
+[Sideboard]
+2 Blind Obedience
+2 Dispel
+2 Duress
+2 Evil Twin
+1 Jace, Memory Adept
+2 Negate
+1 Psychic Spiral
+1 Witchbane Orb

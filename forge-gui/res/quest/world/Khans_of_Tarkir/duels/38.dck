@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Dr Doom
+Title=Dr Doom
+Icon=Dr Doom.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/2014_Standard_State_Championships_-_South_Carolina/Ryan_Dail_-_Abzan_Midrange_(Standard,_#88904).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Brimaz, King of Oreskos
+4 Courser of Kruphix
+4 Fleecemane Lion
+4 Siege Rhino
+4 Sylvan Caryatid
+3 Wingmate Roc
+3 Abzan Charm
+1 Bile Blight
+4 Hero's Downfall
+2 Utter End
+4 Elspeth, Sun's Champion
+1 Caves of Koilos
+3 Forest
+1 Llanowar Wastes
+1 Mana Confluence
+3 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+4 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+3 Windswept Heath
+[Sideboard]
+2 Anafenza, the Foremost
+2 Banishing Light
+4 Drown in Sorrow
+2 Stain the Mind
+4 Thoughtseize
+1 Whip of Erebos

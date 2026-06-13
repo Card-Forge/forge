@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Colossus
+Title=Colossus
+Icon=Colossus.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/DJK3V1N_-_Izzet_Wizards_(Modern,_#2183876).dck
+Deck Type=constructed
+
+[Main]
+4 Thundertrap Trainer
+4 Tamiyo, Inquisitive Student
+2 Sleep-Cursed Faerie
+2 Murktide Regent
+4 Snapcaster Mage
+4 Lightning Bolt
+3 Sink into Stupor
+4 Flare of Denial
+1 Spell Snare
+4 Counterspell
+4 Flame of Anor
+4 Preordain
+3 Island
+2 Misty Rainforest
+2 Thundering Falls
+2 Steam Vents
+1 Otawara, Soaring City
+4 Spirebluff Canal
+2 Scalding Tarn
+2 Flooded Strand
+2 Polluted Delta
+[Sideboard]
+2 Pyroclasm
+4 Obsidian Charmaw
+2 Stern Scolding
+2 Unlicensed Hearse
+3 Consign to Memory
+2 Invert Polarity

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Hard
+Description=./Modern/The_Brothers_War/Duncan_Campbell_-_Esper_Affinity_(Modern,_#1519612)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+4 Thought Monitor
+4 Ornithopter
+4 Sojourner's Companion
+4 Memnite
+4 Frogmite
+1 Soul-Guide Lantern
+1 Aether Spellbomb
+1 Shadowspear
+1 Pithing Needle
+1 Nettlecyst
+4 Springleaf Drum
+4 Cranial Plating
+4 Thoughtcast
+4 Forging the Anchor
+4 Urza's Saga
+1 Spire of Industry
+1 Otawara, Soaring City
+1 Island
+2 Treasure Vault
+2 Razortide Bridge
+3 Mistvault Bridge
+4 Darksteel Citadel
+[Sideboard]
+1 Tormod's Crypt
+1 Relic of Progenitus
+1 Pithing Needle
+1 Metallic Rebuke
+2 Orvar, the All-Form
+2 Hurkyl's Recall
+2 Hallowed Moonlight
+2 Flusterstorm
+3 Dispatch

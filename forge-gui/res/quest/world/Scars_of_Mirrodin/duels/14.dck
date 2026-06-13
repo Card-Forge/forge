@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/StarCityGames.com_Invitational_Grinders_Richmond/Gerald_Freas_-_Valakut_Ramp_(Standard,_#8084).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+1 Inferno Titan
+3 Oracle of Mul Daya
+4 Primeval Titan
+4 Harrow
+3 Lightning Bolt
+3 Summoning Trap
+2 Arc Trail
+3 Cultivate
+4 Explore
+1 Pyroclasm
+3 Khalni Heart Expedition
+5 Forest
+12 Mountain
+2 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+3 Gaea's Revenge
+3 Mark of Mutiny
+3 Naturalize
+3 Ricochet Trap

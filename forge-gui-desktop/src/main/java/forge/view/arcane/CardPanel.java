@@ -36,7 +36,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -104,6 +103,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         ZoneType.Flashback, new Color(80, 20, 100)
     );
     private static final Color DEFAULT_ZONE_COLOR = new Color(60, 60, 80);
+    private static final Color GHOST_TINT = new Color(90, 120, 175, 110);
 
     private final CMatchUI matchUI;
     private CardView card;
@@ -119,6 +119,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private OutlinedLabel damageText;
     private OutlinedLabel cardIdText;
     private boolean displayEnabled = true;
+    private boolean ghost; // faded stand-in for a card this permanent holds in exile
     private boolean isAnimationPanel;
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
     private boolean isSelected;
@@ -126,7 +127,16 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private String zoneBannerText;
     private Color zoneBannerColor;
     private CachedCardImage cachedImage;
+    private int groupCount;
+    private int hotkeyDigit; // 1..9 paints a numbered badge for Ctrl+digit selection; 0 hides
+    private Font badgeFont;
+    private int badgeFontCardWidth; // cardWidth when badgeFont was last computed
 
+    private static final Color BADGE_BG_COLOR = new Color(0, 0, 0, 180);
+    private static final Color HOTKEY_BADGE_BG = new Color(20, 20, 20, 220);
+    private static final Color HOTKEY_BADGE_RING = new Color(220, 220, 220);
+    private static final int HOTKEY_BADGE_MIN_CARD_WIDTH = 80;
+    private static final int HOTKEY_BADGE_MAX_DIAMETER = 28;
     private static Font smallCounterFont;
     private static Font largeCounterFont;
 
@@ -261,6 +271,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         displayEnabled = displayEnabled0;
     }
 
+    public int getGroupCount() {
+        return groupCount;
+    }
+    public void setGroupCount(int count) {
+        this.groupCount = count;
+    }
+
     public final void setAnimationPanel(final boolean isAnimationPanel0) {
         isAnimationPanel = isAnimationPanel0;
     }
@@ -304,7 +321,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int offset = isTapped() && (!noBorderPref || cardImgHasAlpha) ? 1 : 0;
 
         // Magenta outline for when card is chosen
-        if (matchUI.isUsedToPay(getCard())) {
+        if (matchUI.isHighlighted(getCard())) {
             g2d.setColor(Color.magenta);
             final int n2 = Math.max(1, Math.round(2 * cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(cardXOffset - n2, (cardYOffset - n2) + offset, cardWidth + (n2 * 2), cardHeight + (n2 * 2), cornerSize + n2, cornerSize + n2);
@@ -360,11 +377,36 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             }
         }
 
-        if (matchUI.isSelectable(getCard())) { // White border for selectable cards to further highlight them
-            g2d.setColor(Color.WHITE);
-            final int ins = 1;
-            g2d.fillRoundRect(cardXOffset+ins, cardYOffset+ins, cardWidth-ins*2, cardHeight-ins*2, cornerSize-ins, cornerSize-ins);
+        // Inner highlight: white for fully selectable cards, the configured colour for
+        // actionable (weakly selectable) ones. With black borders enabled this sits in the
+        // border gap as a 1px inset; with borders disabled the card image fills the whole
+        // panel and would cover an inset, so draw it as an outset (like the frames above).
+        Color innerBorder = null;
+        if (matchUI.isSelectable(getCard())) {
+            innerBorder = Color.WHITE;
+        } else if (isPreferenceEnabled(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS) && matchUI.isWeaklySelectable(getCard())) {
+            innerBorder = parseActionableHighlightColor();
         }
+        if (innerBorder != null) {
+            g2d.setColor(innerBorder);
+            if (noBorderPref && !isSelected) {
+                final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+                g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n, cornerSize + n);
+            } else {
+                final int ins = 1;
+                g2d.fillRoundRect(cardXOffset + ins, cardYOffset + ins, cardWidth - ins * 2, cardHeight - ins * 2, cornerSize - ins, cornerSize - ins);
+            }
+        }
+    }
+
+    /** Pref is normalized to 6 hex chars on the write side; this just parses,
+     *  falling back to the FPref default if the stored value is malformed. */
+    private static Color parseActionableHighlightColor() {
+        String s = forge.model.FModel.getPreferences().getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR);
+        try {
+            if (s != null && s.length() == 6) return new Color(Integer.parseInt(s, 16));
+        } catch (NumberFormatException ignored) {}
+        return new Color(Integer.parseInt(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR.getDefault(), 16));
     }
 
     private void drawManaCost(final Graphics g, final ManaCost cost, final int deltaY) {
@@ -400,6 +442,12 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         }
         displayIconOverlay(g, canShow);
+        if (groupCount >= 2) {
+            drawGroupCountBadge(g);
+        }
+        if (hotkeyDigit > 0 && cardWidth >= HOTKEY_BADGE_MIN_CARD_WIDTH) {
+            drawHotkeyDigitBadge(g);
+        }
         if (zoneBannerText != null) {
             drawZoneBanner(g);
         }
@@ -514,6 +562,96 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         titleText.setVisible(isVisible);
     }
 
+    private void drawGroupCountBadge(final Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        if (badgeFont == null || badgeFontCardWidth != cardWidth) {
+            badgeFont = new Font("Dialog", Font.BOLD, Math.max(10, cardWidth / 5));
+            badgeFontCardWidth = cardWidth;
+        }
+
+        String text = "\u00D7" + groupCount;
+        FontMetrics fm = g2d.getFontMetrics(badgeFont);
+
+        int textWidth = fm.stringWidth(text);
+        int textHeight = fm.getAscent();
+        int padX = Math.max(4, cardWidth / 20);
+        int padY = Math.max(2, cardHeight / 30);
+        int badgeWidth = textWidth + padX * 2;
+        int badgeHeight = textHeight + padY * 2;
+        int badgeX = cardXOffset + 2;
+        int badgeY = cardYOffset + 2;
+        int cornerRadius = Math.max(4, cardWidth / 16);
+
+        g2d.setColor(BADGE_BG_COLOR);
+        g2d.fillRoundRect(badgeX, badgeY, badgeWidth, badgeHeight, cornerRadius, cornerRadius);
+
+        g2d.setColor(Color.WHITE);
+        g2d.setFont(badgeFont);
+        g2d.drawString(text, badgeX + padX, badgeY + padY + textHeight);
+    }
+
+    public int getHotkeyDigit() {
+        return hotkeyDigit;
+    }
+
+    public void setHotkeyDigit(final int digit) {
+        if (hotkeyDigit == digit) return;
+        hotkeyDigit = digit;
+        repaint();
+    }
+
+    private void drawHotkeyDigitBadge(final Graphics g) {
+        final Graphics2D g2d = (Graphics2D) g.create();
+        try {
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            final int diameter = Math.min(HOTKEY_BADGE_MAX_DIAMETER, cardWidth / 5);
+            final int bx = cardXOffset + cardWidth - diameter - 2;
+            final int by = cardYOffset + 2;
+            g2d.setColor(HOTKEY_BADGE_BG);
+            g2d.fillOval(bx, by, diameter, diameter);
+            g2d.setColor(HOTKEY_BADGE_RING);
+            g2d.drawOval(bx, by, diameter, diameter);
+            g2d.setColor(Color.WHITE);
+            g2d.setFont(new Font("Dialog", Font.BOLD, Math.max(11, diameter * 2 / 3)));
+            final String text = String.valueOf(hotkeyDigit);
+            final FontMetrics fm = g2d.getFontMetrics();
+            g2d.drawString(text, bx + (diameter - fm.stringWidth(text)) / 2,
+                    by + (diameter + fm.getAscent()) / 2 - 2);
+        } finally {
+            g2d.dispose();
+        }
+    }
+
+    public boolean isBadgeHit(int mouseX, int mouseY) {
+        if (groupCount < 2) {
+            return false;
+        }
+        // Badge is drawn at (cardXOffset+2, cardYOffset+2) in the card's local
+        // coordinate space. Mouse coordinates are container-relative. When the
+        // card is tapped, the graphics are rotated but mouse events are not, so
+        // we must inverse-rotate the mouse point into the card's local frame.
+        int localX = mouseX - getX();
+        int localY = mouseY - getY();
+        if (tappedAngle > 0) {
+            float pivotX = cardXOffset + cardWidth / 2f;
+            float pivotY = cardYOffset + cardHeight - cardWidth / 2f;
+            double cos = Math.cos(-tappedAngle);
+            double sin = Math.sin(-tappedAngle);
+            float dx = localX - pivotX;
+            float dy = localY - pivotY;
+            localX = (int) Math.round(cos * dx - sin * dy + pivotX);
+            localY = (int) Math.round(sin * dx + cos * dy + pivotY);
+        }
+        int badgeX = cardXOffset + 2;
+        int badgeY = cardYOffset + 2;
+        int badgeWidth = Math.max(30, cardWidth / 3);
+        int badgeHeight = Math.max(20, cardHeight / 6);
+        return localX >= badgeX && localX <= badgeX + badgeWidth
+            && localY >= badgeY && localY <= badgeY + badgeHeight;
+    }
+
     private void displayIconOverlay(final Graphics g, final boolean canShow) {
         if (canShow && showCardManaCostOverlay() && cardWidth < 200) {
             final boolean showSplitMana = card.isSplitCard() && card.getZone() != ZoneType.Battlefield;
@@ -577,7 +715,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             CardFaceSymbols.drawSymbol("phasing", g, stateXSymbols, ySymbols);
         }
 
-        if (matchUI.isUsedToPay(card)) {
+        if (matchUI.isHighlighted(card)) {
             CardFaceSymbols.drawSymbol("sacrifice", g, (cardXOffset + (cardWidth / 2)) - 20,
                     (cardYOffset + (cardHeight / 2)) - 20);
         }
@@ -589,230 +727,36 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         int abiSpace = (cardWidth / 7);
         int abiY = cardWidth < 200 ? cardYOffset + 25 : cardYOffset + 50;
         hasFlash = false;
-        if (showAbilityIcons()) {
-            if (ZoneType.Battlefield.equals(card.getZone())) {
-                if (card.isCommander()) {
-                    CardFaceSymbols.drawAbilitySymbol("commander", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.isRingBearer()) {
-                    CardFaceSymbols.drawAbilitySymbol("ringbearer", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasFlying()) {
-                    CardFaceSymbols.drawAbilitySymbol("flying", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasHaste()) {
-                    CardFaceSymbols.drawAbilitySymbol("haste", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasDoubleStrike()) {
-                    CardFaceSymbols.drawAbilitySymbol("doublestrike", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                else if (card.getCurrentState().hasFirstStrike()) {
-                    CardFaceSymbols.drawAbilitySymbol("firststrike", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasAnnihilator()) {
-                    CardFaceSymbols.drawAbilitySymbol("annihilator", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasExalted()) {
-                    CardFaceSymbols.drawAbilitySymbol("exalted", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasDeathtouch()) {
-                    CardFaceSymbols.drawAbilitySymbol("deathtouch", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasToxic()) {
-                    CardFaceSymbols.drawAbilitySymbol("toxic", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasIndestructible()) {
-                    CardFaceSymbols.drawAbilitySymbol("indestructible", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasMenace()) {
-                    CardFaceSymbols.drawAbilitySymbol("menace", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasFear()) {
-                    CardFaceSymbols.drawAbilitySymbol("fear", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasIntimidate()) {
-                    CardFaceSymbols.drawAbilitySymbol("intimidate", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasShadow()) {
-                    CardFaceSymbols.drawAbilitySymbol("shadow", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasHorsemanship()) {
-                    CardFaceSymbols.drawAbilitySymbol("horsemanship", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasHexproof()) {
-                    if (!card.getCurrentState().getHexproofKey().isEmpty()){
-                        String[] splitK = card.getCurrentState().getHexproofKey().split(":");
-                        List<String> listHK = Arrays.asList(splitK);
-                        if (listHK.contains("generic")) {
-                            CardFaceSymbols.drawAbilitySymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
-                            abiY += abiSpace;
-                        }
-                        if (listHK.contains("R")) {
-                            CardFaceSymbols.drawAbilitySymbol("hexproofR", g, abiX, abiY, abiScale, abiScale);
-                            abiY += abiSpace;
-                        }
-                        if (listHK.contains("B")) {
-                            CardFaceSymbols.drawAbilitySymbol("hexproofB", g, abiX, abiY, abiScale, abiScale);
-                            abiY += abiSpace;
-                        }
-                        if (listHK.contains("U")) {
-                            CardFaceSymbols.drawAbilitySymbol("hexproofU", g, abiX, abiY, abiScale, abiScale);
-                            abiY += abiSpace;
-                        }
-                        if (listHK.contains("G")) {
-                            CardFaceSymbols.drawAbilitySymbol("hexproofG", g, abiX, abiY, abiScale, abiScale);
-                            abiY += abiSpace;
-                        }
-                        if (listHK.contains("W")) {
-                            CardFaceSymbols.drawAbilitySymbol("hexproofW", g, abiX, abiY, abiScale, abiScale);
-                            abiY += abiSpace;
-                        }
-                        if (listHK.contains("monocolored")) {
-                            CardFaceSymbols.drawAbilitySymbol("hexproofC", g, abiX, abiY, abiScale, abiScale);
-                            abiY += abiSpace;
-                        }
-                    } else {
-                        CardFaceSymbols.drawAbilitySymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                }
-                else if (card.getCurrentState().hasShroud()) {
-                    CardFaceSymbols.drawAbilitySymbol("shroud", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasVigilance()) {
-                    CardFaceSymbols.drawAbilitySymbol("vigilance", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasTrample()) {
-                    CardFaceSymbols.drawAbilitySymbol("trample", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasReach()) {
-                    CardFaceSymbols.drawAbilitySymbol("reach", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasLifelink()) {
-                    CardFaceSymbols.drawAbilitySymbol("lifelink", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasWard()) {
-                    CardFaceSymbols.drawAbilitySymbol("ward", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasWither()) {
-                    CardFaceSymbols.drawAbilitySymbol("wither", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                if (card.getCurrentState().hasDefender()) {
-                    CardFaceSymbols.drawAbilitySymbol("defender", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                }
-                //protection icons
-                if (!card.getCurrentState().getProtectionKey().isEmpty()){
-                    if (card.getCurrentState().getProtectionKey().contains("everything") || card.getCurrentState().getProtectionKey().contains("allcolors")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectAll", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().contains("coloredspells")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectColoredSpells", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("R")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectR", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("G")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectG", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("B")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectB", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("U")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectU", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("W")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectW", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("RG")||card.getCurrentState().getProtectionKey().equals("GR")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectRG", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("RB")||card.getCurrentState().getProtectionKey().equals("BR")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectRB", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("RU")||card.getCurrentState().getProtectionKey().equals("UR")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectRU", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("RW")||card.getCurrentState().getProtectionKey().equals("WR")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectRW", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("GB")||card.getCurrentState().getProtectionKey().equals("BG")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectGB", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("GU")||card.getCurrentState().getProtectionKey().equals("UG")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectGU", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("GW")||card.getCurrentState().getProtectionKey().equals("WG")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectGW", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("BU")||card.getCurrentState().getProtectionKey().equals("UB")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectBU", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("BW")||card.getCurrentState().getProtectionKey().equals("WB")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectBW", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().equals("UW")||card.getCurrentState().getProtectionKey().equals("WU")) {
-                        CardFaceSymbols.drawAbilitySymbol("protectUW", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                    else if (card.getCurrentState().getProtectionKey().contains("generic") || card.getCurrentState().getProtectionKey().length() > 2) {
-                        CardFaceSymbols.drawAbilitySymbol("protectGeneric", g, abiX, abiY, abiScale, abiScale);
-                        abiY += abiSpace;
-                    }
-                }
-            } else {
-                String keywordKey = card.getCurrentState().getKeywordKey();
-                String abilityText = card.getCurrentState().getAbilityText();
-                if (((!keywordKey.contains("Flashback"))
-                    && (keywordKey.contains("Flash")))
-                        || ((abilityText.contains("May be played by"))
-                                && (abilityText.contains("and as though it has flash")))) {
-                        hasFlash = !card.isFaceDown() && ((!ZoneType.Library.equals(card.getZone()) && !ZoneType.Hand.equals(card.getZone())) || matchUI.mayView(card));
-                        if (hasFlash) {
-                            CardFaceSymbols.drawAbilitySymbol("flash", g, cardXOffset + (cardWidth / 2) + (cardWidth / 3), cardWidth < 200 ? cardYOffset + 25 : cardYOffset + 50, cardWidth / 7, cardWidth / 7);
-                    }
+        if (!showAbilityIcons()) {
+            return;
+        }
+        if (ZoneType.Battlefield.equals(card.getZone())) {
+            for (FSkinProp prop : FSkinProp.iconsFromCardState(card.getCurrentState())) {
+                FSkin.drawImage(g, FSkin.getImage(prop), abiX, abiY, abiScale, abiScale);
+                abiY += abiSpace;
+            }
+        } else {
+            String abilityText = card.getCurrentState().getAbilityText();
+            if (card.getCurrentState().hasKeyword(Keyword.FLASH)
+                    || ((abilityText.contains("May be played by"))
+                            && (abilityText.contains("and as though it has flash")))) {
+                    hasFlash = !card.isFaceDown() && ((!ZoneType.Library.equals(card.getZone()) && !ZoneType.Hand.equals(card.getZone())) || matchUI.mayView(card));
+                    if (hasFlash) {
+                        FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_ABILITY_FLASH), cardXOffset + (cardWidth / 2) + (cardWidth / 3), cardWidth < 200 ? cardYOffset + 25 : cardYOffset + 50, cardWidth / 7, cardWidth / 7);
                 }
             }
         }
+        if (ghost) {
+            drawGhostOverlay(g);
+        }
+    }
+
+    private void drawGhostOverlay(final Graphics g) {
+        final Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        final int cornerSize = Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
+        g2d.setColor(GHOST_TINT);
+        g2d.fillRoundRect(cardXOffset, cardYOffset, cardWidth, cardHeight, cornerSize, cornerSize);
     }
 
     private void drawZoneBanner(final Graphics g) {
@@ -1084,7 +1028,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         // Card name overlay
         titleText.setText(CardTranslation.getTranslatedName(card.getCurrentState().getName()));
         // Screen readers can't tell if a card is tapped.
-        if (isPreferenceEnabled(FPref.UI_SR_OPTIMIZE)) {
+        if (isPreferenceEnabled(FPref.UI_SCREENREADER_OPTIMIZE)) {
                 if (this.isTapped()) {
                     titleText.getAccessibleContext().setAccessibleDescription("tapped");
                 } else {
@@ -1168,6 +1112,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     public final List<CardPanel> getAttachedPanels() {
         return attachedPanels;
+    }
+
+    public final boolean isGhost() {
+        return ghost;
+    }
+    public final void setGhost(final boolean ghost0) {
+        ghost = ghost0;
     }
 
     public final List<CardPanel> getStack() {

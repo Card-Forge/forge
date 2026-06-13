@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Jack Sparrow
+Title=Jack Sparrow
+Icon=Jack Sparrow.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine_The_Aftermath/Ishikawa_Takeshi_-_Enchantment_Aggro_(Standard,_#1680865).dck
+Deck Type=constructed
+
+[Main]
+2 Katilda, Dawnhart Martyr
+3 The Restoration of Eiganjo
+4 Spirited Companion
+4 Generous Visitor
+2 Kami of Transience
+4 Jukai Naturalist
+3 Calix, Guided by Fate
+4 Commune with Spirits
+4 Hallowed Haunting
+1 Raffine's Guidance
+4 Audacity
+4 Ossification
+5 Plains
+5 Forest
+4 Brushland
+4 Razorverge Thicket
+2 Overgrown Farmland
+1 Eiganjo, Seat of the Empire
+[Sideboard]
+2 Unlicensed Hearse
+1 Destroy Evil
+1 Temporary Lockdown
+2 Loran of the Third Path
+1 The Stone Brain
+3 Invasion of Gobakhan
+2 Sunfall
+3 Surge of Salvation

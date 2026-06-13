@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Indiana Jones
+Title=Indiana Jones
+Icon=Indiana Jones.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Atrevino1031_-_Mono-Blue_Merfolk_(Modern,_#1967506).dck
+Deck Type=constructed
+
+[Main]
+4 Tide Shaper
+4 Rishadan Dockhand
+4 Vodalian Hexcatcher
+4 Master of the Pearl Trident
+4 Lord of Atlantis
+3 Merfolk Trickster
+4 Tishana's Tidebinder
+3 Svyelun of Sea and Sky
+3 Subtlety
+4 Aether Vial
+2 Chalice of the Void
+2 Cursed Totem
+4 Force of Negation
+4 Dismember
+2 Stern Scolding
+2 Spell Pierce
+2 Spreading Seas
+4 Cavern of Souls
+2 Otawara, Soaring City
+3 Mutavault
+1 Oboro, Palace in the Clouds
+1 Minamo, School at Water's Edge
+9 Island
+[Sideboard]

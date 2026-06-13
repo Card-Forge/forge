@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/Dylan_Klett_-_Dimir_Frog_(Modern,_#2248174).dck
+Deck Type=constructed
+
+[Main]
+1 Abhorrent Oculus
+1 Harbinger of the Seas
+4 Murktide Regent
+4 Orcish Bowmasters
+4 Psychic Frog
+2 Tamiyo, Inquisitive Student
+2 Consider
+4 Counterspell
+4 Fatal Push
+3 Force of Negation
+1 Sheoldred's Edict
+1 Sink into Stupor
+3 Spell Snare
+1 Glistening Deluge
+4 Preordain
+2 Thoughtseize
+2 Darkslick Shores
+1 Hall of Storm Giants
+2 Island
+4 Polluted Delta
+4 Scalding Tarn
+2 Swamp
+2 Undercity Sewers
+2 Watery Grave
+[Sideboard]
+4 Consign to Memory
+1 Glistening Deluge
+1 Harbinger of the Seas
+2 Narset, Parter of Veils
+1 Nihil Spellbomb
+2 Stern Scolding
+1 Surgical Extraction
+1 The Meathook Massacre
+1 Unlicensed Hearse
+1 Vedalken Shackles

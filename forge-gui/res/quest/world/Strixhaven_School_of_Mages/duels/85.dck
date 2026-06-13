@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Andrea_Bianchini_-_Blue_Moon_(Modern,_#1200687).dck
+Deck Type=constructed
+
+[Main]
+1 Brazen Borrower
+2 Murktide Regent
+4 Snapcaster Mage
+1 Batterskull
+1 Spell Snare
+1 Prismari Command
+1 Force of Negation
+1 Expansion // Explosion
+2 Cryptic Command
+3 Fire // Ice
+3 Archmage's Charm
+4 Counterspell
+4 Lightning Bolt
+4 Opt
+2 Serum Visions
+1 Shark Typhoon
+2 Blood Moon
+1 Jace, the Mind Sculptor
+2 Sulfur Falls
+3 Steam Vents
+4 Flooded Strand
+4 Scalding Tarn
+9 Island
+[Sideboard]
+1 Dragon's Claw
+1 Shattering Spree
+1 Aether Gust
+2 Spreading Seas
+2 Flusterstorm
+2 Anger of the Gods
+2 Surgical Extraction
+2 Ashiok, Dream Render
+2 Mystical Dispute

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Radiant
+Title=Radiant
+Icon=Radiant.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Platinum-Mythic_Rank_Player_-_White_Weenie_(Standard,_#1630316).dck
+Deck Type=constructed
+
+[Main]
+4 Brutal Cathar
+4 Knight-Errant of Eos
+2 Extraction Specialist
+4 Hopeful Initiate
+4 Guardian of New Benalia
+4 Skrelv, Defector Mite
+1 Serra Paragon
+4 Adeline, Resplendent Cathar
+4 Thalia, Guardian of Thraben
+2 Fateful Absence
+3 Archangel Elspeth
+19 Plains
+4 Mishra's Foundry
+1 Eiganjo, Seat of the Empire
+[Sideboard]
+2 Surge of Salvation
+4 Anointed Peacekeeper
+4 Elspeth's Smite
+2 Invasion of Gobakhan
+3 Loran of the Third Path

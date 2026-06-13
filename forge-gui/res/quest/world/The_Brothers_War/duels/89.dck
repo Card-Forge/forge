@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Green Arrow
+Title=Green Arrow
+Icon=Green Arrow.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Brothers_War/Dreddybajs_-_Hammer_Time_(Modern,_#1547556)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+1 The Reality Chip
+1 Haywire Mite
+2 Burrenton Forge-Tender
+2 Puresteel Paladin
+2 Puresteel Paladin
+4 Stoneforge Mystic
+4 Ornithopter
+4 Esper Sentinel
+1 Kaldra Compleat
+1 Shadowspear
+3 Springleaf Drum
+4 Colossus Hammer
+2 Blacksmith's Skill
+2 Spell Pierce
+4 Sigarda's Aid
+4 Urza's Saga
+1 Hallowed Fountain
+1 Temple Garden
+1 Inkmoth Nexus
+2 Arid Mesa
+2 Seachrome Coast
+2 Inkmoth Nexus
+2 Marsh Flats
+2 Flooded Strand
+2 Windswept Heath
+3 Plains
+[Sideboard]
+1 Teferi, Time Raveler
+1 Spell Pierce
+1 Lavinia, Azorius Renegade
+1 Blacksmith's Skill
+1 Pithing Needle
+1 Haywire Mite
+2 Drannith Magistrate
+2 Path to Exile
+2 March of Otherworldly Light
+3 Sanctifier en-Vec

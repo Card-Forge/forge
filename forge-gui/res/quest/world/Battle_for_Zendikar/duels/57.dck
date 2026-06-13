@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Aigamuxa
+Title=Aigamuxa
+Icon=Aigamuxa.jpg
+Difficulty=Very Hard
+Description=../Modern/Battle_for_Zendikar/Troc'n'Troll_-_Modern_de_No/David_Josse_-_RW_Ally_(Modern,_#415470).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Akoum Battlesinger
+4 Expedition Envoy
+2 Firemantle Mage
+4 Hada Freeblade
+4 Kabira Evangel
+4 Kazandu Blademaster
+2 Munda, Ambush Leader
+2 Ondu Cleric
+2 Thalia, Guardian of Thraben
+1 Boros Charm
+3 Lightning Bolt
+4 Path to Exile
+4 Ally Encampment
+4 Battlefield Forge
+1 Mountain
+11 Plains
+[Sideboard]
+2 Celestial Purge
+1 Deflecting Palm
+1 Lantern Scout
+2 Relic of Progenitus
+2 Rest in Peace
+2 Smash to Smithereens
+1 Stony Silence
+2 Tuktuk Scrapper

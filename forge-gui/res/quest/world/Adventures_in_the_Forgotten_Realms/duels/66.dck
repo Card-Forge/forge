@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=He-Man
+Title=He-Man
+Icon=He-Man.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/diego_villarino_-_Izzet_Blitz_(Modern,_#1201599)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Sprite Dragon
+3 Dragon's Rage Channeler
+3 Demilich
+4 Monastery Swiftspear
+4 Stormwing Entity
+2 Mutagenic Growth
+3 Unholy Heat
+4 Lava Dart
+4 Manamorphose
+4 Lightning Bolt
+3 Serum Visions
+4 Expressive Iteration
+2 Scalding Tarn
+2 Island
+3 Arid Mesa
+3 Spirebluff Canal
+3 Fiery Islet
+3 Steam Vents
+4 Mountain
+[Sideboard]
+1 Vapor Snag
+1 Fire // Ice
+2 Abrade
+2 Void Mirror
+3 Blood Moon
+3 Relic of Progenitus
+3 Kozilek's Return

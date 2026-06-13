@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/Nagayama_Takuya_-_Green_Food_(Modern,_#1619496).dck
+Deck Type=constructed
+
+[Main]
+4 Ovalchase Daredevil
+2 Fauna Shaman
+4 Gilded Goose
+4 Asmoranomardicadaistinaculdacar
+3 Sarinth Steelseeker
+4 Teething Wurmlet
+4 The Underworld Cookbook
+4 Galvanic Blast
+4 Finale of Devastation
+4 Urza's Saga
+4 Wrenn and Six
+1 Grist, the Hunger Tide
+1 Wrenn and Realmbreaker
+3 Forest
+2 Stomping Ground
+2 Wooded Foothills
+3 Misty Rainforest
+4 Verdant Catacombs
+1 Overgrown Tomb
+1 Gingerbread Cabin
+1 Boseiju, Who Endures
+[Sideboard]
+1 Pithing Needle
+3 Alpine Moon
+1 Nihil Spellbomb
+2 Veil of Summer
+2 Orvar, the All-Form
+2 Endurance
+2 Boseiju, Who Endures
+2 Haywire Mite

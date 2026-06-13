@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=A Wolf in Sheeps Clothing
+Title=A Wolf in Sheeps Clothing
+Icon=A Wolf in Sheeps Clothing.jpg
+Difficulty=Very Hard
+Description=../Modern/Scars_of_Mirrodin/Magic-League_Modern_Trial_23-12-2011/Duodax_-_Jund_(Modern,_#24305).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Dark Confidant
+4 Eternal Witness
+4 Kitchen Finks
+4 Tarmogoyf
+4 Lightning Bolt
+4 Terminate
+4 Maelstrom Pulse
+4 Thoughtseize
+4 Blackcleave Cliffs
+2 Blood Crypt
+1 Forest
+2 Marsh Flats
+2 Overgrown Tomb
+4 Raging Ravine
+1 Swamp
+4 Treetop Village
+4 Verdant Catacombs
+[Sideboard]
+4 Duress
+4 Nihil Spellbomb
+4 Obstinate Baloth
+3 Putrefy

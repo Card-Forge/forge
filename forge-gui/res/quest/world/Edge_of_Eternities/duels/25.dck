@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Yemaya
+Title=Yemaya
+Icon=Yemaya.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/Abbysse_-_Golgari_Reanimator_(Standard,_#2577377).dck
+Deck Type=constructed
+
+[Main]
+2 Cynical Loner
+4 Llanowar Elves
+1 Ghalta, Stampede Tyrant
+4 Kona, Rescue Beastie
+4 Vaultborn Tyrant
+2 Overlord of the Balemurk
+1 Summon: Bahamut
+1 Ureni, the Song Unending
+1 Valgavoth, Terror Eater
+4 Archdruid's Charm
+4 Bitter Triumph
+4 Duress
+4 Zombify
+4 Evendo, Waking Haven
+4 Forest
+4 Starting Town
+4 Susur Secundi, Void Altar
+4 Wastewood Verge
+4 Blooming Marsh
+[Sideboard]
+1 Calamity, Galloping Inferno
+2 Frenzied Baloth
+3 Overlord of the Hauntwoods
+2 Seedship Impact
+4 Smuggler's Surprise
+2 Stab
+1 Terror of the Peaks

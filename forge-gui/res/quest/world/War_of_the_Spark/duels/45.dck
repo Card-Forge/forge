@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Seabiscuit
+Title=Seabiscuit
+Icon=Seabiscuit.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Alex_Peebles_-_Red_Deck_Wins_(Standard,_#798425).dck
+Deck Type=constructed
+
+[Main]
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Goblin Chainwhirler
+3 Runaway Steam-Kin
+4 Viashino Pyromancer
+4 Lightning Strike
+2 Risk Factor
+4 Shock
+2 Wizard's Lightning
+1 Lava Coil
+4 Light Up the Stage
+4 Chandra, Fire Artisan
+20 Mountain
+[Sideboard]
+3 Legion Warboss
+2 Rekindling Phoenix
+2 Experimental Frenzy
+1 Risk Factor
+1 Shivan Fire
+2 Tibalt, Rakish Instigator
+2 Fight with Fire
+2 Lava Coil

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Da Vinci
+Title=Da Vinci
+Icon=Da Vinci.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Igarashi_Tsuyoshi_-_Aura_Hexproof_(Modern,_#793003).dck
+Deck Type=constructed
+
+[Main]
+4 Gladecover Scout
+4 Slippery Bogle
+3 Kor Spiritdancer
+1 Dryad Arbor
+3 Path to Exile
+1 Open the Armory
+4 Ethereal Armor
+3 Hyena Umbra
+3 Spider Umbra
+4 Rancor
+4 Daybreak Coronet
+2 Sentinel's Mark
+2 Spirit Mantle
+3 Leyline of Sanctity
+1 Forest
+2 Plains
+4 Razorverge Thicket
+4 Horizon Canopy
+2 Temple Garden
+4 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+1 Path to Exile
+1 Spirit Link
+3 Damping Sphere
+3 Rest in Peace
+2 Stony Silence
+2 Gaddock Teeg
+1 Gryff's Boon
+2 Disenchant

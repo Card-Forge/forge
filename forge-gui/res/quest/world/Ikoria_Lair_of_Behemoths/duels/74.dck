@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Cyclops
+Title=Cyclops
+Icon=Cyclops.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Ftzz_-_Nexus_Reclamation_(Modern,_#991628).dck
+Deck Type=constructed
+
+[Main]
+1 Ice-Fang Coatl
+3 Snapcaster Mage
+1 Pulse of Murasa
+1 Nexus of Fate
+1 Abrupt Decay
+1 Assassin's Trophy
+1 Blue Sun's Zenith
+1 Logic Knot
+3 Mystical Teachings
+3 Fatal Push
+4 Cryptic Command
+4 Growth Spiral
+4 Opt
+4 Remand
+3 Wilderness Reclamation
+1 Castle Vantress
+1 Field of Ruin
+1 Zagoth Triome
+1 Mystic Sanctuary
+1 Snow-Covered Forest
+1 Snow-Covered Swamp
+2 Watery Grave
+2 Breeding Pool
+2 Hinterland Harbor
+2 Creeping Tar Pit
+3 Polluted Delta
+4 Snow-Covered Island
+4 Misty Rainforest
+[Sideboard]
+1 Consume the Meek
+1 Ceremonious Rejection
+1 Fatal Push
+1 Dispel
+1 Veil of Summer
+1 Surgical Extraction
+1 Ravenous Trap
+1 Mystical Dispute
+1 Echoing Decay
+2 Aether Gust
+2 Ice-Fang Coatl
+2 Weather the Storm

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Deadpool
+Title=Deadpool
+Icon=Deadpool.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/Montreal_Comicon_Standard/Christopher_Leonard_-_Naya_(Standard,_#1596).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Birds of Paradise
+4 Bloodbraid Elf
+4 Knight of the Reliquary
+4 Noble Hierarch
+3 Ranger of Eos
+2 Stoneforge Mystic
+4 Vengevine
+4 Wild Nacatl
+1 Basilisk Collar
+1 Behemoth Sledge
+4 Lightning Bolt
+2 Oblivion Ring
+1 Ajani Vengeant
+4 Arid Mesa
+4 Forest
+2 Misty Rainforest
+3 Mountain
+3 Plains
+2 Raging Ravine
+1 Sejiri Steppe
+2 Stirring Wildwood
+1 Tectonic Edge
+2 Terramorphic Expanse
+[Sideboard]
+1 Baneslayer Angel
+2 Celestial Purge
+3 Cunning Sparkmage
+3 Dauntless Escort
+2 Manabarbs
+2 Path to Exile

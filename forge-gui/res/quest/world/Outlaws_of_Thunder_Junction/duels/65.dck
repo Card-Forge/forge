@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=The Mac Nac Feegle
+Title=The Mac Nac Feegle
+Icon=The Mac Nac Feegle.jpg
+Difficulty=Very Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/Laranjinha-BR_-_As_foretold_(Modern,_#2051904).dck
+Deck Type=constructed
+
+[Main]
+4 Greater Gargadon
+4 Ragavan, Nimble Pilferer
+4 Electrodominance
+4 Lightning Bolt
+3 Spell Pierce
+4 Restore Balance
+4 Crashing Footfalls
+3 Expressive Iteration
+4 Preordain
+2 Ancestral Vision
+4 As Foretold
+2 Jace Reawakened
+2 Island
+4 Scalding Tarn
+4 Spirebluff Canal
+1 Mountain
+2 Steam Vents
+1 Tolaria West
+1 Stomping Ground
+1 Fiery Islet
+2 Thundering Falls
+[Sideboard]
+1 Mystical Dispute
+3 Brotherhood's End
+3 Stone of Erech
+2 Flusterstorm
+2 Blood Moon
+4 Leyline of Sanctity

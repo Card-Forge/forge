@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Bugs Bunny
+Title=Bugs Bunny
+Icon=Bugs Bunny.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/MHayashi_-_Moon_Red_(Modern,_#1292911).dck
+Deck Type=constructed
+
+[Main]
+4 Seasoned Pyromancer
+4 Ragavan, Nimble Pilferer
+4 Fury
+4 Bonecrusher Giant
+4 Relic of Progenitus
+4 Lightning Bolt
+4 Shatterskull Smashing
+4 Reckless Impulse
+4 Seal of Fire
+4 Blood Moon
+4 Chandra, Torch of Defiance
+1 Sunbaked Canyon
+1 Needleverge Pathway
+4 Field of Ruin
+4 Den of the Bugbear
+6 Mountain
+[Sideboard]
+3 Kozilek's Return
+4 Ratchet Bomb
+4 Cleansing Wildfire
+4 Abrade

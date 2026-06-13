@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Ga-Gorib
+Title=Ga-Gorib
+Icon=Ga-Gorib.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/Turin_Magic_Tournament_Magic_Lair_-_Torino,_Italy/Mattia_Tardiani_-_Eldrazi_(Modern,_#610553).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+4 Eldrazi Displacer
+4 Eldrazi Mimic
+4 Eldrazi Skyspawner
+4 Endless One
+4 Reality Smasher
+4 Thought-Knot Seer
+3 Dismember
+4 Path to Exile
+4 Adarkar Wastes
+2 Cavern of Souls
+2 Caves of Koilos
+4 Eldrazi Temple
+4 Eye of Ugin
+4 Flooded Strand
+1 Godless Shrine
+1 Hallowed Fountain
+1 Island
+1 Plains
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+1 All Is Dust
+1 Chalice of the Void
+1 Cyclonic Rift
+1 Grafdigger's Cage
+2 Gut Shot
+1 Hurkyl's Recall
+2 Rest in Peace
+3 Stony Silence
+2 Stubborn Denial
+1 Vesuva

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mines of Kazum Durl
+Title=Mines of Kazum Durl
+Icon=Mines of Kazum Durl.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/PTQ_Dragon┬┤s_Maze_-_Glendale,_Arizona/Dale_Graul_-_Red_Deck_Wins_(Modern,_#45771).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Deathrite Shaman
+4 Goblin Guide
+2 Grim Lavamancer
+4 Vexing Devil
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+3 Blackcleave Cliffs
+2 Blood Crypt
+2 Mountain
+2 Sacred Foundry
+4 Scalding Tarn
+1 Stomping Ground
+[Sideboard]
+4 Molten Rain
+3 Rakdos Charm
+4 Searing Blaze
+4 Skullcrack

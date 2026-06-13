@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Optimus Prime
+Title=Optimus Prime
+Icon=Optimus Prime.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/DaniMRebel_-_GW_Hatebears_(Modern,_#784355).dck
+Deck Type=constructed
+
+[Main]
+4 Flickerwisp
+1 Knight of Autumn
+4 Leonin Arbiter
+4 Noble Hierarch
+2 Ramunap Excavator
+3 Renegade Rallier
+4 Restoration Angel
+3 Scavenging Ooze
+4 Thalia, Guardian of Thraben
+2 Voice of Resurgence
+4 Aether Vial
+4 Path to Exile
+1 Field of Ruin
+2 Forest
+4 Ghost Quarter
+4 Horizon Canopy
+1 Plains
+4 Razorverge Thicket
+1 Stirring Wildwood
+4 Temple Garden
+[Sideboard]
+2 Knight of Autumn
+1 Dismember
+1 Dromoka's Command
+2 Gaddock Teeg
+2 Grafdigger's Cage
+2 Phyrexian Revoker
+2 Settle the Wreckage
+3 Stony Silence

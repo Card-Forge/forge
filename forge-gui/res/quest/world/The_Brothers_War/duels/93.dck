@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jengu
+Title=Jengu
+Icon=Jengu.jpg
+Difficulty=Hard
+Description=./Modern/The_Brothers_War/Adrian_Perdyan_-_Jund_Creativity_(Modern,_#1517796).dck
+Deck Type=constructed
+
+[Main]
+4 Fable of the Mirror-Breaker
+4 Archon of Cruelty
+1 Terminate
+4 Lightning Bolt
+2 Inquisition of Kozilek
+3 Persist
+3 Mishra's Command
+4 Thoughtseize
+4 Indomitable Creativity
+4 Bitter Reunion
+4 Wrenn and Six
+1 Boseiju, Who Endures
+1 Mountain
+1 Sokenzan, Crucible of Defiance
+1 Swamp
+2 Ziatora's Proving Ground
+2 Stomping Ground
+3 Blood Crypt
+4 Wooded Foothills
+4 Dwarven Mine
+4 Bloodstained Mire
+[Sideboard]
+1 Turn the Earth
+1 Emrakul, the Aeons Torn
+2 Ob Nixilis, the Adversary
+2 Necromentia
+2 Hidetsugu Consumes All
+2 Brotherhood's End
+2 Boseiju, Who Endures
+3 Veil of Summer

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=KingKong
+Title=KingKong
+Icon=KingKong.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Elizabeth_Knightmare_-_Mono-Red_Aggro_(Standard,_#1270020).dck
+Deck Type=constructed
+
+[Main]
+1 Inferno of the Star Mounts
+2 Axgard Cavalry
+2 Manaform Hellkite
+3 Fearless Liberator
+3 Magda, Brazen Outlaw
+3 Goldspan Dragon
+3 Dragonkin Berserker
+4 Breakneck Berserker
+4 Inordinate Rage
+4 Stolen Vitality
+4 Run Amok
+4 Play with Fire
+4 Ancestral Anger
+2 Curse of Shaken Faith
+22 Mountain
+[Sideboard]
+2 Thundering Rebuke
+2 Abrade
+3 Sure Strike
+4 Lunar Frenzy
+4 Pack's Betrayal

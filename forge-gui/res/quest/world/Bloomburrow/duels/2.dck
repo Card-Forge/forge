@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Odin
+Title=Odin
+Icon=Odin.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Ale_Mtg_-_Orzhov_Midrange_(Standard,_#2200219).dck
+Deck Type=constructed
+
+[Main]
+2 Beza, the Bounding Spring
+4 Deep-Cavern Bat
+4 Preacher of the Schism
+2 Loran of the Third Path
+3 Zoraline, Cosmos Caller
+2 Aclazotz, Deepest Betrayal
+3 Cut Down
+3 Go for the Throat
+1 Shoot the Sheriff
+2 Virtue of Loyalty
+1 Legions to Ashes
+2 Season of the Burrow
+2 Virtue of Persistence
+2 Temporary Lockdown
+2 Liliana of the Veil
+4 Caves of Koilos
+4 Concealed Courtyard
+4 Fabled Passage
+2 Fountainport
+3 Swamp
+2 Restless Fortress
+4 Shadowy Backstreet
+2 Plains
+[Sideboard]
+1 Beza, the Bounding Spring
+3 Cruelclaw's Heist
+2 Liliana of the Veil
+2 Elspeth's Smite
+2 Kaya, Intangible Slayer
+1 Sunfall
+2 Temporary Lockdown
+2 Duress

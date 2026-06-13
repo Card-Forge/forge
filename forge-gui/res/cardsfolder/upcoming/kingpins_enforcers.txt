@@ -1,0 +1,7 @@
+Name:Kingpin's Enforcers
+ManaCost:2 B
+Types:Creature Human Villain
+PT:2/3
+K:Lifelink
+A:AB$ Draw | Cost$ 2 B Sac<1/Artifact;Creature/artifact or creature> | SpellDescription$ Draw a card.
+Oracle:Lifelink\n{2}{B}, Sacrifice an artifact or creature: Draw a card.

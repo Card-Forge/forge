@@ -1,0 +1,15 @@
+Name:Augusta, Order Returned
+ManaCost:2 W
+Types:Legendary Creature Spirit Advisor
+PT:1/3
+K:Flying
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever NICKNAME attacks, each player exiles a card from their graveyard. When one or more nonland cards are exiled this way, put that many +1/+1 counters on target attacking creature.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | Mandatory$ True | Hidden$ True | RememberChanged$ True | DefinedPlayer$ Player | SubAbility$ DBImmediateTrig
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ GE1 | Execute$ TrigPutCounter | RememberObjects$ Remembered.nonLand | SubAbility$ DBCleanup | TriggerDescription$ When one or more nonland cards are exiled this way, put that many +1/+1 counters on target attacking creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.attacking | ValidTgtDesc$ attacking creature | CounterType$ P1P1 | CounterNum$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerRemembered$Amount
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Graveyard|Counters
+Oracle:Flying, vigilance\nWhenever Augusta attacks, each player exiles a card from their graveyard. When one or more nonland cards are exiled this way, put that many +1/+1 counters on target attacking creature.

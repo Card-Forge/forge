@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=LeChuck
+Title=LeChuck
+Icon=LeChuck.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/PTQ_Barcelona_-_Milano/Marco_Ellena_-_Red_Deck_Wins_(Modern,_#26721).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Grim Lavamancer
+3 Hellspark Elemental
+4 Mogg Fanatic
+4 Stormblood Berserker
+4 Tarmogoyf
+1 Brimstone Volley
+1 Incinerate
+4 Lightning Bolt
+1 Shard Volley
+4 Lava Spike
+4 Rift Bolt
+3 Seal of Fire
+4 Arid Mesa
+4 Copperline Gorge
+4 Mountain
+4 Scalding Tarn
+3 Stomping Ground
+[Sideboard]
+2 Ancient Grudge
+2 Choke
+4 Combust
+4 Leyline of Punishment
+3 Seal of Primordium

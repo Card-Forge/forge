@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Pyro
+Title=Pyro
+Icon=Pyro.jpg
+Difficulty=Hard
+Description=../Modern/Magic_Origins/SCG_States_Anchorage/Peter_Chisholm_-_Red_Deck_Wins_(Modern,_#618022).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+4 Skullcrack
+4 Lava Spike
+1 Pillar of Flame
+4 Rift Bolt
+4 Bloodstained Mire
+5 Mountain
+3 Sacred Foundry
+1 Stomping Ground
+2 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+2 Exquisite Firecraft
+1 Molten Rain
+1 Path to Exile
+4 Tormod's Crypt
+1 Wear // Tear

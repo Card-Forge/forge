@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Fat Albert
+Title=Fat Albert
+Icon=Fat Albert.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine/Gihong_Do_-_Mono-Red_Aggro_(Standard,_#1624974).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Phoenix Chick
+4 Kumano Faces Kakkazan
+3 Feldon, Ronom Excavator
+2 Bloodthirsty Adversary
+1 Thundering Raiju
+4 Stoke the Flames
+4 Play with Fire
+4 Lightning Strike
+3 Reckless Impulse
+2 Wrenn's Resolve
+4 Invasion of Regatha
+15 Mountain
+4 Mishra's Foundry
+2 Sokenzan, Crucible of Defiance
+[Sideboard]
+4 Furnace Punisher
+2 Rending Flame
+2 Koth, Fire of Resistance
+3 Strangle
+4 Obliterating Bolt

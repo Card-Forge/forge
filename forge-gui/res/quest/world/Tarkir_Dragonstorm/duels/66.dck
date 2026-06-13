@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Luna Lovegood
+Title=Luna Lovegood
+Icon=Luna Lovegood.jpg
+Difficulty=Hard
+Description=./Modern/Tarkir_Dragonstorm/ChoccyMilk_-_Selesnya_Ritual_(Modern,_#2449138).dck
+Deck Type=constructed
+
+[Main]
+3 Eternal Witness
+1 Haywire Mite
+4 White Orchid Phantom
+4 Guide of Souls
+4 Ocelot Pride
+3 Emperor of Bones
+2 Witch Enchanter
+2 Brightglass Gearhulk
+4 Severance Priest
+2 Skyclave Apparition
+2 Solitude
+4 Ephemerate
+4 Birthing Ritual
+1 Lush Portico
+1 Shadowy Backstreet
+4 Windswept Heath
+4 Flagstones of Trokair
+2 Temple Garden
+1 Godless Shrine
+1 Overgrown Tomb
+1 Plains
+1 Forest
+4 Marsh Flats
+1 Boseiju, Who Endures
+[Sideboard]
+1 Elesh Norn, Mother of Machines
+2 Gaddock Teeg
+3 Orim's Chant
+2 Stony Silence
+2 Knight of Autumn
+2 Vindicate
+3 Sanctifier en-Vec

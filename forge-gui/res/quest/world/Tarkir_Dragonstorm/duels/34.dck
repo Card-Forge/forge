@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Redwall
+Title=Redwall
+Icon=Redwall.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/Hamuda_-_Rakdos_Aggro_(Standard,_#2449376).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Callous Sell-Sword
+4 Heartfire Hero
+4 Slickshot Show-Off
+4 Emberheart Challenger
+2 Two-Headed Hunter
+4 Cori-Steel Cutter
+4 Monstrous Rage
+4 Turn Inside Out
+4 Burst Lightning
+2 Wrenn's Resolve
+4 Blackcleave Cliffs
+12 Mountain
+4 Sulfurous Springs
+[Sideboard]
+3 Duress
+1 Torch the Tower
+2 Feed the Swarm
+2 Ghost Vacuum
+2 Lithomantic Barrage
+2 Urabrask's Forge
+1 Furnace Reins
+2 Wrenn's Resolve

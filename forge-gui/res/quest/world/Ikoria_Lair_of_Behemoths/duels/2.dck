@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Saladin
+Title=Saladin
+Icon=Saladin.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Aaron_DeLuca_-_Temur_Reclamation_(Standard,_#1007404).dck
+Deck Type=constructed
+
+[Main]
+3 Brazen Borrower
+4 Uro, Titan of Nature's Wrath
+2 Negate
+3 Thassa's Intervention
+4 Expansion // Explosion
+4 Growth Spiral
+4 Opt
+4 Shark Typhoon
+4 Wilderness Reclamation
+1 Temple of Mystery
+1 Mountain
+2 Forest
+2 Island
+3 Fabled Passage
+3 Castle Vantress
+4 Stomping Ground
+4 Breeding Pool
+4 Ketria Triome
+4 Steam Vents
+[Sideboard]
+1 Flame Sweep
+2 Shock
+3 Mystical Dispute
+3 Nightpack Ambusher
+3 Aether Gust
+3 Scorching Dragonfire

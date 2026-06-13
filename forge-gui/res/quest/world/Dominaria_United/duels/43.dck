@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Easy
+Description=./Standard/Dominaria_United/AliEldrazi_-_UW_Control_(Standard,_#1449013).dck
+Deck Type=constructed
+
+[Main]
+1 Hullbreaker Horror
+3 The Restoration of Eiganjo
+1 Pithing Needle
+1 The Celestus
+2 Reckoner Bankbuster
+2 Timeless Lotus
+2 Fateful Absence
+2 Memory Deluge
+3 Syncopate
+3 March of Otherworldly Light
+4 Negate
+2 Silver Scrutiny
+2 Depopulate
+2 Farewell
+2 Teferi, Who Slows the Sunset
+3 The Wandering Emperor
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+2 Spara's Headquarters
+2 Raffine's Tower
+2 Field of Ruin
+3 Adarkar Wastes
+4 Deserted Beach
+5 Island
+5 Plains
+[Sideboard]
+1 Hullbreaker Horror
+1 Reckoner Bankbuster
+1 Fateful Absence
+1 Disdainful Stroke
+1 Dennick, Pious Apprentice
+1 Pithing Needle
+2 Wedding Announcement
+2 Sunset Revelry
+2 Malevolent Hermit
+3 Enduring Angel

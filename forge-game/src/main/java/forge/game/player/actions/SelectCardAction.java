@@ -4,8 +4,7 @@ import forge.game.GameEntityView;
 
 public class SelectCardAction extends PlayerAction{
     public SelectCardAction(GameEntityView cardView) {
-        super(cardView);
-        name = "Select card";
+        super(cardView, "Select card");
     }
 
 

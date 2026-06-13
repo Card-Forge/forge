@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Odysseus
+Title=Odysseus
+Icon=Odysseus.jpg
+Difficulty=Very Hard
+Description=../Modern/Dark_Ascension/PTQ_Barcelona_-_TopDecK_Coimbra/Tiago_Domingues_-_Zoo_(Modern,_#28457).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Grim Lavamancer
+4 Kird Ape
+4 Loam Lion
+4 Tarmogoyf
+3 Woolly Thoctar
+4 Lightning Bolt
+4 Lightning Helix
+3 Path to Exile
+4 Searing Blaze
+4 Rift Bolt
+3 Seal of Fire
+4 Arid Mesa
+1 Forest
+4 Misty Rainforest
+1 Mountain
+1 Plains
+2 Sacred Foundry
+4 Scalding Tarn
+2 Stomping Ground
+1 Temple Garden
+[Sideboard]
+2 Ancient Grudge
+3 Kitchen Finks
+2 Qasali Pridemage
+2 Shatterstorm
+3 Thalia, Guardian of Thraben
+2 Volcanic Fallout

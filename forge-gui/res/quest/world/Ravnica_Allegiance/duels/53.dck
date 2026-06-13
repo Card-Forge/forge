@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Crows in the Field
+Title=Crows in the Field
+Icon=Crows in the Field.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Alloran_-_UW_Hatebear_(Modern,_#785475).dck
+Deck Type=constructed
+
+[Main]
+3 Deputy of Detention
+3 Drogskol Captain
+2 Eidolon of Rhetoric
+3 Kira, Great Glass-Spinner
+4 Mausoleum Wanderer
+2 Phantasmal Image
+4 Rattlechains
+2 Selfless Spirit
+2 Siren Stormtamer
+4 Spell Queller
+3 Supreme Phantom
+2 Thalia, Guardian of Thraben
+4 Aether Vial
+4 Flooded Strand
+2 Glacial Fortress
+3 Hallowed Fountain
+4 Island
+1 Moorland Haunt
+3 Mutavault
+1 Plains
+4 Seachrome Coast
+[Sideboard]
+1 Deputy of Detention
+1 Eidolon of Rhetoric
+2 Selfless Spirit
+1 Siren Stormtamer
+1 Thalia, Guardian of Thraben
+3 Kor Firewalker
+2 Rest in Peace
+4 Unified Will

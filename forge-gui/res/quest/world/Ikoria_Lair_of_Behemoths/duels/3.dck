@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/Aaron_TeCroney_-_Rakdos_Lurrus_(Standard,_#971410).dck
+Deck Type=constructed
+
+[Main]
+3 Gutterbones
+4 Cauldron Familiar
+4 Dreadhorde Butcher
+4 Kroxa, Titan of Death's Hunger
+4 Priest of Forgotten Gods
+4 Robber of the Rich
+4 Serrated Scorpion
+4 Witch's Oven
+2 Call of the Death-Dweller
+4 Claim the Firstborn
+2 Castle Locthwain
+4 Blood Crypt
+4 Fabled Passage
+6 Mountain
+7 Swamp
+[Sideboard]
+1 Heartless Act
+1 Lurrus of the Dream-Den
+1 Dead Weight
+2 Noxious Grasp
+2 Embereth Shieldbreaker
+2 Pharika's Libation
+2 Act of Treason
+2 Agonizing Remorse
+2 Tymaret, Chosen from Death

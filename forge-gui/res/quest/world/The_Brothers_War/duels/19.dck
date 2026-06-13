@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Ratbert
+Title=Ratbert
+Icon=Ratbert.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/Matsuda_Hideyuki_-_WBR_Junk_(Standard,_#1526017).dck
+Deck Type=constructed
+
+[Main]
+1 Sheoldred, the Apocalypse
+1 Ao, the Dawn Sky
+2 Sanctuary Warden
+2 Serra Paragon
+4 Fable of the Mirror-Breaker
+4 Archangel of Wrath
+4 Steel Seraph
+4 Bloodtithe Harvester
+4 Reckoner Bankbuster
+1 Abrade
+3 Go for the Throat
+4 The Wandering Emperor
+1 Jetmir's Garden
+1 Eiganjo, Seat of the Empire
+1 Takenuma, Abandoned Mire
+3 Sulfurous Springs
+4 Sundown Pass
+4 Shattered Sanctum
+4 Haunted Ridge
+4 Caves of Koilos
+4 Battlefield Forge
+[Sideboard]
+1 Loran of the Third Path
+1 Unlicensed Hearse
+1 Rite of Oblivion
+1 Go for the Throat
+1 Abrade
+2 Brotherhood's End
+2 Duress
+3 Liliana of the Veil
+3 Cut Down

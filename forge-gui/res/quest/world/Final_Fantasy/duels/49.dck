@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Scotty
+Title=Scotty
+Icon=Scotty.jpg
+Difficulty=Easy
+Description=./Standard/Final_Fantasy/LittleJ_-_Selesnya_Artifacts_(Standard,_#2528196).dck
+Deck Type=constructed
+
+[Main]
+4 Brightglass Gearhulk
+4 Novice Inspector
+4 Regal Bunnicorn
+4 Scrapshooter
+4 Sentinel of the Nameless City
+4 Teething Wurmlet
+2 Warden of the Inner Sky
+1 Haywire Mite
+1 Kellan, Daring Traveler
+4 Herd Heirloom
+3 Dusk Rose Reliquary
+1 Phoenix Down
+1 Soul-Guide Lantern
+1 Invasion of Gobakhan
+5 Plains
+4 Brushland
+4 Hushwood Verge
+4 Razorverge Thicket
+3 Forest
+2 Restless Prairie
+[Sideboard]
+3 Invasion of Gobakhan
+2 Authority of the Consuls
+2 Ghost Vacuum
+2 Sheltered by Ghosts
+2 Wilt-Leaf Liege
+1 Dusk Rose Reliquary
+1 Haywire Mite
+1 Phoenix Down
+1 Pick Your Poison

@@ -4,7 +4,7 @@ Name:Pauper Puzzles #10 - Running On Empty
 URL:https://pauperpuzzles.wordpress.com/2017/01/26/10-running-on-empty/
 Goal:Survive
 Turns:2
-Difficulty:Hard
+Difficulty:Rare
 Description:Survive until your next turn.
 [state]
 ActivePlayer=Human

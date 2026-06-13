@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Reactor Meltdown
+Title=Reactor Meltdown
+Icon=Reactor Meltdown.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Bliss_Bizzell_-_Domain_Ramp_(Standard,_#1967711).dck
+Deck Type=constructed
+
+[Main]
+4 Topiary Stomper
+3 Atraxa, Grand Unifier
+4 Archangel of Wrath
+1 Chrome Host Seedshark
+4 Sunfall
+4 Herd Migration
+1 Depopulate
+3 Up the Beanstalk
+4 Leyline Binding
+2 Temporary Lockdown
+3 Invasion of Zendikar
+1 Nissa, Ascended Animist
+4 Ziatora's Proving Ground
+1 Swamp
+4 Spara's Headquarters
+3 Plains
+4 Jetmir's Garden
+2 Island
+3 Forest
+1 Boseiju, Who Endures
+1 Mountain
+3 Cavern of Souls
+[Sideboard]
+1 Lithomantic Barrage
+2 Temporary Lockdown
+2 Negate
+2 Destroy Evil
+1 Tishana's Tidebinder
+3 Elspeth's Smite
+2 Tranquil Frillback
+1 Chrome Host Seedshark
+1 Imodane's Recruiter

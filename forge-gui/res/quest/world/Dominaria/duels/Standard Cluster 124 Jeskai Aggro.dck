@@ -1,0 +1,34 @@
+[metadata]
+Name=Jeskai Aggro
+Deck Type=constructed
+Title=Jeskai Aggro
+Description=Jeskai Aggro
+Difficulty=Easy
+Icon=The Great Gatsby
+[Main]
+4 Aether Hub
+4 Ahn-Crop Crasher
+4 Bomat Courier
+4 Daring Buccaneer
+4 Fanatical Firebrand
+4 Hazoret the Fervent
+4 Inspiring Vantage
+3 Kari Zev, Skyship Raider
+4 Lightning Strike
+2 Mountain
+2 Mountain
+4 Mountain
+3 Path of Mettle
+1 Plains
+1 Plains
+4 Rigging Runner
+4 Shock
+4 Spirebluff Canal
+[Sideboard]
+3 Abrade
+2 Chandra's Defeat
+2 Chandra, Torch of Defiance
+2 Glorybringer
+1 Kari Zev's Expertise
+3 Negate
+2 Scavenger Grounds

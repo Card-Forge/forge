@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Ratbert
+Title=Ratbert
+Icon=Ratbert.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/Clinton_Endicott_-_Mono-White_Midrange_(Standard,_#1615828).dck
+Deck Type=constructed
+
+[Main]
+4 Ambitious Farmhand
+2 Intrepid Adversary
+2 Adeline, Resplendent Cathar
+1 Loran of the Third Path
+2 Phyrexian Vindicator
+2 Serra Paragon
+2 Ao, the Dawn Sky
+3 Steel Seraph
+3 The Restoration of Eiganjo
+2 Destroy Evil
+3 Lay Down Arms
+3 Ossification
+4 Wedding Announcement
+3 The Wandering Emperor
+2 Elspeth Resplendent
+2 Eiganjo, Seat of the Empire
+4 Field of Ruin
+16 Plains
+[Sideboard]
+1 Phyrexian Vindicator
+1 Serra Paragon
+1 Ao, the Dawn Sky
+2 Sanctuary Warden
+2 The Eternal Wanderer
+2 Fateful Absence
+4 Knockout Blow
+2 Unlicensed Hearse

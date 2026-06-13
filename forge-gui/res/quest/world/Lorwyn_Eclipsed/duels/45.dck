@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Tibalt
+Title=Tibalt
+Icon=Tibalt.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Michael_Martin_-_W-U-B-R-G_Control_(Standard,_#2819282).dck
+Deck Type=constructed
+
+[Main]
+2 Marang River Regent
+1 Herald of Eternal Dawn
+1 Songcrafter Mage
+4 Ancient Cornucopia
+1 Cursed Recording
+4 Consult the Star Charts
+4 Jeskai Revelation
+4 Lightning Helix
+4 No More Lies
+3 Fire Magic
+2 Three Steps Ahead
+1 Ashling's Command
+1 Inevitable Defeat
+1 Perennation
+4 Starting Town
+3 Floodfarm Verge
+2 Elegant Parlor
+2 Hedge Maze
+2 Lush Portico
+2 Mistrise Village
+2 Riverpyre Verge
+2 Thundering Falls
+1 Bleachbone Verge
+1 Breeding Pool
+1 Gloomlake Verge
+1 Meticulous Archive
+1 Multiversal Passage
+1 Sacred Foundry
+1 Steam Vents
+1 Willowrush Verge
+[Sideboard]
+2 Day of Judgment
+2 Glen Elendra's Answer
+2 Heritage Reclamation
+2 Rest in Peace
+2 Torpor Orb
+1 Get Lost
+1 Inevitable Defeat
+1 Maelstrom Pulse
+1 Stock Up
+1 Summon: Leviathan

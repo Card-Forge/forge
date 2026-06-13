@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Dracula
+Title=Dracula
+Icon=Dracula.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/Gabriel_Roberts_-_Azorius_Control_(Standard,_#2596478).dck
+Deck Type=constructed
+
+[Main]
+2 Beza, the Bounding Spring
+2 Marang River Regent
+3 Consult the Star Charts
+2 Elspeth's Smite
+4 Get Lost
+3 No More Lies
+2 Spell Pierce
+2 Three Steps Ahead
+1 Day of Judgment
+2 Split Up
+4 Stock Up
+3 Ultima
+1 Rest in Peace
+2 Seam Rip
+2 Elspeth, Storm Slayer
+2 Demolition Field
+4 Floodfarm Verge
+3 Fountainport
+4 Island
+4 Meticulous Archive
+4 Plains
+4 Restless Anchorage
+[Sideboard]
+2 Annul
+2 Authority of the Consuls
+1 Beza, the Bounding Spring
+2 Negate
+2 Overlord of the Mistmoors
+1 Rest in Peace
+2 Stoic Sphinx
+1 Three Steps Ahead
+2 Tishana's Tidebinder

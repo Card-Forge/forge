@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=Luna Lovegood
+Title=Luna Lovegood
+Icon=Luna Lovegood.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/Grand_Prix_Bilbao/Mathieu_Deloly_-_Birthing_Pod_(Modern,_#44049).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+1 Deceiver Exarch
+1 Ethersworn Canonist
+1 Glen Elendra Archmage
+1 Harmonic Sliver
+1 Izzet Staticaster
+2 Kiki-Jiki, Mirror Breaker
+3 Kitchen Finks
+1 Linvala, Keeper of Silence
+1 Murderous Redcap
+3 Noble Hierarch
+1 Phantasmal Image
+4 Restoration Angel
+1 Spellskite
+1 Wall of Omens
+4 Wall of Roots
+1 Zealous Conscripts
+4 Birthing Pod
+2 Chord of Calling
+3 Arid Mesa
+1 Breeding Pool
+1 Copperline Gorge
+1 Forest
+2 Gavony Township
+4 Grove of the Burnwillows
+1 Hallowed Fountain
+4 Misty Rainforest
+1 Mountain
+1 Plains
+1 Sacred Foundry
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+[Sideboard]
+1 Ancient Grudge
+1 Aven Mindcensor
+1 Negate
+1 Obstinate Baloth
+3 Path to Exile
+1 Qasali Pridemage
+2 Relic of Progenitus
+2 Sowing Salt
+1 Thrun, the Last Troll

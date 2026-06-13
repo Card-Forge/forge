@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import com.google.common.collect.ImmutableList;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.StaticData;
@@ -68,7 +66,7 @@ public class FDeckImportDialog extends FDialog {
     private final DeckImportController controller;
     private final FDeckEditor.DeckEditorConfig editorConfig;
 
-    private final static ImmutableList<String> importOrCancel = ImmutableList.of(Forge.getLocalizer().getMessage("lblImport"), Forge.getLocalizer().getMessage("lblCancel"));
+    private final static List<String> importOrCancel = List.of(Forge.getLocalizer().getMessage("lblImport"), Forge.getLocalizer().getMessage("lblCancel"));
 
     public FDeckImportDialog(final Deck currentDeck, final FDeckEditor.DeckEditorConfig editorConfig) {
         super(Forge.getLocalizer().getMessage("lblImportFromClipboard"), 2);

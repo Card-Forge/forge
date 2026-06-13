@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Dead Girl
+Title=Dead Girl
+Icon=Dead Girl.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/KoiVixen_-_Mardu_Energy_(Modern,_#2189576).dck
+Deck Type=constructed
+
+[Main]
+4 Ocelot Pride
+4 Guide of Souls
+4 Amped Raptor
+4 Phlage, Titan of Fire's Fury
+4 Ajani, Nacatl Pariah
+4 Mockingbird
+2 Thraben Charm
+2 Consign to Memory
+4 Galvanic Discharge
+3 Expressive Iteration
+3 Static Prison
+1 Mountain
+1 Plains
+1 Thundering Falls
+1 Elegant Parlor
+1 Arena of Glory
+4 Flooded Strand
+2 Hallowed Fountain
+1 Steam Vents
+2 Sacred Foundry
+2 Aether Hub
+2 Scalding Tarn
+4 Arid Mesa
+[Sideboard]
+2 Consign to Memory
+2 Surgical Extraction
+3 Suncleanser
+2 Deafening Silence
+1 Jegantha, the Wellspring
+4 Obsidian Charmaw
+1 Spell Pierce

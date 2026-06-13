@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Ancient Battlefield
+Title=Ancient Battlefield
+Icon=Ancient Battlefield.jpg
+Difficulty=Very Hard
+Description=./Modern/Foundations/Maehori_Shin_-_Goryo_shoot_(Modern,_#2282781).dck
+Deck Type=constructed
+
+[Main]
+3 Fallaji Archaeologist
+2 Atraxa, Grand Unifier
+4 Ulamog, the Defiler
+3 Emperor of Bones
+4 Psychic Frog
+3 Abhorrent Oculus
+1 Kiora, the Rising Tide
+4 Goryo's Vengeance
+3 Ephemerate
+3 Force of Negation
+4 Faithful Mending
+1 Sink into Stupor
+2 Thoughtseize
+4 Unearth
+1 Plains
+1 Island
+1 Swamp
+1 Hallowed Fountain
+1 Godless Shrine
+1 Watery Grave
+2 Flooded Strand
+4 Polluted Delta
+4 Marsh Flats
+1 Meticulous Archive
+1 Shadowy Backstreet
+1 Undercity Sewers
+[Sideboard]
+1 Thoughtseize
+1 Surgical Extraction
+2 Mystical Dispute
+2 Prismatic Ending
+2 Temporary Lockdown
+3 Consign to Memory
+1 Disruptor Flute
+1 Exorcise
+2 Ghost Vacuum

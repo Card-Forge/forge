@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=The Spectre
+Title=The Spectre
+Icon=The Spectre.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Müller_-_The_Rack_(Modern,_#1975694).dck
+Deck Type=constructed
+
+[Main]
+4 Dauthi Voidwalker
+1 Nihil Spellbomb
+1 Pithing Needle
+4 The Rack
+2 Bitter Triumph
+2 Fatal Push
+2 Funeral Charm
+2 Sheoldred's Edict
+4 Inquisition of Kozilek
+3 Raven's Crime
+4 Smallpox
+4 Thoughtseize
+4 Urza's Saga
+4 Liliana of the Veil
+1 Castle Locthwain
+1 Hive of the Eye Tyrant
+3 Mishra's Factory
+9 Swamp
+1 Takenuma, Abandoned Mire
+4 Urborg, Tomb of Yawgmoth
+[Sideboard]
+2 Bontu's Last Reckoning
+2 Chalice of the Void
+1 Hex Parasite
+4 Leyline of the Void
+1 Pithing Needle
+2 Shadow of Doubt
+1 Shadowspear
+2 Surgical Extraction

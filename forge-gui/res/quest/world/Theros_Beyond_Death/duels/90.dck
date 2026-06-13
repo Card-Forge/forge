@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Firestorm
+Title=Firestorm
+Icon=Firestorm.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Chaughey_-_Temur_Delver_(Modern,_#924998).dck
+Deck Type=constructed
+
+[Main]
+1 Snapcaster Mage
+2 Young Pyromancer
+2 Hooting Mandrills
+3 Brazen Borrower
+4 Delver of Secrets
+4 Tarmogoyf
+1 Force of Negation
+2 Tarfire
+3 Spell Pierce
+4 Once Upon a Time
+4 Lightning Bolt
+4 Mana Leak
+2 Flame Slash
+4 Serum Visions
+4 Sleight of Hand
+1 Forest
+1 Island
+1 Stomping Ground
+1 Breeding Pool
+2 Steam Vents
+2 Wooded Foothills
+4 Misty Rainforest
+4 Scalding Tarn
+[Sideboard]
+1 Weather the Storm
+1 Flame Slash
+1 Force of Negation
+1 Spell Pierce
+1 Dismember
+1 Feed the Clan
+1 Shadowspear
+2 Collector Ouphe
+3 Grafdigger's Cage
+3 Damping Sphere

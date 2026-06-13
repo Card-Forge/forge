@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Betty Rubble
+Title=Betty Rubble
+Icon=Betty Rubble.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/9acky_-_Mono_Blue_(Standard,_#961527).dck
+Deck Type=constructed
+
+[Main]
+4 Brineborn Cutthroat
+4 Sea-Dasher Octopus
+4 Spectral Sailor
+4 Stonecoil Serpent
+4 Brazen Borrower
+2 Aether Gust
+3 Sinister Sabotage
+3 Quench
+3 Opt
+3 Mystical Dispute
+4 Essence Capture
+3 Castle Vantress
+19 Island
+[Sideboard]
+1 Aether Gust
+1 Mystical Dispute
+1 Disdainful Stroke
+2 Unsummon
+2 Ashiok's Erasure
+2 Shark Typhoon
+3 Cerulean Drake
+3 Grafdigger's Cage

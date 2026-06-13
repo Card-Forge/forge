@@ -1,0 +1,39 @@
+[metadata]
+Name=Temur Energy
+Deck Type=constructed
+Title=Temur Energy
+Description=Temur Energy
+Difficulty=Easy
+Icon=Dr Fate
+[Main]
+2 Abrade
+4 Aether Hub
+4 Botanical Sanctum
+4 Bristling Hydra
+2 Chandra, Torch of Defiance
+1 Commit // Memory
+1 Confiscation Coup
+1 Forest
+1 Forest
+1 Forest
+4 Glorybringer
+4 Harnessed Lightning
+1 Island
+4 Jadelight Ranger
+4 Longtusk Cub
+1 Magma Spray
+3 Mountain
+1 Rhonas the Indomitable
+3 Rootbound Crag
+4 Servant of the Conduit
+2 Sheltered Thicket
+4 Spirebluff Canal
+4 Whirler Virtuoso
+[Sideboard]
+2 Abrade
+2 Chandra's Defeat
+2 Dire Fleet Daredevil
+2 Naturalize
+4 Negate
+1 Nissa, Steward of Elements
+2 Sweltering Suns

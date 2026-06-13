@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Ghost Council
+Title=Ghost Council
+Icon=Ghost Council.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/Uguzz_Tournaments_-_Milano_(MI)/Passalacqua_Tommaso_-_Faeries_(Modern,_#73476).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+4 Spellstutter Sprite
+1 Agony Warp
+3 Cryptic Command
+1 Dismember
+1 Doom Blade
+1 Go for the Throat
+3 Mana Leak
+3 Spell Snare
+2 Inquisition of Kozilek
+2 Thoughtseize
+4 Bitterblossom
+3 Creeping Tar Pit
+3 Darkslick Shores
+5 Island
+4 Mutavault
+3 River of Tears
+3 Secluded Glen
+2 Swamp
+3 Watery Grave
+[Sideboard]
+1 Batterskull
+1 Blue Sun's Zenith
+1 Consume the Meek
+1 Damnation
+1 Deathmark
+1 Engineered Explosives
+1 Grafdigger's Cage
+1 Hurkyl's Recall
+1 Relic of Progenitus
+1 Sower of Temptation
+1 Spellskite
+1 Sudden Death
+1 Threads of Disloyalty
+1 Vendilion Clique
+1 Wurmcoil Engine

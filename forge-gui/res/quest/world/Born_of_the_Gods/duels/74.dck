@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Leela
+Title=Leela
+Icon=Leela.jpg
+Difficulty=Hard
+Description=../Modern/Born_of_the_Gods/GP_Trial_Sevilla_7Reinos/Ismael_Fernandez_Romero_-_Mono_Green_(Modern,_#173564).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dryad Militant
+4 Experiment One
+4 Kalonian Tusker
+4 Leatherback Baloth
+3 Scavenging Ooze
+4 Strangleroot Geist
+2 Thrun, the Last Troll
+2 Aspect of Hydra
+2 Dismember
+1 Giant Growth
+4 Vines of Vastwood
+4 Rancor
+18 Forest
+2 Treetop Village
+2 Windswept Heath
+[Sideboard]
+2 Choke
+2 Creeping Corrosion
+1 Grafdigger's Cage
+1 Naturalize
+2 Obstinate Baloth
+1 Pithing Needle
+2 Skylasher
+2 Torpor Orb
+1 Unravel the AEther
+1 Wild Defiance

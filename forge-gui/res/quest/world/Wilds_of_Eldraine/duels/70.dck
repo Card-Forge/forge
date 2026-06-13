@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Princess Selenia
+Title=Princess Selenia
+Icon=Princess Selenia.jpg
+Difficulty=Very Hard
+Description=./Modern/Wilds_of_Eldraine/togoresmtg_-_Beanstalk_Affinity_2.0_(Modern,_#1743143)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Frogmite
+4 Memnite
+4 Ornithopter
+4 Sojourner's Companion
+2 Somber Hoverguard
+4 Thought Monitor
+1 Aether Spellbomb
+3 Cranial Plating
+2 Nettlecyst
+2 Shadowspear
+4 Springleaf Drum
+4 Thoughtcast
+4 Up the Beanstalk
+4 Urza's Saga
+2 Darksteel Citadel
+1 Forest
+1 Island
+1 Mistvault Bridge
+4 Spire of Industry
+4 Tanglepool Bridge
+1 Treasure Vault
+[Sideboard]
+2 Annihilating Glare
+2 Damping Sphere
+2 Dismember
+2 Haywire Mite
+3 Metallic Rebuke
+1 Pithing Needle
+1 Soul-Guide Lantern
+2 Soulless Jailer

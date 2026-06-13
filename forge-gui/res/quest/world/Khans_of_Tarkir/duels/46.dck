@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Redwall
+Title=Redwall
+Icon=Redwall.jpg
+Difficulty=Easy
+Description=Khans_of_Tarkir/SCG_Super_IQ_East_Windsor/Craig_Rocco_-_Abzan_Aggro_(Standard,_#126646).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Anafenza, the Foremost
+2 Brimaz, King of Oreskos
+3 Courser of Kruphix
+4 Elvish Mystic
+4 Fleecemane Lion
+2 Heir of the Wilds
+4 Rakshasa Deathdealer
+4 Siege Rhino
+3 Abzan Charm
+3 Gather Courage
+1 Hero's Downfall
+1 Murderous Cut
+1 Ajani, Mentor of Heroes
+1 Sorin, Solemn Visitor
+1 Caves of Koilos
+2 Forest
+4 Llanowar Wastes
+2 Mana Confluence
+2 Plains
+4 Sandsteppe Citadel
+1 Temple of Malady
+2 Temple of Silence
+2 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+3 Bile Blight
+2 Hunt the Hunter
+1 Reclamation Sage
+1 Silence the Believers
+3 Thoughtseize
+1 Utter End

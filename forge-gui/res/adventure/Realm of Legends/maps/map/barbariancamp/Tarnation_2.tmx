@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="32" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="180">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="32" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="181">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -91,6 +91,8 @@
 	]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Diamond Valley|ARN&quot;, &quot;Hellspur Posse Boss|OTJ&quot;, &quot;Brimstone Roundup|OTJ&quot;, &quot;Boom Box|OTJ&quot;, &quot;Bandit's Haul|OTJ&quot;, &quot;Lavaspur Boots|OTJ&quot;, &quot;Key to the Vault|OTJ&quot;  ] }"/>
     <property name="enemy" value="Akul"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -198,6 +200,24 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="180" template="../../../../common/maps/obj/enemy.tx" x="178.037" y="107.544">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Your final blow sends Akul crashing down from his flight, and before he can get out any pithy final words, he splashes down into the lava, his body quickly burnt to ash.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Diamond Valley|ARN&quot;, &quot;Brimstone Roundup|OTJ&quot;, &quot;Boom Box|OTJ&quot;, &quot;Bandit's Haul|OTJ&quot;, &quot;Lavaspur Boots|OTJ&quot;, &quot;Key to the Vault|OTJ&quot;  ] }"/>
+    <property name="enemy" value="Akul"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

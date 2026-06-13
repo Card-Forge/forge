@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Great Gatsby
+Title=The Great Gatsby
+Icon=The Great Gatsby.jpg
+Difficulty=Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/RagingTiltMonster_-_Mono_Black_Scam_(Modern,_#2057108).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+4 Ornithopter
+4 Grief
+4 Memnite
+1 Lavaspur Boots
+4 Nettlecyst
+1 Shadowspear
+4 Springleaf Drum
+4 Mishra's Bauble
+4 Not Dead After All
+4 Dismember
+4 Agadeem's Awakening
+4 Thoughtseize
+4 Urza's Saga
+2 Treasure Vault
+4 Darksteel Citadel
+1 Urborg, Tomb of Yawgmoth
+3 Swamp
+[Sideboard]
+1 Welding Jar
+4 Caustic Bronco
+1 Pithing Needle
+1 Relic of Progenitus
+1 Nihil Spellbomb
+3 Damping Sphere
+1 Grafdigger's Cage
+3 Fatal Push

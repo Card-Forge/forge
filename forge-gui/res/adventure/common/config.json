@@ -272,26 +272,28 @@
     }
   ],
   "starterEditions": [
-	"JMP",
-	"DMU",
-	"BRO",
-	"J22",
-	"ONE",
-	"MOM",
-	"LTR",
-	"J25",
-	"(All)"
+      "JMP",
+      "DMU",
+      "BRO",
+      "J22",
+      "ONE",
+      "MOM",
+      "LTR",
+      "J25",
+      "TLA",
+      "(All)"
   ],
-  "starterEditionNames": [
-	"Jumpstart",
-	"Dominaria United",
-	"The Brothers' War",
-	"Jumpstart 22",
-	"Phyrexia: ONE",
-	"March of the Machine",
-	"Lord of the Rings",
-	"Jumpstart 25",
-	"(All)"
-	]
+    "starterEditionNames": [
+      "Jumpstart",
+      "Dominaria United",
+      "The Brothers' War",
+      "Jumpstart 22",
+      "Phyrexia: ONE",
+      "March of the Machine",
+      "Lord of the Rings",
+      "Jumpstart 25",
+      "The Last Airbender",
+      "(All)"
+    ]
 }
 
