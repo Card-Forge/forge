@@ -1,0 +1,9 @@
+Name:Vault Guardsman
+ManaCost:5 W
+Types:Artifact Creature Human Advisor
+PT:3/4
+K:Convoke
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters, exile target artifact or creature an opponent controls until this creature leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.OppCtrl,Creature.OppCtrl | ValidTgtDesc$ artifact or creature an opponent controls | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nWhen this creature enters, exile target artifact or creature an opponent controls until this creature leaves the battlefield.
