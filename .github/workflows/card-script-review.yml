@@ -1,0 +1,155 @@
+# On a PR that touches card scripts, runs a deterministic linter + a Scryfall
+# frame fact-check and posts terse inline comments. It is purely ADVISORY: it
+# never fails the check, it only comments. A reviewer still decides what to act on.
+#
+# Trigger: pull_request_target, because almost all PRs come from forks and a plain
+# pull_request token is read-only (can't comment). pull_request_target runs in the
+# base repo with a write token, so the hard rule is: NEVER execute PR code.
+# This workflow upholds that — it runs only the BASE repo's scripts (checked out
+# from the target branch) and pulls in just the PR's `cardsfolder/*.txt` files as
+# DATA to lint. The changed-file filter excludes `.github/**`, so a PR cannot swap
+# in its own linter, and nothing from the PR is ever built or executed.
+#
+# Stable across engine changes: the linter derives "known params" from the corpus
+# itself, and the Scryfall side only compares stable frame fields (name/type/P-T/
+# cost/loyalty). Neither is coupled to how a card ability is scripted.
+
+name: Card-script review
+
+on:
+  pull_request_target:
+    paths:
+      - 'forge-gui/res/cardsfolder/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: card-script-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      # Trusted base checkout: the scripts we run and the card corpus the linter
+      # compares against. NOT the PR's code.
+      - name: Check out base repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: List changed card files
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+            // Only cardsfolder .txt files — this also guarantees we never pull a
+            // PR's version of .github/** (incl. the scripts we're about to run).
+            const cards = files.filter(f => f.status !== 'removed'
+                        && f.filename.startsWith('forge-gui/res/cardsfolder/')
+                        && f.filename.endsWith('.txt'));
+            fs.writeFileSync('changed_files.txt', cards.map(f => f.filename).join('\n'));
+
+            // For each card, the set of NEW-file line numbers it actually adds or
+            // changes (the '+' lines of the diff). We only comment on these — a
+            // finding on a line the PR didn't touch is pre-existing and out of scope.
+            // For an added file the whole file is '+' lines, so nothing is lost.
+            const addedLines = {};
+            for (const f of cards) {
+              const lines = [];
+              let newLine = 0;
+              for (const ln of (f.patch || '').split('\n')) {
+                const h = ln.match(/^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/);
+                if (h) { newLine = parseInt(h[1], 10); continue; }
+                if (ln.startsWith('\\')) continue;           // "\ No newline at end of file"
+                if (ln.startsWith('+')) { lines.push(newLine); newLine++; }
+                else if (ln.startsWith('-')) { /* old-side only: no new line */ }
+                else { newLine++; }                          // context line
+              }
+              addedLines[f.filename] = lines;
+            }
+            fs.writeFileSync('diff_lines.json', JSON.stringify(addedLines));
+            core.info(`${cards.length} changed card file(s)`);
+
+      # Bring in the PR's versions of those card files as plain data, overwriting
+      # the base copies in place. We only read them; we never run them.
+      - name: Materialize PR card files (data only)
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          [ -s changed_files.txt ] || { echo "no card files changed"; exit 0; }
+          git fetch --no-tags --depth=1 origin "+refs/pull/${PR_NUMBER}/head:refs/remotes/pr/head"
+          # `|| [ -n "$f" ]` processes the final line even when the file has no
+          # trailing newline (changed_files.txt is written with join('\n')).
+          while IFS= read -r f || [ -n "$f" ]; do
+            [ -n "$f" ] || continue
+            mkdir -p "$(dirname "$f")"
+            git show "refs/remotes/pr/head:$f" > "$f" || echo "skip $f"
+          done < changed_files.txt
+
+      - name: Run review checks
+        continue-on-error: true   # advisory: a script hiccup must never fail the PR
+        env:
+          PYTHONIOENCODING: utf-8   # the comments contain '→'; don't depend on runner locale
+        run: |
+          python .github/scripts/card_script_review.py changed_files.txt > comments.json
+          echo "---- comments ----"
+          cat comments.json
+
+      - name: Post inline comments
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let comments = [], diffLines = {};
+            try { comments = JSON.parse(fs.readFileSync('comments.json', 'utf8')); }
+            catch (e) { core.info('no comments.json — nothing to post'); return; }
+            try { diffLines = JSON.parse(fs.readFileSync('diff_lines.json', 'utf8')); }
+            catch (e) {}
+            if (!comments.length) { core.info('no findings'); return; }
+
+            const { owner, repo } = context.repo;
+            const pull_number = context.issue.number;
+            const commit_id = context.payload.pull_request.head.sha;
+
+            // Diff-lines-only: comment only on lines the PR added or changed. A
+            // finding on an untouched line of an edited file is pre-existing and
+            // out of scope, so we skip it (no summary comment).
+            const inDiff = (c) => (diffLines[c.path] || []).includes(c.line);
+
+            // De-dupe against what the bot already said on this PR (re-runs on push).
+            const existing = await github.paginate(github.rest.pulls.listReviewComments,
+              { owner, repo, pull_number });
+            const seen = new Set(existing
+              .filter(c => c.user.type === 'Bot')
+              .map(c => `${c.path}|${c.line}|${c.body}`));
+
+            let posted = 0, skipped = 0;
+            for (const c of comments) {
+              if (!inDiff(c)) { skipped++; continue; }
+              const key = `${c.path}|${c.line}|${c.body}`;
+              if (seen.has(key)) continue;
+              try {
+                await github.rest.pulls.createReviewComment({
+                  owner, repo, pull_number, commit_id,
+                  path: c.path, line: c.line, side: 'RIGHT', body: c.body,
+                });
+                seen.add(key);
+                posted++;
+              } catch (e) {
+                // Pre-filtered to diff lines, so this is a real API error, not a
+                // line-position problem. Surface it in the log; don't comment.
+                core.warning(`failed to comment on ${c.path}:${c.line} — ${e.message}`);
+              }
+            }
+            core.info(`posted ${posted}, skipped ${skipped} out-of-diff finding(s)`);
