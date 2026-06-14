@@ -4,7 +4,7 @@ Types:Legendary Creature Mutant Warlock Hero
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ DBExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, exile the top card of your library. Until your next end step, you may play that card.
 SVar:DBExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | Duration$ UntilYourNextEndStep | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | Duration$ UntilYourNextEndStep | Affected$ Card.IsRemembered | AffectedZone$ Exile | SubAbility$ DBCleanup
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until your next end step, you may play that card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Whenever you cast a noncreature spell, exile the top card of your library. Until your next end step, you may play that card.

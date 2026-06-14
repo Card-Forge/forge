@@ -5,5 +5,5 @@ PT:2/1
 K:Flash
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME enters, choose target permanent card in your graveyard that was put there from anywhere this turn. Return it to your hand.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn+ThisTurnEntered
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn+ThisTurnEntered | TgtPrompt$ Select target permanent card in your graveyard that was put there from anywhere this turn
 Oracle:Flash\nLifelink\nWhen Night Nurse enters, choose target permanent card in your graveyard that was put there from anywhere this turn. Return it to your hand.

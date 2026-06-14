@@ -3,5 +3,5 @@ ManaCost:4 U
 Types:Legendary Creature Human Artificer Villain
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerDescription$ When NICKNAME enters, you may cast target artifact, instant, or sorcery card with mana value 4 or less from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.
-SVar:TrigPlay:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Artifact.YouCtrl+cmcLE4,Instant.YouCtrl+cmcLE4,Sorcery.YouCtrl+cmcLE4 | TgtPrompt$ Choose target artifact, instant, or sorcery card with mana value 4 or less in your graveyard | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
+SVar:TrigPlay:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Artifact.YouCtrl+cmcLE4,Instant.YouCtrl+cmcLE4,Sorcery.YouCtrl+cmcLE4 | TgtPrompt$ Select target artifact, instant, or sorcery card with mana value 4 or less in your graveyard | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
 Oracle:When Victor Timely enters, you may cast target artifact, instant, or sorcery card with mana value 4 or less from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.
