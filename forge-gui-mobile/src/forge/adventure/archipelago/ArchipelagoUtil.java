@@ -17,6 +17,7 @@ import java.util.List;
 public class ArchipelagoUtil {
     private static final FImage CARD_LOCKED_ICON = FSkinImage.LOCK;
 
+    public static final String[] regionNames = {"waste", "white", "blue", "black", "red"};
     public static void drawLockedCardOverlay(
             Batch batch, float x, float y, float w, float h) {
 
@@ -70,6 +71,17 @@ public class ArchipelagoUtil {
             case "green" -> Config.instance().getItemSprite("GreenRune");
             default -> null;
         };
+    }
+
+    public static void updateLastTraversedRegionOnTeleport(String command) {
+        String loweredCommand = command.toLowerCase();
+        ArchipelagoData apData = ArchipelagoData.getInstance();
+        if (loweredCommand.contains("spawn")) { apData.setLastTraversedRegion("waste"); }
+        if (loweredCommand.contains("plains")) { apData.setLastTraversedRegion("white"); }
+        if (loweredCommand.contains("island")) { apData.setLastTraversedRegion("blue"); }
+        if (loweredCommand.contains("swamp")) { apData.setLastTraversedRegion("black"); }
+        if (loweredCommand.contains("mountain")) { apData.setLastTraversedRegion("red"); }
+        if (loweredCommand.contains("forest")) { apData.setLastTraversedRegion("green"); }
     }
 
     public static void drawLockedRegionOverhead(Batch batch, String regionName, float centerX, float baseY, float alpha) {
