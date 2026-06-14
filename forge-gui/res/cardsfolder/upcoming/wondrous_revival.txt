@@ -1,5 +1,5 @@
 Name:Wondrous Revival
 ManaCost:4 W W
 Types:Sorcery
-A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Hero+YouOwn | ValidTgtDesc$ Hero creature card in your graveyard | TargetMin$ 0 | TargetMax$ 3 | SpellDescription$ Return up to three target Hero creature cards from your graveyard to the battlefield.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Hero+YouOwn | ValidTgtsDesc$ Hero creature card in your graveyard | TargetMin$ 0 | TargetMax$ 3 | SpellDescription$ Return up to three target Hero creature cards from your graveyard to the battlefield.
 Oracle:Return up to three target Hero creature cards from your graveyard to the battlefield.

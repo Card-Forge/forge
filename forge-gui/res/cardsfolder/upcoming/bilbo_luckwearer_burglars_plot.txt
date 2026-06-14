@@ -14,5 +14,5 @@ ALTERNATE
 Name:Burglar's Plot
 ManaCost:4 U
 Types:Sorcery Adventure
-A:SP$ ExchangeControl | ValidTgts$ Permanent.nonLand | TargetsWithSameCardType$ True | TargetMin$ 2 | TargetMax$ 2 | ValidTgtDesc$ nonland permanent | SpellDescription$ Exchange control of two target nonland permanents that share a card type. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ ExchangeControl | ValidTgts$ Permanent.nonLand | TargetsWithSameCardType$ True | TargetMin$ 2 | TargetMax$ 2 | ValidTgtsDesc$ nonland permanent | SpellDescription$ Exchange control of two target nonland permanents that share a card type. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Exchange control of two target nonland permanents that share a card type. (Then exile this card. You may cast the creature later from exile.)
