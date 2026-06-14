@@ -141,6 +141,16 @@ public class SpellAbilityProperty {
             if (sa.getChapter() == sa.getHostCard().getCounters(CounterEnumType.LORE)) {
                 return false;
             }
+        } else if (property.equals("EffectSourceAbility")) {
+            if (!source.isImmutable()) {
+                return false;
+            }
+            if (source.getEffectSourceAbility() == null) {
+                return false;
+            }
+            if (!sa.equals(source.getEffectSourceAbility().getRootAbility().getOriginalAbility())) {
+                return false;
+            }
         } else if (property.equals("LastChapter")) {
             return sa.isLastChapter();
         } else if (property.equals("paidPhyrexianMana")) {
