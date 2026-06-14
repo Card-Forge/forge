@@ -1,0 +1,10 @@
+Name:It's Clobberin' Time!
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Charm | Choices$ DBPump,DBDestroy
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | ValidTgtDesc$ creature you control | SubAbility$ DBDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature an opponent controls.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | AILogic$ PowerDmg | ValidTgtDesc$ creature an opponent controls | NumDmg$ X | DamageSource$ ParentTarget
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | ValidTgtDesc$ artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+K:Rebound
+SVar:X:ParentTargeted$CardPower
+Oracle:Choose one —\n• Target creature you control deals damage equal to its power to target creature an opponent controls.\n• Destroy target artifact or enchantment.\nRebound
