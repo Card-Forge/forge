@@ -23,17 +23,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class SpellAbilityProperty {
-    SpellAbility sa;
-    Player sourceController;
-    Card source;
-
-    public SpellAbilityProperty(SpellAbility sa, Player player, Card source) {
-        this.sa = sa;
-        this.sourceController = player;
-        this.source = source;
-    }
-
-    public boolean hasProperty(String property, CardTraitBase spellAbility) {
+    public static boolean hasProperty(SpellAbility sa, Player sourceController, Card source, String property, CardTraitBase spellAbility) {
         if (property.equals("ManaAbility")) {
             return sa.isManaAbility();
         } else if (property.equals("withoutXCost")) {

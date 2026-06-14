@@ -1019,7 +1019,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
      */
     @Override
     public boolean hasProperty(String property, Player sourceController, Card source, CardTraitBase spellAbility) {
-        return new CardStateProperty(this, sourceController, source).hasProperty(property, spellAbility);
+        return CardStateProperty.hasProperty(this, sourceController, source, property, spellAbility);
     }
 
     public ImmutableList<CardTraitBase> getTraits() {

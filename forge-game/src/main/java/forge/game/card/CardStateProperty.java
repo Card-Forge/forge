@@ -15,17 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 
 public class CardStateProperty {
-    CardState cardState;
-    Player sourceController;
-    Card source;
-
-    public CardStateProperty(CardState state, Player player, Card source) {
-        this.cardState = state;
-        this.sourceController = player;
-        this.source = source;
-    }
-
-    public boolean hasProperty(String property, CardTraitBase spellAbility) {
+    public static boolean hasProperty(CardState cardState, Player sourceController, Card source, String property, CardTraitBase spellAbility) {
         boolean withSource = property.endsWith("Source");
         final ColorSet colors;
         if (withSource && StaticAbilityColorlessDamageSource.colorlessDamageSource(cardState)) {
