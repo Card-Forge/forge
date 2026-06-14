@@ -8,5 +8,5 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigDraw:DB$ Draw
 SVar:X:Count$LifeYouGainedThisTurn
 DeckHas:Ability$Sacrifice|Token & Type$Food
-DeckHints:Ability$Lifegain
+DeckHints:Ability$LifeGain
 Oracle:If you would create one or more tokens, instead create those tokens plus an additional Food token.\nAt the beginning of your end step, if you gained life this turn, draw a card.

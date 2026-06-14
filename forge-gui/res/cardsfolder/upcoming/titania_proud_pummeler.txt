@@ -2,7 +2,7 @@ Name:Titania, Proud Pummeler
 ManaCost:3 R
 Types:Legendary Creature Human Villain
 PT:3/3
-K:First strike
+K:First Strike
 K:Melee
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Melee | Description$ Other creatures you control have melee.
 SVar:PlayMain1:TRUE
