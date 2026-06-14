@@ -351,7 +351,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     public boolean checkResolvedLimit(Player activator) {
         // CR 603.2i
         if (hasParam("ResolvedLimit")) {
-            if (Collections.frequency(getHostCard().getAbilityResolvedThisTurnActivators(getOverridingAbility()), activator)
+            if (getHostCard().getAbilityResolvedThisTurnActivators(getOverridingAbility()).count(activator)
                     >= Integer.parseInt(getParam("ResolvedLimit"))) {
                 return false;
             }
