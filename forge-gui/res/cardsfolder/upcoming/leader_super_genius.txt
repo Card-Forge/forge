@@ -6,6 +6,6 @@ R:Event$ Connive | ActiveZones$ Battlefield | ValidConniver$ Creature.YouCtrl | 
 SVar:DBDraw:DB$ Draw | SubAbility$ DBConnive
 SVar:DBConnive:DB$ Connive | Defined$ ReplacedCard
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConnive | TriggerDescription$ At the beginning of combat on your turn, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
-SVar:TrigConnive:DB$ Connive | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control
+SVar:TrigConnive:DB$ Connive | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control
 DeckHas:Ability$Counters|Discard
 Oracle:If a creature you control would connive, instead you draw a card, then that creature connives.\nAt the beginning of combat on your turn, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

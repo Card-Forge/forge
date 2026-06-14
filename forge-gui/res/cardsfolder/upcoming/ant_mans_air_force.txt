@@ -4,5 +4,5 @@ Types:Creature Insect
 PT:2/1
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, up to one target creature gets -1/-0 until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | IsCurse$ True | NumAtt$ -1
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | IsCurse$ True | NumAtt$ -1
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever this creature attacks, up to one target creature gets -1/-0 until end of turn.

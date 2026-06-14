@@ -2,6 +2,6 @@ Name:Viper, Cruel Conspirator
 ManaCost:1 B
 Types:Legendary Creature Human Assassin Villain
 PT:2/2
-A:AB$ Pump | Cost$ B | ValidTgts$ Creature.attackingAlone | NumAtt$ +1 | NumDef$ 1 | SpellDescription$ Target creature that's attacking alone gets +1/+1 until end of turn.
-A:AB$ Pump | Cost$ B | ValidTgts$ Creature.attackingAlone | KWChoice$ Deathtouch,Lifelink | SpellDescription$ Target creature that's attacking alone gains your choice of deathtouch or lifelink until end of turn.
+A:AB$ Pump | Cost$ B | ValidTgts$ Creature.attackingAlone | TgtPrompt$ Select target creature that's attacking alone | NumAtt$ +1 | NumDef$ 1 | SpellDescription$ Target creature that's attacking alone gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ B | ValidTgts$ Creature.attackingAlone | TgtPrompt$ Select target creature that's attacking alone | KWChoice$ Deathtouch,Lifelink | SpellDescription$ Target creature that's attacking alone gains your choice of deathtouch or lifelink until end of turn.
 Oracle:{B}: Target creature that's attacking alone gets +1/+1 until end of turn.\n{B}: Target creature that's attacking alone gains your choice of deathtouch or lifelink until end of turn.
