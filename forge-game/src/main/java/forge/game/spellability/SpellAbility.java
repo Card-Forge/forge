@@ -2244,7 +2244,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         if (property.startsWith("!")) {
-            return !new SpellAbilityProperty(this, sourceController, source).hasProperty(property, spellAbility);
+            return !new SpellAbilityProperty(this, sourceController, source).hasProperty(property.substring(1), spellAbility);
         }
         return new SpellAbilityProperty(this, sourceController, source).hasProperty(property, spellAbility);
     }
