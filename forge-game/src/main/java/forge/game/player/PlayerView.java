@@ -90,6 +90,13 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.SleeveIndex, p.getLobbyPlayer().getSleeveIndex());
     }
 
+    public String getSleeveArtKey() {
+        return get(TrackableProperty.SleeveArtKey);
+    }
+    void updateSleeveArtKey(Player p) {
+        set(TrackableProperty.SleeveArtKey, p.getLobbyPlayer().getSleeveArtKey());
+    }
+
     public String getCurrentPlaneName() { return get(TrackableProperty.CurrentPlane); }
     void updateCurrentPlaneName( String plane ) {
         set(TrackableProperty.CurrentPlane, plane);

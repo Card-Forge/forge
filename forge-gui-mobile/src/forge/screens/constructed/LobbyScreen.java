@@ -35,6 +35,7 @@ import forge.gui.GuiBase;
 import forge.gui.interfaces.ILobbyView;
 import forge.interfaces.IPlayerChangeListener;
 import forge.localinstance.properties.ForgePreferences;
+import forge.util.SleeveArt;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
@@ -360,6 +361,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         int pTwoIndex = playerPanels.get(1).getSleeveIndex();
 
         prefs.setPref(FPref.UI_SLEEVES, pOneIndex + "," + pTwoIndex);
+        prefs.setPref(FPref.UI_SLEEVE_ART_KEYS, SleeveArt.encode(playerPanels.get(0).getSleeveArtKey())
+                + "," + SleeveArt.encode(playerPanels.get(1).getSleeveArtKey()));
         prefs.save();
     }
 
@@ -640,7 +643,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 if (type != LobbySlotType.AI) {
                     panel.setPlayerName(slot.getName());
                     panel.setAvatarIndex(slot.getAvatarIndex());
-                    panel.setSleeveIndex(slot.getSleeveIndex());
+                    panel.setSleeve(slot.getSleeveIndex(), slot.getSleeveArtKey());
                 } else {
                     //AI: this one overrides the setplayername if blank
                     if (panel.getPlayerName().isEmpty())
@@ -648,6 +651,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     //AI: override settings if somehow player changes it for AI
                     slot.setAvatarIndex(panel.getAvatarIndex());
                     slot.setSleeveIndex(panel.getSleeveIndex());
+                    slot.setSleeveArtKey(panel.getSleeveArtKey());
                 }
                 panel.setTeam(slot.getTeam());
                 panel.setIsReady(slot.isReady());
@@ -817,6 +821,12 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
     }
 
+    void updateSleeveArt(final int index, final String key) {
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.sleeveArtUpdate(key));
+        }
+    }
+
     void setReady(final int index, final boolean ready) {
         if (lobby.isAllowNetworking()) {
             updateDeck(index);
@@ -888,6 +898,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 panel.getPlayerName(),
                 panel.getAvatarIndex(),
                 panel.getSleeveIndex(),
+                panel.getSleeveArtKey(),
                 panel.getTeam(),
                 panel.isArchenemy(),
                 panel.isDevMode(),

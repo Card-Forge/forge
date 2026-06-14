@@ -1,11 +1,12 @@
 package forge.screens.constructed;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
@@ -19,6 +20,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
+import forge.card.CardSleeveImage;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.deck.DeckType;
@@ -27,6 +29,7 @@ import forge.deck.FVanguardChooser;
 import forge.game.GameType;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
+import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.DeckManager;
@@ -42,8 +45,10 @@ import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FToggleSwitch;
+import forge.toolbox.GuiChoose;
 import forge.util.Lang;
 import forge.util.NameGenerator;
+import forge.util.SleeveArt;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
@@ -63,6 +68,7 @@ public class PlayerPanel extends FContainer {
     private final FLabel avatarLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).selectable().alphaComposite(1).iconInBackground(true).build();
     private final FLabel sleeveLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).selectable().alphaComposite(1).iconInBackground(true).build();
     private int avatarIndex, sleeveIndex;
+    private String sleeveArtKey = "";
     private final FTextField txtPlayerName = new FTextField(Forge.getLocalizer().getMessage("lblPlayerName"));
     private final FToggleSwitch humanAiSwitch;
     private final FToggleSwitch devModeSwitch;
@@ -502,7 +508,7 @@ public class PlayerPanel extends FContainer {
                 //update may edit in-case it changed as a result of the AI change
                 setMayEdit(screen.getLobby().mayEdit(index));
                 setAvatarIndex(slot.getAvatarIndex());
-                setSleeveIndex(slot.getSleeveIndex());
+                setSleeve(slot.getSleeveIndex(), slot.getSleeveArtKey());
                 setPlayerName(slot.getName());
             }
         }
@@ -595,19 +601,77 @@ public class PlayerPanel extends FContainer {
     private FEventHandler sleeveCommand = new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            SleevesSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), result -> {
-                setSleeveIndex(result);
+            final String builtIn = Forge.getLocalizer().getMessage("lblBuiltInSleeve");
+            final String cardArt = Forge.getLocalizer().getMessage("lblUseCardArtSleeve");
+            GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectSleeveForPlayer", getPlayerName()),
+                    Arrays.asList(builtIn, cardArt), choice -> {
+                if (choice == null) {
+                    return;
+                }
+                if (choice.equals(cardArt)) {
+                    selectCardArtSleeve();
+                    return;
+                }
+                SleevesSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), result -> {
+                    setSleeveIndex(result);
 
-                if (index < 2) {
-                    screen.updateSleeve(index, result);
-                    screen.updateSleevePrefs();
-                }
-                if (allowNetworking) {
-                    screen.firePlayerChangeListener(index);
-                }
+                    if (index < 2) {
+                        screen.updateSleeve(index, result);
+                        screen.updateSleevePrefs();
+                    }
+                    if (allowNetworking) {
+                        screen.firePlayerChangeListener(index);
+                    }
+                });
             });
         }
     };
+
+    /** Picks a card then a printing; applies its art as this player's sleeve and saves it. */
+    private void selectCardArtSleeve() {
+        final List<PaperCard> unique = new ArrayList<>(FModel.getMagicDb().getCommonCards().getUniqueCards());
+        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectCardForSleeve"), unique, card -> {
+            if (card == null) {
+                return;
+            }
+            final List<PaperCard> prints = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
+            if (prints.size() <= 1) {
+                applyCardArtSleeve(card);
+            } else {
+                GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectCardForSleeve"), prints,
+                        print -> applyCardArtSleeve(print == null ? card : print));
+            }
+        });
+    }
+
+    private void applyCardArtSleeve(final PaperCard card) {
+        final String key = card.getImageKey(false);
+        setSleeveArtKey(key);
+        sleeveLabel.setIcon(new CardSleeveImage(key));
+
+        final List<String> library = SleeveArt.parseList(
+                FModel.getPreferences().getPref(ForgePreferences.FPref.UI_SLEEVE_ART_LIBRARY));
+        if (!library.contains(key)) {
+            library.add(key);
+            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_SLEEVE_ART_LIBRARY, SleeveArt.formatList(library));
+            FModel.getPreferences().save();
+        }
+        if (index < 2) {
+            screen.updateSleeveArt(index, key);
+        }
+        if (allowNetworking) {
+            screen.firePlayerChangeListener(index);
+        }
+    }
+
+    /** Applies a sleeve from slot data: built-in index, then card-art key (with its icon) if present. */
+    public void setSleeve(final int index, final String artKey) {
+        setSleeveIndex(index);
+        if (artKey != null && !artKey.isEmpty()) {
+            setSleeveArtKey(artKey);
+            sleeveLabel.setIcon(new CardSleeveImage(artKey));
+        }
+    }
 
     public void setDeckSelectorButtonText(String text) {
         if (!Forge.isLandscapeMode())
@@ -889,8 +953,10 @@ public class PlayerPanel extends FContainer {
 
     private void createSleeve() {
         String[] currentPrefs = prefs.getPref(FPref.UI_SLEEVES).split(",");
+        String[] artPrefs = prefs.getPref(FPref.UI_SLEEVE_ART_KEYS).split(",", -1);
+        String artKey = index < artPrefs.length ? SleeveArt.decode(artPrefs[index]) : "";
         if (index < currentPrefs.length) {
-            setSleeveIndex(Integer.parseInt(currentPrefs[index]));
+            setSleeve(Integer.parseInt(currentPrefs[index]), artKey);
         }
         else {
             setSleeveIndex(SleevesSelector.getRandomSleeves(screen.getUsedSleeves()));
@@ -910,6 +976,7 @@ public class PlayerPanel extends FContainer {
 
     public void setSleeveIndex(int newSleeveIndex) {
         sleeveIndex = newSleeveIndex;
+        sleeveArtKey = ""; // picking a built-in sleeve clears any card-art sleeve
         if (sleeveIndex != -1) {
             sleeveLabel.setIcon(new FTextureRegionImage(FSkin.getSleeves().get(newSleeveIndex)));
         }
@@ -924,6 +991,13 @@ public class PlayerPanel extends FContainer {
 
     public int getSleeveIndex() {
         return sleeveIndex;
+    }
+
+    public String getSleeveArtKey() {
+        return sleeveArtKey == null ? "" : sleeveArtKey;
+    }
+    public void setSleeveArtKey(String key) {
+        sleeveArtKey = key == null ? "" : key;
     }
 
     public void setPlayerName(String string) {

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -21,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableSet;
 
+import forge.ImageCache;
 import forge.Singletons;
 import forge.ai.AIOption;
 import forge.deck.DeckSection;
@@ -53,6 +55,7 @@ import forge.toolbox.FTextField;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
+import forge.util.SleeveArt;
 import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
@@ -70,6 +73,7 @@ public class PlayerPanel extends FPanel {
     private final FLabel avatarLabel = new FLabel.Builder().opaque(true).hoverable(true).iconScaleFactor(0.99f).iconInBackground(true).build();
     private final FLabel sleeveLabel = new FLabel.Builder().opaque(true).hoverable(true).iconScaleFactor(0.99f).iconInBackground(true).build();
     private int avatarIndex, sleeveIndex;
+    private String sleeveArtKey = "";
 
     private final FTextField txtPlayerName = new FTextField.Builder().build();
     private FRadioButton radioHuman;
@@ -228,8 +232,12 @@ public class PlayerPanel extends FPanel {
         avatarLabel.repaintSelf();
 
         sleeveLabel.setEnabled(mayEdit);
-        sleeveLabel.setIcon(FSkin.getSleeves().get(type == LobbySlotType.OPEN ? -1 : sleeveIndex));
-        sleeveLabel.repaintSelf();
+        if (type != LobbySlotType.OPEN && sleeveArtKey != null && !sleeveArtKey.isEmpty()) {
+            showCardArtOnSleeveLabel(sleeveArtKey);
+        } else {
+            sleeveLabel.setIcon(FSkin.getSleeves().get(type == LobbySlotType.OPEN ? -1 : sleeveIndex));
+            sleeveLabel.repaintSelf();
+        }
 
         txtPlayerName.setEnabled(mayEdit);
         txtPlayerName.setText(type == LobbySlotType.OPEN ? StringUtils.EMPTY : playerName);
@@ -697,9 +705,10 @@ public class PlayerPanel extends FPanel {
 
     private void createSleeve() {
         final String[] currentPrefs = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
+        final String[] artPrefs = FModel.getPreferences().getPref(FPref.UI_SLEEVE_ART_KEYS).split(",", -1);
+        final String artKey = index < artPrefs.length ? SleeveArt.decode(artPrefs[index]) : "";
         if (index < currentPrefs.length) {
-            sleeveIndex = Integer.parseInt(currentPrefs[index]);
-            sleeveLabel.setIcon(FSkin.getSleeves().get(sleeveIndex));
+            setSleeve(Integer.parseInt(currentPrefs[index]), artKey);
         } else {
             setRandomSleeve(false);
         }
@@ -710,16 +719,15 @@ public class PlayerPanel extends FPanel {
             lobby.changePlayerFocus(index);
             sleeveLabel.requestFocusInWindow();
 
-            final SleeveSelector sSel = new SleeveSelector(playerName, sleeveIndex, lobby.getUsedSleeves());
-            for (final FLabel lbl : sSel.getSelectables()) {
-                lbl.setCommand((UiCommand) () -> {
-                    setSleeveIndex(Integer.parseInt(lbl.getName().substring(11)));
-                    sSel.setVisible(false);
-                });
-            }
-
+            final SleeveSelector sSel = new SleeveSelector(playerName, sleeveIndex, sleeveArtKey, lobby.getUsedSleeves());
             sSel.setVisible(true);
             sSel.dispose();
+
+            if (sSel.getResultArtKey() != null) {
+                applyCardArtSleeve(sSel.getResultArtKey());
+            } else if (sSel.getResultIndex() >= 0) {
+                setSleeveIndex(sSel.getResultIndex());
+            }
 
             if (index < 2) {
                 lobby.updateSleevePrefs();
@@ -737,6 +745,21 @@ public class PlayerPanel extends FPanel {
                 lobby.updateSleevePrefs();
             }
         });
+    }
+
+    private void applyCardArtSleeve(final String key) {
+        setSleeveArtKey(key);
+        showCardArtOnSleeveLabel(key);
+    }
+
+    private void showCardArtOnSleeveLabel(final String key) {
+        final BufferedImage art = ImageCache.getSleeveArtCropped(key);
+        if (art != null) {
+            sleeveLabel.setIcon(new FSkin.UnskinnedIcon(art));
+            sleeveLabel.repaintSelf();
+        } else {
+            ImageCache.fetchSleeveArt(key, () -> showCardArtOnSleeveLabel(key));
+        }
     }
 
     /** Applies a random avatar, avoiding avatars already used. */
@@ -805,9 +828,26 @@ public class PlayerPanel extends FPanel {
     }
     public void setSleeveIndex(final int sleeveIndex0) {
         sleeveIndex = sleeveIndex0;
+        sleeveArtKey = ""; // picking a built-in sleeve clears any card-art sleeve
         final SkinImage icon = FSkin.getSleeves().get(sleeveIndex);
         sleeveLabel.setIcon(icon);
         sleeveLabel.repaintSelf();
+    }
+
+    public String getSleeveArtKey() {
+        return sleeveArtKey == null ? "" : sleeveArtKey;
+    }
+    public void setSleeveArtKey(final String key) {
+        sleeveArtKey = key == null ? "" : key;
+    }
+
+    /** Applies a sleeve from slot data: built-in index, then card-art key (with its icon) if present. */
+    public void setSleeve(final int index, final String artKey) {
+        setSleeveIndex(index);
+        if (artKey != null && !artKey.isEmpty()) {
+            setSleeveArtKey(artKey);
+            showCardArtOnSleeveLabel(artKey);
+        }
     }
 
     public int getTeam() {

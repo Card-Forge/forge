@@ -15,6 +15,7 @@ public abstract class LobbyPlayer {
     private int avatarIndex = -1;
     private int sleeveIndex = -1;
     private String avatarCardImageKey;
+    private String sleeveArtKey = "";
 
     public LobbyPlayer(String name) {
         this.name = name;
@@ -73,6 +74,14 @@ public abstract class LobbyPlayer {
     }
     public void setAvatarCardImageKey(String avatarImageKey0) {
         this.avatarCardImageKey = avatarImageKey0;
+    }
+
+    // empty means fall back to the built-in sleeveIndex
+    public String getSleeveArtKey() {
+        return sleeveArtKey == null ? "" : sleeveArtKey;
+    }
+    public void setSleeveArtKey(String sleeveArtKey0) {
+        this.sleeveArtKey = sleeveArtKey0 == null ? "" : sleeveArtKey0;
     }
 
     public abstract void hear(LobbyPlayer player, String message);

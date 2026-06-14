@@ -18,6 +18,7 @@ public final class LobbySlot implements Serializable {
     private String name;
     private int avatarIndex;
     private int sleeveIndex;
+    private String sleeveArtKey = "";
     private int team;
     private boolean isArchenemy;
     private boolean isReady;
@@ -48,6 +49,7 @@ public final class LobbySlot implements Serializable {
         changed |= setIfChanged(data.getName(),            this.name,           this::setName);
         changed |= setIntIfChanged(data.getAvatarIndex(),  this.avatarIndex,    this::setAvatarIndex);
         changed |= setIntIfChanged(data.getSleeveIndex(),  this.sleeveIndex,    this::setSleeveIndex);
+        changed |= setIfChanged(data.getSleeveArtKey(),    this.sleeveArtKey,   this::setSleeveArtKey);
         changed |= setIntIfChanged(data.getTeam(),         this.team,           this::setTeam);
         changed |= setIfChanged(data.getArchenemy(),       this.isArchenemy,    this::setIsArchenemy);
         changed |= setIfChanged(data.getReady(),           this.isReady,        this::setIsReady);
@@ -108,6 +110,13 @@ public final class LobbySlot implements Serializable {
     }
     public void setSleeveIndex(final int sleeveIndex) {
         this.sleeveIndex = sleeveIndex;
+    }
+
+    public String getSleeveArtKey() {
+        return sleeveArtKey == null ? "" : sleeveArtKey;
+    }
+    public void setSleeveArtKey(final String sleeveArtKey) {
+        this.sleeveArtKey = sleeveArtKey == null ? "" : sleeveArtKey;
     }
 
     public int getTeam() {

@@ -164,6 +164,7 @@ public enum TrackableProperty {
     AvatarIndex(TrackableTypes.IntegerType),
     AvatarCardImageKey(TrackableTypes.StringType),
     SleeveIndex(TrackableTypes.IntegerType),
+    SleeveArtKey(TrackableTypes.StringType),
     Opponents(TrackableTypes.PlayerViewCollectionType),
     Life(TrackableTypes.IntegerType),
     MaxHandSize(TrackableTypes.IntegerType),
