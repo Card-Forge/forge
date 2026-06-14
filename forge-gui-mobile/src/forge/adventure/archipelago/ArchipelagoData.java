@@ -76,7 +76,13 @@ public class ArchipelagoData implements SaveFileContent {
     private final int totalTownEventsBreakpoint = 1; // Reward for every 1 town events done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
 
-    public enum ARCHIPELAGO_CHECK_TYPES {COLORLESS_BATTLE_WON, WHITE_BATTLE_WON, BLUE_BATTLE_WON, BLACK_BATTLE_WON, RED_BATTLE_WON, GREEN_BATTLE_WON, COLORLESS_TOWN_QUESTS, WHITE_TOWN_QUESTS, BLUE_TOWN_QUESTS, BLACK_TOWN_QUESTS, RED_TOWN_QUESTS, GREEN_TOWN_QUESTS, TOWN_EVENTS, TOTAL_CARDS_EARNED, MINIBOSS_DEFEATED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, WIN_CONDITION_CLEARED};
+    public enum ARCHIPELAGO_CHECK_TYPES {COLORLESS_BATTLE_WON, WHITE_BATTLE_WON, BLUE_BATTLE_WON, BLACK_BATTLE_WON, RED_BATTLE_WON, GREEN_BATTLE_WON,
+        COLORLESS_TOWN_QUESTS, WHITE_TOWN_QUESTS, BLUE_TOWN_QUESTS, BLACK_TOWN_QUESTS, RED_TOWN_QUESTS, GREEN_TOWN_QUESTS,
+        COLORLESS_TOWN_EVENTS, WHITE_TOWN_EVENTS, BLUE_TOWN_EVENTS, BLACK_TOWN_EVENTS, RED_TOWN_EVENTS, GREEN_TOWN_EVENTS,
+        TOTAL_CARDS_EARNED,
+        MINIBOSS_DEFEATED,
+        BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED,
+        WIN_CONDITION_CLEARED};
 
     private ArchipelagoData() {}
 
@@ -149,6 +155,19 @@ public class ArchipelagoData implements SaveFileContent {
         if (networkedAP) slotData =  ArchipelagoRandomizer.getInstance().getSlotData();
 
         switch (type) {
+            case TOTAL_CARDS_EARNED -> {
+                if (networkedAP) {
+                    // Todo: Signal the APWorld that the next card location is triggered
+                } else {
+                    long totalCardsEarned = 0;
+                    for (long value : cardsEarnedByRarity.values()) {
+                        totalCardsEarned += value;
+                    }
+                    if (totalCardsEarned > 0 && totalCardsEarned % totalCardsEarnedBreakPoint == 0) {
+                        unlockRandomSet();
+                    }
+                }
+            }
             case COLORLESS_BATTLE_WON -> {
                 if (networkedAP) {
                     if (slotData == null) {
@@ -228,99 +247,134 @@ public class ArchipelagoData implements SaveFileContent {
                 }
             }
             case COLORLESS_TOWN_QUESTS -> {
-                int totalTownQuestsDone = 0;
-                for (long count : colorlessCompletedTownQuests.values()) {
-                    totalTownQuestsDone += (int) count;
+                if (networkedAP) {
+                    // Todo: Signal the APWorld that the next quest location is triggered
+                } else {
+                    handleTownQuestDone(colorlessCompletedTownQuests);
                 }
-                if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
-                    LocalRandomizer.getInstance().unlockRandomRegion();
-                }
-                // Todo: Signal the APWorld that the next quest location is triggered
             }
             case WHITE_TOWN_QUESTS -> {
-                int totalTownQuestsDone = 0;
-                for (long count : whiteCompletedTownQuests.values()) {
-                    totalTownQuestsDone += (int) count;
+                if (networkedAP) {
+                    // Todo: Signal the APWorld that the next quest location is triggered
+                } else {
+                    handleTownQuestDone(whiteCompletedTownQuests);
                 }
-                if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
-                    LocalRandomizer.getInstance().unlockRandomRegion();
-                }
-                // Todo: Signal the APWorld that the next quest location is triggered
             }
             case BLUE_TOWN_QUESTS -> {
-                int totalTownQuestsDone = 0;
-                for (long count : blueCompletedTownQuests.values()) {
-                    totalTownQuestsDone += (int) count;
+                if (networkedAP) {
+                    // Todo: Signal the APWorld that the next quest location is triggered
+                } else {
+                    handleTownQuestDone(blueCompletedTownQuests);
                 }
-                if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
-                    LocalRandomizer.getInstance().unlockRandomRegion();
-                }
-                // Todo: Signal the APWorld that the next quest location is triggered
             }
             case RED_TOWN_QUESTS -> {
-                int totalTownQuestsDone = 0;
-                for (long count : redCompletedTownQuests.values()) {
-                    totalTownQuestsDone += (int) count;
+                if (networkedAP) {
+                    // Todo: Signal the APWorld that the next quest location is triggered
+                } else {
+                    handleTownQuestDone(redCompletedTownQuests);
                 }
-                if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
-                    LocalRandomizer.getInstance().unlockRandomRegion();
-                }
-                // Todo: Signal the APWorld that the next quest location is triggered
             }
             case GREEN_TOWN_QUESTS -> {
-                int totalTownQuestsDone = 0;
-                for (long count : greenCompletedTownQuests.values()) {
-                    totalTownQuestsDone += (int) count;
+                if (networkedAP) {
+                    // Todo: Signal the APWorld that the next quest location is triggered
+                } else {
+                    handleTownQuestDone(greenCompletedTownQuests);
                 }
-                if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
-                    LocalRandomizer.getInstance().unlockRandomRegion();
-                }
-                // Todo: Signal the APWorld that the next quest location is triggered
             }
-            case TOWN_EVENTS -> {
-                int totalTownEventsDone = 0;
-                for (long count : colorlessCompletedTownQuests.values()) {
-                    totalTownEventsDone += (int) count;
+            case COLORLESS_TOWN_EVENTS -> {
+                if (networkedAP) {
+                    // Todo: Signal the APWorld that the next event location is triggered
+                } else {
+                    handleTownEventDone(colorlessCompletedTownInnEvents);
                 }
-                if (totalTownEventsDone > 0 && totalTownEventsDone % totalTownEventsBreakpoint == 0) {
-                    LocalRandomizer.getInstance().unlockRandomRegion();
-                }
-                // Todo: Signal the APWorld that the next event location is triggered
             }
-            case TOTAL_CARDS_EARNED -> {
-                long totalCardsEarned = 0;
-                for (long value : cardsEarnedByRarity.values()) {
-                    totalCardsEarned += value;
+            case WHITE_TOWN_EVENTS -> {
+                if (networkedAP) {
+                    // Todo: Signal the APWorld that the next event location is triggered
+                } else {
+                    handleTownEventDone(whiteCompletedTownInnEvents);
                 }
-                if (totalCardsEarned > 0 && totalCardsEarned % totalCardsEarnedBreakPoint == 0) {
-                    unlockRandomSet();
+            }
+            case BLUE_TOWN_EVENTS -> {
+                if (networkedAP) {
+                    // Todo: Signal the APWorld that the next event location is triggered
+                } else {
+                    handleTownEventDone(blueCompletedTownInnEvents);
                 }
-                // Todo: Signal the APWorld that the next card location is triggered
+            }
+            case BLACK_TOWN_EVENTS -> {
+                if (networkedAP) {
+                    // Todo: Signal the APWorld that the next event location is triggered
+                } else {
+                    handleTownEventDone(blackCompletedTownInnEvents);
+                }
+            }
+            case RED_TOWN_EVENTS -> {
+                if (networkedAP) {
+                    // Todo: Signal the APWorld that the next event location is triggered
+                } else {
+                    handleTownEventDone(redCompletedTownInnEvents);
+                }
+            }
+            case GREEN_TOWN_EVENTS -> {
+                if (networkedAP) {
+                    // Todo: Signal the APWorld that the next event location is triggered
+                } else {
+                    handleTownEventDone(greenCompletedTownInnEvents);
+                }
             }
             case MINIBOSS_DEFEATED -> {
+                // Todo: Do something for the local randomizer
                 // Todo: Signal the APWorld that the miniboss is defeated
             }
             case BOSS_WHITE_DEFEATED -> {
+                // Todo: Do something for the local randomizer
                 // Todo: Signal the APWorld that the boss is defeated
             }
             case BOSS_BLUE_DEFEATED -> {
+                // Todo: Do something for the local randomizer
                 // Todo: Signal the APWorld that the boss is defeated
             }
             case BOSS_BLACK_DEFEATED -> {
+                // Todo: Do something for the local randomizer
                 // Todo: Signal the APWorld that the boss is defeated
             }
             case BOSS_RED_DEFEATED -> {
+                // Todo: Do something for the local randomizer
                 // Todo: Signal the APWorld that the boss is defeated
             }
             case BOSS_GREEN_DEFEATED -> {
+                // Todo: Do something for the local randomizer
                 // Todo: Signal the APWorld that the boss is defeated
             }
             case BOSS_COLORLESS_DEFEATED -> {
+                // Todo: Do something for the local randomizer
                 // Todo: Signal the APWorld that the boss is defeated
             }
             case  WIN_CONDITION_CLEARED -> {
+                // Todo: Do something for the local randomizer
                 // Todo: Signal the APWorld that the win condition is reached
             }
+        }
+    }
+
+    private void handleTownEventDone(Map<String, Long> completedTownEventsList) {
+        int totalTownEventsDone = 0;
+        for (long count : completedTownEventsList.values()) {
+            totalTownEventsDone += (int) count;
+        }
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer && totalTownEventsDone > 0 && totalTownEventsDone % totalTownEventsBreakpoint == 0) {
+            LocalRandomizer.getInstance().unlockRandomRegion();
+        }
+    }
+
+    private void handleTownQuestDone(Map<String, Long> completedTownQuestsList) {
+        int totalTownQuestsDone = 0;
+        for (long count : completedTownQuestsList.values()) {
+            totalTownQuestsDone += (int) count;
+        }
+        if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
+            LocalRandomizer.getInstance().unlockRandomRegion();
         }
     }
 
@@ -500,9 +554,38 @@ public class ArchipelagoData implements SaveFileContent {
 
     public void addCompletedTownInnEvents() {
         String townName = TileMapScene.instance().rootPoint.getDisplayName();
-        colorlessCompletedTownQuests.merge(townName, 1L, Long::sum);
-        System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + colorlessCompletedTownQuests.get(townName));
-        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOWN_EVENTS);
+        switch (lastTraversedRegion) {
+            case "waste" -> {
+                colorlessCompletedTownInnEvents.merge(townName, 1L, Long::sum);
+                System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + colorlessCompletedTownInnEvents.get(townName));
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.COLORLESS_TOWN_QUESTS);
+            }
+            case "white" -> {
+                whiteCompletedTownInnEvents.merge(townName, 1L, Long::sum);
+                System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + whiteCompletedTownInnEvents.get(townName));
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.WHITE_TOWN_QUESTS);
+            }
+            case "blue" -> {
+                blueCompletedTownInnEvents.merge(townName, 1L, Long::sum);
+                System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + blueCompletedTownInnEvents.get(townName));
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BLUE_TOWN_QUESTS);
+            }
+            case "black" -> {
+                blackCompletedTownInnEvents.merge(townName, 1L, Long::sum);
+                System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + blackCompletedTownInnEvents.get(townName));
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BLACK_TOWN_QUESTS);
+            }
+            case "red" -> {
+                redCompletedTownInnEvents.merge(townName, 1L, Long::sum);
+                System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + redCompletedTownInnEvents.get(townName));
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.RED_TOWN_QUESTS);
+            }
+            case "green" -> {
+                greenCompletedTownInnEvents.merge(townName, 1L, Long::sum);
+                System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + greenCompletedTownInnEvents.get(townName));
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.GREEN_TOWN_QUESTS);
+            }
+        }
     }
 
     public void addCompletedQuests(AdventureQuestEvent event) {
