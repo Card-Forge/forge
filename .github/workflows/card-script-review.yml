@@ -57,10 +57,23 @@ jobs:
         with:
           script: |
             const fs = require('fs');
+            const head_sha = context.payload.workflow_run.head_sha;   // trusted: from the event
+
+            // The artifact names a PR number, but it came from an untrusted build, so
+            // treat it as a hint. Confirm the PR's real head SHA equals this build's
+            // head SHA before commenting; otherwise a tampered artifact could aim the
+            // poster at someone else's PR. (listPullRequestsAssociatedWithCommit can't
+            // replace this — it returns nothing for fork PRs, which is almost all of them.)
             let meta;
             try { meta = JSON.parse(fs.readFileSync('review-data/card-script-pr-meta.json', 'utf8')); }
             catch (e) { core.info('no PR metadata — nothing to review'); return; }
-            const pull_number = meta.number;
+            const pull_number = Number(meta.number);
+            const { data: prData } = await github.rest.pulls.get({
+              owner: context.repo.owner, repo: context.repo.repo, pull_number });
+            if (prData.state !== 'open' || prData.head.sha !== head_sha) {
+              core.warning('artifact PR does not match the build head — skipping'); return;
+            }
+
             const files = await github.paginate(github.rest.pulls.listFiles, {
               owner: context.repo.owner, repo: context.repo.repo, pull_number });
             const cards = files.filter(f => f.status !== 'removed'
@@ -68,7 +81,7 @@ jobs:
                         && f.filename.endsWith('.txt'));
             if (!cards.length) { core.info('no card files changed'); return; }
             core.setOutput('pull_number', String(pull_number));
-            core.setOutput('head_sha', meta.head_sha);
+            core.setOutput('head_sha', head_sha);
             fs.writeFileSync('changed_files.txt', cards.map(f => f.filename).join('\n'));
 
             // For each card, the NEW-file line numbers it adds or changes (the '+'

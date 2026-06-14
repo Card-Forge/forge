@@ -20,14 +20,19 @@ KEY_TOKEN = re.compile(r"([A-Za-z][A-Za-z0-9]*)\$")  # a `key$` param token
 
 LINE_PREFIXES = {"Name","ManaCost","Types","PT","Loyalty","Defense","Colors","Text",
     "Oracle","K","A","T","S","R","SVar","AI","DeckHints","DeckNeeds","DeckHas",
-    "AlternateMode","Variant","ALTERNATE","SetColor"}
+    "AlternateMode","Variant","ALTERNATE","HandLifeModifier","Draft","CopyFaceFrom",
+    "MeldPair","SPECIALIZE"}
 PFX_LOWER = {p.lower():p for p in LINE_PREFIXES}
-# The sub-ability keys in the engine's additionalAbilityKeys are validated against
-# defined SVars by the build's Java test; only the keys outside that list stay here.
-REF_KEYS = {"Execute","SubAbility","AbilityX","ChosenSubAbility"}
+# Execute (which CardScriptApiTest excludes) and SubAbility (not an
+# additionalAbilityKeys key) are checked here; the additionalAbilityKeys sub-ability
+# keys are validated against defined SVars by CardScriptApiTest instead.
+REF_KEYS = {"Execute","SubAbility"}
 LIST_REF_KEYS = {"Choices"}
+# Engine splits these on " & " (a comma there collapses into one bogus entry).
 AMP_LIST_KEYS = {"AddTypes","AddKeyword","AddKeywords","RemoveKeywords",
-                 "AddTrigger","AddStatic","AddReplacement","Triggers"}
+                 "AddTrigger","AddStaticAbility","AddReplacementEffect"}
+# Engine splits these on "," (a " & " there collapses into one bogus entry).
+COMMA_LIST_KEYS = {"Triggers","AddTriggers","AddStaticAbilities"}
 VALID_KEYS = {"ValidTgts","ValidCard","ValidCards","Valid","Affected","ValidSource",
               "ValidTarget","ChangeType","ChangeValid","SacValid","ValidCause"}
 DESC_KEYS = {"SpellDescription","TriggerDescription","StackDescription","Description"}
@@ -175,8 +180,12 @@ def lint(path, freq=None):
                         add(i,"ERROR","REF-UNDEF",f"{k}$ choice '{nm}' undefined")
             if k in SPACED_KEYS and raw[len(k)+1:len(k)+2] not in (" ",""):
                 add(i,"ERROR","LEX-NOSPACE",f"'{k}$' not followed by a space")
-            if k in AMP_LIST_KEYS and "," in v:
+            # A ":" means a parameterized keyword (Protection:...,..., OnlyUntapChosen:A,B,C)
+            # whose value legitimately carries internal commas; only a comma in a bare list is the bug.
+            if k in AMP_LIST_KEYS and "," in v and ":" not in v:
                 add(i,"ERROR","LEX-DELIM",f"{k}$ uses ',' but engine splits on ' & ' -> becomes one bogus entry")
+            if k in COMMA_LIST_KEYS and " & " in v:
+                add(i,"ERROR","LEX-DELIM",f"{k}$ uses ' & ' but engine splits on ',' -> becomes one bogus entry")
             if k in VALID_KEYS:
                 for tok in re.split(r"[ ,]",v):
                     if tok.count(".")>=2:

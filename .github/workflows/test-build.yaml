@@ -31,14 +31,13 @@ jobs:
       # The card-script review test writes findings here; hand them, plus the PR
       # number, to the Card-script review workflow. A pull_request build has a
       # read-only token on fork PRs and cannot comment, so posting happens there.
+      # The number is a hint only: the poster re-checks it against the build's
+      # trusted head SHA before commenting, so a tampered artifact can't redirect it.
       # One matrix leg only, and always() so a test failure still ships findings.
       - name: Stage card-script review data
         if: ${{ always() && github.event_name == 'pull_request' && matrix.java == '17' }}
         run: |
-          printf '{"number": %s, "head_sha": "%s"}\n' \
-            "${{ github.event.pull_request.number }}" \
-            "${{ github.event.pull_request.head.sha }}" > card-script-pr-meta.json
-          # Stage at repo root so both files sit at the artifact's top level.
+          printf '{"number": %s}\n' "${{ github.event.pull_request.number }}" > card-script-pr-meta.json
           [ -f forge-game/target/card-script-findings.json ] \
             && cp forge-game/target/card-script-findings.json card-script-findings.json || true
 
