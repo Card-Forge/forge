@@ -46,6 +46,20 @@ import java.util.function.Predicate;
  * @since 1.0.15
  */
 public class SpellAbilityCondition extends SpellAbilityVariables {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Condition", "ConditionActivationLimit", "ConditionCheckSVar",
+        "ConditionChosenColor", "ConditionCompare", "ConditionCompare2", "ConditionDefined",
+        "ConditionDefined2", "ConditionFirstCombat", "ConditionGameTypes",
+        "ConditionLifeAmount", "ConditionLifeTotal", "ConditionManaNotSpent",
+        "ConditionManaSpent", "ConditionNoDifferentColors", "ConditionNotPresent",
+        "ConditionOpponentTurn", "ConditionOptionalPaid", "ConditionPhases",
+        "ConditionPlayerContains", "ConditionPlayerDefined", "ConditionPlayerTurn",
+        "ConditionPresent", "ConditionPresent2", "ConditionSVarCompare",
+        "ConditionSorcerySpeed", "ConditionTargetValidTargeting",
+        "ConditionTargetsSingleTarget", "ConditionZone", "OrConditionCheckSVar",
+        "OrOtherConditionSVarCompare",
+    };
+
     // A class for handling SpellAbility Conditions. These restrictions include:
     // Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player,
     // Threshold, Metalcraft, LevelRange, etc
