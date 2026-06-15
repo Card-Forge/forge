@@ -50,19 +50,21 @@ public class CardScriptParamDeclarationTest {
     // The ability declarator prefixes are not params
     private static final Set<String> MARKERS = Set.of("AB", "SP", "ST", "DB");
 
-    // Framework classes that own the shared base layers (their OPTIONAL_PARAMS form the base)
-    private static final String[] FRAMEWORK = {
-        "forge-game/src/main/java/forge/game/ability/SpellAbilityEffect.java",
-        "forge-game/src/main/java/forge/game/ability/AbilityFactory.java",
-        "forge-game/src/main/java/forge/game/ability/AbilityUtils.java",
-        "forge-game/src/main/java/forge/game/spellability/SpellAbility.java",
-        "forge-game/src/main/java/forge/game/spellability/SpellAbilityCondition.java",
-        "forge-game/src/main/java/forge/game/spellability/SpellAbilityRestriction.java",
-        "forge-game/src/main/java/forge/game/spellability/TargetRestrictions.java",
-        "forge-game/src/main/java/forge/game/CardTraitBase.java",
-        "forge-game/src/main/java/forge/game/cost/Cost.java",
-        "forge-ai/src/main/java/forge/ai/SpellAbilityAi.java",
+    // Module source roots walked to find declaring classes -- no per-file path list to maintain.
+    private static final String[] SOURCE_ROOTS = {
+        "forge-game/src/main/java",
+        "forge-ai/src/main/java",
     };
+
+    // Effects own their own params; everything else that declares forms the shared base layer.
+    private static final String EFFECTS_DIR = "/ability/effects/";
+
+    // Assignment of an array initializer to a field -- tolerates an explicit "= new String[]{".
+    // Shared by discovery and parsing so the two can't drift apart.
+    private static final String ASSIGN = "\\s*=\\s*[^;]*?\\{";
+
+    // A class declares params iff one of these fields is assigned an array initializer.
+    private static final Pattern DECLARES = Pattern.compile("(?:OPTIONAL_PARAMS|REQUIRED_PARAMS)" + ASSIGN);
 
     // Cross-cutting readers (they read params owned by effects/triggers, so reads != owned):
     // declared but NOT reads-gated. They still contribute their declared params to the base
@@ -74,25 +76,35 @@ public class CardScriptParamDeclarationTest {
         Path root = locateRoot();
         List<String> errors = new ArrayList<>();
 
-        Set<String> base = new TreeSet<>();
-        for (String rel : FRAMEWORK) {
-            base.addAll(declared(read(root.resolve(rel)), "OPTIONAL_PARAMS"));
-        }
-
-        for (String rel : FRAMEWORK) {
-            Path f = root.resolve(rel);
-            if (declares(read(f))) {
-                checkClass(f, base, false, errors);
+        // Discover every declaring class by walking the source tree.
+        List<Path> declarers = new ArrayList<>();
+        for (String rel : SOURCE_ROOTS) {
+            Path src = root.resolve(rel);
+            if (!Files.isDirectory(src)) {
+                continue;
             }
-        }
-
-        Path effects = root.resolve("forge-game/src/main/java/forge/game/ability/effects");
-        try (Stream<Path> walk = Files.walk(effects)) {
-            for (Path p : (Iterable<Path>) walk.filter(f -> f.toString().endsWith(".java"))::iterator) {
-                if (declares(read(p))) {
-                    checkClass(p, base, true, errors);
+            try (Stream<Path> walk = Files.walk(src)) {
+                for (Path p : (Iterable<Path>) walk.filter(f -> f.toString().endsWith(".java"))::iterator) {
+                    if (declares(read(p))) {
+                        declarers.add(p);
+                    }
                 }
             }
+        }
+
+        // Guard against a broken walk passing vacuously: the framework classes always declare.
+        assertTrue(!declarers.isEmpty(), "no param-declaring classes found -- source-tree discovery is broken");
+
+        // Base = declarers that aren't effects; their optional params are inherited by every effect.
+        Set<String> base = new TreeSet<>();
+        for (Path f : declarers) {
+            if (!isEffect(f)) {
+                base.addAll(declared(read(f), "OPTIONAL_PARAMS"));
+            }
+        }
+
+        for (Path f : declarers) {
+            checkClass(f, base, isEffect(f), errors);
         }
 
         assertTrue(errors.isEmpty(),
@@ -160,7 +172,11 @@ public class CardScriptParamDeclarationTest {
     }
 
     private boolean declares(String src) {
-        return src.contains("OPTIONAL_PARAMS") || src.contains("REQUIRED_PARAMS");
+        return DECLARES.matcher(src).find();
+    }
+
+    private boolean isEffect(Path file) {
+        return file.toString().replace('\\', '/').contains(EFFECTS_DIR);
     }
 
     private Set<String> declared(String src, String field) {
@@ -169,7 +185,7 @@ public class CardScriptParamDeclarationTest {
 
     private List<String> declaredList(String src, String field) {
         List<String> out = new ArrayList<>();
-        Matcher decl = Pattern.compile(field + "\\s*=\\s*\\{").matcher(src);
+        Matcher decl = Pattern.compile(field + ASSIGN).matcher(src);
         if (!decl.find()) {
             return out;
         }
@@ -188,7 +204,7 @@ public class CardScriptParamDeclarationTest {
     /** REQUIRED_PARAMS is String[][]; return one set per inner { } group. */
     private List<Set<String>> requiredGroups(String src) {
         List<Set<String>> groups = new ArrayList<>();
-        Matcher decl = Pattern.compile("REQUIRED_PARAMS\\s*=\\s*\\{").matcher(src);
+        Matcher decl = Pattern.compile("REQUIRED_PARAMS" + ASSIGN).matcher(src);
         if (!decl.find()) {
             return groups;
         }
