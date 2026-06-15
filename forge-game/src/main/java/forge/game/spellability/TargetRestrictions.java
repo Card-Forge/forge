@@ -43,6 +43,16 @@ import forge.util.TextUtil;
  * @version $Id$
  */
 public class TargetRestrictions {
+    public static final String[] OPTIONAL_PARAMS = {
+        "MaxTotalTargetCMC", "MaxTotalTargetPower", "RandomNumTargets", "TargetMax",
+        "TargetMin", "TargetUnique", "TargetValidTargeting", "TargetingPlayer",
+        "TargetsAtRandom", "TargetsForEachPlayer", "TargetsWithDifferentCMC",
+        "TargetsWithDifferentControllers", "TargetsWithDifferentNames",
+        "TargetsWithEqualToughness", "TargetsWithSameCardType", "TargetsWithSameController",
+        "TargetsWithSameCreatureType", "TargetsWithoutSameCreatureType", "TgtPrompt",
+        "TgtZone", "ValidTgts", "ValidTgtsDesc",
+    };
+
     // Target has two things happening:
     // Targeting restrictions (Creature, Min/Maxm etc) which are true for this
     // What this Object is restricted to targeting
