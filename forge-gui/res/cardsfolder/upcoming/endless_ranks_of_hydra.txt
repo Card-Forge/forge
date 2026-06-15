@@ -1,0 +1,10 @@
+Name:Endless Ranks of HYDRA
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ b_2_1_villain_menace | TokenOwner$ You | SpellDescription$ For each opponent, you create a 2/1 black Villain creature token with menace.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.IsCommander+YouOwn | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever your commander enters or attacks, you may pay {1}{B}. If you do, return this card from your graveyard to your hand.
+T:Mode$ Attacks | ValidCard$ Card.IsCommander+YouOwn | Execute$ TrigReturn | Secondary$ True | TriggerZones$ Graveyard | TriggerDescription$ Whenever your commander enters or attacks, you may pay {1}{B}. If you do, return this card from your graveyard to your hand.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 B| Defined$ Self | Origin$ Graveyard | Destination$ Hand
+SVar:X:PlayerCountOpponents$Amount
+DeckHas:Ability$Token
+Oracle:For each opponent, you create a 2/1 black Villain creature token with menace.\nWhenever your commander enters or attacks, you may pay {1}{B}. If you do, return this card from your graveyard to your hand.
