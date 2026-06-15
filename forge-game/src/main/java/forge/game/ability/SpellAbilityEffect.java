@@ -41,10 +41,6 @@ import java.util.*;
  */
 
 public abstract class SpellAbilityEffect {
-    // Card-script parameters read by the framework, declared here so the set each class
-    // consumes is explicit and can be checked against the card scripts. Each framework class
-    // lists the shared (optional) base params it consumes; ability effects additionally
-    // declare REQUIRED_PARAMS (one-of groups) on top.
     public static final String[] OPTIONAL_PARAMS = {
         "AfterDescription", "Amount", "Announce", "AtEOTCondition", "AtEOTDesc",
         "ConditionDescription", "Defined", "DefinedExiler", "Duration",
