@@ -37,6 +37,16 @@ import forge.util.ITranslatable;
  *
  */
 public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVars {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Adamant", "Blessing", "Bloodthirst", "CheckDefinedPlayer", "CheckSVar",
+        "CheckSecondSVar", "ClassLevel", "DayTime", "DefinedPlayerCompare", "Delirium",
+        "Desert", "FatefulHour", "Hellbent", "Invert", "IsPresent", "IsPresent2",
+        "LifeAmount", "LifeTotal", "ManaNotSpent", "ManaSpent", "Metalcraft", "Monarch",
+        "PresentCompare", "PresentCompare2", "PresentDefined", "PresentPlayer",
+        "PresentPlayer2", "PresentZone", "PresentZone2", "Revolt", "SVarCompare",
+        "SecondSVarCompare", "Secondary", "Threshold", "WerewolfTransformCondition",
+        "WerewolfUntransformCondition",
+    };
 
     /** The host card. */
     protected Card hostCard;
