@@ -3,6 +3,7 @@ package forge.game.ability;
 import static org.testng.Assert.assertTrue;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,6 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import com.google.common.reflect.ClassPath;
 import org.testng.annotations.Test;
 
 /**
@@ -28,9 +30,10 @@ import org.testng.annotations.Test;
  * helpers, map lookups, and so on. A parameter read through a non-literal argument cannot be
  * detected, so a passing run means "no undeclared literal read", not a proof of completeness.
  *
- * The check is opt-in: a class that declares neither field is skipped, so declarations can be
- * added a few classes at a time. Once a class declares, removing it from the check requires
- * deleting its whole declaration.
+ * Declarers are found by scanning the classpath for implementors of {@link IHasForgeParams}: a
+ * class is covered iff it implements that interface and lists its params, so there is no path or
+ * package list to maintain. Listing a param field without implementing the interface fails the
+ * test, so discovery and declaration cannot drift apart.
  */
 public class CardScriptParamDeclarationTest {
 
@@ -50,25 +53,33 @@ public class CardScriptParamDeclarationTest {
     // The ability declarator prefixes are not params
     private static final Set<String> MARKERS = Set.of("AB", "SP", "ST", "DB");
 
-    // Module source roots walked to find declaring classes -- no per-file path list to maintain.
-    private static final String[] SOURCE_ROOTS = {
-        "forge-game/src/main/java",
-        "forge-ai/src/main/java",
-    };
+    // Package scanned for declarers (classes implementing IHasForgeParams) -- no path list to maintain
+    private static final String SCAN_PACKAGE = "forge.game";
 
-    // Effects own their own params; everything else that declares forms the shared base layer.
+    // Where a discovered forge-game class's source lives, given its package path
+    private static final String GAME_SRC = "forge-game/src/main/java";
+
+    // Floor for the scan: a partial scan would silently drop declarers (a dropped reader stops
+    // gating its reads), so require these to be found and fail loudly on any shortfall.
+    private static final Set<String> EXPECTED_FRAMEWORK = Set.of(
+        "AbilityFactory", "AbilityUtils", "SpellAbilityEffect", "CardTraitBase", "Cost",
+        "SpellAbility", "SpellAbilityCondition", "SpellAbilityRestriction", "TargetRestrictions");
+
+    // forge-ai declarers are found by walking this source root: the forge-game test classpath can't
+    // see forge-ai (the dependency runs forge-ai -> forge-game), so the classpath scan can't reach them.
+    private static final String AI_SRC = "forge-ai/src/main/java";
+
+    // Effects own their own params; everything else that declares forms the shared base layer
     private static final String EFFECTS_DIR = "/ability/effects/";
 
-    // Assignment of an array initializer to a field -- tolerates an explicit "= new String[]{".
-    // Shared by discovery and parsing so the two can't drift apart.
+    // Assignment of an array initializer to a field -- tolerates an explicit "= new String[]{"
     private static final String ASSIGN = "\\s*=\\s*[^;]*?\\{";
 
-    // A class declares params iff one of these fields is assigned an array initializer.
+    // A source file declares params iff it assigns one of these fields an array initializer
     private static final Pattern DECLARES = Pattern.compile("(?:OPTIONAL_PARAMS|REQUIRED_PARAMS)" + ASSIGN);
 
-    // Cross-cutting readers (they read params owned by effects/triggers, so reads != owned):
-    // declared but NOT reads-gated. They still contribute their declared params to the base
-    // and are subject to the structural checks.
+    // Cross-cutting readers read params owned by other classes, so their reads aren't gated; their
+    // declared params still join the base and face the structural checks.
     private static final Set<String> READ_GATE_EXEMPT = Set.of("SpellAbilityAi");
 
     @Test
@@ -76,26 +87,55 @@ public class CardScriptParamDeclarationTest {
         Path root = locateRoot();
         List<String> errors = new ArrayList<>();
 
-        // Discover every declaring class by walking the source tree.
+        // Discover declarers by scanning the classpath for IHasForgeParams implementors
         List<Path> declarers = new ArrayList<>();
-        for (String rel : SOURCE_ROOTS) {
-            Path src = root.resolve(rel);
-            if (!Files.isDirectory(src)) {
+        Set<String> found = new TreeSet<>();
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
+        for (ClassPath.ClassInfo info : ClassPath.from(cl).getTopLevelClassesRecursive(SCAN_PACKAGE)) {
+            Class<?> c;
+            boolean declares;
+            try {
+                c = Class.forName(info.getName(), false, cl);
+                declares = declaresOwnParams(c);
+            } catch (Throwable t) {
+                // A class that won't load/link can't be one of our plain declarers; skip it
                 continue;
             }
-            try (Stream<Path> walk = Files.walk(src)) {
-                for (Path p : (Iterable<Path>) walk.filter(f -> f.toString().endsWith(".java"))::iterator) {
-                    if (declares(read(p))) {
-                        declarers.add(p);
-                    }
-                }
+            if (!declares) {
+                continue;
+            }
+            if (!IHasForgeParams.class.isAssignableFrom(c)) {
+                errors.add(c.getSimpleName() + ": declares card-script params but does not implement IHasForgeParams");
+                continue;
+            }
+            Path src = root.resolve(GAME_SRC).resolve(c.getName().replace('.', '/') + ".java");
+            if (Files.exists(src)) {
+                declarers.add(src);
+                found.add(c.getSimpleName());
+            } else {
+                errors.add(c.getName() + ": implements IHasForgeParams but its source was not found under " + GAME_SRC);
             }
         }
 
-        // Guard against a broken walk passing vacuously: the framework classes always declare.
-        assertTrue(!declarers.isEmpty(), "no param-declaring classes found -- source-tree discovery is broken");
+        // Fail loudly on a partial scan instead of passing on a subset (see EXPECTED_FRAMEWORK)
+        Set<String> missing = new TreeSet<>(EXPECTED_FRAMEWORK);
+        missing.removeAll(found);
+        assertTrue(missing.isEmpty(), "classpath scan missed expected declarers (partial/broken scan?): " + missing);
 
-        // Base = declarers that aren't effects; their optional params are inherited by every effect.
+        // forge-ai declarers can't be reached by the classpath scan (see AI_SRC), so walk its source
+        Path aiSrc = root.resolve(AI_SRC);
+        assertTrue(Files.isDirectory(aiSrc), "forge-ai source root not found: " + AI_SRC);
+        int beforeAi = declarers.size();
+        try (Stream<Path> walk = Files.walk(aiSrc)) {
+            for (Path p : (Iterable<Path>) walk.filter(f -> f.toString().endsWith(".java"))::iterator) {
+                if (declaresInSource(read(p))) {
+                    declarers.add(p);
+                }
+            }
+        }
+        assertTrue(declarers.size() > beforeAi, "no forge-ai param declarers found under " + AI_SRC + " -- discovery is broken");
+
+        // Base = declarers that aren't effects; their optional params are inherited by every effect
         Set<String> base = new TreeSet<>();
         for (Path f : declarers) {
             if (!isEffect(f)) {
@@ -171,8 +211,21 @@ public class CardScriptParamDeclarationTest {
         }
     }
 
-    private boolean declares(String src) {
+    private boolean declaresOwnParams(Class<?> c) {
+        return hasOwnField(c, "OPTIONAL_PARAMS") || hasOwnField(c, "REQUIRED_PARAMS");
+    }
+
+    private boolean declaresInSource(String src) {
         return DECLARES.matcher(src).find();
+    }
+
+    private boolean hasOwnField(Class<?> c, String name) {
+        for (Field f : c.getDeclaredFields()) {
+            if (f.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isEffect(Path file) {

@@ -15,6 +15,7 @@ import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.IHasForgeParams;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -36,7 +37,7 @@ import forge.util.ITranslatable;
  * Base class for Triggers,ReplacementEffects and StaticAbilities.
  *
  */
-public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVars {
+public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVars, IHasForgeParams {
     public static final String[] OPTIONAL_PARAMS = {
         "Adamant", "Blessing", "Bloodthirst", "CheckDefinedPlayer", "CheckSVar",
         "CheckSecondSVar", "ClassLevel", "DayTime", "DefinedPlayerCompare", "Delirium",

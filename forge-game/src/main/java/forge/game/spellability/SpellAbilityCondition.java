@@ -24,6 +24,7 @@ import forge.game.GameObject;
 import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.IHasForgeParams;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -45,7 +46,7 @@ import java.util.function.Predicate;
  * @version $Id$
  * @since 1.0.15
  */
-public class SpellAbilityCondition extends SpellAbilityVariables {
+public class SpellAbilityCondition extends SpellAbilityVariables implements IHasForgeParams {
     public static final String[] OPTIONAL_PARAMS = {
         "Condition", "ConditionActivationLimit", "ConditionCheckSVar",
         "ConditionChosenColor", "ConditionCompare", "ConditionCompare2", "ConditionDefined",

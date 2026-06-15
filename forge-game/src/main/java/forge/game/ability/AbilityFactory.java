@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
  * @author Forge
  * @version $Id$
  */
-public final class AbilityFactory {
+public final class AbilityFactory implements IHasForgeParams {
     public static final String[] OPTIONAL_PARAMS = {
         "BidSubAbility", "CantChooseSubAbility", "Choices", "ChooseNumberSubAbility",
         "ChooseSubAbility", "ChosenPile", "Cost", "Execute", "FallbackAbility",

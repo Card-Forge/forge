@@ -49,7 +49,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AbilityUtils {
+public class AbilityUtils implements IHasForgeParams {
     public static final String[] OPTIONAL_PARAMS = {
         "AbilityCount", "AnnounceMax", "Destination", "ETB", "ForgetOtherTargets",
         "IncludeAllComponentCards", "LockInText", "RememberCostMana", "RememberTargets",

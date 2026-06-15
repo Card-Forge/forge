@@ -28,6 +28,7 @@ import forge.game.GameObject;
 import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.IHasForgeParams;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -49,7 +50,7 @@ import forge.util.collect.FCollection;
  * @author Forge
  * @version $Id$
  */
-public class SpellAbilityRestriction extends SpellAbilityVariables {
+public class SpellAbilityRestriction extends SpellAbilityVariables implements IHasForgeParams {
     public static final String[] OPTIONAL_PARAMS = {
         "Activation", "ActivationAfterBlockers", "ActivationFirstCombat",
         "ActivationGameTypes", "ActivationLifeAmount", "ActivationLifeTotal",
