@@ -37,6 +37,11 @@ import forge.util.collect.FCollectionView;
  * The three main methods are canPlayAI(), chkAIDrawback and doTriggerAINoCost.
  */
 public abstract class SpellAbilityAi {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AIActivateLast", "AIBidMax", "AICheckSVar", "AILifeThreshold", "AILogic",
+        "AIManaPref", "AIMaxTgtsCount", "AIPhyrexianPayment", "AIRespondsToOwnAbility",
+        "AISVarCompare", "AITgts", "AITgtsStrict", "AIXMax", "UnlessAI",
+    };
 
     public Predicate<Card> CREATURE_OR_TAP_ABILITY = c -> {
         if (c.isCreature()) {
