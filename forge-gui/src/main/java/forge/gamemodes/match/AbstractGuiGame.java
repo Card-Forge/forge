@@ -90,16 +90,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final void setCurrentPlayer(PlayerView player) {
         player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
 
-        if (hasLocalPlayers() && !isLocalPlayer(player)) { //add check if gameControllers is not empty
-            if(GuiBase.getInterface().isLibgdxPort()){//spectator is registered as localplayer bug on ai vs ai (after .
-                if (spectator != null){               //human vs ai game), then it loses "control" when you watch ai vs ai,
-                    currentPlayer = null;             //again, and vice versa, This is to prevent throwing error, lose control,
-                    updateCurrentPlayer(null);        //workaround fix on mayviewcards below is needed or it will bug the UI..
-                    gameControllers.clear();
-                    return;
-                }
-            }
-
+        if (hasLocalPlayers() && !isLocalPlayer(player)) {
             throw new IllegalArgumentException();
         }
 
@@ -203,6 +194,20 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         this.spectator = spectator;
     }
 
+    /**
+     * Discard the previous match's controller bookkeeping. The mobile port hands out a single
+     * reused {@code MatchController} instance per match (see {@code GuiMobile.getNewGuiGame()}),
+     * whereas desktop constructs a fresh {@code CMatchUI}; without this reset the prior match's
+     * controllers and spectator leak into the next match and break {@link #setCurrentPlayer} and
+     * {@link #mayView}.
+     */
+    public void resetForNewMatch() {
+        gameControllers.clear();
+        originalGameControllers.clear();
+        spectator = null;
+        currentPlayer = null;
+    }
+
     @Override
     public final void updateSingleCard(final CardView card) {
         updateCards(Collections.singleton(card));
@@ -233,27 +238,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (!hasLocalPlayers()) {
             return true; //if not in game, card can be shown
         }
-        if (GuiBase.getInterface().isLibgdxPort()){
-            if (gameView != null && gameView.isGameOver()) {
-                return true;
-            }
-            if (spectator != null) { //workaround fix!! this is needed on above code or it will
-                for (Map.Entry<PlayerView, IGameController> e : gameControllers.entrySet()) {
-                    if (e.getValue().equals(spectator)) {
-                        gameControllers.remove(e.getKey());
-                        break;
-                    }
-                }
-                return true;
-            }
-            try {
-                if (getGameController().mayLookAtAllCards()) { // when it bugged here, the game thinks the spectator (null)
-                    return true;                               // is the humancontroller here (maybe because there is an existing game thread???)
-                }
-            } catch (NullPointerException e) {
-                return true; // return true so it will work as normal
-            }
-        } else if (getGameController().mayLookAtAllCards()) {
+        if (GuiBase.getInterface().isLibgdxPort() && gameView != null && gameView.isGameOver()) {
+            return true; //mobile: browse every zone from the minimized win/lose overlay after the match ends
+        }
+        if (getGameController().mayLookAtAllCards()) {
             return true;
         }
         return c.canBeShownToAny(getLocalPlayers());
