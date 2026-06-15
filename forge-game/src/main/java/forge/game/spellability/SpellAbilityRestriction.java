@@ -50,6 +50,16 @@ import forge.util.collect.FCollection;
  * @version $Id$
  */
 public class SpellAbilityRestriction extends SpellAbilityVariables {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Activation", "ActivationAfterBlockers", "ActivationFirstCombat",
+        "ActivationGameTypes", "ActivationLifeAmount", "ActivationLifeTotal",
+        "ActivationLimit", "ActivationPhases", "ActivationZone", "Activator",
+        "AdditionalActivationZone", "Affected", "CheckSVar", "ClassLevel",
+        "GameActivationLimit", "InstantSpeed", "IsPresent", "OpponentTurn", "PlayerTurn",
+        "PresentCompare", "PresentDefined", "PresentZone", "SVarCompare", "SorcerySpeed",
+        "ValidSA",
+    };
+
     // A class for handling SpellAbility Restrictions. These restrictions include:
     // Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player,
     // Threshold, Metalcraft, LevelRange, etc
