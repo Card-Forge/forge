@@ -47,6 +47,15 @@ import java.util.List;
  * @version $Id$
  */
 public class Cost implements Serializable {
+    public static final String[] OPTIONAL_PARAMS = {
+        "AffectedZone", "Amount", "Announce", "Collected", "CollectedCards", "Color",
+        "Cost", "Exiled", "ExiledCards", "FirstForetell", "ForEachShard", "Foraged",
+        "ForagedCards", "IgnoreGeneric", "MinMana", "ModeCost", "OnlyFirstSpell",
+        "RaiseCost", "RaiseTo", "ReduceAmount", "ReduceCost", "Relative",
+        "SpellDescription", "TapCreaturesForMana", "Type", "UnlessValidTarget", "UpTo",
+        "ValidCard", "ValidSpell", "ValidTarget",
+    };
+
     /**
      * Serializables need a version ID.
      */
