@@ -6,7 +6,7 @@ K:Vigilance
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, if you've cast a noncreature spell this turn, put a +1/+1 counter on NICKNAME. When you do, NICKNAME and up to one other target creature you control can't be blocked this turn.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | RememberAmount$ True | SubAbility$ DBImmediateTrig
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigEffect | TriggerAmount$ Count$RememberedNumber | SubAbility$ DBCleanup | TriggerDescription$ When you do, NICKNAME and up to one other target creature you control can't be blocked this turn.
-SVar:TrigEffect:DB$ Effect | ValidTgts$ Creature.Other+YouCtrl | ValidTgtDesc$ another creature you control | TargetMin$ 0 | TargetMax$ 1 | RememberObjects$ Self & Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:TrigEffect:DB$ Effect | ValidTgts$ Creature.Other+YouCtrl | ValidTgtsDesc$ another creature you control | TargetMin$ 0 | TargetMax$ 1 | RememberObjects$ Self & Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl

@@ -370,10 +370,8 @@ public class VLobby implements ILobbyView {
         controller.syncModeFromHost();
         controller.onLobbyDataChanged();
 
-        final boolean allowNetworking = lobby.isAllowNetworking();
-
         ImmutableList<VariantCheckBox> vntBoxes;
-        if (allowNetworking) {
+        if (lobby.isAllowNetworking()) {
             vntBoxes = vntBoxesNetwork;
         } else {
             vntBoxes = vntBoxesLocal;
@@ -394,7 +392,7 @@ public class VLobby implements ILobbyView {
                     panel = playerPanels.get(i);
                     isNewPanel = !panel.isVisible();
                 } else {
-                    panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
+                    panel = new PlayerPanel(this, i, slot, lobby.mayEdit(i), lobby.hasControl());
                     playerPanels.add(panel);
                     String constraints = "pushx, growx, wrap, hidemode 3";
                     if (i == 0) {

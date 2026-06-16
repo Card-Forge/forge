@@ -5,6 +5,6 @@ PT:2/1
 K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When NICKNAME enters, return up to one other target artifact or creature you control to its owner's hand. If it was an artifact, put a +1/+1 counter on NICKNAME.
-SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Artifact.Other+YouCtrl,Creature.Other+YouCtrl | ValidTgtDesc$ another artifact or creature you control | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBPutCounter
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Artifact.Other+YouCtrl,Creature.Other+YouCtrl | ValidTgtsDesc$ another artifact or creature you control | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Artifact
 Oracle:Flash\nFlying\nWhen Rescue enters, return up to one other target artifact or creature you control to its owner's hand. If it was an artifact, put a +1/+1 counter on Rescue.

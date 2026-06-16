@@ -4,7 +4,7 @@ Types:Legendary Creature Mutant Berserker Hero
 PT:3/5
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When NICKNAME enters, he fights up to one other target creature.
-SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.Other | ValidTgtDesc$ another creature | TargetMin$ 0 | TargetMax$ 1
+SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.Other | ValidTgtsDesc$ another creature | TargetMin$ 0 | TargetMax$ 1
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ Healing | ReplacementResult$ Updated | Description$ If damage would be dealt to NICKNAME, instead that damage is dealt, but all other damage already dealt to him is healed.
 SVar:Healing:DB$ HealDamage | Defined$ ReplacedTarget
 Oracle:Haste\nWhen Wolverine enters, he fights up to one other target creature.\nIf damage would be dealt to Wolverine, instead that damage is dealt, but all other damage already dealt to him is healed.

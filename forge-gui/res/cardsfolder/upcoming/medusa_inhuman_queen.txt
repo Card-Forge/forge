@@ -1,0 +1,10 @@
+Name:Medusa, Inhuman Queen
+ManaCost:2 G
+Types:Legendary Creature Inhuman Noble Hero
+PT:2/2
+K:Vigilance
+K:Reach
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a player casts a noncreature spell, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Card.nonCreature+nonLand
+Oracle:Vigilance, reach\nWhenever a player casts a noncreature spell, put a +1/+1 counter on Medusa.
