@@ -4,7 +4,7 @@ Types:Sorcery
 K:Teamwork:3
 A:SP$ Charm | CharmNum$ X | Choices$ DBPutCounter,DBPump | AdditionalDescription$ . If this spell was cast using teamwork, choose both instead.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
-SVar:DBPump:DB$ Pump | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature an opponent controls.
-SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | ValidTgtDesc$ creature an opponent controls
+SVar:DBPump:DB$ Pump | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature an opponent controls.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls
 SVar:X:Count$Teamwork.2.1
 Oracle:Teamwork 3 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 3 or more.)\nChoose one. If this spell was cast using teamwork, choose both instead.\n• Put a +1/+1 counter on target creature.\n• Target creature you control fights target creature an opponent controls.

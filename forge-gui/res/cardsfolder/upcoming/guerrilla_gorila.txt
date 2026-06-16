@@ -3,5 +3,5 @@ ManaCost:1 G
 Types:Creature Ape Soldier Hero
 PT:2/2
 K:Reach
-A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact.nonCreature,Enchantment.nonCreature | ValidTgtDesc$ noncreature artifact or noncreature enchantment | SorcerySpeed$ True | SpellDescription$ Destroy target noncreature artifact or noncreature enchantment. Activate only as a sorcery.
+A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact.nonCreature,Enchantment.nonCreature | ValidTgtsDesc$ noncreature artifact or noncreature enchantment | SorcerySpeed$ True | SpellDescription$ Destroy target noncreature artifact or noncreature enchantment. Activate only as a sorcery.
 Oracle:Reach\nSacrifice this creature: Destroy target noncreature artifact or noncreature enchantment. Activate only as a sorcery.

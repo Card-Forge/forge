@@ -97,7 +97,6 @@ import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.screens.match.controllers.CAntes;
 import forge.screens.match.controllers.CCombat;
 import forge.screens.match.controllers.CDependencies;
 import forge.screens.match.controllers.CDetailPicture;
@@ -167,7 +166,6 @@ public final class CMatchUI
 
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
 
-    private final CAntes cAntes = new CAntes(this);
     private final CCombat cCombat = new CCombat();
     private final CDependencies cDependencies = new CDependencies(this);
     private final CDetailPicture cDetailPicture = new CDetailPicture(this);
@@ -185,12 +183,6 @@ public final class CMatchUI
         this.myDocs = new EnumMap<>(EDocID.class);
         this.myDocs.put(EDocID.CARD_PICTURE, cDetailPicture.getCPicture().getView());
         this.myDocs.put(EDocID.CARD_DETAIL, cDetailPicture.getCDetail().getView());
-        // only create an ante doc if playing for ante
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
-            this.myDocs.put(EDocID.CARD_ANTES, cAntes.getView());
-        } else {
-            this.myDocs.put(EDocID.CARD_ANTES, null);
-        }
         this.myDocs.put(EDocID.REPORT_MESSAGE, getCPrompt().getView());
         this.myDocs.put(EDocID.REPORT_STACK, getCStack().getView());
         this.myDocs.put(EDocID.REPORT_COMBAT, cCombat.getView());
@@ -547,9 +539,6 @@ public final class CMatchUI
                 case Battlefield:
                     setupPlayZone = true;
                     break;
-                case Ante:
-                    updateAnte = true;
-                    break;
                 case Hand:
                     updateHand = true;
                     updateZones = true;
@@ -562,11 +551,8 @@ public final class CMatchUI
                 }
             }
 
-            if (updateAnte) {
-                cAntes.update();
-            }
             final VField vField = getFieldViewFor(owner);
-            if(vField == null) {
+            if (vField == null) {
                 netLog.error("vField is null for player {}, sortedPlayers.indexOf={}",
                         owner.getId(), sortedPlayers.indexOf(owner));
                 return;
@@ -612,7 +598,7 @@ public final class CMatchUI
                             }
                             break;
                         default:
-                            if(!FLOATING_ZONE_TYPES.contains(zone))
+                            if (!FLOATING_ZONE_TYPES.contains(zone))
                                 break;
                             if (FloatingZone.show(this,player,zone)) {
                                 updatedPlayerZones.add(update);
