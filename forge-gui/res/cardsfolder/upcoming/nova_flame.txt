@@ -2,7 +2,7 @@ Name:Nova Flame
 ManaCost:X 2 R R
 Types:Sorcery
 A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBDamageAll | SpellDescription$ Put X +1/+1 counters on target creature you control. It deals damage equal to its power to each other creature.
-SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature.NotDefinedTargeted | NumDmg$ Y | DamageSource$ ParentTarget | ValidDescription$ each other creature.
+SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature.NotDefinedTargeted | NumDmg$ Y | DamageSource$ ParentTarget | ValidDescription$ each other creature
 SVar:X:Count$xPaid
 SVar:Y:ParentTargeted$CardPower
 Oracle:Put X +1/+1 counters on target creature you control. It deals damage equal to its power to each other creature.

@@ -3,9 +3,9 @@ ManaCost:1 W
 Types:Creature Human Warrior
 PT:2/2
 K:First Strike
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ X | SVarCompare$ GTY | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, if an opponent controls more lands than you, create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can’t be spent to cast a nonartifact spell.")
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ X | SVarCompare$ GTY | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, if an opponent controls more lands than you, create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
 SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_vibranium | TokenOwner$ You
 A:AB$ PumpAll | Cost$ Sac<1/CARDNAME/this creature> | ValidCards$ Permanent.Legendary+YouCtrl | KW$ Indestructible | SpellDescription$ Legendary permanents you control gain indestructible until end of turn.
 SVar:X:PlayerCountOpponents$HighestValid Land.YouCtrl
 SVar:Y:Count$Valid Land.YouCtrl
-Oracle:First strike\nWhen this creature enters, if an opponent controls more lands than you, create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can’t be spent to cast a nonartifact spell.")\nSacrifice this creature: Legendary permanents you control gain indestructible until end of turn.
+Oracle:First strike\nWhen this creature enters, if an opponent controls more lands than you, create a tapped Vibranium token. (It's an artifact with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")\nSacrifice this creature: Legendary permanents you control gain indestructible until end of turn.
