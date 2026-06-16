@@ -2131,23 +2131,28 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         final Map<Integer, ReplacementEffect> replacementViewCache = Maps.uniqueIndex(possibleReplacers, ReplacementEffect::getId);
 
+        final List<ReplacementEffectView> sourceREVs = Lists.newArrayList();
         final List<ReplacementEffectView> orderedREVs = Lists.newArrayList();
         if (savedOrder != null) {
             for (final int index : savedOrder) {
                 orderedREVs.add(possibleReplacers.get(index).getView());
             }
+            for (int i = 0; i < possibleReplacers.size(); i++) {
+                if (!savedOrder.contains(i)) {
+                    sourceREVs.add(possibleReplacers.get(i).getView());
+                }
+            }
         } else {
             for (final ReplacementEffect replacementEffect : possibleReplacers) {
-                orderedREVs.add(replacementEffect.getView());
+                sourceREVs.add(replacementEffect.getView());
             }
         }
 
         final boolean reordering = savedOrder != null;
         final IGuiGame.OrderResult<ReplacementEffectView> orderResult = getGui().order(
                 localizer.getMessage(reordering ? "lblReorderReplacementEffects" : "lblSelectOrderForReplacementEffects"),
-                localizer.getMessage("lblApplyFirst"), 0, 0,
-                reordering ? Lists.<ReplacementEffectView>newArrayList() : orderedREVs,
-                reordering ? orderedREVs : Lists.<ReplacementEffectView>newArrayList(), null, false, true);
+                localizer.getMessage("lblApplyFirst"), 0, possibleReplacers.size() - 1,
+                sourceREVs, orderedREVs, null, false, true);
 
         final List<ReplacementEffectView> chosen = orderResult == null ? null : orderResult.ordered();
         if (chosen == null || chosen.isEmpty()) {
@@ -2189,7 +2194,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     private boolean isValidReplacementOrder(final List<Integer> savedOrder, final int size) {
-        return savedOrder.size() == size && savedOrder.stream().allMatch(i -> i >= 0 && i < size);
+        return !savedOrder.isEmpty() && savedOrder.size() <= size
+                && Sets.newHashSet(savedOrder).size() == savedOrder.size()
+                && savedOrder.stream().allMatch(i -> i >= 0 && i < size);
     }
 
     private String describeReplacementOrder(final List<ReplacementEffect> replacementEffects) {
