@@ -340,7 +340,7 @@ public class CardDetailUtil {
             for (final Entry<String, String> e : Sets.union(changedColorWords.entrySet(), changedTypes.entrySet())) {
                 area.append("Text changed: all instances of ");
                 if (e.getKey().equals("Any")) {
-                    if (changedColorWords.containsKey(e.getValue())) {
+                    if (changedColorWords.containsValue(e.getValue())) {
                         area.append("color words");
                     } else if (forge.card.CardType.getBasicTypes().contains(e.getValue())) {
                         area.append("basic land types");

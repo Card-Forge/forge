@@ -91,6 +91,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private boolean unlimitedHandSize = false;
     private Card lastDrawnCard;
     private int numDrawnThisTurn;
+    private int numExtraDrawnThisTurn;
     private int numDrawnLastTurn;
     private int numDrawnThisDrawStep;
     private int numCardsInHandStartedThisTurnWith;
@@ -1194,6 +1195,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (gameStarted) {
             Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
             repParams.put(AbilityKey.Cause, cause);
+            repParams.put(AbilityKey.ExtraDraws, numExtraDrawnThisTurn);
             if (params != null) {
                 repParams.putAll(params);
             }
@@ -1223,7 +1225,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             // CR 121.6c additional actions can't be performed when draw gets replaced
             // but "drawn this way" effects should still count them
-            if (cause != null && cause.hasParam("RememberDrawn") && cause.getParam("RememberDrawn").equals("AllReplaced")) {
+            if (cause != null && "AllReplaced".equals(cause.getParam("RememberDrawn"))) {
                 cause.getHostCard().addRemembered(drawn);
             }
 
@@ -1238,8 +1240,12 @@ public class Player extends GameEntity implements Comparable<Player> {
                 setLastDrawnCard(c);
                 c.setDrawnThisTurn(true);
                 numDrawnThisTurn++;
+                numExtraDrawnThisTurn++;
                 if (game.getPhaseHandler().is(PhaseType.DRAW)) {
                     numDrawnThisDrawStep++;
+                    if (numDrawnThisDrawStep == 1) {
+                        numExtraDrawnThisTurn--;
+                    }
                 }
                 view.updateNumDrawnThisTurn(this);
 
@@ -1273,6 +1279,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void resetNumDrawnThisTurn() {
         numDrawnThisTurn = 0;
+        numExtraDrawnThisTurn = 0;
         view.updateNumDrawnThisTurn(this);
     }
 
