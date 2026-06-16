@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Legendary Creature Mutant Hero
 PT:2/1
 K:Evolve
-A:AB$ Pump | Cost$ Cost$ SubCounter<2/P1P1> | KW$ Indestructible | Defined$ Self | SpellDescription$ He gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy him.)
+A:AB$ Pump | Cost$ SubCounter<2/P1P1> | KW$ Indestructible | Defined$ Self | SpellDescription$ He gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy him.)
 DeckHas:Ability$Counters
 Oracle:Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\nRemove two +1/+1 counters from NICKNAME: He gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy him.)
