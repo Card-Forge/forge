@@ -1,0 +1,11 @@
+Name:Justice, Vance Astrovik
+ManaCost:2 U
+Types:Legendary Creature Mutant Hero
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME enters, return up to one target nonland, nontoken permanent to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+!token | ValidTgtDesc$ nonland, nontoken permanent | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Permanent.Other+nonLand+YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever another nonland permanent you control is returned to its owner's hand, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWhen Justice enters, return up to one target nonland, nontoken permanent to its owner's hand.\nWhenever another nonland permanent you control is returned to its owner's hand, put a +1/+1 counter on Justice.
