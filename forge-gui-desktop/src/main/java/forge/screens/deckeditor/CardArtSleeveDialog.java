@@ -180,6 +180,7 @@ public final class CardArtSleeveDialog {
                 container, ImmutableList.of(localizer.getMessage("lblOK"), localizer.getMessage("lblCancel")), 0);
         grid.addDoubleClickListener(pc -> optionPane.setResult(0));
 
+        optionPane.setDefaultFocus(txtSearch);
         optionPane.setVisible(true);
         final int result = optionPane.getResult();
         final PaperCard selected = grid.getSelected();
@@ -194,14 +195,17 @@ public final class CardArtSleeveDialog {
     }
 
     /**
-     * Paints the cover-cropped card-art sleeve on a black backing for the highlighted printing, and
-     * lets the user drag along the slack axis to reposition the crop. Cover-crops the full-resolution
-     * art live on paint (offset 0 = left/top edge, 1000 = right/bottom, 500 = centre); no built crop is
-     * baked per drag.
+     * Paints the highlighted printing as it will appear on the sleeve — cover-cropped and framed
+     * identically to {@link ImageCache#getSleeveArtCropped} — and lets the user drag along the slack
+     * axis to reposition the crop. Cover-crops the full-resolution art live on paint (offset 0 =
+     * left/top edge, 1000 = right/bottom, 500 = centre); no cropped image is built per drag.
      */
     private static final class SleevePreviewPanel extends JPanel {
         private static final long serialVersionUID = 1L;
-        private static final int MARGIN = 10;
+        // mirror the dark frame baked into the rendered sleeve (ImageCache.cropToCardAspect) at the
+        // same fraction so the preview frames and crops identically to the real sleeve
+        private static final Color SLEEVE_ART_BORDER = new Color(38, 37, 38);
+        private static final double SLEEVE_ART_BORDER_FRACTION = 0.04;
         private final double aspect = ImageCache.sleeveAspect();
         private String key;
         private BufferedImage art; // full, uncropped art-crop
@@ -213,7 +217,7 @@ public final class CardArtSleeveDialog {
         SleevePreviewPanel() {
             setOpaque(false);
             final int w = PREVIEW_W - 56;
-            final int h = (int) Math.round(w / aspect) + 2 * MARGIN;
+            final int h = (int) Math.round(w / aspect);
             final Dimension d = new Dimension(w, h);
             setPreferredSize(d);
             setMinimumSize(d);
@@ -228,7 +232,7 @@ public final class CardArtSleeveDialog {
                     if (art == null) {
                         return;
                     }
-                    final int travel = horizontalSlack ? getWidth() - 2 * MARGIN : getHeight() - 2 * MARGIN;
+                    final int travel = horizontalSlack ? getWidth() : getHeight();
                     if (travel <= 0) {
                         return;
                     }
@@ -279,21 +283,24 @@ public final class CardArtSleeveDialog {
             final int w = getWidth();
             final int h = getHeight();
             final Graphics2D g2 = (Graphics2D) g.create();
-            g2.setColor(Color.BLACK);
+            g2.setColor(SLEEVE_ART_BORDER);
             g2.fillRect(0, 0, w, h);
             if (art != null) {
                 g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
                 g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-                final int destW = w - 2 * MARGIN;
-                final int destH = h - 2 * MARGIN;
-                final double scale = Math.max((double) destW / art.getWidth(), (double) destH / art.getHeight());
+                final double scale = Math.max((double) w / art.getWidth(), (double) h / art.getHeight());
                 final int scaledW = (int) Math.round(art.getWidth() * scale);
                 final int scaledH = (int) Math.round(art.getHeight() * scale);
                 final double f = offset / 1000.0;
-                final int drawX = MARGIN - (int) Math.round((scaledW - destW) * f);
-                final int drawY = MARGIN - (int) Math.round((scaledH - destH) * f);
-                g2.setClip(MARGIN, MARGIN, destW, destH);
+                final int drawX = -(int) Math.round((scaledW - w) * f);
+                final int drawY = -(int) Math.round((scaledH - h) * f);
                 g2.drawImage(art, drawX, drawY, scaledW, scaledH, null);
+                final int bw = Math.max(1, (int) Math.round(Math.min(w, h) * SLEEVE_ART_BORDER_FRACTION));
+                g2.setColor(SLEEVE_ART_BORDER);
+                g2.fillRect(0, 0, w, bw);
+                g2.fillRect(0, h - bw, w, bw);
+                g2.fillRect(0, 0, bw, h);
+                g2.fillRect(w - bw, 0, bw, h);
             }
             g2.dispose();
         }
