@@ -1,0 +1,12 @@
+Name:Doombot Harbinger
+ManaCost:2 B
+Types:Artifact Creature Robot Villain
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, you may mill four cards. (You may put the top four cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You | Optional$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigImmediateTrig | TriggerDescription$ When this creature dies, you may exile this card. When you do, return target creature card from your graveyard to your hand.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ ExileAnyGrave<1/Card.TriggeredNewCard> | Execute$ TrigChangeZone | TriggerDescription$ When you do, return target creature card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | ValidTgtsDesc$ creature card in your graveyard
+DeckHas:Ability$Mill|Graveyard
+Oracle:Flying\nWhen this creature enters, you may mill four cards. (You may put the top four cards of your library into your graveyard.)\nWhen this creature dies, you may exile this card. When you do, return target creature card from your graveyard to your hand.

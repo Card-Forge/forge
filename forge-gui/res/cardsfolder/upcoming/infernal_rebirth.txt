@@ -1,7 +1,7 @@
 Name:Infernal Rebirth
 ManaCost:3 B
 Types:Instant
-A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | ValidTgtDesc$ creature card in your graveyard | TargetMin$ 1 | TargetMax$ 2 | SpellDescription$ Return one or two target creature cards from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | ValidTgtsDesc$ creature card in your graveyard | TargetMin$ 1 | TargetMax$ 2 | SpellDescription$ Return one or two target creature cards from your graveyard to your hand.
 K:TypeCycling:Basic:2
 DeckHas:Ability$Graveyard
 Oracle:Return one or two target creature cards from your graveyard to your hand.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

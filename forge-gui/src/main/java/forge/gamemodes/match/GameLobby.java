@@ -42,15 +42,11 @@ public abstract class GameLobby implements IHasGameType {
 
     private IUpdateable listener;
 
-    private final boolean allowNetworking;
     private HostedMatch hostedMatch;
     private final HashMap<LobbySlot, IGameController> gameControllers = Maps.newHashMap();
-    protected GameLobby(final boolean allowNetworking) {
-        this.allowNetworking = allowNetworking;
-    }
 
-    public final boolean isAllowNetworking() {
-        return allowNetworking;
+    public boolean isAllowNetworking() {
+        return true;
     }
 
     public final boolean isMatchActive() {
@@ -171,8 +167,8 @@ public abstract class GameLobby implements IHasGameType {
 
     public void addSlot() {
         final int newIndex = getNumberOfSlots();
-        final LobbySlotType type = allowNetworking ? LobbySlotType.OPEN : LobbySlotType.AI;
-        addSlot(new LobbySlot(type, null, newIndex, newIndex, newIndex, false, !allowNetworking, Collections.emptySet()));
+        final LobbySlotType type = isAllowNetworking() ? LobbySlotType.OPEN : LobbySlotType.AI;
+        addSlot(new LobbySlot(type, null, newIndex, newIndex, newIndex, false, !isAllowNetworking(), Collections.emptySet()));
     }
     protected final void addSlot(final LobbySlot slot) {
         if (slot == null) {

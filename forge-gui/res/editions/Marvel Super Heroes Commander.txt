@@ -343,6 +343,7 @@ ScryfallCode=MSC
 335 R Titan of Littjara @Néstor Ossandón Leal ${"flavorName": "Lady Loki's Manifestation"}
 336 R Lockjaw, Slobbering Teleporter @Thomas Chamberlain-Keen
 337 R Spark Double @Immanuela Crovius ${"flavorName": "Loki's Double"}
+338 R Professor Hulk @Leroy Steinmann
 339 R Quantum Misalignment @Alexander Skripnikov
 340 R Raise the Palisade @Arthur Yuan ${"flavorName": "Raise the Repulsor Shields"}
 341 R Recurring Insight @Gintas Galvanauskas
@@ -358,6 +359,7 @@ ScryfallCode=MSC
 351 R Kindred Dominance @Lordigan
 352 R Klaw, Master of Sound @Ioannis Fiore
 353 R Lethal Scheme @Néstor Ossandón Leal
+354 R Toxic Deluge @Anthony Devine
 355 R Abomination, World Ravager @Pavel Kolomeyets
 356 R Alicia Masters, Skilled Sculptor @Erion Makuo
 357 R Batroc the Leaper @Lucio Parrillo

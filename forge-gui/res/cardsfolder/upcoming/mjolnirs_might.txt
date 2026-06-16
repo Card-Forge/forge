@@ -6,4 +6,4 @@ SVar:DBExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Rem
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | Duration$ UntilTheEndOfYourNextTurn | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play that card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Mjölnir’s Might deals 4 damage to target player.\nExile the top card of your library. Until the end of your next turn, you may play that card.
+Oracle:Mjölnir's Might deals 4 damage to target player.\nExile the top card of your library. Until the end of your next turn, you may play that card.

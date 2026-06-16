@@ -90,10 +90,10 @@ public class PlayerPanel extends FContainer {
     private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstOathbreakerDecks, lstTinyLeadersDecks, lstBrawlDecks, lstPlanarDecks;
     private final FVanguardChooser lstVanguardAvatars;
 
-    public PlayerPanel(final LobbyScreen screen0, final boolean allowNetworking0, final int index0, final LobbySlot slot, final boolean mayEdit0, final boolean mayControl0) {
+    public PlayerPanel(final LobbyScreen screen0, final int index0, final LobbySlot slot, final boolean mayEdit0, final boolean mayControl0) {
         super();
         screen = screen0;
-        allowNetworking = allowNetworking0;
+        allowNetworking = screen.getLobby().isAllowNetworking();
         if (allowNetworking) {
             humanAiSwitch = new FToggleSwitch(Forge.getLocalizer().getMessage("lblNotReady"), Forge.getLocalizer().getMessage("lblReady"));
         }
@@ -614,7 +614,7 @@ public class PlayerPanel extends FContainer {
                     selectCardArtSleeve();
                     return;
                 }
-                SleevesSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), result -> {
+                SleeveSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), result -> {
                     setSleeveIndex(result);
 
                     if (index < 2) {
@@ -966,7 +966,7 @@ public class PlayerPanel extends FContainer {
             setSleeve(Integer.parseInt(currentPrefs[index]), artKey, artOffset);
         }
         else {
-            setSleeveIndex(SleevesSelector.getRandomSleeves(screen.getUsedSleeves()));
+            setSleeveIndex(SleeveSelector.getRandomSleeves(screen.getUsedSleeves()));
         }
         sleeveLabel.setCommand(sleeveCommand);
     }
