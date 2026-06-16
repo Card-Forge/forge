@@ -1,0 +1,12 @@
+Name:Bast, Panther Goddess
+ManaCost:2 G W
+Types:Legendary Creature Cat God
+PT:4/4
+K:Reach
+K:Trample
+K:Indestructible
+S:Mode$ CantAttack,CantBlock | ValidCard$ Card.Self | IsPresent$ Creature.YouCtrl | PresentCompare$ LE2 | Description$ NICKNAME can't attack or block unless you control three or more creatures.
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target attacking creature gets +X/+X until end of turn, where X is the number of creatures you control.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking | ValidTgtDesc$ attacking creature | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Reach, trample, indestructible\nBast can't attack or block unless you control three or more creatures.\nWhenever you attack, target attacking creature gets +X/+X until end of turn, where X is the number of creatures you control.
