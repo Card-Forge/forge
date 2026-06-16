@@ -4,7 +4,7 @@ Types:Legendary Creature Alien Human Hero
 PT:2/2
 K:Flying
 K:Haste
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDamageAll | TriggerDescription$ When NICKNAME dies, he deals damage equal to his power to each creature.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When NICKNAME dies, he deals damage equal to his power to each creature.
 SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature | NumDmg$ X | ValidDescription$ each creature.
 A:AB$ Discard | Cost$ 4 R R | Defined$ You | Mode$ Hand | SubAbility$ DBDraw | PowerUp$ True | SpellDescription$ Discard your hand, then draw three cards. Put two +1/+1 counters on NICKNAME. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBPutCounter
