@@ -40,7 +40,7 @@ public class ActivationTable extends ForwardingTable<SpellAbility, Optional<Stat
         if (original != null) {
             Optional<StaticAbility> st = Optional.ofNullable(root.getGrantorStatic());
 
-            Multiset<Player> activators = Objects.requireNonNullElse(get(original, st), HashMultiset.create());
+            Multiset<Player> activators = Objects.requireNonNullElseGet(get(original, st), HashMultiset::create);
             activators.add(sa.getActivatingPlayer());
             delegate().put(original, st, activators);
         }
