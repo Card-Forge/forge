@@ -57,7 +57,7 @@ public class Archipelago {
         return APClient.checkLocations(ids);
     }
 
-    public void goal(Long id) {
+    public void goal() {
         APClient.setGameState(ClientStatus.CLIENT_GOAL);
     }
 

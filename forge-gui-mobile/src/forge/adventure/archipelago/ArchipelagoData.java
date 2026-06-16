@@ -80,7 +80,8 @@ public class ArchipelagoData implements SaveFileContent {
         COLORLESS_TOWN_QUESTS, WHITE_TOWN_QUESTS, BLUE_TOWN_QUESTS, BLACK_TOWN_QUESTS, RED_TOWN_QUESTS, GREEN_TOWN_QUESTS,
         COLORLESS_TOWN_EVENTS, WHITE_TOWN_EVENTS, BLUE_TOWN_EVENTS, BLACK_TOWN_EVENTS, RED_TOWN_EVENTS, GREEN_TOWN_EVENTS,
         TOTAL_CARDS_EARNED,
-        MINIBOSS_DEFEATED,
+        SLIME_MOTHER_DEFEATED, SLOBAD_DEFEATED, XIRA_DEFEATED, NAHIRI_DEFEATED, VALYX_DEFEATED, JACE_DEFEATED, KIORA_DEFEATED, MYR_SUPERION_DEFEATED, SLIVER_QUEEN_DEFEATED, TEFERI_DEFEATED, GROLNOK_DEFEATED, GUARDIAN_ANGEL_DEFEATED,
+        LILIANA_DEFEATED, SLIMEFOOT_DEFEATED, SORIN_DEFEATED, CHANDRA_DEFEATED, TIBALTS_TORTURER_DEFEATED, TIBALT_DEFEATED, ZEDRUUS_COOK_DEFEATED, CONJURER_DEFEATED, ZEDRUU_DEFEATED, GARRUK_DEFEATED, HYDRA_OF_SHANDALAAR_DEFEATED, SCARECROW_CAPTAIN_DEFEATED,
         BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED,
         WIN_CONDITION_CLEARED};
 
@@ -246,115 +247,169 @@ public class ArchipelagoData implements SaveFileContent {
                     }
                 }
             }
-            case COLORLESS_TOWN_QUESTS -> {
-                if (networkedAP) {
-                    // Todo: Signal the APWorld that the next quest location is triggered
-                } else {
-                    handleTownQuestDone(colorlessCompletedTownQuests);
-                }
-            }
-            case WHITE_TOWN_QUESTS -> {
-                if (networkedAP) {
-                    // Todo: Signal the APWorld that the next quest location is triggered
-                } else {
-                    handleTownQuestDone(whiteCompletedTownQuests);
-                }
-            }
-            case BLUE_TOWN_QUESTS -> {
-                if (networkedAP) {
-                    // Todo: Signal the APWorld that the next quest location is triggered
-                } else {
-                    handleTownQuestDone(blueCompletedTownQuests);
-                }
-            }
-            case RED_TOWN_QUESTS -> {
-                if (networkedAP) {
-                    // Todo: Signal the APWorld that the next quest location is triggered
-                } else {
-                    handleTownQuestDone(redCompletedTownQuests);
-                }
-            }
-            case GREEN_TOWN_QUESTS -> {
-                if (networkedAP) {
-                    // Todo: Signal the APWorld that the next quest location is triggered
-                } else {
-                    handleTownQuestDone(greenCompletedTownQuests);
-                }
-            }
             case COLORLESS_TOWN_EVENTS -> {
                 if (networkedAP) {
-                    // Todo: Signal the APWorld that the next event location is triggered
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (!colorlessCompletedTownInnEvents.isEmpty() && colorlessCompletedTownInnEvents.size() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(10999L + colorlessCompletedTownInnEvents.size());
+                    }
                 } else {
                     handleTownEventDone(colorlessCompletedTownInnEvents);
                 }
             }
             case WHITE_TOWN_EVENTS -> {
                 if (networkedAP) {
-                    // Todo: Signal the APWorld that the next event location is triggered
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (!whiteCompletedTownInnEvents.isEmpty() && whiteCompletedTownInnEvents.size() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(20999L + whiteCompletedTownInnEvents.size());
+                    }
                 } else {
                     handleTownEventDone(whiteCompletedTownInnEvents);
                 }
             }
             case BLUE_TOWN_EVENTS -> {
                 if (networkedAP) {
-                    // Todo: Signal the APWorld that the next event location is triggered
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (!blueCompletedTownInnEvents.isEmpty() && blueCompletedTownInnEvents.size() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(30999L + blueCompletedTownInnEvents.size());
+                    }
                 } else {
                     handleTownEventDone(blueCompletedTownInnEvents);
                 }
             }
             case BLACK_TOWN_EVENTS -> {
                 if (networkedAP) {
-                    // Todo: Signal the APWorld that the next event location is triggered
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (!blackCompletedTownInnEvents.isEmpty() && blackCompletedTownInnEvents.size() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(40999L + blackCompletedTownInnEvents.size());
+                    }
                 } else {
                     handleTownEventDone(blackCompletedTownInnEvents);
                 }
             }
             case RED_TOWN_EVENTS -> {
                 if (networkedAP) {
-                    // Todo: Signal the APWorld that the next event location is triggered
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (!redCompletedTownInnEvents.isEmpty() && redCompletedTownInnEvents.size() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(50999L + redCompletedTownInnEvents.size());
+                    }
                 } else {
                     handleTownEventDone(redCompletedTownInnEvents);
                 }
             }
             case GREEN_TOWN_EVENTS -> {
                 if (networkedAP) {
-                    // Todo: Signal the APWorld that the next event location is triggered
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (!greenCompletedTownInnEvents.isEmpty() && greenCompletedTownInnEvents.size() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(60999L + greenCompletedTownInnEvents.size());
+                    }
                 } else {
                     handleTownEventDone(greenCompletedTownInnEvents);
                 }
             }
-            case MINIBOSS_DEFEATED -> {
-                // Todo: Do something for the local randomizer
-                // Todo: Signal the APWorld that the miniboss is defeated
+            case COLORLESS_TOWN_QUESTS -> {
+                if (networkedAP) {
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (!colorlessCompletedTownQuests.isEmpty() && colorlessCompletedTownQuests.size() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(11999L + colorlessCompletedTownQuests.size());
+                    }
+                } else {
+                    handleTownQuestDone(colorlessCompletedTownQuests);
+                }
             }
-            case BOSS_WHITE_DEFEATED -> {
-                // Todo: Do something for the local randomizer
-                // Todo: Signal the APWorld that the boss is defeated
+            case WHITE_TOWN_QUESTS -> {
+                if (networkedAP) {
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (!whiteCompletedTownQuests.isEmpty() && whiteCompletedTownQuests.size() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(21999L + whiteCompletedTownQuests.size());
+                    }
+                } else {
+                    handleTownQuestDone(whiteCompletedTownQuests);
+                }
             }
-            case BOSS_BLUE_DEFEATED -> {
-                // Todo: Do something for the local randomizer
-                // Todo: Signal the APWorld that the boss is defeated
+            case BLUE_TOWN_QUESTS -> {
+                if (networkedAP) {
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (!blueCompletedTownQuests.isEmpty() && blueCompletedTownQuests.size() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(31999L + blueCompletedTownQuests.size());
+                    }
+                } else {
+                    handleTownQuestDone(blueCompletedTownQuests);
+                }
             }
-            case BOSS_BLACK_DEFEATED -> {
-                // Todo: Do something for the local randomizer
-                // Todo: Signal the APWorld that the boss is defeated
+            case BLACK_TOWN_QUESTS -> {
+                if (networkedAP) {
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (!blackCompletedTownQuests.isEmpty() && blackCompletedTownQuests.size() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(41999L + blackCompletedTownQuests.size());
+                    }
+                } else {
+                    handleTownQuestDone(redCompletedTownQuests);
+                }
             }
-            case BOSS_RED_DEFEATED -> {
-                // Todo: Do something for the local randomizer
-                // Todo: Signal the APWorld that the boss is defeated
+            case RED_TOWN_QUESTS -> {
+                if (networkedAP) {
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (!redCompletedTownQuests.isEmpty() && redCompletedTownQuests.size() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(51999L + redCompletedTownQuests.size());
+                    }
+                } else {
+                    handleTownQuestDone(redCompletedTownQuests);
+                }
             }
-            case BOSS_GREEN_DEFEATED -> {
-                // Todo: Do something for the local randomizer
-                // Todo: Signal the APWorld that the boss is defeated
+            case GREEN_TOWN_QUESTS -> {
+                if (networkedAP) {
+                    if (slotData == null) {
+                        System.err.print("SlotData was null somehow. Should be impossible.");
+                    } else if (!greenCompletedTownQuests.isEmpty() && greenCompletedTownQuests.size() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(61999L + greenCompletedTownQuests.size());
+                    }
+                } else {
+                    handleTownQuestDone(greenCompletedTownQuests);
+                }
             }
-            case BOSS_COLORLESS_DEFEATED -> {
-                // Todo: Do something for the local randomizer
-                // Todo: Signal the APWorld that the boss is defeated
-            }
-            case  WIN_CONDITION_CLEARED -> {
-                // Todo: Do something for the local randomizer
-                // Todo: Signal the APWorld that the win condition is reached
-            }
+            case SLIME_MOTHER_DEFEATED -> Archipelago.getInstance().checkLocation(100L);
+            case SLOBAD_DEFEATED -> Archipelago.getInstance().checkLocation(101L);
+            case XIRA_DEFEATED -> Archipelago.getInstance().checkLocation(102L);
+            case NAHIRI_DEFEATED -> Archipelago.getInstance().checkLocation(200L);
+            case VALYX_DEFEATED -> Archipelago.getInstance().checkLocation(201L);
+            case JACE_DEFEATED -> Archipelago.getInstance().checkLocation(300L);
+            case KIORA_DEFEATED -> Archipelago.getInstance().checkLocation(301L);
+            case MYR_SUPERION_DEFEATED -> Archipelago.getInstance().checkLocation(302L);
+            case SLIVER_QUEEN_DEFEATED -> Archipelago.getInstance().checkLocation(303L);
+            case TEFERI_DEFEATED -> Archipelago.getInstance().checkLocation(304L);
+            case GROLNOK_DEFEATED -> Archipelago.getInstance().checkLocation(400L);
+            case GUARDIAN_ANGEL_DEFEATED -> Archipelago.getInstance().checkLocation(401L);
+            case LILIANA_DEFEATED -> Archipelago.getInstance().checkLocation(402L);
+            case SLIMEFOOT_DEFEATED -> Archipelago.getInstance().checkLocation(403L);
+            case SORIN_DEFEATED -> Archipelago.getInstance().checkLocation(404L);
+            case CHANDRA_DEFEATED -> Archipelago.getInstance().checkLocation(500L);
+            case TIBALTS_TORTURER_DEFEATED -> Archipelago.getInstance().checkLocation(501L);
+            case TIBALT_DEFEATED -> Archipelago.getInstance().checkLocation(502L);
+            case ZEDRUUS_COOK_DEFEATED -> Archipelago.getInstance().checkLocation(503L);
+            case CONJURER_DEFEATED -> Archipelago.getInstance().checkLocation(504L);
+            case ZEDRUU_DEFEATED -> Archipelago.getInstance().checkLocation(505L);
+            case GARRUK_DEFEATED -> Archipelago.getInstance().checkLocation(600L);
+            case HYDRA_OF_SHANDALAAR_DEFEATED -> Archipelago.getInstance().checkLocation(601L);
+            case SCARECROW_CAPTAIN_DEFEATED -> Archipelago.getInstance().checkLocation(602L);
+            case BOSS_COLORLESS_DEFEATED -> Archipelago.getInstance().checkLocation(1L);
+            case BOSS_WHITE_DEFEATED -> Archipelago.getInstance().checkLocation(2L);
+            case BOSS_BLUE_DEFEATED -> Archipelago.getInstance().checkLocation(3L);
+            case BOSS_BLACK_DEFEATED -> Archipelago.getInstance().checkLocation(4L);
+            case BOSS_RED_DEFEATED -> Archipelago.getInstance().checkLocation(5L);
+            case BOSS_GREEN_DEFEATED -> Archipelago.getInstance().checkLocation(6L);
+            case WIN_CONDITION_CLEARED -> Archipelago.getInstance().goal();
         }
     }
 
@@ -506,9 +561,34 @@ public class ArchipelagoData implements SaveFileContent {
     // Note that the name of a boss is not unique so we'll need to filter from all enemies which have a `boss` value of `true`.
     // Returns `true` if the boss was not already defeated before.
     public boolean addMiniBossDefeated(String miniBossName) {
-        boolean result = miniBossesDefeatedByName.add(miniBossName);
-        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.MINIBOSS_DEFEATED);
-        System.out.println("FORGE_ARCHIPELAGO: DETECTED MINI BOSS DEFEATED: " + miniBossName);
+        boolean result = miniBossesDefeatedByName.add(miniBossName.toLowerCase());
+        switch (miniBossName.toLowerCase()) {
+            case "the mother slime" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.SLIME_MOTHER_DEFEATED);
+            case "slobad" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.SLOBAD_DEFEATED);
+            case "xira" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.XIRA_DEFEATED);
+            case "nahiri" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.NAHIRI_DEFEATED);
+            case "valyx feaster of torment" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.VALYX_DEFEATED);
+            case "jace" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.JACE_DEFEATED);
+            case "kiora" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.KIORA_DEFEATED);
+            case "myr superion" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.MYR_SUPERION_DEFEATED);
+            case "sliver queen" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.SLIVER_QUEEN_DEFEATED);
+            case "teferi" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TEFERI_DEFEATED);
+            case "grolnok" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.GROLNOK_DEFEATED);
+            case "guardian angel" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.GUARDIAN_ANGEL_DEFEATED);
+            case "liliana" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.LILIANA_DEFEATED);
+            case "slimefoot" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.SLIMEFOOT_DEFEATED);
+            case "sorin" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.SORIN_DEFEATED);
+            case "chandra" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.CHANDRA_DEFEATED);
+            case "tibalt's torturer" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TIBALTS_TORTURER_DEFEATED);
+            case "tibalt" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TIBALT_DEFEATED);
+            case "zedruu's cook" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.ZEDRUUS_COOK_DEFEATED);
+            case "conjurer" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.CONJURER_DEFEATED);
+            case "zedruu" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.ZEDRUU_DEFEATED);
+            case "garruk" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.GARRUK_DEFEATED);
+            case "the hydra of shandalaar" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.HYDRA_OF_SHANDALAAR_DEFEATED);
+            case "scarecrow captain" -> updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.SCARECROW_CAPTAIN_DEFEATED);
+        }
+        System.out.println("FORGE_ARCHIPELAGO: DETECTED MINIBOSS DEFEATED: " + miniBossName);
         return result;
     }
 
