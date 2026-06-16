@@ -1,8 +1,8 @@
 Name:Bionic Blow
 ManaCost:X R R
 Types:Sorcery
-A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | NumAtt$ +X | ValidTgtDesc$ creature you control | SubAbility$ DBDamage | SpellDescription$ Target creature you control gets +X/+0 until end of turn. Then it deals damage equal to its power to up to one other target creature.
-SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TargetUnique$ True | ValidTgtDesc$ another creature | TargetMin$ 0 | TargetMax$ 1 | AILogic$ PowerDmg | NumDmg$ Y | DamageSource$ ParentTarget
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | NumAtt$ +X | ValidTgtsDesc$ creature you control | SubAbility$ DBDamage | SpellDescription$ Target creature you control gets +X/+0 until end of turn. Then it deals damage equal to its power to up to one other target creature.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TargetUnique$ True | ValidTgtsDesc$ another creature | TargetMin$ 0 | TargetMax$ 1 | AILogic$ PowerDmg | NumDmg$ Y | DamageSource$ ParentTarget
 SVar:X:Count$xPaid
 SVar:Y:ParentTargeted$CardPower
 SVar:PlayMain1:TRUE

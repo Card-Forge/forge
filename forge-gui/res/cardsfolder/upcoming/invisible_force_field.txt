@@ -1,6 +1,6 @@
 Name:Invisible Force Field
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | ValidTgts$ Permanent.YouCtrl | ValidTgtDesc$ permanent you control | TargetMin$ 0 | TargetMax$ 4 | KW$ Indestructible | SpellDescription$ Up to four target permanents you control gain indestructible until end of turn.
+A:SP$ Pump | ValidTgts$ Permanent.YouCtrl | ValidTgtsDesc$ permanent you control | TargetMin$ 0 | TargetMax$ 4 | KW$ Indestructible | SpellDescription$ Up to four target permanents you control gain indestructible until end of turn.
 K:Rebound
 Oracle:Up to four target permanents you control gain indestructible until end of turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

@@ -19,7 +19,7 @@ import forge.toolbox.FScrollPane;
 import forge.util.MyRandom;
 import forge.util.Utils;
 
-public class SleevesSelector  extends FScreen {
+public class SleeveSelector extends FScreen {
     public static int getRandomSleeves(List<Integer> usedSleeves) {
         int random = 0;
         do {
@@ -29,7 +29,7 @@ public class SleevesSelector  extends FScreen {
     }
 
     public static void show(final String playerName, final int currentIndex0, final List<Integer> usedSleeves0, final Consumer<Integer> callback0) {
-        SleevesSelector selector = new SleevesSelector(playerName, currentIndex0, usedSleeves0, callback0);
+        SleeveSelector selector = new SleeveSelector(playerName, currentIndex0, usedSleeves0, callback0);
         Forge.openScreen(selector);
     }
 
@@ -60,7 +60,7 @@ public class SleevesSelector  extends FScreen {
         }
     };
 
-    private SleevesSelector(final String playerName, final int currentIndex0, final List<Integer> usedSleeves0, final Consumer<Integer> callback0) {
+    private SleeveSelector(final String playerName, final int currentIndex0, final List<Integer> usedSleeves0, final Consumer<Integer> callback0) {
         super(Forge.getLocalizer().getMessage("lblSelectSleeveForPlayer", playerName));
 
         currentIndex = currentIndex0;

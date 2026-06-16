@@ -740,7 +740,7 @@ public class ReplacementHandler {
                                 if (shieldMap.containsKey(target) && shieldMap.get(target) > 0) {
                                     Integer dividedShieldAmount = shieldMap.get(target);
                                     runParams.put(AbilityKey.DividedShieldAmount, dividedShieldAmount);
-                                    shieldAmount -= (int) dividedShieldAmount;
+                                    shieldAmount -= dividedShieldAmount;
                                 } else {
                                     continue;
                                 }

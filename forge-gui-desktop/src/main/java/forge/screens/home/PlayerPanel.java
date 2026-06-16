@@ -113,20 +113,18 @@ public class PlayerPanel extends FPanel {
     private FDeckChooser deckChooser;
 
     private final VLobby lobby;
-    public PlayerPanel(final VLobby lobby, final boolean allowNetworking, final int index, final LobbySlot slot, final boolean mayEdit, final boolean mayControl) {
-        super();
-
+    public PlayerPanel(final VLobby lobby, final int index, final LobbySlot slot, final boolean mayEdit, final boolean mayControl) {
         this.lobby = lobby;
         this.index = index;
         this.mayEdit = mayEdit;
         this.mayControl = mayControl;
-        this.allowNetworking = allowNetworking;
+        this.allowNetworking = lobby.getLobby().isAllowNetworking();
 
         this.deckLabel = lobby.newLabel(localizer.getMessage("lblDeck") + ":");
         this.scmLabel = lobby.newLabel(localizer.getMessage("lblSchemeDeck") + ":");
         this.cmdLabel = lobby.newLabel(localizer.getMessage("lblCommanderDeck") + ":");
-        this.pchLabel =  lobby.newLabel(localizer.getMessage("lblPlanarDeck") + ":");
-        this.vgdLabel =  lobby.newLabel(localizer.getMessage("lblVanguard") + ":");
+        this.pchLabel = lobby.newLabel(localizer.getMessage("lblPlanarDeck") + ":");
+        this.vgdLabel = lobby.newLabel(localizer.getMessage("lblVanguard") + ":");
 
         setLayout(new MigLayout("insets 10px, gap 5px"));
 

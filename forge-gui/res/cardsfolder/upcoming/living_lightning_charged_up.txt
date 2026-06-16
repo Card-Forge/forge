@@ -5,5 +5,5 @@ PT:3/3
 K:Flying
 K:Haste
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, another target creature you control gets +1/+0 and gains haste until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | ValidTgtDesc$ another creature you control | NumAtt$ +1 | KW$ Haste
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | ValidTgtsDesc$ another creature you control | NumAtt$ +1 | KW$ Haste
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nHaste (This creature can attack and {T} as soon as he comes under your control.)\nAt the beginning of combat on your turn, another target creature you control gets +1/+0 and gains haste until end of turn.

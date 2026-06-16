@@ -593,6 +593,12 @@ public class CardDetailUtil {
             area.append(StringUtils.join(card.getExiledCards(), ", "));
         }
 
+        // TODO don't print both if identical
+        if (!card.getUntilLeavesBattlefield().isEmpty()) {
+            area.append("\n");
+            area.append("Exiled until this leaves the battlefield: ").append(card.getUntilLeavesBattlefield());
+        }
+
         // Haunt
         if (!card.getHauntedBy().isEmpty()) {
             area.append("\n");
@@ -608,11 +614,6 @@ public class CardDetailUtil {
         if (!card.getEncodedCards().isEmpty()) {
             area.append("\n");
             area.append("Encoded: ").append(card.getEncodedCards());
-        }
-
-        if (!card.getUntilLeavesBattlefield().isEmpty()) {
-            area.append("\n");
-            area.append("Exiled until this leaves the battlefield: ").append(card.getUntilLeavesBattlefield());
         }
 
         // must block

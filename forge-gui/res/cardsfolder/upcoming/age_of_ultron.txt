@@ -2,7 +2,7 @@ Name:Age of Ultron
 ManaCost:4 B
 Types:Enchantment Saga
 K:Chapter:3:DBDestroy,DBToken,DBPumpAll
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.nonArtifact+OppCtrl | ValidTgtDesc$ nonartifact creature each opponent controls | TargetMin$ 0 | TargetMax$ X | TargetsForEachPlayer$ True | SpellDescription$ For each opponent, destroy up to one target nonartifact creature that player controls.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.nonArtifact+OppCtrl | ValidTgtsDesc$ nonartifact creature each opponent controls | TargetMin$ 0 | TargetMax$ X | TargetsForEachPlayer$ True | SpellDescription$ For each opponent, destroy up to one target nonartifact creature that player controls.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_2_2_a_robot_villain | TokenOwner$ You | SpellDescription$ For each opponent, you create a 2/2 colorless Robot Villain artifact creature token.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.Artifact+YouCtrl | KW$ Deathtouch | SubAbility$ DBPutCounterAll | SpellDescription$ Artifact creatures you control gain deathtouch until end of turn. Put a +1/+1 counter on each of them.
 SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.Artifact+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
