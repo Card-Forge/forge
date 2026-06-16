@@ -1,0 +1,9 @@
+Name:Lady Spider, Maybelle Reilly
+ManaCost:1 R
+Types:Legendary Creature Spider Human Hero
+PT:1/3
+K:Reach
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you discard a card, put a +1/+1 counter on target Spider you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Spider.YouCtrl | ValidTgtDesc$ Spider you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$Discard & Type$Spider
+Oracle:Reach\nWhenever you discard a card, put a +1/+1 counter on target Spider you control.
