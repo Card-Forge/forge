@@ -2,21 +2,21 @@ package forge.game.card;
 
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Lists;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Table;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class ActivationTable extends ForwardingTable<SpellAbility, Optional<StaticAbility>, List<Player>> {
-    Table<SpellAbility, Optional<StaticAbility>, List<Player>> dataTable = HashBasedTable.create();
+public class ActivationTable extends ForwardingTable<SpellAbility, Optional<StaticAbility>, Multiset<Player>> {
+    Table<SpellAbility, Optional<StaticAbility>, Multiset<Player>> dataTable = HashBasedTable.create();
 
     @Override
-    protected Table<SpellAbility, Optional<StaticAbility>, List<Player>> delegate() {
+    protected Table<SpellAbility, Optional<StaticAbility>, Multiset<Player>> delegate() {
         return dataTable;
     }
 
@@ -40,20 +40,17 @@ public class ActivationTable extends ForwardingTable<SpellAbility, Optional<Stat
         if (original != null) {
             Optional<StaticAbility> st = Optional.ofNullable(root.getGrantorStatic());
 
-            List<Player> activators = get(original, st);
-            if (activators == null) {
-                activators = Lists.newArrayList();
-            }
+            Multiset<Player> activators = Objects.requireNonNullElse(get(original, st), HashMultiset.create());
             activators.add(sa.getActivatingPlayer());
             delegate().put(original, st, activators);
         }
     }
 
-    public Integer get(SpellAbility sa) {
+    public int get(SpellAbility sa) {
         return getActivators(sa).size();
     }
 
-    public List<Player> getActivators(SpellAbility sa) {
+    public Multiset<Player> getActivators(SpellAbility sa) {
         SpellAbility root = sa.getRootAbility();
         SpellAbility original = getOriginal(sa);
         Optional<StaticAbility> st = Optional.ofNullable(root.getGrantorStatic());
@@ -61,6 +58,6 @@ public class ActivationTable extends ForwardingTable<SpellAbility, Optional<Stat
         if (contains(original, st)) {
             return get(original, st);
         }
-        return Lists.newArrayList();
+        return HashMultiset.create();
     }
 }
