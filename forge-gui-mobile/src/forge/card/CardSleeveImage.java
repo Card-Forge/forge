@@ -21,7 +21,10 @@ public class CardSleeveImage implements FImage {
     private final CardAvatarImage art;
 
     public CardSleeveImage(final String imageKey) {
-        this.art = new CardAvatarImage(imageKey);
+        this(imageKey, 500);
+    }
+    public CardSleeveImage(final String imageKey, final int cropOffset) {
+        this.art = new CardAvatarImage(imageKey, cropOffset);
     }
 
     @Override

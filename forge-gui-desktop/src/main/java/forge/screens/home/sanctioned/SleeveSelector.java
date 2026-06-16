@@ -3,7 +3,7 @@ package forge.screens.home.sanctioned;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.Collection;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.swing.JLabel;
@@ -16,7 +16,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.ImageCache;
 import forge.gui.UiCommand;
 import forge.gui.WrapLayout;
-import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.CardArtSleeveDialog;
@@ -42,6 +41,7 @@ public class SleeveSelector extends FDialog {
 
     private int resultIndex = -1;
     private String resultArtKey = null;
+    private int resultOffset = 500;
 
     public SleeveSelector(final String playerName, final int currentIndex, final String currentArtKey,
             final Collection<Integer> usedIndices) {
@@ -55,8 +55,9 @@ public class SleeveSelector extends FDialog {
 
         content.add(sectionHeader(localizer.getMessage("lblCardArtSleeves")), "growx");
         pnlCardArt.setOpaque(false);
-        for (final String key : SleeveArt.parseList(FModel.getPreferences().getPref(FPref.UI_SLEEVE_ART_LIBRARY))) {
-            pnlCardArt.add(makeCardArtLabel(key));
+        for (final Map.Entry<String, Integer> entry : SleeveArt.parseLibrary(
+                FModel.getPreferences().getPref(FPref.UI_SLEEVE_ART_LIBRARY)).entrySet()) {
+            pnlCardArt.add(makeCardArtLabel(entry.getKey(), entry.getValue()));
         }
         pnlCardArt.add(makeAddTile());
         content.add(pnlCardArt, "growx");
@@ -96,6 +97,9 @@ public class SleeveSelector extends FDialog {
     public String getResultArtKey() {
         return resultArtKey;
     }
+    public int getResultOffset() {
+        return resultOffset;
+    }
 
     private static JLabel sectionHeader(final String text) {
         final JLabel lbl = new JLabel(text);
@@ -116,14 +120,15 @@ public class SleeveSelector extends FDialog {
         return lbl;
     }
 
-    private FLabel makeCardArtLabel(final String key) {
+    private FLabel makeCardArtLabel(final String key, final int offset) {
         final FLabel lbl = new FLabel.Builder().iconScaleFactor(0.95).iconAlignX(SwingConstants.CENTER)
                 .iconInBackground(true).hoverable(true).selectable(true).selected(key.equals(currentArtKey)).build();
         sizeTile(lbl);
         lbl.setToolTipText(Localizer.getInstance().getMessage("lblCardArtSleeveTip"));
-        refreshCardArtIcon(lbl, key);
+        refreshCardArtIcon(lbl, key, offset);
         lbl.setCommand((UiCommand) () -> {
             resultArtKey = key;
+            resultOffset = offset;
             setVisible(false);
         });
         lbl.setRightClickCommand((UiCommand) () -> removeCardArt(key, lbl));
@@ -137,36 +142,37 @@ public class SleeveSelector extends FDialog {
         lbl.setMinimumSize(size);
     }
 
-    private void refreshCardArtIcon(final FLabel lbl, final String key) {
-        final BufferedImage art = ImageCache.getSleeveArtCropped(key);
+    private void refreshCardArtIcon(final FLabel lbl, final String key, final int offset) {
+        final BufferedImage art = ImageCache.getSleeveArtCropped(key, offset);
         if (art != null) {
             lbl.setIcon(new FSkin.UnskinnedIcon(art));
             lbl.repaintSelf();
         } else {
-            ImageCache.fetchSleeveArt(key, () -> refreshCardArtIcon(lbl, key));
+            ImageCache.fetchSleeveArt(key, () -> refreshCardArtIcon(lbl, key, offset));
         }
     }
 
     private void addCardArt() {
-        final PaperCard chosen = CardArtSleeveDialog.show();
+        final CardArtSleeveDialog.Result chosen = CardArtSleeveDialog.show();
         if (chosen == null) {
             return;
         }
-        final String key = chosen.getImageKey(false);
-        final List<String> library = SleeveArt.parseList(FModel.getPreferences().getPref(FPref.UI_SLEEVE_ART_LIBRARY));
-        if (!library.contains(key)) {
-            library.add(key);
-            FModel.getPreferences().setPref(FPref.UI_SLEEVE_ART_LIBRARY, SleeveArt.formatList(library));
-            FModel.getPreferences().save();
-        }
+        final String key = chosen.card.getImageKey(false);
+        final LinkedHashMap<String, Integer> library = SleeveArt.parseLibrary(
+                FModel.getPreferences().getPref(FPref.UI_SLEEVE_ART_LIBRARY));
+        library.put(key, chosen.offset); // overwrite any prior framing for this art
+        FModel.getPreferences().setPref(FPref.UI_SLEEVE_ART_LIBRARY, SleeveArt.formatLibrary(library));
+        FModel.getPreferences().save();
         resultArtKey = key;
+        resultOffset = chosen.offset;
         setVisible(false);
     }
 
     private void removeCardArt(final String key, final FLabel lbl) {
-        final List<String> library = SleeveArt.parseList(FModel.getPreferences().getPref(FPref.UI_SLEEVE_ART_LIBRARY));
+        final LinkedHashMap<String, Integer> library = SleeveArt.parseLibrary(
+                FModel.getPreferences().getPref(FPref.UI_SLEEVE_ART_LIBRARY));
         library.remove(key);
-        FModel.getPreferences().setPref(FPref.UI_SLEEVE_ART_LIBRARY, SleeveArt.formatList(library));
+        FModel.getPreferences().setPref(FPref.UI_SLEEVE_ART_LIBRARY, SleeveArt.formatLibrary(library));
         FModel.getPreferences().save();
         pnlCardArt.remove(lbl);
         pnlCardArt.revalidate();

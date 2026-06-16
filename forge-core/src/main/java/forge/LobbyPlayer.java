@@ -16,6 +16,7 @@ public abstract class LobbyPlayer {
     private int sleeveIndex = -1;
     private String avatarCardImageKey;
     private String sleeveArtKey = "";
+    private int sleeveArtOffset = 500;
 
     public LobbyPlayer(String name) {
         this.name = name;
@@ -82,6 +83,14 @@ public abstract class LobbyPlayer {
     }
     public void setSleeveArtKey(String sleeveArtKey0) {
         this.sleeveArtKey = sleeveArtKey0 == null ? "" : sleeveArtKey0;
+    }
+
+    // crop offset along the slack axis for a card-art sleeve; ignored for built-in sleeves
+    public int getSleeveArtOffset() {
+        return sleeveArtOffset;
+    }
+    public void setSleeveArtOffset(int sleeveArtOffset0) {
+        this.sleeveArtOffset = sleeveArtOffset0;
     }
 
     public abstract void hear(LobbyPlayer player, String message);

@@ -170,7 +170,7 @@ public class MatchController extends NetworkGuiGame {
             return FSkinImage.UNKNOWN;
         final String artKey = p.getSleeveArtKey();
         if (!StringUtils.isEmpty(artKey)) {
-            return new CardSleeveImage(artKey); // card-art sleeve: cover-cropped to the sleeve aspect
+            return new CardSleeveImage(artKey, p.getSleeveArtOffset()); // card-art sleeve: cover-cropped to the sleeve aspect
         }
         return new FTextureRegionImage(FSkin.getSleeves().get(p.getSleeveIndex()));
     }

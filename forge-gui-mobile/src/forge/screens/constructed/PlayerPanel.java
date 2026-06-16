@@ -3,6 +3,7 @@ package forge.screens.constructed;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -69,6 +70,7 @@ public class PlayerPanel extends FContainer {
     private final FLabel sleeveLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).selectable().alphaComposite(1).iconInBackground(true).build();
     private int avatarIndex, sleeveIndex;
     private String sleeveArtKey = "";
+    private int sleeveArtOffset = 500;
     private final FTextField txtPlayerName = new FTextField(Forge.getLocalizer().getMessage("lblPlayerName"));
     private final FToggleSwitch humanAiSwitch;
     private final FToggleSwitch devModeSwitch;
@@ -508,7 +510,7 @@ public class PlayerPanel extends FContainer {
                 //update may edit in-case it changed as a result of the AI change
                 setMayEdit(screen.getLobby().mayEdit(index));
                 setAvatarIndex(slot.getAvatarIndex());
-                setSleeve(slot.getSleeveIndex(), slot.getSleeveArtKey());
+                setSleeve(slot.getSleeveIndex(), slot.getSleeveArtKey(), slot.getSleeveArtOffset());
                 setPlayerName(slot.getName());
             }
         }
@@ -646,18 +648,21 @@ public class PlayerPanel extends FContainer {
 
     private void applyCardArtSleeve(final PaperCard card) {
         final String key = card.getImageKey(false);
-        setSleeveArtKey(key);
-        sleeveLabel.setIcon(new CardSleeveImage(key));
-
-        final List<String> library = SleeveArt.parseList(
+        // mobile has no crop-drag UI; reuse any framing already saved for this art, else centre
+        final LinkedHashMap<String, Integer> library = SleeveArt.parseLibrary(
                 FModel.getPreferences().getPref(ForgePreferences.FPref.UI_SLEEVE_ART_LIBRARY));
-        if (!library.contains(key)) {
-            library.add(key);
-            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_SLEEVE_ART_LIBRARY, SleeveArt.formatList(library));
+        final int offset = library.getOrDefault(key, SleeveArt.DEFAULT_OFFSET);
+        setSleeveArtKey(key);
+        sleeveArtOffset = offset;
+        sleeveLabel.setIcon(new CardSleeveImage(key, offset));
+
+        if (!library.containsKey(key)) {
+            library.put(key, offset);
+            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_SLEEVE_ART_LIBRARY, SleeveArt.formatLibrary(library));
             FModel.getPreferences().save();
         }
         if (index < 2) {
-            screen.updateSleeveArt(index, key);
+            screen.updateSleeveArt(index, key, offset);
         }
         if (allowNetworking) {
             screen.firePlayerChangeListener(index);
@@ -665,11 +670,12 @@ public class PlayerPanel extends FContainer {
     }
 
     /** Applies a sleeve from slot data: built-in index, then card-art key (with its icon) if present. */
-    public void setSleeve(final int index, final String artKey) {
+    public void setSleeve(final int index, final String artKey, final int artOffset) {
         setSleeveIndex(index);
         if (artKey != null && !artKey.isEmpty()) {
             setSleeveArtKey(artKey);
-            sleeveLabel.setIcon(new CardSleeveImage(artKey));
+            sleeveArtOffset = artOffset;
+            sleeveLabel.setIcon(new CardSleeveImage(artKey, artOffset));
         }
     }
 
@@ -955,8 +961,9 @@ public class PlayerPanel extends FContainer {
         String[] currentPrefs = prefs.getPref(FPref.UI_SLEEVES).split(",");
         String[] artPrefs = prefs.getPref(FPref.UI_SLEEVE_ART_KEYS).split(",", -1);
         String artKey = index < artPrefs.length ? SleeveArt.decode(artPrefs[index]) : "";
+        int artOffset = SleeveArt.offsetForKey(prefs.getPref(FPref.UI_SLEEVE_ART_LIBRARY), artKey);
         if (index < currentPrefs.length) {
-            setSleeve(Integer.parseInt(currentPrefs[index]), artKey);
+            setSleeve(Integer.parseInt(currentPrefs[index]), artKey, artOffset);
         }
         else {
             setSleeveIndex(SleevesSelector.getRandomSleeves(screen.getUsedSleeves()));
@@ -977,6 +984,7 @@ public class PlayerPanel extends FContainer {
     public void setSleeveIndex(int newSleeveIndex) {
         sleeveIndex = newSleeveIndex;
         sleeveArtKey = ""; // picking a built-in sleeve clears any card-art sleeve
+        sleeveArtOffset = 500;
         if (sleeveIndex != -1) {
             sleeveLabel.setIcon(new FTextureRegionImage(FSkin.getSleeves().get(newSleeveIndex)));
         }
@@ -998,6 +1006,10 @@ public class PlayerPanel extends FContainer {
     }
     public void setSleeveArtKey(String key) {
         sleeveArtKey = key == null ? "" : key;
+    }
+
+    public int getSleeveArtOffset() {
+        return sleeveArtOffset;
     }
 
     public void setPlayerName(String string) {

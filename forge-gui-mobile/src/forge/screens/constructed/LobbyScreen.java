@@ -643,7 +643,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 if (type != LobbySlotType.AI) {
                     panel.setPlayerName(slot.getName());
                     panel.setAvatarIndex(slot.getAvatarIndex());
-                    panel.setSleeve(slot.getSleeveIndex(), slot.getSleeveArtKey());
+                    panel.setSleeve(slot.getSleeveIndex(), slot.getSleeveArtKey(), slot.getSleeveArtOffset());
                 } else {
                     //AI: this one overrides the setplayername if blank
                     if (panel.getPlayerName().isEmpty())
@@ -652,6 +652,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     slot.setAvatarIndex(panel.getAvatarIndex());
                     slot.setSleeveIndex(panel.getSleeveIndex());
                     slot.setSleeveArtKey(panel.getSleeveArtKey());
+                    slot.setSleeveArtOffset(panel.getSleeveArtOffset());
                 }
                 panel.setTeam(slot.getTeam());
                 panel.setIsReady(slot.isReady());
@@ -821,9 +822,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
     }
 
-    void updateSleeveArt(final int index, final String key) {
+    void updateSleeveArt(final int index, final String key, final int offset) {
         if (playerChangeListener != null) {
-            playerChangeListener.update(index, UpdateLobbyPlayerEvent.sleeveArtUpdate(key));
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.sleeveArtUpdate(key, offset));
         }
     }
 
@@ -899,6 +900,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 panel.getAvatarIndex(),
                 panel.getSleeveIndex(),
                 panel.getSleeveArtKey(),
+                panel.getSleeveArtOffset(),
                 panel.getTeam(),
                 panel.isArchenemy(),
                 panel.isDevMode(),

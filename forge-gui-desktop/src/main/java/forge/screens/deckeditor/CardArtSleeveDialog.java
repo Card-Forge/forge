@@ -3,10 +3,14 @@ package forge.screens.deckeditor;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -38,6 +42,7 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.special.CardImageGrid;
 import forge.util.Localizer;
+import forge.util.SleeveArt;
 
 /**
  * Master-detail picker for a card-art deck sleeve: a searchable card-name list on the left and the
@@ -61,7 +66,17 @@ public final class CardArtSleeveDialog {
 
     private CardArtSleeveDialog() {}
 
-    public static PaperCard show() {
+    /** The chosen printing together with the crop offset framed in the preview. */
+    public static final class Result {
+        public final PaperCard card;
+        public final int offset;
+        Result(final PaperCard card, final int offset) {
+            this.card = card;
+            this.offset = offset;
+        }
+    }
+
+    public static Result show() {
         FThreads.assertExecutedByEdt(true);
         final Localizer localizer = Localizer.getInstance();
 
@@ -136,10 +151,16 @@ public final class CardArtSleeveDialog {
         final JPanel previewPanel = new JPanel();
         previewPanel.setOpaque(false);
         previewPanel.setLayout(new BoxLayout(previewPanel, BoxLayout.Y_AXIS));
+        final JLabel dragHint = new JLabel(localizer.getMessage("lblDragToChangeCrop"), SwingConstants.CENTER);
+        dragHint.setForeground(Color.LIGHT_GRAY);
+        dragHint.setFont(dragHint.getFont().deriveFont(Font.ITALIC));
+        dragHint.setAlignmentX(Component.CENTER_ALIGNMENT);
         previewPanel.add(Box.createVerticalGlue());
         previewPanel.add(previewTitle);
         previewPanel.add(Box.createVerticalStrut(8));
         previewPanel.add(preview);
+        previewPanel.add(Box.createVerticalStrut(6));
+        previewPanel.add(dragHint);
         previewPanel.add(Box.createVerticalGlue());
 
         final int gridW = COLUMNS * grid.getCellWidth() + SCROLLBAR_W + VIEWPORT_BUFFER;
@@ -162,31 +183,67 @@ public final class CardArtSleeveDialog {
         optionPane.setVisible(true);
         final int result = optionPane.getResult();
         final PaperCard selected = grid.getSelected();
+        final int offset = preview.getOffset();
         optionPane.dispose();
         grid.dispose();
 
-        if (result != 0) {
+        if (result != 0 || selected == null) {
             return null;
         }
-        return selected;
+        return new Result(selected, offset);
     }
 
-    /** Paints the centre-cropped card-art sleeve on a black backing for the highlighted printing. */
+    /**
+     * Paints the cover-cropped card-art sleeve on a black backing for the highlighted printing, and
+     * lets the user drag along the slack axis to reposition the crop. Cover-crops the full-resolution
+     * art live on paint (offset 0 = left/top edge, 1000 = right/bottom, 500 = centre); no built crop is
+     * baked per drag.
+     */
     private static final class SleevePreviewPanel extends JPanel {
         private static final long serialVersionUID = 1L;
         private static final int MARGIN = 10;
+        private final double aspect = ImageCache.sleeveAspect();
         private String key;
-        private BufferedImage img;
+        private BufferedImage art; // full, uncropped art-crop
+        private int offset = 500;
+        private boolean horizontalSlack = true; // which axis the art overflows the sleeve window
+        private int dragStartPx;
+        private int dragStartOffset;
 
         SleevePreviewPanel() {
             setOpaque(false);
-            final double aspect = ImageCache.sleeveAspect();
             final int w = PREVIEW_W - 56;
             final int h = (int) Math.round(w / aspect) + 2 * MARGIN;
             final Dimension d = new Dimension(w, h);
             setPreferredSize(d);
             setMinimumSize(d);
             setMaximumSize(d);
+
+            final MouseAdapter dragger = new MouseAdapter() {
+                @Override public void mousePressed(final MouseEvent e) {
+                    dragStartPx = horizontalSlack ? e.getX() : e.getY();
+                    dragStartOffset = offset;
+                }
+                @Override public void mouseDragged(final MouseEvent e) {
+                    if (art == null) {
+                        return;
+                    }
+                    final int travel = horizontalSlack ? getWidth() - 2 * MARGIN : getHeight() - 2 * MARGIN;
+                    if (travel <= 0) {
+                        return;
+                    }
+                    // grab semantics: dragging the art with the cursor moves the crop window the other way
+                    final int delta = (horizontalSlack ? e.getX() : e.getY()) - dragStartPx;
+                    offset = SleeveArt.clampOffset(dragStartOffset - Math.round(delta * 1000f / travel));
+                    repaint();
+                }
+            };
+            addMouseListener(dragger);
+            addMouseMotionListener(dragger);
+        }
+
+        int getOffset() {
+            return offset;
         }
 
         void setCard(final PaperCard pc) {
@@ -195,31 +252,48 @@ public final class CardArtSleeveDialog {
                 return;
             }
             key = k;
-            img = k == null ? null : ImageCache.getSleeveArtCropped(k);
-            if (k != null && img == null) {
+            offset = 500; // each card starts centred; drag re-frames it
+            art = k == null ? null : ImageCache.getSleeveArtFull(k);
+            if (k != null && art == null) {
                 ImageCache.fetchSleeveArt(k, () -> {
                     if (k.equals(key)) {
-                        img = ImageCache.getSleeveArtCropped(k);
+                        art = ImageCache.getSleeveArtFull(k);
+                        updateSlackAxis();
                         repaint();
                     }
                 });
             }
+            updateSlackAxis();
             repaint();
+        }
+
+        // The cover-crop only overflows one axis; the user drags along that one
+        private void updateSlackAxis() {
+            horizontalSlack = art == null || (double) art.getWidth() / art.getHeight() > aspect;
+            setCursor(Cursor.getPredefinedCursor(art == null ? Cursor.DEFAULT_CURSOR : Cursor.MOVE_CURSOR));
         }
 
         @Override
         protected void paintComponent(final Graphics g) {
             super.paintComponent(g);
-            // black backing box (the whole component); art drawn inset so the black frame shows
             final int w = getWidth();
             final int h = getHeight();
             final Graphics2D g2 = (Graphics2D) g.create();
             g2.setColor(Color.BLACK);
             g2.fillRect(0, 0, w, h);
-            if (img != null) {
+            if (art != null) {
                 g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
                 g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-                g2.drawImage(img, MARGIN, MARGIN, w - 2 * MARGIN, h - 2 * MARGIN, null);
+                final int destW = w - 2 * MARGIN;
+                final int destH = h - 2 * MARGIN;
+                final double scale = Math.max((double) destW / art.getWidth(), (double) destH / art.getHeight());
+                final int scaledW = (int) Math.round(art.getWidth() * scale);
+                final int scaledH = (int) Math.round(art.getHeight() * scale);
+                final double f = offset / 1000.0;
+                final int drawX = MARGIN - (int) Math.round((scaledW - destW) * f);
+                final int drawY = MARGIN - (int) Math.round((scaledH - destH) * f);
+                g2.setClip(MARGIN, MARGIN, destW, destH);
+                g2.drawImage(art, drawX, drawY, scaledW, scaledH, null);
             }
             g2.dispose();
         }

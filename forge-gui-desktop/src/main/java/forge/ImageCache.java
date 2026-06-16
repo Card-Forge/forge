@@ -211,9 +211,15 @@ public class ImageCache {
     private static String hiddenSleeveCacheKey(final CardView cardView, final int width, final int height) {
         final String artKey = customSleeveArtKey(cardView);
         if (artKey != null) {
-            return String.format("__SLEEVEART_%s__#%dx%d", SleeveArt.cacheFileName(artKey), width, height);
+            return String.format("__SLEEVEART_%s_%d__#%dx%d", SleeveArt.cacheFileName(artKey),
+                    sleeveArtOffsetOf(cardView), width, height);
         }
         return String.format("__SLEEVE_%d__#%dx%d", sleeveIndexOf(cardView), width, height);
+    }
+
+    private static int sleeveArtOffsetOf(final CardView cardView) {
+        final PlayerView owner = cardView != null ? cardView.getOwner() : null;
+        return owner != null ? owner.getSleeveArtOffset() : SleeveArt.DEFAULT_OFFSET;
     }
 
     private static String customSleeveArtKey(final CardView cardView) {
@@ -231,7 +237,7 @@ public class ImageCache {
         if (key == null) {
             return null;
         }
-        final BufferedImage art = getSleeveArtCropped(key);
+        final BufferedImage art = getSleeveArtCropped(key, sleeveArtOffsetOf(cardView));
         if (art != null) {
             return art;
         }
@@ -257,13 +263,15 @@ public class ImageCache {
     private static final int SLEEVE_ART_BEVEL_HI = 50;
     private static final int SLEEVE_ART_BEVEL_LO = 40;
 
-    // Cover-crop a (usually landscape) art-crop to the built-in sleeve aspect, keeping the centre,
+    // Cover-crop a (usually landscape) art-crop to the built-in sleeve aspect, positioning the crop
+    // window along whichever axis has slack by offset (0 = left/top, 1000 = right/bottom, 500 = centre),
     // then frame it so it reads as a sleeve next to the built-in ones in the picker.
-    private static BufferedImage centerCropToCardAspect(final BufferedImage src) {
+    private static BufferedImage cropToCardAspect(final BufferedImage src, final int offset) {
         final double aspect = sleeveAspect();
         final int w = src.getWidth();
         final int h = src.getHeight();
         final double srcAspect = (double) w / h;
+        final double f = SleeveArt.clampOffset(offset) / 1000.0;
         int cropW, cropH;
         if (srcAspect > aspect) {
             cropH = h;
@@ -272,8 +280,9 @@ public class ImageCache {
             cropW = w;
             cropH = (int) Math.round(w / aspect);
         }
-        final int x = (w - cropW) / 2;
-        final int y = (h - cropH) / 2;
+        // only the cropped (slack) axis moves; the pinned axis has no travel
+        final int x = (int) Math.round((w - cropW) * f);
+        final int y = (int) Math.round((h - cropH) * f);
         final BufferedImage out = new BufferedImage(cropW, cropH, BufferedImage.TYPE_INT_RGB);
         final Graphics2D g = out.createGraphics();
         g.drawImage(src.getSubimage(x, y, cropW, cropH), 0, 0, null);
@@ -318,8 +327,8 @@ public class ImageCache {
         }
     }
 
-    /** The centre-cropped card-art sleeve image for a key if it is cached, else null (no fetch). */
-    public static BufferedImage getSleeveArtCropped(final String key) {
+    /** The cropped card-art sleeve image for a key at the given offset if it is cached, else null (no fetch). */
+    public static BufferedImage getSleeveArtCropped(final String key, final int offset) {
         if (key == null || key.isEmpty()) {
             return null;
         }
@@ -329,7 +338,23 @@ public class ImageCache {
         }
         try {
             final BufferedImage art = ImageIO.read(f);
-            return art == null ? null : centerCropToCardAspect(art);
+            return art == null ? null : cropToCardAspect(art, offset);
+        } catch (final IOException e) {
+            return null;
+        }
+    }
+
+    /** The full, uncropped art-crop image for a key if cached, else null. Used by the draggable preview. */
+    public static BufferedImage getSleeveArtFull(final String key) {
+        if (key == null || key.isEmpty()) {
+            return null;
+        }
+        final File f = new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(key));
+        if (!f.exists()) {
+            return null;
+        }
+        try {
+            return ImageIO.read(f);
         } catch (final IOException e) {
             return null;
         }

@@ -17,6 +17,7 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     private int avatarIndex = -1;
     private int sleeveIndex = -1;
     private String sleeveArtKey = null; // null = absent from this partial event
+    private Integer sleeveArtOffset = null; // null = absent (0 is a valid offset, so no int sentinel)
     private int team = -1;
     private Boolean isArchenemy = null;
     private Boolean isReady = null;
@@ -32,8 +33,8 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     private String aiProfile = null;
 
 
-    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final String sleeveArtKey, final int team, final boolean isArchenemy, final boolean isDevMode, final Set<AIOption> aiOptions, final String aiProfile) {
-        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, sleeveArtKey, team, isArchenemy, isDevMode, aiOptions, aiProfile);
+    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final String sleeveArtKey, final int sleeveArtOffset, final int team, final boolean isArchenemy, final boolean isDevMode, final Set<AIOption> aiOptions, final String aiProfile) {
+        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, sleeveArtKey, sleeveArtOffset, team, isArchenemy, isDevMode, aiOptions, aiProfile);
     }
     public static UpdateLobbyPlayerEvent deckUpdate(final Deck deck) {
         return new UpdateLobbyPlayerEvent(deck);
@@ -64,9 +65,10 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     public static UpdateLobbyPlayerEvent sleeveUpdate(final int index) {
         return new UpdateLobbyPlayerEvent(index, false);
     }
-    public static UpdateLobbyPlayerEvent sleeveArtUpdate(final String key) {
+    public static UpdateLobbyPlayerEvent sleeveArtUpdate(final String key, final int offset) {
         final UpdateLobbyPlayerEvent event = new UpdateLobbyPlayerEvent();
         event.sleeveArtKey = key == null ? "" : key;
+        event.sleeveArtOffset = offset;
         return event;
     }
     public static UpdateLobbyPlayerEvent isReadyUpdate(final boolean isReady) {
@@ -118,6 +120,7 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
             final int avatarIndex,
             final int sleeveIndex,
             final String sleeveArtKey,
+            final int sleeveArtOffset,
             final int team,
             final boolean isArchenemy,
             final boolean isDevMode,
@@ -128,6 +131,7 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
         this.avatarIndex = avatarIndex;
         this.sleeveIndex = sleeveIndex;
         this.sleeveArtKey = sleeveArtKey;
+        this.sleeveArtOffset = sleeveArtOffset;
         this.team = team;
         this.isArchenemy = isArchenemy;
         this.isDevMode = isDevMode;
@@ -149,6 +153,9 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     }
     public String getSleeveArtKey() {
         return sleeveArtKey;
+    }
+    public Integer getSleeveArtOffset() {
+        return sleeveArtOffset;
     }
     public int getTeam() {
         return team;

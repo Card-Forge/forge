@@ -74,6 +74,7 @@ public class PlayerPanel extends FPanel {
     private final FLabel sleeveLabel = new FLabel.Builder().opaque(true).hoverable(true).iconScaleFactor(0.99f).iconInBackground(true).build();
     private int avatarIndex, sleeveIndex;
     private String sleeveArtKey = "";
+    private int sleeveArtOffset = 500;
 
     private final FTextField txtPlayerName = new FTextField.Builder().build();
     private FRadioButton radioHuman;
@@ -707,8 +708,9 @@ public class PlayerPanel extends FPanel {
         final String[] currentPrefs = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
         final String[] artPrefs = FModel.getPreferences().getPref(FPref.UI_SLEEVE_ART_KEYS).split(",", -1);
         final String artKey = index < artPrefs.length ? SleeveArt.decode(artPrefs[index]) : "";
+        final int artOffset = SleeveArt.offsetForKey(FModel.getPreferences().getPref(FPref.UI_SLEEVE_ART_LIBRARY), artKey);
         if (index < currentPrefs.length) {
-            setSleeve(Integer.parseInt(currentPrefs[index]), artKey);
+            setSleeve(Integer.parseInt(currentPrefs[index]), artKey, artOffset);
         } else {
             setRandomSleeve(false);
         }
@@ -724,7 +726,7 @@ public class PlayerPanel extends FPanel {
             sSel.dispose();
 
             if (sSel.getResultArtKey() != null) {
-                applyCardArtSleeve(sSel.getResultArtKey());
+                applyCardArtSleeve(sSel.getResultArtKey(), sSel.getResultOffset());
             } else if (sSel.getResultIndex() >= 0) {
                 setSleeveIndex(sSel.getResultIndex());
             }
@@ -747,13 +749,14 @@ public class PlayerPanel extends FPanel {
         });
     }
 
-    private void applyCardArtSleeve(final String key) {
+    private void applyCardArtSleeve(final String key, final int offset) {
         setSleeveArtKey(key);
+        sleeveArtOffset = offset;
         showCardArtOnSleeveLabel(key);
     }
 
     private void showCardArtOnSleeveLabel(final String key) {
-        final BufferedImage art = ImageCache.getSleeveArtCropped(key);
+        final BufferedImage art = ImageCache.getSleeveArtCropped(key, sleeveArtOffset);
         if (art != null) {
             sleeveLabel.setIcon(new FSkin.UnskinnedIcon(art));
             sleeveLabel.repaintSelf();
@@ -829,6 +832,7 @@ public class PlayerPanel extends FPanel {
     public void setSleeveIndex(final int sleeveIndex0) {
         sleeveIndex = sleeveIndex0;
         sleeveArtKey = ""; // picking a built-in sleeve clears any card-art sleeve
+        sleeveArtOffset = 500;
         final SkinImage icon = FSkin.getSleeves().get(sleeveIndex);
         sleeveLabel.setIcon(icon);
         sleeveLabel.repaintSelf();
@@ -841,11 +845,16 @@ public class PlayerPanel extends FPanel {
         sleeveArtKey = key == null ? "" : key;
     }
 
+    public int getSleeveArtOffset() {
+        return sleeveArtOffset;
+    }
+
     /** Applies a sleeve from slot data: built-in index, then card-art key (with its icon) if present. */
-    public void setSleeve(final int index, final String artKey) {
+    public void setSleeve(final int index, final String artKey, final int artOffset) {
         setSleeveIndex(index);
         if (artKey != null && !artKey.isEmpty()) {
             setSleeveArtKey(artKey);
+            sleeveArtOffset = artOffset;
             showCardArtOnSleeveLabel(artKey);
         }
     }

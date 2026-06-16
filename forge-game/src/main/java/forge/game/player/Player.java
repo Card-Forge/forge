@@ -2618,6 +2618,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void updateSleeve() {
         view.updateSleeveIndex(this);
         view.updateSleeveArtKey(this);
+        view.updateSleeveArtOffset(this);
     }
 
     /**
