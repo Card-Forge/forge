@@ -1,0 +1,7 @@
+Name:Villainous Hideout
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Villain,Activated.Villain | SpellDescription$ Add one mana of any color. Spend this mana only to cast a Villain spell or to activate an ability of a Villain source.
+A:AB$ Connive | Cost$ 3 T | ValidTgts$ Villain.YouCtrl | ValidTgtDesc$ Villain you control | SorcerySpeed$ True | SpellDescription$ Target Villain you control connives. Activate only as a sorcery. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Villain spell or to activate an ability of a Villain source.\n{3}, {T}: Target Villain you control connives. Activate only as a sorcery. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
