@@ -4,6 +4,6 @@ Types:Legendary Creature Human Mercenary Villain
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When NICKNAME enters, you may sacrifice another creature. When you do, destroy target nonland permanent an opponent controls.
 SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other/another creature> | Execute$ TrigDestroy | TriggerDescription$ When you do, destroy target nonland permanent an opponent controls.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.OppCtrl+nonLand | ValidTgtDesc$ nonland permanent an opponent controls
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.OppCtrl+nonLand | ValidTgtsDesc$ nonland permanent an opponent controls
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 1 | IsPresent$ Creature.YouOwn | PresentCompare$ GE2 | PresentZone$ Graveyard | Description$ As long as there are two or more creature cards in your graveyard, NICKNAME gets +2/+1.
 Oracle:When Killmonger enters, you may sacrifice another creature. When you do, destroy target nonland permanent an opponent controls.\nAs long as there are two or more creature cards in your graveyard, Killmonger gets +2/+1.

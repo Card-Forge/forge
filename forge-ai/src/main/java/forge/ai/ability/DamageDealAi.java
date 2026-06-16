@@ -915,11 +915,6 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = calculateDamageAmount(sa, source, damage);
 
-        // Remove all damage
-        if (sa.hasParam("Remove")) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             dmg = ComputerUtilCost.setMaxXValue(sa, ai, true);
         }

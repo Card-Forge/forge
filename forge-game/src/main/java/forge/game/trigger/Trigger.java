@@ -27,7 +27,6 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardState;
-import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -643,14 +642,14 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     boolean whileKeywordCheck(final String param, final Map<AbilityKey, Object> runParams) {
-        IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
+        CostPaymentStack.Entry currentPayment = (CostPaymentStack.Entry) runParams.get(AbilityKey.IndividualCostPaymentInstance);
         if (currentPayment != null) {
-            if (matchesValidParam(param, currentPayment.getPayment().getAbility())) return true;
+            if (matchesValidParam(param, currentPayment.payment().getAbility())) return true;
         }
 
         CostPaymentStack stack = (CostPaymentStack) runParams.get(AbilityKey.CostStack);
-        for (IndividualCostPaymentInstance individual : stack) {
-            if (matchesValidParam(param, individual.getPayment().getAbility())) return true;
+        for (CostPaymentStack.Entry individual : stack) {
+            if (matchesValidParam(param, individual.payment().getAbility())) return true;
         }
 
         return false;

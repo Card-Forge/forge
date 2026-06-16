@@ -1,0 +1,11 @@
+Name:Crystal, Inhuman Princess
+ManaCost:1 R G
+Types:Legendary Creature Inhuman Noble Hero
+PT:2/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamageAll | TriggerDescription$ Whenever you cast a noncreature spell, NICKNAME deals X damage to each opponent, where X is the number of colors that spell is.
+SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ X
+A:AB$ Mana | Cost$ T | Produced$ Combo R G W U | SpellDescription$ Add {R}, {G}, {W}, or {U}.
+SVar:X:TriggeredCard$CardNumColors
+SVar:BuffedBy:Card.nonCreature+nonLand
+Oracle:Flying\nWhenever you cast a noncreature spell, Crystal deals X damage to each opponent, where X is the number of colors that spell is.\n{T}: Add {R}, {G}, {W}, or {U}.

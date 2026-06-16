@@ -17,6 +17,7 @@ ScryfallCode=MSC
 9 R Molecule Man @Simon Dominic
 10 R Silver Surfer, Galactus's Herald @Irvin Rodriguez
 11 R Avenge @Alex Horley-Orlandelli
+12 R Dora Milaje Elite @Mateus Manhanini
 13 R Everett K. Ross, Hapless Attaché @Alexander Mokhov
 14 R Falcon and Redwing @Allen Douglas
 15 R Hatut Zeraze Strike Force @Toni Infante
@@ -24,7 +25,12 @@ ScryfallCode=MSC
 17 R Heroic Return @David Seeley
 18 R Heroic Sacrifice @Lie Setiawan
 19 R Invisible Force Field @Erikas Perl
+20 R King Solomon's Frogs @Michele Giorgi
 21 R Methods of the Mighty @David Seeley
+22 R Midnight Angel Armor @Mateus Manhanini
+23 R Queen Mother Ramonda @Michael Machira
+24 R Royal Talon Fighter Jet @Sean Vo
+25 R The Spear of Bashenga @Michael Machira
 26 R Ultimate Nullification @Erikas Perl
 27 R Winter Soldier, Reborn Avenger @Lucio Parrillo
 28 R Council of Reeds @Vlad Petruchik
@@ -63,10 +69,18 @@ ScryfallCode=MSC
 61 R Stilt-Man, Towering Terror @Zoltan Boros
 62 R Titania, Proud Pummeler @Filipe Pagliuso
 63 R War Machine, Avenging Arsenal @David Seeley
+64 R Ancestral Communion @Nereida
+65 R Fight for the Throne @Le Vuong
 66 R It's Clobberin' Time! @Thomas Chamberlain-Keen
+67 R M'Baku, Jabari Chieftain @Lee Woo-chul
 68 R Medusa, Inhuman Queen @Irvin Rodriguez
+69 R Nakia, Wakandan Operative @Mateus Manhanini
+70 R W'Kabi, Shield of the Nation @Ovidio Cartagena
+71 R Wakanda Forever! @Eli Minaya
+72 R Zuri, Warrior of Wakanda @Andreas Zafiratos
 73 R Ant-Man, Elusive Avenger @Steve Morris
 74 R Archnemesis @Riccardo Federici
+75 R Bast, Panther Goddess @Leesha Hannigan
 76 R Black Bolt, Inhuman King @Irvin Rodriguez
 77 R Black Widow, Agile Avenger @Junggeun Yoon
 78 R Captain Marvel, Apex Avenger @Julie Bell
@@ -89,6 +103,7 @@ ScryfallCode=MSC
 95 M Shuri, the Black Panther @L.A. Draws
 96 R The Squadron Sinister @Javier Charro
 97 R Storm, Queen of Wakanda @Pauline Voss
+98 R T'Chaka, Venerable King @L.A. Draws
 99 R Typhoid Mary, Fractured @Javier Charro
 100 R Ultron, Unlimited @Nathaniel Himawan
 101 R Willie Lumpkin, Postman @Gintas Galvanauskas
@@ -99,10 +114,18 @@ ScryfallCode=MSC
 106 R H.E.R.B.I.E., Lovable Robot @Nanna Marie Steffensen
 107 R Hulkbuster Armor @Maxim Ruabtsev
 108 R Jocasta, Automaton Avenger @Myles Wohl
+109 R Kimoyo Beads @Wero Gallo
+110 R N'Yami-Class Mother Ship @Kevin Sidharta
 111 R Negative Zone Portal @Vilhelmas Banys
+112 R Panther Habit @Smirtouille
+113 R Panther Robot @Andreia Ugrai
+114 R Shuri's Fabricator @L.A. Draws
 115 R Tri-Sentinel, Act of Vengeance @Nathaniel Himawan
 116 R Unstable Molecule Suit @Jurijus Chitrovas
+117 R Vibranium Mining Mech @Ivan Dedov
+118 R Vibranium Strike Gauntlets @Camille Alquier
 119 R Vision, Synthezoid Avenger @Mark Spears
+120 R The Great Mound @Pablo Mendoza
 121 R Austere Command @Taurin Clarke
 122 R Bastion Protector @Uzuri
 123 U Bovine Intervention @Nanna Marie Steffensen
@@ -112,14 +135,23 @@ ScryfallCode=MSC
 127 U Cut a Deal @Nanna Marie Steffensen
 128 C Destroy Evil @David Palumbo
 129 R Dismantling Wave @Uzuri
+130 U Dispatch @Aaron J. Riley
+131 M Divine Visitation @Flavio Greco Paglia
 132 M Folk Hero @John Tyler Christopher
+133 U Generous Gift @David Álvarez
 134 R Gift of Immortality @Marco Turini
+135 U Ingenious Smith @Michael Machira
+136 M Loyal Retainers @Tyler Walpole
 137 C Make Your Move @Uzuri
+138 R Martial Coup @Andreas Zafiratos
 139 R Monologue Tax @Vilhelmas Banys
+140 U Palace Jailer @Bastien L. Deharme
 141 U Path to Exile @Nino Is
 142 R Promise of Loyalty @Sveta Pikul
 143 U Swords to Plowshares @Greg Smallwood
 144 R Tragic Arrogance @Rimas Valeikis
+145 U Valorous Stance @Tyler Walpole
+146 R Vanquish the Horde @Nereida
 147 C Arcane Denial @Bastien L. Deharme
 148 U Chameleon, Master of Disguise @Javier Charro
 149 C Deep Analysis @Michael MacRae
@@ -142,8 +174,16 @@ ScryfallCode=MSC
 166 R Seize the Day @Michael MacRae
 167 U Superior Foes of Spider-Man @Ben Harvey
 168 U Vandalblast @Javier Charro
+169 U Beast Within @Thomas Chamberlain-Keen
+170 R Birds of Paradise @Kevin Sidharta
+171 R Conduit of Worlds @Le Vuong
 172 C Cultivate @Darius Zablockis
 173 C Farseek @Rimas Valeikis
+174 R Greater Good @Eli Minaya
+175 U Harmonize @Aniekan Udofia
+176 U Loyal Guardian @Kevin Sidharta
+177 C Nature's Lore @Mateus Manhanini
+178 R Overwhelming Stampede @Daniel Landerman
 179 R Path of Discovery @Rytis Sabaliauskas
 180 U Terramorph @Eglė Mosakaitė
 181 U Three Visits @Eugene Maslovski
@@ -159,12 +199,18 @@ ScryfallCode=MSC
 191 U Arcane Signet @Jason Smith
 192 U Arcane Signet @Vilhelmas Banys
 193 U Arcane Signet @Ioannis Fiore
+194 U Arcane Signet @Rafater
 195 R Chromatic Lantern @Rytis Sabaliauskas
+196 R Coveted Jewel @Eric Wilkerson
 197 R Currency Converter @Néstor Ossandón Leal
 198 R Door of Destinies @David Szabo
+199 R Gilded Lotus @Domenico Cava
+200 R Helm of the Host @Eli Minaya
 201 U Hero's Blade @Jason Smith
 202 U Lightning Greaves @Darius Zablockis
 203 R Metallic Mimic @Greg Smallwood
+204 R Metalwork Colossus @Josu Hernaiz
+205 U Meteor Golem @Domenico Cava
 206 R Mirage Mirror @Sveta Pikul
 207 U Patchwork Banner @Bartek Fedyczak
 208 R Progenitor's Icon @Jonas De Ro
@@ -173,6 +219,8 @@ ScryfallCode=MSC
 211 U Sol Ring @Myles Wohl
 212 U Sol Ring @Pace Wilder
 213 U Sol Ring @Alexander Gering
+214 U Sol Ring @Randy Gallegos
+215 R Solemn Simulacrum @Flavio Greco Paglia
 216 U Swiftfoot Boots @Immanuela Crovius
 217 U Talisman of Conviction @Uzuri
 218 U Talisman of Creativity @Andreia Ugrai
@@ -181,6 +229,9 @@ ScryfallCode=MSC
 221 U Talisman of Progress @John Tyler Christopher
 222 U Thought Vessel @Svetlin Velinov
 223 R Tome of Legends @Monztre
+224 R Trading Post @L.A. Draws
+225 U Whispersilk Cloak @Josu Hernaiz
+226 R Bountiful Promenade @Bastien Grivet
 227 R Canopy Vista @Anthony Devine
 228 R Canyon Slough @Arthur Yuan
 229 R Choked Estuary @Shahab Alizadeh
@@ -190,6 +241,7 @@ ScryfallCode=MSC
 233 C Command Tower @Leon Tukker
 234 C Command Tower @Paulius Daščioras
 235 C Command Tower @Lordigan
+236 C Command Tower @Rockey Chen
 237 U Crumbling Necropolis @Shahab Alizadeh
 238 R Dragonskull Summit @Jonas De Ro
 239 R Drowned Catacomb @Jonas De Ro
@@ -198,6 +250,7 @@ ScryfallCode=MSC
 242 R Fabled Passage @Mintautas Šukys
 243 R Fetid Pools @Jonas De Ro
 244 R Foreboding Ruins @Alexander Gering
+245 R Fortified Village @Pablo Mendoza
 246 R Frostboil Snarl @Fariba Khamseh
 247 R Furycalm Snarl @Pablo Mendoza
 248 R Glacial Fortress @Eugene Maslovski
@@ -211,8 +264,10 @@ ScryfallCode=MSC
 256 R Port Town @Arthur Yuan
 257 R Prairie Stream @Rockey Chen
 258 R Radiant Summit @Rytis Sabaliauskas
+259 R Razorverge Thicket @Pablo Mendoza
 260 R Rejuvenating Springs @Sveta Pikul
 261 R Rootbound Crag @Eugene Maslovski
+262 R Scattered Groves @Josu Hernaiz
 263 R Scavenger Grounds @Bastien Grivet
 264 R Scorched Geyser @Maxim Ruabtsev
 265 U Secluded Courtyard @Jonas De Ro
@@ -220,20 +275,249 @@ ScryfallCode=MSC
 267 R Sodden Verdure @Rytis Sabaliauskas
 268 R Spectator Seating @Pablo Mendoza
 269 R Sulfur Falls @Piotr Dura
+270 R Sungrass Prairie @Pablo Mendoza
 271 R Sunken Hollow @Pavel Kolomeyets
 272 R Sunpetal Grove @Rafater
 273 C Terramorphic Expanse @Arthur Yuan
+274 R Throne of the High City @Pablo Mendoza
 275 U Unclaimed Territory @Pavel Kolomeyets
+276 R Scourglass @Toni Infante ${"flavorName": "Orbital Vibranium Bomb"}
 277 M Mind's Dilation @Rafater ${"flavorName": "The Watcher's Warning"}
-278 R Raise the Palisade @Arthur Yuan
+278 R Raise the Palisade @Arthur Yuan ${"flavorName": "Raise Repulsor Shields"}
 279 R Spark Double @Immanuela Crovius ${"flavorName": "Loki's Double"}
 280 R Titan of Littjara @Néstor Ossandón Leal ${"flavorName": "Lady Loki's Manifestation"}
 281 R Annie Joins Up @Nanna Marie Steffensen ${"flavorName": "Franklin's Finality"}
+282 R Fleecemane Lion @Thomas Chamberlain-Keen ${"flavorName": "Wakandan War Panther"}
 283 R Genesis Ultimatum @Mintautas Šukys ${"flavorName": "The Five Arrive"}
 284 U Containment Construct @John Tyler Christopher ${"flavorName": "Awesome Android"}
-285 U Fellwar Stone @Carlos Dattoli
+285 U Fellwar Stone @Carlos Dattoli ${"flavorName": "S.H.I.E.L.D. Spy Satellite"}
+286 R Hammer of Nazahn @Kevin Sidharta ${"flavorName": "Black Panther's Claws"}
 287 U Herald's Horn @Pablo Mendoza ${"flavorName": "Avengers Monitoring Station"}
+288 R Mind's Eye @Michele Giorgi ${"flavorName": "Panther Idol"}
+289 R Sword of the Animist @Domenico Cava ${"flavorName": "Skybreaker, Sword of Bashenga"}
+290 U Thran Dynamo @Tyler Walpole ${"flavorName": "Vibranium Dynamo"}
+291 R Galactus, Devourer of Worlds @Piotr Dura
+292 R Molecule Man @Simon Dominic
+293 R Silver Surfer, Galactus's Herald @Irvin Rodriguez
+294 R Austere Command @Taurin Clarke
+295 R Avenge @Alex Horley-Orlandelli
+296 R Bastion Protector @Uzuri
+297 R Cleansing Nova @Vlad Petruchik
+298 R Clever Concealment @Jurijus Chitrovas
+299 R Collective Effort @Jurijus Chitrovas
+300 R Dismantling Wave @Uzuri
+301 M Divine Visitation @Flavio Greco Paglia
+302 R Dora Milaje Elite @Mateus Manhanini
+303 R Everett K. Ross, Hapless Attaché @Alexander Mokhov
+304 R Falcon and Redwing @Allen Douglas
+305 M Folk Hero @John Tyler Christopher
+306 R Gift of Immortality @Marco Turini
+307 R Hatut Zeraze Strike Force @Toni Infante
+308 R Hercules, Olympian Hero @Alex Horley-Orlandelli
+309 R Heroic Return @David Seeley
+310 R Heroic Sacrifice @Lie Setiawan
+311 R Invisible Force Field @Erikas Perl
+312 R King Solomon's Frogs @Michele Giorgi
+313 M Loyal Retainers @Tyler Walpole
+314 R Martial Coup @Andreas Zafiratos
+315 R Methods of the Mighty @David Seeley
+316 R Midnight Angel Armor @Mateus Manhanini
+317 R Monologue Tax @Vilhelmas Banys
+318 R Scourglass @Toni Infante
+319 R Promise of Loyalty @Sveta Pikul
+320 R Queen Mother Ramonda @Michael Machira
+321 R Royal Talon Fighter Jet @Sean Vo
+322 R The Spear of Bashenga @Michael Machira
+323 R Tragic Arrogance @Rimas Valeikis
+324 R Ultimate Nullification @Erikas Perl
+325 R Vanquish the Horde @Nereida
+326 R Winter Soldier, Reborn Avenger @Lucio Parrillo
+327 R Council of Reeds @Vlad Petruchik
+328 R Extract Power @Ioannis Fiore
+329 R Fantastic Elasticity @Mintautas Šukys
+330 R Glorious Purpose @Fariba Khamseh
+331 R Helmut Zemo, Mastermind @Bartek Fedyczak
+332 R Iron Man, Armored Avenger @Carlos Dattoli
+333 R Jarvis, Earth's Mightiest Butler @Gintas Galvanauskas
+334 R Kindred Discovery @Stephanie Hans
+335 R Titan of Littjara @Néstor Ossandón Leal ${"flavorName": "Lady Loki's Manifestation"}
+336 R Lockjaw, Slobbering Teleporter @Thomas Chamberlain-Keen
+337 R Spark Double @Immanuela Crovius ${"flavorName": "Loki's Double"}
+338 R Professor Hulk @Leroy Steinmann
+339 R Quantum Misalignment @Alexander Skripnikov
+340 R Raise the Palisade @Arthur Yuan ${"flavorName": "Raise the Repulsor Shields"}
+341 R Recurring Insight @Gintas Galvanauskas
+342 R Valeria Richards, Precocious @Justyna Dura
+343 R The Wasp, Winsome Avenger @Raoul Vitale
+344 M Mind's Dilation @Rafater ${"flavorName": "The Watcher's Warning"}
+345 R West Coast Expansion @E. M. Gist
+346 R Black Market Connections @Xabi Gaztelua
+347 R Damocles Base, Sword of Kang @Anthony Devine
+348 R Endless Ranks of HYDRA @Bartek Fedyczak
+349 R The Frightful Four @Björn Barends
+350 R Iron Monger, Sadistic Tycoon @Bartek Fedyczak
+351 R Kindred Dominance @Lordigan
+352 R Klaw, Master of Sound @Ioannis Fiore
+353 R Lethal Scheme @Néstor Ossandón Leal
+354 R Toxic Deluge @Anthony Devine
+355 R Abomination, World Ravager @Pavel Kolomeyets
+356 R Alicia Masters, Skilled Sculptor @Erion Makuo
+357 R Batroc the Leaper @Lucio Parrillo
+358 R Blasphemous Act @Immanuela Crovius
+359 R Chaos Warp @Filipe Pagliuso
+360 R Firebird, Blazing Ranger @Alessandra Pisano
+361 R Flame On! @Rafater
+362 R Franklin Richards, Ascendant @Julia Vasilyeva
+363 R Into the Time Vortex @Rimas Valeikis
+364 R Killmonger, Ruthless Usurper @L.A. Draws
+365 R Lady Loki, Agent of Chaos @Marta Nael
+366 R Living Laser @Nathaniel Himawan
+367 R Loki's Scepter @L J Koh
+368 R Nova Flame @Erikas Perl
+369 R Photon, Mighty Marvel @Tran Nguyen
+370 R Puppet Master, String Puller @John Tyler Christopher
+371 R Seize the Day @Michael MacRae
+372 R She-Hulk, Wallbreaker @Julia Vasilyeva
+373 R Stilt-Man, Towering Terror @Zoltan Boros
+374 R Titania, Proud Pummeler @Filipe Pagliuso
+375 R War Machine, Avenging Arsenal @David Seeley
+376 R Ancestral Communion @Nereida
+377 R Birds of Paradise @Kevin Sidharta
+378 R Conduit of Worlds @Le Vuong
+379 R Fight for the Throne @Le Vuong
+380 R Greater Good @Eli Minaya
+381 R It's Clobberin' Time! @Thomas Chamberlain-Keen
+382 R M'Baku, Jabari Chieftain @Lee Woo-chul
+383 R Medusa, Inhuman Queen @Irvin Rodriguez
+384 R Nakia, Wakandan Operative @Mateus Manhanini
+385 R Overwhelming Stampede @Daniel Landerman
+386 R Path of Discovery @Rytis Sabaliauskas
+387 R W'Kabi, Shield of the Nation @Ovidio Cartagena
+388 R Wakanda Forever! @Eli Minaya
+389 R Zuri, Warrior of Wakanda @Andreas Zafiratos
+390 R Ant-Man, Elusive Avenger @Steve Morris
+391 R Archnemesis @Riccardo Federici
+392 R Bast, Panther Goddess @Leesha Hannigan
+393 R Bedevil @Björn Barends
+394 R Black Bolt, Inhuman King @Irvin Rodriguez
+395 R Black Widow, Agile Avenger @Junggeun Yoon
+396 R Captain Marvel, Apex Avenger @Julie Bell
+397 R Cosmic Crucible @Mintautas Šukys
+398 R Crystal, Inhuman Princess @Darius Zablockis
+399 M Director Nick Fury @Javier Charro
+400 R Dragon Man, Reformed Robot @Gintas Galvanauskas
+401 R First Family @Viktor Fetsch
+402 R Genesis Ultimatum @Mintautas Šukys ${"flavorName": "The Five Arrive"}
+403 R Annie Joins Up @Nanna Marie Steffensen ${"flavorName": "Franklin's Finality"}
+404 R Galvanic Iteration @Eglė Mosakaitė
+405 R Hawkeye, Avenging Archer @Darius Zablockis
+406 R Kang Prime @Lixin Yin
+407 M Loki, the Deceiver @Alexander Mokhov
+408 R Love on the Battlefield @Stephanie Hans
+409 R Namor, Atlantean King @Mintautas Šukys
+410 R Okoye, Mighty and Adored @Aniekan Udofia
+411 R Power Pack @Billy Christian
+412 R Quicksilver, Speedster @Leroy Steinmann
+413 R Red Ghost, Intangible Genius @Nathaniel Himawan
+414 R Scarlet Witch, Chaotic Avenger @Solan
+415 R Shang-Chi and the Ten Rings @Carissa Susilo
+416 M Shuri, the Black Panther @L.A. Draws
+417 R The Squadron Sinister @Javier Charro
+418 R Storm, Queen of Wakanda @Pauline Voss
+419 R T'Chaka, Venerable King @L.A. Draws
+420 R Taunt from the Rampart @Thomas Chamberlain-Keen
+421 R Typhoid Mary, Fractured @Javier Charro
+422 R Ultron, Unlimited @Nathaniel Himawan
+423 R Fleecemane Lion @Thomas Chamberlain-Keen ${"flavorName": "Wakandan War Panther"}
+424 R Whirlwind of Thought @Viktor Fetsch
+425 R Willie Lumpkin, Postman @Gintas Galvanauskas
+426 R Avengers Quinjet @Maxim Ruabtsev
+427 R Hammer of Nazahn @Kevin Sidharta ${"flavorName": "Black Panther's Claws"}
+428 R Chromatic Lantern @Rytis Sabaliauskas
+429 R Coveted Jewel @Eric Wilkerson
+430 R Currency Converter @Néstor Ossandón Leal
+431 R Doom's Time Platform @L J Koh
+432 R Door of Destinies @David Szabo
+433 R The Fantasticar @Maxim Ruabtsev
+434 R Gilded Lotus @Domenico Cava
+435 R Heart-Shaped Herb @Andreia Ugrai
+436 R H.E.R.B.I.E., Lovable Robot @Nanna Marie Steffensen
+437 R Helm of the Host @Eli Minaya
+438 R Hulkbuster Armor @Maxim Ruabtsev
+439 R Jocasta, Automaton Avenger @Myles Wohl
+440 R Kimoyo Beads @Wero Gallo
+441 R Metallic Mimic @Greg Smallwood
+442 R Metalwork Colossus @Josu Hernaiz
+443 R Mirage Mirror @Sveta Pikul
+444 R N'Yami-Class Mother Ship @Kevin Sidharta
+445 R Negative Zone Portal @Vilhelmas Banys
+446 R Panther Habit @Smirtouille
+447 R Mind's Eye @Michele Giorgi ${"flavorName": "Panther Idol"}
+448 R Panther Robot @Andreia Ugrai
+449 R Progenitor's Icon @Jonas De Ro
+450 R Shuri's Fabricator @L.A. Draws
+451 R Skullclamp @Lordigan
+452 R Sword of the Animist @Domenico Cava ${"flavorName": "Skybreaker, Sword of Bashenga"}
+453 R Solemn Simulacrum @Flavio Greco Paglia
+454 R Tome of Legends @Monztre
+455 R Trading Post @L.A. Draws
+456 R Tri-Sentinel, Act of Vengeance @Nathaniel Himawan
+457 R Unstable Molecule Suit @Jurijus Chitrovas
+458 R Vibranium Mining Mech @Ivan Dedov
+459 R Vibranium Strike Gauntlets @Camille Alquier
 460 R Vision, Synthezoid Avenger @Mark Spears
+461 R Bountiful Promenade @Bastien Grivet
+462 R Canopy Vista @Anthony Devine
+463 R Canyon Slough @Arthur Yuan
+464 R Choked Estuary @Shahab Alizadeh
+465 R Cinder Glade @Pace Wilder
+466 R Clifftop Retreat @Arthur Yuan
+467 R Coastal Peak @Jonas De Ro
+468 R Dragonskull Summit @Jonas De Ro
+469 R Drowned Catacomb @Jonas De Ro
+470 R Exotic Orchard @David Szabo
+471 R Fabled Passage @Mintautas Šukys
+472 R Fetid Pools @Jonas De Ro
+473 R Foreboding Ruins @Alexander Gering
+474 R Fortified Village @Pablo Mendoza
+475 R Frostboil Snarl @Fariba Khamseh
+476 R Furycalm Snarl @Pablo Mendoza
+477 R Glacial Fortress @Eugene Maslovski
+478 R Glittering Massif @Jonas De Ro
+479 R The Great Mound @Pablo Mendoza
+480 R Hinterland Harbor @Pace Wilder
+481 R Irrigated Farmland @Milivoj Ćeran
+482 R Luxury Suite @Leon Tukker
+483 R Plaza of Heroes @Taurin Clarke
+484 R Port Town @Arthur Yuan
+485 R Prairie Stream @Rockey Chen
+486 R Radiant Summit @Rytis Sabaliauskas
+487 R Razorverge Thicket @Pablo Mendoza
+488 R Rejuvenating Springs @Sveta Pikul
+489 R Rootbound Crag @Eugene Maslovski
+490 R Scattered Groves @Josu Hernaiz
+491 R Scavenger Grounds @Bastien Grivet
+492 R Scorched Geyser @Maxim Ruabtsev
+493 R Smoldering Marsh @Shahab Alizadeh
+494 R Sodden Verdure @Rytis Sabaliauskas
+495 R Spectator Seating @Pablo Mendoza
+496 R Sulfur Falls @Piotr Dura
+497 R Sungrass Prairie @Pablo Mendoza
+498 R Sunken Hollow @Pavel Kolomeyets
+499 R Sunpetal Grove @Rafater
+500 R Throne of the High City @Pablo Mendoza
+501 R Iron Man, Futurist Paragon @Thanh Tuấn
+502 R Hulk, Always Angry @Thanh Tuấn
+503 R Thor, Guardian of Midgard @Thanh Tuấn
+504 R Black Widow, Intel Expert @Thanh Tuấn
+505 R Captain America, Unbowed @Thanh Tuấn
+506 R Hawkeye, Trick Shot @Thanh Tuấn
+507 R Ultron, Machine Overlord @Kieran Yanner
+508 R Thanos, Death's Consort @Kieran Yanner
+509 R M.O.D.O.K., Evil Intellect @Kieran Yanner
+510 R Absorbing Man and Titania @Kieran Yanner
+511 R Abomination, Irradiated Brute @Kieran Yanner
+512 R Loki, God of Lies @Kieran Yanner
 517 C Fall to Earth @Le Vuong
 518 U Hawkeye, Clint Barton @Taurin Clarke
 520 U Iconic Shield @Gal Or
@@ -588,15 +872,37 @@ ScryfallCode=MSC
 881 M T'Challa, the Black Panther @Eli Minaya
 882 U Rescue, Pepper Potts @Julia Vasilyeva
 883 R Thor, Asgard's Avenger @Wayne Reynolds
-N.A. R Abomination, Irradiated Brute @
-N.A. R Absorbing Man and Titania @
-N.A. R Black Widow, Intel Expert @
-N.A. R Captain America, Unbowed @
-N.A. R Hawkeye, Trick Shot @
-N.A. R Hulk, Always Angry @
-N.A. R Iron Man, Futurist Paragon @
-N.A. R Loki, God of Lies @
-N.A. R M.O.D.O.K., Evil Intellect @
-N.A. R Thanos, Death's Consort @
-N.A. R Thor, Guardian of Midgard @
-N.A. R Ultron, Machine Overlord @
+
+[tokens]
+2 c_3_2_shapeshifter_changeling @Lixin Yin
+3 c_0_3_wall_defender_reach @Alexander Kintner
+4 w_4_4_angel_flying_vigilance @Thomas Chamberlain-Keen
+5 w_1_1_bird_flying @David Szabo
+6 w_0_1_goat @Brooklyn Smith
+7 w_2_2_ox @Nanna Marie Steffensen
+9 b_2_2_rogue @David Álvarez
+10 r_3_3_ape_villain_haste @Zoltan Boros
+11 g_3_3_beast @Thomas Chamberlain-Keen
+12 g_3_3_elephant @David Álvarez
+13 g_4_4_rhino_trample @Thomas Chamberlain-Keen
+14 c_4_4_a_construct_flying_haste @Gabriel Rubio
+15 c_a_vibranium @Diego Gisbert
+18 c_3_2_shapeshifter_changeling @Lixin Yin
+19 c_0_3_wall_defender_reach @Alexander Kintner
+20 w_4_4_angel_flying_vigilance @Thomas Chamberlain-Keen
+21 w_1_1_bird_flying @David Szabo
+22 w_0_1_goat @Brooklyn Smith
+23 w_2_2_ox @Nanna Marie Steffensen
+25 b_2_2_rogue @David Álvarez
+26 r_3_3_ape_villain_haste @Zoltan Boros
+27 g_3_3_beast @Thomas Chamberlain-Keen
+28 g_3_3_elephant @David Álvarez
+29 g_4_4_rhino_trample @Thomas Chamberlain-Keen
+30 c_4_4_a_construct_flying_haste @Gabriel Rubio
+31 c_a_vibranium @Diego Gisbert
+32 c_2_1_a_robot_hero_flying @David Szabo
+
+[other]
+1 copy @Javier Charro
+16 monarch @Eli Minaya
+17 copy @Javier Charro

@@ -6090,6 +6090,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         this.hasBeenDealtDeathtouchDamage = hasBeenDealtDeatchtouchDamage;
     }
 
+    public final void healDamage() {
+        setDamage(0);
+        setHasBeenDealtDeathtouchDamage(false);
+        clearAssignedDamage();
+    }
+
     public final boolean hasBeenDealtExcessDamageThisTurn() {
         return hasBeenDealtExcessDamageThisTurn;
     }

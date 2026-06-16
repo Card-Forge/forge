@@ -6,7 +6,7 @@ SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ First Strike & Vigilance | AddType$ Legendary,Soldier | Description$ Enchanted creature gets +2/+2, has first strike and vigilance, and is a legendary Soldier in addition to its other types.
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigAttachAttack | TriggerDescription$ Whenever enchanted creature attacks or blocks, attach any number of target Equipment you control to it.
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigAttachBlock | Secondary$ True | TriggerDescription$ Whenever enchanted creature attacks or blocks, attach any number of target Equipment you control to it.
-SVar:TrigAttachAttack:DB$ Attach | ValidTgts$ Equipment.YouCtrl | ValidTgtDesc$ Equipment you control | TargetMin$ 0 | TargetMax$ MaxTargets | Object$ Targeted | Defined$ TriggeredAttackerLKICopy
-SVar:TrigAttachBlock:DB$ Attach | ValidTgts$ Equipment.YouCtrl | ValidTgtDesc$ Equipment you control | TargetMin$ 0 | TargetMax$ MaxTargets | Object$ Targeted | Defined$ TriggeredBlockerLKICopy
+SVar:TrigAttachAttack:DB$ Attach | ValidTgts$ Equipment.YouCtrl | ValidTgtsDesc$ Equipment you control | TargetMin$ 0 | TargetMax$ MaxTargets | Object$ Targeted | Defined$ TriggeredAttackerLKICopy
+SVar:TrigAttachBlock:DB$ Attach | ValidTgts$ Equipment.YouCtrl | ValidTgtsDesc$ Equipment you control | TargetMin$ 0 | TargetMax$ MaxTargets | Object$ Targeted | Defined$ TriggeredBlockerLKICopy
 SVar:MaxTargets:Count$Valid Equipment
 Oracle:Enchant creature\nEnchanted creature gets +2/+2, has first strike and vigilance, and is a legendary Soldier in addition to its other types.\nWhenever enchanted creature attacks or blocks, attach any number of target Equipment you control to it.

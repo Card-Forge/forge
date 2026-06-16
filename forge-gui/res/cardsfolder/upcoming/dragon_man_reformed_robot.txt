@@ -1,0 +1,10 @@
+Name:Dragon Man, Reformed Robot
+ManaCost:2 W U
+Types:Legendary Artifact Creature Dragon Robot
+PT:*/5
+K:Flying
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ NICKNAME's power is equal to the greatest mana value among noncreature permanents you control and noncreature cards in your graveyard.
+S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Graveyard | EffectZone$ Graveyard | RaiseCost$ Discard<1/Card> | Description$ You may cast this card from your graveyard by discarding a card in addition to paying its other costs.
+SVar:X:Count$ValidBattlefield,Graveyard Card.nonCreature+YouCtrl$GreatestCardManaCost
+DeckHas:Ability$Graveyard
+Oracle:Flying\nDragon Man's power is equal to the greatest mana value among noncreature permanents you control and noncreature cards in your graveyard.\nYou may cast this card from your graveyard by discarding a card in addition to paying its other costs.

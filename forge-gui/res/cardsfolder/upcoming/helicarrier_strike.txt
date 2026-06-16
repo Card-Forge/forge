@@ -1,0 +1,7 @@
+Name:Helicarrier Strike
+ManaCost:W
+Types:Instant
+K:Teamwork:2
+A:SP$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | ValidTgtDesc$ attacking or blocking creature | NumDmg$ X | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature. If this spell was cast using teamwork, it deals 4 damage to that creature instead.
+SVar:X:Count$Teamwork.4.2
+Oracle:Teamwork 2 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 2 or more.)\nHelicarrier Strike deals 2 damage to target attacking or blocking creature. If this spell was cast using teamwork, it deals 4 damage to that creature instead.

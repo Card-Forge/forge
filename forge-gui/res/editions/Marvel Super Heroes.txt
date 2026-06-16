@@ -459,3 +459,32 @@ ScryfallCode=MSH
 452 U Avengers Tower @Arthur Yuan
 453 U Baxter Building @Paulius Daščioras
 454 U Villainous Hideout @Paulius Daščioras
+
+[tokens]
+1 c_0_4_wall_defender @Thanh Tuấn
+2 w_3_2_hero_vigilance @Lixin Yin
+3 w_1_1_soldier @Nathaniel Himawan
+4 w_1_1_soldier @Bachzim
+5 u_6_5_leviathan_hexproof @Svetlin Velinov
+6 u_1_1_merfolk @Eilene Cherie
+7 redwing @Leesha Hannigan
+8 galactus @Justyna Dura
+9 b_2_1_villain_menace @Thanh Tuấn
+10 the_void @Lixin Yin
+11 r_1_1_alien_haste_must_attack @Michele Giorgi
+12 g_1_1_insect @Milivoj Ćeran
+13 moloid @Genel Jumalon
+14 g_1_1_squirrel @Brooklyn Smith
+15 the_tiger_god @Patrick Gañas
+16 zabu @Rhonda Libbey
+17 c_a_clue_draw @Rafater
+18 doombot @L J Koh
+19 c_a_food_sac @Javier Charro
+20 c_2_2_a_robot_villain @L J Koh
+21 sturdy_shield @Svetlin Velinov
+22 c_a_treasure_sac @Rafater
+23 w_1_1_soldier @Bachzim
+24 u_1_1_merfolk @Eilene Cherie
+25 b_2_1_villain_menace @Thanh Tuấn
+26 c_2_2_a_robot_villain @L J Koh
+27 c_a_treasure_sac @Rafater

@@ -22,8 +22,8 @@ import java.util.Map;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.cost.CostTeamwork;
-import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.CostPaymentStack;
 import forge.util.Localizer;
 
 /**
@@ -79,8 +79,8 @@ public class TriggerTaps extends Trigger {
         }
 
         if (hasParam("Teamwork")) {
-            IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
-            if (currentPayment == null || !(currentPayment.getCost() instanceof CostTeamwork)) {
+            CostPaymentStack.Entry currentPayment = (CostPaymentStack.Entry) runParams.get(AbilityKey.IndividualCostPaymentInstance);
+            if (currentPayment == null || !(currentPayment.cost() instanceof CostTeamwork)) {
                 return false;
             }
         }

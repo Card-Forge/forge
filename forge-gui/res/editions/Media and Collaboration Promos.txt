@@ -102,3 +102,4 @@ ScryfallCode=PMEI
 2026-12 R Turtle Lair @Marina Ortega Lorente
 2026-13 R Command Tower @Victor Adame Minguez
 2026-14 R Loki, God of Mischief @Eric Deschamps
+2026-15 R Shuri, Wakandan Inventor @Kevin Glint
