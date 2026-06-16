@@ -2102,11 +2102,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleReplacers.size() == 1) {
             return first;
         }
-        final List<String> res = possibleReplacers.stream().map(ReplacementEffect::toString).collect(Collectors.toList());
-        final String firstStr = res.get(0);
-        for (int i = 1; i < res.size(); i++) {
+        final String firstStr = first.toString();
+        for (int i = 1; i < possibleReplacers.size(); i++) {
             // prompt user if there are multiple different options
-            if (!res.get(i).equals(firstStr)) {
+            if (!possibleReplacers.get(i).toString().equals(firstStr)) {
                 return chooseOrderedReplacementEffect(possibleReplacers);
             }
         }
@@ -2121,25 +2120,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private ReplacementEffect chooseOrderedReplacementEffect(final List<ReplacementEffect> possibleReplacers) {
         final String replacementLookupKey = describeReplacementOrder(possibleReplacers);
         List<Integer> savedOrder = orderedReplacementLookup.get(replacementLookupKey);
-        if (savedOrder != null && savedOrder.size() != possibleReplacers.size()) {
+        if (savedOrder != null && !isValidReplacementOrder(savedOrder, possibleReplacers.size())) {
             orderedReplacementLookup.remove(replacementLookupKey);
             rememberedReplacementKeys.remove(replacementLookupKey);
             savedOrder = null;
         }
         if (savedOrder != null && rememberedReplacementKeys.contains(replacementLookupKey)) {
-            final int index = savedOrder.get(0);
-            if (index >= 0 && index < possibleReplacers.size()) {
-                return possibleReplacers.get(index);
-            }
-            orderedReplacementLookup.remove(replacementLookupKey);
-            rememberedReplacementKeys.remove(replacementLookupKey);
-            savedOrder = null;
+            return possibleReplacers.get(savedOrder.get(0));
         }
 
-        final Map<Integer, ReplacementEffect> replacementViewCache = Maps.newHashMap();
-        for (final ReplacementEffect replacementEffect : possibleReplacers) {
-            replacementViewCache.put(replacementEffect.getId(), replacementEffect);
-        }
+        final Map<Integer, ReplacementEffect> replacementViewCache = Maps.uniqueIndex(possibleReplacers, ReplacementEffect::getId);
 
         final List<ReplacementEffectView> orderedREVs = Lists.newArrayList();
         if (savedOrder != null) {
@@ -2152,16 +2142,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         }
 
-        final IGuiGame.OrderResult<ReplacementEffectView> orderResult;
-        if (savedOrder != null) {
-            orderResult = getGui().order(localizer.getMessage("lblReorderReplacementEffects"),
-                    localizer.getMessage("lblApplyFirst"), 0, 0,
-                    Lists.newArrayList(), orderedREVs, null, false, true);
-        } else {
-            orderResult = getGui().order(localizer.getMessage("lblSelectOrderForReplacementEffects"),
-                    localizer.getMessage("lblApplyFirst"), 0, 0,
-                    orderedREVs, Lists.newArrayList(), null, false, true);
-        }
+        final boolean reordering = savedOrder != null;
+        final IGuiGame.OrderResult<ReplacementEffectView> orderResult = getGui().order(
+                localizer.getMessage(reordering ? "lblReorderReplacementEffects" : "lblSelectOrderForReplacementEffects"),
+                localizer.getMessage("lblApplyFirst"), 0, 0,
+                reordering ? Lists.<ReplacementEffectView>newArrayList() : orderedREVs,
+                reordering ? orderedREVs : Lists.<ReplacementEffectView>newArrayList(), null, false, true);
 
         final List<ReplacementEffectView> chosen = orderResult == null ? null : orderResult.ordered();
         if (chosen == null || chosen.isEmpty()) {
@@ -2184,11 +2170,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private void rememberReplacementOrders(final List<ReplacementEffect> availableReplacements,
                                            final List<ReplacementEffect> orderedReplacements,
                                            final boolean rememberDecision) {
+        final List<ReplacementEffect> remainingAvailable = Lists.newArrayList(availableReplacements);
         for (int offset = 0; offset < orderedReplacements.size(); offset++) {
-            final List<ReplacementEffect> remainingAvailable = Lists.newArrayList(availableReplacements);
-            for (int i = 0; i < offset; i++) {
-                remainingAvailable.remove(orderedReplacements.get(i));
-            }
             final String suffixKey = describeReplacementOrder(remainingAvailable);
             final List<Integer> suffixOrder = Lists.newArrayListWithCapacity(remainingAvailable.size());
             for (int i = offset; i < orderedReplacements.size(); i++) {
@@ -2201,7 +2184,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             } else {
                 rememberedReplacementKeys.remove(suffixKey);
             }
+            remainingAvailable.remove(orderedReplacements.get(offset));
         }
+    }
+
+    private boolean isValidReplacementOrder(final List<Integer> savedOrder, final int size) {
+        return savedOrder.size() == size && savedOrder.stream().allMatch(i -> i >= 0 && i < size);
     }
 
     private String describeReplacementOrder(final List<ReplacementEffect> replacementEffects) {
