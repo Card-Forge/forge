@@ -1431,7 +1431,7 @@ public class GameAction {
                 p.checkKeywordCard();
 
                 for (final ZoneType zt : ZoneType.values()) {
-                    if (zt == ZoneType.Battlefield) {
+                    if (zt == ZoneType.Battlefield || zt == ZoneType.Flashback) {
                         continue;
                     }
                     for (final Card c : p.getCardsIn(zt).threadSafeIterable()) {
