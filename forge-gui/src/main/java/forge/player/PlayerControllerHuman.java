@@ -2096,35 +2096,129 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
+    // Mutated from game thread on replacement prompts; cleared from Netty thread via YieldUpdate.ClearAbilityOrders.
+    private final Map<String, List<Integer>> orderedReplacementLookup = Maps.newConcurrentMap();
+    private final Set<String> rememberedReplacementKeys = Sets.newConcurrentHashSet();
+
     @Override
     public ReplacementEffect chooseSingleReplacementEffect(final List<ReplacementEffect> possibleReplacers) {
         final ReplacementEffect first = possibleReplacers.get(0);
         if (possibleReplacers.size() == 1) {
             return first;
         }
-        final List<String> res = possibleReplacers.stream().map(ReplacementEffect::toString).collect(Collectors.toList());
-        final String firstStr = res.get(0);
-        final String prompt = localizer.getMessage("lblChooseFirstApplyReplacementEffect");
-        for (int i = 1; i < res.size(); i++) {
-            // prompt user if there are multiple different options
-            if (!res.get(i).equals(firstStr)) {
-                if (!GuiBase.isNetPlay(getGui())) //non network game don't need serialization
-                    return getGui().one(prompt, possibleReplacers);
-                ReplacementEffectView rev = getGui().one(prompt, possibleReplacers.stream().map(ReplacementEffect::getView).collect(Collectors.toList()));
-                return possibleReplacers.stream().filter(re -> re.getId() == rev.getId()).findAny().orElse(first);
+        String firstStr = first.toString();
+        if (possibleReplacers.stream().allMatch(re -> re == first || re.toString().equals(firstStr))) {
+            // return first option without prompting if all options are the same
+            return first;
+        }
+
+        final String replacementLookupKey = describeReplacementOrder(possibleReplacers);
+        List<Integer> savedOrder = orderedReplacementLookup.get(replacementLookupKey);
+        if (savedOrder != null && !isValidReplacementOrder(savedOrder, possibleReplacers.size())) {
+            orderedReplacementLookup.remove(replacementLookupKey);
+            rememberedReplacementKeys.remove(replacementLookupKey);
+            savedOrder = null;
+        }
+        if (savedOrder != null) {
+            if (rememberedReplacementKeys.contains(replacementLookupKey)) {
+                return possibleReplacers.get(savedOrder.get(0));
+            }
+            if (savedOrder.size() == 1) {
+                orderedReplacementLookup.remove(replacementLookupKey);
+                savedOrder = null;
             }
         }
-        // return first option without prompting if all options are the same
-        return first;
+
+        final Map<Integer, ReplacementEffect> replacementViewCache = Maps.uniqueIndex(possibleReplacers, ReplacementEffect::getId);
+
+        final List<ReplacementEffectView> sourceREVs = Lists.newArrayList();
+        final List<ReplacementEffectView> orderedREVs = Lists.newArrayList();
+        if (savedOrder != null) {
+            for (final int index : savedOrder) {
+                orderedREVs.add(possibleReplacers.get(index).getView());
+            }
+            for (int i = 0; i < possibleReplacers.size(); i++) {
+                if (!savedOrder.contains(i)) {
+                    sourceREVs.add(possibleReplacers.get(i).getView());
+                }
+            }
+        } else {
+            for (final ReplacementEffect replacementEffect : possibleReplacers) {
+                sourceREVs.add(replacementEffect.getView());
+            }
+        }
+
+        final boolean reordering = savedOrder != null;
+        final IGuiGame.OrderResult<ReplacementEffectView> orderResult = getGui().order(
+                localizer.getMessage(reordering ? "lblReorderReplacementEffects" : "lblSelectOrderForReplacementEffects"),
+                localizer.getMessage("lblApplyFirst"), 0, possibleReplacers.size() - 1,
+                sourceREVs, orderedREVs, null, false, true);
+
+        final List<ReplacementEffectView> chosen = orderResult == null ? null : orderResult.ordered();
+        if (chosen == null || chosen.isEmpty()) {
+            return possibleReplacers.get(0);
+        }
+
+        final List<ReplacementEffect> orderedREs = Lists.newArrayListWithCapacity(chosen.size());
+        for (final ReplacementEffectView replacementEffectView : chosen) {
+            final ReplacementEffect replacementEffect = replacementViewCache.get(replacementEffectView.getId());
+            if (replacementEffect == null) {
+                return possibleReplacers.get(0);
+            }
+            orderedREs.add(replacementEffect);
+        }
+
+        rememberReplacementOrders(possibleReplacers, orderedREs, orderResult.rememberDecision());
+        return orderedREs.get(0);
+    }
+
+    private void rememberReplacementOrders(final List<ReplacementEffect> availableReplacements,
+                                           final List<ReplacementEffect> orderedReplacements,
+                                           final boolean rememberDecision) {
+        if (!rememberDecision && orderedReplacements.size() == 1) {
+            final String replacementLookupKey = describeReplacementOrder(availableReplacements);
+            orderedReplacementLookup.remove(replacementLookupKey);
+            rememberedReplacementKeys.remove(replacementLookupKey);
+            return;
+        }
+
+        final List<ReplacementEffect> remainingAvailable = Lists.newArrayList(availableReplacements);
+        for (int offset = 0; offset < orderedReplacements.size(); offset++) {
+            final String suffixKey = describeReplacementOrder(remainingAvailable);
+            final List<Integer> suffixOrder = Lists.newArrayListWithCapacity(remainingAvailable.size());
+            for (int i = offset; i < orderedReplacements.size(); i++) {
+                suffixOrder.add(remainingAvailable.indexOf(orderedReplacements.get(i)));
+            }
+
+            orderedReplacementLookup.put(suffixKey, suffixOrder);
+            if (rememberDecision) {
+                rememberedReplacementKeys.add(suffixKey);
+            } else {
+                rememberedReplacementKeys.remove(suffixKey);
+            }
+            remainingAvailable.remove(orderedReplacements.get(offset));
+        }
+    }
+
+    private boolean isValidReplacementOrder(final List<Integer> savedOrder, final int size) {
+        return !savedOrder.isEmpty() && savedOrder.size() <= size
+                && Sets.newHashSet(savedOrder).size() == savedOrder.size()
+                && savedOrder.stream().allMatch(i -> i >= 0 && i < size);
+    }
+
+    private String describeReplacementOrder(final List<ReplacementEffect> replacementEffects) {
+        final char delim = (char) 5;
+        return replacementEffects.stream()
+                .map(ReplacementEffect::toString)
+                .collect(Collectors.joining(String.valueOf(delim)));
     }
 
     @Override
     public StaticAbility chooseSingleStaticAbility(final List<StaticAbility> possibleStatics) {
         final StaticAbility first = possibleStatics.get(0);
         boolean isCostReduction = first.getMode().contains(StaticAbilityMode.ReduceCost);
-        final Set<String> sts = possibleStatics.stream().map(StaticAbility::toString).collect(Collectors.toSet());
         // return first option without prompting if all options are the same, or if they don't care about ordering costs
-        if (sts.size() == 1 || (isCostReduction && !isFullControl(FullControlFlag.ChooseCostOrder))) {
+        if (possibleStatics.size() == 1 || (isCostReduction && !isFullControl(FullControlFlag.ChooseCostOrder))) {
             return first;
         }
         String prompt = Localizer.getInstance().getMessage(isCostReduction ? "lblChooseCostReduction" : "lblChooseAbilityToPlay");
@@ -3789,6 +3883,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (update instanceof YieldUpdate.ClearAbilityOrders) {
             orderedSALookup.clear();
             rememberedKeys.clear();
+            orderedReplacementLookup.clear();
+            rememberedReplacementKeys.clear();
             return;
         }
         if (yieldController.apply(update)) {
