@@ -5,7 +5,7 @@ Name=Marvel Super Heroes
 Type=Expansion
 ScryfallCode=MSH
 #https://mtgscribe.com/2026/06/03/marvel-super-heroes-play-booster-fact-sheet/
-BoosterSlots=Common,Common-SPG,Uncommon,RareMythic,Land,Wildcard,WildcardFoil
+BoosterSlots=Common,Common-Scene,Common-SourceMaterial,Uncommon,UncommonScene,RareMythic,Land,Wildcard,WildcardFoil
 Booster=5 Common, 1 Common-Scene, 1 Common-SourceMaterial, 2 Uncommon, 1 UncommonScene, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=30
@@ -13,7 +13,7 @@ BoosterBox=30
 [Common]
 Base=Common:fromSheet("MSH cards")
 
-[Common-SPG]
+[Common-Scene]
 Base=Common:fromSheet("MSH cards")
 Replace=0.086F Common:fromSheet("MSH scene")
 
@@ -538,7 +538,7 @@ Replace=.025F fromSheet("MSH city chaos")+
 453 U Baxter Building @Paulius Daščioras
 454 U Villainous Hideout @Paulius Daščioras
 
-[default basics]
+[basic frame]
 1 Plains|MSH|[287]
 1 Plains|MSH|[288]
 1 Island|MSH|[289]
