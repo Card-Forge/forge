@@ -630,7 +630,6 @@ Replace=.025F fromSheet("MSH city chaos")+
 1 Tony Stark|MSH|[350]
 1 Epic Fight|MSH|[351]
 
-
 [logo]
 1 Captain America, Super-Soldier|MSH|[352]
 1 Captain America, Wings of Freedom|MSH|[353]
