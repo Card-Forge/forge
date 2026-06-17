@@ -1,4 +1,4 @@
-Name:Frantic Strength
+Name:Furious Strength
 ManaCost:2 R
 Types:Enchantment Aura
 K:Enchant:Creature
