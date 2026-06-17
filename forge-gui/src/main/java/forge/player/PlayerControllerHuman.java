@@ -1736,7 +1736,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardToMaximumHandSize(final int nDiscard) {
+    public CardCollectionView chooseCardsToDiscardToMaximumHandSize(final int nDiscard) {
         final int max = player.getMaxHandSize();
 
         if (getGui().isLibgdxPort()) {
