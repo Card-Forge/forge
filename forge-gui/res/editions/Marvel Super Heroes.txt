@@ -377,7 +377,7 @@ Replace=.025F fromSheet("MSH city chaos")+
 295 L Forest @Domenico Cava
 296 L Forest @Rytis Sabaliauskas
 
-[borderless]]
+[borderless]
 297 M Avengers Assemble! @Steve Ellis
 298 R Origin of the Avengers @Tyler Walpole
 299 R Super-Soldier Serum @Tyler Walpole
