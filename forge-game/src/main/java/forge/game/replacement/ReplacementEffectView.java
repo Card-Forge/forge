@@ -42,6 +42,7 @@ public class ReplacementEffectView extends TrackableObject implements IHasCardVi
     }
 
     void updateDescription(ReplacementEffect re) {
-        set(TrackableProperty.Description, re.getDescription());
+        final String description = re.getDescription();
+        set(TrackableProperty.Description, description.isEmpty() ? re.getHostCard().toString() : re.toString());
     }
 }

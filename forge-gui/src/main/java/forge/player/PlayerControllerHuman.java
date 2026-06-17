@@ -2125,8 +2125,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             rememberedReplacementKeys.remove(replacementLookupKey);
             savedOrder = null;
         }
-        if (savedOrder != null && rememberedReplacementKeys.contains(replacementLookupKey)) {
-            return possibleReplacers.get(savedOrder.get(0));
+        if (savedOrder != null) {
+            if (rememberedReplacementKeys.contains(replacementLookupKey)) {
+                return possibleReplacers.get(savedOrder.get(0));
+            }
+            if (savedOrder.size() == 1) {
+                orderedReplacementLookup.remove(replacementLookupKey);
+                savedOrder = null;
+            }
         }
 
         final Map<Integer, ReplacementEffect> replacementViewCache = Maps.uniqueIndex(possibleReplacers, ReplacementEffect::getId);
@@ -2175,6 +2181,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private void rememberReplacementOrders(final List<ReplacementEffect> availableReplacements,
                                            final List<ReplacementEffect> orderedReplacements,
                                            final boolean rememberDecision) {
+        if (!rememberDecision && orderedReplacements.size() == 1) {
+            final String replacementLookupKey = describeReplacementOrder(availableReplacements);
+            orderedReplacementLookup.remove(replacementLookupKey);
+            rememberedReplacementKeys.remove(replacementLookupKey);
+            return;
+        }
+
         final List<ReplacementEffect> remainingAvailable = Lists.newArrayList(availableReplacements);
         for (int offset = 0; offset < orderedReplacements.size(); offset++) {
             final String suffixKey = describeReplacementOrder(remainingAvailable);
