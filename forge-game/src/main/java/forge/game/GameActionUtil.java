@@ -301,7 +301,15 @@ public final class GameActionUtil {
         // there is a flashback cost (and not the cards cost)
         if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParams:ExtraDescription
             final String[] k = keyword.split(":");
-            newSA = sa.copyWithManaCostReplaced(activator, new Cost(k[1], false));
+            
+            // Default to mana cost if no cost provided
+            final String costString = k[1];
+            if (costString.equals("")) {
+                newSA = sa.copy(activator);
+            } else {
+                newSA = sa.copyWithManaCostReplaced(activator, new Cost(k[1], false));
+            }
+
             String extraParams =  k.length > 2 ? k[2] : "";
             if (!extraParams.isEmpty()) {
                 for (Map.Entry<String, String> param : AbilityFactory.getMapParams(extraParams).entrySet()) {
