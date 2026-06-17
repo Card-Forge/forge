@@ -4,6 +4,80 @@ Date=2026-06-26
 Name=Marvel Super Heroes
 Type=Expansion
 ScryfallCode=MSH
+#https://mtgscribe.com/2026/06/03/marvel-super-heroes-play-booster-fact-sheet/
+BoosterSlots=Common,Common-Scene,Common-SourceMaterial,Uncommon,UncommonScene,RareMythic,Land,Wildcard,WildcardFoil
+Booster=5 Common, 1 Common-Scene, 1 Common-SourceMaterial, 2 Uncommon, 1 UncommonScene, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("MSH cards")
+
+[Common-Scene]
+Base=Common:fromSheet("MSH cards")
+Replace=0.086F Common:fromSheet("MSH scene")
+
+[Common-SourceMaterial]
+Base=Common:fromSheet("MSH cards")
+Replace=0.086F Common:fromSheet("MSH scene")
+Replace=0.0417F fromSheet("MAR cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("MSH cards")
+
+[UncommonScene]
+Base=Uncommon:fromSheet("MSH cards")
+Replace=0.12F Uncommon:fromSheet("MSH scene")
+
+[RareMythic]
+Base=Rare:fromSheet("MSH cards")
+Replace=.166F Mythic:fromSheet("MSH cards")
+Replace=.01F Rare:fromSheet("MSH scene")
+Replace=.008F Mythic:fromSheet("MSH scene")
+Replace=0.024F Rare:fromSheet("MSH logo")
+Replace=0.007F Mythic:fromSheet("MSH logo")
+Replace=0.019F Rare:fromSheet("MSH panel")
+Replace=0.008F Mythic:fromSheet("MSH panel")
+
+[Wildcard]
+Base=Uncommon:fromSheet("MSH cards")
+Replace=0.124F Common:fromSheet("MSH cards")
+Replace=0.168F Rare:fromSheet("MSH cards")
+Replace=0.021F Mythic:fromSheet("MSH cards")
+Replace=0.008F Common:fromSheet("MSH scene")
+Replace=0.027F Uncommon:fromSheet("MSH scene")
+Replace=0.008F Rare:fromSheet("MSH scene")
+Replace=0.002F Mythic:fromSheet("MSH scene")
+Replace=0.01F Rare:fromSheet("MSH logo")
+Replace=0.004F Mythic:fromSheet("MSH logo")
+Replace=0.006F Rare:fromSheet("MSH panel")
+Replace=0.002F Mythic:fromSheet("MSH panel")
+Replace=0.01F Rare:fromSheet("MSH borderless land")
+
+[WildcardFoil]
+Base=Common:fromSheet("MSH cards")
+Replace=0.296F Uncommon:fromSheet("MSH cards")
+Replace=0.059F Rare:fromSheet("MSH cards")
+Replace=0.012F Mythic:fromSheet("MSH cards")
+Replace=0.008F Common:fromSheet("MSH scene")
+Replace=0.012F Uncommon:fromSheet("MSH scene")
+Replace=0.005F Rare:fromSheet("MSH scene")
+Replace=0.001F Mythic:fromSheet("MSH scene")
+Replace=0.08F Rare:fromSheet("MSH logo")
+Replace=0.002F Mythic:fromSheet("MSH logo")
+Replace=0.005F Rare:fromSheet("MSH panel")
+Replace=0.001F Mythic:fromSheet("MSH panel")
+Replace=0.004F Rare:fromSheet("MSH borderless land")
+
+[Land]
+Base=BasicLand:!fromSheet("MSH basic frame"):!fromSheet("MSH city calm"):!fromSheet("MSH city chaos")
+Repalce=.1F BasicLand:!fromSheet("MSH basic frame"):!fromSheet("MSH city calm"):!fromSheet("MSH city chaos")+
+Replace=.2F BasicLand:fromSheet("MSH basic frame")
+Replace=.05F BasicLand:fromSheet("MSH basic frame")+
+Replace=.1F fromSheet("MSH city calm")
+Replace=.025F fromSheet("MSH city calm")+
+Replace=.1F fromSheet("MSH city chaos")
+Replace=.025F fromSheet("MSH city chaos")+
 
 [cards]
 1 U Agent 13, Sharon Carter @Michael MacRae
@@ -302,6 +376,8 @@ ScryfallCode=MSH
 294 L Mountain @Pace Wilder
 295 L Forest @Domenico Cava
 296 L Forest @Rytis Sabaliauskas
+
+[borderless]]
 297 M Avengers Assemble! @Steve Ellis
 298 R Origin of the Avengers @Tyler Walpole
 299 R Super-Soldier Serum @Tyler Walpole
@@ -407,6 +483,8 @@ ScryfallCode=MSH
 399 M King T'Challa @Jack Kirby
 400 M Thanos, the Mad Titan @Jen Bartel
 401 M Ultron, Artificial Malevolence @Sal Buscema & Sam Grainger
+
+[extended art]
 402 R Agent Phil Coulson @Marc Aspinall
 403 M Kang the Conqueror @Peter Scanlan
 404 R S.H.I.E.L.D. Flying Car @Paulius Daščioras
@@ -459,6 +537,128 @@ ScryfallCode=MSH
 452 U Avengers Tower @Arthur Yuan
 453 U Baxter Building @Paulius Daščioras
 454 U Villainous Hideout @Paulius Daščioras
+
+[basic frame]
+1 Plains|MSH|[287]
+1 Plains|MSH|[288]
+1 Island|MSH|[289]
+1 Island|MSH|[290]
+1 Swamp|MSH|[291]
+1 Swamp|MSH|[292]
+1 Mountain|MSH|[293]
+1 Mountain|MSH|[294]
+1 Forest|MSH|[295]
+1 Forest|MSH|[296]
+
+[city calm]
+1 Plains|MSH|[277]
+1 Island|MSH|[279]
+1 Swamp|MSH|[281]
+1 Mountain|MSH|[283]
+1 Forest|MSH|[285]
+
+[city chaos]
+1 Plains|MSH|[278]
+1 Island|MSH|[280]
+1 Swamp|MSH|[282]
+1 Mountain|MSH|[284]
+1 Forest|MSH|[286]
+
+[borderless land]
+1 Dark Fortress|MSH|[380]
+1 Gathering Place|MSH|[381]
+1 Gleaming Bastion|MSH|[382]
+1 Hidden Lair|MSH|[383]
+1 Training Compound|MSH|[384]
+
+[panel]
+1 Avengers Assemble!|MSH|[297]
+1 Origin of the Avengers|MSH|[298]
+1 Super-Soldier Serum|MSH|[299]
+1 Multiversal Incursion|MSH|[300]
+1 Secret Invasion|MSH|[301]
+1 Avengers Disassembled|MSH|[302]
+1 Mjölnir, Hammer of Thor|MSH|[303]
+1 World War Hulk|MSH|[304]
+1 Armor Wars|MSH|[305]
+1 Avengers: Under Siege|MSH|[306]
+1 The Coming of Galactus|MSH|[307]
+1 The Super Hero Civil War|MSH|[308]
+1 Vision Quest|MSH|[309]
+1 Arc Reactor|MSH|[310]
+1 Captain America's Shield|MSH|[311]
+1 Cosmic Cube|MSH|[312]
+1 The Ten Rings|MSH|[313]
+
+[scene]
+1 Nick Fury, Agent of S.H.I.E.L.D.|MSH|[314}
+1 Baron Strucker, HYDRA Overlord|MSH|[315]
+1 Captain America, Super-Soldier|MSH|[316]
+1 Captain America's Shield|MSH|[317]
+1 Madame Hydra|MSH|[318]
+1 Arnim Zola, Bio-Fanatic|MSH|[319]
+1 Mister Fantastic, Reed Richards|MSH|[320]
+1 Human Torch, Johnny Storm|MSH|[321]
+1 The Thing, Ben Grimm|MSH|[322]
+1 Invisible Woman, Sue Storm|MSH|[323]
+1 Daredevil, Man Without Fear|MSH|[324]
+1 Bullseye, Death Dealer|MSH|[325]
+1 Elektra, Daughter of the Hand|MSH|[326]
+1 The Kingpin of Crime|MSH|[327]
+1 Jennifer Walters|MSH|[328]
+1 Red Hulk|MSH|[329]
+1 Leader, Super-Genius|MSH|[330]
+1 Bruce Banner|MSH|[331]
+1 HULK SMASH!|MSH|[332]
+1 Abomination, Terrifying Titan|MSH|[333]
+1 Avengers Tower|MSH|[334]
+1 Spider-Man, To the Rescue|MSH|[335]
+1 Doctor Doom|MSH|[336]
+1 Cosmic Cube|MSH|[337]
+1 Thor, God of Thunder|MSH|[338]
+1 Mjölnir, Hammer of Thor|MSH|[339]
+1 Blazing Crescendo|MSH|[340]
+1 Avengers Assemble!|MSH|[341]
+1 Captain Marvel, Earth's Protector|MSH|[342]
+1 Loki, God of Mischief|MSH|[343]
+1 Ultron, Artificial Malevolence|MSH|[344]
+1 Monica Rambeau|MSH|[345]
+1 King T'Challa|MSH|[346]
+1 Black Widow, Super Spy|MSH|[347]
+1 Take Up the Shield|MSH|[348]
+1 Earth's Mightiest Heroes|MSH|[349]
+1 Tony Stark|MSH|[350]
+1 Epic Fight|MSH|[351]
+
+[logo]
+1 Captain America, Super-Soldier|MSH|[352]
+1 Captain America, Wings of Freedom|MSH|[353]
+1 Captain Marvel, Earth's Protector|MSH|[354]
+1 Jennifer Walters|MSH|[355]
+1 Monica Rambeau|MSH|[356]
+1 Nick Fury, Agent of S.H.I.E.L.D.|MSH|[357]
+1 The Sentry, Golden Guardian|MSH|[358]
+1 Bruce Banner|MSH|[359]
+1 Ironheart, Clever Champion|MSH|[360]
+1 Ms. Marvel, Kamala Khan|MSH|[361]
+1 Namor the Sub-Mariner|MSH|[362]
+1 Tony Stark|MSH|[363]
+1 Black Widow, Super Spy|MSH|[364]
+1 Doctor Doom|MSH|[365]
+1 Elektra, Daughter of the Hand|MSH|[366]
+1 Hawkeye, Master Marksman|MSH|[367]
+1 The Scarlet Witch|MSH|[368]
+1 Thor, God of Thunder|MSH|[369]
+1 Shang-Chi, Master of Kung Fu|MSH|[370]
+1 The Unbeatable Squirrel Girl|MSH|[371]
+1 Daredevil, Man Without Fear|MSH|[372]
+1 King T'Challa|MSH|[373]
+1 The Kingpin of Crime|MSH|[374]
+1 Storm, Windrider|MSH|[375]
+1 Thanos, the Mad Titan|MSH|[376]
+1 Winter Soldier, Icy Assassin|MSH|[377]
+1 Wolverine, Fierce Fighter|MSH|[378]
+1 The Vision|MSH|[379]
 
 [tokens]
 1 c_0_4_wall_defender @Thanh Tuấn
