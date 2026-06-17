@@ -49,8 +49,8 @@ public class CardDamageTable extends ForwardingTable<Card, GameEntity, Integer> 
                 ge.getGame().getTriggerHandler().runTrigger(TriggerType.DamagePreventedOnce, runParams, false);
 
                 ge.getView().updatePreventNextDamage(ge);
-                if (ge instanceof Player) {
-                    ge.getGame().fireEvent(new GameEventPlayerStatsChanged((Player) ge, false));
+                if (ge instanceof Player p) {
+                    ge.getGame().fireEvent(new GameEventPlayerStatsChanged(p));
                 }
             }
         }
