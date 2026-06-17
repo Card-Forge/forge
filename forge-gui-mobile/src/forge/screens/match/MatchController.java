@@ -15,7 +15,6 @@ import forge.game.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.FullControlFlag;
-import forge.item.IPaperCard;
 import forge.util.collect.FCollection;
 import forge.Forge;
 import forge.Graphics;
@@ -303,12 +302,7 @@ public class MatchController extends NetworkGuiGame {
             view.getStack().checkEmptyStack();
 
         if (ph != null && saveState && ph.isMain()) {
-            phaseGameState = new GameState() {
-                @Override
-                public IPaperCard getPaperCard(final String cardName, final String setCode, final int artID) {
-                    return FModel.getMagicDb().getCommonCards().getCard(cardName, setCode, artID);
-                }
-            };
+            phaseGameState = new GameState();
             try {
                 phaseGameState.initFromGame(getGameView().getGame());
             } catch (Exception e) {
