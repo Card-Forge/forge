@@ -2058,6 +2058,9 @@ public class AbilityUtils {
         if (sq[0].equals("CardToughness")) {
             return doXMath(c.getNetToughness(), expr, c, ctb);
         }
+        if (sq[0].equals("CardBaseToughness")) {
+            return doXMath(c.getCurrentToughness(), expr, c, ctb);
+        }
         if (sq[0].equals("CardSumPT")) {
             return doXMath(c.getNetPower() + c.getNetToughness(), expr, c, ctb);
         }
