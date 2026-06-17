@@ -4,7 +4,7 @@ import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.AvailableActions;
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.ai.PlayerControllerAi;
 import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.card.*;

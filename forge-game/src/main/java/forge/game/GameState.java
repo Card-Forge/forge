@@ -1,4 +1,4 @@
-package forge.ai;
+package forge.game;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
@@ -10,8 +10,6 @@ import forge.card.CardStateName;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
-import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;

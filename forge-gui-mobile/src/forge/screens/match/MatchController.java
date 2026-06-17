@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.adventure.scene.DuelScene;
 import forge.adventure.util.Config;
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.FullControlFlag;

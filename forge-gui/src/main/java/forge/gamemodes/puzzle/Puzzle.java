@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.google.common.collect.Sets;
 
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.card.GamePieceType;
 import forge.game.Game;
 import forge.game.GameType;
