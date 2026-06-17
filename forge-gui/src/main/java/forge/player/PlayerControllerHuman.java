@@ -2096,28 +2096,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
+    // Mutated from game thread on replacement prompts; cleared from Netty thread via YieldUpdate.ClearAbilityOrders.
+    private final Map<String, List<Integer>> orderedReplacementLookup = Maps.newConcurrentMap();
+    private final Set<String> rememberedReplacementKeys = Sets.newConcurrentHashSet();
+
     @Override
     public ReplacementEffect chooseSingleReplacementEffect(final List<ReplacementEffect> possibleReplacers) {
         final ReplacementEffect first = possibleReplacers.get(0);
         if (possibleReplacers.size() == 1) {
             return first;
         }
-        final String firstStr = first.toString();
-        for (int i = 1; i < possibleReplacers.size(); i++) {
-            // prompt user if there are multiple different options
-            if (!possibleReplacers.get(i).toString().equals(firstStr)) {
-                return chooseOrderedReplacementEffect(possibleReplacers);
-            }
+        String firstStr = first.toString();
+        if (possibleReplacers.stream().allMatch(re -> re == first || re.toString().equals(firstStr))) {
+            // return first option without prompting if all options are the same
+            return first;
         }
-        // return first option without prompting if all options are the same
-        return first;
-    }
 
-    // Mutated from game thread on replacement prompts; cleared from Netty thread via YieldUpdate.ClearAbilityOrders.
-    private final Map<String, List<Integer>> orderedReplacementLookup = Maps.newConcurrentMap();
-    private final Set<String> rememberedReplacementKeys = Sets.newConcurrentHashSet();
-
-    private ReplacementEffect chooseOrderedReplacementEffect(final List<ReplacementEffect> possibleReplacers) {
         final String replacementLookupKey = describeReplacementOrder(possibleReplacers);
         List<Integer> savedOrder = orderedReplacementLookup.get(replacementLookupKey);
         if (savedOrder != null && !isValidReplacementOrder(savedOrder, possibleReplacers.size())) {
@@ -2216,7 +2210,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final char delim = (char) 5;
         return replacementEffects.stream()
                 .map(ReplacementEffect::toString)
-                .map(this::trimStackContext)
                 .collect(Collectors.joining(String.valueOf(delim)));
     }
 
@@ -2224,9 +2217,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public StaticAbility chooseSingleStaticAbility(final List<StaticAbility> possibleStatics) {
         final StaticAbility first = possibleStatics.get(0);
         boolean isCostReduction = first.getMode().contains(StaticAbilityMode.ReduceCost);
-        final Set<String> sts = possibleStatics.stream().map(StaticAbility::toString).collect(Collectors.toSet());
         // return first option without prompting if all options are the same, or if they don't care about ordering costs
-        if (sts.size() == 1 || (isCostReduction && !isFullControl(FullControlFlag.ChooseCostOrder))) {
+        if (possibleStatics.size() == 1 || (isCostReduction && !isFullControl(FullControlFlag.ChooseCostOrder))) {
             return first;
         }
         String prompt = Localizer.getInstance().getMessage(isCostReduction ? "lblChooseCostReduction" : "lblChooseAbilityToPlay");

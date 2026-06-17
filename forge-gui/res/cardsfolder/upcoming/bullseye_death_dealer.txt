@@ -2,7 +2,7 @@ Name:Bullseye, Death Dealer
 ManaCost:2 BR
 Types:Legendary Creature Human Assassin Villain
 PT:2/3
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChoice | TriggerDescription$ When NICKNAME enters, you may sacrifice an artifact or discard a nonland card. When you do, NICKNAME deals 2 damage to any target.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChoice | TriggerDescription$ When NICKNAME enters, you may sacrifice an artifact or discard a nonland card. When you do, NICKNAME deals 2 damage to any target.
 SVar:TrigChoice:DB$ GenericChoice | Choices$ DBSacToHit,DBDiscardToHit
 SVar:DBSacToHit:DB$ ImmediateTrigger | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigDamage | SpellDescription$ Sacrifice an artifact. When you do, NICKNAME deals 2 damage to any target.
 SVar:DBDiscardToHit:DB$ ImmediateTrigger | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigDamage | SpellDescription$ Discard a card. When you do, NICKNAME deals 2 damage to any target.
