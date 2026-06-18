@@ -26,7 +26,6 @@ public class LocalRandomizer {
     protected final Set<String> greenItemShopList = new HashSet<>();
     protected final Set<String> remainingEquipmentPool = new HashSet<>();
 
-    protected int receivedAmountOfSetUnlockChecks = 0;
     protected final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
     protected final int totalTownQuestsBreakpoint = 1; // Reward for every 1 town quests done.
     protected final int totalTownEventsBreakpoint = 1; // Reward for every 1 town events done.
@@ -53,8 +52,90 @@ public class LocalRandomizer {
         redItemShopList.clear();
         greenItemShopList.clear();
         remainingEquipmentPool.clear();
-        receivedAmountOfSetUnlockChecks = 0;
+        randomizeLocalEquipment();
         ArchipelagoData.getInstance().setupFreshSaveFile(ArchipelagoMode.solo_randomizer);
+    }
+
+    public void updatePlayerChecks(ArchipelagoCheckTypes type) {
+        switch (type) {
+            case TOTAL_CARDS_EARNED -> {
+                long totalCardsEarned = 0;
+                for (long value : archipelagoDataInstance.cardsEarnedByRarity.values()) {
+                    totalCardsEarned += value;
+                }
+                if (totalCardsEarned > 0 && totalCardsEarned % totalCardsEarnedBreakPoint == 0) {
+                    archipelagoDataInstance.unlockRandomSet();
+                }
+            }
+            case COLORLESS_BATTLE_WON -> {
+                if (archipelagoDataInstance.totalBattlesWonColorless > 0 && archipelagoDataInstance.totalBattlesWonColorless % totalBattlesWonBreakpoint == 0) {
+                    archipelagoDataInstance.unlockRandomSet();
+                }
+            }
+            case WHITE_BATTLE_WON -> {
+                if (archipelagoDataInstance.totalBattlesWonWhite > 0 && archipelagoDataInstance.totalBattlesWonWhite % totalBattlesWonBreakpoint == 0) {
+                    archipelagoDataInstance.unlockRandomSet();
+                }
+            }
+            case BLUE_BATTLE_WON -> {
+                if (archipelagoDataInstance.totalBattlesWonBlue > 0 && archipelagoDataInstance.totalBattlesWonBlue % totalBattlesWonBreakpoint == 0) {
+                    archipelagoDataInstance.unlockRandomSet();
+                }
+            }
+            case BLACK_BATTLE_WON -> {
+                if (archipelagoDataInstance.totalBattlesWonBlack > 0 && archipelagoDataInstance.totalBattlesWonBlack % totalBattlesWonBreakpoint == 0) {
+                    archipelagoDataInstance.unlockRandomSet();
+                }
+            }
+            case RED_BATTLE_WON -> {
+                if (archipelagoDataInstance.totalBattlesWonRed > 0 && archipelagoDataInstance.totalBattlesWonRed % totalBattlesWonBreakpoint == 0) {
+                    archipelagoDataInstance.unlockRandomSet();
+                }
+            }
+            case GREEN_BATTLE_WON -> {
+                if (archipelagoDataInstance.totalBattlesWonGreen > 0 && archipelagoDataInstance.totalBattlesWonGreen % totalBattlesWonBreakpoint == 0) {
+                    archipelagoDataInstance.unlockRandomSet();
+                }
+            }
+            case COLORLESS_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.colorlessCompletedTownInnEvents);
+            case WHITE_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.whiteCompletedTownInnEvents);
+            case BLUE_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.blueCompletedTownInnEvents);
+            case BLACK_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.blackCompletedTownInnEvents);
+            case RED_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.redCompletedTownInnEvents);
+            case GREEN_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.greenCompletedTownInnEvents);
+            case COLORLESS_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.colorlessCompletedTownQuests);
+            case WHITE_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.whiteCompletedTownQuests);
+            case BLUE_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.blueCompletedTownQuests);
+            case BLACK_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.blackCompletedTownQuests);
+            case RED_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.redCompletedTownQuests);
+            case GREEN_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.greenCompletedTownQuests);
+        }
+    }
+
+    private void handleTownEventDone(Map<String, Long> completedTownEventsList) {
+        int totalTownEventsDone = 0;
+        for (long count : completedTownEventsList.values()) {
+            totalTownEventsDone += (int) count;
+        }
+        if (archipelagoDataInstance.archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
+            if (totalTownEventsDone > 0 && totalTownEventsDone % totalTownEventsBreakpoint == 0) {
+                LocalRandomizer.getInstance().unlockRandomRegion();
+            }
+        }
+    }
+
+    private void handleTownQuestDone(Map<String, Long> completedTownQuestsList) {
+        int totalTownQuestsDone = 0;
+        for (long count : completedTownQuestsList.values()) {
+            totalTownQuestsDone += (int) count;
+        }
+        if (archipelagoDataInstance.archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
+            if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
+                LocalRandomizer.getInstance().unlockRandomRegion();
+            }
+        }
     }
 
     // Todo: Make the max life upgrades available through another method (more checks perhaps)
