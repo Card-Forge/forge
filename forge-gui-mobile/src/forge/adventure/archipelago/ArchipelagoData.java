@@ -248,7 +248,7 @@ public class ArchipelagoData implements SaveFileContent {
         Random random = new Random();
         String setToUnlock;
 
-        for (int i = 0; i < setUnlockChecksRestAmount; i++) {
+        for (int i = 0; i < amountOfSetsToUnlockFloored; i++) {
             setToUnlock = lockedList.get(random.nextInt(lockedList.size()));
             unlockSetByName(setToUnlock);
             lockedSets.remove(setToUnlock);
