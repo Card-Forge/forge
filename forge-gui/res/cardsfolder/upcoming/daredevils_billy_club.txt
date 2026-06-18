@@ -1,7 +1,7 @@
 Name:Daredevil's Billy Club
 ManaCost:1 R
 Types:Artifact Equipment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this Equipment enters, it deals 2 damage to any target and 1 damage to you.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this Equipment enters, it deals 2 damage to any target and 1 damage to you.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBDamage | DamageMap$ True
 SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
