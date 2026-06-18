@@ -19,7 +19,7 @@ import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.AdventureQuestData;
-import forge.adventure.data.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;

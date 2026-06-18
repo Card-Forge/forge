@@ -1,4 +1,4 @@
-package forge.adventure.util;
+package forge.adventure.archipelago;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -6,24 +6,20 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import forge.Graphics;
 import forge.adventure.data.RewardData;
+import forge.adventure.util.Config;
+import forge.adventure.util.Reward;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ArchipelagoUtil {
     private static final FImage CARD_LOCKED_ICON = FSkinImage.LOCK;
 
+    public static final String[] regionNames = {"waste", "white", "blue", "black", "red"};
     public static void drawLockedCardOverlay(
             Batch batch, float x, float y, float w, float h) {
-
-        // Todo: Darkening the card doesn't actually work here yet, please fix.
-        // Darken card
-//        batch.setColor(0.5f, 0.5f, 0.5f, 0.50f);
-//        batch.draw(
-//                FSkinImage.BLANK.getTextureRegion(),
-//                x, y, w, h
-//        );
-//        batch.setColor(Color.WHITE);
-
         // Draw lock icon
         // Normalize bounds (works for flipped cards too)
         float drawX = Math.min(x, x + w);
@@ -67,6 +63,17 @@ public class ArchipelagoUtil {
         };
     }
 
+    public static void updateLastTraversedRegionOnTeleport(String command) {
+        String loweredCommand = command.toLowerCase();
+        ArchipelagoData apData = ArchipelagoData.getInstance();
+        if (loweredCommand.contains("spawn")) { apData.setLastTraversedRegion("waste"); }
+        if (loweredCommand.contains("plains")) { apData.setLastTraversedRegion("white"); }
+        if (loweredCommand.contains("island")) { apData.setLastTraversedRegion("blue"); }
+        if (loweredCommand.contains("swamp")) { apData.setLastTraversedRegion("black"); }
+        if (loweredCommand.contains("mountain")) { apData.setLastTraversedRegion("red"); }
+        if (loweredCommand.contains("forest")) { apData.setLastTraversedRegion("green"); }
+    }
+
     public static void drawLockedRegionOverhead(Batch batch, String regionName, float centerX, float baseY, float alpha) {
         TextureRegion rune = getRegionRune(regionName);
         if (rune == null)
@@ -104,5 +111,17 @@ public class ArchipelagoUtil {
             return replacedAPReward.get(0);
         }
         return null;
+    }
+
+    /// We depend on these POI names to have these exact names.
+    /// These are used as identifiers to make sure that when generating a world in networked archipelago they are placed close enough to the center to always be well accessible within their region.
+    /// This is to prevent logic errors where a region unlock might be locked behind a certain miniboss dungeon, but that dungeon happened to generate in a random bubble within another region.
+    public static List<String> getArchipelagoPois() {
+        return Arrays.asList("slime cave", "slobads factory", "xiras hive", "emrakul", "quest_aportaltonowhere", "quest_digsite", "quest_primaljungle", "quest_banditcave",
+                                "nahiri encampment", "unhallowedabbey",
+                                "kiora island", "teferi hideout", "jacehold", "skep", "quest_libraryofvarsil",
+                                "slimefoots lair", "temple of liliana", "grolnoks bog", "vampirecastle3",
+                                "temple of chandra", "tibalts fortress", "zedruu city", "quest_shardmines",
+                                "garruk forest", "scarecrow farm", "quest_frostbittencavern", "grove7");
     }
 }

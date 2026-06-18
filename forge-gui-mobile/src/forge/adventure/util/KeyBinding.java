@@ -49,6 +49,10 @@ public enum KeyBinding {
         return false;
     }
 
+    public int[] getBindings() {
+        return bindings;
+    }
+
     // The controller binding always has index 1.
     final static String controllerPrefix = "XBox_";
 

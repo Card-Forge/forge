@@ -9,7 +9,8 @@ import com.badlogic.gdx.utils.IntMap;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
-import forge.adventure.data.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoMode;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Controls;
@@ -224,11 +225,9 @@ public class DeckSelectScene extends UIScene {
 
     @Override
     public boolean back() {
-        // Todo: Check active deck here for locked cards, show error dialog if not all cards are unlocked.
+        // Check active deck here for locked cards, show error dialog if not all cards are unlocked.
         ArchipelagoData archipelagoData = ArchipelagoData.getInstance();
-
-        // Todo: Add check to see if `ArchipelagoMode` is enabled (should be done everywhere we made changes outside of `ArchipelagoData.java`
-        if (!archipelagoData.checkDeckUnlocked(Current.player().getSelectedDeck())) {
+        if (archipelagoData.getArchipelagoMode() != ArchipelagoMode.disabled && !archipelagoData.checkDeckUnlocked(Current.player().getSelectedDeck())) {
             // Todo: Localize deckNotFullyUnlockedDialog text
             Dialog deckNotFullyUnlockedDialog = createGenericDialog("Deck contains locked cards", null,
                     Forge.getLocalizer().getMessage("lblOK"),

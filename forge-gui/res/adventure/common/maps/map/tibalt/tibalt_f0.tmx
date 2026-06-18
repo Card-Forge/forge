@@ -174,7 +174,7 @@
   <object id="188" template="../../obj/enemy.tx" x="193.509" y="438.105">
    <properties>
     <property name="displayNameOverride" value="Tibalt's Pet Dragon"/>
-    <property name="enemy" value="Vulcano Dragon"/>
+    <property name="enemy" value="Volcano Dragon"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>

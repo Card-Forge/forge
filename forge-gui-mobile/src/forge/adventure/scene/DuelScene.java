@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
+import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.*;
@@ -147,15 +148,11 @@ public class DuelScene extends ForgeScene {
                     });
             FThreads.invokeInEdtNowOrLater(() -> bossDialogue.show());
         } else {
-            // Todo: Do something with the rewards for archipelago here
-            // Todo: Decide if planeswalker bosses are mini or castle bosses
             if (enemy.getData().boss) {
                 // Check if the enemy's deck is stored in a path containing "miniboss" or just "boss".
                 if (enemy.getData().deck[0].toLowerCase().contains("miniboss")) {
-                    System.out.println("FORGE_ARCHIPELAGO: DETECTED MINI BOSS DEFEATED: " + enemyName);
                     ArchipelagoData.getInstance().addMiniBossDefeated(enemyName);
                 } else {
-                    System.out.println("FORGE_ARCHIPELAGO: DETECTED CASTLE BOSS DEFEATED: " + enemyName);
                     ArchipelagoData.getInstance().addBossDefeated(enemyName);
                 }
             }

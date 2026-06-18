@@ -13,9 +13,12 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.archipelago.Archipelago;
+import forge.adventure.archipelago.LocalRandomizer;
 import forge.adventure.character.ShopActor;
-import forge.adventure.data.ArchipelagoData;
-import forge.adventure.data.ArchipelagoMode;
+import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoMode;
+import forge.adventure.data.ItemData;
 import forge.adventure.data.RewardData;
 import forge.adventure.data.ShopData;
 import forge.adventure.player.AdventurePlayer;
@@ -506,9 +509,15 @@ public class RewardScene extends UIScene {
                     lastRowXAdjust = ((numberOfColumns * cardWidth) - (lastRowCount * cardWidth)) / 2;
             }
 
-            // Todo: Add logic so this works with the networked archipelago as well.
             if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled && type == Type.Loot && reward.getType() == Reward.Type.Item && reward.getItem().equipmentSlot != null && !reward.getItem().equipmentSlot.isEmpty()) {
-                reward = ArchipelagoData.getInstance().takeSingleEquipmentOutOfRemainingPool();
+                if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.solo_randomizer) {
+                    reward = LocalRandomizer.getInstance().takeSingleEquipmentOutOfRemainingPool();
+                } else {
+                    ItemData itemData = new ItemData();
+                    itemData.iconName = "APIconSmall";
+                    itemData.name = "Archipelago Reward";
+                    reward = new Reward(itemData);
+                }
             }
             RewardActor actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
 
@@ -610,7 +619,12 @@ public class RewardScene extends UIScene {
                             changes.buyCard(objectID, index);
 
                         Current.player().takeGold(price);
-                        Current.player().addReward(rewardActor.getReward());
+                        if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago && rewardActor.getReward().getItem().archilepagoLocationId >= 0) {
+                            ItemData itemData = rewardActor.getReward().getItem();
+                            Archipelago.getInstance().checkLocation(itemData.archilepagoLocationId);
+                        } else {
+                            Current.player().addReward(rewardActor.getReward());
+                        }
 
                         Gdx.input.vibrate(5);
                         SoundSystem.instance.play(SoundEffectType.FlipCoin, false);

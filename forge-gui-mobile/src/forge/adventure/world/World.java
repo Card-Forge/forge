@@ -13,6 +13,9 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
 import forge.Forge;
+import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoMode;
+import forge.adventure.archipelago.ArchipelagoUtil;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestMap;
@@ -451,6 +454,10 @@ public class World implements Disposable, SaveFileContent {
             clearTerrain((int) (data.width * data.playerStartPosX), (int) (data.height * data.playerStartPosY), 10);
             //otherPoints.add(new Rectangle(((float) data.width * data.playerStartPosX * (float) data.tileSize) - data.tileSize * 3, ((float) data.height * data.playerStartPosY * data.tileSize) - data.tileSize * 3, data.tileSize * 6, data.tileSize * 6));
             boolean running = true;
+            boolean isNetworkedAP = ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago;
+            List<String> archipelagoPois = new ArrayList<>();
+            if (isNetworkedAP)
+                archipelagoPois = ArchipelagoUtil.getArchipelagoPois();
             here:
             while (running) {
                 mapPoiIds = new PointOfInterestMap(getChunkSize(), data.tileSize, data.width / getChunkSize(), data.height / getChunkSize());
@@ -462,7 +469,14 @@ public class World implements Disposable, SaveFileContent {
                         for (int i = 0; i < poi.count; i++) {
                             for (int counter = 0; counter < 500; counter++)//tries 500 times to find a free point
                             {
-                                float radius = (float) Math.sqrt(((random.nextDouble()) / 2 * poi.radiusFactor));
+                                boolean isArchipelagoPoi  = archipelagoPois.contains(poi.name.toLowerCase());
+                                float radius;
+                                if (isArchipelagoPoi) {
+                                    radius = (float) (Math.sqrt(random.nextDouble()) * (biome.name.equals("waste") ? 0.15f : 0.25f));
+                                } else {
+                                    radius = (float) Math.sqrt((random.nextDouble() / 2f) * poi.radiusFactor);
+                                }
+
                                 float theta = (float) (random.nextDouble() * 2 * Math.PI);
                                 float x = (float) (radius * Math.cos(theta));
                                 x *= (biome.width * width / 2);

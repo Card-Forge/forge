@@ -1,7 +1,6 @@
 package forge.adventure.world;
 
-import forge.adventure.data.ArchipelagoData;
-import forge.adventure.data.ArchipelagoMode;
+import forge.adventure.archipelago.*;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -38,7 +37,6 @@ public class WorldSave {
     private final AdventurePlayer player = new AdventurePlayer();
     private final World world = new World();
     private final PointOfInterestChanges.Map pointOfInterestChanges = new PointOfInterestChanges.Map();
-    private final ArchipelagoData archipelagoData = new ArchipelagoData();
 
 
     private final SignalList onLoadList = new SignalList();
@@ -78,7 +76,7 @@ public class WorldSave {
                 try {
                     currentSave.world.load(mainData.readSubData("world"));
                     currentSave.pointOfInterestChanges.load(mainData.readSubData("pointOfInterestChanges"));
-                    currentSave.archipelagoData.load(mainData.readSubData("archipelago"));
+                    ArchipelagoData.getInstance().load(mainData.readSubData("archipelago"));
                     WorldStage.getInstance().load(mainData.readSubData("worldStage"));
 
                 } catch (Exception e) {
@@ -136,6 +134,17 @@ public class WorldSave {
     }
 
     public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode, int customDeckIndex, CardEdition starterEdition, long seed, ArchipelagoMode archipelagoMode) {
+        ArchipelagoData archipelagoData = ArchipelagoData.getInstance();
+        Archipelago.getInstance().disconnect();
+        // Initial archipelago setup
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            LocalRandomizer.getInstance().setupFreshSaveFile();
+        } else if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
+            ArchipelagoRandomizer.getInstance().setupFreshSaveFile();
+        } else {
+            archipelagoData.setupFreshSaveFile(archipelagoMode);
+        }
+
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
         boolean chaos = mode == AdventureModes.Chaos;

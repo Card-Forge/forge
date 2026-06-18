@@ -53,7 +53,6 @@ public class MenuScene extends UIScene {
         return dialogShown;
     }
 
-    // Todo: I think when this happens, we don't log the rewards in archipelago. We probably want to move the logic that detects if items are added to the AdventurePlayer.java class
     void setEffects(DialogData.ActionData[] data) {
         if (data == null) return;
         for (DialogData.ActionData E : data) {

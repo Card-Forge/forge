@@ -25,6 +25,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.archipelago.*;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
 import forge.adventure.player.AdventurePlayer;
@@ -738,7 +739,7 @@ public class MapStage extends GameStage {
                                 //  Also, there's code duplication here, you should fix that by making a function.
                                 if (data.name.toLowerCase().contains("equipment") || data.name.toLowerCase().contains("items")) {
                                     // Get list of items for specific shop.
-                                    Object[] randomizedEquipmentList = ArchipelagoData.getInstance().getItemsForEquipmentShop(data.name);
+                                    Object[] randomizedEquipmentList = LocalRandomizer.getInstance().getItemsForEquipmentShop(data.name);
                                     // Swap the shop's rewards
                                     if (randomizedEquipmentList != null && randomizedEquipmentList.length <= data.rewards.size) {
                                         for (int i = 0; i < randomizedEquipmentList.length; i++) {
@@ -751,10 +752,14 @@ public class MapStage extends GameStage {
                                 }
                                 break;
                             case networked_archipelago:
-                                // Todo: Get randomized subset from networked APWorld via ArchipelagoData.
-                                //  This code is a stub and should be replaced.
-                                for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
-                                    ret.addAll(rdata.generate(false, false));
+                                if (data.name.toLowerCase().contains("equipment") || data.name.toLowerCase().contains("items")) {
+                                    Set<ItemData> shopItems = ArchipelagoRandomizer.getInstance().getShopItems(data.name);
+
+                                    if (shopItems != null && shopItems.size() <= data.rewards.size) {
+                                        for (ItemData item : shopItems) {
+                                            ret.add(new Reward(item));
+                                        }
+                                    }
                                 }
                         }
                         ShopActor actor = new ShopActor(this, id, ret, data);

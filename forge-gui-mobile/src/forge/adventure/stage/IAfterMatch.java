@@ -1,6 +1,6 @@
 package forge.adventure.stage;
 
-import forge.adventure.data.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoData;
 
 public interface IAfterMatch {
     default void setWinner(boolean winner, boolean isArena) {

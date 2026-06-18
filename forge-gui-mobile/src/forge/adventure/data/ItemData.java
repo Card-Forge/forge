@@ -1,7 +1,9 @@
 package forge.adventure.data;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import forge.adventure.archipelago.Archipelago;
 import forge.adventure.util.Config;
+import io.github.archipelagomw.parts.NetworkItem;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -29,26 +31,74 @@ public class ItemData implements Serializable, Cloneable {
     public String commandOnUse;
     public int shardsNeeded;
     public DialogData dialogOnUse;
+    public long archipelagoItemId = -1;
+    public long archilepagoLocationId = -1;
+    public int archipelagoPlayerId = -1;
+    public int archipelagoFlags = 0;
+    public String archipelagoItemName = "";
+    public String archipelagoLocationName = "";
+    public String archipelagoPlayerName = "";
 
-
-    public ItemData()
-    {
+    public ItemData() {
 
     }
-    public ItemData(ItemData cpy)
-    {
-        name              = cpy.name;
-        equipmentSlot     = cpy.equipmentSlot;
-        effect            = new EffectData(cpy.effect);
-        description       = cpy.description;
-        iconName          = cpy.iconName;
-        questItem         = cpy.questItem;
-        cost              = cpy.cost;
-        usableInPoi       = cpy.usableInPoi;
-        usableOnWorldMap  = cpy.usableOnWorldMap;
-        commandOnUse      = cpy.commandOnUse;
-        shardsNeeded      = cpy.shardsNeeded;
-        dialogOnUse       = cpy.dialogOnUse;
+
+    public ItemData(ItemData cpy) {
+        name                    = cpy.name;
+        equipmentSlot           = cpy.equipmentSlot;
+        effect                  = new EffectData(cpy.effect);
+        description             = cpy.description;
+        iconName                = cpy.iconName;
+        questItem               = cpy.questItem;
+        cost                    = cpy.cost;
+        usableInPoi             = cpy.usableInPoi;
+        usableOnWorldMap        = cpy.usableOnWorldMap;
+        commandOnUse            = cpy.commandOnUse;
+        shardsNeeded            = cpy.shardsNeeded;
+        dialogOnUse             = cpy.dialogOnUse;
+        archipelagoItemId       = cpy.archipelagoItemId;
+        archilepagoLocationId   = cpy.archilepagoLocationId;
+        archipelagoPlayerId     = cpy.archipelagoPlayerId;
+        archipelagoFlags        = cpy.archipelagoFlags;
+        archipelagoItemName     = cpy.archipelagoItemName;
+        archipelagoLocationName = cpy.archipelagoLocationName;
+        archipelagoPlayerName   = cpy.archipelagoPlayerName;
+    }
+
+    public ItemData(NetworkItem networkItem) {
+        String itemType = "Filler";
+        switch (networkItem.flags){
+            case 0b001:
+                itemType = "Progression";
+                break;
+            case 0b010:
+                itemType = "Useful";
+                break;
+            case 0b100:
+                itemType = "Trap";
+                break;
+        }
+
+        name = networkItem.itemName;
+        if (!itemType.isEmpty()) name += "\n" + itemType + " item for " + networkItem.playerName;
+        iconName = "APIconSmall";
+        // Item name is recognised as a known item, show its information:
+        if (ItemListData.getItem(networkItem.itemName) != null) {
+            ItemData data = ItemListData.getItem(networkItem.itemName);
+            iconName = data.iconName;
+            equipmentSlot = data.equipmentSlot;
+            effect = data.effect;
+            description = data.description;
+        }
+        cost = Archipelago.getInstance().getRandomItemPrice();
+
+        archipelagoItemId       = networkItem.itemID;
+        archilepagoLocationId   = networkItem.locationID;
+        archipelagoPlayerId     = networkItem.playerID;
+        archipelagoFlags        = networkItem.flags;
+        archipelagoItemName     = networkItem.itemName;
+        archipelagoLocationName = networkItem.locationName;
+        archipelagoPlayerName   = networkItem.playerName;
     }
 
     public Sprite sprite() {
