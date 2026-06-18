@@ -123,6 +123,9 @@ public class ArchipelagoUtil {
         return null;
     }
 
+    /// We depend on these POI names to have these exact names.
+    /// These are used as identifiers to make sure that when generating a world in networked archipelago they are placed close enough to the center to always be well accessible within their region.
+    /// This is to prevent logic errors where a region unlock might be locked behind a certain miniboss dungeon, but that dungeon happened to generate in a random bubble within another region.
     public static List<String> getArchipelagoPois() {
         return Arrays.asList("slime cave", "slobads factory", "xiras hive", "emrakul", "quest_aportaltonowhere", "quest_digsite", "quest_primaljungle", "quest_banditcave",
                                 "nahiri encampment", "unhallowedabbey",

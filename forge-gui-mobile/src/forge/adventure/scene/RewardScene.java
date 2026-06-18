@@ -509,9 +509,15 @@ public class RewardScene extends UIScene {
                     lastRowXAdjust = ((numberOfColumns * cardWidth) - (lastRowCount * cardWidth)) / 2;
             }
 
-            // Todo: Add logic so this works with the networked archipelago as well.
             if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled && type == Type.Loot && reward.getType() == Reward.Type.Item && reward.getItem().equipmentSlot != null && !reward.getItem().equipmentSlot.isEmpty()) {
-                reward = LocalRandomizer.getInstance().takeSingleEquipmentOutOfRemainingPool();
+                if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.solo_randomizer) {
+                    reward = LocalRandomizer.getInstance().takeSingleEquipmentOutOfRemainingPool();
+                } else {
+                    ItemData itemData = new ItemData();
+                    itemData.iconName = "APIconSmall";
+                    itemData.name = "Archipelago Reward";
+                    reward = new Reward(itemData);
+                }
             }
             RewardActor actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
 

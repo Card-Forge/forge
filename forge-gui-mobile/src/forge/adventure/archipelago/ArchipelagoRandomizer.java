@@ -55,7 +55,6 @@ public class ArchipelagoRandomizer {
         ArchipelagoData.getInstance().setupFreshSaveFile(ArchipelagoMode.networked_archipelago);
     }
 
-    /// Todo: Add custom pop-up message to be shown upon receiving a check.
     public void unlockManaCrystalReward(Integer amount) {
         Current.player().addShards(amount);
         archipelagoDataInstance.addShards(amount);
@@ -82,7 +81,6 @@ public class ArchipelagoRandomizer {
     }
 
     public void handleShopData(List<NetworkItem> shopLocationScounts) {
-        int setUnlocks = 0;
         for (NetworkItem shopLocation : shopLocationScounts) {
             if (shopLocation.locationID >= 1000 && shopLocation.locationID < 1100) {
                 colorlessEquipmentShopList.add(new ItemData(shopLocation));
@@ -107,10 +105,8 @@ public class ArchipelagoRandomizer {
             } else if (shopLocation.locationID >= 2000 && shopLocation.locationID < 2100) {
                 greenItemShopList.add(new ItemData(shopLocation));
             }
-            if (shopLocation.itemName.equals("Set Unlock") && shopLocation.itemID == 1009L) setUnlocks++;
         }
-
-        ArchipelagoData.getInstance().setTotalAmountOfSetUnlockChecks(setUnlocks);
+        ArchipelagoData.getInstance().setTotalAmountOfSetUnlockChecks(slotData.SetUnlockCount);
     }
 
     public Set<ItemData> getShopItems(String shopName) {
@@ -199,7 +195,6 @@ public class ArchipelagoRandomizer {
         apSettingsScene.setPasswordTextField(lastPassword);
     }
 
-    // Todo: This should be called by the networked part of the AP implementation when we receive a reward.
     public void incrementLastArchipelagoRewardIndex() {
         archipelagoDataInstance.lastArchipelagoRewardIndex++;
     }

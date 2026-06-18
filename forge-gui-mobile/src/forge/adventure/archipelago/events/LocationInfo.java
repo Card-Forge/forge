@@ -19,7 +19,7 @@ public class LocationInfo {
         if (event.locations.size() == locationCount) {
             ArchipelagoRandomizer.getInstance().handleShopData(event.locations);
         } else {
-
+            //TODO: Show hints in console, maybe handle this in PrintJsonListener later?
         }
     }
 }

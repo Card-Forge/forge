@@ -42,7 +42,6 @@ public class ArchipelagoSettingsScene extends UIScene {
     }
 
     public void connect() {
-        //TODO: Setup AP client and connect
         Archipelago.getInstance().connect(ipTextField.getText(), portTextField.getText(), slotNameTextField.getText(), passwordTextField.getText(), connectStatusLabel);
     }
 

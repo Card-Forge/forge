@@ -43,6 +43,10 @@ public class SlotData implements Serializable {
     public int MaxShopPrice;
     @SerializedName("gold_multiplier_percentage")
     public int GoldMultiplierPercentage;
+    @SerializedName("death_link")
+    public int DeathLink;
+    @SerializedName("set_unlock_count")
+    public int SetUnlockCount;
     @SerializedName("seed")
     public String Seed;
 }
