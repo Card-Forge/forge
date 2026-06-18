@@ -32,7 +32,14 @@ public class EncodeEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Player activator = sa.getActivatingPlayer();
+        final Card host = sa.getHostCard();
+        Player activator = sa.getActivatingPlayer(); // Fall back to host controller if activating player is null
+        if (activator == null) {
+            activator = host.getController();
+        }
+    if (activator == null) {
+        return; // No valid player to perform the encoding
+    }
         final Game game = activator.getGame();
 
         if (host.isToken()) {
