@@ -6,7 +6,6 @@ import com.google.common.collect.Maps;
 import forge.LobbyPlayer;
 import forge.card.CardType;
 import forge.card.MagicColor;
-import forge.card.mana.ManaAtom;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -500,11 +499,7 @@ public class PlayerView extends GameEntityView {
         return get(TrackableProperty.Mana);
     }
     void updateMana(Player p) {
-        Map<Byte, Integer> mana = new HashMap<>();
-        for (byte b : ManaAtom.MANATYPES) {
-            mana.put(b, p.getManaPool().getAmountOfColor(b));
-        }
-        set(TrackableProperty.Mana, mana);
+        set(TrackableProperty.Mana, p.getManaPool().getView());
     }
 
     private List<String> getDetailsList() {
