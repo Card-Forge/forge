@@ -1414,7 +1414,7 @@ public class ComputerUtilCard {
             }
             //TODO:add threat from triggers and other abilities (ie. Bident of Thassa)
         }
-        if (!c.getManaAbilities().isEmpty()) {
+        if (!c.getManaAbilities().isEmpty() && !landGrantingRemoval(sa)) {
             threat += 0.5f * costTarget / opp.getLandsInPlay().size();   //set back opponent's mana
         }
 
@@ -1424,6 +1424,21 @@ public class ComputerUtilCard {
         }
         final float chance = MyRandom.getRandom().nextFloat();
         return chance < valueNow;
+    }
+
+    private static boolean landGrantingRemoval(final SpellAbility sa) {
+        SpellAbility sub = sa.getSubAbility();
+        while (sub != null) {
+            if (ApiType.ChangeZone.equals(sub.getApi())
+                    && "Library".equals(sub.getParamOrDefault("Origin", ""))
+                    && "Battlefield".equals(sub.getParamOrDefault("Destination", ""))
+                    && sub.getParamOrDefault("ChangeType", "").contains("Land.Basic")
+                    && "TargetedController".equals(sub.getParamOrDefault("DefinedPlayer", ""))) {
+                return true;
+            }
+            sub = sub.getSubAbility();
+        }
+        return false;
     }
 
     /**

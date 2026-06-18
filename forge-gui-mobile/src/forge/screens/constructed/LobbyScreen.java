@@ -600,11 +600,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     @Override
     public void update(final boolean fullUpdate) {
         int playerCount = lobby.getNumberOfSlots();
-
-        updateVariantSelection();
-
         final boolean allowNetworking = lobby.isAllowNetworking();
 
+        updateVariantSelection();
         setStartButtonAvailability();
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
@@ -619,7 +617,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     isNewPanel = !panel.isVisible();
                 }
                 else {
-                    panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
+                    panel = new PlayerPanel(this, i, slot, lobby.mayEdit(i), lobby.hasControl());
                     // Register before initialize: deck-chooser populate fires onSelectionChange synchronously, which can recurse into updateDeck(i).
                     playerPanels.add(panel);
                     playersScroll.add(panel);

@@ -1,0 +1,9 @@
+Name:Photon, Mighty Marvel
+ManaCost:3 R
+Types:Legendary Creature Human Hero
+PT:2/4
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMana | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, add that much mana of any one color. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigMana:DB$ Mana | Produced$ Any | Amount$ X | PersistentMana$ True
+SVar:X:TriggerCount$DamageAmount
+Oracle:Flying\nWhenever Photon deals combat damage to a player, add that much mana of any one color. Until end of turn, you don't lose this mana as steps and phases end.

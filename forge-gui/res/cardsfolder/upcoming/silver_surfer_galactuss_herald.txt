@@ -1,0 +1,11 @@
+Name:Silver Surfer, Galactus's Herald
+ManaCost:5
+Types:Legendary Creature Alien Hero
+PT:4/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When NICKNAME enters, you may search your library for a card named Galactus, Devourer of Worlds, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedGalactus; Devourer of Worlds | ChangeNum$ 1 | ShuffleNonMandatory$ True
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigEffect | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, until the end of your next turn, target creature attacks that player each combat if able.
+SVar:TrigEffect:DB$ Effect | ValidTgts$ Creature | StaticAbilities$ MustAttack | RememberObjects$ Targeted & TriggeredTarget | ExileOnMoved$ Battlefield | Duration$ UntilTheEndOfYourNextTurn
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Creature.IsRemembered | MustAttack$ Player.IsRemembered | Description$ This creature attacks that player each combat if able.
+Oracle:Flying\nWhen Silver Surfer enters, you may search your library for a card named Galactus, Devourer of Worlds, reveal it, put it into your hand, then shuffle.\nWhenever Silver Surfer deals combat damage to a player, until the end of your next turn, target creature attacks that player each combat if able.

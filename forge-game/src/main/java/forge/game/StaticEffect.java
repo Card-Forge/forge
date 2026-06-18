@@ -311,7 +311,6 @@ public class StaticEffect {
                     affectedCard.removeHiddenExtrinsicKeywords(timestamp, ability.getId());
                 }
 
-                // remove may look at
                 if (hasParam("MayLookAt")) {
                     affectedCard.removeMayLookAt(getTimestamp());
                 }

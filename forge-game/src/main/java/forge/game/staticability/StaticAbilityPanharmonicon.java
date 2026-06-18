@@ -6,7 +6,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
+import forge.game.card.CardDamageTable;
 import forge.game.GameObjectPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
@@ -207,7 +207,7 @@ public class StaticAbilityPanharmonicon {
                 }
             }
             if (trigMode.equals(TriggerType.DamageAll)) {
-                CardDamageMap table = (CardDamageMap) runParams.get(AbilityKey.DamageMap);
+                CardDamageTable table = (CardDamageTable) runParams.get(AbilityKey.DamageMap);
                 table = table.filteredMap(trigger.getParam("ValidSource"), trigger.getParam("ValidTarget"), trigger.getHostCard(), trigger);
                 table = table.filteredMap(stAb.getParam("ValidSource"), stAb.getParam("ValidTarget"), host, stAb);
                 if (table.isEmpty()) {

@@ -1954,19 +1954,39 @@ public class CardFactoryUtil {
                 t.setOverridingAbility(sa);
                 inst.addTrigger(t);
             }
-        } else if (keyword.startsWith("Ward")) {
-            final String[] k = keyword.split(":");
-            final Cost cost = new Cost(k[1], false);
-            String costDesc = cost.toSimpleString();
-
+        } else if (keyword.startsWith("Ward") && inst instanceof Ward ward) {
             String strTrig = "Mode$ BecomesTarget | ValidSource$ SpellAbility.OppCtrl | ValidTarget$ Card.Self "
-                    + " | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Ward " + costDesc + " ("
+                    + " | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ " + inst.getTitle() + " ("
                     + inst.getReminderText() + ")";
-            String effect = "DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ " + k[1]
-                    + " | UnlessPayer$ TriggeredSourceSAController";
 
             final Trigger trigger = TriggerHandler.parseTrigger(strTrig, card, intrinsic);
-            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+
+            if (ward.getCostString() != null) {
+                String effect = "DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ " + ward.getCostString()
+                        + " | UnlessPayer$ TriggeredSourceSAController";
+                trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            } else {
+                List<AbilitySub> subs = Lists.newArrayList();
+                for (Map.Entry<String, Cost> e : ward.getCosts().entrySet()) {
+                    StringBuilder costDesc = new StringBuilder();
+                    if (e.getValue().isOnlyManaCost()) {
+                        costDesc.append("Pay ");
+                    }
+                    costDesc.append(e.getValue().toSimpleString());
+
+                    String effect = "DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ " + e.getKey()
+                        + " | UnlessPayer$ TriggeredSourceSAController | SpellDescription$ " + costDesc.toString();
+                    subs.add((AbilitySub)AbilityFactory.getAbility(effect, card));
+                }
+
+                String effect = "DB$ GenericChoice | Defined$ TriggeredSourceSAController | AILogic$ PayUnlessCost";
+                SpellAbility saChoice = AbilityFactory.getAbility(effect, card);
+                saChoice.setAdditionalAbilityList("Choices", subs);
+                // in case no cost can be paid
+                saChoice.setAdditionalAbility("FallbackAbility", AbilityFactory.getAbility("DB$ Counter | Defined$ TriggeredSourceSA", card));
+
+                trigger.setOverridingAbility(saChoice);
+            }
 
             inst.addTrigger(trigger);
         } else if (keyword.equals("MayFlashSac")) {
@@ -2466,7 +2486,7 @@ public class CardFactoryUtil {
             String repeffstr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | Secondary$ True"
                     + " | Description$ Umbra armor (" + inst.getReminderText() + ")";
 
-            String abprevDamage = "DB$ DealDamage | Defined$ ReplacedCard | Remove$ All";
+            String abprevDamage = "DB$ HealDamage | Defined$ ReplacedCard";
             String abdestroy = "DB$ Destroy | Defined$ Self";
 
             SpellAbility sa = AbilityFactory.getAbility(abprevDamage, card);

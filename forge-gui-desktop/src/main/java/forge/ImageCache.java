@@ -200,10 +200,28 @@ public class ImageCache {
         return getOriginalImageInternal(imageKey, useDefaultIfNotFound, null);
     }
 
+    private static int sleeveIndexOf(final CardView cardView) {
+        final PlayerView owner = cardView != null ? cardView.getOwner() : null;
+        return owner != null ? owner.getSleeveIndex() : 0;
+    }
+
+    private static String hiddenSleeveCacheKey(final CardView cardView, final int width, final int height) {
+        return String.format("__SLEEVE_%d__#%dx%d", sleeveIndexOf(cardView), width, height);
+    }
+
     // return the pair of image and a flag to indicate if it is a placeholder image.
     private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
         if (null == imageKey) {
             return Pair.of(null, false);
+        }
+
+        // Owner's sleeve as the back for any card the viewer can't see
+        // With no sleeve set, fall through so the standard t:hidden back renders
+        if (imageKey.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))) {
+            final BufferedImage back = FSkin.getSleeveImage(sleeveIndexOf(cardView));
+            if (back != null) {
+                return Pair.of(back, false);
+            }
         }
 
         IPaperCard ipc = null;
@@ -362,6 +380,9 @@ public class ImageCache {
         }
 
         String resizedKey = String.format("%s#%dx%d", key, width, height);
+        if (key.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))) {
+            resizedKey = hiddenSleeveCacheKey(cardView, width, height);
+        }
 
         final BufferedImage cached = _CACHE.getIfPresent(resizedKey);
         if (null != cached) {

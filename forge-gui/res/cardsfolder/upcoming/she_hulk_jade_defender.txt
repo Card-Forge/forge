@@ -1,0 +1,9 @@
+Name:She-Hulk, Jade Defender
+ManaCost:3 G
+Types:Legendary Creature Gamma Hero
+PT:4/4
+K:Reach
+K:Trample
+A:AB$ Destroy | Cost$ 4 G G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to one target artifact or enchantment | TargetMin$ 0 | TargetMax$ 1 | PowerUp$ True | SubAbility$ DBPutCounter | SpellDescription$ Destroy up to one target artifact or enchantment. Put a +1/+1 counter on NICKNAME. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Reach, trample\nPower-up — {4}{G}{G}: Destroy up to one target artifact or enchantment. Put a +1/+1 counter on She-Hulk. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)

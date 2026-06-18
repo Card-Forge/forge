@@ -96,19 +96,19 @@ public class DeckFileHeader {
 
         this.keyCards = new ArrayList<>();
         String rawKeyCards = kvPairs.get(DeckFileHeader.KEY_CARDS);
-        if( StringUtils.isNotBlank(rawKeyCards) ) {
-            for( String k: rawKeyCards.split(";"))
-                if ( StringUtils.isNotBlank(k))
+        if (StringUtils.isNotBlank(rawKeyCards) ) {
+            for (String k: rawKeyCards.split(";"))
+                if (StringUtils.isNotBlank(k))
                     keyCards.add(k.trim());
         }
     }
 
     private void extractDraftNotes(String rawNotes) {
-        if(StringUtils.isBlank(rawNotes) ) {
+        if (StringUtils.isBlank(rawNotes)) {
             return;
         }
 
-        for(String t : rawNotes.split("\\|")) {
+        for (String t : rawNotes.split("\\|")) {
             if (StringUtils.isBlank(t)) {
                 continue;
             }
