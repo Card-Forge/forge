@@ -21,7 +21,6 @@ public class ArchipelagoClient extends Client {
         this.getEventManager().registerListener(new ReceiveItem());
         this.getEventManager().registerListener(new LocationInfo(this));
         this.getEventManager().registerListener(new OnDeathLink(this));
-        this.getEventManager().registerListener(new PrintJsonListener());
     }
 
     public void setSlotData(SlotData slotData) {
