@@ -70,7 +70,7 @@ Replace=0.003512F Rare:fromSheet("MSH borderless land")
 
 [Land]
 Base=BasicLand:!fromSheet("MSH basic frame"):!fromSheet("MSH city calm"):!fromSheet("MSH city chaos")
-Repalce=.1F BasicLand:!fromSheet("MSH basic frame"):!fromSheet("MSH city calm"):!fromSheet("MSH city chaos")+
+Replace=.1F BasicLand:!fromSheet("MSH basic frame"):!fromSheet("MSH city calm"):!fromSheet("MSH city chaos")+
 Replace=.2F BasicLand:fromSheet("MSH basic frame")
 Replace=.05F BasicLand:fromSheet("MSH basic frame")+
 Replace=.1F fromSheet("MSH city calm")
