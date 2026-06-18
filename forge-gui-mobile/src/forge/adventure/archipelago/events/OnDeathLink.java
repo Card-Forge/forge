@@ -21,7 +21,7 @@ public class OnDeathLink {
     public void onDeath(DeathLinkEvent event) {
         SlotData slotData = APClient.getSlotData();
         if (APClient.isConnected() && slotData != null && slotData.DeathLink == 1) {
-            //TODO: Handle deathlink
+            // Todo: Handle deathlink
         }
     }
 }

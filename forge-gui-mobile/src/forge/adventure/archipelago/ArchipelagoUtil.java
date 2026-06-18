@@ -20,16 +20,6 @@ public class ArchipelagoUtil {
     public static final String[] regionNames = {"waste", "white", "blue", "black", "red"};
     public static void drawLockedCardOverlay(
             Batch batch, float x, float y, float w, float h) {
-
-        // Todo: Darkening the card doesn't actually work here yet, please fix.
-        // Darken card
-//        batch.setColor(0.5f, 0.5f, 0.5f, 0.50f);
-//        batch.draw(
-//                FSkinImage.BLANK.getTextureRegion(),
-//                x, y, w, h
-//        );
-//        batch.setColor(Color.WHITE);
-
         // Draw lock icon
         // Normalize bounds (works for flipped cards too)
         float drawX = Math.min(x, x + w);
