@@ -246,11 +246,14 @@ public class ArchipelagoData implements SaveFileContent {
         setUnlockChecksRestAmount = (amountOfSetsToUnlock - amountOfSetsToUnlockFloored);
         List<String> lockedList = new ArrayList<>(lockedSets);
         Random random = new Random();
+        String setToUnlock;
 
-        String setToUnlock = lockedList.get(random.nextInt(lockedList.size()));
-        unlockSetByName(setToUnlock);
-        lockedSets.remove(setToUnlock);
-        receivedAmountOfSetUnlockChecks++;
+        for (int i = 0; i < setUnlockChecksRestAmount; i++) {
+            setToUnlock = lockedList.get(random.nextInt(lockedList.size()));
+            unlockSetByName(setToUnlock);
+            lockedSets.remove(setToUnlock);
+            receivedAmountOfSetUnlockChecks++;
+        }
     }
 
     public void generateGameNotification(String message) {
