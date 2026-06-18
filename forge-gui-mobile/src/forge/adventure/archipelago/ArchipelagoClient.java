@@ -19,7 +19,6 @@ public class ArchipelagoClient extends Client {
         this.setItemsHandlingFlags(ItemsHandling.SEND_ITEMS | ItemsHandling.SEND_OWN_ITEMS | ItemsHandling.SEND_STARTING_INVENTORY);
         this.getEventManager().registerListener(new ConnectResult(this, connectStatusLabel));
         this.getEventManager().registerListener(new ReceiveItem());
-        this.getEventManager().registerListener(new LocationChecked());
         this.getEventManager().registerListener(new LocationInfo(this));
         this.getEventManager().registerListener(new OnDeathLink(this));
         this.getEventManager().registerListener(new PrintJsonListener());

@@ -25,9 +25,9 @@ public class ArchipelagoData implements SaveFileContent {
     // Todo: This works fine for singleplayer even when updates come out but the fact that the list of all sets can grow will cause problems in Archipelago due to a variable amount of checks.
     protected final Set<String> allCardSets = new HashSet<>();
     // List of teleportation runes that we use to gate regions
-    protected final Set<String> regionTeleportingRunes = new HashSet<>(Arrays.asList("white rune","black rune","blue rune","red rune","green rune"));
+    protected final Set<String> regionTeleportingRunes = new HashSet<>(Arrays.asList("white rune", "black rune", "blue rune", "red rune", "green rune"));
     // List of known main bosses that contribute to APWorld completion
-    private final Set<String> mainBosses = new HashSet<>(Arrays.asList("lorthos","emrakul","lathliss","ghalta","griselbrand","akroma"));
+    private final Set<String> mainBosses = new HashSet<>(Arrays.asList("lorthos", "emrakul", "lathliss", "ghalta", "griselbrand", "akroma"));
 
     // Actual user data we want to store
     private final Map<String, Long> colorlessCompletedTownInnEvents = new HashMap<>();
@@ -76,16 +76,21 @@ public class ArchipelagoData implements SaveFileContent {
     private final int totalTownEventsBreakpoint = 1; // Reward for every 1 town events done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
 
-    public enum ARCHIPELAGO_CHECK_TYPES {COLORLESS_BATTLE_WON, WHITE_BATTLE_WON, BLUE_BATTLE_WON, BLACK_BATTLE_WON, RED_BATTLE_WON, GREEN_BATTLE_WON,
+    public enum ARCHIPELAGO_CHECK_TYPES {
+        COLORLESS_BATTLE_WON, WHITE_BATTLE_WON, BLUE_BATTLE_WON, BLACK_BATTLE_WON, RED_BATTLE_WON, GREEN_BATTLE_WON,
         COLORLESS_TOWN_QUESTS, WHITE_TOWN_QUESTS, BLUE_TOWN_QUESTS, BLACK_TOWN_QUESTS, RED_TOWN_QUESTS, GREEN_TOWN_QUESTS,
         COLORLESS_TOWN_EVENTS, WHITE_TOWN_EVENTS, BLUE_TOWN_EVENTS, BLACK_TOWN_EVENTS, RED_TOWN_EVENTS, GREEN_TOWN_EVENTS,
         TOTAL_CARDS_EARNED,
         SLIME_MOTHER_DEFEATED, SLOBAD_DEFEATED, XIRA_DEFEATED, NAHIRI_DEFEATED, VALYX_DEFEATED, JACE_DEFEATED, KIORA_DEFEATED, MYR_SUPERION_DEFEATED, SLIVER_QUEEN_DEFEATED, TEFERI_DEFEATED, GROLNOK_DEFEATED, GUARDIAN_ANGEL_DEFEATED,
         LILIANA_DEFEATED, SLIMEFOOT_DEFEATED, SORIN_DEFEATED, CHANDRA_DEFEATED, TIBALTS_TORTURER_DEFEATED, TIBALT_DEFEATED, ZEDRUUS_COOK_DEFEATED, CONJURER_DEFEATED, ZEDRUU_DEFEATED, GARRUK_DEFEATED, HYDRA_OF_SHANDALAAR_DEFEATED, SCARECROW_CAPTAIN_DEFEATED,
         BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED,
-        WIN_CONDITION_CLEARED};
+        WIN_CONDITION_CLEARED
+    }
 
-    private ArchipelagoData() {}
+    ;
+
+    private ArchipelagoData() {
+    }
 
     public static ArchipelagoData getInstance() {
         return archipelagoDataInstance;
@@ -122,7 +127,7 @@ public class ArchipelagoData implements SaveFileContent {
         bossesDefeatedByName.clear();
         miniBossesDefeatedByName.clear();
         lockedWorldRegionsByName.clear();
-        lockedWorldRegionsByName.addAll(new HashSet<>(Arrays.asList("white","blue","black","red","green")));
+        lockedWorldRegionsByName.addAll(new HashSet<>(Arrays.asList("white", "blue", "black", "red", "green")));
 
         lastArchipelagoRewardIndex = 0;
         totalGoldEarned = 0;
@@ -141,7 +146,6 @@ public class ArchipelagoData implements SaveFileContent {
 
         this.archipelagoMode = archipelagoMode;
 
-        // Todo: Swap with ArchipelagoRandomizer implementation if that's enabled
         if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
             LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
             localRandomizer.randomizeLocalEquipment();
@@ -153,13 +157,141 @@ public class ArchipelagoData implements SaveFileContent {
         if (archipelagoMode == ArchipelagoMode.disabled) return;
         boolean networkedAP = archipelagoMode == ArchipelagoMode.networked_archipelago;
         SlotData slotData = null;
-        if (networkedAP) slotData =  ArchipelagoRandomizer.getInstance().getSlotData();
-
-        switch (type) {
-            case TOTAL_CARDS_EARNED -> {
-                if (networkedAP) {
-                    // Todo: Signal the APWorld that the next card location is triggered
-                } else {
+        if (networkedAP) {
+            slotData = ArchipelagoRandomizer.getInstance().getSlotData();
+            if (slotData == null) {
+                System.err.print("SlotData was null somehow. Should be impossible.");
+            } else {
+                switch (type) {
+                    case TOTAL_CARDS_EARNED -> {
+                        // Todo: Signal the APWorld that the next card location is triggered
+                    }
+                    case COLORLESS_BATTLE_WON -> {
+                        if (totalBattlesWonColorless > 0 && totalBattlesWonColorless % slotData.FightsPerLocation == 0 && totalBattlesWonColorless / slotData.FightsPerLocation <= slotData.FightLocations) {
+                            Archipelago.getInstance().checkLocation(9999L + totalBattlesWonColorless / slotData.FightsPerLocation);
+                        }
+                    }
+                    case WHITE_BATTLE_WON -> {
+                        if (totalBattlesWonWhite > 0 && totalBattlesWonWhite % slotData.FightsPerLocation == 0 && totalBattlesWonWhite / slotData.FightsPerLocation <= slotData.FightLocations) {
+                            Archipelago.getInstance().checkLocation(19999L + totalBattlesWonWhite / slotData.FightsPerLocation);
+                        }
+                    }
+                    case BLUE_BATTLE_WON -> {
+                        if (totalBattlesWonBlue > 0 && totalBattlesWonBlue % slotData.FightsPerLocation == 0 && totalBattlesWonBlue / slotData.FightsPerLocation <= slotData.FightLocations) {
+                            Archipelago.getInstance().checkLocation(29999L + totalBattlesWonBlue / slotData.FightsPerLocation);
+                        }
+                    }
+                    case BLACK_BATTLE_WON -> {
+                        if (totalBattlesWonBlack > 0 && totalBattlesWonBlack % slotData.FightsPerLocation == 0 && totalBattlesWonBlack / slotData.FightsPerLocation <= slotData.FightLocations) {
+                            Archipelago.getInstance().checkLocation(39999L + totalBattlesWonBlack / slotData.FightsPerLocation);
+                        }
+                    }
+                    case RED_BATTLE_WON -> {
+                        if (totalBattlesWonRed > 0 && totalBattlesWonRed % slotData.FightsPerLocation == 0 && totalBattlesWonRed / slotData.FightsPerLocation <= slotData.FightLocations) {
+                            Archipelago.getInstance().checkLocation(49999L + totalBattlesWonRed / slotData.FightsPerLocation);
+                        }
+                    }
+                    case GREEN_BATTLE_WON -> {
+                        if (totalBattlesWonGreen > 0 && totalBattlesWonGreen % slotData.FightsPerLocation == 0 && totalBattlesWonGreen / slotData.FightsPerLocation <= slotData.FightLocations) {
+                            Archipelago.getInstance().checkLocation(59999L + totalBattlesWonGreen / slotData.FightsPerLocation);
+                        }
+                    }
+                    case COLORLESS_TOWN_EVENTS -> {
+                        if (!colorlessCompletedTownInnEvents.isEmpty() && colorlessCompletedTownInnEvents.size() <= slotData.QuestLocations) {
+                            Archipelago.getInstance().checkLocation(10999L + colorlessCompletedTownInnEvents.size());
+                        }
+                    }
+                    case WHITE_TOWN_EVENTS -> {
+                        if (!whiteCompletedTownInnEvents.isEmpty() && whiteCompletedTownInnEvents.size() <= slotData.QuestLocations) {
+                            Archipelago.getInstance().checkLocation(20999L + whiteCompletedTownInnEvents.size());
+                        }
+                    }
+                    case BLUE_TOWN_EVENTS -> {
+                        if (!blueCompletedTownInnEvents.isEmpty() && blueCompletedTownInnEvents.size() <= slotData.QuestLocations) {
+                            Archipelago.getInstance().checkLocation(30999L + blueCompletedTownInnEvents.size());
+                        }
+                    }
+                    case BLACK_TOWN_EVENTS -> {
+                        if (!blackCompletedTownInnEvents.isEmpty() && blackCompletedTownInnEvents.size() <= slotData.QuestLocations) {
+                            Archipelago.getInstance().checkLocation(40999L + blackCompletedTownInnEvents.size());
+                        }
+                    }
+                    case RED_TOWN_EVENTS -> {
+                        if (!redCompletedTownInnEvents.isEmpty() && redCompletedTownInnEvents.size() <= slotData.QuestLocations) {
+                            Archipelago.getInstance().checkLocation(50999L + redCompletedTownInnEvents.size());
+                        }
+                    }
+                    case GREEN_TOWN_EVENTS -> {
+                        if (!greenCompletedTownInnEvents.isEmpty() && greenCompletedTownInnEvents.size() <= slotData.QuestLocations) {
+                            Archipelago.getInstance().checkLocation(60999L + greenCompletedTownInnEvents.size());
+                        }
+                    }
+                    case COLORLESS_TOWN_QUESTS -> {
+                        if (!colorlessCompletedTownQuests.isEmpty() && colorlessCompletedTownQuests.size() <= slotData.QuestLocations) {
+                            Archipelago.getInstance().checkLocation(11999L + colorlessCompletedTownQuests.size());
+                        }
+                    }
+                    case WHITE_TOWN_QUESTS -> {
+                        if (!whiteCompletedTownQuests.isEmpty() && whiteCompletedTownQuests.size() <= slotData.QuestLocations) {
+                            Archipelago.getInstance().checkLocation(21999L + whiteCompletedTownQuests.size());
+                        }
+                    }
+                    case BLUE_TOWN_QUESTS -> {
+                        if (!blueCompletedTownQuests.isEmpty() && blueCompletedTownQuests.size() <= slotData.QuestLocations) {
+                            Archipelago.getInstance().checkLocation(31999L + blueCompletedTownQuests.size());
+                        }
+                    }
+                    case BLACK_TOWN_QUESTS -> {
+                        if (!blackCompletedTownQuests.isEmpty() && blackCompletedTownQuests.size() <= slotData.QuestLocations) {
+                            Archipelago.getInstance().checkLocation(41999L + blackCompletedTownQuests.size());
+                        }
+                    }
+                    case RED_TOWN_QUESTS -> {
+                        if (!redCompletedTownQuests.isEmpty() && redCompletedTownQuests.size() <= slotData.QuestLocations) {
+                            Archipelago.getInstance().checkLocation(51999L + redCompletedTownQuests.size());
+                        }
+                    }
+                    case GREEN_TOWN_QUESTS -> {
+                        if (!greenCompletedTownQuests.isEmpty() && greenCompletedTownQuests.size() <= slotData.QuestLocations) {
+                            Archipelago.getInstance().checkLocation(61999L + greenCompletedTownQuests.size());
+                        }
+                    }
+                    case SLIME_MOTHER_DEFEATED -> Archipelago.getInstance().checkLocation(100L);
+                    case SLOBAD_DEFEATED -> Archipelago.getInstance().checkLocation(101L);
+                    case XIRA_DEFEATED -> Archipelago.getInstance().checkLocation(102L);
+                    case NAHIRI_DEFEATED -> Archipelago.getInstance().checkLocation(200L);
+                    case VALYX_DEFEATED -> Archipelago.getInstance().checkLocation(201L);
+                    case JACE_DEFEATED -> Archipelago.getInstance().checkLocation(300L);
+                    case KIORA_DEFEATED -> Archipelago.getInstance().checkLocation(301L);
+                    case MYR_SUPERION_DEFEATED -> Archipelago.getInstance().checkLocation(302L);
+                    case SLIVER_QUEEN_DEFEATED -> Archipelago.getInstance().checkLocation(303L);
+                    case TEFERI_DEFEATED -> Archipelago.getInstance().checkLocation(304L);
+                    case GROLNOK_DEFEATED -> Archipelago.getInstance().checkLocation(400L);
+                    case GUARDIAN_ANGEL_DEFEATED -> Archipelago.getInstance().checkLocation(401L);
+                    case LILIANA_DEFEATED -> Archipelago.getInstance().checkLocation(402L);
+                    case SLIMEFOOT_DEFEATED -> Archipelago.getInstance().checkLocation(403L);
+                    case SORIN_DEFEATED -> Archipelago.getInstance().checkLocation(404L);
+                    case CHANDRA_DEFEATED -> Archipelago.getInstance().checkLocation(500L);
+                    case TIBALTS_TORTURER_DEFEATED -> Archipelago.getInstance().checkLocation(501L);
+                    case TIBALT_DEFEATED -> Archipelago.getInstance().checkLocation(502L);
+                    case ZEDRUUS_COOK_DEFEATED -> Archipelago.getInstance().checkLocation(503L);
+                    case CONJURER_DEFEATED -> Archipelago.getInstance().checkLocation(504L);
+                    case ZEDRUU_DEFEATED -> Archipelago.getInstance().checkLocation(505L);
+                    case GARRUK_DEFEATED -> Archipelago.getInstance().checkLocation(600L);
+                    case HYDRA_OF_SHANDALAAR_DEFEATED -> Archipelago.getInstance().checkLocation(601L);
+                    case SCARECROW_CAPTAIN_DEFEATED -> Archipelago.getInstance().checkLocation(602L);
+                    case BOSS_COLORLESS_DEFEATED -> Archipelago.getInstance().checkLocation(1L);
+                    case BOSS_WHITE_DEFEATED -> Archipelago.getInstance().checkLocation(2L);
+                    case BOSS_BLUE_DEFEATED -> Archipelago.getInstance().checkLocation(3L);
+                    case BOSS_BLACK_DEFEATED -> Archipelago.getInstance().checkLocation(4L);
+                    case BOSS_RED_DEFEATED -> Archipelago.getInstance().checkLocation(5L);
+                    case BOSS_GREEN_DEFEATED -> Archipelago.getInstance().checkLocation(6L);
+                    case WIN_CONDITION_CLEARED -> Archipelago.getInstance().goal();
+                }
+            }
+        } else {
+            switch (type) {
+                case TOTAL_CARDS_EARNED -> {
                     long totalCardsEarned = 0;
                     for (long value : cardsEarnedByRarity.values()) {
                         totalCardsEarned += value;
@@ -168,248 +300,49 @@ public class ArchipelagoData implements SaveFileContent {
                         unlockRandomSet();
                     }
                 }
-            }
-            case COLORLESS_BATTLE_WON -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (totalBattlesWonColorless > 0 && totalBattlesWonColorless % slotData.FightsPerLocation == 0 && totalBattlesWonColorless / slotData.FightsPerLocation <= slotData.FightLocations) {
-                        Archipelago.getInstance().checkLocation(9999L + totalBattlesWonColorless / slotData.FightsPerLocation);
-                    }
-                } else {
+                case COLORLESS_BATTLE_WON -> {
                     if (totalBattlesWonColorless > 0 && totalBattlesWonColorless % totalBattlesWonBreakpoint == 0) {
                         unlockRandomSet();
                     }
                 }
-            }
-            case WHITE_BATTLE_WON -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (totalBattlesWonWhite > 0 && totalBattlesWonWhite % slotData.FightsPerLocation == 0 && totalBattlesWonWhite / slotData.FightsPerLocation <= slotData.FightLocations) {
-                        Archipelago.getInstance().checkLocation(19999L + totalBattlesWonWhite / slotData.FightsPerLocation);
-                    }
-                } else {
+                case WHITE_BATTLE_WON -> {
                     if (totalBattlesWonWhite > 0 && totalBattlesWonWhite % totalBattlesWonBreakpoint == 0) {
                         unlockRandomSet();
                     }
                 }
-            }
-            case BLUE_BATTLE_WON -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (totalBattlesWonBlue > 0 && totalBattlesWonBlue % slotData.FightsPerLocation == 0 && totalBattlesWonBlue / slotData.FightsPerLocation <= slotData.FightLocations) {
-                        Archipelago.getInstance().checkLocation(29999L + totalBattlesWonBlue / slotData.FightsPerLocation);
-                    }
-                } else {
+                case BLUE_BATTLE_WON -> {
                     if (totalBattlesWonBlue > 0 && totalBattlesWonBlue % totalBattlesWonBreakpoint == 0) {
                         unlockRandomSet();
                     }
                 }
-            }
-            case BLACK_BATTLE_WON -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (totalBattlesWonBlack > 0 && totalBattlesWonBlack % slotData.FightsPerLocation == 0 && totalBattlesWonBlack / slotData.FightsPerLocation <= slotData.FightLocations) {
-                        Archipelago.getInstance().checkLocation(39999L + totalBattlesWonBlack / slotData.FightsPerLocation);
-                    }
-                } else {
+                case BLACK_BATTLE_WON -> {
                     if (totalBattlesWonBlack > 0 && totalBattlesWonBlack % totalBattlesWonBreakpoint == 0) {
                         unlockRandomSet();
                     }
                 }
-            }
-            case RED_BATTLE_WON -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (totalBattlesWonRed > 0 && totalBattlesWonRed % slotData.FightsPerLocation == 0 && totalBattlesWonRed / slotData.FightsPerLocation <= slotData.FightLocations) {
-                        Archipelago.getInstance().checkLocation(49999L + totalBattlesWonRed / slotData.FightsPerLocation);
-                    }
-                } else {
+                case RED_BATTLE_WON -> {
                     if (totalBattlesWonRed > 0 && totalBattlesWonRed % totalBattlesWonBreakpoint == 0) {
                         unlockRandomSet();
                     }
                 }
-            }
-            case GREEN_BATTLE_WON -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (totalBattlesWonGreen > 0 && totalBattlesWonGreen % slotData.FightsPerLocation == 0 && totalBattlesWonGreen / slotData.FightsPerLocation <= slotData.FightLocations) {
-                        Archipelago.getInstance().checkLocation(59999L + totalBattlesWonGreen / slotData.FightsPerLocation);
-                    }
-                } else {
+                case GREEN_BATTLE_WON -> {
                     if (totalBattlesWonGreen > 0 && totalBattlesWonGreen % totalBattlesWonBreakpoint == 0) {
                         unlockRandomSet();
                     }
                 }
+                case COLORLESS_TOWN_EVENTS -> handleTownEventDone(colorlessCompletedTownInnEvents);
+                case WHITE_TOWN_EVENTS -> handleTownEventDone(whiteCompletedTownInnEvents);
+                case BLUE_TOWN_EVENTS -> handleTownEventDone(blueCompletedTownInnEvents);
+                case BLACK_TOWN_EVENTS -> handleTownEventDone(blackCompletedTownInnEvents);
+                case RED_TOWN_EVENTS -> handleTownEventDone(redCompletedTownInnEvents);
+                case GREEN_TOWN_EVENTS -> handleTownEventDone(greenCompletedTownInnEvents);
+                case COLORLESS_TOWN_QUESTS -> handleTownQuestDone(colorlessCompletedTownQuests);
+                case WHITE_TOWN_QUESTS -> handleTownQuestDone(whiteCompletedTownQuests);
+                case BLUE_TOWN_QUESTS -> handleTownQuestDone(blueCompletedTownQuests);
+                case BLACK_TOWN_QUESTS -> handleTownQuestDone(redCompletedTownQuests);
+                case RED_TOWN_QUESTS -> handleTownQuestDone(redCompletedTownQuests);
+                case GREEN_TOWN_QUESTS -> handleTownQuestDone(greenCompletedTownQuests);
             }
-            case COLORLESS_TOWN_EVENTS -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (!colorlessCompletedTownInnEvents.isEmpty() && colorlessCompletedTownInnEvents.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(10999L + colorlessCompletedTownInnEvents.size());
-                    }
-                } else {
-                    handleTownEventDone(colorlessCompletedTownInnEvents);
-                }
-            }
-            case WHITE_TOWN_EVENTS -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (!whiteCompletedTownInnEvents.isEmpty() && whiteCompletedTownInnEvents.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(20999L + whiteCompletedTownInnEvents.size());
-                    }
-                } else {
-                    handleTownEventDone(whiteCompletedTownInnEvents);
-                }
-            }
-            case BLUE_TOWN_EVENTS -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (!blueCompletedTownInnEvents.isEmpty() && blueCompletedTownInnEvents.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(30999L + blueCompletedTownInnEvents.size());
-                    }
-                } else {
-                    handleTownEventDone(blueCompletedTownInnEvents);
-                }
-            }
-            case BLACK_TOWN_EVENTS -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (!blackCompletedTownInnEvents.isEmpty() && blackCompletedTownInnEvents.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(40999L + blackCompletedTownInnEvents.size());
-                    }
-                } else {
-                    handleTownEventDone(blackCompletedTownInnEvents);
-                }
-            }
-            case RED_TOWN_EVENTS -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (!redCompletedTownInnEvents.isEmpty() && redCompletedTownInnEvents.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(50999L + redCompletedTownInnEvents.size());
-                    }
-                } else {
-                    handleTownEventDone(redCompletedTownInnEvents);
-                }
-            }
-            case GREEN_TOWN_EVENTS -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (!greenCompletedTownInnEvents.isEmpty() && greenCompletedTownInnEvents.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(60999L + greenCompletedTownInnEvents.size());
-                    }
-                } else {
-                    handleTownEventDone(greenCompletedTownInnEvents);
-                }
-            }
-            case COLORLESS_TOWN_QUESTS -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (!colorlessCompletedTownQuests.isEmpty() && colorlessCompletedTownQuests.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(11999L + colorlessCompletedTownQuests.size());
-                    }
-                } else {
-                    handleTownQuestDone(colorlessCompletedTownQuests);
-                }
-            }
-            case WHITE_TOWN_QUESTS -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (!whiteCompletedTownQuests.isEmpty() && whiteCompletedTownQuests.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(21999L + whiteCompletedTownQuests.size());
-                    }
-                } else {
-                    handleTownQuestDone(whiteCompletedTownQuests);
-                }
-            }
-            case BLUE_TOWN_QUESTS -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (!blueCompletedTownQuests.isEmpty() && blueCompletedTownQuests.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(31999L + blueCompletedTownQuests.size());
-                    }
-                } else {
-                    handleTownQuestDone(blueCompletedTownQuests);
-                }
-            }
-            case BLACK_TOWN_QUESTS -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (!blackCompletedTownQuests.isEmpty() && blackCompletedTownQuests.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(41999L + blackCompletedTownQuests.size());
-                    }
-                } else {
-                    handleTownQuestDone(redCompletedTownQuests);
-                }
-            }
-            case RED_TOWN_QUESTS -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (!redCompletedTownQuests.isEmpty() && redCompletedTownQuests.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(51999L + redCompletedTownQuests.size());
-                    }
-                } else {
-                    handleTownQuestDone(redCompletedTownQuests);
-                }
-            }
-            case GREEN_TOWN_QUESTS -> {
-                if (networkedAP) {
-                    if (slotData == null) {
-                        System.err.print("SlotData was null somehow. Should be impossible.");
-                    } else if (!greenCompletedTownQuests.isEmpty() && greenCompletedTownQuests.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(61999L + greenCompletedTownQuests.size());
-                    }
-                } else {
-                    handleTownQuestDone(greenCompletedTownQuests);
-                }
-            }
-            case SLIME_MOTHER_DEFEATED -> Archipelago.getInstance().checkLocation(100L);
-            case SLOBAD_DEFEATED -> Archipelago.getInstance().checkLocation(101L);
-            case XIRA_DEFEATED -> Archipelago.getInstance().checkLocation(102L);
-            case NAHIRI_DEFEATED -> Archipelago.getInstance().checkLocation(200L);
-            case VALYX_DEFEATED -> Archipelago.getInstance().checkLocation(201L);
-            case JACE_DEFEATED -> Archipelago.getInstance().checkLocation(300L);
-            case KIORA_DEFEATED -> Archipelago.getInstance().checkLocation(301L);
-            case MYR_SUPERION_DEFEATED -> Archipelago.getInstance().checkLocation(302L);
-            case SLIVER_QUEEN_DEFEATED -> Archipelago.getInstance().checkLocation(303L);
-            case TEFERI_DEFEATED -> Archipelago.getInstance().checkLocation(304L);
-            case GROLNOK_DEFEATED -> Archipelago.getInstance().checkLocation(400L);
-            case GUARDIAN_ANGEL_DEFEATED -> Archipelago.getInstance().checkLocation(401L);
-            case LILIANA_DEFEATED -> Archipelago.getInstance().checkLocation(402L);
-            case SLIMEFOOT_DEFEATED -> Archipelago.getInstance().checkLocation(403L);
-            case SORIN_DEFEATED -> Archipelago.getInstance().checkLocation(404L);
-            case CHANDRA_DEFEATED -> Archipelago.getInstance().checkLocation(500L);
-            case TIBALTS_TORTURER_DEFEATED -> Archipelago.getInstance().checkLocation(501L);
-            case TIBALT_DEFEATED -> Archipelago.getInstance().checkLocation(502L);
-            case ZEDRUUS_COOK_DEFEATED -> Archipelago.getInstance().checkLocation(503L);
-            case CONJURER_DEFEATED -> Archipelago.getInstance().checkLocation(504L);
-            case ZEDRUU_DEFEATED -> Archipelago.getInstance().checkLocation(505L);
-            case GARRUK_DEFEATED -> Archipelago.getInstance().checkLocation(600L);
-            case HYDRA_OF_SHANDALAAR_DEFEATED -> Archipelago.getInstance().checkLocation(601L);
-            case SCARECROW_CAPTAIN_DEFEATED -> Archipelago.getInstance().checkLocation(602L);
-            case BOSS_COLORLESS_DEFEATED -> Archipelago.getInstance().checkLocation(1L);
-            case BOSS_WHITE_DEFEATED -> Archipelago.getInstance().checkLocation(2L);
-            case BOSS_BLUE_DEFEATED -> Archipelago.getInstance().checkLocation(3L);
-            case BOSS_BLACK_DEFEATED -> Archipelago.getInstance().checkLocation(4L);
-            case BOSS_RED_DEFEATED -> Archipelago.getInstance().checkLocation(5L);
-            case BOSS_GREEN_DEFEATED -> Archipelago.getInstance().checkLocation(6L);
-            case WIN_CONDITION_CLEARED -> Archipelago.getInstance().goal();
         }
     }
 
@@ -435,7 +368,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     public boolean isSetUnlocked(String setCode) {
         if (archipelagoMode == ArchipelagoMode.disabled) return true;
-        if (setCode == null || !setsUnlockedByCode.contains(setCode)){
+        if (setCode == null || !setsUnlockedByCode.contains(setCode)) {
             return false;
         } else {
             return true;
@@ -446,10 +379,7 @@ public class ArchipelagoData implements SaveFileContent {
         if (archipelagoMode == ArchipelagoMode.disabled) return true;
         if (!Arrays.asList(ArchipelagoUtil.regionNames).contains(regionName.toLowerCase())) return true;
         lastTraversedRegion = regionName;
-        if (archipelagoDataInstance.lockedWorldRegionsByName.contains(lastTraversedRegion)) {
-            return false;
-        }
-        return true;
+        return !archipelagoDataInstance.lockedWorldRegionsByName.contains(lastTraversedRegion);
     }
 
     public ArchipelagoMode getArchipelagoMode() {
@@ -480,12 +410,9 @@ public class ArchipelagoData implements SaveFileContent {
         // Card sets unlocked
         String setCode = card.getEdition();
 
-        if (isSetUnlocked(setCode)) {
-            return true;
-        }
+        return isSetUnlocked(setCode);
 
         // Neither card nor set is unlocked
-        return false;
     }
 
     public boolean checkDeckUnlocked(Deck selectedDeck) {
