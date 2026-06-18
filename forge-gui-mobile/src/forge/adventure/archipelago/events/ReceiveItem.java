@@ -50,7 +50,7 @@ public class ReceiveItem {
                 case 2002:
                 case 2003:
                 case 2004:
-                    //TODO: implement color sanity
+                    // Todo: implement color sanity
                     break;
                 default:
                     APRandomizer.unlockItemReward(ItemRegistry.getItem(item.itemID));

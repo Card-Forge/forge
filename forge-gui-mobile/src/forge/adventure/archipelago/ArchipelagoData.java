@@ -67,14 +67,9 @@ public class ArchipelagoData implements SaveFileContent {
 
     // List of unlockable checks
     // Todo: Fill list based on archipelago xml contents
-    protected int receivedAmountOfSetUnlockChecks = 0;
     protected float setUnlockChecksRestAmount = 0;
-
     protected int totalAmountOfSetUnlockChecks = 100; // This is set based on the value we receive in the APWorld
-    private final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
-    private final int totalTownQuestsBreakpoint = 1; // Reward for every 1 town quests done.
-    private final int totalTownEventsBreakpoint = 1; // Reward for every 1 town events done.
-    private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
+
 
     public enum ARCHIPELAGO_CHECK_TYPES {
         COLORLESS_BATTLE_WON, WHITE_BATTLE_WON, BLUE_BATTLE_WON, BLACK_BATTLE_WON, RED_BATTLE_WON, GREEN_BATTLE_WON,
@@ -141,7 +136,6 @@ public class ArchipelagoData implements SaveFileContent {
         totalBattlesWonColorless = 0;
         lastTraversedRegion = "waste";
 
-        receivedAmountOfSetUnlockChecks = 0;
         setUnlockChecksRestAmount = 0f;
 
         this.archipelagoMode = archipelagoMode;
@@ -290,43 +284,44 @@ public class ArchipelagoData implements SaveFileContent {
                 }
             }
         } else {
+            LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
             switch (type) {
                 case TOTAL_CARDS_EARNED -> {
                     long totalCardsEarned = 0;
                     for (long value : cardsEarnedByRarity.values()) {
                         totalCardsEarned += value;
                     }
-                    if (totalCardsEarned > 0 && totalCardsEarned % totalCardsEarnedBreakPoint == 0) {
+                    if (totalCardsEarned > 0 && totalCardsEarned % localRandomizer.totalCardsEarnedBreakPoint == 0) {
                         unlockRandomSet();
                     }
                 }
                 case COLORLESS_BATTLE_WON -> {
-                    if (totalBattlesWonColorless > 0 && totalBattlesWonColorless % totalBattlesWonBreakpoint == 0) {
+                    if (totalBattlesWonColorless > 0 && totalBattlesWonColorless % localRandomizer.totalBattlesWonBreakpoint == 0) {
                         unlockRandomSet();
                     }
                 }
                 case WHITE_BATTLE_WON -> {
-                    if (totalBattlesWonWhite > 0 && totalBattlesWonWhite % totalBattlesWonBreakpoint == 0) {
+                    if (totalBattlesWonWhite > 0 && totalBattlesWonWhite % localRandomizer.totalBattlesWonBreakpoint == 0) {
                         unlockRandomSet();
                     }
                 }
                 case BLUE_BATTLE_WON -> {
-                    if (totalBattlesWonBlue > 0 && totalBattlesWonBlue % totalBattlesWonBreakpoint == 0) {
+                    if (totalBattlesWonBlue > 0 && totalBattlesWonBlue % localRandomizer.totalBattlesWonBreakpoint == 0) {
                         unlockRandomSet();
                     }
                 }
                 case BLACK_BATTLE_WON -> {
-                    if (totalBattlesWonBlack > 0 && totalBattlesWonBlack % totalBattlesWonBreakpoint == 0) {
+                    if (totalBattlesWonBlack > 0 && totalBattlesWonBlack % localRandomizer.totalBattlesWonBreakpoint == 0) {
                         unlockRandomSet();
                     }
                 }
                 case RED_BATTLE_WON -> {
-                    if (totalBattlesWonRed > 0 && totalBattlesWonRed % totalBattlesWonBreakpoint == 0) {
+                    if (totalBattlesWonRed > 0 && totalBattlesWonRed % localRandomizer.totalBattlesWonBreakpoint == 0) {
                         unlockRandomSet();
                     }
                 }
                 case GREEN_BATTLE_WON -> {
-                    if (totalBattlesWonGreen > 0 && totalBattlesWonGreen % totalBattlesWonBreakpoint == 0) {
+                    if (totalBattlesWonGreen > 0 && totalBattlesWonGreen % localRandomizer.totalBattlesWonBreakpoint == 0) {
                         unlockRandomSet();
                     }
                 }
@@ -351,8 +346,11 @@ public class ArchipelagoData implements SaveFileContent {
         for (long count : completedTownEventsList.values()) {
             totalTownEventsDone += (int) count;
         }
-        if (archipelagoMode == ArchipelagoMode.solo_randomizer && totalTownEventsDone > 0 && totalTownEventsDone % totalTownEventsBreakpoint == 0) {
-            LocalRandomizer.getInstance().unlockRandomRegion();
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
+            if (totalTownEventsDone > 0 && totalTownEventsDone % localRandomizer.totalTownEventsBreakpoint == 0) {
+                LocalRandomizer.getInstance().unlockRandomRegion();
+            }
         }
     }
 
@@ -361,8 +359,11 @@ public class ArchipelagoData implements SaveFileContent {
         for (long count : completedTownQuestsList.values()) {
             totalTownQuestsDone += (int) count;
         }
-        if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
-            LocalRandomizer.getInstance().unlockRandomRegion();
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
+            if (totalTownQuestsDone > 0 && totalTownQuestsDone % localRandomizer.totalTownQuestsBreakpoint == 0) {
+                LocalRandomizer.getInstance().unlockRandomRegion();
+            }
         }
     }
 
@@ -458,7 +459,8 @@ public class ArchipelagoData implements SaveFileContent {
         }
 
         // If we already received all checks, unlock the entire list of locked sets
-        if (receivedAmountOfSetUnlockChecks >= totalAmountOfSetUnlockChecks) {
+        LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
+        if (localRandomizer.receivedAmountOfSetUnlockChecks >= totalAmountOfSetUnlockChecks) {
             for (String set : lockedSets) {
                 unlockSetByName(set);
             }
@@ -473,7 +475,7 @@ public class ArchipelagoData implements SaveFileContent {
         String setToUnlock = lockedList.get(random.nextInt(lockedList.size()));
         unlockSetByName(setToUnlock);
         lockedSets.remove(setToUnlock);
-        receivedAmountOfSetUnlockChecks++;
+        localRandomizer.receivedAmountOfSetUnlockChecks++;
     }
 
     public void generateGameNotification(String message) {
@@ -856,7 +858,7 @@ public class ArchipelagoData implements SaveFileContent {
         }
 
         setUnlockChecksRestAmount = data.containsKey("setUnlocksReceivedRest") ? data.readFloat("setUnlocksReceivedRest") : 0;
-        receivedAmountOfSetUnlockChecks = data.containsKey("setUnlocksReceived") ? data.readInt("setUnlocksReceived") : 0;
+        localRandomizer.receivedAmountOfSetUnlockChecks = data.containsKey("setUnlocksReceived") ? data.readInt("setUnlocksReceived") : 0;
         totalBattlesWonColorless = data.containsKey("totalBattlesWonColorless") ? data.readInt("totalBattlesWonColorless") : 0;
         totalBattlesWonWhite = data.containsKey("totalBattlesWonWhite") ? data.readInt("totalBattlesWonWhite") : 0;
         totalBattlesWonBlue = data.containsKey("totalBattlesWonBlue") ? data.readInt("totalBattlesWonBlue") : 0;
@@ -940,7 +942,7 @@ public class ArchipelagoData implements SaveFileContent {
         }
 
         data.store("setUnlocksReceivedRest", setUnlockChecksRestAmount);
-        data.store("setUnlocksReceived", receivedAmountOfSetUnlockChecks);
+        data.store("setUnlocksReceived", localRandomizer.receivedAmountOfSetUnlockChecks);
         data.store("totalBattlesWonColorless", totalBattlesWonColorless);
         data.store("totalBattlesWonWhite", totalBattlesWonWhite);
         data.store("totalBattlesWonBlue", totalBattlesWonBlue);

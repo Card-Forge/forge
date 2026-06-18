@@ -148,8 +148,6 @@ public class DuelScene extends ForgeScene {
                     });
             FThreads.invokeInEdtNowOrLater(() -> bossDialogue.show());
         } else {
-            // Todo: Do something with the rewards for archipelago here
-            // Todo: Decide if planeswalker bosses are mini or castle bosses
             if (enemy.getData().boss) {
                 // Check if the enemy's deck is stored in a path containing "miniboss" or just "boss".
                 if (enemy.getData().deck[0].toLowerCase().contains("miniboss")) {

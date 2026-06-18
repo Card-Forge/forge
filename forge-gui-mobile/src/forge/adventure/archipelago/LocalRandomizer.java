@@ -26,6 +26,12 @@ public class LocalRandomizer {
     protected final Set<String> greenItemShopList = new HashSet<>();
     protected final Set<String> remainingEquipmentPool = new HashSet<>();
 
+    protected int receivedAmountOfSetUnlockChecks = 0;
+    protected final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
+    protected final int totalTownQuestsBreakpoint = 1; // Reward for every 1 town quests done.
+    protected final int totalTownEventsBreakpoint = 1; // Reward for every 1 town events done.
+    protected final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
+
     private LocalRandomizer() {
         archipelagoDataInstance = ArchipelagoData.getInstance();
     }
@@ -47,6 +53,7 @@ public class LocalRandomizer {
         redItemShopList.clear();
         greenItemShopList.clear();
         remainingEquipmentPool.clear();
+        receivedAmountOfSetUnlockChecks = 0;
         ArchipelagoData.getInstance().setupFreshSaveFile(ArchipelagoMode.solo_randomizer);
     }
 
