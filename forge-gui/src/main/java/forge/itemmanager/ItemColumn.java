@@ -126,6 +126,6 @@ public class ItemColumn implements Comparator<Entry<InventoryItem, Integer>> {
             return 0;
         }
 
-        return Comparator.nullsFirst(Comparator.<Entry<InventoryItem, Integer>, Comparable>comparing(this.fnSort, getSortState().equals(SortState.ASC) ? Comparator.naturalOrder() : Comparator.reverseOrder())).compare(o1, o2);
+        return Comparator.nullsFirst(Comparator.<Entry<InventoryItem, Integer>, Comparable>comparing(this.fnSort, Comparator.nullsFirst(getSortState().equals(SortState.ASC) ? Comparator.naturalOrder() : Comparator.reverseOrder()))).compare(o1, o2);
     }
 }
