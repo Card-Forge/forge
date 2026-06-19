@@ -19,22 +19,22 @@ public class ReceiveItem {
         if (event.getIndex() > APRandomizer.getLastArchipelagoRewardIndex()) {
             switch ((int)item.itemID) {
                 case 1000:
-                    APRandomizer.unlockGoldReward(750);
+                    APData.unlockGoldReward(750);
                     break;
                 case 1001:
-                    APRandomizer.unlockGoldReward(1500);
+                    APData.unlockGoldReward(1500);
                     break;
                 case 1002:
-                    APRandomizer.unlockGoldReward(3000);
+                    APData.unlockGoldReward(3000);
                     break;
                 case 1003:
-                    APRandomizer.unlockManaCrystalReward(20);
+                    APData.unlockManaCrystalReward(20);
                     break;
                 case 1004:
-                    APRandomizer.unlockManaCrystalReward(30);
+                    APData.unlockManaCrystalReward(30);
                     break;
                 case 1005:
-                    APRandomizer.unlockManaCrystalReward(50);
+                    APData.unlockManaCrystalReward(50);
                     break;
                 case 1009:
                     APData.unlockRandomSet();

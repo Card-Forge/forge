@@ -25,11 +25,16 @@ public class LocalRandomizer {
     protected final Set<String> redItemShopList = new HashSet<>();
     protected final Set<String> greenItemShopList = new HashSet<>();
     protected final Set<String> remainingEquipmentPool = new HashSet<>();
+    protected int checksSinceLastRegionReward = 0;
 
-    protected final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
-    protected final int totalTownQuestsBreakpoint = 1; // Reward for every 1 town quests done.
-    protected final int totalTownEventsBreakpoint = 1; // Reward for every 1 town events done.
-    protected final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
+    private final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
+    private final int totalTownQuestsBreakpoint = 1; // Reward for every 1 town quests done.
+    private final int totalTownEventsBreakpoint = 1; // Reward for every 1 town events done.
+    private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
+    private final int regionUnlockBreakpoint = 8;
+    private final int regionUnlockChance = 15;
+    private final int goldRewardChance = 25;
+    private final int manaRewardChance = 25;
 
     private LocalRandomizer() {
         archipelagoDataInstance = ArchipelagoData.getInstance();
@@ -64,37 +69,37 @@ public class LocalRandomizer {
                     totalCardsEarned += value;
                 }
                 if (totalCardsEarned > 0 && totalCardsEarned % totalCardsEarnedBreakPoint == 0) {
-                    archipelagoDataInstance.unlockRandomSet();
+                    generateRandomizedReward();
                 }
             }
             case COLORLESS_BATTLE_WON -> {
                 if (archipelagoDataInstance.totalBattlesWonColorless > 0 && archipelagoDataInstance.totalBattlesWonColorless % totalBattlesWonBreakpoint == 0) {
-                    archipelagoDataInstance.unlockRandomSet();
+                    generateRandomizedReward();
                 }
             }
             case WHITE_BATTLE_WON -> {
                 if (archipelagoDataInstance.totalBattlesWonWhite > 0 && archipelagoDataInstance.totalBattlesWonWhite % totalBattlesWonBreakpoint == 0) {
-                    archipelagoDataInstance.unlockRandomSet();
+                    generateRandomizedReward();
                 }
             }
             case BLUE_BATTLE_WON -> {
                 if (archipelagoDataInstance.totalBattlesWonBlue > 0 && archipelagoDataInstance.totalBattlesWonBlue % totalBattlesWonBreakpoint == 0) {
-                    archipelagoDataInstance.unlockRandomSet();
+                    generateRandomizedReward();
                 }
             }
             case BLACK_BATTLE_WON -> {
                 if (archipelagoDataInstance.totalBattlesWonBlack > 0 && archipelagoDataInstance.totalBattlesWonBlack % totalBattlesWonBreakpoint == 0) {
-                    archipelagoDataInstance.unlockRandomSet();
+                    generateRandomizedReward();
                 }
             }
             case RED_BATTLE_WON -> {
                 if (archipelagoDataInstance.totalBattlesWonRed > 0 && archipelagoDataInstance.totalBattlesWonRed % totalBattlesWonBreakpoint == 0) {
-                    archipelagoDataInstance.unlockRandomSet();
+                    generateRandomizedReward();
                 }
             }
             case GREEN_BATTLE_WON -> {
                 if (archipelagoDataInstance.totalBattlesWonGreen > 0 && archipelagoDataInstance.totalBattlesWonGreen % totalBattlesWonBreakpoint == 0) {
-                    archipelagoDataInstance.unlockRandomSet();
+                    generateRandomizedReward();
                 }
             }
             case COLORLESS_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.colorlessCompletedTownInnEvents);
@@ -120,7 +125,7 @@ public class LocalRandomizer {
         if (archipelagoDataInstance.archipelagoMode == ArchipelagoMode.solo_randomizer) {
             LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
             if (totalTownEventsDone > 0 && totalTownEventsDone % totalTownEventsBreakpoint == 0) {
-                LocalRandomizer.getInstance().unlockRandomRegion();
+                generateRandomizedReward();
             }
         }
     }
@@ -133,7 +138,40 @@ public class LocalRandomizer {
         if (archipelagoDataInstance.archipelagoMode == ArchipelagoMode.solo_randomizer) {
             LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
             if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
-                LocalRandomizer.getInstance().unlockRandomRegion();
+                generateRandomizedReward();
+            }
+        }
+    }
+
+    // Randomly picks between the 4 reward options.
+    private void generateRandomizedReward() {
+        Random random = new Random();
+        int roll = random.nextInt(100);
+        // Guarantee a region reward after X checks where X is regionUnlockBreakpoint.
+        if (roll < regionUnlockChance || checksSinceLastRegionReward >= regionUnlockBreakpoint) {
+            unlockRandomRegion();
+            checksSinceLastRegionReward = 0;
+        } else {
+            checksSinceLastRegionReward++;
+            if (roll < regionUnlockChance + goldRewardChance) {
+                roll = random.nextInt(3);
+                int goldAmount = 750;
+                switch (roll) {
+                    case 1 -> goldAmount = 1500;
+                    case 2 -> goldAmount = 3000;
+                }
+                archipelagoDataInstance.unlockGoldReward(goldAmount);
+            } else if (roll < regionUnlockChance + goldRewardChance + manaRewardChance) {
+                roll = random.nextInt(3);
+                int manaAmount = 20;
+                switch (roll) {
+                    case 1 -> manaAmount = 30;
+                    case 2 -> manaAmount = 50;
+                }
+                archipelagoDataInstance.unlockManaCrystalReward(manaAmount);
+            } else {
+                // If no other change was hit, generate a set unlock. At the moment there is a 35% chance of this.
+                archipelagoDataInstance.unlockRandomSet();
             }
         }
     }

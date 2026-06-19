@@ -188,16 +188,6 @@ public class ArchipelagoRandomizer {
         }
     }
 
-    public void unlockManaCrystalReward(Integer amount) {
-        Current.player().addShards(amount);
-        archipelagoDataInstance.addShards(amount);
-    }
-
-    public void unlockGoldReward(int amount) {
-        Current.player().giveGold(amount);
-        archipelagoDataInstance.addGold(amount);
-    }
-
     // Todo: Verify that this is actually what we want and it's working
     public void unlockMultipleItemReward(Map<String, Integer> itemNamesAndAmounts) {
         for (Map.Entry<String, Integer> item : itemNamesAndAmounts.entrySet()) {

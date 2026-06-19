@@ -223,6 +223,16 @@ public class ArchipelagoData implements SaveFileContent {
         }
     }
 
+    public void unlockManaCrystalReward(Integer amount) {
+        Current.player().addShards(amount);
+        archipelagoDataInstance.addShards(amount);
+    }
+
+    public void unlockGoldReward(int amount) {
+        Current.player().giveGold(amount);
+        archipelagoDataInstance.addGold(amount);
+    }
+
     // This produces a different result each time it's rolled, the RNG isn't seeded.
     public void unlockRandomSet() {
         // Subtract unlocked sets from full list.
@@ -613,6 +623,7 @@ public class ArchipelagoData implements SaveFileContent {
             loadStringSet(data, "redItemShop", localRandomizer.redItemShopList);
             loadStringSet(data, "greenItemShop", localRandomizer.greenItemShopList);
             loadStringSet(data, "remainingEquipment", localRandomizer.remainingEquipmentPool);
+            if (data.containsKey("checksSinceLastRegionReward")) localRandomizer.checksSinceLastRegionReward = data.readInt("checksSinceLastRegionReward");
         }
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
             WorldData.resetShopLists();
@@ -695,6 +706,7 @@ public class ArchipelagoData implements SaveFileContent {
             saveStringSet(data, "redItemShop", localRandomizer.redItemShopList);
             saveStringSet(data, "greenItemShop", localRandomizer.greenItemShopList);
             saveStringSet(data, "remainingEquipment", localRandomizer.remainingEquipmentPool);
+            data.store("checksSinceLastRegionReward", localRandomizer.checksSinceLastRegionReward);
         }
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
             saveItemDataSet(data, "colorlessEquipmentShop", networkedRandomizer.colorlessEquipmentShopList);
