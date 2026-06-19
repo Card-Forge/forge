@@ -323,7 +323,7 @@ ScryfallCode=MSC
 315 R Methods of the Mighty @David Seeley
 316 R Midnight Angel Armor @Mateus Manhanini
 317 R Monologue Tax @Vilhelmas Banys
-318 R Scourglass @Toni Infante
+318 R Scourglass @Toni Infante ${"flavorName": "Orbital Vibranium Bomb"}
 319 R Promise of Loyalty @Sveta Pikul
 320 R Queen Mother Ramonda @Michael Machira
 321 R Royal Talon Fighter Jet @Sean Vo
