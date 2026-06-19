@@ -36,6 +36,7 @@ public class LocalRandomizer {
     private final int goldRewardChance = 20;
     private final int manaRewardChance = 20;
     private final int maxLifeRewardChance = 5;
+    private final int equipmentRewardChance = 5;
 
     private LocalRandomizer() {
         archipelagoDataInstance = ArchipelagoData.getInstance();
@@ -180,8 +181,15 @@ public class LocalRandomizer {
             } else if (roll < regionUnlockChance + goldRewardChance + manaRewardChance + maxLifeRewardChance) {
                 archipelagoDataInstance.addMaxLife(1);
                 Current.player().addMaxLife(1);
+            } else if (roll < regionUnlockChance + goldRewardChance + manaRewardChance + maxLifeRewardChance + equipmentRewardChance) {
+                Reward reward = takeSingleEquipmentOutOfRemainingPool();
+                switch (reward.getType()) {
+                    case Gold -> archipelagoDataInstance.unlockGoldReward(reward.getCount());
+                    case Shards -> archipelagoDataInstance.unlockManaCrystalReward(reward.getCount());
+                    case Item -> archipelagoDataInstance.addItem(reward.getItem().name);
+                }
             } else {
-                // If no other change was hit, generate a set unlock. At the moment there is a 45% chance of this by default which becomes 55% once all regions are unlocked.
+                // If no other change was hit, generate a set unlock. At the moment there is a 40% chance of this by default which becomes 50% once all regions are unlocked.
                 archipelagoDataInstance.unlockRandomSet();
             }
         }
