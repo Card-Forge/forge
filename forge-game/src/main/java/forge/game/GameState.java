@@ -1,4 +1,4 @@
-package forge.ai;
+package forge.game;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
@@ -10,8 +10,6 @@ import forge.card.CardStateName;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
-import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
@@ -28,7 +26,6 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.PaperToken;
 import forge.util.TextUtil;
@@ -42,7 +39,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
 
-public abstract class GameState {
+public class GameState {
     private static final Map<ZoneType, String> ZONES = new HashMap<>();
     static {
         ZONES.put(ZoneType.Battlefield, "battlefield");
@@ -109,8 +106,6 @@ public abstract class GameState {
 
     public GameState() {
     }
-
-    public abstract IPaperCard getPaperCard(String cardName, String setCode, int artID);
 
     @Override
     public String toString() {
