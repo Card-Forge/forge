@@ -1646,7 +1646,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Dune-BroodAnklet",
       "effect": {
-        "lifeModifier": -4,
+        "lifeModifier": -8,
         "startBattleWithCard": [
           "Dune-Brood Nephilim|GPT"
         ]
@@ -5107,7 +5107,7 @@
   },
   {
     "name": "Manaforce Mace",
-    "description": "Equip +3. +X/+X equal to domain",
+    "description": "Equip 3. +X/+X equal to domain",
     "equipmentSlot": "Right",
     "iconName": "ManaforceMace",
     "effect": {
