@@ -209,12 +209,12 @@ public class ArchipelagoData implements SaveFileContent {
     /// --- The checks below can be called from the networked part of the AP implementation. Note that `setLastArchipelagoRewardIndex` must be called manually. ---
     private void unlockSetByName(String setToUnlock) {
         addSetUnlockedByCode(setToUnlock);
-        String setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD: " + setToUnlock;
+        String setUnlockedText = "Randomizer: Unlocked Set: " + setToUnlock;
         // Some sets don't have booster packs such as full-art land sets (P23).
         var booster = StaticData.instance().getBoosters().get(setToUnlock);
         if (booster != null) {
             Current.player().addBooster(AdventureEventController.instance().generateBooster(setToUnlock));
-            setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD + BOOSTER DETECTED: " + setToUnlock;
+            setUnlockedText = "Randomizer: Unlocked Set + Booster: " + setToUnlock;
             System.out.println(setUnlockedText);
         }
         // Archipelago does not know what set will be unlocked, this randomized locally. Therefore, we always wanna show the player a notificatin.
@@ -224,11 +224,17 @@ public class ArchipelagoData implements SaveFileContent {
     }
 
     public void unlockManaCrystalReward(Integer amount) {
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            generateGameNotification("Randomizer: Shard reward (" + amount + "S)");
+        }
         Current.player().addShards(amount);
         archipelagoDataInstance.addShards(amount);
     }
 
     public void unlockGoldReward(int amount) {
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            generateGameNotification("Randomizer: Gold reward (" + amount + "G)");
+        }
         Current.player().giveGold(amount);
         archipelagoDataInstance.addGold(amount);
     }
@@ -305,7 +311,7 @@ public class ArchipelagoData implements SaveFileContent {
             case "the hydra of shandalaar" -> updatePlayerChecks(ArchipelagoCheckTypes.HYDRA_OF_SHANDALAAR_DEFEATED);
             case "scarecrow captain" -> updatePlayerChecks(ArchipelagoCheckTypes.SCARECROW_CAPTAIN_DEFEATED);
         }
-        System.out.println("FORGE_ARCHIPELAGO: DETECTED MINIBOSS DEFEATED: " + miniBossName);
+        System.out.println("Randomizer: Miniboss Defeated: " + miniBossName);
         return result;
     }
 
@@ -336,7 +342,7 @@ public class ArchipelagoData implements SaveFileContent {
             updatePlayerChecks(ArchipelagoCheckTypes.WIN_CONDITION_CLEARED);
         }
 
-        System.out.println("FORGE_ARCHIPELAGO: DETECTED CASTLE BOSS DEFEATED: " + bossName);
+        System.out.println("Randomizer: Castle Boss Defeated: " + bossName);
         return result;
     }
 
@@ -345,7 +351,7 @@ public class ArchipelagoData implements SaveFileContent {
     }
 
     public boolean addSetUnlockedByCode(String setCode) {
-        System.out.println("FORGE_ARCHIPELAGO: CARD SET REWARD: " + setCode);
+        System.out.println("Randomizer: Unlocked Set: " + setCode);
         return setsUnlockedByCode.add(setCode);
     }
 
