@@ -32,9 +32,10 @@ public class LocalRandomizer {
     private final int totalTownEventsBreakpoint = 1; // Reward for every 1 town events done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
     private final int regionUnlockBreakpoint = 8;
-    private final int regionUnlockChance = 15;
-    private final int goldRewardChance = 25;
-    private final int manaRewardChance = 25;
+    private final int regionUnlockChance = 10;
+    private final int goldRewardChance = 20;
+    private final int manaRewardChance = 20;
+    private final int maxLifeRewardChance = 5;
 
     private LocalRandomizer() {
         archipelagoDataInstance = ArchipelagoData.getInstance();
@@ -146,9 +147,16 @@ public class LocalRandomizer {
     // Randomly picks between the 4 reward options.
     private void generateRandomizedReward() {
         Random random = new Random();
-        int roll = random.nextInt(100);
+        int roll;
+        if (archipelagoDataInstance.lockedWorldRegionsByName.isEmpty()) {
+            // Skip the region reward chance if the pool is empty.
+            roll = random.nextInt(regionUnlockChance, 100);
+        } else {
+            roll = random.nextInt(100);
+        }
+
         // Guarantee a region reward after X checks where X is regionUnlockBreakpoint.
-        if (roll < regionUnlockChance || checksSinceLastRegionReward >= regionUnlockBreakpoint) {
+        if (!archipelagoDataInstance.lockedWorldRegionsByName.isEmpty() && (roll < regionUnlockChance || checksSinceLastRegionReward >= regionUnlockBreakpoint)) {
             unlockRandomRegion();
             checksSinceLastRegionReward = 0;
         } else {
@@ -169,8 +177,11 @@ public class LocalRandomizer {
                     case 2 -> manaAmount = 50;
                 }
                 archipelagoDataInstance.unlockManaCrystalReward(manaAmount);
+            } else if (roll < regionUnlockChance + goldRewardChance + manaRewardChance + maxLifeRewardChance) {
+                archipelagoDataInstance.addMaxLife(1);
+                Current.player().addMaxLife(1);
             } else {
-                // If no other change was hit, generate a set unlock. At the moment there is a 35% chance of this.
+                // If no other change was hit, generate a set unlock. At the moment there is a 45% chance of this by default which becomes 55% once all regions are unlocked.
                 archipelagoDataInstance.unlockRandomSet();
             }
         }
@@ -247,7 +258,7 @@ public class LocalRandomizer {
                     case 0:
                         return new Reward(Reward.Type.Gold, 3000);
                     case 1:
-                        return new Reward(Reward.Type.Shards, 75);
+                        return new Reward(Reward.Type.Shards, 50);
                 }
             }
         }
