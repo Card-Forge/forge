@@ -886,7 +886,7 @@ public final class StaticAbilityContinuous {
                 }
             }
 
-            if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
+            if (controllerMayPlay) {
                 String mayPlayAltCost = mayPlayAltManaCost;
 
                 if (mayPlayAltCost != null) {
@@ -899,21 +899,24 @@ public final class StaticAbilityContinuous {
                 Player mayPlayController = params.containsKey("MayPlayPlayer") ?
                     AbilityUtils.getDefinedPlayers(affectedCard, params.get("MayPlayPlayer"), stAb).get(0) :
                     controller;
-                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
-                        mayPlayAltCost != null ? new Cost(mayPlayAltCost, false, affectedCard.equals(hostCard)) : null, mayPlayWithFlash,
-                        mayPlayGrantZonePermissions, stAb);
 
-                if (mayLookAt != null && mayLookAt.isEmpty()) {
-                    mayLookAt.add(mayPlayController);
-                }
+                if (mayPlayLimit == null || stAb.getMayPlayTurn(mayPlayController) < mayPlayLimit) {
+                    affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
+                            mayPlayAltCost != null ? new Cost(mayPlayAltCost, false, affectedCard.equals(hostCard)) : null, mayPlayWithFlash,
+                            mayPlayGrantZonePermissions, stAb);
 
-                // If the MayPlay effect only affected itself, check if it is in graveyard and give other player who cast Shaman's Trance MayPlay
-                if (stAb.hasParam("Affected") && stAb.getParam("Affected").equals("Card.Self") && affectedCard.isInZone(ZoneType.Graveyard)) {
-                    for (final Player p : game.getPlayers()) {
-                        if (p.hasKeyword("Shaman's Trance") && mayPlayController != p) {
-                            affectedCard.setMayPlay(p, mayPlayWithoutManaCost,
-                                    mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
-                                    mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
+                    if (mayLookAt != null && mayLookAt.isEmpty()) {
+                        mayLookAt.add(mayPlayController);
+                    }
+
+                    // If the MayPlay effect only affected itself, check if it is in graveyard and give other player who cast Shaman's Trance MayPlay
+                    if (stAb.hasParam("Affected") && stAb.getParam("Affected").equals("Card.Self") && affectedCard.isInZone(ZoneType.Graveyard)) {
+                        for (final Player p : game.getPlayers()) {
+                            if (p.hasKeyword("Shaman's Trance") && mayPlayController != p) {
+                                affectedCard.setMayPlay(p, mayPlayWithoutManaCost,
+                                        mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
+                                        mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
+                            }
                         }
                     }
                 }

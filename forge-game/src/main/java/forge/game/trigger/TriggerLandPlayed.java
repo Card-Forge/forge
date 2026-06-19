@@ -92,7 +92,7 @@ public class TriggerLandPlayed extends Trigger {
 
         if (hasParam("NotFirstLand")) {
             Card land = (Card) runParams.get(AbilityKey.Card);
-            if (land.getController().getLandsPlayedThisTurn() < 1) {
+            if (land.getController().getLandsPlayedThisTurn().isEmpty()) {
                 return false;
             }
         }

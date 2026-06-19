@@ -98,8 +98,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numExploredThisTurn;
     private int numTokenCreatedThisTurn;
     private int numForetoldThisTurn;
-    private int landsPlayedThisTurn;
-    private int landsPlayedLastTurn;
+    private int landsPlayedMyLastTurn;
     private int numPowerSurgeLands;
     private int spellsCastThisTurn;
     private int spellsCastThisGame;
@@ -123,6 +122,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private List<Card> discardedThisTurn = new ArrayList<>();
     private List<Card> sacrificedThisTurn = new ArrayList<>();
+    private List<SpellAbility> landsPlayedThisTurn = new ArrayList<>();
 
     private int simultaneousDamage = 0;
 
@@ -1637,6 +1637,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final Card playLand(final Card land, SpellAbility cause) {
+
         land.setController(this, 0);
         if (land.isFaceDown()) {
             land.turnFaceUp(null);
@@ -1644,20 +1645,26 @@ public class Player extends GameEntity implements Comparable<Player> {
                 land.changeToState(cause.getCardStateName());
             }
         }
+        Card lki = CardCopyService.getLKICopy(land);
 
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(land);
         runParams.put(AbilityKey.Origin, land.getZone().getZoneType().name());
 
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.CardLKI, lki);
+
         game.copyLastState();
-        final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, cause);
+        final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, cause, moveParams);
         game.updateLastStateForCard(c);
+
+        SpellAbility causeLKI = cause.copy(lki, true);
 
         // Run triggers
         runParams.put(AbilityKey.SpellAbility, cause);
         game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
 
         game.getStack().unfreezeStack();
-        addLandPlayedThisTurn();
+        addLandPlayedThisTurn(causeLKI);
 
         // play a sound
         game.fireEvent(new GameEventLandPlayed(PlayerView.get(this), CardView.get(c)));
@@ -1699,7 +1706,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // check for adjusted max lands play per turn
-        return getLandsPlayedThisTurn() < getMaxLandPlays();
+        return getLandsPlayedThisTurn().size() < getMaxLandPlays();
     }
 
     public final int getMaxLandPlays() {
@@ -2239,32 +2246,26 @@ public class Player extends GameEntity implements Comparable<Player> {
         startingHandSize = shs;
     }
 
-    public final int getLandsPlayedThisTurn() {
+    public final List<SpellAbility> getLandsPlayedThisTurn() {
         return landsPlayedThisTurn;
     }
-    public final int getLandsPlayedLastTurn() {
-        return landsPlayedLastTurn;
+    public final int getLandsPlayedMyLastTurn() {
+        return landsPlayedMyLastTurn;
     }
-    public final void addLandPlayedThisTurn() {
-        landsPlayedThisTurn++;
+    public final void addLandPlayedThisTurn(SpellAbility landLki) {
+        landsPlayedThisTurn.add(landLki);
         achievementTracker.landsPlayed++;
         view.updateNumLandThisTurn(this);
     }
     public final void resetLandsPlayedThisTurn() {
-        landsPlayedThisTurn = 0;
+        landsPlayedThisTurn.clear();
         view.updateNumLandThisTurn(this);
     }
-    public final void setLandsPlayedThisTurn(int num) {
-        // This method should only be used directly when setting up the game state.
-        landsPlayedThisTurn = num;
-
-        view.updateNumLandThisTurn(this);
-    }
-    public final void setLandsPlayedLastTurn(int num) {
-        landsPlayedLastTurn = num;
+    public final void setLandsPlayedMyLastTurn(int num) {
+        landsPlayedMyLastTurn = num;
     }
     public final void setNumDrawnLastTurn(int num) {
-        numDrawnLastTurn= num;
+        numDrawnLastTurn = num;
     }
 
     public final int getInvestigateNumThisTurn() {
@@ -2493,8 +2494,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumTokenCreatedThisTurn();
         setNumCardsInHandStartedThisTurnWith(getCardsIn(ZoneType.Hand).size());
         setTappedLandForManaThisTurn(false);
-        setLandsPlayedLastTurn(getLandsPlayedThisTurn());
-        resetLandsPlayedThisTurn();
+
         resetInvestigatedThisTurn();
         resetSurveilThisTurn();
         resetDiscardedThisTurn();
@@ -2525,9 +2525,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (game.getPhaseHandler().isPlayerTurn(this)) {
             setBeenDealtCombatDamageSinceLastTurn(false);
             setAttackedPlayersMyLastTurn(getAttackedPlayersMyTurn());
+            setLandsPlayedMyLastTurn(getLandsPlayedThisTurn().size());
             clearAttackedMyTurn();
             this.lastTurnNr = game.getPhaseHandler().getTurn();
         }
+        resetLandsPlayedThisTurn();
     }
 
     public boolean canCastSorcery() {

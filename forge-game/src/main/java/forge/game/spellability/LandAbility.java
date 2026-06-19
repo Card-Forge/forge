@@ -65,10 +65,6 @@ public class LandAbility extends AbilityStatic {
         getHostCard().setSplitStateToPlayAbility(this);
         final Card result = getActivatingPlayer().playLand(getHostCard(), this);
 
-        // increase mayplay used
-        if (getMayPlay() != null) {
-            getMayPlay().incMayPlayTurn();
-        }
         // if land isn't in battlefield try to reset the card state
         if (result != null && !result.isInPlay()) {
             result.setState(CardStateName.Original, true);
