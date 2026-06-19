@@ -127,10 +127,16 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     Collection<PaperCard> getAllCards(Predicate<PaperCard> predicate);
     Collection<PaperCard> getAllCards(String cardName,Predicate<PaperCard> predicate);
     Collection<PaperCard> getAllCards(CardEdition edition);
+    Collection<PaperCard> getAllCardsNoAlt(String rulesName, Predicate<PaperCard> predicate);
     Collection<PaperCard> getUniqueCards();
+    PaperCard getUniqueByName(String cardName);
+    PaperCard getUniqueByNameNoAlt(String rulesName);
+    Collection<ICardFace> getAllFaces();
+    ICardFace getFaceByName(String faceName);
 
     Stream<PaperCard> streamAllCards();
     Stream<PaperCard> streamUniqueCards();
+    Stream<ICardFace> streamAllFaces();
 
     /* UTILITY METHODS
      * =============== */

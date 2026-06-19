@@ -433,7 +433,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
+    public CardCollectionView chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
         return chooseItems(player.getZone(ZoneType.Hand).getCards(), numDiscard);
     }
 
@@ -733,11 +733,6 @@ public class PlayerControllerForTests extends PlayerController {
     public List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, int min, int max, DelayedReveal delayedReveal, String selectPrompt, Player decider) {
         // this isn't used
         return null;
-    }
-
-    @Override
-    public void resetAtEndOfTurn() {
-        // Not used by the controller for tests
     }
 
     @Override

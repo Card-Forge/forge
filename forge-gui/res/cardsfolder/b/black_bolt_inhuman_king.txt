@@ -1,0 +1,11 @@
+Name:Black Bolt, Inhuman King
+ManaCost:2 W U
+Types:Legendary Creature Inhuman Noble Hero
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, NICKNAME gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Lethal Voice — Whenever NICKNAME becomes the target of a spell or ability an opponent controls, destroy target nonland permanent that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand+ControlledBy TriggeredSourceSAController | ValidTgtsDesc$ nonland permanent that player controls
+SVar:BuffedBy:Card.nonLand+nonCreature
+Oracle:Flying\nWhenever you cast a noncreature spell, Black Bolt gets +2/+2 until end of turn.\nLethal Voice — Whenever Black Bolt becomes the target of a spell or ability an opponent controls, destroy target nonland permanent that player controls.

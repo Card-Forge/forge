@@ -1401,12 +1401,8 @@ public class GameAction {
         return checkStateEffects(runEvents, Sets.newHashSet());
     }
     public boolean checkStateEffects(final boolean runEvents, final Set<Card> affectedCards) {
-        // sol(10/29) added for Phase updates, state effects shouldn't be
-        // checked during Spell Resolution (except when persist-returning
-        if (game.getStack().isResolving()) {
-            return false;
-        }
-
+        // check game over early for win conditions such as Platinum Angel + Hurricane lethal for both players
+        checkGameOverCondition();
         if (game.isGameOver()) {
             return false;
         }
@@ -1414,9 +1410,6 @@ public class GameAction {
         final boolean refreeze = game.getStack().isFrozen();
         game.getStack().setFrozen(true);
         game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
-
-        // check the game over condition early for win conditions such as Platinum Angel + Hurricane lethal for both players
-        checkGameOverCondition();
 
         // do this multiple times, sometimes creatures/permanents will survive when they shouldn't
         boolean performedSBA = false;
@@ -1438,7 +1431,7 @@ public class GameAction {
                 p.checkKeywordCard();
 
                 for (final ZoneType zt : ZoneType.values()) {
-                    if (zt == ZoneType.Battlefield) {
+                    if (zt == ZoneType.Battlefield || zt == ZoneType.Flashback) {
                         continue;
                     }
                     for (final Card c : p.getCardsIn(zt).threadSafeIterable()) {
@@ -2668,7 +2661,6 @@ public class GameAction {
     }
 
     public CardCollection mill(final PlayerCollection millers, final int numCards, final ZoneType destination, final SpellAbility sa, final Map<AbilityKey, Object> moveParams) {
-        final boolean reveal = sa != null && !sa.hasParam("NoReveal");
         final boolean showRevealDialog = sa != null && sa.hasParam("ShowMilledCards");
 
         final CardCollection milled = new CardCollection();
@@ -2683,17 +2675,15 @@ public class GameAction {
 
             // Reveal the milled cards, so players don't have to manually inspect the
             // graveyard to figure out which ones were milled.
-            if (reveal) { // do not reveal when exiling face down
-                String toZoneStr = destination.equals(ZoneType.Graveyard) ? "" : " (" +
-                        Localizer.getInstance().getMessage("lblMilledToZone", destination.getTranslatedName()) + ")";
-                if (showRevealDialog) {
-                    final String message = Localizer.getInstance().getMessage("lblMilledCards");
-                    final boolean addSuffix = !toZoneStr.isEmpty();
-                    reveal(milledPlayer, destination, p, false, message, addSuffix);
-                }
-                game.fireEvent(new GameEventAddLog(GameLogEntryType.ZONE_CHANGE, p + " milled " +
-                        Lang.joinHomogenous(milledPlayer) + toZoneStr + "."));
+            String toZoneStr = destination.equals(ZoneType.Graveyard) ? "" : " (" +
+                    Localizer.getInstance().getMessage("lblMilledToZone", destination.getTranslatedName()) + ")";
+            if (showRevealDialog) {
+                final String message = Localizer.getInstance().getMessage("lblMilledCards");
+                final boolean addSuffix = !toZoneStr.isEmpty();
+                reveal(milledPlayer, destination, p, false, message, addSuffix);
             }
+            game.fireEvent(new GameEventAddLog(GameLogEntryType.ZONE_CHANGE, p + " milled " +
+                    Lang.joinHomogenous(milledPlayer) + toZoneStr + "."));
         }
 
         if (!milled.isEmpty()) {
@@ -2705,7 +2695,7 @@ public class GameAction {
         return milled;
     }
 
-    public void dealDamage(final boolean isCombat, final CardDamageMap damageMap, final CardDamageMap preventMap,
+    public void dealDamage(final boolean isCombat, final CardDamageTable damageMap, final CardDamageTable preventMap,
                            final GameEntityCounterTable counterTable, final SpellAbility cause) {
         // Clear assigned damage if is combat
         if (isCombat) {

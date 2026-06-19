@@ -1,14 +1,11 @@
 package forge.screens.home;
 
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
@@ -18,39 +15,29 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.AIOption;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckProxy;
-import forge.deck.DeckSection;
-import forge.deck.DeckType;
-import forge.deck.DeckgenUtil;
-import forge.deck.RandomDeckGenerator;
+import forge.deck.*;
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
 import forge.game.card.CardView;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
+import forge.gamemodes.net.*;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
 import forge.gui.SwingPrefBinders;
+import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
 import forge.interfaces.IPlayerChangeListener;
+import forge.localinstance.skin.FSkinProp;
 import forge.item.PaperCard;
+import forge.itemmanager.ItemManagerConfig;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FLabel;
-import forge.toolbox.FList;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FPanel;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.FScrollPanel;
-import forge.toolbox.FSkin;
+import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinImage;
-import forge.toolbox.FTextField;
 import forge.util.*;
 import net.miginfocom.swing.MigLayout;
 
@@ -62,23 +49,33 @@ import net.miginfocom.swing.MigLayout;
 public class VLobby implements ILobbyView {
 
     static final int MAX_PLAYERS = 8;
+    private static final int EVENT_BTN_WIDTH = 200;
+    private static final int EVENT_BTN_HEIGHT = 50;
+    private static final int START_ROW_LABEL_WIDTH = 150;
+    private static final int START_ROW_COMBO_WIDTH = 50;
+    private static final int START_ROW_GAMES_WIDTH = START_ROW_LABEL_WIDTH + START_ROW_COMBO_WIDTH;
+    private static final int COMMANDER_BRACKET_SIDE_WIDTH = START_ROW_LABEL_WIDTH * 2 + START_ROW_COMBO_WIDTH;
+    private static final int COMMANDER_GAMES_SIDE_WIDTH = COMMANDER_BRACKET_SIDE_WIDTH + START_ROW_GAMES_WIDTH;
     final Localizer localizer = Localizer.getInstance();
     private static final ForgePreferences prefs = FModel.getPreferences();
 
     // General variables
     private final GameLobby lobby;
+    private CLobby controller;
     private IPlayerChangeListener playerChangeListener = null;
     private final LblHeader lblTitle = new LblHeader(localizer.getMessage("lblHeaderConstructedMode"));
     private int activePlayersNum = 0;
     private int playerWithFocus = 0; // index of the player that currently has focus
 
     private final StartButton btnStart  = new StartButton();
-    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
-    private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] {"1","3","5"});
-    private final SwingPrefBinders.ComboBox gamesInMatchBinder =
-      new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
+    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 3"));
+    private final JComboBox<String> maximumCommanderBracket = new JComboBox<>(new String[]{"1", "2", "3", "4", "5"});
+    private final SwingPrefBinders.ComboBox maximumCommanderBracketBinder = new SwingPrefBinders.ComboBox(FPref.DECKGEN_MAXIMUM_COMMANDER_BRACKET, maximumCommanderBracket);
+    private final JPanel maximumCommanderBracketFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+    private final JComboBox<String> gamesInMatch = new JComboBox<>(new String[]{"1", "3", "5"});
+    private final SwingPrefBinders.ComboBox gamesInMatchBinder = new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
     private final JPanel gamesInMatchFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
-    private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2")); // Main content frame
+    private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2, hidemode 3")); // Main content frame
 
     // Variants frame and variables
     private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 10"));
@@ -128,11 +125,105 @@ public class VLobby implements ILobbyView {
     private final Vector<Object> humanListData = new Vector<>();
     private final Vector<Object> aiListData = new Vector<>();
 
-    // CTR
+    // Mode selector (network only). Mode state lives in CLobby; this combo is the widget.
+    private final FComboBoxPanel<String> cboModePanel = new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblMode"),
+            ImmutableList.of(Localizer.getInstance().getMessage("lblConstructed"),
+                    Localizer.getInstance().getMessage("lblLimited")));
+
+    // Event config panel (top of right panel in Draft/Sealed mode)
+    private final FPanel eventConfigPanel = new FPanel(new MigLayout("insets 5 10 15 10, gap 2, wrap"));
+    private final FLabel lblEventFormat = new FLabel.Builder().text("\u2014").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
+    private final FLabel lblEventProduct = new FLabel.Builder().text("\u2014").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
+    private final FLabel lblEventPanelTitle = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkEventDetailsTitle")).fontSize(15).fontStyle(Font.BOLD).build();
+    private final FLabel lblEventStatus = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC).build();
+    private final FLabel lblEventFormatCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblFormat")).fontSize(13).build();
+    private final FLabel lblEventProductCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblProduct")).fontSize(13).build();
+    private final FLabel lblEventPickTimerCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkPickTimerCaption")).fontSize(13).build();
+    private final FLabel lblEventDateCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblEventDate")).fontSize(13).build();
+    private final FLabel lblEventDate = new FLabel.Builder().text("\u2014").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
+    private final FLabel lblEventPickTimer = new FLabel.Builder().text("\u2014").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
+    private final FButton btnNewEvent = new FButton(Localizer.getInstance().getMessage("lblNetworkNewEventButton"));
+    private final FLabel btnDismissEvent = new FLabel.Builder().icon(FSkin.getIcon(FSkinProp.ICO_CLOSE)).iconInBackground(false).hoverable(true).tooltip(Localizer.getInstance().getMessage("lblNetworkDismissEventTooltip")).build();
+    private final FCheckBox cbDeckConformance = new FCheckBox(Localizer.getInstance().getMessage("lblNetworkDeckFilter"));
+
+    // Split panel for right side in Draft/Sealed mode
+    private final FPanel eventRightPanel = new FPanel(new MigLayout("insets 0, gap 0, wrap, fill"));
+
+    // Action buttons for Draft/Sealed mode
+    private final FButton btnStartEvent = new FButton(Localizer.getInstance().getMessage("lblNetworkStartDraft"));
+    private final FButton btnStartMatch = new FButton(Localizer.getInstance().getMessage("lblNetworkStartMatch"));
+
+    private boolean refreshGeneratedDecks = false;
+
+    // (network draft state lives in CLobby)
+
     public VLobby(final GameLobby lobby) {
         this.lobby = lobby;
+        // Create controller first — VLobby.update() and render methods rely on a non-null
+        // controller. External callers (e.g. CSubmenuOnlineLobby) pick up the same instance
+        // via view.getController().
+        new CLobby(this);
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+
+        if (lobby.isAllowNetworking()) {
+            cboModePanel.addActionListener(e -> controller.onModeChanged());
+            // Set a larger font on the combo box to match/exceed the variants label
+            for (final Component c : cboModePanel.getComponents()) {
+                c.setFont(FSkin.getBoldFont(14).getBaseFont());
+            }
+            constructedFrame.add(cboModePanel, "w 100%, h 28px!, gapbottom 10px, spanx 2, wrap");
+
+            eventRightPanel.setOpaque(false);
+            eventConfigPanel.setOpaque(true);
+            eventConfigPanel.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2).stepColor(20).getColor());
+            eventConfigPanel.setLayout(new MigLayout(
+                    "insets 10 14 10 14, gap 14 8, wrap 2, hidemode 3",
+                    "[110px!][grow,fill]"));
+
+            // Muted caption color derived from CLR_TEXT so it degrades with the theme
+            java.awt.Color captionColor = FSkin.getColor(FSkin.Colors.CLR_TEXT).stepColor(-80).getColor();
+            lblEventFormatCaption.setForeground(captionColor);
+            lblEventProductCaption.setForeground(captionColor);
+            lblEventPickTimerCaption.setForeground(captionColor);
+            lblEventDateCaption.setForeground(captionColor);
+            lblEventStatus.setForeground(captionColor);
+
+            // Row 1: title (+ X dismiss for host). Nested panel so hiding the X doesn't let
+            // MigLayout's wrap-count logic drop the status label onto this row.
+            final JPanel titleRow = new JPanel(new MigLayout("insets 0, fillx"));
+            titleRow.setOpaque(false);
+            titleRow.add(lblEventPanelTitle, "growx, pushx");
+            if (lobby.hasControl()) {
+                btnDismissEvent.setCommand(() -> controller.onDismissEvent());
+                titleRow.add(btnDismissEvent, "w 24px!, h 24px!, align right");
+            }
+            eventConfigPanel.add(titleRow, "span 2, growx, wrap");
+
+            // Row 2: centered status message (shown only when no event exists)
+            eventConfigPanel.add(lblEventStatus, "span 2, align center, wrap, gapbottom 4");
+
+            // Rows 3-6: caption | value pairs
+            eventConfigPanel.add(lblEventFormatCaption);
+            eventConfigPanel.add(lblEventFormat, "wrap");
+            eventConfigPanel.add(lblEventProductCaption);
+            eventConfigPanel.add(lblEventProduct, "wrap");
+            eventConfigPanel.add(lblEventPickTimerCaption);
+            eventConfigPanel.add(lblEventPickTimer, "wrap");
+            eventConfigPanel.add(lblEventDateCaption);
+            eventConfigPanel.add(lblEventDate, "wrap, gapbottom 6");
+
+            // Row 7: filter checkbox
+            cbDeckConformance.setSelected(true);
+            if (lobby.hasControl()) {
+                cbDeckConformance.addActionListener(e -> controller.onConformanceChanged());
+            } else {
+                cbDeckConformance.setEnabled(false);
+            }
+            eventConfigPanel.add(cbDeckConformance, "span 2, wrap");
+
+            updateEventPanelState();
+        }
 
         ////////////////////////////////////////////////////////
         //////////////////// Variants Panel ////////////////////
@@ -167,7 +258,6 @@ public class VLobby implements ILobbyView {
 
         ////////////////////////////////////////////////////////
         ////////////////////// Deck Panel //////////////////////
-
         populateVanguardLists();
         for (int i = 0; i < MAX_PLAYERS; i++) {
             buildDeckPanels(i);
@@ -179,25 +269,58 @@ public class VLobby implements ILobbyView {
         // Start Button
         if (lobby.hasControl()) {
             pnlStart.setOpaque(false);
-            pnlStart.add(btnStart, "align center");
+            maximumCommanderBracketFrame.add(newLabel("Maximum Bracket:"), "w " + START_ROW_LABEL_WIDTH + "px!, h 30px!");
+            maximumCommanderBracketFrame.add(maximumCommanderBracket, "w " + START_ROW_COMBO_WIDTH + "px!, h 30px!");
+            maximumCommanderBracketFrame.setOpaque(false);
+            addConstructedStartControls();
             // Start button event handling
             btnStart.addActionListener(arg0 -> {
+                if (refreshGeneratedDecks) {
+                    refreshGeneratedDecks = false;
+                    update(true);
+                }
                 Runnable startGame = lobby.startGame();
                 if (startGame != null) {
                     startGame.run();
                 }
             });
         }
+        if (lobby.isAllowNetworking() && lobby.hasControl()) {
+            btnStartEvent.setFont(FSkin.getRelativeFont(18));
+            btnStartEvent.addActionListener(e -> controller.startEvent());
+            btnStartMatch.setFont(FSkin.getRelativeFont(18));
+            btnStartMatch.addActionListener(arg0 -> {
+                Runnable startGame = lobby.startGame();
+                if (startGame != null) {
+                    startGame.run();
+                }
+            });
+            btnNewEvent.setFont(FSkin.getRelativeFont(18));
+            btnNewEvent.addActionListener(e -> controller.openEventConfigDialog());
+        }
         String defaultGamesInMatch = FModel.getPreferences().getPref(FPref.UI_MATCHES_PER_GAME);
         if (defaultGamesInMatch == null || defaultGamesInMatch.isEmpty()) {
             defaultGamesInMatch = "3";
         }
 
-        gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w 150px!, h 30px!");
-        gamesInMatchFrame.add(gamesInMatch, "w 50px!, h 30px!");
+        gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w " + START_ROW_LABEL_WIDTH + "px!, h 30px!");
+        gamesInMatchFrame.add(gamesInMatch, "w " + START_ROW_COMBO_WIDTH + "px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
+    }
 
-        pnlStart.add(gamesInMatchFrame);
+    private void addConstructedStartControls() {
+        if (lobby.getGameType() == GameType.Commander || hasVariant(GameType.Commander)) {
+            maximumCommanderBracketFrame.setVisible(true);
+            pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 3"));
+            pnlStart.add(maximumCommanderBracketFrame, "w " + COMMANDER_BRACKET_SIDE_WIDTH + "px!, align left");
+            pnlStart.add(btnStart, "align center");
+            pnlStart.add(gamesInMatchFrame, "w " + COMMANDER_GAMES_SIDE_WIDTH + "px!, align left");
+        } else {
+            maximumCommanderBracketFrame.setVisible(false);
+            pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+            pnlStart.add(btnStart, "align center");
+            pnlStart.add(gamesInMatchFrame, "align center");
+        }
     }
 
     public void updateDeckPanel() {
@@ -244,10 +367,11 @@ public class VLobby implements ILobbyView {
         activePlayersNum = lobby.getNumberOfSlots();
         addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
 
-        final boolean allowNetworking = lobby.isAllowNetworking();
+        controller.syncModeFromHost();
+        controller.onLobbyDataChanged();
 
-        ImmutableList<VariantCheckBox> vntBoxes = null;
-        if (allowNetworking) {
+        ImmutableList<VariantCheckBox> vntBoxes;
+        if (lobby.isAllowNetworking()) {
             vntBoxes = vntBoxesNetwork;
         } else {
             vntBoxes = vntBoxesLocal;
@@ -268,7 +392,7 @@ public class VLobby implements ILobbyView {
                     panel = playerPanels.get(i);
                     isNewPanel = !panel.isVisible();
                 } else {
-                    panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
+                    panel = new PlayerPanel(this, i, slot, lobby.mayEdit(i), lobby.hasControl());
                     playerPanels.add(panel);
                     String constraints = "pushx, growx, wrap, hidemode 3";
                     if (i == 0) {
@@ -282,6 +406,7 @@ public class VLobby implements ILobbyView {
                 panel.setType(type);
                 panel.setPlayerName(slot.getName());
                 panel.setAvatarIndex(slot.getAvatarIndex());
+                panel.setSleeveIndex(slot.getSleeveIndex());
                 panel.setTeam(slot.getTeam());
                 panel.setIsReady(slot.isReady());
                 panel.setIsDevMode(slot.isDevMode());
@@ -326,9 +451,48 @@ public class VLobby implements ILobbyView {
         if (playerWithFocus >= activePlayersNum) {
             changePlayerFocus(activePlayersNum - 1);
         } else {
-            populateDeckPanel(lobby.getGameType());
+            updateRightPanelForMode();
         }
         refreshPanels(true, true);
+    }
+
+    public void setController(final CLobby controller) {
+        this.controller = controller;
+    }
+    public CLobby getController() {
+        return controller;
+    }
+
+    @Override
+    public IDraftEventHandler getDraftHandler() {
+        return controller;
+    }
+
+    GameLobby getLobby() {
+        return lobby;
+    }
+
+    String getCurrentModeSelection() {
+        return cboModePanel.getSelectedItem();
+    }
+
+    int getCurrentModeIndex() {
+        return cboModePanel.getSelectedIndex();
+    }
+    void setCurrentModeIndex(int idx) {
+        cboModePanel.setSelectedIndex(idx);
+    }
+
+    void refreshConstructedFrame() {
+        constructedFrame.revalidate();
+        constructedFrame.repaint();
+    }
+
+    boolean getConformanceSelected() {
+        return cbDeckConformance.isSelected();
+    }
+    void setConformanceSelected(boolean selected) {
+        cbDeckConformance.setSelected(selected);
     }
 
     public void setPlayerChangeListener(final IPlayerChangeListener listener) {
@@ -336,7 +500,10 @@ public class VLobby implements ILobbyView {
     }
 
     void setReady(final int index, final boolean ready) {
-        if (ready && decks[index] == null && !lobby.hasAutoGeneratedVariant()) {
+        // Limited mode: deck is produced by the draft/sealed flow (no pre-selection
+        // required when starting a new event) or is selected from the filtered event
+        // deck list when running a match from a past event. Skip the generic check.
+        if (ready && decks[index] == null && !lobby.hasAutoGeneratedVariant() && !controller.isLimitedMode()) {
             SOptionPane.showErrorDialog(localizer.getMessage("msgSelectAdeckBeforeReadying"));
             update(false);
             return;
@@ -389,6 +556,7 @@ public class VLobby implements ILobbyView {
     void removePlayer(final int index) {
         lobby.removeSlot(index);
     }
+
     boolean hasVariant(final GameType variant) {
         return lobby.hasVariant(variant);
     }
@@ -397,7 +565,7 @@ public class VLobby implements ILobbyView {
         final PlayerPanel panel = getPlayerPanel(index);
         return UpdateLobbyPlayerEvent.create(panel.getType(),
                 panel.getPlayerName(),
-                panel.getAvatarIndex(), -1 /*TODO panel.getSleeveIndex()*/,
+                panel.getAvatarIndex(), panel.getSleeveIndex(),
                 panel.getTeam(), panel.isArchenemy(),
                 panel.isDevMode(),
                 panel.getAiOptions(),
@@ -449,6 +617,7 @@ public class VLobby implements ILobbyView {
     }
 
     private void selectMainDeck(final FDeckChooser mainChooser, final int playerIndex, final boolean isCommanderDeck) {
+        refreshGeneratedDecks = false;
         final DeckType type = mainChooser.getSelectedDeckType();
         final Deck deck = mainChooser.getDeck();
         // something went wrong, clear selection to prevent error loop
@@ -687,9 +856,144 @@ public class VLobby implements ILobbyView {
         newFocus.setFocused(true);
 
         playersScroll.getViewport().scrollRectToVisible(newFocus.getBounds());
-        populateDeckPanel(gType);
+        updateRightPanelForMode();
 
         refreshPanels(true, true);
+    }
+
+    void setVariantsVisible(boolean visible) {
+        Container scrollPane = variantsPanel.getParent();
+        while (scrollPane != null && !(scrollPane instanceof JScrollPane)) {
+            scrollPane = scrollPane.getParent();
+        }
+        if (scrollPane != null) {
+            scrollPane.setVisible(visible);
+        }
+    }
+
+    void updateRightPanelForMode() {
+        decksFrame.removeAll();
+        if (!controller.isLimitedMode()) {
+            populateDeckPanel(lobby.getGameType());
+        } else {
+            eventRightPanel.removeAll();
+            eventRightPanel.add(eventConfigPanel, "w 100%, growx, gapbottom 10px, wrap");
+
+            if (playerWithFocus < playerPanels.size() && lobby.mayEdit(playerWithFocus)) {
+                final FDeckChooser chooser = getDeckChooser(playerWithFocus);
+                if (chooser != null) {
+                    eventRightPanel.add(chooser, "w 100%, h 100%, grow, push");
+                }
+            }
+
+            decksFrame.add(eventRightPanel, "w 100%, h 100%, growy, pushy");
+
+            if (lobby.hasControl()) {
+                controller.scanAvailableEvents();
+            }
+            updateDeckListFilter();
+        }
+        decksFrame.revalidate();
+        decksFrame.repaint();
+    }
+
+    void updateActionButtons() {
+        final boolean isLimited = controller.isLimitedMode();
+
+        // Rebuild pnlStart layout
+        pnlStart.removeAll();
+        pnlStart.setOpaque(false);
+        if (lobby.hasControl()) {
+            if (isLimited) {
+                pnlStart.setLayout(new MigLayout("insets 0, gap 0"));
+                final String label = (controller.getConfiguredFormat() == EventFormat.SEALED)
+                        ? localizer.getMessage("lblNetworkGeneratePools")
+                        : localizer.getMessage("lblNetworkStartDraft");
+                btnStartEvent.setText(label);
+                boolean isExistingEvent = controller.getActiveEventId() != null;
+                btnStartEvent.setEnabled(controller.getConfiguredFormat() != null && !isExistingEvent);
+                btnStartMatch.setEnabled(isExistingEvent);
+                final String eventBtn = "w " + EVENT_BTN_WIDTH + "px!, h " + EVENT_BTN_HEIGHT + "px!";
+                pnlStart.add(btnNewEvent, "cell 0 0, " + eventBtn + ", gapright 20");
+                pnlStart.add(btnStartEvent, "cell 1 0, " + eventBtn + ", gapright 20");
+                pnlStart.add(btnStartMatch, "cell 2 0, " + eventBtn);
+                pnlStart.add(gamesInMatchFrame, "cell 2 1, align center");
+            } else {
+                addConstructedStartControls();
+            }
+        }
+        // Non-host: nothing to show here — match controls are host-only.
+        pnlStart.revalidate();
+        pnlStart.repaint();
+    }
+
+    /** Render the event panel from pre-computed contents. No decisions live here. */
+    void setEventPanelContents(CLobby.EventPanelContents c) {
+        lblEventStatus.setText(c.statusText());
+        lblEventStatus.setVisible(!c.statusText().isEmpty());
+        lblEventFormat.setText(c.formatText());
+        lblEventProduct.setText(c.productText());
+        lblEventPickTimer.setText(c.timerText());
+        lblEventDate.setText(c.dateText());
+        if (lobby.hasControl()) {
+            btnDismissEvent.setVisible(c.showDismissX());
+        }
+        cbDeckConformance.setVisible(c.showConformance());
+        cbDeckConformance.setEnabled(c.conformanceEnabled());
+        eventConfigPanel.revalidate();
+        eventConfigPanel.repaint();
+    }
+
+    /** Delegator kept for existing call sites; prefer controller.refreshEventPanel(). */
+    void updateEventPanelState() {
+        controller.refreshEventPanel();
+    }
+
+    void updateDeckListFilter() {
+        if (!controller.isLimitedMode()) return;
+        if (playerWithFocus >= playerPanels.size() || !lobby.mayEdit(playerWithFocus)) return;
+
+        final FDeckChooser chooser = getDeckChooser(playerWithFocus);
+        if (chooser == null) return;
+
+        if (chooser.getSelectedDeckType() != DeckType.NET_EVENT_DECK) {
+            chooser.setSelectedDeckType(DeckType.NET_EVENT_DECK);
+        }
+
+        // Re-read pools from disk so edits made in the deck editor are reflected.
+        FModel.getDecks().reloadNetworkEventDecks();
+
+        final String activeEventId = controller.getActiveEventId();
+        List<DeckProxy> allDecks;
+        if (activeEventId == null) {
+            // No event loaded — there are no valid decks for a limited match yet.
+            allDecks = new ArrayList<>();
+        } else if (controller.isActiveConformance()) {
+            allDecks = new ArrayList<>(DeckProxy.getAllNetworkEventDecks());
+            allDecks.removeIf(dp -> {
+                Deck d = dp.getDeck();
+                return d == null || !activeEventId.equals(DeckProxy.getEventTag(d, "eventId"));
+            });
+        } else {
+            allDecks = new ArrayList<>(DeckProxy.getAllNetworkEventDecks());
+        }
+
+        // Preserve the user's current pick across pool rebuilds. Match by deck name —
+        // reloadNetworkEventDecks() rebuilds DeckProxy instances so reference equality
+        // would fail on every lobby update, silently resetting selection.
+        DeckProxy previouslySelected = chooser.getLstDecks().getSelectedItem();
+        String prevName = (previouslySelected != null && previouslySelected.getDeck() != null)
+                ? previouslySelected.getDeck().getName() : null;
+        chooser.getLstDecks().setPool(allDecks);
+        chooser.getLstDecks().setup(ItemManagerConfig.NET_EVENT_DECKS);
+        if (prevName != null) {
+            for (DeckProxy dp : allDecks) {
+                if (dp.getDeck() != null && prevName.equals(dp.getDeck().getName())) {
+                    chooser.getLstDecks().setSelectedItem(dp);
+                    break;
+                }
+            }
+        }
     }
 
     /** Saves avatar prefs for players one and two. */
@@ -768,6 +1072,10 @@ public class VLobby implements ILobbyView {
         return names;
     }
 
+    public void markDirty() {
+        refreshGeneratedDecks = true;
+    }
+
     /////////////////////////////////////////////
     //========== Various listeners in build order
 
@@ -785,6 +1093,7 @@ public class VLobby implements ILobbyView {
                     lobby.removeVariant(variantType);
                 }
                 VLobby.this.update(false);
+                VLobby.this.updateActionButtons();
             });
         }
     }
@@ -824,7 +1133,7 @@ public class VLobby implements ILobbyView {
             final GameType gameType = forCommander ? type : GameType.Constructed;
             final FDeckChooser fdc = new FDeckChooser(null, ai, gameType, forCommander);
             fdc.initialize(prefKey, deckType);
-            fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, forCommander));
+            fdc.setDeckSelectionCommand(() -> selectMainDeck(fdc, iSlot, forCommander));
             return fdc;
         });
     }
@@ -883,6 +1192,11 @@ public class VLobby implements ILobbyView {
       return gamesInMatchBinder;
     }
 
+    /** Return the maximumCommanderBracketBinder. */
+    public SwingPrefBinders.ComboBox getMaximumCommanderBracketBinder() {
+      return maximumCommanderBracketBinder;
+    }
+
     /** Populate vanguard lists. */
     private void populateVanguardLists() {
         humanListData.add("Use deck's default avatar (random if unavailable)");
@@ -916,4 +1230,5 @@ public class VLobby implements ILobbyView {
             vgdList.setSelectedIndex(0);
         }
     }
+
 }

@@ -1,0 +1,7 @@
+Name:Powerful Broker
+ManaCost:2 G
+Types:Creature Human Villain
+PT:3/3
+A:AB$ PutCounter | Cost$ T | ValidTgts$ Permanent,Player | TgtPrompt$ Select target permanent or player | CounterType$ ExistingCounter | EachExistingCounter$ True | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ For each kind of counter on target permanent or player, give that permanent or player another counter of that kind. Activate only as a sorcery.
+DeckHints:Ability$Counters
+Oracle:{T}: For each kind of counter on target permanent or player, give that permanent or player another counter of that kind. Activate only as a sorcery.

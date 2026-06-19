@@ -1,0 +1,8 @@
+Name:Hyperion's Atomic Vision
+ManaCost:1 W
+Types:Instant
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ Behold<1/Hero> | Description$ As an additional cost to cast this spell, you may behold a Hero. (You may choose a Hero you control or reveal a Hero card from your hand.)
+A:SP$ Destroy | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SubAbility$ DBScry | SpellDescription$ Destroy target tapped creature. If a Hero was beheld, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | Condition$ OptionalCost | ConditionOptionalPaid$ True
+DeckHints:Type$Hero
+Oracle:As an additional cost to cast this spell, you may behold a Hero. (You may choose a Hero you control or reveal a Hero card from your hand.)\nDestroy target tapped creature. If a Hero was beheld, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)

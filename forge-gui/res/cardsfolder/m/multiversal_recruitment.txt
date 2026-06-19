@@ -1,0 +1,7 @@
+Name:Multiversal Recruitment
+ManaCost:3 U
+Types:Sorcery
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | NonLegendary$ True | SpellDescription$ Create a token that's a copy of target creature you control, except it isn't legendary.
+K:Flashback:5 U U
+DeckHas:Ability$Token
+Oracle:Create a token that's a copy of target creature you control, except it isn't legendary.\nFlashback {5}{U}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

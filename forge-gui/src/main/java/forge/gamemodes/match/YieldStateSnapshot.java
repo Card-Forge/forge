@@ -2,6 +2,7 @@ package forge.gamemodes.match;
 
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.AutoYieldStore;
 
 import java.io.Serializable;
@@ -24,5 +25,6 @@ public record YieldStateSnapshot(
         Map<String, AutoYieldStore.TriggerDecision> abilityTriggerDecisions,
         boolean autoYieldsDisabled,
         boolean autoTriggersDisabled,
-        Map<PlayerView, EnumSet<PhaseType>> skipPhases
+        Map<PlayerView, EnumSet<PhaseType>> skipPhases,
+        Map<FPref, String> prefOverrides
 ) implements Serializable {}

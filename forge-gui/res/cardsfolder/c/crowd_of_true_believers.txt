@@ -1,0 +1,8 @@
+Name:Crowd of True Believers
+ManaCost:W
+Types:Creature Human Citizen
+PT:1/2
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl+attackingAlone | TgtPrompt$ Select target creature you control that's attacking alone | NumAtt$ +1 | SubAbility$ DBGainLife | SpellDescription$ Target creature you control that's attacking alone gets +1/+0 until end of turn. You gain 1 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:{T}: Target creature you control that's attacking alone gets +1/+0 until end of turn. You gain 1 life.

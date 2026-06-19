@@ -71,6 +71,7 @@ public class InputBlock extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void showMessage() {
+        getController().pushBlockerCandidates(defender, combat);
         // could add "Reset Blockers" button
         Localizer localizer = Localizer.getInstance();
         getController().getGui().updateButtons(getOwner(), true, false, true);
@@ -87,6 +88,12 @@ public class InputBlock extends InputSyncronizedBase {
             getController().getGame().fireEvent(GameEventCombatUpdate.fromCards(combat.getAttackers(), combat.getAllBlockers()));
 
         getController().getGui().showCombat();
+    }
+
+    @Override
+    protected void onStop() {
+        // Clear so highlights don't survive autopass.
+        getController().clearActionableCards();
     }
 
     /** {@inheritDoc} */
@@ -182,11 +189,11 @@ public class InputBlock extends InputSyncronizedBase {
 
     private void setCurrentAttacker(final Card card) {
         if (currentAttacker != null) {
-            getController().getGui().setHighlighted(CardView.get(currentAttacker), false);
+            getController().getGui().setHighlighted(List.of(CardView.get(currentAttacker)), false);
         }
         currentAttacker = card;
         if (card != null) {
-            getController().getGui().setHighlighted(CardView.get(card), true);
+            getController().getGui().setHighlighted(List.of(CardView.get(card)), true);
         }
     }
 }

@@ -9,7 +9,7 @@ public interface GameObject {
     default boolean canBeTargetedBy(final SpellAbility sa) {
         return false;
     }
-    
+
     /**
      * Checks if is valid.
      * 

@@ -67,16 +67,6 @@ public class HostedMatch {
 
     public HostedMatch() {}
 
-    /**
-     * Look up the IGuiGame for a given Player from the guis map.
-     * This is the authoritative source for the GUI assigned to each player,
-     * unlike PlayerControllerHuman.getGui() which may be overwritten.
-     */
-    public IGuiGame getGuiForPlayer(final Player player) {
-        if (guis == null || player == null) { return null; }
-        return guis.get(player.getRegisteredPlayer());
-    }
-
     public void setStartGameHook(Runnable hook) {
         startGameHook = hook;
     }
@@ -88,7 +78,7 @@ public class HostedMatch {
         gameRules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
         gameRules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
         gameRules.setAnteIncludeBasicLands(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_INCLUDE_BASIC_LANDS));
-        gameRules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+        gameRules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_MANABURN));
         gameRules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
         gameRules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
         gameRules.setGamesPerMatch(FModel.getPreferences().getPrefInt(FPref.UI_MATCHES_PER_GAME));
@@ -389,10 +379,10 @@ public class HostedMatch {
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
             humanController.getYieldController().clearAutoYields();
 
-            if (humanCount > 0) //conceded
+            //conceded
+            if (humanCount > 0 || !GuiBase.getInterface().isLibgdxPort() || !isMatchOver) {
                 humanController.getGui().afterGameEnd();
-            else if (!GuiBase.getInterface().isLibgdxPort()||!isMatchOver)
-                humanController.getGui().afterGameEnd();
+            }
             humanController.getGui().updateDayTime(null);
         }
         humanControllers.clear();
@@ -425,10 +415,6 @@ public class HostedMatch {
         public Void visit(final UiEventBlockerAssigned event) {
             for (final PlayerControllerHuman humanController : humanControllers) {
                 humanController.getGui().updateSingleCard(event.blocker());
-                final PlayerView p = humanController.getPlayer().getView();
-                if (event.attackerBeingBlocked() != null && event.attackerBeingBlocked().getController().equals(p)) {
-                    humanController.autoPassCancel();
-                }
             }
             return null;
         }

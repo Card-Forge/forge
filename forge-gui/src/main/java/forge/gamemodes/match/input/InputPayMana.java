@@ -62,6 +62,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected void onStop() {
+        getController().clearActionableCards();
         if (!isFinished()) {
             // Clear current Mana cost being paid for SA
             saPaidFor.setManaCostBeingPaid(null);
@@ -95,14 +96,14 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             List<SpellAbility> manaAbilities = getAllManaAbilities(card);
             // Desktop Forge floating menu functionality
             if (manaAbilities.size() == 1) {
-                activateManaAbility(card, manaAbilities.get(0));
+                return activateManaAbility(card, manaAbilities.get(0));
             } else {
                 SpellAbility spellAbility = getController().getAbilityToPlay(card, manaAbilities, triggerEvent);
                 if (spellAbility != null) {
-                    activateManaAbility(card, spellAbility);
+                    return activateManaAbility(card, spellAbility);
                 }
             }
-            return true;
+            return false;
         }
     }
 
@@ -400,6 +401,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (activateDelayedCard()) {
             return;
         }
+        // Drop just-tapped sources from the highlight set.
+        getController().pushActionableCards(true);
         if (supportAutoPay()) {
             if (canPayManaCost == null) {
                 //use AI utility to determine if mana cost can be paid if that hasn't been determined yet
@@ -422,6 +425,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     @Override
     public void showMessage() {
         if (isFinished()) { return; }
+        getController().pushActionableCards(true);
         updateButtons();
         onStateChanged();
     }
@@ -445,6 +449,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     public boolean isPaid() { return bPaid; }
+
+    public boolean isActivatingManaAbility() { return locked; }
 
     protected String messagePrefix;
     public void setMessagePrefix(String prompt) {

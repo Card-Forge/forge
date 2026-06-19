@@ -186,7 +186,7 @@ public class ControlGainAi extends SpellAbilityAi {
             Card t = null;
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().size() == 0)) {
+                if (sa.getTargets().size() < sa.getMinTargets() || sa.getTargets().size() == 0) {
                     sa.resetTargets();
                     return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 } else {

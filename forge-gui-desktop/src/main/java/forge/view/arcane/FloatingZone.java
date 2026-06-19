@@ -423,17 +423,6 @@ public class FloatingZone extends FloatingCardArea {
         }
     }
 
-    /** Deregister all zone docs. Called on game end before closeAll. */
-    public static void deregisterZoneDocs() {
-        for (final VZone vZone : dockedZones.values()) {
-            final EDocID docID = vZone.getDocumentID();
-            if (docID != null) {
-                docID.setDoc(null);
-            }
-        }
-        // Don't clear dockedZones here — closeAll() handles that
-    }
-
     /** Remove dockedZones entries that weren't placed into cells by loadLayout. */
     public static void pruneUnparentedDocks() {
         dockedZones.values().removeIf(vZone -> vZone.getParentCell() == null);
@@ -540,9 +529,14 @@ public class FloatingZone extends FloatingCardArea {
             .ghostText(Localizer.getInstance().getMessage("lblFilterByName"))
             .build();
     private final FHtmlViewer promptLabel = new FHtmlViewer();
-    private final FLabel hotkeyHint = new FLabel.Builder()
+    private final FLabel hotkeyHintBase = new FLabel.Builder()
             .text(Localizer.getInstance().getMessage("lblHotkeySelectHint"))
-            .fontSize(11)
+            .fontSize(10)
+            .fontAlign(SwingConstants.CENTER)
+            .build();
+    private final FLabel hotkeyHintMin = new FLabel.Builder()
+            .text(Localizer.getInstance().getMessage("lblHotkeySelectHintMin"))
+            .fontSize(10)
             .fontAlign(SwingConstants.CENTER)
             .build();
     private String filter = "";
@@ -559,23 +553,22 @@ public class FloatingZone extends FloatingCardArea {
 
     protected Iterable<CardView> getCards() {
         FCollectionView<CardView> zoneCards = player.getCards(zone);
-        if (zoneCards != null) {
-            Iterable<CardView> safe = getMatchUI().isNetGame() ? zoneCards.threadSafeIterable() : zoneCards;
-            cardList = new FCollection<>(safe);
-            if (sortedByName) {
-                cardList.sort(comp);
-            } else if (zone == ZoneType.Flashback) {
-                cardList.sort(ZONE_ORDER_COMPARATOR);
-            }
-            if (!filter.isEmpty()) {
-                final String needle = filter.toLowerCase(Locale.ROOT);
-                cardList.removeIf(card -> !getMatchUI().mayView(card)
-                        || !card.getName().toLowerCase(Locale.ROOT).contains(needle));
-            }
-            return cardList;
-        } else {
-            return null;
+        if (zoneCards.isEmpty()) {
+            return zoneCards;
         }
+        Iterable<CardView> safe = getMatchUI().isNetGame() ? zoneCards.threadSafeIterable() : zoneCards;
+        cardList = new FCollection<>(safe);
+        if (sortedByName) {
+            cardList.sort(comp);
+        } else if (zone == ZoneType.Flashback) {
+            cardList.sort(ZONE_ORDER_COMPARATOR);
+        }
+        if (!filter.isEmpty()) {
+            final String needle = filter.toLowerCase(Locale.ROOT);
+            cardList.removeIf(card -> !getMatchUI().mayView(card)
+                    || !card.getName().toLowerCase(Locale.ROOT).contains(needle));
+        }
+        return cardList;
     }
 
     private FloatingZone(final CMatchUI matchUI, final PlayerView player0, final ZoneType zone0) {
@@ -590,8 +583,10 @@ public class FloatingZone extends FloatingCardArea {
         window.add(promptLabel, "growx, wmin 10, gapbottom 4, wrap, hidemode 3");
         window.add(searchField, "growx, wrap");
         window.add(getScrollPane(), "grow, push, wrap");
-        hotkeyHint.setVisible(false);
-        window.add(hotkeyHint, "growx");
+        hotkeyHintBase.setVisible(false);
+        hotkeyHintMin.setVisible(false);
+        window.add(hotkeyHintBase, "growx, wrap, hidemode 3");
+        window.add(hotkeyHintMin, "growx, hidemode 3");
         window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); //pfps so that old content does not reappear?
         getScrollPane().setViewportView(this);
         setOpaque(false);
@@ -613,7 +608,11 @@ public class FloatingZone extends FloatingCardArea {
         onShow();
         // Override the base class's focusableWindowState=false so the search field can take keystrokes.
         getWindow().setFocusableWindowState(true);
-        if (getMatchUI().isSelecting()) {
+        // The window auto-grabs focus to the filter on show; suppress that while the prompt has an
+        // actionable button so OK/Cancel keep keyboard focus (the field stays clickable to filter).
+        final boolean takeFilterFocus = !getMatchUI().isInputButtonEnabled();
+        getWindow().setAutoRequestFocus(takeFilterFocus);
+        if (takeFilterFocus) {
             getWindow().setDefaultFocus(searchField);
         }
         getWindow().setVisible(true);
@@ -631,29 +630,26 @@ public class FloatingZone extends FloatingCardArea {
     @Override
     protected void doRefresh() {
         List<CardPanel> cardPanels = new ArrayList<>();
-        Iterable<CardView> cards = getCards();
-        if (cards != null) {
-            for (final CardView card : cards) {
-                CardPanel cardPanel = getCardPanel(card.getId());
-                if (cardPanel == null) {
-                    cardPanel = new CardPanel(getMatchUI(), card);
-                    cardPanel.setDisplayEnabled(true);
-                } else {
-                    cardPanel.setCard(card);
-                }
-                if (zone == ZoneType.Flashback) {
-                    final ZoneType cardZone = card.getZone();
-                    if (cardZone != null) {
-                        cardPanel.setZoneBanner(cardZone.getTranslatedName().toUpperCase(), cardZone);
-                    }
-                }
-                cardPanels.add(cardPanel);
+
+        for (final CardView card : getCards()) {
+            CardPanel cardPanel = getCardPanel(card.getId());
+            if (cardPanel == null) {
+                cardPanel = new CardPanel(getMatchUI(), card);
+                cardPanel.setDisplayEnabled(true);
+            } else {
+                cardPanel.setCard(card);
             }
+            if (zone == ZoneType.Flashback) {
+                final ZoneType cardZone = card.getZone();
+                if (cardZone != null) {
+                    cardPanel.setZoneBanner(cardZone.getTranslatedName().toUpperCase(), cardZone);
+                }
+            }
+            cardPanels.add(cardPanel);
         }
         setCardPanels(cardPanels);
         final int shown = cardPanels.size();
-        final FCollectionView<CardView> zoneCards = player.getCards(zone);
-        final int total = zoneCards != null ? zoneCards.size() : shown;
+        final int total = player.getZoneSize(zone);
         if (!filter.isEmpty() && shown < total) {
             final String sortDetail = sortedByName
                     ? Localizer.getInstance().getMessage("lblRightClickToUnSort")
@@ -667,7 +663,7 @@ public class FloatingZone extends FloatingCardArea {
     }
 
     private void updatePromptVisibility() {
-        final boolean show = getCards() != null && StreamUtil.stream(getCards()).anyMatch(c -> getMatchUI().isSelectable(c));
+        final boolean show = StreamUtil.stream(getCards()).anyMatch(c -> getMatchUI().isSelectable(c));
         final String prompt = show ? getMatchUI().getPromptMessage() : null;
         if (prompt != null && !prompt.isEmpty()) {
             promptLabel.setText(FSkin.encodeSymbols(prompt, false));
@@ -676,6 +672,8 @@ public class FloatingZone extends FloatingCardArea {
             promptLabel.setText("");
             promptLabel.setVisible(false);
         }
+        hotkeyHintBase.setVisible(show);
+        hotkeyHintMin.setVisible(show && getMatchUI().getSelectionMin() > 1);
         window.revalidate();
     }
 
@@ -779,7 +777,37 @@ public class FloatingZone extends FloatingCardArea {
         }
         if (!e.isControlDown() || e.isAltDown() || e.isMetaDown()) return false;
         final int digit = e.getKeyCode() - KeyEvent.VK_0;
-        if (digit < 1 || digit > 9) return false;
+        if (digit < 0 || digit > 9) return false;
+        if (digit == 0) {
+            // Ctrl+0: auto-pick the first N selectables that haven't been picked yet.
+            // Selection progress is tracked client-side via the highlighted set — both
+            // InputSelectTargets and InputSelectManyBase call setHighlighted(true/false)
+            // on add/remove, so highlighted ∩ selectable == cards picked so far.
+            // Batched into one selectCard so the server processes atomically — separate
+            // messages race (a thread spawned per message).
+            for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {
+                if (!fz.isVisible()) continue;
+                final int min = fz.getMatchUI().getSelectionMin();
+                if (min < 1) continue;
+                final int need = Math.max(0, min - fz.getMatchUI().countPickedSelectables());
+                if (need < 1) continue;
+                final List<CardView> picks = new ArrayList<>(need);
+                for (final CardPanel panel : new ArrayList<>(fz.getCardPanels())) {
+                    if (picks.size() >= need) break;
+                    final CardView cv = panel.getCard();
+                    if (!fz.getMatchUI().isSelectable(cv)) continue;
+                    if (fz.getMatchUI().isHighlighted(cv)) continue;
+                    picks.add(cv);
+                }
+                if (picks.isEmpty()) continue;
+                // Wire-serializable: ArrayList.subList() returns a SubList view that's not Serializable.
+                final List<CardView> others = picks.size() > 1 ? new ArrayList<>(picks.subList(1, picks.size())) : null;
+                fz.getMatchUI().getGameController().selectCard(picks.get(0), others,
+                        new MouseTriggerEvent(MouseEvent.BUTTON1, 0, 0));
+                return true;
+            }
+            return false;
+        }
         for (final FloatingZone fz : floatingAreas.values()) {
             if (!fz.isVisible()) continue;
             final CardPanel target = fz.findPanelByHotkeyDigit(digit);
@@ -807,8 +835,11 @@ public class FloatingZone extends FloatingCardArea {
                 panel.setHotkeyDigit(0);
             }
         }
-        if (!clear) {
-            hotkeyHint.setVisible(next > 1);
+    }
+
+    public static void clearAllHotkeyAffordance() {
+        for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {
+            if (fz.isVisible()) fz.assignOwnHotkeyDigits(true);
         }
     }
 

@@ -92,6 +92,7 @@ public class NetConnectUtil {
                 return null;
             }
         });
+        server.setDraftHandler(view.getDraftHandler());
         chatInterface.setGameClient(new IRemote() {
             @Override
             public void send(final NetEvent event) {
@@ -174,7 +175,7 @@ public class NetConnectUtil {
         port = hostPort.port();
         if (port == -1) port = Integer.valueOf(ForgeNetPreferences.FNetPref.NET_PORT.getDefault());
 
-        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui, hostname, port);
+        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), gui, hostname, port);
         onlineLobby.setClient(client);
         chatInterface.setGameClient(client);
         final ClientGameLobby lobby = new ClientGameLobby();
@@ -192,7 +193,6 @@ public class NetConnectUtil {
             }
             @Override
             public void close() {
-                GuiBase.setInterrupted(true);
                 onlineLobby.closeConn(Localizer.getInstance().getMessage("lblYourConnectionToHostWasInterrupted", url));
             }
             @Override
@@ -200,6 +200,7 @@ public class NetConnectUtil {
                 return lobby;
             }
         });
+        client.setDraftHandler(view.getDraftHandler());
         view.setPlayerChangeListener((index, event) -> client.send(event));
 
         NetworkLogConfig.activateNetworkLogging();

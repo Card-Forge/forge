@@ -283,7 +283,7 @@
 			[
 				{
 					&quot;name&quot;: &quot;Here's the map. This will lead you to your loved ones.&quot;,
-                    &quot;text&quot;: &quot;The families weep with job. 'Thank you! Oh, thank you! Our reward is hardly enough for your heroism but know you will always be a hero to us.'&quot;,
+                    &quot;text&quot;: &quot;The families weep with joy. 'Thank you! Oh, thank you! Our reward is hardly enough for your heroism but know you will always be a hero to us.'&quot;,
 					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [
 						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},

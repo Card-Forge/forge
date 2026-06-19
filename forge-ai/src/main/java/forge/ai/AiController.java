@@ -695,25 +695,17 @@ public class AiController {
         int bestRestriction = Integer.MIN_VALUE;
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
-            SpellAbility currentSA = sa;
             sa.setActivatingPlayer(player);
             // check everything necessary
 
-            AiPlayDecision opinion = canPlayAndPayFor(currentSA);
+            AiPlayDecision opinion = canPlayAndPayFor(sa);
             //PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s @ %s %s >>> \n", opinion, sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
             if (opinion == AiPlayDecision.WillPlay) {
-                if (bestSA == null) {
-                    bestSA = currentSA;
-                    bestRestriction = ComputerUtil.counterSpellRestriction(player, currentSA);
-                } else {
-                    // Compare bestSA with this SA
-                    final int restrictionLevel = ComputerUtil.counterSpellRestriction(player, currentSA);
-
-                    if (restrictionLevel > bestRestriction) {
-                        bestRestriction = restrictionLevel;
-                        bestSA = currentSA;
-                    }
+                final int restrictionLevel = ComputerUtil.counterSpellRestriction(player, sa);
+                if (bestSA == null || restrictionLevel > bestRestriction) {
+                    bestRestriction = restrictionLevel;
+                    bestSA = sa;
                 }
             }
         }
@@ -962,7 +954,7 @@ public class AiController {
             return AiPlayDecision.AnotherTime;
         }
         if (sa.usesTargeting()) {
-            if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa, true) == 0) {
+            if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa) == 0) {
                 return AiPlayDecision.TargetingFailed;
             }
             if (!StaticAbilityMustTarget.meetsMustTargetRestriction(sa)) {
@@ -1690,8 +1682,8 @@ public class AiController {
             try {
                 e.printStackTrace();
                 t.stop();
-            } catch (UnsupportedOperationException ex) {
-                // Android and Java 20 dropped support to stop so sadly thread will keep running
+            } catch (UnsupportedOperationException | NoSuchMethodError ex) {
+                // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
                 timeoutReached = true;
                 future.cancel(true);
                 // TODO wait a few more seconds to try and exit at a safe point before letting the engine continue

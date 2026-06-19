@@ -16,7 +16,6 @@ import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostAdjustment;
-import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordWithCostAndType;
@@ -31,6 +30,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.CostPaymentStack;
 import forge.game.zone.ZoneType;
 import forge.util.*;
 import forge.util.collect.FCollection;
@@ -1686,6 +1686,10 @@ public class AbilityUtils {
                     return doXMath(calculateAmount(c, sq[kicked ? 1 : 2], ctb), expr, c, ctb);
                 }
 
+                if (sq[0].startsWith("Teamwork")) {
+                    return doXMath(calculateAmount(c, sq[sa.isOptionalCostPaid(OptionalCost.Teamwork) ? 1 : 2], ctb), expr, c, ctb);
+                }
+
                 if (sq[0].startsWith("OptionalGenericCostPaid")) {
                     return doXMath(calculateAmount(c, sq[sa.isOptionalCostPaid(OptionalCost.Generic) ? 1 : 2], ctb), expr, c, ctb);
                 }
@@ -2031,6 +2035,9 @@ public class AbilityUtils {
         }
         if (sq[0].startsWith("PromisedGift")) {
             return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isGiftPromised() ? 1 : 2], ctb), expr, c, ctb);
+        }
+        if (sq[0].startsWith("Teamwork")) {
+            return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isTeamwork() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].startsWith("Escaped")) {
             return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2], ctb), expr, c, ctb);
@@ -2769,8 +2776,8 @@ public class AbilityUtils {
             final String validFilter = workingCopy[1];
             // use objectXCount ?
             int activated = CardUtil.getThisTurnActivated(validFilter, c, ctb, player).size();
-            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
-                if (i.getPayment().getAbility().isValid(validFilter, player, c, ctb)) {
+            for (CostPaymentStack.Entry i : game.costPaymentStack) {
+                if (i.payment().getAbility().isValid(validFilter, player, c, ctb)) {
                     activated++;
                 }
             }
@@ -2980,11 +2987,11 @@ public class AbilityUtils {
         return applyTextChangeEffects(def, ability.getHostCard(), false);
     }
 
-    public static final String applyKeywordTextChangeEffects(final String kw, final Card card) {
+    public static final String applyKeywordTextChangeEffects(final String kw, Map<String,String> colorMap, Map<String,String> typeMap) {
         if (!CardUtil.isKeywordModifiable(kw)) {
             return kw;
         }
-        return applyTextChangeEffects(kw, card, false);
+        return applyTextChangeEffects(kw, false, colorMap, typeMap);
     }
 
     public static final String applyDescriptionTextChangeEffects(final String def, final CardTraitBase ability) {

@@ -5,9 +5,11 @@ import java.util.List;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.AutoYieldStore.TriggerDecision;
 import forge.util.ITriggerEvent;
 
@@ -18,6 +20,8 @@ public interface IGameController {
     boolean canPlayUnlimitedLands();
 
     void concede();
+
+    void drawOfferAction(DrawOfferMessage.Action action);
 
     void alphaStrike();
 
@@ -52,23 +56,24 @@ public interface IGameController {
     void requestResync();
 
     void passPriority();
-    void passPriorityUntilEndOfTurn();
 
     // Auto-yield preferences
-    boolean shouldAutoYield(String key);
+    default boolean shouldAutoYield(String key) {
+        return getYieldController().shouldAutoYield(key);
+    }
     /**
      * @param isAbilityScope true if {@code key} is an ability suffix (Per Ability * modes);
      *   false if {@code key} is the full raw key (Per Card mode). Server-side handlers
      *   route storage by this flag instead of consulting the host's own UI_AUTO_DECISION_MODE.
      */
     void setShouldAutoYield(String key, boolean autoYield, boolean isAbilityScope);
-    boolean getDisableAutoYields();
     void setDisableAutoYields(boolean disable);
 
     // Trigger accept/decline preferences
-    TriggerDecision getTriggerDecision(String key);
+    default TriggerDecision getTriggerDecision(String key) {
+        return getYieldController().getTriggerDecision(key);
+    }
     void setTriggerDecision(String key, TriggerDecision decision, boolean isAbilityScope);
-    boolean getDisableAutoTriggers();
     void setDisableAutoTriggers(boolean disable);
 
     /** Apply a unified yield update envelope to this controller's YieldController. */
@@ -83,4 +88,7 @@ public interface IGameController {
     }
 
     YieldController getYieldController();
+
+    /** Setter dispatches the per-PCH envelope; reads go via getYieldController(). Pref values are String-typed in {@link forge.localinstance.properties.PreferencesStore}, so callers wrap booleans with {@code String.valueOf}. */
+    void setYieldPref(FPref pref, String value);
 }

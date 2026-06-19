@@ -74,6 +74,11 @@ public final class ForgeConstants {
     public static final String NET_ARCHIVE_LEGACY_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-legacy.txt";
     public static final String NET_ARCHIVE_VINTAGE_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-vintage.txt";
     public static final String NET_ARCHIVE_BLOCK_DECKS_LIST_FILE     = LISTS_DIR + "net-decks-archive-block.txt";
+    public static final String COMMANDER_BRACKET_COMBOS_FILE         = LISTS_DIR + "commander-bracket-combos.txt";
+    public static final String COMMANDER_BRACKET_GAMECHANGERS_FILE   = LISTS_DIR + "gamechangers.txt";
+    public static final String COMMANDER_BRACKET_MASS_LAND_DENIAL_FILE = LISTS_DIR + "mass-land-denial.txt";
+    public static final String COMMANDER_BRACKET_EXTRA_TURNS_FILE    = LISTS_DIR + "extra-turns.txt";
+    public static final String COMMANDER_BRACKET_CHAINED_EXTRA_TURNS_FILE = LISTS_DIR + "chained-extra-turns.txt";
     public static final String ADVENTURE_BOOSTER_PRICE_FILE 		 = ADVENTURE_COMMON_LIST_DIR + "adventure-booster-price.txt";
 
     public static final String CHANGES_FILE                 = ASSETS_DIR + "README.txt";
@@ -261,6 +266,7 @@ public final class ForgeConstants {
     public static final String DECK_OATHBREAKER_DIR       = DECK_BASE_DIR + "oathbreaker" + PATH_SEPARATOR;
     public static final String DECK_NET_DIR               = DECK_BASE_DIR + "net" + PATH_SEPARATOR;
     public static final String DECK_NET_ARCHIVE_DIR       = DECK_BASE_DIR + "archive" + PATH_SEPARATOR;
+    public static final String DECK_NET_EVENT_DIR         = DECK_BASE_DIR + "network-events" + PATH_SEPARATOR;
     public static final String QUEST_SAVE_DIR             = USER_QUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String CONQUEST_SAVE_DIR          = USER_CONQUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String DECK_TINY_LEADERS_DIR      = DECK_BASE_DIR + "tiny_leaders" + PATH_SEPARATOR;
@@ -319,6 +325,7 @@ public final class ForgeConstants {
             DECK_COMMANDER_DIR,
             DECK_OATHBREAKER_DIR,
             DECK_NET_DIR,
+            DECK_NET_EVENT_DIR,
             QUEST_SAVE_DIR,
             CACHE_TOKEN_PICS_DIR,
             CACHE_ICON_PICS_DIR,
@@ -331,7 +338,7 @@ public final class ForgeConstants {
 
     // URLs
     public static final String URL_CARDFORGE = "https://downloads.cardforge.org";
-    private static final String GITHUB_ASSETS_BASE = "https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/";
+    public static final String GITHUB_ASSETS_BASE = "https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/";
 
     public static final String URL_PIC_DOWNLOAD = URL_CARDFORGE + "/images/cards/";
     public static final String URL_TOKEN_DOWNLOAD = URL_CARDFORGE + "/images/tokens/";

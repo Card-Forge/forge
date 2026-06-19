@@ -588,6 +588,11 @@ public class Cost implements Serializable {
             return new CostBlight(splitStr[0]);
         }
 
+        if (parse.startsWith("Teamwork<")) {
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostTeamwork(splitStr[0]);
+        }
+
         if (parse.equals("Forage")) {
             return new CostForage();
         }

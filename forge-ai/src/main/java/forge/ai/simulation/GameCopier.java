@@ -109,7 +109,7 @@ public class GameCopier {
             newPlayer.setCrankCounter(origPlayer.getCrankCounter());
             // TODO creatureAttackedThisTurn
             for (Mana m : origPlayer.getManaPool()) {
-                newPlayer.getManaPool().addMana(m, false);
+                newPlayer.getManaPool().addManaNoEvent(m);
             }
             playerMap.put(origPlayer, newPlayer);
         }
@@ -361,10 +361,6 @@ public class GameCopier {
             newCard.setDamageReceivedThisTurn(c.getDamageReceivedThisTurn());
 
             newCard.copyFrom(c);
-
-            for (Table.Cell<Long, Long, List<String>> kw : c.getHiddenExtrinsicKeywordsTable().cellSet()) {
-                newCard.addHiddenExtrinsicKeywords(kw.getRowKey(), kw.getColumnKey(), kw.getValue());
-            }
             newCard.updateKeywordsCache();
 
             if (c.isTapped()) {

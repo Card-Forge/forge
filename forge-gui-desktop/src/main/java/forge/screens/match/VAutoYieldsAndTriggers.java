@@ -90,11 +90,11 @@ public class VAutoYieldsAndTriggers extends FDialog {
         listScroller = new FScrollPane(lstEntries, true);
 
         chkDisableYields = new FCheckBox(Localizer.getInstance().getMessage("lblDisableAllAutoYields"),
-                matchUI.getGameController().getDisableAutoYields());
+                matchUI.getGameController().getYieldController().getDisableAutoYields());
         chkDisableYields.addChangeListener(e -> matchUI.getGameController().setDisableAutoYields(chkDisableYields.isSelected()));
 
         chkDisableTriggers = new FCheckBox(Localizer.getInstance().getMessage("lblDisableAllAutoTriggers"),
-                matchUI.getGameController().getDisableAutoTriggers());
+                matchUI.getGameController().getYieldController().getDisableAutoTriggers());
         chkDisableTriggers.addChangeListener(e -> matchUI.getGameController().setDisableAutoTriggers(chkDisableTriggers.isSelected()));
 
         btnOk = new FButton(Localizer.getInstance().getMessage("lblOK"));

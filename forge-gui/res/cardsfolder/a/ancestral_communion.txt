@@ -1,0 +1,7 @@
+Name:Ancestral Communion
+ManaCost:1 G
+Types:Sorcery
+T:Mode$ SpellCast | ValidCard$ Card.Self | IsPresent$ Card.IsCommander+YouCtrl+YouOwn | NoResolvingCheck$ True | Execute$ TrigCopy | TriggerDescription$ When you cast this spell while you control your commander, copy this spell. You may choose a new target for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Return target permanent card from your graveyard to your hand.
+Oracle:When you cast this spell while you control your commander, copy this spell. You may choose a new target for the copy.\nReturn target permanent card from your graveyard to your hand.

@@ -1,0 +1,11 @@
+Name:Political Triumph
+ManaCost:W
+Types:Enchantment Plan
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever a creature you control enters, scry 1 and put a plan counter on this enchantment.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1 | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ PLAN | CounterNum$ 1
+T:Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ PLAN | CounterAmount$ EQ4 | Execute$ TrigSac | TriggerDescription$ When the fourth plan counter is put on this enchantment, sacrifice it, draw a card, and put a +1/+1 counter on each creature you control.
+SVar:TrigSac:DB$ Sacrifice | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SubAbility$ DBCounterAll
+SVar:DBCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Whenever a creature you control enters, scry 1 and put a plan counter on this enchantment.\nWhen the fourth plan counter is put on this enchantment, sacrifice it, draw a card, and put a +1/+1 counter on each creature you control.

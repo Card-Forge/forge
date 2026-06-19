@@ -862,6 +862,12 @@ public class Main extends AndroidApplication {
         }
 
         @Override
+        public void convertToPNG(InputStream input, OutputStream output) {
+            Bitmap bmp = BitmapFactory.decodeStream(input);
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, output);
+        }
+
+        @Override
         public Pair<Integer, Integer> getRealScreenSize(boolean real) {
             //app size
             WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
