@@ -179,7 +179,6 @@ public class LocalRandomizer {
                 }
                 archipelagoDataInstance.unlockManaCrystalReward(manaAmount);
             } else if (roll < regionUnlockChance + goldRewardChance + manaRewardChance + maxLifeRewardChance) {
-                archipelagoDataInstance.addMaxLife(1);
                 Current.player().addMaxLife(1);
             } else if (roll < regionUnlockChance + goldRewardChance + manaRewardChance + maxLifeRewardChance + equipmentRewardChance) {
                 Reward reward = takeSingleEquipmentOutOfRemainingPool();

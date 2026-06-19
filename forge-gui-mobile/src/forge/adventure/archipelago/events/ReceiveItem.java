@@ -41,11 +41,9 @@ public class ReceiveItem {
                     break;
                 case 1010:
                     Current.player().addMaxLife(1);
-                    APData.addMaxLife(1);
                     break;
                 case 1011:
                     Current.player().addMaxLife(2);
-                    APData.addMaxLife(2);
                     break;
                 case 2000:
                 case 2001:
