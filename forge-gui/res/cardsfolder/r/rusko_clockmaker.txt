@@ -8,7 +8,7 @@ T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | E
 SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Permanent.YouCtrl+namedMidnight Clock | CounterType$ HOUR | CounterNum$ 1 | SubAbility$ DBDrain
 SVar:DBDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
-SVar:BuffedBy:nonCreature
+SVar:BuffedBy:Card.nonCreature
 SVar:BuffedBy:Artifact.namedMidnight Clock
 DeckHas:Ability$LifeGain|Counters & Type$Artifact
 DeckHints:Name$Midnight Clock

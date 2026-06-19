@@ -2,7 +2,7 @@ Name:S.H.I.E.L.D. Spy Kit
 ManaCost:W
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
-T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Alone$ True | Execute$ TrigUntap| TriggerDescription$ Whenever equipped creature attacks alone, untap it and scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Alone$ True | Execute$ TrigUntap | TriggerDescription$ Whenever equipped creature attacks alone, untap it and scry 1. (Look at the top card of your library. You may put that card on the bottom.)
 SVar:TrigUntap:DB$ Untap | Defined$ TriggeredAttackerLKICopy | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 K:Equip:1

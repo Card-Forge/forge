@@ -458,7 +458,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   </object>
   <object id="165" template="../../../../common/maps/obj/shop.tx" x="128.667" y="502">
    <properties>
-    <property name="commonShopList" value="EldrainePacks"/>
+    <property name="commonShopList" value="EldraineBoosters"/>
     <property name="mythicShopList" value=""/>
     <property name="rareShopList" value=""/>
     <property name="uncommonShopList" value=""/>

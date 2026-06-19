@@ -4,6 +4,6 @@ Types:Legendary Artifact Creature Robot Hero
 PT:2/2
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Cybernetic Senses — Whenever NICKNAME attacks, draw a card if her power is 4 or greater.
-SVar:TrigDraw:DB$ Draw | ConditionDefined$ TriggeredCardLKICopy | ConditionPresent$ Card.powerGE4
+SVar:TrigDraw:DB$ Draw | ConditionDefined$ TriggeredAttackerLKICopy | ConditionPresent$ Card.powerGE4
 A:AB$ PutCounter | Cost$ 7 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | PowerUp$ True | SpellDescription$ Put two +1/+1 counters on NICKNAME. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)
 Oracle:Flying\nCybernetic Senses — Whenever Viv Vision attacks, draw a card if her power is 4 or greater.\nPower-up — {7}: Put two +1/+1 counters on Viv Vision. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)

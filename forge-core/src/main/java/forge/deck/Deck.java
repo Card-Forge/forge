@@ -57,6 +57,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private Integer commanderBracket;
     private Map<String, List<String>> deferredSections = null;
     private Map<String, List<String>> loadedSections = null;
+    private DeckFormat deckFormat;
+    private String sourceUrl;
     private String lastCardArtPreferenceUsed = "";
     private Boolean lastCardArtOptimisationOptionUsed = null;
     private boolean includeCardsFromUnspecifiedSet = false;
@@ -256,6 +258,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         result.setAiHints(StringUtils.join(aiHints, " | "));
         result.setDraftNotes(draftNotes);
         result.setCommanderBracket(deckHash, commanderBracket);
+        result.setDeckFormat(deckFormat);
+        result.setSourceUrl(sourceUrl);
         //noinspection ConstantValue
         if(tags != null) //Can happen deserializing old Decks.
             result.tags.addAll(this.tags);
@@ -627,6 +631,22 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     public Map<String, String> getDraftNotes() {
         return draftNotes;
+    }
+
+    public void setDeckFormat(DeckFormat deckFormat0) {
+        deckFormat = deckFormat0;
+    }
+
+    public DeckFormat getDeckFormat() {
+        return deckFormat;
+    }
+
+    public void setSourceUrl(String sourceUrl0) {
+        sourceUrl = sourceUrl0;
+    }
+
+    public String getSourceUrl() {
+        return sourceUrl;
     }
 
     public void setAiHints(String aiHintsInfo) {

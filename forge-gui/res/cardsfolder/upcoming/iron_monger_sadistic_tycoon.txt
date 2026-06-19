@@ -1,0 +1,9 @@
+Name:Iron Monger, Sadistic Tycoon
+ManaCost:2 B
+Types:Legendary Artifact Creature Robot Villain
+PT:2/2
+K:Flying
+T:Mode$ Connives | Execute$ TrigPutCounterAll | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control connives, put a +1/+1 counter on each Villain you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Villain.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Villain
+Oracle:Flying\nWhenever a creature you control connives, put a +1/+1 counter on each Villain you control.

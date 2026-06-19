@@ -91,6 +91,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private boolean unlimitedHandSize = false;
     private Card lastDrawnCard;
     private int numDrawnThisTurn;
+    private int numExtraDrawnThisTurn;
     private int numDrawnLastTurn;
     private int numDrawnThisDrawStep;
     private int numCardsInHandStartedThisTurnWith;
@@ -993,7 +994,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         changedKeywords.put(timestamp, staticId, cks);
         updateKeywords();
-        game.fireEvent(new GameEventPlayerStatsChanged(this, true));
+        game.fireEvent(new GameEventPlayerStatsChanged(this));
     }
 
     public final KeywordInterface getKeywordForStaticAbility(String kw, final long staticId) {
@@ -1014,7 +1015,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 getKeywordCard().removeChangedCardTraits(timestamp, staticId);
             }
             updateKeywords();
-            game.fireEvent(new GameEventPlayerStatsChanged(this, true));
+            game.fireEvent(new GameEventPlayerStatsChanged(this));
         }
         return change;
     }
@@ -1194,6 +1195,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (gameStarted) {
             Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
             repParams.put(AbilityKey.Cause, cause);
+            repParams.put(AbilityKey.ExtraDraws, numExtraDrawnThisTurn);
             if (params != null) {
                 repParams.putAll(params);
             }
@@ -1223,7 +1225,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             // CR 121.6c additional actions can't be performed when draw gets replaced
             // but "drawn this way" effects should still count them
-            if (cause != null && cause.hasParam("RememberDrawn") && cause.getParam("RememberDrawn").equals("AllReplaced")) {
+            if (cause != null && "AllReplaced".equals(cause.getParam("RememberDrawn"))) {
                 cause.getHostCard().addRemembered(drawn);
             }
 
@@ -1238,8 +1240,12 @@ public class Player extends GameEntity implements Comparable<Player> {
                 setLastDrawnCard(c);
                 c.setDrawnThisTurn(true);
                 numDrawnThisTurn++;
+                numExtraDrawnThisTurn++;
                 if (game.getPhaseHandler().is(PhaseType.DRAW)) {
                     numDrawnThisDrawStep++;
+                    if (numDrawnThisDrawStep == 1) {
+                        numExtraDrawnThisTurn--;
+                    }
                 }
                 view.updateNumDrawnThisTurn(this);
 
@@ -1273,6 +1279,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void resetNumDrawnThisTurn() {
         numDrawnThisTurn = 0;
+        numExtraDrawnThisTurn = 0;
         view.updateNumDrawnThisTurn(this);
     }
 
@@ -1706,13 +1713,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void addMaxLandPlays(long timestamp, int value) {
         adjustLandPlays.put(timestamp, value);
         getView().updateMaxLandPlay(this);
-        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this));
     }
     public final boolean removeMaxLandPlays(long timestamp) {
         boolean changed = adjustLandPlays.remove(timestamp) != null;
         if (changed) {
             getView().updateMaxLandPlay(this);
-            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this));
         }
         return changed;
     }
@@ -1720,13 +1727,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void addMaxLandPlaysInfinite(long timestamp) {
         adjustLandPlaysInfinite.add(timestamp);
         getView().updateUnlimitedLandPlay(this);
-        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this));
     }
     public final boolean removeMaxLandPlaysInfinite(long timestamp) {
         boolean changed = adjustLandPlaysInfinite.remove(timestamp);
         if (changed) {
             getView().updateUnlimitedLandPlay(this);
-            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this));
         }
         return changed;
     }
@@ -2841,7 +2848,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void incCommanderCast(Card commander) {
         commanderCast.merge(commander, 1, Integer::sum);
         getView().updateCommanderCast(this, commander);
-        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this));
     }
 
     public void resetCommanderStats() {
@@ -3697,12 +3704,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void addAdditionalVote(long timestamp, int value) {
         additionalVotes.put(timestamp, value);
         getView().updateAdditionalVote(this);
-        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this));
     }
     public void removeAdditionalVote(long timestamp) {
         if (additionalVotes.remove(timestamp) != null) {
             getView().updateAdditionalVote(this);
-            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this));
         }
     }
 
@@ -3717,12 +3724,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void addAdditionalOptionalVote(long timestamp, int value) {
         additionalOptionalVotes.put(timestamp, value);
         getView().updateOptionalAdditionalVote(this);
-        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this));
     }
     public void removeAdditionalOptionalVote(long timestamp) {
         if (additionalOptionalVotes.remove(timestamp) != null) {
             getView().updateOptionalAdditionalVote(this);
-            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this));
         }
     }
 
@@ -3754,7 +3761,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         Player control = getGame().getControlVote();
         for (Player pl : getGame().getPlayers()) {
             pl.getView().updateControlVote(pl.equals(control));
-            getGame().fireEvent(new GameEventPlayerStatsChanged(pl, false));
+            getGame().fireEvent(new GameEventPlayerStatsChanged(pl));
         }
     }
 
@@ -3777,12 +3784,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void addAdditionalVillainousChoices(long timestamp, int value) {
         additionalVillainousChoices.put(timestamp, value);
         getView().updateAdditionalVillainousChoices(this);
-        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this));
     }
     public void removeAdditionalVillainousChoices(long timestamp) {
         if (additionalVillainousChoices.remove(timestamp) != null) {
             getView().updateAdditionalVillainousChoices(this);
-            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this));
         }
     }
 

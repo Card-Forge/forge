@@ -83,8 +83,8 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         if (gt.getDeckFormat() == DeckFormat.Commander) {
             this.addView(new CommanderBracketView(this));
-            CommanderBracketService.addUpdateListener(commanderBracketUpdateListener);
         }
+        CommanderBracketService.addUpdateListener(commanderBracketUpdateListener);
 
         this.addSelectionListener(e -> {
             if (cmdSelect != null) {

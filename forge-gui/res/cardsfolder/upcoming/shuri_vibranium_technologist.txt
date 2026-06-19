@@ -1,0 +1,11 @@
+Name:Shuri, Vibranium Technologist
+ManaCost:2 WU
+Types:Legendary Creature Human Artificer Hero
+PT:2/2
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBDraw
+SVar:DBToken:DB$ Token | TokenOwner$ You | TokenScript$ c_1_1_a_robot_hero_flying | SpellDescription$ Create a 1/1 colorless Robot Hero artifact creature token with flying.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+DeckHas:Ability$Token
+Oracle:Vigilance\nWhen Shuri enters, choose one —\n• Create a 1/1 colorless Robot Hero artifact creature token with flying.\n• Draw a card.

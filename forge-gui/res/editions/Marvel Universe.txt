@@ -48,6 +48,7 @@ ScryfallCode=MAR
 40 M Terminate @Mark Bagley & Randy Emberlin
 41 M Archangel of Thune @Jamie McKelvie & Jordie Bellair ${"flavorName": "Heaven-Sent Marvel"}
 42 M Concerted Effort @Jack Kirby
+43 M Don't Move @John Byrne
 44 M Ephemerate @Mateus Manhanini
 45 M Final Showdown @John Buscema & Tom Palmer
 46 M Light of Promise @David Lopez
@@ -66,6 +67,7 @@ ScryfallCode=MAR
 59 M Reconnaissance Mission @Kaare Andrews
 60 M Show and Tell @John Buscema
 61 M Simulacrum Synthesizer @Jack Kirby
+62 M Three Steps Ahead @Jack Kirby & Vince Colletta
 63 M Dauthi Voidwalker @Adam Hughes ${"flavorName": "Widow-Making Infiltrator"}
 64 M Deadly Dispute @Mark Brooks
 65 M Extinction Event @George Pérez & Joe Rubinstein
@@ -74,6 +76,7 @@ ScryfallCode=MAR
 68 M No Mercy @Jack Kirby
 69 M Chaos Warp @Joe Quesada & Danny Miki
 70 M Fiery Emancipation @Alex Ross
+71 M Fury of the Horde @Leinil Francis Yu
 72 M Monstrous Rage @Ed McGuinness & Dexter Vines
 73 M Seize the Day @David Mazzucchelli
 74 M Bedlam @Dave Cockrum & Irving Watanabe
@@ -84,6 +87,7 @@ ScryfallCode=MAR
 79 M Heroic Intervention @Jack Kirby & Don Heck
 80 M Heroic Intervention @Jack Kirby & Dick Ayers
 81 M Primal Vigor @John Buscema & Frank Giacoia
+82 M Rancor @Marie Severin
 83 M Steely Resolve @Dan Adkins
 84 M Unnatural Growth @Alex Ross
 85 M Anthem of Champions @John Romita Jr. & Bob Layton
@@ -100,4 +104,67 @@ ScryfallCode=MAR
 96 M Warleader's Call @George Pérez & Tom Smith
 97 M Wolverine, Best There Is @Tony S. Daniel & Rain Beredo
 98 M Horn of Greed @Winslow Mortimer & Mike Esposito
+99 M Roaming Throne @Alex Ross ${"flavorName": "Doom Variant"}
 100 M Sword of Fire and Ice @Alex Ross ${"flavorName": "Patriotic Shield"}
+
+[source material]
+1 Archangel of Thune|MAR|[41]
+1 Concerted Effort|MAR|[42]
+1 Don't Move|MAR|[43]
+1 Ephemerate|MAR|[44]
+1 Final Showdown|MAR|[45]
+1 Light of Promise|MAR|[46]
+1 Path to Exile|MAR|[47]
+1 Return to the Ranks|MAR|[48]
+1 Righteous Fury|MAR|[49]
+1 Steelshaper's Gift|MAR|[50]
+1 Teferi's Protection|MAR|[51]
+1 Counterspell|MAR|[52]
+1 Cyberdrive Awakener|MAR|[53]
+1 Dig Through Time|MAR|[54]
+1 Harbinger of the Seas|MAR|[55]
+1 Lord of Atlantis|MAR|[56]
+1 Mechanized Production|MAR|[57]
+1 Narset's Reversal|MAR|[58]
+1 Reconnaissance Mission|MAR|[59]
+1 Show and Tell|MAR|[60]
+1 Simulacrum Synthesizer|MAR|[61]
+1 Three Steps Ahead|MAR|[62]
+1 Dauthi Voidwalker|MAR|[63]
+1 Deadly Dispute|MAR|[64]
+1 Extinction Event|MAR|[65]
+1 Final Act|MAR|[66]
+1 Massacre Girl|MAR|[67]
+1 No Mercy|MAR|[68]
+1 Chaos Warp|MAR|[69]
+1 Fiery Emancipation|MAR|[70]
+1 Fury of the Horde|MAR|[71]
+1 Monstrous Rage|MAR|[72]
+1 Seize the Day|MAR|[73]
+1 Bedlam|MAR|[74]
+1 Beast Within|MAR|[75]
+1 Defense of the Heart|MAR|[76]
+1 Force of Vigor|MAR|[77]
+1 Heroic Intervention|MAR|[78]
+1 Heroic Intervention|MAR|[79]
+1 Heroic Intervention|MAR|[80]
+1 Primal Vigor|MAR|[81]
+1 Rancor|MAR|[82]
+1 Steely Resolve|MAR|[83]
+1 Unnatural Growth|MAR|[84]
+1 Anthem of Champions|MAR|[85]
+1 Aurelia, the Warleader|MAR|[86]
+1 Black Panther, Wakandan King|MAR|[87]
+1 Captain America, First Avenger|MAR|[88]
+1 Escape to the Wilds|MAR|[89]
+1 Fight to the Death|MAR|[90]
+1 Iron Man, Titan of Innovation|MAR|[91]
+1 Privileged Position|MAR|[92]
+1 Ravenous Tyrannosaurus|MAR|[93]
+1 Storm, Force of Nature|MAR|[94]
+1 Sundering Growth|MAR|[95]
+1 Warleader's Call|MAR|[96]
+1 Wolverine, Best There Is|MAR|[97]
+1 Horn of Greed|MAR|[98]
+1 Roaming Throne|MAR|[99]
+1 Sword of Fire and Ice|MAR|[100]

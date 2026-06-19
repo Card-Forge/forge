@@ -7,6 +7,6 @@ K:Vigilance
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ No One Dies! — When NICKNAME enters, you may tap him. When you do, another target nonattacking creature you control gains indestructible until end of turn.
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ tapXType<1/Card.Self/CARDNAME> | Execute$ TrigPump | TriggerDescription$ When you do, another target nonattacking creature you control gains indestructible until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+!attacking+YouCtrl | ValidTgtDesc$ another nonattacking creature you control | KW$ Indestructible
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+!attacking+YouCtrl | ValidTgtsDesc$ another nonattacking creature you control | KW$ Indestructible
 DeckHas:Ability$Proliferate
 Oracle:Flash\nVigilance, reach\nNo One Dies! — When Spider-Man enters, you may tap him. When you do, another target nonattacking creature you control gains indestructible until end of turn.

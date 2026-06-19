@@ -100,8 +100,25 @@ public class DeckProxy implements InventoryItem {
         return deck instanceof PreconDeck || "Precon".equals(deckType) || "Commander Precon".equals(deckType);
     }
 
+    public boolean isCommanderDeck() {
+        final Deck sourceDeck = getDeck();
+        final DeckFormat format = sourceDeck == null ? null : sourceDeck.getDeckFormat();
+        return format != null && format.hasCommander()
+                || sourceDeck != null && sourceDeck.has(DeckSection.Commander)
+                || "Commander".equals(deckType)
+                || "Commander Precon".equals(deckType)
+                || "Oathbreaker".equals(deckType)
+                || "Brawl".equals(deckType)
+                || "Tiny Leaders".equals(deckType);
+    }
+
     public String getPath() {
         return path;
+    }
+
+    public String getSourceUrl() {
+        final Deck sourceDeck = getDeck();
+        return sourceDeck == null ? null : sourceDeck.getSourceUrl();
     }
 
     public CardEdition getEdition() {

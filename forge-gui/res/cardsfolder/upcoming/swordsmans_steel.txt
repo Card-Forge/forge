@@ -1,0 +1,10 @@
+Name:Swordsman's Steel
+ManaCost:4
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this Equipment enters, draw a card for each Equipment you control.
+SVar:TrigDraw:DB$ Draw | NumCards$ X
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ Y | AddToughness$ Y | Description$ Equipped creature gets +2/+2 for each Equipment you control.
+K:Equip:3
+SVar:X:Count$Valid Equipment.YouCtrl
+SVar:Y:Count$Valid Equipment.YouCtrl/Twice
+Oracle:When this Equipment enters, draw a card for each Equipment you control.\nEquipped creature gets +2/+2 for each Equipment you control.\nEquip {3}

@@ -327,11 +327,11 @@ public enum ColumnDef {
     DECK_BRACKET("lblBracket", "ttCommanderBracket", 55, true, SortState.ASC,
             from -> {
                 DeckProxy deck = toDeck(from.getKey());
-                return deck == null ? 1 : CommanderBracketService.getBracket(deck);
+                return deck == null || !deck.isCommanderDeck() ? 6 : CommanderBracketService.getBracket(deck);
             },
             from -> {
                 DeckProxy deck = toDeck(from.getKey());
-                return deck == null ? "" : CommanderBracketService.getBracketDisplay(deck);
+                return deck == null || !deck.isCommanderDeck() ? "" : CommanderBracketService.getBracketDisplay(deck);
             }),
     /**
      * The main library size column.

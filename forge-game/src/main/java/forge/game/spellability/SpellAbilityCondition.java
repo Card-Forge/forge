@@ -109,6 +109,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Bargain")) {
                 this.bargain = true;
             }
+            if (value.equals("Teamwork")) {
+                this.teamwork = true;
+            }
             if (value.equals("AltCost"))
                 this.altCostPaid = true;
 
@@ -275,6 +278,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.surgeCostPaid && !sa.isSurged()) return false;
         if (this.bargain && !sa.isBargained()) return false;
         if (this.foretold && !sa.isForetold()) return false;
+        if (this.teamwork && !sa.isTeamwork()) return false;
 
         if (this.optionalCostPaid && this.optionalBoolean && !sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
         if (this.optionalCostPaid && !this.optionalBoolean && sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
