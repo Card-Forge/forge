@@ -3947,12 +3947,9 @@
     "equipmentSlot": "Neck",
     "iconName": "Liliana'sVeil",
     "effect": {
-      "lifeModifier": -6,
-      "opponent": {
-        "startBattleWithCard": [
-          "Oath of Liliana|EMN"
-        ]
-      }
+      "startBattleWithCard": [
+        "Oath of Liliana"
+      ]
     }
   },
     {
