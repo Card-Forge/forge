@@ -1,0 +1,8 @@
+Name:Kingpin, Wilson Fisk
+ManaCost:3 B
+Types:Legendary Creature Human Villain
+PT:3/6
+K:Menace
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.Self,Creature.Other | TriggerZones$ Battlefield | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever you sacrifice NICKNAME or another creature, create two Treasure tokens. This ability triggers only once each turn. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+Oracle:Menace\nWhenever you sacrifice Kingpin or another creature, create two Treasure tokens. This ability triggers only once each turn. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.")

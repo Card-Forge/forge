@@ -1,0 +1,8 @@
+Name:Project Deathlok Soldier
+ManaCost:B
+Types:Artifact Creature Zombie Soldier
+PT:1/2
+A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return this card from your graveyard to your hand.
+SVar:DiscardMe:1
+SVar:SacMe:3
+Oracle:{2}{B}: Return this card from your graveyard to your hand.

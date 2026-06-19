@@ -1,0 +1,14 @@
+Name:Ant-Man, Reformed Rogue
+ManaCost:2 GU
+Types:Legendary Creature Human Rogue Hero
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpPlus | TriggerDescription$ Whenever you cast a green spell, NICKNAME gets +1/+0 and gains trample until end of turn.
+SVar:TrigPumpPlus:DB$ Pump | NumAtt$ +1 | KW$ Trample | Defined$ Self
+T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpMinus | TriggerDescription$ Whenever you cast a blue spell, NICKNAME gets -1/-0 until end of turn and can't be blocked this turn.
+SVar:TrigPumpMinus:DB$ Pump | NumAtt$ -1 | Defined$ Self | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | ExileOnMoved$ Battlefield | RememberObjects$ Self | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:BuffedBy:Card.Green,Card.Blue
+Oracle:Whenever you cast a green spell, Ant-Man gets +1/+0 and gains trample until end of turn.\nWhenever you cast a blue spell, Ant-Man gets -1/-0 until end of turn and can't be blocked this turn.\nWhenever Ant-Man deals combat damage to a player, draw a card.

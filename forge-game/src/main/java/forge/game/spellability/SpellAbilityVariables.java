@@ -334,6 +334,7 @@ public class SpellAbilityVariables implements Cloneable {
     protected boolean optionalBoolean = true; // Just in case you need to check if something wasn't kicked, etc
     protected boolean surgeCostPaid = false;
     protected boolean bargain = false;
+    protected boolean teamwork = false;
     protected boolean foretold = false;
 
     // IsPresent for Valid battlefield stuff

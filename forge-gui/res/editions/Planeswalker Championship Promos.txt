@@ -49,3 +49,7 @@ ScryfallCode=PWCS
 2025-6 R Slickshot Show-Off @KIYA
 2026-1 M Beza, the Bounding Spring @Hale
 2026-2 R Into the Flood Maw @Kaeru DX
+2026-3 M The Wandering Rescuer @Hisashi Momose
+2026-4 R Twitching Doll @Tomoyuki Mizufune
+2026-05 R Voice of Victory @tokiwata
+2026-6 R Strategic Betrayal @Amayagido

@@ -4710,6 +4710,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.Player, tapper);
         runParams.put(AbilityKey.FirstTime, tappedThisTurn == 0);
+        runParams.put(AbilityKey.CostStack, getGame().costPaymentStack);
+        runParams.put(AbilityKey.IndividualCostPaymentInstance, getGame().costPaymentStack.peek());
         getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
 
         tappedThisTurn++;
@@ -6086,6 +6088,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final void setHasBeenDealtDeathtouchDamage(final boolean hasBeenDealtDeatchtouchDamage) {
         this.hasBeenDealtDeathtouchDamage = hasBeenDealtDeatchtouchDamage;
+    }
+
+    public final void healDamage() {
+        setDamage(0);
+        setHasBeenDealtDeathtouchDamage(false);
+        clearAssignedDamage();
     }
 
     public final boolean hasBeenDealtExcessDamageThisTurn() {
@@ -7750,7 +7758,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void addAbilityResolved(SpellAbility ability) {
         numberAbilityResolved.add(ability);
     }
-    public List<Player> getAbilityResolvedThisTurnActivators(SpellAbility ability) {
+    public Multiset<Player> getAbilityResolvedThisTurnActivators(SpellAbility ability) {
         return numberAbilityResolved.getActivators(ability);
     }
 

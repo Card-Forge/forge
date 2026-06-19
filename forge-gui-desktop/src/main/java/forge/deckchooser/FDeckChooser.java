@@ -36,6 +36,7 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.toolbox.FTextField;
 import forge.deck.DeckBase;
 import forge.util.Localizer;
 import forge.util.MyRandom;
@@ -48,6 +49,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -146,6 +148,12 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             .reactOnMouseDown()
             .tooltip("Refresh")
             .build();
+    private JPanel pnlDeckUrl;
+    private FTextField txtDeckUrl;
+    private FLabel btnReloadUrl;
+    private String lastImportedUrlDeckName;
+    private UiCommand deckSelectionCommand;
+    private boolean updatingDeckPool;
 
     private boolean isAi;
 
@@ -199,6 +207,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             }
         };
         lstDecks.setItemActivateCommand(this::activateBrowserSelection);
+        lstDecks.setSelectCommand(this::handleDeckSelection);
         btnViewDeck.setCommand(cmdViewDeck);
         btnRefresh.setCommand(this::refreshBrowserFromButton);
         lstDecks.setSearchChangeListener(this::setBrowserSearchText);
@@ -226,6 +235,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     public DeckManager getLstDecks() { return lstDecks; }
+
+    public void setDeckSelectionCommand(final UiCommand command) {
+        deckSelectionCommand = command;
+    }
 
     public void refreshEditorBrowser() {
         if (editorOnlyBrowser) {
@@ -739,6 +752,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return FModel.getDecks().getTinyLeaders();
         case COMMANDER_DECK:
             return FModel.getDecks().getCommander();
+        case PROVIDED_DECK_URL:
+            return DeckUrlLoader.getStorage();
         default:
             return FModel.getDecks().getConstructed();
         }
@@ -770,6 +785,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return new StorageImmediatelySerialized<>("Commander decks",
                     new DeckStorage(new File(ForgeConstants.DECK_COMMANDER_DIR), ForgeConstants.DECK_BASE_DIR),
                     true);
+        case PROVIDED_DECK_URL:
+            return DeckUrlLoader.getStorage();
         default:
             return new StorageImmediatelySerialized<>("Constructed decks",
                     new DeckStorage(new File(ForgeConstants.DECK_CONSTRUCTED_DIR), ForgeConstants.DECK_BASE_DIR, true),
@@ -857,8 +874,14 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         final List<DeckProxy> displayedRows = browser.searchActive ? buildRecursiveSearchRows() : rows;
         browser.hasDeckRows = containsDeckRows(displayedRows);
         browser.hasCommanderDeckRows = containsCommanderDeckRows(displayedRows);
-        lstDecks.setup(config == null ? getBrowserItemManagerConfig() : config);
-        lstDecks.setPool(displayedRows);
+        updatingDeckPool = true;
+        try {
+            lstDecks.setPool(ImmutableList.of());
+            lstDecks.setup(config == null ? getBrowserItemManagerConfig() : config);
+            lstDecks.setPool(displayedRows);
+        } finally {
+            updatingDeckPool = false;
+        }
         return displayedRows;
     }
 
@@ -1039,6 +1062,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         browser.hasDecksHomeParent = false;
         browser.clearListParent();
         lstDecks.setCaption("Decks");
+        updateDeckUrlPanelVisibility();
         displaySingleSelectBrowserRows(rows);
     }
 
@@ -1095,6 +1119,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         if (folderPath.equals(new File(ForgeConstants.DECK_NET_DIR).getAbsolutePath())) {
             return isForCommander ? DeckType.NET_COMMANDER_DECK : DeckType.NET_DECK;
         }
+        if (folderPath.equals(new File(DeckUrlLoader.getStorage().getFullPath()).getAbsolutePath())) {
+            return DeckType.PROVIDED_DECK_URL;
+        }
         return null;
     }
 
@@ -1112,6 +1139,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         selectedDeckType = deckType;
         decksComboBox.setDisplayedDeckType(deckType);
         lstDecks.setCaption(deckType.toString());
+        updateDeckUrlPanelVisibility();
     }
 
     private boolean isGeneratedOrListBrowserView() {
@@ -1370,6 +1398,13 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         updateDecks(DeckProxy.getAllNetworkEventDecks(), ItemManagerConfig.NET_EVENT_DECKS);
     }
 
+    private void selectLastImportedUrlDeckRow() {
+        if (lastImportedUrlDeckName != null) {
+            lstDecks.setSelectedString(lastImportedUrlDeckName);
+        }
+        syncUrlFieldWithSelectedDeck();
+    }
+
     public Deck getDeck() {
         final DeckProxy proxy = getSelectedDeckProxy();
         if (proxy == null) {
@@ -1400,6 +1435,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         if (decksComboBox == null) { //initialize components with delayed initialization the first time this is populated
             decksComboBox = new DecksComboBox();
             lstDecksContainer = new ItemManagerContainer(lstDecks);
+            initializeDeckUrlPanel();
             decksComboBox.addListener(this);
             if (editorOnlyBrowser) {
                 updateDecksHome();
@@ -1409,19 +1445,95 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         } else {
             removeAll();
         }
-        this.setLayout(new MigLayout("insets 0, gap 0"));
+        this.setLayout(new MigLayout("insets 0, gap 0, hidemode 3"));
         if (!editorOnlyBrowser) {
             decksComboBox.addTo(this, "w 100%, h 30px!, gapbottom 5px, spanx 2, wrap");
+            this.add(pnlDeckUrl, "w 100%, h 30px!, gapbottom 5px, spanx 2, wrap");
         }
         this.add(lstDecksContainer, "w 100%, growy, pushy, spanx 2, wrap");
         if (!editorOnlyBrowser) {
             this.add(btnViewDeck, "w 50%-3px, h 30px!, gaptop 5px, gapright 6px");
             this.add(btnRandom, "w 50%-3px, h 30px!, gaptop 5px");
+            updateDeckUrlPanelVisibility();
         }
         if (isShowing()) {
             revalidate();
             repaint();
         }
+    }
+
+    private void initializeDeckUrlPanel() {
+        pnlDeckUrl = new JPanel(new MigLayout("insets 0, gap 0"));
+        pnlDeckUrl.setOpaque(false);
+        pnlDeckUrl.add(new FLabel.Builder().text(localizer.getMessage("lblDeckUrlLabel")).fontSize(12).fontStyle(Font.BOLD).build(),
+                "h " + FTextField.HEIGHT + "px!, gapright 6px");
+        txtDeckUrl = new FTextField.Builder().build();
+        txtDeckUrl.addActionListener(e -> loadDeckFromUrl());
+        pnlDeckUrl.add(txtDeckUrl, "growx, pushx, h " + FTextField.HEIGHT + "px!, gapright 6px");
+        btnReloadUrl = new FLabel.ButtonBuilder().text(localizer.getMessage("lblReload")).fontSize(14).build();
+        btnReloadUrl.setCommand(this::loadDeckFromUrl);
+        pnlDeckUrl.add(btnReloadUrl, "h " + FTextField.HEIGHT + "px!, w pref!");
+    }
+
+    private void updateDeckUrlPanelVisibility() {
+        if (pnlDeckUrl != null) {
+            pnlDeckUrl.setVisible(browser.rootType == DeckType.PROVIDED_DECK_URL);
+        }
+    }
+
+    private void syncUrlFieldWithSelectedDeck() {
+        if (txtDeckUrl == null || selectedDeckType != DeckType.PROVIDED_DECK_URL) {
+            return;
+        }
+        final DeckProxy selected = getSelectedDeckProxy();
+        if (selected != null) {
+            txtDeckUrl.setText(selected.getSourceUrl());
+        }
+    }
+
+    private void handleDeckSelection() {
+        if (updatingDeckPool) {
+            return;
+        }
+        syncUrlFieldWithSelectedDeck();
+        if (deckSelectionCommand != null) {
+            deckSelectionCommand.run();
+        }
+    }
+
+    private void loadDeckFromUrl() {
+        if (txtDeckUrl == null) {
+            return;
+        }
+        final String deckUrl = txtDeckUrl.getText().trim();
+        if (deckUrl.isEmpty()) {
+            return;
+        }
+
+        setDeckUrlLoading(true);
+        FThreads.invokeInBackgroundThread(() -> {
+            try {
+                final DeckProxy deck = DeckUrlLoader.load(deckUrl);
+                FThreads.invokeInEdtLater(() -> {
+                    lastImportedUrlDeckName = deck.toString();
+                    if (selectedDeckType == DeckType.PROVIDED_DECK_URL) {
+                        refreshDecksList(DeckType.PROVIDED_DECK_URL, true, null);
+                    }
+                    setDeckUrlLoading(false);
+                });
+            } catch (final IOException ex) {
+                FThreads.invokeInEdtLater(() -> {
+                    setDeckUrlLoading(false);
+                    FOptionPane.showErrorDialog(ex.getMessage(), localizer.getMessage("lblUnableToLoadDeckUrl"));
+                });
+            }
+        });
+    }
+
+    private void setDeckUrlLoading(final boolean loading) {
+        txtDeckUrl.setEnabled(!loading);
+        btnReloadUrl.setEnabled(!loading);
+        btnReloadUrl.setText(localizer.getMessage(loading ? "lblLoadingEllipsis" : "lblReload"));
     }
 
     public final boolean isAi() {
@@ -1434,12 +1546,15 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     @Override
     public void deckTypeSelected(final DecksComboBoxEvent ev) {
         if (handleNetArchiveDeckTypeSelected(ev)) {
+            updateDeckUrlPanelVisibility();
             return;
         } else if ((ev.getDeckType() == DeckType.NET_DECK || ev.getDeckType() == DeckType.NET_COMMANDER_DECK) && !refreshingDeckType) {
             refreshDecksList(ev.getDeckType(), true, ev);
+            updateDeckUrlPanelVisibility();
             return;
         }
         refreshDecksList(ev.getDeckType(), false, ev);
+        updateDeckUrlPanelVisibility();
     }
 
     private boolean handleNetArchiveDeckTypeSelected(final DecksComboBoxEvent ev) {
@@ -1607,7 +1722,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 break;
             case NET_DECK:
             case NET_COMMANDER_DECK:
+            case PROVIDED_DECK_URL:
                 updateBrowserRoot(deckType);
+                if (deckType == DeckType.PROVIDED_DECK_URL) {
+                    selectLastImportedUrlDeckRow();
+                }
                 break;
             case NET_EVENT_DECK:
                 updateNetEventDecks();
@@ -1750,7 +1869,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
         switch (deckType) {
         case QUEST_OPPONENT_DECK:
-            return true;
         default:
             return false;
         }

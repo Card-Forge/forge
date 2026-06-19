@@ -1,0 +1,9 @@
+Name:Reed Richards, Smartest Man
+ManaCost:5 U
+Types:Legendary Creature Human Scientist Hero
+PT:2/4
+K:Reach
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | FirstExtraCardDrawnThisTurn$ True | ReplaceWith$ DrawFour | Description$ The first time you would draw a card each turn except the first card you draw during each of your draw steps, you draw four cards instead.
+SVar:DrawFour:DB$ Draw | Defined$ You | NumCards$ 4
+Oracle:Reach\nYou have no maximum hand size.\nThe first time you would draw a card each turn except the first card you draw during each of your draw steps, you draw four cards instead.

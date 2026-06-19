@@ -1,0 +1,8 @@
+Name:She-Hulk, Attorney-at-Law
+ManaCost:2 GW
+Types:Legendary Creature Gamma Advisor Hero
+PT:3/3
+K:Vigilance
+A:AB$ PutCounter | Cost$ 6 GW | Defined$ Self | CounterType$ P1P1 | PowerUp$ True | SubAbility$ DBDouble | SpellDescription$ Put a +1/+1 counter on NICKNAME. Then double the number of +1/+1 counters on each creature you control. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)
+SVar:DBDouble:DB$ MultiplyCounter | Defined$ Valid Creature.YouCtrl | CounterType$ P1P1
+Oracle:Vigilance\nPower-up — {6}{G/W}: Put a +1/+1 counter on She-Hulk. Then double the number of +1/+1 counters on each creature you control. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)

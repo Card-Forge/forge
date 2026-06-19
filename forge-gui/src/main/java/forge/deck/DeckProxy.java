@@ -106,6 +106,11 @@ public class DeckProxy implements InventoryItem {
         return deck instanceof DeckBase ? ((DeckBase) deck).getSourceFileName() : null;
     }
 
+    public String getSourceUrl() {
+        final Deck sourceDeck = getDeck();
+        return sourceDeck == null ? null : sourceDeck.getSourceUrl();
+    }
+
     public CardEdition getEdition() {
         if (edition == null) {
             if (deck instanceof PreconDeck pd) {

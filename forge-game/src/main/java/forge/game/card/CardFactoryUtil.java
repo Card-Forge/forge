@@ -2486,7 +2486,7 @@ public class CardFactoryUtil {
             String repeffstr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | Secondary$ True"
                     + " | Description$ Umbra armor (" + inst.getReminderText() + ")";
 
-            String abprevDamage = "DB$ DealDamage | Defined$ ReplacedCard | Remove$ All";
+            String abprevDamage = "DB$ HealDamage | Defined$ ReplacedCard";
             String abdestroy = "DB$ Destroy | Defined$ Self";
 
             SpellAbility sa = AbilityFactory.getAbility(abprevDamage, card);

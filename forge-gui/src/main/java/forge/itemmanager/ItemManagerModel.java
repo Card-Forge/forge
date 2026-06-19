@@ -27,10 +27,9 @@ import forge.deck.DeckBrowserEntry;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.util.ItemPool;
-import forge.util.ItemPoolSorter;
 
 
-public final class ItemManagerModel<T extends InventoryItem> {
+public final class ItemManagerModel<T extends InventoryItem> implements Comparator<Entry<T, Integer>> {
     private static final int maxSortDepth = 3;
 
     private final ItemPool<T> data;
@@ -125,7 +124,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
     public void refreshSort() {
         final List<Entry<T, Integer>> list = getOrderedList();
         if (list.isEmpty()) { return; }
-        try { list.sort(new MyComparator()); }
+        try { list.sort(this); }
         //fix NewDeck editor not loading on Android if a user deleted unwanted sets on edition folder
         catch (IllegalArgumentException ex) {}
     }
@@ -133,7 +132,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
     //Manages sorting orders for multiple depths of sorting
     public final class CascadeManager {
         private final List<ItemColumn> colsToSort = Collections.synchronizedList(new ArrayList<>(3));
-        private Sorter sorter = null;
+        private Comparator<Entry<InventoryItem, Integer>> sorter = null;
 
         // Adds a column to sort cascade list.
         // If column is first in the cascade, inverts direction of sort.
@@ -173,7 +172,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
             }
         }
 
-        public Sorter getSorter() {
+        public Comparator<Entry<InventoryItem, Integer>> getSorter() {
             if (sorter == null) {
                 sorter = createSorter();
             }
@@ -185,55 +184,29 @@ public final class ItemManagerModel<T extends InventoryItem> {
             sorter = null;
         }
 
-        private Sorter createSorter() {
-            final List<ItemPoolSorter<InventoryItem>> oneColSorters = new ArrayList<>(maxSortDepth);
-
+        private Comparator<Entry<InventoryItem, Integer>> createSorter() {
+            Comparator<Entry<InventoryItem, Integer>> result = this::compareDeckBrowserRows;
             synchronized (colsToSort) {
-                for (ItemColumn col : colsToSort) {
-                    oneColSorters.add(new ItemPoolSorter<>(
-                            col.getFnSort(),
-                            col.getConfig().getSortState().equals(SortState.ASC)));
+                for (final ItemColumn col : colsToSort) {
+                    result = result.thenComparing((Comparator<Entry<InventoryItem, Integer>>) col);
                 }
             }
-            return new Sorter(oneColSorters);
+            return result;
         }
 
-        public class Sorter implements Comparator<Entry<InventoryItem, Integer>> {
-            private final List<ItemPoolSorter<InventoryItem>> sorters;
-            private final int cntFields;
-
-            public Sorter(final List<ItemPoolSorter<InventoryItem>> sorters0) {
-                sorters = sorters0;
-                cntFields = sorters0.size();
+        private int compareDeckBrowserRows(final Entry<InventoryItem, Integer> arg0, final Entry<InventoryItem, Integer> arg1) {
+            if (arg0.getKey() instanceof DeckBrowserEntry || arg1.getKey() instanceof DeckBrowserEntry) {
+                final int sortGroup0 = arg0.getKey() instanceof DeckBrowserEntry ? ((DeckBrowserEntry) arg0.getKey()).getSortGroup() : 3;
+                final int sortGroup1 = arg1.getKey() instanceof DeckBrowserEntry ? ((DeckBrowserEntry) arg1.getKey()).getSortGroup() : 3;
+                return Integer.compare(sortGroup0, sortGroup1);
             }
-
-            @Override
-            public final int compare(final Entry<InventoryItem, Integer> arg0, final Entry<InventoryItem, Integer> arg1) {
-                int lastCompare = 0;
-                if (arg0.getKey() instanceof DeckBrowserEntry || arg1.getKey() instanceof DeckBrowserEntry) {
-                    final int sortGroup0 = arg0.getKey() instanceof DeckBrowserEntry ? ((DeckBrowserEntry) arg0.getKey()).getSortGroup() : 3;
-                    final int sortGroup1 = arg1.getKey() instanceof DeckBrowserEntry ? ((DeckBrowserEntry) arg1.getKey()).getSortGroup() : 3;
-                    lastCompare = Integer.compare(sortGroup0, sortGroup1);
-                }
-                int iField = -1;
-                while ((++iField < cntFields) && (lastCompare == 0)) { // reverse
-                                                                            // iteration
-                    final ItemPoolSorter<InventoryItem> sorter = sorters.get(iField);
-                    if (sorter == null) {
-                        break;
-                    }
-                    lastCompare = sorter.compare(arg0, arg1);
-                }
-                return lastCompare;
-            }
+            return 0;
         }
     }
 
-    private final class MyComparator implements Comparator<Entry<T, Integer>> {
-        @SuppressWarnings("unchecked")
-        @Override
-        public int compare(final Entry<T, Integer> o1, final Entry<T, Integer> o2) {
-            return cascadeManager.getSorter().compare((Entry<InventoryItem, Integer>)o1, (Entry<InventoryItem, Integer>)o2);
-        }
+    @SuppressWarnings("unchecked")
+    @Override
+    public int compare(final Entry<T, Integer> o1, final Entry<T, Integer> o2) {
+        return cascadeManager.getSorter().compare((Entry<InventoryItem, Integer>)o1, (Entry<InventoryItem, Integer>)o2);
     }
 }

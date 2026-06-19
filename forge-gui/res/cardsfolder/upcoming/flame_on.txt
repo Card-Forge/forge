@@ -1,0 +1,8 @@
+Name:Flame On!
+ManaCost:4 R
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBPump | SpellDescription$ Put X +1/+1 counters on target creature, where X is the number of noncreature, nonland cards in your graveyard. It gains flying until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Flying
+K:Rebound
+SVar:X:Count$ValidGraveyard Card.nonCreature+nonLand+YouOwn
+Oracle:Put X +1/+1 counters on target creature, where X is the number of noncreature, nonland cards in your graveyard. It gains flying until end of turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

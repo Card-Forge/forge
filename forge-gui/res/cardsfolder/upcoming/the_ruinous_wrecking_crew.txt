@@ -8,7 +8,7 @@ SVar:TrigCharm:DB$ Charm | MinCharmNum$ 0 | CharmNum$ X | Choices$ DBDiscard,DBL
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Discard a card, then draw a card.
 SVar:DBDraw:DB$ Draw
 SVar:DBLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SpellDescription$ Target opponent loses 2 life.
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Card.token | ValidTgtDesc$ token | SpellDescription$ Destroy target token.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Card.token | ValidTgtsDesc$ token | SpellDescription$ Destroy target token.
 SVar:DBSac:DB$ Sacrifice | Defined$ Player | SacValid$ Creature | SpellDescription$ Each player sacrifices a creature of their choice.
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters
