@@ -59311,7 +59311,7 @@
     "life": 30,
     "rewards": [
       {
-        "type": "card",
+        "type": "item",
         "count": 1,
         "itemName": "Cragflame"
       },
