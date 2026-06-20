@@ -198,8 +198,14 @@ public class ArchipelagoRandomizer {
         }
     }
 
+    public void unlockMaxLifeReward(int amount) {
+        System.out.println(String.format("%s%s{RESET}%s%s%s{RESET}", ArchipelagoColors.Salmon, "Forge AP:\n", "Max Life Reward: ", ArchipelagoColors.Cyan, amount));
+        archipelagoDataInstance.addMaxLife(amount);
+    }
+
     public void unlockItemReward(String itemName) {
         Current.player().addItem(itemName);
+        System.out.println(String.format("%s%s{RESET}%s%s%s{RESET}", ArchipelagoColors.Salmon, "Forge AP:\n", "Item Reward: ", ArchipelagoColors.Cyan, itemName));
         archipelagoDataInstance.addItem(itemName);
     }
 

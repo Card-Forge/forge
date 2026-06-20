@@ -4,7 +4,9 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import forge.adventure.data.ItemData;
+import forge.adventure.scene.TileMapScene;
 import forge.adventure.util.*;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.*;
 
@@ -63,7 +65,7 @@ public class LocalRandomizer {
         ArchipelagoData.getInstance().setupFreshSaveFile(ArchipelagoMode.solo_randomizer);
     }
 
-    public void updatePlayerChecks(ArchipelagoCheckTypes type) {
+    public void updatePlayerChecks(ArchipelagoCheckTypes type, @NonNull String notificationMessage) {
         switch (type) {
             case TOTAL_CARDS_EARNED -> {
                 long totalCardsEarned = 0;
@@ -71,82 +73,80 @@ public class LocalRandomizer {
                     totalCardsEarned += value;
                 }
                 if (totalCardsEarned > 0 && totalCardsEarned % totalCardsEarnedBreakPoint == 0) {
-                    generateRandomizedReward();
+                    generateRandomizedReward(notificationMessage);
                 }
             }
             case COLORLESS_BATTLE_WON -> {
                 if (archipelagoDataInstance.totalBattlesWonColorless > 0 && archipelagoDataInstance.totalBattlesWonColorless % totalBattlesWonBreakpoint == 0) {
-                    generateRandomizedReward();
+                    generateRandomizedReward(notificationMessage);
                 }
             }
             case WHITE_BATTLE_WON -> {
                 if (archipelagoDataInstance.totalBattlesWonWhite > 0 && archipelagoDataInstance.totalBattlesWonWhite % totalBattlesWonBreakpoint == 0) {
-                    generateRandomizedReward();
+                    generateRandomizedReward(notificationMessage);
                 }
             }
             case BLUE_BATTLE_WON -> {
                 if (archipelagoDataInstance.totalBattlesWonBlue > 0 && archipelagoDataInstance.totalBattlesWonBlue % totalBattlesWonBreakpoint == 0) {
-                    generateRandomizedReward();
+                    generateRandomizedReward(notificationMessage);
                 }
             }
             case BLACK_BATTLE_WON -> {
                 if (archipelagoDataInstance.totalBattlesWonBlack > 0 && archipelagoDataInstance.totalBattlesWonBlack % totalBattlesWonBreakpoint == 0) {
-                    generateRandomizedReward();
+                    generateRandomizedReward(notificationMessage);
                 }
             }
             case RED_BATTLE_WON -> {
                 if (archipelagoDataInstance.totalBattlesWonRed > 0 && archipelagoDataInstance.totalBattlesWonRed % totalBattlesWonBreakpoint == 0) {
-                    generateRandomizedReward();
+                    generateRandomizedReward(notificationMessage);
                 }
             }
             case GREEN_BATTLE_WON -> {
                 if (archipelagoDataInstance.totalBattlesWonGreen > 0 && archipelagoDataInstance.totalBattlesWonGreen % totalBattlesWonBreakpoint == 0) {
-                    generateRandomizedReward();
+                    generateRandomizedReward(notificationMessage);
                 }
             }
-            case COLORLESS_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.colorlessCompletedTownInnEvents);
-            case WHITE_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.whiteCompletedTownInnEvents);
-            case BLUE_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.blueCompletedTownInnEvents);
-            case BLACK_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.blackCompletedTownInnEvents);
-            case RED_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.redCompletedTownInnEvents);
-            case GREEN_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.greenCompletedTownInnEvents);
-            case COLORLESS_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.colorlessCompletedTownQuests);
-            case WHITE_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.whiteCompletedTownQuests);
-            case BLUE_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.blueCompletedTownQuests);
-            case BLACK_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.blackCompletedTownQuests);
-            case RED_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.redCompletedTownQuests);
-            case GREEN_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.greenCompletedTownQuests);
+            case COLORLESS_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.colorlessCompletedTownInnEvents, notificationMessage);
+            case WHITE_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.whiteCompletedTownInnEvents, notificationMessage);
+            case BLUE_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.blueCompletedTownInnEvents, notificationMessage);
+            case BLACK_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.blackCompletedTownInnEvents, notificationMessage);
+            case RED_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.redCompletedTownInnEvents, notificationMessage);
+            case GREEN_TOWN_EVENTS -> handleTownEventDone(archipelagoDataInstance.greenCompletedTownInnEvents, notificationMessage);
+            case COLORLESS_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.colorlessCompletedTownQuests, notificationMessage);
+            case WHITE_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.whiteCompletedTownQuests, notificationMessage);
+            case BLUE_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.blueCompletedTownQuests, notificationMessage);
+            case BLACK_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.blackCompletedTownQuests, notificationMessage);
+            case RED_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.redCompletedTownQuests, notificationMessage);
+            case GREEN_TOWN_QUESTS -> handleTownQuestDone(archipelagoDataInstance.greenCompletedTownQuests, notificationMessage);
         }
     }
 
-    private void handleTownEventDone(Map<String, Long> completedTownEventsList) {
+    private void handleTownEventDone(Map<String, Long> completedTownEventsList, String notificationMessage) {
         int totalTownEventsDone = 0;
         for (long count : completedTownEventsList.values()) {
             totalTownEventsDone += (int) count;
         }
         if (archipelagoDataInstance.archipelagoMode == ArchipelagoMode.solo_randomizer) {
-            LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
             if (totalTownEventsDone > 0 && totalTownEventsDone % totalTownEventsBreakpoint == 0) {
-                generateRandomizedReward();
+                generateRandomizedReward(notificationMessage);
             }
         }
     }
 
-    private void handleTownQuestDone(Map<String, Long> completedTownQuestsList) {
+    private void handleTownQuestDone(Map<String, Long> completedTownQuestsList, String notificationMessage) {
         int totalTownQuestsDone = 0;
         for (long count : completedTownQuestsList.values()) {
             totalTownQuestsDone += (int) count;
         }
         if (archipelagoDataInstance.archipelagoMode == ArchipelagoMode.solo_randomizer) {
-            LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
             if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
-                generateRandomizedReward();
+                generateRandomizedReward(notificationMessage);
             }
         }
     }
 
     // Randomly picks between the 4 reward options.
-    private void generateRandomizedReward() {
+    private void generateRandomizedReward(String notificationMessage) {
         Random random = new Random();
         int roll;
         if (archipelagoDataInstance.lockedWorldRegionsByName.isEmpty()) {
@@ -158,7 +158,7 @@ public class LocalRandomizer {
 
         // Guarantee a region reward after X checks where X is regionUnlockBreakpoint.
         if (!archipelagoDataInstance.lockedWorldRegionsByName.isEmpty() && (roll < regionUnlockChance || checksSinceLastRegionReward >= regionUnlockBreakpoint)) {
-            unlockRandomRegion();
+            unlockRandomRegion(notificationMessage);
             checksSinceLastRegionReward = 0;
         } else {
             checksSinceLastRegionReward++;
@@ -169,6 +169,7 @@ public class LocalRandomizer {
                     case 1 -> goldAmount = 1500;
                     case 2 -> goldAmount = 3000;
                 }
+                archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s%s{RESET}", ArchipelagoColors.Cyan, goldAmount, "G"));
                 archipelagoDataInstance.unlockGoldReward(goldAmount);
             } else if (roll < regionUnlockChance + goldRewardChance + manaRewardChance) {
                 roll = random.nextInt(3);
@@ -177,19 +178,30 @@ public class LocalRandomizer {
                     case 1 -> manaAmount = 30;
                     case 2 -> manaAmount = 50;
                 }
+                archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s%s{RESET}", ArchipelagoColors.Cyan, manaAmount, " Shards"));
                 archipelagoDataInstance.unlockManaCrystalReward(manaAmount);
             } else if (roll < regionUnlockChance + goldRewardChance + manaRewardChance + maxLifeRewardChance) {
-                Current.player().addMaxLife(1);
+                archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s{RESET}", ArchipelagoColors.Cyan, "Max Life +1"));
+                unlockMaxLifeReward(1);
             } else if (roll < regionUnlockChance + goldRewardChance + manaRewardChance + maxLifeRewardChance + equipmentRewardChance) {
                 Reward reward = takeSingleEquipmentOutOfRemainingPool();
                 switch (reward.getType()) {
-                    case Gold -> archipelagoDataInstance.unlockGoldReward(reward.getCount());
-                    case Shards -> archipelagoDataInstance.unlockManaCrystalReward(reward.getCount());
-                    case Item -> archipelagoDataInstance.addItem(reward.getItem().name);
+                    case Gold -> {
+                        archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s%s{RESET}", ArchipelagoColors.Cyan, reward.getCount(), "G"));
+                        archipelagoDataInstance.unlockGoldReward(reward.getCount());
+                    }
+                    case Shards -> {
+                        archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s%s{RESET}", ArchipelagoColors.Cyan, reward.getCount(), "S"));
+                        archipelagoDataInstance.unlockManaCrystalReward(reward.getCount());
+                    }
+                    case Item -> {
+                        archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s{RESET}", ArchipelagoColors.Cyan, reward.getItem().name));
+                        unlockItemReward(reward.getItem().name);
+                    }
                 }
             } else {
                 // If no other change was hit, generate a set unlock. At the moment there is a 40% chance of this by default which becomes 50% once all regions are unlocked.
-                archipelagoDataInstance.unlockRandomSet();
+                archipelagoDataInstance.unlockRandomSet(notificationMessage);
             }
         }
     }
@@ -305,7 +317,18 @@ public class LocalRandomizer {
         return null;
     }
 
-    public void unlockRandomRegion() {
+    public void unlockMaxLifeReward(int amount) {
+        System.out.println(String.format("%s%s{RESET}%s%s%s{RESET}", ArchipelagoColors.Salmon, "Randomizer:\n", "Max Life Reward: ", ArchipelagoColors.Cyan, amount));
+        archipelagoDataInstance.addMaxLife(amount);
+    }
+
+    public void unlockItemReward(String itemName) {
+        Current.player().addItem(itemName);
+        System.out.println(String.format("%s%s{RESET}%s%s%s{RESET}", ArchipelagoColors.Salmon, "Randomizer:\n", "Item Reward: ", ArchipelagoColors.Cyan, itemName));
+        archipelagoDataInstance.addItem(itemName);
+    }
+
+    public void unlockRandomRegion(String notificationMessage) {
         if (archipelagoDataInstance.lockedWorldRegionsByName.isEmpty()) {
             return;
         }
@@ -316,6 +339,7 @@ public class LocalRandomizer {
             if (setIndex++ == targetRegionIndex) {
                 for (String runeName : archipelagoDataInstance.regionTeleportingRunes) {
                     if (runeName.toLowerCase().contains(region.toLowerCase())) {
+                        archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\nRegion Rune: %s%s{RESET}", ArchipelagoColors.Cyan, runeName));
                         Current.player().addItem(runeName);
                         return;
                     }

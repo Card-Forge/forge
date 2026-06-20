@@ -9,6 +9,6 @@ public interface IAfterMatch {
             playerResultText = "WON!";
             ArchipelagoData.getInstance().addTotalBattlesWon(1);
         }
-        System.out.println("FORGE_ARCHIPELAGO: DETECTED GAME CONCLUSION. THE PLAYER HAS " + playerResultText);
+        System.out.println("Randomizer: Battle Concluded. The player has " + playerResultText);
     }
 }

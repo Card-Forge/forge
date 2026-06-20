@@ -37,13 +37,13 @@ public class ReceiveItem {
                     APData.unlockManaCrystalReward(50);
                     break;
                 case 1009:
-                    APData.unlockRandomSet();
+                    APData.unlockRandomSet("");
                     break;
                 case 1010:
-                    Current.player().addMaxLife(1);
+                    APRandomizer.unlockMaxLifeReward(1);
                     break;
                 case 1011:
-                    Current.player().addMaxLife(2);
+                    APRandomizer.unlockMaxLifeReward(2);
                     break;
                 case 2000:
                 case 2001:
