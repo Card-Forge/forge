@@ -2,7 +2,6 @@ Name:Super-Adaptoid
 ManaCost:2
 Types:Legendary Artifact Creature Robot Villain
 PT:*/2
-K:First Strike
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of legendary creatures you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME enters or attacks, choose another target creature. If that creature has haste and CARDNAME doesn't, put a haste counter on CARDNAME. Do the same for flying, first strike, double strike, deathtouch, indestructible, lifelink, menace, reach, trample, and vigilance.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME enters or attacks, choose another target creature. If that creature has haste and CARDNAME doesn't, put a haste counter on CARDNAME. Do the same for flying, first strike, double strike, deathtouch, indestructible, lifelink, menace, reach, trample, and vigilance.
