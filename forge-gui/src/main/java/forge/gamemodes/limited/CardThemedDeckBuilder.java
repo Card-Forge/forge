@@ -709,7 +709,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      */
     private void addWastesIfRequired(){
         PaperCard waste = FModel.getMagicDb().getCommonCards().getUniqueByNameNoAlt("Wastes");
-        if(colors.isColorless()&& keyCard.getRules().getColorIdentity().isColorless()
+        if(!format.equals(DeckFormat.Brawl)
+                && colors.isColorless() && keyCard.getRules().getColorIdentity().isColorless()
                 && format.isLegalCard(waste)) {
             while (landsNeeded > 0) {
                 deckList.add(waste);
@@ -730,6 +731,11 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      */
     private int[] calculateLandNeeds() {
         final int[] clrCnts = { 0,0,0,0,0 };
+        // Brawl allows colorless commanders to use any number of one chosen basic land type.
+        if (format.equals(DeckFormat.Brawl) && keyCard.getRules().getColorIdentity().isColorless()) {
+            clrCnts[MyRandom.getRandom().nextInt(5)] = 1;
+            return clrCnts;
+        }
         // count each card color using mana costs
         for (final PaperCard cp : deckList) {
             final ManaCost mc = cp.getRules().getManaCost();
