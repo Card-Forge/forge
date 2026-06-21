@@ -377,7 +377,7 @@ public abstract class GameStage extends Stage {
             onRemoveEffect(mod);
         }
 
-        if (isPaused() || isDialogOnlyInput() || /*MapStage.getInstance().isDialogOnlyInput() ||*/ Forge.advFreezePlayerControls) {
+        if (isPaused() || isDialogOnlyInput() || Forge.advFreezePlayerControls) {
             keyboardInput.setZero();
             controllerInput.setZero();
             touchInput.setZero();
