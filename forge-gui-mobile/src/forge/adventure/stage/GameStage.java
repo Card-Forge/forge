@@ -359,6 +359,39 @@ public abstract class GameStage extends Stage {
 
     @Override
     public final void act(float delta) {
+        super.act(delta);
+
+        if (animationTimeout >= 0) {
+            animationTimeout -= delta;
+            return;
+        }
+
+        Array<PlayerModification> modsToRemove = new Array<>();
+        for (Map.Entry<PlayerModification, Float> mod : currentModifications.entrySet()) {
+            mod.setValue(mod.getValue() - delta);
+            if (mod.getValue() < 0)
+                modsToRemove.add(mod.getKey());
+        }
+        for (PlayerModification mod : modsToRemove) {
+            currentModifications.remove(mod);
+            onRemoveEffect(mod);
+        }
+
+        if (isPaused() || isDialogOnlyInput() || /*MapStage.getInstance().isDialogOnlyInput() ||*/ Forge.advFreezePlayerControls) {
+            keyboardInput.setZero();
+            controllerInput.setZero();
+            touchInput.setZero();
+            player.getMovementDirection().setZero();
+            player.stop();
+            return;
+        }
+
+        if (onEndAction != null) {
+
+            onEndAction.run();
+            onEndAction = null;
+        }
+
         keyboardInput.setZero();
         for (int key : KeyBinding.Left.getBindings()) {
             if (Gdx.input.isKeyPressed(key)) {
@@ -385,6 +418,7 @@ public abstract class GameStage extends Stage {
             }
         }
 
+
         // Input priority: touch > controller > keyboard
         Vector2 dir = new Vector2();
         if (touchX >= 0 && touchInput.len() > 0.2f) {
@@ -402,41 +436,14 @@ public abstract class GameStage extends Stage {
             player.getMovementDirection().set(dir);
         }
 
-        super.act(delta);
-
-        if (animationTimeout >= 0) {
-            animationTimeout -= delta;
-            return;
-        }
-        Array<PlayerModification> modsToRemove = new Array<>();
-        for (Map.Entry<PlayerModification, Float> mod : currentModifications.entrySet()) {
-            mod.setValue(mod.getValue() - delta);
-            if (mod.getValue() < 0)
-                modsToRemove.add(mod.getKey());
-        }
-        for (PlayerModification mod : modsToRemove) {
-            currentModifications.remove(mod);
-            onRemoveEffect(mod);
-        }
-
-        if (isPaused()) {
-            return;
-        }
-
-        if (onEndAction != null) {
-
-            onEndAction.run();
-            onEndAction = null;
-        }
-
         if (touchX >= 0) {
             Vector2 target = this.screenToStageCoordinates(new Vector2(touchX, touchY));
-
             target.x -= player.getWidth() / 2f;
             Vector2 diff = target.sub(player.pos());
 
             if (diff.len() < 2) {
                 touchInput.setZero();
+                player.stop();
             } else {
                 touchInput.set(diff);
             }
@@ -605,10 +612,12 @@ public abstract class GameStage extends Stage {
         if (isPaused())
             return true;
         if (KeyBinding.Left.isPressed(keycode) || KeyBinding.Right.isPressed(keycode)) {
+            player.getMovementDirection().x = 0;
             if (!player.isMoving())
                 stop();
         }
         if (KeyBinding.Down.isPressed(keycode) || KeyBinding.Up.isPressed(keycode)) {
+            player.getMovementDirection().y = 0;
             if (!player.isMoving())
                 stop();
         }

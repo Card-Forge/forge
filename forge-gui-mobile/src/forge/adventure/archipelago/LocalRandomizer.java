@@ -4,7 +4,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import forge.adventure.data.ItemData;
-import forge.adventure.scene.TileMapScene;
 import forge.adventure.util.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
