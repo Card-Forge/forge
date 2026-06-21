@@ -1483,7 +1483,7 @@ public class CardProperty {
 
             final int actualNumber;
             if (splitProperty[0].endsWith("ReceivedThisTurn")) {
-                actualNumber = game.getCounterAddedThisTurn(cType, splitProperty[3], "Card.StrictlySelf", source, sourceController, spellAbility);
+                actualNumber = game.getCounterAddedThisTurn(cType, splitProperty[3], "Card.StrictlySelf", card, controller, spellAbility);
             } else {
                 actualNumber = card.getCounters(cType);
             }
