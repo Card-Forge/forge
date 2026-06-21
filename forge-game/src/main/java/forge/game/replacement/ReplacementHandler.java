@@ -97,40 +97,36 @@ public class ReplacementHandler {
         final List<ReplacementEffect> possibleReplacers = Lists.newArrayList();
 
         // Round up Static replacement effects
-        game.forEachCardInGame(new Visitor<Card>() {
-            @Override
-            public boolean visit(Card crd) {
-                Card c = preList.get(crd);
-                Zone cardZone = game.getZoneOf(c);
+        game.forEachCardInGame(crd -> {
+            Card c = preList.get(crd);
+            Zone cardZone = game.getZoneOf(c);
 
-                // only when not prelist
-                boolean noLKIstate = c != crd || event != ReplacementType.Moved || c.isImmutable() || runParams.get(AbilityKey.LastStateBattlefield) == null;
-                if (!noLKIstate) {
-                    Card lastState = ((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).get(c);
-                    if (lastState != c) {
-                        // use LKI because it has the right RE from the state before the effect started
-                        c = lastState;
-                        cardZone = lastState.getLastKnownZone();
-                    } else if (cardZone != null && cardZone.is(ZoneType.Battlefield)) {
-                        // no LKI found so it shouldn't apply, this can happen during simultaneous zone changes
-                        return true;
-                    }
+            // only when not prelist
+            boolean noLKIstate = c != crd || event != ReplacementType.Moved || c.isImmutable() || runParams.get(AbilityKey.LastStateBattlefield) == null;
+            if (!noLKIstate) {
+                Card lastState = ((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).get(c);
+                if (lastState != c) {
+                    // use LKI because it has the right RE from the state before the effect started
+                    c = lastState;
+                    cardZone = lastState.getLastKnownZone();
+                } else if (cardZone != null && cardZone.is(ZoneType.Battlefield)) {
+                    // no LKI found so it shouldn't apply, this can happen during simultaneous zone changes
+                    return true;
                 }
-
-                for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
-                    if (!replacementEffect.hasRun() && !hasRun.contains(replacementEffect)
-                            && (layer == null || replacementEffect.getLayer() == layer)
-                            && replacementEffect.modeCheck(event, runParams)
-                            && !possibleReplacers.contains(replacementEffect)
-                            && replacementEffect.zonesCheck(cardZone)
-                            && replacementEffect.requirementsCheck(game)
-                            && replacementEffect.canReplace(runParams)) {
-                        possibleReplacers.add(replacementEffect);
-                    }
-                }
-                return true;
             }
 
+            for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
+                if (!replacementEffect.hasRun() && !hasRun.contains(replacementEffect)
+                        && (layer == null || replacementEffect.getLayer() == layer)
+                        && replacementEffect.modeCheck(event, runParams)
+                        && !possibleReplacers.contains(replacementEffect)
+                        && replacementEffect.zonesCheck(cardZone)
+                        && replacementEffect.requirementsCheck(game)
+                        && replacementEffect.canReplace(runParams)) {
+                    possibleReplacers.add(replacementEffect);
+                }
+            }
+            return true;
         }, affectedCard != null && affectedCard.isInZone(ZoneType.Sideboard));
 
         if (affectedLKI != null) {
