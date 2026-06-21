@@ -596,6 +596,9 @@ public abstract class GameStage extends Stage {
     public void stop() {
         WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+        touchInput.setZero();
+        keyboardInput.setZero();
+        controllerInput.setZero();
         touchX = -1;
         touchY = -1;
         player.stop();

@@ -233,8 +233,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
     public void loadPOI(PointOfInterest poi) {
         try {
-            TileMapScene.instance().load(poi);
             stop();
+            TileMapScene.instance().load(poi);
             TileMapScene.instance().setFromWorldMap(true);
             Forge.switchScene(TileMapScene.instance());
         } catch (Exception e) {
