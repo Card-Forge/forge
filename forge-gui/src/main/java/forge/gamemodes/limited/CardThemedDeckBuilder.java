@@ -730,11 +730,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      */
     private int[] calculateLandNeeds() {
         final int[] clrCnts = { 0,0,0,0,0 };
-        //Brawl allows colourless commanders to have any number of one basic land to fill out the deck..
-        if (format.equals(DeckFormat.Brawl) && keyCard.getRules().getColorIdentity().isColorless()){
-            clrCnts[MyRandom.getRandom().nextInt(5)] = 1;
-            return clrCnts;
-        }
         // count each card color using mana costs
         for (final PaperCard cp : deckList) {
             final ManaCost mc = cp.getRules().getManaCost();
