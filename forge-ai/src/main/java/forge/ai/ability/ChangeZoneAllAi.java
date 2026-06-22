@@ -68,7 +68,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         
         if ("LivingDeath".equals(aiLogic)) {
             return SpecialCardAi.LivingDeath.consider(ai, sa);
-        } else if ("Timetwister".equalsIgnoreCase(aiLogic)) {
+        } else if ("Timetwister".equals(aiLogic)) {
             return SpecialCardAi.Timetwister.consider(ai, sa);
         } else if ("RetDiscardedThisTurn".equals(aiLogic)) {
             boolean result = !ai.getDiscardedThisTurn().isEmpty() && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN);
