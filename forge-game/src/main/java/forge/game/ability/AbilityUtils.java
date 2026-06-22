@@ -370,8 +370,8 @@ public class AbilityUtils {
         if (card == null) { return 0; }
 
         Player player = null;
-        if (ability instanceof SpellAbility) {
-            player = ((SpellAbility)ability).getActivatingPlayer();
+        if (ability instanceof SpellAbility sa) {
+            player = sa.getActivatingPlayer();
         }
         if (player == null) {
             player = card.getController();
@@ -1562,8 +1562,8 @@ public class AbilityUtils {
 
         Player player = null;
         if (ctb != null) {
-            if (ctb instanceof SpellAbility) {
-                player = ((SpellAbility)ctb).getActivatingPlayer();
+            if (ctb instanceof SpellAbility sa) {
+                player = sa.getActivatingPlayer();
             }
             if (player == null) {
                 player = ctb.getHostCard().getController();
@@ -1942,8 +1942,7 @@ public class AbilityUtils {
             } else {
                 final List<ZoneType> zones = ZoneType.listValueOf(lparts[0].length() > 5 ? lparts[0].substring(5) : "Battlefield");
                 boolean usedLastState = false;
-                if (ctb instanceof SpellAbility && zones.size() == 1) {
-                    SpellAbility sa = (SpellAbility) ctb;
+                if (ctb instanceof SpellAbility sa && zones.size() == 1) {
                     if (sa.isReplacementAbility()) {
                         if (zones.get(0).equals(ZoneType.Battlefield)) {
                             cardsInZones = sa.getRootAbility().getLastStateBattlefield();
@@ -3671,10 +3670,14 @@ public class AbilityUtils {
 
         // shortcut to filter from Defined directly
         if (def.startsWith("Valid")) {
-            final String[] splitString = def.split("/", 2);
+            final String[] calcX = def.split("\\$", 2);
+            final String[] splitString = calcX[0].split("/", 2);
             String valid = splitString[0].substring(6);
-            final int num = CardLists.getValidCardCount(paidList, valid, source.getController(), source, ctb);
-            return doXMath(num, splitString.length > 1 ? splitString[1] : null, source, ctb);
+            final List<Card> filtered = CardLists.getValidCardsAsList(paidList, valid, source.getController(), source, ctb);
+            if (calcX.length > 1) {
+                return handlePaid(filtered, calcX[1], source, ctb);
+            }
+            return doXMath(filtered.size(), splitString.length > 1 ? splitString[1] : null, source, ctb);
         }
 
         if (def.startsWith("AllTypes")) {
