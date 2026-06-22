@@ -674,6 +674,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
                 for (int j = 0; j < nLand; j++) {
                     deckList.add(getBasicLand(i));
+                    landsNeeded--;
                 }
             }
         }
@@ -709,8 +710,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      */
     private void addWastesIfRequired(){
         PaperCard waste = FModel.getMagicDb().getCommonCards().getUniqueByNameNoAlt("Wastes");
-        if(!format.equals(DeckFormat.Brawl)
-                && colors.isColorless() && keyCard.getRules().getColorIdentity().isColorless()
+        if(colors.isColorless()&& keyCard.getRules().getColorIdentity().isColorless()
                 && format.isLegalCard(waste)) {
             while (landsNeeded > 0) {
                 deckList.add(waste);
