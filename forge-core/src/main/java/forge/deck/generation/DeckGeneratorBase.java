@@ -233,7 +233,6 @@ public abstract class DeckGeneratorBase {
             addSome(targetSize - actualSize, tDeck.toFlatList());
         }
         else if (actualSize > targetSize) {
-
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
                 List<PaperCard> toRemove = tDeck.toFlatList().stream()
                         .filter(PaperCardPredicates.NOT_BASIC_LAND)
