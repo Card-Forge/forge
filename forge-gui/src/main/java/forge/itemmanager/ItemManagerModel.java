@@ -26,10 +26,9 @@ import java.util.Map.Entry;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.util.ItemPool;
-import forge.util.ItemPoolSorter;
 
 
-public final class ItemManagerModel<T extends InventoryItem> {
+public final class ItemManagerModel<T extends InventoryItem> implements Comparator<Entry<T, Integer>> {
     private static final int maxSortDepth = 3;
 
     private final ItemPool<T> data;
@@ -124,7 +123,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
     public void refreshSort() {
         final List<Entry<T, Integer>> list = getOrderedList();
         if (list.isEmpty()) { return; }
-        try { list.sort(new MyComparator()); }
+        try { list.sort(this); }
         //fix NewDeck editor not loading on Android if a user deleted unwanted sets on edition folder
         catch (IllegalArgumentException ex) {}
     }
@@ -132,7 +131,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
     //Manages sorting orders for multiple depths of sorting
     public final class CascadeManager {
         private final List<ItemColumn> colsToSort = Collections.synchronizedList(new ArrayList<>(3));
-        private Sorter sorter = null;
+        private Comparator<Entry<InventoryItem, Integer>> sorter = null;
 
         // Adds a column to sort cascade list.
         // If column is first in the cascade, inverts direction of sort.
@@ -172,9 +171,11 @@ public final class ItemManagerModel<T extends InventoryItem> {
             }
         }
 
-        public Sorter getSorter() {
+        public Comparator<Entry<InventoryItem, Integer>> getSorter() {
             if (sorter == null) {
-                sorter = createSorter();
+                synchronized (colsToSort) {
+                    sorter = colsToSort.stream().map(c -> (Comparator<Entry<InventoryItem, Integer>>) c).reduce((a,b) -> 0, Comparator::thenComparing);
+                }
             }
             return sorter;
         }
@@ -183,51 +184,11 @@ public final class ItemManagerModel<T extends InventoryItem> {
             colsToSort.clear();
             sorter = null;
         }
-
-        private Sorter createSorter() {
-            final List<ItemPoolSorter<InventoryItem>> oneColSorters = new ArrayList<>(maxSortDepth);
-
-            synchronized (colsToSort) {
-                for (ItemColumn col : colsToSort) {
-                    oneColSorters.add(new ItemPoolSorter<>(
-                            col.getFnSort(),
-                            col.getConfig().getSortState().equals(SortState.ASC)));
-                }
-            }
-            return new Sorter(oneColSorters);
-        }
-
-        public class Sorter implements Comparator<Entry<InventoryItem, Integer>> {
-            private final List<ItemPoolSorter<InventoryItem>> sorters;
-            private final int cntFields;
-
-            public Sorter(final List<ItemPoolSorter<InventoryItem>> sorters0) {
-                sorters = sorters0;
-                cntFields = sorters0.size();
-            }
-
-            @Override
-            public final int compare(final Entry<InventoryItem, Integer> arg0, final Entry<InventoryItem, Integer> arg1) {
-                int lastCompare = 0;
-                int iField = -1;
-                while ((++iField < cntFields) && (lastCompare == 0)) { // reverse
-                                                                            // iteration
-                    final ItemPoolSorter<InventoryItem> sorter = sorters.get(iField);
-                    if (sorter == null) {
-                        break;
-                    }
-                    lastCompare = sorter.compare(arg0, arg1);
-                }
-                return lastCompare;
-            }
-        }
     }
 
-    private final class MyComparator implements Comparator<Entry<T, Integer>> {
-        @SuppressWarnings("unchecked")
-        @Override
-        public int compare(final Entry<T, Integer> o1, final Entry<T, Integer> o2) {
-            return cascadeManager.getSorter().compare((Entry<InventoryItem, Integer>)o1, (Entry<InventoryItem, Integer>)o2);
-        }
+    @SuppressWarnings("unchecked")
+    @Override
+    public int compare(final Entry<T, Integer> o1, final Entry<T, Integer> o2) {
+        return cascadeManager.getSorter().compare((Entry<InventoryItem, Integer>)o1, (Entry<InventoryItem, Integer>)o2);
     }
 }

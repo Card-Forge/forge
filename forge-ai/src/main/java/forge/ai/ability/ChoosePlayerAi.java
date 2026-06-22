@@ -1,11 +1,10 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import forge.ai.AiAttackController;
+
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtil;
+import forge.ai.AiPlayerPredicates;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -13,7 +12,6 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.List;
 import java.util.Map;
 
 public class ChoosePlayerAi extends SpellAbilityAi {
@@ -41,8 +39,7 @@ public class ChoosePlayerAi extends SpellAbilityAi {
         else if ("Curse".equals(sa.getParam("AILogic"))) {
             PlayerCollection curseChoices = new PlayerCollection(choices).filter(PlayerPredicates.isOpponentOf(ai));
             if (!curseChoices.isEmpty()) {
-                Player preferredOpponent = AiAttackController.choosePreferredDefenderPlayer(ai);
-                chosen = curseChoices.contains(preferredOpponent) ? preferredOpponent : ComputerUtil.evaluateBoardPosition(curseChoices);
+                chosen = curseChoices.max(AiPlayerPredicates.compareByBoardPosition);
             }
             if (chosen == null) {
                 chosen = Iterables.getFirst(choices, null);
@@ -53,10 +50,10 @@ public class ChoosePlayerAi extends SpellAbilityAi {
             chosen = Iterables.contains(choices, ai) ? ai : Iterables.getFirst(choices, null);
         }
         else if ("BestAllyBoardPosition".equals(sa.getParam("AILogic"))) {
-            List<Player> prefChoices = Lists.newArrayList(choices);
+            PlayerCollection prefChoices = new PlayerCollection(choices);
             prefChoices.removeAll(ai.getOpponents());
             if (!prefChoices.isEmpty()) {
-                chosen = ComputerUtil.evaluateBoardPosition(prefChoices);
+                chosen = prefChoices.max(AiPlayerPredicates.compareByBoardPosition);
             }
             if (chosen == null) {
                 chosen = Iterables.getFirst(choices, null);

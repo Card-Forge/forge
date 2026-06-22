@@ -1,0 +1,7 @@
+Name:West Coast Expansion
+ManaCost:X U U
+Types:Sorcery
+A:SP$ Draw | NumCards$ X | SubAbility$ DBPlay | SpellDescription$ Draw X cards. If X is 5 or more, you may cast a Hero spell from your hand without paying its mana cost.
+SVar:DBPlay:DB$ Play | Valid$ Card | ValidSA$ Spell.Hero+YouOwn | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5
+SVar:X:Count$xPaid
+Oracle:Draw X cards. If X is 5 or more, you may cast a Hero spell from your hand without paying its mana cost.

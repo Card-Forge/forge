@@ -68,12 +68,11 @@ public class NetConnectUtil {
                 server.updateLobbyState();
             }
             @Override
-            public void update(final int slot, final LobbySlotType type) {return;}
+            public void update(final int slot, final LobbySlotType type) {}
         });
-        view.setPlayerChangeListener((index, event) -> {
-            server.updateSlot(index, event);
-            server.updateLobbyState();
-        });
+        // updateSlot already routes through the IUpdateable listener above, which calls
+        // updateLobbyState; calling it again here would broadcast a duplicate LobbyUpdateEvent.
+        view.setPlayerChangeListener(server::updateSlot);
 
         server.setLobbyListener(new ILobbyListener() {
             @Override
@@ -93,6 +92,7 @@ public class NetConnectUtil {
                 return null;
             }
         });
+        server.setDraftHandler(view.getDraftHandler());
         chatInterface.setGameClient(new IRemote() {
             @Override
             public void send(final NetEvent event) {
@@ -175,7 +175,7 @@ public class NetConnectUtil {
         port = hostPort.port();
         if (port == -1) port = Integer.valueOf(ForgeNetPreferences.FNetPref.NET_PORT.getDefault());
 
-        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui, hostname, port);
+        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), gui, hostname, port);
         onlineLobby.setClient(client);
         chatInterface.setGameClient(client);
         final ClientGameLobby lobby = new ClientGameLobby();
@@ -193,7 +193,6 @@ public class NetConnectUtil {
             }
             @Override
             public void close() {
-                GuiBase.setInterrupted(true);
                 onlineLobby.closeConn(Localizer.getInstance().getMessage("lblYourConnectionToHostWasInterrupted", url));
             }
             @Override
@@ -201,6 +200,7 @@ public class NetConnectUtil {
                 return lobby;
             }
         });
+        client.setDraftHandler(view.getDraftHandler());
         view.setPlayerChangeListener((index, event) -> client.send(event));
 
         NetworkLogConfig.activateNetworkLogging();

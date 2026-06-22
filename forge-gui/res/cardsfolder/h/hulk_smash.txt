@@ -1,0 +1,11 @@
+Name:HULK SMASH!
+ManaCost:1 R
+Types:Instant
+K:Teamwork:4
+A:SP$ Charm | CharmNum$ X | Choices$ DBDestroy,DBPump | AdditionalDescription$ . If this spell was cast using teamwork, choose both instead.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Destroy target noncreature artifact.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature an opponent controls.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature an opponent controls | NumDmg$ Y | DamageSource$ ParentTarget
+SVar:X:Count$Teamwork.2.1
+SVar:Y:ParentTargeted$CardPower
+Oracle:Teamwork 4 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 4 or more.)\nChoose one. If this spell was cast using teamwork, choose both instead.\n• Destroy target noncreature artifact.\n• Target creature you control deals damage equal to its power to target creature an opponent controls.

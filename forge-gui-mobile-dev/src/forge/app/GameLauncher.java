@@ -80,7 +80,7 @@ public class GameLauncher {
         else if (hasBothDims) isPortrait = heightArg > widthArg;
 
         ApplicationListener start = Forge.getApp(hw, new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),
-            assetsDir, false, isPortrait, false, 0);
+            assetsDir, isPortrait, false, 0);
 
         // Initialize window size
         int windowWidth, windowHeight;

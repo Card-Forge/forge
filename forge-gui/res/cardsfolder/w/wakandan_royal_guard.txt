@@ -1,0 +1,11 @@
+Name:Wakandan Royal Guard
+ManaCost:4 G
+Types:Creature Human Soldier Hero
+PT:4/4
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When this creature enters, put a +1/+1 counter on target creature. If that creature is another Hero, put two +1/+1 counters on it instead.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Targeted$Valid Creature.Other+Hero/Plus.1
+DeckHas:Ability$Counters
+DeckHints:Type$Hero
+Oracle:Vigilance\nWhen this creature enters, put a +1/+1 counter on target creature. If that creature is another Hero, put two +1/+1 counters on it instead.

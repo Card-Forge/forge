@@ -342,7 +342,7 @@ ScryfallCode=KHM
 325 U Koll, the Forgemaster @Nico Delort
 326 M Koma, Cosmos Serpent @rishxxv
 327 U Maja, Bretagard Protector @Richard Luong
-328 U Moritte of the Frost @Poison Project
+328 U Moritte of the Frost @Anditya Dita
 329 U Narfi, Betrayer King @Christopher Lovell
 330 R Sarulf, Realm Eater @Dibujante Nocturno
 331 U Svella, Ice Shaper @DZO

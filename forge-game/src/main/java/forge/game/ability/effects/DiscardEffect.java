@@ -258,7 +258,10 @@ public class DiscardEffect extends SpellAbilityEffect {
                 int min = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : Math.min(validCards.size(), numCards);
                 int max = sa.hasParam("AnyNumber") ? validCards.size() : Math.min(validCards.size(), numCards);
 
-                toBeDiscarded = max == 0 ? CardCollection.EMPTY : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
+                // Reveal/Look modes disclose dPHand to the chooser; non-valid revealed cards should remain visible during the choice.
+                final boolean revealed = mode.startsWith("Reveal") || mode.startsWith("Look");
+                final CardCollectionView visibleToChooser = revealed ? dPHand : validCards;
+                toBeDiscarded = max == 0 ? CardCollection.EMPTY : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max, visibleToChooser);
 
                 if (toBeDiscarded.isEmpty()) {
                     continue;

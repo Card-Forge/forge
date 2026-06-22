@@ -139,8 +139,19 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.currentView = this.listView;
     }
 
+    protected void addView(final ItemView<T> view) {
+        if (this.initialized) {
+            throw new IllegalStateException("Views must be added before ItemManager initialization");
+        }
+        this.views.add(view);
+    }
+
     protected ImageView<T> createImageView(final ItemManagerModel<T> model0) {
         return new ImageView<>(this, model0, this.showRanking);
+    }
+
+    protected ItemManagerModel<T> getModel() {
+        return this.model;
     }
 
     public final CDetailPicture getCDetailPicture() {

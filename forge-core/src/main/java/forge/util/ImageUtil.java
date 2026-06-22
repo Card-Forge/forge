@@ -162,7 +162,7 @@ public class ImageUtil {
                     return card.getOtherPart().getName();
                 } else if (!card.getMeldWith().isEmpty()) {
                     final CardDb db = StaticData.instance().getCommonCards();
-                    return db.getRules(card.getMeldWith()).getOtherPart().getName();
+                    return db.getRulesOrElseUnsupported(card.getMeldWith()).getOtherPart().getName();
                 } else {
                     return null;
                 }
@@ -206,7 +206,7 @@ public class ImageUtil {
         return getImageRelativePath(cp, face, true, true);
     }
 
-    public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop){
+    public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop) {
         final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F\\d+");
         String editionCode;
         if (setCode != null && !setCode.isEmpty())

@@ -87,7 +87,7 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 40 U Caelorna, Coral Tyrant @Deruchenko Alexander
 41 U Diversion Unit @Xabi Gaztelua
 42 C Flood the Engine @Eric Wilkerson
-43 C Gearseeker Serpent @Jean Pierre Targete
+43 C Gearseeker Serpent @J.P. Targete
 44 C Glitch Ghost Surveyor @Johan Grenier
 45 C Guidelight Optimizer @Mirko Failoni
 46 C Howler's Heavy @Borja Pindado
@@ -204,14 +204,14 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 157 U Defend the Rider @Raph Lomotan
 158 R District Mascot @Liiga Smilshkalne
 159 U Dredger's Insight @Bartek Fedyczak
-160 U Earthrumbler @Jean Pierre Targete
+160 U Earthrumbler @J.P. Targete
 161 U Elvish Refueler @Carly Milligan
 162 U Fang Guardian @Jason A. Engle
 163 U Fang-Druid Summoner @Nino Is
 164 U Greenbelt Guardian @Tianxing Xu
 165 C Hazard of the Dunes @Brent Hollowell
 166 C Jibbirik Omnivore @Jesper Ejsing
-167 C Loxodon Surveyor @Jean Pierre Targete
+167 C Loxodon Surveyor @J.P. Targete
 168 R Lumbering Worldwagon @Raph Lomotan
 169 M March of the World Ooze @Helge C. Balzer
 170 C Migrating Ketradon @Izzy
@@ -298,7 +298,7 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 251 L Bloodfell Caves @Ron Spencer
 252 L Blossoming Sands @Valera Lutfullina
 253 U Country Roads @Mark Poole
-254 L Dismal Backwater @Sam Burley
+254 L Dismal Backwater @Wayne Wu
 255 U Foul Roads @Borja Pindado
 256 L Jungle Hollow @Eddie Mendoza
 257 R Muraganda Raceway @Brian Valeza
@@ -353,8 +353,8 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 304 R Thopter Fabricator @William Tempest
 305 U Carrion Cruiser @Ian Jepson
 306 R Cryptcaller Chariot @Oliver Barrett
-307 R Demonic Junker @Death Burger
-308 M The Last Ride @Death Burger
+307 R Demonic Junker @Deathburger
+308 M The Last Ride @Deathburger
 309 C Ripclaw Wrangler @Andrew Griffith
 310 R Boommobile @Ian Jepson
 311 C Burner Rocket @Carl Critchlow
@@ -371,7 +371,7 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 322 R Debris Beetle @Michal Ivan
 323 U Dune Drifter @Arik Roper
 324 U Guidelight Pathmaker @Dan Mumford
-325 U Haunted Hellride @Death Burger
+325 U Haunted Hellride @Deathburger
 326 U Rangers' Aetherhive @Francisco Badilla
 327 U Rocketeer Boostbuggy @Adam Volker
 328 U Thundering Broodwagon @Villarrte
@@ -569,8 +569,8 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 521 R Possession Engine @Douglas P. Lobo
 522 R Thopter Fabricator @William Tempest
 523 R Cryptcaller Chariot @Oliver Barrett
-524 R Demonic Junker @Death Burger
-525 M The Last Ride @Death Burger
+524 R Demonic Junker @Deathburger
+525 M The Last Ride @Deathburger
 526 R Boommobile @Ian Jepson
 527 R Gastal Thrillroller @Dan Mumford
 528 R Lumbering Worldwagon @Francisco Badilla

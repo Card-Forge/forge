@@ -104,7 +104,7 @@ ScryfallCode=ONC
 96 C Plague Stinger @Ryan Pancoast
 97 R Chain Reaction @Trevor Claxton
 98 M Dragonmaster Outcast @Raymond Swanland
-99 U Hate Mirage @LA Draws
+99 U Hate Mirage @L.A. Draws
 100 U Hordeling Outburst @Zoltan Boros
 101 R Legion Warboss @Alex Konstad
 102 U Loyal Apprentice @Joe Slucher

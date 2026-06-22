@@ -385,7 +385,7 @@ public class Main extends AndroidApplication {
             forgeLogo = findViewById(resId("id", "logo_id"));
             activeView = findViewById(resId("id", "mainview"));
             activeView.setBackgroundColor(Color.WHITE);
-            forgeView = initializeForView(Forge.getApp(hwInfo, getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, isTabletDevice, Build.VERSION.SDK_INT), config);
+            forgeView = initializeForView(Forge.getApp(hwInfo, getAndroidClipboard(), adapter, ASSETS_DIR, !isLandscape, isTabletDevice, Build.VERSION.SDK_INT), config);
 
             getAnimator(ObjectAnimator.ofFloat(forgeLogo, "alpha", 1f, 1f).setDuration(800), ObjectAnimator.ofObject(activeView, "backgroundColor", new ArgbEvaluator(), Color.WHITE, Color.BLACK).setDuration(1600), new AnimatorListenerAdapter() {
                 @Override
@@ -859,6 +859,12 @@ public class Main extends AndroidApplication {
         public void convertToJPEG(InputStream input, OutputStream output) {
             Bitmap bmp = BitmapFactory.decodeStream(input);
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, output);
+        }
+
+        @Override
+        public void convertToPNG(InputStream input, OutputStream output) {
+            Bitmap bmp = BitmapFactory.decodeStream(input);
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, output);
         }
 
         @Override

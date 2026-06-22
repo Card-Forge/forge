@@ -489,7 +489,7 @@ public class CountersPutAi extends CountersAi {
                 list.remove(sacTarget);
             }
 
-            if (list.size() < sa.getTargetRestrictions().getMinTargets(source, sa)) {
+            if (list.size() < sa.getMinTargets()) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
@@ -796,7 +796,7 @@ public class CountersPutAi extends CountersAi {
             }
         } else if (sa.getTargetRestrictions().canOnlyTgtOpponent() && !sa.getTargetRestrictions().canTgtCreature()) {
             PlayerCollection playerList = new PlayerCollection(IterableUtil.filter(
-                    sa.getTargetRestrictions().getAllCandidates(sa, true, true), Player.class));
+                    sa.getTargetRestrictions().getAllCandidates(sa, true), Player.class));
 
             if (playerList.isEmpty()) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);

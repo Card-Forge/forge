@@ -28,6 +28,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.util.Aggregates;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -290,7 +291,7 @@ public enum DeckFormat {
                 final List<PaperCard> commanders = deck.getCommanders();
 
                 if (commanders.isEmpty()) {
-                    return "is missing a commander";
+                    return Localizer.getInstance().getMessage("lblPlayerDoesntHaveCommander");
                 }
 
                 if (commanders.size() > 2) {

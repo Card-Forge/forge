@@ -361,9 +361,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 case END_OF_TURN:
                     nEndOfTurnsThisTurn++;
                     game.getEndOfTurn().executeUntil(playerTurn);
-                    if (playerTurn.getController().isAI()) {
-                        playerTurn.getController().resetAtEndOfTurn();
-                    }
+                    playerTurn.getController().resetAtEndOfTurn();
 
                     game.getEndOfTurn().executeAt();
                     break;
@@ -933,7 +931,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         }
 
         // fireEvent to update the Details
-        game.fireEvent(new GameEventPlayerStatsChanged(toUpdate, false));
+        game.fireEvent(new GameEventPlayerStatsChanged(toUpdate));
 
         return result;
     }
@@ -968,6 +966,11 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             extraPhases.put(afterPhase, new Stack<>());
         }
         return extraPhases.get(afterPhase).push(new ExtraPhase(extraPhaseList.get(0)));
+    }
+
+    public final boolean hasExtraPhaseAfter(final PhaseType afterPhase, final PhaseType extraPhase) {
+        final Stack<ExtraPhase> phases = extraPhases.get(afterPhase);
+        return phases != null && !phases.isEmpty() && phases.peek().getPhase() == extraPhase;
     }
 
     public final boolean isFirstCombat() {

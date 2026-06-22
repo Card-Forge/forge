@@ -1,0 +1,11 @@
+Name:Daughter of the Deep
+ManaCost:1 U
+Types:Creature Merfolk Noble
+PT:2/1
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw your second card each turn, create a 1/1 blue Merfolk creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ u_1_1_merfolk
+A:AB$ Effect | Cost$ U T | ValidTgts$ Merfolk | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ MakeUnblockable | SpellDescription$ Target Merfolk can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+DeckHas:Ability$Token
+DeckHints:Type$Merfolk
+Oracle:Whenever you draw your second card each turn, create a 1/1 blue Merfolk creature token.\n{U}, {T}: Target Merfolk can't be blocked this turn.

@@ -1,0 +1,11 @@
+Name:Daredevil's Billy Club
+ManaCost:1 R
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this Equipment enters, it deals 2 damage to any target and 1 damage to you.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBDamage | DamageMap$ True
+SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Menace | Description$ Equipped creature gets +1/+0 and has menace.
+K:Equip:2
+AI:RemoveDeck:Random
+Oracle:When this Equipment enters, it deals 2 damage to any target and 1 damage to you.\nEquipped creature gets +1/+0 and has menace. (It can't be blocked except by two or more creatures.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

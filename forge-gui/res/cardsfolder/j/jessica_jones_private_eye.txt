@@ -1,0 +1,11 @@
+Name:Jessica Jones, Private Eye
+ManaCost:2 R
+Types:Legendary Creature Human Detective Hero
+PT:2/3
+A:AB$ Dig | Cost$ T AddCounter<1/STUN> | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top X cards of your library, where X is NICKNAME's power. You may play those cards this turn. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$CardPower
+DeckHas:Ability$Counters
+Oracle:{T}, Put a stun counter on Jessica Jones: Exile the top X cards of your library, where X is Jessica Jones's power. You may play those cards this turn. (If a permanent with a stun counter would become untapped, remove one from it instead.)
