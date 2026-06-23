@@ -11,7 +11,7 @@ Oracle:Your opponents can't cast spells during your turn.\n{3}{G}{W}{W}: Transfo
 ALTERNATE
 
 Name:The Sensational She-Hulk
-ManaCost:3 G G W
+ManaCost:3 G W W
 Types:Legendary Creature Gamma Hero
 PT:6/6
 K:Reach
