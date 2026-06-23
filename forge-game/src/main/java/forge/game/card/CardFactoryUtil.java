@@ -1975,7 +1975,7 @@ public class CardFactoryUtil {
                     costDesc.append(e.getValue().toSimpleString());
 
                     String effect = "DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ " + e.getKey()
-                        + " | UnlessPayer$ TriggeredSourceSAController | SpellDescription$ " + costDesc.toString();
+                        + " | UnlessPayer$ TriggeredSourceSAController | SpellDescription$ " + costDesc;
                     subs.add((AbilitySub)AbilityFactory.getAbility(effect, card));
                 }
 
