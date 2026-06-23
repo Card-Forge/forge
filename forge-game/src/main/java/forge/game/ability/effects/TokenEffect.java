@@ -124,7 +124,7 @@ public class TokenEffect extends TokenEffectBase {
 
         int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("TokenAmount", "1"), sa);
         if (amount < 1) {
-            //return;
+            return;
         }
 
         makeTokenTable(getDefinedPlayersOrTargeted(sa, "TokenOwner"), sa.getParam("TokenScript").split(","),
