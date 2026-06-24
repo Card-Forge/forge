@@ -4113,7 +4113,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean changed = hasChangedCardColors();
 
         changedCardColorsByText.clear();
-        changedCardTypesCharacterDefining.clear();
+        changedCardColorsCharacterDefining.clear();
         changedCardColors.clear();
 
         return changed;
