@@ -318,6 +318,11 @@ public class Cost implements Serializable {
             return new CostPutCounter(splitStr[0], CounterType.getType(splitStr[1]), target, description);
         }
 
+        if (parse.startsWith("AddCounterYou<")) {
+            final String[] splitStr = abCostParse(parse, 2);
+            return new CostPutCounterYou(splitStr[0], CounterType.getType(splitStr[1]));
+        }
+
         // While no card has "PayLife<2> PayLife<3> there might be a card that
         // Changes Cost by adding a Life Payment
         if (parse.startsWith("PayLife<")) {

@@ -18,27 +18,33 @@
 package forge.game.cost;
 
 import forge.game.GameEntityCounterTable;
-import forge.game.card.Card;
-import forge.game.card.CardDamageTable;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 /**
  * The Class CostDamage.
  */
-public class CostDamage extends CostPart {
+public class CostPutCounterYou extends CostPart {
 
     /**
      * Serializables need a version ID.
      */
     private static final long serialVersionUID = 1L;
 
-    public CostDamage(final String amount) {
+    private CounterType type;
+
+    public CostPutCounterYou(final String amount, CounterType type) {
         this.setAmount(amount);
+        this.type = type;
     }
 
     @Override
     public int paymentOrder() { return 8; }
+
+    public CounterType getCounter() {
+        return type;
+    }
 
     /*
      * (non-Javadoc)
@@ -48,7 +54,7 @@ public class CostDamage extends CostPart {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Deal ").append(this.getAmount()).append(" damage to you");
+        sb.append("Get ").append(Cost.convertAmountTypeToWords(convertAmount(), getAmount(), type.getName() + " counter"));
         return sb.toString();
     }
 
@@ -61,20 +67,15 @@ public class CostDamage extends CostPart {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
-        return true;
+        return payer.canReceiveCounters(type);
     }
 
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility sa, final boolean effect) {
-        final Card source = sa.getHostCard();
-        CardDamageTable damageMap = new CardDamageTable();
-        CardDamageTable preventMap = new CardDamageTable();
         GameEntityCounterTable table = new GameEntityCounterTable();
-
-        damageMap.put(source, payer, decision.c);
-        source.getGame().getAction().dealDamage(false, damageMap, preventMap, table, sa);
-
-        return decision.c > 0;
+        table.put(payer, payer, type, decision.c);
+        table.replaceCounterEffect(payer.getGame(), sa);
+        return true;
     }
 
     @Override

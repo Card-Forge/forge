@@ -92,19 +92,18 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 return true;
             }
             return activateDelayedCard();
-        } else {
-            List<SpellAbility> manaAbilities = getAllManaAbilities(card);
-            // Desktop Forge floating menu functionality
-            if (manaAbilities.size() == 1) {
-                return activateManaAbility(card, manaAbilities.get(0));
-            } else {
-                SpellAbility spellAbility = getController().getAbilityToPlay(card, manaAbilities, triggerEvent);
-                if (spellAbility != null) {
-                    return activateManaAbility(card, spellAbility);
-                }
-            }
-            return false;
         }
+
+        List<SpellAbility> manaAbilities = getAllManaAbilities(card);
+        // Desktop Forge floating menu functionality
+        if (manaAbilities.size() == 1) {
+            return activateManaAbility(card, manaAbilities.get(0));
+        }
+        SpellAbility spellAbility = getController().getAbilityToPlay(card, manaAbilities, triggerEvent);
+        if (spellAbility != null) {
+            return activateManaAbility(card, spellAbility);
+        }
+        return true;
     }
 
     protected List<SpellAbility> getAllManaAbilities(Card card) {
