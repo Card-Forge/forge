@@ -55,21 +55,6 @@ public class ReceiveItem {
                 default:
                     APRandomizer.unlockItemReward(ItemRegistry.getItem(item.itemID));
             }
-
-            String itemColor = ArchipelagoColors.Cyan;
-            switch (item.flags){
-                case 0b001:
-                    itemColor = ArchipelagoColors.Plum;
-                    break;
-                case 0b010:
-                    itemColor = ArchipelagoColors.SlateBlue;
-                    break;
-                case 0b100:
-                    itemColor = ArchipelagoColors.Salmon;
-                    break;
-            }
-
-            APData.generateGameNotification(String.format("%s sent you %s%s{RESET} (%s%s{RESET})", item.playerName, itemColor, item.itemName, ArchipelagoColors.Green, item.locationName));
             APRandomizer.incrementLastArchipelagoRewardIndex();
         }
     }

@@ -6,4 +6,5 @@ public class ArchipelagoColors {
     public static final String SlateBlue = "{COLOR=#6D8BE8}";
     public static final String Salmon = "{COLOR=#FA8072}";
     public static final String Green = "{COLOR=#00b359}";
+    public static final String Magenta = "{COLOR=#EE00EE}";
 }
