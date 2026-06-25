@@ -153,6 +153,7 @@ public class Controls {
             minScrollDuration = MIN_SCROLL_DURATION_DEFAULT;
             this.clip(true);
             this.getTextraLabel().setWrap(false);
+            this.align(Align.left);
             this.manageAnimation();
         }
 
@@ -245,19 +246,19 @@ public class Controls {
         @Override
         public void setTextraLabel(TextraLabel label) {
             super.setTextraLabel(label);
-            this.manageAnimation();
+            this.invalidate();
         }
 
         @Override
         public void setText(@Null String text) {
             super.setText(text);
-            this.manageAnimation();
+            this.invalidate();
         }
 
         @Override
         public void setStyle(Button.ButtonStyle style, boolean makeGridGlyphs) {
             super.setStyle(style, makeGridGlyphs);
-            this.manageAnimation();
+            this.invalidate();
         }
 
         @Override
