@@ -94,8 +94,10 @@ public abstract class FloatingCardArea extends CardArea {
         }
     }
 
+    // Owned by the main Forge frame, not the invisible shared root frame: on macOS a focusable child of the
+    // invisible frame won't release focus when hidden, so it lingers and outlives the match behind the main window.
     @SuppressWarnings("serial")
-    protected final FDialog window = new FDialog(false, true, "0") {
+    protected final FDialog window = new FDialog(Singletons.getView().getFrame(), false, true, "0") {
         @Override
         public void setLocationRelativeTo(Component c) {
             if (hasBeenShown || locLoaded) { return; }
