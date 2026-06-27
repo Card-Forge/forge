@@ -3232,7 +3232,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 3,
     "life": 40,
     "rewards": [
       {
@@ -61630,7 +61630,7 @@
      {
         "type": "card",
         "count": 1,
-        "cardName": "Henzie"
+        "cardName": "Henzie \"Toolbox\" Torre"
       },
       {
         "type": "deckCard",
