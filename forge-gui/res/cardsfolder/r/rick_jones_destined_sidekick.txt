@@ -1,0 +1,10 @@
+Name:Rick Jones, Destined Sidekick
+ManaCost:G
+Types:Legendary Creature Human Advisor
+PT:0/3
+A:AB$ Mill | Cost$ 3 T | NumCards$ 4 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill four cards. You may put a Hero or enchantment card from among those cards into your hand. (To mill four cards, put the top four cards of your library into your graveyard.)
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Hero.IsRemembered,Enchantment.IsRemembered | SelectPrompt$ You may select a Hero or enchantment card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill
+DeckHints:Type$Hero|Enchantment
+Oracle:{3}, {T}: Mill four cards. You may put a Hero or enchantment card from among those cards into your hand. (To mill four cards, put the top four cards of your library into your graveyard.)

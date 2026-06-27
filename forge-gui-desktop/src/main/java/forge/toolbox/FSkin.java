@@ -1098,7 +1098,7 @@ public class FSkin {
             str = str.replaceAll(pattern, replacement);
         }
         // Just return the string unencoded if we're optimizing for screen readers.
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SR_OPTIMIZE)) {
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SCREENREADER_OPTIMIZE)) {
             return str;
         }
         // format mana symbols to display as icons
@@ -1516,6 +1516,11 @@ public class FSkin {
 
     public static Map<Integer, SkinImage> getSleeves() {
         return sleeves;
+    }
+
+    public static BufferedImage getSleeveImage(int index) {
+        SkinImage s = sleeves.get(index);
+        return (s != null && s.image instanceof BufferedImage bi) ? bi : null;
     }
 
     public static boolean isLoaded() { return loaded; }

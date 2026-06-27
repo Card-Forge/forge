@@ -365,6 +365,18 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         addTarget(player);
     }
 
+    public boolean selectPlayerForMacro(final Player player, final ITriggerEvent triggerEvent) {
+        final int oldTargetCount = targets.size();
+        onPlayerSelected(player, triggerEvent);
+        return targets.contains(player) && targets.size() > oldTargetCount;
+    }
+
+    public boolean selectCardForMacro(final Card card, final ITriggerEvent triggerEvent) {
+        final int oldTargetCount = targets.size();
+        onCardSelected(card, null, triggerEvent);
+        return targets.contains(card) && targets.size() > oldTargetCount;
+    }
+
     protected Boolean onDividedAsYouChoose(GameObject go) {
         String apiBasedMessage = "Distribute how much to ";
         if (sa.getApi() == ApiType.DealDamage) {

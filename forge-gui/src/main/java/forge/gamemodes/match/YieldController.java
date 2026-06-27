@@ -58,7 +58,10 @@ public class YieldController {
             FPref.YIELD_SUPPRESS_AFTER_END,
             FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS,
             FPref.YIELD_DECLINE_SCOPE_STACK_YIELD,
-            FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS);
+            FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS,
+            // Not a yield pref, but seeded the same way: the host runs the actionable scan on
+            // the remote player's behalf and must use that client's highlight setting, not its own.
+            FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
 
     private final PlayerControllerHuman owner;
 
@@ -498,7 +501,10 @@ public class YieldController {
         }
     }
 
-    private boolean shouldEvaluateInterrupts() {
+    /** True when an event-driven interrupt should be considered: either an interruptible
+     *  yield is active, or APINA + RESPECTS_INTERRUPTS are both on (so the next priority
+     *  window's auto-pass can be blocked by autoPassInterrupted). */
+    public boolean shouldEvaluateInterrupts() {
         if (isInterruptibleYieldActive()) return true;
         return getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS) && getBoolPref(FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS);
     }

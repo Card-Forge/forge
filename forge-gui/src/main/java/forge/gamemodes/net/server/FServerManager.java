@@ -3,6 +3,10 @@ package forge.gamemodes.net.server;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
+import forge.game.GameLogEntry;
+import forge.game.GameView;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventAddLog;
 import forge.game.player.Player;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
@@ -11,10 +15,13 @@ import forge.gamemodes.match.input.InputSynchronized;
 import forge.gamemodes.net.ChatMessage;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
+import forge.gamemodes.net.EventPhase;
 import forge.gamemodes.net.NetworkLogConfig;
+import forge.gamemodes.net.draft.BoosterDraftHost;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.event.*;
 import forge.gui.GuiBase;
+import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.util.SOptionPane;
 import forge.interfaces.IGameController;
@@ -76,6 +83,7 @@ public final class FServerManager implements IHasForgeLog {
     private UpnpService upnpService = null;
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
+    private IDraftEventHandler draftHandler;
     private boolean UPnPMapped = false;
     private int port;
     private static final Localizer localizer = Localizer.getInstance();
@@ -95,6 +103,30 @@ public final class FServerManager implements IHasForgeLog {
 
     RemoteClient getClient(final Channel ch) {
         return clients.get(ch);
+    }
+
+    /** O(n) scan — pod size is capped at 8, so the map keyed by Channel stays the source of truth. */
+    public RemoteClient getClientBySlotIndex(int slotIndex) {
+        for (RemoteClient client : clients.values()) {
+            if (client.getIndex() == slotIndex) {
+                return client;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Send an event to the given slot. If the slot is a remote client, sends
+     * the NetEvent over the wire; otherwise dispatches it to the local lobby
+     * listener (the host's own path) via {@link #dispatchToLocalListener}.
+     */
+    public void sendToSlot(int slotIndex, NetEvent remoteEvent) {
+        RemoteClient client = getClientBySlotIndex(slotIndex);
+        if (client != null) {
+            client.send(remoteEvent);
+        } else {
+            dispatchToLocalListener(remoteEvent);
+        }
     }
 
     IGameController getController(final int index) {
@@ -255,10 +287,22 @@ public final class FServerManager implements IHasForgeLog {
     }
 
     public void broadcast(final NetEvent event) {
-        if (event instanceof MessageEvent msgEvent) {
-            lobbyListener.message(msgEvent.getSource(), msgEvent.getMessage(), msgEvent.getType());
-        }
+        dispatchToLocalListener(event);
         broadcastTo(event, clients.values());
+    }
+
+    /**
+     * Dispatch a broadcast event to the host's local listener — the host does
+     * not receive its own broadcasts over the network, so we mirror them here.
+     */
+    private void dispatchToLocalListener(final NetEvent event) {
+        if (event instanceof MessageEvent e) {
+            if (lobbyListener != null) {
+                lobbyListener.message(e.getSource(), e.getMessage(), e.getType());
+            }
+        } else if (draftHandler != null) {
+            draftHandler.dispatch(event);
+        }
     }
 
     public String formatAfkTimeoutMessage() {
@@ -386,6 +430,10 @@ public final class FServerManager implements IHasForgeLog {
 
     public void setLobbyListener(final ILobbyListener listener) {
         this.lobbyListener = listener;
+    }
+
+    public void setDraftHandler(final IDraftEventHandler handler) {
+        this.draftHandler = handler;
     }
 
     public void updateLobbyState() {
@@ -798,6 +846,19 @@ public final class FServerManager implements IHasForgeLog {
         netGui.openView(new forge.trackable.TrackableCollection<>(netGui.getLocalPlayers()));
         netLog.info("[Reconnect] Sent game state and openView to slot {}", slotIndex);
 
+        // Replay the host's log entries to rebuild the client's log on re-connect
+        final GameView gameView = netGui.getGameView();
+        if (gameView != null && gameView.getGameLog() != null) {
+            final List<GameEvent> logEvents = new ArrayList<>();
+            for (final GameLogEntry entry : gameView.getGameLog().getAllEntries()) {
+                logEvents.add(new GameEventAddLog(entry.type(), entry.message(), entry.sourceCard()));
+            }
+            if (!logEvents.isEmpty()) {
+                netGui.replayEvents(logEvents);
+                netLog.info("[Reconnect] Replayed {} game log entries for slot {} ({})", logEvents.size(), slotIndex, client.getUsername());
+            }
+        }
+
         // Replay current prompt
         final PlayerControllerHuman pch = findRemoteController(slotIndex);
         if (pch != null) {
@@ -931,7 +992,21 @@ public final class FServerManager implements IHasForgeLog {
                     // Resume and resync
                     resumeAndResync(disconnected);
 
-                    broadcast(new MessageEvent(String.format("%s has reconnected.", username)));
+                    // Draft-side resync: re-send the current pack and clear grace state.
+                    // The draft host broadcasts its own reconnect message, so suppress
+                    // the generic one below to avoid double-firing.
+                    final boolean draftInProgress = localLobby != null
+                            && localLobby.getCurrentEvent() != null
+                            && localLobby.getCurrentEvent().getPhase() == EventPhase.DRAFTING;
+                    if (draftInProgress) {
+                        final int seat = localLobby.findSeatForLobbySlot(disconnected.getIndex());
+                        final BoosterDraftHost host = localLobby.getDraftHost();
+                        if (seat >= 0 && host != null) {
+                            host.onSeatReconnected(seat);
+                        }
+                    } else {
+                        broadcast(new MessageEvent(String.format("%s has reconnected.", username)));
+                    }
                     netLog.info("[Reconnect] Player reconnected: {}", username);
                 } else {
                     // Normal login flow
@@ -978,6 +1053,11 @@ public final class FServerManager implements IHasForgeLog {
                     broadcastReadyState(client.getUsername(), event.getReady());
                 }
                 return;
+            } else if (msg instanceof DraftPickEvent pickEvent) {
+                if (localLobby != null) {
+                    localLobby.handleDraftPick(pickEvent, client.getIndex());
+                }
+                return;
             }
             // Note: MessageEvent is handled by MessageHandler, not here
             // to avoid duplicate display on host's chat
@@ -1019,12 +1099,13 @@ public final class FServerManager implements IHasForgeLog {
 
             netLog.info("[Disconnect] Client disconnected: index={}, username={}", playerIndex, username);
 
-            if (isMatchActive() && client.hasValidSlot()) {
-                // Game is active — enter reconnection mode
-                // Pause the RemoteClientGuiGame so sends become no-ops
-                pauseRemoteClientGuiGame(client);
+            final boolean draftInProgress = localLobby != null
+                    && localLobby.getCurrentEvent() != null
+                    && localLobby.getCurrentEvent().getPhase() == EventPhase.DRAFTING;
 
-                // Store for reconnection lookup
+            if (isMatchActive() && client.hasValidSlot()) {
+                // Match is active — pause, store for reconnect, run 5-minute reclaim timer.
+                pauseRemoteClientGuiGame(client);
                 disconnectedClients.put(username, client);
 
                 // Start periodic countdown timer (ticks every 30s)
@@ -1049,6 +1130,17 @@ public final class FServerManager implements IHasForgeLog {
                     String.format("%s disconnected. Waiting %s for reconnect...", username, formatTime(RECONNECT_TIMEOUT_SECONDS))));
                 lobbyListener.message(null, "(Host can use /skipreconnect to replace disconnected player with AI, or /skiptimeout to wait indefinitely.)", ChatMessage.MessageType.SYSTEM);
                 netLog.info("[Disconnect] Player disconnected mid-game: {} (slot {}). Waiting for reconnect.", username, playerIndex);
+            } else if (draftInProgress && client.hasValidSlot()) {
+                // Draft is in progress — let the draft host own the grace window and
+                // chat announcements. Keep the client in disconnectedClients so the
+                // reconnect handshake can find them; no 5-minute slot-reclaim timer.
+                final int seat = localLobby.findSeatForLobbySlot(playerIndex);
+                final BoosterDraftHost host = localLobby.getDraftHost();
+                if (seat >= 0 && host != null) {
+                    host.onSeatDisconnected(seat);
+                }
+                disconnectedClients.put(username, client);
+                netLog.info("[Disconnect] Draft client disconnected: {} (slot {}). Grace started.", username, playerIndex);
             } else if (client.hasValidSlot()) {
                 // Peer completed registration but match isn't active (or slot was freed earlier)
                 localLobby.disconnectPlayer(playerIndex);

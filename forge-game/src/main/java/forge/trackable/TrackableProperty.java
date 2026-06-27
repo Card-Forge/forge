@@ -12,7 +12,6 @@ import forge.trackable.TrackableTypes.TrackableType;
 
 public enum TrackableProperty {
     //Shared
-    Text(TrackableTypes.StringType),
     PreventNextDamage(TrackableTypes.IntegerType),
     AttachedCards(TrackableTypes.CardViewCollectionType),
     Counters(TrackableTypes.CounterMapType),
@@ -95,6 +94,7 @@ public enum TrackableProperty {
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
     ExiledWith(TrackableTypes.CardViewType),
+    PreparedSpell(TrackableTypes.CardViewType),
     WasDestroyed(TrackableTypes.BooleanType),
     CrackOverlay(TrackableTypes.IntegerType),
     NeedsTransformAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
@@ -214,14 +214,6 @@ public enum TrackableProperty {
     PromptIfOnlyPossibleAbility(TrackableTypes.BooleanType),
     SA_IsSpell(TrackableTypes.BooleanType),
 
-    //ReplacementEffectView
-    RE_HostCard(TrackableTypes.CardViewType),
-    RE_Description(TrackableTypes.StringType),
-
-    //StaticAbilityView
-    ST_HostCard(TrackableTypes.CardViewType),
-    ST_Description(TrackableTypes.StringType),
-
     //HasBackSide
     BackSideName(TrackableTypes.StringType),
     HasBackSide(TrackableTypes.BooleanType),
@@ -295,10 +287,6 @@ public enum TrackableProperty {
     @SuppressWarnings("unchecked")
     public <T> void updateObjLookup(Tracker tracker, T newObj) {
         ((TrackableType<T>) type).updateObjLookup(tracker, newObj);
-    }
-
-    public void copyChangedProps(TrackableObject from, TrackableObject to) {
-        type.copyChangedProps(from, to, this);
     }
 
     @SuppressWarnings("unchecked")

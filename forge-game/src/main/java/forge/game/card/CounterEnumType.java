@@ -35,6 +35,8 @@ public enum CounterEnumType implements CounterType {
 
     ACORN("ACORN", 139, 69, 19, CounterAiCategory.Positive),
 
+    ACQUIREDTASTE("acquired taste", "ATASTE", 139, 19, 69, CounterAiCategory.Positive),
+
     AEGIS("AEGIS", 207, 207, 207, CounterAiCategory.Positive),
 
     AGE("AGE", 255, 137, 57, CounterAiCategory.Negative),
@@ -243,6 +245,8 @@ public enum CounterEnumType implements CounterType {
 
     INTERVENTION("INTRV", 205, 203, 105, CounterAiCategory.Positive),
 
+    INVASION("INVAS", 235, 120, 60, CounterAiCategory.Positive),
+    
     INVITATION("INVIT", 205, 0, 26, CounterAiCategory.Positive),
 
     ISOLATION("ISOLT", 250, 190, 0, CounterAiCategory.Positive),
@@ -385,6 +389,8 @@ public enum CounterEnumType implements CounterType {
 
     RUST("RUST", 255, 181, 116, CounterAiCategory.Negative),
 
+    SAURIAN("SAUR", 120, 203, 161, CounterAiCategory.Positive),
+
     SCREAM("SCREM", 0, 220, 255, CounterAiCategory.Positive),
 
     SCROLL("SCRLL", 206, 199, 162, CounterAiCategory.Positive),
@@ -526,6 +532,11 @@ public enum CounterEnumType implements CounterType {
     @Override
     public int getBlue() {
         return blue;
+    }
+
+    @Override
+    public CounterAiCategory getAiCategory() {
+        return aiCategory;
     }
 
     @Override

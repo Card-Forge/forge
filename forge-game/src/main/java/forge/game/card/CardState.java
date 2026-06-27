@@ -24,7 +24,6 @@ import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
-import forge.game.ForgeScript;
 import forge.game.GameObject;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
@@ -404,10 +403,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         for (KeywordInterface k : intrinsicKeyword0) {
             intrinsicKeywords.insert(k.copy(card, lki));
         }
-        updateKeywordsCache();
-    }
-
-    public final void updateKeywordsCache() {
         card.updateKeywordsCache(this);
     }
 
@@ -445,12 +440,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
         }
         return changed;
-    }
-
-    public void addIntrinsicKeywords(Collection<KeywordInterface> intrinsicKeywords2) {
-        for (KeywordInterface inst : intrinsicKeywords2) {
-            intrinsicKeywords.insert(inst);
-        }
     }
 
     public final boolean removeIntrinsicKeyword(final String s) {
@@ -1030,7 +1019,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
      */
     @Override
     public boolean hasProperty(String property, Player sourceController, Card source, CardTraitBase spellAbility) {
-        return ForgeScript.cardStateHasProperty(this, property, sourceController, source, spellAbility);
+        return CardStateProperty.hasProperty(this, sourceController, source, property, spellAbility);
     }
 
     public ImmutableList<CardTraitBase> getTraits() {
@@ -1114,5 +1103,14 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     @Override
     public String getTranslatedName() {
         return CardTranslation.getTranslatedName(this);
+    }
+
+    public boolean isWorthy() {
+        CardTypeView type = getTypeWithChanges();
+        if (!type.isCreature() || !type.isLegendary() || type.hasSubtype("Villain")) {
+            return false;
+        }
+        ColorSet color = getCard().getColor(this);
+        return color.hasRed() || color.hasWhite();
     }
 }

@@ -1,6 +1,6 @@
 [metadata]
 Code=SLX
-Date=2022-04-29
+Date=2022-03-03
 Name=Universes Within
 Type=Collector_Edition
 ScryfallCode=SLX

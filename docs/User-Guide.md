@@ -201,7 +201,7 @@ Forge offers several yield options depending on how long you want to skip prompt
 - **Yield to stack / Resolve entire stack** — auto-pass while the stack resolves. Right-click a stack item to choose: **Yield to stack** auto-passes until the stack empties or an interrupt fires (for example, an opponent casts another spell); **Resolve entire stack** keeps auto-passing until the whole stack is empty even if opponents cast more spells.
 
 > [!NOTE]
-> For more information and configuration options — including interrupt conditions, automatic yield suggestions, and speed settings — see [Advanced Yield Options](advanced-yield-options.md).
+> For more information and configuration options — including interrupt conditions, automatic yield suggestions, and speed settings — see [Advanced Yield Options](Advanced-Yield-Options.md).
 
 ## Individual Yields and Trigger Decisions
 When a spell or an ability appears on the stack you can right-click it to decide if you want to always accept (Always Yes) or always decline it (Always No). For abilities marked "(OPTIONAL)" the same right-click lets you set an auto-yield so you don't get prompted on subsequent activations.
@@ -229,9 +229,19 @@ This feature lets you skip different helpers that streamline gameplay by avoidin
 e.g. the opposite cost order is needed if activating an animated "Halo Fountain" that's also tapped.
 
 ## Repeatable Sequences (Macros)
-A feature for advanced users: during a match, you can use the default shortcut shift-R to specify a sequence of actions (mouse clicks, essentially, in the desktop paradigm). Type the IDs of cards/players you'd like to interact with, in order. Then the default shortcut @ (shift-2) will execute your sequence, one "click" at a time, repeating when it reaches the end. This is useful for executing repeated combos, such as sacrificing a recurring creature to Goblin Bombardment. You can see the IDs of cards by turning them on under "Card Overlays" in the "Game" menu.
+Macros let advanced users record and replay a short sequence of match actions. They are mainly useful for deterministic combo loops where the same prompts, priority passes, targets, mana choices, and stack-order decisions repeat several times.
 
-The macro will dutifully execute your click sequence without regard to changes in game state (so if an opponent kills your specified creature mid-macro, and you continue to execute it, you will be essentially clicking on the creature in the graveyard, which may or may not be what you want).
+On desktop, use the macro buttons in the match dock or the configurable keyboard shortcuts:
+
+- **Record Macro** defaults to Shift+R. Press it once to start recording, then take the actions you want to repeat. Press it again to stop recording and choose how many times to repeat the recorded sequence.
+- **Play Macro Once** defaults to Shift+2. This replays the next recorded sequence once.
+- **Repeat Macro** defaults to Shift+3. This asks for a repeat count and replays the recorded sequence that many times.
+
+Recorded macros can include common match choices such as selecting cards or players, activating abilities, passing priority, paying mana from the pool, choosing colors or mana combinations, choosing modes, confirming prompts, ordering simultaneous abilities, and resolving scry choices.
+
+Macro replay is prompt-aware: Forge attempts each recorded action only when the current game prompt can accept it. If the game state diverges from the recording, playback stops instead of blindly clicking through unrelated prompts. Macros are best suited for predictable loops. If a card changes zones, a target becomes illegal, or an opponent interrupts the loop, you may need to stop and record a new sequence.
+
+For troubleshooting, macro replay logging can be enabled from the command line with `-Dforge.macro.debug=true`.
 
 # Desktop User Interface
 
@@ -246,7 +256,7 @@ The match screen is divided into resizable panels. The numbers below identify ea
 3. **Player field tabs** — switch between opponents' fields in multiplayer; the (N new) indicator highlights cards that have changed since you last viewed that field. See [Sort Player Fields in Turn Order](#sort-player-fields-in-turn-order) for ordering options.
 4. **Card Detail** — selected card's text and metadata.
 5. **Opponent's field** — same layout as your own field (items 6-10 describe its components).
-6. **Avatar and life total** — left-click to target the player, hover to see more info including Commander damage.
+6. **Avatar and life total** — left-click to target the player, hover to see more info including Commander damage and, when a Commander bracket cap is active, estimated Commander bracket.
 7. **Zone buttons** — hand, library, graveyard, exile, command, and sideboard with live counts; click to view, right-click for display options. See [Viewing cards in different zones](#viewing-cards-in-different-zones) for details.
 8. **Turn Phases** — click any pip to toggle a priority stop in that phase; right-click to yield to that phase.
 9. **Mana pool** — floating mana; click a symbol to spend it during cost payment.

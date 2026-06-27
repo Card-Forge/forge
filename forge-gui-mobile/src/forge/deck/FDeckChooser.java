@@ -1072,8 +1072,8 @@ public class FDeckChooser extends FScreen {
         }
 
         lstDecks.setSelectionSupport(1, maxSelections);
-        lstDecks.setPool(pool);
         lstDecks.setup(config);
+        lstDecks.setPool(pool);
 
         if (config == ItemManagerConfig.STRING_ONLY) {
             //hide edit/view buttons for string-only lists
@@ -1356,7 +1356,12 @@ public class FDeckChooser extends FScreen {
                     NetDeckArchiveBlock = NetDeckArchiveBlock.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveBlock.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_BLOCK_DECK;
                 }
-                return DeckType.valueOf(deckType);
+                DeckType resolved = DeckType.valueOf(deckType);
+                // TODO: remove when network draft/sealed support is added to mobile.
+                if (resolved == DeckType.NET_EVENT_DECK) {
+                    return selectedDeckType;
+                }
+                return resolved;
             }
         }
         catch (IllegalArgumentException ex) {

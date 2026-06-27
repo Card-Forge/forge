@@ -6,18 +6,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
+
 import forge.adventure.scene.DuelScene;
 import forge.adventure.util.Config;
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.FullControlFlag;
-import forge.item.IPaperCard;
 import forge.util.collect.FCollection;
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Maps;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.GuiMobile;
@@ -39,13 +37,13 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.match.HostedMatch;
 import forge.interfaces.IGameController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
-import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
@@ -60,6 +58,7 @@ import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.screens.match.views.VAssignCombatDamage;
 import forge.screens.match.views.VAssignGenericAmount;
+import forge.screens.match.views.VDrawOfferDialog;
 import forge.screens.match.views.VPhaseIndicator;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPlayerPanel.InfoTab;
@@ -100,6 +99,42 @@ public class MatchController extends NetworkGuiGame {
                 updatePromptForAwait(other);
             }
         }
+    }
+
+    private VDrawOfferDialog drawOfferDialog;
+
+    @Override
+    public void updateDrawOffer(final DrawOfferMessage.Status update) {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (update.result() != null) {
+                if (drawOfferDialog == null) { drawOfferDialog = new VDrawOfferDialog(); }
+                drawOfferDialog.showResult(update);
+                drawOfferDialog = null;
+                return;
+            }
+            PlayerView localTarget = null;
+            for (final PlayerView lp : getLocalPlayers()) {
+                if (update.isPending(lp)) {
+                    localTarget = lp;
+                    break;
+                }
+            }
+            if (localTarget != null) {
+                // a local player still owes a vote — always (re)present it, even if previously hidden
+                if (drawOfferDialog == null) {
+                    drawOfferDialog = new VDrawOfferDialog();
+                }
+                drawOfferDialog.refresh(update, localTarget);
+            } else {
+                // only watchers locally — show the read-only tally but respect dismissal
+                if (drawOfferDialog == null) {
+                    drawOfferDialog = new VDrawOfferDialog();
+                } else if (!drawOfferDialog.isVisible()) {
+                    return;
+                }
+                drawOfferDialog.refresh(update, null);
+            }
+        });
     }
 
     public static Deck getPlayerDeck(final PlayerView playerView) {
@@ -212,17 +247,12 @@ public class MatchController extends NetworkGuiGame {
         Forge.openScreen(view);
     }
 
-    @Override
-    public void showPromptMessage(final PlayerView player, final String message) {
-        cancelWaitingTimer();
-        view.getPrompt(player).setMessage(message);
-    }
     public void showPromptMessageNoCancel(final PlayerView player, final String message) {
         view.getPrompt(player).setMessage(message);
     }
 
     @Override
-    public void showCardPromptMessage(final PlayerView player, final String message, final CardView card) {
+    public void showPromptMessage(final PlayerView player, final String message, final CardView card) {
         cancelWaitingTimer();
         view.getPrompt(player).setMessage(message, card);
     }
@@ -245,6 +275,7 @@ public class MatchController extends NetworkGuiGame {
     public void alertUser() {
         //TODO
     }
+
     private PlayerView lastPlayer;
     @Override
     public void updatePhase(boolean saveState) {
@@ -268,25 +299,15 @@ public class MatchController extends NetworkGuiGame {
         }
 
         if(GuiBase.isNetPlay(this))
-            checkStack();
+            view.getStack().checkEmptyStack();
 
         if (ph != null && saveState && ph.isMain()) {
-            phaseGameState = new GameState() {
-                @Override
-                public IPaperCard getPaperCard(final String cardName, final String setCode, final int artID) {
-                    return FModel.getMagicDb().getCommonCards().getCard(cardName, setCode, artID);
-                }
-            };
+            phaseGameState = new GameState();
             try {
                 phaseGameState.initFromGame(getGameView().getGame());
             } catch (Exception e) {
             }
         }
-    }
-
-
-    public void checkStack() {
-        view.getStack().checkEmptyStack();
     }
 
     public void showWinlose() {
@@ -314,7 +335,6 @@ public class MatchController extends NetworkGuiGame {
     @Override
     public void disableOverlay() {
     }
-
     @Override
     public void enableOverlay() {
     }
@@ -520,12 +540,8 @@ public class MatchController extends NetworkGuiGame {
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if ( p.getCards(ZoneType.Battlefield) != null ) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
-                if ( p.getCards(ZoneType.Hand) != null ) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
         });
     }
@@ -536,12 +552,30 @@ public class MatchController extends NetworkGuiGame {
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
-                if ( p.getCards(ZoneType.Battlefield) != null ) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
-                }
-                if ( p.getCards(ZoneType.Hand) != null ) {
-                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
-                }
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+        });
+    }
+
+    @Override
+    public void setWeaklySelectable(final Iterable<CardView> cards) {
+        super.setWeaklySelectable(cards);
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+        });
+    }
+
+    @Override
+    public void clearWeaklySelectable() {
+        super.clearWeaklySelectable();
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
         });
     }

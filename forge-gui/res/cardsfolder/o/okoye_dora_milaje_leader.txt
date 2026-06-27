@@ -1,0 +1,11 @@
+Name:Okoye, Dora Milaje Leader
+ManaCost:3 W
+Types:Legendary Creature Human Warrior Hero
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create two 1/1 white Soldier creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Creature.attacking+token+YouCtrl | AddKeyword$ First Strike | Description$ Attacking creature tokens you control have first strike.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+DeckHints:Ability$Token
+Oracle:When Okoye enters, create two 1/1 white Soldier creature tokens.\nAttacking creature tokens you control have first strike.

@@ -56,6 +56,7 @@
   </object>
   <object id="61" template="../../../../common/maps/obj/enemy.tx" x="190.862" y="79.688">
    <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Savai Sabertooth|IKO&quot;, &quot;Savai Triome|IKO&quot;]}"/>
     <property name="enemy" value="Snapdax"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -83,6 +84,7 @@
   </object>
   <object id="84" template="../../../../common/maps/obj/enemy.tx" x="291.395" y="84.9899">
    <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Glimmerbell|IKO&quot;, &quot;Ketria Triome|IKO&quot;]}"/>
     <property name="enemy" value="Illuna"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -90,6 +92,7 @@
   </object>
   <object id="85" template="../../../../common/maps/obj/enemy.tx" x="70.477" y="109.716">
    <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Zagoth Mamba|IKO&quot;, &quot;Zagoth Triome|IKO&quot;]}"/>
     <property name="enemy" value="Brokkos"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -97,6 +100,7 @@
   </object>
   <object id="86" template="../../../../common/maps/obj/enemy.tx" x="119.391" y="162.392">
    <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Frenzied Raptor|IKO&quot;, &quot;Raugrin Triome|IKO&quot;]}"/>
     <property name="enemy" value="Vadrok"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -104,6 +108,7 @@
   </object>
   <object id="87" template="../../../../common/maps/obj/enemy.tx" x="243.019" y="153.792">
    <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Essence Symbiote|IKO&quot;, &quot;Indatha Triome|IKO&quot;]}"/>
     <property name="enemy" value="Nethroi"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>

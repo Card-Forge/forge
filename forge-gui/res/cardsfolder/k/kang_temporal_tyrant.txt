@@ -1,0 +1,12 @@
+Name:Kang, Temporal Tyrant
+ManaCost:2 U B
+Types:Legendary Creature Human Villain
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+SVar:TrigConnive:DB$ Connive
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever you draw your second card each turn, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters|Discard
+Oracle:Whenever Kang attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nWhenever you draw your second card each turn, each opponent loses 1 life and you gain 1 life.

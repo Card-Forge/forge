@@ -300,7 +300,7 @@ ChaosDraftThemes=GRAVEYARD_MATTERS
 284 C Submerged Boneyard @Christine Choi
 285 C Timber Gorge @Cliff Childs
 286 C Tranquil Expanse @Sam Burley
-287 C Woodland Stream @Efflam Mercier
+287 C Woodland Stream @Enora Mercier
 
 [tokens]
 16 w_1_1_cat_lifelink @Filip Burburan

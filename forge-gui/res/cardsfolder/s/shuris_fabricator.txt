@@ -1,0 +1,7 @@
+Name:Shuri's Fabricator
+ManaCost:4
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this artifact enters, create two tapped Vibranium tokens. (They're artifacts with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_vibranium | TokenTapped$ True | TokenAmount$ 2 | TokenOwner$ You
+A:AB$ ChangeZone | Cost$ 6 T | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | WithCountersType$ FINALITY | SorcerySpeed$ True | SpellDescription$ Return target artifact card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery. (If a permanent with a finality counter on it would be put into a graveyard, exile it instead.)
+Oracle:When this artifact enters, create two tapped Vibranium tokens. (They're artifacts with indestructible and "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")\n{6}, {T}: Return target artifact card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery. (If a permanent with a finality counter on it would be put into a graveyard, exile it instead.)

@@ -401,6 +401,11 @@ public class PlayerControllerAi extends PlayerController {
         return getAi().confirmStaticApplication(hostCard, logic);
     }
 
+    // TODO: accept based on game state (infinite loop / unwinnable position); always declines for now
+    public boolean acceptsDrawOffer() {
+        return false;
+    }
+
     @Override
     public boolean confirmTrigger(WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
@@ -872,7 +877,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
+    public CardCollectionView chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
         return brains.getCardsToDiscard(numDiscard, null, null);
     }
 

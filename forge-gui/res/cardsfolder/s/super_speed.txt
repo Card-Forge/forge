@@ -1,0 +1,10 @@
+Name:Super Speed
+ManaCost:R
+Types:Enchantment Aura
+K:Flash
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this Aura enters, enchanted creature gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Enchanted | KW$ First Strike
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Haste | Description$ Enchanted creature gets +1/+0 and has haste.
+Oracle:Flash\nEnchant creature\nWhen this Aura enters, enchanted creature gains first strike until end of turn.\nEnchanted creature gets +1/+0 and has haste.

@@ -954,7 +954,7 @@ public class AiController {
             return AiPlayDecision.AnotherTime;
         }
         if (sa.usesTargeting()) {
-            if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa, true) == 0) {
+            if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa) == 0) {
                 return AiPlayDecision.TargetingFailed;
             }
             if (!StaticAbilityMustTarget.meetsMustTargetRestriction(sa)) {
@@ -1682,8 +1682,8 @@ public class AiController {
             try {
                 e.printStackTrace();
                 t.stop();
-            } catch (UnsupportedOperationException ex) {
-                // Android and Java 20 dropped support to stop so sadly thread will keep running
+            } catch (UnsupportedOperationException | NoSuchMethodError ex) {
+                // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
                 timeoutReached = true;
                 future.cancel(true);
                 // TODO wait a few more seconds to try and exit at a safe point before letting the engine continue

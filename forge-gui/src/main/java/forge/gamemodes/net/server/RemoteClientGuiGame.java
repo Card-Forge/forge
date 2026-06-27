@@ -1,10 +1,11 @@
 package forge.gamemodes.net.server;
 
 import forge.LobbyPlayer;
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.event.GameEvent;
+import forge.game.event.GameEventPlayerControl;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
@@ -13,6 +14,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
@@ -28,6 +30,7 @@ import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
+import forge.trackable.Tracker;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
@@ -88,11 +91,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     public void pause() {
         paused = true;
     }
-
     public void resume() {
         paused = false;
     }
-
     public boolean isPaused() {
         return paused;
     }
@@ -323,18 +324,24 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
-    public void showPromptMessage(final PlayerView playerView, final String message) {
-        send(ProtocolMethod.showPromptMessage, playerView, message);
-    }
-
-    @Override
     public void applyYieldUpdate(final YieldUpdate update) {
         send(ProtocolMethod.applyYieldUpdate, update);
     }
 
     @Override
-    public void showCardPromptMessage(final PlayerView playerView, final String message, final CardView card) {
-        syncAndSend(ProtocolMethod.showCardPromptMessage, playerView, message, card);
+    public void showPromptMessage(final PlayerView playerView, final String message, final CardView card) {
+        // card == null is the await/auto-pass timer path, which fires while the game thread is live — walking the graph there races it.
+        // card != null comes from blocking input with the game thread parked on its latch, so syncAndSend is safe and ships the CardView.
+        if (card == null) {
+            send(ProtocolMethod.showPromptMessage, playerView, message, null);
+        } else {
+            syncAndSend(ProtocolMethod.showPromptMessage, playerView, message, card);
+        }
+    }
+
+    @Override
+    public void updateDrawOffer(final DrawOfferMessage.Status update) {
+        send(ProtocolMethod.updateDrawOffer, update);
     }
 
     @Override
@@ -499,6 +506,18 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
+    public void setWeaklySelectable(final Iterable<CardView> cards) {
+        updateGameView();
+        send(ProtocolMethod.setWeaklySelectable, cards);
+    }
+
+    @Override
+    public void clearWeaklySelectable() {
+        updateGameView();
+        send(ProtocolMethod.clearWeaklySelectable);
+    }
+
+    @Override
     public void setPlayerAvatar(final LobbyPlayer player, final IHasIcon ihi) {
         // TODO Auto-generated method stub
     }
@@ -532,6 +551,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     @Override
     public void handleGameEvents(List<GameEvent> events) {
         if (paused) { return; }
+        for (GameEvent ev : events) {
+            if (ev instanceof GameEventPlayerControl pc) {
+                syncControlledPlayer(pc);
+            }
+        }
         netLog.info("Sending batch of {}: [{}]", events.size(),
                 events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
         // When GameEventGameStarted arrives, prepareAllZones has completed —
@@ -584,6 +608,38 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
             forge.trackable.Tracker tracker = gameView != null ? gameView.getTracker() : null;
             sender.send(ProtocolMethod.applyDelta, DeltaPacket.eventsOnly(TrackableSerializer.wrapEvents(events, tracker)));
         }
+    }
+
+    /**
+     * Keep this proxy's local-player map in step with control changes. When a player on this
+     * client gains control of an opponent, the opponent's priority is handled through this
+     * client's shared input proxy, so {@link #setCurrentPlayer} must accept the controlled
+     * player as local. Mirrors {@code FControlGameEventHandler}, which does this for the
+     * host's own GUI; remote proxies only forward events and would otherwise never register
+     * the controlled player, throwing when their turn comes.
+     */
+    private void syncControlledPlayer(final GameEventPlayerControl ev) {
+        final PlayerView controlled = ev.player();
+        if (controlled == null) {
+            return;
+        }
+        final PlayerView master = ev.newLobbyPlayerName() == null ? null : controlled.getMindSlaveMaster();
+        if (master != null && ev.newControllerIsHuman() && isLocalPlayer(master)) {
+            setGameController(controlled, getGameController(master));
+        } else {
+            setGameController(controlled, null);
+        }
+    }
+
+    /**
+     * Send events as a standalone applyDelta without running {@link DeltaSyncManager#collectDeltas},
+     * which is game-thread-only and would also redundantly re-send the full graph right after a reconnect's sendFullState.
+     */
+    public void replayEvents(final List<GameEvent> events) {
+        if (paused) { return; }
+        final GameView gameView = getGameView();
+        final Tracker tracker = gameView != null ? gameView.getTracker() : null;
+        sender.send(ProtocolMethod.applyDelta, DeltaPacket.eventsOnly(TrackableSerializer.wrapEvents(events, tracker)));
     }
 
     @Override

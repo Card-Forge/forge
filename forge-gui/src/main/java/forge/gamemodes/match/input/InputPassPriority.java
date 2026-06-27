@@ -66,6 +66,11 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     @Override
+    protected void onStop() {
+        getController().clearActionableCards();
+    }
+
+    @Override
     public void showAndWait() {
         final FServerManager server = FServerManager.getInstance();
         final AfkTimeout timeout = server != null
@@ -158,6 +163,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         pendingSuggestion = null;
         pendingSuggestionMessage = null;
 
+        getController().pushActionableCards(false);
         showMessage(getTurnPhasePriorityMessage(getController().getGame()));
         chosenSa = null;
         Localizer localizer = Localizer.getInstance();
@@ -257,7 +263,9 @@ public class InputPassPriority extends InputSyncronizedBase {
         }
 
         passPriority(() -> {
-            getController().macros().addRememberedAction(new PassPriorityAction());
+            getController().macros().addRememberedAction(new PassPriorityAction(
+                    getController().getGame().getStack().isEmpty(),
+                    getController().getGame().getPhaseHandler().getPhase()));
             stop();
         });
     }

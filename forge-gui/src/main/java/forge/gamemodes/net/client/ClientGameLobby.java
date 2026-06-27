@@ -6,10 +6,6 @@ import forge.gui.interfaces.IGuiGame;
 public final class ClientGameLobby extends GameLobby {
     private int localPlayer = -1;
 
-    public ClientGameLobby() {
-        super(true);
-    }
-
     public void setLocalPlayer(final int index) {
         this.localPlayer = index;
     }

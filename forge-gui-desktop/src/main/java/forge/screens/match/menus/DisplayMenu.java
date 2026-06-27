@@ -37,6 +37,8 @@ public final class DisplayMenu {
         menu.add(getSubmenu_StackGroupPermanents());
         menu.add(getMenuItem_TokensSeparateRow());
         menu.add(getMenuItem_SeparateCombatStacks());
+        menu.add(getMenuItem_ActionableHighlights());
+        menu.add(getMenuItem_LinkedExileCards());
         return menu;
     }
 
@@ -107,6 +109,38 @@ public final class DisplayMenu {
             prefs.setPref(FPref.UI_SEPARATE_COMBAT_STACKS, enabled);
             prefs.save();
             relayoutFields();
+        });
+        return menuItem;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_ActionableHighlights() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedCheckBoxMenuItem menuItem = MenuUtil.createStayOpenSkinnedCheckBox(localizer.getMessage("cbShowActionableHighlights"));
+        menuItem.setToolTipText(localizer.getMessage("nlShowActionableHighlights"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS));
+        menuItem.addActionListener(e -> {
+            final boolean enabled = !prefs.getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
+            prefs.setPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, enabled);
+            prefs.save();
+            matchUI.repaintCardOverlays();
+        });
+        return menuItem;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_LinkedExileCards() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedCheckBoxMenuItem menuItem = MenuUtil.createStayOpenSkinnedCheckBox(localizer.getMessage("cbShowLinkedExileCards"));
+        menuItem.setToolTipText(localizer.getMessage("nlShowLinkedExileCards"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_SHOW_LINKED_EXILE_CARDS));
+        menuItem.addActionListener(e -> {
+            final boolean enabled = !prefs.getPrefBoolean(FPref.UI_SHOW_LINKED_EXILE_CARDS);
+            prefs.setPref(FPref.UI_SHOW_LINKED_EXILE_CARDS, enabled);
+            prefs.save();
+            SwingUtilities.invokeLater(() -> {
+                for (final VField f : matchUI.getFieldViews()) {
+                    f.getTabletop().refreshGhosts();
+                }
+            });
         });
         return menuItem;
     }

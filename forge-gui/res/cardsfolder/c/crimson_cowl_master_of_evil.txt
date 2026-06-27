@@ -1,0 +1,9 @@
+Name:Crimson Cowl, Master of Evil
+ManaCost:2 B
+Types:Legendary Creature Human Villain
+PT:1/3
+T:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ Player | ValidAttackers$ Villain.!token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more nontoken Villains you control attack a player, you create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_1_villain_menace
+SVar:PlayMain1:TRUE
+DeckHints:Type$Villain
+Oracle:Whenever one or more nontoken Villains you control attack a player, you create a 2/1 black Villain creature token with menace. (It can't be blocked except by two or more creatures.)
