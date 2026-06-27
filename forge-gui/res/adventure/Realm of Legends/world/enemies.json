@@ -8822,11 +8822,6 @@
     "life": 40,
     "rewards": [
       {
-        "type": "item",
-        "count": 1,
-        "itemName": "Prayerbook of Ire"
-      },
-      {
         "type": "card",
         "count": 1,
         "cardName": "Ojer Axonil, Deepest Might"
@@ -29958,6 +29953,11 @@
     "scale": 1,
     "life": 30,
     "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Prayerbook of Ire"
+      },
       {
         "type": "card",
         "count": 1,
