@@ -39,7 +39,6 @@ public final class DeckUrlLoader {
         final DeckUrlProvider.RemoteDeck remoteDeck = provider.load(normalizedUrl, storage);
         final Deck deck = importDeck(remoteDeck);
 
-        deleteRenamedSourceDecks(storage, deck);
         storage.add(deck);
         return new DeckProxy(deck, localizer.getMessage("lblUrlDeck"), GameType.Constructed, storage);
     }
@@ -140,18 +139,6 @@ public final class DeckUrlLoader {
             }
         }
         return requestedName;
-    }
-
-    private static void deleteRenamedSourceDecks(final StorageImmediatelySerialized<Deck> storage, final Deck deck) throws IOException {
-        final List<String> oldNames = new ArrayList<>();
-        for (final Deck savedDeck : storage) {
-            if (!deck.getName().equals(savedDeck.getName()) && isSameSourceDeck(deck.getSourceUrl(), savedDeck.getSourceUrl())) {
-                oldNames.add(savedDeck.getName());
-            }
-        }
-        for (final String oldName : oldNames) {
-            storage.delete(oldName);
-        }
     }
 
     private static boolean isSameSourceDeck(final String sourceUrl, final String savedSourceUrl) throws IOException {
