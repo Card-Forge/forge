@@ -2089,10 +2089,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardLists.count(getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS) >= 3;
     }
 
-    public final boolean hasDesert() {
-        return getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)).anyMatch(CardPredicates.isType("Desert"));
-    }
-
     public final boolean hasThreshold() {
         return getZone(ZoneType.Graveyard).size() >= 7;
     }
