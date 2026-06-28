@@ -51,7 +51,8 @@ public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;
 
     public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
-        cost = new ManaCostBeingPaid(cost); //check copy of cost so it doesn't modify the exist cost being paid
+        //check copy of cost so it doesn't modify the exist cost being paid
+        cost = new ManaCostBeingPaid(cost);
         return payManaCost(cost, sa, ai, true, true, effect);
     }
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
@@ -118,12 +119,12 @@ public class ComputerUtilMana {
         return score;
     }
 
-    private static void sortManaAbilities(final ListMultimap<ManaCostShard, SpellAbility> manaAbilityMap, final SpellAbility sa) {
+    private static void sortManaAbilities(final ListMultimap<ManaCostShard, SpellAbility> sourcesForShards, final ListMultimap<Integer, SpellAbility> manaAbilityMap, final SpellAbility sa) {
         final Map<Card, Integer> manaCardMap = Maps.newHashMap();
         final List<Card> orderedCards = Lists.newArrayList();
 
-        for (final ManaCostShard shard : manaAbilityMap.keySet()) {
-            for (SpellAbility ability : manaAbilityMap.get(shard)) {
+        for (final ManaCostShard shard : sourcesForShards.keySet()) {
+            for (SpellAbility ability : sourcesForShards.get(shard)) {
                 final Card hostCard = ability.getHostCard();
                 if (!manaCardMap.containsKey(hostCard)) {
                     manaCardMap.put(hostCard, scoreManaProducingCard(hostCard));
@@ -143,25 +144,24 @@ public class ComputerUtilMana {
             System.out.println();
         }
 
-        String[] colorsMostCommon;
-        if (manaAbilityMap.keySet().stream().anyMatch(ManaCostShard::isGeneric)) {
+        List<Integer> colorsMostCommon;
+        if (sourcesForShards.keySet().stream().anyMatch(ManaCostShard::isGeneric)) {
             // early tempo is more important so we only look at hand here
             CardCollection hand = new CardCollection(sa.getActivatingPlayer().getCardsIn(ZoneType.Hand));
             hand.remove(sa.getHostCard());
             AiDeckStatistics stats = AiDeckStatistics.fromCards(hand);
             Integer[] orderedColorsIdx = {0, 1, 2, 3, 4};
             // order common colors to the front, increases chance AI can play a second spell after
-            Arrays.sort(orderedColorsIdx, Comparator.comparingInt(o -> stats.maxPips[(int) o]).reversed());
-            colorsMostCommon = Arrays.stream(orderedColorsIdx)
+            colorsMostCommon = Arrays.stream(orderedColorsIdx).sorted(Comparator.comparingInt(o -> stats.maxPips[(int) o]).reversed())
                     .filter(idx -> stats.maxPips[idx] > 0)
-                    .map(idx -> MagicColor.toShortString(MagicColor.WUBRG[idx]))
-                    .toArray(String[]::new);
+                    .map(idx -> (int) MagicColor.WUBRG[idx])
+                    .collect(Collectors.toList());
         } else {
             colorsMostCommon = null;
         }
 
-        for (final ManaCostShard shard : manaAbilityMap.keySet()) {
-            final List<SpellAbility> abilities = manaAbilityMap.get(shard);
+        for (final ManaCostShard shard : sourcesForShards.keySet()) {
+            final List<SpellAbility> abilities = sourcesForShards.get(shard);
             final List<SpellAbility> newAbilities = new ArrayList<>(abilities);
 
             if (DEBUG_MANA_PAYMENT) {
@@ -172,13 +172,15 @@ public class ComputerUtilMana {
                 int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
 
                 if (preOrder != 0) {
-                    // if the score is identical (most likely basics) try keep access to more colors longer
-                    if (shard.isGeneric() && manaCardMap.get(ability1.getHostCard()) == manaCardMap.get(ability2.getHostCard())) {
-                        for (String col : colorsMostCommon) {
-                            if (ability1.canProduce(col) && !ability2.canProduce(col)) {
+                    // on identical score (most likely basics) try keep access to more colors longer
+                    if (shard.isGeneric() && manaCardMap.get(ability1.getHostCard()).equals(manaCardMap.get(ability2.getHostCard()))) {
+                        for (Integer col : colorsMostCommon) {
+                            boolean fromCommonColorSource1 = manaAbilityMap.get(col).stream().anyMatch(ma -> ma.getHostCard().equals(ability1.getHostCard()));
+                            boolean fromCommonColorSource2 = manaAbilityMap.get(col).stream().anyMatch(ma -> ma.getHostCard().equals(ability2.getHostCard()));
+                            if (fromCommonColorSource1 && !fromCommonColorSource2) {
                                 return 1;
                             }
-                            if (!ability1.canProduce(col) && ability2.canProduce(col)) {
+                            if (!fromCommonColorSource1 && fromCommonColorSource2) {
                                 return -1;
                             }
                         }
@@ -210,7 +212,7 @@ public class ComputerUtilMana {
                 System.out.println("Sorted Abilities: " + newAbilities);
             }
 
-            manaAbilityMap.replaceValues(shard, newAbilities);
+            sourcesForShards.replaceValues(shard, newAbilities);
 
             // Sort the first N abilities so that the preferred shard is selected, e.g. Adamant
             String manaPref = sa.getParamOrDefault("AIManaPref", "");
@@ -253,7 +255,7 @@ public class ComputerUtilMana {
                             finalAbilities.add(ab);
                     }
 
-                    manaAbilityMap.replaceValues(shard, finalAbilities);
+                    sourcesForShards.replaceValues(shard, finalAbilities);
                 }
             }
         }
@@ -625,7 +627,7 @@ public class ComputerUtilMana {
         // select which abilities may be used for each shard
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
-        sortManaAbilities(sourcesForShards, sa);
+        sortManaAbilities(sourcesForShards, manaAbilityMap, sa);
 
         ManaCostShard toPay;
         // Loop over mana needed
@@ -934,7 +936,7 @@ public class ComputerUtilMana {
             }
         }
 
-        sortManaAbilities(sourcesForShards, sa);
+        sortManaAbilities(sourcesForShards, manaAbilityMap, sa);
         if (DEBUG_MANA_PAYMENT) {
             System.out.println("DEBUG_MANA_PAYMENT: sourcesForShards = " + sourcesForShards);
         }
