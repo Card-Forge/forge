@@ -478,7 +478,6 @@ public class ArchipelagoData implements SaveFileContent {
     // There are no checks that depend on this at the moment.
     public void addPack(String boosterPackName) {
         packsEarnedBySet.merge(boosterPackName, 1L, Long::sum);
-        System.out.println("Randomizer:\n Card Pack Reward: " + boosterPackName);
     }
 
     public void addMaxLife(int amount) {

@@ -316,6 +316,11 @@ public class LocalRandomizer {
         return null;
     }
 
+    public void unlockCardPackReward(String boosterPackName) {
+        System.out.println(String.format("%s%s{RESET}%s%s%s{RESET}", ArchipelagoColors.Salmon, "Randomizer:\n", "Card Pack Reward: ", ArchipelagoColors.Cyan, boosterPackName));
+        archipelagoDataInstance.addPack(boosterPackName);
+    }
+
     public void unlockMaxLifeReward(int amount) {
         System.out.println(String.format("%s%s{RESET}%s%s%s{RESET}", ArchipelagoColors.Salmon, "Randomizer:\n", "Max Life Reward: ", ArchipelagoColors.Cyan, amount));
         archipelagoDataInstance.addMaxLife(amount);
