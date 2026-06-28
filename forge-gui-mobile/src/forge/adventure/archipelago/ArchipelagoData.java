@@ -474,9 +474,11 @@ public class ArchipelagoData implements SaveFileContent {
         itemsGainedByName.merge(itemName, 1L, Long::sum);
     }
 
+    // This function only tracks how many packs the player has earned of each type.
+    // There are no checks that depend on this at the moment.
     public void addPack(String boosterPackName) {
         packsEarnedBySet.merge(boosterPackName, 1L, Long::sum);
-        System.out.println("Randomizer:\n Card Pack Reward: " + boosterPackName); // Todo move to local/networked
+        System.out.println("Randomizer:\n Card Pack Reward: " + boosterPackName);
     }
 
     public void addMaxLife(int amount) {
