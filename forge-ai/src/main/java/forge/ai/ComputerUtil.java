@@ -2315,6 +2315,11 @@ public class ComputerUtil {
                 return new CardCollection(goodChoices.getFirst());
             }
 
+            Card nearTermThreat = getBestNearTermDiscardThreat(discarder, goodChoices);
+            if (nearTermThreat != null) {
+                return new CardCollection(nearTermThreat);
+            }
+
             if (sa.hasParam("DiscardValid")) {
                 final String validString = sa.getParam("DiscardValid");
                 if (validString.contains("Creature") && !validString.contains("nonCreature")) {
@@ -2372,6 +2377,22 @@ public class ComputerUtil {
         }
 
         return goodChoices.subList(0, max);
+    }
+
+    private static Card getBestNearTermDiscardThreat(Player discarder, CardCollection goodChoices) {
+        int manaSources = ComputerUtilMana.getAvailableManaEstimate(discarder, false);
+        if (CardLists.count(discarder.getCardsIn(ZoneType.Hand), CardPredicates.LANDS_PRODUCING_MANA) > 0) {
+            manaSources++;
+        }
+
+        final int nearTermMana = manaSources + 1;
+        CardCollection nearTermChoices = CardLists.filter(goodChoices,
+                c -> !c.isLand() && c.getCMC() <= nearTermMana);
+        if (nearTermChoices.isEmpty()) {
+            return null;
+        }
+
+        return ComputerUtilCard.getBestAI(nearTermChoices);
     }
 
     public static CardCollection getCardsToDiscardFromFriend(Player aiChooser, Player p, SpellAbility sa, CardCollection validCards, int min, int max) {
