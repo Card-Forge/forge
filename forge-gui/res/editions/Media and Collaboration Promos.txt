@@ -104,3 +104,4 @@ ScryfallCode=PMEI
 2026-14 R Loki, God of Mischief @Eric Deschamps
 2026-15 R Shuri, Wakandan Inventor @Kevin Glint
 2026-16 R Captain America, Living Legend @Miguel Mercado
+2026-17 R Sazh's Chocobo @Domenico Cava
