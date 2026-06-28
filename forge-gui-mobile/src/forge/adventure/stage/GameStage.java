@@ -383,7 +383,6 @@ public abstract class GameStage extends Stage {
             touchInput.setZero();
             player.getMovementDirection().setZero();
             player.stop();
-            return;
         }
 
         if (onEndAction != null) {

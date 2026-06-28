@@ -16,8 +16,8 @@ import java.util.List;
 
 public class ArchipelagoUtil {
     private static final FImage CARD_LOCKED_ICON = FSkinImage.LOCK;
-
-    public static final String[] regionNames = {"waste", "white", "blue", "black", "red"};
+    public static final int TOTAL_AMOUNT_OF_SET_UNLOCK_CHECKS = 100;
+    public static final String[] REGION_NAMES = {"waste", "white", "blue", "black", "red"};
     public static void drawLockedCardOverlay(
             Batch batch, float x, float y, float w, float h) {
         // Draw lock icon

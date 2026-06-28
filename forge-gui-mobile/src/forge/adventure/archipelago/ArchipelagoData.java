@@ -69,7 +69,7 @@ public class ArchipelagoData implements SaveFileContent {
     // List of unlockable checks
     // Todo: Fill list based on archipelago xml contents
     protected float setUnlockChecksRestAmount = 0;
-    protected int totalAmountOfSetUnlockChecks = 100; // This is set based on the value we receive in the APWorld
+    protected int totalAmountOfSetUnlockChecks = ArchipelagoUtil.TOTAL_AMOUNT_OF_SET_UNLOCK_CHECKS; // This is set based on the value we receive in the APWorld
     protected int receivedAmountOfSetUnlockChecks = 0;
 
     private ArchipelagoData() {
@@ -125,6 +125,7 @@ public class ArchipelagoData implements SaveFileContent {
         lastTraversedRegion = "waste";
 
         setUnlockChecksRestAmount = 0f;
+        totalAmountOfSetUnlockChecks = ArchipelagoUtil.TOTAL_AMOUNT_OF_SET_UNLOCK_CHECKS;
         receivedAmountOfSetUnlockChecks = 0;
 
         this.archipelagoMode = archipelagoMode;
@@ -155,7 +156,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     public boolean isRegionUnlocked(String regionName) {
         if (archipelagoMode == ArchipelagoMode.disabled) return true;
-        if (!Arrays.asList(ArchipelagoUtil.regionNames).contains(regionName.toLowerCase())) return true;
+        if (!Arrays.asList(ArchipelagoUtil.REGION_NAMES).contains(regionName.toLowerCase())) return true;
         lastTraversedRegion = regionName;
         return !archipelagoDataInstance.lockedWorldRegionsByName.contains(lastTraversedRegion);
     }
@@ -216,7 +217,6 @@ public class ArchipelagoData implements SaveFileContent {
         if (booster != null) {
             Current.player().addBooster(AdventureEventController.instance().generateBooster(setToUnlock));
             setUnlockedText += String.format(" + %s%s{RESET}", ArchipelagoColors.Green, "Matching Booster Pack");
-            System.out.println(setUnlockedText);
         }
         // Archipelago does not know what set will be unlocked, this is randomized locally. Therefore, we always wanna show the player a notification.
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
@@ -224,18 +224,7 @@ public class ArchipelagoData implements SaveFileContent {
         } else if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
             generateGameNotification(String.format("%s\n%s", notificationMessage, setUnlockedText));
         }
-    }
-
-    public void unlockManaCrystalReward(Integer amount) {
-        Current.player().addShards(amount);
-        System.out.println("Randomizer:\n Shard reward (" + amount + "S)");
-        archipelagoDataInstance.addShards(amount);
-    }
-
-    public void unlockGoldReward(int amount) {
-        Current.player().giveGold(amount);
-        System.out.println("Randomizer:\n Gold reward (" + amount + "G)");
-        archipelagoDataInstance.addGold(amount);
+        System.out.println(setUnlockedText);
     }
 
     // This produces a different result each time it's rolled, the RNG isn't seeded.
@@ -352,7 +341,6 @@ public class ArchipelagoData implements SaveFileContent {
     }
 
     public boolean addSetUnlockedByCode(String setCode) {
-        System.out.println("Randomizer:\n Unlocked Set: " + setCode);
         return setsUnlockedByCode.add(setCode);
     }
 

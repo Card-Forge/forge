@@ -168,8 +168,8 @@ public class LocalRandomizer {
                     case 1 -> goldAmount = 1500;
                     case 2 -> goldAmount = 3000;
                 }
-                archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s%s{RESET}", ArchipelagoColors.Cyan, goldAmount, "G"));
-                archipelagoDataInstance.unlockGoldReward(goldAmount);
+                archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s%s{RESET}", ArchipelagoColors.Cyan, goldAmount, " Gold"));
+                unlockGoldReward(goldAmount);
             } else if (roll < regionUnlockChance + goldRewardChance + manaRewardChance) {
                 roll = random.nextInt(3);
                 int manaAmount = 20;
@@ -178,7 +178,7 @@ public class LocalRandomizer {
                     case 2 -> manaAmount = 50;
                 }
                 archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s%s{RESET}", ArchipelagoColors.Cyan, manaAmount, " Shards"));
-                archipelagoDataInstance.unlockManaCrystalReward(manaAmount);
+                unlockManaCrystalReward(manaAmount);
             } else if (roll < regionUnlockChance + goldRewardChance + manaRewardChance + maxLifeRewardChance) {
                 archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s{RESET}", ArchipelagoColors.Cyan, "Max Life +1"));
                 unlockMaxLifeReward(1);
@@ -186,12 +186,12 @@ public class LocalRandomizer {
                 Reward reward = takeSingleEquipmentOutOfRemainingPool();
                 switch (reward.getType()) {
                     case Gold -> {
-                        archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s%s{RESET}", ArchipelagoColors.Cyan, reward.getCount(), "G"));
-                        archipelagoDataInstance.unlockGoldReward(reward.getCount());
+                        archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s%s{RESET}", ArchipelagoColors.Cyan, reward.getCount(), " Gold"));
+                        unlockGoldReward(reward.getCount());
                     }
                     case Shards -> {
                         archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s%s{RESET}", ArchipelagoColors.Cyan, reward.getCount(), "S"));
-                        archipelagoDataInstance.unlockManaCrystalReward(reward.getCount());
+                        unlockManaCrystalReward(reward.getCount());
                     }
                     case Item -> {
                         archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\n%s%s{RESET}", ArchipelagoColors.Cyan, reward.getItem().name));
@@ -330,6 +330,18 @@ public class LocalRandomizer {
         Current.player().addItem(itemName);
         System.out.println(String.format("%s%s{RESET}%s%s%s{RESET}", ArchipelagoColors.Salmon, "Randomizer:\n", "Item Reward: ", ArchipelagoColors.Cyan, itemName));
         archipelagoDataInstance.addItem(itemName);
+    }
+
+    public void unlockManaCrystalReward(Integer amount) {
+        Current.player().addShards(amount);
+        System.out.println(String.format("%s%s{RESET}%s%s%s{RESET}", ArchipelagoColors.Salmon, "Randomizer:\n", "Shard Reward: ", ArchipelagoColors.Cyan, amount));
+        archipelagoDataInstance.addShards(amount);
+    }
+
+    public void unlockGoldReward(int amount) {
+        Current.player().giveGold(amount);
+        System.out.println(String.format("%s%s{RESET}%s%s%s{RESET}", ArchipelagoColors.Salmon, "Randomizer:\n", "Gold Reward: ", ArchipelagoColors.Cyan, amount));
+        archipelagoDataInstance.addGold(amount);
     }
 
     public void unlockRandomRegion(String notificationMessage) {

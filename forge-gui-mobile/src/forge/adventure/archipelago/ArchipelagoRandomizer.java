@@ -214,6 +214,18 @@ public class ArchipelagoRandomizer {
         archipelagoDataInstance.addItem(itemName);
     }
 
+    public void unlockManaCrystalReward(Integer amount) {
+        Current.player().addShards(amount);
+        System.out.println(String.format("%s%s{RESET}%s%s%s{RESET}", ArchipelagoColors.Salmon, "Forge AP:\n", "Shard Reward: ", ArchipelagoColors.Cyan, amount));
+        archipelagoDataInstance.addShards(amount);
+    }
+
+    public void unlockGoldReward(int amount) {
+        Current.player().giveGold(amount);
+        System.out.println(String.format("%s%s{RESET}%s%s%s{RESET}", ArchipelagoColors.Salmon, "Forge AP:\n", "Gold Reward: ", ArchipelagoColors.Cyan, amount));
+        archipelagoDataInstance.addGold(amount);
+    }
+
     public void handleShopData(List<NetworkItem> shopLocationScounts) {
         for (NetworkItem shopLocation : shopLocationScounts) {
             if (shopLocation.locationID >= 1000 && shopLocation.locationID < 1100) {
