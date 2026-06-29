@@ -175,6 +175,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
             value += addValue(30, "revive");
         }
+        value += addValue(evaluateRepeatableDeathDrain(c), "death-drain");
 
         // Bad keywords
         if (c.hasKeyword(Keyword.DEFENDER) || c.hasKeyword("CARDNAME can't attack.")) {
@@ -316,6 +317,27 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         }
         // default value
         return 10;
+    }
+
+    private int evaluateRepeatableDeathDrain(final Card c) {
+        int value = 0;
+        for (final Trigger t : c.getTriggers()) {
+            if (!TriggerType.ChangesZone.equals(t.getMode())) {
+                continue;
+            }
+            if (!"Battlefield".equals(t.getParamOrDefault("Origin", ""))
+                    || !"Graveyard".equals(t.getParamOrDefault("Destination", ""))) {
+                continue;
+            }
+            if (!t.getParamOrDefault("ValidCard", "").contains("Other")) {
+                continue;
+            }
+            final SpellAbility ab = t.ensureAbility();
+            if (ab != null && ApiType.LoseLife.equals(ab.getApi())) {
+                value += 30;
+            }
+        }
+        return value;
     }
 
     protected int addValue(int value, String text) {
