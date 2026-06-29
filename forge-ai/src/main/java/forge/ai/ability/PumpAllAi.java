@@ -63,8 +63,14 @@ public class PumpAllAi extends PumpAiBase {
             }
         }
 
-        final int power = AbilityUtils.calculateAmount(source, sa.getParam("NumAtt"), sa);
-        final int defense = AbilityUtils.calculateAmount(source, sa.getParam("NumDef"), sa);
+        final String numAttack = sa.getParamOrDefault("NumAtt", "0");
+        final String numDefense = sa.getParamOrDefault("NumDef", "0");
+        if (usesPaidX(sa, numAttack, numDefense) && !setPaidX(sa, ai)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        final int power = AbilityUtils.calculateAmount(source, numAttack, sa);
+        final int defense = AbilityUtils.calculateAmount(source, numDefense, sa);
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<>();
         final PhaseType phase = game.getPhaseHandler().getPhase();
 
@@ -161,5 +167,19 @@ public class PumpAllAi extends PumpAiBase {
             }
         }
         return false;
+    }
+
+    private boolean usesPaidX(final SpellAbility sa, final String numAttack, final String numDefense) {
+        return sa.getSVar("X").equals("Count$xPaid") && (numAttack.contains("X") || numDefense.contains("X"));
+    }
+
+    private boolean setPaidX(final SpellAbility sa, final Player ai) {
+        final SpellAbility root = sa.getRootAbility();
+        final Cost rootCost = root.getPayCosts();
+        if (rootCost == null || !rootCost.hasXInAnyCostPart()) {
+            return true;
+        }
+        root.setXManaCostPaid(null);
+        return ComputerUtilCost.setMaxXValue(root, ai, sa.isTrigger()) > 0;
     }
 }
