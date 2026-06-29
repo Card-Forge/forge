@@ -69,6 +69,7 @@ public enum DeckFormat {
     Commander      ( Range.is(99),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getCommanderPredicate().test(card)
     ),
+    CommanderDraft ( Range.of(59, 99),                     Range.of(0, 15), 4),
     Oathbreaker      ( Range.is(58),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
@@ -158,7 +159,7 @@ public enum DeckFormat {
     }
 
     public boolean hasCommander() {
-        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl;
+        return this == Commander || this == CommanderDraft || this == Oathbreaker || this == TinyLeaders || this == Brawl;
     }
 
     public boolean hasSignatureSpell() {

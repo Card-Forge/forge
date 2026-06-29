@@ -328,6 +328,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             DeckGroup::new, DeckPreferences::setDraftDeck);
     public static DeckEditorConfig EditorConfigDraft = new GameTypeDeckEditorConfig(GameType.Draft, DECK_CONTROLLER_DRAFT);
 
+    public static DeckEditorConfig EditorConfigCommanderDraft = new GameTypeDeckEditorConfig(GameType.CommanderDraft, DECK_CONTROLLER_DRAFT);
+
     public static DeckEditorConfig EditorConfigSealed = new GameTypeDeckEditorConfig(GameType.Sealed,
             new FileDeckGroupController(FModel.getDecks().getSealed(), DeckGroup::new, DeckPreferences::setSealedDeck))
             .setSideboardConfig(ItemManagerConfig.SEALED_POOL);
