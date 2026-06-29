@@ -176,12 +176,16 @@ public class PermanentAi extends SpellAbilityAi {
 
         // don't play cards without being able to pay the upkeep for
         boolean hasUpkeepCost = false;
+        int upkeepLifeLoss = 0;
         Cost upkeepCost = new Cost("0", true);
         for (Trigger t : source.getTriggers()) {
             if (!TriggerType.Phase.equals(t.getMode())) {
                 continue;
             }
             if (!"Upkeep".equals(t.getParam("Phase"))) {
+                continue;
+            }
+            if (!t.matchesValidParam("ValidPlayer", ai)) {
                 continue;
             }
             SpellAbility ab = t.ensureAbility();
@@ -195,6 +199,16 @@ public class PermanentAi extends SpellAbilityAi {
                 }
                 hasUpkeepCost = true;
                 upkeepCost.add(AbilityUtils.calculateUnlessCost(ab, ab.getParam("UnlessCost"), true));
+            } else if (ApiType.LoseLife.equals(ab.getApi()) && ab.hasParam("LifeAmount")) {
+                final Player oldActivator = ab.getActivatingPlayer();
+                ab.setActivatingPlayer(ai);
+                try {
+                    if (AbilityUtils.getDefinedPlayers(source, ab.getParamOrDefault("Defined", "You"), ab).contains(ai)) {
+                        upkeepLifeLoss += AbilityUtils.calculateAmount(source, ab.getParam("LifeAmount"), ab);
+                    }
+                } finally {
+                    ab.setActivatingPlayer(oldActivator);
+                }
             }
         }
 
@@ -208,6 +222,10 @@ public class PermanentAi extends SpellAbilityAi {
             if (!ComputerUtilCost.canPayCost(emptyAbility, ai, true)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
             }
+        }
+        if (upkeepLifeLoss > 0 && (ai.getLife() <= upkeepLifeLoss
+                || ComputerUtil.aiLifeInDanger(ai, true, upkeepLifeLoss))) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // check for specific AI preferences
