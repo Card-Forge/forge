@@ -94,6 +94,7 @@ public enum TrackableProperty {
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
     ExiledWith(TrackableTypes.CardViewType),
+    PreparedSpell(TrackableTypes.CardViewType),
     WasDestroyed(TrackableTypes.BooleanType),
     CrackOverlay(TrackableTypes.IntegerType),
     NeedsTransformAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),

@@ -895,6 +895,15 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostPutCounterYou cost) {
+        int c = cost.getAbilityAmount(ability);
+        if (!confirmAction(cost, Localizer.getInstance().getMessage("lblPutNTypeCounterOnTarget", c, cost.getCounter().getName(), controller.getPlayer().toString()))) {
+            return null;
+        }
+        return PaymentDecision.number(c);
+    }
+
+    @Override
     public PaymentDecision visit(final CostBlight cost) {
         return this.visit((CostPutCounter) cost);
     }

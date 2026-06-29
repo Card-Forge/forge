@@ -73,8 +73,10 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             floatingMana.put(m.getColor(), m);
             colors.add(MagicColor.Color.fromByte(m.getColor()));
         }
-        owner.updateManaForView();
-        owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Added, colors));
+        if (!colors.isEmpty()) {
+            owner.updateManaForView();
+            owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Added, colors));
+        }
     }
 
     /**
@@ -190,7 +192,6 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     public boolean removeMana(Mana... manaList) {
         return removeMana(Arrays.asList(manaList));
     }
-
     public boolean removeMana(final Iterable<Mana> manaList) {
         Set<MagicColor.Color> colors = EnumSet.noneOf(MagicColor.Color.class);
         for (Mana m : manaList) {
@@ -198,8 +199,10 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                 colors.add(MagicColor.Color.fromByte(m.getColor()));
             }
         }
-        owner.updateManaForView();
-        owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, colors));
+        if (!colors.isEmpty()) {
+            owner.updateManaForView();
+            owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, colors));
+        }
         return !colors.isEmpty();
     }
 

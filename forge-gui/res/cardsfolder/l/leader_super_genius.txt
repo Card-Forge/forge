@@ -1,0 +1,11 @@
+Name:Leader, Super-Genius
+ManaCost:2 U U
+Types:Legendary Creature Gamma Scientist Villain
+PT:1/3
+R:Event$ Connive | ActiveZones$ Battlefield | ValidConniver$ Creature.YouCtrl | ReplaceWith$ DBDraw | Description$ If a creature you control would connive, instead you draw a card, then that creature connives.
+SVar:DBDraw:DB$ Draw | SubAbility$ DBConnive
+SVar:DBConnive:DB$ Connive | Defined$ ReplacedCard
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConnive | TriggerDescription$ At the beginning of combat on your turn, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:TrigConnive:DB$ Connive | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control
+DeckHas:Ability$Counters|Discard
+Oracle:If a creature you control would connive, instead you draw a card, then that creature connives.\nAt the beginning of combat on your turn, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

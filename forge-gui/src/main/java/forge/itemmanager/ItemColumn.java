@@ -17,6 +17,7 @@
  */
 package forge.itemmanager;
 
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
@@ -25,7 +26,7 @@ import forge.item.InventoryItem;
 import forge.itemmanager.ItemColumnConfig.SortState;
 
 
-public class ItemColumn {
+public class ItemColumn implements Comparator<Entry<InventoryItem, Integer>> {
     private final ItemColumnConfig config;
     private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort;
     private final Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay;
@@ -117,5 +118,14 @@ public class ItemColumn {
             Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
             Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay0) {
         colOverrides.put(colDef, new ItemColumn(config.getCols().get(colDef), fnSort0, fnDisplay0));
+    }
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @Override
+    public int compare(Entry<InventoryItem, Integer> o1, Entry<InventoryItem, Integer> o2) {
+        if (getSortState().equals(SortState.NONE)) {
+            return 0;
+        }
+
+        return Comparator.nullsFirst(Comparator.<Entry<InventoryItem, Integer>, Comparable>comparing(this.fnSort, Comparator.<Comparable>nullsFirst(getSortState().equals(SortState.ASC) ? Comparator.naturalOrder() : Comparator.reverseOrder()))).compare(o1, o2);
     }
 }

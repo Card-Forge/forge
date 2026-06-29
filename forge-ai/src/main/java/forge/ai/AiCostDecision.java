@@ -445,6 +445,11 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostPutCounterYou cost) {
+        return PaymentDecision.number(cost.getAbilityAmount(ability));
+    }
+
+    @Override
     public PaymentDecision visit(CostTap cost) {
         return PaymentDecision.number(0);
     }

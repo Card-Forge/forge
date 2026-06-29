@@ -1,0 +1,9 @@
+Name:Thing Swing
+ManaCost:3 G
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | ValidTarget$ Hero.YouCtrl | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a Hero you control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | ValidTgtsDesc$ creature you control | SubAbility$ BloodDamage | SpellDescription$ Target creature you control deals damage equal to twice its power to target creature an opponent controls.
+SVar:BloodDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | AILogic$ PowerDmg | NumDmg$ X | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower/Times.2
+DeckHints:Type$Hero
+Oracle:This spell costs {2} less to cast if it targets a Hero you control.\nTarget creature you control deals damage equal to twice its power to target creature an opponent controls.

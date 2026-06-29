@@ -1078,8 +1078,8 @@ public class FDeckChooser extends FScreen {
         }
 
         lstDecks.setSelectionSupport(1, maxSelections);
-        lstDecks.setPool(pool);
         lstDecks.setup(config);
+        lstDecks.setPool(pool);
 
         if (config == ItemManagerConfig.STRING_ONLY) {
             //hide edit/view buttons for string-only lists

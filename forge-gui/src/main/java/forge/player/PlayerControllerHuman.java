@@ -4,7 +4,7 @@ import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.AvailableActions;
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.ai.PlayerControllerAi;
 import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.card.*;
@@ -58,6 +58,8 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DeclineScope;
+import forge.gamemodes.match.DrawOfferCoordinator;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
@@ -980,12 +982,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (!inp.getResult()) {
                     FThreads.invokeInEdtLater(this::autoPassUntilEndOfTurn);
                 }
-                getGui().updateRevealedCards(collection);
                 FThreads.invokeInEdtNowOrLater(() -> getGui().hideZones(getLocalPlayerView(), zonesShown[0]));
             } else {
                 getGui().reveal(fm, collection);
-                getGui().updateRevealedCards(collection);
             }
+            getGui().updateRevealedCards(collection);
             endTempShowCards();
         }
     }
@@ -1384,7 +1385,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         for (String token : sa.getParam("TokenScript").split(",")) {
                             Card protoType = TokenInfo.getProtoType(token, sa, null);
                             for (String type : protoType.getType().getCreatureTypes()) {
-                                Integer count = typesInDeck.getOrDefault(type, 0);
                                 typesInDeck.merge(type, 1, Integer::sum);
                             }
                         }
@@ -1551,6 +1551,99 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         getGui().updateAutoPassPrompt();
     }
 
+    private static final ZoneType[] ACTIONABLE_PAYMENT_ZONES = new ZoneType[] {
+        ZoneType.Hand, ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Exile, ZoneType.Command
+    };
+
+    /** Cache from {@link AvailableActions#collectActionable}, populated in
+     *  {@link #chooseSpellAbilityToPlay} and reused by {@link #pushActionableCards}. */
+    private Set<CardView> cachedActionableCards;
+
+    /** Push the actionable-card set to the GUI. Payment mode falls back to the
+     *  "playable mana ability" predicate; non-payment reuses {@link #cachedActionableCards}. */
+    public void pushActionableCards(boolean paymentMode) {
+        if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
+            getGui().clearWeaklySelectable();
+            return;
+        }
+
+        if (paymentMode) {
+            final Set<CardView> result = Sets.newHashSet();
+            for (ZoneType zone : ACTIONABLE_PAYMENT_ZONES) {
+                for (Card c : player.getCardsIn(zone)) {
+                    if (cardHasPlayableManaAbility(c)) {
+                        result.add(c.getView());
+                    }
+                }
+            }
+            getGui().setWeaklySelectable(result);
+            return;
+        }
+
+        // Reuse the priority-time scan; recompute if neither APINA nor highlights triggered it.
+        Set<CardView> actionable = cachedActionableCards;
+        if (actionable == null) {
+            actionable = AvailableActions.collectActionable(getPlayer(), computeAvailableActionsBudgetMs(getPlayer()));
+        }
+        getGui().setWeaklySelectable(actionable);
+    }
+
+    private boolean cardHasPlayableManaAbility(Card c) {
+        for (SpellAbility sa : c.getAllPossibleAbilities(player, true)) {
+            if (sa.isManaAbility() && sa.canPlay()) return true;
+        }
+        return false;
+    }
+
+    public void clearActionableCards() {
+        getGui().clearWeaklySelectable();
+    }
+
+    /** Push undeclared, legal attacker candidates. */
+    public void pushAttackerCandidates(final Player attackingPlayer, final Combat combat) {
+        if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
+            getGui().clearWeaklySelectable();
+            return;
+        }
+        final Set<CardView> result = Sets.newHashSet();
+        for (final Card c : attackingPlayer.getCreaturesInPlay()) {
+            if (!CombatUtil.canAttack(c)) continue;
+            // Drop already-declared attackers.
+            if (combat != null && combat.isAttacking(c)) continue;
+            result.add(c.getView());
+        }
+        getGui().setWeaklySelectable(result);
+    }
+
+    /** Push defenders that could block at least one current attacker. */
+    public void pushBlockerCandidates(final Player defendingPlayer, final Combat combat) {
+        if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
+            getGui().clearWeaklySelectable();
+            return;
+        }
+        final Set<CardView> result = Sets.newHashSet();
+        if (combat == null) {
+            getGui().setWeaklySelectable(result);
+            return;
+        }
+        final Iterable<Card> attackers = combat.getAttackers();
+        for (final Card blocker : defendingPlayer.getCreaturesInPlay()) {
+            if (!CombatUtil.canBlock(blocker)) continue;
+            // Only highlight if the blocker can block at least one live attacker.
+            boolean canBlockSomething = false;
+            for (final Card atk : attackers) {
+                if (CombatUtil.canBlock(atk, blocker, combat)) {
+                    canBlockSomething = true;
+                    break;
+                }
+            }
+            if (canBlockSomething) {
+                result.add(blocker.getView());
+            }
+        }
+        getGui().setWeaklySelectable(result);
+    }
+
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         netLog.trace("ENTRY for player {}, phase={}, isGameOver={}",
@@ -1558,10 +1651,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final MagicStack stack = getGame().getStack();
 
         // Skip when already yielding — yield proceeds regardless of available-actions.
-        // Yield check first: it's a field read, vs needsAvailableActions which does 3 synced FPref reads.
-        if (!yieldController.isYieldActive() && needsAvailableActions()) {
+        // Compute the actionable set when APINA / suggestions / highlights need it.
+        boolean highlightsEnabled = yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
+        if (!yieldController.isYieldActive() && (needsAvailableActions() || highlightsEnabled)) {
             long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
-            getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
+            if (highlightsEnabled) {
+                // Highlights need the full set; APINA derives its boolean from the same scan.
+                Set<CardView> actionable = AvailableActions.collectActionable(getPlayer(), timeoutMs);
+                cachedActionableCards = actionable;
+                getPlayer().getView().setHasAvailableActions(!actionable.isEmpty());
+            } else {
+                // APINA only — early-exit boolean scan is cheaper than a full walk.
+                cachedActionableCards = null;
+                getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
+            }
+        } else {
+            cachedActionableCards = null;
         }
 
         // yieldJustEndedFlag is read from the EDT (didYieldJustEnd); synchronized writer/reader pair handles visibility.
@@ -1631,7 +1736,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardToMaximumHandSize(final int nDiscard) {
+    public CardCollectionView chooseCardsToDiscardToMaximumHandSize(final int nDiscard) {
         final int max = player.getMaxHandSize();
 
         if (getGui().isLibgdxPort()) {
@@ -1991,35 +2096,129 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
+    // Mutated from game thread on replacement prompts; cleared from Netty thread via YieldUpdate.ClearAbilityOrders.
+    private final Map<String, List<Integer>> orderedReplacementLookup = Maps.newConcurrentMap();
+    private final Set<String> rememberedReplacementKeys = Sets.newConcurrentHashSet();
+
     @Override
     public ReplacementEffect chooseSingleReplacementEffect(final List<ReplacementEffect> possibleReplacers) {
         final ReplacementEffect first = possibleReplacers.get(0);
         if (possibleReplacers.size() == 1) {
             return first;
         }
-        final List<String> res = possibleReplacers.stream().map(ReplacementEffect::toString).collect(Collectors.toList());
-        final String firstStr = res.get(0);
-        final String prompt = localizer.getMessage("lblChooseFirstApplyReplacementEffect");
-        for (int i = 1; i < res.size(); i++) {
-            // prompt user if there are multiple different options
-            if (!res.get(i).equals(firstStr)) {
-                if (!GuiBase.isNetPlay(getGui())) //non network game don't need serialization
-                    return getGui().one(prompt, possibleReplacers);
-                ReplacementEffectView rev = getGui().one(prompt, possibleReplacers.stream().map(ReplacementEffect::getView).collect(Collectors.toList()));
-                return possibleReplacers.stream().filter(re -> re.getId() == rev.getId()).findAny().orElse(first);
+        String firstStr = first.toString();
+        if (possibleReplacers.stream().allMatch(re -> re == first || re.toString().equals(firstStr))) {
+            // return first option without prompting if all options are the same
+            return first;
+        }
+
+        final String replacementLookupKey = describeReplacementOrder(possibleReplacers);
+        List<Integer> savedOrder = orderedReplacementLookup.get(replacementLookupKey);
+        if (savedOrder != null && !isValidReplacementOrder(savedOrder, possibleReplacers.size())) {
+            orderedReplacementLookup.remove(replacementLookupKey);
+            rememberedReplacementKeys.remove(replacementLookupKey);
+            savedOrder = null;
+        }
+        if (savedOrder != null) {
+            if (rememberedReplacementKeys.contains(replacementLookupKey)) {
+                return possibleReplacers.get(savedOrder.get(0));
+            }
+            if (savedOrder.size() == 1) {
+                orderedReplacementLookup.remove(replacementLookupKey);
+                savedOrder = null;
             }
         }
-        // return first option without prompting if all options are the same
-        return first;
+
+        final Map<Integer, ReplacementEffect> replacementViewCache = Maps.uniqueIndex(possibleReplacers, ReplacementEffect::getId);
+
+        final List<ReplacementEffectView> sourceREVs = Lists.newArrayList();
+        final List<ReplacementEffectView> orderedREVs = Lists.newArrayList();
+        if (savedOrder != null) {
+            for (final int index : savedOrder) {
+                orderedREVs.add(possibleReplacers.get(index).getView());
+            }
+            for (int i = 0; i < possibleReplacers.size(); i++) {
+                if (!savedOrder.contains(i)) {
+                    sourceREVs.add(possibleReplacers.get(i).getView());
+                }
+            }
+        } else {
+            for (final ReplacementEffect replacementEffect : possibleReplacers) {
+                sourceREVs.add(replacementEffect.getView());
+            }
+        }
+
+        final boolean reordering = savedOrder != null;
+        final IGuiGame.OrderResult<ReplacementEffectView> orderResult = getGui().order(
+                localizer.getMessage(reordering ? "lblReorderReplacementEffects" : "lblSelectOrderForReplacementEffects"),
+                localizer.getMessage("lblApplyFirst"), 0, possibleReplacers.size() - 1,
+                sourceREVs, orderedREVs, null, false, true);
+
+        final List<ReplacementEffectView> chosen = orderResult == null ? null : orderResult.ordered();
+        if (chosen == null || chosen.isEmpty()) {
+            return possibleReplacers.get(0);
+        }
+
+        final List<ReplacementEffect> orderedREs = Lists.newArrayListWithCapacity(chosen.size());
+        for (final ReplacementEffectView replacementEffectView : chosen) {
+            final ReplacementEffect replacementEffect = replacementViewCache.get(replacementEffectView.getId());
+            if (replacementEffect == null) {
+                return possibleReplacers.get(0);
+            }
+            orderedREs.add(replacementEffect);
+        }
+
+        rememberReplacementOrders(possibleReplacers, orderedREs, orderResult.rememberDecision());
+        return orderedREs.get(0);
+    }
+
+    private void rememberReplacementOrders(final List<ReplacementEffect> availableReplacements,
+                                           final List<ReplacementEffect> orderedReplacements,
+                                           final boolean rememberDecision) {
+        if (!rememberDecision && orderedReplacements.size() == 1) {
+            final String replacementLookupKey = describeReplacementOrder(availableReplacements);
+            orderedReplacementLookup.remove(replacementLookupKey);
+            rememberedReplacementKeys.remove(replacementLookupKey);
+            return;
+        }
+
+        final List<ReplacementEffect> remainingAvailable = Lists.newArrayList(availableReplacements);
+        for (int offset = 0; offset < orderedReplacements.size(); offset++) {
+            final String suffixKey = describeReplacementOrder(remainingAvailable);
+            final List<Integer> suffixOrder = Lists.newArrayListWithCapacity(remainingAvailable.size());
+            for (int i = offset; i < orderedReplacements.size(); i++) {
+                suffixOrder.add(remainingAvailable.indexOf(orderedReplacements.get(i)));
+            }
+
+            orderedReplacementLookup.put(suffixKey, suffixOrder);
+            if (rememberDecision) {
+                rememberedReplacementKeys.add(suffixKey);
+            } else {
+                rememberedReplacementKeys.remove(suffixKey);
+            }
+            remainingAvailable.remove(orderedReplacements.get(offset));
+        }
+    }
+
+    private boolean isValidReplacementOrder(final List<Integer> savedOrder, final int size) {
+        return !savedOrder.isEmpty() && savedOrder.size() <= size
+                && Sets.newHashSet(savedOrder).size() == savedOrder.size()
+                && savedOrder.stream().allMatch(i -> i >= 0 && i < size);
+    }
+
+    private String describeReplacementOrder(final List<ReplacementEffect> replacementEffects) {
+        final char delim = (char) 5;
+        return replacementEffects.stream()
+                .map(ReplacementEffect::toString)
+                .collect(Collectors.joining(String.valueOf(delim)));
     }
 
     @Override
     public StaticAbility chooseSingleStaticAbility(final List<StaticAbility> possibleStatics) {
         final StaticAbility first = possibleStatics.get(0);
         boolean isCostReduction = first.getMode().contains(StaticAbilityMode.ReduceCost);
-        final Set<String> sts = possibleStatics.stream().map(StaticAbility::toString).collect(Collectors.toSet());
         // return first option without prompting if all options are the same, or if they don't care about ordering costs
-        if (sts.size() == 1 || (isCostReduction && !isFullControl(FullControlFlag.ChooseCostOrder))) {
+        if (possibleStatics.size() == 1 || (isCostReduction && !isFullControl(FullControlFlag.ChooseCostOrder))) {
             return first;
         }
         String prompt = Localizer.getInstance().getMessage(isCostReduction ? "lblChooseCostReduction" : "lblChooseAbilityToPlay");
@@ -2667,7 +2866,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         @Override
         public void setCanPlayUnlimitedLands(final boolean canPlayUnlimitedLands0) {
             canPlayUnlimitedLands = canPlayUnlimitedLands0;
-            getGame().fireEvent(new GameEventPlayerStatsChanged(player, false));
+            getGame().fireEvent(new GameEventPlayerStatsChanged(player));
         }
 
         /*
@@ -2716,12 +2915,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         private GameState createGameStateObject() {
-            return new GameState() {
-                @Override
-                public IPaperCard getPaperCard(final String cardName, final String setCode, final int artID) {
-                    return FModel.getMagicDb().getCommonCards().getCard(cardName, setCode, artID);
-                }
-            };
+            return new GameState();
         }
 
         /*
@@ -3492,6 +3686,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public void drawOfferAction(final DrawOfferMessage.Action action) {
+        switch (action) {
+            case OFFER -> DrawOfferCoordinator.offer(getGame(), player);
+            case ACCEPT -> DrawOfferCoordinator.respond(getGame(), player, true);
+            case DECLINE -> DrawOfferCoordinator.respond(getGame(), player, false);
+        }
+    }
+
+    @Override
     public void awaitNextInput() {
         getGui().awaitNextInput();
     }
@@ -3675,6 +3878,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (update instanceof YieldUpdate.ClearAbilityOrders) {
             orderedSALookup.clear();
             rememberedKeys.clear();
+            orderedReplacementLookup.clear();
+            rememberedReplacementKeys.clear();
             return;
         }
         if (yieldController.apply(update)) {

@@ -1,0 +1,10 @@
+Name:M.O.D.O.K.
+ManaCost:3 B B
+Types:Legendary Artifact Creature Villain
+PT:2/2
+K:Flying
+K:Lifelink
+A:AB$ Connive | PrecostDesc$ Mental Organism — | Cost$ PayLife<3> | PlayerTurn$ True | SpellDescription$ CARDNAME connives. Activate only during your turn. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddPower$ -1 | AddToughness$ -1 | Description$ Designed Only for Killing — Creatures your opponents control get -1/-1.
+DeckHas:Ability$Discard|Counters
+Oracle:Flying, lifelink\nMental Organism — Pay 3 life: M.O.D.O.K. connives. Activate only during your turn. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nDesigned Only for Killing — Creatures your opponents control get -1/-1.

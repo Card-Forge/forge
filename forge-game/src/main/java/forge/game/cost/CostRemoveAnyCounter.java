@@ -147,7 +147,6 @@ public class CostRemoveAnyCounter extends CostPart {
         return true;
     }
 
-
     public String getDescriptiveType(boolean multiple) {
         String typeDesc = this.getTypeDescription();
         if (typeDesc == null) {

@@ -1,0 +1,9 @@
+Name:Echo, Perceptive Prodigy
+ManaCost:2 U
+Types:Legendary Creature Human Hero
+PT:1/4
+K:Vigilance
+A:AB$ CopySpellAbility | Cost$ 1 T | TargetType$ Activated.YouCtrl,Triggered.YouCtrl | ValidTgts$ Card.Creature | ValidTgtsDesc$ activated or triggered ability you control from a creature source | MayChooseTarget$ True | SpellDescription$ Copy target activated or triggered ability you control from a creature source. You may choose new targets for the copy. (Mana abilities can't be targeted.)
+SVar:BuffedBy:Legendary
+DeckNeeds:Type$Legendary
+Oracle:Vigilance\n{1}, {T}: Copy target activated or triggered ability you control from a creature source. You may choose new targets for the copy. (Mana abilities can't be targeted.)

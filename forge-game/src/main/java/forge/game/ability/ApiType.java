@@ -110,6 +110,7 @@ public enum ApiType {
     GenericChoice (ChooseGenericEffect.class),
     Goad (GoadEffect.class),
     Haunt (HauntEffect.class),
+    HealDamage (HealDamageEffect.class),
     Heist (HeistEffect.class),
     Investigate (InvestigateEffect.class),
     Intensify (IntensifyEffect.class),

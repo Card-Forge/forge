@@ -68,6 +68,23 @@ public class CardRenderer {
         BehindVert
     }
 
+    /** Pref is normalized to 6 hex chars on the write side; this just parses,
+     *  falling back to the FPref default if the stored value is malformed. */
+    private static Color parseActionableHighlightColor() {
+        String s = FModel.getPreferences().getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR);
+        try {
+            if (s != null && s.length() == 6) return rgbFromHex(s);
+        } catch (NumberFormatException ignored) {}
+        return rgbFromHex(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR.getDefault());
+    }
+
+    private static Color rgbFromHex(String s) {
+        int r = Integer.parseInt(s.substring(0, 2), 16);
+        int g = Integer.parseInt(s.substring(2, 4), 16);
+        int b = Integer.parseInt(s.substring(4, 6), 16);
+        return FSkinColor.fromRGB(r, g, b);
+    }
+
     // class that simplifies the callback logic of CachedCardImage
     static class RendererCachedCardImage extends CachedCardImage {
         boolean clearcardArtCache = false;
@@ -815,6 +832,9 @@ public class CardRenderer {
         //Magenta outline when card is chosen
         if (MatchController.instance.isHighlighted(card)) {
             g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
+        } else if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
+                && MatchController.instance.isWeaklySelectable(card)) {
+            g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);
         }
         //Ability Icons
         if (unselectable) {

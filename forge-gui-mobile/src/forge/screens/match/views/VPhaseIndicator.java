@@ -43,7 +43,7 @@ public class VPhaseIndicator extends FContainer {
     }
 
     private void addPhaseLabel(String caption, PhaseType phaseType) {
-        phaseLabels.put(phaseType, add(new PhaseLabel(caption, phaseType)));
+        phaseLabels.put(phaseType, add(new PhaseLabel(caption)));
     }
 
     public PhaseLabel getLabel(PhaseType phaseType) {
@@ -113,16 +113,14 @@ public class VPhaseIndicator extends FContainer {
 
     public class PhaseLabel extends FDisplayObject {
         private final String caption;
-        private final PhaseType phaseType;
         private boolean stopAtPhase = false;
         private boolean active = false;
         private boolean yieldMarked = false;
         private Runnable onToggled;
         private Runnable onLongPress;
 
-        public PhaseLabel(String caption0, PhaseType phaseType0) {
+        public PhaseLabel(String caption0) {
             caption = caption0;
-            phaseType = phaseType0;
         }
 
         public boolean getActive() {
@@ -130,10 +128,6 @@ public class VPhaseIndicator extends FContainer {
         }
         public void setActive(boolean active0) {
             active = active0;
-        }
-
-        public PhaseType getPhaseType() {
-            return phaseType;
         }
 
         public boolean getStopAtPhase() {

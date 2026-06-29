@@ -67,16 +67,6 @@ public class HostedMatch {
 
     public HostedMatch() {}
 
-    /**
-     * Look up the IGuiGame for a given Player from the guis map.
-     * This is the authoritative source for the GUI assigned to each player,
-     * unlike PlayerControllerHuman.getGui() which may be overwritten.
-     */
-    public IGuiGame getGuiForPlayer(final Player player) {
-        if (guis == null || player == null) { return null; }
-        return guis.get(player.getRegisteredPlayer());
-    }
-
     public void setStartGameHook(Runnable hook) {
         startGameHook = hook;
     }
@@ -88,7 +78,7 @@ public class HostedMatch {
         gameRules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
         gameRules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
         gameRules.setAnteIncludeBasicLands(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_INCLUDE_BASIC_LANDS));
-        gameRules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+        gameRules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_MANABURN));
         gameRules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
         gameRules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
         gameRules.setGamesPerMatch(FModel.getPreferences().getPrefInt(FPref.UI_MATCHES_PER_GAME));
@@ -291,14 +281,20 @@ public class HostedMatch {
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions
         game.getAction().invoke(() -> {
+            // Capture the current game in a local so this lambda keeps operating on the
+            // game it started even if another thread (e.g. the EDT handling a player's
+            // "quit"/"continue" decision via addNextGameDecision -> endCurrentGame())
+            // concurrently clears the `game` field while match.startGame() is wrapping up.
+            final Game currentGame = game;
+
             if (humanCount == 0) {
                 // Create FControlGamePlayback in game thread to allow pausing
                 playbackControl = new FControlGamePlayback(humanControllers.get(0));
-                playbackControl.setGame(game);
-                game.subscribeToEvents(playbackControl);
+                playbackControl.setGame(currentGame);
+                currentGame.subscribeToEvents(playbackControl);
             }
             // Actually start the game!
-            match.startGame(game, startGameHook);
+            match.startGame(currentGame, startGameHook);
             // this function waits?
             if (endGameHook != null){
                 endGameHook.run();
@@ -319,7 +315,7 @@ public class HostedMatch {
             isMatchOver = match.isMatchOver();
             if (humanCount == 0) {
                 // ... if no human players, let AI decide next game
-                if (game.getRules().getGameType() == GameType.Constructed) {
+                if (currentGame.getRules().getGameType() == GameType.Constructed) {
                     // Dramatic interlude to signal end of game.
                     FThreads.delayInEDT(3000, () -> {
                         if (isMatchOver) {

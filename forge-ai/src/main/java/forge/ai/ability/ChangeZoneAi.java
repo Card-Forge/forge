@@ -605,6 +605,18 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return null;
         }
 
+        if (ai.getTurn() <= 3) {
+            int manaSources = ComputerUtilMana.getAvailableManaEstimate(ai, false);
+            if (CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS_PRODUCING_MANA) > 0) {
+                manaSources++;
+            }
+            final int nearTermMana = manaSources + 1;
+            CardCollection nearTerm = CardLists.filter(list, c -> c.getCMC() <= nearTermMana);
+            if (!nearTerm.isEmpty()) {
+                return ComputerUtilCard.getBestCreatureAI(nearTerm);
+            }
+        }
+
         // not urgent, get the largest creature possible
         // TODO checkETBEffects
         return ComputerUtilCard.getBestCreatureAI(list);
@@ -956,7 +968,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // if it's blink or bounce, try to save my about to die stuff
             final boolean blink = (destination.equals(ZoneType.Exile) && (subApi == ApiType.DelayedTrigger
                     || "DelayedBlink".equals(sa.getParam("AILogic")) || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered"))));
-            if ((destination.equals(ZoneType.Hand) || blink) && (sa.getMinTargets() <= 1)) {
+            if ((destination.equals(ZoneType.Hand) || blink) && sa.getMinTargets() <= 1) {
                 // save my about to die stuff
                 Card tobounce = canBouncePermanent(ai, sa, list);
                 if (tobounce != null) {

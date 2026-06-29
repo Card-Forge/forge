@@ -470,6 +470,11 @@ public final class GameActionUtil {
                 String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 costs.add(new OptionalCostValue(OptionalCost.Entwine, cost));
+            } else if (keyword.startsWith("Teamwork")) {
+                String[] k = keyword.split(":");
+                String costString = "Teamwork<" + k[1] + ">";
+                final Cost cost = new Cost(costString, false);
+                costs.add(new OptionalCostValue(OptionalCost.Teamwork, cost));
             } else if (keyword.startsWith("Gift")) {
               final Cost cost = new Cost("PromiseGift", false);
               costs.add(new OptionalCostValue(OptionalCost.PromiseGift, cost));

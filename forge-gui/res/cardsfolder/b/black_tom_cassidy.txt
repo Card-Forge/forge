@@ -1,0 +1,8 @@
+Name:Black Tom Cassidy
+ManaCost:1 G
+Types:Legendary Creature Mutant Villain
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBGainLife | SpellDescription$ Add {G}. If you control another Mutant, you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | ConditionPresent$ Mutant.Other+YouCtrl | ConditionCompare$ GE1 | LifeAmount$ 1
+DeckHints:Type$Mutant
+Oracle:{T}: Add {G}. If you control another Mutant, you gain 1 life.

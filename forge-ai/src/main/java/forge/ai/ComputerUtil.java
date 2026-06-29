@@ -355,7 +355,7 @@ public class ComputerUtil {
                         return false;
                     }
 
-                    if (card.hasKeyword(Keyword.DISTURB) || card.hasKeyword(Keyword.ESCAPE) || card.hasKeyword(Keyword.DISTURB)) {
+                    if (card.hasKeyword(Keyword.DISTURB) || card.hasKeyword(Keyword.ESCAPE)) {
                         return true;
                     }
 
@@ -1181,6 +1181,7 @@ public class ComputerUtil {
             }
         }
 
+        // ideally we'd check with cost reducers included
         if (card.getManaCost().isZero()) {
             return true;
         }
@@ -1189,8 +1190,8 @@ public class ComputerUtil {
             return true;
         }
 
+        // Planning to choose Haste for Riot
         if (cardState.hasKeyword(Keyword.RIOT) && SpecialAiLogic.preferHasteForRiot(sa, ai)) {
-            // Planning to choose Haste for Riot, so do this in Main 1
             return true;
         }
 
@@ -1216,7 +1217,7 @@ public class ComputerUtil {
             return true;
         }
 
-        //cast equipment in Main1 when there are creatures to equip and no other unequipped equipment
+        // cast equipment in Main1 when there are creatures to equip and no other unequipped equipment
         if (card.isEquipment()) {
             boolean playNow = false;
             for (Card c : card.getController().getCardsIn(ZoneType.Battlefield)) {
@@ -2314,6 +2315,11 @@ public class ComputerUtil {
                 return new CardCollection(goodChoices.getFirst());
             }
 
+            Card nearTermThreat = getBestNearTermDiscardThreat(discarder, goodChoices);
+            if (nearTermThreat != null) {
+                return new CardCollection(nearTermThreat);
+            }
+
             if (sa.hasParam("DiscardValid")) {
                 final String validString = sa.getParam("DiscardValid");
                 if (validString.contains("Creature") && !validString.contains("nonCreature")) {
@@ -2371,6 +2377,22 @@ public class ComputerUtil {
         }
 
         return goodChoices.subList(0, max);
+    }
+
+    private static Card getBestNearTermDiscardThreat(Player discarder, CardCollection goodChoices) {
+        int manaSources = ComputerUtilMana.getAvailableManaEstimate(discarder, false);
+        if (CardLists.count(discarder.getCardsIn(ZoneType.Hand), CardPredicates.LANDS_PRODUCING_MANA) > 0) {
+            manaSources++;
+        }
+
+        final int nearTermMana = manaSources + 1;
+        CardCollection nearTermChoices = CardLists.filter(goodChoices,
+                c -> !c.isLand() && c.getCMC() <= nearTermMana);
+        if (nearTermChoices.isEmpty()) {
+            return null;
+        }
+
+        return ComputerUtilCard.getBestAI(nearTermChoices);
     }
 
     public static CardCollection getCardsToDiscardFromFriend(Player aiChooser, Player p, SpellAbility sa, CardCollection validCards, int min, int max) {
