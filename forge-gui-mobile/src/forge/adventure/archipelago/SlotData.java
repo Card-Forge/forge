@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class SlotData implements Serializable {
+    @SerializedName("castles_required")
+    public int CastlesRequired;
     @SerializedName("color_sanity")
     public int ColorSanity;
     @SerializedName("starting_color")
