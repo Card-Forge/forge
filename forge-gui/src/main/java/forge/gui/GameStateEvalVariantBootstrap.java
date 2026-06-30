@@ -4,6 +4,7 @@ import forge.ai.simulation.GameStateEvalVariant;
 import forge.ai.simulation.GameStateEvalWeights;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 
 /**
  * Selects {@link GameStateEvalWeights} once per JVM for AI simulation scoring.
@@ -19,7 +20,7 @@ public final class GameStateEvalVariantBootstrap {
 
     /**
      * Reads {@code forge.eval.variant} or prefs and configures {@link GameStateEvalWeights}.
-     * Call before {@link forge.model.FModel#initialize} when {@link GuiBase#getForgePrefs()} is valid.
+     * Call before {@link forge.model.FModel#initialize} when {@link FModel#getPreferences()} is valid.
      */
     public static void apply() {
         final String prop = System.getProperty("forge.eval.variant");
@@ -36,7 +37,7 @@ public final class GameStateEvalVariantBootstrap {
             return;
         }
 
-        final ForgePreferences prefs = GuiBase.getForgePrefs();
+        final ForgePreferences prefs = FModel.getPreferences();
         final String pref = prefs.getPref(FPref.UI_GAME_STATE_EVAL_VARIANT);
         final String trimmed = pref != null ? pref.trim() : "";
         if (trimmed.isEmpty()) {

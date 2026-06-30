@@ -19,8 +19,6 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CZone;
 import forge.toolbox.FScrollPane;
@@ -94,7 +92,7 @@ public class VZone implements IVDoc<CZone> {
     /** Refresh card panels from zone data. */
     public void refresh() {
         final List<CardPanel> cardPanels = new ArrayList<>();
-        final Iterable<CardView> cards = matchUI.cardsForZoneDisplay(player, zone);
+        final FCollectionView<CardView> cards = matchUI.cardsForZoneDisplay(player, zone);
         if (cards != null) {
             final Iterable<CardView> safeCards = matchUI.isNetGame() ? cards.threadSafeIterable() : cards;
             final List<CardView> cardList = new ArrayList<>();
