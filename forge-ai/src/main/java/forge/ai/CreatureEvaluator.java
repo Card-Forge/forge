@@ -333,11 +333,31 @@ public class CreatureEvaluator implements Function<Card, Integer> {
                 continue;
             }
             final SpellAbility ab = t.ensureAbility();
-            if (ab != null && ApiType.LoseLife.equals(ab.getApi())) {
+            if (isRepeatableOpponentDrain(ab)) {
                 value += 30;
             }
         }
         return value;
+    }
+
+    private boolean isRepeatableOpponentDrain(final SpellAbility ab) {
+        if (ab == null || !ApiType.LoseLife.equals(ab.getApi()) || !hasGainLifeSubAbility(ab)) {
+            return false;
+        }
+        final String defined = ab.getParamOrDefault("Defined", "");
+        final String validTgts = ab.getParamOrDefault("ValidTgts", "");
+        return defined.contains("Opponent") || "Player".equals(validTgts) || validTgts.contains("Opponent");
+    }
+
+    private boolean hasGainLifeSubAbility(final SpellAbility ab) {
+        SpellAbility sub = ab.getSubAbility();
+        while (sub != null) {
+            if (ApiType.GainLife.equals(sub.getApi())) {
+                return true;
+            }
+            sub = sub.getSubAbility();
+        }
+        return false;
     }
 
     protected int addValue(int value, String text) {
