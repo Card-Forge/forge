@@ -16,6 +16,8 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.archipelago.Archipelago;
+import forge.adventure.archipelago.ArchipelagoRandomizer;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.AdventureQuestData;
@@ -23,6 +25,7 @@ import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.scene.ArchipelagoSettingsScene;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.scene.RewardScene;
@@ -425,6 +428,10 @@ public class MapDialog {
             if (E.issueQuest != null && (!E.issueQuest.isEmpty())) {
                 questAccepted = E.issueQuest;
                 emitQuestAccepted();
+            }
+            if (E.openArchipelagoSettings) {
+                ArchipelagoSettingsScene.instance().setConnectStatusLabel(Archipelago.getInstance().isConnected() ? "{FADE=GREEN;GREEN;0.1}Connected!" : "{FADE=RED;RED;0.1}Not Connected...");
+                Forge.switchScene(ArchipelagoSettingsScene.instance());
             }
         }
     }
