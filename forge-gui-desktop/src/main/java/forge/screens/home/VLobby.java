@@ -197,9 +197,9 @@ public class VLobby implements ILobbyView {
             pnlStart.setOpaque(false);
             if (lobbyChrome == LobbyChrome.DANDAN_ONLY) {
                 pnlStart.setLayout(new MigLayout("insets 0, gap 12 12, wrap 2"));
-                final FLabel btnPreferences = new FLabel.ButtonBuilder().fontSize(14)
-                        .text(localizer.getMessage("Preferences")).build();
-                btnPreferences.setCommand(() -> CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_PREFERENCES));
+                final PreferencesButton btnPreferences = new PreferencesButton();
+                btnPreferences.addActionListener(e ->
+                        CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_PREFERENCES));
                 pnlStart.add(btnPreferences, "align center");
                 pnlStart.add(btnStart, "align center");
             } else {
