@@ -329,7 +329,8 @@ public class ArchipelagoData implements SaveFileContent {
             }
         }
         // Win condition is reached if all bosses have been defeated.
-        if (bossesDefeatedByName.containsAll(mainBosses)) {
+        ArchipelagoRandomizer apRandomizer = ArchipelagoRandomizer.getInstance();
+        if (bossesDefeatedByName.size() >= apRandomizer.getSlotData().CastlesRequired) {
             updatePlayerChecks(ArchipelagoCheckTypes.WIN_CONDITION_CLEARED, notificationMessage);
         }
 
