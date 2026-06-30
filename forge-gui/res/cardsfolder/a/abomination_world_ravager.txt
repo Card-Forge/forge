@@ -1,0 +1,8 @@
+Name:Abomination, World Ravager
+ManaCost:7 R
+Types:Legendary Creature Gamma Berserker Villain
+PT:10/10
+K:Menace
+K:Trample
+K:Mayhem:4 R
+Oracle:Menace, trample\nMayhem {4}{R} (You may cast this card from your graveyard for {4}{R} if you discarded it this turn. Timing rules still apply.)

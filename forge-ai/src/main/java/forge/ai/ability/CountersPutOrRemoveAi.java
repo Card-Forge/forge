@@ -105,7 +105,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
                 if (maritEmpty) {
                     CardCollectionView depthsList = CardLists.filter(countersList,
-                            CardPredicates.nameEquals("Dark Depths"), CardPredicates.hasCounter(CounterEnumType.ICE));
+                            CardPredicates.nameEquals("Dark Depths"), CardPredicates.hasCounter(CounterType.getType("ICE")));
 
                     if (!depthsList.isEmpty()) {
                         sa.getTargets().add(depthsList.getFirst());
@@ -217,6 +217,8 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
         Card tgt = (Card) params.get("Target");
 
+        CounterType ice = CounterType.getType("ICE");
+
         // planeswalker has high priority for loyalty counters
         if (tgt.isPlaneswalker() && options.contains(CounterEnumType.LOYALTY)) {
             return CounterEnumType.LOYALTY;
@@ -241,12 +243,12 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
             }
         } else {
             // this counters are treat first to be removed
-            if ("Dark Depths".equals(tgt.getName()) && options.contains(CounterEnumType.ICE)) {
+            if ("Dark Depths".equals(tgt.getName()) && options.contains(ice)) {
                 CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
                 boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
 
                 if (maritEmpty) {
-                    return CounterEnumType.ICE;
+                    return ice;
                 }
             } else if (tgt.hasKeyword(Keyword.UNDYING) && options.contains(CounterEnumType.P1P1)) {
                 return CounterEnumType.P1P1;
@@ -279,6 +281,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
             Card tgt = (Card) params.get("Target");
             CounterType type = (CounterType) params.get("CounterType");
+            CounterType ice = CounterType.getType("ICE");
 
             if (tgt.getController().isOpponentOf(ai)) {
                 if (type.is(CounterEnumType.LOYALTY) && tgt.isPlaneswalker()) {
@@ -286,22 +289,22 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 }
 
                 return ComputerUtil.isNegativeCounter(type, tgt);
-            } else {
-                if (type.is(CounterEnumType.ICE) && "Dark Depths".equals(tgt.getName())) {
-                    CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-                    boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
+            }
 
-                    if (maritEmpty) {
-                        return false;
-                    }
-                } else if (type.is(CounterEnumType.M1M1) && tgt.hasKeyword(Keyword.PERSIST)) {
-                    return false;
-                } else if (type.is(CounterEnumType.P1P1) && tgt.hasKeyword(Keyword.UNDYING)) {
+            if (type == ice && "Dark Depths".equals(tgt.getName())) {
+                CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
+                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
+
+                if (maritEmpty) {
                     return false;
                 }
-
-                return !ComputerUtil.isNegativeCounter(type, tgt);
+            } else if (type.is(CounterEnumType.M1M1) && tgt.hasKeyword(Keyword.PERSIST)) {
+                return false;
+            } else if (type.is(CounterEnumType.P1P1) && tgt.hasKeyword(Keyword.UNDYING)) {
+                return false;
             }
+
+            return !ComputerUtil.isNegativeCounter(type, tgt);
         }
         return super.chooseBinary(kindOfChoice, sa, params);
     }

@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import com.google.common.collect.ImmutableList;
-
 import com.google.common.collect.Lists;
 import forge.Forge;
 import forge.Graphics;
@@ -47,7 +45,7 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
         setHeight(FOptionPane.getMaxDisplayObjHeight());
 
         optionPane = new FOptionPane(null, null, title, null, this,
-                isOptional ? ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblCancel")) : ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 0, result -> {
+                isOptional ? List.of(Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblCancel")) : List.of(Forge.getLocalizer().getMessage("lblOK")), 0, result -> {
                     if (result == 0) {
                         callback.accept(((PickerTab) tabPages.get(0)).list.getSelectedItem());
                     }

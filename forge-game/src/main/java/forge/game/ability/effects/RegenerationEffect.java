@@ -36,8 +36,7 @@ public class RegenerationEffect extends SpellAbilityEffect {
 
             SpellAbility cause = (SpellAbility)sa.getReplacingObject(AbilityKey.Cause);
 
-            gameCard.setDamage(0);
-            gameCard.setHasBeenDealtDeathtouchDamage(false);
+            gameCard.healDamage();
             if (gameCard.tap(true, cause, gameCard.getController())) tapped.add(gameCard);
             gameCard.addRegeneratedThisTurn();
 

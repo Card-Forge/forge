@@ -1,6 +1,6 @@
 Name:Folio of Fancies
 ManaCost:1 U
-Types:Artifact
+Types:Artifact Book
 S:Mode$ Continuous | Affected$ Player | SetMaxHandSize$ Unlimited | Description$ Players have no maximum hand size.
 SVar:NonStackingEffect:True
 A:AB$ Draw | Cost$ X X T | NumCards$ X | Defined$ Player | SpellDescription$ Each player draws X cards.

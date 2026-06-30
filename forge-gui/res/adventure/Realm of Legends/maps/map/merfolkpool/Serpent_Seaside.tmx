@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="87">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="88">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -37,7 +37,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztVjtOAzEQtURBEeUCdJD/hyBFSlIBFcrmsykQSJArcAAkzkKTD/knKNRcAgQScIA0XIIZGbMTs961NyEVT3qK7bH9ZsbOeBn7RxA8FRmzC5vXRc3n4t9qZKqM9Wv8FykQCnOKcTovW1Xvp4Pc9/pE3RnbOV7Wxb4gzsPfgzXp9uuOphf7K+i+wdm9Az8KXDdiMxYFxmxvzQTYk3Zw3Qu4L5fAJnAE68cS96t875SLTXCyYp6H4P9IIuZgVuMxjW2Hwo7tia23f47417KcdqrBWFoi1cV+puHMF/0sGfND0lruty33eaibqy+fYRT8iAHjNX09gUjZ294FP+4UviB6ld9jfcj3QDPnuhD5SEr+0n4C8p00yLnAnMSQcrmjaB+AzhA4A47LvK+LoSIX8v9w5JMzv7OQkVLkQtZNB8hZEKxaZ01wesKJb6yb7uMWp/z+dg3y66WL8NKVEYU7dnvE2/eGb2HesM5SO2pSmoLWSVXNUml2LPM7LbAL++3h++cSq/i2oZrCN9SNVHi+Yy61SwZ9bxEt2LMN7Eh75yvreeME6Hv7o1NZjmUT0NEKeoY6mGucEUXzEHyBOtqzeVtbZ9vbrpOHGNTReENf9wXO9hVYg/k3YT6G9+iBxJz3uE/0+8Ik1rMSY+clrlsHXoU4ab3KSbqoNfXJEeI67G0XmgjURAyJ1tQlXromCMT6BXNiVQHPwTLQVD3Zcpx+uvIaP/8+FXZ6njq6unEuSPsLWYOwlg==
+   eJztljlOAzEUhi1RUESpQXSQTNYhSGFJBVQok2VSIJAgV+AASJyFJmzZg0LNJUAgAQdIwyV4T46ZN2YWexKo+KVfGY+X7/nZsYexf0XR0w5j9vbfc5H5vPO7jHyVsXaN/6KFYnFu8Z62M6v+46moMO2frjvvVvbdXCwLYzv83ZgTt113mEFuz8B9g7V7B39sc27CZiwJNuxgZhrqM3Z07gnsl1NwE9yD/n3J61U+dtajTngwY567EH9PMuZgVONz6tuORT0+D2y18QskvpblPGcbjOUkUy6W8w2nvSib5F2YMpa7fGV5t0Nuoe5ewyTEYYBTNXWeUKIcXH8Dcdz6xIK6q/x814Z8dxRzriqRj4wULy2nId8ZjZwLjckcsh57FOs7wOmCR+B+mZdV1fXJhfw/7IXkLGwtZGV9ciFzcxFyFkWznrM6OjzgxjvWi/u4wC3fvzca+Q3iooK4spKwxy73+PO95l1Y1DxnaT0yqXVFz0m/M8uPeW3p72mhVRhvDe8/j7mKbxvKFLEhN1Hh+TY8zi5Z9L5FtWDMK/C1NHaxMp87Tojet9+cinsufyEVVtQ1VNFYYY2omrsQC5yjdzZ/VuYsBter5MGAczTVUOe+wNq+gmvQfslkbNnk++iBzLkYsJ/o94XOXI9KjB2XOHcTmFvgs5j7vCpIXGQNQ3KEOo8H1yOzPo0VmaguYQ095kv7RJHoP5kyBddLFxC/pcH0u7LleYZx5T5h8X361GN/ygvjqs5zQp6/AMthsFY=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -250,6 +250,14 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
     <property name="spawn.Insane" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="60"/>
     <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/shop.tx" x="144.333" y="484.667">
+   <properties>
+    <property name="commonShopList" value="LargeSeaCreatures"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

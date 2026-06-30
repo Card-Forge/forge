@@ -1,0 +1,7 @@
+Name:Ultimate Nullification
+ManaCost:4 W
+Types:Sorcery
+A:SP$ ChangeZoneAll | Cost$ 4 W Sac<1/Creature.Legendary/legendary creature> | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ ExileAllGraveyards | SpellDescription$ Exile all creatures and graveyards.
+SVar:ExileAllGraveyards:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBPut
+SVar:DBPut:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put CARDNAME on the bottom of its owner's library.
+Oracle:As an additional cost to cast this spell, sacrifice a legendary creature.\nExile all creatures and graveyards. Put Ultimate Nullification on the bottom of its owner's library.

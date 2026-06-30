@@ -65,9 +65,9 @@ public class NetworkLogAnalyzer {
     private static final Pattern ENCODED_BYTES_PATTERN = Pattern.compile(
             "Encoded (\\d+) bytes \\(compressed\\)");
 
-    // "send() blocked 214 ms for <player>"
-    private static final Pattern SEND_BLOCKED_PATTERN = Pattern.compile(
-            "send\\(\\) blocked (\\d+) ms");
+    // "<player> recovered after 1.3s outbound buffer saturation (47 server sends)"
+    private static final Pattern SATURATION_RECOVERY_PATTERN = Pattern.compile(
+            "recovered after (\\d+)\\.(\\d+)s outbound buffer saturation \\((\\d+) server sends\\)");
 
     // Turn detection from event batch lists: "GameEventTurnBegan" in batch contents
     private static final Pattern BATCH_TURN_BEGAN_PATTERN = Pattern.compile(
@@ -449,11 +449,15 @@ public class NetworkLogAnalyzer {
                     continue;
                 }
 
-                // send() blocking times
-                Matcher blockedMatcher = SEND_BLOCKED_PATTERN.matcher(line);
-                if (blockedMatcher.find()) {
+                // Outbound buffer saturation episode (recovery line carries duration + send count)
+                Matcher saturationMatcher = SATURATION_RECOVERY_PATTERN.matcher(line);
+                if (saturationMatcher.find()) {
                     try {
-                        metrics.recordSendBlocked(Long.parseLong(blockedMatcher.group(1)));
+                        long seconds = Long.parseLong(saturationMatcher.group(1));
+                        long tenths = Long.parseLong(saturationMatcher.group(2));
+                        long durationMs = seconds * 1000 + tenths * 100;
+                        int sendsQueued = Integer.parseInt(saturationMatcher.group(3));
+                        metrics.recordSaturationEpisode(durationMs, sendsQueued);
                     } catch (NumberFormatException e) {
                         // skip
                     }

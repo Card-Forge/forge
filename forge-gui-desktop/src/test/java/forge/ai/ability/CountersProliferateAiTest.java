@@ -16,7 +16,6 @@ import org.testng.annotations.Test;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
-
 public class CountersProliferateAiTest extends AITest {
 
     @Test

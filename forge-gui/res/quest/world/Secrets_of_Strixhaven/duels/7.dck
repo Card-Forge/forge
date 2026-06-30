@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/AJ_Grenke_-_Golgari_Midrange_(Standard,_#2940407).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Llanowar Elves
+3 Ouroboroid
+3 Preacher of the Schism
+3 Qarsi Revenant
+1 Bloodthirsty Conqueror
+1 Disruptive Stormbrood
+1 Firdoch Core
+4 Requiting Hex
+3 Witherbloom Charm
+3 Maelstrom Pulse
+1 Strategic Betrayal
+4 Unholy Annex
+3 Professor Dellian Fel
+4 Blooming Marsh
+4 Overgrown Tomb
+2 Deathcap Glade
+2 Forest
+2 Restless Cottage
+2 Soulstone Sanctuary
+2 Swamp
+2 Underground Mortuary
+2 Wastewood Verge
+1 Ba Sing Se
+[Sideboard]
+3 Mai, Scornful Striker
+3 Strategic Betrayal
+2 Duress
+2 Pick Your Poison
+2 Withering Curse
+1 Bloodthirsty Conqueror
+1 The Rise of Sozin
+1 Vicious Rivalry

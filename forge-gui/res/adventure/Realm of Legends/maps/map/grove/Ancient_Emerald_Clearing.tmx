@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="92">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="93">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -23,7 +23,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJytVVtuwkAMXFXq1+YWpJAUFC7R03AQaAml5Ui8Up736WfXYqwdTBJaqZZG2Xgdj+31OlPvXDdxrh+wDHgP76sk6gqsZe/VXzDFN7pXQif2nYB9QErffAKyXgSIqH/m6RtOq8vhtwueFM+MYpc4CvKtfmR/7uv5csR8wnODZwa7XsAa+i3WB9IpTkBG3BLfmeLQPE7wJbJy17KDvwP2+wED1ywzH3PX/ErUWt9z4muSbYN+2aA/0lkXlHOPajw0nJ32EG5k0xLfGnVU/pLytbz/IRmtJ7gntoelz9789Xf2/OrqWaf78BdfUrN9wDisn6jO2lN6L0rYT+ieiVR/zHOHXhE/c/ixvNKfX0mcFToDSrrvC9/OwzJBD0v8z8ntLFJo3Ququ84A1fXunP0Mec3gK8cdPdJ8sVBOni0So965bk3P2X49omYVzRKueVbDyzMqpfcOzZvzL3p93WAnPdXGLedZEbfWlmvI56x9/PIQbeye7gtsXzF07u4Ru/a/9po95zGd6SCJHLon5/H9GG2aePVfwXmwvfiuDK/mUSLnEeU5cvc5mVv/s9ae801dvAs27rG/z/kDc96cpQ==
+   eJytVUtOw0AMHSGxmuxh39AmtAoLOAKn6UFaaEqhR+ov9HsflozVZ+XVTdIiYekpE4/jZ3s8zsg7146c6wbMAj7C+zwqdRnWsvfmjxjhG93LoRP7VsAmIKZvvgBZTwNE1D/zdA2n1aXw2wZPjGdCsUscGflWP7I/8dV8KWLe47nEM4FdJ2AB/QrrLekUeyAhbonvQHFoHnv4Epm7U1nD3xb73YAe9u7C4r53aj/2Ze6aX45a63tKfHWyqtHPAp4D54vh3dFZZ5Rzh2r8ZDhbzSGcybIhvgXqqPw55Wt5/0MSWg9xT2wPS5+9+9Pv+PxEZhW+q3Sf/uhLarYJGIT1A9VZe0rvRQ77Id0zkeKPea7RK+JnAj+WV/rzOypnhc6AnO771DfzsAzRwxL/Y3Q+ixRa94zqrjNAdZ0LZz9GXmP4SnFHdzRfLJSTZ4vEqHeuXdFztl93qFlBs4RrnlTw8oyK6b1F8+ZwRa8vauykp5q45TwL4tbacg35nLWPX29KG7un+wLbVwyduxvErv2vvWbPeUBn2otKDt2T8/i5LW3qePVfwXmwvfguDK/mkSPnPuXZd5c5mVv/s9ae841deRds3AN/mfMXFz6d6w==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -79,6 +79,14 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
     <property name="spawn.Hard" type="bool" value="false"/>
     <property name="spawn.Insane" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/shop.tx" x="288.802" y="84.6495">
+   <properties>
+    <property name="commonShopList" value="ClassicBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

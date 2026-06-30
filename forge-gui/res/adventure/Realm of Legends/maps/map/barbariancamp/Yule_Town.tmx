@@ -127,7 +127,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;tinder wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Jolly Gerbils|BLB&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;Tinder Wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Jolly Gerbils|BLB&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
     <property name="enemy" value="Santa"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
@@ -478,7 +478,7 @@
                         { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hidetsugu, Devouring Chaos&quot;, &quot;count&quot;: 1 },
                         { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hidetsugu Consumes All&quot;, &quot;count&quot;: 1 },
                         { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hidetsugu's Second Rite&quot;, &quot;count&quot;: 1 },
-                        { &quot;type&quot;: &quot;card&quot;, &quot;subTypes&quot;: [&quot;Sorcery&quot;], &quot;colors&quot;: [ &quot;red&quot;], &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ], &quot;count&quot;: 5 }       
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardType&quot;: [&quot;Sorcery&quot;], &quot;colors&quot;: [ &quot;red&quot;], &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ], &quot;count&quot;: 5 }
                       ]
                     } ],
 					&quot;condition&quot;: [
@@ -533,7 +533,7 @@ With that, he vanishes in a cloud of smoke. Almost immediately after, another be
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;tinder wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;Tinder Wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
     <property name="enemy" value="Santa"/>
     <property name="spawn.Hard" type="bool" value="false"/>
     <property name="spawn.Insane" type="bool" value="false"/>

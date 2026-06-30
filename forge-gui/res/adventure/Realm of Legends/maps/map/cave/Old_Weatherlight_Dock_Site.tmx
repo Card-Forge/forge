@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="119">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="120">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -34,7 +34,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzFlb1OAkEQx4fDDyiIWukbQBQqTLDTho8OEx7ARmOijYVAQi9Y6DMYX8DY2VCYWFpAoUYrE4OVdvbobPbGW5fbvb27Vf/JP8eEY387O7MDgFrFI7X9vh+UJ9+JIh03yHFEOQzLP3MKE4fdA/2mXgHYrISP42qAawzRVyXuMHEc1au4f3RpjTtMHFWNmrSHY+9JFmNb8uMG2RaX+pNEMXHEWPxep8NMMFvuT4q/cxRiv/ejSu7P/+jn/e7f9PMdzoF7wQfIfcTnkzCDtpGxU1XHUTTfA1iQ3EJ2u+u9M0LGq8t5SXi2rabElaXiOkmARJJ/bhv0c1iurE+HM0kJgf+bXJO7Gpe7VePWaZDFe5a1y712uFXq4/m+IfPdAvc8RK1upwAKrnWicxPPTuauS2s0sZ4tRU13p3nOfYO9iveTKYN3eK43+R7r0Y9Z/VqMa6KbHMDZpbe/hrDuyKdGjk8ei3mApbwZd+z2xnPOOxeTsxHVcc+6iMxVDVeuCzszylXHZTmK/aLznsQ9SQGcprzYZJ7QHGIzkeWhmkMPBW6mDan+y2mAlXQwSxQxLmY4l63J6sOeOtsQ9QHVbayZGTYVxO0YzOYo/01x8v0CnyfgyQ==
+   eJzFlb1OAkEQx4fDDyiIWukbQBQqTLDTho8OEx7ARmOijYVAQi9Y6DMYX8DY2VCYWFpAoUYrE4OVdvbobPbGW5fbvb27Vf/JP3eTW/a3Mzu7AKhVPFLb7/ugPDkminTcIMcR5TAs/8wpTBx2DfSbegVgsxI+jqsBzjFEX5W4w8RxVK/i+tGlNe4wcVQ1atIajr0nWYxtyY8bZFtc6k8SxcQRY/G7ToeZYLbcnxR/5yjEfuOjSu7P/+jn/e7f9PMd3gP3gg+Q+4jPJ+EO2kbGTlUdR9F8D2BBcgvZ7a43ZoSMV5fzkvBsW02JK0vFdZIAiSR/bxv0c1iurE+HM0kJgf+bXJOzGpe7VePWaZDFc5a1y712uFXqY33fkPlugXseYq9upwAKrnWiuom1k7nr0hxN3M+WYk93p3nOfYO1iueTKYNneK43OY716Mesfi7GNdFNDuDs0ltfQ5h35LNHjk8ei3mApbwZd+z2xnPOq4tJbUR13FoXkbmq4cr7wmpGueq4LEexX3Tek7gnKYDTFH8X66IT3UPsTmR5qO6hhwI304a0/8tpgJU0fxfrohMxLmY4l83J9oc9dbYh6gPat7HmzrCpIG7H4G6O8t8UJ98vIS/iCw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -310,6 +310,14 @@
 	}
 ]</property>
     <property name="enemy" value="Vhati il-Dal"/>
+   </properties>
+  </object>
+  <object id="119" template="../../../../common/maps/obj/shop.tx" x="64.2651" y="438.029">
+   <properties>
+    <property name="commonShopList" value="OldDominariaBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

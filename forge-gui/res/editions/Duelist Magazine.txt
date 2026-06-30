@@ -1,0 +1,14 @@
+[metadata]
+Code=TDLS
+Date=1995-03-01
+Name=Duelist Magazine Tokens
+Type=Promo
+ScryfallCode=TDLS
+TokensCode=TDLS
+
+[tokens]
+1 b_0_1_thrull @Anson Maddocks
+2 g_1_1_saproling @Daniel Gelon
+3 w_1_1_citizen @Tom Wanerstrand
+4 u_1_1_camarid @Douglas Shuler
+5 r_1_1_goblin @Christopher Rush

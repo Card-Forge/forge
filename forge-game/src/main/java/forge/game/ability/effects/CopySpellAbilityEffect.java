@@ -105,9 +105,8 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         continue;
                     }
 
-                    FCollection<GameEntity> all = new FCollection<>(IterableUtil.filter(targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true), GameObjectPredicates.restriction(sa.getParam("CopyForEachCanTarget").split(","), sa.getActivatingPlayer(), card, sa)));
-                    // Remove targeted players because getAllCandidates include all the valid players
-                    all.removeAll(getTargetPlayers(targetedSA));
+                    FCollection<GameEntity> all = new FCollection<>(IterableUtil.filter(targetedSA.getTargetRestrictions().getAllCandidates(targetedSA), GameObjectPredicates.restriction(sa.getParam("CopyForEachCanTarget").split(","), sa.getActivatingPlayer(), card, sa)));
+                    all.removeAll(getTargetEntities(targetedSA));
 
                     if (sa.hasParam("ChooseOnlyOne")) { // Beamsplitter Mage
                         GameEntity choice = controller.getController().chooseSingleEntityForEffect(all, sa, Localizer.getInstance().getMessage("lblChooseOne"), null);
@@ -136,9 +135,9 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
                     FCollection<GameEntity>  newTgts = new FCollection<>();
                     for (GameEntity e : tgts) {
-                        if (e instanceof Player) { // Zevlor
+                        if (e instanceof Player p) { // Zevlor
                             FCollection<GameEntity> choices = new FCollection<>(e);
-                            choices.addAll(((Player) e).getCardsIn(ZoneType.Battlefield));
+                            choices.addAll(p.getCardsIn(ZoneType.Battlefield));
                             newTgts.add(controller.getController().chooseSingleEntityForEffect(choices, sa, Localizer.getInstance().getMessage("lblChooseOne"), null));
                         } else { // Ivy
                             newTgts.add(e);
@@ -163,14 +162,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
                         // extra case for Epic to remove the keyword and the last part of the SpellAbility
                         if (sa.hasParam("Epic")) {
-                            copy.getHostCard().getCurrentState().removeIntrinsicKeyword(Keyword.EPIC);
-                            SpellAbility sub = copy;
-                            while (sub.getSubAbility() != null && !sub.hasParam("Epic")) {
-                                sub = sub.getSubAbility();
-                            }
-                            if (sub != null) {
-                                sub.getParent().setSubAbility(sub.getSubAbility());
-                            }
+                            copy.getHostCard().removeIntrinsicKeyword(Keyword.EPIC);
                         }
 
                         copies.add(copy);

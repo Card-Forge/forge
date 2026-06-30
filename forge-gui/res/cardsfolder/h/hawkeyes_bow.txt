@@ -1,0 +1,8 @@
+Name:Hawkeye's Bow
+ManaCost:R
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Reach | Description$ Equipped creature gets +1/+0 and has reach.
+T:Mode$ Taps | ValidCard$ Creature.EquippedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever equipped creature becomes tapped, it deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1 | DamageSource$ TriggeredCardLKICopy
+K:Equip:1
+Oracle:Equipped creature gets +1/+0 and has reach.\nWhenever equipped creature becomes tapped, it deals 1 damage to each opponent.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

@@ -85,7 +85,7 @@
   {
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 4,
-    &quot;rarity&quot;: [ &quot;Rare, Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
 </property>

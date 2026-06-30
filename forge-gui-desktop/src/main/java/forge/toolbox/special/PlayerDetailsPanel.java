@@ -60,7 +60,6 @@ public class PlayerDetailsPanel extends JPanel {
         manaLabels.add(new DetailLabelMana("G", "lblGreenManaOfN"));
         manaLabels.add(new DetailLabelMana("C", "lblColorlessManaOfN"));
 
-
         EnumSet<ZoneType> extraZoneTypes = EnumSet.copyOf(supportedZones);
         extraZoneTypes.removeAll(zoneLabels.keySet());
         extraLabel = new DetailLabelExtra(extraZoneTypes);

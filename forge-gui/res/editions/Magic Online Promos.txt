@@ -1,7 +1,7 @@
 [metadata]
-Name=Magic Online Promos
 Code=PRM
 Date=2002-06-24
+Name=Magic Online Promos
 Type=Online
 ScryfallCode=PRM
 
@@ -217,7 +217,6 @@ ScryfallCode=PRM
 35044 U Juggernaut @Dan Frazier
 35046 U Mortify @Brian Snõddy
 35048 R Wrath of God @Ron Spencer
-35050 C Aisling Leprechaun @Quinton Hoover
 35052 C Headless Horseman @Quinton Hoover
 35054 U Soltari Priest @Dany Orizio
 35056 U Whirling Dervish @Alex Horley-Orlandelli
@@ -235,15 +234,6 @@ ScryfallCode=PRM
 35080 R Yawgmoth's Will @Ron Spencer
 35082 C Zodiac Rooster @Ai Desheng
 35084 C Zodiac Monkey @Ai Desheng
-35086 C Zodiac Rabbit @Ai Desheng
-35088 U Zodiac Tiger @Ai Desheng
-35090 U Zodiac Horse @Ai Desheng
-35092 U Zodiac Ox @Ai Desheng
-35094 C Zodiac Rat @Qi Baocheng
-35096 C Zodiac Snake @Qi Baocheng
-35098 C Zodiac Goat @Qi Baocheng
-35100 U Zodiac Pig @Qi Baocheng
-35102 C Zodiac Dog @Qi Baocheng
 35104 U Pendelhaven @Philip Straub
 35106 U Harmonize @Vance Kovacs
 35108 C Mana Tithe @Donato Giancola
@@ -306,7 +296,6 @@ ScryfallCode=PRM
 35958 R Arena @Rob Alexander
 35960 R Giant Badger @Liz Danforth
 35962 R Mana Crypt @Mark Tedin
-35964 R Sewers of Estark @Melissa A. Benson
 35966 R Windseeker Centaur @Anson Maddocks
 35968 U Hedge Troll @Paolo Parente
 35970 R Underworld Dreams @Julie Baroh
@@ -315,7 +304,6 @@ ScryfallCode=PRM
 35976 R Spiritmonger @Kev Walker
 35978 C Fiery Temper @Ben Wootten
 35980 C Icatian Javelineers @Michael Phillippi
-35982 U Mind Warp @Liz Danforth
 35984 U Blood Knight @Matt Cavotta
 35986 C Memory Lapse @Mark Tedin
 35988 U Calciderm @Dave Kendall
@@ -680,6 +668,12 @@ ScryfallCode=PRM
 44317 R Restoration Angel @Wesley Burt
 44319 R Killing Wave @Michael Komarck
 44321 M Lotus Cobra @Terese Nielsen
+44340 R Tazeem @Vincent Proce
+44342 R Tember City @Ben Thompson
+44344 R Mirrored Depths @Chippy
+44346 R Horizon Boughs @Jean-Sébastien Rossbach
+44348 R Celestine Reef @Donato Giancola
+44350 R Stairs to Infinity @Steven Belledin
 45199 U Acidic Slime @Brad Rigney
 45201 U Lingering Souls @John Stanko
 45203 C Forbidden Alchemy @Randy Gallegos
@@ -1230,8 +1224,8 @@ ScryfallCode=PRM
 71588 R Lavinia, Azorius Renegade @Matt Stewart
 71590 U Rakdos Firewheeler @Tyler Walpole
 71592 U Gate Colossus @Milivoj Ćeran
-72219 R Time Wipe @Heonhwa Choe
-72221 U Liliana's Triumph @Heonhwa Choe
+72219 R Time Wipe @Heonhwa
+72221 U Liliana's Triumph @Heonhwa
 72223 R Karn's Bastion @Piotr Dura
 72225 R Domri, Anarch of Bolas @Raita Kazama
 72227 U Dovin, Hand of Control @Nablange
@@ -1622,7 +1616,7 @@ ScryfallCode=PRM
 81974 R Brash Taunter @Svetlin Velinov
 81976 M Terror of the Peaks @Andrey Kuzinskiy
 81978 R Temple of Triumph @Piotr Dura
-81980 R Double Vision @Heonhwa Choe
+81980 R Double Vision @Heonhwa
 81982 R Jolrael, Mwonvuli Recluse @Izzy
 81984 R Azusa, Lost but Seeking @Winona Nelson
 81986 R Sporeweb Weaver @Slawomir Maniak
@@ -1716,11 +1710,11 @@ ScryfallCode=PRM
 83720 R Phylath, World Sculptor @Pascal Blanché
 83722 M Lithoform Engine @Colin Boyer
 83724 R Coveted Prize @Lie Setiawan
-83726 R Orah, Skyclave Hierophant @Heonhwa Choe
+83726 R Orah, Skyclave Hierophant @Heonhwa
 83728 R Inscription of Abundance @Zoltan Boros
 83730 R Skyclave Relic @Daniel Ljunggren
 83732 R Crawling Barrens @Jonas De Ro
-83734 R Nighthawk Scavenger @Heonhwa Choe
+83734 R Nighthawk Scavenger @Heonhwa
 83736 R Charix, the Raging Isle @Viktor Titov
 83738 R Nahiri's Lithoforming @Campbell White
 83740 R Swarm Shambler @Nicholas Gregory
@@ -1946,7 +1940,6 @@ ScryfallCode=PRM
 86236 M Sakashima of a Thousand Faces @Jason A. Engle
 86238 U Esior, Wardwing Familiar @Jesper Ejsing
 86240 R Krark, the Thumbless @Mathias Kollros
-86242 S The Prismatic Piper @Seb McKinnon
 86244 R Liesa, Shroud of Dusk @Slawomir Maniak
 86246 R Belbe, Corrupted Observer @Igor Kieryluk
 86248 U Reyav, Master Smith @Scott Murphy
@@ -1973,7 +1966,7 @@ ScryfallCode=PRM
 86290 U Breeches, Brazen Plunderer @Svetlin Velinov
 86292 R Lathiel, the Bounteous Dawn @Lucas Graciano
 86294 U Nadier, Agent of the Duskenel @Yongjae Choi
-86296 U Thalisse, Reverent Medium @Heonhwa Choe
+86296 U Thalisse, Reverent Medium @Heonhwa
 86298 U Numa, Joraga Chieftain @Kieran Yanner
 86300 U Abomination of Llanowar @Vincent Proce
 86302 U Toggo, Goblin Weaponsmith @Svetlin Velinov
@@ -1984,7 +1977,7 @@ ScryfallCode=PRM
 86312 R Kwain, Itinerant Meddler @Lucas Graciano
 86314 M Akroma, Vision of Ixidor @Chris Rahn
 86316 U Radiant, Serra Archangel @Chris Rallis
-86318 U Siani, Eye of the Storm @Heonhwa Choe
+86318 U Siani, Eye of the Storm @Heonhwa
 86320 U Alharu, Solemn Ritualist @Chris Rallis
 86322 U Slurrk, All-Ingesting @Jehan Choo
 86324 U Hamza, Guardian of Arashin @Wisnu Tan
@@ -2087,7 +2080,7 @@ ScryfallCode=PRM
 88386 U Aegar, the Freezing Flame @WolfSkullJack
 88388 U Harald, King of Skemfar @Collin Estrada
 88390 U Koll, the Forgemaster @Nico Delort
-88392 U Moritte of the Frost @Poison Project
+88392 U Moritte of the Frost @Anditya Dita
 88394 R Pyre of Heroes @Piotr Dura
 88396 R Maskwood Nexus @Jason A. Engle
 88398 R Cosmos Elixir @Volkan Baǵa
@@ -2104,11 +2097,9 @@ ScryfallCode=PRM
 89974 R Leonin Lightscribe @Steven Belledin
 89976 R Nils, Discipline Enforcer @Magali Villeneuve
 89978 R Strict Proctor @Jokubas Uogintas
-89980 R Scholarship Sponsor @Tomas Duchek
 89982 R Sparring Regimen @Tomasz Jedruszek
 89984 R Combat Calligrapher @Joseph Weston
 89986 R Semester's End @Alayna Danner
-89988 R Guardian Archon @Scott M. Fischer
 89990 R Devastating Mastery @Jake Murray
 89992 R Elite Spellbinder @Ryan Pancoast
 89994 R Promise of Loyalty @Sara Winters
@@ -2164,7 +2155,7 @@ ScryfallCode=PRM
 90094 R Retriever Phoenix @Karl Kopinski
 90096 R Fervent Mastery @Sean Sevestre
 90098 R Draconic Intervention @Johan Grenier
-90100 R Rionya, Fire Dancer @Heonhwa Choe
+90100 R Rionya, Fire Dancer @Heonhwa
 90102 R Radiant Performer @Alessandra Pisano
 90104 R Inferno Project @Olivier Bernard
 90106 R Fiery Encore @Justyna Dura
@@ -2252,7 +2243,6 @@ ScryfallCode=PRM
 90290 M Gyome, Master Chef @Steve Prescott
 90292 M Adrix and Nev, Twincasters @Andrew Mar
 90294 M Extus, Oriq Overlord @Chase Stone & Kekai Kotaki
-90296 M Esix, Fractal Bloom @Chase Stone
 90300 M Blex, Vexing Pest @Ekaterina Burmak
 90304 M Jadzi, Oracle of Arcavios @Chris Rahn
 90308 M Rowan, Scholar of Sparks @Anna Steinbauer
@@ -2489,7 +2479,7 @@ ScryfallCode=PRM
 93982 R Mask of Griselbrand @Jason Felix
 93984 R Ghouls' Night Out @Fajareka Setiawan
 93988 R Curse of Leeches @Uriah Voth
-93992 M Bloodthirsty Adversary @Heonhwa Choe
+93992 M Bloodthirsty Adversary @Heonhwa
 93994 M Moonveil Regent @Joshua Raphael
 93996 M Sunstreak Phoenix @Brian Valeza
 93998 R Falkenrath Pit Fighter @Anna Fehr
@@ -2605,7 +2595,7 @@ ScryfallCode=PRM
 95425 R Howlpack Piper @Cristi Balanescu
 95429 M Cemetery Prowler @Daarken
 95431 M Cultivator Colossus @Antonio José Manzanedo
-95433 M Avabruck Caretaker @Heonhwa Choe
+95433 M Avabruck Caretaker @Heonhwa
 95441 M Millicent, Restless Revenant @Denman Rooke
 95445 M Kaya, Geist Hunter @Raymond Swanland
 95449 R Investigator's Journal @Yeong-Hao Han
@@ -2708,7 +2698,7 @@ ScryfallCode=PRM
 98069 R Satsuki, the Living Lore @Ryan Pancoast
 98071 R Kotose, the Silent Spider @Marta Nael
 98073 R Greasefang, Okiba Boss @Victor Adame Minguez
-98075 R Raiyuu, Storm's Edge @Heonhwa Choe
+98075 R Raiyuu, Storm's Edge @Heonhwa
 98077 R Hinata, Dawn-Crowned @Alexander Mokhov
 98079 R Satoru Umezawa @Anna Pavleeva
 98081 R Satoru Umezawa @Yoji Shinkawa
@@ -2920,7 +2910,7 @@ ScryfallCode=PRM
 102371 R City of Brass @Mark Poole
 102373 R Forbidden Orchard @Drew Tucker
 102375 M Cavern of Souls @Drew Tucker
-103382 M Serra Paragon @Heonhwa Choe
+103382 M Serra Paragon @Heonhwa
 103384 R Valiant Veteran @Néstor Ossandón Leal
 103386 R Serra Redeemer @Joshua Raphael
 103388 R Guardian of New Benalia @Ernanda Souza
@@ -3053,7 +3043,7 @@ ScryfallCode=PRM
 105764 R Titania's Command @Dominik Mayer
 105766 M Rootpath Purifier @Justyna Dura
 105768 M Rootwire Amalgam @Leon Tukker
-105770 M Titania, Nature's Force @Heonhwa Choe
+105770 M Titania, Nature's Force @Heonhwa
 105772 M Awaken the Woods @Bryan Sola
 105774 R Harbin, Vanguard Aviator @Kieran Yanner
 105776 R Urza, Prince of Kroog @Cosmin Podar

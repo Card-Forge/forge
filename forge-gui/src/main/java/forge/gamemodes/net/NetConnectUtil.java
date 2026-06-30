@@ -29,15 +29,26 @@ import java.util.List;
 public class NetConnectUtil {
     private NetConnectUtil() { }
 
-    public static String getServerUrl() {
-        final String url = SOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblOnlineMultiplayerDest"), Localizer.getInstance().getMessage("lblConnectToServer"));
-        if (url == null) { return null; }
+    /**
+     * Prompt for the server address to join. Returns null if cancelled, or the address string.
+     */
+    public static String getJoinServerUrl() {
+        final String url = SOptionPane.showInputDialog(
+                Localizer.getInstance().getMessage("lblEnterServerAddress"),
+                Localizer.getInstance().getMessage("lblJoinGame"));
+        if (url == null || url.isEmpty()) { return null; }
 
-        //prompt user for player one name if needed
+        ensurePlayerName();
+        return url;
+    }
+
+    /**
+     * Ensure the player name is set before connecting.
+     */
+    public static void ensurePlayerName() {
         if (StringUtils.isBlank(FModel.getPreferences().getPref(FPref.PLAYER_NAME))) {
             GamePlayerUtil.setPlayerName();
         }
-        return url;
     }
 
     public static ChatMessage host(final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
@@ -46,6 +57,7 @@ public class NetConnectUtil {
         final ServerGameLobby lobby = new ServerGameLobby();
         final ILobbyView view = onlineLobby.setLobby(lobby);
 
+        NetworkLogConfig.activateNetworkLogging();
         server.startServer(port);
         server.setLobby(lobby);
 
@@ -56,12 +68,11 @@ public class NetConnectUtil {
                 server.updateLobbyState();
             }
             @Override
-            public void update(final int slot, final LobbySlotType type) {return;}
+            public void update(final int slot, final LobbySlotType type) {}
         });
-        view.setPlayerChangeListener((index, event) -> {
-            server.updateSlot(index, event);
-            server.updateLobbyState();
-        });
+        // updateSlot already routes through the IUpdateable listener above, which calls
+        // updateLobbyState; calling it again here would broadcast a duplicate LobbyUpdateEvent.
+        view.setPlayerChangeListener(server::updateSlot);
 
         server.setLobbyListener(new ILobbyListener() {
             @Override
@@ -69,8 +80,8 @@ public class NetConnectUtil {
                 // NO-OP, lobby connected directly
             }
             @Override
-            public void message(final String source, final String message) {
-                chatInterface.addMessage(new ChatMessage(source, message));
+            public void message(final String source, final String message, final ChatMessage.MessageType type) {
+                chatInterface.addMessage(new ChatMessage(source, message, type));
             }
             @Override
             public void close() {
@@ -81,6 +92,7 @@ public class NetConnectUtil {
                 return null;
             }
         });
+        server.setDraftHandler(view.getDraftHandler());
         chatInterface.setGameClient(new IRemote() {
             @Override
             public void send(final NetEvent event) {
@@ -163,7 +175,7 @@ public class NetConnectUtil {
         port = hostPort.port();
         if (port == -1) port = Integer.valueOf(ForgeNetPreferences.FNetPref.NET_PORT.getDefault());
 
-        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui, hostname, port);
+        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), gui, hostname, port);
         onlineLobby.setClient(client);
         chatInterface.setGameClient(client);
         final ClientGameLobby lobby = new ClientGameLobby();
@@ -171,8 +183,8 @@ public class NetConnectUtil {
         lobby.setListener(view);
         client.addLobbyListener(new ILobbyListener() {
             @Override
-            public void message(final String source, final String message) {
-                chatInterface.addMessage(new ChatMessage(source, message));
+            public void message(final String source, final String message, final ChatMessage.MessageType type) {
+                chatInterface.addMessage(new ChatMessage(source, message, type));
             }
             @Override
             public void update(final GameLobbyData state, final int slot) {
@@ -181,7 +193,6 @@ public class NetConnectUtil {
             }
             @Override
             public void close() {
-                GuiBase.setInterrupted(true);
                 onlineLobby.closeConn(Localizer.getInstance().getMessage("lblYourConnectionToHostWasInterrupted", url));
             }
             @Override
@@ -189,8 +200,10 @@ public class NetConnectUtil {
                 return lobby;
             }
         });
+        client.setDraftHandler(view.getDraftHandler());
         view.setPlayerChangeListener((index, event) -> client.send(event));
 
+        NetworkLogConfig.activateNetworkLogging();
         try {
             client.connect();
         }

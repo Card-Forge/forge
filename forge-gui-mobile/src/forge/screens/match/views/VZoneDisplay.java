@@ -32,8 +32,7 @@ public class VZoneDisplay extends VCardDisplayArea {
     public void update() {
         final GameView gv = MatchController.instance.getGameView();
         final FCollectionView<CardView> cards = DanDanViewZones.cardsForZoneDisplay(gv, player, zoneType);
-        refreshCardPanels(cards);
-    }
+        refreshCardPanels(gv.instance.isNetGame() ? cards.threadSafeIterable() : cards);    }
 
     @Override
     public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {

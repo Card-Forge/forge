@@ -4,7 +4,7 @@ Types:Artifact
 # Doesn't interact properly with Myr Welder right now
 A:AB$ Repeat | Cost$ XMin1 X T | ValidTgts$ Opponent | MaxRepeat$ MaxRepeats | RepeatSubAbility$ DBCleanBeforeRepeat | RepeatCheckSVar$ AccumulatedMilled | RepeatSVarCompare$ LTX | AILogic$ MaxXAtOppEOT | StackDescription$ SpellDescription | SpellDescription$ Target opponent mills a card, then repeats this process until a creature card or X cards have been put into their graveyard this way, whichever comes first. If one or more creature cards were put into that graveyard this way, sacrifice CARDNAME and put one of them onto the battlefield under your control. X can't be 0. | SubAbility$ DBSacHelm
 SVar:DBCleanBeforeRepeat:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBMill
-SVar:DBMill:DB$ Mill | NumCards$ 1 | RememberMilled$ True | Defined$ Targeted | SubAbility$ DBAccumulateX | NoReveal$ True
+SVar:DBMill:DB$ Mill | NumCards$ 1 | RememberMilled$ True | Defined$ Targeted | SubAbility$ DBAccumulateX
 SVar:DBAccumulateX:DB$ StoreSVar | SVar$ AccumulatedMilled | Type$ CountSVar | Expression$ AccumulatedMilled/Plus.1 | ConditionCheckSVar$ MilledCard | ConditionSVarCompare$ EQ1 | SubAbility$ DBMilledCreature
 SVar:DBMilledCreature:DB$ StoreSVar | SVar$ AccumulatedMilled | Type$ Calculate | Expression$ X | ConditionCheckSVar$ MilledCreature | ConditionSVarCompare$ EQ1 | SubAbility$ DBEmptyLibrary
 SVar:DBEmptyLibrary:DB$ StoreSVar | SVar$ AccumulatedMilled | Type$ Calculate | Expression$ X | ConditionCheckSVar$ TargetedLibrary | ConditionSVarCompare$ EQ0

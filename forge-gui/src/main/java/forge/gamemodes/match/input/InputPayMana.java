@@ -19,7 +19,6 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
 import forge.gui.FThreads;
-import forge.gui.GuiBase;
 import forge.player.PlayerControllerHuman;
 import forge.util.Evaluator;
 import forge.util.ITriggerEvent;
@@ -63,6 +62,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected void onStop() {
+        getController().clearActionableCards();
         if (!isFinished()) {
             // Clear current Mana cost being paid for SA
             saPaidFor.setManaCostBeingPaid(null);
@@ -76,7 +76,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getController().getGui().isLibgdxPort()) {
             // Mobile Forge allows to tap cards underneath the current card even if the current one is tapped
             if (otherCardsToSelect != null) {
                 for (Card c : otherCardsToSelect) {
@@ -92,19 +92,18 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 return true;
             }
             return activateDelayedCard();
-        } else {
-            List<SpellAbility> manaAbilities = getAllManaAbilities(card);
-            // Desktop Forge floating menu functionality
-            if (manaAbilities.size() == 1) {
-                activateManaAbility(card, manaAbilities.get(0));
-            } else {
-                SpellAbility spellAbility = getController().getAbilityToPlay(card, manaAbilities, triggerEvent);
-                if (spellAbility != null) {
-                    activateManaAbility(card, spellAbility);
-                }
-            }
-            return true;
         }
+
+        List<SpellAbility> manaAbilities = getAllManaAbilities(card);
+        // Desktop Forge floating menu functionality
+        if (manaAbilities.size() == 1) {
+            return activateManaAbility(card, manaAbilities.get(0));
+        }
+        SpellAbility spellAbility = getController().getAbilityToPlay(card, manaAbilities, triggerEvent);
+        if (spellAbility != null) {
+            return activateManaAbility(card, spellAbility);
+        }
+        return true;
     }
 
     protected List<SpellAbility> getAllManaAbilities(Card card) {
@@ -401,6 +400,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (activateDelayedCard()) {
             return;
         }
+        // Drop just-tapped sources from the highlight set.
+        getController().pushActionableCards(true);
         if (supportAutoPay()) {
             if (canPayManaCost == null) {
                 //use AI utility to determine if mana cost can be paid if that hasn't been determined yet
@@ -423,6 +424,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     @Override
     public void showMessage() {
         if (isFinished()) { return; }
+        getController().pushActionableCards(true);
         updateButtons();
         onStateChanged();
     }
@@ -446,6 +448,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     public boolean isPaid() { return bPaid; }
+
+    public boolean isActivatingManaAbility() { return locked; }
 
     protected String messagePrefix;
     public void setMessagePrefix(String prompt) {

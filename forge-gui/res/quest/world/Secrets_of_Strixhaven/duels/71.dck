@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Cohen the Barbarian
+Title=Cohen the Barbarian
+Icon=Cohen the Barbarian.jpg
+Difficulty=Hard
+Description=./Modern/Secrets_of_Strixhaven/Julio_Machado_-_Mill_(Modern,_#2915129).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+3 Exhibition Tidecaller
+4 Fatal Push
+4 Surgical Extraction
+2 Visions of Beyond
+3 Drown in the Loch
+1 Sink into Stupor
+4 Archive Trap
+1 Murderous Cut
+2 Preordain
+3 Tasha's Hideous Laughter
+4 Fractured Sanity
+3 Field of Ruin
+4 Polluted Delta
+2 Undercity Sewers
+3 Island
+1 Scalding Tarn
+1 Oboro, Palace in the Clouds
+1 Otawara, Soaring City
+1 Swamp
+3 Flooded Strand
+2 Watery Grave
+[Sideboard]
+2 Engineered Explosives
+4 Consign to Memory
+2 Extirpate
+2 Toxic Deluge
+3 Mystical Dispute
+2 Crypt Incursion

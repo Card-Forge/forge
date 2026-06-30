@@ -330,7 +330,7 @@
                     &quot;text&quot;: &quot;'I have to say, little one, you've impressed me! You've more than earned these rewards, and the gratitude of all the mountainfolk.'&quot;,
 					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [
-		      {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Jewel of War&quot;},
+		      {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;War Helm&quot;},
                         {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Gamble&quot;},
                         {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Underworld Breach&quot;}
                       ]

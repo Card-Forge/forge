@@ -1,0 +1,12 @@
+Name:Captain America, Liberator
+ManaCost:3 W W
+Types:Legendary Creature Human Soldier Hero
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When NICKNAME enters, you may search your library for an Equipment card with mana value 3 or less, put it onto the battlefield, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Equipment.cmcLE3 | ShuffleNonMandatory$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME attacks, for each Equipment attached to him, create a 1/1 white Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier
+SVar:X:Count$Valid Equipment.Attached
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Equipment
+Oracle:When Captain America enters, you may search your library for an Equipment card with mana value 3 or less, put it onto the battlefield, then shuffle.\nWhenever Captain America attacks, for each Equipment attached to him, create a 1/1 white Soldier creature token.

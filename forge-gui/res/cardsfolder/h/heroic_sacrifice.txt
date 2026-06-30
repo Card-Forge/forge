@@ -1,0 +1,10 @@
+Name:Heroic Sacrifice
+ManaCost:1 W
+Types:Instant
+A:SP$ Effect | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | ReplacementEffects$ DamageMagnet | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBDelayedTrigger | SpellDescription$ Choose target creature you control. Until end of turn, all damage that would be dealt to you and creatures you control is dealt to the chosen creature instead (if it's still on the battlefield).
+SVar:DamageMagnet:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You,Creature.YouCtrl | DamageTarget$ Remembered | ReplaceWith$ DmgMe | Description$ All damage that would be dealt to you and other permanents you control is dealt to this creature instead.
+SVar:DmgMe:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ Card
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigPutCounter | SpellDescription$ When that creature dies this turn, put its counters on up to one target creature you control and draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | TargetMin$ 0 | TargetMax$ 1 | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+Oracle:Choose target creature you control. Until end of turn, all damage that would be dealt to you and creatures you control is dealt to the chosen creature instead (if it's still on the battlefield). When that creature dies this turn, put its counters on up to one target creature you control and draw a card.

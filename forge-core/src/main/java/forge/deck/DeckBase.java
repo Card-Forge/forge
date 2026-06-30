@@ -25,7 +25,6 @@ import java.time.format.DateTimeFormatter;
 
 public abstract class DeckBase implements Serializable, Comparable<DeckBase>, InventoryItem {
     private static final long serialVersionUID = -7538150536939660052L;
-    // gameType is from Constant.GameType, like GameType.Regular
 
     private String name;
     private transient String directory;

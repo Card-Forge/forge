@@ -1,0 +1,9 @@
+Name:Quantum Reduction
+ManaCost:1 U
+Types:Enchantment Aura
+K:Teamwork:2
+K:Enchant:Creature
+S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell.Teamwork | EffectZone$ All | Caster$ You | Description$ You may cast this spell as though it had flash if it's cast using teamwork.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -5 | RemoveAllAbilities$ True | Description$ Enchanted creature gets -5/-0 and loses all abilities.
+SVar:AttachAILogic:Curse
+Oracle:Teamwork 2 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 2 or more.)\nYou may cast this spell as though it had flash if it's cast using teamwork.\nEnchant creature\nEnchanted creature gets -5/-0 and loses all abilities.

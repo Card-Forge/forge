@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
@@ -79,7 +80,11 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     }
 
     public FDialog(final boolean modal0, final boolean allowResize0, final String insets) {
-        super(JOptionPane.getRootFrame(), modal0);
+        this(JOptionPane.getRootFrame(), modal0, allowResize0, insets);
+    }
+
+    public FDialog(final Frame owner, final boolean modal0, final boolean allowResize0, final String insets) {
+        super(owner, modal0);
         allowResize = allowResize0;
         setUndecorated(true);
         setIconImage(FSkin.getIcon(FSkinProp.ICO_FAVICON)); //use Forge icon by default
@@ -130,12 +135,13 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     //Make Escape key close dialog if allowed
     @Override
     public boolean dispatchKeyEvent(final KeyEvent e) {
-        if (e.getID() == KeyEvent.KEY_PRESSED) {
-            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                final WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-                Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
-                return true;
-            }
+        if (e.getID() == KeyEvent.KEY_PRESSED && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            // Non-modal floats (e.g. the chat panel) shouldn't swallow ESC unless the user
+            // has actually focused them — otherwise pressing ESC anywhere in the app closes
+            // any open non-modal instead of running the focused window's own ESC handler.
+            if (!isModal() && !isFocused()) return false;
+            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+            return true;
         }
         return false;
     }
@@ -186,6 +192,8 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
                     Singletons.getView().getNavigationBar().setMenuShortcutsEnabled(false);
                 }
                 openModals.push(this);
+                // macOS can float a non-modal sibling (floating zone, chat) above an app-modal dialog; invokeLater runs in the modal's own event pump, so this raises it above them once shown
+                SwingUtilities.invokeLater(this::toFront);
             }
         }
         else {

@@ -45,7 +45,12 @@ public class DeckSerializer {
         out.add(TextUtil.enclosedBracket("metadata"));
     
         out.add(TextUtil.concatNoSpace(DeckFileHeader.NAME,"=", d.getName().replaceAll("\n", "")));
-        out.add(TextUtil.concatNoSpace(DeckFileHeader.DECK_TYPE, "=", d.getDeckFormat().name()));
+        if (d.getDeckFormat() != null) {
+            out.add(TextUtil.concatNoSpace(DeckFileHeader.DECK_TYPE, "=", d.getDeckFormat().name()));
+        }
+        if (d.getSourceUrl() != null) {
+            out.add(TextUtil.concatNoSpace(DeckFileHeader.SOURCE_URL, "=", d.getSourceUrl().replaceAll("\n", "")));
+        }
         // these are optional
         if (d.getComment() != null) {
             out.add(TextUtil.concatNoSpace(DeckFileHeader.COMMENT,"=", d.getComment().replaceAll("\n", "")));
@@ -102,6 +107,8 @@ public class DeckSerializer {
         Deck d = new Deck(dh.getName());
         d.setDeckFormat(dh.getDeckType());
         d.setComment(dh.getComment());
+        d.setDeckFormat(dh.getDeckType());
+        d.setSourceUrl(dh.getSourceUrl());
         d.setAiHints(dh.getAiHints());
         d.getTags().addAll(dh.getTags());
         d.setDraftNotes(dh.getDraftNotes());

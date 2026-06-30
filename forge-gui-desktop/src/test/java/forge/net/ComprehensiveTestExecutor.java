@@ -116,7 +116,7 @@ public class ComprehensiveTestExecutor implements IHasForgeLog {
     }
 
     private MultiProcessGameExecutor.ExecutionResult executeSequentially(int[] playerCounts, boolean[] commanderFlags) {
-        ensureFModelInitialized();
+        TestUtils.ensureFModelInitialized();
 
         netLog.info("Starting {} sequential games", playerCounts.length);
 
@@ -171,10 +171,6 @@ public class ComprehensiveTestExecutor implements IHasForgeLog {
             // Close this game's log file
             NetworkLogConfig.closeThreadLogger();
         }
-    }
-
-    private static synchronized void ensureFModelInitialized() {
-        TestUtils.ensureFModelInitialized();
     }
 
     /**

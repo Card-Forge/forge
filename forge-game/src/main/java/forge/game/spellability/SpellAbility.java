@@ -36,7 +36,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.CardTraitBase;
-import forge.game.ForgeScript;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
@@ -165,8 +164,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private final Supplier<CardCollection> rollbackEffects = Suppliers.memoize(CardCollection::new);
 
-    private CardDamageMap damageMap;
-    private CardDamageMap preventMap;
+    private CardDamageTable damageMap;
+    private CardDamageTable preventMap;
     private GameEntityCounterTable counterTable;
     private CardZoneTable changeZoneTable;
     private Map<Player, Integer> loseLifeMap;
@@ -377,7 +376,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public final List<AbilityManaPart> getAllManaParts() {
         AbilityManaPart mp = getManaPart();
         if (mp == null && subAbility == null) {
-            return ImmutableList.of();
+            return List.of();
         }
         List<AbilityManaPart> result = Lists.newArrayList();
         if (mp != null) {
@@ -609,14 +608,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return hasParam("CumulativeUpkeep");
     }
 
-    public boolean isEpic() {
-        AbilitySub sub = this.getSubAbility();
-        while (sub != null && !sub.hasParam("Epic")) {
-            sub = sub.getSubAbility();
-        }
-        return sub != null && sub.hasParam("Epic");
-    }
-
     public boolean isBargained() {
         return isOptionalCostPaid(OptionalCost.Bargain);
     }
@@ -632,6 +623,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isEntwine() {
         return isOptionalCostPaid(OptionalCost.Entwine);
+    }
+
+    public boolean isTeamwork() {
+        return isOptionalCostPaid(OptionalCost.Teamwork);
     }
 
     public boolean isJumpstart() {
@@ -992,7 +987,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         //resetPaidHash(); // FIXME: if uncommented, breaks Dragon Presence, e.g. Orator of Ojutai + revealing a Dragon from hand.
         // Is it truly necessary at this point? The paid hash seems to be reset on all SA instance operations.
         // Epic spell keeps original targets
-        if (!isEpic()) {
+        if (!this.getHostCard().hasKeyword(Keyword.EPIC)) {
             resetTargets();
         }
         resetTriggeringObjects();
@@ -1006,9 +1001,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public String yieldKey() {
         if (getHostCard() != null) {
             return getHostCard().toString() + ": " + toUnsuppressedString();
-        } else {
-            return toUnsuppressedString();
         }
+        return toUnsuppressedString();
     }
 
     public String getStackDescription() {
@@ -1171,9 +1165,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public List<AbilitySub> getAdditionalAbilityList(final String name) {
         if (additionalAbilityLists.containsKey(name)) {
             return additionalAbilityLists.get(name);
-        } else {
-            return ImmutableList.of();
         }
+        return List.of();
     }
 
     public void setAdditionalAbilityList(final String name, final List<AbilitySub> list) {
@@ -1254,10 +1247,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             // need to copy the damage tables
             if (damageMap != null) {
-                clone.damageMap = new CardDamageMap(damageMap);
+                clone.damageMap = new CardDamageTable(damageMap);
             }
             if (preventMap != null) {
-                clone.preventMap = new CardDamageMap(preventMap);
+                clone.preventMap = new CardDamageTable(preventMap);
             }
             if (counterTable != null) {
                 clone.counterTable = new GameEntityCounterTable(counterTable);
@@ -1877,7 +1870,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public int getMinTargets() {
         return getTargetRestrictions().getMinTargets(getHostCard(), this);
     }
-
     public int getMaxTargets() {
         return getTargetRestrictions().getMaxTargets(getHostCard(), this);
     }
@@ -2252,9 +2244,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         if (property.startsWith("!")) {
-            return !ForgeScript.spellAbilityHasProperty(this, property.substring(1), sourceController, source, spellAbility);
+            return !SpellAbilityProperty.hasProperty(this, sourceController, source, property.substring(1), spellAbility);
         }
-        return ForgeScript.spellAbilityHasProperty(this, property, sourceController, source, spellAbility);
+        return SpellAbilityProperty.hasProperty(this, sourceController, source, property, spellAbility);
     }
 
     // Return whether this spell tracks what color mana is spent to cast it for the sake of the effect
@@ -2298,6 +2290,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         stackDescription = AbilityUtils.applyDescriptionTextChangeEffects(originalStackDescription, this);
         description = AbilityUtils.applyDescriptionTextChangeEffects(originalDescription, this);
+
+        getConditions().setConditions(getMapParams());
+        if (getRestrictions() != null) {
+            getRestrictions().setRestrictions(getMapParams());
+        }
 
         if (subAbility != null) {
             // if the parent of the subability is not this,
@@ -2426,7 +2423,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return score;
     }
 
-    public CardDamageMap getDamageMap() {
+    public CardDamageTable getDamageMap() {
         if (damageMap != null) {
             return damageMap;
         } else if (getParent() != null) {
@@ -2435,7 +2432,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return null;
     }
 
-    public CardDamageMap getPreventMap() {
+    public CardDamageTable getPreventMap() {
         if (preventMap != null) {
             return preventMap;
         } else if (getParent() != null) {
@@ -2471,10 +2468,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return null;
     }
 
-    public void setDamageMap(final CardDamageMap map) {
+    public void setDamageMap(final CardDamageTable map) {
         damageMap = map;
     }
-    public void setPreventMap(final CardDamageMap map) {
+    public void setPreventMap(final CardDamageTable map) {
         preventMap = map;
     }
     public void setCounterTable(final GameEntityCounterTable table) {

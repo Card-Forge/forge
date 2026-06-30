@@ -1,0 +1,10 @@
+Name:Bob, Reluctant HYDRA Agent
+ManaCost:1 B
+Types:Legendary Creature Human Coward Villain
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigChangeZone | TriggerDescription$ Whenever NICKNAME attacks alone, return him to his owner's hand. If you do, each opponent loses 2 life and you gain 2 life.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever Bob attacks alone, return him to his owner's hand. If you do, each opponent loses 2 life and you gain 2 life.

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Aangjani_-_Azorius_Tempo_(Standard,_#2923704).dck
+Deck Type=constructed
+
+[Main]
+4 Aang, Swift Savior
+4 Aven Interrupter
+4 Floodpits Drowner
+4 Skycoach Conductor
+4 Voice of Victory
+3 Quantum Riddler
+1 Beza, the Bounding Spring
+2 Get Lost
+2 Spell Snare
+2 Avatar's Wrath
+4 High Noon
+1 Airbender Ascension
+4 Floodfarm Verge
+4 Hallowed Fountain
+4 Island
+4 Plains
+4 Starting Town
+2 Abandoned Air Temple
+2 Multiversal Passage
+1 Restless Anchorage
+[Sideboard]
+2 Annul
+2 Disdainful Stroke
+2 Flashfreeze
+2 Ghost Vacuum
+2 Seam Rip
+1 Beza, the Bounding Spring
+1 Petrified Hamlet
+1 Pyrrhic Strike
+1 Quantum Riddler
+1 Spectacular Tactics
