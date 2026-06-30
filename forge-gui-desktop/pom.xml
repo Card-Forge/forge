@@ -18,6 +18,8 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
         <mandatory.java.args>-Xmx4096m -Dio.netty.tryReflectionSetAccessible=true -Dfile.encoding=UTF-8</mandatory.java.args>
+        <!-- Default: skip TCP network integration suite; use -Prun-network-integration-tests to include it -->
+        <forge.surefire.networkIT.exclude>**/NetworkPlayIntegrationTest.java</forge.surefire.networkIT.exclude>
         <addopen.java.args>--add-opens java.desktop/java.beans=ALL-UNNAMED --add-opens java.desktop/javax.swing.border=ALL-UNNAMED --add-opens java.desktop/javax.swing.event=ALL-UNNAMED --add-opens java.desktop/sun.swing=ALL-UNNAMED --add-opens java.desktop/java.awt.image=ALL-UNNAMED --add-opens java.desktop/java.awt.color=ALL-UNNAMED --add-opens java.desktop/sun.awt.image=ALL-UNNAMED --add-opens java.desktop/javax.swing=ALL-UNNAMED --add-opens java.desktop/java.awt=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED</addopen.java.args>
     </properties>
 
@@ -67,6 +69,15 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>${forge.surefire.networkIT.exclude}</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
@@ -731,6 +742,13 @@ try {
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>run-network-integration-tests</id>
+            <properties>
+                <!-- Surefire exclude pattern that matches no test class, so NetworkPlayIntegrationTest runs -->
+                <forge.surefire.networkIT.exclude>**/ZZZNonExistentNetworkITPlaceholder.java</forge.surefire.networkIT.exclude>
+            </properties>
         </profile>
     </profiles>
 
