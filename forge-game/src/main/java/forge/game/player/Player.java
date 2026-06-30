@@ -1365,7 +1365,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         return result;
     }
-    public final CardCollectionView getCardsIn(final ZoneType[] zones) {
+    public final CardCollectionView getCardsIn(final ZoneType... zones) {
         final CardCollection result = new CardCollection();
         for (final ZoneType z : zones) {
             result.addAll(getCardsIn(z));
