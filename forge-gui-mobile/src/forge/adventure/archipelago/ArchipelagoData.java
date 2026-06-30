@@ -81,7 +81,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     // This must be updated to reset any sets/maps/variables otherwise things persist between loads of different save files!
     public void setupFreshSaveFile(ArchipelagoMode archipelagoMode) {
-        GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
+        GameHUD.getInstance().setApButtonVisibility(/*archipelagoMode == ArchipelagoMode.networked_archipelago*/false); // Todo: Revert to the commented block once the screen is implemented
         cardsUnlockedByName.clear();
         this.addCardUnlockedByName("Plains");
         this.addCardUnlockedByName("Forest");
@@ -351,37 +351,37 @@ public class ArchipelagoData implements SaveFileContent {
                 colorlessCompletedTownInnEvents.merge(townName, 1L, Long::sum);
                 String notificationMessage = String.format("%sRandomizer:{RESET}\nInn Event Completed: " + townName + " - " + colorlessCompletedTownInnEvents.get(townName), ArchipelagoColors.Plum);
                 System.out.println(notificationMessage);
-                updatePlayerChecks(ArchipelagoCheckTypes.COLORLESS_TOWN_QUESTS, notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.COLORLESS_TOWN_EVENTS, notificationMessage);
             }
             case "white" -> {
                 whiteCompletedTownInnEvents.merge(townName, 1L, Long::sum);
                 String notificationMessage = String.format("%sRandomizer:{RESET}\nInn Event Completed: " + townName + " - " + whiteCompletedTownInnEvents.get(townName), ArchipelagoColors.Plum);
                 System.out.println(notificationMessage);
-                updatePlayerChecks(ArchipelagoCheckTypes.WHITE_TOWN_QUESTS,  notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.WHITE_TOWN_EVENTS,  notificationMessage);
             }
             case "blue" -> {
                 blueCompletedTownInnEvents.merge(townName, 1L, Long::sum);
                 String notificationMessage = String.format("%sRandomizer:{RESET}\nInn Event Completed: " + townName + " - " + blueCompletedTownInnEvents.get(townName), ArchipelagoColors.Plum);
                 System.out.println(notificationMessage);
-                updatePlayerChecks(ArchipelagoCheckTypes.BLUE_TOWN_QUESTS, notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.BLUE_TOWN_EVENTS, notificationMessage);
             }
             case "black" -> {
                 blackCompletedTownInnEvents.merge(townName, 1L, Long::sum);
                 String notificationMessage = String.format("%sRandomizer:{RESET}\nInn Event Completed: " + townName + " - " + blackCompletedTownInnEvents.get(townName), ArchipelagoColors.Plum);
                 System.out.println(notificationMessage);
-                updatePlayerChecks(ArchipelagoCheckTypes.BLACK_TOWN_QUESTS, notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.BLACK_TOWN_EVENTS, notificationMessage);
             }
             case "red" -> {
                 redCompletedTownInnEvents.merge(townName, 1L, Long::sum);
                 String notificationMessage = String.format("%sRandomizer:{RESET}\nInn Event Completed: " + townName + " - " + redCompletedTownInnEvents.get(townName), ArchipelagoColors.Plum);
                 System.out.println(notificationMessage);
-                updatePlayerChecks(ArchipelagoCheckTypes.RED_TOWN_QUESTS,  notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.RED_TOWN_EVENTS,  notificationMessage);
             }
             case "green" -> {
                 greenCompletedTownInnEvents.merge(townName, 1L, Long::sum);
                 String notificationMessage = String.format("%sRandomizer:{RESET}\nInn Event Completed: " + townName + " - " + greenCompletedTownInnEvents.get(townName), ArchipelagoColors.Plum);
                 System.out.println(notificationMessage);
-                updatePlayerChecks(ArchipelagoCheckTypes.GREEN_TOWN_QUESTS, notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.GREEN_TOWN_EVENTS, notificationMessage);
             }
         }
     }
@@ -663,7 +663,7 @@ public class ArchipelagoData implements SaveFileContent {
         totalShardsEarned = data.containsKey("shards") ? data.readInt("shards") : 0;
         lastArchipelagoRewardIndex = data.containsKey("lastArchipelagoRewardIndex") ? data.readInt("lastArchipelagoRewardIndex") : 0;
         setTotalAmountOfSetUnlockChecks(data.containsKey("totalSetUnlockChecks") ? data.readInt("totalSetUnlockChecks") : 100);
-        GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
+        GameHUD.getInstance().setApButtonVisibility(/*archipelagoMode == ArchipelagoMode.networked_archipelago*/false); // Todo: Revert to the commented block once the screen is implemented
         if (archipelagoMode == ArchipelagoMode.networked_archipelago && Archipelago.getInstance().isConnected()) {
             Archipelago.getInstance().disconnect();
         }

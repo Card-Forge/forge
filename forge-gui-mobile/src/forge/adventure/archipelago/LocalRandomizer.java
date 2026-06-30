@@ -122,9 +122,7 @@ public class LocalRandomizer {
 
     private void handleTownEventDone(Map<String, Long> completedTownEventsList, String notificationMessage) {
         int totalTownEventsDone = 0;
-        for (long count : completedTownEventsList.values()) {
-            totalTownEventsDone += (int) count;
-        }
+        totalTownEventsDone += (int) completedTownEventsList.values().stream().mapToLong(Long::longValue).sum();
         if (archipelagoDataInstance.archipelagoMode == ArchipelagoMode.solo_randomizer) {
             if (totalTownEventsDone > 0 && totalTownEventsDone % totalTownEventsBreakpoint == 0) {
                 generateRandomizedReward(notificationMessage);
@@ -134,9 +132,7 @@ public class LocalRandomizer {
 
     private void handleTownQuestDone(Map<String, Long> completedTownQuestsList, String notificationMessage) {
         int totalTownQuestsDone = 0;
-        for (long count : completedTownQuestsList.values()) {
-            totalTownQuestsDone += (int) count;
-        }
+        totalTownQuestsDone += (int) completedTownQuestsList.values().stream().mapToLong(Long::longValue).sum();
         if (archipelagoDataInstance.archipelagoMode == ArchipelagoMode.solo_randomizer) {
             if (totalTownQuestsDone > 0 && totalTownQuestsDone % totalTownQuestsBreakpoint == 0) {
                 generateRandomizedReward(notificationMessage);

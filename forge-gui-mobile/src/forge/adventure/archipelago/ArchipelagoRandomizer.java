@@ -94,63 +94,63 @@ public class ArchipelagoRandomizer {
                     }
                 }
                 case COLORLESS_TOWN_EVENTS -> {
-                    if (!archipelagoDataInstance.colorlessCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.colorlessCompletedTownInnEvents.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(10999L + archipelagoDataInstance.colorlessCompletedTownInnEvents.size());
+                    if (!archipelagoDataInstance.colorlessCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.colorlessCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(10999L + archipelagoDataInstance.colorlessCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case WHITE_TOWN_EVENTS -> {
-                    if (!archipelagoDataInstance.whiteCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.whiteCompletedTownInnEvents.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(20999L + archipelagoDataInstance.whiteCompletedTownInnEvents.size());
+                    if (!archipelagoDataInstance.whiteCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.whiteCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(20999L + archipelagoDataInstance.whiteCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case BLUE_TOWN_EVENTS -> {
-                    if (!archipelagoDataInstance.blueCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.blueCompletedTownInnEvents.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(30999L + archipelagoDataInstance.blueCompletedTownInnEvents.size());
+                    if (!archipelagoDataInstance.blueCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.blueCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(30999L + archipelagoDataInstance.blueCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case BLACK_TOWN_EVENTS -> {
-                    if (!archipelagoDataInstance.blackCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.blackCompletedTownInnEvents.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(40999L + archipelagoDataInstance.blackCompletedTownInnEvents.size());
+                    if (!archipelagoDataInstance.blackCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.blackCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(40999L + archipelagoDataInstance.blackCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case RED_TOWN_EVENTS -> {
-                    if (!archipelagoDataInstance.redCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.redCompletedTownInnEvents.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(50999L + archipelagoDataInstance.redCompletedTownInnEvents.size());
+                    if (!archipelagoDataInstance.redCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.redCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(50999L + archipelagoDataInstance.redCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case GREEN_TOWN_EVENTS -> {
-                    if (!archipelagoDataInstance.greenCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.greenCompletedTownInnEvents.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(60999L + archipelagoDataInstance.greenCompletedTownInnEvents.size());
+                    if (!archipelagoDataInstance.greenCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.greenCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(60999L + archipelagoDataInstance.greenCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case COLORLESS_TOWN_QUESTS -> {
-                    if (!archipelagoDataInstance.colorlessCompletedTownQuests.isEmpty() && archipelagoDataInstance.colorlessCompletedTownQuests.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(11999L + archipelagoDataInstance.colorlessCompletedTownQuests.size());
+                    if (!archipelagoDataInstance.colorlessCompletedTownQuests.isEmpty() && archipelagoDataInstance.colorlessCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(11999L + archipelagoDataInstance.colorlessCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case WHITE_TOWN_QUESTS -> {
-                    if (!archipelagoDataInstance.whiteCompletedTownQuests.isEmpty() && archipelagoDataInstance.whiteCompletedTownQuests.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(21999L + archipelagoDataInstance.whiteCompletedTownQuests.size());
+                    if (!archipelagoDataInstance.whiteCompletedTownQuests.isEmpty() && archipelagoDataInstance.whiteCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(21999L + archipelagoDataInstance.whiteCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case BLUE_TOWN_QUESTS -> {
-                    if (!archipelagoDataInstance.blueCompletedTownQuests.isEmpty() && archipelagoDataInstance.blueCompletedTownQuests.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(31999L + archipelagoDataInstance.blueCompletedTownQuests.size());
+                    if (!archipelagoDataInstance.blueCompletedTownQuests.isEmpty() && archipelagoDataInstance.blueCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(31999L + archipelagoDataInstance.blueCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case BLACK_TOWN_QUESTS -> {
-                    if (!archipelagoDataInstance.blackCompletedTownQuests.isEmpty() && archipelagoDataInstance.blackCompletedTownQuests.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(41999L + archipelagoDataInstance.blackCompletedTownQuests.size());
+                    if (!archipelagoDataInstance.blackCompletedTownQuests.isEmpty() && archipelagoDataInstance.blackCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(41999L + archipelagoDataInstance.blackCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case RED_TOWN_QUESTS -> {
-                    if (!archipelagoDataInstance.redCompletedTownQuests.isEmpty() && archipelagoDataInstance.redCompletedTownQuests.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(51999L + archipelagoDataInstance.redCompletedTownQuests.size());
+                    if (!archipelagoDataInstance.redCompletedTownQuests.isEmpty() && archipelagoDataInstance.redCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(51999L + archipelagoDataInstance.redCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case GREEN_TOWN_QUESTS -> {
-                    if (!archipelagoDataInstance.greenCompletedTownQuests.isEmpty() && archipelagoDataInstance.greenCompletedTownQuests.size() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(61999L + archipelagoDataInstance.greenCompletedTownQuests.size());
+                    if (!archipelagoDataInstance.greenCompletedTownQuests.isEmpty() && archipelagoDataInstance.greenCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
+                        Archipelago.getInstance().checkLocation(61999L + archipelagoDataInstance.greenCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case SLIME_MOTHER_DEFEATED -> Archipelago.getInstance().checkLocation(100L);
