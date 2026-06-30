@@ -61,7 +61,30 @@ public class ArchipelagoRandomizer {
         } else {
             switch (type) {
                 case TOTAL_CARDS_EARNED -> {
-                    // Todo: Signal the APWorld that the next card location is triggered
+                    for (Map.Entry<String, Long> entry : archipelagoDataInstance.cardsEarnedByRarity.entrySet()) {
+                        switch (entry.getKey()) {
+                            case "C" -> {
+                                if (entry.getValue() > 0 && entry.getValue() % slotData.CommonCardsPerLocation == 0 && entry.getValue() / slotData.CommonCardsPerLocation <= slotData.CommonCardLocations) {
+                                    Archipelago.getInstance().checkLocation(4999L + entry.getValue() / slotData.CommonCardsPerLocation);
+                                }
+                            }
+                            case "U" -> {
+                                if (entry.getValue() > 0 && entry.getValue() % slotData.UncommonCardsPerLocation == 0 && entry.getValue() / slotData.UncommonCardsPerLocation <= slotData.UncommonCardLocations) {
+                                    Archipelago.getInstance().checkLocation(5099L + entry.getValue() / slotData.UncommonCardsPerLocation);
+                                }
+                            }
+                            case "R" -> {
+                                if (entry.getValue() > 0 && entry.getValue() % slotData.RareCardsPerLocation == 0 && entry.getValue() / slotData.RareCardsPerLocation <= slotData.RareCardLocations) {
+                                    Archipelago.getInstance().checkLocation(5199L + entry.getValue() / slotData.RareCardsPerLocation);
+                                }
+                            }
+                            case "M" -> {
+                                if (entry.getValue() > 0 && entry.getValue() % slotData.MythicRareCardsPerLocation == 0 && entry.getValue() / slotData.MythicRareCardsPerLocation <= slotData.MythicRareCardLocations) {
+                                    Archipelago.getInstance().checkLocation(5299L + entry.getValue() / slotData.MythicRareCardsPerLocation);
+                                }
+                            }
+                        }
+                    }
                 }
                 case COLORLESS_BATTLE_WON -> {
                     if (archipelagoDataInstance.totalBattlesWonColorless > 0 && archipelagoDataInstance.totalBattlesWonColorless % slotData.FightsPerLocation == 0 && archipelagoDataInstance.totalBattlesWonColorless / slotData.FightsPerLocation <= slotData.FightLocations) {

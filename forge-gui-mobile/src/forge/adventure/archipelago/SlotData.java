@@ -21,6 +21,22 @@ public class SlotData implements Serializable {
     public int EventLocations;
     @SerializedName("include_miniboss_locations")
     public int IncludeMinibossLocations;
+    @SerializedName("common_card_locations")
+    public int CommonCardLocations;
+    @SerializedName("common_cards_per_location")
+    public int CommonCardsPerLocation;
+    @SerializedName("uncommon_card_locations")
+    public int UncommonCardLocations;
+    @SerializedName("uncommon_cards_per_location")
+    public int UncommonCardsPerLocation;
+    @SerializedName("rare_card_locations")
+    public int RareCardLocations;
+    @SerializedName("rare_cards_per_location")
+    public int RareCardsPerLocation;
+    @SerializedName("mythic_rare_card_locations")
+    public int MythicRareCardLocations;
+    @SerializedName("mythic_rare_cards_per_location")
+    public int MythicRareCardsPerLocation;
     @SerializedName("include_power")
     public int IncludePower;
     @SerializedName("include_cheat")
