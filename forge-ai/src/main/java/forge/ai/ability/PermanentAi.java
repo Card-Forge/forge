@@ -199,15 +199,10 @@ public class PermanentAi extends SpellAbilityAi {
                 }
                 hasUpkeepCost = true;
                 upkeepCost.add(AbilityUtils.calculateUnlessCost(ab, ab.getParam("UnlessCost"), true));
-            } else if (ApiType.LoseLife.equals(ab.getApi()) && ab.hasParam("LifeAmount")) {
-                final Player oldActivator = ab.getActivatingPlayer();
+            } else if (ApiType.LoseLife.equals(ab.getApi()) && !ab.usesTargeting()) {
                 ab.setActivatingPlayer(ai);
-                try {
-                    if (AbilityUtils.getDefinedPlayers(source, ab.getParamOrDefault("Defined", "You"), ab).contains(ai)) {
-                        upkeepLifeLoss += AbilityUtils.calculateAmount(source, ab.getParam("LifeAmount"), ab);
-                    }
-                } finally {
-                    ab.setActivatingPlayer(oldActivator);
+                if (AbilityUtils.getDefinedPlayers(source, ab.getParam("Defined"), ab).contains(ai)) {
+                    upkeepLifeLoss += AbilityUtils.calculateAmount(source, ab.getParam("LifeAmount"), ab);
                 }
             }
         }

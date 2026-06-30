@@ -190,9 +190,8 @@ public class DamageDealAi extends DamageAiBase {
                     }
                     return new AiAbilityDecision(0, AiPlayDecision.StackNotEmpty);
                 }
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if ("NinThePainArtist".equals(logic)) {
             // Make sure not to mana lock ourselves + make the opponent draw cards into an immediate discard
             if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
