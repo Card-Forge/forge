@@ -1,7 +1,6 @@
 package forge.ai;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.IdentityHashMap;
@@ -233,7 +232,7 @@ public class ComputerUtilCard {
             // TODO - Improve ranking various non-basic lands depending on context
 
             // Urza's Mine/Tower/Power Plant
-            final CardCollectionView aiAvailable = nbLand.get(0).getController().getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Hand));
+            final CardCollectionView aiAvailable = nbLand.get(0).getController().getCardsIn(ZoneType.Battlefield, ZoneType.Hand);
             if (IterableUtil.any(list, CardPredicates.nameEquals("Urza's Mine"))) {
                 if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Mine")).isEmpty()) {
                     return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Mine")).getFirst();

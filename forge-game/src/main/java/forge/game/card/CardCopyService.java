@@ -296,10 +296,6 @@ public class CardCopyService {
         newCopy.setBasePower(copyFrom.getCurrentPower());
         newCopy.setBaseToughness(copyFrom.getCurrentToughness());
 
-        // printed P/T
-        newCopy.setBasePowerString(copyFrom.getCurrentState().getBasePowerString());
-        newCopy.setBaseToughnessString(copyFrom.getCurrentState().getBaseToughnessString());
-
         // extra copy PT boost
         newCopy.setPTBoost(copyFrom.getPTBoostTable());
 
