@@ -10,6 +10,7 @@ import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.*;
 
@@ -68,7 +69,7 @@ public class ArchipelagoData implements SaveFileContent {
     // List of unlockable checks
     // Todo: Fill list based on archipelago xml contents
     protected float setUnlockChecksRestAmount = 0;
-    protected int totalAmountOfSetUnlockChecks = 100; // This is set based on the value we receive in the APWorld
+    protected int totalAmountOfSetUnlockChecks = ArchipelagoUtil.TOTAL_AMOUNT_OF_SET_UNLOCK_CHECKS; // This is set based on the value we receive in the APWorld
     protected int receivedAmountOfSetUnlockChecks = 0;
 
     private ArchipelagoData() {
@@ -80,7 +81,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     // This must be updated to reset any sets/maps/variables otherwise things persist between loads of different save files!
     public void setupFreshSaveFile(ArchipelagoMode archipelagoMode) {
-        GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
+        GameHUD.getInstance().setApButtonVisibility(/*archipelagoMode == ArchipelagoMode.networked_archipelago*/false); // Todo: Revert to the commented block once the screen is implemented
         cardsUnlockedByName.clear();
         this.addCardUnlockedByName("Plains");
         this.addCardUnlockedByName("Forest");
@@ -124,6 +125,7 @@ public class ArchipelagoData implements SaveFileContent {
         lastTraversedRegion = "waste";
 
         setUnlockChecksRestAmount = 0f;
+        totalAmountOfSetUnlockChecks = ArchipelagoUtil.TOTAL_AMOUNT_OF_SET_UNLOCK_CHECKS;
         receivedAmountOfSetUnlockChecks = 0;
 
         this.archipelagoMode = archipelagoMode;
@@ -131,7 +133,7 @@ public class ArchipelagoData implements SaveFileContent {
         loadAllAvailableSets();
     }
 
-    private void updatePlayerChecks(ArchipelagoCheckTypes type) {
+    private void updatePlayerChecks(ArchipelagoCheckTypes type, @NonNull String notificationMessage) {
         if (archipelagoMode == ArchipelagoMode.disabled) return;
         boolean networkedAP = archipelagoMode == ArchipelagoMode.networked_archipelago;
         if (networkedAP) {
@@ -139,7 +141,7 @@ public class ArchipelagoData implements SaveFileContent {
             apRandomizer.updatePlayerChecks(type);
         } else {
             LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
-            localRandomizer.updatePlayerChecks(type);
+            localRandomizer.updatePlayerChecks(type, notificationMessage);
         }
     }
 
@@ -154,7 +156,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     public boolean isRegionUnlocked(String regionName) {
         if (archipelagoMode == ArchipelagoMode.disabled) return true;
-        if (!Arrays.asList(ArchipelagoUtil.regionNames).contains(regionName.toLowerCase())) return true;
+        if (!Arrays.asList(ArchipelagoUtil.REGION_NAMES).contains(regionName.toLowerCase())) return true;
         lastTraversedRegion = regionName;
         return !archipelagoDataInstance.lockedWorldRegionsByName.contains(lastTraversedRegion);
     }
@@ -207,24 +209,26 @@ public class ArchipelagoData implements SaveFileContent {
     }
 
     /// --- The checks below can be called from the networked part of the AP implementation. Note that `setLastArchipelagoRewardIndex` must be called manually. ---
-    private void unlockSetByName(String setToUnlock) {
+    private void unlockSetByName(String setToUnlock, String notificationMessage) {
         addSetUnlockedByCode(setToUnlock);
-        String setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD: " + setToUnlock;
+        String setUnlockedText = String.format("Set Unlock: %s%s{RESET}", ArchipelagoColors.Cyan, setToUnlock);
         // Some sets don't have booster packs such as full-art land sets (P23).
         var booster = StaticData.instance().getBoosters().get(setToUnlock);
         if (booster != null) {
             Current.player().addBooster(AdventureEventController.instance().generateBooster(setToUnlock));
-            setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD + BOOSTER DETECTED: " + setToUnlock;
-            System.out.println(setUnlockedText);
+            setUnlockedText += String.format(" + %s%s{RESET}", ArchipelagoColors.Green, "Matching Booster Pack");
         }
-        // Archipelago does not know what set will be unlocked, this randomized locally. Therefore, we always wanna show the player a notificatin.
-        if (archipelagoMode != ArchipelagoMode.disabled) {
-            generateGameNotification(setUnlockedText);
+        // Archipelago does not know what set will be unlocked, this is randomized locally. Therefore, we always wanna show the player a notification.
+        if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
+            generateGameNotification(String.format("%s%s{RESET}%s", ArchipelagoColors.Salmon, "Forge AP:\n", setUnlockedText));
+        } else if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            generateGameNotification(String.format("%s\n%s", notificationMessage, setUnlockedText));
         }
+        System.out.println(setUnlockedText);
     }
 
     // This produces a different result each time it's rolled, the RNG isn't seeded.
-    public void unlockRandomSet() {
+    public void unlockRandomSet(String notificationMessage) {
         // Subtract unlocked sets from full list.
         Set<String> lockedSets = new HashSet<>(allCardSets);
         lockedSets.removeAll(setsUnlockedByCode);
@@ -236,8 +240,8 @@ public class ArchipelagoData implements SaveFileContent {
 
         // If we already received all checks, unlock the entire list of locked sets
         if (receivedAmountOfSetUnlockChecks >= totalAmountOfSetUnlockChecks) {
-            for (String set : lockedSets) {
-                unlockSetByName(set);
+            for (String setToUnlock : lockedSets) {
+                unlockSetByName(setToUnlock, notificationMessage);
             }
         }
 
@@ -250,7 +254,7 @@ public class ArchipelagoData implements SaveFileContent {
 
         for (int i = 0; i < amountOfSetsToUnlockFloored; i++) {
             setToUnlock = lockedList.get(random.nextInt(lockedList.size()));
-            unlockSetByName(setToUnlock);
+            unlockSetByName(setToUnlock, notificationMessage);
             lockedSets.remove(setToUnlock);
             receivedAmountOfSetUnlockChecks++;
         }
@@ -269,64 +273,66 @@ public class ArchipelagoData implements SaveFileContent {
     // Returns `true` if the boss was not already defeated before.
     public boolean addMiniBossDefeated(String miniBossName) {
         boolean result = miniBossesDefeatedByName.add(miniBossName.toLowerCase());
+        String notificationMessage = String.format("%sRandomizer:{RESET}\nMiniboss Defeated: " + miniBossName, ArchipelagoColors.Plum);
+        System.out.println(notificationMessage);
         switch (miniBossName.toLowerCase()) {
-            case "the mother slime" -> updatePlayerChecks(ArchipelagoCheckTypes.SLIME_MOTHER_DEFEATED);
-            case "slobad" -> updatePlayerChecks(ArchipelagoCheckTypes.SLOBAD_DEFEATED);
-            case "xira" -> updatePlayerChecks(ArchipelagoCheckTypes.XIRA_DEFEATED);
-            case "nahiri" -> updatePlayerChecks(ArchipelagoCheckTypes.NAHIRI_DEFEATED);
-            case "valyx feaster of torment" -> updatePlayerChecks(ArchipelagoCheckTypes.VALYX_DEFEATED);
-            case "jace" -> updatePlayerChecks(ArchipelagoCheckTypes.JACE_DEFEATED);
-            case "kiora" -> updatePlayerChecks(ArchipelagoCheckTypes.KIORA_DEFEATED);
-            case "myr superion" -> updatePlayerChecks(ArchipelagoCheckTypes.MYR_SUPERION_DEFEATED);
-            case "sliver queen" -> updatePlayerChecks(ArchipelagoCheckTypes.SLIVER_QUEEN_DEFEATED);
-            case "teferi" -> updatePlayerChecks(ArchipelagoCheckTypes.TEFERI_DEFEATED);
-            case "grolnok" -> updatePlayerChecks(ArchipelagoCheckTypes.GROLNOK_DEFEATED);
-            case "guardian angel" -> updatePlayerChecks(ArchipelagoCheckTypes.GUARDIAN_ANGEL_DEFEATED);
-            case "liliana" -> updatePlayerChecks(ArchipelagoCheckTypes.LILIANA_DEFEATED);
-            case "slimefoot" -> updatePlayerChecks(ArchipelagoCheckTypes.SLIMEFOOT_DEFEATED);
-            case "sorin" -> updatePlayerChecks(ArchipelagoCheckTypes.SORIN_DEFEATED);
-            case "chandra" -> updatePlayerChecks(ArchipelagoCheckTypes.CHANDRA_DEFEATED);
-            case "tibalt's torturer" -> updatePlayerChecks(ArchipelagoCheckTypes.TIBALTS_TORTURER_DEFEATED);
-            case "tibalt" -> updatePlayerChecks(ArchipelagoCheckTypes.TIBALT_DEFEATED);
-            case "zedruu's cook" -> updatePlayerChecks(ArchipelagoCheckTypes.ZEDRUUS_COOK_DEFEATED);
-            case "conjurer" -> updatePlayerChecks(ArchipelagoCheckTypes.CONJURER_DEFEATED);
-            case "zedruu" -> updatePlayerChecks(ArchipelagoCheckTypes.ZEDRUU_DEFEATED);
-            case "garruk" -> updatePlayerChecks(ArchipelagoCheckTypes.GARRUK_DEFEATED);
-            case "the hydra of shandalaar" -> updatePlayerChecks(ArchipelagoCheckTypes.HYDRA_OF_SHANDALAAR_DEFEATED);
-            case "scarecrow captain" -> updatePlayerChecks(ArchipelagoCheckTypes.SCARECROW_CAPTAIN_DEFEATED);
+            case "the mother slime" -> updatePlayerChecks(ArchipelagoCheckTypes.SLIME_MOTHER_DEFEATED, notificationMessage);
+            case "slobad" -> updatePlayerChecks(ArchipelagoCheckTypes.SLOBAD_DEFEATED, notificationMessage);
+            case "xira" -> updatePlayerChecks(ArchipelagoCheckTypes.XIRA_DEFEATED, notificationMessage);
+            case "nahiri" -> updatePlayerChecks(ArchipelagoCheckTypes.NAHIRI_DEFEATED, notificationMessage);
+            case "valyx feaster of torment" -> updatePlayerChecks(ArchipelagoCheckTypes.VALYX_DEFEATED, notificationMessage);
+            case "jace" -> updatePlayerChecks(ArchipelagoCheckTypes.JACE_DEFEATED, notificationMessage);
+            case "kiora" -> updatePlayerChecks(ArchipelagoCheckTypes.KIORA_DEFEATED, notificationMessage);
+            case "myr superion" -> updatePlayerChecks(ArchipelagoCheckTypes.MYR_SUPERION_DEFEATED, notificationMessage);
+            case "sliver queen" -> updatePlayerChecks(ArchipelagoCheckTypes.SLIVER_QUEEN_DEFEATED, notificationMessage);
+            case "teferi" -> updatePlayerChecks(ArchipelagoCheckTypes.TEFERI_DEFEATED, notificationMessage);
+            case "grolnok" -> updatePlayerChecks(ArchipelagoCheckTypes.GROLNOK_DEFEATED, notificationMessage);
+            case "guardian angel" -> updatePlayerChecks(ArchipelagoCheckTypes.GUARDIAN_ANGEL_DEFEATED, notificationMessage);
+            case "liliana" -> updatePlayerChecks(ArchipelagoCheckTypes.LILIANA_DEFEATED, notificationMessage);
+            case "slimefoot" -> updatePlayerChecks(ArchipelagoCheckTypes.SLIMEFOOT_DEFEATED, notificationMessage);
+            case "sorin" -> updatePlayerChecks(ArchipelagoCheckTypes.SORIN_DEFEATED, notificationMessage);
+            case "chandra" -> updatePlayerChecks(ArchipelagoCheckTypes.CHANDRA_DEFEATED, notificationMessage);
+            case "tibalt's torturer" -> updatePlayerChecks(ArchipelagoCheckTypes.TIBALTS_TORTURER_DEFEATED, notificationMessage);
+            case "tibalt" -> updatePlayerChecks(ArchipelagoCheckTypes.TIBALT_DEFEATED, notificationMessage);
+            case "zedruu's cook" -> updatePlayerChecks(ArchipelagoCheckTypes.ZEDRUUS_COOK_DEFEATED, notificationMessage);
+            case "conjurer" -> updatePlayerChecks(ArchipelagoCheckTypes.CONJURER_DEFEATED, notificationMessage);
+            case "zedruu" -> updatePlayerChecks(ArchipelagoCheckTypes.ZEDRUU_DEFEATED, notificationMessage);
+            case "garruk" -> updatePlayerChecks(ArchipelagoCheckTypes.GARRUK_DEFEATED, notificationMessage);
+            case "the hydra of shandalaar" -> updatePlayerChecks(ArchipelagoCheckTypes.HYDRA_OF_SHANDALAAR_DEFEATED, notificationMessage);
+            case "scarecrow captain" -> updatePlayerChecks(ArchipelagoCheckTypes.SCARECROW_CAPTAIN_DEFEATED, notificationMessage);
         }
-        System.out.println("FORGE_ARCHIPELAGO: DETECTED MINIBOSS DEFEATED: " + miniBossName);
         return result;
     }
 
     public boolean addBossDefeated(String bossName) {
         boolean result = bossesDefeatedByName.add(bossName.toLowerCase());
+        String notificationMessage = String.format("%sRandomizer:{RESET}\nCastle Boss Defeated: " + bossName, ArchipelagoColors.Plum);
+        System.out.println(notificationMessage);
         switch (bossName.toLowerCase()) {
             case "akroma" -> {
-                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_WHITE_DEFEATED);
+                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_WHITE_DEFEATED, notificationMessage);
             }
             case "lorthos" -> {
-                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_BLUE_DEFEATED);
+                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_BLUE_DEFEATED, notificationMessage);
             }
             case "griselbrand" -> {
-                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_BLACK_DEFEATED);
+                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_BLACK_DEFEATED, notificationMessage);
             }
             case "lathliss" -> {
-                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_RED_DEFEATED);
+                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_RED_DEFEATED, notificationMessage);
             }
             case "ghalta" -> {
-                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_GREEN_DEFEATED);
+                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_GREEN_DEFEATED, notificationMessage);
             }
             case "emrakul" -> {
-                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_COLORLESS_DEFEATED);
+                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_COLORLESS_DEFEATED, notificationMessage);
             }
         }
         // Win condition is reached if all bosses have been defeated.
         if (bossesDefeatedByName.containsAll(mainBosses)) {
-            updatePlayerChecks(ArchipelagoCheckTypes.WIN_CONDITION_CLEARED);
+            updatePlayerChecks(ArchipelagoCheckTypes.WIN_CONDITION_CLEARED, notificationMessage);
         }
 
-        System.out.println("FORGE_ARCHIPELAGO: DETECTED CASTLE BOSS DEFEATED: " + bossName);
         return result;
     }
 
@@ -335,7 +341,6 @@ public class ArchipelagoData implements SaveFileContent {
     }
 
     public boolean addSetUnlockedByCode(String setCode) {
-        System.out.println("FORGE_ARCHIPELAGO: CARD SET REWARD: " + setCode);
         return setsUnlockedByCode.add(setCode);
     }
 
@@ -344,33 +349,39 @@ public class ArchipelagoData implements SaveFileContent {
         switch (lastTraversedRegion) {
             case "waste" -> {
                 colorlessCompletedTownInnEvents.merge(townName, 1L, Long::sum);
-                System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + colorlessCompletedTownInnEvents.get(townName));
-                updatePlayerChecks(ArchipelagoCheckTypes.COLORLESS_TOWN_QUESTS);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nInn Event Completed: " + townName + " - " + colorlessCompletedTownInnEvents.get(townName), ArchipelagoColors.Plum);
+                System.out.println(notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.COLORLESS_TOWN_EVENTS, notificationMessage);
             }
             case "white" -> {
                 whiteCompletedTownInnEvents.merge(townName, 1L, Long::sum);
-                System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + whiteCompletedTownInnEvents.get(townName));
-                updatePlayerChecks(ArchipelagoCheckTypes.WHITE_TOWN_QUESTS);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nInn Event Completed: " + townName + " - " + whiteCompletedTownInnEvents.get(townName), ArchipelagoColors.Plum);
+                System.out.println(notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.WHITE_TOWN_EVENTS,  notificationMessage);
             }
             case "blue" -> {
                 blueCompletedTownInnEvents.merge(townName, 1L, Long::sum);
-                System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + blueCompletedTownInnEvents.get(townName));
-                updatePlayerChecks(ArchipelagoCheckTypes.BLUE_TOWN_QUESTS);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nInn Event Completed: " + townName + " - " + blueCompletedTownInnEvents.get(townName), ArchipelagoColors.Plum);
+                System.out.println(notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.BLUE_TOWN_EVENTS, notificationMessage);
             }
             case "black" -> {
                 blackCompletedTownInnEvents.merge(townName, 1L, Long::sum);
-                System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + blackCompletedTownInnEvents.get(townName));
-                updatePlayerChecks(ArchipelagoCheckTypes.BLACK_TOWN_QUESTS);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nInn Event Completed: " + townName + " - " + blackCompletedTownInnEvents.get(townName), ArchipelagoColors.Plum);
+                System.out.println(notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.BLACK_TOWN_EVENTS, notificationMessage);
             }
             case "red" -> {
                 redCompletedTownInnEvents.merge(townName, 1L, Long::sum);
-                System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + redCompletedTownInnEvents.get(townName));
-                updatePlayerChecks(ArchipelagoCheckTypes.RED_TOWN_QUESTS);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nInn Event Completed: " + townName + " - " + redCompletedTownInnEvents.get(townName), ArchipelagoColors.Plum);
+                System.out.println(notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.RED_TOWN_EVENTS,  notificationMessage);
             }
             case "green" -> {
                 greenCompletedTownInnEvents.merge(townName, 1L, Long::sum);
-                System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + greenCompletedTownInnEvents.get(townName));
-                updatePlayerChecks(ArchipelagoCheckTypes.GREEN_TOWN_QUESTS);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nInn Event Completed: " + townName + " - " + greenCompletedTownInnEvents.get(townName), ArchipelagoColors.Plum);
+                System.out.println(notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.GREEN_TOWN_EVENTS, notificationMessage);
             }
         }
     }
@@ -381,54 +392,58 @@ public class ArchipelagoData implements SaveFileContent {
         switch (lastTraversedRegion) {
             case "waste" -> {
                 colorlessCompletedTownQuests.merge(townName, 1L, Long::sum);
-                System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + colorlessCompletedTownQuests.get(townName));
-                updatePlayerChecks(ArchipelagoCheckTypes.COLORLESS_TOWN_QUESTS);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nQuest Completed: " + townName + " - " + colorlessCompletedTownQuests.get(townName), ArchipelagoColors.Plum);
+                System.out.println(notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.COLORLESS_TOWN_QUESTS, notificationMessage);
             }
             case "white" -> {
                 whiteCompletedTownQuests.merge(townName, 1L, Long::sum);
-                System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + whiteCompletedTownQuests.get(townName));
-                updatePlayerChecks(ArchipelagoCheckTypes.WHITE_TOWN_QUESTS);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nQuest Completed: " + townName + " - " + whiteCompletedTownQuests.get(townName),  ArchipelagoColors.Plum);
+                System.out.println(notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.WHITE_TOWN_QUESTS, notificationMessage);
             }
             case "blue" -> {
                 blueCompletedTownQuests.merge(townName, 1L, Long::sum);
-                System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + blueCompletedTownQuests.get(townName));
-                updatePlayerChecks(ArchipelagoCheckTypes.BLUE_TOWN_QUESTS);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nQuest Completed: " + townName + " - " + blueCompletedTownQuests.get(townName), ArchipelagoColors.Plum);
+                System.out.println(notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.BLUE_TOWN_QUESTS, notificationMessage);
             }
             case "black" -> {
                 blackCompletedTownQuests.merge(townName, 1L, Long::sum);
-                System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + blackCompletedTownQuests.get(townName));
-                updatePlayerChecks(ArchipelagoCheckTypes.BLACK_TOWN_QUESTS);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nQuest Completed: " + townName + " - " + blackCompletedTownQuests.get(townName), ArchipelagoColors.Plum);
+                System.out.println(notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.BLACK_TOWN_QUESTS, notificationMessage);
             }
             case "red" -> {
                 redCompletedTownQuests.merge(townName, 1L, Long::sum);
-                System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + redCompletedTownQuests.get(townName));
-                updatePlayerChecks(ArchipelagoCheckTypes.RED_TOWN_QUESTS);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nQuest Completed: " + townName + " - " + redCompletedTownQuests.get(townName), ArchipelagoColors.Plum);
+                System.out.println(notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.RED_TOWN_QUESTS, notificationMessage);
             }
             case "green" -> {
                 greenCompletedTownQuests.merge(townName, 1L, Long::sum);
-                System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + greenCompletedTownQuests.get(townName));
-                updatePlayerChecks(ArchipelagoCheckTypes.GREEN_TOWN_QUESTS);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nQuest Completed: " + townName + " - " + greenCompletedTownQuests.get(townName), ArchipelagoColors.Plum);
+                System.out.println(notificationMessage);
+                updatePlayerChecks(ArchipelagoCheckTypes.GREEN_TOWN_QUESTS, notificationMessage);
             }
         }
     }
 
     public void addCardByRarity(String rarity) {
         cardsEarnedByRarity.merge(rarity, 1L, Long::sum);
-        // Todo: This method will be called a lot when we receive a large batch of cards, make sure this doesn't cause too much slowdown.
-        updatePlayerChecks(ArchipelagoCheckTypes.TOTAL_CARDS_EARNED);
+        updatePlayerChecks(ArchipelagoCheckTypes.TOTAL_CARDS_EARNED, String.format("%sRandomizer:{RESET}\nCards of Rarity: " + rarity + " - " + cardsEarnedByRarity.get(rarity), ArchipelagoColors.Plum));
     }
 
     public void addGold(int amount) {
         totalGoldEarned += amount;
-        System.out.println("FORGE_ARCHIPELAGO: GOLD REWARD DETECTED: " + amount);
     }
 
     private void addUnlockedRegionByName(String regionName) {
         lockedWorldRegionsByName.remove(regionName);
+        System.out.println("Randomizer:\n Region Unlocked: " + regionName);
     }
 
     // Due to MapDialog.SetEffects() using just a name string to add items to the player's inventory, it's likely that the name is unique.
-    // Todo: Verify that item names are unique.
     public void addItem(String itemName) {
         if (regionTeleportingRunes.contains(itemName.toLowerCase())) {
             // Unlock the region based on the color found in the itemName
@@ -443,57 +458,55 @@ public class ArchipelagoData implements SaveFileContent {
             } else if (itemName.toLowerCase().contains("green")) {
                 addUnlockedRegionByName("green");
             }
-            String regionUnlockMessage = "FORGE_ARCHIPELAGO: REGION REWARD DETECTED: " + itemName;
-            System.out.println(regionUnlockMessage);
-            // Only show added items when solo randomizer is enabled. otherwise Archipelago will already show a pop-up
-            if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
-                generateGameNotification(regionUnlockMessage);
-            }
         }
         itemsGainedByName.merge(itemName, 1L, Long::sum);
-        System.out.println("FORGE_ARCHIPELAGO: ITEM REWARD DETECTED: " + itemName);
     }
 
+    // This function only tracks how many packs the player has earned of each type.
+    // There are no checks that depend on this at the moment.
     public void addPack(String boosterPackName) {
         packsEarnedBySet.merge(boosterPackName, 1L, Long::sum);
-        System.out.println("FORGE_ARCHIPELAGO: CARD PACK REWARD DETECTED: +" + boosterPackName);
     }
 
     public void addMaxLife(int amount) {
         totalExtraMaxLifeEarned += amount;
-        System.out.println("FORGE_ARCHIPELAGO: MAX LIFE REWARD DETECTED: +" + amount);
     }
 
     public void addShards(int amount) {
         totalShardsEarned += amount;
-        System.out.println("FORGE_ARCHIPELAGO: SHARD REWARD DETECTED: +" + amount);
     }
 
     public void addTotalBattlesWon(int amount) {
         switch (lastTraversedRegion) {
             case "waste" -> {
                 totalBattlesWonColorless += amount;
-                updatePlayerChecks(ArchipelagoCheckTypes.COLORLESS_BATTLE_WON);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nWastes Region Battles Won: " + totalBattlesWonColorless, ArchipelagoColors.Plum);
+                updatePlayerChecks(ArchipelagoCheckTypes.COLORLESS_BATTLE_WON, notificationMessage);
             }
             case "white" -> {
                 totalBattlesWonWhite += amount;
-                updatePlayerChecks(ArchipelagoCheckTypes.WHITE_BATTLE_WON);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nWhite Region Battles Won: " + totalBattlesWonWhite, ArchipelagoColors.Plum);
+                updatePlayerChecks(ArchipelagoCheckTypes.WHITE_BATTLE_WON, notificationMessage);
             }
             case "blue" -> {
                 totalBattlesWonBlue += amount;
-                updatePlayerChecks(ArchipelagoCheckTypes.BLUE_BATTLE_WON);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nBlue Region Battles Won: " + totalBattlesWonBlue, ArchipelagoColors.Plum);
+                updatePlayerChecks(ArchipelagoCheckTypes.BLUE_BATTLE_WON, notificationMessage);
             }
             case "black" -> {
                 totalBattlesWonBlack += amount;
-                updatePlayerChecks(ArchipelagoCheckTypes.BLACK_BATTLE_WON);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nBlack Region Battles Won: " + totalBattlesWonBlack, ArchipelagoColors.Plum);
+                updatePlayerChecks(ArchipelagoCheckTypes.BLACK_BATTLE_WON, notificationMessage);
             }
             case "red" -> {
                 totalBattlesWonRed += amount;
-                updatePlayerChecks(ArchipelagoCheckTypes.RED_BATTLE_WON);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nRed Region Battles Won: " + totalBattlesWonRed, ArchipelagoColors.Plum);
+                updatePlayerChecks(ArchipelagoCheckTypes.RED_BATTLE_WON, notificationMessage);
             }
             case "green" -> {
                 totalBattlesWonGreen += amount;
-                updatePlayerChecks(ArchipelagoCheckTypes.GREEN_BATTLE_WON);
+                String notificationMessage = String.format("%sRandomizer:{RESET}\nGreen Region Battles Won: " + totalBattlesWonGreen, ArchipelagoColors.Plum);
+                updatePlayerChecks(ArchipelagoCheckTypes.GREEN_BATTLE_WON, notificationMessage);
             }
         }
     }
@@ -613,6 +626,7 @@ public class ArchipelagoData implements SaveFileContent {
             loadStringSet(data, "redItemShop", localRandomizer.redItemShopList);
             loadStringSet(data, "greenItemShop", localRandomizer.greenItemShopList);
             loadStringSet(data, "remainingEquipment", localRandomizer.remainingEquipmentPool);
+            if (data.containsKey("checksSinceLastRegionReward")) localRandomizer.checksSinceLastRegionReward = data.readInt("checksSinceLastRegionReward");
         }
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
             WorldData.resetShopLists();
@@ -649,7 +663,7 @@ public class ArchipelagoData implements SaveFileContent {
         totalShardsEarned = data.containsKey("shards") ? data.readInt("shards") : 0;
         lastArchipelagoRewardIndex = data.containsKey("lastArchipelagoRewardIndex") ? data.readInt("lastArchipelagoRewardIndex") : 0;
         setTotalAmountOfSetUnlockChecks(data.containsKey("totalSetUnlockChecks") ? data.readInt("totalSetUnlockChecks") : 100);
-        GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
+        GameHUD.getInstance().setApButtonVisibility(/*archipelagoMode == ArchipelagoMode.networked_archipelago*/false); // Todo: Revert to the commented block once the screen is implemented
         if (archipelagoMode == ArchipelagoMode.networked_archipelago && Archipelago.getInstance().isConnected()) {
             Archipelago.getInstance().disconnect();
         }
@@ -695,6 +709,7 @@ public class ArchipelagoData implements SaveFileContent {
             saveStringSet(data, "redItemShop", localRandomizer.redItemShopList);
             saveStringSet(data, "greenItemShop", localRandomizer.greenItemShopList);
             saveStringSet(data, "remainingEquipment", localRandomizer.remainingEquipmentPool);
+            data.store("checksSinceLastRegionReward", localRandomizer.checksSinceLastRegionReward);
         }
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
             saveItemDataSet(data, "colorlessEquipmentShop", networkedRandomizer.colorlessEquipmentShopList);

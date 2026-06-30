@@ -233,8 +233,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
     public void loadPOI(PointOfInterest poi) {
         try {
-            TileMapScene.instance().load(poi);
             stop();
+            TileMapScene.instance().load(poi);
             TileMapScene.instance().setFromWorldMap(true);
             Forge.switchScene(TileMapScene.instance());
         } catch (Exception e) {
@@ -269,7 +269,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
 
         World world = WorldSave.getCurrentSave().getWorld();
-        int currentBiome = World.highestBiome(world.getBiome((int) player.getX() / world.getTileSize(), (int) player.getY() / world.getTileSize()));
+        int currentBiome = World.highestBiome(world.getBiome((int) ((player.getX() + player.getWidth() / 2f) / world.getTileSize()), (int) ((player.getY() + player.getHeight() / 2f) / world.getTileSize())));
         List<BiomeData> biomeData = WorldSave.getCurrentSave().getWorld().getData().GetBiomes();
         float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2 : 1;
         if (biomeData.size() <= currentBiome) {// "if isOnRoad
