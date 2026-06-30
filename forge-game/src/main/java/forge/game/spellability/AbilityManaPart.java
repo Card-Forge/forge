@@ -419,23 +419,35 @@ public class AbilityManaPart implements java.io.Serializable {
                 return true;
             }
 
-            // "can't" zone restriction – shouldn't be mixed with other restrictions
-            if (restriction.startsWith("CantCastSpellFrom")) {
+            
+            if (restriction.startsWith("CantCast ")) {
                 if (!sa.isSpell()) {
                     return true;
                 }
-                final ZoneType badZone = ZoneType.smartValueOf(restriction.substring(17));
-                final Card host = sa.getHostCard();
-                final Zone castFrom = host.getCastFrom();
-                //ComputerUtilMana looks at this to see if AI can cast things, so need a fallback zone
-                final ZoneType zone = castFrom == null ? host.getZone().getZoneType() : castFrom.getZoneType();
-                if (!badZone.equals(zone)) {
-                    return true;
-                }
-            }
 
-            if (restriction.equals("CantCastNonArtifactSpells")) {
-                return !sa.isSpell() || sa.getHostCard().isArtifact();
+                 final String subRestriction = restriction.substring(9);
+
+                // "can't" zone restriction
+                if (subRestriction.startsWith("From")) {
+                    final ZoneType badZone = ZoneType.smartValueOf(subRestriction.substring(4));
+                    final Card host = sa.getHostCard();
+                    final Zone castFrom = host.getCastFrom();
+                    //ComputerUtilMana looks at this to see if AI can cast things, so need a fallback zone
+                    final ZoneType zone = castFrom == null ? host.getZone().getZoneType() : castFrom.getZoneType();
+                    if (!badZone.equals(zone)) {
+                        return true;
+                    }
+
+                    continue;
+                }
+
+                // If the spell matches the restriction filter (e.g. "Spell.!Artifact"), 
+                // then it is explicitly forbidden from using this mana.
+                if (sa.isValid(subRestriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
+                    return false;
+                }
+
+                continue;
             }
 
             // TODO refactor to differ between ForCost and ForEffect

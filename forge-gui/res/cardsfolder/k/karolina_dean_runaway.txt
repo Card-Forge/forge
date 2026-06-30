@@ -4,5 +4,5 @@ Types:Legendary Creature Alien Hero
 PT:3/3
 K:Flying
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of your first main phase, add {W}{U}{B}{R}{G}. You can't spend this mana to cast spells from your hand.
-SVar:TrigMana:DB$ Mana | Produced$ W U B R G | RestrictValid$ CantCastSpellFromHand
+SVar:TrigMana:DB$ Mana | Produced$ W U B R G | RestrictValid$ CantCast FromHand
 Oracle:Flying\nAt the beginning of your first main phase, add {W}{U}{B}{R}{G}. You can't spend this mana to cast spells from your hand.
