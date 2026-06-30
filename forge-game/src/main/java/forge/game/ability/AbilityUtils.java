@@ -2843,7 +2843,7 @@ public class AbilityUtils {
             final String rest = l[0].substring(22);
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), rest, player, c, ctb);
             for (final Card card : list) {
-                kinds.addAll(card.getCounters().keySet());
+                kinds.addAll(card.getCounters().elementSet());
             }
             return doXMath(kinds.size(), expr, c, ctb);
         }
@@ -3518,7 +3518,7 @@ public class AbilityUtils {
         if (value.contains("Counters")) {
             int count = 0;
             if (sq[1].equals("ALL")) {
-                count = Aggregates.sum(player.getCounters().values());
+                count = player.getNumAllCounters();
             } else {
                 count = player.getCounters(CounterType.getType(sq[1]));
             }

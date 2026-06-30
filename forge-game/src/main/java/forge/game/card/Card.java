@@ -1923,13 +1923,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
-    public final void setCounters(final Map<CounterType, Integer> allCounters) {
-        boolean changed = counters.containsKey(CounterEnumType.MANABOND) || counters.keySet().stream().allMatch(CounterType::isKeywordCounter);
+    public final void setCounters(final Multiset<CounterType> allCounters) {
+        boolean changed = counters.contains(CounterEnumType.MANABOND) || counters.elementSet().stream().allMatch(CounterType::isKeywordCounter);
         counters = allCounters;
         view.updateCounters(this);
 
         if (!isLKI()) {
-            for (CounterType ct : counters.keySet()) {
+            for (CounterType ct : counters.elementSet()) {
                 if (createCounterStatic(ct)) {
                     changed = true;
                 }
@@ -1943,7 +1943,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     public final void clearCounters() {
         if (counters.isEmpty()) { return; }
-        boolean changed = counters.containsKey(CounterEnumType.MANABOND) || counters.keySet().stream().allMatch(CounterType::isKeywordCounter);
+        boolean changed = counters.contains(CounterEnumType.MANABOND) || counters.elementSet().stream().allMatch(CounterType::isKeywordCounter);
 
         counters.clear();
         view.updateCounters(this);
@@ -1953,24 +1953,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public final int sumAllCounters() {
-        int count = 0;
-        for (final Integer value2 : counters.values()) {
-            count += value2;
-        }
-        return count;
-    }
-
-    public final void putEtbCounters(Map<Optional<Player>, Map<CounterType, Integer>> etbCounters) {
+    public final void putEtbCounters(Map<Optional<Player>, Multiset<CounterType>> etbCounters) {
         if (etbCounters == null) {
             return;
         }
         // used for LKI
-        for (Map<CounterType, Integer> m : etbCounters.values()) {
-            for (Map.Entry<CounterType, Integer> e : m.entrySet()) {
-                CounterType ct = e.getKey();
+        for (Multiset<CounterType> m : etbCounters.values()) {
+            for (Multiset.Entry<CounterType> e : m.entrySet()) {
+                CounterType ct = e.getElement();
                 if (canReceiveCounters(ct)) {
-                    setCounters(ct, getCounters(ct) + e.getValue());
+                    setCounters(ct, getCounters(ct) + e.getCount());
                 }
             }
         }

@@ -187,7 +187,7 @@ public class CountersPutAi extends CountersAi {
                     aiCreat = CardLists.filter(aiCreat, CardPredicates.hasCounters());
 
                     aiCreat = CardLists.filter(aiCreat, input -> {
-                        for (CounterType counterType : input.getCounters().keySet()) {
+                        for (CounterType counterType : input.getCounters().elementSet()) {
                             if (!ComputerUtil.isNegativeCounter(counterType, input)
                                     && input.canReceiveCounters(counterType)) {
                                 return true;

@@ -947,13 +947,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Override
-    public void setCounters(Map<CounterType, Integer> allCounters) {
+    public void setCounters(Multiset<CounterType> allCounters) {
         counters = allCounters;
         view.updateCounters(this);
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
 
         // create Radiation Effect for GameState
-        if (counters.getOrDefault(CounterEnumType.RAD, 0) > 0) {
+        if (counters.count(CounterEnumType.RAD) > 0) {
             this.createRadiationEffect(null);
         } else {
             this.removeRadiationEffect();

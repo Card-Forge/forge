@@ -25,6 +25,7 @@ import forge.game.phase.PhaseType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 
 import forge.game.CardTraitBase;
@@ -86,7 +87,7 @@ public class ReplacementHandler {
 
             // need to apply Counters to check its future state on the battlefield
             @SuppressWarnings("unchecked")
-            Map<Optional<Player>, Map<CounterType, Integer>> etbCounters = (Map<Optional<Player>, Map<CounterType, Integer>>) runParams.get(AbilityKey.CounterMap);
+            Map<Optional<Player>, Multiset<CounterType>> etbCounters = (Map<Optional<Player>, Multiset<CounterType>>) runParams.get(AbilityKey.CounterMap);
             affectedLKI.putEtbCounters(etbCounters);
             preList.add(affectedLKI);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(), preList);
