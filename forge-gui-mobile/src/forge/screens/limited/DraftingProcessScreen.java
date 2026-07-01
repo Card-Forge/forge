@@ -38,6 +38,11 @@ public class DraftingProcessScreen extends FDeckEditor {
             draft.setLogEntry(this.draftLog);
             deckHeader.initDraftLog(this.draftLog, this);
         }
+        deckHeader.initCogworkButton(() -> {
+            draft.getHumanPlayer().cogworkLibrarianActivatedByUI = true;
+            deckHeader.btnCogwork.setVisible(false);
+            deckHeader.revalidate();
+        });
     }
 
     @Override
