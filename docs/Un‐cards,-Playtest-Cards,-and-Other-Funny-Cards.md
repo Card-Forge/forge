@@ -257,6 +257,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Stone Drake
 1. (P) Indicate
 1. (P) (Uk) Anax and Cymede & Kynaios and Tiro
+1. (P) Call from the Grave
 1. Cardboard Carapace - Counts copies in the sideboard. Not exactly as written but very little room for improvement. Adventure+Quest Inventories?
 1. Shoe Tree - Can't use actual shoes for counters sadly.
 1. "Ach! Hans, Run!" - Just have to name the card.
@@ -381,13 +382,13 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 ### Tier 0.5: Done*
 
 1. Ass Whuppin - Implemented as "Destroy target silver bordered permanent," leaving off the Acorn errata and the ability to target other games.
-1. Spatula of the Ages - Implemented to look for silver border, but has since been errata'd to include acorn cards. (See also: "Un-Cards", Tier 2.)
-1. Border Guardian - Borders are only tracked on an edition level. Silver-bordered SLD cards and borderless prints won't behave correctly. (See also: "Border Color Matters", Tier 3)
+1. Spatula of the Ages - Implemented to look for silver border, but has since been errata'd to include acorn cards. (See also: Un-Cards, tier 2.)
+1. Border Guardian - Borders are only tracked on an edition level. Silver-bordered SLD cards and borderless prints won't behave correctly. (See also: Border Color Matters, tier 3)
 1. (P) Planequake - "Uncovered Cavern" plot booster still doesn't exist.
 1. Sword of Dungeons & Dragons - Dragon token is colorless, not gold. See "NonWUBRG Colors" in Tier 5.
 1. (HTR) Mountain Mover - Cards stored "Underneath" Mountain Mover are put into exile instead.
 1. 1996 World Champion - Activated ability in library is implemented as an emblem created at the start of the game.
-1. (HTR) War of the Spark - "from War of the Spark" is currently implemented with City in a Bottle logic, which reportedly could use some revision. Unclear if card is meant to look at exact printing or original printing. (See also: "Set Matters", Tier 2)
+1. (HTR) War of the Spark - "from War of the Spark" is currently implemented with City in a Bottle logic, which reportedly could use some revision. Unclear if card is meant to look at exact printing or original printing. (See also: Set Matters, tier 2)
 1. (Uk) The Battle of Dragon Brothers // Fate Reforged - Notes choices by card name similar to a draft choice.
 1. (P) Bolshack Dragon - Using the relevant HTML tags, strikethrough does work for the Card Detail. However it doesn't display properly on the generated card image, showing the tags verbatim with no line over text (as of 2025-05-27). Thus, the relevant bits of text were removed pending suitable game engine changes. The Armored type wasn't added to TypesList.txt on the convenient assumption that an editorial lapse prevented it from being printed struck through.
 1. (P) Liliana's Other Contract // Liliana's Undead Minion - The back face is assumed, lacking any other information, to be colorless. May need some hack to display the front face image as the back face when it transforms.
@@ -440,12 +441,9 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Priority Avenger
 1. (P) Innocuous Insect
 1. (P) Truth or Dare
-1. (P) Buried Ogre
 1. (P) A Good Thing
-1. (P) Barry's Land
 1. Gifts Given
 1. Svega, the Unconventional
-1. (P) Call from the Grave
 1. (P) Chatzuk, Mighty Guitarist
 1. (P) Fludge, Gunk Guardian
 1. (P) Hish of the Snake Cult
@@ -504,7 +502,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) First Stage of Magic Design
 1. (Uk) Mijo, the Bull
 1. (Uk) Reflective Gate
-1. (Uk) Mana Max, Afterburner
 1. (Uk) Catch-Up Mechanic
 1. (Uk) The Good Time Sleuth
 1. (Uk) Kibo's Bananamobile
@@ -512,7 +509,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Would You Have Done the Same?
 1. (Uk) Davvol's Birthdaymobile
 1. (Uk) Tarkir Omenpath
-1. (Uk) Dialogue Tree
 1. (Uk) Save Point
 1. (Uk) Red and Black Legac
 1. (Uk) The Herald of Numot
@@ -533,9 +529,20 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Brave Falconhawk
 1. (Uk) Fear of Fear Itself
 1. (Uk) 17-Year Cicadas
+1. (Uk) A Chaotic Night in Vegas
+1. (Uk) The Bringer of the Red Beard
+1. (Uk) The Bird Champion
+1. (Uk) The Cookout Creator
+1. (Uk) The Ice Dancer
+1. (Uk) Crow Scarer
+1. (Uk) Wurmcoil Broodmother
+1. (Uk) The Five Stages of Grief
+1. (Uk) Rat of God
+1. (Uk) Drop Bear
 1. Jester's Sombrero - May be able to do this with RemoveFromMatch?
 1. Gallery of Legends - (Attraction) Similar to Killer Cosplay?
 1. (P) Gunk Slug - Similar to Time Sidewalk and Bone Rattler?
+1. (P) Buried Ogre - Optionally starts in graveyard. Likely do-able via `MayEffectFromOpeningDeck`?
 1. (P) Problematic Volcano - Similar to Raging River?
 1. (P) Patient Turtle - Player went first this game. Seen with Forsaken Crossroad.
 1. (P) Alberix, the Trade Planet - Resources seem mostly equivalent to "card exiled by CARDNAME", barring linked ability issues.
@@ -559,19 +566,47 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Rideable Mantis - Unsure if you can use SaddledThisTurn in an xCount.
 1. (Uk) May the Mana Be with You - Just choose the shockland?
 1. (Uk) Frie, Displaced in Time - Might be able to just trigger on exile and check if the card is now warped.
-1. (Uk) The Bean - (Plane) Altered for second printing. May be worth a variant print?
+1. (Uk) Land Station - Should probably come with better support for wishing for basic lands in limited.
+1. (Uk) The Ancient Dingus - Wishing for a random card from a stack of "visible unsleeved cards" probably has to be adapted to just wishing for a random sideboard card.
+1. (Uk) Colorless Ultimatum - No idea if multiple generic costs works, but could be converted to {4} if not.
+
+
+#### Black Lotus Lounge Planes
+(Not mechanically distinct, but a huge number of these have landed in tier 1. They aren't all on Scryfall.)
 1. (Uk) Black Lotus Lounge - (Plane)
 1. (Uk) City Hall - (Plane)
 1. (Uk) Shy Town - (Plane)
 1. (Uk) Sky Deck - (Plane)
-1. (Uk) The Windy City - (Plane) Significantly altered for second printing. May be worth a variant print?
 1. (Uk) Bicycle Rack - (Plane)
 1. (Uk) Event Horizon - (Plane)
 1. (Uk) The Food Court - (Plane)
 1. (Uk) Oteclán - (Plane)
 1. (Uk) Probability Flux - (Plane)
 1. (Uk) Tarnation - (Plane)
+1. (Uk) High and Dry Black Market - (Plane)
+1. (Uk) Jalira's Show - (Plane)
+1. (Uk) Mojave Desert - (Plane)
+1. (Uk) No Way Out - (Plane)
+1. (Uk) Pursued by Something - (Plane)
+1. (Uk) Raiders' Allegiance - (Plane)
+1. (Uk) Flamekin Village Square - (Plane)
+1. (Uk) Alesha's Arena - (Plane)
+1. (Uk) Jalira's Showroom - (Plane)
+1. (Uk) Samut's Training Grounds - (Plane)
+1. (Uk) Ureni's Lair - (Plane)
+1. (Uk) Lorwyn Arena - (Plane)
+1. (Uk) Terminus, End of the Line - (Plane)
+1. (Uk) Waffle Hovel - (Plane)
+1. (Uk) Neon Graveyard - (Plane)
+1. (Uk) Pizza Parlor - (Plane)
+1. (Uk) Fleem-for-All - (Plane)
+1. (Uk) The Bean - (Plane) Altered for second printing. May be worth a variant print?
+1. (Uk) The Windy City - (Plane) Significantly altered for second printing. May be worth a variant print?
+1. (Uk) Asmoranomardicadaistinaculdacar's Kitchen - (Plane) Altered for second printing. May be worth a variant print?
+1. (Uk) Elvish Impersonation Contest - (Plane) and then (Phenomenon). Completely different in second printing. Might function as a variant since legality and game piece type are the same?
+1. (Uk) Omenpath Instability - (Phenomenon) - Significantly altered for second printing. May be worth a variant print?
 1. (Uk) That's Enough Slices - (Phenomenon) Or rather, "Phenome-nom". Could potentially add support for "flavor type-lines". Functionally it's fine.
+1. (Uk) Ikori-All-You-Can-Eat - (Plane) Perpetually granting Mutate
 
 
 
@@ -581,14 +616,15 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Clam-I-Am - Option to reroll threes.
 1. Wall of Fortune
 1. Snickering Squirrel
-1. (See also: Socketed Sprocketer, Tier 2)
-1. (See also: "Rerolling Dice (using the stack)", Tier 4.)
+1. (See also: "Socketed Sprocketer", tier 2)
+1. (See also: Rerolling Dice (using the stack), tier 4.)
 
 #### Card Packs
 (We have Booster Tutor. MakeCard can probably support these?)
 1. Summon the Pack
 1. Opening Ceremony
 1. (Uk) Unknown Event - (Phenomenon)
+1. (See also: "A Container of Booster Packs", tier 3)
 
 #### Doesn't Actually Do Anything
 1. (P) Abbot of the Sacred Meeple
@@ -599,7 +635,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Crux of Mirrodin
 1. (Uk) Sheoldred's Terror - May change if Argentum is revisited
 1. (Uk) Delphia, Undecided
-1. (See also: "Set Matters", Tier 2)
+1. (See also: Set Matters, tier 2)
 
 #### Commander-tron Lands
 (Urzatron lands have special support, but could probably be scripted without it.)
@@ -616,6 +652,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Disciple of Nissa
 1. (Uk) The Ash Lizard
 1. (Uk) The Wise Sable
+1. (Uk) The Goblin Mastermind - Also gives all your cards Kindred Goblin?
 
 
 ### Tier 2
@@ -673,7 +710,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Your Wish is My Command - Choose an extra mode for a spell cast this way.
 1. (Uk) Agoraphobic Phyrexian - Could reasonably be adapted to affect the Planechase plane instead of the Unknown Event plane. Should be possible to RemoveAllAbilities from a Plane?
 1. (Uk) Xerex Squire - Square root, or maybe just add hypotenuse support to X-math.
-1. (Uk) Occupation of Llanowar - Control Point battle type.
 1. (Uk) Phyrexian Incubator - Properties of back face of card in library.
 1. (Uk) Fioran Reformist - Remove the Monarch. Democracy can just be implemented in the card script.
 1. (Uk) Dockbreacher - Number of treasures created this turn.
@@ -695,7 +731,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Pleasant Taxer - Taxes searching a library.
 1. (Uk) The Karst, Enchanted - Different toughness and different card types while searching.
 1. (Uk) Genevieve, Conniving Dragon - Party die. X-Math for number of sides on a regular die roll?
-1. (Uk) Artist Alley - (Plane) Choose card with favorite art. Would have to work on the honor system. AI can pick randomly.
+1. (Uk) The Art of Magic - (Plane) Choose card with favorite art. Would have to work on the honor system. AI can pick randomly. Originally named "Artist Alley", renamed after name collision.
 1. (Uk) Quest Compleated Beast - Fear of Sleep Paralysis brought some "can't remove counters" support, but doesn't yet include players.
 1. (Uk) The Tokenator - Token's power and toughness is any combination that totals a certain value.
 1. (Uk) The Weekly Princess - "Stops being day or night" - shouldn't be tough but needs a couple tweaks to work.
@@ -710,6 +746,15 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) New Magic Game Plus - Needs a way to leave itself in exile after restarting the game. (Currently can only ignore cards in one zone at a time.)
 1. (Uk) Out of Town - Unsure if there's an easy way to refer to the owner of an exiled card in a later trigger.
 1. (Uk) Pirk, Heroic Captain - "fully station a Spacecraft"
+1. (Uk) Dialogue Tree - Self-exile and delayed return to hand from inside a reflexive trigger. Unprecedented, but might be do-able with some fancy script-work.
+1. (Uk) Blended Twistling - Devotion to hybrid.
+1. (Uk) Tinfoil Helm - Protection from hybrid mana. Not sure valid syntax can look for that.
+1. (Uk) Bin Chicken - Might be able to do "Treat all food tokens as though they were Junk tokens and vice versa" via animate. Grant types and abilities of the opposite type?
+1. (Uk) The Big Aquarium - (Plane) Probably just define a custom type batch for "marine animals".
+1. (Uk) The Merch Booth - (Plane) Resource it generates could be approximated with a counter on a placeholder card in the command zone.
+1. (Uk) You Encounter a Beholder! - (Phenomenon) "Roll with advantage". Like Krark's Other Thumb but only affecting a single roll. Might be possible currently?
+1. (Uk) Gravitational Capture - (Phenomenon) Unsure if we can have each player dig for something and have it enter under the control of the next player in a direction.
+1. (Uk) Bagel Valley - (Plane) Defines rules for everything counters in reminder text, unlike Omo, who applies their effects through card text. Could apply the static effect to the chosen permanents separately? 
 
 
 #### Unique but Simple Keywords
@@ -744,6 +789,10 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Vegetable Car - "Onionfect", generates food tokens instead of dealing damage.
 1. (Uk) Shen, Wish Granter - "Scatter the Dragonstorm Globes" keyword action is trivial except for the need to track it globally. Could use an emblem maybe?
 1. (Uk) You're Toast - "Manifest Bread", like Manifest Dread except the manifested card becomes a food and can't be turned face up.
+1. (Uk) Auntie Ant, Ant Auntie - "Multiblight", Blight that can be distributed.
+1. (Uk) Cola Bottling Plant - (Plane) Can probably just use a custom counter for the "Bottled" designation.
+1. (Uk) Preston's Stage - (Plane) "Performs a magic trick", casting an instant-speed spell or turning a face down creature face up.
+1. (Uk) Mysterious Planet - (Plane) Station on a Plane(t).
 
 ##### Mono-Eminence Cycle
 (Can probably be tested for with existing tools.)
@@ -751,7 +800,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Lorthos, Tentacled Terror - (Also starting hand size.)
 1. (Uk) Auntie Flint
 1. (Uk) Mzed, Mercenary Leader
-1. (Uk) Mr. Wiggles, Helpful Butterfly - (Also tutor to battlefield before game starts?)
+1. (Uk) Mr. Wiggles, Helpful Butterfly
 
 
 #### Variations on Existing Keywords
@@ -769,6 +818,11 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Reverse Ninja - "Ustujnin", like Ninjutsu but for blockers.
 1. (Uk) Saga of Krark Losing His Thumb - "Flip Ahead", Similar to "Turn Ahead" but with a coin flip. Needs ability to repeat current chapter on loss.
 1. (Uk) Monet, Sensei of the Sewers - Fixed commander ninjutsu. Also, "If Monet was Ninjutsu'd"
+1. (Uk) The Sphere - (Plane) Red Amass. Also round power/toughness up to the nearest 5. Substantially altered to tier 1 for second printing, and altered again for third printing. May be worth variant prints?
+
+#### Control Point Battle Type
+1. (Uk) Occupation of Llanowar
+1. (Uk) Occupation of Kulrath
 
 #### Three-color Devotion.
 (Currently only supports two. These are also written as "Devotion to Abzan" instead of "Devotion to White, Black, and Green")
@@ -777,6 +831,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Devoted Temur
 1. (Uk) Devoted Jeskai
 1. (Uk) Devoted Mardu
+1. (See also: "Blended Twistling", tier 2)
 
 #### Unique but Simple Costs
 (Needs engine support since costs can't be custom-scripted, but the behavior for these should be straightforward.)
@@ -806,8 +861,9 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Rod of Spanking
 1. Impounding Lot-Bot
 1. The Majestic Duo
+1. (HTR) The Secret Lair - [Supposedly](https://mtg.wiki/page/Heroes_of_the_Realm#Trivia), the secret word is "word".
 1. (Uk) Game Knights Live - (Plane)
-1. (See also: Magic Word, Tier 3)
+1. (See also: "Magic Word", tier 3)
 
 #### Compliments, Insults, Apologies
 (Similar to above, but less specific wording. Could be done in spirit by keeping pre-defined list of phrases and let the player choose one.)
@@ -826,12 +882,10 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Bucket List - Check off card types
 1. (P) Duelists' Convocation International - Check off digits of random 10-digit number.
 1. (P) Map to Lorthos's Temple - Checklist of objectives
-
-#### Name Collision
-(Functional Variants already give us support for "same name, different rules". The hurdle and distinction here is "same name, different legality".)
-1. (Uk) Fast // Furious
-1. (P) Red Herring - Also: Swaps itself from the hand with a permanent in play, swapping targets on the original to itself.
-1. (P) Pick Your Poison - Nearly identical to point value modal choices seen in Bloomburrow, but no icon and points must add up to exact value. Also name collision.
+1. (Uk) The Underworld Fantasy Queen - Seasons. Tracked globally like Day/Night?
+1. (Uk) The Sad Creaturez - Shared feelings
+1. (Uk) Goldengrave - (Plane) Join a Tarkir clan for as long as you're on a plane.
+1. (Uk) Strixhaven Rivalry - (Plane) Join a Strixhaven college for as long as you're on a plane. College colors matter.
 
 #### Maintaining lists
 (Similar to noting things, but not just card IDs)
@@ -840,6 +894,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Retto, Family Racer - "Family" - noting card names secretly. Also dialog as payment.
 1. (Uk) The Fifth Alias - List not necessarily independent from card, but it'd take an extreme edge case to need more than one.
 1. (Uk) Syx, Robot Overlord - Ditto. Might be missing a clause that strikes the name from the list, or prevents guessing revealed invaders?
+1. (See also: "The Whiteboarder", tier 3)
 
 #### Panglacial Worm-likes
 1. Infernal Spawn of Infernal Spawn of Evil - (Also dialog as payment)
@@ -863,12 +918,13 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) All-Star Kicker - Via "Pass the Ball". Also Assist Kicker.
 1. (Uk) Trash Panda - Also "Opponent dredge".
 1. (Uk) X, Mystery Racer
+1. (Uk) Circus of the Sun - (Plane) Seems like a mistake, but it does tell you to return a creature you control to your hand.
 
 #### Other Un-Games
 (It would be fun to include concurrent games running in other tabs. Aside from that, seeing only the current game misses the spirit of the card but technically works fine, and these would otherwise be in Tier 6 or 7.)
 1. Side Quest
 1. Exit Through the Grift Shop
-1. (See also: "Ass Whuppin", Tier 0.5)
+1. (See also: "Ass Whuppin", tier 0.5)
 
 #### Turn Over Card
 (Transform if it's a DFC, becomes a 2/2 if it's a normal card, splits up melded cards...)
@@ -879,7 +935,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 (Looks for Silver Bordered or Acorn cards, but not playtest or Heroes cards. This category probably needs to be defined anyway.)
 1. Everythingamajig B
 1. Underdome
-1. (See also: Spatula of the Ages, Tier 0.5)
+1. (See also: "Spatula of the Ages", tier 0.5)
 
 #### Playtest Matters
 (Looks for playtest cards. Similar to the above, this should probably be a defined category anyway.)
@@ -890,8 +946,8 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Fear of the Unknown
 1. (Uk) Rinta, Cousin of Sitka
 1. (Uk) Lord of Atlanta
-1. (Uk) The Mystery Raceway - Also event outcome matters.
-1. (See Also: The Companion of the Wilds, Tier 3)
+1. (See also: "The Companion of the Wilds", tier 3)
+1. (See also: "The Mystery Raceway", tier 3) 
 
 #### Set Matters
 (The wording of these often varies and it's sometimes unclear how reprints should be treated. Tempted to throw them all in tier 4.)
@@ -899,16 +955,19 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (HTR) Keeper of the Secret Lair - Another set filter like above, but matching the set of the current print.
 1. (Uk) Across the Multiverse - Only includes the main set, no bonus sheets.
 1. (Uk) Must Be Knights - Specifically printings from Enchanting Tales (WOT).
-1. (See also: War of the Spark, Tier 0)
+1. (Uk) Secret Lair - (Plane) - "Shiny" category, which is a set filter plus foil-matters. Not to be confused with "The Secret Lair", tier 2.
+1. (See also: "War of the Spark", tier 0)
 1. (See also: "Apocalypse Chime" and "City in a Bottle", Black Border)
-1. (See also: "City in a Bottle Effect", Tier 1)
+1. (See also: City in a Bottle Effect, tier 1)
 
 #### Legality Matters
 1. Standard Procedure - "currently legal in Standard"
 1. (Uk) The Zabulous Cosplayer
 1. (Uk) The Pro Tour - (Plane) "Differently named Standard-legal cards".
-1. (See also, "The Wheeling Runner", tier 2)
-1. (See also, "The Mox Painter", tier 5)
+1. (Uk) The Wizardly Barge - "tournament-legal Wizard creature"
+1. (See also: "The Wheeling Runner", tier 2)
+1. (See also: "The Mox Painter", tier 5)
+1. (See also: "The Playful Winners", tier 3)
 
 #### Extra Zones
 1. (P) Whammy Burn - Whammy deck.
@@ -941,8 +1000,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Wheeling Runner - Also a Vintage-legal filter on random card creation. (See also: Legality Matters, tier 2)
 1. (Uk) The Highland Runner - Also beginning of first upkeep trigger.
 1. (Uk) The Bear Force Pilot Runner - Apparently this is an errata on an existing Unknown Event card?
-
-
 
 #### Mana from Particular Source
 (Similar to snow costs)
@@ -991,6 +1048,15 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Inversion Zone
 1. (Uk) The Moon
 1. (Uk) Istfell
+
+#### Ranks
+(At an event at the Vegas 2025 MagicCon, a series of "Rank" cards were given to play with. They function like Conspiracies or Vanguards with a one-time activated ability. Would be substantially simpler and 99% correct to implement them as such than create a new type of nontraditional card.)
+1. (Uk) Chief Engineer - (Rank)
+1. (Uk) Chief Medical Officer - (Rank)
+1. (Uk) Head of Security - (Rank)
+1. (Uk) Navigator (Rank)
+1. (Uk) Captain - (Rank) Choose the starting player.
+1. (Uk) First Officer - (Rank) "May activate another player's rrank ability this turn, even if they already have"
 
 #### Command Tax Matters
 1. (Uk) Tax Hounds
@@ -1051,18 +1117,15 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Margle, Cousin of Yargle - "Can't gain abilities"
 1. (Uk) Spice Rack - Maximum Commander size. Sounds like an SBA; Could maybe simulate but would want to suppress commander replacement effect.
 1. (Uk) Banned Eldraine Card - Choose an additional cost that determines which card it becomes (perpetually).
-1. (Uk) Takesies // Backsies - "Treat all counters as -1/-1 counters".
 1. (Uk) Trampled Lotus - Activate up to three mana abilities of opponents' lands. "Splitter Second" effectively makes this a mana ability.
 1. (Uk) The Asker of More Mana - RaiseCost can cover spells and abilities, but not resolution stuff like UnlessCosts.
 1. (Uk) Interrogation Robot - Trivial, but partly dependent on card in this tier. (See "Who // What // When // Where // Why")
 1. (Uk) The Horizon Seeker - Count unique keywords and ability words.
 1. (Uk) The Convincing General - Make two creature types interchangeable.
-1. (Uk) The Magical City, New - Land as commander.
 1. (Uk) Mad Labs - (Phenomenon) Choose a keyword counter.
 1. (P) Glimpse, the Unthinkable - "Can't be chosen" and name can't be chosen while in play. Also normalized name collision.
 1. (P) Muraganda Eldrazi - "Counts as having no abilities.", but still has them. Also Primeval Counter.
 1. (P) Omnipresent Impostor - Can be found when searching library regardless of criteria. Has all names. Basic supertype.
-1. (P) Oddric, Lunar Marquis - Eater-of-Virtue-ing a specific triggered ability by text. Granting Devoid and Changeling will need special handling since that normally doesn't work due to layers. (See "Slivdrazi Monstrosity", Tier 0)
 1. (P) Panglacial Shinobi - "Library ninjutsu" - have to swap it with an attacking creature. Also Panglacial Worm-likes, Tier 2.
 1. (P) Toofer, Keeper of the Full Grip - "Card Advantage", the net change in relative hand size between you and all opponents when a spell resolves.
 1. (Uk) Second Stage of Magic Design - Looks for unique Keywords and Ability words.
@@ -1080,6 +1143,13 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Fear of Forgetting Names - Remove name from a permanent. 
 1. (Uk) Surprise, Nerd - Replace pump effects.
 1. (Uk) The Charitable Drafter - Draft a booster pack.
+1. (Uk) Mana Max, Afterburner - Triggers when a player loses one or more unspent mana.
+1. (Uk) The Whiteboarder - Choosing and noting abilities and stats. Assembles a creature token from noted characteristics, removing them from notes. Specifies border color for token.
+1. (Uk) Yeah Nah // Nah Yeah - "Target spell resolves."
+1. (Uk) Spare Changeling - "Whenever you pay an additional cost while casting a spell"
+1. (Uk) A Container of Booster Packs - Player chooses 3+ different booster packs, one is selected at random to open and take a card from. See also: Card Packs, tier 1.
+1. (Uk) Welcome to Australia - Turn libraries upside down. Playing with top card revealed works well enough but reversing the order only while a static ability is active is a bit weird.
+1. (Uk) Team-Up! - (Phenomenon) State trigger where players win if both their adjacent players are eliminated. Can apply to multiple players concurrently.
 
 
 
@@ -1096,6 +1166,11 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 (Essentially a Pact, but as a keyword and the cost can be paid any time on the next turn. Unclear how this interacts with cost adjustments. FAQ also adamant that Super haste is not a form of Haste.)
 1. Rocket-Powered Turbo Slug
 1. (Uk) Need for Speed (Not the Odyssey One)
+
+#### Grant Keyword Ignoring Layers
+1. (P) Oddric, Lunar Marquis - Grants Changeling and Devoid. Also: Eater-of-Virtue-ing a specific triggered ability by text.
+1. (Uk) Everyone's an Imposter - Grants Changeling.
+1. (See also: "Slivdrazi Monstrosity", tier 0)
 
 #### Text Boxes
 (Usually just refers to all the abilities and keywords, and Exchange of Words does this in black border. But it has different rulings in Un-Games, where flavor text and watermarks also matter.)
@@ -1122,7 +1197,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Extremely Slow Zombie
 1. Garbage Elemental F
 1. Three-Headed Goblin
-1. (See also: Throat Wolf)
+1. (See also: "Throat Wolf", tier 3)
 
 #### Activate in Any Zone
 (Including while it's in your library and you're about to search for a card with certain characteristics...)
@@ -1152,6 +1227,8 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Convention Maro - Choose a trigger requirement and an X-math function. Also watermark matters, landscape matters, and artist matters.
 1. (Uk) The Faction Dragon - "Choose a faction" meaning clan, guild, etc. Mana cost is the faction's mana colors. Also the chosen faction's watermark matters.
 1. (Uk) Your Favorite Missing Character - Any two colors, up to three creature types, an arbitrary name, and one of four listed abilities.
+1. (Uk) The Playful Winners - Tally marks accumulated as it wins games. Also enters as a copy of a random tournament legal card with any partner variant.
+1. (Uk) The Strixhaven-Lorwyn Rover - Choose a Strixhaven college and a Lorwyn creature type. Also, sets color identity but not color.
 1. (See Also: "Cryptic Spires", Black Border)
 1. (See Also: "The Prismatic Piper", "Faceless One", and "Clara Oswald", Black Border)
 
@@ -1168,6 +1245,15 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Your Favorite Character - Name of a Magic character. Probably best adapted as picking any string for the name, unless Vorthos (Tier 5) gets added. Rest of it seems possible to script, though complicated.
 1. (Uk) ______ - Perpetual name change built from two chosen types and the player's name. Also no name by default. Also name conflict (lack-of-name conflict??) with _____.
 1. (Uk) Naming Screen - Arbitrary four-letter names for tokens.
+1. (Uk) The Good Gamers - Name tokens anything. Also, all damage it does counts toward your commander's commander damage.
+
+#### Name Collision
+(Functional Variants already give us support for "same name, different rules". The hurdle and distinction here is "same name, different legality".)
+1. (Uk) Fast // Furious
+1. (P) Red Herring - Also: Swaps itself from the hand with a permanent in play, swapping targets on the original to itself.
+1. (P) Pick Your Poison - Nearly identical to point value modal choices seen in Bloomburrow, but no icon and points must add up to exact value. Also name collision.
+1. (Uk) Fear // Loathing
+1. (See also: "The Art of Magic" and "Artist Alley", tier 2 and tier 7)
 
 #### Rulebreaker
 (If this is your commander, loosens color identity or deck building restrictions.)
@@ -1178,7 +1264,13 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Paradise Bird
 1. (Uk) The Covert Blue Mage
 1. (Uk) Mister Cheddar, Cheese Sliver - Exempts Slivers from singleton rules. Also "Ratmanship" keyword.
-1. (See also: The Waffle Restaurant, tier 4)
+1. (See also: "The Waffle Restaurant", tier 4)
+
+#### Land as Commander
+1. (Uk) The Magical City, New
+1. (Uk) The Mystery Raceway - Also event outcome matters. See also: Playtest Matters, tier 2.
+1. (Uk) The Goblin Sparring Grounds - Should probably say "When this mana is spent". 
+1. (See also: "The Waffle Restaurant", tier 4)
 
 #### Adjust validity for sacrifices
 1. (Uk) Slobad, Actually Just Fine - Make sacrifice creatures and artifacts interchangable.
@@ -1192,7 +1284,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Demon Detective
 1. (Uk) Aggressive Detective
 1. (Uk) Growing Detective
-1. (See also: "Command From the Shadows", Tier 5)
+1. (See also: "Command From the Shadows", tier 5)
 
 #### Change Game Piece Type
 1. Claire D'Loon, Joy Sculptor - Tokens become "Tokens that are also Cards", which count as tokens but can exist outside the battlefield. Mystery Booster apparently has "Token Cards" (See: Time Sidewalk); are those the same thing?
@@ -1201,6 +1293,10 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 #### Affects Gameplay Trackers
 1. (P) Naturalize 2 - Destroy emblems, monarch, city's blessing, dungeons, day, night, and the initiative. And any future trackers, like Start your Engines.
 1. (Uk) Clear, Fair Magic - Destroys all of those, plus planes, schemes, vanguards, bounties and elite creatures (if those ever get added), or conspiracies.
+
+#### Change Behavior of Counters
+1. (Uk) Takesies // Backsies - "Treat all counters as -1/-1 counters".
+1. (Uk) Uh, Squen & Crag Made a Card - Flips the behavior of +1/+1 and -1/-1 counters.
 
 
 #### Augment
@@ -1317,6 +1413,8 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Chea, Friend to Maybe Too Many
 1. (Uk) The Water Maro
 1. (Uk) Chic // Ago
+1. (Uk) The Karfell Rocker
+1. (Uk) Georgia echnical Ins i u e - (Plane)
 
 ##### Text Box Text Matters
 1. Tainted Monkey
@@ -1422,8 +1520,9 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Mishra's Toy Workshop - Generates mana for token-creating abilities.
 1. (Uk) The Countering Runner - Discounts spells that would counter things. (Also "Psychic Damage") (Also "Ready to Run", Tier 2)
 1. (Uk) The Brewing Chef - "card that creates a token".
-1. (Uk) The Waffle Restaurant - "cards that can create Food tokens". Also this has to be recognized before the game because the check is for deck legality. See "Rulebreaker", Tier 3
+1. (Uk) The Waffle Restaurant - "cards that can create Food tokens". Also this has to be recognized before the game because the check is for deck legality. See also: Rulebreaker and Land as Commander, tier 3
 1. (Uk) The Traveling Postman - Chooses a random Magic card that creates a token that isn't a copy token,
+1. (Uk) The Salubrious Philosopher - "Mana sources" and "Removal".
 
 #### Memory
 (The AI for "accidentally" forgetting certain bits of info is a bit weird conceptually but not impossible)
@@ -1457,7 +1556,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 #### Instant Permanent
 1. (P) Visitor from Planet Q
 1. (P) Lightning Colt
-1. (See also: Blue Screen of Death, Tier 5)
+1. (See also: "Blue Screen of Death", Tier 5)
 
 #### Animate Zone
 (Attaching an enchantment to a zone is a bit weird. The resulting creature in these cases doesn't seem to be all that complicated to handle in most cases, but some weird edge cases exist, especially with un-cards.)
@@ -1470,6 +1569,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Glade of the Pump Spells - Land with mana cost. Do-able on its own, but may have a knock-on effect for other cards.
 1. (P) Madlands - Land with Madness. Played as a land drop when madness cost is paid.
 1. (Uk) Blustering Barnyard - "Storm (Pretend it works on a land)". Also pawprint charm on an ability. May work fine?
+1. (P) Barry's Land - Art includes the text "Domain +1", meaning the card's existence introduces "Cloud" into the game's basic land types.
 
 #### Share attachment effects
 (Could possibly get 90% there with a static ability meddling with EquippedBy or AttachedBy, but plenty of edge cases out there.)
@@ -1500,6 +1600,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Command From The Shadows - Conspiracy that keeps commanders hidden until first played. Problem is we show commanders in the lobby before the game even starts. Could be its own separate game mode.
 1. (Uk) The Mox Painter - Tournament legal moxen. Reminder text gives a fixed list, but not future proof. Also depends on a card in this tier (See: "Mox Lotus").
 1. (Uk) Advanced Tactics - Puts all creatures onto a 5x5 grid and lets their controllers move them around. Unclear what happens when there's more than 25 creatures in play. Biggest hurdle would be the UI overhaul needed to actually display the grid.
+1. (Uk) Welcome to Valley - (Plane) "Animal" batch that specifies that the animal must exist in real life. Can't be determined from type line; e.g. Leonin are typed as Cats but wouldn't count.
 
 #### Noninteger Numbers
 1. Bosom Buddy
@@ -1639,13 +1740,13 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Phone a Friend - Could just be randomly chosen and/or let the opponent choose?
 1. Yule Ooze - Could change the cost from eating food to sacrificing a Food to keep the spirit of the card, but that is a rules change.
 1. Fluttershy - Stare down could be implemented as a designation. But even so, "creature with a tail" would make this at best a Tier 5.
-1. (HTR) The Secret Lair - Can't implement accurately without knowing the secret word.
 1. Autograph Book - Collect signatures from opponents? Adventure enemies? (Also Legacy, Tier 3.)
 1. (Uk) The Clever Magician - Proposing a rule. Could cover a lot of ground functionally by just opening a text editor and letting them write their rule as a card script, to apply through an effect. UX for that implementation would be a lost cause though, and the AI would never be able to evaluate it.
 1. (Uk) At Least It's a Dry Heat - Even without the geolocation needed to determine "sources on the east coast", tracking the causality of damage events through numbers would be Tier 4 at best.
 1. (Uk) Drive to Work - Sharing fun facts about cards.
-1. (Uk) Sorin's Remastered Manor - (Plane) Would need some combination of tags and types to form a criteria for "could be a horror movie monster".
+1. (Uk) Sorin's Remastered Manor - (Plane) Would need some combination of tags and types to form a criteria for "could be a horror movie monster". Altered in a confusing way for second printing.
 1. (Uk) The Commander Recommender - Revealing 15 cards of a commander deck from outside the game is do-able but very messy. "Guesses wrong" just expands on The Celestial Toymaker. The requirement that the commander deck be a legitimate one is unenforcable.
+1. (Uk) Evy, Fang Keeper - Could just choose what gets drawn on the card from a list.
 
 #### Dexterity; tossing cards at other cards
 1. Landfill
@@ -1687,6 +1788,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 (Could theoretically be determined digitally by accessing an outside source of information, but doing so would be a terrible idea for reasons which could fill several paragraphs.)
 1. Photo Op - Scrape Twitter?
 1. (Uk) A-Town - Acquire local IP and test it against a Geolocation database?
+1. (Uk) Explore the Local Scene - (Phenomenon) Fetch local restaurants and tourist attractions via a maps API?
 
 
 ### Tier 7
@@ -1735,6 +1837,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Bog Humbugs
 1. Seasonal Sequels
 1. (Uk) High Noon At Thunder Junction - (Plane)
+1. (P) In Residence
 
 #### Gotcha Cycle
 1. Cardpecker
@@ -1779,7 +1882,10 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Moniker Mage
 1. Granny's Payback
 1. Blurry Beeble
-1. (Uk) New Player's Journey - (Plane) Also core set matters
+1. (Uk) Through the Wormhole - (Plane)
+1. (Uk) LobbyCon - (Plane)
+1. (Uk) New Player's Journey - (Plane) Also core set matters.
+1. (Uk) Demo Tables - (Plane) Also expansion symbol matters.
 
 #### Physical Hands Matter
 1. Deadhead
@@ -1794,6 +1900,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 #### Signatories Matter
 1. (Uk) The Collector
 1. (Uk) Mark Ritual
+1. (Uk) Artist Alley
 
 #### Prior Event Attendance
 1. (Uk) Windy City Elemental
