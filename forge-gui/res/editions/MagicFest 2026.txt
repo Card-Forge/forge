@@ -6,10 +6,14 @@ Type=Promo
 ScryfallCode=PF26
 
 [cards]
-1F R Wayfarer's Bauble @Diego Gisbert
+1 R Wayfarer's Bauble @Diego Gisbert
 2 R Fyndhorn Elves @Julie Dillon
 3 R Prismatic Ending @Chris Seaman
 4 M Consecrated Sphinx @Mark Zug
 5 R Counterspell @Stephen Daniele
 F6 R In Residence @Mark Rosewater
 7 R Preordain @Chris Seaman
+8 R Llanowar Elves @Chris Rahn
+9 R Utopia Sprawl @Yeong-Hao Han
+10 M Atraxa, Praetors' Voice @Tyler Jacobson & Scott Okumura
+F11 R Bicycle Elemental @Mark Rosewater
