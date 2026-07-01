@@ -1478,12 +1478,17 @@ public class CardProperty {
             final String[] splitProperty = property.split("_");
             final String strNum = splitProperty[1].substring(2);
             final String comparator = splitProperty[1].substring(0, 2);
-            final String counterType = splitProperty[2];
+            final CounterType cType = CounterType.getType(splitProperty[2]);
             final int number = AbilityUtils.calculateAmount(source, strNum, spellAbility);
 
-            final int actualnumber = card.getCounters(CounterType.getType(counterType));
+            final int actualNumber;
+            if (splitProperty[0].endsWith("ReceivedThisTurn")) {
+                actualNumber = game.getCounterAddedThisTurn(cType, splitProperty[3], "Card.StrictlySelf", card, controller, spellAbility);
+            } else {
+                actualNumber = card.getCounters(cType);
+            }
 
-            if (!Expressions.compare(actualnumber, comparator, number)) {
+            if (!Expressions.compare(actualNumber, comparator, number)) {
                 return false;
             }
         }
@@ -1752,6 +1757,11 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isGiftPromised();
+        } else if (property.equals("Teamwork")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isTeamwork();
         } else if (property.equals("impended")) {
             if (card.getCastSA() == null) {
                 return false;

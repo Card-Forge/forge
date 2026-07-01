@@ -14,5 +14,5 @@ ALTERNATE
 Name:Maestro's Gift
 ManaCost:3 U R
 Types:Sorcery
-A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | PumpKeywords$ Haste | PumpDuration$ EOT | SpellDescription$ Create a token that's a copy of target creature you control. That token gains haste until end of turn.
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | PumpKeywords$ Haste | PumpDuration$ EOT | SpellDescription$ Create a token that's a copy of target creature you control. That token gains haste until end of turn.
 Oracle:Create a token that's a copy of target creature you control. That token gains haste until end of turn.

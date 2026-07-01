@@ -1,7 +1,7 @@
 package forge.game;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
 import forge.game.combat.Combat;
@@ -174,7 +174,7 @@ public class GameSnapshot {
         newPlayer.setLifeStartedThisTurnWith(origPlayer.getLifeStartedThisTurnWith());
         newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
         newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
-        newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
+        newPlayer.setCounters(HashMultiset.create(origPlayer.getCounters()));
         newPlayer.setBlessing(origPlayer.hasBlessing(), null);
         newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
         newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());

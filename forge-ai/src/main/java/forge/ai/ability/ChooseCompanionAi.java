@@ -5,6 +5,7 @@ import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.MyRandom;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +23,7 @@ public class ChooseCompanionAi extends SpellAbilityAi {
             return null;
         }
 
-        Collections.shuffle(cards);
+        Collections.shuffle(cards, MyRandom.getRandom());
         return cards.get(0);
     }
 }

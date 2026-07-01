@@ -1,0 +1,11 @@
+Name:Ms. Marvel, Elastic Ally
+ManaCost:2 GW
+Types:Legendary Creature Mutant Inhuman Hero
+PT:2/2
+K:Reach
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When NICKNAME enters, target creature gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +2
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+powerGTbasePower | ValidTarget$ Player | CombatDamage$ True | ActivationLimit$ 1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control with power greater than its base power deals combat damage to a player, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+SVar:PlayMain1:TRUE
+Oracle:Reach\nWhen Ms. Marvel enters, target creature gets +2/+0 until end of turn.\nWhenever a creature you control with power greater than its base power deals combat damage to a player, draw a card. This ability triggers only once each turn.

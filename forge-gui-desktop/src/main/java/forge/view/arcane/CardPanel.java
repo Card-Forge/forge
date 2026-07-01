@@ -44,6 +44,8 @@ import java.util.Map;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
+import com.google.common.collect.Multiset;
+
 import forge.CachedCardImage;
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -103,6 +105,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         ZoneType.Flashback, new Color(80, 20, 100)
     );
     private static final Color DEFAULT_ZONE_COLOR = new Color(60, 60, 80);
+    private static final Color GHOST_TINT = new Color(90, 120, 175, 110);
 
     private final CMatchUI matchUI;
     private CardView card;
@@ -118,6 +121,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private OutlinedLabel damageText;
     private OutlinedLabel cardIdText;
     private boolean displayEnabled = true;
+    private boolean ghost; // faded stand-in for a card this permanent holds in exile
     private boolean isAnimationPanel;
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
     private boolean isSelected;
@@ -744,6 +748,17 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 }
             }
         }
+        if (ghost) {
+            drawGhostOverlay(g);
+        }
+    }
+
+    private void drawGhostOverlay(final Graphics g) {
+        final Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        final int cornerSize = Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
+        g2d.setColor(GHOST_TINT);
+        g2d.fillRoundRect(cardXOffset, cardYOffset, cardWidth, cardHeight, cornerSize, cornerSize);
     }
 
     private void drawZoneBanner(final Graphics g) {
@@ -787,10 +802,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         FontMetrics largeFontMetrics = g.getFontMetrics(largeCounterFont);
 
         if (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE)) == CounterDisplayType.OLD_WHEN_SMALL) {
-            int maxCounters = 0;
-            for (Integer numberOfCounters : card.getCounters().values()) {
-                maxCounters = Math.max(maxCounters, numberOfCounters);
-            }
+            int maxCounters = card.getCounters().entrySet().stream().mapToInt(Multiset.Entry::getCount).max().orElse(0);
 
             if (counterBoxBaseWidth + largeFontMetrics.stringWidth(String.valueOf(maxCounters)) > cardWidth) {
                 drawCounterImage(g);
@@ -799,9 +811,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         }
 
-        for (Map.Entry<CounterType, Integer> counterEntry :  new HashSet<>(card.getCounters().entrySet())) {
-            final CounterType counter = counterEntry.getKey();
-            final int numberOfCounters = counterEntry.getValue();
+        for (Multiset.Entry<CounterType> counterEntry : new HashSet<>(card.getCounters().entrySet())) {
+            final CounterType counter = counterEntry.getElement();
+            final int numberOfCounters = counterEntry.getCount();
             final int counterBoxRealWidth = counterBoxBaseWidth + largeFontMetrics.stringWidth(String.valueOf(numberOfCounters));
 
             final int counterYOffset;
@@ -844,10 +856,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private void drawCounterImage(final Graphics g) {
-        int counters = 0;
-        for (final Integer i : card.getCounters().values()) {
-            counters += i;
-        }
+        int counters = card.getCounters().size();
 
         final int yCounters = (cardYOffset + cardHeight) - (cardHeight / 3) - 40;
 
@@ -1015,7 +1024,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         // Card name overlay
         titleText.setText(CardTranslation.getTranslatedName(card.getCurrentState().getName()));
         // Screen readers can't tell if a card is tapped.
-        if (isPreferenceEnabled(FPref.UI_SR_OPTIMIZE)) {
+        if (isPreferenceEnabled(FPref.UI_SCREENREADER_OPTIMIZE)) {
                 if (this.isTapped()) {
                     titleText.getAccessibleContext().setAccessibleDescription("tapped");
                 } else {
@@ -1099,6 +1108,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     public final List<CardPanel> getAttachedPanels() {
         return attachedPanels;
+    }
+
+    public final boolean isGhost() {
+        return ghost;
+    }
+    public final void setGhost(final boolean ghost0) {
+        ghost = ghost0;
     }
 
     public final List<CardPanel> getStack() {

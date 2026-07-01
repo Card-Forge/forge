@@ -501,7 +501,10 @@ public class YieldController {
         }
     }
 
-    private boolean shouldEvaluateInterrupts() {
+    /** True when an event-driven interrupt should be considered: either an interruptible
+     *  yield is active, or APINA + RESPECTS_INTERRUPTS are both on (so the next priority
+     *  window's auto-pass can be blocked by autoPassInterrupted). */
+    public boolean shouldEvaluateInterrupts() {
         if (isInterruptibleYieldActive()) return true;
         return getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS) && getBoolPref(FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS);
     }

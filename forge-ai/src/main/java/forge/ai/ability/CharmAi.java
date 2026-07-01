@@ -2,18 +2,24 @@ package forge.ai.ability;
 
 import com.google.common.collect.Lists;
 import forge.ai.*;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class CharmAi extends SpellAbilityAi {
     @Override
@@ -47,7 +53,7 @@ public class CharmAi extends SpellAbilityAi {
         } else {
             // only randomize if not all possible together
             if (num < choices.size()) {
-                Collections.shuffle(choices);
+                Collections.shuffle(choices, MyRandom.getRandom());
             }
 
             /*
@@ -88,15 +94,21 @@ public class CharmAi extends SpellAbilityAi {
             CharmEffect.chainAbilities(sa, chosenList);
         }
 
+        if (chosenList.size() < num) {
+            if (sa.isEntwine()) {
+                return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
+            }
+            // TODO return lower score since the SA wouldn't be used to its full effectiveness
+        }
+
         return super.checkApiLogic(ai, sa);
     }
 
     private List<AbilitySub> chooseOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, boolean isTrigger, int num, int min) {
         List<AbilitySub> chosen = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-        // TODO unused for now, the AI doesn't know how to effectively handle repeated choices
-        boolean allowRepeat = sa.hasParam("CanRepeatModes");
 
+        // TODO the AI doesn't know how to effectively handle repeated choices from CanRepeatModes yet.
         final int pawprintLimit = sa.hasParam("Pawprint") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Pawprint"), sa) : 0;
         if (pawprintLimit > 0) {
             // try to pay for the more expensive subs first
@@ -109,7 +121,7 @@ public class CharmAi extends SpellAbilityAi {
             handleDependentModes(sa, chosen, sub);
             sub.setActivatingPlayer(ai);
             // TODO refactor to obtain the AiAbilityDecision instead, then we can check all to sort by value
-            if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
+            if (AiPlayDecision.WillPlay == aic.canPlaySa(sub) && canPayForAdditionalMode(sa, chosen, sub, ai)) {
                 if (pawprintLimit > 0) {
                     int curPawprintAmount = AbilityUtils.calculateAmount(sub.getHostCard(), sub.getParamOrDefault("Pawprint", "0"), sub);
                     if (pawprintAmount + curPawprintAmount > pawprintLimit) {
@@ -146,6 +158,21 @@ public class CharmAi extends SpellAbilityAi {
                         if (chosen.size() == min) {
                             break;
                         }
+                    }
+                }
+            }
+        }
+        if (!isTrigger && !chosen.isEmpty() && chosen.size() < num && min < num) {
+            // Optional extra modes can be worth adding even when canPlaySa() is too strict for a standalone mode.
+            choices.removeAll(chosen);
+            for (AbilitySub sub : choices) {
+                handleDependentModes(sa, chosen, sub);
+                sub.setActivatingPlayer(ai);
+                if (SpellApiToAi.Converter.get(sub).chkDrawbackWithSubs(ai, sub).willingToPlay()
+                        && canPayForAdditionalMode(sa, chosen, sub, ai)) {
+                    chosen.add(sub);
+                    if (chosen.size() == num) {
+                        break;
                     }
                 }
             }
@@ -283,9 +310,40 @@ public class CharmAi extends SpellAbilityAi {
         }
     }
 
+    private boolean canPayForAdditionalMode(SpellAbility sa, List<AbilitySub> chosen, AbilitySub sub, Player ai) {
+        Card source = sa.getHostCard();
+        if (!source.hasKeyword(Keyword.ESCALATE) && !source.hasKeyword(Keyword.SPREE) && !source.hasKeyword(Keyword.TIERED)) {
+            return true;
+        }
+        try {
+            List<AbilitySub> testModes = Lists.newArrayList(chosen);
+            testModes.add(sub);
+            sa.setSubAbility(null);
+            CharmEffect.chainAbilities(sa, testModes);
+            return ComputerUtilCost.canPayCost(sa, ai, false);
+        } finally {
+            sa.setSubAbility(null);
+        }
+    }
+
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> opponents, Map<String, Object> params) {
         return Aggregates.random(opponents);
+    }
+
+    @Override
+    public List<OptionalCostValue> chooseOptionalCosts(Player payer, SpellAbility chosen, List<OptionalCostValue> optionalCostValues) {
+        List<OptionalCostValue> chosenCosts = super.chooseOptionalCosts(payer, chosen, optionalCostValues);
+
+        Optional<OptionalCostValue> entwine = chosenCosts.stream().filter(c -> c.getType() == OptionalCost.Entwine).findFirst();
+        if (entwine.isPresent()) {
+            SpellAbility entwined = GameActionUtil.addOptionalCosts(chosen, chosenCosts);
+            if (!checkApiLogic(payer, entwined).willingToPlay()) {
+                chosenCosts.remove(entwine.get());
+            }
+        }
+
+        return chosenCosts;
     }
 
     @Override

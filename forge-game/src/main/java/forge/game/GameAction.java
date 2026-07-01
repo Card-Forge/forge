@@ -252,7 +252,7 @@ public class GameAction {
 
             // need to copy counters when card enters another zone than hand or library
             if (StaticAbilityCountersRemain.countersRemain(lastKnownInfo, zoneTo)) {
-                copied.setCounters(Maps.newHashMap(lastKnownInfo.getCounters()));
+                copied.setCounters(HashMultiset.create(lastKnownInfo.getCounters()));
             }
 
             // perpetual stuff
@@ -1095,26 +1095,23 @@ public class GameAction {
             dependencies = HashBasedTable.create();
         }
 
-        game.forEachCardInGame(new Visitor<>() {
-            @Override
-            public boolean visit(final Card c) {
-                // need to get Card from preList if able
-                final Card co = preList.get(c);
-                for (StaticAbility stAb : co.getStaticAbilities()) {
-                    if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
-                        staticAbilities.add(stAb);
-                    }
+        game.forEachCardInGame(c -> {
+            // need to get Card from preList if able
+            final Card co = preList.get(c);
+            for (StaticAbility stAb : co.getStaticAbilities()) {
+                if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
+                    staticAbilities.add(stAb);
                 }
-                if (!co.getStaticCommandList().isEmpty()) {
-                    staticList.add(co);
-                }
-                for (StaticAbility stAb : co.getHiddenStaticAbilities()) {
-                    if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
-                        staticAbilities.add(stAb);
-                    }
-                }
-                return true;
             }
+            if (!co.getStaticCommandList().isEmpty()) {
+                staticList.add(co);
+            }
+            for (StaticAbility stAb : co.getHiddenStaticAbilities()) {
+                if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
+                    staticAbilities.add(stAb);
+                }
+            }
+            return true;
         }, true);
 
         staticAbilities.sort(effectOrder);
@@ -1431,7 +1428,7 @@ public class GameAction {
                 p.checkKeywordCard();
 
                 for (final ZoneType zt : ZoneType.values()) {
-                    if (zt == ZoneType.Battlefield) {
+                    if (zt == ZoneType.Battlefield || zt == ZoneType.Flashback) {
                         continue;
                     }
                     for (final Card c : p.getCardsIn(zt).threadSafeIterable()) {
@@ -2695,7 +2692,7 @@ public class GameAction {
         return milled;
     }
 
-    public void dealDamage(final boolean isCombat, final CardDamageMap damageMap, final CardDamageMap preventMap,
+    public void dealDamage(final boolean isCombat, final CardDamageTable damageMap, final CardDamageTable preventMap,
                            final GameEntityCounterTable counterTable, final SpellAbility cause) {
         // Clear assigned damage if is combat
         if (isCombat) {

@@ -315,26 +315,6 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.CommanderAltType);
     }
 
-    public Map<CounterType, Integer> getCounters() {
-        return get(TrackableProperty.Counters);
-    }
-    public int getCounters(CounterType counterType) {
-        final Map<CounterType, Integer> counters = getCounters();
-        if (counters != null) {
-            Integer count = counters.get(counterType);
-            if (count != null) {
-                return count;
-            }
-        }
-        return 0;
-    }
-    public boolean hasSameCounters(CardView otherCard) {
-        Map<CounterType, Integer> counters = getCounters();
-        if (counters == null) {
-            return otherCard.getCounters() == null;
-        }
-        return counters.equals(otherCard.getCounters());
-    }
     public boolean hasSamePT(CardView otherCard) {
         if (getCurrentState().getPower() != otherCard.getCurrentState().getPower())
             return false;
@@ -343,8 +323,7 @@ public class CardView extends GameEntityView {
         return true;
     }
     void updateCounters(Card c) {
-        set(TrackableProperty.Counters, c.getCounters());
-        flagAsChanged(TrackableProperty.Counters);
+        super.updateCounters(c);
         updateLethalDamage(c);
         CardStateView state = getCurrentState();
         state.updatePower(c);
@@ -786,6 +765,13 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.ExiledWith);
     }
 
+    public CardView getPreparedSpell() {
+        return get(TrackableProperty.PreparedSpell);
+    }
+    void updatePreparedSpell(Card c) {
+        set(TrackableProperty.PreparedSpell, CardView.get(c.getPreparedSpell()));
+    }
+
     public FCollectionView<CardView> getImprintedCards() {
         return Objects.requireNonNullElse(get(TrackableProperty.ImprintedCards), FCollection.getEmpty());
     }
@@ -1135,6 +1121,12 @@ public class CardView extends GameEntityView {
         if ((isSplitCard || c.isDoubleFaced()) && isFaceDown()) {
             // face-down (e.g. manifested) split cards should show the original face on their flip side
             alternateState = c.getState(CardStateName.Original);
+        }
+
+        // When a card is cloned as an Adventure creature, getAlternateState() returns null
+        // because it only checks original states. Fall back to the Secondary clone state.
+        if (alternateState == null && c.hasState(CardStateName.Secondary)) {
+            alternateState = c.getState(CardStateName.Secondary);
         }
 
         if (alternateState == null) {

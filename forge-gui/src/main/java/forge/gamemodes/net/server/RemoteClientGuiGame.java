@@ -1,10 +1,11 @@
 package forge.gamemodes.net.server;
 
 import forge.LobbyPlayer;
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.event.GameEvent;
+import forge.game.event.GameEventPlayerControl;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
@@ -550,6 +551,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     @Override
     public void handleGameEvents(List<GameEvent> events) {
         if (paused) { return; }
+        for (GameEvent ev : events) {
+            if (ev instanceof GameEventPlayerControl pc) {
+                syncControlledPlayer(pc);
+            }
+        }
         netLog.info("Sending batch of {}: [{}]", events.size(),
                 events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
         // When GameEventGameStarted arrives, prepareAllZones has completed —
@@ -601,6 +607,27 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
             GameView gameView = getGameView();
             forge.trackable.Tracker tracker = gameView != null ? gameView.getTracker() : null;
             sender.send(ProtocolMethod.applyDelta, DeltaPacket.eventsOnly(TrackableSerializer.wrapEvents(events, tracker)));
+        }
+    }
+
+    /**
+     * Keep this proxy's local-player map in step with control changes. When a player on this
+     * client gains control of an opponent, the opponent's priority is handled through this
+     * client's shared input proxy, so {@link #setCurrentPlayer} must accept the controlled
+     * player as local. Mirrors {@code FControlGameEventHandler}, which does this for the
+     * host's own GUI; remote proxies only forward events and would otherwise never register
+     * the controlled player, throwing when their turn comes.
+     */
+    private void syncControlledPlayer(final GameEventPlayerControl ev) {
+        final PlayerView controlled = ev.player();
+        if (controlled == null) {
+            return;
+        }
+        final PlayerView master = ev.newLobbyPlayerName() == null ? null : controlled.getMindSlaveMaster();
+        if (master != null && ev.newControllerIsHuman() && isLocalPlayer(master)) {
+            setGameController(controlled, getGameController(master));
+        } else {
+            setGameController(controlled, null);
         }
     }
 

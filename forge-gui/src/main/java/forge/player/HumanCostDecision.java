@@ -3,6 +3,8 @@ package forge.player;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multiset;
+
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -895,6 +897,15 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostPutCounterYou cost) {
+        int c = cost.getAbilityAmount(ability);
+        if (!confirmAction(cost, Localizer.getInstance().getMessage("lblPutNTypeCounterOnTarget", c, cost.getCounter().getName(), controller.getPlayer().toString()))) {
+            return null;
+        }
+        return PaymentDecision.number(c);
+    }
+
+    @Override
     public PaymentDecision visit(final CostBlight cost) {
         return this.visit((CostPutCounter) cost);
     }
@@ -1078,11 +1089,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
             CounterType cType = this.counterType;
             if (cType == null) {
-                Map<CounterType, Integer> cmap = counterTable.filterToRemove(c);
+                Multiset<CounterType> cmap = counterTable.filterToRemove(c);
 
                 String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
 
-                cType = getController().chooseCounterType(Lists.newArrayList(cmap.keySet()), sa, prompt, null);
+                cType = getController().chooseCounterType(Lists.newArrayList(cmap.elementSet()), sa, prompt, null);
             }
 
             if (cType == null || !c.canRemoveCounters(cType)) {
@@ -1111,8 +1122,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 }
             } else {
                 boolean found = false;
-                for (Map.Entry<CounterType, Integer> e : c.getCounters().entrySet()) {
-                    if (e.getValue() > counterTable.get(null, c, e.getKey())) {
+                for (Multiset.Entry<CounterType> e : c.getCounters().entrySet()) {
+                    if (e.getCount() > counterTable.get(null, c, e.getElement())) {
                         found = true;
                         break;
                     }
@@ -1245,23 +1256,23 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (cType != null) {
             counterTable.put(null, c, cType, cntToRemove);
         } else {
-            Map<CounterType, Integer> cMap = counterTable.filterToRemove(c);
-            for (CounterType ct : ImmutableList.copyOf(cMap.keySet())) {
+            Multiset<CounterType> cMap = counterTable.filterToRemove(c);
+            for (CounterType ct : ImmutableList.copyOf(cMap.elementSet())) {
                 if (!c.canRemoveCounters(ct)) {
                     cMap.remove(ct);
                 }
             }
             if (cMap.isEmpty()) return counterTable;
             if (cMap.size() == 1) {
-                counterTable.put(null, c, cMap.entrySet().iterator().next().getKey(), cntToRemove);
+                counterTable.put(null, c, cMap.elementSet().iterator().next(), cntToRemove);
             } else while (cntToRemove > 0) {
                 final PlayerController pc = c.getController().getController();
 
                 String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
-                CounterType chosen = pc.chooseCounterType(Lists.newArrayList(cMap.keySet()), sa, prompt, null);
+                CounterType chosen = pc.chooseCounterType(Lists.newArrayList(cMap.elementSet()), sa, prompt, null);
 
-                int max = Math.min(cntToRemove, cMap.get(chosen));
-                int remaining = Aggregates.sum(cMap.values());
+                int max = Math.min(cntToRemove, cMap.count(chosen));
+                int remaining = cMap.size();
                 int min = Math.max(1, max - remaining);
                 prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosen.getName());
                 int chosenAmount = pc.chooseNumber(sa, prompt, min, max, null);

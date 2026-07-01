@@ -1,0 +1,7 @@
+Name:White Tiger, Amulet Keeper
+ManaCost:1 G
+Types:Legendary Creature Human Hero
+PT:3/1
+A:AB$ Draw | Cost$ 3 G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Defined$ You | NumCards$ 1 | SubAbility$ DBChangeZone | SpellDescription$ Draw a card.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ True | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ You may put a land card from your hand onto the battlefield.
+Oracle:{3}{G}, Exile this card from your graveyard: Draw a card. You may put a land card from your hand onto the battlefield.

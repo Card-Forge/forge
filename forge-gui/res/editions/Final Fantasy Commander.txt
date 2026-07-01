@@ -84,7 +84,7 @@ ScryfallCode=FIC
 76 R Aerith, Last Ancient @Marta Nael
 77 R Ardbert, Warrior of Darkness @Thanh Tuấn
 78 R Banon, the Returners' Leader @Daniel Landerman
-79 R Barret, Avalanche Leader @J. Schirmer & M. Verhasselt
+79 R Barret, Avalanche Leader @Jana Schirmer & Matthias Verhasselt
 80 R Edgar, Master Machinist @Immanuela Crovius
 81 R Emet-Selch of the Third Seat @Magali Villeneuve
 82 R Estinien Varlineau @Fang Xinyu
@@ -171,7 +171,7 @@ ScryfallCode=FIC
 163 R Aerith, Last Ancient @Marta Nael
 164 R Ardbert, Warrior of Darkness @Thanh Tuấn
 165 R Banon, the Returners' Leader @Daniel Landerman
-166 R Barret, Avalanche Leader @J. Schirmer & M. Verhasselt
+166 R Barret, Avalanche Leader @Jana Schirmer & Matthias Verhasselt
 167 M Celes, Rune Knight @Néstor Ossandón Leal
 168 M Cloud, Ex-SOLDIER @Justyna Dura
 169 R Edgar, Master Machinist @Immanuela Crovius

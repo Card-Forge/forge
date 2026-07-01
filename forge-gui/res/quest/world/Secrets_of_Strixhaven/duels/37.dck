@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Medium
+Description=./Standard/Secrets_of_Strixhaven/Jack_Yudt_-_Izzet_Prowess_(Standard,_#2939887).dck
+Deck Type=constructed
+
+[Main]
+4 Eddymurk Crab
+4 Burst Lightning
+4 Opt
+2 Get Out
+1 Prismari Charm
+4 Boomerang Basics
+4 Flow State
+4 Sleight of Hand
+3 Stock Up
+2 Impractical Joke
+4 Stormchaser's Talent
+3 Roaring Furnace
+6 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+4 Steam Vents
+2 Multiversal Passage
+1 Stormcarved Coast
+[Sideboard]
+3 Slagstorm
+2 Emeritus of Ideation
+2 Negate
+2 Wan Shi Tong, Librarian
+1 Annul
+1 Broadside Barrage
+1 Disdainful Stroke
+1 Get Out
+1 Spell Snare
+1 Spider-Sense
