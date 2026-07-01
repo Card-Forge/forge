@@ -674,10 +674,11 @@ public class DeckgenUtil {
                         preSelectedCards.add(paperCard);
                     }
                 }
-            }else {
+            } else {
                 String matrixKey = (format.equals(DeckFormat.TinyLeaders) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders
                 List<Map.Entry<PaperCard, Integer>> potentialCards = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(matrixKey).get(commander.getName()));
-                for(Map.Entry<PaperCard,Integer> pair:getWeightedRandomizedCardPool(potentialCards)){
+                prepareWeightedRandomizedCardPool(potentialCards);
+                for(Map.Entry<PaperCard,Integer> pair:potentialCards){
                     if(format.isLegalCard(pair.getKey())) {
                         preSelectedCards.add(pair.getKey());
                     }
@@ -774,6 +775,15 @@ public class DeckgenUtil {
         return deck;
     }
 
+    private static void prepareWeightedRandomizedCardPool(final List<Map.Entry<PaperCard, Integer>> potentialCards) {
+        final Map<Map.Entry<PaperCard, Integer>, Double> sortKeys = new IdentityHashMap<>();
+        for (final Map.Entry<PaperCard, Integer> cardEntry : potentialCards) {
+            final int weight = Math.max(1, cardEntry.getValue());
+            sortKeys.put(cardEntry, Math.log(MyRandom.getRandom().nextDouble()) / weight);
+        }
+        potentialCards.sort(Comparator.comparingDouble(sortKeys::get).reversed());
+    }
+
     private static List<PaperCard> limitCardsToCommanderBracket(final List<PaperCard> cards,
             final PaperCard commander, final PaperCard selectedPartner, final int maxBracket) {
         if (maxBracket < 1 || maxBracket >= 4) {
@@ -809,19 +819,6 @@ public class DeckgenUtil {
             }
         }
         return Aggregates.random(partners);
-    }
-
-    private static List<Map.Entry<PaperCard, Integer>> getWeightedRandomizedCardPool(final List<Map.Entry<PaperCard, Integer>> potentialCards) {
-        final Map<Map.Entry<PaperCard, Integer>, Double> sortKeys = new IdentityHashMap<>();
-        for (final Map.Entry<PaperCard, Integer> cardEntry : potentialCards) {
-            sortKeys.put(cardEntry, getWeightedRandomSortKey(cardEntry));
-        }
-        potentialCards.sort(Comparator.comparingDouble(sortKeys::get).reversed());
-        return potentialCards;
-    }
-    private static double getWeightedRandomSortKey(final Map.Entry<PaperCard, Integer> cardEntry) {
-        final int weight = Math.max(1, cardEntry.getValue());
-        return Math.log(MyRandom.getRandom().nextDouble()) / weight;
     }
 
     public static Map<ManaCostShard, Integer> suggestBasicLandCount(Deck d) {

@@ -659,7 +659,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
                 for (int j = 0; j < nLand; j++) {
                     deckList.add(getBasicLand(i));
-                    landsNeeded--;
                 }
                 landsNeeded -= nLand;
             }
@@ -898,15 +897,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      *            number to add
      */
     private void addManaCurveCards(final Iterable<PaperCard> creatures, int num, String nameForLog) {
-/*        // Add the deck card
-        if(commanderCard.getRules().getMainPart().getType().isCreature()) {
-            keyCards = Iterables.filter(aiPlayables,PaperCard.Predicates.name(commanderCard.getName()));
-            final List<PaperCard> keyCardList = Lists.newArrayList(keyCards);
-            deckList.addAll(keyCardList);
-            aiPlayables.removeAll(keyCardList);
-            rankedColorList.removeAll(keyCardList);
-        }*/
-
         final Map<Integer, Long> creatureCosts = deckList.stream().filter(PaperCardPredicates.IS_CREATURE)
             .collect(Collectors.groupingBy(c -> Ints.constrainToRange(c.getRules().getManaCost().getCMC(), 1, 6), Collectors.counting()));
 
