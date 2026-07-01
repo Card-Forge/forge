@@ -2,6 +2,8 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multiset;
+
 import forge.ai.*;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -1292,13 +1294,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         }
                     }
                 }
-                Map<CounterType, Integer> counters = c.getCounters();
-                for (CounterType ct : counters.keySet()) {
-                    int amount = counters.get(ct);
-                    if (ComputerUtil.isNegativeCounter(ct, c)) {
-                        numNegativeCounters += amount;
+                for (Multiset.Entry<CounterType> e : c.getCounters().entrySet()) {
+                    if (ComputerUtil.isNegativeCounter(e.getElement(), c)) {
+                        numNegativeCounters += e.getCount();
                     }
-                    numTotalCounters += amount;
+                    numTotalCounters += e.getCount();
                 }
                 if (hasValuableAttachments || (ComputerUtilCard.isUselessCreature(ai, c) && !hasOppAttachments)) {
                     continue;

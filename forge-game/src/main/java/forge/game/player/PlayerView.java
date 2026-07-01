@@ -3,6 +3,8 @@ package forge.game.player;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
+
 import forge.LobbyPlayer;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -176,24 +178,6 @@ public class PlayerView extends GameEntityView {
     }
     void updateLife(Player p) {
         set(TrackableProperty.Life, p.getLife());
-    }
-
-    public Map<CounterType, Integer> getCounters() {
-        return get(TrackableProperty.Counters);
-    }
-    public int getCounters(CounterType counterType) {
-        final Map<CounterType, Integer> counters = getCounters();
-        if (counters != null) {
-            Integer count = counters.get(counterType);
-            if (count != null) {
-                return count;
-            }
-        }
-        return 0;
-    }
-    void updateCounters(Player p) {
-        set(TrackableProperty.Counters, p.getCounters());
-        flagAsChanged(TrackableProperty.Counters);
     }
 
     public boolean getIsExtraTurn() {
@@ -511,11 +495,11 @@ public class PlayerView extends GameEntityView {
         final List<String> details = Lists.newArrayListWithCapacity(8);
         details.add(Localizer.getInstance().getMessage("lblLifeHas", getLife()));
 
-        Map<CounterType, Integer> counters = getCounters();
+        Multiset<CounterType> counters = getCounters();
         if (counters != null) {
-            for (Entry<CounterType, Integer> p : counters.entrySet()) {
-                if (p.getValue() > 0) {
-                    details.add(Localizer.getInstance().getMessage("lblTypeCounterHas", p.getKey().getName(), p.getValue()));
+            for (Multiset.Entry<CounterType> p : counters.entrySet()) {
+                if (p.getCount() > 0) {
+                    details.add(Localizer.getInstance().getMessage("lblTypeCounterHas", p.getElement().getName(), p.getCount()));
                 }
             }
         }

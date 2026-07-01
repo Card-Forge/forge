@@ -252,7 +252,7 @@ public class GameAction {
 
             // need to copy counters when card enters another zone than hand or library
             if (StaticAbilityCountersRemain.countersRemain(lastKnownInfo, zoneTo)) {
-                copied.setCounters(Maps.newHashMap(lastKnownInfo.getCounters()));
+                copied.setCounters(HashMultiset.create(lastKnownInfo.getCounters()));
             }
 
             // perpetual stuff

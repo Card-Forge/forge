@@ -44,6 +44,8 @@ import java.util.Map;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
+import com.google.common.collect.Multiset;
+
 import forge.CachedCardImage;
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -800,10 +802,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         FontMetrics largeFontMetrics = g.getFontMetrics(largeCounterFont);
 
         if (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE)) == CounterDisplayType.OLD_WHEN_SMALL) {
-            int maxCounters = 0;
-            for (Integer numberOfCounters : card.getCounters().values()) {
-                maxCounters = Math.max(maxCounters, numberOfCounters);
-            }
+            int maxCounters = card.getCounters().entrySet().stream().mapToInt(Multiset.Entry::getCount).max().orElse(0);
 
             if (counterBoxBaseWidth + largeFontMetrics.stringWidth(String.valueOf(maxCounters)) > cardWidth) {
                 drawCounterImage(g);
@@ -812,9 +811,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         }
 
-        for (Map.Entry<CounterType, Integer> counterEntry :  new HashSet<>(card.getCounters().entrySet())) {
-            final CounterType counter = counterEntry.getKey();
-            final int numberOfCounters = counterEntry.getValue();
+        for (Multiset.Entry<CounterType> counterEntry : new HashSet<>(card.getCounters().entrySet())) {
+            final CounterType counter = counterEntry.getElement();
+            final int numberOfCounters = counterEntry.getCount();
             final int counterBoxRealWidth = counterBoxBaseWidth + largeFontMetrics.stringWidth(String.valueOf(numberOfCounters));
 
             final int counterYOffset;
@@ -857,10 +856,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private void drawCounterImage(final Graphics g) {
-        int counters = 0;
-        for (final Integer i : card.getCounters().values()) {
-            counters += i;
-        }
+        int counters = card.getCounters().size();
 
         final int yCounters = (cardYOffset + cardHeight) - (cardHeight / 3) - 40;
 

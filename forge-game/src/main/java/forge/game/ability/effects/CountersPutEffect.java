@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 
 import forge.card.MagicColor;
@@ -325,13 +326,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             CardCollectionView counterCards =
                                     CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
                                             type.split("_")[1], activator, card, sa);
-                            List<CounterType> counterTypes = Lists.newArrayList();
+                            Set<CounterType> counterTypes = Sets.newLinkedHashSet();
                             for (Card c : counterCards) {
-                                for (final Map.Entry<CounterType, Integer> map : c.getCounters().entrySet()) {
-                                    if (!counterTypes.contains(map.getKey())) {
-                                        counterTypes.add(map.getKey());
-                                    }
-                                }
+                                counterTypes.addAll(c.getCounters().elementSet());
                             }
                             for (CounterType ct : counterTypes) {
                                 if (sa.hasParam("AltChoiceForEach")) {
@@ -379,7 +376,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 if (existingCounter) {
                     final List<CounterType> choices = Lists.newArrayList();
                     // get types of counters
-                    for (CounterType ct : obj.getCounters().keySet()) {
+                    for (CounterType ct : obj.getCounters().elementSet()) {
                         if (obj.canReceiveCounters(ct) || putOnEachOther) {
                             choices.add(ct);
                         }
@@ -433,17 +430,17 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
                 if (sa.hasParam("EachFromSource")) {
                     for (Card c : AbilityUtils.getDefinedCards(card, sa.getParam("EachFromSource"), sa)) {
-                        for (Entry<CounterType, Integer> cti : c.getCounters().entrySet()) {
+                        for (Multiset.Entry<CounterType> cti : c.getCounters().entrySet()) {
                             if (gameCard != null) {
                                 if (!sa.hasParam("CounterNum")) {
                                     // default is all
-                                    counterAmount = cti.getValue();
+                                    counterAmount = cti.getCount();
                                 }
                                 if (etbcounter) {
                                     GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
-                                    etbTable.put(placer, gameCard, cti.getKey(), counterAmount);
+                                    etbTable.put(placer, gameCard, cti.getElement(), counterAmount);
                                 } else {
-                                    gameCard.addCounter(cti.getKey(), counterAmount, placer, table);
+                                    gameCard.addCounter(cti.getElement(), counterAmount, placer, table);
                                 }
                             }
                         }
@@ -602,9 +599,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 counterMapValue = Integer.valueOf(sa.getParam("CounterMapValues"));
             }
             @SuppressWarnings("unchecked")
-            Map<CounterType, Integer> counterMap = (Map<CounterType, Integer>) sa.getTriggeringObject(AbilityKey.CounterMap);
-            for (Map.Entry<CounterType, Integer> e : counterMap.entrySet()) {
-                resolvePerType(sa, placer, e.getKey(), counterMapValue == null ? e.getValue() : counterMapValue, table, false);
+            Multiset<CounterType> counterMap = (Multiset<CounterType>) sa.getTriggeringObject(AbilityKey.CounterMap);
+            for (Multiset.Entry<CounterType> e : counterMap.entrySet()) {
+                resolvePerType(sa, placer, e.getElement(), counterMapValue == null ? e.getCount() : counterMapValue, table, false);
             }
         } else if (sa.hasParam("SharedKeywords")) {
             List<String> keywords = Arrays.asList(sa.getParam("SharedKeywords").split(" & "));
@@ -651,9 +648,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
         table.replaceCounterEffect(game, cause);
 
         if (sa.hasParam("RemovePhase")) {
-            for (Map.Entry<GameEntity, Map<CounterType, Integer>> e : table.row(Optional.of(placer)).entrySet()) {
-                for (Map.Entry<CounterType, Integer> ce : e.getValue().entrySet()) {
-                    addRemovePhaseTrigger(card, sa, sa.getParam("RemovePhase"), e.getKey(), ce.getKey(), ce.getValue());
+            for (Map.Entry<GameEntity, Multiset<CounterType>> e : table.row(Optional.of(placer)).entrySet()) {
+                for (Multiset.Entry<CounterType> ce : e.getValue().entrySet()) {
+                    addRemovePhaseTrigger(card, sa, sa.getParam("RemovePhase"), e.getKey(), ce.getElement(), ce.getCount());
                 }
             }
         }

@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
 
 import forge.card.CardType;
 import forge.card.CardTypeView;
@@ -179,7 +180,7 @@ public class TrackableTypes {
     public static final TrackableType<Set<Integer>> IntegerSetType = new TrackableType<>(null);
     public static final TrackableType<Map<Integer, Integer>> IntegerMapType = new TrackableType<>(null);
     public static final TrackableType<Map<Byte, Integer>> ManaMapType = new TrackableType<>(null);
-    public static final TrackableType<Map<CounterType, Integer>> CounterMapType = new TrackableType<>(null);
+    public static final TrackableType<Multiset<CounterType>> CounterMapType = new TrackableType<>(null);
     public static final TrackableType<Map<Object, Object>> GenericMapType = new TrackableType<>(null);
     public static final TrackableType<KeywordCollectionView> KeywordCollectionViewType = new TrackableType<>(KeywordCollectionView.EMPTY);
 }
