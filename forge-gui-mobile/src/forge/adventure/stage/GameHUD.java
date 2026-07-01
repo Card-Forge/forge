@@ -24,7 +24,6 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.github.tommyettinger.textra.TextraButton;
-import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 
 import java.util.EnumSet;

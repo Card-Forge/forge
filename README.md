@@ -46,6 +46,7 @@ Embark on a thrilling single-player journey where you can:
 - Explore an overworld map.
 - Challenge diverse AI opponents.
 - Collect cards and items to boost your abilities.
+- Archipelago Multiworld compatibility
 
 <img width="1282" height="752" alt="Shandalar World" src="https://github.com/user-attachments/assets/9af31471-d688-442f-9418-9807d8635b72" />
 

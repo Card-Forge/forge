@@ -3,9 +3,14 @@ package forge.adventure.character;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.Array;
+import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoMode;
+import forge.adventure.archipelago.ArchipelagoRandomizer;
+import forge.adventure.data.DialogData;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
+import forge.adventure.util.MapDialog;
 import forge.adventure.util.Paths;
 
 import java.util.HashMap;
@@ -38,6 +43,28 @@ public class PortalActor extends EntryActor {
             //Activate portal? Launch Dialog?
         }
         if (currentAnimationType == PortalAnimationTypes.Active) {
+            if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago && ArchipelagoRandomizer.getInstance().getSlotData() == null) {
+                // Check if the player has filled slotData, if not, tell them to connect to Archipelago before continuing.
+                DialogData dialog = new DialogData();
+                dialog.text =
+                        """
+                        You must first connect to the Archipelago server before continuing your adventure.
+                        \s
+                        Please open the game menu and look for the Archipelago button to set up your connection.
+                        """;
+
+                DialogData button = new DialogData();
+                button.name = "Take me there";
+                DialogData.ActionData action = new DialogData.ActionData();
+                action.openArchipelagoSettings = true;
+                button.action = new DialogData.ActionData[] { action };
+                dialog.options = new DialogData[] { button };
+                MapDialog mapDialog = new MapDialog(dialog, stage, -1, null);
+                stage.showDialog();
+                mapDialog.activate();
+                return;
+            }
+
             if (targetMap == null || targetMap.isEmpty()) {
                 stage.exitDungeon(false, false);
             } else {

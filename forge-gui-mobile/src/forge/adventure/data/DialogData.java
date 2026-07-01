@@ -81,6 +81,8 @@ public class DialogData implements Serializable {
         public int addMapReputation = 0;  //Gives the player X reputation points in this POI. Negative to take.
         public String POIReference; //used with addMapReputation when a quest step affects reputation in another location
 
+        public boolean openArchipelagoSettings = false;
+
         public ActionData(){}
 
         public ActionData(ActionData other){
