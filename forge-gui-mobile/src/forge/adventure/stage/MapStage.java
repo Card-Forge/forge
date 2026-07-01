@@ -760,6 +760,10 @@ public class MapStage extends GameStage {
                                             ret.add(new Reward(item));
                                         }
                                     }
+                                } else {
+                                    for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
+                                        ret.addAll(rdata.generate(false, false));
+                                    }
                                 }
                         }
                         ShopActor actor = new ShopActor(this, id, ret, data);
