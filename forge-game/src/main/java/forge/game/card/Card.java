@@ -3407,7 +3407,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean hasRemoveIntrinsic() {
-        return IterableUtil.any(getChangedCardTypes(), ICardChangedType::isRemoveLandTypes);
+        // only Layer 4 are affected, and it's never intrinsic
+        return changedCardTypes.values().stream().anyMatch(ICardChangedType::isRemoveLandTypes);
     }
 
     public boolean hasNoAbilities() {
