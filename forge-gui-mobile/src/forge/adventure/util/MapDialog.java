@@ -17,7 +17,6 @@ import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.archipelago.Archipelago;
-import forge.adventure.archipelago.ArchipelagoRandomizer;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.AdventureQuestData;

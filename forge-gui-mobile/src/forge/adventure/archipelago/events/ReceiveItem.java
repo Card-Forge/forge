@@ -4,7 +4,6 @@ import forge.adventure.archipelago.ArchipelagoColors;
 import forge.adventure.archipelago.ArchipelagoRandomizer;
 import forge.adventure.archipelago.ItemRegistry;
 import forge.adventure.archipelago.ArchipelagoData;
-import forge.adventure.util.Current;
 import io.github.archipelagomw.events.ArchipelagoEventListener;
 import io.github.archipelagomw.events.ReceiveItemEvent;
 import io.github.archipelagomw.parts.NetworkItem;

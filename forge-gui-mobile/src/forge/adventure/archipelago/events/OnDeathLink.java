@@ -1,14 +1,9 @@
 package forge.adventure.archipelago.events;
 
-import com.github.tommyettinger.textra.TypingLabel;
 import forge.adventure.archipelago.ArchipelagoClient;
 import forge.adventure.archipelago.SlotData;
-import io.github.archipelagomw.Print.APPrintJsonType;
 import io.github.archipelagomw.events.ArchipelagoEventListener;
 import io.github.archipelagomw.events.DeathLinkEvent;
-import io.github.archipelagomw.events.PrintJSONEvent;
-
-
 
 public class OnDeathLink {
     private final ArchipelagoClient APClient;

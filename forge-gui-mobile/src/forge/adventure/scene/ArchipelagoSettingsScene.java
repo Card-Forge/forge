@@ -6,8 +6,6 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.archipelago.Archipelago;
 
-import java.net.URISyntaxException;
-
 /**
  * Scene to handle settings of the archipelago client
  */
