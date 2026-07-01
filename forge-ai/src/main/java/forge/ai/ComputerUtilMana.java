@@ -119,7 +119,9 @@ public class ComputerUtilMana {
         return score;
     }
 
-    private static void sortManaAbilities(final ListMultimap<ManaCostShard, SpellAbility> sourcesForShards, final ListMultimap<Integer, SpellAbility> manaAbilityMap, final SpellAbility sa) {
+    private static void sortManaAbilities(final ListMultimap<ManaCostShard, SpellAbility> sourcesForShards,
+            final ListMultimap<Integer, SpellAbility> manaAbilityMap, final SpellAbility sa,
+            final ManaCostBeingPaid cost) {
         final Map<Card, Integer> manaCardMap = Maps.newHashMap();
         final List<Card> orderedCards = Lists.newArrayList();
 
@@ -169,6 +171,14 @@ public class ComputerUtilMana {
             }
 
             newAbilities.sort((ability1, ability2) -> {
+                if (!shard.isGeneric() && cost.getGenericManaAmount() > 0) {
+                    int amount1 = ability1.totalAmountOfManaGenerated(sa, true);
+                    int amount2 = ability2.totalAmountOfManaGenerated(sa, true);
+                    if (amount1 != amount2 && (amount1 > 1 || amount2 > 1)) {
+                        return amount2 - amount1;
+                    }
+                }
+
                 int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
 
                 if (preOrder != 0) {
@@ -627,7 +637,7 @@ public class ComputerUtilMana {
         // select which abilities may be used for each shard
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
-        sortManaAbilities(sourcesForShards, manaAbilityMap, sa);
+        sortManaAbilities(sourcesForShards, manaAbilityMap, sa, cost);
 
         ManaCostShard toPay;
         // Loop over mana needed
@@ -936,7 +946,7 @@ public class ComputerUtilMana {
             }
         }
 
-        sortManaAbilities(sourcesForShards, manaAbilityMap, sa);
+        sortManaAbilities(sourcesForShards, manaAbilityMap, sa, cost);
         if (DEBUG_MANA_PAYMENT) {
             System.out.println("DEBUG_MANA_PAYMENT: sourcesForShards = " + sourcesForShards);
         }
@@ -1781,10 +1791,11 @@ public class ComputerUtilMana {
     public static List<SpellAbility> getAIPlayableMana(Card c) {
         final List<SpellAbility> res = new ArrayList<>();
         for (final SpellAbility a : c.getManaAbilities()) {
-            // if a mana ability has a mana cost the AI will miscalculate
-            // if there is a parent ability the AI can't use it
+            // if there is a parent ability the AI can't use it; mana costs are only
+            // considered when the activation cost is reusable, like filter lands.
             final Cost cost = a.getPayCosts();
-            if (cost.hasManaCost() || (a.getApi() != ApiType.Mana && a.getApi() != ApiType.ManaReflected)) {
+            if ((a.getApi() != ApiType.Mana && a.getApi() != ApiType.ManaReflected)
+                    || (cost.hasManaCost() && !cost.isReusuableResource())) {
                 continue;
             }
 
