@@ -159,7 +159,7 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
      */
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        CEditorConstructed.buildRemoveContextMenu(cmb, sectionMode, true);
+        CEditorConstructed.buildRemoveContextMenu(cmb, sectionMode, gameType, true);
     }
 
     /*
