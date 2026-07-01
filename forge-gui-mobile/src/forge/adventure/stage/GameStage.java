@@ -377,76 +377,75 @@ public abstract class GameStage extends Stage {
             onRemoveEffect(mod);
         }
 
+        if (onEndAction != null) {
+            onEndAction.run();
+            onEndAction = null;
+        }
+
         if (isPaused() || isDialogOnlyInput() || Forge.advFreezePlayerControls) {
             keyboardInput.setZero();
             controllerInput.setZero();
             touchInput.setZero();
             player.getMovementDirection().setZero();
             player.stop();
-        }
-
-        if (onEndAction != null) {
-
-            onEndAction.run();
-            onEndAction = null;
-        }
-
-        keyboardInput.setZero();
-        for (int key : KeyBinding.Left.getBindings()) {
-            if (Gdx.input.isKeyPressed(key)) {
-                keyboardInput.x = -1;
-                break;
-            }
-        }
-        for (int key : KeyBinding.Right.getBindings()) {
-            if (Gdx.input.isKeyPressed(key)) {
-                keyboardInput.x = 1;
-                break;
-            }
-        }
-        for (int key : KeyBinding.Up.getBindings()) {
-            if (Gdx.input.isKeyPressed(key)) {
-                keyboardInput.y = 1;
-                break;
-            }
-        }
-        for (int key : KeyBinding.Down.getBindings()) {
-            if (Gdx.input.isKeyPressed(key)) {
-                keyboardInput.y = -1;
-                break;
-            }
-        }
-
-
-        // Input priority: touch > controller > keyboard
-        Vector2 dir = new Vector2();
-        if (touchX >= 0 && touchInput.len() > 0.2f) {
-            dir.set(touchInput);
-
-        } else if (controllerInput.len() > 0.2f) {
-            dir.set(controllerInput);
-
         } else {
-            dir.set(keyboardInput);
-        }
-        if (dir.len() < 0.01f) {
-            player.stop();
-        } else {
-            player.getMovementDirection().set(dir);
-        }
+            keyboardInput.setZero();
+            for (int key : KeyBinding.Left.getBindings()) {
+                if (Gdx.input.isKeyPressed(key)) {
+                    keyboardInput.x = -1;
+                    break;
+                }
+            }
+            for (int key : KeyBinding.Right.getBindings()) {
+                if (Gdx.input.isKeyPressed(key)) {
+                    keyboardInput.x = 1;
+                    break;
+                }
+            }
+            for (int key : KeyBinding.Up.getBindings()) {
+                if (Gdx.input.isKeyPressed(key)) {
+                    keyboardInput.y = 1;
+                    break;
+                }
+            }
+            for (int key : KeyBinding.Down.getBindings()) {
+                if (Gdx.input.isKeyPressed(key)) {
+                    keyboardInput.y = -1;
+                    break;
+                }
+            }
 
-        if (touchX >= 0) {
-            Vector2 target = this.screenToStageCoordinates(new Vector2(touchX, touchY));
-            target.x -= player.getWidth() / 2f;
-            Vector2 diff = target.sub(player.pos());
+            // Input priority: touch > controller > keyboard
+            Vector2 dir = new Vector2();
+            if (touchX >= 0 && touchInput.len() > 0.2f) {
+                dir.set(touchInput);
 
-            if (diff.len() < 2) {
-                touchInput.setZero();
+            } else if (controllerInput.len() > 0.2f) {
+                dir.set(controllerInput);
+
+            } else {
+                dir.set(keyboardInput);
+            }
+            if (dir.len() < 0.01f) {
                 player.stop();
             } else {
-                touchInput.set(diff);
+                player.getMovementDirection().set(dir);
+            }
+
+            if (touchX >= 0) {
+                Vector2 target = this.screenToStageCoordinates(new Vector2(touchX, touchY));
+                target.x -= player.getWidth() / 2f;
+                Vector2 diff = target.sub(player.pos());
+
+                if (diff.len() < 2) {
+                    touchInput.setZero();
+                    player.stop();
+                } else {
+                    touchInput.set(diff);
+                }
             }
         }
+
         camera.position.x = Math.min(Math.max(Scene.getIntendedWidth() / 2f, player.pos().x), getViewport().getWorldWidth() - Scene.getIntendedWidth() / 2f);
         camera.position.y = Math.min(Math.max(Scene.getIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.getIntendedHeight() / 2f);
 

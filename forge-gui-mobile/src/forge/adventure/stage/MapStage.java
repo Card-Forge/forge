@@ -416,13 +416,8 @@ public class MapStage extends GameStage {
                         } else {
                             otherEntries.add(entry);
                         }
-                        // Todo: This makes the portal appear, we should do some logic when the player enters the portal
-                        if (!prop.containsKey("noExit") || prop.get("noExit").toString().equals("false")) {
-                            if (ArchipelagoRandomizer.getInstance().getSlotData() != null) {
-                                addMapActor(obj, entry);
-                            }
-                            // Notify the user that they must connect to
-                        }
+                        if (!prop.containsKey("noExit") || prop.get("noExit").toString().equals("false"))
+                            addMapActor(obj, entry);
                         break;
                     case "portal":
                         float px = Float.parseFloat(prop.get("x").toString());
