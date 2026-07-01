@@ -46,53 +46,9 @@ Embark on a thrilling single-player journey where you can:
 - Explore an overworld map.
 - Challenge diverse AI opponents.
 - Collect cards and items to boost your abilities.
+- Archipelago Multiworld compatibility
 
 <img width="1282" height="752" alt="Shandalar World" src="https://github.com/user-attachments/assets/9af31471-d688-442f-9418-9807d8635b72" />
-
-### 🎲 Randomized Adventure Mode
-Play the Adventure mode on the Shandalar world but with randomized items & biomes. Unlock each region of the map as you progress.
-- All cards outside your starting deck will be locked by default. 
-- Biomes, cards and equipment unlocks are randomized and can be unlocked by completing various objectives in the game such as:
-  - Collecting cards
-  - Completing quests
-  - Winning battles
-  - Competing at Inn events
-  - Defeating bosses and mini-bosses
-- Equipment shop contents are fully randomized and (almost) any piece of equipment in game can show up.
-- The Leather Boots in your starting equipment are removed regardless of difficulty, all entities' base speeds are increased to compensate.
-
-### 🏝️ Archipelago Adventure Mode
-Play the Randomized Adventure Mode using Archipelago to shuffle all items and locations amongst a pool of other Archipelago compatible games.
-<br/>Archipelago adds the following locations to the pool:
-- Buying items from equipment & item shops
-- Defeating a mini-boss
-- Defeating a castle boss
-- Winning a certain number of battles per region
-- Completing a certain number of quests per region
-- Finishing a certain number of inn events per region
-- Collecting a certain number of cards per rarity
-
-This Archipelago implementation adds the following rewards and filler rewards to the pool:
-- Region unlocks in the form of "region runes", one per color of region
-- Gold in various amounts
-- Mana Shards in various amounts
-- Bronze/Silver/Gold Challenge Coins
-- Sets of cards including a free matching booster pack
-- Max life in various amounts
-- Pieces of equipment for the player to wear
-
-#### Step-by-step guide on how to set up Forge Archipelago Adventure Mode:
-1. Download the [latest release](https://github.com/BramTeurlings/forge-archipelago/releases) of this repository
-2. Download the [latest release](https://github.com/BramTeurlings/forge-APWorld/releases) of the Forge APWorld repository
-3. Download the [latest release](https://github.com/ArchipelagoMW/Archipelago/releases) of the Archipelago Client
-4. Install Card-Forge using the `forge-installer-<VERSION>-SNAPSHOT.jar` file bundled in this repository's release files
-5. Install the Archipelago Client by opening the `Setup.Archipelago.<VERSION>.exe` bundled in Archipelago Client release files
-6. Open the Archipelago Launcher and click "Open" on the "Install APWorld" option. 
-7. When prompted, select the `forge.apworld` file downloaded from the Forge APWorld repository release files.
-8. Once complete, restart the launcher.
-9. Click "Open" on the "Options Creator" option.
-10. Scroll down the list on the left side until you see "Forge" or "ForgeAP".
-11. Etc
 
 ### 🔍 Quest Modes
 Engage in focused gameplay without the overworld exploration—perfect for quick sessions!
