@@ -5,9 +5,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.net.BindException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import javax.swing.JMenu;
@@ -20,7 +18,6 @@ import net.miginfocom.swing.MigLayout;
 
 import forge.gamemodes.net.ChatMessage;
 import forge.gamemodes.net.NetConnectUtil;
-import forge.gamemodes.net.server.FServerManager;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.SOverlayUtils;
@@ -29,10 +26,8 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.util.SOptionPane;
 import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgeNetPreferences;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
-import forge.model.FModel;
 import forge.screens.home.CHomeUI;
 import forge.screens.home.CLobby;
 import forge.screens.home.VLobby;
@@ -96,37 +91,11 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     }
 
     static void showServerAddressesDialog() {
-        final ForgeNetPreferences netPrefs = FModel.getNetPreferences();
-        final int port = netPrefs.getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
-        final LinkedHashMap<String, String> addresses = FServerManager.getAllLocalAddresses();
-        final String externalAddress = FServerManager.getExternalAddress();
         final Localizer localizer = Localizer.getInstance();
+        final NetConnectUtil.ServerAddressList addresses = NetConnectUtil.collectHostedServerAddresses();
 
-        // Collect rows in display order; we auto-copy and star whichever row matches
-        // the last-copied URL, falling back to the first row.
-        final List<String> orderedLabels = new ArrayList<>();
-        final List<String> orderedUrls = new ArrayList<>();
-        if (externalAddress != null) {
-            orderedLabels.add("External (WAN)");
-            orderedUrls.add(externalAddress + ":" + port);
-        }
-        for (final Map.Entry<String, String> entry : addresses.entrySet()) {
-            orderedLabels.add(entry.getKey());
-            orderedUrls.add(entry.getValue() + ":" + port);
-        }
-
-        // If the remembered URL is present in the current list, auto-copy and star it.
-        // Otherwise fall back to the first entry (external if present, else first local
-        // interface) — matches the old copyHostedServerUrl default. Do NOT overwrite
-        // the remembered value on fallback, so a later reconnect to the original
-        // network restores the preference.
-        final String rememberedUrl = netPrefs.getPref(ForgeNetPreferences.FNetPref.NET_LAST_COPIED_URL);
-        int starIndex = orderedUrls.indexOf(rememberedUrl);
-        if (starIndex < 0) {
-            starIndex = orderedUrls.isEmpty() ? -1 : 0;
-        }
-        if (starIndex >= 0) {
-            copyToClipboard(orderedUrls.get(starIndex));
+        if (addresses.starIndex >= 0) {
+            copyToClipboard(addresses.urls.get(addresses.starIndex));
         }
 
         final JPanel panel = new JPanel(new MigLayout("insets 0, gap 4 6, wrap 3", "[pref]30[pref]30[pref]"));
@@ -142,25 +111,24 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         panel.add(new FLabel.Builder().text("").build());
 
         final FOptionPane[] holder = new FOptionPane[1];
-        for (int i = 0; i < orderedUrls.size(); i++) {
-            final String url = orderedUrls.get(i);
-            final String label = (i == starIndex) ? orderedLabels.get(i) + " \u2605" : orderedLabels.get(i);
+        for (int i = 0; i < addresses.urls.size(); i++) {
+            final String url = addresses.urls.get(i);
+            final String label = (i == addresses.starIndex) ? addresses.labels.get(i) + " \u2605" : addresses.labels.get(i);
             panel.add(new FLabel.Builder().text(label).fontSize(12).fontAlign(SwingConstants.LEFT).build(), "growx");
             panel.add(new FLabel.Builder().text(url).fontSize(12).fontAlign(SwingConstants.LEFT).build(), "growx");
             final FButton btnCopy = new FButton(localizer.getMessage("lblCopy"));
             btnCopy.setFont(FSkin.getFont(11));
             btnCopy.addActionListener(e -> {
                 copyToClipboard(url);
-                netPrefs.setPref(ForgeNetPreferences.FNetPref.NET_LAST_COPIED_URL, url);
-                netPrefs.save();
+                NetConnectUtil.rememberCopiedServerUrl(url);
                 holder[0].setVisible(false);
             });
             panel.add(btnCopy, "w 70!, h 24!");
         }
 
-        if (starIndex >= 0) {
+        if (addresses.starIndex >= 0) {
             panel.add(new FLabel.Builder()
-                    .text(localizer.getMessage("lblServerUrlCopiedToClipboard", orderedUrls.get(starIndex)))
+                    .text(localizer.getMessage("lblServerUrlCopiedToClipboard", addresses.urls.get(addresses.starIndex)))
                     .fontSize(11).fontStyle(Font.ITALIC).fontAlign(SwingConstants.LEFT).build(),
                     "span 3, growx, gaptop 10");
         }
