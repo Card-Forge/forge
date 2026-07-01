@@ -1,6 +1,6 @@
 Name:Tel-Jilad Defiance
 ManaCost:1 G
 Types:Instant
-A:SP$ Protection | ValidTgts$ Creature | Gains$ Artifact | SpellDescription$ Target creature gains protection from artifacts until end of turn. | SubAbility$ DBDraw
+A:SP$ Pump | ValidTgts$ Creature | KW$ Protection:Artifact | SubAbility$ DBDraw | SpellDescription$ Target creature gains protection from artifacts until end of turn.
 SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 Oracle:Target creature gains protection from artifacts until end of turn.\nDraw a card.

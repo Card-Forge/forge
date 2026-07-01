@@ -3,5 +3,5 @@ ManaCost:1 R
 Types:Creature Goblin Shaman
 PT:2/1
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You may pay 0 rather than pay the echo cost for permanents you control. | Description$ You may pay {0} rather than pay the echo cost for permanents you control.
-A:AB$ Protection | Cost$ R | Defined$ Self | Gains$ red | SpellDescription$ CARDNAME gains protection from red until end of turn.
+A:AB$ Pump | Cost$ R | Defined$ Self | KW$ Protection from red | SpellDescription$ CARDNAME gains protection from red until end of turn.
 Oracle:You may pay {0} rather than pay the echo cost for permanents you control.\n{R}: Thick-Skinned Goblin gains protection from red until end of turn.
