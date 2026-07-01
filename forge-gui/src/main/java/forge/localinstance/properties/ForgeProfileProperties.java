@@ -172,29 +172,52 @@ public class ForgeProfileProperties {
 
         final String fallbackDataDir = TextUtil.concatNoSpace(homeDir, "/.forge");
 
-        if (StringUtils.containsIgnoreCase(osName, "windows")) {
-            // the split between appdata and localappdata on windows is relatively recent.  If
-            // localappdata is not defined, use appdata for both.  and if appdata is not defined,
-            // fall back to a linux-style dot dir in the home directory
+        // Data Dir
+        String dataDir = null;
+        if (System.getenv().containsKey("FORGE_USER_DIR")) {
+            dataDir = System.getenv().get("FORGE_USER_DIR");
+        }
+        else if (StringUtils.containsIgnoreCase(osName, "windows")) {
+            // If appdata is not defined, fall back to a linux-style dot dir in the home directory
             String appRoot = System.getenv().get("APPDATA");
             if (StringUtils.isEmpty(appRoot)) {
                 appRoot = fallbackDataDir;
             }
-            String cacheRoot = System.getenv().get("LOCALAPPDATA");
-            if (StringUtils.isEmpty(cacheRoot)) {
-                cacheRoot = appRoot;
-            }
-            // the cache dir is Forge/Cache instead of just Forge since appRoot and cacheRoot might be the
-            // same directory on windows and we need to distinguish them.
-            return Pair.of(appRoot + File.separator + "Forge", cacheRoot + File.separator + "Forge" + File.separator + "Cache");
+            dataDir = appRoot + File.separator + "Forge";
         }
         else if (StringUtils.containsIgnoreCase(osName, "mac os x")) {
-            return Pair.of(TextUtil.concatNoSpace(homeDir, "/Library/Application Support/Forge"),
-                    TextUtil.concatNoSpace(homeDir, "/Library/Caches/Forge"));
+            dataDir = TextUtil.concatNoSpace(homeDir, "/Library/Application Support/Forge");
+        }
+        else {
+            // Linux and everything else
+            dataDir = fallbackDataDir;
         }
 
-        // Linux and everything else
-        return Pair.of(fallbackDataDir, TextUtil.concatNoSpace(homeDir, "/.cache/forge"));
+        // Cache Dir
+        String cacheDir = null;
+        if (System.getenv().containsKey("FORGE_CACHE_DIR")) {
+            cacheDir = System.getenv().get("FORGE_CACHE_DIR");
+        }
+        else if (StringUtils.containsIgnoreCase(osName, "windows")) {
+            // the split between appdata and localappdata on windows is relatively recent.  If
+            // localappdata is not defined, use a subdirectory of the data dir
+            String cacheRoot = System.getenv().get("LOCALAPPDATA");
+            if (StringUtils.isEmpty(cacheRoot)) {
+                cacheDir = dataDir + File.separator + "Cache";
+            }
+            else {
+                cacheDir = cacheRoot + File.separator + "Forge" + File.separator + "Cache";
+            }
+        }
+        else if (StringUtils.containsIgnoreCase(osName, "mac os x")) {
+            cacheDir = TextUtil.concatNoSpace(homeDir, "/Library/Caches/Forge");
+        }
+        else {
+            // Linux and everything else
+            cacheDir = TextUtil.concatNoSpace(homeDir, "/.cache/forge");
+        }
+
+        return Pair.of(dataDir, cacheDir);
     }
 
     private static void save() {
