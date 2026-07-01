@@ -42,6 +42,8 @@ public class DeckProxy implements InventoryItem {
     private Integer mainSize = null;
     private Integer sbSize = null;
     private Integer avgCMC = null;
+    private Boolean hasCommanderSection = null;
+    private Deck cachedDeck = null;
     private final String path;
     private final Function<IHasName, Deck> fnGetDeck;
     private CardEdition edition;
@@ -59,7 +61,7 @@ public class DeckProxy implements InventoryItem {
         this(deck, deckType, type, "", storage, fnGetDeck);
     }
 
-    private DeckProxy(final IHasName deck, final String deckType, final GameType type, final String path, final IStorage<? extends IHasName> storage, final Function<IHasName, Deck> fnGetDeck) {
+    public DeckProxy(final IHasName deck, final String deckType, final GameType type, final String path, final IStorage<? extends IHasName> storage, final Function<IHasName, Deck> fnGetDeck) {
         this.deck = deck;
         this.deckType = deckType;
         this.storage = storage;
@@ -80,11 +82,28 @@ public class DeckProxy implements InventoryItem {
     }
 
     public Deck getDeck() {
-        return deck instanceof Deck && fnGetDeck == null ? (Deck) deck : fnGetDeck.apply(deck);
+        if (deck instanceof Deck && fnGetDeck == null) {
+            return (Deck) deck;
+        }
+        if (fnGetDeck == null) {
+            return null;
+        }
+        if (cachedDeck == null) {
+            cachedDeck = fnGetDeck.apply(deck);
+        }
+        return cachedDeck;
     }
 
     public String getPath() {
         return path;
+    }
+
+    public IStorage<? extends IHasName> getStorage() {
+        return storage;
+    }
+
+    public String getSourceFileName() {
+        return deck instanceof DeckBase ? ((DeckBase) deck).getSourceFileName() : null;
     }
 
     public String getSourceUrl() {
@@ -140,6 +159,16 @@ public class DeckProxy implements InventoryItem {
         edition = null;
         mainSize = null;
         sbSize = null;
+        hasCommanderSection = null;
+        cachedDeck = null;
+    }
+
+    public boolean hasCommanderSection() {
+        if (hasCommanderSection == null) {
+            final Deck loadedDeck = isGeneratedDeck() ? null : getDeck();
+            hasCommanderSection = loadedDeck != null && !loadedDeck.getCommanders().isEmpty();
+        }
+        return hasCommanderSection;
     }
 
     public ColorSet getColor() {
@@ -573,11 +602,9 @@ public class DeckProxy implements InventoryItem {
         }
     }
 
-    private static class ThemeDeckGenerator extends DeckProxy {
-        private final String name;
+    private static class ThemeDeckGenerator extends GeneratedDeckProxy {
         public ThemeDeckGenerator(final String name0) {
-            super();
-            name = name0;
+            super(name0, 60);
         }
 
         @Override
@@ -594,20 +621,6 @@ public class DeckProxy implements InventoryItem {
             return deck;
         }
 
-        @Override
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
-
-        @Override
-        public boolean isGeneratedDeck() {
-            return true;
-        }
     }
 
     public static List<DeckProxy> getAllThemeDecks() {
@@ -737,54 +750,7 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
-    public static List<DeckProxy> getNetArchiveStandardDecks(final NetDeckArchiveStandard category) {
-        final List<DeckProxy> decks = new ArrayList<>();
-        if (category != null) {
-            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
-        }
-        return decks;
-    }
-
-    public static List<DeckProxy> getNetArchiveModernDecks(final NetDeckArchiveModern category) {
-        final List<DeckProxy> decks = new ArrayList<>();
-        if (category != null) {
-            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
-        }
-        return decks;
-    }
-    public static List<DeckProxy> getNetArchivePioneerDecks(final NetDeckArchivePioneer category) {
-        final List<DeckProxy> decks = new ArrayList<>();
-        if (category != null) {
-            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
-        }
-        return decks;
-    }
-
-    public static List<DeckProxy> getNetArchivePauperDecks(final NetDeckArchivePauper category) {
-        final List<DeckProxy> decks = new ArrayList<>();
-        if (category != null) {
-            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
-        }
-        return decks;
-    }
-
-    public static List<DeckProxy> getNetArchiveLegacyDecks(final NetDeckArchiveLegacy category) {
-        final List<DeckProxy> decks = new ArrayList<>();
-        if (category != null) {
-            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
-        }
-        return decks;
-    }
-
-    public static List<DeckProxy> getNetArchiveVintageDecks(final NetDeckArchiveVintage category) {
-        final List<DeckProxy> decks = new ArrayList<>();
-        if (category != null) {
-            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
-        }
-        return decks;
-    }
-
-    public static List<DeckProxy> getNetArchiveBlockDecks(final NetDeckArchiveBlock category) {
+    public static List<DeckProxy> getNetArchiveDecks(final NetDeckStorageBase category) {
         final List<DeckProxy> decks = new ArrayList<>();
         if (category != null) {
             addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);

@@ -29,7 +29,9 @@ import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
-import forge.screens.deckeditor.views.*;
+import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.screens.match.controllers.CDetailPicture;
@@ -58,10 +60,6 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
     private String ccAddLabel = Localizer.getInstance().getMessage("lblAddcard");
     private DragCell constructedDecksParent = null;
-    private DragCell commanderDecksParent = null;
-    private DragCell oathbreakerDecksParent = null;
-    private DragCell brawlDecksParent = null;
-    private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
     private boolean saved = false;
 
@@ -281,10 +279,6 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         constructedDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
-        commanderDecksParent = removeTab(VCommanderDecks.SINGLETON_INSTANCE);
-        oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
-        brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
-        tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
 
         // set catalog table to single-selection only mode
         getCatalogManager().setAllowMultipleSelections(false);
@@ -330,18 +324,6 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         }
         if (constructedDecksParent != null) {
             constructedDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-        }
-        if (commanderDecksParent != null) {
-            commanderDecksParent.addDoc(VCommanderDecks.SINGLETON_INSTANCE);
-        }
-        if (oathbreakerDecksParent != null) {
-            oathbreakerDecksParent.addDoc(VOathbreakerDecks.SINGLETON_INSTANCE);
-        }
-        if (brawlDecksParent!= null) {
-            brawlDecksParent.addDoc(VBrawlDecks.SINGLETON_INSTANCE);
-        }
-        if (tinyLeadersDecksParent != null) {
-            tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
         }
 
         // set catalog table back to free-selection mode

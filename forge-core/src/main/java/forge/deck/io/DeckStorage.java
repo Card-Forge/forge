@@ -87,6 +87,7 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
 
         if (result != null) {
             result.setDirectory(file.getParent().substring(rootDir.length()));
+            result.setSourceFileName(file.getName());
         }
         return result;
     }
@@ -107,4 +108,3 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
         return DCK_FILE_FILTER;
     }
 }
-

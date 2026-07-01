@@ -19,6 +19,7 @@ package forge.itemmanager;
 
 import forge.card.*;
 import forge.card.mana.ManaCost;
+import forge.deck.DeckBrowserEntry;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
@@ -56,6 +57,10 @@ public enum ColumnDef {
      */
     NAME("lblName", "lblName", 180, false, SortState.ASC,
             from -> {
+                if (from.getKey() instanceof DeckBrowserEntry) {
+                    DeckBrowserEntry entry = (DeckBrowserEntry) from.getKey();
+                    return String.format("%02d:%s", entry.getSortGroup(), TextUtil.toSortableName(entry.getDisplayName()));
+                }
                 if (from.getKey() instanceof PaperCard) {
                     String spire = ((PaperCard) from.getKey()).getMarkedColors() == null ? "" : ((PaperCard) from.getKey()).getMarkedColors().toString();
                     String sortableName = ((PaperCard)from.getKey()).getSortableName();
@@ -251,13 +256,13 @@ public enum ColumnDef {
      */
     DECK_FAVORITE("", "ttFavorite", 18, true, SortState.DESC,
             from -> {
-                DeckProxy deck = toDeck(from.getKey());
+                DeckProxy deck = toDeckProxy(from.getKey());
                 if (deck == null) {
                     return -1;
                 }
                 return DeckPreferences.getPrefs(deck).getStarCount();
             },
-            from -> toDeck(from.getKey())),
+            from -> toDeckProxy(from.getKey())),
     /**
      * The edit/delete deck column.
      */
@@ -274,14 +279,17 @@ public enum ColumnDef {
      * The deck color column.
      */
     DECK_COLOR("lblColor", "ttColor", 70, true, SortState.ASC,
-            from -> toDeckColor(from.getKey()).getOrderWeight(),
+            from -> {
+                ColorSet color = toDeckColor(from.getKey());
+                return color == null ? -1 : color.getOrderWeight();
+            },
             from -> toDeckColor(from.getKey())),
     /**
      * The deck format column.
      */
     DECK_FORMAT("lblFormat", "ttFormats", 60, false, SortState.DESC,
             from -> {
-                DeckProxy deck = toDeck(from.getKey());
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
                 if (deck == null) {
                     return -1;
                 }
@@ -295,7 +303,7 @@ public enum ColumnDef {
                 return acc;
             },
             from -> {
-                DeckProxy deck = toDeck(from.getKey());
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
                 if (deck == null) {
                     return null;
                 }
@@ -305,9 +313,16 @@ public enum ColumnDef {
      * The deck edition column, a mystery to us all.
      */
     DECK_EDITION("lblSet", "lblSet", 38, true, SortState.DESC,
-            from -> toDeck(from.getKey()).getEdition(),
             from -> {
-                CardEdition deckEdition = toDeck(from.getKey()).getEdition();
+                DeckProxy deck = toDeck(from.getKey());
+                return deck == null ? null : deck.getEdition();
+            },
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                if (deck == null) {
+                    return null;
+                }
+                CardEdition deckEdition = deck.getEdition();
                 if (deckEdition != null)
                     return deckEdition.getCode();
                 return null;
@@ -322,29 +337,49 @@ public enum ColumnDef {
             from -> eventTag(from.getKey(), "eventDate"),
             from -> eventTag(from.getKey(), "eventDate")),
     DECK_AI("lblAI", "lblAIStatus", 38, true, SortState.DESC,
-            from -> toDeck(from.getKey()).getAI().inMainDeck,
-            from -> toDeck(from.getKey()).getAI()),
-    DECK_BRACKET("lblBracket", "ttCommanderBracket", 55, true, SortState.ASC,
             from -> {
-                DeckProxy deck = toDeck(from.getKey());
-                return deck == null ? 1 : CommanderBracketCalculator.getBracket(deck.getDeck());
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
+                return deck == null ? -1 : deck.getAI().inMainDeck;
             },
             from -> {
-                DeckProxy deck = toDeck(from.getKey());
-                return deck == null ? "" : CommanderBracketCalculator.getBracket(deck.getDeck());
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
+                return deck == null ? null : deck.getAI();
+            }),
+    DECK_BRACKET("lblBracket", "ttCommanderBracket", 55, true, SortState.ASC,
+            from -> {
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
+                return isCommanderDeck(deck) ? CommanderBracketCalculator.getBracket(deck.getDeck()) : 1;
+            },
+            from -> {
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
+                return isCommanderDeck(deck) ? String.valueOf(CommanderBracketCalculator.getBracket(deck.getDeck())) : "-";
             }),
     /**
      * The main library size column.
      */
     DECK_MAIN("lblMain", "ttMain", 30, true, SortState.ASC,
-            from -> toDeck(from.getKey()).getMainSize(),
-            from -> toDeck(from.getKey()).getMainSize()),
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                return deck == null ? -1 : deck.getMainSize();
+            },
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                int size = deck == null ? -1 : deck.getMainSize();
+                return size < 0 ? null : size;
+            }),
     /**
      * The sideboard size column.
      */
     DECK_SIDE("lblSide", "lblSideboard", 30, true, SortState.ASC,
-            from -> toDeck(from.getKey()).getSideSize(),
-            from -> toDeck(from.getKey()).getSideSize()),
+            from -> {
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
+                return deck == null ? -1 : deck.getSideSize();
+            },
+            from -> {
+                DeckProxy deck = toNonGeneratedDeck(from.getKey());
+                int size = deck == null ? -1 : deck.getSideSize();
+                return size < 0 ? null : size;
+            }),
     /**
      * The key card indicator column for cards in the current deck.
      */
@@ -459,11 +494,39 @@ public enum ColumnDef {
     }
 
     private static DeckProxy toDeck(final InventoryItem i) {
-        return i instanceof DeckProxy ? ((DeckProxy) i) : null;
+        if (i instanceof DeckBrowserEntry) {
+            DeckBrowserEntry entry = (DeckBrowserEntry) i;
+            return entry.isDeck() ? entry : null;
+        }
+        if (i instanceof DeckProxy) {
+            DeckProxy deck = (DeckProxy) i;
+            if (deck.isGeneratedDeck()) {
+                return deck;
+            }
+            return deck.getDeck() == null ? null : deck;
+        }
+        return null;
+    }
+
+    private static DeckProxy toNonGeneratedDeck(final InventoryItem i) {
+        final DeckProxy deck = toDeck(i);
+        return deck == null || deck.isGeneratedDeck() ? null : deck;
+    }
+
+    private static DeckProxy toDeckProxy(final InventoryItem i) {
+        if (i instanceof DeckBrowserEntry) {
+            final DeckBrowserEntry entry = (DeckBrowserEntry) i;
+            return entry.getDeckRowProxy();
+        }
+        return i instanceof DeckProxy ? (DeckProxy) i : null;
+    }
+
+    private static boolean isCommanderDeck(final DeckProxy deck) {
+        return deck != null && deck.hasCommanderSection();
     }
 
     private static String eventTag(final InventoryItem i, final String key) {
-        DeckProxy d = toDeck(i);
+        DeckProxy d = toNonGeneratedDeck(i);
         if (d == null) return "";
         String v = DeckProxy.getEventTag(d.getDeck(), key);
         return v != null ? v : "";
@@ -482,7 +545,8 @@ public enum ColumnDef {
     }
 
     private static ColorSet toDeckColor(final InventoryItem i) {
-        return i instanceof DeckProxy ? ((DeckProxy) i).getColor() : null;
+        DeckProxy deck = toDeck(i);
+        return deck == null ? null : deck.getColor();
     }
 
     private static String toDeckFolder(final InventoryItem i) {

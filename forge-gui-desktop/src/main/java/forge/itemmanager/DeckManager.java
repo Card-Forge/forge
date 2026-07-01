@@ -8,6 +8,7 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 import javax.swing.JMenu;
 import javax.swing.JTable;
@@ -20,8 +21,8 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckBrowserEntry;
 import forge.deck.DeckGroup;
-import forge.deck.DeckFormat;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
@@ -49,6 +50,7 @@ import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.ItemPool;
 import forge.util.Localizer;
 
 /**
@@ -63,7 +65,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     //private static final FSkin.SkinIcon icoEditOver = FSkin.getIcon(FSkinProp.ICO_EDIT_OVER);
 
     private final GameType gameType;
+    private final CommanderBracketView commanderBracketView;
     private UiCommand cmdDelete, cmdSelect;
+    private Consumer<DeckProxy> editCommand;
+    private Consumer<String> searchChangeListener;
 
     /**
      * Creates deck list for selected decks for quick deleting, editing, and
@@ -75,17 +80,66 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         super(DeckProxy.class, cDetailPicture, true, false);
         this.gameType = gt;
 
-        if (gt.getDeckFormat() == DeckFormat.Commander) {
-            this.addView(new CommanderBracketView(this));
-        }
+        commanderBracketView = new CommanderBracketView(this);
+        commanderBracketView.getButton().setVisible(false);
+        this.addView(commanderBracketView);
 
         this.addSelectionListener(e -> {
+            final DeckProxy selected = getSelectedItem();
+            updateCommanderBracketViewVisibility(selected);
+            if (!isDeckRow(selected)) {
+                return;
+            }
             if (cmdSelect != null) {
                 cmdSelect.run();
             }
         });
 
         this.setItemActivateCommand((UiCommand) () -> editDeck(getSelectedItem()));
+    }
+
+    @Override
+    public void setPool(final Iterable<DeckProxy> items) {
+        super.setPool(items);
+        updateCommanderBracketViewVisibility(getSelectedItem());
+    }
+
+    @Override
+    public void setPool(final ItemPool<DeckProxy> pool0) {
+        super.setPool(pool0);
+        updateCommanderBracketViewVisibility(getSelectedItem());
+    }
+
+    @Override
+    public void setPool(final ItemPool<DeckProxy> poolView, final boolean infinite) {
+        super.setPool(poolView, infinite);
+        updateCommanderBracketViewVisibility(getSelectedItem());
+    }
+
+    private void updateCommanderBracketViewVisibility(final DeckProxy selected) {
+        final boolean visible = isCommanderDeck(selected);
+        commanderBracketView.getButton().setVisible(visible);
+        if (!visible && getCurrentView() == commanderBracketView && isInitialized()) {
+            setViewIndex(0);
+        }
+        revalidate();
+        repaint();
+    }
+
+    private boolean isCommanderDeck(final DeckProxy deck) {
+        final DeckProxy realDeck = getRealDeckProxy(deck);
+        return realDeck != null && realDeck.hasCommanderSection();
+    }
+
+    private boolean isDeckRow(final DeckProxy deck) {
+        return getRealDeckProxy(deck) != null;
+    }
+
+    private DeckProxy getRealDeckProxy(final DeckProxy deck) {
+        if (deck instanceof DeckBrowserEntry) {
+            return ((DeckBrowserEntry) deck).getDeckRowProxy();
+        }
+        return deck;
     }
 
     @Override
@@ -148,6 +202,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         return this.cmdSelect;
     }
 
+    public void setEditCommand(final Consumer<DeckProxy> editCommand0) {
+        editCommand = editCommand0;
+    }
+
     @Override
     protected void addDefaultFilters() {
         if (this.getConfig() == ItemManagerConfig.STRING_ONLY) { return; }
@@ -158,6 +216,35 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     @Override
     protected ItemFilter<DeckProxy> createSearchFilter() {
         return new DeckSearchFilter(this);
+    }
+
+    public void setSearchChangeListener(final Consumer<String> listener) {
+        searchChangeListener = listener;
+    }
+
+    @Override
+    protected int getDisplayCount(final Iterable<Entry<DeckProxy, Integer>> items) {
+        int total = 0;
+        for (final Entry<DeckProxy, Integer> entry : items) {
+            if (isDeckRow(entry.getKey())) {
+                total += entry.getValue();
+            }
+        }
+        return total;
+    }
+
+    public void notifySearchChanged(final String searchText) {
+        if (searchChangeListener != null) {
+            searchChangeListener.accept(searchText);
+        }
+    }
+
+    @Override
+    public void applyNewOrModifiedFilter(final ItemFilter<? extends DeckProxy> filter) {
+        if (filter instanceof DeckSearchFilter) {
+            notifySearchChanged(((DeckSearchFilter) filter).getSearchText());
+        }
+        super.applyNewOrModifiedFilter(filter);
     }
 
     private Map<String, HashMap> buildHierarchy(String path) {
@@ -326,6 +413,14 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
 
     public void editDeck(final DeckProxy deck) {
+        if (!isDeckRow(deck)) {
+            return;
+        }
+        if (editCommand != null) {
+            editCommand.accept(deck);
+            return;
+        }
+
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
 
@@ -445,10 +540,11 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     public class DeckActionsRenderer extends ItemCellRenderer {
         //private final int overActionIndex = -1;
         private static final int imgSize = 20;
+        private boolean showActions;
 
         @Override
         public boolean alwaysShowTooltip() {
-            return false;
+            return true;
         }
 
         /*
@@ -460,7 +556,9 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
          */
         @Override
         public final Component getTableCellRendererComponent(final JTable table, final Object value,
-                final boolean isSelected, final boolean hasFocus, final int row, final int column) {
+            final boolean isSelected, final boolean hasFocus, final int row, final int column) {
+            final DeckProxy deck = getActionDeck(value);
+            showActions = deck != null;
             setToolTipText(null);
             return super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
         }
@@ -471,7 +569,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             final int x = e.getX() - cellBounds.x;
 
             if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1) {
-                final DeckProxy deck = (DeckProxy) value;
+                final DeckProxy deck = getActionDeck(value);
+                if (deck == null) {
+                    return;
+                }
 
                 if (x >= 0 && x < imgSize) { //delete button
                     if (DeckManager.this.deleteDeck(deck)) {
@@ -487,6 +588,31 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 listView.getTable().repaint();
                 e.consume();
             }
+        }
+
+        @Override
+        protected <T extends InventoryItem> String getToolTipText(final MouseEvent e, final ItemListView<T> listView,
+                final Object value, final int row, final int column) {
+            if (getActionDeck(value) == null) {
+                return null;
+            }
+
+            final Rectangle cellBounds = listView.getTable().getCellRect(row, column, false);
+            final int x = e.getX() - cellBounds.x;
+            if (x >= 0 && x < imgSize) {
+                return "Click to delete this deck";
+            }
+            if (x >= imgSize && x < imgSize * 2) {
+                return "Click to edit this deck";
+            }
+            return null;
+        }
+
+        private DeckProxy getActionDeck(final Object value) {
+            if (!(value instanceof DeckProxy)) {
+                return null;
+            }
+            return DeckManager.this.getRealDeckProxy((DeckProxy) value);
         }
 
         /*private void setOverActionIndex(final ItemListView<?> listView, int overActionIndex0) {
@@ -514,6 +640,9 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         @Override
         public final void paint(final Graphics g) {
             super.paint(g);
+            if (!showActions) {
+                return;
+            }
 
             // Improve scaling quality
             if (g instanceof Graphics2D g2d) {

@@ -36,7 +36,7 @@ public enum CAllDecks implements ICDoc {
     }
 
     public void refresh() {
-        refreshDeckManager(view.getLstDecks(), DeckProxy.getAllConstructedDecks());
+        view.refreshBrowser();
     }
 
     /* (non-Javadoc)
@@ -44,7 +44,7 @@ public enum CAllDecks implements ICDoc {
      */
     @Override
     public void update() {
-        updateDeckManager(view.getLstDecks());
+        view.refreshBrowser();
     }
 
     public static void refreshDeckManager(DeckManager dm, Iterable<DeckProxy> deckList){

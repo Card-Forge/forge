@@ -23,6 +23,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import forge.deck.DeckBrowserEntry;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.util.ItemPool;
@@ -173,9 +174,7 @@ public final class ItemManagerModel<T extends InventoryItem> implements Comparat
 
         public Comparator<Entry<InventoryItem, Integer>> getSorter() {
             if (sorter == null) {
-                synchronized (colsToSort) {
-                    sorter = colsToSort.stream().map(c -> (Comparator<Entry<InventoryItem, Integer>>) c).reduce((a,b) -> 0, Comparator::thenComparing);
-                }
+                sorter = createSorter();
             }
             return sorter;
         }
@@ -183,6 +182,25 @@ public final class ItemManagerModel<T extends InventoryItem> implements Comparat
         public void reset() {
             colsToSort.clear();
             sorter = null;
+        }
+
+        private Comparator<Entry<InventoryItem, Integer>> createSorter() {
+            Comparator<Entry<InventoryItem, Integer>> result = this::compareDeckBrowserRows;
+            synchronized (colsToSort) {
+                for (final ItemColumn col : colsToSort) {
+                    result = result.thenComparing((Comparator<Entry<InventoryItem, Integer>>) col);
+                }
+            }
+            return result;
+        }
+
+        private int compareDeckBrowserRows(final Entry<InventoryItem, Integer> arg0, final Entry<InventoryItem, Integer> arg1) {
+            if (arg0.getKey() instanceof DeckBrowserEntry || arg1.getKey() instanceof DeckBrowserEntry) {
+                final int sortGroup0 = arg0.getKey() instanceof DeckBrowserEntry ? ((DeckBrowserEntry) arg0.getKey()).getSortGroup() : 3;
+                final int sortGroup1 = arg1.getKey() instanceof DeckBrowserEntry ? ((DeckBrowserEntry) arg1.getKey()).getSortGroup() : 3;
+                return Integer.compare(sortGroup0, sortGroup1);
+            }
+            return 0;
         }
     }
 

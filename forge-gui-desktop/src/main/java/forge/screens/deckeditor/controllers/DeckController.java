@@ -302,6 +302,18 @@ public class DeckController<T extends DeckBase> {
         load(name);
     }
 
+    public void setCurrentFolder(final IStorage<T> folder, final String path) {
+        if (folder == null) {
+            return;
+        }
+        currentFolder = folder;
+        modelPath = StringUtils.defaultString(path);
+    }
+
+    public void loadFromCurrentFolder(final String name) {
+        load(name);
+    }
+
     /**
      * Load.
      *
