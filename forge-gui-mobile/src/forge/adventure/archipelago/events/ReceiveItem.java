@@ -1,6 +1,5 @@
 package forge.adventure.archipelago.events;
 
-import forge.adventure.archipelago.ArchipelagoColors;
 import forge.adventure.archipelago.ArchipelagoRandomizer;
 import forge.adventure.archipelago.ItemRegistry;
 import forge.adventure.archipelago.ArchipelagoData;
