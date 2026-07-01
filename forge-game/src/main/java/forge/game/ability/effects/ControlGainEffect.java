@@ -20,6 +20,7 @@ import forge.game.card.CardLists;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityCantGainControl;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
@@ -87,7 +88,13 @@ public class ControlGainEffect extends SpellAbilityEffect {
     }
 
     private static void doLoseControl(final Card c, final Card host, final long tStamp) {
-        if (null == c || c.hasKeyword("Other players can't gain control of CARDNAME.")) {
+        if (null == c) {
+            return;
+        }
+        
+        boolean cantGainControl = c.hasKeyword("Other players can't gain control of CARDNAME.") || StaticAbilityCantGainControl.cantGainControl(c);
+
+        if (cantGainControl) {
             return;
         }
         final Game game = host.getGame();
