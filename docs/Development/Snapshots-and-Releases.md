@@ -39,3 +39,15 @@ It would be useful for other people to be comfortable with the release process. 
 * Upload the package and its sha to the create new release page
 5. Marketing
 * Advertise in the #announcements channel in the Discord
+
+### Updating an existing installation with a local build
+
+Often, to test your code, you may want to use an existing installation and overwrite only the code files.
+
+The following steps will help perform an incremental update to your existing installation.
+
+1. Run `mvn clean install -DskipTests` from the main project directory to build the artifacts.
+2. Copy `forge-gui-desktop/target/forge-gui-desktop-${VERSION}-jar-with-dependencies.jar` to the root installation directory.
+3. Copy `forge-gui-mobile-dev/target/forge-gui-mobile-dev-*-jar-with-dependencies.jar` to the root installation directory.
+4. Make sure the scripts you use to launch Forge, located in the root instalation directory, are referencing the copied files.
+
