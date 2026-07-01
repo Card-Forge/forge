@@ -187,7 +187,7 @@ public class CountersPutAi extends CountersAi {
                     aiCreat = CardLists.filter(aiCreat, CardPredicates.hasCounters());
 
                     aiCreat = CardLists.filter(aiCreat, input -> {
-                        for (CounterType counterType : input.getCounters().keySet()) {
+                        for (CounterType counterType : input.getCounters().elementSet()) {
                             if (!ComputerUtil.isNegativeCounter(counterType, input)
                                     && input.canReceiveCounters(counterType)) {
                                 return true;
@@ -796,7 +796,7 @@ public class CountersPutAi extends CountersAi {
             }
         } else if (sa.getTargetRestrictions().canOnlyTgtOpponent() && !sa.getTargetRestrictions().canTgtCreature()) {
             PlayerCollection playerList = new PlayerCollection(IterableUtil.filter(
-                    sa.getTargetRestrictions().getAllCandidates(sa, true, true), Player.class));
+                    sa.getTargetRestrictions().getAllCandidates(sa, true), Player.class));
 
             if (playerList.isEmpty()) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);

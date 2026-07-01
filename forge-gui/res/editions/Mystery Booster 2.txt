@@ -393,3 +393,8 @@ F618 R Slumbering Waterways @Kevin Dubell
 F619 R Temur Elevator @Marika Lord
 F620 R Under-Construction Skyscraper @Kevin Dubell
 F621 R Value Town @Hélio Frazão
+
+[LandTypes]
+Omenpath:Omenpaths
+[WalkerTypes]
+You

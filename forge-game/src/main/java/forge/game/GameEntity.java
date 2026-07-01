@@ -22,8 +22,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
 
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -44,13 +45,14 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttach;
 import forge.game.zone.ZoneType;
+import forge.trackable.TrackableProperty;
 import forge.util.Lang;
 
 public abstract class GameEntity implements GameObject, IIdentifiable {
     protected int id;
     private String name = "";
     protected CardCollection attachedCards = new CardCollection();
-    protected Map<CounterType, Integer> counters = Maps.newHashMap();
+    protected Multiset<CounterType> counters = HashMultiset.create();
     protected List<Pair<Integer, Boolean>> damageReceivedThisTurn = Lists.newArrayList();
 
     protected GameEntity(int id0) {
@@ -149,25 +151,20 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
 
     // doesn't include phased out cards
     public final CardCollectionView getAttachedCards() {
-        return CardLists.filter(attachedCards, CardPredicates.phasedIn());
+        return CardLists.filter(getAllAttachedCards(), CardPredicates.phasedIn());
     }
 
     // for view does include phased out cards
     public final CardCollectionView getAllAttachedCards() {
-        return attachedCards;
+        return CardCollection.getView(attachedCards);
     }
 
     public final void setAttachedCards(final Iterable<Card> cards) {
-        attachedCards = new CardCollection(cards);
-        updateAttachedCards();
+        attachedCards = getView().setCards(attachedCards, cards, TrackableProperty.AttachedCards);
     }
 
     public final void clearAttachedCards() {
-        if (attachedCards.isEmpty()) {
-            return;
-        }
-        attachedCards.clear();
-        updateAttachedCards();
+        attachedCards = getView().clearCards(attachedCards, TrackableProperty.AttachedCards);
     }
 
     public final boolean hasCardAttachments() {
@@ -196,19 +193,15 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
     }
 
     public final void addAttachedCard(final Card c) {
-        if (attachedCards.add(c)) {
-            updateAttachedCards();
-        }
+        attachedCards = getView().addCard(attachedCards, c, TrackableProperty.AttachedCards);
     }
 
     public final void removeAttachedCard(final Card c) {
-        if (attachedCards.remove(c)) {
-            updateAttachedCards();
-        }
+        attachedCards = getView().removeCard(attachedCards, c, TrackableProperty.AttachedCards);
     }
 
     public final void updateAttachedCards() {
-        getView().updateAttachedCards(this);
+        getView().setCards(null, attachedCards, TrackableProperty.AttachedCards);
     }
 
     public final void unAttachAllCards(Card old) {
@@ -305,35 +298,24 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
     }
 
     // get all counters from a card
-    public final Map<CounterType, Integer> getCounters() {
+    public final Multiset<CounterType> getCounters() {
         return counters;
     }
 
     // get total number of all counters on an entity
     public final int getNumAllCounters() {
-        int count = 0;
-        for (Integer i : getCounters().values()) {
-            if (i != null && i > 0) {
-                count += i;
-            }
-        }
-        return count;
+        return this.counters.size();
     }
 
     public final int getCounters(final CounterType counterName) {
-        Integer value = counters.get(counterName);
-        return value == null ? 0 : value;
+        return counters.count(counterName);
     }
 
     public void setCounters(final CounterType counterType, final Integer num) {
-        if (num <= 0) {
-            counters.remove(counterType);
-        } else {
-            counters.put(counterType, num);
-        }
+        counters.setCount(counterType, num);
     }
 
-    abstract public void setCounters(final Map<CounterType, Integer> allCounters);
+    abstract public void setCounters(final Multiset<CounterType> allCounters);
 
     abstract public boolean canRemoveCounters(final CounterType type);
 

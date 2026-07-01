@@ -28,8 +28,10 @@ import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gamemodes.net.EventFormat;
 import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
@@ -70,6 +72,12 @@ public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
     private final List<DeckSection> allSections = new ArrayList<>();
+
+    /** Picks the editor screen for a network event deck from its eventFormat tag. */
+    public static FScreen networkEventEditorScreen(Deck deck) {
+        return deck != null && EventFormat.BOOSTER_DRAFT.name().equals(DeckProxy.getEventTag(deck, "eventFormat"))
+                ? FScreen.DECK_EDITOR_DRAFT : FScreen.DECK_EDITOR_SEALED;
+    }
 
     //========== Constructor
 

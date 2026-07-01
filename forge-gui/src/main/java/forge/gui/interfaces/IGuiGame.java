@@ -1,7 +1,7 @@
 package forge.gui.interfaces;
 
 import forge.LobbyPlayer;
-import forge.ai.GameState;
+import forge.game.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
@@ -15,6 +15,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.net.DeltaPacket;
@@ -29,6 +30,7 @@ import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
+import forge.util.collect.FCollectionView;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -73,6 +75,9 @@ public interface IGuiGame {
         showPromptMessage(playerView, message, null);
     }
     void showPromptMessage(PlayerView playerView, String message, CardView card);
+
+    /** Open or refresh the draw-offer dialog with the current tally. Default no-op for GUIs that don't render it. */
+    default void updateDrawOffer(DrawOfferMessage.Status update) { }
 
     default void updateButtons(final PlayerView owner, final boolean okEnabled, final boolean cancelEnabled, final boolean focusOk) {
         updateButtons(owner, Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"), okEnabled, cancelEnabled, focusOk);
@@ -120,6 +125,7 @@ public interface IGuiGame {
     void updateSingleCard(CardView card);
 
     void updateCards(Iterable<CardView> cards);
+    default void updateCardsNetSafe(FCollectionView<CardView> cards) { updateCards(isNetGame() ? cards.threadSafeIterable() : cards); }
 
     void updateRevealedCards(TrackableCollection<CardView> collection);
 
@@ -264,10 +270,11 @@ public interface IGuiGame {
      * select-min hotkeys). Callers without a known range pass {@code (0, 0)}.
      */
     void setSelectables(Iterable<CardView> cards, int min, int max);
-
     void clearSelectables();
-
     boolean isSelecting();
+
+    void setWeaklySelectable(final Iterable<CardView> cards);
+    void clearWeaklySelectable();
 
     boolean isGamePaused();
     void setGamePause(boolean pause);

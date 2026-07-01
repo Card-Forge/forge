@@ -1,0 +1,9 @@
+Name:Boomerang, Blade Flinger
+ManaCost:1 B
+Types:Legendary Creature Human Villain
+PT:1/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever NICKNAME attacks, he deals 1 damage to each opponent and you gain 1 life.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ Opponent | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Boomerang attacks, he deals 1 damage to each opponent and you gain 1 life.

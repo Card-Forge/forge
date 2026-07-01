@@ -1,5 +1,6 @@
 package forge.game.card;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.CardStateName;
@@ -295,15 +296,11 @@ public class CardCopyService {
         newCopy.setBasePower(copyFrom.getCurrentPower());
         newCopy.setBaseToughness(copyFrom.getCurrentToughness());
 
-        // printed P/T
-        newCopy.setBasePowerString(copyFrom.getCurrentState().getBasePowerString());
-        newCopy.setBaseToughnessString(copyFrom.getCurrentState().getBaseToughnessString());
-
         // extra copy PT boost
         newCopy.setPTBoost(copyFrom.getPTBoostTable());
 
         newCopy.copyFrom(copyFrom);
-        newCopy.setCounters(Maps.newHashMap(copyFrom.getCounters()));
+        newCopy.setCounters(HashMultiset.create(copyFrom.getCounters()));
 
         newCopy.setColor(copyFrom.getColor());
         newCopy.setPhasedOut(copyFrom.getPhasedOut());

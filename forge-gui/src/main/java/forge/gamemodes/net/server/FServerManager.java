@@ -3,6 +3,10 @@ package forge.gamemodes.net.server;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
+import forge.game.GameLogEntry;
+import forge.game.GameView;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventAddLog;
 import forge.game.player.Player;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
@@ -17,6 +21,7 @@ import forge.gamemodes.net.draft.BoosterDraftHost;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.event.*;
 import forge.gui.GuiBase;
+import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.util.SOptionPane;
 import forge.interfaces.IGameController;
@@ -78,6 +83,7 @@ public final class FServerManager implements IHasForgeLog {
     private UpnpService upnpService = null;
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
+    private IDraftEventHandler draftHandler;
     private boolean UPnPMapped = false;
     private int port;
     private static final Localizer localizer = Localizer.getInstance();
@@ -288,22 +294,14 @@ public final class FServerManager implements IHasForgeLog {
     /**
      * Dispatch a broadcast event to the host's local listener — the host does
      * not receive its own broadcasts over the network, so we mirror them here.
-     * Kept in sync with {@code FGameClient.LobbyUpdateHandler}.
      */
     private void dispatchToLocalListener(final NetEvent event) {
-        if (lobbyListener == null) return;
         if (event instanceof MessageEvent e) {
-            lobbyListener.message(e.getSource(), e.getMessage(), e.getType());
-        } else if (event instanceof ReceiveEventPoolEvent e) {
-            lobbyListener.receiveEventPool(e.getEventId(), e.getPool());
-        } else if (event instanceof DraftAutoPickedEvent e) {
-            lobbyListener.draftAutoPicked(e.getSeatIndex(), e.getCard(),
-                    e.getPackNumber(), e.getPickInPack());
-        } else if (event instanceof DraftPackArrivedEvent e) {
-            lobbyListener.draftPackArrived(e.getSeatIndex(), e.getPack(),
-                    e.getPackNumber(), e.getPickNumber(), e.getTimerDurationSeconds());
-        } else if (event instanceof DraftSeatPickedEvent e) {
-            lobbyListener.draftSeatPicked(e.getSeatIndex(), e.getSeatQueueDepths());
+            if (lobbyListener != null) {
+                lobbyListener.message(e.getSource(), e.getMessage(), e.getType());
+            }
+        } else if (draftHandler != null) {
+            draftHandler.dispatch(event);
         }
     }
 
@@ -432,6 +430,10 @@ public final class FServerManager implements IHasForgeLog {
 
     public void setLobbyListener(final ILobbyListener listener) {
         this.lobbyListener = listener;
+    }
+
+    public void setDraftHandler(final IDraftEventHandler handler) {
+        this.draftHandler = handler;
     }
 
     public void updateLobbyState() {
@@ -843,6 +845,19 @@ public final class FServerManager implements IHasForgeLog {
         netGui.updateGameView();
         netGui.openView(new forge.trackable.TrackableCollection<>(netGui.getLocalPlayers()));
         netLog.info("[Reconnect] Sent game state and openView to slot {}", slotIndex);
+
+        // Replay the host's log entries to rebuild the client's log on re-connect
+        final GameView gameView = netGui.getGameView();
+        if (gameView != null && gameView.getGameLog() != null) {
+            final List<GameEvent> logEvents = new ArrayList<>();
+            for (final GameLogEntry entry : gameView.getGameLog().getAllEntries()) {
+                logEvents.add(new GameEventAddLog(entry.type(), entry.message(), entry.sourceCard()));
+            }
+            if (!logEvents.isEmpty()) {
+                netGui.replayEvents(logEvents);
+                netLog.info("[Reconnect] Replayed {} game log entries for slot {} ({})", logEvents.size(), slotIndex, client.getUsername());
+            }
+        }
 
         // Replay current prompt
         final PlayerControllerHuman pch = findRemoteController(slotIndex);

@@ -1,0 +1,10 @@
+Name:Iron Man, Tony Stark
+ManaCost:3 R R
+Types:Legendary Artifact Creature Human Hero
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddPower$ 1 | Description$ Attacking creatures you control get +1/+0.
+T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a red spell, create a 2/1 colorless Robot Hero artifact creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ c_2_1_a_robot_hero_flying
+DeckHas:Ability$Token
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nAttacking creatures you control get +1/+0.\nWhenever you cast a red spell, create a 2/1 colorless Robot Hero artifact creature token with flying.

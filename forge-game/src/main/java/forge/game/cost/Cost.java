@@ -318,6 +318,11 @@ public class Cost implements Serializable {
             return new CostPutCounter(splitStr[0], CounterType.getType(splitStr[1]), target, description);
         }
 
+        if (parse.startsWith("AddCounterYou<")) {
+            final String[] splitStr = abCostParse(parse, 2);
+            return new CostPutCounterYou(splitStr[0], CounterType.getType(splitStr[1]));
+        }
+
         // While no card has "PayLife<2> PayLife<3> there might be a card that
         // Changes Cost by adding a Life Payment
         if (parse.startsWith("PayLife<")) {
@@ -588,6 +593,11 @@ public class Cost implements Serializable {
             return new CostBlight(splitStr[0]);
         }
 
+        if (parse.startsWith("Teamwork<")) {
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostTeamwork(splitStr[0]);
+        }
+
         if (parse.equals("Forage")) {
             return new CostForage();
         }
@@ -853,14 +863,14 @@ public class Cost implements Serializable {
             boolean append = true;
             if (!first) {
                 if (part instanceof CostPartMana) {
-                    cost.insert(0, ", ").insert(0, part.toString());
+                    cost.insert(0, ", ").insert(0, part);
                     append = false;
                 } else {
                     cost.append(", ");
                 }
             }
             if (append) {
-                cost.append(part.toString());
+                cost.append(part);
             }
             first = false;
         }

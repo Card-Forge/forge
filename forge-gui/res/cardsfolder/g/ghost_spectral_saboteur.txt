@@ -1,0 +1,7 @@
+Name:Ghost, Spectral Saboteur
+ManaCost:2 UB
+Types:Legendary Creature Human Rogue Villain
+PT:2/2
+K:Flash
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ Intangibility — NICKNAME can't be blocked.
+Oracle:Flash\nIntangibility — Ghost can't be blocked.

@@ -20,7 +20,7 @@
  </layer>
  <layer id="8" name="Walls Supplementary" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBhaYBfPQLuAvgDkX2ka+jkHarYGN4SNjGH25tDI/hB2VHthAJd/G7ipYy8oTLGlI2k84tQAp/ixi+Myn5rxvlKUtuaTAqR5aJemZHGYjSvOaWEvvnCllr9BfqknIj/IDlAcD3d70cN+oPxLLgAASRoSRA==
+   eJxjYBhaYBfPQLuAvgDkX2ka+jkHarYGN4SNjGH25tDI/hB2VHthAJd/G7ipYy8oTLGlI2k84tQAjxixi+Myn5rxvlKUtuaTAqR5aJemZHGYjSvOaWEvvnCllr9BfqknIj/IDlAcD3d70cN+oPxLLgAAdqASTg==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
@@ -28,7 +28,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFhEAtNwNDHRTXc9PP3p08DAwh7AwMUbwMDLI8tLEjB2ouyHwYG0avEEUVpwWQhfoRGYDs3ctDvfAGmYfOB+EGbuzqdgHt3k0FP6Pbe4ofgqV5MNXB1MLSGqX2YoszfPZSAyD7ATnekO0FxTWyvSC57RIQTIm9IDv3oPkP3b8gAAsXbHLkAJCdMjwIP+EL0xwq5qW9aObkaqLmIxAbJEbN+EUH+PxCS3vxgYGyd6gBAIbLKXU=
+   eJxjYBgFhEAtNwNDHRTXc9PP3p08DAwh7AwMUbwMDLI8tLEjB2ouyHwYG0avEEUVpwWQhfoRGYDs3ctDvfAGmYfOB+EGbuzqdgHt3k0FP6Pb+4gRgqV5MNXB1MLSGqX2YoszfPZSAyD7ATnekO0FxTWyvSC57RIQTIm9IDv3oPkP3b8gAAsXbHLkAJCdMjwIP+EL0xwq5qW9aObkaqLmIxAbJEbN+EUH+PxCS3vxgYGyd6gBAOGvKYk=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

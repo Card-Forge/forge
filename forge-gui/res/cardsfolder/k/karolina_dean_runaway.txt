@@ -1,0 +1,8 @@
+Name:Karolina Dean, Runaway
+ManaCost:3 R
+Types:Legendary Creature Alien Hero
+PT:3/3
+K:Flying
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of your first main phase, add {W}{U}{B}{R}{G}. This mana can't be spent to cast spells from your hand.
+SVar:TrigMana:DB$ Mana | Produced$ W U B R G | RestrictValid$ CantCastSpellFromHand
+Oracle:Flying\nAt the beginning of your first main phase, add {W}{U}{B}{R}{G}. This mana can't be spent to cast spells from your hand.

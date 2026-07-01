@@ -1,0 +1,7 @@
+Name:Hulkbuster Armor
+ManaCost:4
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | SetPower$ 9 | SetToughness$ 9 | AddKeyword$ Flying | Description$ Equipped creature has base power and toughness 9/9 and has flying.
+K:Equip:3:Hero.YouCtrl:Hero you control
+K:Equip:6
+Oracle:Equipped creature has base power and toughness 9/9 and has flying.\nEquip Hero {3}\nEquip {6}

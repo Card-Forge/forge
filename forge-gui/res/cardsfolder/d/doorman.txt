@@ -1,0 +1,7 @@
+Name:Doorman
+ManaCost:1 G
+Types:Legendary Creature Mutant Hero
+PT:2/3
+A:AB$ Effect | Cost$ T | ValidTgts$ Creature | RememberObjects$ Targeted | StaticAbilities$ KWPump | SpellDescription$ Until end of turn, target creature can't be blocked by creatures with power 2 or less and/or Walls.
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.powerLE2,Creature.Wall | Description$ This creature can't be blocked by creatures with power 2 or less and/or Walls this turn.
+Oracle:{T}: Until end of turn, target creature can't be blocked by creatures with power 2 or less and/or Walls.

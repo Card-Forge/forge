@@ -69,6 +69,7 @@ public enum AbilityKey {
     Exploited("Exploited"),
     Explored("Explored"),
     Explorer("Explorer"),
+    ExtraDraws("ExtraDraws"),
     ExtraTurn("ExtraTurn"),
     ETB("ETB"),
     Fighter("Fighter"),

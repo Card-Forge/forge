@@ -1,0 +1,9 @@
+Name:Murdock's Crusade
+ManaCost:1 W
+Types:Sorcery
+K:Teamwork:4
+A:SP$ Charm | CharmNum$ X | Choices$ DBStreetJustice,DBLegalJustice | AdditionalDescription$ . If this spell was cast using teamwork, choose both instead.
+SVar:DBStreetJustice:DB$ ChangeZone | ValidTgts$ Creature.toughnessGE4 | ValidTgtsDesc$ creature with toughness 4 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Street Justice — Exile target creature with toughness 4 or greater.
+SVar:DBLegalJustice:DB$ ChangeZone | ValidTgts$ Enchantment.cmcGE4 | ValidTgtsDesc$ enchantment with mana value 4 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Legal Justice — Exile target enchantment with mana value 4 or greater.
+SVar:X:Count$Teamwork.2.1
+Oracle:Teamwork 4 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 4 or more.)\nChoose one. If this spell was cast using teamwork, choose both instead.\n• Street Justice — Exile target creature with toughness 4 or greater.\n• Legal Justice — Exile target enchantment with mana value 4 or greater.
