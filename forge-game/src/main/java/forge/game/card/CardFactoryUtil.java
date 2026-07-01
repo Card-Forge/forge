@@ -502,6 +502,8 @@ public class CardFactoryUtil {
         for (KeywordInterface inst : card.getKeywords()) {
             inst.createTraits(card, true);
         }
+        // createTraits mutated each KeywordInstance's trait lists in place; rebuild so the cached trait snapshot sees them.
+        card.updateKeywordsCache();
     }
 
     private static ReplacementEffect createETBReplacement(final CardState card, ReplacementLayer layer,
