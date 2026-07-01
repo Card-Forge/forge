@@ -324,8 +324,6 @@ public class CardView extends GameEntityView {
     }
     void updateCounters(Card c) {
         super.updateCounters(c);
-        set(TrackableProperty.Counters, c.getCounters());
-        flagAsChanged(TrackableProperty.Counters);
         updateLethalDamage(c);
         CardStateView state = getCurrentState();
         state.updatePower(c);
