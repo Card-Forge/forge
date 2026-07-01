@@ -1,0 +1,12 @@
+Name:The Cookout Creator
+ManaCost:W B G
+Types:Legendary Creature Human Gamer
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters, create a Food token.
+SVar:TrigFood:DB$ Token | TokenScript$ c_a_food_sac
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 colorless Human creature token for each Food you control.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_human | TokenAmount$ X
+SVar:X:Count$Valid Food.YouCtrl
+A:AB$ Draw | Cost$ tapXType<4/Human> | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ You draw a card and create a Treasure token.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac
+Oracle:When The Cookout Creator enters, create a Food token.\nAt the beginning of your upkeep, create a 1/1 colorless Human creature token for each Food you control.\nTap four untapped Humans you control: You draw a card and create a Treasure token.

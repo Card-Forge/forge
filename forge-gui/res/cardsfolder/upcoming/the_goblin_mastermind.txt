@@ -1,0 +1,13 @@
+Name:The Goblin Mastermind
+ManaCost:2 B R
+Types:Legendary Creature Goblin Wizard
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.YouCtrl | AffectedZone$ All | AddType$ Kindred & Goblin | Description$ As long as you control CARDNAME or it's your commander, permanents you control are Kindred Goblins in addition to their other types. The same is true for spells you control and cards that you own that aren't on the battlefield.
+S:Mode$ Continuous | Affected$ Card.YouCtrl | CheckSVar$ B | AffectedZone$ All | EffectZone$ All | AddType$ Kindred & Goblin | Secondary$ True | Description$ As long as you control CARDNAME or it's your commander, permanents you control are Kindred Goblins in addition to their other types. The same is true for spells you control and cards that you own that aren't on the battlefield.
+SVar:B:Count$ValidLibrary,Hand,Battlefield,Graveyard,Stack,Exile,Command Card.Self+YouOwn+IsCommander
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigCopyToken | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you create a token that's a copy of one of Skirk Prospector, Goblin Lackey, Goblin Piledriver, Goblin Warchief, Boggart Harbinger, or Goblin Ringleader, chosen at random.
+SVar:TrigCopyToken:DB$ NameCard | Defined$ You | AtRandom$ True | ChooseFromList$ Skirk Prospector,Goblin Lackey,Goblin Piledriver,Goblin Warchief,Boggart Harbinger,Goblin Ringleader | SubAbility$ DBMake
+SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ DBCopyPerm
+SVar:DBCopyPerm:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+Oracle:As long as you control The Goblin Mastermind or it's your commander, permanents you control are Kindred Goblins in addition to their other types. The same is true for spells you control and cards that you own that aren't on the battlefield.\nWhenever The Goblin Mastermind deals combat damage to a player, you create a token that's a copy of one of Skirk Prospector, Goblin Lackey, Goblin Piledriver, Goblin Warchief, Boggart Harbinger, or Goblin Ringleader, chosen at random.

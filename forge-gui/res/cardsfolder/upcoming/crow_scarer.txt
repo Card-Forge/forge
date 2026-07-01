@@ -1,0 +1,10 @@
+Name:Crow Scarer
+ManaCost:4
+Types:Creature Scarecrow
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, each player creates two 1/1 black Bird creature tokens with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_bird_flying | TokenAmount$ 2 | TokenOwner$ Player
+S:Mode$ Continuous | Affected$ Permanent.Bird | AddType$ Coward | Description$ Birds are Cowards in addition to their other types.
+S:Mode$ CantAttack | ValidCard$ Creature.Coward | Description$ Cowards can't attack or block creatures you control.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.YouCtrl | ValidBlocker$ Creature.Coward | Secondary$ True | Description$ Cowards can't attack or block creatures you control.
+Oracle:When this creature enters, each player creates two 1/1 black Bird creature tokens with flying.\nBirds are Cowards in addition to their other types.\nCowards can't attack or block creatures you control.

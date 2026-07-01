@@ -1,0 +1,12 @@
+Name:The Ice Dancer
+ManaCost:R W U
+Types:Legendary Creature Human Athlete
+PT:2/2
+A:AB$ Pump | Cost$ 2 Q | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever The Ice Dancer deals combat damage to a player, create a Gold token. Then you draw X cards and gain X life, where X is the number of artifact tokens you control. The Ice Dancer deals X damage to each opponent.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_gold_sac | RememberTokens$ True | TokenOwner$ You | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBDamageAll
+SVar:DBDamageAll:DB$ DamageAll | ValidPlayers$ Opponent | NumDmg$ X
+SVar:X:Count$Valid Artifact.token+YouCtrl
+Oracle:{2}, {Q}: The Ice Dancer gains flying until end of turn. ({Q} is the untap symbol.)\nWhenever The Ice Dancer deals combat damage to a player, create a Gold token. Then you draw X cards and gain X life, where X is the number of artifact tokens you control. The Ice Dancer deals X damage to each opponent. (A Gold token is an artifact with "Sacrifice this token: Add one mana of any color.")
