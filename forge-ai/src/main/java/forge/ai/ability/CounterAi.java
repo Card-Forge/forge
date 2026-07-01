@@ -9,6 +9,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.ai.*;
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CounterEffect;
@@ -22,11 +23,128 @@ import forge.game.cost.CostSacrifice;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
 public class CounterAi extends SpellAbilityAi {
+
+    private SpellAbilityStackInstance getTopSpellAbilityStackInstance(Game game, SpellAbility sa) {
+        Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
+
+        if (!it.hasNext()) {
+            return null;
+        }
+
+        SpellAbilityStackInstance target = it.next();
+        if (sa.equals(target.getSpellAbility()) && it.hasNext()) {
+            target = it.next();
+        }
+        return target;
+    }
+
+    private boolean isOnlyThreateningOpponents(Player ai) {
+        if (ai.getGame().getPlayers().size() < 3) {
+            return false;
+        }
+
+        boolean threatensOpponent = false;
+        for (GameObject threatened : ComputerUtil.predictThreatenedObjects(ai, null, true)) {
+            if (threatened instanceof Player threatenedPlayer) {
+                if (!threatenedPlayer.isOpponentOf(ai)) {
+                    return false;
+                }
+                threatensOpponent = true;
+            } else if (threatened instanceof Card threatenedCard) {
+                if (!threatenedCard.getController().isOpponentOf(ai)) {
+                    return false;
+                }
+                threatensOpponent = true;
+            }
+        }
+
+        return threatensOpponent;
+    }
+
+    private boolean targetsOnlyOpponents(Player ai, TargetChoices targets) {
+        boolean targetsOpponent = false;
+
+        for (Player targetedPlayer : targets.getTargetPlayers()) {
+            if (!targetedPlayer.isOpponentOf(ai)) {
+                return false;
+            }
+            targetsOpponent = true;
+        }
+
+        for (Card targetedCard : targets.getTargetCards()) {
+            if (!targetedCard.getController().isOpponentOf(ai)) {
+                return false;
+            }
+            targetsOpponent = true;
+        }
+
+        for (SpellAbility targetedSpell : targets.getTargetSpells()) {
+            final Player targetedSpellController = targetedSpell.getActivatingPlayer();
+            if (targetedSpellController == null || !targetedSpellController.isOpponentOf(ai)) {
+                return false;
+            }
+            targetsOpponent = true;
+        }
+
+        return targetsOpponent;
+    }
+
+    private boolean onlyTargetsOpponents(Player ai, SpellAbilityStackInstance stackInstance) {
+        if (ai.getGame().getPlayers().size() < 3 || stackInstance == null) {
+            return false;
+        }
+
+        boolean targetsOpponent = false;
+        for (SpellAbilityStackInstance current = stackInstance; current != null; current = current.getSubInstance()) {
+            SpellAbility currentAbility = current.getSpellAbility();
+            if (currentAbility.usesTargeting()) {
+                final TargetChoices targets = current.getTargetChoices();
+                if (targets != null) {
+                    if (!targetsOnlyOpponents(ai, targets)) {
+                        return false;
+                    }
+                    targetsOpponent = true;
+                }
+            }
+        }
+
+        return targetsOpponent;
+    }
+
+    private boolean isOpponentCounteringAnotherOpponent(Player ai, SpellAbilityStackInstance stackInstance) {
+        if (ai.getGame().getPlayers().size() < 3 || stackInstance == null) {
+            return false;
+        }
+
+        final Player counteringPlayer = stackInstance.getSpellAbility().getActivatingPlayer();
+        if (counteringPlayer == null || !counteringPlayer.isOpponentOf(ai)) {
+            return false;
+        }
+
+        for (SpellAbilityStackInstance current = stackInstance; current != null; current = current.getSubInstance()) {
+            SpellAbility currentAbility = current.getSpellAbility();
+            if (currentAbility.getApi() == ApiType.Counter && currentAbility.usesTargeting()) {
+                final TargetChoices targets = current.getTargetChoices();
+                if (targets != null) {
+                    final SpellAbility targetedSpell = targets.getFirstTargetedSpell();
+                    if (targetedSpell != null) {
+                        final Player targetedSpellPlayer = targetedSpell.getActivatingPlayer();
+                        if (targetedSpellPlayer != null && targetedSpellPlayer.isOpponentOf(ai)
+                                && targetedSpellPlayer != counteringPlayer) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
@@ -35,6 +153,7 @@ public class CounterAi extends SpellAbilityAi {
         final Game game = ai.getGame();
         int tgtCMC = 0;
         SpellAbility tgtSA = null;
+        SpellAbilityStackInstance tgtSI = null;
 
         if (game.getStack().isEmpty()) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
@@ -47,7 +166,12 @@ public class CounterAi extends SpellAbilityAi {
         }
 
         if (sa.usesTargeting()) {
-            final SpellAbility topSA = ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
+            tgtSI = getTopSpellAbilityStackInstance(game, sa);
+            if (tgtSI == null) {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+
+            final SpellAbility topSA = tgtSI.getSpellAbility();
             if ((topSA.isSpell() && !topSA.isCounterableBy(sa)) || ai.getYourTeam().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -217,6 +341,21 @@ public class CounterAi extends SpellAbilityAi {
         }
 
         if (dontCounter) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        // In multiplayer, stay out of counter wars between opponents unless we have a more specific reason to intervene.
+        if (tgtSI != null && isOpponentCounteringAnotherOpponent(ai, tgtSI)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        // In multiplayer, don't counter targeted interaction that only points at opponents and their permanents.
+        if (tgtSI != null && onlyTargetsOpponents(ai, tgtSI)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        // In multiplayer, be less eager to counter interaction that is only harming another opponent.
+        if (tgtSA != null && isOnlyThreateningOpponents(ai)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 

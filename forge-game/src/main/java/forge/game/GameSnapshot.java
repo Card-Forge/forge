@@ -18,6 +18,7 @@ import forge.game.zone.ZoneType;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -217,13 +218,16 @@ public class GameSnapshot {
         // Try to match the StackInstance ID. If we don't find it, generate a new stack instance that matches
         // If we do find it, we may need to alter the existing stack instance
         // If we find it and we're restoring, we dont need to do anything
+        Map<Integer, SpellAbility> copiedSpells = new HashMap<>();
 
         Map<Integer, SpellAbilityStackInstance> stackIds = new HashMap<>();
         for (SpellAbilityStackInstance toEntry : toGame.getStack()) {
             stackIds.put(toEntry.getId(), toEntry);
+            copiedSpells.put(toEntry.getSpellAbility().getId(), toEntry.getSpellAbility());
         }
 
-        for (SpellAbilityStackInstance origEntry : fromGame.getStack()) {
+        for (Iterator<SpellAbilityStackInstance> it = fromGame.getStack().reverseIterator(); it.hasNext(); ) {
+            SpellAbilityStackInstance origEntry = it.next();
             int id = origEntry.getId();
             SpellAbilityStackInstance instance = stackIds.getOrDefault(id, null);
 
@@ -262,12 +266,25 @@ public class GameSnapshot {
                             newSa.getTargets().add(findBy(toGame, (Card) o));
                         } else if (o instanceof Player) {
                             newSa.getTargets().add(findBy(toGame, (Player) o));
+                        } else if (o instanceof SpellAbility targetSa) {
+                            SpellAbility copiedTargetSa = copiedSpells.get(targetSa.getId());
+                            if (copiedTargetSa != null) {
+                                newSa.getTargets().add(copiedTargetSa);
+                            } else {
+                                SpellAbilityStackInstance targetInstance = toGame.getStack().getInstanceMatchingSpellAbilityID(targetSa);
+                                if (targetInstance != null) {
+                                    newSa.getTargets().add(targetInstance.getSpellAbility());
+                                } else {
+                                    System.out.println("Failed to restore target " + o + " for " + origSa);
+                                }
+                            }
                         } else {
                             System.out.println("Failed to restore target " + o + " for " + origSa);
                         }
                     }
                 }
                 toGame.getStack().add(newSa, id);
+                copiedSpells.put(origSa.getId(), newSa);
             }
         }
     }
@@ -481,4 +498,3 @@ public class GameSnapshot {
         return null;
     }
 }
-
