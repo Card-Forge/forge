@@ -85,6 +85,12 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         cardList.add(index, c);
     }
 
+    /** Reorder the zone to match the given card list atomically (no empty-zone window). */
+    public final void setCardOrder(List<Card> order) {
+        cardList.clear();
+        cardList.addAll(order);
+    }
+
     public final void add(final Card c) {
         add(c, null);
     }

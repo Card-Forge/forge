@@ -1111,6 +1111,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void resetSurveilThisTurn() {
         surveilThisTurn = 0;
     }
+    public void setSurveilThisTurn(int n) {
+        surveilThisTurn = n;
+    }
 
     public boolean canMulligan() {
         return !getZone(ZoneType.Hand).isEmpty();
@@ -1286,11 +1289,17 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getNumDrawnThisTurn() {
         return numDrawnThisTurn;
     }
+    public final void setNumDrawnThisTurn(int n) {
+        numDrawnThisTurn = n;
+    }
     public final int getNumDrawnLastTurn() {
         return numDrawnLastTurn;
     }
     public final int numDrawnThisDrawStep() {
         return numDrawnThisDrawStep;
+    }
+    public final void setNumDrawnThisDrawStep(int n) {
+        numDrawnThisDrawStep = n;
     }
 
     /**
@@ -1413,6 +1422,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getNumRollsThisTurn() {
         return numRollsThisTurn;
     }
+    public final void setNumRollsThisTurn(int n) {
+        numRollsThisTurn = n;
+    }
     public void roll() {
         numRollsThisTurn++;
     }
@@ -1422,6 +1434,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final int getNumFlipsThisTurn() {
         return numFlipsThisTurn;
+    }
+    public final void setNumFlipsThisTurn(int n) {
+        numFlipsThisTurn = n;
     }
     public void flip() {
         numFlipsThisTurn++;
@@ -1471,6 +1486,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getNumTokenCreatedThisTurn() {
         return numTokenCreatedThisTurn;
     }
+    public final void setNumTokenCreatedThisTurn(int n) {
+        numTokenCreatedThisTurn = n;
+    }
 
     public final void resetNumTokenCreatedThisTurn() {
         numTokenCreatedThisTurn = 0;
@@ -1490,6 +1508,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void resetNumForetoldThisTurn() {
         numForetoldThisTurn = 0;
     }
+    public final void setNumForetoldThisTurn(int n) {
+        numForetoldThisTurn = n;
+    }
 
     public final List<Card> getDiscardedThisTurn() {
         return discardedThisTurn;
@@ -1506,6 +1527,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void resetNumExploredThisTurn() {
         numExploredThisTurn = 0;
+    }
+    public final void setNumExploredThisTurn(int n) {
+        numExploredThisTurn = n;
     }
 
     public int getNumCardsInHandStartedThisTurnWith() {
@@ -1770,7 +1794,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final Card getLastDrawnCard() {
         return lastDrawnCard;
     }
-    private Card setLastDrawnCard(final Card c) {
+    public Card setLastDrawnCard(final Card c) {
         lastDrawnCard = c;
         return lastDrawnCard;
     }
@@ -1815,6 +1839,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final int getLastTurnNr() {
         return this.lastTurnNr;
+    }
+    public final void setLastTurnNr(int n) {
+        this.lastTurnNr = n;
     }
 
     public boolean hasTappedLandForManaThisTurn() {
@@ -1876,6 +1903,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void resetVenturedThisTurn() {
         venturedThisTurn = 0;
+    }
+    public final void setVenturedThisTurn(int n) {
+        venturedThisTurn = n;
     }
 
     public final List<Card> getCompletedDungeons() {
@@ -2275,6 +2305,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void resetInvestigatedThisTurn() {
         investigatedThisTurn = 0;
     }
+    public final void setInvestigatedThisTurn(int n) {
+        investigatedThisTurn = n;
+    }
 
     public final void addSacrificedThisTurn(final Card cpy, final SpellAbility source) {
         // Play the Sacrifice sound
@@ -2333,6 +2366,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getSpellsCastThisGame() {
         return spellsCastThisGame;
     }
+    public final void setSpellsCastThisGame(int n) {
+        spellsCastThisGame = n;
+    }
     public final void resetSpellCastThisGame() {
         spellsCastThisGame = 0;
     }
@@ -2353,6 +2389,12 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final int getLifeGainedTimesThisTurn() {
         return lifeGainedTimesThisTurn;
+    }
+    public final void setLifeGainedTimesThisTurn(int n) {
+        lifeGainedTimesThisTurn = n;
+    }
+    public final void setLifeGainedByTeamThisTurn(int n) {
+        lifeGainedByTeamThisTurn = n;
     }
 
     public final int getLifeLostThisTurn() {
@@ -3386,6 +3428,31 @@ public class Player extends GameEntity implements Comparable<Player> {
         return gainedOwnership;
     }
 
+    // === Snapshot support setters ===
+
+    public void setSimultaneousDamage(int n) { simultaneousDamage = n; }
+    public int getSimultaneousDamage() { return simultaneousDamage; }
+    public void setTriedToDrawFromEmptyLibrary(boolean b) { triedToDrawFromEmptyLibrary = b; }
+    public boolean getTriedToDrawFromEmptyLibrary() { return triedToDrawFromEmptyLibrary; }
+
+    public void setDiscardedThisTurn(List<Card> cards) { discardedThisTurn = new ArrayList<>(cards); }
+    public void setSacrificedThisTurn(List<Card> cards) { sacrificedThisTurn = new ArrayList<>(cards); }
+    public void setDiceRollsThisTurn(List<Integer> rolls) { diceRollsThisTurn = new ArrayList<>(rolls); }
+    public List<Card> getSpellsCastSinceBeginningOfLastTurn() { return spellsCastSinceBeginningOfLastTurn; }
+    public void setSpellsCastSinceBeginningOfLastTurn(List<Card> cards) { spellsCastSinceBeginningOfLastTurn = new ArrayList<>(cards); }
+    public void setAttackedThisTurn(Map<GameEntity, List<Card>> map) { attackedThisTurn = new HashMap<>(map); }
+    public Map<GameEntity, List<Card>> getAttackedThisTurn() { return attackedThisTurn; }
+    public void setAttackedPlayersThisCombat(List<Player> players) { attackedPlayersThisCombat = new ArrayList<>(players); }
+    public void setCompletedDungeons(List<Card> dungeons) { completedDungeons = new ArrayList<>(dungeons); }
+    public void setLostOwnership(CardCollection cards) { lostOwnership = new CardCollection(cards); }
+    public void setGainedOwnership(CardCollection cards) { gainedOwnership = new CardCollection(cards); }
+    public void setElementalBendThisTurn(EnumSet<TriggerType> set) { elementalBendThisTurn = set.isEmpty() ? EnumSet.noneOf(TriggerType.class) : EnumSet.copyOf(set); }
+    public EnumSet<TriggerType> getElementalBendThisTurn() { return elementalBendThisTurn; }
+    public void setCurrentPlanes(CardCollection cards) { currentPlanes = new CardCollection(cards); }
+    public CardCollection getCurrentPlanes() { return currentPlanes; }
+    public void setPlaneswalkedToThisTurn(CardCollection cards) { planeswalkedToThisTurn = new CardCollection(cards); }
+    public void setActiveScheme(Card c) { activeScheme = c; }
+
     @Override
     public PlayerView getView() {
         return view;
@@ -3938,6 +4005,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public int getAttractionsVisitedThisTurn() {
         return this.attractionsVisitedThisTurn;
     }
+    public void setAttractionsVisitedThisTurn(int n) {
+        this.attractionsVisitedThisTurn = n;
+    }
 
     public int getCrankCounter() {
         return this.crankCounter;
@@ -4015,6 +4085,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public int getDevotionMod() {
         return devotionMod;
+    }
+    public void setDevotionMod(int n) {
+        devotionMod = n;
     }
 
     public void afterStaticAbilityLayer(StaticAbilityLayer layer) {
