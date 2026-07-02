@@ -2,7 +2,7 @@ Name:Shipbreaker Kraken
 ManaCost:4 U U
 Types:Creature Kraken
 PT:6/6
-K:Monstrosity:4:6 U U
+A:AB$ PutCounter | Cost$ 6 U U | Monstrosity$ 4
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ When this creature becomes monstrous, tap up to four target creatures. Those creatures don't untap during their controllers' untap steps for as long as you control this creature.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 4 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | ReplacementEffects$ DontUntap | Duration$ AsLongAsControl

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Orzhov-precon
+Title=Orzhov-precon
+Icon=Orzhov-precon.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/TimbersFC_-_Golgari_Cauldron_(Modern,_#2372611).dck
+Deck Type=constructed
+
+[Main]
+2 Haywire Mite
+1 Delighted Halfling
+1 The Swarmweaver
+4 Webstrike Elite
+1 Satyr Wayfinder
+1 Ishkanah, Grafwidow
+2 Scavenging Ooze
+3 Ignoble Hierarch
+4 Agatha's Soul Cauldron
+2 Nihil Spellbomb
+4 Fatal Push
+2 Malevolent Rumble
+4 Green Sun's Zenith
+2 Insidious Roots
+3 Urza's Saga
+4 Grist, the Hunger Tide
+2 Underground Mortuary
+1 Shifting Woodland
+1 Dryad Arbor
+4 Verdant Catacombs
+4 Windswept Heath
+2 Overgrown Tomb
+1 Swamp
+3 Forest
+2 Boseiju, Who Endures
+[Sideboard]
+1 Vexing Bauble
+3 Fulminator Mage
+3 Stillmoon Cavalier
+1 Pithing Needle
+1 Caustic Caterpillar
+1 Force of Vigor
+3 Thoughtseize
+1 Masked Vandal
+1 Endurance

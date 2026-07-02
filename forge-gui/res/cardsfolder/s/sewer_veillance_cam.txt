@@ -1,0 +1,9 @@
+Name:Sewer-veillance Cam
+ManaCost:U
+Types:Artifact
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTapOrUntap | TriggerDescription$ When this artifact enters or leaves the battlefield, you may tap or untap target creature.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTapOrUntap | Secondary$ True | TriggerDescription$ When this artifact enters or leaves the battlefield, you may tap or untap target creature.
+SVar:TrigTapOrUntap:DB$ TapOrUntap | ValidTgts$ Creature
+A:AB$ Draw | Cost$ 3 U Sac<1/CARDNAME/this artifact> | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:Flash\nWhen this artifact enters or leaves the battlefield, you may tap or untap target creature.\n{3}{U}, Sacrifice this artifact: Draw two cards.

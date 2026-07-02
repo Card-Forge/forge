@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Boromir
+Title=Boromir
+Icon=Boromir.jpg
+Difficulty=Easy
+Description=Magic_Origins/Standard_Daily_#8552200/inosta_-_Abzan_Midrange_(Standard,_#308126).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Anafenza, the Foremost
+4 Courser of Kruphix
+3 Den Protector
+4 Fleecemane Lion
+2 Herald of Torment
+4 Siege Rhino
+4 Abzan Charm
+2 Bile Blight
+2 Dromoka's Command
+3 Hero's Downfall
+4 Thoughtseize
+1 Caves of Koilos
+3 Forest
+4 Llanowar Wastes
+1 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+3 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Arashin Cleric
+1 Duress
+2 Hunt the Hunter
+2 Nissa, Vastwood Seer
+1 Sorin, Solemn Visitor
+3 Ultimate Price
+2 Unravel the AEther

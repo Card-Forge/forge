@@ -35,7 +35,7 @@ public class PowerExchangeAi extends SpellAbilityAi {
         if (sa.hasParam("Defined")) {
             c2 = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).get(0);
         }
-        else if (tgt.getMinTargets(sa.getHostCard(), sa) > 1) {
+        else if (sa.getMinTargets() > 1) {
             CardCollection list2 = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
             CardLists.sortByPowerDesc(list2);
             c2 = list2.isEmpty() ? null : list2.get(0);

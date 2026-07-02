@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=MamiWata
+Title=MamiWata
+Icon=MamiWata.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Elias_Martins_-_Izzet_Blitz_(Modern,_#1209398)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Bonecrusher Giant
+2 Goldspan Dragon
+3 Sprite Dragon
+4 Monastery Swiftspear
+4 Stormwing Entity
+1 Shadowspear
+2 Desperate Ritual
+2 Unholy Heat
+2 Mutagenic Growth
+4 Lightning Bolt
+4 Manamorphose
+2 Expressive Iteration
+2 Finale of Promise
+4 Serum Visions
+2 Seal of Removal
+1 Castle Vantress
+1 Scalding Tarn
+2 Steam Vents
+4 Sulfur Falls
+6 Mountain
+6 Island
+[Sideboard]
+1 Soul-Guide Lantern
+1 Mystical Dispute
+1 Pithing Needle
+2 Tormod's Crypt
+2 Vapor Snag
+2 Alpine Moon
+2 Test of Talents
+2 Prismari Command
+2 Leyline of Combustion

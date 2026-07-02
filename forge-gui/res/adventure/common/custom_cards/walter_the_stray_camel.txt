@@ -1,0 +1,15 @@
+Name:Walter, the Stray Camel
+Colors:White
+Types:Legendary Creature Camel
+PT:0/1
+S:Mode$ Continuous | Affected$ Camel.YouCtrl | AddPower$ 1 | Description$ Camels you control have get +1/+0 and attack each turn if able.
+S:Mode$ MustAttack | ValidCreature$ Camel.YouCtrl | Secondary$ True | Description$ Camels you control have get +1/+0 and attack each turn if able.
+S:Mode$ Continuous | Affected$ Camel.YouOwn | ValidAfterStack$ Spell.Camel | EffectZone$ Battlefield,Graveyard | MayPlay$ True | AffectedZone$ Graveyard,Exile | Description$ You may play camel cards from your graveyard or exile, this effect is also active if NICKNAME is in Exile or in your Graveyard
+T:Mode$ DamageDone | ValidSource$ Camel.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigRandomCard | TriggerDescription$ Whenever a camel you control deals combat damage to a player, a random nondesert card becomes the card "Desert" with the effect "Camels your opponents control get +1/+0". 
+SVar:TrigRandomCard:DB$ ChooseCard | Name$ Desert | Choices$ Land.nonDesert+OwnedBy TriggeredTarget | ChoiceZone$ Library | AtRandom$ True | Amount$ 1 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Types$ Land,Desert | RemoveAllAbilities$ True | staticAbilities$ CamelPump | Abilities$ ABMana | RemoveCardTypes$ True | Duration$ Perpetual | Defined$ ChosenCard | Triggers$ LandTapDraw | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:CamelPump:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Camel.OppCtrl | AddPower$ 1 | Description$ Camels you control have get +1/+0 and attack each turn if able.
+SVar:ABMana:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+SVar:DesertDamage:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking Creature | NumDmg$ 1 | ActivationPhases$ EndCombat | SpellDescription$ CARDNAME deals 1 damage to target attacking creature. Activate only during the end of combat step.
+Oracle:Camels you control have get +1/+0 and attack each turn if able.\nYou may play camel cards from your graveyard or exile, this effect is also active if WALTER is in Exile or in your Graveyard\nWhenever a camel you control deals combat damage to a player, a random nondesert card becomes the card "Desert".
+ 

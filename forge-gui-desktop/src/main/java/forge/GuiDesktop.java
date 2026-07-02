@@ -138,11 +138,6 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public ISkinImage getCardArt(final PaperCard card) {
-        return null; //TODO
-    }
-
-    @Override
     public ISkinImage getCardArt(final PaperCard card, final boolean backFace) {
         return null; //TODO
     }
@@ -367,6 +362,14 @@ public class GuiDesktop implements IGuiBase {
         return (float) Math.min(scaleX, scaleY);
     }
     static float screenScale = initializeScreenScale();
+
+    @Override
+    public boolean hasNetGame() {
+        if (Singletons.getView() == null || Singletons.getView().getNavigationBar() == null) {
+            return false;
+        }
+        return Singletons.getView().getNavigationBar().hasNetGame();
+    }
 
     @Override
     public float getScreenScale() {

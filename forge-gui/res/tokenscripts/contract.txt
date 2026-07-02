@@ -1,0 +1,10 @@
+Name:Contract
+ManaCost:no cost
+Colors:white
+Types:Enchantment Aura
+K:Enchant:Creature
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, it gets +2/+0 until end of turn if it's attacking one of your opponents. Otherwise, its controller loses 2 life.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +2 | ConditionCheckSVar$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredAttackerController | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+SVar:X:TriggeredAttacker$Valid Card.attacking Opponent
+Oracle:Enchant creature\nWhenever enchanted creature attacks, it gets +2/+0 until end of turn if it's attacking one of your opponents. Otherwise, its controller loses 2 life.

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=A Wolf in Sheeps Clothing
+Title=A Wolf in Sheeps Clothing
+Icon=A Wolf in Sheeps Clothing.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/Boulderer_-_Grixis_Control_(Modern,_#2373398).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+2 Orcish Bowmasters
+4 Tamiyo, Inquisitive Student
+3 Consider
+4 Flame of Anor
+3 Sheoldred's Edict
+4 Counterspell
+2 Cling to Dust
+3 Spell Snare
+1 Sink into Stupor
+2 Spell Pierce
+4 Fatal Push
+2 Lightning Bolt
+1 Lórien Revealed
+3 Island
+1 Otawara, Soaring City
+2 Watery Grave
+4 Polluted Delta
+2 Steam Vents
+4 Scalding Tarn
+1 Swamp
+1 Hall of Storm Giants
+1 Thundering Falls
+1 Undercity Sewers
+1 Misty Rainforest
+[Sideboard]
+2 Mystical Dispute
+1 Aether Gust
+4 Consign to Memory
+1 Nihil Spellbomb
+1 Surgical Extraction
+3 Break the Ice
+3 Fuel the Flames

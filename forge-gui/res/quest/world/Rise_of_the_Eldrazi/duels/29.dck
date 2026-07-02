@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Bela Lugosi
+Title=Bela Lugosi
+Icon=Bela Lugosi.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/PTQ_Amsterdam_2010_-_Seattle_-_USA/Vincent_Nadeau_-_Cruel_Control_(Standard,_#1710).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Gatekeeper of Malakir
+2 Malakir Bloodwitch
+4 Sedraxis Specter
+2 Countersquall
+4 Lightning Bolt
+2 Terminate
+4 Blightning
+3 Cruel Ultimatum
+4 Spreading Seas
+4 Jace, the Mind Sculptor
+4 Creeping Tar Pit
+4 Crumbling Necropolis
+1 Dragonskull Summit
+1 Drowned Catacomb
+3 Island
+4 Lavaclaw Reaches
+3 Mountain
+4 Scalding Tarn
+3 Swamp
+[Sideboard]
+2 Consume the Meek
+3 Thought Hemorrhage
+4 Vampire Nighthawk

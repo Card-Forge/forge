@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Firestorm
+Title=Firestorm
+Icon=Firestorm.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/Bandito9999_-_Mono_Red_(Standard,_#1483641).dck
+Deck Type=constructed
+
+[Main]
+2 Squee, Dubious Monarch
+2 Goro-Goro, Disciple of Ryusei
+3 Bloodthirsty Adversary
+3 Radha's Firebrand
+4 Phoenix Chick
+4 Thundering Raiju
+4 Reckless Stormseeker
+4 Shivan Devastator
+4 Kumano Faces Kakkazan
+4 Play with Fire
+4 Lightning Strike
+1 Sokenzan, Crucible of Defiance
+21 Mountain
+[Sideboard]

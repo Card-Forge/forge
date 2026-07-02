@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Storm
+Title=Storm
+Icon=Storm.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Abysse_-_Jeskai_Control_(Standard,_#983021).dck
+Deck Type=constructed
+
+[Main]
+4 Agent of Treachery
+1 Tale's End
+2 Dovin's Veto
+2 Shatter the Sky
+3 Elspeth Conquers Death
+4 Fires of Invention
+4 Omen of the Sea
+4 Omen of the Sun
+4 Shark Typhoon
+4 The Birth of Meletis
+4 Lukka, Coppercoat Outcast
+4 Narset, Parter of Veils
+4 Teferi, Time Raveler
+2 Mountain
+2 Castle Vantress
+3 Plains
+3 Fabled Passage
+3 Temple of Epiphany
+3 Castle Ardenvale
+4 Steam Vents
+4 Sacred Foundry
+4 Raugrin Triome
+4 Island
+4 Hallowed Fountain
+[Sideboard]
+1 Yorion, Sky Nomad
+2 Aether Gust
+2 Archon of Sun's Grace
+2 Deafening Clarion
+2 Dovin's Veto
+2 Omen of the Forge
+4 Mystical Dispute

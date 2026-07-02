@@ -23,7 +23,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>${revision}</version>
+        <version>2.0.13</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
@@ -88,11 +88,27 @@
                 <filtering>true</filtering>
                 <targetPath>assets</targetPath>
             </resource>
+            <!-- tinylog + SLF4J service descriptors: the android-maven-plugin strips
+                 META-INF/ from dependency JARs during unpack, so we ship our own copies
+                 so tinylog's ServiceLoader can discover its providers at runtime. -->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
         </resources>
         <!-- append generated snapshot-version property -->
         <finalName>forge-android-${snapshot-version}</finalName>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.5.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents.core5</groupId>
+            <artifactId>httpcore5</artifactId>
+            <version>5.2.4</version>
+        </dependency>
         <dependency>
             <groupId>org.robolectric</groupId>
             <artifactId>android-all</artifactId>

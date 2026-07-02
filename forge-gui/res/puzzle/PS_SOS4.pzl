@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Secrets of Strixhaven #04
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/06/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Remember that your solution must satisfy all possible opponent decisions. Your opponent has a Royal Treatment in hand. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=3
+p0hand=Withering Curse;Witherbloom Charm;Masterful Flourish;Timeline Culler;Dissection Practice;Salt Road Skirmish
+p0battlefield=Virulent Emissary;Pest Mascot;Gorma, the Gullet|Counters:P1P1=1;Carrion Cruiser;Swamp;Swamp;Swamp;Temple of Malady|NoETBTrigs;Temple of Malady|NoETBTrigs;Temple of Malady|NoETBTrigs
+p1life=13
+p1battlefield=Environmental Scientist;Environmental Scientist;Cheerful Osteomancer

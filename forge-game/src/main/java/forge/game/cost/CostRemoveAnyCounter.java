@@ -17,19 +17,25 @@
  */
 package forge.game.cost;
 
+import forge.card.CardType;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * The Class CostRemoveAnyCounter.
@@ -65,24 +71,19 @@ public class CostRemoveAnyCounter extends CostPart {
     public Integer getMaxAmountX(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
 
-        CardCollectionView validCards = CardLists.getValidCards(payer.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), payer, source, ability);
-        int allCounters = 0;
-        for (Card c : validCards) {
-            if (this.counter != null) {
-                if (!c.canRemoveCounters(this.counter)) {
-                    continue;
-                }
-                allCounters += c.getCounters(this.counter);
-            } else {
-                for (Map.Entry<CounterType, Integer> entry : c.getCounters().entrySet()) {
-                    if (!c.canRemoveCounters(entry.getKey())) {
-                        continue;
-                    }
-                    allCounters += entry.getValue();
-                }
-            }
+        CardCollectionView validCards;
+        if (payCostFromSource()) {
+            validCards = new CardCollection(source);
+        } else {
+            validCards = CardLists.getValidCards(payer.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), payer, source, ability);
         }
-        return allCounters;
+        if (this.counter != null) {
+            return validCards.stream().mapToInt(c -> c.canRemoveCounters(this.counter) ? c.getCounters(this.counter) : 0).sum();
+        }
+        // use flatMap instead of mapMulti for Android 13 and below
+        //https://developer.android.com/reference/java/util/stream/Stream#mapMulti
+        return validCards.stream().flatMap(c -> c.getCounters().entrySet().stream().filter(e -> c.canRemoveCounters(e.getKey())))
+                .collect(Collectors.summingInt(e -> e.getValue()));
     }
 
     /*
@@ -107,16 +108,24 @@ public class CostRemoveAnyCounter extends CostPart {
         final StringBuilder sb = new StringBuilder();
 
         final String counters =  this.counter == null ? "counter" : this.counter.getName().toLowerCase() + " counter";
-        final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
+        boolean multiple = !"1".equals(getAmount());
 
         sb.append("Remove ");
         if (oneOrMore) {
-            sb.append("one or more ").append(counters).append("s");
+            sb.append("one or more ").append(Lang.getPlural(counters));
         } else {
             sb.append(Cost.convertAmountTypeToWords(this.convertAmount(), this.getAmount(), counters));
-            sb.append(this.getAmount().equals("1") ? "" : "s");
         }
-        sb.append(" from ").append(desc).append(" you control");
+        sb.append(" from ");
+        if (payCostFromSource()) { // TODO use THISTYPE
+            sb.append(getDescriptiveType(multiple));
+        } else {
+            if (multiple) {
+                sb.append(" among ");
+            }
+            sb.append(getDescriptiveType(multiple));
+            sb.append(" you control");
+        }
 
         return sb.toString();
     }
@@ -138,8 +147,26 @@ public class CostRemoveAnyCounter extends CostPart {
         return true;
     }
 
+
+    public String getDescriptiveType(boolean multiple) {
+        String typeDesc = this.getTypeDescription();
+        if (typeDesc == null) {
+            if (payCostFromSource()) {
+                return getType();
+            }
+            Collection<String> types = Arrays.asList(getType().split(";"));
+            if (multiple)
+                types = types.stream().map(CardType::getPluralType).collect(Collectors.toList());
+            typeDesc = Lang.getInstance().buildValidDesc(types, multiple);
+        }
+        if (!multiple && !typeDesc.startsWith("an")) { // skip adding to "another"
+            typeDesc = (Lang.startsWithVowel(typeDesc) ? "an " : "a ") + typeDesc;
+        }
+        return typeDesc;
+    }
+
+    @Override
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }
-
 }

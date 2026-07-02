@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=A Wolf in Sheeps Clothing
+Title=A Wolf in Sheeps Clothing
+Icon=A Wolf in Sheeps Clothing.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/GPT_London_2013-La_Bottega_dell┬┤Alchimista/Saverio_Quochi_-_Infect_(Modern,_#44081).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+4 Plague Stinger
+2 Apostle's Blessing
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+2 Ranger's Guile
+4 Vines of Vastwood
+2 Rancor
+2 Unstable Mutation
+1 Breeding Pool
+2 Forest
+1 Hinterland Harbor
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+4 Dismember
+1 Dispel
+1 Grafdigger's Cage
+4 Inquisition of Kozilek
+2 Spellskite
+1 Steel Sabotage
+2 Surgical Extraction

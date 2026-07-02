@@ -89,7 +89,7 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void addDeck(){
-        if (Current.player().getDeckCount() >= AdventurePlayer.MAX_DECK_COUNT){
+        if (Current.player().getDeckCount() >= Current.player().getMaxDeckCount()){
             showDialog(createGenericDialog(Forge.getLocalizer().getMessage("lblAddDeck"), Forge.getLocalizer().getMessage("lblMaxDeckCountReached"),
                     Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null));
             return;
@@ -264,6 +264,8 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void edit() {
-        Forge.switchScene(DeckEditScene.getInstance());
+        DeckEditScene editScene = DeckEditScene.getInstance();
+        editScene.loadEvent(null);
+        Forge.switchScene(editScene);
     }
 }

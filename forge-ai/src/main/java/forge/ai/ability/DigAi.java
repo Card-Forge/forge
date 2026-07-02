@@ -72,7 +72,7 @@ public class DigAi extends SpellAbilityAi {
                     manaToSave = Integer.parseInt(TextUtil.split(sa.getParam("AILogic"), '.')[1]);
                 }
 
-                int numCards = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()) - manaToSave;
+                int numCards = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger()) - manaToSave;
                 if (numCards <= 0) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
@@ -122,13 +122,12 @@ public class DigAi extends SpellAbilityAi {
         // Triggers that ask to pay {X} (e.g. Depala, Pilot Exemplar).
         if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayXButSaveMana")) {
             int manaToSave = Integer.parseInt(TextUtil.split(sa.getParam("AILogic"), '.')[1]);
-            int numCards = ComputerUtilCost.getMaxXValue(sa, ai, true) - manaToSave;
+            int numCards = ComputerUtilCost.setMaxXValue(sa, ai, true) - manaToSave;
             if (numCards <= 0) {
                 if (mandatory) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(100, AiPlayDecision.CantPlayAi);
                 }
+                return new AiAbilityDecision(100, AiPlayDecision.CantPlayAi);
             }
             root.setXManaCostPaid(numCards);
         }
@@ -161,9 +160,8 @@ public class DigAi extends SpellAbilityAi {
 
         if (sa.getActivatingPlayer().isOpponentOf(ai) && relatedPlayer.isOpponentOf(ai)) {
             return ComputerUtilCard.getWorstPermanentAI(valid, false, true, false, false);
-        } else {
-            return ComputerUtilCard.getBestAI(valid);
         }
+        return ComputerUtilCard.getBestAI(valid);
     }
 
     /* (non-Javadoc)

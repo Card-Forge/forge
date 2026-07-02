@@ -525,11 +525,7 @@ public class ManaCostBeingPaid {
             if (xManaCostPaidByColor == null) {
                 xManaCostPaidByColor = Maps.newHashMap();
             }
-            Integer xColor = xManaCostPaidByColor.get(color);
-            if (xColor == null) {
-                xColor = 0;
-            }
-            xManaCostPaidByColor.put(color, xColor + 1);
+            xManaCostPaidByColor.merge(color, 1, Integer::sum);
         }
 
         decreaseShard(chosenShard, 1);

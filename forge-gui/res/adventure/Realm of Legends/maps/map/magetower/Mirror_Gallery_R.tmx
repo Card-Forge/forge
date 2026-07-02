@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="105">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="respawnEnemies" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="1" name="Background" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmEEOwjAMBPOD5AdVBR9tq/Ir4Gtw4YbAbtdxDjNSbpZ3VCWy1VIAAAAAAAAA4BtLLWUVnq329Z+att8s7vePj//+/m6Pdvzcaq7/2VxVn6xc/HNz8c/NVftb59JV7H9pmjnnnUsqf1XevfPc8c7Bp+iejXr/e+eO7L8Y3tzI/qqaCPC310SAv70mAvztNR68+9uvvUtVE7m/9Ua1v3l2vLP/KCL2NwtZb1MF/jZe3r59Qg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJgEAMQNHrBbkBRNzPbZ1IgpVWVsboe3BcmV8F0hoAwHtsY3YBQD1TP/6553YAwF3rcH7V7oBrf1WV26G67L2XPR/+6gv3+1K4PejPpT9P7J/ot3/yPNG/A1ZZCjU=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmFkOwjAMRPuLULlMS3sGzsJ5WHos6IUgopGqEMeTvVIdaf4i+ymLPUl/appeJBKJRCKRKKPGr96g1EDnDoX4zwtX6tEJ/y74p7Zp7oAe7Y/rBs5/tuXvMrJPpdZ1L/xo/ZwX/hc4X+qn8At/vns5FOJH6oPtrnNcXSF+JL5tr0L50f5K9edU/NMSk+LR/d2MH3puqTiUP1mzUV5DxeR4qLxoX6PuEZKXmqNzq57J9cuZyLvmuR7/xZ0TJK+eY97fmDtJ8V8OfvwhOXPy+67/Vvht7Ln5fd8kufhzv3VsOVOenxgPYat/anDewcUTyj8a+ZF3gus8IjnR8xwbi9qjvfObNYD6f6B8SG1+Kp5Pvhh+l39zrRnV97n3u+lD1my2eq7ZXLWT82+5vD+3thwb6t9sa5ZycLlz+LcaI6X/qTFC/U/I+zD0fVn7r3er/5/Cn1Yfuas/Dg==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJgEAMBdD0Fi5yc4ngDiq6uNeJYCteuPcgRUKKXwUSAQAA0Ld1jNhq7ePfSb61DHdllDl/1twAAAAtyfq/zyXiLM/ZUfupvO8D7cl6f+jLBUHgCzI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="60" template="../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_1.tmx"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="368" y="532.333">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Absolute Law|USG&quot;, &quot;Chill|TMP&quot;, &quot;Command Tower&quot;, &quot;Exotic Orchard&quot;, &quot;Witch-Maw Nephilim|GPT&quot;, &quot;Tablet of Compleation|ONE&quot;]}"/>
+    <property name="enemy" value="Atraxa"/>
+    <property name="pursueRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="313" y="567">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Opulent Palace&quot;, &quot;Blood Pet|TMP&quot;, &quot;Puppet Strings|TMP&quot;, &quot;Volrath's Shapeshifter|STH&quot;, &quot;Flourishing Defenses|ECC&quot;
+]}</property>
+    <property name="enemy" value="Volrath"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="309.667" y="492.667">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sandsteppe Citadel&quot;, &quot;Slaughter Singer&quot;, &quot;Sculpted Perfection&quot;, &quot;Phyrexian Awakening&quot;, &quot;Gift of Compleation&quot;
+]}</property>
+    <property name="enemy" value="Ixhel"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="369.5" y="475">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Haunted Mire&quot;, &quot;Idyllic Beachfront&quot;, &quot;Cursed Wombat&quot;, &quot;Metropolis Angel&quot;
+]}</property>
+    <property name="enemy" value="Reyhan and Ishai"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="419.333" y="496">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Seaside Citadel&quot;, &quot;Herald of the Pantheon&quot;, &quot;Soul Snare&quot;, &quot;Shoal Kraken&quot;
+]}</property>
+    <property name="enemy" value="Estrid"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/enemy.tx" x="421.333" y="565.333">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Arcane Sanctum&quot;, &quot;Syndicate Heavy&quot;, &quot;Diviner Spirit&quot;
+]}</property>
+    <property name="enemy" value="Oloro"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/enemy.tx" x="116" y="410">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Mox Ruby&quot;, &quot;Ruby Medallion&quot;, &quot;Ruby Collector&quot;, &quot;Gratuitous Violence|ons&quot;, &quot;Sunbird's Invocation|xln&quot; ] }"/>
+    <property name="enemy" value="Márton Stromgald"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="111" y="597">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Strionic Resonator|NCC&quot;, &quot;Dolmen Gate&quot;, &quot;Tariel, Reckoner of Souls|CMD&quot;, &quot;Nomad Outpost|TDM&quot;, &quot;Swiftfoot Boots&quot;, &quot;Scroll of griselbrand|AVR&quot;, &quot;Scroll of avacyn|AVR&quot;, &quot;Vial of Dragonfire|DTK&quot; ] }"/>
+    <property name="enemy" value="Kaalia"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="610" y="408.333">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Rundvelt Hordemaster&quot;, &quot;Boggart Shenanigans&quot;, &quot;Torch Courier|GRN&quot;, &quot;Goblin Burrows|ONS&quot;, &quot;Goblinslide|KTK&quot;, &quot;Goblin Influx Array|YDMU&quot; ] }"/>
+    <property name="enemy" value="Krenko"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="297" y="231">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Mishra's Workshop&quot;, &quot;Mishra's Foundry|BRO&quot;, &quot;Mishra's Juggernaut&quot;, &quot;Ankh of Mishra|5ED&quot;, &quot;Mishra's Factory&quot;, &quot;Mishra's Bauble|BRR&quot;, &quot;Assembly-Worker&quot;]}</property>
+    <property name="enemy" value="Mishra"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="232" y="230">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Altar of the Pantheon&quot;, &quot;Goblin Assault&quot;, &quot;Hammer of Purphoros&quot;, &quot;Anax, Hardened in the Forge&quot;, &quot;Font of Ire|JOU&quot;, &quot;Roiling Vortex|ZNR&quot;, &quot;War Effort|TDM&quot;]}</property>
+    <property name="enemy" value="Purphoros"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/enemy.tx" x="620" y="599">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;At Knifepoint|OTJ&quot;, &quot;Generous Plunderer&quot;, &quot;Diamond Valley|ARN&quot;, &quot;Hellspur Posse Boss|OTJ&quot;, &quot;Brimstone Roundup|OTJ&quot;, &quot;Boom Box|OTJ&quot;, &quot;Bandit's Haul|OTJ&quot;, &quot;Lavaspur Boots|OTJ&quot;, &quot;Key to the Vault|OTJ&quot;  ] }"/>
+    <property name="enemy" value="Akul"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/enemy.tx" x="498" y="228">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Furnace Punisher&quot;, &quot;Panic Spellbomb&quot;, &quot;Pyrite Spellbomb&quot;, &quot;The autonomous furnace|ONE&quot;, &quot;Fallen Ferromancer&quot;, &quot;Shrine of Burning Rage|NPH&quot;, &quot;Furnace Skullbomb|ONE&quot;, &quot;Urabrask's Forge|ONE&quot;, &quot;Vindictive Flamestoker|ONE&quot;]}</property>
+    <property name="enemy" value="Urabrask"/>
+    <property name="threatRange" value="0"/>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/enemy.tx" x="425" y="226">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Oran-Rief Survivalist&quot;, &quot;Hagra Diabolist&quot;, &quot;Evolving Wilds|WWK&quot;, &quot;Zendikar Incarnate&quot;, &quot;Ally Encampment|BFZ&quot;, &quot;Retreat to Emeria|BFZ&quot;, &quot;Captain's Claws|OGW&quot;, &quot;Veteran Warleader|BFZ&quot;, &quot;Cliffside Lookout|BFZ&quot;]}</property>
+    <property name="enemy" value="General Tazri"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

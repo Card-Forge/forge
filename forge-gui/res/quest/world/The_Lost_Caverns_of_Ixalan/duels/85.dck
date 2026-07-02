@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Indiana Jones
+Title=Indiana Jones
+Icon=Indiana Jones.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/SlapOne_-_Mono-Blue_Merfolk_(Modern,_#2002304).dck
+Deck Type=constructed
+
+[Main]
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Merfolk Trickster
+2 Subtlety
+3 Svyelun of Sea and Sky
+4 Tide Shaper
+4 Tishana's Tidebinder
+4 Vodalian Hexcatcher
+4 Aether Vial
+1 Dismember
+4 Force of Negation
+2 Spell Pierce
+3 Cavern of Souls
+1 Fiery Islet
+9 Island
+1 Minamo, School at Water's Edge
+4 Mutavault
+2 Otawara, Soaring City
+[Sideboard]
+3 Aether Gust
+2 Chalice of the Void
+3 Cursed Totem
+1 Dismember
+2 Spreading Seas
+2 Stern Scolding
+2 Subtlety

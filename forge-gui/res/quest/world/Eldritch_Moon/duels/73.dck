@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Oberon
+Title=Oberon
+Icon=Oberon.jpg
+Difficulty=Hard
+Description=../Modern/Eldritch_Moon/Competitive_Modern_Constructed_League/Michy82_-_Red_Deck_Wins_(Modern,_#638954).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Bedlam Reveler
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+3 Bloodstained Mire
+2 Mountain
+2 Sacred Foundry
+4 Scalding Tarn
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+3 Destructive Revelry
+3 Eidolon of the Great Revel
+2 Path to Exile
+1 Phyrexian Unlife
+1 Skullcrack
+1 Smash to Smithereens

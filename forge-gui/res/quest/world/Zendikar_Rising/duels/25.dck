@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Momir
+Title=Momir
+Icon=Momir.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Aaron_Moller_-_Boros_Midrange_(Standard,_#1050542).dck
+Deck Type=constructed
+
+[Main]
+1 Ox of Agonas
+1 Containment Priest
+2 Drannith Magistrate
+2 Skyclave Cleric
+2 Giant Killer
+3 Skyclave Apparition
+4 Tectonic Giant
+4 Bonecrusher Giant
+2 Valakut Awakening
+2 Shock
+2 Spikefield Hazard
+2 Roil Eruption
+3 Shatterskull Smashing
+3 Thundering Rebuke
+3 Felidar Retreat
+3 Chandra, Heart of Fire
+4 Fabled Passage
+4 Plains
+4 Savai Triome
+4 Needleverge Pathway
+5 Mountain
+[Sideboard]
+1 Outlaws' Merriment
+1 Giant Killer
+1 Skyclave Apparition
+1 Containment Priest
+2 Ox of Agonas
+2 Realm-Cloaked Giant
+2 Phoenix of Ash
+2 Cinderclasm
+3 Elspeth Conquers Death

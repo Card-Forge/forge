@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Ekolo
+Title=Ekolo
+Icon=Ekolo.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/Yuda_Kazunari_-_Dimir_Control_(Modern,_#2820296).dck
+Deck Type=constructed
+
+[Main]
+1 Snapcaster Mage
+3 Subtlety
+4 Orcish Bowmasters
+3 Wan Shi Tong, Librarian
+1 Loch Mare
+4 Fatal Push
+1 Spell Pierce
+4 Counterspell
+3 Spell Snare
+1 Logic Knot
+1 Force of Negation
+2 Cling to Dust
+3 Sheoldred's Edict
+3 Consult the Star Charts
+1 Stock Up
+1 Kaito, Bane of Nightmares
+4 Island
+1 Swamp
+4 Field of Ruin
+3 Watery Grave
+1 Flooded Strand
+4 Polluted Delta
+3 Misty Rainforest
+1 Scalding Tarn
+2 Undercity Sewers
+1 Gloomlake Verge
+[Sideboard]
+1 Batterskull
+1 Damnation
+1 Nihil Spellbomb
+1 Toxic Deluge
+3 Mystical Dispute
+3 Break the Ice
+4 Consign to Memory
+1 Harbinger of the Seas

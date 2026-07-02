@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Selesnya-precon
+Title=Selesnya-precon
+Icon=Selesnya-precon.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Osanai_Yuuma_-_Tribal_Zoo_(Modern,_#790635).dck
+Deck Type=constructed
+
+[Main]
+4 Noble Hierarch
+4 Wild Nacatl
+1 Grim Lavamancer
+4 Tarmogoyf
+3 Voice of Resurgence
+4 Mantis Rider
+4 Gruul Spellbreaker
+4 Might of Alara
+4 Lightning Bolt
+4 Boros Charm
+4 Tribal Flames
+1 Hallowed Fountain
+1 Sacred Foundry
+1 Temple Garden
+1 Godless Shrine
+1 Steam Vents
+1 Breeding Pool
+1 Stomping Ground
+1 Blood Crypt
+4 Wooded Foothills
+4 Windswept Heath
+4 Arid Mesa
+[Sideboard]
+4 Assassin's Trophy
+3 Negate
+2 Eidolon of Rhetoric
+2 Knight of Autumn
+2 Kor Firewalker
+2 Gaddock Teeg

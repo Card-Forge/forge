@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Tarzan
+Title=Tarzan
+Icon=Tarzan.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/AleFunes84_-_Izzet_Lessons_(Standard,_#2798934).dck
+Deck Type=constructed
+
+[Main]
+4 Gran-Gran
+4 Monument to Endurance
+3 Abandon Attachments
+4 Accumulate Wisdom
+4 Combustion Technique
+4 Firebending Lesson
+2 It'll Quench Ya!
+1 Three Steps Ahead
+4 Boomerang Basics
+4 Artist's Talent
+4 Stormchaser's Talent
+2 Agna Qel'a
+4 Spirebluff Canal
+4 Riverpyre Verge
+2 Mountain
+6 Island
+4 Steam Vents
+[Sideboard]
+3 Spell Pierce
+1 Iroh's Demonstration
+2 Soul-Guide Lantern
+2 Ral, Crackling Wit
+2 Sear
+2 Pyroclasm
+2 Annul
+1 Three Steps Ahead

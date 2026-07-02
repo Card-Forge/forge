@@ -88,13 +88,15 @@ public class CountersRemoveAi extends SpellAbilityAi {
         CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
         boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
 
+        CounterType iceType = CounterType.getType("ICE");
+
         if (type.matches("All")) {
             // Logic Part for Vampire Hexmage
             // Break Dark Depths
             if (maritEmpty) {
                 CardCollectionView depthsList = ai.getCardsIn(ZoneType.Battlefield, "Dark Depths");
                 depthsList = CardLists.filter(depthsList, CardPredicates.isTargetableBy(sa),
-                        CardPredicates.hasCounter(CounterEnumType.ICE, 3));
+                        CardPredicates.hasCounter(iceType, 3));
                 if (!depthsList.isEmpty()) {
                     sa.getTargets().add(depthsList.getFirst());
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -117,7 +119,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             int amount;
             boolean xPay = false;
             if (amountStr.equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
-                final int manaLeft = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                final int manaLeft = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
 
                 if (manaLeft == 0) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
@@ -130,13 +132,13 @@ public class CountersRemoveAi extends SpellAbilityAi {
             // try to remove them from Dark Depths and Planeswalkers too
 
             if (maritEmpty) {
-                CardCollectionView depthsList = ai.getCardsIn(ZoneType.Battlefield, "Dark Depths");
-                depthsList = CardLists.filter(depthsList, CardPredicates.isTargetableBy(sa),
-                        CardPredicates.hasCounter(CounterEnumType.ICE));
+                CardCollectionView depthsList = CardLists.filter(
+                    ai.getCardsIn(ZoneType.Battlefield, "Dark Depths"),
+                    CardPredicates.isTargetableBy(sa), CardPredicates.hasCounter(iceType));
 
                 if (!depthsList.isEmpty()) {
                     Card depth = depthsList.getFirst();
-                    int ice = depth.getCounters(CounterEnumType.ICE);
+                    int ice = depth.getCounters(iceType);
                     if (amount >= ice) {
                         sa.getTargets().add(depth);
                         if (xPay) {
@@ -271,7 +273,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             boolean xPay = false;
             // Timecrafting has X R
             if (amountStr.equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
-                final int manaLeft = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                final int manaLeft = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
 
                 if (manaLeft == 0) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
@@ -298,7 +300,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         if (mandatory) {
             if (type.equals("P1P1")) {
                 // Try to target creatures with Adapt or similar
-                CardCollection adaptCreats = CardLists.filter(list, CardPredicates.hasKeyword(Keyword.ADAPT));
+                CardCollection adaptCreats = CardLists.filter(list, c -> c.getNonManaAbilities().anyMatch(ab -> ab.hasParam("Adapt")));
                 if (!adaptCreats.isEmpty()) {
                     sa.getTargets().add(ComputerUtilCard.getWorstAI(adaptCreats));
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

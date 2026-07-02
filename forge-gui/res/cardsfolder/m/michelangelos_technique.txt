@@ -1,0 +1,6 @@
+Name:Michelangelo's Technique
+ManaCost:4 G
+Types:Sorcery
+K:Sneak:3 G
+A:SP$ Dig | DigNum$ 8 | ChangeNum$ 2 | Optional$ True | ChangeValid$ Creature | WithTotalCMC$ 6 | DestinationZone$ Battlefield | RestRandomOrder$ True | SpellDescription$ Look at the top eight cards of your library. Put up to two creature cards with total mana value 6 or less from among them onto the battlefield and the rest on the bottom of your library in a random order.
+Oracle:Sneak {3}{G} (You may cast this spell for {3}{G} if you also return an unblocked attacker you control to hand during the declare blockers step.)\nLook at the top eight cards of your library. Put up to two creature cards with total mana value 6 or less from among them onto the battlefield and the rest on the bottom of your library in a random order.

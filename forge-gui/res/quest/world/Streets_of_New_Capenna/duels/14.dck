@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Buffy
+Title=Buffy
+Icon=Buffy.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/PitLUL_-_Mono_Green_(Standard,_#1407262).dck
+Deck Type=constructed
+
+[Main]
+4 Werewolf Pack Leader
+4 Ulvenwald Oddity
+4 Sculptor of Winter
+4 Old-Growth Troll
+4 Jewel Thief
+4 Esika's Chariot
+2 Invoke the Ancients
+4 Blizzard Brawl
+2 Unnatural Growth
+4 Ranger Class
+1 Boseiju, Who Endures
+3 Lair of the Hydra
+20 Snow-Covered Forest
+[Sideboard]
+1 Bouncer's Beatdown
+2 Workshop Warchief
+2 Tamiyo's Safekeeping
+2 Snakeskin Veil
+2 Reckoner Bankbuster
+2 Froghemoth
+4 Outland Liberator

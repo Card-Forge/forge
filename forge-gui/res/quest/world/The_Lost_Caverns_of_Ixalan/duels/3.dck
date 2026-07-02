@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Professor X
+Title=Professor X
+Icon=Professor X.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Kagechika_Yusuke_-_WR_Blitz_(Standard,_#1973059).dck
+Deck Type=constructed
+
+[Main]
+4 Thalia, Guardian of Thraben
+4 Adeline, Resplendent Cathar
+2 Brutal Cathar
+4 Hopeful Initiate
+2 Resolute Reinforcements
+1 King Darien XLVIII
+4 Recruitment Officer
+2 Knight-Errant of Eos
+4 Coppercoat Vanguard
+2 Cheeky House-Mouse
+3 Spellbook Vendor
+4 Imodane's Recruiter
+1 Kellan, Daring Traveler
+8 Plains
+4 Battlefield Forge
+3 Cavern of Souls
+2 Eiganjo, Seat of the Empire
+4 Secluded Courtyard
+2 Mirrex
+[Sideboard]
+2 Lantern Flare
+3 Wedding Announcement
+2 Extraction Specialist
+3 Destroy Evil
+2 Loran of the Third Path
+3 Invasion of Gobakhan

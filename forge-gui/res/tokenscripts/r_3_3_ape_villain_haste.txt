@@ -1,0 +1,7 @@
+Name:Ape Villain Token
+ManaCost:no cost
+Colors:red
+Types:Creature Ape Villain
+PT:3/3
+K:Haste
+Oracle:Haste

@@ -1,0 +1,8 @@
+Name:Alex Wilder, Runaway
+ManaCost:1 R
+Types:Legendary Creature Human Hero Villain
+PT:1/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCastByYou+!wasCastFromYourHand,Creature.YouCtrl+wasCastByYou+!wasCastFromYourHand | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME or another creature you control enters, if you cast it from anywhere other than your hand, it gets +2/+0 and gains haste until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredCardLKICopy | NumAtt$ +2 | KW$ Haste
+K:Escape:2 R ExileFromGrave<3/Card.Other/other>
+Oracle:Whenever Alex Wilder or another creature you control enters, if you cast it from anywhere other than your hand, it gets +2/+0 and gains haste until end of turn.\nEscape—{2}{R}, Exile three other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=BlackPanther
+Title=BlackPanther
+Icon=BlackPanther.jpg
+Difficulty=Very Hard
+Description=./Modern/Secrets_of_Strixhaven/EDHplayer_-_Boros_Wildfire_(Modern,_#2913894).dck
+Deck Type=constructed
+
+[Main]
+4 White Orchid Phantom
+2 Pinnacle Monk
+2 Solitude
+2 Witch Enchanter
+4 Magmatic Hellkite
+2 Elesh Norn, Mother of Machines
+4 Ragavan, Nimble Pilferer
+4 Path to Exile
+2 Reprieve
+3 Erode
+4 Cleansing Wildfire
+4 Boom
+4 Price of Freedom
+3 Rustvale Bridge
+1 Mountain
+2 Sacred Foundry
+4 Arid Mesa
+2 Plains
+4 Flagstones of Trokair
+3 Elegant Parlor
+[Sideboard]
+3 Sanctifier en-Vec
+2 Reprieve
+4 Wrath of the Skies
+2 Drannith Magistrate
+1 Brotherhood's End
+2 Leonin Arbiter
+1 Emrakul, the Aeons Torn

@@ -23,6 +23,7 @@ public class ArchipelagoRandomizer {
     protected final Set<ItemData> greenItemShopList = new HashSet<>();
     protected final Set<ItemData> remainingEquipmentPool = new HashSet<>();
     protected final List<Long> locationQueue = new ArrayList<>();
+    protected Set<ItemData> boughtColorlessEquipmentShopList = new HashSet<>();
     private SlotData slotData;
     private String lastIp = "";
     private String lastPort = "";
@@ -38,6 +39,15 @@ public class ArchipelagoRandomizer {
     }
 
     public void setupFreshSaveFile() {
+        clearShopData();
+        remainingEquipmentPool.clear();
+        locationQueue.clear();
+        slotData = null;
+        ArchipelagoData.getInstance().setupFreshSaveFile(ArchipelagoMode.networked_archipelago);
+    }
+
+    private void clearShopData() {
+        boughtColorlessEquipmentShopList.clear();
         colorlessEquipmentShopList.clear();
         whiteEquipmentShopList.clear();
         blueEquipmentShopList.clear();
@@ -49,10 +59,6 @@ public class ArchipelagoRandomizer {
         blackItemShopList.clear();
         redItemShopList.clear();
         greenItemShopList.clear();
-        remainingEquipmentPool.clear();
-        locationQueue.clear();
-        slotData = null;
-        ArchipelagoData.getInstance().setupFreshSaveFile(ArchipelagoMode.networked_archipelago);
     }
 
     public void updatePlayerChecks(ArchipelagoCheckTypes type) {
@@ -249,8 +255,9 @@ public class ArchipelagoRandomizer {
         archipelagoDataInstance.addGold(amount);
     }
 
-    public void handleShopData(List<NetworkItem> shopLocationScounts) {
-        for (NetworkItem shopLocation : shopLocationScounts) {
+    public void handleShopData(List<NetworkItem> shopLocationScouts) {
+        clearShopData();
+        for (NetworkItem shopLocation : shopLocationScouts) {
             if (shopLocation.locationID >= 1000 && shopLocation.locationID < 1100) {
                 colorlessEquipmentShopList.add(new ItemData(shopLocation));
             } else if (shopLocation.locationID >= 1100 && shopLocation.locationID < 1200) {
@@ -370,5 +377,13 @@ public class ArchipelagoRandomizer {
 
     public int getLastArchipelagoRewardIndex() {
         return archipelagoDataInstance.lastArchipelagoRewardIndex;
+    }
+
+    public Set<ItemData> getBoughtColorlessEquipmentShopList() {
+        return boughtColorlessEquipmentShopList;
+    }
+
+    public void addToBoughtColorlessEquipmentShopList(ItemData item) {
+        this.boughtColorlessEquipmentShopList.add(item);
     }
 }

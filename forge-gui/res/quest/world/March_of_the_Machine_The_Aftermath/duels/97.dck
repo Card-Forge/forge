@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Carnage
+Title=Carnage
+Icon=Carnage.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Ichiwaki_Fumihiro_-_WU_Control_(Modern,_#1669009).dck
+Deck Type=constructed
+
+[Main]
+4 Solitude
+3 Chalice of the Void
+4 Counterspell
+4 Archmage's Charm
+1 Memory Deluge
+2 Supreme Verdict
+4 Prismatic Ending
+2 Shark Typhoon
+2 Dress Down
+4 Leyline Binding
+1 Teferi, Hero of Dominaria
+3 Teferi, Time Raveler
+1 The Wandering Emperor
+2 Plains
+3 Island
+1 Breeding Pool
+2 Hallowed Fountain
+1 Steam Vents
+4 Flooded Strand
+2 Misty Rainforest
+3 Scalding Tarn
+2 Mystic Gate
+1 Castle Vantress
+1 Raugrin Triome
+1 Zagoth Triome
+1 Hall of Storm Giants
+1 Otawara, Soaring City
+[Sideboard]
+3 Spell Pierce
+2 Wear // Tear
+2 Hallowed Moonlight
+2 Rest in Peace
+1 Ulamog, the Infinite Gyre
+1 Dovin's Veto
+1 Kaheera, the Orphanguard
+2 Metropolis Reformer

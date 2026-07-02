@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Gruul-precon
+Title=Gruul-precon
+Icon=Gruul-precon.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine/AliEldrazi_-_Azorious_Tokens_(Standard,_#1627940).dck
+Deck Type=constructed
+
+[Main]
+2 Faerie Mastermind
+4 Resolute Reinforcements
+4 Monastery Mentor
+1 Elesh Norn
+3 Spell Pierce
+4 Protect the Negotiators
+4 Meeting of Minds
+3 Lay Down Arms
+3 Invasion of Gobakhan
+4 Wedding Announcement
+4 Invasion of New Phyrexia
+10 Plains
+1 Island
+2 Seachrome Coast
+4 Deserted Beach
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+3 Spara's Headquarters
+2 Mishra's Foundry
+[Sideboard]
+1 Lay Down Arms
+2 Surge of Salvation
+2 Dennick, Pious Apprentice
+1 Loran of the Third Path
+1 The Wandering Emperor

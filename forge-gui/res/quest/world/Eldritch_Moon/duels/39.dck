@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Rakdos
+Title=Rakdos
+Icon=Rakdos.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/Competitive_Standard_Constructed_League/DoctorPenick_-_4c_Emerge_(Standard,_#635608).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Elder Deep-Fiend
+4 Haunted Dead
+4 Jace, Vryn's Prodigy
+3 Noose Constrictor
+4 Prized Amalgam
+2 Wretched Gryff
+4 Grapple with the Past
+4 Kozilek's Return
+4 Gather the Pack
+4 Traverse the Ulvenwald
+4 Evolving Wilds
+3 Forest
+2 Island
+3 Llanowar Wastes
+2 Lumbering Falls
+1 Mountain
+1 Sanctum of Ugin
+1 Sunken Hollow
+2 Swamp
+4 Yavimaya Coast
+[Sideboard]
+2 Collective Brutality
+1 Distended Mindbender
+1 Ishkanah, Grafwidow
+2 Painful Truths
+2 Pick the Brain
+2 Radiant Flames
+1 Thought-Knot Seer
+2 To the Slaughter
+2 Transgress the Mind

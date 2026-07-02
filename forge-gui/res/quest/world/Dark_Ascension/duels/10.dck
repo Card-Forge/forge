@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=StAnastacia
+Title=StAnastacia
+Icon=StAnastacia.jpg
+Difficulty=Easy
+Description=Dark_Ascension/Pro_Tour_Dark_Ascension_Top_Standard_Decks/Raphael_Thebault_-_Zombies_(Standard,_#26012).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Diregraf Ghoul
+4 Geralf's Messenger
+4 Gravecrawler
+4 Highborn Ghoul
+4 Phyrexian Obliterator
+3 Vault Skirge
+3 Lashwrithe
+3 Sword of War and Peace
+2 Tragic Slip
+4 Victim of Night
+25 Swamp
+[Sideboard]
+4 Myr Sire
+3 Nihil Spellbomb
+4 Ratchet Bomb
+1 Smallpox
+1 Sword of Feast and Famine

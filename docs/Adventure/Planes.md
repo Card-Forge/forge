@@ -23,12 +23,21 @@ _HOWEVER_: Everything is still very early in design. Most of the biomes are empt
 
 In it's current state, expect to find bugs. if you do, please report them to Shenshinoman in the Forge Discord.
 
+## Realm of Legends
+A plane entirely built around the commander format. Choose from any preconstructed deck or a basic starter, then venture through 120+ new dungeons, collect 300+ new items and battle 850+ new enemies, including hundreds of new bosses and minibosses. You can check out the official guide [here](https://docs.google.com/document/d/1CAJ56ngx9-mrQYVsZymMv5Q6fxDKPzVQB895lE1arwY/edit?tab=t.0).
+
+**STATUS:** 99% functional and live. Enjoy! (There may be the occasional bug found. if so, please report it so we can get it resolved.)
+
 ## Shandalar
 The base plane, where all the magic happens, and where the dev team members working on Adventure generally focus their efforts. The story is mostly complete, but there _is_ further work planned. Everything works, and you can easily spend dozens of hours, or more, in this plane.
 
 **STATUS:** Fully functional and live. Enjoy!
 
 ## Shandalar Old Border
-So, you like the Shandalar plane, but miss "ye good olde days" of yore? Then Shandalar Old Border is for you. This is the Shandalar base plane, but with modifications so that everything is from the Scourge set, or older.
+So, you like the Shandalar plane, but miss "ye good olde days" of yore? Then Shandalar Old Border is for you. This is the Shandalar base plane, but restricted to cards from Magic's golden era — Alpha (1993) through Scourge (2003).
+
+The plane features over 6,000 old-border legal cards spanning 46 editions, hundreds of hand-crafted enemy decks with thematic lore-appropriate builds, 99 redesigned boss encounters with custom decks and unique rewards, 150+ new items and equipment, and a completely redesigned endgame. It also includes a Commander mode for a very different kind of run, classic preconstructed starter decks, and a Historical Arena where the opponents play real tournament decks from the 1993–2002 World Championships.
+
+The official site is at [oldborder-shandalar.net](https://oldborder-shandalar.net) — features list, setup guide, walkthrough, monthly changelog, community deck gallery, and links to the Discord/Reddit.
 
 **STATUS:** 99% functional and live. Enjoy! (There may be the occasional bug found. if so, please report it so we can get it resolved.)

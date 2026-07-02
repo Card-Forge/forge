@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Robot86
+Title=Robot86
+Icon=Albert Einstein.jpg
+Difficulty=Medium
+Description=Rakdos 
+Deck Type=constructed
+
+[Main]
+4 Bomat Courier
+4 Dread Wanderer
+4 Glint-Sleeve Siphoner
+4 Hazoret the Fervent
+4 Night Market Lookout
+4 Scrapheap Scrounger
+2 Yahenni, Undying Partisan
+3 Aethersphere Harvester
+4 Fatal Push
+4 Lightning Strike
+4 Aether Hub
+2 Canyon Slough
+4 Dragonskull Summit
+2 Mountain
+11 Swamp
+[Sideboard]
+3 Bontu's Last Reckoning
+2 Chandra's Defeat
+2 Doomfall
+4 Duress
+2 Unlicensed Disintegration
+2 Vraska's Contempt

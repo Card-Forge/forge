@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Betty Rubble
+Title=Betty Rubble
+Icon=Betty Rubble.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/munekata_ryo_-_Mono_Green_Aggro_(Modern,_#1750097).dck
+Deck Type=constructed
+
+[Main]
+3 Steel Leaf Champion
+4 Noble Hierarch
+4 Strangleroot Geist
+2 Questing Beast
+4 Old-Growth Troll
+3 Endurance
+4 Ignoble Hierarch
+4 Mosswood Dreadknight
+1 Shadowspear
+3 Aspect of Hydra
+4 Vines of Vastwood
+3 Dismember
+8 Forest
+4 Wooded Foothills
+4 Overgrown Tomb
+2 Nurturing Peatland
+2 Lair of the Hydra
+1 Boseiju, Who Endures
+[Sideboard]
+3 Damping Sphere
+2 Engineered Explosives
+4 Leyline of the Void
+2 Chalice of the Void
+3 Force of Vigor
+1 Tear Asunder

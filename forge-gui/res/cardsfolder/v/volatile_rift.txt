@@ -1,0 +1,7 @@
+Name:Volatile Rift
+ManaCost:RG RG
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Library | Destination$ Hand | ValidCard$ Creature.YouOwn | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Vivid — Whenever a creature card is put into your hand from your library, it perpetually gets +X/+0, where X is the number of colors among permanents you control.
+SVar:TrigPump:DB$ Pump | PumpZone$ Hand | TriggeredCardLKICopy | NumAtt$ +X | Duration$ Perpetual
+SVar:X:Count$Valid Permanent.YouCtrl$Colors
+Oracle:Vivid — Whenever a creature card is put into your hand from your library, it perpetually gets +X/+0, where X is the number of colors among permanents you control.

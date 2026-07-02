@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Waterlord
+Title=Waterlord
+Icon=Waterlord.jpg
+Difficulty=Medium
+Description=Oath_of_the_Gatewatch/SCG_Invitational_Qualifier_East_Windsor/Giuseppe_Pucci_-_Bant_(Standard,_#610176).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Bounding Krasis
+4 Deathmist Raptor
+2 Den Protector
+4 Eldrazi Skyspawner
+3 Jace, Vryn's Prodigy
+4 Reflector Mage
+3 Stratus Dancer
+4 Sylvan Advocate
+4 Wingmate Roc
+4 Collected Company
+2 Dromoka's Command
+2 Canopy Vista
+4 Flooded Strand
+3 Forest
+1 Island
+4 Lumbering Falls
+3 Plains
+2 Prairie Stream
+4 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+3 Arashin Cleric
+3 Disdainful Stroke
+3 Dispel
+2 Silkwrap
+3 Valorous Stance

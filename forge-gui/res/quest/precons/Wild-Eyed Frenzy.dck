@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Wild-Eyed Frenzy
+Description=Wild-Eyed Frenzy attacks relentlessly. Mono-red aggression with flanking.
+Deck Type=constructed
+Set=VIS
+Image=wild-eyed_frenzy.jpg
+[main]
+8 Mountain|MIR|1
+8 Mountain|MIR|2
+7 Mountain|MIR|3
+1 Flame Elemental|MIR
+2 Goblin Elite Infantry|MIR
+2 Goblin Recruiter|VIS
+2 Goblin Soothsayer|MIR
+3 Goblin Swine-Rider|VIS
+2 Goblin Tinkerer|MIR
+3 Keeper of Kookus|VIS
+1 Kookus|VIS
+1 Ogre Enforcer|VIS
+2 Talruum Champion|VIS
+2 Talruum Piper|VIS
+1 Viashino Sandstalker|VIS
+2 Mob Mentality|VIS
+3 Chaos Charm|MIR
+2 Fireblast|VIS
+3 Flare|MIR
+2 Goblin Scouts|MIR
+2 Song of Blood|VIS
+1 Unerring Sling|MIR
+[sideboard]

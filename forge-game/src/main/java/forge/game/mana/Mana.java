@@ -21,6 +21,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
+import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 
@@ -30,17 +31,7 @@ import forge.game.spellability.SpellAbility;
  * This represents a single mana 'globe' floating in a player's pool.
  * </p>
  */
-public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility) {
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + color;
-        result = prime * result + ((manaAbility == null) ? 0 : manaAbility.hashCode());
-        result = prime * result + ((sourceCard == null) ? 0 : sourceCard.hashCode());
-        return result;
-    }
+public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Player player) {
 
     @Override
     public boolean equals(Object other) {
@@ -75,72 +66,92 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility) {
             if (mp.isPersistentMana() != mp2.isPersistentMana()) {
                 return false;
             }
+            if (mp.isCombatMana() != mp2.isCombatMana()) {
+                return false;
+            }
         }
 
         return mp == mp2 || (mp.getManaRestrictions().equals(mp2.getManaRestrictions()) && mp.getExtraManaRestriction().equals(mp2.getExtraManaRestriction()));
     }
 
-    public Mana(final byte color, final Card sourceCard, final AbilityManaPart manaAbility) {
+    public Mana(final byte color, final Card sourceCard, final AbilityManaPart manaAbility, final Player player) {
         this.color = color;
         this.manaAbility = manaAbility;
         this.sourceCard = sourceCard.isInPlay() ? CardCopyService.getLKICopy(sourceCard) : sourceCard.getGame().getChangeZoneLKIInfo(sourceCard);
+        this.player = player;
     }
 
     @Override
-    public final String toString() {
+    public String toString() {
         return MagicColor.toShortString(color);
     }
 
-    public final boolean isSnow() {
+    public boolean isSnow() {
         return this.sourceCard.isSnow();
     }
 
-    public final boolean isRestricted() {
+    public boolean isRestricted() {
         return this.manaAbility != null && (!manaAbility.getManaRestrictions().isEmpty() || !manaAbility.getExtraManaRestriction().isEmpty());
     }
+    public boolean meetsManaRestrictions(SpellAbility saBeingPaid) {
+        return this.manaAbility == null || manaAbility.meetsManaRestrictions(saBeingPaid);
+    }
 
-    public final boolean addsNoCounterMagic(SpellAbility saBeingPaid) {
+    public boolean addsNoCounterMagic(SpellAbility saBeingPaid) {
         return this.manaAbility != null && manaAbility.cannotCounterPaidWith(saBeingPaid);
     }
 
-    public final boolean addsCounters(SpellAbility saBeingPaid) {
+    public boolean addsCounters(SpellAbility saBeingPaid) {
         return this.manaAbility != null && manaAbility.addsCounters(saBeingPaid);
     }
 
-    public final boolean addsKeywords(SpellAbility saBeingPaid) {
+    public boolean addsKeywords(SpellAbility saBeingPaid) {
         return this.manaAbility != null && manaAbility.addKeywords(saBeingPaid);
     }
 
-    public final boolean addsKeywordsType() {
+    public boolean addsKeywordsType() {
         return this.manaAbility != null && manaAbility.getAddsKeywordsType() != null;
     }
-    
-    public final boolean addsKeywordsUntil() {
+
+    public boolean addsKeywordsUntil() {
         return this.manaAbility != null && manaAbility.getAddsKeywordsUntil() != null;
     }
 
-    public final String getAddedKeywords() {
+    public String getAddedKeywords() {
         return this.manaAbility.getKeywords();
     }
 
-    public final boolean triggersWhenSpent() {
+    public boolean triggersWhenSpent() {
         return this.manaAbility != null && manaAbility.getTriggersWhenSpent();
     }
+    public boolean isPersistentMana() {
+        return this.manaAbility != null && manaAbility.isPersistentMana();
+    }
+    public boolean isCombatMana() {
+        return this.manaAbility != null && manaAbility.isCombatMana();
+    }
 
-    public final byte getColor() {
+    public byte getColor() {
         return this.color;
     }
 
-    public final Card getSourceCard() {
+    public Card getSourceCard() {
         return this.sourceCard;
     }
 
-    public final AbilityManaPart getManaAbility() {
+    public AbilityManaPart getManaAbility() {
         return this.manaAbility;
+    }
+
+    public Player getPlayer() {
+        return this.player;
     }
 
     public boolean isColorless() {
         return color == (byte)ManaAtom.COLORLESS;
     }
 
+    public Mana convertColor(byte color) {
+        return new Mana(color, this.sourceCard, this.manaAbility, this.player);
+    }
 }

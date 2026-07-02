@@ -210,7 +210,7 @@ ScryfallCode=40K
 202 R Living Death @L J Koh
 203 R Mutilate @Games Workshop
 204 R Blasphemous Act @Games Workshop
-205 R Chaos Warp @Heonhwa Choe
+205 R Chaos Warp @Heonhwa
 206 M Past in Flames @Johannes Mücke
 207 R Reverberate @David Astruga
 208 R Starstorm @Zhillustrator

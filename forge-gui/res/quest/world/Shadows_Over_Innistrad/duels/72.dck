@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Hard
+Description=../Modern/Shadows_over_Innistrad/SCG_Invitational_Qualifier_Falls_Church/Benjamin_Daniel_-_Eldrazi_(Modern,_#629434).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eldrazi Displacer
+1 Endbringer
+4 Endless One
+4 Matter Reshaper
+4 Reality Smasher
+4 Thought-Knot Seer
+2 Go for the Throat
+4 Path to Exile
+3 Inquisition of Kozilek
+4 Lingering Souls
+1 Thoughtseize
+1 Cavern of Souls
+4 Caves of Koilos
+4 Eldrazi Temple
+2 Ghost Quarter
+2 Godless Shrine
+4 Marsh Flats
+1 Plains
+4 Shambling Vent
+1 Swamp
+1 Vault of the Archangel
+1 Wastes
+[Sideboard]
+1 Anguished Unmaking
+1 Celestial Purge
+1 Damnation
+1 Disenchant
+1 Memoricide
+3 Relic of Progenitus
+2 Stony Silence
+2 Timely Reinforcements
+2 Warping Wail
+1 Zealous Persecution

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mox Jet|LEA&quot;, &quot;Jet Collector&quot;, &quot;Jet Medallion|TMP&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="7" name="Sub Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzF09EKwCAIBdBeZOxDtk/s+0P2MoazeyVTkCCqk1j9bK0D6cXKPd+U4z+zXM+07Eue8Za4i5iRuleZla7n73AtO7O/Xr06n+1a/o56kR5HXY0Kt6pe9g+zLuOjJuMifqZr/cXZWcxa5O7vt83GAOiOf9E=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy7zM7AcAWIrwIxDATwMzAEArEnEAfxM5AMfnIzMJRx4ldTyMHAUATE16H2g8BroF3PgfgVEHcLoKpnZUfF2EAlJwTjA/xAeQFOiN0gfBdoVgvQrlYBTDvRAS57QUCNFb9eGIDZy8uJGubIoIyRgaEciCsYiTOTGAAL72IO3HZuZ4KwtzHhNieGmzR7YeEtiCNeRNDsEsNh91cS7UUHO7kYGHZzIfibgPZIQu2SwONfECDVz+h6o8jQD3IvKB8hY1IAKLz2ofmZGDt/odlDKB+j698FNeMHN2G7YX5Et5NUAArjCCQMC+/NTBCMbiel9sFAOJKde4DmfsdjLqE0dIzI8gMEYHFLyE5K7MBnN7qd6HmLXiAGms5+EpHWqG0vclojJY9Qy95ICtMwAK4ORec=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1lU1OwzAQhU0gVIk3LDkAIG5EQd1yhQAbVsCud+AMEWpF+dlA6QW4BstQ6Ip5ckaeWLYbI/VJT4miZD7Pj2Ol+ikfhC31WCr1q42fSvtOVSj1kVunMm/2lLol35EvtoylRtren+nut6lcaJqFc51km+FOs/XvMBvcN4q7IP+IWuPZwT/y7SOwL6nuV4XhHJHHO4b7ta3UfENcZr9SjodtzuBCuPbhYi5Ro1TtE/chM/m+t1y2rDUzZg4HfeL+pDKhl7LLhLGX5oILxtDh8LNT7WfEmD6BWRU2Z+iEYj+Xpi9gI/eVZy0pzOPc+nzXcpkNNRR7qQ1/6DH2YS3iVjSz10WYKffpIu/my5YC/1ubvJmJOiydWtctq15TW7kOH9edq1GEGdNnhCvN3Ebb3uJ/vvIwfTMfit+XC7m9dedYzvxMrEGeR2586XtxLkku95bt1rdx+s7z5p4TMbaP20ehmoTOZV992X8fTZuw
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyllb1KA0EQx+eOrHB3SAotTB0VGwstoo+gPoGIpRC0EUE0Vj6BT2IjKrFRQU8L0c7gmwhi5Qy7ww17c2bv8ofhktzO/uZjZwNQTxttgE20rbb+fjcDuGiV7Syx9moAVpNw3kkEcOoZaxDpPj53AZnPph5T47INIp0tucTsud9HNZh3cfWaYayzJXcdv88H5sq8WYXpM4g9rIiNuNuZ/byGdj49njkuV9Ycrrn9h0sWomvcoxMXT9ab85cMnznynsxdScJqrbH30W8Z9/ho6UzSb1bOT9Y6RJJ946yL/n1TXVttfiU39HyROt7+/Qpfnhmp46jMbiKKgbgyFjmndDfIGeV3DynAYzoZW+bLvCXH3JsqjLRo7JqfTO99Ey7fx3TvHmI9X0xxF5Plbh3VmoxjaKJ39DtQuJdY9yO3N3O51118XsU2rqZczvVLcHO3L53VJ1Pkx72eiYs+36eTcUnfmT0r/J+Ti/7yvPQ87k7Dc+XP0CdYtuwrx8B3sc/9A/1KbtY=
+  </data>
+ </layer>
+ <layer id="8" name="Clutter bis" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYECAel4GqgAOYeqYMxBuuEldZ1AFiOswMEjoUNdMYvxpDLTTBIu9QyFsBfUZGIT0aWM2Nv83QPPOeqCdG6D2uvPTxn5k4Au0ww+I/ZHsAtlLa7tfA81/A8RvofZ0WzIw9FjS3u5OAQaGLiDuFoDwNa0YGLSsIGyY3dSyH1s8bzLHrhbZblxuoFW5iM9ekJ3Y7CXFLQFAMwOBOAjJbORwQLcXZjal/n0HNPM9EH/AEZ8we9NZEfbh8i8poAeYtnqBuE8At70gALOXXLvxqW3AUhfjSlPk+BkA72wiaA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="190.666" y="89.2855">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Wound Reflection|2xm&quot;, &quot;Grave Betrayal|rtr&quot;]}"/>
+    <property name="enemy" value="Ihsan's Shade"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="272"/>
+  <object id="57" template="../../../../common/maps/obj/collision.tx" x="480" y="0" width="16" height="272"/>
+  <object id="58" template="../../../../common/maps/obj/collision.tx" x="-16" y="272" width="512" height="16"/>
+  <object id="59" template="../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
+  <object id="77" template="../../../../common/maps/obj/scroll.tx" x="191.25" y="158.25">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Jet Collector&quot;, &quot;editions&quot;: [ &quot;YOTJ&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/dialog.tx" x="198.5" y="223" width="49.5" height="16.5" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The very air in this place is thick with black mana, filling you with a sense of dread. Atop the hill ahead, a shadowy figure stands, the infamous mox jet hung around his neck. 
+
+Your manasight stone blazes with power, near-blindingly bright.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/scroll.tx" x="236.333" y="119.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Jet Medallion&quot;, &quot;editions&quot;: [ &quot;TMP&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/enemy.tx" x="191.792" y="88.1323">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Grave Betrayal|rtr&quot;]}"/>
+    <property name="enemy" value="Ihsan's Shade"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/shop.tx" x="241" y="85">
+   <properties>
+    <property name="commonShopList" value="ClassicBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

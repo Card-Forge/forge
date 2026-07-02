@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="70">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="71">
  <editorsettings>
   <export target="bazaar_of_wonders.tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJzt1LEKACAIBND2fti5L291iLxAU+qG29SnBElvTRiGCc1QQWp0rdXnsdMulV10FmJluFn3VnAR+zXXsrPeN8KP/h883VWfNdPj1pN9boQuXbr/uhNtp9Ws
@@ -30,31 +30,36 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="204" y="368" width="56" height="16"/>
-  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="256" y="208">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="204" y="368" width="56" height="16"/>
+  <object id="41" template="../../../../common/maps/obj/shop.tx" x="256" y="208">
    <properties>
     <property name="commonShopList" value="Land"/>
    </properties>
   </object>
-  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="304" y="208">
+  <object id="42" template="../../../../common/maps/obj/shop.tx" x="304" y="208">
    <properties>
     <property name="commonShopList" value="AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop"/>
    </properties>
   </object>
-  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="352" y="208">
+  <object id="43" template="../../../../common/maps/obj/shop.tx" x="352" y="208">
    <properties>
     <property name="commonShopList" value="Artifact"/>
    </properties>
   </object>
-  <object id="64" template="../../../../../../common/maps/obj/shop.tx" x="104" y="272">
+  <object id="64" template="../../../../common/maps/obj/shop.tx" x="104" y="272">
    <properties>
     <property name="commonShopList" value="BookStore"/>
     <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="150" y="273"/>
-  <object id="62" template="../../../../../../common/maps/obj/shardtrader.tx" x="400" y="288"/>
-  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="210" y="274">
+  <object id="47" template="../../../../common/maps/obj/inn.tx" x="150" y="273"/>
+  <object id="62" template="../../../../common/maps/obj/shardtrader.tx" x="400" y="288"/>
+  <object id="70" template="../../../../common/maps/obj/shop.tx" x="256" y="272">
+   <properties>
+    <property name="commonShopList" value="SketchbookShop"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="210" y="274">
    <properties>
     <property name="enemy" value="Bazaar Keeper"/>
     <property name="effect">{ "startBattleWithCard": [ "Island|MMQ", "Mountain|MMQ", "Forest|MMQ", "Swamp|MMQ", "Plains|MMQ", "High Market|MMQ", "Talas Merchant|P02", "Merchant Ship|ARN", "Trade Caravan|HML", "Bargaining Table|MMQ", "Crooked Scales|MMQ" ] }</property>

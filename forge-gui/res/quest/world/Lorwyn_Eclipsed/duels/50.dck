@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/Adam_Fischer_-_Mono-Green_Landfall_(Standard,_#2822853).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Icetill Explorer
+4 Llanowar Elves
+4 Sazh's Chocobo
+3 Mightform Harmonizer
+2 Fecund Greenshell
+1 Keen-Eyed Curator
+1 Mossborn Hydra
+1 Lumbering Worldwagon
+1 Archdruid's Charm
+4 Earthbender Ascension
+4 Sapling Nursery
+14 Forest
+4 Fabled Passage
+3 Ba Sing Se
+3 Escape Tunnel
+3 Promising Vein
+[Sideboard]
+4 Meltstrider's Resolve
+3 Mossborn Hydra
+3 Origin of Metalbending
+2 Torpor Orb
+1 Pawpatch Formation
+1 Soul-Guide Lantern
+1 Vivien Reid

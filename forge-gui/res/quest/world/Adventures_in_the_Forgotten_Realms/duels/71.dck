@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Reverend Lovejoy
+Title=Reverend Lovejoy
+Icon=Reverend Lovejoy.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/DethFrmAbove_-_Golgari_Evolution_(Modern,_#1199359)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Zulaport Cutthroat
+1 Hapatra, Vizier of Poisons
+1 Gilded Goose
+1 Prosperous Innkeeper
+1 Reclamation Sage
+1 Essence Warden
+3 Wall of Roots
+4 Geralf's Messenger
+4 Ignoble Hierarch
+4 Strangleroot Geist
+4 Yawgmoth, Thran Physician
+4 Young Wolf
+4 Chord of Calling
+4 Eldritch Evolution
+1 Grist, the Hunger Tide
+1 Dryad Arbor
+1 Forest
+1 Khalni Garden
+1 Swamp
+1 Urborg, Tomb of Yawgmoth
+1 Yavimaya, Cradle of Growth
+2 Overgrown Tomb
+2 Nurturing Peatland
+4 Verdant Catacombs
+4 Twilight Mire
+4 Blooming Marsh
+[Sideboard]
+1 Reclamation Sage
+1 Grist, the Hunger Tide
+1 Kitchen Finks
+2 Endurance
+2 Thoughtseize
+2 Crime // Punishment
+2 Force of Vigor
+2 Damping Sphere
+2 Veil of Summer

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Bugs Bunny
+Title=Bugs Bunny
+Icon=Bugs Bunny.jpg
+Difficulty=Very Hard
+Description=../Modern/Shadows_over_Innistrad/Modern_EMA_Event/Matthew_Mains_-_Mardu_Nahiri_(Modern,_#637568).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Emrakul, the Aeons Torn
+2 Goblin Dark-Dwellers
+4 Sin Prodder
+2 Kolaghan's Command
+4 Lightning Bolt
+2 Lightning Helix
+1 Murderous Cut
+4 Path to Exile
+1 Terminate
+2 Dreadbore
+3 Inquisition of Kozilek
+4 Lingering Souls
+2 Thoughtseize
+4 Nahiri, the Harbinger
+2 Arid Mesa
+4 Blackcleave Cliffs
+1 Blood Crypt
+4 Bloodstained Mire
+1 Godless Shrine
+4 Marsh Flats
+1 Mountain
+1 Plains
+2 Sacred Foundry
+3 Shambling Vent
+1 Swamp
+[Sideboard]
+2 Anger of the Gods
+2 Crumble to Dust
+2 Fulminator Mage
+1 Kalitas, Traitor of Ghet
+2 Rest in Peace
+1 Slaughter Games
+2 Sudden Shock
+2 Timely Reinforcements

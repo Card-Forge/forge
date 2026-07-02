@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Zombie Attack
+Title=Zombie Attack
+Icon=Zombie Attack.jpg
+Difficulty=Hard
+Description=./Modern/Edge_of_Eternities/Emmett_Neyman_-_Esper_Blink_(Modern,_#2685381).dck
+Deck Type=constructed
+
+[Main]
+4 Overlord of the Balemurk
+4 Phelia, Exuberant Shepherd
+4 Quantum Riddler
+4 Solitude
+4 Witch Enchanter
+3 Flickerwisp
+2 Emperor of Bones
+1 Boggart Trawler
+1 Elesh Norn, Mother of Machines
+3 Ephemerate
+3 Fatal Push
+2 Consign to Memory
+4 Thoughtseize
+2 Teferi, Time Raveler
+4 Marsh Flats
+3 Flooded Strand
+2 Godless Shrine
+2 Plains
+2 Polluted Delta
+1 Hallowed Fountain
+1 Meticulous Archive
+1 Shadowy Backstreet
+1 Swamp
+1 Undercity Sewers
+1 Watery Grave
+[Sideboard]
+3 White Orchid Phantom
+2 Ashiok, Dream Render
+2 Consign to Memory
+2 Mystical Dispute
+2 Orcish Bowmasters
+2 Wrath of the Skies
+1 Celestial Purge
+1 Prismatic Ending

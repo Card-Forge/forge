@@ -1,0 +1,9 @@
+Name:Ardyn, the Usurper|Deck:Ardyn, the Usurper.dck|Variant:Commander|Avatar:Ardyn, the Usurper|Desc:
+Name:Jecht, Reluctant Guardian|Deck:Jecht, Reluctant Guardian.dck|Variant:Commander|Avatar:Jecht, Reluctant Guardian|Desc:
+Name:Edea, Possessed Sorceress|Deck:Edea, Possessed Sorceress.dck|Variant:Commander|Avatar:Edea, Possessed Sorceress|Desc:
+Name:Kuja, Genome Sorcerer|Deck:Kuja, Genome Sorcerer.dck|Variant:Commander|Avatar:Kuja, Genome Sorcerer|Desc:
+Name:Black Mage|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Xande, Dark Mage|Deck:Xande, Dark Mage.dck|Variant:Commander|Avatar:Xande, Dark Mage|Desc:
+Name:Zodiark, Umbral God|Deck:Zodiark, Umbral God.dck|Variant:Commander|Avatar:Zodiark, Umbral God|Desc:
+Name:Noctis, Prince of Lucis|Deck:Noctis, Prince of Lucis.dck|Variant:Commander|Avatar:Noctis, Prince of Lucis|Desc:
+Name:Sin, Spira's Punishment|Deck:Sin, Spira's Punishment.dck|Variant:Commander|Avatar:Sin, Spira's Punishment|Desc:

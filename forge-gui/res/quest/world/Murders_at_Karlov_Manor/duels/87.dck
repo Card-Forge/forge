@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Aquaman
+Title=Aquaman
+Icon=Aquaman.jpg
+Difficulty=Hard
+Description=./Modern/Murders_at_Karlov_Manor/416FrowningTable_-_Domain_Cascade_(Modern,_#2000715).dck
+Deck Type=constructed
+
+[Main]
+4 Scion of Draco
+4 Shardless Agent
+4 Subtlety
+4 Force of Negation
+4 Fire // Ice
+4 Crashing Footfalls
+3 Lórien Revealed
+4 Ardent Plea
+4 Leyline Binding
+4 Leyline of the Guildpact
+1 Boseiju, Who Endures
+4 Misty Rainforest
+1 Breeding Pool
+4 Flooded Strand
+1 Plains
+1 Hallowed Fountain
+1 Island
+1 Lush Portico
+1 Forest
+1 Steam Vents
+1 Temple Garden
+1 Thundering Falls
+2 Wooded Foothills
+1 Xander's Lounge
+[Sideboard]
+1 Boseiju, Who Endures
+2 Dismember
+3 Endurance
+2 Force of Vigor
+2 Magus of the Moon
+3 Mystical Dispute
+1 Teferi, Time Raveler
+1 Tishana's Tidebinder

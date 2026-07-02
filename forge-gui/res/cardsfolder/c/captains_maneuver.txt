@@ -5,7 +5,7 @@ Types:Instant
 A:SP$ ChoosePlayer | ValidTgts$ Creature,Player,Planeswalker | Choices$ ThisTargetedPlayer | Defined$ You | SubAbility$ DBChooseCreature | StackDescription$ SpellDescription | SpellDescription$ The next X damage that would be dealt to target creature, planeswalker, or player this turn is dealt to another target creature, planeswalker, or player instead.
 SVar:DBChooseCreature:DB$ ChooseCard | DefinedCards$ ParentTargeted | Mandatory$ True | Defined$ You | SubAbility$ DBSetVarBefore
 SVar:DBSetVarBefore:DB$ StoreSVar | SVar$ Y | Type$ Calculate | Expression$ X | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player,Planeswalker | TargetUnique$ True | TgtPrompt$ Select another target to redirect the damage to | ReplacementEffects$ ManeuverDamage | Triggers$ OutOfSight | RememberObjects$ ThisTargetedCard,ThisTargetedPlayer | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player,Planeswalker | TargetUnique$ True | TgtPrompt$ Select another target to redirect the damage to | ReplacementEffects$ ManeuverDamage | Triggers$ OutOfSight | RememberObjects$ ThisTargetedCard & ThisTargetedPlayer | SubAbility$ DBCleanup
 SVar:ManeuverDamage:Event$ DamageDone | ValidTarget$ Card.Creature+ChosenCard,Card.Planeswalker+ChosenCard,Player.Chosen | ReplaceWith$ ManeuverDmg | DamageTarget$ Remembered | Description$ The next X damage that would be dealt to target creature, planeswalker, or player this turn is dealt to another target creature, planeswalker, or player instead.
 SVar:ManeuverDmg:DB$ ReplaceSplitDamage | DamageTarget$ Remembered | VarName$ Y
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.ChosenCard,Card.IsRemembered | Execute$ ExileEffect | Static$ True

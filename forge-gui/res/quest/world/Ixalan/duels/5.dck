@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robot5
+Title=Robot5
+Icon=Amphibian.jpg
+Difficulty=Medium
+Description=Mardu Vehicles  
+Deck Type=constructed
+
+[Main]
+4 Bomat Courier
+2 Depala, Pilot Exemplar
+3 Hazoret the Fervent
+4 Scrapheap Scrounger
+4 Toolcraft Exemplar
+4 Veteran Motorist
+2 Aethersphere Harvester
+4 Heart of Kiran
+4 Lightning Strike
+1 Shock
+4 Unlicensed Disintegration
+2 Aether Hub
+4 Concealed Courtyard
+2 Dragonskull Summit
+4 Inspiring Vantage
+4 Mountain
+4 Plains
+4 Spire of Industry
+[Sideboard]
+3 Abrade
+2 Authority of the Consuls
+1 Cast Out
+2 Chandra, Torch of Defiance
+4 Rampaging Ferocidon
+1 Shock
+2 Solemnity

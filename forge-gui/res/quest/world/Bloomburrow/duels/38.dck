@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Superman
+Title=Superman
+Icon=Superman.jpg
+Difficulty=Easy
+Description=./Standard/Bloomburrow/AndreaPaglialunga_-_Boros_Mice_(Standard,_#2167768).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+2 Mabel, Heir to Cragflame
+4 Manifold Mouse
+4 Raging Battle Mouse
+4 Heartfire Hero
+4 Flowerfoot Swordmaster
+4 Cheeky House-Mouse
+2 Skrelv, Defector Mite
+4 Might of the Meek
+4 Monstrous Rage
+4 Rabid Gnaw
+4 Battlefield Forge
+4 Inspiring Vantage
+2 Lupinflower Village
+3 Rockface Village
+4 Plains
+3 Mountain
+[Sideboard]
+1 Abrade
+2 Case of the Crimson Pulse
+2 Destroy Evil
+4 Tectonic Hazard
+4 Urabrask's Forge
+2 Witchstalker Frenzy

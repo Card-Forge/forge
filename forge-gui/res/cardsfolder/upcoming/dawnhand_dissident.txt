@@ -1,8 +1,0 @@
-Name:Dawnhand Dissident
-ManaCost:B
-Types:Creature Elf Warlock
-PT:1/2
-A:AB$ Surveil | Cost$ T Blight<1> | Amount$ 1 | SpellDescription$ Surveil 1.
-A:AB$ ChangeZone | Cost$ T Blight<2> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
-S:Mode$ Continuous | Affected$ Creature.YouOwn+ExiledWithSource | Condition$ PlayerTurn | MayPlay$ True | EffectZone$ Battlefield | AffectedZone$ Exile | RaiseCost$ RemoveAnyCounter<3/Any/Creature.YouCtrl/among creatures you control> | Description$ During your turn, you may cast creature spells from among cards you own exiled with this creature by removing three counters from among creatures you control in addition to paying their other costs.
-Oracle:{T}, Blight 1: Surveil 1.\n{T}, Blight 2: Exile target card from a graveyard.\nDuring your turn, you may cast creature spells from among cards you own exiled with this creature by removing three counters from among creatures you control in addition to paying their other costs.

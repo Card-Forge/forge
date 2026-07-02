@@ -1,0 +1,7 @@
+Name:Raft Security OFficer
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:1/3
+A:AB$ Tap | Cost$ 2 T | ValidTgts$ Creature | ReduceCost$ X | SpellDescription$ Tap target creature. This ability costs {1} less to activate if it targets a creature with power 3 or less.
+SVar:X:AllTargeted$Valid Creature.powerLE3
+Oracle:{2}, {T}: Tap target creature. This ability costs {1} less to activate if it targets a creature with power 3 or less.

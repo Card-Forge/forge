@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="ancient_diamond_mine.tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
@@ -29,12 +29,12 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="282" width="48" height="16">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="282" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="10575" x="197.5" y="138.75" width="16" height="16">
+  <object id="50" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="10575" x="197.5" y="138.75" width="16" height="16">
    <properties>
     <property name="hidden" type="bool" value="false"/>
     <property name="dialog">[
@@ -46,14 +46,12 @@
         "condition": [
           { "hasGold": 10000 }
         ],
-        "text": "The crystals shimmer and absorb your gold. In exchange, ancient spells materialize before you - cards from the Beta era of magic!",
+        "text": "The crystals shimmer and absorb your gold. In exchange, a sealed pack from the dawn of magic materializes before you!",
         "action": [
           {
             "addGold": -10000,
             "grantRewards": [
-              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["R"], "count": 1 },
-              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["U"], "count": 3 },
-              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["C"], "count": 11 }
+              { "type": "cardPackShop", "count": 1, "editions": ["LEB"] }
             ]
           }
         ]
@@ -70,14 +68,12 @@
         "condition": [
           { "hasShards": 400 }
         ],
-        "text": "The crystals shimmer and absorb your mana shards. In exchange, ancient spells materialize before you - cards from the Beta era of magic!",
+        "text": "The crystals shimmer and absorb your mana shards. In exchange, a sealed pack from the dawn of magic materializes before you!",
         "action": [
           {
             "addShards": -400,
             "grantRewards": [
-              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["R"], "count": 1 },
-              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["U"], "count": 3 },
-              { "type": "randomCard", "sourceDeck": "decks/custom_lists/LEB_List.dck", "rarity": ["C"], "count": 11 }
+              { "type": "cardPackShop", "count": 1, "editions": ["LEB"] }
             ]
           }
         ]

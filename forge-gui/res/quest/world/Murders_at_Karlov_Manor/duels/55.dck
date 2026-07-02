@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Reactor Meltdown
+Title=Reactor Meltdown
+Icon=Reactor Meltdown.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/Christian_Dawson_-_Domain_Rhinos_(Modern,_#1967472).dck
+Deck Type=constructed
+
+[Main]
+4 Shardless Agent
+4 Subtlety
+4 Solitude
+4 Scion of Draco
+4 Crashing Footfalls
+4 Lórien Revealed
+4 Ardent Plea
+4 Leyline of the Guildpact
+4 Leyline Binding
+3 Teferi, Time Raveler
+1 Xander's Lounge
+1 Lush Portico
+1 Meticulous Archive
+1 Hallowed Fountain
+1 Breeding Pool
+1 Steam Vents
+1 Boseiju, Who Endures
+1 Island
+1 Plains
+1 Forest
+4 Misty Rainforest
+4 Flooded Strand
+2 Windswept Heath
+1 Temple Garden
+[Sideboard]
+2 Inevitable Betrayal
+2 Tishana's Tidebinder
+2 Mystical Dispute
+2 Force of Negation
+2 Dismember
+2 Force of Vigor
+3 Endurance

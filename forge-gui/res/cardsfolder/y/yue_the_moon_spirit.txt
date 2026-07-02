@@ -1,6 +1,6 @@
 Name:Yue, the Moon Spirit
 ManaCost:3 U
-Types:Legendary Creature Spirit Ally 
+Types:Legendary Creature Spirit Ally
 PT:3/3
 K:Flying
 K:Vigilance

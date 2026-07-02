@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Very Hard
+Description=../Modern/Battle_for_Zendikar/Modern_Constructed_League/Skater_Bruski_-_Skater_Bruski_(5-0)_(Modern,_#507392).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blight Herder
+1 Conduit of Ruin
+4 Oblivion Sower
+1 Spellskite
+2 Ulamog, the Ceaseless Hunger
+4 Wasteland Strangler
+1 Nihil Spellbomb
+4 Relic of Progenitus
+2 Scrabbling Claws
+2 Go for the Throat
+4 Lightning Bolt
+1 All Is Dust
+4 Inquisition of Kozilek
+2 Thoughtseize
+4 Blackcleave Cliffs
+2 Blood Crypt
+4 Bloodstained Mire
+4 Eldrazi Temple
+4 Eye of Ugin
+2 Mountain
+2 Swamp
+2 Urborg, Tomb of Yawgmoth
+[Sideboard]
+2 Anger of the Gods
+2 Crumble to Dust
+1 Damnation
+2 Duress
+1 Night of Souls' Betrayal
+1 Pyroclasm
+1 Slaughter Games
+1 Surgical Extraction
+2 Vampiric Link
+1 Vandalblast

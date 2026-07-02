@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Houngan
+Title=Houngan
+Icon=Houngan.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/PTQ_Dragon┬┤s_Maze_-_Quebec_City,_Quebec/Matt_Clairmont_-_Gruul_Aggro_(Modern,_#48422).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Goblin Guide
+2 Grim Lavamancer
+4 Kird Ape
+4 Stormblood Berserker
+3 Dismember
+4 Lightning Bolt
+4 Rancor
+2 Arid Mesa
+4 Copperline Gorge
+1 Forest
+1 Misty Rainforest
+2 Mountain
+2 Scalding Tarn
+4 Stomping Ground
+3 Verdant Catacombs
+[Sideboard]
+1 Act of Aggression
+2 Ancient Grudge
+1 Combust
+3 Molten Rain
+1 Smash to Smithereens
+2 Tormod's Crypt
+3 Vines of Vastwood
+2 Volcanic Fallout

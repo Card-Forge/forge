@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Bumba
+Title=Bumba
+Icon=Bumba.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/Jonathan_Hakes_-_Boros_Mice_(Standard,_#2275344).dck
+Deck Type=constructed
+
+[Main]
+3 Cheeky House-Mouse
+4 Emberheart Challenger
+4 Flowerfoot Swordmaster
+4 Heartfire Hero
+1 Mabel, Heir to Cragflame
+2 Manifold Mouse
+2 Screaming Nemesis
+4 Boros Charm
+4 Burst Lightning
+4 Lightning Helix
+4 Monstrous Rage
+4 Sheltered by Ghosts
+4 Battlefield Forge
+4 Inspiring Vantage
+5 Mountain
+3 Plains
+2 Raucous Carnival
+2 Rockface Village
+[Sideboard]
+2 Crystal Barricade
+3 Exorcise
+2 Rest in Peace
+2 Screaming Nemesis
+2 Slagstorm
+2 Surge of Salvation
+2 Urabrask's Forge

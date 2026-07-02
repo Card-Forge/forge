@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Obatala
+Title=Obatala
+Icon=Obatala.jpg
+Difficulty=Hard
+Description=./Modern/Aetherdrift/LumberJacks_-_Golgari_Yawgmoth_(Modern,_#2382952).dck
+Deck Type=constructed
+
+[Main]
+1 Blood Artist
+2 Orcish Bowmasters
+4 Delighted Halfling
+2 Wall of Roots
+2 Strangleroot Geist
+4 Young Wolf
+2 Walking Ballista
+4 Yawgmoth, Thran Physician
+1 Endurance
+3 Agatha's Soul Cauldron
+2 Chord of Calling
+2 Malevolent Rumble
+3 Green Sun's Zenith
+4 Dredger's Insight
+3 Grist, the Hunger Tide
+2 Underground Mortuary
+1 Shifting Woodland
+1 Windswept Heath
+2 Wooded Foothills
+2 Wastewood Verge
+2 Forest
+1 Dryad Arbor
+4 Verdant Catacombs
+1 Pendelhaven
+2 Overgrown Tomb
+1 Swamp
+2 Boseiju, Who Endures
+[Sideboard]
+1 Haywire Mite
+1 Soulless Jailer
+1 Toxic Deluge
+4 Fulminator Mage
+3 Fatal Push
+1 Damping Sphere
+1 Scavenging Ooze
+1 Endurance
+2 Force of Vigor

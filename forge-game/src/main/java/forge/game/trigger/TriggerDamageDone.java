@@ -78,7 +78,7 @@ public class TriggerDamageDone extends Trigger {
             if (cause == null) {
                 return false;
             }
-            if (!cause.matchesValidParam(getParam("TargetRelativeToCause"), runParams.get(AbilityKey.DamageTarget))) {
+            if (!cause.matchesValid(runParams.get(AbilityKey.DamageTarget), getParam("TargetRelativeToCause").split(","))) {
                 return false;
             }
         }

@@ -7,198 +7,153 @@ Type=Multiplayer
 ScryfallCode=ARC
 
 [cards]
-1 C All in Good Time
-1 R Leonin Abunas
-2 C All Shall Smolder in My Wake
-2 U Metallurgeon
-3 C Approach My Molten Realm
-3 C Oblivion Ring
-4 C Behold the Power of Destruction
-4 U Path to Exile
-5 C Choose Your Champion
-5 C Sanctum Gargoyle
-6 C Dance, Pathetic Marionette
-6 R March of the Machines
-7 C The Dead Shall Serve
-7 R Master Transmuter
-8 C A Display of My Dark Power
-8 U Spin into Myth
-9 C Embrace My Diabolical Vision
-9 R Avatar of Woe
-10 C Every Hope Shall Vanish
-10 R Beacon of Unrest
-11 C Bog Witch
-11 C Every Last Vestige Shall Rot
-12 C Evil Comes to Fruition
-12 R Cemetery Reaper
-13 C The Fate of the Flammable
-13 U Corpse Connoisseur
-14 C Dregscape Zombie
-14 C Feed the Machine
-15 C I Bask in Your Silent Awe
-15 R Extractor Demon
-16 C Festering Goblin
-16 C I Call on the Ancient Magics
-17 C I Delight in Your Convulsions
-17 U Incremental Blight
-18 C I Know All, I See All
-18 C Infectious Horror
-19 C Ignite the Cloneforge!
-19 U Infest
-20 C Into the Earthen Maw
-20 U Makeshift Mannequin
-21 C Introductions Are in Order
-21 U Reanimate
-22 C The Iron Guardian Stirs
-22 U Reassembling Skeleton
-23 C Know Naught but Fire
-23 R Scion of Darkness
-24 C Look Skyward and Despair
-24 U Shriekmaw
-25 C May Civilization Collapse
-25 C Sign in Blood
-26 C Mortal Flesh Is Weak
-26 C Twisted Abomination
-27 C My Crushing Masterstroke
-27 C Urborg Syphon-Mage
-28 C My Genius Knows No Bounds
-28 U Zombie Infestation
-29 C My Undead Horde Awakens
-29 U Zombify
-30 C Battering Craghorn
-30 C My Wish Is Your Command
-31 C Nature Demands an Offering
-31 U Breath of Darigaaz
-32 C Chandra's Outrage
-32 C Nature Shields Its Own
-33 C Dragon Breath
-33 C Nothing Can Stop Me Now
-34 C Dragon Fodder
-34 C Only Blood Ends Your Nightmares
-35 C The Pieces Are Coming Together
-35 U Dragon Whelp
-36 C Realms Befitting My Majesty
-36 U Dragonspeaker Shaman
-37 C Roots of All Evil
-37 U Fireball
-38 C Rotted Ones, Lay Siege
-38 R Flameblast Dragon
-39 C Surrender Your Thoughts
-39 U Furnace Whelp
-40 C Gathan Raiders
-40 C Tooth, Claw, and Tail
-41 C The Very Soil Shall Shake
-41 R Hellkite Charger
-42 C Which of You Burns Brightest?
-42 R Imperial Hellkite
-43 C Your Fate Is Thrice Sealed
-43 U Inferno Trap
-44 C Your Puny Minds Cannot Fathom
-44 R Kilnmouth Dragon
-45 C Your Will Is Not Your Own
-45 R Ryusei, the Falling Star
-46 C Seething Song
-47 C Skirk Commando
-48 C Skirk Marauder
-49 R Taurean Mauler
-50 R Two-Headed Dragon
-51 U Volcanic Fallout
-52 R Chameleon Colossus
-53 R Feral Hydra
-54 C Fertilid
-55 C Fierce Empath
-56 C Fog
-57 R Forgotten Ancient
-58 C Gleeful Sabotage
-59 U Harmonize
-60 U Hunting Moa
-61 R Kamahl, Fist of Krosa
-62 C Krosan Tusker
-63 C Leaf Gilder
-64 R Molimo, Maro-Sorcerer
-65 C Plummet
-66 R Primal Command
-67 C Rancor
-68 C Sakura-Tribe Elder
-69 C Shinen of Life's Roar
-70 C Spider Umbra
-71 R Thelonite Hermit
-72 R Verdeloth the Ancient
-73 C Wall of Roots
-74 C Wickerbough Elder
-75 U Yavimaya Dryad
-76 C Agony Warp
-77 C Architects of Will
-78 C Armadillo Cloak
-79 R Avatar of Discord
-80 U Batwing Brume
-81 U Bituminous Blast
-82 C Branching Bolt
-83 C Colossal Might
-84 C Ethersworn Shieldmage
-85 C Fieldmist Borderpost
-86 U Fires of Yavimaya
-87 U Heroes' Reunion
-88 R Kaervek the Merciless
-89 R Magister Sphinx
-90 C Mistvein Borderpost
-91 C Pale Recluse
-92 U Rakdos Guildmage
-93 U Savage Twister
-94 U Selesnya Guildmage
-95 C Terminate
-96 U Torrent of Souls
-97 U Unbender Tine
-98 C Unmake
-99 R Vampiric Dragon
-100 U Watchwolf
-101 U Wax // Wane
-102 C Aether Spellbomb
-103 C Azorius Signet
-104 C Dimir Signet
-105 U Dreamstone Hedron
-106 R Duplicant
-107 U Everflowing Chalice
-108 C Gruul Signet
-109 U Juggernaut
-110 U Lightning Greaves
-111 R Lodestone Golem
-112 R Memnarch
-113 C Obelisk of Esper
-114 C Rakdos Signet
-115 U Skullcage
-116 U Sorcerer's Strongbox
-117 U Sun Droplet
-118 R Sundering Titan
-119 U Synod Centurion
-120 U Synod Sanctum
-121 U Thran Dynamo
-122 U Thunderstaff
-123 U Artisan of Kozilek
-124 C Barren Moor
-125 U Graypelt Refuge
-126 U Kazandu Refuge
-127 C Khalni Garden
-128 U Krosan Verge
-129 U Llanowar Reborn
-130 R Mosswort Bridge
-131 U Nantuko Monastery
-132 C Rakdos Carnarium
-133 C Secluded Steppe
-134 C Terramorphic Expanse
-135 C Tranquil Thicket
-136 U Vitu-Ghazi, the City-Tree
-137 L Plains
-137 L Plains
-141 L Island
-141 L Island
-141 L Island
-143 L Swamp
-143 L Swamp
-143 L Swamp
-146 L Mountain
-146 L Mountain
-146 L Mountain
-149 L Forest
-149 L Forest
-149 L Forest
+1 R Leonin Abunas @Darrell Riche
+2 U Metallurgeon @Warren Mahy
+3 C Oblivion Ring @Franz Vohwinkel
+4 U Path to Exile @Todd Lockwood
+5 C Sanctum Gargoyle @Shelly Wan
+6 R March of the Machines @Ben Thompson
+7 R Master Transmuter @Chippy
+8 U Spin into Myth @David Day
+9 R Avatar of Woe @rk post
+10 R Beacon of Unrest @Alan Pollack
+11 C Bog Witch @Gao Yan
+12 R Cemetery Reaper @Dave Allsop
+13 U Corpse Connoisseur @Mark Hyzer
+14 C Dregscape Zombie @Lars Grant-West
+15 R Extractor Demon @Carl Critchlow
+16 C Festering Goblin @Thomas M. Baxa
+17 U Incremental Blight @Chuck Lukacs
+18 C Infectious Horror @Pete Venters
+19 U Infest @Karl Kopinski
+20 U Makeshift Mannequin @Darrell Riche
+21 U Reanimate @Robert Bliss
+22 U Reassembling Skeleton @Austin Hsu
+23 R Scion of Darkness @Mark Zug
+24 U Shriekmaw @Steve Prescott
+25 C Sign in Blood @Howard Lyon
+26 C Twisted Abomination @Daren Bader
+27 C Urborg Syphon-Mage @Greg Staples
+28 U Zombie Infestation @Thomas M. Baxa
+29 U Zombify @Mark Romanoski
+30 C Battering Craghorn @Matt Cavotta
+31 U Breath of Darigaaz @Greg Hildebrandt & Tim Hildebrandt
+32 C Chandra's Outrage @Christopher Moeller
+33 C Dragon Breath @Greg Staples
+34 C Dragon Fodder @Jaime Jones
+35 U Dragon Whelp @Steven Belledin
+36 U Dragonspeaker Shaman @Kev Walker
+37 U Fireball @Dave Dorman
+38 R Flameblast Dragon @Jaime Jones
+39 U Furnace Whelp @Matt Cavotta
+40 C Gathan Raiders @Paolo Parente
+41 R Hellkite Charger @Jaime Jones
+42 R Imperial Hellkite @Matt Cavotta
+43 U Inferno Trap @Philip Straub
+44 R Kilnmouth Dragon @Carl Critchlow
+45 R Ryusei, the Falling Star @Nottsuo
+46 C Seething Song @Martina Pilcerova
+47 C Skirk Commando @Dave Dorman
+48 C Skirk Marauder @Pete Venters
+49 R Taurean Mauler @Dominick Domingo
+50 R Two-Headed Dragon @Sam Wood
+51 U Volcanic Fallout @Zoltan Boros & Gabor Szikszai
+52 R Chameleon Colossus @Darrell Riche
+53 R Feral Hydra @Steve Prescott
+54 C Fertilid @Wayne Reynolds
+55 C Fierce Empath @Alan Pollack
+56 C Fog @John Avon
+57 R Forgotten Ancient @Mark Tedin
+58 C Gleeful Sabotage @Todd Lockwood
+59 U Harmonize @Paul Lee
+60 U Hunting Moa @DiTerlizzi
+61 R Kamahl, Fist of Krosa @Matthew D. Wilson
+62 C Krosan Tusker @Kev Walker
+63 C Leaf Gilder @Quinton Hoover
+64 R Molimo, Maro-Sorcerer @Mark Zug
+65 C Plummet @Pete Venters
+66 R Primal Command @Wayne England
+67 C Rancor @Kev Walker
+68 C Sakura-Tribe Elder @Carl Critchlow
+69 C Shinen of Life's Roar @Matt Cavotta
+70 C Spider Umbra @Christopher Moeller
+71 R Thelonite Hermit @Chippy
+72 R Verdeloth the Ancient @Daren Bader
+73 C Wall of Roots @John Matson
+74 C Wickerbough Elder @Jesper Ejsing
+75 U Yavimaya Dryad @Rebecca Guay
+76 C Agony Warp @Dave Allsop
+77 C Architects of Will @Matt Stewart
+78 C Armadillo Cloak @Paolo Parente
+79 R Avatar of Discord @rk post
+80 U Batwing Brume @Richard Kane Ferguson
+81 U Bituminous Blast @Raymond Swanland
+82 C Branching Bolt @Vance Kovacs
+83 C Colossal Might @Justin Sweet
+84 C Ethersworn Shieldmage @Daarken
+85 C Fieldmist Borderpost @Michael Bruinsma
+86 U Fires of Yavimaya @Val Mayerik
+87 U Heroes' Reunion @Terese Nielsen
+88 R Kaervek the Merciless @rk post
+89 R Magister Sphinx @Steven Belledin
+90 C Mistvein Borderpost @Pete Venters
+91 C Pale Recluse @Cyril Van Der Haegen
+92 U Rakdos Guildmage @Jeremy Jarvis
+93 U Savage Twister @Luca Zontini
+94 U Selesnya Guildmage @Mark Zug
+95 C Terminate @Wayne Reynolds
+96 U Torrent of Souls @Ian Edward Ameling
+97 U Unbender Tine @Greg Hildebrandt
+98 C Unmake @Steven Belledin
+99 R Vampiric Dragon @Gary Ruddell
+100 U Watchwolf @Kev Walker
+101 U Wax // Wane @Ben Thompson
+102 C Aether Spellbomb @Jim Nelson
+103 C Azorius Signet @Greg Hildebrandt
+104 C Dimir Signet @Greg Hildebrandt
+105 U Dreamstone Hedron @Eric Deschamps
+106 R Duplicant @Thomas M. Baxa
+107 U Everflowing Chalice @Steve Argyle
+108 C Gruul Signet @Greg Hildebrandt
+109 U Juggernaut @Arnie Swekel
+110 U Lightning Greaves @Jeremy Jarvis
+111 R Lodestone Golem @Chris Rahn
+112 R Memnarch @Carl Critchlow
+113 C Obelisk of Esper @Francis Tsai
+114 C Rakdos Signet @Greg Hildebrandt
+115 U Skullcage @Ron Spencer
+116 U Sorcerer's Strongbox @Chuck Lukacs
+117 U Sun Droplet @Greg Hildebrandt
+118 R Sundering Titan @Jim Murray
+119 U Synod Centurion @Kev Walker
+120 U Synod Sanctum @Dana Knutson
+121 U Thran Dynamo @Ron Spears
+122 U Thunderstaff @Kaja Foglio
+123 U Artisan of Kozilek @Jason Felix
+124 C Barren Moor @Heather Hudson
+125 U Graypelt Refuge @Philip Straub
+126 U Kazandu Refuge @Franz Vohwinkel
+127 C Khalni Garden @Ryan Pancoast
+128 U Krosan Verge @Tony Szczudlo
+129 U Llanowar Reborn @Philip Straub
+130 R Mosswort Bridge @Jeremy Jarvis
+131 U Nantuko Monastery @Rob Alexander
+132 C Rakdos Carnarium @John Avon
+133 C Secluded Steppe @Heather Hudson
+134 C Terramorphic Expanse @Dan Murayama Scott
+135 C Tranquil Thicket @Heather Hudson
+136 U Vitu-Ghazi, the City-Tree @Martina Pilcerova
+137 L Plains @Fred Fields
+138 L Plains @Fred Fields
+139 L Island @John Avon
+140 L Island @John Avon
+141 L Island @John Avon
+142 L Swamp @Susan Van Camp
+143 L Swamp @Susan Van Camp
+144 L Swamp @Susan Van Camp
+145 L Mountain @Rob Alexander
+146 L Mountain @Rob Alexander
+147 L Mountain @Rob Alexander
+148 L Forest @Quinton Hoover
+149 L Forest @Quinton Hoover
+150 L Forest @Quinton Hoover

@@ -273,9 +273,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
                 }
             }
             return desc;
-        } else {
-            return "";
         }
+        return "";
     }
 
     /**
@@ -329,11 +328,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             setOverridingAbility(sa);
         }
         return sa;
-    }
-
-    @Override
-    public List<Object> getTriggerRemembered() {
-        return ImmutableList.of();
     }
 
     protected boolean canReplaceETB(Map<AbilityKey, Object> runParams) {

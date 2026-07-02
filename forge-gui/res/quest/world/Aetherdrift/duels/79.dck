@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Hard
+Description=./Modern/Aetherdrift/fried-rice_-_Affinity_(Modern,_#2377968).dck
+Deck Type=constructed
+
+[Main]
+3 Tamiyo, Inquisitive Student
+4 Esper Sentinel
+4 Thought Monitor
+3 Urza, Lord High Artificer
+4 Ingenious Smith
+1 Lavaspur Boots
+1 Aether Spellbomb
+1 Relic of Progenitus
+4 Mox Opal
+1 Pithing Needle
+1 Shadowspear
+4 Portable Hole
+1 Sink into Stupor
+4 Metallic Rebuke
+4 Stock Up
+4 Urza's Saga
+4 Razortide Bridge
+3 Seachrome Coast
+3 Darksteel Citadel
+3 Hallowed Fountain
+1 Plains
+1 Island
+1 Otawara, Soaring City
+[Sideboard]
+4 Consign to Memory
+1 Relic of Progenitus
+2 Dispatch
+3 Damping Sphere
+2 Teferi, Time Raveler
+1 Grafdigger's Cage
+2 Spell Pierce

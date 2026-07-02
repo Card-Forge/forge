@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/HandsomeMaxie_-_Mono_G_Stompy_(Standard,_#2278784).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+4 Flourishing Bloom-Kin
+2 Scavenging Ooze
+1 Keen-Eyed Curator
+4 Outcaster Trailblazer
+3 Polukranos Reborn
+3 Spinner of Souls
+2 Ojer Kaslem, Deepest Growth
+1 Ghalta, Primal Hunger
+4 Cenote Scout
+4 Bushwhack
+3 Audacity
+2 Garruk's Uprising
+1 Twists and Turns
+20 Forest
+2 The Hunter Maze
+[Sideboard]
+1 Hunter's Talent
+1 Over the Edge
+2 Bite Down
+2 Pawpatch Formation
+2 Snakeskin Veil
+2 Sandstalker Moloch
+1 Scrapshooter
+2 Obstinate Baloth
+2 Wrenn and Realmbreaker

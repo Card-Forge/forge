@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Hard
+Description=./Modern/Aetherdrift/Ben_Corry_-_Dimir_Oculus_(Modern,_#2384179).dck
+Deck Type=constructed
+
+[Main]
+4 Psychic Frog
+4 Abhorrent Oculus
+2 Dauthi Voidwalker
+2 Harbinger of the Seas
+1 Brazen Borrower
+1 Picklock Prankster
+3 Spell Snare
+3 Force of Negation
+2 Spell Pierce
+2 Sink into Stupor
+4 Fatal Push
+2 Counterspell
+1 Thought Scour
+4 Consider
+2 Stern Scolding
+4 Unearth
+2 Thoughtseize
+1 Quag Feast
+2 Watery Grave
+4 Polluted Delta
+2 Island
+1 Swamp
+1 Gloomlake Verge
+2 Undercity Sewers
+2 Flooded Strand
+2 Bloodstained Mire
+[Sideboard]
+1 Harbinger of the Seas
+2 Nihil Spellbomb
+4 Consign to Memory
+1 Toxic Deluge
+2 Engineered Explosives
+2 Mystical Dispute
+1 Surgical Extraction
+1 Dismember
+1 Graveyard Trespasser

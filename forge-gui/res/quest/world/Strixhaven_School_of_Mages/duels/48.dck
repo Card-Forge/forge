@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=Imperial Guard
+Title=Imperial Guard
+Icon=Imperial Guard.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Akkiryoku_-_Orzhov_Lifegain_(Standard,_#1145038).dck
+Deck Type=constructed
+
+[Main]
+1 Vito, Thorn of the Dusk Rose
+1 Orah, Skyclave Hierophant
+1 Stalwart Valkyrie
+1 Baneslayer Angel
+1 Luminous Broodmoth
+1 Hushbringer
+1 Strict Proctor
+1 Speaker of the Heavens
+1 Nightmare Shepherd
+1 Terror of the Peaks
+2 Shadewing Laureate
+2 Stonecoil Serpent
+2 Thunderous Orator
+3 Faerie Guidemother
+3 Indulging Patrician
+4 Archon of Absolution
+4 Killian, Ink Duelist
+1 Shadowspear
+1 Skyclave Relic
+4 Letter of Acceptance
+1 Silverquill Command
+1 Mascot Exhibition
+1 Inkling Summoning
+1 Primal Might
+2 Guiding Voice
+1 Dramatic Finale
+1 Shark Typhoon
+2 Demonic Embrace
+3 Griffin Aerie
+2 The World Tree
+3 Idyllic Grange
+7 Swamp
+10 Plains
+[Sideboard]
+1 Forever Young
+1 Plumb the Forbidden
+1 Confront the Past
+1 Introduction to Annihilation
+1 Spirit Summoning
+1 Pest Summoning
+1 Containment Breach
+1 Start from Scratch
+2 Duress
+3 Expanded Anatomy

@@ -15,15 +15,6 @@ public class StreamUtil {
 
     /**
      * @return a Stream with the provided iterable as its source.
-     * @deprecated Stream collections with {@link Collection#stream()}.
-     */
-    @Deprecated
-    public static <T> Stream<T> stream(Collection<T> collection) {
-        return collection.stream();
-    }
-
-    /**
-     * @return a Stream with the provided iterable as its source.
      */
     public static <T> Stream<T> stream(Iterable<T> iterable) {
         return StreamSupport.stream(iterable.spliterator(), false);

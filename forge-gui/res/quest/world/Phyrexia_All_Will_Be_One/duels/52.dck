@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=The Backlash Machine
+Title=The Backlash Machine
+Icon=The Backlash Machine.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/George_Anders_-_Golgari_Infect_(Modern,_#1578863).dck
+Deck Type=constructed
+
+[Main]
+4 Phyrexian Crusader
+4 Glistener Elf
+2 Plague Stinger
+2 Noble Hierarch
+4 Venerated Rotpriest
+4 Ignoble Hierarch
+3 Snakeskin Veil
+3 Groundswell
+2 Vines of Vastwood
+3 Mutagenic Growth
+1 Apostle's Blessing
+2 Infectious Bite
+1 Giant Growth
+3 Might of Old Krosa
+4 Scale Up
+1 Ashiok, Dream Render
+1 Urborg, Tomb of Yawgmoth
+1 Boseiju, Who Endures
+1 Nurturing Peatland
+3 Verdant Catacombs
+2 Misty Rainforest
+1 Pendelhaven
+4 Overgrown Tomb
+4 Inkmoth Nexus
+2 Forest
+1 Swamp
+1 The Seedcore
+1 Dryad Arbor
+[Sideboard]
+2 Dismember
+2 Surgical Extraction
+1 Void Mirror
+2 Abrupt Decay
+1 Tormod's Crypt
+2 Fatal Push
+1 Extinction Event
+2 Veil of Summer
+2 Spellskite

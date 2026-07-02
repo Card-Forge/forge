@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=The Thing
+Title=The Thing
+Icon=The Thing.jpg
+Difficulty=Very Hard
+Description=./Modern/Tarkir_Dragonstorm/Roy-Arne_De_Wilde_-_Jeskai_Hammer_Time_(Modern,_#2442596).dck
+Deck Type=constructed
+
+[Main]
+4 Memnite
+4 Ornithopter
+4 Puresteel Paladin
+4 Stoneforge Mystic
+4 Colossus Hammer
+4 Leyline Axe
+4 Mox Opal
+1 Lavaspur Boots
+1 Nettlecyst
+1 Shadowspear
+4 Battlefield Improvisation
+4 Surge of Salvation
+1 Razorgrass Ambush
+4 Urza's Saga
+1 Forge Anew
+4 Flooded Strand
+3 Plains
+2 Hallowed Fountain
+2 Inkmoth Nexus
+1 Arid Mesa
+1 Marsh Flats
+1 Meticulous Archive
+1 Sacred Foundry
+[Sideboard]
+3 Consign to Memory
+2 Hushbringer
+2 Rest in Peace
+2 Sanctifier en-Vec
+2 Voice of Victory
+2 Wear // Tear
+2 Whipflare

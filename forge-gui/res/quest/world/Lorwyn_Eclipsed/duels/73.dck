@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Fruitkid_-_Merfolk_(Modern,_#2787728).dck
+Deck Type=constructed
+
+[Main]
+2 Lord of Atlantis
+4 Tide Shaper
+3 Harbinger of the Seas
+3 Svyelun of Sea and Sky
+3 Tishana's Tidebinder
+3 Sygg, Wanderwine Wisdom
+3 Mindspring Merfolk
+4 Master of the Pearl Trident
+2 Glasspool Mimic
+2 Silvergill Mentor
+2 Silvergill Adept
+4 Aether Vial
+4 Sink into Stupor
+4 Flare of Denial
+2 Spell Snare
+2 Force of Negation
+2 Mutavault
+3 Cavern of Souls
+2 Otawara, Soaring City
+3 Island
+4 Wanderwine Hub
+[Sideboard]
+4 Consign to Memory
+2 Champions of the Shoal
+2 Unlicensed Hearse
+1 Harbinger of the Seas
+2 Subtlety
+2 Vodalian Hexcatcher
+2 Dismember

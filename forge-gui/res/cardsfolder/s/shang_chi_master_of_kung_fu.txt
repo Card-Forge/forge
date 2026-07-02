@@ -1,0 +1,7 @@
+Name:Shang-Chi, Master of Kung Fu
+ManaCost:1 G
+Types:Legendary Creature Human Warrior Hero
+PT:2/2
+S:Mode$ ActivateAbilityAsIfHaste | ValidCard$ Creature.YouCtrl+inZoneBattlefield | Description$ You may activate abilities of creatures you control as though those creatures had haste.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | RestrictValid$ Activated.Creature | SpellDescription$ Add two mana of any one color. Spend this mana only to activate abilities of creature sources.
+Oracle:You may activate abilities of creatures you control as though those creatures had haste.\n{T}: Add two mana of any one color. Spend this mana only to activate abilities of creature sources.

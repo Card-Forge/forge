@@ -1,0 +1,7 @@
+Name:Ragamuffin Raptor
+ManaCost:4 G
+Types:Creature Dinosaur
+PT:4/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When this creature enters, return up to one target creature or Food card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.YouOwn,Food.YouOwn | TgtPrompt$ Select target creature or Food card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Hand
+Oracle:When this creature enters, return up to one target creature or Food card from your graveyard to your hand.

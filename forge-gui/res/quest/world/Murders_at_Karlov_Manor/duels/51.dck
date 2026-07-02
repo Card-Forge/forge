@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Anubis
+Title=Anubis
+Icon=Anubis.jpg
+Difficulty=Hard
+Description=./Modern/Murders_at_Karlov_Manor/Aaron_Martin_-_Jund_Creativity_(Modern,_#1967542).dck
+Deck Type=constructed
+
+[Main]
+4 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+3 Bitter Triumph
+3 Lightning Bolt
+2 Fatal Push
+4 Indomitable Creativity
+1 Transmogrify
+4 Thoughtseize
+4 Persist
+3 Bitter Reunion
+4 Wrenn and Six
+2 Arid Mesa
+3 Scalding Tarn
+4 Wooded Foothills
+3 Bloodstained Mire
+1 Mountain
+4 Dwarven Mine
+2 Stomping Ground
+2 Blood Crypt
+1 Commercial District
+1 Raucous Theater
+1 Boseiju, Who Endures
+[Sideboard]
+4 Pick Your Poison
+3 Turn the Earth
+3 Veil of Summer
+2 Alpine Moon
+1 Molten Collapse

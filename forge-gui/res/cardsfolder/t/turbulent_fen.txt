@@ -1,0 +1,6 @@
+Name:Turbulent Fen
+ManaCost:no cost
+Types:Land Swamp Forest
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless your opponents control eight or more lands.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.OppCtrl | ConditionCompare$ LT8
+Oracle:({T}: Add {B} or {G}.)\nThis land enters tapped unless your opponents control eight or more lands.

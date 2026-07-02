@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Gruul-precon
+Title=Gruul-precon
+Icon=Gruul-precon.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/MTG_Lukas_-_Death_and_Taxes_(Modern,_#1581579).dck
+Deck Type=constructed
+
+[Main]
+4 Leonin Arbiter
+3 Thalia, Guardian of Thraben
+4 Stoneforge Mystic
+4 Giver of Runes
+2 Archon of Emeria
+4 Solitude
+2 Brutal Cathar
+1 Lion Sash
+2 Skrelv, Defector Mite
+4 Melira, the Living Cure
+1 Sword of Fire and Ice
+1 Kaldra Compleat
+4 Aether Vial
+1 Plains
+1 Plains
+1 Eiganjo Castle
+1 Plains
+4 Horizon Canopy
+4 Razorverge Thicket
+4 Ghost Quarter
+1 Temple Garden
+1 Boseiju, Who Endures
+1 Boseiju, Who Endures
+2 Eiganjo, Seat of the Empire
+2 Boseiju, Who Endures
+1 Plaza of Heroes
+[Sideboard]
+2 Burrenton Forge-Tender
+3 Gaddock Teeg
+2 Path to Exile
+1 Batterskull
+2 Hallowed Moonlight
+2 Sanctifier en-Vec
+3 Outland Liberator

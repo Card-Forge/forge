@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/Ishihara_Toshinari_-_WB_Aggro_(Standard,_#1754924).dck
+Deck Type=constructed
+
+[Main]
+4 Giada, Font of Hope
+4 Inspiring Overseer
+1 Sanctuary Warden
+2 Serra Paragon
+4 Steel Seraph
+2 Phyrexian Fleshgorger
+2 Skrelv, Defector Mite
+1 Boon-Bringer Valkyrie
+1 Guardian of Ghirapur
+2 Fateful Absence
+1 Undying Malice
+2 March of Otherworldly Light
+1 Not Dead After All
+4 Touch the Spirit Realm
+4 Ossification
+1 The Wandering Emperor
+1 Elspeth Resplendent
+6 Plains
+3 Swamp
+1 Field of Ruin
+2 Caves of Koilos
+2 Shattered Sanctum
+1 Eiganjo, Seat of the Empire
+1 Takenuma, Abandoned Mire
+4 Obscura Storefront
+1 Demolition Field
+2 Mirrex
+[Sideboard]
+2 Infernal Grasp
+2 Liesa, Forgotten Archangel
+1 Farewell
+2 Malicious Malfunction
+1 Depopulate
+1 Elspeth Resplendent
+1 Sanctuary Warden
+1 Unlicensed Hearse
+1 Calamity's Wake
+1 The Eternal Wanderer
+1 Kaya, Intangible Slayer
+1 Mirrex

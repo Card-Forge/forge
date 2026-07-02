@@ -31,4 +31,6 @@ public final class AiPlayerPredicates {
             return Integer.compare(v0, v1);
         };
     }
+
+    public static Comparator<Player> compareByBoardPosition = Comparator.comparing(p -> ComputerUtil.evaluateBoardPosition(null, p));
 }

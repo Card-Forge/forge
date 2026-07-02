@@ -1,6 +1,6 @@
 Name:Patriar's Humiliation
 ManaCost:W
 Types:Instant
-A:SP$ Animate | ValidTgts$ Creature | RemoveAllAbilities$ True | Duration$ Perpetual | SubAbility$ DBDealDamage | StackDescription$ REP Target creature_{c:Targeted} | SpellDescription$ Target creature perpetually loses all abilities, then
-SVar:DBDealDamage:DB$ DealDamage | NumDmg$ Count$Valid Creature.YouCtrl | Defined$ Targeted | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals damage to it equal to the number of creatures you control.
+A:SP$ Animate | ValidTgts$ Creature | RemoveAllAbilities$ True | Duration$ Perpetual | SubAbility$ DBDealDamage | StackDescription$ REP Target creature_{c:Targeted} & abilities,_abilities, then | SpellDescription$ Target creature perpetually loses all abilities,
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ Count$Valid Creature.YouCtrl | Defined$ Targeted | SpellDescription$ then CARDNAME deals damage to it equal to the number of creatures you control.
 Oracle:Target creature perpetually loses all abilities, then Patriar's Humiliation deals damage to it equal to the number of creatures you control.

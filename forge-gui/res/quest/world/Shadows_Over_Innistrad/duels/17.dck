@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Radioactive Man
+Title=Radioactive Man
+Icon=Radioactive Man.jpg
+Difficulty=Easy
+Description=Shadows_over_Innistrad/StarCityGames.com_Standard_Open_-_Atlanta,_GA/Logan_Glover_-_Eldrazi_(Standard,_#624900).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Dragonlord Atarka
+3 Ulamog, the Ceaseless Hunger
+2 Ulvenwald Hydra
+4 World Breaker
+3 Hedron Archive
+4 Kozilek's Return
+4 Explosive Vegetation
+4 Nissa's Pilgrimage
+1 Nissa's Renewal
+4 Oath of Nissa
+3 Chandra, Flamecaller
+4 Cinder Glade
+1 Drownyard Temple
+11 Forest
+2 Mountain
+4 Sanctum of Ugin
+4 Shrine of the Forsaken Gods
+[Sideboard]
+1 Gaea's Revenge
+4 Jaddi Offshoot
+2 Reality Smasher
+2 Roast
+2 Thought-Knot Seer
+2 Tireless Tracker
+2 Warping Wail

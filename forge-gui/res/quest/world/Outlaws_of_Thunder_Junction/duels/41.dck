@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Ezio
+Title=Ezio
+Icon=Ezio.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/Adam_Boyd_-_Boros_Convoke_(Standard,_#2075056).dck
+Deck Type=constructed
+
+[Main]
+4 Novice Inspector
+4 Voldaren Epicure
+1 Nurturing Pixie
+4 Warden of the Inner Sky
+4 Resolute Reinforcements
+4 Imodane's Recruiter
+4 Knight-Errant of Eos
+1 Get Lost
+4 Gleeful Demolition
+4 Case of the Gateway Express
+4 Warleader's Call
+3 Plains
+2 Mountain
+2 Eiganjo, Seat of the Empire
+3 Sokenzan, Crucible of Defiance
+4 Cavern of Souls
+4 Battlefield Forge
+4 Inspiring Vantage
+[Sideboard]
+1 Strangle
+1 Mirrex
+1 End the Festivities
+2 Lithomantic Barrage
+1 Unlicensed Hearse
+3 Get Lost
+3 Invasion of Gobakhan
+3 Urabrask's Forge

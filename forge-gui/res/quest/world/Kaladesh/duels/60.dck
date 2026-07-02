@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Aqueduct
+Title=Aqueduct
+Icon=Aqueduct.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/Maxwell_Mick_-_Burn_(Modern,_#668505).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+4 Searing Blaze
+1 Shard Volley
+2 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+2 Inspiring Vantage
+3 Mountain
+2 Sacred Foundry
+4 Scalding Tarn
+1 Stomping Ground
+3 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+3 Destructive Revelry
+2 Gut Shot
+1 Molten Rain
+2 Path to Exile
+2 Ravenous Trap
+2 Relic of Progenitus
+2 Skullcrack

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Waterlord
+Title=Waterlord
+Icon=Waterlord.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Danilo_SIlva_Duarte_-_Rakdos_Midrange_(Standard,_#1432697).dck
+Deck Type=constructed
+
+[Main]
+1 Immersturm Predator
+1 Goldspan Dragon
+2 Fable of the Mirror-Breaker
+2 Eradicator Valkyrie
+2 Body Dropper
+3 Graveyard Trespasser
+4 Voldaren Epicure
+4 Tenacious Underdog
+4 Shambling Ghast
+1 Soul Shatter
+2 Soul Transfer
+3 Bloodchief's Thirst
+4 Dread Fugue
+4 Ob Nixilis, the Adversary
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+3 Haunted Ridge
+4 Blightstep Pathway
+7 Mountain
+7 Swamp
+[Sideboard]
+2 Reckoner's Bargain
+2 Infernal Grasp
+3 Abrade
+4 Duress
+4 Ray of Enfeeblement

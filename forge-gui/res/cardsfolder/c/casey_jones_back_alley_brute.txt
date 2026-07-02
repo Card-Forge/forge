@@ -1,0 +1,12 @@
+Name:Casey Jones, Back Alley Brute
+ManaCost:3 R
+Types:Legendary Creature Human Berserker
+PT:4/2
+K:Menace
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever NICKNAME attacks, put a +1/+1 counter on target attacking creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ CounterAddedOnce | CounterType$ P1P1 | ValidSource$ You | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you put one or more +1/+1 counters on a creature you control, NICKNAME deals that much damage to target opponent.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ X
+SVar:X:TriggerCount$Amount
+SVar:HasAttackEffect:TRUE
+Oracle:Menace\nWhenever Casey Jones attacks, put a +1/+1 counter on target attacking creature.\nWhenever you put one or more +1/+1 counters on a creature you control, Casey Jones deals that much damage to target opponent.

@@ -1,7 +1,7 @@
 Name:Valiant Emberkin
 ManaCost:1 R W
 Types:Enchantment Creature Mouse Glimmer
-PT:1/1
+PT:1/2
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME enters or attacks, target creature you control perpetually gets +1/+0.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, target creature you control perpetually gets +1/+0.

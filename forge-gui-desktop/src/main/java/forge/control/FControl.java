@@ -41,12 +41,10 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.ImageCache;
-import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.io.QuestDataIO;
-import forge.gui.GuiBase;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.InvalidLayoutFileException;
@@ -60,7 +58,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.menus.ForgeMenu;
 import forge.model.FModel;
-import forge.player.GamePlayerUtil;
+import forge.sound.SoundSystem;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
@@ -68,7 +66,6 @@ import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.RestartUtil;
-import forge.util.TextUtil;
 import forge.view.FFrame;
 import forge.view.FView;
 
@@ -231,6 +228,7 @@ public enum FControl implements KeyEventDispatcher {
         if (!canExitForge(false)) {
             return false;
         }
+        SoundSystem.instance.dispose();
         Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         System.exit(0);
         return true;
@@ -262,10 +260,6 @@ public enum FControl implements KeyEventDispatcher {
 
         display = FView.SINGLETON_INSTANCE.getLpnDocument();
 
-        //set ExperimentalNetworkOption from preference
-        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
-        GuiBase.enablePropertyConfig(propertyConfig);
-
         closeAction = CloseAction.valueOf(prefs.getPref(FPref.UI_CLOSE_ACTION));
 
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(getLocalizer().getMessage("lblLoadingQuest"));
@@ -281,11 +275,7 @@ public enum FControl implements KeyEventDispatcher {
                 System.err.printf("Error loading quest data (%s).. skipping for now..%n", questname);
             }
         }
-        // format release notes upon loading
-        try {
-            TextUtil.getFormattedChangelog(new File(FileUtil.pathCombine(System.getProperty("user.dir"), ForgeConstants.CHANGES_FILE_NO_RELEASE)), "");
-        } catch (Exception e) {
-        }
+
         // Handles resizing in null layouts of layers in JLayeredPane as well as saving window layout
         final FFrame window = Singletons.getView().getFrame();
         window.addComponentListener(new ComponentAdapter() {
@@ -480,7 +470,4 @@ public enum FControl implements KeyEventDispatcher {
         return false;
     }
 
-    public final LobbyPlayer getGuiPlayer() {
-        return GamePlayerUtil.getGuiPlayer();
-    }
 }

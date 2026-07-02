@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Aragorn
+Title=Aragorn
+Icon=Aragorn.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/SCG_Invitational_Qualifier_Eugene/Zack_Loos_-_Bogles_(Modern,_#302746).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+2 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+3 Hyena Umbra
+4 Rancor
+4 Spider Umbra
+1 Spirit Link
+3 Spirit Mantle
+2 Unflinching Courage
+2 Brushland
+1 Forest
+2 Horizon Canopy
+1 Plains
+4 Razorverge Thicket
+4 Temple Garden
+4 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+1 Grafdigger's Cage
+2 Hallowed Moonlight
+3 Leyline of Sanctity
+2 Nature's Claim
+1 Rest in Peace
+1 Spellskite
+2 Stony Silence
+2 Suppression Field
+1 Torpor Orb

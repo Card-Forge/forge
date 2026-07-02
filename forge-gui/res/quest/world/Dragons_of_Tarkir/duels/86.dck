@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Fin Fang Foom
+Title=Fin Fang Foom
+Icon=Fin Fang Foom.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/2015_Modern_State_Championships_-_Mississippi/Michael_Hwang_-_Red_Deck_Wins_(Modern,_#227717).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+1 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+3 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+2 Stomping Ground
+3 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+3 Destructive Revelry
+3 Kor Firewalker
+2 Path to Exile
+2 Rending Volley

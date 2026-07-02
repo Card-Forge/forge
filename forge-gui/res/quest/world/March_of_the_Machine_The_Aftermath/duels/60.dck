@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Ajok
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Mayor_of_Value_Town_-_GW_Company_(Modern,_#1673329).dck
+Deck Type=constructed
+
+[Main]
+3 Burrenton Forge-Tender
+4 Knight of the Reliquary
+2 Renegade Rallier
+1 Ramunap Excavator
+2 Knight of Autumn
+4 Noble Hierarch
+4 Archon of Emeria
+4 Solitude
+2 Prosperous Innkeeper
+1 Elesh Norn, Mother of Machines
+2 Nissa, Resurgent Animist
+4 Deeproot Wayfinder
+4 Collected Company
+2 Horizon Canopy
+1 Verdant Catacombs
+1 Tectonic Edge
+3 Ghost Quarter
+1 Gavony Township
+2 Temple Garden
+1 Wooded Foothills
+4 Windswept Heath
+1 Temple Garden
+1 Blast Zone
+1 Misty Rainforest
+1 Yavimaya, Cradle of Growth
+2 Plains
+2 Forest
+[Sideboard]
+1 Burrenton Forge-Tender
+1 Ratchet Bomb
+1 Knight of Autumn
+3 Collector Ouphe
+2 Endurance
+2 Force of Vigor
+2 Path to Exile
+1 The Filigree Sylex
+2 Soulless Jailer

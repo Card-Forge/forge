@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Lex Luthor
+Title=Lex Luthor
+Icon=Lex Luthor.jpg
+Difficulty=Very Hard
+Description=../Modern/Eldritch_Moon/Grand_Prix_Dallas-Fort_Worth_2016_-_9_to_64_Decklists/Zane_Houston_-_Junk_(Modern,_#645352).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Courser of Kruphix
+1 Kalitas, Traitor of Ghet
+3 Kitchen Finks
+3 Scavenging Ooze
+4 Tarmogoyf
+1 Tasigur, the Golden Fang
+2 Tireless Tracker
+4 Abrupt Decay
+2 Disfigure
+3 Dismember
+1 Murderous Cut
+1 Vines of Vastwood
+4 Inquisition of Kozilek
+2 Thoughtseize
+1 Liliana, the Last Hope
+3 Forest
+3 Ghost Quarter
+2 Marsh Flats
+4 Overgrown Tomb
+3 Swamp
+3 Treetop Village
+4 Verdant Catacombs
+4 Windswept Heath
+[Sideboard]
+2 Damnation
+2 Disfigure
+4 Fulminator Mage
+2 Golgari Charm
+1 Kitchen Finks
+1 Maelstrom Pulse
+2 Surgical Extraction
+1 Tireless Tracker

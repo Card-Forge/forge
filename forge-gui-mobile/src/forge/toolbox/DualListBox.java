@@ -32,6 +32,7 @@ public class DualListBox<T> extends FDialog {
 
     private final FLabel orderedLabel;
     private final FLabel selectOrder;
+    private final FCheckBox rememberDecisionCheckBox;
 
     private final int targetRemainingSourcesMin;
     private final int targetRemainingSourcesMax;
@@ -114,6 +115,10 @@ public class DualListBox<T> extends FDialog {
         selectOrder = add(new FLabel.Builder().align(Align.center).text(Forge.getLocalizer().getMessage("lblSelectOrder")).build());
         orderedLabel = add(new FLabel.Builder().align(Align.center).build());
 
+        rememberDecisionCheckBox = add(new FCheckBox(Forge.getLocalizer().getMessage("lblAlwaysUseThisOrder"), true));
+        rememberDecisionCheckBox.setToolTipText(Forge.getLocalizer().getMessage("lblAlwaysUseThisOrderTooltip"));
+        rememberDecisionCheckBox.setVisible(false);
+
         setButtonState();
     }
 
@@ -125,7 +130,8 @@ public class DualListBox<T> extends FDialog {
 
         float gapBetweenButtons = FOptionPane.PADDING / 2;
         float labelHeight = selectOrder.getAutoSizeBounds().height;
-        float listHeight = (maxHeight - 2 * labelHeight - 2 * FOptionPane.PADDING) / 2;
+        float checkboxBand = rememberDecisionCheckBox.isVisible() ? labelHeight + FOptionPane.PADDING / 2 : 0;
+        float listHeight = (maxHeight - 2 * labelHeight - 2 * FOptionPane.PADDING - checkboxBand) / 2;
         float addButtonWidth = addAllButton.getAutoSizeBounds().width * 1.2f;
         float addButtonHeight = listHeight / 2 - gapBetweenButtons;
         float listWidth = width - addButtonWidth - gapBetweenButtons;
@@ -145,11 +151,25 @@ public class DualListBox<T> extends FDialog {
         removeAllButton.setBounds(x, y + addButtonHeight + gapBetweenButtons, addButtonWidth, addButtonHeight);
         destList.setBounds(x + width - listWidth, y, listWidth, listHeight);
 
+        if (rememberDecisionCheckBox.isVisible()) {
+            float checkboxHeight = labelHeight;
+            float checkboxY = maxHeight - checkboxHeight - FOptionPane.PADDING / 2;
+            rememberDecisionCheckBox.setBounds(FOptionPane.PADDING, checkboxY, width, checkboxHeight);
+        }
+
         return maxHeight;
     }
 
     public void setSecondColumnLabelText(String label) {
         orderedLabel.setText(label);
+    }
+
+    public void setRememberDecisionVisible(boolean visible) {
+        rememberDecisionCheckBox.setVisible(visible);
+    }
+
+    public boolean isRememberDecisionSelected() {
+        return rememberDecisionCheckBox.isSelected();
     }
 
     public List<T> getRemainingSourceList() {

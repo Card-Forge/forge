@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Oberon
+Title=Oberon
+Icon=Oberon.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Danilo_SIlva_Duarte_-_Rakdos_Aggro_(Standard,_#1432977).dck
+Deck Type=constructed
+
+[Main]
+1 Goldspan Dragon
+2 Shambling Ghast
+2 Fable of the Mirror-Breaker
+2 Eradicator Valkyrie
+3 Graveyard Trespasser
+4 Tenacious Underdog
+4 Bloodtithe Harvester
+4 Voldaren Epicure
+1 Reckoner Bankbuster
+1 Soul Shatter
+2 Soul Transfer
+3 Bloodchief's Thirst
+4 Dread Fugue
+4 Ob Nixilis, the Adversary
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+3 Haunted Ridge
+4 Blightstep Pathway
+6 Mountain
+8 Swamp
+[Sideboard]
+1 Structural Assault
+1 Reckoner's Bargain
+2 Infernal Grasp
+3 Abrade
+4 Duress
+4 Ray of Enfeeblement

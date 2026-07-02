@@ -38,7 +38,11 @@ Image=disrupter.jpg
 1 Gerrard's Irregulars|MMQ
 1 Ogre Taskmaster|MMQ
 1 Subterranean Hangar|MMQ
-12 Swamp|MMQ
-8 Mountain|MMQ
+4 Swamp|MMQ|1
+4 Swamp|MMQ|2
+4 Swamp|MMQ|3
+3 Mountain|MMQ|1
+3 Mountain|MMQ|2
+2 Mountain|MMQ|3
 1 Undertaker|MMQ
 [sideboard]

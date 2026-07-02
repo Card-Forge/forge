@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Dr Doom
+Title=Dr Doom
+Icon=Dr Doom.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/Alyson_Kerley_-_Boros_Aggro_(Modern,_#1474929)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Clever Lumimancer
+4 Kiln Fiend
+2 Gut Shot
+3 Apostle's Blessing
+3 Mutagenic Growth
+4 Lightning Bolt
+4 Emerge Unscathed
+4 Manamorphose
+4 Lava Dart
+3 Assault Strobe
+4 Ancestral Anger
+2 Sacred Foundry
+3 Inspiring Vantage
+4 Battlefield Forge
+8 Mountain
+[Sideboard]
+1 Deflecting Palm
+2 Blossoming Calm
+2 Tormod's Crypt
+3 Leyline of Punishment
+3 Smash to Smithereens
+4 Path to Exile

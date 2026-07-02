@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Barney Rubble
+Title=Barney Rubble
+Icon=Barney Rubble.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/SCG_Classic_Columbia/Phillip_Fortner_-_Jund_Zombies_(Standard,_#47379).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Blood Artist
+2 Deathrite Shaman
+4 Diregraf Ghoul
+4 Dreg Mangler
+4 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+4 Lotleth Troll
+1 Abrupt Decay
+3 Brimstone Volley
+3 Tragic Slip
+1 Dreadbore
+4 Blood Crypt
+4 Cavern of Souls
+4 Dragonskull Summit
+4 Overgrown Tomb
+3 Swamp
+4 Woodland Cemetery
+[Sideboard]
+2 Duress
+3 Liliana of the Veil
+2 Olivia Voldaren
+2 Slaughter Games
+2 Victim of Night

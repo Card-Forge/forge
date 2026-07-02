@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Eomer
+Title=Eomer
+Icon=Eomer.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/Saddle_Brook,_New_Jersey/Robin_Meeker_Cummings_in_PTQ_Barcelona_-_Faeries_(Modern,_#27362).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Mistbind Clique
+1 Mistblade Shinobi
+4 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+3 Vedalken Shackles
+4 Cryptic Command
+2 Mana Leak
+4 Remand
+1 Spell Pierce
+4 Spell Snare
+17 Island
+4 Mutavault
+4 Tectonic Edge
+[Sideboard]
+1 Academy Ruins
+1 Dismember
+1 Dispel
+1 Hurkyl's Recall
+1 Jace Beleren
+3 Ratchet Bomb
+1 Sower of Temptation
+1 Steel Sabotage
+3 Threads of Disloyalty
+1 Wurmcoil Engine

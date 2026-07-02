@@ -1,0 +1,8 @@
+Name:Game Over
+ManaCost:3 B B
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | Description$ This spell costs {2} less to cast if a player's life total is less than or equal to half their starting life total.
+A:SP$ DestroyAll | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
+SVar:X:PlayerCountPlayers$ConditionLEY LifeTotal
+SVar:Y:PlayerCountDefinedPlayer.PlayerUID_RelativePlayerUID$StartingLife/HalfDown
+Oracle:This spell costs {2} less to cast if a player's life total is less than or equal to half their starting life total.\nDestroy all creatures.

@@ -1,0 +1,9 @@
+Name:Hidden Hideout
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo ColorIdentity | SpellDescription$ Add one mana of any color in your commander's color identity.
+A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature.YouCtrl+HasCounters | TgtPrompt$ Select target creature you control | KW$ Lifelink | SpellDescription$ Target creature you control with a counter on it gains lifelink until end of turn.
+AI:RemoveDeck:NonCommander
+Oracle:This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity.\n{2}, {T}: Target creature you control with a counter on it gains lifelink until end of turn.

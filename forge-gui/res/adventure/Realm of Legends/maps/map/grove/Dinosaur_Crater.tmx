@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="70" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="141">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Meteor Crater&quot;, &quot;Belligerent Yearling&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="2" name="Grass" width="70" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1UsKwjAUheGAtLZxA4L42IS4Cdfh0JlOBadOXI1bEFehgjgWV2AvMRg1qH2oVf7AR1JaWnK4uR3HSg0KMEysIqX2PaXWybw5r9NYBMa8es+OQ5j+vVkUkUlFm1wCbTLpJPM4zp5LPbi+PoaXtejX3p9LU+fPRd4j2ciYxiYTMUmZjbt3n1n1c7n46kdGw8lLsov09VnxyVMrZeX2CbuWbCQTWw/D+Hk2/8R3NkJ9/5zbR7J8R3rx9kcy9fVPy/d81kx+zeBm/5KNzUeupWe0H2QhZ2pZQA3IcOeys/8X371IP66tPPmUnfTe3bkeWvrSH17JxPbnUdf49l4AAAAAAAAAAAAAAAAAAAAAlNMJp7PLsA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="70" height="50">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="7" name="Tree" width="70" height="50">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="8" name="OverTree" width="70" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmlFKxDAQhvO6zTV8WpD1BoLCrogvegFPoC8ewnP4WLUreAMFFz1I1Yqg4AXMkAaWbrZN2+kkTfJBWFi6Sfj7ZzKZLGORSCQSiYTLC8EYTwRj1HGzb/bc4WzYebiG7ffiGqG9/zFwmzB2l7T7DUVMs81SaHLMbc/CPU6EJp+8m298J0vk2hiLb0z3bQwWpW+iZzZxLdbs2p7AGvOZW555RegDIy8Ez/iaX/bJExcOrSPK+DoWMHPH0yljZ9N+fbT1GvYZZog1fCE0uazo0kUrFet88bFOA51WoYHlF9+BXATDL3Ux5AAxvmD21YRpHPMlltSBnT9vy3+HytPniL5Z4XW1gapDxFqEBM4E94n8POKyqTO3z+surbz7j8oZIOfyO/h857JOA636XKhQeMNn//WFcp/GoqkO4tMdgQveNdWTsiaUt4ifLmg4Nq52ZMMEcsa+HrFZHx5CEx06jWx4eGUwLrYmz3hdofM4YexhYvYshU9skwktlqJ9i3z2N8Az0LbcqRBa/Ij255AmqcPn1Oqap8wj4M4G1qqr2uh4I+hLxfWme/OQciulSc7bn+HrdLre6z83n6jT6hw5AbS5Tw9xTl3vs2suRZHnNsUwGB/2rMKh/+0oTahz1LSsMxflXvXFZa21Sw0Re29VXqGsuYD+oInSAcbPNB6xVQdqe+/wD/MYeZk=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="557.542" y="797.708" width="57.4583" height="15.125">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="312.999" y="241">
+   <properties>
+    <property name="enemy" value="Zetalpa"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="73,77,116,77"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="551.096" y="274.064">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With three great dying roars, the colossal dinosaur falls back. The whole valley shakes with the impact as an entire grove of trees is crushed under its weight.&quot;,
+	   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Strider Harness|RIX&quot;, &quot;Jungle Shrine|LCC&quot;, &quot;The Skullspore Nexus|LCI&quot;, &quot;Poetic Ingenuity|LCI&quot;]}"/>
+    <property name="enemy" value="Zacama"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="987.242" y="280.756">
+   <properties>
+    <property name="enemy" value="Tsagan"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/waypoint.tx" x="957.506" y="211.33"/>
+  <object id="68" template="../../../../common/maps/obj/waypoint.tx" x="547.669" y="322.864"/>
+  <object id="73" template="../../../../common/maps/obj/waypoint.tx" x="367.753" y="178.8"/>
+  <object id="75" template="../../../../common/maps/obj/waypoint.tx" x="506.606" y="502.553"/>
+  <object id="77" template="../../../../common/maps/obj/waypoint.tx" x="279.068" y="334.98"/>
+  <object id="78" template="../../../../common/maps/obj/waypoint.tx" x="618.632" y="462.388"/>
+  <object id="79" template="../../../../common/maps/obj/waypoint.tx" x="800.641" y="398.152"/>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="-3.385" y="-16" width="1125.44" height="16"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="-2.05333" y="798.667" width="1125.44" height="16"/>
+  <object id="87" template="../../obj/treasure.tx" x="916.667" y="158.667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2,
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/enemy.tx" x="137.334" y="615.333">
+   <properties>
+    <property name="enemy" value="Huatli"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="104,108,104,105"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="975.334" y="675.334">
+   <properties>
+    <property name="enemy" value="Wayta"/>
+    <property name="speedModifier" type="float" value="5"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="558.334" y="367">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;dinosaur egg|lcc&quot;, &quot;Triassic Egg|LEG&quot;, &quot;strider harness|RIX&quot;, &quot;maskwood nexus|KLD&quot;]}"/>
+    <property name="enemy" value="Atla Palani"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="430.667" y="118.666">
+   <properties>
+    <property name="displayNameOverride" value=""/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Frilled Deathspitter|RIX&quot;, &quot;Strider Harness|RIX&quot;, &quot;restless ridgeline|LCI|2&quot;]}"/>
+    <property name="enemy" value="Gishath"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/waypoint.tx" x="723.333" y="568"/>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="301.667" y="550.666">
+   <properties>
+    <property name="enemy" value="Nezahal"/>
+    <property name="speedModifier" type="float" value="4"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="98,125,96,125"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/waypoint.tx" x="368" y="649.333"/>
+  <object id="96" template="../../../../common/maps/obj/waypoint.tx" x="341.333" y="602.667"/>
+  <object id="97" template="../../../../common/maps/obj/waypoint.tx" x="393.333" y="573.333"/>
+  <object id="98" template="../../../../common/maps/obj/waypoint.tx" x="469.333" y="529.333"/>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="478.666" y="578.666">
+   <properties>
+    <property name="enemy" value="Ghalta"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="1120" y="-15.3585" width="16" height="827.384"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="-16.6667" y="-17.692" width="16" height="827.384"/>
+  <object id="104" template="../../../../common/maps/obj/waypoint.tx" x="179.333" y="688.667"/>
+  <object id="105" template="../../../../common/maps/obj/waypoint.tx" x="121.333" y="534"/>
+  <object id="108" template="../../../../common/maps/obj/waypoint.tx" x="308.667" y="796"/>
+  <object id="109" template="../../../../common/maps/obj/enemy.tx" x="798" y="263.333">
+   <properties>
+    <property name="displayNameOverride" value=""/>
+    <property name="enemy" value="Pantlaza"/>
+    <property name="speedModifier" type="float" value="5"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/manashards.tx" x="863.333" y="593.333">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/manashards.tx" x="143.333" y="386.667"/>
+  <object id="113" template="../../../../common/maps/obj/manashards.tx" x="442.667" y="610">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="114" template="../../../../common/maps/obj/manashards.tx" x="718" y="438.667">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/waypoint.tx" x="178.667" y="390"/>
+  <object id="117" template="../../../../common/maps/obj/enemy.tx" x="214" y="460.667">
+   <properties>
+    <property name="enemy" value="Zilortha"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="116,118,96,95,96,118,116"/>
+   </properties>
+  </object>
+  <object id="118" template="../../../../common/maps/obj/waypoint.tx" x="224" y="510.667"/>
+  <object id="119" template="../../../../common/maps/obj/enemy.tx" x="740.667" y="505.333">
+   <properties>
+    <property name="enemy" value="Etali"/>
+    <property name="speedModifier" type="float" value="4"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="93,126,79,126"/>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/waypoint.tx" x="577.333" y="550"/>
+  <object id="121" template="../../../../common/maps/obj/waypoint.tx" x="584.667" y="697.333"/>
+  <object id="125" template="../../../../common/maps/obj/waypoint.tx" x="256" y="537.333"/>
+  <object id="126" template="../../../../common/maps/obj/waypoint.tx" x="800" y="467.333"/>
+  <object id="127" template="../../../../common/maps/obj/dialog.tx" x="545" y="769.25" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A vast valley looms before you. Colossal dinosaurs loom over the tops of the ancient trees, the echoes of their heavy footsteps audible even from the great distance. 
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="128" template="../../../../common/maps/obj/dialog.tx" x="519" y="350.25" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A colossal dinosaur looms ahead. Three overlapping roars nearly deafen you as each of its trio of heads slavers hungrily.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="129" template="../../../../common/maps/obj/dialog.tx" x="526" y="413.75" width="128" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A woman stands ahead, guarding a clutch of dinosaur eggs. 
+
+'Your trampling through this valley is over. Proceed, and I will put an end to you.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="130" template="../../../../common/maps/obj/manashards.tx" x="96" y="490"/>
+  <object id="131" template="../../../../common/maps/obj/manashards.tx" x="1056" y="501"/>
+  <object id="132" template="../../../../common/maps/obj/dialog.tx" x="367" y="146.75" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The dinosaur ahead seems stronger than the others, and perhaps more clever as well. It almost seems to smile as it bears its massive teeth in your direction.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="133" template="../../../../common/maps/obj/dialog.tx" x="654.121" y="740.008" width="21.0909" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;WARNING: Dinosaurs ahead. Do not proceed unless you wish to go extinct as well.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="134" template="../../obj/treasure.tx" x="732" y="184">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;Red&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;White&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="135" template="../../obj/treasure.tx" x="474" y="89">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="136" template="../../obj/treasure.tx" x="552" y="246.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;Red&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;White&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="137" template="../../../../common/maps/obj/enemy.tx" x="434" y="120">
+   <properties>
+    <property name="displayNameOverride" value=""/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Frilled Deathspitter|RIX&quot;, &quot;Strider Harness|RIX&quot;]}"/>
+    <property name="enemy" value="Gishath"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="138" template="../../../../common/maps/obj/enemy.tx" x="559.833" y="366.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;dinosaur egg|lcc&quot;, &quot;Triassic Egg|LEG&quot;]}"/>
+    <property name="enemy" value="Atla Palani"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="139" template="../../../../common/maps/obj/enemy.tx" x="552" y="273">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With three great dying roars, the colossal dinosaur falls back. The whole valley shakes with the impact as an entire grove of trees is crushed under its weight.&quot;,
+	   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Strider Harness|RIX&quot;, &quot;Jungle Shrine|LCC&quot;, &quot;Poetic Ingenuity|LCI&quot;]}"/>
+    <property name="enemy" value="Zacama"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="140" template="../../../../common/maps/obj/shop.tx" x="497.5" y="709.5">
+   <properties>
+    <property name="commonShopList" value="Dinosaur"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

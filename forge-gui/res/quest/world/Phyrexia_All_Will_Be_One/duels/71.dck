@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Philipp_Seeber_-_Jeskai_Control_(Modern,_#1607164).dck
+Deck Type=constructed
+
+[Main]
+1 Elesh Norn, Mother of Machines
+4 Fury
+3 Lightning Angel
+4 Mantis Rider
+4 Ragavan, Nimble Pilferer
+4 Solitude
+4 Subtlety
+1 Timeless Dragon
+1 Defabricate
+1 Dovin's Veto
+4 Ephemerate
+1 Force of Negation
+1 March of Otherworldly Light
+4 Expressive Iteration
+1 Touch the Spirit Realm
+1 Teferi, Time Raveler
+4 Arid Mesa
+4 Flooded Strand
+2 Hallowed Fountain
+2 Island
+3 Marsh Flats
+1 Mountain
+2 Plains
+1 Raugrin Triome
+2 Sacred Foundry
+[Sideboard]
+1 Defabricate
+2 March of Otherworldly Light
+1 Soul-Guide Lantern
+2 Magus of the Moon
+2 Blood Moon
+3 Deputy of Detention
+2 Teferi, Time Raveler
+2 Force of Negation

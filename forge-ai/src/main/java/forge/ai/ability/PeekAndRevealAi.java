@@ -49,7 +49,7 @@ public class PeekAndRevealAi extends SpellAbilityAi {
         }
 
         if ("X".equals(sa.getParam("PeekAmount")) && sa.getSVar("X").equals("Count$xPaid")) {
-            int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
+            int xPay = ComputerUtilCost.setMaxXValue(sa, aiPlayer, sa.isTrigger());
             if (xPay == 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }

@@ -1,0 +1,9 @@
+Name:Guac & Marshmallow Pizza
+ManaCost:G
+Types:Artifact Food
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this artifact enters, target creature gets +2/+2 until end of turn. Untap it.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this artifact> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+Oracle:Flash\nWhen this artifact enters, target creature gets +2/+2 until end of turn. Untap it.\n{2}, {T}, Sacrifice this artifact: You gain 3 life.

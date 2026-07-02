@@ -7,12 +7,12 @@ import forge.game.Game;
 import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
+import org.tinylog.Logger;
 
 public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
 
     private String aiProfile = "";
     private boolean rotateProfileEachGame;
-    private boolean allowCheatShuffle;
     private boolean useSimulation;
 
     public LobbyPlayerAi(String name, Set<AIOption> options) {
@@ -22,14 +22,8 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
         }
     }
 
-    public boolean isAllowCheatShuffle() {
-        return allowCheatShuffle;
-    }
-    public void setAllowCheatShuffle(boolean allowCheatShuffle) {
-        this.allowCheatShuffle = allowCheatShuffle;
-    }
-
     public void setAiProfile(String profileName) {
+        Logger.debug("[AI Preferences] " + name + " using profile " + profileName);
         aiProfile = profileName;
     }
     public String getAiProfile() {
@@ -43,7 +37,6 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
     private PlayerControllerAi createControllerFor(Player ai) {
         PlayerControllerAi result = new PlayerControllerAi(ai.getGame(), ai, this);
         result.setUseSimulation(useSimulation);
-        result.allowCheatShuffle(allowCheatShuffle);
         return result;
     }
 
@@ -59,7 +52,6 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
 
         if (rotateProfileEachGame) {
             setAiProfile(AiProfileUtil.getRandomProfile());
-            /*System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", getAiProfile(), getName()));*/
         }
         return ai;
     }

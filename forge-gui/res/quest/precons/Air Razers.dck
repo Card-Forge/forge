@@ -20,8 +20,12 @@ Image=air_razers.jpg
 2 Shower of Coals|ODY
 1 Scalpelexis|JUD
 1 Concentrate|ODY
-12 Island|ODY
-12 Mountain|ODY
+4 Island|ODY|1
+4 Island|ODY|2
+4 Island|ODY|3
+4 Mountain|ODY|1
+4 Mountain|ODY|2
+4 Mountain|ODY|3
 2 Aven Fisher|ODY
 2 Fiery Temper|TOR
 1 Wonder|JUD

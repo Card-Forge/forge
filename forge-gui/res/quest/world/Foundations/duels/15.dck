@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Denethor
+Title=Denethor
+Icon=Denethor.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/Jake_Houtz_-_Boros_Aggro_(Standard,_#2275458).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+2 Fugitive Codebreaker
+4 Slickshot Show-Off
+4 Hired Claw
+4 Emberheart Challenger
+4 Boros Charm
+2 Shock
+4 Monstrous Rage
+4 Burst Lightning
+4 Lightning Helix
+4 Boltwave
+1 Rockface Village
+4 Battlefield Forge
+4 Inspiring Vantage
+11 Mountain
+[Sideboard]
+2 Scorching Shot
+2 Fugitive Codebreaker
+2 Obliterating Bolt
+4 Urabrask's Forge
+2 Torch the Tower
+3 Screaming Nemesis

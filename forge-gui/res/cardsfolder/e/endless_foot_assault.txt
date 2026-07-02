@@ -1,0 +1,10 @@
+Name:Endless Foot Assault
+ManaCost:2 W
+Types:Enchantment
+K:Squad:1 W
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ DBRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, for each opponent, create a 1/1 black Ninja creature token that's tapped and attacking that player.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | ChangeZoneTable$ True | RepeatSubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ b_1_1_ninja | TokenTapped$ True | TokenAttacking$ RememberedPlayer | TokenOwner$ You
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:Squad {1}{W} (As an additional cost to cast this spell, you may pay {1}{W} any number of times. When this enchantment enters, create that many tokens that are copies of it.)\nWhenever you attack, for each opponent, create a 1/1 black Ninja creature token that's tapped and attacking that player.

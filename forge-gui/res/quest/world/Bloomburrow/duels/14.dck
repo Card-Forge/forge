@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=StAnastacia
+Title=StAnastacia
+Icon=StAnastacia.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/MackSmith_-_Boros_Forge_(Standard,_#2162150).dck
+Deck Type=constructed
+
+[Main]
+3 Beza, the Bounding Spring
+4 Carrot Cake
+4 Urabrask's Forge
+4 Get Lost
+4 Lightning Helix
+4 Torch the Tower
+2 Virtue of Loyalty
+2 Sunfall
+1 White Sun's Twilight
+4 Caretaker's Talent
+3 Temporary Lockdown
+3 Battlefield Forge
+4 Elegant Parlor
+4 Fountainport
+3 Inspiring Vantage
+1 Mirrex
+4 Plains
+2 Mountain
+4 Sunken Citadel
+[Sideboard]
+3 Abrade
+3 Archangel Elspeth
+2 Destroy Evil
+2 Kutzil's Flanker
+2 Loran of the Third Path
+2 Sunspine Lynx
+1 Temporary Lockdown

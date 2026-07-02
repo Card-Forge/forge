@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=King Arthur
+Title=King Arthur
+Icon=King Arthur.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/SCG_Invitational_Qualifier_Salem/Kyle_Anderson_-_Mono_Black_(Standard,_#81404).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Desecration Demon
+4 Gray Merchant of Asphodel
+2 Lifebane Zombie
+4 Nightveil Specter
+4 Pack Rat
+1 Bile Blight
+4 Devour Flesh
+4 Hero's Downfall
+4 Thoughtseize
+4 Underworld Connections
+4 Mutavault
+21 Swamp
+[Sideboard]
+2 Dark Betrayal
+1 Doom Blade
+2 Drown in Sorrow
+3 Duress
+1 Erebos, God of the Dead
+1 Liliana Vess
+1 Pharika's Cure
+2 Staff of the Death Magus
+1 Whip of Erebos

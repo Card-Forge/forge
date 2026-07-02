@@ -5,7 +5,7 @@ A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseKeep | SubA
 SVar:DBChooseKeep:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.RememberedPlayerCtrl | MinAmount$ 0 | Amount$ Count$Valid Creature.RememberedPlayerCtrl | RememberChosen$ True
 SVar:DBRepeatPay:DB$ RepeatEach | RepeatPlayers$ Player | LoseLifeMap$ True | RepeatSubAbility$ DBPay | SubAbility$ DBSacAll
 SVar:DBPay:DB$ Pump | ForgetObjects$ Valid Creature.RememberedPlayerCtrl | UnlessCost$ PayLife<Y> | UnlessPayer$ Remembered
-SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Creature.IsNotRemembered | SubAbility$ DBCleanup
+SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Creature.!IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Times.Z

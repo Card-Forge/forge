@@ -171,7 +171,8 @@ The simplest method for creating an effect on your card is to find another card 
 Unzipping this file will sllow you to search for any card in the containing subfolders. 
 
 # Custom mechanics
-We don't accept new mechanics from outside of official Cards into the main repository. This restriction is needed to keep the engine healthy.
+We don't accept new mechanics from outside of official Cards into the main repository. This restriction is needed to keep the engine healthy.  
+The exception would be if you want to integrate them into adventure gameplay, but that'll require a pretty clean implementation.
 
 However there is some support to simulate them using named abilities:
 

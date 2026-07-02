@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Totoro
+Title=Totoro
+Icon=Totoro.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/SCG_Invitational_Qualifier_Statesville/Tim_Krzywicki_-_Naya_Eldrazi_Ramp_(Standard,_#366264).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Dragonlord Atarka
+1 Dragonlord Dromoka
+4 Hangarback Walker
+3 Nissa, Vastwood Seer
+4 Oblivion Sower
+1 Omnath, Locus of Rage
+4 Ulamog, the Ceaseless Hunger
+2 Hedron Archive
+4 Explosive Vegetation
+2 Nissa's Renewal
+3 Sylvan Scrying
+4 Ugin, the Spirit Dragon
+14 Forest
+1 Haven of the Spirit Dragon
+2 Mountain
+1 Plains
+4 Sanctum of Ugin
+4 Shrine of the Forsaken Gods
+[Sideboard]
+3 Feed the Clan
+4 Jaddi Offshoot
+1 Void Winnower
+4 Whisperwood Elemental
+3 Winds of Qal Sisma

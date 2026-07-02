@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 111715 - Closing the Gap
 URL:http://www.gatheringmagic.com/seanuy-111715-closing-the-gap/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description: Win this turn.
 [state]
 ActivePlayer=human

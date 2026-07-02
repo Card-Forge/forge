@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Data
+Title=Data
+Icon=Data.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/2011_TCGplayer.com_TCQ_-_Orlando,_FL_(3-26)/JimmyHartman_-_Valakut_Ramp_(Standard,_#12036).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Inferno Titan
+4 Overgrown Battlement
+4 Primeval Titan
+4 Harrow
+2 Summoning Trap
+4 Explore
+3 Green Sun's Zenith
+3 Slagstorm
+4 Khalni Heart Expedition
+2 Koth of the Hammer
+6 Forest
+11 Mountain
+2 Raging Ravine
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Acidic Slime
+4 Arc Trail
+1 Creeping Corrosion
+2 Gaea's Revenge
+2 Reverberate
+3 Tumble Magnet

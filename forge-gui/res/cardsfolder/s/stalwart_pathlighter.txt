@@ -5,5 +5,5 @@ PT:3/1
 K:Vigilance
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigPumpAll | TriggerDescription$ Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, creatures you control gain indestructible until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible
-SVar:X:Count$DifferentPower_Creature.YouCtrl
+SVar:X:Count$Valid Creature.YouCtrl$DifferentCardPower
 Oracle:Vigilance\nCoven — At the beginning of combat on your turn, if you control three or more creatures with different powers, creatures you control gain indestructible until end of turn.

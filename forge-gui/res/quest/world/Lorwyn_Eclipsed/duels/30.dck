@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=The Very Hungry Caterpillar
+Title=The Very Hungry Caterpillar
+Icon=The Very Hungry Caterpillar.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/KelMasterP_-_Rakdos_Monument_(Standard,_#2796420).dck
+Deck Type=constructed
+
+[Main]
+4 Flamewake Phoenix
+4 Bloodghast
+3 Inti, Seneschal of the Sun
+4 Iron-Shield Elf
+4 Marauding Mako
+2 Tersa Lightshatter
+4 Moonshadow
+4 Bloodthorn Flail
+4 Monument to Endurance
+2 Bitter Triumph
+3 Requiting Hex
+4 Blazemire Verge
+4 Mountain
+4 Blood Crypt
+3 Multiversal Passage
+1 Restless Vents
+4 Starting Town
+2 Swamp
+[Sideboard]
+2 Case of the Crimson Pulse
+3 Sunspine Lynx
+3 Soul-Guide Lantern
+2 Shoot the Sheriff
+3 Pyroclasm
+2 Duress

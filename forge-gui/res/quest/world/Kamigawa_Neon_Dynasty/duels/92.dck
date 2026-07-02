@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Dr Doom
+Title=Dr Doom
+Icon=Dr Doom.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Jacob_Dunlap_-_Azorius_Hammer_(Modern,_#1475038)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Lavinia, Azorius Renegade
+1 The Reality Chip
+2 Giver of Runes
+2 Invisible Stalker
+4 Ornithopter
+4 Esper Sentinel
+4 Puresteel Paladin
+4 Stoneforge Mystic
+1 Shadowspear
+1 Kaldra Compleat
+3 Springleaf Drum
+4 Colossus Hammer
+2 Spell Pierce
+2 Blacksmith's Skill
+4 Urza's Saga
+4 Sigarda's Aid
+1 Silent Clearing
+2 Arid Mesa
+2 Hallowed Fountain
+3 Seachrome Coast
+3 Inkmoth Nexus
+3 Plains
+3 Marsh Flats
+[Sideboard]
+1 Meddling Mage
+1 Relic of Progenitus
+2 Hallowed Moonlight
+2 Path to Exile
+2 Hushbringer
+2 March of Otherworldly Light
+2 Lavinia, Azorius Renegade
+3 Mana Leak

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Robin Hood
+Title=Robin Hood
+Icon=Robin Hood.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/AlpInco_-_Izzet_Spells_(Modern,_#1148671)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Soul-Scar Mage
+4 Sprite Dragon
+4 Stormwing Entity
+4 Monastery Swiftspear
+1 Wild Slash
+2 Vapor Snag
+3 Opt
+3 Mutagenic Growth
+4 Lava Dart
+4 Lightning Bolt
+4 Manamorphose
+4 Expressive Iteration
+1 Wooded Foothills
+1 Bloodstained Mire
+2 Arid Mesa
+2 Scalding Tarn
+2 Steam Vents
+3 Mountain
+4 Spirebluff Canal
+4 Fiery Islet
+[Sideboard]
+1 Brazen Borrower
+1 Bonecrusher Giant
+2 Abrade
+2 Bedlam Reveler
+2 Kozilek's Return
+2 Mystical Dispute
+2 Spell Pierce
+3 Tormod's Crypt

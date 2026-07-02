@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Lupin the Third
+Title=Lupin the Third
+Icon=Lupin the Third.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/1-3drop_-_Jeskai_Cycling_(Standard,_#968933).dck
+Deck Type=constructed
+
+[Main]
+4 Drannith Stinger
+4 Flourishing Fox
+4 Valiant Rescuer
+4 Drannith Healer
+4 Zenith Flare
+4 Startling Development
+4 Frostveil Ambush
+2 Boon of the Wish-Giver
+4 Memory Leak
+4 Go for Blood
+4 Footfall Crater
+4 Sacred Foundry
+5 Mountain
+9 Plains
+[Sideboard]
+1 Lurrus of the Dream-Den
+3 Grafdigger's Cage
+3 Fry
+4 Glass Casket
+4 Apostle of Purifying Light

@@ -1,9 +1,15 @@
 package forge.game.event;
 
 import forge.game.GameEntity;
+import forge.game.GameEntityView;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 
-public record GameEventCardAttachment(Card equipment, GameEntity oldEntity, GameEntity newTarget) implements GameEvent {
+public record GameEventCardAttachment(CardView equipment, GameEntityView oldEntity, GameEntityView newTarget) implements GameEvent {
+
+    public GameEventCardAttachment(Card equipment, GameEntity oldEntity, GameEntity newTarget) {
+        this(CardView.get(equipment), GameEntityView.get(oldEntity), GameEntityView.get(newTarget));
+    }
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Waylon Smithers
+Title=Waylon Smithers
+Icon=Waylon Smithers.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Miles_Wilson_-_Temur_Footfalls_(Modern,_#1192437).dck
+Deck Type=constructed
+
+[Main]
+2 Subtlety
+3 Fury
+4 Shardless Agent
+4 Bonecrusher Giant
+4 Brazen Borrower
+2 Dead // Gone
+3 Prismari Command
+4 Violent Outburst
+4 Force of Negation
+4 Fire // Ice
+4 Crashing Footfalls
+1 Mountain
+1 Breeding Pool
+1 Ketria Triome
+2 Stomping Ground
+2 Island
+2 Steam Vents
+2 Forest
+3 Wooded Foothills
+4 Scalding Tarn
+4 Misty Rainforest
+[Sideboard]
+3 Blood Moon
+4 Endurance
+4 Force of Vigor
+4 Mystical Dispute

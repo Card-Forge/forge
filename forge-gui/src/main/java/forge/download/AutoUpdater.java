@@ -1,6 +1,5 @@
 package forge.download;
 
-import com.google.common.collect.ImmutableList;
 import forge.gui.GuiBase;
 import forge.gui.download.GuiDownloadZipService;
 import forge.gui.util.SOptionPane;
@@ -82,7 +81,7 @@ public class AutoUpdater {
             return false;
         } else if (updateChannel.equals("none")) {
             String message = localizer.getMessage("lblYouHaventSetUpdateChannel");
-            List<String> options = ImmutableList.of(localizer.getMessageorUseDefault("lblCancel", "Cancel"), localizer.getMessageorUseDefault("lblRelease", "Release"), localizer.getMessageorUseDefault("lblSnapshot", "Snapshot"));
+            List<String> options = List.of(localizer.getMessageorUseDefault("lblCancel", "Cancel"), localizer.getMessageorUseDefault("lblRelease", "Release"), localizer.getMessageorUseDefault("lblSnapshot", "Snapshot"));
             int option = SOptionPane.showOptionDialog(message, localizer.getMessage("lblManualCheck"), null, options, 0);
             if (option < 1) {
                 return false;
@@ -144,7 +143,7 @@ public class AutoUpdater {
             }
         }
         catch (Exception e) {
-            SOptionPane.showOptionDialog(e.getMessage(), localizer.getMessage("lblError"), null, ImmutableList.of("Ok"));
+            SOptionPane.showOptionDialog(e.getMessage(), localizer.getMessage("lblError"), null, List.of("Ok"));
             return false;
         }
         // If version doesn't match, it's assummably newer.
@@ -188,7 +187,7 @@ public class AutoUpdater {
         String v = snapsBuildDate.isEmpty() ? version : version + TextUtil.enclosedParen(snapsBuildDate);
         String b = buildDate.isEmpty() ? buildVersion : buildVersion + TextUtil.enclosedParen(buildDate);
         String message = localizer.getMessage("lblNewVersionForgeAvailableUpdateConfirm", v, b) + logs;
-        final List<String> options = ImmutableList.of(localizer.getMessage("lblUpdateNow"), localizer.getMessage("lblUpdateLater"));
+        final List<String> options = List.of(localizer.getMessage("lblUpdateNow"), localizer.getMessage("lblUpdateLater"));
         if (SOptionPane.showOptionDialog(message, localizer.getMessage("lblNewVersionAvailable"), null, options, 0) == 0) {
             return downloadFromForge();
         }
@@ -230,7 +229,7 @@ public class AutoUpdater {
         return false;
     }
     private void restartAndUpdate(String packagePath) {
-        if (SOptionPane.showOptionDialog(localizer.getMessage("lblForgeUpdateMessage", packagePath), localizer.getMessage("lblRestart"), null, ImmutableList.of(localizer.getMessage("lblOK")), 0) == 0) {
+        if (SOptionPane.showOptionDialog(localizer.getMessage("lblForgeUpdateMessage", packagePath), localizer.getMessage("lblRestart"), null, List.of(localizer.getMessage("lblOK")), 0) == 0) {
             final Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
             if (desktop != null) {
                 try {

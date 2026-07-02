@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Mister Fantastic
+Title=Mister Fantastic
+Icon=Mister Fantastic.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/Hase_Shinta_-_Dimir_Murktide_(Modern,_#2527525).dck
+Deck Type=constructed
+
+[Main]
+3 Murktide Regent
+2 Subtlety
+4 Orcish Bowmasters
+4 Psychic Frog
+1 Astrologian's Planisphere
+4 Fatal Push
+4 Counterspell
+3 Spell Snare
+1 Dismember
+3 Force of Negation
+4 Thoughtseize
+4 Preordain
+4 Lórien Revealed
+2 Pest Control
+2 Island
+1 Swamp
+1 Hallowed Fountain
+2 Watery Grave
+4 Flooded Strand
+4 Polluted Delta
+1 Meticulous Archive
+2 Undercity Sewers
+[Sideboard]
+1 Vindicate
+1 Celestial Purge
+2 Nihil Spellbomb
+1 Containment Priest
+1 Mystical Dispute
+2 Stern Scolding
+1 Pest Control
+4 Consign to Memory
+2 Harbinger of the Seas

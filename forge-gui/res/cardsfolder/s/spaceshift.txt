@@ -1,0 +1,7 @@
+Name:Spaceshift
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Artifact,Creature | ValidTgtsDesc$ artifact or creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile target artifact or creature, then return that card to the battlefield under its owner's control with a +1/+1 counter on it.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | WithCountersType$ P1P1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Exile target artifact or creature, then return that card to the battlefield under its owner's control with a +1/+1 counter on it.

@@ -66,7 +66,6 @@ import java.util.Map;
  */
 public abstract class GameStage extends Stage {
 
-
     private final OrthographicCamera camera;
     Group backgroundSprites;
     SpriteGroup foregroundSprites;
@@ -254,7 +253,6 @@ public abstract class GameStage extends Stage {
     }
 
     public boolean axisMoved(Controller controller, int axisIndex, float value) {
-
         if (MapStage.getInstance().isDialogOnlyInput() || isPaused()) {
             return true;
         }
@@ -272,11 +270,7 @@ public abstract class GameStage extends Stage {
     HashMap<PlayerModification, Float> currentModifications = new HashMap<>();
 
     public void modifyPlayer(PlayerModification mod, float value) {
-        float currentValue = 0;
-        if (currentModifications.containsKey(mod)) {
-            currentValue = currentModifications.get(mod);
-        }
-        currentModifications.put(mod, currentValue + value);
+        currentModifications.merge(mod, value, Float::sum);
     }
 
     public void flyFor(float value) {
@@ -344,7 +338,6 @@ public abstract class GameStage extends Stage {
         }
         return player;
     }
-
 
     public SpriteGroup getSpriteGroup() {
         return foregroundSprites;

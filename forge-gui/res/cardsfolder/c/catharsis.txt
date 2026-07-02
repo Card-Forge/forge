@@ -1,0 +1,11 @@
+Name:Catharsis
+ManaCost:4 RW RW
+Types:Creature Elemental Incarnation
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ CastSA>Count$Adamant_2.White.2.0 | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, if {W}{W} was spent to cast it, create two 1/1 green and white Kithkin creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ gw_1_1_kithkin
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ CastSA>Count$Adamant_2.Red.2.0 | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When this creature enters, if {R}{R} was spent to cast it, creatures you control get +1/+1 and gain haste until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Haste | NumAtt$ +1 | NumDef$ +1
+K:Evoke:RW RW
+DeckHas:Ability$Token
+Oracle:When this creature enters, if {W}{W} was spent to cast it, create two 1/1 green and white Kithkin creature tokens.\nWhen this creature enters, if {R}{R} was spent to cast it, creatures you control get +1/+1 and gain haste until end of turn.\nEvoke {R/W}{R/W} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)

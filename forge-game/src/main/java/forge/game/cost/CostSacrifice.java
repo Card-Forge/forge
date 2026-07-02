@@ -156,7 +156,6 @@ public class CostSacrifice extends CostPartWithList {
     @Override
     protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
         final Game game = ability.getHostCard().getGame();
-        // no table there, it is already handled by CostPartWithList
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         AbilityKey.addCardZoneTableParams(moveParams, table);
 

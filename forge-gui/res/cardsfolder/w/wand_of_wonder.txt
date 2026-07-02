@@ -6,7 +6,7 @@ SVar:DBX1:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 1 | SubAbility$ D
 SVar:DBX2:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 2 | SubAbility$ DBExile | SpellDescription$ 10—19 VERT X is two.
 SVar:DBX3:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 3 | SubAbility$ DBExile | SpellDescription$ 20 VERT X is three.
 SVar:DBExile:DB$ DigUntil | Defined$ Player.Opponent | Valid$ Instant,Sorcery | FoundDestination$ Exile | RevealedDestination$ Exile | ImprintFound$ True | RememberRevealed$ True | SubAbility$ DBShuffle
-SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsNotImprinted | Origin$ Exile | Destination$ Library | Shuffle$ True | ForgetChanged$ True | SubAbility$ DBPlay
+SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+!IsImprinted | Origin$ Exile | Destination$ Library | Shuffle$ True | ForgetChanged$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ Imprinted | WithoutManaCost$ True | ValidSA$ Instant,Sorcery | Optional$ True | Amount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Number$0

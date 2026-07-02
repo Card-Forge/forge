@@ -1,0 +1,11 @@
+Name:Tokka & Rahzar, Unsupervised
+ManaCost:2 R
+Types:Legendary Creature Turtle Wolf Mutant
+PT:3/3
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.Other+!token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivationLimit$ 1 | TriggerDescription$ Whenever another nontoken creature you control leaves the battlefield, put a +1/+1 counter on NICKNAME and create a Treasure token. This ability triggers only once each turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Token|Sacrifice
+DeckHints:Ability$Counters
+Oracle:First strike\nWhenever another nontoken creature you control leaves the battlefield, put a +1/+1 counter on Tokka & Rahzar and create a Treasure token. This ability triggers only once each turn.

@@ -1,0 +1,6 @@
+Name:I Am Iron Man
+ManaCost:2 U
+Types:Instant
+A:SP$ Animate | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | Types$ Artifact,Creature | Power$ 4 | Toughness$ 4 | Keywords$ Flying | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/4 and gains flying.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:Until end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/4 and gains flying.\nDraw a card.

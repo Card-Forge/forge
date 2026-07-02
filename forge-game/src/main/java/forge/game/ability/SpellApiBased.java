@@ -15,7 +15,6 @@ public class SpellApiBased extends Spell {
         super(sourceCard, abCost);
         this.setTargetRestrictions(tgt);
 
-        originalMapParams.putAll(params0);
         mapParams.putAll(params0);
         api = api0;
         effect = api.getSpellEffect();
@@ -24,6 +23,7 @@ public class SpellApiBased extends Spell {
         this.setIntrinsic(true);
 
         effect.buildSpellAbility(this);
+        originalMapParams.putAll(mapParams);
     }
 
     @Override

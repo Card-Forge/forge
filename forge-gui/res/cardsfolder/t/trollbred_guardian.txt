@@ -2,7 +2,7 @@ Name:Trollbred Guardian
 ManaCost:4 G
 Types:Creature Troll Frog Warrior
 PT:5/5
-K:Adapt:2:2 G
+A:AB$ PutCounter | Cost$ 2 G | Adapt$ 2
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Each creature you control with a +1/+1 counter on it has trample.
 DeckHas:Ability$Counters
 DeckHints:Ability$Counters

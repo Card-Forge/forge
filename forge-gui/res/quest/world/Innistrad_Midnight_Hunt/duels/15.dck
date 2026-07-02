@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Lull_N_-_Azorius_Tempo_(Standard,_#1217240).dck
+Deck Type=constructed
+
+[Main]
+1 Loyal Warhound
+1 Brutal Cathar
+2 Legion Angel
+2 Malevolent Hermit
+3 Reidane, God of the Worthy
+4 Intrepid Adversary
+4 Luminarch Aspirant
+4 Spectral Adversary
+4 Elite Spellbinder
+1 Maul of the Skyclaves
+1 Fateful Absence
+2 Jwari Disruption
+3 Concerted Defense
+4 Fading Hope
+1 Hall of Storm Giants
+2 Deserted Beach
+3 Cave of the Frost Dragon
+4 Hengegate Pathway
+5 Plains
+9 Island
+[Sideboard]
+1 Portable Hole
+1 Maul of the Skyclaves
+1 Concerted Defense
+1 Ray of Frost
+2 Malevolent Hermit
+2 Loyal Warhound
+2 Legion Angel
+2 Fateful Absence
+3 Brutal Cathar

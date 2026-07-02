@@ -1,7 +1,6 @@
 package forge.game.card.token;
 
 import com.google.common.base.Joiner;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ImageKeys;
 import forge.StaticData;
@@ -10,24 +9,32 @@ import forge.card.ColorSet;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardUtil;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TokenInfo {
+    // Per-game pin so same-type tokens share art. Weak keys GC finished games.
+    private static final Map<Game, Map<String, String>> TOKEN_EDITION_PINS =
+            java.util.Collections.synchronizedMap(new WeakHashMap<>());
+
+    private static Map<String, String> getPinsFor(Game game) {
+        return TOKEN_EDITION_PINS.computeIfAbsent(game, g -> new ConcurrentHashMap<>());
+    }
+
     final String name;
     final String imageName;
     final String manaCost;
@@ -118,7 +125,7 @@ public class TokenInfo {
         c.setName(name);
         c.setImageKey(ImageKeys.getTokenKey(imageName));
 
-        c.setColor(color == null ? ColorSet.fromManaCost(new ManaCost(new ManaCostParser(manaCost))) : color);
+        c.setColor(color == null ? ColorSet.fromManaCost(new ManaCost(manaCost)) : color);
         c.setGamePieceType(GamePieceType.TOKEN);
 
         for (final String t : types) {
@@ -147,7 +154,6 @@ public class TokenInfo {
     public Card makeOneToken(final Player controller) {
         return makeOneToken(controller, controller.getGame().nextCardId());
     }
-
     public Card makeOneToken(final Player controller, int id) {
         final Game game = controller.getGame();
         final Card c = toCard(game, id);
@@ -200,7 +206,7 @@ public class TokenInfo {
             final boolean nameGenerated = result.getName().endsWith(" Token");
             boolean typeChanged = false;
 
-            if (!Iterables.isEmpty(type.getSubtypes())) {
+            if (!type.getSubtypes().isEmpty()) {
                 for (final Map.Entry<String, String> e : typeMap.entrySet()) {
                     if (type.hasSubtype(e.getKey())) {
                         type.remove(e.getKey());
@@ -225,41 +231,7 @@ public class TokenInfo {
         List<String> toAdd = Lists.newArrayList();
         for (final KeywordInterface k : result.getCurrentState().getIntrinsicKeywords()) {
             final String o = k.getOriginal();
-            // only Modifiable should go there
-            if (!CardUtil.isKeywordModifiable(o)) {
-                continue;
-            }
-            String r = o;
-            // replace types
-            for (final Map.Entry<String, String> e : typeMap.entrySet()) {
-                final String key = e.getKey();
-                final String pkey = CardType.getPluralType(key);
-                final String value = e.getValue();
-                final String pvalue = CardType.getPluralType(e.getValue());
-                r = r.replaceAll(pkey, pvalue);
-                r = r.replaceAll(key, value);
-            }
-            // replace color words
-            for (final Map.Entry<String, String> e : colorMap.entrySet()) {
-                final String vName = e.getValue();
-                final String vCaps = StringUtils.capitalize(vName);
-                final String vLow = vName.toLowerCase();
-                if ("Any".equals(e.getKey())) {
-                    for (final byte c : MagicColor.WUBRG) {
-                        final String cName = MagicColor.toLongString(c);
-                        final String cNameCaps = StringUtils.capitalize(cName);
-                        final String cNameLow = cName.toLowerCase();
-                        r = r.replaceAll(cNameCaps, vCaps);
-                        r = r.replaceAll(cNameLow, vLow);
-                    }
-                } else {
-                    final String cName = e.getKey();
-                    final String cNameCaps = StringUtils.capitalize(cName);
-                    final String cNameLow = cName.toLowerCase();
-                    r = r.replaceAll(cNameCaps, vCaps);
-                    r = r.replaceAll(cNameLow, vLow);
-                }
-            }
+            String r = AbilityUtils.applyKeywordTextChangeEffects(o, colorMap, typeMap);
             if (!r.equals(o)) {
                 toRemove.add(k);
                 toAdd.add(r);
@@ -288,9 +260,15 @@ public class TokenInfo {
         if (sa.getKeyword() != null && sa.getKeyword().getStatic() != null) {
             editionHost = sa.getKeyword().getStatic().getHostCard();
         }
-        String edition = ObjectUtils.firstNonNull(editionHost, host).getSetCode();
-        edition = ObjectUtils.firstNonNull(StaticData.instance().getCardEdition(edition).getTokenSet(script), edition);
+        String edition = Objects.requireNonNullElse(editionHost, host).getSetCode();
+        edition = Objects.requireNonNullElse(StaticData.instance().getCardEdition(edition).getTokenSet(script), edition);
+        Map<String, String> pins = getPinsFor(game);
+        String pinned = pins.get(script);
+        if (pinned != null) edition = pinned;
         PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
+        if (token != null && pinned == null) {
+            pins.put(script, token.getEdition());
+        }
 
         if (token == null) {
             return null;

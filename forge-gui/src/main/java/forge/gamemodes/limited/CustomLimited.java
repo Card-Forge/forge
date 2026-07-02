@@ -65,6 +65,8 @@ public class CustomLimited extends DeckBase {
     /** The Num packs. */
     private int numPacks = 3;
 
+    private int numPlayers = 8;
+
     private transient ItemPool<PaperCard> cardPool;
 
     /** The Land set code. */
@@ -116,6 +118,7 @@ public class CustomLimited extends DeckBase {
         cd.landSetCode = data.get("LandSetCode");
         cd.numPacks = data.getInt("NumPacks");
         cd.singleton = data.getBoolean("Singleton");
+        cd.numPlayers = data.getInt("NumPlayers");
         cd.customRankingsFile = data.get("CustomRankings", "rankings_cubecobra.txt");
         final Deck deckCube = cubes.get(data.get("DeckFile"));
         cd.cardPool = deckCube == null ? ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class) : deckCube.getMain();
@@ -140,6 +143,25 @@ public class CustomLimited extends DeckBase {
      */
     public void setNumPacks(final int numPacksIn) {
         this.numPacks = numPacksIn;
+    }
+
+    /**
+     * Gets the num players.
+     * 
+     * @return the numPlayers
+     */
+    public int getNumPlayers() {
+        return this.numPlayers;
+    }
+
+    /**
+     * Sets the num players.
+     * 
+     * @param numPlayersIn
+     *            the numPlayers to set
+     */
+    public void setNumPlayers(final int numPlayersIn) {
+        this.numPlayers = numPlayersIn;
     }
 
     /**

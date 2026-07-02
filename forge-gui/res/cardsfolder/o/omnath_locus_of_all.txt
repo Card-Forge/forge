@@ -1,5 +1,5 @@
 Name:Omnath, Locus of All
-ManaCost:W U PB R G
+ManaCost:W U BP R G
 Types:Legendary Creature Phyrexian Elemental
 PT:4/4
 R:Event$ LoseMana | ValidPlayer$ You | ReplacementResult$ Replaced | ReplaceWith$ ConvertMana | ActiveZones$ Battlefield | Description$ If you would lose unspent mana, that mana becomes black instead.

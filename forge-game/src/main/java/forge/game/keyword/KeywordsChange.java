@@ -23,6 +23,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.game.card.Card;
+import forge.game.card.ICardTraitChanges;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -35,9 +36,9 @@ import forge.game.trigger.Trigger;
  *
  * @author Forge
  */
-public class KeywordsChange implements Cloneable {
+public class KeywordsChange implements ICardTraitChanges, IKeywordsChange, Cloneable {
     private KeywordCollection keywords = new KeywordCollection();
-    private List<KeywordInterface> removeKeywordInterfaces = Lists.newArrayList();
+    private KeywordCollection removeKeywordInterfaces = new KeywordCollection();
     private List<String> removeKeywords = Lists.newArrayList();
     private boolean removeAllKeywords;
 
@@ -72,7 +73,7 @@ public class KeywordsChange implements Cloneable {
         }
 
         if (removeKeywordInterfaces != null) {
-            this.removeKeywordInterfaces.addAll(removeKeywordInterfaces);
+            this.removeKeywordInterfaces.insertAll(removeKeywordInterfaces);
         }
 
         this.removeAllKeywords = removeAll;
@@ -89,7 +90,7 @@ public class KeywordsChange implements Cloneable {
     }
 
     public final Collection<KeywordInterface> getRemovedKeywordInstances() {
-        return this.removeKeywordInterfaces;
+        return this.removeKeywordInterfaces.getValues();
     }
     /**
      *
@@ -131,17 +132,9 @@ public class KeywordsChange implements Cloneable {
         try {
             KeywordsChange result = (KeywordsChange)super.clone();
 
-            result.keywords = new KeywordCollection();
-            for (KeywordInterface ki : this.keywords.getValues()) {
-                result.keywords.insert(ki.copy(host, lki));
-            }
-
+            result.keywords = this.keywords.copy(host, lki);
             result.removeKeywords = Lists.newArrayList(removeKeywords);
-
-            result.removeKeywordInterfaces = Lists.newArrayList();
-            for (KeywordInterface ki : this.removeKeywordInterfaces) {
-                result.removeKeywordInterfaces.add(ki.copy(host, lki));
-            }
+            result.removeKeywordInterfaces = this.removeKeywordInterfaces.copy(host, lki);
 
             return result;
         }  catch (final Exception ex) {
@@ -149,45 +142,41 @@ public class KeywordsChange implements Cloneable {
         }
     }
 
-    /**
-     * @return the triggers
-     */
-    public Collection<Trigger> getTriggers() {
-        List<Trigger> result = Lists.newArrayList();
-        for (KeywordInterface k : this.keywords.getValues()) {
-            result.addAll(k.getTriggers());
-        }
-        return result;
+    public List<SpellAbility> applySpellAbility(List<SpellAbility> list) {
+        return keywords.applySpellAbility(list);
     }
-    /**
-     * @return the replacements
-     */
-    public Collection<ReplacementEffect> getReplacements() {
-        List<ReplacementEffect> result = Lists.newArrayList();
-        for (KeywordInterface k : this.keywords.getValues()) {
-            result.addAll(k.getReplacements());
-        }
-        return result;
+    public List<Trigger> applyTrigger(List<Trigger> list) {
+        return keywords.applyTrigger(list);
     }
-    /**
-     * @return the abilities
-     */
-    public Collection<SpellAbility> getAbilities() {
-        List<SpellAbility> result = Lists.newArrayList();
-        for (KeywordInterface k : this.keywords.getValues()) {
-            result.addAll(k.getAbilities());
-        }
-        return result;
+    public List<ReplacementEffect> applyReplacementEffect(List<ReplacementEffect> list) {
+        return keywords.applyReplacementEffect(list);
     }
-    /**
-     * @return the staticAbilities
-     */
-    public Collection<StaticAbility> getStaticAbilities() {
-        List<StaticAbility> result = Lists.newArrayList();
-        for (KeywordInterface k : this.keywords.getValues()) {
-            result.addAll(k.getStaticAbilities());
+    public List<StaticAbility> applyStaticAbility(List<StaticAbility> list) {
+        return keywords.applyStaticAbility(list);
+    }
+
+    public void applyKeywords(KeywordCollection list) {
+        if (isRemoveAllKeywords()) {
+            list.clear();
         }
-        return result;
+        else if (getRemoveKeywords() != null) {
+            list.removeAll(getRemoveKeywords());
+        }
+
+        list.removeInstances(getRemovedKeywordInstances());
+
+        if (getKeywords() != null) {
+            list.insertAll(getKeywords());
+        }
+    }
+
+    public boolean hasTraits() {
+        for (KeywordInterface k : this.keywords.getValues()) {
+            if (k.hasTraits()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /* (non-Javadoc)

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Obatala
+Title=Obatala
+Icon=Obatala.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Nishioka_Shuhei_-_Caverns_(Standard,_#1981644).dck
+Deck Type=constructed
+
+[Main]
+1 Thrun, Breaker of Silence
+3 Gargantuan Leech
+2 March of Otherworldly Light
+1 Union of the Third Path
+3 Virtue of Loyalty
+3 Get Lost
+3 Sunfall
+2 Calamitous Cave-In
+3 Cosmium Confluence
+4 Up the Beanstalk
+4 Bat Colony
+4 Spelunking
+1 Plains
+1 Swamp
+1 Forest
+4 Captivating Cave
+4 Cavernous Maw
+4 Forgotten Monument
+1 Hidden Courtyard
+1 Hidden Necropolis
+1 Hidden Nursery
+2 Promising Vein
+4 Sunken Citadel
+4 Volatile Fault
+[Sideboard]
+2 Soul-Guide Lantern
+1 Farewell
+3 Knockout Blow
+2 Temporary Lockdown
+3 Tear Asunder
+1 Thrun, Breaker of Silence
+1 Sunfall
+2 Kutzil's Flanker

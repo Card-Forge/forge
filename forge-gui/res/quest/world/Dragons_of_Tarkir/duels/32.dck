@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Legolas
+Title=Legolas
+Icon=Legolas.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/SCG_Premier_IQ_Worcester/Oliver_Tiu_-_Bant_Megamorph_(Standard,_#242122).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Courser of Kruphix
+4 Deathmist Raptor
+4 Den Protector
+1 Dragonlord Atarka
+2 Dragonlord Dromoka
+3 Dragonlord Ojutai
+2 Dragonlord Silumgar
+4 Satyr Wayfinder
+4 Sylvan Caryatid
+2 Foul-Tongue Invocation
+2 Hero's Downfall
+1 Murderous Cut
+3 Thoughtseize
+2 Forest
+4 Haven of the Spirit Dragon
+3 Llanowar Wastes
+4 Opulent Palace
+1 Plains
+1 Sandsteppe Citadel
+1 Temple of Deceit
+4 Temple of Malady
+2 Urborg, Tomb of Yawgmoth
+3 Windswept Heath
+[Sideboard]
+2 Bile Blight
+1 Crux of Fate
+4 Drown in Sorrow
+1 Silumgar, the Drifting Death
+1 Ultimate Price
+1 Utter End

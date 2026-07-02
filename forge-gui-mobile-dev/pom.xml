@@ -9,7 +9,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>${revision}</version>
+        <version>2.0.13</version>
     </parent>
 
     <artifactId>forge-gui-mobile-dev</artifactId>
@@ -145,9 +145,9 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <attach>false</attach>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
+                    <descriptors>
+                        <descriptor>src/main/assembly/jar-with-dependencies.xml</descriptor>
+                    </descriptors>
                     <archive>
                         <manifestEntries>
                             <Implementation-Title>${project.name}</Implementation-Title>

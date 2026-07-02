@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=King Arthur
+Title=King Arthur
+Icon=King Arthur.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/Open_de_Modern_Asgard_Badalona/Isaac_Fernandez_-_Dredge_(Modern,_#459761).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+4 Gravecrawler
+3 Gurmag Angler
+4 Hedron Crab
+4 Lotleth Troll
+2 Noble Hierarch
+1 Rotting Rats
+1 Satyr Wayfinder
+4 Vengevine
+3 Abrupt Decay
+2 Grisly Salvage
+2 Murderous Cut
+2 Stubborn Denial
+3 Tracker's Instincts
+2 Breeding Pool
+2 Forest
+3 Misty Rainforest
+2 Overgrown Tomb
+3 Polluted Delta
+1 Stomping Ground
+2 Swamp
+4 Verdant Catacombs
+2 Watery Grave
+[Sideboard]
+4 Ancient Grudge
+1 Damnation
+1 Darkblast
+3 Gnaw to the Bone
+2 Golgari Charm
+2 Memory's Journey

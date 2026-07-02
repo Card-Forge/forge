@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Negoogunogumbar
+Title=Negoogunogumbar
+Icon=Negoogunogumbar.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Alan_Ngo_-_Azorius_Affinity_(Modern,_#1409582)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Urza, Lord High Artificer
+4 Ingenious Smith
+4 Esper Sentinel
+4 Memnite
+4 Thought Monitor
+1 Relic of Progenitus
+1 Aether Spellbomb
+1 Shadowspear
+1 Nettlecyst
+3 Springleaf Drum
+4 Portable Hole
+3 Metallic Rebuke
+3 Thoughtcast
+4 Urza's Saga
+2 Teferi, Time Raveler
+1 Plains
+1 Island
+1 Otawara, Soaring City
+2 Hallowed Fountain
+3 Seachrome Coast
+3 Razortide Bridge
+3 Flooded Strand
+4 Darksteel Citadel
+[Sideboard]
+1 Teferi, Time Raveler
+1 Relic of Progenitus
+1 Pithing Needle
+1 Disenchant
+2 Kor Firewalker
+2 Meddling Mage
+2 Spell Pierce
+2 Flusterstorm
+3 Dispatch

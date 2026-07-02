@@ -1,7 +1,6 @@
 Name:Armed with Proof
 ManaCost:2 W
 Types:Enchantment
-Oracle:
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters, investigate twice. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate | Num$ 2
 S:Mode$ Continuous | Affected$ Clue.YouCtrl | AddType$ Equipment | AddStaticAbility$ TreasureEquip | AddKeyword$ Equip:2 | Description$ Clues you control are Equipment in addition to their other types and have "Equipped creature gets +2/+0" and equip {2}.

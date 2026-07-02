@@ -33,8 +33,7 @@ public class SetStateAi extends SpellAbilityAi {
         }
 
         if (sa.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
-            sa.setXManaCostPaid(xPay);
+            ComputerUtilCost.setMaxXValue(sa, aiPlayer, sa.isTrigger());
         }
 
         if ("Transform".equals(mode) || "Flip".equals(mode)) {
@@ -236,9 +235,10 @@ public class SetStateAi extends SpellAbilityAi {
                 }
 
                 final Card othercard = aiPlayer.getCardsIn(ZoneType.Battlefield, other.getName()).getFirst();
+                CounterType ki = CounterType.getType("KI");
 
                 // for legendary KI counter creatures
-                if (othercard.getCounters(CounterEnumType.KI) >= source.getCounters(CounterEnumType.KI)) {
+                if (othercard.getCounters(ki) >= source.getCounters(ki)) {
                     // if the other legendary is useless try to replace it
                     return ComputerUtilCard.isUselessCreature(aiPlayer, othercard);
                 }

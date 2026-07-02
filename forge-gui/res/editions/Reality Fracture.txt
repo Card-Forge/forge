@@ -1,0 +1,15 @@
+[metadata]
+Code=FRA
+Date=2026-10-02
+Name=Reality Fracture
+Type=Expansion
+ScryfallCode=FRA
+
+[cards]
+49 M Bloodline Recollector @Cynthia Sheppard
+212 M Chandra, Chill of Compliance @Kieran Yanner
+244 M Chandra, Torch of Defiance @Kieran Yanner
+329 M Stingcaster Mage @Gal Or
+402 M Bloodline Recollector @Mark Poole
+427 M Bloodline Recollector @Cynthia Sheppard
+457 M Stingcaster Mage @Gal Or

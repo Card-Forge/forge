@@ -1,0 +1,18 @@
+Name:Lluwen, Exchange Student
+ManaCost:2 B G
+Types:Legendary Creature Elf Druid
+PT:3/4
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ NICKNAME enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+A:AB$ AlterAttribute | Cost$ ExileFromGrave<1/Creature> | Attributes$ Prepared | SorcerySpeed$ True | SpellDescription$ NICKNAME becomes prepared. Activate only as a sorcery.
+AlternateMode:Prepare
+Oracle:Lluwen enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\nExile a creature card from your graveyard: Lluwen becomes prepared. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Pest Friend
+ManaCost:BG
+Types:Sorcery
+A:SP$ Token | TokenScript$ bg_1_1_pest_attack_lifegain | SpellDescription$ Create a 1/1 black and green Pest creature token with "Whenever this token attacks, you gain 1 life."
+DeckHas:Ability$Token
+Oracle:Create a 1/1 black and green Pest creature token with "Whenever this token attacks, you gain 1 life."

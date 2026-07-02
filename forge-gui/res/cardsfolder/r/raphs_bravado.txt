@@ -1,0 +1,6 @@
+Name:Raph's Bravado
+ManaCost:1 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.attacking | AddPower$ 1 | Condition$ PlayerTurn | Description$ During your turn, attacking creatures get +1/+0.
+SVar:PlayMain1:TRUE
+Oracle:During your turn, attacking creatures get +1/+0.

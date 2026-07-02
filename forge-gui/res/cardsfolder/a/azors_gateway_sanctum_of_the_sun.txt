@@ -10,7 +10,7 @@ T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCar
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Y:Remembered$DifferentCMC
+SVar:Y:Remembered$DifferentCardManaCost
 AlternateMode:DoubleFaced
 Oracle:{1}, {T}: Draw a card, then exile a card from your hand. If cards with five or more different mana values are exiled with Azor's Gateway, you gain 5 life, untap Azor's Gateway, and transform it.
 

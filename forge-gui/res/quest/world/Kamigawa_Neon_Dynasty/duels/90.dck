@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Benjamin_Ball_-_Temur_Rhinos_(Modern,_#1519628).dck
+Deck Type=constructed
+
+[Main]
+2 Bonecrusher Giant
+2 Endurance
+3 Fury
+4 Shardless Agent
+4 Brazen Borrower
+2 Dead // Gone
+4 Fire // Ice
+4 Force of Negation
+4 Mystical Dispute
+4 Violent Outburst
+4 Crashing Footfalls
+1 Breeding Pool
+1 Waterlogged Grove
+1 Ketria Triome
+1 Mountain
+1 Stomping Ground
+1 Fiery Islet
+1 Otawara, Soaring City
+1 Boseiju, Who Endures
+2 Forest
+2 Steam Vents
+3 Island
+4 Scalding Tarn
+4 Misty Rainforest
+[Sideboard]
+1 Fury
+1 Thrun, the Last Troll
+2 Subtlety
+2 Endurance
+2 Foundation Breaker
+3 Blood Moon
+4 Force of Vigor

@@ -1,0 +1,7 @@
+Name:EPF Point Squad
+ManaCost:1 RW RW
+Types:Creature Human Soldier
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Alliance — Whenever another creature you control enters, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
+Oracle:Alliance — Whenever another creature you control enters, put a +1/+1 counter on this creature.

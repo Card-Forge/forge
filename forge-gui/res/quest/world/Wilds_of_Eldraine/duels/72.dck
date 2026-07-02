@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Greensaleen_-_Rakdos_Tempo_(Modern,_#1751495).dck
+Deck Type=constructed
+
+[Main]
+2 Bonecrusher Giant
+4 Dauthi Voidwalker
+3 Fable of the Mirror-Breaker
+4 Fury
+4 Grief
+4 Orcish Bowmasters
+4 Ragavan, Nimble Pilferer
+1 Seasoned Pyromancer
+1 Sheoldred, the Apocalypse
+2 Fatal Push
+2 Feign Death
+4 Not Dead After All
+2 Terminate
+3 Thoughtseize
+3 Blackcleave Cliffs
+4 Blood Crypt
+4 Bloodstained Mire
+1 Mountain
+2 Polluted Delta
+3 Swamp
+1 Takenuma, Abandoned Mire
+2 Verdant Catacombs
+[Sideboard]
+3 Blood Moon
+2 Cast into the Fire
+3 Chalice of the Void
+2 Force of Despair
+3 Leyline of the Void
+2 Lightning Bolt

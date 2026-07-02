@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=He-Man
+Title=He-Man
+Icon=He-Man.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/Lennny_-_Azorius_Soldiers_(Standard,_#1543032).dck
+Deck Type=constructed
+
+[Main]
+1 Zephyr Sentinel
+2 Guardian of New Benalia
+2 Siege Veteran
+3 Harbin, Vanguard Aviator
+3 Thalia, Guardian of Thraben
+3 Brutal Cathar
+4 Skystrike Officer
+4 Yotian Frontliner
+4 Valiant Veteran
+4 Recruitment Officer
+4 Resolute Reinforcements
+2 Slip Out the Back
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+2 Island
+2 Mishra's Foundry
+4 Fortified Beachhead
+4 Adarkar Wastes
+4 Secluded Courtyard
+6 Plains
+[Sideboard]
+1 Brutal Cathar
+1 Guardian of New Benalia
+1 Thalia, Guardian of Thraben
+1 Siege Veteran
+2 Loran of the Third Path
+2 Deadly Riposte
+2 Spell Pierce
+2 Protect the Negotiators
+3 Extraction Specialist

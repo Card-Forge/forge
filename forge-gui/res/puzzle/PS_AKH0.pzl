@@ -3,7 +3,7 @@ Name:Possibility Storm - Amonkhet #00
 URL:https://i.redd.it/qpxurj487xty.png
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:Win this turn. Your opponent has activated Gideon of the Trials ultimate (emblem-granting) ability earlier in the game. During your opponent's last turn, they activated Gideon of the Trials's +1 ability targeting your Ayli, Eternal Pilgrim.
 [state]
 ActivePlayer=Human

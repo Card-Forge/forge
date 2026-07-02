@@ -1,0 +1,9 @@
+Name:Gau, Feral Youth|Deck:Gau, Feral Youth.dck|Variant:Commander|Avatar:Gau, Feral Youth|Desc:
+Name:Queen Brahne|Deck:Queen Brahne.dck|Variant:Commander|Avatar:Queen Brahne|Desc:
+Name:Lightning, Security Sergeant|Deck:Lightning, Security Sergeant.dck|Variant:Commander|Avatar:Lightning, Security Sergeant|Desc:
+Name:Freya Crescent|Deck:Freya Crescent.dck|Variant:Commander|Avatar:Freya Crescent|Desc:
+Name:Red Mage|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Celes, Rune Knight|Deck:Celes, Rune Knight.dck|Variant:Commander|Avatar:Celes, Rune Knight|Desc:
+Name:Terra, Herald of Hope|Deck:Terra, Herald of Hope.dck|Variant:Commander|Avatar:Terra, Herald of Hope|Desc:
+Name:Zidane, Tantalus Thief|Deck:Zidane, Tantalus Thief.dck|Variant:Commander|Avatar:Zidane, Tantalus Thief|Desc:
+Name:Gilgamesh, Master-at-Arms|Deck:Gilgamesh, Master-at-Arms.dck|Variant:Commander|Avatar:Gilgamesh, Master-at-Arms|Desc:

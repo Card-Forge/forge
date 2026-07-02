@@ -69,18 +69,17 @@ public class PermanentCreatureAi extends PermanentAi {
         if (card.hasKeyword(Keyword.FLASH) || (!ai.canCastSorcery() && sa.canCastTiming(ai) && !sa.isCastFromPlayEffect())) {
             if (advancedFlash) {
                 return doAdvancedFlashLogic(card, ai, sa);
-            } else {
-                // save cards with flash for surprise blocking
-                if ((ai.isUnlimitedHandSize() || ai.getCardsIn(ZoneType.Hand).size() <= ai.getMaxHandSize()
-                        || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
-                        && ai.getManaPool().totalMana() <= 0
-                        && (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
-                        && !card.hasETBTrigger(true) && !card.hasSVar("AmbushAI")
-                        && game.getStack().isEmpty()
-                        && !ComputerUtil.castPermanentInMain1(ai, sa)) {
-                    // AiPlayDecision.AnotherTime;
-                    return false;
-                }
+            }
+            // save cards with flash for surprise blocking
+            if ((ai.isUnlimitedHandSize() || ai.getCardsIn(ZoneType.Hand).size() <= ai.getMaxHandSize()
+                    || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
+                    && ai.getManaPool().totalMana() <= 0
+                    && (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
+                    && !card.hasETBTrigger(true) && !card.hasSVar("AmbushAI")
+                    && game.getStack().isEmpty()
+                    && !ComputerUtil.castPermanentInMain1(ai, sa)) {
+                // AiPlayDecision.AnotherTime;
+                return false;
             }
         }
 

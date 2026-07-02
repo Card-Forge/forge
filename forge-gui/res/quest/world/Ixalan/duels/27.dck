@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Robot27
+Title=Robot27
+Icon=Dungeon Crawling White.jpg
+Difficulty=Easy
+Description=4-Color Energy 
+Deck Type=constructed
+
+[Main]
+3 Bristling Hydra
+2 Deathgorge Scavenger
+2 Glorybringer
+3 Longtusk Cub
+1 Rhonas the Indomitable
+2 Ripjaw Raptor
+4 Rogue Refiner
+4 Servant of the Conduit
+2 The Scarab God
+3 Whirler Virtuoso
+3 Abrade
+3 Harnessed Lightning
+4 Attune with Aether
+2 Chandra, Torch of Defiance
+4 Aether Hub
+1 Blooming Marsh
+4 Botanical Sanctum
+4 Forest
+1 Island
+2 Mountain
+2 Rootbound Crag
+1 Sheltered Thicket
+2 Spirebluff Canal
+1 Swamp
+[Sideboard]
+2 Carnage Tyrant
+2 Chandra's Defeat
+2 Confiscation Coup
+1 Deathgorge Scavenger
+1 Magma Spray
+3 Negate
+2 Sweltering Suns
+2 Vizier of Many Faces

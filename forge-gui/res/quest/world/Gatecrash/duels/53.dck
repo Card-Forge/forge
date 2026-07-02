@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/KING_4_-_Roma/Andrea_Nocentini_-_Zoo_(Modern,_#63228).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+4 Tarmogoyf
+3 Dismember
+4 Lightning Bolt
+2 Tarfire
+3 Rancor
+2 Seal of Fire
+4 Arid Mesa
+2 Forest
+2 Misty Rainforest
+3 Mountain
+4 Scalding Tarn
+4 Stomping Ground
+[Sideboard]
+2 Ancient Grudge
+2 Blood Moon
+1 Grafdigger's Cage
+2 Kitchen Finks
+1 Krosan Grip
+1 Mutagenic Growth
+1 Pillar of Flame
+1 Relic of Progenitus
+2 Skullcrack
+1 Torpor Orb

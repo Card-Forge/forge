@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Bart Simpson
+Title=Bart Simpson
+Icon=Bart Simpson.jpg
+Difficulty=Very Hard
+Description=../Modern/Journey_into_Nyx/2014_Modern_State_Championships_-_Michigan/Don_Li_-_Red_Deck_Wins_(Modern,_#83005).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Ball Lightning
+4 Eidolon of the Great Revel
+4 Goblin Guide
+3 Grim Lavamancer
+4 Spark Elemental
+4 Lightning Bolt
+4 Searing Blaze
+4 Shard Volley
+3 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+11 Mountain
+4 Scalding Tarn
+1 Stomping Ground
+[Sideboard]
+2 Back to Nature
+2 Destructive Revelry
+2 Dragon's Claw
+2 Ensnaring Bridge
+1 Pyroclasm
+2 Relic of Progenitus
+2 Searing Blood
+2 Smash to Smithereens

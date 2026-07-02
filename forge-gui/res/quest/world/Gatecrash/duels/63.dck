@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Bushwhacked
+Title=Bushwhacked
+Icon=Bushwhacked.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/Modern_Turniers_vom_19.02.2013/Broscheit_Klaus_-_Boros_(Modern,_#46614).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Ash Zealot
+4 Goblin Guide
+2 Grim Lavamancer
+4 Vexing Devil
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+2 Searing Blaze
+4 Skullcrack
+1 Bonfire of the Damned
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Battlefield Forge
+4 Clifftop Retreat
+3 Mountain
+1 Plains
+4 Sacred Foundry
+[Sideboard]
+2 Blind Obedience
+2 Blood Moon
+3 Disenchant
+2 Rest in Peace
+2 Spark Trooper
+2 Torpor Orb
+2 Volcanic Fallout

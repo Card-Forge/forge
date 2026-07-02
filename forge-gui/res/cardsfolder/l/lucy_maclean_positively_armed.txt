@@ -1,0 +1,9 @@
+Name:Lucy MacLean, Positively Armed
+ManaCost:4 W
+Types:Legendary Creature Human Survivor
+PT:3/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.token | TriggerZones$ Battlefield | Execute$ TrigCopy | OptionalDecider$ You | ResolvedLimit$ 1 | TriggerDescription$ Golden Rule — Whenever a token enters, you may have target player other than its controller create a token that's a copy of it, then you draw a card if an opponent created a token this way. Do this only once each turn.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | ValidTgts$ Player.!TriggeredCardController | TgtPrompt$ Select target player other than the token's controller | Controller$ Targeted | RememberTokens$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card.OwnedBy Opponent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Golden Rule — Whenever a token enters, you may have target player other than its controller create a token that's a copy of it, then you draw a card if an opponent created a token this way. Do this only once each turn.

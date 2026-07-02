@@ -1,0 +1,9 @@
+Name:Textbook Tabulator
+ManaCost:2 U
+Types:Creature Frog Wizard
+PT:0/3
+K:Increment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Increment (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.)\nWhen this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

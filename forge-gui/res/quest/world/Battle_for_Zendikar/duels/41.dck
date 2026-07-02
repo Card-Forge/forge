@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Easy
+Description=Battle_for_Zendikar/SCG_Premier_IQ_Northbrook/Colin_Sala_-_Abzan_Hardened_Scales_(Standard,_#371204).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avatar of the Resolute
+4 Den Protector
+4 Hangarback Walker
+4 Managorger Hydra
+3 Servant of the Scale
+2 Abzan Charm
+4 Dromoka's Command
+4 Stubborn Denial
+4 Hardened Scales
+4 Silkwrap
+2 Canopy Vista
+7 Forest
+1 Plains
+1 Prairie Stream
+4 Windswept Heath
+4 Wooded Foothills
+4 Yavimaya Coast
+[Sideboard]
+2 Disdainful Stroke
+2 Dispel
+2 Evolutionary Leap
+2 Feed the Clan
+2 Hidden Dragonslayer
+1 Mastery of the Unseen
+2 Surge of Righteousness
+2 Valorous Stance

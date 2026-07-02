@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Olokun
+Title=Olokun
+Icon=Olokun.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/griffinlussier_-_Modern_Jund_(Modern,_#1254553).dck
+Deck Type=constructed
+
+[Main]
+2 Ragavan, Nimble Pilferer
+2 Dark Confidant
+4 Tarmogoyf
+1 Unholy Heat
+2 Fatal Push
+4 Lightning Bolt
+1 Dreadbore
+1 Dread Fugue
+1 Bloodchief's Thirst
+2 Crime // Punishment
+3 Inquisition of Kozilek
+3 Thoughtseize
+1 Liliana, the Last Hope
+1 Vraska, Golgari Queen
+2 Grist, the Hunger Tide
+3 Wrenn and Six
+4 Liliana of the Veil
+1 Barren Moor
+1 Stomping Ground
+1 Mountain
+1 Swamp
+1 Forest
+1 Blood Crypt
+2 Wooded Foothills
+2 Overgrown Tomb
+2 Blackcleave Cliffs
+3 Raging Ravine
+4 Verdant Catacombs
+4 Bloodstained Mire
+[Sideboard]
+1 Ancient Grudge
+1 Engineered Explosives
+1 Gaea's Blessing
+1 Kolaghan's Command
+1 Shadow Guildmage
+3 Fulminator Mage
+3 Leyline of the Void
+4 Huntmaster of the Fells

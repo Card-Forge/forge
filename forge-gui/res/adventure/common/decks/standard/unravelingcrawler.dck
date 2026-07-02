@@ -5,7 +5,7 @@ Difficulty=medium
 Description=Mono U deck with Sunken City, Inundate, counterspells and bounce
 Icon=Kojak.jpg
 Deck Type=constructed
-[main]
+[Main]
 22 Island|M12
 1 Sapphire Medallion
 4 Briarberry Cohort
@@ -32,4 +32,4 @@ Deck Type=constructed
 1 Sphinx of Magosi
 1 Spire Golem
 1 Harbor Serpent
-[sideboard]
+[Sideboard]

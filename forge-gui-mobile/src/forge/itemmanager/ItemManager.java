@@ -66,6 +66,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private boolean showRanking = false;
     private boolean showPriceInfo = false;
     private boolean multiSelectMode = false;
+    private boolean allowGroupIdentical = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private ContextMenuBuilder<T> contextMenuBuilder;
     private ContextMenu contextMenu;
@@ -964,6 +965,21 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return showPriceInfo;
     }
 
+    public boolean getAllowGroupIdentical() {
+        return allowGroupIdentical;
+    }
+
+    public void setAllowGroupIdentical(boolean allowGroupIdentical0) {
+        if(allowGroupIdentical == allowGroupIdentical0) {
+            return;
+        }
+            
+        allowGroupIdentical = allowGroupIdentical0;
+        if (pool != null) {
+            updateView(false, null);
+        }
+    }
+
     public void setWantUnique(boolean unique) {
         wantUnique = unique;
     }
@@ -1238,10 +1254,12 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         boolean usingListView = currentView == listView;
         switch(keyCode) {
-            case(Input.Keys.DPAD_RIGHT):
+            case Input.Keys.DPAD_RIGHT:
+            case Input.Keys.PAGE_DOWN:
                 setSelectedIndexRelative(usingListView ? 10 : 1);
                 return true;
             case Input.Keys.DPAD_LEFT:
+            case Input.Keys.PAGE_UP:
                 setSelectedIndexRelative(usingListView ? -10 : -1);
                 return true;
             case Input.Keys.DPAD_DOWN:

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Isperia
+Title=Isperia
+Icon=Isperia.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/Modern_Constructed_League/AliEnWaRe__-_Eldrazi_(Modern,_#611699).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eldrazi Mimic
+4 Endless One
+4 Matter Reshaper
+4 Oblivion Sower
+4 Reality Smasher
+2 Spellskite
+4 Thought-Knot Seer
+2 Ulamog, the Ceaseless Hunger
+4 Expedition Map
+4 Dismember
+4 Eldrazi Temple
+4 Eye of Ugin
+2 Urborg, Tomb of Yawgmoth
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+2 Wastes
+[Sideboard]
+2 All Is Dust
+2 Chalice of the Void
+1 Grafdigger's Cage
+2 Gut Shot
+1 Pithing Needle
+2 Ratchet Bomb
+3 Relic of Progenitus
+2 Warping Wail

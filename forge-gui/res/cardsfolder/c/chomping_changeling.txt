@@ -1,0 +1,8 @@
+Name:Chomping Changeling
+ManaCost:2 G
+Types:Creature Shapeshifter
+PT:1/2
+K:Changeling
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature enters, destroy up to one target artifact or enchantment.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact or enchantment
+Oracle:Changeling (This card is every creature type.)\nWhen this creature enters, destroy up to one target artifact or enchantment.

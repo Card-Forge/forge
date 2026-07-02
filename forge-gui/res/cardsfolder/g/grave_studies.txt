@@ -1,0 +1,6 @@
+Name:Grave Studies
+ManaCost:B G
+Types:Instant
+A:SP$ MakeCard | Conjure$ True | Name$ Teacher's Pest | Zone$ Battlefield | SubAbility$ DBSac | SpellDescription$ Conjure a card named Teacher's Pest onto the battlefield, then each player sacrifices a creature.
+SVar:DBSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Player
+Oracle:Conjure a card named Teacher's Pest onto the battlefield, then each player sacrifices a creature.

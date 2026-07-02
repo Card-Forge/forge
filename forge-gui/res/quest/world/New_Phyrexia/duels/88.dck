@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Picard
+Title=Picard
+Icon=Picard.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/GPT_Malm&ouml;__Copenhagen/Emil_Andersen_-_Faeries_(Modern,_#28590).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+1 Relic of Progenitus
+3 Vedalken Shackles
+4 Cryptic Command
+4 Mana Leak
+2 Remand
+1 Spell Pierce
+3 Spell Snare
+1 Faerie Conclave
+17 Island
+4 Mutavault
+3 Tectonic Edge
+[Sideboard]
+1 Gut Shot
+1 Hurkyl's Recall
+1 Mortarpod
+2 Ratchet Bomb
+2 Sower of Temptation
+1 Steel Sabotage
+2 Threads of Disloyalty
+1 Wurmcoil Engine

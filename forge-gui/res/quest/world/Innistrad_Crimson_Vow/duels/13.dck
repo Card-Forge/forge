@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Cyclops
+Title=Cyclops
+Icon=Cyclops.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/Akuma_65_-_Izzet_Aggro_(Standard,_#1248785).dck
+Deck Type=constructed
+
+[Main]
+1 Iymrith, Desert Doom
+2 Inferno of the Star Mounts
+2 Galazeth Prismari
+2 Goldspan Dragon
+2 Magda, Brazen Outlaw
+4 Smoldering Egg
+1 The Celestus
+1 Pithing Needle
+2 Orb of Dragonkind
+1 Teach by Example
+2 Fading Hope
+3 Prismari Command
+3 Spikefield Hazard
+4 Dragon's Fire
+2 Seize the Spoils
+2 Expressive Iteration
+2 Rowan, Scholar of Sparks
+1 Field of Ruin
+1 Tyrite Sanctum
+1 Surtland Frostpyre
+1 Prismari Campus
+2 Hall of Storm Giants
+3 Stormcarved Coast
+3 Mountain
+4 Temple of the Dragon Queen
+4 Island
+4 Riverglide Pathway
+[Sideboard]
+1 Annul
+1 Hullbreaker Horror
+1 Pithing Needle
+1 Crush the Weak
+1 Cinderclasm
+1 Teach by Example
+1 Alrund's Epiphany
+1 Kazuul's Fury
+2 Disdainful Stroke
+2 Heated Debate
+3 Test of Talents

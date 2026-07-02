@@ -1,0 +1,11 @@
+Name:Koya, Death from Above
+ManaCost:2 W
+Types:Legendary Creature Mutant Ninja Bird
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When NICKNAME enters, exile up to one other target creature. At the beginning of the next end step, you may pay {3}{B}. If you don't, return that card to the battlefield under its owner's control.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.Other | TargetMin$ 0 | TargetMax$ 1 | Mandatory$ True | ValidTgtsDesc$ another creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | TriggerDescription$ At the beginning of the next end step, you may pay {3}{B}. If you don't, return that card to the battlefield under its owner's control. | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI | UnlessCost$ 3 B | UnlessPayer$ You
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\nWhen Koya enters, exile up to one other target creature. At the beginning of the next end step, you may pay {3}{B}. If you don't, return that card to the battlefield under its owner's control.

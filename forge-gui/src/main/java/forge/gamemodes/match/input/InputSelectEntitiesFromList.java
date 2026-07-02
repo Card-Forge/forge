@@ -54,7 +54,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
                 vCards.add(c.getView());
             }
         }
-        getController().getGui().setSelectables(vCards);
+        getController().getGui().setSelectables(vCards, this.min, this.max);
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final GameEntity ge : validChoices) {
             final Zone cz = ge instanceof Card c ? c.getLastKnownZone() : null;
@@ -72,6 +72,11 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (!selectEntity(c)) {
             return false;
+        }
+        if (otherCardsToSelect != null) {
+            for (final Card other : otherCardsToSelect) {
+                selectEntity(other);
+            }
         }
         refresh();
         return true;
@@ -99,6 +104,10 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     @Override
     public final Collection<T> getSelected() {
         return selected;
+    }
+
+    public final FCollectionView<T> getValidChoices() {
+        return validChoices;
     }
 
     @SuppressWarnings("unchecked")
@@ -176,7 +185,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         super.showMessage();
         // Use mass select mode for proliferate. If you wanted to add it to a different effect
         // the effect must allow you to select any number of targets between "none" and "all valid targets"
-        if (sa != null && ApiType.Proliferate == sa.getApi()) {
+        if (sa != null && ApiType.Proliferate == sa.getApi() && min == 0) {
             massSelectMode = MassSelectMode.NONE;
             updateMassSelectButton();
         }
@@ -210,6 +219,9 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
             this.getSelected().clear();
             if (massSelectMode == MassSelectMode.MINE) { // Select all valid targets owned by player
                 for (T v : validChoices) {
+                    if (selected.size() == max) {
+                        break;
+                    }
                     if (v instanceof Card c) {
                         if (c.getController().equals(getController().getPlayer())) {
                             selected.add(v);
@@ -219,6 +231,9 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
                 }
             } else if (massSelectMode == MassSelectMode.ALL) { // Select all valid targets
                 for (T c : validChoices) {
+                    if (selected.size() == max) {
+                        break;
+                    }
                     selected.add(c);
                     onSelectStateChanged(c, true);
                 }

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Easy
+Description=Fate_Reforged/SCG_Standard_Open_Washington/Tim_Armstrong_-_Abzan_Aggro_(Standard,_#172416).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Fleecemane Lion
+4 Rakshasa Deathdealer
+4 Siege Rhino
+4 Wingmate Roc
+3 Bile Blight
+3 Hero's Downfall
+1 Murderous Cut
+1 Utter End
+2 Valorous Stance
+2 Thoughtseize
+3 Sorin, Solemn Visitor
+3 Caves of Koilos
+1 Forest
+3 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+3 Temple of Silence
+2 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+1 Ajani, Mentor of Heroes
+1 Arbor Colossus
+3 Drown in Sorrow
+2 Gather Courage
+4 Glare of Heresy
+1 Liliana Vess
+1 Merciless Executioner

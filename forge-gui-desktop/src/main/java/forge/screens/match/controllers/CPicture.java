@@ -69,12 +69,14 @@ public class CPicture implements ICDoc {
      */
     void showCard(final CardView c, final boolean isInAltState, final boolean mayView, final boolean mayFlip) {
         final CardStateView toShow = c != null && mayView ? c.getState(isInAltState) : null;
+        // even when the face is hidden, the picture panel still needs the card to show the owner's sleeve
+        final CardStateView forPicture = c != null ? c.getState(isInAltState) : null;
         boolean displayFlipped = c != null && c.isFlipped();
         if (c != null && c.isFlipCard() && isInAltState) {
             displayFlipped = !displayFlipped;
         }
         flipIndicator.setVisible(toShow != null && mayFlip);
-        picturePanel.setCard(toShow, mayView, displayFlipped);
+        picturePanel.setCard(forPicture, mayView, displayFlipped);
         zoomer.setCard(toShow, mayFlip);
     }
 

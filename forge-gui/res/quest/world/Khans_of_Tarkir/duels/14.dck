@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Simic-precon
+Title=Simic-precon
+Icon=Simic-precon.jpg
+Difficulty=Easy
+Description=Khans_of_Tarkir/SCG_Standard_Open_Columbus/Justin_Peavler_-_Abzan_Reanimator_(Standard,_#149649).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+2 Doomwake Giant
+2 Hornet Queen
+4 Satyr Wayfinder
+4 Sidisi, Brood Tyrant
+1 Soul of Innistrad
+4 Sylvan Caryatid
+3 Whip of Erebos
+1 Bile Blight
+3 Hero's Downfall
+4 Murderous Cut
+2 Thoughtseize
+2 Ashiok, Nightmare Weaver
+1 Evolving Wilds
+3 Forest
+1 Island
+4 Llanowar Wastes
+1 Mana Confluence
+4 Opulent Palace
+2 Polluted Delta
+2 Swamp
+2 Temple of Malady
+1 Temple of Mystery
+1 Urborg, Tomb of Yawgmoth
+2 Yavimaya Coast
+[Sideboard]
+2 Dark Betrayal
+2 Disdainful Stroke
+2 Kiora, the Crashing Wave
+1 Pharika, God of Affliction
+2 Reclamation Sage
+1 Sultai Charm
+1 Treasure Cruise

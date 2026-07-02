@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Radiant
+Title=Radiant
+Icon=Radiant.jpg
+Difficulty=Medium
+Description=./Standard/Avatar_The_Last_Airbender/BenderGreat_-_Mono-Black_Midrange_(Standard,_#2820808).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodthirsty Conqueror
+4 Qarsi Revenant
+4 Unstoppable Slasher
+3 Bloodletter of Aclazotz
+3 Deep-Cavern Bat
+3 Enduring Tenacity
+3 Starscape Cleric
+3 Shoot the Sheriff
+3 Duress
+3 Strategic Betrayal
+3 Unholy Annex
+18 Swamp
+4 Realm of Koh
+2 Soulstone Sanctuary
+[Sideboard]
+3 Ozai's Cruelty
+3 Zero Point Ballad
+2 Archenemy's Charm
+2 Bitter Triumph
+2 Leyline of the Void
+1 Day of Black Sun
+1 Duress
+1 Strategic Betrayal

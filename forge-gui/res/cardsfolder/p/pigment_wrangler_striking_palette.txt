@@ -1,0 +1,18 @@
+Name:Pigment Wrangler
+ManaCost:4 R
+Types:Creature Orc Sorcerer
+PT:4/4
+K:Flying
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+AlternateMode:Prepare
+Oracle:Flying\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Striking Palette
+ManaCost:R
+Types:Sorcery
+A:SP$ DelayedTrigger | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+Oracle:When you next cast an instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.

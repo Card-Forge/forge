@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Golgari-precon
+Title=Golgari-precon
+Icon=Golgari-precon.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/mtgoassassin75_-_Bant_Spirits_(Modern,_#1322160).dck
+Deck Type=constructed
+
+[Main]
+1 Kira, Great Glass-Spinner
+1 Cemetery Illuminator
+2 Empyrean Eagle
+2 Spectral Sailor
+2 Selfless Spirit
+2 Rattlechains
+4 Mausoleum Wanderer
+4 Skyclave Apparition
+4 Spell Queller
+4 Supreme Phantom
+4 Drogskol Captain
+4 Aether Vial
+4 Collected Company
+1 Hallowed Fountain
+1 Windswept Heath
+1 Waterlogged Grove
+1 Temple Garden
+1 Plains
+1 Island
+1 Breeding Pool
+2 Seachrome Coast
+2 Marsh Flats
+3 Cavern of Souls
+4 Glasspool Mimic
+4 Flooded Strand
+[Sideboard]
+1 Kira, Great Glass-Spinner
+2 Lavinia, Azorius Renegade
+2 Path to Exile
+2 Thalia, Guardian of Thraben
+2 Rest in Peace
+3 Veil of Summer
+3 Force of Negation

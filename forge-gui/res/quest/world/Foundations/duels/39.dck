@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=MahamotiGenie
+Title=MahamotiGenie
+Icon=MahamotiGenie.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/Ivan_Draw_Go_-_Azorius_Tempo_(Standard,_#2277108).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+4 Haughty Djinn
+2 Kiora, the Rising Tide
+4 Picklock Prankster
+2 Get Lost
+4 Moment of Truth
+4 Unsummon
+4 Chart a Course
+4 Helping Hand
+3 Recommission
+4 Founding the Third Path
+4 Floodfarm Verge
+1 Plains
+4 Meticulous Archive
+5 Island
+3 Adarkar Wastes
+4 Seachrome Coast
+[Sideboard]
+3 Exorcise
+1 Get Lost
+1 Monastery Mentor
+3 Sheltered by Ghosts
+1 Split Up
+2 Temporary Lockdown
+4 Negate

@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Call of the Kor
+Description=The en-Kor nomads have mastered the art of redirecting damage. Call of the Kor assembles these warriors to protect each other while striking at foes.
+Deck Type=constructed
+Set=STH
+Image=call_of_the_kor.jpg
+[main]
+5 Plains|TMP|1
+4 Plains|TMP|2
+4 Plains|TMP|3
+4 Swamp|TMP|1
+4 Swamp|TMP|2
+3 Swamp|TMP|3
+3 Nomads en-Kor|STH
+1 Shaman en-Kor|STH
+2 Warrior en-Kor|STH
+1 Soltari Champion|STH
+2 Knight of Dawn|TMP
+1 Cloudchaser Eagle|TMP
+4 Spirit en-Kor|STH
+2 Lancers en-Kor|STH
+1 Skeleton Scavengers|STH
+1 Darkling Stalker|TMP
+2 Gravedigger|TMP
+1 Screeching Harpy|TMP
+3 Endless Scream|TMP
+2 Enfeeblement|MIR
+1 Flickering Ward|TMP
+1 Dark Banishing|TMP
+1 Disenchant|TMP
+1 Smite|STH
+1 Temper|STH
+1 Death Stroke|STH
+2 Evincar's Justice|TMP
+2 Lab Rats|STH
+[sideboard]

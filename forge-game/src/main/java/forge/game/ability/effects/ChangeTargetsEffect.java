@@ -30,6 +30,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
 
     @Override
     public void buildSpellAbility(SpellAbility sa) {
+        super.buildSpellAbility(sa);
         if (sa.usesTargeting()) {
             sa.getTargetRestrictions().setZone(ZoneType.Stack);
         }
@@ -104,7 +105,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                         // random target and DefinedMagnet works on single targets
                         if (sa.hasParam("RandomTarget")) {
                             int div = changingTgtSA.getTotalDividedValue();
-                            List<GameEntity> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
+                            List<GameEntity> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA);
                             if (sa.hasParam("RandomTargetRestriction")) {
                                 candidates.removeIf(c -> !c.isValid(sa.getParam("RandomTargetRestriction").split(","), activator, sa.getHostCard(), sa));
                             }

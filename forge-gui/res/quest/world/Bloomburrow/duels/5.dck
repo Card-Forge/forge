@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=George of the Jungle
+Title=George of the Jungle
+Icon=George of the Jungle.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Collin_Britton_-_Selesnya_Tokens_(Standard,_#2177536).dck
+Deck Type=constructed
+
+[Main]
+4 Valley Mightcaller
+4 Pawpatch Recruit
+4 Seasoned Warrenguard
+3 Burrowguard Mentor
+3 Finneas, Ace Archer
+4 Valley Questcaller
+4 Knight-Errant of Eos
+2 Warren Warleader
+4 Hop to It
+4 Case of the Gateway Express
+2 Cavern of Souls
+4 Razorverge Thicket
+2 Oakhollow Village
+2 Restless Prairie
+4 Brushland
+3 Forest
+7 Plains
+[Sideboard]
+3 Pick Your Poison
+4 Elspeth's Smite
+4 Get Lost
+4 Invasion of Gobakhan

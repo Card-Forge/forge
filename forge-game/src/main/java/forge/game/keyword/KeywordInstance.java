@@ -73,14 +73,6 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
 
     /*
      * (non-Javadoc)
-     * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.card.Card, boolean)
-     */
-    public final void createTraits(final Card host, final boolean intrinsic) {
-        createTraits(host, intrinsic, false);
-    }
-
-    /*
-     * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.card.Card, boolean, boolean)
      */
     public final void createTraits(final Card host, final boolean intrinsic, final boolean clear) {
@@ -127,13 +119,6 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     }
 
     /* (non-Javadoc)
-     * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.player.Player)
-     */
-    @Override
-    public void createTraits(Player player) {
-        createTraits(player, false);
-    }
-    /* (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.player.Player, boolean)
      */
     @Override
@@ -146,7 +131,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
         }
         try {
             String msg = "KeywordInstance:createTraits: make Traits for Keyword";
-            
+
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Player", player.getName());
             bread.setData("Keyword", this.original);
@@ -212,6 +197,18 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
         staticAbilities.add(st);
     }
 
+    public boolean hasTraits() {
+        if (!getAbilities().isEmpty())
+            return true;
+        if (!getTriggers().isEmpty())
+            return true;
+        if (!getReplacements().isEmpty())
+            return true;
+        if (!getStaticAbilities().isEmpty())
+            return true;
+        return false;
+    }
+
     /*
      * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#getTriggers()
@@ -239,6 +236,24 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
      */
     public Collection<StaticAbility> getStaticAbilities() {
         return staticAbilities;
+    }
+
+
+    public List<SpellAbility> applySpellAbility(List<SpellAbility> list) {
+        list.addAll(getAbilities());
+        return list;
+    }
+    public List<Trigger> applyTrigger(List<Trigger> list) {
+        list.addAll(getTriggers());
+        return list;
+    }
+    public List<ReplacementEffect> applyReplacementEffect(List<ReplacementEffect> list) {
+        list.addAll(getReplacements());
+        return list;
+    }
+    public List<StaticAbility> applyStaticAbility(List<StaticAbility> list) {
+        list.addAll(getStaticAbilities());
+        return list;
     }
 
     /*
@@ -393,7 +408,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
 
     @Override
     public final void setSVar(final String name, final String value) {
-        
+
     }
 
     @Override

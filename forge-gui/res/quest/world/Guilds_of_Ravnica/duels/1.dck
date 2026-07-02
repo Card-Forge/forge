@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Black Panther
+Title=Black Panther
+Icon=Black Panther.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/ARCANIC_-_Grixis_Conjecture_(Standard,_#771940).dck
+Deck Type=constructed
+
+[Main]
+4 Treasure Map
+3 Expansion // Explosion
+2 Moment of Craving
+4 Opt
+4 Shock
+3 Discovery // Dispersal
+4 Lava Coil
+4 Pirate's Pillage
+2 Star of Extinction
+2 The Eldest Reborn
+3 The Mirari Conjecture
+2 Karn, Scion of Urza
+4 Dragonskull Summit
+2 Drowned Catacomb
+2 Island
+3 Mountain
+4 Steam Vents
+4 Sulfur Falls
+4 Watery Grave
+[Sideboard]
+4 Duress
+3 Fungal Infection
+1 Star of Extinction
+2 Swamp
+1 The Eldest Reborn
+4 Thought Erasure

@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Barney Rubble
+Title=Barney Rubble
+Icon=Barney Rubble.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Edel_-_Jund_(Modern,_#1006682).dck
+Deck Type=constructed
+
+[Main]
+2 Bloodbraid Elf
+2 Klothys, God of Destiny
+2 Scavenging Ooze
+3 Seasoned Pyromancer
+4 Tarmogoyf
+1 Kolaghan's Command
+3 Assassin's Trophy
+3 Fatal Push
+3 Lightning Bolt
+1 Maelstrom Pulse
+3 Inquisition of Kozilek
+3 Thoughtseize
+3 Wrenn and Six
+3 Liliana of the Veil
+1 Canyon Slough
+1 Sheltered Thicket
+1 Raging Ravine
+1 Overgrown Tomb
+1 Blood Crypt
+1 Stomping Ground
+2 Nurturing Peatland
+2 Swamp
+2 Wooded Foothills
+2 Forest
+2 Bloodstained Mire
+4 Verdant Catacombs
+4 Blackcleave Cliffs
+[Sideboard]
+1 Maelstrom Pulse
+1 Barrier Breach
+2 Ashiok, Dream Render
+2 Boil
+2 Collective Brutality
+2 Damping Sphere
+2 Grafdigger's Cage
+3 Dragon's Claw

@@ -86,9 +86,6 @@ public enum StaticAbilityMode {
     // StaticAbilityAdapt
     CanAdapt,
 
-    // StaticAbilityExhaust
-    CanExhaust,
-
     // StaticAbilityCantBeCopied
     CantBeCopied,
 
@@ -162,12 +159,16 @@ public enum StaticAbilityMode {
 
     // StaticAbilityFlipCoinMod
     FlipCoinMod,
+    FlipCoinDoubler,
 
     // StaticAbilityPlotZone
     PlotZone,
 
     // StaticAbilityNumLoyaltyAct
     NumLoyaltyAct,
+
+    // StaticAbilityAdditionalActivations
+    Activations,
 
     // StaticAbilityDevotion
     Devotion,
@@ -187,10 +188,18 @@ public enum StaticAbilityMode {
     // StaticAbilityManaConvert
     ManaConvert,
 
+    // StaticAbilityUntapOtherPlayer
+    UntapOtherPlayer,
+
     // StaticAbilityTurnPhaseReversed
     TurnReversed,
     PhaseReversed,
 
+    // StaticAbilityAttackRequirement
+    AttackRequirement,
+
+    // StaticAbilityCountersRemain
+    CountersRemain,
     ;
 
     public static StaticAbilityMode smartValueOf(final String value) {

@@ -1,0 +1,11 @@
+Name:Spinerock Tyrant
+ManaCost:3 R R
+Types:Creature Dragon
+PT:6/6
+K:Flying
+K:Wither
+T:Mode$ SpellCast | ValidSA$ Instant.singleTarget,Sorcery.singleTarget | ValidActivatingPlayer$ You | OptionalDecider$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell with a single target, you may copy it. If you do, those spells gain wither. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | RememberNewCard$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ TriggeredCard & Remembered | KW$ Wither | PumpZone$ Stack | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\nWither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever you cast an instant or sorcery spell with a single target, you may copy it. If you do, those spells gain wither. You may choose new targets for the copy.

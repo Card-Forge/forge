@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Milhouse_van_Houten
+Title=Milhouse_van_Houten
+Icon=Milhouse_van_Houten.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/Alvin_Yeo_-_Jeskai_Aggro_(Modern,_#2169125).dck
+Deck Type=constructed
+
+[Main]
+4 Ajani, Nacatl Pariah
+4 Amped Raptor
+1 Bonecrusher Giant
+4 Guide of Souls
+4 Mockingbird
+3 Ocelot Pride
+3 Phlage, Titan of Fire's Fury
+3 Fable of the Mirror-Breaker
+4 Galvanic Discharge
+3 Lightning Bolt
+3 Static Prison
+2 Teferi, Time Raveler
+4 Aether Hub
+1 Arena of Glory
+4 Arid Mesa
+1 Elegant Parlor
+1 Flooded Strand
+1 Hallowed Fountain
+1 Meticulous Archive
+1 Mountain
+1 Plains
+2 Sacred Foundry
+2 Scalding Tarn
+1 Steam Vents
+2 Windswept Heath
+[Sideboard]
+1 Jegantha, the Wellspring
+3 Consign to Memory
+2 Damping Sphere
+2 Fear, Fire, Foes!
+2 Harsh Mentor
+3 Suncleanser
+2 Unlicensed Hearse

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Wonder Twins
+Title=Wonder Twins
+Icon=Wonder Twins.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/SCG_Invitational_Qualifier_Denton/Tyler_Huddleston_-_Burn_(Modern,_#385261).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+3 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+2 Searing Blaze
+1 Shard Volley
+3 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+4 Mountain
+3 Sacred Foundry
+2 Stomping Ground
+2 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Ancient Grudge
+2 Deflecting Palm
+2 Destructive Revelry
+2 Kor Firewalker
+2 Molten Rain
+1 Rest in Peace
+1 Smash to Smithereens
+2 Torpor Orb

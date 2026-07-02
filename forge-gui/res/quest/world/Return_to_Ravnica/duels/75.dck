@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ghost Rider
+Title=Ghost Rider
+Icon=Ghost Rider.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/GPT_Bilbao_2013_-_Kame_House,_Almeria/Jesus_Franco_-_Jund_(Modern,_#44168).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Dark Confidant
+4 Deathrite Shaman
+4 Tarmogoyf
+2 Tombstalker
+2 Abrupt Decay
+4 Lightning Bolt
+3 Path to Exile
+4 Lingering Souls
+2 Maelstrom Pulse
+4 Rancor
+4 Blackcleave Cliffs
+1 Blood Crypt
+1 Forest
+1 Godless Shrine
+4 Marsh Flats
+1 Overgrown Tomb
+4 Rootbound Crag
+1 Stomping Ground
+1 Swamp
+1 Temple Garden
+4 Verdant Catacombs
+[Sideboard]
+2 Extirpate
+3 Huntmaster of the Fells
+4 Rakdos Charm
+2 Seal of Primordium
+4 Thoughtseize

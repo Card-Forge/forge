@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sly Cooper
+Title=Sly Cooper
+Icon=Sly Cooper.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/Modern_Daily_#9404614/CharkAttack_-_UR_Eldrazi_(Modern,_#602294).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+4 Eldrazi Mimic
+3 Eldrazi Obligator
+4 Eldrazi Skyspawner
+4 Endless One
+4 Reality Smasher
+2 Ruination Guide
+4 Thought-Knot Seer
+4 Vile Aggregate
+3 Dismember
+4 Corrupted Crossroads
+4 Eldrazi Temple
+4 Eye of Ugin
+4 Flooded Strand
+2 Island
+4 Shivan Reef
+2 Steam Vents
+[Sideboard]
+2 Chalice of the Void
+1 Cyclonic Rift
+2 Gut Shot
+3 Hurkyl's Recall
+2 Relic of Progenitus
+2 Spellskite
+3 Stubborn Denial

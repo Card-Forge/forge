@@ -3,5 +3,6 @@ DeckFile:MTGO Vintage Cube 2017
 Singleton:True
 LandSetCode:RTR
 
-Booster:15 Any
-NumPacks:3
+Booster: 15 Any
+NumPacks: 3
+NumPlayers: 8

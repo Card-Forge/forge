@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=En Sabah Nur
+Title=En Sabah Nur
+Icon=En Sabah Nur.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/SCG_Invitational_Qualifier_Uncasville/Goni_Bautista_-_Burn_(Modern,_#314720).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+4 Skullcrack
+4 Exquisite Firecraft
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+5 Mountain
+4 Sacred Foundry
+4 Scalding Tarn
+3 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+2 Dragon's Claw
+3 Lightning Helix
+3 Molten Rain
+2 Rending Volley
+3 Smash to Smithereens

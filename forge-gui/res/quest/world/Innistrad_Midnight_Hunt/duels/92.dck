@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Oshun
+Title=Oshun
+Icon=Oshun.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/logansmith_-_Temur_Cascade_(Modern,_#1218915).dck
+Deck Type=constructed
+
+[Main]
+1 Murktide Regent
+2 Brazen Borrower
+2 Seasoned Pyromancer
+3 Endurance
+3 Deadshot Minotaur
+4 Curator of Mysteries
+4 Shardless Agent
+2 Hieroglyphic Illumination
+2 Dead // Gone
+4 Violent Outburst
+4 Fire // Ice
+4 Force of Negation
+4 Crashing Footfalls
+1 Hinterland Harbor
+1 Forest
+1 Mountain
+1 Stomping Ground
+1 Sulfur Falls
+1 Breeding Pool
+2 Steam Vents
+2 Island
+3 Wooded Foothills
+4 Scalding Tarn
+4 Misty Rainforest
+[Sideboard]
+1 Arlinn, the Pack's Hope
+1 Firespout
+1 Klothys, God of Destiny
+2 Fury
+3 Blood Moon
+3 Force of Vigor
+4 Mystical Dispute

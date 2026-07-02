@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Quest for Ulas Temple
+Title=Quest for Ulas Temple
+Icon=Quest for Ulas Temple.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Luke_Sheeley_-_Selesnya_Heliod_(Modern,_#1343786).dck
+Deck Type=constructed
+
+[Main]
+1 Auriok Champion
+2 Walking Ballista
+3 Skyclave Apparition
+4 Heliod, Sun-Crowned
+4 Spike Feeder
+4 Conclave Mentor
+4 Ranger-Captain of Eos
+4 Noble Hierarch
+4 Birds of Paradise
+4 Collected Company
+4 Teferi, Time Raveler
+1 Boseiju, Who Endures
+1 Pendelhaven
+1 Hallowed Fountain
+1 Breeding Pool
+2 Plains
+2 Horizon Canopy
+2 Misty Rainforest
+2 Flooded Strand
+3 Temple Garden
+3 Forest
+4 Windswept Heath
+[Sideboard]
+1 Skyclave Apparition
+2 Sanctifier en-Vec
+2 Veil of Summer
+2 Path to Exile
+2 March of Otherworldly Light
+3 Endurance
+3 Damping Sphere

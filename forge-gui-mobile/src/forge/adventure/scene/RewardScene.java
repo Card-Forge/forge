@@ -13,11 +13,10 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
-import forge.adventure.archipelago.Archipelago;
-import forge.adventure.archipelago.LocalRandomizer;
+import forge.adventure.archipelago.*;
 import forge.adventure.character.ShopActor;
-import forge.adventure.archipelago.ArchipelagoData;
-import forge.adventure.archipelago.ArchipelagoMode;
+import forge.haptic.HapticEngine;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.adventure.data.ItemData;
 import forge.adventure.data.RewardData;
 import forge.adventure.data.ShopData;
@@ -34,6 +33,7 @@ import forge.sound.SoundSystem;
 import forge.util.ItemPool;
 
 import java.util.Comparator;
+import java.util.Set;
 
 /**
  * Displays the rewards of a fight or a treasure
@@ -275,7 +275,7 @@ public class RewardScene extends UIScene {
 
         Current.player().takeShards(price);
 
-        Gdx.input.vibrate(5);
+        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_SHOP_ACTION, 5);
         SoundSystem.instance.play(SoundEffectType.Shuffle, false);
 
         updateBuyButtons();
@@ -323,6 +323,34 @@ public class RewardScene extends UIScene {
     }
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
+        // Merge Gold and Shards rewards into single entries
+        int totalGold = 0;
+        int totalShards = 0;
+        Array<Reward> others = new Array<>();
+        for (Reward r : new Array.ArrayIterator<>(newRewards)) {
+            switch (r.getType()) {
+                case Gold:
+                    totalGold += r.getCount();
+                    break;
+                case Shards:
+                    totalShards += r.getCount();
+                    break;
+                default:
+                    others.add(r);
+                    break;
+            }
+        }
+        newRewards.clear();
+        if (totalGold > 0) {
+            newRewards.add(new Reward(Reward.Type.Gold, totalGold));
+        }
+        if (totalShards > 0) {
+            newRewards.add(new Reward(Reward.Type.Shards, totalShards));
+        }
+        for (Reward r : others) {
+            newRewards.add(r);
+        }
+
         headerLabel.clearListeners();
         // Sort the rewards based on the rarity of the card inside the reward/ lets give items rarity
         newRewards.sort(Comparator.comparing(reward -> {
@@ -509,17 +537,36 @@ public class RewardScene extends UIScene {
                     lastRowXAdjust = ((numberOfColumns * cardWidth) - (lastRowCount * cardWidth)) / 2;
             }
 
-            if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled && type == Type.Loot && reward.getType() == Reward.Type.Item && reward.getItem().equipmentSlot != null && !reward.getItem().equipmentSlot.isEmpty()) {
-                if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.solo_randomizer) {
-                    reward = LocalRandomizer.getInstance().takeSingleEquipmentOutOfRemainingPool();
-                } else {
-                    ItemData itemData = new ItemData();
-                    itemData.iconName = "APIconSmall";
-                    itemData.name = "Archipelago Reward";
-                    reward = new Reward(itemData);
+            RewardActor actor;
+
+            if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled) {
+                boolean itemAlreadySold = false;
+                if (type == Type.Loot && reward.getType() == Reward.Type.Item && reward.getItem().equipmentSlot != null && !reward.getItem().equipmentSlot.isEmpty()) {
+                    if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.solo_randomizer) {
+                        reward = LocalRandomizer.getInstance().takeSingleEquipmentOutOfRemainingPool();
+                    } else {
+                        ItemData itemData = new ItemData();
+                        itemData.iconName = "APIconSmall";
+                        itemData.name = "Archipelago Reward";
+                        reward = new Reward(itemData);
+                    }
+                } else if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago && type == Type.Shop && shopActor.getName().equalsIgnoreCase("equipment")) {
+                    skipCard = false;
+                    Set<ItemData> data = ArchipelagoRandomizer.getInstance().getBoughtColorlessEquipmentShopList();
+                    for (ItemData item : data) {
+                        if (item.name.equalsIgnoreCase(reward.getItem().name) && item.archilepagoLocationId == reward.getItem().archilepagoLocationId) {
+                            itemAlreadySold = true;
+                            break;
+                        }
+                    }
                 }
+                actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
+                if (itemAlreadySold) {
+                    actor.sold();
+                }
+            } else {
+                actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
             }
-            RewardActor actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
 
             actor.setBounds(lastRowXAdjust + xOff + cardWidth * (i % numberOfColumns) + spacing, yOff + cardHeight * currentRow + spacing, cardWidth - spacing * 2, cardHeight - spacing * 2);
 
@@ -611,6 +658,13 @@ public class RewardScene extends UIScene {
             price *= shopModifier;
             setText("[+GoldCoin] " + price);
             updateOwned();
+            if (rewardActor.isSold()) {
+                isSold = true;
+                setDisabled(true);
+                getColor().a = 0.5f;
+                updateBuyButtons();
+                return;
+            }
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -622,11 +676,12 @@ public class RewardScene extends UIScene {
                         if (ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago && rewardActor.getReward().getItem() != null && rewardActor.getReward().getItem().archilepagoLocationId >= 0) {
                             ItemData itemData = rewardActor.getReward().getItem();
                             Archipelago.getInstance().checkLocation(itemData.archilepagoLocationId);
+                            ArchipelagoRandomizer.getInstance().addToBoughtColorlessEquipmentShopList(itemData);
                         } else {
                             Current.player().addReward(rewardActor.getReward());
                         }
 
-                        Gdx.input.vibrate(5);
+                        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_SHOP_ACTION, 5);
                         SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
 
                         if (changes == null)
@@ -691,7 +746,7 @@ public class RewardScene extends UIScene {
                         headerLabel.setText("Select " + remainingSelections + " rewards");
                         doneButton.setDisabled(remainingSelections > 0);
 
-                        Gdx.input.vibrate(5);
+                        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD, 5);
                         //SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
 
                         isSold = true;

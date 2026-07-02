@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Anubis
+Title=Anubis
+Icon=Anubis.jpg
+Difficulty=Hard
+Description=./Modern/Edge_of_Eternities/Kanemasa_Hiroyuki_-_Mono_Blue_Control_(Modern,_#2656226).dck
+Deck Type=constructed
+
+[Main]
+3 Subtlety
+4 Tamiyo, Inquisitive Student
+4 Thundertrap Trainer
+4 Quantum Riddler
+4 Counterspell
+3 Spell Snare
+3 Dismember
+4 Essence Flux
+1 Force of Negation
+4 Flare of Denial
+4 Sink into Stupor
+4 Preordain
+2 Lórien Revealed
+11 Island
+1 Otawara, Soaring City
+4 Gloomlake Verge
+[Sideboard]
+2 Engineered Explosives
+1 Force of Negation
+2 Mystical Dispute
+1 Dress Down
+2 Stern Scolding
+4 Consign to Memory
+1 Winter Moon
+2 Ghost Vacuum

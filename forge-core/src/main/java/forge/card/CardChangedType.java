@@ -96,7 +96,7 @@ public record CardChangedType(CardTypeView addType, CardTypeView removeType, boo
         }
         // remove specific creature types from all creature types
         if (removeType() != null && newType.allCreatureTypes) {
-            newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(IterableUtil.filter(removeType(), CardType::isACreatureType)));
+            newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(IterableUtil.filter(removeType().getSubtypes(), CardType::isACreatureType)));
         }
         return newType;
     }

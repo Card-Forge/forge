@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Robot78
+Title=Robot78
+Icon=Beast2.jpg
+Difficulty=Hard
+Description=Abzan 
+Deck Type=constructed
+
+[Main]
+4 Anointer Priest
+3 Renegade Map
+1 Treasure Map
+4 Fatal Push
+3 Fumigate
+3 Start // Finish
+4 Anointed Procession
+2 Cast Out
+4 Hidden Stockpile
+2 Ixalan's Binding
+4 Legion's Landing
+3 Vraska, Relic Seeker
+4 Concealed Courtyard
+4 Evolving Wilds
+1 Field of Ruin
+1 Forest
+2 Ifnir Deadlands
+5 Plains
+4 Shefet Dunes
+2 Swamp
+[Sideboard]
+2 Angel of Sanctions
+2 Authority of the Consuls
+4 Duress
+1 Lay Bare the Heart
+3 Lost Legacy
+2 Sunscourge Champion
+1 Trespasser's Curse

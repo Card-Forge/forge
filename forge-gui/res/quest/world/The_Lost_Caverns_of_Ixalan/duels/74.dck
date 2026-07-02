@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Savra
+Title=Savra
+Icon=Savra.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/medvedev_-_Mono_Black_Scam_(Modern,_#1992534).dck
+Deck Type=constructed
+
+[Main]
+4 Dauthi Voidwalker
+4 Grief
+2 Orcish Bowmasters
+3 Sheoldred, the Apocalypse
+4 The One Ring
+1 Cling to Dust
+4 Fatal Push
+4 Not Dead After All
+3 Sheoldred's Edict
+4 Thoughtseize
+2 Liliana of the Veil
+3 Castle Locthwain
+4 Demolition Field
+4 Sunken Citadel
+8 Swamp
+1 Takenuma, Abandoned Mire
+4 Field of Ruin
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+2 Ashiok, Dream Render
+2 Cursed Totem
+2 Damnation
+1 Emrakul, the Aeons Torn
+2 Necromentia
+2 Tourach, Dread Cantor
+1 Pithing Needle
+1 Unlicensed Hearse
+2 Nihil Spellbomb

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Pyro
+Title=Pyro
+Icon=Pyro.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/Devin_Beaston_-_Rakdos_Midrange_(Standard,_#1615667).dck
+Deck Type=constructed
+
+[Main]
+4 Graveyard Trespasser
+4 Bloodtithe Harvester
+3 Sheoldred, the Apocalypse
+3 Phyrexian Fleshgorger
+4 Fable of the Mirror-Breaker
+3 Reckoner Bankbuster
+4 Cut Down
+2 Abrade
+4 Go for the Throat
+1 Undying Malice
+3 Invoke Despair
+9 Swamp
+1 Sokenzan, Crucible of Defiance
+2 Mountain
+4 Sulfurous Springs
+4 Haunted Ridge
+4 Blackcleave Cliffs
+1 Takenuma, Abandoned Mire
+[Sideboard]
+4 Duress
+2 Path of Peril
+1 Reckoner Bankbuster
+2 Soul Transfer
+2 Archfiend of the Dross
+1 Anoint with Affliction
+1 Liliana of the Veil
+1 Undying Malice
+1 Bladecoil Serpent

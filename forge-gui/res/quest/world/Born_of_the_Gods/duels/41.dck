@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Gollum
+Title=Gollum
+Icon=Gollum.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/Appreciation_Weekend_-_Legacy_Gaming_Company/Neil_Jenkins_-_Azorius_Control_(Standard,_#66685).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+1 Elixir of Immortality
+3 Azorius Charm
+1 Celestial Flare
+4 Dissolve
+1 Fated Retribution
+1 Last Breath
+4 Sphinx's Revelation
+2 Syncopate
+2 Divination
+1 Revoke Existence
+4 Supreme Verdict
+4 Detention Sphere
+2 Elspeth, Sun's Champion
+3 Jace, Architect of Thought
+2 Azorius Guildgate
+4 Hallowed Fountain
+8 Island
+2 Mutavault
+6 Plains
+4 Temple of Enlightenment
+[Sideboard]
+2 Blind Obedience
+2 Brimaz, King of Oreskos
+2 Dispel
+1 Jace, Memory Adept
+2 Negate
+1 Pithing Needle
+1 Ratchet Bomb

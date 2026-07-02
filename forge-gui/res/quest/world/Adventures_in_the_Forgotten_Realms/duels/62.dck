@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Sorin
+Title=Sorin
+Icon=Sorin.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/zansyed_-_Jeskai_DRC_(Modern,_#1201977).dck
+Deck Type=constructed
+
+[Main]
+4 Dragon's Rage Channeler
+4 Dreadhorde Arcanist
+4 Esper Sentinel
+4 Luminarch Aspirant
+2 Memory Lapse
+4 Opt
+4 Unholy Heat
+4 Spell Pierce
+1 Declaration in Stone
+2 Pillar of Flame
+4 Expressive Iteration
+1 Hall of Oracles
+2 Steam Vents
+2 Spirebluff Canal
+2 Needleverge Pathway
+4 Sacred Foundry
+4 Hallowed Fountain
+4 Inspiring Vantage
+4 Riverglide Pathway
+[Sideboard]
+1 Abrade
+1 Aether Gust
+1 Dovin's Veto
+1 Entrancing Melody
+1 Fry
+1 Mystical Dispute
+2 Lurrus of the Dream-Den
+2 Containment Priest
+2 Aether Spellbomb
+2 Portable Hole
+2 Soul-Guide Lantern

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Doctor John Zoidberg
+Title=Doctor John Zoidberg
+Icon=Doctor John Zoidberg.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Alex_Busche_-_Golgari_Stompy_(Standard,_#768386).dck
+Deck Type=constructed
+
+[Main]
+2 Carnage Tyrant
+3 Ghalta, Primal Hunger
+4 Jadelight Ranger
+4 Kraul Harpooner
+4 Llanowar Elves
+4 Nullhide Ferox
+4 Pelt Collector
+4 Steel Leaf Champion
+4 Thorn Lieutenant
+3 Assassin's Trophy
+15 Forest
+4 Overgrown Tomb
+1 Swamp
+4 Woodland Cemetery
+[Sideboard]
+1 Carnage Tyrant
+2 Find // Finality
+1 Midnight Reaper
+1 Shapers' Sanctuary
+2 Sorcerous Spyglass
+1 The Eldest Reborn
+4 Vine Mare
+1 Vivien Reid
+1 Vraska, Golgari Queen
+1 Vraska, Relic Seeker

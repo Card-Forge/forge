@@ -1,11 +1,11 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="49">
  <properties>
   <property name="preventEscape" type="bool" value="true" />
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/rivers.tsx" />
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/rivers.tsx" />
  <layer id="1" name="Background" width="30" height="40">
   <data encoding="base64" compression="zlib">
    eJztlbENgDAMBF0wEBskgZaRgA0yAAVsl0gwBXiJnES+uPp1n9jOg1kWQgghxO8psX3mFsz20D7XZqbjI5mtgC/lfMf27+uZV+qj3wL0S7k6Pj8PsKdI5/HzrZDzMvWTS+wqh/pXVO7Z4Qy7c4WcD+AW0rzLja1M
@@ -30,54 +30,127 @@
   </data>
  </layer>
  <objectgroup id="6" name="Waypoints">
-  <object id="5" template="../../../../../../common/maps/obj/waypoint.tx" name="5" x="224" y="352" />
-  <object id="10" template="../../../../../../common/maps/obj/waypoint.tx" name="10" x="320" y="512" />
-  <object id="11" template="../../../../../../common/maps/obj/waypoint.tx" name="11" x="48" y="496" />
-  <object id="12" template="../../../../../../common/maps/obj/waypoint.tx" name="12" x="416" y="608" />
-  <object id="13" template="../../../../../../common/maps/obj/waypoint.tx" name="13" x="384" y="320" />
-  <object id="14" template="../../../../../../common/maps/obj/waypoint.tx" name="14" x="256" y="160" />
-  <object id="15" template="../../../../../../common/maps/obj/waypoint.tx" name="15" x="416" y="80" />
-  <object id="16" template="../../../../../../common/maps/obj/waypoint.tx" name="16" x="256" y="64" />
-  <object id="17" template="../../../../../../common/maps/obj/waypoint.tx" name="17" x="144" y="64" />
-  <object id="18" template="../../../../../../common/maps/obj/waypoint.tx" name="18" x="32" y="160" />
-  <object id="19" template="../../../../../../common/maps/obj/waypoint.tx" name="19" x="32" y="384" />
-  <object id="20" template="../../../../../../common/maps/obj/waypoint.tx" name="20" x="160" y="240" />
-  <object id="21" template="../../../../../../common/maps/obj/waypoint.tx" name="21" x="160" y="496" />
-  <object id="22" template="../../../../../../common/maps/obj/waypoint.tx" name="22" x="368" y="224" />
-  <object id="23" template="../../../../../../common/maps/obj/waypoint.tx" name="23" x="288" y="416" />
-  <object id="24" template="../../../../../../common/maps/obj/waypoint.tx" name="24" x="112" y="320" />
-  <object id="25" template="../../../../../../common/maps/obj/waypoint.tx" name="25" x="272" y="240" />
-  <object id="26" template="../../../../../../common/maps/obj/waypoint.tx" name="26" x="144" y="144" />
-  <object id="37" template="../../../../../../common/maps/obj/waypoint.tx" name="37" x="64" y="352" />
-  <object id="38" template="../../../../../../common/maps/obj/waypoint.tx" name="38" x="416" y="336" />
+  <object id="5" template="../../../../common/maps/obj/waypoint.tx" name="5" x="224" y="352" />
+  <object id="10" template="../../../../common/maps/obj/waypoint.tx" name="10" x="320" y="512" />
+  <object id="11" template="../../../../common/maps/obj/waypoint.tx" name="11" x="48" y="496" />
+  <object id="12" template="../../../../common/maps/obj/waypoint.tx" name="12" x="416" y="608" />
+  <object id="13" template="../../../../common/maps/obj/waypoint.tx" name="13" x="384" y="320" />
+  <object id="14" template="../../../../common/maps/obj/waypoint.tx" name="14" x="256" y="160" />
+  <object id="15" template="../../../../common/maps/obj/waypoint.tx" name="15" x="416" y="80" />
+  <object id="16" template="../../../../common/maps/obj/waypoint.tx" name="16" x="256" y="64" />
+  <object id="17" template="../../../../common/maps/obj/waypoint.tx" name="17" x="144" y="64" />
+  <object id="18" template="../../../../common/maps/obj/waypoint.tx" name="18" x="32" y="160" />
+  <object id="19" template="../../../../common/maps/obj/waypoint.tx" name="19" x="32" y="384" />
+  <object id="20" template="../../../../common/maps/obj/waypoint.tx" name="20" x="160" y="240" />
+  <object id="21" template="../../../../common/maps/obj/waypoint.tx" name="21" x="160" y="496" />
+  <object id="22" template="../../../../common/maps/obj/waypoint.tx" name="22" x="368" y="224" />
+  <object id="23" template="../../../../common/maps/obj/waypoint.tx" name="23" x="288" y="416" />
+  <object id="24" template="../../../../common/maps/obj/waypoint.tx" name="24" x="112" y="320" />
+  <object id="25" template="../../../../common/maps/obj/waypoint.tx" name="25" x="272" y="240" />
+  <object id="26" template="../../../../common/maps/obj/waypoint.tx" name="26" x="144" y="144" />
+  <object id="37" template="../../../../common/maps/obj/waypoint.tx" name="37" x="64" y="352" />
+  <object id="38" template="../../../../common/maps/obj/waypoint.tx" name="38" x="416" y="336" />
  </objectgroup>
  <objectgroup id="5" name="Objects">
-  <object id="8" template="../../../../../../common/maps/obj/treasure.tx" x="304" y="48" />
-  <object id="9" template="../../../../../../common/maps/obj/treasure.tx" x="416" y="352">
+  <object id="8" template="../../../../common/maps/obj/treasure.tx" x="304" y="48"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.18,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.32,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.14,
+    "count": 3,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="9" template="../../../../common/maps/obj/treasure.tx" x="416" y="352">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 2,
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 1,
-  "probability": 0.5,
-  "rarity": [ "rare" ],
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 3,
-  "addMaxCount": 2
-},{
-  "type": "item",
-  "count": 1,
-  "itemName": "Landscape Sketchbook - Mirage"
-}]</property>
+    <property name="reward">[
+  {
+    "type": "item",
+    "count": 1,
+    "itemName": "Landscape Sketchbook - Mirage"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
-  <object id="31" template="../../../../../../common/maps/obj/gold.tx" x="304" y="112" />
-  <object id="32" template="../../../../../../common/maps/obj/dialog.tx" x="177" y="125" width="204" height="112">
+  <object id="31" template="../../../../common/maps/obj/gold.tx" x="304" y="112" />
+  <object id="32" template="../../../../common/maps/obj/dialog.tx" x="177" y="125" width="204" height="112">
    <properties>
     <property name="dialog">[
 {
@@ -87,14 +160,14 @@
 ]</property>
    </properties>
   </object>
-  <object id="33" template="../../../../../../common/maps/obj/enemy.tx" x="192" y="544">
+  <object id="33" template="../../../../common/maps/obj/enemy.tx" x="192" y="544">
    <properties>
     <property name="deckOverride" value="" />
     <property name="enemy" value="Ape" />
     <property name="waypoints" value="r11-21-10-23" />
    </properties>
   </object>
-  <object id="34" template="../../../../../../common/maps/obj/enemy.tx" x="112" y="400">
+  <object id="34" template="../../../../common/maps/obj/enemy.tx" x="112" y="400">
    <properties>
     <property name="deckOverride" value="" />
     <property name="enemy" value="Gorilla" />
@@ -102,7 +175,7 @@
    <property name="effect">{ "startBattleWithCard": [ "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
     </properties>
   </object>
-  <object id="35" template="../../../../../../common/maps/obj/enemy.tx" x="384" y="480">
+  <object id="35" template="../../../../common/maps/obj/enemy.tx" x="384" y="480">
    <properties>
     <property name="deckOverride" value="" />
     <property name="enemy" value="Gorilla" />
@@ -110,7 +183,7 @@
    <property name="effect">{ "startBattleWithCard": [ "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
     </properties>
   </object>
-  <object id="36" template="../../../../../../common/maps/obj/enemy.tx" x="64" y="352">
+  <object id="36" template="../../../../common/maps/obj/enemy.tx" x="64" y="352">
    <properties>
     <property name="deckOverride" value="" />
     <property name="enemy" value="Elephant" />
@@ -120,7 +193,7 @@
    <property name="effect">{"startBattleWithCard": ["Brushland|ICE", "Elephant Graveyard|ARN", "War Mammoth|LEA"]}</property>
 </properties>
   </object>
-  <object id="39" template="../../../../../../common/maps/obj/enemy.tx" x="416" y="336">
+  <object id="39" template="../../../../common/maps/obj/enemy.tx" x="416" y="336">
    <properties>
     <property name="deckOverride" value="" />
     <property name="enemy" value="Green Beast" />
@@ -130,7 +203,7 @@
     <property name="waypoints" value="13" />
    </properties>
   </object>
-  <object id="40" template="../../../../../../common/maps/obj/enemy.tx" x="224" y="160">
+  <object id="40" template="../../../../common/maps/obj/enemy.tx" x="224" y="160">
    <properties>
     <property name="deckOverride" value="" />
     <property name="enemy" value="Ape" />
@@ -139,7 +212,7 @@
     <property name="waypoints" value="18,r20-26,r14-25,r15-22, r14-25, r20-26" />
    </properties>
   </object>
-  <object id="41" template="../../../../../../common/maps/obj/enemy.tx" x="240" y="272">
+  <object id="41" template="../../../../common/maps/obj/enemy.tx" x="240" y="272">
    <properties>
     <property name="deckOverride" value="" />
     <property name="enemy" value="Gorilla" />
@@ -148,13 +221,13 @@
    <property name="effect">{ "startBattleWithCard": [ "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
     </properties>
   </object>
-  <object id="42" template="../../../../../../common/maps/obj/enemy.tx" x="192" y="358">
+  <object id="42" template="../../../../common/maps/obj/enemy.tx" x="192" y="358">
    <properties>
     <property name="enemy" value="Poisonous Snake" />
     <property name="waypoints" value="r10-13-15-17-18-21-24-25" />
    </properties>
   </object>
-  <object id="43" template="../../../../../../common/maps/obj/enemy.tx" x="256" y="64">
+  <object id="43" template="../../../../common/maps/obj/enemy.tx" x="256" y="64">
    <properties>
     <property name="deckOverride" value="decks/miniboss/jungle_king.dck" />
     <property name="effect">{ "startBattleWithCard": [ "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
@@ -165,13 +238,13 @@
     <property name="waypoints" value="16" />
    </properties>
   </object>
-  <object id="44" template="../../../../../../common/maps/obj/enemy.tx" x="400" y="96">
+  <object id="44" template="../../../../common/maps/obj/enemy.tx" x="400" y="96">
    <properties>
     <property name="enemy" value="Poisonous Snake" />
     <property name="waypoints" value="r11-12-16-19-22-23-26" />
    </properties>
   </object>
-  <object id="45" template="../../../../../../common/maps/obj/booster.tx" x="416" y="528">
+  <object id="45" template="../../../../common/maps/obj/booster.tx" x="416" y="528">
    <properties>
     <property name="reward">[
   {
@@ -195,7 +268,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="46" template="../../../../../../common/maps/obj/booster.tx" x="16" y="176">
+  <object id="46" template="../../../../common/maps/obj/booster.tx" x="16" y="176">
    <properties>
     <property name="reward">[
   {
@@ -219,7 +292,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="47" template="../../../../../../common/maps/obj/enemy.tx" x="144" y="560">
+  <object id="47" template="../../../../common/maps/obj/enemy.tx" x="144" y="560">
    <properties>
     <property name="deckOverride" value="" />
     <property name="enemy" value="Gorilla" />
@@ -227,21 +300,64 @@
    <property name="effect">{ "startBattleWithCard": [ "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
     </properties>
   </object>
-  <object id="48" template="../../../../../../common/maps/obj/enemy.tx" x="176" y="80">
+  <object id="48" template="../../../../common/maps/obj/enemy.tx" x="176" y="80">
    <properties>
     <property name="enemy" value="Gorilla Chief" />
-    <property name="threatRange" type="int" value="60" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Birds of Paradise|4ED", "Birds of Paradise|7ED", "Ley Line|MMQ", "Hidden Ancients|USG", "Hidden Guerrillas|USG", "Hidden Herd|USG", "Hidden Predators|USG", "Hidden Spider|USG", "Hidden Stag|USG", "Hidden Gibbons|ULG"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
-  <object id="1" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="0" width="32" height="640" />
-  <object id="2" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="640" width="544" height="32" />
-  <object id="3" template="../../../../../../common/maps/obj/collision.tx" x="480" y="0" width="32" height="640" />
-  <object id="4" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="-32" width="544" height="32" />
-  <object id="7" template="../../../../../../common/maps/obj/entry_up.tx" x="35" y="640" width="126" height="16" />
-  <object id="27" template="../../../../../../common/maps/obj/treasure.tx" x="64" y="96" />
-  <object id="28" template="../../../../../../common/maps/obj/gold.tx" x="432" y="224" />
-  <object id="29" template="../../../../../../common/maps/obj/gold.tx" x="32" y="400" />
-  <object id="30" template="../../../../../../common/maps/obj/gold.tx" x="224" y="496" />
+  <object id="1" template="../../../../common/maps/obj/collision.tx" x="-32" y="0" width="32" height="640" />
+  <object id="2" template="../../../../common/maps/obj/collision.tx" x="-32" y="640" width="544" height="32" />
+  <object id="3" template="../../../../common/maps/obj/collision.tx" x="480" y="0" width="32" height="640" />
+  <object id="4" template="../../../../common/maps/obj/collision.tx" x="-32" y="-32" width="544" height="32" />
+  <object id="7" template="../../../../common/maps/obj/entry_up.tx" x="35" y="640" width="126" height="16" />
+  <object id="27" template="../../../../common/maps/obj/treasure.tx" x="64" y="96"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property></properties></object>
+  <object id="28" template="../../../../common/maps/obj/gold.tx" x="432" y="224" />
+  <object id="29" template="../../../../common/maps/obj/gold.tx" x="32" y="400" />
+  <object id="30" template="../../../../common/maps/obj/gold.tx" x="224" y="496" />
  </objectgroup>
 </map>

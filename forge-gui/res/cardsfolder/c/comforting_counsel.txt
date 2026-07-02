@@ -1,0 +1,9 @@
+Name:Comforting Counsel
+ManaCost:1 G
+Types:Enchantment
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a growth counter on this enchantment.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ GROWTH | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 3 | AddToughness$ 3 | IsPresent$ Card.Self+counters_GE5_GROWTH | Description$ As long as there are five or more growth counters on this enchantment, creatures you control get +3/+3.
+DeckHas:Ability$Counters
+DeckHints:Ability$LifeGain
+Oracle:Whenever you gain life, put a growth counter on this enchantment.\nAs long as there are five or more growth counters on this enchantment, creatures you control get +3/+3.

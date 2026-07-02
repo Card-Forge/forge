@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Spock
+Title=Spock
+Icon=Spock.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/SCG_Invitational_Qualifier_Laredo/Edwin_Magana_-_Abzan_Aggro_(Standard,_#268684).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Anafenza, the Foremost
+4 Courser of Kruphix
+4 Den Protector
+4 Fleecemane Lion
+2 Rakshasa Deathdealer
+4 Siege Rhino
+4 Warden of the First Tree
+1 Wingmate Roc
+1 Bow of Nylea
+3 Abzan Charm
+4 Dromoka's Command
+4 Hero's Downfall
+1 Sorin, Solemn Visitor
+3 Caves of Koilos
+3 Forest
+3 Llanowar Wastes
+3 Plains
+3 Sandsteppe Citadel
+3 Temple of Malady
+1 Urborg, Tomb of Yawgmoth
+3 Windswept Heath
+[Sideboard]
+1 Bile Blight
+2 Drown in Sorrow
+3 Hornet Nest
+2 Mistcutter Hydra
+3 Self-Inflicted Wound
+3 Ultimate Price

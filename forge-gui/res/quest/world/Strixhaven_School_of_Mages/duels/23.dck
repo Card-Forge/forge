@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Saruman
+Title=Saruman
+Icon=Saruman.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/DonHoernchen_-_Mono-Blue_Control_(Standard,_#1172643).dck
+Deck Type=constructed
+
+[Main]
+2 Icebreaker Kraken
+4 Ascendant Spirit
+4 Brazen Borrower
+4 Frost Augur
+2 Negate
+2 Essence Scatter
+2 Graven Lore
+4 Saw It Coming
+4 Alrund's Epiphany
+4 Shark Typhoon
+2 Teferi, Master of Time
+4 Faceless Haven
+22 Snow-Covered Island
+[Sideboard]
+1 Essence Scatter
+2 Test of Talents
+2 Soul-Guide Lantern
+2 Unsubstantiate
+2 Mystical Dispute
+3 Midnight Clock
+3 Frogify

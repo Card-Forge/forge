@@ -23,6 +23,7 @@ import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.gamemodes.limited.CardRanker;
+import forge.gamemodes.net.EventFormat;
 import forge.gui.card.CardPreferences;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -40,6 +41,8 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Function;
+
+import forge.deck.CommanderBracketCalculator;
 
 public enum ColumnDef {
     /**
@@ -309,9 +312,27 @@ public enum ColumnDef {
                     return deckEdition.getCode();
                 return null;
             }),
+    DECK_EVENT_TYPE("lblEventType", "lblEventType", 50, false, SortState.ASC,
+            from -> eventFormatDisplay(eventTag(from.getKey(), "eventFormat")),
+            from -> eventFormatDisplay(eventTag(from.getKey(), "eventFormat"))),
+    DECK_EVENT_PRODUCT("lblProduct", "lblProduct", 80, false, SortState.ASC,
+            from -> eventTag(from.getKey(), "eventProduct"),
+            from -> eventTag(from.getKey(), "eventProduct")),
+    DECK_EVENT_DATE("lblEventDate", "lblEventDate", 60, false, SortState.DESC,
+            from -> eventTag(from.getKey(), "eventDate"),
+            from -> eventTag(from.getKey(), "eventDate")),
     DECK_AI("lblAI", "lblAIStatus", 38, true, SortState.DESC,
             from -> toDeck(from.getKey()).getAI().inMainDeck,
             from -> toDeck(from.getKey()).getAI()),
+    DECK_BRACKET("lblBracket", "ttCommanderBracket", 55, true, SortState.ASC,
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                return deck == null ? 1 : CommanderBracketCalculator.getBracket(deck.getDeck());
+            },
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                return deck == null ? "" : CommanderBracketCalculator.getBracket(deck.getDeck());
+            }),
     /**
      * The main library size column.
      */
@@ -323,7 +344,25 @@ public enum ColumnDef {
      */
     DECK_SIDE("lblSide", "lblSideboard", 30, true, SortState.ASC,
             from -> toDeck(from.getKey()).getSideSize(),
-            from -> toDeck(from.getKey()).getSideSize());
+            from -> toDeck(from.getKey()).getSideSize()),
+    /**
+     * The key card indicator column for cards in the current deck.
+     */
+    DECK_KEY_CARD("lblKey", "ttKeyCard", 20, true, SortState.DESC,
+            from -> {
+                InventoryItem item = from.getKey();
+                if (item instanceof PaperCard) {
+                    return 0; // no special sorting for key cards
+                }
+                return -1;
+            },
+            from -> {
+                InventoryItem item = from.getKey();
+                if (item instanceof PaperCard) {
+                    return item; // pass the card through to the renderer
+                }
+                return null;
+            });
 
     ColumnDef(String shortName0, String longName0, int preferredWidth0, boolean isWidthFixed0, SortState sortState0,
               Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
@@ -421,6 +460,25 @@ public enum ColumnDef {
 
     private static DeckProxy toDeck(final InventoryItem i) {
         return i instanceof DeckProxy ? ((DeckProxy) i) : null;
+    }
+
+    private static String eventTag(final InventoryItem i, final String key) {
+        DeckProxy d = toDeck(i);
+        if (d == null) return "";
+        String v = DeckProxy.getEventTag(d.getDeck(), key);
+        return v != null ? v : "";
+    }
+
+    private static String eventFormatDisplay(final String rawFormat) {
+        if (rawFormat.isEmpty()) return "";
+        Localizer localizer = Localizer.getInstance();
+        if (EventFormat.BOOSTER_DRAFT.name().equals(rawFormat)) {
+            return localizer.getMessage("lblDraft");
+        }
+        if (EventFormat.SEALED.name().equals(rawFormat)) {
+            return localizer.getMessage("lblSealed");
+        }
+        return rawFormat;
     }
 
     private static ColorSet toDeckColor(final InventoryItem i) {

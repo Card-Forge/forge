@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/Modern_Turniers_vom_Dienstag_den_06.05.2013/Markus_Kufer_-_GW_Aggro_(Modern,_#52111).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Gladecover Scout
+4 Silhana Ledgewalker
+4 Slippery Bogle
+4 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+4 Rancor
+3 Spider Umbra
+2 Spirit Link
+4 Spirit Mantle
+3 Arid Mesa
+1 Forest
+4 Horizon Canopy
+1 Plains
+4 Razorverge Thicket
+3 Temple Garden
+4 Verdant Catacombs
+[Sideboard]
+4 Nature's Claim
+3 Pithing Needle
+3 Stony Silence
+3 Torpor Orb

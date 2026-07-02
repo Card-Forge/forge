@@ -1,0 +1,8 @@
+Name:Armed Assailant
+ManaCost:2 B
+Types:Creature Human Villain
+PT:1/3
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Card.Self+equipped | AddPower$ 2 | AddKeyword$ Menace | Description$ As long as this creature is equipped, it gets +2/+0 and has menace. (It can't be blocked except by two or more creatures.)
+SVar:EquipMe:Once
+Oracle:Deathtouch\nAs long as this creature is equipped, it gets +2/+0 and has menace. (It can't be blocked except by two or more creatures.)

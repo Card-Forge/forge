@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Surtr
+Title=Surtr
+Icon=Surtr.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/-Nicolo-_-_Red_Deck_Wins_(Standard,_#787547).dck
+Deck Type=constructed
+
+[Main]
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Goblin Chainwhirler
+4 Runaway Steam-Kin
+4 Viashino Pyromancer
+4 Lightning Strike
+4 Shock
+4 Wizard's Lightning
+3 Light Up the Stage
+4 Experimental Frenzy
+13 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+[Sideboard]
+1 Banefire
+4 Cindervines
+2 Collision // Colossus
+1 Dire Fleet Daredevil
+2 Fiery Cannonade
+3 Lava Coil
+2 Treasure Map

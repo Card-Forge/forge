@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Borborygmos
+Title=Borborygmos
+Icon=Borborygmos.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/Les_Hordes_de_Maltus_from_Ottersthal/Yannick_Hammer_-_RW_planeswalker_(Modern,_#22113).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+3 Flame Javelin
+4 Lightning Bolt
+4 Lightning Helix
+3 Path to Exile
+4 Searing Blaze
+1 Devil's Play
+2 Wrath of God
+4 Ajani Vengeant
+3 Chandra, the Firebrand
+4 Koth of the Hammer
+4 Arid Mesa
+12 Mountain
+4 Plains
+4 Sacred Foundry
+1 Scalding Tarn
+[Sideboard]
+2 Ghostly Prison
+1 Gideon Jura
+1 Hellspark Elemental
+3 Kor Firewalker
+2 Mirran Crusader
+2 Pyroclasm
+4 Timely Reinforcements

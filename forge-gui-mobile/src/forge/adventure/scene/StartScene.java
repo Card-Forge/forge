@@ -15,6 +15,7 @@ import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
+import forge.assets.FSkinTexture;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeProfileProperties;
 import forge.screens.TransitionScreen;
@@ -307,6 +308,7 @@ public class StartScene extends UIScene {
             updateSettingRow();
         }
 
+        FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(Config.instance().getPrefix());
 
         if (Forge.createNewAdventureMap) {

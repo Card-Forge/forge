@@ -17,24 +17,20 @@
  */
 package forge.game.ability.effects;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-
 import com.google.common.collect.Lists;
-
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.RemoveType;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardTraitChanges;
+import forge.game.card.ICardTraitChanges;
 import forge.game.card.perpetual.*;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
@@ -45,6 +41,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
     public static void doAnimate(final Card c, final SpellAbility sa, final Integer power, final Integer toughness,
@@ -74,8 +75,17 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         if (sa.hasParam("RemoveEnchantmentTypes"))
             remove.add(RemoveType.EnchantmentTypes);
 
-        boolean removeNonManaAbilities = sa.hasParam("RemoveNonManaAbilities");
-        boolean removeAll = sa.hasParam("RemoveAllAbilities");
+        Predicate<CardTraitBase> removeAbilities = null;
+        boolean removeAllKeywords = false;
+        if (sa.hasParam("RemoveAllAbilities")) {
+            removeAbilities = e -> true;
+            removeAllKeywords = true;
+        } else if (sa.hasParam("RemoveNonManaAbilities")) {
+            removeAbilities = Predicate.not(CardTraitBase::isManaAbility);
+            removeAllKeywords = true;
+        } else if (sa.hasParam("RemoveThisAbility")) {
+            removeAbilities = e -> sa.getOriginalAbility().equals(e);
+        }
 
         if (sa.hasParam("RememberAnimated")) {
             source.addRemembered(c);
@@ -85,13 +95,13 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         // Alchemy "incorporate" cost
         if (sa.hasParam("Incorporate")) {
-            final ManaCost incMCost = new ManaCost(new ManaCostParser(sa.getParam("Incorporate")));
+            final ManaCost incMCost = new ManaCost(sa.getParam("Incorporate"));
             PerpetualIncorporate p = new PerpetualIncorporate(timestamp, incMCost);
             c.addPerpetual(p);
             p.applyEffect(c);
         }
         if (sa.hasParam("ManaCost")) {
-            final ManaCost manaCost = new ManaCost(new ManaCostParser(sa.getParam("ManaCost")));
+            final ManaCost manaCost = new ManaCost(sa.getParam("ManaCost"));
             if (perpetual) {
                 PerpetualManaCost p = new PerpetualManaCost(timestamp, manaCost);
                 c.addPerpetual(p);
@@ -106,11 +116,11 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
         }
 
-        if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAll) {
+        if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAllKeywords) {
             if (perpetual) {
-                c.addPerpetual(new PerpetualKeywords(timestamp, keywords, removeKeywords, removeAll));
+                c.addPerpetual(new PerpetualKeywords(timestamp, keywords, removeKeywords, removeAllKeywords));
             }
-            c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, null);
+            c.addChangedCardKeywords(keywords, removeKeywords, removeAllKeywords, timestamp, null);
         }
 
         // do this after changing types in case it wasn't a creature before
@@ -143,12 +153,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             addLeaveBattlefieldReplacement(c, sa, sa.getParam("LeaveBattlefield"));
         }
 
-        // remove abilities
-        final List<SpellAbility> removedAbilities = Lists.newArrayList();
-        if (sa.hasParam("RemoveThisAbility")) {
-            removedAbilities.add(sa.getOriginalAbility());
-        }
-
         // give abilities
         final List<SpellAbility> addedAbilities = Lists.newArrayList();
         for (final String s : abilities) {
@@ -163,8 +167,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         // Grant triggers
         final List<Trigger> addedTriggers = Lists.newArrayList();
         for (final String s : triggers) {
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa);
-            addedTriggers.add(parsedTrigger);
+            addedTriggers.add(TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa));
         }
 
         // give replacement effects
@@ -197,7 +200,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         };
 
         if (sa.hasParam("RevertCost")) {
-            final ManaCost cost = new ManaCost(new ManaCostParser(sa.getParam("RevertCost")));
+            final ManaCost cost = new ManaCost(sa.getParam("RevertCost"));
             final String desc = sa.getStackDescription();
             final SpellAbility revertSA = new AbilityStatic(c, cost) {
                 @Override
@@ -213,13 +216,16 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         // after unanimate to add RevertCost
-        if (removeAll || removeNonManaAbilities
-                || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
+        if (removeAbilities != null
+                || !addedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
-            CardTraitChanges changes = c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
-                addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
+            ICardTraitChanges changes = c.addChangedCardTraits(addedAbilities, addedTriggers, addedReplacements,
+                addedStaticAbilities, removeAbilities, timestamp, 0);
             if (perpetual) {
                 c.addPerpetual(new PerpetualAbilities(timestamp, changes));
+                if (changes instanceof CardTraitChanges ctc && ctc.containsCostChange()) {
+                    c.calculatePerpetualAdjustedManaCost();
+                }
             }
         }
 

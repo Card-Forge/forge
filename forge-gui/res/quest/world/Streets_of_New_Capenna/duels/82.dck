@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Zombie Attack
+Title=Zombie Attack
+Icon=Zombie Attack.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Felicia_Hynes_-_Rakdos_Goblins_(Modern,_#1438866).dck
+Deck Type=constructed
+
+[Main]
+1 Pashalik Mons
+1 Skirk Prospector
+1 Goblin Trashmaster
+1 Goblin Chieftain
+2 Sling-Gang Lieutenant
+2 Kiki-Jiki, Mirror Breaker
+3 Goblin Ringleader
+3 Mogg Fanatic
+3 Boggart Harbinger
+4 Mogg War Marshal
+4 Conspicuous Snoop
+4 Munitions Expert
+4 Goblin Matron
+4 Aether Vial
+1 Swamp
+1 Den of the Bugbear
+1 Sokenzan, Crucible of Defiance
+2 Blood Crypt
+3 Bloodstained Mire
+3 Mountain
+4 Cavern of Souls
+4 Secluded Courtyard
+4 Auntie's Hovel
+[Sideboard]
+1 Boggart Harbinger
+1 Fury
+2 Thoughtseize
+2 Unlicensed Hearse
+2 Void Mirror
+3 Leyline of the Void
+4 Magus of the Moon

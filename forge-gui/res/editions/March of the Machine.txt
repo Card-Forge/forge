@@ -18,7 +18,7 @@ ScryfallCode=MOM
 6 M Archangel Elspeth @Cynthia Sheppard
 7 C Attentive Skywarden @Jodie Muir
 8 C Bola Slinger @Hendry Iwanaga
-9 R Boon-Bringer Valkyrie @Heonhwa Choe
+9 R Boon-Bringer Valkyrie @Heonhwa
 10 C Cut Short @Tran Nguyen
 11 R Dusk Legion Duelist @Ryan Valle
 12 M Elesh Norn @Magali Villeneuve
@@ -360,7 +360,7 @@ ScryfallCode=MOM
 337 R Surrak and Goreclaw @Lucas Graciano
 
 [extended art]
-343 R Boon-Bringer Valkyrie @Heonhwa Choe
+343 R Boon-Bringer Valkyrie @Heonhwa
 344 R Dusk Legion Duelist @Ryan Valle
 345 R Guardian of Ghirapur @Cynthia Sheppard
 346 R Knight-Errant of Eos @Kevin Sidharta

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Darkseid
+Title=Darkseid
+Icon=Darkseid.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Allison_Warfield_-_Simic_Nexus_(Standard,_#783892).dck
+Deck Type=constructed
+
+[Main]
+2 Hydroid Krasis
+2 Blink of an Eye
+4 Chemister's Insight
+4 Growth Spiral
+4 Nexus of Fate
+4 Opt
+4 Root Snare
+2 Sinister Sabotage
+1 Spell Pierce
+4 Wilderness Reclamation
+4 Search for Azcanta
+6 Forest
+5 Island
+1 Arch of Orazca
+4 Breeding Pool
+4 Hinterland Harbor
+4 Memorial to Genius
+1 Simic Guildgate
+[Sideboard]
+3 Biogenic Ooze
+3 Incubation Druid
+2 Kraul Harpooner
+3 Murmuring Mystic
+1 Crushing Canopy
+2 Negate
+1 Spell Pierce

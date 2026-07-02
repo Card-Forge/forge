@@ -1,8 +1,10 @@
 package forge.ai.ability;
 
 import forge.ai.*;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 public class SacrificeAllAi extends SpellAbilityAi {
 
@@ -18,6 +20,8 @@ public class SacrificeAllAi extends SpellAbilityAi {
             }
         } else if (logic.equals("MadSarkhanDragon")) {
             return SpecialCardAi.SarkhanTheMad.considerMakeDragon(ai, sa);
+        } else if (logic.equals("ShapeAnew")) {
+            return considerShapeAnew(ai, sa);
         }
 
         AiAbilityDecision decision = DestroyAllAi.doMassRemovalLogic(ai, sa);
@@ -33,5 +37,19 @@ public class SacrificeAllAi extends SpellAbilityAi {
         //TODO: Add checks for bad outcome
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
 
+    }
+
+    private AiAbilityDecision considerShapeAnew(Player ai, SpellAbility sa) {
+        Card worstToSacrifice = ComputerUtilCard.getCheapestPermanentAI(CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS), sa, true);
+        if (worstToSacrifice == null) {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
+        Card worstToGain = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.ARTIFACTS));
+        if (worstToGain != null && worstToGain.getCMC() > worstToSacrifice.getCMC() + sa.getHostCard().getCMC()) {
+            sa.resetTargets();
+            sa.getTargets().add(worstToSacrifice);
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 }
