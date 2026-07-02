@@ -2,5 +2,5 @@ Name:Scouring Sands
 ManaCost:1 R
 Types:Sorcery
 A:SP$ DamageAll | ValidCards$ Creature.OppCtrl | ValidDescription$ each creature your opponents control | NumDmg$ 1 | SubAbility$ DBScry | SpellDescription$ CARDNAME deals 1 damage to each creature your opponents control.
-SVar:DBScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1.
-Oracle:Scouring Sands deals 1 damage to each creature your opponents control. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+SVar:DBScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+Oracle:Scouring Sands deals 1 damage to each creature your opponents control. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
