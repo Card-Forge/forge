@@ -122,6 +122,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private OutlinedLabel cardIdText;
     private boolean displayEnabled = true;
     private boolean ghost; // faded stand-in for a card this permanent holds in exile
+    private boolean dimmed;
     private boolean isAnimationPanel;
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
     private boolean isSelected;
@@ -271,6 +272,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
     public final void setDisplayEnabled(final boolean displayEnabled0) {
         displayEnabled = displayEnabled0;
+    }
+
+    public final void setDimmed(final boolean dimmed0) {
+        dimmed = dimmed0;
     }
 
     public int getGroupCount() {
@@ -459,8 +464,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         boolean nonselectable = matchUI.isSelecting() && !matchUI.isSelectable(getCard());
-        // if selecting, darken non-selectable cards
-        if (nonselectable) {
+        // darken non-selectable cards while selecting, and panels explicitly dimmed
+        if (nonselectable || dimmed) {
             boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
             boolean cardImgHasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
             final int cornerSize = noBorderPref && !cardImgHasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
