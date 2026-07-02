@@ -966,7 +966,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
     "deck": [
-      "decks/standard/bluedragon.dck"
+      "decks/miniboss/bluedragon.dck"
     ],
     "ai": "",
     "boss": true,
@@ -7371,7 +7371,7 @@
     "name": "Dark Enchanter",
     "sprite": "sprites/enemy/humanoid/viashino/dreamwalker.atlas",
     "deck": [
-      "decks/standard/darkenchanter.dck"
+      "decks/miniboss/darkenchanter.dck"
     ],
     "ai": "",
     "boss": true,
@@ -9971,7 +9971,7 @@
     "name": "Elesh Norn",
     "sprite": "sprites/enemy/aberration/phyrexian/eleshnorn.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "boss": true,
@@ -17646,7 +17646,7 @@
     "name": "Jin-Gitaxias",
     "sprite": "sprites/enemy/aberration/phyrexian/jin-gitaxias.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "spawnRate": 0.1,
@@ -18789,7 +18789,7 @@
     "name": "Kozilek",
     "sprite": "sprites/enemy/aberration/eldrazi/kozilek.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "spawnRate": 0.1,
@@ -22345,7 +22345,7 @@
     "name": "Nissa",
     "sprite": "sprites/enemy/humanoid/elf/nissa.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "spawnRate": 0.1,
@@ -29508,7 +29508,7 @@
     "name": "Urabrask",
     "sprite": "sprites/enemy/aberration/phyrexian/urabrask.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "boss": true,
@@ -30057,7 +30057,7 @@
     "name": "Vorinclex",
     "sprite": "sprites/enemy/aberration/phyrexian/vorinclex.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "spawnRate": 0.1,
