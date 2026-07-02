@@ -35,11 +35,11 @@ import forge.util.TextUtil;
  * Loads preferred values when instantiated.
  * If a requested value is not present, default is returned.
  */
-public abstract class PreferencesStore<T extends Enum<T> & PreferencesStore.IPref> {
+public abstract class AbstractPreferences<T extends Enum<T> & IPreferences.IPref> implements IPreferences<T> {
     private final Map<T, String> preferenceValues;
     private final String filename;
 
-    public PreferencesStore(final String filename0, final Class<T> clasz) {
+    public AbstractPreferences(final String filename0, final Class<T> clasz) {
         preferenceValues = new EnumMap<>(clasz);
         filename = filename0;
 
@@ -68,8 +68,8 @@ public abstract class PreferencesStore<T extends Enum<T> & PreferencesStore.IPre
 
     protected abstract T[] getEnumValues();
     protected abstract T valueOf(String name);
-    protected abstract String getPrefDefault(T key);
 
+    @Override
     public void save() {
         BufferedWriter writer = null;
         try {
@@ -91,18 +91,17 @@ public abstract class PreferencesStore<T extends Enum<T> & PreferencesStore.IPre
         }
     }
 
+    @Override
     public final void reset() {
         this.preferenceValues.clear();
     }
 
+    @Override
     public final void setPref(final T q0, final String s0) {
         preferenceValues.put(q0, s0);
     }
 
-    public final void setPref(final T q0, final boolean val) {
-        setPref(q0, String.valueOf(val));
-    }
-
+    @Override
     public final String getPref(final T fp0) {
         String val;
 
@@ -110,26 +109,6 @@ public abstract class PreferencesStore<T extends Enum<T> & PreferencesStore.IPre
         if (val == null) { val = getPrefDefault(fp0); }
 
         return val;
-    }
-    
-    public final void togglePrefBoolean(final T q0) {
-        setPref(q0, !getPrefBoolean(q0));
-    }
-
-    public final int getPrefInt(final T fp0) {
-        try {
-            return Integer.parseInt(getPref(fp0));
-        } catch (NumberFormatException e) {
-            return Integer.parseInt(getPrefDefault(fp0));
-        }
-    }
-
-    public final boolean getPrefBoolean(final T fp0) {
-        return Boolean.parseBoolean(getPref(fp0));
-    }
-    
-    public final double getPrefDouble(final T fp0) {
-        return Double.parseDouble(getPref(fp0));        
     }
 
     public void setGameType(final T q0, final Set<GameType> gameTypes) {
@@ -178,9 +157,5 @@ public abstract class PreferencesStore<T extends Enum<T> & PreferencesStore.IPre
             result.add(GameType.Archenemy);
         else if (gameType.equals("Archenemy Rumble"))
             result.add(GameType.ArchenemyRumble);
-    }
-
-    public interface IPref  {
-        String getDefault(); // Common method for getting the default value
     }
 }

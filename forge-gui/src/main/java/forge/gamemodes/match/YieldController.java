@@ -42,7 +42,7 @@ import java.util.Set;
 public class YieldController {
 
     /** Yield FPrefs synced per-PCH; enumerated here so the client snapshot includes every value, not just touched overrides.
-     * Stored String-typed (see {@link forge.localinstance.properties.PreferencesStore}); consumers parse via {@link #getBoolPref}/{@link #getStringPref} according to the pref's expected type. */
+     * Stored String-typed (see {@link forge.localinstance.properties.IPreferences}); consumers parse via {@link #getBoolPref}/{@link #getStringPref} according to the pref's expected type. */
     private static final EnumSet<FPref> SYNCED_PREFS = EnumSet.of(
             FPref.YIELD_INTERRUPT_ON_ATTACKERS,
             FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL,
