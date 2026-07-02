@@ -204,13 +204,11 @@ public class CountersPutAi extends CountersAi {
                     }
                 }
 
-                if (sa.canTarget(ai)) {
+                if (sa.canTarget(ai) && !ai.getCounters().isEmpty()) {
                     // don't target itself when its forced to add poison counters too
-                    if (!ai.getCounters().isEmpty()) {
-                        if (!eachExisting || ai.getPoisonCounters() < 5) {
-                            sa.getTargets().add(ai);
-                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                        }
+                    if (!eachExisting || ai.getPoisonCounters() < 5) {
+                        sa.getTargets().add(ai);
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
 
@@ -335,14 +333,8 @@ public class CountersPutAi extends CountersAi {
             amount = 1; // TODO: improve this to possibly account for some variability depending on the roll outcome (e.g. 4 for 1d8, perhaps)
         }
 
-        if (sa.hasParam("Adapt") &&
-                (!source.canReceiveCounters(CounterEnumType.P1P1) || source.getCounters(CounterEnumType.P1P1) > 0)) {
+        if (sa.hasParam("Adapt") && source.getCounters(CounterEnumType.P1P1) > 0) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-
-        if (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) &&
-                (sa.hasParam("Adapt") || sourceName.equals("Psychic Frog"))) {
-            return doCombatAdaptLogic(source, amount, game.getCombat());
         }
 
         if ("Fight".equals(logic) || "PowerDmg".equals(logic)) {
@@ -544,40 +536,38 @@ public class CountersPutAi extends CountersAi {
 
                 if (sa.isCurse()) {
                     choice = chooseCursedTarget(list, type, amount, ai);
-                } else {
-                    if (type.equals("P1P1") && !isSorcerySpeed(sa, ai)) {
-                        for (Card c : list) {
-                            if (ComputerUtilCard.shouldPumpCard(ai, sa, c, amount, amount, Lists.newArrayList())) {
-                                choice = c;
-                                break;
-                            }
+                } else if (type.equals("P1P1") && !isSorcerySpeed(sa, ai)) {
+                    for (Card c : list) {
+                        if (ComputerUtilCard.shouldPumpCard(ai, sa, c, amount, amount, Lists.newArrayList())) {
+                            choice = c;
+                            break;
                         }
-
-                        if (choice == null) {
-                            // try to use as cheap kill
-                            choice =  ComputerUtil.getKilledByTargeting(sa, CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa));
-                        }
-
-                        if (choice == null) {
-                            // find generic target
-                            boolean increasesCharmOutcome = false;
-                            if (sa.getRootAbility().getApi() == ApiType.Charm && source.getStaticAbilities().isEmpty()) {
-                                List<AbilitySub> choices = Lists.newArrayList(sa.getRootAbility().getAdditionalAbilityList("Choices"));
-                                choices.remove(sa);
-                                // check if other choice will already be played
-                                increasesCharmOutcome = !choices.get(0).getTargets().isEmpty(); 
-                            }
-                            if (source != null && !source.isSpell() || increasesCharmOutcome // does not cost a card or can buff charm for no expense
-                                    || ph.getTurn() - source.getTurnInZone() >= game.getPlayers().size() * 2) {
-                                if (abCost == Cost.Zero || ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai)) {
-                                    // only use at opponent EOT unless it is free
-                                    choice = chooseBoonTarget(list, type);
-                                }
-                            }
-                        }
-                    } else {
-                        choice = chooseBoonTarget(list, type);
                     }
+
+                    if (choice == null) {
+                        // try to use as cheap kill
+                        choice =  ComputerUtil.getKilledByTargeting(sa, CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa));
+                    }
+
+                    if (choice == null) {
+                        // find generic target
+                        boolean increasesCharmOutcome = false;
+                        if (sa.getRootAbility().getApi() == ApiType.Charm && source.getStaticAbilities().isEmpty()) {
+                            List<AbilitySub> choices = Lists.newArrayList(sa.getRootAbility().getAdditionalAbilityList("Choices"));
+                            choices.remove(sa);
+                            // check if other choice will already be played
+                            increasesCharmOutcome = !choices.get(0).getTargets().isEmpty();
+                        }
+                        if (source != null && !source.isSpell() || increasesCharmOutcome // does not cost a card or can buff charm for no expense
+                                || ph.getTurn() - source.getTurnInZone() >= game.getPlayers().size() * 2) {
+                            if (abCost == Cost.Zero || ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai)) {
+                                // only use at opponent EOT unless it is free
+                                choice = chooseBoonTarget(list, type);
+                            }
+                        }
+                    }
+                } else {
+                    choice = chooseBoonTarget(list, type);
                 }
 
                 if (choice == null) { // can't find anything left
@@ -602,14 +592,16 @@ public class CountersPutAi extends CountersAi {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         } else {
-            final List<Card> cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+            final CounterType cType = CounterType.getType(type);
+            final CardCollection cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa)
+                    .filter(CardPredicates.canReceiveCounters(cType));
             // Don't activate Curse abilities on my cards and non-curse abilities
             // on my opponents
             if (cards.isEmpty() || (cards.get(0).getController().isOpponentOf(ai) && !sa.isCurse())) {
                 return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
 
-            final int currCounters = cards.get(0).getCounters(CounterType.getType(type));
+            final int currCounters = cards.get(0).getCounters(cType);
 
             // adding counters would cause counter amount to overflow
             if (Integer.MAX_VALUE - currCounters <= amount) {
@@ -627,23 +619,20 @@ public class CountersPutAi extends CountersAi {
             // each non +1/+1 counter on the card is a 10% chance of not
             // activating this ability.
 
-            if (!(type.equals("P1P1") || type.equals("M1M1") || type.equals("ICE")) && (MyRandom.getRandom().nextFloat() < (.1 * currCounters))) {
+            if (!(type.equals("P1P1") || type.equals("M1M1") || type.equals("ICE")) && MyRandom.getRandom().nextFloat() < (.1 * currCounters)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             // Instant +1/+1
             if (type.equals("P1P1") && !isSorcerySpeed(sa, ai)) {
-                final Combat combat = game.getCombat();
-                // e.g. Power-Up abilities: use it to survive or win combat even without a sac cost
-                final boolean savesOrWinsCombat = combat != null
-                        && doCombatAdaptLogic(cards.get(0), amount, combat).willingToPlay();
-                if (!hasSacCost && !savesOrWinsCombat
-                        && !(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
+                // e.g. Power-Up abilities: use it to survive or win combat
+                if (!hasSacCost && !(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())
+                        && !ComputerUtilCard.shouldPumpCard(ai, sa, cards.get(0), amount, amount, Lists.newArrayList())) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
 
             // Useless since the card already has the keyword (or for another reason)
-            if (ComputerUtil.isUselessCounter(CounterType.getType(type), cards.get(0))) {
+            if (ComputerUtil.isUselessCounter(cType, cards.get(0))) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
@@ -1157,42 +1146,6 @@ public class CountersPutAi extends CountersAi {
         }
 
         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-    }
-
-    private AiAbilityDecision doCombatAdaptLogic(Card source, int amount, Combat combat) {
-        // TODO use smarter ComputerUtilCombat checks
-        if (combat.isAttacking(source)) {
-            if (!combat.isBlocked(source)) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                for (Card blockedBy : combat.getBlockers(source)) {
-                    if (blockedBy.getNetToughness() > source.getNetPower()
-                            && blockedBy.getNetToughness() <= source.getNetPower() + amount) {
-                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    }
-                }
-
-                int totBlkPower = Aggregates.sum(combat.getBlockers(source), Card::getNetPower);
-                if (source.getNetToughness() <= totBlkPower
-                        && source.getNetToughness() + amount > totBlkPower) {
-                    return new AiAbilityDecision(100, AiPlayDecision.ImpactCombat);
-                }
-            }
-        } else if (combat.isBlocking(source)) {
-            for (Card blocked : combat.getAttackersBlockedBy(source)) {
-                if (blocked.getNetToughness() > source.getNetPower()
-                        && blocked.getNetToughness() <= source.getNetPower() + amount) {
-                    return new AiAbilityDecision(100, AiPlayDecision.ImpactCombat);
-                }
-            }
-
-            int totAtkPower = Aggregates.sum(combat.getAttackersBlockedBy(source), Card::getNetPower);
-            if (source.getNetToughness() <= totAtkPower
-                    && source.getNetToughness() + amount > totAtkPower) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            }
-        }
-        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
-public class CountersPutAiPowerUpTest extends SimulationTest {
+public class CountersPutAiTest extends SimulationTest {
 
     @Test
     public void testPowerUp_savesAttackerFromLethalCombat_aiActivates() {

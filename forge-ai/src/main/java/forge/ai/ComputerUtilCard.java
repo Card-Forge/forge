@@ -1754,13 +1754,13 @@ public class ComputerUtilCard {
                     }
                 }
 
-                float value = 1.0f * (pumpedDmg - dmg);
+                float value = pumpedDmg - dmg;
                 if (c == sa.getHostCard() && power > 0) {
                     int divisor = sa.getPayCosts().getTotalMana().getCMC();
                     if (divisor <= 0) {
                         divisor = 1;
                     }
-                    value *= power / divisor;
+                    value *= (float) power / divisor;
                 } else {
                     value /= opp.getLife();
                 }
