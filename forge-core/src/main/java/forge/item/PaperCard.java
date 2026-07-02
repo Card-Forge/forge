@@ -284,7 +284,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         if (!name.equals(other.name)) {
             return false;
         }
-        if (!edition.equals(other.edition)) {
+        CardEdition thisCardEdition = StaticData.instance().getCardEdition(edition);
+        CardEdition otherCardEdition = StaticData.instance().getCardEdition(other.getEdition());
+        if (!thisCardEdition.equals(otherCardEdition)) {
             return false;
         }
         if (!getCollectorNumber().equals(other.getCollectorNumber()))
@@ -415,8 +417,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         if (0 != nameCmp) {
             return nameCmp;
         }
-        //FIXME: compare sets properly
-        int setDiff = edition.compareTo(o.getEdition());
+        CardEdition thisCardEdition = StaticData.instance().getCardEdition(edition);
+        CardEdition oCardEdition = StaticData.instance().getCardEdition(o.getEdition());
+        int setDiff = thisCardEdition.compareTo(oCardEdition);
         if (0 != setDiff)
             return setDiff;
         String thisCollNrKey = getCollectorNumberSortingKey();

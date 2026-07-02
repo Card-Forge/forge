@@ -1,10 +1,10 @@
 package forge.deck;
 
-import java.util.Set;
-import java.util.HashSet;
 import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 import forge.Forge;
+import forge.adventure.player.AdventurePlayer;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
@@ -17,6 +17,8 @@ import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.toolbox.FOptionPane;
+import forge.util.ItemPool;
+import org.apache.commons.lang3.StringUtils;
 
 public class FDeckViewer extends FScreen {
     private static FDeckViewer deckViewer;
@@ -49,16 +51,32 @@ public class FDeckViewer extends FScreen {
     }
 
     public static void copyCollectionToClipboard(CardPool pool) {
+        ItemPool<PaperCard> autoSellCards = AdventurePlayer.current().getAutoSellCards();
+        CardPool playedCards = pool.getFilteredPool(card -> !autoSellCards.contains(card));
+
         final String nl = System.lineSeparator();
         final StringBuilder collectionList = new StringBuilder();
-        Set<String> accounted = new HashSet<>();
-        for (final Entry<PaperCard, Integer> entry : pool) {
-            String cardName = entry.getKey().getCardName();
-            if (!accounted.contains(cardName)) {
-                collectionList.append(pool.countByName(cardName)).append(" ").append(cardName).append(nl);
-                accounted.add(cardName);
+        collectionList.append("\"Count\",\"Name\",\"Edition\",\"Collector Number\",\"Foil\"").append(nl);
+        Pattern regexQuote = Pattern.compile("\"");
+        Pattern regexEdPlst = Pattern.compile("PLIST|MB1");
+        Pattern regexEdNem = Pattern.compile("NMS");
+        Pattern regexEdP02 = Pattern.compile("PO2");
+
+        for (final Entry<PaperCard, Integer> entry : playedCards) {
+            PaperCard card = entry.getKey();
+            if (!card.isVeryBasicLand()) {
+                Integer count = entry.getValue();
+                String cleanCardName = regexQuote.matcher(card.getCardName()).replaceAll("\"\"");
+                // Moxfield import will choke on accented characters so replace them with ASCII equivalents
+                cleanCardName = StringUtils.stripAccents(cleanCardName);
+                String cleanCardEdition = regexEdPlst.matcher(card.getEdition()).replaceAll("PLST");
+                cleanCardEdition = regexEdNem.matcher(cleanCardEdition).replaceAll("NEM");
+                cleanCardEdition = regexEdP02.matcher(cleanCardEdition).replaceAll("P02");
+                String cardLine = "\"" + count + "\",\"" + cleanCardName + "\",\"" + cleanCardEdition + "\",\"" + card.getCollectorNumber() + "\",\"" + (card.isFoil() ? "foil" : "") + "\"" + nl;
+                collectionList.append(cardLine);
             }
         }
+
         Forge.getClipboard().setContents(collectionList.toString());
         FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblCollectionCopiedClipboard"));
     }
