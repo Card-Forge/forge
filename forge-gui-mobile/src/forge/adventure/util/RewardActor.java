@@ -982,6 +982,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         getColor().a = 0.5f;
     }
 
+    public boolean isSold() {
+        return sold;
+    }
+
     private static boolean inCollectionLike(PaperCard pc) {
         var coll = AdventurePlayer.current().getCollectionCards(true).toFlatList();
         String name = pc.getName();
