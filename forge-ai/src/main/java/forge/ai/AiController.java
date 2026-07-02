@@ -851,6 +851,10 @@ public class AiController {
             return AiPlayDecision.AnotherTime;
         }
 
+        if (ComputerUtilCard.shouldAvoidDrawPunisher(player, sa)) {
+            return AiPlayDecision.CurseEffects;
+        }
+
         // this is the "heaviest" check, which also sets up targets, defines X, etc.
         AiPlayDecision canPlay = canPlaySa(sa);
 
@@ -1266,6 +1270,10 @@ public class AiController {
     }
 
     public AiPlayDecision canPlayFromEffectAI(Spell spell, boolean mandatory, boolean withoutPayingManaCost) {
+        if (!mandatory && ComputerUtilCard.shouldAvoidDrawPunisher(player, spell)) {
+            return AiPlayDecision.CurseEffects;
+        }
+
         if (spell instanceof SpellApiBased) {
             boolean chance;
             if (withoutPayingManaCost) {
