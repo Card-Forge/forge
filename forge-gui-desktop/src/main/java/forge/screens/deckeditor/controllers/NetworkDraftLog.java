@@ -15,6 +15,7 @@ public final class NetworkDraftLog {
     private static final Color COLOR_BANNER = new Color(100, 150, 200);     // muted blue
     private static final Color COLOR_SEPARATOR = new Color(130, 130, 130);  // gray
     private static final Color COLOR_MY_PICK = new Color(50, 200, 50);      // green
+    private static final Color COLOR_MY_PICK_AUTO = new Color(225, 90, 90); // red
     private static final Color COLOR_OTHER_PICK = new Color(180, 180, 180); // light gray
 
     private static final String BANNER = "======================================";
@@ -62,10 +63,9 @@ public final class NetworkDraftLog {
     }
 
     public static void logMyPick(String cardName, int packNumber, int pickInPack, int queueDepth, boolean auto) {
-        String displayName = auto ? cardName + " (auto)" : cardName;
-        String base = localizer.getMessage("lblDraftLogMyPick", displayName,
-                String.valueOf(packNumber), String.valueOf(pickInPack));
-        log(base + waitingSuffix(queueDepth), COLOR_MY_PICK);
+        String key = auto ? "lblDraftLogMyAutoPick" : "lblDraftLogMyPick";
+        String base = localizer.getMessage(key, cardName, String.valueOf(packNumber), String.valueOf(pickInPack));
+        log(base + waitingSuffix(queueDepth), auto ? COLOR_MY_PICK_AUTO : COLOR_MY_PICK);
     }
 
     private static String waitingSuffix(int queueDepth) {
