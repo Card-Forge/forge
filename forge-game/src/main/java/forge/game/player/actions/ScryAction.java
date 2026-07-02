@@ -25,7 +25,7 @@ public class ScryAction extends PlayerAction {
         for (final Card card : cards) {
             names.add(card.getName());
         }
-        return names;
+        return Collections.unmodifiableList(names);
     }
 
     public List<String> getTopCardNames() {

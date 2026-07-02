@@ -16,12 +16,12 @@ public class PassPriorityAction extends PlayerAction {
         this.phase = phase;
     }
 
-    public boolean wasStackEmpty() {
-        return stackWasEmpty;
+    public boolean canReplay(final boolean currentStackEmpty, final PhaseType currentPhase) {
+        return stackWasEmpty == currentStackEmpty && (phase == null || phase == currentPhase);
     }
 
-    public PhaseType getPhase() {
-        return phase;
+    public boolean isStackPassFor(final PhaseType currentPhase) {
+        return !stackWasEmpty && phase == currentPhase;
     }
 
     @Override

@@ -806,9 +806,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmTrigger(final WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         final Trigger regtrig = wrapper.getTrigger();
-        AutoYieldStore.TriggerDecision decision = getTriggerDecision(wrapper.yieldKey());
-        if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
-        if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
+        if (!isMacroActive()) {
+            AutoYieldStore.TriggerDecision decision = getTriggerDecision(wrapper.yieldKey());
+            if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
+            if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
+        }
 
         // triggers with costs can always be declined by not paying the cost
         if (sa.hasParam("Cost") && !sa.getParam("Cost").equals("0")) {
@@ -842,9 +844,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 cardView = spellAbilityView.getHostCard();
             else
                 cardView = wrapper.getCardView();
-            return this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
+            final boolean result = this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
+            recordConfirm(cardView, result);
+            return result;
         }
-        return InputConfirm.confirm(this, wrapper, buildQuestion.toString());
+        final boolean result = InputConfirm.confirm(this, wrapper, buildQuestion.toString());
+        recordConfirm(wrapper.getCardView(), result);
+        return result;
     }
 
     @Override
@@ -1530,7 +1536,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // CombatUtil.canAttack ensures we only get here when the player has a legal attacker
         // so APINA must never skip - the invocation itself is the available action. User
         // initiated yields (pass until end of turn) still skip when not-attacking is legal.
-        if (yieldController.shouldAutoYield()) {
+        if (!isMacroActive() && yieldController.shouldAutoYield()) {
             if (CombatUtil.validateAttackers(combat)) {
                 return;
             }
@@ -1652,7 +1658,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // Skip when already yielding — yield proceeds regardless of available-actions.
         // Compute the actionable set when APINA / suggestions / highlights need it.
-        boolean highlightsEnabled = yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
+        boolean macroActive = isMacroActive();
+        boolean highlightsEnabled = !macroActive && yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
         if (!yieldController.isYieldActive() && (needsAvailableActions() || highlightsEnabled)) {
             long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
             if (highlightsEnabled) {
@@ -1710,7 +1717,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         } else {
             final SpellAbility ability = stack.peekAbility();
-            if (ability != null && ability.isAbility() && shouldAutoYield(ability.yieldKey())) {
+            if (!macroActive && ability != null && ability.isAbility() && shouldAutoYield(ability.yieldKey())) {
                 // avoid prompt for input if top ability of stack is set to auto-yield
                 try {
                     Thread.sleep(FControlGamePlayback.resolveDelay);
@@ -2305,6 +2312,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             for (final int index : savedOrder) {
                 orderedSAs.add(activePlayerSAs.get(index));
             }
+            macros().addRememberedAction(new StackOrderAction(describeAbilityOrder(orderedSAs)));
             return orderedSAs;
         }
 
@@ -3666,6 +3674,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return macros;
     }
 
+    public boolean isMacroActive() {
+        return macros != null && (macros.isRecording() || macros.isReplaying());
+    }
+
     @Override
     public void concede() {
         if (player != null) {
@@ -3816,8 +3828,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean mayAutoPass() {
-        return yieldController.shouldAutoYield()
-                || yieldController.isAutoPassingNoActions(getLocalPlayerView());
+        return !isMacroActive()
+                && (yieldController.shouldAutoYield()
+                || yieldController.isAutoPassingNoActions(getLocalPlayerView()));
     }
 
     public void autoPassUntilEndOfTurn() {
@@ -3851,6 +3864,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
         yieldController.setTriggerDecision(key, decision, isAbilityScope);
 
+        if (isMacroActive()) return;
         if (!(inputQueue.getInput() instanceof InputConfirm)) return;
         final SpellAbilityStackInstance top = getGame().getStack().peek();
         if (top == null || !top.isTrigger()) return;
@@ -3867,6 +3881,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {
+        if (isMacroActive()) {
+            return false;
+        }
         if (isRemoteClient()) {
             return yieldController.isSkippingPhase(turnPlayer, phase);
         }
@@ -3907,6 +3924,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /** Re-evaluate mayAutoPass at the current prompt; click OK if it would now fire.
      *  Same compute gating as {@link #chooseSpellAbilityToPlay} so the actions field is fresh. */
     private void tryAutoPassNow() {
+        if (isMacroActive()) return;
         if (!(inputQueue.getInput() instanceof InputPassPriority)) return;
         if (!yieldController.isYieldActive() && needsAvailableActions()) {
             long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
@@ -3919,6 +3937,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     /** True if yield consumer needs the synced wire field. */
     private boolean needsAvailableActions() {
+        if (isMacroActive()) return false;
         if (yieldController.getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) return true;
         if (yieldController.getDeclineScope(FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS) != DeclineScope.NEVER) return true;
         if (yieldController.getDeclineScope(FPref.YIELD_DECLINE_SCOPE_STACK_YIELD) != DeclineScope.NEVER) return true;
