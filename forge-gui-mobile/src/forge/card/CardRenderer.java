@@ -726,12 +726,20 @@ public class CardRenderer {
     }
 
     public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
-        drawCardWithOverlays(g, card, x, y, w, h, pos, false, false, false);
+        drawCardWithOverlays(g, card, x, y, w, h, pos, false, false, false, 0);
+    }
+
+    public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, int groupCount) {
+        drawCardWithOverlays(g, card, x, y, w, h, pos, false, false, false, groupCount);
     }
 
     static float markersHeight = 0f;
 
     public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean stackview, boolean showAltState, boolean isChoiceList) {
+        drawCardWithOverlays(g, card, x, y, w, h, pos, stackview, showAltState, isChoiceList, 0);
+    }
+
+    public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean stackview, boolean showAltState, boolean isChoiceList, int groupCount) {
         boolean canShow = MatchController.instance.mayView(card);
         float oldAlpha = g.getfloatAlphaComposite();
         boolean unselectable = !MatchController.instance.isSelectable(card) && MatchController.instance.isSelecting();
@@ -747,6 +755,10 @@ public class CardRenderer {
         y += padding;
         w -= 2 * padding;
         h -= 2 * padding;
+
+        if (groupCount >= 2) {
+            drawGroupCountBadge(g, groupCount, cx, cy, cw, ch);
+        }
 
         // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
         final CardStateView details = showAltState ? card.getAlternateState() : isChoiceList && card.isSplitCard() ? card.getLeftSplitState() : card.getCurrentState();
@@ -1195,5 +1207,42 @@ public class CardRenderer {
                 packer.dispose();
             }
         });
+    }
+
+    private static void drawGroupCountBadge(Graphics g, int count, float x, float y, float w, float h) {
+        String text = "×" + formatGroupCount(count);
+        FSkinFont font = FSkinFont.forHeight(h * 0.15f);
+        float textWidth = font.getBounds(text).width;
+        float textHeight = font.getCapHeight();
+        float padX = w / 20f;
+        float padY = h / 30f;
+        float badgeWidth = textWidth + padX * 2;
+        float badgeHeight = textHeight + padY * 2;
+
+        g.fillRect(new Color(0, 0, 0, 0.7f), x + 2, y + 2, badgeWidth, badgeHeight);
+        g.drawText(text, font, Color.WHITE, x + 2 + padX, y + 2 + padY, textWidth, textHeight, false, Align.left, false);
+    }
+
+    private static String formatGroupCount(int count) {
+        if (count < 1000) {
+            return String.valueOf(count);
+        }
+        if (count < 1000000) {
+            return formatLargeValue(count / 1000.0) + "k";
+        }
+        if (count < 1000000000) {
+            return formatLargeValue(count / 1000000.0) + "M";
+        }
+        return formatLargeValue(count / 1000000000.0) + "B";
+    }
+
+    private static String formatLargeValue(double val) {
+        if (val >= 100) {
+            return String.format(java.util.Locale.ENGLISH, "%.0f", val);
+        }
+        if (val >= 10) {
+            return String.format(java.util.Locale.ENGLISH, "%.1f", val).replace(".0", "");
+        }
+        return String.format(java.util.Locale.ENGLISH, "%.2f", val).replace(".00", "").replace(".0", "");
     }
 }

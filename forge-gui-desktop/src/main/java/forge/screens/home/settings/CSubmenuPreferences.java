@@ -619,8 +619,8 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private void initializeStackGroupPermanentsComboBox() {
         final Localizer localizer = Localizer.getInstance();
-        final String[] keys = {"default", "stack", "group_creatures", "group_all"};
-        final String[] labelKeys = {"lblGroupDefault", "lblGroupStack", "lblGroupCreatures", "lblGroupAll"};
+        final String[] keys = {"default", "stack", "group_tokens", "group_creatures", "group_all"};
+        final String[] labelKeys = {"lblGroupDefault", "lblGroupStack", "lblGroupTokens", "lblGroupCreatures", "lblGroupAll"};
         final Map<String, String> mapping = new LinkedHashMap<>();
         final String[] labels = new String[keys.length];
         for (int i = 0; i < keys.length; i++) {

@@ -161,6 +161,16 @@ public class FCardPanel extends FDisplayObject {
         }
     }
 
+    private int groupCount;
+
+    public int getGroupCount() {
+        return groupCount;
+    }
+
+    public void setGroupCount(int groupCount0) {
+        groupCount = groupCount0;
+    }
+
     private void rotateTransform(Graphics g, float x, float y, float w, float h, float edgeOffset, boolean animate) {
         if (tapped) {
             g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, getTappedAngle());
@@ -169,7 +179,7 @@ public class FCardPanel extends FDisplayObject {
             transformAnimation.start();
             transformAnimation.drawCard(g, card, x, y, w, h);
         } else {
-            CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
+            CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition(), groupCount);
             if (Forge.hasGamepad() && isHovered())
                 g.drawRect(3f, Color.LIME, x, y, w, h);
         }

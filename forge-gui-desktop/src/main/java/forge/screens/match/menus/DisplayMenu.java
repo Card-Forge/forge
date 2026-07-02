@@ -71,9 +71,9 @@ public final class DisplayMenu {
         final ButtonGroup group = new ButtonGroup();
         final String current = prefs.getPref(FPref.UI_GROUP_PERMANENTS);
 
-        final String[] keys = {"default", "stack", "group_creatures", "group_all"};
-        final String[] labelKeys = {"lblGroupDefault", "lblGroupStack", "lblGroupCreatures", "lblGroupAll"};
-        final String[] tooltipKeys = {"nlGroupDefault", "nlGroupStack", "nlGroupCreatures", "nlGroupAll"};
+        final String[] keys = {"default", "stack", "group_tokens", "group_creatures", "group_all"};
+        final String[] labelKeys = {"lblGroupDefault", "lblGroupStack", "lblGroupTokens", "lblGroupCreatures", "lblGroupAll"};
+        final String[] tooltipKeys = {"nlGroupDefault", "nlGroupStack", "nlGroupTokens", "nlGroupCreatures", "nlGroupAll"};
         for (int i = 0; i < keys.length; i++) {
             final SkinnedRadioButtonMenuItem item = MenuUtil.createStayOpenSkinnedRadioButton(localizer.getMessage(labelKeys[i]));
             item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
