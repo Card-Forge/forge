@@ -9,18 +9,15 @@ Name=Hazezon Tamar
 1 Aura Mutation|INV
 1 Aura Shards|INV
 1 Wooded Foothills|ONS
-1 Blasphemous Act|BRC
 1 Windswept Heath|ONS
 1 Coat of Arms|EXO
-1 Crop Rotation|ULG
-1 Defense of the Heart|ULG
+1 Vitalizing Wing|PCY
 1 Druid's Call|ODY
-1 Eladamri's Call|PLS
 1 Elfhame Palace|INV
 1 Exploration|USG
 1 Fires of Yavimaya|INV
 1 Flicker|UDS
-5 Forest|SUM
+8 Forest|3ED
 1 Forgotten Cave|ONS
 1 Grasslands|MIR
 1 Hammer Mage|MMQ
@@ -30,14 +27,12 @@ Name=Hazezon Tamar
 1 Hurricane|ICE
 1 Jungle Patrol|MIR
 1 Shivan Oasis|INV
-1 Keldon Necropolis|INV
 1 Krosan Verge|JUD
 1 Márton Stromgald|ICE
 1 Meteor Crater|PLS
 1 Mirari's Wake|JUD
 1 Mobilization|ONS
-1 Mossfire Valley|ODY
-5 Mountain|3ED
+8 Mountain|3ED
 1 Mountain Valley|MIR
 1 Nantuko Monastery|JUD
 1 Naturalize|ONS
@@ -46,7 +41,7 @@ Name=Hazezon Tamar
 1 Oblation|ONS
 1 Overrun|TMP
 1 Pendelhaven|TSB
-5 Plains|SUM
+7 Plains|3ED
 1 Pulsemage Advocate|JUD
 1 Rampant Growth|MIR
 1 Reclamation Sage|TSR
@@ -54,16 +49,13 @@ Name=Hazezon Tamar
 1 Retribution of the Meek|VIS
 1 Rith, the Awakener|INV
 1 Rith's Grove|PLS
-1 Scroll Rack|TMP
 1 Secluded Steppe|ONS
 1 Seedborn Muse|LGN
-1 Shivan Gorge|USG
 1 Skyshroud Claim|NEM
 1 Skyshroud Ranger|TMP
 1 Snake Basket|VIS
 1 Sol Ring|SUM
 1 Starstorm|ONS
-1 Sungrass Prairie|ODY
 1 Fervor|WTH
 1 Swords to Plowshares|4ED
 1 Sylvan Library|4ED
