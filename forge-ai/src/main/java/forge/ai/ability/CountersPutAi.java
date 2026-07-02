@@ -826,19 +826,17 @@ public class CountersPutAi extends CountersAi {
             if (sa.getTargetRestrictions().isForEachPlayer()) {
                 sa.resetTargets();
                 for (Player p : ai.getGame().getPlayers()) {
-                    CardCollection targetable = CardLists.getTargetableCards(p.getCardsIn(ZoneType.Battlefield), sa);
-                    if (!targetable.isEmpty()) {
-                        Card choice;
-                        if (p.isOpponentOf(ai)) {
-                            // prefer best opponent target (most relevant creature)
-                            choice = ComputerUtilCard.getBestAI(targetable);
-                        } else {
-                            // for self choose a low-value own permanent
-                            choice = ComputerUtilCard.getWorstPermanentAI(targetable, true, true, true, false);
-                        }
-                        if (choice != null) {
-                            sa.getTargets().add(choice);
-                        }
+                    CardCollection targetable = CardLists.canSubsequentlyTarget(new CardCollection(p.getCardsIn(ZoneType.Battlefield)), sa);
+                    Card choice;
+                    if (p.isOpponentOf(ai)) {
+                        // prefer best opponent target (most relevant creature)
+                        choice = ComputerUtilCard.getBestCreatureAI(targetable);
+                    } else {
+                        // for self choose a low-value own permanent
+                        choice = ComputerUtilCard.getWorstCreatureAI(targetable);
+                    }
+                    if (choice != null) {
+                        sa.getTargets().add(choice);
                     }
                 }
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
